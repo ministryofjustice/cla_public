@@ -1,14 +1,36 @@
-{% extends "checker/base.html" %}{% load i18n %}
+{% extends "checker/base.html" %}{% load i18n pdb %}
 
-{% block page_header %}{% trans "Your details" %}{% endblock %}
-
+{% block page_header %}
+  <h1>{% trans "Your details" %}</h1>
+  <p>{% trans "What is your problem about? Choose what is putting you at immediate risk." %}</p>
+{% endblock %}
 
 {% block checker_content %}
-    <form action="." method="POST">
-        {{ wizard.management_form }}
-        {% csrf_token %}
-        {{ form.as_p }}
-    <button class="btn btn-success">{% trans "Next" %}</button>
-    </form>
+  <form action="." method="POST">
+    {% csrf_token %}
+
+    {{ wizard.management_form }}
+    {{ form.non_field_errors }}
+    
+    <div class="FormBlock FormBlock--grey">
+      {% for field in form %}
+        <fieldset class="FormRow FormRow--group">
+          <legend>{{field.label}}</legend>
+
+          {% for choice in field.field.choices %}
+          <label for="{{field.auto_id}}-{{choice.0}}">
+            <input type="radio" name="{{field.auto_id}}" id="{{field.auto_id}}-{{choice.0}}" value="{{choice.0}}">
+            {{choice.1}}
+          </label>
+          {% endfor %}
+        </fieldset>
+      {% endfor %}
+    </div>
+
+    <div class="FormActions">
+      <button type="submit" class="Button">{% trans "Next step" %}</button>
+      <a href="#">{% trans "Go back to previous step" %}</a>
+    </div>
+  </form>
 
 {% endblock %}
