@@ -1,0 +1,66 @@
+.ProgressIndicator {
+  list-style: none;
+  display: table; 
+  background: #F3F9FD;
+  width: 100%;
+  margin: 40px 0;
+  padding: 0;
+  border: 1px solid #E0EEF9;
+
+  .ProgressIndicator-step {
+    @include core-19;
+    display: table-cell;
+    color: $grey-1;
+    text-align: center;
+    vertical-align: middle;
+    height: 51px;
+    padding-left: 15px;
+    position: relative;
+
+    .ProgressIndicator-tick {
+      background: url(../images/progress-indicator/tick.png) right center no-repeat;
+      padding-right: 22px;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      background: url(../images/progress-indicator/chevron.png) right center no-repeat;
+      height: 100%;
+      width: 15px;
+      position: absolute;
+      z-index: 10;
+      right: -15px;
+      top: 0;
+    }
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child:after {
+      display: none;
+    }
+
+    &.is-complete {
+      color: #248BC7;
+      font-weight: 700;
+      a {
+        color: #248BC7;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &.is-active {
+      color: #fff;
+      font-weight: 700;
+      background-color: #248BC7;
+      &:after {
+        background-image: url(../images/progress-indicator/chevron--active.png);      
+      }
+    }    
+  }
+}

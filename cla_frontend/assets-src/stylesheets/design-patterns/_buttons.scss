@@ -1,0 +1,11 @@
+.Button {
+  @include button;
+  @include border-radius(3px);
+
+  &.Button--secondary {
+    background-color: $grey-3;
+  }
+  &.Button--warning {
+    background-color: $red;
+  }
+}

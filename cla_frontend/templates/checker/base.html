@@ -1,0 +1,44 @@
+{% extends "base.html" %}{% load i18n helpers static %}
+
+{% block page_title %}Civil Legal Aid{% endblock %}
+
+{% block stylesheets %}
+  <!--[if gt IE 8]><!--><link href="{% static 'stylesheets/cla.main.css' %}" media="screen" rel="stylesheet"><!--<![endif]-->
+  <!--[if IE 6]><link href="{% static 'stylesheets/cla.main-ie6.css' %}" media="screen" rel="stylesheet"><![endif]-->
+  <!--[if IE 7]><link href="{% static 'stylesheets/cla.main-ie7.css' %}" media="screen" rel="stylesheet"><![endif]-->
+  <!--[if IE 8]><link href="{% static 'stylesheets/cla.main-ie8.css' %}" media="screen" rel="stylesheet"><![endif]-->
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{% static 'javascripts/vendor.js' %}"></script>
+  <script src="{% static 'javascripts/cla.main.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="inner">
+
+    {% block breadcrumb %}
+      <nav>
+        <ol class="ProgressIndicator" role="progressbar" aria-valuetext="Step {{ breadcrumb.index }} of {{ breadcrumb.length }}">
+          {% for item in breadcrumb.all %}
+            <li class="ProgressIndicator-step{% if item.active %} is-active{% endif %}{% if item.step in history_data %} is-complete{% endif %}">
+              {% if item.step in history_data and not item.active %}
+                <a href="{% url 'checker:checker_step' item.step %}" class="ProgressIndicator-tick">{{ item.name }}</a>
+              {% else %}
+                {{item.name}}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ol>
+      </nav>
+    {% endblock %}
+
+    <header class="PageHeader">
+      {% block page_header %}{% endblock %}
+    </header>
+
+    {% block checker_content %}{% endblock %}
+
+    {% block summary %}{% endblock summary %}
+  </div>
+{% endblock %}

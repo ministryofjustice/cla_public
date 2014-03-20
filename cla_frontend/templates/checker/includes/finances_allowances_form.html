@@ -1,0 +1,8 @@
+{% load i18n core_forms_tags %}
+{% if form %}{% style_form form %}
+<fieldset>
+    <label>{% trans fieldset_label %}</label>
+
+    {{ form.as_p }}
+</fieldset>
+{% endif %}

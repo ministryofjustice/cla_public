@@ -1,0 +1,10 @@
+# Versions are left out on purpose in order for you to use the latest ones.
+# After the first "pip install -r", just run "pip freeze" and add the version
+# to each package in each requirements/*.txt.
+
+Django==1.6.1
+
+# MOJ Template
+django-moj-template==0.10.2
+
+slumber==0.6.0

@@ -1,0 +1,7 @@
+-r testing.txt
+
+#Sphinx
+django-extensions==1.3.3
+Werkzeug==0.9.4
+django-debug-toolbar==1.0.1
+django-pdb==0.3.2

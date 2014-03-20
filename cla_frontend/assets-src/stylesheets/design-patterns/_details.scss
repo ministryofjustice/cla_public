@@ -1,0 +1,39 @@
+details {
+  @include core-19;
+  display: block;
+
+  summary {
+    display: block;
+    color: $link-colour;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:focus {
+      background-color: $yellow;
+      outline: 3px solid $yellow;
+    }    
+  }
+
+  div {
+    border-left: 3px solid #ccc;
+    padding: 10px 60px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+  }
+}
+  
+.no-details {
+  details {
+    summary:before {
+      content: "►";
+      float: left;
+      width: 25px;
+      font-size: 0.8em;
+      line-height: 1.7em;
+    }
+
+    &.open summary:before {
+      content: "▼ ";
+    }
+  }  
+}

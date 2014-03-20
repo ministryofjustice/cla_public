@@ -1,0 +1,28 @@
+{% extends "checker/base.html" %}{% load core_forms_tags i18n %}
+
+{% block page_header %}{% endblock page_header %}
+
+{% block breadcrumb %}{% endblock breadcrumb %}
+
+
+{% block checker_content %}
+<form action="." method="POST">
+    {% csrf_token %}
+    {{ wizard.management_form }}
+    {{ form.non_field_errors }}
+
+    <div>
+        {% with form=form.form_dict.contact_details %}{% style_form form %}
+        {{ form.as_p }}
+        {% endwith %}
+
+        {% with form=form.form_dict.extra %}{% style_form form %}
+        {{ form.as_p }}
+        {% endwith %}
+
+        <div>
+            <button type="submit" class="btn btn-success">{% trans "Apply for legal aid" %}</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
