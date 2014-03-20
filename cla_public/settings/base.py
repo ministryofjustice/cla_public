@@ -126,13 +126,13 @@ TEMPLATE_CONTEXT_PROCESSORS =  (
     'django.core.context_processors.request',
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    "cla_frontend.apps.core.context_processors.globals"
+    "cla_public.apps.core.context_processors.globals"
  )
 
-ROOT_URLCONF = 'cla_frontend.urls'
+ROOT_URLCONF = 'cla_public.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'cla_frontend.wsgi.application'
+WSGI_APPLICATION = 'cla_public.wsgi.application'
 
 # TODO change this ?
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'
@@ -150,10 +150,8 @@ INSTALLED_APPS = (
 
 PROJECT_APPS = (
     'moj_template',
-    'cla_auth',
     'core',
     'checker',
-    'call_centre'
 )
 
 INSTALLED_APPS += PROJECT_APPS
@@ -189,17 +187,6 @@ LOGGING = {
 
 
 BACKEND_BASE_URI = 'http://127.0.0.1:8000'
-
-AUTH_CLIENT_ID = 'b4b9220ffcb11ebfdab1'
-AUTH_CLIENT_SECRET = '2df71313bdd38a2e1b815015e1b14387e7681d41'
-
-AUTH_USER_MODEL = 'cla_auth.ClaUser'
-
-AUTHENTICATION_BACKENDS = (
-    'cla_auth.backend.ClaBackend',
-)
-LOGIN_REDIRECT_URL = 'cla_auth.views.login_redirect_url'
-
 
 # EMAILS
 

@@ -4,7 +4,7 @@ import subprocess
 import os
 import sys
 
-PROJECT_NAME = "cla_frontend"
+PROJECT_NAME = "cla_public"
 
 # use python scripts/jenkins/build.py integration
 
@@ -39,4 +39,4 @@ run('%s/pip install -r requirements/jenkins.txt' % bin_path)
 run("find . -name '*.pyc' -delete")
 
 # run tests
-run("%s/python manage.py jenkins --coverage-rcfile=.coveragerc --settings=cla_frontend.settings.jenkins" % bin_path)
+run("%s/python manage.py jenkins --coverage-rcfile=.coveragerc --settings=cla_public.settings.jenkins" % bin_path)

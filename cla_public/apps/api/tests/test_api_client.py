@@ -1,5 +1,5 @@
 # # -*- coding: utf-8 -*-
-# from cla_frontend.apps.api import client as c
+# from cla_public.apps.api import client as c
 # from django.conf import settings
 # import os
 # import slumber.exceptions as sx
