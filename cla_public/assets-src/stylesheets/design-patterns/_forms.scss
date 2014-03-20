@@ -55,6 +55,9 @@
       margin-right: 20px;
     }
   }
+  .QuestionPrompt-answer {
+    margin: 0;
+  }
   
   // modifiers
   &.FormRow--group {
@@ -88,6 +91,12 @@
     details div {
       padding-left: 60px;
       padding-right: 60px;
+    }
+  }
+
+  &.QuestionPrompt--active {
+    legend {
+      font-weight: 700;
     }
   }
 }
