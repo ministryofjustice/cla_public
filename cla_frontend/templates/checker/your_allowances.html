@@ -1,0 +1,24 @@
+{% extends "checker/base.html" %}{% load i18n humanize %}
+
+{% block page_header %}{% trans "You and your partner's disposable money" %}{% endblock page_header %}
+
+{% block checker_content %}
+	<h1>{% trans "Your expenses" %}</h1>
+	<p>{% trans "Whether or not you qualify for legal aid depends on how much money you and your partner earn. To find out if you’re financially eligible, please answer these questions as honestly and fully as you can." %}</p>
+
+	<form method=post action="." role="form">
+        {% csrf_token %}
+        {{ wizard.management_form }}
+        {{ form.non_field_errors }}
+
+        {% with form=form.form_dict.your_allowances fieldset_label="Your expenses" %}
+            {% include "checker/includes/finances_allowances_form.html" %}
+        {% endwith %}
+
+        {% with form=form.form_dict.partners_allowances fieldset_label="Your partner's expenses" %}
+            {% include "checker/includes/finances_allowances_form.html" %}
+        {% endwith %}
+
+        <button type="submit" class="btn btn-success">{% trans "Next" %}</button>
+	</form>
+{% endblock %}

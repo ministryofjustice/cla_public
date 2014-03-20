@@ -1,0 +1,37 @@
+{% load i18n core_forms_tags %}
+{% if form %}{% style_form form %}
+<fieldset>
+    <label>{% trans fieldset_label %}</label>
+    <div class="form-group">
+        {{ form.earnings.errors }}
+        <div>{{ form.earnings.label_tag }}</div>
+
+        <div class="input-group col-xs-3 row">
+            <span class="input-group-addon">&pound;</span>
+            {{ form.earnings }}
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        {{ form.other_income.errors }}
+        <div>{{ form.other_income.label_tag }}</div>
+
+        <div class="input-group col-xs-3 row">
+            <span class="input-group-addon">&pound;</span>
+            {{ form.other_income }}
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        {{ form.self_employed.errors }}
+        <div>{{ form.self_employed.label_tag }}</div>
+
+        <div class="input-group col-xs-3 row">
+            {{ form.self_employed }}
+        </div>
+    </div>
+
+</fieldset>
+{% endif %}

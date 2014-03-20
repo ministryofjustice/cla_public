@@ -1,0 +1,33 @@
+{"http_interactions": [
+    {
+        "request": {
+            "body": "",
+            "headers": {
+                "content-type": "application/json",
+                "Accept-Encoding": "gzip, deflate, compress",
+                "accept": "application/json",
+                "User-Agent": "python-requests/2.2.1 CPython/2.7.5+ Linux/3.11.0-15-generic"
+            },
+            "method": "GET",
+            "uri": "http://127.0.0.1:8000/legalaid/api/v1/category/"
+        },
+        "response": {
+            "body": {
+                "string": "[{\"id\": 1, \"name\": \"Debt\", \"description\": \"\"}, {\"id\": 2, \"name\": \"Violence\", \"description\": \"\\r\\n\"}]",
+                "encoding": null
+            },
+            "headers": {
+                "vary": "Accept, Cookie",
+                "server": "Werkzeug/0.9.4 Python/2.7.5+",
+                "connection": "close",
+                "allow": "GET, HEAD, OPTIONS",
+                "date": "Wed, 12 Feb 2014 12:14:19 GMT",
+                "x-frame-options": "SAMEORIGIN",
+                "content-type": "application/json"
+            },
+            "url": "http://127.0.0.1:8000/legalaid/api/v1/category/",
+            "status_code": 200
+        },
+        "recorded_at": "2014-02-12T12:14:19"
+    }
+], "recorded_with": "betamax"}

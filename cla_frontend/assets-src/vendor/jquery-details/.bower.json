@@ -1,0 +1,15 @@
+{
+  "name": "jquery-details",
+  "homepage": "https://github.com/mathiasbynens/jquery-details",
+  "version": "0.1.0",
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.0",
+    "commit": "3cc7fc6c6868570d614a217c316db6cf5dd451f5"
+  },
+  "_source": "git://github.com/mathiasbynens/jquery-details.git",
+  "_target": "~0.1.0",
+  "_originalSource": "jquery-details",
+  "_direct": true
+}

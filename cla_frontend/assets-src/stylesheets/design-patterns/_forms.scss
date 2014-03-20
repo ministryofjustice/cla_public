@@ -1,0 +1,75 @@
+.FormBlock {
+  margin: 0;
+
+  &.FormBlock--grey {
+    padding: 25px 50px;
+    margin: 0 0 30px;
+    border-width: 1px 0;
+    border-color: #C2C2C2;
+    border-style: solid;
+    background-color: $grey-4;
+  }
+}
+
+.FormRow {
+  padding: 25px;
+  margin: 0 0 1px;
+  position: relative;
+
+  .FormRow-label {
+    @include core-19;
+
+    &.FormRow-label--odd {
+      background-color: #f1f1f1;
+    }
+  }
+
+  .FormRow-inner {
+    border-left: 3px solid #ccc;
+    padding: 10px 60px;
+  }
+
+  &.FormRow--group {
+    padding: 0;
+
+    .FormRow-label {
+      padding: 25px;
+      display: block;
+      position: relative;
+
+      input {
+        margin-right: 20px;
+      }
+
+      &.is-selected {
+        background-color: #D5E8F4;
+      }
+
+      &.is-focused {
+        outline: 3px solid $yellow;
+        position: relative;
+        z-index: 1;
+
+        input:focus {
+          outline: none;
+          background: none;
+        }
+      }
+    }
+  }
+
+  details {
+    summary {
+      position: absolute;
+      right: 25px;
+      top: 25px;
+      z-index: 2;
+    }
+  }
+}
+
+.FormActions {
+  .Button {
+    margin-right: 20px;
+  }
+}

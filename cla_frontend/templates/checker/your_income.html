@@ -1,0 +1,28 @@
+{% extends "checker/base.html" %}{% load i18n humanize helpers %}
+
+{% block page_header %}{% trans "Your income" %}{% endblock %}
+
+
+{% block checker_content %}
+    <p>{% trans "Whether or not you qualify for legal aid depends on how much money you and your partner earn. To find out if you’re financially eligible, please answer these questions as honestly and fully as you can." %}</p>
+
+    <form method=post action="." role="form">
+        {% csrf_token %}
+        {{ wizard.management_form }}
+        {{ form.non_field_errors }}
+
+        {% with form=form.form_dict.your_income fieldset_label="Your income" %}
+            {% include "checker/includes/finances_income_form.html" %}
+        {% endwith %}
+
+        {% with form=form.form_dict.partners_income fieldset_label="Your partner's income" %}
+            {% include "checker/includes/finances_income_form.html" %}
+        {% endwith %}
+
+        {% with form=form.form_dict.dependants fieldset_label="Dependants" %}
+            {% include "checker/includes/finances_dependants_form.html" %}
+        {% endwith %}
+
+        <button type="submit" class="btn btn-success">{% trans "Next" %}</button>
+    </form>
+{% endblock %}
