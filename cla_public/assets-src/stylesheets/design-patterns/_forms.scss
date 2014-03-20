@@ -49,7 +49,7 @@
 
   .FormRow-option {
     display: block;
-    padding: 5px 20px;
+    padding: 5px 30px;
 
     input {
       margin-right: 20px;
@@ -83,6 +83,11 @@
           background: none;
         }
       }
+    }
+
+    details div {
+      padding-left: 60px;
+      padding-right: 60px;
     }
   }
 }
