@@ -53,11 +53,11 @@ venv
 *.iml
 *.iws
 
-cla_frontend/settings/local.py
+cla_public/settings/local.py
 
 # collect static output directory
-cla_frontend/assets/
-cla_frontend/static/
+cla_public/assets/
+cla_public/static/
 
 .DS_Store
 

@@ -3,19 +3,19 @@ var gulp = require('gulp'),
     stylish = require('jshint-stylish');
 
 var paths = {
-  dest_dir: 'cla_frontend/assets/',
-  styles: 'cla_frontend/assets-src/stylesheets/**/*.scss',
+  dest_dir: 'cla_public/assets/',
+  styles: 'cla_public/assets-src/stylesheets/**/*.scss',
   scripts: [
-    'cla_frontend/assets-src/javascripts/modules/moj.LabelFocus.js',
-    'cla_frontend/assets-src/javascripts/modules/moj.LabelSelect.js',
-    'cla_frontend/assets-src/javascripts/modules/moj.Conditional.js',
-    'cla_frontend/assets-src/javascripts/modules/moj.Shame.js'
+    'cla_public/assets-src/javascripts/modules/moj.LabelFocus.js',
+    'cla_public/assets-src/javascripts/modules/moj.LabelSelect.js',
+    'cla_public/assets-src/javascripts/modules/moj.Conditional.js',
+    'cla_public/assets-src/javascripts/modules/moj.Shame.js'
   ],
   vendor_scripts: [
-    'cla_frontend/assets-src/vendor/lodash/dist/lodash.min.js',
-    'cla_frontend/assets-src/vendor/jquery-details/jquery.details.min.js'
+    'cla_public/assets-src/vendor/lodash/dist/lodash.min.js',
+    'cla_public/assets-src/vendor/jquery-details/jquery.details.min.js'
   ],
-  images: 'cla_frontend/assets-src/images/**/*'
+  images: 'cla_public/assets-src/images/**/*'
 };
 
 // compile scss

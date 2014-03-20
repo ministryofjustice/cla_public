@@ -12,7 +12,7 @@ Frontend application for the Civil Legal Aid Tool.
 
 Clone the repository:
 
-    git clone git@github.com:ministryofjustice/cla_frontend.git
+    git clone git@github.com:ministryofjustice/cla_public.git
 
 Next, create the environment and start it up:
 
@@ -50,19 +50,19 @@ Assets are managed using [gulp.js](http://gulpjs.com/). To compile the assets on
 
 ### Stylesheets
 
-Stylesheets are located in `cla_frontend/assets-src/stylesheets` and are compiled into `cla_frontend/assets/stylesheets`. They are written in Sass using the `scss` syntax. To compile the stylesheets run:
+Stylesheets are located in `cla_public/assets-src/stylesheets` and are compiled into `cla_public/assets/stylesheets`. They are written in Sass using the `scss` syntax. To compile the stylesheets run:
 
     gulp sass
 
 ### Javascripts
 
-Javascripts files are located in `cla_frontend/assets/src/javascripts` and are concatinated into `cla_frontend/assets/javascripts`. To compile the javascript files run:
+Javascripts files are located in `cla_public/assets/src/javascripts` and are concatinated into `cla_public/assets/javascripts`. To compile the javascript files run:
 
     gulp js
 
 ### Images
 
-Image are optimised and copied into the `cla_frontend/assets/images` folder using gulp. Source images should be stored in `cla_frontend/assets-src/images`. To optimise and copy images into assets run:
+Image are optimised and copied into the `cla_public/assets/images` folder using gulp. Source images should be stored in `cla_public/assets-src/images`. To optimise and copy images into assets run:
 
     gulp images
 
