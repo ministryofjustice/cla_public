@@ -9,10 +9,14 @@
     border-style: solid;
     background-color: $grey-4;
   }
+
+  .FormRow {
+    padding: 25px;
+  }
 }
 
 .FormRow {
-  padding: 25px;
+  padding: 15px 0;
   margin: 0 0 1px;
   position: relative;
 
@@ -23,12 +27,36 @@
       background-color: #f1f1f1;
     }
   }
+  legend.FormRow-label {
+    padding: 20px 145px 0 0;
+    margin: 0 0 -5px;
+  }
 
   .FormRow-inner {
     border-left: 3px solid #ccc;
     padding: 10px 60px;
+    margin: 10px 0 25px;
   }
 
+  details {
+    summary {
+      position: absolute;
+      right: 25px;
+      top: 25px;
+      z-index: 2;
+    }
+  }
+
+  .FormRow-option {
+    display: block;
+    padding: 5px 20px;
+
+    input {
+      margin-right: 20px;
+    }
+  }
+  
+  // modifiers
   &.FormRow--group {
     padding: 0;
 
@@ -55,15 +83,6 @@
           background: none;
         }
       }
-    }
-  }
-
-  details {
-    summary {
-      position: absolute;
-      right: 25px;
-      top: 25px;
-      z-index: 2;
     }
   }
 }
