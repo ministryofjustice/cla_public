@@ -1,0 +1,239 @@
+From 85e53f200aeeddbe770d92b25287cf1a43ff4b24 Mon Sep 17 00:00:00 2001
+From: Dom Smith <dom@teneightfive.com>
+Date: Wed, 19 Mar 2014 17:31:03 +0000
+Subject: [PATCH] Refine casper tests. Run with makefile
+
+---
+ Makefile                                           |  2 ++
+ README.md                                          | 19 ++++++++++++++-
+ .../stylesheets/design-patterns/_details.scss      |  4 ++++
+ spec/javascript/basic.js                           | 24 -------------------
+ spec/javascript/conditional.js                     | 28 ----------------------
+ tests/javascript/browser/basic.test.coffee         | 10 ++++++++
+ .../javascript/browser/jquery.details.test.coffee  | 20 ++++++++++++++++
+ .../javascript/browser/moj.Conditional.test.coffee | 27 +++++++++++++++++++++
+ tests/javascript/casper-helpers.coffee             |  5 ++++
+ 9 files changed, 86 insertions(+), 53 deletions(-)
+ create mode 100644 Makefile
+ delete mode 100644 spec/javascript/basic.js
+ delete mode 100644 spec/javascript/conditional.js
+ create mode 100644 tests/javascript/browser/basic.test.coffee
+ create mode 100644 tests/javascript/browser/jquery.details.test.coffee
+ create mode 100644 tests/javascript/browser/moj.Conditional.test.coffee
+ create mode 100644 tests/javascript/casper-helpers.coffee
+
+diff --git a/Makefile b/Makefile
+new file mode 100644
+index 0000000..efaa2fc
+--- /dev/null
++++ b/Makefile
+@@ -0,0 +1,2 @@
++test:
++	casperjs test ./tests/javascript/browser/ --includes=./tests/javascript/casper-helpers.coffee
+\ No newline at end of file
+diff --git a/README.md b/README.md
+index 4524bff..5c8bef7 100644
+--- a/README.md
++++ b/README.md
+@@ -70,4 +70,21 @@ Image are optimised and copied into the `cla_public/assets/images` folder usin
+
+ When making frequent changes to the assets you can run a gulp watch command to instantly compile any assets. To watch the source assets, run:
+
+-    gulp watch
+\ No newline at end of file
++    gulp watch
++
++## Testing
++
++CasperJS is used to run basic functional/browser tests on basic DOM interactions. To run the tests, make sure you have the following dependencies:
++
++* [PhantomJS](http://phantomjs.org/)
++* [CasperJS](http://casperjs.org/) (dev version)
++
++To run the tests, use the following make command:
++
++    make test
++
++By default, tests will be run on `http://0.0.0.0:8001/`. To change this you can pass the `--url` argument on the command called in the make file. To see what command is called look at the `Makefile` at the project root.
++
++
++
++
+\ No newline at end of file
+diff --git a/cla_public/assets-src/stylesheets/design-patterns/_details.scss b/cla_public/assets-src/stylesheets/design-patterns/_details.scss
+index cfb7c19..c0b94b1 100644
+--- a/cla_public/assets-src/stylesheets/design-patterns/_details.scss
++++ b/cla_public/assets-src/stylesheets/design-patterns/_details.scss
+@@ -15,11 +15,15 @@ details {
+   }
+
+   div {
++    display: none;
+     border-left: 3px solid #ccc;
+     padding: 10px 60px;
+     margin-top: 10px;
+     margin-bottom: 25px;
+   }
++  &[open] div {
++    display: block;
++  }
+ }
+
+ .no-details {
+diff --git a/spec/javascript/basic.js b/spec/javascript/basic.js
+deleted file mode 100644
+index 836e4df..0000000
+--- a/spec/javascript/basic.js
++++ /dev/null
+@@ -1,24 +0,0 @@
+-var url = casper.cli.get('url'),
+-    sitename = 'Civil Legal Aid';
+-
+-
+-casper.start(url, function() {
+-
+-  casper.test.comment('Testing site basics');
+-
+-  this.test.assert(
+-    this.getCurrentUrl() === url, 'url is the one expected'
+-  );
+-
+-  this.test.assertHttpStatus(200, sitename + ' is up');
+-
+-  this.test.assertTitle(
+-    'Civil Legal Aid',
+-    sitename + ' has the correct title'
+-  );
+-
+-});
+-
+-casper.run(function() {
+-  this.test.done();
+-});
+\ No newline at end of file
+diff --git a/spec/javascript/conditional.js b/spec/javascript/conditional.js
+deleted file mode 100644
+index bb02f2f..0000000
+--- a/spec/javascript/conditional.js
++++ /dev/null
+@@ -1,28 +0,0 @@
+-var url = casper.cli.get('url');
+-
+-casper.start(url + '/your_problem', function() {
+-
+-  casper.test.comment('Testing conditional content');
+-
+-  casper.test.comment('hidden on load');
+-  this.test.assertNotVisible('#conditional-rHeXR');
+-
+-  this.test.assertExists('input[name=your_problem-category][value=rHeXR]');
+-
+-  this.evaluate(function(term) {
+-    document.querySelector('input[name=your_problem-category][value=rHeXR]').setAttribute('checked', true);
+-    $('input[name=your_problem-category]').trigger('change');
+-  });
+-  this.test.assertVisible('#conditional-rHeXR');
+-
+-  this.evaluate(function(term) {
+-    document.querySelector('input[name=your_problem-category][value=WqIKJ]').setAttribute('checked', true);
+-    $('input[name=your_problem-category]').trigger('change');
+-  });
+-  this.test.assertNotVisible('#conditional-rHeXR');
+-
+-});
+-
+-casper.run(function() {
+-  this.test.done();
+-});
+\ No newline at end of file
+diff --git a/tests/javascript/browser/basic.test.coffee b/tests/javascript/browser/basic.test.coffee
+new file mode 100644
+index 0000000..cf9bafb
+--- /dev/null
++++ b/tests/javascript/browser/basic.test.coffee
+@@ -0,0 +1,10 @@
++casper.test.begin 'Site basics', suite = (test) ->
++
++  casper.start casper.base_url, ->
++    test.assertHttpStatus 200, 'site is up'
++
++  casper.then ->
++    test.assertSelectorHasText 'title', 'Civil Legal Aid', 'site contains the correct title'
++
++  casper.run ->
++    test.done()
+\ No newline at end of file
+diff --git a/tests/javascript/browser/jquery.details.test.coffee b/tests/javascript/browser/jquery.details.test.coffee
+new file mode 100644
+index 0000000..47b5808
+--- /dev/null
++++ b/tests/javascript/browser/jquery.details.test.coffee
+@@ -0,0 +1,20 @@
++field_name = "your_problem-category"
++
++casper.test.begin "Details tag", (test) ->
++
++  casper.start casper.base_url + "your_problem/", ->
++    test.assertSelectorHasText "h1", "Your problem", "page has correct title"
++
++  casper.then ->
++    test.assertExists "details", "has details tag"
++    test.assertNotVisible "details > div", "details content is not visible"
++
++  casper.thenEvaluate ((term) ->
++    $("details:first").find('summary').click().trigger('click')
++  ), ""
++
++  casper.then ->
++    test.assertVisible "details > *", "details content is visible"
++
++  casper.run ->
++    test.done()
+\ No newline at end of file
+diff --git a/tests/javascript/browser/moj.Conditional.test.coffee b/tests/javascript/browser/moj.Conditional.test.coffee
+new file mode 100644
+index 0000000..0884544
+--- /dev/null
++++ b/tests/javascript/browser/moj.Conditional.test.coffee
+@@ -0,0 +1,27 @@
++field_name = "your_problem-category"
++
++casper.test.begin "Conditional content", (test) ->
++
++  casper.start casper.base_url + "your_problem/", ->
++    test.assertSelectorHasText "h1", "Your problem", "page has correct title"
++
++  casper.then ->
++    test.assertNotVisible "#conditional-rHeXR", "conditional content not visible on load"
++    test.assertExists "input[name=#{field_name}]", "option field exists"
++
++  casper.thenEvaluate ((field) ->
++    $("input[name=#{field}]:last").attr("checked", true).trigger "change"
++  ), field_name
++
++  casper.then ->
++    test.assertVisible "#conditional-rHeXR", "conditional content is visible"
++
++  casper.thenEvaluate ((field) ->
++    $("input[name=#{field}]:first").attr("checked", true).trigger "change"
++  ), field_name
++
++  casper.then ->
++    test.assertNotVisible "#conditional-rHeXR", "conditional content is visible"
++
++  casper.run ->
++    test.done()
+\ No newline at end of file
+diff --git a/tests/javascript/casper-helpers.coffee b/tests/javascript/casper-helpers.coffee
+new file mode 100644
+index 0000000..1385618
+--- /dev/null
++++ b/tests/javascript/casper-helpers.coffee
+@@ -0,0 +1,5 @@
++# Casper.js Integration Test Helpers
++
++# Base URL
++casper.base_url = casper.cli.get('url') || 'http://0.0.0.0:8001/'
++
+--
+1.8.5.5

@@ -71,3 +71,19 @@ Image are optimised and copied into the `cla_public/assets/images` folder using 
 When making frequent changes to the assets you can run a gulp watch command to instantly compile any assets. To watch the source assets, run:
 
     gulp watch
+
+## Testing
+
+CasperJS is used to run basic functional/browser tests on basic DOM interactions. To run the tests, make sure you have the following dependencies:
+
+* [PhantomJS](http://phantomjs.org/)
+* [CasperJS](http://casperjs.org/) (dev version)
+
+To run the tests, use the following make command:
+
+    make test
+
+By default, tests will be run on `http://0.0.0.0:8001/`. To change this you can pass the `--url` argument on the command called in the make file. To see what command is called look at the `Makefile` at the project root.
+
+
+
