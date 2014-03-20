@@ -2,7 +2,6 @@
 
 {% block page_header %}
   <h1>{% trans "Your details" %}</h1>
-  <p>{% trans "What is your problem about? Choose what is putting you at immediate risk." %}</p>
 {% endblock %}
 
 {% block checker_content %}
@@ -12,23 +11,30 @@
     {{ wizard.management_form }}
     {{ form.non_field_errors }}
     
-    <div class="FormBlock FormBlock--grey">
-      {% for field in form %}
-        <fieldset class="FormRow FormRow--group">
-          <legend>{{field.label}}</legend>
+    {% for field in form %}
+      <fieldset class="FormRow">
+        <legend class="FormRow-label">{{field.label}}</legend>
 
-          {% for choice in field.field.choices %}
-          <label for="{{field.auto_id}}-{{choice.0}}">
-            <input type="radio" name="{{field.auto_id}}" id="{{field.auto_id}}-{{choice.0}}" value="{{choice.0}}">
-            {{choice.1}}
-          </label>
-          {% endfor %}
-        </fieldset>
-      {% endfor %}
-    </div>
+        <details>
+          <summary>{% trans "More info" %}</summary>
+          <div>
+            Some content
+          </div>
+        </details>
+
+        {{field.errors}}
+
+        {% for choice in field.field.choices %}
+        <label for="{{field.auto_id}}_{{ forloop.counter0 }}" class="FormRow-option">
+          <input type="radio" name="{{field.html_name}}" id="{{field.auto_id}}_{{ forloop.counter0 }}" value="{{choice.0}}"{% if field.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+          {{choice.1}}
+        </label>
+        {% endfor %}        
+      </fieldset>
+    {% endfor %}
 
     <div class="FormActions">
-      <button type="submit" class="Button">{% trans "Next step" %}</button>
+      <button type="submit" class="Button">{% trans "Next step - Your finances" %}</button>
       <a href="#">{% trans "Go back to previous step" %}</a>
     </div>
   </form>
