@@ -1,14 +1,13 @@
 {% load core_forms_tags %}{% style_form form %}
-<fieldset>
-    <label>{{ fieldset_label }}</label>
+<fieldset class="FormBlock FormBlock--grey">
+  <legend class="FormBlock-legend">{{ fieldset_legend }}</label>
 
-    <div class="form-group">
-        {{ form.other_properties.errors }}
-        <div>{{ form.other_properties.label_tag }}</div>
+  <div class="form-group">
+    {{ form.other_properties.errors }}
+    <div>{{ form.other_properties.label_tag }}</div>
 
-        <div class="input-group col-xs-2 row">
-            {{ form.other_properties }}
-        </div>
+    <div class="input-group col-xs-2 row">
+      {{ form.other_properties }}
     </div>
-
+  </div>
 </fieldset>
