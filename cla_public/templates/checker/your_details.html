@@ -12,13 +12,13 @@
     {{ form.non_field_errors }}
     
     {% for field in form %}
-      <fieldset class="FormRow">
+      <fieldset class="FormRow js-QuestionPrompt">
         <legend class="FormRow-label">{{field.label}}</legend>
 
         <details>
           <summary>{% trans "More info" %}</summary>
           <div>
-            Some content
+            Some example help text
           </div>
         </details>
 
