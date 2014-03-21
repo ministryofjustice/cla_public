@@ -11,25 +11,24 @@
   }
 
   .FormRow {
+    margin: 0;
     padding: 25px;
   }
 }
 
 .FormRow {
-  padding: 15px 0;
-  margin: 0 0 1px;
+  margin: 20px 0;
+  padding: 0;
   position: relative;
 
   .FormRow-label {
     @include core-19;
+    margin: 0 0 5px;
+    padding: 0 145px 0 0;
 
     &.FormRow-label--odd {
       background-color: #f1f1f1;
     }
-  }
-  legend.FormRow-label {
-    padding: 20px 145px 0 0;
-    margin: 0 0 -5px;
   }
 
   .FormRow-inner {
@@ -41,8 +40,8 @@
   details {
     summary {
       position: absolute;
-      right: 25px;
-      top: 25px;
+      right: 0;
+      top: 0;
       z-index: 2;
     }
   }
@@ -61,10 +60,12 @@
   
   // modifiers
   &.FormRow--group {
+    margin: 0 0 1px;
     padding: 0;
 
     .FormRow-label {
       padding: 25px;
+      margin: 0;
       display: block;
       position: relative;
 
@@ -88,20 +89,28 @@
       }
     }
 
-    details div {
-      padding-left: 60px;
-      padding-right: 60px;
+    details {
+      summary {
+        top: 25px;
+      }
+      div {
+        padding-left: 60px;
+        padding-right: 60px;
+      }
     }
   }
 
   &.QuestionPrompt--active {
-    legend {
+    .FormRow-label {
       font-weight: 700;
     }
   }
 }
 
 .FormActions {
+  margin: 50px 0 0;
+  @include core-19;
+
   .Button {
     margin-right: 20px;
   }
