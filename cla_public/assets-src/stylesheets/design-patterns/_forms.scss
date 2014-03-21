@@ -11,15 +11,19 @@
   }
 
   .FormRow {
-    margin: 0;
-    padding: 25px;
+    
   }
+}
+.FormBlock-label {
+  @include heading-24;
+  margin-bottom: 10px;
 }
 
 .FormRow {
   margin: 20px 0;
   padding: 0;
   position: relative;
+  clear: both;
 
   label {
     @include core-19;
@@ -29,6 +33,7 @@
     @include core-19;
     margin: 0 0 5px;
     padding: 0 145px 0 0;
+    display: block;
 
     &.FormRow-label--odd {
       background-color: #f1f1f1;
@@ -39,6 +44,34 @@
     border-left: 3px solid #ccc;
     padding: 10px 60px;
     margin: 10px 0 25px;
+  }
+
+  .FormRow-prefix,
+  .FormRow-suffix {
+    display: inline-block;
+    float: left;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    border: 1px solid #C2C2C2;
+    text-align: center;
+  }
+  .FormRow-prefix {
+    border-right: 0;
+  }
+  .FormRow-suffix {
+    border-left: 0;
+  }
+
+  input[type=text],
+  input[type=password],
+  input[type=number] {
+    @include core-19;
+    border: 1px solid #C2C2C2;
+    padding: 2px 4px;
+    margin: 0;
+    display: inline-block;
+    float: left;
   }
 
   details {

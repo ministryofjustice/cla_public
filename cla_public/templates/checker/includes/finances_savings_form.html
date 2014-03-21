@@ -1,44 +1,42 @@
 {% load core_forms_tags %}{% style_form form %}
-<fieldset class="FormBlock FormBlock--grey">
-  <legend class="FormBlock-legend">{{ fieldset_label }}</legend>
+<section>
+  <h2 id="{{form.prefix}}-label" class="FormBlock-label">{{ fieldset_label }}</h2>
 
-  <div class="form-group">
-    {{ form.bank.errors }}
-    <span class="col-xs-7">{{ form.bank.label_tag }}</span>
+  <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
+    <div class="FormRow cf">
+      {{ form.bank.errors }}
+      <label for="{{ form.bank.id_for_label }}">
+        <span class="FormRow-label">{{ form.bank.label }}</span>
+        <span class="FormRow-prefix">&pound;</span>
+        {{ form.bank }}
+      </label>
+    </div>
 
-    <span class="input-group col-xs-3 row">
-      <span class="input-group-addon">&pound;</span>
-      {{ form.bank }}
-    </span>
+    <div class="FormRow cf">
+      {{ form.investments.errors }}
+      <label for="{{ form.investments.id_for_label }}">
+        <span class="FormRow-label">{{ form.investments.label }}</span>
+        <span class="FormRow-prefix">&pound;</span>
+        {{ form.investments }}
+      </label>
+    </div>
+
+    <div class="FormRow cf">
+      {{ form.valuable_items.errors }}
+      <label for="{{ form.valuable_items.id_for_label }}">
+        <span class="FormRow-label">{{ form.valuable_items.label }}</span>
+        <span class="FormRow-prefix">&pound;</span>
+        {{ form.valuable_items }}
+      </label>
+    </div>
+
+    <div class="FormRow cf">
+      {{ form.money_owed.errors }}
+      <label for="{{ form.money_owed.id_for_label }}">
+        <span class="FormRow-label">{{ form.money_owed.label }}</span>
+        <span class="FormRow-prefix">&pound;</span>
+        {{ form.money_owed }}
+      </label>
+    </div>
   </div>
-
-  <div class="form-group">
-    {{ form.investments.errors }}
-    <span class="col-xs-7">{{ form.investments.label_tag }}</span>
-
-    <span class="input-group col-xs-3 row">
-      <span class="input-group-addon">&pound;</span>
-      {{ form.investments }}
-    </span>
-  </div>
-
-  <div class="form-group">
-    {{ form.valuable_items.errors }}
-    <span class="col-xs-7">{{ form.valuable_items.label_tag }}</span>
-
-    <span class="input-group col-xs-3 row">
-      <span class="input-group-addon">&pound;</span>
-      {{ form.valuable_items }}
-    </span>
-  </div>
-
-  <div class="form-group">
-    {{ form.money_owed.errors }}
-    <span class="col-xs-7">{{ form.money_owed.label_tag }}</span>
-
-    <span class="input-group col-xs-3 row">
-      <span class="input-group-addon">&pound;</span>
-      {{ form.money_owed }}
-    </span>
-  </div>
-</fieldset>
+</section>

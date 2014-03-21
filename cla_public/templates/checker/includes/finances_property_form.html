@@ -1,40 +1,41 @@
 {% load core_forms_tags %}{% style_form form %}
-<fieldset class="FormBlock FormBlock--grey">
-  <legend class="FormBlock-legend">Your property</legend>
+<div class="FormRow cf">
+  {{ form.worth.errors }}
+  <label for="{{ form.worth.id_for_label }}">
+    <span class="FormRow-label">{{ form.worth.label }}</span>
+    <span class="FormRow-prefix">&pound;</span>
+    {{ form.worth }}
+  </label>
+</div>
 
-  <div class="form-group">
-    {{ form.worth.errors }}
-    <div>{{ form.worth.label_tag }}</div>
+<div class="FormRow cf">
+  {{ form.mortgage_left.errors }}
+  <label for="{{ form.mortgage_left.id_for_label }}">
+    <span class="FormRow-label">{{ form.mortgage_left.label }}</span>
+    <span class="FormRow-prefix">&pound;</span>
+    {{ form.mortgage_left }}
+  </label>
+</div>
 
-    <div class="input-group col-xs-3 row">
-      <span class="input-group-addon">&pound;</span>
-      {{ form.worth }}
-    </div>
-  </div>
+<div class="FormRow cf" role="radiogroup" aria-labelledby="{{ form.owner.id_for_label }}-label">
+  {{ form.owner.errors }}
+  <p class="FormRow-label" id="{{ form.owner.id_for_label }}-label">{{ form.owner.label }}</p>
+  
+  {% for choice in form.owner.field.choices %}
+  <label for="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
+    <input type="radio" name="{{ form.owner.html_name }}" id="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.owner.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+    {{ choice.1 }}
+  </label>
+  {% endfor %}
+</div>
 
-  <div class="form-group">
-    {{ form.mortgage_left.errors }}
-    <div>{{ form.mortgage_left.label_tag }}</div>
+<div class="FormRow cf">
+  {{ form.share.errors }}
+  <label for="{{ form.share.id_for_label }}">
+    <span class="FormRow-label">{{ form.share.label }}</span>
+    {{ form.share }}
+    <span class="FormRow-suffix">%</span>
+  </label>
+</div>
 
-    <div class="input-group col-xs-3 row">
-      <span class="input-group-addon">&pound;</span>
-      {{ form.mortgage_left }}
-    </div>
-  </div>
-
-  <div>
-    {{ form.owner.errors }}
-    <div>{{ form.owner.label_tag }}</div>
-    <div>{{ form.owner }}</div>
-  </div>
-
-  <div class="form-group">
-    {{ form.share.errors }}
-    <div>{{ form.share.label_tag }}</div>
-
-    <div class="input-group col-xs-2 row">
-      <span class="input-group-addon">%</span>
-      {{ form.share }}
-    </div>
-  </div>
-</fieldset>
+<hr class="u-HorLine">

@@ -1,13 +1,12 @@
 {% load core_forms_tags %}{% style_form form %}
-<fieldset class="FormBlock FormBlock--grey">
-  <legend class="FormBlock-legend">{{ fieldset_legend }}</label>
-
-  <div class="form-group">
-    {{ form.other_properties.errors }}
-    <div>{{ form.other_properties.label_tag }}</div>
-
-    <div class="input-group col-xs-2 row">
-      {{ form.other_properties }}
-    </div>
-  </div>
-</fieldset>
+<div class="FormRow cf" role="radiogroup" aria-labelledby="{{ form.other_properties.id_for_label }}-label">
+  {{ form.other_properties.errors }}
+  <p class="FormRow-label" id="{{ form.other_properties.id_for_label }}-label">{{ form.other_properties.label }}</p>
+  
+  {% for choice in form.other_properties.field.choices %}
+  <label for="{{ form.other_properties.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
+    <input type="radio" name="{{ form.other_properties.html_name }}" id="{{ form.other_properties.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.other_properties.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+    {{ choice.1 }}
+  </label>
+  {% endfor %}
+</div>
