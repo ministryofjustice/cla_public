@@ -4,7 +4,7 @@ import subprocess
 import os
 import sys
 
-PROJECT_NAME = "cla_public"
+PROJECT_NAME = "cla_backend"
 
 # use python scripts/jenkins/build.py integration
 
@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 env = args.envname[0]
 env_name = "%s-%s" % (PROJECT_NAME, env)
-env_path = "/var/lib/jenkins/envs/%s" % env_name
+env_path = "/tmp/jenkins/envs/%s" % env_name
 bin_path = "%s/bin" % env_path
 
 
@@ -35,8 +35,9 @@ if not os.path.isdir(env_path):
 
 run('%s/pip install -r requirements/jenkins.txt' % bin_path)
 
+
 # Remove .pyc files from the project
 run("find . -name '*.pyc' -delete")
 
 # run tests
-run("%s/python manage.py jenkins --coverage-rcfile=.coveragerc --settings=cla_public.settings.jenkins" % bin_path)
+run("%s/python manage.py jenkins --coverage-rcfile=.coveragerc --settings=cla_backend.settings.jenkins --all" % bin_path)
