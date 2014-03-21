@@ -40,4 +40,4 @@ run('%s/pip install -r requirements/jenkins.txt' % bin_path)
 run("find . -name '*.pyc' -delete")
 
 # run tests
-run("%s/python manage.py jenkins --coverage-rcfile=.coveragerc --settings=cla_public.settings.jenkins --all" % bin_path)
+run("%s/python manage.py jenkins --coverage-rcfile=.coveragerc --settings=cla_public.settings.jenkins" % bin_path)
