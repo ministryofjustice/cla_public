@@ -1,10 +1,8 @@
 {% extends "checker/base.html" %}{% load i18n %}
 
 {% block page_header %}
-
   <h1>{% trans "Your problem" %}</h1>
   <p>{% trans "What is your problem about? Choose what is putting you at immediate risk." %}</p>
-
 {% endblock %}
 
 {% block checker_content %}
@@ -21,13 +19,13 @@
       {% for category in form.fields.category.choices %}
         <div class="FormRow FormRow--group">
           <label for="{{ form.category.auto_id }}_{{ forloop.counter0 }}" class="FormRow-label{% cycle ' FormRow-label--odd' '' %}">
-            <input type="radio" name="{{ form.category.html_name }}" id="{{ form.category.auto_id }}_{{ forloop.counter0 }}" value="{{ category.0 }}" {% if category.0 == form.category.value %}checked="checked"{% endif %}{% if forloop.counter0|add:1 == form.fields.category.choices|length %} data-conditional-el="conditional-{{ category.0 }}"{% endif %} class="js-Conditional">
+            <input type="radio" name="{{ form.category.html_name }}" id="{{ form.category.auto_id }}_{{ forloop.counter0 }}" value="{{ category.0 }}" {% if category.0 == form.category.value %}checked="checked"{% endif %}{% if forloop.counter0|add:1 == form.fields.category.choices|length %} data-conditional-el="conditional-{{ category.0 }}" class="js-Conditional"{% endif %}>
             {{ category.1 }}
           </label>
 
           {% if category.2.description %}
             <details>
-              <summary>More info</summary>
+              <summary>{% trans "More info" %}</summary>
               <div>
                 {{ category.2.description }}
               </div>
@@ -36,8 +34,8 @@
 
           {% if forloop.counter0|add:1 == form.fields.category.choices|length %}
             {# this should only show up if last category is selected #}
-            <div id="conditional-{{ category.0 }}">
-              <p><strong>If your case does not match any of the above:</strong></p>
+            <div id="conditional-{{ category.0 }}" class="Conditional">
+              <p class="Conditional-label"><strong>{% trans "If your case does not match any of the above:" %}</strong></p>
               <div class="FormRow-inner">
                 {{ form.your_problem_notes.label_tag }}
 
@@ -53,7 +51,7 @@
 
     <div class="FormActions">
       <button type="submit" class="Button">{% trans "Next step - your details" %}</button>
-      <a href="#">Go back to previous step</a>
+      <a href="#">{% trans "Go back to previous step" %}</a>
     </div>
   </form>
 

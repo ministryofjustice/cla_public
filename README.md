@@ -24,6 +24,14 @@ Install python dependencies:
 
     pip install -r requirements/local.txt
 
+Install node dependencies:
+
+    npm install
+
+Compile assets:
+
+    gulp build
+
 Start the server:
 
     ./manage.py runserver 8001

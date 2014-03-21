@@ -1,14 +1,42 @@
-{% extends "checker/base.html" %}{% load i18n %}
+{% extends "checker/base.html" %}{% load i18n pdb %}
 
-{% block page_header %}{% trans "Your details" %}{% endblock %}
-
+{% block page_header %}
+  <h1>{% trans "Your details" %}</h1>
+{% endblock %}
 
 {% block checker_content %}
-    <form action="." method="POST">
-        {{ wizard.management_form }}
-        {% csrf_token %}
-        {{ form.as_p }}
-    <button class="btn btn-success">{% trans "Next" %}</button>
-    </form>
+  <form action="." method="POST">
+    {% csrf_token %}
+
+    {{ wizard.management_form }}
+    {{ form.non_field_errors }}
+    
+    {% for field in form %}
+      <fieldset class="FormRow js-QuestionPrompt">
+        <legend class="FormRow-label">{{field.label}}</legend>
+
+        <details>
+          <summary>{% trans "More info" %}</summary>
+          <div>
+            Some example help text
+          </div>
+        </details>
+
+        {{field.errors}}
+
+        {% for choice in field.field.choices %}
+        <label for="{{field.auto_id}}_{{ forloop.counter0 }}" class="FormRow-option">
+          <input type="radio" name="{{field.html_name}}" id="{{field.auto_id}}_{{ forloop.counter0 }}" value="{{choice.0}}"{% if field.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+          {{choice.1}}
+        </label>
+        {% endfor %}        
+      </fieldset>
+    {% endfor %}
+
+    <div class="FormActions">
+      <button type="submit" class="Button">{% trans "Next step - Your finances" %}</button>
+      <a href="#">{% trans "Go back to previous step" %}</a>
+    </div>
+  </form>
 
 {% endblock %}

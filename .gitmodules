@@ -1,6 +1,0 @@
-[submodule "cla_public/assets-src/vendor/govuk_frontend_toolkit"]
-	path = cla_public/assets-src/vendor/govuk_frontend_toolkit
-	url = https://github.com/alphagov/govuk_frontend_toolkit.git
-[submodule "cla_public/assets-src/vendor/govuk_toolkit"]
-	path = cla_public/assets-src/vendor/govuk_toolkit
-	url = https://github.com/alphagov/govuk_frontend_toolkit.git
