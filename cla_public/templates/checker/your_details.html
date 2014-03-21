@@ -12,8 +12,8 @@
     {{ form.non_field_errors }}
     
     {% for field in form %}
-      <fieldset class="FormRow js-QuestionPrompt">
-        <legend class="FormRow-label">{{field.label}}</legend>
+      <div class="FormRow js-QuestionPrompt" role="radiogroup" aria-labelledby="{{field.auto_id}}-label">
+        <p class="FormRow-label" id="{{field.auto_id}}-label">{{field.label}}</p>
 
         <details>
           <summary>{% trans "More info" %}</summary>
@@ -30,12 +30,12 @@
           {{choice.1}}
         </label>
         {% endfor %}        
-      </fieldset>
+      </div>
     {% endfor %}
 
     <div class="FormActions">
       <button type="submit" class="Button">{% trans "Next step - Your finances" %}</button>
-      <a href="#">{% trans "Go back to previous step" %}</a>
+      <a href="{% url 'checker:checker_step' wizard.steps.prev %}">{% trans "Go back to previous step" %}</a>
     </div>
   </form>
 

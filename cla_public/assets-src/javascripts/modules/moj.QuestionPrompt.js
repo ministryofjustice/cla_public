@@ -30,7 +30,7 @@
 
     inputChange: function (e) {
       var $this = $(e.target),
-          $fieldset = $this.closest('fieldset'),
+          $fieldset = $this.closest(this.el),
           answer = $this.val() === 1 ? 'Yes' : 'No';
 
       // remove previous current classes
@@ -52,7 +52,7 @@
     changeAnswer: function (e) {
       e.preventDefault();
 
-      var $fieldset = $(e.target).closest('fieldset');
+      var $fieldset = $(e.target).closest(this.el);
 
       // remove previous current classes
       $('.QuestionPrompt--active').removeClass('QuestionPrompt--active');
