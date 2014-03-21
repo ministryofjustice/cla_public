@@ -63,3 +63,6 @@ cla_public/static/
 
 # node
 node_modules/
+
+# bower packages
+cla_public/assets-src/vendor/
