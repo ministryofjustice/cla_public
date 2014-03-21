@@ -1,45 +1,57 @@
 {% extends "checker/base.html" %}{% load i18n humanize helpers %}
 
-{% block page_header %}{% trans "Your finances" %}{% endblock %}
+{% block page_header %}
+  <h1>{% trans "Your finances" %}</h1>
+{% endblock %}
 
 {% block checker_content %}
-    <p>{% trans "Whether or not you qualify for legal aid depends on how much money you and your partner have. To find out if you’re financially eligible, please answer these questions as honestly and fully as you can." %}</p>
+  <p>{% trans "Whether or not you qualify for legal aid depends on how much money you and your partner have. To find out if you’re financially eligible, please answer these questions as honestly and fully as you can." %}</p>
 
 	<form method=post action="." role="form">
 		{% csrf_token %}
 		{{ wizard.management_form }}
 		{{ form.non_field_errors }}
+    
+    {% if form.form_dict.property or form.form_dict.your_other_properties %}
+      <section>
+        <h2 id="{{ form.form_dict.property.prefix }}-label" class="FormBlock-label">Your property</h2>
 
-		{% with form.form_dict.property as formset %}
+        <div class="FormBlock FormBlock--grey" aria-labelledby="{{ form.form_dict.property.prefix }}-label" role="group">
+      		{% with form.form_dict.property as formset %}
             {% if formset %}
-                {{ formset.management_form}}
-                {% for form in formset %}
-                    {% if form %}
-                        {% include "checker/includes/finances_property_form.html" %}
-                    {% endif %}
-                {% endfor %}
+              {{ formset.management_form}}
+              {% for form in formset %}
+                {% if form %}
+                  {% include "checker/includes/finances_property_form.html" %}
+                {% endif %}
+              {% endfor %}
             {% endif %}
-		{% endwith %}
+      		{% endwith %}
 
-        {% with form=form.form_dict.your_other_properties  fieldset_label="Other properties"%}
+          {% with form=form.form_dict.your_other_properties fieldset_label="Other properties"%}
             {% if form %}
-                {% include "checker/includes/finances_other_property_form.html" %}
+              {% include "checker/includes/finances_other_property_form.html" %}
             {% endif %}
-        {% endwith %}
+          {% endwith %}
+        </div>
+      </section>
+    {% endif %}
 
 		{% with form.form_dict.your_savings as form %}{% with "Your savings" as fieldset_label %}
-            {% if form %}
-                {% include "checker/includes/finances_savings_form.html" %}
-            {% endif %}
+      {% if form %}
+        {% include "checker/includes/finances_savings_form.html" %}
+      {% endif %}
 		{% endwith %}{% endwith %}
 
 		{% with form.form_dict.partners_savings as form %}{% with "Your partner's savings" as fieldset_label %}
-            {% if form %}
-                {% include "checker/includes/finances_savings_form.html" %}
-            {% endif %}
+      {% if form %}
+        {% include "checker/includes/finances_savings_form.html" %}
+      {% endif %}
 		{% endwith %}{% endwith %}
 
-
-        <button type="submit" class="btn btn-success">{% trans "Next" %}</button>
+    <div class="FormActions">
+      <button type="submit" class="Button">{% trans "Next step" %}</button>
+      <a href="{% url 'checker:checker_step' wizard.steps.prev %}">{% trans "Go back to previous step" %}</a>
+    </div>
 	</form>
 {% endblock %}

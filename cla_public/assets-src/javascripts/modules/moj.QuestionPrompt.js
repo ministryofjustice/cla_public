@@ -31,8 +31,8 @@
     inputChange: function (e) {
       var $this = $(e.target),
           $fieldset = $this.closest(this.el),
-          answer = $this.val() === 1 ? 'Yes' : 'No';
-
+          answer = $this.val() === "1" ? 'Yes' : 'No';
+      
       // remove previous current classes
       $('.QuestionPrompt--active').removeClass('QuestionPrompt--active');
 
