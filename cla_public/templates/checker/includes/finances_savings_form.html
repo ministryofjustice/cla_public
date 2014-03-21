@@ -1,41 +1,57 @@
 {% load core_forms_tags %}{% style_form form %}
-<section>
+<section class="Grid">
   <h2 id="{{form.prefix}}-label" class="FormBlock-label">{{ fieldset_label }}</h2>
 
   <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
     <div class="FormRow cf">
       {{ form.bank.errors }}
       <label for="{{ form.bank.id_for_label }}">
-        <span class="FormRow-label">{{ form.bank.label }}</span>
-        <span class="FormRow-prefix">&pound;</span>
-        {{ form.bank }}
+        <span class="Grid-col Grid-col--2-3">
+          {{ form.bank.label }}
+        </span>
+        <span class="Grid-col Grid-col--1-3">
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.bank }}
+        </span>
       </label>
     </div>
 
     <div class="FormRow cf">
       {{ form.investments.errors }}
       <label for="{{ form.investments.id_for_label }}">
-        <span class="FormRow-label">{{ form.investments.label }}</span>
-        <span class="FormRow-prefix">&pound;</span>
-        {{ form.investments }}
+        <span class="Grid-col Grid-col--2-3">
+          {{ form.investments.label }}
+        </span>
+        <span class="Grid-col Grid-col--1-3">
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.investments }}
+        </span>
       </label>
     </div>
 
     <div class="FormRow cf">
       {{ form.valuable_items.errors }}
       <label for="{{ form.valuable_items.id_for_label }}">
-        <span class="FormRow-label">{{ form.valuable_items.label }}</span>
-        <span class="FormRow-prefix">&pound;</span>
-        {{ form.valuable_items }}
+        <span class="Grid-col Grid-col--2-3">
+          {{ form.valuable_items.label }}
+        </span>
+        <span class="Grid-col Grid-col--1-3">
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.valuable_items }}
+        </span>
       </label>
     </div>
 
     <div class="FormRow cf">
       {{ form.money_owed.errors }}
-      <label for="{{ form.money_owed.id_for_label }}">
-        <span class="FormRow-label">{{ form.money_owed.label }}</span>
-        <span class="FormRow-prefix">&pound;</span>
-        {{ form.money_owed }}
+      <label for="{{ form.money_owed.id_for_label }}" class="Grid-row">
+        <span class="Grid-col Grid-col--2-3">
+          {{ form.money_owed.label }}
+        </span>
+        <span class="Grid-col Grid-col--1-3">
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.money_owed }}
+        </span>
       </label>
     </div>
   </div>
