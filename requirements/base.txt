@@ -5,6 +5,6 @@
 Django==1.6.1
 
 # MOJ Template
-django-moj-template==0.10.2
+django-moj-template==0.10.3
 
 slumber==0.6.0
