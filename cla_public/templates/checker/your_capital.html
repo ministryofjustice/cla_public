@@ -14,7 +14,7 @@
     
     {% if form.form_dict.property or form.form_dict.your_other_properties %}
       <section>
-        <h2 id="{{ form.form_dict.property.prefix }}-label" class="FormBlock-label">Your property</h2>
+        <h2 id="{{ form.form_dict.property.prefix }}-label" class="FormBlock-label">{% trans "Your property" %}</h2>
 
         <div class="FormBlock FormBlock--grey" aria-labelledby="{{ form.form_dict.property.prefix }}-label" role="group">
       		{% with form.form_dict.property as formset %}
