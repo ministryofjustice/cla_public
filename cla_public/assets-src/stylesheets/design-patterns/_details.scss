@@ -17,9 +17,16 @@ details {
   div {
     display: none;
     border-left: 3px solid #ccc;
-    padding: 10px 30px;
+    padding: 0 30px;
     margin-top: 10px;
     margin-bottom: 25px;
+
+    p, ul, ol {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   }
   &[open] div {
     display: block;

@@ -22,7 +22,7 @@ $border-colour: #C2C2C2;
 .FormBlock {
   margin: 0;
 
-  &.FormBlock--grey {
+  &--grey {
     padding: 25px 50px;
     margin: 0 0 30px;
     border-width: 1px 0;
@@ -52,7 +52,7 @@ $border-colour: #C2C2C2;
     padding: 0 145px 0 0;
     display: block;
 
-    &.FormRow-label--odd {
+    &--odd {
       background-color: #f1f1f1;
     }
   }
@@ -88,12 +88,15 @@ $border-colour: #C2C2C2;
   input[type=text],
   input[type=password],
   input[type=number] {
-    @include core-19;
+    @include core-24;
+    font-size: 23px;
     border: 1px solid $border-colour;
     padding: 2px 4px;
     margin: 0;
+    height: 32px;
     display: inline-block;
     float: left;
+    @include box-sizing(border-box);
   }
   // shorten if help
   .Grid-col--1-3 input[type=number] {
@@ -132,7 +135,7 @@ $border-colour: #C2C2C2;
   }
   
   // modifiers
-  &.FormRow--group {
+  &--group {
     margin: 0 0 1px;
     padding: 0;
 

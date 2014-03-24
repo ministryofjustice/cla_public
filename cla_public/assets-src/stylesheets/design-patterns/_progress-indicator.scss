@@ -7,7 +7,7 @@
   padding: 0;
   border: 1px solid #E0EEF9;
 
-  .ProgressIndicator-step {
+  &-step {
     @include core-19;
     display: table-cell;
     color: $grey-1;
