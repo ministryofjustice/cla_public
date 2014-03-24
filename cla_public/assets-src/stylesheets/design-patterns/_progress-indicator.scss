@@ -1,52 +1,56 @@
+$background-colour: #F3F9FD;
+$border-colour: #E0EEF8;
+$active-background-colour: #2C8CC5;
+
 .ProgressIndicator {
   list-style: none;
-  display: table; 
-  background: #F3F9FD;
+  background: $background-colour;
+  border: 1px solid $border-colour;
   width: 100%;
-  margin: 40px 0;
   padding: 0;
-  border: 1px solid #E0EEF9;
+  margin: 40px 0;
+  display: table;
 
-  &-step {
+  .ProgressIndicator-step {
     @include core-19;
     display: table-cell;
     color: $grey-1;
     text-align: center;
     vertical-align: middle;
+    margin: 0;
+    padding: 0 30px 0 15px;
     height: 51px;
-    padding-left: 15px;
     position: relative;
+    background: {
+      position: right center;
+      repeat: no-repeat;
+    }
+    @include svg-bg("../images/progress-indicator/chevron");
 
     .ProgressIndicator-tick {
-      background: url(../images/progress-indicator/tick.png) right center no-repeat;
+      background: {
+        position: right center;
+        repeat: no-repeat;
+      }
+      @include svg-bg("../images/progress-indicator/tick");
       padding-right: 22px;
     }
 
-    &:after {
-      content: "";
-      display: block;
-      background: url(../images/progress-indicator/chevron.png) right center no-repeat;
-      height: 100%;
-      width: 15px;
-      position: absolute;
-      z-index: 10;
-      right: -15px;
-      top: 0;
-    }
+    &:last-child, 
+    .no-svg &:last-child {
+      padding-right: 15px;
+      background-image: none;
 
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child:after {
-      display: none;
+      &.is-active {
+        background-image: none;
+      }
     }
 
     &.is-complete {
-      color: #248BC7;
+      color: $active-background-colour;
       font-weight: 700;
       a {
-        color: #248BC7;
+        color: $active-background-colour;
         text-decoration: none;
         &:hover {
           text-decoration: underline;
@@ -57,10 +61,12 @@
     &.is-active {
       color: #fff;
       font-weight: 700;
-      background-color: #248BC7;
-      &:after {
-        background-image: url(../images/progress-indicator/chevron--active.png);      
-      }
-    }    
+      background-color: $active-background-colour;
+      @include svg-bg("../images/progress-indicator/chevron--active");
+    }
+
+    &.is-previous {
+      @include svg-bg("../images/progress-indicator/chevron--previous");
+    }
   }
 }
