@@ -66,7 +66,7 @@ run( "%s/python manage.py collectstatic --noinput" % bin_path)
 
 # run tests
 backend_process = run_bg(
-    "%s/python %s/manage.py testserver initial_category.json --addport 8000 --noinput" % (backend_bin_path, backend_workspace,))
+    "%s/python %s/manage.py testserver initial_category.json --addport 8000 --noinput" % (backend_bin_path, backend_workspace.replace(' ', '\ '),))
 public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
 run('make test')
 backend_process.terminate()
