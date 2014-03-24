@@ -64,10 +64,10 @@ run( "%s/python manage.py collectstatic --noinput" % bin_path)
 # run tests
 backend_process = run_bg(
     "cd %s && %s/python manage.py testserver initial_category.json --addrport 8000 --noinput --settings=cla_backend.settings.jenkins" % (backend_workspace.replace(' ', '\ '),backend_bin_path, ))
-run("wget http://localhost:8000 -t 20 --retry-connrefused --waitretry=2 -T 60")
+run("wget http://localhost:8000/admin/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
-run("wget http://localhost:8001 -t 20 --retry-connrefused --waitretry=2 -T 60")
+run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 run('make test')
 
