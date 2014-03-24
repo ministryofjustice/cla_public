@@ -1,25 +1,24 @@
 {% load i18n core_forms_tags %}
 {% if form %}{% style_form form %}
-<fieldset>
-    <label>{% trans fieldset_label %}</label>
+  <section>
+    <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
 
-    <div class="form-group">
+    <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
+      <div class="FormRow cf">
         {{ form.dependants_old.errors }}
-        <div>{{ form.dependants_old.label_tag }}</div>
+        <label for="{{ form.dependants_old.id_for_label }}">
+          <span class="FormRow-label">{{ form.dependants_old.label }}</span>
+          {{ form.dependants_old }}
+        </label>
+      </div>
 
-        <div class="input-group col-xs-2 row">
-            {{ form.dependants_old }}
-        </div>
-    </div>
-
-    <div class="form-group">
+      <div class="FormRow cf">
         {{ form.dependants_young.errors }}
-        <div>{{ form.dependants_young.label_tag }}</div>
-
-        <div class="input-group col-xs-2 row">
-            {{ form.dependants_young }}
-        </div>
+        <label for="{{ form.dependants_young.id_for_label }}">
+          <span class="FormRow-label">{{ form.dependants_young.label }}</span>
+          {{ form.dependants_young }}
+        </label>
+      </div>
     </div>
-
-</fieldset>
+  </section>
 {% endif %}
