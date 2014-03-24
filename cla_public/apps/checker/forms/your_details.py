@@ -10,31 +10,27 @@ class YourDetailsForm(CheckerWizardMixin, forms.Form):
     form_tag = 'your_details'
 
     has_partner = RadioBooleanField(
-        required=True, label=_(u'Do you have a partner?')
+        required=True, label=_(u'Do you have a partner?'), help_text=(u'<p>Legal aid is calculated on both you and your partner\'s money. A \'partner\' is a person you\'re married to or a person you live with as if you\'re married</p>')
     )
 
     has_benefits = RadioBooleanField(
-        required=True, label=_(u''.join([
-            u"Are you or your partner on Income Support, "
-            u"Income Based Jobseeker's Allowance, Income Based Employment"
-            u" and Support Allowance or Guarantee Credit?"
-        ]))
+        required=True, label=_(u'Are you or your partner on any benefits?'), help_text=(u'<p>Legal aid is based on how much money you have so any benefits you get must be taken into account</p>')
     )
 
     has_children = RadioBooleanField(
-        required=True, label=_(u'Do you have children?')
+        required=True, label=_(u'Do you have children?'), help_text=(u'<p>Your childcare costs will be taken into account provided you can give the right evidence</p>')
     )
 
     caring_responsibilities = RadioBooleanField(
-        required=True, label=_(u'Do you any other caring responsibilities?')
+        required=True, label=_(u'Do you any other caring responsibilities?'), help_text=(u'<p>Other care costs will be taken into account provided you can give the right evidence</p>')
     )
 
     own_property = RadioBooleanField(
-        required=True, label=_(u'Do you or your partner own a property?')
+        required=True, label=_(u'Do you or your partner own a property?'), help_text=(u'<p>Legal aid is based on how much money you have. That means any property you own must be considered, even if you don\'t live in it. Your \'home\' is where you live as your only or main residence and includes caravans, houseboats or other vehicles</p>')
     )
 
     risk_homeless = RadioBooleanField(
-        required=True, label=_(u'Are you are risk of becoming homeless?')
+        required=True, label=_(u'Are you at immediate risk of losing your home or becoming homeless?'), help_text=(u'<p>Legal aid is generally available if you are at immediate risk of becoming homeless. Your \'home\' is where you live as your only or main residence and includes caravans, houseboats or other vehicles</p>')
     )
 
     older_than_sixty = RadioBooleanField(

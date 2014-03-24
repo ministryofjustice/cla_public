@@ -19,6 +19,15 @@ h3 {
 h4 {
   @include core-24;
 }
-p {
+p, ul, ol {
   @include core-19;
+}
+
+ul, ol {
+  padding-left: 30px;
+}
+ol {
+  li {
+    list-style: decimal;
+  }
 }
