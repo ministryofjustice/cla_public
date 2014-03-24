@@ -1,3 +1,24 @@
+$select-colour: #D5E8F4;
+$focus-colour: $yellow;
+$border-colour: #C2C2C2;
+
+// form mixins
+@mixin label-focusSelect {
+  &.is-selected {
+    background-color: $select-colour;
+  }
+  &.is-focused {
+    outline: 3px solid $focus-colour;
+    position: relative;
+    z-index: 1;
+
+    input:focus {
+      outline: none;
+      background: none;
+    }
+  }
+}
+
 .FormBlock {
   margin: 0;
 
@@ -5,13 +26,9 @@
     padding: 25px 50px;
     margin: 0 0 30px;
     border-width: 1px 0;
-    border-color: #C2C2C2;
+    border-color: $border-colour;
     border-style: solid;
     background-color: $grey-4;
-  }
-
-  .FormRow {
-    
   }
 }
 .FormBlock-label {
@@ -53,7 +70,7 @@
     height: 30px;
     width: 30px;
     line-height: 30px;
-    border: 1px solid #C2C2C2;
+    border: 1px solid $border-colour;
     text-align: center;
   }
   .FormRow-prefix {
@@ -62,16 +79,31 @@
   .FormRow-suffix {
     border-left: 0;
   }
+  .FormRow-help {
+    display: inline-block;
+    margin-left: 15px;
+    padding-top: 3px;
+  }
 
   input[type=text],
   input[type=password],
   input[type=number] {
     @include core-19;
-    border: 1px solid #C2C2C2;
+    border: 1px solid $border-colour;
     padding: 2px 4px;
     margin: 0;
     display: inline-block;
     float: left;
+  }
+  // shorten if help
+  .Grid-col--1-3 input[type=number] {
+    width: 48%;
+  }
+  // remove spinner
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   details {
@@ -85,7 +117,11 @@
 
   .FormRow-option {
     display: block;
-    padding: 5px 30px;
+    float: left;
+    clear: both;
+    padding: 10px 25px 10px 20px;
+    margin: 1px 10px 0;
+    @include label-focusSelect;
 
     input {
       margin-right: 20px;
@@ -105,24 +141,10 @@
       margin: 0;
       display: block;
       position: relative;
+      @include label-focusSelect;
 
       input {
         margin-right: 20px;
-      }
-
-      &.is-selected {
-        background-color: #D5E8F4;
-      }
-
-      &.is-focused {
-        outline: 3px solid $yellow;
-        position: relative;
-        z-index: 1;
-
-        input:focus {
-          outline: none;
-          background: none;
-        }
       }
     }
 
@@ -135,6 +157,13 @@
         padding-left: 60px;
         padding-right: 60px;
       }
+    }
+
+    &:first-child {
+      margin-top: 25px;
+    }
+    &:last-child {
+      margin-bottom: 25px;
     }
   }
 
