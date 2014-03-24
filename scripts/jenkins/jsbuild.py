@@ -4,7 +4,6 @@ import subprocess
 import os
 import sys
 
-
 def run(command, **kwargs):
     defaults = {
         'shell': True
@@ -22,9 +21,7 @@ def run_bg(command, **kwargs):
     }
     defaults.update(kwargs)
 
-    return_code = subprocess.Popen(command, **defaults)
-    if return_code:
-        sys.exit(return_code)
+    return subprocess.Popen("exec " + command, **defaults)
 
 
 
@@ -66,8 +63,23 @@ run( "%s/python manage.py collectstatic --noinput" % bin_path)
 
 # run tests
 backend_process = run_bg(
-    "cd %s && %s/python manage.py testserver initial_category.json --addport 8000 --noinput --settings=cla_backend.settings.backend" % (backend_workspace.replace(' ', '\ '),backend_bin_path, ))
+    "cd %s && %s/python manage.py testserver initial_category.json --addrport 8000 --noinput --settings=cla_backend.settings.jenkins" % (backend_workspace.replace(' ', '\ '),backend_bin_path, ))
+run("curl --connect-timeout 5 \
+     --max-time 10 \
+     --retry 20 \
+     --retry-delay 2 \
+     --retry-max-time 60 \
+     'http://127.0.0.1:8000'")
+
 public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
+run("curl --connect-timeout 5 \
+     --max-time 10 \
+     --retry 20 \
+     --retry-delay 2 \
+     --retry-max-time 60 \
+     'http://127.0.0.1:8001'")
+
+
 run('make test')
-backend_process.terminate()
-public_process.terminate()
+
+run('pkill -f envs/cla_.*integration')
