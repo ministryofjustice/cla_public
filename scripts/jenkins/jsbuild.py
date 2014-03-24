@@ -21,7 +21,7 @@ def run_bg(command, **kwargs):
     }
     defaults.update(kwargs)
 
-    return subprocess.Popen("exec " + command, **defaults)
+    return subprocess.Popen(command, **defaults)
 
 
 
