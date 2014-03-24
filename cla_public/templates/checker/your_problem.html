@@ -9,15 +9,6 @@
 
   <form action="." method="POST">
     {% csrf_token %}
-    
-    <ul>
-      <li>List</li>
-      <li>item</li>
-    </ul>
-    <ol>
-      <li>List</li>
-      <li>item</li>
-    </ol>
 
     {{ wizard.management_form }}
     {{ form.non_field_errors }}
