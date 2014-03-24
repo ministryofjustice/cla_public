@@ -2,10 +2,10 @@
   @include button;
   @include border-radius(3px);
 
-  &.Button--secondary {
+  &--secondary {
     background-color: $grey-3;
   }
-  &.Button--warning {
+  &--warning {
     background-color: $red;
   }
 }

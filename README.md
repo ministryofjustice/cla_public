@@ -53,7 +53,7 @@ Assets are managed using [gulp.js](http://gulpjs.com/). To compile the assets on
 ### FE Dependencies
 
 * [nodejs.org](http://nodejs.org/)
-* [Sass](http://sass-lang.com/)
+* [Sass](http://sass-lang.com/) (minimum v3.3)
 * [gulp.js](http://gulpjs.com/)
 
 ### Stylesheets
