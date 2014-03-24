@@ -158,6 +158,13 @@ $border-colour: #C2C2C2;
         padding-right: 60px;
       }
     }
+
+    &:first-child {
+      margin-top: 25px;
+    }
+    &:last-child {
+      margin-bottom: 25px;
+    }
   }
 
   &.QuestionPrompt--active {
