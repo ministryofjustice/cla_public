@@ -66,3 +66,6 @@ node_modules/
 
 # bower packages
 cla_public/assets-src/vendor/
+
+# test results
+xunit.xml
