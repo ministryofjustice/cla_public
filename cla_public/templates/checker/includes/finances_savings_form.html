@@ -1,6 +1,6 @@
 {% load core_forms_tags %}{% style_form form %}
 <section class="Grid">
-  <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
+  <h2 id="{{form.prefix}}-label" class="FormBlock-label">{{ fieldset_label }}</h2>
 
   <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
     <div class="FormRow cf">
