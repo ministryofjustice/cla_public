@@ -4,7 +4,7 @@ import subprocess
 import os
 import sys
 
-def run(command, **kwargs):
+def run(command, ignore_rc=False, **kwargs):
     defaults = {
         'shell': True
     }
@@ -12,7 +12,8 @@ def run(command, **kwargs):
 
     return_code = subprocess.call(command, **defaults)
     if return_code:
-        sys.exit(return_code)
+        if not ignore_rc:
+            sys.exit(return_code)
 
 
 def run_bg(command, **kwargs):
@@ -71,4 +72,5 @@ run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 run('make test')
 
-run('pkill -f envs/cla_.*integration')
+print 'exiting...'
+run('pkill -f envs/cla_.*integration', ignore_rc=True)
