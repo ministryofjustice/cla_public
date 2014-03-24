@@ -88,12 +88,15 @@ $border-colour: #C2C2C2;
   input[type=text],
   input[type=password],
   input[type=number] {
-    @include core-19;
+    @include core-24;
+    font-size: 23px;
     border: 1px solid $border-colour;
     padding: 2px 4px;
     margin: 0;
+    height: 32px;
     display: inline-block;
     float: left;
+    @include box-sizing(border-box);
   }
   // shorten if help
   .Grid-col--1-3 input[type=number] {
