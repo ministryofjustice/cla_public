@@ -4,12 +4,11 @@ casper.test.begin "Disposable Income not eligible because too much income", (tes
   casper.start casper.base_url + "your_problem/", ->
     test.assertSelectorHasText "h1", "Your problem", "page has correct title"
 
-
   casper.thenEvaluate ->
       $("input[name=your_problem-category]:first").click()
-      $("button[type='submit']").click()
 
   casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_details/
 
   casper.thenEvaluate ->
@@ -17,7 +16,6 @@ casper.test.begin "Disposable Income not eligible because too much income", (tes
     $("#id_your_details-has_partner_0").click()
 
   casper.then ->
-    @fill 'form', {}, true
     @waitForUrl /.*your_capital/
 
   casper.thenEvaluate ->
