@@ -3,6 +3,9 @@
 {% block page_title %}Civil Legal Aid{% endblock %}
 
 {% block stylesheets %}
+  <!-- load modernizer -->
+  <script src="{% static 'javascripts/vendor/modernizr.custom.92045.js' %}"></script>
+
   <!--[if gt IE 8]><!--><link href="{% static 'stylesheets/cla.main.css' %}" media="screen" rel="stylesheet"><!--<![endif]-->
   <!--[if IE 6]><link href="{% static 'stylesheets/cla.main-ie6.css' %}" media="screen" rel="stylesheet"><![endif]-->
   <!--[if IE 7]><link href="{% static 'stylesheets/cla.main-ie7.css' %}" media="screen" rel="stylesheet"><![endif]-->
@@ -21,7 +24,7 @@
       <nav>
         <ol class="ProgressIndicator" role="progressbar" aria-valuetext="Step {{ breadcrumb.index }} of {{ breadcrumb.length }}">
           {% for item in breadcrumb.all %}
-            <li class="ProgressIndicator-step{% if item.active %} is-active{% endif %}{% if item.step in history_data %} is-complete{% endif %}">
+            <li class="ProgressIndicator-step{% if item.active %} is-active{% endif %}{% if item.step in history_data %} is-complete{% endif %}{% if item.is_previous %} is-previous{% endif %}">
               {% if item.step in history_data and not item.active %}
                 <a href="{% url 'checker:checker_step' item.step %}" class="ProgressIndicator-tick">{{ item.name }}</a>
               {% else %}
