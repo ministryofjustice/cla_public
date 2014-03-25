@@ -57,10 +57,10 @@ casper.test.begin "Disposable Income is eligible because not enough income", (te
 
 
   casper.thenEvaluate ->
-      $("input[name=your_problem-category]:first").click()
-      $("button[type='submit']").click()
+    $("input[name=your_problem-category]:first").click()
 
   casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_details/
 
   casper.thenEvaluate ->
