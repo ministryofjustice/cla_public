@@ -48,7 +48,7 @@ class BreadCrumb(object):
 
         active_index = 0
 
-        for index, item in enumerate(l, 1):
+        for index, item in enumerate(l):
             if item['active']:
                 active_index = index
                 break
