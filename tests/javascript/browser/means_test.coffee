@@ -16,6 +16,7 @@ casper.test.begin "Disposable Income not eligible because too much income", (tes
     $("#id_your_details-has_partner_0").click()
 
   casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_capital/
 
   casper.thenEvaluate ->
