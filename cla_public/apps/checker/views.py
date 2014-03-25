@@ -19,28 +19,44 @@ class BreadCrumb(object):
     @property
     def all(self):
         current_form = self.wizard.get_form()
-        return [
+        l = [
             {
                 'name': 'Your Problem',
                 'step': 'your_problem',
-                'active': current_form.form_tag == 'your_problem'
+                'active': current_form.form_tag == 'your_problem',
+                'is_previous': False,
             },
             {
                 'name': 'Your Details',
                 'step': 'your_details',
-                'active': current_form.form_tag == 'your_details'
+                'active': current_form.form_tag == 'your_details',
+                'is_previous': False,
             },
             {
                 'name': 'Your Finances',
                 'step': 'your_capital',
-                'active': current_form.form_tag == 'your_finances'
+                'active': current_form.form_tag == 'your_finances',
+                'is_previous': False,
             },
             {
                 'name': 'Result',
                 'step': 'result',
-                'active': current_form.form_tag == 'result'
+                'active': current_form.form_tag == 'result',
+                'is_previous': False,
             }
         ]
+
+        active_index = 0
+
+        for index, item in enumerate(l, 1):
+            if item['active']:
+                active_index = index
+                break
+
+        if active_index > 0:
+            l[active_index-1]['is_previous'] = True
+
+        return l
 
     @property
     def index(self):
