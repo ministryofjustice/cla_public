@@ -15,25 +15,32 @@ casper.test.begin "Disposable Income not eligible because too much income", (tes
   casper.thenEvaluate ->
     $("input[value=0][type=radio]").click()
     $("#id_your_details-has_partner_0").click()
-    $("button[type='submit']").click()
 
+  casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_capital/
 
   casper.thenEvaluate ->
     $("input[type=number]").val(0)
-    $("button[type='submit']").click()
+
+  casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_income/
 
   casper.thenEvaluate ->
     $("input[type=number]").val(0)
     $("#id_your_income-earnings").val(910.51)
     $("input[value=1][type=radio]").click()
-    $("button[type='submit']").click()
+
+  casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_allowances/
 
   casper.thenEvaluate ->
     $("input[type=number]").val(0)
-    $("button[type='submit']").click()
+
+  casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*result/
 
   casper.then ->
@@ -51,8 +58,8 @@ casper.test.begin "Disposable Income is eligible because not enough income", (te
 
 
   casper.thenEvaluate ->
-    $("input[name=your_problem-category]:first").click()
-    $("button[type='submit']").click()
+      $("input[name=your_problem-category]:first").click()
+      $("button[type='submit']").click()
 
   casper.then ->
     @waitForUrl /.*your_details/
@@ -60,29 +67,36 @@ casper.test.begin "Disposable Income is eligible because not enough income", (te
   casper.thenEvaluate ->
     $("input[value=0][type=radio]").click()
     $("#id_your_details-has_partner_0").click()
-    $("button[type='submit']").click()
 
+  casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_capital/
 
   casper.thenEvaluate ->
     $("input[type=number]").val(0)
-    $("button[type='submit']").click()
+
+  casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_income/
 
   casper.thenEvaluate ->
     $("input[type=number]").val(0)
     $("#id_your_income-earnings").val(910.5)
     $("input[value=1][type=radio]").click()
-    $("button[type='submit']").click()
+
+  casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*your_allowances/
 
   casper.thenEvaluate ->
     $("input[type=number]").val(0)
-    $("button[type='submit']").click()
+
+  casper.then ->
+    @fill 'form', {}, true
     @waitForUrl /.*result/
 
   casper.then ->
-    test.assertSelectorHasText "form h2", "might be", "test case is eligible"
+    test.assertSelectorHasText "form h2", "might be", "test case is not eligible"
 
   casper.run ->
     test.done()
