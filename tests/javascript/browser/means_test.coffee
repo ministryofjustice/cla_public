@@ -6,17 +6,14 @@ casper.test.begin "Disposable Income not eligible because too much income", (tes
 
 
   casper.thenEvaluate ->
-      $("input[name=your_problem-category]:first").click()
-      $("button[type='submit']").click()
-
-  casper.then ->
+    $("input[name=your_problem-category]:first").click()
+    $("button[type='submit']").click()
     @waitForUrl /.*your_details/
 
   casper.thenEvaluate ->
     $("input[value=0][type=radio]").click()
     $("#id_your_details-has_partner_0").click()
     $("button[type='submit']").click()
-
     @waitForUrl /.*your_capital/
 
   casper.thenEvaluate ->
@@ -49,19 +46,15 @@ casper.test.begin "Disposable Income is eligible because not enough income", (te
   casper.start casper.base_url + "your_problem/", ->
     test.assertSelectorHasText "h1", "Your problem", "page has correct title"
 
-
   casper.thenEvaluate ->
     $("input[name=your_problem-category]:first").click()
     $("button[type='submit']").click()
-
-  casper.then ->
     @waitForUrl /.*your_details/
 
   casper.thenEvaluate ->
     $("input[value=0][type=radio]").click()
     $("#id_your_details-has_partner_0").click()
     $("button[type='submit']").click()
-
     @waitForUrl /.*your_capital/
 
   casper.thenEvaluate ->
