@@ -1,4 +1,22 @@
+// Load svg background image if browser supports it
 @mixin svg-bg($filename, $extension: '.png') {
   background-image: url($filename + $extension);
   .svg & { background-image: url($filename + '.svg'); }
+}
+
+// Use block style label on radio/checkboxes
+@mixin label-focusSelect {
+  &.is-selected {
+    background-color: $select-colour;
+  }
+  &.is-focused {
+    outline: 3px solid $focus-colour;
+    position: relative;
+    z-index: 1;
+
+    input:focus {
+      outline: none;
+      background: none;
+    }
+  }
 }
