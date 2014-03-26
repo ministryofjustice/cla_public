@@ -4,6 +4,8 @@
 
 Django==1.6.1
 
+django-widget-tweaks==1.3
+
 # MOJ Template
 django-moj-template==0.10.3
 
