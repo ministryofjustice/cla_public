@@ -1,4 +1,4 @@
-{% load core_forms_tags %}{% style_form form %}
+{% load widget_tweaks %}
 <div class="FormRow cf">
   {{ form.worth.errors }}
   <label for="{{ form.worth.id_for_label }}">
@@ -33,7 +33,7 @@
   {{ form.share.errors }}
   <label for="{{ form.share.id_for_label }}">
     <span class="FormRow-label">{{ form.share.label }}</span>
-    {{ form.share }}
+    {{ form.share|add_class:"FormRow-field--s" }}
     <span class="FormRow-suffix">%</span>
   </label>
 </div>

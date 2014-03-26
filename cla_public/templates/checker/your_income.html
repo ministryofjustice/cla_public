@@ -6,8 +6,7 @@
 {% endblock %}
 
 
-{% block checker_content %}    
-
+{% block checker_content %}
   <form method=post action="." role="form">
     {% csrf_token %}
     {{ wizard.management_form }}

@@ -15,7 +15,7 @@
     <fieldset class="FormBlock FormBlock--grey">
       {{ form.category.errors }}
       {% for category in form.fields.category.choices %}
-        <div class="FormRow FormRow--group">
+        <div class="FormRow FormRow--group{% if category.2.description %} FormRow--details{% endif %}">
           <label for="{{ form.category.auto_id }}_{{ forloop.counter0 }}" class="FormRow-label{% cycle ' FormRow-label--odd' '' %}">
             <input type="radio" name="{{ form.category.html_name }}" id="{{ form.category.auto_id }}_{{ forloop.counter0 }}" value="{{ category.0 }}" {% if category.0 == form.category.value %}checked="checked"{% endif %}{% if forloop.counter0|add:1 == form.fields.category.choices|length %} data-conditional-el="conditional-{{ category.0 }}"{% endif %} class="js-Conditional">
             {{ category.1 }}

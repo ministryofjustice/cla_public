@@ -1,25 +1,37 @@
-{% load i18n %}
+{% load i18n widget_tweaks %}
 {% if form %}
   <section>
     <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
     
     <div class="FormBlock FormBlock--grey Grid" aria-labelledby="{{form.prefix}}-label" role="group">
+      
+      {% for fieldset in form.fieldsets %}
+        {% if fieldset.legend %}
+        <div class="{{ fieldset.classes }}"> 
+          <h3 class="FieldGroup-label">{{ fieldset.legend }}</h3>
+        {% endif %}
 
-      {% for field in form %}
-        <div class="FormRow FormRow--help cf">
-          {{ field.errors }}
-          <label for="{{ field.id_for_label }}">
-            <span class="Grid-col Grid-col--2-3">
-              {{ field.label }}
-            </span>
-            <span class="Grid-col Grid-col--1-3">
-              <span class="FormRow-prefix">&pound;</span>
-              {{ field }}
-              <span class="FormRow-help">per month</span>
-            </span>
-          </label>
+        {% for field in fieldset %}
+          <div class="FormRow FormRow--help cf">
+            {{ field.errors }}
+            <label for="{{ field.id_for_label }}">
+              <span class="FormRow-label Grid-col Grid-col--2-3">
+                {{ field.label }}
+              </span>
+              <span class="Grid-col Grid-col--1-3">
+                <span class="FormRow-prefix">&pound;</span>
+                {{ field }}
+                <span class="FormRow-help">per month</span>
+              </span>
+            </label>
+          </div>
+        {% endfor %}
+
+        {% if fieldset.legend %}
         </div>
+        {% endif %}
       {% endfor %}
+
     </div>
       
   </fieldset>
