@@ -1,0 +1,24 @@
+$error-colour: #E32C2E;
+$error-background-colour: #FDF8F5;
+
+.Error {
+  background-color: $error-background-colour;
+  border-left: 3px solid $error-colour;
+  margin: {
+    left: -1em;
+    right: -1em;
+  }
+  padding: 1em 1em 1em;
+
+  .Error-message {
+    @include core-16;
+    display: block;
+    padding: 0.2em 0;
+    color: $error-colour;
+  }
+
+  details summary {
+    top: 1em;
+    right: 1em;
+  }
+}
