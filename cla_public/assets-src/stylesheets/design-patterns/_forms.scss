@@ -2,22 +2,7 @@ $select-colour: #D5E8F4;
 $focus-colour: $yellow;
 $border-colour: #C2C2C2;
 
-// form mixins
-@mixin label-focusSelect {
-  &.is-selected {
-    background-color: $select-colour;
-  }
-  &.is-focused {
-    outline: 3px solid $focus-colour;
-    position: relative;
-    z-index: 1;
 
-    input:focus {
-      outline: none;
-      background: none;
-    }
-  }
-}
 
 .FormBlock {
   margin: 0;
