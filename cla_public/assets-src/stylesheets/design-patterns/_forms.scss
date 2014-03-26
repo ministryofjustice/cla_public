@@ -67,11 +67,12 @@ $border-colour: #C2C2C2;
   .FormRow-suffix {
     display: inline-block;
     float: left;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
     border: 1px solid $border-colour;
     text-align: center;
+    @include box-sizing(border-box);
   }
   .FormRow-prefix {
     border-right: 0;
@@ -80,9 +81,16 @@ $border-colour: #C2C2C2;
     border-left: 0;
   }
   .FormRow-help {
-    display: inline-block;
-    margin-left: 15px;
-    padding-top: 3px;
+    display: block;
+    clear: both;
+    @include box-sizing(border-box);
+
+    @include media(960px) {
+      float: left;
+      clear: none;
+      padding-top: 3px;
+      margin-left: 15px;
+    }
   }
 
   input[type=text],
@@ -96,11 +104,20 @@ $border-colour: #C2C2C2;
     height: 32px;
     display: inline-block;
     float: left;
+    width: 230px;
     @include box-sizing(border-box);
   }
-  // shorten if help
-  .Grid-col--1-3 input[type=number] {
-    width: 48%;
+  // shorten if in column
+  .Grid-col--1-3 {
+    .FormRow-prefix,
+    .FormRow-suffix {
+      width: 11.5942%;
+    }
+    input[type=text],
+    input[type=password],
+    input[type=number] {
+      width: 82.4058%;
+    }
   }
   // remove spinner
   input[type=number]::-webkit-inner-spin-button,
@@ -167,6 +184,21 @@ $border-colour: #C2C2C2;
     }
     &:last-child {
       margin-bottom: 25px;
+    }
+  }
+
+  &--help {
+    .Grid-col--1-3 {
+      input[type=text],
+      input[type=password],
+      input[type=number] {
+        width: 47.4058%;
+      }
+      .FormRow-help {
+        @include media(960px) {
+          width: 35%;
+        }
+      }
     }
   }
 

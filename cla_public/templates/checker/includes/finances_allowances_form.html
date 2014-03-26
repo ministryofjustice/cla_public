@@ -1,12 +1,12 @@
-{% load i18n core_forms_tags %}
-{% if form %}{% style_form form %}
+{% load i18n %}
+{% if form %}
   <section>
     <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
     
     <div class="FormBlock FormBlock--grey Grid" aria-labelledby="{{form.prefix}}-label" role="group">
 
       {% for field in form %}
-        <div class="FormRow cf">
+        <div class="FormRow FormRow--help cf">
           {{ field.errors }}
           <label for="{{ field.id_for_label }}">
             <span class="Grid-col Grid-col--2-3">
