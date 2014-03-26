@@ -152,6 +152,8 @@ PROJECT_APPS = (
     'moj_template',
     'core',
     'checker',
+    'widget_tweaks',
+    'form_utils',
 )
 
 INSTALLED_APPS += PROJECT_APPS

@@ -1,5 +1,5 @@
-{% load i18n core_forms_tags %}
-{% if form %}{% style_form form %}
+{% load i18n widget_tweaks %}
+{% if form %}
   <section>
     <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
 
@@ -8,7 +8,7 @@
         {{ form.dependants_old.errors }}
         <label for="{{ form.dependants_old.id_for_label }}">
           <span class="FormRow-label">{{ form.dependants_old.label }}</span>
-          {{ form.dependants_old }}
+          {{ form.dependants_old|add_class:"FormRow-field--xs" }}
         </label>
       </div>
 
@@ -16,7 +16,7 @@
         {{ form.dependants_young.errors }}
         <label for="{{ form.dependants_young.id_for_label }}">
           <span class="FormRow-label">{{ form.dependants_young.label }}</span>
-          {{ form.dependants_young }}
+          {{ form.dependants_young|add_class:"FormRow-field--xs" }}
         </label>
       </div>
     </div>

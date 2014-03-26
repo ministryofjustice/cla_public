@@ -12,7 +12,7 @@
     {{ form.non_field_errors }}
     
     {% for field in form %}
-      <div class="FormRow cf" role="radiogroup" aria-labelledby="{{field.auto_id}}-label">
+      <div class="FormRow{% if field.help_text %} FormRow--details{% endif %} cf" role="radiogroup" aria-labelledby="{{field.auto_id}}-label">
         <p class="FormRow-label" id="{{field.auto_id}}-label">{{field.label}}</p>
         
         {% if field.help_text %}
