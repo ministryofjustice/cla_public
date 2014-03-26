@@ -5,6 +5,8 @@ from django import forms
 from django.utils.translation import ugettext as _
 from django.forms.formsets import formset_factory, BaseFormSet
 
+import form_utils.forms
+
 from core.forms import MultipleFormsForm
 
 from ..fields import RadioBooleanField, MoneyField
@@ -297,7 +299,7 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
         }
 
 
-class YourSingleAllowancesForm(CheckerWizardMixin, forms.Form):
+class YourSingleAllowancesForm(CheckerWizardMixin, form_utils.forms.BetterForm):
     mortgage = MoneyField(label=_(u"Mortgage"), min_value=0)
     rent = MoneyField(label=_(u"Rent"), min_value=0)
     tax = MoneyField(label=_(u"Tax"), min_value=0)
@@ -307,6 +309,10 @@ class YourSingleAllowancesForm(CheckerWizardMixin, forms.Form):
     criminal_legalaid_contributions = MoneyField(
         label=_(u"Payments being made towards a contribution order"), min_value=0
     )
+
+    class Meta:
+        fieldsets = [('housing', {'fields': ['mortgage', 'rent'], 'legend': 'Housing costs', 'classes': ['FieldGroup']}),
+                     ('', {'fields': ['tax', 'ni', 'maintenance', 'childcare', 'criminal_legalaid_contributions']})]
 
 
 class YourAllowancesForm(YourFinancesFormMixin, MultipleFormsForm):
