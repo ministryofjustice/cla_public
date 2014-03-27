@@ -1,5 +1,7 @@
 {% extends "checker/base.html" %}{% load i18n %}
 
+{% block body_classes %}{{ product_type }} {{ phase }} v-StartPage{% endblock %}
+
 {% block page_header %}
   <h1>Check if you can get legal aid</h1>
 {% endblock page_header %}
@@ -23,8 +25,10 @@
 
   <h2>What happens at the end</h2>
 
-  <p>All questions are asked to find out what help is available to you. Fill in the form honestlyand fully to get an accurate answer. Upon completing this application you will be told whether or not you are eligible to receive Civil Legal Aid and how we will get in contact with you to proceed your case.</p>
+  <p>All questions are asked to find out what help is available to you. Fill in the form honestly and fully to get an accurate answer. Upon completing this application you will be told whether or not you are eligible to receive Civil Legal Aid and how we will get in contact with you to proceed your case.</p>
 
-  <a href="/checker" class="Button" role="button">Check if you can get legal aid</a>
-  <a href="">Other ways of getting legal advice</a>
+  <p>
+    <a href="/checker" class="Button" role="button">Check if you can get legal aid</a>
+    <a href="">Other ways of getting legal advice</a>
+  </p>
 {% endblock %}

@@ -23,6 +23,13 @@ p, ul, ol {
   @include core-19;
 }
 
+p {
+  padding: {
+    top: 4px;
+    bottom: 4px;
+  }
+}
+
 ul, ol {
   padding-left: 30px;
 }

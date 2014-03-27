@@ -1,0 +1,11 @@
+.v-StartPage {
+  .PageHeader {
+    padding: 30px 0 60px;
+  }
+
+  h2 {
+    @include bold-24;
+    padding-top: 18px;
+    padding-bottom: 0;
+  }
+}
