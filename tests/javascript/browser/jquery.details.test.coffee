@@ -2,7 +2,7 @@ field_name = "your_problem-category"
 
 casper.test.begin "Details tag", (test) ->
 
-  casper.start casper.base_url + "your_problem/", ->
+  casper.start casper.base_url + "checker/your_problem/", ->
     test.assertSelectorHasText "h1", "Your problem", "page has correct title"
 
   casper.then ->

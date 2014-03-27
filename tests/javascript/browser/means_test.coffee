@@ -1,7 +1,7 @@
 casper.test.begin "Disposable Income not eligible because too much income", (test) ->
 
   phantom.clearCookies()
-  casper.start casper.base_url + "your_problem/", ->
+  casper.start casper.base_url + "checker/your_problem/", ->
     test.assertSelectorHasText "h1", "Your problem", "page has correct title"
 
   casper.thenEvaluate ->
@@ -52,7 +52,7 @@ casper.test.begin "Disposable Income not eligible because too much income", (tes
 
 casper.test.begin "Disposable Income is eligible because not enough income", (test) ->
   phantom.clearCookies()
-  casper.start casper.base_url + "your_problem/", ->
+  casper.start casper.base_url + "checker/your_problem/", ->
     test.assertSelectorHasText "h1", "Your problem", "page has correct title"
 
 
@@ -103,7 +103,7 @@ casper.test.begin "Disposable Income is eligible because not enough income", (te
 
 casper.test.begin "Disposable Income not eligible because too much income and with children", (test) ->
   phantom.clearCookies()
-  casper.start casper.base_url + "your_problem/", ->
+  casper.start casper.base_url + "checker/your_problem/", ->
     test.assertSelectorHasText "h1", "Your problem", "page has correct title"
 
 
@@ -156,7 +156,7 @@ casper.test.begin "Disposable Income not eligible because too much income and wi
 
 casper.test.begin "Disposable Income is eligible because not enough income and with children", (test) ->
   phantom.clearCookies()
-  casper.start casper.base_url + "your_problem/", ->
+  casper.start casper.base_url + "checker/your_problem/", ->
     test.assertSelectorHasText "h1", "Your problem", "page has correct title"
 
 
