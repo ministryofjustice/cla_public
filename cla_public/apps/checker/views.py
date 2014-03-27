@@ -215,6 +215,10 @@ class CheckerWizard(NamedUrlSessionWizardView):
             return self.render_goto_step('result')
 
 
+class StartPageView(TemplateView):
+    template_name = 'checker/start_page.html'
+
+
 class ConfirmationView(TemplateView):
     template_name = 'checker/confirmation.html'
 
