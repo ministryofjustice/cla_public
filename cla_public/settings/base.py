@@ -147,13 +147,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'widget_tweaks',
+    'form_utils',
 )
 
 PROJECT_APPS = (
     'moj_template',
     'core',
     'checker',
-    'form_utils',
 )
 
 INSTALLED_APPS += PROJECT_APPS
