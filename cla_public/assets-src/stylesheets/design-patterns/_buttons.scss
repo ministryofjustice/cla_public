@@ -2,15 +2,29 @@
   @include button;
   @include border-radius(3px);
   @include core-19;
-
-  &--secondary {
-    background-color: $grey-3;
+  
+  &:link {
+    color: $white;
   }
-  &--warning {
-    background-color: $red;
-  }
-
   & + * {
     margin-left: 20px;
+  }
+  
+  // modifiers
+  &--secondary {
+    @include button($grey-3);
+    @include border-radius(3px);
+
+    &:link {
+      color: $black;
+    }
+  }
+  &--warning {
+    @include button($red);
+    @include border-radius(3px);
+
+    &:link {
+      color: $white;
+    }
   }
 }
