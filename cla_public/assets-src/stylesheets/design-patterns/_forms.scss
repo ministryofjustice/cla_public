@@ -43,9 +43,13 @@ $border-colour: #C2C2C2;
   }
 
   .FormRow-inner {
-    border-left: 3px solid #ccc;
-    padding: 10px 60px;
-    margin: 10px 0 25px;
+    padding: 10px 60px 0;
+    margin: 10px 0 0;
+
+    label {
+      display: block;
+      margin: 0 0 15px;
+    }
   }
 
   .FormRow-prefix,
@@ -77,7 +81,7 @@ $border-colour: #C2C2C2;
       margin-left: 15px;
     }
   }
-
+  
   input[type=text],
   input[type=password],
   input[type=number] {
@@ -90,7 +94,6 @@ $border-colour: #C2C2C2;
     display: inline-block;
     float: left;
     width: 230px;
-    @include box-sizing(border-box);
 
     // size modifiers 
     &.FormRow-field--s {
@@ -99,6 +102,16 @@ $border-colour: #C2C2C2;
     &.FormRow-field--xs {
       width: 50px;
     }
+  }
+  textarea {
+    @include core-19;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    border: 1px solid $border-colour;
+    padding: 2px 4px;
+    margin: 0;
+    @include box-sizing(border-box);
   }
   // shorten if in column
   .Grid-col--1-3 {
