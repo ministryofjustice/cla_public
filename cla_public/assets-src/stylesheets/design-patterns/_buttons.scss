@@ -1,11 +1,16 @@
 .Button {
   @include button;
   @include border-radius(3px);
+  @include core-19;
 
   &--secondary {
     background-color: $grey-3;
   }
   &--warning {
     background-color: $red;
+  }
+
+  & + * {
+    margin-left: 20px;
   }
 }
