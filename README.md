@@ -24,6 +24,10 @@ Install python dependencies:
 
     pip install -r requirements/local.txt
 
+Install Javascript libraries:
+
+    bower install
+
 Install node dependencies:
 
     npm install
