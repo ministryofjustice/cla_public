@@ -4,7 +4,7 @@ $error-background-colour: #FDF8F5;
 .ErrorSummary {
   background-color: $error-background-colour;
   border: 3px solid $error-colour;
-  padding: 0.5em 1em;
+  padding: 1.5em 2em 1em;
   margin-top: 1em;
   margin-bottom: 3em;
 
@@ -14,19 +14,23 @@ $error-background-colour: #FDF8F5;
 
   p {
     padding: 0;
+    @include core-16;
   }
 
   .ErrorSummary-list {
     @include core-16;
     color: $error-colour;
-    padding-left: 25px;
+    padding-left: 0;
   }
 
   .ErrorSummary-listItem {
     margin: 0 0 0.25em;
+    list-style: none;
+
     a {
       color: $error-colour;
       text-decoration: none;
+
       &:hover {
         text-decoration: underline;
       }
@@ -37,11 +41,11 @@ $error-background-colour: #FDF8F5;
 .Error {
   background-color: $error-background-colour;
   border-left: 3px solid $error-colour;
+  padding: 1em 1em 1em;
   margin: {
     left: -1em;
     right: -1em;
   }
-  padding: 1em 1em 1em;
 
   .Error-message {
     @include core-16;
