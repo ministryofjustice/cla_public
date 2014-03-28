@@ -7,7 +7,7 @@
 {% block checker_content %}
   <p>{% trans "Whether or not you qualify for legal aid depends on how much money you and your partner have. To find out if you’re financially eligible, please answer these questions as honestly and fully as you can." %}</p>
 
-	<form method=post action="." role="form">
+	<form method=post action=".">
 		{% csrf_token %}
 		{{ wizard.management_form }}    
 		{{ form.non_field_errors }}
