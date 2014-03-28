@@ -1,4 +1,4 @@
-{% extends "checker/base.html" %}{% load i18n %}
+{% extends "checker/base.html" %}{% load i18n helpers pdb %}
 
 {% block page_header %}
   <h1>{% trans "Your details" %}</h1>
@@ -9,7 +9,28 @@
     {% csrf_token %}
 
     {{ wizard.management_form }}
-    {{ form.non_field_errors }}
+    
+    {% if form.errors %}
+      <div class="ErrorSummary" role="alert" aria-labelledby="error-heading" tabindex="-1">
+        <h2 class="ErrorSummary-heading" id="error-heading">There was a problem submitting the form</h2>
+        <p>Because of the following problems:</p>
+        <ol class="ErrorSummary-list">
+          {% for field, errors in form.errors.items %}
+            {% with field_obj=form|field_from_name:field %}
+            <li class="ErrorSummary-listItem"><a href="#{{ field_obj.auto_id }}-label">              
+              {{ field_obj.label }}
+              {% for error in errors %}
+                {% if not forloop.first  %}
+                  and
+                {% endif %}
+                {{ error }}
+              {% endfor %}
+            </a></li>
+            {% endwith %}
+          {% endfor %}
+        </ol>
+      </div>
+    {% endif %}
     
     {% for field in form %}
       <div class="FormRow cf{% if field.help_text %} FormRow--details{% endif %}{% if field.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ field.auto_id }}-label">

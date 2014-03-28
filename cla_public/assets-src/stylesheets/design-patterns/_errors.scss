@@ -1,6 +1,39 @@
 $error-colour: #E32C2E;
 $error-background-colour: #FDF8F5;
 
+.ErrorSummary {
+  background-color: $error-background-colour;
+  border: 3px solid $error-colour;
+  padding: 0.5em 1em;
+  margin-top: 1em;
+  margin-bottom: 3em;
+
+  .ErrorSummary-heading {
+    @include bold-24;
+  }
+
+  p {
+    padding: 0;
+  }
+
+  .ErrorSummary-list {
+    @include core-16;
+    color: $error-colour;
+    padding-left: 25px;
+  }
+
+  .ErrorSummary-listItem {
+    margin: 0 0 0.25em;
+    a {
+      color: $error-colour;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
 .Error {
   background-color: $error-background-colour;
   border-left: 3px solid $error-colour;
