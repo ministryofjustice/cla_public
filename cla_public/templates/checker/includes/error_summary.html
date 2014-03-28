@@ -4,6 +4,8 @@
     <h2 class="ErrorSummary-heading" id="error-heading">{% trans "There was a problem submitting the form" %}</h2>
     <p>{% trans "Because of the following problems:" %}</p>
     <ol class="ErrorSummary-list">
+    {% for k, form in form.form_dict.items %}
+      
       {% for field, errors in form.errors.items %}
         {% with field_obj=form|field_from_name:field %}
         <li class="ErrorSummary-listItem"><a href="#{{ field_obj.auto_id }}-label">              
@@ -17,6 +19,25 @@
         </a></li>
         {% endwith %}
       {% endfor %}
+      
+    {% empty %}
+
+      {% for field, errors in form.errors.items %}
+        {% with field_obj=form|field_from_name:field %}
+        <li class="ErrorSummary-listItem"><a href="#{{ field_obj.auto_id }}-label">              
+          {{ field_obj.label }}
+          {% for error in errors %}
+            {% if not forloop.first  %}
+              {% trans "and" %}
+            {% endif %}
+            {{ error }}
+          {% endfor %}
+        </a></li>
+        {% endwith %}
+      {% endfor %}
+
+    {% endfor %}
+      
     </ol>
   </div>
 {% endif %}
