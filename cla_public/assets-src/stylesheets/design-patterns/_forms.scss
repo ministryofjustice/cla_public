@@ -94,6 +94,7 @@ $border-colour: #C2C2C2;
     display: inline-block;
     float: left;
     width: 230px;
+    @include box-sizing(border-box);
 
     // size modifiers 
     &.FormRow-field--s {
