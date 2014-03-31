@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 <div class="FormRow cf{% if form.worth.errors %} Error{% endif %}">
-  <label for="{{ form.worth.id_for_label }}" id="{{ form.worth.id_for_label }}-label">
+  <label for="{{ form.worth.id_for_label }}" id="{{ form.worth.auto_id }}-label">
     <span class="FormRow-label">
       {{ form.worth.label }}
       {% for error in form.worth.errors %}
@@ -13,7 +13,7 @@
 </div>
 
 <div class="FormRow cf{% if form.mortgage_left.errors %} Error{% endif %}">
-  <label for="{{ form.mortgage_left.id_for_label }}" id="{{ form.mortgage_left.id_for_label }}-label">
+  <label for="{{ form.mortgage_left.id_for_label }}" id="{{ form.mortgage_left.auto_id }}-label">
     <span class="FormRow-label">
       {{ form.mortgage_left.label }}
       {% for error in form.mortgage_left.errors %}
@@ -42,7 +42,7 @@
 </div>
 
 <div class="FormRow cf{% if form.share.errors %} Error{% endif %}">
-  <label for="{{ form.share.id_for_label }}" id="{{ form.share.id_for_label }}-label">
+  <label for="{{ form.share.id_for_label }}" id="{{ form.share.auto_id }}-label">
     <span class="FormRow-label">
       {{ form.share.label }}
       {% for error in form.share.errors %}
