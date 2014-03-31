@@ -7,7 +7,7 @@
 
 {% block checker_content %}
 
-  <form action="." method="POST">
+  <form action="." method="POST" class="js-LabelSelect">
     {% csrf_token %}
 
     {{ wizard.management_form }}
