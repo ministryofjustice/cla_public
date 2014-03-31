@@ -41,7 +41,7 @@ $error-background-colour: #FDF8F5;
 .Error {
   background-color: $error-background-colour;
   border-left: 3px solid $error-colour;
-  padding: 1em 1em 1em;
+  padding: 1em 1em;
   margin: {
     left: -1em;
     right: -1em;
@@ -57,5 +57,15 @@ $error-background-colour: #FDF8F5;
   details summary {
     top: 1em;
     right: 1em;
+  }
+}
+.FormBlock--grey .Error {
+  margin: {
+    left: -3.125em;
+    right: -3.125em;
+  };
+  padding: {
+    left: 3.125em;
+    right: 3.125em;
   }
 }
