@@ -2,7 +2,7 @@
   'use strict';
 
   moj.Modules.LabelSelect = {
-    el: 'form',
+    el: '.js-LabelSelect',
 
     init: function () {
       this.cacheEls();
