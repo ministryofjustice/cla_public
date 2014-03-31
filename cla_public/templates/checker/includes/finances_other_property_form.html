@@ -1,6 +1,10 @@
-<div class="FormRow cf" role="radiogroup" aria-labelledby="{{ form.other_properties.auto_id }}-label">
-  {{ form.other_properties.errors }}
-  <p class="FormRow-label" id="{{ form.other_properties.auto_id }}-label">{{ form.other_properties.label }}</p>
+<div class="FormRow cf{% if form.other_properties.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.other_properties.auto_id }}-label">
+  <p class="FormRow-label" id="{{ form.other_properties.auto_id }}-label">
+    {{ form.other_properties.label }}
+    {% for error in form.other_properties.errors %}
+      <span class="Error-message">{{ error }}</span>
+    {% endfor %}
+  </p>
   
   {% for choice in form.other_properties.field.choices %}
   <label for="{{ form.other_properties.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
