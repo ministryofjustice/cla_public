@@ -4,27 +4,39 @@
     <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
 
     <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
-      <div class="FormRow cf">
-        {{ form.earnings.errors }}
-        <label for="{{ form.earnings.id_for_label }}">
-          <span class="FormRow-label">{{ form.earnings.label }}</span>
+      <div class="FormRow cf{% if form.earnings.errors %} Error{% endif %}">
+        <label for="{{ form.earnings.id_for_label }}" id="{{ form.earnings.auto_id }}-label">
+          <span class="FormRow-label">
+            {{ form.earnings.label }}
+            {% for error in form.earnings.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </span>
           <span class="FormRow-prefix">&pound;</span>
           {{ form.earnings }}
         </label>
       </div>
 
-      <div class="FormRow cf">
-        {{ form.other_income.errors }}
-        <label for="{{ form.other_income.id_for_label }}">
-          <span class="FormRow-label">{{ form.other_income.label }}</span>
+      <div class="FormRow cf{% if form.other_income.errors %} Error{% endif %}">
+        <label for="{{ form.other_income.id_for_label }}" id="{{ form.other_income.auto_id }}-label">
+          <span class="FormRow-label">
+            {{ form.other_income.label }}
+            {% for error in form.other_income.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </span>
           <span class="FormRow-prefix">&pound;</span>
           {{ form.other_income }}
         </label>
       </div>
 
-      <div class="FormRow cf" role="radiogroup" aria-labelledby="{{ form.self_employed.id_for_label }}-label">
-        {{ form.self_employed.errors }}
-        <p class="FormRow-label" id="{{ form.self_employed.id_for_label }}-label">{{ form.self_employed.label }}</p>
+      <div class="FormRow cf{% if form.self_employed.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.self_employed.auto_id }}-label">
+        <p class="FormRow-label" id="{{ form.self_employed.auto_id }}-label">
+          {{ form.self_employed.label }}
+          {% for error in form.self_employed.errors %}
+            <span class="Error-message">{{ error }}</span>
+          {% endfor %}
+        </p>
         
         {% for choice in form.self_employed.field.choices %}
         <label for="{{ form.self_employed.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
