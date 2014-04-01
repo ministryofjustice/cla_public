@@ -1,0 +1,14 @@
+.TextIcon {
+  background: {
+    repeat: no-repeat;
+    position: left top;
+  };
+  padding-left: 81px;
+}
+
+.TextIcon--tick {
+  @include svg-bg("../images/icons/tick");
+}
+.TextIcon--cross {
+  @include svg-bg("../images/icons/cross");
+}

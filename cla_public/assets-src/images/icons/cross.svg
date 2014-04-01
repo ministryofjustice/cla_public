@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="61px" height="61px" viewBox="0 0 61 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>cross</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="User_flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="8_LegalAidResults_No" sketch:type="MSArtboardGroup" transform="translate(-130.000000, -238.000000)">
+            <g id="X" sketch:type="MSLayerGroup" transform="translate(130.000000, 238.000000)">
+                <path d="M30.124,0 C46.762,0 60.249,13.485 60.249,30.123 C60.249,46.76 46.762,60.248 30.124,60.248 C13.488,60.248 0,46.76 0,30.123 C0,13.485 13.488,0 30.124,0" id="Circle" fill="#9B2F2F" sketch:type="MSShapeGroup"></path>
+                <path d="M24.3933296,30.8943868 L16.8601499,38.8472536 C15.6341499,40.1912536 15.7301499,42.2772536 17.0751499,43.5022536 L18.2931499,44.6122536 C19.6381499,45.8392536 21.7221499,45.7432536 22.9481499,44.3972536 L30.3734955,36.5589687 L38.3271008,44.0928481 C39.6711008,45.3188481 41.7571008,45.2228481 42.9821008,43.8778481 L44.0921008,42.6598481 C45.3191008,41.3148481 45.2231008,39.2308481 43.8771008,38.0048481 L36.0383593,30.5790698 L43.5731499,22.6252536 C44.7991499,21.2802536 44.7021499,19.1962536 43.3571499,17.9692536 L42.1401499,16.8602536 C40.7951499,15.6342536 38.7111499,15.7302536 37.4841499,17.0742536 L30.0581786,24.913939 L22.1051008,17.3798481 C20.7601008,16.1538481 18.6761008,16.2508481 17.4491008,17.5958481 L16.3401008,18.8128481 C15.1141008,20.1578481 15.2101008,22.2418481 16.5541008,23.4688481 L24.3933296,30.8943868 Z" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>
