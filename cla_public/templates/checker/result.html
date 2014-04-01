@@ -11,14 +11,12 @@
 {% endblock page_header %}
 
 {% block checker_content %}
-  <form action="." method="POST">
+  <form action="." method="POST" class="Apply">
     {% csrf_token %}
     {{ wizard.management_form }}
     {{ form.non_field_errors }}
 
-    <div>
-      <button type="submit" class="Button">{% trans "Apply for legal aid" %}</button>
-    </div>
+    <button type="submit" class="Button">{% trans "Apply for legal aid" %}</button>
   </form>
 {% endblock %}
 
