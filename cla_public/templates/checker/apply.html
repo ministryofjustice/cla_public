@@ -10,6 +10,14 @@
     {% csrf_token %}
     {{ wizard.management_form }}
     {{ form.non_field_errors }}
+    
+    <p>{% trans "To finish applying for Legal Aid, you need to fill in your personal details" %}</p>
+    
+    <fieldset class="FormBlock FormBlock--grey">
+      <div class="FormRow cf">
+        <label for=""></label>
+      </div>
+    </fieldset>
 
     <div>
         {% with form=form.form_dict.contact_details %}{% style_form form %}

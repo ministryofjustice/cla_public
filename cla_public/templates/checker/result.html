@@ -1,10 +1,12 @@
 {% extends "checker/base.html" %}{% load i18n %}
 
+{% block body_classes %}{{ product_type }} {{ phase }} v-Result{% endblock %}
+
 {% block page_header %}
   {% if not is_eligible %}
-  <h1 class="i-tick">{% trans "You are not able to get Legal Aid" %}</h1>
+  <h1 class="TextIcon TextIcon--cross">{% trans "You are not able to get Legal Aid" %}</h1>
   {% else %}
-  <h1 class="i-cross">{% trans "You might be able to get Legal Aid" %}</h1>
+  <h1 class="TextIcon TextIcon--tick">{% trans "You might be able to get Legal Aid" %}</h1>
   {% endif %}
 {% endblock page_header %}
 
