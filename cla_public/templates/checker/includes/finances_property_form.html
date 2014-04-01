@@ -1,7 +1,7 @@
-{% load core_forms_tags %}{% style_form form %}
+{% load widget_tweaks %}
 <div class="FormRow cf">
   {{ form.worth.errors }}
-  <label for="{{ form.worth.id_for_label }}">
+  <label for="{{ form.worth.id_for_label }}" id="{{ form.worth.id_for_label }}-label">
     <span class="FormRow-label">{{ form.worth.label }}</span>
     <span class="FormRow-prefix">&pound;</span>
     {{ form.worth }}
@@ -10,16 +10,16 @@
 
 <div class="FormRow cf">
   {{ form.mortgage_left.errors }}
-  <label for="{{ form.mortgage_left.id_for_label }}">
+  <label for="{{ form.mortgage_left.id_for_label }}" id="{{ form.mortgage_left.id_for_label }}-label">
     <span class="FormRow-label">{{ form.mortgage_left.label }}</span>
     <span class="FormRow-prefix">&pound;</span>
     {{ form.mortgage_left }}
   </label>
 </div>
 
-<div class="FormRow cf" role="radiogroup" aria-labelledby="{{ form.owner.id_for_label }}-label">
+<div class="FormRow cf" role="radiogroup" aria-labelledby="{{ form.owner.auto_id }}-label">
   {{ form.owner.errors }}
-  <p class="FormRow-label" id="{{ form.owner.id_for_label }}-label">{{ form.owner.label }}</p>
+  <p class="FormRow-label" id="{{ form.owner.auto_id }}-label">{{ form.owner.label }}</p>
   
   {% for choice in form.owner.field.choices %}
   <label for="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
@@ -31,9 +31,9 @@
 
 <div class="FormRow cf">
   {{ form.share.errors }}
-  <label for="{{ form.share.id_for_label }}">
+  <label for="{{ form.share.id_for_label }}" id="{{ form.share.id_for_label }}-label">
     <span class="FormRow-label">{{ form.share.label }}</span>
-    {{ form.share }}
+    {{ form.share|add_class:"FormRow-field--s" }}
     <span class="FormRow-suffix">%</span>
   </label>
 </div>

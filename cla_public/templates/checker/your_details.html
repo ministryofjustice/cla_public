@@ -1,4 +1,4 @@
-{% extends "checker/base.html" %}{% load i18n %}
+{% extends "checker/base.html" %}{% load i18n helpers %}
 
 {% block page_header %}
   <h1>{% trans "Your details" %}</h1>
@@ -7,13 +7,20 @@
 {% block checker_content %}
   <form action="." method="POST">
     {% csrf_token %}
-
     {{ wizard.management_form }}
-    {{ form.non_field_errors }}
+
+    {% with form=form %}
+      {% include "checker/includes/error_summary.html" %}
+    {% endwith %}
     
     {% for field in form %}
-      <div class="FormRow cf" role="radiogroup" aria-labelledby="{{field.auto_id}}-label">
-        <p class="FormRow-label" id="{{field.auto_id}}-label">{{field.label}}</p>
+      <div class="FormRow cf{% if field.help_text %} FormRow--details{% endif %}{% if field.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ field.auto_id }}-label">
+        <p class="FormRow-label" id="{{ field.auto_id }}-label">
+          {{ field.label }}
+          {% for error in field.errors %}
+            <span class="Error-message">{{ error }}</span>
+          {% endfor %}
+        </p>
         
         {% if field.help_text %}
         <details>
@@ -23,8 +30,6 @@
           </div>
         </details>
         {% endif %}
-
-        {{field.errors}}
 
         {% for choice in field.field.choices %}
         <label for="{{ field.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">

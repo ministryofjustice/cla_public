@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    plugins = require("gulp-load-plugins")(),
+    plugins = require('gulp-load-plugins')(),
     stylish = require('jshint-stylish'),
     runSequence = require('run-sequence');
 
@@ -8,10 +8,12 @@ var paths = {
   src_dir: 'cla_public/assets-src/',
   styles: 'cla_public/assets-src/stylesheets/**/*.scss',
   scripts: [
+    'cla_public/assets-src/javascripts/moj.Helpers.js',
     'cla_public/assets-src/javascripts/modules/moj.LabelFocus.js',
     'cla_public/assets-src/javascripts/modules/moj.LabelSelect.js',
     'cla_public/assets-src/javascripts/modules/moj.Conditional.js',
     'cla_public/assets-src/javascripts/modules/moj.QuestionPrompt.js',
+    'cla_public/assets-src/javascripts/modules/moj.Validation.js',
     'cla_public/assets-src/javascripts/modules/moj.Shame.js'
   ],
   vendor_scripts: 'cla_public/assets-src/javascripts/vendor/*',

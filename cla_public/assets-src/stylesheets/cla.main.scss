@@ -9,15 +9,23 @@
 @import "../../../node_modules/govuk_frontend_toolkit/govuk_frontend_toolkit/stylesheets/typography";
 @import "../../../node_modules/govuk_frontend_toolkit/govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
 
-@import "mixins";
-@import "design-patterns/grid";
-@import "design-patterns/forms";
-@import "design-patterns/buttons";
-@import "design-patterns/details";
-@import "design-patterns/conditional-content";
-@import "design-patterns/progress-indicator";
+// Extras
 @import "typography";
 @import "utilities";
+@import "mixins";
+
+// Design patterns
+@import "design-patterns/grid";
+@import "design-patterns/forms";
+@import "design-patterns/errors";
+@import "design-patterns/buttons";
+@import "design-patterns/details";
+@import "design-patterns/notice";
+@import "design-patterns/conditional-content";
+@import "design-patterns/progress-indicator";
+
+// View
+@import "start-page";
 
 
 

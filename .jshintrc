@@ -18,7 +18,8 @@
   "indent": 2,
   "jquery": true,
   "globals": {
-    "moj": true
+    "moj": true,
+    "_": true
   },
 
   "maxparams": 4,

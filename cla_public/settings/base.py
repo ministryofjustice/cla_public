@@ -146,6 +146,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'widget_tweaks',
+    'form_utils',
 )
 
 PROJECT_APPS = (

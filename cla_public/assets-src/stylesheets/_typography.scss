@@ -23,11 +23,21 @@ p, ul, ol {
   @include core-19;
 }
 
-ul, ol {
-  padding-left: 30px;
-}
-ol {
-  li {
-    list-style: decimal;
+section {
+  p {
+    margin: 0;
+    padding: {
+      top: 12px;
+      bottom: 12px;
+    }
+  }
+
+  ul, ol {
+    padding-left: 30px;
+  }
+  ol {
+    li {
+      list-style: decimal;
+    }
   }
 }

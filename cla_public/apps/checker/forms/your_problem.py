@@ -13,7 +13,7 @@ class YourProblemForm(CheckerWizardMixin, forms.Form):
 
     your_problem_notes = forms.CharField(
         required=False, max_length=500,
-        label=_(u'You can also provide additional details about your case in the text box below.'),
+        label=_(u'Please give us any additional details about your problem that may be relevant'),
         widget=forms.Textarea(attrs={'rows': 5, 'cols': 80})
     )
 

@@ -1,11 +1,30 @@
 .Button {
   @include button;
   @include border-radius(3px);
-
+  @include core-19;
+  
+  &:link {
+    color: $white;
+  }
+  & + * {
+    margin-left: 20px;
+  }
+  
+  // modifiers
   &--secondary {
-    background-color: $grey-3;
+    @include button($grey-3);
+    @include border-radius(3px);
+
+    &:link {
+      color: $black;
+    }
   }
   &--warning {
-    background-color: $red;
+    @include button($red);
+    @include border-radius(3px);
+
+    &:link {
+      color: $white;
+    }
   }
 }

@@ -1,0 +1,71 @@
+$error-colour: #E32C2E;
+$error-background-colour: #FDF8F5;
+
+.ErrorSummary {
+  background-color: $error-background-colour;
+  border: 3px solid $error-colour;
+  padding: 1.5em 2em 1em;
+  margin-top: 1em;
+  margin-bottom: 3em;
+
+  .ErrorSummary-heading {
+    @include bold-24;
+  }
+
+  p {
+    padding: 0;
+    @include core-16;
+  }
+
+  .ErrorSummary-list {
+    @include core-16;
+    color: $error-colour;
+    padding-left: 0;
+  }
+
+  .ErrorSummary-listItem {
+    margin: 0 0 0.25em;
+    list-style: none;
+
+    a {
+      color: $error-colour;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.Error {
+  background-color: $error-background-colour;
+  border-left: 3px solid $error-colour;
+  padding: 1em 1em;
+  margin: {
+    left: -1em;
+    right: -1em;
+  }
+
+  .Error-message {
+    @include core-16;
+    display: block;
+    padding: 0.2em 0;
+    color: $error-colour;
+  }
+
+  details summary {
+    top: 1em;
+    right: 1em;
+  }
+}
+.FormBlock--grey .Error {
+  margin: {
+    left: -3.125em;
+    right: -3.125em;
+  };
+  padding: {
+    left: 3.125em;
+    right: 3.125em;
+  }
+}

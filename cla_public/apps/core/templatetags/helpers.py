@@ -17,3 +17,8 @@ def in_pounds(value):
         value = value / 100.0
         return u'{val:.2f}'.format(val=value)
     return value
+
+
+@register.filter()
+def field_from_name(form, name):
+    return form[name]
