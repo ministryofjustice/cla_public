@@ -44,7 +44,7 @@ casper.test.begin "Disposable Income not eligible because too much income and wi
     @waitForUrl /.*result/
 
   casper.then ->
-    @test.assertSelectorHasText "form h2", "not", "test case is not eligible"
+    @test.assertSelectorHasText "h1", "not", "test case is not eligible"
 
   casper.run ->
     @test.done()
