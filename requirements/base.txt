@@ -12,3 +12,5 @@ django-form-utils==1.0.1
 django-moj-template==0.10.3
 
 slumber==0.6.0
+
+git+ssh://git@github.com/ministryofjustice/cla_common.git@0.1.2#egg=cla_common

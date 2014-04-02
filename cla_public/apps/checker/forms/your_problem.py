@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
-from core.forms import AdvancedCollectionChoiceField
+from cla_common.forms import AdvancedCollectionChoiceField
 from .base import CheckerWizardMixin
 
 

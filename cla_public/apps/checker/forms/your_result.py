@@ -2,7 +2,7 @@ from django import forms
 from django.forms.util import ErrorList
 from django.utils.translation import ugettext as _
 
-from core.forms import MultipleFormsForm
+from cla_common.forms import MultipleFormsForm
 
 from ..exceptions import InconsistentStateException
 

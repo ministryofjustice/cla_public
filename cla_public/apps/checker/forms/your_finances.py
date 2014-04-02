@@ -7,7 +7,7 @@ from django.forms.formsets import formset_factory, BaseFormSet
 
 import form_utils.forms
 
-from core.forms import MultipleFormsForm
+from cla_common.forms import MultipleFormsForm
 
 from ..fields import RadioBooleanField, MoneyField
 

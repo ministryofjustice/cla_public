@@ -154,6 +154,7 @@ PROJECT_APPS = (
     'moj_template',
     'core',
     'checker',
+    'cla_common'
 )
 
 INSTALLED_APPS += PROJECT_APPS
