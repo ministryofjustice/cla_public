@@ -20,7 +20,7 @@
       <section>
         <h2 id="{{ form.form_dict.property.prefix }}-label" class="FormBlock-label">{% trans "Your property" %}</h2>
 
-        <div class="FormBlock FormBlock--grey" aria-labelledby="{{ form.form_dict.property.prefix }}-label" role="group">
+        <div class="FormBlock FormBlock--grey{% if form.form_dict.property.errors|any_true or form.form_dict.your_other_properties.errors|any_true %} FieldsetError{% endif %}" aria-labelledby="{{ form.form_dict.property.prefix }}-label" role="group">
       		{% with form.form_dict.property as formset %}
             {% if formset %}
               {{ formset.management_form}}
