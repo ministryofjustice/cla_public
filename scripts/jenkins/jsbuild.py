@@ -25,6 +25,8 @@ def run_bg(command, **kwargs):
     return subprocess.Popen(command, **defaults)
 
 
+print 'starting...'
+run('pkill -f envs/cla_.*integration', ignore_rc=True)
 
 PROJECT_NAME = "cla_public"
 BACKEND_PROJECT_NAME = "cla_backend"
