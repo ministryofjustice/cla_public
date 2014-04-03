@@ -13,6 +13,7 @@
 @import "typography";
 @import "utilities";
 @import "mixins";
+@import "icons";
 
 // Design patterns
 @import "design-patterns/grid";
@@ -21,11 +22,13 @@
 @import "design-patterns/buttons";
 @import "design-patterns/details";
 @import "design-patterns/notice";
+@import "design-patterns/summary-block";
 @import "design-patterns/conditional-content";
 @import "design-patterns/progress-indicator";
 
 // View
-@import "start-page";
+@import "views/start-page";
+@import "views/result-page";
 
 
 

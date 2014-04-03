@@ -1,27 +1,23 @@
 {% extends "checker/base.html" %}{% load i18n %}
 
-{% block page_header %}{% trans "Check if you might get legal aid" %}{% endblock page_header %}
+{% block body_classes %}{{ product_type }} {{ phase }} v-Result{% endblock %}
 
-{% block summary %}{% include "checker/includes/summary.html" %}{% endblock summary %}
+{% block page_header %}
+  {% if not is_eligible %}
+  <h1 class="TextIcon TextIcon--cross">{% trans "You are not able to get Legal Aid" %}</h1>
+  {% else %}
+  <h1 class="TextIcon TextIcon--tick">{% trans "You might be able to get Legal Aid" %}</h1>
+  {% endif %}
+{% endblock page_header %}
 
 {% block checker_content %}
-<form action="." method="POST">
+  <form action="." method="POST" class="Apply">
     {% csrf_token %}
     {{ wizard.management_form }}
     {{ form.non_field_errors }}
 
-    <div>
-
-    {% if not is_eligible %}
-        <h2 style="text-align:center">{% trans "You are not able to get Legal Aid" %}</h2>
-        <p>{% trans "Other places that may be able to help" %}</p>
-
-    {% else %}
-        <h2 style="text-align:center">{% trans "You might be able to get Legal Aid" %}</h2>
-        <p>{% trans "To finish applying for Legal Aid, your next step is to fill in your personal details" %}</p>
-
-        <button type="submit" class="btn btn-success">{% trans "Apply for legal aid" %}</button>
-    {% endif %}
-    </div>
-</form>
+    <button type="submit" class="Button">{% trans "Apply for legal aid" %}</button>
+  </form>
 {% endblock %}
+
+{% block summary %}{% include "checker/includes/summary.html" %}{% endblock summary %}
