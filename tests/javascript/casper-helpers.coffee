@@ -4,7 +4,7 @@
 casper.base_url = casper.cli.get("url") || "http://0.0.0.0:8001/"
 
 casper.startChecker = ->
-  @start "http://0.0.0.0:8001/", ->
+  @start casper.base_url, ->
 
   @then ->
     @click "a[role=button]"
