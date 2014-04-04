@@ -1,3 +1,4 @@
+from cla_common.constants import TITLE_CHOICES
 from django import forms
 from django.forms.util import ErrorList
 from django.utils.translation import ugettext as _
@@ -11,13 +12,7 @@ from .base import CheckerWizardMixin, EligibilityMixin
 
 class ContactDetailsForm(forms.Form):
     title = forms.ChoiceField(
-        label=_(u'Title'), choices=(
-            ('mr', 'Mr'),
-            ('mrs', 'Mrs'),
-            ('miss', 'Miss'),
-            ('ms', 'Ms'),
-            ('dr', 'Dr')
-        )
+        label=_(u'Title'), choices=TITLE_CHOICES
     )
     full_name = forms.CharField(label=_(u'Full name'), max_length=300)
     postcode = forms.CharField(label=_(u'Postcode'), max_length=10)
