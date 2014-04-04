@@ -44,8 +44,8 @@
 
       moj.log(CLA.templates);
 
-      if ($set.find('.ValueSummary').length > 0) {
-        $set.find('.ValueSummary').replaceWith(CLA.templates.SubTotal({value: value}));
+      if ($set.find('.SubTotal').length > 0) {
+        $set.find('.SubTotal').replaceWith(CLA.templates.SubTotal({value: value}));
       } else {
         $set.append(CLA.templates.SubTotal({value: value}));
       }
