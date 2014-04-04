@@ -26,4 +26,13 @@
     }
   }
   
+  .Grid-colPush {
+
+    &--1-3 {
+      margin-left: 32.35294%;
+    }
+    &--2-3 {
+      margin-left: 66.17647%;
+    }
+  }
 }

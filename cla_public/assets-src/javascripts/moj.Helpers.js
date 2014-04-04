@@ -31,4 +31,9 @@
     /*jshint laxbreak: true */
     return target.offset().top;
   };
+
+  // Handlebars Helpers
+  Handlebars.registerHelper('formatCurrency', function(value) {
+    return parseFloat(value).toFixed(2);
+  });
 })();

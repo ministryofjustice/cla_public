@@ -214,11 +214,11 @@ class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
 
 class YourDependentsForm(CheckerWizardMixin, forms.Form):
     dependants_old = forms.IntegerField(
-        label=_(u'Children aged 16 and over'), required=False, min_value=0
+        label=_(u'Children aged 16 and over'), required=True, min_value=0
     )
 
     dependants_young = forms.IntegerField(
-        label=_(u'Children aged 15 and under'), required=False, min_value=0
+        label=_(u'Children aged 15 and under'), required=True, min_value=0
     )
 
 

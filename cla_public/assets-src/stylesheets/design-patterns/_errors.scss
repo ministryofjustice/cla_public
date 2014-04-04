@@ -1,8 +1,9 @@
 $error-colour: #E32C2E;
-$error-background-colour: #FDF8F5;
+$error-bg-colour: #FAEBEC;
+$fieldset-error-bg-colour: #FDF8F5;
 
 .ErrorSummary {
-  background-color: $error-background-colour;
+  background-color: $error-bg-colour;
   border: 3px solid $error-colour;
   padding: 1.5em 2em 1em;
   margin-top: 1em;
@@ -39,7 +40,7 @@ $error-background-colour: #FDF8F5;
 }
 
 .Error {
-  background-color: $error-background-colour;
+  background-color: $error-bg-colour;
   border-left: 3px solid $error-colour;
   padding: 1em 1em;
   margin: {
@@ -59,13 +60,20 @@ $error-background-colour: #FDF8F5;
     right: 1em;
   }
 }
-.FormBlock--grey .Error {
-  margin: {
-    left: -3.125em;
-    right: -3.125em;
-  };
-  padding: {
-    left: 3.125em;
-    right: 3.125em;
+
+.FormBlock--grey {
+  &.FieldsetError {
+    background-color: $fieldset-error-bg-colour;
+  }   
+
+ .Error {
+    margin: {
+      left: -3.125em;
+      right: -3.125em;
+    };
+    padding: {
+      left: 3.125em;
+      right: 3.125em;
+    }
   }
 }

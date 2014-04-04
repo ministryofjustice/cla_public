@@ -20,7 +20,7 @@ class ContactDetailsForm(forms.Form):
         label=_(u'Street'), max_length=250,
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 21})
     )
-    town = forms.CharField(label=_(u'Town'), max_length=100)
+    town = forms.CharField(label=_(u'Town/city'), max_length=100)
     mobile_phone = forms.CharField(label=_(u'Mobile Phone'), max_length=20, required=False)
     home_phone = forms.CharField(label=_('Home Phone'), max_length=20, required=False)
 

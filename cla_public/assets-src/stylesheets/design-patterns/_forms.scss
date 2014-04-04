@@ -95,14 +95,6 @@ $border-colour: #C2C2C2;
     float: left;
     width: 230px;
     @include box-sizing(border-box);
-
-    // size modifiers 
-    &.FormRow-field--s {
-      width: 100px;
-    }
-    &.FormRow-field--xs {
-      width: 50px;
-    }
   }
   textarea {
     @include core-19;
@@ -113,6 +105,20 @@ $border-colour: #C2C2C2;
     padding: 2px 4px;
     margin: 0;
     @include box-sizing(border-box);
+  }
+
+  // size modifiers 
+  input.FormRow-field--l,
+  textarea.FormRow-field--l {
+    width: 420px;
+  }
+  input.FormRow-field--s,
+  textarea.FormRow-field--s {
+    width: 100px;
+  }
+  input.FormRow-field--xs,
+  textarea.FormRow-field--xs {
+    width: 50px;
   }
   // shorten if in column
   .Grid-col--1-3 {
@@ -214,6 +220,22 @@ $border-colour: #C2C2C2;
           width: 35%;
         }
       }
+    }
+  }
+
+  &--inline {
+    .FormRow-label {
+      float: left;
+      width: 200px;
+      margin: 0;
+      padding-top: 5px;
+    }
+    select,
+    input[type=text],
+    input[type=password],
+    input[type=number],
+    textarea {
+      float: left;
     }
   }
 
