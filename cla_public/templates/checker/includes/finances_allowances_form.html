@@ -3,7 +3,7 @@
   <section>
     <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
     
-    <div class="FormBlock FormBlock--grey Grid{% if form.errors %} FieldsetError{% endif %}" aria-labelledby="{{form.prefix}}-label" role="group">
+    <div class="FormBlock FormBlock--grey Grid js-SubTotal{% if form.errors %} FieldsetError{% endif %}" aria-labelledby="{{form.prefix}}-label" role="group">
       {% for fieldset in form.fieldsets %}
         {% if fieldset.legend %}
         <div class="{{ fieldset.classes }}"> 

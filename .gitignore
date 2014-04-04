@@ -69,3 +69,6 @@ cla_public/assets-src/vendor/
 
 # test results
 xunit.xml
+
+# ignore generated handlebars templates
+cla_public/assets-src/javascripts/templates.js
