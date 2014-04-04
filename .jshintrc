@@ -19,7 +19,9 @@
   "jquery": true,
   "globals": {
     "moj": true,
-    "_": true
+    "CLA": true,
+    "_": true,
+    "Handlebars": true
   },
 
   "maxparams": 4,

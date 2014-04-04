@@ -7,20 +7,25 @@ var paths = {
   dest_dir: 'cla_public/assets/',
   src_dir: 'cla_public/assets-src/',
   styles: 'cla_public/assets-src/stylesheets/**/*.scss',
+  templates: 'cla_public/assets-src/javascripts/templates/*.hbs',
   scripts: [
+    // vendor scripts
+    'cla_public/assets-src/vendor/lodash/dist/lodash.min.js',
+    'cla_public/assets-src/vendor/jquery-details/jquery.details.js',
+    'cla_public/assets-src/vendor/handlebars/handlebars.js',
+    // templates
+    'cla_public/assets-src/javascripts/templates.js',
+    // CLA
     'cla_public/assets-src/javascripts/moj.Helpers.js',
     'cla_public/assets-src/javascripts/modules/moj.LabelFocus.js',
     'cla_public/assets-src/javascripts/modules/moj.LabelSelect.js',
     'cla_public/assets-src/javascripts/modules/moj.Conditional.js',
+    'cla_public/assets-src/javascripts/modules/moj.SumCalc.js',
     'cla_public/assets-src/javascripts/modules/moj.QuestionPrompt.js',
     'cla_public/assets-src/javascripts/modules/moj.Validation.js',
     'cla_public/assets-src/javascripts/modules/moj.Shame.js'
   ],
   vendor_scripts: 'cla_public/assets-src/javascripts/vendor/*',
-  bower_scripts: [
-    'cla_public/assets-src/vendor/lodash/dist/lodash.min.js',
-    'cla_public/assets-src/vendor/jquery-details/jquery.details.min.js'
-  ],
   images: 'cla_public/assets-src/images/**/*'
 };
 
@@ -39,31 +44,41 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(paths.dest_dir + 'stylesheets'));
 });
 
-// concat and move modules
-gulp.task('js:main', function() {
+// js templates
+gulp.task('templates', function(){
+  gulp.src(paths.templates)
+    .pipe(plugins.handlebars())
+    .pipe(plugins.defineModule('plain'))
+    .pipe(plugins.declare({
+      namespace: 'CLA.templates'
+    }))
+    .pipe(plugins.concat('templates.js'))
+    .pipe(gulp.dest(paths.src_dir + 'javascripts'));
+});
+
+// default js task
+gulp.task('js', ['templates'], function() {
   gulp
     .src(paths.scripts)
     .pipe(plugins.concat('cla.main.js'))
     .pipe(gulp.dest(paths.dest_dir + 'javascripts'));
-});
-// move vendor scripts
-gulp.task('js:vendor', function() {
+  // copy static vendor files
   gulp
     .src(paths.vendor_scripts)
     .pipe(gulp.dest(paths.dest_dir + 'javascripts/vendor'));
 });
-// concat and move footer bower vendor scripts
-gulp.task('js:bower', function() {
-  gulp
-    .src(paths.bower_scripts)
-    .pipe(plugins.concat('vendor.js'))
-    .pipe(gulp.dest(paths.dest_dir + 'javascripts'));
-});
 
 // jshint js code
 gulp.task('lint', function() {
+  var files = paths.scripts.slice(0);
+
+  // files to ignore from linting
+  files.push('!cla_public/assets-src/vendor/**');
+  files.push('!cla_public/assets-src/javascripts/vendor/**');
+  files.push('!cla_public/assets-src/javascripts/templates.js');
+
   gulp
-    .src(paths.scripts)
+    .src(files)
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter(stylish));
 });
@@ -79,9 +94,8 @@ gulp.task('images', function() {
 // setup watches
 gulp.task('watch', function() {
   gulp.watch(paths.styles, ['sass']);
-  gulp.watch(paths.scripts, ['lint', 'js:main']);
-  gulp.watch(paths.vendor_scripts, ['lint', 'js:vendor']);
-  gulp.watch(paths.bower_scripts, ['lint', 'js:bower']);
+  gulp.watch(paths.scripts, ['lint', 'js']);
+  gulp.watch(paths.templates, ['js']);
   gulp.watch(paths.images, ['images']);
 });
 
@@ -89,5 +103,5 @@ gulp.task('watch', function() {
 gulp.task('default', ['build']);
 // run build
 gulp.task('build', function() {
-  runSequence('clean', ['js:main', 'js:vendor', 'js:bower', 'images', 'sass']);
+  runSequence('clean', ['templates', 'js', 'images', 'sass']);
 });
