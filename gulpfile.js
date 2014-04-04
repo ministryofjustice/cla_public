@@ -20,7 +20,7 @@ var paths = {
     'cla_public/assets-src/javascripts/modules/moj.LabelFocus.js',
     'cla_public/assets-src/javascripts/modules/moj.LabelSelect.js',
     'cla_public/assets-src/javascripts/modules/moj.Conditional.js',
-    'cla_public/assets-src/javascripts/modules/moj.SumCalc.js',
+    'cla_public/assets-src/javascripts/modules/moj.SubTotal.js',
     'cla_public/assets-src/javascripts/modules/moj.QuestionPrompt.js',
     'cla_public/assets-src/javascripts/modules/moj.Validation.js',
     'cla_public/assets-src/javascripts/modules/moj.Shame.js'
