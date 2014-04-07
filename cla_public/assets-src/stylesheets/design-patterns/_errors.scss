@@ -48,17 +48,25 @@ $fieldset-error-bg-colour: #FDF8F5;
     right: -1em;
   }
 
-  .Error-message {
-    @include core-16;
-    display: block;
-    padding: 0.2em 0;
-    color: $error-colour;
-  }
-
   details summary {
     top: 1em;
     right: 1em;
   }
+
+  &.FormRow--group {
+    padding: 0;
+
+    .FormRow-label {
+      background-color: transparent;
+    }
+  }
+}
+
+.Error-message {
+  @include core-16;
+  display: block;
+  padding: 0.2em 0;
+  color: $error-colour;
 }
 
 .FormBlock--grey {

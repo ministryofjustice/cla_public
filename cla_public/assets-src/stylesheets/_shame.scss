@@ -1,0 +1,4 @@
+// To overcome specificity issue when using details tag within radio group
+.Error.FormRow--group details summary {
+  right: 4em;
+}
