@@ -181,6 +181,8 @@ $border-colour: #C2C2C2;
   }
 
   &--details {
+    border-bottom: 1px solid transparent;
+
     .FormRow-label {
       padding-right: 145px;
     }

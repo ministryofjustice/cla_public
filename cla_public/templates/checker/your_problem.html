@@ -1,4 +1,4 @@
-{% extends "checker/base.html" %}{% load i18n %}
+{% extends "checker/base.html" %}{% load i18n helpers %}
 
 {% block page_header %}
   <h1>{% trans "Your problem" %}</h1>
@@ -9,13 +9,19 @@
 
   <form action="." method="POST" class="js-LabelSelect">
     {% csrf_token %}
-
     {{ wizard.management_form }}
     {{ form.non_field_errors }}
-    <fieldset class="FormBlock FormBlock--grey">
-      {{ form.category.errors }}
+
+    {% with form=form %}
+      {% include "checker/includes/error_summary.html" %}
+    {% endwith %}
+
+    <fieldset class="FormBlock FormBlock--grey{% if form.category.errors|any_true %} FieldsetError{% endif %}">
+      {% for error in form.category.errors %}
+        {# <span class="Error-message">{{ error }}</span>  #}
+      {% endfor %}
       {% for category in form.fields.category.choices %}
-        <div class="FormRow FormRow--group{% if category.2.description %} FormRow--details{% endif %}">
+        <div class="FormRow FormRow--group{% if category.2.description %} FormRow--details{% endif %}{% if form.category.errors|any_true %} Error{% endif %}">
           <label for="{{ form.category.auto_id }}_{{ forloop.counter0 }}" class="FormRow-label{% cycle ' FormRow-label--odd' '' %}">
             <input type="radio" name="{{ form.category.html_name }}" id="{{ form.category.auto_id }}_{{ forloop.counter0 }}" value="{{ category.0 }}" {% if category.0 == form.category.value %}checked="checked"{% endif %}{% if forloop.counter0|add:1 == form.fields.category.choices|length %} data-conditional-el="conditional-{{ category.0 }}"{% endif %} class="js-Conditional">
             {{ category.1 }}
