@@ -53,12 +53,12 @@ $fieldset-error-bg-colour: #FDF8F5;
     right: 1em;
   }
 
+  .FormRow-label {
+    background-color: transparent;
+  }
+
   &.FormRow--group {
     padding: 0;
-
-    .FormRow-label {
-      background-color: transparent;
-    }
   }
 }
 
