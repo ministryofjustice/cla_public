@@ -22,7 +22,7 @@
       }, 300)
       .promise()
       .done(function() {
-        $target.closest('.FormRow').find('input, select, textarea').first().focus();
+        $target.closest('.FormRow, form').find('input:not([type=hidden]), select, textarea').first().focus();
       });
   };
 
