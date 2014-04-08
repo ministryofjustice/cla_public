@@ -43,6 +43,7 @@ casper.test.begin "Disposable Income not eligible because too much income", (tes
 
   casper.then ->
     @test.assertSelectorHasText "h1", "not", "test case is not eligible"
+    @test.assertSelectorDoesntHaveText "button[type=submit]", "Apply for legal aid", "apply button doesn't exist"
 
   casper.run ->
     @test.done()
