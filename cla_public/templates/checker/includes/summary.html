@@ -72,11 +72,10 @@
     </section>
   {% endif %}
 
-  {% if history_data.your_capital %}
+  {% if history_data.your_capital.property %}
     <section class="SummaryBlock">
       <h2 class="SummaryBlock-heading">{% trans "Your finances" %}</h2>
       <ul class="SummaryBlock-list">
-        {% if history_data.your_capital.property %}
         <li>
           {% blocktrans count property_count=history_data.your_capital.property|length %}
               You have one property
@@ -110,7 +109,6 @@
             {% endfor %}
             </ul>
         </li>
-        {% endif %}
       </ul>
 
       {% if not read_only %}
