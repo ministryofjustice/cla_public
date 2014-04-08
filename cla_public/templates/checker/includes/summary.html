@@ -194,12 +194,12 @@
     <section class="SummaryBlock">
       <h2 class="SummaryBlock-heading">{% trans "Contact details" %}</h2>
       <div class="SummaryBlock-list">
-        {{data.title|capfirst}} {{data.full_name}}<br>
-        {{data.street}}<br>
-        {{data.town}} {{data.postcode}}<br><br>
+        <p>{{data.title|capfirst}} {{data.full_name}}</p>
+        <p>{{data.street}}</p>
+        <p>{{data.town}} {{data.postcode}}</p>
 
-        {% trans "Mobile" %}: {{data.mobile_phone|default:"-"}}<br>
-        {% trans "Home" %}: {{data.home_phone|default:"-"}}
+        <p>{% trans "Mobile" %}: {{data.mobile_phone|default:"-"}}</p>
+        <p>{% trans "Home" %}: {{data.home_phone|default:"-"}}</p>
       </div>
     </section>
   {% endwith %}{% endif %}
