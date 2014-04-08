@@ -16,13 +16,9 @@
   };
   list-style: none;
 
-  li {
-    padding: 0.5em;
+  li, p {
+    padding: 0.5em 0;
   }
-}
-
-.SummaryBlock-listItem {
-  
 }
 
 .SummaryBlock-edit {
