@@ -2,7 +2,6 @@
 
 {% block page_header %}
   <h1>{% trans "Your problem" %}</h1>
-  <p>{% trans "What is your problem about? Choose what is putting you at immediate risk." %}</p>
 {% endblock %}
 
 {% block checker_content %}
@@ -15,8 +14,10 @@
     {% with form=form %}
       {% include "checker/includes/error_summary.html" %}
     {% endwith %}
+  
+    <p id="{{ form.category.auto_id }}-label">{% trans "What is your problem about? Choose what is putting you at immediate risk." %}</p>
 
-    <fieldset class="FormBlock FormBlock--grey{% if form.category.errors|any_true %} FieldsetError{% endif %}">
+    <div class="FormBlock FormBlock--grey{% if form.category.errors|any_true %} FieldsetError{% endif %}">
       {% for error in form.category.errors %}
         {# <span class="Error-message">{{ error }}</span>  #}
       {% endfor %}
@@ -50,7 +51,8 @@
           {% endif %}
         </div>
       {% endfor %}
-    </fieldset>
+    </div>
+
     <p>{% trans "If possible, please choose one of the categories above. If you’re really not sure or it doesn’t appear above, you can ask for a call back here." %}</p>
 
     <div class="FormActions">
