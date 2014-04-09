@@ -15,7 +15,10 @@
 {% block javascripts %}
   <script src="{% static 'javascripts/cla.main.js' %}"></script>
   {% if debug %}
+  <!-- NOT IN PROD MODE -->
   <script src="{% static 'javascripts/cla.debug.js' %}"></script>
+  {% else %}
+  <!-- IN PROD MODE -->
   {% endif %}
 {% endblock %}
 
