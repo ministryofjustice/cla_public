@@ -1,4 +1,4 @@
-// Validation module for LPA
+// Validation module
 // Dependencies: moj, _, jQuery
 
 (function () {

@@ -17,13 +17,7 @@ var paths = {
     'cla_public/assets-src/javascripts/templates.js',
     // CLA
     'cla_public/assets-src/javascripts/moj.Helpers.js',
-    'cla_public/assets-src/javascripts/modules/moj.LabelFocus.js',
-    'cla_public/assets-src/javascripts/modules/moj.LabelSelect.js',
-    'cla_public/assets-src/javascripts/modules/moj.Conditional.js',
-    'cla_public/assets-src/javascripts/modules/moj.SubTotal.js',
-    'cla_public/assets-src/javascripts/modules/moj.QuestionPrompt.js',
-    'cla_public/assets-src/javascripts/modules/moj.Validation.js',
-    'cla_public/assets-src/javascripts/modules/moj.Shame.js'
+    'cla_public/assets-src/javascripts/modules/*'
   ],
   vendor_scripts: 'cla_public/assets-src/javascripts/vendor/*',
   images: 'cla_public/assets-src/images/**/*'
@@ -58,14 +52,24 @@ gulp.task('templates', function(){
 
 // default js task
 gulp.task('js', ['templates'], function() {
+  var prod = paths.scripts.slice(0);
+
+  // ignore debug files
+  prod.push('!' + paths.src_dir + '**/*debug*');
+  // create concatinated js file
   gulp
-    .src(paths.scripts)
+    .src(prod)
     .pipe(plugins.concat('cla.main.js'))
     .pipe(gulp.dest(paths.dest_dir + 'javascripts'));
   // copy static vendor files
   gulp
     .src(paths.vendor_scripts)
     .pipe(gulp.dest(paths.dest_dir + 'javascripts/vendor'));
+  // create debug js file
+  gulp
+    .src(paths.src_dir + 'javascripts/**/*debug*')
+    .pipe(plugins.concat('cla.debug.js'))
+    .pipe(gulp.dest(paths.dest_dir + 'javascripts/'));
 });
 
 // jshint js code
@@ -94,8 +98,7 @@ gulp.task('images', function() {
 // setup watches
 gulp.task('watch', function() {
   gulp.watch(paths.styles, ['sass']);
-  gulp.watch(paths.scripts, ['lint', 'js']);
-  gulp.watch(paths.templates, ['js']);
+  gulp.watch(paths.src_dir + 'javascripts/**/*', ['lint', 'js']);
   gulp.watch(paths.images, ['images']);
 });
 
@@ -103,5 +106,5 @@ gulp.task('watch', function() {
 gulp.task('default', ['build']);
 // run build
 gulp.task('build', function() {
-  runSequence('clean', ['templates', 'js', 'images', 'sass']);
+  runSequence('clean', ['lint', 'templates', 'js', 'images', 'sass']);
 });

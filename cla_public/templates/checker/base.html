@@ -14,6 +14,9 @@
 
 {% block javascripts %}
   <script src="{% static 'javascripts/cla.main.js' %}"></script>
+  {% if debug %}
+  <script src="{% static 'javascripts/cla.debug.js' %}"></script>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
