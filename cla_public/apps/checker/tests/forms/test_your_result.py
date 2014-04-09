@@ -1,6 +1,7 @@
 from core.testing.testcases import CLATestCase
 
-from ...forms import ApplyForm, ResultForm
+from ...forms import ApplyForm
+
 from ...exceptions import InconsistentStateException
 
 from ..fixtures import mocked_api
