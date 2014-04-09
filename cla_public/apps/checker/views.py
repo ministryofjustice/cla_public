@@ -9,7 +9,7 @@ from django.contrib.formtools.wizard.storage import get_storage
 from .helpers import SessionCheckerHelper
 from .forms import YourProblemForm, YourDetailsForm, \
     YourCapitalForm, YourIncomeForm, YourAllowancesForm, \
-    ResultForm, ApplyForm
+    ApplyForm
 
 
 class BreadCrumb(object):
@@ -79,8 +79,7 @@ class CheckerWizard(NamedUrlSessionWizardView):
         ("your_capital", YourCapitalForm),
         ("your_income", YourIncomeForm),
         ("your_allowances", YourAllowancesForm),
-        ("result", ResultForm),
-        ("apply", ApplyForm),
+        ("result", ApplyForm),
     ]
 
     TEMPLATES = {
@@ -89,8 +88,7 @@ class CheckerWizard(NamedUrlSessionWizardView):
         "your_capital": "checker/your_capital.html",
         "your_income": "checker/your_income.html",
         "your_allowances": "checker/your_allowances.html",
-        "result": "checker/result.html",
-        "apply": "checker/apply.html"
+        "result": "checker/apply.html"
     }
 
     # def dispatch(self, request, *args, **kwargs):

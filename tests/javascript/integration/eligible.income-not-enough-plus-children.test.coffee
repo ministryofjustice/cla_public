@@ -48,10 +48,6 @@ casper.test.begin "Disposable Income is eligible because not enough income and w
     @test.assertSelectorHasText "button[type=submit]", "Apply for legal aid", "apply button exists with correct text"
 
   casper.then ->
-    @fill 'form', {}, true
-    @waitForUrl /.*apply/
-
-  casper.then ->
     @fill 'form', {
       'contact_details-full_name': 'Test Name',
       'contact_details-postcode': 'SW1 1DD',

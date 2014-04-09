@@ -42,29 +42,6 @@ class ContactDetailsForm(forms.Form):
 
 
 
-class ResultForm(EligibilityMixin, CheckerWizardMixin, forms.Form):
-    form_tag = 'result'
-
-    def get_context_data(self):
-        # eligibility check reference should be set otherwise => error
-        self.check_that_reference_exists()
-
-        return {
-            'is_eligible': self.is_eligible()
-        }
-
-    def save(self, *args, **kwargs):
-        # user must be eligible (double-checking) otherwise => error
-        if not self.is_eligible():
-            raise InconsistentStateException('You must be eligible to apply')
-
-        return {
-            'eligibility_check': {
-                'reference': self.reference
-            }
-        }
-
-
 class AdditionalNotesForm(forms.Form):
     notes = forms.CharField(
         required=False, max_length=500,
@@ -78,6 +55,15 @@ class ApplyForm(EligibilityMixin, CheckerWizardMixin, MultipleFormsForm):
         ('contact_details', ContactDetailsForm),
         ('extra', AdditionalNotesForm)
     )
+
+
+    def get_context_data(self):
+        # eligibility check reference should be set otherwise => error
+        self.check_that_reference_exists()
+
+        return {
+            'is_eligible': self.is_eligible()
+        }
 
     def get_contact_details(self):
         data = self.cleaned_data['contact_details']

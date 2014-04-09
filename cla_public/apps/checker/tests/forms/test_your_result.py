@@ -1,52 +1,10 @@
 from core.testing.testcases import CLATestCase
 
-from ...forms import ApplyForm, ResultForm
+from ...forms import ApplyForm
+
 from ...exceptions import InconsistentStateException
 
 from ..fixtures import mocked_api
-
-
-class ResultFormTestCase(CLATestCase):
-    DEFAULT_CHECK_REFERENCE = 1234567890
-
-    def test_post_success(self):
-        form = ResultForm(reference=self.DEFAULT_CHECK_REFERENCE, data={})
-        self.mocked_connection.eligibility_check(self.DEFAULT_CHECK_REFERENCE).\
-            is_eligible().post.return_value = mocked_api.IS_ELIGIBLE_YES
-        self.assertTrue(form.is_valid())
-
-        response = form.save()
-        self.assertDictEqual(response, {
-            'eligibility_check': {
-                'reference': self.DEFAULT_CHECK_REFERENCE
-            }
-        })
-
-    def test_fail_without_eligibility_check_reference(self):
-        form = ResultForm()
-
-        self.assertRaises(InconsistentStateException, form.get_context_data)
-
-    def test_is_eligible_context_var(self):
-        form = ResultForm(reference=self.DEFAULT_CHECK_REFERENCE)
-        self.mocked_connection.eligibility_check(self.DEFAULT_CHECK_REFERENCE).\
-            is_eligible().post.return_value = mocked_api.IS_ELIGIBLE_YES
-
-        self.assertTrue(form.get_context_data()['is_eligible'])
-
-    def test_is_not_eligible_context_var(self):
-        form = ResultForm(reference=self.DEFAULT_CHECK_REFERENCE)
-        self.mocked_connection.eligibility_check(self.DEFAULT_CHECK_REFERENCE).\
-            is_eligible().post.return_value = mocked_api.IS_ELIGIBLE_NO
-
-        self.assertFalse(form.get_context_data()['is_eligible'])
-
-    def test_fails_if_eligibility_unknown(self):
-        form = ResultForm(reference=self.DEFAULT_CHECK_REFERENCE)
-        self.mocked_connection.eligibility_check(self.DEFAULT_CHECK_REFERENCE).\
-            is_eligible().post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
-
-        self.assertRaises(InconsistentStateException, form.get_context_data)
 
 
 class ApplyFormTestCase(CLATestCase):
