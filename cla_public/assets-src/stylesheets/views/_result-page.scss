@@ -1,15 +1,15 @@
 .v-Result {
 
   .PageHeader {
-    padding-top: 10px;
     padding-bottom: 20px;
-
-    p {
-      @include core-27;
-    }
   }
 
-  .Apply {
-    margin-bottom: 60px;
+  form > p {
+    @include core-24;
+  }
+
+  .FormActions {
+    margin-top: 0;
+    margin-bottom: 70px;
   }
 }

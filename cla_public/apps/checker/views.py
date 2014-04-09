@@ -88,7 +88,7 @@ class CheckerWizard(NamedUrlSessionWizardView):
         "your_capital": "checker/your_capital.html",
         "your_income": "checker/your_income.html",
         "your_allowances": "checker/your_allowances.html",
-        "result": "checker/apply.html"
+        "result": "checker/result.html"
     }
 
     # def dispatch(self, request, *args, **kwargs):

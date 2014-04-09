@@ -5,8 +5,8 @@
   'use strict';
 
   moj.Modules.Development = {
-    el: '#wrapper',
-    template: CLA.templates.Development.fillLinks(),
+    el: 'body',
+    template: CLA.templates.Development.fillLinks,
 
     init: function () {
       _.bindAll(this, 'render', 'fillForm');
@@ -16,6 +16,7 @@
 
     cacheEls: function () {
       this.$el = $(this.el);
+      this.step = $('#id_checker_wizard-current_step').val();
     },
 
     bindEvents: function () {
@@ -24,19 +25,16 @@
     },
 
     render: function () {
-      if ($('.ProgressIndicator').attr('aria-valuetext') !== 'Step 4 of 4') {
-        $('.ProgressIndicator').after(this.template);
-      }
+      $('.indicator').after(this.template({step: this.step}));
     },
 
     fillForm: function (e) {
       e.preventDefault();
 
       var $el = $(e.target),
-          eligible = $el.data('eligible'),
-          step = $('#id_checker_wizard-current_step').val();
+          eligible = $el.data('eligible');
 
-      switch(step) {
+      switch(this.step) {
         case 'your_problem':
           this.fillProblem(eligible);
           break;
@@ -52,6 +50,28 @@
         case 'your_allowances':
           this.fillAllowances();
           break;
+        default:
+          this.fillBasic();
+      }
+    },
+
+    fillBasic: function () {
+      var $fields = $('form').find('input:not([type=submit], [type=hidden]), textarea, select');
+
+      $fields.each(this.completeField);
+    },
+
+    completeField: function (i, el) {
+      var $this = $(el),
+          $label = $('label[for=' + $this.attr('id') + ']'),
+          type = $this.prop('type'),
+          val;
+
+      if (type === 'text' || type === 'textarea') {
+        val = $.trim($label.text().replace(/cannot be blank/g,''));
+        $this.val(val);
+      } else if (type === 'select-one') {
+        $this.find('option:first').prop('selected', true);
       }
     },
 
