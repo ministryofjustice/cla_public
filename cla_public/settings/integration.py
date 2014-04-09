@@ -6,7 +6,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Marco Fucci', 'marco.fucci@digital.justice.co.uk'),
-    ('Rai Kotecha', 'ravi.kotecha@digital.justice.gov.uk'),
+    ('Ravi Kotecha', 'ravi.kotecha@digital.justice.gov.uk'),
 )
 
 MANAGERS = ADMINS
@@ -20,6 +20,7 @@ ALLOWED_HOSTS = [
     HOST_NAME
 ]
 
+# Allow MOJ_DSD IPS to see TEMPLATE_DEBUG
 INTERNAL_IPS = iptools.IpRangeList(
     '12.137.32.0/20',
     '81.134.202.16/28',
