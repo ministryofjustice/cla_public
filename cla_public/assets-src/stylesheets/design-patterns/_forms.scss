@@ -97,7 +97,7 @@ $border-colour: #C2C2C2;
     @include box-sizing(border-box);
   }
   textarea {
-    @include core-19;
+    @include core-24;
     width: 100%;
     height: auto;
     display: block;
