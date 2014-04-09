@@ -51,6 +51,8 @@ class AdditionalNotesForm(forms.Form):
 
 
 class ApplyForm(EligibilityMixin, CheckerWizardMixin, MultipleFormsForm):
+    form_tag = 'result'
+    
     forms_list = (
         ('contact_details', ContactDetailsForm),
         ('extra', AdditionalNotesForm)

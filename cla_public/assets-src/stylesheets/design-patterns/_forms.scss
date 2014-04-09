@@ -97,10 +97,10 @@ $border-colour: #C2C2C2;
     @include box-sizing(border-box);
   }
   textarea {
-    @include core-19;
+    @include core-24;
     width: 100%;
     height: auto;
-    display: inline-block;
+    display: block;
     border: 1px solid $border-colour;
     padding: 2px 4px;
     margin: 0;

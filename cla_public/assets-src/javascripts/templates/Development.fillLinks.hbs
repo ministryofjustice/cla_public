@@ -1,1 +1,5 @@
-<a href="#" class="js-FillForm" data-eligible="true">Fill eligible form</a> | <a href="#" class="js-FillForm" data-eligible="false">Fill not eligible form</a>
+{{#if_eq step "result"}}
+  <a href="#" class="js-FillForm">Fill form</a>
+{{else}}
+  <a href="#" class="js-FillForm" data-eligible="true">Fill eligible form</a> | <a href="#" class="js-FillForm" data-eligible="false">Fill not eligible form</a>
+{{/if_eq}}
