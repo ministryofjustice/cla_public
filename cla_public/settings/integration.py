@@ -15,3 +15,7 @@ MANAGERS = ADMINS
 HOST_NAME = "http://cla-public.dsd.io"
 
 BACKEND_BASE_URI = 'http://cla-backend.dsd.io'
+
+ALLOWED_HOSTS = [
+    HOST_NAME
+]
