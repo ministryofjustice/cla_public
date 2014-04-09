@@ -8,7 +8,6 @@
       _.bindAll(this, 'render', 'showSummary', 'calculate');
       this.cacheEls();
       this.bindEvents();
-      moj.log('init');
     },
 
     bindEvents: function () {
