@@ -5,7 +5,7 @@
   'use strict';
 
   moj.Modules.Development = {
-    el: '#wrapper',
+    el: 'body',
     template: CLA.templates.Development.fillLinks,
 
     init: function () {
@@ -25,9 +25,7 @@
     },
 
     render: function () {
-      if ($('.ProgressIndicator').length > 0 && $('form').length > 0) {
-        $('.ProgressIndicator').after(this.template({step: this.step}));
-      }
+      $('.indicator').after(this.template({step: this.step}));
     },
 
     fillForm: function (e) {

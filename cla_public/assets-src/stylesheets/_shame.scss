@@ -2,3 +2,8 @@
 .Error.FormRow--group details summary {
   right: 4em;
 }
+
+// colour override on dev toolbar
+.indicator--dev {
+  background-color: $light-blue !important;
+}
