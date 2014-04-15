@@ -217,7 +217,8 @@ class CheckerWizard(NamedUrlSessionWizardView):
             return super(CheckerWizard, self).render(form, **kwargs)
         except InconsistentStateException:
             # should be "Eligibility Reference cannot be None"
-            return self.render_goto_step(1)
+
+            return self.render_goto_step(self.steps.first)
 
 
 class StartPageView(TemplateView):
