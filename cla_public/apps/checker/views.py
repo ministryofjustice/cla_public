@@ -10,7 +10,7 @@ from .helpers import SessionCheckerHelper
 from .forms import YourProblemForm, YourDetailsForm, \
     YourCapitalForm, YourIncomeForm, YourAllowancesForm, \
     ApplyForm
-
+from .exceptions import InconsistentStateException
 
 class BreadCrumb(object):
     def __init__(self, wizard):
@@ -211,6 +211,13 @@ class CheckerWizard(NamedUrlSessionWizardView):
 
         if form.form_tag == 'your_finances' and not form.is_eligibility_unknown():
             return self.render_goto_step('result')
+    
+    def render(self, form=None, **kwargs):
+        try:
+            return super(CheckerWizard, self).render(form, **kwargs)
+        except InconsistentStateException:
+            # should be "Eligibility Reference cannot be None"
+            return self.render_goto_step(1)
 
 
 class StartPageView(TemplateView):

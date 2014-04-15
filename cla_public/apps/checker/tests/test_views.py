@@ -542,9 +542,9 @@ class CheckerWizardTestCase(CLATestCase):
 
         self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
 
-        self.assertRaises(InconsistentStateException,
-            self.client.get, self.result_url
-        )
+        response = self.client.get(self.result_url, follow=True)
+        self.assertRedirects(response, self.your_problem_url)
+        
 
         # api called?
         self.assertEqual(self.mocked_is_eligible_post.called, True)
@@ -562,8 +562,12 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }
-        with self.assertRaises(InconsistentStateException):
-            r1 = self.client.get(self.result_url)
+        #with self.assertRaises(InconsistentStateException):
+        #    r1 = self.client.get(self.result_url)
+        
+        response = self.client.get(self.result_url, follow=True)
+        self.assertRedirects(response, self.your_problem_url)
+
 
     def test_post_result_fails_if_not_eligible(self):
         """
