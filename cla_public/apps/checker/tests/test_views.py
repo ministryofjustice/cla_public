@@ -542,9 +542,9 @@ class CheckerWizardTestCase(CLATestCase):
 
         self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
 
-        self.assertRaises(InconsistentStateException,
-            self.client.get, self.result_url
-        )
+        response = self.client.get(self.result_url, follow=True)
+        self.assertRedirects(response, self.your_problem_url)
+        
 
         # api called?
         self.assertEqual(self.mocked_is_eligible_post.called, True)
@@ -562,8 +562,10 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }
-        with self.assertRaises(InconsistentStateException):
-            r1 = self.client.get(self.result_url)
+
+        response = self.client.get(self.result_url, follow=True)
+        self.assertRedirects(response, self.your_problem_url)
+
 
     def test_post_result_fails_if_not_eligible(self):
         """
@@ -687,6 +689,41 @@ class ConfirmationViewTestCase(CLATestCase):
             response.context_data['case_reference'],
             mocked_data['metadata']['case_reference']
         )
+
+    def test_get_success_then_back_button(self):
+        """
+        If the user pressed the back button after the confirmation page
+        a redirect should take them back to the first form.
+        """
+
+        response = self.client.get(reverse('checker:checker', args=(), kwargs={}))
+
+        # mock session data
+        s = self.client.session
+        mocked_data = {
+            'forms_data': {
+                'forms_data': pickle.dumps({
+                    'category': 1
+                })
+            },
+            'metadata': {
+                'eligibility_check_reference': 123456789,
+                'case_reference': 'LA-2954-3453'
+            }
+        }
+        s['checker_confirmation'] = mocked_data
+        s.save()
+
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+        result_url = reverse(
+            'checker:checker_step', args=(), kwargs={'step': 'result'}
+        )
+
+        response = self.client.get(result_url, follow=True)
+        self.assertEqual(response.status_code, 200)
+
 
     def test_404_session_data(self):
         response = self.client.get(self.url)
