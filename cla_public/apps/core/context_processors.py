@@ -1,7 +1,7 @@
 def globals(request):
   return {
-    'app_title': 'Civil Legal Aid',
-    'proposition_title': 'Civil Legal Aid',
+    'app_title': 'Civil Legal Advice',
+    'proposition_title': 'Civil Legal Advice',
     'phase': 'alpha',
     'product_type': 'service',
     'feedback_url': '#',
