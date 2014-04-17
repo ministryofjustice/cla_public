@@ -5,7 +5,7 @@
 }
 
 // Use block style label on radio/checkboxes
-@mixin label-focusSelect {
+@mixin label-focusSelect($select-colour: #D5E8F4, $focus-colour: $yellow) {
   &.is-selected {
     background-color: $select-colour;
   }
