@@ -1,7 +1,4 @@
-$select-colour: #D5E8F4;
-$focus-colour: $yellow;
 $border-colour: #C2C2C2;
-
 
 
 .FormBlock {
@@ -142,9 +139,8 @@ $border-colour: #C2C2C2;
   .FormRow-option {
     display: block;
     float: left;
-    clear: both;
-    padding: 10px 25px 10px 20px;
-    margin: 1px 10px 0;
+    padding: 10px 10px 10px 10px;
+    margin: 1px 30px 0 0;
     @include label-focusSelect;
 
     input {

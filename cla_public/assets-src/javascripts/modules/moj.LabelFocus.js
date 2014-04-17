@@ -2,7 +2,7 @@
   'use strict';
 
   moj.Modules.LabelFocus = {
-    el: 'form',
+    el: '.js-LabelFocus',
 
     init: function () {
       this.cacheEls();
