@@ -19,6 +19,12 @@
     "run-sequence": "~0.3.6",
     "gulp-declare": "~0.2.0",
     "gulp-handlebars": "~2.0.0",
-    "gulp-define-module": "~0.1.0"
+    "gulp-define-module": "~0.1.0",
+    "wd": "~0.2.19",
+    "chai": "~1.9.1",
+    "chai-as-promised": "~4.1.1",
+    "phantom-wd-runner": "~0.0.2",
+    "mocha": "~1.18.2",
+    "colors": "^0.6.2"
   }
 }
