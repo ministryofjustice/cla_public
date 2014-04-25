@@ -4,7 +4,7 @@ casper.test.begin 'Site basics', suite = (test) ->
     test.assertHttpStatus 200, 'site is up'
 
   casper.then ->
-    test.assertSelectorHasText 'title', 'Civil Legal Aid', 'site contains the correct title'
+    test.assertSelectorHasText 'title', 'Civil Legal Advice', 'site contains the correct title'
 
   casper.run ->
     test.done()
