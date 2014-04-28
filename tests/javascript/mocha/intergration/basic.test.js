@@ -18,7 +18,7 @@ describe('basic test', function() {
             browser.get('http://localhost:8002')
                 .title()
                 .then(function(title){
-                    title.should.equal('Civil Legal Aid')
+                    title.should.equal('Civil Legal Advice')
                 })
                 .nodeify(done);
         });
