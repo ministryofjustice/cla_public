@@ -1,4 +1,4 @@
-{% load i18n means_summary_tags %}
+{% load i18n means_summary_tags helpers %}
 
 {% if history_data and eligibility_check %}{% get_means_summary eligibility_check as sections %}
 
@@ -31,4 +31,17 @@
       </div>
     </section>
   {% endwith %}{% endif %}
+
+
+  
+  {% if eligibility_check.notes %}
+  <section class="SummaryBlock CommentBlock">
+    <div class="SummaryBlock-list">
+      <figure class="Figure IconRow IconRow--name">
+        <figcaption class="Figure-cap">{% trans "You wrote" %}:</figcaption>
+        <blockquote class="Quote">{{ eligibility_check.notes|linebreaksbr }}</blockquote>
+      </figure>
+    </div>
+  </section>
+  {% endif %}
 {% endif %}
