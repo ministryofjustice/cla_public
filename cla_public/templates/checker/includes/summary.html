@@ -36,11 +36,9 @@
   
   {% if eligibility_check.notes %}
   <section class="SummaryBlock CommentBlock">
+    <h2 class="SummaryBlock-heading">{% trans "Additional details" %}</h2>
     <div class="SummaryBlock-list">
-      <figure class="Figure IconRow IconRow--name">
-        <figcaption class="Figure-cap">{% trans "You wrote" %}:</figcaption>
-        <blockquote class="Quote">{{ eligibility_check.notes|linebreaksbr }}</blockquote>
-      </figure>
+      <blockquote class="Quote">{{ eligibility_check.notes|linebreaksbr }}</blockquote>
     </div>
   </section>
   {% endif %}
