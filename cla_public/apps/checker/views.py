@@ -1,3 +1,4 @@
+from api.client import connection
 from django.shortcuts import redirect
 from django.http import Http404
 from django.core.urlresolvers import reverse
@@ -143,6 +144,11 @@ class CheckerWizard(NamedUrlSessionWizardView):
         # steps
         context['steps'] = self.steps.all[:-2]
         context['breadcrumb'] = BreadCrumb(self)
+
+        if self.steps.current == u'result':
+            context['eligibility_check'] = connection.eligibility_check(self.storage.get_eligibility_check_reference()).get()
+
+
         return context
 
     def get_form_kwargs(self, step=None):
@@ -211,7 +217,7 @@ class CheckerWizard(NamedUrlSessionWizardView):
 
         if form.form_tag == 'your_finances' and not form.is_eligibility_unknown():
             return self.render_goto_step('result')
-    
+
     def render(self, form=None, **kwargs):
         try:
             return super(CheckerWizard, self).render(form, **kwargs)
@@ -242,7 +248,10 @@ class ConfirmationView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ConfirmationView, self).get_context_data(**kwargs)
 
+        check_ref = self.session_helper.get_eligibility_check_reference()
+        check = connection.eligibility_check(check_ref).get()
         context.update({
+            'eligibility_check': check,
             'history_data': self.session_helper.get_forms_data(),
             'case_reference': self.session_helper.get_case_reference()
         })
