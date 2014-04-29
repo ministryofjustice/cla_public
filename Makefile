@@ -4,4 +4,4 @@ test:
 test-nw:
 	./nightwatch -c tests/javascript/nightwatch.json
 test-jenkins:
-	./nightwatch -c tests/javascript/nightwatch.json --env integration
+	./nightwatch -c tests/javascript/nightwatch.json --env jenkins
