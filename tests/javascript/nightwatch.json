@@ -6,8 +6,8 @@
   "globals_path" : "",
 
   "selenium" : {
-    "start_process" : false,
-    "server_path" : "",
+    "start_process" : true,
+    "server_path" : "/usr/local/Cellar/selenium-server-standalone/2.41.0/libexec/selenium-server-standalone-2.41.0.jar",
     "log_path" : "",
     "host" : "127.0.0.1",
     "port" : 4444
@@ -32,13 +32,9 @@
         "acceptSslCerts": true
       }
     },
-    "integration": {
-      "desiredCapabilities": {
-        "browserName": "firefox",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true,
-        "browserstack.user": "kerincosford",
-        "browserstack.key": "LNAmG91yFnikYfvRJo2T"
+    "jenkins": {
+      "selenium" : {
+        "server_path" : "/srv/jenkins/workspace/CLA Public JS - Intergration/selenium-2.41.0/selenium-java-2.41.0.jar"
       }
     }
   }
