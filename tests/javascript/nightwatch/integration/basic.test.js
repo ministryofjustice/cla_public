@@ -1,7 +1,7 @@
 module.exports = {
   "Basic test" : function (browser) {
     browser
-      .url("http://localhost:8002")
+      .url(browser.launch_url)
       .assert.title('Civil Legal Advice')
       .end();
   }
