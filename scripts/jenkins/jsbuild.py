@@ -30,10 +30,8 @@ run('pkill -f envs/cla_.*integration', ignore_rc=True)
 
 PROJECT_NAME = "cla_public"
 BACKEND_PROJECT_NAME = "cla_backend"
-SELENIUM_ZIP_NAME = "selenium-java-2.41.0.zip"
-SELENIUM_UNZIP_DIR = "selenium-2.41.0"
-SELENIUM_ZIP_URL = "http://selenium-release.storage.googleapis.com/2.41/%s" % SELENIUM_ZIP_NAME
-SELENIUM_JAR_NAME = "selenium-java-2.41.0.jar"
+SELENIUM_JAR_URL = "http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar"
+SELENIUM_JAR_NAME = "selenium-server-standalone-2.41.0.jar"
 
 # use python scripts/jenkins/build.py integration
 
@@ -50,9 +48,6 @@ args = parser.parse_args()
 env = args.envname[0]
 backend_workspace = args.backend_dir[0]
 
-SELENIUM_JAR_PATH = "%s/%s/%s" % (backend_workspace, SELENIUM_UNZIP_DIR,
-                                  SELENIUM_JAR_NAME)
-
 env_name = "%s-%s" % (PROJECT_NAME, env)
 env_path = "/tmp/jenkins/envs/%s" % env_name
 bin_path = "%s/bin" % env_path
@@ -62,11 +57,8 @@ backend_env_path = "/tmp/jenkins/envs/%s" % backend_env_name
 backend_bin_path = "%s/bin" % backend_env_path
 
 # Install Selenium .jar if not already present
-if not os.path.isfile(SELENIUM_JAR_PATH):
-    if not os.path.isfile("%s/%s" % (backend_workspace, SELENIUM_ZIP_NAME)):
-        run('cd "%s" && wget %s' % (backend_workspace, SELENIUM_ZIP_URL))
-    run('rm -rf "%s/%s"' % (backend_workspace, SELENIUM_UNZIP_DIR))
-    run('cd "%s" && unzip %s' % (backend_workspace, SELENIUM_ZIP_NAME))
+if not os.path.isfile("%s/%s" % (backend_workspace, SELENIUM_JAR_NAME)):
+    run('cd "%s" && wget %s' % (backend_workspace, SELENIUM_JAR_URL))
 
 # Remove .pyc files from the project
 run("find . -name '*.pyc' -delete")

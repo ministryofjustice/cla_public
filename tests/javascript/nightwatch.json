@@ -34,7 +34,7 @@
     },
     "jenkins": {
       "selenium" : {
-        "server_path" : "/srv/jenkins/workspace/CLA Public JS - Intergration/selenium-2.41.0/selenium-java-2.41.0.jar"
+        "server_path" : "/srv/jenkins/workspace/CLA Public JS - Intergration/selenium-server-standalone-2.41.0.jar"
       }
     }
   }
