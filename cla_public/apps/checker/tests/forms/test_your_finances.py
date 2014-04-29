@@ -171,6 +171,28 @@ class YourCapitalFormTestCase(CLATestCase):
             self._get_default_api_post_data()
         )
 
+    def test_fails_if_first_properties_not_filled_in(self):
+        # 'property-TOTAL_FORMS' == 1 but the property #1 is not filled in
+        data = {k: v for k,v in self._get_default_post_data().items() if not k.startswith('property-0') }
+        data['property-TOTAL_FORMS'] = 1
+        form = YourCapitalForm(reference=self.reference, data=data)
+
+        self.assertFalse(form.is_valid())
+        property_form = form.get_form_by_prefix('property')
+        self.assertFalse(property_form.is_valid())
+        self.assertEqual(property_form.non_form_errors(), [u'Fill in all your property details'])
+
+    def test_fails_if_second_properties_not_filled_in(self):
+        # 'property-TOTAL_FORMS' == 2 but the property #2 is not filled in
+        data = dict(self._get_default_post_data())
+        data['property-TOTAL_FORMS'] = 2
+        form = YourCapitalForm(reference=self.reference, data=data)
+
+        self.assertFalse(form.is_valid())
+        property_form = form.get_form_by_prefix('property')
+        self.assertFalse(property_form.is_valid())
+        self.assertEqual(property_form.non_form_errors(), [u'Fill in all your property details'])
+
     def test_post_update_cleaned_data_other_properties(self):
         """
         TEST cleaned_data for other properties
@@ -279,6 +301,7 @@ class YourCapitalFormTestCase(CLATestCase):
 
     def test_calculated_capital_assets_no_property(self):
         data = {k: v for k,v in self._get_default_post_data().items() if not k.startswith('property-0')}
+        data['property-TOTAL_FORMS'] = 0
         form = YourCapitalForm(data=data)
         self.assertTrue(form.is_valid())
         self.assertEqual(form.total_capital_assets, 80010)
