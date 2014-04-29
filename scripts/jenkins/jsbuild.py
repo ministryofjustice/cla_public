@@ -58,7 +58,7 @@ backend_env_path = "/tmp/jenkins/envs/%s" % backend_env_name
 backend_bin_path = "%s/bin" % backend_env_path
 
 # Install Selenium .jar if not already present
-if not os.path.isfile("%s/%s" % backend_bin_path, SELENIUM_JAR_NAME):
+if not os.path.isfile("%s/%s" % (backend_bin_path, SELENIUM_JAR_NAME)):
     run("wget %s" % SELENIUM_ZIP_URL)
     run("unzip %s" % SELENIUM_ZIP_NAME)
     run("mv %s %s" % (SELENIUM_JAR_NAME, backend_bin_path))
