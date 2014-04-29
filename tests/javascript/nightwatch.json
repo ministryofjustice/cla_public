@@ -41,7 +41,7 @@
         "browserstack.key": "LNAmG91yFnikYfvRJo2T"
       },
       "selenium" : {
-        "server_path" : "/tmp/jenkins/envs/cla_backend/bin/selenium-java-2.41.0.jar"
+        "server_path" : "/srv/jenkins/workspace/CLA Public JS - Intergration/selenium-java-2.41.0.jar"
       }
     }
   }
