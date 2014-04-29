@@ -30,7 +30,7 @@ run('pkill -f envs/cla_.*integration', ignore_rc=True)
 
 PROJECT_NAME = "cla_public"
 BACKEND_PROJECT_NAME = "cla_backend"
-CWD = os.getcwd()
+CWD = "/srv/jenkins/workspace/CLA Public JS - Intergration"
 SELENIUM_ZIP_NAME = "selenium-java-2.41.0.zip"
 SELENIUM_UNZIP_DIR = "selenium-2.41.0"
 SELENIUM_ZIP_URL = "http://selenium-release.storage.googleapis.com/2.41/%s" % SELENIUM_ZIP_NAME
