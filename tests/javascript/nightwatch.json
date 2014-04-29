@@ -6,8 +6,8 @@
   "globals_path" : "",
 
   "selenium" : {
-    "start_process" : false,
-    "server_path" : "",
+    "start_process" : true,
+    "server_path" : "/usr/local/Cellar/selenium-server-standalone/2.41.0/libexec/selenium-server-standalone-2.41.0.jar",
     "log_path" : "",
     "host" : "127.0.0.1",
     "port" : 4444
@@ -39,6 +39,9 @@
         "acceptSslCerts": true,
         "browserstack.user": "kerincosford",
         "browserstack.key": "LNAmG91yFnikYfvRJo2T"
+      },
+      "selenium" : {
+        "server_path" : "/tmp/jenkins/envs/cla_backend/bin/selenium-java-2.41.0.jar"
       }
     }
   }
