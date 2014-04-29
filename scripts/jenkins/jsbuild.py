@@ -57,8 +57,8 @@ backend_env_path = "/tmp/jenkins/envs/%s" % backend_env_name
 backend_bin_path = "%s/bin" % backend_env_path
 
 # Install Selenium .jar if not already present
-if not os.path.isfile("%s/%s" % (backend_workspace, SELENIUM_JAR_NAME)):
-    run('cd "%s" && wget %s' % (backend_workspace, SELENIUM_JAR_URL))
+if not os.path.isfile("%s/%s" % (bin_path, SELENIUM_JAR_NAME)):
+    run('cd "%s" && wget %s' % (bin_path, SELENIUM_JAR_URL))
 
 # Remove .pyc files from the project
 run("find . -name '*.pyc' -delete")
