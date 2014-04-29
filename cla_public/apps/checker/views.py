@@ -172,7 +172,26 @@ class CheckerWizard(NamedUrlSessionWizardView):
     def render_done(self, form, **kwargs):
         response = self.render_redirect(form)
         if not response:
-            response = super(CheckerWizard, self).render_done(form, **kwargs)
+            if kwargs.get('step', None) != self.done_step_name:
+                return redirect(self.get_step_url(self.done_step_name))
+
+            final_form_list = []
+            # walk through the form list and try to validate the data again.
+            for form_key in self.get_form_list():
+                form_obj = self.get_form(step=form_key,
+                                         data=self.storage.get_step_data(form_key),
+                                         files=self.storage.get_step_files(form_key))
+                if not form_obj.is_valid():
+                    if (hasattr(form, 'is_eligibility_unknown') and form.is_eligibility_unknown()) \
+                            or not hasattr(form, 'is_eligibility_unknown'):
+                        return self.render_revalidation_failure(form_key, form_obj, **kwargs)
+                final_form_list.append(form_obj)
+
+            # render the done view and reset the wizard before returning the
+            # response. This is needed to prevent from rendering done with the
+            # same data twice.
+            response = self.done(final_form_list, **kwargs)
+            self.storage.reset()
         return response
 
     def get_form_step_data(self, form):
