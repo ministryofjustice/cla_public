@@ -35,6 +35,11 @@
     "jenkins": {
       "selenium" : {
         "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar"
+      },
+      "desiredCapabilities": {
+        "browserName": "phantomjs",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true
       }
     }
   }
