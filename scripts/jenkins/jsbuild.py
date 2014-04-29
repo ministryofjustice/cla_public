@@ -50,6 +50,9 @@ args = parser.parse_args()
 env = args.envname[0]
 backend_workspace = args.backend_dir[0]
 
+SELENIUM_JAR_PATH = "%s/%s/%s" % (backend_workspace, SELENIUM_UNZIP_DIR,
+                                  SELENIUM_JAR_NAME)
+
 env_name = "%s-%s" % (PROJECT_NAME, env)
 env_path = "/tmp/jenkins/envs/%s" % env_name
 bin_path = "%s/bin" % env_path
@@ -59,13 +62,11 @@ backend_env_path = "/tmp/jenkins/envs/%s" % backend_env_name
 backend_bin_path = "%s/bin" % backend_env_path
 
 # Install Selenium .jar if not already present
-if not os.path.isfile("%s/%s" % (backend_workspace, SELENIUM_JAR_NAME)):
+if not os.path.isfile(SELENIUM_JAR_PATH):
     if not os.path.isfile("%s/%s" % (backend_workspace, SELENIUM_ZIP_NAME)):
         run('cd "%s" && wget %s' % (backend_workspace, SELENIUM_ZIP_URL))
     run('rm -rf "%s/%s"' % (backend_workspace, SELENIUM_UNZIP_DIR))
     run('cd "%s" && unzip %s' % (backend_workspace, SELENIUM_ZIP_NAME))
-    run('mv "%s/%s/%s" "%s/%s"' % (backend_workspace, SELENIUM_UNZIP_DIR, SELENIUM_JAR_NAME,
-                                   backend_workspace, SELENIUM_JAR_NAME))
 
 # Remove .pyc files from the project
 run("find . -name '*.pyc' -delete")
