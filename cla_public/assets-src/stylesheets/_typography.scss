@@ -19,7 +19,7 @@ h3 {
 h4 {
   @include core-24;
 }
-p, ul, ol {
+p, ul, ol, blockquote {
   @include core-19;
 }
 
