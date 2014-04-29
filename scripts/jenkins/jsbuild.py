@@ -63,6 +63,7 @@ backend_bin_path = "%s/bin" % backend_env_path
 if not os.path.isfile("%s/%s" % (CWD, SELENIUM_JAR_NAME)):
     if not os.path.isfile("%s/%s" % (CWD, SELENIUM_ZIP_NAME)):
         run("wget %s" % SELENIUM_ZIP_URL)
+    run("rm -rf $s/%s" % (CWD, SELENIUM_UNZIP_DIR))
     run("unzip %s" % SELENIUM_ZIP_NAME)
     run("mv %s/%s %s" % (SELENIUM_UNZIP_DIR, SELENIUM_JAR_NAME,
                          CWD))
