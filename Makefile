@@ -3,5 +3,5 @@ test:
 
 test-nw:
 	./nightwatch -c tests/javascript/nightwatch.json
-test-browserstack:
+test-jenkins:
 	./nightwatch -c tests/javascript/nightwatch.json --env integration

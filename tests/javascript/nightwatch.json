@@ -32,14 +32,7 @@
         "acceptSslCerts": true
       }
     },
-    "integration": {
-      "desiredCapabilities": {
-        "browserName": "firefox",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true,
-        "browserstack.user": "kerincosford",
-        "browserstack.key": "LNAmG91yFnikYfvRJo2T"
-      },
+    "jenkins": {
       "selenium" : {
         "server_path" : "/srv/jenkins/workspace/CLA Public JS - Intergration/selenium-java-2.41.0.jar"
       }
