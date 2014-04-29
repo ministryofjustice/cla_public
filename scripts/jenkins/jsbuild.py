@@ -61,11 +61,11 @@ backend_bin_path = "%s/bin" % backend_env_path
 # Install Selenium .jar if not already present
 if not os.path.isfile("%s/%s" % (backend_workspace, SELENIUM_JAR_NAME)):
     if not os.path.isfile("%s/%s" % (backend_workspace, SELENIUM_ZIP_NAME)):
-        run("cd %s && wget %s" % (backend_workspace, SELENIUM_ZIP_URL))
-    run("rm -rf %s/%s" % (backend_workspace, SELENIUM_UNZIP_DIR))
-    run("cd %s && unzip %s" % (backend_workspace, SELENIUM_ZIP_NAME))
-    run("cd %s && mv %s/%s %s" % (backend_workspace, SELENIUM_UNZIP_DIR,
-                                  SELENIUM_JAR_NAME, backend_workspace))
+        run('cd "%s" && wget %s' % (backend_workspace, SELENIUM_ZIP_URL))
+    run('rm -rf "%s/%s"' % (backend_workspace, SELENIUM_UNZIP_DIR))
+    run('cd "%s" && unzip %s' % (backend_workspace, SELENIUM_ZIP_NAME))
+    run('cd "%s" && mv "%s/%s" "%s"' % (backend_workspace, SELENIUM_UNZIP_DIR,
+                                        SELENIUM_JAR_NAME, backend_workspace))
 
 # Remove .pyc files from the project
 run("find . -name '*.pyc' -delete")
