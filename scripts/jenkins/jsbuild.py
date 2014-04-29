@@ -64,8 +64,8 @@ if not os.path.isfile("%s/%s" % (backend_workspace, SELENIUM_JAR_NAME)):
         run('cd "%s" && wget %s' % (backend_workspace, SELENIUM_ZIP_URL))
     run('rm -rf "%s/%s"' % (backend_workspace, SELENIUM_UNZIP_DIR))
     run('cd "%s" && unzip %s' % (backend_workspace, SELENIUM_ZIP_NAME))
-    run('cd "%s" && mv "%s/%s" "%s"' % (backend_workspace, SELENIUM_UNZIP_DIR,
-                                        SELENIUM_JAR_NAME, backend_workspace))
+    run('mv "%s/%s/%s" "%s/%s"' % (backend_workspace, SELENIUM_UNZIP_DIR, SELENIUM_JAR_NAME,
+                                   backend_workspace, SELENIUM_JAR_NAME))
 
 # Remove .pyc files from the project
 run("find . -name '*.pyc' -delete")
