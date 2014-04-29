@@ -61,7 +61,7 @@ backend_bin_path = "%s/bin" % backend_env_path
 
 # Install Selenium .jar if not already present
 if not os.path.isfile("%s/%s" % (CWD, SELENIUM_JAR_NAME)):
-    if not os.path.isfile("%s/%s", (CWD, SELENIUM_ZIP_NAME)):
+    if not os.path.isfile("%s/%s" % (CWD, SELENIUM_ZIP_NAME)):
         run("wget %s" % SELENIUM_ZIP_URL)
     run("unzip %s" % SELENIUM_ZIP_NAME)
     run("mv %s/%s %s" % (SELENIUM_UNZIP_DIR, SELENIUM_JAR_NAME,
