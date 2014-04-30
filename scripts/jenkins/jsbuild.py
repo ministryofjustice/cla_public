@@ -81,7 +81,7 @@ run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-phantomjs")
 
 # iOS7 iPhone 5s
-run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
+#run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
 
 
 print 'exiting...'
