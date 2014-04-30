@@ -52,6 +52,36 @@
         "browserstack.user": "janszumiec",
         "browserstack.key": "oX5YoppK12BMXdVAgWvz"
       }
+    },
+    "jenkins-phantomjs": {
+      "launch_url" : "http://localhost:8001",
+      "selenium" : {
+        "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar"
+      },
+      "desiredCapabilities": {
+        "project": "cla",
+        "browserName": "pantomjs",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserstack.user": "janszumiec",
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz"
+      }
+    },
+    "jenkins-iphone-ios7": {
+      "launch_url" : "http://localhost:8001",
+      "selenium" : {
+        "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar"
+      },
+      "desiredCapabilities": {
+        "project": "cla",
+        "platform": "MAC",
+        "browserName": "iPhone",
+        "device": "iPhone 5s",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserstack.user": "janszumiec",
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz"
+      }
     }
   }
 }

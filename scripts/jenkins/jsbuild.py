@@ -77,14 +77,11 @@ run("wget http://localhost:8000/admin/ -t 20 --retry-connrefused --waitretry=2 -
 public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
 run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
-# initialize env vars to null
-null_env = "BS_BROWSERNAME='' BS_BROWSER='' BS_BROWSER_VERSION='' BS_OS='' BS_OS_VERSION='' BS_RESOLUTION='' BS_PLATFORM='' BS_DEVICE=''"
-
 # phantom
-run('%s BS_BROWSERNAME=phantomjs make test-jenkins' % null_env)
+run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-phantomjs")
 
 # iOS7 iPhone 5s
-run('%s BS_PLATFORM=MAC BS_BROWSERNAME=iPhone BS_DEVICE="iPhone 5s" make test-jenkins' % null_env)
+run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
 
 
 print 'exiting...'
