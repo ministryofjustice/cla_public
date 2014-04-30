@@ -62,7 +62,7 @@
         "project": "cla",
         "browserName": "pantomjs",
         "javascriptEnabled": true,
-        "acceptSslCerts": true,
+        "acceptSslCerts": true
       }
     },
     "jenkins-iphone-ios7": {
