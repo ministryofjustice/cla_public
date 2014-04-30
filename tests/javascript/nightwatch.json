@@ -58,6 +58,8 @@
     },
     "jenkins-iphone-ios7": {
       "launch_url" : "http://localhost:8001",
+      "selenium_port"  : 80,
+      "selenium_host"  : "hub.browserstack.com",
       "selenium" : {
         "start_process" : false,
         "host" : "hub.browserstack.com",
