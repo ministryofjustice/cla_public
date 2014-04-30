@@ -27,7 +27,7 @@
         "path" : ""
       },
       "desiredCapabilities": {
-        "browserName": "phantomjs",
+        "browserName": "${BROWSER}",
         "javascriptEnabled": true,
         "acceptSslCerts": true
       }
@@ -38,9 +38,19 @@
         "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar"
       },
       "desiredCapabilities": {
-        "browserName": "phantomjs",
+        "project": "cla",
+        "browserName": "${BS_BROWSERNAME}",
+        "browser": "${BS_BROWSER}",
+        "browser_version": "${BS_BROWSER_VERSION}",
+        "os": "${BS_OS}",
+        "os_version": "${BS_OS_VERSION}",
+        "resolution": "${BS_RESOLUTION}",
+        "platform": "${BS_PLATFORM}",
+        "device": "${BS_DEVICE}",
         "javascriptEnabled": true,
-        "acceptSslCerts": true
+        "acceptSslCerts": true,
+        "browserstack.user": "janszumiec",
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz"
       }
     }
   }

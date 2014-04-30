@@ -77,7 +77,12 @@ run("wget http://localhost:8000/admin/ -t 20 --retry-connrefused --waitretry=2 -
 public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
 run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
-run('make test-jenkins')
+# phantom
+run('BS_BROWSERNAME=phantomjs make test-jenkins')
+
+# iOS7 iPhone 5s
+run('BS_PLATFORM=MAC BS_BROWSERNAME=iPhone BS_DEVICE="iPhone 5s" make test-jenkins')
+
 
 print 'exiting...'
 run('pkill -f envs/cla_.*integration', ignore_rc=True)
