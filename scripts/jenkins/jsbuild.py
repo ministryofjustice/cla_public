@@ -77,6 +77,9 @@ run("wget http://localhost:8000/admin/ -t 20 --retry-connrefused --waitretry=2 -
 public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
 run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
+# initialize env vars to null
+run('export BS_BROWSERNAME= BS_BROWSER= BS_BROWSER_VERSION= BS_OS= BS_OS_VERSION= BS_RESOLUTION= BS_PLATFORM= BS_DEVICE=')
+
 # phantom
 run('BS_BROWSERNAME=phantomjs make test-jenkins')
 
