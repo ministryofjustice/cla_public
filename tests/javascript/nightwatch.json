@@ -71,7 +71,8 @@
         "javascriptEnabled": true,
         "acceptSslCerts": true,
         "browserstack.user": "janszumiec",
-        "browserstack.key": "oX5YoppK12BMXdVAgWvz"
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz",
+        "browserstack.local": true
       }
     }
   }
