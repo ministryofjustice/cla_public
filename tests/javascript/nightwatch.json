@@ -57,6 +57,7 @@
       }
     },
     "jenkins-iphone-ios7": {
+      "output_folder" : "reports/iphone-ios7",
       "launch_url" : "http://localhost:8001",
       "selenium_port"  : 80,
       "selenium_host"  : "hub.browserstack.com",
@@ -78,6 +79,7 @@
       }
     },
     "jenkins-ie9-win7": {
+      "output_folder" : "reports/ie9-win7",
       "launch_url" : "http://localhost:8001",
       "selenium_port"  : 80,
       "selenium_host"  : "hub.browserstack.com",
@@ -101,6 +103,7 @@
       }
     },
     "jenkins-chrome34-win8.1": {
+      "output_folder" : "reposts/chrome34-win81",
       "launch_url" : "http://localhost:8001",
       "selenium_port"  : 80,
       "selenium_host"  : "hub.browserstack.com",
