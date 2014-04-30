@@ -78,7 +78,7 @@ public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
 run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 # initialize env vars to null
-null_env = 'BS_BROWSERNAME= BS_BROWSER= BS_BROWSER_VERSION= BS_OS= BS_OS_VERSION= BS_RESOLUTION= BS_PLATFORM= BS_DEVICE='
+null_env = "BS_BROWSERNAME='' BS_BROWSER='' BS_BROWSER_VERSION='' BS_OS='' BS_OS_VERSION='' BS_RESOLUTION='' BS_PLATFORM='' BS_DEVICE=''"
 
 # phantom
 run('%s BS_BROWSERNAME=phantomjs make test-jenkins' % null_env)
