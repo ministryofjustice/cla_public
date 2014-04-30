@@ -95,7 +95,8 @@ run_bg("%s/%s -force oX5YoppK12BMXdVAgWvz localhost,8001,0" % (bin_path, BROWSER
 time.sleep(10)
 
 # iOS7 iPhone 5s
-run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
+#run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
+run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-ie9-win7")
 
 
 
