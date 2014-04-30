@@ -90,7 +90,7 @@ if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
     run('cd "%s" && rm %s' % (bin_path, BROWSERSTACK_ZIP_NAME))
 
 # start Browserstack local tunnel agent
-run("%s/%s oX5YoppK12BMXdVAgWvz localhost,8001,0" % (bin_path, BROWSERSTACK_BIN_NAME))
+run_bg("%s/%s oX5YoppK12BMXdVAgWvz localhost,8001,0" % (bin_path, BROWSERSTACK_BIN_NAME))
 
 # iOS7 iPhone 5s
 run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
