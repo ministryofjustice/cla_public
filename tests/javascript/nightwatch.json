@@ -63,14 +63,14 @@
         "browserName": "pantomjs",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "browserstack.user": "janszumiec",
-        "browserstack.key": "oX5YoppK12BMXdVAgWvz"
       }
     },
     "jenkins-iphone-ios7": {
       "launch_url" : "http://localhost:8001",
       "selenium" : {
-        "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar"
+        "start_process" : false,
+        "host" : "hub.browserstack.com",
+        "port" : 80
       },
       "desiredCapabilities": {
         "project": "cla",
