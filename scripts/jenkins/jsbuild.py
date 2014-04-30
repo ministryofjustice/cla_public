@@ -32,6 +32,9 @@ PROJECT_NAME = "cla_public"
 BACKEND_PROJECT_NAME = "cla_backend"
 SELENIUM_JAR_URL = "http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar"
 SELENIUM_JAR_NAME = "selenium-server-standalone-2.41.0.jar"
+BROWSERSTACK_ZIP_URL = "https://www.browserstack.com/browserstack-local/BrowserStackLocal-linux-x64.zip"
+BROWSERSTACK_ZIP_NAME = "BrowserStackLocal-linux-x64.zip"
+BROWSERSTACK_BIN_NAME = "BrowserStackLocal"
 
 # use python scripts/jenkins/build.py integration
 
@@ -80,9 +83,20 @@ run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 # phantom
 run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-phantomjs")
 
+# Ensure BrowserStackLocal is installed
+if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
+    run('cd "%s" && wget %s' % (bin_path, BROWSERSTACK_ZIP_URL))
+    run('cd "%s" && unzip %s' % (bin_path, BROWSERSTACK_ZIP_NAME))
+    run('cd "%s" && rm %s' % (bin_path, BROWSERSTACK_ZIP_NAME))
+
+# start Browserstack local tunnel agent
+run("%s/%s oX5YoppK12BMXdVAgWvz localhost,8001,0" % (bin_path, BROWSERSTACK_BIN_NAME))
+
 # iOS7 iPhone 5s
-#run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
+run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
+
 
 
 print 'exiting...'
 run('pkill -f envs/cla_.*integration', ignore_rc=True)
+
