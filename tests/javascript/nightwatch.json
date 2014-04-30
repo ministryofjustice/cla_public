@@ -76,6 +76,29 @@
         "browserstack.key": "oX5YoppK12BMXdVAgWvz",
         "browserstack.local": true
       }
+    },
+    "jenkins-ie9-win7": {
+      "launch_url" : "http://localhost:8001",
+      "selenium_port"  : 80,
+      "selenium_host"  : "hub.browserstack.com",
+      "selenium" : {
+        "start_process" : false,
+        "host" : "hub.browserstack.com",
+        "port" : 80
+      },
+      "desiredCapabilities": {
+        "project": "cla",
+        "browser": "IE",
+        "browser_version": "9.0",
+        "os": "Windows",
+        "os_version": "7",
+        "resolution": "1024x768",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserstack.user": "janszumiec",
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz",
+        "browserstack.local": true
+      }
     }
   }
 }
