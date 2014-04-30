@@ -78,13 +78,13 @@ public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
 run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 # initialize env vars to null
-run('export BS_BROWSERNAME= BS_BROWSER= BS_BROWSER_VERSION= BS_OS= BS_OS_VERSION= BS_RESOLUTION= BS_PLATFORM= BS_DEVICE=')
+null_env = 'BS_BROWSERNAME= BS_BROWSER= BS_BROWSER_VERSION= BS_OS= BS_OS_VERSION= BS_RESOLUTION= BS_PLATFORM= BS_DEVICE='
 
 # phantom
-run('BS_BROWSERNAME=phantomjs make test-jenkins')
+run('%s BS_BROWSERNAME=phantomjs make test-jenkins' % null_env)
 
 # iOS7 iPhone 5s
-run('BS_PLATFORM=MAC BS_BROWSERNAME=iPhone BS_DEVICE="iPhone 5s" make test-jenkins')
+run('%s BS_PLATFORM=MAC BS_BROWSERNAME=iPhone BS_DEVICE="iPhone 5s" make test-jenkins' % null_env)
 
 
 print 'exiting...'
