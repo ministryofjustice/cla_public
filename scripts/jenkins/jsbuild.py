@@ -94,12 +94,10 @@ if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
 run_bg("%s/%s -force oX5YoppK12BMXdVAgWvz localhost,8001,0" % (bin_path, BROWSERSTACK_BIN_NAME))
 time.sleep(10)
 
-# iOS7 iPhone 5s
-#run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-iphone-ios7")
-run("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-ie9-win7")
-
+run_bg("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-ie9-win7")
+run_bg("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-chrome34-win8.1')
 
 
 print 'exiting...'
 run('pkill -f envs/cla_.*integration', ignore_rc=True)
-
+run('pkill -f nightwatch', ignore_rc=True)
