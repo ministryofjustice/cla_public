@@ -92,7 +92,7 @@ nw_env = {
     'bs_user': 'janszumiec',
     'bs_key': 'oX5YoppK12BMXdVAgWvz'
 }
-nw_env = ' '.join(["%s=%s" % (k.upper(), v) for k, v in bs_env.items()])
+nw_env = ' '.join(["%s=%s" % (k.upper(), v) for k, v in nw_env.items()])
 
 # phantom
 run("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/phantomjs.json" % nw_env)
