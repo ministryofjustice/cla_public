@@ -119,7 +119,9 @@ for c in BROWSERSTACK_BROWSER_CONFS:
 
     for root, dirs, files in os.walk(dest_dir):
         for f in files:
-            os.rename(f, re.sub(r'\.js$', '.%s.js' % c, f))
+            src = os.path.join(root, f)
+            dest = os.path.join(root, re.sub(r'\.js$', '.%s.js' % c, f))
+            os.rename(src, dest)
 
     bs_nw_env = nw_env.copy()
     bs_nw_env['src_folders'] = dest_dir
