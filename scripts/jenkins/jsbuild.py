@@ -108,9 +108,14 @@ run_bg("%s/%s -force oX5YoppK12BMXdVAgWvz localhost,8001,0" % (
        bin_path, BROWSERSTACK_BIN_NAME))
 time.sleep(10)
 
+bs_processes = []
 for c in BROWSERSTACK_BROWSER_CONFS:
-    run_bg("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/%s.json" % (nw_env, c))
+    bs_processes.append(
+        run_bg("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/%s.json" % (nw_env, c))
+    )
 
+# wait for all browserstack tests to complete before killing server processes
+[p.wait() for p in bs_processes]
 
 print 'exiting...'
 run('pkill -f envs/cla_.*integration', ignore_rc=True)
