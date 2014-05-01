@@ -4,6 +4,8 @@ import subprocess
 import os
 import sys
 import time
+import shutil
+import re
 
 def run(command, ignore_rc=False, **kwargs):
     defaults = {
@@ -87,15 +89,16 @@ run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 nw_env = {
     'src_folders': 'tests/javascript/nightwatch/integration',
+    'output_folder': 'reports/phantomjs',
     'launch_url': 'http://localhost:8001',
     'project': 'cla',
     'bs_user': 'janszumiec',
     'bs_key': 'oX5YoppK12BMXdVAgWvz'
 }
-nw_env = ' '.join(["%s=%s" % (k.upper(), v) for k, v in nw_env.items()])
+nw_env_str = ' '.join(["%s=%s" % (k.upper(), v) for k, v in nw_env.items()])
 
 # phantom
-run("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/phantomjs.json" % nw_env)
+run("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/phantomjs.json" % nw_env_str)
 
 # Ensure BrowserStackLocal is installed
 if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
@@ -110,8 +113,25 @@ time.sleep(10)
 
 bs_processes = []
 for c in BROWSERSTACK_BROWSER_CONFS:
+    dest_dir = 'tests/javascript/nightwatch/integration-%s' % c
+    shutil.rmtree(dest_dir, ignore_errors=True)
+    shutil.copytree('tests/javascript/nightwatch/integration', dest_dir)
+
+    for root, dirs, files in os.walk(dest_dir):
+        for f in files:
+            os.rename(f, re.sub(r'\.js$', '.%s.js' % c, f))
+
+    bs_nw_env = nw_env.copy()
+    bs_nw_env['src_folders'] = dest_dir
+    bs_nw_env['output_folder'] = 'reports/%s' % c
+
+    bs_nw_env_str = ' '.join(["%s=%s" % (k.upper(), v)
+                             for k, v in bs_nw_env.items()])
+
+    conf_path = 'tests/javascript/nightwatch/conf/jenkins/%s.json' % c
+
     bs_processes.append(
-        run_bg("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/%s.json" % (nw_env, c))
+        run_bg("%s ./nightwatch -c %s" % (bs_nw_env_str, conf_path))
     )
 
 # wait for all browserstack tests to complete before killing server processes
