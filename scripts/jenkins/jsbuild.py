@@ -85,8 +85,17 @@ run("wget http://localhost:8000/admin/ -t 20 --retry-connrefused --waitretry=2 -
 public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
 run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
+nw_env = {
+    'src_folders': 'tests/javascript/nightwatch/integration',
+    'launch_url': 'http://localhost:8001',
+    'project': 'cla',
+    'bs_user': 'janszumiec',
+    'bs_key': 'oX5YoppK12BMXdVAgWvz'
+}
+nw_env = ' '.join(["%s=%s" % (k.upper(), v) for k, v in bs_env.items()])
+
 # phantom
-run("./nightwatch -c tests/javascript/nightwatch/conf/jenkins/phantomjs.json")
+run("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/phantomjs.json" % nw_env)
 
 # Ensure BrowserStackLocal is installed
 if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
@@ -98,20 +107,8 @@ if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
 run_bg("%s/%s -force oX5YoppK12BMXdVAgWvz localhost,8001,0" % (bin_path, BROWSERSTACK_BIN_NAME))
 time.sleep(10)
 
-bs_env = {
-    'src_folders': 'tests/javascript/nightwatch/integration',
-    'launch_url': 'http://localhost:8001',
-    'project': 'cla',
-    'bs_user': 'janszumiec',
-    'bs_key': 'oX5YoppK12BMXdVAgWvz'
-}
-bs_env = ' '.join(["%s=%s" % (k.upper(), v) for k, v in bs_env.items()])
-
 for c in BROWSERSTACK_BROWSER_CONFS:
-    run_bg("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/%s.json" % (bs_env, c))
-
-# run_bg("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-ie9-win7")
-# run_bg("./nightwatch -c tests/javascript/nightwatch.json --env jenkins-chrome34-win8.1")
+    run_bg("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/%s.json" % (nw_env, c))
 
 
 print 'exiting...'
