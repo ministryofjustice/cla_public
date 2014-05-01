@@ -7,7 +7,7 @@
 
   "selenium" : {
     "start_process" : true,
-    "server_path" : "/usr/local/Cellar/selenium-server-standalone/2.41.0/libexec/selenium-server-standalone-2.41.0.jar",
+    "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar",
     "log_path": "",
     "host" : "127.0.0.1",
     "port" : 4444
@@ -15,9 +15,6 @@
 
   "test_settings" : {
     "default": {
-      "globals" : {
-          "browser_uid": "phantomjs"
-        },
       "launch_url" : "${LAUNCH_URL}",
       "desiredCapabilities": {
         "browserName": "phantomjs",
