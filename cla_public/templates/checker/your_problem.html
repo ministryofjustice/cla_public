@@ -1,0 +1,63 @@
+{% extends "checker/base.html" %}{% load i18n helpers %}
+
+{% block page_header %}
+  <h1>{% trans "Your problem" %}</h1>
+{% endblock %}
+
+{% block checker_content %}
+
+  <form action="." method="POST" class="js-LabelSelect js-LabelFocus">
+    {% csrf_token %}
+    {{ wizard.management_form }}
+    {{ form.non_field_errors }}
+
+    {% with form=form %}
+      {% include "checker/includes/error_summary.html" %}
+    {% endwith %}
+  
+    <p id="{{ form.category.auto_id }}-label">{% trans "What is your problem about? Choose what is putting you at immediate risk." %}</p>
+
+    <div class="FormBlock FormBlock--grey{% if form.category.errors|any_true %} FieldsetError{% endif %}">
+      {% for error in form.category.errors %}
+        {# <span class="Error-message">{{ error }}</span>  #}
+      {% endfor %}
+      {% for category in form.fields.category.choices %}
+        <div class="FormRow FormRow--group{% if category.2.description %} FormRow--details{% endif %}{% if form.category.errors|any_true %} Error{% endif %}">
+          <label for="{{ form.category.auto_id }}_{{ forloop.counter0 }}" class="FormRow-label{% cycle ' FormRow-label--odd' '' %}">
+            <input type="radio" name="{{ form.category.html_name }}" id="{{ form.category.auto_id }}_{{ forloop.counter0 }}" value="{{ category.0 }}" {% if category.0 == form.category.value %}checked="checked"{% endif %}{% if forloop.counter0|add:1 == form.fields.category.choices|length %} data-conditional-el="conditional-{{ category.0 }}"{% endif %} class="js-Conditional">
+            {{ category.1 }}
+          </label>
+
+          {% if category.2.description %}
+            <details>
+              <summary>{% trans "More info" %}</summary>
+              <div>
+                {{ category.2.description|safe }}
+              </div>
+            </details>
+          {% endif %}
+
+          {% if forloop.counter0|add:1 == form.fields.category.choices|length %}
+            {# this should only show up if last category is selected #}
+            <div id="conditional-{{ category.0 }}" class="Conditional">
+              <p class="Conditional-label"><strong>{% trans "If your case does not match any of the above:" %}</strong></p>
+              <div class="FormRow-inner">
+                {{ form.your_problem_notes.label_tag }}
+
+                {{ form.your_problem_notes.errors }}
+                {{ form.your_problem_notes }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <p>{% trans "If possible, please choose one of the categories above. If you’re really not sure or it doesn’t appear above, you can ask for a call back here." %}</p>
+
+    <div class="FormActions">
+      <button type="submit" class="Button">{% trans "Next step - Your details" %}</button>
+    </div>
+  </form>
+
+{% endblock %}

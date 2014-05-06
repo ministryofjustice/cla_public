@@ -1,0 +1,72 @@
+$background-colour: #F3F9FD;
+$border-colour: #E0EEF8;
+$active-background-colour: #2C8CC5;
+
+.ProgressIndicator {
+  list-style: none;
+  background: $background-colour;
+  border: 1px solid $border-colour;
+  width: 100%;
+  padding: 0;
+  margin: 40px 0;
+  display: table;
+
+  .ProgressIndicator-step {
+    @include core-19;
+    display: table-cell;
+    color: $grey-1;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0 30px 0 15px;
+    height: 51px;
+    position: relative;
+    background: {
+      position: right center;
+      repeat: no-repeat;
+    }
+    @include svg-bg("../images/progress-indicator/chevron");
+
+    .ProgressIndicator-tick {
+      background: {
+        position: right center;
+        repeat: no-repeat;
+      }
+      @include svg-bg("../images/progress-indicator/tick");
+      padding-right: 22px;
+    }
+
+    &:last-child, 
+    .svg &:last-child {
+      padding-right: 15px;
+      background-image: none;
+
+      &.is-active {
+        background-image: none;
+      }
+    }
+
+    &.is-complete {
+      color: $active-background-colour;
+      font-weight: 700;
+      a {
+        color: $active-background-colour;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &.is-active {
+      color: #fff;
+      font-weight: 700;
+      background-color: $active-background-colour;
+      @include svg-bg("../images/progress-indicator/chevron--active");
+    }
+
+    &.is-previous {
+      @include svg-bg("../images/progress-indicator/chevron--previous");
+    }
+  }
+}

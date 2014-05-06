@@ -1,0 +1,50 @@
+details {
+  @include core-19;
+  display: block;
+
+  summary {
+    display: block;
+    color: $link-colour;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:focus {
+      background-color: $yellow;
+      outline: 3px solid $yellow;
+    }    
+  }
+
+  div {
+    display: none;
+    border-left: 3px solid #ccc;
+    padding: 0 30px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+
+    p, ul, ol {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+  &[open] div {
+    display: block;
+  }
+}
+  
+.no-details {
+  details {
+    summary:before {
+      content: "►";
+      float: left;
+      width: 25px;
+      font-size: 0.8em;
+      line-height: 1.7em;
+    }
+
+    &.open summary:before {
+      content: "▼ ";
+    }
+  }  
+}

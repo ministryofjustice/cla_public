@@ -1,0 +1,19 @@
+.SubTotal {
+  font-weight: 700;
+  border-style: solid;
+  border-color: #979797;
+  border-width: 1px 0;
+  line-height: 1em;
+  padding: {
+    top: 20px;
+    bottom: 20px;
+  };
+  margin: {
+    top: 30px;
+    bottom: 10px;
+  }
+
+  .SubTotal-symbol {
+    padding: 0 13px;
+  }
+}

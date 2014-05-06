@@ -1,0 +1,22 @@
+{% load i18n widget_tweaks %}
+{% if form %}
+  <section>
+    <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
+
+    <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
+    {% for field in form %}
+      <div class="FormRow cf{% if field.errors %} Error{% endif %}">
+        <label for="{{ field.id_for_label }}" id="{{ field.auto_id }}-label">
+          <span class="FormRow-label">
+            {{ field.label }}
+            {% for error in field.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </span>
+          {{ field|add_class:"FormRow-field--xs" }}
+        </label>
+      </div>
+    {% endfor %}
+    </div>
+  </section>
+{% endif %}

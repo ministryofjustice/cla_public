@@ -1,0 +1,37 @@
+.SummaryBlock {
+  position: relative;
+}
+
+.SummaryBlock-heading {
+  @include core-24;
+}
+
+.SummaryBlock-list {
+  background-color: #E8F0F0;
+  padding: 1.2em 1.6em;
+  margin: 0 0 1em;
+  border: {
+    top: 1px solid #C2C2C2;
+    bottom: 1px solid #C2C2C2;
+  };
+  list-style: none;
+
+  li, p {
+    padding: 0.5em 0;
+  }
+}
+
+.SummaryBlock-edit {
+  @include core-19;
+  position: absolute;
+  top: 9px;
+  right: 0;
+
+  &:link,
+  &:visited {
+    color: $black;
+  }
+  &:hover {
+    color: $link-hover-colour;
+  }
+}
