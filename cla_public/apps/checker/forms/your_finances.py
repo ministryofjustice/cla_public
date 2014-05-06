@@ -79,6 +79,26 @@ class OnlyAllowExtraIfNoInitialFormSet(BaseFormSet):
             self.extra = 0
         super(OnlyAllowExtraIfNoInitialFormSet, self).__init__(*args, **kwargs)
 
+    def clean(self):
+        from django.forms.util import ErrorList
+
+        # if any form in error => skip
+        if any([not form.is_valid() for form in self.forms]):
+            return
+
+        count = 0
+        for form in self.forms:
+            try:
+                if form.cleaned_data:
+                    count += 1
+            except AttributeError:
+                pass
+
+        if count < self.total_form_count():
+            raise forms.ValidationError(_('Fill in all your property details'))
+
+        return self.cleaned_data
+
 
 class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 

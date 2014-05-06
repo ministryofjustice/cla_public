@@ -15,7 +15,7 @@
 
   "test_settings" : {
     "default" : {
-      "launch_url" : "http://localhost",
+      "launch_url" : "http://localhost:8002",
       "selenium_port"  : 4444,
       "selenium_host"  : "localhost",
       "silent": true,
@@ -32,16 +32,15 @@
         "acceptSslCerts": true
       }
     },
-    "integration": {
-      "desiredCapabilities": {
-        "browserName": "firefox",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true,
-        "browserstack.user": "kerincosford",
-        "browserstack.key": "LNAmG91yFnikYfvRJo2T"
-      },
+    "jenkins": {
+      "launch_url" : "http://localhost:8001",
       "selenium" : {
-        "server_path" : "/tmp/jenkins/envs/cla_backend/bin/selenium-java-2.41.0.jar"
+        "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar"
+      },
+      "desiredCapabilities": {
+        "browserName": "phantomjs",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true
       }
     }
   }
