@@ -31,13 +31,20 @@
               {% endfor %}
             {% endif %}
       		{% endwith %}
+        </div>
 
+        <div class="FormBlock-actions">
+          <button class="Button Button--secondary" type="submit" value="add-property">{% trans "Add another property" %}</button>
+        </div>
+
+        <div class="visuallyhidden">
           {% with form=form.form_dict.your_other_properties fieldset_label="Other properties"%}
             {% if form %}
               {% include "checker/includes/finances_other_property_form.html" %}
             {% endif %}
           {% endwith %}
         </div>
+        
       </section>
     {% endif %}
 
