@@ -72,6 +72,7 @@ class CheckerWizardTestCase(CLATestCase):
             "property-0-mortgage_left": [50000],
             "property-0-owner": [1],
             "property-0-share": [100],
+            "property-0-disputed": [u"1"],
             "your_other_properties-other_properties": [u"0"],
             "your_savings-bank": [100],
             "your_savings-investments": [100],
@@ -357,6 +358,7 @@ class CheckerWizardTestCase(CLATestCase):
             "property-0-mortgage_left": [50000],
             "property-0-owner": [1],
             "property-0-share": [100],
+            "property-0-disputed": [u"1"],
             "your_other_properties-other_properties": [u"1"],
             "your_savings-bank": [100],
             "your_savings-investments": [100],
@@ -544,7 +546,7 @@ class CheckerWizardTestCase(CLATestCase):
 
         response = self.client.get(self.result_url, follow=True)
         self.assertRedirects(response, self.your_problem_url)
-        
+
 
         # api called?
         self.assertEqual(self.mocked_is_eligible_post.called, True)

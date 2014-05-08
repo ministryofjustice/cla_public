@@ -1,5 +1,5 @@
 test:
-	casperjs test ./tests/javascript/functional/ ./tests/javascript/integration/ --includes=./tests/javascript/casper-helpers.coffee --xunit=xunit.xml
+	casperjs test ./tests/javascript/functional/ ./tests/javascript/integration/ --includes=./tests/javascript/casper-helpers.coffee --xunit=reports/casperjs/xunit.xml
 
 test-nw:
 	./nightwatch -c tests/javascript/nightwatch.json
