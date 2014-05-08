@@ -240,8 +240,8 @@ class CheckerWizard(NamedUrlSessionWizardView):
         if getattr(self, 'redirect_to_self', False):
             return self.render_goto_step(self.steps.current)
 
-        if form.form_tag == 'your_finances' and not form.is_eligibility_unknown():
-            return self.render_goto_step('result')
+#         if form.form_tag == 'your_finances' and not form.is_eligibility_unknown():
+#             return self.render_goto_step('result')
 
     def render(self, form=None, **kwargs):
         try:
