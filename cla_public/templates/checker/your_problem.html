@@ -14,7 +14,7 @@
     {% with form=form %}
       {% include "checker/includes/error_summary.html" %}
     {% endwith %}
-  
+
     <p id="{{ form.category.auto_id }}-label">{% trans "What is your problem about? Choose what is putting you at immediate risk." %}</p>
 
     <div class="FormBlock FormBlock--grey{% if form.category.errors|any_true %} FieldsetError{% endif %}">
