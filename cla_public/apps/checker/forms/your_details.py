@@ -17,10 +17,6 @@ class YourDetailsForm(CheckerWizardMixin, forms.Form):
         required=True, label=_(u'Are you or your partner on any benefits?'), help_text=_(u'<p>Legal aid is based on how much money you have so any benefits you get must be taken into account</p>')
     )
 
-    has_nass_benefits = RadioBooleanField(
-        required=True, label=_(u'Are you or your partner recieving NASS support?'), help_text=_(u'<p>Legal aid is based on how much money you have so any benefits you get must be taken into account</p>')
-    )
-
     has_children = RadioBooleanField(
         required=True, label=_(u'Do you have children?'), help_text=_(u'<p>Your childcare costs will be taken into account provided you can give the right evidence</p>')
     )
@@ -46,7 +42,6 @@ class YourDetailsForm(CheckerWizardMixin, forms.Form):
         post_data = {
             'is_you_or_your_partner_over_60': data['older_than_sixty'],
             'on_passported_benefits': data['has_benefits'],
-            'on_nass_benefits': data['has_nass_benefits'],
             'has_partner': data['has_partner'],
         }
         if not self.reference:
