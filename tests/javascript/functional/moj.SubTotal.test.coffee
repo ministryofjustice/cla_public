@@ -13,6 +13,7 @@ casper.test.begin "Subtotal Calculator", (test) ->
     @waitForUrl /.*your_details/
   casper.thenEvaluate ->
     $("input[value=1][type=radio]").click()
+    $("input[value=0][name=your_details-has_benefits]").click()
   casper.then ->
     @fill 'form', {}, true
     @waitForUrl /.*your_capital/
