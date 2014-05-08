@@ -127,14 +127,18 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
     def ask_about_capital(wizard):
 
         # if citizen does not have benefits, ask about capital....
-        cleaned_data = wizard.get_cleaned_data_for_step('your_details') or {}
-        if cleaned_data.get('has_benefits', 0) == 0:
+        cleaned_data = wizard.get_cleaned_data_for_step('your_details') or {}        
+        if not cleaned_data.get('has_benefits', False):
             return True
 
-        # ... if nass then don't ask
         cleaned_data = wizard.get_cleaned_data_for_step('your_benefits') or {}
+
+        # ... if nass then don't ask
         if cleaned_data.get('nass_benefit', False):
             return False
+        
+        if cleaned_data.get('passport_benefit', False):
+            return True
 
         return True
 
@@ -275,9 +279,14 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
         """
         'If on any of the above [list of benefits] the user is assessed for
         disposable capital but not gross/net income.'
-        """
-        cleaned_data = wizard.get_cleaned_data_for_step('your_details') or {}
-        return not cleaned_data.get('has_benefits', True)
+        """        
+        cleaned_data = wizard.get_cleaned_data_for_step('your_details') or {}        
+        if not cleaned_data.get('has_benefits', False):
+            return True
+
+        cleaned_data = wizard.get_cleaned_data_for_step('your_benefits') or {}
+        return not (cleaned_data.get('passport_benefit', False) \
+                    or cleaned_data.get('nass_benefit', False))
 
     def _prepare_for_init(self, kwargs):
         super(YourIncomeForm, self)._prepare_for_init(kwargs)
