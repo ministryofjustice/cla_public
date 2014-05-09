@@ -46,7 +46,6 @@ class YourDetailsFormTestCase(CLATestCase):
         self.mocked_connection.eligibility_check.post.return_value = self._get_default_post_data_response()
         response = form.save()
         self.mocked_connection.eligibility_check.post.assert_called_with({
-            'on_passported_benefits': data['has_benefits'],
             'is_you_or_your_partner_over_60': data['older_than_sixty'],
             'has_partner': data['has_partner']
         })
@@ -91,7 +90,6 @@ class YourDetailsFormTestCase(CLATestCase):
         form.save()
         self.mocked_connection.eligibility_check(reference).patch.assert_called_with(
             {
-                'on_passported_benefits': data['has_benefits'],
                 'is_you_or_your_partner_over_60': data['older_than_sixty'],
                 'has_partner': data['has_partner']
             }
