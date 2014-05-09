@@ -1,9 +1,9 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
-from .base import CheckerWizardMixin
+from .base import CheckerWizardMixin, EligibilityMixin
 
-class YourBenefitsForm(CheckerWizardMixin, forms.Form):
+class YourBenefitsForm(EligibilityMixin, CheckerWizardMixin, forms.Form):
 
     form_tag = 'your_benefits'
 
@@ -52,7 +52,7 @@ class YourBenefitsForm(CheckerWizardMixin, forms.Form):
             raise forms.ValidationError(_('None and something selected'))
 
         if not (none_of_above or nass_benefit or cleaned_data['passport_benefit']):
-            raise forms.ValidationError(_('Nothing choosen'))
+            raise forms.ValidationError(_('Nothing chosen'))
 
         return cleaned_data
 
