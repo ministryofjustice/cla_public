@@ -17,7 +17,7 @@ class ContactDetailsForm(forms.Form):
     full_name = forms.CharField(label=_(u'Full name'), max_length=300)
     postcode = forms.CharField(label=_(u'Postcode'), max_length=10)
     street = forms.CharField(
-        label=_(u'Street'), max_length=250,
+        label=_(u'Address'), max_length=250,
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 21})
     )
     town = forms.CharField(label=_(u'Town/city'), max_length=100)
