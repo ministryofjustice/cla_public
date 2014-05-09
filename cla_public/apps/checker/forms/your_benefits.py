@@ -51,6 +51,9 @@ class YourBenefitsForm(CheckerWizardMixin, forms.Form):
         if none_of_above and (nass_benefit or cleaned_data['passport_benefit']):
             raise forms.ValidationError(_('None and something selected'))
 
+        if not (none_of_above or nass_benefit or cleaned_data['passport_benefit']):
+            raise forms.ValidationError(_('Nothing choosen'))
+
         return cleaned_data
 
     def save(self, *args, **kwargs):
