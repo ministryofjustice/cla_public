@@ -53,6 +53,8 @@
         default:
           this.fillBasic();
       }
+
+      $('form').find('[type=submit]').focus();
     },
 
     fillBasic: function () {
