@@ -75,7 +75,8 @@ class CheckerWizard(NamedUrlSessionWizardView):
     storage_name = 'checker.storage.CheckerSessionStorage'
     condition_dict = {'your_benefits': YourBenefitsForm.ask_about_benefits,
                       'your_capital': YourCapitalForm.ask_about_capital,
-                      'your_income' : YourIncomeForm.ask_about_income
+                      'your_income' : YourIncomeForm.ask_about_income,    # paired
+                      'your_allowances' : YourIncomeForm.ask_about_income # paired
                      }
 
     form_list = [
@@ -138,6 +139,7 @@ class CheckerWizard(NamedUrlSessionWizardView):
         return data
 
     def get_context_data(self, form, **kwargs):
+
         context = super(CheckerWizard, self).get_context_data(form, **kwargs)
 
         history_data = self.get_all_cleaned_data_dicts()
@@ -153,7 +155,6 @@ class CheckerWizard(NamedUrlSessionWizardView):
 
         if self.steps.current == u'result':
             context['eligibility_check'] = connection.eligibility_check(self.storage.get_eligibility_check_reference()).get()
-
 
         return context
 
@@ -240,8 +241,8 @@ class CheckerWizard(NamedUrlSessionWizardView):
         if getattr(self, 'redirect_to_self', False):
             return self.render_goto_step(self.steps.current)
 
-#         if form.form_tag == 'your_finances' and not form.is_eligibility_unknown():
-#             return self.render_goto_step('result')
+        if form.form_tag == 'your_finances' and not form.is_eligibility_unknown():
+            return self.render_goto_step('result')
 
     def render(self, form=None, **kwargs):
         try:
