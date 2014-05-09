@@ -34,7 +34,9 @@ gulp.task('clean', function() {
 gulp.task('sass', function() {
   gulp
     .src(paths.styles)
-    .pipe(plugins.rubySass())
+    .pipe(plugins.rubySass({
+      loadPath: 'node_modules/govuk_frontend_toolkit/' // add node module toolkit path
+    }))
     .pipe(gulp.dest(paths.dest_dir + 'stylesheets'));
 });
 
