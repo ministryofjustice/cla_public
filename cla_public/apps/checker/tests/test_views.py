@@ -29,6 +29,9 @@ class CheckerWizardTestCase(CLATestCase):
         self.your_details_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_details'}
         )
+        self.your_benefits_url = reverse(
+            'checker:checker_step', args=(), kwargs={'step': 'your_benefits'}
+        )
         self.your_capital_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_capital'}
         )
@@ -60,6 +63,17 @@ class CheckerWizardTestCase(CLATestCase):
             'your_details-caring_responsibilities': [1],
             'your_details-own_property': [1],
             'checker_wizard-current_step': 'your_details',
+        }
+
+    def _get_your_benefits_post_data(self):
+        return {
+            "checker_wizard-current_step": "your_benefits",
+            'your_benefits-income_support': [1],
+            "your_benefits-job_seekers": [1],
+            "your_benefits-employment_allowance": [1],
+            "your_benefits-universal_credit": [1],
+            "your_benefits-nass_benefit": [1],
+            "your_benefits-none_of_above": [1],
         }
 
     def _get_your_capital_post_data(self):
@@ -129,6 +143,7 @@ class CheckerWizardTestCase(CLATestCase):
         fillers = {
             'your_problem': self._get_your_problem_post_data,
             'your_details': self._get_your_details_post_data,
+            'your_benefits': self._get_your_benefits_post_data,
             'your_capital': self._get_your_capital_post_data,
             'your_income': self._get_your_income_post_data,
             'your_allowances': self._get_your_allowances_post_data,
@@ -255,7 +270,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
 
         response = self.client.post(self.your_details_url, data=data)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertRedirects(response, self.your_benefits_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
@@ -272,7 +287,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE
 
         response = self.client.post(self.your_details_url, data=data)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertRedirects(response, self.your_benefits_url)
 
         self.assertEqual(self.mocked_eligibility_check_patch.called, True)
 
