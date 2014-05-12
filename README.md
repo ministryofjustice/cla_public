@@ -7,6 +7,11 @@ Frontend application for the Civil Legal Aid Tool.
 * [Virtualenv](http://www.virtualenv.org/en/latest/)
 * [Python](http://www.python.org/) (Can be installed using `brew`)
 * [Postgres](http://www.postgresql.org/)
+* **Frontend**
+* [nodejs.org](http://nodejs.org/)
+* [Sass](http://sass-lang.com/) (Ruby version - minimum v3.3)
+* [gulp.js](http://gulpjs.com/) (Installed globally using `npm install -g gulp`)
+* [Bower](http://bower.io/) (Installed globally using `npm install -g bower`)
 
 ## Installation
 
@@ -24,11 +29,15 @@ Install python dependencies:
 
     pip install -r requirements/local.txt
 
-Install Javascript libraries:
+Install Frontend dependencies libraries:
+
+    npm install -g bower gulp
+
+Install bower packages:
 
     bower install
 
-Install node dependencies:
+Install node packages:
 
     npm install
 
@@ -53,12 +62,6 @@ Each time you start a new terminal instance you will need to run the following c
 Assets are managed using [gulp.js](http://gulpjs.com/). To compile the assets once, after a pull for example, run:
 
     gulp build
-
-### FE Dependencies
-
-* [nodejs.org](http://nodejs.org/)
-* [Sass](http://sass-lang.com/) (minimum v3.3)
-* [gulp.js](http://gulpjs.com/)
 
 ### Stylesheets
 
