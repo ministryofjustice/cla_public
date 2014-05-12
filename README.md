@@ -91,8 +91,9 @@ When making frequent changes to the assets you can run a gulp watch command to i
 
 CasperJS is used to run basic functional/browser tests on basic DOM interactions. To run the tests, make sure you have the following dependencies:
 
+* [Selenium](http://docs.seleniumhq.org/) (2.41.0)
+* [Nightwatch.js](http://nightwatchjs.org/) (~0.4.14)
 * [PhantomJS](http://phantomjs.org/) (1.9.7)
-* [CasperJS](http://casperjs.org/) (1.1.0-beta3)
 
 To run the tests, use the following make command:
 
