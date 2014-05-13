@@ -1,81 +1,86 @@
-{% load widget_tweaks %}
-<div class="FormRow cf{% if form.worth.errors and show_errors %} Error{% endif %}">
-  <label for="{{ form.worth.id_for_label }}" id="{{ form.worth.auto_id }}-label">
-    <span class="FormRow-label">
-      {{ form.worth.label }}
-      {% if show_errors %}
-        {% for error in form.worth.errors %}
-          <span class="Error-message">{{ error }}</span>
-        {% endfor %}
-      {% endif %}
-    </span>
-    <span class="FormRow-prefix">&pound;</span>
-    {{ form.worth }}
-  </label>
-</div>
+{% load i18n widget_tweaks humanize core_format_tags %}
 
-<div class="FormRow cf{% if form.mortgage_left.errors and show_errors %} Error{% endif %}">
-  <label for="{{ form.mortgage_left.id_for_label }}" id="{{ form.mortgage_left.auto_id }}-label">
-    <span class="FormRow-label">
-      {{ form.mortgage_left.label }}
-      {% if show_errors %}
-        {% for error in form.mortgage_left.errors %}
-          <span class="Error-message">{{ error }}</span>
-        {% endfor %}
-      {% endif %}
-    </span>
-    <span class="FormRow-prefix">&pound;</span>
-    {{ form.mortgage_left }}
-  </label>
-</div>
+<h2 id="{{ a }}-label" class="FormBlock-label">{% trans "Your" %} {{ count|ordinal_from_count:total }} {% trans "property" %}</h2>
 
-<div class="FormRow cf{% if form.owner.errors and show_errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.owner.auto_id }}-label">
-  <p class="FormRow-label" id="{{ form.owner.auto_id }}-label">
-    {{ form.owner.label }}
-    {% if show_errors %}
-      {% for error in form.owner.errors %}
-        <span class="Error-message">{{ error }}</span>
-      {% endfor %}
-    {% endif %}
-  </p>
-
-  {% for choice in form.owner.field.choices %}
-    <label for="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
-      <input type="radio" name="{{ form.owner.html_name }}" id="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.owner.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
-      {{ choice.1 }}
+<div class="FormBlock FormBlock--grey" aria-labelledby="{{ a }}-label" role="group">
+  <div class="FormRow cf{% if form.worth.errors and show_errors %} Error{% endif %}">
+    <label for="{{ form.worth.id_for_label }}" id="{{ form.worth.auto_id }}-label">
+      <span class="FormRow-label">
+        {{ form.worth.label }}
+        {% if show_errors %}
+          {% for error in form.worth.errors %}
+            <span class="Error-message">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </span>
+      <span class="FormRow-prefix">&pound;</span>
+      {{ form.worth }}
     </label>
-  {% endfor %}
-</div>
+  </div>
 
-<div class="FormRow cf{% if form.share.errors and show_errors %} Error{% endif %}">
-  <label for="{{ form.share.id_for_label }}" id="{{ form.share.auto_id }}-label">
-    <span class="FormRow-label">
-      {{ form.share.label }}
+  <div class="FormRow cf{% if form.mortgage_left.errors and show_errors %} Error{% endif %}">
+    <label for="{{ form.mortgage_left.id_for_label }}" id="{{ form.mortgage_left.auto_id }}-label">
+      <span class="FormRow-label">
+        {{ form.mortgage_left.label }}
+        {% if show_errors %}
+          {% for error in form.mortgage_left.errors %}
+            <span class="Error-message">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </span>
+      <span class="FormRow-prefix">&pound;</span>
+      {{ form.mortgage_left }}
+    </label>
+  </div>
+
+  <div class="FormRow cf{% if form.owner.errors and show_errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.owner.auto_id }}-label">
+    <p class="FormRow-label" id="{{ form.owner.auto_id }}-label">
+      {{ form.owner.label }}
       {% if show_errors %}
-        {% for error in form.share.errors %}
+        {% for error in form.owner.errors %}
           <span class="Error-message">{{ error }}</span>
         {% endfor %}
       {% endif %}
-    </span>
-    {{ form.share|add_class:"FormRow-field--s" }}
-    <span class="FormRow-suffix">%</span>
-  </label>
-</div>
+    </p>
 
-<div class="FormRow cf{% if form.disputed.errors and show_errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.disputed.auto_id }}-label">
-  <p class="FormRow-label" id="{{ form.disputed.auto_id }}-label">
-    {{ form.disputed.label }}
-    {% if show_errors %}
-      {% for error in form.disputed.errors %}
-        <span class="Error-message">{{ error }}</span>
-      {% endfor %}
-    {% endif %}
-  </p>
+    {% for choice in form.owner.field.choices %}
+      <label for="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
+        <input type="radio" name="{{ form.owner.html_name }}" id="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.owner.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+        {{ choice.1 }}
+      </label>
+    {% endfor %}
+  </div>
 
-  {% for choice in form.disputed.field.choices %}
-    <label for="{{ form.disputed.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
-      <input type="radio" name="{{ form.disputed.html_name }}" id="{{ form.disputed.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.disputed.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
-      {{ choice.1 }}
+  <div class="FormRow cf{% if form.share.errors and show_errors %} Error{% endif %}">
+    <label for="{{ form.share.id_for_label }}" id="{{ form.share.auto_id }}-label">
+      <span class="FormRow-label">
+        {{ form.share.label }}
+        {% if show_errors %}
+          {% for error in form.share.errors %}
+            <span class="Error-message">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </span>
+      {{ form.share|add_class:"FormRow-field--s" }}
+      <span class="FormRow-suffix">%</span>
     </label>
-  {% endfor %}
+  </div>
+
+  <div class="FormRow cf{% if form.disputed.errors and show_errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.disputed.auto_id }}-label">
+    <p class="FormRow-label" id="{{ form.disputed.auto_id }}-label">
+      {{ form.disputed.label }}
+      {% if show_errors %}
+        {% for error in form.disputed.errors %}
+          <span class="Error-message">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    </p>
+
+    {% for choice in form.disputed.field.choices %}
+      <label for="{{ form.disputed.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
+        <input type="radio" name="{{ form.disputed.html_name }}" id="{{ form.disputed.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.disputed.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+        {{ choice.1 }}
+      </label>
+    {% endfor %}
+  </div>
 </div>
