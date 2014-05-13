@@ -17,6 +17,10 @@ $border-colour: #C2C2C2;
   @include heading-24;
   margin-bottom: 10px;
 }
+.FormBlock-actions {
+  margin-top: -15px;
+  margin-bottom: 2em;
+}
 
 .FormRow {
   margin: 20px 0;

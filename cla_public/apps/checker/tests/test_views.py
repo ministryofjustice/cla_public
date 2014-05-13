@@ -108,6 +108,7 @@ class CheckerWizardTestCase(CLATestCase):
             "partners_savings-investments": [100],
             "partners_savings-valuable_items": [100],
             "partners_savings-money_owed": [100],
+            "submit": "submit"
         }
 
     def _get_your_income_post_data(self):
@@ -452,7 +453,6 @@ class CheckerWizardTestCase(CLATestCase):
             "property-0-owner": [1],
             "property-0-share": [100],
             "property-0-disputed": [u"1"],
-            "your_other_properties-other_properties": [u"1"],
             "your_savings-bank": [100],
             "your_savings-investments": [100],
             "your_savings-valuable_items": [100],
@@ -461,6 +461,7 @@ class CheckerWizardTestCase(CLATestCase):
             "partners_savings-investments": [100],
             "partners_savings-valuable_items": [100],
             "partners_savings-money_owed": [100],
+            "submit": "add-property",
         }
 
         self._fill_in_prev_steps(current_step='your_capital')
@@ -471,14 +472,16 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE_FROM_YOUR_SAVINGS
 
         response = self.client.post(self.your_capital_url, data=post_data, follow=True)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.redirect_chain)
+
         self.assertGreater(
             len(response.context_data['form'].get_form_by_prefix('property')),
             len(r1.context_data['form'].get_form_by_prefix('property'))
         )
 
         # api called?
-        self.assertEqual(self.mocked_eligibility_check_patch.called, True)
+        self.assertEqual(self.mocked_eligibility_check_patch.called, False)
         # shouldn't call is_eligible because the user has to add another property
         self.assertEqual(self.mocked_is_eligible_post.called, False)
 
