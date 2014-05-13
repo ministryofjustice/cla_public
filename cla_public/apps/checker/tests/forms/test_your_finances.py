@@ -16,7 +16,6 @@ class YourCapitalFormTestCase(CLATestCase):
     all_forms = {
         'your_savings',
         'partners_savings',
-        'your_other_properties'
     }
 
     partner_forms = {
@@ -160,7 +159,6 @@ class YourCapitalFormTestCase(CLATestCase):
         """
         form = YourCapitalForm(reference=self.reference, data=self._get_default_post_data())
 
-        self.assertTrue(form.get_form_by_prefix('your_other_properties').is_valid())
         self.assertTrue(form.get_form_by_prefix('your_savings').is_valid())
         self.assertTrue(form.get_form_by_prefix('partners_savings').is_valid())
 
@@ -196,15 +194,6 @@ class YourCapitalFormTestCase(CLATestCase):
         property_form = form.get_form_by_prefix('property')
         self.assertFalse(property_form.is_valid())
         self.assertEqual(property_form.non_form_errors(), [u'Fill in all your property details'])
-
-    def test_post_update_cleaned_data_other_properties(self):
-        """
-        TEST cleaned_data for other properties
-        """
-        form = YourCapitalForm(reference=self.reference, data=self._get_default_post_data())
-
-        self.assertTrue(form.get_form_by_prefix('your_other_properties').is_valid())
-        self.assertEqual(form.get_form_by_prefix('your_other_properties').cleaned_data['other_properties'], False)
 
     def test_post_update_cleaned_data_your_savings(self):
         """

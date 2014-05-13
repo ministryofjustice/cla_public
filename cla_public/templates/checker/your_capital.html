@@ -1,68 +1,71 @@
 {% extends "checker/base.html" %}{% load i18n humanize helpers %}
 
 {% block page_header %}
-  <h1>{% trans "Your finances" %}</h1>
+    <h1>{% trans "Your finances" %}</h1>
 {% endblock %}
 
 {% block checker_content %}
-  <p>{% trans "Whether or not you qualify for legal aid depends on how much money you and your partner have. To find out if you’re financially eligible, please answer these questions as honestly and fully as you can." %}</p>
+    {% with show_errors=form.show_errors|default_if_none:True %}
+      {{ show_errors }}
+        <p>{% trans "Whether or not you qualify for legal aid depends on how much money you and your partner have. To find out if you’re financially eligible, please answer these questions as honestly and fully as you can." %}</p>
 
-	<form method=post action=".">
-		{% csrf_token %}
-		{{ wizard.management_form }}    
-		{{ form.non_field_errors }}
+        <form method=post action=".">
+            {% csrf_token %}
+            {{ wizard.management_form }}
+            {{ form.non_field_errors }}
 
-    {% with form=form %}
-      {% include "checker/includes/error_summary.html" %}
-    {% endwith %}
-    
-    {% if form.form_dict.property or form.form_dict.your_other_properties %}
-      <section>
-        <h2 id="{{ form.form_dict.property.prefix }}-label" class="FormBlock-label">{% trans "Your property" %}</h2>
+            {% if show_errors %}
+                {% include "checker/includes/error_summary.html" %}
+            {% endif %}
 
-        <div class="FormBlock FormBlock--grey{% if form.form_dict.property.errors|any_true or form.form_dict.your_other_properties.errors|any_true %} FieldsetError{% endif %}" aria-labelledby="{{ form.form_dict.property.prefix }}-label" role="group">
-      		{% with form.form_dict.property as formset %}
-            {% if formset %}
-              {{ formset.management_form}}
-              {% for form in formset %}
+            {% if form.form_dict.property or form.form_dict.your_other_properties %}
+                <section>
+                    <h2 id="{{ form.form_dict.property.prefix }}-label" class="FormBlock-label">{% trans "Your property" %}</h2>
+
+                    <div class="FormBlock FormBlock--grey{% if form.form_dict.property.errors|any_true or form.form_dict.your_other_properties.errors|any_true %} FieldsetError{% endif %}" aria-labelledby="{{ form.form_dict.property.prefix }}-label" role="group">
+                        {% with form.form_dict.property as formset %}
+                            {% if formset %}
+                                {{ formset.management_form}}
+                                {% for form in formset %}
+                                    {% if form %}
+                                        {% include "checker/includes/finances_property_form.html" %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+
+                    <div class="FormBlock-actions">
+                        <button class="Button Button--secondary" type="submit" name="submit" value="add-property">{% trans "Add another property" %}</button>
+                    </div>
+
+                    <div class="visuallyhidden">
+                        {% with form=form.form_dict.your_other_properties fieldset_label="Other properties"%}
+                            {% if form %}
+                                {% include "checker/includes/finances_other_property_form.html" %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+
+                </section>
+            {% endif %}
+
+            {% with form.form_dict.your_savings as form %}{% with "Your savings" as fieldset_label %}
                 {% if form %}
-                  {% include "checker/includes/finances_property_form.html" %}
+                    {% include "checker/includes/finances_savings_form.html" %}
                 {% endif %}
-              {% endfor %}
-            {% endif %}
-      		{% endwith %}
-        </div>
+            {% endwith %}{% endwith %}
 
-        <div class="FormBlock-actions">
-          <button class="Button Button--secondary" type="submit" value="add-property">{% trans "Add another property" %}</button>
-        </div>
+            {% with form.form_dict.partners_savings as form %}{% with "Your partner's savings" as fieldset_label %}
+                {% if form %}
+                    {% include "checker/includes/finances_savings_form.html" %}
+                {% endif %}
+            {% endwith %}{% endwith %}
 
-        <div class="visuallyhidden">
-          {% with form=form.form_dict.your_other_properties fieldset_label="Other properties"%}
-            {% if form %}
-              {% include "checker/includes/finances_other_property_form.html" %}
-            {% endif %}
-          {% endwith %}
-        </div>
-        
-      </section>
-    {% endif %}
-
-		{% with form.form_dict.your_savings as form %}{% with "Your savings" as fieldset_label %}
-      {% if form %}
-        {% include "checker/includes/finances_savings_form.html" %}
-      {% endif %}
-		{% endwith %}{% endwith %}
-
-		{% with form.form_dict.partners_savings as form %}{% with "Your partner's savings" as fieldset_label %}
-      {% if form %}
-        {% include "checker/includes/finances_savings_form.html" %}
-      {% endif %}
-		{% endwith %}{% endwith %}
-
-    <div class="FormActions">
-      <button type="submit" class="Button">{% trans "Next step" %}</button>
-      <a href="{% url 'checker:checker_step' wizard.steps.prev %}">{% trans "Go back to previous step" %}</a>
-    </div>
-	</form>
+            <div class="FormActions">
+                <button type="submit" class="Button" name="submit" value="submit">{% trans "Next step" %}</button>
+                <a href="{% url 'checker:checker_step' wizard.steps.prev %}">{% trans "Go back to previous step" %}</a>
+            </div>
+        </form>
+    {% endwith %}
 {% endblock %}

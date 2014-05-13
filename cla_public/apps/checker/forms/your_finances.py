@@ -3,7 +3,8 @@ import itertools
 
 from django import forms
 from django.utils.translation import ugettext as _
-from django.forms.formsets import formset_factory, BaseFormSet
+from django.forms.formsets import formset_factory, BaseFormSet, \
+    TOTAL_FORM_COUNT, INITIAL_FORM_COUNT
 
 import form_utils.forms
 
@@ -31,12 +32,6 @@ class YourFinancesFormMixin(EligibilityMixin, CheckerWizardMixin):
         self.has_property = kwargs.pop('has_property', True)
         self.has_children = kwargs.pop('has_children', True)
         self.has_benefits = kwargs.pop('has_benefits', False)
-
-
-class YourCapitalOtherPropertyForm(CheckerWizardMixin, forms.Form):
-    other_properties = RadioBooleanField(
-        required=True, label=_(u'Do you own another property?')
-    )
 
 
 class YourCapitalPropertyForm(CheckerWizardMixin, forms.Form):
@@ -102,6 +97,23 @@ class OnlyAllowExtraIfNoInitialFormSet(BaseFormSet):
 
         return self.cleaned_data
 
+    def add_form(self, **kwargs):
+        tfc = self.total_form_count()
+        self.forms.append(self._construct_form(tfc, **kwargs))
+        self.forms[tfc].is_bound = False
+
+        # make data mutable
+        self.data = self.data.copy()
+
+        # increase hidden form counts
+        total_count_name = '%s-%s' % (self.management_form.prefix, TOTAL_FORM_COUNT)
+        initial_count_name = '%s-%s' % (self.management_form.prefix, INITIAL_FORM_COUNT)
+        self.data[total_count_name] = self.management_form.cleaned_data[TOTAL_FORM_COUNT] + 1
+        self.data[initial_count_name] = self.management_form.cleaned_data[INITIAL_FORM_COUNT] + 1
+
+    @property
+    def new_form_added(self):
+        return self.data.get('submit') == 'add-property'
 
 class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 
@@ -118,7 +130,6 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
     )
 
     forms_list = (
-        ('your_other_properties', YourCapitalOtherPropertyForm),
         ('your_savings', YourCapitalSavingsForm),
         ('partners_savings', YourCapitalSavingsForm),
     )
@@ -132,7 +143,6 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
             del new_forms_list['partners_savings']
         if not self.has_property:
             del new_formset_list['property']
-            del new_forms_list['your_other_properties']
 
         self.forms_list = new_forms_list.items()
         self.formset_list = new_formset_list.items()
@@ -221,6 +231,19 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
             'eligibility_check': response
         }
 
+
+    def add_property_if_required(self):
+        if self.data.get('submit') == 'add-property':
+            self.form_dict()['property'].add_form()
+            return True
+
+    @property
+    def show_errors(self):
+        for _, form in self.form_dict().items():
+            if hasattr(form, 'new_form_added'):
+                if form.new_form_added:
+                    return False
+        return True
 
 class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
     earnings = MoneyField(
