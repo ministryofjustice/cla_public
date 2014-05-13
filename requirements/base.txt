@@ -14,4 +14,4 @@ django-moj-template==0.11.1
 slumber==0.6.0
 iptools==0.6.1
 
-git+ssh://git@github.com/ministryofjustice/cla_common.git@0.1.8#egg=cla_common==0.1.8
+git+ssh://git@github.com/ministryofjustice/cla_common.git@0.1.9#egg=cla_common==0.1.9
