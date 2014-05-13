@@ -108,6 +108,7 @@ class CheckerWizardTestCase(CLATestCase):
             "partners_savings-investments": [100],
             "partners_savings-valuable_items": [100],
             "partners_savings-money_owed": [100],
+            "submit": "submit"
         }
 
     def _get_your_income_post_data(self):
