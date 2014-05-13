@@ -26,6 +26,9 @@ ELIGIBILITY_CHECK_CREATE = {
     'notes': 'lorem ipsum'
 }
 
+IS_ELIGIBILE_UNKNOWN = {
+    'is_eligible' : 'unknown'
+}
 
 ELIGIBILITY_CHECK_UPDATE = {
     'reference': '1234567890',

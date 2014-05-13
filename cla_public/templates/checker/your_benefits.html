@@ -1,0 +1,28 @@
+{% extends "checker/base.html" %}{% load i18n helpers %}
+
+{% block page_header %}
+  <h1>{% trans "Your benefits" %}</h1>
+{% endblock %}
+
+{% block checker_content %}
+  <form action="." method="POST">
+    {% csrf_token %}
+    {{ wizard.management_form }}
+    {{ form.non_field_errors }}
+
+    {% with form=form %}
+      {% include "checker/includes/error_summary.html" %}
+    {% endwith %}
+    
+	{{form.as_p}}
+	
+	<p>Note: Benefits such as child benefit/tax credit should be declared as income in the subsequent income declaration.</p>
+
+
+    <div class="FormActions">
+      <button type="submit" class="Button">{% trans "Next step - Your finances" %}</button>
+      <a href="{% url 'checker:checker_step' wizard.steps.prev %}">{% trans "Go back to previous step" %}</a>
+    </div>
+  </form>
+
+{% endblock %}

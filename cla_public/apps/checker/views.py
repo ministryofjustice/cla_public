@@ -10,7 +10,7 @@ from django.contrib.formtools.wizard.storage import get_storage
 from .helpers import SessionCheckerHelper
 from .forms import YourProblemForm, YourDetailsForm, \
     YourCapitalForm, YourIncomeForm, YourAllowancesForm, \
-    ApplyForm
+    ApplyForm, YourBenefitsForm
 from .exceptions import InconsistentStateException
 
 class BreadCrumb(object):
@@ -73,10 +73,12 @@ class BreadCrumb(object):
 
 class CheckerWizard(NamedUrlSessionWizardView):
     storage_name = 'checker.storage.CheckerSessionStorage'
+    condition_dict = {'your_benefits': YourBenefitsForm.ask_about_benefits }
 
     form_list = [
         ("your_problem", YourProblemForm),
         ("your_details", YourDetailsForm),
+        ("your_benefits", YourBenefitsForm),
         ("your_capital", YourCapitalForm),
         ("your_income", YourIncomeForm),
         ("your_allowances", YourAllowancesForm),
@@ -86,6 +88,7 @@ class CheckerWizard(NamedUrlSessionWizardView):
     TEMPLATES = {
         "your_problem": "checker/your_problem.html",
         "your_details": "checker/your_details.html",
+        "your_benefits": "checker/your_benefits.html",
         "your_capital": "checker/your_capital.html",
         "your_income": "checker/your_income.html",
         "your_allowances": "checker/your_allowances.html",
@@ -147,7 +150,6 @@ class CheckerWizard(NamedUrlSessionWizardView):
 
         if self.steps.current == u'result':
             context['eligibility_check'] = connection.eligibility_check(self.storage.get_eligibility_check_reference()).get()
-
 
         return context
 
@@ -234,7 +236,9 @@ class CheckerWizard(NamedUrlSessionWizardView):
         if getattr(self, 'redirect_to_self', False):
             return self.render_goto_step(self.steps.current)
 
-        if form.form_tag == 'your_finances' and not form.is_eligibility_unknown():
+        if (form.form_tag == 'your_finances' \
+            or form.form_tag == 'your_benefits') \
+            and not form.is_eligibility_unknown():
             return self.render_goto_step('result')
 
     def render(self, form=None, **kwargs):

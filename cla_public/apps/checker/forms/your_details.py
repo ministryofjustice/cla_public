@@ -41,7 +41,6 @@ class YourDetailsForm(CheckerWizardMixin, forms.Form):
         data = self.cleaned_data
         post_data = {
             'is_you_or_your_partner_over_60': data['older_than_sixty'],
-            'on_passported_benefits': data['has_benefits'],
             'has_partner': data['has_partner'],
         }
         if not self.reference:

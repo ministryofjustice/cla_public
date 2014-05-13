@@ -29,6 +29,9 @@ class CheckerWizardTestCase(CLATestCase):
         self.your_details_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_details'}
         )
+        self.your_benefits_url = reverse(
+            'checker:checker_step', args=(), kwargs={'step': 'your_benefits'}
+        )
         self.your_capital_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_capital'}
         )
@@ -60,6 +63,29 @@ class CheckerWizardTestCase(CLATestCase):
             'your_details-caring_responsibilities': [1],
             'your_details-own_property': [1],
             'checker_wizard-current_step': 'your_details',
+        }
+
+    def _get_your_benefits_nass_post_data(self):
+        return {
+            "checker_wizard-current_step": "your_benefits",
+#             'your_benefits-income_support': [False],
+#             "your_benefits-job_seekers": [False],
+#             "your_benefits-employment_allowance": [False],
+#             "your_benefits-universal_credit": [False],
+             "your_benefits-nass_benefit": [1],
+#               "your_benefits-none_of_above": [0],
+        }
+
+    def _get_your_benefits_passported_post_data(self):
+        return {
+            "checker_wizard-current_step": "your_benefits",
+            "your_benefits-universal_credit": [1],
+        }
+
+    def _get_your_benefits_none_post_data(self):
+        return {
+            "checker_wizard-current_step": "your_benefits",
+            "your_benefits-none_of_above": [1],
         }
 
     def _get_your_capital_post_data(self):
@@ -129,6 +155,7 @@ class CheckerWizardTestCase(CLATestCase):
         fillers = {
             'your_problem': self._get_your_problem_post_data,
             'your_details': self._get_your_details_post_data,
+            'your_benefits': self._get_your_benefits_none_post_data,
             'your_capital': self._get_your_capital_post_data,
             'your_income': self._get_your_income_post_data,
             'your_allowances': self._get_your_allowances_post_data,
@@ -255,7 +282,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
 
         response = self.client.post(self.your_details_url, data=data)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertRedirects(response, self.your_benefits_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
@@ -272,9 +299,75 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE
 
         response = self.client.post(self.your_details_url, data=data)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertRedirects(response, self.your_benefits_url)
 
         self.assertEqual(self.mocked_eligibility_check_patch.called, True)
+
+
+    ## YOUR BENEFITS
+
+    def test_get_your_benefits(self):
+        self._fill_in_prev_steps(current_step='your_benefits')
+
+        response = self.client.get(self.your_benefits_url)
+        self.assertTrue('sessionid' in response.cookies)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertStepEqual(response, 'your_benefits')
+
+    def test_post_your_benefits_nass(self):
+        """
+        TEST post that citizen is on NASS benefit; should not require capital or income forms
+        """
+        self._fill_in_prev_steps(current_step='your_benefit', without_reference=True)
+
+        data = self._get_your_benefits_nass_post_data()
+
+        r1 = self.client.get(self.your_benefits_url)
+
+        self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
+
+        response = self.client.post(self.your_benefits_url, data=data)
+        self.assertRedirects(response, self.result_url)
+
+        self.assertEqual(self.mocked_eligibility_check_create.called, True)
+
+    def test_post_your_benefits_none(self):
+        """
+        TEST the citizen said yes to benefits on the details page and then didn't find their
+        benefit on the benefits page. i.e. their benefit isn't NASS or a passported benefit.
+        """
+        self._fill_in_prev_steps(current_step='your_benefit', without_reference=True)
+
+        data = self._get_your_benefits_none_post_data()
+
+        r1 = self.client.get(self.your_benefits_url)
+
+        self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
+        self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
+
+        response = self.client.post(self.your_benefits_url, data=data)
+        self.assertRedirects(response, self.your_capital_url)
+
+        self.assertEqual(self.mocked_eligibility_check_create.called, True)
+
+    def test_post_your_benefits_passported(self):
+        """
+        TEST the citizen has one passported benefit.
+        """
+        self._fill_in_prev_steps(current_step='your_benefit', without_reference=True)
+
+        data = self._get_your_benefits_passported_post_data()
+
+        r1 = self.client.get(self.your_benefits_url)
+
+        self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
+        self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
+
+        response = self.client.post(self.your_benefits_url, data=data)
+        self.assertRedirects(response, self.your_capital_url)
+
+        self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
     ## YOUR CAPITAL
 
