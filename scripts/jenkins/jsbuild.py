@@ -7,6 +7,7 @@ import time
 import shutil
 import re
 
+
 def run(command, ignore_rc=False, **kwargs):
     defaults = {
         'shell': True
@@ -108,6 +109,8 @@ if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
 
 # start Browserstack local tunnel agent
 print "Starting BrowserStackLocal tunnel"
+sys.stdout.flush()
+
 run_bg("%s/%s -force oX5YoppK12BMXdVAgWvz localhost,8001,0" % (
        bin_path, BROWSERSTACK_BIN_NAME))
 time.sleep(30)
