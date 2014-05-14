@@ -36,10 +36,10 @@ class YourFinancesFormMixin(EligibilityMixin, CheckerWizardMixin):
 
 class YourCapitalPropertyForm(CheckerWizardMixin, forms.Form):
     worth = MoneyField(
-        label=_(u"How much is it worth?"), min_value=0, required=True
+        label=_(u"How much is it worth?"), required=True
     )
     mortgage_left = MoneyField(
-        label=_(u"How much is left to pay on the mortgage?"), min_value=0,
+        label=_(u"How much is left to pay on the mortgage?"),
         required=True
     )
     owner = RadioBooleanField(
@@ -57,17 +57,16 @@ class YourCapitalPropertyForm(CheckerWizardMixin, forms.Form):
 
 class YourCapitalSavingsForm(CheckerWizardMixin, forms.Form):
     bank = MoneyField(
-        label=_(u"Do you have any money saved in a bank or building society?"),
-        min_value=0
+        label=_(u"Do you have any money saved in a bank or building society?")
     )
     investments = MoneyField(
-        label=_(u"Do you have any investments, shares, ISAs?"), min_value=0
+        label=_(u"Do you have any investments, shares, ISAs?")
     )
     valuable_items = MoneyField(
-        label=_(u"Do you have any valuable items over £££ each?"), min_value=0
+        label=_(u"Do you have any valuable items over £££ each?")
     )
     money_owed = MoneyField(
-        label=_(u"Do you have any money owed to you?"), min_value=0
+        label=_(u"Do you have any money owed to you?")
     )
 
 

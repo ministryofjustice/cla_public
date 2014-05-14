@@ -67,7 +67,12 @@ $border-colour: #C2C2C2;
     line-height: 32px;
     border: 1px solid $border-colour;
     text-align: center;
+    background: $white;
     @include box-sizing(border-box);
+
+    .FormBlock & {
+      background: $grey-4;      
+    }
   }
   .FormRow-prefix {
     border-right: 0;

@@ -20,8 +20,9 @@ casper.test.begin "Subtotal Calculator", (test) ->
   casper.thenEvaluate ->
     $("input[type=number]").val(0)
     $("input[value=0][type=radio]").click()
+    $("[type=submit][value=submit]").click()
   casper.then ->
-    @fill 'form', {}, true
+    # @fill 'form', {}, true
     @waitForUrl /.*your_income/
   casper.thenEvaluate ->
     $("input[type=number]").val(0)

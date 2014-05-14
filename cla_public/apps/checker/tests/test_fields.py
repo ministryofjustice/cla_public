@@ -55,7 +55,7 @@ class MoneyFieldTests(TestCase):
             print f.clean('41')
 
     def test_with_valid_validates(self):
-        f = MoneyField()
+        f = MoneyField(min_value=None, max_value=None)
 
         self.assertEqual(2000, f.clean('20'))
         self.assertEqual(-2000, f.clean('-20'))
