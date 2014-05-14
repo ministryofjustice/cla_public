@@ -107,6 +107,7 @@ if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
     run('cd "%s" && rm %s' % (bin_path, BROWSERSTACK_ZIP_NAME))
 
 # start Browserstack local tunnel agent
+print "Starting BrowserStackLocal tunnel"
 run_bg("%s/%s -force oX5YoppK12BMXdVAgWvz localhost,8001,0" % (
        bin_path, BROWSERSTACK_BIN_NAME))
 time.sleep(10)
