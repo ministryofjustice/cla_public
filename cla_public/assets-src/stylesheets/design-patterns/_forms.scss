@@ -16,6 +16,11 @@ $border-colour: #C2C2C2;
 .FormBlock-label {
   @include heading-24;
   margin-bottom: 10px;
+
+  &--inline {
+    margin-right: 10px;
+    float: left;
+  }
 }
 .FormBlock-actions {
   margin-top: -15px;
