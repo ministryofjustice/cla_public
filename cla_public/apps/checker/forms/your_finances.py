@@ -55,6 +55,9 @@ class YourCapitalPropertyForm(CheckerWizardMixin, forms.Form):
         label=_(u'What is your share of the property?'),
         min_value=0, max_value=100
     )
+    disputed = RadioBooleanField(
+        label=_(u"Is this property disputed?"), required=True
+    )
 
 
 class YourCapitalSavingsForm(CheckerWizardMixin, forms.Form):
@@ -188,7 +191,8 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
             return {
                 'mortgage_left': property.get('mortgage_left'),
                 'share': property.get('share'),
-                'value': property.get('worth')
+                'value': property.get('worth'),
+                'disputed': property.get('disputed')
             }
         properties = cleaned_data.get('property', [])
         return [_transform(p) for p in properties if p]

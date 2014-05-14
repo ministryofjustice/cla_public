@@ -107,6 +107,7 @@ class YourCapitalFormTestCase(CLATestCase):
             u'property-0-owner': u'1',
             u'property-0-share': u'100',
             u'property-0-worth': u'100000',
+            u'property-0-disputed': u'1',
             u'property-INITIAL_FORMS': u'0',
             u'property-MAX_NUM_FORMS': u'20',
             u'property-TOTAL_FORMS': u'1',
@@ -127,7 +128,10 @@ class YourCapitalFormTestCase(CLATestCase):
                 }
             },
             "property_set": [
-                {"share": 100, "value": 10000000, "mortgage_left": 5000000}
+                {
+                    "share": 100, "value": 10000000, "mortgage_left": 5000000,
+                    "disputed": True
+                }
             ],
             "partner": {
                 "savings": {

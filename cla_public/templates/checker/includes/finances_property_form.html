@@ -32,7 +32,7 @@
       <span class="Error-message">{{ error }}</span>
     {% endfor %}
   </p>
-  
+
   {% for choice in form.owner.field.choices %}
   <label for="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
     <input type="radio" name="{{ form.owner.html_name }}" id="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.owner.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
@@ -52,6 +52,22 @@
     {{ form.share|add_class:"FormRow-field--s" }}
     <span class="FormRow-suffix">%</span>
   </label>
+</div>
+
+<div class="FormRow cf{% if form.disputed.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.disputed.auto_id }}-label">
+  <p class="FormRow-label" id="{{ form.disputed.auto_id }}-label">
+    {{ form.disputed.label }}
+    {% for error in form.disputed.errors %}
+      <span class="Error-message">{{ error }}</span>
+    {% endfor %}
+  </p>
+
+  {% for choice in form.disputed.field.choices %}
+  <label for="{{ form.disputed.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
+    <input type="radio" name="{{ form.disputed.html_name }}" id="{{ form.disputed.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.disputed.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+    {{ choice.1 }}
+  </label>
+  {% endfor %}
 </div>
 
 <hr class="u-HorLine">

@@ -1,5 +1,5 @@
 module.exports = {
-  "Basic test" : function (browser) {
+  "Conditional content" : function (browser) {
     browser
       .url(browser.launch_url)
       .assert.title('Civil Legal Advice')
