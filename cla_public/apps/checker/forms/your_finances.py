@@ -10,7 +10,7 @@ import form_utils.forms
 
 from cla_common.forms import MultipleFormsForm
 
-from ..fields import RadioBooleanField, MoneyField
+from ..fields import RadioBooleanField, MoneyField, MoneyIntervalField
 
 from .base import CheckerWizardMixin, EligibilityMixin
 
@@ -245,7 +245,7 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
         return True
 
 class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
-    earnings = MoneyField(
+    earnings = MoneyIntervalField(
         label=_(u"Earnings per month"), min_value=0
     )
 

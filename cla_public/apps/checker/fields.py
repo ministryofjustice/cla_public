@@ -1,6 +1,7 @@
 from decimal import Decimal, InvalidOperation
 from django import forms
 from django.core import validators
+from django.forms import widgets
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -18,6 +19,46 @@ class RadioBooleanField(forms.TypedChoiceField):
         super(RadioBooleanField, self).__init__(*args, **kwargs)
 
 
+class MoneyIntervalWidget(widgets.MultiWidget):
+
+    def __init__(self, attrs=None):
+
+        intervals = [('per_week', 'Per Week'),
+                     ('per_month', 'Per Month'),
+                     ('per_year', 'Per Year')]
+
+        _widgets = (
+            widgets.NumberInput(attrs=attrs),
+            widgets.Select(attrs=attrs, choices=intervals)
+        )
+        super(MoneyIntervalWidget, self).__init__(_widgets, attrs)
+
+    def decompress(self, value):
+        if value:
+            return value.split("-")
+        return [None, None]
+
+
+class MoneyIntervalField(forms.MultiValueField):
+    widget = MoneyIntervalWidget
+
+    def __init__(self, max_value=9999999999, min_value=0, step=None, *args, **kwargs):
+        self.max_value, self.min_value, self.step = max_value, min_value, step or '0.01'
+
+        fields = [
+            forms.CharField(),
+            forms.CharField(),
+        ]
+
+        super(MoneyIntervalField, self).__init__(fields, *args, **kwargs)
+
+        if max_value is not None:
+            self.validators.append(validators.MaxValueValidator(max_value))
+        if min_value is not None:
+            self.validators.append(validators.MinValueValidator(min_value))
+
+    def compress(self, data_vals):
+        return "-".join(data_vals)
 
 
 class MoneyField(forms.Field):
