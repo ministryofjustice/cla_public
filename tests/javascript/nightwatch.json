@@ -1,13 +1,13 @@
 {
-  "src_folders" : ["tests/javascript/nightwatch/integration"],
-  "output_folder" : "reports",
+  "src_folders" : ["tests/javascript/nightwatch"],
+  "output_folder" : "reports/nightwatch",
   "custom_commands_path" : "",
   "custom_assertions_path" : "",
   "globals_path" : "",
 
   "selenium" : {
     "start_process" : true,
-    "server_path" : "/usr/local/Cellar/selenium-server-standalone/2.41.0/libexec/selenium-server-standalone-2.41.0.jar",
+    "server_path" : "/usr/local/Cellar/selenium-server-standalone/2.40.0/libexec/selenium-server-standalone-2.40.0.jar",
     "log_path" : "",
     "host" : "127.0.0.1",
     "port" : 4444
@@ -15,7 +15,7 @@
 
   "test_settings" : {
     "default" : {
-      "launch_url" : "http://localhost:8002",
+      "launch_url" : "http://localhost:8001",
       "selenium_port"  : 4444,
       "selenium_host"  : "localhost",
       "silent": true,
@@ -27,7 +27,7 @@
         "path" : ""
       },
       "desiredCapabilities": {
-        "browserName": "phantomjs",
+        "browserName": "${BROWSER}",
         "javascriptEnabled": true,
         "acceptSslCerts": true
       }
@@ -38,9 +38,92 @@
         "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar"
       },
       "desiredCapabilities": {
+        "project": "cla",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserstack.user": "janszumiec",
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz"
+      }
+    },
+    "jenkins-phantomjs": {
+      "launch_url" : "http://localhost:8001",
+      "selenium" : {
+        "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar"
+      },
+      "desiredCapabilities": {
         "browserName": "phantomjs",
         "javascriptEnabled": true,
         "acceptSslCerts": true
+      }
+    },
+    "jenkins-iphone-ios7": {
+      "output_folder" : "reports/iphone-ios7",
+      "launch_url" : "http://localhost:8001",
+      "selenium_port"  : 80,
+      "selenium_host"  : "hub.browserstack.com",
+      "selenium" : {
+        "start_process" : false,
+        "host" : "hub.browserstack.com",
+        "port" : 80
+      },
+      "desiredCapabilities": {
+        "project": "cla",
+        "platform": "MAC",
+        "browserName": "iPhone",
+        "device": "iPhone 5s",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserstack.user": "janszumiec",
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz",
+        "browserstack.local": true
+      }
+    },
+    "jenkins-ie9-win7": {
+      "output_folder" : "reports/ie9-win7",
+      "launch_url" : "http://localhost:8001",
+      "selenium_port"  : 80,
+      "selenium_host"  : "hub.browserstack.com",
+      "selenium" : {
+        "start_process" : false,
+        "host" : "hub.browserstack.com",
+        "port" : 80
+      },
+      "desiredCapabilities": {
+        "project": "cla",
+        "browser": "IE",
+        "browser_version": "9.0",
+        "os": "Windows",
+        "os_version": "7",
+        "resolution": "1024x768",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserstack.user": "janszumiec",
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz",
+        "browserstack.local": true
+      }
+    },
+    "jenkins-chrome34-win8.1": {
+      "output_folder" : "reposts/chrome34-win81",
+      "launch_url" : "http://localhost:8001",
+      "selenium_port"  : 80,
+      "selenium_host"  : "hub.browserstack.com",
+      "selenium" : {
+        "start_process" : false,
+        "host" : "hub.browserstack.com",
+        "port" : 80
+      },
+      "desiredCapabilities": {
+        "project": "cla",
+        "browser": "IE",
+        "browser_version": "9.0",
+        "os": "Windows",
+        "os_version": "7",
+        "resolution": "1024x768",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserstack.user": "janszumiec",
+        "browserstack.key": "oX5YoppK12BMXdVAgWvz",
+        "browserstack.local": true
       }
     }
   }
