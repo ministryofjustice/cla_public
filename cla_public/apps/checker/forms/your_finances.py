@@ -13,6 +13,7 @@ from cla_common.forms import MultipleFormsForm
 from ..fields import RadioBooleanField, MoneyField
 
 from .base import CheckerWizardMixin, EligibilityMixin
+import re
 
 
 OWNED_BY_CHOICES = [
@@ -95,6 +96,62 @@ class OnlyAllowExtraIfNoInitialFormSet(BaseFormSet):
             raise forms.ValidationError(_('Fill in all your property details'))
 
         return self.cleaned_data
+
+    def _get_form_index_from_prefix(self, key):
+        key = key.lstrip(self.management_form.prefix)
+        key = key.split('-')[-2]
+        idx = int(key)
+        return idx
+
+    def _get_non_formset_data(self):
+        return {k: v
+                      for k, v in self.data.items()
+                      if not re.match('%s-\d{1,2}-.*' % self.management_form.prefix,k ) }
+
+
+    def _get_formset_data(self):
+        return {k: v
+                        for k, v in self.data.items()
+                        if re.match('%s-\d{1,2}-.*' % self.management_form.prefix,k ) }
+
+    def _get_grouped_formset_data(self, exclude=None):
+        if not exclude:
+            exclude = []
+
+        grouped_formset_data = {}
+        for i,g in itertools.groupby(sorted(self._get_formset_data().items()),
+                                     lambda x:self._get_form_index_from_prefix(x[0])):
+            if i not in exclude:
+                grouped_formset_data[i] = list(g)
+        return grouped_formset_data
+
+
+    def remove_form(self, index):
+        # remove the requested form
+        self.forms.pop(index)
+
+
+        # get non formset and keep it so we can set it to self.data
+        other_data = self._get_non_formset_data()
+
+        # fix the numbering of each remaining formset if required
+        for i, (k, v) in enumerate(self._get_grouped_formset_data(exclude=[index]).items()):
+            v = [(x[0].replace('-%s-' % k, '-%s-' % i), x[1]) for x in v]
+            other_data.update(dict(v))
+
+        self.data = other_data
+
+
+        total_count_name = '%s-%s' % (self.management_form.prefix, TOTAL_FORM_COUNT)
+        initial_count_name = '%s-%s' % (self.management_form.prefix, INITIAL_FORM_COUNT)
+        self.data[total_count_name] = self.management_form.cleaned_data[TOTAL_FORM_COUNT] - 1
+        self.data[initial_count_name] = self.management_form.cleaned_data[INITIAL_FORM_COUNT] - 1
+
+        # remove the action from data
+        self.data.pop('submit', None)
+
+        # regenerate forms using updated data
+        self.forms = [self._construct_form(i) for i in xrange(self.total_form_count())]
 
     def add_form(self, **kwargs):
         tfc = self.total_form_count()
@@ -231,10 +288,19 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
         }
 
 
-    def add_property_if_required(self):
-        if self.data.get('submit') == 'add-property':
-            self.form_dict()['property'].add_form()
-            return True
+    def process_actions(self):
+        action = self.data.get('submit')
+        property_formset = self.form_dict()['property']
+        if action == 'add-property':
+            property_formset.add_form()
+        if action and 'remove-property' in action:
+            index = action.split('-')[-1]
+            try:
+                index = int(index)
+                property_formset.remove_form(index)
+            except ValueError:
+                pass
+        return action != 'submit'
 
     @property
     def show_errors(self):
