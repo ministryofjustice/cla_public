@@ -302,14 +302,14 @@ class YourCapitalFormTestCase(CLATestCase):
             u'property-1-worth': u'100000',
             u'property-1-disputed': u'1',
             u'property-2-mortgage_left': u'10000',
-            u'property-2-owner': u'2',
-            u'property-2-share': u'200',
+            u'property-2-owner': u'1',
+            u'property-2-share': u'100',
             u'property-2-worth': u'200000',
             u'property-2-disputed': u'0',
             u'property-INITIAL_FORMS': u'0',
             u'property-MAX_NUM_FORMS': u'20',
             u'property-TOTAL_FORMS': u'3',
-            u'submit': u'remove-property-2',
+            u'submit': u'remove-property-1',
 
             }
         data.update(more_data)
@@ -319,7 +319,7 @@ class YourCapitalFormTestCase(CLATestCase):
         property_forms_after_process_actions = form.form_dict()['property'].total_form_count()
         self.assertTrue(form.is_valid())
         self.assertLess(property_forms_after_process_actions, property_forms_before_process_action)
-        self.assertEqual(form.cleaned_data['property'][1]['worth'], more_data[u'property-2-worth'])
+        self.assertEqual(form.cleaned_data['property'][1]['worth'], int(more_data[u'property-2-worth']) * 100)
 
     # TEST Calculated fields
 
