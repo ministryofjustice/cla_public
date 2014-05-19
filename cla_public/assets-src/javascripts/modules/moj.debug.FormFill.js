@@ -16,6 +16,7 @@
 
     cacheEls: function () {
       this.$el = $(this.el);
+      this.$form = ('#content form', this.$el);
       this.step = $('#id_checker_wizard-current_step').val();
     },
 
@@ -54,7 +55,7 @@
           this.fillBasic();
       }
 
-      $('form').find('[type=submit]').focus();
+      this.$form.find('[type=submit]').focus();
     },
 
     fillBasic: function () {
@@ -96,7 +97,7 @@
     fillCapital: function () {
       $('input[type=number]').val(0);
       $('input[value=1][name=property-0-owner]').click();
-      $('input[value=0][name=your_other_properties-other_properties]').click();
+      $('input[value=0][name=property-0-disputed]').click();
     },
 
     fillIncome: function (eligible) {

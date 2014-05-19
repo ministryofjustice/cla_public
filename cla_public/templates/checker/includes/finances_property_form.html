@@ -2,7 +2,7 @@
 
 <div class="clearfix">
   <h2 id="{{ form.prefix }}-label" class="FormBlock-label FormBlock-label--inline">{% trans "Your" %} {{ count|ordinal_from_count:total }} {% trans "property" %}</h2>
-  
+
   {% if count > 1 %}
     <button class="Button--text" type="submit" name="submit" value="remove-property-{{ count|add:-1 }}">{% trans "Remove property" %}</button>
   {% endif %}
@@ -57,21 +57,6 @@
     {% endfor %}
   </div>
 
-  <div class="FormRow cf{% if form.share.errors and show_errors %} Error{% endif %}">
-    <label for="{{ form.share.id_for_label }}" id="{{ form.share.auto_id }}-label">
-      <span class="FormRow-label">
-        {{ form.share.label }}
-        {% if show_errors %}
-          {% for error in form.share.errors %}
-            <span class="Error-message">{{ error }}</span>
-          {% endfor %}
-        {% endif %}
-      </span>
-      {{ form.share|add_class:"FormRow-field--s" }}
-      <span class="FormRow-suffix">%</span>
-    </label>
-  </div>
-
   <div class="FormRow cf{% if form.disputed.errors and show_errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.disputed.auto_id }}-label">
     <p class="FormRow-label" id="{{ form.disputed.auto_id }}-label">
       {{ form.disputed.label }}
@@ -89,4 +74,21 @@
       </label>
     {% endfor %}
   </div>
+
+  <div class="FormRow cf{% if form.share.errors and show_errors %} Error{% endif %}">
+    <label for="{{ form.share.id_for_label }}" id="{{ form.share.auto_id }}-label">
+      <span class="FormRow-label">
+        {{ form.share.label }}
+        {% if show_errors %}
+          {% for error in form.share.errors %}
+            <span class="Error-message">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </span>
+      {{ form.share|add_class:"FormRow-field--s" }}
+      <span class="FormRow-suffix">%</span>
+    </label>
+  </div>
+
 </div>
+
