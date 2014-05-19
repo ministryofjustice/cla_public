@@ -290,16 +290,17 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 
     def process_actions(self):
         action = self.data.get('submit')
-        property_formset = self.form_dict()['property']
-        if action == 'add-property':
-            property_formset.add_form()
-        if action and 'remove-property' in action:
-            index = action.split('-')[-1]
-            try:
-                index = int(index)
-                property_formset.remove_form(index)
-            except ValueError:
-                pass
+        property_formset = self.form_dict().get('property')
+        if property_formset:
+            if action == 'add-property':
+                property_formset.add_form()
+            if action and 'remove-property' in action:
+                index = action.split('-')[-1]
+                try:
+                    index = int(index)
+                    property_formset.remove_form(index)
+                except ValueError:
+                    pass
         return action != 'submit'
 
     @property
