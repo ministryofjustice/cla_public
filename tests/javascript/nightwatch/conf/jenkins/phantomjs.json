@@ -1,6 +1,6 @@
 {
   "src_folders" : ["${SRC_FOLDERS}"],
-  "output_folder" : "${OUTPUT_FOLDER}",
+  "output_folder" : "reports/phantomjs",
 
   "selenium" : {
     "start_process" : true,
@@ -10,6 +10,7 @@
 
   "test_settings" : {
     "default": {
+      "silent": true,
       "launch_url" : "${LAUNCH_URL}",
       "desiredCapabilities": {
         "browserName": "phantomjs"
