@@ -1,5 +1,5 @@
 from django import template
-from django.contrib.humanize.templatetags.humanize import ordinal
+from num2words import num2words
 
 register = template.Library()
 
@@ -7,4 +7,5 @@ register = template.Library()
 def ordinal_from_count(count, total):
     if total == 1:
         return ""
-    return ordinal(count)
+    # hard coded to English for now, not sure how we'd handle Welsh
+    return num2words(count, ordinal=True, lang='en_GB')
