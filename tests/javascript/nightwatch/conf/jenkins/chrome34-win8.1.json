@@ -10,10 +10,11 @@
 
   "test_settings" : {
     "default": {
+      "silent": true,
       "launch_url" : "${LAUNCH_URL}",
       "selenium_port"  : 80,
       "selenium_host"  : "hub.browserstack.com",
-      
+
       "desiredCapabilities": {
         "project": "${PROJECT}",
         "browser": "Chrome",
