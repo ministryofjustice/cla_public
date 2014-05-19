@@ -90,11 +90,8 @@ run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 nw_env = {
     'src_folders': 'tests/javascript/nightwatch',
-    'output_folder': 'reports/phantomjs',
     'launch_url': 'http://localhost:8001',
     'project': 'cla',
-    'bs_user': 'janszumiec',
-    'bs_key': 'oX5YoppK12BMXdVAgWvz'
 }
 nw_env_str = ' '.join(["%s=%s" % (k.upper(), v) for k, v in nw_env.items()])
 
