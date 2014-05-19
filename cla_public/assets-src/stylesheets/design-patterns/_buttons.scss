@@ -29,4 +29,20 @@
       color: $white;
     }
   }
+  &--text {
+    @include button(transparent);
+    @include core-19;
+    color: $link-colour;
+    text-decoration: underline;
+    
+    &:visited {
+      color: $link-visited-colour;
+    }
+    &:hover {
+      color: $link-hover-colour;
+    }
+    &:active {
+      color: $link-active-colour;
+    }
+  }
 }

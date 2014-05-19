@@ -1,6 +1,6 @@
 from api.client import connection
 from django.forms.util import ErrorList
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView
@@ -140,9 +140,8 @@ class CheckerWizard(NamedUrlSessionWizardView):
 
     def get_form(self, step=None, data=None, files=None):
         form = super(CheckerWizard,self).get_form(step,data,files)
-        if isinstance(form, YourCapitalForm):
-            form.show_errors
-            if form.add_property_if_required():
+        if isinstance(form, YourCapitalForm) and data:
+            if form.process_actions():
                 self.redirect_to_self = True
         return form
 
