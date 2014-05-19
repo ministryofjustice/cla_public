@@ -89,7 +89,7 @@ public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
 run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 nw_env = {
-    'src_folders': 'tests/javascript/nightwatch/integration',
+    'src_folders': 'tests/javascript/nightwatch',
     'output_folder': 'reports/phantomjs',
     'launch_url': 'http://localhost:8001',
     'project': 'cla',
@@ -123,9 +123,9 @@ time.sleep(30)
 # separating each set of browser tests from each other.
 bs_processes = []
 for c in BROWSERSTACK_BROWSER_CONFS:
-    dest_dir = 'tests/javascript/nightwatch/integration-%s' % c
+    dest_dir = 'tests/javascript/nightwatch-%s' % c
     shutil.rmtree(dest_dir, ignore_errors=True)
-    shutil.copytree('tests/javascript/nightwatch/integration', dest_dir)
+    shutil.copytree('tests/javascript/nightwatch', dest_dir)
 
     for root, dirs, files in os.walk(dest_dir):
         for f in files:
