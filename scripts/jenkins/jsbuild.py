@@ -3,7 +3,6 @@ import argparse
 import subprocess
 import os
 import sys
-import time
 import shutil
 import re
 from streamreader import NonBlockingStreamReader as NBSR
@@ -36,10 +35,12 @@ run('pkill -f envs/cla_.*integration', ignore_rc=True)
 
 PROJECT_NAME = "cla_public"
 BACKEND_PROJECT_NAME = "cla_backend"
-SELENIUM_JAR_URL = "http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar"
+SELENIUM_JAR_URL = ("http://selenium-release.storage.googleapis.com/"
+                    "2.41/selenium-server-standalone-2.41.0.jar")
 SELENIUM_JAR_NAME = "selenium-server-standalone-2.41.0.jar"
-BROWSERSTACK_ZIP_URL = "https://www.browserstack.com/browserstack-local/BrowserStackLocal-linux-x64.zip"
 BROWSERSTACK_ZIP_NAME = "BrowserStackLocal-linux-x64.zip"
+BROWSERSTACK_ZIP_URL = ("https://www.browserstack.com/browserstack-local/"
+                        + BROWSERSTACK_ZIP_NAME)
 BROWSERSTACK_BIN_NAME = "BrowserStackLocal"
 BROWSERSTACK_BROWSER_CONFS = [
     'chrome34-win8.1',
@@ -89,14 +90,16 @@ backend_process = run_bg(
      "test_provider.json test_auth_clients.json --addrport 8000 --noinput "
      "--settings=cla_backend.settings.jenkins") % (
         backend_workspace.replace(' ', '\ '), backend_bin_path),
-     stdout=FNULL
+    stdout=FNULL
 )
-run("wget http://localhost:8000/admin/ -t 20 --retry-connrefused --waitretry=2 -T 60")
+run("wget http://localhost:8000/admin/ -t 20 "
+    "--retry-connrefused --waitretry=2 -T 60")
 
 public_process = run_bg(
     "%s/python manage.py runserver 8001" % bin_path,
     stdout=FNULL)
-run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
+run("wget http://localhost:8001/ -t 20 "
+    "--retry-connrefused --waitretry=2 -T 60")
 
 nw_env = {
     'src_folders': 'tests/javascript/nightwatch',
@@ -106,7 +109,8 @@ nw_env = {
 nw_env_str = ' '.join(["%s=%s" % (k.upper(), v) for k, v in nw_env.items()])
 
 # phantom
-run("%s ./nightwatch -c tests/javascript/nightwatch/conf/jenkins/phantomjs.json" % nw_env_str)
+run(("%s ./nightwatch -c "
+     "tests/javascript/nightwatch/conf/jenkins/phantomjs.json") % nw_env_str)
 
 # Ensure BrowserStackLocal is installed
 if not os.path.isfile("%s/%s" % (bin_path, BROWSERSTACK_BIN_NAME)):
