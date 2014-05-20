@@ -93,7 +93,9 @@ backend_process = run_bg(
 )
 run("wget http://localhost:8000/admin/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
-public_process = run_bg( "%s/python manage.py runserver 8001" % bin_path)
+public_process = run_bg(
+    "%s/python manage.py runserver 8001" % bin_path,
+    stdout=FNULL)
 run("wget http://localhost:8001/ -t 20 --retry-connrefused --waitretry=2 -T 60")
 
 nw_env = {
