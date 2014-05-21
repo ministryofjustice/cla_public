@@ -9,8 +9,7 @@ from django.forms.formsets import formset_factory, BaseFormSet, \
 import form_utils.forms
 
 from cla_common.forms import MultipleFormsForm
-
-from ..fields import RadioBooleanField, MoneyField, MoneyIntervalField
+from ..fields import RadioBooleanField, MoneyField, MoneyIntervalField, MoneyInterval
 
 from .base import CheckerWizardMixin, EligibilityMixin
 
@@ -287,8 +286,15 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
         self.forms_list = new_forms_list.items()
 
     def _get_total_earnings(self, cleaned_data):
-        own_income, partner_income = self.get_incomes(cleaned_data)
-        return sum(itertools.chain(own_income.values(), partner_income.values()))
+        total = 0
+        for i in self.get_incomes(cleaned_data):
+            total += i['other_income']
+            if isinstance( i['earnings'], dict):
+                total += i['earnings']['per_month']
+            else:
+                total += i['earnings']
+
+        return total
 
     @property
     def total_earnings(self):
@@ -304,11 +310,13 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
         return cleaned_data
 
     def get_income(self, key, cleaned_data):
-        return {
+        income = {
             'earnings': cleaned_data.get(key, {}).get('earnings', 0),
             'other_income': cleaned_data.get(key, {}).get('other_income', 0),
             'self_employed': cleaned_data.get(key, {}).get('self_employed', False)
         }
+
+        return income
 
     def get_incomes(self, cleaned_data):
         your_income = self.get_income('your_income', cleaned_data)
@@ -324,6 +332,7 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
         data = self.cleaned_data
         your_income, partner_income = self.get_incomes(data)
+
         dependants = self.get_dependants(data)
         post_data = {
             'dependants_young': dependants.get('dependants_young', 0),
