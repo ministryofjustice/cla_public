@@ -6,7 +6,7 @@
 
 {% block checker_content %}
 
-  <form action="." method="POST" class="js-LabelSelect js-LabelFocus">
+  <form action="." method="POST">
     {% csrf_token %}
     {{ wizard.management_form }}
     {{ form.non_field_errors }}
@@ -22,8 +22,8 @@
         {# <span class="Error-message">{{ error }}</span>  #}
       {% endfor %}
       {% for category in form.fields.category.choices %}
-        <div class="FormRow FormRow--group{% if category.2.description %} FormRow--details{% endif %}{% if form.category.errors|any_true %} Error{% endif %}">
-          <label for="{{ form.category.auto_id }}_{{ forloop.counter0 }}" class="FormRow-label{% cycle ' FormRow-label--odd' '' %}">
+        <div class="FormRow{% if category.2.description %} FormRow--details{% endif %}{% if form.category.errors|any_true %} Error{% endif %}">
+          <label for="{{ form.category.auto_id }}_{{ forloop.counter0 }}" class="">
             <input type="radio" name="{{ form.category.html_name }}" id="{{ form.category.auto_id }}_{{ forloop.counter0 }}" value="{{ category.0 }}" {% if category.0 == form.category.value %}checked="checked"{% endif %}{% if forloop.counter0|add:1 == form.fields.category.choices|length %} data-conditional-el="conditional-{{ category.0 }}"{% endif %} class="js-Conditional">
             {{ category.1 }}
           </label>
