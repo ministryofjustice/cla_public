@@ -32,11 +32,10 @@ class MoneyIntervalWidget(widgets.MultiWidget):
         )
         super(MoneyIntervalWidget, self).__init__(_widgets, attrs)
 
-#     def decompress(self, value):
-#         if value:
-#             x,y = value.split("-")
-#             return [x,y]
-#         return [None, None]
+    def decompress(self, value):
+        if value and isinstance(value, MoneyInterval):
+            return [value.per_interval_value, value.interval_period]
+        return [None, None]
 
     def format_output(self, rendered_widgets):
 
