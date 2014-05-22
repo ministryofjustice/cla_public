@@ -361,11 +361,13 @@ class YourIncomeFormTestCase(CLATestCase):
 
     def _get_default_post_data(self):
         return {
-            u'your_income-earnings': u'222',
+            u'your_income-earnings_0': u'222',
+            u'your_income-earnings_1': u'per_month',
             u'your_income-other_income': u'333',
             u'your_income-self_employed': u'0',
 
-            u'partners_income-earnings': u'444',
+            u'partners_income-earnings_0': u'444',
+            u'partners_income-earnings_1': u'per_month',
             u'partners_income-other_income': u'555',
             u'partners_income-self_employed': u'1',
 
@@ -377,14 +379,20 @@ class YourIncomeFormTestCase(CLATestCase):
         return {
             "you": {
                 "income": {
-                    "earnings": 22200,
+                    "earnings":  {'earnings_interval_period': u'per_month',
+                                  'earnings_per_interval_value': 22200,
+                                  'per_month': 22200
+                                 },
                     "other_income": 33300,
                     "self_employed": False,
                 }
             },
             "partner": {
                 "income": {
-                    "earnings": 44400,
+                    "earnings":  {'earnings_interval_period': u'per_month',
+                                  'earnings_per_interval_value': 44400,
+                                  'per_month': 44400
+                                 },
                     "other_income": 55500,
                     "self_employed": True,
                 }
@@ -480,7 +488,8 @@ class YourIncomeFormTestCase(CLATestCase):
         """
         form = YourIncomeForm(reference=self.reference, data=self._get_default_post_data())
         self.assertTrue(form.get_form_by_prefix('your_income').is_valid())
-        self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['earnings'], 22200)
+        earnings_dict = {'earnings_interval_period': u'per_month', 'earnings_per_interval_value': 22200, 'per_month': 22200}
+        self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['earnings'], earnings_dict)
         self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['other_income'], 33300)
         self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['self_employed'], False)
 
@@ -490,7 +499,8 @@ class YourIncomeFormTestCase(CLATestCase):
         """
         form = YourIncomeForm(reference=self.reference, data=self._get_default_post_data())
         self.assertTrue(form.get_form_by_prefix('partners_income').is_valid())
-        self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['earnings'], 44400)
+        earnings_dict = {'earnings_interval_period': u'per_month', 'earnings_per_interval_value': 44400, 'per_month': 44400}
+        self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['earnings'], earnings_dict)
         self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['other_income'], 55500)
         self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['self_employed'], True)
 
@@ -503,7 +513,7 @@ class YourIncomeFormTestCase(CLATestCase):
                     # your savings is mandatory
                     {
                         'data': {
-                            'your_income-earnings': None,
+                            'your_income-earnings_0': None,
                             'your_income-other_income': None,
                             'your_income-self_employed': None
                         },
@@ -515,7 +525,7 @@ class YourIncomeFormTestCase(CLATestCase):
                     },
                     {
                         'data': {
-                            'your_income-earnings': -1,
+                            'your_income-earnings_0': -1,
                             'your_income-other_income': -1,
                         },
                         'error': {
