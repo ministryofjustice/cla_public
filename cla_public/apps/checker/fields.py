@@ -33,8 +33,8 @@ class MoneyIntervalWidget(widgets.MultiWidget):
         super(MoneyIntervalWidget, self).__init__(_widgets, attrs)
 
     def decompress(self, value):
-        if value and isinstance(value, MoneyInterval):
-            return [value.per_interval_value, value.interval_period]
+        if value and isinstance(value, dict):
+            return [value['earnings_per_interval_value'], value['earnings_interval_period']]
         return [None, None]
 
     def format_output(self, rendered_widgets):
@@ -50,7 +50,7 @@ class MoneyIntervalWidget(widgets.MultiWidget):
 class MoneyIntervalField(forms.MultiValueField):
     widget = MoneyIntervalWidget
 
-    def __init__(self, max_value=9999999999, min_value=0, step=None, *args, **kwargs):
+    def __init__(self, max_value=2500000, min_value=0, step=None, *args, **kwargs):
         self.max_value, self.min_value, self.step = max_value, min_value, step or '0.01'
 
         fields = [
@@ -78,7 +78,6 @@ class MoneyIntervalField(forms.MultiValueField):
                      'per_month' :  mi.as_monthly()
                    }
         return None
-
 
     def widget_attrs(self, widget):
         attrs = super(MoneyIntervalField, self).widget_attrs(widget)
