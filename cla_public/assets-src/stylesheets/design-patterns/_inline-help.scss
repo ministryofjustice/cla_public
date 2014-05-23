@@ -24,6 +24,21 @@ $help-bg-colour: $yellow-25;
   }
 }
 
+.Help-text {
+  display: none;
+  color: $grey-1;
+  @include core-19;
+  margin: 0;
+  padding: 0 0 0 25px;
+  background-repeat: no-repeat;
+  background-position: left 3px;
+  @include svg-bg("../images/icons/info");
+
+  .Help & {
+    display: block;
+  }
+}
+
 .FormBlock--grey {
  .Help {
     margin: {
