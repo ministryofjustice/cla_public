@@ -73,8 +73,8 @@ class MoneyIntervalField(forms.MultiValueField):
             mi = MoneyInterval(interval_period=data_vals[1])
             mi.set_as_pounds(per_interval_value=data_vals[0])
             # a serialiser has been deemed too much
-            return { 'earnings_interval_period' : mi.interval_period,
-                     'earnings_per_interval_value' : mi.per_interval_value,
+            return { 'interval_period' : mi.interval_period,
+                     'per_interval_value' : mi.per_interval_value,
                      'per_month' :  mi.as_monthly()
                    }
         return None

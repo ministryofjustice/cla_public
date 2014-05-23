@@ -94,8 +94,8 @@ ELIGIBILITY_CHECK_UPDATE_FROM_YOUR_INCOME = {
     },
     "partner": {
         "income": {
-            "earnings": {'earnings_interval_period': u'per_week',
-                         'earnings_per_interval_value': 44400,
+            "earnings": {'interval_period': u'per_week',
+                         'per_interval_value': 44400,
                          'per_month': 44400
                         },
             "other_income": 555,

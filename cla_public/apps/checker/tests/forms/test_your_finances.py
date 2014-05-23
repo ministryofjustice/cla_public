@@ -379,8 +379,8 @@ class YourIncomeFormTestCase(CLATestCase):
         return {
             "you": {
                 "income": {
-                    "earnings":  {'earnings_interval_period': u'per_month',
-                                  'earnings_per_interval_value': 22200,
+                    "earnings":  {'interval_period': u'per_month',
+                                  'per_interval_value': 22200,
                                   'per_month': 22200
                                  },
                     "other_income": 33300,
@@ -389,8 +389,8 @@ class YourIncomeFormTestCase(CLATestCase):
             },
             "partner": {
                 "income": {
-                    "earnings":  {'earnings_interval_period': u'per_month',
-                                  'earnings_per_interval_value': 44400,
+                    "earnings":  {'interval_period': u'per_month',
+                                  'per_interval_value': 44400,
                                   'per_month': 44400
                                  },
                     "other_income": 55500,
@@ -488,7 +488,7 @@ class YourIncomeFormTestCase(CLATestCase):
         """
         form = YourIncomeForm(reference=self.reference, data=self._get_default_post_data())
         self.assertTrue(form.get_form_by_prefix('your_income').is_valid())
-        earnings_dict = {'earnings_interval_period': u'per_month', 'earnings_per_interval_value': 22200, 'per_month': 22200}
+        earnings_dict = {'interval_period': u'per_month', 'per_interval_value': 22200, 'per_month': 22200}
         self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['earnings'], earnings_dict)
         self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['other_income'], 33300)
         self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['self_employed'], False)
@@ -499,7 +499,7 @@ class YourIncomeFormTestCase(CLATestCase):
         """
         form = YourIncomeForm(reference=self.reference, data=self._get_default_post_data())
         self.assertTrue(form.get_form_by_prefix('partners_income').is_valid())
-        earnings_dict = {'earnings_interval_period': u'per_month', 'earnings_per_interval_value': 44400, 'per_month': 44400}
+        earnings_dict = {'interval_period': u'per_month', 'per_interval_value': 44400, 'per_month': 44400}
         self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['earnings'], earnings_dict)
         self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['other_income'], 55500)
         self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['self_employed'], True)
