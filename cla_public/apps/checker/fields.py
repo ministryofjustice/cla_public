@@ -70,8 +70,7 @@ class MoneyIntervalField(forms.MultiValueField):
             #value = int(Decimal(data_vals[0]).quantize(ZERO_DP))*100
             #compressed = "%s-%s" % (value, data_vals[1])
             #return compressed
-            mi = MoneyInterval(interval_period=data_vals[1])
-            mi.set_as_pounds(per_interval_value=data_vals[0])
+            mi = MoneyInterval(data_vals[1], pounds=data_vals[0])
             # a serialiser has been deemed too much
             return { 'interval_period' : mi.interval_period,
                      'per_interval_value' : mi.per_interval_value,
