@@ -27,3 +27,5 @@ INTERNAL_IPS = iptools.IpRangeList(
     '85.118.8.128/26',
     '127.0.0.1'
 )
+
+GA_ID = 'UA-37377084-13'

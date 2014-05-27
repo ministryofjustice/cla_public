@@ -110,7 +110,6 @@ class YourCapitalFormTestCase(CLATestCase):
             u'property-INITIAL_FORMS': u'0',
             u'property-MAX_NUM_FORMS': u'20',
             u'property-TOTAL_FORMS': u'1',
-            u'your_other_properties-other_properties': u'0',
             u'your_savings-bank': u'100',
             u'your_savings-investments': u'100',
             u'your_savings-money_owed': u'100',
@@ -262,6 +261,65 @@ class YourCapitalFormTestCase(CLATestCase):
             self.assertFalse(form.is_valid())
             self.assertEqual(form.errors['your_savings'], error_data['error'])
 
+    def test_add_new_property(self):
+        data = self._get_default_post_data()
+        data['submit'] = 'add-property'
+        form = YourCapitalForm(data=data)
+        property_forms_before_process_action = form.form_dict()['property'].total_form_count()
+        form.process_actions()
+        property_forms_after_process_actions = form.form_dict()['property'].total_form_count()
+        self.assertFalse(form.is_valid())
+        self.assertGreater(property_forms_after_process_actions, property_forms_before_process_action)
+
+    def test_remove_property_last(self):
+        data = self._get_default_post_data()
+        more_data = {
+            u'property-1-mortgage_left': u'20000',
+            u'property-1-owner': u'1',
+            u'property-1-share': u'100',
+            u'property-1-worth': u'200000',
+            u'property-1-disputed': u'1',
+            u'property-INITIAL_FORMS': u'0',
+            u'property-MAX_NUM_FORMS': u'20',
+            u'property-TOTAL_FORMS': u'2',
+            u'submit': u'remove-property-1',
+
+        }
+        data.update(more_data)
+        form = YourCapitalForm(data=data)
+        property_forms_before_process_action = form.form_dict()['property'].total_form_count()
+        form.process_actions()
+        property_forms_after_process_actions = form.form_dict()['property'].total_form_count()
+        self.assertTrue(form.is_valid())
+        self.assertLess(property_forms_after_process_actions, property_forms_before_process_action)
+
+    def test_remove_property_middle(self):
+        data = self._get_default_post_data()
+        more_data = {
+            u'property-1-mortgage_left': u'20000',
+            u'property-1-owner': u'1',
+            u'property-1-share': u'100',
+            u'property-1-worth': u'100000',
+            u'property-1-disputed': u'1',
+            u'property-2-mortgage_left': u'10000',
+            u'property-2-owner': u'1',
+            u'property-2-share': u'100',
+            u'property-2-worth': u'200000',
+            u'property-2-disputed': u'0',
+            u'property-INITIAL_FORMS': u'0',
+            u'property-MAX_NUM_FORMS': u'20',
+            u'property-TOTAL_FORMS': u'3',
+            u'submit': u'remove-property-1',
+
+            }
+        data.update(more_data)
+        form = YourCapitalForm(data=data)
+        property_forms_before_process_action = form.form_dict()['property'].total_form_count()
+        form.process_actions()
+        property_forms_after_process_actions = form.form_dict()['property'].total_form_count()
+        self.assertTrue(form.is_valid())
+        self.assertLess(property_forms_after_process_actions, property_forms_before_process_action)
+        self.assertEqual(form.cleaned_data['property'][1]['worth'], int(more_data[u'property-2-worth']) * 100)
 
     # TEST Calculated fields
 

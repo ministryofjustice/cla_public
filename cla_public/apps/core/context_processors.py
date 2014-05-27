@@ -1,3 +1,6 @@
+from django.conf import settings
+
+
 def globals(request):
   return {
     'app_title': 'Civil Legal Advice',
@@ -5,5 +8,5 @@ def globals(request):
     'phase': 'alpha',
     'product_type': 'service',
     'feedback_url': '#',
-    'ga_id': '',
+    'ga_id': settings.GA_ID,
   }
