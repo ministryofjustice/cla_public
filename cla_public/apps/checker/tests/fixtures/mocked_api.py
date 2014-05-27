@@ -84,8 +84,8 @@ ELIGIBILITY_CHECK_UPDATE_FROM_YOUR_INCOME = {
     ],
     "you": {
         "income": {
-            "earnings": {'earnings_interval_period': u'per_4week',
-                         'earnings_per_interval_value': 22200,
+            "earnings": {'interval_period': u'per_4week',
+                         'per_interval_value': 22200,
                          'per_month': 22200
                         },
             "other_income": 333,
