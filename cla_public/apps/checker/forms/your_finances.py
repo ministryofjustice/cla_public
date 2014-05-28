@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 import itertools
 
 from django import forms
@@ -9,10 +10,11 @@ from django.forms.formsets import formset_factory, BaseFormSet, \
 import form_utils.forms
 
 from cla_common.forms import MultipleFormsForm
-from ..fields import RadioBooleanField, MoneyField, MoneyIntervalField, MoneyInterval
+from cla_common.money_interval.forms import MoneyIntervalField
+
+from ..fields import RadioBooleanField, MoneyField
 
 from .base import CheckerWizardMixin, EligibilityMixin
-import re
 
 
 OWNED_BY_CHOICES = [
