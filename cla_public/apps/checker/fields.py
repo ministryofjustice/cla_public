@@ -3,11 +3,11 @@ from django import forms
 from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 
-
 BOOL_CHOICES = ((1, _('Yes')), (0, _('No')))
 
 TWO_DP = Decimal('.01')
 ZERO_DP = Decimal('1')
+
 
 class RadioBooleanField(forms.TypedChoiceField):
     def __init__(self, *args, **kwargs):
@@ -16,8 +16,6 @@ class RadioBooleanField(forms.TypedChoiceField):
         kwargs['choices'] = kwargs.pop('choices', BOOL_CHOICES)
 
         super(RadioBooleanField, self).__init__(*args, **kwargs)
-
-
 
 
 class MoneyField(forms.Field):

@@ -114,10 +114,12 @@ class CheckerWizardTestCase(CLATestCase):
     def _get_your_income_post_data(self):
         return {
             "checker_wizard-current_step": "your_income",
-            "your_income-earnings": [100],
+            "your_income-earnings_0": [100],
+            "your_income-earnings_1": ['per_month'],
             "your_income-other_income": [100],
             "your_income-self_employed": [0],
-            "partners_income-earnings": [100],
+            "partners_income-earnings_0": [100],
+            "partners_income-earnings_1": ['per_month'],
             "partners_income-other_income": [100],
             "partners_income-self_employed": [0],
             "dependants-dependants_old": [0],
