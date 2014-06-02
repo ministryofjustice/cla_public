@@ -24,7 +24,7 @@ class YourBenefitsForm(EligibilityMixin, CheckerWizardMixin, forms.Form):
     )
 
     nass_benefit = forms.BooleanField(
-           label=_(u'immigration/asylum'), required=False
+           label=_(u'Immigration/asylum'), required=False
     )
 
     none_of_above = forms.BooleanField(
