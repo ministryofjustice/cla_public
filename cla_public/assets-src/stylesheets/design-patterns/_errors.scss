@@ -70,6 +70,7 @@ $fieldset-error-bg-colour: #FDF8F5;
 }
 
 .FormBlock--grey {
+  position: relative;
   &.FieldsetError {
     background-color: $fieldset-error-bg-colour;
   }   
