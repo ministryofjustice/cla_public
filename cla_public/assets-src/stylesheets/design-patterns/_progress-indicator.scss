@@ -10,6 +10,9 @@ $active-background-colour: #2C8CC5;
   padding: 0;
   margin: 40px 0;
   display: table;
+  @include ie-lte(7) {
+    display: block;
+  }
 
   .ProgressIndicator-step {
     @include core-19;
@@ -26,6 +29,13 @@ $active-background-colour: #2C8CC5;
       repeat: no-repeat;
     }
     @include svg-bg("../images/progress-indicator/chevron");
+
+    @include ie-lte(7) {
+      display: block;
+      float: left;
+      padding-top: 11px;
+      height: 40px;
+    }
 
     .ProgressIndicator-tick {
       background: {
