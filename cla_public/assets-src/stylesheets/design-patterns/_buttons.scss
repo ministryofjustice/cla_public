@@ -1,6 +1,5 @@
-.Button {
+@mixin cla-button() {
   @include button;
-  @include border-radius(3px);
   @include core-19;
   
   &:link {
@@ -13,7 +12,6 @@
   // modifiers
   &--secondary {
     @include button($grey-3);
-    @include border-radius(3px);
     @include core-19;
 
     &:link {
@@ -22,7 +20,6 @@
   }
   &--warning {
     @include button($red);
-    @include border-radius(3px);
     @include core-19;
 
     &:link {
@@ -44,5 +41,16 @@
     &:active {
       color: $link-active-colour;
     }
+  }
+}
+
+.Button {
+  @include cla-button;
+}
+
+// IE7 doesn't support uppercase button class
+@include ie-lte(8) {
+  .button {
+    @include cla-button;
   }
 }
