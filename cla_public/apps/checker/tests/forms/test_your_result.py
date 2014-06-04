@@ -16,7 +16,6 @@ class ApplyFormTestCase(CLATestCase):
         'full_name': 'John Doe',
         'postcode': 'SW1H 9AJ',
         'street': '102 Petty France',
-        'town': 'London',
         'mobile_phone': '0123456789',
         'home_phone': '9876543210'
     }
@@ -48,7 +47,6 @@ class ApplyFormTestCase(CLATestCase):
                         'full_name': [u'This field is required.'],
                         'postcode': [u'This field is required.'],
                         'street': [u'This field is required.'],
-                        'town': [u'This field is required.'],
                     }
                 },
                 'data': {
@@ -56,7 +54,6 @@ class ApplyFormTestCase(CLATestCase):
                     'contact_details-full_name': None,
                     'contact_details-postcode': None,
                     'contact_details-street': None,
-                    'contact_details-town': None,
                     'contact_details-mobile_phone': None,
                     'contact_details-home_phone': None,
                     'extra-notes': None
@@ -81,7 +78,6 @@ class ApplyFormTestCase(CLATestCase):
                         'full_name': [u'Ensure this value has at most 300 characters (it has 301).'],
                         'postcode': [u'Ensure this value has at most 10 characters (it has 11).'],
                         'street': [u'Ensure this value has at most 250 characters (it has 251).'],
-                        'town': [u'Ensure this value has at most 100 characters (it has 101).'],
                         'mobile_phone': [u'Ensure this value has at most 20 characters (it has 21).'],
                         'home_phone': [u'Ensure this value has at most 20 characters (it has 21).'],
                     },
@@ -93,7 +89,6 @@ class ApplyFormTestCase(CLATestCase):
                     'contact_details-full_name': u'a'*301,
                     'contact_details-postcode': u'a'*11,
                     'contact_details-street': u'a'*251,
-                    'contact_details-town': u'a'*101,
                     'contact_details-mobile_phone': u'a'*21,
                     'contact_details-home_phone': u'a'*21,
                     'extra-notes': u'a'*501

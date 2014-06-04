@@ -658,7 +658,6 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-full_name": 'John Doe',
             "contact_details-postcode": 'SW1H 9AJ',
             "contact_details-street": '102 Petty France',
-            "contact_details-town": 'London',
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }
@@ -679,7 +678,6 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-full_name": 'John Doe',
             "contact_details-postcode": 'SW1H 9AJ',
             "contact_details-street": '102 Petty France',
-            "contact_details-town": 'London',
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }
@@ -706,7 +704,6 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-full_name": 'John Doe',
             "contact_details-postcode": 'SW1H 9AJ',
             "contact_details-street": '102 Petty France',
-            "contact_details-town": 'London',
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }
@@ -730,7 +727,6 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-full_name": 'John Doe',
             "contact_details-postcode": 'SW1H 9AJ',
             "contact_details-street": '102 Petty France',
-            "contact_details-town": 'London',
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }

@@ -133,7 +133,6 @@ ELIGIBILITY_CHECK_CREATE_CASE = {
         "full_name": "John Doe",
         "postcode": "SW1H 9AJ",
         "street": "102 Petty France",
-        "town": "London",
         "mobile_phone": "0123456789",
         "home_phone": "9876543210"
     },
