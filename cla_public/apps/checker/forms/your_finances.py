@@ -314,11 +314,11 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 
 class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
     earnings = MoneyIntervalField(
-        label=_(u"Earnings per month"), min_value=0
+        label=_(u"Earnings"), min_value=0
     )
 
     other_income = MoneyField(
-        label=_(u"Other income per month?"), min_value=0
+        label=_(u"Other income"), min_value=0
     )
 
     self_employed = RadioBooleanField(
