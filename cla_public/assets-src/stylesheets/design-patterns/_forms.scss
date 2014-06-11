@@ -46,6 +46,14 @@ $border-colour: #C2C2C2;
     &--odd {
       background-color: #f1f1f1;
     }
+
+    &--inline {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0 12px;
+      line-height: 32px;
+    }
   }
 
   .FormRow-inner {
@@ -119,6 +127,17 @@ $border-colour: #C2C2C2;
     border: 1px solid $border-colour;
     padding: 2px 4px;
     margin: 0;
+    @include box-sizing(border-box);
+  }
+  select {
+    @include core-19;
+    display: inline-block;
+    border: 1px solid $border-colour;
+    padding: 2px 4px;
+    margin: 0;
+    height: 32px;
+    background: #fff;
+    @include border-radius(0);
     @include box-sizing(border-box);
   }
   input[type=radio],
