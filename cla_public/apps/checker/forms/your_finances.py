@@ -317,7 +317,7 @@ class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
         label=_(u"Earnings"), min_value=0
     )
 
-    other_income = MoneyField(
+    other_income = MoneyIntervalField(
         label=_(u"Other income"), min_value=0
     )
 
@@ -357,11 +357,8 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
     def _get_total_earnings(self, cleaned_data):
         total = 0
         for i in self.get_incomes(cleaned_data):
-            total += i['other_income']
-            if isinstance( i['earnings'], dict):
-                total += i['earnings']['per_month']
-            else:
-                total += i['earnings']
+            total += i['other_income']['per_month']
+            total += i['earnings']['per_month']
 
         return total
 
@@ -380,8 +377,8 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
     def get_income(self, key, cleaned_data):
         income = {
-            'earnings': cleaned_data.get(key, {}).get('earnings', 0),
-            'other_income': cleaned_data.get(key, {}).get('other_income', 0),
+            'earnings': cleaned_data.get(key, {}).get('earnings', {'per_month' : 0}),
+            'other_income': cleaned_data.get(key, {}).get('other_income', {'per_month' : 0}),
             'self_employed': cleaned_data.get(key, {}).get('self_employed', False)
         }
 
@@ -424,12 +421,12 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
 
 class YourSingleAllowancesForm(CheckerWizardMixin, form_utils.forms.BetterForm):
-    mortgage = MoneyField(label=_(u"Mortgage"), min_value=0)
-    rent = MoneyField(label=_(u"Rent"), min_value=0)
-    tax = MoneyField(label=_(u"Tax"), min_value=0)
-    ni = MoneyField(label=_(u"National Insurance"), min_value=0)
-    maintenance = MoneyField(label=_(u"Maintenance"), min_value=0)
-    childcare = MoneyField(label=_(u"Childcare"), min_value=0)
+    mortgage = MoneyIntervalField(label=_(u"Mortgage"), min_value=0)
+    rent = MoneyIntervalField(label=_(u"Rent"), min_value=0)
+    tax = MoneyIntervalField(label=_(u"Tax"), min_value=0)
+    ni = MoneyIntervalField(label=_(u"National Insurance"), min_value=0)
+    maintenance = MoneyIntervalField(label=_(u"Maintenance"), min_value=0)
+    childcare = MoneyIntervalField(label=_(u"Childcare"), min_value=0)
     criminal_legalaid_contributions = MoneyField(
         label=_(u"Payments being made towards a contribution order"), min_value=0
     )
@@ -456,16 +453,14 @@ class YourAllowancesForm(YourFinancesFormMixin, MultipleFormsForm):
 
     def _get_allowances(self, key, cleaned_data):
         if key in cleaned_data:
-            mortgage = cleaned_data.get(key, {}).get('mortgage', 0)
-            rent = cleaned_data.get(key, {}).get('rent', 0)
 
-            tax = cleaned_data.get(key, {}).get('tax', 0)
-            ni = cleaned_data.get(key, {}).get('ni', 0)
             return {
-                'mortgage_or_rent': mortgage + rent,
-                'income_tax_and_ni': tax + ni,
-                'maintenance': cleaned_data.get(key, {}).get('maintenance', 0),
-                'childcare': cleaned_data.get(key, {}).get('childcare', 0),
+                'mortgage': cleaned_data.get(key, {}).get('mortgage', {}),
+                'rent': cleaned_data.get(key, {}).get('rent', {}),
+                'income_tax': cleaned_data.get(key, {}).get('tax', {}),
+                'national_insurance': cleaned_data.get(key, {}).get('ni', {}), 
+                'maintenance': cleaned_data.get(key, {}).get('maintenance', {}),
+                'childcare': cleaned_data.get(key, {}).get('childcare', {}),
                 'criminal_legalaid_contributions': cleaned_data.get(key, {}).get('criminal_legalaid_contributions', 0),
             }
 
