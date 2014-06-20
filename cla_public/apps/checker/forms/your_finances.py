@@ -328,11 +328,13 @@ class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
 
 class YourDependentsForm(CheckerWizardMixin, forms.Form):
     dependants_old = forms.IntegerField(
-        label=_(u'Children aged 16 and over'), required=True, min_value=0
+        label=_(u'Children aged 16 and over'), required=True,
+        min_value=0, max_value=50
     )
 
     dependants_young = forms.IntegerField(
-        label=_(u'Children aged 15 and under'), required=True, min_value=0
+        label=_(u'Children aged 15 and under'), required=True,
+        min_value=0, max_value=50
     )
 
 
@@ -458,7 +460,7 @@ class YourAllowancesForm(YourFinancesFormMixin, MultipleFormsForm):
                 'mortgage': cleaned_data.get(key, {}).get('mortgage', {}),
                 'rent': cleaned_data.get(key, {}).get('rent', {}),
                 'income_tax': cleaned_data.get(key, {}).get('tax', {}),
-                'national_insurance': cleaned_data.get(key, {}).get('ni', {}), 
+                'national_insurance': cleaned_data.get(key, {}).get('ni', {}),
                 'maintenance': cleaned_data.get(key, {}).get('maintenance', {}),
                 'childcare': cleaned_data.get(key, {}).get('childcare', {}),
                 'criminal_legalaid_contributions': cleaned_data.get(key, {}).get('criminal_legalaid_contributions', 0),
