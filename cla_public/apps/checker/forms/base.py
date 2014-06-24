@@ -1,6 +1,8 @@
-from ..exceptions import InconsistentStateException
+from cla_common.constants import ELIGIBILITY_STATES
 
 from api.client import connection
+
+from ..exceptions import InconsistentStateException
 
 
 class CheckerWizardMixin(object):
@@ -29,10 +31,6 @@ class CheckerWizardMixin(object):
 
 
 class EligibilityMixin(object):
-    ELIGIBILITY_YES = 'yes'
-    ELIGIBILITY_NO = 'no'
-    ELIGIBILITY_UNKNOWN = 'unknown'
-
     @property
     def eligibility(self):
         if not hasattr(self, '_eligibility'):
@@ -43,7 +41,7 @@ class EligibilityMixin(object):
     def is_eligible(self):
         if self.is_eligibility_unknown():
             raise InconsistentStateException(u'Eligibility unknown')
-        return self.eligibility == self.ELIGIBILITY_YES
+        return self.eligibility == ELIGIBILITY_STATES.YES
 
     def is_eligibility_unknown(self):
-        return self.eligibility == self.ELIGIBILITY_UNKNOWN
+        return self.eligibility == ELIGIBILITY_STATES.UNKNOWN
