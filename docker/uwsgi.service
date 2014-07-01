@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /usr/local/bin/uwsgi --ini /etc/wsgi/conf.d/cla_public.ini
