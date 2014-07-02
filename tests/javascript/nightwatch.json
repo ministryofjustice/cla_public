@@ -10,7 +10,7 @@
 
   "test_settings" : {
     "default" : {
-      "launch_url" : "http://localhost:8001",
+      "launch_url" : "http://localhost:8002",
       "silent": true,
       "desiredCapabilities": {
         "browserName": "phantomjs"
@@ -18,7 +18,7 @@
     },
 
     "firefox" : {
-      "launch_url" : "http://localhost:8001",
+      "launch_url" : "http://localhost:8002",
       "silent": true,
       "desiredCapabilities": {
         "browserName": "firefox"
