@@ -225,6 +225,10 @@ class StartPageView(TemplateView):
     template_name = 'checker/start_page.html'
 
 
+class ThresholdView(TemplateView):
+    template_name = 'checker/threshold.html'
+
+
 class ConfirmationView(TemplateView):
     template_name = 'checker/confirmation.html'
 
