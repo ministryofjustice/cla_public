@@ -46,10 +46,18 @@ $border-colour: #C2C2C2;
     &--odd {
       background-color: #f1f1f1;
     }
+
+    &--inline {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0 12px;
+      line-height: 32px;
+    }
   }
 
   .FormRow-inner {
-    padding: 10px 60px 0;
+    padding: 10px 35px 0;
     margin: 10px 0 0;
 
     label {
@@ -106,6 +114,10 @@ $border-colour: #C2C2C2;
     float: left;
     width: 230px;
     @include box-sizing(border-box);
+    @include ie-lte(7) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
   textarea {
     @include core-24;
@@ -116,6 +128,23 @@ $border-colour: #C2C2C2;
     padding: 2px 4px;
     margin: 0;
     @include box-sizing(border-box);
+  }
+  select {
+    @include core-19;
+    display: inline-block;
+    border: 1px solid $border-colour;
+    padding: 2px 4px;
+    margin: 0;
+    height: 32px;
+    background: #fff;
+    @include border-radius(0);
+    @include box-sizing(border-box);
+  }
+  input[type=radio],
+  input[type=checkbox] {
+    margin: 0 20px 0 0;
+    position: relative;
+    top: -2px;
   }
 
   // size modifiers 
@@ -180,6 +209,11 @@ $border-colour: #C2C2C2;
       input {
         margin-right: 20px;
       }
+    }
+
+    .FormRow-inner {
+      padding-left: 60px;
+      padding-right: 60px;
     }
 
     &:first-child {

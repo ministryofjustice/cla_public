@@ -84,14 +84,20 @@ ELIGIBILITY_CHECK_UPDATE_FROM_YOUR_INCOME = {
     ],
     "you": {
         "income": {
-            "earnings": 222,
+            "earnings": {'interval_period': u'per_4week',
+                         'per_interval_value': 22200,
+                         'per_month': 22200
+                        },
             "other_income": 333,
             "self_employed": False,
         }
     },
     "partner": {
         "income": {
-            "earnings": 444,
+            "earnings": {'interval_period': u'per_week',
+                         'per_interval_value': 44400,
+                         'per_month': 44400
+                        },
             "other_income": 555,
             "self_employed": False,
         }
@@ -127,7 +133,6 @@ ELIGIBILITY_CHECK_CREATE_CASE = {
         "full_name": "John Doe",
         "postcode": "SW1H 9AJ",
         "street": "102 Petty France",
-        "town": "London",
         "mobile_phone": "0123456789",
         "home_phone": "9876543210"
     },

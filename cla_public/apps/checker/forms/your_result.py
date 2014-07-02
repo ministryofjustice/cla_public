@@ -20,7 +20,6 @@ class ContactDetailsForm(forms.Form):
         label=_(u'Address'), max_length=250,
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 21})
     )
-    town = forms.CharField(label=_(u'Town/city'), max_length=100)
     mobile_phone = forms.CharField(label=_(u'Mobile Phone'), max_length=20, required=False)
     home_phone = forms.CharField(label=_('Home Phone'), max_length=20, required=False)
 
@@ -74,7 +73,6 @@ class ApplyForm(EligibilityMixin, CheckerWizardMixin, MultipleFormsForm):
             'full_name': data['full_name'],
             'postcode': data['postcode'],
             'street': data['street'],
-            'town': data['town'],
             'mobile_phone': data['mobile_phone'],
             'home_phone': data['home_phone']
         }

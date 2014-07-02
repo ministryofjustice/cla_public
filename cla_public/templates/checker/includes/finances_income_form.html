@@ -4,6 +4,7 @@
     <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
 
     <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
+
       <div class="FormRow cf{% if form.earnings.errors %} Error{% endif %}">
         <label for="{{ form.earnings.id_for_label }}" id="{{ form.earnings.auto_id }}-label">
           <span class="FormRow-label">
@@ -46,5 +47,6 @@
         {% endfor %}
       </div>
     </div>
+ 
   </section>
 {% endif %}

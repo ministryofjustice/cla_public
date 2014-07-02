@@ -5,16 +5,9 @@
     el: '.js-LabelSelect',
 
     init: function () {
+      _.bindAll(this, 'render');
       this.cacheEls();
       this.bindEvents();
-
-      // keep current state
-      this.$options.each(function () {
-        var $el = $(this);
-        if($el.is(':checked')){
-          $el.parent().addClass('is-selected');
-        }
-      });
     },
 
     bindEvents: function () {
@@ -35,10 +28,22 @@
             $parent.removeClass('is-selected');
           }
         });
+
+      moj.Events.on('render LabelSelect.render', this.render);
     },
 
     cacheEls: function () {
       this.$options = $(this.el).find('input[type=radio], input[type=checkbox]');
+    },
+
+    render: function () {
+      // keep current state
+      this.$options.each(function () {
+        var $el = $(this);
+        if($el.is(':checked')){
+          $el.parent().addClass('is-selected');
+        }
+      });
     }
   };
 }());
