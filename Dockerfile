@@ -10,7 +10,6 @@ MAINTAINER Peter Idah <peter.idah@digital.justice.gov.uk>
 
 # Set correct environment variables.
 ENV HOME /root
-
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
 
@@ -25,7 +24,7 @@ RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-
 RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full && \
   chown -R www-data:www-data /var/lib/nginx
 
-ADD ./docker/nginx.conf /etc/nginx/nginx.conf
+#ADD ./docker/nginx.conf /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
 
 # Install ruby
@@ -48,14 +47,25 @@ RUN mkdir -p /var/log/wsgi
 RUN  mkdir -p /var/log/nginx/cla_public
 ADD ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
 
+# install service files for runit
+ADD ./docker/uwsgi.service /etc/service/uwsgi/run
+
+# install service files for runit
+ADD ./docker/nginx.service /etc/service/nginx/run
 # Define mountable directories.
 VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi"]
+
+# Expose ports.
+EXPOSE 80
 
 # APP_HOME
 ENV APP_HOME /home/app/django
 
 # Add project directory to docker
 ADD ./ /home/app/django
+#
+# Add local.py for QA
+#RUN ln -sf  /home/app/django/cla_public/settings/integration.py /home/app/django/cla_public/settings/local.py
 
 # Add deploy-key
 RUN mkdir -p /root/.ssh
@@ -68,28 +78,13 @@ WORKDIR /home/app/django
 # PIP INSTALL APPLICATION
 RUN pip install -r requirements/production.txt
 
-# Set the locale
-RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8  
-
 #NPM bower and gulp
-RUN npm install -g bower gulp && \
-  bower install --allow-root && \
-  npm install
+RUN  npm install -g bower gulp && npm install
 
-RUN gulp build
+# gulp build
+RUN export LANG='en_US.UTF-8' && gulp build 
+
+RUN locale-gen --purge  en_US.UTF-8 && echo export LANG=''
 
 RUN python manage.py collectstatic --noinput
 
-# install service files for runit
-ADD ./docker/nginx.service /etc/service/nginx/run
-
-# install service files for runit
-ADD ./docker/uwsgi.service /etc/service/uwsgi/run
-
-# Expose ports.
-EXPOSE 80
-
-RUN apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
