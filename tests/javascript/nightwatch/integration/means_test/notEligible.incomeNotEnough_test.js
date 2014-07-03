@@ -34,7 +34,7 @@ module.exports = {
       .assert.containsText('.PageHeader h1', 'Your income', 'your income passes')
       .execute(function () {
         $("input[type=number]").val(0);
-        $("#id_your_income-earnings").val(910.51);
+        $("#id_your_income-earnings_0").val(910.51);
         $("input[value=1][type=radio]").click();
       })
       .submitForm('#content form');
