@@ -1,3 +1,4 @@
+/* jshint maxcomplexity:10 */
 // Development module that is only loaded on dev and staging
 // Dependencies: moj, _, jQuery
 
@@ -97,7 +98,7 @@
       }
     },
 
-    fillBenefits: function (eligible) {
+    fillBenefits: function () {
       $('input[name=your_benefits-income_support]').prop('checked', true);
     },
 
