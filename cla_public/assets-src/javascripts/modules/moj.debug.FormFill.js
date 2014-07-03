@@ -42,6 +42,9 @@
         case 'your_details':
           this.fillDetails(eligible);
           break;
+        case 'your_benefits':
+          this.fillBenefits(eligible);
+          break;
         case 'your_capital':
           this.fillCapital();
           break;
@@ -92,6 +95,10 @@
       } else {
         $('input[value=0][type=radio]').click();
       }
+    },
+
+    fillBenefits: function (eligible) {
+      $('input[name=your_benefits-income_support]').prop('checked', true);
     },
 
     fillCapital: function () {
