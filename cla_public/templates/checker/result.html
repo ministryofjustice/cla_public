@@ -74,18 +74,6 @@
           </label>
         </div>
 
-        <div class="FormRow FormRow--inline cf{% if form.town.errors %} Error{% endif %}">
-          <label for="{{ form.town.id_for_label }}" id="{{ form.town.auto_id }}-label">
-            <span class="FormRow-label">
-              {{ form.town.label }}
-              {% for error in form.town.errors %}
-              <span class="Error-message">{{ error }}</span>
-              {% endfor %}
-            </span>
-            {{ form.town|add_class:"FormRow-field--l" }}
-          </label>
-        </div>
-
         <div class="FormRow FormRow--inline cf{% if form.mobile_phone.errors %} Error{% endif %}">
           <label for="{{ form.mobile_phone.id_for_label }}" id="{{ form.mobile_phone.auto_id }}-label">
             <span class="FormRow-label">
