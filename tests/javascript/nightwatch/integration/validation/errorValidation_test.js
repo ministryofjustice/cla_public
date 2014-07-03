@@ -111,7 +111,6 @@ module.exports = {
       .setValue('[name=contact_details-full_name]', 'Test Name')
       .setValue('[name=contact_details-postcode]', 'SW1 1DD')
       .setValue('[name=contact_details-street]', 'Street')
-      .setValue('[name=contact_details-town]', 'Town')
       .setValue('[name=contact_details-mobile_phone]', '01234567890')
       .submitForm('#content form')
       .assert.containsText('.PageHeader p', 'Your reference number', 'passes when completed')

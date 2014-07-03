@@ -15,7 +15,6 @@ module.exports = {
       .assert.containsText('.PageHeader h1', 'Your details', 'your problem passes')
       .execute(function () {
         $("input[value=0][type=radio]").click();
-        $("#id_your_details-has_partner_0").click();
       })
       .submitForm('#content form');
   },
