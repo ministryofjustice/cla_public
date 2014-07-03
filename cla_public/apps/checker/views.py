@@ -79,9 +79,9 @@ class CheckerWizard(NamedUrlSessionWizardView):
 
     form_list = [
         ("your_problem", YourProblemForm),
+        ("your_finances_interstitial", YourFinancesNullForm),
         ("your_details", YourDetailsForm),
         ("your_benefits", YourBenefitsForm),
-        ("your_finances_interstitial", YourFinancesNullForm),
         ("your_capital", YourCapitalForm),
         ("your_income", YourIncomeForm),
         ("your_allowances", YourAllowancesForm),
