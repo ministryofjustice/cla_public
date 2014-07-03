@@ -103,7 +103,8 @@ $border-colour: #C2C2C2;
   
   input[type=text],
   input[type=password],
-  input[type=number] {
+  input[type=number],
+  input[type=email] {
     @include core-24;
     font-size: 23px;
     border: 1px solid $border-colour;
