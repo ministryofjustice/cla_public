@@ -41,7 +41,7 @@ module.exports = {
   "Your finances fails" : function (browser) {
     browser
       .click('#content form button[type=submit]')
-      .pause(500)
+      .pause(2000)
       .assert.containsText('.PageHeader h1', 'Your finances', 'remained on same page')
       .assert.elementPresent('.ErrorSummary', 'error summary is present')
       .assert.containsText('.ErrorSummary', 'There was a problem submitting the form', 'error summary contains correct message')
@@ -56,7 +56,7 @@ module.exports = {
         $("input[value=1][type=radio]").click();
       })
       .click('#content form button[type=submit]')
-      .pause(500)
+      .pause(2000)
       .assert.containsText('.PageHeader h1', 'Your income', 'passes when completed')
   },
 

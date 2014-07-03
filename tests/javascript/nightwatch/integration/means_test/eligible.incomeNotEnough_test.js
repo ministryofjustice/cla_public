@@ -27,7 +27,7 @@ module.exports = {
         $("input[type=number]").val(0);
       })
       .click('#content form button[type=submit]')
-      .pause(500);
+      .pause(8000);
   },
   
   "Eligible income (Your finances - income)" : function (browser) {
