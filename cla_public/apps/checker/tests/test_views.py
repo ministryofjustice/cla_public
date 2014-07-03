@@ -32,6 +32,10 @@ class CheckerWizardTestCase(CLATestCase):
         self.your_benefits_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_benefits'}
         )
+        self.your_finances_interstitial_url = reverse(
+            'checker:checker_step', args=(), kwargs={
+                'step': 'your_finances_interstitial'}
+        )
         self.your_capital_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_capital'}
         )
@@ -173,6 +177,7 @@ class CheckerWizardTestCase(CLATestCase):
             'your_problem': self._get_your_problem_post_data,
             'your_details': self._get_your_details_post_data,
             'your_benefits': self._get_your_benefits_none_post_data,
+            'your_finances_interstitial': lambda : {},
             'your_capital': self._get_your_capital_post_data,
             'your_income': self._get_your_income_post_data,
             'your_allowances': self._get_your_allowances_post_data,
@@ -358,13 +363,13 @@ class CheckerWizardTestCase(CLATestCase):
 
         data = self._get_your_benefits_none_post_data()
 
-        r1 = self.client.get(self.your_benefits_url)
+        r1 = self.client.get(self.your_finances_interstitial_url)
 
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
         self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
 
         response = self.client.post(self.your_benefits_url, data=data)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertRedirects(response, self.your_finances_interstitial_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
@@ -376,13 +381,13 @@ class CheckerWizardTestCase(CLATestCase):
 
         data = self._get_your_benefits_passported_post_data()
 
-        r1 = self.client.get(self.your_benefits_url)
+        r1 = self.client.get(self.your_finances_interstitial_url)
 
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
         self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
 
         response = self.client.post(self.your_benefits_url, data=data)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertRedirects(response, self.your_finances_interstitial_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 

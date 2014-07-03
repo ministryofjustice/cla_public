@@ -11,7 +11,7 @@ from django.contrib.formtools.wizard.storage import get_storage
 from .helpers import SessionCheckerHelper
 from .forms import YourProblemForm, YourDetailsForm, \
     YourCapitalForm, YourIncomeForm, YourAllowancesForm, \
-    ApplyForm, YourBenefitsForm
+    ApplyForm, YourBenefitsForm, YourFinancesNullForm
 from .exceptions import InconsistentStateException
 
 class BreadCrumb(object):
@@ -37,7 +37,8 @@ class BreadCrumb(object):
             {
                 'name': 'Your Finances',
                 'step': 'your_capital',
-                'active': current_form.form_tag == 'your_finances',
+                'active': current_form.form_tag in \
+                    ('your_finances', 'your_finances_interstitial'),
                 'is_previous': False,
             },
             {
@@ -80,6 +81,7 @@ class CheckerWizard(NamedUrlSessionWizardView):
         ("your_problem", YourProblemForm),
         ("your_details", YourDetailsForm),
         ("your_benefits", YourBenefitsForm),
+        ("your_finances_interstitial", YourFinancesNullForm),
         ("your_capital", YourCapitalForm),
         ("your_income", YourIncomeForm),
         ("your_allowances", YourAllowancesForm),
@@ -90,6 +92,8 @@ class CheckerWizard(NamedUrlSessionWizardView):
         "your_problem": "checker/your_problem.html",
         "your_details": "checker/your_details.html",
         "your_benefits": "checker/your_benefits.html",
+        "your_finances_interstitial":
+            "checker/interstitials/your_finances.html",
         "your_capital": "checker/your_capital.html",
         "your_income": "checker/your_income.html",
         "your_allowances": "checker/your_allowances.html",
