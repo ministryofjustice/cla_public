@@ -85,18 +85,6 @@
             {{ form.mobile_phone }}
           </label>
         </div>
-
-        <div class="FormRow FormRow--inline cf{% if form.home_phone.errors %} Error{% endif %}">
-          <label for="{{ form.home_phone.id_for_label }}" id="{{ form.home_phone.auto_id }}-label">
-            <span class="FormRow-label">
-              {{ form.home_phone.label }}
-              {% for error in form.home_phone.errors %}
-              <span class="Error-message">{{ error }}</span>
-              {% endfor %}
-            </span>
-            {{ form.home_phone }}
-          </label>
-        </div>
       </fieldset>
       {% endwith %}
 
