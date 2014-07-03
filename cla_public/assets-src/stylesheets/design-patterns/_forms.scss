@@ -120,19 +120,19 @@ $border-colour: #C2C2C2;
     }
     &::-webkit-input-placeholder {
       @include core-19;
-      line-height: 32px;
+      padding-top: 5px;
     }
     &:-moz-placeholder {
       @include core-19;
-      line-height: 32px;
+      padding-top: 5px;
     }
     &::-moz-placeholder {
       @include core-19;
-      line-height: 32px;
+      padding-top: 5px;
     }
     &:-ms-input-placeholder {  
       @include core-19;
-      line-height: 32px;
+      padding-top: 5px;
     }
   }
   textarea {
