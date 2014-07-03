@@ -118,6 +118,22 @@ $border-colour: #C2C2C2;
       padding-top: 0;
       padding-bottom: 0;
     }
+    &::-webkit-input-placeholder {
+      @include core-19;
+      line-height: 32px;
+    }
+    &:-moz-placeholder {
+      @include core-19;
+      line-height: 32px;
+    }
+    &::-moz-placeholder {
+      @include core-19;
+      line-height: 32px;
+    }
+    &:-ms-input-placeholder {  
+      @include core-19;
+      line-height: 32px;
+    }
   }
   textarea {
     @include core-24;

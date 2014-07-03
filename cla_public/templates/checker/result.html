@@ -46,7 +46,7 @@
                 <span class="Error-message">{{ error }}</span>
               {% endfor %}
             </span>
-            {{ form.full_name|add_class:"FormRow-field--l" }}
+            {{ form.full_name|add_class:"FormRow-field--l"|attr:"placeholder:For example: John Smith" }}
           </label>
         </div>
 
