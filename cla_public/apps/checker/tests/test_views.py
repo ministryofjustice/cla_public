@@ -262,7 +262,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
 
         response = self.client.post(self.your_problem_url, data=data)
-        self.assertRedirects(response, self.your_details_url)
+        self.assertRedirects(response, self.your_finances_interstitial_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
@@ -276,7 +276,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE
 
         response = self.client.post(self.your_problem_url, data=data)
-        self.assertRedirects(response, self.your_details_url)
+        self.assertRedirects(response, self.your_finances_interstitial_url)
 
         self.assertEqual(self.mocked_eligibility_check_patch.called, True)
 
@@ -369,7 +369,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
 
         response = self.client.post(self.your_benefits_url, data=data)
-        self.assertRedirects(response, self.your_finances_interstitial_url)
+        self.assertRedirects(response, self.your_capital_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
@@ -387,7 +387,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
 
         response = self.client.post(self.your_benefits_url, data=data)
-        self.assertRedirects(response, self.your_finances_interstitial_url)
+        self.assertRedirects(response, self.your_capital_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
