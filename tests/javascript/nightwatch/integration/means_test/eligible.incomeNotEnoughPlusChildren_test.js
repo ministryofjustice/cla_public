@@ -26,7 +26,7 @@ module.exports = {
       .execute(function () {
         $("input[type=number]").val(0);
       })
-      .submitForm('#content form');
+      .click('#content form button[type=submit]');
   },
   
   "Eligible income w/ children (Your finances - income)" : function (browser) {
