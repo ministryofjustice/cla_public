@@ -105,11 +105,11 @@
       $('input[value=1][type=radio]').click();
 
       if (eligible) {
-        $('#id_your_income-earnings').val(732.99+(285.13*3));
+        $('#id_your_income-earnings_0').val(732.99+(285.13*3));
         $('#id_dependants-dependants_old').val(2);
         $('#id_dependants-dependants_young').val(1);
       } else {
-        $('#id_your_income-earnings').val(910.51);
+        $('#id_your_income-earnings_0').val(910.51);
       }
     },
 
