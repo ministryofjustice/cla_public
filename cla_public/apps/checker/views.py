@@ -142,14 +142,6 @@ class CheckerWizard(NamedUrlSessionWizardView):
                 kwargs['has_benefits'] = bool(details_data['has_benefits'])
         return kwargs
 
-    def get_form(self, step=None, data=None, files=None):
-        form = super(CheckerWizard,self).get_form(step,data,files)
-        if isinstance(form, YourCapitalForm) and data:
-            if form.process_actions():
-                self.redirect_to_self = True
-        return form
-
-
     def render_next_step(self, form, **kwargs):
         response = self.render_redirect(form)
         if not response:

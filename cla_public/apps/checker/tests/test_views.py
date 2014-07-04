@@ -459,52 +459,6 @@ class CheckerWizardTestCase(CLATestCase):
         response = self.client.post(self.your_capital_url, data=post_data)
         self.assertRedirects(response, self.result_url)
 
-    def test_post_your_capital_with_extra_property(self):
-        """
-        Test that ticking yes for 'I own other properties' returns you to the same page
-        with an additional property
-        """
-        post_data = {
-            "checker_wizard-current_step": "your_capital",
-            "property-TOTAL_FORMS": [1],
-            "property-INITIAL_FORMS": [0],
-            "property-MAX_NUM_FORMS": [20],
-            "property-0-worth": [100000],
-            "property-0-mortgage_left": [50000],
-            "property-0-owner": [1],
-            "property-0-share": [100],
-            "property-0-disputed": [u"1"],
-            "your_savings-bank": [100],
-            "your_savings-investments": [100],
-            "your_savings-valuable_items": [100],
-            "your_savings-money_owed": [100],
-            "partners_savings-bank": [100],
-            "partners_savings-investments": [100],
-            "partners_savings-valuable_items": [100],
-            "partners_savings-money_owed": [100],
-            "submit": "add-property",
-        }
-
-        self._fill_in_prev_steps(current_step='your_capital')
-
-        r1 = self.client.get(self.your_capital_url)
-
-        # mock api responses
-        self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE_FROM_YOUR_SAVINGS
-
-        response = self.client.post(self.your_capital_url, data=post_data, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse(response.redirect_chain)
-
-        self.assertGreater(
-            len(response.context_data['form'].get_form_by_prefix('property')),
-            len(r1.context_data['form'].get_form_by_prefix('property'))
-        )
-
-        # api called?
-        self.assertEqual(self.mocked_eligibility_check_patch.called, False)
-        # shouldn't call is_eligible because the user has to add another property
-        self.assertEqual(self.mocked_is_eligible_post.called, False)
 
     def test_post_your_capital_fails_without_reference(self):
         self._fill_in_prev_steps(current_step='your_capital', without_reference=True)

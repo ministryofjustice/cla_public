@@ -4,8 +4,8 @@ from core.testing.testcases import CLATestCase
 from django.forms.formsets import formset_factory
 
 from ...forms.your_finances import YourCapitalPropertyForm, \
-    OnlyAllowExtraIfNoInitialFormSet, YourAllowancesForm, YourCapitalForm, \
-    YourIncomeForm
+    YourAllowancesForm, YourCapitalForm, \
+    YourIncomeForm, FirstRequiredFormSet
 from ...exceptions import InconsistentStateException
 
 from ..fixtures import mocked_api
@@ -181,18 +181,13 @@ class YourCapitalFormTestCase(CLATestCase):
         self.assertFalse(form.is_valid())
         property_form = form.get_form_by_prefix('property')
         self.assertFalse(property_form.is_valid())
-        self.assertEqual(property_form.non_form_errors(), [u'Fill in all your property details'])
-
-    def test_fails_if_second_properties_not_filled_in(self):
-        # 'property-TOTAL_FORMS' == 2 but the property #2 is not filled in
-        data = dict(self._get_default_post_data())
-        data['property-TOTAL_FORMS'] = 2
-        form = YourCapitalForm(reference=self.reference, data=data)
-
-        self.assertFalse(form.is_valid())
-        property_form = form.get_form_by_prefix('property')
-        self.assertFalse(property_form.is_valid())
-        self.assertEqual(property_form.non_form_errors(), [u'Fill in all your property details'])
+        self.assertEqual(property_form.errors, [
+            {'owner': [u'This field is required.'],
+             'disputed': [u'This field is required.'],
+             'share': [u'This field is required.'],
+             'worth': [u'This field is required.'],
+             'mortgage_left': [u'This field is required.']}
+        ])
 
     def test_post_update_cleaned_data_your_savings(self):
         """
@@ -261,65 +256,6 @@ class YourCapitalFormTestCase(CLATestCase):
             self.assertFalse(form.is_valid())
             self.assertEqual(form.errors['your_savings'], error_data['error'])
 
-    def test_add_new_property(self):
-        data = self._get_default_post_data()
-        data['submit'] = 'add-property'
-        form = YourCapitalForm(data=data)
-        property_forms_before_process_action = form.form_dict()['property'].total_form_count()
-        form.process_actions()
-        property_forms_after_process_actions = form.form_dict()['property'].total_form_count()
-        self.assertFalse(form.is_valid())
-        self.assertGreater(property_forms_after_process_actions, property_forms_before_process_action)
-
-    def test_remove_property_last(self):
-        data = self._get_default_post_data()
-        more_data = {
-            u'property-1-mortgage_left': u'20000',
-            u'property-1-owner': u'1',
-            u'property-1-share': u'100',
-            u'property-1-worth': u'200000',
-            u'property-1-disputed': u'1',
-            u'property-INITIAL_FORMS': u'0',
-            u'property-MAX_NUM_FORMS': u'20',
-            u'property-TOTAL_FORMS': u'2',
-            u'submit': u'remove-property-1',
-
-        }
-        data.update(more_data)
-        form = YourCapitalForm(data=data)
-        property_forms_before_process_action = form.form_dict()['property'].total_form_count()
-        form.process_actions()
-        property_forms_after_process_actions = form.form_dict()['property'].total_form_count()
-        self.assertTrue(form.is_valid())
-        self.assertLess(property_forms_after_process_actions, property_forms_before_process_action)
-
-    def test_remove_property_middle(self):
-        data = self._get_default_post_data()
-        more_data = {
-            u'property-1-mortgage_left': u'20000',
-            u'property-1-owner': u'1',
-            u'property-1-share': u'100',
-            u'property-1-worth': u'100000',
-            u'property-1-disputed': u'1',
-            u'property-2-mortgage_left': u'10000',
-            u'property-2-owner': u'1',
-            u'property-2-share': u'100',
-            u'property-2-worth': u'200000',
-            u'property-2-disputed': u'0',
-            u'property-INITIAL_FORMS': u'0',
-            u'property-MAX_NUM_FORMS': u'20',
-            u'property-TOTAL_FORMS': u'3',
-            u'submit': u'remove-property-1',
-
-            }
-        data.update(more_data)
-        form = YourCapitalForm(data=data)
-        property_forms_before_process_action = form.form_dict()['property'].total_form_count()
-        form.process_actions()
-        property_forms_after_process_actions = form.form_dict()['property'].total_form_count()
-        self.assertTrue(form.is_valid())
-        self.assertLess(property_forms_after_process_actions, property_forms_before_process_action)
-        self.assertEqual(form.cleaned_data['property'][1]['worth'], int(more_data[u'property-2-worth']) * 100)
 
     # TEST Calculated fields
 
@@ -365,36 +301,6 @@ class YourCapitalFormTestCase(CLATestCase):
         form = YourCapitalForm(data=default_data)
         self.assertTrue(form.is_valid())
         self.assertEqual(form.total_capital_assets, 80010 + (5000000 * 2))
-
-
-class YourCapitalPropertyFormSetSetTeseCase(CLATestCase):
-
-    def test_no_extra_allowed_if_initial_data_supplied(self):
-        YourCapitalPropertyFormSet = formset_factory(
-            YourCapitalPropertyForm,
-            extra=1,
-            max_num=20,
-            validate_max=True,
-            formset=OnlyAllowExtraIfNoInitialFormSet
-        )
-        formset = YourCapitalPropertyFormSet(
-            initial=[
-                {"share": 100, "value": 100000, "mortgage_left": 50000},
-                {"share": 100, "value": 100000, "mortgage_left": 50000}
-            ]
-        )
-        self.assertEqual(formset.extra, 0)
-
-    def test_one_extra_allowed_if_no_initial_data_supplied(self):
-        YourCapitalPropertyFormSet = formset_factory(
-            YourCapitalPropertyForm,
-            extra=1,
-            max_num=20,
-            validate_max=True,
-            formset=OnlyAllowExtraIfNoInitialFormSet
-        )
-        formset = YourCapitalPropertyFormSet()
-        self.assertEqual(formset.extra, 1)
 
 
 class YourIncomeFormTestCase(CLATestCase):
