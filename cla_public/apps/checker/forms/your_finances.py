@@ -339,12 +339,12 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
 
 class YourSingleAllowancesForm(CheckerWizardMixin, form_utils.forms.BetterForm):
-    mortgage = MoneyIntervalField(label=_(u"Mortgage"), min_value=0)
-    rent = MoneyIntervalField(label=_(u"Rent"), min_value=0)
-    maintenance = MoneyIntervalField(label=_(u"Maintenance"), min_value=0)
-    childcare = MoneyIntervalField(label=_(u"Childcare"), min_value=0)
+    mortgage = MoneyIntervalField(label=_(u"Mortgage"), help_text=_(u"Homeowner repayments to a bank or building society. Check your most recent mortgage or bank statement."), min_value=0)
+    rent = MoneyIntervalField(label=_(u"Rent"), help_text=_(u"Money you pay your landlord to live in your home. Check your most recent bank statement or rent book."), min_value=0)
+    maintenance = MoneyIntervalField(label=_(u"Maintenance"), help_text=_(u"Regular payments you make to an ex-partner to help with their living costs or the living costs of your child who no longer lives with you."), min_value=0)
+    childcare = MoneyIntervalField(label=_(u"Childcare"), help_text=_(u"Money you pay for your child to be looked after while you work or study."), min_value=0)
     criminal_legalaid_contributions = MoneyField(
-        label=_(u"Payments being made towards a contribution order"), min_value=0
+        label=_(u"Contribution order"), help_text=_(u"Money you pay towards the cost of legal help following a criminal conviction."), min_value=0
     )
 
     class Meta:
@@ -352,10 +352,20 @@ class YourSingleAllowancesForm(CheckerWizardMixin, form_utils.forms.BetterForm):
                      ('', {'fields': ['maintenance', 'childcare', 'criminal_legalaid_contributions']})]
 
 
+class YourSinglePartnerAllowancesForm(YourSingleAllowancesForm):
+    def __init__(self, *args, **kwargs):
+        super(YourSinglePartnerAllowancesForm, self).__init__(*args, **kwargs)
+        self.fields["mortgage"].help_text = _(u"Homeowner repayments to a bank or building society. Check most recent mortgage or bank statements.")
+        self.fields["rent"].help_text = _(u"Money your partner pays your landlord. Check most recent bank statements or rent book.")
+        self.fields["maintenance"].help_text = _(u"Regular payments made to an ex-partner to help with their living costs or the living costs of a child who no longer lives with your partner.")
+        self.fields["childcare"].help_text = _(u"Money your partner pays for a child to be looked after while they work or study.")
+        self.fields["criminal_legalaid_contributions"].help_text = _(u"Money your partner pays towards the cost of legal help following a criminal conviction.")
+
+
 class YourAllowancesForm(YourFinancesFormMixin, MultipleFormsForm):
     forms_list = (
         ('your_allowances', YourSingleAllowancesForm),
-        ('partners_allowances', YourSingleAllowancesForm)
+        ('partners_allowances', YourSinglePartnerAllowancesForm)
     )
 
     def _prepare_for_init(self, kwargs):

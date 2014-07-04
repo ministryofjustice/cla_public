@@ -6,8 +6,8 @@
     <div class="FormBlock FormBlock--grey{% if form.errors %} FieldsetError{% endif %}" aria-labelledby="{{form.prefix}}-label" role="group">
       {% for fieldset in form.fieldsets %}
         {% for field in fieldset %}
-          <div class="FormRow cf{% if field.errors %} Error{% endif %}">
-            <label for="{{ field.id_for_label }}" id="{{ field.auto_id }}-label">
+          <div class="FormRow Grid cf{% if field.errors %} Error{% endif %}">
+            <label for="{{ field.id_for_label }}" id="{{ field.auto_id }}-label" class="Grid-col Grid-col--1-3">
               <span class="FormRow-label">
                 {{ field.label }}
                 {% for error in field.errors %}
@@ -15,8 +15,13 @@
                 {% endfor %}
               </span>
               <span class="FormRow-prefix">&pound;</span>
-              {{ field }}
+              {{ field|add_class:"FormRow-field--interval" }}
             </label>
+            <div class="Grid-col Grid-col--2-3">
+              <p class="Help-text">
+                {{ field.help_text }}
+              </p>
+            </div>
           </div>
         {% endfor %}
       {% endfor %}

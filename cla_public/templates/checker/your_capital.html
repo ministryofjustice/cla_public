@@ -15,7 +15,7 @@
     {% include "checker/includes/error_summary.html" %}
 
     {% if form.form_dict.property or form.form_dict.your_other_properties %}
-      <section>
+      <section class="js-MultiAddress">
         {% with form.form_dict.property as formset %}
           {% if formset %}
             {{ formset.management_form }}
@@ -28,10 +28,6 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
-
-        <div class="FormBlock-actions">
-          <button class="Button Button--secondary" type="submit" name="submit" value="add-property">{% trans "Add another property" %}</button>
-        </div>
       </section>
     {% endif %}
 
