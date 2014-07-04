@@ -26,7 +26,8 @@
         "acceptSslCerts": true,
         "browserstack.user": "${BS_USER}",
         "browserstack.key": "${BS_KEY}",
-        "browserstack.local": true
+        "browserstack.local": true,
+        "browserstack.debug": true
       }
     }
   }
