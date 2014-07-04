@@ -332,8 +332,8 @@ class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
         label=_(u"Earnings last month"), min_value=0
     )
 
-    tax = MoneyIntervalField(label=_(u"Tax"), min_value=0)
-    ni = MoneyIntervalField(label=_(u"National Insurance"), min_value=0)
+    tax = MoneyIntervalField(label=_(u"Tax paid"), min_value=0)
+    ni = MoneyIntervalField(label=_(u"National Insurance Contribution"), min_value=0)
 
     other_income = MoneyIntervalField(
         label=_(u"Other income last month"), min_value=0
@@ -459,8 +459,6 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 class YourSingleAllowancesForm(CheckerWizardMixin, form_utils.forms.BetterForm):
     mortgage = MoneyIntervalField(label=_(u"Mortgage"), min_value=0)
     rent = MoneyIntervalField(label=_(u"Rent"), min_value=0)
-    tax = MoneyIntervalField(label=_(u"Tax"), min_value=0)
-    ni = MoneyIntervalField(label=_(u"National Insurance Contribution"), min_value=0)
     maintenance = MoneyIntervalField(label=_(u"Maintenance"), min_value=0)
     childcare = MoneyIntervalField(label=_(u"Childcare"), min_value=0)
     criminal_legalaid_contributions = MoneyField(
