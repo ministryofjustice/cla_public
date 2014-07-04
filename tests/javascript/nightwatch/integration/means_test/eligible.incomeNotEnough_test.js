@@ -48,7 +48,7 @@ module.exports = {
   
   "Eligible income (Your finances - expenses)" : function (browser) {
     browser
-      .assert.containsText('.PageHeader h1', 'Your expenses', 'your expenses contains correct title')
+      .assert.containsText('.PageHeader h1', 'Your costs', 'your expenses contains correct title')
       .execute(function () {
         $("input[type=number]").val(0);
       })

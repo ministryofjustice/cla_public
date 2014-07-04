@@ -80,13 +80,13 @@ module.exports = {
         $("input[type=number]").val(0);
       })
       .submitForm('#content form')
-      .assert.containsText('.PageHeader h1', 'Your expenses', 'passes when completed')
+      .assert.containsText('.PageHeader h1', 'Your costs', 'passes when completed')
   },
 
   "Your expenses fails" : function (browser) {
     browser
       .submitForm('#content form')
-      .assert.containsText('.PageHeader h1', 'Your expenses', 'remained on same page')
+      .assert.containsText('.PageHeader h1', 'Your costs', 'remained on same page')
       .assert.elementPresent('.ErrorSummary', 'error summary is present')
       .assert.containsText('.ErrorSummary', 'There was a problem submitting the form', 'error summary contains correct message')
       .assert.elementPresent('.FormRow.Error', 'field errors are present')

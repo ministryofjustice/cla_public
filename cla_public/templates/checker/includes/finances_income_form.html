@@ -1,12 +1,12 @@
-{% load i18n %}
+{% load widget_tweaks i18n %}
 {% if form %}
   <section>
     <h2 id="{{form.prefix}}-label" class="FormBlock-label">{% trans fieldset_label %}</h2>
 
     <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
 
-      <div class="FormRow cf{% if form.earnings.errors %} Error{% endif %}">
-        <label for="{{ form.earnings.id_for_label }}" id="{{ form.earnings.auto_id }}-label">
+      <div class="FormRow Grid cf{% if form.earnings.errors %} Error{% endif %}">
+        <label for="{{ form.earnings.id_for_label }}" id="{{ form.earnings.auto_id }}-label" class="Grid-col Grid-col--1-3">
           <span class="FormRow-label">
             {{ form.earnings.label }}
             {% for error in form.earnings.errors %}
@@ -14,12 +14,21 @@
             {% endfor %}
           </span>
           <span class="FormRow-prefix">&pound;</span>
-          {{ form.earnings }}
+          {{ form.earnings|add_class:"FormRow-field--interval" }}
         </label>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Your total money earned before tax. Check your most recent payslips.
+            {% else %}
+              Your partner's total money earned before tax. We need this to work out your household income.
+            {% endif %}
+          </p>
+        </div>  
       </div>
 
-      <div class="FormRow cf{% if form.other_income.errors %} Error{% endif %}">
-        <label for="{{ form.other_income.id_for_label }}" id="{{ form.other_income.auto_id }}-label">
+      <div class="FormRow Grid cf{% if form.other_income.errors %} Error{% endif %}">
+        <label for="{{ form.other_income.id_for_label }}" id="{{ form.other_income.auto_id }}-label" class="Grid-col Grid-col--1-3">
           <span class="FormRow-label">
             {{ form.other_income.label }}
             {% for error in form.other_income.errors %}
@@ -27,12 +36,21 @@
             {% endfor %}
           </span>
           <span class="FormRow-prefix">&pound;</span>
-          {{ form.other_income }}
+          {{ form.other_income|add_class:"FormRow-field--interval" }}
         </label>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Include child benefit, pensions, tax credits, income from investments, maintenance payments and employee-benefits, such as company car and fuel allowances.
+            {% else %}
+              Include child benefit, pensions, tax credits, income from investments, maintenance payments and employee-benefits, such as company car and fuel allowances.
+            {% endif %}
+          </p>
+        </div>
       </div>
 
-      <div class="FormRow cf{% if form.tax.errors %} Error{% endif %}">
-        <label for="{{ form.tax.id_for_label }}" id="{{ form.tax.auto_id }}-label">
+      <div class="FormRow Grid cf{% if form.tax.errors %} Error{% endif %}">
+        <label for="{{ form.tax.id_for_label }}" id="{{ form.tax.auto_id }}-label" class="Grid-col Grid-col--1-3">
           <span class="FormRow-label">
             {{ form.tax.label }}
             {% for error in form.tax.errors %}
@@ -40,12 +58,21 @@
             {% endfor %}
           </span>
           <span class="FormRow-prefix">&pound;</span>
-          {{ form.tax }}
+          {{ form.tax|add_class:"FormRow-field--interval" }}
         </label>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Money deducted from your pay by your employer – check your most recent pay-slip. If you work for yourself instead of a company check your most recent tax bill.
+            {% else %}
+              Money deducted from your partner’s pay by their employer – check most recent pay-slip. If your partner is self-employed check most recent tax bill.
+            {% endif %}
+          </p>
+        </div>
       </div>
 
-      <div class="FormRow cf{% if form.ni.errors %} Error{% endif %}">
-        <label for="{{ form.ni.id_for_label }}" id="{{ form.ni.auto_id }}-label">
+      <div class="FormRow Grid cf{% if form.ni.errors %} Error{% endif %}">
+        <label for="{{ form.ni.id_for_label }}" id="{{ form.ni.auto_id }}-label" class="Grid-col Grid-col--1-3">
           <span class="FormRow-label">
             {{ form.ni.label }}
             {% for error in form.ni.errors %}
@@ -53,24 +80,44 @@
             {% endfor %}
           </span>
           <span class="FormRow-prefix">&pound;</span>
-          {{ form.ni }}
+          {{ form.ni|add_class:"FormRow-field--interval" }}
         </label>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Money deducted from your pay by your employer – check your most recent pay-slip. If you work for yourself instead of a company check your most recent tax bill.
+            {% else %}
+              Money deducted from your partner’s pay by their employer – check most recent pay-slip. If your partner is self-employed check most recent tax bill.
+            {% endif %}
+          </p>
+        </div>
       </div>
 
-      <div class="FormRow cf{% if form.self_employed.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.self_employed.auto_id }}-label">
-        <p class="FormRow-label" id="{{ form.self_employed.auto_id }}-label">
-          {{ form.self_employed.label }}
-          {% for error in form.self_employed.errors %}
-            <span class="Error-message">{{ error }}</span>
-          {% endfor %}
-        </p>
+      <div class="FormRow Grid cf{% if form.self_employed.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.self_employed.auto_id }}-label">
+        <div class="Grid-col Grid-col--1-3">
+          <p class="FormRow-label" id="{{ form.self_employed.auto_id }}-label">
+            {{ form.self_employed.label }}
+            {% for error in form.self_employed.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </p>
 
-        {% for choice in form.self_employed.field.choices %}
-        <label for="{{ form.self_employed.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
-          <input type="radio" name="{{ form.self_employed.html_name }}" id="{{ form.self_employed.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.self_employed.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
-          {{ choice.1 }}
-        </label>
-        {% endfor %}
+          {% for choice in form.self_employed.field.choices %}
+          <label for="{{ form.self_employed.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
+            <input type="radio" name="{{ form.self_employed.html_name }}" id="{{ form.self_employed.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.self_employed.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+            {{ choice.1 }}
+          </label>
+          {% endfor %}
+        </div>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Being self employed means you work for yourself instead of a company.
+            {% else %}
+              Being self employed means your partner works for themselves instead of a company.
+            {% endif %}
+          </p>
+        </div>
       </div>
     </div>
 
