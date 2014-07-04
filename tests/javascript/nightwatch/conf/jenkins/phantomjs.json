@@ -1,0 +1,20 @@
+{
+  "src_folders" : ["${SRC_FOLDERS}"],
+  "output_folder" : "reports/phantomjs",
+
+  "selenium" : {
+    "start_process" : true,
+    "server_path" : "/tmp/jenkins/envs/cla_public-integration/bin/selenium-server-standalone-2.41.0.jar",
+    "log_path": false
+  },
+
+  "test_settings" : {
+    "default": {
+      "silent": true,
+      "launch_url" : "${LAUNCH_URL}",
+      "desiredCapabilities": {
+        "browserName": "phantomjs"
+      }
+    }
+  }
+}

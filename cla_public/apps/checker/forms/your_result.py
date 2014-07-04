@@ -20,7 +20,7 @@ class ContactDetailsForm(forms.Form):
         label=_(u'Address'), max_length=250,
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 21})
     )
-    mobile_phone = forms.CharField(label=_(u'Mobile Phone'), max_length=20, required=False)
+    mobile_phone = forms.CharField(label=_(u'Contact number'), max_length=20, required=False)
     home_phone = forms.CharField(label=_('Home Phone'), max_length=20, required=False)
 
     def clean(self, *args, **kwargs):

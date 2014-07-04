@@ -22,7 +22,7 @@
         {% include "checker/includes/error_summary.html" %}
       {% endwith %}
 
-      <p>{% trans "To finish applying for Legal Aid, you need to fill in your personal details" %}</p>
+      <p>{% trans "Please provide the following information so we can contact you about your application for legal aid." %}</p>
       
       {% with form=form.form_dict.contact_details %}
       <fieldset class="FormBlock FormBlock--grey">
@@ -46,7 +46,7 @@
                 <span class="Error-message">{{ error }}</span>
               {% endfor %}
             </span>
-            {{ form.full_name|add_class:"FormRow-field--l" }}
+            {{ form.full_name|add_class:"FormRow-field--l"|attr:"placeholder:For example: John Smith" }}
           </label>
         </div>
 
@@ -74,18 +74,6 @@
           </label>
         </div>
 
-        <div class="FormRow FormRow--inline cf{% if form.town.errors %} Error{% endif %}">
-          <label for="{{ form.town.id_for_label }}" id="{{ form.town.auto_id }}-label">
-            <span class="FormRow-label">
-              {{ form.town.label }}
-              {% for error in form.town.errors %}
-              <span class="Error-message">{{ error }}</span>
-              {% endfor %}
-            </span>
-            {{ form.town|add_class:"FormRow-field--l" }}
-          </label>
-        </div>
-
         <div class="FormRow FormRow--inline cf{% if form.mobile_phone.errors %} Error{% endif %}">
           <label for="{{ form.mobile_phone.id_for_label }}" id="{{ form.mobile_phone.auto_id }}-label">
             <span class="FormRow-label">
@@ -98,15 +86,12 @@
           </label>
         </div>
 
-        <div class="FormRow FormRow--inline cf{% if form.home_phone.errors %} Error{% endif %}">
-          <label for="{{ form.home_phone.id_for_label }}" id="{{ form.home_phone.auto_id }}-label">
+        <div class="FormRow FormRow--inline cf">
+          <label for="id_contact_details-email" id="id_contact_details-email-label">
             <span class="FormRow-label">
-              {{ form.home_phone.label }}
-              {% for error in form.home_phone.errors %}
-              <span class="Error-message">{{ error }}</span>
-              {% endfor %}
+              Email address
             </span>
-            {{ form.home_phone }}
+            <input id="id_contact_details-email" name="contact_details-email" type="email" autocomplete="off">
           </label>
         </div>
       </fieldset>

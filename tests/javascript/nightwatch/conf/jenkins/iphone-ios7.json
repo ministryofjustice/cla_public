@@ -1,0 +1,30 @@
+{
+  "src_folders" : ["${SRC_FOLDERS}"],
+  "output_folder" : "${OUTPUT_FOLDER}",
+
+  "selenium" : {
+    "start_process" : false,
+    "host" : "hub.browserstack.com",
+    "port" : 80
+  },
+
+  "test_settings" : {
+    "default": {
+      "silent": true,
+      "launch_url" : "${LAUNCH_URL}",
+      "selenium_port"  : 80,
+      "selenium_host"  : "hub.browserstack.com",
+      "desiredCapabilities": {
+        "project": "${PROJECT}",
+        "platform": "MAC",
+        "browserName": "iPhone",
+        "device": "iPhone 5s",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserstack.user": "${BS_USER}",
+        "browserstack.key": "${BS_KEY}",
+        "browserstack.local": true
+      }
+    }
+  }
+}
