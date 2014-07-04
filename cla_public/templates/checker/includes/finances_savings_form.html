@@ -2,18 +2,16 @@
 <section class="Grid">
   <h2 id="{{form.prefix}}-label" class="FormBlock-label">{{ fieldset_label }}</h2>
 
-  <div class="FormBlock FormBlock--grey{% if form.errors and show_errors %} FieldsetError{% endif %}" aria-labelledby="{{form.prefix}}-label" role="group">
+  <div class="FormBlock FormBlock--grey{% if form.errors %} FieldsetError{% endif %}" aria-labelledby="{{form.prefix}}-label" role="group">
 
     {% for field in form %}
-      <div class="FormRow cf{% if field.errors and show_errors %} Error{% endif %}">
+      <div class="FormRow cf{% if field.errors %} Error{% endif %}">
         <label for="{{ field.id_for_label }}" id="{{ field.auto_id }}-label">
           <span class="Grid-col Grid-col--2-3">
             {{ field.label }}
-            {% if show_errors %}
               {% for error in field.errors %}
                 <span class="Error-message">{{ error }}</span>
               {% endfor %}
-            {% endif %}
           </span>
           <span class="Grid-col Grid-col--1-3">
             <span class="FormRow-prefix">&pound;</span>

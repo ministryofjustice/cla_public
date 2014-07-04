@@ -44,7 +44,7 @@ BROWSERSTACK_ZIP_URL = ("https://www.browserstack.com/browserstack-local/"
 BROWSERSTACK_BIN_NAME = "BrowserStackLocal"
 BROWSERSTACK_BROWSER_CONFS = [
     'chrome34-win8.1',
-    'ie9-win7',
+    # 'ie9-win7',
 ]
 
 # use python scripts/jenkins/build.py integration
