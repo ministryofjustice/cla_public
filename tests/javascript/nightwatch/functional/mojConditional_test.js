@@ -9,12 +9,12 @@ module.exports = {
       .execute(function () {
         $("input[name=your_problem-category][data-conditional-el]").attr("checked", true).trigger("change");
       })
-      .waitForElementVisible('.Conditional', 500, 'wait for conditional content to show')
+      .waitForElementVisible('.Conditional', 1500, 'wait for conditional content to show')
       .assert.visible('.Conditional', 'conditional content is visible')
       .execute(function () {
         $("input[name=your_problem-category]:not([data-conditional-el])").attr("checked", true).trigger("change");
       })
-      .waitForElementNotVisible('.Conditional', 500, 'wait for conditional content to hide')
+      .waitForElementNotVisible('.Conditional', 1500, 'wait for conditional content to hide')
       .assert.hidden('.Conditional', 'conditional content not visible')
       .end();
   }
