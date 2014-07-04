@@ -16,13 +16,19 @@ module.exports = {
         $("input[name=your_problem-category]:first").click();
       })
       .submitForm('#content form')
-      .assert.containsText('.PageHeader h1', 'Your details', 'passes when completed')
+      .assert.containsText('.PageHeader h1', 'Your finances', 'passes when completed')
+  },
+
+  "Your finances start page passes" : function (browser) {
+    browser
+      .submitForm('#content form')
+      .assert.containsText('.PageHeader h1', 'About you', 'passes when completed')
   },
 
   "Your details fails" : function (browser) {
     browser
       .submitForm('#content form')
-      .assert.containsText('.PageHeader h1', 'Your details', 'remained on same page')
+      .assert.containsText('.PageHeader h1', 'About you', 'remained on same page')
       .assert.elementPresent('.ErrorSummary', 'error summary is present')
       .assert.containsText('.ErrorSummary', 'There was a problem submitting the form', 'error summary contains correct message')
       .assert.elementPresent('.FormRow.Error', 'field errors are present')
@@ -35,13 +41,13 @@ module.exports = {
         $("input[value=0][type=radio]").click();
       })
       .submitForm('#content form')
-      .assert.containsText('.PageHeader h1', 'Your finances', 'passes when completed')
+      .assert.containsText('.PageHeader h1', 'Your money', 'passes when completed')
   },
 
   "Your finances fails" : function (browser) {
     browser
-      .click('#content form button[type=submit]')
-      .assert.containsText('.PageHeader h1', 'Your finances', 'remained on same page')
+      .submitForm('#content form')
+      .assert.containsText('.PageHeader h1', 'Your money', 'remained on same page')
       .assert.elementPresent('.ErrorSummary', 'error summary is present')
       .assert.containsText('.ErrorSummary', 'There was a problem submitting the form', 'error summary contains correct message')
       .assert.elementPresent('.FormRow.Error', 'field errors are present')
@@ -54,7 +60,7 @@ module.exports = {
         $("input[type=number]").val(0);
         $("input[value=1][type=radio]").click();
       })
-      .click('#content form button[type=submit]')
+      .submitForm('#content form')
       .assert.containsText('.PageHeader h1', 'Your income', 'passes when completed')
   },
 
