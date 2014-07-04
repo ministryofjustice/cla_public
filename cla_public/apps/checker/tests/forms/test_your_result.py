@@ -17,7 +17,8 @@ class ApplyFormTestCase(CLATestCase):
         'postcode': 'SW1H 9AJ',
         'street': '102 Petty France',
         'mobile_phone': '0123456789',
-        'home_phone': '9876543210'
+        'home_phone': '9876543210',
+        'email': 'test@example.com',
     }
 
     EXTRA_DEFAULT_DATA = {

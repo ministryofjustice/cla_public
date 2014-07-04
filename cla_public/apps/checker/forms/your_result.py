@@ -21,7 +21,8 @@ class ContactDetailsForm(forms.Form):
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 21})
     )
     mobile_phone = forms.CharField(label=_(u'Contact number'), max_length=20, required=False)
-    home_phone = forms.CharField(label=_('Home Phone'), max_length=20, required=False)
+    home_phone = forms.CharField(label=_(u'Home Phone'), max_length=20, required=False)
+    email = forms.EmailField(label=_(u'Email address'), required=False)
 
     def clean(self, *args, **kwargs):
         cleaned_data = super(ContactDetailsForm, self).clean(*args, **kwargs)
@@ -74,7 +75,8 @@ class ApplyForm(EligibilityMixin, CheckerWizardMixin, MultipleFormsForm):
             'postcode': data['postcode'],
             'street': data['street'],
             'mobile_phone': data['mobile_phone'],
-            'home_phone': data['home_phone']
+            'home_phone': data['home_phone'],
+            'email': data['email'],
         }
 
     def get_extra(self):
