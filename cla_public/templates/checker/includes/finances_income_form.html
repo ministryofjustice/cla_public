@@ -31,6 +31,32 @@
         </label>
       </div>
 
+      <div class="FormRow cf{% if form.tax.errors %} Error{% endif %}">
+        <label for="{{ form.tax.id_for_label }}" id="{{ form.tax.auto_id }}-label">
+          <span class="FormRow-label">
+            {{ form.tax.label }}
+            {% for error in form.tax.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </span>
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.tax }}
+        </label>
+      </div>
+
+      <div class="FormRow cf{% if form.ni.errors %} Error{% endif %}">
+        <label for="{{ form.ni.id_for_label }}" id="{{ form.ni.auto_id }}-label">
+          <span class="FormRow-label">
+            {{ form.ni.label }}
+            {% for error in form.ni.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </span>
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.ni }}
+        </label>
+      </div>
+
       <div class="FormRow cf{% if form.self_employed.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.self_employed.auto_id }}-label">
         <p class="FormRow-label" id="{{ form.self_employed.auto_id }}-label">
           {{ form.self_employed.label }}
@@ -38,7 +64,7 @@
             <span class="Error-message">{{ error }}</span>
           {% endfor %}
         </p>
-        
+
         {% for choice in form.self_employed.field.choices %}
         <label for="{{ form.self_employed.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
           <input type="radio" name="{{ form.self_employed.html_name }}" id="{{ form.self_employed.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.self_employed.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
@@ -47,6 +73,6 @@
         {% endfor %}
       </div>
     </div>
- 
+
   </section>
 {% endif %}
