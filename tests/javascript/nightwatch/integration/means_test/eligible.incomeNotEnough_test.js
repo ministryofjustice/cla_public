@@ -32,7 +32,7 @@ module.exports = {
       .execute(function () {
         $("input[type=number]").val(0);
       })
-      .click('#content form button[type=submit]');
+      .submitForm('#content form');
   },
   
   "Eligible income (Your finances - income)" : function (browser) {
