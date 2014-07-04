@@ -103,7 +103,8 @@ $border-colour: #C2C2C2;
   
   input[type=text],
   input[type=password],
-  input[type=number] {
+  input[type=number],
+  input[type=email] {
     @include core-24;
     font-size: 23px;
     border: 1px solid $border-colour;
@@ -117,6 +118,22 @@ $border-colour: #C2C2C2;
     @include ie-lte(7) {
       padding-top: 0;
       padding-bottom: 0;
+    }
+    &::-webkit-input-placeholder {
+      @include core-19;
+      padding-top: 5px;
+    }
+    &:-moz-placeholder {
+      @include core-19;
+      padding-top: 5px;
+    }
+    &::-moz-placeholder {
+      @include core-19;
+      padding-top: 5px;
+    }
+    &:-ms-input-placeholder {  
+      @include core-19;
+      padding-top: 5px;
     }
   }
   textarea {

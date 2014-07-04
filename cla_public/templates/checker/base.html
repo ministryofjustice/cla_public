@@ -23,6 +23,7 @@
 {% block content %}
   <div class="inner">
 
+    {% comment %}
     {% block breadcrumb %}
       <nav>
         <ol class="ProgressIndicator" role="progressbar" aria-valuetext="Step {{ breadcrumb.index }} of {{ breadcrumb.length }}">
@@ -38,6 +39,7 @@
         </ol>
       </nav>
     {% endblock %}
+    {% endcomment %}
 
     <header class="PageHeader">
       {% block page_header %}{% endblock %}

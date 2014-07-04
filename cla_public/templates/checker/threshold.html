@@ -1,0 +1,43 @@
+{% extends "checker/base.html" %}{% load i18n %}
+
+{% block body_classes %}{{ product_type }} {{ phase }} v-StartPage{% endblock %}
+
+{% block page_header %}
+  <h1>Can you get legal aid?</h1>
+{% endblock page_header %}
+
+{% block breadcrumb %}{% endblock breadcrumb %}
+
+{% block checker_content %}
+  <h2>What is legal aid?</h2>
+
+  <p>You'll only get legal aid if you can prove:</p>
+
+  <ul>
+    <li>you have an income of less than £2,657 a month before tax (this includes your partner's income if you live together)</li>
+    <li>you have less than £8,000 in savings or in a home you own (this includes your partner's savings if you live together)</li>
+  </ul>
+
+  <p>Civil legal aid <strong>only</strong> covers problems to do with:</p>
+
+  <ul>
+    <li>housing</li>
+    <li>debt</li>
+    <li>discrimination</li>
+    <li>family</li>
+    <li>education</li>
+  </ul>
+
+  <p>Civil legal aid <strong>does not</strong> cover problems to do with:</p>
+
+  <ul>
+    <li>employment</li>
+    <li>immigration</li>
+    <li>consumer issues</li>
+    <li>criminal issues</li>
+  </ul>
+
+  <p>
+    <a href="{% url 'checker:checker' %}" class="Button" role="button">Start</a>
+  </p>
+{% endblock %}

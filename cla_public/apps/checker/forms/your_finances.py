@@ -59,16 +59,31 @@ class YourCapitalPropertyForm(CheckerWizardMixin, forms.Form):
 
 class YourCapitalSavingsForm(CheckerWizardMixin, forms.Form):
     bank = MoneyField(
-        label=_(u"Do you have any money saved in a bank or building society?")
+        label=_(u"How much money do you have saved in a bank or building society?")
     )
     investments = MoneyField(
-        label=_(u"Do you have any investments, shares, ISAs?")
+        label=_(u"What is the total value of any investments (shares or ISAs) you have?")
     )
     valuable_items = MoneyField(
-        label=_(u"Do you have any valuable items over £££ each?")
+        label=_(u"What is the total value of any items you have worth over £500?")
     )
     money_owed = MoneyField(
-        label=_(u"Do you have any money owed to you?")
+        label=_(u"How much money do you have owed to you?")
+    )
+
+
+class YourCapitalPartnerSavingsForm(CheckerWizardMixin, forms.Form):
+    bank = MoneyField(
+        label=_(u"How much money does your partner have saved in a bank or building society?")
+    )
+    investments = MoneyField(
+        label=_(u"What is the total value of any investments (shares or ISAs) your partner has?")
+    )
+    valuable_items = MoneyField(
+        label=_(u"What is the total value of any items your partner has worth over £500?")
+    )
+    money_owed = MoneyField(
+        label=_(u"How much money does your partner have owed to them?")
     )
 
 
@@ -188,7 +203,7 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 
     forms_list = (
         ('your_savings', YourCapitalSavingsForm),
-        ('partners_savings', YourCapitalSavingsForm),
+        ('partners_savings', YourCapitalPartnerSavingsForm),
     )
 
     def _prepare_for_init(self, kwargs):
@@ -314,11 +329,14 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 
 class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
     earnings = MoneyIntervalField(
-        label=_(u"Earnings"), min_value=0
+        label=_(u"Earnings last month"), min_value=0
     )
 
+    tax = MoneyIntervalField(label=_(u"Tax paid"), min_value=0)
+    ni = MoneyIntervalField(label=_(u"National Insurance Contribution"), min_value=0)
+
     other_income = MoneyIntervalField(
-        label=_(u"Other income"), min_value=0
+        label=_(u"Other income last month"), min_value=0
     )
 
     self_employed = RadioBooleanField(
@@ -379,8 +397,8 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
     def get_income(self, key, cleaned_data):
         income = {
-            'earnings': cleaned_data.get(key, {}).get('earnings', {'per_month' : 0}),
-            'other_income': cleaned_data.get(key, {}).get('other_income', {'per_month' : 0}),
+            'earnings': cleaned_data.get(key, {}).get('earnings', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'other_income': cleaned_data.get(key, {}).get('other_income', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
             'self_employed': cleaned_data.get(key, {}).get('self_employed', False)
         }
 
@@ -391,6 +409,19 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
         partner_income = self.get_income('partners_income', cleaned_data) or {}
         return your_income, partner_income
 
+    def _get_allowances(self, key, cleaned_data):
+        if key in cleaned_data:
+
+            return {
+                'income_tax': cleaned_data.get(key, {}).get('tax', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+                'national_insurance': cleaned_data.get(key, {}).get('ni', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            }
+
+    def get_allowances(self, cleaned_data):
+        your_allowances = self._get_allowances('your_income', cleaned_data)
+        partner_allowances = self._get_allowances('partners_income', cleaned_data) or {}
+        return your_allowances, partner_allowances
+
     def get_dependants(self, cleaned_data):
         return cleaned_data.get('dependants', {})
 
@@ -400,19 +431,22 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
         data = self.cleaned_data
         your_income, partner_income = self.get_incomes(data)
+        your_allowances, partner_allowances = self.get_allowances(data)
 
         dependants = self.get_dependants(data)
         post_data = {
             'dependants_young': dependants.get('dependants_young', 0),
             'dependants_old': dependants.get('dependants_old', 0),
             'you': {
-                'income': your_income
+                'income': your_income,
+                'deductions': your_allowances
             }
         }
         if partner_income:
             post_data.update({
                 'partner': {
-                    'income': partner_income
+                    'income': partner_income,
+                    'deductions': partner_allowances
                 }
             })
 
@@ -425,8 +459,6 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 class YourSingleAllowancesForm(CheckerWizardMixin, form_utils.forms.BetterForm):
     mortgage = MoneyIntervalField(label=_(u"Mortgage"), min_value=0)
     rent = MoneyIntervalField(label=_(u"Rent"), min_value=0)
-    tax = MoneyIntervalField(label=_(u"Tax"), min_value=0)
-    ni = MoneyIntervalField(label=_(u"National Insurance"), min_value=0)
     maintenance = MoneyIntervalField(label=_(u"Maintenance"), min_value=0)
     childcare = MoneyIntervalField(label=_(u"Childcare"), min_value=0)
     criminal_legalaid_contributions = MoneyField(
@@ -435,7 +467,7 @@ class YourSingleAllowancesForm(CheckerWizardMixin, form_utils.forms.BetterForm):
 
     class Meta:
         fieldsets = [('housing', {'fields': ['mortgage', 'rent'], 'legend': 'Housing costs', 'classes': ['FieldGroup']}),
-                     ('', {'fields': ['tax', 'ni', 'maintenance', 'childcare', 'criminal_legalaid_contributions']})]
+                     ('', {'fields': ['maintenance', 'childcare', 'criminal_legalaid_contributions']})]
 
 
 class YourAllowancesForm(YourFinancesFormMixin, MultipleFormsForm):
@@ -459,8 +491,6 @@ class YourAllowancesForm(YourFinancesFormMixin, MultipleFormsForm):
             return {
                 'mortgage': cleaned_data.get(key, {}).get('mortgage', {}),
                 'rent': cleaned_data.get(key, {}).get('rent', {}),
-                'income_tax': cleaned_data.get(key, {}).get('tax', {}),
-                'national_insurance': cleaned_data.get(key, {}).get('ni', {}),
                 'maintenance': cleaned_data.get(key, {}).get('maintenance', {}),
                 'childcare': cleaned_data.get(key, {}).get('childcare', {}),
                 'criminal_legalaid_contributions': cleaned_data.get(key, {}).get('criminal_legalaid_contributions', 0),

@@ -1,48 +1,50 @@
 {% extends "checker/base.html" %}{% load i18n helpers %}
 
 {% block page_header %}
-  <h1>{% trans "Your details" %}</h1>
+  <h1>{% trans "About you" %}</h1>
 {% endblock %}
 
 {% block checker_content %}
   <form action="." method="POST">
-    {% csrf_token %}
-    {{ wizard.management_form }}
-    {{ form.non_field_errors }}
+    <fieldset class="FormBlock FormBlock--grey">
+      {% csrf_token %}
+      {{ wizard.management_form }}
+      {{ form.non_field_errors }}
 
-    {% with form=form %}
-      {% include "checker/includes/error_summary.html" %}
-    {% endwith %}
-    
-    {% for field in form %}
-      <div class="FormRow cf{% if field.help_text %} FormRow--details{% endif %}{% if field.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ field.auto_id }}-label">
-        <p class="FormRow-label" id="{{ field.auto_id }}-label">
-          {{ field.label }}
-          {% for error in field.errors %}
-            <span class="Error-message">{{ error }}</span>
+      {% with form=form %}
+        {% include "checker/includes/error_summary.html" %}
+      {% endwith %}
+      
+      {% for field in form %}
+        <div class="FormRow cf{% if field.help_text %} FormRow--details{% endif %}{% if field.errors %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ field.auto_id }}-label">
+          <p class="FormRow-label" id="{{ field.auto_id }}-label">
+            {{ field.label }}
+            {% for error in field.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </p>
+          
+          {% if field.help_text %}
+          <details>
+            <summary>{% trans "More info" %}</summary>
+            <div>
+              {{ field.help_text|safe }}
+            </div>
+          </details>
+          {% endif %}
+
+          {% for choice in field.field.choices %}
+          <label for="{{ field.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
+            <input type="radio" name="{{ field.html_name }}" id="{{ field.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if field.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+            {{ choice.1 }}
+          </label>
           {% endfor %}
-        </p>
-        
-        {% if field.help_text %}
-        <details>
-          <summary>{% trans "More info" %}</summary>
-          <div>
-            {{ field.help_text|safe }}
-          </div>
-        </details>
-        {% endif %}
-
-        {% for choice in field.field.choices %}
-        <label for="{{ field.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
-          <input type="radio" name="{{ field.html_name }}" id="{{ field.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if field.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
-          {{ choice.1 }}
-        </label>
-        {% endfor %}
-      </div>
-    {% endfor %}
+        </div>
+      {% endfor %}
+    </fieldset>
 
     <div class="FormActions">
-      <button type="submit" class="Button">{% trans "Next step - Your finances" %}</button>
+      <button type="submit" class="Button">{% trans "Next step" %}</button>
       <a href="{% url 'checker:checker_step' wizard.steps.prev %}">{% trans "Go back to previous step" %}</a>
     </div>
   </form>

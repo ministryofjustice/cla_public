@@ -32,6 +32,10 @@ class CheckerWizardTestCase(CLATestCase):
         self.your_benefits_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_benefits'}
         )
+        self.your_finances_interstitial_url = reverse(
+            'checker:checker_step', args=(), kwargs={
+                'step': 'your_finances_interstitial'}
+        )
         self.your_capital_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_capital'}
         )
@@ -119,11 +123,19 @@ class CheckerWizardTestCase(CLATestCase):
             "your_income-other_income_0": [100],
             "your_income-other_income_1": ['per_month'],
             "your_income-self_employed": [0],
+            'your_income-tax_0': [700],
+            'your_income-tax_1': ['per_month'],
+            'your_income-ni_0': [700],
+            'your_income-ni_1': ['per_month'],
             "partners_income-earnings_0": [100],
             "partners_income-earnings_1": ['per_month'],
             "partners_income-other_income_0": [100],
             "partners_income-other_income_1": ['per_month'],
             "partners_income-self_employed": [0],
+            'partners_income-tax_0': [701],
+            'partners_income-tax_1': ['per_month'],
+            'partners_income-ni_0': [701],
+            'partners_income-ni_1': ['per_month'],
             "dependants-dependants_old": [0],
             "dependants-dependants_young": [0],
         }
@@ -134,10 +146,6 @@ class CheckerWizardTestCase(CLATestCase):
             'your_allowances-mortgage_1': ['per_month'],
             'your_allowances-rent_0': [700],
             'your_allowances-rent_1': ['per_month'],
-            'your_allowances-tax_0': [700],
-            'your_allowances-tax_1': ['per_month'],
-            'your_allowances-ni_0': [700],
-            'your_allowances-ni_1': ['per_month'],
             'your_allowances-maintenance_0': [700],
             'your_allowances-maintenance_1': ['per_month'],
             'your_allowances-childcare_0': [700],
@@ -148,10 +156,6 @@ class CheckerWizardTestCase(CLATestCase):
             'partners_allowances-mortgage_1': ['per_month'],
             'partners_allowances-rent_0': [701],
             'partners_allowances-rent_1': ['per_month'],
-            'partners_allowances-tax_0': [701],
-            'partners_allowances-tax_1': ['per_month'],
-            'partners_allowances-ni_0': [701],
-            'partners_allowances-ni_1': ['per_month'],
             'partners_allowances-maintenance_0': [701],
             'partners_allowances-maintenance_1': ['per_month'],
             'partners_allowances-childcare_0': [701],
@@ -173,6 +177,7 @@ class CheckerWizardTestCase(CLATestCase):
             'your_problem': self._get_your_problem_post_data,
             'your_details': self._get_your_details_post_data,
             'your_benefits': self._get_your_benefits_none_post_data,
+            'your_finances_interstitial': lambda : {},
             'your_capital': self._get_your_capital_post_data,
             'your_income': self._get_your_income_post_data,
             'your_allowances': self._get_your_allowances_post_data,
@@ -257,7 +262,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
 
         response = self.client.post(self.your_problem_url, data=data)
-        self.assertRedirects(response, self.your_details_url)
+        self.assertRedirects(response, self.your_finances_interstitial_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
@@ -271,7 +276,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE
 
         response = self.client.post(self.your_problem_url, data=data)
-        self.assertRedirects(response, self.your_details_url)
+        self.assertRedirects(response, self.your_finances_interstitial_url)
 
         self.assertEqual(self.mocked_eligibility_check_patch.called, True)
 
@@ -358,7 +363,7 @@ class CheckerWizardTestCase(CLATestCase):
 
         data = self._get_your_benefits_none_post_data()
 
-        r1 = self.client.get(self.your_benefits_url)
+        r1 = self.client.get(self.your_finances_interstitial_url)
 
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
         self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
@@ -376,7 +381,7 @@ class CheckerWizardTestCase(CLATestCase):
 
         data = self._get_your_benefits_passported_post_data()
 
-        r1 = self.client.get(self.your_benefits_url)
+        r1 = self.client.get(self.your_finances_interstitial_url)
 
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
         self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN

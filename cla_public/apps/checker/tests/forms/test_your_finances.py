@@ -425,11 +425,21 @@ class YourIncomeFormTestCase(CLATestCase):
             u'your_income-other_income_1': u'per_month',
             u'your_income-self_employed': u'0',
 
+            u'your_income-tax_0': u'353',
+            u'your_income-tax_1': u'per_month',
+            u'your_income-ni_0': u'354',
+            u'your_income-ni_1': u'per_month',
+
             u'partners_income-earnings_0': u'444',
             u'partners_income-earnings_1': u'per_month',
             u'partners_income-other_income_0': u'555',
             u'partners_income-other_income_1': u'per_month',
             u'partners_income-self_employed': u'1',
+
+            u'partners_income-tax_0': u'453',
+            u'partners_income-tax_1': u'per_month',
+            u'partners_income-ni_0': u'454',
+            u'partners_income-ni_1': u'per_month',
 
             u'dependants-dependants_young': u'3',
             u'dependants-dependants_old': u'2',
@@ -442,6 +452,10 @@ class YourIncomeFormTestCase(CLATestCase):
                     "earnings":  {'interval_period': u'per_month', 'per_interval_value': 22200, 'per_month': 22200 },
                     "other_income": {'interval_period': u'per_month', 'per_interval_value': 33300, 'per_month': 33300 },
                     "self_employed": False,
+                },
+                "deductions": {
+                    "income_tax": {'per_interval_value': 35300, 'per_month': 35300, 'interval_period': u'per_month'},
+                    "national_insurance": {'per_interval_value': 35400, 'per_month': 35400, 'interval_period': u'per_month'},
                 }
             },
             "partner": {
@@ -449,6 +463,10 @@ class YourIncomeFormTestCase(CLATestCase):
                     "earnings": {'interval_period': u'per_month', 'per_interval_value': 44400, 'per_month': 44400 },
                     "other_income": {'interval_period': u'per_month', 'per_interval_value': 55500, 'per_month': 55500 },
                     "self_employed": True,
+                },
+                "deductions": {
+                    "income_tax": {'per_interval_value': 45300, 'per_month': 45300, 'interval_period': u'per_month'},
+                    "national_insurance": {'per_interval_value': 45400, 'per_month': 45400, 'interval_period': u'per_month'},
                 }
             },
             "dependants_young": 3,
@@ -627,10 +645,6 @@ class YourAllowancesFormTestCase(CLATestCase):
             u'your_allowances-mortgage_1': u'per_month',
             u'your_allowances-rent_0': u'352',
             u'your_allowances-rent_1': u'per_month',
-            u'your_allowances-tax_0': u'353',
-            u'your_allowances-tax_1': u'per_month',
-            u'your_allowances-ni_0': u'354',
-            u'your_allowances-ni_1': u'per_month',
             u'your_allowances-maintenance_0': u'355',
             u'your_allowances-maintenance_1': u'per_month',
             u'your_allowances-childcare_0': u'355.50',
@@ -641,10 +655,6 @@ class YourAllowancesFormTestCase(CLATestCase):
             u'partners_allowances-mortgage_1': u'per_month',
             u'partners_allowances-rent_0': u'452',
             u'partners_allowances-rent_1': u'per_month',
-            u'partners_allowances-tax_0': u'453',
-            u'partners_allowances-tax_1': u'per_month',
-            u'partners_allowances-ni_0': u'454',
-            u'partners_allowances-ni_1': u'per_month',
             u'partners_allowances-maintenance_0': u'455',
             u'partners_allowances-maintenance_1': u'per_month',
             u'partners_allowances-childcare_0': u'455.50',
@@ -658,8 +668,6 @@ class YourAllowancesFormTestCase(CLATestCase):
                 "deductions": {
                     "mortgage": {'per_interval_value': 35100, 'per_month': 35100, 'interval_period': u'per_month'},
                     "rent": {'per_interval_value': 35200, 'per_month': 35200, 'interval_period': u'per_month'},
-                    "income_tax": {'per_interval_value': 35300, 'per_month': 35300, 'interval_period': u'per_month'},
-                    "national_insurance": {'per_interval_value': 35400, 'per_month': 35400, 'interval_period': u'per_month'},
                     "maintenance": {'per_interval_value': 35500, 'per_month': 35500, 'interval_period': u'per_month'},
                     "childcare": {'per_interval_value': 35550, 'per_month': 35550, 'interval_period': u'per_month'},
                     "criminal_legalaid_contributions": 35600
@@ -669,8 +677,6 @@ class YourAllowancesFormTestCase(CLATestCase):
                 "deductions": {
                     "mortgage": {'per_interval_value': 45100, 'per_month': 45100, 'interval_period': u'per_month'},
                     "rent": {'per_interval_value': 45200, 'per_month': 45200, 'interval_period': u'per_month'},
-                    "income_tax": {'per_interval_value': 45300, 'per_month': 45300, 'interval_period': u'per_month'},
-                    "national_insurance": {'per_interval_value': 45400, 'per_month': 45400, 'interval_period': u'per_month'},
                     "maintenance": {'per_interval_value': 45500, 'per_month': 45500, 'interval_period': u'per_month'},
                     "childcare": {'per_interval_value': 45550, 'per_month': 45550, 'interval_period': u'per_month'},
                     "criminal_legalaid_contributions": 45600
@@ -780,10 +786,6 @@ class YourAllowancesFormTestCase(CLATestCase):
                             'your_allowances-mortgage_1': None,
                             'your_allowances-rent_0': None,
                             'your_allowances-rent_1': None,
-                            'your_allowances-tax_0': None,
-                            'your_allowances-tax_1': None,
-                            'your_allowances-ni_0': None,
-                            'your_allowances-ni_1': None,
                             'your_allowances-maintenance_0': None,
                             'your_allowances-maintenance_1': None,
                             'your_allowances-childcare_0': None,
@@ -793,8 +795,6 @@ class YourAllowancesFormTestCase(CLATestCase):
                         'error': {
                             'mortgage': [u'This field is required.'],
                             'rent': [u'This field is required.'],
-                            'tax': [u'This field is required.'],
-                            'ni': [u'This field is required.'],
                             'maintenance': [u'This field is required.'],
                             'childcare': [u'This field is required.'],
                             'criminal_legalaid_contributions': [u'This field is required.'],
@@ -806,10 +806,6 @@ class YourAllowancesFormTestCase(CLATestCase):
                             'your_allowances-mortgage_1': 'per_month',
                             'your_allowances-rent_0': -1,
                             'your_allowances-rent_1': 'per_month',
-                            'your_allowances-tax_0': -1,
-                            'your_allowances-tax_1': 'per_month',
-                            'your_allowances-ni_0': -1,
-                            'your_allowances-ni_1': 'per_month',
                             'your_allowances-maintenance_0': -1,
                             'your_allowances-maintenance_1': 'per_month',
                             'your_allowances-childcare_0': -1,
@@ -819,8 +815,6 @@ class YourAllowancesFormTestCase(CLATestCase):
                         'error': {
                             'mortgage': [u'Ensure this value is greater than or equal to 0.'],
                             'rent': [u'Ensure this value is greater than or equal to 0.'],
-                            'tax': [u'Ensure this value is greater than or equal to 0.'],
-                            'ni': [u'Ensure this value is greater than or equal to 0.'],
                             'maintenance': [u'Ensure this value is greater than or equal to 0.'],
                             'childcare': [u'Ensure this value is greater than or equal to 0.'],
                             'criminal_legalaid_contributions': [u'Ensure this value is greater than or equal to 0.'],
