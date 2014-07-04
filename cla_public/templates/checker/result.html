@@ -23,7 +23,7 @@
       {% endwith %}
 
       <p>{% trans "Please provide the following information so we can contact you about your application for legal aid." %}</p>
-      
+
       {% with form=form.form_dict.contact_details %}
       <fieldset class="FormBlock FormBlock--grey">
         <div class="FormRow FormRow--inline cf{% if form.title.errors %} Error{% endif %}">
@@ -86,12 +86,15 @@
           </label>
         </div>
 
-        <div class="FormRow FormRow--inline cf">
-          <label for="id_contact_details-email" id="id_contact_details-email-label">
+        <div class="FormRow FormRow--inline cf{% if form.email.errors %} Error{% endif %}">
+          <label for="{{ form.email.id_for_label }}" id="{{ form.email.auto_id }}-label">
             <span class="FormRow-label">
-              Email address
+              {{ form.email.label }}
+              {% for error in form.email.errors %}
+              <span class="Error-message">{{ error }}</span>
+              {% endfor %}
             </span>
-            <input id="id_contact_details-email" name="contact_details-email" type="email" autocomplete="off">
+            {{ form.email }}
           </label>
         </div>
       </fieldset>
