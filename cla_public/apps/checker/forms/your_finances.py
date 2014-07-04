@@ -379,8 +379,8 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
     def get_income(self, key, cleaned_data):
         income = {
-            'earnings': cleaned_data.get(key, {}).get('earnings', {'per_month' : 0}),
-            'other_income': cleaned_data.get(key, {}).get('other_income', {'per_month' : 0}),
+            'earnings': cleaned_data.get(key, {}).get('earnings', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'other_income': cleaned_data.get(key, {}).get('other_income', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
             'self_employed': cleaned_data.get(key, {}).get('self_employed', False)
         }
 
