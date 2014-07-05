@@ -1,5 +1,6 @@
 from .base import *
 import os
+import iptools
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 
@@ -24,13 +25,13 @@ ALLOWED_HOSTS = [
 ]
 
 # Allow MOJ_DSD IPS to see TEMPLATE_DEBUG
-#INTERNAL_IPS = iptools.IpRangeList(
-#    '12.137.32.0/20',
-#    '81.134.202.16/28',
-#    '85.118.8.128/26',
-#    '213.205.229.219/32',
-#    '127.0.0.1'
-#)
+INTERNAL_IPS = iptools.IpRangeList(
+    '12.137.32.0/20',
+    '81.134.202.16/28',
+    '85.118.8.128/26',
+    '213.205.229.219/32',
+    '127.0.0.1'
+)
 
 GA_ID = os.environ["GA_ID"]
 
