@@ -1,0 +1,7 @@
+CLA_ENV=development
+SECRET_KEY=odimf%y#bszp359fe5z-zhd77m7_=*m768^@rr8*hk5knvd^-p
+DEBUG=True
+APP_NAME=cla_public
+HOST_NAME=http://public-qa.cla.dsd.io
+BACKEND_BASE_URI=http://ip-172-31-27-7.eu-west-1.compute.internal
+GA_ID=UA-37377084-13

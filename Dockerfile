@@ -21,8 +21,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
 
 # Install Nginx.
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update
-RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full && \
-  chown -R www-data:www-data /var/lib/nginx
+RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full
 
 #ADD ./docker/nginx.conf /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
@@ -35,16 +34,14 @@ RUN gem2.1 install sass --no-rdoc --no-ri
 
 # INstall Node.js
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository -y ppa:chris-lea/node.js && apt-get update
-RUN DEBIAN_FRONTEND='noninteractive' apt-get purge -y  g++ make
-RUN DEBIAN_FRONTEND='noninteractive' apt-get install -y nodejs
+RUN DEBIAN_FRONTEND='noninteractive' apt-get purge -y  g++ make &&  apt-get install -y nodejs
 
 #Pip install Python packages
 
 RUN pip install GitPython uwsgi
 
-RUN mkdir -p /var/log/wsgi
+RUN mkdir -p /var/log/wsgi /var/log/nginx/cla_public /root/.ssh && chown -R www-data:www-data /var/lib/nginx /var/log/wsgi
 
-RUN  mkdir -p /var/log/nginx/cla_public
 ADD ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
 
 # install service files for runit
@@ -52,6 +49,7 @@ ADD ./docker/uwsgi.service /etc/service/uwsgi/run
 
 # install service files for runit
 ADD ./docker/nginx.service /etc/service/nginx/run
+
 # Define mountable directories.
 VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi"]
 
@@ -68,7 +66,6 @@ ADD ./ /home/app/django
 #RUN ln -sf  /home/app/django/cla_public/settings/integration.py /home/app/django/cla_public/settings/local.py
 
 # Add deploy-key
-RUN mkdir -p /root/.ssh
 ADD ./docker/deploy-key /root/.ssh/id_rsa
 ADD ./docker/config /root/.ssh/config
 
@@ -86,5 +83,6 @@ RUN export LANG='en_US.UTF-8' && gulp build
 
 RUN locale-gen --purge  en_US.UTF-8 && echo export LANG=''
 
-RUN python manage.py collectstatic --noinput
+ADD ./docker/rc_script /etc/rc.local
 
+ADD ./docker/nginx.conf /etc/nginx/nginx.conf
