@@ -10,8 +10,9 @@
       this.bindEvents();
     },
 
-    render: function () {
-      this.$addresses.append(CLA.templates.MultiAddress.addProperty());
+    cacheEls: function () {
+      this.$addresses = $(this.el);
+      this.count = 1;
     },
 
     bindEvents: function () {
@@ -20,6 +21,15 @@
         .on('click', '[value="remove-property"]', this.removeProperty);
 
       moj.Events.on('render', this.render);
+    },
+
+    render: function () {
+      this.$addresses.append(CLA.templates.MultiAddress.addProperty());
+      this.$addresses.find('.js-MultiAddress-property').each(function(i, el) {
+        if (i > 0) {
+          $(el).find('.js-MultiAddress-header').append(CLA.templates.MultiAddress.removeProperty());
+        }
+      });
     },
 
     addProperty: function () {
@@ -43,11 +53,6 @@
       if (this.count < 3 && this.$addresses.find('.js-MultiAddress-add').length < 1) {
         this.$addresses.append(CLA.templates.MultiAddress.addProperty());
       }
-    },
-
-    cacheEls: function () {
-      this.$addresses = $(this.el);
-      this.count = 1;
     }
   };
 }());
