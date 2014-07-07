@@ -58,7 +58,7 @@ module.exports = {
   
   "Not eligible income Result" : function (browser) {
     browser
-      .assert.containsText('.PageHeader h1', 'You are not able to get Legal Aid', 'result page contains unsuccessful title')
+      .assert.containsText('.PageHeader h1', 'You do not qualify for legal aid', 'result page contains unsuccessful title')
       .end();
   }
 };
