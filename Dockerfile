@@ -4,7 +4,7 @@
 # https://github.com/dockerfile/nginx
 #
 # Pull base image.
-FROM phusion/baseimage:0.9.10
+FROM phusion/baseimage:0.9.11
 
 MAINTAINER Peter Idah <peter.idah@digital.justice.gov.uk>
 
