@@ -1,8 +1,5 @@
 module.exports = {
   "Details tag" : function (browser) {
-
-    browser.assert.equal(true, false);
-
     browser
       .deleteCookies()
       .url(browser.launch_url + '/checker')
