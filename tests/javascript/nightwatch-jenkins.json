@@ -5,7 +5,7 @@
   "selenium" : {
     "start_process" : false,
     "host": "ondemand.saucelabs.com",
-    "port": 80,
+    "port": 80
   },
 
   "test_settings" : {
