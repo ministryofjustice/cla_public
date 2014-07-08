@@ -1,0 +1,49 @@
+{
+  "src_folders" : ["tests/javascript/nightwatch"],
+  "output_folder" : "reports/nightwatch",
+
+  "selenium" : {
+    "start_process" : false,
+    "host": "ondemand.saucelabs.com",
+    "port": 80,
+  },
+
+  "test_settings" : {
+    "default" : {
+      "launch_url" : "${LAUNCH_URL}",
+      "silent": true,
+      "desiredCapabilities": {
+        "browserName": "phantomjs"
+      }
+    },
+
+    "chrome34win81": {
+      "launch_url" : "${LAUNCH_URL}",
+      "silent": true,
+      "selenium_host": "ondemand.saucelabs.com",
+      "selenium_port": 80,
+      "username": "${SAUCE_USER}",
+      "access_key": "${SAUCE_KEY}",
+      "desiredCapabilities": {
+        "browser": "googlechrome",
+        "os": "Windows 8.1",
+        "browser-version": "35"
+      }
+    },
+
+    "ie9win7": {
+      "silent": true,
+      "launch_url" : "${LAUNCH_URL}",
+      "selenium_host": "ondemand.saucelabs.com",
+      "selenium_port": 80,
+      "username": "${SAUCE_USER}",
+      "access_key": "${SAUCE_KEY}",
+      "desiredCapabilities": {
+        "browser": "iehta",
+        "os": "Windows 7",
+        "browser-version": "9"
+      }
+    }
+
+  }
+}
