@@ -67,8 +67,8 @@ ADD ./ /home/app/django
 
 # Add deploy-key
 ADD ./docker/deploy-key /root/.ssh/id_rsa
-RUN chmod 400 /root/.ssh/id_rsa
 ADD ./docker/config /root/.ssh/config
+RUN chmod 400 /root/.ssh/id_rsa && eval $(ssh-agent -s) && ssh-add /root/.ssh/id_rsa
 
 # Define working directory.
 WORKDIR /home/app/django
