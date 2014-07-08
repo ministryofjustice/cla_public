@@ -3,7 +3,7 @@ module.exports = {
     browser
       .deleteCookies()
       .url(browser.launch_url + '/checker')
-      .assert.containsText('h1', 'Your problem', 'page has correct title')
+      .assert.containsText('h123', 'Your problem', 'page has correct title')
       .assert.elementPresent('details', 'details tag exists')
       .assert.hidden('details > div', 'details content not visible')
       .execute(function () {
