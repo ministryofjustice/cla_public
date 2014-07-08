@@ -25,9 +25,9 @@
       "username": "${SAUCE_USER}",
       "access_key": "${SAUCE_KEY}",
       "desiredCapabilities": {
-        "browser": "googlechrome",
-        "os": "Windows 8.1",
-        "browser-version": "35"
+        "browserName": "chrome",
+        "platform": "Windows 8.1",
+        "version": "35"
       }
     },
 
@@ -39,9 +39,9 @@
       "username": "${SAUCE_USER}",
       "access_key": "${SAUCE_KEY}",
       "desiredCapabilities": {
-        "browser": "iehta",
-        "os": "Windows 7",
-        "browser-version": "9"
+        "browserName": "internet explorer",
+        "platform": "Windows 7",
+        "version": "9"
       }
     }
 
