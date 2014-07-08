@@ -40,7 +40,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get purge -y  g++ make &&  apt-get inst
 
 RUN pip install GitPython uwsgi
 
-RUN mkdir -p /var/log/wsgi /var/log/nginx/cla_public /root/.ssh && chown -R www-data:www-data /var/lib/nginx /var/log/wsgi
+RUN mkdir -p /var/log/wsgi /var/log/nginx/cla_public && chown -R www-data:www-data /var/lib/nginx /var/log/wsgi
 
 ADD ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
 
@@ -61,26 +61,18 @@ ENV APP_HOME /home/app/django
 
 # Add project directory to docker
 ADD ./ /home/app/django
-#
-# Add local.py for QA
-#RUN ln -sf  /home/app/django/cla_public/settings/integration.py /home/app/django/cla_public/settings/local.py
 
-# Add deploy-key
-ADD ./docker/deploy-key /root/.ssh/id_rsa
-ADD ./docker/config /root/.ssh/config
-RUN chmod 400 /root/.ssh/id_rsa && eval $(ssh-agent -s) && ssh-add /root/.ssh/id_rsa
-
-# Define working directory.
-WORKDIR /home/app/django
+# awaiting docker fix
+#WORKDIR /home/app/django
 
 # PIP INSTALL APPLICATION
-RUN pip install -r requirements/production.txt
+RUN cd /home/app/django && pip install -r requirements/production.txt
 
 #NPM bower and gulp
-RUN  npm install -g bower gulp && npm install
+RUN  npm install -g bower gulp && cd /home/app/django && npm install
 
 # gulp build
-RUN export LANG='en_US.UTF-8' && gulp build 
+RUN export LANG='en_US.UTF-8' && cd /home/app/django && gulp build 
 
 RUN locale-gen --purge  en_US.UTF-8 && echo export LANG=''
 
