@@ -40,8 +40,8 @@
       "access_key": "${SAUCE_KEY}",
       "desiredCapabilities": {
         "browserName": "internet explorer",
-        "platform": "Windows 7",
-        "version": "9"
+        "platform": "Windows XP",
+        "version": "7"
       }
     }
 
