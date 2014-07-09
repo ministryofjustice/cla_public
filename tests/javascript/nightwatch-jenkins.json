@@ -25,7 +25,7 @@
       "username": "${SAUCE_USER}",
       "access_key": "${SAUCE_KEY}",
       "desiredCapabilities": {
-        "name": "test-name",
+        "name": "CLA public nightwatch",
         "browserName": "chrome",
         "platform": "Windows 8.1",
         "version": "35"
@@ -40,7 +40,7 @@
       "username": "${SAUCE_USER}",
       "access_key": "${SAUCE_KEY}",
       "desiredCapabilities": {
-        "name": "test-name",
+        "name": "CLA public nightwatch",
         "browserName": "internet explorer",
         "platform": "Windows XP",
         "version": "7"
