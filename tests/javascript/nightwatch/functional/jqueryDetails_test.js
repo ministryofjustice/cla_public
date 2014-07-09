@@ -1,8 +1,4 @@
 module.exports = {
-  setUp : function(browser) {
-    browser.capabilities['name'] = 'Details tag';
-  },
-
   "Details tag" : function (browser) {
     browser
       .deleteCookies()
