@@ -66,7 +66,7 @@ ADD ./ /home/app/django
 #WORKDIR /home/app/django
 
 # PIP INSTALL APPLICATION
-RUN cd /home/app/django && pip install -r requirements/production.txt
+RUN cd /home/app/django && pip install -r requirements/production.txt && find . -name '*.pyc' -delete
 
 #NPM bower and gulp
 RUN  npm install -g bower gulp && cd /home/app/django && npm install
