@@ -4,3 +4,11 @@
   background-color: #C2C2C2;
   height: 1px;
 }
+.u-optionalBlock {
+  border-left: 4px solid $grey-2;
+  padding: 10px 0 10px 20px;
+  margin: 0 0 1em;
+}
+.js-enabled .u-jsHidden {
+  display: none;
+}

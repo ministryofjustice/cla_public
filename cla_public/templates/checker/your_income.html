@@ -7,7 +7,7 @@
 
 
 {% block checker_content %}
-  <form method=post action="." role="form">
+  <form method=post action="." role="form" class="js-FieldHelp">
     {% csrf_token %}
     {{ wizard.management_form }}
     {{ form.non_field_errors }}

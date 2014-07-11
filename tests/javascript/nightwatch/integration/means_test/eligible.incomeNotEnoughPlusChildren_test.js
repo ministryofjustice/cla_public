@@ -10,9 +10,15 @@ module.exports = {
       .submitForm('#content form');
   },
   
+  "Eligible income w/ children (Your finances start page)" : function (browser) {
+    browser
+      .assert.containsText('.PageHeader h1', 'Your finances', 'your problem start page contains correct title')
+      .submitForm('#content form');
+  },
+  
   "Eligible income w/ children (Your details)" : function (browser) {
     browser
-      .assert.containsText('.PageHeader h1', 'Your details', 'your problem passes')
+      .assert.containsText('.PageHeader h1', 'About you', 'your details contains correct title')
       .execute(function () {
         $("input[value=0][type=radio]").click();
         $("#id_your_details-has_children_0").click();
@@ -22,16 +28,16 @@ module.exports = {
   
   "Eligible income w/ children (Your finances - property)" : function (browser) {
     browser
-      .assert.containsText('.PageHeader h1', 'Your finances', 'your finances passes')
+      .assert.containsText('.PageHeader h1', 'Your money', 'your finances contains correct title')
       .execute(function () {
         $("input[type=number]").val(0);
       })
-      .click('#content form button[type=submit]');
+      .submitForm('#content form');
   },
   
   "Eligible income w/ children (Your finances - income)" : function (browser) {
     browser
-      .assert.containsText('.PageHeader h1', 'Your income', 'your income passes')
+      .assert.containsText('.PageHeader h1', 'Your income', 'your income contains correct title')
       .execute(function () {
         $("input[type=number]").val(0);
         $("#id_your_income-earnings_0").val(732.99+(285.13*3));
@@ -44,7 +50,7 @@ module.exports = {
   
   "Eligible income w/ children (Your finances - expenses)" : function (browser) {
     browser
-      .assert.containsText('.PageHeader h1', 'Your expenses', 'your expenses passes')
+      .assert.containsText('.PageHeader h1', 'Your costs', 'your expenses contains correct title')
       .execute(function () {
         $("input[type=number]").val(0);
       })

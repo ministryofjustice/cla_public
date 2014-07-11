@@ -4,7 +4,7 @@
 
   "selenium" : {
     "start_process" : true,
-    "server_path" : "/usr/local/Cellar/selenium-server-standalone/2.40.0/libexec/selenium-server-standalone-2.40.0.jar",
+    "server_path" : "node_modules/selenium-standalone/.selenium/2.42.0/server.jar",
     "log_path" : false
   },
 

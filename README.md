@@ -55,7 +55,15 @@ Each time you start a new terminal instance you will need to run the following c
 
     source env/bin/activate
 
-    ./manage.py runserver 8001
+    ./manage.py runserver 8002
+
+You may need to add a local.py settings file to load apps like `debug_toolbar` and `django_pdb`. An example can be found at:
+
+    cla_frontend/settings/.example.local.py
+
+If using the apps suggested in this file you will also need to run `pip install` on `local.txt`:
+
+    pip install -r requirements/local.txt
 
 ## Frontend
 
