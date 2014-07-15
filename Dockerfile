@@ -21,7 +21,8 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
 
 # Install Nginx.
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update
-RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full
+RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full && \
+  chown -R www-data:www-data /var/lib/nginx
 
 #ADD ./docker/nginx.conf /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
@@ -40,9 +41,10 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get purge -y  g++ make &&  apt-get inst
 
 RUN pip install GitPython uwsgi
 
-RUN mkdir -p /var/log/wsgi /var/log/nginx/cla_public && chown -R www-data:www-data /var/lib/nginx /var/log/wsgi
+RUN mkdir -p /var/log/wsgi && chown -R www-data:www-data /var/log/wsgi && chmod -R g+s /var/log/wsgi
 
 ADD ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
+ADD ./docker/cla_public.conf /etc/rsyslog.d/cla_public.conf
 
 # install service files for runit
 ADD ./docker/uwsgi.service /etc/service/uwsgi/run
@@ -51,7 +53,7 @@ ADD ./docker/uwsgi.service /etc/service/uwsgi/run
 ADD ./docker/nginx.service /etc/service/nginx/run
 
 # Define mountable directories.
-VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi"]
+VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi", "/var/log/cla_public"]
 
 # Expose ports.
 EXPOSE 80
