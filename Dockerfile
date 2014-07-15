@@ -44,7 +44,6 @@ RUN pip install GitPython uwsgi
 RUN mkdir -p /var/log/wsgi && chown -R www-data:www-data /var/log/wsgi && chmod -R g+s /var/log/wsgi
 
 ADD ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
-ADD ./docker/cla_public.conf /etc/rsyslog.d/cla_public.conf
 
 # install service files for runit
 ADD ./docker/uwsgi.service /etc/service/uwsgi/run
