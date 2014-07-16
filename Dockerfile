@@ -77,6 +77,4 @@ RUN export LANG='en_US.UTF-8' && cd /home/app/django && gulp build
 
 RUN locale-gen --purge  en_US.UTF-8 && echo export LANG=''
 
-ADD ./docker/rc_script /etc/rc.local
-
 ADD ./docker/nginx.conf /etc/nginx/nginx.conf
