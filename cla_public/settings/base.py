@@ -114,6 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'core.middleware.AnonymousUserSessionSecurityMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -148,6 +149,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'widget_tweaks',
     'form_utils',
+    'session_security'
 )
 
 PROJECT_APPS = (
@@ -192,6 +194,12 @@ LOGGING = {
 BACKEND_BASE_URI = 'http://127.0.0.1:8000'
 
 GA_ID = ''
+
+
+# Settings for django-session-security.
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SECURITY_WARN_AFTER = 3360
+SESSION_SECURITY_EXPIRE_AFTER = 3600
 
 # EMAILS
 
