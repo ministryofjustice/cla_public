@@ -24,8 +24,8 @@ RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-
 RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full && \
   chown -R www-data:www-data /var/lib/nginx
 
-#ADD ./docker/nginx.conf /etc/nginx/nginx.conf
-RUN rm -f /etc/nginx/sites-enabled/default
+ADD ./docker/htpassword /etc/nginx/conf.d/htpassword
+RUN rm -f /etc/nginx/sites-enabled/default && chown www-data:www-data /etc/nginx/conf.d/htpassword
 
 # Install ruby
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:brightbox/ruby-ng && apt-get update
