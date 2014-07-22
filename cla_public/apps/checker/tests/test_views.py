@@ -64,6 +64,7 @@ class CheckerWizardTestCase(CLATestCase):
             'your_details-has_benefits': [1],
             'your_details-risk_homeless': [1],
             'your_details-older_than_sixty': [1],
+            'your_details-is_under_eighteen': [0],
             'your_details-caring_responsibilities': [1],
             'your_details-own_property': [1],
             'checker_wizard-current_step': 'your_details',
