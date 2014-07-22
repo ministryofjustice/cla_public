@@ -6,16 +6,16 @@
     <div class="FormBlock FormBlock--grey" aria-labelledby="{{form.prefix}}-label" role="group">
 
       <div class="FormRow Grid cf{% if form.earnings.errors %} Error{% endif %}">
-        <label for="{{ form.earnings.id_for_label }}" id="{{ form.earnings.auto_id }}-label" class="Grid-col Grid-col--1-3">
-          <span class="FormRow-label">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.earnings.id_for_label }}" id="{{ form.earnings.auto_id }}-label">
             {{ form.earnings.label }}
             {% for error in form.earnings.errors %}
               <span class="Error-message">{{ error }}</span>
             {% endfor %}
-          </span>
+          </label>
           <span class="FormRow-prefix">&pound;</span>
           {{ form.earnings|add_class:"FormRow-field--interval" }}
-        </label>
+        </div>
         <div class="Grid-col Grid-col--2-3">
           <p class="Help-text">
             {% if fieldset_label == 'You' %}
@@ -28,16 +28,16 @@
       </div>
 
       <div class="FormRow Grid cf{% if form.other_income.errors %} Error{% endif %}">
-        <label for="{{ form.other_income.id_for_label }}" id="{{ form.other_income.auto_id }}-label" class="Grid-col Grid-col--1-3">
-          <span class="FormRow-label">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.other_income.id_for_label }}" id="{{ form.other_income.auto_id }}-label">
             {{ form.other_income.label }}
             {% for error in form.other_income.errors %}
               <span class="Error-message">{{ error }}</span>
             {% endfor %}
-          </span>
+          </label>
           <span class="FormRow-prefix">&pound;</span>
           {{ form.other_income|add_class:"FormRow-field--interval" }}
-        </label>
+        </div>
         <div class="Grid-col Grid-col--2-3">
           <p class="Help-text">
             {% if fieldset_label == 'You' %}
@@ -50,16 +50,16 @@
       </div>
 
       <div class="FormRow Grid cf{% if form.tax.errors %} Error{% endif %}">
-        <label for="{{ form.tax.id_for_label }}" id="{{ form.tax.auto_id }}-label" class="Grid-col Grid-col--1-3">
-          <span class="FormRow-label">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.tax.id_for_label }}" id="{{ form.tax.auto_id }}-label">
             {{ form.tax.label }}
             {% for error in form.tax.errors %}
               <span class="Error-message">{{ error }}</span>
             {% endfor %}
-          </span>
+          </label>
           <span class="FormRow-prefix">&pound;</span>
           {{ form.tax|add_class:"FormRow-field--interval" }}
-        </label>
+        </div>
         <div class="Grid-col Grid-col--2-3">
           <p class="Help-text">
             {% if fieldset_label == 'You' %}
@@ -72,16 +72,16 @@
       </div>
 
       <div class="FormRow Grid cf{% if form.ni.errors %} Error{% endif %}">
-        <label for="{{ form.ni.id_for_label }}" id="{{ form.ni.auto_id }}-label" class="Grid-col Grid-col--1-3">
-          <span class="FormRow-label">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.ni.id_for_label }}" id="{{ form.ni.auto_id }}-label">
             {{ form.ni.label }}
             {% for error in form.ni.errors %}
               <span class="Error-message">{{ error }}</span>
             {% endfor %}
-          </span>
+          </label>
           <span class="FormRow-prefix">&pound;</span>
           {{ form.ni|add_class:"FormRow-field--interval" }}
-        </label>
+        </div>
         <div class="Grid-col Grid-col--2-3">
           <p class="Help-text">
             {% if fieldset_label == 'You' %}
