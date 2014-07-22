@@ -7,16 +7,16 @@
       {% for fieldset in form.fieldsets %}
         {% for field in fieldset %}
           <div class="FormRow Grid cf{% if field.errors %} Error{% endif %}">
-            <label for="{{ field.id_for_label }}" id="{{ field.auto_id }}-label" class="Grid-col Grid-col--1-3">
-              <span class="FormRow-label">
+            <div class="Grid-col Grid-col--1-3">
+              <label class="FormRow-label" for="{{ field.id_for_label }}" id="{{ field.auto_id }}-label">
                 {{ field.label }}
                 {% for error in field.errors %}
                   <span class="Error-message">{{ error }}</span>
                 {% endfor %}
-              </span>
+              </label>
               <span class="FormRow-prefix">&pound;</span>
               {{ field|add_class:"FormRow-field--interval" }}
-            </label>
+            </div>
             <div class="Grid-col Grid-col--2-3">
               <p class="Help-text">
                 {{ field.help_text }}
