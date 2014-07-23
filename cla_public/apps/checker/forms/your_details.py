@@ -3,10 +3,10 @@ from django.utils.translation import ugettext as _
 
 from ..fields import RadioBooleanField
 
-from .base import CheckerWizardMixin
+from .base import CheckerWizardMixin, EligibilityMixin
 
 
-class YourDetailsForm(CheckerWizardMixin, forms.Form):
+class YourDetailsForm(EligibilityMixin, CheckerWizardMixin, forms.Form):
     form_tag = 'your_details'
 
     has_partner = RadioBooleanField(

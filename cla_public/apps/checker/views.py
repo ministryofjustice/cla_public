@@ -203,8 +203,9 @@ class CheckerWizard(NamedUrlSessionWizardView):
         if getattr(self, 'redirect_to_self', False):
             return self.render_goto_step(self.steps.current)
 
-        if (form.form_tag == 'your_finances' \
-            or form.form_tag == 'your_benefits') \
+        if (form.form_tag == 'your_finances'
+            or form.form_tag == 'your_benefits'
+            or form.form_tag == 'your_details') \
             and not form.is_eligibility_unknown():
             return self.render_goto_step('result')
 
