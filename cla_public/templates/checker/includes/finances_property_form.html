@@ -40,17 +40,17 @@
       </label>
     </div>
 
-    <div class="FormRow cf{% if form.owner.errors  %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.owner.auto_id }}-label">
-      <p class="FormRow-label" id="{{ form.owner.auto_id }}-label">
-        {{ form.owner.label }}
-        {% for error in form.owner.errors %}
+    <div class="FormRow cf{% if form.main.errors  %} Error{% endif %}" role="radiogroup" aria-labelledby="{{ form.main.auto_id }}-label">
+      <p class="FormRow-label" id="{{ form.main.auto_id }}-label">
+        {{ form.main.label }}
+        {% for error in form.main.errors %}
           <span class="Error-message">{{ error }}</span>
         {% endfor %}
       </p>
 
-      {% for choice in form.owner.field.choices %}
-        <label for="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
-          <input type="radio" name="{{ form.owner.html_name }}" id="{{ form.owner.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.owner.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
+      {% for choice in form.main.field.choices %}
+        <label for="{{ form.main.auto_id }}_{{ forloop.counter0 }}" class="FormRow-option">
+          <input type="radio" name="{{ form.main.html_name }}" id="{{ form.main.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}"{% if form.main.value|stringformat:"s" == choice.0|stringformat:"s" %} checked="checked"{% endif %}>
           {{ choice.1 }}
         </label>
       {% endfor %}

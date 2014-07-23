@@ -94,7 +94,7 @@ class CheckerWizardTestCase(CLATestCase):
             "property-MAX_NUM_FORMS": [20],
             "property-0-worth": [100000],
             "property-0-mortgage_left": [50000],
-            "property-0-owner": [1],
+            "property-0-main": [1],
             "property-0-share": [100],
             "property-0-disputed": [u"1"],
             "your_other_properties-other_properties": [u"0"],

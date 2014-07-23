@@ -6,6 +6,7 @@ from django import forms
 from django.utils.translation import ugettext as _
 from django.forms.formsets import formset_factory, BaseFormSet, \
     TOTAL_FORM_COUNT, INITIAL_FORM_COUNT
+from django.forms.util import ErrorList
 
 import form_utils.forms
 
@@ -44,9 +45,9 @@ class YourCapitalPropertyForm(CheckerWizardMixin, forms.Form):
         label=_(u"How much is left to pay on the mortgage?"),
         required=True
     )
-    owner = RadioBooleanField(
-        label=_(u"Is the property owned by you or is it in joint names?"),
-        choices=OWNED_BY_CHOICES, required=True
+    main = RadioBooleanField(
+        label=_(u"Are you currently living at this property?"),
+        required=True
     )
     share = forms.IntegerField(
         label=_(u'What is your share of the property?'),
@@ -86,11 +87,28 @@ class YourCapitalPartnerSavingsForm(CheckerWizardMixin, forms.Form):
         label=_(u"How much money does your partner have owed to them?")
     )
 
+
 class FirstRequiredFormSet(BaseFormSet):
     def __init__(self, *args, **kwargs):
         super(FirstRequiredFormSet, self).__init__(*args, **kwargs)
         if self.forms:
             self.forms[0].empty_permitted = False
+
+
+class PropertyFormSet(FirstRequiredFormSet):
+    def clean(self):
+        if filter(None, self._errors):
+            return
+
+        cleaned_data = self.cleaned_data
+        main_properties = [prop for prop in cleaned_data if prop.get('main', False)]
+        if len(main_properties) > 1:
+            self._errors[0]['main'] = ErrorList([
+                _(u'Only one main property allowed')
+            ])
+
+        return cleaned_data
+
 
 class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 
@@ -99,7 +117,7 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
         extra=3,
         max_num=3,
         validate_max=True,
-        formset=FirstRequiredFormSet
+        formset=PropertyFormSet
     )
 
     formset_list = (
@@ -179,7 +197,8 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
                 'mortgage_left': property.get('mortgage_left'),
                 'share': property.get('share'),
                 'value': property.get('worth'),
-                'disputed': property.get('disputed')
+                'disputed': property.get('disputed'),
+                'main': property.get('main'),
             }
         properties = cleaned_data.get('property', [])
         return [_transform(p) for p in properties if p]
