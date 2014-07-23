@@ -103,7 +103,7 @@ class YourCapitalFormTestCase(CLATestCase):
             u'partners_savings-money_owed': u'100.03',
             u'partners_savings-valuable_items': u'100.04',
             u'property-0-mortgage_left': u'50000',
-            u'property-0-owner': u'1',
+            u'property-0-main': u'1',
             u'property-0-share': u'100',
             u'property-0-worth': u'100000',
             u'property-0-disputed': u'1',
@@ -128,7 +128,7 @@ class YourCapitalFormTestCase(CLATestCase):
             "property_set": [
                 {
                     "share": 100, "value": 10000000, "mortgage_left": 5000000,
-                    "disputed": True
+                    "disputed": True, 'main': 1
                 }
             ],
             "partner": {
@@ -182,7 +182,7 @@ class YourCapitalFormTestCase(CLATestCase):
         property_form = form.get_form_by_prefix('property')
         self.assertFalse(property_form.is_valid())
         self.assertEqual(property_form.errors, [
-            {'owner': [u'This field is required.'],
+            {'main': [u'This field is required.'],
              'disputed': [u'This field is required.'],
              'share': [u'This field is required.'],
              'worth': [u'This field is required.'],
@@ -296,7 +296,8 @@ class YourCapitalFormTestCase(CLATestCase):
     def test_calculated_capital_assets_two_property(self):
         default_data = self._get_default_post_data()
         default_data['property-TOTAL_FORMS'] = u'2'
-        new_data = {k.replace('0','1'): v for k,v in default_data.items() if  k.startswith('property-0')}
+        new_data = {k.replace('0','1'): v for k,v in default_data.items() if k.startswith('property-0')}
+        new_data['property-1-main'] = '0'
         default_data.update(new_data)
         form = YourCapitalForm(data=default_data)
         self.assertTrue(form.is_valid())

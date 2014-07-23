@@ -104,7 +104,7 @@
 
     fillCapital: function () {
       $('input[type=number]:visible').val(0);
-      $('input[value=1][name=property-0-owner]').click();
+      $('input[value=1][name=property-0-main]').click();
       $('input[value=0][name=property-0-disputed]').click();
     },
 
