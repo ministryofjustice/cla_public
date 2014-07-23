@@ -1,1 +1,1 @@
-use tag with /
+inverse build */feature/*
