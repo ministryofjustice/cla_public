@@ -72,10 +72,12 @@ RUN cd /home/app/django && pip install -r requirements/production.txt && find . 
 RUN ln -s /home/app/django/cla_public/settings/docker.py /home/app/django/cla_public/settings/local.py
 
 #NPM bower and gulp
-RUN  npm install -g bower gulp && cd /home/app/django && npm install
+RUN npm install -g bower gulp && \
+  cd /home/app/django && bower install --allow-root && \
+  npm install
 
 # gulp build
-RUN export LANG='en_US.UTF-8' && cd /home/app/django && gulp build 
+RUN export LANG='en_US.UTF-8' && cd /home/app/django && gulp build
 
 RUN locale-gen --purge  en_US.UTF-8 && echo export LANG=''
 
