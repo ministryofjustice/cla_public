@@ -58,20 +58,26 @@ class CheckerWizardTestCase(CLATestCase):
         }
 
     def _get_your_details_post_data(self):
-        return {u'checker_wizard-current_step': [u'your_details'],
-         u'your_details-has_children': [u'1'],
-         u'your_details-has_benefits': [u'1'],
-         u'your_details-own_property': [u'1'],
-         u'your_details-older_than_sixty': [u'1'],
-         u'your_details-has_partner': [u'1'],
-         u'your_details-risk_homeless': [u'1'],
-         u'your_details-caring_responsibilities': [u'1'],
-         u'your_details-is_under_eighteen': [u'0'],
+        return {
+            'your_details-has_partner': [1],
+            'your_details-has_children': [1],
+            'your_details-has_benefits': [1],
+            'your_details-risk_homeless': [1],
+            'your_details-older_than_sixty': [1],
+            'your_details-caring_responsibilities': [1],
+            'your_details-own_property': [1],
+            'checker_wizard-current_step': 'your_details',
         }
+
     def _get_your_benefits_nass_post_data(self):
         return {
             "checker_wizard-current_step": "your_benefits",
+#             'your_benefits-income_support': [False],
+#             "your_benefits-job_seekers": [False],
+#             "your_benefits-employment_allowance": [False],
+#             "your_benefits-universal_credit": [False],
              "your_benefits-nass_benefit": [1],
+#               "your_benefits-none_of_above": [0],
         }
 
     def _get_your_benefits_passported_post_data(self):
@@ -296,7 +302,6 @@ class CheckerWizardTestCase(CLATestCase):
         r1 = self.client.get(self.your_details_url)
 
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
-        self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
 
         response = self.client.post(self.your_details_url, data=data)
         self.assertRedirects(response, self.your_benefits_url)
@@ -314,33 +319,11 @@ class CheckerWizardTestCase(CLATestCase):
         r1 = self.client.get(self.your_details_url)
 
         self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE
-        self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
 
         response = self.client.post(self.your_details_url, data=data)
         self.assertRedirects(response, self.your_benefits_url)
 
         self.assertEqual(self.mocked_eligibility_check_patch.called, True)
-
-
-
-    def test_update_your_details_under_18(self):
-        """
-        TEST post your details - with reference
-        """
-        self._fill_in_prev_steps(current_step='your_details')
-
-        data = self._get_your_details_post_data()
-        data['your_details-is_under_eighteen'] = [u'1']
-        r1 = self.client.get(self.your_details_url)
-
-        self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE
-        self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_YES
-
-        response = self.client.post(self.your_details_url, data=data)
-        self.assertRedirects(response, self.result_url)
-
-        self.assertEqual(self.mocked_eligibility_check_patch.called, True)
-
 
 
     ## YOUR BENEFITS
