@@ -29,11 +29,3 @@ INTERNAL_IPS = iptools.IpRangeList(
 )
 
 GA_ID = 'UA-37377084-13'
-
-RAVEN_CONFIG = {
-    'dsn': 'https://675e5dd8e19748ec8a36febb6982fa96:c4db076533774732b754cd77b0464d58@app.getsentry.com/26720',
-}
-
-INSTALLED_APPS = INSTALLED_APPS + (
-    'raven.contrib.django.raven_compat',
-)
