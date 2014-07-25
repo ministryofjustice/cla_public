@@ -3,10 +3,10 @@ from django.utils.translation import ugettext as _
 
 from ..fields import RadioBooleanField
 
-from .base import CheckerWizardMixin, EligibilityMixin
+from .base import CheckerWizardMixin
 
 
-class YourDetailsForm(EligibilityMixin, CheckerWizardMixin, forms.Form):
+class YourDetailsForm(CheckerWizardMixin, forms.Form):
     form_tag = 'your_details'
 
     has_partner = RadioBooleanField(
@@ -37,16 +37,11 @@ class YourDetailsForm(EligibilityMixin, CheckerWizardMixin, forms.Form):
         required=True, label=_(u'Are you or your partner aged 60 or over?')
     )
 
-    is_under_eighteen = RadioBooleanField(
-        required=True, label=_(u'Are you or your partner aged under 18?')
-    )
-
     def save(self, *args, **kwargs):
         data = self.cleaned_data
         post_data = {
             'is_you_or_your_partner_over_60': data['older_than_sixty'],
             'has_partner': data['has_partner'],
-            'is_under_eighteen': data['is_under_eighteen']
         }
         if not self.reference:
             response = self.connection.eligibility_check.post(post_data)

@@ -20,7 +20,6 @@ class YourDetailsFormTestCase(CLATestCase):
             'caring_responsibilities': 0,
             'own_property': 0,
             'risk_homeless': 0,
-            'is_under_eighteen': 0,
         }
 
     def _get_default_post_data_response(self):
@@ -35,7 +34,6 @@ class YourDetailsFormTestCase(CLATestCase):
             "dependants_young": 0,
             "dependants_old": 0,
             "is_you_or_your_partner_over_60": True,
-            "is_under_eighteen": False,
             "has_partner": True,
             "on_passported_benefits": True
         }
@@ -49,14 +47,12 @@ class YourDetailsFormTestCase(CLATestCase):
         response = form.save()
         self.mocked_connection.eligibility_check.post.assert_called_with({
             'is_you_or_your_partner_over_60': data['older_than_sixty'],
-            'has_partner': data['has_partner'],
-            "is_under_eighteen": data['is_under_eighteen']
+            'has_partner': data['has_partner']
         })
         self.assertTrue('reference' in response['eligibility_check'])
         self.assertDictContainsSubset(
             {
                 'is_you_or_your_partner_over_60': True,
-                'is_under_eighteen': False,
                 'has_partner': True,
                 'on_passported_benefits': True
             },
@@ -95,8 +91,7 @@ class YourDetailsFormTestCase(CLATestCase):
         self.mocked_connection.eligibility_check(reference).patch.assert_called_with(
             {
                 'is_you_or_your_partner_over_60': data['older_than_sixty'],
-                'has_partner': data['has_partner'],
-                "is_under_eighteen": data['is_under_eighteen']
+                'has_partner': data['has_partner']
             }
         )
         self.mocked_connection.eligibility_check.assert_called_with(reference)
