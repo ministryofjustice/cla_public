@@ -243,7 +243,7 @@ RAVEN_CONFIG = {
 if 'RAVEN_CONFIG_DSN' in os.environ:
     MIDDLEWARE_CLASSES = (
         'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-        'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
+        #'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     ) + MIDDLEWARE_CLASSES
 
 # EMAILS
