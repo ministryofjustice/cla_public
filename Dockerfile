@@ -13,6 +13,9 @@ ENV HOME /root
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
 
+# Set timezone
+RUN echo "Europe/London" > /etc/timezone  &&  dpkg-reconfigure -f noninteractive tzdata
+
 # Dependencies
 RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
   apt-get -y --force-yes install apt-utils python-pip \
