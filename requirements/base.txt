@@ -2,7 +2,7 @@
 # After the first "pip install -r", just run "pip freeze" and add the version
 # to each package in each requirements/*.txt.
 
-Django==1.6.5
+Django==1.6.6
 
 django-widget-tweaks==1.3
 
