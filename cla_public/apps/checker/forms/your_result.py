@@ -1,4 +1,4 @@
-from cla_common.constants import TITLE_CHOICES
+from cla_common.constants import TITLES
 from django import forms
 from django.forms.util import ErrorList
 from django.utils.translation import ugettext as _
@@ -12,17 +12,17 @@ from .base import CheckerWizardMixin, EligibilityMixin
 
 class ContactDetailsForm(forms.Form):
     title = forms.ChoiceField(
-        label=_(u'Title'), choices=TITLE_CHOICES
+        label=_(u'Title'), choices=TITLES.CHOICES
     )
     full_name = forms.CharField(label=_(u'Full name'), max_length=300)
     postcode = forms.CharField(label=_(u'Postcode'), max_length=10)
     street = forms.CharField(
-        label=_(u'Street'), max_length=250,
+        label=_(u'Address'), max_length=250,
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 21})
     )
-    town = forms.CharField(label=_(u'Town/city'), max_length=100)
-    mobile_phone = forms.CharField(label=_(u'Mobile Phone'), max_length=20, required=False)
-    home_phone = forms.CharField(label=_('Home Phone'), max_length=20, required=False)
+    mobile_phone = forms.CharField(label=_(u'Contact number'), max_length=20, required=False)
+    home_phone = forms.CharField(label=_(u'Home Phone'), max_length=20, required=False)
+    email = forms.EmailField(label=_(u'Email address'), required=False)
 
     def clean(self, *args, **kwargs):
         cleaned_data = super(ContactDetailsForm, self).clean(*args, **kwargs)
@@ -74,9 +74,9 @@ class ApplyForm(EligibilityMixin, CheckerWizardMixin, MultipleFormsForm):
             'full_name': data['full_name'],
             'postcode': data['postcode'],
             'street': data['street'],
-            'town': data['town'],
             'mobile_phone': data['mobile_phone'],
-            'home_phone': data['home_phone']
+            'home_phone': data['home_phone'],
+            'email': data['email'],
         }
 
     def get_extra(self):

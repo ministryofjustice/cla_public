@@ -44,6 +44,8 @@ $fieldset-error-bg-colour: #FDF8F5;
   border-left: 3px solid $error-colour;
   padding: 1em 1em;
   margin: {
+    top: 1em;
+    bottom: 1em;
     left: -1em;
     right: -1em;
   }
@@ -70,6 +72,7 @@ $fieldset-error-bg-colour: #FDF8F5;
 }
 
 .FormBlock--grey {
+  position: relative;
   &.FieldsetError {
     background-color: $fieldset-error-bg-colour;
   }   

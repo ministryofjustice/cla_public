@@ -7,4 +7,5 @@ from django.conf.urls.static import static
 
 urlpatterns = patterns('',
     url(r'^', include('checker.urls', namespace='checker',)),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'session_security/', include('session_security.urls')),
+    ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

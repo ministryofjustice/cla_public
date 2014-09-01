@@ -1,6 +1,5 @@
 $border-colour: #C2C2C2;
 
-
 .FormBlock {
   margin: 0;
 
@@ -16,11 +15,20 @@ $border-colour: #C2C2C2;
 .FormBlock-label {
   @include heading-24;
   margin-bottom: 10px;
+
+  &--inline {
+    margin-right: 10px;
+    float: left;
+  }
+}
+.FormBlock-actions {
+  margin-top: -15px;
+  margin-bottom: 2em;
 }
 
 .FormRow {
-  margin: 20px 0;
-  padding: 0;
+  margin: 0;
+  padding: 10px 0;
   position: relative;
   clear: both;
 
@@ -37,10 +45,18 @@ $border-colour: #C2C2C2;
     &--odd {
       background-color: #f1f1f1;
     }
+
+    &--inline {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0 12px;
+      line-height: 32px;
+    }
   }
 
   .FormRow-inner {
-    padding: 10px 60px 0;
+    padding: 10px 35px 0;
     margin: 10px 0 0;
 
     label {
@@ -58,7 +74,16 @@ $border-colour: #C2C2C2;
     line-height: 32px;
     border: 1px solid $border-colour;
     text-align: center;
+    background: $white;
     @include box-sizing(border-box);
+
+    .FormBlock & {
+      background: $grey-4;      
+    }
+
+    &--1-3 {
+      width: 11.5942%;
+    }
   }
   .FormRow-prefix {
     border-right: 0;
@@ -80,8 +105,10 @@ $border-colour: #C2C2C2;
   }
   
   input[type=text],
+  input[type=email],
   input[type=password],
-  input[type=number] {
+  input[type=number],
+  input[type=email] {
     @include core-24;
     font-size: 23px;
     border: 1px solid $border-colour;
@@ -92,6 +119,26 @@ $border-colour: #C2C2C2;
     float: left;
     width: 230px;
     @include box-sizing(border-box);
+    @include ie-lte(7) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    &::-webkit-input-placeholder {
+      @include core-19;
+      padding-top: 5px;
+    }
+    &:-moz-placeholder {
+      @include core-19;
+      padding-top: 5px;
+    }
+    &::-moz-placeholder {
+      @include core-19;
+      padding-top: 5px;
+    }
+    &:-ms-input-placeholder {  
+      @include core-19;
+      padding-top: 5px;
+    }
   }
   textarea {
     @include core-24;
@@ -102,6 +149,23 @@ $border-colour: #C2C2C2;
     padding: 2px 4px;
     margin: 0;
     @include box-sizing(border-box);
+  }
+  select {
+    @include core-19;
+    display: inline-block;
+    border: 1px solid $border-colour;
+    padding: 2px 4px;
+    margin: 0;
+    height: 32px;
+    background: #fff;
+    @include border-radius(0);
+    @include box-sizing(border-box);
+  }
+  input[type=radio],
+  input[type=checkbox] {
+    margin: 0 20px 0 0;
+    position: relative;
+    top: -2px;
   }
 
   // size modifiers 
@@ -117,17 +181,17 @@ $border-colour: #C2C2C2;
   textarea.FormRow-field--xs {
     width: 50px;
   }
-  // shorten if in column
-  .Grid-col--1-3 {
-    .FormRow-prefix,
-    .FormRow-suffix {
-      width: 11.5942%;
-    }
-    input[type=text],
-    input[type=password],
-    input[type=number] {
-      width: 82.4058%;
-    }
+  input.FormRow-field--1-3,
+  textarea.FormRow-field--1-3 {
+    width: 82.4058%;
+  }
+  input.FormRow-field--interval {
+    width: 42%;
+    margin-right: 3%;
+  }
+  input.FormRow-field--1-3-help,
+  textarea.FormRow-field--1-3-help {
+    width: 47.4058%;
   }
   // remove spinner
   input[type=number]::-webkit-inner-spin-button,
@@ -166,6 +230,11 @@ $border-colour: #C2C2C2;
       input {
         margin-right: 20px;
       }
+    }
+
+    .FormRow-inner {
+      padding-left: 60px;
+      padding-right: 60px;
     }
 
     &:first-child {
@@ -208,11 +277,6 @@ $border-colour: #C2C2C2;
 
   &--help {
     .Grid-col--1-3 {
-      input[type=text],
-      input[type=password],
-      input[type=number] {
-        width: 47.4058%;
-      }
       .FormRow-help {
         @include media(960px) {
           width: 35%;
@@ -230,6 +294,7 @@ $border-colour: #C2C2C2;
     }
     select,
     input[type=text],
+    input[type=email],
     input[type=password],
     input[type=number],
     textarea {

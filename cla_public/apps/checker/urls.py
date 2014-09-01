@@ -12,6 +12,8 @@ urlpatterns = patterns('',
 
     url(r'^$', views.StartPageView.as_view(), name='start_page'),
 
+    url(r'^threshold/$', views.ThresholdView.as_view(), name='threshold'),
+
     url(r'^checker/$', checker_wizard, name='checker'),
     url(r'^checker/(?P<step>.+)/$', checker_wizard, name='checker_step'),
 )

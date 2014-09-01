@@ -1,4 +1,5 @@
 import sys
+import os
 from os.path import join, abspath, dirname
 
 # PATH vars
@@ -114,6 +115,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'core.middleware.AnonymousUserSessionSecurityMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -148,6 +150,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'widget_tweaks',
     'form_utils',
+    'session_security'
 )
 
 PROJECT_APPS = (
@@ -167,12 +170,41 @@ INSTALLED_APPS += PROJECT_APPS
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue'
         }
     },
     'handlers': {
+        'production_file':{
+            'level' : 'INFO',
+            'class' : 'logging.handlers.RotatingFileHandler',
+            'filename' : '/var/log/wsgi/app.log',
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount' : 7,
+            'formatter': 'verbose',
+            'filters': ['require_debug_false'],
+        },
+        'debug_file':{
+            'level' : 'DEBUG',
+            'class' : 'logging.handlers.RotatingFileHandler',
+            'filename' : '/var/log/wsgi/debug.log',
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount' : 7,
+            'formatter': 'verbose',
+            'filters': ['require_debug_true'],
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -185,11 +217,34 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        '': {
+            'handlers': ['production_file','debug_file'],
+            'level': 'DEBUG',
+        },
     }
 }
 
 
 BACKEND_BASE_URI = 'http://127.0.0.1:8000'
+
+GA_ID = ''
+
+
+# Settings for django-session-security.
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SECURITY_WARN_AFTER = 3360
+SESSION_SECURITY_EXPIRE_AFTER = 3600
+
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('RAVEN_CONFIG_DSN', ''),
+    'site': os.environ.get('RAVEN_CONFIG_SITE', '')
+}
+
+if 'RAVEN_CONFIG_DSN' in os.environ:
+    MIDDLEWARE_CLASSES = (
+        'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
+        #'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
+    ) + MIDDLEWARE_CLASSES
 
 # EMAILS
 

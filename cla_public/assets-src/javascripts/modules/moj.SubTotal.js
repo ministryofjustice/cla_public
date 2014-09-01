@@ -41,8 +41,6 @@
       var $set = el !== undefined ? $(el) : $(e.target).closest(this.el),
           value = this.calculate($set);
 
-      moj.log(CLA.templates);
-
       if ($set.find('.SubTotal').length > 0) {
         $set.find('.SubTotal').replaceWith(CLA.templates.SubTotal({value: value}));
       } else {

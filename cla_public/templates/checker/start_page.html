@@ -3,29 +3,25 @@
 {% block body_classes %}{{ product_type }} {{ phase }} v-StartPage{% endblock %}
 
 {% block page_header %}
-  <h1>Do you qualify for legal aid: quick check</h1>
-  <p>Use this quick online checker to find out it you're likely to qualify for legal aid.</p>
+  <h1>Do you qualify for legal aid?</h1>
+  <p>Check here to see if you can get legal aid and find out where to go next for help.</p>
 {% endblock page_header %}
 
 {% block breadcrumb %}{% endblock breadcrumb %}
 
 {% block checker_content %}
-  <h2>Before you start</h2>
-  
-  <p>You'll need recent details of any benefits you receive, your income, property and also your partner's details to get an accurate result.</p>
+  <h2>What is legal aid?</h2>
 
-  <p>Legal aid is only given if you have very limited money or are at immediate risk of harm. But if the checker says you don't qualify, appropriate advice agencies will be listed to help you.</p>
+  <ul>
+    <li>it can help you cover the cost of legal advice</li>
+    <li>it can get someone to speak for you in court</li>
+    <li>it can help you resolve family problems without going to court</li>
+  </ul>
 
-  <p>This tool is for non-criminal, ie civil, cases only. If you've been charged with a crime, ask your solicitor about legal aid.</p>
-
-  <p>This tool only checks if you can get legal aid in England and Wales</p>
-
-  <div class="Notice">
-    <p>You need to make a claim to make sure you qualify and how much of a contribution you'll get</p>
-  </div>
+  <p>You can only get legal aid if you are at <strong>immediate risk of serious harm</strong>, <strong>losing your home</strong> and <strong>have very limited money</strong>.</p>
 
   <p>
-    <a href="/checker" class="Button" role="button">Start</a>
+    <a href="{% url 'checker:threshold' %}" class="Button" role="button">Continue</a>
     <a href="">Other ways of getting legal advice</a>
   </p>
 {% endblock %}

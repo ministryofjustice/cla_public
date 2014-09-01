@@ -76,3 +76,5 @@ cla_public/assets-src/javascripts/templates.js
 
 /phantomjsdriver.log
 /selenium-debug.log
+
+/.sass-cache/

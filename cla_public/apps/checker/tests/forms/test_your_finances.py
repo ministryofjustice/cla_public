@@ -4,8 +4,8 @@ from core.testing.testcases import CLATestCase
 from django.forms.formsets import formset_factory
 
 from ...forms.your_finances import YourCapitalPropertyForm, \
-    OnlyAllowExtraIfNoInitialFormSet, YourAllowancesForm, YourCapitalForm, \
-    YourIncomeForm
+    YourAllowancesForm, YourCapitalForm, \
+    YourIncomeForm, FirstRequiredFormSet
 from ...exceptions import InconsistentStateException
 
 from ..fixtures import mocked_api
@@ -16,7 +16,6 @@ class YourCapitalFormTestCase(CLATestCase):
     all_forms = {
         'your_savings',
         'partners_savings',
-        'your_other_properties'
     }
 
     partner_forms = {
@@ -104,13 +103,13 @@ class YourCapitalFormTestCase(CLATestCase):
             u'partners_savings-money_owed': u'100.03',
             u'partners_savings-valuable_items': u'100.04',
             u'property-0-mortgage_left': u'50000',
-            u'property-0-owner': u'1',
+            u'property-0-main': u'1',
             u'property-0-share': u'100',
             u'property-0-worth': u'100000',
+            u'property-0-disputed': u'1',
             u'property-INITIAL_FORMS': u'0',
             u'property-MAX_NUM_FORMS': u'20',
             u'property-TOTAL_FORMS': u'1',
-            u'your_other_properties-other_properties': u'0',
             u'your_savings-bank': u'100',
             u'your_savings-investments': u'100',
             u'your_savings-money_owed': u'100',
@@ -127,7 +126,10 @@ class YourCapitalFormTestCase(CLATestCase):
                 }
             },
             "property_set": [
-                {"share": 100, "value": 10000000, "mortgage_left": 5000000}
+                {
+                    "share": 100, "value": 10000000, "mortgage_left": 5000000,
+                    "disputed": True, 'main': 1
+                }
             ],
             "partner": {
                 "savings": {
@@ -156,7 +158,6 @@ class YourCapitalFormTestCase(CLATestCase):
         """
         form = YourCapitalForm(reference=self.reference, data=self._get_default_post_data())
 
-        self.assertTrue(form.get_form_by_prefix('your_other_properties').is_valid())
         self.assertTrue(form.get_form_by_prefix('your_savings').is_valid())
         self.assertTrue(form.get_form_by_prefix('partners_savings').is_valid())
 
@@ -180,27 +181,13 @@ class YourCapitalFormTestCase(CLATestCase):
         self.assertFalse(form.is_valid())
         property_form = form.get_form_by_prefix('property')
         self.assertFalse(property_form.is_valid())
-        self.assertEqual(property_form.non_form_errors(), [u'Fill in all your property details'])
-
-    def test_fails_if_second_properties_not_filled_in(self):
-        # 'property-TOTAL_FORMS' == 2 but the property #2 is not filled in
-        data = dict(self._get_default_post_data())
-        data['property-TOTAL_FORMS'] = 2
-        form = YourCapitalForm(reference=self.reference, data=data)
-
-        self.assertFalse(form.is_valid())
-        property_form = form.get_form_by_prefix('property')
-        self.assertFalse(property_form.is_valid())
-        self.assertEqual(property_form.non_form_errors(), [u'Fill in all your property details'])
-
-    def test_post_update_cleaned_data_other_properties(self):
-        """
-        TEST cleaned_data for other properties
-        """
-        form = YourCapitalForm(reference=self.reference, data=self._get_default_post_data())
-
-        self.assertTrue(form.get_form_by_prefix('your_other_properties').is_valid())
-        self.assertEqual(form.get_form_by_prefix('your_other_properties').cleaned_data['other_properties'], False)
+        self.assertEqual(property_form.errors, [
+            {'main': [u'This field is required.'],
+             'disputed': [u'This field is required.'],
+             'share': [u'This field is required.'],
+             'worth': [u'This field is required.'],
+             'mortgage_left': [u'This field is required.']}
+        ])
 
     def test_post_update_cleaned_data_your_savings(self):
         """
@@ -309,41 +296,12 @@ class YourCapitalFormTestCase(CLATestCase):
     def test_calculated_capital_assets_two_property(self):
         default_data = self._get_default_post_data()
         default_data['property-TOTAL_FORMS'] = u'2'
-        new_data = {k.replace('0','1'): v for k,v in default_data.items() if  k.startswith('property-0')}
+        new_data = {k.replace('0','1'): v for k,v in default_data.items() if k.startswith('property-0')}
+        new_data['property-1-main'] = '0'
         default_data.update(new_data)
         form = YourCapitalForm(data=default_data)
         self.assertTrue(form.is_valid())
         self.assertEqual(form.total_capital_assets, 80010 + (5000000 * 2))
-
-
-class YourCapitalPropertyFormSetSetTeseCase(CLATestCase):
-
-    def test_no_extra_allowed_if_initial_data_supplied(self):
-        YourCapitalPropertyFormSet = formset_factory(
-            YourCapitalPropertyForm,
-            extra=1,
-            max_num=20,
-            validate_max=True,
-            formset=OnlyAllowExtraIfNoInitialFormSet
-        )
-        formset = YourCapitalPropertyFormSet(
-            initial=[
-                {"share": 100, "value": 100000, "mortgage_left": 50000},
-                {"share": 100, "value": 100000, "mortgage_left": 50000}
-            ]
-        )
-        self.assertEqual(formset.extra, 0)
-
-    def test_one_extra_allowed_if_no_initial_data_supplied(self):
-        YourCapitalPropertyFormSet = formset_factory(
-            YourCapitalPropertyForm,
-            extra=1,
-            max_num=20,
-            validate_max=True,
-            formset=OnlyAllowExtraIfNoInitialFormSet
-        )
-        formset = YourCapitalPropertyFormSet()
-        self.assertEqual(formset.extra, 1)
 
 
 class YourIncomeFormTestCase(CLATestCase):
@@ -368,13 +326,27 @@ class YourIncomeFormTestCase(CLATestCase):
 
     def _get_default_post_data(self):
         return {
-            u'your_income-earnings': u'222',
-            u'your_income-other_income': u'333',
+            u'your_income-earnings_0': u'222',
+            u'your_income-earnings_1': u'per_month',
+            u'your_income-other_income_0': u'333',
+            u'your_income-other_income_1': u'per_month',
             u'your_income-self_employed': u'0',
 
-            u'partners_income-earnings': u'444',
-            u'partners_income-other_income': u'555',
+            u'your_income-tax_0': u'353',
+            u'your_income-tax_1': u'per_month',
+            u'your_income-ni_0': u'354',
+            u'your_income-ni_1': u'per_month',
+
+            u'partners_income-earnings_0': u'444',
+            u'partners_income-earnings_1': u'per_month',
+            u'partners_income-other_income_0': u'555',
+            u'partners_income-other_income_1': u'per_month',
             u'partners_income-self_employed': u'1',
+
+            u'partners_income-tax_0': u'453',
+            u'partners_income-tax_1': u'per_month',
+            u'partners_income-ni_0': u'454',
+            u'partners_income-ni_1': u'per_month',
 
             u'dependants-dependants_young': u'3',
             u'dependants-dependants_old': u'2',
@@ -384,16 +356,24 @@ class YourIncomeFormTestCase(CLATestCase):
         return {
             "you": {
                 "income": {
-                    "earnings": 22200,
-                    "other_income": 33300,
+                    "earnings":  {'interval_period': u'per_month', 'per_interval_value': 22200, 'per_month': 22200 },
+                    "other_income": {'interval_period': u'per_month', 'per_interval_value': 33300, 'per_month': 33300 },
                     "self_employed": False,
+                },
+                "deductions": {
+                    "income_tax": {'per_interval_value': 35300, 'per_month': 35300, 'interval_period': u'per_month'},
+                    "national_insurance": {'per_interval_value': 35400, 'per_month': 35400, 'interval_period': u'per_month'},
                 }
             },
             "partner": {
                 "income": {
-                    "earnings": 44400,
-                    "other_income": 55500,
+                    "earnings": {'interval_period': u'per_month', 'per_interval_value': 44400, 'per_month': 44400 },
+                    "other_income": {'interval_period': u'per_month', 'per_interval_value': 55500, 'per_month': 55500 },
                     "self_employed": True,
+                },
+                "deductions": {
+                    "income_tax": {'per_interval_value': 45300, 'per_month': 45300, 'interval_period': u'per_month'},
+                    "national_insurance": {'per_interval_value': 45400, 'per_month': 45400, 'interval_period': u'per_month'},
                 }
             },
             "dependants_young": 3,
@@ -487,8 +467,10 @@ class YourIncomeFormTestCase(CLATestCase):
         """
         form = YourIncomeForm(reference=self.reference, data=self._get_default_post_data())
         self.assertTrue(form.get_form_by_prefix('your_income').is_valid())
-        self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['earnings'], 22200)
-        self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['other_income'], 33300)
+        earnings_dict = {'interval_period': u'per_month', 'per_interval_value': 22200, 'per_month': 22200}
+        other_income_dict = {'interval_period': u'per_month', 'per_interval_value': 33300, 'per_month': 33300}
+        self.assertDictEqual(form.get_form_by_prefix('your_income').cleaned_data['earnings'], earnings_dict)
+        self.assertDictEqual(form.get_form_by_prefix('your_income').cleaned_data['other_income'], other_income_dict)
         self.assertEqual(form.get_form_by_prefix('your_income').cleaned_data['self_employed'], False)
 
     def test_post_update_cleaned_data_partner_income(self):
@@ -497,8 +479,10 @@ class YourIncomeFormTestCase(CLATestCase):
         """
         form = YourIncomeForm(reference=self.reference, data=self._get_default_post_data())
         self.assertTrue(form.get_form_by_prefix('partners_income').is_valid())
-        self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['earnings'], 44400)
-        self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['other_income'], 55500)
+        earnings_dict = {'interval_period': u'per_month', 'per_interval_value': 44400, 'per_month': 44400}
+        other_income_dict = {'interval_period': u'per_month', 'per_interval_value': 55500, 'per_month': 55500}
+        self.assertDictEqual(form.get_form_by_prefix('partners_income').cleaned_data['earnings'], earnings_dict)
+        self.assertDictEqual(form.get_form_by_prefix('partners_income').cleaned_data['other_income'], other_income_dict)
         self.assertEqual(form.get_form_by_prefix('partners_income').cleaned_data['self_employed'], True)
 
     def test_form_validation(self):
@@ -510,8 +494,8 @@ class YourIncomeFormTestCase(CLATestCase):
                     # your savings is mandatory
                     {
                         'data': {
-                            'your_income-earnings': None,
-                            'your_income-other_income': None,
+                            'your_income-earnings_0': None,
+                            'your_income-other_income_0': None,
                             'your_income-self_employed': None
                         },
                         'error': {
@@ -522,8 +506,8 @@ class YourIncomeFormTestCase(CLATestCase):
                     },
                     {
                         'data': {
-                            'your_income-earnings': -1,
-                            'your_income-other_income': -1,
+                            'your_income-earnings_0': -1,
+                            'your_income-other_income_0': -1,
                         },
                         'error': {
                             'earnings': [u'Ensure this value is greater than or equal to 0.'],
@@ -564,20 +548,24 @@ class YourAllowancesFormTestCase(CLATestCase):
 
     def _get_default_post_data(self):
         return {
-            u'your_allowances-mortgage': u'351',
-            u'your_allowances-rent': u'352',
-            u'your_allowances-tax': u'353',
-            u'your_allowances-ni': u'354',
-            u'your_allowances-maintenance': u'355',
-            u'your_allowances-childcare': u'355.50',
+            u'your_allowances-mortgage_0': u'351',
+            u'your_allowances-mortgage_1': u'per_month',
+            u'your_allowances-rent_0': u'352',
+            u'your_allowances-rent_1': u'per_month',
+            u'your_allowances-maintenance_0': u'355',
+            u'your_allowances-maintenance_1': u'per_month',
+            u'your_allowances-childcare_0': u'355.50',
+            u'your_allowances-childcare_1': u'per_month',
             u'your_allowances-criminal_legalaid_contributions': u'356',
 
-            u'partners_allowances-mortgage': u'451',
-            u'partners_allowances-rent': u'452',
-            u'partners_allowances-tax': u'453',
-            u'partners_allowances-ni': u'454',
-            u'partners_allowances-maintenance': u'455',
-            u'partners_allowances-childcare': u'455.50',
+            u'partners_allowances-mortgage_0': u'451',
+            u'partners_allowances-mortgage_1': u'per_month',
+            u'partners_allowances-rent_0': u'452',
+            u'partners_allowances-rent_1': u'per_month',
+            u'partners_allowances-maintenance_0': u'455',
+            u'partners_allowances-maintenance_1': u'per_month',
+            u'partners_allowances-childcare_0': u'455.50',
+            u'partners_allowances-childcare_1': u'per_month',
             u'partners_allowances-criminal_legalaid_contributions': u'456',
         }
 
@@ -585,19 +573,19 @@ class YourAllowancesFormTestCase(CLATestCase):
         return {
             "you": {
                 "deductions": {
-                    "mortgage_or_rent": 70300,
-                    "income_tax_and_ni": 70700,
-                    "maintenance": 35500,
-                    "childcare": 35550,
+                    "mortgage": {'per_interval_value': 35100, 'per_month': 35100, 'interval_period': u'per_month'},
+                    "rent": {'per_interval_value': 35200, 'per_month': 35200, 'interval_period': u'per_month'},
+                    "maintenance": {'per_interval_value': 35500, 'per_month': 35500, 'interval_period': u'per_month'},
+                    "childcare": {'per_interval_value': 35550, 'per_month': 35550, 'interval_period': u'per_month'},
                     "criminal_legalaid_contributions": 35600
                 }
             },
             "partner": {
                 "deductions": {
-                    "mortgage_or_rent": 90300,
-                    "income_tax_and_ni": 90700,
-                    "maintenance": 45500,
-                    "childcare": 45550,
+                    "mortgage": {'per_interval_value': 45100, 'per_month': 45100, 'interval_period': u'per_month'},
+                    "rent": {'per_interval_value': 45200, 'per_month': 45200, 'interval_period': u'per_month'},
+                    "maintenance": {'per_interval_value': 45500, 'per_month': 45500, 'interval_period': u'per_month'},
+                    "childcare": {'per_interval_value': 45550, 'per_month': 45550, 'interval_period': u'per_month'},
                     "criminal_legalaid_contributions": 45600
                 }
             }
@@ -701,19 +689,19 @@ class YourAllowancesFormTestCase(CLATestCase):
                     # your allowances is mandatory
                     {
                         'data': {
-                            'your_allowances-mortgage': None,
-                            'your_allowances-rent': None,
-                            'your_allowances-tax': None,
-                            'your_allowances-ni': None,
-                            'your_allowances-maintenance': None,
-                            'your_allowances-childcare': None,
+                            'your_allowances-mortgage_0': None,
+                            'your_allowances-mortgage_1': None,
+                            'your_allowances-rent_0': None,
+                            'your_allowances-rent_1': None,
+                            'your_allowances-maintenance_0': None,
+                            'your_allowances-maintenance_1': None,
+                            'your_allowances-childcare_0': None,
+                            'your_allowances-childcare_1': None,
                             'your_allowances-criminal_legalaid_contributions': None,
                         },
                         'error': {
                             'mortgage': [u'This field is required.'],
                             'rent': [u'This field is required.'],
-                            'tax': [u'This field is required.'],
-                            'ni': [u'This field is required.'],
                             'maintenance': [u'This field is required.'],
                             'childcare': [u'This field is required.'],
                             'criminal_legalaid_contributions': [u'This field is required.'],
@@ -721,19 +709,19 @@ class YourAllowancesFormTestCase(CLATestCase):
                     },
                     {
                         'data': {
-                            'your_allowances-mortgage': -1,
-                            'your_allowances-rent': -1,
-                            'your_allowances-tax': -1,
-                            'your_allowances-ni': -1,
-                            'your_allowances-maintenance': -1,
-                            'your_allowances-childcare': -1,
+                            'your_allowances-mortgage_0': -1,
+                            'your_allowances-mortgage_1': 'per_month',
+                            'your_allowances-rent_0': -1,
+                            'your_allowances-rent_1': 'per_month',
+                            'your_allowances-maintenance_0': -1,
+                            'your_allowances-maintenance_1': 'per_month',
+                            'your_allowances-childcare_0': -1,
+                            'your_allowances-childcare_1': 'per_month',
                             'your_allowances-criminal_legalaid_contributions': -1,
                         },
                         'error': {
                             'mortgage': [u'Ensure this value is greater than or equal to 0.'],
                             'rent': [u'Ensure this value is greater than or equal to 0.'],
-                            'tax': [u'Ensure this value is greater than or equal to 0.'],
-                            'ni': [u'Ensure this value is greater than or equal to 0.'],
                             'maintenance': [u'Ensure this value is greater than or equal to 0.'],
                             'childcare': [u'Ensure this value is greater than or equal to 0.'],
                             'criminal_legalaid_contributions': [u'Ensure this value is greater than or equal to 0.'],
@@ -749,6 +737,6 @@ class YourAllowancesFormTestCase(CLATestCase):
 
                 form = YourAllowancesForm(reference=self.reference, data=data)
                 self.assertFalse(form.is_valid())
-                self.assertEqual(
+                self.assertDictEqual(
                     form.errors[error_section_name], error_data['error']
                 )

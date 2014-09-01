@@ -29,6 +29,13 @@ class CheckerWizardTestCase(CLATestCase):
         self.your_details_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_details'}
         )
+        self.your_benefits_url = reverse(
+            'checker:checker_step', args=(), kwargs={'step': 'your_benefits'}
+        )
+        self.your_finances_interstitial_url = reverse(
+            'checker:checker_step', args=(), kwargs={
+                'step': 'your_finances_interstitial'}
+        )
         self.your_capital_url = reverse(
             'checker:checker_step', args=(), kwargs={'step': 'your_capital'}
         )
@@ -62,6 +69,29 @@ class CheckerWizardTestCase(CLATestCase):
             'checker_wizard-current_step': 'your_details',
         }
 
+    def _get_your_benefits_nass_post_data(self):
+        return {
+            "checker_wizard-current_step": "your_benefits",
+#             'your_benefits-income_support': [False],
+#             "your_benefits-job_seekers": [False],
+#             "your_benefits-employment_allowance": [False],
+#             "your_benefits-universal_credit": [False],
+             "your_benefits-nass_benefit": [1],
+#               "your_benefits-none_of_above": [0],
+        }
+
+    def _get_your_benefits_passported_post_data(self):
+        return {
+            "checker_wizard-current_step": "your_benefits",
+            "your_benefits-universal_credit": [1],
+        }
+
+    def _get_your_benefits_none_post_data(self):
+        return {
+            "checker_wizard-current_step": "your_benefits",
+            "your_benefits-none_of_above": [1],
+        }
+
     def _get_your_capital_post_data(self):
         return {
             "checker_wizard-current_step": "your_capital",
@@ -70,8 +100,9 @@ class CheckerWizardTestCase(CLATestCase):
             "property-MAX_NUM_FORMS": [20],
             "property-0-worth": [100000],
             "property-0-mortgage_left": [50000],
-            "property-0-owner": [1],
+            "property-0-main": [1],
             "property-0-share": [100],
+            "property-0-disputed": [u"1"],
             "your_other_properties-other_properties": [u"0"],
             "your_savings-bank": [100],
             "your_savings-investments": [100],
@@ -81,37 +112,54 @@ class CheckerWizardTestCase(CLATestCase):
             "partners_savings-investments": [100],
             "partners_savings-valuable_items": [100],
             "partners_savings-money_owed": [100],
+            "submit": "submit"
         }
 
     def _get_your_income_post_data(self):
         return {
             "checker_wizard-current_step": "your_income",
-            "your_income-earnings": [100],
-            "your_income-other_income": [100],
+            "your_income-earnings_0": [100],
+            "your_income-earnings_1": ['per_month'],
+            "your_income-other_income_0": [100],
+            "your_income-other_income_1": ['per_month'],
             "your_income-self_employed": [0],
-            "partners_income-earnings": [100],
-            "partners_income-other_income": [100],
+            'your_income-tax_0': [700],
+            'your_income-tax_1': ['per_month'],
+            'your_income-ni_0': [700],
+            'your_income-ni_1': ['per_month'],
+            "partners_income-earnings_0": [100],
+            "partners_income-earnings_1": ['per_month'],
+            "partners_income-other_income_0": [100],
+            "partners_income-other_income_1": ['per_month'],
             "partners_income-self_employed": [0],
+            'partners_income-tax_0': [701],
+            'partners_income-tax_1': ['per_month'],
+            'partners_income-ni_0': [701],
+            'partners_income-ni_1': ['per_month'],
             "dependants-dependants_old": [0],
             "dependants-dependants_young": [0],
         }
 
     def _get_your_allowances_post_data(self):
         return {
-            'your_allowances-mortgage': [700],
-            'your_allowances-rent': [700],
-            'your_allowances-tax': [700],
-            'your_allowances-ni': [700],
-            'your_allowances-maintenance': [700],
-            'your_allowances-childcare': [700],
+            'your_allowances-mortgage_0': [700],
+            'your_allowances-mortgage_1': ['per_month'],
+            'your_allowances-rent_0': [700],
+            'your_allowances-rent_1': ['per_month'],
+            'your_allowances-maintenance_0': [700],
+            'your_allowances-maintenance_1': ['per_month'],
+            'your_allowances-childcare_0': [700],
+            'your_allowances-childcare_1': ['per_month'],
             'your_allowances-criminal_legalaid_contributions': [700],
 
-            'partners_allowances-mortgage': [701],
-            'partners_allowances-rent': [701],
-            'partners_allowances-tax': [701],
-            'partners_allowances-ni': [701],
-            'partners_allowances-maintenance': [701],
-            'partners_allowances-childcare': [701],
+            'partners_allowances-mortgage_0': [701],
+            'partners_allowances-mortgage_1': ['per_month'],
+            'partners_allowances-rent_0': [701],
+            'partners_allowances-rent_1': ['per_month'],
+            'partners_allowances-maintenance_0': [701],
+            'partners_allowances-maintenance_1': ['per_month'],
+            'partners_allowances-childcare_0': [701],
+            'partners_allowances-childcare_1': ['per_month'],
             'partners_allowances-criminal_legalaid_contributions': [701],
 
             'checker_wizard-current_step': 'your_allowances',
@@ -128,6 +176,8 @@ class CheckerWizardTestCase(CLATestCase):
         fillers = {
             'your_problem': self._get_your_problem_post_data,
             'your_details': self._get_your_details_post_data,
+            'your_benefits': self._get_your_benefits_none_post_data,
+            'your_finances_interstitial': lambda : {},
             'your_capital': self._get_your_capital_post_data,
             'your_income': self._get_your_income_post_data,
             'your_allowances': self._get_your_allowances_post_data,
@@ -212,7 +262,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
 
         response = self.client.post(self.your_problem_url, data=data)
-        self.assertRedirects(response, self.your_details_url)
+        self.assertRedirects(response, self.your_finances_interstitial_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
@@ -226,7 +276,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE
 
         response = self.client.post(self.your_problem_url, data=data)
-        self.assertRedirects(response, self.your_details_url)
+        self.assertRedirects(response, self.your_finances_interstitial_url)
 
         self.assertEqual(self.mocked_eligibility_check_patch.called, True)
 
@@ -254,7 +304,7 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
 
         response = self.client.post(self.your_details_url, data=data)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertRedirects(response, self.your_benefits_url)
 
         self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
@@ -271,9 +321,75 @@ class CheckerWizardTestCase(CLATestCase):
         self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE
 
         response = self.client.post(self.your_details_url, data=data)
-        self.assertRedirects(response, self.your_capital_url)
+        self.assertRedirects(response, self.your_benefits_url)
 
         self.assertEqual(self.mocked_eligibility_check_patch.called, True)
+
+
+    ## YOUR BENEFITS
+
+    def test_get_your_benefits(self):
+        self._fill_in_prev_steps(current_step='your_benefits')
+
+        response = self.client.get(self.your_benefits_url)
+        self.assertTrue('sessionid' in response.cookies)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertStepEqual(response, 'your_benefits')
+
+    def test_post_your_benefits_nass(self):
+        """
+        TEST post that citizen is on NASS benefit; should not require capital or income forms
+        """
+        self._fill_in_prev_steps(current_step='your_benefit', without_reference=True)
+
+        data = self._get_your_benefits_nass_post_data()
+
+        r1 = self.client.get(self.your_benefits_url)
+
+        self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
+
+        response = self.client.post(self.your_benefits_url, data=data)
+        self.assertRedirects(response, self.result_url)
+
+        self.assertEqual(self.mocked_eligibility_check_create.called, True)
+
+    def test_post_your_benefits_none(self):
+        """
+        TEST the citizen said yes to benefits on the details page and then didn't find their
+        benefit on the benefits page. i.e. their benefit isn't NASS or a passported benefit.
+        """
+        self._fill_in_prev_steps(current_step='your_benefit', without_reference=True)
+
+        data = self._get_your_benefits_none_post_data()
+
+        r1 = self.client.get(self.your_finances_interstitial_url)
+
+        self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
+        self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
+
+        response = self.client.post(self.your_benefits_url, data=data)
+        self.assertRedirects(response, self.your_capital_url)
+
+        self.assertEqual(self.mocked_eligibility_check_create.called, True)
+
+    def test_post_your_benefits_passported(self):
+        """
+        TEST the citizen has one passported benefit.
+        """
+        self._fill_in_prev_steps(current_step='your_benefit', without_reference=True)
+
+        data = self._get_your_benefits_passported_post_data()
+
+        r1 = self.client.get(self.your_finances_interstitial_url)
+
+        self.mocked_eligibility_check_create.return_value = mocked_api.ELIGIBILITY_CHECK_CREATE
+        self.mocked_is_eligible_post.return_value = mocked_api.IS_ELIGIBLE_UNKNOWN
+
+        response = self.client.post(self.your_benefits_url, data=data)
+        self.assertRedirects(response, self.your_capital_url)
+
+        self.assertEqual(self.mocked_eligibility_check_create.called, True)
 
     ## YOUR CAPITAL
 
@@ -343,49 +459,6 @@ class CheckerWizardTestCase(CLATestCase):
         response = self.client.post(self.your_capital_url, data=post_data)
         self.assertRedirects(response, self.result_url)
 
-    def test_post_your_capital_with_extra_property(self):
-        """
-        Test that ticking yes for 'I own other properties' returns you to the same page
-        with an additional property
-        """
-        post_data = {
-            "checker_wizard-current_step": "your_capital",
-            "property-TOTAL_FORMS": [1],
-            "property-INITIAL_FORMS": [0],
-            "property-MAX_NUM_FORMS": [20],
-            "property-0-worth": [100000],
-            "property-0-mortgage_left": [50000],
-            "property-0-owner": [1],
-            "property-0-share": [100],
-            "your_other_properties-other_properties": [u"1"],
-            "your_savings-bank": [100],
-            "your_savings-investments": [100],
-            "your_savings-valuable_items": [100],
-            "your_savings-money_owed": [100],
-            "partners_savings-bank": [100],
-            "partners_savings-investments": [100],
-            "partners_savings-valuable_items": [100],
-            "partners_savings-money_owed": [100],
-        }
-
-        self._fill_in_prev_steps(current_step='your_capital')
-
-        r1 = self.client.get(self.your_capital_url)
-
-        # mock api responses
-        self.mocked_eligibility_check_patch.return_value = mocked_api.ELIGIBILITY_CHECK_UPDATE_FROM_YOUR_SAVINGS
-
-        response = self.client.post(self.your_capital_url, data=post_data, follow=True)
-        self.assertRedirects(response, self.your_capital_url)
-        self.assertGreater(
-            len(response.context_data['form'].get_form_by_prefix('property')),
-            len(r1.context_data['form'].get_form_by_prefix('property'))
-        )
-
-        # api called?
-        self.assertEqual(self.mocked_eligibility_check_patch.called, True)
-        # shouldn't call is_eligible because the user has to add another property
-        self.assertEqual(self.mocked_is_eligible_post.called, False)
 
     def test_post_your_capital_fails_without_reference(self):
         self._fill_in_prev_steps(current_step='your_capital', without_reference=True)
@@ -544,7 +617,7 @@ class CheckerWizardTestCase(CLATestCase):
 
         response = self.client.get(self.result_url, follow=True)
         self.assertRedirects(response, self.your_problem_url)
-        
+
 
         # api called?
         self.assertEqual(self.mocked_is_eligible_post.called, True)
@@ -558,7 +631,6 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-full_name": 'John Doe',
             "contact_details-postcode": 'SW1H 9AJ',
             "contact_details-street": '102 Petty France',
-            "contact_details-town": 'London',
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }
@@ -579,7 +651,6 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-full_name": 'John Doe',
             "contact_details-postcode": 'SW1H 9AJ',
             "contact_details-street": '102 Petty France',
-            "contact_details-town": 'London',
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }
@@ -606,7 +677,6 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-full_name": 'John Doe',
             "contact_details-postcode": 'SW1H 9AJ',
             "contact_details-street": '102 Petty France',
-            "contact_details-town": 'London',
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }
@@ -630,7 +700,6 @@ class CheckerWizardTestCase(CLATestCase):
             "contact_details-full_name": 'John Doe',
             "contact_details-postcode": 'SW1H 9AJ',
             "contact_details-street": '102 Petty France',
-            "contact_details-town": 'London',
             "contact_details-mobile_phone": '0123456789',
             "contact_details-home_phone": '9876543210',
         }

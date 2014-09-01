@@ -47,15 +47,15 @@ class MoneyFieldTests(TestCase):
     def test_violate_min_value_input_not_allowed(self):
         f = MoneyField(min_value=0)
         with self.assertRaises(ValidationError):
-            print f.clean('-24.5')
+            f.clean('-24.5')
 
     def test_violate_max_value_input_not_allowed(self):
         f = MoneyField(max_value=40)
         with self.assertRaises(ValidationError):
-            print f.clean('41')
+            f.clean('41')
 
     def test_with_valid_validates(self):
-        f = MoneyField()
+        f = MoneyField(min_value=None, max_value=None)
 
         self.assertEqual(2000, f.clean('20'))
         self.assertEqual(-2000, f.clean('-20'))
@@ -78,5 +78,5 @@ class MoneyFieldTests(TestCase):
         with self.assertRaises(ValidationError):
             f.clean(False)
         with self.assertRaises(ValidationError):
-            print f.clean('0x24C')
+            f.clean('0x24C')
 

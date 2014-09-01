@@ -1,0 +1,48 @@
+{% extends "checker/base.html" %}{% load i18n widget_tweaks helpers %}
+
+{% block page_header %}
+  <h1>{% trans "Your benefits" %}</h1>
+{% endblock %}
+
+{% block checker_content %}
+  <form action="." method="POST">
+    {% csrf_token %}
+    {{ wizard.management_form }}
+    {{ form.non_field_errors }}
+
+    {% with form=form %}
+      {% include "checker/includes/error_summary.html" %}
+    {% endwith %}
+
+    <p>Whether or not you qualify for legal aid depends on how much money you and your partner earn. To find out if you're financially eligible, please answer these questions as honestly and fully as you can.</p>
+
+    <p>Note: Benefits such as child benefit/tax credit should be declared as income in the subsequent income declaration.</p>
+
+    <div class="FormBlock FormBlock--grey{% if form.errors and show_errors %} FieldsetError{% endif %}">
+      {% for field in form %}
+        <div class="FormRow {% if field.errors|any_true %} Error{% endif %}">
+          <label for="{{ field.auto_id }}" class="FormRow-label">
+            <input type="checkbox" name="{{ field.html_name }}" id="{{ field.auto_id }}" {% if field.value %}checked="checked"{% endif %}{% if forloop.counter0|add:1 == form.fields|length %} data-conditional-el="conditional-{{ field.auto_id }}"{% endif %} class="js-Conditional">
+            {{ field.label }}
+          </label>
+
+          {% if forloop.counter0|add:1 == form.fields|length %}
+            {# this should only show up if last category is selected #}
+            <div id="conditional-{{ field.auto_id }}" class="Conditional">
+              <p class="Conditional-label"><strong>{% trans "Please list which benefits you are on that are not listed:" %}</strong></p>
+              <div class="FormRow-inner">
+                <textarea cols="80" id="id_your_problem-your_problem_notes" name="your_problem-your_problem_notes" rows="5"></textarea>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="FormActions">
+      <button type="submit" class="Button">{% trans "Next step" %}</button>
+      <a href="{% url 'checker:checker_step' wizard.steps.prev %}">{% trans "Go back to previous step" %}</a>
+    </div>
+  </form>
+
+{% endblock %}

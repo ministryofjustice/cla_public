@@ -5,25 +5,25 @@
   }
 }
 
-h1 {
-  @include heading-48;
-  font-weight: 700;
-}
-h2 {
-  @include heading-36;
-  font-weight: 700;
-}
-h3 {
-  @include core-36;
-}
-h4 {
-  @include core-24;
-}
-p, ul, ol, blockquote {
-  @include core-19;
-}
-
 section {
+  h1 {
+    @include heading-48;
+    font-weight: 700;
+  }
+  h2 {
+    @include heading-36;
+    font-weight: 700;
+  }
+  h3 {
+    @include core-36;
+  }
+  h4 {
+    @include core-24;
+  }
+  p, ul, ol, blockquote {
+    @include core-19;
+  }
+
   p {
     margin: 0;
     padding: {

@@ -1,0 +1,7 @@
+#!/bin/bash
+exec 2>&1
+cd /home/app/django
+
+python manage.py collectstatic --noinput
+
+exec /usr/local/bin/uwsgi --ini /etc/wsgi/conf.d/cla_public.ini

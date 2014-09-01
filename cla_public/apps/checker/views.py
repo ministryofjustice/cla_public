@@ -1,5 +1,6 @@
 from api.client import connection
-from django.shortcuts import redirect
+from django.forms.util import ErrorList
+from django.shortcuts import redirect, render
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView
@@ -10,7 +11,7 @@ from django.contrib.formtools.wizard.storage import get_storage
 from .helpers import SessionCheckerHelper
 from .forms import YourProblemForm, YourDetailsForm, \
     YourCapitalForm, YourIncomeForm, YourAllowancesForm, \
-    ApplyForm
+    ApplyForm, YourBenefitsForm, YourFinancesNullForm
 from .exceptions import InconsistentStateException
 
 class BreadCrumb(object):
@@ -36,7 +37,8 @@ class BreadCrumb(object):
             {
                 'name': 'Your Finances',
                 'step': 'your_capital',
-                'active': current_form.form_tag == 'your_finances',
+                'active': current_form.form_tag in \
+                    ('your_finances', 'your_finances_interstitial'),
                 'is_previous': False,
             },
             {
@@ -73,10 +75,13 @@ class BreadCrumb(object):
 
 class CheckerWizard(NamedUrlSessionWizardView):
     storage_name = 'checker.storage.CheckerSessionStorage'
+    condition_dict = {'your_benefits': YourBenefitsForm.ask_about_benefits }
 
     form_list = [
         ("your_problem", YourProblemForm),
+        ("your_finances_interstitial", YourFinancesNullForm),
         ("your_details", YourDetailsForm),
+        ("your_benefits", YourBenefitsForm),
         ("your_capital", YourCapitalForm),
         ("your_income", YourIncomeForm),
         ("your_allowances", YourAllowancesForm),
@@ -86,39 +91,14 @@ class CheckerWizard(NamedUrlSessionWizardView):
     TEMPLATES = {
         "your_problem": "checker/your_problem.html",
         "your_details": "checker/your_details.html",
+        "your_benefits": "checker/your_benefits.html",
+        "your_finances_interstitial":
+            "checker/interstitials/your_finances.html",
         "your_capital": "checker/your_capital.html",
         "your_income": "checker/your_income.html",
         "your_allowances": "checker/your_allowances.html",
         "result": "checker/result.html"
     }
-
-    # def dispatch(self, request, *args, **kwargs):
-    #     """
-    #     This renders the form or, if needed, does the http redirects.
-    #     """
-    #     self.prefix = self.get_prefix(*args, **kwargs)
-    #     self.storage = get_storage(self.storage_name, self.prefix, request,
-    #         getattr(self, 'file_storage', None))
-    #     self.steps = StepsHelper(self)
-
-    #     step_url = kwargs.get('step', None)
-    #     if step_url:
-    #         # walk through the form list and try to validate the data again.
-    #         for form_key in self.get_form_list():
-    #             if form_key == step_url:
-    #                 break
-
-    #             form_obj = self.get_form(step=form_key,
-    #                 data=self.storage.get_step_data(form_key),
-    #                 files=self.storage.get_step_files(form_key))
-    #             if not form_obj.is_valid():
-    #                 return self.render_revalidation_failure(form_key, form_obj, **kwargs)
-
-    #     response = super(CheckerWizard, self).dispatch(request, *args, **kwargs)
-
-    #     # update the response (e.g. adding cookies)
-    #     self.storage.update_response(response)
-    #     return response
 
     def get_template_names(self):
         return [self.TEMPLATES[self.steps.current]]
@@ -147,7 +127,6 @@ class CheckerWizard(NamedUrlSessionWizardView):
 
         if self.steps.current == u'result':
             context['eligibility_check'] = connection.eligibility_check(self.storage.get_eligibility_check_reference()).get()
-
 
         return context
 
@@ -194,16 +173,6 @@ class CheckerWizard(NamedUrlSessionWizardView):
             self.storage.reset()
         return response
 
-    def get_form_step_data(self, form):
-        data = super(CheckerWizard, self).get_form_step_data(form)
-        if form.form_tag == 'your_finances':
-            if bool(form.cleaned_data.get('your_other_properties',{}).get('other_properties', False)):
-                data = data.copy()
-                data['property-TOTAL_FORMS'] = unicode(int(data['property-TOTAL_FORMS']) + 1)
-                data['your_other_properties-other_properties'] = u'0'
-                self.redirect_to_self = True
-        return data
-
     def process_step(self, form):
         response_data = form.save()
 
@@ -234,7 +203,9 @@ class CheckerWizard(NamedUrlSessionWizardView):
         if getattr(self, 'redirect_to_self', False):
             return self.render_goto_step(self.steps.current)
 
-        if form.form_tag == 'your_finances' and not form.is_eligibility_unknown():
+        if (form.form_tag == 'your_finances' \
+            or form.form_tag == 'your_benefits') \
+            and not form.is_eligibility_unknown():
             return self.render_goto_step('result')
 
     def render(self, form=None, **kwargs):
@@ -248,6 +219,10 @@ class CheckerWizard(NamedUrlSessionWizardView):
 
 class StartPageView(TemplateView):
     template_name = 'checker/start_page.html'
+
+
+class ThresholdView(TemplateView):
+    template_name = 'checker/threshold.html'
 
 
 class ConfirmationView(TemplateView):

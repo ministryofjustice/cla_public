@@ -3,11 +3,11 @@ from django import forms
 from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 
-
 BOOL_CHOICES = ((1, _('Yes')), (0, _('No')))
 
 TWO_DP = Decimal('.01')
 ZERO_DP = Decimal('1')
+
 
 class RadioBooleanField(forms.TypedChoiceField):
     def __init__(self, *args, **kwargs):
@@ -18,14 +18,12 @@ class RadioBooleanField(forms.TypedChoiceField):
         super(RadioBooleanField, self).__init__(*args, **kwargs)
 
 
-
-
 class MoneyField(forms.Field):
     default_error_messages = {
         'invalid': _('Enter a number with up to two decimal places.'),
     }
 
-    def __init__(self, max_value=None, min_value=None, step=None, *args, **kwargs):
+    def __init__(self, max_value=9999999999, min_value=0, step=None, *args, **kwargs):
         self.max_value, self.min_value, self.step = max_value, min_value, step or '0.01'
         kwargs.setdefault('widget', forms.NumberInput if not kwargs.get('localize') else self.widget)
         super(MoneyField, self).__init__(*args, **kwargs)

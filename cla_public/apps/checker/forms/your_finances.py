@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
+import re
 import itertools
 
 from django import forms
 from django.utils.translation import ugettext as _
-from django.forms.formsets import formset_factory, BaseFormSet
+from django.forms.formsets import formset_factory, BaseFormSet, \
+    TOTAL_FORM_COUNT, INITIAL_FORM_COUNT
+from django.forms.util import ErrorList
 
 import form_utils.forms
 
 from cla_common.forms import MultipleFormsForm
+from cla_common.money_interval.forms import MoneyIntervalField
 
 from ..fields import RadioBooleanField, MoneyField
 
@@ -33,81 +37,87 @@ class YourFinancesFormMixin(EligibilityMixin, CheckerWizardMixin):
         self.has_benefits = kwargs.pop('has_benefits', False)
 
 
-class YourCapitalOtherPropertyForm(CheckerWizardMixin, forms.Form):
-    other_properties = RadioBooleanField(
-        required=True, label=_(u'Do you own another property?')
-    )
-
-
 class YourCapitalPropertyForm(CheckerWizardMixin, forms.Form):
     worth = MoneyField(
-        label=_(u"How much is it worth?"), min_value=0, required=True
+        label=_(u"How much is it worth?"), required=True
     )
     mortgage_left = MoneyField(
-        label=_(u"How much is left to pay on the mortgage?"), min_value=0,
+        label=_(u"How much is left to pay on the mortgage?"),
         required=True
     )
-    owner = RadioBooleanField(
-        label=_(u"Is the property owned by you or is it in joint names?"),
-        choices=OWNED_BY_CHOICES, required=True
+    main = RadioBooleanField(
+        label=_(u"Are you currently living at this property?"),
+        required=True
     )
     share = forms.IntegerField(
         label=_(u'What is your share of the property?'),
         min_value=0, max_value=100
     )
+    disputed = RadioBooleanField(
+        label=_(u"Is this property disputed?"), required=True
+    )
 
 
 class YourCapitalSavingsForm(CheckerWizardMixin, forms.Form):
     bank = MoneyField(
-        label=_(u"Do you have any money saved in a bank or building society?"),
-        min_value=0
+        label=_(u"How much money do you have saved in a bank or building society?")
     )
     investments = MoneyField(
-        label=_(u"Do you have any investments, shares, ISAs?"), min_value=0
+        label=_(u"What is the total value of any investments (shares or ISAs) you have?")
     )
     valuable_items = MoneyField(
-        label=_(u"Do you have any valuable items over £££ each?"), min_value=0
+        label=_(u"What is the total value of any items you have worth over £500?")
     )
     money_owed = MoneyField(
-        label=_(u"Do you have any money owed to you?"), min_value=0
+        label=_(u"How much money do you have owed to you?")
     )
 
 
-class OnlyAllowExtraIfNoInitialFormSet(BaseFormSet):
+class YourCapitalPartnerSavingsForm(CheckerWizardMixin, forms.Form):
+    bank = MoneyField(
+        label=_(u"How much money does your partner have saved in a bank or building society?")
+    )
+    investments = MoneyField(
+        label=_(u"What is the total value of any investments (shares or ISAs) your partner has?")
+    )
+    valuable_items = MoneyField(
+        label=_(u"What is the total value of any items your partner has worth over £500?")
+    )
+    money_owed = MoneyField(
+        label=_(u"How much money does your partner have owed to them?")
+    )
+
+
+class FirstRequiredFormSet(BaseFormSet):
     def __init__(self, *args, **kwargs):
-        if kwargs.get('initial'):
-            self.extra = 0
-        super(OnlyAllowExtraIfNoInitialFormSet, self).__init__(*args, **kwargs)
+        super(FirstRequiredFormSet, self).__init__(*args, **kwargs)
+        if self.forms:
+            self.forms[0].empty_permitted = False
 
+
+class PropertyFormSet(FirstRequiredFormSet):
     def clean(self):
-        from django.forms.util import ErrorList
-
-        # if any form in error => skip
-        if any([not form.is_valid() for form in self.forms]):
+        if filter(None, self._errors):
             return
 
-        count = 0
-        for form in self.forms:
-            try:
-                if form.cleaned_data:
-                    count += 1
-            except AttributeError:
-                pass
+        cleaned_data = self.cleaned_data
+        main_properties = [prop for prop in cleaned_data if prop.get('main', False)]
+        if len(main_properties) > 1:
+            self._errors[0]['main'] = ErrorList([
+                _(u'Only one main property allowed')
+            ])
 
-        if count < self.total_form_count():
-            raise forms.ValidationError(_('Fill in all your property details'))
-
-        return self.cleaned_data
+        return cleaned_data
 
 
 class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 
     YourCapitalPropertyFormSet = formset_factory(
         YourCapitalPropertyForm,
-        extra=1,
-        max_num=20,
+        extra=3,
+        max_num=3,
         validate_max=True,
-        formset=OnlyAllowExtraIfNoInitialFormSet
+        formset=PropertyFormSet
     )
 
     formset_list = (
@@ -115,9 +125,8 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
     )
 
     forms_list = (
-        ('your_other_properties', YourCapitalOtherPropertyForm),
         ('your_savings', YourCapitalSavingsForm),
-        ('partners_savings', YourCapitalSavingsForm),
+        ('partners_savings', YourCapitalPartnerSavingsForm),
     )
 
     def _prepare_for_init(self, kwargs):
@@ -129,7 +138,6 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
             del new_forms_list['partners_savings']
         if not self.has_property:
             del new_formset_list['property']
-            del new_forms_list['your_other_properties']
 
         self.forms_list = new_forms_list.items()
         self.formset_list = new_formset_list.items()
@@ -188,7 +196,9 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
             return {
                 'mortgage_left': property.get('mortgage_left'),
                 'share': property.get('share'),
-                'value': property.get('worth')
+                'value': property.get('worth'),
+                'disputed': property.get('disputed'),
+                'main': property.get('main'),
             }
         properties = cleaned_data.get('property', [])
         return [_transform(p) for p in properties if p]
@@ -219,12 +229,15 @@ class YourCapitalForm(YourFinancesFormMixin, MultipleFormsForm):
 
 
 class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
-    earnings = MoneyField(
-        label=_(u"Earnings per month"), min_value=0
+    earnings = MoneyIntervalField(
+        label=_(u"Earnings last month"), min_value=0
     )
 
-    other_income = MoneyField(
-        label=_(u"Other income per month?"), min_value=0
+    tax = MoneyIntervalField(label=_(u"Tax paid"), min_value=0)
+    ni = MoneyIntervalField(label=_(u"National Insurance Contribution"), min_value=0)
+
+    other_income = MoneyIntervalField(
+        label=_(u"Other income last month"), min_value=0
     )
 
     self_employed = RadioBooleanField(
@@ -234,11 +247,13 @@ class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
 
 class YourDependentsForm(CheckerWizardMixin, forms.Form):
     dependants_old = forms.IntegerField(
-        label=_(u'Children aged 16 and over'), required=True, min_value=0
+        label=_(u'Children aged 16 and over'), required=True,
+        min_value=0, max_value=50
     )
 
     dependants_young = forms.IntegerField(
-        label=_(u'Children aged 15 and under'), required=True, min_value=0
+        label=_(u'Children aged 15 and under'), required=True,
+        min_value=0, max_value=50
     )
 
 
@@ -261,8 +276,12 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
         self.forms_list = new_forms_list.items()
 
     def _get_total_earnings(self, cleaned_data):
-        own_income, partner_income = self.get_incomes(cleaned_data)
-        return sum(itertools.chain(own_income.values(), partner_income.values()))
+        total = 0
+        for i in self.get_incomes(cleaned_data):
+            total += i['other_income']['per_month']
+            total += i['earnings']['per_month']
+
+        return total
 
     @property
     def total_earnings(self):
@@ -278,16 +297,31 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
         return cleaned_data
 
     def get_income(self, key, cleaned_data):
-        return {
-            'earnings': cleaned_data.get(key, {}).get('earnings', 0),
-            'other_income': cleaned_data.get(key, {}).get('other_income', 0),
+        income = {
+            'earnings': cleaned_data.get(key, {}).get('earnings', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'other_income': cleaned_data.get(key, {}).get('other_income', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
             'self_employed': cleaned_data.get(key, {}).get('self_employed', False)
         }
+
+        return income
 
     def get_incomes(self, cleaned_data):
         your_income = self.get_income('your_income', cleaned_data)
         partner_income = self.get_income('partners_income', cleaned_data) or {}
         return your_income, partner_income
+
+    def _get_allowances(self, key, cleaned_data):
+        if key in cleaned_data:
+
+            return {
+                'income_tax': cleaned_data.get(key, {}).get('tax', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+                'national_insurance': cleaned_data.get(key, {}).get('ni', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            }
+
+    def get_allowances(self, cleaned_data):
+        your_allowances = self._get_allowances('your_income', cleaned_data)
+        partner_allowances = self._get_allowances('partners_income', cleaned_data) or {}
+        return your_allowances, partner_allowances
 
     def get_dependants(self, cleaned_data):
         return cleaned_data.get('dependants', {})
@@ -298,18 +332,22 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
         data = self.cleaned_data
         your_income, partner_income = self.get_incomes(data)
+        your_allowances, partner_allowances = self.get_allowances(data)
+
         dependants = self.get_dependants(data)
         post_data = {
             'dependants_young': dependants.get('dependants_young', 0),
             'dependants_old': dependants.get('dependants_old', 0),
             'you': {
-                'income': your_income
+                'income': your_income,
+                'deductions': your_allowances
             }
         }
         if partner_income:
             post_data.update({
                 'partner': {
-                    'income': partner_income
+                    'income': partner_income,
+                    'deductions': partner_allowances
                 }
             })
 
@@ -320,25 +358,33 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
 
 
 class YourSingleAllowancesForm(CheckerWizardMixin, form_utils.forms.BetterForm):
-    mortgage = MoneyField(label=_(u"Mortgage"), min_value=0)
-    rent = MoneyField(label=_(u"Rent"), min_value=0)
-    tax = MoneyField(label=_(u"Tax"), min_value=0)
-    ni = MoneyField(label=_(u"National Insurance"), min_value=0)
-    maintenance = MoneyField(label=_(u"Maintenance"), min_value=0)
-    childcare = MoneyField(label=_(u"Childcare"), min_value=0)
+    mortgage = MoneyIntervalField(label=_(u"Mortgage"), help_text=_(u"Homeowner repayments to a bank or building society. Check your most recent mortgage or bank statement."), min_value=0)
+    rent = MoneyIntervalField(label=_(u"Rent"), help_text=_(u"Money you pay your landlord to live in your home. Check your most recent bank statement or rent book."), min_value=0)
+    maintenance = MoneyIntervalField(label=_(u"Maintenance"), help_text=_(u"Regular payments you make to an ex-partner to help with their living costs or the living costs of your child who no longer lives with you."), min_value=0)
+    childcare = MoneyIntervalField(label=_(u"Childcare"), help_text=_(u"Money you pay for your child to be looked after while you work or study."), min_value=0)
     criminal_legalaid_contributions = MoneyField(
-        label=_(u"Payments being made towards a contribution order"), min_value=0
+        label=_(u"Contribution order"), help_text=_(u"Money you pay towards the cost of legal help following a criminal conviction."), min_value=0
     )
 
     class Meta:
         fieldsets = [('housing', {'fields': ['mortgage', 'rent'], 'legend': 'Housing costs', 'classes': ['FieldGroup']}),
-                     ('', {'fields': ['tax', 'ni', 'maintenance', 'childcare', 'criminal_legalaid_contributions']})]
+                     ('', {'fields': ['maintenance', 'childcare', 'criminal_legalaid_contributions']})]
+
+
+class YourSinglePartnerAllowancesForm(YourSingleAllowancesForm):
+    def __init__(self, *args, **kwargs):
+        super(YourSinglePartnerAllowancesForm, self).__init__(*args, **kwargs)
+        self.fields["mortgage"].help_text = _(u"Homeowner repayments to a bank or building society. Check most recent mortgage or bank statements.")
+        self.fields["rent"].help_text = _(u"Money your partner pays your landlord. Check most recent bank statements or rent book.")
+        self.fields["maintenance"].help_text = _(u"Regular payments made to an ex-partner to help with their living costs or the living costs of a child who no longer lives with your partner.")
+        self.fields["childcare"].help_text = _(u"Money your partner pays for a child to be looked after while they work or study.")
+        self.fields["criminal_legalaid_contributions"].help_text = _(u"Money your partner pays towards the cost of legal help following a criminal conviction.")
 
 
 class YourAllowancesForm(YourFinancesFormMixin, MultipleFormsForm):
     forms_list = (
         ('your_allowances', YourSingleAllowancesForm),
-        ('partners_allowances', YourSingleAllowancesForm)
+        ('partners_allowances', YourSinglePartnerAllowancesForm)
     )
 
     def _prepare_for_init(self, kwargs):
@@ -352,16 +398,12 @@ class YourAllowancesForm(YourFinancesFormMixin, MultipleFormsForm):
 
     def _get_allowances(self, key, cleaned_data):
         if key in cleaned_data:
-            mortgage = cleaned_data.get(key, {}).get('mortgage', 0)
-            rent = cleaned_data.get(key, {}).get('rent', 0)
 
-            tax = cleaned_data.get(key, {}).get('tax', 0)
-            ni = cleaned_data.get(key, {}).get('ni', 0)
             return {
-                'mortgage_or_rent': mortgage + rent,
-                'income_tax_and_ni': tax + ni,
-                'maintenance': cleaned_data.get(key, {}).get('maintenance', 0),
-                'childcare': cleaned_data.get(key, {}).get('childcare', 0),
+                'mortgage': cleaned_data.get(key, {}).get('mortgage', {}),
+                'rent': cleaned_data.get(key, {}).get('rent', {}),
+                'maintenance': cleaned_data.get(key, {}).get('maintenance', {}),
+                'childcare': cleaned_data.get(key, {}).get('childcare', {}),
                 'criminal_legalaid_contributions': cleaned_data.get(key, {}).get('criminal_legalaid_contributions', 0),
             }
 
