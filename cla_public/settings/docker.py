@@ -4,7 +4,7 @@ import iptools
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 
-DEBUG = bool(os.environ.get('DEBUG', False))
+DEBUG = bool(os.environ.get('SET_DEBUG', False))
 
 TEMPLATE_DEBUG = DEBUG
 
