@@ -100,9 +100,15 @@ gulp.task('images', function() {
 
 // setup watches
 gulp.task('watch', function() {
+  var lr = require('gulp-livereload');
+  lr.listen();
+
   gulp.watch(paths.styles, ['sass']);
   gulp.watch(paths.src_dir + 'javascripts/**/*', ['lint', 'js']);
   gulp.watch(paths.images, ['images']);
+
+  // trigger livereload on CSS change only (*.map files cause full page refresh)
+  gulp.watch(paths.dest_dir + '**/*.css').on('change', lr.changed);
 });
 
 // setup default tasks
