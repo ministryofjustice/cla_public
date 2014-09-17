@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp'),
     plugins = require('gulp-load-plugins')(),
     stylish = require('jshint-stylish'),
@@ -74,7 +76,6 @@ gulp.task('js', ['templates'], function() {
     .pipe(gulp.dest(paths.dest_dir + 'javascripts/'));
 });
 
-// jshint js code
 gulp.task('lint', function() {
   var files = paths.scripts.slice(0);
 
