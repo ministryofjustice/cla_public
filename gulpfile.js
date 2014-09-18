@@ -107,8 +107,8 @@ gulp.task('watch', function() {
   gulp.watch(paths.src_dir + 'javascripts/**/*', ['lint', 'js']);
   gulp.watch(paths.images, ['images']);
 
-  // trigger livereload on CSS change only (*.map files cause full page refresh)
-  gulp.watch(paths.dest_dir + '**/*.css').on('change', lr.changed);
+  // Exclude *.map files as they cause full page refresh
+  gulp.watch([paths.dest_dir + '**/*', '!**/*.map']).on('change', lr.changed);
 });
 
 // setup default tasks
