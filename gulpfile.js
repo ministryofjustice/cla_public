@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp'),
     plugins = require('gulp-load-plugins')(),
     stylish = require('jshint-stylish'),
@@ -74,7 +76,6 @@ gulp.task('js', ['templates'], function() {
     .pipe(gulp.dest(paths.dest_dir + 'javascripts/'));
 });
 
-// jshint js code
 gulp.task('lint', function() {
   var files = paths.scripts.slice(0);
 
@@ -99,9 +100,15 @@ gulp.task('images', function() {
 
 // setup watches
 gulp.task('watch', function() {
+  var lr = require('gulp-livereload');
+  lr.listen();
+
   gulp.watch(paths.styles, ['sass']);
   gulp.watch(paths.src_dir + 'javascripts/**/*', ['lint', 'js']);
   gulp.watch(paths.images, ['images']);
+
+  // Exclude *.map files as they cause full page refresh
+  gulp.watch([paths.dest_dir + '**/*', '!**/*.map']).on('change', lr.changed);
 });
 
 // setup default tasks
