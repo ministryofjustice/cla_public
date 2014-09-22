@@ -93,7 +93,11 @@ Image are optimised and copied into the `cla_public/assets/images` folder using 
 
 When making frequent changes to the assets you can run a gulp watch command to instantly compile any assets. To watch the source assets, run:
 
-    gulp watch
+    gulp watch --hostname mylocal.dev --port 8001
+
+This task synchronises browser interactions across devices (such as scrolling, filling in forms etc) as well as LiveReload CSS, images and JS. It runs as a proxy to the local web server.
+
+The arguments are optional. `--host` is your local webserver (defaults to `localhost`) and `--port` is your local webserver's port number (defaults to `8002`).
 
 ## Testing
 
