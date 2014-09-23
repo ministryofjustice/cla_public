@@ -28,7 +28,7 @@
     "nightwatch": "0.5.8",
     "phantom-wd-runner": "~0.0.2",
     "run-sequence": "~0.3.6",
-    "selenium-standalone": "2.42.2",
+    "selenium-standalone": "2.42.2-2.9.0",
     "wd": "~0.2.19"
   }
 }
