@@ -24,7 +24,7 @@
               Your partner's total money earned before tax. We need this to work out your household income.
             {% endif %}
           </p>
-        </div>  
+        </div>
       </div>
 
       <div class="FormRow Grid cf{% if form.other_income.errors %} Error{% endif %}">
@@ -88,6 +88,138 @@
               Money deducted from your pay by your employer – check your most recent pay-slip. If you work for yourself instead of a company check your most recent tax bill.
             {% else %}
               Money deducted from your partner’s pay by their employer – check most recent pay-slip. If your partner is self-employed check most recent tax bill.
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <div class="FormRow Grid cf{% if form.self_employment_drawings.errors %} Error{% endif %}">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.self_employment_drawings.id_for_label }}" id="{{ form.self_employment_drawings.auto_id }}-label">
+            {{ form.self_employment_drawings.label }}
+            {% for error in form.self_employment_drawings.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </label>
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.self_employment_drawings|add_class:"FormRow-field--interval" }}
+        </div>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Employment drawing help text (You)
+            {% else %}
+              Employment drawing help text
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <div class="FormRow Grid cf{% if form.benefits.errors %} Error{% endif %}">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.benefits.id_for_label }}" id="{{ form.benefits.auto_id }}-label">
+            {{ form.benefits.label }}
+            {% for error in form.benefits.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </label>
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.benefits|add_class:"FormRow-field--interval" }}
+        </div>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Benefits help text (You)
+            {% else %}
+              Benefits help text
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <div class="FormRow Grid cf{% if form.tax_credits.errors %} Error{% endif %}">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.tax_credits.id_for_label }}" id="{{ form.tax_credits.auto_id }}-label">
+            {{ form.tax_credits.label }}
+            {% for error in form.tax_credits.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </label>
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.tax_credits|add_class:"FormRow-field--interval" }}
+        </div>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Tax credits help text (You)
+            {% else %}
+              Tax credits help text
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <div class="FormRow Grid cf{% if form.child_benefits.errors %} Error{% endif %}">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.child_benefits.id_for_label }}" id="{{ form.child_benefits.auto_id }}-label">
+            {{ form.child_benefits.label }}
+            {% for error in form.child_benefits.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </label>
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.child_benefits|add_class:"FormRow-field--interval" }}
+        </div>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Child benefits help text (You)
+            {% else %}
+              Child benefits help text
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <div class="FormRow Grid cf{% if form.maintenance_received.errors %} Error{% endif %}">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.maintenance_received.id_for_label }}" id="{{ form.maintenance_received.auto_id }}-label">
+            {{ form.maintenance_received.label }}
+            {% for error in form.maintenance_received.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </label>
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.maintenance_received|add_class:"FormRow-field--interval" }}
+        </div>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Maintenance received help text (You)
+            {% else %}
+              Maintenance received help text
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <div class="FormRow Grid cf{% if form.pension.errors %} Error{% endif %}">
+        <div class="Grid-col Grid-col--1-3">
+          <label class="FormRow-label" for="{{ form.pension.id_for_label }}" id="{{ form.pension.auto_id }}-label">
+            {{ form.pension.label }}
+            {% for error in form.pension.errors %}
+              <span class="Error-message">{{ error }}</span>
+            {% endfor %}
+          </label>
+          <span class="FormRow-prefix">&pound;</span>
+          {{ form.pension|add_class:"FormRow-field--interval" }}
+        </div>
+        <div class="Grid-col Grid-col--2-3">
+          <p class="Help-text">
+            {% if fieldset_label == 'You' %}
+              Pension help text (You)
+            {% else %}
+              Pension help text
             {% endif %}
           </p>
         </div>

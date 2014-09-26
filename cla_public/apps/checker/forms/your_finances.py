@@ -244,6 +244,29 @@ class YourSingleIncomeForm(CheckerWizardMixin, forms.Form):
         label=_(u"Are you self employed?"), initial=0
     )
 
+    self_employment_drawings = MoneyIntervalField(
+        label=_(u"Self employment drawings"), min_value=0
+    )
+
+    benefits = MoneyIntervalField(
+        label=_(u"Benefits"), min_value=0
+    )
+
+    tax_credits = MoneyIntervalField(
+        label=_(u"Tax credits"), min_value=0
+    )
+
+    child_benefits = MoneyIntervalField(
+        label=_(u"Child benefits"), min_value=0
+    )
+
+    maintenance_received = MoneyIntervalField(
+        label=_(u"Maintenance received"), min_value=0
+    )
+
+    pension = MoneyIntervalField(
+        label=_(u"Pension"), min_value=0
+    )
 
 class YourDependentsForm(CheckerWizardMixin, forms.Form):
     dependants_old = forms.IntegerField(
@@ -300,6 +323,12 @@ class YourIncomeForm(YourFinancesFormMixin, MultipleFormsForm):
         income = {
             'earnings': cleaned_data.get(key, {}).get('earnings', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
             'other_income': cleaned_data.get(key, {}).get('other_income', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'self_employment_drawings': cleaned_data.get(key, {}).get('self_employment_drawings', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'benefits': cleaned_data.get(key, {}).get('benefits', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'tax_credits': cleaned_data.get(key, {}).get('tax_credits', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'child_benefits': cleaned_data.get(key, {}).get('child_benefits', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'maintenance_received': cleaned_data.get(key, {}).get('maintenance_received', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
+            'pension': cleaned_data.get(key, {}).get('pension', {'per_interval_value': 0, 'per_month': 0, 'interval_period': 'per_month'}),
             'self_employed': cleaned_data.get(key, {}).get('self_employed', False)
         }
 
