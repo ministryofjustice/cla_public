@@ -1,0 +1,3 @@
+echo -e "\n\n$(tput setaf 5)ENVIRONMENT : $CLA_ENV$(tput sgr0)"
+echo -e "\n$(tput setaf 5)COMPONENT : $APP_NAME$(tput sgr0)"
+echo -e "\n$(tput setaf 5)CURRENT VERSION : $(cd /home/app/django && git rev-parse HEAD)$(tput sgr0)"
