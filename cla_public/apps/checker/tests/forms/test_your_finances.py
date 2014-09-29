@@ -337,6 +337,21 @@ class YourIncomeFormTestCase(CLATestCase):
             u'your_income-ni_0': u'354',
             u'your_income-ni_1': u'per_month',
 
+            u'your_income-self_employed_0': u'0',
+            u'your_income-self_employed_1': u'per_month',
+            u'your_income-self_employment_drawings_0': u'0',
+            u'your_income-self_employment_drawings_1': u'per_month',
+            u'your_income-benefits_0': u'0',
+            u'your_income-benefits_1': u'per_month',
+            u'your_income-tax_credits_0': u'0',
+            u'your_income-tax_credits_1': u'per_month',
+            u'your_income-child_benefits_0': u'0',
+            u'your_income-child_benefits_1': u'per_month',
+            u'your_income-maintenance_received_0': u'0',
+            u'your_income-maintenance_received_1': u'per_month',
+            u'your_income-pension_0': u'0',
+            u'your_income-pension_1': u'per_month',
+
             u'partners_income-earnings_0': u'444',
             u'partners_income-earnings_1': u'per_month',
             u'partners_income-other_income_0': u'555',
@@ -348,6 +363,21 @@ class YourIncomeFormTestCase(CLATestCase):
             u'partners_income-ni_0': u'454',
             u'partners_income-ni_1': u'per_month',
 
+            u'partners_income-self_employed_0': u'0',
+            u'partners_income-self_employed_1': u'per_month',
+            u'partners_income-self_employment_drawings_0': u'0',
+            u'partners_income-self_employment_drawings_1': u'per_month',
+            u'partners_income-benefits_0': u'0',
+            u'partners_income-benefits_1': u'per_month',
+            u'partners_income-tax_credits_0': u'0',
+            u'partners_income-tax_credits_1': u'per_month',
+            u'partners_income-child_benefits_0': u'0',
+            u'partners_income-child_benefits_1': u'per_month',
+            u'partners_income-maintenance_received_0': u'0',
+            u'partners_income-maintenance_received_1': u'per_month',
+            u'partners_income-pension_0': u'0',
+            u'partners_income-pension_1': u'per_month',
+
             u'dependants-dependants_young': u'3',
             u'dependants-dependants_old': u'2',
         }
@@ -358,6 +388,12 @@ class YourIncomeFormTestCase(CLATestCase):
                 "income": {
                     "earnings":  {'interval_period': u'per_month', 'per_interval_value': 22200, 'per_month': 22200 },
                     "other_income": {'interval_period': u'per_month', 'per_interval_value': 33300, 'per_month': 33300 },
+                    "self_employment_drawings": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "benefits": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "tax_credits": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "child_benefits": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "maintenance_received": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "pension": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
                     "self_employed": False,
                 },
                 "deductions": {
@@ -369,6 +405,12 @@ class YourIncomeFormTestCase(CLATestCase):
                 "income": {
                     "earnings": {'interval_period': u'per_month', 'per_interval_value': 44400, 'per_month': 44400 },
                     "other_income": {'interval_period': u'per_month', 'per_interval_value': 55500, 'per_month': 55500 },
+                    "self_employment_drawings": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "benefits": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "tax_credits": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "child_benefits": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "maintenance_received": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
+                    "pension": {'interval_period': u'per_month', 'per_interval_value': 0, 'per_month': 0 },
                     "self_employed": True,
                 },
                 "deductions": {
@@ -496,11 +538,23 @@ class YourIncomeFormTestCase(CLATestCase):
                         'data': {
                             'your_income-earnings_0': None,
                             'your_income-other_income_0': None,
+                            'your_income-self_employment_drawings_0': None,
+                            'your_income-benefits_0': None,
+                            'your_income-tax_credits_0': None,
+                            'your_income-child_benefits_0': None,
+                            'your_income-maintenance_received_0': None,
+                            'your_income-pension_0': None,
                             'your_income-self_employed': None
                         },
                         'error': {
                             'earnings': [u'This field is required.'],
                             'other_income': [u'This field is required.'],
+                            'self_employment_drawings': [u'This field is required.'],
+                            'benefits': [u'This field is required.'],
+                            'tax_credits': [u'This field is required.'],
+                            'child_benefits': [u'This field is required.'],
+                            'maintenance_received': [u'This field is required.'],
+                            'pension': [u'This field is required.'],
                             'self_employed': [u'This field is required.']
                         }
                     },
@@ -508,10 +562,22 @@ class YourIncomeFormTestCase(CLATestCase):
                         'data': {
                             'your_income-earnings_0': -1,
                             'your_income-other_income_0': -1,
+                            'your_income-self_employment_drawings_0': -1,
+                            'your_income-benefits_0': -1,
+                            'your_income-tax_credits_0': -1,
+                            'your_income-child_benefits_0': -1,
+                            'your_income-maintenance_received_0': -1,
+                            'your_income-pension_0': -1,
                         },
                         'error': {
                             'earnings': [u'Ensure this value is greater than or equal to 0.'],
                             'other_income': [u'Ensure this value is greater than or equal to 0.'],
+                            'self_employment_drawings': [u'Ensure this value is greater than or equal to 0.'],
+                            'benefits': [u'Ensure this value is greater than or equal to 0.'],
+                            'tax_credits': [u'Ensure this value is greater than or equal to 0.'],
+                            'child_benefits': [u'Ensure this value is greater than or equal to 0.'],
+                            'maintenance_received': [u'Ensure this value is greater than or equal to 0.'],
+                            'pension': [u'Ensure this value is greater than or equal to 0.'],
                         }
                     },
                 ],
