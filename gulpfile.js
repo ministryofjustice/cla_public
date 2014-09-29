@@ -3,7 +3,9 @@
 var gulp = require('gulp'),
     plugins = require('gulp-load-plugins')(),
     stylish = require('jshint-stylish'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    browserSync = require('browser-sync'),
+    argv = require('yargs').argv;
 
 var paths = {
   dest_dir: 'cla_public/assets/',
@@ -38,8 +40,12 @@ gulp.task('sass', function() {
     .src(paths.styles)
     .pipe(plugins.rubySass({
       loadPath: 'node_modules/govuk_frontend_toolkit/' // add node module toolkit path
-    }))
-    .pipe(gulp.dest(paths.dest_dir + 'stylesheets'));
+    })).on('error', function(error) {
+      console.log(error.toString());
+    })
+    .pipe(gulp.dest(paths.dest_dir + 'stylesheets'))
+    .pipe(plugins.filter('**/*.css'))
+    .pipe(browserSync.reload({ stream: true }));
 });
 
 // js templates
@@ -98,17 +104,20 @@ gulp.task('images', function() {
     .pipe(gulp.dest(paths.dest_dir + 'images'));
 });
 
-// setup watches
+// Run BrowserSync proxy server and watch for file changes
 gulp.task('watch', function() {
-  var lr = require('gulp-livereload');
-  lr.listen();
+  var host = argv.host || 'localhost';
+  var port = argv.port || 8002;
+
+  browserSync({
+    proxy: host + ':' + port,
+    open: false,
+    port: 3000
+  });
 
   gulp.watch(paths.styles, ['sass']);
-  gulp.watch(paths.src_dir + 'javascripts/**/*', ['lint', 'js']);
-  gulp.watch(paths.images, ['images']);
-
-  // Exclude *.map files as they cause full page refresh
-  gulp.watch([paths.dest_dir + '**/*', '!**/*.map']).on('change', lr.changed);
+  gulp.watch(paths.src_dir + 'javascripts/**/*', ['lint', 'js', browserSync.reload]);
+  gulp.watch(paths.images, ['images', browserSync.reload]);
 });
 
 // setup default tasks
