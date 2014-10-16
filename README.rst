@@ -7,9 +7,7 @@ Dependencies
 ------------
 
 -  `Virtualenv <http://www.virtualenv.org/en/latest/>`__
--  `Python <http://www.python.org/>`__ (Can be installed using ``brew``)
--  `Postgres <http://www.postgresql.org/>`__
--  **Frontend**
+-  `Python 2.7 <http://www.python.org/>`__ (Can be installed using ``brew``)
 -  `nodejs.org <http://nodejs.org/>`__
 -  `Sass <http://sass-lang.com/>`__ (Ruby version - minimum v3.3)
 -  `gulp.js <http://gulpjs.com/>`__ (Installed globally using
@@ -30,7 +28,8 @@ Next, create the environment and start it up:
 
 ::
 
-    virtualenv env --prompt=\(cla_fe\)
+    cd cla_public
+    virtualenv env --prompt=\(cla_public\)
 
     source env/bin/activate
 
@@ -39,6 +38,12 @@ Install python dependencies:
 ::
 
     pip install -r requirements/local.txt
+
+Create a ``local.py`` settings file from the example file:
+
+::
+
+    cp cla_public/settings/.example.local.py cla_public/settings/local.py
 
 Install Frontend dependencies libraries:
 
@@ -64,11 +69,11 @@ Compile assets:
 
     gulp build
 
-Start the server:
+Start the server. Don't forget to keep the backend server running on port 8000:
 
 ::
 
-    ./manage.py runserver 8001
+    ./manage.py runserver 8002
 
 Dev
 ---
@@ -82,19 +87,22 @@ following commands to get the server running again:
 
     ./manage.py runserver 8002
 
-You may need to add a local.py settings file to load apps like
-``debug_toolbar`` and ``django_pdb``. An example can be found at:
+We suggest you should keep 2 terminals (+1 for the backend):
+
+1. with django runserver running
 
 ::
 
-    cla_frontend/settings/.example.local.py
+    source env/bin/activate
 
-If using the apps suggested in this file you will also need to run
-``pip install`` on ``local.txt``:
+    ./manage.py runserver 8002
+
+2. with gulp watching and compiling the assets
 
 ::
 
-    pip install -r requirements/local.txt
+    gulp build && gulp watch
+
 
 Frontend
 --------
@@ -171,13 +179,14 @@ dependencies:
 -  `Nightwatch.js <http://nightwatchjs.org/>`__ (~0.4.14)
 -  `PhantomJS <http://phantomjs.org/>`__ (1.9.7)
 
-To run the tests, use the following make command:
+To run the tests, keep the backend and the public runservers running,
+open a new terminal, cd to the cla_public and use the following make command:
 
 ::
 
     make test
 
-By default, tests will be run on ``http://0.0.0.0:8001/``. To change
+By default, tests will be run on ``http://0.0.0.0:8002/``. To change
 this you can pass the ``--url`` argument on the command called in the
 make file. To see what command is called look at the ``Makefile`` at the
 project root.
