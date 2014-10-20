@@ -1,5 +1,6 @@
 #!/bin/bash
 exec 2>&1
+if [[ "$CLA_ENV" == "prod" || "$CLA_ENV" == "staging" ]]; then grep sentry /etc/hosts 2>&1 /dev/null || echo "$SENTRY_IPADRESS $SENTRY_HOSTNAME" >> /etc/hosts /dev/null ; fi
 cd /home/app/django
 
 python manage.py collectstatic --noinput
