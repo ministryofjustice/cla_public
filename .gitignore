@@ -52,6 +52,7 @@ venv
 *.ipr
 *.iml
 *.iws
+.idea
 
 cla_public/settings/local.py
 
@@ -77,4 +78,4 @@ cla_public/assets-src/javascripts/templates.js
 /phantomjsdriver.log
 /selenium-debug.log
 
-/.sass-cache/
+.sass-cache/
