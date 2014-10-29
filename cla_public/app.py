@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import logging
 import logging.config
-
+import jinja2
 import sys
 import os
 import yaml
-from flask import Flask
+from flask import Flask, url_for, Blueprint
+
+from cla_public.views.index import index_blueprint
 
 log = logging.getLogger(__name__)
 
@@ -60,8 +62,43 @@ def setup_config(app, config_name):
         log.critical('Environment variable %s must be set. Exiting...', CONFIG_FILE_ENV_NAME)
         sys.exit(1)
 
+def change_jinja_templates(app):
+    # Change the template loader so it will seek out the MOJ Jinja
+    # base templates.
+    moj_loader = jinja2.ChoiceLoader([
+            app.jinja_loader,
+            jinja2.PackageLoader('moj_template', 'templates')
+            ])
+
+    app.jinja_loader = moj_loader
+
+    # we need to load a special method called "static" to mimic
+    # Django; ideally we would not rely on Django-isms but the MOJ
+    # template assumes you're using jinja with Django.
+    import moj_template
+    root_template_dir = moj_template.__path__[0]
+    static_dir = os.path.join(root_template_dir, 'static')
+    template_dir = os.path.join(root_template_dir,
+                                'templates', 'moj_template')
+
+    moj_template_blueprint = Blueprint('moj_template', 'moj_template',
+                                       static_folder=static_dir,
+                                       static_url_path='/moj-static',
+                                       template_folder=template_dir)
+    app.register_blueprint(moj_template_blueprint)
+    @app.context_processor
+    def utility_processor():
+        def static(filename):
+            return url_for('moj_template.static', filename=filename)
+        return {'static': static}
+
+    return app
+
 def create_app(config_name='FLASK'):
     app = Flask(__name__)
+    # This should happen before other things
+    app.register_blueprint(index_blueprint)
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
+    app = change_jinja_templates(app)
     setup_config(app, config_name)
     return app
