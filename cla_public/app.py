@@ -5,7 +5,7 @@ import jinja2
 import sys
 import os
 import yaml
-from flask import Flask, url_for, Blueprint
+from flask import Flask, url_for, Blueprint, render_template
 
 from cla_public.views.index import base_blueprint
 from cla_public.views.problem import problem_blueprint
