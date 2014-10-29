@@ -9,7 +9,8 @@ var paths = {
   styles: 'cla_public/static-src/stylesheets/**/*.scss',
   scripts: 'cla_public/static-src/javascripts/*',
   vendor_scripts: vendorFiles,
-  images: 'cla_public/static-src/images/**/*'
+  images: 'cla_public/static-src/images/**/*',
+  templates: 'cla_public/templates/**/*'
 };
 
 module.exports = paths;

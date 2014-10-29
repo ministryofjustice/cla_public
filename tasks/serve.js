@@ -5,6 +5,7 @@ var paths = require('./_paths');
 var browserSync = require('browser-sync');
 var argv = require('yargs').argv;
 
+
 // Proxy existing server via brower-sync and serve on localhost:3000
 gulp.task('serve', function() {
   var host = argv.host || argv.h || 'localhost';
@@ -16,5 +17,6 @@ gulp.task('serve', function() {
     port: 3000
   });
 
-  return gulp.watch(paths.styles, ['sass']);
+  gulp.watch(paths.templates, browserSync.reload);
+  gulp.watch(paths.styles, ['sass']);
 });
