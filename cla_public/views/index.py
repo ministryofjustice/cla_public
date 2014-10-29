@@ -1,14 +1,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from flask import Blueprint, render_template
 
+import os
 import logging
+
+from flask import Blueprint, render_template, send_from_directory, current_app
+
 
 log = logging.getLogger(__name__)
 
-index_blueprint = Blueprint('index', __name__)
+base_blueprint = Blueprint('index', __name__)
 
 
-@index_blueprint.route('/')
+@base_blueprint.route('/<path:filename>')
+def static(filename):
+    # HACK: Switch to nginx.
+    directory = os.path.join(current_app.static_folder, '../static-templates/')
+    return send_from_directory(directory, filename)
+
+@base_blueprint.route('/')
 def index():
     return render_template('index.html')
