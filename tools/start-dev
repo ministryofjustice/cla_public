@@ -1,0 +1,4 @@
+dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+parentdir=$(dirname "$dir")
+
+(export CLA_PUBLIC_CONFIG="$parentdir/cla_public.sample.conf"; foreman start -f "$parentdir/Procfile.dev")
