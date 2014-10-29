@@ -60,3 +60,5 @@ venv
 node_modules/
 
 .sass-cache/
+
+vendor/
