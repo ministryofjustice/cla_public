@@ -112,4 +112,10 @@ def create_app(config_name='FLASK'):
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
     setup_config(app, config_name)
     app = change_jinja_templates(app)
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('404.html'), 404
+    @app.errorhandler(500)
+    def page_not_found(e):
+        return render_template('500.html'), 500
     return app
