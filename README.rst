@@ -10,6 +10,8 @@ Ideally there'd be a salt state you could run to bootstrap a CLA Public dev envi
 
   pip install -r requirements.txt
 
+  python setup.py develop
+
 Then, copy ``cla_public.sample.conf`` and name it ``cla_public.dev.conf`` or a name of your choosing.
 
 Next you must tell Flask where to find your configuration file::
