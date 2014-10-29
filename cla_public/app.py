@@ -87,12 +87,21 @@ def change_jinja_templates(app):
                                        static_url_path='/moj-static',
                                        template_folder=template_dir)
     app.register_blueprint(moj_template_blueprint)
+
     @app.context_processor
     def utility_processor():
         def static(filename):
             return url_for('moj_template.static', filename=filename)
         return {'static': static}
 
+    # Expose user variables
+    @app.context_processor
+    def moj_variables():
+        try:
+            return app.config['APP_SETTINGS']
+        except KeyError:
+            log.critical('Cannot find APP_SETTINGS group in the configuration file.')
+            sys.exit(1)
     return app
 
 def create_app(config_name='FLASK'):
@@ -101,6 +110,6 @@ def create_app(config_name='FLASK'):
     app.register_blueprint(base_blueprint)
     app.register_blueprint(problem_blueprint)
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
-    app = change_jinja_templates(app)
     setup_config(app, config_name)
+    app = change_jinja_templates(app)
     return app
