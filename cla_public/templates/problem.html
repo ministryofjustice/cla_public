@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form method="POST" action="{{ url_for('problem.problem') }}">
+    {{ form.csrf_token }}
+    <table>
+      {% for cat in form.category  %}
+        <tr>
+          <td>{{ cat }}</td>
+          <td>{{ cat.label }}</td>
+          <td>{{ cat.helptext }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+    <input type="submit" value="Go">
+  </form>
+{% endblock content %}
