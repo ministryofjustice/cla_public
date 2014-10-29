@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import logging
+import pytest
 
 from flask_script import Manager, Shell, Server
 from flask_migrate import MigrateCommand
