@@ -21,3 +21,8 @@ def static(filename):
 @base_blueprint.route('/')
 def index():
     return render_template('index.html')
+
+# TODO: static pages created by Clive, Mickey to re-arrange and re-route correctly
+@base_blueprint.route('/cookies')
+def cookies():
+    return render_template('cookies.html')
