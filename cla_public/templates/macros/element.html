@@ -1,0 +1,13 @@
+{% macro alert(type='info', icon=None, title=None) %}
+  <div class="alert-{{type}}">
+    {% if icon %}
+      <span class="icon icon-{{icon}}" aria-hidden="true"></span>
+    {% endif %}
+    <div class="alert-message">
+      {% if title %}
+        <h3 class="alert-header">{{title}}</h3>
+      {% endif %}
+      {{ caller() }}
+    </div>
+  </div>
+{% endmacro %}

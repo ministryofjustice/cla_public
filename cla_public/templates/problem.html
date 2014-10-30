@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% import "macros/form.html" as Form %}
+{% import "macros/element.html" as Element %}
 
 {% block page_heading %}
   What do you need help with?
@@ -11,15 +12,21 @@
 {% endblock %}
 
 {% block inner_content %}
-  <div class="alert-info">
-    <div class="alert-message">
-      <p>If you have more than one problem, you can complete this service more than once.</p>
-      <p>If you’re really not sure what to choose, ask us to <a href="#">call you back</a>.</p>
-    </div>
-  </div>
+  {% call Element.alert() %}
+    <p>If you have more than one problem, you can complete this service more than once.</p>
+    <p>If you’re really not sure what to choose, ask us to <a href="#">call you back</a>.</p>
+  {% endcall %}
 
   <form method="POST" action="{{ url_for('problem.problem') }}">
     {{ form.csrf_token }}
+
+    {% if form.errors.category %}
+      {% call Element.alert('error', icon='cross') %}
+        {% for line in form.errors.category %}
+          <p>{{line}}</p>
+        {% endfor %}
+      {% endcall %}
+    {% endif %}
 
     {% for cat in form.category %}
       {{ Form.block_label(cat) }}
