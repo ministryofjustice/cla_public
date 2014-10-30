@@ -8,6 +8,7 @@
 @import 'forms';
 @import 'alerts';
 @import 'icons';
+@import 'shame';
 
 .phase-banner {
   @extend %site-width-container;
@@ -15,9 +16,16 @@
   margin-bottom: 30px;
 }
 
-
 #content {
   > .inner-block {
     @extend %site-width-container;
   }
+}
+
+.grid-row {
+  @extend %grid-row;
+}
+
+.column-two-thirds {
+  @include grid-column(2/3);
 }
