@@ -1,0 +1,26 @@
+.icon {
+  display: inline-block;
+
+  &:before {
+    font-size: 22px;
+    line-height: 1.2;
+    text-align: center;
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
+
+  &-tick {
+    &:before {
+      content: '✔';
+      color: $green;
+    }
+  }
+
+  &-cross {
+    &:before {
+      content: '✘';
+      color: $mellow-red;
+    }
+  }
+}

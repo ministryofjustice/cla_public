@@ -1,23 +1,48 @@
 %alert-generic {
   $_padding: 1.05263em;
   padding: $_padding;
-  border-left: 4px solid $grey-2;
-  background: rgba($grey-2, .1);
   margin: 0 0 $_padding;
 
-  > .alert-message {
-    > p {
-      margin: .5em 0 0;
+  > .icon {
+    float: left;
+    margin-right: 20px;
+  }
 
-      &:first-child {
-        margin: 0;
-      }
+  > .alert-message {
+    overflow: hidden;
+
+    > .alert-header,
+    > p {
+      margin: 0 0 .5em;
+    }
+
+    .alert-header {
+      @include core-24;
+      font-weight: bold;
+    }
+
+    > p:last-child {
+      margin: 0;
     }
   }
 }
 
 .alert {
-  &-info {
+  @mixin _make-alert($colour: null) {
     @extend %alert-generic;
+    background: rgba($colour, .1);
+    border-left: 4px solid $colour;
+  }
+
+  &-info {
+    @include _make-alert($grey-2);
+  }
+
+  &-error {
+    @include _make-alert($mellow-red);
+  }
+
+  &-success {
+    @include _make-alert($turquoise);
   }
 }
