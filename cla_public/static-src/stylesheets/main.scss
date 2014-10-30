@@ -1,3 +1,22 @@
-body {
-  background: red;
+@import "govuk_frontend_toolkit/stylesheets/colours";
+@import "govuk_frontend_toolkit/stylesheets/grid_layout";
+@import "govuk_frontend_toolkit/stylesheets/typography";
+
+@import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
+
+@import 'typography';
+@import 'forms';
+@import 'alerts';
+
+.phase-banner {
+  @extend %site-width-container;
+  @include phase-banner(beta);
+  margin-bottom: 30px;
+}
+
+
+#content {
+  > .inner-block {
+    @extend %site-width-container;
+  }
 }

@@ -1,0 +1,24 @@
+{# Block level label used for single options per line #}
+{% macro block_label(field) %}
+  <div class="block-label">
+    <label class="form-label" id="{{field.id}}">
+      {{ field }}
+      {{ field.label.text }}
+      {% if field.helptext %}
+        <div class="form-hint">
+          {{field.helptext|safe}}
+        </div>
+      {% endif %}
+    </label>
+  </div>
+{% endmacro %}
+
+{# Form actions block #}
+{% macro actions(button_label, previous_link=None) %}
+  <p class="form-actions">
+    <button type="submit" class="button">{{ button_label }}</button>
+    {% if previous_link %}
+      <a href="{{ url( 'checker:checker_step', previous_link) }}">Go back to previous step</a>
+    {% endif %}
+  </p>
+{% endmacro %}

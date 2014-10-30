@@ -1,0 +1,28 @@
+.block-label {
+  .form-label {
+    display: block;
+    padding: 18px 30px 15px 45px;
+    margin: 5px 0;
+    background: $grey-3;
+    border: 1px solid $grey-3;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $black;
+    }
+
+    > input[type="checkbox"],
+    > input[type="radio"] {
+      float: left;
+      margin-left: -24px;
+    }
+  }
+
+  .form-hint {
+    color: $grey-1;
+  }
+}
+
+.button {
+  padding: 0.52632em 0.78947em 0.26316em;
+}

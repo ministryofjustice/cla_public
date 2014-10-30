@@ -1,0 +1,8 @@
+body {
+  @include core-19;
+}
+
+h1 {
+  @include core-48;
+  font-weight: bold;
+}

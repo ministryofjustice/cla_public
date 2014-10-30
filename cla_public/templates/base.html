@@ -1,2 +1,22 @@
 {% extends "moj_template/base.jinja" %}
 
+{% block page_title %}{{ app_title }}{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/main.css') }}">
+{% endblock %}
+
+{% block content %}
+  {% include "_phase-tag.html" %}
+
+  <article class="inner-block">
+    {% block page_header %}
+      <header>
+        <h1>{% block page_heading %}{% endblock %}</h1>
+        {% block page_subheading %}{% endblock %}
+      </header>
+    {% endblock %}
+
+    {% block inner_content %}{% endblock %}
+  </article>
+{% endblock %}

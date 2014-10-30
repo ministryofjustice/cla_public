@@ -1,18 +1,30 @@
 {% extends "base.html" %}
 
-{% block content %}
-  <h1>{{ app_title }}</h1>
+{% import "macros/form.html" as Form %}
+
+{% block page_heading %}
+  What do you need help with?
+{% endblock %}
+
+{% block page_subheading %}
+  <p>Choose one of the options below.</p>
+{% endblock %}
+
+{% block inner_content %}
+  <div class="alert-info">
+    <div class="alert-message">
+      <p>If you have more than one problem, you can complete this service more than once.</p>
+      <p>If you’re really not sure what to choose, ask us to <a href="#">call you back</a>.</p>
+    </div>
+  </div>
+
   <form method="POST" action="{{ url_for('problem.problem') }}">
     {{ form.csrf_token }}
-    <table>
-      {% for cat in form.category  %}
-        <tr>
-          <td>{{ cat }}</td>
-          <td>{{ cat.label }}</td>
-          <td>{{ cat.helptext }}</td>
-        </tr>
-      {% endfor %}
-    </table>
-    <input type="submit" value="Go">
+
+    {% for cat in form.category %}
+      {{ Form.block_label(cat) }}
+    {% endfor %}
+
+    {{ Form.actions('Continue') }}
   </form>
-{% endblock content %}
+{% endblock %}
