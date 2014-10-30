@@ -104,6 +104,17 @@ def change_jinja_templates(app):
             sys.exit(1)
     return app
 
+def register_error_handlers(app):
+    @app.errorhandler(404)
+    def http_page_not_found(e):
+        return render_template('404.html'), 404
+
+    @app.errorhandler(500)
+    def http_server_error(e):
+        return render_template('500.html'), 500
+
+    return app
+
 def create_app(config_name='FLASK'):
     app = Flask(__name__)
     # This should happen before other things
@@ -112,10 +123,5 @@ def create_app(config_name='FLASK'):
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
     setup_config(app, config_name)
     app = change_jinja_templates(app)
-    @app.errorhandler(404)
-    def page_not_found(e):
-        return render_template('404.html'), 404
-    @app.errorhandler(500)
-    def page_not_found(e):
-        return render_template('500.html'), 500
+    app = register_error_handlers(app)
     return app
