@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "browser-sync": "^1.6.0",
-    "govuk_frontend_toolkit": "0.42.0",
+    "govuk_frontend_toolkit": "^2.0.1",
     "gulp": "^3.8.9",
     "gulp-clean": "~0.2.4",
     "gulp-concat": "~2.1.7",
