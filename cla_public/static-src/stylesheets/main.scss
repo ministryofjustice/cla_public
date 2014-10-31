@@ -30,3 +30,11 @@
 .column-two-thirds {
   @include grid-column(2/3);
 }
+
+article .info-notice {
+  border-left: 10px solid $border-colour;
+  margin-bottom: 1em;
+}
+article .application-notice {
+  padding: 0.1em 0 0.1em 1em;
+}
