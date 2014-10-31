@@ -1,4 +1,9 @@
-{# Block level label used for single options per line #}
+{#
+  Block level label used for single options per line
+
+  Params:
+    - field - WTForm field
+#}
 {% macro block_label(field) %}
   <div class="block-label">
     <label class="form-label" id="{{field.id}}">
@@ -13,7 +18,12 @@
   </div>
 {% endmacro %}
 
-{# Form actions block #}
+{#
+  Form actions block
+
+  Params:
+    - field - WTForm field
+#}
 {% macro actions(button_label, previous_link=None) %}
   <p class="form-actions">
     <button type="submit" class="button">{{ button_label }}</button>
