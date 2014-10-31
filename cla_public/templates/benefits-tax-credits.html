@@ -4,11 +4,11 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  About you
+  Your benefits and tax credits
 {% endblock %}
 
 {% block inner_content %}
-  <form method="POST" action="{{ url_for('.about') }}">
+  <form method="POST" action="{{ url_for('.benefits_tax_credits') }}">
     {{ form.csrf_token }}
 
     {% if form.errors %}

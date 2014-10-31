@@ -8,7 +8,7 @@ import yaml
 from flask import Flask, url_for, Blueprint, render_template
 
 from cla_public.views.index import base_blueprint
-from cla_public.views.checker import checker_blueprint
+from cla_public.views.checker import checker_blueprint, result_blueprint
 
 log = logging.getLogger(__name__)
 
@@ -120,6 +120,7 @@ def create_app(config_name='FLASK'):
     # This should happen before other things
     app.register_blueprint(base_blueprint)
     app.register_blueprint(checker_blueprint)
+    app.register_blueprint(result_blueprint)
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
     setup_config(app, config_name)
     app = change_jinja_templates(app)

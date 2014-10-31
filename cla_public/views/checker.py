@@ -13,6 +13,7 @@ from cla_public.views.custom import HelpTextRadioField
 log = logging.getLogger(__name__)
 
 checker_blueprint = Blueprint('checker', __name__)
+result_blueprint = Blueprint('result', __name__)
 
 # Categories the user needs help with
 CATEGORIES = [
@@ -33,6 +34,13 @@ CATEGORIES = [
     ('benefits', 'Welfare benefits appeals', 'Appealing a decision about your benefits')
 ]
 
+RESULT_OPTIONS = [
+    ('eligible', 'Eligible'),
+    ('ineligible', 'Ineligible'),
+    ('face-to-face', 'Face-to-face'),
+    ('confirmation', 'Confirmation'),
+]
+
 class ProblemForm(Form):
     categories = HelpTextRadioField('What do you need help with?',
                           choices=CATEGORIES,
@@ -40,12 +48,11 @@ class ProblemForm(Form):
                           validators=[Required()])
 
 
-class AboutForm(Form):
-    pass
+class ProceedForm(Form):
+    proceed = BooleanField(validators=[Required('Not a valid choice')])
 
-
-class BenefitsForm(Form):
-    pass
+class ResultForm(Form):
+    result = RadioField(choices=RESULT_OPTIONS, validators=[Required('Not a valid choice')])
 
 
 @checker_blueprint.route('/problem', methods=['GET', 'POST'])
@@ -58,7 +65,7 @@ def problem():
 
 @checker_blueprint.route('/about', methods=['GET', 'POST'])
 def about():
-    form = AboutForm()
+    form = ProceedForm()
     if form.validate_on_submit():
         return redirect(url_for('.benefits'))
     return render_template('about.html', form=form)
@@ -66,8 +73,55 @@ def about():
 
 @checker_blueprint.route('/benefits', methods=['GET', 'POST'])
 def benefits():
-    form = BenefitsForm()
+    form = ProceedForm()
     if form.validate_on_submit():
         return redirect(url_for('.property'))
     return render_template('benefits.html', form=form)
 
+
+@checker_blueprint.route('/property', methods=['GET', 'POST'])
+def property():
+    form = ProceedForm()
+    if form.validate_on_submit():
+        return redirect(url_for('.savings'))
+    return render_template('property.html', form=form)
+
+
+@checker_blueprint.route('/savings', methods=['GET', 'POST'])
+def savings():
+    form = ProceedForm()
+    if form.validate_on_submit():
+        return redirect(url_for('.benefits_tax_credits'))
+    return render_template('savings.html', form=form)
+
+
+@checker_blueprint.route('/benefits-tax-credits', methods=['GET', 'POST'])
+def benefits_tax_credits():
+    form = ProceedForm()
+    if form.validate_on_submit():
+        return redirect(url_for('.income'))
+    return render_template('benefits-tax-credits.html', form=form)
+
+
+@checker_blueprint.route('/income', methods=['GET', 'POST'])
+def income():
+    form = ProceedForm()
+    if form.validate_on_submit():
+        return redirect(url_for('.outgoings'))
+    return render_template('income.html', form=form)
+
+
+@checker_blueprint.route('/outgoings', methods=['GET', 'POST'])
+def outgoings():
+    form = ResultForm()
+    if form.validate_on_submit():
+        return redirect(url_for('result.show', outcome=form.data['result']))
+    return render_template('outgoings.html', form=form)
+
+
+@result_blueprint.route('/result/<outcome>', methods=['GET', 'POST'])
+def show(outcome):
+    try:
+        return render_template('result/%s.html' % outcome)
+    except TemplateNotFound:
+        abort(404)

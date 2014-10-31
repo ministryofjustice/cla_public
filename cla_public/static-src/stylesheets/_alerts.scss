@@ -1,7 +1,7 @@
 %alert-generic {
   $_padding: 1.05263em;
   padding: $_padding;
-  margin: 0 0 $_padding;
+  margin: $_padding 0;
 
   > .icon {
     float: left;

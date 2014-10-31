@@ -4,11 +4,11 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  About you
+  Your savings
 {% endblock %}
 
 {% block inner_content %}
-  <form method="POST" action="{{ url_for('.about') }}">
+  <form method="POST" action="{{ url_for('.savings') }}">
     {{ form.csrf_token }}
 
     {% if form.errors %}

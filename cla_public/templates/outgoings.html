@@ -4,11 +4,11 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  About you
+  Your outgoings
 {% endblock %}
 
 {% block inner_content %}
-  <form method="POST" action="{{ url_for('.about') }}">
+  <form method="POST" action="{{ url_for('.outgoings') }}">
     {{ form.csrf_token }}
 
     {% if form.errors %}
@@ -19,9 +19,13 @@
       {% endcall %}
     {% endif %}
 
-    <p>
-      <label>{{ form.proceed }} Proceed?</label>
-    </p>
+    {% for option in form.result %}
+      <p>
+        <label>
+          {{ option }} {{option.label}}
+        </label>
+      </p>
+    {% endfor %}
 
     {{ Form.actions('Continue') }}
   </form>
