@@ -13,7 +13,11 @@
     {% block page_header %}
       <header>
         <h1>{% block page_heading %}{% endblock %}</h1>
-        {% block page_subheading %}{% endblock %}
+        {% if self.page_subheading() %}
+          <div class="subtitle">
+            {% block page_subheading %}{% endblock %}
+          </div>
+        {% endif %}
       </header>
     {% endblock %}
 
