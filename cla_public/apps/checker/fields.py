@@ -10,30 +10,31 @@ from wtforms.validators import InputRequired
 from cla_public.apps.checker.constants import MONEY_INTERVALS
 
 
-class HelpTextRadioField(RadioField):
-    """RadioField that also stores an field for inline help text
+class DescriptionRadioField(RadioField):
+    """RadioField with a description for each radio button, not just for the
+    group.
 
     The choices kwargs field takes a list of triples.
 
     Format:
 
-    choices=[(name, label, helptext), ...]
+    choices=[(name, label, description), ...]
     """
 
     def __init__(self, *args, **kwargs):
-        self.helptext = []
+        self.descriptions = []
         choices = []
-        for name, label, helptext in kwargs.get('choices', []):
-            self.helptext.append(helptext)
+        for name, label, description in kwargs.get('choices', []):
+            self.descriptions.append(description)
             choices.append((name, label))
         if choices:
             kwargs['choices'] = choices
-        super(HelpTextRadioField, self).__init__(*args, **kwargs)
+        super(DescriptionRadioField, self).__init__(*args, **kwargs)
 
     def __iter__(self):
-        options = super(HelpTextRadioField, self).__iter__()
+        options = super(DescriptionRadioField, self).__iter__()
         for index, option in enumerate(options):
-            option.helptext = self.helptext[index]
+            option.description = self.descriptions[index]
             yield option
 
 

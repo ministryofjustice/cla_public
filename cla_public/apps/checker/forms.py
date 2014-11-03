@@ -6,13 +6,13 @@ from wtforms import IntegerField
 from wtforms.validators import InputRequired
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES
-from cla_public.apps.checker.fields import HelpTextRadioField, \
+from cla_public.apps.checker.fields import DescriptionRadioField, \
     MoneyIntervalField, MultiCheckboxField, YesNoField
 
 
 class ProblemForm(Form):
     """Area of law choice"""
-    categories = HelpTextRadioField(
+    categories = DesciptionRadioField(
         u'What do you need help with?',
         choices=CATEGORIES,
         coerce=unicode,
