@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+"CLA Public app"
+
 import logging
 import logging.config
 import jinja2
 import sys
 import os
 import yaml
-from flask import Flask, url_for, Blueprint, render_template
+from flask import Blueprint, Flask, url_for, render_template
 
-from cla_public.views.index import base_blueprint
-from cla_public.views.checker import checker_blueprint, result_blueprint
+from cla_public.apps.base.views import base
+from cla_public.apps.checker.views import checker
+
 
 log = logging.getLogger(__name__)
 
@@ -20,6 +23,7 @@ CONFIG_FILE_ENV_NAME = 'CLA_PUBLIC_CONFIG'
 # the logger.
 VERBOSE_LOGGING_ENV_NAME = 'CLA_PUBLIC_VERBOSE'
 
+
 def setup_logging(verbose=False):
     try:
         with open('logging.conf') as f:
@@ -30,9 +34,10 @@ def setup_logging(verbose=False):
         else:
             level = logging.INFO
 
-        logging.basicConfig(level=level,
-                            format='%(asctime)s %(levelname)-8s %(name)s %(message)s',
-                            datefmt='%Y-%m-%d %H:%M:%S')
+        logging.basicConfig(
+            level=level,
+            format='%(asctime)s %(levelname)-8s %(name)s %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S')
 
         # logging for the cla_public module (top level)
         logger = logging.getLogger('cla_public')
@@ -48,7 +53,9 @@ def setup_config(app, config_name):
     try:
         user_config_file = os.environ[CONFIG_FILE_ENV_NAME]
         if not os.path.isfile(user_config_file):
-            log.critical('Config file %s is not a valid file. Exiting...', user_config_file)
+            log.critical(
+                'Config file %s is not a valid file. Exiting...',
+                user_config_file)
             sys.exit(1)
         else:
             try:
@@ -57,19 +64,24 @@ def setup_config(app, config_name):
                 app.config.update(config_data[config_name])
                 log.info('Loaded configuration file %s', user_config_file)
             except (yaml.YAMLError, yaml.MarkedYAMLError):
-                log.exception('Parsing YAML file %s failed. Exiting...', user_config_file)
+                log.exception(
+                    'Parsing YAML file %s failed. Exiting...',
+                    user_config_file)
                 sys.exit(1)
     except KeyError:
-        log.critical('Environment variable %s must be set. Exiting...', CONFIG_FILE_ENV_NAME)
+        log.critical(
+            'Environment variable %s must be set. Exiting...',
+            CONFIG_FILE_ENV_NAME)
         sys.exit(1)
+
 
 def change_jinja_templates(app):
     # Change the template loader so it will seek out the MOJ Jinja
     # base templates.
     moj_loader = jinja2.ChoiceLoader([
-            app.jinja_loader,
-            jinja2.PackageLoader('moj_template', 'templates'),
-            ])
+        app.jinja_loader,
+        jinja2.PackageLoader('moj_template', 'templates'),
+    ])
 
     app.jinja_loader = moj_loader
 
@@ -100,9 +112,11 @@ def change_jinja_templates(app):
         try:
             return app.config['APP_SETTINGS']
         except KeyError:
-            log.critical('Cannot find APP_SETTINGS group in the configuration file.')
+            log.critical(
+                'Cannot find APP_SETTINGS group in the configuration file.')
             sys.exit(1)
     return app
+
 
 def register_error_handlers(app):
     @app.errorhandler(404)
@@ -115,12 +129,11 @@ def register_error_handlers(app):
 
     return app
 
+
 def create_app(config_name='FLASK'):
     app = Flask(__name__)
-    # This should happen before other things
-    app.register_blueprint(base_blueprint)
-    app.register_blueprint(checker_blueprint)
-    app.register_blueprint(result_blueprint)
+    app.register_blueprint(base)
+    app.register_blueprint(checker)
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
     setup_config(app, config_name)
     app = change_jinja_templates(app)
