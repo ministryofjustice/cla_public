@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% import "macros/form.html" as Form %}
+{% import "macros/element.html" as Element %}
+
+{% block page_heading %}
+  Your outgoings
+{% endblock %}
+
+{% block inner_content %}
+  <form method="POST" action="{{ url_for('.outgoings') }}">
+    {{ form.csrf_token }}
+
+    {% if form.errors %}
+      {% call Element.alert('error', icon='cross') %}
+        {% for line in form.errors.proceed %}
+          <p>{{line}}</p>
+        {% endfor %}
+      {% endcall %}
+    {% endif %}
+
+    {% for option in form.result %}
+      <p>
+        <label>
+          {{ option }} {{option.label}}
+        </label>
+      </p>
+    {% endfor %}
+
+    {{ Form.actions('Continue') }}
+  </form>
+{% endblock %}

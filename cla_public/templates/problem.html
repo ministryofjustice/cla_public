@@ -17,18 +17,18 @@
     <p>If you’re really not sure what to choose, ask us to <a href="#">call you back</a>.</p>
   {% endcall %}
 
-  <form method="POST" action="{{ url_for('problem.problem') }}">
+  <form method="POST" action="{{ url_for('.problem') }}">
     {{ form.csrf_token }}
 
-    {% if form.errors.category %}
+    {% if form.errors %}
       {% call Element.alert('error', icon='cross') %}
-        {% for line in form.errors.category %}
+        {% for line in form.errors.categories %}
           <p>{{line}}</p>
         {% endfor %}
       {% endcall %}
     {% endif %}
 
-    {% for cat in form.category %}
+    {% for cat in form.categories %}
       {{ Form.block_label(cat) }}
     {% endfor %}
 

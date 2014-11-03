@@ -6,7 +6,7 @@
     "url": "https://github.com/ministryofjustice/cla_public"
   },
   "devDependencies": {
-    "browser-sync": "^1.6.0",
+    "browser-sync": "^1.6.2",
     "govuk_frontend_toolkit": "^2.0.1",
     "gulp": "^3.8.9",
     "gulp-clean": "~0.2.4",
