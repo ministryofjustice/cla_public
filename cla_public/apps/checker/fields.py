@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 "Custom form fields"
 
-from flask_wtf import Form
+from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, RadioField, SelectField, \
     SelectMultipleField, widgets
-from wtforms.compat import text_type
-from wtforms.validators import InputRequired
 from wtforms.compat import text_type
 
 from cla_public.apps.checker.constants import MONEY_INTERVALS
@@ -49,7 +47,7 @@ class YesNoField(RadioField):
             choices=choices, **kwargs)
 
 
-class MoneyIntervalForm(Form):
+class MoneyIntervalForm(NoCsrfForm):
     """Money amount and interval subform"""
     amount = IntegerField()
     interval = SelectField('', choices=MONEY_INTERVALS)
@@ -57,6 +55,8 @@ class MoneyIntervalForm(Form):
 
 class MoneyIntervalField(FormField):
     """Convenience class for FormField(MoneyIntervalForm)"""
+
+    widget = widgets.ListWidget()
 
     def __init__(self, **kwargs):
         super(MoneyIntervalField, self).__init__(MoneyIntervalForm, **kwargs)
