@@ -1,27 +1,27 @@
 {% extends "base.html" %}
 
 {% import "macros/form.html" as Form %}
-{% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  Your property
+  You and your partner’s property
 {% endblock %}
 
 {% block inner_content %}
+  <p>Please tell us about any property owned by you, your partner or both of you.</p>
+  <p>If you or your partner own more than one property, you can add more properties below.</p>
+
   <form method="POST" action="{{ url_for('.property') }}">
     {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
 
-    {% if form.errors %}
-      {% call Element.alert('error', icon='cross') %}
-        {% for line in form.errors.proceed %}
-          <p>{{line}}</p>
-        {% endfor %}
-      {% endcall %}
-    {% endif %}
-
-    <p>
-      <label>{{ form.proceed }} Proceed?</label>
-    </p>
+    {{ Form.yesno_field(form.is_main_home) }}
+    {{ Form.yesno_field(form.other_shareholders) }}
+    {{ Form.text_field(form.property_value, prefix="£") }}
+    {{ Form.text_field(form.mortgage_remaining, prefix="£") }}
+    {{ Form.text_field(form.mortgage_payments, prefix="£") }}
+    {{ Form.yesno_field(form.is_rented) }}
+    {{ Form.text_field(form.rent_amount, prefix="£") }}
+    {{ Form.yesno_field(form.in_dispute) }}
 
     {{ Form.actions('Continue') }}
   </form>

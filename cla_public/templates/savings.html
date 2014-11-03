@@ -1,27 +1,21 @@
 {% extends "base.html" %}
 
 {% import "macros/form.html" as Form %}
-{% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  Your savings
+  You and your partner’s savings
 {% endblock %}
 
 {% block inner_content %}
+  <p>Any cash, savings or investments held in both your names.</p>
+
   <form method="POST" action="{{ url_for('.savings') }}">
     {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
 
-    {% if form.errors %}
-      {% call Element.alert('error', icon='cross') %}
-        {% for line in form.errors.proceed %}
-          <p>{{line}}</p>
-        {% endfor %}
-      {% endcall %}
-    {% endif %}
-
-    <p>
-      <label>{{ form.proceed }} Proceed?</label>
-    </p>
+    {{ Form.text_field(form.savings, prefix="£") }}
+    {{ Form.text_field(form.investments, prefix="£") }}
+    {{ Form.text_field(form.valuables, prefix="£") }}
 
     {{ Form.actions('Continue') }}
   </form>

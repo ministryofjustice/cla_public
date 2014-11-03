@@ -68,28 +68,38 @@ class YourBenefitsForm(Form):
 
 
 class PropertyForm(Form):
-    main_home = YesNoField()
-    other_shareholders = YesNoField()
-    property_value = IntegerField()
-    mortgage_remaining = IntegerField()
-    mortgage_payments = IntegerField()
-    rented = YesNoField()
-    rent_amount = IntegerField()
-    in_dispute = YesNoField()
+    is_main_home = YesNoField(u'Is this property your main home?',
+        description=u"If you are separated and no longer live in the property you own, please answer ‘no’")
+    other_shareholders = YesNoField(u'Does anyone else own a share of the property?',
+        description=u"Other than you and your partner")
+    property_value = IntegerField(u'How much is the property worth?',
+        description=u"Use your own estimate")
+    mortgage_remaining = IntegerField(u'How much is left to pay on the mortgage?',
+        description=u"Include the full amount you owe, even if the property has shared ownership")
+    mortgage_payments = IntegerField(u'How much are your monthly mortgage repayments?')
+    is_rented = YesNoField(u'Does anyone pay you rent for this property?')
+    rent_amount = IntegerField(u'How much rent do they pay you?')
+    in_dispute = YesNoField(u'Is your share of the property in dispute?',
+        description=u"For example, as part of the financial settlement of a divorce")
 
 
 class SavingsForm(Form):
-    savings = IntegerField()
-    investments = IntegerField()
-    valuables = IntegerField()
+    savings = IntegerField(description=u"The total amount of savings in cash, bank or building society")
+    investments = IntegerField(description=u"This includes stocks, shares, bonds (but not property)")
+    valuables = IntegerField(u'Valuable items you and your partner own worth over £500 each',
+        description=u"Total value of any items you own with some exceptions")
 
 
 class TaxCreditsForm(Form):
-    child_benefit = IntegerField()
-    child_tax_credit = IntegerField()
-    benefits = MultiCheckboxField(choices=NON_INCOME_BENEFITS)
-    other_benefits = YesNoField()
-    total_other_benefit = IntegerField()
+    child_benefit = IntegerField(u'Child Benefit',
+        description=u"The total amount you get for all your children")
+    child_tax_credit = IntegerField(u'Child Tax Credit',
+        description=u"The total amount you get for all your children")
+    benefits = MultiCheckboxField(u'Do you or your partner get any of these benefits?',
+        description=u"These benefits don’t count as income. Please tick the ones you receive.",
+        choices=NON_INCOME_BENEFITS)
+    other_benefits = YesNoField('Do you or your partner receive any other benefits not listed above?')
+    total_other_benefit = MoneyIntervalField('Total amount of benefits not listed above')
 
 
 class IncomeAndTaxForm(Form):

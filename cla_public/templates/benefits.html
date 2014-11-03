@@ -13,12 +13,10 @@
     {{ form.csrf_token }}
 
     {% if form.errors %}
-      {% call Element.alert('error', icon='cross') %}
-        {% for line in form.errors.proceed %}
-          <p>{{line}}</p>
-        {% endfor %}
-      {% endcall %}
-    {% endif %}
+        {% call Element.alert('error', icon='cross') %}
+          <p>Please select at least one option.</p>
+        {% endcall %}
+      {% endif %}
 
     {% for benefit in form.benefits %}
       {{ Form.block_label(benefit) }}

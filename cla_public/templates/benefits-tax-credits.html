@@ -11,17 +11,13 @@
   <form method="POST" action="{{ url_for('.benefits_tax_credits') }}">
     {{ form.csrf_token }}
 
-    {% if form.errors %}
-      {% call Element.alert('error', icon='cross') %}
-        {% for line in form.errors.proceed %}
-          <p>{{line}}</p>
-        {% endfor %}
-      {% endcall %}
-    {% endif %}
+    {{ Form.handle_errors(form) }}
 
-    <p>
-      <label>{{ form.proceed }} Proceed?</label>
-    </p>
+    {{ Form.text_field(form.child_benefit, prefix="£") }}
+    {{ Form.text_field(form.child_tax_credit, prefix="£") }}
+    {{ Form.check_list_field(form.benefits) }}
+    {{ Form.yesno_field(form.other_benefits) }}
+    {{ Form.money_interval_field(form.total_other_benefit) }}
 
     {{ Form.actions('Continue') }}
   </form>
