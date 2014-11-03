@@ -19,9 +19,11 @@
       {% endcall %}
     {% endif %}
 
+    {% for benefit in form.benefits %}
     <p>
-      <label>{{ form.proceed }} Proceed?</label>
+      <label>{{ benefit.label }}</label> {{ benefit }}
     </p>
+    {% endfor %}
 
     {{ Form.actions('Continue') }}
   </form>

@@ -7,7 +7,7 @@ import logging
 
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.constants import RESULT_OPTIONS
-from cla_public.apps.checker.forms import AboutYouForm, ProblemForm, ProceedForm, ResultForm
+from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, ProblemForm, ProceedForm, ResultForm
 
 
 log = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ def about():
 
 @checker.route('/benefits', methods=['GET', 'POST'])
 def benefits():
-    form = ProceedForm()
+    form = YourBenefitsForm()
     if form.validate_on_submit():
         return redirect(url_for('.property'))
     return render_template('benefits.html', form=form)
