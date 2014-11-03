@@ -2,11 +2,10 @@
 "Checker forms"
 
 from flask_wtf import Form
-from wtforms import IntegerField, RadioField
+from wtforms import IntegerField
 from wtforms.validators import InputRequired
 
-from cla_public.apps.checker.constants import CATEGORIES, RESULT_OPTIONS, \
-    BENEFITS_CHOICES
+from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES
 from cla_public.apps.checker.fields import HelpTextRadioField, \
     MoneyIntervalField, MultiCheckboxField, YesNoField
 
@@ -21,26 +20,22 @@ class ProblemForm(Form):
 
 
 class AboutYouForm(Form):
-    have_partner = YesNoField()
-    in_dispute = YesNoField()
-    on_benefits = YesNoField()
-    have_children = YesNoField()
-    num_children = IntegerField()
-    have_dependants = YesNoField()
-    num_dependants = IntegerField()
-    have_savings = YesNoField()
-    own_property = YesNoField()
-    employed = YesNoField()
-    self_employed = YesNoField()
-    aged_60_or_over = YesNoField()
+    have_partner = YesNoField(u'Do you have a partner?')
+    in_dispute = YesNoField(u'Are you in a dispute with your partner?')
+    on_benefits = YesNoField(u'Are you on any benefits?')
+    have_children = YesNoField(u'Do you have any children aged 15 or under?')
+    num_children = IntegerField(u'How many?')
+    have_dependants = YesNoField(u'Do you have any dependants aged 16 or over?')
+    num_dependants = IntegerField(u'How many?')
+    have_savings = YesNoField(u'Do you have any savings, investments or any valuable items?')
+    own_property = YesNoField(u'Do you own any property?')
+    employed = YesNoField(u'Are you employed?')
+    self_employed = YesNoField(u'Are you self-employed?')
+    aged_60_or_over = YesNoField(u'Are you aged 60 or over?')
 
 
 class YourBenefitsForm(Form):
     benefits = MultiCheckboxField(choices=BENEFITS_CHOICES)
-
-
-class ProceedForm(Form):
-    proceed = YesNoField()
 
 
 class PropertyForm(Form):
@@ -83,9 +78,3 @@ class OutgoingsForm(Form):
     maintenance = MoneyIntervalField()
     income_contribution = MoneyIntervalField()
     childcare = MoneyIntervalField()
-
-
-class ResultForm(Form):
-    result = RadioField(
-        choices=RESULT_OPTIONS,
-        validators=[InputRequired(u'Not a valid choice')])
