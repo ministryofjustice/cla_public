@@ -1,3 +1,5 @@
+{% import "macros/element.html" as Element %}
+
 {#
   Block level label used for single options per line
 
@@ -27,7 +29,7 @@
 {% macro yesno_field(field) %}
   <dl class="form-group {% if field.errors %}m-error{% endif %}">
     <dt class="form-row">
-      {{ field.label }}
+      {{ field.label.text }}
       {% if field.description %}
         <div class="field-help">
           {{ field.description }}
@@ -45,6 +47,84 @@
 {% endmacro %}
 
 {#
+  Text field
+
+  Params:
+    - field - WTForm field
+    - prefix (optional) - Adds label with specified string before the field
+    - suffix (optional) - Adds label with specified string after the field
+#}
+{% macro text_field(field, prefix=None, suffix=None) %}
+  <dl class="form-group {% if field.errors %}m-error{% endif %}">
+    <dt class="form-row">
+      {{ field.label }}
+      {% if field.description %}
+        <div class="field-help">
+          {{ field.description }}
+        </div>
+      {% endif %}
+    </dt>
+    <dd class="form-row">
+      {% if prefix %}
+        <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
+      {% endif %}
+      {{ field(class_='form-control') }}
+      {% if suffix %}
+        <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
+      {% endif %}
+    </dd>
+  </dl>
+{% endmacro %}
+
+{#
+  List of checkboxes
+
+  Params:
+    - field - WTForm field
+#}
+{% macro check_list_field(field) %}
+  <dl class="form-group {% if field.errors %}m-error{% endif %}">
+    <dt class="form-row">
+      {{ field.label }}
+      {% if field.description %}
+        <div class="field-help">
+          {{ field.description }}
+        </div>
+      {% endif %}
+    </dt>
+    <dd class="form-row">
+      {{field}}
+    </dd>
+  </dl>
+{% endmacro %}
+
+{#
+  Money interval field
+
+  Params:
+    - field - WTForm field
+    - prefix (optional) - Adds label with specified string before the field
+    - suffix (optional) - Adds label with specified string after the field
+#}
+{% macro money_interval_field(field) %}
+  <dl class="form-group {% if field.errors %}m-error{% endif %}">
+    <dt class="form-row">
+      {{ field.label }}
+      {% if field.description %}
+        <div class="field-help">
+          {{ field.description }}
+        </div>
+      {% endif %}
+    </dt>
+    <dd class="form-row">
+      <label class="input-prefix" for="{{field.amount.id}}">£</label>
+      {{ field.amount(class_='form-control') }}
+      {{ field.interval(class_='form-control') }}
+    </dd>
+  </dl>
+{% endmacro %}
+
+{#
   Form actions block
 
   Params:
@@ -57,4 +137,19 @@
       <a href="{{ url( 'checker:checker_step', previous_link) }}">Go back to previous step</a>
     {% endif %}
   </p>
+{% endmacro %}
+
+{#
+  Show generic form errors alert
+
+  Params:
+    - form - WTForm form object
+#}
+{% macro handle_errors(form) %}
+  {% if form.errors %}
+    {% call Element.alert('error', icon='cross') %}
+      <p>This form has errors.</p>
+      <p>Please correct them and try again.</p>
+    {% endcall %}
+  {% endif %}
 {% endmacro %}

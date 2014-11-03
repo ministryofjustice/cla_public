@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% import "macros/form.html" as Form %}
-{% import "macros/element.html" as Element %}
 
 {% block page_heading %}
   About you
@@ -10,13 +9,7 @@
 {% block inner_content %}
   <form method="POST" action="{{ url_for('.about') }}">
     {{ form.csrf_token }}
-
-    {% if form.errors %}
-      {% call Element.alert('error', icon='cross') %}
-        <p>This form has errors.</p>
-        <p>Please correct them and try again.</p>
-      {% endcall %}
-    {% endif %}
+    {{ Form.handle_errors(form) }}
 
     {{ Form.yesno_field(form.have_partner) }}
     {{ Form.yesno_field(form.in_dispute) }}
