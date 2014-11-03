@@ -89,3 +89,22 @@ MONEY_INTERVALS = [
     ('per month', 'per month'),
     ('per year', 'per year')
 ]
+
+NON_INCOME_BENEFITS = [
+    ('attendance', 'Attendance Allowance'),
+    ('care-community', 'Care in the community Direct Payment'),
+    ('carers', 'Carers\' Allowance'),
+    ('constant-attendance', 'Constant Attendance Allowance'),
+    ('ctax-benefits', 'Council Tax Benefits'),
+    ('disability-living', 'Disability Living Allowance'),
+    ('earnings-top-up', 'Earnings Top Up'),
+    ('ex-severe-disablement', 'Exceptionally Severe Disablement Allowance'),
+    ('fostering', 'Fostering Allowance'),
+    ('housing', 'Housing Benefit'),
+    ('indep-living', 'Independent Living Funds payment'),
+    ('personal-indep', 'Personal Independent Payments'),
+    ('severe-disablement', 'Severe Disablement Allowance'),
+    ('social-fund', 'Social Fund Payments'),
+    ('war-pension', 'War Pension'),
+    ('widows-pension', 'Widow\'s Pension lump sum payments'),
+]

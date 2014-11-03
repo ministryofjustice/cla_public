@@ -5,7 +5,8 @@ from flask_wtf import Form
 from wtforms import IntegerField
 from wtforms.validators import InputRequired
 
-from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES
+from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
+    NON_INCOME_BENEFITS
 from cla_public.apps.checker.fields import DescriptionRadioField, \
     MoneyIntervalField, MultiCheckboxField, YesNoField
 
@@ -67,7 +68,7 @@ class SavingsForm(Form):
 class TaxCreditsForm(Form):
     child_benefit = IntegerField()
     child_tax_credit = IntegerField()
-    benefits = MultiCheckboxField()
+    benefits = MultiCheckboxField(choices=NON_INCOME_BENEFITS)
     other_benefits = YesNoField()
     total_other_benefit = IntegerField()
 
