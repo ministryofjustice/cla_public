@@ -18,9 +18,11 @@ def static(filename):
     directory = os.path.join(current_app.static_folder, '../static-templates/')
     return send_from_directory(directory, filename)
 
+
 @base_blueprint.route('/')
 def index():
     return render_template('index.html')
+
 
 # TODO: static pages created by Clive, Mickey to re-arrange and re-route correctly
 @base_blueprint.route('/cookies')
