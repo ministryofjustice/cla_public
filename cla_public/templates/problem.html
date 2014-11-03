@@ -28,8 +28,8 @@
       {% endcall %}
     {% endif %}
 
-    {% for cat in form.categories %}
-      {{ Form.block_label(cat) }}
+    {% for category in form.categories %}
+      {{ Form.block_label(category) }}
     {% endfor %}
 
     {{ Form.actions('Continue') }}

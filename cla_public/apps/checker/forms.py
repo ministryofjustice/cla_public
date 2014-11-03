@@ -12,7 +12,7 @@ from cla_public.apps.checker.fields import DescriptionRadioField, \
 
 class ProblemForm(Form):
     """Area of law choice"""
-    categories = DesciptionRadioField(
+    categories = DescriptionRadioField(
         u'What do you need help with?',
         choices=CATEGORIES,
         coerce=unicode,

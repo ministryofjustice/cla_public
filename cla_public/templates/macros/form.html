@@ -9,9 +9,9 @@
     <label class="form-label" id="{{field.id}}">
       {{ field }}
       {{ field.label.text }}
-      {% if field.helptext %}
+      {% if field.description %}
         <div class="form-hint">
-          {{field.helptext|safe}}
+          {{field.description|safe}}
         </div>
       {% endif %}
     </label>
