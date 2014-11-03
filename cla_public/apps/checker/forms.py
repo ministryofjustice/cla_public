@@ -3,7 +3,7 @@
 
 from flask_wtf import Form
 from wtforms import IntegerField
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, ValidationError
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
@@ -44,8 +44,27 @@ class AboutYouForm(Form):
     aged_60_or_over = YesNoField(u'Are you aged 60 or over?')
 
 
+class AtLeastOne(object):
+    """
+    Valid if at least one option is checked.
+
+    :param message:
+        Error message to raise in case of a validation error.
+    """
+    def __init__(self, message=None):
+        self.message = message
+
+    def __call__(self, form, field):
+        if len(field.data) < 1:
+            message = self.message
+            if message is None:
+                message = field.gettext('Must select at least one option.')
+            raise ValidationError(message)
+
+
 class YourBenefitsForm(Form):
-    benefits = MultiCheckboxField(choices=BENEFITS_CHOICES)
+    benefits = MultiCheckboxField(choices=BENEFITS_CHOICES,
+            validators=[AtLeastOne()])
 
 
 class PropertyForm(Form):
