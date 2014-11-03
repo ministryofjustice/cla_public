@@ -23,6 +23,7 @@
     "jshint-stylish": "~0.1.5",
     "main-bower-files": "^2.1.0",
     "require-dir": "^0.1.0",
+    "selenium-standalone": "^2.44.0-1",
     "yargs": "^1.3.2"
   }
 }
