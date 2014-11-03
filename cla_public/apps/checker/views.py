@@ -7,7 +7,7 @@ import logging
 
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.constants import RESULT_OPTIONS
-from cla_public.apps.checker.forms import ProblemForm, ProceedForm, ResultForm
+from cla_public.apps.checker.forms import AboutYouForm, ProblemForm, ProceedForm, ResultForm
 
 
 log = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ def problem():
 
 @checker.route('/about', methods=['GET', 'POST'])
 def about():
-    form = ProceedForm()
+    form = AboutYouForm()
     if form.validate_on_submit():
         return redirect(url_for('.benefits'))
     return render_template('about.html', form=form)

@@ -20,7 +20,7 @@
     {% endif %}
 
     <p>
-      <label>{{ form.proceed }} Proceed?</label>
+    <label>{% for field in form %}{{ field }}{% endfor %}</label>
     </p>
 
     {{ Form.actions('Continue') }}
