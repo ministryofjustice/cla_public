@@ -58,8 +58,8 @@ class MoneyIntervalField(FormField):
 
     widget = widgets.ListWidget()
 
-    def __init__(self, **kwargs):
-        super(MoneyIntervalField, self).__init__(MoneyIntervalForm, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(MoneyIntervalField, self).__init__(MoneyIntervalForm, *args, **kwargs)
 
 
 class MultiCheckboxField(SelectMultipleField):
