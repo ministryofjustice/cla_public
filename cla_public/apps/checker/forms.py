@@ -11,41 +11,28 @@ from .constants import CATEGORIES, RESULT_OPTIONS
 class HelpTextRadioField(RadioField):
     """RadioField that also stores an field for inline help text
 
-    The choices kwargs field now takes a list of triples instead of a list of
-    tuples.
+    The choices kwargs field takes a list of triples.
 
     Format:
 
     choices=[(name, label, helptext), ...]
     """
 
+    def __init__(self, *args, **kwargs):
+        self.helptext = []
+        choices = []
+        for name, label, helptext in kwargs.get('choices', []):
+            self.helptext.append(helptext)
+            choices.append((name, label))
+        if choices:
+            kwargs['choices'] = choices
+        super(HelpTextRadioField, self).__init__(*args, **kwargs)
+
     def __iter__(self):
-        opts = {
-            'widget': self.option_widget,
-            '_name': self.name,
-            '_form': None,
-            '_meta': self.meta
-        }
-        for i, (value, label, helptext, checked) in enumerate(self.iter_choices()):
-            opt = self._Option(label=label, id='%s-%d' % (self.id, i), **opts)
-
-            # We shim the helptext in on the Option() object
-            opt.helptext = helptext
-            opt.process(None, value)
-            opt.checked = checked
-            yield opt
-
-    def iter_choices(self):
-        # We assume the choices field now has triples
-        for value, label, helptext in self.choices:
-            yield (value, label, helptext, self.coerce(value) == self.data)
-
-    def pre_validate(self, form):
-        for v, _, _ in self.choices:
-            if self.data == v:
-                break
-        else:
-            raise ValueError(self.gettext(u'Not a valid choice'))
+        options = super(HelpTextRadioField, self).__iter__()
+        for index, option in enumerate(options):
+            option.helptext = self.helptext[index]
+            yield option
 
 
 class ProblemForm(Form):
