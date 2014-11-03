@@ -21,6 +21,10 @@
 #content {
   > .inner-block {
     @extend %site-width-container;
+
+    > header {
+      margin-bottom: 30px;
+    }
   }
 }
 

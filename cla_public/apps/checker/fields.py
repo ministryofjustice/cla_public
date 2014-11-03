@@ -6,6 +6,7 @@ from wtforms import FormField, IntegerField, RadioField, SelectField, \
     SelectMultipleField, widgets
 from wtforms.compat import text_type
 from wtforms.validators import InputRequired
+from wtforms.compat import text_type
 
 from cla_public.apps.checker.constants import MONEY_INTERVALS
 

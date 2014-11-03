@@ -19,6 +19,32 @@
 {% endmacro %}
 
 {#
+  Yes/No field
+
+  Params:
+    - field - WTForm field
+#}
+{% macro yesno_field(field) %}
+  <dl class="form-group {% if field.errors %}m-error{% endif %}">
+    <dt class="form-row">
+      {{ field.label }}
+      {% if field.description %}
+        <div class="field-help">
+          {{ field.description }}
+        </div>
+      {% endif %}
+    </dt>
+    <dd class="form-row">
+      {% for option in field %}
+        <label class="radio-inline">
+          {{option}} {{option.label.text}}
+        </label>
+      {% endfor %}
+    </dd>
+  </dl>
+{% endmacro %}
+
+{#
   Form actions block
 
   Params:

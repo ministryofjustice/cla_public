@@ -13,15 +13,21 @@
 
     {% if form.errors %}
       {% call Element.alert('error', icon='cross') %}
-        {% for line in form.errors.proceed %}
-          <p>{{line}}</p>
-        {% endfor %}
+        <p>This form has errors.</p>
+        <p>Please correct them and try again.</p>
       {% endcall %}
     {% endif %}
 
-    <p>
-    <label>{% for field in form %}{{ field }}{% endfor %}</label>
-    </p>
+    {{ Form.yesno_field(form.have_partner) }}
+    {{ Form.yesno_field(form.in_dispute) }}
+    {{ Form.yesno_field(form.on_benefits) }}
+    {{ Form.yesno_field(form.have_children) }}
+    {{ Form.yesno_field(form.have_dependants) }}
+    {{ Form.yesno_field(form.have_savings) }}
+    {{ Form.yesno_field(form.own_property) }}
+    {{ Form.yesno_field(form.is_employed) }}
+    {{ Form.yesno_field(form.is_self_employed) }}
+    {{ Form.yesno_field(form.aged_60_or_over) }}
 
     {{ Form.actions('Continue') }}
   </form>
