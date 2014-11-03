@@ -71,3 +71,21 @@ RESULT_OPTIONS = [
     ('face-to-face', u'Face-to-face'),
     ('confirmation', u'Confirmation'),
 ]
+
+"Benefits"
+BENEFITS_CHOICES = [
+    ('income-support', u'Income Support'),
+    ('jobseekers-allowance', u'Income-based Jobseeker\'s Allowance'),
+    ('guarantee-credit', u'Guarantee Credit'),
+    ('universal-credit', u'Universal Credit'),
+    ('employment-support', u'Income-related Employment and Support Allowance'),
+    ('asylum-support', u'National Asylum Support Service benefit'),
+    ('other-benefit', u'A different benefit not listed above'),
+]
+
+MONEY_INTERVALS = [
+    ('per week', 'per week'),
+    ('4 weekly', '4 weekly'),
+    ('per month', 'per month'),
+    ('per year', 'per year')
+]
