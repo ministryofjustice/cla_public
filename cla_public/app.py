@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+"CLA Public app"
+
 import logging
 import logging.config
 import jinja2
 import sys
 import os
 import yaml
-from flask import Flask, url_for, Blueprint, render_template
+from flask import Blueprint, Flask, url_for, render_template
 
-from cla_public.views.index import base_blueprint
-from cla_public.views.checker import checker_blueprint, result_blueprint
+from cla_public.apps.base.views import base
+from cla_public.apps.checker.views import checker
+
 
 log = logging.getLogger(__name__)
 
@@ -129,10 +132,8 @@ def register_error_handlers(app):
 
 def create_app(config_name='FLASK'):
     app = Flask(__name__)
-    # This should happen before other things
-    app.register_blueprint(base_blueprint)
-    app.register_blueprint(checker_blueprint)
-    app.register_blueprint(result_blueprint)
+    app.register_blueprint(base)
+    app.register_blueprint(checker)
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
     setup_config(app, config_name)
     app = change_jinja_templates(app)
