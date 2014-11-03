@@ -4,6 +4,7 @@
 from flask_wtf import Form
 from wtforms import FormField, IntegerField, RadioField, SelectField, \
     SelectMultipleField, widgets
+from wtforms.compat import text_type
 from wtforms.validators import InputRequired
 
 from cla_public.apps.checker.constants import MONEY_INTERVALS
@@ -39,10 +40,11 @@ class HelpTextRadioField(RadioField):
 class YesNoField(RadioField):
     """Yes/No radio button field"""
 
-    def __init__(self, *args, **kwargs):
-        kwargs['choices'] = [('1', 'Yes'), ('0', 'No')]
-        kwargs['validators'] = [InputRequired()]
-        super(YesNoField, self).__init__(self, *args, **kwargs)
+    def __init__(self, label=None, validators=None, **kwargs):
+        choices = [('1', 'Yes'), ('0', 'No')]
+        super(YesNoField, self).__init__(
+            label=label, validators=validators, coerce=text_type,
+            choices=choices, **kwargs)
 
 
 class MoneyIntervalForm(Form):
