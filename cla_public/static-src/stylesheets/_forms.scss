@@ -2,13 +2,14 @@
   .form-label {
     display: block;
     padding: 18px 30px 15px 45px;
-    margin: 5px 0;
-    background: $grey-3;
+    margin: 2px 0;
+    background: $grey-4;
     border: 1px solid $grey-3;
     cursor: pointer;
 
     &:hover {
-      border-color: $black;
+      border-color: $grey-2;
+      background: $white;
     }
 
     > input[type="checkbox"],
@@ -41,5 +42,41 @@
 
   @include ie(6) {
     background-image: url("../images/icons/icon-pointer-2x.png");
+  }
+}
+
+.form-group {
+  margin: 2px 0;
+  background: $grey-4;
+  padding: 20px 0;
+
+  &.m-error {
+    background: rgba($red, .1);
+  }
+
+  .form-row {
+    padding: 0 20px;
+    margin: 0;
+
+    & + .form-row {
+      margin: 10px 0 -10px;
+    }
+  }
+}
+
+.field-help {
+  font-size: .9em;
+  margin-top: 5px;
+  color: $grey-1;
+}
+
+.radio-inline {
+  display: inline-block;
+  padding: 5px 10px;
+
+  input[type="radio"] {
+    margin: 0 5px 0 0;
+    position: relative;
+    top: -2px;
   }
 }
