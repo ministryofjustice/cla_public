@@ -75,7 +75,7 @@ def income():
 def outgoings():
     form = OutgoingsForm()
     if form.validate_on_submit():
-        return redirect(url_for('.result', outcome=form.data['result']))
+        return redirect(url_for('.result', outcome='eligible'))
     return render_template('outgoings.html', form=form)
 
 

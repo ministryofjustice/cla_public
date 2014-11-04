@@ -10,18 +10,15 @@
 {% block inner_content %}
   <form method="POST" action="{{ url_for('.income') }}">
     {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
 
-    {% if form.errors %}
-      {% call Element.alert('error', icon='cross') %}
-        {% for line in form.errors.proceed %}
-          <p>{{line}}</p>
-        {% endfor %}
-      {% endcall %}
-    {% endif %}
-
-    <p>
-      <label>{{ form.proceed }} Proceed?</label>
-    </p>
+    {{ Form.money_interval_field(form.earnings) }}
+    {{ Form.money_interval_field(form.income_tax) }}
+    {{ Form.money_interval_field(form.national_insurance) }}
+    {{ Form.money_interval_field(form.working_tax_credit) }}
+    {{ Form.money_interval_field(form.maintenance) }}
+    {{ Form.money_interval_field(form.pension) }}
+    {{ Form.money_interval_field(form.other_income) }}
 
     {{ Form.actions('Continue') }}
   </form>

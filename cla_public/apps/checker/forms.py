@@ -103,17 +103,27 @@ class TaxCreditsForm(Form):
 
 
 class IncomeAndTaxForm(Form):
-    earnings = MoneyIntervalField()
-    incometax = MoneyIntervalField()
-    national_insurance = MoneyIntervalField()
-    working_tax_credit = MoneyIntervalField()
-    maintenance = MoneyIntervalField()
-    pension = MoneyIntervalField()
-    other_income = MoneyIntervalField()
+    earnings = MoneyIntervalField(u'Wages before tax',
+        description=u"This includes all your wages and any earnings from self-employment")
+    income_tax = MoneyIntervalField(u'Income tax',
+        description=u"Tax paid directly out of your wages and any tax you pay on self-employed earnings")
+    national_insurance = MoneyIntervalField(u'National Insurance contributions',
+        description=u"Check your payslip or your National Insurance statement if you’re self-employed")
+    working_tax_credit = MoneyIntervalField(u'Working Tax Credit')
+    maintenance = MoneyIntervalField(u'Maintenance received',
+        description=u"Payments you get from an ex-partner")
+    pension = MoneyIntervalField(u'Pension received',
+        description=u"Payments you receive if you’re retired")
+    other_income = MoneyIntervalField(u'Any other income',
+        description=u"For example, student grants, income from trust funds, dividends")
 
 
 class OutgoingsForm(Form):
-    rent = MoneyIntervalField()
-    maintenance = MoneyIntervalField()
-    income_contribution = MoneyIntervalField()
-    childcare = MoneyIntervalField()
+    rent = MoneyIntervalField(u'Rent',
+        description=u"Money you and your partner pay your landlord")
+    maintenance = MoneyIntervalField(u'Maintenance',
+        description=u"Money you and/or your partner pay to an ex-partner for their living costs")
+    income_contribution = MoneyIntervalField(u'Income Contribution Order',
+        description=u"Money you and/or your partner pay towards your criminal legal aid")
+    childcare = MoneyIntervalField(u'Childcare',
+        description=u"Money you and your partner pay for your child to be looked after while you work or study")
