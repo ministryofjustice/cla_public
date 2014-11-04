@@ -2,7 +2,7 @@
   .form-label {
     display: block;
     padding: 18px 30px 15px 45px;
-    margin: 2px 0;
+    margin: -20px;
     background: $grey-4;
     border: 1px solid $grey-3;
     cursor: pointer;
@@ -14,13 +14,8 @@
 
     > input[type="checkbox"],
     > input[type="radio"] {
-      float: left;
       margin-left: -24px;
     }
-  }
-
-  .form-hint {
-    color: $grey-1;
   }
 }
 
@@ -28,12 +23,16 @@
   @include core-19;
   border: 1px solid $grey-2;
   padding: 4px;
-  height: 25px;
 }
 
 select.form-control {
   height: 35px;
   background: $white;
+}
+
+input[type="text"],
+input[type="number"] {
+  height: 25px;
 }
 
 .input-prefix,
@@ -78,25 +77,26 @@ select.form-control {
     margin: 0;
 
     & + .form-row {
-      margin: 10px 0 -10px;
+      margin-top: 10px;
     }
   }
 }
 
 .form-row {
+  input[type="checkbox"],
+  input[type="radio"] {
+    margin: 0 5px 0 0;
+    position: relative;
+    top: -2px;
+  }
+
   ul {
-    margin: 0 0 -10px;
+    margin: 0 0 -5px;
     padding: 0;
     list-style: none;
 
     > li {
       padding: 5px;
-
-      input[type="checkbox"] {
-        position: relative;
-        top: -2px;
-        margin-right: 5px;
-      }
     }
   }
 }
@@ -109,11 +109,5 @@ select.form-control {
 
 .radio-inline {
   display: inline-block;
-  padding: 5px 10px;
-
-  input[type="radio"] {
-    margin: 0 5px 0 0;
-    position: relative;
-    top: -2px;
-  }
+  padding: 0 10px;
 }
