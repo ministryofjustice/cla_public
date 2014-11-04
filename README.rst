@@ -23,3 +23,14 @@ Next, you can run the management command like this::
   ./manage.py --help
 
 You can run the server with ``manage.py runserver``.
+
+
+Test
+====
+
+To run browser test run in PhantomJs, Chrome or Firefox run the following respectively:
+
+  make test
+  make test-chrome
+  make test-firefox
+
