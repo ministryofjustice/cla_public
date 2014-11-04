@@ -2,10 +2,8 @@
 
 var gulp = require('gulp');
 var paths = require('./_paths');
-var clean = require('gulp-clean');
+var del = require('del');
 
 gulp.task('clean', function() {
-  return gulp
-    .src(paths.dest, {read: false})
-    .pipe(clean());
+  del(paths.dest);
 });
