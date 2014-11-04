@@ -1,8 +1,43 @@
 {% extends "base.html" %}
 
+{% import "macros/form.html" as Form %}
+{% import "macros/element.html" as Element %}
+
 {% block page_heading %}
   You might qualify for legal aid with Civil Legal Advice
 {% endblock %}
 
 {% block inner_content %}
+  <h2>Request a callback</h2>
+  <p>
+    To find out if legal aid can help in your specific situation, you need to speak
+    to an operator. Please submit your details so that they call you back.
+  </p>
+  <p>
+    If you don’t have a number we can call you on, please contact
+    <a href="https://www.gov.uk/civil-legal-advice">Civil Legal Advice</a>.
+  </p>
+
+  <form method="POST" action="{{ url_for('.result', outcome='eligible') }}">
+    {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
+
+    {{ Form.text_field(form.title) }}
+    {{ Form.text_field(form.full_name) }}
+    {{ Form.text_field(form.contact_number) }}
+    {{ Form.text_field(form.post_code) }}
+    {{ Form.textarea_field(form.address) }}
+    {{ Form.textarea_field(form.extra_notes) }}
+
+    {% call Element.alert() %}
+      <h3>What happens next</h3>
+      <p>
+        If the operator you speak to believes you can get legal aid, they will
+        find you specialist legal help, like a phone call with a solicitor or
+        support from a family mediation service.
+      </p>
+    {% endcall %}
+
+    {{ Form.actions('Request callback') }}
+  </form>
 {% endblock %}

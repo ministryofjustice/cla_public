@@ -9,7 +9,7 @@ from cla_public.apps.checker import checker
 from cla_public.apps.checker.constants import RESULT_OPTIONS
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertyForm, SavingsForm, TaxCreditsForm, IncomeAndTaxForm, \
-    OutgoingsForm
+    OutgoingsForm, ApplicationForm
 
 
 log = logging.getLogger(__name__)
@@ -84,8 +84,11 @@ def result(outcome):
     "Display the outcome of the means test"
 
     valid_outcomes = (result for (result, _) in RESULT_OPTIONS)
-
     if outcome not in valid_outcomes:
         abort(404)
 
-    return render_template('result/%s.html' % outcome)
+    form = ApplicationForm()
+    if form.validate_on_submit():
+        return redirect(url_for('.result', outcome='confirmation'))
+
+    return render_template('result/%s.html' % outcome, form=form)

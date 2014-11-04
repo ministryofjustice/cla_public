@@ -2,8 +2,8 @@
 "Checker forms"
 
 from flask_wtf import Form
-from wtforms import IntegerField
-from wtforms.validators import InputRequired, ValidationError
+from wtforms import IntegerField, StringField, TextAreaField
+from wtforms.validators import InputRequired, ValidationError, Optional
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
@@ -127,3 +127,14 @@ class OutgoingsForm(Form):
         description=u"Money you and/or your partner pay towards your criminal legal aid")
     childcare = MoneyIntervalField(u'Childcare',
         description=u"Money you and your partner pay for your child to be looked after while you work or study")
+
+
+class ApplicationForm(Form):
+    title = StringField(u'Title', description=u"Mr, Mrs, Ms", validators=[InputRequired()])
+    full_name = StringField(u'Full name', validators=[InputRequired()])
+    contact_number = StringField(u'Contact phone number', validators=[InputRequired()])
+    post_code = StringField(u'Postcode')
+    address = TextAreaField(u'Address')
+    extra_notes = TextAreaField(u'Help the operator to understand your situation',
+        description=u"In your own words, please tell us exactly what your problem is about. \
+        The Civil Legal Advice operator will read this before they call you.")
