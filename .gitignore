@@ -26,9 +26,9 @@ pip-log.txt
 .tox
 nosetests.xml
 
-# Nightwatch
-testing/output
-selenium-debug.log
+*.log
+
+tests/reports/
 
 # Translations
 *.mo
