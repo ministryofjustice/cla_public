@@ -27,3 +27,11 @@ def index():
 @base.route('/cookies')
 def cookies():
     return render_template('cookies.html')
+
+@base.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+@base.route('/feedback')
+def feedback():
+    return render_template('feedback.html')
