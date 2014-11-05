@@ -11,6 +11,7 @@ from flask import Blueprint, Flask, url_for, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 from cla_public.apps.base.views import base
 from cla_public.apps.checker.views import checker
+from cla_public.apps.checker.session import CheckerSessionInterface
 
 
 log = logging.getLogger(__name__)
@@ -137,6 +138,7 @@ def register_error_handlers(app):
 
 def create_app(config_name='FLASK'):
     app = Flask(__name__)
+    app.session_interface = CheckerSessionInterface()
     app.register_blueprint(base)
     app.register_blueprint(checker)
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
