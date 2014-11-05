@@ -20,7 +20,20 @@ def set_form_session_key(field_name, data):
     data."""
     session[field_name] = data
 
-def remove_form_session_key(field_name):
+def get_form_session_key(field_name, default=None):
+    """Returns the data associated with field_name.
+
+    If default is not None, return this if the field_name does not
+    exist"""
+    try:
+        return session[field_name]
+    except KeyError:
+        if default is not None:
+            return default
+        else:
+            raise
+
+def unset_form_session_key(field_name):
     """Removes a form's field name from the session"""
     try:
         del session[field_name]
@@ -49,7 +62,7 @@ class MultiPageForm(Form):
                 set_form_session_key(key, data)
             else:
                 log.debug('Failure: %s=%s', key, data)
-                remove_form_session_key(key)
+                unset_form_session_key(key)
 
         return success
 
