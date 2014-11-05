@@ -28,9 +28,12 @@ You can run the server with ``manage.py runserver``.
 Test
 ====
 
-To run browser test run in PhantomJs, Chrome or Firefox run the following respectively:
+To run browser test run in PhantomJs, Chrome or Firefox run the following respectively::
 
   make test
   make test-chrome
   make test-firefox
 
+To run a single test rather than the entire suite add param ``test=path/to/test``, e.g.::
+
+  make test test=tests/specs/static-pages.js
