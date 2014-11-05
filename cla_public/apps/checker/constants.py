@@ -83,6 +83,8 @@ BENEFITS_CHOICES = [
     ('other-benefit', u'A different benefit not listed above'),
 ]
 
+PASSPORTED_BENEFITS = [benefit for benefit, _ in BENEFITS_CHOICES[0:-1]]
+
 MONEY_INTERVALS = [
     ('per week', 'per week'),
     ('4 weekly', '4 weekly'),
@@ -108,3 +110,8 @@ NON_INCOME_BENEFITS = [
     ('war-pension', 'War Pension'),
     ('widows-pension', 'Widow\'s Pension lump sum payments'),
 ]
+
+F2F_CATEGORIES = ('clinneg', 'commcare')
+
+YES = '1'
+NO = '0'

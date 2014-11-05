@@ -6,7 +6,7 @@ from wtforms import FormField, IntegerField, RadioField, SelectField, \
     SelectMultipleField, widgets
 from wtforms.compat import text_type
 
-from cla_public.apps.checker.constants import MONEY_INTERVALS
+from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 
 
 class DescriptionRadioField(RadioField):
@@ -41,7 +41,7 @@ class YesNoField(RadioField):
     """Yes/No radio button field"""
 
     def __init__(self, label=None, validators=None, **kwargs):
-        choices = [('1', 'Yes'), ('0', 'No')]
+        choices = [(YES, 'Yes'), (NO, 'No')]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=text_type,
             choices=choices, **kwargs)
