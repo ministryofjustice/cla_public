@@ -1,0 +1,22 @@
+.form-control {
+  @include core-19;
+  border: 1px solid $grey-2;
+  padding: 4px;
+}
+
+select.form-control {
+  height: 35px;
+  background: $white;
+}
+
+input[type="text"],
+input[type="number"] {
+  height: 25px;
+}
+
+.input-prefix,
+.input-suffix {
+  width: 30px;
+  display: inline-block;
+  text-align: center;
+}

@@ -22,9 +22,7 @@
 
     {% if form.errors %}
       {% call Element.alert('error', icon='cross') %}
-        {% for line in form.errors.categories %}
-          <p>{{line}}</p>
-        {% endfor %}
+        <p>Please select the area of law you need help with.</p>
       {% endcall %}
     {% endif %}
 
