@@ -2,4 +2,4 @@
 from flask import Blueprint
 
 
-base = Blueprint('index', __name__)
+base = Blueprint('base', __name__)
