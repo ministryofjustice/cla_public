@@ -21,6 +21,7 @@ bin_path = "%s/bin" % env_path
 
 def run(command, **kwargs):
     os.environ['CLA_PUBLIC_CONFIG'] = 'cla_public.sample.conf'
+    os.environ['PATH'] = '{0}/bin:{1}'.format(env_path, os.environ['PATH'])
     defaults = {
         'shell': True
         }
