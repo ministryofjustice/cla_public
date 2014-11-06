@@ -4,9 +4,12 @@
 import os
 import logging
 
-from flask import render_template, send_from_directory, current_app
+from flask import render_template, send_from_directory, current_app, \
+    redirect, url_for
 
 from cla_public.apps.base import base
+
+from cla_public.apps.base.forms import FeedbackForm
 
 
 log = logging.getLogger(__name__)
@@ -32,6 +35,9 @@ def cookies():
 def privacy():
     return render_template('privacy.html')
 
-@base.route('/feedback')
+@base.route('/feedback', methods=['GET', 'POST'])
 def feedback():
-    return render_template('feedback.html')
+    form = FeedbackForm()
+    if form.validate_on_submit():
+        return redirect(url_for('.index'))
+    return render_template('feedback.html', form=form)
