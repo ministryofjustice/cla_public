@@ -38,7 +38,7 @@
 #}
 {% macro block_label(field) %}
   {% call form_group(field, show_title_row=False, class_='block-label') %}
-    <label class="form-label" id="{{field.id}}">
+    <label class="form-label" for="{{field.id}}">
       {{ field }}
       {{ field.label.text }}
       {% if field.description %}
