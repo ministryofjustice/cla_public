@@ -12,7 +12,7 @@ def make_key(form, field):
 class TestMultiPageForm(unittest.TestCase):
 
     def setUp(self):
-        self.app = app.create_app('FLASK_TEST')
+        self.app = app.create_app('config/testing.py')
         self._ctx = self.app.test_request_context()
         self._ctx.push()
 
