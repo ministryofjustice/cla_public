@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"Categories the user needs help with"
+"Constants used in the checker app"
+
+# Categories the user needs help with
 CATEGORIES = [
     # value, label, inline help text
     (
@@ -64,7 +66,7 @@ CATEGORIES = [
         u'Appealing a decision about your benefits')
 ]
 
-"Outcomes of the checker"
+# Outcomes of the checker
 RESULT_OPTIONS = [
     ('eligible', u'Eligible'),
     ('ineligible', u'Ineligible'),
@@ -72,7 +74,7 @@ RESULT_OPTIONS = [
     ('confirmation', u'Confirmation'),
 ]
 
-"Benefits"
+# Benefits
 BENEFITS_CHOICES = [
     ('income-support', u'Income Support'),
     ('jobseekers-allowance', u'Income-based Jobseeker\'s Allowance'),
