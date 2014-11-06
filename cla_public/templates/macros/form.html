@@ -8,13 +8,22 @@
       Whether to show the title row text as label
 #}
 {% macro form_group(field, title_as_label=True, show_title_row=True, class_='') %}
+  {% if field.flags.optional %}
+    {% set label_text = field.label.text + ' (optional)' %}
+  {% else %}
+    {% set label_text = field.label.text %}
+  {% endif %}
+  {% set field_label = field.label(
+    for=title_as_label if title_as_label is string else field.id,
+    text=label_text
+  ) %}
   <dl class="form-group {{ class_ }}{% if field.errors %} m-error{% endif %}">
     {% if show_title_row %}
       <dt class="form-row">
         {%- if title_as_label -%}
-          {{- field.label(for=title_as_label) if title_as_label is string else field.label -}}
+          {{- field_label -}}
         {%- else -%}
-          {{ field.label.text }}
+          {{ label_text }}
         {%- endif -%}
         {%- if field.description -%}
           <div class="field-help">

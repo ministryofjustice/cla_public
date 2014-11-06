@@ -134,7 +134,8 @@ class ApplicationForm(Form):
     full_name = StringField(u'Full name', validators=[InputRequired()])
     contact_number = StringField(u'Contact phone number', validators=[InputRequired()])
     post_code = StringField(u'Postcode')
-    address = TextAreaField(u'Address')
+    address = TextAreaField(u'Address', validators=[Optional()])
     extra_notes = TextAreaField(u'Help the operator to understand your situation',
         description=u"In your own words, please tell us exactly what your problem is about. \
-        The Civil Legal Advice operator will read this before they call you.")
+        The Civil Legal Advice operator will read this before they call you.",
+        validators=[Optional()])
