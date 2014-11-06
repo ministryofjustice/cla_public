@@ -14,6 +14,10 @@ input[type="number"] {
   height: 25px;
 }
 
+textarea {
+  min-height: 100px;
+}
+
 .input-prefix,
 .input-suffix {
   width: 30px;
