@@ -25,8 +25,8 @@ def run(command, **kwargs):
         'shell': True
         }
     defaults.update(kwargs)
-
     return_code = subprocess.call(command, **defaults)
+    print 'Running command %r' % command
     if return_code:
         sys.exit(return_code)
 
