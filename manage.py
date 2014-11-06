@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import logging
-import pytest
+import shlex
+import subprocess
+import sys
 
 from flask_script import Manager, Shell, Server
 from flask_migrate import MigrateCommand
@@ -18,9 +20,11 @@ def _make_context():
 @manager.command
 def test():
     """Run the tests."""
-    import pytest
-    exit_code = pytest.main(['tests', '--verbose'])
-    return exit_code
+    command_line = app.config['NOSE_COMMAND']
+    log.info('Running %r', command_line)
+    args = shlex.split(command_line)
+    subprocess.Popen(args, stdin=sys.stdin,
+                     stdout=sys.stdout, stderr=sys.stderr).wait()
 
 manager.add_command('server', Server())
 manager.add_command('shell', Shell(make_context=_make_context))
