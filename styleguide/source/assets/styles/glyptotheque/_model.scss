@@ -1,0 +1,94 @@
+@import 'bourbon';
+@import 'pygments/github';
+
+.glypto-model {
+  box-shadow: 0 1px 0 0 rgba(black, .02), 0 1px 1px rgba(black, .1);
+  margin-bottom: 35px;
+
+  > header {
+    @include clearfix;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    background: white;
+    position: relative;
+    padding: 10px 15px;
+    margin-bottom: 2px;
+    min-height: 40px;
+
+    h3 {
+      font-weight: 400;
+      font-size: 1.2rem;
+      line-height: 1.2;
+      letter-spacing: -.02rem;
+      margin: 0;
+      float: left;
+    }
+
+    a {
+      color: #0070a8;
+      text-decoration: none;
+
+      &:hover {
+        color: #d25f00;
+      }
+    }
+
+    p {
+      padding: .3rem 0 0;
+      margin: 0;
+      color: #777;
+      font-size: .8rem;
+      clear: both;
+    }
+
+    ._standalone {
+      @include position(absolute, 0px 0px null null);
+      margin: 13px;
+      font-size: 14px;
+    }
+  }
+
+  > .glypto-model-stage {
+    $_padding: 15px;
+
+    position: relative;
+    background: white;
+    padding: $_padding;
+
+    > figure,
+    > iframe {
+      @include transition(300ms);
+      display: block;
+      margin: 0;
+
+      &:hover {
+        box-shadow: 0 0 0 1px white, 0 0 0 2px rgba(black, .1);
+      }
+    }
+
+    > figure {
+      @include clearfix;
+    }
+
+    ._component {
+      @include transition(200ms max-width);
+      overflow: hidden;
+      padding: 5px;
+
+      &.__small {
+        max-width: 320px;
+      }
+
+      &.__medium {
+        max-width: 640px;
+      }
+
+      &.__large {
+        max-width: 1280px;
+      }
+
+      &.__default {
+        max-width: 100%;
+      }
+    }
+  }
+}

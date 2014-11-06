@@ -1,0 +1,7 @@
+section.glypto-model-utils
+  menu
+    button._tab-toggle(ng-class="{'__active': show == 'source'}" ng-click="show = show === 'source' ? null : 'source'") HTML source
+    button._tab-toggle(ng-class="{'__active': show == 'outline'}" ng-click="show = show === 'outline' ? null : 'outline'") Outline
+  ._container
+    ._panel.glypto-model-source ng-class="{'__shown': show == 'source'}" = code('html') { html }
+    ._panel.glypto-model-outline ng-class="{'__shown': show == 'outline'}" = outline(html)

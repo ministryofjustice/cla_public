@@ -1,0 +1,12 @@
+- resources_for(current_page.url, exclude_indexes: true, sort_by: :nav_order).each do |r|
+
+  - current_page.add_metadata({ page: { \
+      title: r.data.title,
+      description: r.data.description,
+      local_url: r.url,
+      stylesheets: r.data.stylesheet || r.data.stylesheets,
+      javascripts: r.data.javascript || r.data.javascripts,
+      iframe: r.metadata.page[:iframe] \
+    } })
+
+  = partial r.url.sub(/\/$/, '.html')

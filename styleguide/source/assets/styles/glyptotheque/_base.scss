@@ -1,0 +1,17 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #d9d7de;
+}
+
+.glyptotheque {
+  padding: 35px 20px;
+  min-height: 100%;
+  overflow: hidden;
+  background: lighten($light-grey, 5);
+  box-shadow: -1px 0 0 rgba(black, .1);
+  position: relative;
+}

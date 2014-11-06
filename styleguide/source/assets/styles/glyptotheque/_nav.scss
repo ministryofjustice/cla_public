@@ -1,0 +1,148 @@
+.glypto-nav,
+#glypto-nav-placeholder {
+  float: left;
+  width: $glypto-nav-width;
+  min-height: 1px;
+}
+
+.glypto-nav {
+  @include transition(120ms ease-out);
+  color: #444;
+
+  &.s-hidden {
+    margin-left: -$glypto-nav-width;
+  }
+
+  .search {
+    padding: 5px;
+    background: rgba(black, .06);
+    box-shadow: 0 1px 0 rgba(white, .2);
+
+    input {
+      @include box-sizing(border-box);
+      border: 1px solid rgba(black, .2);
+      background: rgba(white, .6);
+      padding: 4px;
+      font-size: 14px;
+      display: block;
+      width: 100%;
+      outline: none;
+
+      &:focus {
+        border-color: rgba(black, .4);
+        background: rgba(white, .8);
+      }
+    }
+  }
+
+  > .glypto-nav-toggle {
+    @include size(30px);
+    padding: 0;
+    background: none;
+    border: 0;
+    float: right;
+    margin-right: -31px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    opacity: .5;
+    outline: none;
+
+    &:before {
+      @include position(absolute, 8px 0 null 0);
+      box-shadow: 0 0 0 1px black, 0 5px 0 1px black, 0 10px 0 1px black, 0 15px 0 1px black;
+      width: 16px;
+      margin: auto;
+      opacity: .6;
+      content: '';
+    }
+
+    &:hover {
+      opacity: .8;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+
+  ul {
+    @include clearfix;
+    list-style: none;
+    font-size: 12px;
+    line-height: 1.2;
+    padding: 0;
+    margin: 0;
+  }
+
+  ._logo + ul:before,
+  > ul > li:after {
+    @include background(linear-gradient(to right, transparent, rgba(black, .06)));
+    height: 1px;
+    display: block;
+    content: '';
+  }
+
+  a {
+    display: block;
+    padding: 8px 10px;
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+
+    &:hover,
+    &:focus {
+      color: inherit;
+      background: rgba(black, .03);
+    }
+
+    &:active {
+      color: inherit;
+      background: #b5cdd9;
+    }
+  }
+
+  li._index {
+    > a {
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    ._count {
+      float: right;
+      background: rgba(black, .03);
+      color: rgba(black, .4);
+      line-height: 16px;
+      padding: 0 7px;
+      margin: -1px 0;
+      line-height: 16px;
+      border-radius: 7px;
+    }
+
+    ul {
+      a:before {
+        content: '';
+        margin: 0 5px;
+      }
+
+      ul a:before {
+        margin-left: 15px;
+      }
+
+      li:not(._index) a:before {
+        content: '•';
+      }
+    }
+  }
+
+  li.s-selected > a {
+    color: inherit;
+    background: rgba(#b5cdd9, .5);
+  }
+
+  a._logo {
+    background: rgba(black, .2);
+    color: white;
+    border-bottom: 1px solid rgba(black, .1);
+    margin-bottom: -1px;
+  }
+}

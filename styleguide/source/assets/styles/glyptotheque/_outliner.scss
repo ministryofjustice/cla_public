@@ -1,0 +1,126 @@
+.glypto-model-outline {
+  @mixin _item($color: null, $before: none, $after: none) {
+    $pres-color: #aaa;
+
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+
+    @if $color {
+      color: $color;
+    }
+    &:before {
+      content: $before;
+      color: $pres-color;
+    }
+    &:after {
+      content: $after;
+      color: $pres-color;
+    }
+  }
+
+  font: 600 11px Menlo, monospace;
+  cursor: default;
+
+  ._element {
+    @include transition(100ms);
+    padding: 1px 2px 2px;
+    border-radius: 3px;
+    margin: 1px 1px 1px;
+
+    &:hover {
+      box-shadow: inset 0 0 0 1px rgba(black, .07);
+      background: rgba(white, .2);
+    }
+
+    > span {
+      margin-top: 1px;
+    }
+
+    ._element {
+      margin-left: 10px;
+    }
+
+    > ._name,
+    ._classes {
+      border-radius: 3px;
+      background: rgba(white, .2);
+    }
+
+    > ._name,
+    ._classes,
+    ._class {
+      padding: 2px 5px;
+      margin-right: 1px;
+      white-space: nowrap;
+    }
+  }
+
+  ._classes {
+    @include _item;
+    box-shadow: inset 0 0 0 1px rgba(#cc3333, .2);
+  }
+
+  ._element > ._name {
+    @include _item(#003366);
+    box-shadow: inset 0 0 0 1px rgba(#003366, .2);
+  }
+
+  ._element ._class {
+    @include _item(#cc3333, $before: '.');
+    margin: -2px 0 -2px -1px;
+    border-left: 1px solid rgba(#cc3333, .1);
+    background: none;
+
+    &:first-child {
+      margin-left: -4px;
+      border: 0;
+    }
+
+    &:before {
+      font-family: serif;
+      font-weight: bold;
+      font-size: 12px;
+      margin: 0 2px 0 -2px;
+      color: inherit;
+    }
+  }
+
+  ._attributes {
+    @include _item;
+    padding: 2px;
+    // box-shadow: inset 0 0 0 1px rgba(#aaa, .2);
+    border-radius: 3px;
+    word-break: break-word;
+  }
+
+  ._attr {
+    margin: 0 3px;
+
+    > ._name {
+      @include _item(#3366cc, $after: '=');
+    }
+
+    > ._value {
+      @include _item(#339900, $before: '"', $after: '"');
+      position: relative;
+      padding-right: 7px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 400px;
+
+      &:after {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  ._text {
+    @include _item(#aaa);
+    font: normal 13px/15px Helvetica, Arial, sans-serif;
+    padding: 2px 5px 0;
+    max-width: 360px;
+    word-break: break-word;
+  }
+}
