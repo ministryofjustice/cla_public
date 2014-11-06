@@ -59,3 +59,47 @@ class TestMultiPageForm(unittest.TestCase):
             with self.assertRaises(KeyError):
                 key = '{0}_{1}'.format('ProblemForm', 'categories')
                 get_form_session_key(key)
+
+    def test_session_multi_page_valid_forms(self):
+        # Test that Form fields are stored across several pages and
+        # requests in the session object.
+
+        def post_form_page(page_name, data):
+            uri = url_for(page_name)
+            resp = c.post(uri, data=data)
+            # We expect a 302 redirect as we are shuffled to the next
+            # page.
+            self.assertEquals(resp.status_code, 302)
+
+        with self.app.test_client() as c:
+            problem_data = {'categories': 'debt'}
+            post_form_page('checker.problem', problem_data)
+
+            about_data = {
+                'have_partner': '1',
+                'in_dispute': '0',
+                'on_benefits': '0',
+                'have_children': '0',
+                'num_children': 0,
+                'have_dependants': '0',
+                'num_dependants': 0,
+                'have_savings': '0',
+                'own_property': '0',
+                'is_employed': '0',
+                'is_self_employed': '0',
+                'aged_60_or_over': '0',
+                }
+
+            post_form_page('checker.about', about_data)
+
+            def make_key(form, field):
+                return '{0}_{1}'.format(form, field)
+
+            self.assertEqual(
+                get_form_session_key(make_key('ProblemForm', 'categories')),
+                problem_data['categories'])
+
+            for field, value in about_data.items():
+                self.assertEqual(
+                    get_form_session_key(make_key('AboutYouForm', field)),
+                    value)
