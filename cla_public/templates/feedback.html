@@ -6,95 +6,21 @@
 {% block page_heading %}Your feedback{% endblock %}
 
 {% block inner_content %}
-
-<form>
-  <dl class="form-group">
-    <dt class="form-row">
-      <label for="feedback_difficulty_feedback">Did you have any difficulty with this service?</label>
-    </dt>
-    <dd class="form-row">
-      <textarea class="form-control" name="feedback_difficulty_feedback" maxlength="5000" id="feedback_difficulty_feedback"></textarea>
-    </dd>
-  </dl>
-
-  <dl class="form-group">
-    <dt class="form-row">
-      <label for="feedback_difficulty_feedback">Do you have any ideas for how it could be improved?</label>
-    </dt>
-    <dd class="form-row">
-      <textarea class="form-control" name="feedback_difficulty_feedback" maxlength="5000" id="feedback_difficulty_feedback"></textarea>
-    </dd>
-  </dl>
-
   <p>
-    <small>
-      Please don't include any personal or financial details
-      <br>
-      <span class="hint">For example, your National Insurance or credit card numbers.</span>
-    </small>
+    Please don't include any personal or financial details
+    <br>
+    For example, your National Insurance or credit card numbers.
   </p>
 
-  <fieldset class="form-group">
-    <div class="form-row">
-      <legend>Overall, how did you feel about the service you received today?</legend>
-    </div>
-    <div class="form-row">
-      <ul>
-        <li>
-          <input id="satisfaction_feedback_very_satisfied" type="radio" value="very_satisfied" name="satisfaction_feedback">
-          <label for="satisfaction_feedback_very_satisfied">Very satisfied</label>
-        </li>
-        <li>
-          <input id="satisfaction_feedback_satisfied" type="radio" value="satisfied" name="satisfaction_feedback">
-          <label for="satisfaction_feedback_satisfied">Satisfied</label>
-        </li>
-        <li>
-          <input id="satisfaction_feedback_neither_satisfied_or_dissatisfied" type="radio" value="neither_satisfied_or_dissatisfied" name="satisfaction_feedback">
-          <label for="satisfaction_feedback_neither_satisfied_or_dissatisfied">Neither satisfied or dissatisfied</label>
-        </li>
-        <li>
-          <input id="satisfaction_feedback_dissatisfied" type="radio" value="dissatisfied" name="satisfaction_feedback">
-          <label for="satisfaction_feedback_dissatisfied">Dissatisfied</label>
-        </li>
-        <li>
-          <input id="satisfaction_feedback_very_dissatisfied" type="radio" value="very_dissatisfied" name="satisfaction_feedback">
-          <label for="satisfaction_feedback_very_dissatisfied">Very dissatisfied</label>
-        </li>
-      </ul>
-    </div>
-  </fieldset>
+  <form method="POST" action="{{ url_for('.feedback') }}">
+    {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
 
-  <fieldset class="form-group">
-    <div class="form-row">
-      <legend>Did you have any help filling in this form?</legend>
-    </div>
-    <div class="form-row">
-      <ul>
-        <li>
-          <input id="help_feedback_filled_in_myself" type="radio" value="filled_in_myself" name="help_feedback">
-          <label for="help_feedback_filled_in_myself">No, I filled in this form myself</label>
-        </li>
-        <li>
-          <input id="help_feedback_filled_in_for_me" type="radio" value="filled_in_for_me" name="help_feedback">
-          <label for="help_feedback_filled_in_for_me">I have difficulty using computers so someone filled in this form for me</label>
-        </li>
-        <li>
-          <input id="help_feedback_used_accessibility_tool" type="radio" value="used_accessibility_tool" name="help_feedback">
-          <label for="help_feedback_used_accessibility_tool">I used an accessibility tool such as a screen reader</label>
-        </li>
-        <li>
-          <input id="help_feedback_other_help" type="radio" value="other_help" name="help_feedback">
-          <label for="help_feedback_other_help">I had some other kind of help</label>
-          <input class="form-control" type="text" name="feedback[other_help]" id="feedback_other_help">
-        </li>
-      </ul>
-    </div>
-  </fieldset>
+    {{ Form.textarea_field(form.difficulty) }}
+    {{ Form.textarea_field(form.ideas) }}
+    {{ Form.check_list_field(form.feel_about_service) }}
+    {{ Form.check_list_field(form.help_filling_in_form) }}
 
-  <p class="form-actions">
-    <input type="submit" value="Send feedback" class="button">
-  </p>
-
-</form>
-
+    {{ Form.actions('Send feedback') }}
+  </form>
 {% endblock %}
