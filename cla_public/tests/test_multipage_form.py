@@ -1,30 +1,23 @@
 from __future__ import unicode_literals
-
-from flask import url_for
-from cla_public import app
-from cla_public.apps.checker.forms import (set_form_session_key,
-                                           unset_form_session_key,
-                                           get_form_session_key)
 import unittest
+
+from flask import url_for, session
+from cla_public import app
+
+
+def make_key(form, field):
+    return '{form}.{field}'.format(form=form, field=field)
 
 
 class TestMultiPageForm(unittest.TestCase):
 
     def setUp(self):
-        self.app = app.create_app('FLASK_TEST')
+        self.app = app.create_app('config/testing.py')
         self._ctx = self.app.test_request_context()
         self._ctx.push()
 
     def tearDown(self):
         pass
-
-    def test_session_set_and_unset(self):
-        # Test that we can set, unset and recall session state.
-        set_form_session_key('test_key', 'test_value')
-        self.assertEqual(get_form_session_key('test_key'), 'test_value')
-        unset_form_session_key('test_key')
-        with self.assertRaises(KeyError):
-            get_form_session_key('test_key')
 
     def test_session_single_page_valid_form(self):
         # Test that POSTing to a single page will store the form data
@@ -38,8 +31,8 @@ class TestMultiPageForm(unittest.TestCase):
             self.assertEquals(resp.status_code, 302)
             # The session store should now contain a field called
             # <FormName>_categories where FormName is ProblemForm.
-            key = '{0}_{1}'.format('ProblemForm', 'categories')
-            self.assertEquals(get_form_session_key(key), choice)
+            key = make_key('ProblemForm', 'categories')
+            self.assertEquals(session.get(key), choice)
 
     def test_session_single_page_fail_validation(self):
         # Test that POSTing to a single page -- and fail the form
@@ -56,9 +49,8 @@ class TestMultiPageForm(unittest.TestCase):
 
             # Test that the "categories" field is not stored in the
             # session.
-            with self.assertRaises(KeyError):
-                key = '{0}_{1}'.format('ProblemForm', 'categories')
-                get_form_session_key(key)
+            key = make_key('ProblemForm', 'categories')
+            self.assertFalse(key in session)
 
     def test_session_multi_page_valid_forms(self):
         # Test that Form fields are stored across several pages and
@@ -92,14 +84,11 @@ class TestMultiPageForm(unittest.TestCase):
 
             post_form_page('checker.about', about_data)
 
-            def make_key(form, field):
-                return '{0}_{1}'.format(form, field)
-
             self.assertEqual(
-                get_form_session_key(make_key('ProblemForm', 'categories')),
+                session.get(make_key('ProblemForm', 'categories')),
                 problem_data['categories'])
 
             for field, value in about_data.items():
                 self.assertEqual(
-                    get_form_session_key(make_key('AboutYouForm', field)),
+                    session.get(make_key('AboutYouForm', field)),
                     value)
