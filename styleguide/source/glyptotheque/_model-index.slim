@@ -10,5 +10,5 @@
     } })
 
   .glypto-section
-    h2 = link_to r.data.title, r.url
+    h2.glypto-title = link_to r.data.title, r.url
     = partial r.url.sub(/\/$/, '.html')

@@ -46,9 +46,16 @@ body {
     font-weight: 400;
     font-size: 22px;
     margin: 0;
+  }
 
+  .glypto-title {
     a {
+      color: #0070a8;
       text-decoration: none;
+
+      &:hover {
+        color: $hover-orange;
+      }
     }
   }
 }
