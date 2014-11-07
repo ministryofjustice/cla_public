@@ -30,7 +30,7 @@ class MultiPageForm(Form):
     def __init__(self, formdata=None, obj=None, prefix='',
                  csrf_context=None, secret_key=None, csrf_enabled=None, *args,
                  **kwargs):
-        namespace = '{0}.'.format(self.__class__.__name__)
+        namespace = '{0}_'.format(self.__class__.__name__)
 
         self_fields = lambda (key, val): \
             key.startswith(namespace)
@@ -54,7 +54,7 @@ class MultiPageForm(Form):
         """
         success = super(MultiPageForm, self).validate()
 
-        namespace = lambda field: '{form}.{field}'.format(
+        namespace = lambda field: '{form}_{field}'.format(
             form=self.__class__.__name__,
             field=field)
 
