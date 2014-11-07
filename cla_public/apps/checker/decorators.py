@@ -3,7 +3,7 @@
 
 import functools
 
-from flask import render_template, request, session
+from flask import current_app, render_template, request, session
 
 
 def form_view(form_class, form_template):
@@ -13,6 +13,13 @@ def form_view(form_class, form_template):
 
         @functools.wraps(fn)
         def wrapper(*args, **kwargs):
+
+            if current_app.config.get('DEBUG'):
+                # allow overriding session variables
+                # no point validating since it's only for dev testing
+                for key, val in request.args.items():
+                    session[key] = val
+
             form = form_class(request.form, session)
             if form.validate_on_submit():
                 return fn(session)
