@@ -1,40 +1,57 @@
 .glypto-model-utils {
   > menu {
+    @include clearfix;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
     margin: 0;
-    padding: 8px;
+    padding: 6px 0;
+    position: relative;
+    border-bottom: 2px solid white;
+
+    > a,
+    > button {
+      text-transform: uppercase;
+      padding: 5px 8px 3px;
+      border-radius: 3px;
+      background: none;
+
+      &:hover {
+        color: #666;
+        background: rgba(white, .7);
+      }
+      &:active {
+        color: #555;
+        background: rgba(black, .1);
+      }
+
+      &.__active {
+        color: white;
+        background: rgba(black, .3);
+
+        &:active {
+          background: rgba(black, .5);
+          color: white;
+        }
+      }
+
+      .fa {
+        margin-left: 5px;
+      }
+    }
   }
 
   ._tab-toggle {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 600;
-    color: #888;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    background: none;
-    border-radius: 3px;
+    float: left;
     border: none;
     outline: none;
     margin-right: 3px;
+  }
 
-    &:hover {
-      color: rgba(black, .4);
-      background: rgba(white, .7);
-    }
-    &:active {
-      color: #555;
-      background: rgba(black, .1);
-    }
-
-    &.__active {
-      color: white;
-      background: rgba(black, .3);
-
-      &:active {
-        background: rgba(black, .5);
-        color: white;
-      }
-    }
+  ._isolated {
+    float: right;
+    text-decoration: none;
+    color: inherit;
   }
 
   ._container {
@@ -43,13 +60,12 @@
   }
 
   ._panel {
-    border-top: 1px solid rgba(black, .05);
-    padding: 10px 15px;
-    background: rgba(black, .05);
+    padding: 10px;
     display: none;
 
     &.__shown {
       display: block;
+      background: rgba(black, .05);
     }
   }
 

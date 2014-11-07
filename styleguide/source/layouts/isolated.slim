@@ -8,7 +8,7 @@ html
     = include_stylesheets(current_page.data.stylesheets || current_page.data.stylesheet)
 
   body class="#{yield_content(:body_class)}"
-    = yield
+    = yield_content :model
 
     = yield_content :javascripts
     = include_javascripts(current_page.data.javascripts || current_page.data.javascript)

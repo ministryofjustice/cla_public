@@ -1,17 +1,21 @@
 ._element
   span._name = item.el_name
+  - if item.id
+    span._id ##{item.id}
   - if item.class_name.present?
     span._classes
       - item.class_name.split(/\s+/).each do |c|
-        span._class = c
+        span._class .#{c}
   - if item.attrs.any?
-    span._attributes
+    span._attributes<>
       - item.attrs.each do |a|
-        span._attr
-          span._name = a.name
+        span._attr<>
+          span._name #{a.name}
+          | ="
           span._value title="#{a.value.length > 27 ? a.value.strip : nil}" = a.value
+          | "
   - if item.text.present?
-    span._text title="#{item.text.length > 27 ? item.text.strip : nil}" = item.text
+    span._text<> title="#{item.text.length > 27 ? item.text.strip : nil}" = item.text
 
   - if item.children.any?
     - item.children.each do | child |

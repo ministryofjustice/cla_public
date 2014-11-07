@@ -27,6 +27,7 @@
     padding: 1px 2px 2px;
     border-radius: 3px;
     margin: 1px 1px 1px;
+    color: #aaa;
 
     &:hover {
       box-shadow: inset 0 0 0 1px rgba(black, .07);
@@ -42,18 +43,25 @@
     }
 
     > ._name,
+    ._id,
     ._classes {
       border-radius: 3px;
       background: rgba(white, .2);
     }
 
     > ._name,
+    ._id,
     ._classes,
     ._class {
       padding: 2px 5px;
       margin-right: 1px;
       white-space: nowrap;
     }
+  }
+
+  ._id {
+    @include _item(#009486);
+    box-shadow: inset 0 0 0 1px rgba(#009486, .2);
   }
 
   ._classes {
@@ -67,7 +75,7 @@
   }
 
   ._element ._class {
-    @include _item(#cc3333, $before: '.');
+    @include _item(#cc3333);
     margin: -2px 0 -2px -1px;
     border-left: 1px solid rgba(#cc3333, .1);
     background: none;
@@ -89,37 +97,27 @@
   ._attributes {
     @include _item;
     padding: 2px;
-    // box-shadow: inset 0 0 0 1px rgba(#aaa, .2);
     border-radius: 3px;
     word-break: break-word;
   }
 
   ._attr {
-    margin: 0 3px;
-
     > ._name {
-      @include _item(#3366cc, $after: '=');
+      @include _item(#3366cc);
     }
 
     > ._value {
-      @include _item(#339900, $before: '"', $after: '"');
-      position: relative;
-      padding-right: 7px;
+      @include _item(#339900);
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: 400px;
-
-      &:after {
-        position: absolute;
-        right: 0;
-      }
     }
   }
 
   ._text {
-    @include _item(#aaa);
+    @include _item;
     font: normal 13px/15px Helvetica, Arial, sans-serif;
-    padding: 2px 5px 0;
+    padding: 2px 2px 0;
     max-width: 360px;
     word-break: break-word;
   }

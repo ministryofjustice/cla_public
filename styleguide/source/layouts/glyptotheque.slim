@@ -1,4 +1,4 @@
-- content_for :page_title,  'CLA Elements'
+- content_for :page_title,  'CLA ELements'
 - content_for :ng_app,      'glyptotheque'
 - content_for :stylesheets,  stylesheet_link_tag('glyptotheque')
 
@@ -7,6 +7,9 @@
     = partial 'glyptotheque/nav'
 
   main.glyptotheque
+    - if current_page.data.title
+      header
+        h1 = current_page.data.title
     = yield
 
   javascript:
