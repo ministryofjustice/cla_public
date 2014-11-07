@@ -1,3 +1,4 @@
+from flask import current_app, request
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
@@ -38,6 +39,8 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def has_partner(self):
+        if current_app.config.get('DEBUG') and 'partner' in request.args:
+            return request.args['partner'] in ('y', 'Y', '1', 'yes', 'true')
         return self.get('AboutYouForm.have_partner', NO) == YES
 
 
