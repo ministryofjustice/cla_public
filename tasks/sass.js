@@ -7,7 +7,7 @@ var sass = require('gulp-ruby-sass');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
-gulp.task('sass', ['clean'], function() {
+gulp.task('sass', ['clean-css'], function() {
   return gulp
     .src(paths.src + 'stylesheets/**/*.scss')
     .pipe(sass({

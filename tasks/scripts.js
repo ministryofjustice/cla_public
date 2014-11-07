@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var paths = require('./_paths');
 var concat = require('gulp-concat');
 
-gulp.task('scripts', ['clean', 'lint'], function() {
+gulp.task('scripts', ['clean-js', 'lint'], function() {
   var scripts = paths.vendor_scripts.concat(paths.scripts);
 
   return gulp

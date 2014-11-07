@@ -24,3 +24,7 @@
     {% block inner_content %}{% endblock %}
   </article>
 {% endblock %}
+
+{% block javascripts %}
+<script src="{{ url_for('static', filename='javascripts/cla.js') }}"></script>
+{% endblock %}
