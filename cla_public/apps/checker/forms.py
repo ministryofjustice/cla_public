@@ -6,7 +6,7 @@ import logging
 from flask import session
 from flask_wtf import Form
 from wtforms import IntegerField, StringField, TextAreaField
-from wtforms.validators import InputRequired, ValidationError, Optional
+from wtforms.validators import InputRequired, ValidationError
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
@@ -18,8 +18,35 @@ from cla_public.apps.checker.fields import DescriptionRadioField, \
 log = logging.getLogger(__name__)
 
 
+class Struct(object):
+
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+
+
 class MultiPageForm(Form):
     """Stores validated form data in the session"""
+
+    def __init__(self, formdata=None, obj=None, prefix='',
+                 csrf_context=None, secret_key=None, csrf_enabled=None, *args,
+                 **kwargs):
+        namespace = '{0}_'.format(self.__class__.__name__)
+
+        self_fields = lambda (key, val): \
+            key.startswith(namespace)
+
+        strip_namespace = lambda (key, val): \
+            (key.replace(namespace, ''), val)
+
+        if obj:
+            obj = Struct(**dict(map(
+                strip_namespace,
+                filter(self_fields, obj.items()))))
+
+        super(MultiPageForm, self).__init__(
+            formdata=formdata, obj=obj, prefix=prefix,
+            csrf_context=csrf_context, secret_key=secret_key,
+            csrf_enabled=csrf_enabled, *args, **kwargs)
 
     def validate(self):
         """Store the validated field data in the session.
@@ -27,7 +54,7 @@ class MultiPageForm(Form):
         """
         success = super(MultiPageForm, self).validate()
 
-        namespace = lambda field: '{form}.{field}'.format(
+        namespace = lambda field: '{form}_{field}'.format(
             form=self.__class__.__name__,
             field=field)
 
@@ -49,6 +76,9 @@ class ProblemForm(MultiPageForm):
         choices=CATEGORIES,
         coerce=unicode,
         validators=[InputRequired()])
+
+    def __init__(self, *args, **kwargs):
+        super(ProblemForm, self).__init__(*args, **kwargs)
 
 
 class AboutYouForm(MultiPageForm):
@@ -93,6 +123,9 @@ class AboutYouForm(MultiPageForm):
             u"and self-employed"))
     aged_60_or_over = YesNoField(u'Are you aged 60 or over?')
 
+    def __init__(self, *args, **kwargs):
+        super(AboutYouForm, self).__init__(*args, **kwargs)
+
 
 class AtLeastOne(object):
     """
@@ -117,6 +150,9 @@ class YourBenefitsForm(MultiPageForm):
     benefits = MultiCheckboxField(
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
+
+    def __init__(self, *args, **kwargs):
+        super(YourBenefitsForm, self).__init__(*args, **kwargs)
 
 
 class PropertyForm(MultiPageForm):
@@ -145,6 +181,9 @@ class PropertyForm(MultiPageForm):
         description=(
             u"For example, as part of the financial settlement of a divorce"))
 
+    def __init__(self, *args, **kwargs):
+        super(PropertyForm, self).__init__(*args, **kwargs)
+
 
 class SavingsForm(MultiPageForm):
     savings = IntegerField(
@@ -155,6 +194,9 @@ class SavingsForm(MultiPageForm):
     valuables = PartnerIntegerField(
         u'Valuable items you and your partner own worth over £500 each',
         description=u"Total value of any items you own with some exceptions")
+
+    def __init__(self, *args, **kwargs):
+        super(SavingsForm, self).__init__(*args, **kwargs)
 
 
 class TaxCreditsForm(MultiPageForm):
@@ -174,6 +216,9 @@ class TaxCreditsForm(MultiPageForm):
         u'Do you or your partner receive any other benefits not listed above?')
     total_other_benefit = MoneyIntervalField(
         u'Total amount of benefits not listed above')
+
+    def __init__(self, *args, **kwargs):
+        super(TaxCreditsForm, self).__init__(*args, **kwargs)
 
 
 class IncomeAndTaxForm(MultiPageForm):
@@ -205,6 +250,9 @@ class IncomeAndTaxForm(MultiPageForm):
             u"For example, student grants, income from trust funds, "
             u"dividends"))
 
+    def __init__(self, *args, **kwargs):
+        super(IncomeAndTaxForm, self).__init__(*args, **kwargs)
+
 
 class OutgoingsForm(MultiPageForm):
     rent = PartnerMoneyIntervalField(
@@ -225,6 +273,9 @@ class OutgoingsForm(MultiPageForm):
         description=(
             u"Money you and your partner pay for your child to be looked "
             u"after while you work or study"))
+
+    def __init__(self, *args, **kwargs):
+        super(OutgoingsForm, self).__init__(*args, **kwargs)
 
 
 class ApplicationForm(Form):

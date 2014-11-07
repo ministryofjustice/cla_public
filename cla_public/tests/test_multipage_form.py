@@ -6,7 +6,7 @@ from cla_public import app
 
 
 def make_key(form, field):
-    return '{form}.{field}'.format(form=form, field=field)
+    return '{form}_{field}'.format(form=form, field=field)
 
 
 class TestMultiPageForm(unittest.TestCase):
