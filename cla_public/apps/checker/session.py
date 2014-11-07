@@ -36,6 +36,10 @@ class CheckerSession(SecureCookieSession):
         other_benefits = bool(benefits.difference(PASSPORTED_BENEFITS))
         return has_children or is_carer or other_benefits
 
+    @property
+    def has_partner(self):
+        return self.get('AboutYouForm.have_partner', NO) == YES
+
 
 class CheckerSessionInterface(SecureCookieSessionInterface):
     session_class = CheckerSession

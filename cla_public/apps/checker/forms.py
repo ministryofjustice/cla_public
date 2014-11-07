@@ -11,7 +11,8 @@ from wtforms.validators import InputRequired, ValidationError, Optional
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
 from cla_public.apps.checker.fields import DescriptionRadioField, \
-    MoneyIntervalField, MultiCheckboxField, YesNoField
+    MoneyIntervalField, MultiCheckboxField, YesNoField, PartnerIntegerField, \
+    PartnerYesNoField, PartnerMoneyIntervalField, PartnerMultiCheckboxField
 
 
 log = logging.getLogger(__name__)
@@ -124,7 +125,7 @@ class PropertyForm(MultiPageForm):
         description=(
             u"If you are separated and no longer live in the property you "
             u"own, please answer ‘no’"))
-    other_shareholders = YesNoField(
+    other_shareholders = PartnerYesNoField(
         u'Does anyone else own a share of the property?',
         description=u"Other than you and your partner")
     property_value = IntegerField(
@@ -151,7 +152,7 @@ class SavingsForm(MultiPageForm):
             u"The total amount of savings in cash, bank or building society"))
     investments = IntegerField(
         description=u"This includes stocks, shares, bonds (but not property)")
-    valuables = IntegerField(
+    valuables = PartnerIntegerField(
         u'Valuable items you and your partner own worth over £500 each',
         description=u"Total value of any items you own with some exceptions")
 
@@ -163,13 +164,13 @@ class TaxCreditsForm(MultiPageForm):
     child_tax_credit = IntegerField(
         u'Child Tax Credit',
         description=u"The total amount you get for all your children")
-    benefits = MultiCheckboxField(
+    benefits = PartnerMultiCheckboxField(
         u'Do you or your partner get any of these benefits?',
         description=(
             u"These benefits don’t count as income. Please tick the ones you "
             u"receive."),
         choices=NON_INCOME_BENEFITS)
-    other_benefits = YesNoField(
+    other_benefits = PartnerYesNoField(
         u'Do you or your partner receive any other benefits not listed above?')
     total_other_benefit = MoneyIntervalField(
         u'Total amount of benefits not listed above')
@@ -206,20 +207,20 @@ class IncomeAndTaxForm(MultiPageForm):
 
 
 class OutgoingsForm(MultiPageForm):
-    rent = MoneyIntervalField(
+    rent = PartnerMoneyIntervalField(
         u'Rent',
         description=u"Money you and your partner pay your landlord")
-    maintenance = MoneyIntervalField(
+    maintenance = PartnerMoneyIntervalField(
         u'Maintenance',
         description=(
             u"Money you and/or your partner pay to an ex-partner for their "
             u"living costs"))
-    income_contribution = MoneyIntervalField(
+    income_contribution = PartnerMoneyIntervalField(
         u'Income Contribution Order',
         description=(
             u"Money you and/or your partner pay towards your criminal legal "
             u"aid"))
-    childcare = MoneyIntervalField(
+    childcare = PartnerMoneyIntervalField(
         u'Childcare',
         description=(
             u"Money you and your partner pay for your child to be looked "
