@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 "Checker forms"
 
+import logging
+
+from flask import session
 from flask_wtf import Form
 from wtforms import IntegerField, StringField, TextAreaField
 from wtforms.validators import InputRequired, ValidationError, Optional
@@ -10,9 +13,62 @@ from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
 from cla_public.apps.checker.fields import DescriptionRadioField, \
     MoneyIntervalField, MultiCheckboxField, YesNoField
 
+log = logging.getLogger(__name__)
 
-class ProblemForm(Form):
+def set_form_session_key(field_name, data):
+    """Stores in the session a form's field name and its requisite
+    data."""
+    session[field_name] = data
+
+def get_form_session_key(field_name, default=None):
+    """Returns the data associated with field_name.
+
+    If default is not None, return this if the field_name does not
+    exist"""
+    try:
+        return session[field_name]
+    except KeyError:
+        if default is not None:
+            return default
+        else:
+            raise
+
+def unset_form_session_key(field_name):
+    """Removes a form's field name from the session"""
+    try:
+        del session[field_name]
+    except KeyError:
+        pass
+
+class MultiPageForm(Form):
+
+    def validate(self):
+        success = super(MultiPageForm, self).validate()
+
+        # If the validation succeeded, we need to store its validated
+        # field data against our session.
+        #
+        # Simultaneously, if the validation *failed*, we must clear
+        # out this form's fields from our session to avoid polluting
+        # the session with invalidated data.
+        form_name = self.__class__.__name__
+
+        for field_name, data in self.data.iteritems():
+            # We need the name of the form also as there is no
+            # guarantee of uniqueness for field names across forms.
+            key = '{0}_{1}'.format(form_name, field_name)
+            if success:
+                log.debug('Success: %s=%s', key, data)
+                set_form_session_key(key, data)
+            else:
+                log.debug('Failure: %s=%s', key, data)
+                unset_form_session_key(key)
+
+        return success
+
+class ProblemForm(MultiPageForm):
     """Area of law choice"""
+
     categories = DescriptionRadioField(
         u'What do you need help with?',
         choices=CATEGORIES,
@@ -20,7 +76,7 @@ class ProblemForm(Form):
         validators=[InputRequired()])
 
 
-class AboutYouForm(Form):
+class AboutYouForm(MultiPageForm):
     have_partner = YesNoField(u'Do you have a partner?',
         description=u"Your partner is your husband, wife, civil partner or someone you live with as if you’re married")
     in_dispute = YesNoField(u'Are you in a dispute with your partner?',
@@ -51,6 +107,7 @@ class AtLeastOne(object):
     :param message:
         Error message to raise in case of a validation error.
     """
+
     def __init__(self, message=None):
         self.message = message
 
@@ -62,12 +119,12 @@ class AtLeastOne(object):
             raise ValidationError(message)
 
 
-class YourBenefitsForm(Form):
+class YourBenefitsForm(MultiPageForm):
     benefits = MultiCheckboxField(choices=BENEFITS_CHOICES,
             validators=[AtLeastOne()])
 
 
-class PropertyForm(Form):
+class PropertyForm(MultiPageForm):
     is_main_home = YesNoField(u'Is this property your main home?',
         description=u"If you are separated and no longer live in the property you own, please answer ‘no’")
     other_shareholders = YesNoField(u'Does anyone else own a share of the property?',
@@ -83,14 +140,14 @@ class PropertyForm(Form):
         description=u"For example, as part of the financial settlement of a divorce")
 
 
-class SavingsForm(Form):
+class SavingsForm(MultiPageForm):
     savings = IntegerField(description=u"The total amount of savings in cash, bank or building society")
     investments = IntegerField(description=u"This includes stocks, shares, bonds (but not property)")
     valuables = IntegerField(u'Valuable items you and your partner own worth over £500 each',
         description=u"Total value of any items you own with some exceptions")
 
 
-class TaxCreditsForm(Form):
+class TaxCreditsForm(MultiPageForm):
     child_benefit = IntegerField(u'Child Benefit',
         description=u"The total amount you get for all your children")
     child_tax_credit = IntegerField(u'Child Tax Credit',
@@ -102,7 +159,7 @@ class TaxCreditsForm(Form):
     total_other_benefit = MoneyIntervalField('Total amount of benefits not listed above')
 
 
-class IncomeAndTaxForm(Form):
+class IncomeAndTaxForm(MultiPageForm):
     earnings = MoneyIntervalField(u'Wages before tax',
         description=u"This includes all your wages and any earnings from self-employment")
     income_tax = MoneyIntervalField(u'Income tax',
@@ -118,7 +175,7 @@ class IncomeAndTaxForm(Form):
         description=u"For example, student grants, income from trust funds, dividends")
 
 
-class OutgoingsForm(Form):
+class OutgoingsForm(MultiPageForm):
     rent = MoneyIntervalField(u'Rent',
         description=u"Money you and your partner pay your landlord")
     maintenance = MoneyIntervalField(u'Maintenance',
