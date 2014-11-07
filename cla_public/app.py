@@ -8,9 +8,10 @@ import sys
 import os
 import yaml
 from flask import Blueprint, Flask, url_for, render_template
-
+from flask_debugtoolbar import DebugToolbarExtension
 from cla_public.apps.base.views import base
 from cla_public.apps.checker.views import checker
+from cla_public.apps.checker.session import CheckerSessionInterface
 
 
 log = logging.getLogger(__name__)
@@ -22,7 +23,6 @@ CONFIG_FILE_ENV_NAME = 'CLA_PUBLIC_CONFIG'
 # Name of the environment variable that we determine the verbosity of
 # the logger.
 VERBOSE_LOGGING_ENV_NAME = 'CLA_PUBLIC_VERBOSE'
-
 
 def setup_logging(verbose=False):
     try:
@@ -117,6 +117,12 @@ def change_jinja_templates(app):
             sys.exit(1)
     return app
 
+def setup_debugtoolbar(app):
+    # Must appear *after* change_jinja_templates
+    app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+
+    DebugToolbarExtension(app)
+    return app
 
 def register_error_handlers(app):
     @app.errorhandler(404)
@@ -132,10 +138,12 @@ def register_error_handlers(app):
 
 def create_app(config_name='FLASK'):
     app = Flask(__name__)
+    app.session_interface = CheckerSessionInterface()
     app.register_blueprint(base)
     app.register_blueprint(checker)
     setup_logging(bool(os.environ.get(VERBOSE_LOGGING_ENV_NAME, False)))
     setup_config(app, config_name)
     app = change_jinja_templates(app)
     app = register_error_handlers(app)
+    app = setup_debugtoolbar(app)
     return app

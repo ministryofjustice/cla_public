@@ -1,12 +1,54 @@
 # -*- coding: utf-8 -*-
 "Custom form fields"
 
+import re
+
+from flask import session
 from wtforms import Form as NoCsrfForm
-from wtforms import FormField, IntegerField, RadioField, SelectField, \
+from wtforms import FormField, IntegerField, Label, RadioField, SelectField, \
     SelectMultipleField, widgets
 from wtforms.compat import text_type
 
-from cla_public.apps.checker.constants import MONEY_INTERVALS
+from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
+
+
+partner_regex = re.compile(r'(and\/or|and|or) your partner')
+
+
+class DynamicPartnerLabel(Label):
+
+    def __call__(self, text=None, **kwargs):
+        if not text:
+            text = self.text
+        if not session.has_partner and 'partner' in text:
+            text = re.sub(partner_regex, '', text)
+        return super(DynamicPartnerLabel, self).__call__(text, **kwargs)
+
+
+class PartnerMixin(object):
+
+    @property
+    def label(self):
+        if not hasattr(self, '_label'):
+            return None
+        return self._label
+
+    @label.setter
+    def label(self, value):
+        self._label = DynamicPartnerLabel(self.id, value.text)
+
+    @property
+    def description(self):
+        if not hasattr(self, '_description'):
+            return None
+        desc = self._description
+        if not session.has_partner and 'partner' in self._description:
+            desc = re.sub(partner_regex, '', desc)
+        return desc
+
+    @description.setter
+    def description(self, value):
+        self._description = value
 
 
 class DescriptionRadioField(RadioField):
@@ -41,7 +83,7 @@ class YesNoField(RadioField):
     """Yes/No radio button field"""
 
     def __init__(self, label=None, validators=None, **kwargs):
-        choices = [('1', 'Yes'), ('0', 'No')]
+        choices = [(YES, 'Yes'), (NO, 'No')]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=text_type,
             choices=choices, **kwargs)
@@ -59,7 +101,8 @@ class MoneyIntervalField(FormField):
     widget = widgets.ListWidget()
 
     def __init__(self, *args, **kwargs):
-        super(MoneyIntervalField, self).__init__(MoneyIntervalForm, *args, **kwargs)
+        super(MoneyIntervalField, self).__init__(
+            MoneyIntervalForm, *args, **kwargs)
 
 
 class MultiCheckboxField(SelectMultipleField):
@@ -71,3 +114,19 @@ class MultiCheckboxField(SelectMultipleField):
     """
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
+
+
+class PartnerMoneyIntervalField(MoneyIntervalField, PartnerMixin):
+    pass
+
+
+class PartnerIntegerField(IntegerField, PartnerMixin):
+    pass
+
+
+class PartnerYesNoField(YesNoField, PartnerMixin):
+    pass
+
+
+class PartnerMultiCheckboxField(MultiCheckboxField, PartnerMixin):
+    pass
