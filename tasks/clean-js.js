@@ -6,7 +6,5 @@ var del = require('del');
 
 gulp.task('clean-js', function(cb) {
   // Ensure the files are deleted before calling next task
-  del(paths.dest + 'javascripts', function() {
-    cb();
-  });
+  del(paths.dest + 'javascripts', cb);
 });
