@@ -2,6 +2,7 @@ from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
     PASSPORTED_BENEFITS, YES
+from cla_public.apps.checker.utils import passported
 
 
 class CheckerSession(SecureCookieSession):
@@ -25,8 +26,7 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def is_on_passported_benefits(self):
-        benefits = set(self.get('YourBenefitsForm_benefits', []))
-        return bool(benefits.intersection(PASSPORTED_BENEFITS))
+        return passported(self.get('YourBenefitsForm_benefits', []))
 
     @property
     def has_tax_credits(self):
