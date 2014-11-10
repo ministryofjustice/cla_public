@@ -100,11 +100,13 @@ class AboutYouForm(MultiPageForm):
     have_children = YesNoField(
         u'Do you have any children aged 15 or under?',
         description=u"Don’t include any children who don’t live with you")
-    num_children = IntegerField(u'How many?')
+    num_children = IntegerField(u'How many?',
+                                validators=[ZeroOrNoneValidator()])
     have_dependants = YesNoField(
         u'Do you have any dependants aged 16 or over?',
         description=u"People who you live with and support financially")
-    num_dependants = IntegerField(u'How many?')
+    num_dependants = IntegerField(u'How many?',
+                                  validators=[ZeroOrNoneValidator()])
     have_savings = YesNoField(
         u'Do you have any savings, investments or any valuable items?',
         description=(
@@ -161,16 +163,20 @@ class PropertyForm(MultiPageForm):
         description=u"Other than you and your partner")
     property_value = IntegerField(
         u'How much is the property worth?',
-        description=u"Use your own estimate")
+        description=u"Use your own estimate",
+        validators=[ZeroOrNoneValidator()])
     mortgage_remaining = IntegerField(
         u'How much is left to pay on the mortgage?',
         description=(
             u"Include the full amount you owe, even if the property has "
-            u"shared ownership"))
+            u"shared ownership"),
+        validators=[ZeroOrNoneValidator()])
     mortgage_payments = IntegerField(
-        u'How much are your monthly mortgage repayments?')
+        u'How much are your monthly mortgage repayments?',
+        validators=[ZeroOrNoneValidator()])
     is_rented = YesNoField(u'Does anyone pay you rent for this property?')
-    rent_amount = IntegerField(u'How much rent do they pay you?')
+    rent_amount = IntegerField(u'How much rent do they pay you?',
+                               validators=[ZeroOrNoneValidator()])
     in_dispute = YesNoField(
         u'Is your share of the property in dispute?',
         description=(
