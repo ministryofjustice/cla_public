@@ -13,7 +13,7 @@ from wtforms.compat import text_type
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 
 
-partner_regex = re.compile(r'(and\/or|and|or) your partner')
+partner_regex = re.compile(r'(and/or|and|or) your partner')
 
 
 class ZeroOrNoneValidator(object):
