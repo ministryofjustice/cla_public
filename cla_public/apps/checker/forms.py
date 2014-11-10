@@ -200,7 +200,8 @@ class SavingsForm(MultiPageForm):
         validators=[ZeroOrNoneValidator()])
     valuables = PartnerIntegerField(
         u'Valuable items you and your partner own worth over £500 each',
-        description=u"Total value of any items you own with some exceptions")
+        description=u"Total value of any items you own with some exceptions",
+        validators=[ZeroOrNoneValidator(min_val=500)])
 
     def __init__(self, *args, **kwargs):
         super(SavingsForm, self).__init__(*args, **kwargs)
