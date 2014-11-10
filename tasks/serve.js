@@ -19,4 +19,5 @@ gulp.task('serve', function() {
 
   gulp.watch(paths.templates, browserSync.reload);
   gulp.watch(paths.styles, ['sass']);
+  gulp.watch(paths.scripts, ['scripts']);
 });
