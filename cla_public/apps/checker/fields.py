@@ -137,7 +137,10 @@ class MoneyIntervalField(FormField):
     widget = widgets.ListWidget()
 
     def __init__(self, *args, **kwargs):
-        del kwargs['validators']
+        try:
+            del kwargs['validators']
+        except KeyError:
+            pass
         super(MoneyIntervalField, self).__init__(
             MoneyIntervalForm, *args, **kwargs)
 
