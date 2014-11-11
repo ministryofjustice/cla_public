@@ -35,5 +35,9 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{ url_for('static', filename='javascripts/cla.js') }}"></script>
+  <script src="{{ url_for('static', filename='javascripts/cla.js') }}"></script>
+
+  {% if config.DEBUG %}
+    <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
+  {% endif %}
 {% endblock %}

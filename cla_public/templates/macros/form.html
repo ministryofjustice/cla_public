@@ -134,12 +134,17 @@
     - prefix <@string> (optional) Adds label with specified string before the field
     - suffix <@string> (optional) Adds label with specified string after the field
 #}
-{% macro money_interval_field(field) %}
-  {% call form_group(field, title_as_label=field.amount.id) %}
-    <label class="input-prefix" for="{{field.amount.id}}">£</label>
-    {{ field.amount(class_='form-control') }}
-    {{ field.interval(class_='form-control') }}
-  {% endcall %}
+{% macro money_interval_field(field, is_hidden=False) %}
+  {% if is_hidden %}
+    <input type="hidden" name="{{ field.amount.name }}" value="0">
+    <input type="hidden" name="{{ field.interval.name }}" value="per_week">
+  {% else %}
+    {% call form_group(field, title_as_label=field.amount.id) %}
+      <label class="input-prefix" for="{{field.amount.id}}">£</label>
+      {{ field.amount(class_='form-control') }}
+      {{ field.interval(class_='form-control') }}
+    {% endcall %}
+  {% endif %}
 {% endmacro %}
 
 

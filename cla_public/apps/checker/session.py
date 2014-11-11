@@ -37,8 +37,22 @@ class CheckerSession(SecureCookieSession):
         return has_children or is_carer or other_benefits
 
     @property
+    def has_children(self):
+        return self.get('AboutYouForm_have_children', NO) == YES
+
+    @property
     def has_partner(self):
-        return self.get('AboutYouForm_have_partner', NO) == YES
+        partner = self.get('AboutYouForm_have_partner', NO) == YES
+        in_dispute = self.get('AboutYouForm_in_dispute', NO) == YES
+        return partner and not in_dispute
+
+    @property
+    def is_employed(self):
+        return self.get('AboutYouForm_is_employed', NO) == YES
+
+    @property
+    def is_self_employed(self):
+        return self.get('AboutYouForm_is_self_employed', NO) == YES
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):
