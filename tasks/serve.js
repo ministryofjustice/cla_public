@@ -18,6 +18,8 @@ gulp.task('serve', function() {
   });
 
   gulp.watch(paths.templates, browserSync.reload);
+  gulp.watch(paths.images, ['images']);
+  gulp.watch(paths.ie_styles, ['ie-css']);
   gulp.watch(paths.styles, ['sass']);
   gulp.watch(paths.scripts, ['scripts']);
 });
