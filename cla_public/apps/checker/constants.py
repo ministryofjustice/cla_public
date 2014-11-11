@@ -3,6 +3,10 @@
 CATEGORIES = [
     # value, label, inline help text
     (
+        'violence',
+        u'Abuse at home',
+        u'Domestic violence, child abuse, harassment by an ex-partner'),
+    (
         'clinneg',
         u'Clinical negligence',
         u'Doctors and nurses not treating you with due care'),
@@ -54,10 +58,6 @@ CATEGORIES = [
         'aap',
         u'Trouble with the police',
         u'Being treated unfairly by the police, wrongful arrest'),
-    (
-        'violence',
-        u'Violence or abuse at home',
-        u'Domestic violence, child abuse, harassment by an ex-partner'),
     (
         'benefits',
         u'Welfare benefits appeals',
