@@ -226,8 +226,7 @@ class IncomeAndTaxForm(MultiPageForm):
         description=(
             u"This includes all your wages and any earnings from "
             u"self-employment"),
-        validators=[ZeroOrNoneValidator()],
-        )
+        validators=[ZeroOrNoneValidator()])
     income_tax = MoneyIntervalField(
         u'Income tax',
         description=(
