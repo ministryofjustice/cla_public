@@ -3,7 +3,7 @@ import unittest
 from mock import MagicMock
 
 from flask import url_for, session
-from wtforms.validators import ValidationError
+from wtforms.validators import ValidationError, StopValidation
 from cla_public import app
 from cla_public.apps.checker.fields import ZeroOrNoneValidator
 
@@ -28,8 +28,9 @@ class TestMultiPageForm(unittest.TestCase):
         field.data = None
         v = ZeroOrNoneValidator(min_val=0, max_val=100)
         # Call validator. It will return None if the validator passed.
-        return_val = v(form, field)
-        self.assertIsNone(return_val)
+        with self.assertRaises(StopValidation):
+            return_val = v(form, field)
+            self.assertIsNone(return_val)
 
     def test_ZeroOrNoneValidator_has_min_value(self):
 
