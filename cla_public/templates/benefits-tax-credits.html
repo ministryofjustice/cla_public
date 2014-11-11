@@ -21,10 +21,8 @@
 
     {{ Form.handle_errors(form) }}
 
-    {% if session.has_children %}
-      {{ Form.money_interval_field(form.child_benefit) }}
-      {{ Form.money_interval_field(form.child_tax_credit) }}
-    {% endif %}
+    {{ Form.money_interval_field(form.child_benefit, not session.has_children) }}
+    {{ Form.money_interval_field(form.child_tax_credit, not session.has_children) }}
     {{ Form.check_list_field(form.benefits) }}
     {{ Form.yesno_field(form.other_benefits) }}
     {{ Form.money_interval_field(form.total_other_benefit) }}
