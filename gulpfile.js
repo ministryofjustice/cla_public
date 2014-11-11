@@ -7,7 +7,6 @@ var requireDir = require('require-dir');
 var dir = requireDir('./tasks');
 
 gulp.task('build', [
-    'ie-css',
     'minify-css',
     'minify-scripts',
     'images'
