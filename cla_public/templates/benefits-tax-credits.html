@@ -13,8 +13,8 @@
 
     {{ Form.handle_errors(form) }}
 
-    {{ Form.text_field(form.child_benefit, prefix="£") }}
-    {{ Form.text_field(form.child_tax_credit, prefix="£") }}
+    {{ Form.money_interval_field(form.child_benefit) }}
+    {{ Form.money_interval_field(form.child_tax_credit) }}
     {{ Form.check_list_field(form.benefits) }}
     {{ Form.yesno_field(form.other_benefits) }}
     {{ Form.money_interval_field(form.total_other_benefit) }}
