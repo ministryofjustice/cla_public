@@ -199,11 +199,11 @@ class SavingsForm(MultiPageForm):
 
 
 class TaxCreditsForm(MultiPageForm):
-    child_benefit = IntegerField(
+    child_benefit = MoneyIntervalField(
         u'Child Benefit',
         description=u"The total amount you get for all your children",
         validators=[ZeroOrNoneValidator()])
-    child_tax_credit = IntegerField(
+    child_tax_credit = MoneyIntervalField(
         u'Child Tax Credit',
         description=u"The total amount you get for all your children",
         validators=[ZeroOrNoneValidator()])
