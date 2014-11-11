@@ -111,7 +111,15 @@ NON_INCOME_BENEFITS = [
     ('widows-pension', 'Widow’s Pension lump sum payments'),
 ]
 
-F2F_CATEGORIES = ('clinneg', 'commcare')
+F2F_CATEGORIES = (
+    'clinneg',
+    'commcare',
+    'immigration',
+    'mentalhealth',
+    'pi',
+    'publiclaw',
+    'aap'
+)
 
 YES = '1'
 NO = '0'
