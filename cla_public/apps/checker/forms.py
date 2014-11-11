@@ -3,16 +3,20 @@
 
 import logging
 
+from functools import partial
 from flask import session
 from flask_wtf import Form
 from wtforms import IntegerField, StringField, TextAreaField
-from wtforms.validators import InputRequired, ValidationError
+from wtforms.validators import InputRequired, ValidationError, NumberRange
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
-from cla_public.apps.checker.fields import DescriptionRadioField, \
-    MoneyIntervalField, MultiCheckboxField, YesNoField, PartnerIntegerField, \
-    PartnerYesNoField, PartnerMoneyIntervalField, PartnerMultiCheckboxField
+from cla_public.apps.checker.fields import (
+    DescriptionRadioField, MoneyIntervalField, MultiCheckboxField,
+    YesNoField, PartnerIntegerField, PartnerYesNoField,
+    PartnerMoneyIntervalField, PartnerMultiCheckboxField,
+    ZeroOrNoneValidator,
+    )
 
 
 log = logging.getLogger(__name__)
@@ -77,9 +81,6 @@ class ProblemForm(MultiPageForm):
         coerce=unicode,
         validators=[InputRequired()])
 
-    def __init__(self, *args, **kwargs):
-        super(ProblemForm, self).__init__(*args, **kwargs)
-
 
 class AboutYouForm(MultiPageForm):
     have_partner = YesNoField(
@@ -99,11 +100,13 @@ class AboutYouForm(MultiPageForm):
     have_children = YesNoField(
         u'Do you have any children aged 15 or under?',
         description=u"Don’t include any children who don’t live with you")
-    num_children = IntegerField(u'How many?')
+    num_children = IntegerField(u'How many?',
+                                validators=[ZeroOrNoneValidator()])
     have_dependants = YesNoField(
         u'Do you have any dependants aged 16 or over?',
         description=u"People who you live with and support financially")
-    num_dependants = IntegerField(u'How many?')
+    num_dependants = IntegerField(u'How many?',
+                                  validators=[ZeroOrNoneValidator()])
     have_savings = YesNoField(
         u'Do you have any savings, investments or any valuable items?',
         description=(
@@ -122,9 +125,6 @@ class AboutYouForm(MultiPageForm):
             u"This means working for yourself - you may be both employed "
             u"and self-employed"))
     aged_60_or_over = YesNoField(u'Are you aged 60 or over?')
-
-    def __init__(self, *args, **kwargs):
-        super(AboutYouForm, self).__init__(*args, **kwargs)
 
 
 class AtLeastOne(object):
@@ -151,9 +151,6 @@ class YourBenefitsForm(MultiPageForm):
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
 
-    def __init__(self, *args, **kwargs):
-        super(YourBenefitsForm, self).__init__(*args, **kwargs)
-
 
 class PropertyForm(MultiPageForm):
     is_main_home = YesNoField(
@@ -166,46 +163,50 @@ class PropertyForm(MultiPageForm):
         description=u"Other than you and your partner")
     property_value = IntegerField(
         u'How much is the property worth?',
-        description=u"Use your own estimate")
+        description=u"Use your own estimate",
+        validators=[ZeroOrNoneValidator()])
     mortgage_remaining = IntegerField(
         u'How much is left to pay on the mortgage?',
         description=(
             u"Include the full amount you owe, even if the property has "
-            u"shared ownership"))
+            u"shared ownership"),
+        validators=[ZeroOrNoneValidator()])
     mortgage_payments = IntegerField(
-        u'How much are your monthly mortgage repayments?')
+        u'How much are your monthly mortgage repayments?',
+        validators=[ZeroOrNoneValidator()])
     is_rented = YesNoField(u'Does anyone pay you rent for this property?')
-    rent_amount = IntegerField(u'How much rent do they pay you?')
+    rent_amount = IntegerField(u'How much rent do they pay you?',
+                               validators=[ZeroOrNoneValidator()])
     in_dispute = YesNoField(
         u'Is your share of the property in dispute?',
         description=(
             u"For example, as part of the financial settlement of a divorce"))
 
-    def __init__(self, *args, **kwargs):
-        super(PropertyForm, self).__init__(*args, **kwargs)
-
 
 class SavingsForm(MultiPageForm):
     savings = IntegerField(
         description=(
-            u"The total amount of savings in cash, bank or building society"))
+            u"The total amount of savings in cash, bank or building society"),
+        validators=[ZeroOrNoneValidator()]
+        )
     investments = IntegerField(
-        description=u"This includes stocks, shares, bonds (but not property)")
+        description=u"This includes stocks, shares, bonds (but not property)",
+        validators=[ZeroOrNoneValidator()])
     valuables = PartnerIntegerField(
         u'Valuable items you and your partner own worth over £500 each',
-        description=u"Total value of any items you own with some exceptions")
-
-    def __init__(self, *args, **kwargs):
-        super(SavingsForm, self).__init__(*args, **kwargs)
+        description=u"Total value of any items you own with some exceptions",
+        validators=[ZeroOrNoneValidator(min_val=500)])
 
 
 class TaxCreditsForm(MultiPageForm):
     child_benefit = IntegerField(
         u'Child Benefit',
-        description=u"The total amount you get for all your children")
+        description=u"The total amount you get for all your children",
+        validators=[ZeroOrNoneValidator()])
     child_tax_credit = IntegerField(
         u'Child Tax Credit',
-        description=u"The total amount you get for all your children")
+        description=u"The total amount you get for all your children",
+        validators=[ZeroOrNoneValidator()])
     benefits = PartnerMultiCheckboxField(
         u'Do you or your partner get any of these benefits?',
         description=(
@@ -215,10 +216,8 @@ class TaxCreditsForm(MultiPageForm):
     other_benefits = PartnerYesNoField(
         u'Do you or your partner receive any other benefits not listed above?')
     total_other_benefit = MoneyIntervalField(
-        u'Total amount of benefits not listed above')
-
-    def __init__(self, *args, **kwargs):
-        super(TaxCreditsForm, self).__init__(*args, **kwargs)
+        u'Total amount of benefits not listed above',
+        validators=[ZeroOrNoneValidator()])
 
 
 class IncomeAndTaxForm(MultiPageForm):
@@ -226,32 +225,37 @@ class IncomeAndTaxForm(MultiPageForm):
         u'Wages before tax',
         description=(
             u"This includes all your wages and any earnings from "
-            u"self-employment"))
+            u"self-employment"),
+        validators=[ZeroOrNoneValidator()],
+        )
     income_tax = MoneyIntervalField(
         u'Income tax',
         description=(
             u"Tax paid directly out of your wages and any tax you pay on "
-            u"self-employed earnings"))
+            u"self-employed earnings"),
+        validators=[ZeroOrNoneValidator()])
     national_insurance = MoneyIntervalField(
         u'National Insurance contributions',
         description=(
             u"Check your payslip or your National Insurance statement if "
-            u"you’re self-employed"))
-    working_tax_credit = MoneyIntervalField(u'Working Tax Credit')
+            u"you’re self-employed"),
+        validators=[ZeroOrNoneValidator()])
+    working_tax_credit = MoneyIntervalField(u'Working Tax Credit',
+                                            validators=[ZeroOrNoneValidator()])
     maintenance = MoneyIntervalField(
         u'Maintenance received',
-        description=u"Payments you get from an ex-partner")
+        description=u"Payments you get from an ex-partner",
+        validators=[ZeroOrNoneValidator()])
     pension = MoneyIntervalField(
         u'Pension received',
-        description=u"Payments you receive if you’re retired")
+        description=u"Payments you receive if you’re retired",
+        validators=[ZeroOrNoneValidator()])
     other_income = MoneyIntervalField(
         u'Any other income',
         description=(
             u"For example, student grants, income from trust funds, "
-            u"dividends"))
-
-    def __init__(self, *args, **kwargs):
-        super(IncomeAndTaxForm, self).__init__(*args, **kwargs)
+            u"dividends"),
+        validators=[ZeroOrNoneValidator()])
 
 
 class OutgoingsForm(MultiPageForm):
@@ -273,9 +277,6 @@ class OutgoingsForm(MultiPageForm):
         description=(
             u"Money you and your partner pay for your child to be looked "
             u"after while you work or study"))
-
-    def __init__(self, *args, **kwargs):
-        super(OutgoingsForm, self).__init__(*args, **kwargs)
 
 
 class ApplicationForm(Form):
