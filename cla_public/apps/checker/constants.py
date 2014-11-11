@@ -87,10 +87,10 @@ PASSPORTED_BENEFITS = [benefit for benefit, _ in BENEFITS_CHOICES[0:-1]]
 NASS_BENEFITS = ('asylum-support',)
 
 MONEY_INTERVALS = [
-    ('per week', 'per week'),
-    ('4 weekly', '4 weekly'),
-    ('per month', 'per month'),
-    ('per year', 'per year')
+    ('per_week', 'per week'),
+    ('4_weekly', '4 weekly'),
+    ('per_month', 'per month'),
+    ('per_year', 'per year')
 ]
 
 NON_INCOME_BENEFITS = [

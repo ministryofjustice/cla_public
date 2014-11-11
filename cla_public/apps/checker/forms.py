@@ -19,6 +19,17 @@ from cla_public.apps.checker.utils import nass, passported
 log = logging.getLogger(__name__)
 
 
+def money_interval(amount, interval='per_week'):
+    return {
+        'per_interval_value': amount,
+        'interval_period': interval
+    }
+
+
+def to_money_interval(data):
+    return money_interval(data['amount'], data['interval'])
+
+
 class Struct(object):
 
     def __init__(self, **entries):
@@ -134,8 +145,8 @@ class AboutYouForm(MultiPageForm):
 
     def api_payload(self):
         return {
-            'dependants_young': self.num_children.data,
-            'dependants_old': self.num_dependants.data,
+            'dependants_young': self.num_children.data or 0,
+            'dependants_old': self.num_dependants.data or 0,
             'is_you_or_your_partner_over_60': self.aged_60_or_over.data,
             'has_partner': self.have_partner.data,
             'you': {'income': {
@@ -251,9 +262,9 @@ class TaxCreditsForm(MultiPageForm):
 
     def api_payload(self):
         return {'you': {'income': {
-            'child_benefits': self.child_benefit.data,
-            'tax_credits': self.child_tax_credit.data,
-            'benefits': self.total_other_benefit.data
+            'child_benefits': money_interval(self.child_benefit.data),
+            'tax_credits': money_interval(self.child_tax_credit.data),
+            'benefits': to_money_interval(self.total_other_benefit.data)
         }}}
 
 
@@ -293,15 +304,15 @@ class IncomeAndTaxForm(MultiPageForm):
         return {
             'you': {
                 'income': {
-                    'earnings': self.earnings.data,
-                    'tax_credits': self.working_tax_credit.data,  # TODO - total
-                    'maintenance_received': self.maintenance.data,
-                    'pension': self.pension.data,
-                    'other_income': self.other_income.data
+                    'earnings': to_money_interval(self.earnings.data),
+                    'tax_credits': to_money_interval(self.working_tax_credit.data),  # TODO - total
+                    'maintenance_received': to_money_interval(self.maintenance.data),
+                    'pension': to_money_interval(self.pension.data),
+                    'other_income': to_money_interval(self.other_income.data)
                 },
                 'deductions': {
-                    'income_tax': self.income_tax.data,
-                    'national_insurance': self.national_insurance.data,
+                    'income_tax': to_money_interval(self.income_tax.data),
+                    'national_insurance': to_money_interval(self.national_insurance.data),
                 }
             }
         }
@@ -332,10 +343,10 @@ class OutgoingsForm(MultiPageForm):
 
     def api_payload(self):
         return {'you': {'deductions': {
-            'rent': self.rent.data,
-            'maintenance': self.maintenance.data,
-            'criminal_legalaid_contributions': self.income_contribution.data,
-            'childcare': self.childcare.data
+            'rent': to_money_interval(self.rent.data),
+            'maintenance': to_money_interval(self.maintenance.data),
+            'criminal_legalaid_contributions': self.income_contribution.data['amount'],
+            'childcare': to_money_interval(self.childcare.data)
         }}}
 
 
