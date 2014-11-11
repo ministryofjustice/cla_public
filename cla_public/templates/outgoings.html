@@ -21,9 +21,7 @@
     {{ Form.money_interval_field(form.rent) }}
     {{ Form.money_interval_field(form.maintenance) }}
     {{ Form.money_interval_field(form.income_contribution) }}
-    {% if session.has_child %}
-      {{ Form.money_interval_field(form.childcare) }}
-    {% endif %}
+    {{ Form.money_interval_field(form.childcare, not session.has_children) }}
 
     {{ Form.actions('Submit') }}
   </form>
