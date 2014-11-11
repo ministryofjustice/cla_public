@@ -75,7 +75,7 @@ RESULT_OPTIONS = [
 "Benefits"
 BENEFITS_CHOICES = [
     ('income-support', u'Income Support'),
-    ('jobseekers-allowance', u'Income-based Jobseeker\'s Allowance'),
+    ('jobseekers-allowance', u'Income-based Jobseeker’s Allowance'),
     ('guarantee-credit', u'Guarantee Credit'),
     ('universal-credit', u'Universal Credit'),
     ('employment-support', u'Income-related Employment and Support Allowance'),
@@ -95,7 +95,7 @@ MONEY_INTERVALS = [
 NON_INCOME_BENEFITS = [
     ('attendance', 'Attendance Allowance'),
     ('care-community', 'Care in the community Direct Payment'),
-    ('carers', 'Carers\' Allowance'),
+    ('carers', 'Carers’ Allowance'),
     ('constant-attendance', 'Constant Attendance Allowance'),
     ('ctax-benefits', 'Council Tax Benefits'),
     ('disability-living', 'Disability Living Allowance'),
@@ -108,7 +108,7 @@ NON_INCOME_BENEFITS = [
     ('severe-disablement', 'Severe Disablement Allowance'),
     ('social-fund', 'Social Fund Payments'),
     ('war-pension', 'War Pension'),
-    ('widows-pension', 'Widow\'s Pension lump sum payments'),
+    ('widows-pension', 'Widow’s Pension lump sum payments'),
 ]
 
 F2F_CATEGORIES = ('clinneg', 'commcare')
