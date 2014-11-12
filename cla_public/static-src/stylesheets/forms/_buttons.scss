@@ -1,5 +1,15 @@
-.button {
-  padding: 0.52632em 0.78947em 0.26316em;
+.button-large {
+  padding: .5em .8em .3em;
+}
+
+.button-larger {
+  font-size: 1.1em;
+  padding: .6em .9em .4em;
+  font-weight: bold;
+}
+
+.button-small {
+  font-size: .8em;
 }
 
 .button-get-started {
