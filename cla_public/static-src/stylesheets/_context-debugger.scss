@@ -30,6 +30,13 @@
     cursor: pointer;
     height: 22px;
     line-height: 20px;
+
+    &:active {
+      background: $grey-2;
+      border-color: rgba($black, .4);
+      color: inherit;
+      box-shadow: inset 0 0 2px rgba($black, .3);
+    }
   }
 
   menu {
