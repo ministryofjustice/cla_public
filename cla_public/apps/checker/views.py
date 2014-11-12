@@ -92,7 +92,6 @@ def property(user):
     if user.has_savings:
         next_step = 'savings'
 
-    import nose; nose.tools.set_trace() ## DEBUG ##
     return proceed(next_step)
 
 
