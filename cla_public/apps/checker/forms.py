@@ -6,7 +6,7 @@ import logging
 from functools import partial
 from flask import session
 from flask_wtf import Form
-from wtforms import IntegerField, StringField, TextAreaField
+from wtforms import IntegerField, StringField, TextAreaField, FieldList, FormField
 from wtforms.validators import InputRequired, ValidationError, NumberRange
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
@@ -15,7 +15,7 @@ from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField, MultiCheckboxField,
     YesNoField, PartnerIntegerField, PartnerYesNoField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField,
-    ZeroOrNoneValidator,
+    ZeroOrNoneValidator, AdditionalPropertyForm,
     )
 
 
@@ -182,6 +182,8 @@ class PropertyForm(MultiPageForm):
         description=(
             u"For example, as part of the financial settlement of a divorce"))
 
+    additional_properties = FieldList(FormField(AdditionalPropertyForm),
+                                      max_entries=3)
 
 class SavingsForm(MultiPageForm):
     savings = IntegerField(

@@ -21,7 +21,7 @@
   <form method="POST" action="{{ url_for('.property') }}">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
-
+    <h2>Main Property</h2>
     {{ Form.yesno_field(form.is_main_home) }}
     {{ Form.yesno_field(form.other_shareholders) }}
     {{ Form.text_field(form.property_value, prefix="£") }}
@@ -30,7 +30,13 @@
     {{ Form.yesno_field(form.is_rented) }}
     {{ Form.text_field(form.rent_amount, prefix="£") }}
     {{ Form.yesno_field(form.in_dispute) }}
-
+    <button type="submit" name="add-property">Add Additional Property</button>
+    {% for additional_property in form.additional_properties %}
+      <h2>Property {{ loop.index }}</h2>
+      {% for prop in additional_property %}
+        {{ Form.text_field(prop, prefix="£") }}
+      {% endfor %}
+    {% endfor %}
     {{ Form.actions('Continue') }}
   </form>
 {% endblock %}
