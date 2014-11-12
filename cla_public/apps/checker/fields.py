@@ -181,3 +181,20 @@ class PartnerYesNoField(YesNoField, PartnerMixin):
 
 class PartnerMultiCheckboxField(MultiCheckboxField, PartnerMixin):
     pass
+
+
+class AdditionalPropertyForm(NoCsrfForm):
+
+    property_value = IntegerField(
+        u'How much is the property worth?',
+        description=u"Use your own estimate",
+        validators=[ZeroOrNoneValidator()])
+    mortgage_remaining = IntegerField(
+        u'How much is left to pay on the mortgage?',
+        description=(
+            u"Include the full amount you owe, even if the property has "
+            u"shared ownership"),
+        validators=[ZeroOrNoneValidator()])
+    mortgage_payments = IntegerField(
+        u'How much are your monthly mortgage repayments?',
+        validators=[ZeroOrNoneValidator()])
