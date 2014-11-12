@@ -1,3 +1,20 @@
+fieldset {
+  margin: 20px 0;
+
+  header {
+    @extend %contain-floats;
+    margin: 0 0 10px;
+
+    h3 {
+      float: left;
+    }
+
+    button {
+      float: right;
+    }
+  }
+}
+
 .form-group {
   margin: 2px 0;
   background: $grey-4;
