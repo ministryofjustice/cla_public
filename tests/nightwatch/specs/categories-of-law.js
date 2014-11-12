@@ -1,12 +1,41 @@
 'use strict';
 
-var FAIL = {
-  categories: [0, 1, 7, 8, 9, 10, 11],
+var _ = require('lodash');
+var util = require('util');
+
+var CATEGORIES_OF_LAW = [
+  'clinneg',
+  'commcare',
+  'debt',
+  'discrimination',
+  'education',
+  'family',
+  'housing',
+  'immigration',
+  'mentalhealth',
+  'pi',
+  'publiclaw',
+  'aap',
+  'violence',
+  'benefits'
+];
+
+var NOT_COVERED = {
+  categories: [
+    'clinneg',
+    'commcare',
+    'immigration',
+    'mentalhealth',
+    'pi',
+    'publiclaw',
+    'aap'
+  ],
   url: '/face-to-face',
   headline: 'We can’t help you with your problem'
 };
-var PASS = {
-  categories: [2, 3, 4, 5, 6, 12, 13],
+
+var COVERED = {
+  categories: _.difference(CATEGORIES_OF_LAW, NOT_COVERED.categories),
   url: '/about',
   headline: 'About you'
 };
@@ -30,24 +59,28 @@ module.exports = {
   },
 
   'Select failure categories': function(client) {
-    FAIL.categories.forEach(function(item) {
+    NOT_COVERED.categories.forEach(function(item) {
       client
-        .click('#categories-' + item)
+        .click(util.format('input[name="categories"][value="%s"]', item))
         .submitForm('form')
-        .verify.urlContains(FAIL.url)
-        .verify.containsText('h1', FAIL.headline)
+        .verify.urlContains(NOT_COVERED.url,
+          util.format('Goes to %s when ‘%s’ is selected', NOT_COVERED.url, item)
+        )
+        .verify.containsText('h1', NOT_COVERED.headline)
         .back()
       ;
     });
   },
 
   'Select success categories': function(client) {
-    PASS.categories.forEach(function(item) {
+    COVERED.categories.forEach(function(item) {
       client
-        .click('#categories-' + item)
+        .click(util.format('input[name="categories"][value="%s"]', item))
         .submitForm('form')
-        .verify.urlContains(PASS.url)
-        .verify.containsText('h1', PASS.headline)
+        .verify.urlContains(COVERED.url,
+          util.format('Goes to %s when ‘%s’ is selected', COVERED.url, item)
+        )
+        .verify.containsText('h1', COVERED.headline)
         .back()
       ;
     });
