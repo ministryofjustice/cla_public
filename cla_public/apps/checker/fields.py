@@ -99,9 +99,12 @@ class DescriptionRadioField(RadioField):
     """
 
     def __init__(self, *args, **kwargs):
+        self.field_names = []
+        self.help_texts = []
         self.descriptions = []
         choices = []
         for name, label, description in kwargs.get('choices', []):
+            self.field_names.append(name)
             self.descriptions.append(description)
             choices.append((name, label))
         if choices:
@@ -112,7 +115,15 @@ class DescriptionRadioField(RadioField):
         options = super(DescriptionRadioField, self).__iter__()
         for index, option in enumerate(options):
             option.description = self.descriptions[index]
+            option.field_name = self.field_names[index]
+            try:
+                option.help_text = self.help_texts[index]
+            except IndexError:
+                option.help_text = None
             yield option
+
+    def add_help_texts(self, help_texts):
+        self.help_texts = help_texts
 
 
 class YesNoField(RadioField):

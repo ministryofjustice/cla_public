@@ -1,0 +1,19 @@
+forms:
+  AboutYouForm:
+    fields:
+
+      have_children:
+        help_text: Young people aged 16 or over who live with you and who you support financially should be included in the next question under “Do you have any dependants aged 16 or over?”
+
+      have_dependants:
+        help_text: This could be a young person for whom you get Child Benefit
+
+      have_savings:
+        help_text: |
+          Don’t include the following:
+
+          - household furniture and effects, unless they’re exceptionally valuable
+          - tools of your trade (for example, computers for a graphic designer, carpentry tools for a carpenter)
+          - the car or vehicle you use regularly, unless it’s a classic car or luxury vehicle
+
+          Give the item’s current value - what the item would sell for if you sold it today.

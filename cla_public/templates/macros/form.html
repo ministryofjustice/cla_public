@@ -30,6 +30,12 @@
             {{- field.description -}}
           </div>
         {%- endif -%}
+        {%- if field.help_text -%}
+          <a>more info</a>
+          <div class="field-help-text">
+            {{- field.help_text|safe -}}
+          </div>
+        {%- endif -%}
       </dt>
     {% endif %}
     <dd class="form-row">
@@ -53,6 +59,12 @@
       {% if field.description %}
         <div class="field-help">
           {{field.description|safe}}
+        </div>
+      {% endif %}
+      {% if field.help_text %}
+        <a>more info</a>
+        <div class="field-help-text">
+          {{field.help_text|safe}}
         </div>
       {% endif %}
     </label>
