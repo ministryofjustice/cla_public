@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 
-from flask import abort, render_template, redirect, session, url_for
+from flask import abort, render_template, redirect, request, session, url_for
 
 import logging
 
@@ -77,7 +77,14 @@ def benefits(user):
 @checker.route('/property', methods=['GET', 'POST'])
 @form_view(PropertyForm, 'property.html')
 def property(user):
-
+    # This is the only way to detect if the add-property button was
+    # clicked.
+    if 'add-property' in request.form:
+        form = PropertyForm(request.form)
+        if len(form.additional_properties.entries) < \
+                form.additional_properties.max_entries:
+            form.additional_properties.append_entry()
+        return render_template('property.html', form=form)
     next_step = 'income'
 
     if user.has_tax_credits:

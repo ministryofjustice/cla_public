@@ -7,7 +7,7 @@ from functools import partial
 from flask import session
 from flask_wtf import Form
 from wtforms import BooleanField, IntegerField, SelectField, StringField, \
-    TextAreaField
+    TextAreaField, FieldList, FormField
 from wtforms.validators import InputRequired, ValidationError, NumberRange
 
 from cla_common.constants import ADAPTATION_LANGUAGES, CONTACT_SAFETY
@@ -19,7 +19,7 @@ from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField, MultiCheckboxField,
     YesNoField, PartnerIntegerField, PartnerYesNoField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField,
-    ZeroOrNoneValidator,
+    ZeroOrNoneValidator, AdditionalPropertyForm,
     )
 
 
@@ -210,6 +210,9 @@ class PropertyForm(MultiPageForm):
         u'Is your share of the property in dispute?',
         description=(
             u"For example, as part of the financial settlement of a divorce"))
+
+    additional_properties = FieldList(FormField(AdditionalPropertyForm),
+                                      max_entries=3)
 
     def api_payload(self):
         return {
