@@ -214,6 +214,14 @@ class PropertyForm(MultiPageForm):
     def __init__(self, *args, **kwargs):
         super(PropertyForm, self).__init__(*args, **kwargs)
 
+    def api_payload(self):
+        return {
+            'value': self.property_value.data,
+            'mortgage_left': self.mortgage_remaining.data,
+            'disputed': self.in_dispute.data,
+            'main': self.is_main_home.data
+        }
+
 
 class SavingsForm(MultiPageForm):
     savings = IntegerField(
