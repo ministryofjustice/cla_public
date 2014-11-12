@@ -11,6 +11,7 @@ from wtforms.validators import InputRequired, ValidationError
 
 from cla_common.constants import ADAPTATION_LANGUAGES, CONTACT_SAFETY
 
+from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
 from cla_public.apps.checker.fields import DescriptionRadioField, \
@@ -20,13 +21,6 @@ from cla_public.apps.checker.utils import nass, passported
 
 
 log = logging.getLogger(__name__)
-
-
-def money_interval(amount, interval='per_week'):
-    return {
-        'per_interval_value': amount,
-        'interval_period': interval
-    }
 
 
 def to_money_interval(data):

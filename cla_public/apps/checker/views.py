@@ -6,8 +6,9 @@ from flask import abort, render_template, redirect, session, url_for
 import logging
 
 from cla_public.apps.checker import checker
+from cla_public.apps.checker.api import post_to_case_api
 from cla_public.apps.checker.constants import RESULT_OPTIONS
-from cla_public.apps.checker.decorators import form_view, post_to_case_api
+from cla_public.apps.checker.decorators import form_view
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertyForm, SavingsForm, TaxCreditsForm, IncomeAndTaxForm, \
     OutgoingsForm, ApplicationForm
