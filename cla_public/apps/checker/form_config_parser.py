@@ -14,7 +14,7 @@ class FormConfigParser(object):
     Loads help text in to DescriptionRadioField fields
     """
     _markdown_fields = [
-        'help_text'
+        'more_info'
     ]
 
     def __init__(self, form_name, config_path=None):
@@ -33,10 +33,9 @@ class FormConfigParser(object):
 
         if form_name in config_data['forms']:
             self.form_config = config_data['forms'][form_name]
-            if 'fields' in self.form_config:
-                # Convert markdown fields to markdown
-                for field_name, field_config in self.form_config['fields'].iteritems():
-                    self.fields[field_name] = self.values_to_markdown(field_config)
+            # Convert markdown fields to markdown
+            for field_name, field_config in self.form_config.get('fields').iteritems():
+                self.fields[field_name] = self.values_to_markdown(field_config)
 
     def values_to_markdown(self, field_config):
         """
@@ -60,22 +59,22 @@ class FormConfigParser(object):
 
             field_config = self.fields[field_name]
 
-            if field and hasattr(field, 'add_help_texts'):
+            if field and hasattr(field, 'add_more_infos'):
                 # Add help text to individual radios in DescriptionRadioField fields
-                help_texts = []
+                more_infos = []
 
                 field_options = field_config.get('field_options', {})
                 for radio_field in field:
 
                     radio_field_config = field_options.get(radio_field.field_name, {})
 
-                    help_text = radio_field_config.get('help_text', None)
-                    if help_text:
-                        help_texts.append(markdown2.markdown(help_text))
+                    more_info = radio_field_config.get('more_info', None)
+                    if more_info:
+                        more_infos.append(markdown2.markdown(more_info))
                     else:
-                        help_texts.append(None)
+                        more_infos.append(None)
 
-                field.add_help_texts(help_texts)
+                field.add_more_infos(more_infos)
 
             return field_config
 

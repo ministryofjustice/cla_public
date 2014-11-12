@@ -3,15 +3,15 @@ forms:
     fields:
 
       have_children:
-        help_text: >
+        more_info: >
           Young people aged 16 or over who live with you and who you support financially should
           be included in the next question under “Do you have any dependants aged 16 or over?”
 
       have_dependants:
-        help_text: This could be a young person for whom you get Child Benefit
+        more_info: This could be a young person for whom you get Child Benefit
 
       have_savings:
-        help_text: |
+        more_info: |
           Don’t include the following:
 
           - household furniture and effects, unless they’re exceptionally valuable
@@ -23,7 +23,7 @@ forms:
   PropertyForm:
     fields:
       in_dispute:
-        help_text: >
+        more_info: >
           A disputed property is one whose ownership is disputed by someone eg an ex-partner wants
           to claim a share in it as part of a divorce or separation, or a creditor or mortgage
           company wants to force the sale of it to repay a debt.
@@ -31,7 +31,7 @@ forms:
   SavingsForm:
     fields:
       valuables:
-        help_text: |
+        more_info: |
           Don’t include the following:
 
           - household furniture and effects, unless they’re exceptionally valuable

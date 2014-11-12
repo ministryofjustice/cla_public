@@ -3,10 +3,10 @@ forms:
     fields:
 
       text_field:
-        help_text: Test text."'][;df;lgds'fl''das
+        more_info: Test text."'][;df;lgds'fl''das
 
       markdown_field:
-        help_text: |
+        more_info: |
           Heading for Debt Markdown
           =========================
 
@@ -22,10 +22,10 @@ forms:
         field_options:
 
           text_field:
-            help_text: Test text."'][;df;lgds'fl''das
+            more_info: Test text."'][;df;lgds'fl''das
 
           markdown_field:
-            help_text: |
+            more_info: |
               Heading for Debt Markdown
               =========================
 

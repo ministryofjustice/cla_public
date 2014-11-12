@@ -30,11 +30,11 @@ class Struct(object):
         self.__dict__.update(entries)
 
 
-class ConfigForm(Form):
+class ConfigFormMixin(object):
     def __init__(self, *args, **kwargs):
         config_path = kwargs.pop('config_path', None)
 
-        super(ConfigForm, self).__init__(*args, **kwargs)
+        super(ConfigFormMixin, self).__init__(*args, **kwargs)
 
         self.config_data = FormConfigParser(self.__class__.__name__,
                                             config_path=config_path)
@@ -46,7 +46,7 @@ class ConfigForm(Form):
                 setattr(field, attribute, value)
 
 
-class MultiPageForm(ConfigForm):
+class MultiPageForm(ConfigFormMixin, Form):
     """Stores validated form data in the session"""
 
     def __init__(self, formdata=None, obj=None, prefix='',
