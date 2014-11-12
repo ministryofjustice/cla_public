@@ -9,7 +9,7 @@ from wtforms import BooleanField, IntegerField, SelectField, StringField, \
     TextAreaField
 from wtforms.validators import InputRequired, ValidationError
 
-from cla_common.constants import ADAPTATION_LANGUAGES
+from cla_common.constants import ADAPTATION_LANGUAGES, CONTACT_SAFETY
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
@@ -364,6 +364,7 @@ class ApplicationForm(Form):
     contact_number = StringField(
         u'Contact phone number',
         validators=[InputRequired()])
+    safe_to_contact = SelectField(u'Safe to contact', choices=CONTACT_SAFETY)
     post_code = StringField(u'Postcode')
     address = TextAreaField(u'Address')
     extra_notes = TextAreaField(

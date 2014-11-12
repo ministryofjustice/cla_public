@@ -24,10 +24,16 @@
 
     {{ Form.text_field(form.title) }}
     {{ Form.text_field(form.full_name) }}
-    {{ Form.text_field(form.contact_number) }}
+    {{ Form.text_field(form.contact_number) }} {{ form.safe_to_contact }}
     {{ Form.text_field(form.post_code) }}
     {{ Form.textarea_field(form.address) }}
     {{ Form.textarea_field(form.extra_notes) }}
+
+    {{ form.bsl_webcam }}
+    {{ form.minicom }}
+    {{ form.text_relay }}
+    {{ form.welsh }}
+    {{ form.language }}
 
     {% call Element.alert() %}
       <h3>What happens next</h3>

@@ -7,7 +7,7 @@ import logging
 
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.constants import RESULT_OPTIONS
-from cla_public.apps.checker.decorators import form_view, get_api_connection
+from cla_public.apps.checker.decorators import form_view, post_to_case_api
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertyForm, SavingsForm, TaxCreditsForm, IncomeAndTaxForm, \
     OutgoingsForm, ApplicationForm
@@ -125,18 +125,10 @@ def result(outcome):
     if outcome not in valid_outcomes:
         abort(404)
 
-    reference = session.get('eligibility_check')
-    is_eligible = 'unknown'
-    if reference is not None:
-        api = get_api_connection()
-        import json
-        session['means_test'] = json.dumps(api.eligibility_check(reference).get())
-        response = api.eligibility_check(reference).is_eligible().post()
-        is_eligible = response['is_eligible']
-
     form = ApplicationForm()
     if form.validate_on_submit():
+        post_to_case_api(form)
         return redirect(url_for('.result', outcome='confirmation'))
 
     return render_template(
-        'result/%s.html' % outcome, form=form, is_eligible=is_eligible)
+        'result/%s.html' % outcome, form=form)

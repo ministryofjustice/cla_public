@@ -68,7 +68,7 @@ def initialise_eligibility_check(check):
     return check
 
 
-def post_to_backend(form):
+def post_to_eligibility_check_api(form):
     backend = get_api_connection()
     reference = session.get('eligibility_check')
     payload = form.api_payload()
@@ -79,6 +79,16 @@ def post_to_backend(form):
         session['eligibility_check'] = response['reference']
     else:
         backend.eligibility_check(reference).patch(payload)
+
+
+def post_to_case_api(form):
+    backend = get_api_connection()
+    reference = session.get('eligibility_check')
+    payload = form.api_payload()
+
+    payload['eligibility_check'] = reference
+    response = backend.case.post(payload)
+    session['case_ref'] = response['reference']
 
 
 def form_view(form_class, form_template):
@@ -94,7 +104,7 @@ def form_view(form_class, form_template):
 
             form = form_class(request.form, session)
             if form.validate_on_submit():
-                post_to_backend(form)
+                post_to_eligibility_check_api(form)
                 return fn(session)
 
             return render_template(form_template, form=form)
