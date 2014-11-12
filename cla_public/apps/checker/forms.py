@@ -215,12 +215,21 @@ class PropertyForm(MultiPageForm):
                                       max_entries=3)
 
     def api_payload(self):
-        return {
-            'value': self.property_value.data,
-            'mortgage_left': self.mortgage_remaining.data,
-            'disputed': self.in_dispute.data,
-            'main': self.is_main_home.data
-        }
+        payload = {'property_set': [
+            {
+                'value': self.property_value.data,
+                'mortgage_left': self.mortgage_remaining.data,
+                'disputed': self.in_dispute.data,
+                'main': self.is_main_home.data
+            }
+        ]}
+        for prop in self.additional_properties:
+            payload['property_set'].append({
+                'value': prop.form.property_value.data,
+                'mortgage_left': prop.form.mortgage_remaining.data
+            })
+        return payload
+
 
 
 class SavingsForm(MultiPageForm):
