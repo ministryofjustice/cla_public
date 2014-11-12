@@ -5,8 +5,11 @@ import logging
 
 from flask import session
 from flask_wtf import Form
-from wtforms import IntegerField, StringField, TextAreaField
+from wtforms import BooleanField, IntegerField, SelectField, StringField, \
+    TextAreaField
 from wtforms.validators import InputRequired, ValidationError
+
+from cla_common.constants import ADAPTATION_LANGUAGES
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
@@ -369,3 +372,28 @@ class ApplicationForm(Form):
             u"In your own words, please tell us exactly what your problem is "
             u"about. The Civil Legal Advice operator will read this before "
             u"they call you."))
+    bsl_webcam = BooleanField(u'BSL - Webcam')
+    minicom = BooleanField(u'Minicom')
+    text_relay = BooleanField(u'Text Relay')
+    welsh = BooleanField(u'Welsh')
+    language = SelectField(
+        u'Language',
+        choices=([('', u'Choose a language')] + ADAPTATION_LANGUAGES))
+
+    def api_payload(self):
+        return {
+            'personal_details': {
+                'title': self.title.data,
+                'full_name': self.full_name.data,
+                'postcode': self.post_code.data,
+                'mobile_phone': self.contact_number.data,
+                'street': self.address.data,
+                'safe_to_contact': self.safe_to_contact.data
+            },
+            'adaptation_details': {
+                'bsl_webcam': self.bsl_webcam.data,
+                'minicom': self.minicom.data,
+                'text_relay': self.text_relay.data,
+                'language': self.welsh.data and 'WELSH' or self.language.data
+            }
+        }
