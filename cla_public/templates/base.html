@@ -4,6 +4,15 @@
 
 {% block stylesheets %}
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/main.css') }}">
+  <!--[if IE 6]>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/ie/ie6.css') }}">
+  <![endif]-->
+  <!--[if IE 7]>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/ie/ie7.css') }}">
+  <![endif]-->
+  <!--[if IE 8]>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/ie/ie8.css') }}">
+  <![endif]-->
 {% endblock %}
 
 {% block content %}
@@ -23,4 +32,12 @@
 
     {% block inner_content %}{% endblock %}
   </article>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ url_for('static', filename='javascripts/cla.js') }}"></script>
+
+  {% if config.DEBUG %}
+    <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
+  {% endif %}
 {% endblock %}

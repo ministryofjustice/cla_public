@@ -3,6 +3,10 @@
 CATEGORIES = [
     # value, label, inline help text
     (
+        'violence',
+        u'Abuse at home',
+        u'Domestic violence, child abuse, harassment by an ex-partner'),
+    (
         'clinneg',
         u'Clinical negligence',
         u'Doctors and nurses not treating you with due care'),
@@ -55,10 +59,6 @@ CATEGORIES = [
         u'Trouble with the police',
         u'Being treated unfairly by the police, wrongful arrest'),
     (
-        'violence',
-        u'Violence or abuse at home',
-        u'Domestic violence, child abuse, harassment by an ex-partner'),
-    (
         'benefits',
         u'Welfare benefits appeals',
         u'Appealing a decision about your benefits')
@@ -75,7 +75,7 @@ RESULT_OPTIONS = [
 "Benefits"
 BENEFITS_CHOICES = [
     ('income-support', u'Income Support'),
-    ('jobseekers-allowance', u'Income-based Jobseeker\'s Allowance'),
+    ('jobseekers-allowance', u'Income-based Jobseeker’s Allowance'),
     ('guarantee-credit', u'Guarantee Credit'),
     ('universal-credit', u'Universal Credit'),
     ('employment-support', u'Income-related Employment and Support Allowance'),
@@ -94,25 +94,33 @@ MONEY_INTERVALS = [
 ]
 
 NON_INCOME_BENEFITS = [
-    ('attendance', 'Attendance Allowance'),
-    ('care-community', 'Care in the community Direct Payment'),
-    ('carers', 'Carers\' Allowance'),
-    ('constant-attendance', 'Constant Attendance Allowance'),
-    ('ctax-benefits', 'Council Tax Benefits'),
-    ('disability-living', 'Disability Living Allowance'),
-    ('earnings-top-up', 'Earnings Top Up'),
-    ('ex-severe-disablement', 'Exceptionally Severe Disablement Allowance'),
-    ('fostering', 'Fostering Allowance'),
-    ('housing', 'Housing Benefit'),
-    ('indep-living', 'Independent Living Funds payment'),
-    ('personal-indep', 'Personal Independent Payments'),
-    ('severe-disablement', 'Severe Disablement Allowance'),
-    ('social-fund', 'Social Fund Payments'),
-    ('war-pension', 'War Pension'),
-    ('widows-pension', 'Widow\'s Pension lump sum payments'),
+    ('attendance', u'Attendance Allowance'),
+    ('care-community', u'Care in the community Direct Payment'),
+    ('carers', u'Carers’ Allowance'),
+    ('constant-attendance', u'Constant Attendance Allowance'),
+    ('ctax-benefits', u'Council Tax Benefits'),
+    ('disability-living', u'Disability Living Allowance'),
+    ('earnings-top-up', u'Earnings Top Up'),
+    ('ex-severe-disablement', u'Exceptionally Severe Disablement Allowance'),
+    ('fostering', u'Fostering Allowance'),
+    ('housing', u'Housing Benefit'),
+    ('indep-living', u'Independent Living Funds payment'),
+    ('personal-indep', u'Personal Independent Payments'),
+    ('severe-disablement', u'Severe Disablement Allowance'),
+    ('social-fund', u'Social Fund Payments'),
+    ('war-pension', u'War Pension'),
+    ('widows-pension', u'Widow’s Pension lump sum payments'),
 ]
 
-F2F_CATEGORIES = ('clinneg', 'commcare')
+F2F_CATEGORIES = (
+    'clinneg',
+    'commcare',
+    'immigration',
+    'mentalhealth',
+    'pi',
+    'publiclaw',
+    'aap'
+)
 
 YES = '1'
 NO = '0'

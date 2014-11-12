@@ -30,6 +30,7 @@
 .alert {
   @mixin _make-alert($colour: null) {
     @extend %alert-generic;
+    background: lighten($colour, 45);
     background: rgba($colour, .1);
     border-left: 4px solid $colour;
   }

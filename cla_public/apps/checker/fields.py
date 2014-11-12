@@ -7,13 +7,49 @@ from flask import session
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, Label, RadioField, SelectField, \
     SelectMultipleField, widgets
+from wtforms.validators import ValidationError, StopValidation
 from wtforms.compat import text_type
 
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 
 
-partner_regex = re.compile(r'(and\/or|and|or) your partner')
+partner_regex = re.compile(r'(and/or|and|or) your partner')
 
+
+class ZeroOrNoneValidator(object):
+    """Form Validator that checks if the minimum is min_val (or greater)
+    or None."""
+
+    def __init__(self, min_val=0, max_val=None, message=None):
+        self.min_val = min_val
+        self.max_val = max_val
+        self.message = message
+
+    def __call__(self, form, field):
+        # This code is copied from NumberRange. It is identical except
+        # it will short-circuit if data is None and not raise a
+        # ValidationError exception.
+        data = field.data
+        if (self.min_val is not None and data < self.min_val) or \
+                (self.max_val is not None and data > self.max_val):
+            if data is None:
+                # We *also* need this as we need to clear out any
+                # field errors generated from IntegerField saying
+                # "None" is not a valid integer.
+                field.errors[:] = []
+                raise StopValidation()
+            message = self.message
+            if message is None:
+                # we use %(min_val)s interpolation to support floats, None, and
+                # Decimals without throwing a formatting exception.
+                if self.max_val is None:
+                    message = field.gettext('Number must be at least %(min_val)s.')
+                elif self.min_val is None:
+                    message = field.gettext('Number must be at most %(max_val)s.')
+                else:
+                    message = field.gettext('Number must be between %(min_val)s and %(max_val)s.')
+
+            raise ValidationError(message % dict(min_val=self.min_val, max_val=self.max_val))
 
 class DynamicPartnerLabel(Label):
 
@@ -101,6 +137,10 @@ class MoneyIntervalField(FormField):
     widget = widgets.ListWidget()
 
     def __init__(self, *args, **kwargs):
+        try:
+            del kwargs['validators']
+        except KeyError:
+            pass
         super(MoneyIntervalField, self).__init__(
             MoneyIntervalForm, *args, **kwargs)
 

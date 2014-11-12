@@ -3,11 +3,19 @@
 {% import "macros/form.html" as Form %}
 
 {% block page_heading %}
-  You and your partner’s savings
+  {% if session.has_partner %}
+    You and your partner’s savings
+  {% else %}
+    Your savings
+  {% endif %}
 {% endblock %}
 
 {% block inner_content %}
-  <p>Any cash, savings or investments held in both your names.</p>
+  {% if session.has_partner %}
+    <p>Any cash, savings or investments held in both your names.</p>
+  {% else %}
+    <p>We need to know about any money you have saved or invested.</p>
+  {% endif %}
 
   <form method="POST" action="{{ url_for('.savings') }}">
     {{ form.csrf_token }}

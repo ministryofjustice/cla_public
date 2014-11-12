@@ -4,17 +4,25 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  Your benefits and tax credits
+  {% if session.has_partner %}
+    You and your partner’s benefits and tax credits
+  {% else %}
+    Your benefits and tax credits
+  {% endif %}
 {% endblock %}
 
 {% block inner_content %}
+  <p>
+    We need to know about any benefits and tax credits your whole household receives.
+    Please answer these questions as fully and accurately as you can.
+  </p>
   <form method="POST" action="{{ url_for('.benefits_tax_credits') }}">
     {{ form.csrf_token }}
 
     {{ Form.handle_errors(form) }}
 
-    {{ Form.text_field(form.child_benefit, prefix="£") }}
-    {{ Form.text_field(form.child_tax_credit, prefix="£") }}
+    {{ Form.money_interval_field(form.child_benefit, not session.has_children) }}
+    {{ Form.money_interval_field(form.child_tax_credit, not session.has_children) }}
     {{ Form.check_list_field(form.benefits) }}
     {{ Form.yesno_field(form.other_benefits) }}
     {{ Form.money_interval_field(form.total_other_benefit) }}

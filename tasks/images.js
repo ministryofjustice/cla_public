@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var paths = require('./_paths');
 var imagemin = require('gulp-imagemin');
 
-gulp.task('images', ['clean'], function() {
+gulp.task('images', ['clean-images'], function() {
   gulp
     .src(paths.images)
     .pipe(imagemin({ optimizationLevel: 5 }))
