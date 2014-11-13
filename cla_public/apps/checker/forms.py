@@ -110,7 +110,7 @@ class ProblemForm(MultiPageForm):
 
     def api_payload(self):
         return {
-            'category': self.categories.data
+            'notes': 'User selected category: {0}'.format(self.categories.data)
         }
 
 
