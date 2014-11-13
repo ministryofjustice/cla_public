@@ -2,6 +2,18 @@
   @include core-19;
   border: 1px solid $grey-2;
   padding: 4px;
+
+  &.m-small {
+    width: 3em;
+  }
+
+  &.m-large {
+    width: 16em;
+  }
+
+  &.m-larger {
+    width: 24em;
+  }
 }
 
 select.form-control {

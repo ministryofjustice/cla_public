@@ -75,6 +75,18 @@ fieldset {
   }
 }
 
+.form-subfield {
+  margin: 10px 0 0 10px;
+
+  .js-enabled &.s-hidden {
+    display: none;
+  }
+
+  label {
+    margin-right: 10px;
+  }
+}
+
 .radio-inline {
   display: inline-block;
   padding: 0 10px;

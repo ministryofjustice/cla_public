@@ -7,17 +7,26 @@
     - title_as_label <@boolean|id> (optional, default: True)
       Whether to show the title row text as label
 #}
-{% macro form_group(field, title_as_label=True, show_title_row=True, class_='') %}
+{% macro form_group(
+    field,
+    related_field=None,
+    title_as_label=True,
+    show_title_row=True,
+    class_=''
+  )
+%}
   {% if field.flags.optional %}
     {% set label_text = field.label.text + ' (optional)' %}
   {% else %}
     {% set label_text = field.label.text %}
   {% endif %}
   {% set field_label = field.label(
-    for=title_as_label if title_as_label is string else field.id,
-    text=label_text
-  ) %}
-  <dl class="form-group {{ class_ }}{% if field.errors %} m-error{% endif %}">
+      for=title_as_label if title_as_label is string else field.id,
+      text=label_text
+    )
+  %}
+  {% set errors = field.errors or related_field.errors %}
+  <dl class="form-group {{ class_ }}{% if errors %} m-error{% endif %}">
     {% if show_title_row %}
       <dt class="form-row">
         {%- if title_as_label -%}
@@ -44,9 +53,9 @@
     <dd class="form-row">
       {{ caller() }}
     </dd>
-    {% if field.errors %}
+    {% if errors %}
       <dd class="form-row">
-        {{ field_errors(field.errors) }}
+        {{ field_errors(errors) }}
       </dd>
     {% endif %}
   </dl>
@@ -109,19 +118,22 @@
     - field <@object> WTForm field
 #}
 {% macro yesno_field(field, related_field=None) %}
-  {% call form_group(field, False) %}
+  {% call form_group(field, related_field, title_as_label=False) %}
     {%- for option in field -%}
-      <label class="radio-inline">
-        {{- option }} {{ option.label.text -}}
+      <label class="radio-inline" for="{{option.id}}">
+        {% if related_field %}
+          {{- option(**{'data-controls': related_field.id }) }}
+        {% else %}
+          {{- option }}
+        {% endif %}
+        {{ option.label.text -}}
       </label>
     {%- endfor -%}
     {% if related_field %}
-      <dt class="form-row">
-        {{ related_field.label.text }}
-      </dt>
-      <dd class="form-row">
-        {{ related_field(class_='form-control') }}
-      </dd>
+      <div class="form-subfield s-hidden" data-subfield-id="{{related_field.id}}">
+        {{ related_field.label|test }}
+        {{ related_field(class_='form-control m-small') }}
+      </div>
     {% endif %}
   {% endcall %}
 {% endmacro %}
