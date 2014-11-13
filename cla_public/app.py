@@ -43,7 +43,7 @@ def create_app(config_file=None):
 
     logging.basicConfig(
         level=app.config.get('LOG_LEVEL', 'DEBUG'),
-        format='%(asctime)s %(levelname)-8s %(name)s %(message)s',
+        format='%(asctime)s %(levelname)s %(name)s %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S')
 
     return app
