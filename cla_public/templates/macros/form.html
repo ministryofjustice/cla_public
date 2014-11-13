@@ -25,9 +25,18 @@
         {%- else -%}
           {{ label_text }}
         {%- endif -%}
-        {%- if field.description -%}
+        {% if field.description or field.help_text %}
           <div class="field-help">
-            {{- field.description -}}
+            {%- if field.description -%}
+              <span class="field-description">
+                {{- field.description -}}
+              </span>
+            {%- endif -%}
+            {%- if field.more_info -%}
+              <div class="field-more-info">
+                {{- field.more_info|safe -}}
+              </div>
+            {%- endif -%}
           </div>
         {%- endif -%}
       </dt>
@@ -53,6 +62,12 @@
       {% if field.description %}
         <div class="field-help">
           {{field.description|safe}}
+        </div>
+      {% endif %}
+      {% if field.more_info %}
+        <a>more info</a>
+        <div class="field-more-info">
+          {{field.more_info|safe}}
         </div>
       {% endif %}
     </label>
@@ -157,10 +172,7 @@
 #}
 {% macro actions(button_label, previous_link=None) %}
   <p class="form-actions">
-    <button type="submit" class="button">{{ button_label }}</button>
-    {% if previous_link %}
-      <a href="{{ url( 'checker:checker_step', previous_link) }}">Go back to previous step</a>
-    {% endif %}
+    <button type="submit" class="button button-larger">{{ button_label }}</button>
   </p>
 {% endmacro %}
 

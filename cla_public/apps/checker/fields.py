@@ -6,7 +6,7 @@ import re
 from flask import session
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, Label, RadioField, SelectField, \
-    SelectMultipleField, widgets
+    SelectMultipleField, widgets, FieldList
 from wtforms.validators import ValidationError, StopValidation
 from wtforms.compat import text_type
 
@@ -99,9 +99,12 @@ class DescriptionRadioField(RadioField):
     """
 
     def __init__(self, *args, **kwargs):
+        self.field_names = []
+        self.more_infos = []
         self.descriptions = []
         choices = []
         for name, label, description in kwargs.get('choices', []):
+            self.field_names.append(name)
             self.descriptions.append(description)
             choices.append((name, label))
         if choices:
@@ -112,7 +115,15 @@ class DescriptionRadioField(RadioField):
         options = super(DescriptionRadioField, self).__iter__()
         for index, option in enumerate(options):
             option.description = self.descriptions[index]
+            option.field_name = self.field_names[index]
+            try:
+                option.more_info = self.more_infos[index]
+            except IndexError:
+                option.more_info = None
             yield option
+
+    def add_more_infos(self, more_infos):
+        self.more_infos = more_infos
 
 
 class YesNoField(RadioField):
@@ -154,6 +165,12 @@ class MultiCheckboxField(SelectMultipleField):
     """
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
+
+
+class PropertyList(FieldList):
+    def remove(self, index):
+        del self.entries[index]
+        self.last_index -= 1
 
 
 class PartnerMoneyIntervalField(MoneyIntervalField, PartnerMixin):

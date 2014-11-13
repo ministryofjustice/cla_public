@@ -3,12 +3,13 @@
 
 import logging
 
-from functools import partial
 from flask import session
 from flask_wtf import Form
+from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, IntegerField, SelectField, StringField, \
-    TextAreaField, FieldList, FormField
-from wtforms.validators import InputRequired, ValidationError, NumberRange
+    TextAreaField, FormField
+from wtforms.compat import iteritems
+from wtforms.validators import InputRequired, ValidationError
 
 from cla_common.constants import ADAPTATION_LANGUAGES, CONTACT_SAFETY
 
@@ -19,8 +20,10 @@ from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField, MultiCheckboxField,
     YesNoField, PartnerIntegerField, PartnerYesNoField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField,
-    ZeroOrNoneValidator, AdditionalPropertyForm,
+    ZeroOrNoneValidator, PropertyList
     )
+from cla_public.apps.checker.form_config_parser import FormConfigParser
+from cla_public.apps.checker.utils import nass, passported
 
 
 log = logging.getLogger(__name__)
@@ -36,7 +39,23 @@ class Struct(object):
         self.__dict__.update(entries)
 
 
-class MultiPageForm(Form):
+class ConfigFormMixin(object):
+    def __init__(self, *args, **kwargs):
+        config_path = kwargs.pop('config_path', None)
+
+        super(ConfigFormMixin, self).__init__(*args, **kwargs)
+
+        self.config_data = FormConfigParser(self.__class__.__name__,
+                                            config_path=config_path)
+
+        # set config attributes on the field
+        for field_name, field in iteritems(self._fields):
+            field_config = self.config_data.get_field_config(field_name, field)
+            for attribute, value in field_config.iteritems():
+                setattr(field, attribute, value)
+
+
+class MultiPageForm(ConfigFormMixin, Form):
     """Stores validated form data in the session"""
 
     def __init__(self, formdata=None, obj=None, prefix='',
@@ -181,7 +200,7 @@ class YourBenefitsForm(MultiPageForm):
         }
 
 
-class PropertyForm(MultiPageForm):
+class PropertyForm(NoCsrfForm):
     is_main_home = YesNoField(
         u'Is this property your main home?',
         description=(
@@ -211,25 +230,10 @@ class PropertyForm(MultiPageForm):
         description=(
             u"For example, as part of the financial settlement of a divorce"))
 
-    additional_properties = FieldList(FormField(AdditionalPropertyForm),
-                                      max_entries=3)
 
-    def api_payload(self):
-        payload = {'property_set': [
-            {
-                'value': self.property_value.data,
-                'mortgage_left': self.mortgage_remaining.data,
-                'disputed': self.in_dispute.data,
-                'main': self.is_main_home.data
-            }
-        ]}
-        for prop in self.additional_properties:
-            payload['property_set'].append({
-                'value': prop.form.property_value.data,
-                'mortgage_left': prop.form.mortgage_remaining.data
-            })
-        return payload
-
+class PropertiesForm(MultiPageForm):
+    properties = PropertyList(
+        FormField(PropertyForm), min_entries=1, max_entries=3)
 
 
 class SavingsForm(MultiPageForm):
@@ -324,14 +328,17 @@ class IncomeAndTaxForm(MultiPageForm):
             'you': {
                 'income': {
                     'earnings': to_money_interval(self.earnings.data),
-                    'tax_credits': to_money_interval(self.working_tax_credit.data),  # TODO - total
-                    'maintenance_received': to_money_interval(self.maintenance.data),
+                    'tax_credits': to_money_interval(
+                        self.working_tax_credit.data),  # TODO - total
+                    'maintenance_received': to_money_interval(
+                        self.maintenance.data),
                     'pension': to_money_interval(self.pension.data),
                     'other_income': to_money_interval(self.other_income.data)
                 },
                 'deductions': {
                     'income_tax': to_money_interval(self.income_tax.data),
-                    'national_insurance': to_money_interval(self.national_insurance.data),
+                    'national_insurance': to_money_interval(
+                        self.national_insurance.data),
                 }
             }
         }
@@ -361,7 +368,8 @@ class OutgoingsForm(MultiPageForm):
         return {'you': {'deductions': {
             'rent': to_money_interval(self.rent.data),
             'maintenance': to_money_interval(self.maintenance.data),
-            'criminal_legalaid_contributions': self.income_contribution.data['amount'],
+            'criminal_legalaid_contributions':
+                self.income_contribution.data['amount'],
             'childcare': to_money_interval(self.childcare.data)
         }}}
 

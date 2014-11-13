@@ -2,17 +2,20 @@
 
 var gulp = require('gulp');
 var paths = require('./_paths');
+var filter = require('gulp-filter');
 var concat = require('gulp-concat');
 
 gulp.task('scripts', ['clean-js'], function() {
-  var prod = [paths.scripts];
-  prod.push('!' + paths.scripts + '*debug*');
+  var withoutDebug = filter(['**/*.js', '!**/*debug*']);
 
-  gulp.src(prod)
+  var stream = gulp.src(paths.scripts)
+    .pipe(withoutDebug)
     .pipe(concat('cla.js'))
     .pipe(gulp.dest(paths.dest + 'javascripts'));
 
-  return gulp.src(paths.scripts + '*debug*')
+  withoutDebug.restore({ end: true })
     .pipe(concat('cla-debug.js'))
     .pipe(gulp.dest(paths.dest + 'javascripts'));
+
+  return stream;
 });

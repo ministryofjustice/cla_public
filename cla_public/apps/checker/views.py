@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 
-from flask import abort, render_template, redirect, request, session, url_for
+from flask import abort, current_app, render_template, redirect, request, \
+    session, url_for
 
 import logging
 
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_case_api
 from cla_public.apps.checker.constants import RESULT_OPTIONS
-from cla_public.apps.checker.decorators import form_view
+from cla_public.apps.checker.decorators import form_view, override_session_vars
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    ProblemForm, PropertyForm, SavingsForm, TaxCreditsForm, IncomeAndTaxForm, \
+    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, IncomeAndTaxForm, \
     OutgoingsForm, ApplicationForm
 
 
@@ -75,25 +76,36 @@ def benefits(user):
 
 
 @checker.route('/property', methods=['GET', 'POST'])
-@form_view(PropertyForm, 'property.html')
-def property(user):
-    # This is the only way to detect if the add-property button was
-    # clicked.
-    if 'add-property' in request.form:
-        form = PropertyForm(request.form)
-        if len(form.additional_properties.entries) < \
-                form.additional_properties.max_entries:
-            form.additional_properties.append_entry()
-        return render_template('property.html', form=form)
-    next_step = 'income'
+def property():
+    if current_app.config.get('DEBUG'):
+        override_session_vars()
 
-    if user.has_tax_credits:
-        next_step = 'benefits_tax_credits'
+    form = PropertiesForm(request.form, session)
+    if form.is_submitted():
+        # Add new property button clicked
+        # submit the form but don't validate
+        if 'add-property' in request.form:
+            if len(form.properties.entries) < form.properties.max_entries:
+                form.properties.append_entry()
+        # Remove property button clicked
+        # Remove the item from the properties list
+        # index passed as button value
+        elif 'remove-property' in request.form:
+            index = int(request.form['remove-property'])
+            form.properties.remove(index)
+        # Do normal validation on submit
+        elif form.validate():
+            next_step = 'income'
 
-    if user.has_savings:
-        next_step = 'savings'
+            if session.has_tax_credits:
+                next_step = 'benefits_tax_credits'
 
-    return proceed(next_step)
+            if session.has_savings:
+                next_step = 'savings'
+
+            return proceed(next_step)
+
+    return render_template('property.html', form=form)
 
 
 @checker.route('/savings', methods=['GET', 'POST'])
