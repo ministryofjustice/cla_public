@@ -21,6 +21,7 @@ fieldset {
   padding: 20px 0;
 
   &.m-error {
+    background: lighten($mellow-red, 42);
     background: rgba($red, .1);
   }
 
