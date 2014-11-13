@@ -15,7 +15,7 @@ from cla_common.constants import ADAPTATION_LANGUAGES, CONTACT_SAFETY
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS
+    NON_INCOME_BENEFITS, YES, NO
 from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField, MultiCheckboxField,
     YesNoField, PartnerIntegerField, PartnerYesNoField,
@@ -24,6 +24,7 @@ from cla_public.apps.checker.fields import (
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
+
 
 
 log = logging.getLogger(__name__)
@@ -167,6 +168,21 @@ class AboutYouForm(MultiPageForm):
             'you': {'income': {
                 'self_employed': self.is_self_employed.data}}
         }
+
+    def validate(self, *args, **kwargs):
+        is_valid = super(AboutYouForm, self).validate(*args, **kwargs)
+
+        if self.have_children.data == YES:
+            if not self.num_children.data:
+                self.num_children.errors.append(u'Please specify the number of children you have')
+                is_valid = False
+
+        if self.have_dependants.data == YES:
+            if not self.num_dependants.data:
+                self.num_dependants.errors.append(u'Please specify the number of dependants you have')
+                is_valid = False
+
+        return is_valid
 
 
 class AtLeastOne(object):
