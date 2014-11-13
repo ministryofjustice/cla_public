@@ -316,7 +316,8 @@ class TaxCreditsForm(MultiPageForm):
         }}}
 
 
-class IncomeAndTaxForm(MultiPageForm):
+class IncomeFieldForm(NoCsrfForm):
+
     earnings = MoneyIntervalField(
         u'Wages before tax',
         description=(
@@ -371,6 +372,13 @@ class IncomeAndTaxForm(MultiPageForm):
                 }
             }
         }
+class IncomeAndTaxForm(MultiPageForm):
+
+    your_income = FieldList(FormField(IncomeFieldForm), label='Your personal income',
+                            min_entries=1, max_entries=1)
+
+    partner_income = FieldList(FormField(IncomeFieldForm), label="Your partner's income",
+                            min_entries=0, max_entries=1)
 
 
 class OutgoingsForm(MultiPageForm):
