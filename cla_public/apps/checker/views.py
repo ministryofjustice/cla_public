@@ -7,7 +7,7 @@ from flask import abort, current_app, render_template, redirect, request, \
 import logging
 
 from cla_public.apps.checker import checker
-from cla_public.apps.checker.api import post_to_case_api
+from cla_public.apps.checker.api import post_to_case_api, get_ordered_organisations_by_category
 from cla_public.apps.checker.constants import RESULT_OPTIONS
 from cla_public.apps.checker.decorators import form_view, override_session_vars
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
@@ -150,5 +150,9 @@ def result(outcome):
         post_to_case_api(form)
         return redirect(url_for('.result', outcome='confirmation'))
 
+    organisations = []
+    if outcome == 'ineligible':
+        categories = get_ordered_organisations_by_category()
+
     return render_template(
-        'result/%s.html' % outcome, form=form)
+        'result/%s.html' % outcome, form=form, categories=categories)

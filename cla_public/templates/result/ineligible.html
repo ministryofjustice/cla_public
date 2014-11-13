@@ -6,4 +6,12 @@
 
 {% block inner_content %}
   <p>You can still get practical help and advice from the organisations listed below. You don’t have to qualify for legal aid to get help and advice from these organisations.</p>
+  {%  for category, organisations in categories.items() %}
+    <p>{{ category }}</p>
+    <ul>
+    {%  for organisation in organisations %}
+      <li><a href="{{ organisation.website }}">{{ organisation.service_name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% endfor %}
 {% endblock %}
