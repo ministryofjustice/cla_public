@@ -44,7 +44,34 @@
     <dd class="form-row">
       {{ caller() }}
     </dd>
+    {% if field.errors %}
+      <dd class="form-row">
+        {{ field_errors(field.errors) }}
+      </dd>
+    {% endif %}
   </dl>
+{% endmacro %}
+
+{#
+  Render field errors
+  (including mutli-fields)
+
+  Params:
+    - errors <@object> WTForm field.errors
+#}
+{% macro field_errors(errors) %}
+  <div class="field-error">
+    {% set errors = errors.values() if errors is mapping else errors %}
+    {% for error in errors %}
+      {% if error is string %}
+        <p>{{error}}</p>
+      {% else %}
+        {% for line in error %}
+          <p>{{line}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endmacro %}
 
 
@@ -81,13 +108,21 @@
   Params:
     - field <@object> WTForm field
 #}
-{% macro yesno_field(field) %}
+{% macro yesno_field(field, related_field=None) %}
   {% call form_group(field, False) %}
     {%- for option in field -%}
       <label class="radio-inline">
         {{- option }} {{ option.label.text -}}
       </label>
     {%- endfor -%}
+    {% if related_field %}
+      <dt class="form-row">
+        {{ related_field.label.text }}
+      </dt>
+      <dd class="form-row">
+        {{ related_field(class_='form-control') }}
+      </dd>
+    {% endif %}
   {% endcall %}
 {% endmacro %}
 

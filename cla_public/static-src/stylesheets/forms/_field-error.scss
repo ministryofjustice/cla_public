@@ -1,0 +1,14 @@
+.field-error {
+  padding-left: 20px;
+  color: $red;
+
+  &:before {
+    content: '✘';
+    float: left;
+    margin-left: -20px;
+  }
+
+  p {
+    margin: 10px 0 0;
+  }
+}
