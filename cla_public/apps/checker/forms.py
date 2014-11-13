@@ -132,12 +132,12 @@ class AboutYouForm(MultiPageForm):
     have_children = YesNoField(
         u'Do you have any children aged 15 or under?',
         description=u"Don’t include any children who don’t live with you")
-    num_children = IntegerField(u'How many?',
+    num_children = IntegerField(u'If Yes, how many?',
                                 validators=[ZeroOrNoneValidator()])
     have_dependants = YesNoField(
         u'Do you have any dependants aged 16 or over?',
         description=u"People who you live with and support financially")
-    num_dependants = IntegerField(u'How many?',
+    num_dependants = IntegerField(u'If Yes, how many?',
                                   validators=[ZeroOrNoneValidator()])
     have_savings = YesNoField(
         u'Do you have any savings, investments or any valuable items?',
