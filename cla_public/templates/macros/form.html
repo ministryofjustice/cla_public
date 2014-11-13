@@ -172,10 +172,7 @@
 #}
 {% macro actions(button_label, previous_link=None) %}
   <p class="form-actions">
-    <button type="submit" class="button">{{ button_label }}</button>
-    {% if previous_link %}
-      <a href="{{ url( 'checker:checker_step', previous_link) }}">Go back to previous step</a>
-    {% endif %}
+    <button type="submit" class="button button-larger">{{ button_label }}</button>
   </p>
 {% endmacro %}
 

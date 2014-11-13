@@ -22,14 +22,35 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.yesno_field(form.is_main_home) }}
-    {{ Form.yesno_field(form.other_shareholders) }}
-    {{ Form.text_field(form.property_value, prefix="£") }}
-    {{ Form.text_field(form.mortgage_remaining, prefix="£") }}
-    {{ Form.text_field(form.mortgage_payments, prefix="£") }}
-    {{ Form.yesno_field(form.is_rented) }}
-    {{ Form.text_field(form.rent_amount, prefix="£") }}
-    {{ Form.yesno_field(form.in_dispute) }}
+    {% for property in form.properties %}
+      <fieldset id="property-set-{{loop.index}}">
+        <header>
+          {% if form.properties|count > 1 %}
+            <h3>Property {{loop.index}}</h3>
+          {% endif %}
+          {% if loop.index != 1 %}
+            <button class="button-secondary button-small" name="remove-property" value="{{loop.index0}}">
+              Remove property
+            </button>
+          {% endif %}
+        </header>
+
+        {{ Form.yesno_field(property.is_main_home) }}
+        {{ Form.yesno_field(property.other_shareholders) }}
+        {{ Form.text_field(property.property_value, prefix="£") }}
+        {{ Form.text_field(property.mortgage_remaining, prefix="£") }}
+        {{ Form.text_field(property.mortgage_payments, prefix="£") }}
+        {{ Form.yesno_field(property.is_rented) }}
+        {{ Form.text_field(property.rent_amount, prefix="£") }}
+        {{ Form.yesno_field(property.in_dispute) }}
+      </fieldset>
+    {% endfor %}
+
+    {% if form.properties|count < 3 %}
+      <p>
+        <button class="button-secondary button-large" name="add-property">Add Additional Property</button>
+      </p>
+    {% endif %}
 
     {{ Form.actions('Continue') }}
   </form>

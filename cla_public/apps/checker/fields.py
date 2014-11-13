@@ -6,7 +6,7 @@ import re
 from flask import session
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, Label, RadioField, SelectField, \
-    SelectMultipleField, widgets
+    SelectMultipleField, widgets, FieldList
 from wtforms.validators import ValidationError, StopValidation
 from wtforms.compat import text_type
 
@@ -165,6 +165,12 @@ class MultiCheckboxField(SelectMultipleField):
     """
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
+
+
+class PropertyList(FieldList):
+    def remove(self, index):
+        del self.entries[index]
+        self.last_index -= 1
 
 
 class PartnerMoneyIntervalField(MoneyIntervalField, PartnerMixin):
