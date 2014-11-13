@@ -8,8 +8,8 @@ from flask import render_template, send_from_directory, current_app, \
     redirect, url_for
 
 from cla_public.apps.base import base
-
 from cla_public.apps.base.forms import FeedbackForm
+import cla_public.apps.base.filters
 
 
 log = logging.getLogger(__name__)
