@@ -66,13 +66,21 @@
   Params:
     - field <@object> WTForm field
 #}
-{% macro yesno_field(field) %}
+{% macro yesno_field(field, related_field=None) %}
   {% call form_group(field, False) %}
     {%- for option in field -%}
       <label class="radio-inline">
         {{- option }} {{ option.label.text -}}
       </label>
     {%- endfor -%}
+    {% if related_field %}
+      <dt class="form-row">
+        {{ related_field.label.text }}
+      </dt>
+      <dd class="form-row">
+        {{ related_field(class_='form-control') }}
+      </dd>
+    {% endif %}
   {% endcall %}
 {% endmacro %}
 
