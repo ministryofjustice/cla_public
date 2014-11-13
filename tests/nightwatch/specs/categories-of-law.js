@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var util = require('util');
+var common = require('../modules/common-functions');
 
 var CATEGORIES_OF_LAW = [
   'clinneg',
@@ -56,6 +57,10 @@ module.exports = {
       .assert.urlContains('/problem')
       .assert.containsText('h1', 'What do you need help with?')
     ;
+  },
+
+  'Select nothing (error)': function(client) {
+    common.submitAndCheckForError(client, 'Please select the area of law you need help with.');
   },
 
   'Select failure categories': function(client) {

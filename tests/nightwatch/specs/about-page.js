@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var util = require('util');
+var common = require('../modules/common-functions');
 
 var QUESTIONS = [
   'have_partner',
@@ -62,11 +63,13 @@ module.exports = {
       .assert.containsText('h1', 'About you')
     ;
 
+    common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again');
+
     allToNo(client);
     client
       .submitForm('form')
       .verify.urlContains('/income', 'Goes to /income when all answers are No')
-      .back()
+      .url(client.launch_url + '/about')
     ;
 
     OUTCOMES.forEach(function(item) {
@@ -76,6 +79,7 @@ module.exports = {
         .submitForm('form')
         .verify.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
         .back()
+      ;
     });
 
     client.end();
