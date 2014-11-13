@@ -1,0 +1,35 @@
+forms:
+  TestConfigForm:
+    fields:
+
+      text_field:
+        more_info: Test text."'][;df;lgds'fl''das
+
+      markdown_field:
+        more_info: |
+          Heading for Debt Markdown
+          =========================
+
+          - List One
+          - Lisr Two
+
+          Standard text
+
+  TestDescriptionRadioFieldForm:
+    fields:
+
+      radio_select:
+        field_options:
+
+          text_field:
+            more_info: Test text."'][;df;lgds'fl''das
+
+          markdown_field:
+            more_info: |
+              Heading for Debt Markdown
+              =========================
+
+              - List One
+              - Lisr Two
+
+              Standard text

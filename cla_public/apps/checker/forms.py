@@ -7,6 +7,7 @@ from functools import partial
 from flask import session
 from flask_wtf import Form
 from wtforms import IntegerField, StringField, TextAreaField
+from wtforms.compat import iteritems
 from wtforms.validators import InputRequired, ValidationError, NumberRange
 
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
@@ -17,6 +18,7 @@ from cla_public.apps.checker.fields import (
     PartnerMoneyIntervalField, PartnerMultiCheckboxField,
     ZeroOrNoneValidator,
     )
+from cla_public.apps.checker.form_config_parser import FormConfigParser
 
 
 log = logging.getLogger(__name__)
@@ -28,7 +30,23 @@ class Struct(object):
         self.__dict__.update(entries)
 
 
-class MultiPageForm(Form):
+class ConfigFormMixin(object):
+    def __init__(self, *args, **kwargs):
+        config_path = kwargs.pop('config_path', None)
+
+        super(ConfigFormMixin, self).__init__(*args, **kwargs)
+
+        self.config_data = FormConfigParser(self.__class__.__name__,
+                                            config_path=config_path)
+
+        # set config attributes on the field
+        for field_name, field in iteritems(self._fields):
+            field_config = self.config_data.get_field_config(field_name, field)
+            for attribute, value in field_config.iteritems():
+                setattr(field, attribute, value)
+
+
+class MultiPageForm(ConfigFormMixin, Form):
     """Stores validated form data in the session"""
 
     def __init__(self, formdata=None, obj=None, prefix='',
@@ -51,6 +69,7 @@ class MultiPageForm(Form):
             formdata=formdata, obj=obj, prefix=prefix,
             csrf_context=csrf_context, secret_key=secret_key,
             csrf_enabled=csrf_enabled, *args, **kwargs)
+
 
     def validate(self):
         """Store the validated field data in the session.
