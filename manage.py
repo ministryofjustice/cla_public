@@ -23,7 +23,7 @@ def _make_context():
 @manager.command
 def test():
     """Run the tests."""
-    command_line = 'nosestests'
+    command_line = 'nosetests'
     log.info('Running %r', command_line)
     args = shlex.split(command_line)
     subprocess.Popen(args, stdin=sys.stdin,
