@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 
-from flask import abort, current_app, render_template, redirect, url_for, \
-    request, session
+from flask import abort, current_app, render_template, redirect, request, \
+    session, url_for
 
 import logging
 
 from cla_public.apps.checker import checker
+from cla_public.apps.checker.api import post_to_case_api
 from cla_public.apps.checker.constants import RESULT_OPTIONS
-from cla_public.apps.checker.decorators import form_view
+from cla_public.apps.checker.decorators import form_view, override_session_vars
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, IncomeAndTaxForm, \
     OutgoingsForm, ApplicationForm
@@ -77,10 +78,7 @@ def benefits(user):
 @checker.route('/property', methods=['GET', 'POST'])
 def property():
     if current_app.config.get('DEBUG'):
-        # allow overriding session variables
-        # no point validating since it's only for dev testing
-        for key, val in request.args.items():
-            session[key] = val
+        override_session_vars()
 
     form = PropertiesForm(request.form, session)
     if form.is_submitted():
@@ -108,6 +106,7 @@ def property():
             return proceed(next_step)
 
     return render_template('property.html', form=form)
+
 
 @checker.route('/savings', methods=['GET', 'POST'])
 @form_view(SavingsForm, 'savings.html')
@@ -148,6 +147,8 @@ def result(outcome):
 
     form = ApplicationForm()
     if form.validate_on_submit():
+        post_to_case_api(form)
         return redirect(url_for('.result', outcome='confirmation'))
 
-    return render_template('result/%s.html' % outcome, form=form)
+    return render_template(
+        'result/%s.html' % outcome, form=form)

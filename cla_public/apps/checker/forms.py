@@ -3,14 +3,17 @@
 
 import logging
 
-from functools import partial
 from flask import session
 from flask_wtf import Form
-from wtforms.compat import iteritems
 from wtforms import Form as NoCsrfForm
-from wtforms import IntegerField, StringField, TextAreaField, FormField
-from wtforms.validators import InputRequired, ValidationError, NumberRange
+from wtforms import BooleanField, IntegerField, SelectField, StringField, \
+    TextAreaField, FormField
+from wtforms.compat import iteritems
+from wtforms.validators import InputRequired, ValidationError
 
+from cla_common.constants import ADAPTATION_LANGUAGES, CONTACT_SAFETY
+
+from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS
 from cla_public.apps.checker.fields import (
@@ -20,9 +23,14 @@ from cla_public.apps.checker.fields import (
     ZeroOrNoneValidator, PropertyList
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
+from cla_public.apps.checker.utils import nass, passported
 
 
 log = logging.getLogger(__name__)
+
+
+def to_money_interval(data):
+    return money_interval(data['amount'], data['interval'])
 
 
 class Struct(object):
@@ -71,7 +79,6 @@ class MultiPageForm(ConfigFormMixin, Form):
             csrf_context=csrf_context, secret_key=secret_key,
             csrf_enabled=csrf_enabled, *args, **kwargs)
 
-
     def validate(self):
         """Store the validated field data in the session.
         If the validation failed, remove this form's field data.
@@ -100,6 +107,11 @@ class ProblemForm(MultiPageForm):
         choices=CATEGORIES,
         coerce=unicode,
         validators=[InputRequired()])
+
+    def api_payload(self):
+        return {
+            'category': self.categories.data
+        }
 
 
 class AboutYouForm(MultiPageForm):
@@ -146,6 +158,16 @@ class AboutYouForm(MultiPageForm):
             u"and self-employed"))
     aged_60_or_over = YesNoField(u'Are you aged 60 or over?')
 
+    def api_payload(self):
+        return {
+            'dependants_young': self.num_children.data or 0,
+            'dependants_old': self.num_dependants.data or 0,
+            'is_you_or_your_partner_over_60': self.aged_60_or_over.data,
+            'has_partner': self.have_partner.data,
+            'you': {'income': {
+                'self_employed': self.is_self_employed.data}}
+        }
+
 
 class AtLeastOne(object):
     """
@@ -170,6 +192,12 @@ class YourBenefitsForm(MultiPageForm):
     benefits = MultiCheckboxField(
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
+
+    def api_payload(self):
+        return {
+            'on_passported_benefits': passported(self.benefits.data),
+            'on_nass_benefits': nass(self.benefits.data)
+        }
 
 
 class PropertyForm(NoCsrfForm):
@@ -204,7 +232,8 @@ class PropertyForm(NoCsrfForm):
 
 
 class PropertiesForm(MultiPageForm):
-    properties = PropertyList(FormField(PropertyForm), min_entries=1, max_entries=3)
+    properties = PropertyList(
+        FormField(PropertyForm), min_entries=1, max_entries=3)
 
 
 class SavingsForm(MultiPageForm):
@@ -220,6 +249,13 @@ class SavingsForm(MultiPageForm):
         u'Valuable items you and your partner own worth over £500 each',
         description=u"Total value of any items you own with some exceptions",
         validators=[ZeroOrNoneValidator(min_val=500)])
+
+    def api_payload(self):
+        return {'you': {'savings': {
+            'bank_balance': self.savings.data,
+            'investment_balance': self.investments.data,
+            'asset_balance': self.valuables.data
+        }}}
 
 
 class TaxCreditsForm(MultiPageForm):
@@ -242,6 +278,13 @@ class TaxCreditsForm(MultiPageForm):
     total_other_benefit = MoneyIntervalField(
         u'Total amount of benefits not listed above',
         validators=[ZeroOrNoneValidator()])
+
+    def api_payload(self):
+        return {'you': {'income': {
+            'child_benefits': money_interval(self.child_benefit.data),
+            'tax_credits': money_interval(self.child_tax_credit.data),
+            'benefits': to_money_interval(self.total_other_benefit.data)
+        }}}
 
 
 class IncomeAndTaxForm(MultiPageForm):
@@ -280,6 +323,26 @@ class IncomeAndTaxForm(MultiPageForm):
             u"dividends"),
         validators=[ZeroOrNoneValidator()])
 
+    def api_payload(self):
+        return {
+            'you': {
+                'income': {
+                    'earnings': to_money_interval(self.earnings.data),
+                    'tax_credits': to_money_interval(
+                        self.working_tax_credit.data),  # TODO - total
+                    'maintenance_received': to_money_interval(
+                        self.maintenance.data),
+                    'pension': to_money_interval(self.pension.data),
+                    'other_income': to_money_interval(self.other_income.data)
+                },
+                'deductions': {
+                    'income_tax': to_money_interval(self.income_tax.data),
+                    'national_insurance': to_money_interval(
+                        self.national_insurance.data),
+                }
+            }
+        }
+
 
 class OutgoingsForm(MultiPageForm):
     rent = PartnerMoneyIntervalField(
@@ -301,6 +364,15 @@ class OutgoingsForm(MultiPageForm):
             u"Money you and your partner pay for your child to be looked "
             u"after while you work or study"))
 
+    def api_payload(self):
+        return {'you': {'deductions': {
+            'rent': to_money_interval(self.rent.data),
+            'maintenance': to_money_interval(self.maintenance.data),
+            'criminal_legalaid_contributions':
+                self.income_contribution.data['amount'],
+            'childcare': to_money_interval(self.childcare.data)
+        }}}
+
 
 class ApplicationForm(Form):
     title = StringField(
@@ -313,6 +385,7 @@ class ApplicationForm(Form):
     contact_number = StringField(
         u'Contact phone number',
         validators=[InputRequired()])
+    safe_to_contact = SelectField(u'Safe to contact', choices=CONTACT_SAFETY)
     post_code = StringField(u'Postcode')
     address = TextAreaField(u'Address')
     extra_notes = TextAreaField(
@@ -321,3 +394,28 @@ class ApplicationForm(Form):
             u"In your own words, please tell us exactly what your problem is "
             u"about. The Civil Legal Advice operator will read this before "
             u"they call you."))
+    bsl_webcam = BooleanField(u'BSL - Webcam')
+    minicom = BooleanField(u'Minicom')
+    text_relay = BooleanField(u'Text Relay')
+    welsh = BooleanField(u'Welsh')
+    language = SelectField(
+        u'Language',
+        choices=([('', u'Choose a language')] + ADAPTATION_LANGUAGES))
+
+    def api_payload(self):
+        return {
+            'personal_details': {
+                'title': self.title.data,
+                'full_name': self.full_name.data,
+                'postcode': self.post_code.data,
+                'mobile_phone': self.contact_number.data,
+                'street': self.address.data,
+                'safe_to_contact': self.safe_to_contact.data
+            },
+            'adaptation_details': {
+                'bsl_webcam': self.bsl_webcam.data,
+                'minicom': self.minicom.data,
+                'text_relay': self.text_relay.data,
+                'language': self.welsh.data and 'WELSH' or self.language.data
+            }
+        }

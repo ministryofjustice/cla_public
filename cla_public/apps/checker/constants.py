@@ -84,6 +84,7 @@ BENEFITS_CHOICES = [
 ]
 
 PASSPORTED_BENEFITS = [benefit for benefit, _ in BENEFITS_CHOICES[0:-1]]
+NASS_BENEFITS = ('asylum-support',)
 
 MONEY_INTERVALS = [
     ('per_week', 'per week'),
