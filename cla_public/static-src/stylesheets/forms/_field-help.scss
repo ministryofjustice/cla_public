@@ -1,0 +1,28 @@
+.field-help {
+  font-size: .9em;
+  margin: 8px 0;
+  color: $grey-1;
+
+  p {
+    margin: 8px 0 0;
+  }
+
+  ul {
+    list-style: disc;
+    margin: 10px 0 10px 20px;
+  }
+
+  li {
+    padding: 0;
+  }
+
+  &.s-expanded {
+    .field-more-info {
+      display: block;
+    }
+
+    .field-more-info-toggle:before {
+      content: '▾';
+    }
+  }
+}

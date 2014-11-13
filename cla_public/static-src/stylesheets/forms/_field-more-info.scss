@@ -1,0 +1,28 @@
+.field-more-info {
+  margin: 8px 0;
+
+  .js-enabled & {
+    display: none;
+  }
+}
+
+.field-more-info-toggle {
+  color: $link-colour;
+  font-size: .9em;
+  padding-left: 13px;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:before {
+    content: '▸';
+    float: left;
+    font-size: 16px;
+    margin-left: -13px;
+  }
+}
