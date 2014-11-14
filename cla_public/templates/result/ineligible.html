@@ -5,25 +5,28 @@
 {% endblock %}
 
 {% block inner_content %}
-  <p>You can still get practical help and advice from the organisations listed below. You don’t have to qualify for legal aid to get help and advice from these organisations.</p>
-  <h1>Filtered list</h1>
-  {%  for organisation in organisations %}
-    <p><a href="{{ organisation.website }}">{{ organisation.service_name }}</a></p>
-    {%  if organisation.address and organisation.address != 'N/A' %}
-        <p>{{ organisation.address }}</p>
-    {%  endif %}
-    {%  if organisation.helpline and organisation.helpline != 'N/A' %}
-        <p>{{ organisation.helpline }}</p>
-    {%  endif %}
-  {% endfor %}
-  <hr>
-  <h1>List all by category</h1>
-  {%  for category, organisations in categories.items() %}
-    <p>{{ category }}</p>
+  <p>
+    You can still get practical help and advice from the organisations
+    listed below. You don’t have to qualify for legal aid to get help
+    and advice from these organisations.
+  </p>
+
+  <div class="org-list">
     <ul>
-    {%  for organisation in organisations %}
-      <li><a href="{{ organisation.website }}">{{ organisation.service_name }}</a></li>
+      {% for org in organisations %}
+        <li class="vcard">
+          <a class="org" href="{{ org.website }}">
+            {{ org.service_name }}
+          </a>
+          {% if org.helpline %}
+            <p>Helpline: <span class="tel">{{ org.helpline }}</span></p>
+          {% endif %}
+        </li>
+      </ul>
     {% endfor %}
-    </ul>
-  {% endfor %}
+
+    <p>
+      <a href="{{ url_for('base.organisations') }}">More organisations</a>
+    </p>
+  </div>
 {% endblock %}
