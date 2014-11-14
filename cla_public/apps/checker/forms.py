@@ -297,8 +297,8 @@ class TaxCreditsForm(MultiPageForm):
 
     def api_payload(self):
         return {'you': {'income': {
-            'child_benefits': money_interval(self.child_benefit.data),
-            'tax_credits': money_interval(self.child_tax_credit.data),
+            'child_benefits': to_money_interval(self.child_benefit.data),
+            'tax_credits': to_money_interval(self.child_tax_credit.data),
             'benefits': to_money_interval(self.total_other_benefit.data)
         }}}
 
