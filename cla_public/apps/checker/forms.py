@@ -7,7 +7,7 @@ from flask import session
 from flask_wtf import Form
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, IntegerField, SelectField, StringField, \
-    TextAreaField, FormField
+    TextAreaField, FormField, FieldList
 from wtforms.compat import iteritems
 from wtforms.validators import InputRequired, ValidationError
 
