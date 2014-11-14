@@ -9,6 +9,7 @@ from flask import render_template, send_from_directory, current_app, \
 
 from cla_public.apps.base import base
 from cla_public.apps.base.forms import FeedbackForm
+from cla_public.apps.checker.api import get_ordered_organisations_by_category
 import cla_public.apps.base.filters
 
 
