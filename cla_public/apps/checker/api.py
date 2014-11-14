@@ -99,14 +99,14 @@ def post_to_case_api(form):
     session['case_ref'] = response['reference']
 
 
-def get_organisation_list():
+def get_organisation_list(**kwargs):
     backend = get_api_connection()
-    api_response = backend.organisation.get(page_size=100)
+    api_response = backend.organisation.get(page_size=100, **kwargs)
     return api_response['results']
 
 
-def get_ordered_organisations_by_category():
-    organisations = get_organisation_list()
+def get_ordered_organisations_by_category(**kwargs):
+    organisations = get_organisation_list(**kwargs)
     categories = OrderedDict((name, []) for field, name, description in CATEGORIES)
     for organisation in organisations:
         for cat in organisation['categories']:
