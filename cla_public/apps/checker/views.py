@@ -11,7 +11,7 @@ from cla_public.apps.checker.api import post_to_case_api
 from cla_public.apps.checker.constants import RESULT_OPTIONS
 from cla_public.apps.checker.decorators import form_view, override_session_vars
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, IncomeAndTaxForm, \
+    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
     OutgoingsForm, ApplicationForm
 
 
@@ -126,21 +126,9 @@ def benefits_tax_credits(user):
 
 
 @checker.route('/income', methods=['GET', 'POST'])
+@form_view(income_form, 'income.html')
 def income():
-    if current_app.config.get('DEBUG'):
-        # allow overriding session variables
-        # no point validating since it's only for dev testing
-        for key, val in request.args.items():
-            session[key] = val
-    form = IncomeAndTaxForm(request.form, session)
-    if session.has_partner:
-        # We can only ever have 1 partner, so we should never attempt
-        # to add one unless we presently have 0.
-        if len(form.partner_income.entries) == 0:
-            form.partner_income.append_entry()
-    if form.validate_on_submit():
-        return proceed('outgoings')
-    return render_template('income.html', form=form)
+    return proceed('outgoings')
 
 
 @checker.route('/outgoings', methods=['GET', 'POST'])

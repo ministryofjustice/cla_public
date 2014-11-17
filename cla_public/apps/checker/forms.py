@@ -372,13 +372,24 @@ class IncomeFieldForm(NoCsrfForm):
                 }
             }
         }
+
+
 class IncomeAndTaxForm(MultiPageForm):
+    your_income = FormField(IncomeFieldForm, label=u'Your personal income')
 
-    your_income = FieldList(FormField(IncomeFieldForm), label='Your personal income',
-                            min_entries=1, max_entries=1)
 
-    partner_income = FieldList(FormField(IncomeFieldForm), label="Your partner's income",
-                            min_entries=0, max_entries=1)
+def income_form(*args, **kwargs):
+    """Dynamically add partner subform if user has a partner"""
+
+    class IncomeForm(IncomeAndTaxForm):
+        pass
+
+    if session.has_partner:
+        IncomeForm.partner_income = FormField(
+            IncomeFieldForm,
+            label=u'Your partner\'s income')
+
+    return IncomeForm(*args, **kwargs)
 
 
 class OutgoingsForm(MultiPageForm):
