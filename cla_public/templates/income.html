@@ -17,27 +17,31 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    <h2>You</h2>
-    {% with is_hidden = not (session.is_employed or session.is_self_employed) %}
-    {{ Form.money_interval_field(form.your_income.earnings, is_hidden) }}
-    {{ Form.money_interval_field(form.your_income.income_tax, is_hidden) }}
-    {{ Form.money_interval_field(form.your_income.national_insurance, is_hidden) }}
-    {{ Form.money_interval_field(form.your_income.working_tax_credit, is_hidden) }}
-    {{ Form.money_interval_field(form.your_income.maintenance) }}
-    {{ Form.money_interval_field(form.your_income.pension) }}
-    {{ Form.money_interval_field(form.your_income.other_income) }}
-
     {% if session.has_partner %}
-    <h2>Your Partner</h2>
-    {{ Form.money_interval_field(form.partner_income.earnings, is_hidden) }}
-    {{ Form.money_interval_field(form.partner_income.income_tax, is_hidden) }}
-    {{ Form.money_interval_field(form.partner_income.national_insurance, is_hidden) }}
-    {{ Form.money_interval_field(form.partner_income.working_tax_credit, is_hidden) }}
-    {{ Form.money_interval_field(form.partner_income.maintenance) }}
-    {{ Form.money_interval_field(form.partner_income.pension) }}
-    {{ Form.money_interval_field(form.partner_income.other_income) }}
+      <h3>Your personal income</h3>
+      <p>This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.</p>
     {% endif %}
+    {% with is_hidden = not (session.is_employed or session.is_self_employed) %}
+      {{ Form.money_interval_field(form.your_income.earnings, is_hidden) }}
+      {{ Form.money_interval_field(form.your_income.income_tax, is_hidden) }}
+      {{ Form.money_interval_field(form.your_income.national_insurance, is_hidden) }}
+      {{ Form.money_interval_field(form.your_income.working_tax_credit, is_hidden) }}
+      {{ Form.money_interval_field(form.your_income.maintenance) }}
+      {{ Form.money_interval_field(form.your_income.pension) }}
+      {{ Form.money_interval_field(form.your_income.other_income) }}
+
+      {% if session.has_partner %}
+        <h3>Your partner’s income</h3>
+        {{ Form.money_interval_field(form.partner_income.earnings, is_hidden) }}
+        {{ Form.money_interval_field(form.partner_income.income_tax, is_hidden) }}
+        {{ Form.money_interval_field(form.partner_income.national_insurance, is_hidden) }}
+        {{ Form.money_interval_field(form.partner_income.working_tax_credit, is_hidden) }}
+        {{ Form.money_interval_field(form.partner_income.maintenance) }}
+        {{ Form.money_interval_field(form.partner_income.pension) }}
+        {{ Form.money_interval_field(form.partner_income.other_income) }}
+      {% endif %}
     {% endwith %}
+
     {{ Form.actions('Continue') }}
   </form>
 {% endblock %}
