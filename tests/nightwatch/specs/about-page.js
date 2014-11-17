@@ -2,19 +2,8 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
+var ABOUT_YOU_QUESTIONS = require('../modules/constants').ABOUT_YOU_QUESTIONS;
 
-var QUESTIONS = [
-  'have_partner',
-  'in_dispute',
-  'on_benefits',
-  'have_children',
-  'have_dependants',
-  'have_savings',
-  'own_property',
-  'is_employed',
-  'is_self_employed',
-  'aged_60_or_over'
-];
 var OUTCOMES = [
   {
     question: 'on_benefits',
@@ -44,30 +33,14 @@ var FIELDS_WITH_SUBFIELDS = [
 
 module.exports = {
   'Start page': function(client) {
-    client
-      .deleteCookies()
-      .init()
-      .maximizeWindow()
-      .waitForElementVisible('body', 1000)
-      .click('a.button-get-started')
-    ;
+    common.startPage(client);
   },
 
   'Categories of law (Your problem)': function(client) {
-    client
-      .assert.urlContains('/problem')
-      .assert.containsText('h1', 'What do you need help with?')
-      .click('input[name="categories"][value="debt"]')
-      .submitForm('form')
-    ;
+    common.selectDebtCategory(client);
   },
 
   'About you': function(client) {
-    var allToNo = function(client) {
-      QUESTIONS.forEach(function(item) {
-        client.click(util.format('input[name="%s"][value="%s"]', item, 0));
-      });
-    };
     client
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
@@ -75,11 +48,11 @@ module.exports = {
 
     // test validation
     common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again');
-    QUESTIONS.forEach(function(item) {
+    ABOUT_YOU_QUESTIONS.forEach(function(item) {
       common.submitAndCheckForFieldError(client, item, 'Not a valid choice');
     });
     FIELDS_WITH_SUBFIELDS.forEach(function(item) {
-      allToNo(client);
+      common.aboutYouSetAllToNo(client);
       client
         .verify.hidden(util.format('input[name="%s"]', item.subfield_name))
         .click(util.format('input[name="%s"][value="%s"]', item.field_name, 1))
@@ -90,14 +63,14 @@ module.exports = {
     });
 
     // test outcomes
-    allToNo(client);
+    common.aboutYouSetAllToNo(client);
     client
       .submitForm('form')
       .verify.urlContains('/income', 'Goes to /income when all answers are No')
       .url(client.launch_url + '/about')
     ;
     OUTCOMES.forEach(function(item) {
-      allToNo(client);
+      common.aboutYouSetAllToNo(client);
       client
         .click(util.format('input[name="%s"][value="%s"]', item.question, 1))
         .submitForm('form')
