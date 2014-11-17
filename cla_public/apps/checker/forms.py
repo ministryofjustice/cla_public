@@ -360,27 +360,34 @@ class IncomeFieldForm(NoCsrfForm):
 
     def api_payload(self):
         return {
-            'you': {
-                'income': {
-                    'earnings': to_money_interval(self.earnings.data),
-                    'tax_credits': to_money_interval(
-                        self.working_tax_credit.data),  # TODO - total
-                    'maintenance_received': to_money_interval(
-                        self.maintenance.data),
-                    'pension': to_money_interval(self.pension.data),
-                    'other_income': to_money_interval(self.other_income.data)
-                },
-                'deductions': {
-                    'income_tax': to_money_interval(self.income_tax.data),
-                    'national_insurance': to_money_interval(
-                        self.national_insurance.data),
-                }
+            'income': {
+                'earnings': to_money_interval(self.earnings.data),
+                'tax_credits': to_money_interval(
+                    self.working_tax_credit.data),  # TODO - total
+                'maintenance_received': to_money_interval(
+                    self.maintenance.data),
+                'pension': to_money_interval(self.pension.data),
+                'other_income': to_money_interval(self.other_income.data)
+            },
+            'deductions': {
+                'income_tax': to_money_interval(self.income_tax.data),
+                'national_insurance': to_money_interval(
+                    self.national_insurance.data),
             }
         }
 
 
 class IncomeAndTaxForm(MultiPageForm):
     your_income = FormField(IncomeFieldForm, label=u'Your personal income')
+
+    def api_payload(self):
+        partner_income = getattr(self, 'partner_income', None)
+        if partner_income:
+            partner_income = partner_income.form.api_payload()
+        return {
+            'you': self.your_income.form.api_payload(),
+            'partner': partner_income
+        }
 
 
 def income_form(*args, **kwargs):

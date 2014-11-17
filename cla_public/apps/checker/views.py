@@ -127,7 +127,7 @@ def benefits_tax_credits(user):
 
 @checker.route('/income', methods=['GET', 'POST'])
 @form_view(income_form, 'income.html')
-def income():
+def income(user):
     return proceed('outgoings')
 
 
