@@ -239,12 +239,25 @@ class PropertyForm(NoCsrfForm):
         u'How much are your monthly mortgage repayments?',
         validators=[ZeroOrNoneValidator()])
     is_rented = YesNoField(u'Does anyone pay you rent for this property?')
-    rent_amount = IntegerField(u'How much rent do they pay you?',
+    rent_amount = MoneyIntervalField(u'If Yes, how much rent do they pay you?',
                                validators=[ZeroOrNoneValidator()])
     in_dispute = YesNoField(
         u'Is your share of the property in dispute?',
         description=(
             u"For example, as part of the financial settlement of a divorce"))
+
+    def validate(self, *args, **kwargs):
+        is_valid = super(PropertyForm, self).validate(*args, **kwargs)
+
+        if self.is_rented.data == YES:
+            if not self.rent_amount.form.data['amount']:
+                self.rent_amount.form.amount.errors.append(
+                    u'Please specify the amount you receive for rent of this property'
+                )
+                is_valid = False
+
+        return is_valid
+
 
 
 class PropertiesForm(MultiPageForm):
