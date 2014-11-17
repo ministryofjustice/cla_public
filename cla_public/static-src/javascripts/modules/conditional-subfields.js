@@ -14,6 +14,9 @@
     setInitialState: function() {
       var self = this;
       this.subfields
+        .filter(function() {
+          return $(this).is(':checked');
+        })
         .each(function() {
           self.setVisibility($(this));
         });
