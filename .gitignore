@@ -65,5 +65,6 @@ node_modules/
 
 .sass-cache/
 
+cla_public/config/local.py
 cla_public/static-src/vendor/**
 cla_public/static/
