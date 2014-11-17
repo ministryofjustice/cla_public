@@ -1,0 +1,10 @@
+from flask_debugtoolbar import DebugToolbarExtension
+
+from .base import *
+
+
+DEBUG = True
+LOG_LEVEL = 'DEBUG'
+
+DEBUG_TB_INTERCEPT_REDIRECTS = False
+EXTENSIONS.append(DebugToolbarExtension())
