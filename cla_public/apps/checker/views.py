@@ -11,7 +11,7 @@ from cla_public.apps.checker.api import post_to_case_api
 from cla_public.apps.checker.constants import RESULT_OPTIONS
 from cla_public.apps.checker.decorators import form_view, override_session_vars
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, IncomeAndTaxForm, \
+    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
     OutgoingsForm, ApplicationForm
 
 
@@ -126,8 +126,8 @@ def benefits_tax_credits(user):
 
 
 @checker.route('/income', methods=['GET', 'POST'])
-@form_view(IncomeAndTaxForm, 'income.html')
-def income(user):
+@form_view(income_form, 'income.html')
+def income():
     return proceed('outgoings')
 
 

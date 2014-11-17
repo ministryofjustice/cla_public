@@ -26,7 +26,6 @@ from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
 
 
-
 log = logging.getLogger(__name__)
 
 
@@ -174,12 +173,14 @@ class AboutYouForm(MultiPageForm):
 
         if self.have_children.data == YES:
             if not self.num_children.data:
-                self.num_children.errors.append(u'Please specify the number of children you have')
+                self.num_children.errors.append(
+                    u'Please specify the number of children you have')
                 is_valid = False
 
         if self.have_dependants.data == YES:
             if not self.num_dependants.data:
-                self.num_dependants.errors.append(u'Please specify the number of dependants you have')
+                self.num_dependants.errors.append(
+                    u'Please specify the number of dependants you have')
                 is_valid = False
 
         return is_valid
@@ -316,7 +317,8 @@ class TaxCreditsForm(MultiPageForm):
         }}}
 
 
-class IncomeAndTaxForm(MultiPageForm):
+class IncomeFieldForm(NoCsrfForm):
+
     earnings = MoneyIntervalField(
         u'Wages before tax',
         description=(
@@ -371,6 +373,24 @@ class IncomeAndTaxForm(MultiPageForm):
                 }
             }
         }
+
+
+class IncomeAndTaxForm(MultiPageForm):
+    your_income = FormField(IncomeFieldForm, label=u'Your personal income')
+
+
+def income_form(*args, **kwargs):
+    """Dynamically add partner subform if user has a partner"""
+
+    class IncomeForm(IncomeAndTaxForm):
+        pass
+
+    if session.has_partner:
+        IncomeForm.partner_income = FormField(
+            IncomeFieldForm,
+            label=u'Your partner\'s income')
+
+    return IncomeForm(*args, **kwargs)
 
 
 class OutgoingsForm(MultiPageForm):
