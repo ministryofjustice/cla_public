@@ -4,8 +4,8 @@
     <li>
       Has partner
       <span class="_options">
-        <a href="?AboutYouForm_have_partner=1" {% if session.has_partner %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_have_partner=0" {% if not session.has_partner %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_have_partner=1&amp;&amp;AboutYouForm_in_dispute=0" {% if session.has_partner %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_partner=0&amp;AboutYouForm_in_dispute=0" {% if not session.has_partner %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
@@ -25,8 +25,8 @@
     <li>
       Has children
       <span class="_options">
-        <a href="?AboutYouForm_have_children=1"{% if session.has_children %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_have_children=0"{% if not session.has_children %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_have_children=1&amp;AboutYouForm_num_children=1"{% if session.has_children %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_children=0&amp;AboutYouForm_num_children="{% if not session.has_children %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
