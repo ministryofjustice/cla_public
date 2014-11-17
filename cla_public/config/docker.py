@@ -11,5 +11,5 @@ SESSION_COOKIE_SECURE = False
 HOST_NAME = os.environ['HOST_NAME']
 
 BACKEND_API = {
-    'url': os.environ['BACKEND_BASE_URI']
+    'url': os.environ['BACKEND_BASE_URI'] + '/checker/api/v1/'
 }
