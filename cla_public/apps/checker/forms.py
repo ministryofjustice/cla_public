@@ -32,6 +32,10 @@ log = logging.getLogger(__name__)
 def to_money_interval(data):
     return money_interval(data['amount'], data['interval'])
 
+LANG_CHOICES = filter(
+    lambda x: x[0] not in ('ENGLISH', 'WELSH'),
+    [('', 'Choose a language')] + ADAPTATION_LANGUAGES)
+
 
 class Struct(object):
 
@@ -447,9 +451,10 @@ class ApplicationForm(Form):
     minicom = BooleanField(u'Minicom')
     text_relay = BooleanField(u'Text Relay')
     welsh = BooleanField(u'Welsh')
-    language = SelectField(
-        u'Language',
-        choices=([('', u'Choose a language')] + ADAPTATION_LANGUAGES))
+    is_other_language = BooleanField(u'Other language')
+    other_language = SelectField(
+        u'Language required',
+        choices=([('', u'Choose a language')] + LANG_CHOICES))
 
     def api_payload(self):
         return {
@@ -465,6 +470,6 @@ class ApplicationForm(Form):
                 'bsl_webcam': self.bsl_webcam.data,
                 'minicom': self.minicom.data,
                 'text_relay': self.text_relay.data,
-                'language': self.welsh.data and 'WELSH' or self.language.data
+                'language': self.welsh.data and 'WELSH' or self.other_language.data
             }
         }

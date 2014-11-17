@@ -77,7 +77,7 @@ fieldset {
 }
 
 .form-subfield {
-  margin: 15px 0 0 10px;
+  margin: 10px 0 0 0;
 
   .js-enabled &.s-hidden {
     display: none;
@@ -87,6 +87,10 @@ fieldset {
     margin-right: 10px;
     display: block;
     margin-bottom: 5px;
+  }
+
+  .form-inline {
+    display: inline-block;
   }
 
   .input-prefix {
