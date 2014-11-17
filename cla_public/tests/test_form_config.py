@@ -40,7 +40,7 @@ class TestDescriptionRadioFieldForm(ConfigFormMixin, Form):
 class TestFormConfig(unittest.TestCase):
 
     def setUp(self):
-        self.app = app.create_app('FLASK_TEST')
+        self.app = app.create_app('config/testing.py')
         self._ctx = self.app.test_request_context()
         self._ctx.push()
 
