@@ -14,8 +14,12 @@
     {{ Form.yesno_field(form.have_partner) }}
     {{ Form.yesno_field(form.in_dispute) }}
     {{ Form.yesno_field(form.on_benefits) }}
-    {{ Form.yesno_field(form.have_children, related_field=form.num_children) }}
-    {{ Form.yesno_field(form.have_dependants, related_field=form.num_dependants) }}
+    {% call Form.yesno_field(form.have_children, related_field=form.num_children) %}
+      {{ Form.text_field(form.num_children, use_form_group=False) }}
+    {% endcall %}
+    {% call Form.yesno_field(form.have_dependants, related_field=form.num_dependants) %}
+      {{ Form.text_field(form.num_dependants, use_form_group=False) }}
+    {% endcall %}
     {{ Form.yesno_field(form.have_savings) }}
     {{ Form.yesno_field(form.own_property) }}
     {{ Form.yesno_field(form.is_employed) }}
@@ -24,4 +28,11 @@
 
     {{ Form.actions('Continue') }}
   </form>
+
+  <script>
+    window.CONDITIONAL_LABELS = {
+      num_children: 'How many?',
+      num_dependants: 'How many?'
+    };
+  </script>
 {% endblock %}

@@ -40,8 +40,9 @@
         {{ Form.text_field(property.property_value, prefix="£") }}
         {{ Form.text_field(property.mortgage_remaining, prefix="£") }}
         {{ Form.text_field(property.mortgage_payments, prefix="£") }}
-        {{ Form.yesno_field(property.is_rented) }}
-        {{ Form.text_field(property.rent_amount, prefix="£") }}
+        {% call Form.yesno_field(property.is_rented, related_field=property.rent_amount) %}
+          {{ Form.money_interval_field(property.rent_amount, use_form_group=False) }}
+        {% endcall %}
         {{ Form.yesno_field(property.in_dispute) }}
       </fieldset>
     {% endfor %}
@@ -54,4 +55,12 @@
 
     {{ Form.actions('Continue') }}
   </form>
+
+  <script>
+    window.CONDITIONAL_LABELS = {
+      'properties-0-rent_amount': 'How much rent do they pay you?',
+      'properties-1-rent_amount': 'How much rent do they pay you?',
+      'properties-2-rent_amount': 'How much rent do they pay you?'
+    };
+  </script>
 {% endblock %}

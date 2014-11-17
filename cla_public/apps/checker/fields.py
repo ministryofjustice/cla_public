@@ -7,7 +7,7 @@ from flask import session
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, Label, RadioField, SelectField, \
     SelectMultipleField, widgets, FieldList
-from wtforms.validators import ValidationError, StopValidation
+from wtforms.validators import ValidationError, StopValidation, Optional
 from wtforms.compat import text_type
 
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
@@ -138,8 +138,20 @@ class YesNoField(RadioField):
 
 class MoneyIntervalForm(NoCsrfForm):
     """Money amount and interval subform"""
-    amount = IntegerField()
+    amount = IntegerField(validators=[Optional()])
     interval = SelectField('', choices=MONEY_INTERVALS)
+
+    def validate(self, *args, **kwargs):
+        is_valid = super(MoneyIntervalForm, self).validate(*args, **kwargs)
+
+        if self.interval.data != '':
+            if self.amount.data is None:
+                self.amount.errors.append(
+                    u'Not a valid number'
+                )
+                return False
+
+        return is_valid
 
 
 class MoneyIntervalField(FormField):
