@@ -1,6 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
 var util = require('util');
 var common = require('../modules/common-functions');
 
@@ -30,6 +29,18 @@ var OUTCOMES = [
     url: '/savings'
   }
 ];
+var FIELDS_WITH_SUBFIELDS = [
+  {
+    field_name: 'have_children',
+    subfield_name: 'num_children',
+    errorText: 'Please specify the number of children you have'
+  },
+  {
+    field_name: 'have_dependants',
+    subfield_name: 'num_dependants',
+    errorText: 'Please specify the number of dependants you have'
+  }
+];
 
 module.exports = {
   'Start page': function(client) {
@@ -57,21 +68,34 @@ module.exports = {
         client.click(util.format('input[name="%s"][value="%s"]', item, 0));
       });
     };
-
     client
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
     ;
 
+    // test validation
     common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again');
+    QUESTIONS.forEach(function(item) {
+      common.submitAndCheckForFieldError(client, item, 'Not a valid choice');
+    });
+    FIELDS_WITH_SUBFIELDS.forEach(function(item) {
+      allToNo(client);
+      client
+        .verify.hidden(util.format('input[name="%s"]', item.subfield_name))
+        .click(util.format('input[name="%s"][value="%s"]', item.field_name, 1))
+        .verify.visible(util.format('input[name="%s"]', item.subfield_name))
+        .submitForm('form')
+      ;
+      common.submitAndCheckForFieldError(client, item.field_name, item.errorText);
+    });
 
+    // test outcomes
     allToNo(client);
     client
       .submitForm('form')
       .verify.urlContains('/income', 'Goes to /income when all answers are No')
       .url(client.launch_url + '/about')
     ;
-
     OUTCOMES.forEach(function(item) {
       allToNo(client);
       client
