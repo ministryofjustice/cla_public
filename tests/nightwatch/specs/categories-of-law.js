@@ -43,13 +43,7 @@ var COVERED = {
 
 module.exports = {
   'Start page': function(client) {
-    client
-      .deleteCookies()
-      .init()
-      .maximizeWindow()
-      .waitForElementVisible('body', 1000)
-      .click('a.button-get-started')
-    ;
+    common.startPage(client);
   },
 
   'Categories of law (Your problem)': function(client) {
