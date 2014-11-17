@@ -3,6 +3,10 @@
   padding: $_padding;
   margin: $_padding 0;
 
+  h3 {
+    margin-top: 0;
+  }
+
   > .icon {
     float: left;
     margin-right: 20px;
