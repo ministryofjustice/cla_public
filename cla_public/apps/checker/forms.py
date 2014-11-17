@@ -305,7 +305,7 @@ class TaxCreditsForm(MultiPageForm):
     other_benefits = PartnerYesNoField(
         u'Do you or your partner receive any other benefits not listed above?')
     total_other_benefit = MoneyIntervalField(
-        u'Total amount of benefits not listed above',
+        u'If Yes, total amount of benefits not listed above',
         validators=[ZeroOrNoneValidator()])
 
     def api_payload(self):
