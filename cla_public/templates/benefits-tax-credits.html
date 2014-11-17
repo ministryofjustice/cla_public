@@ -24,9 +24,16 @@
     {{ Form.money_interval_field(form.child_benefit, not session.has_children) }}
     {{ Form.money_interval_field(form.child_tax_credit, not session.has_children) }}
     {{ Form.check_list_field(form.benefits) }}
-    {{ Form.yesno_field(form.other_benefits) }}
-    {{ Form.money_interval_field(form.total_other_benefit) }}
+    {% call Form.yesno_field(form.other_benefits, related_field=form.total_other_benefit) %}
+      {{ Form.money_interval_field(form.total_other_benefit, use_form_group=False) }}
+    {% endcall %}
 
     {{ Form.actions('Continue') }}
   </form>
+
+  <script>
+    window.CONDITIONAL_LABELS = {
+      'total_other_benefit': 'Total amount of benefits not listed above'
+    };
+  </script>
 {% endblock %}

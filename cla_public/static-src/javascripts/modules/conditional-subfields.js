@@ -8,6 +8,7 @@
       this.cacheEls();
       this.bindEvents();
       this.setInitialState();
+      this.replaceLabels();
     },
 
     setInitialState: function() {
@@ -16,6 +17,32 @@
         return $(this).is(':checked');
       }).each(function() {
         self.setVisibility($(this).data('controls'), this.value === '1');
+      });
+    },
+
+    replaceLabels: function() {
+      if(!window.CONDITIONAL_LABELS) {
+        return;
+      }
+
+      var labelsToReplace = $.unique(
+        $.map($(this.subfields), function(item) {
+          return $(item).data('controls');
+        })
+      );
+
+      // Find labels defined in template and replace the text.
+      // Exclude the prefix/suffix labels
+      $.each(labelsToReplace, function() {
+        if(typeof window.CONDITIONAL_LABELS[this] !== 'string') {
+          return;
+        }
+
+        $('label[for="' + this + '"]')
+          .filter(function() {
+            return !$(this).hasClass('input-prefix') && !$(this).hasClass('input-suffix');
+          })
+          .text(window.CONDITIONAL_LABELS[this]);
       });
     },
 

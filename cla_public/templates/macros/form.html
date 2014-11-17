@@ -116,8 +116,15 @@
 
   Params:
     - field <@object> WTForm field
+    - field <@object> (optional) WTForm field to include as subfield
+                      (creates relationship via JS which allows toggling)
 #}
 {% macro yesno_field(field, related_field=None) %}
+  {# set subfields as macro caller and make them optional #}
+  {% if caller %}
+    {% set subfield = caller() %}
+  {% endif %}
+
   {% call form_group(field, related_field, title_as_label=False) %}
     {%- for option in field -%}
       <label class="radio-inline" for="{{option.id}}">
@@ -129,10 +136,9 @@
         {{ option.label.text -}}
       </label>
     {%- endfor -%}
-    {% if related_field %}
+    {% if related_field and subfield %}
       <div class="form-subfield s-hidden" data-subfield-id="{{related_field.id}}">
-        {{ related_field.label|test }}
-        {{ related_field(class_='form-control m-small') }}
+        {{ subfield }}
       </div>
     {% endif %}
   {% endcall %}
@@ -146,9 +152,21 @@
     - field <@object> WTForm field
     - prefix <@string> (optional) Adds label with specified string before the field
     - suffix <@string> (optional) Adds label with specified string after the field
+    - use_form_group <@boolean> (optional) Don't wrap in form group when set to False
 #}
-{% macro text_field(field, prefix=None, suffix=None) %}
-  {% call form_group(field) %}
+{% macro text_field(field, prefix=None, suffix=None, use_form_group=True) %}
+  {% if use_form_group %}
+    {% call form_group(field) %}
+      {% if prefix %}
+        <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
+      {% endif %}
+      {{ field(class_='form-control') }}
+      {% if suffix %}
+        <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
+      {% endif %}
+    {% endcall %}
+  {% else %}
+    {{ field.label }}
     {% if prefix %}
       <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
     {% endif %}
@@ -156,7 +174,7 @@
     {% if suffix %}
       <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
     {% endif %}
-  {% endcall %}
+  {% endif %}
 {% endmacro %}
 
 
@@ -196,16 +214,23 @@
     - prefix <@string> (optional) Adds label with specified string before the field
     - suffix <@string> (optional) Adds label with specified string after the field
 #}
-{% macro money_interval_field(field, is_hidden=False) %}
+{% macro money_interval_field(field, is_hidden=False, use_form_group=True) %}
   {% if is_hidden %}
     <input type="hidden" name="{{ field.amount.name }}" value="0">
     <input type="hidden" name="{{ field.interval.name }}" value="per_week">
   {% else %}
-    {% call form_group(field, title_as_label=field.amount.id) %}
+    {% if use_form_group %}
+      {% call form_group(field, title_as_label=field.amount.id) %}
+        <label class="input-prefix" for="{{field.amount.id}}">£</label>
+        {{ field.amount(class_='form-control') }}
+        {{ field.interval(class_='form-control') }}
+      {% endcall %}
+    {% else %}
+      {{field.label}}
       <label class="input-prefix" for="{{field.amount.id}}">£</label>
       {{ field.amount(class_='form-control') }}
       {{ field.interval(class_='form-control') }}
-    {% endcall %}
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
