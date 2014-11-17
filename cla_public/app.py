@@ -3,6 +3,7 @@
 
 import logging
 from flask import Blueprint, Flask, url_for, render_template
+from raven.contrib.flask import Sentry
 
 from cla_public.django_to_jinja import change_jinja_templates
 from cla_public.apps.base.views import base
@@ -32,6 +33,8 @@ def create_app(config_file=None):
         app.config.from_pyfile(config_file)
     else:
         app.config.from_envvar('CLA_PUBLIC_CONFIG')
+
+    Sentry().init_app(app)
 
     for extension in app.config['EXTENSIONS']:
         extension.init_app(app)
