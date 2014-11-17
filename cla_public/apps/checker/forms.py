@@ -7,7 +7,7 @@ from flask import session
 from flask_wtf import Form
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, IntegerField, SelectField, StringField, \
-    TextAreaField, FormField, FieldList
+    TextAreaField, FormField
 from wtforms.compat import iteritems
 from wtforms.validators import InputRequired, ValidationError
 
@@ -24,7 +24,6 @@ from cla_public.apps.checker.fields import (
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
-
 
 
 log = logging.getLogger(__name__)
@@ -174,12 +173,14 @@ class AboutYouForm(MultiPageForm):
 
         if self.have_children.data == YES:
             if not self.num_children.data:
-                self.num_children.errors.append(u'Please specify the number of children you have')
+                self.num_children.errors.append(
+                    u'Please specify the number of children you have')
                 is_valid = False
 
         if self.have_dependants.data == YES:
             if not self.num_dependants.data:
-                self.num_dependants.errors.append(u'Please specify the number of dependants you have')
+                self.num_dependants.errors.append(
+                    u'Please specify the number of dependants you have')
                 is_valid = False
 
         return is_valid
