@@ -38,6 +38,8 @@ def create_app(config_file=None):
 
     app.session_interface = CheckerSessionInterface()
 
+    register_error_handlers(app)
+
     app.register_blueprint(base)
     app.register_blueprint(checker)
 
