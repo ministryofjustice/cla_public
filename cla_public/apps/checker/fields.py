@@ -13,6 +13,7 @@ from wtforms.compat import text_type
 from cla_common.money_interval.models import MoneyInterval
 from cla_common.constants import CONTACT_SAFETY, ADAPTATION_LANGUAGES
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
+from cla_public.libs.call_centre_availability import day_choice, available_days
 
 
 partner_regex = re.compile(r'(and/or|and|or) your partner')
@@ -282,3 +283,10 @@ class AdaptationsForm(NoCsrfForm):
 
 class PartnerMoneyField(MoneyField, PartnerMixin):
     pass
+
+
+class DayChoiceField(SelectField):
+
+    def __init__(self, num_days=6, *args, **kwargs):
+        super(DayChoiceField, self).__init__(*args, **kwargs)
+        self.choices = map(day_choice, available_days(num_days))

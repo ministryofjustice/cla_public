@@ -31,6 +31,14 @@
     {{ Form.textarea_field(form.extra_notes) }}
     {{ Form.adaptations_field(form.adaptations) }}
 
+    {% for radio in form.specific_day %}
+        <p>{{ radio }} {{ radio.label }}</p>
+    {% endfor %}
+    {{ form.time_today }}
+    {{ form.time_tomorrow }}
+    {{ form.time_in_day }}
+    {{ form.day }}
+
     {% call Element.alert() %}
       <h3>What happens next</h3>
       <p>

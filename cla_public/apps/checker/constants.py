@@ -132,3 +132,9 @@ ORGANISATION_CATEGORY_MAPPING = {
     'Trouble with the police': 'Action against police',
     'Welfare benefits appeals': 'Welfare benefits'
 }
+
+DAY_CHOICES = (
+    ('today', 'Call me today at'),
+    ('tomorrow', 'Call me tomorrow at'),
+    ('specific_day', 'Call me in the next week on')
+)

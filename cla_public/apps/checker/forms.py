@@ -5,8 +5,9 @@ import logging
 
 from flask import session
 from flask_wtf import Form
-from wtforms import Form as NoCsrfForm
-from wtforms import IntegerField, SelectField, StringField, \
+
+from wtforms import Form as NoCsrfForm, RadioField
+from wtforms import BooleanField, IntegerField, SelectField, StringField, \
     TextAreaField, FormField
 from wtforms.compat import iteritems
 from wtforms.validators import InputRequired, Optional, ValidationError
@@ -15,17 +16,18 @@ from cla_common.constants import CONTACT_SAFETY
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO
+    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES
 from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyField, MoneyIntervalField, MultiCheckboxField,
     YesNoField, PartnerIntegerField, PartnerYesNoField, PartnerMoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField,
     ZeroOrNoneValidator, PropertyList, AdaptationsForm,
-    money_interval_to_monthly
+    money_interval_to_monthly, DayChoiceField
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
-
+from cla_public.libs.call_centre_availability import today_slots, \
+    tomorrow_slots, time_slots, time_choice
 
 log = logging.getLogger(__name__)
 
@@ -469,6 +471,27 @@ class ApplicationForm(Form):
     adaptations = FormField(AdaptationsForm,
         u'I need help with English or have special communication needs')
 
+    specific_day = RadioField(
+        choices=DAY_CHOICES,
+        default=DAY_CHOICES[0][0])
+
+    # choices must be set dynamically as cache is not available at runtime
+    time_today = SelectField(
+        choices=())
+    time_tomorrow = SelectField(
+        choices=())
+    time_in_day = SelectField(
+        choices=())
+
+    day = DayChoiceField()
+
+    def __init__(self, *args, **kwargs):
+        super(ApplicationForm, self).__init__(*args, **kwargs)
+
+        setattr(self._fields['time_today'], 'choices', map(time_choice, today_slots()))
+        setattr(self._fields['time_tomorrow'], 'choices', map(time_choice, tomorrow_slots()))
+        setattr(self._fields['time_in_day'], 'choices', map(time_choice, time_slots()))
+
     def api_payload(self):
         return {
             'personal_details': {
@@ -487,3 +510,8 @@ class ApplicationForm(Form):
                     or self.adaptations.other_language.data
             }
         }
+
+    def validate(self):
+        is_valid = super(ApplicationForm, self).validate()
+
+        return is_valid

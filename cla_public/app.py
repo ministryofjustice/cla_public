@@ -3,6 +3,7 @@
 
 import logging
 from flask import Blueprint, Flask, url_for, render_template
+from flask.ext.cache import Cache
 from raven.contrib.flask import Sentry
 
 from cla_public.django_to_jinja import change_jinja_templates
@@ -41,6 +42,8 @@ def create_app(config_file=None):
         extension.init_app(app)
 
     app.session_interface = CheckerSessionInterface()
+
+    app.cache = Cache(app, config=app.config['CACHE_CONFIG'])
 
     register_error_handlers(app)
 
