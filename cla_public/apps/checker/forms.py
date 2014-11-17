@@ -244,8 +244,7 @@ class PropertyForm(NoCsrfForm):
         u'How much are your monthly mortgage repayments?',
         validators=[ZeroOrNoneValidator()])
     is_rented = YesNoField(u'Does anyone pay you rent for this property?')
-    rent_amount = MoneyIntervalField(u'If Yes, how much rent do they pay you?',
-                               validators=[ZeroOrNoneValidator()])
+    rent_amount = MoneyIntervalField(u'If Yes, how much rent do they pay you?')
     in_dispute = YesNoField(
         u'Is your share of the property in dispute?',
         description=(
@@ -257,12 +256,11 @@ class PropertyForm(NoCsrfForm):
         if self.is_rented.data == YES:
             if not self.rent_amount.form.data['amount']:
                 self.rent_amount.form.amount.errors.append(
-                    u'Please specify the amount you receive for rent of this property'
-                )
+                    u'Please specify the amount you receive for rent of this '
+                    u'property')
                 is_valid = False
 
         return is_valid
-
 
 
 class PropertiesForm(MultiPageForm):
@@ -295,12 +293,10 @@ class SavingsForm(MultiPageForm):
 class TaxCreditsForm(MultiPageForm):
     child_benefit = MoneyIntervalField(
         u'Child Benefit',
-        description=u"The total amount you get for all your children",
-        validators=[ZeroOrNoneValidator()])
+        description=u"The total amount you get for all your children")
     child_tax_credit = MoneyIntervalField(
         u'Child Tax Credit',
-        description=u"The total amount you get for all your children",
-        validators=[ZeroOrNoneValidator()])
+        description=u"The total amount you get for all your children")
     benefits = PartnerMultiCheckboxField(
         u'Do you or your partner get any of these benefits?',
         description=(
@@ -310,8 +306,7 @@ class TaxCreditsForm(MultiPageForm):
     other_benefits = PartnerYesNoField(
         u'Do you or your partner receive any other benefits not listed above?')
     total_other_benefit = MoneyIntervalField(
-        u'If Yes, total amount of benefits not listed above',
-        validators=[ZeroOrNoneValidator()])
+        u'If Yes, total amount of benefits not listed above')
 
     def api_payload(self):
         return {'you': {'income': {
@@ -327,36 +322,29 @@ class IncomeFieldForm(NoCsrfForm):
         u'Wages before tax',
         description=(
             u"This includes all your wages and any earnings from "
-            u"self-employment"),
-        validators=[ZeroOrNoneValidator()])
+            u"self-employment"))
     income_tax = MoneyIntervalField(
         u'Income tax',
         description=(
             u"Tax paid directly out of your wages and any tax you pay on "
-            u"self-employed earnings"),
-        validators=[ZeroOrNoneValidator()])
+            u"self-employed earnings"))
     national_insurance = MoneyIntervalField(
         u'National Insurance contributions',
         description=(
             u"Check your payslip or your National Insurance statement if "
-            u"you’re self-employed"),
-        validators=[ZeroOrNoneValidator()])
-    working_tax_credit = MoneyIntervalField(u'Working Tax Credit',
-                                            validators=[ZeroOrNoneValidator()])
+            u"you’re self-employed"))
+    working_tax_credit = MoneyIntervalField(u'Working Tax Credit')
     maintenance = MoneyIntervalField(
         u'Maintenance received',
-        description=u"Payments you get from an ex-partner",
-        validators=[ZeroOrNoneValidator()])
+        description=u"Payments you get from an ex-partner")
     pension = MoneyIntervalField(
         u'Pension received',
-        description=u"Payments you receive if you’re retired",
-        validators=[ZeroOrNoneValidator()])
+        description=u"Payments you receive if you’re retired")
     other_income = MoneyIntervalField(
         u'Any other income',
         description=(
             u"For example, student grants, income from trust funds, "
-            u"dividends"),
-        validators=[ZeroOrNoneValidator()])
+            u"dividends"))
 
     def api_payload(self):
         return {

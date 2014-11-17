@@ -51,6 +51,7 @@ class ZeroOrNoneValidator(object):
 
             raise ValidationError(message % dict(min_val=self.min_val, max_val=self.max_val))
 
+
 class DynamicPartnerLabel(Label):
 
     def __call__(self, text=None, **kwargs):
@@ -142,16 +143,24 @@ class MoneyIntervalForm(NoCsrfForm):
     interval = SelectField('', choices=MONEY_INTERVALS)
 
     def validate(self, *args, **kwargs):
-        is_valid = super(MoneyIntervalForm, self).validate(*args, **kwargs)
+        valid_amount = self.amount.validate(self)
+        amount_not_set = self.amount.data is None
+        nonzero_amount = self.amount.data > 0
+        interval_selected = self.interval.data != ''
 
-        if self.interval.data != '':
-            if self.amount.data is None:
-                self.amount.errors.append(
-                    u'Not a valid number'
-                )
-                return False
+        if not valid_amount:
+            # default field validation should set error message
+            return False
 
-        return is_valid
+        if interval_selected and amount_not_set:
+            self.interval.errors = (u'Not a valid amount',)
+            return False
+
+        if not interval_selected and nonzero_amount:
+            self.interval.errors = (u'Please select an interval')
+            return False
+
+        return True
 
 
 class MoneyIntervalField(FormField):
@@ -160,10 +169,6 @@ class MoneyIntervalField(FormField):
     widget = widgets.ListWidget()
 
     def __init__(self, *args, **kwargs):
-        try:
-            del kwargs['validators']
-        except KeyError:
-            pass
         super(MoneyIntervalField, self).__init__(
             MoneyIntervalForm, *args, **kwargs)
 
