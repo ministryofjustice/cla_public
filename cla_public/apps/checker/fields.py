@@ -51,6 +51,7 @@ class ZeroOrNoneValidator(object):
 
             raise ValidationError(message % dict(min_val=self.min_val, max_val=self.max_val))
 
+
 class DynamicPartnerLabel(Label):
 
     def __call__(self, text=None, **kwargs):

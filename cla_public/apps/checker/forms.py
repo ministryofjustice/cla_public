@@ -26,7 +26,6 @@ from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
 
 
-
 log = logging.getLogger(__name__)
 
 
@@ -174,12 +173,14 @@ class AboutYouForm(MultiPageForm):
 
         if self.have_children.data == YES:
             if not self.num_children.data:
-                self.num_children.errors.append(u'Please specify the number of children you have')
+                self.num_children.errors.append(
+                    u'Please specify the number of children you have')
                 is_valid = False
 
         if self.have_dependants.data == YES:
             if not self.num_dependants.data:
-                self.num_dependants.errors.append(u'Please specify the number of dependants you have')
+                self.num_dependants.errors.append(
+                    u'Please specify the number of dependants you have')
                 is_valid = False
 
         return is_valid
@@ -252,12 +253,11 @@ class PropertyForm(NoCsrfForm):
         if self.is_rented.data == YES:
             if not self.rent_amount.form.data['amount']:
                 self.rent_amount.form.amount.errors.append(
-                    u'Please specify the amount you receive for rent of this property'
-                )
+                    u'Please specify the amount you receive for rent of this '
+                    u'property')
                 is_valid = False
 
         return is_valid
-
 
 
 class PropertiesForm(MultiPageForm):
