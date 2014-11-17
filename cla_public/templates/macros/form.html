@@ -4,12 +4,15 @@
 
   Params:
     - field <@object> WTForm field
+    - subfield <@object> (optional) WTForm field to include as subfield
     - title_as_label <@boolean|id> (optional, default: True)
+    - show_title_row <@boolean> (optional, default: True)
       Whether to show the title row text as label
+    - class_ <@string> (optional) CSS class attribute
 #}
 {% macro form_group(
     field,
-    related_field=None,
+    subfield=None,
     title_as_label=True,
     show_title_row=True,
     class_=''
@@ -25,7 +28,7 @@
       text=label_text
     )
   %}
-  {% set errors = field.errors or related_field.errors %}
+  {% set errors = field.errors or subfield.errors %}
   <dl class="form-group {{ class_ }}{% if errors %} m-error{% endif %}">
     {% if show_title_row %}
       <dt class="form-row">
@@ -116,29 +119,33 @@
 
   Params:
     - field <@object> WTForm field
-    - field <@object> (optional) WTForm field to include as subfield
-                      (creates relationship via JS which allows toggling)
+    - subfield <@object> (optional) WTForm field to include as subfield
+                      (creates relationship via JS for conditional toggling)
 #}
-{% macro yesno_field(field, related_field=None) %}
+{% macro yesno_field(field, subfield=None) %}
   {# set subfields as macro caller and make them optional #}
   {% if caller %}
-    {% set subfield = caller() %}
+    {% set subfield_caller = caller() %}
   {% endif %}
 
-  {% call form_group(field, related_field, title_as_label=False) %}
+  {% call form_group(field, subfield, title_as_label=False) %}
     {%- for option in field -%}
       <label class="radio-inline" for="{{option.id}}">
-        {% if related_field %}
-          {{- option(**{'data-controls': related_field.id }) }}
+        {% if subfield %}
+          {{- option(**{
+              'data-conditional-controls': subfield.id,
+              'data-conditional-show-value': '1'
+            })
+          }}
         {% else %}
           {{- option }}
         {% endif %}
         {{ option.label.text -}}
       </label>
     {%- endfor -%}
-    {% if related_field and subfield %}
-      <div class="form-subfield s-hidden" data-subfield-id="{{related_field.id}}">
-        {{ subfield }}
+    {% if subfield and subfield_caller %}
+      <div class="form-subfield s-hidden" data-conditional-id="{{subfield.id}}">
+        {{ subfield_caller }}
       </div>
     {% endif %}
   {% endcall %}
@@ -154,13 +161,13 @@
     - suffix <@string> (optional) Adds label with specified string after the field
     - use_form_group <@boolean> (optional) Don't wrap in form group when set to False
 #}
-{% macro text_field(field, prefix=None, suffix=None, use_form_group=True) %}
+{% macro text_field(field, prefix=None, suffix=None, use_form_group=True, class_='') %}
   {% if use_form_group %}
     {% call form_group(field) %}
       {% if prefix %}
         <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
       {% endif %}
-      {{ field(class_='form-control') }}
+      {{ field(class_='form-control ' + class_) }}
       {% if suffix %}
         <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
       {% endif %}
@@ -170,7 +177,7 @@
     {% if prefix %}
       <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
     {% endif %}
-    {{ field(class_='form-control') }}
+    {{ field(class_='form-control ' + class_) }}
     {% if suffix %}
       <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
     {% endif %}
@@ -232,6 +239,19 @@
       {{ field.interval(class_='form-control') }}
     {% endif %}
   {% endif %}
+{% endmacro %}
+
+
+{#
+  Select field
+
+  Params:
+    - field <@object> WTForm field
+#}
+{% macro select_field(field) %}
+  {% call form_group(field) %}
+    {{ field(class_='form-control') }}
+  {% endcall %}
 {% endmacro %}
 
 

@@ -2,7 +2,7 @@
   'use strict';
 
   moj.Modules.ConditionalSubfields = {
-    subfields: [],
+    el: '[data-conditional-controls]',
 
     init: function() {
       this.cacheEls();
@@ -13,12 +13,11 @@
 
     setInitialState: function() {
       var self = this;
-      this.subfields.filter(function() {
-        return $(this).is(':checked');
-      }).each(function() {
-        self.setVisibility($(this).data('controls'), this.value === '1');
-      });
-    },
+      this.subfields
+        .each(function() {
+          self.setVisibility($(this));
+        });
+      },
 
     replaceLabels: function() {
       if(!window.CONDITIONAL_LABELS) {
@@ -27,7 +26,7 @@
 
       var labelsToReplace = $.unique(
         $.map($(this.subfields), function(item) {
-          return $(item).data('controls');
+          return $(item).data().conditionalControls;
         })
       );
 
@@ -52,21 +51,28 @@
     },
 
     handleChange: function(evt) {
-      var $el = $(evt.target);
-      var isShown = !!parseInt($el.val());
-      var id = $el.data('controls');
-
-      this.setVisibility(id, isShown);
+      this.setVisibility($(evt.target));
     },
 
-    setVisibility: function(subfieldId, visibility) {
-      $('[data-subfield-id="' + subfieldId +'"]')
-        .toggleClass('s-expanded', visibility)
-        .toggleClass('s-hidden', !visibility);
+    setVisibility: function($field) {
+      var isShown = $field.val() === $field.data().conditionalShowValue + '';
+      var id = $field.data().conditionalControls;
+
+      if($field.is(':checkbox')) {
+        isShown = isShown && $field.is(':checked');
+      }
+
+      $('[data-conditional-id="' + id +'"]')
+        .toggleClass('s-expanded', isShown)
+        .toggleClass('s-hidden', !isShown)
+        .attr({
+          'aria-expanded': isShown,
+          'aria-hidden': !isShown
+        });
     },
 
     cacheEls: function() {
-      this.subfields = $('[data-controls]');
+      this.subfields = $(this.el);
     }
   };
 }());

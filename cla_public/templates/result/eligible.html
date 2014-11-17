@@ -23,17 +23,42 @@
     {{ Form.handle_errors(form) }}
 
     {{ Form.text_field(form.title) }}
-    {{ Form.text_field(form.full_name) }}
-    {{ Form.text_field(form.contact_number) }} {{ form.safe_to_contact }}
+    {{ Form.text_field(form.full_name, class_='m-large') }}
+    {{ Form.text_field(form.contact_number, class_='m-large') }}
+    {{ Form.select_field(form.safe_to_contact) }}
     {{ Form.text_field(form.post_code) }}
     {{ Form.textarea_field(form.address) }}
     {{ Form.textarea_field(form.extra_notes) }}
 
-    {{ form.bsl_webcam }}
-    {{ form.minicom }}
-    {{ form.text_relay }}
-    {{ form.welsh }}
-    {{ form.language }}
+    <dl class="form-group">
+      <dt class="form-row">
+        I need help with English or have special communication needs
+      </dt>
+      <dd class="form-row">
+        {{ form.bsl_webcam }} {{ form.bsl_webcam.label }}
+      </dd>
+      <dd class="form-row">
+        {{ form.minicom }} {{ form.minicom.label }}
+      </dd>
+      <dd class="form-row">
+        {{ form.text_relay }} {{ form.text_relay.label }}
+      </dd>
+      <dd class="form-row">
+        {{ form.welsh }} {{ form.welsh.label }}
+      </dd>
+      <dd class="form-row">
+        {{ form.is_other_language(**{
+            'data-conditional-controls': form.other_language.id,
+            'data-conditional-show-value': 'y'
+          })
+        }}
+        {{ form.is_other_language.label }}
+        <div class="form-subfield" data-conditional-id="{{form.other_language.id}}">
+          {{ form.other_language.label(class='form-inline') }}
+          {{ form.other_language(class_='form-control') }}
+        </div>
+      </dd>
+    </dl>
 
     {% call Element.alert() %}
       <h3>What happens next</h3>
