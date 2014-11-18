@@ -1,36 +1,36 @@
 (function () {
   'use strict';
 
-  var on_saturday = function (time) {
+  var onSaturday = function (time) {
     return time.getDay() === 6;
   };
 
-  var is_today = function (time) {
+  var isToday = function (time) {
     var today = new Date();
     return time.getFullYear() === today.getFullYear() &&
       time.getMonth() === today.getMonth() &&
       time.getDate() === today.getDate();
   };
 
-  var too_late = function (time) {
-    var cut_off = new Date();
-    cut_off.setHours(cut_off.getHours() + 1);
-    return time <= cut_off;
+  var tooLate = function (time) {
+    var cutOff = new Date();
+    cutOff.setHours(cutOff.getHours() + 1);
+    return time <= cutOff;
   };
 
-  var after_1230 = function (time) {
-    var twelve_thirty = new Date(time);
-    twelve_thirty.setHours(12, 30, 0, 0);
-    return time >= twelve_thirty;
+  var after1230 = function (time) {
+    var twelveThirty = new Date(time);
+    twelveThirty.setHours(12, 30, 0, 0);
+    return time >= twelveThirty;
   };
 
   var available = function (time) {
 
-    if (on_saturday(time) && after_1230(time)) {
+    if (onSaturday(time) && after1230(time)) {
       return false;
     }
 
-    if (is_today(time) && too_late(time)) {
+    if (isToday(time) && tooLate(time)) {
       return false;
     }
 
@@ -58,35 +58,35 @@
         };
       }
 
-      this.$day_select
+      this.$daySelect
         .on('change', this.render)
-        .on('focus', check(this.$specific_day));
+        .on('focus', check(this.$specificDay));
 
-      this.$time_select
-        .on('focus', check(this.$specific_day));
+      this.$timeSelect
+        .on('focus', check(this.$specificDay));
 
-      this.$today_time_select
+      this.$todayTimeSelect
         .on('focus', check(this.$today));
 
-      this.$tomorrow_time_select
+      this.$tomorrowTimeSelect
         .on('focus', check(this.$tomorrow));
 
       moj.Events.on('render AvailabilityTimes.render', this.render);
     },
 
     cacheEls: function () {
-      this.$day_select = $(this.el);
-      this.$time_select = $('[name=time_in_day]');
-      this.$today_time_select = $('[name=time_today]');
-      this.$tomorrow_time_select = $('[name=time_tomorrow]');
+      this.$daySelect = $(this.el);
+      this.$timeSelect = $('[name=time_in_day]');
+      this.$todayTimeSelect = $('[name=time_today]');
+      this.$tomorrowTimeSelect = $('[name=time_tomorrow]');
       this.$today = $('[name=specific_day][value=today]');
       this.$tomorrow = $('[name=specific_day][value=tomorrow]');
-      this.$specific_day = $('[name=specific_day][value=specific_day]');
+      this.$specificDay = $('[name=specific_day][value=specific_day]');
     },
 
     slot: function (time) {
-      var date = this.$day_select.val();
-      time = time || this.$time_select.val();
+      var date = this.$daySelect.val();
+      time = time || this.$timeSelect.val();
       var year = date.slice(0, 4);
       var month = parseInt(date.slice(4, 6)) - 1;  // JS months start at 0
       var day = date.slice(6);
@@ -98,11 +98,11 @@
     render: function () {
       var self = this;
 
-      $.each(this.$time_select.children(), function () {
+      $.each(this.$timeSelect.children(), function () {
         setEnabled(this, available(self.slot($(this).val())));
       });
 
-      this.$time_select.children(':not(:disabled)').first().attr('selected', true);
+      this.$timeSelect.children(':not(:disabled)').first().attr('selected', true);
     }
   };
 }());
