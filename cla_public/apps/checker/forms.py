@@ -523,7 +523,7 @@ class ApplicationForm(Form):
     time_in_day = SelectField(
         choices=())
 
-    day = DayChoiceField()
+    day = DayChoiceField(id='id_day')
 
     def __init__(self, *args, **kwargs):
         super(ApplicationForm, self).__init__(*args, **kwargs)
