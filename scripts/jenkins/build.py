@@ -56,11 +56,9 @@ def clean_pyc():
 
 def run_tests(venv_path):
     config = 'CLA_PUBLIC_CONFIG=config/jenkins.py'
-    xunit = '--with-xunit --xunit-file=junit.xml'
-    run('{conf} {venv}/bin/nosetests {xunit}'.format(
+    run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
-        conf=config,
-        xunit=xunit))
+        conf=config))
 
 
 def main():
