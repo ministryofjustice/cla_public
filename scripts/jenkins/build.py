@@ -55,7 +55,8 @@ def clean_pyc():
 
 
 def run_tests(venv_path):
-    run('{venv}/bin/nosetests'.format(venv=venv_path))
+    run('CLA_PUBLIC_CONFIG=config/jenkins.py {venv}/bin/nosetests'.format(
+        venv=venv_path))
 
 
 def main():
