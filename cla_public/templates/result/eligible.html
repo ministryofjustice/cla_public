@@ -13,10 +13,6 @@
     To find out if legal aid can help in your specific situation, you need to speak
     to an operator. Please submit your details so that they call you back.
   </p>
-  <p>
-    If you don’t have a number we can call you on, please contact
-    <a href="https://www.gov.uk/civil-legal-advice">Civil Legal Advice</a>.
-  </p>
 
   <form method="POST" action="{{ url_for('.result', outcome='eligible') }}">
     {{ form.csrf_token }}
@@ -26,6 +22,12 @@
     {{ Form.text_field(form.full_name, class_='m-large') }}
     {{ Form.text_field(form.contact_number, class_='m-large') }}
     {{ Form.select_field(form.safe_to_contact) }}
+
+    <p>
+      If you don’t have a number we can call you on, please contact
+      <a href="https://www.gov.uk/civil-legal-advice">Civil Legal Advice</a>.
+    </p>
+  
     {{ Form.text_field(form.post_code) }}
     {{ Form.textarea_field(form.address) }}
     {{ Form.textarea_field(form.extra_notes) }}
