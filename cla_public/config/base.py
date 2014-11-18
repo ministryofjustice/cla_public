@@ -21,10 +21,8 @@ BACKEND_API = {
     'url': 'http://localhost:8000/checker/api/v1/'
 }
 
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('RAVEN_CONFIG_DSN'),
-    'site': os.environ.get('RAVEN_CONFIG_SITE')
-}
+SENTRY_DSN = os.environ.get('RAVEN_CONFIG_DSN', '')
+SENTRY_SITE_NAME = os.environ.get('RAVEN_CONFIG_SITE', '')
 
 EXTENSIONS = []
 
