@@ -2,7 +2,6 @@
 "Checker forms"
 
 import logging
-import datetime
 
 from flask import session
 from flask_wtf import Form
@@ -20,16 +19,13 @@ from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES
 from cla_public.apps.checker.fields import (
-    DescriptionRadioField, MoneyField, MoneyIntervalField, MultiCheckboxField,
-    YesNoField, PartnerIntegerField, PartnerYesNoField, PartnerMoneyField,
-    PartnerMoneyIntervalField, PartnerMultiCheckboxField,
-    ZeroOrNoneValidator, PropertyList, AdaptationsForm,
-    money_interval_to_monthly, DayChoiceField
-    )
+    AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
+    MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
+    PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
+    ZeroOrNoneValidator, PropertyList, scheduled_time, money_interval_to_monthly,
+    AdaptationsForm)
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
-from cla_public.libs.call_centre_availability import today_slots, \
-    tomorrow_slots, time_slots, time_choice, available
 
 log = logging.getLogger(__name__)
 
@@ -450,44 +446,6 @@ class OutgoingsForm(MultiPageForm):
         }}}
 
 
-def parse_HHMM(s):
-    if s:
-        hour = int(s[:2])
-        minute = int(s[2:])
-        return datetime.time(hour, minute)
-    return None
-
-
-def parse_YYYYMMDD(s):
-    if s:
-        year = int(s[:4])
-        month = int(s[4:6])
-        day = int(s[6:])
-        return datetime.date(year, month, day)
-    return None
-
-
-def scheduled_time(specific_day, time_today, time_tomorrow, day, time_in_day):
-    date = datetime.date.today()
-    time = None
-
-    if specific_day == 'today':
-        time = parse_HHMM(time_today)
-
-    if specific_day == 'tomorrow':
-        date += datetime.timedelta(days=1)
-        time = parse_HHMM(time_tomorrow)
-
-    if specific_day == 'specific_day':
-        date = parse_YYYYMMDD(day)
-        time = parse_HHMM(time_in_day)
-
-    if date and time:
-        return datetime.datetime.combine(date, time)
-
-    return None
-
-
 class ApplicationForm(Form):
     title = StringField(
         u'Title',
@@ -515,30 +473,12 @@ class ApplicationForm(Form):
         choices=DAY_CHOICES,
         default=DAY_CHOICES[0][0])
 
-    # choices must be set dynamically as cache is not available at runtime
-    time_today = SelectField(
-        choices=())
-    time_tomorrow = SelectField(
-        choices=())
-    time_in_day = SelectField(
-        choices=())
-
-    day = DayChoiceField(id='id_day')
-
-    def __init__(self, *args, **kwargs):
-        super(ApplicationForm, self).__init__(*args, **kwargs)
-
-        setattr(self._fields['time_today'], 'choices',
-                map(time_choice, today_slots()))
-        setattr(self._fields['time_tomorrow'], 'choices',
-                map(time_choice, tomorrow_slots()))
-        setattr(self._fields['time_in_day'], 'choices',
-                map(time_choice, time_slots()))
+    time = AvailabilityCheckerField(u'Arrange a time for a callback.')
 
     def api_payload(self):
-        time = scheduled_time(self.specific_day.data, self.time_today.data,
-                              self.time_tomorrow.data, self.day.data,
-                              self.time_in_day.data)
+        time = scheduled_time(self.time.specific_day.data, self.time.time_today.data,
+                              self.time.time_tomorrow.data, self.time.day.data,
+                              self.time.time_in_day.data).replace(tzinfo=pytz.utc)
         return {
             'personal_details': {
                 'title': self.title.data,
@@ -557,38 +497,4 @@ class ApplicationForm(Form):
             },
             'requires_action_at': time.isoformat(),
         }
-
-    def validate(self):
-        is_valid = super(ApplicationForm, self).validate()
-        time = scheduled_time(self.specific_day.data, self.time_today.data,
-                              self.time_tomorrow.data, self.day.data,
-                              self.time_in_day.data).replace(tzinfo=pytz.utc)
-        if time is None:
-            log.warning('Failed calculating scheduled_time. self.data = {0}'
-                        .format(self.data))
-            self.specific_day.errors = [u'There was a problem with the'
-                                        u' selected time, please try again']
-            is_valid = False
-
-        validate_fields = (
-            ('time_today', 'today'),
-            ('time_tomorrow', 'tomorrow'),
-            ('time_in_day', 'specific_day'),
-        )
-
-        for field_name, specific_day in validate_fields:
-            if self.specific_day.data == specific_day and \
-                    not available(time):
-                self._fields[field_name].errors = [u'Can\'t schedule a callback'
-                                                   u' at the requested time']
-                is_valid = False
-
-        if self.specific_day.data == 'specific_day':
-            if not self.day.data:
-                self.day.errors = [u'This field is required']
-            if not available(time):
-                self.day.errors = [u'Can\'t schedule a callback '
-                                   u'on the requested day']
-
-        return is_valid
 

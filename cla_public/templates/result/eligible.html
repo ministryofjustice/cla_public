@@ -27,19 +27,13 @@
       If you don’t have a number we can call you on, please contact
       <a href="https://www.gov.uk/civil-legal-advice">Civil Legal Advice</a>.
     </p>
-  
+
     {{ Form.text_field(form.post_code) }}
     {{ Form.textarea_field(form.address) }}
     {{ Form.textarea_field(form.extra_notes) }}
     {{ Form.adaptations_field(form.adaptations) }}
 
-    {% for radio in form.specific_day %}
-        <p>{{ radio }} {{ radio.label }}</p>
-    {% endfor %}
-    {{ form.time_today }}
-    {{ form.time_tomorrow }}
-    {{ form.time_in_day }}
-    {{ form.day }}
+    {{ Form.availability_checker_field(form.time) }}
 
     {% call Element.alert() %}
       <h3>What happens next</h3>

@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 "Custom form fields"
 
+import logging
 import re
+import datetime
 
 from flask import session
+import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
@@ -11,11 +14,14 @@ from wtforms.validators import ValidationError, StopValidation, Optional
 from wtforms.compat import text_type
 
 from cla_common.money_interval.models import MoneyInterval
-from cla_common.constants import CONTACT_SAFETY, ADAPTATION_LANGUAGES
-from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
-from cla_public.libs.call_centre_availability import day_choice, available_days
+from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES, DAY_CHOICES
+from cla_public.libs.call_centre_availability import day_choice, available_days, time_choice, today_slots, \
+    tomorrow_slots, time_slots, available
+
+from cla_common.constants import ADAPTATION_LANGUAGES
 
 
+log = logging.getLogger(__name__)
 partner_regex = re.compile(r'(and/or|and|or) your partner')
 
 
@@ -290,3 +296,115 @@ class DayChoiceField(SelectField):
     def __init__(self, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.choices = map(day_choice, available_days(num_days))
+
+
+def parse_HHMM(s):
+    if s:
+        hour = int(s[:2])
+        minute = int(s[2:])
+        return datetime.time(hour, minute)
+    return None
+
+
+def parse_YYYYMMDD(s):
+    if s:
+        year = int(s[:4])
+        month = int(s[4:6])
+        day = int(s[6:])
+        return datetime.date(year, month, day)
+    return None
+
+
+def scheduled_time(specific_day, time_today, time_tomorrow, day, time_in_day):
+    date = datetime.date.today()
+    time = None
+
+    if specific_day == 'today':
+        time = parse_HHMM(time_today)
+
+    if specific_day == 'tomorrow':
+        date += datetime.timedelta(days=1)
+        time = parse_HHMM(time_tomorrow)
+
+    if specific_day == 'specific_day':
+        date = parse_YYYYMMDD(day)
+        time = parse_HHMM(time_in_day)
+
+    if date and time:
+        return datetime.datetime.combine(date, time)
+
+    return None
+
+
+class AvailabilityCheckerForm(NoCsrfForm):
+    specific_day = RadioField(
+        label=u'Arrange a callback time',
+        choices=DAY_CHOICES,
+        default=DAY_CHOICES[0][0])
+
+    # choices must be set dynamically as cache is not available at runtime
+    time_today = SelectField(
+        choices=(),
+        id='id_time_today')
+    time_tomorrow = SelectField(
+        choices=(),
+        id='id_time_tomorrow')
+    time_in_day = SelectField(
+        choices=(),
+        id='id_time_in_day')
+    day = DayChoiceField(id='id_day')
+
+    def __init__(self, *args, **kwargs):
+        kwargs['prefix'] = ''
+        super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
+
+        setattr(self._fields['time_today'], 'choices',
+                map(time_choice, today_slots()))
+        setattr(self._fields['time_tomorrow'], 'choices',
+                map(time_choice, tomorrow_slots()))
+        setattr(self._fields['time_in_day'], 'choices',
+                map(time_choice, time_slots()))
+
+    def validate(self):
+        is_valid = super(AvailabilityCheckerForm, self).validate()
+        time = scheduled_time(self.specific_day.data, self.time_today.data,
+                              self.time_tomorrow.data, self.day.data,
+                              self.time_in_day.data)
+        if time is None:
+            log.warning('Failed calculating scheduled_time. self.data = {0}'
+                        .format(self.data))
+            self.specific_day.errors = [u'There was a problem with the'
+                                        u' selected time, please try again']
+            is_valid = False
+
+        validate_fields = (
+            ('time_today', 'today'),
+            ('time_tomorrow', 'tomorrow'),
+            ('time_in_day', 'specific_day'),
+        )
+
+        for field_name, specific_day in validate_fields:
+            if self.specific_day.data == specific_day and \
+                    not available(time):
+                self._fields[field_name].errors = [u'Can\'t schedule a callback'
+                                                   u' at the requested time']
+                is_valid = False
+
+        if self.specific_day.data == 'specific_day':
+            if not self.day.data:
+                self.day.errors = [u'This field is required']
+            if not available(time):
+                self.day.errors = [u'Can\'t schedule a callback '
+                                   u'on the requested day']
+
+        return is_valid
+
+
+class AvailabilityCheckerField(FormField):
+    """Convenience class for FormField(AvailabilityCheckerForm"""
+
+    widget = widgets.ListWidget()
+
+    def __init__(self, *args, **kwargs):
+        super(AvailabilityCheckerField, self).__init__(
+            AvailabilityCheckerForm, *args, **kwargs)
