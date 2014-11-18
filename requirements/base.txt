@@ -13,6 +13,7 @@ itsdangerous==0.24
 jinja-moj-template==0.19.0
 markdown2==2.3.0
 python-dateutil==2.2
+pytz==2014.9
 raven==4.2.3
 requests==2.4.3
 six==1.8.0

@@ -135,5 +135,8 @@ def suffix(d):
 def day_choice(day):
     return (
         day.strftime('%Y%m%d'),
-        '%s %s%s' % (day.strftime('%A'), day.strftime('%d').lstrip('0'), suffix(day.day)))
+        '%s %s%s' % (
+            day.strftime('%A'),
+            day.strftime('%d').lstrip('0'),
+            suffix(day.day)))
 
