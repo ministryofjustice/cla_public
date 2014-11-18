@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 import argparse
-import subprocess
+import logging
 import os
+import subprocess
 import sys
 
+
+log = logging.getLogger(__name__)
 
 PROJECT_NAME = "cla_public"
 
@@ -25,6 +28,7 @@ def run(command, **kwargs):
     if 'shell' not in kwargs:
         kwargs['shell'] = True
 
+    log.info('Running {command}'.format(command=command))
     return_code = subprocess.call(command, **kwargs)
     if return_code:
         sys.exit(return_code)
@@ -51,7 +55,7 @@ def clean_pyc():
 
 
 def run_tests(venv_path):
-    run('{venv}/bin/python manage.py test'.format(venv=venv_path))
+    run('{venv}/bin/nosetests'.format(venv=venv_path))
 
 
 def main():
