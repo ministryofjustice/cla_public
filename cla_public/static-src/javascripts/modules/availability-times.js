@@ -2,7 +2,7 @@
   'use strict';
 
   var on_saturday = function (time) {
-    return time.getDay() == 6;
+    return time.getDay() === 6;
   };
 
   var is_today = function (time) {
@@ -96,10 +96,10 @@
     },
 
     render: function () {
-      var _this = this;
+      var self = this;
 
       $.each(this.$time_select.children(), function () {
-        setEnabled(this, available(_this.slot($(this).val())));
+        setEnabled(this, available(self.slot($(this).val())));
       });
 
       this.$time_select.children(':not(:disabled)').first().attr('selected', true);
