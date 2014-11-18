@@ -216,8 +216,7 @@ class YourBenefitsForm(MultiPageForm):
 
     def api_payload(self):
         return {
-            'on_passported_benefits': passported(self.benefits.data),
-            'on_nass_benefits': nass(self.benefits.data)
+            'on_passported_benefits': passported(self.benefits.data)
         }
 
 
@@ -309,11 +308,14 @@ class TaxCreditsForm(MultiPageForm):
         u'If Yes, total amount of benefits not listed above')
 
     def api_payload(self):
-        return {'you': {'income': {
-            'child_benefits': to_money_interval(self.child_benefit.data),
-            'tax_credits': to_money_interval(self.child_tax_credit.data),
-            'benefits': to_money_interval(self.total_other_benefit.data)
-        }}}
+        return {
+            'on_nass_benefits': nass(self.benefits.data),
+            'you': {'income': {
+                'child_benefits': to_money_interval(self.child_benefit.data),
+                'tax_credits': to_money_interval(self.child_tax_credit.data),
+                'benefits': to_money_interval(self.total_other_benefit.data)
+            }}
+        }
 
 
 class IncomeFieldForm(NoCsrfForm):
