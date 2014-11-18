@@ -57,7 +57,6 @@ module.exports = {
         .verify.hidden(util.format('input[name="%s"]', item.subfield_name))
         .click(util.format('input[name="%s"][value="%s"]', item.field_name, 1))
         .verify.visible(util.format('input[name="%s"]', item.subfield_name))
-        .submitForm('form')
       ;
       common.submitAndCheckForFieldError(client, item.field_name, item.errorText);
     });
