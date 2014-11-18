@@ -6,12 +6,12 @@ import logging
 from flask import session
 from flask_wtf import Form
 from wtforms import Form as NoCsrfForm
-from wtforms import BooleanField, IntegerField, SelectField, StringField, \
+from wtforms import IntegerField, SelectField, StringField, \
     TextAreaField, FormField
 from wtforms.compat import iteritems
 from wtforms.validators import InputRequired, ValidationError
 
-from cla_common.constants import ADAPTATION_LANGUAGES, CONTACT_SAFETY
+from cla_common.constants import CONTACT_SAFETY
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
@@ -20,7 +20,7 @@ from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField, MultiCheckboxField,
     YesNoField, PartnerIntegerField, PartnerYesNoField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField,
-    ZeroOrNoneValidator, PropertyList
+    ZeroOrNoneValidator, PropertyList, AdaptationsForm
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
@@ -31,11 +31,6 @@ log = logging.getLogger(__name__)
 
 def to_money_interval(data):
     return money_interval(data['amount'], data['interval'])
-
-LANG_CHOICES = filter(
-    lambda x: x[0] not in ('ENGLISH', 'WELSH'),
-    [('', 'Choose a language')] + ADAPTATION_LANGUAGES)
-
 
 class Struct(object):
 
@@ -444,14 +439,8 @@ class ApplicationForm(Form):
             u"In your own words, please tell us exactly what your problem is "
             u"about. The Civil Legal Advice operator will read this before "
             u"they call you."))
-    bsl_webcam = BooleanField(u'BSL - Webcam')
-    minicom = BooleanField(u'Minicom')
-    text_relay = BooleanField(u'Text Relay')
-    welsh = BooleanField(u'Welsh')
-    is_other_language = BooleanField(u'Other language')
-    other_language = SelectField(
-        u'Language required',
-        choices=([('', u'Choose a language')] + LANG_CHOICES))
+    adaptations = FormField(AdaptationsForm,
+        u'I need help with English or have special communication needs')
 
     def api_payload(self):
         return {
@@ -464,9 +453,10 @@ class ApplicationForm(Form):
                 'safe_to_contact': self.safe_to_contact.data
             },
             'adaptation_details': {
-                'bsl_webcam': self.bsl_webcam.data,
-                'minicom': self.minicom.data,
-                'text_relay': self.text_relay.data,
-                'language': self.welsh.data and 'WELSH' or self.other_language.data
+                'bsl_webcam': self.adaptations.bsl_webcam.data,
+                'minicom': self.adaptations.minicom.data,
+                'text_relay': self.adaptations.text_relay.data,
+                'language': self.adaptations.welsh.data and 'WELSH' \
+                    or self.adaptations.other_language.data
             }
         }
