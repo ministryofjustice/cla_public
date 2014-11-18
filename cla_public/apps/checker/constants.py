@@ -79,7 +79,6 @@ BENEFITS_CHOICES = [
     ('guarantee-credit', u'Guarantee Credit'),
     ('universal-credit', u'Universal Credit'),
     ('employment-support', u'Income-related Employment and Support Allowance'),
-    ('asylum-support', u'National Asylum Support Service benefit'),
     ('other-benefit', u'A different benefit not listed above'),
 ]
 
@@ -106,6 +105,7 @@ NON_INCOME_BENEFITS = [
     ('fostering', u'Fostering Allowance'),
     ('housing', u'Housing Benefit'),
     ('indep-living', u'Independent Living Funds payment'),
+    ('asylum-support', u'National Asylum Support Service benefit'),
     ('personal-indep', u'Personal Independent Payments'),
     ('severe-disablement', u'Severe Disablement Allowance'),
     ('social-fund', u'Social Fund Payments'),
