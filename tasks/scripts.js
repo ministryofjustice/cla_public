@@ -6,9 +6,10 @@ var filter = require('gulp-filter');
 var concat = require('gulp-concat');
 
 gulp.task('scripts', ['clean-js'], function() {
+  var scripts = paths.vendor_scripts.concat(paths.scripts);
   var withoutDebug = filter(['**/*.js', '!**/*debug*']);
 
-  var stream = gulp.src(paths.scripts)
+  var stream = gulp.src(scripts)
     .pipe(withoutDebug)
     .pipe(concat('cla.js'))
     .pipe(gulp.dest(paths.dest + 'javascripts'));
