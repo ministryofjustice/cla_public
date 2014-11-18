@@ -14,20 +14,18 @@ var BENEFITS = [
 ];
 
 module.exports = {
-  'Start page': function(client) {
-    common.startPage(client);
-  },
+  'Start page': common.startPage,
 
-  'Categories of law (Your problem)': function(client) {
-    common.selectDebtCategory(client);
-  },
+  'Categories of law (Your problem)': common.selectDebtCategory,
 
   'About you': function(client) {
-    common.aboutYouSetAllToNo(client);
     client
       .assert.urlContains('/about')
-      .click('input[name="on_benefits"][value="1"]')
-      .submitForm('form');
+      .assert.containsText('h1', 'About you')
+    ;
+    common.aboutPageSetAllToNo(client);
+    common.setYesNoFields(client, 'on_benefits', 1);
+    client.submitForm('form');
   },
 
   'Benefits': function(client) {

@@ -42,9 +42,7 @@ var COVERED = {
 };
 
 module.exports = {
-  'Start page': function(client) {
-    common.startPage(client);
-  },
+  'Start page': common.startPage,
 
   'Categories of law (Your problem)': function(client) {
     client
