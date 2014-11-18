@@ -13,6 +13,10 @@ class CheckerSession(SecureCookieSession):
         return self.get('ProblemForm_categories') in F2F_CATEGORIES
 
     @property
+    def category(self):
+        return self.get('ProblemForm_categories')
+
+    @property
     def has_savings(self):
         return self.get('AboutYouForm_have_savings', NO) == YES
 

@@ -5,5 +5,24 @@
 {% endblock %}
 
 {% block inner_content %}
-  <p>You can still get practical help and advice from the organisations listed below. You don’t have to qualify for legal aid to get help and advice from these organisations.</p>
+  <p>
+    You can still get practical help and advice from the organisations
+    listed below. You don’t have to qualify for legal aid to get help
+    and advice from these organisations.
+  </p>
+
+  <div class="org-list">
+    <ul>
+      {% for org in organisations %}
+        <li class="vcard">
+          <a class="org" href="{{ org.website }}">
+            {{ org.service_name }}
+          </a>
+          {% if org.helpline %}
+            <p>Helpline: <span class="tel">{{ org.helpline }}</span></p>
+          {% endif %}
+        </li>
+      </ul>
+    {% endfor %}
+  </div>
 {% endblock %}

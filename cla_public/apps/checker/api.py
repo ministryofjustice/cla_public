@@ -1,5 +1,7 @@
+from collections import OrderedDict
 from flask import current_app, session
 import slumber
+from cla_public.apps.checker.constants import CATEGORIES
 
 
 class DummyResource(object):
@@ -95,3 +97,20 @@ def post_to_case_api(form):
     payload['eligibility_check'] = reference
     response = backend.case.post(payload)
     session['case_ref'] = response['reference']
+
+
+def get_organisation_list(**kwargs):
+    backend = get_api_connection()
+    api_response = backend.organisation.get(page_size=100, **kwargs)
+    return api_response['results']
+
+
+def get_ordered_organisations_by_category(**kwargs):
+    organisations = get_organisation_list(**kwargs)
+    categories = OrderedDict((name, []) for field, name, description in CATEGORIES)
+    for organisation in organisations:
+        for cat in organisation['categories']:
+            if cat['name'] in categories:
+                categories[cat['name']].append(organisation)
+                break
+    return categories
