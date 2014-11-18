@@ -15,7 +15,8 @@
       var self = this;
       this.subfields
         .filter(function() {
-          return $(this).is(':checked');
+          // Unchecked checkbox or checked radio button
+          return this.type === 'checkbox' || $(this).is(':checked');
         })
         .each(function() {
           self.setVisibility($(this));
