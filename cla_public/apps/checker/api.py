@@ -2,7 +2,25 @@ from flask import current_app, session
 import slumber
 
 
+class DummyResource(object):
+
+    def __call__(self, *args, **kwargs):
+        return self
+
+    def post(self, payload):
+        return {'reference': 'DUMMY-REF'}
+
+    def patch(self, payload):
+        return self.post(payload)
+
+    def __getattr__(self, name):
+        return DummyResource()
+
+
 def get_api_connection():
+    if current_app.config.get('TESTING'):
+        return DummyResource()
+
     return slumber.API(current_app.config['BACKEND_API']['url'])
 
 

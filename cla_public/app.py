@@ -34,7 +34,8 @@ def create_app(config_file=None):
     else:
         app.config.from_envvar('CLA_PUBLIC_CONFIG')
 
-    Sentry().init_app(app)
+    if app.config.get('SENTRY_DSN'):
+        Sentry().init_app(app)
 
     for extension in app.config['EXTENSIONS']:
         extension.init_app(app)

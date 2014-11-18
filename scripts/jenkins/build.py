@@ -1,45 +1,72 @@
 #!/usr/bin/env python
 import argparse
-import subprocess
+import logging
 import os
+import subprocess
 import sys
+
+
+log = logging.getLogger(__name__)
 
 PROJECT_NAME = "cla_public"
 
-# use python scripts/jenkins/build.py integration
 
-# args
-parser = argparse.ArgumentParser(description='Build project ready for testing by Jenkins.')
-parser.add_argument('envname', metavar='envname', type=str, nargs=1, help='e.g. integration, production, etc.')
-args = parser.parse_args()
-
-env = args.envname[0]
-env_name = "%s-%s" % (PROJECT_NAME, env)
-env_path = "/tmp/jenkins/envs/%s" % env_name
-bin_path = "%s/bin" % env_path
+def env_name():
+    parser = argparse.ArgumentParser(
+        description='Build project ready for testing by Jenkins.')
+    parser.add_argument(
+        'envname',
+        metavar='envname',
+        type=str,
+        nargs=1,
+        help='e.g. integration, production, etc.')
+    args = parser.parse_args()
+    return args.envname[0]
 
 
 def run(command, **kwargs):
-    os.environ['CLA_PUBLIC_CONFIG'] = 'cla_public.sample.conf'
-    os.environ['PATH'] = '{0}/bin:{1}'.format(env_path, os.environ['PATH'])
-    defaults = {
-        'shell': True
-        }
-    defaults.update(kwargs)
-    return_code = subprocess.call(command, **defaults)
-    print 'Running command %r' % command
+    if 'shell' not in kwargs:
+        kwargs['shell'] = True
+
+    log.info('Running {command}'.format(command=command))
+    return_code = subprocess.call(command, **kwargs)
     if return_code:
         sys.exit(return_code)
 
-# setting up virtualenv
-if not os.path.isdir(env_path):
-    run('virtualenv --no-site-packages %s' % env_path)
 
-run('%s/pip install -r requirements.txt' % bin_path)
+def make_virtualenv(env):
+    venv_path = '/tmp/jenkins/envs/{project}-{env}'.format(
+        project=PROJECT_NAME,
+        env=env)
+
+    if not os.path.isdir(venv_path):
+        run('virtualenv --no-site-packages {path}'.format(path=venv_path))
+
+    return venv_path
 
 
-# Remove .pyc files from the project
-run("find . -name '*.pyc' -delete")
+def install_dependencies(venv_path):
+    run('{venv}/bin/pip install -r requirements/jenkins.txt'.format(
+        venv=venv_path))
 
-# run tests
-run("%s/python manage.py test" % bin_path)
+
+def clean_pyc():
+    run("find . -name '*.pyc' -delete")
+
+
+def run_tests(venv_path):
+    config = 'CLA_PUBLIC_CONFIG=config/jenkins.py'
+    run('{conf} {venv}/bin/nosetests --with-xunit'.format(
+        venv=venv_path,
+        conf=config))
+
+
+def main():
+    venv_path = make_virtualenv(env_name())
+    install_dependencies(venv_path)
+    clean_pyc()
+    run_tests(venv_path)
+
+
+if __name__ == '__main__':
+    main()
