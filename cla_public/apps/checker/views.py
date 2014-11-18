@@ -150,6 +150,7 @@ def result(outcome):
         post_to_case_api(form)
         return redirect(url_for('.result', outcome='confirmation'))
 
+    organisations = []
     if outcome == 'ineligible':
         category_name = (name for field, name, description in CATEGORIES if field == session.category).next()
         organisations = get_organisation_list(article_category__name=category_name)
