@@ -35,10 +35,10 @@
 {% endblock %}
 
 {% block javascripts %}
-  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
-  <script src="{{ url_for('static', filename='javascripts/cla.js') }}"></script>
-
   {% if config.DEBUG %}
+    <script src="{{ url_for('static', filename='javascripts/cla.js') }}"></script>
     <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('static', filename='javascripts/cla.min.js') }}"></script>
   {% endif %}
 {% endblock %}
