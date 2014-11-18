@@ -33,6 +33,8 @@
         $data.find('.context-debugger').toggleClass('s-expanded');
         $('#content').replaceWith($data);
 
+        moj.Modules.ConditionalSubfields.init();
+
         cb();
       });
     }
