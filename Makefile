@@ -1,6 +1,6 @@
 test:
-	./nightwatch -c tests/nightwatch/config.json -t ${test}
+	./nightwatch -c tests/nightwatch/local.json -t ${test}
 test-chrome:
-	./nightwatch -c tests/nightwatch/config.json --env chrome -t ${test}
+	./nightwatch -c tests/nightwatch/local.json --env chrome -t ${test}
 test-firefox:
-	./nightwatch -c tests/nightwatch/config.json --env firefox -t ${test}
+	./nightwatch -c tests/nightwatch/local.json --env firefox -t ${test}
