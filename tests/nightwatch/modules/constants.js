@@ -12,3 +12,9 @@ exports.ABOUT_YOU_QUESTIONS = [
   'is_self_employed',
   'aged_60_or_over'
 ];
+exports.PROPERTY_QUESTIONS = [
+  'properties-0-is_main_home',
+  'properties-0-other_shareholders',
+  'properties-0-is_rented',
+  'properties-0-in_dispute'
+];

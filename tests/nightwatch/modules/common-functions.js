@@ -25,10 +25,24 @@ module.exports = {
     ;
   },
 
-  aboutYouSetAllToNo: function(client) {
-    ABOUT_YOU_QUESTIONS.forEach(function(item) {
-      client.click(util.format('input[name="%s"][value="%s"]', item, 0));
-    });
+  aboutPageSetAllToNo: function(client) {
+    this.setYesNoFields(client, ABOUT_YOU_QUESTIONS, 0);
+  },
+
+  setYesNoFields: function(client, fields, val) {
+    var clickOption = function(client, field, val) {
+      client.click(util.format('input[name="%s"][value="%s"]', field, val), function() {
+        console.log(util.format('Set %s to %s', field, (val === 1 ? 'yes' : 'no')));
+      });
+    };
+
+    if(fields.constructor === Array) {
+      fields.forEach(function(field) {
+        clickOption(client, field, val);
+      });
+    } else {
+      clickOption(client, fields, val);
+    }
   },
 
   // Check validation
@@ -49,5 +63,17 @@ module.exports = {
       .assert.containsText(util.format('//input[@id="%s-0"]/ancestor::dl//*[@class="field-error"]', field), errorText)
       .useCss()
     ;
+  },
+
+  checkTextIsEqual: function(client, field, expectedText, xpath) {
+    if(xpath) { // this may come in handy using CSS selectors later on
+      client.useXpath();
+    }
+    client.getText(field, function(result) {
+      this.assert.equal(result.value, expectedText, util.format('Text of %s exactly matches "%s"', field, expectedText));
+    });
+    if(xpath) {
+      client.useCss();
+    }
   }
 };
