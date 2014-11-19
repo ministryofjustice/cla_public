@@ -9,7 +9,6 @@ var BENEFITS = [
   'guarantee-credit',
   'universal-credit',
   'employment-support',
-  'asylum-support',
   'other-benefit'
 ];
 

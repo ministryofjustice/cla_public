@@ -35,7 +35,6 @@ module.exports = {
     ;
     common.checkTextIsEqual(client, '//input[@id="properties-0-other_shareholders-0"]/ancestor::dl//*[@class="field-help"]', 'Other than you and your partner', true);
 
-
     // test validation
     common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again.');
 
@@ -53,6 +52,23 @@ module.exports = {
       .click(util.format('input[name="%s"][value="%s"]', 'properties-0-is_rented', 0))
       .submitForm('form')
       .verify.urlContains('/income')
+    ;
+
+    // add/remove properties
+    client
+      .init(client.launch_url + '/property') // in case previous verify fails
+      .assert.elementPresent('fieldset#property-set-1')
+      .assert.elementNotPresent('fieldset#property-set-2')
+      .assert.elementNotPresent('fieldset#property-set-3')
+      .click('button[name="add-property"]')
+      .waitForElementPresent('fieldset#property-set-2', 1000)
+      .click('button[name="add-property"]')
+      .waitForElementPresent('fieldset#property-set-3', 1000)
+      .assert.elementNotPresent('button[name="add-property"]')
+      .click('button[name="remove-property"][value="2"]')
+      .assert.elementNotPresent('fieldset#property-set-3')
+      .click('button[name="remove-property"][value="1"]')
+      .assert.elementNotPresent('fieldset#property-set-2')
     ;
 
     client.end();
