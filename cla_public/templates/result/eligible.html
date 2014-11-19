@@ -32,11 +32,9 @@
     {{ Form.textarea_field(form.address) }}
     {{ Form.textarea_field(form.extra_notes) }}
     {{ Form.adaptations_field(form.adaptations) }}
-
     {{ Form.availability_checker_field(form.time) }}
 
-    {% call Element.alert() %}
-      <h3>What happens next</h3>
+    {% call Element.alert(title='What happens next') %}
       <p>
         If the operator you speak to believes you can get legal aid, they will
         find you specialist legal help, like a phone call with a solicitor or
