@@ -469,10 +469,6 @@ class ApplicationForm(Form):
     adaptations = FormField(AdaptationsForm,
         u'I need help with English or have special communication needs')
 
-    specific_day = RadioField(
-        choices=DAY_CHOICES,
-        default=DAY_CHOICES[0][0])
-
     time = AvailabilityCheckerField(u'Arrange a time for a callback.')
 
     def api_payload(self):
