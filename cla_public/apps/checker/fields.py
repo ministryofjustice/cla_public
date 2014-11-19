@@ -166,13 +166,13 @@ class MoneyField(IntegerField):
                 self.data = None
                 raise ValueError(self.gettext(u'Not a valid amount'))
 
-            if self.min_val and self.data < self.min_val:
+            if self.min_val is not None and self.data < self.min_val:
                 self.data = None
                 raise ValueError(self.gettext(
                     u'Amount must be greater than £{:.2f}'.format(
                         self.min_val / 100.0)))
 
-            if self.max_val and self.data > self.max_val:
+            if self.max_val is not None and self.data > self.max_val:
                 self.data = None
                 raise ValueError(self.gettext(
                     u'Amount must be less than £{:.2f}'.format(
