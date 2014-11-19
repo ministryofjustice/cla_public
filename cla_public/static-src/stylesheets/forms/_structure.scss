@@ -44,21 +44,18 @@ fieldset {
     top: -2px;
   }
 
-  ul {
-    margin: 0 0 -5px;
-    padding: 0;
-    list-style: none;
+  .form-option-list {
+    margin-left: 8px;
   }
+}
+
+.form-option-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
   li {
-    padding: 5px;
-  }
-}
-
-  }
-}
-
-
+    margin: 5px 0;
   }
 }
 

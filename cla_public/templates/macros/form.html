@@ -94,23 +94,16 @@
     - field <@object> WTForm field
 #}
 {% macro block_label(field) %}
-  {% call form_group(field, show_title_row=False, class_='block-label') %}
-    <label class="form-label" for="{{field.id}}">
-      {{ field }}
-      {{ field.label.text }}
-      {% if field.description %}
-        <div class="field-help">
-          {{field.description|safe}}
-        </div>
-      {% endif %}
-      {% if field.more_info %}
-        <a>more info</a>
-        <div class="field-more-info">
-          {{field.more_info|safe}}
-        </div>
-      {% endif %}
-    </label>
-  {% endcall %}
+  <label class="block-label" for="{{field.id}}">
+    {{ field }}
+    {{ field.label.text }}
+
+    {% if field.description %}
+      <div class="field-help">
+        {{field.description|safe}}
+      </div>
+    {% endif %}
+  </label>
 {% endmacro %}
 
 
@@ -217,7 +210,7 @@
 #}
 {% macro check_list_field(field) %}
   {% call form_group(field, False) %}
-    {{ field }}
+    {{ field(class_='form-option-list') }}
   {% endcall %}
 {% endmacro %}
 

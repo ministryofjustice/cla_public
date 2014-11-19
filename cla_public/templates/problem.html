@@ -26,9 +26,11 @@
       {% endcall %}
     {% endif %}
 
-    {% for category in form.categories %}
-      {{ Form.block_label(category) }}
-    {% endfor %}
+    <ul class="form-option-list" role="radiogroup">
+      {% for category in form.categories %}
+        <li>{{ Form.block_label(category) }}</li>
+      {% endfor %}
+    </ul>
 
     {{ Form.actions('Continue') }}
   </form>
