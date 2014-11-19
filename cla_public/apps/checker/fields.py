@@ -5,15 +5,19 @@ import re
 
 from flask import session
 from wtforms import Form as NoCsrfForm
-from wtforms import FormField, IntegerField, Label, RadioField, SelectField, \
-    SelectMultipleField, widgets, FieldList
+from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
+    SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.validators import ValidationError, StopValidation, Optional
 from wtforms.compat import text_type
 
+from cla_common.constants import CONTACT_SAFETY, ADAPTATION_LANGUAGES
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 
-
 partner_regex = re.compile(r'(and/or|and|or) your partner')
+
+LANG_CHOICES = filter(
+    lambda x: x[0] not in ('ENGLISH', 'WELSH'),
+    [('', '-- Choose a language --')] + ADAPTATION_LANGUAGES)
 
 
 class ZeroOrNoneValidator(object):
@@ -221,3 +225,14 @@ class AdditionalPropertyForm(NoCsrfForm):
     mortgage_payments = IntegerField(
         u'How much are your monthly mortgage repayments?',
         validators=[ZeroOrNoneValidator()])
+
+
+class AdaptationsForm(NoCsrfForm):
+    bsl_webcam = BooleanField(u'BSL - Webcam')
+    minicom = BooleanField(u'Minicom')
+    text_relay = BooleanField(u'Text Relay')
+    welsh = BooleanField(u'Welsh')
+    is_other_language = BooleanField(u'Other language')
+    other_language = SelectField(
+        u'Language required:',
+        choices=(LANG_CHOICES))

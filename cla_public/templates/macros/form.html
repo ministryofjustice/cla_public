@@ -256,6 +256,49 @@
 
 
 {#
+  Adaptations field
+
+  Params:
+    - field <@object> WTForm field
+#}
+{% macro adaptations_field(field) %}
+  <dl class="form-group">
+    <dt class="form-row">
+      {{ field.label }}
+    </dt>
+    <dd class="form-row">
+      {{ field.bsl_webcam }}
+      {{ field.bsl_webcam.label }}
+    </dd>
+    <dd class="form-row">
+      {{ field.minicom }}
+      {{ field.minicom.label }}
+    </dd>
+    <dd class="form-row">
+      {{ field.text_relay }}
+      {{ field.text_relay.label }}
+    </dd>
+    <dd class="form-row">
+      {{ field.welsh }}
+      {{ field.welsh.label }}
+    </dd>
+    <dd class="form-row">
+      {{ field.is_other_language(**{
+          'data-conditional-controls': field.other_language.id,
+          'data-conditional-show-value': 'y'
+        })
+      }}
+      {{ field.is_other_language.label }}
+      <div class="form-subfield" data-conditional-id="{{field.other_language.id}}">
+        {{ field.other_language.label(class='form-inline') }}
+        {{ field.other_language(class_='form-control') }}
+      </div>
+    </dd>
+  </dl>
+{% endmacro %}
+
+
+{#
   Form actions block
 
   Params:
