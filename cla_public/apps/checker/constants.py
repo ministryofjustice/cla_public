@@ -125,3 +125,10 @@ F2F_CATEGORIES = (
 
 YES = '1'
 NO = '0'
+
+ORGANISATION_CATEGORY_MAPPING = {
+    'Abuse at home': 'Family',
+    'Public law': 'Public',
+    'Trouble with the police': 'Action against police',
+    'Welfare benefits appeals': 'Welfare benefits'
+}
