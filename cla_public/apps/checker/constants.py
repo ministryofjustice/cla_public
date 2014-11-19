@@ -132,3 +132,7 @@ ORGANISATION_CATEGORY_MAPPING = {
     'Trouble with the police': 'Action against police',
     'Welfare benefits appeals': 'Welfare benefits'
 }
+
+ELIGIBILITY_ELIGIBLE = 'eligible'
+ELIGIBILITY_INELIGIBLE = 'ineligible'
+ELIGIBILITY_UNKNOWN = 'unknown'
