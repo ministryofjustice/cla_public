@@ -218,8 +218,9 @@
 
   Params:
     - field <@object> WTForm field
-    - prefix <@string> (optional) Adds label with specified string before the field
-    - suffix <@string> (optional) Adds label with specified string after the field
+    - is_hidden <@boolean> (optional, default: False) Whether to render the field as hidden
+    - use_form_group <@boolean> (optional, default: True) Whether to use form_group to wrap
+        the field
 #}
 {% macro money_interval_field(field, is_hidden=False, use_form_group=True) %}
   {% if is_hidden %}
@@ -303,9 +304,8 @@
 
   Params:
     - button_label <@string> Button label
-    - previous_link <@boolean> (optional) Whether to show link to previous page
 #}
-{% macro actions(button_label, previous_link=None) %}
+{% macro actions(button_label) %}
   <p class="form-actions">
     <button type="submit" class="button button-larger">{{ button_label }}</button>
   </p>
