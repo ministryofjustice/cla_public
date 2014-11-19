@@ -141,9 +141,47 @@ class YesNoField(RadioField):
             choices=choices, **kwargs)
 
 
+class MoneyField(IntegerField):
+
+    def __init__(self, label=None, validators=None, min_val=0, max_val=None,
+                 **kwargs):
+        super(MoneyField, self).__init__(label, validators, **kwargs)
+        self.min_val = min_val
+        self.max_val = max_val
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            pounds, _, pence = valuelist[0].partition('.')
+            pounds = pounds.replace(',', '')
+
+            if pence and len(pence) != 2:
+                self.data = None
+                raise ValueError(self.gettext(u'Not a valid amount'))
+
+            try:
+                self.data = int(pounds) * 100
+                if pence:
+                    self.data += int(pence)
+            except ValueError:
+                self.data = None
+                raise ValueError(self.gettext(u'Not a valid amount'))
+
+            if self.min_val and self.data < self.min_val:
+                self.data = None
+                raise ValueError(self.gettext(
+                    u'Amount must be greater than £{:.2f}'.format(
+                        self.min_val / 100.0)))
+
+            if self.max_val and self.data > self.max_val:
+                self.data = None
+                raise ValueError(self.gettext(
+                    u'Amount must be less than £{:.2f}'.format(
+                        self.max_val / 100.0)))
+
+
 class MoneyIntervalForm(NoCsrfForm):
     """Money amount and interval subform"""
-    amount = IntegerField(validators=[Optional()])
+    amount = MoneyField(validators=[Optional()])
     interval = SelectField('', choices=MONEY_INTERVALS)
 
     def validate(self, *args, **kwargs):
@@ -210,23 +248,6 @@ class PartnerMultiCheckboxField(MultiCheckboxField, PartnerMixin):
     pass
 
 
-class AdditionalPropertyForm(NoCsrfForm):
-
-    property_value = IntegerField(
-        u'How much is the property worth?',
-        description=u"Use your own estimate",
-        validators=[ZeroOrNoneValidator()])
-    mortgage_remaining = IntegerField(
-        u'How much is left to pay on the mortgage?',
-        description=(
-            u"Include the full amount you owe, even if the property has "
-            u"shared ownership"),
-        validators=[ZeroOrNoneValidator()])
-    mortgage_payments = IntegerField(
-        u'How much are your monthly mortgage repayments?',
-        validators=[ZeroOrNoneValidator()])
-
-
 class AdaptationsForm(NoCsrfForm):
     bsl_webcam = BooleanField(u'BSL - Webcam')
     minicom = BooleanField(u'Minicom')
@@ -236,3 +257,7 @@ class AdaptationsForm(NoCsrfForm):
     other_language = SelectField(
         u'Language required:',
         choices=(LANG_CHOICES))
+
+
+class PartnerMoneyField(MoneyField, PartnerMixin):
+    pass
