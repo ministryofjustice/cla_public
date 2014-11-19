@@ -31,7 +31,7 @@ def form_view(form_class, form_template):
             form = form_class(request.form, session)
             if form.validate_on_submit():
                 post_to_eligibility_check_api(form)
-                is_eligible = post_to_is_eligible_api()
+                is_eligible = post_to_is_eligible_api(form)
                 if is_eligible == ELIGIBILITY_INELIGIBLE:
                     return redirect(url_for('.result', outcome='ineligible'))
                 return fn(session)
