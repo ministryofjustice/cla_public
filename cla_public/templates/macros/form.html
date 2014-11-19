@@ -160,8 +160,17 @@
     - prefix <@string> (optional) Adds label with specified string before the field
     - suffix <@string> (optional) Adds label with specified string after the field
     - use_form_group <@boolean> (optional) Don't wrap in form group when set to False
+    - class_ <@string> (optional) CSS class of input field
+    - label_class <@string> (optional) CSS class of field label (when used as subfield)
 #}
-{% macro text_field(field, prefix=None, suffix=None, use_form_group=True, class_='') %}
+{% macro text_field(
+  field,
+  prefix=None,
+  suffix=None,
+  use_form_group=True,
+  class_='',
+  label_class=''
+) %}
   {% if use_form_group %}
     {% call form_group(field) %}
       {% if prefix %}
@@ -173,7 +182,7 @@
       {% endif %}
     {% endcall %}
   {% else %}
-    {{ field.label }}
+    {{ field.label(class_=label_class) }}
     {% if prefix %}
       <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
     {% endif %}
@@ -291,7 +300,7 @@
       }}
       {{ field.is_other_language.label }}
       <div class="form-subfield" data-conditional-id="{{field.other_language.id}}">
-        {{ field.other_language.label(class='form-inline') }}
+        {{ field.other_language.label(class='label-inline') }}
         {{ field.other_language(class_='form-control') }}
       </div>
     </dd>

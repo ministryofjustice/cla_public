@@ -15,10 +15,14 @@
     {{ Form.yesno_field(form.in_dispute) }}
     {{ Form.yesno_field(form.on_benefits) }}
     {% call Form.yesno_field(form.have_children, subfield=form.num_children) %}
-      {{ Form.text_field(form.num_children, use_form_group=False) }}
+      {{ Form.text_field(form.num_children, use_form_group=False,
+          class_='m-small', label_class='label-inline')
+      }}
     {% endcall %}
     {% call Form.yesno_field(form.have_dependants, subfield=form.num_dependants) %}
-      {{ Form.text_field(form.num_dependants, use_form_group=False) }}
+      {{ Form.text_field(form.num_dependants, use_form_group=False,
+          class_='m-small', label_class='label-inline')
+      }}
     {% endcall %}
     {{ Form.yesno_field(form.have_savings) }}
     {{ Form.yesno_field(form.own_property) }}
