@@ -9,7 +9,7 @@ from wtforms import Form as NoCsrfForm
 from wtforms import IntegerField, SelectField, StringField, \
     TextAreaField, FormField
 from wtforms.compat import iteritems
-from wtforms.validators import InputRequired, ValidationError
+from wtforms.validators import InputRequired, Optional, ValidationError
 
 from cla_common.constants import CONTACT_SAFETY
 
@@ -17,8 +17,8 @@ from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS, YES, NO
 from cla_public.apps.checker.fields import (
-    DescriptionRadioField, MoneyIntervalField, MultiCheckboxField,
-    YesNoField, PartnerIntegerField, PartnerYesNoField,
+    DescriptionRadioField, MoneyField, MoneyIntervalField, MultiCheckboxField,
+    YesNoField, PartnerIntegerField, PartnerYesNoField, PartnerMoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField,
     ZeroOrNoneValidator, PropertyList, AdaptationsForm
     )
@@ -225,17 +225,17 @@ class PropertyForm(NoCsrfForm):
     other_shareholders = PartnerYesNoField(
         u'Does anyone else own a share of the property?',
         description=u"Other than you and your partner")
-    property_value = IntegerField(
+    property_value = MoneyField(
         u'How much is the property worth?',
         description=u"Use your own estimate",
         validators=[ZeroOrNoneValidator()])
-    mortgage_remaining = IntegerField(
+    mortgage_remaining = MoneyField(
         u'How much is left to pay on the mortgage?',
         description=(
             u"Include the full amount you owe, even if the property has "
             u"shared ownership"),
         validators=[ZeroOrNoneValidator()])
-    mortgage_payments = IntegerField(
+    mortgage_payments = MoneyField(
         u'How much are your monthly mortgage repayments?',
         validators=[ZeroOrNoneValidator()])
     is_rented = YesNoField(u'Does anyone pay you rent for this property?')
@@ -264,18 +264,15 @@ class PropertiesForm(MultiPageForm):
 
 
 class SavingsForm(MultiPageForm):
-    savings = IntegerField(
+    savings = MoneyField(
         description=(
-            u"The total amount of savings in cash, bank or building society"),
-        validators=[ZeroOrNoneValidator()]
-        )
-    investments = IntegerField(
-        description=u"This includes stocks, shares, bonds (but not property)",
-        validators=[ZeroOrNoneValidator()])
-    valuables = PartnerIntegerField(
+            u"The total amount of savings in cash, bank or building society"))
+    investments = MoneyField(
+        description=u"This includes stocks, shares, bonds (but not property)")
+    valuables = PartnerMoneyField(
         u'Valuable items you and your partner own worth over £500 each',
-        description=u"Total value of any items you own with some exceptions",
-        validators=[ZeroOrNoneValidator(min_val=500)])
+        min_val=50000,
+        description=u"Total value of any items you own with some exceptions")
 
     def api_payload(self):
         return {'you': {'savings': {
