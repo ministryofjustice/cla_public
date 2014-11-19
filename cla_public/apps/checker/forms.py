@@ -32,6 +32,7 @@ log = logging.getLogger(__name__)
 def to_money_interval(data):
     return money_interval(data['amount'], data['interval'])
 
+
 class Struct(object):
 
     def __init__(self, **entries):
