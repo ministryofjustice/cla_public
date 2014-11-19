@@ -111,6 +111,14 @@ def post_to_eligibility_check_api(form):
         backend.eligibility_check(reference).patch(payload)
 
 
+def post_to_is_eligible_api():
+    backend = get_api_connection()
+    reference = session.get('eligibility_check')
+
+    if reference:
+        return backend.eligibility_check(reference).is_eligible().post().get('is_eligible')
+
+
 def post_to_case_api(form):
     backend = get_api_connection()
     reference = session.get('eligibility_check')
