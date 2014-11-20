@@ -109,7 +109,11 @@ class ProblemForm(MultiPageForm):
         validators=[InputRequired()])
 
     def api_payload(self):
+        category = self.categories.data
+        if category == 'violence':
+            category = 'family'
         return {
+            'category': category,
             'notes': 'User selected category: {0}'.format(self.categories.data)
         }
 
