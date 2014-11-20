@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 
-from collections import namedtuple
 import logging
 
 from flask import abort, current_app, render_template, redirect, request, \
