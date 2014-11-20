@@ -10,10 +10,13 @@ from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
 from wtforms.validators import ValidationError, StopValidation, Optional
 from wtforms.compat import text_type
 
+from cla_common.money_interval.models import MoneyInterval
 from cla_common.constants import CONTACT_SAFETY, ADAPTATION_LANGUAGES
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 
+
 partner_regex = re.compile(r'(and/or|and|or) your partner')
+
 
 LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
@@ -205,6 +208,21 @@ class MoneyIntervalForm(NoCsrfForm):
         return True
 
 
+def money_interval_to_monthly(data):
+    amount = data['amount']
+    interval = data['interval']
+
+    if interval == 'per_month':
+        return data
+
+    multiplier = MoneyInterval._intervals_dict[interval]
+
+    return {
+        'amount': amount * multiplier,
+        'interval': 'per_month'
+    }
+
+
 class MoneyIntervalField(FormField):
     """Convenience class for FormField(MoneyIntervalForm)"""
 
@@ -213,6 +231,9 @@ class MoneyIntervalField(FormField):
     def __init__(self, *args, **kwargs):
         super(MoneyIntervalField, self).__init__(
             MoneyIntervalForm, *args, **kwargs)
+
+    def as_monthly(self):
+        return money_interval_to_monthly(self.data)
 
 
 class MultiCheckboxField(SelectMultipleField):
