@@ -149,7 +149,7 @@ def result(outcome):
     form = ApplicationForm()
     if form.validate_on_submit():
         if form.extra_notes.data:
-            session.add_note('User problem: {0}'.format(form.extra_notes.data))
+            session.add_note('User problem:\n{0}'.format(form.extra_notes.data))
 
         post_to_eligibility_check_api(session.notes_object())
         post_to_case_api(form)
