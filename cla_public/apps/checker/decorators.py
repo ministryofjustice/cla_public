@@ -2,11 +2,11 @@
 "CLA Public decorators"
 
 import functools
+from cla_common.constants import ELIGIBILITY_STATES
 
 from flask import current_app, render_template, request, session, url_for, redirect
 
 from cla_public.apps.checker.api import post_to_eligibility_check_api, post_to_is_eligible_api
-from cla_public.apps.checker.constants import ELIGIBILITY_INELIGIBLE
 
 
 def override_session_vars():
@@ -32,7 +32,7 @@ def form_view(form_class, form_template):
             if form.validate_on_submit():
                 post_to_eligibility_check_api(form)
                 is_eligible = post_to_is_eligible_api(form)
-                if is_eligible == ELIGIBILITY_INELIGIBLE:
+                if is_eligible == ELIGIBILITY_STATES.NO:
                     return redirect(url_for('.result', outcome='ineligible'))
                 return fn(session)
 
