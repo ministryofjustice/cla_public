@@ -113,8 +113,8 @@ class ProblemForm(MultiPageForm):
         category = self.categories.data
         if category == 'violence':
             category = 'family'
-        session['notes'] = {
-            'User selected category': self.categories.data}
+        session.add_note('User selected category: {0}'.format(
+            self.categories.data))
         return {
             'category': category
         }
@@ -321,10 +321,8 @@ class TaxCreditsForm(MultiPageForm):
         u'If Yes, total amount of benefits not listed above')
 
     def api_payload(self):
-        notes = session.get('notes', {})
-        notes['Other benefits'] = '{0}\n'.format('\n'.join([
-            ' - {0}'.format(benefit) for benefit in self.benefits.data]))
-        session['notes'] = notes
+        session.add_note('Other benefits:\n{0}'.format('\n'.join([
+            ' - {0}'.format(benefit) for benefit in self.benefits.data])))
         return {
             'on_nass_benefits': nass(self.benefits.data),
             'you': {'income': {

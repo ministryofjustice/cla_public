@@ -149,14 +149,10 @@ def result(outcome):
 
     form = ApplicationForm()
     if form.validate_on_submit():
-        notes = session.get('notes', {})
-        notes['User problem'] = form.extra_notes.data
+        if form.extra_notes.data:
+            session.add_note('User problem: {0}'.format(form.extra_notes.data))
 
-        class Notes(object):
-            def api_payload(self):
-                return {'notes': '\n\n'.join(
-                    '{0}:\n {1}'.format(k, v) for k, v in notes.items())}
-        post_to_eligibility_check_api(Notes())
+        post_to_eligibility_check_api(session.notes_object())
         post_to_case_api(form)
         return redirect(url_for('.result', outcome='confirmation'))
 

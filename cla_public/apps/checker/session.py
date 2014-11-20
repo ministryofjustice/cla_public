@@ -58,6 +58,20 @@ class CheckerSession(SecureCookieSession):
     def is_self_employed(self):
         return self.get('AboutYouForm_is_self_employed', NO) == YES
 
+    def add_note(self, note):
+        notes = self.get('notes', [])
+        notes.append(note)
+        self['notes'] = notes
+
+    def notes_object(self):
+        session = self
+
+        class Notes(object):
+            def api_payload(self):
+                return {'notes': '\n\n'.join(session.get('notes', []))}
+
+        return Notes()
+
 
 class CheckerSessionInterface(SecureCookieSessionInterface):
     session_class = CheckerSession
