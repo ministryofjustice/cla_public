@@ -113,9 +113,10 @@ class ProblemForm(MultiPageForm):
         category = self.categories.data
         if category == 'violence':
             category = 'family'
+        session['notes'] = {
+            'User selected category': self.categories.data}
         return {
-            'category': category,
-            'notes': 'User selected category: {0}'.format(self.categories.data)
+            'category': category
         }
 
 
@@ -320,6 +321,10 @@ class TaxCreditsForm(MultiPageForm):
         u'If Yes, total amount of benefits not listed above')
 
     def api_payload(self):
+        notes = session.get('notes', {})
+        notes['Other benefits'] = '{0}\n'.format('\n'.join([
+            ' - {0}'.format(benefit) for benefit in self.benefits.data]))
+        session['notes'] = notes
         return {
             'on_nass_benefits': nass(self.benefits.data),
             'you': {'income': {
@@ -364,7 +369,7 @@ class IncomeFieldForm(NoCsrfForm):
         tax_credits = self.working_tax_credit.as_monthly()
         child_tax_credit = session.get(
             'TaxCreditsForm_child_tax_credit',
-            {'amount': 0, 'interval': tax_credits['per_month']})
+            {'amount': 0, 'interval': 'per_month'})
         if child_tax_credit['amount'] > 0:
             if child_tax_credit['interval'] != 'per_month':
                 child_tax_credit = money_interval_to_monthly(child_tax_credit)

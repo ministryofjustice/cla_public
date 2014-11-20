@@ -215,7 +215,7 @@ def money_interval_to_monthly(data):
     if interval == 'per_month':
         return data
 
-    multiplier = MoneyInterval._intervals_dict[interval]
+    multiplier = MoneyInterval._intervals_dict[interval]['multiply_factor']
 
     return {
         'amount': amount * multiplier,
