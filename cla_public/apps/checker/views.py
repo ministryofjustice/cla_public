@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 
+import logging
+
 from flask import abort, current_app, render_template, redirect, request, \
     session, url_for
 
-import logging
-
 from cla_public.apps.checker import checker
-from cla_public.apps.checker.api import post_to_case_api, get_organisation_list
+from cla_public.apps.checker.api import post_to_case_api, \
+    post_to_eligibility_check_api, get_organisation_list
 from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, ORGANISATION_CATEGORY_MAPPING
 from cla_public.apps.checker.decorators import form_view, override_session_vars
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
@@ -147,6 +148,10 @@ def result(outcome):
 
     form = ApplicationForm()
     if form.validate_on_submit():
+        if form.extra_notes.data:
+            session.add_note('User problem:\n{0}'.format(form.extra_notes.data))
+
+        post_to_eligibility_check_api(session.notes_object())
         post_to_case_api(form)
         return redirect(url_for('.result', outcome='confirmation'))
 

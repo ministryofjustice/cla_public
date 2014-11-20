@@ -20,7 +20,8 @@ from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyField, MoneyIntervalField, MultiCheckboxField,
     YesNoField, PartnerIntegerField, PartnerYesNoField, PartnerMoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField,
-    ZeroOrNoneValidator, PropertyList, AdaptationsForm
+    ZeroOrNoneValidator, PropertyList, AdaptationsForm,
+    money_interval_to_monthly
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
@@ -109,8 +110,13 @@ class ProblemForm(MultiPageForm):
         validators=[InputRequired()])
 
     def api_payload(self):
+        category = self.categories.data
+        if category == 'violence':
+            category = 'family'
+        session.add_note('User selected category: {0}'.format(
+            self.categories.data))
         return {
-            'notes': 'User selected category: {0}'.format(self.categories.data)
+            'category': category
         }
 
 
@@ -245,6 +251,16 @@ class PropertyForm(NoCsrfForm):
         description=(
             u"For example, as part of the financial settlement of a divorce"))
 
+    def api_payload(self):
+        share = 100 if self.other_shareholders.data == NO else None
+        return {
+            'value': self.property_value.data,
+            'mortgage_left': self.mortgage_remaining.data,
+            'share': share,
+            'disputed': self.in_dispute.data,
+            'main': self.is_main_home.data
+        }
+
     def validate(self, *args, **kwargs):
         is_valid = super(PropertyForm, self).validate(*args, **kwargs)
 
@@ -261,6 +277,10 @@ class PropertyForm(NoCsrfForm):
 class PropertiesForm(MultiPageForm):
     properties = PropertyList(
         FormField(PropertyForm), min_entries=1, max_entries=3)
+
+    def api_payload(self):
+        return {'property_set': [
+            prop.form.api_payload() for prop in self.properties]}
 
 
 class SavingsForm(MultiPageForm):
@@ -301,6 +321,8 @@ class TaxCreditsForm(MultiPageForm):
         u'If Yes, total amount of benefits not listed above')
 
     def api_payload(self):
+        session.add_note('Other benefits:\n{0}'.format('\n'.join([
+            ' - {0}'.format(benefit) for benefit in self.benefits.data])))
         return {
             'on_nass_benefits': nass(self.benefits.data),
             'you': {'income': {
@@ -342,11 +364,18 @@ class IncomeFieldForm(NoCsrfForm):
             u"dividends"))
 
     def api_payload(self):
+        tax_credits = self.working_tax_credit.as_monthly()
+        child_tax_credit = session.get(
+            'TaxCreditsForm_child_tax_credit',
+            {'amount': 0, 'interval': 'per_month'})
+        if child_tax_credit['amount'] > 0:
+            if child_tax_credit['interval'] != 'per_month':
+                child_tax_credit = money_interval_to_monthly(child_tax_credit)
+            tax_credits['amount'] += child_tax_credit['amount']
         return {
             'income': {
                 'earnings': to_money_interval(self.earnings.data),
-                'tax_credits': to_money_interval(
-                    self.working_tax_credit.data),  # TODO - total
+                'tax_credits': to_money_interval(tax_credits),
                 'maintenance_received': to_money_interval(
                     self.maintenance.data),
                 'pension': to_money_interval(self.pension.data),
