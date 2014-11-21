@@ -18,3 +18,8 @@ exports.PROPERTY_QUESTIONS = [
   'properties-0-is_rented',
   'properties-0-in_dispute'
 ];
+exports.SAVINGS_QUESTIONS = [
+  'savings',
+  'investments',
+  'valuables'
+];
