@@ -9,12 +9,12 @@ CATEGORIES = [
     (
         'clinneg',
         u'Clinical negligence',
-        u'Doctors and nurses not treating you with due care'),
+        u'Doctors and nurses not treating you with due care during medical treatment'),
     (
         'commcare',
         u'Community care',
         (u'You’re unhappy with the care being provided for yourself or a '
-         u'relative')),
+         u'relative - for example, in a care home or your own home')),
     (
         'debt',
         u'Debt',
