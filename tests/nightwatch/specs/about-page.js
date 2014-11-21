@@ -52,6 +52,9 @@ module.exports = {
       client.verify.hidden(util.format('input[name="%s"]', item.subfield_name));
       common.setYesNoFields(client, item.field_name, 1);
       client.verify.visible(util.format('input[name="%s"]', item.subfield_name));
+      common.setYesNoFields(client, item.field_name, 0);
+      client.verify.hidden(util.format('input[name="%s"]', item.subfield_name));
+      common.setYesNoFields(client, item.field_name, 1);
       common.submitAndCheckForFieldError(client, item.field_name, item.errorText);
     });
 

@@ -21,6 +21,7 @@ module.exports = {
       .assert.urlContains('/problem')
       .assert.containsText('h1', 'What do you need help with?')
       .click('input[name="categories"][value="debt"]')
+      .assert.attributeEquals('input[name="categories"][value="debt"]', 'checked', 'true')
       .submitForm('form')
     ;
   },
@@ -75,5 +76,13 @@ module.exports = {
     if(xpath) {
       client.useCss();
     }
+  },
+
+  checkAttributeIsNotPresent: function(client, selector, attribute) {
+    client
+      .getAttribute(selector, attribute, function(result) {
+        this.assert.equal(result.value, null, util.format('Checking selector %s does NOT have attribute %s: %s', selector, attribute, (result.value === null)));
+      })
+    ;
   }
 };
