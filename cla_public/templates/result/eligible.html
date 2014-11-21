@@ -4,14 +4,14 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  You might qualify for legal aid with Civil Legal Advice
+  You might qualify for legal aid
 {% endblock %}
 
 {% block inner_content %}
   <h2>Request a callback</h2>
   <p>
-    To find out if legal aid can help in your specific situation, you need to speak
-    to an operator. Please submit your details so that they call you back.
+    Based on the answers you've given, you're likely to qualify financially for legal aid. To find out if legal aid can help with your specific problem, you need to speak
+    to a Civil Legal Advice operator. Please submit your details so they can call you back.
   </p>
 
   <form method="POST" action="{{ url_for('.result', outcome='eligible') }}">
