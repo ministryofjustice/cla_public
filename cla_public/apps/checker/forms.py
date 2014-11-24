@@ -469,7 +469,7 @@ class ApplicationForm(Form):
     adaptations = FormField(AdaptationsForm,
         u'I need help with English or have special communication needs')
 
-    time = AvailabilityCheckerField(u'Arrange a time for a callback.')
+    time = AvailabilityCheckerField(u'Arrange a time for a callback')
 
     def api_payload(self):
         time = scheduled_time(self.time.specific_day.data, self.time.time_today.data,
