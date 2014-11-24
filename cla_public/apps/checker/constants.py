@@ -88,7 +88,7 @@ NASS_BENEFITS = ('asylum-support',)
 MONEY_INTERVALS = [
     ('', '-- Please select --'),
     ('per_week', 'per week'),
-    ('4_weekly', '4 weekly'),
+    ('per_4week', '4 weekly'),
     ('per_month', 'per month'),
     ('per_year', 'per year')
 ]
