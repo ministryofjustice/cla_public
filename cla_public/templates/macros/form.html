@@ -301,8 +301,17 @@
       }}
       {{ field.is_other_language.label }}
       <div class="form-subfield" data-conditional-id="{{field.other_language.id}}">
-        {{ field.other_language.label(class='label-inline') }}
         {{ field.other_language(class_='form-control') }}
+      </div>
+    </dd>
+    <dd class="form-row">
+      {{ field.is_other_adaptation(**{
+          'data-conditional-controls': field.other_adaptation.id,
+          'data-conditional-show-value': 'y'
+        }) }}
+      {{ field.is_other_adaptation.label }}
+      <div class="form-subfield" data-conditional-id="{{field.other_adaptation.id}}">
+        {{ field.other_adaptation(class_='form-control', rows=4, cols=40) }}
       </div>
     </dd>
   </dl>
@@ -333,7 +342,7 @@
   {% if form.errors %}
     {% call Element.alert('error', icon='cross') %}
       <p>This form has errors.</p>
-      <p>Please correct them and try again.</p>
+      <p>Please see below for the errors you need to correct.</p>
     {% endcall %}
   {% endif %}
 {% endmacro %}
@@ -357,7 +366,7 @@
             {% elif radio.id == 'specific_day-1' %}
               {{ field.time_tomorrow(class_='form-control') }}
             {% else %}
-              {{ field.time_in_day(class_='form-control') }} {{ field.day(class_='form-control') }}
+              {{ field.day(class_='form-control') }} at {{ field.time_in_day(class_='form-control') }}
             {%  endif %}
           </span>
         </label>

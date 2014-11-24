@@ -4,8 +4,8 @@ CATEGORIES = [
     # value, label, inline help text
     (
         'violence',
-        u'Abuse at home',
-        u'Domestic violence, child abuse, harassment by an ex-partner'),
+        u'Domestic violence',
+        u'Abuse at home, child abuse, harassment by an ex-partner'),
     (
         'clinneg',
         u'Clinical negligence',

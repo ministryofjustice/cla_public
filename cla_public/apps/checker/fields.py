@@ -7,7 +7,7 @@ import datetime
 
 from flask import session
 import pytz
-from wtforms import Form as NoCsrfForm
+from wtforms import Form as NoCsrfForm, TextAreaField
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.compat import text_type
@@ -145,13 +145,13 @@ class MoneyField(IntegerField):
             if self.min_val is not None and self.data < self.min_val:
                 self.data = None
                 raise ValueError(self.gettext(
-                    u'Amount must be greater than £{:.2f}'.format(
+                    u'This amount must be more than £{:.0f}'.format(
                         self.min_val / 100.0)))
 
             if self.max_val is not None and self.data > self.max_val:
                 self.data = None
                 raise ValueError(self.gettext(
-                    u'Amount must be less than £{:.2f}'.format(
+                    u'This amount must be less than £{:.0f}'.format(
                         self.max_val / 100.0)))
 
     def process_data(self, value):
@@ -261,6 +261,10 @@ class AdaptationsForm(NoCsrfForm):
     other_language = SelectField(
         u'Language required:',
         choices=(LANG_CHOICES))
+    is_other_adaptation = BooleanField(u'Any other adaptation')
+    other_adaptation = TextAreaField(
+        u'Any other adaptation',
+        description=u'Please tell us what you need in the box below')
 
 
 class PartnerMoneyField(MoneyField, PartnerMixin):

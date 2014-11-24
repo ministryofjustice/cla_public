@@ -18,7 +18,8 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def has_savings(self):
-        return self.get('AboutYouForm_have_savings', NO) == YES
+        return self.get('AboutYouForm_have_savings', NO) == YES \
+               or self.get('AboutYouForm_have_valuables', NO) == YES
 
     @property
     def owns_property(self):
