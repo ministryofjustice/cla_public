@@ -164,6 +164,10 @@
   class_='',
   label_class=''
 ) %}
+  {% if caller %}
+    {% set text_field_caller = caller() %}
+  {% endif %}
+
   {% if use_form_group %}
     {% call form_group(field) %}
       {% if prefix %}
@@ -172,6 +176,10 @@
       {{ field(class_='form-control ' + class_) }}
       {% if suffix %}
         <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
+      {% endif %}
+
+      {% if text_field_caller %}
+        {{ text_field_caller }}
       {% endif %}
     {% endcall %}
   {% else %}
