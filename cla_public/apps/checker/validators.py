@@ -2,7 +2,7 @@ from wtforms.compat import string_types
 from wtforms.validators import StopValidation, ValidationError
 
 
-class DependantOn(object):
+class IgnoreIf(object):
 
     def __init__(self, field_name, dependencies, message=''):
         self.field_name = field_name
@@ -15,7 +15,7 @@ class DependantOn(object):
     def __call__(self, form, field):
         depfield = getattr(form, self.field_name)
         for dependency in self.dependencies:
-            if callable(dependency) and not dependency(depfield, form=form):
+            if callable(dependency) and dependency(depfield, form=form):
                 if not field.raw_data or isinstance(field.raw_data[0], string_types):
                     if hasattr(field, 'clear_errors'):
                         field.clear_errors()
@@ -31,12 +31,6 @@ class FieldValue(object):
 
     def __call__(self, field, **kwargs):
         return field.data == self.value
-
-
-class FieldValid(object):
-
-    def __call__(self, field, form=None):
-        return field.validate(form)
 
 
 class AtLeastOne(object):

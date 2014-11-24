@@ -28,7 +28,7 @@ from cla_public.apps.checker.fields import (
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
-from cla_public.apps.checker.validators import AtLeastOne, DependantOn, \
+from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
     FieldValue, MoneyIntervalAmountRequired
 
 log = logging.getLogger(__name__)
@@ -145,7 +145,7 @@ class AboutYouForm(MultiPageForm):
     num_children = IntegerField(
         u'If Yes, how many?',
         validators=[
-            DependantOn('have_children', FieldValue(YES)),
+            IgnoreIf('have_children', FieldValue(NO)),
             NumberRange(min=1)])
     have_dependants = YesNoField(
         u'Do you have any dependants aged 16 or over?',
@@ -153,7 +153,7 @@ class AboutYouForm(MultiPageForm):
     num_dependants = IntegerField(
         u'If Yes, how many?',
         validators=[
-            DependantOn('have_dependants', FieldValue(YES)),
+            IgnoreIf('have_dependants', FieldValue(NO)),
             NumberRange(min=1)])
     have_savings = YesNoField(
         u'Do you have any savings, investments or any valuable items?',
@@ -222,7 +222,7 @@ class PropertyForm(NoCsrfForm):
     rent_amount = MoneyIntervalField(
         u'If Yes, how much rent do they pay you?',
         validators=[
-            DependantOn('is_rented', FieldValue(YES)),
+            IgnoreIf('is_rented', FieldValue(NO)),
             MoneyIntervalAmountRequired()])
     in_dispute = YesNoField(
         u'Is your share of the property in dispute?',
@@ -286,7 +286,7 @@ class TaxCreditsForm(MultiPageForm):
     total_other_benefit = MoneyIntervalField(
         u'If Yes, total amount of benefits not listed above',
         validators=[
-            DependantOn('other_benefits', FieldValue(YES)),
+            IgnoreIf('other_benefits', FieldValue(NO)),
             MoneyIntervalAmountRequired()])
 
     def api_payload(self):
