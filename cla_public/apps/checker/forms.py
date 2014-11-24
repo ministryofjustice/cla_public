@@ -5,8 +5,10 @@ import logging
 
 from flask import session
 from flask_wtf import Form
-from wtforms import Form as NoCsrfForm
-from wtforms import IntegerField, SelectField, StringField, \
+import pytz
+
+from wtforms import Form as NoCsrfForm, RadioField
+from wtforms import BooleanField, IntegerField, SelectField, StringField, \
     TextAreaField, FormField
 from wtforms.compat import iteritems
 from wtforms.validators import InputRequired, Optional, ValidationError
@@ -15,17 +17,15 @@ from cla_common.constants import CONTACT_SAFETY
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO
+    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES
 from cla_public.apps.checker.fields import (
-    DescriptionRadioField, MoneyField, MoneyIntervalField, MultiCheckboxField,
-    YesNoField, PartnerIntegerField, PartnerYesNoField, PartnerMoneyField,
-    PartnerMoneyIntervalField, PartnerMultiCheckboxField,
-    ZeroOrNoneValidator, PropertyList, AdaptationsForm,
-    money_interval_to_monthly
-    )
+    AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
+    MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
+    PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
+    ZeroOrNoneValidator, PropertyList, scheduled_time, money_interval_to_monthly,
+    AdaptationsForm)
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
-
 
 log = logging.getLogger(__name__)
 
@@ -469,7 +469,12 @@ class ApplicationForm(Form):
     adaptations = FormField(AdaptationsForm,
         u'I need help with English or have special communication needs')
 
+    time = AvailabilityCheckerField(u'Arrange a time for a callback.')
+
     def api_payload(self):
+        time = scheduled_time(self.time.specific_day.data, self.time.time_today.data,
+                              self.time.time_tomorrow.data, self.time.day.data,
+                              self.time.time_in_day.data).replace(tzinfo=pytz.utc)
         return {
             'personal_details': {
                 'title': self.title.data,
@@ -484,6 +489,8 @@ class ApplicationForm(Form):
                 'minicom': self.adaptations.minicom.data,
                 'text_relay': self.adaptations.text_relay.data,
                 'language': self.adaptations.welsh.data and 'WELSH' \
-                    or self.adaptations.other_language.data
-            }
+                            or self.adaptations.other_language.data
+            },
+            'requires_action_at': time.isoformat(),
         }
+

@@ -24,6 +24,10 @@ BACKEND_API = {
 SENTRY_DSN = os.environ.get('RAVEN_CONFIG_DSN', '')
 SENTRY_SITE_NAME = os.environ.get('RAVEN_CONFIG_SITE', '')
 
+CACHE_CONFIG = {
+    'CACHE_TYPE': 'simple'
+}
+
 EXTENSIONS = []
 
 # local.py overrides all the common settings.

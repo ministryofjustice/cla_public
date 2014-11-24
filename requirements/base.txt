@@ -1,5 +1,6 @@
 Flask-WTF==0.10.2
 Flask==0.10.1
+Flask-Cache==0.13.1
 Jinja2==2.7.3
 MarkupSafe==0.23
 PyYAML==3.11
@@ -12,6 +13,7 @@ itsdangerous==0.24
 jinja-moj-template==0.19.0
 markdown2==2.3.0
 python-dateutil==2.2
+pytz==2014.9
 raven==4.2.3
 requests==2.4.3
 six==1.8.0

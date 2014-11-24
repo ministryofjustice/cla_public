@@ -327,3 +327,27 @@
     {% endcall %}
   {% endif %}
 {% endmacro %}
+
+
+{#
+  Availability checker field
+
+  Params:
+    - field <@object> WTForm field
+#}
+{% macro availability_checker_field(field) %}
+  {% call form_group(field) %}
+    {% for radio in field.specific_day %}
+      <p>
+        {{ radio }} {{ radio.label }}
+        {% if radio.id == 'specific_day-0' %}
+          {{ field.time_today(class_='form-control') }}
+        {% elif radio.id == 'specific_day-1' %}
+          {{ field.time_tomorrow(class_='form-control') }}
+        {% else %}
+          {{ field.time_in_day(class_='form-control') }} {{ field.day(class_='form-control') }}
+        {%  endif %}
+      </p>
+    {% endfor %}
+  {% endcall %}
+{% endmacro %}
