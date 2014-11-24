@@ -2,7 +2,7 @@
   'use strict';
 
   moj.Modules.LabelSelect = {
-    el: '.block-label',
+    el: '.block-label, .radio-inline',
 
     init: function () {
       _.bindAll(this, 'render');

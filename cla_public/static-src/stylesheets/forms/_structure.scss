@@ -29,6 +29,8 @@ fieldset {
   &.m-error {
     background: lighten($mellow-red, 42);
     background: rgba($red, .1);
+    border-top-color: desaturate(lighten($mellow-red, 30), 50);
+    border-top-color: rgba(black, .12);
 
     .form-row {
       padding: 0 20px;
@@ -58,6 +60,22 @@ fieldset {
   }
 }
 
+.form-field {
+  margin: 15px 0 0;
+
+  &:first-child {
+    margin: 0;
+  }
+}
+
+.form-inline-field {
+  display: inline-block;
+
+  input + & {
+    margin-left: 5px;
+  }
+}
+
 .form-option-list {
   margin: 0;
   padding: 0;
@@ -66,11 +84,6 @@ fieldset {
   li {
     margin: 5px 0;
   }
-}
-
-.radio-inline {
-  display: inline-block;
-  padding: 0 10px;
 }
 
 .form-actions {
