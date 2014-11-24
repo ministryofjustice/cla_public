@@ -154,6 +154,13 @@ class MoneyField(IntegerField):
                     u'Amount must be less than £{:.2f}'.format(
                         self.max_val / 100.0)))
 
+    def process_data(self, value):
+        self.data = value
+        if value:
+            pence = value % 100
+            pounds = value / 100
+            self.data = '{0}.{1:02}'.format(pounds, pence)
+
 
 class MoneyIntervalForm(NoCsrfForm):
     """Money amount and interval subform"""
