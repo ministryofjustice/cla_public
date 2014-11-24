@@ -5,7 +5,7 @@ import os
 import subprocess
 import sys
 
-from flask_script import Manager, Shell, Server
+from flask.ext.script import Manager, Shell, Server
 
 from cla_public.app import create_app
 

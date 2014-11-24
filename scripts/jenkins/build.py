@@ -2,13 +2,17 @@
 import argparse
 import logging
 import os
+import signal
 import subprocess
 import sys
+from Queue import Queue
 
 
 log = logging.getLogger(__name__)
 
 PROJECT_NAME = "cla_public"
+
+background_processes = Queue()
 
 
 def env_name():
@@ -24,11 +28,17 @@ def env_name():
     return args.envname[0]
 
 
-def run(command, **kwargs):
+def run(command, background=False, **kwargs):
     if 'shell' not in kwargs:
         kwargs['shell'] = True
 
     log.info('Running {command}'.format(command=command))
+
+    if background:
+        process = subprocess.Popen(command, **kwargs)
+        background_processes.put(process)
+        return process
+
     return_code = subprocess.call(command, **kwargs)
     if return_code:
         sys.exit(return_code)
@@ -48,7 +58,7 @@ def make_virtualenv(env):
 def install_dependencies(venv_path):
     run('{venv}/bin/pip install -r requirements/jenkins.txt'.format(
         venv=venv_path))
-
+    run('npm install')
     run('bower install')
 
 
@@ -61,13 +71,36 @@ def run_tests(venv_path):
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
+    run('{venv}/bin/python manage.py runserver'.format(venv=venv_path),
+        background=True)
+    run('./nightwatch -c tests/nightwatch/local.json -o nightwatch.xml')
+
+
+def kill_child_processes(pid, sig=signal.SIGTERM):
+    ps_cmd = subprocess.Popen(
+        'ps -o pid --ppid {0} --noheaders'.format(pid),
+        shell=True,
+        stdout=subprocess.PIPE)
+    ps_out = ps_cmd.stdout.read()
+    retcode = ps_cmd.wait()
+    for pid_str in ps_out.split('\n')[:-1]:
+        os.kill(int(pid_str), sig)
 
 
 def main():
-    venv_path = make_virtualenv(env_name())
-    install_dependencies(venv_path)
-    clean_pyc()
-    run_tests(venv_path)
+    try:
+        venv_path = make_virtualenv(env_name())
+        install_dependencies(venv_path)
+        clean_pyc()
+        run_tests(venv_path)
+    finally:
+        while not background_processes.empty():
+            process = background_processes.get()
+            try:
+                kill_child_processes(process.pid)
+                process.kill()
+            except OSError:
+                pass
 
 
 if __name__ == '__main__':
