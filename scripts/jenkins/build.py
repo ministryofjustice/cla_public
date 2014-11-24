@@ -82,7 +82,7 @@ def kill_child_processes(pid, sig=signal.SIGTERM):
         stdout=subprocess.PIPE)
     ps_out = ps_cmd.stdout.read()
     retcode = ps_cmd.wait()
-    for pid_str in ps_output.split('\n')[:-1]:
+    for pid_str in ps_out.split('\n')[:-1]:
         os.kill(int(pid_str), sig)
 
 
