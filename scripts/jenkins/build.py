@@ -71,7 +71,8 @@ def run_tests(venv_path):
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
-    run('./manage.py runserver', background=True)
+    run('{venv}/bin/python manage.py runserver'.format(venv=venv_path),
+        background=True)
     run('./nightwatch -c tests/nightwatch/local.json -o nightwatch.xml')
 
 
