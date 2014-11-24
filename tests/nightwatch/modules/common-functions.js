@@ -61,6 +61,8 @@ module.exports = {
     client
       .submitForm('form')
       .useXpath()
+      // TODO: YOU ARE HERE
+      // need to make this work with SELECT elements not just INPUTS
       .assert.containsText(util.format('//input[@name="%s"]/ancestor::dl//*[@class="field-error"]', field), errorText)
       .useCss()
     ;
