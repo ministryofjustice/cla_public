@@ -257,14 +257,18 @@ class SavingsForm(MultiPageForm):
         description=u"This includes stocks, shares, bonds (but not property)")
     valuables = PartnerMoneyField(
         u'Valuable items you and your partner own worth over £500 each',
-        min_val=50000,
         description=u"Total value of any items you own with some exceptions")
 
     def api_payload(self):
+        # rather than showing an error message, just ignore values less than
+        # £500
+        valuables = self.valuables.data
+        if valuables < 50000:
+            valuables = 0
         return {'you': {'savings': {
             'bank_balance': self.savings.data,
             'investment_balance': self.investments.data,
-            'asset_balance': self.valuables.data
+            'asset_balance': valuables
         }}}
 
 
