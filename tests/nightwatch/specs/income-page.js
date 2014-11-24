@@ -23,8 +23,9 @@ module.exports = {
       .assert.urlContains('/income')
       .assert.containsText('h1', 'Your income and tax')
     ;
+  },
 
-    // test context-dependent questions for employment status
+  'Context-dependent questions for employment status': function(client) {
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client.assert.hidden(util.format('[name="your_income-%s-amount"]', item));
       client.assert.hidden(util.format('[name="your_income-%s-interval"]', item));
@@ -44,8 +45,9 @@ module.exports = {
       client.assert.visible(util.format('[name="your_income-%s-amount"]', item));
       client.assert.visible(util.format('[name="your_income-%s-interval"]', item));
     });
+  },
 
-    // context-dependent text and questions for partner
+  'Context-dependent text and questions for partner': function(client) {
     client
       .assert.doesNotContainText('body', 'Your personal income')
       .assert.doesNotContainText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.')
