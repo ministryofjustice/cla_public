@@ -16,8 +16,9 @@
   <h3>What happens next?</h3>
   <p>
     Your details have been submitted and an operator will call you back
-    around the time you requested. If the
-    operator you speak to believes you can get legal aid, they will find
+    around the time you requested
+    (<strong>{{ session.time_to_callback|datetime('full') }}</strong>).
+    If the operator you speak to believes you can get legal aid, they will find
     you specialist legal help, like a phone call with a solicitor or
     support from a family mediation service.
   </p>
