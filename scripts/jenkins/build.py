@@ -48,7 +48,7 @@ def make_virtualenv(env):
 def install_dependencies(venv_path):
     run('{venv}/bin/pip install -r requirements/jenkins.txt'.format(
         venv=venv_path))
-
+    run('npm install')
     run('bower install')
 
 
