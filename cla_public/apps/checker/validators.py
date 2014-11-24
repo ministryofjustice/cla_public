@@ -1,3 +1,4 @@
+from wtforms.compat import string_types
 from wtforms.validators import StopValidation, ValidationError
 
 
@@ -15,10 +16,11 @@ class DependantOn(object):
         depfield = getattr(form, self.field_name)
         for dependency in self.dependencies:
             if callable(dependency) and not dependency(depfield, form=form):
-                if hasattr(field, 'clear_errors'):
-                    field.clear_errors()
-                else:
-                    field.errors = []
+                if not field.raw_data or isinstance(field.raw_data[0], string_types):
+                    if hasattr(field, 'clear_errors'):
+                        field.clear_errors()
+                    else:
+                        field.errors[:] = []
                 raise StopValidation()
 
 
@@ -59,7 +61,31 @@ class AtLeastOne(object):
 class MoneyIntervalAmountRequired(object):
 
     def __call__(self, form, field):
-        data = field.data
-        if 'amount' not in data or data['amount'] < 0:
-            field.errors[:] = []
+        amount = field.form.amount.data
+        if amount is None:
             raise ValidationError(u'Please provide an amount')
+
+
+class ValidMoneyInterval(object):
+    """
+    Validates that either an amount and interval have been set, or that a zero
+    amount has been set.
+    """
+
+    def __call__(self, form, field):
+        amount = field.form.amount
+        interval = field.form.interval
+        amount_not_set = amount.data is None
+        nonzero_amount = amount.data > 0
+        interval_selected = interval.data != ''
+
+        try:
+            amount.validate(field.form)
+        except ValidationError as e:
+            raise e
+
+        if interval_selected and amount_not_set:
+            raise ValidationError(u'Not a valid amount')
+
+        if not interval_selected and nonzero_amount:
+            raise ValidationError(u'Please select an interval')

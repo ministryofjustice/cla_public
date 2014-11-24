@@ -11,14 +11,16 @@ from wtforms import Form as NoCsrfForm
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.compat import text_type
-from wtforms.validators import Optional
+from wtforms.validators import Optional, StopValidation
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_common.money_interval.models import MoneyInterval
-from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES, DAY_CHOICES
-from cla_public.libs.call_centre_availability import day_choice, available_days, time_choice, today_slots, \
+from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES, \
+    DAY_CHOICES
+from cla_public.apps.checker.validators import ValidMoneyInterval
+from cla_public.libs.call_centre_availability import day_choice, \
+    available_days, time_choice, today_slots, \
     tomorrow_slots, time_slots, available
-
 
 
 log = logging.getLogger(__name__)
@@ -158,32 +160,6 @@ class MoneyIntervalForm(NoCsrfForm):
     amount = MoneyField(validators=[Optional()])
     interval = SelectField('', choices=MONEY_INTERVALS)
 
-    def validate(self, *args, **kwargs):
-        valid_amount = self.amount.validate(self)
-        amount_not_set = self.amount.data is None
-        nonzero_amount = self.amount.data > 0
-        interval_selected = self.interval.data != ''
-
-        if not valid_amount:
-            # default field validation should set error message
-            return False
-
-        if interval_selected and amount_not_set:
-            self.interval.errors = (u'Not a valid amount',)
-            return False
-
-        if not interval_selected and nonzero_amount:
-            self.interval.errors = (u'Please select an interval')
-            return False
-
-        return True
-
-    def clear_errors(self):
-        self._errors = None
-        for name, field in self._fields.iteritems():
-            if field.errors:
-                field.errors[:] = []
-
 
 def money_interval_to_monthly(data):
     amount = data['amount']
@@ -204,10 +180,12 @@ class MoneyIntervalField(FormField):
     """Convenience class for FormField(MoneyIntervalForm)"""
 
     def __init__(self, *args, **kwargs):
+        self._errors = []
         self.validators = []
         if 'validators' in kwargs:
-            self.validators = kwargs['validators']
+            self.validators.extend(kwargs['validators'])
             del kwargs['validators']
+        self.validators.append(ValidMoneyInterval())
 
         super(MoneyIntervalField, self).__init__(
             MoneyIntervalForm, *args, **kwargs)
@@ -217,11 +195,15 @@ class MoneyIntervalField(FormField):
 
     def validate(self, form, extra_validators=None):
         stop_validation = self._run_validation_chain(form, self.validators)
-        is_valid = not stop_validation and self.form.validate()
-        return len(self.errors) == 0 and is_valid
+        return len(self.errors) == 0
 
-    def clear_errors(self):
-        self.form.clear_errors()
+    @property
+    def errors(self):
+        return self._errors
+
+    @errors.setter
+    def errors(self, _errors):
+        self._errors = _errors
 
 
 class MultiCheckboxField(SelectMultipleField):
