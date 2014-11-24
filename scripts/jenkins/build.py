@@ -2,6 +2,7 @@
 import argparse
 import logging
 import os
+import signal
 import subprocess
 import sys
 from Queue import Queue
