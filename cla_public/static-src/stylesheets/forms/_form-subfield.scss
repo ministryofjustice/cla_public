@@ -1,0 +1,22 @@
+.form-subfield {
+  margin: 15px 0 0 0;
+
+  .js-enabled &.s-hidden {
+    display: none;
+  }
+
+  label {
+    margin-right: 10px;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .label-inline {
+    display: inline-block;
+  }
+
+  .input-prefix {
+    margin: 0;
+    display: inline-block;
+  }
+}

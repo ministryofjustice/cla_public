@@ -6,28 +6,39 @@ fieldset {
     margin: 0 0 10px;
 
     h3 {
-      float: left;
+      display: inline-block;
       margin: 0;
     }
 
     button {
-      float: right;
+      margin-left: 10px;
+      vertical-align: top;
     }
   }
 }
 
 .form-group {
-  margin: 2px 0;
-  background: $grey-4;
+  margin: 0;
+  border-top: 1px solid $grey-3;
   padding: 20px 0;
+
+  &:first-of-type {
+    border: 0;
+  }
 
   &.m-error {
     background: lighten($mellow-red, 42);
     background: rgba($red, .1);
+    border-top-color: desaturate(lighten($mellow-red, 30), 50);
+    border-top-color: rgba(black, .12);
+
+    .form-row {
+      padding: 0 20px;
+    }
   }
 
   .form-row {
-    padding: 0 20px;
+    padding: 0;
     margin: 0;
 
     & + .form-row {
@@ -44,64 +55,35 @@ fieldset {
     top: -2px;
   }
 
-  ul {
-    margin: 0 0 -5px;
-    padding: 0;
-    list-style: none;
+  .form-option-list {
+    margin-left: 8px;
   }
+}
+
+.form-field {
+  margin: 15px 0 0;
+
+  &:first-child {
+    margin: 0;
+  }
+}
+
+.form-inline-field {
+  display: inline-block;
+
+  input + & {
+    margin-left: 5px;
+  }
+}
+
+.form-option-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
   li {
-    padding: 5px;
+    margin: 5px 0;
   }
-}
-
-.block-label {
-  .form-label {
-    display: block;
-    padding: 18px 30px 15px 45px;
-    margin: -20px;
-    background: $grey-4;
-    border: 1px solid $grey-3;
-    cursor: pointer;
-
-    &:hover {
-      border-color: $grey-2;
-      background: $white;
-    }
-
-    > input[type="checkbox"],
-    > input[type="radio"] {
-      margin-left: -24px;
-    }
-  }
-}
-
-.form-subfield {
-  margin: 10px 0 0 0;
-
-  .js-enabled &.s-hidden {
-    display: none;
-  }
-
-  label {
-    margin-right: 10px;
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .form-inline {
-    display: inline-block;
-  }
-
-  .input-prefix {
-    margin: 0;
-    display: inline-block;
-  }
-}
-
-.radio-inline {
-  display: inline-block;
-  padding: 0 10px;
 }
 
 .form-actions {

@@ -16,12 +16,20 @@
     },
 
     handleToggle: function(evt) {
-      $(evt.target).parent().toggleClass('s-expanded');
+      var $fieldHelp = $(evt.target).parent();
+      $fieldHelp
+        .toggleClass('s-expanded')
+        .find('.field-more-info')
+          .attr('aria-expanded', function() {
+            return $(this).attr('aria-expanded') === 'false';
+          });
     },
 
     addMoreInfoLink: function() {
       $.each(this.moreInfos, function(i, el) {
-        $('<a class="field-more-info-toggle">more info</a>').insertBefore($(el));
+        $(this).attr('aria-expanded', 'false');
+        $('<a class="field-more-info-toggle" role="button">more info</a>')
+          .insertBefore($(el));
       });
     },
 

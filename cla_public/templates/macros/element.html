@@ -1,11 +1,14 @@
 {% macro alert(type='info', icon=None, title=None) %}
-  <div class="alert-{{type}}">
+  <div class="alert-{{type}}"
+    role="alert"
+    {% if title %}aria-labelledby="alert-heading-{{type}}"{% endif %}
+  >
     {% if icon %}
       <span class="icon icon-{{icon}}" aria-hidden="true"></span>
     {% endif %}
     <div class="alert-message">
       {% if title %}
-        <h3 class="alert-header">{{title}}</h3>
+        <h3 class="alert-header" id="alert-heading-{{type}}">{{title}}</h3>
       {% endif %}
       {{ caller() }}
     </div>

@@ -20,23 +20,23 @@
 
     {{ Form.text_field(form.title) }}
     {{ Form.text_field(form.full_name, class_='m-large') }}
-    {{ Form.text_field(form.contact_number, class_='m-large') }}
-    {{ Form.select_field(form.safe_to_contact) }}
-
-    <p>
-      If you don’t have a number we can call you on, please contact
-      <a href="https://www.gov.uk/civil-legal-advice">Civil Legal Advice</a>.
-    </p>
+    {% call Form.text_field(form.contact_number, class_='m-large') %}
+      {{ form.safe_to_contact(class_='form-control') }}
+      <p class="form-subfield">
+        If you don’t have a number we can call you on, please contact
+        <a href="https://www.gov.uk/civil-legal-advice" target="_blank">
+          Civil Legal Advice
+        </a>.
+      </p>
+    {% endcall %}
 
     {{ Form.text_field(form.post_code) }}
     {{ Form.textarea_field(form.address) }}
     {{ Form.textarea_field(form.extra_notes) }}
     {{ Form.adaptations_field(form.adaptations) }}
-
     {{ Form.availability_checker_field(form.time) }}
 
-    {% call Element.alert() %}
-      <h3>What happens next</h3>
+    {% call Element.alert(title='What happens next') %}
       <p>
         If the operator you speak to believes you can get legal aid, they will
         find you specialist legal help, like a phone call with a solicitor or

@@ -94,23 +94,16 @@
     - field <@object> WTForm field
 #}
 {% macro block_label(field) %}
-  {% call form_group(field, show_title_row=False, class_='block-label') %}
-    <label class="form-label" for="{{field.id}}">
-      {{ field }}
-      {{ field.label.text }}
-      {% if field.description %}
-        <div class="field-help">
-          {{field.description|safe}}
-        </div>
-      {% endif %}
-      {% if field.more_info %}
-        <a>more info</a>
-        <div class="field-more-info">
-          {{field.more_info|safe}}
-        </div>
-      {% endif %}
-    </label>
-  {% endcall %}
+  <label class="block-label" for="{{field.id}}">
+    {{ field }}
+    {{ field.label.text }}
+
+    {% if field.description %}
+      <div class="field-help">
+        {{field.description|safe}}
+      </div>
+    {% endif %}
+  </label>
 {% endmacro %}
 
 
@@ -160,8 +153,21 @@
     - prefix <@string> (optional) Adds label with specified string before the field
     - suffix <@string> (optional) Adds label with specified string after the field
     - use_form_group <@boolean> (optional) Don't wrap in form group when set to False
+    - class_ <@string> (optional) CSS class of input field
+    - label_class <@string> (optional) CSS class of field label (when used as subfield)
 #}
-{% macro text_field(field, prefix=None, suffix=None, use_form_group=True, class_='') %}
+{% macro text_field(
+  field,
+  prefix=None,
+  suffix=None,
+  use_form_group=True,
+  class_='',
+  label_class=''
+) %}
+  {% if caller %}
+    {% set text_field_caller = caller() %}
+  {% endif %}
+
   {% if use_form_group %}
     {% call form_group(field) %}
       {% if prefix %}
@@ -171,9 +177,13 @@
       {% if suffix %}
         <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
       {% endif %}
+
+      {% if text_field_caller %}
+        {{ text_field_caller }}
+      {% endif %}
     {% endcall %}
   {% else %}
-    {{ field.label }}
+    {{ field.label(class_=label_class) }}
     {% if prefix %}
       <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
     {% endif %}
@@ -208,7 +218,7 @@
 #}
 {% macro check_list_field(field) %}
   {% call form_group(field, False) %}
-    {{ field }}
+    {{ field(class_='form-option-list') }}
   {% endcall %}
 {% endmacro %}
 
@@ -218,8 +228,9 @@
 
   Params:
     - field <@object> WTForm field
-    - prefix <@string> (optional) Adds label with specified string before the field
-    - suffix <@string> (optional) Adds label with specified string after the field
+    - is_hidden <@boolean> (optional, default: False) Whether to render the field as hidden
+    - use_form_group <@boolean> (optional, default: True) Whether to use form_group to wrap
+        the field
 #}
 {% macro money_interval_field(field, is_hidden=False, use_form_group=True) %}
   {% if is_hidden %}
@@ -290,7 +301,7 @@
       }}
       {{ field.is_other_language.label }}
       <div class="form-subfield" data-conditional-id="{{field.other_language.id}}">
-        {{ field.other_language.label(class='form-inline') }}
+        {{ field.other_language.label(class='label-inline') }}
         {{ field.other_language(class_='form-control') }}
       </div>
     </dd>
@@ -303,9 +314,8 @@
 
   Params:
     - button_label <@string> Button label
-    - previous_link <@boolean> (optional) Whether to show link to previous page
 #}
-{% macro actions(button_label, previous_link=None) %}
+{% macro actions(button_label) %}
   <p class="form-actions">
     <button type="submit" class="button button-larger">{{ button_label }}</button>
   </p>
@@ -338,15 +348,19 @@
 {% macro availability_checker_field(field) %}
   {% call form_group(field) %}
     {% for radio in field.specific_day %}
-      <p>
-        {{ radio }} {{ radio.label }}
-        {% if radio.id == 'specific_day-0' %}
-          {{ field.time_today(class_='form-control') }}
-        {% elif radio.id == 'specific_day-1' %}
-          {{ field.time_tomorrow(class_='form-control') }}
-        {% else %}
-          {{ field.time_in_day(class_='form-control') }} {{ field.day(class_='form-control') }}
-        {%  endif %}
+      <p class="form-field">
+        <label class="radio-inline" for="{{radio.id}}">
+          {{ radio }} {{ radio.label.text }}
+          <span class="form-inline-field">
+            {% if radio.id == 'specific_day-0' %}
+              {{ field.time_today(class_='form-control') }}
+            {% elif radio.id == 'specific_day-1' %}
+              {{ field.time_tomorrow(class_='form-control') }}
+            {% else %}
+              {{ field.time_in_day(class_='form-control') }} {{ field.day(class_='form-control') }}
+            {%  endif %}
+          </span>
+        </label>
       </p>
     {% endfor %}
   {% endcall %}
