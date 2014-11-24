@@ -165,6 +165,12 @@ def money_interval_to_monthly(data):
     amount = data['amount']
     interval = data['interval']
 
+    if amount is None or interval == '':
+        return {
+            'amount': 0,
+            'interval': 'per_month'
+        }
+
     if interval == 'per_month':
         return data
 
