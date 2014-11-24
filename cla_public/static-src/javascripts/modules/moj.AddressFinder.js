@@ -108,7 +108,7 @@
     renderAddressList: function (addresses) {
       var $list = $('.js-AddressFinder-addressList');
       var addrItems = [];
-      
+
       // tidy up addresses for dropdown list
       $.each(addresses, function (i, addr) {
         var parts = addr.formatted_address.split('\n');

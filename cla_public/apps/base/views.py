@@ -3,9 +3,11 @@
 
 import os
 import logging
+import requests
+import urllib
 
 from flask import render_template, send_from_directory, current_app, \
-    redirect, url_for
+    redirect, url_for, request
 
 from cla_public.apps.base import base
 from cla_public.apps.base.forms import FeedbackForm
@@ -42,3 +44,18 @@ def feedback():
     if form.validate_on_submit():
         return redirect(url_for('.index'))
     return render_template('feedback.html', form=form)
+
+@base.route('/addressfinder/<path:path>', methods=['GET'])
+def addressfinder_proxy_view(path):
+    response = requests.get(
+        '{host}/{path}?{params}'.format(
+            host=current_app.config['ADDRESSFINDER_API_HOST'],
+            path=path,
+            params=urllib.urlencode(request.args)),
+        headers={
+            'Authorization': 'Token {token}'.format(
+                token=current_app.config['ADDRESSFINDER_API_TOKEN'])
+        }
+    )
+    return current_app.response_class(response.text,
+        mimetype='application/json')

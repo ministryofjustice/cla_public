@@ -24,6 +24,11 @@ BACKEND_API = {
 SENTRY_DSN = os.environ.get('RAVEN_CONFIG_DSN', '')
 SENTRY_SITE_NAME = os.environ.get('RAVEN_CONFIG_SITE', '')
 
+ADDRESSFINDER_API_HOST = os.environ.get('ADDRESSFINDER_API_HOST',
+    'http://addressfinder.dsd.io/')
+ADDRESSFINDER_API_TOKEN = os.environ.get('ADDRESSFINDER_API_TOKEN',
+    '7050a403a2fc1dcf74670acb3504d0f5cec50c5c')
+
 CACHE_CONFIG = {
     'CACHE_TYPE': 'simple'
 }
