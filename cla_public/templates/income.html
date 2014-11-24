@@ -4,7 +4,11 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  Your income and tax
+  {% if session.has_partner %}
+    You and your partner’s income and tax
+  {% else %}
+    Your income and tax
+  {% endif %}
 {% endblock %}
 
 {% block inner_content %}

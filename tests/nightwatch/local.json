@@ -1,6 +1,7 @@
 {
   "src_folders" : "tests/nightwatch/specs",
   "output_folder" : "tests/reports/nightwatch",
+  "custom_assertions_path" : "tests/nightwatch/custom_assertions",
 
   "selenium" : {
     "start_process" : true,
