@@ -49,6 +49,8 @@ def install_dependencies(venv_path):
     run('{venv}/bin/pip install -r requirements/jenkins.txt'.format(
         venv=venv_path))
 
+    run('bower install')
+
 
 def clean_pyc():
     run("find . -name '*.pyc' -delete")
