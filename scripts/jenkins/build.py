@@ -61,6 +61,7 @@ def run_tests(venv_path):
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
+    run('./nightwatch -c tests/nightwatch/local.json')
 
 
 def main():
