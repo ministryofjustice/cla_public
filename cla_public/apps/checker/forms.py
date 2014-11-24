@@ -11,7 +11,8 @@ from wtforms import Form as NoCsrfForm, RadioField
 from wtforms import BooleanField, IntegerField, SelectField, StringField, \
     TextAreaField, FormField
 from wtforms.compat import iteritems
-from wtforms.validators import InputRequired, Optional, ValidationError
+from wtforms.validators import InputRequired, NumberRange, Optional, \
+    ValidationError
 
 from cla_common.constants import CONTACT_SAFETY
 
@@ -22,10 +23,13 @@ from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
-    ZeroOrNoneValidator, PropertyList, scheduled_time, money_interval_to_monthly,
-    AdaptationsForm)
+    PropertyList, scheduled_time, money_interval_to_monthly,
+    AdaptationsForm
+    )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
+from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
+    FieldValue, MoneyIntervalAmountRequired
 
 log = logging.getLogger(__name__)
 
@@ -137,14 +141,20 @@ class AboutYouForm(MultiPageForm):
             u"Being on some benefits can help you qualify for legal aid"))
     have_children = YesNoField(
         u'Do you have any children aged 15 or under?',
-        description=u"Don’t include any children who don’t live with you")
-    num_children = IntegerField(u'If Yes, how many?',
-                                validators=[ZeroOrNoneValidator()])
+        description=u"Don't include any children who don't live with you")
+    num_children = IntegerField(
+        u'If Yes, how many?',
+        validators=[
+            IgnoreIf('have_children', FieldValue(NO)),
+            NumberRange(min=1)])
     have_dependants = YesNoField(
         u'Do you have any dependants aged 16 or over?',
         description=u"People who you live with and support financially")
-    num_dependants = IntegerField(u'If Yes, how many?',
-                                  validators=[ZeroOrNoneValidator()])
+    num_dependants = IntegerField(
+        u'If Yes, how many?',
+        validators=[
+            IgnoreIf('have_dependants', FieldValue(NO)),
+            NumberRange(min=1)])
     have_savings = YesNoField(
         u'Do you have any savings, investments or any valuable items?',
         description=(
@@ -174,42 +184,6 @@ class AboutYouForm(MultiPageForm):
                 'self_employed': self.is_self_employed.data}}
         }
 
-    def validate(self, *args, **kwargs):
-        is_valid = super(AboutYouForm, self).validate(*args, **kwargs)
-
-        if self.have_children.data == YES:
-            if not self.num_children.data:
-                self.num_children.errors.append(
-                    u'Please specify the number of children you have')
-                is_valid = False
-
-        if self.have_dependants.data == YES:
-            if not self.num_dependants.data:
-                self.num_dependants.errors.append(
-                    u'Please specify the number of dependants you have')
-                is_valid = False
-
-        return is_valid
-
-
-class AtLeastOne(object):
-    """
-    Valid if at least one option is checked.
-
-    :param message:
-        Error message to raise in case of a validation error.
-    """
-
-    def __init__(self, message=None):
-        self.message = message
-
-    def __call__(self, form, field):
-        if len(field.data) < 1:
-            message = self.message
-            if message is None:
-                message = field.gettext('Must select at least one option.')
-            raise ValidationError(message)
-
 
 class YourBenefitsForm(MultiPageForm):
     benefits = MultiCheckboxField(
@@ -234,18 +208,22 @@ class PropertyForm(NoCsrfForm):
     property_value = MoneyField(
         u'How much is the property worth?',
         description=u"Use your own estimate",
-        validators=[ZeroOrNoneValidator()])
+        validators=[Optional(), NumberRange(min=0)])
     mortgage_remaining = MoneyField(
         u'How much is left to pay on the mortgage?',
         description=(
             u"Include the full amount you owe, even if the property has "
             u"shared ownership"),
-        validators=[ZeroOrNoneValidator()])
+        validators=[Optional(), NumberRange(min=0)])
     mortgage_payments = MoneyField(
         u'How much are your monthly mortgage repayments?',
-        validators=[ZeroOrNoneValidator()])
+        validators=[Optional(), NumberRange(min=0)])
     is_rented = YesNoField(u'Does anyone pay you rent for this property?')
-    rent_amount = MoneyIntervalField(u'If Yes, how much rent do they pay you?')
+    rent_amount = MoneyIntervalField(
+        u'If Yes, how much rent do they pay you?',
+        validators=[
+            IgnoreIf('is_rented', FieldValue(NO)),
+            MoneyIntervalAmountRequired()])
     in_dispute = YesNoField(
         u'Is your share of the property in dispute?',
         description=(
@@ -260,18 +238,6 @@ class PropertyForm(NoCsrfForm):
             'disputed': self.in_dispute.data,
             'main': self.is_main_home.data
         }
-
-    def validate(self, *args, **kwargs):
-        is_valid = super(PropertyForm, self).validate(*args, **kwargs)
-
-        if self.is_rented.data == YES:
-            if not self.rent_amount.form.data['amount']:
-                self.rent_amount.form.amount.errors.append(
-                    u'Please specify the amount you receive for rent of this '
-                    u'property')
-                is_valid = False
-
-        return is_valid
 
 
 class PropertiesForm(MultiPageForm):
@@ -291,14 +257,18 @@ class SavingsForm(MultiPageForm):
         description=u"This includes stocks, shares, bonds (but not property)")
     valuables = PartnerMoneyField(
         u'Valuable items you and your partner own worth over £500 each',
-        min_val=50000,
         description=u"Total value of any items you own with some exceptions")
 
     def api_payload(self):
+        # rather than showing an error message, just ignore values less than
+        # £500
+        valuables = self.valuables.data
+        if valuables < 50000:
+            valuables = 0
         return {'you': {'savings': {
             'bank_balance': self.savings.data,
             'investment_balance': self.investments.data,
-            'asset_balance': self.valuables.data
+            'asset_balance': valuables
         }}}
 
 
@@ -318,7 +288,10 @@ class TaxCreditsForm(MultiPageForm):
     other_benefits = PartnerYesNoField(
         u'Do you or your partner receive any other benefits not listed above?')
     total_other_benefit = MoneyIntervalField(
-        u'If Yes, total amount of benefits not listed above')
+        u'If Yes, total amount of benefits not listed above',
+        validators=[
+            IgnoreIf('other_benefits', FieldValue(NO)),
+            MoneyIntervalAmountRequired()])
 
     def api_payload(self):
         session.add_note('Other benefits:\n{0}'.format('\n'.join([
@@ -466,15 +439,17 @@ class ApplicationForm(Form):
             u"In your own words, please tell us exactly what your problem is "
             u"about. The Civil Legal Advice operator will read this before "
             u"they call you."))
-    adaptations = FormField(AdaptationsForm,
+    adaptations = FormField(
+        AdaptationsForm,
         u'I need help with English or have special communication needs')
 
     time = AvailabilityCheckerField(u'Arrange a time for a callback')
 
     def api_payload(self):
-        time = scheduled_time(self.time.specific_day.data, self.time.time_today.data,
-                              self.time.time_tomorrow.data, self.time.day.data,
-                              self.time.time_in_day.data).replace(tzinfo=pytz.utc)
+        time = scheduled_time(
+            self.time.specific_day.data, self.time.time_today.data,
+            self.time.time_tomorrow.data, self.time.day.data,
+            self.time.time_in_day.data).replace(tzinfo=pytz.utc)
         return {
             'personal_details': {
                 'title': self.title.data,
@@ -488,9 +463,9 @@ class ApplicationForm(Form):
                 'bsl_webcam': self.adaptations.bsl_webcam.data,
                 'minicom': self.adaptations.minicom.data,
                 'text_relay': self.adaptations.text_relay.data,
-                'language': self.adaptations.welsh.data and 'WELSH' \
-                            or self.adaptations.other_language.data
+                'language':
+                    self.adaptations.welsh.data and 'WELSH'
+                    or self.adaptations.other_language.data
             },
             'requires_action_at': time.isoformat(),
         }
-

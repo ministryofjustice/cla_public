@@ -10,15 +10,17 @@ import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
-from wtforms.validators import ValidationError, StopValidation, Optional
 from wtforms.compat import text_type
-
-from cla_common.money_interval.models import MoneyInterval
-from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES, DAY_CHOICES
-from cla_public.libs.call_centre_availability import day_choice, available_days, time_choice, today_slots, \
-    tomorrow_slots, time_slots, available
+from wtforms.validators import Optional, StopValidation
 
 from cla_common.constants import ADAPTATION_LANGUAGES
+from cla_common.money_interval.models import MoneyInterval
+from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES, \
+    DAY_CHOICES
+from cla_public.apps.checker.validators import ValidMoneyInterval
+from cla_public.libs.call_centre_availability import day_choice, \
+    available_days, time_choice, today_slots, \
+    tomorrow_slots, time_slots, available
 
 
 log = logging.getLogger(__name__)
@@ -28,42 +30,6 @@ partner_regex = re.compile(r'(and/or|and|or) your partner')
 LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
     [('', '-- Choose a language --')] + ADAPTATION_LANGUAGES)
-
-
-class ZeroOrNoneValidator(object):
-    """Form Validator that checks if the minimum is min_val (or greater)
-    or None."""
-
-    def __init__(self, min_val=0, max_val=None, message=None):
-        self.min_val = min_val
-        self.max_val = max_val
-        self.message = message
-
-    def __call__(self, form, field):
-        # This code is copied from NumberRange. It is identical except
-        # it will short-circuit if data is None and not raise a
-        # ValidationError exception.
-        data = field.data
-        if (self.min_val is not None and data < self.min_val) or \
-                (self.max_val is not None and data > self.max_val):
-            if data is None:
-                # We *also* need this as we need to clear out any
-                # field errors generated from IntegerField saying
-                # "None" is not a valid integer.
-                field.errors[:] = []
-                raise StopValidation()
-            message = self.message
-            if message is None:
-                # we use %(min_val)s interpolation to support floats, None, and
-                # Decimals without throwing a formatting exception.
-                if self.max_val is None:
-                    message = field.gettext('Number must be at least %(min_val)s.')
-                elif self.min_val is None:
-                    message = field.gettext('Number must be at most %(max_val)s.')
-                else:
-                    message = field.gettext('Number must be between %(min_val)s and %(max_val)s.')
-
-            raise ValidationError(message % dict(min_val=self.min_val, max_val=self.max_val))
 
 
 class DynamicPartnerLabel(Label):
@@ -188,36 +154,29 @@ class MoneyField(IntegerField):
                     u'Amount must be less than £{:.2f}'.format(
                         self.max_val / 100.0)))
 
+    def process_data(self, value):
+        self.data = value
+        if value:
+            pence = value % 100
+            pounds = value / 100
+            self.data = '{0}.{1:02}'.format(pounds, pence)
+
 
 class MoneyIntervalForm(NoCsrfForm):
     """Money amount and interval subform"""
     amount = MoneyField(validators=[Optional()])
     interval = SelectField('', choices=MONEY_INTERVALS)
 
-    def validate(self, *args, **kwargs):
-        valid_amount = self.amount.validate(self)
-        amount_not_set = self.amount.data is None
-        nonzero_amount = self.amount.data > 0
-        interval_selected = self.interval.data != ''
-
-        if not valid_amount:
-            # default field validation should set error message
-            return False
-
-        if interval_selected and amount_not_set:
-            self.interval.errors = (u'Not a valid amount',)
-            return False
-
-        if not interval_selected and nonzero_amount:
-            self.interval.errors = (u'Please select an interval')
-            return False
-
-        return True
-
 
 def money_interval_to_monthly(data):
     amount = data['amount']
     interval = data['interval']
+
+    if amount is None or interval == '':
+        return {
+            'amount': 0,
+            'interval': 'per_month'
+        }
 
     if interval == 'per_month':
         return data
@@ -233,14 +192,31 @@ def money_interval_to_monthly(data):
 class MoneyIntervalField(FormField):
     """Convenience class for FormField(MoneyIntervalForm)"""
 
-    widget = widgets.ListWidget()
-
     def __init__(self, *args, **kwargs):
+        self._errors = []
+        self.validators = []
+        if 'validators' in kwargs:
+            self.validators.extend(kwargs['validators'])
+            del kwargs['validators']
+        self.validators.append(ValidMoneyInterval())
+
         super(MoneyIntervalField, self).__init__(
             MoneyIntervalForm, *args, **kwargs)
 
     def as_monthly(self):
         return money_interval_to_monthly(self.data)
+
+    def validate(self, form, extra_validators=None):
+        stop_validation = self._run_validation_chain(form, self.validators)
+        return len(self.errors) == 0
+
+    @property
+    def errors(self):
+        return self._errors
+
+    @errors.setter
+    def errors(self, _errors):
+        self._errors = _errors
 
 
 class MultiCheckboxField(SelectMultipleField):
