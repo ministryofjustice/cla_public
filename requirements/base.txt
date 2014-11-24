@@ -19,3 +19,4 @@ requests==2.4.3
 six==1.8.0
 slumber==0.6.0
 wsgiref==0.1.2
+Babel==1.3

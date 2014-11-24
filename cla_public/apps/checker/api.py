@@ -129,6 +129,7 @@ def post_to_case_api(form):
     payload['eligibility_check'] = reference
     response = backend.case.post(payload)
     session['case_ref'] = response['reference']
+    session['time_to_callback'] = response['requires_action_at']
 
 
 def get_organisation_list(**kwargs):
