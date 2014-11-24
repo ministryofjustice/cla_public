@@ -8,7 +8,10 @@ var paths = {
   dest: 'cla_public/static/',
   styles: 'cla_public/static-src/stylesheets/**/*.scss',
   ie_styles: 'cla_public/static-src/ie/**/*.scss',
-  scripts: 'cla_public/static-src/javascripts/**/*',
+  scripts: [
+    'cla_public/static-src/javascripts/**/*',
+    '!cla_public/static-src/javascripts/templates/*'
+  ],
   vendor_scripts: vendorFiles,
   images: 'cla_public/static-src/images/**/*',
   templates: 'cla_public/templates/**/*'
