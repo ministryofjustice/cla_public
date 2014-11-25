@@ -252,9 +252,15 @@ class PropertiesForm(MultiPageForm):
 class SavingsForm(MultiPageForm):
     savings = MoneyField(
         description=(
-            u"The total amount of savings in cash, bank or building society"))
+            u"The total amount of savings in cash, bank or building society"),
+        validators=[InputRequired(
+            message=u'Enter 0 if you have no savings'
+        )])
     investments = MoneyField(
-        description=u"This includes stocks, shares, bonds (but not property)")
+        description=u"This includes stocks, shares, bonds (but not property)",
+        validators=[InputRequired(
+            message=u'Enter 0 if you have no investments'
+        )])
     valuables = PartnerMoneyField(
         u'Total value of items worth over £500 each',
         description=u"Total value of any items worth over £500 each with some exceptions..")
