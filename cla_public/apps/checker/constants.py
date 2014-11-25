@@ -138,3 +138,9 @@ DAY_CHOICES = (
     ('tomorrow', 'Call me tomorrow at'),
     ('specific_day', 'Call me in the next week on')
 )
+
+CONTACT_SAFETY = (
+    # constant, db_id, friendly string
+    ('SAFE', 'Safe to leave a message'),
+    ('NO_MESSAGE', 'Not safe to leave a message'),
+)

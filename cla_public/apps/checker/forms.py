@@ -14,11 +14,9 @@ from wtforms.compat import iteritems
 from wtforms.validators import InputRequired, NumberRange, Optional, \
     ValidationError
 
-from cla_common.constants import CONTACT_SAFETY
-
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES
+    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY
 from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
@@ -434,7 +432,8 @@ class ApplicationForm(Form):
         validators=[InputRequired()])
     safe_to_contact = RadioField(
         u'Safe to contact',
-        choices=CONTACT_SAFETY
+        choices=CONTACT_SAFETY,
+        default=CONTACT_SAFETY[0][0]
     )
     post_code = StringField(u'Postcode')
     address = TextAreaField(u'Address')
