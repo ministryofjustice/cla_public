@@ -11,7 +11,7 @@ from wtforms import Form as NoCsrfForm, TextAreaField
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.compat import text_type
-from wtforms.validators import Optional, StopValidation
+from wtforms.validators import Optional, StopValidation, InputRequired
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_common.money_interval.models import MoneyInterval
@@ -112,6 +112,8 @@ class YesNoField(RadioField):
 
     def __init__(self, label=None, validators=None, **kwargs):
         choices = [(YES, 'Yes'), (NO, 'No')]
+        if validators is None:
+            validators = [InputRequired(message=u'Please choose Yes or No')]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=text_type,
             choices=choices, **kwargs)
