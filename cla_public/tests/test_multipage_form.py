@@ -76,6 +76,7 @@ class TestMultiPageForm(unittest.TestCase):
                 'have_dependants': '0',
                 'num_dependants': 0,
                 'have_savings': '0',
+                'have_valuables': '0',
                 'own_property': '0',
                 'is_employed': '0',
                 'is_self_employed': '0',

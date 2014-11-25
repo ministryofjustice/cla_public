@@ -7,11 +7,11 @@ import datetime
 
 from flask import session
 import pytz
-from wtforms import Form as NoCsrfForm
+from wtforms import Form as NoCsrfForm, TextAreaField
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.compat import text_type
-from wtforms.validators import Optional, StopValidation
+from wtforms.validators import Optional, StopValidation, InputRequired
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_common.money_interval.models import MoneyInterval
@@ -112,6 +112,8 @@ class YesNoField(RadioField):
 
     def __init__(self, label=None, validators=None, **kwargs):
         choices = [(YES, 'Yes'), (NO, 'No')]
+        if validators is None:
+            validators = [InputRequired(message=u'Please choose Yes or No')]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=text_type,
             choices=choices, **kwargs)
@@ -145,13 +147,13 @@ class MoneyField(IntegerField):
             if self.min_val is not None and self.data < self.min_val:
                 self.data = None
                 raise ValueError(self.gettext(
-                    u'Amount must be greater than £{:.2f}'.format(
+                    u'This amount must be more than £{:.0f}'.format(
                         self.min_val / 100.0)))
 
             if self.max_val is not None and self.data > self.max_val:
                 self.data = None
                 raise ValueError(self.gettext(
-                    u'Amount must be less than £{:.2f}'.format(
+                    u'This amount must be less than £{:.0f}'.format(
                         self.max_val / 100.0)))
 
     def process_data(self, value):
@@ -261,6 +263,10 @@ class AdaptationsForm(NoCsrfForm):
     other_language = SelectField(
         u'Language required:',
         choices=(LANG_CHOICES))
+    is_other_adaptation = BooleanField(u'Any other adaptation')
+    other_adaptation = TextAreaField(
+        u'Any other adaptation',
+        description=u'Please tell us what you need in the box below')
 
 
 class PartnerMoneyField(MoneyField, PartnerMixin):

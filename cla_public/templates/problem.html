@@ -12,10 +12,6 @@
 {% endblock %}
 
 {% block inner_content %}
-  {% call Element.alert() %}
-    <p>If you have more than one problem, you can complete this service more than once.</p>
-    <p>If you’re really not sure what to choose, ask us to <a href="#">call you back</a>.</p>
-  {% endcall %}
 
   <form method="POST" action="{{ url_for('.problem') }}">
     {{ form.csrf_token }}
@@ -32,6 +28,12 @@
       {% endfor %}
     </ul>
 
+    {% call Element.alert() %}
+      <p>If you have more than one problem, you can complete this service more than once.</p>
+      <p>If you’re really not sure what to choose, ask us to <a href="/result/eligible">call you back</a>.</p>
+    {% endcall %}
+
     {{ Form.actions('Continue') }}
   </form>
+
 {% endblock %}

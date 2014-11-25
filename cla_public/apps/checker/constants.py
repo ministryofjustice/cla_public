@@ -4,17 +4,17 @@ CATEGORIES = [
     # value, label, inline help text
     (
         'violence',
-        u'Abuse at home',
-        u'Domestic violence, child abuse, harassment by an ex-partner'),
+        u'Domestic violence',
+        u'Abuse at home, child abuse, harassment by an ex-partner'),
     (
         'clinneg',
         u'Clinical negligence',
-        u'Doctors and nurses not treating you with due care'),
+        u'Doctors and nurses not treating you with due care during medical treatment'),
     (
         'commcare',
         u'Community care',
         (u'You’re unhappy with the care being provided for yourself or a '
-         u'relative')),
+         u'relative - for example, in a care home or your own home')),
     (
         'debt',
         u'Debt',
@@ -137,4 +137,10 @@ DAY_CHOICES = (
     ('today', 'Call me today at'),
     ('tomorrow', 'Call me tomorrow at'),
     ('specific_day', 'Call me in the next week on')
+)
+
+CONTACT_SAFETY = (
+    # constant, db_id, friendly string
+    ('SAFE', 'Safe to leave a message'),
+    ('NO_MESSAGE', 'Not safe to leave a message'),
 )

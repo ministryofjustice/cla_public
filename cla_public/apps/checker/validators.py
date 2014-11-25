@@ -82,4 +82,4 @@ class ValidMoneyInterval(object):
             raise ValidationError(u'Not a valid amount')
 
         if not interval_selected and nonzero_amount:
-            raise ValidationError(u'Please select an interval')
+            raise ValidationError(u'Please select a time period from the drop down')

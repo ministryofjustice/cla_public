@@ -4,14 +4,14 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  You might qualify for legal aid with Civil Legal Advice
+  You might qualify for legal aid
 {% endblock %}
 
 {% block inner_content %}
   <h2>Request a callback</h2>
   <p>
-    To find out if legal aid can help in your specific situation, you need to speak
-    to an operator. Please submit your details so that they call you back.
+    Based on the answers you've given, you might qualify financially for legal aid. To find out if legal aid can help with your specific problem, you need to speak
+    to a Civil Legal Advice operator. Please submit your details so we can call you back.
   </p>
 
   <form method="POST" action="{{ url_for('.result', outcome='eligible') }}">
@@ -21,7 +21,7 @@
     {{ Form.text_field(form.title) }}
     {{ Form.text_field(form.full_name, class_='m-large') }}
     {% call Form.text_field(form.contact_number, class_='m-large') %}
-      {{ form.safe_to_contact(class_='form-control') }}
+      {{ Form.radio_list(form.safe_to_contact) }}
       <p class="form-subfield">
         If you don’t have a number we can call you on, please contact
         <a href="https://www.gov.uk/civil-legal-advice" target="_blank">
@@ -38,7 +38,7 @@
 
     {% call Element.alert(title='What happens next') %}
       <p>
-        If the operator you speak to believes you can get legal aid, they will
+        If the operator you speak to thinks you can get legal aid, they will
         find you specialist legal help, like a phone call with a solicitor or
         support from a family mediation service.
       </p>

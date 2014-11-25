@@ -10,7 +10,7 @@ forms:
       have_dependants:
         more_info: This could be a young person for whom you get Child Benefit
 
-      have_savings:
+      have_valuables:
         more_info: |
           Don’t include the following:
 

@@ -14,11 +14,9 @@ from wtforms.compat import iteritems
 from wtforms.validators import InputRequired, NumberRange, Optional, \
     ValidationError
 
-from cla_common.constants import CONTACT_SAFETY
-
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES
+    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY
 from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
@@ -156,9 +154,11 @@ class AboutYouForm(MultiPageForm):
             IgnoreIf('have_dependants', FieldValue(NO)),
             NumberRange(min=1)])
     have_savings = YesNoField(
-        u'Do you have any savings, investments or any valuable items?',
+        u'Do you have any savings or investments?')
+    have_valuables = YesNoField(
+        u'Do you have any valuable items worth over £500 each?',
         description=(
-            u"Valuable items are worth over £500 each with some exceptions"))
+            u"Items worth over £500 each with some exceptions..."))
     own_property = YesNoField(
         u'Do you own any property?',
         description=u"For example, a house, flat or static caravan")
@@ -203,16 +203,16 @@ class PropertyForm(NoCsrfForm):
             u"If you are separated and no longer live in the property you "
             u"own, please answer ‘no’"))
     other_shareholders = PartnerYesNoField(
-        u'Does anyone else own a share of the property?',
-        description=u"Other than you and your partner")
+        u'Does anyone else (other than you or your partner) own a share of the property?',
+        description=u"Select 'Yes' if you share ownership with a friend, relative or ex-partner")
     property_value = MoneyField(
         u'How much is the property worth?',
-        description=u"Use your own estimate",
+        description=u"Use a property website",
         validators=[Optional(), NumberRange(min=0)])
     mortgage_remaining = MoneyField(
         u'How much is left to pay on the mortgage?',
         description=(
-            u"Include the full amount you owe, even if the property has "
+            u"Include the full amount owed, even if the property has "
             u"shared ownership"),
         validators=[Optional(), NumberRange(min=0)])
     mortgage_payments = MoneyField(
@@ -252,12 +252,18 @@ class PropertiesForm(MultiPageForm):
 class SavingsForm(MultiPageForm):
     savings = MoneyField(
         description=(
-            u"The total amount of savings in cash, bank or building society"))
+            u"The total amount of savings in cash, bank or building society"),
+        validators=[InputRequired(
+            message=u'Enter 0 if you have no savings'
+        )])
     investments = MoneyField(
-        description=u"This includes stocks, shares, bonds (but not property)")
+        description=u"This includes stocks, shares, bonds (but not property)",
+        validators=[InputRequired(
+            message=u'Enter 0 if you have no investments'
+        )])
     valuables = PartnerMoneyField(
-        u'Valuable items you and your partner own worth over £500 each',
-        description=u"Total value of any items you own with some exceptions")
+        u'Total value of items worth over £500 each',
+        description=u"Total value of any items worth over £500 each with some exceptions...")
 
     def api_payload(self):
         # rather than showing an error message, just ignore values less than
@@ -323,7 +329,9 @@ class IncomeFieldForm(NoCsrfForm):
         description=(
             u"Check your payslip or your National Insurance statement if "
             u"you’re self-employed"))
-    working_tax_credit = MoneyIntervalField(u'Working Tax Credit')
+    working_tax_credit = MoneyIntervalField(
+        u'Working Tax Credit',
+        description=u'Extra money for people who work and have a low income')
     maintenance = MoneyIntervalField(
         u'Maintenance received',
         description=u"Payments you get from an ex-partner")
@@ -390,9 +398,7 @@ def income_form(*args, **kwargs):
 
 
 class OutgoingsForm(MultiPageForm):
-    rent = PartnerMoneyIntervalField(
-        u'Rent',
-        description=u"Money you and your partner pay your landlord")
+    rent = PartnerMoneyIntervalField(u'Rent')
     maintenance = PartnerMoneyIntervalField(
         u'Maintenance',
         description=(
@@ -430,7 +436,11 @@ class ApplicationForm(Form):
     contact_number = StringField(
         u'Contact phone number',
         validators=[InputRequired()])
-    safe_to_contact = SelectField(u'Safe to contact', choices=CONTACT_SAFETY)
+    safe_to_contact = RadioField(
+        u'Safe to contact',
+        choices=CONTACT_SAFETY,
+        default=CONTACT_SAFETY[0][0]
+    )
     post_code = StringField(u'Postcode')
     address = TextAreaField(u'Address')
     extra_notes = TextAreaField(
@@ -441,9 +451,9 @@ class ApplicationForm(Form):
             u"they call you."))
     adaptations = FormField(
         AdaptationsForm,
-        u'I need help with English or have special communication needs')
+        u'Do you have any special communication needs?')
 
-    time = AvailabilityCheckerField(u'Arrange a time for a callback')
+    time = AvailabilityCheckerField(u'Select a time for us to call you')
 
     def api_payload(self):
         time = scheduled_time(
@@ -465,7 +475,9 @@ class ApplicationForm(Form):
                 'text_relay': self.adaptations.text_relay.data,
                 'language':
                     self.adaptations.welsh.data and 'WELSH'
-                    or self.adaptations.other_language.data
+                    or self.adaptations.other_language.data,
+                'notes': self.adaptations.other_adaptation.data
+                    if self.adaptations.is_other_adaptation.data else ''
             },
             'requires_action_at': time.isoformat(),
         }
