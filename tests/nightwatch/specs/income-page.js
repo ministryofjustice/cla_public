@@ -53,10 +53,10 @@ module.exports = {
       .assert.doesNotContainText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.')
     ;
 
-    // EMPLOYMENT_QUESTIONS.EMPLOYED.concat(EMPLOYMENT_QUESTIONS.COMMON).forEach(function(item) {
-    //   client.assert.elementNotPresent(util.format('[name="partner_income-%s-amount"]', item));
-    //   client.assert.elementNotPresent(util.format('[name="partner_income-%s-interval"]', item));
-    // });
+    EMPLOYMENT_QUESTIONS.EMPLOYED.concat(EMPLOYMENT_QUESTIONS.COMMON).forEach(function(item) {
+      client.assert.elementNotPresent(util.format('[name="partner_income-%s-amount"]', item));
+      client.assert.elementNotPresent(util.format('[name="partner_income-%s-interval"]', item));
+    });
 
     client.back();
     common.setYesNoFields(client, 'is_self_employed', 0);
@@ -91,17 +91,9 @@ module.exports = {
         client.setValue(util.format('[name=%s_income-%s-amount]', person, item), '250');
         common.submitAndCheckForFieldError(client, util.format('%s_income-%s-amount', person, item), 'Please select an interval');
         client.clearValue(util.format('[name=%s_income-%s-amount]', person, item));
-        client.pause(1000);
-        client.setValue(util.format('[name=%s_income-%s-interval]', person, item), 'per week');
-        client.pause(1000);
-        client.setValue(util.format('[name=%s_income-%s-interval]', person, item), 'per month');
-        client.pause(1000);
-        client.setValue(util.format('[name=%s_income-%s-interval]', person, item), 'per week');
-        client.pause(1000);
         client.setValue(util.format('[name=%s_income-%s-interval]', person, item), 'per month');
         client.click('body');
-        client.pause(3000);
-        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-interval', person, item), 'Not a valid amount');
+        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-interval', person, item), 'Not a valid amount', 'select');
       });
     });
   },
