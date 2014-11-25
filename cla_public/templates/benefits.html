@@ -4,11 +4,15 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_heading %}
-  Your benefits
+  {% if session.has_partner %}
+    You and your partner’s benefits
+  {% else %}
+    Your benefits
+  {% endif %}
 {% endblock %}
 
 {% block inner_content %}
-  <p>Are you or your partner on any of these benefits?</p>
+  <p>Are you {% if session.has_partner %}or your partner {% endif %}on any of these benefits?</p>
   <form method="POST" action="{{ url_for('.benefits') }}">
     {{ form.csrf_token }}
 

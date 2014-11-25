@@ -31,13 +31,30 @@ module.exports = {
     client
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
+      .assert.containsText('body', 'Are you on any of these benefits?')
     ;
+  },
 
-    // test validation
+  'Context-dependent text and headline for partner': function(client) {
+    client
+      .assert.doesNotContainText('h1', 'You and your partner’s benefits')
+      .assert.doesNotContainText('body', 'Are you or your partner on any of these benefits?')
+      .back()
+    ;
+    common.setYesNoFields(client, 'have_partner', 1);
+    client
+      .submitForm('form')
+      .assert.containsText('h1', 'You and your partner’s benefits')
+      .assert.containsText('body', 'Are you or your partner on any of these benefits?')
+    ;
+  },
+
+  'Test validation': function(client) {
     client.submitForm('form');
     common.submitAndCheckForError(client, 'Please select at least one option.');
+  },
 
-    // test outcomes
+  'Test outcomes': function(client) {
     BENEFITS.forEach(function(item) {
       var destination = (item === 'other-benefit' ? '/benefits-tax-credits' : '/eligible');
       client

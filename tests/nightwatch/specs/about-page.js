@@ -41,8 +41,9 @@ module.exports = {
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
     ;
+  },
 
-    // test validation
+  'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again');
     ABOUT_YOU_QUESTIONS.forEach(function(item) {
       common.submitAndCheckForFieldError(client, item, 'Not a valid choice');
@@ -57,8 +58,9 @@ module.exports = {
       common.setYesNoFields(client, item.field_name, 1);
       common.submitAndCheckForFieldError(client, item.field_name, item.errorText);
     });
+  },
 
-    // test outcomes
+  'Test outcomes': function(client) {
     common.aboutPageSetAllToNo(client);
     client
       .submitForm('form')

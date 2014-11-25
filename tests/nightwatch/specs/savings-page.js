@@ -19,12 +19,14 @@ module.exports = {
     client.submitForm('form');
   },
 
-  'Savings': function(client) {
-    // test context-dependent text for partner
+  'Savings page': function(client) {
     client
       .assert.urlContains('/savings')
       .assert.containsText('h1', 'Your savings')
     ;
+  },
+
+  'Context-dependent text for partner': function(client) {
     common.checkTextIsEqual(client, 'label[for="valuables"]', 'Valuable items you own worth over £500 each');
     client.back();
     common.setYesNoFields(client, 'have_partner', 1);
@@ -34,15 +36,17 @@ module.exports = {
       .assert.containsText('h1', 'You and your partner’s savings')
     ;
     common.checkTextIsEqual(client, 'label[for="valuables"]', 'Valuable items you and your partner own worth over £500 each');
+  },
 
-    // test validation
+  'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again.');
 
     SAVINGS_QUESTIONS.forEach(function(item) {
       common.submitAndCheckForFieldError(client, item, 'Not a valid amount');
     });
+  },
 
-    // check outcomes
+  'Test outcomes': function(client) {
     SAVINGS_QUESTIONS.forEach(function(item) {
       client.setValue(util.format('input[name="%s"]', item), '5000');
     });
@@ -64,5 +68,4 @@ module.exports = {
 
     client.end();
   }
-
 };

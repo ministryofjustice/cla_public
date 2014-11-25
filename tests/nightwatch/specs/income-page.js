@@ -96,9 +96,7 @@ module.exports = {
         common.submitAndCheckForFieldError(client, util.format('%s_income-%s-interval', person, item), 'Not a valid amount', 'select');
       });
     });
-  },
 
-  'end': function(client){
     client.end();
   }
 
