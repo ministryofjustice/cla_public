@@ -169,6 +169,8 @@ def result(outcome):
         if form.extra_notes.data:
             session.add_note('User problem:\n{0}'.format(form.extra_notes.data))
 
+        session['time_to_callback'] = form.time.scheduled_time()
+
         post_to_eligibility_check_api(session.notes_object())
         post_to_case_api(form)
         return redirect(url_for('.result', outcome='confirmation'))
