@@ -57,11 +57,12 @@ module.exports = {
   },
 
   // check specific field group for error text
-  submitAndCheckForFieldError: function(client, field, errorText) {
+  submitAndCheckForFieldError: function(client, fieldName, errorText, tag) {
+    tag = tag || "input";
     client
       .submitForm('form')
       .useXpath()
-      .assert.containsText(util.format('//input[@name="%s"]/ancestor::dl//*[@class="field-error"]', field), errorText)
+      .assert.containsText(util.format('//%s[@name="%s"]/ancestor::dl//div[@class="field-error"]', tag, fieldName), errorText)
       .useCss()
     ;
   },

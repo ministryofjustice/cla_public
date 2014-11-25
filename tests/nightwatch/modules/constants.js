@@ -23,3 +23,16 @@ exports.SAVINGS_QUESTIONS = [
   'investments',
   'valuables'
 ];
+exports.EMPLOYMENT_QUESTIONS = {
+  COMMON: [
+    'maintenance',
+    'pension',
+    'other_income'
+  ],
+  EMPLOYED: [
+    'earnings',
+    'income_tax',
+    'national_insurance',
+    'working_tax_credit'
+  ]
+};

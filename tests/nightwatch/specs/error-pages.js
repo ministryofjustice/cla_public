@@ -6,7 +6,7 @@ module.exports = {
       .init(client.launch_url + '/qwertyuiopasdfghjklzxcvbnm')
       .maximizeWindow()
       .waitForElementVisible('body', 1000)
-      .assert.containsText('h1', 'Error 404. Sorry, this page doesn’t exist')
+      .assert.containsText('h1', 'Error 404 - sorry, this page doesn’t exist')
       .end()
     ;
   }

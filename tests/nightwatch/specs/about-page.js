@@ -22,12 +22,12 @@ var FIELDS_WITH_SUBFIELDS = [
   {
     field_name: 'have_children',
     subfield_name: 'num_children',
-    errorText: 'Please specify the number of children you have'
+    errorText: 'Not a valid integer value\nNumber must be at least 1.'
   },
   {
     field_name: 'have_dependants',
     subfield_name: 'num_dependants',
-    errorText: 'Please specify the number of dependants you have'
+    errorText: 'Not a valid integer value\nNumber must be at least 1.'
   }
 ];
 
