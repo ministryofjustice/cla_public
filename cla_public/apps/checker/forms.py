@@ -263,7 +263,7 @@ class SavingsForm(MultiPageForm):
         )])
     valuables = PartnerMoneyField(
         u'Total value of items worth over £500 each',
-        description=u"Total value of any items worth over £500 each with some exceptions..")
+        description=u"Total value of any items worth over £500 each with some exceptions...")
 
     def api_payload(self):
         # rather than showing an error message, just ignore values less than
