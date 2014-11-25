@@ -33,8 +33,11 @@ def test():
     run(nosetests)
 
 
+def _make_context():
+    return {'app': app}
+
 manager.add_command('server', Server())
-manager.add_command('shell', Shell(make_context={'app': app}))
+manager.add_command('shell', Shell(make_context=_make_context))
 
 
 if __name__ == '__main__':

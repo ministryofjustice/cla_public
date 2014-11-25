@@ -73,7 +73,7 @@ def run_tests(venv_path):
         conf=config))
     run('{venv}/bin/python manage.py runserver'.format(venv=venv_path),
         background=True)
-    run('./nightwatch -c tests/nightwatch/local.json -o nightwatch.xml')
+    run('./nightwatch -c tests/nightwatch/local.json')
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
