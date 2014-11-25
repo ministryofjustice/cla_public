@@ -21,7 +21,7 @@ from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
-    PropertyList, scheduled_time, money_interval_to_monthly,
+    PropertyList, money_interval_to_monthly,
     AdaptationsForm
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
@@ -456,10 +456,7 @@ class ApplicationForm(Form):
     time = AvailabilityCheckerField(u'Select a time for us to call you')
 
     def api_payload(self):
-        time = scheduled_time(
-            self.time.specific_day.data, self.time.time_today.data,
-            self.time.time_tomorrow.data, self.time.day.data,
-            self.time.time_in_day.data).replace(tzinfo=pytz.utc)
+        time = self.time.scheduled_time().replace(tzinfo=pytz.utc)
         return {
             'personal_details': {
                 'title': self.title.data,

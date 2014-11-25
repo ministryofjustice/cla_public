@@ -133,10 +133,13 @@ ORGANISATION_CATEGORY_MAPPING = {
     'Welfare benefits appeals': 'Welfare benefits'
 }
 
+DAY_TODAY = 'today'
+DAY_TOMORROW = 'tomorrow'
+DAY_SPECIFIC = 'specific_day'
 DAY_CHOICES = (
-    ('today', 'Call me today at'),
-    ('tomorrow', 'Call me tomorrow at'),
-    ('specific_day', 'Call me in the next week on')
+    (DAY_TODAY, 'Call me today at'),
+    (DAY_TOMORROW, 'Call me tomorrow at'),
+    (DAY_SPECIFIC, 'Call me in the next week on')
 )
 
 CONTACT_SAFETY = (

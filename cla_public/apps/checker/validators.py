@@ -1,5 +1,12 @@
+import datetime
+
 from wtforms.compat import string_types
 from wtforms.validators import StopValidation, ValidationError
+
+from cla_public.apps.checker.constants import DAY_TODAY, DAY_TOMORROW, \
+    DAY_SPECIFIC
+from cla_public.libs import call_centre_availability
+from cla_public.libs.call_centre_availability import available
 
 
 class IgnoreIf(object):
@@ -31,6 +38,12 @@ class FieldValue(object):
 
     def __call__(self, field, **kwargs):
         return field.data == self.value
+
+
+class FieldValueNot(FieldValue):
+
+    def __call__(self, field, **kwargs):
+        return field.data != self.value
 
 
 class AtLeastOne(object):
@@ -83,3 +96,24 @@ class ValidMoneyInterval(object):
 
         if not interval_selected and nonzero_amount:
             raise ValidationError(u'Please select a time period from the drop down')
+
+
+class AvailableSlot(object):
+    """
+    Validates whether the selected time slot is available.
+    """
+
+    def __init__(self, day):
+        self.day = day
+
+    def __call__(self, form, field):
+        date = call_centre_availability.current_datetime()
+        if self.day == DAY_TOMORROW:
+            date = date + datetime.timedelta(days=1)
+        if self.day == DAY_SPECIFIC:
+            date = form.day.data
+        time = datetime.datetime.combine(date, field.data)
+        print time
+        if not available(time):
+            raise ValidationError(
+                u"Can't schedule a callback at the requested time")
