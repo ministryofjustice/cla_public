@@ -332,6 +332,23 @@
 
 
 {#
+  Form radio list
+
+  Params:
+    - field <@object> WTForm field
+#}
+{% macro radio_list(field) %}
+  {% for radio in field %}
+    <p class="form-field">
+      <label class="radio-inline" for="{{radio.id}}">
+        {{ radio }} {{ radio.label.text }}
+      </label>
+    </p>
+  {% endfor %}
+{% endmacro %}
+
+
+{#
   Show generic form errors alert
 
   Params:

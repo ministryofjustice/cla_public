@@ -21,7 +21,7 @@
     {{ Form.text_field(form.title) }}
     {{ Form.text_field(form.full_name, class_='m-large') }}
     {% call Form.text_field(form.contact_number, class_='m-large') %}
-      {{ form.safe_to_contact(class_='form-control') }}
+      {{ Form.radio_list(form.safe_to_contact) }}
       <p class="form-subfield">
         If you don’t have a number we can call you on, please contact
         <a href="https://www.gov.uk/civil-legal-advice" target="_blank">

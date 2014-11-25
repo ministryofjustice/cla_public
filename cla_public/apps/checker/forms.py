@@ -432,7 +432,7 @@ class ApplicationForm(Form):
     contact_number = StringField(
         u'Contact phone number',
         validators=[InputRequired()])
-    safe_to_contact = SelectField(
+    safe_to_contact = RadioField(
         u'Safe to contact',
         choices=CONTACT_SAFETY
     )
