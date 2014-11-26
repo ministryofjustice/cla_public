@@ -5,7 +5,18 @@
     validNavigation: false,
 
     init: function() {
+      this.bindEvents();
       this.keepSessionAlive();
+    },
+
+    bindEvents: function() {
+      $(window).on('unload',  $.proxy(this.clearSessionIfNotValid, this));
+
+      $('a').on('click',  $.proxy(this.isValidNavigation, this));
+
+      $('button').on('click',  $.proxy(this.isValidNavigation, this));
+
+      $('form').on('submit',  $.proxy(this.isValidNavigation, this));
     },
 
     keepSessionAlive: function () {
@@ -13,7 +24,7 @@
       var self = this;
       setTimeout(function () {
         self.keepSessionAlive();
-      }, 30000);
+      }, 10000);
     },
 
     isValidNavigation: function () {
