@@ -179,10 +179,11 @@ def result(outcome):
 
     organisations = []
     if outcome == 'ineligible':
+        session.clear()
         category_name = (name for field, name, description in CATEGORIES if field == session.category).next()
         category_name = ORGANISATION_CATEGORY_MAPPING.get(category_name, category_name)
         organisations = get_organisation_list(article_category__name=category_name)
-    elif outcome == 'confirmation':
+    elif outcome == 'confirmation' or outcome == 'face-to-face':
         session.clear()
 
     return render_template(
