@@ -3,10 +3,6 @@
 CATEGORIES = [
     # value, label, inline help text
     (
-        'violence',
-        u'Domestic violence',
-        u'Abuse at home, child abuse, harassment by an ex-partner'),
-    (
         'clinneg',
         u'Clinical negligence',
         u'Doctors and nurses not treating you with due care during medical treatment'),
@@ -19,6 +15,10 @@ CATEGORIES = [
         'debt',
         u'Debt',
         u'Money problems, bankruptcy, repossession'),
+    (
+        'violence',
+        u'Domestic violence',
+        u'Abuse at home, child abuse, harassment by an ex-partner'),
     (
         'discrimination',
         u'Discrimination',
