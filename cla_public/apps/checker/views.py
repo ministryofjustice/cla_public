@@ -60,7 +60,9 @@ def about(user):
     if user.owns_property:
         next_step = 'property'
 
-    if user.is_on_benefits:
+    if any([user.is_on_benefits,
+            user.has_children,
+            user.has_dependants]):
         next_step = 'benefits'
 
     return proceed(next_step)

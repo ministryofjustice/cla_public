@@ -46,6 +46,10 @@ class CheckerSession(SecureCookieSession):
         return self.get('AboutYouForm_have_children', NO) == YES
 
     @property
+    def has_dependants(self):
+        return self.get('AboutYouForm_have_dependants', NO) == YES
+
+    @property
     def has_partner(self):
         partner = self.get('AboutYouForm_have_partner', NO) == YES
         in_dispute = self.get('AboutYouForm_in_dispute', NO) == YES
