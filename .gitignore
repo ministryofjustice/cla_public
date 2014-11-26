@@ -69,3 +69,6 @@ node_modules/
 cla_public/config/local.py
 cla_public/static-src/vendor/**
 cla_public/static/
+
+# ignore generated handlebars templates
+cla_public/static-src/javascripts/templates.js

@@ -167,7 +167,6 @@
   {% if caller %}
     {% set text_field_caller = caller() %}
   {% endif %}
-
   {% if use_form_group %}
     {% call form_group(field) %}
       {% if prefix %}
@@ -389,5 +388,21 @@
         </label>
       </p>
     {% endfor %}
+  {% endcall %}
+{% endmacro %}
+
+
+{#
+  Postcode field for address finder
+
+  Params:
+    - field <@object> WTForm field
+    - attributes <@dict> (optional, default: {}) HTML attributes for field
+#}
+{% macro postcode_field(field, attributes={}) %}
+  {% call form_group(field) %}
+    <div class="FormRow FormRow--inline">
+      {{ field(class_='form-control js-AddressFinder', **attributes) }}
+    </div>
   {% endcall %}
 {% endmacro %}

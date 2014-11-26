@@ -30,8 +30,10 @@
       </p>
     {% endcall %}
 
-    {{ Form.text_field(form.post_code) }}
+    {{ Form.postcode_field(form.post_code, attributes={'data-address-el': '#address'}) }}
+
     {{ Form.textarea_field(form.address) }}
+
     {{ Form.textarea_field(form.extra_notes) }}
     {{ Form.adaptations_field(form.adaptations) }}
     {{ Form.availability_checker_field(form.time) }}
