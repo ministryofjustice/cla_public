@@ -10,13 +10,23 @@ from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, get_organisation_list
 from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, ORGANISATION_CATEGORY_MAPPING
-from cla_public.apps.checker.decorators import form_view, override_session_vars
+from cla_public.apps.checker.decorators import form_view, override_session_vars, redirect_if_no_session
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
     OutgoingsForm, ApplicationForm
 
 
 log = logging.getLogger(__name__)
+
+
+@checker.after_request
+def add_header(response):
+    """
+    Add no-cache headers
+    """
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    return response
 
 
 def proceed(next_step, **kwargs):
@@ -38,6 +48,7 @@ def problem(user):
 
 
 @checker.route('/about', methods=['GET', 'POST'])
+@redirect_if_no_session()
 @form_view(AboutYouForm, 'about.html')
 def about(user):
 
@@ -56,6 +67,7 @@ def about(user):
 
 
 @checker.route('/benefits', methods=['GET', 'POST'])
+@redirect_if_no_session()
 @form_view(YourBenefitsForm, 'benefits.html')
 def benefits(user):
 
@@ -77,6 +89,7 @@ def benefits(user):
 
 
 @checker.route('/property', methods=['GET', 'POST'])
+@redirect_if_no_session()
 def property():
     if current_app.config.get('DEBUG'):
         override_session_vars()
@@ -110,6 +123,7 @@ def property():
 
 
 @checker.route('/savings', methods=['GET', 'POST'])
+@redirect_if_no_session()
 @form_view(SavingsForm, 'savings.html')
 def savings(user):
     next_step = 'income'
@@ -121,24 +135,28 @@ def savings(user):
 
 
 @checker.route('/benefits-tax-credits', methods=['GET', 'POST'])
+@redirect_if_no_session()
 @form_view(TaxCreditsForm, 'benefits-tax-credits.html')
 def benefits_tax_credits(user):
     return proceed('income')
 
 
 @checker.route('/income', methods=['GET', 'POST'])
+@redirect_if_no_session()
 @form_view(income_form, 'income.html')
 def income(user):
     return proceed('outgoings')
 
 
 @checker.route('/outgoings', methods=['GET', 'POST'])
+@redirect_if_no_session()
 @form_view(OutgoingsForm, 'outgoings.html')
 def outgoings(user):
     return outcome('eligible')
 
 
 @checker.route('/result/<outcome>', methods=['GET', 'POST'])
+@redirect_if_no_session()
 def result(outcome):
     "Display the outcome of the means test"
 
@@ -160,6 +178,8 @@ def result(outcome):
         category_name = (name for field, name, description in CATEGORIES if field == session.category).next()
         category_name = ORGANISATION_CATEGORY_MAPPING.get(category_name, category_name)
         organisations = get_organisation_list(article_category__name=category_name)
+    elif outcome == 'confirmation':
+        session.clear()
 
     return render_template(
         'result/%s.html' % outcome, form=form, organisations=organisations)

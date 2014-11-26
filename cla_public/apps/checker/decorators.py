@@ -24,11 +24,10 @@ def form_view(form_class, form_template):
 
         @functools.wraps(fn)
         def wrapper(*args, **kwargs):
-
             if current_app.config.get('DEBUG'):
                 override_session_vars()
 
-            form = form_class(request.form, session)
+            form = form_class(request.form)
             if form.validate_on_submit():
                 post_to_eligibility_check_api(form)
                 is_eligible = post_to_is_eligible_api(form)
@@ -37,6 +36,19 @@ def form_view(form_class, form_template):
                 return fn(session)
 
             return render_template(form_template, form=form)
+
+        return wrapper
+
+    return view
+
+
+def redirect_if_no_session():
+    def view(fn):
+        @functools.wraps(fn)
+        def wrapper(*args, **kwargs):
+            if not session:
+                return redirect('/session-expired')
+            return fn(*args, **kwargs)
 
         return wrapper
 
