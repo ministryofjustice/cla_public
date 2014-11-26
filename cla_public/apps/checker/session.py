@@ -1,3 +1,4 @@
+import datetime
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
@@ -7,6 +8,8 @@ from cla_public.apps.checker.utils import passported
 
 class CheckerSession(SecureCookieSession):
     "Provides some convenience properties for inter-page logic"
+
+    expires_override = None
 
     @property
     def needs_face_to_face(self):
@@ -80,3 +83,12 @@ class CheckerSession(SecureCookieSession):
 
 class CheckerSessionInterface(SecureCookieSessionInterface):
     session_class = CheckerSession
+
+    # Need to override the expires so that we can set the
+    # session to expire 20 seconds from page close
+    def get_expiration_time(self, app, session):
+        if session.permanent:
+            if session.expires_override:
+                return session.expires_override
+
+            return datetime.datetime.utcnow() + app.permanent_session_lifetime

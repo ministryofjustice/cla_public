@@ -3,6 +3,7 @@
 
 import os
 import logging
+import datetime
 import requests
 import urllib
 
@@ -75,7 +76,11 @@ def session_keep_alive():
 
 @base.route('/session_end')
 def session_end():
-    session.clear()
+    if session and not session.permanent:
+        session.permanent = True
+    if session:
+        session.expires_override = datetime.datetime.utcnow() \
+                                   + datetime.timedelta(seconds=20)
     return jsonify({
         'session': 'CLEAR'
     })
