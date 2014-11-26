@@ -44,6 +44,10 @@ def create_app(config_file=None):
         format='%(asctime)s %(levelname)s %(name)s %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S')
 
+    if app.debug:
+        from werkzeug.debug import DebuggedApplication
+        app = DebuggedApplication(app, True)
+
     return app
 
 
