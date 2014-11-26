@@ -89,7 +89,7 @@ module.exports = {
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.EMPLOYED.concat(EMPLOYMENT_QUESTIONS.COMMON).forEach(function(item) {
         client.setValue(util.format('[name=%s_income-%s-amount]', person, item), '250');
-        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-amount', person, item), 'Please select an interval');
+        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-amount', person, item), 'Please select a time period from the drop down');
         client.clearValue(util.format('[name=%s_income-%s-amount]', person, item));
         client.setValue(util.format('[name=%s_income-%s-interval]', person, item), 'per month');
         client.click('body');

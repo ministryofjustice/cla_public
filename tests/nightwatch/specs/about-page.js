@@ -44,9 +44,9 @@ module.exports = {
   },
 
   'Test validation': function(client) {
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again');
+    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
     ABOUT_YOU_QUESTIONS.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item, 'Not a valid choice');
+      common.submitAndCheckForFieldError(client, item, 'Please choose Yes or No');
     });
     FIELDS_WITH_SUBFIELDS.forEach(function(item) {
       common.aboutPageSetAllToNo(client);
