@@ -9,8 +9,10 @@
     },
 
     keepSessionAlive: function () {
-      setInterval(function () {
-        $.get('/session_keep_alive');
+      $.get('/session_keep_alive');
+      var self = this;
+      setTimeout(function () {
+        self.keepSessionAlive();
       }, 30000);
     },
 
