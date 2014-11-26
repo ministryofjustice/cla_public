@@ -27,25 +27,27 @@ module.exports = {
   },
 
   'Context-dependent text for partner': function(client) {
-    common.checkTextIsEqual(client, '//input[@id="properties-0-other_shareholders-0"]/ancestor::dl//*[@class="field-help"]', 'Other than you', true);
-    client.back();
+    client
+      .assert.containsText('body', 'If you own more than one property, you can add more properties below.')
+      .back();
     common.setYesNoFields(client, 'have_partner', 1);
     client
       .submitForm('form')
       .assert.urlContains('/property')
       .assert.containsText('h1', 'You and your partner’s property')
+      .assert.containsText('body', 'Please tell us about any property owned by you, your partner or both of you.')
+      .assert.containsText('body', 'If you or your partner own more than one property, you can add more properties below.')
     ;
-    common.checkTextIsEqual(client, '//input[@id="properties-0-other_shareholders-0"]/ancestor::dl//*[@class="field-help"]', 'Other than you and your partner', true);
   },
 
   'Test validation': function(client) {
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again.');
+    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
     PROPERTY_QUESTIONS.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item, 'Not a valid choice');
+      common.submitAndCheckForFieldError(client, item, 'Please choose Yes or No');
     });
 
-    common.setYesNoFields(client, 'properties-0-is_rented', 1);
+    common.setYesNoFields(client, PROPERTY_QUESTIONS, 1);
     client
       .setValue('#properties-0-rent_amount-amount', '')
       .setValue('#properties-0-rent_amount-interval', 'per month')
@@ -60,6 +62,7 @@ module.exports = {
 
   'Add/remove properties': function(client) {
     client
+      .back()
       .assert.elementPresent('fieldset#property-set-1')
       .assert.elementNotPresent('fieldset#property-set-2')
       .assert.elementNotPresent('fieldset#property-set-3')

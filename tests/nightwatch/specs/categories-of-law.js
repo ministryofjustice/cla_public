@@ -32,7 +32,7 @@ var NOT_COVERED = {
     'aap'
   ],
   url: '/face-to-face',
-  headline: 'We can’t help you with your problem'
+  headline: 'You might qualify for legal aid, but we don\'t handle this type of problem'
 };
 
 var COVERED = {

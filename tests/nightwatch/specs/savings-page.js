@@ -27,28 +27,29 @@ module.exports = {
   },
 
   'Context-dependent text for partner': function(client) {
-    common.checkTextIsEqual(client, 'label[for="valuables"]', 'Valuable items you own worth over £500 each');
-    client.back();
+    client
+      .assert.containsText('body', 'We need to know about any money you have saved or invested.')
+      .back();
     common.setYesNoFields(client, 'have_partner', 1);
     client
       .submitForm('form')
       .assert.urlContains('/savings')
       .assert.containsText('h1', 'You and your partner’s savings')
+      .assert.containsText('body', 'Any cash, savings or investments held in both your names.')
     ;
-    common.checkTextIsEqual(client, 'label[for="valuables"]', 'Valuable items you and your partner own worth over £500 each');
   },
 
   'Test validation': function(client) {
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again.');
+    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
     SAVINGS_QUESTIONS.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item, 'Not a valid amount');
+      common.submitAndCheckForFieldError(client, item.name, item.errorText);
     });
   },
 
   'Test outcomes': function(client) {
     SAVINGS_QUESTIONS.forEach(function(item) {
-      client.setValue(util.format('input[name="%s"]', item), '5000');
+      client.setValue(util.format('input[name="%s"]', item.name), '5000');
     });
     client
       .submitForm('form')
@@ -57,8 +58,8 @@ module.exports = {
     ;
     SAVINGS_QUESTIONS.forEach(function(item) {
       client
-        .clearValue(util.format('input[name="%s"]', item))
-        .setValue(util.format('input[name="%s"]', item), '500')
+        .clearValue(util.format('input[name="%s"]', item.name))
+        .setValue(util.format('input[name="%s"]', item.name), '500')
       ;
     });
     client

@@ -7,6 +7,7 @@ exports.ABOUT_YOU_QUESTIONS = [
   'have_children',
   'have_dependants',
   'have_savings',
+  'have_valuables',
   'own_property',
   'is_employed',
   'is_self_employed',
@@ -19,9 +20,18 @@ exports.PROPERTY_QUESTIONS = [
   'properties-0-in_dispute'
 ];
 exports.SAVINGS_QUESTIONS = [
-  'savings',
-  'investments',
-  'valuables'
+  {
+    name: 'savings',
+    errorText: 'Enter 0 if you have no savings'
+  },
+  {
+    name: 'investments',
+    errorText: 'Enter 0 if you have no investments'
+  },
+  {
+    name: 'valuables',
+    errorText: 'Not a valid amount'
+  }
 ];
 exports.EMPLOYMENT_QUESTIONS = {
   COMMON: [
