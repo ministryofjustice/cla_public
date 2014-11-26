@@ -19,12 +19,14 @@ module.exports = {
     client.submitForm('form');
   },
 
-  'Property': function(client) {
-    // test context-dependent text for partner
+  'Property page': function(client) {
     client
       .assert.urlContains('/property')
       .assert.containsText('h1', 'Your property')
     ;
+  },
+
+  'Context-dependent text for partner': function(client) {
     common.checkTextIsEqual(client, '//input[@id="properties-0-other_shareholders-0"]/ancestor::dl//*[@class="field-help"]', 'Other than you', true);
     client.back();
     common.setYesNoFields(client, 'have_partner', 1);
@@ -34,8 +36,9 @@ module.exports = {
       .assert.containsText('h1', 'You and your partner’s property')
     ;
     common.checkTextIsEqual(client, '//input[@id="properties-0-other_shareholders-0"]/ancestor::dl//*[@class="field-help"]', 'Other than you and your partner', true);
+  },
 
-    // test validation
+  'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease correct them and try again.');
 
     PROPERTY_QUESTIONS.forEach(function(item) {
@@ -51,12 +54,12 @@ module.exports = {
     client
       .click(util.format('input[name="%s"][value="%s"]', 'properties-0-is_rented', 0))
       .submitForm('form')
-      .verify.urlContains('/income')
+      .assert.urlContains('/income')
     ;
+  },
 
-    // add/remove properties
+  'Add/remove properties': function(client) {
     client
-      .init(client.launch_url + '/property') // in case previous verify fails
       .assert.elementPresent('fieldset#property-set-1')
       .assert.elementNotPresent('fieldset#property-set-2')
       .assert.elementNotPresent('fieldset#property-set-3')
@@ -73,5 +76,4 @@ module.exports = {
 
     client.end();
   }
-
 };
