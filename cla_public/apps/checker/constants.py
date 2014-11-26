@@ -143,7 +143,6 @@ DAY_CHOICES = (
 )
 
 CONTACT_SAFETY = (
-    # constant, db_id, friendly string
-    ('SAFE', 'Safe to leave a message'),
-    ('NO_MESSAGE', 'Not safe to leave a message'),
+    ('SAFE', 'Yes'),
+    ('NO_MESSAGE', 'No'),
 )
