@@ -7,7 +7,7 @@ import requests
 import urllib
 
 from flask import render_template, send_from_directory, current_app, \
-    redirect, url_for, request
+    redirect, url_for, request, session, jsonify
 
 from cla_public.apps.base import base
 from cla_public.apps.base.forms import FeedbackForm
@@ -27,6 +27,7 @@ def static(filename):
 
 @base.route('/')
 def index():
+    session.clear()
     return render_template('index.html')
 
 
@@ -59,3 +60,22 @@ def addressfinder_proxy_view(path):
     )
     return current_app.response_class(response.text,
         mimetype='application/json')
+
+@base.route('/session-expired')
+def session_expired():
+    return render_template('session-expired.html')
+
+@base.route('/session_keep_alive')
+def session_keep_alive():
+    if session and not session.permanent:
+        session.permanent = True
+    return jsonify({
+        'session': 'OK'
+    })
+
+@base.route('/session_end')
+def session_end():
+    session.clear()
+    return jsonify({
+        'session': 'CLEAR'
+    })
