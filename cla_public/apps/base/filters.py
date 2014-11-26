@@ -3,8 +3,7 @@ from babel.dates import format_datetime
 from dateutil import parser
 
 @base.app_template_filter()
-def datetime(value, format='medium', locale='en_GB'):
-    dt = parser.parse(value)
+def datetime(dt, format='medium', locale='en_GB'):
     if format == 'full':
         format="EEEE, d MMMM y 'at' HH:mm"
     elif format == 'medium':
