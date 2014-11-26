@@ -437,9 +437,9 @@ class ApplicationForm(Form):
         u'Contact phone number',
         validators=[InputRequired()])
     safe_to_contact = RadioField(
-        u'Safe to contact',
+        u'Safe to leave a message',
         choices=CONTACT_SAFETY,
-        default=CONTACT_SAFETY[0][0]
+        validators=[InputRequired(message=u'Please choose Yes or No')],
     )
     post_code = StringField(u'Postcode')
     address = TextAreaField(u'Address')
