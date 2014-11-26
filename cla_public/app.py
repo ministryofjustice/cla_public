@@ -2,7 +2,8 @@
 "CLA Public app"
 
 import logging
-from flask import Blueprint, Flask, url_for, render_template
+import os
+from flask import Flask, render_template
 from flask.ext.cache import Cache
 from raven.contrib.flask import Sentry
 
@@ -13,18 +14,6 @@ from cla_public.apps.checker.session import CheckerSessionInterface
 
 
 log = logging.getLogger(__name__)
-
-
-def register_error_handlers(app):
-    @app.errorhandler(404)
-    def http_page_not_found(e):
-        return render_template('404.html'), 404
-
-    @app.errorhandler(500)
-    def http_server_error(e):
-        return render_template('500.html'), 500
-
-    return app
 
 
 def create_app(config_file=None):
@@ -54,5 +43,29 @@ def create_app(config_file=None):
         level=app.config.get('LOG_LEVEL', 'DEBUG'),
         format='%(asctime)s %(levelname)s %(name)s %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S')
+
+    return app
+
+
+def register_error_handlers(app):
+    """
+    Assign error page templates to all error status codes we care about
+    """
+
+    error_handlers = {
+        '404.html': [404],
+        '4xx.html': [401, 402, 405, 406, 407, 408, 409],
+        '5xx.html': [500, 501, 502, 503, 504, 505]}
+
+    def make_handler(code, template):
+
+        def handler(e):
+            return render_template(os.path.join('errors', template)), code
+
+        return handler
+
+    for template, codes in error_handlers.iteritems():
+        for code in codes:
+            app.register_error_handler(code, make_handler(code, template))
 
     return app
