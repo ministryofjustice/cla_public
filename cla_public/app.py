@@ -46,7 +46,7 @@ def create_app(config_file=None):
 
     if app.debug:
         from werkzeug.debug import DebuggedApplication
-        app = DebuggedApplication(app, True)
+        app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
 
     return app
 
