@@ -171,10 +171,11 @@ def result(outcome):
         if form.extra_notes.data:
             session.add_note('User problem:\n{0}'.format(form.extra_notes.data))
 
-        session['time_to_callback'] = form.time.scheduled_time()
-
         post_to_eligibility_check_api(session.notes_object())
         post_to_case_api(form)
+
+        session['time_to_callback'] = form.time.scheduled_time()
+
         return redirect(url_for('.result', outcome='confirmation'))
 
     organisations = []
@@ -183,8 +184,11 @@ def result(outcome):
         category_name = (name for field, name, description in CATEGORIES if field == session.category).next()
         category_name = ORGANISATION_CATEGORY_MAPPING.get(category_name, category_name)
         organisations = get_organisation_list(article_category__name=category_name)
-    elif outcome == 'confirmation' or outcome == 'face-to-face':
+
+    response = render_template(
+        'result/%s.html' % outcome, form=form, organisations=organisations)
+
+    if outcome == 'confirmation' or outcome == 'face-to-face':
         session.clear()
 
-    return render_template(
-        'result/%s.html' % outcome, form=form, organisations=organisations)
+    return response
