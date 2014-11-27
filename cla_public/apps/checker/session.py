@@ -53,6 +53,12 @@ class CheckerSession(SecureCookieSession):
         return self.get('AboutYouForm_have_dependants', NO) == YES
 
     @property
+    def children_or_tax_credits(self):
+        return any([self.has_tax_credits,
+                    self.has_children,
+                    self.has_dependants])
+
+    @property
     def has_partner(self):
         partner = self.get('AboutYouForm_have_partner', NO) == YES
         in_dispute = self.get('AboutYouForm_in_dispute', NO) == YES
