@@ -20,7 +20,7 @@ from cla_public.apps.checker.fields import (
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
     PropertyList, money_interval_to_monthly,
-    AdaptationsForm
+    AdaptationsForm, HoneypotField
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.utils import nass, passported
@@ -50,7 +50,20 @@ class ConfigFormMixin(object):
                 field.__dict__.update(config.get(field_name, field))
 
 
-class ProblemForm(ConfigFormMixin, Form):
+class HoneypotMixin(object):
+
+    def __init__(self, *args, **kwargs):
+        super(HoneypotMixin, self).__init__(*args, **kwargs)
+
+        self._fields['hp_field'] = HoneypotField(
+            u'Leave this field empty',
+            _form=self,
+            _prefix=self._prefix,
+            _name='hp_field',
+            _translations=None)
+
+
+class ProblemForm(ConfigFormMixin, HoneypotMixin, Form):
     """Area of law choice"""
 
     categories = DescriptionRadioField(
@@ -70,7 +83,7 @@ class ProblemForm(ConfigFormMixin, Form):
         }
 
 
-class AboutYouForm(ConfigFormMixin, Form):
+class AboutYouForm(ConfigFormMixin, HoneypotMixin, Form):
     have_partner = YesNoField(
         u'Do you have a partner?',
         description=(
@@ -137,7 +150,7 @@ class AboutYouForm(ConfigFormMixin, Form):
         }
 
 
-class YourBenefitsForm(ConfigFormMixin, Form):
+class YourBenefitsForm(ConfigFormMixin, HoneypotMixin, Form):
     benefits = MultiCheckboxField(
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
@@ -192,7 +205,7 @@ class PropertyForm(NoCsrfForm):
         }
 
 
-class PropertiesForm(ConfigFormMixin, Form):
+class PropertiesForm(ConfigFormMixin, HoneypotMixin, Form):
     properties = PropertyList(
         FormField(PropertyForm), min_entries=1, max_entries=3)
 
@@ -201,7 +214,7 @@ class PropertiesForm(ConfigFormMixin, Form):
             prop.form.api_payload() for prop in self.properties]}
 
 
-class SavingsForm(ConfigFormMixin, Form):
+class SavingsForm(ConfigFormMixin, HoneypotMixin, Form):
     savings = MoneyField(
         description=(
             u"The total amount of savings in cash, bank or building society"),
@@ -230,7 +243,7 @@ class SavingsForm(ConfigFormMixin, Form):
         }}}
 
 
-class TaxCreditsForm(ConfigFormMixin, Form):
+class TaxCreditsForm(ConfigFormMixin, HoneypotMixin, Form):
     child_benefit = MoneyIntervalField(
         u'Child Benefit',
         description=u"The total amount you get for all your children")
@@ -325,7 +338,7 @@ class IncomeFieldForm(NoCsrfForm):
         }
 
 
-class IncomeAndTaxForm(ConfigFormMixin, Form):
+class IncomeAndTaxForm(ConfigFormMixin, HoneypotMixin, Form):
     your_income = FormField(IncomeFieldForm, label=u'Your personal income')
 
     def api_payload(self):
@@ -352,8 +365,10 @@ def income_form(*args, **kwargs):
     return IncomeForm(*args, **kwargs)
 
 
-class OutgoingsForm(ConfigFormMixin, Form):
-    rent = PartnerMoneyIntervalField(u'Rent')
+class OutgoingsForm(ConfigFormMixin, HoneypotMixin, Form):
+    rent = PartnerMoneyIntervalField(
+        u'Rent',
+        description=u"Money you and your partner pay your landlord")
     maintenance = PartnerMoneyIntervalField(
         u'Maintenance',
         description=(
