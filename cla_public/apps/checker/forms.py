@@ -208,7 +208,7 @@ class PropertyForm(NoCsrfForm):
     property_value = MoneyField(
         u'How much is the property worth?',
         description=u"Use a property website",
-        validators=[Optional(), NumberRange(min=0)])
+        validators=[InputRequired(u'Please enter a valid amount'), NumberRange(min=0)])
     mortgage_remaining = MoneyField(
         u'How much is left to pay on the mortgage?',
         description=(
