@@ -208,7 +208,7 @@ class PropertyForm(NoCsrfForm):
     property_value = MoneyField(
         u'How much is the property worth?',
         description=u"Use a property website",
-        validators=[Optional(), NumberRange(min=0)])
+        validators=[InputRequired(u'Please enter a valid amount'), NumberRange(min=0)])
     mortgage_remaining = MoneyField(
         u'How much is left to pay on the mortgage?',
         description=(
@@ -318,17 +318,20 @@ class IncomeFieldForm(NoCsrfForm):
         u'Wages before tax',
         description=(
             u"This includes all your wages and any earnings from "
-            u"self-employment"))
+            u"self-employment"),
+        validators=[MoneyIntervalAmountRequired()])
     income_tax = MoneyIntervalField(
         u'Income tax',
         description=(
             u"Tax paid directly out of your wages and any tax you pay on "
-            u"self-employed earnings"))
+            u"self-employed earnings"),
+        validators=[MoneyIntervalAmountRequired()])
     national_insurance = MoneyIntervalField(
         u'National Insurance contributions',
         description=(
             u"Check your payslip or your National Insurance statement if "
-            u"you’re self-employed"))
+            u"you’re self-employed"),
+        validators=[MoneyIntervalAmountRequired()])
     working_tax_credit = MoneyIntervalField(
         u'Working Tax Credit',
         description=u'Extra money for people who work and have a low income')
@@ -474,7 +477,6 @@ class ApplicationForm(Form):
                     self.adaptations.welsh.data and 'WELSH'
                     or self.adaptations.other_language.data,
                 'notes': self.adaptations.other_adaptation.data
-                    if self.adaptations.is_other_adaptation.data else ''
             },
             'requires_action_at': time.isoformat(),
         }
