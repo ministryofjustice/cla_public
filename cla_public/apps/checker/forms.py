@@ -9,7 +9,7 @@ import pytz
 
 from wtforms import Form as NoCsrfForm
 from wtforms import IntegerField, SelectField, StringField, \
-    TextAreaField, FormField
+    TextAreaField, FormField, RadioField
 from wtforms.fields.core import UnboundField
 from wtforms.validators import InputRequired, NumberRange, Optional
 
@@ -21,7 +21,7 @@ from cla_public.apps.checker.fields import (
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
     PropertyList, money_interval_to_monthly,
-    AdaptationsForm, HoneypotField
+    AdaptationsForm
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.honeypot import Honeypot
