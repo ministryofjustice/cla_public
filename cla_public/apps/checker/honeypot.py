@@ -9,10 +9,6 @@ FIELD_NAME = 'comment'
 CSS_CLASS = 'hp_decoy'
 
 
-class HoneypotException(Exception):
-    pass
-
-
 class HoneypotWidget(widgets.Input):
 
     def __call__(self, field, **kwargs):
@@ -28,6 +24,10 @@ class HoneypotWidget(widgets.Input):
 class HoneypotField(StringField):
     widget = HoneypotWidget()
 
+    def pre_validate(self, form):
+        if self.data:
+            raise ValueError(self.gettext(u'This field must be left empty'))
+
 
 class Honeypot(object):
 
@@ -39,11 +39,3 @@ class Honeypot(object):
         self._unbound_fields.append((FIELD_NAME, unbound))
 
         super(Honeypot, self).__init__(*args, **kwargs)
-
-    def validate(self):
-        field = getattr(self, FIELD_NAME)
-
-        if field and field.data:
-            raise HoneypotException('User filled the honeypot field')
-
-        return super(Honeypot, self).validate()

@@ -441,8 +441,5 @@
 
 
 {% macro honeypot(form) %}
-  <label for="{{ honeypot_field_name }}">
-    {{ form[honeypot_field_name].label }}
-    {{ form[honeypot_field_name] }}
-  </label>
+  {{ text_field(form[honeypot_field_name]) }}
 {% endmacro %}

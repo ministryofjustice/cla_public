@@ -100,7 +100,7 @@ class CheckerSession(SecureCookieSession):
 
     def clear_form_data(self, form):
         classname = form.__class__.__name__
-        form_data = map(namespace(classname), form.data.items())
+        form_data = dict(map(namespace(classname), form.data.items()))
         for key in form_data.keys():
             if key in self:
                 del self[key]
