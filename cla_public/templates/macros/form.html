@@ -147,7 +147,7 @@
     - subfield <@object> (optional) WTForm field to include as subfield
                       (creates relationship via JS for conditional toggling)
 #}
-{% macro yesno_field(field, subfield=None, use_form_group=True, class_=None, label_class=None) %}
+{% macro yesno_field(field, subfield=None, use_form_group=True, label_class='') %}
   {# set subfields as macro caller and make them optional #}
   {% if caller %}
     {% set subfield_caller = caller() %}
