@@ -47,7 +47,7 @@ def form_view(form_class, form_template):
 
                 else:
 
-                    session.clear_form_data(form_class.__name__)
+                    session.clear_form_data(form)
 
             return render_template(form_template, form=form)
 
