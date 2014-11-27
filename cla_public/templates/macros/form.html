@@ -229,9 +229,9 @@
     - rows <@number> (optional, default: 4) HTML rows attribute
     - cols <@number> (optional, default: 40) HTML cols attribute
 #}
-{% macro textarea_field(field, rows=4, cols=40) %}
+{% macro textarea_field(field, class_='') %}
   {% call form_group(field) %}
-    {{ field(class_='form-control', rows=rows, cols=cols) }}
+    {{ field(class_='form-control ' + class_, rows=4, cols=40) }}
   {% endcall %}
 {% endmacro %}
 
