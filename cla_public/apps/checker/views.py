@@ -19,16 +19,6 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
 log = logging.getLogger(__name__)
 
 
-@checker.after_request
-def add_header(response):
-    """
-    Add no-cache headers
-    """
-    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
-    response.headers['Pragma'] = 'no-cache'
-    return response
-
-
 def proceed(next_step, **kwargs):
     return redirect(url_for('.{0}'.format(next_step), **kwargs))
 
