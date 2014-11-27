@@ -1,18 +1,23 @@
 /* jshint unused: false */
 
+'use strict';
+
 var gulp = require('gulp');
 var paths = require('./_paths');
-var plugins = require('gulp-load-plugins')();
+var handlebars = require('gulp-handlebars');
+var defineModule = require('gulp-define-module');
+var declare = require('gulp-declare');
+var concat = require('gulp-concat');
 
 // js templates
-gulp.task('templates', function(){
+gulp.task('client-templates', function(){
   gulp.src('cla_public/static-src/javascripts/templates/*.hbs')
-    .pipe(plugins.handlebars())
-    .pipe(plugins.defineModule('plain'))
-    .pipe(plugins.declare({
+    .pipe(handlebars())
+    .pipe(defineModule('plain'))
+    .pipe(declare({
       namespace: 'CLA.templates'
     }))
-    .pipe(plugins.concat('templates.js'))
+    .pipe(concat('templates.js'))
     .pipe(gulp.dest('cla_public/static-src/javascripts'));
 });
 

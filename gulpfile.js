@@ -4,11 +4,12 @@
 
 var gulp = require('gulp');
 var requireDir = require('require-dir');
-var dir = requireDir('./tasks');
+
+requireDir('./tasks');
 
 gulp.task('build', [
     'minify-css',
-    'templates',
+    'client-templates',
     'minify-scripts',
     'images'
   ]
