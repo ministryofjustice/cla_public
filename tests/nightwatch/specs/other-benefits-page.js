@@ -105,6 +105,23 @@ module.exports = {
       .submitForm('form')
       .assert.urlContains('/income')
     ;
+  },
+
+  'Should also see page if benefits=no but children=yes': function(client) {
+    common.startPage(client);
+    common.selectDebtCategory(client);
+
+    client
+      .assert.urlContains('/about')
+      .assert.containsText('h1', 'About you')
+    ;
+    common.aboutPageSetAllToNo(client);
+    common.setYesNoFields(client, 'have_children', 1);
+    client
+      .setValue('input[name="num_children"]', 1)
+      .submitForm('form')
+      .assert.urlContains('/benefits-tax-credits')
+    ;
 
     client.end();
   }
