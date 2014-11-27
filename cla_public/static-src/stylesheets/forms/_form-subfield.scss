@@ -2,21 +2,32 @@
   margin: 15px 0 0 0;
 
   .js-enabled &.s-hidden {
-    display: none;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .js-enabled &.s-expanded {
+    @include transition(opacity, ease, 300ms);
+    opacity: 1;
   }
 
   label {
-    margin-right: 10px;
     display: block;
-    margin-bottom: 5px;
   }
 
   .label-inline {
     display: inline-block;
+    margin-right: 10px;
   }
 
   .input-prefix {
     margin: 0;
+    display: inline-block;
+  }
+
+  .radio-inline {
     display: inline-block;
   }
 }

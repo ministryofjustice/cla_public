@@ -132,7 +132,11 @@ class AboutYouForm(MultiPageForm):
         u'Are you in a dispute with your partner?',
         description=(
             u"This means a dispute over money or property following a "
-            u"separation"))
+            u"separation"),
+        validators=[
+            IgnoreIf('have_partner', FieldValue(NO)),
+            InputRequired(message=u'Please choose Yes or No')
+        ])
     on_benefits = YesNoField(
         u'Are you on any benefits?',
         description=(

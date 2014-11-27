@@ -108,6 +108,37 @@
 
 
 {#
+  Yes/No elements
+
+  Params:
+    - field <@object> WTForm field
+    - subfield <@object> (optional) WTForm field to include as subfield
+                      (creates relationship via JS for conditional toggling)
+    - subfield_caller <@object> (optional)
+#}
+{% macro yesno_elements(field, subfield=None, subfield_caller=None) %}
+  {%- for option in field -%}
+    <label class="radio-inline" for="{{option.id}}">
+      {% if subfield %}
+        {{- option(**{
+            'data-conditional-controls': subfield.id,
+            'data-conditional-show-value': '1'
+          })
+        }}
+      {% else %}
+        {{- option }}
+      {% endif %}
+      {{ option.label.text -}}
+    </label>
+  {%- endfor -%}
+  {% if subfield and subfield_caller %}
+    <div class="form-subfield s-hidden" data-conditional-id="{{subfield.id}}">
+      {{ subfield_caller }}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{#
   Yes/No field
 
   Params:
@@ -115,33 +146,27 @@
     - subfield <@object> (optional) WTForm field to include as subfield
                       (creates relationship via JS for conditional toggling)
 #}
-{% macro yesno_field(field, subfield=None) %}
+{% macro yesno_field(field, subfield=None, use_form_group=True, class_=None, label_class=None) %}
   {# set subfields as macro caller and make them optional #}
   {% if caller %}
     {% set subfield_caller = caller() %}
+  {% else %}
+    {% set subfield_caller = None %}
   {% endif %}
 
-  {% call form_group(field, subfield, title_as_label=False) %}
-    {%- for option in field -%}
-      <label class="radio-inline" for="{{option.id}}">
-        {% if subfield %}
-          {{- option(**{
-              'data-conditional-controls': subfield.id,
-              'data-conditional-show-value': '1'
-            })
-          }}
-        {% else %}
-          {{- option }}
-        {% endif %}
-        {{ option.label.text -}}
-      </label>
-    {%- endfor -%}
-    {% if subfield and subfield_caller %}
-      <div class="form-subfield s-hidden" data-conditional-id="{{subfield.id}}">
-        {{ subfield_caller }}
+  {% if use_form_group %}
+    {% call form_group(field, subfield, title_as_label=False) %}
+      {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
+    {% endcall %}
+  {% else %}
+    {{ field.label(class_=label_class) }}
+    {% if field.description %}
+      <div class="field-help">
+        {{field.description|safe}}
       </div>
     {% endif %}
-  {% endcall %}
+    {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
+  {% endif %}
 {% endmacro %}
 
 
