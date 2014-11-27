@@ -45,7 +45,7 @@ module.exports = {
     client
       .setValue('[name="num_children"]', 1)
       .submitForm('form')
-      .pause(5000)
+      .assert.containsText('h1', 'Your benefits')
     ;
 
 
