@@ -310,6 +310,13 @@
         }) }}
       {{ field.is_other_adaptation.label }}
       <div class="form-subfield" data-conditional-id="{{field.other_adaptation.id}}">
+        {%- if field.other_adaptation.description -%}
+          <div class="field-help">
+            <span class="field-description">
+              {{- field.other_adaptation.description -}}
+            </span>
+          </div>
+        {%- endif -%}
         {{ field.other_adaptation(class_='form-control', rows=4, cols=40) }}
       </div>
     </dd>
