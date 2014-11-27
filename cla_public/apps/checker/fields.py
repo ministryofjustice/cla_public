@@ -392,18 +392,3 @@ class AvailabilityCheckerField(FormField):
 
     def scheduled_time(self):
         return self.form.scheduled_time()
-
-
-class HoneypotWidget(widgets.Input):
-
-    def __call__(self, field, **kwargs):
-        kwargs.setdefault('value', '')
-        return widgets.HTMLString('<input {params}></input>'.format(
-            params=widgets.html_params(
-                name=field.name,
-                class_='hp_decoy',
-                **kwargs)))
-
-
-class HoneypotField(StringField):
-    widget = HoneypotWidget()

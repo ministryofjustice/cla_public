@@ -25,7 +25,7 @@
     {{ Form.text_field(form.investments, prefix="£") }}
     {{ Form.text_field(form.valuables, prefix="£") }}
 
-    {{ Form.honeypot(form.hp_field) }}
+    {{ Form.honeypot(form) }}
     {{ Form.actions('Continue') }}
   </form>
 {% endblock %}

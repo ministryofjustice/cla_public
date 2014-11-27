@@ -14,6 +14,7 @@ from cla_public.apps.checker.decorators import form_view, override_session_vars,
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
     OutgoingsForm, ApplicationForm
+from cla_public.apps.checker.honeypot import FIELD_NAME as HONEYPOT_FIELD_NAME
 
 
 log = logging.getLogger(__name__)
@@ -25,6 +26,9 @@ def proceed(next_step, **kwargs):
 
 def outcome(outcome):
     return proceed('result', outcome=outcome)
+
+
+checker.add_app_template_global(HONEYPOT_FIELD_NAME, name='honeypot_field_name')
 
 
 @checker.route('/problem', methods=['GET', 'POST'])
