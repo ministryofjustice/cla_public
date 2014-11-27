@@ -2,7 +2,7 @@
   'use strict';
 
   moj.Modules.AddressFinder = {
-    el: '.js-AddressFinder',
+    el: '.address-finder',
     url: '/addressfinder/addresses/',
 
     init: function () {
@@ -13,17 +13,17 @@
 
     cacheEls: function () {
       this.addresses = [];
-      this.$postcode = $(this.el);
+      this.$postcode = $(this.el).find('input[type="text"]');
       this.$addressField = $(this.$postcode.data('address-el'));
-      this.$postcodeRow = this.$postcode.parents('.FormRow');
-      this.$postcodeLabel = this.$postcodeRow.find('.FormRow-label');
+      this.$postcodeRow = this.$postcode.closest('.form-row');
+      this.$formGroup = this.$postcode.closest('.form-group');
       this.$form = this.$postcode.parents('form');
     },
 
     bindEvents: function () {
       this.$postcode.on('keydown keypress', this.onEnter);
-      this.$form.on('click', '.js-AddressFinder-button', this.onclickFindBtn);
-      this.$form.on('change', '.js-AddressFinder-options', this.onchangeAddress);
+      this.$form.on('click', '.address-finder > button', this.onclickFindBtn);
+      this.$form.on('change', '.address-list select', this.onchangeAddress);
 
       moj.Events.on('render AddressFinder.render', this.render);
     },
@@ -31,7 +31,7 @@
     onEnter: function (event) {
       if (event.which === 13) {
         event.preventDefault();
-        this.$form.find('.js-AddressFinder-button').click();
+        this.$postcode.siblings('button').click();
       }
     },
 
@@ -53,7 +53,7 @@
     onchangeAddress: function (event) {
       this.updateAddress($(event.target).val());
       // remove address list
-      $('.js-AddressFinder-addressList').remove();
+      $('.address-list').remove();
     },
 
     queryAddressFinder: function (postcode) {
@@ -66,7 +66,7 @@
     },
 
     querySuccess: function (data) {
-      this.$form.find('.js-AddressFinder-button').attr('disabled', false);
+      this.$form.find('.address-finder-button').attr('disabled', false);
 
       // store addresses in module
       this.addresses = data;
@@ -83,7 +83,7 @@
     },
 
     queryFail: function (jqxhr, textStatus, error) {
-      this.$form.find('.js-AddressFinder-button').attr('disabled', false);
+      this.$form.find('.address-finder-button').attr('disabled', false);
 
       this.showError('Request failed: ' + textStatus + ', ' + error);
     },
@@ -101,18 +101,17 @@
       this.$addressField.val(parts.join('\n')).focus();
     },
 
-    render: function (addr) {
+    render: function () {
       this.$postcode.after(CLA.templates.AddressFinder.findButton());
     },
 
     renderAddressList: function (addresses) {
-      var $list = $('.js-AddressFinder-addressList');
+      var $list = $('.address-list');
       var addrItems = [];
 
       // tidy up addresses for dropdown list
       $.each(addresses, function (i, addr) {
         var parts = addr.formatted_address.split('\n');
-        var postcode = parts.pop();
         var text = parts.join(', ');
         addrItems.push(text);
       });
@@ -122,20 +121,20 @@
       } else {
         this.$postcodeRow.after(CLA.templates.AddressFinder.addressList({items: addrItems, count: addresses.length}));
       }
-      $('.js-AddressFinder-options').focus();
+      $('.address-list .form-control').focus();
     },
 
     showError: function (msg) {
-      this.$postcodeRow.addClass('Error');
-      this.$postcodeLabel.append($('<span class="Error-message">' + msg + '</span>'));
+      this.$formGroup.addClass('m-error');
+      this.$formGroup.append($('<dd class="form-row"><div class="field-error">' + msg + '</div></dd>'));
     },
 
     reset: function () {
-      this.$postcodeRow
-        .removeClass('Error')
-        .find('.Error-message').remove();
+      this.$formGroup
+        .removeClass('m-error')
+        .find('.field-error').parent().remove();
 
-      $('.js-AddressFinder-addressList').remove();
+      $('.address-list').remove();
     }
   };
 }());

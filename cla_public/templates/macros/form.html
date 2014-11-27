@@ -433,8 +433,8 @@
 #}
 {% macro postcode_field(field, attributes={}) %}
   {% call form_group(field) %}
-    <div class="FormRow FormRow--inline">
-      {{ field(class_='form-control js-AddressFinder', **attributes) }}
+    <div class="address-finder">
+      {{ field(class_='form-control', **attributes) }}
     </div>
   {% endcall %}
 {% endmacro %}

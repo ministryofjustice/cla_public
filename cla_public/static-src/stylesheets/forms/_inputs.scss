@@ -1,5 +1,3 @@
-.FormRow select,
-.FormRow button,
 .form-control {
   @include core-19;
   border: 1px solid $grey-2;
@@ -18,7 +16,6 @@
   }
 }
 
-.FormRow select,
 select.form-control {
   height: 35px;
   background: $white;
