@@ -138,6 +138,7 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
   Yes/No field
 
@@ -183,6 +184,7 @@
 #}
 {% macro text_field(
   field,
+  subfield=None,
   prefix=None,
   suffix=None,
   use_form_group=True,
@@ -193,7 +195,7 @@
     {% set text_field_caller = caller() %}
   {% endif %}
   {% if use_form_group %}
-    {% call form_group(field) %}
+    {% call form_group(field, subfield) %}
       {% if prefix %}
         <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
       {% endif %}
