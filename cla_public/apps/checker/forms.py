@@ -43,10 +43,10 @@ class ConfigFormMixin(object):
 
         super(ConfigFormMixin, self).__init__(*args, **kwargs)
 
-        if config_path:
-            config = FormConfigParser(
-                self.__class__.__name__, config_path=config_path)
+        config = FormConfigParser(
+            self.__class__.__name__, config_path=config_path)
 
+        if config:
             # set config attributes on the field
             for field_name, field in self._fields.iteritems():
                 field.__dict__.update(config.get(field_name, field))

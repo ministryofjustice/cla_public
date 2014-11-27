@@ -37,6 +37,9 @@ class FormConfigParser(object):
             for field_name, field_config in self.form_config.get('fields').iteritems():
                 self.fields[field_name] = self.values_to_markdown(field_config)
 
+    def __nonzero__(self):
+        return self.form_config is not None
+
     def values_to_markdown(self, field_config):
         """
         Converts fields in self._markdown_fields to html from markdown

@@ -5,7 +5,7 @@ from flask_wtf import Form
 
 from cla_public import app
 from cla_public.apps.checker.fields import DescriptionRadioField
-from cla_public.apps.checker.forms import ConfigFormMixin
+from cla_public.apps.checker.forms import ConfigFormMixin, AboutYouForm
 
 
 FORMS_CONFIG = 'config/forms_config.yml'
@@ -79,6 +79,9 @@ class TestFormConfig(unittest.TestCase):
                     ' One</li>\n<li>Lisr Two</li>\n</ul>\n\n<p>Standard text</p>\n'
                 )
 
-
+    def test_about_you_more_info(self):
+        form = AboutYouForm()
+        have_valuables = form._fields['have_valuables']
+        self.assertTrue(bool(have_valuables.more_info))
 
 
