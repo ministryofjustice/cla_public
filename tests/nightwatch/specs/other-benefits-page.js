@@ -3,15 +3,6 @@
 var util = require('util');
 var common = require('../modules/common-functions');
 
-var BENEFITS = [
-  'income-support',
-  'jobseekers-allowance',
-  'guarantee-credit',
-  'universal-credit',
-  'employment-support',
-  'other-benefit'
-];
-
 module.exports = {
   'Start page': common.startPage,
 
@@ -40,7 +31,22 @@ module.exports = {
   'Benefits and tax credits page': function(client) {
     client
       .assert.urlContains('/benefits-tax-credits')
-      // .assert.containsText('h1', 'Your benefits')
+    ;
+    common.checkTextIsEqual(client, 'h1', 'Your benefits and tax credits');
+  },
+
+  'Child benefit fields': function(client) {
+    client
+      .assert.hidden('input[name="child_benefit-amount"]')
+      .back()
+      .back()
+    ;
+    common.setYesNoFields(client, 'have_children', 1);
+    client
+      .setValue('[name="num_children"]', 1)
+      .submitForm('form')
+      .pause(5000)
+    ;
 
 
     client.end();

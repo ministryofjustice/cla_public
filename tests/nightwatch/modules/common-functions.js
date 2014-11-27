@@ -72,7 +72,7 @@ module.exports = {
       client.useXpath();
     }
     client.getText(field, function(result) {
-      this.assert.equal(result.value, expectedText, util.format('Text of %s exactly matches "%s"', field, expectedText));
+      this.assert.equal(result.value, expectedText, util.format('Text of <%s> exactly matches "%s"', field, expectedText));
     });
     if(xpath) {
       client.useCss();
