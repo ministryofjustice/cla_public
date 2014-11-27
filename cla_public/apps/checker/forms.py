@@ -437,7 +437,7 @@ class ApplicationForm(Form):
         u'Contact phone number',
         validators=[InputRequired()])
     safe_to_contact = RadioField(
-        u'Safe to leave a message',
+        u'Is it safe for us to leave a message on this number?',
         choices=CONTACT_SAFETY,
         validators=[InputRequired(message=u'Please choose Yes or No')],
     )
