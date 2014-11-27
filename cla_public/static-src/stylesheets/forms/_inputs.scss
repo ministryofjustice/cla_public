@@ -2,6 +2,7 @@
   @include core-19;
   border: 1px solid $grey-2;
   padding: 4px;
+  vertical-align: middle;
 
   &.m-small {
     width: 3em;
@@ -17,13 +18,13 @@
 }
 
 select.form-control {
-  height: 35px;
+  height: 34px;
   background: $white;
 }
 
 input[type="text"],
 input[type="number"] {
-  height: 25px;
+  height: 24px;
 }
 
 textarea {
