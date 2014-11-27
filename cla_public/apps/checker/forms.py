@@ -477,7 +477,6 @@ class ApplicationForm(Form):
                     self.adaptations.welsh.data and 'WELSH'
                     or self.adaptations.other_language.data,
                 'notes': self.adaptations.other_adaptation.data
-                    if self.adaptations.is_other_adaptation.data else ''
             },
             'requires_action_at': time.isoformat(),
         }
