@@ -27,13 +27,27 @@ def form_view(form_class, form_template):
             if current_app.config.get('DEBUG'):
                 override_session_vars()
 
-            form = form_class(request.form)
-            if form.validate_on_submit():
-                post_to_eligibility_check_api(form)
-                is_eligible = post_to_is_eligible_api(form)
-                if is_eligible == ELIGIBILITY_STATES.NO:
-                    return redirect(url_for('.result', outcome='ineligible'))
-                return fn(session)
+            form_session_data = session.get_form_data(
+                form_class.__name__, as_object=True)
+
+            form = form_class(request.form, form_session_data)
+            if form.is_submitted():
+
+                if form.validate():
+
+                    session.update_form_data(form)
+
+                    post_to_eligibility_check_api(form)
+                    is_eligible = post_to_is_eligible_api(form)
+                    if is_eligible == ELIGIBILITY_STATES.NO:
+                        return redirect(
+                            url_for('.result', outcome='ineligible'))
+
+                    return fn(session)
+
+                else:
+
+                    session.clear_form_data(form_class.__name__)
 
             return render_template(form_template, form=form)
 

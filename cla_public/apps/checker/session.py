@@ -6,6 +6,19 @@ from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
 from cla_public.apps.checker.utils import passported
 
 
+def namespace(ns):
+    def prefix_key(item):
+        key, value = item
+        return ('{0}_{1}'.format(ns, key), value)
+    return prefix_key
+
+
+class Struct(object):
+
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+
+
 class CheckerSession(SecureCookieSession):
     "Provides some convenience properties for inter-page logic"
 
@@ -79,6 +92,29 @@ class CheckerSession(SecureCookieSession):
                 return {'notes': '\n\n'.join(session.get('notes', []))}
 
         return Notes()
+
+    def update_form_data(self, form):
+        classname = form.__class__.__name__
+        form_data = map(namespace(classname), form.data.items())
+        self.update(form_data)
+
+    def clear_form_data(self, form):
+        classname = form.__class__.__name__
+        form_data = map(namespace(classname), form.data.items())
+        for key in form_data.keys():
+            if key in self:
+                del self[key]
+
+    def get_form_data(self, form_class_name, as_object=False):
+        ns = '{0}_'.format(form_class_name)
+        namespaced = lambda (key, val): key.startswith(ns)
+        strip_ns = lambda (key, val): (key.replace(ns, ''), val)
+        form_data = dict(map(strip_ns, filter(namespaced, self.items())))
+
+        if as_object:
+            form_data = Struct(**form_data)
+
+        return form_data
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):
