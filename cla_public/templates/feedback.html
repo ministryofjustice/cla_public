@@ -21,6 +21,7 @@
     {{ Form.check_list_field(form.feel_about_service) }}
     {{ Form.check_list_field(form.help_filling_in_form) }}
 
+    {{ Form.honeypot(form.hp_field) }}
     {{ Form.actions('Send feedback') }}
   </form>
 {% endblock %}

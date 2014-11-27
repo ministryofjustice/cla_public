@@ -46,6 +46,7 @@
       </p>
     {% endcall %}
 
+    {{ Form.honeypot(form.hp_field) }}
     {{ Form.actions('Request callback') }}
   </form>
 {% endblock %}

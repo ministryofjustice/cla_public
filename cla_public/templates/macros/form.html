@@ -438,3 +438,11 @@
     </div>
   {% endcall %}
 {% endmacro %}
+
+
+{% macro honeypot(field) %}
+  <label for="hp_field">
+    {{ field.label }}
+    {{ field }}
+  </label>
+{% endmacro %}

@@ -10,6 +10,7 @@ import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import IntegerField, SelectField, StringField, \
     TextAreaField, FormField
+from wtforms.fields.core import UnboundField
 from wtforms.validators import InputRequired, NumberRange, Optional
 
 from cla_public.apps.checker.api import money_interval
@@ -53,14 +54,13 @@ class ConfigFormMixin(object):
 class HoneypotMixin(object):
 
     def __init__(self, *args, **kwargs):
-        super(HoneypotMixin, self).__init__(*args, **kwargs)
 
-        self._fields['hp_field'] = HoneypotField(
-            u'Leave this field empty',
-            _form=self,
-            _prefix=self._prefix,
-            _name='hp_field',
-            _translations=None)
+        unbound = UnboundField(
+            HoneypotField,
+            u'Leave this field empty')
+        self._unbound_fields.append(('hp_field', unbound))
+
+        super(HoneypotMixin, self).__init__(*args, **kwargs)
 
 
 class ProblemForm(ConfigFormMixin, HoneypotMixin, Form):
@@ -395,7 +395,7 @@ class OutgoingsForm(ConfigFormMixin, HoneypotMixin, Form):
         }}}
 
 
-class ApplicationForm(Form):
+class ApplicationForm(HoneypotMixin, Form):
     title = StringField(
         u'Title',
         description=u"Mr, Mrs, Ms",

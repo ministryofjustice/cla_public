@@ -28,6 +28,7 @@
       {% endfor %}
     </ul>
 
+    {{ Form.honeypot(form.hp_field) }}
     {{ Form.actions('Continue') }}
   </form>
 {% endblock %}
