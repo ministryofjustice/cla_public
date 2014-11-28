@@ -7,8 +7,10 @@ from cla_public.apps.base.fields import MultiRadioField
 
 from cla_public.apps.base.constants import FEEL_ABOUT_SERVICE, \
     HELP_FILLING_IN_FORM
+from cla_public.apps.checker.honeypot import Honeypot
 
-class FeedbackForm(Form):
+
+class FeedbackForm(Honeypot, Form):
     difficulty = TextAreaField(u'Did you have any difficulty with this service?')
 
     ideas = TextAreaField(u'Do you have any ideas for how it could be improved?')
