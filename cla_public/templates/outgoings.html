@@ -23,6 +23,7 @@
     {{ Form.money_interval_field(form.income_contribution) }}
     {{ Form.money_interval_field(form.childcare, not session.has_children) }}
 
+    {{ Form.honeypot(form) }}
     {{ Form.actions('Submit') }}
   </form>
 {% endblock %}

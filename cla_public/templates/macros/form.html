@@ -138,6 +138,7 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
   Yes/No field
 
@@ -146,7 +147,7 @@
     - subfield <@object> (optional) WTForm field to include as subfield
                       (creates relationship via JS for conditional toggling)
 #}
-{% macro yesno_field(field, subfield=None, use_form_group=True, class_=None, label_class=None) %}
+{% macro yesno_field(field, subfield=None, use_form_group=True, label_class='') %}
   {# set subfields as macro caller and make them optional #}
   {% if caller %}
     {% set subfield_caller = caller() %}
@@ -183,6 +184,7 @@
 #}
 {% macro text_field(
   field,
+  subfield=None,
   prefix=None,
   suffix=None,
   use_form_group=True,
@@ -193,7 +195,7 @@
     {% set text_field_caller = caller() %}
   {% endif %}
   {% if use_form_group %}
-    {% call form_group(field) %}
+    {% call form_group(field, subfield) %}
       {% if prefix %}
         <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
       {% endif %}
@@ -227,9 +229,9 @@
     - rows <@number> (optional, default: 4) HTML rows attribute
     - cols <@number> (optional, default: 40) HTML cols attribute
 #}
-{% macro textarea_field(field, rows=4, cols=40) %}
+{% macro textarea_field(field, class_='') %}
   {% call form_group(field) %}
-    {{ field(class_='form-control', rows=rows, cols=cols) }}
+    {{ field(class_='form-control ' + class_, rows=4, cols=40) }}
   {% endcall %}
 {% endmacro %}
 
@@ -433,8 +435,15 @@
 #}
 {% macro postcode_field(field, attributes={}) %}
   {% call form_group(field) %}
-    <div class="FormRow FormRow--inline">
-      {{ field(class_='form-control js-AddressFinder', **attributes) }}
+    <div class="address-finder">
+      {{ field(class_='form-control', **attributes) }}
     </div>
   {% endcall %}
+{% endmacro %}
+
+
+{% macro honeypot(form) %}
+  <div class="hp-field">
+    {{ text_field(form[honeypot_field_name], use_form_group=False) }}
+  </div>
 {% endmacro %}

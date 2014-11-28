@@ -18,6 +18,7 @@ gulp.task('serve', ['build'], function() {
   });
 
   gulp.watch(paths.templates, browserSync.reload);
+  gulp.watch(paths.clientTemplates, ['client-templates', 'scripts', browserSync.reload]);
   gulp.watch(paths.images, ['images']);
   gulp.watch(paths.ie_styles, ['ie-css']);
   gulp.watch(paths.styles, ['sass']);

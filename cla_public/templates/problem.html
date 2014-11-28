@@ -33,6 +33,7 @@
       <p>If you’re really not sure what to choose, ask us to <a href="/result/eligible">call you back</a>.</p>
     {% endcall %}
 
+    {{ Form.honeypot(form) }}
     {{ Form.actions('Continue') }}
   </form>
 

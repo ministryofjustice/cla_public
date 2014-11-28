@@ -6,6 +6,8 @@
     overflow: hidden;
     visibility: hidden;
     opacity: 0;
+    margin: 0;
+    padding: 0;
   }
 
   .js-enabled &.s-expanded {
@@ -17,7 +19,8 @@
     display: block;
   }
 
-  .label-inline {
+  .label-inline,
+  .radio-inline {
     display: inline-block;
     margin-right: 10px;
   }

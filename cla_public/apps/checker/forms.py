@@ -7,12 +7,11 @@ from flask import session
 from flask_wtf import Form
 import pytz
 
-from wtforms import Form as NoCsrfForm, RadioField
-from wtforms import BooleanField, IntegerField, SelectField, StringField, \
-    TextAreaField, FormField
-from wtforms.compat import iteritems
-from wtforms.validators import InputRequired, NumberRange, Optional, \
-    ValidationError
+from wtforms import Form as NoCsrfForm
+from wtforms import IntegerField, SelectField, StringField, \
+    TextAreaField, FormField, RadioField
+from wtforms.fields.core import UnboundField
+from wtforms.validators import InputRequired, NumberRange, Optional
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
@@ -25,9 +24,11 @@ from cla_public.apps.checker.fields import (
     AdaptationsForm
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
+from cla_public.apps.checker.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
     FieldValue, MoneyIntervalAmountRequired
+
 
 log = logging.getLogger(__name__)
 
@@ -36,73 +37,22 @@ def to_money_interval(data):
     return money_interval(data['amount'], data['interval'])
 
 
-class Struct(object):
-
-    def __init__(self, **entries):
-        self.__dict__.update(entries)
-
-
 class ConfigFormMixin(object):
     def __init__(self, *args, **kwargs):
         config_path = kwargs.pop('config_path', None)
 
         super(ConfigFormMixin, self).__init__(*args, **kwargs)
 
-        self.config_data = FormConfigParser(self.__class__.__name__,
-                                            config_path=config_path)
+        config = FormConfigParser(
+            self.__class__.__name__, config_path=config_path)
 
-        # set config attributes on the field
-        for field_name, field in iteritems(self._fields):
-            field_config = self.config_data.get_field_config(field_name, field)
-            for attribute, value in field_config.iteritems():
-                setattr(field, attribute, value)
-
-
-class MultiPageForm(ConfigFormMixin, Form):
-    """Stores validated form data in the session"""
-
-    def __init__(self, formdata=None, obj=None, prefix='',
-                 csrf_context=None, secret_key=None, csrf_enabled=None, *args,
-                 **kwargs):
-        namespace = '{0}_'.format(self.__class__.__name__)
-
-        self_fields = lambda (key, val): \
-            key.startswith(namespace)
-
-        strip_namespace = lambda (key, val): \
-            (key.replace(namespace, ''), val)
-
-        if obj:
-            obj = Struct(**dict(map(
-                strip_namespace,
-                filter(self_fields, obj.items()))))
-
-        super(MultiPageForm, self).__init__(
-            formdata=formdata, obj=obj, prefix=prefix,
-            csrf_context=csrf_context, secret_key=secret_key,
-            csrf_enabled=csrf_enabled, *args, **kwargs)
-
-    def validate(self):
-        """Store the validated field data in the session.
-        If the validation failed, remove this form's field data.
-        """
-        success = super(MultiPageForm, self).validate()
-
-        namespace = lambda field: '{form}_{field}'.format(
-            form=self.__class__.__name__,
-            field=field)
-
-        for field_name, data in self.data.iteritems():
-            key = namespace(field_name)
-            if success:
-                session[key] = data
-            elif key in session:
-                del session[key]
-
-        return success
+        if config:
+            # set config attributes on the field
+            for field_name, field in self._fields.iteritems():
+                field.__dict__.update(config.get(field_name, field))
 
 
-class ProblemForm(MultiPageForm):
+class ProblemForm(ConfigFormMixin, Honeypot, Form):
     """Area of law choice"""
 
     categories = DescriptionRadioField(
@@ -122,7 +72,7 @@ class ProblemForm(MultiPageForm):
         }
 
 
-class AboutYouForm(MultiPageForm):
+class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     have_partner = YesNoField(
         u'Do you have a partner?',
         description=(
@@ -189,7 +139,7 @@ class AboutYouForm(MultiPageForm):
         }
 
 
-class YourBenefitsForm(MultiPageForm):
+class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
     benefits = MultiCheckboxField(
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
@@ -244,7 +194,7 @@ class PropertyForm(NoCsrfForm):
         }
 
 
-class PropertiesForm(MultiPageForm):
+class PropertiesForm(ConfigFormMixin, Honeypot, Form):
     properties = PropertyList(
         FormField(PropertyForm), min_entries=1, max_entries=3)
 
@@ -253,7 +203,7 @@ class PropertiesForm(MultiPageForm):
             prop.form.api_payload() for prop in self.properties]}
 
 
-class SavingsForm(MultiPageForm):
+class SavingsForm(ConfigFormMixin, Honeypot, Form):
     savings = MoneyField(
         description=(
             u"The total amount of savings in cash, bank or building society"),
@@ -282,7 +232,7 @@ class SavingsForm(MultiPageForm):
         }}}
 
 
-class TaxCreditsForm(MultiPageForm):
+class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
     child_benefit = MoneyIntervalField(
         u'Child Benefit',
         description=u"The total amount you get for all your children")
@@ -377,7 +327,7 @@ class IncomeFieldForm(NoCsrfForm):
         }
 
 
-class IncomeAndTaxForm(MultiPageForm):
+class IncomeAndTaxForm(ConfigFormMixin, Honeypot, Form):
     your_income = FormField(IncomeFieldForm, label=u'Your personal income')
 
     def api_payload(self):
@@ -404,8 +354,10 @@ def income_form(*args, **kwargs):
     return IncomeForm(*args, **kwargs)
 
 
-class OutgoingsForm(MultiPageForm):
-    rent = PartnerMoneyIntervalField(u'Rent')
+class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
+    rent = PartnerMoneyIntervalField(
+        u'Rent',
+        description=u"Money you and your partner pay your landlord")
     maintenance = PartnerMoneyIntervalField(
         u'Maintenance',
         description=(
@@ -432,7 +384,7 @@ class OutgoingsForm(MultiPageForm):
         }}}
 
 
-class ApplicationForm(Form):
+class ApplicationForm(Honeypot, Form):
     title = StringField(
         u'Title',
         description=u"Mr, Mrs, Ms",

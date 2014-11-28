@@ -28,6 +28,7 @@
       {{ Form.money_interval_field(form.total_other_benefit, use_form_group=False) }}
     {% endcall %}
 
+    {{ Form.honeypot(form) }}
     {{ Form.actions('Continue') }}
   </form>
 

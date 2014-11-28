@@ -20,8 +20,14 @@
 
     {{ Form.text_field(form.title) }}
     {{ Form.text_field(form.full_name, class_='m-large') }}
-    {% call Form.text_field(form.contact_number, class_='m-large') %}
-      {{ Form.yesno_field(form.safe_to_contact) }}
+    {% call Form.text_field(form.contact_number, subfield=form.safe_to_contact, class_='m-large') %}
+      <div class="form-subfield">
+        {{ Form.yesno_field(
+          form.safe_to_contact,
+          use_form_group=False,
+          label_class='title-label'
+        ) }}
+      </div>
       <p class="form-subfield">
         If you don’t have a number we can call you on, please contact
         <a href="https://www.gov.uk/civil-legal-advice" target="_blank">
@@ -33,8 +39,7 @@
     {{ Form.postcode_field(form.post_code, attributes={'data-address-el': '#address'}) }}
 
     {{ Form.textarea_field(form.address) }}
-
-    {{ Form.textarea_field(form.extra_notes) }}
+    {{ Form.textarea_field(form.extra_notes, class_='m-full') }}
     {{ Form.adaptations_field(form.adaptations) }}
     {{ Form.availability_checker_field(form.time) }}
 
@@ -46,6 +51,7 @@
       </p>
     {% endcall %}
 
+    {{ Form.honeypot(form) }}
     {{ Form.actions('Request callback') }}
   </form>
 {% endblock %}

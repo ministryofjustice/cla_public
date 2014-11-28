@@ -46,6 +46,7 @@
       {% endif %}
     {% endwith %}
 
+    {{ Form.honeypot(form) }}
     {{ Form.actions('Continue') }}
   </form>
 {% endblock %}
