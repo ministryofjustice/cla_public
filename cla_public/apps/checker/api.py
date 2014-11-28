@@ -114,10 +114,9 @@ def post_to_eligibility_check_api(form):
 def post_to_is_eligible_api(form):
     backend = get_api_connection()
     reference = session.get('eligibility_check')
-    payload = form.api_payload()
 
     if reference:
-        response = backend.eligibility_check(reference).is_eligible().post(payload)
+        response = backend.eligibility_check(reference).is_eligible().post({})
         return response.get('is_eligible')
 
 
