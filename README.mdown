@@ -10,7 +10,7 @@ Installation
 
 Then, copy ``cla_public/config/local.py.example`` and name it ``cla_public/config/local.py``.
 
-Next, you can run the management command like this::
+Next, you can run the management command like this:
 
     ./manage.py --help
 
@@ -22,10 +22,10 @@ automatically reload CSS and JS changes and enables other whizzy things.
 Test
 ----
 
-To run unit tests, run the following::
+To run unit tests, run the following:
 
     ./manage.py test
 
-To run browser test run in PhantomJs, Chrome or Firefox run the following respectively::
+To run browser test run in PhantomJs, Chrome or Firefox run the following respectively:
 
     ./nightwatch -c tests/nightwatch/local.json
