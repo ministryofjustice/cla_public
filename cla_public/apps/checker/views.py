@@ -48,15 +48,16 @@ def about(user):
 
     next_step = 'income'
 
+    if user.children_or_tax_credits:
+        next_step = 'benefits_tax_credits'
+
     if user.has_savings:
         next_step = 'savings'
 
     if user.owns_property:
         next_step = 'property'
 
-    if any([user.is_on_benefits,
-            user.has_children,
-            user.has_dependants]):
+    if user.is_on_benefits:
         next_step = 'benefits'
 
     return proceed(next_step)
@@ -72,7 +73,7 @@ def benefits(user):
 
     next_step = 'income'
 
-    if user.has_tax_credits:
+    if user.children_or_tax_credits:
         next_step = 'benefits_tax_credits'
 
     if user.has_savings:
@@ -107,7 +108,7 @@ def property():
         elif form.validate():
             next_step = 'income'
 
-            if session.has_tax_credits:
+            if session.children_or_tax_credits:
                 next_step = 'benefits_tax_credits'
 
             if session.has_savings:
@@ -124,7 +125,7 @@ def property():
 def savings(user):
     next_step = 'income'
 
-    if user.has_tax_credits:
+    if user.children_or_tax_credits:
         next_step = 'benefits_tax_credits'
 
     return proceed(next_step)
