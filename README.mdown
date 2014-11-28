@@ -4,15 +4,15 @@
 Installation
 ------------
 
-  pip install -r requirements/local.txt
+    pip install -r requirements/local.txt
 
-  npm install && bower install && gulp
+    npm install && bower install && gulp
 
 Then, copy ``cla_public/config/local.py.example`` and name it ``cla_public/config/local.py``.
 
 Next, you can run the management command like this::
 
-  ./manage.py --help
+    ./manage.py --help
 
 You can run the server with ``manage.py runserver``, or you can run
 ``tools/start-dev`` to run the server with foreman, which will monitor and
@@ -24,8 +24,8 @@ Test
 
 To run unit tests, run the following::
 
-  ./manage.py test
+    ./manage.py test
 
 To run browser test run in PhantomJs, Chrome or Firefox run the following respectively::
 
-  ./nightwatch -c tests/nightwatch/local.json
+    ./nightwatch -c tests/nightwatch/local.json
