@@ -5,16 +5,17 @@
 
   "selenium" : {
     "start_process" : true,
+    "log_path": "tests/reports",
     "server_path" : "node_modules/selenium-standalone/.selenium/2.43.1/server.jar"
   },
 
   "test_settings" : {
     "default" : {
       "launch_url" : "http://public-integration.cla.dsd.io",
-      "silent": true,
+      "silent": false,
       "screenshots" : {
         "enabled" : true,
-        "path" : "tests/reports/nightwatch/screenshots"
+        "path" : "tests/reports/nightwatch"
       },
       "desiredCapabilities": {
         "browserName": "phantomjs",
