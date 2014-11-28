@@ -33,6 +33,7 @@
     {{ Form.yesno_field(form.is_self_employed) }}
     {{ Form.yesno_field(form.aged_60_or_over) }}
 
+    {{ Form.honeypot(form) }}
     {{ Form.actions('Continue') }}
   </form>
 

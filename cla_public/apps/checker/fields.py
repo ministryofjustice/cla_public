@@ -9,7 +9,7 @@ from flask import session
 import pytz
 from wtforms import Form as NoCsrfForm, TextAreaField
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
-    SelectField, SelectMultipleField, widgets, FieldList
+    SelectField, SelectMultipleField, widgets, FieldList, StringField
 from wtforms.compat import text_type
 from wtforms.validators import Optional, StopValidation, InputRequired
 

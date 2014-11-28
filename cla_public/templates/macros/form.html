@@ -438,3 +438,10 @@
     </div>
   {% endcall %}
 {% endmacro %}
+
+
+{% macro honeypot(form) %}
+  <div class="hp-field">
+    {{ text_field(form[honeypot_field_name], use_form_group=False) }}
+  </div>
+{% endmacro %}
