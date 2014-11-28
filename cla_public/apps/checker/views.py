@@ -89,8 +89,6 @@ def benefits(user):
 @redirect_if_no_session()
 @form_view(PropertiesForm, 'property.html')
 def property(user):
-    if current_app.config.get('DEBUG'):
-        override_session_vars()
 
     next_step = 'income'
 
