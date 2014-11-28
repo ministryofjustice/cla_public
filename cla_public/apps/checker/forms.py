@@ -401,10 +401,6 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
 
 
 class ApplicationForm(Honeypot, Form):
-    title = StringField(
-        u'Title',
-        description=u"Mr, Mrs, Ms",
-        validators=[InputRequired()])
     full_name = StringField(
         u'Full name',
         validators=[InputRequired()])
@@ -434,7 +430,6 @@ class ApplicationForm(Honeypot, Form):
         time = self.time.scheduled_time().replace(tzinfo=pytz.utc)
         return {
             'personal_details': {
-                'title': self.title.data,
                 'full_name': self.full_name.data,
                 'postcode': self.post_code.data,
                 'mobile_phone': self.contact_number.data,
