@@ -1,9 +1,8 @@
-.FormRow select,
-.FormRow button,
 .form-control {
   @include core-19;
   border: 1px solid $grey-2;
   padding: 4px;
+  vertical-align: middle;
 
   &.m-small {
     width: 3em;
@@ -16,17 +15,21 @@
   &.m-larger {
     width: 24em;
   }
+
+  &.m-full {
+    width: 100%;
+    height: 8em;
+  }
 }
 
-.FormRow select,
 select.form-control {
-  height: 35px;
+  height: 34px;
   background: $white;
 }
 
 input[type="text"],
 input[type="number"] {
-  height: 25px;
+  height: 24px;
 }
 
 textarea {

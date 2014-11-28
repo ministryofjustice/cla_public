@@ -18,7 +18,6 @@
     "gulp-ignore": "^1.2.1",
     "gulp-imagemin": "~0.1.5",
     "gulp-jshint": "~1.5.0",
-    "gulp-load-plugins": "0.4.0",
     "gulp-minify-css": "^0.3.8",
     "gulp-print": "^1.1.0",
     "gulp-rename": "~1.2.0",

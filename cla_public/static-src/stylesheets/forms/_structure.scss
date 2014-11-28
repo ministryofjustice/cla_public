@@ -31,14 +31,10 @@ fieldset {
     background: rgba($red, .1);
     border-top-color: desaturate(lighten($mellow-red, 30), 50);
     border-top-color: rgba(black, .12);
-
-    .form-row {
-      padding: 0 20px;
-    }
   }
 
   .form-row {
-    padding: 0;
+    padding: 0 20px;
     margin: 0;
 
     & + .form-row {
