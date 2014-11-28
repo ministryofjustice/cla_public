@@ -3,7 +3,7 @@
 
 import logging
 
-from flask import abort, current_app, render_template, redirect, request, \
+from flask import abort, current_app, render_template, redirect, \
     session, url_for
 
 from cla_public.apps.checker import checker
@@ -87,36 +87,20 @@ def benefits(user):
 
 @checker.route('/property', methods=['GET', 'POST'])
 @redirect_if_no_session()
-def property():
+@form_view(PropertiesForm, 'property.html')
+def property(user):
     if current_app.config.get('DEBUG'):
         override_session_vars()
 
-    form = PropertiesForm(request.form, session)
-    if form.is_submitted():
-        # Add new property button clicked
-        # submit the form but don't validate
-        if 'add-property' in request.form:
-            if len(form.properties.entries) < form.properties.max_entries:
-                form.properties.append_entry()
-        # Remove property button clicked
-        # Remove the item from the properties list
-        # index passed as button value
-        elif 'remove-property' in request.form:
-            index = int(request.form['remove-property'])
-            form.properties.remove(index)
-        # Do normal validation on submit
-        elif form.validate():
-            next_step = 'income'
+    next_step = 'income'
 
-            if session.children_or_tax_credits:
-                next_step = 'benefits_tax_credits'
+    if session.children_or_tax_credits:
+        next_step = 'benefits_tax_credits'
 
-            if session.has_savings:
-                next_step = 'savings'
+    if session.has_savings:
+        next_step = 'savings'
 
-            return proceed(next_step)
-
-    return render_template('property.html', form=form)
+    return proceed(next_step)
 
 
 @checker.route('/savings', methods=['GET', 'POST'])

@@ -3,7 +3,7 @@
 
 import logging
 
-from flask import session
+from flask import session, request
 from flask_wtf import Form
 import pytz
 
@@ -197,6 +197,22 @@ class PropertyForm(NoCsrfForm):
 class PropertiesForm(ConfigFormMixin, Honeypot, Form):
     properties = PropertyList(
         FormField(PropertyForm), min_entries=1, max_entries=3)
+
+    _submitted = None
+
+    def is_submitted(self):
+        if self._submitted is None:
+            if 'add-property' in request.form:
+                if len(self.properties.entries) < self.properties.max_entries:
+                    self.properties.append_entry()
+                self._submitted = False
+            elif 'remove-property' in request.form:
+                index = int(request.form['remove-property'])
+                self.properties.remove(index)
+                self._submitted = False
+            else:
+                self._submitted = super(PropertiesForm, self).is_submitted()
+        return self._submitted
 
     def api_payload(self):
         return {'property_set': [
