@@ -5,14 +5,13 @@
 
   "selenium" : {
     "start_process" : true,
-    "log_path": "tests/reports",
     "server_path" : "node_modules/selenium-standalone/.selenium/2.43.1/server.jar"
   },
 
   "test_settings" : {
     "default" : {
       "launch_url" : "http://localhost:5000",
-      "silent": false,
+      "silent": true,
       "screenshots" : {
         "enabled" : true,
         "path" : "tests/reports/nightwatch"
