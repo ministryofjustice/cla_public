@@ -32,9 +32,7 @@ module.exports = {
 
   setYesNoFields: function(client, fields, val) {
     var clickOption = function(client, field, val) {
-      client.click(util.format('input[name="%s"][value="%s"]', field, val), function() {
-        console.log(util.format('Set %s to %s', field, (val === 1 ? 'yes' : 'no')));
-      });
+      client.click(util.format('input[name="%s"][value="%s"]', field, val));
     };
 
     if(fields.constructor === Array) {
