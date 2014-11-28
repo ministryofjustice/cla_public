@@ -14,7 +14,7 @@
       "silent": true,
       "screenshots" : {
         "enabled" : true,
-        "path" : "tests/reports/nightwatch/screenshots"
+        "path" : "tests/reports/nightwatch"
       },
       "desiredCapabilities": {
         "browserName": "phantomjs",

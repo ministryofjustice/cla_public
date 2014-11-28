@@ -31,6 +31,7 @@ module.exports = {
       .assert.containsText('body', 'If you own more than one property, you can add more properties below.')
       .back();
     common.setYesNoFields(client, 'have_partner', 1);
+    common.setYesNoFields(client, 'in_dispute', 0);
     client
       .submitForm('form')
       .assert.urlContains('/property')
@@ -46,9 +47,11 @@ module.exports = {
     PROPERTY_QUESTIONS.forEach(function(item) {
       common.submitAndCheckForFieldError(client, item, 'Please choose Yes or No');
     });
+    common.submitAndCheckForFieldError(client, 'properties-0-property_value', 'Please enter a valid amount');
 
     common.setYesNoFields(client, PROPERTY_QUESTIONS, 1);
     client
+      .setValue('input[name="properties-0-property_value"]', '100000')
       .setValue('#properties-0-rent_amount-amount', '')
       .setValue('#properties-0-rent_amount-interval', 'per month')
     ;
