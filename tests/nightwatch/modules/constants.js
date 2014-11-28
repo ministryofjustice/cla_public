@@ -46,3 +46,7 @@ exports.EMPLOYMENT_QUESTIONS = {
     'working_tax_credit'
   ]
 };
+exports.CHILD_BENEFIT_QUESTIONS = [
+  'child_benefit',
+  'child_tax_credit'
+];
