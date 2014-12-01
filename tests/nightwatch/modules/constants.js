@@ -39,10 +39,12 @@ exports.EMPLOYMENT_QUESTIONS = {
     'pension',
     'other_income'
   ],
-  EMPLOYED: [
+  EMPLOYED_MANDATORY: [
     'earnings',
     'income_tax',
-    'national_insurance',
+    'national_insurance'
+  ],
+  EMPLOYED_OPTIONAL: [
     'working_tax_credit'
   ]
 };
