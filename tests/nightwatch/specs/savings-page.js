@@ -31,6 +31,7 @@ module.exports = {
       .assert.containsText('body', 'We need to know about any money you have saved or invested.')
       .back();
     common.setYesNoFields(client, 'have_partner', 1);
+    common.setYesNoFields(client, 'in_dispute', 0);
     client
       .submitForm('form')
       .assert.urlContains('/savings')
@@ -49,14 +50,6 @@ module.exports = {
 
   'Test outcomes': function(client) {
     SAVINGS_QUESTIONS.forEach(function(item) {
-      client.setValue(util.format('input[name="%s"]', item.name), '5000');
-    });
-    client
-      .submitForm('form')
-      .verify.urlContains('/result/ineligible', 'Result ineligible when all savings fields set to £5000')
-      .back()
-    ;
-    SAVINGS_QUESTIONS.forEach(function(item) {
       client
         .clearValue(util.format('input[name="%s"]', item.name))
         .setValue(util.format('input[name="%s"]', item.name), '500')
@@ -65,6 +58,14 @@ module.exports = {
     client
       .submitForm('form')
       .verify.urlContains('/income', 'Should arrive at income page when all savings fields set to £500')
+      .back()
+    ;
+    SAVINGS_QUESTIONS.forEach(function(item) {
+      client.setValue(util.format('input[name="%s"]', item.name), '5000');
+    });
+    client
+      .submitForm('form')
+      .verify.urlContains('/result/ineligible', 'Result ineligible when all savings fields set to £5000')
     ;
 
     client.end();

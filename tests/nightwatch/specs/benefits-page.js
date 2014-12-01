@@ -42,6 +42,7 @@ module.exports = {
       .back()
     ;
     common.setYesNoFields(client, 'have_partner', 1);
+    common.setYesNoFields(client, 'in_dispute', 0);
     client
       .submitForm('form')
       .assert.containsText('h1', 'You and your partner’s benefits')
