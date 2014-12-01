@@ -60,7 +60,7 @@
 
       {{ caller() }}
     </dd>
-    {% if errors %}
+    {% if errors and not subfield_id %}
       <dd class="form-row">
         {{ field_errors(errors) }}
       </dd>
@@ -136,9 +136,7 @@
     </label>
   {%- endfor -%}
   {% if subfield and subfield_caller %}
-    <div class="form-subfield s-hidden" data-conditional-id="{{subfield.id}}">
-      {{ subfield_caller }}
-    </div>
+    {{ subfield_caller }}
   {% endif %}
 {% endmacro %}
 
@@ -151,7 +149,13 @@
     - subfield <@object> (optional) WTForm field to include as subfield
                       (creates relationship via JS for conditional toggling)
 #}
-{% macro yesno_field(field, subfield=None, use_form_group=True, label_class='') %}
+{% macro yesno_field(
+  field,
+  subfield=None,
+  use_form_group=True,
+  label_class='',
+  group_class=''
+) %}
   {# set subfields as macro caller and make them optional #}
   {% if caller %}
     {% set subfield_caller = caller() %}
@@ -160,7 +164,12 @@
   {% endif %}
 
   {% if use_form_group %}
-    {% call form_group(field, subfield, title_as_label=False) %}
+    {% call form_group(
+      field,
+      subfield,
+      title_as_label=False,
+      class_=group_class
+    ) %}
       {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
     {% endcall %}
   {% else %}
@@ -193,13 +202,18 @@
   suffix=None,
   use_form_group=True,
   class_='',
-  label_class=''
+  label_class='',
+  group_class=''
 ) %}
   {% if caller %}
     {% set text_field_caller = caller() %}
   {% endif %}
   {% if use_form_group %}
-    {% call form_group(field, subfield) %}
+    {% call form_group(
+      field,
+      subfield,
+      class_=group_class
+    ) %}
       {% if prefix %}
         <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
       {% endif %}
@@ -233,8 +247,8 @@
     - rows <@number> (optional, default: 4) HTML rows attribute
     - cols <@number> (optional, default: 40) HTML cols attribute
 #}
-{% macro textarea_field(field, class_='') %}
-  {% call form_group(field) %}
+{% macro textarea_field(field, class_='', group_class='', show_title_row=True) %}
+  {% call form_group(field, class_=group_class, show_title_row=show_title_row) %}
     {{ field(class_='form-control ' + class_, rows=4, cols=40) }}
   {% endcall %}
 {% endmacro %}
@@ -262,13 +276,13 @@
     - use_form_group <@boolean> (optional, default: True) Whether to use form_group to wrap
         the field
 #}
-{% macro money_interval_field(field, is_hidden=False, use_form_group=True) %}
+{% macro money_interval_field(field, is_hidden=False, use_form_group=True, group_class='') %}
   {% if is_hidden %}
     <input type="hidden" name="{{ field.amount.name }}" value="0">
     <input type="hidden" name="{{ field.interval.name }}" value="per_week">
   {% else %}
     {% if use_form_group %}
-      {% call form_group(field, title_as_label=field.amount.id) %}
+      {% call form_group(field, title_as_label=field.amount.id, class_=group_class) %}
         <label class="input-prefix" for="{{field.amount.id}}">£</label>
         {{ field.amount(class_='form-control') }}
         {{ field.interval(class_='form-control') }}
@@ -289,8 +303,8 @@
   Params:
     - field <@object> WTForm field
 #}
-{% macro select_field(field) %}
-  {% call form_group(field) %}
+{% macro select_field(field, group_class='', show_title_row=True) %}
+  {% call form_group(field, class_=group_class, show_title_row=show_title_row) %}
     {{ field(class_='form-control') }}
   {% endcall %}
 {% endmacro %}
@@ -330,9 +344,7 @@
         })
       }}
       {{ field.is_other_language.label }}
-      <div class="form-subfield" data-conditional-id="{{field.other_language.id}}">
-        {{ field.other_language(class_='form-control') }}
-      </div>
+      {{ select_field(field.other_language, group_class='form-subfield s-hidden', show_title_row=False) }}
     </dd>
     <dd class="form-row">
       {{ field.is_other_adaptation(**{
@@ -340,16 +352,7 @@
           'data-conditional-show-value': 'y'
         }) }}
       {{ field.is_other_adaptation.label }}
-      <div class="form-subfield" data-conditional-id="{{field.other_adaptation.id}}">
-        {%- if field.other_adaptation.description -%}
-          <div class="field-help">
-            <span class="field-description">
-              {{- field.other_adaptation.description -}}
-            </span>
-          </div>
-        {%- endif -%}
-        {{ field.other_adaptation(class_='form-control', rows=4, cols=40) }}
-      </div>
+      {{ textarea_field(field.other_adaptation, group_class='form-subfield s-hidden', show_title_row=False) }}
     </dd>
   </dl>
 {% endmacro %}

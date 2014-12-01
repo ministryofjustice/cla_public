@@ -20,19 +20,13 @@
 
     {{ Form.text_field(form.full_name, class_='m-large') }}
     {% call Form.text_field(form.contact_number, subfield=form.safe_to_contact, class_='m-large') %}
-      <div class="form-subfield">
-        {{ Form.yesno_field(
-          form.safe_to_contact,
-          use_form_group=False,
-          label_class='title-label'
-        ) }}
-      </div>
-      <p class="form-subfield">
+      {{ Form.yesno_field(form.safe_to_contact) }}
+      <div>
         If you don’t have a number we can call you on, please contact
         <a href="https://www.gov.uk/civil-legal-advice" target="_blank">
           Civil Legal Advice
         </a>.
-      </p>
+      </div>
     {% endcall %}
 
     {{ Form.postcode_field(form.post_code, attributes={'data-address-el': '#address'}) }}

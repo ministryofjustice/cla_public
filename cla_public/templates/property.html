@@ -42,7 +42,7 @@
         {{ Form.text_field(property.mortgage_remaining, prefix="£") }}
         {{ Form.text_field(property.mortgage_payments, prefix="£") }}
         {% call Form.yesno_field(property.is_rented, subfield=property.rent_amount) %}
-          {{ Form.money_interval_field(property.rent_amount, use_form_group=False) }}
+          {{ Form.money_interval_field(property.rent_amount, group_class='form-subfield s-hidden') }}
         {% endcall %}
         {{ Form.yesno_field(property.in_dispute) }}
       </fieldset>
