@@ -29,7 +29,10 @@
     )
   %}
   {% set errors = field.errors or subfield.errors %}
-  <dl class="form-group {{ class_ }}{% if errors %} m-error{% endif %}">
+  {% set subfield_id=field.id if 'subfield' in class_ else '' %}
+  <dl
+    class="form-group {{ class_ }}{% if errors and not subfield_id %} m-error{% endif %}"
+    {% if subfield_id %}data-subfield-id="{{subfield_id}}"{% endif %}>
     {% if show_title_row %}
       <dt class="form-row">
         {%- if title_as_label -%}
