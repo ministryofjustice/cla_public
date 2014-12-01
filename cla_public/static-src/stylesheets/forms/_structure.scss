@@ -18,9 +18,9 @@ fieldset {
 }
 
 .form-group {
-  margin: 0;
   border-top: 1px solid $grey-3;
-  padding: 20px 0;
+  padding: 15px 0;
+  margin: 0 -15px;
 
   &:first-of-type {
     border: 0;
@@ -34,7 +34,7 @@ fieldset {
   }
 
   .form-row {
-    padding: 0 20px;
+    padding: 0 15px;
     margin: 0;
 
     & + .form-row {
@@ -83,7 +83,7 @@ fieldset {
 }
 
 .form-actions {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 // Honeypot field
