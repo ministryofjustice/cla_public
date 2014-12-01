@@ -25,4 +25,12 @@
       content: '▾';
     }
   }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.field-description {
+  margin-right: 8px;
 }

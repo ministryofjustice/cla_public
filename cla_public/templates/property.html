@@ -25,16 +25,16 @@
 
     {% for property in form.properties %}
       <fieldset id="property-set-{{loop.index}}">
-        <header>
-          {% if form.properties|count > 1 %}
+        {% if form.properties|count > 1 %}
+          <header>
             <h3>Property {{loop.index}}</h3>
-          {% endif %}
-          {% if loop.index != 1 %}
-            <button class="button-secondary button-small" name="remove-property" value="{{loop.index0}}">
-              Remove property
-            </button>
-          {% endif %}
-        </header>
+            {% if loop.index != 1 %}
+              <button class="button-secondary button-small" name="remove-property" value="{{loop.index0}}">
+                Remove property
+              </button>
+            {% endif %}
+          </header>
+        {% endif %}
 
         {{ Form.yesno_field(property.is_main_home) }}
         {{ Form.yesno_field(property.other_shareholders) }}
@@ -42,7 +42,7 @@
         {{ Form.text_field(property.mortgage_remaining, prefix="£") }}
         {{ Form.text_field(property.mortgage_payments, prefix="£") }}
         {% call Form.yesno_field(property.is_rented, subfield=property.rent_amount) %}
-          {{ Form.money_interval_field(property.rent_amount, use_form_group=False) }}
+          {{ Form.money_interval_field(property.rent_amount, group_class='form-subfield s-hidden') }}
         {% endcall %}
         {{ Form.yesno_field(property.in_dispute) }}
       </fieldset>

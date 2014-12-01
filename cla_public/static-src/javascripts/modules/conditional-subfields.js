@@ -66,7 +66,7 @@
         isShown = isShown && $field.is(':checked');
       }
 
-      $('[data-conditional-id="' + id +'"]')
+      $('[data-subfield-id="' + id +'"]')
         .toggleClass('s-expanded', isShown)
         .toggleClass('s-hidden', !isShown)
         .attr({

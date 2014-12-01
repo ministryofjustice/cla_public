@@ -25,7 +25,7 @@
     {{ Form.money_interval_field(form.child_tax_credit, not session.has_children) }}
     {{ Form.check_list_field(form.benefits) }}
     {% call Form.yesno_field(form.other_benefits, subfield=form.total_other_benefit) %}
-      {{ Form.money_interval_field(form.total_other_benefit, use_form_group=False) }}
+      {{ Form.money_interval_field(form.total_other_benefit, group_class='form-subfield s-hidden') }}
     {% endcall %}
 
     {{ Form.honeypot(form) }}

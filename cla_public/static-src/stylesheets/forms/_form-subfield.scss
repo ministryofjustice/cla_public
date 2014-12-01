@@ -1,5 +1,7 @@
-.form-subfield {
+.form-group .form-subfield {
   margin: 15px 0 0 0;
+  padding: 5px 0;
+  border-left: 4px solid $grey-2;
 
   .js-enabled &.s-hidden {
     height: 0;
