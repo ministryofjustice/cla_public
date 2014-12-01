@@ -122,6 +122,24 @@ module.exports = {
       .assert.urlContains('/benefits-tax-credits')
     ;
 
+  },
+
+  'Should also see page if benefits=no but dependants=yes': function(client) {
+    common.startPage(client);
+    common.selectDebtCategory(client);
+
+    client
+      .assert.urlContains('/about')
+      .assert.containsText('h1', 'About you')
+    ;
+    common.aboutPageSetAllToNo(client);
+    common.setYesNoFields(client, 'have_dependants', 1);
+    client
+      .setValue('input[name="num_dependants"]', 1)
+      .submitForm('form')
+      .assert.urlContains('/benefits-tax-credits')
+    ;
+
     client.end();
   }
 

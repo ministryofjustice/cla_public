@@ -13,12 +13,14 @@ exports.ABOUT_YOU_QUESTIONS = [
   'is_self_employed',
   'aged_60_or_over'
 ];
+
 exports.PROPERTY_QUESTIONS = [
   'properties-0-is_main_home',
   'properties-0-other_shareholders',
   'properties-0-is_rented',
   'properties-0-in_dispute'
 ];
+
 exports.SAVINGS_QUESTIONS = [
   {
     name: 'savings',
@@ -33,6 +35,7 @@ exports.SAVINGS_QUESTIONS = [
     errorText: 'Not a valid amount'
   }
 ];
+
 exports.EMPLOYMENT_QUESTIONS = {
   COMMON: [
     'maintenance',
@@ -48,7 +51,15 @@ exports.EMPLOYMENT_QUESTIONS = {
     'working_tax_credit'
   ]
 };
+
 exports.CHILD_BENEFIT_QUESTIONS = [
   'child_benefit',
   'child_tax_credit'
+];
+
+exports.OUTGOINGS_QUESTIONS = [
+  'rent',
+  'maintenance',
+  'income_contribution',
+  'childcare'
 ];
