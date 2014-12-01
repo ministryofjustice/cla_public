@@ -57,7 +57,8 @@ def addressfinder_proxy_view(path):
         headers={
             'Authorization': 'Token {token}'.format(
                 token=current_app.config['ADDRESSFINDER_API_TOKEN'])
-        }
+        },
+        timeout=current_app.config.get('API_CLIENT_TIMEOUT', None)
     )
     return current_app.response_class(response.text,
         mimetype='application/json')

@@ -38,7 +38,8 @@ def get_date(bank_holiday):
 
 
 def load_bank_holidays():
-    holidays = requests.get(BANK_HOLIDAYS_URL).json()['events']
+    timeout = current_app.config.get('API_CLIENT_TIMEOUT', None)
+    holidays = requests.get(BANK_HOLIDAYS_URL, timeout=timeout).json()['events']
     return map(get_date, holidays)
 
 
