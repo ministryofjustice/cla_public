@@ -18,7 +18,6 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.text_field(form.title) }}
     {{ Form.text_field(form.full_name, class_='m-large') }}
     {% call Form.text_field(form.contact_number, subfield=form.safe_to_contact, class_='m-large') %}
       <div class="form-subfield">
