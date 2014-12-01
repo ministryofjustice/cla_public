@@ -42,9 +42,9 @@ module.exports = {
       .back()
     ;
     common.setYesNoFields(client, 'have_partner', 1);
+    common.setYesNoFields(client, 'in_dispute', 0);
     client
       .submitForm('form')
-      .click('input[value="other-benefit"]')
       .submitForm('form')
     ;
     common.checkTextIsEqual(client, 'h1', 'You and your partner’s benefits and tax credits');
@@ -63,7 +63,6 @@ module.exports = {
     client
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
-      .click('input[value="other-benefit"]')
       .submitForm('form')
     ;
     CHILD_BENEFIT_QUESTIONS.forEach(function(item) {
