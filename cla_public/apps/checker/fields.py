@@ -264,9 +264,9 @@ class AdaptationsForm(NoCsrfForm):
     other_language = SelectField(
         u'Language required:',
         choices=(LANG_CHOICES))
-    is_other_adaptation = BooleanField(u'Any other adaptation')
+    is_other_adaptation = BooleanField(u'Any other communication needs')
     other_adaptation = TextAreaField(
-        u'Any other adaptation',
+        u'Other communication needs',
         description=u'Please tell us what you need in the box below')
 
 
