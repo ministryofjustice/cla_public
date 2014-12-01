@@ -40,23 +40,24 @@
         {%- else -%}
           {{ label_text }}
         {%- endif -%}
-        {% if field.description or field.help_text %}
-          <div class="field-help">
-            {%- if field.description -%}
-              <span class="field-description">
-                {{- field.description -}}
-              </span>
-            {%- endif -%}
-            {%- if field.more_info -%}
-              <div class="field-more-info">
-                {{- field.more_info|safe -}}
-              </div>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
       </dt>
     {% endif %}
     <dd class="form-row">
+      {% if field.description or field.help_text %}
+        <div class="field-help">
+          {%- if field.description -%}
+            <span class="field-description">
+              {{- field.description -}}
+            </span>
+          {%- endif -%}
+          {%- if field.more_info -%}
+            <div class="field-more-info">
+              {{- field.more_info|safe -}}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
       {{ caller() }}
     </dd>
     {% if errors %}
