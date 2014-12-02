@@ -266,8 +266,8 @@
   Params:
     - field <@object> WTForm field
 #}
-{% macro check_list_field(field) %}
-  {% call form_group(field) %}
+{% macro check_list_field(field, show_label=True) %}
+  {% call form_group(field, show_title_row=show_label) %}
     <ul class="form-option-list">
       {% for option in field %}
         <li>

@@ -22,7 +22,7 @@
       {% endcall %}
     {% endif %}
 
-    {{ Form.check_list_field(form.benefits) }}
+    {{ Form.check_list_field(form.benefits, show_label=False) }}
 
     {{ Element.call_me_back_link() }}
 
