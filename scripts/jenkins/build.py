@@ -84,7 +84,7 @@ def run_tests(venv_path):
     port = random.randint(8007, 8999)
     os.environ['CLA_PUBLIC_PORT'] = '{0}'.format(port)
     run(
-        '{conf} {venv}/bin/python manage.py runserver {port}'.format(
+        '{conf} {venv}/bin/python manage.py runserver -p {port} -D -R'.format(
             venv=venv_path,
             conf=config,
             port=port),
