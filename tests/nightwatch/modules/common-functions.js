@@ -60,7 +60,7 @@ module.exports = {
     client
       .submitForm('form')
       .useXpath()
-      .assert.containsText(util.format('//%s[@name="%s"]/ancestor::dl//div[@class="field-error"]', tag, fieldName), errorText)
+      .assert.containsText(util.format('//%s[@name="%s"]/ancestor::dl', tag, fieldName), errorText)
       .useCss()
     ;
   },
