@@ -40,12 +40,21 @@ fieldset {
   list-style: none;
 
   li {
-    margin: 5px 0;
+    margin: 8px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
 .form-actions {
   margin-top: 40px;
+  padding: 0 15px;
 }
 
 // Honeypot field
