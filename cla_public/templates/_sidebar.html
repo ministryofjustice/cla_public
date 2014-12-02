@@ -1,0 +1,23 @@
+<aside class="sidebar">
+  {% if 'resources' in sidebar %}
+    <h3>Resources</h3>
+    <nav>
+      <ul>
+        <li><a target="_blank" href="https://www.gov.uk/legal-aid">Legal aid</a></li>
+        <li><a target="_blank" href="https://www.gov.uk/legal-aid/how-to-claim">Criminal legal aid</a></li>
+        <li><a href="#">How this service protects your privacy</a></li>
+        <li><a href="#">Other sources of legal help</a></li>
+      </ul>
+    </nav>
+  {% elif 'reminder' in sidebar %}
+    <h3>Who can get legal aid?</h3>
+    <ul>
+      <li>your income (or combined income if you have a partner) should not be more than £2,657 a month before tax</li>
+      <li>your savings (or combined savings if you have a partner) should not be more than £8,000</li>
+      <li>
+        you (and your partner if you have one) should have no more than £733 a month left after we've
+        taken certain living expenses into account - this service will work this out for you
+      </li>
+    </ul>
+  {% endif %}
+</aside>

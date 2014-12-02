@@ -14,6 +14,7 @@
 @import 'tables';
 @import 'confirmation';
 @import 'org-list';
+@import 'sidebar';
 @import 'shame';
 
 .phase-banner {
@@ -28,6 +29,33 @@
 
     > header {
       margin-bottom: 30px;
+    }
+  }
+}
+
+.main-content > header {
+  margin-bottom: 30px;
+}
+
+.m-has-sidebar {
+  .main-content,
+  .sidebar {
+    @include media(tablet) {
+      float: left;
+    }
+  }
+
+  .main-content {
+    @include media(tablet) {
+      width: 66%;
+      padding-right: 4%;
+    }
+  }
+
+  .sidebar {
+    @include media(tablet) {
+      margin-top: 35px;
+      width: 30%;
     }
   }
 }

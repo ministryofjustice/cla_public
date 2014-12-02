@@ -18,20 +18,28 @@
 {% block content %}
   {% include "_phase-tag.html" %}
 
-  <article class="inner-block">
-    {% block page_header %}
-      <header>
-        <h1>{% block page_heading %}{% endblock %}</h1>
-        {% if self.page_subheading() %}
-          <div class="subtitle">
-            {% block page_subheading %}{% endblock %}
-          </div>
-        {% endif %}
-      </header>
-    {% endblock %}
+  <div class="inner-block {% if sidebar %}m-has-sidebar{% endif %}">
+    <article class="main-content">
+      {% block page_header %}
+        <header>
+          <h1>{% block page_heading %}{% endblock %}</h1>
+          {% if self.page_subheading() %}
+            <div class="subtitle">
+              {% block page_subheading %}{% endblock %}
+            </div>
+          {% endif %}
+        </header>
+      {% endblock %}
 
-    {% block inner_content %}{% endblock %}
-  </article>
+      {% block inner_content %}{% endblock %}
+    </article>
+
+    {% block sidebar %}
+      {% if sidebar %}
+        {% include '_sidebar.html' %}
+      {% endif %}
+    {% endblock %}
+  </div>
 {% endblock %}
 
 {% block javascripts %}
