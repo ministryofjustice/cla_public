@@ -7,6 +7,11 @@ SESSION_COOKIE_SECURE = False
 
 TESTING = True
 
-LOG_LEVEL = 'DEBUG'
+LOGGING['loggers'] = {
+    '': {
+        'handlers': ['console'],
+        'level': 'DEBUG'
+    }
+}
 
 WTF_CSRF_ENABLED = False
