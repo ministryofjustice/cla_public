@@ -61,7 +61,7 @@ module.exports = {
       client
         .click(util.format('input[value="%s"]', item))
         .submitForm('form')
-        .verify.urlContains(destination, util.format('Goes to %s when %s is checked', destination, item))
+        .assert.urlContains(destination, util.format('Goes to %s when %s is checked', destination, item))
         .back()
         .click(util.format('input[value="%s"]', item))
     });
