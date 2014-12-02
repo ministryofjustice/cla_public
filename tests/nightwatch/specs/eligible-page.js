@@ -74,7 +74,7 @@ module.exports = {
       .pause(1000)
       .assert.value('#address', 'Ministry of Justice\n102 Petty France\nLondon')
 
-      // test for single address for known postcode
+      // test for invalid postcode
       .clearValue('input[name="post_code"]')
       .clearValue('#address')
       .setValue('input[name="post_code"]', 'abcdefg')
