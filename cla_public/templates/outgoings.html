@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
 {% block page_heading %}
@@ -22,6 +23,8 @@
     {{ Form.money_interval_field(form.maintenance) }}
     {{ Form.money_interval_field(form.income_contribution) }}
     {{ Form.money_interval_field(form.childcare, not session.has_children) }}
+
+    {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions('Submit') }}

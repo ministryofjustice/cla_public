@@ -1,50 +1,14 @@
-{% extends "base.html" %}
-
-{% import "macros/form.html" as Form %}
-{% import "macros/element.html" as Element %}
+{% extends "call-me-back.html" %}
 
 {% block page_heading %}
   You might qualify for legal aid
 {% endblock %}
 
-{% block inner_content %}
+{% block page_text %}
   <h2>Request a callback</h2>
+
   <p>
     Based on the answers you've given, you might qualify financially for legal aid. To find out if legal aid can help with your specific problem, you need to speak
     to a Civil Legal Advice operator. Please submit your details so we can call you back.
   </p>
-
-  <form method="POST" action="{{ url_for('.result', outcome='eligible') }}">
-    {{ form.csrf_token }}
-    {{ Form.handle_errors(form) }}
-
-    {{ Form.text_field(form.full_name, class_='m-large') }}
-    {% call Form.text_field(form.contact_number, subfield=form.safe_to_contact, class_='m-large') %}
-      {{ Form.yesno_field(form.safe_to_contact) }}
-      <div>
-        If you don’t have a number we can call you on, please contact
-        <a href="https://www.gov.uk/civil-legal-advice" target="_blank">
-          Civil Legal Advice
-        </a>.
-      </div>
-    {% endcall %}
-
-    {{ Form.postcode_field(form.post_code, attributes={'data-address-el': '#address'}) }}
-
-    {{ Form.textarea_field(form.address) }}
-    {{ Form.textarea_field(form.extra_notes, class_='m-full') }}
-    {{ Form.adaptations_field(form.adaptations) }}
-    {{ Form.availability_checker_field(form.time) }}
-
-    {% call Element.alert(title='What happens next') %}
-      <p>
-        If the operator you speak to thinks you can get legal aid, they will
-        find you specialist legal help, like a phone call with a solicitor or
-        support from a family mediation service.
-      </p>
-    {% endcall %}
-
-    {{ Form.honeypot(form) }}
-    {{ Form.actions('Request callback') }}
-  </form>
 {% endblock %}

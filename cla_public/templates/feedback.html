@@ -21,6 +21,8 @@
     {{ Form.check_list_field(form.feel_about_service) }}
     {{ Form.check_list_field(form.help_filling_in_form) }}
 
+    {{ Element.call_me_back_link() }}
+
     {{ Form.honeypot(form) }}
     {{ Form.actions('Send feedback') }}
   </form>

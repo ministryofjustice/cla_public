@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
 {% block page_heading %}
@@ -53,6 +54,8 @@
         <button class="button-secondary button-large" name="add-property">Add another property</button>
       </p>
     {% endif %}
+
+    {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions('Continue') }}
