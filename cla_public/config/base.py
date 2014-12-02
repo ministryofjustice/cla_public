@@ -6,7 +6,63 @@ DEBUG = False
 
 TESTING = False
 
-LOG_LEVEL = 'WARNING'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+        'logstash': {
+            '()': 'logstash_formatter.LogstashFormatter'
+        }
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'cla_public.libs.logging_filters.RequireDebug',
+            'debug': False
+        },
+        'require_debug_true': {
+            '()': 'cla_public.libs.logging_filters.RequireDebug',
+            'debug': True
+        }
+    },
+    'handlers': {
+        'production_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/tmp/app.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5MB
+            'backupCount': 7,
+            'formatter': 'logstash',
+            'filters': ['require_debug_false'],
+        },
+        'debug_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/tmp/debug.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5MB
+            'backupCount': 7,
+            'formatter': 'verbose',
+            'filters': ['require_debug_true'],
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+            'stream': 'ext://sys.stdout'
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['production_file', 'debug_file'],
+            'level': 'DEBUG'
+        }
+    }
+}
 
 SECRET_KEY = "e\x1bU3\xbc\x00\xb0\xae\x07z~D\x03\xcc'\x04\x1f\xcd\xe8\xee\x83\xe6\x9b\x19"
 

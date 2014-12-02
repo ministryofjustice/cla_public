@@ -2,6 +2,7 @@
 "CLA Public app"
 
 import logging
+import logging.config
 import os
 from flask import Flask, render_template
 from flask.ext.cache import Cache
@@ -39,10 +40,7 @@ def create_app(config_file=None):
     app.register_blueprint(base)
     app.register_blueprint(checker)
 
-    logging.basicConfig(
-        level=app.config.get('LOG_LEVEL', 'DEBUG'),
-        format='%(asctime)s %(levelname)s %(name)s %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S')
+    logging.config.dictConfig(app.config['LOGGING'])
 
     if app.debug:
         from werkzeug.debug import DebuggedApplication
