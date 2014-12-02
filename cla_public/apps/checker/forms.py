@@ -3,7 +3,7 @@
 
 import logging
 
-from flask import session, request
+from flask import current_app, session, request
 from flask_wtf import Form
 import pytz
 
@@ -37,6 +37,15 @@ def to_money_interval(data):
     return money_interval(data['amount'], data['interval'])
 
 
+class TestFormErrors(object):
+
+    def validate(self):
+        is_valid = super(TestFormErrors, self).validate()
+        if current_app.config['TESTING'] and not is_valid:
+            log.debug('\n'.join(self.errors))
+        return is_valid
+
+
 class ConfigFormMixin(object):
     def __init__(self, *args, **kwargs):
         config_path = kwargs.pop('config_path', None)
@@ -52,7 +61,7 @@ class ConfigFormMixin(object):
                 field.__dict__.update(config.get(field_name, field))
 
 
-class ProblemForm(ConfigFormMixin, Honeypot, Form):
+class ProblemForm(TestFormErrors, ConfigFormMixin, Honeypot, Form):
     """Area of law choice"""
 
     categories = DescriptionRadioField(
@@ -72,7 +81,7 @@ class ProblemForm(ConfigFormMixin, Honeypot, Form):
         }
 
 
-class AboutYouForm(ConfigFormMixin, Honeypot, Form):
+class AboutYouForm(TestFormErrors, ConfigFormMixin, Honeypot, Form):
     have_partner = YesNoField(
         u'Do you have a partner?',
         description=(
@@ -139,7 +148,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         }
 
 
-class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
+class YourBenefitsForm(TestFormErrors, ConfigFormMixin, Honeypot, Form):
     benefits = MultiCheckboxField(
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
@@ -194,7 +203,7 @@ class PropertyForm(NoCsrfForm):
         }
 
 
-class PropertiesForm(ConfigFormMixin, Honeypot, Form):
+class PropertiesForm(TestFormErrors, ConfigFormMixin, Honeypot, Form):
     properties = PropertyList(
         FormField(PropertyForm), min_entries=1, max_entries=3)
 
@@ -219,7 +228,7 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
             prop.form.api_payload() for prop in self.properties]}
 
 
-class SavingsForm(ConfigFormMixin, Honeypot, Form):
+class SavingsForm(TestFormErrors, ConfigFormMixin, Honeypot, Form):
     savings = MoneyField(
         description=(
             u"The total amount of savings in cash, bank or building society"),
@@ -248,7 +257,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, Form):
         }}}
 
 
-class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
+class TaxCreditsForm(TestFormErrors, ConfigFormMixin, Honeypot, Form):
     child_benefit = MoneyIntervalField(
         u'Child Benefit',
         description=u"The total amount you get for all your children")
@@ -343,7 +352,7 @@ class IncomeFieldForm(NoCsrfForm):
         }
 
 
-class IncomeAndTaxForm(ConfigFormMixin, Honeypot, Form):
+class IncomeAndTaxForm(TestFormErrors, ConfigFormMixin, Honeypot, Form):
     your_income = FormField(IncomeFieldForm, label=u'Your personal income')
 
     def api_payload(self):
@@ -370,7 +379,7 @@ def income_form(*args, **kwargs):
     return IncomeForm(*args, **kwargs)
 
 
-class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
+class OutgoingsForm(TestFormErrors, ConfigFormMixin, Honeypot, Form):
     rent = PartnerMoneyIntervalField(
         u'Rent',
         description=u"Money you and your partner pay your landlord")

@@ -8,6 +8,7 @@ import sys
 from Queue import Queue
 
 
+logging.basicConfig(level='INFO')
 log = logging.getLogger(__name__)
 
 PROJECT_NAME = "cla_public"
@@ -71,7 +72,10 @@ def run_tests(venv_path):
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
-    run('{venv}/bin/python manage.py runserver'.format(venv=venv_path),
+    run(
+        '{conf} {venv}/bin/python manage.py runserver'.format(
+            venv=venv_path,
+            conf=config),
         background=True)
     run('./nightwatch -c tests/nightwatch/public-integration.json')
 
