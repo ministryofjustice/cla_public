@@ -22,11 +22,7 @@
       {% endcall %}
     {% endif %}
 
-    <ul class="form-option-list" role="radiogroup">
-      {% for benefit in form.benefits %}
-        <li>{{ Form.block_label(benefit) }}</li>
-      {% endfor %}
-    </ul>
+    {{ Form.check_list_field(form.benefits) }}
 
     {{ Element.call_me_back_link() }}
 

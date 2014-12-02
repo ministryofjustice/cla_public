@@ -267,8 +267,17 @@
     - field <@object> WTForm field
 #}
 {% macro check_list_field(field) %}
-  {% call form_group(field, False) %}
-    {{ field(class_='form-option-list') }}
+  {% call form_group(field) %}
+    <ul class="form-option-list">
+      {% for option in field %}
+        <li>
+          <label class="radio-inline" for="{{option.id}}">
+            {{ option }}
+            {{ option.label.text }}
+          </label>
+        </li>
+      {% endfor %}
+    </ul>
   {% endcall %}
 {% endmacro %}
 
@@ -328,37 +337,54 @@
       {{ field.label }}
     </dt>
     <dd class="form-row">
-      {{ field.bsl_webcam }}
-      {{ field.bsl_webcam.label }}
-    </dd>
-    <dd class="form-row">
-      {{ field.minicom }}
-      {{ field.minicom.label }}
-    </dd>
-    <dd class="form-row">
-      {{ field.text_relay }}
-      {{ field.text_relay.label }}
-    </dd>
-    <dd class="form-row">
-      {{ field.welsh }}
-      {{ field.welsh.label }}
-    </dd>
-    <dd class="form-row">
-      {{ field.is_other_language(**{
-          'data-conditional-controls': field.other_language.id,
-          'data-conditional-show-value': 'y'
-        })
-      }}
-      {{ field.is_other_language.label }}
-      {{ select_field(field.other_language, group_class='form-subfield s-hidden', show_title_row=False) }}
-    </dd>
-    <dd class="form-row">
-      {{ field.is_other_adaptation(**{
-          'data-conditional-controls': field.other_adaptation.id,
-          'data-conditional-show-value': 'y'
-        }) }}
-      {{ field.is_other_adaptation.label }}
-      {{ textarea_field(field.other_adaptation, group_class='form-subfield s-hidden', show_title_row=False) }}
+      <ul class="form-option-list">
+        <li>
+          <label class="radio-inline" for="{{field.bsl_webcam.id}}">
+            {{ field.bsl_webcam }}
+            {{ field.bsl_webcam.label.text }}
+          </label>
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.minicom.id}}">
+            {{ field.minicom }}
+            {{ field.minicom.label.text }}
+          </label>
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.text_relay.id}}">
+            {{ field.text_relay }}
+            {{ field.text_relay.label.text }}
+          </label>
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.welsh.id}}">
+            {{ field.welsh }}
+            {{ field.welsh.label.text }}
+          </label>
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.is_other_language.id}}">
+            {{ field.is_other_language(**{
+                'data-conditional-controls': field.other_language.id,
+                'data-conditional-show-value': 'y'
+              })
+            }}
+            {{ field.is_other_language.label.text }}
+          </label>
+          {{ select_field(field.other_language, group_class='form-subfield s-hidden', show_title_row=False) }}
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.is_other_adaptation.id}}">
+            {{ field.is_other_adaptation(**{
+                'data-conditional-controls': field.other_adaptation.id,
+                'data-conditional-show-value': 'y'
+              })
+            }}
+            {{ field.is_other_adaptation.label.text }}
+          </label>
+          {{ textarea_field(field.other_adaptation, group_class='form-subfield s-hidden', show_title_row=False) }}
+        </li>
+      </ul>
     </dd>
   </dl>
 {% endmacro %}
