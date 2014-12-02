@@ -64,14 +64,6 @@ fieldset {
   }
 }
 
-.form-inline-field {
-  display: inline-block;
-
-  input + & {
-    margin-left: 5px;
-  }
-}
-
 .form-option-list {
   margin: 0;
   padding: 0;
