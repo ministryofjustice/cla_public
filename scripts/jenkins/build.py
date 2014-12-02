@@ -2,6 +2,7 @@
 import argparse
 import logging
 import os
+import random
 import signal
 import subprocess
 import sys
@@ -67,16 +68,27 @@ def clean_pyc():
     run("find . -name '*.pyc' -delete")
 
 
+def wait_until_available(url):
+    wget = run((
+        'wget {url} -O/dev/null -t 20 --retry-connrefused --waitretry=2 '
+        '-T 60').format(url=url),
+        background=True)
+    wget.wait()
+
+
 def run_tests(venv_path):
     config = 'CLA_PUBLIC_CONFIG=config/jenkins.py'
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
+    port = random.randint(8007, 8999)
     run(
-        '{conf} {venv}/bin/python manage.py runserver'.format(
+        '{conf} {venv}/bin/python manage.py runserver {port}'.format(
             venv=venv_path,
-            conf=config),
+            conf=config,
+            port=port),
         background=True)
+    wait_until_available('http://localhost:{port}/'.format(port=port))
     run('./nightwatch -c tests/nightwatch/public-integration.json')
 
 
@@ -98,13 +110,17 @@ def main():
         clean_pyc()
         run_tests(venv_path)
     finally:
-        while not background_processes.empty():
-            process = background_processes.get()
-            try:
-                kill_child_processes(process.pid)
-                process.kill()
-            except OSError:
-                pass
+        kill_all_background_processes()
+
+
+def kill_all_background_processes():
+    while not background_processes.empty():
+        process = background_processes.get()
+        try:
+            kill_child_processes(process.pid)
+            process.kill()
+        except OSError:
+            pass
 
 
 if __name__ == '__main__':
