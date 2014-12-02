@@ -203,17 +203,36 @@
   use_form_group=True,
   class_='',
   label_class='',
-  group_class=''
+  group_class='',
+  is_hidden=False,
+  default_value=''
 ) %}
-  {% if caller %}
-    {% set text_field_caller = caller() %}
-  {% endif %}
-  {% if use_form_group %}
-    {% call form_group(
-      field,
-      subfield,
-      class_=group_class
-    ) %}
+  {% if is_hidden %}
+    <input type="hidden" name="{{ field.name }}" value="{{ default_value }}">
+  {% else %}
+    {% if caller %}
+      {% set text_field_caller = caller() %}
+    {% endif %}
+    {% if use_form_group %}
+      {% call form_group(
+        field,
+        subfield,
+        class_=group_class
+      ) %}
+        {% if prefix %}
+          <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
+        {% endif %}
+        {{ field(class_='form-control ' + class_) }}
+        {% if suffix %}
+          <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
+        {% endif %}
+
+        {% if text_field_caller %}
+          {{ text_field_caller }}
+        {% endif %}
+      {% endcall %}
+    {% else %}
+      {{ field.label(class_=label_class) }}
       {% if prefix %}
         <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
       {% endif %}
@@ -221,19 +240,6 @@
       {% if suffix %}
         <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
       {% endif %}
-
-      {% if text_field_caller %}
-        {{ text_field_caller }}
-      {% endif %}
-    {% endcall %}
-  {% else %}
-    {{ field.label(class_=label_class) }}
-    {% if prefix %}
-      <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
-    {% endif %}
-    {{ field(class_='form-control ' + class_) }}
-    {% if suffix %}
-      <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
     {% endif %}
   {% endif %}
 {% endmacro %}

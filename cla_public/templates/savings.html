@@ -22,9 +22,14 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.text_field(form.savings, prefix="£") }}
-    {{ Form.text_field(form.investments, prefix="£") }}
-    {{ Form.text_field(form.valuables, prefix="£") }}
+    {% with is_hidden = not session.has_savings %}
+      {{ Form.text_field(form.savings, prefix="£", is_hidden=is_hidden, default_value='0') }}
+      {{ Form.text_field(form.investments, prefix="£", is_hidden=is_hidden, default_value='0') }}
+    {% endwith %}
+    {% with is_hidden = not session.has_valuables %}
+      {{ Form.text_field(form.valuables, prefix="£", is_hidden=is_hidden, default_value='0') }}
+    {% endwith %}
+
 
     {{ Element.call_me_back_link() }}
 
