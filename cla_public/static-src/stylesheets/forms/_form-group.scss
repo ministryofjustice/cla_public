@@ -1,0 +1,64 @@
+.form-group {
+  border-top: 1px solid $grey-3;
+  padding: 15px 0;
+  margin: 0;
+
+  &:first-of-type {
+    border: 0;
+  }
+
+  &.m-error {
+    background: lighten($mellow-red, 44);
+    border-top-color: desaturate(lighten($mellow-red, 37), 48);
+  }
+
+  .form-row {
+    padding: 0 15px;
+    margin: 0;
+
+    & + .form-row {
+      margin-top: 10px;
+    }
+  }
+
+  // Subfields
+  .form-subfield {
+    margin: 10px 0 0;
+    padding: 5px 0;
+    border-left: 4px solid $grey-2;
+    border-top: 0;
+
+    .js-enabled &.s-hidden {
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .js-enabled &.s-expanded {
+      @include transition(opacity, ease, 300ms);
+      opacity: 1;
+    }
+
+    label {
+      display: block;
+    }
+
+    .label-inline,
+    .radio-inline {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .input-prefix {
+      margin: 0;
+      display: inline-block;
+    }
+
+    .radio-inline {
+      display: inline-block;
+    }
+  }
+}
