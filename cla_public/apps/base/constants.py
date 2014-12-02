@@ -16,3 +16,7 @@ HELP_FILLING_IN_FORM = [
     ('accessibility_tool', u'I used an accessibility tool such as a screen reader'),
     ('other_help', u'I had some other kind of help'),
 ]
+
+TIMEOUT_RETURN_ERROR = {
+    'error': 'Request timeout.'
+}
