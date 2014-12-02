@@ -8,6 +8,7 @@ import sys
 from Queue import Queue
 
 
+logging.basicConfig(level='INFO')
 log = logging.getLogger(__name__)
 
 PROJECT_NAME = "cla_public"
