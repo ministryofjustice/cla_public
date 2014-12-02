@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
 {% block page_heading %}
@@ -24,6 +25,8 @@
     {{ Form.text_field(form.savings, prefix="£") }}
     {{ Form.text_field(form.investments, prefix="£") }}
     {{ Form.text_field(form.valuables, prefix="£") }}
+
+    {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions('Continue') }}

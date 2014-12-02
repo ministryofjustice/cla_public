@@ -30,7 +30,7 @@
 
     {% call Element.alert() %}
       <p>If you have more than one problem, you can complete this service more than once.</p>
-      <p>If you’re really not sure what to choose, ask us to <a href="/result/eligible">call you back</a>.</p>
+      <p>If you’re really not sure what to choose, ask us to <a href="{{ url_for('.call_me_back') }}">call you back</a>.</p>
     {% endcall %}
 
     {{ Form.honeypot(form) }}

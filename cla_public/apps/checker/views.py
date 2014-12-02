@@ -168,3 +168,9 @@ def result(outcome):
         session.clear()
 
     return response
+
+@checker.route('/call-me-back', methods=['GET', 'POST'])
+@redirect_if_no_session()
+@form_view(ApplicationForm, 'call-me-back.html')
+def call_me_back(user):
+    return outcome('confirmation')
