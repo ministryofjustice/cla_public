@@ -2,15 +2,7 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
-
-var BENEFITS = [
-  'income-support',
-  'jobseekers-allowance',
-  'guarantee-credit',
-  'universal-credit',
-  'employment-support',
-  'other-benefit'
-];
+var BENEFITS = require('../modules/constants').BENEFITS;
 
 module.exports = {
   'Start page': common.startPage,
