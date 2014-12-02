@@ -43,6 +43,7 @@ class TestFormErrors(object):
         is_valid = super(TestFormErrors, self).validate()
         if current_app.config['TESTING'] and not is_valid:
             log.debug('\n'.join(self.errors))
+        return is_valid
 
 
 class ConfigFormMixin(object):
