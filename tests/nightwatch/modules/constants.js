@@ -30,20 +30,24 @@ exports.BENEFITS = [
   'other-benefit'
 ];
 
-exports.SAVINGS_QUESTIONS = [
-  {
-    name: 'savings',
-    errorText: 'Enter 0 if you have no savings'
-  },
-  {
-    name: 'investments',
-    errorText: 'Enter 0 if you have no investments'
-  },
-  {
-    name: 'valuables',
-    errorText: 'Not a valid amount'
-  }
-];
+exports.SAVINGS_QUESTIONS = {
+  MANDATORY: [
+    {
+      name: 'savings',
+      errorText: 'Enter 0 if you have no savings'
+    },
+    {
+      name: 'investments',
+      errorText: 'Enter 0 if you have no investments'
+    }
+  ],
+  OPTIONAL: [
+    {
+      name: 'valuables',
+      errorText: 'Not a valid amount'
+    }
+  ]
+};
 
 exports.EMPLOYMENT_QUESTIONS = {
   COMMON: [
