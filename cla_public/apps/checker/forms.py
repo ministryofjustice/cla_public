@@ -15,7 +15,8 @@ from wtforms.validators import InputRequired, NumberRange, Optional
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY
+    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY, \
+    PASSPORTED_BENEFITS
 from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
@@ -145,7 +146,11 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
         validators=[AtLeastOne()])
 
     def api_payload(self):
+        is_selected = lambda benefit: benefit in self.benefits.data
+        as_tuple = lambda benefit: (benefit, is_selected(benefit))
+        benefits = dict(map(as_tuple, PASSPORTED_BENEFITS))
         return {
+            'specific_benefits': benefits,
             'on_passported_benefits': passported(self.benefits.data)
         }
 

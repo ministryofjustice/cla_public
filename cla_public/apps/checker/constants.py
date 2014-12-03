@@ -74,11 +74,11 @@ RESULT_OPTIONS = [
 
 "Benefits"
 BENEFITS_CHOICES = [
-    ('income-support', u'Income Support'),
-    ('jobseekers-allowance', u'Income-based Jobseeker’s Allowance'),
-    ('guarantee-credit', u'Guarantee Credit'),
-    ('universal-credit', u'Universal Credit'),
-    ('employment-support', u'Income-related Employment and Support Allowance'),
+    ('income_support', u'Income Support'),
+    ('job_seekers_allowance', u'Income-based Jobseeker’s Allowance'),
+    ('pension_credit', u'Guarantee Credit'),
+    ('universal_credit', u'Universal Credit'),
+    ('employment_support', u'Income-related Employment and Support Allowance'),
     ('other-benefit', u'A different benefit not listed above'),
 ]
 
