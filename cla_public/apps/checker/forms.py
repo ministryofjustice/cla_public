@@ -430,7 +430,8 @@ class ApplicationForm(Honeypot, Form):
         description=(
             u"In your own words, please tell us exactly what your problem is "
             u"about. The Civil Legal Advice operator will read this before "
-            u"they call you."))
+            u"they call you."),
+        validators=[Optional()])
     adaptations = FormField(
         AdaptationsForm,
         u'Do you have any special communication needs?')
