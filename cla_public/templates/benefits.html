@@ -12,7 +12,6 @@
 {% endblock %}
 
 {% block inner_content %}
-  <p>Are you {% if session.has_partner %}or your partner {% endif %}on any of these benefits?</p>
   <form method="POST" action="{{ url_for('.benefits') }}">
     {{ form.csrf_token }}
 
@@ -22,7 +21,7 @@
       {% endcall %}
     {% endif %}
 
-    {{ Form.check_list_field(form.benefits, show_label=False) }}
+    {{ Form.check_list_field(form.benefits) }}
 
     {{ Element.call_me_back_link() }}
 

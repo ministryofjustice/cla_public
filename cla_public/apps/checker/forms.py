@@ -137,7 +137,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
 
 
 class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
-    benefits = MultiCheckboxField(
+    benefits = PartnerMultiCheckboxField(
+        u'Are you or your partner on any of these benefits?',
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
 
