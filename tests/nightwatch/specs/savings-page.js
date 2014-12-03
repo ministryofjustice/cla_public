@@ -89,7 +89,7 @@ module.exports = {
     });
     client
       .submitForm('form')
-      .assert.urlContains('/result/ineligible', 'Result ineligible when all savings fields set to £5000')
+      .assert.urlContains('/help-organisations', 'Result ineligible when all savings fields set to £5000')
     ;
 
     client.end();

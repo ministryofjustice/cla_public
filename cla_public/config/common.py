@@ -76,6 +76,9 @@ APP_SETTINGS = {
     'proposition_title': 'Civil Legal Aid'
 }
 
+# Timeout for api get requests so they don't hang waiting for a response
+API_CLIENT_TIMEOUT = 10
+
 BACKEND_API = {
     'url': 'http://localhost:8000/checker/api/v1/'
 }

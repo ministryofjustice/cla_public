@@ -1,7 +1,10 @@
 from collections import OrderedDict
-from flask import current_app, session
 import slumber
+import urllib
+from flask import current_app, session
+from cla_public.apps.base.decorators import api_proxy
 from cla_public.apps.checker.constants import CATEGORIES
+from cla_common.constants import ELIGIBILITY_STATES
 
 
 class DummyResource(object):
@@ -23,7 +26,10 @@ def get_api_connection():
     if current_app.config.get('TESTING'):
         return DummyResource()
 
-    return slumber.API(current_app.config['BACKEND_API']['url'])
+    return slumber.API(
+        current_app.config['BACKEND_API']['url'],
+        timeout=current_app.config['API_CLIENT_TIMEOUT']
+    )
 
 
 def money_interval(amount, interval='per_week'):
@@ -111,6 +117,7 @@ def post_to_eligibility_check_api(form):
         backend.eligibility_check(reference).patch(payload)
 
 
+@api_proxy(return_value=ELIGIBILITY_STATES.UNKNOWN)
 def post_to_is_eligible_api(form):
     backend = get_api_connection()
     reference = session.get('eligibility_check')
@@ -130,10 +137,20 @@ def post_to_case_api(form):
     session['case_ref'] = response['reference']
 
 
+@api_proxy(return_value=[])
 def get_organisation_list(**kwargs):
-    backend = get_api_connection()
-    api_response = backend.organisation.get(page_size=100, **kwargs)
-    return api_response['results']
+    kwargs['page_size'] = 100
+    key = 'organisation_list_%s' % urllib.urlencode(kwargs)
+    organisation_list = current_app.cache.get(key)
+    if not organisation_list:
+        backend = get_api_connection()
+        api_response = backend.organisation.get(**kwargs)
+        organisation_list = api_response['results']
+
+        one_year = 365 * 24 * 60 * 60
+        current_app.cache.set(key, organisation_list, timeout=one_year)
+
+    return organisation_list
 
 
 def get_ordered_organisations_by_category(**kwargs):

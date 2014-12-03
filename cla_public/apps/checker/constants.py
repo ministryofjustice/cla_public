@@ -66,7 +66,6 @@ CATEGORIES = [
 "Outcomes of the checker"
 RESULT_OPTIONS = [
     ('eligible', u'Eligible'),
-    ('ineligible', u'Ineligible'),
     ('face-to-face', u'Face-to-face'),
     ('confirmation', u'Confirmation'),
 ]
@@ -126,7 +125,7 @@ YES = '1'
 NO = '0'
 
 ORGANISATION_CATEGORY_MAPPING = {
-    'Abuse at home': 'Family',
+    'Domestic violence': 'Family',
     'Public law': 'Public',
     'Actions against the police': 'Action against police',
     'Welfare benefits appeals': 'Welfare benefits'
