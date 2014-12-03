@@ -1,35 +1,28 @@
 .form-control {
   @include core-19;
+  @include box-sizing(border-box);
   border: 1px solid $grey-2;
+  width: 50%;
+  max-width: 100%;
   padding: 4px;
   vertical-align: middle;
 
   &.m-small {
-    width: 3em;
+    width: 8em;
   }
 
   &.m-large {
-    width: 16em;
-  }
-
-  &.m-larger {
-    width: 24em;
+    width: 25em;
   }
 
   &.m-full {
-    width: 98%;
-    height: 8em;
+    width: 100%;
   }
 }
 
 select.form-control {
-  height: 34px;
   background: $white;
-}
-
-input[type="text"],
-input[type="number"] {
-  height: 24px;
+  width: auto;
 }
 
 textarea {
