@@ -1,4 +1,4 @@
-from cla_public.config.base import *
+from cla_public.config.common import *
 
 
 DEBUG = os.environ.get('SET_DEBUG', False) == 'True'

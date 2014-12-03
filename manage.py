@@ -11,7 +11,7 @@ from cla_public.app import create_app
 
 
 log = logging.getLogger(__name__)
-os.environ.setdefault('CLA_PUBLIC_CONFIG', 'config/base.py')
+os.environ.setdefault('CLA_PUBLIC_CONFIG', 'config/common.py')
 app = create_app()
 manager = Manager(app)
 
