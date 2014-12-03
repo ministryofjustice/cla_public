@@ -3,6 +3,10 @@
 CATEGORIES = [
     # value, label, inline help text
     (
+        'aap',
+        u'Actions against the police',
+        u'Being treated unlawfully by authorities who detain, imprison and prosecute (for example, the police), abuse in care cases'),
+    (
         'clinneg',
         u'Clinical negligence',
         u'Doctors and nurses not treating you with due care during medical treatment'),
@@ -14,7 +18,7 @@ CATEGORIES = [
     (
         'debt',
         u'Debt',
-        u'Money problems, bankruptcy, repossession'),
+        u'Struggling to manage or pay off debt, bankruptcy, repossession'),
     (
         'violence',
         u'Domestic violence',
@@ -32,7 +36,7 @@ CATEGORIES = [
     (
         'family',
         u'Family',
-        u'Divorce, separation, contact with children'),
+        u'Divorce, separation, contact with children, children being taken into care, forced marriage'),
     (
         'housing',
         u'Housing',
@@ -40,12 +44,12 @@ CATEGORIES = [
     (
         'immigration',
         u'Immigration and asylum',
-        u'Applying for asylum or permission to stay in the UK'),
+        u'Applying for asylum or permission to stay in the UK, including for victims of human trafficking'),
     (
         'mentalhealth',
         u'Mental health',
-        (u'Getting someone to speak for you at a mental health tribunal or '
-         u'inquest')),
+        (u'Help with mental health and mental capacity legal issues'
+         ),
     (
         'pi',
         u'Personal injury',
@@ -54,10 +58,6 @@ CATEGORIES = [
         'publiclaw',
         u'Public law',
         u'Taking legal action against a public body, like your local council'),
-    (
-        'aap',
-        u'Trouble with the police',
-        u'Being treated unfairly by the police, wrongful arrest'),
     (
         'benefits',
         u'Welfare benefits appeals',
