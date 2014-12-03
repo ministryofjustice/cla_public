@@ -42,10 +42,7 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def has_savings_or_valuables(self):
-        return any([
-            self.has_savings,
-            self.has_valuables,
-        ])
+        return self.has_savings or self.has_valuables
 
     @property
     def owns_property(self):
