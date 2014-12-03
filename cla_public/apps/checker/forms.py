@@ -191,6 +191,7 @@ class PropertyForm(NoCsrfForm):
             'mortgage_left': self.mortgage_remaining.data,
             'share': share,
             'disputed': self.in_dispute.data,
+            'rent': self.rent_amount.data,
             'main': self.is_main_home.data
         }
 
@@ -216,8 +217,13 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
         return self._submitted
 
     def api_payload(self):
-        return {'property_set': [
-            prop.form.api_payload() for prop in self.properties]}
+        properties = [prop.form.api_payload() for prop in self.properties]
+        monthly_rents = [
+            money_interval_to_monthly(prop['rent']) for prop in properties]
+        total_rent = sum(rent['per_interval_value'] for rent in monthly_rents)
+        return {
+            'property_set': properties,
+            'you': {'income': {'other_income': total_rent}}}
 
 
 class SavingsForm(ConfigFormMixin, Honeypot, Form):
