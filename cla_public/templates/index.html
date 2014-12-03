@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% set sidebar = 'resources' %}
+
+{% block container_class %}m-has-sidebar{% endblock %}
+
 {% block page_heading %}
   Can I get legal aid?
 {% endblock %}
@@ -44,5 +48,4 @@
     <li>your income should not be more than £2,657 a month before tax</li>
     <li>your savings should not be more than £8,000</li>
   </ul>
-
 {% endblock %}
