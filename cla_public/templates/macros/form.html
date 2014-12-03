@@ -250,12 +250,14 @@
 
   Params:
     - field <@object> WTForm field
+    - class_ <@string> (optional) input CSS class
+    - group_class <@string> (optional) group container CSS class
+    - show_title_row <@boolean> (default: True) Whether to show label as title in group container
     - rows <@number> (optional, default: 4) HTML rows attribute
-    - cols <@number> (optional, default: 40) HTML cols attribute
 #}
-{% macro textarea_field(field, class_='', group_class='', show_title_row=True) %}
+{% macro textarea_field(field, class_='', group_class='', show_title_row=True, rows=4) %}
   {% call form_group(field, class_=group_class, show_title_row=show_title_row) %}
-    {{ field(class_='form-control ' + class_, rows=4, cols=40) }}
+    {{ field(class_='form-control ' + class_, rows=rows) }}
   {% endcall %}
 {% endmacro %}
 
