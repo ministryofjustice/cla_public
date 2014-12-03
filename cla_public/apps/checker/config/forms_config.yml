@@ -1,4 +1,16 @@
 forms:
+
+  ProblemForm:
+    fields:
+
+      categories:
+        field_options:
+          violence:
+            selected_notification: If you are in imediate danger you can ask us to [call you back](/call-me-back).
+
+          housing:
+            selected_notification: If you are in imediate need of housing you can ask us to [call you back](/call-me-back).
+
   AboutYouForm:
     fields:
 

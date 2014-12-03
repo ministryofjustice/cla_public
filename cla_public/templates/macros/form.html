@@ -107,6 +107,11 @@
         {{field.description|safe}}
       </div>
     {% endif %}
+    {% if field.selected_notification %}
+      <div class="field-selected-notification">
+        {{field.selected_notification|safe}}
+      </div>
+    {% endif %}
   </label>
 {% endmacro %}
 
