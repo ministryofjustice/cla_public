@@ -299,13 +299,13 @@
     {% if use_form_group %}
       {% call form_group(field, title_as_label=field.per_interval_value.id, class_=group_class) %}
         <label class="input-prefix" for="{{field.per_interval_value.id}}">£</label>
-        {{ field.per_interval_value(class_='form-control') }}
+        {{ field.per_interval_value(class_='form-control m-small') }}
         {{ field.interval_period(class_='form-control') }}
       {% endcall %}
     {% else %}
       {{field.label}}
       <label class="input-prefix" for="{{field.per_interval_value.id}}">£</label>
-      {{ field.per_interval_value(class_='form-control') }}
+      {{ field.per_interval_value(class_='form-control m-small') }}
       {{ field.interval_period(class_='form-control') }}
     {% endif %}
   {% endif %}
