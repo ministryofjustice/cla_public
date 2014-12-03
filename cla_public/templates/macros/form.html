@@ -460,7 +460,7 @@
 {% macro postcode_field(field, attributes={}) %}
   {% call form_group(field) %}
     <div class="address-finder">
-      {{ field(class_='form-control', **attributes) }}
+      {{ field(class_='form-control m-small', **attributes) }}
     </div>
   {% endcall %}
 {% endmacro %}
