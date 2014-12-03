@@ -31,7 +31,7 @@ exports.BENEFITS = [
 ];
 
 exports.SAVINGS_QUESTIONS = {
-  MANDATORY: [
+  MONEY: [
     {
       name: 'savings',
       errorText: 'Enter 0 if you have no savings'
@@ -41,7 +41,7 @@ exports.SAVINGS_QUESTIONS = {
       errorText: 'Enter 0 if you have no investments'
     }
   ],
-  OPTIONAL: [
+  VALUABLES: [
     {
       name: 'valuables',
       errorText: 'Not a valid amount'
