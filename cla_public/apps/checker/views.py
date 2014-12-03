@@ -155,22 +155,32 @@ def result(outcome):
 
         return redirect(url_for('.result', outcome='confirmation'))
 
-    organisations = []
-    if outcome == 'ineligible':
-        category_name = (name for field, name, description in CATEGORIES if field == session.category).next()
-        category_name = ORGANISATION_CATEGORY_MAPPING.get(category_name, category_name)
-        organisations = get_organisation_list(article_category__name=category_name)
-
     response = render_template(
-        'result/%s.html' % outcome, form=form, organisations=organisations)
+        'result/%s.html' % outcome, form=form)
 
-    if outcome in ['confirmation', 'face-to-face', 'ineligible']:
+    if outcome in ['confirmation', 'face-to-face']:
         session.clear()
 
     return response
+
 
 @checker.route('/call-me-back', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(ApplicationForm, 'call-me-back.html')
 def call_me_back(user):
     return outcome('confirmation')
+
+
+@checker.route('/help-organisations/<category_name>', methods=['GET'])
+def help_organisations(category_name):
+    if session:
+        session.clear()
+
+    valid_outcomes = [name for field, name, description in CATEGORIES]
+    if category_name not in valid_outcomes:
+        abort(404)
+
+    category_name = ORGANISATION_CATEGORY_MAPPING.get(category_name, category_name)
+
+    organisations = get_organisation_list(article_category__name=category_name)
+    return render_template('help-organisations.html', organisations=organisations)

@@ -2,7 +2,7 @@ import datetime
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
-    PASSPORTED_BENEFITS, YES
+    PASSPORTED_BENEFITS, YES, CATEGORIES
 from cla_public.apps.checker.utils import passported
 
 
@@ -31,6 +31,10 @@ class CheckerSession(SecureCookieSession):
     @property
     def category(self):
         return self.get('ProblemForm_categories')
+
+    @property
+    def category_name(self):
+        return (name for field, name, description in CATEGORIES if field == self.category).next()
 
     @property
     def has_savings(self):

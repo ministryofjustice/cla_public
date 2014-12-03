@@ -41,7 +41,9 @@ def form_view(form_class, form_template):
                     is_eligible = post_to_is_eligible_api(form)
                     if is_eligible == ELIGIBILITY_STATES.NO:
                         return redirect(
-                            url_for('.result', outcome='ineligible'))
+                            url_for(
+                                '.help_organisations',
+                                category_name=session.category_name))
 
                     return fn(session)
 
