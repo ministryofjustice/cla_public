@@ -22,7 +22,7 @@ CATEGORIES = [
     (
         'violence',
         u'Domestic violence',
-        u'Abuse at home, child abuse, harassment by an ex-partner'),
+        u'Abuse at home, child abuse, harassment by an ex-partner, forced marriage'),
     (
         'discrimination',
         u'Discrimination',
@@ -36,7 +36,7 @@ CATEGORIES = [
     (
         'family',
         u'Family',
-        u'Divorce, separation, contact with children, children being taken into care, forced marriage'),
+        u'Divorce, separation, contact with children, children being taken into care'),
     (
         'housing',
         u'Housing',
