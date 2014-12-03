@@ -57,7 +57,7 @@ module.exports = {
     });
     client
       .submitForm('form')
-      .verify.urlContains('/income', 'Should arrive at income page when all savings fields set to £500')
+      .assert.urlContains('/income', 'Should arrive at income page when all savings fields set to £500')
       .back()
     ;
     SAVINGS_QUESTIONS.forEach(function(item) {
@@ -65,7 +65,7 @@ module.exports = {
     });
     client
       .submitForm('form')
-      .verify.urlContains('/result/ineligible', 'Result ineligible when all savings fields set to £5000')
+      .assert.urlContains('/result/ineligible', 'Result ineligible when all savings fields set to £5000')
     ;
 
     client.end();

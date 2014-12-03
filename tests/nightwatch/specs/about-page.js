@@ -50,11 +50,11 @@ module.exports = {
     });
     FIELDS_WITH_SUBFIELDS.forEach(function(item) {
       common.aboutPageSetAllToNo(client);
-      client.verify.hidden(util.format('input[name="%s"]', item.subfield_name));
+      client.assert.hidden(util.format('input[name="%s"]', item.subfield_name));
       common.setYesNoFields(client, item.field_name, 1);
-      client.verify.visible(util.format('input[name="%s"]', item.subfield_name));
+      client.assert.visible(util.format('input[name="%s"]', item.subfield_name));
       common.setYesNoFields(client, item.field_name, 0);
-      client.verify.hidden(util.format('input[name="%s"]', item.subfield_name));
+      client.assert.hidden(util.format('input[name="%s"]', item.subfield_name));
       common.setYesNoFields(client, item.field_name, 1);
       common.submitAndCheckForFieldError(client, item.field_name, item.errorText);
     });
@@ -64,7 +64,7 @@ module.exports = {
     common.aboutPageSetAllToNo(client);
     client
       .submitForm('form')
-      .verify.urlContains('/income', 'Goes to /income when all answers are No')
+      .assert.urlContains('/income', 'Goes to /income when all answers are No')
       .url(client.launch_url + '/about')
     ;
     OUTCOMES.forEach(function(item) {
@@ -72,7 +72,7 @@ module.exports = {
       common.setYesNoFields(client, item.question, 1);
       client
         .submitForm('form')
-        .verify.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
+        .assert.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
         .back()
       ;
     });

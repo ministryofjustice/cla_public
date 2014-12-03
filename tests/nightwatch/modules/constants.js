@@ -21,6 +21,15 @@ exports.PROPERTY_QUESTIONS = [
   'properties-0-in_dispute'
 ];
 
+exports.BENEFITS = [
+  'income-support',
+  'jobseekers-allowance',
+  'guarantee-credit',
+  'universal-credit',
+  'employment-support',
+  'other-benefit'
+];
+
 exports.SAVINGS_QUESTIONS = [
   {
     name: 'savings',

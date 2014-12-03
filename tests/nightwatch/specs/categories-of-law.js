@@ -60,10 +60,10 @@ module.exports = {
       client
         .click(util.format('input[name="categories"][value="%s"]', item))
         .submitForm('form')
-        .verify.urlContains(NOT_COVERED.url,
+        .assert.urlContains(NOT_COVERED.url,
           util.format('Goes to %s when ‘%s’ is selected', NOT_COVERED.url, item)
         )
-        .verify.containsText('h1', NOT_COVERED.headline)
+        .assert.containsText('h1', NOT_COVERED.headline)
         .back()
       ;
     });
@@ -74,10 +74,10 @@ module.exports = {
       client
         .click(util.format('input[name="categories"][value="%s"]', item))
         .submitForm('form')
-        .verify.urlContains(COVERED.url,
+        .assert.urlContains(COVERED.url,
           util.format('Goes to %s when ‘%s’ is selected', COVERED.url, item)
         )
-        .verify.containsText('h1', COVERED.headline)
+        .assert.containsText('h1', COVERED.headline)
         .back()
       ;
     });

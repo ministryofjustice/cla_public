@@ -2,15 +2,7 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
-
-var BENEFITS = [
-  'income-support',
-  'jobseekers-allowance',
-  'guarantee-credit',
-  'universal-credit',
-  'employment-support',
-  'other-benefit'
-];
+var BENEFITS = require('../modules/constants').BENEFITS;
 
 module.exports = {
   'Start page': common.startPage,
@@ -61,7 +53,7 @@ module.exports = {
       client
         .click(util.format('input[value="%s"]', item))
         .submitForm('form')
-        .verify.urlContains(destination, util.format('Goes to %s when %s is checked', destination, item))
+        .assert.urlContains(destination, util.format('Goes to %s when %s is checked', destination, item))
         .back()
         .click(util.format('input[value="%s"]', item))
     });
