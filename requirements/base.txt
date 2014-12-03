@@ -18,6 +18,10 @@ pytz==2014.9
 raven==4.2.3
 requests==2.4.3
 six==1.8.0
-slumber==0.6.0
+
+# Temporarily install slumber from fork until https://github.com/samgiles/slumber/pull/100 is accepted
+# so we can add a timeout on requests
+# slumber==0.6.0
+git+git://github.com/s-block/slumber.git@ec7dcd75f5d7d3680df51f56ce4312a1375f34e6
 wsgiref==0.1.2
 Babel==1.3

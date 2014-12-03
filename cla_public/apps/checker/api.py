@@ -26,7 +26,10 @@ def get_api_connection():
     if current_app.config.get('TESTING'):
         return DummyResource()
 
-    return slumber.API(current_app.config['BACKEND_API']['url'])
+    return slumber.API(
+        current_app.config['BACKEND_API']['url'],
+        timeout=current_app.config['API_CLIENT_TIMEOUT']
+    )
 
 
 def money_interval(amount, interval='per_week'):
