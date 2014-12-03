@@ -284,20 +284,20 @@
 #}
 {% macro money_interval_field(field, is_hidden=False, use_form_group=True, group_class='') %}
   {% if is_hidden %}
-    <input type="hidden" name="{{ field.amount.name }}" value="0">
-    <input type="hidden" name="{{ field.interval.name }}" value="per_week">
+    <input type="hidden" name="{{ field.per_interval_value.name }}" value="0">
+    <input type="hidden" name="{{ field.interval_period.name }}" value="per_week">
   {% else %}
     {% if use_form_group %}
-      {% call form_group(field, title_as_label=field.amount.id, class_=group_class) %}
-        <label class="input-prefix" for="{{field.amount.id}}">£</label>
-        {{ field.amount(class_='form-control') }}
-        {{ field.interval(class_='form-control') }}
+      {% call form_group(field, title_as_label=field.per_interval_value.id, class_=group_class) %}
+        <label class="input-prefix" for="{{field.per_interval_value.id}}">£</label>
+        {{ field.per_interval_value(class_='form-control') }}
+        {{ field.interval_period(class_='form-control') }}
       {% endcall %}
     {% else %}
       {{field.label}}
-      <label class="input-prefix" for="{{field.amount.id}}">£</label>
-      {{ field.amount(class_='form-control') }}
-      {{ field.interval(class_='form-control') }}
+      <label class="input-prefix" for="{{field.per_interval_value.id}}">£</label>
+      {{ field.per_interval_value(class_='form-control') }}
+      {{ field.interval_period(class_='form-control') }}
     {% endif %}
   {% endif %}
 {% endmacro %}
