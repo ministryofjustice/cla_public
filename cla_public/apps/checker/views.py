@@ -51,7 +51,7 @@ def about(user):
     if user.children_or_tax_credits:
         next_step = 'benefits_tax_credits'
 
-    if user.has_savings:
+    if user.has_savings_or_valuables:
         next_step = 'savings'
 
     if user.owns_property:
@@ -76,7 +76,7 @@ def benefits(user):
     if user.children_or_tax_credits:
         next_step = 'benefits_tax_credits'
 
-    if user.has_savings:
+    if user.has_savings_or_valuables:
         next_step = 'savings'
 
     if user.owns_property:
@@ -95,7 +95,7 @@ def property(user):
     if session.children_or_tax_credits:
         next_step = 'benefits_tax_credits'
 
-    if session.has_savings:
+    if session.has_savings_or_valuables:
         next_step = 'savings'
 
     return proceed(next_step)
