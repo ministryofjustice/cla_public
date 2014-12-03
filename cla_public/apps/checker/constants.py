@@ -48,8 +48,7 @@ CATEGORIES = [
     (
         'mentalhealth',
         u'Mental health',
-        (u'Help with mental health and mental capacity legal issues'
-         ),
+        u'Help with mental health and mental capacity legal issues'),
     (
         'pi',
         u'Personal injury',
@@ -129,7 +128,7 @@ NO = '0'
 ORGANISATION_CATEGORY_MAPPING = {
     'Abuse at home': 'Family',
     'Public law': 'Public',
-    'Trouble with the police': 'Action against police',
+    'Actions against the police': 'Action against police',
     'Welfare benefits appeals': 'Welfare benefits'
 }
 
