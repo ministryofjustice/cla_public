@@ -76,6 +76,10 @@ def wait_until_available(url):
     wget.wait()
 
 
+def update_static_assets():
+    run('gulp')
+
+
 def run_tests(venv_path):
     config = 'CLA_PUBLIC_CONFIG=config/jenkins.py'
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
@@ -108,6 +112,7 @@ def main():
     try:
         venv_path = make_virtualenv(env_name())
         install_dependencies(venv_path)
+        update_static_assets()
         clean_pyc()
         run_tests(venv_path)
     finally:
