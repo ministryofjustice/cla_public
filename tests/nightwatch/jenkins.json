@@ -13,10 +13,6 @@
     "default" : {
       "launch_url" : "http://localhost:${CLA_PUBLIC_PORT}/",
       "silent": true,
-      "screenshots" : {
-        "enabled" : true,
-        "path" : "tests/reports/nightwatch"
-      },
       "desiredCapabilities": {
         "browserName": "phantomjs",
         "javascriptEnabled" : true,
@@ -26,12 +22,20 @@
     },
 
     "firefox" : {
+      "screenshots" : {
+        "enabled" : true,
+        "path" : "tests/reports/nightwatch/screenshots"
+      },
       "desiredCapabilities": {
         "browserName": "firefox"
       }
     },
 
     "chrome" : {
+      "screenshots" : {
+        "enabled" : true,
+        "path" : "tests/reports/nightwatch/screenshots"
+      },
       "desiredCapabilities": {
         "browserName": "chrome"
       }

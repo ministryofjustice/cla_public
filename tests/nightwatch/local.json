@@ -12,10 +12,6 @@
     "default" : {
       "launch_url" : "http://localhost:5000",
       "silent": true,
-      "screenshots" : {
-        "enabled" : true,
-        "path" : "tests/reports/nightwatch"
-      },
       "desiredCapabilities": {
         "browserName": "phantomjs",
         "javascriptEnabled" : true,
@@ -25,12 +21,20 @@
     },
 
     "firefox" : {
+      "screenshots" : {
+        "enabled" : true,
+        "path" : "tests/reports/nightwatch/screenshots"
+      },
       "desiredCapabilities": {
         "browserName": "firefox"
       }
     },
 
     "chrome" : {
+      "screenshots" : {
+        "enabled" : true,
+        "path" : "tests/reports/nightwatch/screenshots"
+      },
       "desiredCapabilities": {
         "browserName": "chrome"
       }
