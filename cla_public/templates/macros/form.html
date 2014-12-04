@@ -108,9 +108,9 @@
       </div>
     {% endif %}
     {% if field.selected_notification %}
-      <div class="field-selected-notification">
+      {% call Element.alert() %}
         {{field.selected_notification|safe}}
-      </div>
+      {% endcall %}
     {% endif %}
   </label>
 {% endmacro %}
