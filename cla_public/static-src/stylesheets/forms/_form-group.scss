@@ -3,6 +3,10 @@
   padding: 20px 0;
   margin: 0;
 
+  @include media(mobile) {
+    margin: 0 -15px;
+  }
+
   &:first-of-type {
     border: 0;
   }
