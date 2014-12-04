@@ -1,0 +1,22 @@
+body.js-enabled {
+  .field-selected-notification {
+    display: none;
+  }
+
+  .s-selected {
+    .field-selected-notification {
+      display: block;
+    }
+  }
+}
+
+.field-selected-notification {
+  border-left: 4px solid $red;
+  background-color: $mellow-red-50;
+  padding: 5px 10px 10px 20px;
+  color: $red;
+
+  p {
+    margin: 10px 0 0;
+  }
+}
