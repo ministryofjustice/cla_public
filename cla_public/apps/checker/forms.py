@@ -339,9 +339,17 @@ class IncomeFieldForm(NoCsrfForm):
         child_tax_credit = session.get(
             'TaxCreditsForm_child_tax_credit', money_interval(0))
         tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
+
+        earnings = self.earnings.data
+        self_employed_drawings = None
+        # Switch all earnings to self employed drawings if only self employed
+        if session.is_self_employed and not session.is_employed:
+            earnings, self_employed_drawings = self_employed_drawings, earnings
+
         return {
             'income': {
-                'earnings': self.earnings.data,
+                'earnings': earnings,
+                'self_employment_drawings': self_employed_drawings,
                 'tax_credits': tax_credits,
                 'maintenance_received': self.maintenance.data,
                 'pension': self.pension.data,
