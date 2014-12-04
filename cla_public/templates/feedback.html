@@ -16,8 +16,8 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.textarea_field(form.difficulty) }}
-    {{ Form.textarea_field(form.ideas) }}
+    {{ Form.textarea_field(form.difficulty, class_='m-full', rows=6) }}
+    {{ Form.textarea_field(form.ideas, class_='m-full', rows=6) }}
     {{ Form.check_list_field(form.feel_about_service) }}
     {{ Form.check_list_field(form.help_filling_in_form) }}
 
