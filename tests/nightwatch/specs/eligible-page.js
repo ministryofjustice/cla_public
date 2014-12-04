@@ -23,7 +23,7 @@ module.exports = {
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
       .assert.containsText('body', 'Are you on any of these benefits?')
-      .click('input[value="income-support"]')
+      .click('input[value="income_support"]')
       .submitForm('form')
     ;
   },
@@ -46,6 +46,9 @@ module.exports = {
     ['full_name', 'contact_number'].forEach(function(item) {
       common.submitAndCheckForFieldError(client, item, 'This field is required.');
     });
+    client
+      .setValue('input[name="full_name"]', 'John Doe')
+      .setValue('input[name="contact_number"]', '12345')
     common.submitAndCheckForFieldError(client, 'safe_to_contact', 'Please choose Yes or No');
   },
 
