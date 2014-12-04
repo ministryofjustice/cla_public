@@ -1,7 +1,7 @@
 from cla_public.config.common import *
 
 
-DEBUG = True
+DEBUG = False
 
 SESSION_COOKIE_SECURE = False
 
