@@ -7,12 +7,7 @@ var INELIGIBLE_OUTCOMES = require('../modules/constants').INELIGIBLE_OUTCOMES;
 module.exports = {
   'Loop through eligible categories': function(client) {
     INELIGIBLE_OUTCOMES.forEach(function(item) {
-      // console.log(item.link.href);
-      // console.log(encodeURI(item.link.href));
-
       common.startPage(client);
-
-
       client
         .assert.urlContains('/problem')
         .click(util.format('input[name="categories"][value="%s"]', item.category.value))
@@ -34,9 +29,9 @@ module.exports = {
         .verify.elementPresent(util.format('//div[@class="org-list"]/ul/li/a[@href="%s"]', encodeURI(item.link.href)))
         .useCss()
       ;
-
-      // client.end();
     });
+
+    client.end();
   }
 
 };
