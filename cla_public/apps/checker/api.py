@@ -32,7 +32,7 @@ def get_api_connection():
     )
 
 
-def money_interval(amount, interval='per_week'):
+def money_interval(amount, interval='per_month'):
     return {
         'per_interval_value': amount,
         'interval_period': interval

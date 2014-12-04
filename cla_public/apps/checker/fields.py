@@ -167,18 +167,18 @@ class MoneyField(IntegerField):
 
 class MoneyIntervalForm(NoCsrfForm):
     """Money amount and interval subform"""
-    amount = MoneyField(validators=[Optional()])
-    interval = SelectField('', choices=MONEY_INTERVALS)
+    per_interval_value = MoneyField(validators=[Optional()])
+    interval_period = SelectField('', choices=MONEY_INTERVALS)
 
 
 def money_interval_to_monthly(data):
-    amount = data['amount']
-    interval = data['interval']
+    amount = data['per_interval_value']
+    interval = data['interval_period']
 
     if amount is None or interval == '':
         return {
-            'amount': 0,
-            'interval': 'per_month'
+            'per_interval_value': 0,
+            'interval_period': 'per_month'
         }
 
     if interval == 'per_month':
@@ -187,8 +187,8 @@ def money_interval_to_monthly(data):
     multiplier = MoneyInterval._intervals_dict[interval]['multiply_factor']
 
     return {
-        'amount': amount * multiplier,
-        'interval': 'per_month'
+        'per_interval_value': amount * multiplier,
+        'interval_period': 'per_month'
     }
 
 

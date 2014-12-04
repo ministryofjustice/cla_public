@@ -35,8 +35,8 @@ module.exports = {
 
   'Childcare fields': function(client) {
     client
-      .assert.hidden('input[name="childcare-amount"]')
-      .assert.hidden('input[name="childcare-interval"]')
+      .assert.hidden('input[name="childcare-per_interval_value"]')
+      .assert.hidden('input[name="childcare-interval_period"]')
       .back()
       .back()
     ;
@@ -49,8 +49,8 @@ module.exports = {
     client
       .submitForm('form')
       .submitForm('form')
-      .assert.visible('input[name="childcare-amount"]')
-      .assert.visible('select[name="childcare-interval"]')
+      .assert.visible('input[name="childcare-per_interval_value"]')
+      .assert.visible('select[name="childcare-interval_period"]')
     ;
   },
 
@@ -81,15 +81,15 @@ module.exports = {
 
   'Validation': function(client) {
     OUTGOINGS_QUESTIONS.forEach(function(item) {
-      client.setValue(util.format('input[name=%s-amount]', item), '500');
-      common.submitAndCheckForFieldError(client, item + '-amount', 'Please select a time period from the drop down');
-      client.clearValue(util.format('input[name=%s-amount]', item));
-      client.setValue(util.format('select[name=%s-interval]', item), 'per month');
-      common.submitAndCheckForFieldError(client, item + '-amount', 'Not a valid amount');
+      client.setValue(util.format('input[name=%s-per_interval_value]', item), '500');
+      common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Please select a time period from the drop down');
+      client.clearValue(util.format('input[name=%s-per_interval_value]', item));
+      client.setValue(util.format('select[name=%s-interval_period]', item), 'per month');
+      common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Not a valid amount');
     });
 
     OUTGOINGS_QUESTIONS.forEach(function(item) {
-      client.setValue(util.format('input[name=%s-amount]', item), '500');
+      client.setValue(util.format('input[name=%s-per_interval_value]', item), '500');
     });
     client
       .submitForm('form')

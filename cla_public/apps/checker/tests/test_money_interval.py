@@ -31,50 +31,50 @@ class TestMoneyInterval(unittest.TestCase):
         self.validator = ValidMoneyInterval()
         form = Mock()
         field = Mock()
-        field.form.amount.data = None
-        field.form.interval.data = ''
+        field.form.per_interval_value.data = None
+        field.form.interval_period.data = ''
         self.assertValidationPasses(form, field)
 
     def test_money_interval_validator_invalid_amount(self):
         self.validator = ValidMoneyInterval()
         form = Mock()
         field = Mock()
-        field.form.amount.validate = Mock(side_effect=ValidationError())
+        field.form.per_interval_value.validate = Mock(side_effect=ValidationError())
         self.assertValidationError(form, field)
 
     def test_money_interval_validator_amount_not_set_interval_selected(self):
         self.validator = ValidMoneyInterval()
         form = Mock()
         field = Mock()
-        field.form.amount.data = None
-        field.form.interval.data = 'per_week'
+        field.form.per_interval_value.data = None
+        field.form.interval_period.data = 'per_week'
         self.assertValidationError(form, field)
 
     def test_money_interval_validator_amount_set_interval_not_selected(self):
         self.validator = ValidMoneyInterval()
         form = Mock()
         field = Mock()
-        field.form.amount.data = 100
-        field.form.interval.data = ''
+        field.form.per_interval_value.data = 100
+        field.form.interval_period.data = ''
         self.assertValidationError(form, field)
 
-        field.form.amount.data = 0
+        field.form.per_interval_value.data = 0
         self.assertValidationPasses(form, field)
 
     def test_money_interval_validator_amount_set_interval_selected(self):
         self.validator = ValidMoneyInterval()
         form = Mock()
         field = Mock()
-        field.form.amount.data = 100
+        field.form.per_interval_value.data = 100
 
         for interval, _ in MONEY_INTERVALS:
             if interval != '':
-                field.form.interval.data = interval
+                field.form.interval_period.data = interval
                 self.assertValidationPasses(form, field)
 
     def test_money_interval_amount_required(self):
         self.validator = MoneyIntervalAmountRequired()
         form = Mock()
         field = Mock()
-        field.form.amount.data = None
+        field.form.per_interval_value.data = None
         self.assertValidationError(form, field)

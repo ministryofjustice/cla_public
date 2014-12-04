@@ -34,10 +34,6 @@ from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
 log = logging.getLogger(__name__)
 
 
-def to_money_interval(data):
-    return money_interval(data['amount'], data['interval'])
-
-
 class ConfigFormMixin(object):
     def __init__(self, *args, **kwargs):
         config_path = kwargs.pop('config_path', None)
@@ -195,8 +191,17 @@ class PropertyForm(NoCsrfForm):
             'mortgage_left': self.mortgage_remaining.data,
             'share': share,
             'disputed': self.in_dispute.data,
+            'rent': self.rent_amount.data,
             'main': self.is_main_home.data
         }
+
+
+def sum_money_intervals(first, second):
+    first = money_interval_to_monthly(first)
+    second = money_interval_to_monthly(second)
+    return money_interval(
+        first['per_interval_value'] + second['per_interval_value'],
+        first['interval_period'])
 
 
 class PropertiesForm(ConfigFormMixin, Honeypot, Form):
@@ -220,8 +225,12 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
         return self._submitted
 
     def api_payload(self):
-        return {'property_set': [
-            prop.form.api_payload() for prop in self.properties]}
+        properties = [prop.form.api_payload() for prop in self.properties]
+        rents = [prop['rent'] for prop in properties]
+        total_rent = reduce(sum_money_intervals, rents, money_interval(0))
+        return {
+            'property_set': properties,
+            'you': {'income': {'other_income': total_rent}}}
 
 
 class SavingsForm(ConfigFormMixin, Honeypot, Form):
@@ -282,9 +291,9 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
         return {
             'on_nass_benefits': nass(self.benefits.data),
             'you': {'income': {
-                'child_benefits': to_money_interval(self.child_benefit.data),
-                'tax_credits': to_money_interval(self.child_tax_credit.data),
-                'benefits': to_money_interval(self.total_other_benefit.data)
+                'child_benefits': self.child_benefit.data,
+                'tax_credits': self.child_tax_credit.data,
+                'benefits': self.total_other_benefit.data
             }}
         }
 
@@ -325,27 +334,21 @@ class IncomeFieldForm(NoCsrfForm):
             u"dividends"))
 
     def api_payload(self):
-        tax_credits = self.working_tax_credit.as_monthly()
+        tax_credits = self.working_tax_credit.data
         child_tax_credit = session.get(
-            'TaxCreditsForm_child_tax_credit',
-            {'amount': 0, 'interval': 'per_month'})
-        if child_tax_credit['amount'] > 0:
-            if child_tax_credit['interval'] != 'per_month':
-                child_tax_credit = money_interval_to_monthly(child_tax_credit)
-            tax_credits['amount'] += child_tax_credit['amount']
+            'TaxCreditsForm_child_tax_credit', money_interval(0))
+        tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
         return {
             'income': {
-                'earnings': to_money_interval(self.earnings.data),
-                'tax_credits': to_money_interval(tax_credits),
-                'maintenance_received': to_money_interval(
-                    self.maintenance.data),
-                'pension': to_money_interval(self.pension.data),
-                'other_income': to_money_interval(self.other_income.data)
+                'earnings': self.earnings.data,
+                'tax_credits': tax_credits,
+                'maintenance_received': self.maintenance.data,
+                'pension': self.pension.data,
+                'other_income': self.other_income.data
             },
             'deductions': {
-                'income_tax': to_money_interval(self.income_tax.data),
-                'national_insurance': to_money_interval(
-                    self.national_insurance.data),
+                'income_tax': self.income_tax.data,
+                'national_insurance': self.national_insurance.data,
             }
         }
 
@@ -399,11 +402,11 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
 
     def api_payload(self):
         return {'you': {'deductions': {
-            'rent': to_money_interval(self.rent.data),
-            'maintenance': to_money_interval(self.maintenance.data),
+            'rent': self.rent.data,
+            'maintenance': self.maintenance.data,
             'criminal_legalaid_contributions':
-                self.income_contribution.data['amount'],
-            'childcare': to_money_interval(self.childcare.data)
+                self.income_contribution.data['per_interval_value'],
+            'childcare': self.childcare.data
         }}}
 
 
