@@ -22,11 +22,11 @@ exports.PROPERTY_QUESTIONS = [
 ];
 
 exports.BENEFITS = [
-  'income-support',
-  'jobseekers-allowance',
-  'guarantee-credit',
-  'universal-credit',
-  'employment-support',
+  'income_support',
+  'job_seekers_allowance',
+  'pension_credit',
+  'universal_credit',
+  'employment_support',
   'other-benefit'
 ];
 
