@@ -176,6 +176,8 @@ def help_organisations(category_name):
     if session:
         session.clear()
 
+    category_name = category_name.replace('-', ' ').capitalize()
+
     valid_outcomes = [name for field, name, description in CATEGORIES]
     if category_name not in valid_outcomes:
         abort(404)
