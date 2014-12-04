@@ -88,13 +88,14 @@ def run_tests(venv_path):
     port = random.randint(8007, 8999)
     os.environ['CLA_PUBLIC_PORT'] = '{0}'.format(port)
     run(
-        '{conf} {venv}/bin/python manage.py runserver -p {port} -D -R'.format(
+        '{conf} {venv}/bin/python manage.py runserver -h 0.0.0.0 -p {port} -D -R'.format(
             venv=venv_path,
             conf=config,
             port=port),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=port))
-    run('./nightwatch -c tests/nightwatch/jenkins.json')
+    run('./nightwatch -c tests/nightwatch/jenkins.json --verbose')
+    run('env')
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
