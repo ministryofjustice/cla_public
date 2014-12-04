@@ -196,6 +196,14 @@ class PropertyForm(NoCsrfForm):
         }
 
 
+def sum_money_intervals(first, second):
+    first = money_interval_to_monthly(first)
+    second = money_interval_to_monthly(second)
+    return money_interval(
+        first['per_interval_value'] + second['per_interval_value'],
+        first['interval_period'])
+
+
 class PropertiesForm(ConfigFormMixin, Honeypot, Form):
     properties = PropertyList(
         FormField(PropertyForm), min_entries=1, max_entries=3)
@@ -218,9 +226,9 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
 
     def api_payload(self):
         properties = [prop.form.api_payload() for prop in self.properties]
-        monthly_rents = [
-            money_interval_to_monthly(prop['rent']) for prop in properties]
-        total_rent = sum(rent['per_interval_value'] for rent in monthly_rents)
+        rents = [prop['rent'] for prop in properties]
+        total_rent = reduce(
+            sum_money_intervals, monthly_rents, money_interval(0))
         return {
             'property_set': properties,
             'you': {'income': {'other_income': total_rent}}}
@@ -327,15 +335,10 @@ class IncomeFieldForm(NoCsrfForm):
             u"dividends"))
 
     def api_payload(self):
-        tax_credits = self.working_tax_credit.as_monthly()
+        tax_credits = self.working_tax_credit.data
         child_tax_credit = session.get(
-            'TaxCreditsForm_child_tax_credit',
-            money_interval(0, 'per_month'))
-        if child_tax_credit['per_interval_value'] > 0:
-            if child_tax_credit['interval_period'] != 'per_month':
-                child_tax_credit = money_interval_to_monthly(child_tax_credit)
-            tax_credits['per_interval_value'] += \
-                child_tax_credit['per_interval_value']
+            'TaxCreditsForm_child_tax_credit', money_interval(0))
+        tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
         return {
             'income': {
                 'earnings': self.earnings.data,
