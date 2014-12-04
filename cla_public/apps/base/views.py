@@ -54,6 +54,17 @@ def feedback():
 @base.route('/addressfinder/<path:path>', methods=['GET'])
 @api_proxy(return_value=[], json_response=True)
 def addressfinder_proxy_view(path):
+    if current_app.config['TESTING']:
+        if request.params.get('postcode') == 'e181ja':
+            return [
+                {'formatted_address': '3 Crescent Road\nLondon\nE18 1JA'},
+                {'formatted_address': 'Foo bar quux'}]
+        if request.params.get('postcode') == 'sw1h9aj':
+            return [
+                {'formatted_address':
+                    'Ministry of Justice\n102 Petty France\nLondon\nSW1H 9AJ'}]
+        return []
+
     response = requests.get(
         '{host}/{path}?{params}'.format(
             host=current_app.config['ADDRESSFINDER_API_HOST'],
@@ -65,9 +76,7 @@ def addressfinder_proxy_view(path):
         },
         timeout=current_app.config.get('API_CLIENT_TIMEOUT', None)
     )
-    return current_app.response_class(
-        response.text, mimetype='application/json')
-
+    return response.text
 
 @base.route('/session-expired')
 def session_expired():
