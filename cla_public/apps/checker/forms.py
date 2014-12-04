@@ -227,8 +227,7 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
     def api_payload(self):
         properties = [prop.form.api_payload() for prop in self.properties]
         rents = [prop['rent'] for prop in properties]
-        total_rent = reduce(
-            sum_money_intervals, monthly_rents, money_interval(0))
+        total_rent = reduce(sum_money_intervals, rents, money_interval(0))
         return {
             'property_set': properties,
             'you': {'income': {'other_income': total_rent}}}
