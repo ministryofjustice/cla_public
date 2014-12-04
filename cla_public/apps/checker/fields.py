@@ -81,8 +81,8 @@ class DescriptionRadioField(RadioField):
     """
 
     def __init__(self, *args, **kwargs):
+        self.options_attributes = []
         self.field_names = []
-        self.more_infos = []
         self.descriptions = []
         choices = []
         for name, label, description in kwargs.get('choices', []):
@@ -98,14 +98,17 @@ class DescriptionRadioField(RadioField):
         for index, option in enumerate(options):
             option.description = self.descriptions[index]
             option.field_name = self.field_names[index]
+
             try:
-                option.more_info = self.more_infos[index]
+                option_attributes = self.options_attributes[index]
+                option.__dict__.update(option_attributes)
             except IndexError:
-                option.more_info = None
+                pass
+
             yield option
 
-    def add_more_infos(self, more_infos):
-        self.more_infos = more_infos
+    def add_options_attributes(self, options_attributes):
+        self.options_attributes = options_attributes
 
 
 class YesNoField(RadioField):

@@ -107,6 +107,11 @@
         {{field.description|safe}}
       </div>
     {% endif %}
+    {% if field.selected_notification %}
+      {% call Element.alert() %}
+        {{field.selected_notification|safe}}
+      {% endcall %}
+    {% endif %}
   </label>
 {% endmacro %}
 

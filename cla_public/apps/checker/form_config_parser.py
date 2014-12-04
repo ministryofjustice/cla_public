@@ -14,7 +14,8 @@ class FormConfigParser(object):
     Loads help text in to DescriptionRadioField fields
     """
     _markdown_fields = [
-        'more_info'
+        'more_info',
+        'selected_notification',
     ]
 
     def __init__(self, form_name, config_path=None):
@@ -62,22 +63,16 @@ class FormConfigParser(object):
 
             field_config = self.fields[field_name]
 
-            if field and hasattr(field, 'add_more_infos'):
+            if field and hasattr(field, 'add_options_attributes'):
                 # Add help text to individual radios in DescriptionRadioField fields
-                more_infos = []
+                options_attributes = []
 
                 field_options = field_config.get('field_options', {})
                 for radio_field in field:
+                    radio_field_config = self.values_to_markdown(field_options.get(radio_field.field_name, {}))
+                    options_attributes.append(radio_field_config)
 
-                    radio_field_config = field_options.get(radio_field.field_name, {})
-
-                    more_info = radio_field_config.get('more_info', None)
-                    if more_info:
-                        more_infos.append(markdown2.markdown(more_info))
-                    else:
-                        more_infos.append(None)
-
-                field.add_more_infos(more_infos)
+                field.add_options_attributes(options_attributes)
 
             return field_config
 

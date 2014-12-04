@@ -35,6 +35,21 @@
     top: 15px;
     left: 18px;
   }
+
+  .alert {
+    font-size: .9em;
+    margin: 10px 0 0;
+
+    .js-enabled & {
+      display: none;
+    }
+  }
+
+  &.s-selected {
+    .alert-info {
+      display: block;
+    }
+  }
 }
 
 
