@@ -34,7 +34,8 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def category_name(self):
-        return (name for field, name, description in CATEGORIES if field == self.category).next()
+        name = (name for field, name, description in CATEGORIES if field == self.category).next()
+        return name.lower().replace(' ', '-')
 
     @property
     def has_savings(self):
