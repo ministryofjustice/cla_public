@@ -16,7 +16,7 @@
       <ul>
         {% for org in organisations %}
           <li class="vcard">
-            <a class="org" href="{{ org.website }}">
+            <a class="org" href="{{ org.website }}" rel="external">
               {{ org.service_name }}
             </a>
             {% if org.helpline and org.helpline|lower|trim != 'n/a' %}
