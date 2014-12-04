@@ -137,7 +137,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
 
 
 class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
-    benefits = MultiCheckboxField(
+    benefits = PartnerMultiCheckboxField(
+        u'Are you or your partner on any of these benefits?',
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
 
@@ -276,9 +277,9 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
             u"receive."),
         choices=NON_INCOME_BENEFITS)
     other_benefits = PartnerYesNoField(
-        u'Do you or your partner receive any other benefits not listed above? '
-        u'For example, Working Tax Credit, Incapacity Benefit, Contribution-based '
-        u'Jobseeker\'s Allowance')
+        u'Do you or your partner receive any other benefits not listed above? ',
+        description=u'For example, Working Tax Credit, Incapacity Benefit, \
+            Contribution-based Jobseeker\'s Allowance')
     total_other_benefit = MoneyIntervalField(
         u'If Yes, total amount of benefits not listed above',
         validators=[
@@ -429,7 +430,8 @@ class ApplicationForm(Honeypot, Form):
         description=(
             u"In your own words, please tell us exactly what your problem is "
             u"about. The Civil Legal Advice operator will read this before "
-            u"they call you."))
+            u"they call you."),
+        validators=[Optional()])
     adaptations = FormField(
         AdaptationsForm,
         u'Do you have any special communication needs?')

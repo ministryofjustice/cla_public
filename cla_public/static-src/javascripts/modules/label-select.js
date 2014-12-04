@@ -4,13 +4,13 @@
   moj.Modules.LabelSelect = {
     el: '.block-label, .radio-inline',
 
-    init: function () {
+    init: function() {
       _.bindAll(this, 'render');
       this.cacheEls();
       this.bindEvents();
     },
 
-    bindEvents: function () {
+    bindEvents: function() {
       this.$options
         .on('change', function () {
           var $el = $(this),
@@ -32,11 +32,11 @@
       moj.Events.on('render LabelSelect.render', this.render);
     },
 
-    cacheEls: function () {
+    cacheEls: function() {
       this.$options = $(this.el).find('input[type=radio], input[type=checkbox]');
     },
 
-    render: function () {
+    render: function() {
       // keep current state
       this.$options.each(function () {
         var $el = $(this);

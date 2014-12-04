@@ -118,7 +118,7 @@
     - field <@object> WTForm field
     - subfield <@object> (optional) WTForm field to include as subfield
                       (creates relationship via JS for conditional toggling)
-    - subfield_caller <@object> (optional)
+    - subfield_caller <@object> (optional) Subfield
 #}
 {% macro yesno_elements(field, subfield=None, subfield_caller=None) %}
   {%- for option in field -%}
@@ -148,12 +148,13 @@
     - field <@object> WTForm field
     - subfield <@object> (optional) WTForm field to include as subfield
                       (creates relationship via JS for conditional toggling)
+    - use_form_group <@boolean> (default: True) Whether to wrap the field in form group
+    - group_class <@string> (optional) group container CSS class
 #}
 {% macro yesno_field(
   field,
   subfield=None,
   use_form_group=True,
-  label_class='',
   group_class=''
 ) %}
   {# set subfields as macro caller and make them optional #}
@@ -173,7 +174,7 @@
       {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
     {% endcall %}
   {% else %}
-    {{ field.label(class_=label_class) }}
+    {{ field.label }}
     {% if field.description %}
       <div class="field-help">
         {{field.description|safe}}
@@ -193,7 +194,9 @@
     - suffix <@string> (optional) Adds label with specified string after the field
     - use_form_group <@boolean> (optional) Don't wrap in form group when set to False
     - class_ <@string> (optional) CSS class of input field
-    - label_class <@string> (optional) CSS class of field label (when used as subfield)
+    - group_class <@string> (optional) group container CSS class
+    - is_hidden <@boolean> (default: False) Whether the field should be represented as hidden
+    - default_value <@string> (optional) default value of hidden field
 #}
 {% macro text_field(
   field,
@@ -202,7 +205,6 @@
   suffix=None,
   use_form_group=True,
   class_='',
-  label_class='',
   group_class='',
   is_hidden=False,
   default_value=''
@@ -232,7 +234,7 @@
         {% endif %}
       {% endcall %}
     {% else %}
-      {{ field.label(class_=label_class) }}
+      {{ field.label }}
       {% if prefix %}
         <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
       {% endif %}
@@ -250,12 +252,14 @@
 
   Params:
     - field <@object> WTForm field
+    - class_ <@string> (optional) input CSS class
+    - group_class <@string> (optional) group container CSS class
+    - show_title_row <@boolean> (default: True) Whether to show label as title in group container
     - rows <@number> (optional, default: 4) HTML rows attribute
-    - cols <@number> (optional, default: 40) HTML cols attribute
 #}
-{% macro textarea_field(field, class_='', group_class='', show_title_row=True) %}
+{% macro textarea_field(field, class_='', group_class='', show_title_row=True, rows=4) %}
   {% call form_group(field, class_=group_class, show_title_row=show_title_row) %}
-    {{ field(class_='form-control ' + class_, rows=4, cols=40) }}
+    {{ field(class_='form-control ' + class_, rows=rows) }}
   {% endcall %}
 {% endmacro %}
 
@@ -265,10 +269,20 @@
 
   Params:
     - field <@object> WTForm field
+    - show_label <@boolean> (default: True) Whether to show field label
 #}
-{% macro check_list_field(field) %}
-  {% call form_group(field, False) %}
-    {{ field(class_='form-option-list') }}
+{% macro check_list_field(field, show_label=True) %}
+  {% call form_group(field, show_title_row=show_label) %}
+    <ul class="form-option-list">
+      {% for option in field %}
+        <li>
+          <label class="radio-inline" for="{{option.id}}">
+            {{ option }}
+            {{ option.label.text }}
+          </label>
+        </li>
+      {% endfor %}
+    </ul>
   {% endcall %}
 {% endmacro %}
 
@@ -279,8 +293,8 @@
   Params:
     - field <@object> WTForm field
     - is_hidden <@boolean> (optional, default: False) Whether to render the field as hidden
-    - use_form_group <@boolean> (optional, default: True) Whether to use form_group to wrap
-        the field
+    - use_form_group <@boolean> (default: True) Whether to wrap the field in form group
+    - group_class <@string> (optional) group container CSS class
 #}
 {% macro money_interval_field(field, is_hidden=False, use_form_group=True, group_class='') %}
   {% if is_hidden %}
@@ -290,13 +304,13 @@
     {% if use_form_group %}
       {% call form_group(field, title_as_label=field.per_interval_value.id, class_=group_class) %}
         <label class="input-prefix" for="{{field.per_interval_value.id}}">£</label>
-        {{ field.per_interval_value(class_='form-control') }}
+        {{ field.per_interval_value(class_='form-control m-small') }}
         {{ field.interval_period(class_='form-control') }}
       {% endcall %}
     {% else %}
       {{field.label}}
       <label class="input-prefix" for="{{field.per_interval_value.id}}">£</label>
-      {{ field.per_interval_value(class_='form-control') }}
+      {{ field.per_interval_value(class_='form-control m-small') }}
       {{ field.interval_period(class_='form-control') }}
     {% endif %}
   {% endif %}
@@ -308,6 +322,7 @@
 
   Params:
     - field <@object> WTForm field
+    - show_title_row <@boolean> Whether to show label row
 #}
 {% macro select_field(field, group_class='', show_title_row=True) %}
   {% call form_group(field, class_=group_class, show_title_row=show_title_row) %}
@@ -328,37 +343,54 @@
       {{ field.label }}
     </dt>
     <dd class="form-row">
-      {{ field.bsl_webcam }}
-      {{ field.bsl_webcam.label }}
-    </dd>
-    <dd class="form-row">
-      {{ field.minicom }}
-      {{ field.minicom.label }}
-    </dd>
-    <dd class="form-row">
-      {{ field.text_relay }}
-      {{ field.text_relay.label }}
-    </dd>
-    <dd class="form-row">
-      {{ field.welsh }}
-      {{ field.welsh.label }}
-    </dd>
-    <dd class="form-row">
-      {{ field.is_other_language(**{
-          'data-conditional-controls': field.other_language.id,
-          'data-conditional-show-value': 'y'
-        })
-      }}
-      {{ field.is_other_language.label }}
-      {{ select_field(field.other_language, group_class='form-subfield s-hidden', show_title_row=False) }}
-    </dd>
-    <dd class="form-row">
-      {{ field.is_other_adaptation(**{
-          'data-conditional-controls': field.other_adaptation.id,
-          'data-conditional-show-value': 'y'
-        }) }}
-      {{ field.is_other_adaptation.label }}
-      {{ textarea_field(field.other_adaptation, group_class='form-subfield s-hidden', show_title_row=False) }}
+      <ul class="form-option-list">
+        <li>
+          <label class="radio-inline" for="{{field.bsl_webcam.id}}">
+            {{ field.bsl_webcam }}
+            {{ field.bsl_webcam.label.text }}
+          </label>
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.minicom.id}}">
+            {{ field.minicom }}
+            {{ field.minicom.label.text }}
+          </label>
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.text_relay.id}}">
+            {{ field.text_relay }}
+            {{ field.text_relay.label.text }}
+          </label>
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.welsh.id}}">
+            {{ field.welsh }}
+            {{ field.welsh.label.text }}
+          </label>
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.is_other_language.id}}">
+            {{ field.is_other_language(**{
+                'data-conditional-controls': field.other_language.id,
+                'data-conditional-show-value': 'y'
+              })
+            }}
+            {{ field.is_other_language.label.text }}
+          </label>
+          {{ select_field(field.other_language, group_class='form-subfield s-hidden', show_title_row=False) }}
+        </li>
+        <li>
+          <label class="radio-inline" for="{{field.is_other_adaptation.id}}">
+            {{ field.is_other_adaptation(**{
+                'data-conditional-controls': field.other_adaptation.id,
+                'data-conditional-show-value': 'y'
+              })
+            }}
+            {{ field.is_other_adaptation.label.text }}
+          </label>
+          {{ textarea_field(field.other_adaptation, group_class='form-subfield s-hidden', show_title_row=False) }}
+        </li>
+      </ul>
     </dd>
   </dl>
 {% endmacro %}
@@ -374,23 +406,6 @@
   <p class="form-actions">
     <button type="submit" class="button button-larger">{{ button_label }}</button>
   </p>
-{% endmacro %}
-
-
-{#
-  Form radio list
-
-  Params:
-    - field <@object> WTForm field
-#}
-{% macro radio_list(field) %}
-  {% for radio in field %}
-    <p class="form-field">
-      <label class="radio-inline" for="{{radio.id}}">
-        {{ radio }} {{ radio.label.text }}
-      </label>
-    </p>
-  {% endfor %}
 {% endmacro %}
 
 
@@ -419,22 +434,22 @@
 #}
 {% macro availability_checker_field(field) %}
   {% call form_group(field) %}
-    {% for radio in field.specific_day %}
-      <p class="form-field">
-        <label class="radio-inline" for="{{radio.id}}">
-          {{ radio }} {{ radio.label.text }}
-          <span class="form-inline-field">
-            {% if radio.id == 'specific_day-0' %}
-              {{ field.time_today(class_='form-control') }}
-            {% elif radio.id == 'specific_day-1' %}
-              {{ field.time_tomorrow(class_='form-control') }}
-            {% else %}
-              {{ field.day(class_='form-control') }} at {{ field.time_in_day(class_='form-control') }}
-            {%  endif %}
-          </span>
-        </label>
-      </p>
-    {% endfor %}
+    <ul class="form-option-list" role="radiogroup">
+      {% for radio in field.specific_day %}
+        <li>
+          <label class="radio-inline" for="{{radio.id}}">
+            {{ radio }} {{ radio.label.text }}
+          </label>
+          {% if radio.id == 'specific_day-0' %}
+            {{ field.time_today(class_='form-control') }}
+          {% elif radio.id == 'specific_day-1' %}
+            {{ field.time_tomorrow(class_='form-control') }}
+          {% else %}
+            {{ field.day(class_='form-control') }} at {{ field.time_in_day(class_='form-control') }}
+          {%  endif %}
+        </li>
+      {% endfor %}
+    </ul>
   {% endcall %}
 {% endmacro %}
 
@@ -449,7 +464,7 @@
 {% macro postcode_field(field, attributes={}) %}
   {% call form_group(field) %}
     <div class="address-finder">
-      {{ field(class_='form-control', **attributes) }}
+      {{ field(class_='form-control m-small', **attributes) }}
     </div>
   {% endcall %}
 {% endmacro %}

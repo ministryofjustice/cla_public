@@ -1,4 +1,9 @@
-%alert-generic {
+.alert {
+  @mixin _style-alert($border-colour, $bg-colour) {
+    background: $bg-colour;
+    border-left: 4px solid $border-colour;
+  }
+
   $_padding: 1.05263em;
   padding: $_padding;
   margin: $_padding 0;
@@ -29,25 +34,12 @@
       margin: 0;
     }
   }
-}
-
-.alert {
-  @mixin _make-alert($colour: null) {
-    @extend %alert-generic;
-    background: lighten($colour, 45);
-    background: rgba($colour, .1);
-    border-left: 4px solid $colour;
-  }
 
   &-info {
-    @include _make-alert($grey-2);
+    @include _style-alert($grey-2, $grey-4);
   }
 
   &-error {
-    @include _make-alert($mellow-red);
-  }
-
-  &-success {
-    @include _make-alert($turquoise);
+    @include _style-alert($mellow-red, lighten($mellow-red, 40));
   }
 }

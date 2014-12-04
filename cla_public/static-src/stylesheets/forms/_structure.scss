@@ -17,42 +17,12 @@ fieldset {
   }
 }
 
-.form-group {
-  border-top: 1px solid $grey-3;
-  padding: 15px 0;
-  margin: 0 -15px;
-
-  &:first-of-type {
-    border: 0;
-  }
-
-  &.m-error {
-    background: lighten($mellow-red, 42);
-    background: rgba($red, .1);
-    border-top-color: desaturate(lighten($mellow-red, 30), 50);
-    border-top-color: rgba(black, .12);
-  }
-
-  .form-row {
-    padding: 0 15px;
-    margin: 0;
-
-    & + .form-row {
-      margin-top: 10px;
-    }
-  }
-}
-
 .form-row {
   input[type="checkbox"],
   input[type="radio"] {
     margin: 0 5px 0 0;
     position: relative;
     top: -2px;
-  }
-
-  .form-option-list {
-    margin-left: 8px;
   }
 }
 
@@ -64,26 +34,27 @@ fieldset {
   }
 }
 
-.form-inline-field {
-  display: inline-block;
-
-  input + & {
-    margin-left: 5px;
-  }
-}
-
 .form-option-list {
   margin: 0;
   padding: 0;
   list-style: none;
 
   li {
-    margin: 5px 0;
+    margin: 8px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
 .form-actions {
   margin-top: 40px;
+  padding: 0 15px;
 }
 
 // Honeypot field

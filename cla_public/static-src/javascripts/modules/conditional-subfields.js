@@ -41,7 +41,8 @@
           return;
         }
 
-        $('label[for="' + this + '"]')
+        // Use 'begins with' to account for multi element fields, e.g. money field
+        $('label[for^="' + this + '"]')
           .filter(function() {
             return !$(this).hasClass('input-prefix') && !$(this).hasClass('input-suffix');
           })

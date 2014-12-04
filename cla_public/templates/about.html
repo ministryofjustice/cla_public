@@ -20,10 +20,10 @@
 
     {{ Form.yesno_field(form.on_benefits) }}
     {% call Form.yesno_field(form.have_children, subfield=form.num_children) %}
-      {{ Form.text_field(form.num_children, group_class='form-subfield s-hidden') }}
+      {{ Form.text_field(form.num_children, group_class='form-subfield s-hidden', class_='m-small') }}
     {% endcall %}
     {% call Form.yesno_field(form.have_dependants, subfield=form.num_dependants) %}
-      {{ Form.text_field(form.num_dependants, group_class='form-subfield s-hidden') }}
+      {{ Form.text_field(form.num_dependants, group_class='form-subfield s-hidden', class_='m-small') }}
     {% endcall %}
     {{ Form.yesno_field(form.have_savings) }}
     {{ Form.yesno_field(form.have_valuables) }}

@@ -12,10 +12,10 @@
     bindEvents: function () {
       // set focused selector to parent label
       this.$options
-        .on('focus', function () {
+        .on('focus', function() {
           $(this).parent('label').addClass('s-focused');
         })
-        .on('focusout', function () {
+        .on('blur', function() {
           $('.s-focused').removeClass('s-focused');
         });
     },
