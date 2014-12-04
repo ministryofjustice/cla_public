@@ -23,7 +23,7 @@ module.exports = {
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
       .assert.containsText('body', 'Are you on any of these benefits?')
-      .click('input[value="income-support"]')
+      .click('input[value="income_support"]')
       .submitForm('form')
     ;
   },
