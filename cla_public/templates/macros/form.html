@@ -118,7 +118,7 @@
     - field <@object> WTForm field
     - subfield <@object> (optional) WTForm field to include as subfield
                       (creates relationship via JS for conditional toggling)
-    - subfield_caller <@object> (optional)
+    - subfield_caller <@object> (optional) Subfield
 #}
 {% macro yesno_elements(field, subfield=None, subfield_caller=None) %}
   {%- for option in field -%}
@@ -148,6 +148,8 @@
     - field <@object> WTForm field
     - subfield <@object> (optional) WTForm field to include as subfield
                       (creates relationship via JS for conditional toggling)
+    - use_form_group <@boolean> (default: True) Whether to wrap the field in form group
+    - group_class <@string> (optional) group container CSS class
 #}
 {% macro yesno_field(
   field,
@@ -192,6 +194,9 @@
     - suffix <@string> (optional) Adds label with specified string after the field
     - use_form_group <@boolean> (optional) Don't wrap in form group when set to False
     - class_ <@string> (optional) CSS class of input field
+    - group_class <@string> (optional) group container CSS class
+    - is_hidden <@boolean> (default: False) Whether the field should be represented as hidden
+    - default_value <@string> (optional) default value of hidden field
 #}
 {% macro text_field(
   field,
@@ -264,6 +269,7 @@
 
   Params:
     - field <@object> WTForm field
+    - show_label <@boolean> (default: True) Whether to show field label
 #}
 {% macro check_list_field(field, show_label=True) %}
   {% call form_group(field, show_title_row=show_label) %}
@@ -287,8 +293,8 @@
   Params:
     - field <@object> WTForm field
     - is_hidden <@boolean> (optional, default: False) Whether to render the field as hidden
-    - use_form_group <@boolean> (optional, default: True) Whether to use form_group to wrap
-        the field
+    - use_form_group <@boolean> (default: True) Whether to wrap the field in form group
+    - group_class <@string> (optional) group container CSS class
 #}
 {% macro money_interval_field(field, is_hidden=False, use_form_group=True, group_class='') %}
   {% if is_hidden %}
@@ -316,6 +322,7 @@
 
   Params:
     - field <@object> WTForm field
+    - show_title_row <@boolean> Whether to show label row
 #}
 {% macro select_field(field, group_class='', show_title_row=True) %}
   {% call form_group(field, class_=group_class, show_title_row=show_title_row) %}
