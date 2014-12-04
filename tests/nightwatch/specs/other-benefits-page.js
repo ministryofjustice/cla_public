@@ -52,8 +52,8 @@ module.exports = {
 
   'Child benefit fields': function(client) {
     CHILD_BENEFIT_QUESTIONS.forEach(function(item) {
-      client.assert.hidden(util.format('input[name="%s-amount"]', item));
-      client.assert.hidden(util.format('input[name="%s-interval"]', item));
+      client.assert.hidden(util.format('input[name="%s-per_interval_value"]', item));
+      client.assert.hidden(util.format('input[name="%s-interval_period"]', item));
     });
     client
       .back()
@@ -66,8 +66,8 @@ module.exports = {
       .submitForm('form')
     ;
     CHILD_BENEFIT_QUESTIONS.forEach(function(item) {
-      client.assert.visible(util.format('input[name="%s-amount"]', item));
-      client.assert.visible(util.format('select[name="%s-interval"]', item));
+      client.assert.visible(util.format('input[name="%s-per_interval_value"]', item));
+      client.assert.visible(util.format('select[name="%s-interval_period"]', item));
     });
   },
 
@@ -76,31 +76,31 @@ module.exports = {
 
     CHILD_BENEFIT_QUESTIONS.forEach(function(item) {
       client
-        .setValue(util.format('input[name="%s-amount"]', item), '100')
+        .setValue(util.format('input[name="%s-per_interval_value"]', item), '100')
       ;
-      common.submitAndCheckForFieldError(client, item + '-amount', 'Please select a time period from the drop down');
+      common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Please select a time period from the drop down');
       client
-        .clearValue(util.format('input[name="%s-amount"]', item))
-        .setValue(util.format('select[name="%s-interval"]', item), 'per month')
+        .clearValue(util.format('input[name="%s-per_interval_value"]', item))
+        .setValue(util.format('select[name="%s-interval_period"]', item), 'per month')
       ;
-      common.submitAndCheckForFieldError(client, item + '-interval', 'Not a valid amount', 'select');
+      common.submitAndCheckForFieldError(client, item + '-interval_period', 'Not a valid amount', 'select');
       client
-        .setValue(util.format('input[name="%s-amount"]', item), '100')
+        .setValue(util.format('input[name="%s-per_interval_value"]', item), '100')
       ;
     });
 
     common.submitAndCheckForFieldError(client, 'other_benefits', 'Please choose Yes or No');
     client.click('input[name="other_benefits"][value="1"]');
     common.submitAndCheckForFieldError(client, 'other_benefits', 'Please provide an amount');
-    client.setValue('input[name="total_other_benefit-amount"]', '100');
+    client.setValue('input[name="total_other_benefit-per_interval_value"]', '100');
     common.submitAndCheckForFieldError(client, 'other_benefits', 'Please select a time period from the drop down');
     client
-      .clearValue('input[name="total_other_benefit-amount"]')
-      .setValue('select[name="total_other_benefit-interval"]', 'per month')
+      .clearValue('input[name="total_other_benefit-per_interval_value"]')
+      .setValue('select[name="total_other_benefit-interval_period"]', 'per month')
     ;
     common.submitAndCheckForFieldError(client, 'other_benefits', 'Not a valid amount');
     client
-      .setValue('input[name="total_other_benefit-amount"]', '100')
+      .setValue('input[name="total_other_benefit-per_interval_value"]', '100')
       .submitForm('form')
       .assert.urlContains('/income')
     ;

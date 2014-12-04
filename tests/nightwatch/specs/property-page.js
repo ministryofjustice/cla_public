@@ -52,8 +52,8 @@ module.exports = {
     common.setYesNoFields(client, PROPERTY_QUESTIONS, 1);
     client
       .setValue('input[name="properties-0-property_value"]', '100000')
-      .setValue('#properties-0-rent_amount-amount', '')
-      .setValue('#properties-0-rent_amount-interval', 'per month')
+      .setValue('#properties-0-rent_amount-per_interval_value', '')
+      .setValue('#properties-0-rent_amount-interval_period', 'per month')
     ;
     common.submitAndCheckForFieldError(client, 'properties-0-is_rented', 'Not a valid amount');
     client

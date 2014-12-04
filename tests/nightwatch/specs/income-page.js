@@ -31,8 +31,8 @@ module.exports = {
 
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
-        .assert.hidden(util.format('[name="your_income-%s-amount"]', item))
-        .assert.hidden(util.format('[name="your_income-%s-interval"]', item))
+        .assert.hidden(util.format('[name="your_income-%s-per_interval_value"]', item))
+        .assert.hidden(util.format('[name="your_income-%s-interval_period"]', item))
       ;
     });
     client.back();
@@ -40,8 +40,8 @@ module.exports = {
     client.submitForm('form');
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
-        .assert.visible(util.format('[name="your_income-%s-amount"]', item))
-        .assert.visible(util.format('[name="your_income-%s-interval"]', item))
+        .assert.visible(util.format('[name="your_income-%s-per_interval_value"]', item))
+        .assert.visible(util.format('[name="your_income-%s-interval_period"]', item))
       ;
     });
     client.back();
@@ -50,8 +50,8 @@ module.exports = {
     client.submitForm('form');
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
-        .assert.visible(util.format('[name="your_income-%s-amount"]', item))
-        .assert.visible(util.format('[name="your_income-%s-interval"]', item))
+        .assert.visible(util.format('[name="your_income-%s-per_interval_value"]', item))
+        .assert.visible(util.format('[name="your_income-%s-interval_period"]', item))
       ;
     });
   },
@@ -64,8 +64,8 @@ module.exports = {
 
     EMPLOYMENT_QUESTIONS.EMPLOYED.concat(EMPLOYMENT_QUESTIONS.COMMON).forEach(function(item) {
       client
-        .assert.elementNotPresent(util.format('[name="partner_income-%s-amount"]', item))
-        .assert.elementNotPresent(util.format('[name="partner_income-%s-interval"]', item))
+        .assert.elementNotPresent(util.format('[name="partner_income-%s-per_interval_value"]', item))
+        .assert.elementNotPresent(util.format('[name="partner_income-%s-interval_period"]', item))
       ;
     });
 
@@ -80,8 +80,8 @@ module.exports = {
     ;
     EMPLOYMENT_QUESTIONS.COMMON.forEach(function(item) {
       client
-        .assert.visible(util.format('[name="partner_income-%s-amount"]', item))
-        .assert.visible(util.format('[name="partner_income-%s-interval"]', item))
+        .assert.visible(util.format('[name="partner_income-%s-per_interval_value"]', item))
+        .assert.visible(util.format('[name="partner_income-%s-interval_period"]', item))
       ;
     });
     client.back();
@@ -89,8 +89,8 @@ module.exports = {
     client.submitForm('form');
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
-        .assert.visible(util.format('[name="partner_income-%s-amount"]', item))
-        .assert.visible(util.format('[name="partner_income-%s-interval"]', item))
+        .assert.visible(util.format('[name="partner_income-%s-per_interval_value"]', item))
+        .assert.visible(util.format('[name="partner_income-%s-interval_period"]', item))
       ;
     });
   },
@@ -99,28 +99,28 @@ module.exports = {
 
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.EMPLOYED_MANDATORY.forEach(function(item) {
-        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-amount', person, item), 'Please provide an amount');
+        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-per_interval_value', person, item), 'Please provide an amount');
       });
     });
 
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.ALL.forEach(function(item) {
-        client.setValue(util.format('[name=%s_income-%s-amount]', person, item), '250');
-        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-amount', person, item), 'Please select a time period from the drop down');
+        client.setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '250');
+        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-per_interval_value', person, item), 'Please select a time period from the drop down');
         client
-          .clearValue(util.format('[name=%s_income-%s-amount]', person, item))
-          .setValue(util.format('[name=%s_income-%s-interval]', person, item), 'per month')
+          .clearValue(util.format('[name=%s_income-%s-per_interval_value]', person, item))
+          .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
           .click('body')
         ;
-        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-interval', person, item), 'Not a valid amount', 'select');
+        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-interval_period', person, item), 'Not a valid amount', 'select');
       });
     });
 
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.ALL.forEach(function(item) {
         client
-          .setValue(util.format('[name=%s_income-%s-amount]', person, item), '50')
-          .setValue(util.format('[name=%s_income-%s-interval]', person, item), 'per month')
+          .setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '50')
+          .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
         ;
       });
     });
