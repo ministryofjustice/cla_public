@@ -153,7 +153,6 @@
   field,
   subfield=None,
   use_form_group=True,
-  label_class='',
   group_class=''
 ) %}
   {# set subfields as macro caller and make them optional #}
@@ -173,7 +172,7 @@
       {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
     {% endcall %}
   {% else %}
-    {{ field.label(class_=label_class) }}
+    {{ field.label }}
     {% if field.description %}
       <div class="field-help">
         {{field.description|safe}}
@@ -193,7 +192,6 @@
     - suffix <@string> (optional) Adds label with specified string after the field
     - use_form_group <@boolean> (optional) Don't wrap in form group when set to False
     - class_ <@string> (optional) CSS class of input field
-    - label_class <@string> (optional) CSS class of field label (when used as subfield)
 #}
 {% macro text_field(
   field,
@@ -202,7 +200,6 @@
   suffix=None,
   use_form_group=True,
   class_='',
-  label_class='',
   group_class='',
   is_hidden=False,
   default_value=''
@@ -232,7 +229,7 @@
         {% endif %}
       {% endcall %}
     {% else %}
-      {{ field.label(class_=label_class) }}
+      {{ field.label }}
       {% if prefix %}
         <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
       {% endif %}
