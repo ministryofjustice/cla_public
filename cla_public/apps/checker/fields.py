@@ -365,6 +365,10 @@ class AvailabilityCheckerForm(NoCsrfForm):
     def __init__(self, *args, **kwargs):
         kwargs['prefix'] = ''
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
+        if not self.time_today.choices:
+            self.specific_day.data = DAY_TOMORROW
+        if not self.time_tomorrow.choices and self.specific_day.data == DAY_TOMORROW:
+            self.specific_day.data = DAY_SPECIFIC
 
     def scheduled_time(self, today=None):
         date = today or datetime.date.today()
