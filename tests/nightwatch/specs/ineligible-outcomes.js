@@ -22,7 +22,7 @@ module.exports = {
         .setValue('input[name="savings"]', '50000')
         .setValue('input[name="investments"]', '50000')
         .submitForm('form')
-        .assert.urlContains('/help-organisations/' + item.category.label)
+        .assert.urlContains('/help-organisations/' + item.category.label.toLowerCase().replace(/ /g, '-'))
         .assert.containsText('.org-list ul', item.link.text)
         .useXpath()
         //using verify here as the data is iffy at present
