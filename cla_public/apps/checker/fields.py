@@ -173,6 +173,13 @@ class MoneyIntervalForm(NoCsrfForm):
     per_interval_value = MoneyField(validators=[Optional()])
     interval_period = SelectField('', choices=MONEY_INTERVALS)
 
+    def __init__(self, *args, **kwargs):
+        # Enable choices to be passed through
+        choices = kwargs.pop('choices', None)
+        super(MoneyIntervalForm, self).__init__(*args, **kwargs)
+        if choices:
+            self.interval_period.choices = choices
+
 
 def money_interval_to_monthly(data):
     amount = data['per_interval_value']
@@ -206,8 +213,21 @@ class MoneyIntervalField(FormField):
             del kwargs['validators']
         self.validators.append(ValidMoneyInterval())
 
+        # Enable kwarg choices to be passed through to interval field
+        self.choices = kwargs.pop('choices', None)
+
         super(MoneyIntervalField, self).__init__(
             MoneyIntervalForm, *args, **kwargs)
+
+        # If choices passed through then proxy the self.form_class creator
+        # and pass through the choices when the cinstance is created
+        if self.choices:
+            self._form_class = self.form_class
+
+            def form_class_proxy(*args, **kwargs):
+                return self._form_class(choices=self.choices, *args, **kwargs)
+
+            self.form_class = form_class_proxy
 
     def as_monthly(self):
         return money_interval_to_monthly(self.data)

@@ -16,7 +16,7 @@ from wtforms.validators import InputRequired, NumberRange, Optional
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY, \
-    PASSPORTED_BENEFITS
+    PASSPORTED_BENEFITS, money_intervals_except
 from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
@@ -273,7 +273,8 @@ class SavingsForm(ConfigFormMixin, Honeypot, Form):
 class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
     child_benefit = MoneyIntervalField(
         u'Child Benefit',
-        description=u"The total amount you get for all your children")
+        description=u"The total amount you get for all your children",
+        choices=money_intervals_except('', 'per_week', 'per_month'))
     child_tax_credit = MoneyIntervalField(
         u'Child Tax Credit',
         description=u"The total amount you get for all your children")
