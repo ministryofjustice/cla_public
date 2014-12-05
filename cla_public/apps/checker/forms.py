@@ -76,7 +76,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             u"Your partner is your husband, wife, civil partner or someone "
             u"you live with as if you’re married"))
     in_dispute = YesNoField(
-        u'Are you in a dispute with your partner?',
+        u'If Yes, are you in a dispute with your partner?',
         description=(
             u"This means a dispute over money or property following a "
             u"separation"),
