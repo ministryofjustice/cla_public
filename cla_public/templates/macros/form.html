@@ -441,18 +441,22 @@
   {% call form_group(field) %}
     <ul class="form-option-list" role="radiogroup">
       {% for radio in field.specific_day %}
-        <li>
-          <label class="radio-inline" for="{{radio.id}}">
-            {{ radio }} {{ radio.label.text }}
-          </label>
-          {% if radio.id == 'specific_day-0' %}
-            {{ field.time_today(class_='form-control') }}
-          {% elif radio.id == 'specific_day-1' %}
-            {{ field.time_tomorrow(class_='form-control') }}
-          {% else %}
-            {{ field.day(class_='form-control') }} at {{ field.time_in_day(class_='form-control') }}
-          {%  endif %}
-        </li>
+        {% if (radio.id == 'specific_day-0' and field.time_today.choices) or
+        (radio.id == 'specific_day-1' and field.time_tomorrow.choices) or
+        (radio.id == 'specific_day-2' and field.day.choices) %}
+          <li>
+            <label class="radio-inline" for="{{radio.id}}">
+              {{ radio }} {{ radio.label.text }}
+            </label>
+            {% if radio.id == 'specific_day-0' %}
+              {{ field.time_today(class_='form-control') }}
+            {% elif radio.id == 'specific_day-1' %}
+              {{ field.time_tomorrow(class_='form-control') }}
+            {% else %}
+              {{ field.day(class_='form-control') }} at {{ field.time_in_day(class_='form-control') }}
+            {%  endif %}
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
   {% endcall %}
