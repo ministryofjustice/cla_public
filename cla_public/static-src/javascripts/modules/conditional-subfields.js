@@ -46,6 +46,7 @@
           .filter(function() {
             return !$(this).hasClass('input-prefix') && !$(this).hasClass('input-suffix');
           })
+          .first()
           .text(window.CONDITIONAL_LABELS[this]);
       });
     },
