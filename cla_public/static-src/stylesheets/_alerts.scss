@@ -14,7 +14,7 @@
 
   > .icon {
     float: left;
-    margin-right: 20px;
+    margin: 3px 20px 0 0;
   }
 
   > .alert-message {
@@ -22,7 +22,7 @@
 
     > .alert-header,
     > p {
-      margin: 0 0 .5em;
+      margin: .5em 0 0;
     }
 
     .alert-header {
@@ -30,7 +30,7 @@
       font-weight: bold;
     }
 
-    > p:last-child {
+    > p:first-child {
       margin: 0;
     }
   }
