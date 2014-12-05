@@ -16,7 +16,7 @@ from wtforms.validators import InputRequired, NumberRange, Optional
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY, \
-    PASSPORTED_BENEFITS, money_intervals_except
+    PASSPORTED_BENEFITS, money_intervals, money_intervals_except
 from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
@@ -177,6 +177,7 @@ class PropertyForm(NoCsrfForm):
     is_rented = YesNoField(u'Does anyone pay you rent for this property?')
     rent_amount = MoneyIntervalField(
         u'If Yes, how much rent do they pay you?',
+        choices=money_intervals_except('per_4week'),
         validators=[
             IgnoreIf('is_rented', FieldValue(NO)),
             MoneyIntervalAmountRequired()])
@@ -274,10 +275,11 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
     child_benefit = MoneyIntervalField(
         u'Child Benefit',
         description=u"The total amount you get for all your children",
-        choices=money_intervals_except('', 'per_week', 'per_month'))
+        choices=money_intervals('', 'per_week', 'per_4week'))
     child_tax_credit = MoneyIntervalField(
         u'Child Tax Credit',
-        description=u"The total amount you get for all your children")
+        description=u"The total amount you get for all your children",
+        choices=money_intervals_except('per_month'))
     benefits = PartnerMultiCheckboxField(
         u'Do you or your partner get any of these benefits?',
         description=(
@@ -290,6 +292,7 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
             Contribution-based Jobseeker\'s Allowance')
     total_other_benefit = MoneyIntervalField(
         u'If Yes, total amount of benefits not listed above',
+        choices=money_intervals_except('per_month'),
         validators=[
             IgnoreIf('other_benefits', FieldValue(NO)),
             MoneyIntervalAmountRequired()])
@@ -400,7 +403,8 @@ def income_form(*args, **kwargs):
 class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     rent = PartnerMoneyIntervalField(
         u'Rent',
-        description=u"Money you and your partner pay your landlord")
+        description=u"Money you and your partner pay your landlord",
+        choices=money_intervals_except('per_4week'))
     maintenance = PartnerMoneyIntervalField(
         u'Maintenance',
         description=(
@@ -410,12 +414,14 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
         u'Income Contribution Order',
         description=(
             u"Money you and/or your partner pay towards your criminal legal "
-            u"aid"))
+            u"aid"),
+        choices=money_intervals('per_month'))
     childcare = PartnerMoneyIntervalField(
         u'Childcare',
         description=(
             u"Money you and your partner pay for your child to be looked "
-            u"after while you work or study"))
+            u"after while you work or study"),
+        choices=money_intervals_except('per_4week'))
 
     def api_payload(self):
         return {'you': {'deductions': {
