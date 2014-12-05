@@ -229,9 +229,16 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
         properties = [prop.form.api_payload() for prop in self.properties]
         rents = [prop['rent'] for prop in properties]
         total_rent = reduce(sum_money_intervals, rents, money_interval(0))
+        total_mortgage = sum(
+            [p.mortgage_payments.data for p in self.properties if p.mortgage_payments.data is not None]
+        )
         return {
             'property_set': properties,
-            'you': {'income': {'other_income': total_rent}}}
+            'you': {
+                'income': {'other_income': total_rent},
+                'deductions': {'mortgage': total_mortgage}
+            }
+        }
 
 
 class SavingsForm(ConfigFormMixin, Honeypot, Form):
