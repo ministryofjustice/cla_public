@@ -2,6 +2,8 @@
 
 var util = require('util');
 var ABOUT_YOU_QUESTIONS = require('../modules/constants').ABOUT_YOU_QUESTIONS;
+var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
+SAVINGS_QUESTIONS.ALL = SAVINGS_QUESTIONS.MONEY.concat(SAVINGS_QUESTIONS.VALUABLES);
 
 module.exports = {
   // skip start page
@@ -42,6 +44,15 @@ module.exports = {
     } else {
       clickOption(client, fields, val);
     }
+  },
+
+  setAllSavingsFieldsToValue: function(client, val) {
+    SAVINGS_QUESTIONS.ALL.forEach(function(item) {
+      client
+        .clearValue(util.format('input[name="%s"]', item.name))
+        .setValue(util.format('input[name="%s"]', item.name), val)
+      ;
+    });
   },
 
   // Check validation
