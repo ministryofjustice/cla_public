@@ -127,9 +127,7 @@ module.exports = {
         .assert.urlContains('/help-organisations', util.format('Result ineligible when %s field set to £%s', item.name, (SAVINGS_THRESHOLD + 1)))
       ;
     });
-  },
 
-  'end': function(client) {
     client.end();
   }
 };
