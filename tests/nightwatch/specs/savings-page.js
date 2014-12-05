@@ -109,6 +109,27 @@ module.exports = {
       ;
     });
 
+
+
+    SAVINGS_QUESTIONS.ALL.forEach(function(item) {
+      // start from scratch because result pages clear session
+      common.startPage(client);
+      common.selectDebtCategory(client);
+      common.aboutPageSetAllToNo(client);
+      common.setYesNoFields(client, ['have_savings', 'have_valuables'], 1);
+      client.submitForm('form');
+      // set all to 0
+      common.setAllSavingsFieldsToValue(client, 0);
+      // set this item to 8001
+      client
+        .setValue(util.format('input[name="%s"]', item.name), SAVINGS_THRESHOLD + 1)
+        .submitForm('form')
+        .assert.urlContains('/help-organisations', util.format('Result ineligible when %s field set to £%s', item.name, (SAVINGS_THRESHOLD + 1)))
+      ;
+    });
+  },
+
+  'end': function(client) {
     client.end();
   }
 };
