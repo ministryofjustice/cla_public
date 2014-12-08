@@ -26,6 +26,7 @@
     "jshint-stylish": "~0.1.5",
     "lodash": "^2.4.1",
     "main-bower-files": "^2.1.0",
+    "moment": "^2.8.4",
     "nightwatch": "^0.5.32",
     "phantomjs": "^1.9.12",
     "require-dir": "^0.1.0",
