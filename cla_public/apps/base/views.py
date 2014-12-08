@@ -15,6 +15,7 @@ from cla_public.apps.base.decorators import api_proxy
 from cla_public.apps.base.forms import FeedbackForm
 from cla_public.apps.checker.api import get_ordered_organisations_by_category
 import cla_public.apps.base.filters
+import cla_public.apps.base.extensions
 
 
 log = logging.getLogger(__name__)
