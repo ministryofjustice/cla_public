@@ -16,7 +16,7 @@ from wtforms.validators import InputRequired, NumberRange, Optional
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY, \
-    PASSPORTED_BENEFITS, money_intervals, money_intervals_except
+    PASSPORTED_BENEFITS
 from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
@@ -26,7 +26,7 @@ from cla_public.apps.checker.fields import (
     )
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.honeypot import Honeypot
-from cla_public.apps.checker.utils import nass, passported
+from cla_public.apps.checker.utils import nass, passported, money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
     FieldValue, MoneyIntervalAmountRequired
 

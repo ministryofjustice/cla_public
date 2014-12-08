@@ -91,15 +91,6 @@ MONEY_INTERVALS = [
     ('per_year', 'per year')
 ]
 
-
-def money_intervals_except(*fields):
-    return [(key, display) for key, display in MONEY_INTERVALS if key not in fields]
-
-
-def money_intervals(*fields):
-    return [(key, display) for key, display in MONEY_INTERVALS if key in fields]
-
-
 NON_INCOME_BENEFITS = [
     ('attendance', u'Attendance Allowance'),
     ('care-community', u'Care in the community Direct Payment'),
