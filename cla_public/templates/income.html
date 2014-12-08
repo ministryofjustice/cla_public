@@ -7,10 +7,15 @@
 
 {% block page_heading %}
   {% if session.has_partner %}
-    You and your partner’s income and tax
+    You and your partner’s
   {% else %}
-    Your income and tax
+    Your
   {% endif %}
+  {% if session.is_employed or session.is_self_employed %}
+    income and tax
+  {% else %}
+    money coming in
+  {%  endif %}
 {% endblock %}
 
 {% block inner_content %}
