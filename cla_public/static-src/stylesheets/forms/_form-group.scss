@@ -3,6 +3,10 @@
   padding: 20px 0;
   margin: 0;
 
+  @include media(mobile) {
+    margin: 0 -15px;
+  }
+
   &:first-of-type {
     border: 0;
   }
@@ -27,6 +31,8 @@
     padding: 5px 0;
     border-left: 4px solid $grey-2;
     border-top: 0;
+    position: relative;
+    zoom: 1;
 
     .js-enabled &.s-hidden {
       height: 0;

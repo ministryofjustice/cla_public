@@ -17,11 +17,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  background: url(../images/icons/icon-dropdown.png) 1px 6px no-repeat;
+  background: url(../images/icons/icon-dropdown-2x.png) 1px 6px/8px no-repeat;
 
-  &:before {
-    content: '▸';
-    float: left;
-    font-size: 16px;
-    margin-left: -13px;
+  .field-help.s-expanded & {
+    background-position: 0 -13px;
   }
 }

@@ -1,12 +1,8 @@
 .field-error {
   padding-left: 20px;
   color: $red;
-
-  &:before {
-    content: '✘';
-    float: left;
-    margin-left: -20px;
-  }
+  background: url(../images/icons/icon-small-cross.png) 0 .4em no-repeat;
+  background: url(../images/icons/icon-small-cross-2x.png) 0 .4em/10px no-repeat;
 
   p {
     margin: 10px 0 0;
