@@ -21,7 +21,7 @@
 
     {{ Form.money_interval_field(form.rent) }}
     {{ Form.money_interval_field(form.maintenance) }}
-    {{ Form.money_interval_field(form.income_contribution) }}
+    {{ Form.text_field(form.income_contribution, prefix="£") }}
     {{ Form.money_interval_field(form.childcare, not session.has_children) }}
 
     {{ Element.call_me_back_link() }}
