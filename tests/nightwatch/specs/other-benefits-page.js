@@ -81,7 +81,8 @@ module.exports = {
       common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Please select a time period from the drop down');
       client
         .clearValue(util.format('input[name="%s-per_interval_value"]', item))
-        .setValue(util.format('select[name="%s-interval_period"]', item), 'per month')
+        .click(util.format('select[name="%s-interval_period"]', item))
+        .click(util.format('select[name="%s-interval_period"] option:last-child', item))
       ;
       common.submitAndCheckForFieldError(client, item + '-interval_period', 'Not a valid amount', 'select');
       client
@@ -96,7 +97,8 @@ module.exports = {
     common.submitAndCheckForFieldError(client, 'other_benefits', 'Please select a time period from the drop down');
     client
       .clearValue('input[name="total_other_benefit-per_interval_value"]')
-      .setValue('select[name="total_other_benefit-interval_period"]', 'per month')
+      .click('select[name="total_other_benefit-interval_period"]')
+      .click('select[name="total_other_benefit-interval_period"] option:last-child')
     ;
     common.submitAndCheckForFieldError(client, 'other_benefits', 'Not a valid amount');
     client

@@ -48,10 +48,14 @@ module.exports = {
       common.submitAndCheckForFieldError(client, item, 'Please choose Yes or No');
     });
     common.submitAndCheckForFieldError(client, 'properties-0-property_value', 'Please enter a valid amount');
+    common.submitAndCheckForFieldError(client, 'properties-0-mortgage_remaining', 'Please select 0 if you have no mortgage');
+    common.submitAndCheckForFieldError(client, 'properties-0-mortgage_payments', 'Number must be at least 0.');
 
     common.setYesNoFields(client, PROPERTY_QUESTIONS, 1);
     client
       .setValue('input[name="properties-0-property_value"]', '100000')
+      .setValue('input[name="properties-0-mortgage_remaining"]', '90000')
+      .setValue('input[name="properties-0-mortgage_payments"]', '1000')
       .setValue('#properties-0-rent_amount-per_interval_value', '')
       .setValue('#properties-0-rent_amount-interval_period', 'per month')
     ;

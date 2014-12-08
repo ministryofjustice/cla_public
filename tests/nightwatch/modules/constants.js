@@ -75,7 +75,6 @@ exports.CHILD_BENEFIT_QUESTIONS = [
 exports.OUTGOINGS_QUESTIONS = [
   'rent',
   'maintenance',
-  'income_contribution',
   'childcare'
 ];
 
