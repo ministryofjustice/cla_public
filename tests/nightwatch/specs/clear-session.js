@@ -21,7 +21,7 @@ module.exports = {
       .init()
       .maximizeWindow()
       .waitForElementVisible('body', 1000)
-      .click('a.button-get-started')
+      .click('a#start')
     ;
   },
 

@@ -20,7 +20,7 @@ module.exports = {
       .waitForElementVisible('body', 1000)
     ;
     testSidebar(client, 'Resources');
-    client.click('a.button-get-started');
+    client.click('a#start');
   },
 
   'Categories of law (Your problem)': common.selectDebtCategory,
