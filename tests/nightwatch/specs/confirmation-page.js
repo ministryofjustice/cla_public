@@ -2,6 +2,7 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
+var moment = require('moment');
 
 var eligibleJourney = function(client) {
   common.startPage(client);
@@ -37,18 +38,38 @@ var eligibleJourney = function(client) {
   });
 };
 
+var checkCallbackTime = function(client, day, time) {
+  var then = moment();
+  then.date(day);
+  then.hours(time.substr(0, 2));
+  then.minutes(time.substr(2, 2));
+  var formattedCallbackTime = then.format('dddd, d MMMM YYYY [at] hh:mm');
+
+  client
+    .pause(2000)
+    .submitForm('form')
+    .pause(10000)
+    .waitForElementVisible('header.confirmation', 2000)
+    .assert.containsText('.main-content', formattedCallbackTime)
+  ;
+
+};
+
 module.exports = {
   'Eligible journey': eligibleJourney,
 
   'Check callback today (next available)': function(client) {
     var now = new Date();
     if(now.getDay() !== 0) {
-      // TODO: latest callback on a saturday is 1215
       if(now.getHours() < 19) {
-        client.getValue('select[name="time_today"]', function(result) {
-          // TODO: write checkCallbackTime function :)
-          checkCallbackTime(client, now.getDay(), result.value);
-        });
+        if(now.getDay() === 6 && (now.getHours() > 11 || (now.getHours() === 11 && now.getMinutes() > 14))) {
+          console.log('Today not available after 11.15am on a Saturday, test skipped');
+        } else {
+          client.getValue('select[name="time_today"]', function(result) {
+            // TODO: write checkCallbackTime function :)
+            checkCallbackTime(client, now.getDay(), result.value);
+          });
+        }
       } else {
         console.log('Today not available after 7pm, test skipped');
       }
