@@ -1,7 +1,7 @@
 import datetime
 
 from wtforms.compat import string_types
-from wtforms.validators import StopValidation, ValidationError
+from wtforms.validators import StopValidation, ValidationError, Optional
 
 from cla_public.apps.checker.constants import DAY_TODAY, DAY_TOMORROW, \
     DAY_SPECIFIC
@@ -117,3 +117,7 @@ class AvailableSlot(object):
         if not available(time):
             raise ValidationError(
                 u"Can't schedule a callback at the requested time")
+
+
+class NotRequired(Optional):
+    field_flags = ()

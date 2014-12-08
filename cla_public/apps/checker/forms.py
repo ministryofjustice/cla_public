@@ -28,7 +28,7 @@ from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired
+    FieldValue, MoneyIntervalAmountRequired, NotRequired
 
 
 log = logging.getLogger(__name__)
@@ -410,12 +410,12 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
         description=(
             u"Money you and/or your partner pay to an ex-partner for their "
             u"living costs"))
-    income_contribution = PartnerMoneyIntervalField(
-        u'Income Contribution Order',
+    income_contribution = PartnerMoneyField(
+        u'Monthly Income Contribution Order',
         description=(
-            u"Money you and/or your partner pay towards your criminal legal "
+            u"Money you and/or your partner pay per month towards your criminal legal "
             u"aid"),
-        choices=money_intervals('per_month'))
+        validators=[NotRequired()])
     childcare = PartnerMoneyIntervalField(
         u'Childcare',
         description=(
@@ -428,7 +428,7 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
             'rent': self.rent.data,
             'maintenance': self.maintenance.data,
             'criminal_legalaid_contributions':
-                self.income_contribution.data['per_interval_value'],
+                self.income_contribution.data,
             'childcare': self.childcare.data
         }}}
 
