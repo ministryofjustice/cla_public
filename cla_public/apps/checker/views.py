@@ -70,13 +70,14 @@ def benefits(user):
 
     next_step = 'income'
 
-    if user.children_or_tax_credits:
-        next_step = 'benefits_tax_credits'
-
     kwargs = {}
     if user.is_on_passported_benefits:
         kwargs['outcome'] = 'eligible'
         next_step = 'result'
+
+    if user.children_or_tax_credits:
+        kwargs = {}
+        next_step = 'benefits_tax_credits'
 
     if user.has_savings_or_valuables:
         kwargs = {}
@@ -96,13 +97,14 @@ def property(user):
 
     next_step = 'income'
 
-    if session.children_or_tax_credits:
-        next_step = 'benefits_tax_credits'
-
     kwargs = {}
     if user.is_on_passported_benefits:
         kwargs['outcome'] = 'eligible'
         next_step = 'result'
+
+    if session.children_or_tax_credits:
+        kwargs = {}
+        next_step = 'benefits_tax_credits'
 
     if session.has_savings_or_valuables:
         kwargs = {}
@@ -117,13 +119,14 @@ def property(user):
 def savings(user):
     next_step = 'income'
 
-    if user.children_or_tax_credits:
-        next_step = 'benefits_tax_credits'
-
     kwargs = {}
     if user.is_on_passported_benefits:
         kwargs['outcome'] = 'eligible'
         next_step = 'result'
+
+    if user.children_or_tax_credits:
+        kwargs = {}
+        next_step = 'benefits_tax_credits'
 
     return proceed(next_step, **kwargs)
 
@@ -132,7 +135,14 @@ def savings(user):
 @redirect_if_no_session()
 @form_view(TaxCreditsForm, 'benefits-tax-credits.html')
 def benefits_tax_credits(user):
-    return proceed('income')
+    next_step = 'income'
+
+    kwargs = {}
+    if user.is_on_passported_benefits:
+        kwargs['outcome'] = 'eligible'
+        next_step = 'result'
+
+    return proceed(next_step, **kwargs)
 
 
 @checker.route('/income', methods=['GET', 'POST'])
