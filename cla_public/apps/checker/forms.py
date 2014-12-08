@@ -118,10 +118,20 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         description=(
             u"This means working as an employee - you may be both employed "
             u"and self-employed"))
+    partner_is_employed = YesNoField(
+        u'Is your partner employed?',
+        description=(
+            u"This means working as an employee - your partner may be both employed "
+            u"and self-employed"))
     is_self_employed = YesNoField(
         u'Are you self-employed?',
         description=(
             u"This means working for yourself - you may be both employed "
+            u"and self-employed"))
+    partner_is_self_employed = YesNoField(
+        u'Is your partner self-employed?',
+        description=(
+            u"This means working for yourself - your partner may be both employed "
             u"and self-employed"))
     aged_60_or_over = YesNoField(u'Are you aged 60 or over?')
 
