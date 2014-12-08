@@ -398,6 +398,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
             time = self.time_today.data
 
         if self.specific_day.data == DAY_TOMORROW:
+            date += datetime.timedelta(days=1)
             time = self.time_tomorrow.data
 
         if self.specific_day.data == DAY_SPECIFIC:
