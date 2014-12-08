@@ -5,7 +5,7 @@
 {% block container_class %}m-has-sidebar{% endblock %}
 
 {% block page_heading %}
-  Check if you can get legal aid
+  Can I get legal aid?
 {% endblock %}
 
 {% block page_subheading %}
@@ -14,21 +14,10 @@
 
 {% block inner_content %}
   <p>To get legal aid, you must qualify financially and have a relevant problem.</p>
-  <p><a href="#">Check if you can get legal aid for your specific problem</a></p>
 
-  <h3>Check if you can get help from Civil Legal Advice</h3>
-  <p>If you’re eligible for legal aid, you may be able to get free, confidential legal advice from Civil Legal Advice (CLA). CLA can only help with problems related to:</p>
-  <ul>
-    <li>debt, if your home is at risk</li>
-    <li>housing</li>
-    <li>education</li>
-    <li>family</li>
-    <li>domestic violence</li>
-    <li>discrimination</li>
-    <li>benefit appeals</li>
-  </ul>
-  <p><a href="{{ url_for('checker.problem') }}" id="start">Check if you qualify financially for help from Civil Legal Advice</a></p>
-  <p>If you qualify financially, you can ask to speak to a Civil Legal Advice operator about your problem at the end of this service.</p>
+  <p>If you qualify, you may be able to speak to a Civil Legal Advice operator about your problem at the end of this service. Civil Legal Advice is a national advice line for England and Wales, funded by legal aid.</p>
+
+  <p><a class="button button-get-started" href="{{ url_for('checker.problem') }}" id="start">Start</a></p>
 
   <h3>Before you start</h3>
   <p>To use this service, you’ll need:</p>
@@ -38,9 +27,13 @@
     <li>details of any benefits you got last month</li>
   </ul>
 
+  <p>You’ll only get guidance on whether or not you can get legal aid - you won’t get a final decision.</p>
+
   <p>Legal aid is different in <a href="http://www.slab.org.uk/public/civil/eligibility/" rel="external">Scotland</a> and <a href="http://www.dojni.gov.uk/index/public-consultations/current-consultations/consultation-on-scope-of-civil-legal-aid.htm" rel="external">Northern Ireland</a>.</p>
 
-  <p>If you’ve been charged with a crime, this service doesn’t apply to you. Ask your solicitor about <a href="#">criminal legal aid</a>.</p>
+  <p>For more detail on whether your specific problem is covered by legal aid, use the <a href="#">GOV.UK legal aid checker</a></p>
 
   <p>This service is only for adults. If you’re under 18, <a href="#">talk to a solicitor about legal aid</a>.</p>
+
+  <p>If you’ve been charged with a crime, this service doesn’t apply to you. Ask your solicitor about <a href="#">criminal legal aid</a>.</p>
 {% endblock %}
