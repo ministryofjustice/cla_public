@@ -352,7 +352,7 @@ class IncomeFieldForm(NoCsrfForm):
         tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
 
         earnings = self.earnings.data
-        self_employed_drawings = None
+        self_employed_drawings = 0
         # Switch all earnings to self employed drawings if only self employed
         if session.is_self_employed and not session.is_employed:
             earnings, self_employed_drawings = self_employed_drawings, earnings
