@@ -29,8 +29,7 @@
   display: block;
   padding: 15px 15px 15px 45px;
 
-  input[type="checkbox"],
-  input[type="radio"] {
+  input {
     position: absolute;
     top: 15px;
     left: 18px;
@@ -46,7 +45,7 @@
   }
 
   &.s-selected {
-    .alert-info {
+    .alert {
       display: block;
     }
   }

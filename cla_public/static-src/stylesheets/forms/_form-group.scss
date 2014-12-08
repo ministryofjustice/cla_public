@@ -1,6 +1,6 @@
 .form-group {
   border-top: 1px solid $grey-3;
-  padding: 20px 0;
+  padding: 10px 0;
   margin: 0;
 
   @include media(mobile) {
@@ -18,11 +18,7 @@
 
   .form-row {
     padding: 0 15px;
-    margin: 0;
-
-    & + .form-row {
-      margin-top: 10px;
-    }
+    margin: 10px 0;
   }
 
   // Subfields
