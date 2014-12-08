@@ -14,15 +14,13 @@ var eligibleJourney = function(client) {
   ;
   common.aboutPageSetAllToNo(client);
   common.setYesNoFields(client, 'on_benefits', 1);
-  client.submitForm('form');
   client
+    .submitForm('form')
     .assert.urlContains('/benefits')
     .assert.containsText('h1', 'Your benefits')
     .assert.containsText('body', 'Are you on any of these benefits?')
     .click('input[value="income_support"]')
     .submitForm('form')
-  ;
-  client
     .assert.urlContains('/result/eligible')
     .assert.containsText('h1', 'You might qualify for legal aid')
     .assert.containsText('h2', 'Request a callback')
@@ -76,8 +74,9 @@ module.exports = {
 
     var now = moment();
     if(now.day() !== 6) {
-      client.click('input[name="specific_day"][value="tomorrow"]');
-      client.getValue('select[name="time_tomorrow"]', function(result) {
+      client
+        .click('input[name="specific_day"][value="tomorrow"]')
+        .getValue('select[name="time_tomorrow"]', function(result) {
         checkCallbackTime(client, now.add(1, 'days').date(), result.value);
       });
     } else {
