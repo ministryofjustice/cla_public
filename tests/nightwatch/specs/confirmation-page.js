@@ -42,19 +42,17 @@ var checkCallbackTime = function(client, date, time) {
   var formattedCallbackTime = then.format('dddd, D MMMM YYYY [at] HH:mm');
 
   client
-    .pause(5000)
     .submitForm('form')
-    .pause(5000)
     .waitForElementVisible('header.confirmation', 2000)
-    .assert.containsText('.main-content', formattedCallbackTime)
+    .assert.containsText('h1', 'We will call you back')
+    .verify.containsText('.main-content', formattedCallbackTime)
   ;
-
 };
 
 module.exports = {
-  'Eligible journey': eligibleJourney,
-
   'Check callback today (next available)': function(client) {
+    eligibleJourney(client);
+
     var now = moment();
     if(now.day() !== 0) {
       if(now.hour() < 19) {
@@ -62,7 +60,6 @@ module.exports = {
           console.log('Today not available after 11.15am on a Saturday, test skipped');
         } else {
           client.getValue('select[name="time_today"]', function(result) {
-            console.log(result.value);
             checkCallbackTime(client, now.date(), result.value);
           });
         }
@@ -74,19 +71,40 @@ module.exports = {
     }
   },
 
-  'Eligible journey again': eligibleJourney,
-
   'Check callback tomorrow': function(client) {
-    client.click('input[name="specific_day"][value="tomorrow"]');
+    eligibleJourney(client);
+
     var now = moment();
     if(now.day() !== 6) {
+      client.click('input[name="specific_day"][value="tomorrow"]');
       client.getValue('select[name="time_tomorrow"]', function(result) {
-        console.log(result.value);
         checkCallbackTime(client, now.add(1, 'days').date(), result.value);
       });
     } else {
       console.log('Tomorrow not available on Saturday, test skipped');
     }
+  },
+
+  'Check callback specific day': function(client) {
+    eligibleJourney(client);
+
+    client
+      .click('input[name="specific_day"][value="specific_day"]')
+      .click('select#id_day')
+      .click('select#id_day option:last-child')
+      .click('select#id_time_in_day')
+      .click('select#id_time_in_day option:last-child')
+      .click('body')
+      .getValue('select#id_day', function(result) {
+        var then = moment();
+        then.year(result.value.substr(0, 4));
+        then.month(result.value.substr(4, 2));
+        then.date(result.value.substr(6, 2));
+        client.getValue('select#id_time_in_day', function(result) {
+          checkCallbackTime(client, then.date(), result.value);
+        });
+      })
+    ;
   },
 
   'end': function(client) {
