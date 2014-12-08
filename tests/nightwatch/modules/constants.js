@@ -1,5 +1,7 @@
 'use strict';
 
+exports.SAVINGS_THRESHOLD = 8000;
+
 exports.ABOUT_YOU_QUESTIONS = [
   'have_partner',
   'in_dispute',
