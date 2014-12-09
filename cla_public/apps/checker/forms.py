@@ -112,7 +112,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             u"Items worth over £500 each with some exceptions..."))
     own_property = YesNoField(
         u'Do you own any property?',
-        description=u"For example, a house, flat or static caravan")
+        description=u"For example, a house, static caravan or flat")
     is_employed = YesNoField(
         u'Are you employed?',
         description=(
