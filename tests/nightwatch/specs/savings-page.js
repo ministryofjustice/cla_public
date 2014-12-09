@@ -34,6 +34,7 @@ module.exports = {
       .back();
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, 'in_dispute', 0);
+    common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
     client
       .submitForm('form')
       .assert.urlContains('/savings')
