@@ -3,15 +3,15 @@
 {% block page_title %}{{ app_title }}{% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/main.css') }}">
+  <link rel="stylesheet" href="{{ asset('stylesheets/main.css') }}">
   <!--[if IE 6]>
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/ie/ie6.css') }}">
+    <link rel="stylesheet" href="{{ asset('stylesheets/ie/ie6.css') }}">
   <![endif]-->
   <!--[if IE 7]>
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/ie/ie7.css') }}">
+    <link rel="stylesheet" href="{{ asset('stylesheets/ie/ie7.css') }}">
   <![endif]-->
   <!--[if IE 8]>
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/ie/ie8.css') }}">
+    <link rel="stylesheet" href="{{ asset('stylesheets/ie/ie8.css') }}">
   <![endif]-->
 {% endblock %}
 
@@ -43,10 +43,5 @@
 {% endblock %}
 
 {% block javascripts %}
-  {% if config.DEBUG %}
-    <script src="{{ url_for('static', filename='javascripts/cla.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
-  {% else %}
-    <script src="{{ url_for('static', filename='javascripts/cla.min.js') }}"></script>
-  {% endif %}
+  <script src="{{ asset(filename='javascripts/cla.js') }}"></script>
 {% endblock %}
