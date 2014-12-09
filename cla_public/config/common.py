@@ -89,6 +89,8 @@ SENTRY_SITE_NAME = os.environ.get('RAVEN_CONFIG_SITE', '')
 ADDRESSFINDER_API_HOST = os.environ.get('ADDRESSFINDER_API_HOST')
 ADDRESSFINDER_API_TOKEN = os.environ.get('ADDRESSFINDER_API_TOKEN')
 
+GA_ID = os.environ.get('GA_ID')
+
 CACHE_CONFIG = {
     'CACHE_TYPE': 'simple'
 }
