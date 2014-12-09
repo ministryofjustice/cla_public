@@ -15,7 +15,11 @@
     {{ Form.handle_errors(form) }}
 
     {% call Form.yesno_field(form.have_partner, subfield=form.in_dispute) %}
-      {{ Form.yesno_field(form.in_dispute, group_class='form-subfield s-hidden') }}
+      {{ Form.yesno_field(
+                form.in_dispute,
+                group_class='form-subfield s-hidden',
+                subfield=[form.partner_is_employed, form.partner_is_self_employed],
+                show_value='0') }}
     {% endcall %}
 
     {{ Form.yesno_field(form.on_benefits) }}
@@ -29,9 +33,9 @@
     {{ Form.yesno_field(form.have_valuables) }}
     {{ Form.yesno_field(form.own_property) }}
     {{ Form.yesno_field(form.is_employed) }}
-    {{ Form.yesno_field(form.partner_is_employed) }}
+    {{ Form.yesno_field(form.partner_is_employed, group_class='form-subfield s-hidden') }}
     {{ Form.yesno_field(form.is_self_employed) }}
-    {{ Form.yesno_field(form.partner_is_self_employed) }}
+    {{ Form.yesno_field(form.partner_is_self_employed, group_class='form-subfield s-hidden') }}
     {{ Form.yesno_field(form.aged_60_or_over) }}
 
     {{ Element.call_me_back_link() }}

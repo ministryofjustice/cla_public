@@ -115,7 +115,6 @@
   </label>
 {% endmacro %}
 
-
 {#
   Yes/No elements
 
@@ -125,13 +124,21 @@
                       (creates relationship via JS for conditional toggling)
     - subfield_caller <@object> (optional) Subfield
 #}
-{% macro yesno_elements(field, subfield=None, subfield_caller=None) %}
+{% macro yesno_elements(field, subfield=None, subfield_caller=None, show_value='1') %}
   {%- for option in field -%}
     <label class="radio-inline" for="{{option.id}}">
       {% if subfield %}
+        {% if subfield.id %}
+          {% set conditional_controls=[subfield.id] %}
+        {% else %}
+          {% set conditional_controls=[] %}
+          {% for s in subfield %}
+            {% do conditional_controls.append(s.id) %}
+          {% endfor %}
+        {% endif %}
         {{- option(**{
-            'data-conditional-controls': subfield.id,
-            'data-conditional-show-value': '1'
+            'data-conditional-controls': '["%s"]' % '","'.join(conditional_controls),
+            'data-conditional-show-value': show_value
           })
         }}
       {% else %}
@@ -160,7 +167,8 @@
   field,
   subfield=None,
   use_form_group=True,
-  group_class=''
+  group_class='',
+  show_value='1'
 ) %}
   {# set subfields as macro caller and make them optional #}
   {% if caller %}
@@ -175,7 +183,7 @@
       subfield,
       class_=group_class
     ) %}
-      {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
+      {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller, show_value=show_value)  }}
     {% endcall %}
   {% else %}
     {{ field.label }}
@@ -184,7 +192,7 @@
         {{field.description|safe}}
       </div>
     {% endif %}
-    {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
+    {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller, show_value=show_value)  }}
   {% endif %}
 {% endmacro %}
 
