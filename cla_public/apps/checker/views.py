@@ -68,21 +68,26 @@ def about(user):
 @form_view(YourBenefitsForm, 'benefits.html')
 def benefits(user):
 
-    if user.is_on_passported_benefits:
-        return outcome('eligible')
-
     next_step = 'income'
 
+    kwargs = {}
+    if user.is_on_passported_benefits:
+        kwargs['outcome'] = 'eligible'
+        next_step = 'result'
+
     if user.children_or_tax_credits:
+        kwargs = {}
         next_step = 'benefits_tax_credits'
 
     if user.has_savings_or_valuables:
+        kwargs = {}
         next_step = 'savings'
 
     if user.owns_property:
+        kwargs = {}
         next_step = 'property'
 
-    return proceed(next_step)
+    return proceed(next_step, **kwargs)
 
 
 @checker.route('/property', methods=['GET', 'POST'])
@@ -92,13 +97,20 @@ def property(user):
 
     next_step = 'income'
 
+    kwargs = {}
+    if user.is_on_passported_benefits:
+        kwargs['outcome'] = 'eligible'
+        next_step = 'result'
+
     if session.children_or_tax_credits:
+        kwargs = {}
         next_step = 'benefits_tax_credits'
 
     if session.has_savings_or_valuables:
+        kwargs = {}
         next_step = 'savings'
 
-    return proceed(next_step)
+    return proceed(next_step, **kwargs)
 
 
 @checker.route('/savings', methods=['GET', 'POST'])
@@ -107,17 +119,30 @@ def property(user):
 def savings(user):
     next_step = 'income'
 
+    kwargs = {}
+    if user.is_on_passported_benefits:
+        kwargs['outcome'] = 'eligible'
+        next_step = 'result'
+
     if user.children_or_tax_credits:
+        kwargs = {}
         next_step = 'benefits_tax_credits'
 
-    return proceed(next_step)
+    return proceed(next_step, **kwargs)
 
 
 @checker.route('/benefits-tax-credits', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(TaxCreditsForm, 'benefits-tax-credits.html')
 def benefits_tax_credits(user):
-    return proceed('income')
+    next_step = 'income'
+
+    kwargs = {}
+    if user.is_on_passported_benefits:
+        kwargs['outcome'] = 'eligible'
+        next_step = 'result'
+
+    return proceed(next_step, **kwargs)
 
 
 @checker.route('/income', methods=['GET', 'POST'])
