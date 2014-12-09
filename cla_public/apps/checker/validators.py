@@ -40,10 +40,16 @@ class FieldValue(object):
         return field.data == self.value
 
 
+class FieldValueOrNone(FieldValue):
+
+    def __call__(self, field, **kwargs):
+        return field.data == self.value or not field.raw_data
+
+
 class FieldValueNot(FieldValue):
 
     def __call__(self, field, **kwargs):
-        return field.data != self.value
+        return field.data in self.value
 
 
 class AtLeastOne(object):

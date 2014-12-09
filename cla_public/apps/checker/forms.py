@@ -28,7 +28,7 @@ from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired, NotRequired
+    FieldValue, MoneyIntervalAmountRequired, NotRequired, FieldValueOrNone
 
 
 log = logging.getLogger(__name__)
@@ -122,7 +122,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         u'Is your partner employed?',
         description=(
             u"This means working as an employee - your partner may be both employed "
-            u"and self-employed"))
+            u"and self-employed"),
+        validators=[IgnoreIf('in_dispute', FieldValueOrNone(YES))])
     is_self_employed = YesNoField(
         u'Are you self-employed?',
         description=(
@@ -132,7 +133,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         u'Is your partner self-employed?',
         description=(
             u"This means working for yourself - your partner may be both employed "
-            u"and self-employed"))
+            u"and self-employed"),
+        validators=[IgnoreIf('in_dispute', FieldValueOrNone(YES))])
     aged_60_or_over = YesNoField(u'Are you aged 60 or over?')
 
     def api_payload(self):
