@@ -97,6 +97,14 @@ class CheckerSession(SecureCookieSession):
     def is_self_employed(self):
         return self.get('AboutYouForm_is_self_employed', NO) == YES
 
+    @property
+    def partner_is_employed(self):
+        return self.has_partner and self.get('AboutYouForm_partner_is_employed', NO) == YES
+
+    @property
+    def partner_is_self_employed(self):
+        return self.has_partner and self.get('AboutYouForm_partner_is_self_employed', NO) == YES
+
     def add_note(self, note):
         notes = self.get('notes', [])
         notes.append(note)
