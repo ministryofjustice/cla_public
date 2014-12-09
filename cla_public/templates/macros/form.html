@@ -29,7 +29,7 @@
     )
   %}
   {% set errors = field.errors or subfield.errors %}
-  {% set subfield_id=field.id if 'subfield' in class_ else '' %}
+  {% set subfield_id=field.id if 'subfield' in class_ or 'conditional' in class_ else '' %}
   <dl
     class="form-group {{ class_ }}{% if errors and not subfield_id %} m-error{% endif %}"
     {% if subfield_id %}data-subfield-id="{{subfield_id}}"{% endif %}>
