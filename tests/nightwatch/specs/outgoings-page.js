@@ -58,7 +58,7 @@ module.exports = {
     client
       .assert.containsText('body', 'Money you pay your landlord')
       .assert.containsText('body', 'Money you pay to an ex-partner for their living costs')
-      .assert.containsText('body', 'Money you pay towards your criminal legal aid')
+      .assert.containsText('body', 'Money you pay per month towards your criminal legal aid')
       .assert.containsText('body', 'Money you pay for your child to be looked after while you work or study')
       .back()
       .back()
@@ -74,7 +74,7 @@ module.exports = {
       .assert.containsText('h1', 'You and your partner’s outgoings')
       .assert.containsText('body', 'Money you and your partner pay your landlord')
       .assert.containsText('body', 'Money you and/or your partner pay to an ex-partner for their living costs')
-      .assert.containsText('body', 'Money you and/or your partner pay towards your criminal legal aid')
+      .assert.containsText('body', 'Money you and/or your partner pay per month towards your criminal legal aid')
       .assert.containsText('body', 'Money you and your partner pay for your child to be looked after while you work or study')
     ;
   },
