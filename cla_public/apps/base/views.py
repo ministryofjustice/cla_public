@@ -32,6 +32,10 @@ def index():
     session.clear()
     return render_template('index.html')
 
+@base.route('/b')
+def indexb():
+    session.clear()
+    return render_template('index-b.html')
 
 @base.route('/cookies')
 def cookies():
