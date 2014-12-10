@@ -181,7 +181,7 @@ def result(outcome):
         return redirect(url_for('.result', outcome='confirmation'))
 
     response = render_template(
-        'result/%s.html' % outcome, form=form)
+        'result/%s.html' % outcome, form=form, category_name=session.category_name)
 
     if outcome in ['confirmation', 'face-to-face']:
         session.clear()
