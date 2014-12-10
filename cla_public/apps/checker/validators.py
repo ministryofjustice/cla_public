@@ -49,7 +49,7 @@ class FieldValueOrNone(FieldValue):
 class FieldValueNot(FieldValue):
 
     def __call__(self, field, **kwargs):
-        return field.data in self.value
+        return field.data != self.value
 
 
 class AtLeastOne(object):
