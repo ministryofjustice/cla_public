@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "Base app views"
 
+import json
 import os
 import logging
 import datetime
@@ -42,9 +43,11 @@ def indexb():
 def cookies():
     return render_template('cookies.html')
 
+
 @base.route('/privacy')
 def privacy():
     return render_template('privacy.html')
+
 
 @base.route('/feedback', methods=['GET', 'POST'])
 def feedback():
@@ -53,9 +56,21 @@ def feedback():
         return redirect(url_for('.index'))
     return render_template('feedback.html', form=form)
 
+
 @base.route('/addressfinder/<path:path>', methods=['GET'])
 @api_proxy(return_value=[], json_response=True)
 def addressfinder_proxy_view(path):
+    if current_app.config.get('TESTING', False):
+        if request.args.get('postcode') == 'e181ja':
+            return json.dumps([
+                {'formatted_address': '3 Crescent Road\nLondon\nE18 1JA'},
+                {'formatted_address': 'Foo bar quux'}])
+        if request.args.get('postcode') == 'sw1h9aj':
+            return json.dumps([
+                {'formatted_address':
+                    'Ministry of Justice\n102 Petty France\nLondon\nSW1H 9AJ'}])
+        return json.dumps([])
+
     response = requests.get(
         '{host}/{path}?{params}'.format(
             host=current_app.config['ADDRESSFINDER_API_HOST'],
@@ -67,12 +82,12 @@ def addressfinder_proxy_view(path):
         },
         timeout=current_app.config.get('API_CLIENT_TIMEOUT', None)
     )
-    return current_app.response_class(response.text,
-        mimetype='application/json')
+    return response.text
 
 @base.route('/session-expired')
 def session_expired():
     return render_template('session-expired.html')
+
 
 @base.route('/session_keep_alive')
 def session_keep_alive():
@@ -82,16 +97,18 @@ def session_keep_alive():
         'session': 'OK'
     })
 
+
 @base.route('/session_end')
 def session_end():
     if session:
         if not session.permanent:
             session.permanent = True
-        session.expires_override = datetime.datetime.utcnow() \
-                                   + datetime.timedelta(seconds=20)
+        session.expires_override = \
+            datetime.datetime.utcnow() + datetime.timedelta(seconds=20)
     return jsonify({
         'session': 'CLEAR'
     })
+
 
 @base.route('/500')
 def internal_error():

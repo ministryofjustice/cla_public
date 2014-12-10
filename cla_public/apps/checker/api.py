@@ -13,7 +13,14 @@ class DummyResource(object):
         return self
 
     def post(self, payload):
-        return {'reference': 'DUMMY-REF'}
+        savings = session.get('SavingsForm_savings', 0)
+        investments = session.get('SavingsForm_investments', 0)
+        is_eligible = 'unknown'
+        if savings >= 500000 and investments >= 500000:
+            is_eligible = 'no'
+        return {
+            'reference': 'DUMMY-REF',
+            'is_eligible': is_eligible}
 
     def patch(self, payload):
         return self.post(payload)
