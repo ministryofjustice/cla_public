@@ -37,12 +37,13 @@
       </p>
     {% endcall %}
 
+    {{ Form.availability_checker_field(form.time) }}
+
     {{ Form.postcode_field(form.post_code, attributes={'data-address-el': '#address'}) }}
 
     {{ Form.textarea_field(form.address, class_='m-large') }}
     {{ Form.textarea_field(form.extra_notes, class_='m-full', rows=8) }}
     {{ Form.adaptations_field(form.adaptations) }}
-    {{ Form.availability_checker_field(form.time) }}
 
     {% call Element.alert(title='What happens next') %}
       <p>
