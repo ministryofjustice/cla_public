@@ -1,16 +1,17 @@
 fieldset {
   margin: 20px 0;
+  border: 0;
 
   header {
-    @extend %contain-floats;
     margin: 0 0 10px;
 
     h3 {
-      display: inline-block;
+      display: inline;
       margin: 0;
+      font-size: 23px;
     }
 
-    button {
+    .button-small {
       margin-left: 10px;
       vertical-align: top;
     }
