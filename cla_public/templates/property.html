@@ -39,9 +39,9 @@
 
         {{ Form.yesno_field(property.is_main_home) }}
         {{ Form.yesno_field(property.other_shareholders) }}
-        {{ Form.text_field(property.property_value, prefix="£") }}
-        {{ Form.text_field(property.mortgage_remaining, prefix="£") }}
-        {{ Form.text_field(property.mortgage_payments, prefix="£") }}
+        {{ Form.text_field(property.property_value, prefix="£", class_='m-small') }}
+        {{ Form.text_field(property.mortgage_remaining, prefix="£", class_='m-small') }}
+        {{ Form.text_field(property.mortgage_payments, prefix="£", class_='m-small') }}
         {% call Form.yesno_field(property.is_rented, subfield=property.rent_amount) %}
           {{ Form.money_interval_field(property.rent_amount, group_class='form-subfield s-hidden') }}
         {% endcall %}
