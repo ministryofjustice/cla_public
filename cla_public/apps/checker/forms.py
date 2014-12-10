@@ -163,7 +163,7 @@ class PropertyForm(NoCsrfForm):
         description=u"Select 'Yes' if you share ownership with a friend, relative or ex-partner")
     property_value = MoneyField(
         u'How much is the property worth?',
-        description=u"Use a property website",
+        description=u"Use a property website or the land registry website",
         validators=[InputRequired(u'Please enter a valid amount'), NumberRange(min=0)])
     mortgage_remaining = MoneyField(
         u'How much is left to pay on the mortgage?',
