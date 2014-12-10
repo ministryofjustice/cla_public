@@ -383,7 +383,7 @@
         <li>
           <label class="radio-inline" for="{{field.is_other_language.id}}">
             {{ field.is_other_language(**{
-                'data-conditional-controls': field.other_language.id,
+                'data-conditional-controls': '["%s"]' % field.other_language.id,
                 'data-conditional-show-value': 'y'
               })
             }}
@@ -394,7 +394,7 @@
         <li>
           <label class="radio-inline" for="{{field.is_other_adaptation.id}}">
             {{ field.is_other_adaptation(**{
-                'data-conditional-controls': field.other_adaptation.id,
+                'data-conditional-controls': '["%s"]' % field.other_adaptation.id,
                 'data-conditional-show-value': 'y'
               })
             }}

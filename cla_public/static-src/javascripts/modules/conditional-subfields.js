@@ -62,7 +62,8 @@
 
     setVisibility: function($field) {
       var isShown = $field.val() ? $field.val() === $field.data().conditionalShowValue + '': true;
-      var ids = $field.data().conditionalControls || [];
+      var conditionalControls = $field.data().conditionalControls;
+      var ids = $.isArray(conditionalControls) ? conditionalControls : [];
 
       if($field.is(':checkbox')) {
         isShown = isShown && $field.is(':checked');
