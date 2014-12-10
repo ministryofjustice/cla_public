@@ -85,7 +85,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             InputRequired(message=u'Please choose Yes or No')
         ])
     on_benefits = YesNoField(
-        u'Are you on any benefits?',
+        u'Do you receive any benefits (including child benefit)?',
         description=(
             u"Being on some benefits can help you qualify for legal aid"))
     have_children = YesNoField(
