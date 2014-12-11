@@ -4,7 +4,7 @@
     <span>This is a new service – your <a href="{{ url_for('base.feedback') }}">feedback</a> will help us to improve it.</span>
   </p>
 
-  {% if form -%}
+  {% if form and config.DEBUG -%}
     {% include "_context-debugger.html" %}
   {%- endif -%}
 </div>
