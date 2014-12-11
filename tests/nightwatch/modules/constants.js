@@ -2,6 +2,79 @@
 
 exports.SAVINGS_THRESHOLD = 8000;
 
+exports.CATEGORIES_OF_LAW = [
+  {
+    value: 'clinneg',
+    name: 'Clinical negligence',
+    covered: false
+  },
+  {
+    value: 'commcare',
+    name: 'Community care',
+    covered: false
+  },
+  {
+    value: 'debt',
+    name: 'Debt',
+    covered: true
+  },
+  {
+    value: 'discrimination',
+    name: 'Discrimination',
+    covered: true
+  },
+  {
+    value: 'education',
+    name: 'Education',
+    covered: true
+  },
+  {
+    value: 'family',
+    name: 'Family',
+    covered: true
+  },
+  {
+    value: 'housing',
+    name: 'Housing',
+    covered: true
+  },
+  {
+    value: 'immigration',
+    name: 'Immigration and asylum',
+    covered: false
+  },
+  {
+    value: 'mentalhealth',
+    name: 'Mental health',
+    covered: false
+  },
+  {
+    value: 'pi',
+    name: 'Personal injury',
+    covered: false
+  },
+  {
+    value: 'publiclaw',
+    name: 'Public law',
+    covered: false
+  },
+  {
+    value: 'aap',
+    name: 'Actions against the police',
+    covered: false
+  },
+  {
+    value: 'violence',
+    name: 'Domestic violence',
+    covered: true
+  },
+  {
+    value: 'benefits',
+    name: 'Welfare benefits appeals',
+    covered: true
+  }
+];
+
 exports.ABOUT_YOU_QUESTIONS = [
   'have_partner',
   'in_dispute',

@@ -49,7 +49,7 @@ module.exports = {
       common.submitAndCheckForFieldError(client, item, 'Please choose Yes or No');
     });
     common.submitAndCheckForFieldError(client, 'properties-0-property_value', 'Please enter a valid amount');
-    common.submitAndCheckForFieldError(client, 'properties-0-mortgage_remaining', 'Please select 0 if you have no mortgage');
+    common.submitAndCheckForFieldError(client, 'properties-0-mortgage_remaining', 'Please enter 0 if you have no mortgage');
     common.submitAndCheckForFieldError(client, 'properties-0-mortgage_payments', 'Number must be at least 0.');
 
     common.setYesNoFields(client, PROPERTY_QUESTIONS, 1);

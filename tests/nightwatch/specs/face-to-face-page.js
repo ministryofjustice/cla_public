@@ -20,7 +20,7 @@ module.exports = {
   'Face-to-face page': function(client) {
     client
       .assert.urlContains('/face-to-face')
-      .assert.containsText('h1', 'You might qualify for legal aid, but we don\'t handle this type of problem')
+      .assert.containsText('h1', 'This service doesn’t handle issues related to clinical negligence')
       .click('article p:last-child a')
       .pause(1000)
       .assert.urlContains('find-legal-advice.justice.gov.uk')
