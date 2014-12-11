@@ -20,7 +20,6 @@
 .phase-banner {
   @extend %site-width-container;
   @include phase-banner(beta);
-  margin-bottom: 30px;
   z-index: 2;
 }
 
