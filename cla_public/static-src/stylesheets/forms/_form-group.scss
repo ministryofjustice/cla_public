@@ -7,10 +7,6 @@
     margin: 0 -15px;
   }
 
-  &:first-of-type {
-    border: 0;
-  }
-
   &.m-error {
     background: lighten($mellow-red, 44);
     border-top-color: desaturate(lighten($mellow-red, 37), 48);
@@ -24,11 +20,12 @@
   // Subfields
   .form-subfield {
     margin: 10px 0 0;
-    padding: 5px 0;
+    padding: 0;
     border-left: 4px solid $grey-2;
     border-top: 0;
     position: relative;
     zoom: 1;
+    overflow: hidden;
 
     .js-enabled &.s-hidden {
       height: 0;
