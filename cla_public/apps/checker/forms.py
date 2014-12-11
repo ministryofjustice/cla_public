@@ -170,7 +170,7 @@ class PropertyForm(NoCsrfForm):
         description=(
             u"Include the full amount owed, even if the property has "
             u"shared ownership"),
-        validators=[InputRequired(u'Please select 0 if you have no mortgage'), NumberRange(min=0)])
+        validators=[InputRequired(u'Please enter 0 if you have no mortgage'), NumberRange(min=0)])
     mortgage_payments = MoneyField(
         u'How much are your monthly mortgage repayments?',
         validators=[IgnoreIf('mortgage_remaining', FieldValue(0)), NumberRange(min=0)])
