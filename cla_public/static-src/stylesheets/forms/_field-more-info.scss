@@ -9,7 +9,7 @@
 .field-more-info-toggle {
   color: $link-colour;
   font-size: .9em;
-  padding-left: 13px;
+  padding-left: 15px;
   display: inline-block;
   cursor: pointer;
   font-weight: bold;
@@ -17,8 +17,12 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background: url(../images/icons/icon-dropdown.png) 1px 6px no-repeat;
-  background: url(../images/icons/icon-dropdown-2x.png) 1px 6px/8px no-repeat;
+  background: url(../images/icons/icon-dropdown.png) 3px 6px no-repeat;
+  background: url(../images/icons/icon-dropdown-2x.png) 3px 6px/8px no-repeat;
+
+  &:active {
+    background-color: $yellow;
+  }
 
   .field-help.s-expanded & {
     background-position: 0 -13px;
