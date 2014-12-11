@@ -85,7 +85,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             InputRequired(message=u'Please choose Yes or No')
         ])
     on_benefits = YesNoField(
-        u'Do you receive any benefits (including child benefit)?',
+        u'Do you receive any benefits (including Child Benefit)?',
         description=(
             u"Being on some benefits can help you qualify for legal aid"))
     have_children = YesNoField(
@@ -175,7 +175,7 @@ class PropertyForm(NoCsrfForm):
         description=u"Select 'Yes' if you share ownership with a friend, relative or ex-partner")
     property_value = MoneyField(
         u'How much is the property worth?',
-        description=u"Use a property website or the land registry website",
+        description=u"Use a property website or the Land Registry website",
         validators=[InputRequired(u'Please enter a valid amount'), NumberRange(min=0)])
     mortgage_remaining = MoneyField(
         u'How much is left to pay on the mortgage?',
@@ -186,9 +186,9 @@ class PropertyForm(NoCsrfForm):
     mortgage_payments = MoneyField(
         u'How much are your monthly mortgage repayments?',
         validators=[IgnoreIf('mortgage_remaining', FieldValue(0)), NumberRange(min=0)])
-    is_rented = YesNoField(u'Does anyone pay you rent for this property?')
+    is_rented = YesNoField(u'Do you rent out any part of this property?')
     rent_amount = MoneyIntervalField(
-        u'If Yes, how much rent do they pay you?',
+        u'If Yes, how much rent do you receive?',
         choices=money_intervals_except('per_4week'),
         validators=[
             IgnoreIf('is_rented', FieldValue(NO)),
@@ -464,8 +464,8 @@ class ApplicationForm(Honeypot, Form):
     extra_notes = TextAreaField(
         u'Help the operator to understand your situation',
         description=(
-            u"In your own words, please tell us exactly what your problem is "
-            u"about. The Civil Legal Advice operator will read this before "
+            u"If you’d like to tell us more about your problem, please do so in the "
+            u"box below. The Civil Legal Advice operator will read this before "
             u"they call you."),
         validators=[Optional()])
     adaptations = FormField(

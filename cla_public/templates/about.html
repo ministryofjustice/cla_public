@@ -29,14 +29,16 @@
     {% call Form.yesno_field(form.have_dependants, subfield=form.num_dependants) %}
       {{ Form.text_field(form.num_dependants, group_class='form-subfield s-hidden', class_='m-small') }}
     {% endcall %}
-    {{ Form.yesno_field(form.have_savings) }}
-    {{ Form.yesno_field(form.have_valuables) }}
     {{ Form.yesno_field(form.own_property) }}
     {{ Form.yesno_field(form.is_employed) }}
     {{ Form.yesno_field(form.partner_is_employed, group_class='form-conditional-field s-hidden') }}
     {{ Form.yesno_field(form.is_self_employed) }}
     {{ Form.yesno_field(form.partner_is_self_employed, group_class='form-conditional-field s-hidden') }}
     {{ Form.yesno_field(form.aged_60_or_over) }}
+
+    {{ Form.yesno_field(form.have_savings) }}
+    {{ Form.yesno_field(form.have_valuables) }}
+    {% include 'partials/_valuables_table.html' %}
 
     {{ Element.call_me_back_link() }}
 

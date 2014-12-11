@@ -30,6 +30,7 @@
     {% endwith %}
     {% with is_hidden = not session.has_valuables %}
       {{ Form.text_field(form.valuables, prefix="£", is_hidden=is_hidden, default_value='0') }}
+      {% include 'partials/_valuables_table.html' %}
     {% endwith %}
 
 
