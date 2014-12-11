@@ -38,7 +38,7 @@ module.exports = {
       .submitForm('form')
       .assert.urlContains('/savings')
       .assert.containsText('h1', 'You and your partner’s savings')
-      .assert.containsText('body', 'Any cash, savings or investments held in your name, your partner\'s name or both your names')
+      .assert.containsText('body', 'Any cash, savings or investments held in your name, your partner’s name or both your names')
     ;
   },
 
