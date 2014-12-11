@@ -32,6 +32,16 @@ def outcome(outcome):
 checker.add_app_template_global(HONEYPOT_FIELD_NAME, name='honeypot_field_name')
 
 
+@checker.after_request
+def add_header(response):
+    """
+    Add no-cache headers
+    """
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    return response
+
+
 @checker.route('/problem', methods=['GET', 'POST'])
 @form_view(ProblemForm, 'problem.html')
 def problem(user):
