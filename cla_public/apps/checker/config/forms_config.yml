@@ -25,16 +25,6 @@ forms:
       have_dependants:
         more_info: This could be a young person for whom you get Child Benefit
 
-      have_valuables:
-        more_info: |
-          Don’t include the following:
-
-          - household furniture and effects, unless they’re exceptionally valuable
-          - tools of your trade (for example, computers for a graphic designer, carpentry tools for a carpenter)
-          - the car or vehicle you use regularly, unless it’s a classic car or luxury vehicle
-
-          Give the item’s current value - what the item would sell for if you sold it today.
-
   PropertyForm:
     fields:
       in_dispute:
@@ -42,15 +32,3 @@ forms:
           A disputed property is one whose ownership is disputed by someone eg an ex-partner wants
           to claim a share in it as part of a divorce or separation, or a creditor or mortgage
           company wants to force the sale of it to repay a debt.
-
-  SavingsForm:
-    fields:
-      valuables:
-        more_info: |
-          Don’t include the following:
-
-          - household furniture and effects, unless they’re exceptionally valuable
-          - tools of your trade (for example, computers for a graphic designer, carpentry tools for a carpenter)
-          - the car or vehicle you use regularly, unless it’s a classic car or luxury vehicle
-
-          Give the item’s current value - what the item would sell for if you sold it today.

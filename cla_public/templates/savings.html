@@ -29,7 +29,9 @@
       {{ Form.text_field(form.investments, prefix="£", is_hidden=is_hidden, default_value='0') }}
     {% endwith %}
     {% with is_hidden = not session.has_valuables %}
-      {{ Form.text_field(form.valuables, prefix="£", is_hidden=is_hidden, default_value='0') }}
+      {% call Form.text_field(form.valuables, prefix="£", is_hidden=is_hidden, default_value='0') %}
+        {% include '_valuables-info.html' %}
+      {% endcall %}
     {% endwith %}
 
 

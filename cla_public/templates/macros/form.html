@@ -147,7 +147,7 @@
       {{ option.label.text -}}
     </label>
   {%- endfor -%}
-  {% if subfield and subfield_caller %}
+  {% if subfield_caller %}
     {{ subfield_caller }}
   {% endif %}
 {% endmacro %}

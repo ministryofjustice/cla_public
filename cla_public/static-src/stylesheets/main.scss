@@ -15,12 +15,12 @@
 @import 'confirmation';
 @import 'org-list';
 @import 'sidebar';
+@import 'split-panels';
 @import 'shame';
 
 .phase-banner {
   @extend %site-width-container;
   @include phase-banner(beta);
-  margin-bottom: 30px;
   z-index: 2;
 }
 
