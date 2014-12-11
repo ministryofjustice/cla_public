@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block page_heading %}
-  We don't handle problems related to {{ category_name|lower }}. A solicitor may be able to help you.
+  We don't handle issues related to {{ category_name|lower }}
+{% endblock %}
+
+{% block page_subheading %}
+  <h2>A solicitor may be able to help you.</h2>
 {% endblock %}
 
 {% block inner_content %}
