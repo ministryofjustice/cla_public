@@ -131,7 +131,9 @@ def post_to_is_eligible_api(form):
 
     if reference:
         response = backend.eligibility_check(reference).is_eligible().post({})
-        return response.get('is_eligible')
+        is_eligible = response.get('is_eligible')
+        session['is_eligible'] = is_eligible
+        return is_eligible
 
 
 def post_to_case_api(form):

@@ -2,6 +2,7 @@
 "Checker views"
 
 import logging
+from cla_common.constants import ELIGIBILITY_STATES
 
 from flask import abort, current_app, render_template, redirect, \
     session, url_for
@@ -29,6 +30,16 @@ def outcome(outcome):
 
 
 checker.add_app_template_global(HONEYPOT_FIELD_NAME, name='honeypot_field_name')
+
+
+@checker.after_request
+def add_header(response):
+    """
+    Add no-cache headers
+    """
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    return response
 
 
 @checker.route('/problem', methods=['GET', 'POST'])
@@ -181,7 +192,10 @@ def result(outcome):
         return redirect(url_for('.result', outcome='confirmation'))
 
     response = render_template(
-        'result/%s.html' % outcome, form=form)
+        'result/%s.html' % outcome,
+        form=form,
+        category_name=session.category_name,
+        eligibility_unknown=session.get('is_eligible', None) == ELIGIBILITY_STATES.UNKNOWN)
 
     if outcome in ['confirmation', 'face-to-face']:
         session.clear()

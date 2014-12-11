@@ -43,7 +43,7 @@ def form_view(form_class, form_template):
                         return redirect(
                             url_for(
                                 '.help_organisations',
-                                category_name=session.category_name))
+                                category_name=session.category_slug))
 
                     return fn(session)
 

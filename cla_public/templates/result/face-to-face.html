@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 
 {% block page_heading %}
-  You might qualify for legal aid, but we don't handle this type of problem
+  This service doesn't handle issues related to {{ category_name|lower }}
+{% endblock %}
+
+{% block page_subheading %}
+  <h2>However, a solicitor may be able to help you</h2>
 {% endblock %}
 
 {% block inner_content %}
-  <p>Civil Legal Advice only handles problems that relate to certain categories of law.
-    Your problem is about a category of law that we don't cover.</p>
-
   <p>You may be able to get legal aid, but you will need to speak to a solicitor who can
     take on your case. If you qualify for legal aid, you will not have to pay for the
     solicitor's advice. </p>
   <p>You can search for a solicitor in your area.</p>
 
   <p>
-    <a class="button" href="http://find-legal-advice.justice.gov.uk/">Find a legal adviser</a>
+    <a class="button" href="http://find-legal-advice.justice.gov.uk/">Find a solicitor</a>
   </p>
 {% endblock %}
