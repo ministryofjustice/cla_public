@@ -15,10 +15,6 @@
   <![endif]-->
 {% endblock %}
 
-{% block head %}
-  {% include "_analytics.html" %}
-{% endblock %}
-
 {% block content %}
   {% include "_phase-tag.html" %}
 
@@ -47,6 +43,8 @@
 {% endblock %}
 
 {% block javascripts %}
+  {% include "_analytics.html" %}
+
   <script src="{{ asset(filename='javascripts/cla.js') }}"></script>
   {% if config.DEBUG %}
     <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
