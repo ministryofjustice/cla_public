@@ -29,7 +29,7 @@
     )
   %}
   {% set errors = field.errors or subfield.errors %}
-  {% set subfield_id=field.id if 'subfield' in class_ else '' %}
+  {% set subfield_id=field.id if 'subfield' in class_ or 'conditional' in class_ else '' %}
   <dl
     class="form-group {{ class_ }}{% if errors and not subfield_id %} m-error{% endif %}"
     {% if subfield_id %}data-subfield-id="{{subfield_id}}"{% endif %}>
@@ -115,7 +115,6 @@
   </label>
 {% endmacro %}
 
-
 {#
   Yes/No elements
 
@@ -125,13 +124,21 @@
                       (creates relationship via JS for conditional toggling)
     - subfield_caller <@object> (optional) Subfield
 #}
-{% macro yesno_elements(field, subfield=None, subfield_caller=None) %}
+{% macro yesno_elements(field, subfield=None, subfield_caller=None, show_value='1') %}
   {%- for option in field -%}
     <label class="radio-inline" for="{{option.id}}">
       {% if subfield %}
+        {% if subfield.id %}
+          {% set conditional_controls=[subfield.id] %}
+        {% else %}
+          {% set conditional_controls=[] %}
+          {% for s in subfield %}
+            {% do conditional_controls.append(s.id) %}
+          {% endfor %}
+        {% endif %}
         {{- option(**{
-            'data-conditional-controls': subfield.id,
-            'data-conditional-show-value': '1'
+            'data-conditional-controls': '["%s"]' % '","'.join(conditional_controls),
+            'data-conditional-show-value': show_value
           })
         }}
       {% else %}
@@ -160,7 +167,8 @@
   field,
   subfield=None,
   use_form_group=True,
-  group_class=''
+  group_class='',
+  show_value='1'
 ) %}
   {# set subfields as macro caller and make them optional #}
   {% if caller %}
@@ -175,7 +183,7 @@
       subfield,
       class_=group_class
     ) %}
-      {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
+      {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller, show_value=show_value)  }}
     {% endcall %}
   {% else %}
     {{ field.label }}
@@ -184,7 +192,7 @@
         {{field.description|safe}}
       </div>
     {% endif %}
-    {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller)  }}
+    {{ yesno_elements(field, subfield=subfield, subfield_caller=subfield_caller, show_value=show_value)  }}
   {% endif %}
 {% endmacro %}
 
@@ -375,7 +383,7 @@
         <li>
           <label class="radio-inline" for="{{field.is_other_language.id}}">
             {{ field.is_other_language(**{
-                'data-conditional-controls': field.other_language.id,
+                'data-conditional-controls': '["%s"]' % field.other_language.id,
                 'data-conditional-show-value': 'y'
               })
             }}
@@ -386,7 +394,7 @@
         <li>
           <label class="radio-inline" for="{{field.is_other_adaptation.id}}">
             {{ field.is_other_adaptation(**{
-                'data-conditional-controls': field.other_adaptation.id,
+                'data-conditional-controls': '["%s"]' % field.other_adaptation.id,
                 'data-conditional-show-value': 'y'
               })
             }}

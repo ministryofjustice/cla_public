@@ -61,20 +61,34 @@
     },
 
     setVisibility: function($field) {
-      var isShown = $field.val() === $field.data().conditionalShowValue + '';
-      var id = $field.data().conditionalControls;
+      var isShown = $field.val() ? $field.val() === $field.data().conditionalShowValue + '': true;
+      var conditionalControls = $field.data().conditionalControls;
+      var ids = [];
+      if (conditionalControls) {
+        ids = $.isArray(conditionalControls) ? conditionalControls : [conditionalControls];
+      }
 
       if($field.is(':checkbox')) {
         isShown = isShown && $field.is(':checked');
       }
 
-      $('[data-subfield-id="' + id +'"]')
-        .toggleClass('s-expanded', isShown)
-        .toggleClass('s-hidden', !isShown)
-        .attr({
-          'aria-expanded': isShown,
-          'aria-hidden': !isShown
-        });
+      $.each(ids, function(index, id) {
+        var $conditionalContainer = $('[data-subfield-id="' + id +'"]');
+        $conditionalContainer
+          .toggleClass('s-expanded', isShown)
+          .toggleClass('s-hidden', !isShown)
+          .attr({
+            'aria-expanded': isShown,
+            'aria-hidden': !isShown
+          });
+
+        if (!isShown) {
+          $('input[type="radio"]', $conditionalContainer)
+            .prop('checked', false)
+            .first()
+            .change();
+        }
+      });
     },
 
     cacheEls: function() {

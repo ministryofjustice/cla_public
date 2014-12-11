@@ -23,7 +23,7 @@ module.exports = {
   'Income': function(client) {
     client
       .assert.urlContains('/income')
-      .assert.containsText('h1', 'Your income and tax')
+      .assert.containsText('h1', 'Your money coming in')
     ;
   },
 
@@ -71,10 +71,11 @@ module.exports = {
 
     client.back();
     common.setYesNoFields(client, 'have_partner', 1);
-    common.setYesNoFields(client, ['is_self_employed', 'in_dispute'], 0);
+    common.setYesNoFields(client, ['is_self_employed', 'in_dispute', 'partner_is_self_employed'], 0);
+    common.setYesNoFields(client, 'partner_is_employed', 1);
     client
       .submitForm('form')
-      .assert.containsText('h1', 'You and your partner’s income and tax')
+      .assert.containsText('h1', 'You and your partner’s money coming in')
       .assert.containsText('body', 'Your personal income')
       .assert.containsText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.')
     ;

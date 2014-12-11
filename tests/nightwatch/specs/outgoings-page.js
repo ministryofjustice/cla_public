@@ -21,7 +21,7 @@ module.exports = {
   'Income': function(client) {
     client
       .assert.urlContains('/income')
-      .assert.containsText('h1', 'Your income and tax')
+      .assert.containsText('h1', 'Your money coming in')
       .submitForm('form')
     ;
   },
@@ -66,6 +66,7 @@ module.exports = {
     ;
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, 'in_dispute', 0);
+    common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
     client
       .submitForm('form')
       .submitForm('form')

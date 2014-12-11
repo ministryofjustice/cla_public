@@ -79,7 +79,9 @@ class TestMultiPageForm(unittest.TestCase):
                 'have_valuables': '0',
                 'own_property': '0',
                 'is_employed': '0',
+                'partner_is_employed': '0',
                 'is_self_employed': '0',
+                'partner_is_self_employed': '0',
                 'aged_60_or_over': '0',
                 }
 

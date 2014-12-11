@@ -7,10 +7,15 @@
 
 {% block page_heading %}
   {% if session.has_partner %}
-    You and your partner’s income and tax
+    You and your partner’s
   {% else %}
-    Your income and tax
+    Your
   {% endif %}
+  {% if session.is_employed or session.is_self_employed %}
+    income and tax
+  {% else %}
+    money coming in
+  {%  endif %}
 {% endblock %}
 
 {% block inner_content %}
@@ -37,20 +42,21 @@
         {{ Form.money_interval_field(form.your_income.pension) }}
         {{ Form.money_interval_field(form.your_income.other_income) }}
       </fieldset>
-
-      {% if session.has_partner %}
+    {% endwith %}
+    {% if session.has_partner %}
+      {% with is_hidden_for_partner = not (session.partner_is_employed or session.partner_is_self_employed) %}
         <fieldset>
           <h3>Your partner’s income</h3>
-          {{ Form.money_interval_field(form.partner_income.earnings, is_hidden) }}
-          {{ Form.money_interval_field(form.partner_income.income_tax, is_hidden) }}
-          {{ Form.money_interval_field(form.partner_income.national_insurance, is_hidden) }}
-          {{ Form.money_interval_field(form.partner_income.working_tax_credit, is_hidden) }}
+          {{ Form.money_interval_field(form.partner_income.earnings, is_hidden_for_partner) }}
+          {{ Form.money_interval_field(form.partner_income.income_tax, is_hidden_for_partner) }}
+          {{ Form.money_interval_field(form.partner_income.national_insurance, is_hidden_for_partner) }}
+          {{ Form.money_interval_field(form.partner_income.working_tax_credit, is_hidden_for_partner) }}
           {{ Form.money_interval_field(form.partner_income.maintenance) }}
           {{ Form.money_interval_field(form.partner_income.pension) }}
           {{ Form.money_interval_field(form.partner_income.other_income) }}
         </fieldset>
-      {% endif %}
-    {% endwith %}
+      {% endwith %}
+    {% endif %}
 
     {{ Element.call_me_back_link() }}
 

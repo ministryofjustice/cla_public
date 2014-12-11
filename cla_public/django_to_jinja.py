@@ -17,6 +17,8 @@ def change_jinja_templates(app):
         jinja2.PackageLoader('moj_template', 'templates'),
     ])
 
+    app.jinja_env.add_extension("jinja2.ext.do")
+
     app.jinja_loader = moj_loader
 
     # we need to load a special method called "static" to mimic
