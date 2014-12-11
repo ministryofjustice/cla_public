@@ -46,3 +46,12 @@
     };
   </script>
 {% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+  {% if session.category %}
+    <script>
+      ga('send', 'event', 'category', 'selected', '{{session.category}}');
+    </script>
+  {% endif %}
+{% endblock %}
