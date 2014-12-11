@@ -299,7 +299,7 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
         choices=NON_INCOME_BENEFITS)
     other_benefits = PartnerYesNoField(
         u'Do you or your partner receive any other benefits not listed above? ',
-        description=u'For example, Working Tax Credit, Incapacity Benefit, \
+        description=u'For example, Incapacity Benefit, \
             Contribution-based Jobseeker\'s Allowance')
     total_other_benefit = MoneyIntervalField(
         u'If Yes, total amount of benefits not listed above',
