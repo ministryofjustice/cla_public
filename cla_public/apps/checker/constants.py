@@ -5,7 +5,8 @@ CATEGORIES = [
     (
         'aap',
         u'Actions against the police',
-        u'Being treated unlawfully by authorities who detain, imprison and prosecute (for example, the police), abuse in care cases'),
+        u'Being treated unlawfully by authorities who detain, imprison and prosecute '
+        u'(for example, the police), abuse in care cases'),
     (
         'clinneg',
         u'Clinical negligence',
@@ -18,7 +19,12 @@ CATEGORIES = [
     (
         'debt',
         u'Debt',
-        u'Struggling to manage or pay off debt, bankruptcy, repossession'),
+        u'Struggling to pay off debt, bankruptcy, repossession, mortgage arrears, '
+        u'dept putting your home at risk if you are a home owner'),
+    (
+        'employment',
+        u'Employment',
+        u'Being treated unfairly at work, unfair dismissal, employment tribunals'),
     (
         'violence',
         u'Domestic violence',
@@ -40,11 +46,12 @@ CATEGORIES = [
     (
         'housing',
         u'Housing',
-        u'Eviction, homelessness, losing your home, rent arrears'),
+        u'Eviction, homelessness, losing your rented home, rent arrears'),
     (
         'immigration',
         u'Immigration and asylum',
-        u'Applying for asylum or permission to stay in the UK, including for victims of human trafficking'),
+        u'Applying for asylum or permission to stay in the UK, including for victims of '
+        u'human trafficking'),
     (
         'mentalhealth',
         u'Mental health',
