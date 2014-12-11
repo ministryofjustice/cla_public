@@ -22,10 +22,6 @@ CATEGORIES = [
         u'Struggling to pay off debt, bankruptcy, repossession, mortgage arrears, '
         u'dept putting your home at risk if you are a home owner'),
     (
-        'employment',
-        u'Employment',
-        u'Being treated unfairly at work, unfair dismissal, employment tribunals'),
-    (
         'violence',
         u'Domestic violence',
         u'Abuse at home, child abuse, harassment by an ex-partner, forced marriage'),
@@ -39,6 +35,10 @@ CATEGORIES = [
         u'Education',
         (u'Special educational needs, problems with school places, '
          u'exclusions, learning difficulties')),
+    (
+        'employment',
+        u'Employment',
+        u'Being treated unfairly at work, unfair dismissal, employment tribunals'),
     (
         'family',
         u'Family',
