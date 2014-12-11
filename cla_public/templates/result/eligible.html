@@ -19,3 +19,11 @@
       to a Civil Legal Advice operator. Please submit your details so we can call you back.
   </p>
 {% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+  <script>
+    {% set event_label = 'unknown' if eligibility_unknown else 'eligible' %}
+    ga('send', 'event', 'result', 'callback', '{{ event_label }}');
+  </script>
+{% endblock %}
