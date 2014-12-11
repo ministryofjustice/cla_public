@@ -12,17 +12,17 @@
     margin-top: 0;
   }
 
-  > .icon {
+  .icon {
     float: left;
     margin: 3px 20px 0 0;
   }
 
-  > .alert-message {
+  .alert-message {
     overflow: hidden;
 
-    > .alert-header,
-    > p {
-      margin: .5em 0 0;
+    .alert-header,
+    p {
+      margin: 10px 0 0;
     }
 
     .alert-header {
@@ -30,7 +30,7 @@
       font-weight: bold;
     }
 
-    > p:first-child {
+    p:first-child {
       margin: 0;
     }
   }

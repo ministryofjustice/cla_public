@@ -218,9 +218,11 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
                 if len(self.properties.entries) < self.properties.max_entries:
                     self.properties.append_entry()
                 self._submitted = False
-            elif 'remove-property' in request.form:
-                index = int(request.form['remove-property'])
-                self.properties.remove(index)
+            elif 'remove-property-1' in request.form:
+                self.properties.remove(1)
+                self._submitted = False
+            elif 'remove-property-2' in request.form:
+                self.properties.remove(2)
                 self._submitted = False
             else:
                 self._submitted = super(PropertiesForm, self).is_submitted()

@@ -30,18 +30,16 @@
           <header>
             <h3>Property {{loop.index}}</h3>
             {% if loop.index != 1 %}
-              <button class="button-secondary button-small" name="remove-property" value="{{loop.index0}}">
-                Remove property
-              </button>
+              <input class="button-secondary button-small" name="remove-property-{{loop.index0}}" type="submit" value="Remove property" />
             {% endif %}
           </header>
         {% endif %}
 
         {{ Form.yesno_field(property.is_main_home) }}
         {{ Form.yesno_field(property.other_shareholders) }}
-        {{ Form.text_field(property.property_value, prefix="£") }}
-        {{ Form.text_field(property.mortgage_remaining, prefix="£") }}
-        {{ Form.text_field(property.mortgage_payments, prefix="£") }}
+        {{ Form.text_field(property.property_value, prefix="£", class_='m-small') }}
+        {{ Form.text_field(property.mortgage_remaining, prefix="£", class_='m-small') }}
+        {{ Form.text_field(property.mortgage_payments, prefix="£", class_='m-small') }}
         {% call Form.yesno_field(property.is_rented, subfield=property.rent_amount) %}
           {{ Form.money_interval_field(property.rent_amount, group_class='form-subfield s-hidden') }}
         {% endcall %}
@@ -51,7 +49,7 @@
 
     {% if form.properties|count < 3 %}
       <p>
-        <button class="button-secondary button-large" name="add-property">Add another property</button>
+        <input type="submit" class="button-secondary button-large" name="add-property" value="Add another property">
       </p>
     {% endif %}
 
