@@ -1,14 +1,21 @@
 {% extends "call-me-back.html" %}
 
 {% block page_heading %}
-  You might qualify for legal aid
+  {% if eligibility_unknown %}
+    We need more information
+  {% else %}
+    You might qualify for legal aid
+  {% endif %}
 {% endblock %}
 
 {% block page_text %}
   <h2>Request a callback</h2>
 
   <p>
-    Based on the answers you've given, you might qualify financially for legal aid. To find out if legal aid can help with your specific problem, you need to speak
-    to a Civil Legal Advice operator. Please submit your details so we can call you back.
+    {% if not eligibility_unknown %}
+      Based on the answers you've given, you might qualify financially for legal aid.
+    {% endif %}
+    To find out if legal aid can help with your specific problem, you need to speak
+      to a Civil Legal Advice operator. Please submit your details so we can call you back.
   </p>
 {% endblock %}
