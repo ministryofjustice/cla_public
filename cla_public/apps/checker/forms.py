@@ -107,9 +107,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     have_savings = YesNoField(
         u'Do you have any savings or investments?')
     have_valuables = YesNoField(
-        u'Do you have any valuable items worth over £500 each?',
-        description=(
-            u"Items worth over £500 each with some exceptions..."))
+        u'Do you have any valuable items worth over £500 each?')
     own_property = YesNoField(
         u'Do you own any property?',
         description=u"For example, a house, static caravan or flat")
@@ -269,8 +267,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, Form):
             message=u'Enter 0 if you have no investments'
         )])
     valuables = PartnerMoneyField(
-        u'Total value of items worth over £500 each',
-        description=u"Total value of any items worth over £500 each with some exceptions...")
+        u'Total value of items worth over £500 each')
 
     def api_payload(self):
         # rather than showing an error message, just ignore values less than
