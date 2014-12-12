@@ -180,6 +180,13 @@ class MoneyIntervalForm(NoCsrfForm):
         if choices:
             self.interval_period.choices = choices
 
+    @property
+    def data(self):
+        data = super(MoneyIntervalForm, self).data
+        if data['per_interval_value'] is 0 and not data['interval_period']:
+            data['interval_period'] = MONEY_INTERVALS[1][0]
+        return data
+
 
 def money_interval_to_monthly(data):
     amount = data['per_interval_value']
