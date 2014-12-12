@@ -31,7 +31,7 @@
     {% with is_hidden = not (session.is_employed or session.is_self_employed) %}
       <fieldset>
         {% if session.has_partner %}
-          <h3>Your personal income</h3>
+          <h3>Your money coming in</h3>
           <p>This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.</p>
         {% endif %}
         {{ Form.money_interval_field(form.your_income.earnings, is_hidden) }}
@@ -46,7 +46,7 @@
     {% if session.has_partner %}
       {% with is_hidden_for_partner = not (session.partner_is_employed or session.partner_is_self_employed) %}
         <fieldset>
-          <h3>Your partner’s income</h3>
+          <h3>Your partner’s money coming in</h3>
           {{ Form.money_interval_field(form.partner_income.earnings, is_hidden_for_partner) }}
           {{ Form.money_interval_field(form.partner_income.income_tax, is_hidden_for_partner) }}
           {{ Form.money_interval_field(form.partner_income.national_insurance, is_hidden_for_partner) }}
