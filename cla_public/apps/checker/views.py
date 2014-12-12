@@ -191,10 +191,11 @@ def result(outcome):
 
         return redirect(url_for('.result', outcome='confirmation'))
 
+
     response = render_template(
         'result/%s.html' % outcome,
         form=form,
-        category_name=session.category_name,
+        category_name=session.category_name if session.category else 'your issue',
         eligibility_unknown=session.get('is_eligible', None) == ELIGIBILITY_STATES.UNKNOWN)
 
     if outcome in ['confirmation', 'face-to-face']:
