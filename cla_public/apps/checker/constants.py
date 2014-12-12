@@ -46,7 +46,8 @@ CATEGORIES = [
     (
         'housing',
         u'Housing',
-        u'Eviction, homelessness, losing your rented home, rent arrears'),
+        u'Eviction, homelessness, losing your rented home, rent arrears, harassment by '
+        u'a landlord or neighbour, health and safety issues with your home'),
     (
         'immigration',
         u'Immigration and asylum',
