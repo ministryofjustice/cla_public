@@ -30,7 +30,6 @@ module.exports = {
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
     ;
-    testSidebar(client, 'Who can get legal aid?');
     common.aboutPageSetAllToNo(client);
     common.setYesNoFields(client, 'is_employed', 1);
     common.setYesNoFields(client, 'have_savings', 1);
