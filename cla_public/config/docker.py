@@ -6,7 +6,7 @@ DEBUG = os.environ.get('SET_DEBUG', False) == 'True'
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # TODO - change this to True when serving over HTTPS
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = os.environ.get('CLA_ENV', '') in ['prod', 'staging']
 
 HOST_NAME = os.environ['HOST_NAME']
 
