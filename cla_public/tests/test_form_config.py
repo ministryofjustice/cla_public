@@ -81,7 +81,7 @@ class TestFormConfig(unittest.TestCase):
 
     def test_about_you_more_info(self):
         form = AboutYouForm()
-        have_valuables = form._fields['have_valuables']
-        self.assertTrue(bool(have_valuables.more_info))
+        have_children = form._fields['have_children']
+        self.assertTrue(bool(have_children.more_info))
 
 
