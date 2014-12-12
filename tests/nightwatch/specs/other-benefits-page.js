@@ -40,6 +40,7 @@ module.exports = {
     client
       .back()
       .back()
+      .waitForElementPresent('form[action="/about"]', 2000)
     ;
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, 'in_dispute', 0);
@@ -59,6 +60,7 @@ module.exports = {
     client
       .back()
       .back()
+      .waitForElementPresent('form[action="/about"]', 2000)
     ;
     common.setYesNoFields(client, 'have_children', 1);
     client
