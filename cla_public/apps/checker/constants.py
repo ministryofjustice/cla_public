@@ -19,7 +19,7 @@ CATEGORIES = [
     (
         'debt',
         u'Debt',
-        u'Struggling to pay off debt, bankruptcy, repossession, mortgage arrears, '
+        u'Struggling with debt, bankruptcy, repossession, mortgage arrears, '
         u'debt putting your home at risk if you are a home owner'),
     (
         'violence',
