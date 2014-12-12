@@ -316,7 +316,8 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
             'you': {'income': {
                 'child_benefits': self.child_benefit.data,
                 'tax_credits': self.child_tax_credit.data,
-                'benefits': self.total_other_benefit.data
+                'benefits': self.total_other_benefit.data if
+                self.other_benefits.data == YES else money_interval(0)
             }}
         }
 
