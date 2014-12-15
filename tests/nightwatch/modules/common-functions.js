@@ -7,13 +7,17 @@ SAVINGS_QUESTIONS.ALL = SAVINGS_QUESTIONS.MONEY.concat(SAVINGS_QUESTIONS.VALUABL
 
 module.exports = {
   // skip start page
-  startPage: function(client) {
+  startPage: function(client, msg) {
     client
       .deleteCookies()
       .init()
       .maximizeWindow()
       .waitForElementVisible('body', 1000)
-      .click('a#start')
+      .click('a#start', function() {
+        if(msg) {
+          console.log('\n' + msg + '\n');
+        }
+      })
     ;
   },
 
@@ -97,11 +101,15 @@ module.exports = {
   },
 
   // setValue on <select> items seems unreliable in nightwatch
-  setDropdownValue: function(client, fieldName, value) {
+  setDropdownValue: function(client, fieldName, value, verbose) {
     client
       .click(util.format('select[name="%s"]', fieldName))
       .click(util.format('select[name="%s"] option[value="%s"]', fieldName, value))
-      .setValue(util.format('select[name="%s"]', fieldName), client.Keys.ENTER)
+      .setValue(util.format('select[name="%s"]', fieldName), client.Keys.ENTER, function() {
+        if(verbose && !!verbose) {
+          console.log(util.format('Set %s to %s', fieldName, value));
+        }
+      })
     ;
   }
 };
