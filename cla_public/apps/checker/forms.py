@@ -22,8 +22,8 @@ from cla_public.apps.checker.fields import (
     MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
     PropertyList, money_interval_to_monthly,
-    AdaptationsForm
-    )
+    AdaptationsForm,
+    PassKwargsToFormField)
 from cla_public.apps.checker.form_config_parser import FormConfigParser
 from cla_public.apps.checker.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, money_intervals_except, money_intervals
@@ -324,6 +324,10 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
 
 class IncomeFieldForm(NoCsrfForm):
 
+    def __init__(self, *args, **kwargs):
+        self.is_partner = kwargs.pop('is_partner', False)
+        super(IncomeFieldForm, self).__init__(*args, **kwargs)
+
     earnings = MoneyIntervalField(
         u'Wages before tax',
         description=(
@@ -361,7 +365,8 @@ class IncomeFieldForm(NoCsrfForm):
         tax_credits = self.working_tax_credit.data
         child_tax_credit = session.get(
             'TaxCreditsForm_child_tax_credit', money_interval(0))
-        tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
+        if not self.is_partner:
+            tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
 
         earnings = self.earnings.data
         self_employed_drawings = money_interval(0)
@@ -405,8 +410,9 @@ def income_form(*args, **kwargs):
         pass
 
     if session.has_partner:
-        IncomeForm.partner_income = FormField(
+        IncomeForm.partner_income = PassKwargsToFormField(
             IncomeFieldForm,
+            form_kwargs={'is_partner': True},
             label=u'Your partner\'s income')
 
     return IncomeForm(*args, **kwargs)
