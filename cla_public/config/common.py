@@ -95,6 +95,10 @@ CACHE_CONFIG = {
     'CACHE_TYPE': 'simple'
 }
 
+STATSD_PREFIX = 'public'
+STATSD_HOST = os.environ.get('STATSD_HOST', 'localhost')
+STATSD_PORT = os.environ.get('STATSD_PORT', 8125)
+
 EXTENSIONS = []
 
 LANGUAGES = {
