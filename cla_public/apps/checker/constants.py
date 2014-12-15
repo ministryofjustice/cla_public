@@ -14,13 +14,13 @@ CATEGORIES = [
     (
         'commcare',
         u'Community care',
-        (u'You’re unhappy with the care being provided for yourself or a '
-         u'relative - for example, in a care home or your own home')),
+        (u'You’re unhappy with the care being provided for yourself or a relative due '
+         u'to age, disability or special educational needs - for example, in a care '
+         u'home or your own home')),
     (
         'debt',
         u'Debt',
-        u'Struggling with debt, bankruptcy, repossession, mortgage arrears, '
-        u'debt putting your home at risk if you are a home owner'),
+        u'Bankruptcy, repossession, mortgage debt that is putting your home at risk'),
     (
         'violence',
         u'Domestic violence',
@@ -46,8 +46,9 @@ CATEGORIES = [
     (
         'housing',
         u'Housing',
-        u'Eviction, homelessness, losing your rented home, rent arrears, harassment by '
-        u'a landlord or neighbour, health and safety issues with your home'),
+        u'Eviction, homelessness, losing your rented home, rent arrears, being harassed '
+        u'by a landlord or neighbour, health and safety issues with your home, anti-social '
+        u'behaviour orders'),
     (
         'immigration',
         u'Immigration and asylum',
@@ -67,8 +68,9 @@ CATEGORIES = [
         u'Taking legal action against a public body, like your local council'),
     (
         'benefits',
-        u'Welfare benefits appeals',
-        u'Appealing a decision about your benefits')
+        u'Welfare benefits',
+        u'Appealing a decision made by the social security tribunal about your benefits '
+        u'to the Upper Tribunal, Court of Appeal or Supreme Court')
 ]
 
 "Outcomes of the checker"
@@ -126,7 +128,8 @@ F2F_CATEGORIES = (
     'mentalhealth',
     'pi',
     'publiclaw',
-    'aap'
+    'aap',
+    'employment',
 )
 
 YES = '1'
@@ -136,7 +139,6 @@ ORGANISATION_CATEGORY_MAPPING = {
     'Domestic violence': 'Family',
     'Public law': 'Public',
     'Actions against the police': 'Action against police',
-    'Welfare benefits appeals': 'Welfare benefits'
 }
 
 DAY_TODAY = 'today'
