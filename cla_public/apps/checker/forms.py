@@ -389,13 +389,14 @@ class IncomeAndTaxForm(ConfigFormMixin, Honeypot, Form):
     your_income = FormField(IncomeFieldForm, label=u'Your personal income')
 
     def api_payload(self):
+        api_payload = {
+            'you': self.your_income.form.api_payload(),
+        }
         partner_income = getattr(self, 'partner_income', None)
         if partner_income:
-            partner_income = partner_income.form.api_payload()
-        return {
-            'you': self.your_income.form.api_payload(),
-            'partner': partner_income
-        }
+            api_payload['partner'] = partner_income.form.api_payload()
+
+        return api_payload
 
 
 def income_form(*args, **kwargs):
