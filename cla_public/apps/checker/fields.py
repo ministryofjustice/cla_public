@@ -209,7 +209,22 @@ def money_interval_to_monthly(data):
     }
 
 
-class MoneyIntervalField(FormField):
+class PassKwargsToFormField(FormField):
+
+    def __init__(self, *args, **kwargs):
+        form_kwargs = kwargs.pop('form_kwargs', {})
+
+        super(PassKwargsToFormField, self).__init__(*args, **kwargs)
+        self._form_class = self.form_class
+
+        def form_class_proxy(*f_args, **f_kwargs):
+            f_kwargs.update(form_kwargs)
+            return self._form_class(*f_args, **f_kwargs)
+
+        self.form_class = form_class_proxy
+
+
+class MoneyIntervalField(PassKwargsToFormField):
     """Convenience class for FormField(MoneyIntervalForm)"""
 
     def __init__(self, *args, **kwargs):
@@ -221,20 +236,10 @@ class MoneyIntervalField(FormField):
         self.validators.append(ValidMoneyInterval())
 
         # Enable kwarg choices to be passed through to interval field
-        self.choices = kwargs.pop('choices', None)
+        choices = kwargs.pop('choices', None)
 
         super(MoneyIntervalField, self).__init__(
-            MoneyIntervalForm, *args, **kwargs)
-
-        # If choices passed through then proxy the self.form_class creator
-        # and pass through the choices when the cinstance is created
-        if self.choices:
-            self._form_class = self.form_class
-
-            def form_class_proxy(*args, **kwargs):
-                return self._form_class(choices=self.choices, *args, **kwargs)
-
-            self.form_class = form_class_proxy
+            MoneyIntervalForm, form_kwargs={'choices': choices}, *args, **kwargs)
 
     def as_monthly(self):
         return money_interval_to_monthly(self.data)
