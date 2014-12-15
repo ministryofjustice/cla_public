@@ -286,11 +286,13 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
     child_benefit = MoneyIntervalField(
         u'Child Benefit',
         description=u"The total amount you get for all your children",
-        choices=money_intervals('', 'per_week', 'per_4week'))
+        choices=money_intervals('', 'per_week', 'per_4week'),
+        validators=[MoneyIntervalAmountRequired()])
     child_tax_credit = MoneyIntervalField(
         u'Child Tax Credit',
         description=u"The total amount you get for all your children",
-        choices=money_intervals_except('per_month'))
+        choices=money_intervals_except('per_month'),
+        validators=[MoneyIntervalAmountRequired()])
     benefits = PartnerMultiCheckboxField(
         u'Do you or your partner get any of these benefits?',
         description=(
@@ -344,18 +346,22 @@ class IncomeFieldForm(NoCsrfForm):
         validators=[MoneyIntervalAmountRequired()])
     working_tax_credit = MoneyIntervalField(
         u'Working Tax Credit',
-        description=u'Extra money for people who work and have a low income')
+        description=u'Extra money for people who work and have a low income',
+        validators=[MoneyIntervalAmountRequired()])
     maintenance = MoneyIntervalField(
         u'Maintenance received',
-        description=u"Payments you get from an ex-partner")
+        description=u"Payments you get from an ex-partner",
+        validators=[MoneyIntervalAmountRequired()])
     pension = MoneyIntervalField(
         u'Pension received',
-        description=u"Payments you receive if you’re retired")
+        description=u"Payments you receive if you’re retired",
+        validators=[MoneyIntervalAmountRequired()])
     other_income = MoneyIntervalField(
         u'Any other income',
         description=(
             u"For example, student grants, income from trust funds, "
-            u"dividends"))
+            u"dividends"),
+        validators=[MoneyIntervalAmountRequired()])
 
     def api_payload(self):
         tax_credits = self.working_tax_credit.data
@@ -416,24 +422,26 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     rent = PartnerMoneyIntervalField(
         u'Rent',
         description=u"Money you and your partner pay your landlord",
-        choices=money_intervals_except('per_4week'))
+        choices=money_intervals_except('per_4week'),
+        validators=[MoneyIntervalAmountRequired()])
     maintenance = PartnerMoneyIntervalField(
         u'Maintenance',
         description=(
             u"Money you and/or your partner pay to an ex-partner for their "
-            u"living costs"))
+            u"living costs"),
+        validators=[MoneyIntervalAmountRequired()])
     income_contribution = PartnerMoneyField(
         u'Monthly Income Contribution Order',
         description=(
             u"Money you and/or your partner pay per month towards your criminal legal "
-            u"aid"),
-        validators=[NotRequired()])
+            u"aid"))
     childcare = PartnerMoneyIntervalField(
         u'Childcare',
         description=(
             u"Money you and your partner pay for your child to be looked "
             u"after while you work or study"),
-        choices=money_intervals_except('per_4week'))
+        choices=money_intervals_except('per_4week'),
+        validators=[MoneyIntervalAmountRequired()])
 
     def api_payload(self):
         return {'you': {'deductions': {
