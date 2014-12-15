@@ -413,7 +413,7 @@ def income_form(*args, **kwargs):
         IncomeForm.partner_income = PassKwargsToFormField(
             IncomeFieldForm,
             form_kwargs={'is_partner': True},
-            label=u'Your partner\'s income')
+            label=u'Your partner‘s income')
 
     return IncomeForm(*args, **kwargs)
 
