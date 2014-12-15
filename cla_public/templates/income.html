@@ -32,7 +32,7 @@
       <fieldset>
         {% if session.has_partner %}
           <h3>Your money coming in</h3>
-          <p>This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.</p>
+          <p>This section is for any money that is paid to you personally - for example, your wages. You should record money coming in for your partner, if you have one, in the next section.</p>
         {% endif %}
         {{ Form.money_interval_field(form.your_income.earnings, is_hidden) }}
         {{ Form.money_interval_field(form.your_income.income_tax, is_hidden) }}
