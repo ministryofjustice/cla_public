@@ -5,12 +5,13 @@ import logging
 import logging.config
 import os
 from flask import Flask, render_template
+from flask.ext.babel import Babel
 from flask.ext.cache import Cache
 from raven.contrib.flask import Sentry
 
 from cla_public.django_to_jinja import change_jinja_templates
 from cla_public.apps.base.views import base
-from cla_public.apps.checker.views import checker
+from cla_public.apps.checker.views import checker, get_locale
 from cla_public.apps.checker.session import CheckerSessionInterface
 
 
@@ -33,6 +34,8 @@ def create_app(config_file=None):
 
     app.session_interface = CheckerSessionInterface()
 
+    app.babel = Babel(app)
+    app.babel.localeselector(get_locale)
     app.cache = Cache(app, config=app.config['CACHE_CONFIG'])
 
     register_error_handlers(app)

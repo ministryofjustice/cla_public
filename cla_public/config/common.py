@@ -97,6 +97,11 @@ CACHE_CONFIG = {
 
 EXTENSIONS = []
 
+LANGUAGES = {
+    'cy': 'Welsh',
+    'en': 'English',
+}
+
 # local.py overrides all the common settings.
 try:
     from cla_public.config.local import *

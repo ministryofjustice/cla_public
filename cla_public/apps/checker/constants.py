@@ -1,76 +1,79 @@
 # -*- coding: utf-8 -*-
+from flask.ext.babel import lazy_gettext as _
+
+
 "Categories the user needs help with"
 CATEGORIES = [
     # value, label, inline help text
     (
         'aap',
-        u'Actions against the police',
-        u'Being treated unlawfully by authorities who detain, imprison and prosecute '
-        u'(for example, the police), abuse in care cases'),
+        _(u'Actions against the police'),
+        _(u'Being treated unlawfully by authorities who detain, imprison and prosecute '
+        u'(for example, the police), abuse in care cases')),
     (
         'clinneg',
-        u'Clinical negligence',
-        u'Doctors and nurses not treating you with due care during medical treatment'),
+        _(u'Clinical negligence'),
+        _(u'Doctors and nurses not treating you with due care during medical treatment')),
     (
         'commcare',
-        u'Community care',
-        (u'You’re unhappy with the care being provided for yourself or a relative due '
-         u'to age, disability or special educational needs - for example, in a care '
-         u'home or your own home')),
+        _(u'Community care'),
+        _(u'You’re unhappy with the care being provided for yourself or a relative due '
+        u'to age, disability or special educational needs - for example, in a care '
+        u'home or your own home')),
     (
         'debt',
-        u'Debt',
-        u'Bankruptcy, repossession, mortgage debt that is putting your home at risk'),
+        _(u'Debt'),
+        _(u'Bankruptcy, repossession, mortgage debt that is putting your home at risk')),
     (
         'violence',
-        u'Domestic violence',
-        u'Abuse at home, child abuse, harassment by an ex-partner, forced marriage'),
+        _(u'Domestic violence'),
+        _(u'Abuse at home, child abuse, harassment by an ex-partner, forced marriage')),
     (
         'discrimination',
-        u'Discrimination',
-        (u'Being treated unfairly because of your race, sex, sexual '
-         u'orientation')),
+        _(u'Discrimination'),
+        _(u'Being treated unfairly because of your race, sex, sexual '
+        u'orientation')),
     (
         'education',
-        u'Education',
-        (u'Special educational needs, problems with school places, '
-         u'exclusions, learning difficulties')),
+        _(u'Education'),
+        _(u'Special educational needs, problems with school places, '
+        u'exclusions, learning difficulties')),
     (
         'employment',
-        u'Employment',
-        u'Being treated unfairly at work, unfair dismissal, employment tribunals'),
+        _(u'Employment'),
+        _(u'Being treated unfairly at work, unfair dismissal, employment tribunals')),
     (
         'family',
-        u'Family',
-        u'Divorce, separation, contact with children, children being taken into care'),
+        _(u'Family'),
+        _(u'Divorce, separation, contact with children, children being taken into care')),
     (
         'housing',
-        u'Housing',
-        u'Eviction, homelessness, losing your rented home, rent arrears, being harassed '
+        _(u'Housing'),
+        _(u'Eviction, homelessness, losing your rented home, rent arrears, being harassed '
         u'by a landlord or neighbour, health and safety issues with your home, anti-social '
-        u'behaviour orders'),
+        u'behaviour orders')),
     (
         'immigration',
-        u'Immigration and asylum',
-        u'Applying for asylum or permission to stay in the UK, including for victims of '
-        u'human trafficking'),
+        _(u'Immigration and asylum'),
+        _(u'Applying for asylum or permission to stay in the UK, including for victims of '
+        u'human trafficking')),
     (
         'mentalhealth',
-        u'Mental health',
-        u'Help with mental health and mental capacity legal issues'),
+        _(u'Mental health'),
+        _(u'Help with mental health and mental capacity legal issues')),
     (
         'pi',
-        u'Personal injury',
-        u'An accident that was not your fault'),
+        _(u'Personal injury'),
+        _(u'An accident that was not your fault')),
     (
         'publiclaw',
-        u'Public law',
-        u'Taking legal action against a public body, like your local council'),
+        _(u'Public law'),
+        _(u'Taking legal action against a public body, like your local council')),
     (
         'benefits',
-        u'Welfare benefits',
-        u'Appealing a decision made by the social security tribunal about your benefits '
-        u'to the Upper Tribunal, Court of Appeal or Supreme Court')
+        _(u'Welfare benefits'),
+        _(u'Appealing a decision made by the social security tribunal about your benefits '
+        u'to the Upper Tribunal, Court of Appeal or Supreme Court'))
 ]
 
 "Outcomes of the checker"
