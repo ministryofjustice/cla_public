@@ -216,6 +216,10 @@ def sum_money_intervals(first, second):
         first['interval_period'])
 
 
+def sum_rents(rents):
+    return reduce(sum_money_intervals, rents, money_interval(0))
+
+
 class PropertiesForm(ConfigFormMixin, Honeypot, Form):
     properties = PropertyList(
         FormField(PropertyForm), min_entries=1, max_entries=3)
@@ -241,7 +245,8 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
     def api_payload(self):
         properties = [prop.form.api_payload() for prop in self.properties]
         rents = [prop['rent'] for prop in properties]
-        total_rent = reduce(sum_money_intervals, rents, money_interval(0))
+        total_rent = sum_rents(rents)
+
         total_mortgage = sum(
             [p.mortgage_payments.data for p in self.properties if p.mortgage_payments.data is not None]
         )
@@ -380,6 +385,12 @@ class IncomeFieldForm(NoCsrfForm):
         if session.is_self_employed and not session.is_employed:
             earnings, self_employed_drawings = self_employed_drawings, earnings
 
+        other_income = self.other_income.data
+        if session.owns_property:
+            rents = [p['rent_amount'] for p in session.get('PropertiesForm_properties', [])]
+            total_rent = sum_rents(rents)
+            other_income = sum_money_intervals(other_income, total_rent)
+
         return {
             'income': {
                 'earnings': earnings,
@@ -387,7 +398,7 @@ class IncomeFieldForm(NoCsrfForm):
                 'tax_credits': tax_credits,
                 'maintenance_received': self.maintenance.data,
                 'pension': self.pension.data,
-                'other_income': self.other_income.data
+                'other_income': other_income
             },
             'deductions': {
                 'income_tax': self.income_tax.data,
