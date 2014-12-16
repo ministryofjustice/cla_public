@@ -108,11 +108,17 @@ def kill_child_processes(pid, sig=signal.SIGTERM):
         os.kill(int(pid_str), sig)
 
 
+def compile_messages(venv_path):
+    """Compile message.po files to mo files for the translations"""
+    run('{venv}/bin/python manage.py compile_messages'.format(venv=venv_path))
+
+
 def main():
     try:
         venv_path = make_virtualenv(env_name())
         install_dependencies(venv_path)
         update_static_assets()
+        compile_messages(venv_path)
         clean_pyc()
         run_tests(venv_path)
     finally:
