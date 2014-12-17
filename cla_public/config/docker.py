@@ -14,5 +14,22 @@ BACKEND_API = {
     'url': os.environ['BACKEND_BASE_URI'] + '/checker/api/v1/'
 }
 
-LOGGING['handlers']['production_file']['filename'] = '/var/log/wsgi/app.log'
-LOGGING['handlers']['debug_file']['filename'] = '/var/log/wsgi/debug.log'
+if DEBUG:
+    LOGGING['handlers']['debug_file'] = {
+        'level': 'DEBUG',
+        'class': 'logging.handlers.RotatingFileHandler',
+        'filename': '/var/log/wsgi/debug.log',
+        'maxBytes': 1024 * 1024 * 5,  # 5MB
+        'backupCount': 7,
+        'formatter': 'verbose'}
+    LOGGING['loggers'][''] = ['debug_file']
+
+else:
+    LOGGING['handlers']['production_file'] = {
+        'level': 'INFO',
+        'class': 'logging.handlers.RotatingFileHandler',
+        'filename': '/var/log/wsgi/app.log',
+        'maxBytes': 1024 * 1024 * 5,  # 5MB
+        'backupCount': 7,
+        'formatter': 'logstash'}
+    LOGGING['loggers']['']['handlers'] = ['production_file']

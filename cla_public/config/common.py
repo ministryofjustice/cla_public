@@ -11,7 +11,9 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': (
+                '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d '
+                '%(message)s')
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
@@ -20,35 +22,7 @@ LOGGING = {
             '()': 'logstash_formatter.LogstashFormatter'
         }
     },
-    'filters': {
-        'require_debug_false': {
-            '()': 'cla_public.libs.logging_filters.RequireDebug',
-            'debug': False
-        },
-        'require_debug_true': {
-            '()': 'cla_public.libs.logging_filters.RequireDebug',
-            'debug': True
-        }
-    },
     'handlers': {
-        'production_file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tmp/app.log',
-            'maxBytes': 1024 * 1024 * 5,  # 5MB
-            'backupCount': 7,
-            'formatter': 'logstash',
-            'filters': ['require_debug_false'],
-        },
-        'debug_file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/tmp/debug.log',
-            'maxBytes': 1024 * 1024 * 5,  # 5MB
-            'backupCount': 7,
-            'formatter': 'verbose',
-            'filters': ['require_debug_true'],
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -58,7 +32,7 @@ LOGGING = {
     },
     'loggers': {
         '': {
-            'handlers': ['production_file', 'debug_file'],
+            'handlers': ['console'],
             'level': 'DEBUG'
         }
     }

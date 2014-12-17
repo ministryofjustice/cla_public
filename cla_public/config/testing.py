@@ -7,11 +7,6 @@ SESSION_COOKIE_SECURE = False
 
 TESTING = True
 
-LOGGING['loggers'] = {
-    '': {
-        'handlers': ['console'],
-        'level': 'INFO'
-    }
-}
+LOGGING['loggers']['']['level'] = 'WARNING'
 
 WTF_CSRF_ENABLED = False
