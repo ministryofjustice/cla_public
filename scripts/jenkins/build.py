@@ -110,7 +110,7 @@ def kill_child_processes(pid, sig=signal.SIGTERM):
 
 def compile_messages(venv_path):
     """Compile message.po files to mo files for the translations"""
-    run('{venv}/bin/python manage.py compile_messages'.format(venv=venv_path))
+    run('{venv}/bin/pybabel compile -d translations'.format(venv=VENV))
 
 
 def main():
