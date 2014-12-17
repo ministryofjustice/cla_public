@@ -14,7 +14,6 @@
     "gulp-declare": "0.2.0",
     "gulp-define-module": "0.1.0",
     "gulp-filter": "^1.0.2",
-    "gulp-handlebars": "2.0.0",
     "gulp-ignore": "^1.2.1",
     "gulp-imagemin": "~0.1.5",
     "gulp-jshint": "~1.5.0",

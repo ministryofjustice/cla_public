@@ -9,13 +9,11 @@ var paths = {
   styles: 'cla_public/static-src/stylesheets/**/*.scss',
   ie_styles: 'cla_public/static-src/ie/**/*.scss',
   scripts: [
-    'cla_public/static-src/javascripts/**/*',
-    '!cla_public/static-src/javascripts/templates/*'
+    'cla_public/static-src/javascripts/**/*'
   ],
   vendor_scripts: vendorFiles,
   images: 'cla_public/static-src/images/**/*',
   templates: 'cla_public/templates/**/*',
-  clientTemplates: 'cla_public/static-src/javascripts/templates/**/*'
 };
 
 module.exports = paths;

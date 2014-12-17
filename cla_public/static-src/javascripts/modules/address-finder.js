@@ -9,6 +9,7 @@
       _.bindAll(this, 'render', 'onEnter', 'onclickFindBtn', 'onchangeAddress', 'queryAddressFinder', 'queryFail', 'querySuccess');
       this.cacheEls();
       this.bindEvents();
+      this.templates();
     },
 
     cacheEls: function () {
@@ -102,7 +103,7 @@
     },
 
     render: function () {
-      this.$postcode.after(CLA.templates.AddressFinder.findButton());
+      this.$postcode.after(this.buttonTemplate());
     },
 
     renderAddressList: function (addresses) {
@@ -117,9 +118,9 @@
       });
 
       if ($list.length > 0) {
-        $list.replaceWith(CLA.templates.AddressFinder.addressList({items: addrItems, count: addresses.length}));
+        $list.replaceWith(this.listTemplate({items: addrItems, count: addresses.length}));
       } else {
-        this.$postcodeRow.after(CLA.templates.AddressFinder.addressList({items: addrItems, count: addresses.length}));
+        this.$postcodeRow.after(this.listTemplate({items: addrItems, count: addresses.length}));
       }
       $('.address-list .form-control').focus();
     },
@@ -135,6 +136,11 @@
         .find('.field-error').parent().remove();
 
       $('.address-list').remove();
+    },
+
+    templates: function () {
+      this.listTemplate = _.template($('#addressFinderList').html());
+      this.buttonTemplate = _.template($('#addressFinderButton').html());
     }
   };
 }());
