@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-17 16:25+0000\n"
+"POT-Creation-Date: 2014-12-17 16:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -336,6 +336,7 @@ msgid "-- Choose a language --"
 msgstr ""
 
 #: cla_public/apps/checker/fields.py:142 cla_public/apps/checker/fields.py:150
+#: cla_public/apps/checker/validators.py:101
 msgid "Not a valid amount"
 msgstr ""
 
@@ -778,7 +779,23 @@ msgstr ""
 msgid "This field must be left empty"
 msgstr ""
 
+#: cla_public/apps/checker/honeypot.py:38
+msgid "Leave this field empty"
+msgstr ""
+
 #: cla_public/apps/checker/validators.py:70
 msgid "Must select at least one option."
+msgstr ""
+
+#: cla_public/apps/checker/validators.py:79
+msgid "Please provide an amount"
+msgstr ""
+
+#: cla_public/apps/checker/validators.py:104
+msgid "Please select a time period from the drop down"
+msgstr ""
+
+#: cla_public/apps/checker/validators.py:124
+msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
