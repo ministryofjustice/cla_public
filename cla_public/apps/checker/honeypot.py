@@ -1,5 +1,6 @@
 from wtforms import StringField, widgets
 from wtforms.fields.core import UnboundField
+from flask.ext.babel import lazy_gettext as _
 
 
 # This should be something a bot would want to fill in
