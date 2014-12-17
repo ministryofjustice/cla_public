@@ -102,7 +102,7 @@
     },
 
     render: function () {
-      this.$postcode.after(CLA.templates.AddressFinder.findButton());
+      this.$postcode.after(moj.Templates.AddressFinder.findButton());
     },
 
     renderAddressList: function (addresses) {
@@ -117,9 +117,9 @@
       });
 
       if ($list.length > 0) {
-        $list.replaceWith(CLA.templates.AddressFinder.addressList({items: addrItems, count: addresses.length}));
+        $list.replaceWith(moj.Templates.AddressFinder.addressList({items: addrItems, count: addresses.length}));
       } else {
-        this.$postcodeRow.after(CLA.templates.AddressFinder.addressList({items: addrItems, count: addresses.length}));
+        this.$postcodeRow.after(moj.Templates.AddressFinder.addressList({items: addrItems, count: addresses.length}));
       }
       $('.address-list .form-control').focus();
     },

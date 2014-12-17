@@ -10,7 +10,6 @@
     "tests"
   ],
   "dependencies": {
-    "lodash": "~2.4.1",
-    "handlebars": "~1.3.0"
+    "lodash": "~2.4.1"
   }
 }

@@ -9,7 +9,6 @@ requireDir('./tasks');
 
 gulp.task('build', [
     'minify-css',
-    'client-templates',
     'minify-scripts',
     'images'
   ]
