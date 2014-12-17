@@ -5,7 +5,7 @@ import logging
 
 from flask import session, request
 from flask_wtf import Form
-from flask.ext.babel import lazy_gettext as _
+from flask.ext.babel import lazy_gettext as _, gettext
 import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import IntegerField, StringField, \
@@ -66,7 +66,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
               u"separation")),
         validators=[
             IgnoreIf('have_partner', FieldValue(NO)),
-            InputRequired(message=_(u'Please choose Yes or No'))
+            InputRequired(message=gettext(u'Please choose Yes or No'))
         ])
     on_benefits = YesNoField(
         _(u'Do you receive any benefits (including Child Benefit)?'),
@@ -248,12 +248,12 @@ class SavingsForm(ConfigFormMixin, Honeypot, Form):
         description=(
             _(u"The total amount of savings in cash, bank or building society")),
         validators=[InputRequired(
-            message=_(u'Enter 0 if you have no savings')
+            message=gettext(u'Enter 0 if you have no savings')
         )])
     investments = MoneyField(
         description=_(u"This includes stocks, shares, bonds (but not property)"),
         validators=[InputRequired(
-            message=_(u'Enter 0 if you have no investments')
+            message=gettext(u'Enter 0 if you have no investments')
         )])
     valuables = PartnerMoneyField(
         _(u'Total value of items worth over £500 each'))
@@ -465,7 +465,7 @@ class ApplicationForm(Honeypot, Form):
     safe_to_contact = RadioField(
         _(u'Is it safe for us to leave a message on this number?'),
         choices=CONTACT_SAFETY,
-        validators=[InputRequired(message=_(u'Please choose Yes or No'))],
+        validators=[InputRequired(message=gettext(u'Please choose Yes or No'))],
     )
     post_code = StringField(_(u'Postcode'))
     address = TextAreaField(_(u'Address'))
