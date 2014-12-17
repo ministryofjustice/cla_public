@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block page_heading %}
-  Your session has expired
-{% endblock %}
+{% block page_title %}Session expired - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>Your session has expired</h1>
+
   <p>You can start again by clicking the button below.</p>
 
   <p>

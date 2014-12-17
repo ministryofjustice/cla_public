@@ -3,15 +3,15 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
-{% block page_heading %}
-  {% if session.has_partner %}
-    You and your partner’s property
-  {% else %}
-    Your property
-  {% endif %}
-{% endblock %}
+{% if session.has_partner %}
+  {% set title = 'You and your partner’s property' %}
+{% else %}
+  {% set title = 'Your property' %}
+{% endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>{{ title }}</h1>
 
   {% if session.has_partner %}
     <p>Please tell us about any property owned by you, your partner or both of you.</p>

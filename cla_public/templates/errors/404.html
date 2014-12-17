@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
-{% block page_heading %}Error 404 - sorry, this page doesn’t exist{% endblock %}
+{% block page_title %}404: Page not found - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-<p>Please return to the <a href="/">Can I get legal aid?</a> page and try again.</p>
+  <h1>Sorry, this page doesn’t exist</h1>
+  <p>Please return to the <a href="/">Can I get legal aid?</a> page and try again.</p>
 {% endblock %}

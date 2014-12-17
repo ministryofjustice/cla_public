@@ -3,13 +3,14 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% block page_heading %}Your feedback{% endblock %}
+{% set title = 'Your feedback' %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <p>
-    Please don't include any personal or financial details
-    <br>
-    For example, your National Insurance or credit card numbers.
+  <h1>{{ title }}</h1>
+  <p class="subtitle">
+    Please don't include any personal or financial details,
+    for example, your National Insurance or credit card numbers.
   </p>
 
   <form method="POST" action="{{ url_for('.feedback') }}">

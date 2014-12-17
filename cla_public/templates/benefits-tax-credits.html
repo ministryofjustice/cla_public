@@ -3,15 +3,15 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% block page_heading %}
-  {% if session.has_partner %}
-    You and your partner’s benefits and tax credits
-  {% else %}
-    Your benefits and tax credits
-  {% endif %}
-{% endblock %}
+{% if session.has_partner %}
+  {% set title = 'You and your partner’s benefits and tax credits' %}
+{% else %}
+  {% set title = 'Your benefits and tax credits' %}
+{% endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>{{ title }}</h1>
   <p>
     We need to know about any benefits and tax credits your whole household receives.
     Please answer these questions as fully and accurately as you can.

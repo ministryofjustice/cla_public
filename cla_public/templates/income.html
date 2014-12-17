@@ -5,20 +5,20 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% block page_heading %}
-  {% if session.has_partner %}
-    You and your partner’s
-  {% else %}
-    Your
-  {% endif %}
-  {% if session.is_employed or session.is_self_employed %}
-    income and tax
-  {% else %}
-    money coming in
-  {%  endif %}
-{% endblock %}
+{% if session.has_partner %}
+  {% set title = 'You and your partner’s' %}
+{% else %}
+  {% set title = 'Your' %}
+{% endif %}
+{% if session.is_employed or session.is_self_employed %}
+  {% set title = title + ' income and tax' %}
+{% else %}
+  {% set title = title + ' money coming in' %}
+{%  endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>{{ title }}</h1>
   <p>
     We need to know how much money you have coming in, because this affects
     whether or not you can get legal aid. Please answer these questions as

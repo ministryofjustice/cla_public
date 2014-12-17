@@ -1,14 +1,13 @@
 {% extends "call-me-back.html" %}
 
-{% block page_heading %}
-  {% if eligibility_unknown %}
-    We need more information
-  {% else %}
-    You might qualify for legal aid
-  {% endif %}
-{% endblock %}
-
 {% block page_text %}
+  <h1>
+    {%- if eligibility_unknown -%}
+      We need more information
+    {%- else -%}
+      You might qualify for legal aid
+    {%- endif -%}
+  </h1>
   <h2>Request a callback</h2>
 
   <p>

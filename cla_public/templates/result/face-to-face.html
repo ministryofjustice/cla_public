@@ -1,24 +1,18 @@
 {% extends "base.html" %}
 
-{% block page_heading %}
-    We do not provide advice about issues related to {{ category_name|lower }}
-{% endblock %}
-
-{% block page_subheading %}
-  <h2>
-    {% if category == 'clinneg' %}
-      You will usually only get Legal Aid for advice about Clinical Negligence if your child has been severely injured during birth or in the first 8 weeks of life.
-    {% elif category == 'pi' %}
-      Legal Aid is not usually available for advice about personal injury.
-    {% elif category != 'employment' %}
-      You may be able to get advice from a legal advisor in your area
-    {% endif %}
-  </h2>
-{% endblock %}
-
 {% block inner_content %}
-  {% if category == 'employment' %}
+  <h1>We do not provide advice about issues related to {{ category_name|lower }}</h1>
+  <h2>
+    {%- if category == 'clinneg' -%}
+      You will usually only get Legal Aid for advice about Clinical Negligence if your child has been severely injured during birth or in the first 8 weeks of life.
+    {%- elif category == 'pi' -%}
+      Legal Aid is not usually available for advice about personal injury.
+    {%- elif category != 'employment' -%}
+      You may be able to get advice from a legal advisor in your area
+    {%- endif -%}
+  </h2>
 
+  {% if category == 'employment' %}
     <p>If your employment problem relates to discrimination (for example, you have been treated
     unfairly because of your sex, age or other protected characteristic) we might be able to help.
     Ask a Civil Legal Advice operator to <a href="{{ url_for('checker.call_me_back') }}">call you back</a>.</p>

@@ -3,10 +3,6 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% block page_heading %}
-  Request a callback
-{% endblock %}
-
 {% block javascripts %}
   {{ super() }}
 
@@ -29,9 +25,12 @@
   </script>
 
 {% endblock %}
+{% set title = 'Request a callback' %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
   {% block page_text %}
+    <h1>{{ title }}</h1>
     <p>
       Fill in your personal details to get a callback from Civil Legal Advice and see if you qualify for specialist
       advice on debt, education, discrimination, housing or family problems funded by legal aid.
