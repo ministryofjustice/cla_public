@@ -11,7 +11,6 @@ log = logging.getLogger(__name__)
 class StatsdMiddleware(object):
 
     def __init__(self, app, config):
-        log.info('Statsd middleware started')
         self.app = app
         self.client = statsd.StatsClient(
             config['STATSD_HOST'],

@@ -6,13 +6,6 @@ from .common import *
 DEBUG = True
 SESSION_COOKIE_SECURE = False
 
-LOGGING['loggers'] = {
-    '': {
-        'handlers': ['console'],
-        'level': 'DEBUG'
-    }
-}
-
 DEBUG_TB_INTERCEPT_REDIRECTS = False
 EXTENSIONS.append(DebugToolbarExtension())
 
