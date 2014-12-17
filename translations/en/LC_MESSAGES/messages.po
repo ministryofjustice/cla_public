@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-16 10:32+0000\n"
+"POT-Creation-Date: 2014-12-17 16:25+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -16,6 +16,42 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+
+#: cla_public/apps/base/constants.py:6
+msgid "Very satisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:7
+msgid "Satisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:8
+msgid "Neither satisfied or dissatisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:9
+msgid "Dissatisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:10
+msgid "Very dissatisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:15
+msgid "No, I filled in this form myself"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:16
+msgid "I have difficulty using computers so someone filled in this form for me"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:17
+msgid "I used an accessibility tool such as a screen reader"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:18
+msgid "I had some other kind of help"
+msgstr ""
 
 #: cla_public/apps/checker/constants.py:10
 msgid "Actions against the police"
@@ -151,28 +187,591 @@ msgid ""
 "benefits to the Upper Tribunal, Court of Appeal or Supreme Court"
 msgstr ""
 
-#: cla_public/apps/checker/fields.py:141 cla_public/apps/checker/fields.py:149
+#: cla_public/apps/checker/constants.py:81
+msgid "Eligible"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:82
+msgid "Face-to-face"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:83
+msgid "Confirmation"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:88
+msgid "Income Support"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:89
+msgid "Income-based Jobseeker’s Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:90
+msgid "Guarantee Credit"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:91
+msgid "Universal Credit"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:92
+msgid "Income-related Employment and Support Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:93
+msgid "A different benefit not listed above"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:100
+msgid "-- Please select --"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:101
+msgid "per week"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:102
+msgid "4 weekly"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:103
+msgid "per month"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:104
+msgid "per year"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:108
+msgid "Attendance Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:109
+msgid "Care in the community Direct Payment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:110
+msgid "Carers’ Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:111
+msgid "Constant Attendance Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:112
+msgid "Council Tax Benefits"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:113
+msgid "Disability Living Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:114
+msgid "Earnings Top Up"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:115
+msgid "Exceptionally Severe Disablement Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:116
+msgid "Fostering Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:117
+msgid "Housing Benefit"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:118
+msgid "Independent Living Funds payment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:119
+msgid "National Asylum Support Service benefit"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:120
+msgid "Personal Independent Payments"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:121
+msgid "Severe Disablement Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:122
+msgid "Social Fund Payments"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:123
+msgid "War Pension"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:124
+msgid "Widow’s Pension lump sum payments"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:151
+msgid "Call me today at"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:152
+msgid "Call me tomorrow at"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:153
+msgid "Call me in the next week on"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:157
+msgid "Yes"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:158
+msgid "No"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:34
+msgid "-- Choose a language --"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:142 cla_public/apps/checker/fields.py:150
 msgid "Not a valid amount"
 msgstr ""
 
-#: cla_public/apps/checker/fields.py:154
+#: cla_public/apps/checker/fields.py:155
 msgid "This amount must be more than £{:.0f}"
 msgstr ""
 
-#: cla_public/apps/checker/fields.py:160
+#: cla_public/apps/checker/fields.py:161
 msgid "This amount must be less than £{:.0f}"
 msgstr ""
 
-#: cla_public/apps/checker/fields.py:322
+#: cla_public/apps/checker/fields.py:295
+msgid "BSL - Webcam"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:296
+msgid "Minicom"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:297
+msgid "Text Relay"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:298
+msgid "Welsh"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:299
+msgid "Other language"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:301
+msgid "Language required:"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:303
+msgid "Any other communication needs"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:305
+msgid "Other communication needs"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:306
+msgid "Please tell us what you need in the box below"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:323
 msgid "Not a valid choice"
 msgstr ""
 
-#: cla_public/apps/checker/fields.py:340
+#: cla_public/apps/checker/fields.py:341
 msgid "Not a valid date"
 msgstr ""
 
-#: cla_public/apps/checker/fields.py:360
+#: cla_public/apps/checker/fields.py:361
 msgid "Not a valid time"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:369
+msgid "Arrange a callback time"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:40
+msgid "What do you need help with?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:58
+msgid "Do you have a partner?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:60
+msgid ""
+"Your partner is your husband, wife, civil partner or someone you live "
+"with as if you’re married"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:63
+msgid "If Yes, are you in a dispute with your partner?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:65
+msgid "This means a dispute over money or property following a separation"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:69 cla_public/apps/checker/forms.py:468
+msgid "Please choose Yes or No"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:72
+msgid "Do you receive any benefits (including Child Benefit)?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:74
+msgid "Being on some benefits can help you qualify for legal aid"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:76
+msgid "Do you have any children aged 15 or under?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:77
+msgid "Don't include any children who don't live with you"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:79 cla_public/apps/checker/forms.py:87
+msgid "If Yes, how many?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:84
+msgid "Do you have any dependants aged 16 or over?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:85
+msgid "People who you live with and support financially"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:92
+msgid "Do you have any savings or investments?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:94
+msgid "Do you have any valuable items worth over £500 each?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:96
+msgid "Do you own any property?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:97
+msgid "For example, a house, static caravan or flat"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:99
+msgid "Are you employed?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:101
+msgid ""
+"This means working as an employee - you may be both employed and self-"
+"employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:104
+msgid "Is your partner employed?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:106
+msgid ""
+"This means working as an employee - your partner may be both employed and"
+" self-employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:110
+msgid "Are you self-employed?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:112
+msgid ""
+"This means working for yourself - you may be both employed and self-"
+"employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:115
+msgid "Is your partner self-employed?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:117
+msgid ""
+"This means working for yourself - your partner may be both employed and "
+"self-employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:120
+msgid "Are you aged 60 or over?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:135
+msgid "Are you or your partner on any of these benefits?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:151
+msgid "Is this property your main home?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:153
+msgid ""
+"If you are separated and no longer live in the property you own, please "
+"answer ‘no’"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:156
+msgid ""
+"Does anyone else (other than you or your partner) own a share of the "
+"property?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:157
+msgid "Select 'Yes' if you share ownership with a friend, relative or ex-partner"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:159
+msgid "How much is the property worth?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:160
+msgid "Use a property website or the Land Registry house prices website."
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:161
+msgid "Please enter a valid amount"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:163
+msgid "How much is left to pay on the mortgage?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:165
+msgid "Include the full amount owed, even if the property has shared ownership"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:169
+msgid "How much are your monthly mortgage repayments?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:171
+msgid "Do you rent out any part of this property?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:173
+msgid "If Yes, how much rent do you receive?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:179
+msgid "Is your share of the property in dispute?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:181
+msgid "For example, as part of the financial settlement of a divorce"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:249
+msgid "The total amount of savings in cash, bank or building society"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:251
+msgid "Enter 0 if you have no savings"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:254
+msgid "This includes stocks, shares, bonds (but not property)"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:256
+msgid "Enter 0 if you have no investments"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:259
+msgid "Total value of items worth over £500 each"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:276
+msgid "Child Benefit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:277 cla_public/apps/checker/forms.py:282
+msgid "The total amount you get for all your children"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:281
+msgid "Child Tax Credit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:286
+msgid "Do you or your partner get any of these benefits?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:288
+msgid "These benefits don’t count as income. Please tick the ones you receive."
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:292
+msgid "Do you or your partner receive any other benefits not listed above? "
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:293
+msgid ""
+"For example, Incapacity Benefit,             Contribution-based "
+"Jobseeker's Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:296
+msgid "If Yes, total amount of benefits not listed above"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:323
+msgid "Wages before tax"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:325
+msgid "This includes all your wages and any earnings from self-employment"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:329
+msgid "Income tax"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:331
+msgid ""
+"Tax paid directly out of your wages and any tax you pay on self-employed "
+"earnings"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:335
+msgid "National Insurance contributions"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:337
+msgid ""
+"Check your payslip or your National Insurance statement if you’re self-"
+"employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:341
+msgid "Working Tax Credit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:342
+msgid "Extra money for people who work and have a low income"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:345
+msgid "Maintenance received"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:346
+msgid "Payments you get from an ex-partner"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:349
+msgid "Pension received"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:350
+msgid "Payments you receive if you’re retired"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:353
+msgid "Any other income"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:355
+msgid "For example, student grants, income from trust funds, dividends"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:395
+msgid "Your personal income"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:418
+msgid "Your partner‘s income"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:425
+msgid "Rent"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:426
+msgid "Money you and your partner pay your landlord"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:430
+msgid "Maintenance"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:432
+msgid "Money you and/or your partner pay to an ex-partner for their living costs"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:436
+msgid "Monthly Income Contribution Order"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:438
+msgid ""
+"Money you and/or your partner pay per month towards your criminal legal "
+"aid"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:441
+msgid "Childcare"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:443
+msgid ""
+"Money you and your partner pay for your child to be looked after while "
+"you work or study"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:460
+msgid "Full name"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:463
+msgid "Contact phone number"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:466
+msgid "Is it safe for us to leave a message on this number?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:470
+msgid "Postcode"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:471
+msgid "Address"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:473
+msgid "Help the operator to understand your situation"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:475
+msgid ""
+"If you’d like to tell us more about your problem, please do so in the box"
+" below. The Civil Legal Advice operator will read this before they call "
+"you."
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:481
+msgid "Do you have any special communication needs?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:483
+msgid "Select a time for us to call you"
 msgstr ""
 
 #: cla_public/apps/checker/honeypot.py:29
@@ -184,10 +783,6 @@ msgid "Must select at least one option."
 msgstr ""
 
 #~ msgid ""
-#~ "You’re unhappy with the care being "
-#~ "provided for yourself or a relative "
-#~ "- for example, in a care home "
-#~ "or your own home"
 #~ msgstr ""
 
 #~ msgid "Struggling to manage or pay off debt, bankruptcy, repossession"

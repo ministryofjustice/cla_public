@@ -6,6 +6,7 @@ import re
 import datetime
 
 from flask import session
+from flask.ext.babel import lazy_gettext as _
 import pytz
 from wtforms import Form as NoCsrfForm, TextAreaField
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
@@ -30,7 +31,7 @@ partner_regex = re.compile(r'(and/or|and|or) your partner')
 
 LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
-    [('', '-- Choose a language --')] + ADAPTATION_LANGUAGES)
+    [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
 
 
 class DynamicPartnerLabel(Label):
@@ -291,18 +292,18 @@ class PartnerMultiCheckboxField(MultiCheckboxField, PartnerMixin):
 
 
 class AdaptationsForm(NoCsrfForm):
-    bsl_webcam = BooleanField(u'BSL - Webcam')
-    minicom = BooleanField(u'Minicom')
-    text_relay = BooleanField(u'Text Relay')
-    welsh = BooleanField(u'Welsh')
-    is_other_language = BooleanField(u'Other language')
+    bsl_webcam = BooleanField(_(u'BSL - Webcam'))
+    minicom = BooleanField(_(u'Minicom'))
+    text_relay = BooleanField(_(u'Text Relay'))
+    welsh = BooleanField(_(u'Welsh'))
+    is_other_language = BooleanField(_(u'Other language'))
     other_language = SelectField(
-        u'Language required:',
+        _(u'Language required:'),
         choices=(LANG_CHOICES))
-    is_other_adaptation = BooleanField(u'Any other communication needs')
+    is_other_adaptation = BooleanField(_(u'Any other communication needs'))
     other_adaptation = TextAreaField(
-        u'Other communication needs',
-        description=u'Please tell us what you need in the box below')
+        _(u'Other communication needs'),
+        description=_(u'Please tell us what you need in the box below'))
 
 
 class PartnerMoneyField(MoneyField, PartnerMixin):
@@ -365,7 +366,7 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
 
 class AvailabilityCheckerForm(NoCsrfForm):
     specific_day = RadioField(
-        label=u'Arrange a callback time',
+        label=_(u'Arrange a callback time'),
         choices=DAY_CHOICES,
         default=DAY_TODAY)
 

@@ -78,50 +78,50 @@ CATEGORIES = [
 
 "Outcomes of the checker"
 RESULT_OPTIONS = [
-    ('eligible', u'Eligible'),
-    ('face-to-face', u'Face-to-face'),
-    ('confirmation', u'Confirmation'),
+    ('eligible', _(u'Eligible')),
+    ('face-to-face', _(u'Face-to-face')),
+    ('confirmation', _(u'Confirmation')),
 ]
 
 "Benefits"
 BENEFITS_CHOICES = [
-    ('income_support', u'Income Support'),
-    ('job_seekers_allowance', u'Income-based Jobseeker’s Allowance'),
-    ('pension_credit', u'Guarantee Credit'),
-    ('universal_credit', u'Universal Credit'),
-    ('employment_support', u'Income-related Employment and Support Allowance'),
-    ('other-benefit', u'A different benefit not listed above'),
+    ('income_support', _(u'Income Support')),
+    ('job_seekers_allowance', _(u'Income-based Jobseeker’s Allowance')),
+    ('pension_credit', _(u'Guarantee Credit')),
+    ('universal_credit', _(u'Universal Credit')),
+    ('employment_support', _(u'Income-related Employment and Support Allowance')),
+    ('other-benefit', _(u'A different benefit not listed above')),
 ]
 
-PASSPORTED_BENEFITS = [benefit for benefit, _ in BENEFITS_CHOICES[0:-1]]
+PASSPORTED_BENEFITS = [benefit for benefit, label in BENEFITS_CHOICES[0:-1]]
 NASS_BENEFITS = ('asylum-support',)
 
 MONEY_INTERVALS = [
-    ('', '-- Please select --'),
-    ('per_week', 'per week'),
-    ('per_4week', '4 weekly'),
-    ('per_month', 'per month'),
-    ('per_year', 'per year')
+    ('', _('-- Please select --')),
+    ('per_week', _('per week')),
+    ('per_4week', _('4 weekly')),
+    ('per_month', _('per month')),
+    ('per_year', _('per year'))
 ]
 
 NON_INCOME_BENEFITS = [
-    ('attendance', u'Attendance Allowance'),
-    ('care-community', u'Care in the community Direct Payment'),
-    ('carers', u'Carers’ Allowance'),
-    ('constant-attendance', u'Constant Attendance Allowance'),
-    ('ctax-benefits', u'Council Tax Benefits'),
-    ('disability-living', u'Disability Living Allowance'),
-    ('earnings-top-up', u'Earnings Top Up'),
-    ('ex-severe-disablement', u'Exceptionally Severe Disablement Allowance'),
-    ('fostering', u'Fostering Allowance'),
-    ('housing', u'Housing Benefit'),
-    ('indep-living', u'Independent Living Funds payment'),
-    ('asylum-support', u'National Asylum Support Service benefit'),
-    ('personal-indep', u'Personal Independent Payments'),
-    ('severe-disablement', u'Severe Disablement Allowance'),
-    ('social-fund', u'Social Fund Payments'),
-    ('war-pension', u'War Pension'),
-    ('widows-pension', u'Widow’s Pension lump sum payments'),
+    ('attendance', _(u'Attendance Allowance')),
+    ('care-community', _(u'Care in the community Direct Payment')),
+    ('carers', _(u'Carers’ Allowance')),
+    ('constant-attendance', _(u'Constant Attendance Allowance')),
+    ('ctax-benefits', _(u'Council Tax Benefits')),
+    ('disability-living', _(u'Disability Living Allowance')),
+    ('earnings-top-up', _(u'Earnings Top Up')),
+    ('ex-severe-disablement', _(u'Exceptionally Severe Disablement Allowance')),
+    ('fostering', _(u'Fostering Allowance')),
+    ('housing', _(u'Housing Benefit')),
+    ('indep-living', _(u'Independent Living Funds payment')),
+    ('asylum-support', _(u'National Asylum Support Service benefit')),
+    ('personal-indep', _(u'Personal Independent Payments')),
+    ('severe-disablement', _(u'Severe Disablement Allowance')),
+    ('social-fund', _(u'Social Fund Payments')),
+    ('war-pension', _(u'War Pension')),
+    ('widows-pension', _(u'Widow’s Pension lump sum payments')),
 ]
 
 F2F_CATEGORIES = (
@@ -148,12 +148,12 @@ DAY_TODAY = 'today'
 DAY_TOMORROW = 'tomorrow'
 DAY_SPECIFIC = 'specific_day'
 DAY_CHOICES = (
-    (DAY_TODAY, 'Call me today at'),
-    (DAY_TOMORROW, 'Call me tomorrow at'),
-    (DAY_SPECIFIC, 'Call me in the next week on')
+    (DAY_TODAY, _('Call me today at')),
+    (DAY_TOMORROW, _('Call me tomorrow at')),
+    (DAY_SPECIFIC, _('Call me in the next week on'))
 )
 
 CONTACT_SAFETY = (
-    ('SAFE', 'Yes'),
-    ('NO_MESSAGE', 'No'),
+    ('SAFE', _('Yes')),
+    ('NO_MESSAGE', _('No')),
 )
