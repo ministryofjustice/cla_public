@@ -62,7 +62,7 @@ class PartnerMixin(object):
             return None
         desc = self._description
         if not session.has_partner and 'partner' in self._description:
-            desc = re.sub(partner_regex, '', desc)
+            desc = re.sub(partner_regex, '', unicode(desc))
         return desc
 
     @description.setter
