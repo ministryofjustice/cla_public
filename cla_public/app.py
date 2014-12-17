@@ -13,6 +13,7 @@ from cla_public.django_to_jinja import change_jinja_templates
 from cla_public.apps.base.views import base
 from cla_public.apps.checker.views import checker, get_locale
 from cla_public.apps.checker.session import CheckerSessionInterface
+from cla_public.middleware import StatsdMiddleware
 
 
 log = logging.getLogger(__name__)
@@ -44,6 +45,8 @@ def create_app(config_file=None):
     app.register_blueprint(checker)
 
     logging.config.dictConfig(app.config['LOGGING'])
+
+    app.wsgi_app = StatsdMiddleware(app.wsgi_app, app.config)
 
     if app.debug:
         from werkzeug.debug import DebuggedApplication
