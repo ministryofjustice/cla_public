@@ -15,7 +15,7 @@ def get_en_locale():
 class TestApiPayloads(unittest.TestCase):
 
     def setUp(self):
-        self.patcher = patch('cla_public.libs.form_config_parser.get_locale', get_en_locale)
+        self.patcher = patch('cla_public.libs.utils.get_locale', get_en_locale)
         self.patcher.start()
         self.app = app.create_app('config/testing.py')
         self._ctx = self.app.test_request_context()

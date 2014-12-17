@@ -4,12 +4,7 @@ import yaml
 
 from flask import current_app, request
 
-
-# mock this out for testing
-def get_locale():
-    return request.accept_languages.best_match(
-        current_app.config.get('LANGUAGES').keys()
-    ) or 'en'
+from cla_public.libs.utils import get_locale
 
 
 class FormConfigParser(object):
