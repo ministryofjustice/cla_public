@@ -2,10 +2,12 @@ import os
 import unittest
 from wtforms import StringField
 from flask_wtf import Form
+from mock import patch
 
 from cla_public import app
 from cla_public.apps.checker.fields import DescriptionRadioField
-from cla_public.apps.checker.forms import ConfigFormMixin, AboutYouForm
+from cla_public.apps.checker.forms import AboutYouForm
+from cla_public.libs.form_config_parser import ConfigFormMixin
 
 
 FORMS_CONFIG = 'config/forms_config.yml'
@@ -29,6 +31,10 @@ CHOICES = (
 )
 
 
+def get_en_locale():
+    return 'en'
+
+
 class TestDescriptionRadioFieldForm(ConfigFormMixin, Form):
 
     radio_select = DescriptionRadioField(
@@ -40,12 +46,14 @@ class TestDescriptionRadioFieldForm(ConfigFormMixin, Form):
 class TestFormConfig(unittest.TestCase):
 
     def setUp(self):
+        self.patcher = patch('cla_public.libs.form_config_parser.get_locale', get_en_locale)
+        self.patcher.start()
         self.app = app.create_app('config/testing.py')
         self._ctx = self.app.test_request_context()
         self._ctx.push()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_field_more_info(self):
         form = TestConfigForm(config_path=FORMS_CONFIG_PATH)

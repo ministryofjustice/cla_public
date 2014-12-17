@@ -3,50 +3,33 @@
 
 import logging
 
-from flask import current_app, session, request
+from flask import session, request
 from flask_wtf import Form
 import pytz
-
 from wtforms import Form as NoCsrfForm
-from wtforms import IntegerField, SelectField, StringField, \
+from wtforms import IntegerField, StringField, \
     TextAreaField, FormField, RadioField
-from wtforms.fields.core import UnboundField
 from wtforms.validators import InputRequired, NumberRange, Optional
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY, \
+    NON_INCOME_BENEFITS, YES, NO, CONTACT_SAFETY, \
     PASSPORTED_BENEFITS
 from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
-    MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
+    YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
     PropertyList, money_interval_to_monthly,
     AdaptationsForm,
     PassKwargsToFormField)
-from cla_public.apps.checker.form_config_parser import FormConfigParser
+from cla_public.libs.form_config_parser import ConfigFormMixin
 from cla_public.apps.checker.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired, NotRequired, FieldValueOrNone
+    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone
 
 
 log = logging.getLogger(__name__)
-
-
-class ConfigFormMixin(object):
-    def __init__(self, *args, **kwargs):
-        config_path = kwargs.pop('config_path', None)
-
-        super(ConfigFormMixin, self).__init__(*args, **kwargs)
-
-        config = FormConfigParser(
-            self.__class__.__name__, config_path=config_path)
-
-        if config:
-            # set config attributes on the field
-            for field_name, field in self._fields.iteritems():
-                field.__dict__.update(config.get(field_name, field))
 
 
 class ProblemForm(ConfigFormMixin, Honeypot, Form):

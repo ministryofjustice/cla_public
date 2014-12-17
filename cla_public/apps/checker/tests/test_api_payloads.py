@@ -1,4 +1,4 @@
-from mock import Mock
+from mock import Mock, patch
 import unittest
 
 import flask
@@ -8,11 +8,22 @@ from cla_public import app
 from cla_public.apps.checker.forms import YourBenefitsForm
 
 
+def get_en_locale():
+    return 'en'
+
+
 class TestApiPayloads(unittest.TestCase):
 
     def setUp(self):
+        self.patcher = patch('cla_public.libs.form_config_parser.get_locale', get_en_locale)
+        self.patcher.start()
         self.app = app.create_app('config/testing.py')
+        self._ctx = self.app.test_request_context()
+        self._ctx.push()
         self.app = self.app.test_client()
+
+    def tearDown(self):
+        self.patcher.stop()
 
     def payload(self, form_class, form_data):
         form_class._get_translations = lambda args: None
