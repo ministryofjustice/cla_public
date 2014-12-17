@@ -76,7 +76,7 @@ class MoneyIntervalAmountRequired(object):
     def __call__(self, form, field):
         amount = field.form.per_interval_value.data
         if amount is None:
-            raise ValidationError(u'Please provide an amount')
+            raise ValidationError(field.gettext(u'Please provide an amount'))
 
 
 class ValidMoneyInterval(object):
@@ -98,10 +98,10 @@ class ValidMoneyInterval(object):
             raise e
 
         if interval_selected and amount_not_set:
-            raise ValidationError(u'Not a valid amount')
+            raise ValidationError(field.gettext(u'Not a valid amount'))
 
         if not interval_selected and nonzero_amount:
-            raise ValidationError(u'Please select a time period from the drop down')
+            raise ValidationError(field.gettext(u'Please select a time period from the drop down'))
 
 
 class AvailableSlot(object):
@@ -121,7 +121,7 @@ class AvailableSlot(object):
         time = datetime.datetime.combine(date, field.data)
         if not available(time):
             raise ValidationError(
-                u"Can't schedule a callback at the requested time")
+                field.gettext(u"Can't schedule a callback at the requested time"))
 
 
 class NotRequired(Optional):

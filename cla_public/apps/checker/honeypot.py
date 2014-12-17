@@ -35,7 +35,7 @@ class Honeypot(object):
 
         unbound = UnboundField(
             HoneypotField,
-            u'Leave this field empty')
+            _(u'Leave this field empty'))
         self._unbound_fields.append((FIELD_NAME, unbound))
 
         super(Honeypot, self).__init__(*args, **kwargs)
