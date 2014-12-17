@@ -10,7 +10,7 @@ TESTING = True
 LOGGING['loggers'] = {
     '': {
         'handlers': ['console'],
-        'level': 'WARNING'
+        'level': 'INFO'
     }
 }
 
