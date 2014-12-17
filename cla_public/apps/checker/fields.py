@@ -40,7 +40,7 @@ class DynamicPartnerLabel(Label):
         if not text:
             text = self.text
         if not session.has_partner and 'partner' in text:
-            text = re.sub(partner_regex, '', text)
+            text = re.sub(partner_regex, '', unicode(text))
         return super(DynamicPartnerLabel, self).__call__(text, **kwargs)
 
 
