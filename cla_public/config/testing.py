@@ -7,6 +7,6 @@ SESSION_COOKIE_SECURE = False
 
 TESTING = True
 
-LOGGING['loggers']['']['level'] = 'INFO'
+LOGGING['loggers']['']['level'] = 'WARNING'
 
 WTF_CSRF_ENABLED = False
