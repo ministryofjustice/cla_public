@@ -22,7 +22,12 @@ if DEBUG:
         'maxBytes': 1024 * 1024 * 5,  # 5MB
         'backupCount': 7,
         'formatter': 'verbose'}
-    LOGGING['loggers'][''] = ['debug_file']
+    LOGGING['loggers'] = {
+        '': {
+            'handlers': ['debug_file'],
+            'level': 'DEBUG'
+        }
+    }
 
 else:
     LOGGING['handlers']['production_file'] = {
@@ -32,4 +37,9 @@ else:
         'maxBytes': 1024 * 1024 * 5,  # 5MB
         'backupCount': 7,
         'formatter': 'logstash'}
-    LOGGING['loggers']['']['handlers'] = ['production_file']
+    LOGGING['loggers'] = {
+        '': {
+            'handlers': ['production_file'],
+            'level': 'DEBUG'
+        }
+    }
