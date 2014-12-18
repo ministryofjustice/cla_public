@@ -76,6 +76,10 @@ def wait_until_available(url):
     wget.wait()
 
 
+def remove_old_template_js():
+    run('rm -f cla_public/static-src/javascripts/templates.js')
+
+
 def update_static_assets():
     run('gulp')
 
@@ -117,6 +121,7 @@ def main():
     try:
         venv_path = make_virtualenv(env_name())
         install_dependencies(venv_path)
+        remove_old_template_js()
         update_static_assets()
         compile_messages(venv_path)
         clean_pyc()
