@@ -22,6 +22,9 @@ module.exports = {
     client
       .assert.urlContains('/income')
       .assert.containsText('h1', 'Your money coming in')
+      .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
+      .setValue('input[name="your_income-pension-per_interval_value"]', 0)
+      .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
       .submitForm('form')
     ;
   },
@@ -38,6 +41,7 @@ module.exports = {
       .assert.hidden('input[name="childcare-per_interval_value"]')
       .assert.hidden('input[name="childcare-interval_period"]')
       .back()
+      .waitForElementPresent('form[action="/income"]', 2000)
       .back()
       .waitForElementPresent('form[action="/about"]', 2000)
     ;
@@ -48,7 +52,13 @@ module.exports = {
     ;
     common.setYesNoFields(client, 'other_benefits', 0);
     client
+      .setValue('input[name="child_benefit-per_interval_value"]', 0)
+      .setValue('input[name="child_tax_credit-per_interval_value"]', 0)
       .submitForm('form')
+
+      .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
+      .setValue('input[name="your_income-pension-per_interval_value"]', 0)
+      .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
       .submitForm('form')
       .assert.visible('input[name="childcare-per_interval_value"]')
       .assert.visible('select[name="childcare-interval_period"]')
@@ -71,8 +81,19 @@ module.exports = {
     common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
     client
       .submitForm('form')
+      .waitForElementPresent('form[action="/benefits-tax-credits"]', 2000)
       .submitForm('form')
+      .waitForElementPresent('form[action="/income"]', 2000)
+
+      .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
+      .setValue('input[name="your_income-pension-per_interval_value"]', 0)
+      .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
+      .setValue('input[name="partner_income-maintenance-per_interval_value"]', 0)
+      .setValue('input[name="partner_income-pension-per_interval_value"]', 0)
+      .setValue('input[name="partner_income-other_income-per_interval_value"]', 0)
+
       .submitForm('form')
+      .waitForElementPresent('form[action="/outgoings"]', 2000)
       .assert.urlContains('/outgoings')
       .assert.containsText('h1', 'You and your partner’s outgoings')
       .assert.containsText('body', 'Money you and your partner pay your landlord')
@@ -87,18 +108,20 @@ module.exports = {
       client.setValue(util.format('input[name=%s-per_interval_value]', item), '500');
       common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Please select a time period from the drop down');
       client.clearValue(util.format('input[name=%s-per_interval_value]', item));
-      client.setValue(util.format('select[name=%s-interval_period]', item), 'per month');
+      common.setDropdownValue(client, item + '-interval_period', 'per_month');
       common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Not a valid amount');
     });
+
+    common.submitAndCheckForFieldError(client, 'income_contribution', 'Not a valid amount');
 
     OUTGOINGS_QUESTIONS.forEach(function(item) {
       client.setValue(util.format('input[name=%s-per_interval_value]', item), '500');
     });
     client
+      .setValue('input[name="income_contribution"]', 0)
       .submitForm('form')
       .assert.urlContains('/result/eligible')
     ;
-
 
     client.end();
   }
