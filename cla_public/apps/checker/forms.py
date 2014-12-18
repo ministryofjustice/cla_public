@@ -158,13 +158,13 @@ class PropertyForm(NoCsrfForm):
     property_value = MoneyField(
         _(u'How much is the property worth?'),
         description=_(u"Use a property website or the Land Registry house prices website."),
-        validators=[InputRequired(_(u'Please enter a valid amount')), NumberRange(min=0)])
+        validators=[InputRequired(gettext(u'Please enter a valid amount')), NumberRange(min=0)])
     mortgage_remaining = MoneyField(
         _(u'How much is left to pay on the mortgage?'),
         description=(
             _(u"Include the full amount owed, even if the property has "
               u"shared ownership")),
-        validators=[InputRequired(u'Please enter 0 if you have no mortgage'), NumberRange(min=0)])
+        validators=[InputRequired(gettext(u'Please enter 0 if you have no mortgage')), NumberRange(min=0)])
     mortgage_payments = MoneyField(
         _(u'How much are your monthly mortgage repayments?'),
         validators=[IgnoreIf('mortgage_remaining', FieldValue(0)), NumberRange(min=0)])
@@ -290,8 +290,8 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
         choices=NON_INCOME_BENEFITS)
     other_benefits = PartnerYesNoField(
         _(u'Do you or your partner receive any other benefits not listed above? '),
-        description=_(u'For example, Incapacity Benefit, \
-            Contribution-based Jobseeker\'s Allowance'))
+        description=_(u'For example, Incapacity Benefit, '
+                      u'Contribution-based Jobseeker\'s Allowance'))
     total_other_benefit = MoneyIntervalField(
         _(u'If Yes, total amount of benefits not listed above'),
         choices=money_intervals_except('per_month'),
