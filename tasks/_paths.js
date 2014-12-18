@@ -9,7 +9,8 @@ var paths = {
   styles: 'cla_public/static-src/stylesheets/**/*.scss',
   ie_styles: 'cla_public/static-src/ie/**/*.scss',
   scripts: [
-    'cla_public/static-src/javascripts/**/*'
+    'cla_public/static-src/javascripts/**/*',
+    '!cla_public/static-src/javascripts/templates.js'
   ],
   vendor_scripts: vendorFiles,
   images: 'cla_public/static-src/images/**/*',
