@@ -94,5 +94,14 @@ module.exports = {
         this.assert.equal(result.value, null, util.format('Checking selector %s does NOT have attribute %s: %s', selector, attribute, (result.value === null)));
       })
     ;
+  },
+
+  // setValue on <select> items seems unreliable in nightwatch
+  setDropdownValue: function(client, fieldName, value) {
+    client
+      .click(util.format('select[name="%s"]', fieldName))
+      .click(util.format('select[name="%s"] option[value="%s"]', fieldName, value))
+      .setValue(util.format('select[name="%s"]', fieldName), client.Keys.ENTER)
+    ;
   }
 };

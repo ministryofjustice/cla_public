@@ -15,7 +15,7 @@ module.exports = {
       .init(client.launch_url + '/privacy')
       .maximizeWindow()
       .waitForElementVisible('body', 1000)
-      .assert.containsText('h1', 'Privacy policy')
+      .assert.containsText('h1', 'Civil Legal Advice Privacy Statement')
     ;
   },
 

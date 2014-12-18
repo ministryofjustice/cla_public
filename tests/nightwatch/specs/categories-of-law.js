@@ -22,7 +22,7 @@ module.exports = {
   'Check category outcomes': function(client) {
     CATEGORIES_OF_LAW.forEach(function(item) {
       var url = (item.covered ? '/about' : '/face-to-face');
-      var headline = (item.covered ? 'About you' : util.format('This service doesn’t handle issues related to %s', item.name.toLowerCase()));
+      var headline = (item.covered ? 'About you' : util.format('We do not provide advice about issues related to %s', item.name.toLowerCase()));
       client
         .click(util.format('input[name="categories"][value="%s"]', item.value))
         .submitForm('form')
