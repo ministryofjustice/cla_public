@@ -132,7 +132,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
 
 class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
     benefits = PartnerMultiCheckboxField(
-        _(u'Are you or your partner on any of these benefits?'),
+        label=_(u'Are you on any of these benefits?'),
+        partner_label=_(u'Are you or your partner on any of these benefits?'),
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
 
@@ -153,8 +154,9 @@ class PropertyForm(NoCsrfForm):
             _(u"If you are separated and no longer live in the property you "
               u"own, please answer ‘no’")))
     other_shareholders = PartnerYesNoField(
-        _(u'Does anyone else (other than you or your partner) own a share of the property?'),
-        description=_(u"Select 'Yes' if you share ownership with a friend, relative or ex-partner"))
+        label=_(u'Does anyone else (other than you) own a share of the property?'),
+        description=_(u"Select 'Yes' if you share ownership with a friend, relative or ex-partner"),
+        partner_label=_(u'Does anyone else (other than you or your partner) own a share of the property?'))
     property_value = MoneyField(
         _(u'How much is the property worth?'),
         description=_(u"Use a property website or the Land Registry house prices website."),
@@ -255,7 +257,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, Form):
         validators=[InputRequired(
             message=gettext(u'Enter 0 if you have no investments')
         )])
-    valuables = PartnerMoneyField(
+    valuables = MoneyField(
         _(u'Total value of items worth over £500 each'))
 
     def api_payload(self):
@@ -283,15 +285,15 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
         choices=money_intervals_except('per_month'),
         validators=[MoneyIntervalAmountRequired()])
     benefits = PartnerMultiCheckboxField(
-        _(u'Do you or your partner get any of these benefits?'),
-        description=(
-            _(u"These benefits don’t count as income. Please tick the ones you "
-            u"receive.")),
+        label=_(u'Do you get any of these benefits?'),
+        partner_label=_(u'Do you or your partner get any of these benefits?'),
+        description=_(u"These benefits don’t count as income. Please tick "
+                      u"the ones you receive."),
         choices=NON_INCOME_BENEFITS)
     other_benefits = PartnerYesNoField(
-        _(u'Do you or your partner receive any other benefits not listed above? '),
-        description=_(u'For example, Incapacity Benefit, '
-                      u'Contribution-based Jobseeker\'s Allowance'))
+        label=_(u'Do you receive any other benefits not listed above? '),
+        partner_label=_(u'Do you or your partner receive any other benefits not listed above? '),
+        description=_(u'For example, Incapacity Benefit, Contribution-based Jobseeker\'s Allowance'))
     total_other_benefit = MoneyIntervalField(
         _(u'If Yes, total amount of benefits not listed above'),
         choices=money_intervals_except('per_month'),
@@ -422,26 +424,28 @@ def income_form(*args, **kwargs):
 
 class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     rent = PartnerMoneyIntervalField(
-        _(u'Rent'),
-        description=_(u"Money you and your partner pay your landlord"),
+        label=_(u'Rent'),
+        description=_(u"Money you pay your landlord"),
+        partner_description=_(u"Money you and your partner pay your landlord"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
     maintenance = PartnerMoneyIntervalField(
-        _(u'Maintenance'),
-        description=(
-            _(u"Money you and/or your partner pay to an ex-partner for their "
-              u"living costs")),
+        label=_(u'Maintenance'),
+        description=_(u"Money you pay to an ex-partner for their living costs"),
+        partner_description=_(u"Money you and/or your partner pay to an "
+                              u"ex-partner for their living costs"),
         validators=[MoneyIntervalAmountRequired()])
     income_contribution = PartnerMoneyField(
-        _(u'Monthly Income Contribution Order'),
-        description=(
-            _(u"Money you and/or your partner pay per month towards your criminal legal "
-              u"aid")))
+        label=_(u'Monthly Income Contribution Order'),
+        description=_(u"Money you pay per month towards your criminal legal aid"),
+        partner_description=_(u"Money you and/or your partner pay per month "
+                              u"towards your criminal legal aid"))
     childcare = PartnerMoneyIntervalField(
-        _(u'Childcare'),
-        description=(
-            _(u"Money you and your partner pay for your child to be looked "
-              u"after while you work or study")),
+        label=_(u'Childcare'),
+        description=_(u"Money you pay for your child to be looked after while "
+                      u"you work or study"),
+        partner_description=_(u"Money you and your partner pay for your child "
+                              u"to be looked after while you work or study"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
 

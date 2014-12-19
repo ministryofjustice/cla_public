@@ -26,7 +26,6 @@ from cla_public.libs.call_centre_availability import day_choice, \
 
 
 log = logging.getLogger(__name__)
-partner_regex = re.compile(r'(and/or|and|or) your partner')
 
 
 LANG_CHOICES = filter(
@@ -34,40 +33,15 @@ LANG_CHOICES = filter(
     [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
 
 
-class DynamicPartnerLabel(Label):
-
-    def __call__(self, text=None, **kwargs):
-        if not text:
-            text = self.text
-        if not session.has_partner and 'partner' in text:
-            text = re.sub(partner_regex, '', unicode(text))
-        return super(DynamicPartnerLabel, self).__call__(text, **kwargs)
-
-
 class PartnerMixin(object):
 
-    @property
-    def label(self):
-        if not hasattr(self, '_label'):
-            return None
-        return self._label
-
-    @label.setter
-    def label(self, value):
-        self._label = DynamicPartnerLabel(self.id, value.text)
-
-    @property
-    def description(self):
-        if not hasattr(self, '_description'):
-            return None
-        desc = self._description
-        if not session.has_partner and 'partner' in self._description:
-            desc = re.sub(partner_regex, '', unicode(desc))
-        return desc
-
-    @description.setter
-    def description(self, value):
-        self._description = value
+    def __init__(self, *args, **kwargs):
+        partner_label = kwargs.pop('partner_label', kwargs.get('label'))
+        partner_description = kwargs.pop('partner_description', kwargs.get('description'))
+        if session.has_partner:
+            kwargs['label'] = partner_label
+            kwargs['description'] = partner_description
+        super(PartnerMixin, self).__init__(*args, **kwargs)
 
 
 class DescriptionRadioField(RadioField):
@@ -275,19 +249,19 @@ class PropertyList(FieldList):
         self.last_index -= 1
 
 
-class PartnerMoneyIntervalField(MoneyIntervalField, PartnerMixin):
+class PartnerMoneyIntervalField(PartnerMixin, MoneyIntervalField):
     pass
 
 
-class PartnerIntegerField(IntegerField, PartnerMixin):
+class PartnerIntegerField(PartnerMixin, IntegerField):
     pass
 
 
-class PartnerYesNoField(YesNoField, PartnerMixin):
+class PartnerYesNoField(PartnerMixin, YesNoField):
     pass
 
 
-class PartnerMultiCheckboxField(MultiCheckboxField, PartnerMixin):
+class PartnerMultiCheckboxField(PartnerMixin, MultiCheckboxField):
     pass
 
 
@@ -306,7 +280,7 @@ class AdaptationsForm(NoCsrfForm):
         description=_(u'Please tell us what you need in the box below'))
 
 
-class PartnerMoneyField(MoneyField, PartnerMixin):
+class PartnerMoneyField(PartnerMixin, MoneyField):
     pass
 
 
