@@ -533,7 +533,7 @@ msgstr ""
 msgid ""
 "Does anyone else (other than you or your partner) own a share of the "
 "property?"
-msgstr ""
+msgstr "A oes unrhyw un arall (ar wahân i chi neu eich partner) yn berchen ar gyfran o'r eiddo?"
 
 #: cla_public/apps/checker/forms.py:157
 msgid "Select 'Yes' if you share ownership with a friend, relative or ex-partner"
