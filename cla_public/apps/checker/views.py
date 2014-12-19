@@ -4,8 +4,8 @@
 import logging
 from cla_common.constants import ELIGIBILITY_STATES
 
-from flask import abort, current_app, render_template, redirect, \
-    session, url_for, request
+from flask import abort, render_template, redirect, \
+    session, url_for
 
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_case_api, \
@@ -40,12 +40,6 @@ def add_header(response):
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
     response.headers['Pragma'] = 'no-cache'
     return response
-
-
-def get_locale():
-    return request.accept_languages.best_match(
-        current_app.config.get('LANGUAGES').keys()
-    )
 
 
 @checker.route('/problem', methods=['GET', 'POST'])

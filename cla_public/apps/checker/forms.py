@@ -3,57 +3,41 @@
 
 import logging
 
-from flask import current_app, session, request
+from flask import session, request
 from flask_wtf import Form
+from flask.ext.babel import lazy_gettext as _, gettext
 import pytz
-
 from wtforms import Form as NoCsrfForm
-from wtforms import IntegerField, SelectField, StringField, \
+from wtforms import IntegerField, StringField, \
     TextAreaField, FormField, RadioField
-from wtforms.fields.core import UnboundField
 from wtforms.validators import InputRequired, NumberRange, Optional
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO, DAY_CHOICES, CONTACT_SAFETY, \
+    NON_INCOME_BENEFITS, YES, NO, CONTACT_SAFETY, \
     PASSPORTED_BENEFITS
 from cla_public.apps.checker.fields import (
     AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
-    MultiCheckboxField, YesNoField, PartnerYesNoField, MoneyField,
+    YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
     PropertyList, money_interval_to_monthly,
     AdaptationsForm,
     PassKwargsToFormField)
-from cla_public.apps.checker.form_config_parser import FormConfigParser
+from cla_public.libs.form_config_parser import ConfigFormMixin
 from cla_public.apps.checker.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired, NotRequired, FieldValueOrNone
+    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone
 
 
 log = logging.getLogger(__name__)
-
-
-class ConfigFormMixin(object):
-    def __init__(self, *args, **kwargs):
-        config_path = kwargs.pop('config_path', None)
-
-        super(ConfigFormMixin, self).__init__(*args, **kwargs)
-
-        config = FormConfigParser(
-            self.__class__.__name__, config_path=config_path)
-
-        if config:
-            # set config attributes on the field
-            for field_name, field in self._fields.iteritems():
-                field.__dict__.update(config.get(field_name, field))
 
 
 class ProblemForm(ConfigFormMixin, Honeypot, Form):
     """Area of law choice"""
 
     categories = DescriptionRadioField(
-        u'What do you need help with?',
+        _(u'What do you need help with?'),
         choices=CATEGORIES,
         coerce=unicode,
         validators=[InputRequired()])
@@ -71,69 +55,69 @@ class ProblemForm(ConfigFormMixin, Honeypot, Form):
 
 class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     have_partner = YesNoField(
-        u'Do you have a partner?',
+        _(u'Do you have a partner?'),
         description=(
-            u"Your partner is your husband, wife, civil partner or someone "
-            u"you live with as if you’re married"))
+            _(u"Your partner is your husband, wife, civil partner or someone "
+              u"you live with as if you’re married")))
     in_dispute = YesNoField(
-        u'If Yes, are you in a dispute with your partner?',
+        _(u'If Yes, are you in a dispute with your partner?'),
         description=(
-            u"This means a dispute over money or property following a "
-            u"separation"),
+            _(u"This means a dispute over money or property following a "
+              u"separation")),
         validators=[
             IgnoreIf('have_partner', FieldValue(NO)),
-            InputRequired(message=u'Please choose Yes or No')
+            InputRequired(message=gettext(u'Please choose Yes or No'))
         ])
     on_benefits = YesNoField(
-        u'Do you receive any benefits (including Child Benefit)?',
+        _(u'Do you receive any benefits (including Child Benefit)?'),
         description=(
-            u"Being on some benefits can help you qualify for legal aid"))
+            _(u"Being on some benefits can help you qualify for legal aid")))
     have_children = YesNoField(
-        u'Do you have any children aged 15 or under?',
-        description=u"Don't include any children who don't live with you")
+        _(u'Do you have any children aged 15 or under?'),
+        description=_(u"Don't include any children who don't live with you"))
     num_children = IntegerField(
-        u'If Yes, how many?',
+        _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_children', FieldValue(NO)),
             NumberRange(min=1)])
     have_dependants = YesNoField(
-        u'Do you have any dependants aged 16 or over?',
-        description=u"People who you live with and support financially")
+        _(u'Do you have any dependants aged 16 or over?'),
+        description=_(u"People who you live with and support financially"))
     num_dependants = IntegerField(
-        u'If Yes, how many?',
+        _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_dependants', FieldValue(NO)),
             NumberRange(min=1)])
     have_savings = YesNoField(
-        u'Do you have any savings or investments?')
+        _(u'Do you have any savings or investments?'))
     have_valuables = YesNoField(
-        u'Do you have any valuable items worth over £500 each?')
+        _(u'Do you have any valuable items worth over £500 each?'))
     own_property = YesNoField(
-        u'Do you own any property?',
-        description=u"For example, a house, static caravan or flat")
+        _(u'Do you own any property?'),
+        description=_(u"For example, a house, static caravan or flat"))
     is_employed = YesNoField(
-        u'Are you employed?',
+        _(u'Are you employed?'),
         description=(
-            u"This means working as an employee - you may be both employed "
-            u"and self-employed"))
+            _(u"This means working as an employee - you may be both employed "
+              u"and self-employed")))
     partner_is_employed = YesNoField(
-        u'Is your partner employed?',
+        _(u'Is your partner employed?'),
         description=(
-            u"This means working as an employee - your partner may be both employed "
-            u"and self-employed"),
+            _(u"This means working as an employee - your partner may be both employed "
+              u"and self-employed")),
         validators=[IgnoreIf('in_dispute', FieldValueOrNone(YES))])
     is_self_employed = YesNoField(
-        u'Are you self-employed?',
+        _(u'Are you self-employed?'),
         description=(
-            u"This means working for yourself - you may be both employed "
-            u"and self-employed"))
+            _(u"This means working for yourself - you may be both employed "
+              u"and self-employed")))
     partner_is_self_employed = YesNoField(
-        u'Is your partner self-employed?',
+        _(u'Is your partner self-employed?'),
         description=(
-            u"This means working for yourself - your partner may be both employed "
-            u"and self-employed"),
+            _(u"This means working for yourself - your partner may be both employed "
+              u"and self-employed")),
         validators=[IgnoreIf('in_dispute', FieldValueOrNone(YES))])
-    aged_60_or_over = YesNoField(u'Are you aged 60 or over?')
+    aged_60_or_over = YesNoField(_(u'Are you aged 60 or over?'))
 
     def api_payload(self):
         return {
@@ -148,7 +132,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
 
 class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
     benefits = PartnerMultiCheckboxField(
-        u'Are you or your partner on any of these benefits?',
+        label=_(u'Are you on any of these benefits?'),
+        partner_label=_(u'Are you or your partner on any of these benefits?'),
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
 
@@ -164,37 +149,38 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
 
 class PropertyForm(NoCsrfForm):
     is_main_home = YesNoField(
-        u'Is this property your main home?',
+        _(u'Is this property your main home?'),
         description=(
-            u"If you are separated and no longer live in the property you "
-            u"own, please answer ‘no’"))
+            _(u"If you are separated and no longer live in the property you "
+              u"own, please answer ‘no’")))
     other_shareholders = PartnerYesNoField(
-        u'Does anyone else (other than you or your partner) own a share of the property?',
-        description=u"Select 'Yes' if you share ownership with a friend, relative or ex-partner")
+        label=_(u'Does anyone else (other than you) own a share of the property?'),
+        description=_(u"Select 'Yes' if you share ownership with a friend, relative or ex-partner"),
+        partner_label=_(u'Does anyone else (other than you or your partner) own a share of the property?'))
     property_value = MoneyField(
-        u'How much is the property worth?',
-        description=u"Use a property website or the Land Registry house prices website.",
-        validators=[InputRequired(u'Please enter a valid amount'), NumberRange(min=0)])
+        _(u'How much is the property worth?'),
+        description=_(u"Use a property website or the Land Registry house prices website."),
+        validators=[InputRequired(gettext(u'Please enter a valid amount')), NumberRange(min=0)])
     mortgage_remaining = MoneyField(
-        u'How much is left to pay on the mortgage?',
+        _(u'How much is left to pay on the mortgage?'),
         description=(
-            u"Include the full amount owed, even if the property has "
-            u"shared ownership"),
-        validators=[InputRequired(u'Please enter 0 if you have no mortgage'), NumberRange(min=0)])
+            _(u"Include the full amount owed, even if the property has "
+              u"shared ownership")),
+        validators=[InputRequired(gettext(u'Please enter 0 if you have no mortgage')), NumberRange(min=0)])
     mortgage_payments = MoneyField(
-        u'How much are your monthly mortgage repayments?',
+        _(u'How much are your monthly mortgage repayments?'),
         validators=[IgnoreIf('mortgage_remaining', FieldValue(0)), NumberRange(min=0)])
-    is_rented = YesNoField(u'Do you rent out any part of this property?')
+    is_rented = YesNoField(_(u'Do you rent out any part of this property?'))
     rent_amount = MoneyIntervalField(
-        u'If Yes, how much rent do you receive?',
+        _(u'If Yes, how much rent do you receive?'),
         choices=money_intervals_except('per_4week'),
         validators=[
             IgnoreIf('is_rented', FieldValue(NO)),
             MoneyIntervalAmountRequired()])
     in_dispute = YesNoField(
-        u'Is your share of the property in dispute?',
+        _(u'Is your share of the property in dispute?'),
         description=(
-            u"For example, as part of the financial settlement of a divorce"))
+            _(u"For example, as part of the financial settlement of a divorce")))
 
     def api_payload(self):
         share = 100 if self.other_shareholders.data == NO else None
@@ -262,17 +248,17 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
 class SavingsForm(ConfigFormMixin, Honeypot, Form):
     savings = MoneyField(
         description=(
-            u"The total amount of savings in cash, bank or building society"),
+            _(u"The total amount of savings in cash, bank or building society")),
         validators=[InputRequired(
-            message=u'Enter 0 if you have no savings'
+            message=gettext(u'Enter 0 if you have no savings')
         )])
     investments = MoneyField(
-        description=u"This includes stocks, shares, bonds (but not property)",
+        description=_(u"This includes stocks, shares, bonds (but not property)"),
         validators=[InputRequired(
-            message=u'Enter 0 if you have no investments'
+            message=gettext(u'Enter 0 if you have no investments')
         )])
-    valuables = PartnerMoneyField(
-        u'Total value of items worth over £500 each')
+    valuables = MoneyField(
+        _(u'Total value of items worth over £500 each'))
 
     def api_payload(self):
         # rather than showing an error message, just ignore values less than
@@ -289,27 +275,27 @@ class SavingsForm(ConfigFormMixin, Honeypot, Form):
 
 class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
     child_benefit = MoneyIntervalField(
-        u'Child Benefit',
-        description=u"The total amount you get for all your children",
+        _(u'Child Benefit'),
+        description=_(u"The total amount you get for all your children"),
         choices=money_intervals('', 'per_week', 'per_4week'),
         validators=[MoneyIntervalAmountRequired()])
     child_tax_credit = MoneyIntervalField(
-        u'Child Tax Credit',
-        description=u"The total amount you get for all your children",
+        _(u'Child Tax Credit'),
+        description=_(u"The total amount you get for all your children"),
         choices=money_intervals_except('per_month'),
         validators=[MoneyIntervalAmountRequired()])
     benefits = PartnerMultiCheckboxField(
-        u'Do you or your partner get any of these benefits?',
-        description=(
-            u"These benefits don’t count as income. Please tick the ones you "
-            u"receive."),
+        label=_(u'Do you get any of these benefits?'),
+        partner_label=_(u'Do you or your partner get any of these benefits?'),
+        description=_(u"These benefits don’t count as income. Please tick "
+                      u"the ones you receive."),
         choices=NON_INCOME_BENEFITS)
     other_benefits = PartnerYesNoField(
-        u'Do you or your partner receive any other benefits not listed above? ',
-        description=u'For example, Incapacity Benefit, \
-            Contribution-based Jobseeker\'s Allowance')
+        label=_(u'Do you receive any other benefits not listed above? '),
+        partner_label=_(u'Do you or your partner receive any other benefits not listed above? '),
+        description=_(u'For example, Incapacity Benefit, Contribution-based Jobseeker\'s Allowance'))
     total_other_benefit = MoneyIntervalField(
-        u'If Yes, total amount of benefits not listed above',
+        _(u'If Yes, total amount of benefits not listed above'),
         choices=money_intervals_except('per_month'),
         validators=[
             IgnoreIf('other_benefits', FieldValue(NO)),
@@ -336,40 +322,40 @@ class IncomeFieldForm(NoCsrfForm):
         super(IncomeFieldForm, self).__init__(*args, **kwargs)
 
     earnings = MoneyIntervalField(
-        u'Wages before tax',
+        _(u'Wages before tax'),
         description=(
-            u"This includes all your wages and any earnings from "
-            u"self-employment"),
+            _(u"This includes all your wages and any earnings from "
+              u"self-employment")),
         validators=[MoneyIntervalAmountRequired()])
     income_tax = MoneyIntervalField(
-        u'Income tax',
+        _(u'Income tax'),
         description=(
-            u"Tax paid directly out of your wages and any tax you pay on "
-            u"self-employed earnings"),
+            _(u"Tax paid directly out of your wages and any tax you pay on "
+              u"self-employed earnings")),
         validators=[MoneyIntervalAmountRequired()])
     national_insurance = MoneyIntervalField(
-        u'National Insurance contributions',
+        _(u'National Insurance contributions'),
         description=(
-            u"Check your payslip or your National Insurance statement if "
-            u"you’re self-employed"),
+            _(u"Check your payslip or your National Insurance statement if "
+              u"you’re self-employed")),
         validators=[MoneyIntervalAmountRequired()])
     working_tax_credit = MoneyIntervalField(
-        u'Working Tax Credit',
-        description=u'Extra money for people who work and have a low income',
+        _(u'Working Tax Credit'),
+        description=_(u'Extra money for people who work and have a low income'),
         validators=[MoneyIntervalAmountRequired()])
     maintenance = MoneyIntervalField(
-        u'Maintenance received',
-        description=u"Payments you get from an ex-partner",
+        _(u'Maintenance received'),
+        description=_(u"Payments you get from an ex-partner"),
         validators=[MoneyIntervalAmountRequired()])
     pension = MoneyIntervalField(
-        u'Pension received',
-        description=u"Payments you receive if you’re retired",
+        _(u'Pension received'),
+        description=_(u"Payments you receive if you’re retired"),
         validators=[MoneyIntervalAmountRequired()])
     other_income = MoneyIntervalField(
-        u'Any other income',
+        _(u'Any other income'),
         description=(
-            u"For example, student grants, income from trust funds, "
-            u"dividends"),
+            _(u"For example, student grants, income from trust funds, "
+            u"dividends")),
         validators=[MoneyIntervalAmountRequired()])
 
     def api_payload(self):
@@ -408,7 +394,7 @@ class IncomeFieldForm(NoCsrfForm):
 
 
 class IncomeAndTaxForm(ConfigFormMixin, Honeypot, Form):
-    your_income = FormField(IncomeFieldForm, label=u'Your personal income')
+    your_income = FormField(IncomeFieldForm, label=_(u'Your personal income'))
 
     def api_payload(self):
         api_payload = {
@@ -431,33 +417,35 @@ def income_form(*args, **kwargs):
         IncomeForm.partner_income = PassKwargsToFormField(
             IncomeFieldForm,
             form_kwargs={'is_partner': True},
-            label=u'Your partner‘s income')
+            label=_(u'Your partner‘s income'))
 
     return IncomeForm(*args, **kwargs)
 
 
 class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     rent = PartnerMoneyIntervalField(
-        u'Rent',
-        description=u"Money you and your partner pay your landlord",
+        label=_(u'Rent'),
+        description=_(u"Money you pay your landlord"),
+        partner_description=_(u"Money you and your partner pay your landlord"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
     maintenance = PartnerMoneyIntervalField(
-        u'Maintenance',
-        description=(
-            u"Money you and/or your partner pay to an ex-partner for their "
-            u"living costs"),
+        label=_(u'Maintenance'),
+        description=_(u"Money you pay to an ex-partner for their living costs"),
+        partner_description=_(u"Money you and/or your partner pay to an "
+                              u"ex-partner for their living costs"),
         validators=[MoneyIntervalAmountRequired()])
     income_contribution = PartnerMoneyField(
-        u'Monthly Income Contribution Order',
-        description=(
-            u"Money you and/or your partner pay per month towards your criminal legal "
-            u"aid"))
+        label=_(u'Monthly Income Contribution Order'),
+        description=_(u"Money you pay per month towards your criminal legal aid"),
+        partner_description=_(u"Money you and/or your partner pay per month "
+                              u"towards your criminal legal aid"))
     childcare = PartnerMoneyIntervalField(
-        u'Childcare',
-        description=(
-            u"Money you and your partner pay for your child to be looked "
-            u"after while you work or study"),
+        label=_(u'Childcare'),
+        description=_(u"Money you pay for your child to be looked after while "
+                      u"you work or study"),
+        partner_description=_(u"Money you and your partner pay for your child "
+                              u"to be looked after while you work or study"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
 
@@ -473,30 +461,30 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
 
 class ApplicationForm(Honeypot, Form):
     full_name = StringField(
-        u'Full name',
+        _(u'Full name'),
         validators=[InputRequired()])
     contact_number = StringField(
-        u'Contact phone number',
+        _(u'Contact phone number'),
         validators=[InputRequired()])
     safe_to_contact = RadioField(
-        u'Is it safe for us to leave a message on this number?',
+        _(u'Is it safe for us to leave a message on this number?'),
         choices=CONTACT_SAFETY,
-        validators=[InputRequired(message=u'Please choose Yes or No')],
+        validators=[InputRequired(message=gettext(u'Please choose Yes or No'))],
     )
-    post_code = StringField(u'Postcode')
-    address = TextAreaField(u'Address')
+    post_code = StringField(_(u'Postcode'))
+    address = TextAreaField(_(u'Address'))
     extra_notes = TextAreaField(
-        u'Help the operator to understand your situation',
+        _(u'Help the operator to understand your situation'),
         description=(
-            u"If you’d like to tell us more about your problem, please do so in the "
-            u"box below. The Civil Legal Advice operator will read this before "
-            u"they call you."),
+            _(u"If you’d like to tell us more about your problem, please do so in the "
+              u"box below. The Civil Legal Advice operator will read this before "
+              u"they call you.")),
         validators=[Optional()])
     adaptations = FormField(
         AdaptationsForm,
-        u'Do you have any special communication needs?')
+        _(u'Do you have any special communication needs?'))
 
-    time = AvailabilityCheckerField(u'Select a time for us to call you')
+    time = AvailabilityCheckerField(_(u'Select a time for us to call you'))
 
     def api_payload(self):
         time = self.time.scheduled_time().replace(tzinfo=pytz.utc)

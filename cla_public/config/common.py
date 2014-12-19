@@ -2,6 +2,8 @@ import os
 import datetime
 
 
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 DEBUG = False
 
 TESTING = False
@@ -79,6 +81,10 @@ LANGUAGES = {
     'cy': 'Welsh',
     'en': 'English',
 }
+
+config_path = lambda x: os.path.join(PROJECT_ROOT, 'config', 'forms', x, 'forms_config.yml')
+
+FORM_CONFIG_TRANSLATIONS = {l: config_path(l) for l, label in LANGUAGES.items()}
 
 # local.py overrides all the common settings.
 try:

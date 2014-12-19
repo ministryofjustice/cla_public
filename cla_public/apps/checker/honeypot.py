@@ -1,5 +1,6 @@
 from wtforms import StringField, widgets
 from wtforms.fields.core import UnboundField
+from flask.ext.babel import lazy_gettext as _
 
 
 # This should be something a bot would want to fill in
@@ -35,7 +36,7 @@ class Honeypot(object):
 
         unbound = UnboundField(
             HoneypotField,
-            u'Leave this field empty')
+            _(u'Leave this field empty'))
         self._unbound_fields.append((FIELD_NAME, unbound))
 
         super(Honeypot, self).__init__(*args, **kwargs)

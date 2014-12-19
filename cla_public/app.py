@@ -11,9 +11,10 @@ from raven.contrib.flask import Sentry
 
 from cla_public.django_to_jinja import change_jinja_templates
 from cla_public.apps.base.views import base
-from cla_public.apps.checker.views import checker, get_locale
+from cla_public.apps.checker.views import checker
 from cla_public.apps.checker.session import CheckerSessionInterface
 from cla_public.middleware import StatsdMiddleware
+from cla_public.libs.utils import get_locale
 
 
 log = logging.getLogger(__name__)

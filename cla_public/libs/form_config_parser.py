@@ -2,9 +2,9 @@ import os
 import markdown2
 import yaml
 
+from flask import current_app, request
 
-FORMS_CONFIG = 'config/forms_config.yml'
-FORMS_CONFIG_PATH = os.path.join(os.path.dirname(__file__), FORMS_CONFIG)
+from cla_public.libs.utils import get_locale
 
 
 class FormConfigParser(object):
@@ -27,7 +27,9 @@ class FormConfigParser(object):
         self.fields = {}
         self.form_config = None
 
-        path = config_path or FORMS_CONFIG_PATH
+        locale = get_locale()
+
+        path = config_path or current_app.config['FORM_CONFIG_TRANSLATIONS'][locale]
 
         with open(path) as f:
             config_data = yaml.load(f.read())
@@ -77,3 +79,18 @@ class FormConfigParser(object):
             return field_config
 
         return {}
+
+
+class ConfigFormMixin(object):
+    def __init__(self, *args, **kwargs):
+        config_path = kwargs.pop('config_path', None)
+
+        super(ConfigFormMixin, self).__init__(*args, **kwargs)
+
+        config = FormConfigParser(
+            self.__class__.__name__, config_path=config_path)
+
+        if config:
+            # set config attributes on the field
+            for field_name, field in self._fields.iteritems():
+                field.__dict__.update(config.get(field_name, field))

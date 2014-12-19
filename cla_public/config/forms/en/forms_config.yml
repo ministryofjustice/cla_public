@@ -1,0 +1,31 @@
+forms:
+
+  ProblemForm:
+    fields:
+
+      categories:
+        field_options:
+          violence:
+            selected_notification: If you are in immediate danger you can ask us to [call you back](/call-me-back).
+
+          family:
+            selected_notification: If you are a parent of a child who the council is trying to take in to care, ask us to [call you back](/call-me-back).
+
+  AboutYouForm:
+    fields:
+
+      have_children:
+        more_info: >
+          Young people aged 16 or over who live with you and who you support financially should
+          be included in the next question under “Do you have any dependants aged 16 or over?”
+
+      have_dependants:
+        more_info: This could be a young person for whom you get Child Benefit
+
+  PropertyForm:
+    fields:
+      in_dispute:
+        more_info: >
+          A disputed property is one whose ownership is disputed by someone eg an ex-partner wants
+          to claim a share in it as part of a divorce or separation, or a creditor or mortgage
+          company wants to force the sale of it to repay a debt.

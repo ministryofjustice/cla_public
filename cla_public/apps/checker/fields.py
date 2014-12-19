@@ -6,6 +6,7 @@ import re
 import datetime
 
 from flask import session
+from flask.ext.babel import lazy_gettext as _
 import pytz
 from wtforms import Form as NoCsrfForm, TextAreaField
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
@@ -25,48 +26,22 @@ from cla_public.libs.call_centre_availability import day_choice, \
 
 
 log = logging.getLogger(__name__)
-partner_regex = re.compile(r'(and/or|and|or) your partner')
 
 
 LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
-    [('', '-- Choose a language --')] + ADAPTATION_LANGUAGES)
-
-
-class DynamicPartnerLabel(Label):
-
-    def __call__(self, text=None, **kwargs):
-        if not text:
-            text = self.text
-        if not session.has_partner and 'partner' in text:
-            text = re.sub(partner_regex, '', text)
-        return super(DynamicPartnerLabel, self).__call__(text, **kwargs)
+    [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
 
 
 class PartnerMixin(object):
 
-    @property
-    def label(self):
-        if not hasattr(self, '_label'):
-            return None
-        return self._label
-
-    @label.setter
-    def label(self, value):
-        self._label = DynamicPartnerLabel(self.id, value.text)
-
-    @property
-    def description(self):
-        if not hasattr(self, '_description'):
-            return None
-        desc = self._description
-        if not session.has_partner and 'partner' in self._description:
-            desc = re.sub(partner_regex, '', desc)
-        return desc
-
-    @description.setter
-    def description(self, value):
-        self._description = value
+    def __init__(self, *args, **kwargs):
+        partner_label = kwargs.pop('partner_label', kwargs.get('label'))
+        partner_description = kwargs.pop('partner_description', kwargs.get('description'))
+        if session.has_partner:
+            kwargs['label'] = partner_label
+            kwargs['description'] = partner_description
+        super(PartnerMixin, self).__init__(*args, **kwargs)
 
 
 class DescriptionRadioField(RadioField):
@@ -274,38 +249,38 @@ class PropertyList(FieldList):
         self.last_index -= 1
 
 
-class PartnerMoneyIntervalField(MoneyIntervalField, PartnerMixin):
+class PartnerMoneyIntervalField(PartnerMixin, MoneyIntervalField):
     pass
 
 
-class PartnerIntegerField(IntegerField, PartnerMixin):
+class PartnerIntegerField(PartnerMixin, IntegerField):
     pass
 
 
-class PartnerYesNoField(YesNoField, PartnerMixin):
+class PartnerYesNoField(PartnerMixin, YesNoField):
     pass
 
 
-class PartnerMultiCheckboxField(MultiCheckboxField, PartnerMixin):
+class PartnerMultiCheckboxField(PartnerMixin, MultiCheckboxField):
     pass
 
 
 class AdaptationsForm(NoCsrfForm):
-    bsl_webcam = BooleanField(u'BSL - Webcam')
-    minicom = BooleanField(u'Minicom')
-    text_relay = BooleanField(u'Text Relay')
-    welsh = BooleanField(u'Welsh')
-    is_other_language = BooleanField(u'Other language')
+    bsl_webcam = BooleanField(_(u'BSL - Webcam'))
+    minicom = BooleanField(_(u'Minicom'))
+    text_relay = BooleanField(_(u'Text Relay'))
+    welsh = BooleanField(_(u'Welsh'))
+    is_other_language = BooleanField(_(u'Other language'))
     other_language = SelectField(
-        u'Language required:',
+        _(u'Language required:'),
         choices=(LANG_CHOICES))
-    is_other_adaptation = BooleanField(u'Any other communication needs')
+    is_other_adaptation = BooleanField(_(u'Any other communication needs'))
     other_adaptation = TextAreaField(
-        u'Other communication needs',
-        description=u'Please tell us what you need in the box below')
+        _(u'Other communication needs'),
+        description=_(u'Please tell us what you need in the box below'))
 
 
-class PartnerMoneyField(MoneyField, PartnerMixin):
+class PartnerMoneyField(PartnerMixin, MoneyField):
     pass
 
 
@@ -365,7 +340,7 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
 
 class AvailabilityCheckerForm(NoCsrfForm):
     specific_day = RadioField(
-        label=u'Arrange a callback time',
+        label=_(u'Arrange a callback time'),
         choices=DAY_CHOICES,
         default=DAY_TODAY)
 
