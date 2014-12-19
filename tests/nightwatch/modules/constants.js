@@ -214,7 +214,7 @@ exports.INELIGIBLE_OUTCOMES = [
   },
   {
     category: {
-      label: 'Welfare benefits appeals',
+      label: 'Welfare benefits',
       value: 'benefits'
     },
     link: {
