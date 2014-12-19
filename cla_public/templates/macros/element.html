@@ -1,3 +1,14 @@
+{#
+  Generic alert element
+
+  Params:
+    - type <string> (default: info)
+        Type of alert (sets CSS class `alert-{type}`)
+    - icon <string> (default: none)
+        Alert icon (sets CSS class `icon-{icon}`)
+    - title <string> (default: None)
+        Alert title
+#}
 {% macro alert(type='info', icon=None, title=None) %}
   <div class="alert alert-{{type}}"
     role="alert"
@@ -16,6 +27,9 @@
 {% endmacro %}
 
 
+{#
+  Call me back link
+#}
 {%  macro call_me_back_link() %}
   {% call alert() %}
     <p>If you're having trouble completing this form, or don't have all the information
