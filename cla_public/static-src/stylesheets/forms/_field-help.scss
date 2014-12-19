@@ -6,16 +6,6 @@
     margin: 8px 0 0;
   }
 
-  ul {
-    list-style: disc;
-    margin: 10px 0;
-    padding: 0 0 0 20px;
-  }
-
-  li {
-    padding: 0;
-  }
-
   &.s-expanded {
     .field-more-info {
       display: block;
@@ -27,6 +17,4 @@
   }
 }
 
-.field-description {
-  margin-right: 8px;
-}
+
