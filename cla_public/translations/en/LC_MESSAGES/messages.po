@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-22 13:30+0000\n"
+"POT-Creation-Date: 2014-12-22 13:45+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -425,7 +425,7 @@ msgid ""
 "with, for example a dispute over money or property "
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:71 cla_public/apps/checker/forms.py:478
+#: cla_public/apps/checker/forms.py:71 cla_public/apps/checker/forms.py:479
 msgid "Please choose Yes or No"
 msgstr ""
 
@@ -783,38 +783,42 @@ msgstr ""
 msgid "Full name"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:473
+#: cla_public/apps/checker/forms.py:471
+msgid "For example: John Smith"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:474
 msgid "Contact phone number"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:476
+#: cla_public/apps/checker/forms.py:477
 msgid "Is it safe for us to leave a message on this number?"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:480
+#: cla_public/apps/checker/forms.py:481
 msgid "Postcode"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:481
+#: cla_public/apps/checker/forms.py:482
 msgid "Address"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:483
+#: cla_public/apps/checker/forms.py:484
 msgid "Help the operator to understand your situation"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:485
+#: cla_public/apps/checker/forms.py:486
 msgid ""
 "If you’d like to tell us more about your problem, please do so in the box"
 " below. The Civil Legal Advice operator will read this before they call "
 "you."
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:491
+#: cla_public/apps/checker/forms.py:492
 msgid "Do you have any special communication needs?"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:493
+#: cla_public/apps/checker/forms.py:494
 msgid "Select a time for us to call you"
 msgstr ""
 

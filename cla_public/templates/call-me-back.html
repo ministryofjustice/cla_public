@@ -24,10 +24,6 @@
     </p>
   {% endblock %}
 
-  <p>If you have a court hearing date it is important that you get advice as soon as possible.
-    You may be able to get last-minute help on the day of the hearing from an adviser in the
-    court building.</p>
-
   <form method="POST" action="{{ url_for('.result', outcome='eligible') }}">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
@@ -67,9 +63,11 @@
 
     {% call Element.alert(title='What happens next') %}
       <p>
-        If the operator you speak to thinks you can get legal aid, they will
-        find you specialist legal help, like a phone call with a solicitor or
-        support from a family mediation service.
+        If the operator you speak to thinks you might qualify, they will put you
+        through to a CLA specialist adviser immediately.
+      </p>
+      <p>
+        If CLA can't help we will suggest other places that might be able to assist you.
       </p>
     {% endcall %}
 

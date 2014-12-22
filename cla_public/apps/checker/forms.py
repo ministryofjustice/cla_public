@@ -478,6 +478,7 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
 class ApplicationForm(Honeypot, Form):
     full_name = StringField(
         _(u'Full name'),
+        description=_(u'For example: John Smith'),
         validators=[InputRequired()])
     contact_number = StringField(
         _(u'Contact phone number'),
