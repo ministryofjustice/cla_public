@@ -71,7 +71,7 @@ module.exports = {
     client
       .submitForm('form')
       .useXpath()
-      .assert.containsText(util.format('//%s[@name="%s"]/ancestor::dl', tag, fieldName), errorText)
+      .assert.containsText(util.format('//%s[@name="%s"]/ancestor::fieldset', tag, fieldName), errorText)
       .useCss()
     ;
   },

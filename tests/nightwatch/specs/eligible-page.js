@@ -84,8 +84,8 @@ module.exports = {
       .click('.address-finder-button')
       .click('body')
       .useXpath()
-      .waitForElementVisible('//input[@id="post_code"]/ancestor::dl//div[@class="field-error"]', 25000)
-      .assert.containsText('//input[@id="post_code"]/ancestor::dl//div[@class="field-error"]', 'No addresses were found with that postcode')
+      .waitForElementVisible('//input[@id="post_code"]/ancestor::fieldset//div[@class="field-error"]', 25000)
+      .assert.containsText('//input[@id="post_code"]/ancestor::fieldset//div[@class="field-error"]', 'No addresses were found with that postcode')
       .useCss()
     ;
 
