@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-22 11:50+0000\n"
+"POT-Creation-Date: 2014-12-22 13:19+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -246,71 +246,71 @@ msgid "per year"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:107
-msgid "Attendance Allowance"
+msgid "Armed Forces Independence payment"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:108
-msgid "Care in the community Direct Payment"
+msgid "Attendance Allowance"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:109
-msgid "Carers’ Allowance"
+msgid "Back to Work Bonus"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:110
-msgid "Constant Attendance Allowance"
+msgid "Care in the community Direct Payment"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:111
-msgid "Council Tax Benefits"
+msgid "Carers’ Allowance"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:112
-msgid "Disability Living Allowance"
+msgid "Constant Attendance Allowance"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:113
-msgid "Earnings Top Up"
+msgid "Council Tax Benefits"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:114
-msgid "Exceptionally Severe Disablement Allowance"
+msgid "Disability Living Allowance"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:115
-msgid "Fostering Allowance"
+msgid "Exceptionally Severe Disablement Allowance"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:116
-msgid "Housing Benefit"
+msgid "Fostering Allowance"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:117
-msgid "Independent Living Funds payment"
+msgid "Housing Benefit"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:118
-msgid "National Asylum Support Service benefit"
+msgid "Independent Living Funds payment"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:119
-msgid "Personal Independent Payments"
+msgid "National Asylum Support Service benefit"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:120
-msgid "Severe Disablement Allowance"
+msgid "Personal Independent Payments"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:121
-msgid "Social Fund Payments"
+msgid "Severe Disablement Allowance"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:122
-msgid "War Pension"
+msgid "Social Fund Payments"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:123
-msgid "Widow’s Pension lump sum payments"
+msgid "War Pension"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:150
