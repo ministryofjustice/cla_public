@@ -227,7 +227,9 @@ def help_organisations(category_name):
     if category_name not in valid_outcomes:
         abort(404)
 
+    category = (field for field, name, description in CATEGORIES if name == category_name).next()
+
     category_name = ORGANISATION_CATEGORY_MAPPING.get(category_name, category_name)
 
     organisations = get_organisation_list(article_category__name=category_name)
-    return render_template('help-organisations.html', organisations=organisations)
+    return render_template('help-organisations.html', organisations=organisations, category=category)
