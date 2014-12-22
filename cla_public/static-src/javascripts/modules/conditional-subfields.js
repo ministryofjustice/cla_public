@@ -15,16 +15,14 @@
       var self = this;
 
       this.conditionalFields
-        .each(function(i, item) {
+        .each(function() {
           var $fields = $('[name="' + $(this).data().controlledBy + '"]');
           $fields = $fields.filter(function() {
             // Unchecked checkbox or checked radio button
             return this.type === 'checkbox' || $(this).is(':checked');
           });
 
-          $fields.each(function() {
-            self.setVisibility($(this), $(item));
-          });
+          $fields.each($.proxy(self.handleVisibility, self));
         });
     },
 
@@ -33,10 +31,7 @@
         return;
       }
 
-      // Find labels defined in template and replace the text.
-      // Exclude the prefix/suffix labels
       $.each(window.CONDITIONAL_LABELS, function(key, value) {
-        // Use 'begins with' to account for multi element fields, e.g. money field
         $('#field-' + key + '')
           .find('.fieldset-label *')
           .text(value);
@@ -46,34 +41,45 @@
     bindEvents: function() {
       var self = this;
 
-      $.each(this.conditionalFields, function(i, item) {
-        var controllerId = $(item).data().controlledBy;
+      var controllers = $.unique(this.conditionalFields.map(function() {
+        return $(this).data().controlledBy;
+      }));
 
-        $('[name="' + controllerId + '"]')
-          .on('change', function(evt) {
-            self.handleChange(evt, item);
-          });
+      $.each(controllers, function() {
+        $('[name="' + this + '"]').on('change', $.proxy(self.handleVisibility, self));
       });
     },
 
-    handleChange: function(evt, item) {
-      this.setVisibility($(evt.target), $(item));
+    handleVisibility: function() {
+      var self = this;
+
+      this.conditionalFields.each(function() {
+        self._handleField($(this));
+      });
     },
 
-    setVisibility: function($controllerField, $controlledField) {
-      var isShown = $controllerField.val() ? $controllerField.val() === $controlledField.data().controlValue + '' : true;
+    _handleField: function($field) {
+      var controlInputName = $field.data().controlledBy;
+      var controlInputValue = $field.data().controlValue + '';
+      var $controlInput = $('[name="' + controlInputName + '"][value="' + controlInputValue + '"]');
 
-      if($controllerField.is(':checkbox')) {
-        isShown = isShown && $controllerField.is(':checked');
-      }
+      this._toggleField($field, $controlInput.is(':checked'));
+    },
 
-      $controlledField
-        .toggleClass('s-expanded', isShown)
-        .toggleClass('s-hidden', !isShown)
+    _toggleField: function($field, isVisible) {
+      $field
+        .toggleClass('s-expanded', isVisible)
+        .toggleClass('s-hidden', !isVisible)
         .attr({
-          'aria-expanded': isShown,
-          'aria-hidden': !isShown
+          'aria-expanded': isVisible,
+          'aria-hidden': !isVisible
         });
+
+      if(!isVisible) {
+        $field.find('input')
+          .prop('checked', false)
+          .trigger('label-select');
+      }
     },
 
     cacheEls: function() {
