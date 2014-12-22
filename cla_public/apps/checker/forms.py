@@ -128,7 +128,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             'you': {'income': {
                 'self_employed': self.is_self_employed.data}}
         }
-        if self.have_partner.data and self.partner_is_self_employed.data:
+        if self.have_partner.data and not self.in_dispute.data and self.partner_is_self_employed.data:
             payload['partner'] = {'income': {
                                   'self_employed': self.partner_is_self_employed.data}}
         return payload
