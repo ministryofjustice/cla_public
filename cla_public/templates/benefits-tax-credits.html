@@ -21,11 +21,12 @@
 
     {{ Form.handle_errors(form) }}
 
-    {{ Form.money_interval_field(form.child_benefit, not session.has_children) }}
-    {{ Form.money_interval_field(form.child_tax_credit, not session.has_children) }}
-    {{ Form.check_list_field(form.benefits) }}
-    {% call Form.yesno_field(form.other_benefits, subfield=form.total_other_benefit) %}
-      {{ Form.money_interval_field(form.total_other_benefit, group_class='form-subfield s-hidden') }}
+    {{ Form.money_interval_fieldset(form.child_benefit, not session.has_children) }}
+    {{ Form.money_interval_fieldset(form.child_tax_credit, not session.has_children) }}
+    {{ Form.option_list_fieldset(form.benefits) }}
+    {% call Form.fieldset(form.other_benefits) %}
+      {{ Form.yesno(form.other_benefits) }}
+      {{ Form.money_interval_fieldset(form.total_other_benefit, is_subfield=True, controlled_by=form.other_benefits) }}
     {% endcall %}
 
     {{ Element.call_me_back_link() }}

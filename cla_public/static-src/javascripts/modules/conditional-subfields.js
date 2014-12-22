@@ -2,7 +2,7 @@
   'use strict';
 
   moj.Modules.ConditionalSubfields = {
-    el: '[data-conditional-controls]',
+    el: '[data-controlled-by]',
 
     init: function() {
       this.cacheEls();
@@ -13,86 +13,71 @@
 
     setInitialState: function() {
       var self = this;
-      this.subfields
-        .filter(function() {
-          // Unchecked checkbox or checked radio button
-          return this.type === 'checkbox' || $(this).is(':checked');
-        })
-        .each(function() {
-          self.setVisibility($(this));
+
+      this.conditionalFields
+        .each(function(i, item) {
+          var $fields = $('[name="' + $(this).data().controlledBy + '"]');
+          $fields = $fields.filter(function() {
+            // Unchecked checkbox or checked radio button
+            return this.type === 'checkbox' || $(this).is(':checked');
+          });
+
+          $fields.each(function() {
+            self.setVisibility($(this), $(item));
+          });
         });
-      },
+    },
 
     replaceLabels: function() {
       if(!window.CONDITIONAL_LABELS) {
         return;
       }
 
-      var labelsToReplace = $.unique(
-        $.map($(this.subfields), function(item) {
-          return $(item).data().conditionalControls;
-        })
-      );
-
       // Find labels defined in template and replace the text.
       // Exclude the prefix/suffix labels
-      $.each(labelsToReplace, function() {
-        if(typeof window.CONDITIONAL_LABELS[this] !== 'string') {
-          return;
-        }
-
+      $.each(window.CONDITIONAL_LABELS, function(key, value) {
         // Use 'begins with' to account for multi element fields, e.g. money field
-        $('label[for^="' + this + '"]')
-          .filter(function() {
-            return !$(this).hasClass('input-prefix') && !$(this).hasClass('input-suffix');
-          })
-          .first()
-          .text(window.CONDITIONAL_LABELS[this]);
+        $('#field-' + key + '')
+          .find('.fieldset-label *')
+          .text(value);
       });
     },
 
     bindEvents: function() {
-      this.subfields
-        .on('change', $.proxy(this.handleChange, this));
-    },
+      var self = this;
 
-    handleChange: function(evt) {
-      this.setVisibility($(evt.target));
-    },
+      $.each(this.conditionalFields, function(i, item) {
+        var controllerId = $(item).data().controlledBy;
 
-    setVisibility: function($field) {
-      var isShown = $field.val() ? $field.val() === $field.data().conditionalShowValue + '': true;
-      var conditionalControls = $field.data().conditionalControls;
-      var ids = [];
-      if (conditionalControls) {
-        ids = $.isArray(conditionalControls) ? conditionalControls : [conditionalControls];
-      }
-
-      if($field.is(':checkbox')) {
-        isShown = isShown && $field.is(':checked');
-      }
-
-      $.each(ids, function(index, id) {
-        var $conditionalContainer = $('[data-subfield-id="' + id +'"]');
-        $conditionalContainer
-          .toggleClass('s-expanded', isShown)
-          .toggleClass('s-hidden', !isShown)
-          .attr({
-            'aria-expanded': isShown,
-            'aria-hidden': !isShown
+        $('[name="' + controllerId + '"]')
+          .on('change', function(evt) {
+            self.handleChange(evt, item);
           });
-
-        if (!isShown) {
-          $('input[type="radio"]', $conditionalContainer)
-            .prop('checked', false)
-            .first()
-            .change();
-        }
       });
     },
 
+    handleChange: function(evt, item) {
+      this.setVisibility($(evt.target), $(item));
+    },
+
+    setVisibility: function($controllerField, $controlledField) {
+      var isShown = $controllerField.val() ? $controllerField.val() === $controlledField.data().controlValue + '' : true;
+
+      if($controllerField.is(':checkbox')) {
+        isShown = isShown && $controllerField.is(':checked');
+      }
+
+      $controlledField
+        .toggleClass('s-expanded', isShown)
+        .toggleClass('s-hidden', !isShown)
+        .attr({
+          'aria-expanded': isShown,
+          'aria-hidden': !isShown
+        });
+    },
+
     cacheEls: function() {
-      this.subfields = $(this.el);
+      this.conditionalFields = $(this.el);
     }
   };
 }());

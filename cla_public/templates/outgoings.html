@@ -19,10 +19,10 @@
 
     {{ Form.handle_errors(form) }}
 
-    {{ Form.money_interval_field(form.rent) }}
-    {{ Form.money_interval_field(form.maintenance) }}
-    {{ Form.text_field(form.income_contribution, prefix="£", class_='m-small') }}
-    {{ Form.money_interval_field(form.childcare, not session.has_children) }}
+    {{ Form.money_interval_fieldset(form.rent) }}
+    {{ Form.money_interval_fieldset(form.maintenance) }}
+    {{ Form.text_input_fieldset(form.income_contribution, prefix="£", class_='m-small') }}
+    {{ Form.money_interval_fieldset(form.childcare, skip=not session.has_children) }}
 
     {{ Element.call_me_back_link() }}
 

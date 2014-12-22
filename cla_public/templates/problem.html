@@ -20,11 +20,12 @@
       {% endcall %}
     {% endif %}
 
-    <ul class="form-option-list" role="radiogroup">
-      {% for category in form.categories %}
-        <li>{{ Form.block_label(category) }}</li>
-      {% endfor %}
-    </ul>
+    <fieldset class="fieldset-group">
+      <legend class="fieldset-label">Choose one of the options</legend>
+      <div class="form-row">
+        {{ Form.option_list(form.categories, label_type='block') }}
+      </div>
+    </fieldset>
 
     {% call Element.alert() %}
       <p>If you have more than one problem, you can complete this service more than once.</p>
@@ -34,5 +35,4 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions('Continue') }}
   </form>
-
 {% endblock %}

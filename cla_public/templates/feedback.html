@@ -17,10 +17,10 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.textarea_field(form.difficulty, class_='m-full', rows=6) }}
-    {{ Form.textarea_field(form.ideas, class_='m-full', rows=6) }}
-    {{ Form.check_list_field(form.feel_about_service) }}
-    {{ Form.check_list_field(form.help_filling_in_form) }}
+    {{ Form.textarea_fieldset(form.difficulty, class_='m-full', rows=6) }}
+    {{ Form.textarea_fieldset(form.ideas, class_='m-full', rows=6) }}
+    {{ Form.option_list_fieldset(form.feel_about_service) }}
+    {{ Form.option_list_fieldset(form.help_filling_in_form) }}
 
     {{ Element.call_me_back_link() }}
 

@@ -29,10 +29,12 @@
   display: block;
   padding: 15px 15px 15px 45px;
 
-  input {
+  input,
+  input[type] {
+    margin: 0;
     position: absolute;
-    top: 15px;
-    left: 18px;
+    top: 18px;
+    left: 20px;
   }
 
   .alert {
@@ -58,5 +60,9 @@
 .radio-inline {
   display: inline-block;
   padding: 13px 30px 10px;
-  margin-right: 10px;
+  margin-right: 6px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
