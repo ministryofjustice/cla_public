@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-22 13:19+0000\n"
+"POT-Creation-Date: 2014-12-22 13:30+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -425,7 +425,7 @@ msgid ""
 "with, for example a dispute over money or property "
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:71 cla_public/apps/checker/forms.py:474
+#: cla_public/apps/checker/forms.py:71 cla_public/apps/checker/forms.py:478
 msgid "Please choose Yes or No"
 msgstr ""
 
@@ -726,89 +726,95 @@ msgid "Rent"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:430
-msgid "Money you pay your landlord"
+msgid ""
+"Money you pay your landlord for rent. Do not include rent that is paid by"
+" housing benefit"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:431
-msgid "Money you and your partner pay your landlord"
+#: cla_public/apps/checker/forms.py:432
+msgid ""
+"Money you and your partner pay your landlord for rent. Do not include "
+"rent that is paid by housing benefit"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:435
+#: cla_public/apps/checker/forms.py:438
 msgid "Maintenance"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:436
+#: cla_public/apps/checker/forms.py:439
 msgid "Money you pay to an ex-partner for their living costs"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:437
+#: cla_public/apps/checker/forms.py:440
 msgid "Money you and/or your partner pay to an ex-partner for their living costs"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:441
+#: cla_public/apps/checker/forms.py:444
 msgid "Monthly Income Contribution Order"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:442
+#: cla_public/apps/checker/forms.py:445
 msgid "Money you pay per month towards your criminal legal aid"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:443
+#: cla_public/apps/checker/forms.py:446
 msgid ""
 "Money you and/or your partner pay per month towards your criminal legal "
 "aid"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:446
+#: cla_public/apps/checker/forms.py:449
 msgid "Childcare"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:447
-msgid "Money you pay for your child to be looked after while you work or study"
+#: cla_public/apps/checker/forms.py:450
+msgid ""
+"Money you pay for your child to be looked after while you work or study "
+"outside of your home"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:449
+#: cla_public/apps/checker/forms.py:452
 msgid ""
 "Money you and your partner pay for your child to be looked after while "
-"you work or study"
+"you work or study outside of your home"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:466
+#: cla_public/apps/checker/forms.py:470
 msgid "Full name"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:469
+#: cla_public/apps/checker/forms.py:473
 msgid "Contact phone number"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:472
+#: cla_public/apps/checker/forms.py:476
 msgid "Is it safe for us to leave a message on this number?"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:476
+#: cla_public/apps/checker/forms.py:480
 msgid "Postcode"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:477
+#: cla_public/apps/checker/forms.py:481
 msgid "Address"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:479
+#: cla_public/apps/checker/forms.py:483
 msgid "Help the operator to understand your situation"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:481
+#: cla_public/apps/checker/forms.py:485
 msgid ""
 "If you’d like to tell us more about your problem, please do so in the box"
 " below. The Civil Legal Advice operator will read this before they call "
 "you."
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:487
+#: cla_public/apps/checker/forms.py:491
 msgid "Do you have any special communication needs?"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:489
+#: cla_public/apps/checker/forms.py:493
 msgid "Select a time for us to call you"
 msgstr ""
 

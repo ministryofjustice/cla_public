@@ -437,8 +437,11 @@ def income_form(*args, **kwargs):
 class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     rent = PartnerMoneyIntervalField(
         label=_(u'Rent'),
-        description=_(u"Money you pay your landlord"),
-        partner_description=_(u"Money you and your partner pay your landlord"),
+        description=_(u"Money you pay your landlord for rent. Do not include "
+                      u"rent that is paid by housing benefit"),
+        partner_description=_(u"Money you and your partner pay your landlord "
+                              u"for rent. Do not include rent that is paid by "
+                              u"housing benefit"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
     maintenance = PartnerMoneyIntervalField(
@@ -455,9 +458,10 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     childcare = PartnerMoneyIntervalField(
         label=_(u'Childcare'),
         description=_(u"Money you pay for your child to be looked after while "
-                      u"you work or study"),
-        partner_description=_(u"Money you and your partner pay for your child "
-                              u"to be looked after while you work or study"),
+                      u"you work or study outside of your home"),
+        partner_description=_(u"Money you and your partner pay for your child to "
+                              u"be looked after while you work or study outside "
+                              u"of your home"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
 
