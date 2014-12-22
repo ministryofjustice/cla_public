@@ -6,11 +6,6 @@ from flask.ext.babel import lazy_gettext as _
 CATEGORIES = [
     # value, label, inline help text
     (
-        'aap',
-        _(u'Actions against the police'),
-        _(u'Being treated unlawfully by authorities who detain, imprison and prosecute '
-        u'(for example, the police), abuse in care cases')),
-    (
         'clinneg',
         _(u'Clinical negligence'),
         _(u'Doctors and nurses not treating you with due care during medical treatment')),
@@ -45,13 +40,12 @@ CATEGORIES = [
     (
         'family',
         _(u'Family'),
-        _(u'Divorce, separation, contact with children, children being taken into care')),
+        _(u'Divorce, separation, arrangements for your children, children being taken into care')),
     (
         'housing',
         _(u'Housing'),
-        _(u'Eviction, homelessness, losing your rented home, rent arrears, being harassed '
-        u'by a landlord or neighbour, health and safety issues with your home, anti-social '
-        u'behaviour orders')),
+        _(u'Eviction, homelessness, losing your rented home, rent arrears, harassment '
+          u'by a landlord or neighbour, health and safety issues with your home')),
     (
         'immigration',
         _(u'Immigration and asylum'),
@@ -69,6 +63,11 @@ CATEGORIES = [
         'publiclaw',
         _(u'Public law'),
         _(u'Taking legal action against a public body, like your local council')),
+    (
+        'aap',
+        _(u'Trouble with the police'),
+        _(u'Being treated unlawfully by authorities who detain, imprison and prosecute '
+          u'(for example, the police), abuse in care cases')),
     (
         'benefits',
         _(u'Welfare benefits'),
@@ -141,7 +140,7 @@ NO = '0'
 ORGANISATION_CATEGORY_MAPPING = {
     'Domestic violence': 'Family',
     'Public law': 'Public',
-    'Actions against the police': 'Action against police',
+    'Trouble with the police': 'Action against police',
 }
 
 DAY_TODAY = 'today'

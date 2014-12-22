@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-19 11:54+0000\n"
+"POT-Creation-Date: 2014-12-22 11:36+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -55,280 +55,281 @@ msgid "I had some other kind of help"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:10
-msgid "Actions against the police"
-msgstr ""
-
-#: cla_public/apps/checker/constants.py:11
-msgid ""
-"Being treated unlawfully by authorities who detain, imprison and "
-"prosecute (for example, the police), abuse in care cases"
-msgstr ""
-
-#: cla_public/apps/checker/constants.py:15
 msgid "Clinical negligence"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:16
+#: cla_public/apps/checker/constants.py:11
 msgid "Doctors and nurses not treating you with due care during medical treatment"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:19
+#: cla_public/apps/checker/constants.py:14
 msgid "Community care"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:20
+#: cla_public/apps/checker/constants.py:15
 msgid ""
 "You’re unhappy with the care being provided for yourself or a relative "
 "due to age, disability or special educational needs - for example, in a "
 "care home or your own home"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:25
+#: cla_public/apps/checker/constants.py:20
 msgid "Debt"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:26
+#: cla_public/apps/checker/constants.py:21
 msgid "Bankruptcy, repossession, mortgage debt that is putting your home at risk"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:29
+#: cla_public/apps/checker/constants.py:24
 msgid "Domestic violence"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:30
+#: cla_public/apps/checker/constants.py:25
 msgid "Abuse at home, child abuse, harassment by an ex-partner, forced marriage"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:33
+#: cla_public/apps/checker/constants.py:28
 msgid "Discrimination"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:34
+#: cla_public/apps/checker/constants.py:29
 msgid "Being treated unfairly because of your race, sex, sexual orientation"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:38
+#: cla_public/apps/checker/constants.py:33
 msgid "Education"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:39
+#: cla_public/apps/checker/constants.py:34
 msgid ""
 "Special educational needs, problems with school places, exclusions, "
 "learning difficulties"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:43
+#: cla_public/apps/checker/constants.py:38
 msgid "Employment"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:44
+#: cla_public/apps/checker/constants.py:39
 msgid "Being treated unfairly at work, unfair dismissal, employment tribunals"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:47
+#: cla_public/apps/checker/constants.py:42
 msgid "Family"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:48
-msgid "Divorce, separation, contact with children, children being taken into care"
+#: cla_public/apps/checker/constants.py:43
+msgid ""
+"Divorce, separation, arrangements for your children, children being taken"
+" into care"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:51
+#: cla_public/apps/checker/constants.py:46
 msgid "Housing"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:52
+#: cla_public/apps/checker/constants.py:47
 msgid ""
-"Eviction, homelessness, losing your rented home, rent arrears, being "
-"harassed by a landlord or neighbour, health and safety issues with your "
-"home, anti-social behaviour orders"
+"Eviction, homelessness, losing your rented home, rent arrears, harassment"
+" by a landlord or neighbour, health and safety issues with your home"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:57
+#: cla_public/apps/checker/constants.py:51
 msgid "Immigration and asylum"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:58
+#: cla_public/apps/checker/constants.py:52
 msgid ""
 "Applying for asylum or permission to stay in the UK, including for "
 "victims of human trafficking"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:62
+#: cla_public/apps/checker/constants.py:56
 msgid "Mental health"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:63
+#: cla_public/apps/checker/constants.py:57
 msgid "Help with mental health and mental capacity legal issues"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:66
+#: cla_public/apps/checker/constants.py:60
 msgid "Personal injury"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:67
+#: cla_public/apps/checker/constants.py:61
 msgid "An accident that was not your fault"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:70
+#: cla_public/apps/checker/constants.py:64
 msgid "Public law"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:71
+#: cla_public/apps/checker/constants.py:65
 msgid "Taking legal action against a public body, like your local council"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:74
+#: cla_public/apps/checker/constants.py:68
+msgid "Trouble with the police"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:69
+msgid ""
+"Being treated unlawfully by authorities who detain, imprison and "
+"prosecute (for example, the police), abuse in care cases"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:73
 msgid "Welfare benefits"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:75
+#: cla_public/apps/checker/constants.py:74
 msgid ""
 "Appealing a decision made by the social security tribunal about your "
 "benefits to the Upper Tribunal, Court of Appeal or Supreme Court"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:81
+#: cla_public/apps/checker/constants.py:80
 msgid "Eligible"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:82
+#: cla_public/apps/checker/constants.py:81
 msgid "Face-to-face"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:83
+#: cla_public/apps/checker/constants.py:82
 msgid "Confirmation"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:88
+#: cla_public/apps/checker/constants.py:87
 msgid "Income Support"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:89
+#: cla_public/apps/checker/constants.py:88
 msgid "Income-based Jobseeker’s Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:90
+#: cla_public/apps/checker/constants.py:89
 msgid "Guarantee Credit"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:91
+#: cla_public/apps/checker/constants.py:90
 msgid "Universal Credit"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:92
+#: cla_public/apps/checker/constants.py:91
 msgid "Income-related Employment and Support Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:93
+#: cla_public/apps/checker/constants.py:92
 msgid "A different benefit not listed above"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:100
+#: cla_public/apps/checker/constants.py:99
 msgid "-- Please select --"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:101
+#: cla_public/apps/checker/constants.py:100
 msgid "per week"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:102
+#: cla_public/apps/checker/constants.py:101
 msgid "4 weekly"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:103
+#: cla_public/apps/checker/constants.py:102
 msgid "per month"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:104
+#: cla_public/apps/checker/constants.py:103
 msgid "per year"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:108
+#: cla_public/apps/checker/constants.py:107
 msgid "Attendance Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:109
+#: cla_public/apps/checker/constants.py:108
 msgid "Care in the community Direct Payment"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:110
+#: cla_public/apps/checker/constants.py:109
 msgid "Carers’ Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:111
+#: cla_public/apps/checker/constants.py:110
 msgid "Constant Attendance Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:112
+#: cla_public/apps/checker/constants.py:111
 msgid "Council Tax Benefits"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:113
+#: cla_public/apps/checker/constants.py:112
 msgid "Disability Living Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:114
+#: cla_public/apps/checker/constants.py:113
 msgid "Earnings Top Up"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:115
+#: cla_public/apps/checker/constants.py:114
 msgid "Exceptionally Severe Disablement Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:116
+#: cla_public/apps/checker/constants.py:115
 msgid "Fostering Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:117
+#: cla_public/apps/checker/constants.py:116
 msgid "Housing Benefit"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:118
+#: cla_public/apps/checker/constants.py:117
 msgid "Independent Living Funds payment"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:119
+#: cla_public/apps/checker/constants.py:118
 msgid "National Asylum Support Service benefit"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:120
+#: cla_public/apps/checker/constants.py:119
 msgid "Personal Independent Payments"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:121
+#: cla_public/apps/checker/constants.py:120
 msgid "Severe Disablement Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:122
+#: cla_public/apps/checker/constants.py:121
 msgid "Social Fund Payments"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:123
+#: cla_public/apps/checker/constants.py:122
 msgid "War Pension"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:124
+#: cla_public/apps/checker/constants.py:123
 msgid "Widow’s Pension lump sum payments"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:151
+#: cla_public/apps/checker/constants.py:150
 msgid "Call me today at"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:152
+#: cla_public/apps/checker/constants.py:151
 msgid "Call me tomorrow at"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:153
+#: cla_public/apps/checker/constants.py:152
 msgid "Call me in the next week on"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:157
+#: cla_public/apps/checker/constants.py:156
 msgid "Yes"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:158
+#: cla_public/apps/checker/constants.py:157
 msgid "No"
 msgstr ""
 
@@ -833,19 +834,4 @@ msgstr ""
 #: cla_public/apps/checker/validators.py:124
 msgid "Can't schedule a callback at the requested time"
 msgstr ""
-
-#~ msgid ""
-#~ msgstr ""
-
-#~ msgid "Struggling to manage or pay off debt, bankruptcy, repossession"
-#~ msgstr ""
-
-#~ msgid "Eviction, homelessness, losing your home, rent arrears"
-#~ msgstr ""
-
-#~ msgid "Welfare benefits appeals"
-#~ msgstr ""
-
-#~ msgid "Appealing a decision about your benefits"
-#~ msgstr ""
 
