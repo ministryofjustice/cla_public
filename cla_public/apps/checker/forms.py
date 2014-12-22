@@ -120,7 +120,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     aged_60_or_over = YesNoField(_(u'Are you aged 60 or over?'))
 
     def api_payload(self):
-        return {
+        payload = {
             'dependants_young': self.num_children.data or 0,
             'dependants_old': self.num_dependants.data or 0,
             'is_you_or_your_partner_over_60': self.aged_60_or_over.data,
@@ -128,6 +128,10 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             'you': {'income': {
                 'self_employed': self.is_self_employed.data}}
         }
+        if self.have_partner.data and not self.in_dispute.data and self.partner_is_self_employed.data:
+            payload['partner'] = {'income': {
+                                  'self_employed': self.partner_is_self_employed.data}}
+        return payload
 
 
 class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
