@@ -10,7 +10,8 @@ from flask import abort, render_template, redirect, \
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, get_organisation_list
-from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, ORGANISATION_CATEGORY_MAPPING
+from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, ORGANISATION_CATEGORY_MAPPING, \
+    NO_CALLBACK_CATEGORIES
 from cla_public.apps.checker.decorators import form_view, override_session_vars, redirect_if_no_session
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
@@ -179,6 +180,10 @@ def result(outcome):
     if outcome not in valid_outcomes:
         abort(404)
 
+    if session.category in NO_CALLBACK_CATEGORIES:
+        session.clear()
+        return render_template('result/eligible-no-callback.html')
+
     form = ApplicationForm()
     if form.validate_on_submit():
         if form.extra_notes.data:
@@ -190,7 +195,6 @@ def result(outcome):
         session['time_to_callback'] = form.time.scheduled_time()
 
         return redirect(url_for('.result', outcome='confirmation'))
-
 
     response = render_template(
         'result/%s.html' % outcome,

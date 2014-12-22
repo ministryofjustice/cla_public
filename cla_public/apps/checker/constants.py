@@ -134,6 +134,9 @@ F2F_CATEGORIES = (
     'employment',
 )
 
+"Dont go to callback page for these cats"
+NO_CALLBACK_CATEGORIES = ('benefits',)
+
 YES = '1'
 NO = '0'
 

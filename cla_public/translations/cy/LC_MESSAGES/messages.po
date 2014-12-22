@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-22 13:45+0000\n"
+"POT-Creation-Date: 2014-12-22 15:14+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -313,23 +313,23 @@ msgstr ""
 msgid "War Pension"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:150
+#: cla_public/apps/checker/constants.py:153
 msgid "Call me today at"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:151
+#: cla_public/apps/checker/constants.py:154
 msgid "Call me tomorrow at"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:152
+#: cla_public/apps/checker/constants.py:155
 msgid "Call me in the next week on"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:156
+#: cla_public/apps/checker/constants.py:159
 msgid "Yes"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:157
+#: cla_public/apps/checker/constants.py:160
 msgid "No"
 msgstr ""
 
