@@ -10,17 +10,16 @@
   {% block page_text %}
     <h1>{{ title }}</h1>
     <p>
-      Fill in your personal details to get a callback from Civil Legal Advice and see if you qualify for specialist
-      advice on debt, education, discrimination, housing or family problems funded by legal aid.
+      Fill in your personal details to get a callback from Civil Legal Advice to find out if you
+      qualify for specialist advice on debt, education, discrimination, housing or family problems
+      funded by <a href="https://www.gov.uk/legal-aid">legal aid</a>.
     </p>
     <p>
-      We will try and call you at least once. If we cannot speak to you we will leave you a message.
+      We will try and call you at least once. If we cannot speak to you we will leave you a message
+      unless you tell us below not to.
     </p>
     <p>
-      If you don't want us to leave a message please tell us.
-    </p>
-    <p>
-      If we can't speak to you please book another call back here or call us.
+      If we can't speak to you please book another call back here or call us on 0345 345 4 345.
     </p>
   {% endblock %}
 
@@ -74,6 +73,51 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions('Request callback') }}
   </form>
+
+  {% block below_form %}
+
+    <p>
+      This service only covers England or Wales.<br>
+      We are available Monday to Friday 9am-8pm and Saturday 9am-12:30pm.<br>
+      You can also call us on 0345 3454 345.<br>
+      Minicom: 0345 609 6677.<br>
+      Or text 'legalaid' and your name to 80010.<br>
+    </p>
+
+
+    <p>
+      The first person you speak to will be an operator. They will ask you questions about
+      you and your problem, including you and your partner's financial circumstances.
+    </p>
+
+    <p>
+      If it looks like you might qualify you will be put through to a CLA specialist
+      adviser immediately.
+    </p>
+
+    <p>
+      They will still need to ask you some more questions before making the final decision
+      about whether CLA can offer you advice. And you will need to provide evidence of what
+      you have told us later.
+    </p>
+
+    <p>
+      If CLA can't help you we will always suggest where else you might get help.
+    </p>
+
+    <p>
+      If we can do anything to make it easier for you to communicate with us due to your
+      disability please tell the Operator.
+    </p>
+
+    <p>
+      Protecting your personal data and your privacy is important to us. We are asking for
+      some information from you now so that when we call you back we know who you are. You
+      can read the full <a href="http://www.justice.gov.uk/privacy/community-legal-advice-privacy-statement">Civil Legal Advice Privacy Statement here</a>.
+    </p>
+
+  {% endblock %}
+
 {% endblock %}
 
 
