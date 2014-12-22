@@ -57,13 +57,15 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     have_partner = YesNoField(
         _(u'Do you have a partner?'),
         description=(
-            _(u"Your partner is your husband, wife, civil partner or someone "
-              u"you live with as if you’re married")))
+            _(u"Your partner is your husband, wife, civil partner unless "
+              u"you have permanently separated or someone you live with "
+              u"as if you’re married")))
     in_dispute = YesNoField(
         _(u'If Yes, are you in a dispute with your partner?'),
         description=(
-            _(u"This means a dispute over money or property following a "
-              u"separation")),
+            _(u"This means your partner is the opponent in the dispute "
+              u"you need help with, for example a dispute over money or "
+              u"property ")),
         validators=[
             IgnoreIf('have_partner', FieldValue(NO)),
             InputRequired(message=gettext(u'Please choose Yes or No'))
