@@ -25,20 +25,19 @@
 }
 
 #content {
-  > .inner-block {
+  .inner-block {
     @extend %site-width-container;
+    margin-top: 40px;
 
-    > header {
-      margin-bottom: 30px;
+    h1 {
+      margin: 0;
     }
   }
 }
 
-.main-content > header {
-  margin-bottom: 30px;
-}
-
 .m-has-sidebar {
+  @extend %grid-row;
+
   .main-content,
   .sidebar {
     @include media(tablet) {
@@ -55,7 +54,7 @@
 
   .sidebar {
     @include media(tablet) {
-      margin-top: 35px;
+      margin-top: 12px;
       width: 30%;
     }
   }
