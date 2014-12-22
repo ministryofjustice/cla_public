@@ -31,7 +31,7 @@
 
     {% with skip = not session.has_valuables %}
       {% if skip %}
-        {{ Form.text(form.valuables, skip=skip) }}
+        {{ Form.text_input(form.valuables, skip=skip) }}
       {% else %}
         {% call Form.fieldset(form.valuables, class_='fieldset-group') %}
           {{ Form.text_input(form.valuables, prefix="£", skip=skip, class_='m-small') }}
