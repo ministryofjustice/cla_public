@@ -96,8 +96,3 @@ def session_end():
     return jsonify({
         'session': 'CLEAR'
     })
-
-
-@base.route('/500')
-def internal_error():
-    raise Exception('Foo')
