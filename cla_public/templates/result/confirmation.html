@@ -19,13 +19,59 @@
     Your details have been submitted and an operator will call you back
     around the time you requested
     (<strong>{{ session.time_to_callback|datetime('full') }}</strong>).
-    If the operator you speak to thinks you can get legal aid, they will find
-    you specialist legal help, like a phone call with a solicitor or
-    support from a family mediation service.
   </p>
+  {% if category in ['debt', 'housing', 'violence', 'discrimination', 'education', 'family'] %}
+    <p>
+      We will try and call you once. If we cannot speak to you we will
+      leave you a message unless you have said it is unsafe to do so.
+    </p>
+
+    {% if category == 'violence' %}
+      <p>
+        If you need to urgently protect you or your family you should
+        try and get advice as soon as possible.
+      </p>
+    {% elif category not in ['discrimination', 'education', 'family'] %}
+      <p>
+        If you have a court hearing date it is important that you get
+        advice as soon as possible. You may be able to get last-minute
+        help on the day of the hearing from an adviser in the court building.
+      </p>
+    {% endif %}
+
+    <p>
+      Your CLA specialist adviser will ask you more questions before
+      making the final decision about whether you qualify for legal aid.
+    </p>
+
+    <p>
+      You will need to provide evidence of your financial circumstances
+      and maybe your problem. Your CLA specialist adviser will explain
+      what is needed.
+    </p>
+
+    <p>
+      If your CLA specialist adviser takes your case on they will
+      communicate with you by telephone, email or post.
+    </p>
+
+    <p>
+      If your CLA adviser decides that you need to speak to someone in
+      person or if you need someone to represent you in court, they
+      will organise this.
+    </p>
+  {% else %}
+    <p>
+      If the operator you speak to thinks you can get legal aid, they will find
+      you specialist legal help, like a phone call with a solicitor or
+      support from a family mediation service.
+    </p>
+  {% endif %}
 
   <h2>What if I miss the operator’s call?</h2>
   <p>
-   If you miss the call or are in an emergency, you can call us on 0345 345 4 345. Calls cost no more than 4p a minute from a BT landline. Calls from mobiles usually cost more.
+    If you miss the call or you need advice urgently, you can call us on
+    0345 345 4 345. Find out about call charges
+    <a href="https://www.gov.uk/call-charges">here</a>.
   </p>
 {% endblock %}

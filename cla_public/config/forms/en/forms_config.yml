@@ -9,7 +9,7 @@ forms:
             selected_notification: If you are in immediate danger you can ask us to [call you back](/call-me-back).
 
           family:
-            selected_notification: If you are a parent of a child who the council is trying to take in to care, ask us to [call you back](/call-me-back).
+            selected_notification: If you are a parent of a child who the local authority is trying to take in to care, ask us to [call you back](/call-me-back).
 
   AboutYouForm:
     fields:

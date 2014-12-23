@@ -32,7 +32,6 @@
 #}
 {%  macro call_me_back_link() %}
   {% call alert() %}
-    <p>If you're having trouble completing this form, or don't have all the information
-      you need, ask us to <a href="{{ url_for('checker.call_me_back') }}">call you back</a>.</p>
+    <p>If you're having trouble completing this form, ask us to <a href="{{ url_for('checker.call_me_back') }}">call you back</a>.</p>
   {% endcall %}
 {% endmacro %}

@@ -9,14 +9,26 @@
     {%- endif -%}
   </h1>
   <h2>Request a callback</h2>
+  {% if not eligibility_unknown %}
+    <p>Based on the answers you've given today, you might qualify financially for legal aid.</p>
 
-  <p>
-    {% if not eligibility_unknown %}
-      Based on the answers you’ve given, you might qualify financially for legal aid.
-    {% endif %}
-    To find out if legal aid can help with your specific problem, you need to speak
-      to a Civil Legal Advice operator. Please submit your details so we can call you back.
-  </p>
+    <p>Please submit your details so we can call you back.</p>
+
+    <p>
+      The first person you speak to will be a Civil Legal Advice operator. They will check the
+      information you’ve given us. They will also ask you some more questions to find out if
+      your specific problem is covered by legal aid.
+    </p>
+  {% else %}
+    <p>
+      In order to decide whether you might qualify for legal aid, we need more information about
+      your financial circumstances.
+    </p>
+    <p>The first person you speak to will be a Civil Legal Advice operator. They will check what
+      you told us already. They will also ask you some more questions about your financial
+      circumstances and to find out if your specific problem is covered by legal aid.
+    </p>
+  {% endif %}
 {% endblock %}
 
 {% block javascripts %}
@@ -25,4 +37,32 @@
     {% set event_label = 'unknown' if eligibility_unknown else 'eligible' %}
     ga('send', 'event', 'result', 'callback', '{{ event_label }}');
   </script>
+{% endblock %}
+
+{% block below_form %}
+  {% if eligibility_unknown %}
+    <p>
+      Your CLA specialist adviser will ask you more questions before making the final decision about
+      whether you qualify for legal aid.
+    </p>
+
+    <p>
+      You will need to provide evidence of your financial circumstances and maybe your problem.
+      Your CLA specialist adviser will explain what is needed.
+    </p>
+
+    <p>
+      If your CLA specialist adviser takes your case on they will communicate with you by telephone,
+      email or post.
+    </p>
+
+    <p>
+      If CLA can't help we will always suggest other places that might be able to.
+    </p>
+
+    <p>
+      If your Civil Legal Advice adviser decides that you need to speak to someone in person or if
+      you need someone to represent you in court, they will organise this for you.
+    </p>
+  {% endif %}
 {% endblock %}

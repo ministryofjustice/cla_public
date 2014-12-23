@@ -6,11 +6,6 @@ from flask.ext.babel import lazy_gettext as _
 CATEGORIES = [
     # value, label, inline help text
     (
-        'aap',
-        _(u'Actions against the police'),
-        _(u'Being treated unlawfully by authorities who detain, imprison and prosecute '
-        u'(for example, the police), abuse in care cases')),
-    (
         'clinneg',
         _(u'Clinical negligence'),
         _(u'Doctors and nurses not treating you with due care during medical treatment')),
@@ -45,13 +40,12 @@ CATEGORIES = [
     (
         'family',
         _(u'Family'),
-        _(u'Divorce, separation, contact with children, children being taken into care')),
+        _(u'Divorce, separation, arrangements for your children, children being taken into care')),
     (
         'housing',
         _(u'Housing'),
-        _(u'Eviction, homelessness, losing your rented home, rent arrears, being harassed '
-        u'by a landlord or neighbour, health and safety issues with your home, anti-social '
-        u'behaviour orders')),
+        _(u'Eviction, homelessness, losing your rented home, rent arrears, harassment '
+          u'by a landlord or neighbour, health and safety issues with your home')),
     (
         'immigration',
         _(u'Immigration and asylum'),
@@ -69,6 +63,11 @@ CATEGORIES = [
         'publiclaw',
         _(u'Public law'),
         _(u'Taking legal action against a public body, like your local council')),
+    (
+        'aap',
+        _(u'Trouble with the police'),
+        _(u'Being treated unlawfully by authorities who detain, imprison and prosecute '
+          u'(for example, the police), abuse in care cases')),
     (
         'benefits',
         _(u'Welfare benefits'),
@@ -105,13 +104,14 @@ MONEY_INTERVALS = [
 ]
 
 NON_INCOME_BENEFITS = [
+    ('armed-forces-independance', _(u'Armed Forces Independence payment')),
     ('attendance', _(u'Attendance Allowance')),
+    ('back-to-work-bonus', _(u'Back to Work Bonus')),
     ('care-community', _(u'Care in the community Direct Payment')),
     ('carers', _(u'Carers’ Allowance')),
     ('constant-attendance', _(u'Constant Attendance Allowance')),
     ('ctax-benefits', _(u'Council Tax Benefits')),
     ('disability-living', _(u'Disability Living Allowance')),
-    ('earnings-top-up', _(u'Earnings Top Up')),
     ('ex-severe-disablement', _(u'Exceptionally Severe Disablement Allowance')),
     ('fostering', _(u'Fostering Allowance')),
     ('housing', _(u'Housing Benefit')),
@@ -121,7 +121,6 @@ NON_INCOME_BENEFITS = [
     ('severe-disablement', _(u'Severe Disablement Allowance')),
     ('social-fund', _(u'Social Fund Payments')),
     ('war-pension', _(u'War Pension')),
-    ('widows-pension', _(u'Widow’s Pension lump sum payments')),
 ]
 
 F2F_CATEGORIES = (
@@ -135,13 +134,16 @@ F2F_CATEGORIES = (
     'employment',
 )
 
+"Dont go to callback page for these cats"
+NO_CALLBACK_CATEGORIES = ('benefits',)
+
 YES = '1'
 NO = '0'
 
 ORGANISATION_CATEGORY_MAPPING = {
     'Domestic violence': 'Family',
     'Public law': 'Public',
-    'Actions against the police': 'Action against police',
+    'Trouble with the police': 'Action against police',
 }
 
 DAY_TODAY = 'today'

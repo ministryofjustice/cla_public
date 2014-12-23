@@ -57,13 +57,15 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     have_partner = YesNoField(
         _(u'Do you have a partner?'),
         description=(
-            _(u"Your partner is your husband, wife, civil partner or someone "
-              u"you live with as if you’re married")))
+            _(u"Your partner is your husband, wife, civil partner unless "
+              u"you have permanently separated or someone you live with "
+              u"as if you’re married")))
     in_dispute = YesNoField(
         _(u'If Yes, are you in a dispute with your partner?'),
         description=(
-            _(u"This means a dispute over money or property following a "
-              u"separation")),
+            _(u"This means your partner is the opponent in the dispute "
+              u"you need help with, for example a dispute over money or "
+              u"property ")),
         validators=[
             IgnoreIf('have_partner', FieldValue(NO)),
             InputRequired(message=gettext(u'Please choose Yes or No'))
@@ -435,8 +437,11 @@ def income_form(*args, **kwargs):
 class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     rent = PartnerMoneyIntervalField(
         label=_(u'Rent'),
-        description=_(u"Money you pay your landlord"),
-        partner_description=_(u"Money you and your partner pay your landlord"),
+        description=_(u"Money you pay your landlord for rent. Do not include "
+                      u"rent that is paid by housing benefit"),
+        partner_description=_(u"Money you and your partner pay your landlord "
+                              u"for rent. Do not include rent that is paid by "
+                              u"housing benefit"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
     maintenance = PartnerMoneyIntervalField(
@@ -453,9 +458,10 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     childcare = PartnerMoneyIntervalField(
         label=_(u'Childcare'),
         description=_(u"Money you pay for your child to be looked after while "
-                      u"you work or study"),
-        partner_description=_(u"Money you and your partner pay for your child "
-                              u"to be looked after while you work or study"),
+                      u"you work or study outside of your home"),
+        partner_description=_(u"Money you and your partner pay for your child to "
+                              u"be looked after while you work or study outside "
+                              u"of your home"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
 
@@ -472,6 +478,7 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
 class ApplicationForm(Honeypot, Form):
     full_name = StringField(
         _(u'Full name'),
+        description=_(u'For example: John Smith'),
         validators=[InputRequired()])
     contact_number = StringField(
         _(u'Contact phone number'),
