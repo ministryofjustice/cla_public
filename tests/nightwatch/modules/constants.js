@@ -60,7 +60,7 @@ exports.CATEGORIES_OF_LAW = [
   },
   {
     value: 'aap',
-    name: 'Actions against the police',
+    name: 'Trouble with the police',
     covered: false
   },
   {

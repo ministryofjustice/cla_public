@@ -106,6 +106,16 @@ module.exports = {
       client
         .setValue(util.format('input[name="%s"]', item.name), SAVINGS_THRESHOLD + 1)
         .submitForm('form')
+        .waitForElementPresent('form[action="/income"]', 2000)
+        .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
+        .setValue('input[name="your_income-pension-per_interval_value"]', 0)
+        .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
+        .submitForm('form')
+        .waitForElementPresent('form[action="/outgoings"]', 2000)
+        .setValue('input[name="rent-per_interval_value"]', 0)
+        .setValue('input[name="maintenance-per_interval_value"]', 0)
+        .setValue('input[name="income_contribution"]', 0)
+        .submitForm('form')
         .assert.urlContains('/help-organisations', util.format('Result ineligible when %s field set to £%s', item.name, (SAVINGS_THRESHOLD + 1)))
       ;
     });
