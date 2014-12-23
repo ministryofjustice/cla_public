@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 15:11+0000\n"
+"POT-Creation-Date: 2014-12-24 13:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -955,5 +955,45 @@ msgid ""
 "This online service is only for adults. If you’re under 18, please "
 "contact <a href=\"https://www.gov.uk/civil-legal-advice\">Civil Legal "
 "Advice</a>."
+msgstr ""
+
+#: cla_public/templates/errors/4xx.html:8
+msgid ""
+"Please return to the <a href=\"/\">Find out if Civil Legal Advice can "
+"help you </a> page and try again."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:3
+msgid "Service unavailable"
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:6
+msgid "This service is temporarily unavailable"
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:7
+msgid ""
+"This service is not available right now, but we’re working hard to get "
+"things up and running again."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:8
+msgid "You can try again later or call us on 0345 345 4 345."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:9
+msgid "Minicom: 0345 609 6677"
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:10
+msgid "Or text <strong>legalaid</strong> and your name to 80010."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:11
+msgid "Find out about call charges here</a>."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:12
+msgid "This service is only available if you are a resident of England or Wales."
 msgstr ""
 
