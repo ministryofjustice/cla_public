@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 16:47+0000\n"
+"POT-Creation-Date: 2014-12-23 16:56+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -848,6 +848,17 @@ msgstr ""
 
 #: cla_public/config/common.py:52 cla_public/config/common.py:53
 msgid "Civil Legal Advice"
+msgstr ""
+
+#: cla_public/templates/_phase-tag.html:3
+msgid "BETA"
+msgstr ""
+
+#: cla_public/templates/_phase-tag.html:4
+#, python-format
+msgid ""
+"This is a new service – your <a href=\"%(url)s\">feedback</a>\n"
+"      will help us to improve it."
 msgstr ""
 
 #: cla_public/templates/index.html:8

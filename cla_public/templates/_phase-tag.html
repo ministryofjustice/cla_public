@@ -1,7 +1,8 @@
 <div class="phase-banner">
   <p>
-    <strong class="phase-tag">BETA</strong>
-    <span>This is a new service – your <a href="{{ url_for('base.feedback') }}">feedback</a> will help us to improve it.</span>
+    <strong class="phase-tag">{{ _('BETA') }}</strong>
+    <span>{% trans url=url_for('base.feedback') %}This is a new service – your <a href="{{ url }}">feedback</a>
+      will help us to improve it.{% endtrans %}</span>
   </p>
 
   {% if form and config.DEBUG -%}
