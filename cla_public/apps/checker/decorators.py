@@ -52,7 +52,7 @@ def form_view(form_class, form_template):
     return view
 
 
-def redirect_to_ineligible():
+def redirect_if_ineligible():
     def view(fn):
         @functools.wraps(fn)
         def wrapper(*args, **kwargs):
