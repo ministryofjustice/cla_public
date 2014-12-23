@@ -22,13 +22,6 @@ import cla_public.apps.base.extensions
 log = logging.getLogger(__name__)
 
 
-@base.route('/<path:filename>')
-def static(filename):
-    # HACK: Switch to nginx.
-    directory = os.path.join(current_app.static_folder, '../static-templates/')
-    return send_from_directory(directory, filename)
-
-
 @base.route('/')
 def index():
     session.clear()
