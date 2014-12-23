@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block page_title %}404: Page not found - {{ super() }}{% endblock %}
+{% block page_title %}404: {{ _('Page not found') }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1>Sorry, this page doesn’t exist</h1>
-  <p>Please return to the <a href="/">Can I get legal aid?</a> page and try again.</p>
+  <h1>{{ _('Sorry, this page doesn’t exist') }}</h1>
+  <p>{{ _('Please return to the <a href="/">Can I get legal aid?</a> page and try again.') }}</p>
 {% endblock %}
 
 {% block javascripts %}{% endblock %}

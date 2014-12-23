@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 13:36+0000\n"
+"POT-Creation-Date: 2014-12-23 15:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -959,6 +959,20 @@ msgid ""
 "This online service is only for adults. If you’re under 18, please "
 "contact <a href=\"https://www.gov.uk/civil-legal-advice\">Civil Legal "
 "Advice</a>."
+msgstr ""
+
+#: cla_public/templates/errors/404.html:3
+msgid "Page not found"
+msgstr ""
+
+#: cla_public/templates/errors/404.html:6
+msgid "Sorry, this page doesn’t exist"
+msgstr ""
+
+#: cla_public/templates/errors/404.html:7
+msgid ""
+"Please return to the <a href=\"/\">Can I get legal aid?</a> page and try "
+"again."
 msgstr ""
 
 #: cla_public/templates/errors/4xx.html:8
