@@ -5,20 +5,20 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% block page_heading %}
-  {% if session.has_partner %}
-    You and your partner’s
-  {% else %}
-    Your
-  {% endif %}
-  {% if session.is_employed or session.is_self_employed %}
-    income and tax
-  {% else %}
-    money coming in
-  {%  endif %}
-{% endblock %}
+{% if session.has_partner %}
+  {% set title = 'You and your partner’s' %}
+{% else %}
+  {% set title = 'Your' %}
+{% endif %}
+{% if session.is_employed or session.is_self_employed %}
+  {% set title = title + ' income and tax' %}
+{% else %}
+  {% set title = title + ' money coming in' %}
+{%  endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>{{ title }}</h1>
   <p>
     We need to know how much money you have coming in, because this affects
     whether or not you can get legal aid. Please answer these questions as
@@ -28,34 +28,45 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% with is_hidden = not (session.is_employed or session.is_self_employed) %}
-      <fieldset>
-        {% if session.has_partner %}
-          <h3>Your money coming in</h3>
-          <p>This section is for any money that is paid to you personally - for example, your wages. You should record money coming in for your partner, if you have one, in the next section.</p>
-        {% endif %}
-        {{ Form.money_interval_field(form.your_income.earnings, is_hidden) }}
-        {{ Form.money_interval_field(form.your_income.income_tax, is_hidden) }}
-        {{ Form.money_interval_field(form.your_income.national_insurance, is_hidden) }}
-        {{ Form.money_interval_field(form.your_income.working_tax_credit, is_hidden) }}
-        {{ Form.money_interval_field(form.your_income.maintenance) }}
-        {{ Form.money_interval_field(form.your_income.pension) }}
-        {{ Form.money_interval_field(form.your_income.other_income) }}
-      </fieldset>
+    {% with skip = not (session.is_employed or session.is_self_employed) %}
+      {% if session.has_partner %}
+        <fieldset class="fieldset-group">
+          <header>
+            <h3>Your money coming in</h3>
+          </header>
+          <p class="form-row">
+            This section is for any money that is paid to you personally - for example, your wages.
+            You should record money coming in for your partner, if you have one, in the next section.
+          </p>
+      {% endif %}
+        {{ Form.money_interval_fieldset(form.your_income.earnings, skip=skip) }}
+        {{ Form.money_interval_fieldset(form.your_income.income_tax, skip=skip) }}
+        {{ Form.money_interval_fieldset(form.your_income.national_insurance, skip=skip) }}
+        {{ Form.money_interval_fieldset(form.your_income.working_tax_credit, skip=skip) }}
+        {{ Form.money_interval_fieldset(form.your_income.maintenance) }}
+        {{ Form.money_interval_fieldset(form.your_income.pension) }}
+        {{ Form.money_interval_fieldset(form.your_income.other_income) }}
+      {% if session.has_partner %}
+        </fieldset>
+      {% endif %}
     {% endwith %}
     {% if session.has_partner %}
-      {% with is_hidden_for_partner = not (session.partner_is_employed or session.partner_is_self_employed) %}
-        <fieldset>
-          <h3>Your partner’s money coming in</h3>
-          {{ Form.money_interval_field(form.partner_income.earnings, is_hidden_for_partner) }}
-          {{ Form.money_interval_field(form.partner_income.income_tax, is_hidden_for_partner) }}
-          {{ Form.money_interval_field(form.partner_income.national_insurance, is_hidden_for_partner) }}
-          {{ Form.money_interval_field(form.partner_income.working_tax_credit, is_hidden_for_partner) }}
-          {{ Form.money_interval_field(form.partner_income.maintenance) }}
-          {{ Form.money_interval_field(form.partner_income.pension) }}
-          {{ Form.money_interval_field(form.partner_income.other_income) }}
-        </fieldset>
-      {% endwith %}
+      <fieldset class="fieldset-group">
+        {% with skip_for_partner = not (session.partner_is_employed or session.partner_is_self_employed) %}
+          <header>
+            <h3>Your partner’s money coming in</h3>
+          </header>
+          <fieldset class="group">
+            {{ Form.money_interval_fieldset(form.partner_income.earnings, skip=skip_for_partner) }}
+            {{ Form.money_interval_fieldset(form.partner_income.income_tax, skip=skip_for_partner) }}
+            {{ Form.money_interval_fieldset(form.partner_income.national_insurance, skip=skip_for_partner) }}
+            {{ Form.money_interval_fieldset(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
+            {{ Form.money_interval_fieldset(form.partner_income.maintenance) }}
+            {{ Form.money_interval_fieldset(form.partner_income.pension) }}
+            {{ Form.money_interval_fieldset(form.partner_income.other_income) }}
+          </fieldset>
+        {% endwith %}
+      </fieldset>
     {% endif %}
 
     {{ Element.call_me_back_link() }}

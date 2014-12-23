@@ -12,7 +12,7 @@
 
     bindEvents: function() {
       this.$options
-        .on('change', function () {
+        .on('change label-select', function () {
           var $el = $(this),
               $parent = $el.parent('label');
 

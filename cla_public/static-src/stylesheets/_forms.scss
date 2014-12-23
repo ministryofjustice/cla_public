@@ -1,9 +1,19 @@
-@import 'forms/structure';
 @import 'forms/inputs';
 @import 'forms/buttons';
 @import 'forms/field-help';
 @import 'forms/field-more-info';
 @import 'forms/field-error';
 @import 'forms/labels';
+@import 'forms/fieldset';
 @import 'forms/form-group';
-@import 'forms/address-finder';
+@import 'forms/form-row';
+@import 'forms/form-option-list';
+
+.form-actions {
+  margin-top: 40px;
+}
+
+// Honeypot field
+.hp-field {
+  display: none;
+}

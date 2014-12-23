@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block page_heading %}
-  You’re unlikely to get legal aid
-{% endblock %}
+{% block page_title %}Help organisations - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>You’re unlikely to get legal aid</h1>
+
   <p>Based on the answers you have given, it looks like you do not qualify
     financially for legal aid.</p>
 

@@ -3,39 +3,51 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
-{% block page_heading %}
-  About you
-{% endblock %}
+{% set title = 'About you' %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>{{ title }}</h1>
   <form method="POST" action="{{ url_for('.about') }}">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% call Form.yesno_field(form.have_partner, subfield=form.in_dispute) %}
-      {{ Form.yesno_field(
-                form.in_dispute,
-                group_class='form-subfield s-hidden',
-                subfield=[form.partner_is_employed, form.partner_is_self_employed],
-                show_value='0') }}
+    {% call Form.fieldset(form.have_partner) %}
+      {{ Form.yesno(form.have_partner) }}
+
+      {% call Form.fieldset(form.in_dispute, is_subfield=True, controlled_by=form.have_partner) %}
+        {{ Form.yesno(form.in_dispute) }}
+      {% endcall %}
     {% endcall %}
 
-    {{ Form.yesno_field(form.on_benefits) }}
-    {% call Form.yesno_field(form.have_children, subfield=form.num_children) %}
-      {{ Form.text_field(form.num_children, group_class='form-subfield s-hidden', class_='m-small') }}
-    {% endcall %}
-    {% call Form.yesno_field(form.have_dependants, subfield=form.num_dependants) %}
-      {{ Form.text_field(form.num_dependants, group_class='form-subfield s-hidden', class_='m-small') }}
-    {% endcall %}
-    {{ Form.yesno_field(form.own_property) }}
-    {{ Form.yesno_field(form.is_employed) }}
-    {{ Form.yesno_field(form.partner_is_employed, group_class='form-conditional-field s-hidden') }}
-    {{ Form.yesno_field(form.is_self_employed) }}
-    {{ Form.yesno_field(form.partner_is_self_employed, group_class='form-conditional-field s-hidden') }}
-    {{ Form.yesno_field(form.aged_60_or_over) }}
+    {{ Form.yesno_fieldset(form.on_benefits) }}
 
-    {{ Form.yesno_field(form.have_savings) }}
-    {% call Form.yesno_field(form.have_valuables) %}
+    {% call Form.fieldset(form.have_children) %}
+      {{ Form.yesno(form.have_children) }}
+
+      {% call Form.fieldset(form.num_children, is_subfield=True, controlled_by=form.have_children, as_label=True) %}
+        {{ form.num_children(class_='form-control m-small') }}
+      {% endcall %}
+    {% endcall %}
+
+    {% call Form.fieldset(form.have_dependants) %}
+      {{ Form.yesno(form.have_dependants) }}
+
+      {% call Form.fieldset(form.num_dependants, is_subfield=True, controlled_by=form.have_dependants, as_label=True) %}
+        {{ form.num_dependants(class_='form-control m-small') }}
+      {% endcall %}
+    {% endcall %}
+
+    {{ Form.yesno_fieldset(form.own_property) }}
+    {{ Form.yesno_fieldset(form.is_employed) }}
+    {{ Form.yesno_fieldset(form.partner_is_employed, controlled_by=form.in_dispute, control_value='0') }}
+    {{ Form.yesno_fieldset(form.is_self_employed) }}
+    {{ Form.yesno_fieldset(form.partner_is_self_employed, controlled_by=form.in_dispute, control_value='0') }}
+    {{ Form.yesno_fieldset(form.aged_60_or_over) }}
+    {{ Form.yesno_fieldset(form.have_savings) }}
+
+    {% call Form.fieldset(form.have_valuables) %}
+      {{ Form.yesno(form.have_valuables) }}
       {% include '_valuables-info.html' %}
     {% endcall %}
 

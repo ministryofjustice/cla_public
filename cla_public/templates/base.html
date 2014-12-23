@@ -20,17 +20,6 @@
 
   <div class="inner-block {% if sidebar %}m-has-sidebar{% endif %}">
     <article class="main-content">
-      {% block page_header %}
-        <header>
-          <h1>{% block page_heading %}{% endblock %}</h1>
-          {% if self.page_subheading() %}
-            <div class="subtitle">
-              {% block page_subheading %}{% endblock %}
-            </div>
-          {% endif %}
-        </header>
-      {% endblock %}
-
       {% block inner_content %}{% endblock %}
     </article>
 

@@ -1,10 +1,15 @@
 .field-error {
-  padding-left: 20px;
+  padding: 5px 30px;
+  margin: 15px -10px -10px;
   color: $red;
-  background: url(../images/icons/icon-small-cross.png) 0 .4em no-repeat;
-  background: url(../images/icons/icon-small-cross-2x.png) 0 .4em/10px no-repeat;
+  background: url(../images/icons/icon-small-cross.png) 10px .6em no-repeat;
+  background: url(../images/icons/icon-small-cross-2x.png) 10px .6em/10px no-repeat;
 
   p {
     margin: 10px 0 0;
+
+    &:first-child {
+      margin: 0;
+    }
   }
 }

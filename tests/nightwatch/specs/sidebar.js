@@ -7,7 +7,7 @@ var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
 function testSidebar(client, headline) {
   client
     .assert.visible('aside.sidebar')
-    .assert.containsText('aside.sidebar h3', headline)
+    .assert.containsText('aside.sidebar h2', headline)
   ;
 }
 

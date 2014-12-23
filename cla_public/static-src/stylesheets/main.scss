@@ -18,27 +18,62 @@
 @import 'split-panels';
 @import 'shame';
 
+@media print {
+  body {
+    font-size: 7pt !important;
+  }
+
+  #global-header {
+    margin: 0 0 1mm;
+    font-size: 14pt;
+  }
+
+  #content > .inner-block {
+    margin: 0;
+  }
+}
+
 .phase-banner {
   @extend %site-width-container;
   @include phase-banner(beta);
   z-index: 2;
-}
 
-#content {
-  > .inner-block {
-    @extend %site-width-container;
+  @media print {
+    margin: 0;
+    padding: 0 0 2mm;
+    border-color: $black;
 
-    > header {
-      margin-bottom: 30px;
+    .phase-tag {
+      margin-bottom: 2mm;
+      font-size: 7pt;
+      padding: 1pt 2pt 0;
+      line-height: 1;
+      border: 2px solid $black;
+      color: $black;
+    }
+
+    span {
+      display: block;
+      width: auto;
+      font-size: 7pt;
     }
   }
 }
 
-.main-content > header {
-  margin-bottom: 30px;
+#content {
+  .inner-block {
+    @extend %site-width-container;
+    margin-top: 40px;
+
+    h1 {
+      margin: 0;
+    }
+  }
 }
 
 .m-has-sidebar {
+  @extend %grid-row;
+
   .main-content,
   .sidebar {
     @include media(tablet) {
@@ -55,7 +90,7 @@
 
   .sidebar {
     @include media(tablet) {
-      margin-top: 35px;
+      margin-top: 12px;
       width: 30%;
     }
   }

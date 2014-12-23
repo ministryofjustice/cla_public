@@ -3,15 +3,16 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% block page_heading %}
-  {% if session.has_partner %}
-    You and your partner’s benefits
-  {% else %}
-    Your benefits
-  {% endif %}
-{% endblock %}
+{% if session.has_partner %}
+  {% set title = 'You and your partner’s benefits' %}
+{% else %}
+  {% set title = 'Your benefits' %}
+{% endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>{{ title }}</h1>
+
   <form method="POST" action="{{ url_for('.benefits') }}">
     {{ form.csrf_token }}
 
@@ -21,7 +22,7 @@
       {% endcall %}
     {% endif %}
 
-    {{ Form.check_list_field(form.benefits) }}
+    {{ Form.option_list_fieldset(form.benefits) }}
 
     {{ Element.call_me_back_link() }}
 

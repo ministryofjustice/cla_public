@@ -1,18 +1,15 @@
 .split-panels {
-  font-size: .8em;
+  font-size: .9em;
 
-  &.form-group {
-    padding: 10px 20px;
-  }
-
-  h4 {
-    font-weight: bold;
+  strong {
+    display: block;
     margin: 0 0 10px;
   }
 
   .panel {
     float: left;
-    width: 50%;
+    width: 49.99%;
+    margin: 10px 0;
 
     @include media(mobile) {
       width: auto;

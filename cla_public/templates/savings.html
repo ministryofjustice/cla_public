@@ -5,15 +5,15 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
-{% block page_heading %}
-  {% if session.has_partner %}
-    You and your partner’s savings
-  {% else %}
-    Your savings
-  {% endif %}
-{% endblock %}
-
 {% block inner_content %}
+  <h1>
+    {%- if session.has_partner -%}
+      You and your partner’s savings
+    {%- else -%}
+      Your savings
+    {%- endif -%}
+  </h1>
+
   {% if session.has_partner %}
     <p>Any cash, savings or investments held in your name, your partner’s name or both your names.</p>
   {% else %}
@@ -24,14 +24,20 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% with is_hidden = not session.has_savings %}
-      {{ Form.text_field(form.savings, prefix="£", is_hidden=is_hidden, default_value='0') }}
-      {{ Form.text_field(form.investments, prefix="£", is_hidden=is_hidden, default_value='0') }}
+    {% with skip = not session.has_savings %}
+      {{ Form.text_input_fieldset(form.savings, prefix="£", skip=skip, class_='m-small') }}
+      {{ Form.text_input_fieldset(form.investments, prefix="£", skip=skip, class_='m-small') }}
     {% endwith %}
-    {% with is_hidden = not session.has_valuables %}
-      {% call Form.text_field(form.valuables, prefix="£", is_hidden=is_hidden, default_value='0') %}
-        {% include '_valuables-info.html' %}
-      {% endcall %}
+
+    {% with skip = not session.has_valuables %}
+      {% if skip %}
+        {{ Form.text_input(form.valuables, skip=skip) }}
+      {% else %}
+        {% call Form.fieldset(form.valuables, class_='fieldset-group') %}
+          {{ Form.text_input(form.valuables, prefix="£", skip=skip, class_='m-small') }}
+          {% include '_valuables-info.html' %}
+        {% endcall %}
+      {% endif %}
     {% endwith %}
 
 

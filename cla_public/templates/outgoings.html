@@ -3,15 +3,15 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
-{% block page_heading %}
-  {% if session.has_partner %}
-    You and your partner’s outgoings
-  {% else %}
-    Your outgoings
-  {% endif %}
-{% endblock %}
+{% if session.has_partner %}
+  {% set title = 'You and your partner’s outgoings' %}
+{% else %}
+  {% set title = 'Your outgoings' %}
+{% endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>{{ title }}</h1>
   <p>We only need to know about certain things you pay for, to work out if you may be able to get legal aid.</p>
 
   <form method="POST" action="{{ url_for('.outgoings') }}">
@@ -19,10 +19,10 @@
 
     {{ Form.handle_errors(form) }}
 
-    {{ Form.money_interval_field(form.rent) }}
-    {{ Form.money_interval_field(form.maintenance) }}
-    {{ Form.text_field(form.income_contribution, prefix="£", class_='m-small') }}
-    {{ Form.money_interval_field(form.childcare, not session.has_children) }}
+    {{ Form.money_interval_fieldset(form.rent) }}
+    {{ Form.money_interval_fieldset(form.maintenance) }}
+    {{ Form.text_input_fieldset(form.income_contribution, prefix="£", class_='m-small') }}
+    {{ Form.money_interval_fieldset(form.childcare, skip=not session.has_children) }}
 
     {{ Element.call_me_back_link() }}
 

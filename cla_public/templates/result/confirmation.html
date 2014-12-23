@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
-{% block page_header %}
+{% set title = 'Confirmation' %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
   <header class="confirmation">
     <h1>We will call you back</h1>
     <p>
@@ -10,10 +13,8 @@
       </strong>
     </p>
   </header>
-{% endblock %}
 
-{% block inner_content %}
-  <h3>What happens next?</h3>
+  <h2>What happens next?</h2>
   <p>
     Your details have been submitted and an operator will call you back
     around the time you requested
@@ -23,7 +24,7 @@
     support from a family mediation service.
   </p>
 
-  <h3>What if I miss the operator’s call?</h3>
+  <h2>What if I miss the operator’s call?</h2>
   <p>
    If you miss the call or are in an emergency, you can call us on 0345 345 4 345. Calls cost no more than 4p a minute from a BT landline. Calls from mobiles usually cost more.
   </p>

@@ -15,3 +15,28 @@
 .radio-inline {
   padding: 10px 30px;
 }
+
+.form-row {
+  input[type='radio'],
+  input[type='checkbox'] {
+    top: 1px;
+  }
+}
+
+.block-label input[type='radio'] {
+  top: 17px;
+}
+
+
+.form-group.m-error {
+  &.form-subfield {
+    &:before {
+      top: 21px;
+    }
+  }
+
+  .fieldset-label {
+    padding-left: 5px;
+    margin-left: -3px;
+  }
+}

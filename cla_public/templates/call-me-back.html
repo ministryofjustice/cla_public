@@ -3,35 +3,12 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% block page_heading %}
-  Request a callback
-{% endblock %}
-
-{% block javascripts %}
-  {{ super() }}
-
-  <script type="text/html" id="addressFinderButton">
-    <button class="button-secondary address-finder-button" type="button">
-      Find UK address
-    </button>
-  </script>
-
-  <script type="text/html" id="addressFinderList">
-    <dd class="form-row address-list">
-      <select name="address" class="form-control">
-        <option value="" disabled><%= count %> addresses found</option>
-        <option value="">-- Choose address --</option>
-        <% _.each(items, function(address, index) { %>
-          <option value="<%= index %>"><%= address %></option>
-        <% }); %>
-      </select>
-    </dd>
-  </script>
-
-{% endblock %}
+{% set title = 'Request a callback' %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
   {% block page_text %}
+    <h1>{{ title }}</h1>
     <p>
       Fill in your personal details to get a callback from Civil Legal Advice and see if you qualify for specialist
       advice on debt, education, discrimination, housing or family problems funded by legal aid.
@@ -55,22 +32,38 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.text_field(form.full_name, class_='m-large') }}
-    {% call Form.text_field(form.contact_number, subfield=form.safe_to_contact, class_='m-large') %}
-      {{ Form.yesno_field(form.safe_to_contact, group_class='form-subfield') }}
-      <p style="margin: 10px 0 0">
-        If you don’t have a number we can call you on, please contact
-        <a href="https://www.gov.uk/civil-legal-advice" target="_blank">Civil Legal Advice</a>.
-      </p>
+    {{ Form.text_input_fieldset(form.full_name, class_='m-large') }}
+    {% call Form.fieldset(form.contact_number, as_label=True) %}
+      {{ Form.text_input(form.contact_number, class_='m-large') }}
+
+      {% call Form.fieldset(form.safe_to_contact, is_subfield=True) %}
+        {{ Form.yesno(form.safe_to_contact) }}
+        <p style="margin: 10px 0 0">
+          If you don’t have a number we can call you on, please contact
+          <a href="https://www.gov.uk/civil-legal-advice" target="_blank">Civil Legal Advice</a>.
+        </p>
+      {% endcall %}
     {% endcall %}
 
-    {{ Form.availability_checker_field(form.time) }}
+    {{ Form.availability_checker(form.time) }}
 
-    {{ Form.postcode_field(form.post_code, attributes={'data-address-el': '#address'}) }}
+    <fieldset class="fieldset-group">
+      {% call Form.fieldset(form.post_code, as_label=True) %}
+          <div class="address-finder">
+            {{ form.post_code(class_='form-control m-small', **{ 'data-address-el': '#address' }) }}
+          </div>
+      {% endcall %}
 
-    {{ Form.textarea_field(form.address, class_='m-large') }}
-    {{ Form.textarea_field(form.extra_notes, class_='m-full', rows=8) }}
-    {{ Form.adaptations_field(form.adaptations) }}
+      {% call Form.fieldset(form.address, as_label=True) %}
+        {{ form.address(class_='form-control m-large', rows=5) }}
+      {% endcall %}
+    </fieldset>
+
+    {% call Form.fieldset(form.extra_notes, as_label=True) %}
+      {{ form.extra_notes(class_='form-control m-full', rows=8) }}
+    {% endcall %}
+
+    {{ Form.adaptations(form.adaptations) }}
 
     {% call Element.alert(title='What happens next') %}
       <p>
@@ -83,4 +76,27 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions('Request callback') }}
   </form>
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ super() }}
+
+  <script type="text/html" id="addressFinderButton">
+    <button class="button-secondary address-finder-button" type="button">
+      Find UK address
+    </button>
+  </script>
+
+  <script type="text/html" id="addressFinderList">
+    <dd class="form-row address-list">
+      <select name="address" class="form-control">
+        <option value="" disabled><%= count %> addresses found</option>
+        <option value="">-- Choose address --</option>
+        <% _.each(items, function(address, index) { %>
+          <option value="<%= index %>"><%= address %></option>
+        <% }); %>
+      </select>
+    </dd>
+  </script>
 {% endblock %}

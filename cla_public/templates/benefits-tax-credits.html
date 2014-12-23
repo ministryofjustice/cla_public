@@ -3,15 +3,15 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% block page_heading %}
-  {% if session.has_partner %}
-    You and your partner’s benefits and tax credits
-  {% else %}
-    Your benefits and tax credits
-  {% endif %}
-{% endblock %}
+{% if session.has_partner %}
+  {% set title = 'You and your partner’s benefits and tax credits' %}
+{% else %}
+  {% set title = 'Your benefits and tax credits' %}
+{% endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  <h1>{{ title }}</h1>
   <p>
     We need to know about any benefits and tax credits your whole household receives.
     Please answer these questions as fully and accurately as you can.
@@ -21,11 +21,12 @@
 
     {{ Form.handle_errors(form) }}
 
-    {{ Form.money_interval_field(form.child_benefit, not session.has_children) }}
-    {{ Form.money_interval_field(form.child_tax_credit, not session.has_children) }}
-    {{ Form.check_list_field(form.benefits) }}
-    {% call Form.yesno_field(form.other_benefits, subfield=form.total_other_benefit) %}
-      {{ Form.money_interval_field(form.total_other_benefit, group_class='form-subfield s-hidden') }}
+    {{ Form.money_interval_fieldset(form.child_benefit, not session.has_children) }}
+    {{ Form.money_interval_fieldset(form.child_tax_credit, not session.has_children) }}
+    {{ Form.option_list_fieldset(form.benefits) }}
+    {% call Form.fieldset(form.other_benefits) %}
+      {{ Form.yesno(form.other_benefits) }}
+      {{ Form.money_interval_fieldset(form.total_other_benefit, is_subfield=True, controlled_by=form.other_benefits) }}
     {% endcall %}
 
     {{ Element.call_me_back_link() }}

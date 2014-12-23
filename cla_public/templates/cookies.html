@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
-{% block page_heading %}Cookies{% endblock %}
+{% set title = 'Cookies' %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
 <div class="grid-row">
   <div class="column-two-thirds">
+    <h1>{{ title }}</h1>
 
     <p class="TODO">TODO: this is taken from Accelerated Claims. Edit this to be relevant to CLA Public</p>
 
