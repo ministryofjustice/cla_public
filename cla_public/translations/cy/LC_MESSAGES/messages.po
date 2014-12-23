@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 16:41+0000\n"
+"POT-Creation-Date: 2014-12-23 16:47+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -1130,12 +1130,14 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/result/eligible-no-callback.html:23
+#: cla_public/templates/result/face-to-face.html:56
 msgid ""
 "They will check whether you qualify for legal aid. You should not have to"
 " pay for this check."
 msgstr ""
 
 #: cla_public/templates/result/eligible-no-callback.html:26
+#: cla_public/templates/result/face-to-face.html:65
 msgid "Find a legal adviser"
 msgstr ""
 
@@ -1210,5 +1212,92 @@ msgid ""
 "someone in person or if\n"
 "      you need someone to represent you in court, they will organise this"
 " for you."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:4
+msgid "We do not provide advice about issues related to"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:7
+msgid ""
+"You will usually only get Legal Aid for advice about Clinical Negligence "
+"if\n"
+"      your child has been severely injured during birth or in the first 8"
+" weeks of life"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:10
+msgid "Legal Aid is not usually available for advice about personal injury"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:12
+msgid "You may be able to get advice from a legal advisor in your area"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:18
+msgid ""
+"If your employment problem relates to discrimination (for example, you "
+"have been treated\n"
+"      unfairly because of your sex, age or other protected "
+"characteristic) we might be able to\n"
+"      help. Please go back to <a href=\"/\">start</a> page and click "
+"discrimination."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:24
+msgid ""
+"If your employment problem is not connected to discrimination, legal aid "
+"is not usually\n"
+"      available."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:28
+msgid "You may be able to get free help from:"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:30
+msgid "Advisery, Conciliation and Arbitration Service (Acas)"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:31
+msgid "Law Centres Network"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:35
+msgid ""
+"You can also seek advice from a legal adviser – you will have to pay for "
+"this advice."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:41
+#: cla_public/templates/result/face-to-face.html:51
+msgid ""
+"To find out if you might qualify, contact a legal adviser in your area. "
+"They will check\n"
+"        whether you qualify for legal aid. You should not have to pay for"
+" this check."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:46
+msgid ""
+"Legal aid is not usually available for advice about personal injury. You "
+"may be able to get\n"
+"        legal aid in exceptional cases. You could seek advice from a "
+"legal adviser about whether\n"
+"        an application might succeed in your case and how to apply."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:60
+msgid ""
+"If you don’t qualify for legal aid, you should speak to your adviser "
+"about the cost of advice."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:70
+msgid ""
+"Legal aid may still be available in exceptional cases. You could seek "
+"advice from a legal\n"
+"      adviser about whether an application might succeed in your case and"
+" how to apply."
 msgstr ""
 
