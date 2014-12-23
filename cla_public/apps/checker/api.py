@@ -125,7 +125,7 @@ def post_to_eligibility_check_api(form):
 
 
 @api_proxy(return_value=ELIGIBILITY_STATES.UNKNOWN)
-def post_to_is_eligible_api(form):
+def post_to_is_eligible_api():
     backend = get_api_connection()
     reference = session.get('eligibility_check')
 

@@ -12,7 +12,8 @@ from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, get_organisation_list
 from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, ORGANISATION_CATEGORY_MAPPING, \
     NO_CALLBACK_CATEGORIES
-from cla_public.apps.checker.decorators import form_view, override_session_vars, redirect_if_no_session
+from cla_public.apps.checker.decorators import form_view, override_session_vars, redirect_if_no_session, \
+    redirect_to_ineligible
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
     OutgoingsForm, ApplicationForm
@@ -167,12 +168,14 @@ def income(user):
 @checker.route('/outgoings', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(OutgoingsForm, 'outgoings.html')
+@redirect_to_ineligible()
 def outgoings(user):
     return outcome('eligible')
 
 
 @checker.route('/result/<outcome>', methods=['GET', 'POST'])
 @redirect_if_no_session()
+@redirect_to_ineligible()
 def result(outcome):
     "Display the outcome of the means test"
 
