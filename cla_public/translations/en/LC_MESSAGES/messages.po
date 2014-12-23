@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 16:37+0000\n"
+"POT-Creation-Date: 2014-12-23 16:41+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -1106,22 +1106,44 @@ msgid ""
 "    <a href=\"https://www.gov.uk/call-charges\">here</a>."
 msgstr ""
 
-#: cla_public/templates/result/eligible.html:6
-msgid "We need more information"
-msgstr ""
-
+#: cla_public/templates/result/eligible-no-callback.html:4
 #: cla_public/templates/result/eligible.html:8
 msgid "You might qualify for legal aid"
 msgstr ""
 
-#: cla_public/templates/result/eligible.html:11
-msgid "Request a callback"
-msgstr ""
-
+#: cla_public/templates/result/eligible-no-callback.html:9
+#: cla_public/templates/result/eligible-no-callback.html:15
 #: cla_public/templates/result/eligible.html:13
 msgid ""
 "Based on the answers you’ve given today, you might qualify financially "
 "for legal aid."
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:18
+msgid ""
+"To get advice about appealing a decision made by the social security "
+"tribunal about your\n"
+"    benefits to the Upper Tribunal, Court of Appeal or Supreme Court you "
+"should contact your\n"
+"    nearest legal adviser."
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:23
+msgid ""
+"They will check whether you qualify for legal aid. You should not have to"
+" pay for this check."
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:26
+msgid "Find a legal adviser"
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:6
+msgid "We need more information"
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:11
+msgid "Request a callback"
 msgstr ""
 
 #: cla_public/templates/result/eligible.html:15
