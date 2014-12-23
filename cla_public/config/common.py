@@ -1,5 +1,6 @@
 import os
 import datetime
+from flask.ext.babel import lazy_gettext as _
 
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -48,8 +49,8 @@ SESSION_COOKIE_SECURE = True
 PERMANENT_SESSION_LIFETIME = datetime.timedelta(minutes=5)
 
 APP_SETTINGS = {
-    'app_title': 'Civil Legal Advice',
-    'proposition_title': 'Civil Legal Advice'
+    'app_title': _('Civil Legal Advice'),
+    'proposition_title': _('Civil Legal Advice')
 }
 
 # Timeout for api get requests so they don't hang waiting for a response

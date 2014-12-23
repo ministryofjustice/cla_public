@@ -847,6 +847,10 @@ msgstr ""
 msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
+#: cla_public/config/common.py:52 cla_public/config/common.py:53
+msgid "Civil Legal Advice"
+msgstr ""
+
 #: cla_public/templates/index.html:8
 msgid "Find out if Civil Legal Advice can help you"
 msgstr ""
