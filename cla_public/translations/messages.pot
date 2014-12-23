@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 17:01+0000\n"
+"POT-Creation-Date: 2014-12-23 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -908,6 +908,60 @@ msgid ""
 "you (and your partner if you have one) should have no more than £733 a "
 "month left after we've taken\n"
 "        certain living expenses into account"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:3
+msgid "Don’t include"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:5
+msgid "Furniture and appliances"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:6
+msgid "Your TV"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:7
+msgid "Mobile phones, laptops and other devices"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:8
+msgid "Clothing"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:9
+msgid ""
+"The vehicle you use every day, unless it is a classic car or luxury "
+"vehicle"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:10
+msgid "Equipment or tools you use for your work"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:14
+msgid "Do include"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:16
+msgid "Jewellery"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:17
+msgid "Art"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:18
+msgid "Antiques"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:19
+msgid "Caravans and other vehicles you don’t use every day"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:20
+msgid "Musical instruments, unless you’re a professional musician"
 msgstr ""
 
 #: cla_public/templates/index.html:8
