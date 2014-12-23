@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 16:27+0000\n"
+"POT-Creation-Date: 2014-12-23 16:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1104,5 +1104,88 @@ msgid ""
 "If you miss the call or you need advice urgently, you can call us on\n"
 "    0345 345 4 345. Find out about call charges\n"
 "    <a href=\"https://www.gov.uk/call-charges\">here</a>."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:6
+msgid "We need more information"
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:8
+msgid "You might qualify for legal aid"
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:11
+msgid "Request a callback"
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:13
+msgid ""
+"Based on the answers you’ve given today, you might qualify financially "
+"for legal aid."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:15
+msgid "Please submit your details so we can call you back."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:18
+msgid ""
+"The first person you speak to will be a Civil Legal Advice operator. They"
+" will check the\n"
+"      information you’ve given us. They will also ask you some more "
+"questions to find out if\n"
+"      your specific problem is covered by legal aid."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:24
+msgid ""
+"In order to decide whether you might qualify for legal aid, we need more "
+"information about\n"
+"      your financial circumstances."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:28
+msgid ""
+"The first person you speak to will be a Civil Legal Advice operator. They"
+" will check what\n"
+"      you told us already. They will also ask you some more questions "
+"about your financial\n"
+"      circumstances and to find out if your specific problem is covered "
+"by legal aid."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:46
+msgid ""
+"Your CLA specialist adviser will ask you more questions before making the"
+" final decision about\n"
+"      whether you qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:51
+msgid ""
+"You will need to provide evidence of your financial circumstances and "
+"maybe your problem.\n"
+"      Your CLA specialist adviser will explain what is needed."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:56
+msgid ""
+"If your CLA specialist adviser takes your case on they will communicate "
+"with you by telephone,\n"
+"      email or post."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:61
+msgid ""
+"If CLA can’t help we will always suggest other places that might be able "
+"to."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:65
+msgid ""
+"If your Civil Legal Advice adviser decides that you need to speak to "
+"someone in person or if\n"
+"      you need someone to represent you in court, they will organise this"
+" for you."
 msgstr ""
 
