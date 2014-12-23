@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 11:24+0000\n"
+"POT-Creation-Date: 2014-12-23 15:11+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -845,5 +845,116 @@ msgstr ""
 
 #: cla_public/apps/checker/validators.py:124
 msgid "Can't schedule a callback at the requested time"
+msgstr ""
+
+#: cla_public/templates/index.html:8
+msgid "Find out if Civil Legal Advice can help you"
+msgstr ""
+
+#: cla_public/templates/index.html:9
+msgid ""
+"If you qualify for legal aid, you may be able to get help from Civil "
+"Legal Advice (CLA), a national advice line for England and Wales."
+msgstr ""
+
+#: cla_public/templates/index.html:11
+msgid ""
+"You will be asked general questions about your problem and detailed "
+"questions about your finances."
+msgstr ""
+
+#: cla_public/templates/index.html:13
+msgid ""
+"If it looks like you might qualify for legal aid, the next step will be "
+"to speak to a Civil Legal Advice operator."
+msgstr ""
+
+#: cla_public/templates/index.html:15
+msgid ""
+"If CLA can’t help, you’ll get suggestions of other places you could go "
+"for advice."
+msgstr ""
+
+#: cla_public/templates/index.html:17
+msgid "Start"
+msgstr ""
+
+#: cla_public/templates/index.html:19
+msgid "Before you start"
+msgstr ""
+
+#: cla_public/templates/index.html:20
+msgid ""
+"To use this service, you’ll need details of the following, for you and "
+"your partner, if you have one"
+msgstr ""
+
+#: cla_public/templates/index.html:22
+msgid "your income, income tax and National Insurance contributions"
+msgstr ""
+
+#: cla_public/templates/index.html:23
+msgid "value of any property you own and mortgage details"
+msgstr ""
+
+#: cla_public/templates/index.html:24
+msgid "any savings, investments or valuable items"
+msgstr ""
+
+#: cla_public/templates/index.html:25
+msgid "any benefits you receive"
+msgstr ""
+
+#: cla_public/templates/index.html:28
+msgid ""
+"It might be useful to have your last month’s payslips (if you’re "
+"working), bank statements, recent benefit letters, current valuation for "
+"any property you own and  mortgage statements to hand."
+msgstr ""
+
+#: cla_public/templates/index.html:30
+msgid ""
+"Please answer all questions accurately and honestly. You may need to "
+"provide evidence of what you say later."
+msgstr ""
+
+#: cla_public/templates/index.html:32
+msgid ""
+"At the end you will get an indication of whether you might qualify for "
+"advice from CLA – but you won’t get a final decision until you speak to "
+"us."
+msgstr ""
+
+#: cla_public/templates/index.html:34
+msgid ""
+"You can do a quick <a href=\"https://www.gov.uk/check-legal-"
+"aid\">check</a> to see if you can get legal aid for your specific problem"
+" and find out whether CLA is your best option for help."
+msgstr ""
+
+#: cla_public/templates/index.html:36
+msgid "Who this service is for"
+msgstr ""
+
+#: cla_public/templates/index.html:38
+msgid ""
+"This service is for England and Wales. Legal aid is different in <a "
+"href=\"http://www.slab.org.uk/public/civil/eligibility/\" "
+"rel=\"external\">Scotland</a> and <a href=\"http://www.dojni.gov.uk/index"
+"/public-consultations/current-consultations/consultation-on-scope-of-"
+"civil-legal-aid.htm\" rel=\"external\">Northern Ireland</a>."
+msgstr ""
+
+#: cla_public/templates/index.html:40
+msgid ""
+"If you’ve been charged with a crime, this service doesn’t apply to you. "
+"Ask your solicitor or barrister about criminal legal aid."
+msgstr ""
+
+#: cla_public/templates/index.html:42
+msgid ""
+"This online service is only for adults. If you’re under 18, please "
+"contact <a href=\"https://www.gov.uk/civil-legal-advice\">Civil Legal "
+"Advice</a>."
 msgstr ""
 
