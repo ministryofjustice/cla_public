@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 15:47+0000\n"
+"POT-Creation-Date: 2014-12-23 16:27+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -1022,5 +1022,88 @@ msgstr ""
 
 #: cla_public/templates/macros/element.html:35
 msgid "call you back"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:8
+msgid "We will call you back"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:10
+msgid "Your reference number is"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:17
+msgid "What happens next?"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:19
+msgid ""
+"Your details have been submitted and an operator will call you back\n"
+"      around the time you requested"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:25
+msgid ""
+"We will try and call you once. If we cannot speak to you we will\n"
+"      leave you a message unless you have said it is unsafe to do so."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:31
+msgid ""
+"If you need to urgently protect you or your family you should\n"
+"        try and get advice as soon as possible."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:36
+msgid ""
+"If you have a court hearing date it is important that you get\n"
+"        advice as soon as possible. You may be able to get last-minute\n"
+"        help on the day of the hearing from an adviser in the court "
+"building."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:43
+msgid ""
+"Your CLA specialist adviser will ask you more questions before\n"
+"      making the final decision about whether you qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:48
+msgid ""
+"You will need to provide evidence of your financial circumstances\n"
+"      and maybe your problem. Your CLA specialist adviser will explain\n"
+"      what is needed."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:54
+msgid ""
+"If your CLA specialist adviser takes your case on they will\n"
+"      communicate with you by telephone, email or post."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:59
+msgid ""
+"If your CLA adviser decides that you need to speak to someone in\n"
+"      person or if you need someone to represent you in court, they\n"
+"      will organise this."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:65
+msgid ""
+"If the operator you speak to thinks you can get legal aid, they will find"
+"\n"
+"      you specialist legal help, like a phone call with a solicitor or\n"
+"      support from a family mediation service."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:71
+msgid "What if I miss the operator’s call?"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:73
+msgid ""
+"If you miss the call or you need advice urgently, you can call us on\n"
+"    0345 345 4 345. Find out about call charges\n"
+"    <a href=\"https://www.gov.uk/call-charges\">here</a>."
 msgstr ""
 
