@@ -1,23 +1,23 @@
 <aside class="sidebar">
   {% if 'resources' in sidebar %}
-    <h2>Resources</h2>
+    <h2>{{ _('Resources') }}</h2>
     <nav>
       <ul>
-        <li><a target="_blank" href="https://www.gov.uk/legal-aid">Legal aid</a></li>
-        <li><a target="_blank" href="https://www.gov.uk/legal-aid/how-to-claim">Criminal legal aid</a></li>
-        <li><a href="#">How this service protects your privacy</a></li>
-        <li><a href="#">Other sources of legal help</a></li>
+        <li><a target="_blank" href="https://www.gov.uk/legal-aid">{{ _('Legal aid') }}</a></li>
+        <li><a target="_blank" href="https://www.gov.uk/legal-aid/how-to-claim">{{ _('Criminal legal aid') }}</a></li>
+        <li><a href="#">{{ _('How this service protects your privacy') }}</a></li>
+        <li><a href="#">{{ _('Other sources of legal help') }}</a></li>
       </ul>
     </nav>
   {% elif 'reminder' in sidebar %}
-    <h2>Who can get legal aid?</h2>
-    <p>To qualify for legal aid, you must have a problem that is covered by legal aid and meet these conditions: </p>
+    <h2>{{ _('Who can get legal aid?') }}</h2>
+    <p>{{ _('To qualify for legal aid, you must have a problem that is covered by legal aid and meet these conditions:') }}</p>
     <ul>
-      <li>your income (or combined income if you have a partner) should not be more than £2,657 a month before tax</li>
-      <li>your savings (or combined savings if you have a partner) should not be more than £8,000</li>
+      <li>{{ _('your income (or combined income if you have a partner) should not be more than £2,657 a month before tax') }}</li>
+      <li>{{ _('your savings (or combined savings if you have a partner) should not be more than £8,000') }}</li>
       <li>
-        you (and your partner if you have one) should have no more than £733 a month left after we've taken
-        certain living expenses into account
+        {% trans %}you (and your partner if you have one) should have no more than £733 a month left after we've taken
+        certain living expenses into account{% endtrans %}
       </li>
     </ul>
   {% endif %}
