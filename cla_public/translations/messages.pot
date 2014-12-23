@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 17:05+0000\n"
+"POT-Creation-Date: 2014-12-23 17:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -962,6 +962,22 @@ msgstr ""
 
 #: cla_public/templates/_valuables-info.html:20
 msgid "Musical instruments, unless you’re a professional musician"
+msgstr ""
+
+#: cla_public/templates/about.html:6
+msgid "About you"
+msgstr ""
+
+#: cla_public/templates/about.html:57
+msgid "Continue"
+msgstr ""
+
+#: cla_public/templates/about.html:62
+msgid "Are you in a dispute with your partner?"
+msgstr ""
+
+#: cla_public/templates/about.html:63 cla_public/templates/about.html:64
+msgid "How many?"
 msgstr ""
 
 #: cla_public/templates/index.html:8
