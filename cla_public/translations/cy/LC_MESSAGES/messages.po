@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 15:26+0000\n"
+"POT-Creation-Date: 2014-12-23 15:47+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -1014,5 +1014,13 @@ msgstr ""
 
 #: cla_public/templates/errors/5xx.html:12
 msgid "This service is only available if you are a resident of England or Wales."
+msgstr ""
+
+#: cla_public/templates/macros/element.html:35
+msgid "If you’re having trouble completing this form, ask us to"
+msgstr ""
+
+#: cla_public/templates/macros/element.html:35
+msgid "call you back"
 msgstr ""
 
