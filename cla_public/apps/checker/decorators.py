@@ -38,12 +38,6 @@ def form_view(form_class, form_template):
                     session.update_form_data(form)
 
                     post_to_eligibility_check_api(form)
-                    is_eligible = post_to_is_eligible_api(form)
-                    if is_eligible == ELIGIBILITY_STATES.NO:
-                        return redirect(
-                            url_for(
-                                '.help_organisations',
-                                category_name=session.category_slug))
 
                     return fn(session)
 
@@ -52,6 +46,23 @@ def form_view(form_class, form_template):
                     session.clear_form_data(form)
 
             return render_template(form_template, form=form)
+
+        return wrapper
+
+    return view
+
+
+def redirect_if_ineligible():
+    def view(fn):
+        @functools.wraps(fn)
+        def wrapper(*args, **kwargs):
+            is_eligible = post_to_is_eligible_api()
+            if is_eligible == ELIGIBILITY_STATES.NO:
+                return redirect(
+                    url_for(
+                        '.help_organisations',
+                        category_name=session.category_slug))
+            return fn(*args, **kwargs)
 
         return wrapper
 
