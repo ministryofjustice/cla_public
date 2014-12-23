@@ -32,9 +32,7 @@ var eligibleJourney = function(client) {
   ;
 };
 
-var checkCallbackTime = function(client, date, time) {
-  var then = moment();
-  then.date(date);
+var checkCallbackTime = function(client, then, time) {
   then.hours(time.substr(0, 2));
   then.minutes(time.substr(2, 2));
   var formattedCallbackTime = then.format('dddd, D MMMM YYYY [at] HH:mm');
@@ -58,7 +56,7 @@ module.exports = {
           console.log('Today not available after 11.15am on a Saturday, test skipped');
         } else {
           client.getValue('select[name="time_today"]', function(result) {
-            checkCallbackTime(client, now.date(), result.value);
+            checkCallbackTime(client, now, result.value);
           });
         }
       } else {
@@ -77,7 +75,7 @@ module.exports = {
       client
         .click('input[name="specific_day"][value="tomorrow"]')
         .getValue('select[name="time_tomorrow"]', function(result) {
-        checkCallbackTime(client, now.add(1, 'days').date(), result.value);
+        checkCallbackTime(client, now.add(1, 'days'), result.value);
       });
     } else {
       console.log('Tomorrow not available on Saturday, test skipped');
@@ -94,13 +92,11 @@ module.exports = {
       .click('select#id_time_in_day')
       .click('select#id_time_in_day option:last-child')
       .click('body')
-      .getValue('select#id_day', function(result) {
-        var then = moment();
-        then.year(result.value.substr(0, 4));
-        then.month(result.value.substr(4, 2));
-        then.date(result.value.substr(6, 2));
-        client.getValue('select#id_time_in_day', function(result) {
-          checkCallbackTime(client, then.date(), result.value);
+      .getValue('select#id_day option:last-child', function(result) {
+        var selectedDate = result.value;
+        client.getValue('select#id_time_in_day option:last-child', function(result) {
+          var then = moment([selectedDate.substr(0, 4), parseInt(selectedDate.substr(4, 2))-1, selectedDate.substr(6, 2)]);
+          checkCallbackTime(client, then, result.value);
         });
       })
     ;

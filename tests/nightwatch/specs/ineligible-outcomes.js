@@ -22,7 +22,18 @@ module.exports = {
         .setValue('input[name="savings"]', '50000')
         .setValue('input[name="investments"]', '50000')
         .submitForm('form')
+        .waitForElementPresent('form[action="/income"]', 2000)
+        .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
+        .setValue('input[name="your_income-pension-per_interval_value"]', 0)
+        .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
+        .submitForm('form')
+        .waitForElementPresent('form[action="/outgoings"]', 2000)
+        .setValue('input[name="rent-per_interval_value"]', 0)
+        .setValue('input[name="maintenance-per_interval_value"]', 0)
+        .setValue('input[name="income_contribution"]', 0)
+        .submitForm('form')
         .assert.urlContains('/help-organisations/' + item.category.label.toLowerCase().replace(/ /g, '-'))
+
         .assert.containsText('.org-list ul', item.link.text)
 
         // skipping this assertion for now as the data is iffy at present
