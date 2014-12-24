@@ -2,21 +2,25 @@
 from flask.ext.babel import lazy_gettext as _
 
 # Feedback: feel about service
-FEEL_ABOUT_SERVICE = [
-    ('very_positive', _(u'Very satisfied')),
-    ('positive', _(u'Satisfied')),
-    ('neutral', _(u'Neither satisfied or dissatisfied')),
-    ('negative', _(u'Dissatisfied')),
-    ('very_negative', _(u'Very dissatisfied')),
+FEEL_ABOUT_SERVICE_LABELS = [
+    _(u'Very satisfied'),
+    _(u'Satisfied'),
+    _(u'Neither satisfied or dissatisfied'),
+    _(u'Dissatisfied'),
+    _(u'Very dissatisfied'),
 ]
 
+FEEL_ABOUT_SERVICE = zip(FEEL_ABOUT_SERVICE_LABELS, FEEL_ABOUT_SERVICE_LABELS)
+
 # Feedback: help filling in the form
-HELP_FILLING_IN_FORM = [
-    ('no_help', _(u'No, I filled in this form myself')),
-    ('someone_else', _(u'I have difficulty using computers so someone filled in this form for me')),
-    ('accessibility_tool', _(u'I used an accessibility tool such as a screen reader')),
-    ('other_help', _(u'I had some other kind of help')),
+HELP_FILLING_IN_FORM_LABELS = [
+    _(u'No, I filled in this form myself'),
+    _(u'I have difficulty using computers so someone filled in this form for me'),
+    _(u'I used an accessibility tool such as a screen reader'),
+    _(u'I had some other kind of help'),
 ]
+
+HELP_FILLING_IN_FORM = zip(HELP_FILLING_IN_FORM_LABELS, HELP_FILLING_IN_FORM_LABELS)
 
 TIMEOUT_RETURN_ERROR = {
     'error': 'Request timeout.'
