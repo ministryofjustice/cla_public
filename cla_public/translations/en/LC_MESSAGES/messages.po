@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 11:05+0000\n"
+"POT-Creation-Date: 2014-12-24 11:08+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -401,7 +401,7 @@ msgstr ""
 msgid "Arrange a callback time"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:40
+#: cla_public/apps/checker/forms.py:40 cla_public/templates/problem.html:6
 msgid "What do you need help with?"
 msgstr ""
 
@@ -972,6 +972,7 @@ msgstr ""
 #: cla_public/templates/about.html:57
 #: cla_public/templates/benefits-tax-credits.html:35
 #: cla_public/templates/benefits.html:30 cla_public/templates/income.html:75
+#: cla_public/templates/problem.html:36
 msgid "Continue"
 msgstr ""
 
@@ -1387,6 +1388,35 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
+#: cla_public/templates/problem.html:12
+msgid ""
+"To qualify for legal aid, you must have a problem that is covered by "
+"legal aid."
+msgstr ""
+
+#: cla_public/templates/problem.html:19
+msgid "Please select the area of law you need help with."
+msgstr ""
+
+#: cla_public/templates/problem.html:24
+msgid "Choose one of the options"
+msgstr ""
+
+#: cla_public/templates/problem.html:31
+msgid ""
+"If you have more than one problem, you can complete this service more "
+"than once."
+msgstr ""
+
+#: cla_public/templates/problem.html:32
+msgid "If you’re really not sure what to choose, ask us to"
+msgstr ""
+
+#: cla_public/templates/problem.html:32
+#: cla_public/templates/macros/element.html:35
+msgid "call you back"
+msgstr ""
+
 #: cla_public/templates/errors/404.html:3
 msgid "Page not found"
 msgstr ""
@@ -1443,10 +1473,6 @@ msgstr ""
 
 #: cla_public/templates/macros/element.html:35
 msgid "If you’re having trouble completing this form, ask us to"
-msgstr ""
-
-#: cla_public/templates/macros/element.html:35
-msgid "call you back"
 msgstr ""
 
 #: cla_public/templates/result/confirmation.html:8
