@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 11:16+0000\n"
+"POT-Creation-Date: 2014-12-24 11:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1471,6 +1471,22 @@ msgstr ""
 
 #: cla_public/templates/savings.html:20
 msgid "We need to know about any money you have saved or invested."
+msgstr ""
+
+#: cla_public/templates/session-expired.html:3
+msgid "Session expired"
+msgstr ""
+
+#: cla_public/templates/session-expired.html:6
+msgid "Your session has expired"
+msgstr ""
+
+#: cla_public/templates/session-expired.html:8
+msgid "You can start again by clicking the button below."
+msgstr ""
+
+#: cla_public/templates/session-expired.html:12
+msgid "Start again"
 msgstr ""
 
 #: cla_public/templates/errors/404.html:3
