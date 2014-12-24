@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 10:37+0000\n"
+"POT-Creation-Date: 2014-12-24 10:40+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -1128,6 +1128,20 @@ msgstr ""
 
 #: cla_public/templates/call-me-back.html:129
 msgid "Find UK address"
+msgstr ""
+
+#: cla_public/templates/feedback.html:6
+msgid "Your feedback"
+msgstr ""
+
+#: cla_public/templates/feedback.html:12
+msgid ""
+"Please don't include any personal or financial details,\n"
+"    for example, your National Insurance or credit card numbers."
+msgstr ""
+
+#: cla_public/templates/feedback.html:28
+msgid "Send feedback"
 msgstr ""
 
 #: cla_public/templates/index.html:8

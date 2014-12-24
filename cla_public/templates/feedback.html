@@ -3,14 +3,14 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% set title = 'Your feedback' %}
+{% set title = _('Your feedback') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
   <p class="subtitle">
-    Please don't include any personal or financial details,
-    for example, your National Insurance or credit card numbers.
+    {% trans %}Please don't include any personal or financial details,
+    for example, your National Insurance or credit card numbers.{% endtrans %}
   </p>
 
   <form method="POST" action="{{ url_for('.feedback') }}">
@@ -25,6 +25,6 @@
     {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions('Send feedback') }}
+    {{ Form.actions(_('Send feedback')) }}
   </form>
 {% endblock %}
