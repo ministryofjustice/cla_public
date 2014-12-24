@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 10:11+0000\n"
+"POT-Creation-Date: 2014-12-24 10:37+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -848,6 +848,7 @@ msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
 #: cla_public/config/common.py:52 cla_public/config/common.py:53
+#: cla_public/templates/call-me-back.html:38
 msgid "Civil Legal Advice"
 msgstr ""
 
@@ -1008,6 +1009,125 @@ msgstr ""
 
 #: cla_public/templates/benefits.html:9
 msgid "Your benefits"
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:6
+#: cla_public/templates/result/eligible.html:11
+msgid "Request a callback"
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:13
+msgid ""
+"Fill in your personal details to get a callback from Civil Legal Advice "
+"to find out if you\n"
+"      qualify for specialist advice on debt, education, discrimination, "
+"housing or family problems\n"
+"      funded by <a href=\"https://www.gov.uk/legal-aid\">legal aid</a>."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:18
+msgid ""
+"We will try and call you at least once. If we cannot speak to you we will"
+" leave you a message\n"
+"      unless you tell us below not to."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:22
+msgid ""
+"If we can’t speak to you please book another call back here or call us on"
+" 0345 345 4 345."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:37
+msgid "If you don’t have a number we can call you on, please contact"
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:65
+msgid ""
+"If the operator you speak to thinks you might qualify, they will put you\n"
+"        through to a CLA specialist adviser immediately."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:69
+msgid ""
+"If CLA can’t help we will suggest other places that might be able to "
+"assist you."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:74
+msgid "Request callback"
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:80
+msgid "This service only covers England or Wales."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:81
+msgid "We are available Monday to Friday 9am-8pm and Saturday 9am-12:30pm."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:82
+msgid "You can also call us on 0345 3454 345."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:83
+msgid ": 0345 609 6677."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:84
+msgid "Or text ’legalaid’ and your name to 80010."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:89
+msgid ""
+"The first person you speak to will be an operator. They will ask you "
+"questions about\n"
+"      you and your problem, including you and your partner's financial "
+"circumstances."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:94
+msgid ""
+"If it looks like you might qualify you will be put through to a CLA "
+"specialist\n"
+"      adviser immediately."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:99
+msgid ""
+"They will still need to ask you some more questions before making the "
+"final decision\n"
+"      about whether CLA can offer you advice. And you will need to "
+"provide evidence of what\n"
+"      you have told us later."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:105
+msgid ""
+"If CLA can’t help you we will always suggest where else you might get "
+"help."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:109
+msgid ""
+"If we can do anything to make it easier for you to communicate with us "
+"due to your\n"
+"      disability please tell the Operator."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:114
+msgid ""
+"Protecting your personal data and your privacy is important to us. We are"
+" asking for\n"
+"      some information from you now so that when we call you back we know"
+" who you are. You\n"
+"      can read the full <a href=\"http://www.justice.gov.uk/privacy"
+"/community-legal-advice-privacy-statement\">Civil Legal Advice Privacy "
+"Statement here</a>."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:129
+msgid "Find UK address"
 msgstr ""
 
 #: cla_public/templates/index.html:8
@@ -1302,10 +1422,6 @@ msgstr ""
 
 #: cla_public/templates/result/eligible.html:6
 msgid "We need more information"
-msgstr ""
-
-#: cla_public/templates/result/eligible.html:11
-msgid "Request a callback"
 msgstr ""
 
 #: cla_public/templates/result/eligible.html:15
