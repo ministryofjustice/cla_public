@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 10:40+0000\n"
+"POT-Creation-Date: 2014-12-24 10:58+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -1144,6 +1144,81 @@ msgstr ""
 msgid "Send feedback"
 msgstr ""
 
+#: cla_public/templates/help-organisations.html:3
+msgid "Help organisations"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:6
+msgid "You’re unlikely to get legal aid"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:8
+msgid ""
+"From what you have told us today it looks like you won't be able to\n"
+"    get legal aid as you don’t qualify financially"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:10
+msgid "for the advice they can provide"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:15
+msgid ""
+"If you want to make an application to court about a family matter\n"
+"      you need to first of all see if family mediation will help. Use the"
+"\n"
+"      <a href=\"http://www.familymediationcouncil.org.uk/\" "
+"rel=\"external\">Family Mediation Council</a>\n"
+"      directory to find a mediator and make an appointment for a "
+"Mediation\n"
+"      Information and Assessment Meeting (MIAM)."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:25
+msgid ""
+"You may still qualify for legal aid to seek a court order for protection."
+" To find out if you\n"
+"      might qualify, contact a legal adviser in your area."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:29
+msgid ""
+"You can also seek advice from a legal adviser - you will have to\n"
+"      pay for this advice."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:35
+msgid ""
+"If you have a court hearing date it is important that you get advice\n"
+"      as soon as possible. You may be able to get last-minute help on the"
+"\n"
+"      day of the hearing from an adviser in the court building."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:42
+#: cla_public/templates/result/eligible-no-callback.html:26
+#: cla_public/templates/result/face-to-face.html:65
+msgid "Find a legal adviser"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:46
+msgid ""
+"You may still get free help and advice from the organisations listed\n"
+"    below. You don’t have to qualify for legal aid to get help and advice"
+"\n"
+"    from these organisations."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:60
+msgid "Helpline"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:67
+msgid ""
+"There has been a problem with listing help organisations. Please refresh "
+"this page or try again later."
+msgstr ""
+
 #: cla_public/templates/index.html:8
 msgid "Find out if Civil Legal Advice can help you"
 msgstr ""
@@ -1427,11 +1502,6 @@ msgstr ""
 msgid ""
 "They will check whether you qualify for legal aid. You should not have to"
 " pay for this check."
-msgstr ""
-
-#: cla_public/templates/result/eligible-no-callback.html:26
-#: cla_public/templates/result/face-to-face.html:65
-msgid "Find a legal adviser"
 msgstr ""
 
 #: cla_public/templates/result/eligible.html:6
