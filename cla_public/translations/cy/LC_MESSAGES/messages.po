@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 11:18+0000\n"
+"POT-Creation-Date: 2014-12-24 11:21+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -52,6 +52,22 @@ msgstr ""
 
 #: cla_public/apps/base/constants.py:18
 msgid "I had some other kind of help"
+msgstr ""
+
+#: cla_public/apps/base/forms.py:15
+msgid "Did you have any difficulty with this service?"
+msgstr ""
+
+#: cla_public/apps/base/forms.py:17
+msgid "Do you have any ideas for how it could be improved?"
+msgstr ""
+
+#: cla_public/apps/base/forms.py:20
+msgid "Overall, how did you feel about the service you received today?"
+msgstr ""
+
+#: cla_public/apps/base/forms.py:24
+msgid "Did you have any help filling in this form?"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:10
