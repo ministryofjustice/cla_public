@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 11:37+0000\n"
+"POT-Creation-Date: 2014-12-24 13:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -795,7 +795,7 @@ msgid ""
 "you work or study outside of your home"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:480
+#: cla_public/apps/checker/forms.py:480 cla_public/templates/privacy.html:436
 msgid "Full name"
 msgstr ""
 
@@ -815,7 +815,7 @@ msgstr ""
 msgid "Postcode"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:492
+#: cla_public/apps/checker/forms.py:492 cla_public/templates/privacy.html:437
 msgid "Address"
 msgstr ""
 
@@ -1641,6 +1641,850 @@ msgstr ""
 
 #: cla_public/templates/outgoings.html:30
 msgid "Submit"
+msgstr ""
+
+#: cla_public/templates/privacy.html:3
+msgid "Privacy Statement"
+msgstr ""
+
+#: cla_public/templates/privacy.html:6
+msgid "Terms and conditions and privacy"
+msgstr ""
+
+#: cla_public/templates/privacy.html:9
+msgid ""
+"When using this service you agree to the terms of use for both <a "
+"href=\"http://gov.uk/help/terms-conditions\">gov.uk/help/terms-"
+"conditions</a> as well as\n"
+"    the terms and conditions specific to this service found below."
+msgstr ""
+
+#: cla_public/templates/privacy.html:13
+msgid "If you do not agree to these terms please do not use this service."
+msgstr ""
+
+#: cla_public/templates/privacy.html:15
+msgid "Who manages this digital service and Civil Legal Advice"
+msgstr ""
+
+#: cla_public/templates/privacy.html:17
+msgid ""
+"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is"
+" responsible for Civil Legal Advice (<abbr title=\"Civil Legal "
+"Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid "
+"Agency\">LAA</abbr> works with other\n"
+"    organisations who deliver the <abbr title=\"Civil Legal "
+"Advice\">CLA</abbr> service. For example this digital service is managed "
+"by the Ministry of\n"
+"    Justice."
+msgstr ""
+
+#: cla_public/templates/privacy.html:23
+msgid ""
+"When you first make contact with <abbr title=\"Civil Legal "
+"Advice\">CLA</abbr> you will communicate with the <abbr title=\"Civil "
+"Legal Advice\">CLA</abbr> Operator Service, which is delivered by\n"
+"    Agilisys (a contractor employed by the <abbr title=\"The Legal Aid "
+"Agency\">LAA</abbr> to Agilisys on behalf of Freedom Communications (a "
+"contractor\n"
+"    employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr> to "
+"deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator "
+"Service)."
+msgstr ""
+
+#: cla_public/templates/privacy.html:28
+msgid "Complaints"
+msgstr ""
+
+#: cla_public/templates/privacy.html:30
+msgid ""
+"If you would like to make a complaint about this service or Civil Legal "
+"Advice please contact <abbr title=\"Civil Legal Advice\">CLA</abbr> on "
+"0345 345 4 345."
+msgstr ""
+
+#: cla_public/templates/privacy.html:33
+msgid "How is my privacy protected?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:35
+msgid ""
+"Protecting your privacy is important to us. You can use this service to "
+"find out if you might qualify for\n"
+"    legal aid without providing any personal information that could "
+"identify you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:40
+msgid ""
+"We only save the information you enter if you decide to request a "
+"callback from a Civil Legal Advice\n"
+"    operator."
+msgstr ""
+
+#: cla_public/templates/privacy.html:45
+msgid ""
+"At this point, you will need to tell us your name and phone number and "
+"all the information you've entered will\n"
+"    be stored when you click 'Submit your application'. We store this "
+"information so that the operator can see it\n"
+"    when they speak to you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:51
+msgid ""
+"If you don't want to speak to an operator, you don't need to enter any "
+"personal details and we don't store\n"
+"    any of the information you have entered."
+msgstr ""
+
+#: cla_public/templates/privacy.html:56
+msgid ""
+"To provide you with the best service that we can, Civil Legal Advice may "
+"share some information about you\n"
+"    with other organisations. But we will only do this if you have given "
+"us permission."
+msgstr ""
+
+#: cla_public/templates/privacy.html:61
+msgid ""
+"In exceptional circumstances, we may share limited information about you "
+"without your consent. This would\n"
+"    only be to prevent fraud, help detect crime, if it is required by law"
+" or by a court order or If we are\n"
+"    very worried about your safety or the safety of others."
+msgstr ""
+
+#: cla_public/templates/privacy.html:67
+msgid "Read the full Civil Legal Advice Privacy Statement here."
+msgstr ""
+
+#: cla_public/templates/privacy.html:71
+msgid "Civil Legal Advice Privacy Statement"
+msgstr ""
+
+#: cla_public/templates/privacy.html:73
+msgid ""
+"In order to provide a service to you, Civil Legal Advice (<abbr "
+"title=\"Civil Legal Advice\">CLA</abbr>)\n"
+"    may need to view, collect, record and hold (‘process’) personal data "
+"about you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:77
+msgid ""
+"Personal data is information about you that can be used to identify you "
+"in some way\n"
+"    e.g. your name or telephone number. You can look at the\n"
+"    <a "
+"href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions"
+"#personal-data\" rel=\"external\" target=\"_blank\">full legal "
+"definition</a>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:82
+msgid ""
+"<abbr title=\"Civil Legal Advice\">CLA</abbr> is committed to protecting "
+"your personal data and respecting your privacy.\n"
+"    We are legally bound by the Data Protection Act 1998 to ensure that "
+"we only use your personal\n"
+"    data for the reasons we tell you about. We must also hold it securely."
+msgstr ""
+
+#: cla_public/templates/privacy.html:87
+msgid ""
+"This statement explains how <abbr>CLA</abbr> will process any personal "
+"data that we collect\n"
+"    from you or that you provide to us."
+msgstr ""
+
+#: cla_public/templates/privacy.html:92
+msgid "What is Civil Legal Advice?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:94
+msgid "is a national adviceline for England and Wales, paid for by Legal Aid."
+msgstr ""
+
+#: cla_public/templates/privacy.html:97
+msgid ""
+"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is"
+" responsible for the <abbr>CLA</abbr>\n"
+"    service and the Ministry of Justice (<abbr title=\"The Ministry of "
+"Justice\">MoJ</abbr>) is the Data Controller\n"
+"    for the purposes of the Data Protection Act 1998. They are "
+"responsible for determining the purposes for which\n"
+"    and the manner in which any personal data are, or are to be processed."
+msgstr ""
+
+#: cla_public/templates/privacy.html:103
+msgid ""
+"For a more comprehensive explanation see\n"
+"    <a "
+"href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions"
+"#personal-data\" rel=\"external\" target=\"_blank\">this guide</a>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:107
+msgid ""
+"The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other "
+"organisations who deliver the <abbr>CLA</abbr> service.\n"
+"    For example when you first make contact with <abbr>CLA</abbr> you "
+"will communicate with\n"
+"    the <abbr>CLA</abbr> Operator Service, which is delivered by Agilisys"
+"\n"
+"    (a contractor employed by the <abbr title=\"The Legal Aid "
+"Agency\">LAA</abbr> to [  ])."
+msgstr ""
+
+#: cla_public/templates/privacy.html:113
+msgid ""
+"If after contacting the <abbr>CLA</abbr> Operator Service it is "
+"determined that you\n"
+"    qualify for the <abbr>CLA</abbr> specialist advice service you may be"
+" put through\n"
+"    to one of a number of <abbr>CLA</abbr> Specialist Advice Providers. "
+"If you do not qualify to receive\n"
+"    <abbr>CLA</abbr> specialist advice we will inform you accordingly and"
+"\n"
+"    direct you to alternative help."
+msgstr ""
+
+#: cla_public/templates/privacy.html:120
+msgid ""
+"These organisations are Data Processors for the purposes of the Data "
+"Protection Act 1998 which\n"
+"    means that they process data on behalf of the <abbr>LAA</abbr> and "
+"<abbr title=\"The Ministry of Justice\">MoJ</abbr>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:124
+msgid ""
+"The <abbr>CLA</abbr> service is committed to following this Privacy "
+"Statement.\n"
+"    <abbr>CLA</abbr> Specialists must also adhere to their own internal "
+"privacy policy."
+msgstr ""
+
+#: cla_public/templates/privacy.html:129
+msgid "What data will <abbr>CLA</abbr> collect?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:131
+msgid ""
+"<abbr>CLA</abbr> will only collect the minimum amount of information "
+"necessary in order\n"
+"    to deliver the <abbr>CLA</abbr> service to you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:135
+msgid "The kind of information <abbr>CLA</abbr> may collect about you includes:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:139
+msgid ""
+"Personal details including your name, address, date of birth, contact "
+"details, diversity\n"
+"      monitoring information and national insurance number;"
+msgstr ""
+
+#: cla_public/templates/privacy.html:143
+msgid "Financial information needed to determine if you qualify for legal aid;"
+msgstr ""
+
+#: cla_public/templates/privacy.html:146
+msgid ""
+"Reason for contacting <abbr>CLA</abbr>, such as the nature of your "
+"problem or specific details about your situation;"
+msgstr ""
+
+#: cla_public/templates/privacy.html:149
+msgid ""
+"Details of any specific needs that you may have in order to access the "
+"<abbr>CLA</abbr> service;"
+msgstr ""
+
+#: cla_public/templates/privacy.html:152
+msgid ""
+"Responses to any customer satisfaction survey or details of any feedback,"
+" complaints or requests\n"
+"      for a review of our decision about whether you qualify for legal "
+"aid."
+msgstr ""
+
+#: cla_public/templates/privacy.html:157
+msgid ""
+"The amount of information <abbr>CLA</abbr> will collect will depend on "
+"whether you qualify for the <abbr>CLA</abbr>\n"
+"    service and/or your specific needs. For example you will be asked to "
+"provide more information\n"
+"    before we can transfer you through to a <abbr>CLA</abbr> Specialist."
+msgstr ""
+
+#: cla_public/templates/privacy.html:163
+msgid "What does <abbr>CLA</abbr> use the data for?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:164
+msgid "collects and records information about you to:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:166
+msgid "Work out whether you qualify for legal aid"
+msgstr ""
+
+#: cla_public/templates/privacy.html:167
+msgid "Provide information and/or advice services to you"
+msgstr ""
+
+#: cla_public/templates/privacy.html:168
+msgid "Save you from repeating information every time you contact us"
+msgstr ""
+
+#: cla_public/templates/privacy.html:169
+msgid "Help us monitor and improve our service"
+msgstr ""
+
+#: cla_public/templates/privacy.html:171
+msgid ""
+"Build statistics about the <abbr>CLA</abbr> service, monitor fraud and "
+"justify public expenditure.\n"
+"      This information is collated in an anonymous format."
+msgstr ""
+
+#: cla_public/templates/privacy.html:175
+msgid ""
+"Collect views on the <abbr>CLA</abbr> service and any improvements "
+"considered necessary.\n"
+"      Where consent is provided <abbr>CLA</abbr> User contact details may"
+" be passed onto an independent research agency."
+msgstr ""
+
+#: cla_public/templates/privacy.html:178
+msgid "Prevent or detect crime or fraud"
+msgstr ""
+
+#: cla_public/templates/privacy.html:181
+msgid ""
+"Given the purposes for which your personal data may be used (as referred "
+"to above)\n"
+"    it is essential that the information you provide is accurate and "
+"complete."
+msgstr ""
+
+#: cla_public/templates/privacy.html:186
+msgid "How does <abbr>CLA</abbr> collect your personal data and keep it safe?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:188
+msgid ""
+"<abbr>CLA</abbr> may collect personal data about you by phone, online, "
+"email or post (see table below).\n"
+"    Any personal data will be recorded and stored within a secure system "
+"that meets required Government standards."
+msgstr ""
+
+#: cla_public/templates/privacy.html:192
+msgid ""
+"<abbr>CLA</abbr> will be able to view and verify the information that you"
+" provide and where\n"
+"    necessary will amend it to maintain its accuracy."
+msgstr ""
+
+#: cla_public/templates/privacy.html:196
+msgid ""
+"The minimum amount of personal data that <abbr>CLA</abbr> will ask to "
+"collect is your name and one other piece\n"
+"    of personal information that could be used to identify you e.g. "
+"postcode, date of birth or telephone number."
+msgstr ""
+
+#: cla_public/templates/privacy.html:200
+msgid ""
+"All personal data will be stored on secure servers in the UK. It may also"
+" be stored outside of Europe,\n"
+"    where it could be viewed by our staff or specialist providers."
+msgstr ""
+
+#: cla_public/templates/privacy.html:204
+msgid ""
+"By submitting your personal data, you agree to information being "
+"recorded, used and stored\n"
+"    as outlined in this Privacy Statement."
+msgstr ""
+
+#: cla_public/templates/privacy.html:208
+msgid "How we collect and store your personal data"
+msgstr ""
+
+#: cla_public/templates/privacy.html:211
+msgid "Phone"
+msgstr ""
+
+#: cla_public/templates/privacy.html:213
+msgid ""
+"When you call <abbr>CLA</abbr> we will record relevant personal data that"
+" you provide within a secure digital system.\n"
+"        <br><br>\n"
+"        We may also record your calls. But you can choose to opt out of "
+"this or choose whether or not\n"
+"        to continue with the call.\n"
+"        <br><br>\n"
+"        If you leave <abbr>CLA</abbr> a voice message we will record the "
+"minimum amount of information\n"
+"        required in order to contact you back."
+msgstr ""
+
+#: cla_public/templates/privacy.html:223
+msgid "Online"
+msgstr ""
+
+#: cla_public/templates/privacy.html:225
+msgid ""
+"When you contact <abbr>CLA</abbr> online the personal data that you "
+"provide will be recorded within a secure digital system.\n"
+"        <br><br>\n"
+"        Please note that transmitting information over the internet is "
+"generally not completely secure, and\n"
+"        <abbr>CLA</abbr> can’t guarantee the security of your data. Any "
+"data you transmit is at your own risk.\n"
+"        <abbr>CLA</abbr> have procedures and security features in place "
+"to keep your data secure once we receive it."
+msgstr ""
+
+#: cla_public/templates/privacy.html:233
+msgid "Email"
+msgstr ""
+
+#: cla_public/templates/privacy.html:235
+msgid ""
+"Transmitting information via email is generally not completely secure, "
+"and <abbr>CLA</abbr> can’t guarantee the\n"
+"        security of your data. Any data you transmit is at your own risk."
+"\n"
+"        <br><br>\n"
+"        <abbr>CLA</abbr> have procedures and security features in place "
+"to keep your data secure once we receive it.\n"
+"        <br><br>\n"
+"        When you email <abbr>CLA</abbr>, relevant personal data that you "
+"provide will be recorded within a secure digital system.\n"
+"        <br><br>\n"
+"        <abbr>CLA</abbr> may monitor and store both your incoming and "
+"outgoing emails. We may also use blocking software,"
+msgstr ""
+
+#: cla_public/templates/privacy.html:246
+msgid "Post"
+msgstr ""
+
+#: cla_public/templates/privacy.html:248
+msgid ""
+"When <abbr>CLA</abbr> receives post we may record relevant personal data "
+"included within a secure digital system.\n"
+"        <br><br>\n"
+"        <abbr>CLA</abbr> may also retain original hard-copies of "
+"information submitted by you. This must be stored in a locked\n"
+"        filing cabinet. Digital copies of letters may be scanned and "
+"stored."
+msgstr ""
+
+#: cla_public/templates/privacy.html:257
+msgid "Keeping your personal data safe from others"
+msgstr ""
+
+#: cla_public/templates/privacy.html:260
+msgid "Repeat Contacts"
+msgstr ""
+
+#: cla_public/templates/privacy.html:262
+msgid ""
+"<abbr>CLA</abbr> will not disclose any personal information to anyone "
+"contacting the <abbr>CLA</abbr> service until\n"
+"        they have successfully verified that their identity matches that "
+"of an existing record."
+msgstr ""
+
+#: cla_public/templates/privacy.html:267
+msgid "Third-parties"
+msgstr ""
+
+#: cla_public/templates/privacy.html:269
+msgid ""
+"<abbr>CLA</abbr> will accept contact made by a third-party on behalf of "
+"another person. The third party has to\n"
+"        demonstrate they have appropriate authority to act on your "
+"behalf.\n"
+"        <br><br>\n"
+"        <abbr>CLA</abbr> must record the relationship between the third-"
+"party and the individual seeking advice\n"
+"        and whether they are authorised to act on their behalf.\n"
+"        <br><br>\n"
+"        They must also agree a password to verify the identity of the "
+"third-party if they contact the service again."
+msgstr ""
+
+#: cla_public/templates/privacy.html:279
+msgid "Outgoing Communications"
+msgstr ""
+
+#: cla_public/templates/privacy.html:281
+msgid "<abbr>CLA</abbr> may need to contact you directly."
+msgstr ""
+
+#: cla_public/templates/privacy.html:283
+msgid ""
+"In order to protect privacy <abbr>CLA</abbr> will always check with you "
+"what forms of outgoing communication are acceptable and appropriate and "
+"whether messages can be left."
+msgstr ""
+
+#: cla_public/templates/privacy.html:285
+msgid "When making outgoing calls to you <abbr>CLA</abbr> will ensure that:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:288
+msgid ""
+"Call backs are only made where you have agreed to this. Authorised third "
+"parties\n"
+"            acting on your behalf can give agreement."
+msgstr ""
+
+#: cla_public/templates/privacy.html:292
+msgid ""
+"Where a call back is made to you and there is no answer and a message "
+"taker is available,\n"
+"            no message will be left unless you have previously given "
+"specific instructions that this would be acceptable."
+msgstr ""
+
+#: cla_public/templates/privacy.html:296
+msgid ""
+"Where the phone is answered and someone other than you answers the phone "
+"and says that you are\n"
+"            unavailable or asks who is calling, <abbr>CLA</abbr> will "
+"state that the call is confidential and will not say\n"
+"            that they are calling from <abbr>CLA</abbr>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:306
+msgid "How we use cookies"
+msgstr ""
+
+#: cla_public/templates/privacy.html:308
+msgid ""
+"When you use our online services we may store a small file, known as a "
+"cookie, on your\n"
+"    <abbr title=\"Personal Computer\">PC</abbr> or digital device."
+msgstr ""
+
+#: cla_public/templates/privacy.html:311
+msgid "You may see a message before we store a cookie on your computer."
+msgstr ""
+
+#: cla_public/templates/privacy.html:312
+msgid "The cookies are not used to identify you personally."
+msgstr ""
+
+#: cla_public/templates/privacy.html:313
+msgid "We use these cookies to:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:315
+msgid ""
+"Help your <abbr>PC</abbr> or digital device to interact with us more "
+"quickly"
+msgstr ""
+
+#: cla_public/templates/privacy.html:316
+msgid ""
+"Measure how you use our service so it can be updated and improved based "
+"on your needs"
+msgstr ""
+
+#: cla_public/templates/privacy.html:317
+msgid ""
+"Remember the notifications you’ve seen so that we don’t show them to you "
+"again"
+msgstr ""
+
+#: cla_public/templates/privacy.html:319
+msgid ""
+"Remember how you progress through our service. These cookies don't store "
+"your personal\n"
+"      data and are deleted once you've completed the service."
+msgstr ""
+
+#: cla_public/templates/privacy.html:323
+msgid ""
+"Protect your security by ensuring that third parties cannot create sites "
+"that pose as\n"
+"      a gov.uk service in an attempt to gather your information."
+msgstr ""
+
+#: cla_public/templates/privacy.html:328
+msgid ""
+"You can read more about\n"
+"    <a href=\"https://www.gov.uk/help/cookies\"  rel=\"external\" "
+"target=\"_blank\">how cookies are used on gov.uk</a>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:332
+msgid ""
+"You can read about\n"
+"    <a href=\"http://www.aboutcookies.org/\" rel=\"external\" "
+"target=\"_blank\">how to manage cookies</a>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:337
+msgid "When will we share information about you outside <abbr>CLA</abbr>?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:338
+msgid ""
+"Confidentiality means ensuring information is only accessible by those "
+"allowed to have access to it."
+msgstr ""
+
+#: cla_public/templates/privacy.html:340
+msgid ""
+"We want to keep your contact with <abbr>CLA</abbr> confidential, which "
+"means you can feel safe talking to us.\n"
+"    But we sometimes need to share some information outside "
+"<abbr>CLA</abbr> which we explain below."
+msgstr ""
+
+#: cla_public/templates/privacy.html:344
+msgid ""
+"In order to provide you with the best service that we can we may share "
+"some information about\n"
+"    you with the organisations mentioned below. But we will only do this "
+"if you have given us consent\n"
+"    when the operator asks for it."
+msgstr ""
+
+#: cla_public/templates/privacy.html:351 cla_public/templates/privacy.html:398
+msgid "Who"
+msgstr ""
+
+#: cla_public/templates/privacy.html:352 cla_public/templates/privacy.html:399
+msgid "Why"
+msgstr ""
+
+#: cla_public/templates/privacy.html:358
+msgid ""
+"External research organisations engaged by <abbr title=\"The Legal Aid "
+"Agency\">LAA</abbr>\n"
+"          or <abbr title=\"The Ministry of Justice\">MoJ</abbr>"
+msgstr ""
+
+#: cla_public/templates/privacy.html:362
+msgid ""
+"To inform future government policy on legal aid. Such research will not "
+"identify\n"
+"          individuals whose data has been used for research purposes."
+msgstr ""
+
+#: cla_public/templates/privacy.html:368 cla_public/templates/privacy.html:405
+msgid "Other government organisations"
+msgstr ""
+
+#: cla_public/templates/privacy.html:371
+msgid ""
+"To verify information provided by you and check whether you qualify for "
+"legal aid."
+msgstr ""
+
+#: cla_public/templates/privacy.html:376
+msgid "Other advice organisations"
+msgstr ""
+
+#: cla_public/templates/privacy.html:379
+msgid "To help you get further help and advice from appropriate organisations."
+msgstr ""
+
+#: cla_public/templates/privacy.html:386
+msgid ""
+"In exceptional circumstances we may share limited information without "
+"your consent,\n"
+"    for example if it is a legal requirement or a court compels us to do "
+"so."
+msgstr ""
+
+#: cla_public/templates/privacy.html:389
+msgid "If we do this we will wherever possible:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:391
+msgid "Talk to you first"
+msgstr ""
+
+#: cla_public/templates/privacy.html:392
+msgid "Give you as much control as possible over how we do this"
+msgstr ""
+
+#: cla_public/templates/privacy.html:393
+msgid "Only share information on a ‘need to know’ basis."
+msgstr ""
+
+#: cla_public/templates/privacy.html:408
+msgid "To prevent fraud and help detect crime."
+msgstr ""
+
+#: cla_public/templates/privacy.html:410
+msgid "Or where it is required by law or by a court order"
+msgstr ""
+
+#: cla_public/templates/privacy.html:415
+msgid "External protection organisations"
+msgstr ""
+
+#: cla_public/templates/privacy.html:418
+msgid ""
+"If we are very worried about your safety or the safety of other people we"
+" may need to let others know.\n"
+"          <br><br>\n"
+"          For example if we think it necessary in order to protect a "
+"child, young person or vulnerable adult\n"
+"          from abuse or if we think that there is an immediate risk of "
+"harm."
+msgstr ""
+
+#: cla_public/templates/privacy.html:428
+msgid "Requests to view and amend <abbr>CLA</abbr> Data"
+msgstr ""
+
+#: cla_public/templates/privacy.html:429
+msgid ""
+"You have the right to request details about the personal information "
+"<abbr>CLA</abbr> holds about you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:430
+msgid ""
+"You can also request us to correct any personal information if it is "
+"found to be inaccurate or out of date."
+msgstr ""
+
+#: cla_public/templates/privacy.html:433
+msgid "Requests to view personal data held by <abbr>CLA</abbr>"
+msgstr ""
+
+#: cla_public/templates/privacy.html:434
+msgid ""
+"If you want to view your record, please make a request in writing "
+"including your."
+msgstr ""
+
+#: cla_public/templates/privacy.html:438
+msgid "Date of birth"
+msgstr ""
+
+#: cla_public/templates/privacy.html:439
+msgid "What you contacted <abbr>CLA</abbr> about"
+msgstr ""
+
+#: cla_public/templates/privacy.html:440
+msgid "When you contacted <abbr>CLA</abbr>"
+msgstr ""
+
+#: cla_public/templates/privacy.html:441
+msgid "What information you want to see"
+msgstr ""
+
+#: cla_public/templates/privacy.html:443
+msgid ""
+"Any additional information that might help us to check your identity e.g."
+" <abbr>CLA</abbr> case reference number.\n"
+"      This is to help us protect your privacy by ensuring that we only "
+"give data out to the person it relates to\n"
+"      (or their appropriately authorised representative)."
+msgstr ""
+
+#: cla_public/templates/privacy.html:449
+msgid ""
+"Please note that we cannot give out any information unless the details "
+"that you provide match our records.\n"
+"    If you used a fake name or pseudonym when you contacted "
+"<abbr>CLA</abbr> you will need to prove your identity."
+msgstr ""
+
+#: cla_public/templates/privacy.html:453
+msgid ""
+"If you gave us enough information to identify you, <abbr>CLA</abbr> will "
+"send you your personal information as soon as\n"
+"    possible but within a maximum of 40 days."
+msgstr ""
+
+#: cla_public/templates/privacy.html:457
+msgid ""
+"You can contact us by email at <a class=\"email\" "
+"href=\"mailto:data.access@justice.gsi.gov.uk\">data.access@justice.gsi.gov.uk</a>"
+" or in writing to"
+msgstr ""
+
+#: cla_public/templates/privacy.html:471
+msgid "Requests to delete personal data"
+msgstr ""
+
+#: cla_public/templates/privacy.html:473
+msgid ""
+"<abbr>CLA</abbr> will only keep a record of your personal data where you "
+"have consented to this and we will handle it carefully."
+msgstr ""
+
+#: cla_public/templates/privacy.html:476
+msgid ""
+"We will consider requests to delete some or all of your personal data but"
+" please note that as a minimum <abbr>CLA</abbr> will usually retain:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:480
+msgid ""
+"For everyone that uses our service we will retain a name and one other "
+"piece of personal data e.g.\n"
+"      date of birth and details of what we did for you"
+msgstr ""
+
+#: cla_public/templates/privacy.html:484
+msgid ""
+"For everyone that asks <abbr>CLA</abbr> to check whether they qualify for"
+" legal aid in order to seek advice from a\n"
+"      <abbr>CLA</abbr> Specialist we will also retain details of any "
+"financial information and case details used to prove that\n"
+"      you qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/privacy.html:490
+msgid ""
+"Please note that if you qualify to receive advice from a <abbr>CLA</abbr>"
+" Specialist, they will also need to retain\n"
+"    additional personal data about you within their own Case Handling "
+"System. Such data shall be sufficient\n"
+"    to justify the provision of legal aid advice and meet professional "
+"requirements."
+msgstr ""
+
+#: cla_public/templates/privacy.html:496
+msgid "Changes to the statement"
+msgstr ""
+
+#: cla_public/templates/privacy.html:498
+msgid ""
+"This policy is under regular review. Any changes made to the privacy "
+"policy will be posted here and,\n"
+"    where appropriate, <abbr>CLA</abbr> staff will be notified by email."
+msgstr ""
+
+#: cla_public/templates/privacy.html:503
+msgid "Complaints about this statement"
+msgstr ""
+
+#: cla_public/templates/privacy.html:505
+msgid ""
+"If you would like to make a complaint about this statement and how it "
+"applies to you then please\n"
+"    contact <abbr title=\"Civil Legal Advice\">CLA</abbr> on <span "
+"class=\"tel\">0345 345 4 345</span>."
 msgstr ""
 
 #: cla_public/templates/problem.html:12
