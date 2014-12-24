@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 13:26+0000\n"
+"POT-Creation-Date: 2014-12-24 13:56+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -427,8 +427,8 @@ msgstr ""
 
 #: cla_public/apps/checker/forms.py:60
 msgid ""
-"Your partner is your husband, wife, civil partner unless you have "
-"permanently separated or someone you live with as if you’re married"
+"Your partner is your husband, wife, civil partner (unless you have "
+"permanently separated) or someone you live with as if you’re married"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:64
@@ -466,7 +466,9 @@ msgid "If Yes, how many?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:86
-msgid "Do you have any dependants aged 16 or over?"
+msgid ""
+"Do you have any dependants aged 16 or over? This could be a young person "
+"for whom you get Child Benefit"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:87
@@ -863,6 +865,7 @@ msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
 #: cla_public/config/common.py:52 cla_public/config/common.py:53
+#: cla_public/templates/_sidebar.html:6
 #: cla_public/templates/call-me-back.html:38
 msgid "Civil Legal Advice"
 msgstr ""
@@ -882,45 +885,43 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:6
+#: cla_public/templates/_sidebar.html:7
 msgid "Legal aid"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:7
+#: cla_public/templates/_sidebar.html:8
 msgid "Criminal legal aid"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:8
+#: cla_public/templates/_sidebar.html:9
 msgid "How this service protects your privacy"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:9
+#: cla_public/templates/_sidebar.html:10
 msgid "Other sources of legal help"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:13
+#: cla_public/templates/_sidebar.html:14
 msgid "Who can get legal aid?"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:14
-msgid ""
-"To qualify for legal aid, you must have a problem that is covered by "
-"legal aid and meet these conditions:"
+#: cla_public/templates/_sidebar.html:16
+msgid "your area of law must be covered by Civil Legal Advice"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:16
+#: cla_public/templates/_sidebar.html:17
 msgid ""
 "your income (or combined income if you have a partner) should not be more"
 " than £2,657 a month before tax"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:17
+#: cla_public/templates/_sidebar.html:18
 msgid ""
 "your savings (or combined savings if you have a partner) should not be "
 "more than £8,000"
 msgstr ""
 
-#: cla_public/templates/_sidebar.html:19
+#: cla_public/templates/_sidebar.html:20
 msgid ""
 "you (and your partner if you have one) should have no more than £733 a "
 "month left after we've taken\n"
@@ -1138,8 +1139,7 @@ msgid ""
 " asking for\n"
 "      some information from you now so that when we call you back we know"
 " who you are. You\n"
-"      can read the full <a href=\"http://www.justice.gov.uk/privacy"
-"/community-legal-advice-privacy-statement\">Civil Legal Advice Privacy "
+"      can read the full <a href=\"/privacy\">Civil Legal Advice Privacy "
 "Statement here</a>."
 msgstr ""
 
@@ -2762,7 +2762,7 @@ msgid "We need more information"
 msgstr ""
 
 #: cla_public/templates/result/eligible.html:15
-msgid "Please submit your details so we can call you back."
+msgid "Please submit your details below so we can call you back."
 msgstr ""
 
 #: cla_public/templates/result/eligible.html:18
