@@ -19,9 +19,6 @@ forms:
           Young people aged 16 or over who live with you and who you support financially should
           be included in the next question under “Do you have any dependants aged 16 or over?”
 
-      have_dependants:
-        more_info: This could be a young person for whom you get Child Benefit
-
   PropertyForm:
     fields:
       in_dispute:

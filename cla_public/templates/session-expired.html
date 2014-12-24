@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block page_title %}Session expired - {{ super() }}{% endblock %}
+{% block page_title %}{{ _('Session expired') }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1>Your session has expired</h1>
+  <h1>{{ _('Your session has expired') }}</h1>
 
-  <p>You can start again by clicking the button below.</p>
+  <p>{{ _('You can start again by clicking the button below.') }}</p>
 
   <p>
     <a class="button button-get-started" href="/">
-      Start again
+      {{ _('Start again') }}
     </a>
   </p>
 

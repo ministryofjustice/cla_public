@@ -3,23 +3,23 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% set title = 'Request a callback' %}
+{% set title = _('Request a callback') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
   {% block page_text %}
     <h1>{{ title }}</h1>
     <p>
-      Fill in your personal details to get a callback from Civil Legal Advice to find out if you
+      {% trans %}Fill in your personal details to get a callback from Civil Legal Advice to find out if you
       qualify for specialist advice on debt, education, discrimination, housing or family problems
-      funded by <a href="https://www.gov.uk/legal-aid">legal aid</a>.
+      funded by <a href="https://www.gov.uk/legal-aid">legal aid</a>.{% endtrans %}
     </p>
     <p>
-      We will try and call you at least once. If we cannot speak to you we will leave you a message
-      unless you tell us below not to.
+      {% trans %}We will try and call you at least once. If we cannot speak to you we will leave you a message
+      unless you tell us below not to.{% endtrans %}
     </p>
     <p>
-      If we can't speak to you please book another call back here or call us on 0345 345 4 345.
+      {{ _('If we can’t speak to you please book another call back here or call us on 0345 345 4 345.') }}
     </p>
   {% endblock %}
 
@@ -34,8 +34,8 @@
       {% call Form.fieldset(form.safe_to_contact, is_subfield=True) %}
         {{ Form.yesno(form.safe_to_contact) }}
         <p style="margin: 10px 0 0">
-          If you don’t have a number we can call you on, please contact
-          <a href="https://www.gov.uk/civil-legal-advice" target="_blank">Civil Legal Advice</a>.
+          {{ _('If you don’t have a number we can call you on, please contact') }}
+          <a href="https://www.gov.uk/civil-legal-advice" target="_blank">{{ _('Civil Legal Advice') }}</a>.
         </p>
       {% endcall %}
     {% endcall %}
@@ -62,58 +62,58 @@
 
     {% call Element.alert(title='What happens next') %}
       <p>
-        If the operator you speak to thinks you might qualify, they will put you
-        through to a CLA specialist adviser immediately.
+        {% trans %}If the operator you speak to thinks you might qualify, they will put you
+        through to a CLA specialist adviser immediately.{% endtrans %}
       </p>
       <p>
-        If CLA can't help we will suggest other places that might be able to assist you.
+        {{ _('If CLA can’t help we will suggest other places that might be able to assist you.') }}
       </p>
     {% endcall %}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions('Request callback') }}
+    {{ Form.actions(_('Request callback')) }}
   </form>
 
   {% block below_form %}
 
     <p>
-      This service only covers England or Wales.<br>
-      We are available Monday to Friday 9am-8pm and Saturday 9am-12:30pm.<br>
-      You can also call us on 0345 3454 345.<br>
-      Minicom: 0345 609 6677.<br>
-      Or text 'legalaid' and your name to 80010.<br>
+      {{ _('This service only covers England or Wales.') }}<br>
+      {{ _('We are available Monday to Friday 9am-8pm and Saturday 9am-12:30pm.') }}<br>
+      {{ _('You can also call us on 0345 3454 345.') }}<br>
+      {{ _(': 0345 609 6677.') }}<br>
+      {{ _('Or text ’legalaid’ and your name to 80010.') }}<br>
     </p>
 
 
     <p>
-      The first person you speak to will be an operator. They will ask you questions about
-      you and your problem, including you and your partner's financial circumstances.
+      {% trans %}The first person you speak to will be an operator. They will ask you questions about
+      you and your problem, including you and your partner's financial circumstances.{% endtrans %}
     </p>
 
     <p>
-      If it looks like you might qualify you will be put through to a CLA specialist
-      adviser immediately.
+      {% trans %}If it looks like you might qualify you will be put through to a CLA specialist
+      adviser immediately.{% endtrans %}
     </p>
 
     <p>
-      They will still need to ask you some more questions before making the final decision
+      {% trans %}They will still need to ask you some more questions before making the final decision
       about whether CLA can offer you advice. And you will need to provide evidence of what
-      you have told us later.
+      you have told us later.{% endtrans %}
     </p>
 
     <p>
-      If CLA can't help you we will always suggest where else you might get help.
+      {{ _('If CLA can’t help you we will always suggest where else you might get help.') }}
     </p>
 
     <p>
-      If we can do anything to make it easier for you to communicate with us due to your
-      disability please tell the Operator.
+      {% trans %}If we can do anything to make it easier for you to communicate with us due to your
+      disability please tell the Operator.{% endtrans %}
     </p>
 
     <p>
-      Protecting your personal data and your privacy is important to us. We are asking for
+      {% trans %}Protecting your personal data and your privacy is important to us. We are asking for
       some information from you now so that when we call you back we know who you are. You
-      can read the full <a href="http://www.justice.gov.uk/privacy/community-legal-advice-privacy-statement">Civil Legal Advice Privacy Statement here</a>.
+      can read the full <a href="/privacy">Civil Legal Advice Privacy Statement here</a>.{% endtrans %}
     </p>
 
   {% endblock %}
@@ -126,7 +126,7 @@
 
   <script type="text/html" id="addressFinderButton">
     <button class="button-secondary address-finder-button" type="button">
-      Find UK address
+      {{ _('Find UK address') }}
     </button>
   </script>
 

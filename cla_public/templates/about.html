@@ -3,7 +3,7 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
-{% set title = 'About you' %}
+{% set title = _('About you') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
@@ -54,14 +54,14 @@
     {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions('Continue') }}
+    {{ Form.actions(_('Continue')) }}
   </form>
 
   <script>
     window.CONDITIONAL_LABELS = {
-      in_dispute: 'Are you in a dispute with your partner?',
-      num_children: 'How many?',
-      num_dependants: 'How many?'
+      in_dispute: '{{ _('Are you in a dispute with your partner?') }}',
+      num_children: '{{ _('How many?') }}',
+      num_dependants: '{{ _('How many?') }}'
     };
   </script>
 {% endblock %}

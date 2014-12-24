@@ -3,36 +3,36 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% set title = 'What do you need help with?' %}
+{% set title = _('What do you need help with?') %}
 
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
-  <p class="subtitle">To qualify for legal aid, you must have a problem that is covered by legal aid.</p>
+  <p class="subtitle">{{ _('To qualify for legal aid, you must have a problem that is covered by legal aid.') }}</p>
 
   <form method="POST" action="{{ url_for('.problem') }}">
     {{ form.csrf_token }}
 
     {% if form.errors %}
       {% call Element.alert('error', icon='cross') %}
-        <p>Please select the area of law you need help with.</p>
+        <p>{{ _('Please select the area of law you need help with.') }}</p>
       {% endcall %}
     {% endif %}
 
     <fieldset class="fieldset-group">
-      <legend class="fieldset-label">Choose one of the options</legend>
+      <legend class="fieldset-label">{{ _('Choose one of the options') }}</legend>
       <div class="form-row">
         {{ Form.option_list(form.categories, label_type='block') }}
       </div>
     </fieldset>
 
     {% call Element.alert() %}
-      <p>If you have more than one problem, you can complete this service more than once.</p>
-      <p>If you’re really not sure what to choose, ask us to <a href="{{ url_for('.call_me_back') }}">call you back</a>.</p>
+      <p>{{ _('If you have more than one problem, you can complete this service more than once.') }}</p>
+      <p>{{ _('If you’re really not sure what to choose, ask us to') }} <a href="{{ url_for('.call_me_back') }}">{{ _('call you back') }}</a>.</p>
     {% endcall %}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions('Continue') }}
+    {{ Form.actions(_('Continue')) }}
   </form>
 {% endblock %}

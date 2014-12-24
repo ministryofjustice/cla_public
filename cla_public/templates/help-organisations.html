@@ -1,52 +1,51 @@
 {% extends "base.html" %}
 
-{% block page_title %}Help organisations - {{ super() }}{% endblock %}
+{% block page_title %}{{ _('Help organisations') }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1>You’re unlikely to get legal aid</h1>
+  <h1>{{ _('You’re unlikely to get legal aid') }}</h1>
   <p>
-    From what you have told us today it looks like you won't be able to
-    get legal aid as you don’t qualify financially
-    {% if category == 'violence' %} for the advice they can provide{% endif %}
-    .
+    {% trans %}From what you have told us today it looks like you won't be able to
+    get legal aid as you don’t qualify financially{% endtrans %}
+    {% if category == 'violence' %} {{ _('for the advice they can provide') }}{% endif %}.
   </p>
 
   {% if category == 'family' %}
     <p>
-      If you want to make an application to court about a family matter
+      {% trans %}If you want to make an application to court about a family matter
       you need to first of all see if family mediation will help. Use the
       <a href="http://www.familymediationcouncil.org.uk/" rel="external">Family Mediation Council</a>
       directory to find a mediator and make an appointment for a Mediation
-      Information and Assessment Meeting (MIAM).
+      Information and Assessment Meeting (MIAM).{% endtrans %}
     </p>
   {% endif %}
 
   {% if category == 'violence' %}
     <p>
-      You may still qualify for legal aid to seek a court order for protection. To find out if you
-      might qualify, contact a legal adviser in your area.
+      {% trans %}You may still qualify for legal aid to seek a court order for protection. To find out if you
+      might qualify, contact a legal adviser in your area.{% endtrans %}
     </p>
   {% else %}
-    <p>You can also seek advice from a legal adviser - you will have to
-      pay for this advice.</p>
+    <p>{% trans %}You can also seek advice from a legal adviser - you will have to
+      pay for this advice.{% endtrans %}</p>
   {% endif %}
 
   {% if category not in ['debt', 'violence', 'discrimination', 'education', 'family', 'housing', 'benefits'] %}
     <p>
-      If you have a court hearing date it is important that you get advice
+      {% trans %}If you have a court hearing date it is important that you get advice
       as soon as possible. You may be able to get last-minute help on the
-      day of the hearing from an adviser in the court building.
+      day of the hearing from an adviser in the court building.{% endtrans %}
     </p>
   {% endif %}
 
   <p>
-    <a class="button" href="http://find-legal-advice.justice.gov.uk/">Find a legal adviser</a>
+    <a class="button" href="https://www.gov.uk/find-a-legal-adviser">{{ _('Find a legal adviser') }}</a>
   </p>
 
   <p>
-    You may still get free help and advice from the organisations listed
+    {% trans %}You may still get free help and advice from the organisations listed
     below. You don’t have to qualify for legal aid to get help and advice
-    from these organisations.
+    from these organisations.{% endtrans %}
   </p>
 
   {% if organisations %}
@@ -58,13 +57,13 @@
               {{ org.service_name }}
             </a>
             {% if org.helpline and org.helpline|lower|trim != 'n/a' %}
-              <p>Helpline: <span class="tel">{{ org.helpline }}</span></p>
+              <p>{{ _('Helpline') }}: <span class="tel">{{ org.helpline }}</span></p>
             {% endif %}
           </li>
         {% endfor %}
       </ul>
     </div>
   {% else %}
-    <p>There has been a problem with listing help organisations. Please refresh this page or try again later.</p>
+    <p>{{ _('There has been a problem with listing help organisations. Please refresh this page or try again later.') }}</p>
   {% endif %}
 {% endblock %}

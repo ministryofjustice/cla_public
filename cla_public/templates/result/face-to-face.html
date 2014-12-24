@@ -1,73 +1,74 @@
 {% extends "base.html" %}
 
 {% block inner_content %}
-  <h1>We do not provide advice about issues related to {{ category_name|lower }}</h1>
+  <h1>{{ _('We do not provide advice about issues related to') }} {{ category_name|lower }}</h1>
   <h2>
     {% if category == 'clinneg' %}
-      You will usually only get Legal Aid for advice about Clinical Negligence if
-      your child has been severely injured during birth or in the first 8 weeks of life
+      {% trans %}You will usually only get Legal Aid for advice about Clinical Negligence if
+      your child has been severely injured during birth or in the first 8 weeks of life{% endtrans %}
     {% elif category == 'pi' %}
-      Legal Aid is not usually available for advice about personal injury
+      {{ _('Legal Aid is not usually available for advice about personal injury') }}
     {%- elif category != 'employment' -%}
-      You may be able to get advice from a legal advisor in your area
+      {{ _('You may be able to get advice from a legal advisor in your area') }}
     {%- endif -%}
   </h2>
 
   {% if category == 'employment' %}
     <p>
-      If your employment problem relates to discrimination (for example, you have been treated
+      {% trans %}If your employment problem relates to discrimination (for example, you have been treated
       unfairly because of your sex, age or other protected characteristic) we might be able to
-      help. Please go back to <a href="/">start</a> page and click discrimination.
+      help. Please go back to <a href="/">start</a> page and click discrimination.{% endtrans %}
     </p>
 
     <p>
-      If your employment problem is not connected to discrimination, legal aid is not usually available.
+      {% trans %}If your employment problem is not connected to discrimination, legal aid is not usually
+      available.{% endtrans %}
     </p>
 
-    <p>You may be able to get free help from:</p>
+    <p>{{ _('You may be able to get free help from:') }}</p>
     <ul>
-      <li>Advisery, Conciliation and Arbitration Service (Acas)</li>
-      <li>Law Centres Network</li>
+      <li>{{ _('Advisery, Conciliation and Arbitration Service (Acas)') }}</li>
+      <li>{{ _('Law Centres Network') }}</li>
     </ul>
 
     <p>
-      You can also seek advice from a legal adviser – you will have to pay for this advice.
+      {{ _('You can also seek advice from a legal adviser – you will have to pay for this advice.') }}
     </p>
 
   {% else %}
     {% if category == 'clinneg' %}
       <p>
-        To find out if you might qualify, contact a legal adviser in your area. They will check
-        whether you qualify for legal aid. You should not have to pay for this check.
+        {% trans %}To find out if you might qualify, contact a legal adviser in your area. They will check
+        whether you qualify for legal aid. You should not have to pay for this check.{% endtrans %}
       </p>
     {% elif category == 'pi' %}
       <p>
-        Legal aid is not usually available for advice about personal injury. You may be able to get
+        {% trans %}Legal aid is not usually available for advice about personal injury. You may be able to get
         legal aid in exceptional cases. You could seek advice from a legal adviser about whether
-        an application might succeed in your case and how to apply.
+        an application might succeed in your case and how to apply.{% endtrans %}
       </p>
       <p>
-        To find out if you might qualify, contact a legal adviser in your area. They will check
-        whether you qualify for legal aid. You should not have to pay for this check.
+        {% trans %}To find out if you might qualify, contact a legal adviser in your area. They will check
+        whether you qualify for legal aid. You should not have to pay for this check.{% endtrans %}
       </p>
     {% else %}
       <p>
-        They will check whether you qualify for legal aid. You should not have to pay for this check.
+        {{ _('They will check whether you qualify for legal aid. You should not have to pay for this check.') }}
       </p>
     {% endif %}
     <p>
-      If you don’t qualify for legal aid, you should speak to your adviser about the cost of advice.
+      {{ _('If you don’t qualify for legal aid, you should speak to your adviser about the cost of advice.') }}
     </p>
   {% endif %}
 
   <p>
-    <a class="button" href="http://find-legal-advice.justice.gov.uk/">Find a legal adviser</a>
+    <a class="button" href="http://find-legal-advice.justice.gov.uk/">{{ _('Find a legal adviser') }}</a>
   </p>
 
   {% if category == 'employment' %}
     <p>
-      Legal aid may still be available in exceptional cases. You could seek advice from a legal
-      adviser about whether an application might succeed in your case and how to apply.
+      {% trans %}Legal aid may still be available in exceptional cases. You could seek advice from a legal
+      adviser about whether an application might succeed in your case and how to apply.{% endtrans %}
     </p>
   {% endif %}
 {% endblock %}

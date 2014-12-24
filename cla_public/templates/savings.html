@@ -8,16 +8,16 @@
 {% block inner_content %}
   <h1>
     {%- if session.has_partner -%}
-      You and your partner’s savings
+      {{ _('You and your partner’s savings') }}
     {%- else -%}
-      Your savings
+      {{ _('Your savings') }}
     {%- endif -%}
   </h1>
 
   {% if session.has_partner %}
-    <p>Any cash, savings or investments held in your name, your partner’s name or both your names.</p>
+    <p>{{ _('Any cash, savings or investments held in your name, your partner’s name or both your names.') }}</p>
   {% else %}
-    <p>We need to know about any money you have saved or invested.</p>
+    <p>{{ _('We need to know about any money you have saved or invested.') }}</p>
   {% endif %}
 
   <form method="POST" action="{{ url_for('.savings') }}">
@@ -44,6 +44,6 @@
     {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions('Continue') }}
+    {{ Form.actions(_('Continue')) }}
   </form>
 {% endblock %}

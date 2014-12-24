@@ -57,8 +57,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     have_partner = YesNoField(
         _(u'Do you have a partner?'),
         description=(
-            _(u"Your partner is your husband, wife, civil partner unless "
-              u"you have permanently separated or someone you live with "
+            _(u"Your partner is your husband, wife, civil partner (unless "
+              u"you have permanently separated) or someone you live with "
               u"as if you’re married")))
     in_dispute = YesNoField(
         _(u'If Yes, are you in a dispute with your partner?'),
@@ -83,7 +83,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             IgnoreIf('have_children', FieldValue(NO)),
             NumberRange(min=1)])
     have_dependants = YesNoField(
-        _(u'Do you have any dependants aged 16 or over?'),
+        _(u'Do you have any dependants aged 16 or over? This could be a young person for whom you get Child Benefit'),
         description=_(u"People who you live with and support financially"))
     num_dependants = IntegerField(
         _(u'If Yes, how many?'),

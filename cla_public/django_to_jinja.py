@@ -18,6 +18,7 @@ def change_jinja_templates(app):
     ])
 
     app.jinja_env.add_extension("jinja2.ext.do")
+    app.jinja_env.add_extension("jinja2.ext.i18n")
 
     app.jinja_loader = moj_loader
 
