@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 11:12+0000\n"
+"POT-Creation-Date: 2014-12-24 11:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -973,6 +973,7 @@ msgstr ""
 #: cla_public/templates/benefits-tax-credits.html:35
 #: cla_public/templates/benefits.html:30 cla_public/templates/income.html:75
 #: cla_public/templates/problem.html:36 cla_public/templates/property.html:61
+#: cla_public/templates/savings.html:47
 msgid "Continue"
 msgstr ""
 
@@ -1452,6 +1453,24 @@ msgstr ""
 #: cla_public/templates/property.html:66 cla_public/templates/property.html:67
 #: cla_public/templates/property.html:68
 msgid "How much rent do you receive?"
+msgstr ""
+
+#: cla_public/templates/savings.html:11
+msgid "You and your partner’s savings"
+msgstr ""
+
+#: cla_public/templates/savings.html:13
+msgid "Your savings"
+msgstr ""
+
+#: cla_public/templates/savings.html:18
+msgid ""
+"Any cash, savings or investments held in your name, your partner’s name "
+"or both your names."
+msgstr ""
+
+#: cla_public/templates/savings.html:20
+msgid "We need to know about any money you have saved or invested."
 msgstr ""
 
 #: cla_public/templates/errors/404.html:3
