@@ -6,23 +6,23 @@
 {% import "macros/element.html" as Element %}
 
 {% if session.has_partner %}
-  {% set title = 'You and your partner’s' %}
+  {% set title = _('You and your partner’s') %}
 {% else %}
-  {% set title = 'Your' %}
+  {% set title = _('Your') %}
 {% endif %}
 {% if session.is_employed or session.is_self_employed %}
-  {% set title = title + ' income and tax' %}
+  {% set title = title + ' ' + _('income and tax') %}
 {% else %}
-  {% set title = title + ' money coming in' %}
+  {% set title = title + ' ' + _('money coming in') %}
 {%  endif %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
   <p>
-    We need to know how much money you have coming in, because this affects
+    {% trans %}We need to know how much money you have coming in, because this affects
     whether or not you can get legal aid. Please answer these questions as
-    fully and accurately as you can.
+    fully and accurately as you can.{% endtrans %}
   </p>
   <form method="POST" action="{{ url_for('.income') }}">
     {{ form.csrf_token }}
@@ -32,11 +32,11 @@
       {% if session.has_partner %}
         <fieldset class="fieldset-group">
           <header>
-            <h3>Your money coming in</h3>
+            <h3>{{ _('Your money coming in') }}</h3>
           </header>
           <p class="form-row">
-            This section is for any money that is paid to you personally - for example, your wages.
-            You should record money coming in for your partner, if you have one, in the next section.
+            {% trans %}This section is for any money that is paid to you personally - for example, your wages.
+            You should record money coming in for your partner, if you have one, in the next section.{% endtrans %}
           </p>
       {% endif %}
         {{ Form.money_interval_fieldset(form.your_income.earnings, skip=skip) }}
@@ -54,7 +54,7 @@
       <fieldset class="fieldset-group">
         {% with skip_for_partner = not (session.partner_is_employed or session.partner_is_self_employed) %}
           <header>
-            <h3>Your partner’s money coming in</h3>
+            <h3>{{ _('Your partner’s money coming in') }}</h3>
           </header>
           <fieldset class="group">
             {{ Form.money_interval_fieldset(form.partner_income.earnings, skip=skip_for_partner) }}
@@ -72,6 +72,6 @@
     {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions('Continue') }}
+    {{ Form.actions(_('Continue')) }}
   </form>
 {% endblock %}

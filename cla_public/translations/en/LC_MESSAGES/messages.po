@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 10:58+0000\n"
+"POT-Creation-Date: 2014-12-24 11:03+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -971,7 +971,7 @@ msgstr ""
 
 #: cla_public/templates/about.html:57
 #: cla_public/templates/benefits-tax-credits.html:35
-#: cla_public/templates/benefits.html:30
+#: cla_public/templates/benefits.html:30 cla_public/templates/income.html:75
 msgid "Continue"
 msgstr ""
 
@@ -1216,6 +1216,46 @@ msgstr ""
 msgid ""
 "There has been a problem with listing help organisations. Please refresh "
 "this page or try again later."
+msgstr ""
+
+#: cla_public/templates/income.html:9
+msgid "You and your partner’s"
+msgstr ""
+
+#: cla_public/templates/income.html:11
+msgid "Your"
+msgstr ""
+
+#: cla_public/templates/income.html:14
+msgid "income and tax"
+msgstr ""
+
+#: cla_public/templates/income.html:16
+msgid "money coming in"
+msgstr ""
+
+#: cla_public/templates/income.html:23
+msgid ""
+"We need to know how much money you have coming in, because this affects\n"
+"    whether or not you can get legal aid. Please answer these questions "
+"as\n"
+"    fully and accurately as you can."
+msgstr ""
+
+#: cla_public/templates/income.html:35
+msgid "Your money coming in"
+msgstr ""
+
+#: cla_public/templates/income.html:38
+msgid ""
+"This section is for any money that is paid to you personally - for "
+"example, your wages.\n"
+"            You should record money coming in for your partner, if you "
+"have one, in the next section."
+msgstr ""
+
+#: cla_public/templates/income.html:57
+msgid "Your partner’s money coming in"
 msgstr ""
 
 #: cla_public/templates/index.html:8
