@@ -83,8 +83,9 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             IgnoreIf('have_children', FieldValue(NO)),
             NumberRange(min=1)])
     have_dependants = YesNoField(
-        _(u'Do you have any dependants aged 16 or over? This could be a young person for whom you get Child Benefit'),
-        description=_(u"People who you live with and support financially"))
+        _(u'Do you have any dependants aged 16 or over?'),
+        description=_(u"People who you live with and support financially. This "
+                      u"could be a young person for whom you get Child Benefit"))
     num_dependants = IntegerField(
         _(u'If Yes, how many?'),
         validators=[
