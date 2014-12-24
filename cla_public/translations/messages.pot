@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 11:03+0000\n"
+"POT-Creation-Date: 2014-12-24 11:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1367,6 +1367,24 @@ msgid ""
 "This online service is only for adults. If you’re under 18, please "
 "contact <a href=\"https://www.gov.uk/civil-legal-advice\">Civil Legal "
 "Advice</a>."
+msgstr ""
+
+#: cla_public/templates/outgoings.html:7
+msgid "You and your partner’s outgoings"
+msgstr ""
+
+#: cla_public/templates/outgoings.html:9
+msgid "Your outgoings"
+msgstr ""
+
+#: cla_public/templates/outgoings.html:15
+msgid ""
+"We only need to know about certain things you pay for, to work out if you"
+" may be able to get legal aid."
+msgstr ""
+
+#: cla_public/templates/outgoings.html:30
+msgid "Submit"
 msgstr ""
 
 #: cla_public/templates/errors/404.html:3
