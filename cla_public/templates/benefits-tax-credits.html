@@ -4,17 +4,17 @@
 {% import "macros/element.html" as Element %}
 
 {% if session.has_partner %}
-  {% set title = 'You and your partner’s benefits and tax credits' %}
+  {% set title = _('You and your partner’s benefits and tax credits') %}
 {% else %}
-  {% set title = 'Your benefits and tax credits' %}
+  {% set title = _('Your benefits and tax credits') %}
 {% endif %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
   <p>
-    We need to know about any benefits and tax credits your whole household receives.
-    Please answer these questions as fully and accurately as you can.
+    {% trans %}We need to know about any benefits and tax credits your whole household receives.
+    Please answer these questions as fully and accurately as you can.{% endtrans %}
   </p>
   <form method="POST" action="{{ url_for('.benefits_tax_credits') }}">
     {{ form.csrf_token }}
@@ -32,12 +32,12 @@
     {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions('Continue') }}
+    {{ Form.actions(_('Continue')) }}
   </form>
 
   <script>
     window.CONDITIONAL_LABELS = {
-      'total_other_benefit': 'Total amount of benefits not listed above'
+      'total_other_benefit': '{{ _('Total amount of benefits not listed above') }}'
     };
   </script>
 {% endblock %}

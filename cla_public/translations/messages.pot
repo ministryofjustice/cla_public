@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 10:05+0000\n"
+"POT-Creation-Date: 2014-12-24 10:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -968,7 +968,9 @@ msgstr ""
 msgid "About you"
 msgstr ""
 
-#: cla_public/templates/about.html:57 cla_public/templates/benefits.html:30
+#: cla_public/templates/about.html:57
+#: cla_public/templates/benefits-tax-credits.html:35
+#: cla_public/templates/benefits.html:30
 msgid "Continue"
 msgstr ""
 
@@ -978,6 +980,25 @@ msgstr ""
 
 #: cla_public/templates/about.html:63 cla_public/templates/about.html:64
 msgid "How many?"
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:7
+msgid "You and your partner’s benefits and tax credits"
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:9
+msgid "Your benefits and tax credits"
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:16
+msgid ""
+"We need to know about any benefits and tax credits your whole household "
+"receives.\n"
+"    Please answer these questions as fully and accurately as you can."
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:40
+msgid "Total amount of benefits not listed above"
 msgstr ""
 
 #: cla_public/templates/benefits.html:7
