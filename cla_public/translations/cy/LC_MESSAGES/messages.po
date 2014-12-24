@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 14:48+0000\n"
+"POT-Creation-Date: 2014-12-24 15:06+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -1242,7 +1242,7 @@ msgid "Name"
 msgstr ""
 
 #: cla_public/templates/cookies.html:42 cla_public/templates/cookies.html:97
-#: cla_public/templates/cookies.html:116
+#: cla_public/templates/cookies.html:116 cla_public/templates/cookies.html:135
 msgid "Purpose"
 msgstr ""
 
@@ -1376,10 +1376,6 @@ msgid ""
 "choose to take part, or dismiss the survey, we’ll save a cookie that lets"
 " us know that you’ve seen the message so that we don’t show it to you "
 "again."
-msgstr ""
-
-#: cla_public/templates/cookies.html:135
-msgid "Purpose<"
 msgstr ""
 
 #: cla_public/templates/cookies.html:142
@@ -2913,4 +2909,7 @@ msgid ""
 "      adviser about whether an application might succeed in your case and"
 " how to apply."
 msgstr ""
+
+#~ msgid "Purpose<"
+#~ msgstr ""
 
