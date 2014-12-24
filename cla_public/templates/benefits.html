@@ -4,9 +4,9 @@
 {% import "macros/element.html" as Element %}
 
 {% if session.has_partner %}
-  {% set title = 'You and your partner’s benefits' %}
+  {% set title = _('You and your partner’s benefits') %}
 {% else %}
-  {% set title = 'Your benefits' %}
+  {% set title = _('Your benefits') %}
 {% endif %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
@@ -27,6 +27,6 @@
     {{ Element.call_me_back_link() }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions('Continue') }}
+    {{ Form.actions(_('Continue')) }}
   </form>
 {% endblock %}

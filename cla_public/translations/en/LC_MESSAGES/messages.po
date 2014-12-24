@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-23 17:11+0000\n"
+"POT-Creation-Date: 2014-12-24 10:05+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -968,7 +968,7 @@ msgstr ""
 msgid "About you"
 msgstr ""
 
-#: cla_public/templates/about.html:57
+#: cla_public/templates/about.html:57 cla_public/templates/benefits.html:30
 msgid "Continue"
 msgstr ""
 
@@ -978,6 +978,14 @@ msgstr ""
 
 #: cla_public/templates/about.html:63 cla_public/templates/about.html:64
 msgid "How many?"
+msgstr ""
+
+#: cla_public/templates/benefits.html:7
+msgid "You and your partner’s benefits"
+msgstr ""
+
+#: cla_public/templates/benefits.html:9
+msgid "Your benefits"
 msgstr ""
 
 #: cla_public/templates/index.html:8
