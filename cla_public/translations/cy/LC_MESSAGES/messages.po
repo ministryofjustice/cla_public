@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-24 11:08+0000\n"
+"POT-Creation-Date: 2014-12-24 11:12+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -973,7 +973,7 @@ msgstr ""
 #: cla_public/templates/about.html:57
 #: cla_public/templates/benefits-tax-credits.html:35
 #: cla_public/templates/benefits.html:30 cla_public/templates/income.html:75
-#: cla_public/templates/problem.html:36
+#: cla_public/templates/problem.html:36 cla_public/templates/property.html:61
 msgid "Continue"
 msgstr ""
 
@@ -1416,6 +1416,43 @@ msgstr ""
 #: cla_public/templates/problem.html:32
 #: cla_public/templates/macros/element.html:35
 msgid "call you back"
+msgstr ""
+
+#: cla_public/templates/property.html:7
+msgid "You and your partner’s property"
+msgstr ""
+
+#: cla_public/templates/property.html:9
+msgid "Your property"
+msgstr ""
+
+#: cla_public/templates/property.html:17
+msgid ""
+"Please tell us about any property owned by you, your partner or both of "
+"you."
+msgstr ""
+
+#: cla_public/templates/property.html:18
+msgid ""
+"If you or your partner own more than one property, you can add more "
+"properties below."
+msgstr ""
+
+#: cla_public/templates/property.html:20
+msgid "If you own more than one property, you can add more properties below."
+msgstr ""
+
+#: cla_public/templates/property.html:33
+msgid "Remove property"
+msgstr ""
+
+#: cla_public/templates/property.html:54
+msgid "Add another property"
+msgstr ""
+
+#: cla_public/templates/property.html:66 cla_public/templates/property.html:67
+#: cla_public/templates/property.html:68
+msgid "How much rent do you receive?"
 msgstr ""
 
 #: cla_public/templates/errors/404.html:3
