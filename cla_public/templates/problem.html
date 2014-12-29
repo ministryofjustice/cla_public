@@ -29,7 +29,10 @@
 
     {% call Element.alert() %}
       <p>{{ _('If you have more than one problem, you can complete this service more than once.') }}</p>
-      <p>{{ _('If you’re really not sure what to choose, ask us to') }} <a href="{{ url_for('.call_me_back') }}">{{ _('call you back') }}</a>.</p>
+      <p>
+        {{ _('If you’re really not sure what to choose, ask us to') }}
+        <a href="{{ url_for('.call_me_back') }}" id="callback-link">{{ _('call you back') }}</a>.
+      </p>
     {% endcall %}
 
     {{ Form.honeypot(form) }}
