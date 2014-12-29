@@ -108,7 +108,9 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         description=(
             _(u"This means working as an employee - your partner may be both employed "
               u"and self-employed")),
-        validators=[IgnoreIf('in_dispute', FieldValueOrNone(YES))])
+        validators=[
+            IgnoreIf('in_dispute', FieldValueOrNone(YES)),
+            InputRequired(message=gettext(u'Please choose Yes or No'))])
     is_self_employed = YesNoField(
         _(u'Are you self-employed?'),
         description=(
@@ -119,7 +121,9 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         description=(
             _(u"This means working for yourself - your partner may be both employed "
               u"and self-employed")),
-        validators=[IgnoreIf('in_dispute', FieldValueOrNone(YES))])
+        validators=[
+            IgnoreIf('in_dispute', FieldValueOrNone(YES)),
+            InputRequired(message=gettext(u'Please choose Yes or No'))])
     aged_60_or_over = YesNoField(_(u'Are you aged 60 or over?'))
 
     def api_payload(self):
