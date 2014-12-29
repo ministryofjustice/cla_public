@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% import "macros/form.html" as Form %}
+{% import "macros/element.html" as Element %}
+
+{% set title = _('Thanks for your feedback') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+  <p>{{ _('We use the feedback to improve the service.')}} </p>
+
+  <p>
+    <a href="https://gov.uk/civil-legal-advice" class="button">
+      {{ _('Back to home page') }}
+    </a>
+  </p>
+{% endblock %}

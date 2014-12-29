@@ -51,9 +51,14 @@ def feedback():
         zd_error = _('Something went wrong. Please try again.')
 
         if response.status_code < 300:
-            return redirect(url_for('.index'))
+            return redirect(url_for('.feedback_confirmation'))
 
     return render_template('feedback.html', form=form, zd_error=zd_error)
+
+
+@base.route('/feedback/confirmation')
+def feedback_confirmation():
+    return render_template('feedback-confirmation.html')
 
 
 @base.route('/addressfinder/<path:path>', methods=['GET'])
