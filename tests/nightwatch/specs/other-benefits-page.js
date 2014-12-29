@@ -39,6 +39,7 @@ module.exports = {
   'Context-dependent text for partner': function(client) {
     client
       .back()
+      .waitForElementPresent('form[action="/benefits"]', 2000)
       .back()
       .waitForElementPresent('form[action="/about"]', 2000)
     ;
@@ -47,7 +48,9 @@ module.exports = {
     common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
     client
       .submitForm('form')
+      .waitForElementPresent('form[action="/benefits"]', 2000)
       .submitForm('form')
+      .waitForElementPresent('form[action="/benefits-tax-credits"]', 2000)
     ;
     common.checkTextIsEqual(client, 'h1', 'You and your partner’s benefits and tax credits');
   },
@@ -59,6 +62,7 @@ module.exports = {
     });
     client
       .back()
+      .waitForElementPresent('form[action="/benefits"]', 2000)
       .back()
       .waitForElementPresent('form[action="/about"]', 2000)
     ;
@@ -66,7 +70,9 @@ module.exports = {
     client
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
+      .waitForElementPresent('form[action="/benefits"]', 2000)
       .submitForm('form')
+      .waitForElementPresent('form[action="/benefits-tax-credits"]', 2000)
     ;
     CHILD_BENEFIT_QUESTIONS.forEach(function(item) {
       client.assert.visible(util.format('input[name="%s-per_interval_value"]', item));
