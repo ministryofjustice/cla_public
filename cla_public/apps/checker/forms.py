@@ -251,7 +251,7 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
             'property_set': properties,
             'you': {
                 'income': {'other_income': total_rent},
-                'deductions': {'mortgage': total_mortgage}
+                'deductions': {'mortgage': money_interval(total_mortgage, 'per_month')}
             }
         }
 
