@@ -4,30 +4,25 @@
   "custom_assertions_path" : "tests/nightwatch/custom_assertions",
 
   "selenium" : {
-    "start_process" : true,
     "log_path": "tests/reports",
-    "server_path" : "node_modules/selenium-standalone/.selenium/2.43.1/server.jar"
+    "host" : "172.31.26.191"
   },
 
   "test_settings" : {
     "default" : {
-      "launch_url" : "http://localhost:${CLA_PUBLIC_PORT}/",
+      "launch_url" : "http://172.31.42.35:${CLA_PUBLIC_PORT}/",
       "silent": true,
+      "selenium_host": "172.22.5.67",
+      "selenium_port": 4444,
       "desiredCapabilities": {
-        "browserName": "phantomjs",
-        "javascriptEnabled" : true,
-        "acceptSslCerts" : true,
-        "phantomjs.binary.path" : "node_modules/phantomjs/bin/phantomjs"
+        "browserName": "firefox"
       }
     },
 
-    "firefox" : {
-      "screenshots" : {
-        "enabled" : true,
-        "path" : "tests/reports/nightwatch/screenshots"
-      },
+    "phantomjs" : {
       "desiredCapabilities": {
-        "browserName": "firefox"
+        "browserName": "phantomjs",
+        "phantomjs.binary.path" : "node_modules/phantomjs/bin/phantomjs"
       }
     },
 
