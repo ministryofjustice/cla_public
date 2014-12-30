@@ -33,7 +33,7 @@ module.exports = {
       .assert.urlContains('/result/eligible')
       .assert.containsText('h1', 'You might qualify for legal aid')
       .assert.containsText('h2', 'Request a callback')
-      .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify financially for legal aid.\nPlease submit your details so we can call you back.')
+      .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify financially for legal aid.\nPlease submit your details below so we can call you back.')
     ;
   },
 
