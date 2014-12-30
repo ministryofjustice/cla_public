@@ -36,12 +36,7 @@ module.exports = {
 
   'Categories of law (Your problem)': common.selectDebtCategory,
 
-  'About you': function(client) {
-    client
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-    ;
-  },
+  'About you': common.aboutPage,
 
   'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
@@ -64,16 +59,20 @@ module.exports = {
     common.aboutPageSetAllToNo(client);
     client
       .submitForm('form')
+      .waitForElementVisible('form[action="/income"]', 2000)
       .assert.urlContains('/income', 'Goes to /income when all answers are No')
-      .url(client.launch_url + '/about')
+      .back()
+      .waitForElementVisible('form[action="/about"]', 2000)
     ;
     OUTCOMES.forEach(function(item) {
       common.aboutPageSetAllToNo(client);
       common.setYesNoFields(client, item.question, 1);
       client
         .submitForm('form')
+        .waitForElementVisible(util.format('form[action="%s"]', item.url), 5000)
         .assert.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
         .back()
+        .waitForElementVisible('form[action="/about"]', 2000)
       ;
     });
 

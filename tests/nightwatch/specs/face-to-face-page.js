@@ -19,13 +19,10 @@ module.exports = {
 
   'Face-to-face page': function(client) {
     client
+      .waitForElementVisible('a[href="http://find-legal-advice.justice.gov.uk/"]', 2000)
       .assert.urlContains('/face-to-face')
       .assert.containsText('h1', 'We do not provide advice about issues related to clinical negligence')
-      .click('article p:last-child a')
-      .pause(1000)
-      .assert.urlContains('find-legal-advice.justice.gov.uk')
     ;
-
 
     client.end();
   }

@@ -26,10 +26,7 @@ module.exports = {
   'Categories of law (Your problem)': common.selectDebtCategory,
 
   'About you': function(client) {
-    client
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-    ;
+    common.aboutPage(client);
     common.aboutPageSetAllToNo(client);
     common.setYesNoFields(client, 'is_employed', 1);
     common.setYesNoFields(client, 'have_savings', 1);
@@ -38,6 +35,7 @@ module.exports = {
 
   'Savings page': function(client) {
     client
+      .waitForElementVisible('form[action="/savings"]', 2000)
       .assert.urlContains('/savings')
       .assert.containsText('h1', 'Your savings')
     ;
@@ -50,11 +48,11 @@ module.exports = {
 
   'Income page': function(client) {
     client
+      .waitForElementVisible('form[action="/income"]', 2000)
       .assert.urlContains('/income')
       .assert.containsText('h1', 'Your income')
     ;
     testSidebar(client, 'Who can get legal aid?');
-
 
     client.end();
   }

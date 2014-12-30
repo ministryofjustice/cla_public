@@ -8,19 +8,18 @@ var eligibleJourney = function(client) {
   common.startPage(client);
 
   common.selectDebtCategory(client);
-  client
-    .assert.urlContains('/about')
-    .assert.containsText('h1', 'About you')
-  ;
+  common.aboutPage(client);
   common.aboutPageSetAllToNo(client);
   common.setYesNoFields(client, 'on_benefits', 1);
   client
     .submitForm('form')
+    .waitForElementVisible('form[action="/benefits"]', 2000)
     .assert.urlContains('/benefits')
     .assert.containsText('h1', 'Your benefits')
     .assert.containsText('body', 'Are you on any of these benefits?')
     .click('input[value="income_support"]')
     .submitForm('form')
+    .waitForElementVisible('form[action="/result/eligible"]', 2000)
     .assert.urlContains('/result/eligible')
     .assert.containsText('h1', 'You might qualify for legal aid')
     .assert.containsText('h2', 'Request a callback')
