@@ -248,6 +248,21 @@ class PropertyList(FieldList):
         del self.entries[index]
         self.last_index -= 1
 
+    def validate(self, form, extra_validators=tuple()):
+        super(PropertyList, self).validate(form, extra_validators)
+        self.errors = self.errors or []
+
+        has_main_property = False
+        for property in self.entries:
+            if property.is_main_home.data == YES:
+                if has_main_property:
+                    property.is_main_home.errors.append(
+                        self.gettext('You can only have 1 main Property'))
+                    self.errors.append(property.is_main_home.errors)
+                has_main_property = True
+
+        return len(self.errors) == 0
+
 
 class PartnerMoneyIntervalField(PartnerMixin, MoneyIntervalField):
     pass
