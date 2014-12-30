@@ -1,0 +1,1110 @@
+[
+  {
+    "name": "SCENARIO: Single pensioner, over 60, disp non-salary income *over* 315, normal capital (4p over)",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.98,
+          "investments": 0.03,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 315.08,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0.01,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, disp non-salary income *over* 315, normal capital (4p over)",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.98,
+          "investments": 0.03,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 315.07,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, disp non-salary income just under 315, capital should hit the extra 10K limit",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 17499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 315.01,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, disp salary income *over* 315+45, normal capital (4p over)",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 360.08,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 0,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, disp salary income just under 315+45, normal capital (4p over) should fall within 10K capital allowance",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 360.07,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 0,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, disp salary income just under 315, capital should hit the extra 10K limit",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 17499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 360.07,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 0,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, mixed income *over* 315+45, normal capital (4p over)",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 360,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 0.08,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, mixed income just under 315+45, normal capital (4p over) should fall within 10K capital allowance",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 360,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 0.07,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, mixed income just under 315, capital should hit the extra 10K limit",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 17499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 315.01,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Single pensioner, over 60, on benefits, over 315 income, fails on with 100+100 disregard by 1p",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 1,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "benefits",
+        "fields": {
+          "benefits": "universal_credit"
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 300000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.96,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: As above - disp non-income of 77, should fail with £70K+1p additional capital",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 270000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.96,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 77.07,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: As above - disp non-income of 77, should pass with £70K additional capital",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 270000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 0.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.95,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 77.07,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  },
+
+  {
+    "name": "SCENARIO: Check no-dependants rent cap still works for pensioners alone - fail",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 545.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 315.06,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.01,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 590.01,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.01,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Check no-dependants rent cap still works for pensioners alone - pass",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 1,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 1,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "property",
+        "properties": [
+          {
+            "is_main_home": 1,
+            "other_shareholders": 0,
+            "property_value": 200000.02,
+            "mortgage_remaining": 100000.01,
+            "mortgage_payments": 545.01,
+            "is_rented": 0,
+            "in_dispute": 0
+          }
+        ]
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 7499.98,
+          "investments": 0.02,
+          "valuables": 500.01
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 315.06,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0.02,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0.01,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 590,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0.02,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0.02,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0.01,
+          "childcare-per_interval_value": 0.01,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  }
+]
