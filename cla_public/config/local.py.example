@@ -15,3 +15,10 @@ ADDRESSFINDER_API_HOST = os.environ.get(
 ADDRESSFINDER_API_TOKEN = os.environ.get(
     'ADDRESSFINDER_API_TOKEN',
     'your_service_token')
+
+ZENDESK_API_USERNAME = os.environ.get(
+    'ZENDESK_USERNAME',
+    'your_service_username')
+ZENDESK_API_TOKEN = os.environ.get(
+    'ZENDESK_API_TOKEN',
+    'your_service_token')

@@ -1,6 +1,5 @@
 .form-group {
   margin-top: 25px;
-  border-top: 1px solid $grey-3;
 
   &:first-child {
     margin-top: 10px;
@@ -41,38 +40,6 @@
 
     .radio-inline {
       display: inline-block;
-    }
-  }
-
-
-  &.m-error {
-    border-color: $mellow-red;
-    border-left-width: 4px;
-    position: relative;
-    padding-left: 10px;
-    margin-left: -10px;
-
-    &.form-subfield {
-      border-top: 0;
-      margin-left: 0;
-
-      &:before {
-        content: '';
-        top: 0;
-        width: 9px;
-        position: absolute;
-        left: -4px;
-        border-top: 1px solid $mellow-red;
-      }
-    }
-
-    &:after {
-      content: '';
-      border-bottom: 1px solid $mellow-red;
-      width: 9px;
-      position: absolute;
-      left: -4px;
-      bottom: 0;
     }
   }
 }

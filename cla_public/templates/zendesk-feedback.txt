@@ -1,0 +1,15 @@
+** {{ form.feel_about_service.label.text }} **
+{{ form.feel_about_service.data }}
+
+** {{ form.help_filling_in_form.label.text }} **
+{{ form.help_filling_in_form.data }}
+
+{% if form.difficulty.data %}
+    ** {{ form.difficulty.label.text }} **
+    {{ form.difficulty.data }}
+{% endif %}
+
+{% if form.ideas.data %}
+    ** {{ form.ideas.label.text }} **
+    {{ form.ideas.data }}
+{% endif %}
