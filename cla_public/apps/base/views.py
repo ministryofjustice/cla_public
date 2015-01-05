@@ -64,17 +64,6 @@ def feedback_confirmation():
 @base.route('/addressfinder/<path:path>', methods=['GET'])
 @api_proxy(return_value=[], json_response=True)
 def addressfinder_proxy_view(path):
-    if current_app.config.get('TESTING', False):
-        if request.args.get('postcode') == 'e181ja':
-            return json.dumps([
-                {'formatted_address': '3 Crescent Road\nLondon\nE18 1JA'},
-                {'formatted_address': 'Foo bar quux'}])
-        if request.args.get('postcode') == 'sw1h9aj':
-            return json.dumps([
-                {'formatted_address':
-                    'Ministry of Justice\n102 Petty France\nLondon\nSW1H 9AJ'}])
-        return json.dumps([])
-
     response = requests.get(
         '{host}/{path}?{params}'.format(
             host=current_app.config['ADDRESSFINDER_API_HOST'],
