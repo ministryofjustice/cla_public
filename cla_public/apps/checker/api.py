@@ -7,32 +7,7 @@ from cla_public.apps.checker.constants import CATEGORIES
 from cla_common.constants import ELIGIBILITY_STATES
 
 
-class DummyResource(object):
-
-    def __call__(self, *args, **kwargs):
-        return self
-
-    def post(self, payload):
-        savings = session.get('SavingsForm_savings', 0)
-        investments = session.get('SavingsForm_investments', 0)
-        is_eligible = 'unknown'
-        if savings >= 500000 and investments >= 500000:
-            is_eligible = 'no'
-        return {
-            'reference': 'DUMMY-REF',
-            'is_eligible': is_eligible}
-
-    def patch(self, payload):
-        return self.post(payload)
-
-    def __getattr__(self, name):
-        return DummyResource()
-
-
 def get_api_connection():
-    if current_app.config.get('TESTING'):
-        return DummyResource()
-
     return slumber.API(
         current_app.config['BACKEND_API']['url'],
         timeout=current_app.config['API_CLIENT_TIMEOUT']
