@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from mock import Mock, patch
 import unittest
 
@@ -8,7 +9,7 @@ from cla_public import app
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.checker.fields import MoneyIntervalForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
-    PropertiesForm, PropertyForm
+    PropertiesForm, SavingsForm
 
 
 def get_en_locale():
@@ -137,3 +138,26 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['property_set'][0]['rent']['per_interval_value'], 0)
         self.assertEqual(payload['property_set'][0]['rent']['interval_period'], 'per_month')
         self.assertEqual(payload['property_set'][0]['main'], YES)
+
+    def test_saving_form(self):
+        form_data = {
+            'savings': '100',
+            'investments': '100',
+            'valuables': '500',
+        }
+
+        payload = self.payload(SavingsForm, form_data)
+
+        self.assertEqual(payload['you']['savings']['bank_balance'], 10000)
+        self.assertEqual(payload['you']['savings']['investment_balance'], 10000)
+        self.assertEqual(payload['you']['savings']['asset_balance'], 50000)
+
+        form_data = {
+            'savings': '100',
+            'investments': '100',
+            'valuables': '499.99',
+        }
+
+        payload = self.payload(SavingsForm, form_data)
+
+        self.assertEqual(payload['you']['savings']['asset_balance'], 0, msg=u'Disregard valuables lass than £500')
