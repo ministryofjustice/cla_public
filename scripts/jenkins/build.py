@@ -84,8 +84,8 @@ def update_static_assets():
     run('gulp')
 
 
-def next_port(start_from=8000, up_to=8999):
-    port = random.randing(start_from, up_to)
+def _port(start_from=8000, up_to=8999):
+    port = random.randint(start_from, up_to)
     while True:
         yield port
         port += 1
@@ -97,7 +97,7 @@ def run_server(
         port_env_var='CLA_BACKEND_PORT',
         project_dir='/srv/jenkins/workspace/CLA Backend - integration'):
 
-    port = next_port()
+    port = next(_port())
     os.environ[port_env_var] = '{0}'.format(port)
 
     venv = '/tmp/jenkins/envs/{0}-{1}'.format(project_name, env)
@@ -131,7 +131,7 @@ def run_tests(venv_path):
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
-    port = next_port()
+    port = next(_port())
     os.environ['CLA_PUBLIC_PORT'] = '{0}'.format(port)
     run(
         '{conf} {venv}/bin/python manage.py runserver -p {port} -D -R'.format(
