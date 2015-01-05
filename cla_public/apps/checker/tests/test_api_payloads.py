@@ -9,7 +9,7 @@ from cla_public import app
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.checker.fields import MoneyIntervalForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
-    PropertiesForm, SavingsForm
+    PropertiesForm, SavingsForm, TaxCreditsForm
 
 
 def get_en_locale():
@@ -28,6 +28,12 @@ class TestApiPayloads(unittest.TestCase):
 
     def tearDown(self):
         self.patcher.stop()
+
+    def flatten_dict(self, field_name, data_dict):
+        return {'%s-%s' % (field_name, key): val for key, val in data_dict.items()}
+
+    def flatten_list_of_dicts(self, field_name, data_list):
+        return {'%s-%s-%s' % (field_name, num, key): val for num, d in enumerate(data_list) for key, val in d.items()}
 
     def form(self, form_class, form_data):
         form_class._get_translations = lambda args: None
@@ -108,24 +114,29 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['dependants_old'], 0)
 
     def test_property_form(self):
+        rent_amount = {
+            'per_interval_value': '30',
+            'interval_period': 'per_week'
+        }
+
+        property_one = {
+            'is_main_home': YES,
+            'other_shareholders': NO,
+            'property_value': '100',
+            'mortgage_remaining': '99',
+            'mortgage_payments': '1',
+            'is_rented': YES,
+            'in_dispute': NO
+        }
+
+        property_one.update(self.flatten_dict('rent_amount', rent_amount))
+
         properties = [
-            {
-                'is_main_home': YES,
-                'other_shareholders': NO,
-                'property_value': '100',
-                'mortgage_remaining': '99',
-                'mortgage_payments': '1',
-                'is_rented': NO,
-                'rent_amount': {
-                    'per_interval_value': '30',
-                    'interval_period': 'per_week'
-                },
-                'in_dispute': NO
-            },
+            property_one,
         ]
 
         # need to convert FieldList to flat fields to load in to form
-        form_data = {'properties-%s-%s' % (num, key): val for num, p in enumerate(properties) for key, val in p.items()}
+        form_data = self.flatten_list_of_dicts('properties', properties)
 
         payload = self.payload(PropertiesForm, form_data)
 
@@ -135,8 +146,8 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['property_set'][0]['mortgage_left'], 9900)
         self.assertEqual(payload['property_set'][0]['share'], 100)
         self.assertEqual(payload['property_set'][0]['disputed'], NO)
-        self.assertEqual(payload['property_set'][0]['rent']['per_interval_value'], 0)
-        self.assertEqual(payload['property_set'][0]['rent']['interval_period'], 'per_month')
+        self.assertEqual(payload['property_set'][0]['rent']['per_interval_value'], 3000)
+        self.assertEqual(payload['property_set'][0]['rent']['interval_period'], 'per_week')
         self.assertEqual(payload['property_set'][0]['main'], YES)
 
     def test_saving_form(self):
@@ -161,3 +172,39 @@ class TestApiPayloads(unittest.TestCase):
         payload = self.payload(SavingsForm, form_data)
 
         self.assertEqual(payload['you']['savings']['asset_balance'], 0, msg=u'Disregard valuables lass than £500')
+
+    def test_tax_credit_form(self):
+        form_mi_data = {
+            'child_benefit': {
+                'per_interval_value': '21',
+                'interval_period': 'per_week'
+            },
+            'child_tax_credit': {
+                'per_interval_value': '32',
+                'interval_period': 'per_week'
+            },
+            'total_other_benefit': {
+                'per_interval_value': '43',
+                'interval_period': 'per_week'
+            },
+        }
+
+        form_data = {
+            'benefits': 'asylum-support',
+            'other_benefits': YES,
+        }
+
+        for field_name, money_interval_dict in form_mi_data.items():
+            form_data.update(self.flatten_dict(field_name, money_interval_dict))
+
+        payload = self.payload(TaxCreditsForm, form_data)
+
+        self.assertEqual(payload['on_nass_benefits'], True)
+        self.assertEqual(payload['you']['income']['child_benefits']['per_interval_value'], 2100)
+        self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 3200)
+        self.assertEqual(payload['you']['income']['benefits']['per_interval_value'], 4300)
+
+
+
+
+
