@@ -201,7 +201,7 @@ class PropertyForm(NoCsrfForm):
             'mortgage_left': self.mortgage_remaining.data,
             'share': share,
             'disputed': self.in_dispute.data,
-            'rent': self.rent_amount.data,
+            'rent': self.rent_amount.data if self.is_rented.data == YES else money_interval(0),
             'main': self.is_main_home.data
         }
 

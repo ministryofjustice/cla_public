@@ -6,7 +6,9 @@ from werkzeug.datastructures import MultiDict
 
 from cla_public import app
 from cla_public.apps.checker.constants import NO, YES
-from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm
+from cla_public.apps.checker.fields import MoneyIntervalForm
+from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
+    PropertiesForm, PropertyForm
 
 
 def get_en_locale():
@@ -26,9 +28,12 @@ class TestApiPayloads(unittest.TestCase):
     def tearDown(self):
         self.patcher.stop()
 
-    def payload(self, form_class, form_data):
+    def form(self, form_class, form_data):
         form_class._get_translations = lambda args: None
-        form = form_class(MultiDict(form_data), csrf_enabled=False)
+        return form_class(MultiDict(form_data), csrf_enabled=False)
+
+    def payload(self, form_class, form_data):
+        form = self.form(form_class, form_data)
         return form.api_payload()
 
     def test_your_benefits_form_passported(self):
@@ -100,3 +105,35 @@ class TestApiPayloads(unittest.TestCase):
         payload = self.payload(AboutYouForm, form_data)
         self.assertEqual(payload['dependants_young'], 0)
         self.assertEqual(payload['dependants_old'], 0)
+
+    def test_property_form(self):
+        properties = [
+            {
+                'is_main_home': YES,
+                'other_shareholders': NO,
+                'property_value': '100',
+                'mortgage_remaining': '99',
+                'mortgage_payments': '1',
+                'is_rented': NO,
+                'rent_amount': {
+                    'per_interval_value': '30',
+                    'interval_period': 'per_week'
+                },
+                'in_dispute': NO
+            },
+        ]
+
+        # need to convert FieldList to flat fields to load in to form
+        form_data = {'properties-%s-%s' % (num, key): val for num, p in enumerate(properties) for key, val in p.items()}
+
+        payload = self.payload(PropertiesForm, form_data)
+
+        self.assertEqual(len(payload['property_set']), 1)
+
+        self.assertEqual(payload['property_set'][0]['value'], 10000)
+        self.assertEqual(payload['property_set'][0]['mortgage_left'], 9900)
+        self.assertEqual(payload['property_set'][0]['share'], 100)
+        self.assertEqual(payload['property_set'][0]['disputed'], NO)
+        self.assertEqual(payload['property_set'][0]['rent']['per_interval_value'], 0)
+        self.assertEqual(payload['property_set'][0]['rent']['interval_period'], 'per_month')
+        self.assertEqual(payload['property_set'][0]['main'], YES)
