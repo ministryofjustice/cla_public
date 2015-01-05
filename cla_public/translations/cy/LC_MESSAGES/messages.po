@@ -1549,8 +1549,7 @@ msgstr "Cyn dechrau"
 
 #: cla_public/templates/index.html:20
 msgid ""
-"To use this service, you‚Äôll need details of the following, for you and "
-"your partner, if you have one"
+"To use this service, you’ll need details of the following, for you and your partner, if you have one"
 msgstr "Er mwyn defnyddioír gwasanaeth hwn, bydd angen i chi gael y manylion canlynol ar eich cyfer chi ac ar gyfer eich partner, os oes gennych un"
 
 #: cla_public/templates/index.html:22
@@ -1571,7 +1570,7 @@ msgstr "unrhyw fudd-daliadau yr ydych chiín eu cael"
 
 #: cla_public/templates/index.html:28
 msgid ""
-"It might be useful to have your last month‚Äôs payslips (if you‚Äôre "
+"It might be useful to have your last month’s payslips (if you’re "
 "working), bank statements, recent benefit letters, current valuation for "
 "any property you own and  mortgage statements to hand."
 msgstr "Efallai y byddaiín ddefnyddiol cael eich slipiau cyflog am y mis blaenorol (os ydych yn gweithio), cyfriflenni banc, llythyrau budd-daliadau diweddar, prisiad cyfredol unrhyw eiddo yr ydych yn berchen arno a chyfriflenni morgais wrth law."
@@ -1585,7 +1584,7 @@ msgstr "Atebwch yr holl gwestiynau yn gywir ac yn onest. Efallai bydd arnoch ang
 #: cla_public/templates/index.html:32
 msgid ""
 "At the end you will get an indication of whether you might qualify for "
-"advice from CLA ‚Äì but you won‚Äôt get a final decision until you speak to "
+"advice from CLA – but you won’t get a final decision until you speak to "
 "us."
 msgstr "Ar y diwedd, cewch syniad ynghylch a fyddech yn gymwys i gael cyngor gan CLA - ond ni chewch y penderfyniad terfynol tan y byddwch yn siarad ‚ ni. "
 
@@ -1597,7 +1596,7 @@ msgid ""
 msgstr "Gallwch wneud gwiriad sydyn i weld os allwch gael cymorth cyfreithiol ar gyfer eich problem benodol a chanfod os mai CLA ywír dewis gorau o gymorth"
 
 #: cla_public/templates/index.html:36
-msgid "Ar gyfer pwy y maeír gwasanaeth hwn?"
+msgid "Who this service is for"
 msgstr "Ar gyfer pwy y maeír gwasanaeth hwn?"
 
 #: cla_public/templates/index.html:38
@@ -1611,13 +1610,13 @@ msgstr "Maeír gwasanaeth hwn ar gyfer pobl sydd yn byw yng Nghymru a Lloegr. Ma
 
 #: cla_public/templates/index.html:40
 msgid ""
-"If you‚Äôve been charged with a crime, this service doesn‚Äôt apply to you. "
+"If you’ve been charged with a crime, this service doesn’t apply to you. "
 "Ask your solicitor or barrister about criminal legal aid."
 msgstr "Os ydych chi wedi cael eich cyhuddo o drosedd, nid ywír gwasanaeth hwn yn berthnasol i chi. Holwch eich cyfreithiwr neu fargyfreithiwr am gymorth cyfreithiol troseddol."
 
 #: cla_public/templates/index.html:42
 msgid ""
-"This online service is only for adults. If you‚Äôre under 18, please "
+"This online service is only for adults. If you’re under 18, please "
 "contact <a href=\"https://www.gov.uk/civil-legal-advice\">Civil Legal "
 "Advice</a>."
 msgstr "Maeír gwasanaeth ar-lein hwn ar gyfer oedolion yn unig. Os ydych dan 18 oed, gofynnwch i ni eich ffonioín Ùl. "
