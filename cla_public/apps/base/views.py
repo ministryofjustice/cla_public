@@ -15,6 +15,7 @@ from flask.ext.babel import lazy_gettext as _, gettext
 from cla_public.apps.base import base
 from cla_public.apps.base.decorators import api_proxy
 from cla_public.apps.base.forms import FeedbackForm
+from cla_public.apps.base.mock_addressfinder import mock_addressfinder
 from cla_public.apps.checker.api import get_ordered_organisations_by_category
 import cla_public.apps.base.filters
 import cla_public.apps.base.extensions
@@ -28,6 +29,7 @@ log = logging.getLogger(__name__)
 def index():
     session.clear()
     return render_template('index.html')
+
 
 @base.route('/cookies')
 def cookies():
@@ -64,6 +66,10 @@ def feedback_confirmation():
 @base.route('/addressfinder/<path:path>', methods=['GET'])
 @api_proxy(return_value=[], json_response=True)
 def addressfinder_proxy_view(path):
+
+    if current_app.config.get('TESTING'):
+        return mock_addressfinder(request.args)
+
     response = requests.get(
         '{host}/{path}?{params}'.format(
             host=current_app.config['ADDRESSFINDER_API_HOST'],
@@ -76,6 +82,7 @@ def addressfinder_proxy_view(path):
         timeout=current_app.config.get('API_CLIENT_TIMEOUT', None)
     )
     return response.text
+
 
 @base.route('/session-expired')
 def session_expired():
