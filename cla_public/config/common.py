@@ -82,8 +82,8 @@ STATSD_PORT = os.environ.get('STATSD_PORT', 8125)
 EXTENSIONS = []
 
 LANGUAGES = {
-    'cy': 'Welsh',
     'en': 'English',
+    'cy': 'Welsh',
 }
 
 config_path = lambda x: os.path.join(PROJECT_ROOT, 'config', 'forms', x, 'forms_config.yml')
