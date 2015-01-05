@@ -84,12 +84,49 @@ def update_static_assets():
     run('gulp')
 
 
+def random_port(start_from=8000, up_to=8999):
+    return random.randint(start_from, up_to)
+
+
+last_random_port = None
+
+
+def next_port():
+    if not last_random_port:
+        last_random_port = random_port()
+    else:
+        last_random_port += 1
+    return last_random_port
+
+
+def run_server(
+        env,
+        project_name='cla_backend',
+        port_env_var='CLA_BACKEND_PORT',
+        project_dir='/srv/jenkins/workspace/CLA Backend - integration'):
+
+    port = next_port()
+    os.environ[port_env_var] = '{0}'.format(port)
+
+    venv = '/tmp/jenkins/envs/{0}-{1}'.format(project_name, env)
+
+    run((
+        'cd {workspace} && '
+        '{venv}/bin/python manage.py testserver {fixtures} --addrport {port} '
+        '--noinput --settings=cla_backend.settings.jenkins > /dev/null').format(
+            workspace=project_dir.replace(' ', '\ '),
+            venv=venv,
+            fixtures=fixtures,
+            port=port),
+        background=True)
+
+
 def run_tests(venv_path):
     config = 'CLA_PUBLIC_CONFIG=config/jenkins.py'
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
-    port = random.randint(8007, 8999)
+    port = next_port()
     os.environ['CLA_PUBLIC_PORT'] = '{0}'.format(port)
     run(
         '{conf} {venv}/bin/python manage.py runserver -p {port} -D -R'.format(
@@ -119,12 +156,16 @@ def compile_messages(venv_path):
 
 def main():
     try:
-        venv_path = make_virtualenv(env_name())
+        env = env_name()
+        venv_path = make_virtualenv(env)
         install_dependencies(venv_path)
         remove_old_template_js()
         update_static_assets()
         compile_messages(venv_path)
         clean_pyc()
+        run_server(env)
+        wait_until_available('http://localhost:{port}/admin/'.format(
+            port=os.environ.get('CLA_BACKEND_PORT')))
         run_tests(venv_path)
     finally:
         kill_all_background_processes()
