@@ -1,8 +1,22 @@
 from __future__ import unicode_literals
+import mock
 import unittest
 
 from flask import url_for, session
 from cla_public import app
+from cla_public.apps.checker import api
+
+
+def mock_api_connection():
+    conn = mock.Mock()
+    conn.eligibility_check.is_eligible.post.return_value = {
+        'is_eligible': 'unknown'}
+    conn.eligibility_check.post.return_value = {
+        'reference': 'DUMMY_REF'}
+    return conn
+
+
+api.get_api_connection = mock_api_connection
 
 
 def make_key(form, field):
