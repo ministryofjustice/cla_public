@@ -84,19 +84,11 @@ def update_static_assets():
     run('gulp')
 
 
-def random_port(start_from=8000, up_to=8999):
-    return random.randint(start_from, up_to)
-
-
-last_random_port = None
-
-
-def next_port():
-    if not last_random_port:
-        last_random_port = random_port()
-    else:
-        last_random_port += 1
-    return last_random_port
+def next_port(start_from=8000, up_to=8999):
+    port = random.randing(start_from, up_to)
+    while True:
+        yield port
+        port += 1
 
 
 def run_server(
