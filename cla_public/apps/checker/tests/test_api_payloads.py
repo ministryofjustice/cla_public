@@ -6,7 +6,7 @@ from werkzeug.datastructures import MultiDict
 from cla_public import app
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
-    PropertiesForm, SavingsForm, TaxCreditsForm
+    PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm
 
 
 def get_en_locale():
@@ -200,6 +200,56 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['income']['child_benefits']['per_interval_value'], 2100)
         self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 3200)
         self.assertEqual(payload['you']['income']['benefits']['per_interval_value'], 4300)
+
+    def test_income_form(self):
+        form_mi_data = {
+            'earnings': {
+                'per_interval_value': '1',
+                'interval_period': 'per_week'
+            },
+            'income_tax': {
+                'per_interval_value': '2',
+                'interval_period': 'per_week'
+            },
+            'national_insurance': {
+                'per_interval_value': '3',
+                'interval_period': 'per_week'
+            },
+            'working_tax_credit': {
+                'per_interval_value': '4',
+                'interval_period': 'per_month'
+            },
+            'maintenance': {
+                'per_interval_value': '5',
+                'interval_period': 'per_week'
+            },
+            'pension': {
+                'per_interval_value': '6',
+                'interval_period': 'per_week'
+            },
+            'other_income': {
+                'per_interval_value': '7',
+                'interval_period': 'per_week'
+            },
+        }
+
+        form_data = {}
+        for field_name, money_interval_dict in form_mi_data.items():
+            form_data.update(self.flatten_dict(field_name, money_interval_dict))
+
+        payload = self.payload(IncomeFieldForm, form_data)
+
+        self.assertEqual(payload['income']['earnings']['per_interval_value'], 100)
+        self.assertEqual(payload['income']['earnings']['interval_period'], 'per_week')
+        self.assertEqual(payload['income']['self_employment_drawings']['per_interval_value'], 0)
+        self.assertEqual(payload['income']['tax_credits']['per_interval_value'], 400)
+        self.assertEqual(payload['income']['tax_credits']['interval_period'], 'per_month')
+        self.assertEqual(payload['income']['maintenance_received']['per_interval_value'], 500)
+        self.assertEqual(payload['income']['pension']['per_interval_value'], 600)
+        self.assertEqual(payload['income']['other_income']['per_interval_value'], 700)
+
+        self.assertEqual(payload['deductions']['income_tax']['per_interval_value'], 200)
+        self.assertEqual(payload['deductions']['national_insurance']['per_interval_value'], 300)
 
 
 
