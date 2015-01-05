@@ -59,6 +59,6 @@ ADD ./ /home/app/flask
 #WORKDIR /home/app/flask
 
 # PIP INSTALL APPLICATION
-RUN cd /home/app/flask && pip install -r requirements.txt && find . -name '*.pyc' -delete
+RUN cd /home/app/flask && pip install -r requirements.txt && find . -name '*.pyc' -delete && pybabel compile -d cla_public/translations
 
 ADD ./docker/nginx.conf /etc/nginx/nginx.conf
