@@ -13,6 +13,7 @@
     "default" : {
       "launch_url" : "http://localhost:${CLA_PUBLIC_PORT}/",
       "silent": true,
+      "exclude": "thresholds.js",
       "desiredCapabilities": {
         "browserName": "phantomjs",
         "javascriptEnabled" : true,
