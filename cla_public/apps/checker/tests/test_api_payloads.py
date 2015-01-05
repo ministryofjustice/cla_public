@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 from mock import Mock, patch
 import unittest
-
-import flask
 from werkzeug.datastructures import MultiDict
 
 from cla_public import app
 from cla_public.apps.checker.constants import NO, YES
-from cla_public.apps.checker.fields import MoneyIntervalForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm
 
