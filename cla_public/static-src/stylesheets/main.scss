@@ -18,6 +18,16 @@
 @import 'split-panels';
 @import 'shame';
 
+html {
+  height: 100%;
+}
+
+body {
+  @include gradient(white 400px, $grey-3 400px);
+  filter: none;
+  min-height: 100%;
+}
+
 @media print {
   body {
     font-size: 7pt !important;
