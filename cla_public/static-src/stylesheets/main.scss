@@ -16,7 +16,6 @@
 @import 'org-list';
 @import 'sidebar';
 @import 'split-panels';
-@import 'shame';
 
 @media print {
   body {
@@ -94,22 +93,6 @@
       width: 30%;
     }
   }
-}
-
-.grid-row {
-  @extend %grid-row;
-}
-
-.column-two-thirds {
-  @include grid-column(2/3);
-}
-
-article .info-notice {
-  border-left: 10px solid $border-colour;
-  margin-bottom: 1em;
-}
-article .application-notice {
-  padding: 0.1em 0 0.1em 1em;
 }
 
 
