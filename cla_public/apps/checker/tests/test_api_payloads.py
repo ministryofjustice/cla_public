@@ -8,7 +8,7 @@ from cla_public import app
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm, \
-    IncomeAndTaxForm, income_form
+    IncomeAndTaxForm, income_form, OutgoingsForm, ApplicationForm
 
 
 def get_en_locale():
@@ -33,6 +33,11 @@ class TestApiPayloads(unittest.TestCase):
 
     def flatten_list_of_dicts(self, field_name, data_list):
         return {'%s-%s-%s' % (field_name, num, key): val for num, d in enumerate(data_list) for key, val in d.items()}
+
+    def merge_money_intervals(self, form_data, form_mi_data):
+        for field_name, money_interval_dict in form_mi_data.items():
+            form_data.update(self.flatten_dict(field_name, money_interval_dict))
+        return form_data
 
     def form(self, form_class, form_data):
         form_class._get_translations = lambda args: None
@@ -193,8 +198,7 @@ class TestApiPayloads(unittest.TestCase):
             'other_benefits': YES,
         }
 
-        for field_name, money_interval_dict in form_mi_data.items():
-            form_data.update(self.flatten_dict(field_name, money_interval_dict))
+        form_data = self.merge_money_intervals(form_data, form_mi_data)
 
         payload = self.payload(TaxCreditsForm, form_data)
 
@@ -235,9 +239,7 @@ class TestApiPayloads(unittest.TestCase):
             },
         }
 
-        form_data = {}
-        for field_name, money_interval_dict in form_mi_data.items():
-            form_data.update(self.flatten_dict(field_name, money_interval_dict))
+        form_data = self.merge_money_intervals({}, form_mi_data)
 
         payload = self.payload(IncomeFieldForm, form_data)
 
@@ -265,4 +267,34 @@ class TestApiPayloads(unittest.TestCase):
         self.assertIn('you', payload)
         self.assertIn('partner', payload)
 
+    def test_outgoing_form(self):
+        form_mi_data = {
+            'rent': {
+                'per_interval_value': '27',
+                'interval_period': 'per_month'
+            },
+            'maintenance': {
+                'per_interval_value': '38',
+                'interval_period': 'per_week'
+            },
+            'childcare': {
+                'per_interval_value': '49',
+                'interval_period': 'per_week'
+            },
+        }
 
+        form_data = {
+            'income_contribution': '23',
+        }
+
+        form_data = self.merge_money_intervals(form_data, form_mi_data)
+
+        payload = self.payload(OutgoingsForm, form_data)
+
+        self.assertEqual(payload['you']['deductions']['rent']['per_interval_value'], 2700)
+        self.assertEqual(payload['you']['deductions']['rent']['interval_period'], 'per_month')
+        self.assertEqual(payload['you']['deductions']['maintenance']['per_interval_value'], 3800)
+        self.assertEqual(payload['you']['deductions']['maintenance']['interval_period'], 'per_week')
+        self.assertEqual(payload['you']['deductions']['criminal_legalaid_contributions'], 2300)
+        self.assertEqual(payload['you']['deductions']['childcare']['per_interval_value'], 4900)
+        self.assertEqual(payload['you']['deductions']['childcare']['interval_period'], 'per_week')
