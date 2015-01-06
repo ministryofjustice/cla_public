@@ -17,7 +17,7 @@ PROJECT_NAME = "cla_public"
 background_processes = Queue()
 
 
-def env_name():
+def parse_args():
     parser = argparse.ArgumentParser(
         description='Build project ready for testing by Jenkins.')
     parser.add_argument(
@@ -26,8 +26,15 @@ def env_name():
         type=str,
         nargs=1,
         help='e.g. integration, production, etc.')
+    parser.add_argument(
+        '--threshold-tests',
+        action='store_true',
+        help='run threshold tests')
+
     args = parser.parse_args()
-    return args.envname[0]
+    return {
+        'envname': args.envname[0],
+        'threshold_tests': args.threshold_tests}
 
 
 def run(command, background=False, **kwargs):
@@ -126,7 +133,7 @@ def run_server(
         background=True)
 
 
-def run_tests(venv_path):
+def run_tests(venv_path, threshold_tests=False):
     config = 'CLA_PUBLIC_CONFIG=config/jenkins.py'
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
@@ -140,7 +147,10 @@ def run_tests(venv_path):
             port=port),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=port))
-    run('./nightwatch -c tests/nightwatch/jenkins.json')
+    nightwatch_config = 'jenkins.json'
+    if threshold_tests:
+        nightwatch_config = 'jenkins-threshold.json'
+    run('./nightwatch -c tests/nightwatch/{0}'.format(nightwatch_config))
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
@@ -161,7 +171,8 @@ def compile_messages(venv_path):
 
 def main():
     try:
-        env = env_name()
+        args = parse_args()
+        env = args['envname']
         venv_path = make_virtualenv(env)
         install_dependencies(venv_path)
         remove_old_template_js()
@@ -171,7 +182,7 @@ def main():
         run_server(env)
         wait_until_available('http://localhost:{port}/admin/'.format(
             port=os.environ.get('CLA_BACKEND_PORT')))
-        run_tests(venv_path)
+        run_tests(venv_path, args['threshold_tests'])
     finally:
         kill_all_background_processes()
 
