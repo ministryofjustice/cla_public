@@ -288,5 +288,145 @@
       }
     ],
     "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Test Gross Income Limit - Pass",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "benefits"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 1,
+          "num_children": 2,
+          "have_dependants": 0,
+          "own_property": 0,
+          "aged_60_or_over": 0,
+          "have_savings": 0,
+          "have_valuables": 0,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "benefits-tax-credits",
+        "fields": {
+          "child_benefit-per_interval_value": 0,
+          "child_benefit-interval_period": "per_week",
+          "child_tax_credit-per_interval_value": 0,
+          "child_tax_credit-interval_period": "per_week",
+          "other_benefits": 0
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 2657,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 1000,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 100,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 0,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 900,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 247.56,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  },
+
+  {
+    "name": "SCENARIO: Test Gross Income Limit - Fail",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "benefits"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 1,
+          "num_children": 2,
+          "have_dependants": 0,
+          "own_property": 0,
+          "aged_60_or_over": 0,
+          "have_savings": 0,
+          "have_valuables": 0,
+          "is_employed": 1,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "benefits-tax-credits",
+        "fields": {
+          "child_benefit-per_interval_value": 0,
+          "child_benefit-interval_period": "per_week",
+          "child_tax_credit-per_interval_value": 0,
+          "child_tax_credit-interval_period": "per_week",
+          "other_benefits": 0
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 2657.01,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 1000,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 100,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 0,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 900,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 247.56,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
   }
 ]
