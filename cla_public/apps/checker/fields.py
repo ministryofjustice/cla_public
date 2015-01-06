@@ -6,7 +6,7 @@ import re
 import datetime
 
 from flask import session
-from flask.ext.babel import lazy_gettext as _
+from flask.ext.babel import lazy_gettext as _, gettext
 import pytz
 from wtforms import Form as NoCsrfForm, TextAreaField
 from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
@@ -92,7 +92,7 @@ class YesNoField(RadioField):
     def __init__(self, label=None, validators=None, **kwargs):
         choices = [(YES, 'Yes'), (NO, 'No')]
         if validators is None:
-            validators = [InputRequired(message=u'Please choose Yes or No')]
+            validators = [InputRequired(message=gettext(u'Please choose Yes or No'))]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=text_type,
             choices=choices, **kwargs)
