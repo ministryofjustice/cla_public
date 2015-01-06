@@ -15,6 +15,8 @@
   <![endif]-->
 {% endblock %}
 
+{% block body_classes %}{{ self | quoted }}{% endblock %}
+
 {% block content %}
   {% include "_phase-tag.html" %}
 

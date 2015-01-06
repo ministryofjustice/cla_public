@@ -1,6 +1,7 @@
 from cla_public.apps.base import base
 from babel.dates import format_datetime
 from dateutil import parser
+import re
 
 @base.app_template_filter()
 def datetime(dt, format='medium', locale='en_GB'):
@@ -11,3 +12,10 @@ def datetime(dt, format='medium', locale='en_GB'):
     elif format == 'short':
         format="dd/MM/y, h:mma"
     return format_datetime(dt, format, locale=locale)
+
+@base.app_template_filter('quoted')
+def quoted(s):
+    l = re.findall('\'([^\']*)\.', str(s))
+    if l:
+        return l[0]
+    return None
