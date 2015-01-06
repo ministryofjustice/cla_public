@@ -5,7 +5,7 @@ module.exports = {
     client
       .init(client.launch_url + '/cookies')
       .maximizeWindow()
-      .waitForElementVisible('body', 1000)
+      .waitForElementVisible('body.cookies', 2000)
       .assert.containsText('h1', 'Cookies')
     ;
   },
@@ -14,7 +14,7 @@ module.exports = {
     client
       .init(client.launch_url + '/privacy')
       .maximizeWindow()
-      .waitForElementVisible('body', 1000)
+      .waitForElementVisible('body.privacy', 2000)
       .assert.containsText('h1', 'Terms and conditions and privacy')
     ;
   },
@@ -23,7 +23,7 @@ module.exports = {
     client
       .init(client.launch_url + '/feedback')
       .maximizeWindow()
-      .waitForElementVisible('body', 1000)
+      .waitForElementVisible('body.feedback', 2000)
       .assert.containsText('h1', 'Your feedback')
       .end()
     ;
