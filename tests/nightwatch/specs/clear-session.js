@@ -9,6 +9,7 @@ module.exports = {
 
   'About you': function(client) {
     client
+      .waitForElementVisible('form[action="/about"]', 2000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
       .end()
@@ -26,7 +27,10 @@ module.exports = {
   },
 
   'Check debt category NOT selected': function(client) {
-    client.assert.urlContains('/problem');
+    client
+      .waitForElementVisible('form[action="/problem"]', 2000)
+      .assert.urlContains('/problem')
+    ;
     common.checkAttributeIsNotPresent(client, 'input[name="categories"][value="debt"]', 'checked');
 
     client.end();

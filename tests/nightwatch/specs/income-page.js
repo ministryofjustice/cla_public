@@ -12,16 +12,14 @@ module.exports = {
   'Categories of law (Your problem)': common.selectDebtCategory,
 
   'About you': function(client) {
-    client
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-    ;
+    common.aboutPage(client);
     common.aboutPageSetAllToNo(client);
     client.submitForm('form');
   },
 
   'Income': function(client) {
     client
+      .waitForElementVisible('form[action="/income"]', 2000)
       .assert.urlContains('/income')
       .assert.containsText('h1', 'Your money coming in')
     ;
@@ -35,19 +33,31 @@ module.exports = {
         .assert.hidden(util.format('[name="your_income-%s-interval_period"]', item))
       ;
     });
-    client.back();
+    client
+      .back()
+      .waitForElementVisible('form[action="/about"]', 2000)
+    ;
     common.setYesNoFields(client, 'is_employed', 1);
-    client.submitForm('form');
+    client
+      .submitForm('form')
+      .waitForElementVisible('form[action="/income"]', 2000)
+    ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
         .assert.visible(util.format('[name="your_income-%s-per_interval_value"]', item))
         .assert.visible(util.format('[name="your_income-%s-interval_period"]', item))
       ;
     });
-    client.back();
+    client
+      .back()
+      .waitForElementVisible('form[action="/about"]', 2000)
+    ;
     common.setYesNoFields(client, 'is_employed', 0);
     common.setYesNoFields(client, 'is_self_employed', 1);
-    client.submitForm('form');
+    client
+      .submitForm('form')
+      .waitForElementVisible('form[action="/income"]', 2000)
+    ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
         .assert.visible(util.format('[name="your_income-%s-per_interval_value"]', item))
@@ -69,12 +79,16 @@ module.exports = {
       ;
     });
 
-    client.back();
+    client
+      .back()
+      .waitForElementVisible('form[action="/about"]', 2000)
+    ;
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, ['is_self_employed', 'in_dispute', 'partner_is_self_employed'], 0);
     common.setYesNoFields(client, 'partner_is_employed', 1);
     client
       .submitForm('form')
+      .waitForElementVisible('form[action="/income"]', 2000)
       .assert.containsText('h1', 'You and your partner’s money coming in')
       .assert.containsText('body', 'Your money coming in')
       .assert.containsText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record money coming in for your partner, if you have one, in the next section.')
@@ -85,9 +99,15 @@ module.exports = {
         .assert.visible(util.format('[name="partner_income-%s-interval_period"]', item))
       ;
     });
-    client.back();
+    client
+      .back()
+      .waitForElementVisible('form[action="/about"]', 2000)
+    ;
     common.setYesNoFields(client, 'is_employed', 1);
-    client.submitForm('form');
+    client
+      .submitForm('form')
+      .waitForElementVisible('form[action="/income"]', 2000)
+    ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
         .assert.visible(util.format('[name="partner_income-%s-per_interval_value"]', item))
@@ -128,7 +148,9 @@ module.exports = {
     client
       .click('body')
       .submitForm('form')
-      .assert.urlContains('/outgoings');
+      .waitForElementVisible('form[action="/outgoings"]', 2000)
+      .assert.urlContains('/outgoings')
+    ;
 
     client.end();
   }
