@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+import datetime
 from flask import session
 from mock import Mock, patch
 import unittest
+import pytz
 from werkzeug.datastructures import MultiDict
 
 from cla_public import app
@@ -298,3 +300,52 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['deductions']['criminal_legalaid_contributions'], 2300)
         self.assertEqual(payload['you']['deductions']['childcare']['per_interval_value'], 4900)
         self.assertEqual(payload['you']['deductions']['childcare']['interval_period'], 'per_week')
+
+    def test_application_form(self):
+        adaptations_data = {
+            'bsl_webcam': YES,
+            'minicom': YES,
+            'text_relay': YES,
+            'welsh': YES,
+            'is_other_language': YES,
+            'other_language': YES,
+            'is_other_adaptation': YES,
+            'other_adaptation': 'other',
+        }
+
+        form_data = {
+            'full_name': 'Full Name',
+            'contact_number': '000000000',
+            'safe_to_contact': YES,
+            'post_code': 'POSTCODE',
+            'address': '21 Jump Street',
+            'extra_notes': 'Extra notes',
+
+            'specific_day': 'today',
+            'time_today': '1945',
+            'time_tomorrow': '',
+            'day': '',
+            'time_in_day': '',
+        }
+
+        form_data.update(self.flatten_dict('adaptations', adaptations_data))
+
+        print form_data
+
+        payload = self.payload(ApplicationForm, form_data)
+
+        self.assertEqual(payload['personal_details']['full_name'], 'Full Name')
+        self.assertEqual(payload['personal_details']['postcode'], 'POSTCODE')
+        self.assertEqual(payload['personal_details']['mobile_phone'], '000000000')
+        self.assertEqual(payload['personal_details']['street'], '21 Jump Street')
+        self.assertEqual(payload['personal_details']['safe_to_contact'], YES)
+
+        self.assertEqual(payload['adaptation_details']['bsl_webcam'], True)
+        self.assertEqual(payload['adaptation_details']['minicom'], True)
+        self.assertEqual(payload['adaptation_details']['text_relay'], True)
+        self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
+        self.assertEqual(payload['adaptation_details']['notes'], 'other')
+
+        time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 45))
+        self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
+
