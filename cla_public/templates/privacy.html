@@ -325,8 +325,7 @@
     </li>
   </ul>
   <p>
-    {% trans %}You can read more about
-    <a href="https://www.gov.uk/help/cookies" rel="external" target="_blank">how cookies are used on gov.uk</a>.{% endtrans %}
+    {% trans cookie_url = url_for('.cookies') %}You can read more about <a href="{{ cookie_url }}">how cookies are used</a>.{% endtrans %}
   </p>
   <p>
     {% trans %}You can read about
