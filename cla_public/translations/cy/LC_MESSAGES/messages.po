@@ -1597,8 +1597,8 @@ msgid ""
 msgstr "Gallwch wneud gwiriad sydyn i weld os allwch gael cymorth cyfreithiol ar gyfer eich problem benodol a chanfod os mai CLA yw’r dewis gorau o gymorth"
 
 #: cla_public/templates/index.html:36
-msgid "Ar gyfer pwy y mae’r gwasanaeth hwn?"
-msgstr "Ar gyfer pwy y mae’r gwasanaeth hwn?"
+msgid "Who this service is for"
+msgstr "Ar gyfer pwy y mae’r gwasanaeth hwn"
 
 #: cla_public/templates/index.html:38
 msgid ""
