@@ -250,16 +250,13 @@ class PropertyList(FieldList):
 
     def validate(self, form, extra_validators=tuple()):
         super(PropertyList, self).validate(form, extra_validators)
-        self.errors = self.errors or []
 
-        has_main_property = False
-        for property in self.entries:
-            if property.is_main_home.data == YES:
-                if has_main_property:
-                    property.is_main_home.errors.append(
-                        self.gettext('You can only have 1 main Property'))
-                    self.errors.append(property.is_main_home.errors)
-                has_main_property = True
+        main_properties = filter(lambda x: x.is_main_home.data == YES, self.entries)
+
+        if len(main_properties) > 1:
+            message = self.gettext('You can only have 1 main Property')
+            map(lambda x: x.is_main_home.errors.append(message), main_properties)
+            self.errors.append(message)
 
         return len(self.errors) == 0
 
