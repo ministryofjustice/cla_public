@@ -28,7 +28,6 @@ def parse_args():
         help='e.g. integration, production, etc.')
     parser.add_argument(
         '--threshold-tests',
-        metavar='threshold_tests',
         action='store_true',
         help='run threshold tests')
 
