@@ -53,12 +53,15 @@ module.exports = {
     SAVINGS_QUESTIONS.VALUABLES.forEach(function(item) {
       client.assert.hidden(util.format('input[name="%s"]', item.name));
     });
-    client
-      .url(client.launch_url + '/about')
-      .waitForElementVisible('form[action="/about"]', 2000)
-    ;
+    client.end();
+  },
+
+  'More validation': function(client) {
+    common.startPage(client);
+    common.selectDebtCategory(client);
+    common.aboutPage(client);
+    common.aboutPageSetAllToNo(client);
     common.setYesNoFields(client, 'have_valuables', 1);
-    common.setYesNoFields(client, 'have_savings', 0);
     client
       .submitForm('form')
       .waitForElementVisible('form[action="/savings"]', 2000)
@@ -69,15 +72,15 @@ module.exports = {
     SAVINGS_QUESTIONS.MONEY.forEach(function(item) {
       client.assert.hidden(util.format('input[name="%s"]', item.name));
     });
+    client.end();
   },
 
   'Test outcomes': function(client) {
-    client
-      .url(client.launch_url + '/about')
-      .waitForElementVisible('form[action="/about"]', 2000)
-    ;
-    common.setYesNoFields(client, 'have_valuables', 1);
-    common.setYesNoFields(client, 'have_savings', 1);
+    common.startPage(client);
+    common.selectDebtCategory(client);
+    common.aboutPage(client);
+    common.aboutPageSetAllToNo(client);
+    common.setYesNoFields(client, ['have_valuables', 'have_savings'], 1);
     client
       .submitForm('form')
       .waitForElementVisible('form[action="/savings"]', 2000)
