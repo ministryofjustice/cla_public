@@ -2,7 +2,8 @@
 
 {% block inner_content %}
   <h1>{{ _('We do not provide advice about issues related to') }} {{ category_name|lower }}</h1>
-  <h2>
+
+  <p class="subtitle">
     {% if category == 'clinneg' %}
       {% trans %}You will usually only get Legal Aid for advice about Clinical Negligence if
       your child has been severely injured during birth or in the first 8 weeks of life{% endtrans %}
@@ -11,7 +12,7 @@
     {%- elif category != 'employment' -%}
       {{ _('You may be able to get advice from a legal advisor in your area') }}
     {%- endif -%}
-  </h2>
+  </p>
 
   {% if category == 'employment' %}
     <p>
@@ -62,7 +63,7 @@
   {% endif %}
 
   <p>
-    <a class="button" href="http://find-legal-advice.justice.gov.uk/">{{ _('Find a legal adviser') }}</a>
+    <a class="button button-large" href="http://find-legal-advice.justice.gov.uk/">{{ _('Find a legal adviser') }}</a>
   </p>
 
   {% if category == 'employment' %}
