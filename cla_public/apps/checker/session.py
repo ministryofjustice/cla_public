@@ -1,9 +1,11 @@
 import datetime
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 
+
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
     PASSPORTED_BENEFITS, YES, CATEGORIES
 from cla_public.apps.checker.utils import passported
+from cla_public.libs.utils import override_locale
 
 
 def namespace(ns):
@@ -38,7 +40,10 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def category_slug(self):
-        return self.category_name.lower().replace(' ', '-')
+        # force english translation for slug
+        with override_locale('en'):
+            slug = self.category_name.lower().replace(' ', '-')
+        return slug
 
     @property
     def has_savings(self):

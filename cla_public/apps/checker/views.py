@@ -18,6 +18,7 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
     OutgoingsForm, ApplicationForm
 from cla_public.apps.checker.honeypot import FIELD_NAME as HONEYPOT_FIELD_NAME
+from cla_public.libs.utils import override_locale
 
 
 log = logging.getLogger(__name__)
@@ -226,11 +227,13 @@ def help_organisations(category_name):
 
     category_name = category_name.replace('-', ' ').capitalize()
 
-    valid_outcomes = [name for field, name, description in CATEGORIES]
-    if category_name not in valid_outcomes:
-        abort(404)
+    # force english as knowledge base languages are in english
+    with override_locale('en'):
+        valid_outcomes = [name for field, name, description in CATEGORIES]
+        if category_name not in valid_outcomes:
+            abort(404)
 
-    category = (field for field, name, description in CATEGORIES if name == category_name).next()
+        category = (field for field, name, description in CATEGORIES if name == category_name).next()
 
     category_name = ORGANISATION_CATEGORY_MAPPING.get(category_name, category_name)
 
