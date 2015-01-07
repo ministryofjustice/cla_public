@@ -111,9 +111,13 @@ class MoneyField(IntegerField):
             pounds, _, pence = valuelist[0].strip().partition('.')
             pounds = re.sub(r'[\s,]+', '', pounds)
 
-            if pence and len(pence) != 2:
-                self.data = None
-                raise ValueError(self.gettext(u'Not a valid amount'))
+            if pence:
+                if len(pence) > 2:
+                    self.data = None
+                    raise ValueError(self.gettext(u'Not a valid amount'))
+
+                if len(pence) == 1:
+                    pence = '{0}0'.format(pence)
 
             try:
                 self.data = int(pounds) * 100
