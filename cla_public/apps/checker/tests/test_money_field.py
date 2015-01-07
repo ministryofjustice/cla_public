@@ -94,8 +94,8 @@ class TestMoneyField(unittest.TestCase):
         self.assertInvalidAmount('12.3 45.6')
 
     def test_no_commas_or_spaces_in_pence(self):
-        self.assertInvalidAmount('123.45,6')
-        self.assertInvalidAmount('123.45 6')
+        self.assertInvalidAmount('123.4,6')
+        self.assertInvalidAmount('123.4 6')
 
     def test_negative_amounts_ok(self):
         self.assertValidAmount('-32')
