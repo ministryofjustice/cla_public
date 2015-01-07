@@ -108,7 +108,7 @@ class MoneyField(IntegerField):
 
     def process_formdata(self, valuelist):
         if valuelist:
-            pounds, _, pence = valuelist[0].partition('.')
+            pounds, _, pence = valuelist[0].strip().partition('.')
             pounds = re.sub(r'[\s,]+', '', pounds)
 
             if pence and len(pence) != 2:
