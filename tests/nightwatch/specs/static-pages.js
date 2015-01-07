@@ -1,32 +1,40 @@
 'use strict';
 
-module.exports = {
-  'Cookies page': function(client) {
-    client
-      .init(client.launch_url + '/cookies')
-      .maximizeWindow()
-      .waitForElementVisible('body', 1000)
-      .assert.containsText('h1', 'Cookies')
-    ;
-  },
+var util = require('util');
 
-  'Privacy/terms page': function(client) {
-    client
-      .init(client.launch_url + '/privacy')
-      .maximizeWindow()
-      .waitForElementVisible('body', 1000)
-      .assert.containsText('h1', 'Terms and conditions and privacy')
-    ;
+var STATIC_PAGES = [
+  {
+    name: "cookies",
+    headline: "Cookies"
   },
-
-  'Feedback form page': function(client) {
-    client
-      .init(client.launch_url + '/feedback')
-      .maximizeWindow()
-      .waitForElementVisible('body', 1000)
-      .assert.containsText('h1', 'Your feedback')
-      .end()
-    ;
+  {
+    name: "privacy",
+    headline: "Terms and conditions and privacy"
+  },
+  {
+    name: "feedback",
+    headline: "Your feedback"
   }
+];
 
+module.exports = {
+  'Static pages': function(client) {
+    client
+      .deleteCookies()
+      .init()
+      .maximizeWindow()
+      .waitForElementVisible('body', 1000)
+    ;
+    STATIC_PAGES.forEach(function(item) {
+      client
+        .useXpath()
+        .click(util.format('//footer//a[@href="/%s"]', item.name))
+        .useCss()
+        .waitForElementVisible('body', 1000)
+        .assert.containsText('h1', item.headline)
+        .pause(1000)
+      ;
+    });
+    client.end();
+  }
 };

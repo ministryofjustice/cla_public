@@ -3,6 +3,7 @@
 module.exports = {
   '404 page': function(client) {
     client
+      .deleteCookies()
       .init(client.launch_url + '/qwertyuiopasdfghjklzxcvbnm')
       .maximizeWindow()
       .waitForElementVisible('body', 1000)
@@ -10,5 +11,4 @@ module.exports = {
       .end()
     ;
   }
-
 };
