@@ -57,27 +57,27 @@ class TestMoneyField(unittest.TestCase):
             form.max_val_moneyfield.process_errors,
             '{0} is not too high'.format(amount))
 
-    def test_moneyfield_integer(self):
+    def test_integer(self):
         self.assertValidAmount('500')
         self.assertAmount(50000, '500')
 
-    def test_moneyfield_decimal(self):
+    def test_decimal(self):
         self.assertValidAmount('10.5')
         self.assertAmount(1050, '10.5')
 
-    def test_moneyfield_amount(self):
+    def test_amount(self):
         self.assertValidAmount('12.34')
         self.assertAmount(1234, '12.34')
 
-    def test_moneyfield_too_many_decimal_places(self):
+    def test_too_many_decimal_places(self):
         self.assertInvalidAmount('12.345')
 
-    def test_moneyfield_not_a_number(self):
+    def test_not_a_number(self):
         self.assertInvalidAmount('abc')
         self.assertInvalidAmount('1twothree')
         self.assertInvalidAmount('one2three')
 
-    def test_moneyfield_ignore_commas_and_spaces(self):
+    def test_ignore_commas_and_spaces(self):
         self.assertValidAmount('1,200')
         self.assertAmount(120000, '1,200')
         self.assertValidAmount('1,,,,2')
@@ -89,23 +89,23 @@ class TestMoneyField(unittest.TestCase):
         self.assertValidAmount('123.4      ')
         self.assertAmount(12340, '123.4      ')
 
-    def test_moneyfield_only_one_decimal_point(self):
+    def test_only_one_decimal_point(self):
         self.assertInvalidAmount('1.23.45')
         self.assertInvalidAmount('12.3 45.6')
 
-    def test_moneyfield_no_commas_or_spaces_in_pence(self):
+    def test_no_commas_or_spaces_in_pence(self):
         self.assertInvalidAmount('123.45,6')
         self.assertInvalidAmount('123.45 6')
 
-    def test_moneyfield_negative_amounts_ok(self):
+    def test_negative_amounts_ok(self):
         self.assertValidAmount('-32')
         self.assertAmount(-3200, '-32', field='no_min_moneyfield')
 
-    def test_moneyfield_below_min_val(self):
+    def test_below_min_val(self):
         self.assertValidAmount('-32')
         self.assertAmountTooLow('-32')
         self.assertValidAmount('-12.34')
         self.assertAmountTooLow('-12.34')
 
-    def test_moneyfield_above_max_val(self):
+    def test_above_max_val(self):
         self.assertAmountTooHigh('600')
