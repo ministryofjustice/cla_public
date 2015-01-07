@@ -22,7 +22,6 @@ var SCENARIOS = []
   .concat(require('../modules/thresholds/pensioner-disregard'))
   .concat(require('../modules/thresholds/multiple-properties'))
   .concat(require('../modules/thresholds/user-test-scenarios'))
-  .concat(require('../modules/thresholds/calculator-timebase-scenarios'))
 ;
 
 module.exports = {
