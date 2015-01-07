@@ -208,7 +208,7 @@
   <h3>{{ _('How we collect and store your personal data') }}</h3>
   <table>
     <tr>
-      <th class="u-width-33">{{ _('Phone') }}</th>
+      <th class="u-width-20">{{ _('Phone') }}</th>
       <td>
         {% trans %}When you call <abbr>CLA</abbr> we will record relevant personal data that you provide within a secure digital system.
         <br><br>
@@ -257,7 +257,7 @@
   <h3>{{ _('Keeping your personal data safe from others') }}</h3>
   <table>
     <tr>
-      <th class="u-width-33">{{ _('Repeat Contacts') }}</th>
+      <th class="u-width-20">{{ _('Repeat Contacts') }}</th>
       <td>
         {% trans %}<abbr>CLA</abbr> will not disclose any personal information to anyone contacting the <abbr>CLA</abbr> service until
         they have successfully verified that their identity matches that of an existing record.{% endtrans %}
@@ -325,8 +325,7 @@
     </li>
   </ul>
   <p>
-    {% trans %}You can read more about
-    <a href="https://www.gov.uk/help/cookies"  rel="external" target="_blank">how cookies are used on gov.uk</a>.{% endtrans %}
+    {% trans cookie_url = url_for('.cookies') %}You can read more about <a href="{{ cookie_url }}">how cookies are used</a>.{% endtrans %}
   </p>
   <p>
     {% trans %}You can read about
