@@ -177,7 +177,8 @@ class TestApiPayloads(unittest.TestCase):
 
         payload = self.payload(SavingsForm, form_data)
 
-        self.assertEqual(payload['you']['savings']['asset_balance'], 0, msg=u'Disregard valuables lass than £500')
+        self.assertEqual(payload['you']['savings']['asset_balance'], 0,
+                         msg=u'Disregard valuables less than £500')
 
     def test_tax_credit_form(self):
         form_mi_data = {
