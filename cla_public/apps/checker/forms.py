@@ -219,6 +219,10 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             self.require_savings else SavingsForm.get_zero_api_payload()
         recursive_dict_update(payload, savings_data)
 
+        # add null/session income and set to 0 if on passported benefits later
+        income = IncomeForm().get_session_as_api_payload()
+        recursive_dict_update(payload, income)
+
         return payload
 
     @property
@@ -241,10 +245,16 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
         is_selected = lambda benefit: benefit in self.benefits.data
         as_tuple = lambda benefit: (benefit, is_selected(benefit))
         benefits = dict(map(as_tuple, PASSPORTED_BENEFITS))
-        return {
+        payload = {
             'specific_benefits': benefits,
             'on_passported_benefits': passported(self.benefits.data)
         }
+
+        if passported(self.benefits.data):
+            income = IncomeForm().get_zero_api_payload()
+            recursive_dict_update(payload, income)
+
+        return payload
 
 
 class PropertyForm(NoCsrfForm, FormSessionDataMixin):
