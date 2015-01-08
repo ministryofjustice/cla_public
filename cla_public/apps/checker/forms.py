@@ -40,7 +40,9 @@ class FormSessionDataMixin(object):
 
     @classmethod
     def get_session_as_api_payload(cls):
-        return cls(MultiDict({}), cls.get_session_data()).api_payload()
+        f = cls(MultiDict({}), cls.get_session_data())
+        f.process()
+        return f.api_payload()
 
     @classmethod
     def get_null_api_payload(cls):
