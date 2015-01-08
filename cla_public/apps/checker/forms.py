@@ -229,15 +229,6 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     def require_savings(self):
         return self.have_savings.data == YES or self.have_valuables.data == YES
 
-    @property
-    def require_your_income(self):
-        return self.is_employed.data == YES or self.is_self_employed.data == YES
-
-    @property
-    def require_partner_income(self):
-        return self.partner_is_employed.data == YES \
-            or self.partner_is_self_employed.data == YES
-
 
 class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
     benefits = PartnerMultiCheckboxField(
