@@ -6,8 +6,8 @@ import logging
 from flask import session, request
 from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, gettext, lazy_pgettext
-import pytz
-from wtforms import Form as NoCsrfForm
+from werkzeug.datastructures import MultiDict
+from wtforms import Form as NoCsrfForm, FieldList
 from wtforms import IntegerField, FormField
 from wtforms.validators import InputRequired, NumberRange
 
@@ -26,9 +26,46 @@ from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
     FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone, NotRequired
+from cla_public.libs.utils import recursive_dict_update
 
 
 log = logging.getLogger(__name__)
+
+
+class FormSessionDataMixin(object):
+
+    @classmethod
+    def get_session_data(cls):
+        return session.get_form_data(cls.__name__, as_object=True)
+
+    @classmethod
+    def get_session_as_api_payload(cls):
+        return cls(MultiDict({}), cls.get_session_data()).api_payload()
+
+    @classmethod
+    def get_null_api_payload(cls):
+        return cls().api_payload()
+
+    @classmethod
+    def get_zero_api_payload(cls):
+        """
+        Populate a form and nested forms with Zero values so if they don't
+        need to be filled out
+        """
+        def set_zero_values(form):
+            for field_name, field in form._fields.iteritems():
+                if isinstance(field, MoneyField) or isinstance(field, IntegerField):
+                    field.data = 0
+                elif isinstance(field, MoneyIntervalField):
+                    field.form.per_interval_value.data = 0
+                    field.form.interval_period.data = 'per_month'
+                elif isinstance(field, FormField):
+                    field.form = set_zero_values(field.form)
+                elif isinstance(field, FieldList):
+                    field.entries = []
+            return form
+
+        return set_zero_values(cls()).api_payload()
 
 
 class ProblemForm(ConfigFormMixin, Honeypot, Form):
@@ -170,6 +207,13 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
                 and self.partner_is_self_employed.data == YES:
             payload['partner'] = {'income': {
                 'self_employed': self.partner_is_self_employed.data}}
+
+        # need to delete properties if user changes to no property
+        # also need to save a blank property now if user selects owns_property
+        properties_data = PropertiesForm.get_session_as_api_payload() if \
+            self.own_property.data == YES else PropertiesForm.get_zero_api_payload()
+        recursive_dict_update(payload, properties_data)
+
         return payload
 
 
@@ -190,7 +234,7 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
         }
 
 
-class PropertyForm(NoCsrfForm):
+class PropertyForm(NoCsrfForm, FormSessionDataMixin):
     is_main_home = YesNoField(
         _(u'Is this property your main home?'),
         description=(
@@ -269,7 +313,7 @@ def sum_rents(rents):
     return reduce(sum_money_intervals, rents, money_interval(0))
 
 
-class PropertiesForm(ConfigFormMixin, Honeypot, Form):
+class PropertiesForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
     properties = PropertyList(
         FormField(PropertyForm), min_entries=1, max_entries=3)
 

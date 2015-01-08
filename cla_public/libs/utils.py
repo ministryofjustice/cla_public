@@ -1,4 +1,5 @@
 import contextlib
+from collections import Mapping
 from flask import current_app, request
 from flask.ext.babel import refresh
 
@@ -24,3 +25,21 @@ def override_locale(locale):
     set_locale_selector_func(lambda: locale)
     yield
     set_locale_selector_func(original)
+
+
+def recursive_dict_update(orig, new):
+    """
+    Update dict with new dict by recursively merging dictionaries
+    :param orig: dict - original dict
+    :param new: dict - updated values
+    :return: dict
+    """
+    for key, val in new.iteritems():
+        if isinstance(val, Mapping):
+            tmp = recursive_dict_update(orig.get(key, {}), val)
+            orig[key] = tmp
+        elif isinstance(val, list):
+            orig[key] = (orig.get('key', []) + val)
+        else:
+            orig[key] = new[key]
+    return orig
