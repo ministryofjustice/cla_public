@@ -428,5 +428,401 @@
       }
     ],
     "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Test Disregard Limit - £10k - pass",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 0,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 0,
+          "is_employed": 0,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 17999.99,
+          "investments": 0
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 310,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  },
+
+  {
+    "name": "SCENARIO: Test Disregard Limit - £10k - fail",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 0,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 0,
+          "is_employed": 0,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 18000.01,
+          "investments": 0
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 310,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Test Disregard Limit - £20k - pass",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 0,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 0,
+          "is_employed": 0,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 27999.99,
+          "investments": 0
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 210,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  },
+
+  {
+    "name": "SCENARIO: Test Disregard Limit - £20k - fail",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 0,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 0,
+          "is_employed": 0,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 28000.01,
+          "investments": 0
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 210,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
+  },
+
+  {
+    "name": "SCENARIO: Test Disregard Limit - £40k - pass",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 0,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 0,
+          "is_employed": 0,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 47999.99,
+          "investments": 0
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 160,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "pass"
+  },
+
+  {
+    "name": "SCENARIO: Test Disregard Limit - £40k - fail",
+    "pages": [
+      {
+        "page": "problem",
+        "fields": {
+          "categories": "debt"
+        }
+      },
+      {
+        "page": "about",
+        "fields": {
+          "have_partner": 0,
+          "on_benefits": 0,
+          "have_children": 0,
+          "have_dependants": 0,
+          "own_property": 0,
+          "aged_60_or_over": 1,
+          "have_savings": 1,
+          "have_valuables": 0,
+          "is_employed": 0,
+          "is_self_employed": 0
+        }
+      },
+      {
+        "page": "savings",
+        "fields": {
+          "savings": 48000.01,
+          "investments": 0
+        }
+      },
+      {
+        "page": "income",
+        "fields": {
+          "your_income-earnings-per_interval_value": 0,
+          "your_income-earnings-interval_period": "per_month",
+          "your_income-income_tax-per_interval_value": 0,
+          "your_income-income_tax-interval_period": "per_month",
+          "your_income-national_insurance-per_interval_value": 0,
+          "your_income-national_insurance-interval_period": "per_month",
+          "your_income-working_tax_credit-per_interval_value": 0,
+          "your_income-working_tax_credit-interval_period": "per_month",
+          "your_income-maintenance-per_interval_value": 0,
+          "your_income-maintenance-interval_period": "per_month",
+          "your_income-pension-per_interval_value": 0,
+          "your_income-pension-interval_period": "per_month",
+          "your_income-other_income-per_interval_value": 160,
+          "your_income-other_income-interval_period": "per_month"
+        }
+      },
+      {
+        "page": "outgoings",
+        "fields": {
+          "rent-per_interval_value": 0,
+          "rent-interval_period": "per_month",
+          "maintenance-per_interval_value": 0,
+          "maintenance-interval_period": "per_month",
+          "income_contribution": 0,
+          "childcare-per_interval_value": 0,
+          "childcare-interval_period": "per_month"
+        }
+      }
+    ],
+    "expected_result": "fail"
   }
 ]
