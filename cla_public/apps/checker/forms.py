@@ -32,7 +32,27 @@ from cla_public.libs.utils import recursive_dict_update
 log = logging.getLogger(__name__)
 
 
+def set_zero_values(form):
+    """Set values on a form to zero"""
+    def set_zero(field):
+        if isinstance(field, MoneyField) or isinstance(field, IntegerField):
+            field.data = 0
+        elif isinstance(field, MoneyIntervalField):
+            field.form.per_interval_value.data = 0
+            field.form.interval_period.data = 'per_month'
+        elif isinstance(field, FormField):
+            field.form = set_zero_values(field.form)
+        elif isinstance(field, FieldList):
+            field.entries = []
+    map(set_zero, form._fields.itervalues())
+    return form
+
+
 class FormSessionDataMixin(object):
+    """
+    Mixin for pre-populating the api payload with null or zero data
+    Also loads session data if there is any available
+    """
 
     @classmethod
     def get_session_data(cls):
@@ -54,19 +74,6 @@ class FormSessionDataMixin(object):
         Populate a form and nested forms with Zero values so if they don't
         need to be filled out
         """
-        def set_zero_values(form):
-            for field_name, field in form._fields.iteritems():
-                if isinstance(field, MoneyField) or isinstance(field, IntegerField):
-                    field.data = 0
-                elif isinstance(field, MoneyIntervalField):
-                    field.form.per_interval_value.data = 0
-                    field.form.interval_period.data = 'per_month'
-                elif isinstance(field, FormField):
-                    field.form = set_zero_values(field.form)
-                elif isinstance(field, FieldList):
-                    field.entries = []
-            return form
-
         return set_zero_values(cls()).api_payload()
 
 
