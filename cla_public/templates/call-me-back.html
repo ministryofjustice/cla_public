@@ -75,49 +75,51 @@
   </form>
 
   {% block below_form %}
+    <div class="notice">
+      <h3>Please note</h3>
+      <p>
+        {{ _('This service only covers England or Wales.') }}
+      </p>
+      <p>
+        {{ _('We are available Monday to Friday 9am-8pm and Saturday 9am-12:30pm.') }}<br>
+        {{ _('You can also call us on 0345 3454 345.') }}<br>
+        {{ _('Minicom') }}{{ _(': 0345 609 6677.') }}<br>
+        {{ _('Or text <strong>legalaid</strong> and your name to 80010.') }}<br>
+      </p>
 
-    <p>
-      {{ _('This service only covers England or Wales.') }}<br>
-      {{ _('We are available Monday to Friday 9am-8pm and Saturday 9am-12:30pm.') }}<br>
-      {{ _('You can also call us on 0345 3454 345.') }}<br>
-      {{ _('Minicom') }}{{ _(': 0345 609 6677.') }}<br>
-      {{ _('Or text ’legalaid’ and your name to 80010.') }}<br>
-    </p>
 
+      <p>
+        {% trans %}The first person you speak to will be an operator. They will ask you questions about
+        you and your problem, including you and your partner's financial circumstances.{% endtrans %}
+      </p>
 
-    <p>
-      {% trans %}The first person you speak to will be an operator. They will ask you questions about
-      you and your problem, including you and your partner's financial circumstances.{% endtrans %}
-    </p>
+      <p>
+        {% trans %}If it looks like you might qualify you will be put through to a CLA specialist
+        adviser immediately.{% endtrans %}
+      </p>
 
-    <p>
-      {% trans %}If it looks like you might qualify you will be put through to a CLA specialist
-      adviser immediately.{% endtrans %}
-    </p>
+      <p>
+        {% trans %}They will still need to ask you some more questions before making the final decision
+        about whether CLA can offer you advice. And you will need to provide evidence of what
+        you have told us later.{% endtrans %}
+      </p>
 
-    <p>
-      {% trans %}They will still need to ask you some more questions before making the final decision
-      about whether CLA can offer you advice. And you will need to provide evidence of what
-      you have told us later.{% endtrans %}
-    </p>
+      <p>
+        {{ _('If CLA can’t help you we will always suggest where else you might get help.') }}
+      </p>
 
-    <p>
-      {{ _('If CLA can’t help you we will always suggest where else you might get help.') }}
-    </p>
+      <p>
+        {% trans %}If we can do anything to make it easier for you to communicate with us due to your
+        disability please tell the Operator.{% endtrans %}
+      </p>
 
-    <p>
-      {% trans %}If we can do anything to make it easier for you to communicate with us due to your
-      disability please tell the Operator.{% endtrans %}
-    </p>
-
-    <p>
-      {% trans %}Protecting your personal data and your privacy is important to us. We are asking for
-      some information from you now so that when we call you back we know who you are. You
-      can read the full <a href="/privacy">Civil Legal Advice Privacy Statement here</a>.{% endtrans %}
-    </p>
-
+      <p>
+        {% trans privacy_url=url_for('base.privacy') %}Protecting your personal data and your privacy is important to us. We are asking for
+        some information from you now so that when we call you back we know who you are. You
+        can read the full <a href="{{ privacy_url }}">Civil Legal Advice Privacy Statement here</a>.{% endtrans %}
+      </p>
+    </div>
   {% endblock %}
-
 {% endblock %}
 
 
