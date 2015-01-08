@@ -214,6 +214,12 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             self.own_property.data == YES else PropertiesForm.get_zero_api_payload()
         recursive_dict_update(payload, properties_data)
 
+        # set savings to zero/null depending on has_savings/has_valuables
+        savings_data = SavingsForm.get_session_as_api_payload() if \
+            self.have_savings.data == YES or self.have_valuables.data == YES \
+            else SavingsForm.get_zero_api_payload()
+        recursive_dict_update(payload, savings_data)
+
         return payload
 
 
@@ -354,7 +360,7 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
         }
 
 
-class SavingsForm(ConfigFormMixin, Honeypot, Form):
+class SavingsForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
     savings = MoneyField(
         _('Savings'),
         description=_(
