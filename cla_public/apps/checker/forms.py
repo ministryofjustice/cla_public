@@ -211,16 +211,32 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         # need to delete properties if user changes to no property
         # also need to save a blank property now if user selects owns_property
         properties_data = PropertiesForm.get_session_as_api_payload() if \
-            self.own_property.data == YES else PropertiesForm.get_zero_api_payload()
+            self.require_properties else PropertiesForm.get_zero_api_payload()
         recursive_dict_update(payload, properties_data)
 
         # set savings to zero/null depending on has_savings/has_valuables
         savings_data = SavingsForm.get_session_as_api_payload() if \
-            self.have_savings.data == YES or self.have_valuables.data == YES \
-            else SavingsForm.get_zero_api_payload()
+            self.require_savings else SavingsForm.get_zero_api_payload()
         recursive_dict_update(payload, savings_data)
 
         return payload
+
+    @property
+    def require_properties(self):
+        return self.own_property.data == YES
+
+    @property
+    def require_savings(self):
+        return self.have_savings.data == YES or self.have_valuables.data == YES
+
+    @property
+    def require_your_income(self):
+        return self.is_employed.data == YES or self.is_self_employed.data == YES
+
+    @property
+    def require_partner_income(self):
+        return self.partner_is_employed.data == YES \
+            or self.partner_is_self_employed.data == YES
 
 
 class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
