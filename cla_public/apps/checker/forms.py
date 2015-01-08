@@ -446,7 +446,7 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
         }
 
 
-class IncomeFieldForm(NoCsrfForm):
+class IncomeFieldForm(NoCsrfForm, FormSessionDataMixin):
 
     def __init__(self, *args, **kwargs):
         self.is_partner = kwargs.pop('is_partner', False)
@@ -532,8 +532,17 @@ class IncomeFieldForm(NoCsrfForm):
         }
 
 
-class IncomeAndTaxForm(ConfigFormMixin, Honeypot, Form):
+class IncomeForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
     your_income = FormField(IncomeFieldForm, label=_(u'Your personal income'))
+    partner_income = PassKwargsToFormField(IncomeFieldForm,
+                                           form_kwargs={'is_partner': True},
+                                           label=_(u'Your partner‘s income'))
+
+    def __init__(self, *args, **kwargs):
+        """Dynamically remove partner subform if user has no partner"""
+        super(IncomeForm, self).__init__(*args, **kwargs)
+        if not session.has_partner:
+            del self.partner_income
 
     def api_payload(self):
         api_payload = {
@@ -544,21 +553,6 @@ class IncomeAndTaxForm(ConfigFormMixin, Honeypot, Form):
             api_payload['partner'] = partner_income.form.api_payload()
 
         return api_payload
-
-
-def income_form(*args, **kwargs):
-    """Dynamically add partner subform if user has a partner"""
-
-    class IncomeForm(IncomeAndTaxForm):
-        pass
-
-    if session.has_partner:
-        IncomeForm.partner_income = PassKwargsToFormField(
-            IncomeFieldForm,
-            form_kwargs={'is_partner': True},
-            label=_(u'Your partner‘s income'))
-
-    return IncomeForm(*args, **kwargs)
 
 
 class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
