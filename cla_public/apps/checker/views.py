@@ -2,7 +2,6 @@
 "Checker views"
 
 import logging
-from cla_common.constants import ELIGIBILITY_STATES
 
 from flask import abort, render_template, redirect, \
     session, url_for
@@ -200,14 +199,12 @@ def result(outcome):
     if session.category:
         category_name = session.category_name
 
-    is_unknown = session.get('is_eligible') == ELIGIBILITY_STATES.UNKNOWN
-
     response = render_template(
         'result/%s.html' % outcome,
         form=form,
         category=session.category,
         category_name=category_name,
-        eligibility_unknown=is_unknown)
+        need_more_info=session.need_more_info)
 
     if outcome in ['confirmation', 'face-to-face']:
         session.clear()

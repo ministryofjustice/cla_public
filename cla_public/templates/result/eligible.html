@@ -2,14 +2,14 @@
 
 {% block page_text %}
   <h1>
-    {%- if eligibility_unknown -%}
+    {%- if need_more_info -%}
       {{ _('We need more information') }}
     {%- else -%}
       {{ _('You might qualify for legal aid') }}
     {%- endif -%}
   </h1>
   <h2>{{ _('Request a callback') }}</h2>
-  {% if not eligibility_unknown %}
+  {% if not need_more_info %}
     <p>{{ _('Based on the answers you’ve given today, you might qualify financially for legal aid.') }}</p>
 
     <p>{{ _('Please submit your details below so we can call you back.') }}</p>
@@ -35,13 +35,13 @@
 {% block javascripts %}
   {{ super() }}
   <script>
-    {% set event_label = 'unknown' if eligibility_unknown else 'eligible' %}
+    {% set event_label = 'unknown' if need_more_info else 'eligible' %}
     ga('send', 'event', 'result', 'callback', '{{ event_label }}');
   </script>
 {% endblock %}
 
 {% block below_form %}
-  {% if eligibility_unknown %}
+  {% if need_more_info %}
     <p>
       {% trans %}Your CLA specialist adviser will ask you more questions before making the final decision about
       whether you qualify for legal aid.{% endtrans %}
