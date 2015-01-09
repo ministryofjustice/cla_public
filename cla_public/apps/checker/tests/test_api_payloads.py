@@ -122,6 +122,7 @@ class TestApiPayloads(unittest.TestCase):
 
         # Test zero and null values
 
+        # Test income
         self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], None)
         self.assertEqual(payload['you']['income']['earnings']['interval_period'], None)
         self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
@@ -134,6 +135,17 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], None)
         self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], None)
 
+        # Test savings
+        self.assertEqual(payload['you']['savings']['bank_balance'], 0)
+        self.assertEqual(payload['you']['savings']['investment_balance'], 0)
+        self.assertEqual(payload['you']['savings']['asset_balance'], 0)
+
+        form_data['have_savings'] = YES
+        form_data['have_valuables'] = YES
+        payload = self.payload(AboutYouForm, form_data)
+        self.assertEqual(payload['you']['savings']['bank_balance'], None)
+        self.assertEqual(payload['you']['savings']['investment_balance'], None)
+        self.assertEqual(payload['you']['savings']['asset_balance'], 0)
     def test_property_form(self):
         rent_amount = {
             'per_interval_value': '30',
