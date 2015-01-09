@@ -138,10 +138,16 @@ class MoneyField(IntegerField):
             self.data = '{0}.{1:02}'.format(pounds, pence)
 
 
+def coerce_unicode_if_value(value):
+    return unicode(value) if value is not None else None
+
+
 class MoneyIntervalForm(NoCsrfForm):
     """Money amount and interval subform"""
     per_interval_value = MoneyField(validators=[Optional()])
-    interval_period = SelectField('', choices=MONEY_INTERVALS)
+    interval_period = SelectField('',
+                                  choices=MONEY_INTERVALS,
+                                  coerce=coerce_unicode_if_value)
 
     def __init__(self, *args, **kwargs):
         # Enable choices to be passed through
