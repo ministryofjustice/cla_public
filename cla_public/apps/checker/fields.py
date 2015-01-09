@@ -10,7 +10,6 @@ from flask.ext.babel import lazy_gettext as _, gettext
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
-from wtforms.compat import text_type
 from wtforms.validators import Optional, InputRequired
 
 from cla_common.money_interval.models import MoneyInterval
@@ -19,6 +18,10 @@ from cla_public.apps.checker.validators import ValidMoneyInterval
 
 
 log = logging.getLogger(__name__)
+
+
+def coerce_unicode_if_value(value):
+    return unicode(value) if value is not None else None
 
 
 class PartnerMixin(object):
@@ -85,7 +88,7 @@ class YesNoField(RadioField):
             validators = [
                 InputRequired(message=gettext(u'Please choose Yes or No'))]
         super(YesNoField, self).__init__(
-            label=label, validators=validators, coerce=text_type,
+            label=label, validators=validators, coerce=coerce_unicode_if_value,
             choices=choices, **kwargs)
 
 
@@ -136,10 +139,6 @@ class MoneyField(IntegerField):
             pence = value % 100
             pounds = value / 100
             self.data = '{0}.{1:02}'.format(pounds, pence)
-
-
-def coerce_unicode_if_value(value):
-    return unicode(value) if value is not None else None
 
 
 class MoneyIntervalForm(NoCsrfForm):
