@@ -15,12 +15,6 @@ def namespace(ns):
     return prefix_key
 
 
-class Struct(object):
-
-    def __init__(self, **entries):
-        self.__dict__.update(entries)
-
-
 class CheckerSession(SecureCookieSession):
     "Provides some convenience properties for inter-page logic"
 
@@ -139,15 +133,11 @@ class CheckerSession(SecureCookieSession):
             if key in self:
                 del self[key]
 
-    def get_form_data(self, form_class_name, as_object=False):
+    def get_form_data(self, form_class_name):
         ns = '{0}_'.format(form_class_name)
         namespaced = lambda (key, val): key.startswith(ns)
         strip_ns = lambda (key, val): (key.replace(ns, ''), val)
         form_data = dict(map(strip_ns, filter(namespaced, self.items())))
-
-        if as_object:
-            form_data = Struct(**form_data)
-
         return form_data
 
 

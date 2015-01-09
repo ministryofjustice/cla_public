@@ -28,21 +28,17 @@ def form_view(form_class, form_template):
                 override_session_vars()
 
             form_session_data = session.get_form_data(
-                form_class.__name__, as_object=True)
+                form_class.__name__)
 
-            form = form_class(request.form, form_session_data)
+            form = form_class(request.form, **form_session_data)
             if form.is_submitted():
 
                 if form.validate():
-
                     session.update_form_data(form)
-
                     post_to_eligibility_check_api(form)
-
                     return fn(session)
 
                 else:
-
                     session.clear_form_data(form)
 
             return render_template(form_template, form=form)

@@ -1,25 +1,17 @@
 # -*- coding: utf-8 -*-
 "Base app views"
 
-import json
-import os
 import logging
 import datetime
-import requests
-import urllib
 
-from flask import render_template, send_from_directory, current_app, \
-    redirect, url_for, request, session, jsonify
+from flask import render_template, redirect, url_for, session, jsonify
 from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_public.apps.base import base
-from cla_public.apps.base.decorators import api_proxy
 from cla_public.apps.base.forms import FeedbackForm
-from cla_public.apps.base.mock_addressfinder import mock_addressfinder
-from cla_public.apps.checker.api import get_ordered_organisations_by_category
 import cla_public.apps.base.filters
 import cla_public.apps.base.extensions
-from cla_public.libs.zendesk import ZD
+from cla_public.libs import zendesk
 
 
 log = logging.getLogger(__name__)
@@ -44,44 +36,22 @@ def privacy():
 @base.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     form = FeedbackForm()
-    zd = ZD()
-    zd_error = None
+    error = None
 
     if form.validate_on_submit():
-        payload = form.api_payload()
-        response = zd.post_to_zendesk(payload)
-        zd_error = _('Something went wrong. Please try again.')
+        response = zendesk.create_ticket(form.api_payload())
 
         if response.status_code < 300:
             return redirect(url_for('.feedback_confirmation'))
+        else:
+            error = _('Something went wrong. Please try again.')
 
-    return render_template('feedback.html', form=form, zd_error=zd_error)
+    return render_template('feedback.html', form=form, zd_error=error)
 
 
 @base.route('/feedback/confirmation')
 def feedback_confirmation():
     return render_template('feedback-confirmation.html')
-
-
-@base.route('/addressfinder/<path:path>', methods=['GET'])
-@api_proxy(return_value=[], json_response=True)
-def addressfinder_proxy_view(path):
-
-    if current_app.config.get('TESTING'):
-        return mock_addressfinder(request.args)
-
-    response = requests.get(
-        '{host}/{path}?{params}'.format(
-            host=current_app.config['ADDRESSFINDER_API_HOST'],
-            path=path,
-            params=urllib.urlencode(request.args)),
-        headers={
-            'Authorization': 'Token {token}'.format(
-                token=current_app.config['ADDRESSFINDER_API_TOKEN'])
-        },
-        timeout=current_app.config.get('API_CLIENT_TIMEOUT', None)
-    )
-    return response.text
 
 
 @base.route('/session-expired')

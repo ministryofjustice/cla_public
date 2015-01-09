@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 "CLA Public app"
 
-import logging
 import logging.config
 import os
 from flask import Flask, render_template
@@ -10,14 +9,13 @@ from flask.ext.cache import Cache
 from raven.contrib.flask import Sentry
 
 from cla_public.django_to_jinja import change_jinja_templates
+from cla_public.apps.addressfinder_proxy.views import addressfinder
 from cla_public.apps.base.views import base
+#from cla_public.apps.callmeback.views import callmeback
 from cla_public.apps.checker.views import checker
 from cla_public.apps.checker.session import CheckerSessionInterface
 from cla_public.middleware import StatsdMiddleware
 from cla_public.libs.utils import get_locale
-
-
-log = logging.getLogger(__name__)
 
 
 def create_app(config_file=None):
@@ -31,18 +29,21 @@ def create_app(config_file=None):
     if app.config.get('SENTRY_DSN'):
         Sentry().init_app(app)
 
+    app.babel = Babel(app)
+    app.babel_instance.localeselector(get_locale)
+
+    app.cache = Cache(app)
+
     for extension in app.config['EXTENSIONS']:
         extension.init_app(app)
 
     app.session_interface = CheckerSessionInterface()
 
-    app.babel = Babel(app)
-    app.babel.localeselector(get_locale)
-    app.cache = Cache(app, config=app.config['CACHE_CONFIG'])
-
     register_error_handlers(app)
 
     app.register_blueprint(base)
+    app.register_blueprint(addressfinder)
+    #app.register_blueprint(callmeback)
     app.register_blueprint(checker)
 
     logging.config.dictConfig(app.config['LOGGING'])
