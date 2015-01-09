@@ -146,6 +146,22 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['savings']['bank_balance'], None)
         self.assertEqual(payload['you']['savings']['investment_balance'], None)
         self.assertEqual(payload['you']['savings']['asset_balance'], 0)
+
+        # Test null property
+        self.assertEqual(len(payload['property_set']), 0)
+
+        form_data['own_property'] = YES
+        payload = self.payload(AboutYouForm, form_data)
+        self.assertEqual(len(payload['property_set']), 1)
+
+        self.assertEqual(payload['property_set'][0]['value'], None)
+        self.assertEqual(payload['property_set'][0]['mortgage_left'], None)
+        self.assertEqual(payload['property_set'][0]['share'], None)
+        self.assertEqual(payload['property_set'][0]['disputed'], None)
+        self.assertEqual(payload['property_set'][0]['rent']['per_interval_value'], 0)
+        self.assertEqual(payload['property_set'][0]['rent']['interval_period'], 'per_month')
+        self.assertEqual(payload['property_set'][0]['main'], None)
+
     def test_property_form(self):
         rent_amount = {
             'per_interval_value': '30',
