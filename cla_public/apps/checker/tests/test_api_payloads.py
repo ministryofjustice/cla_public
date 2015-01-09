@@ -11,7 +11,7 @@ from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.callmeback.forms import CallMeBackForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm, \
-    IncomeAndTaxForm, income_form, OutgoingsForm
+    IncomeForm, OutgoingsForm
 
 
 def get_en_locale():
@@ -267,10 +267,7 @@ class TestApiPayloads(unittest.TestCase):
         session['AboutYouForm_have_partner'] = YES
         session['AboutYouForm_in_dispute'] = NO
 
-        IncomeAndTaxForm._get_translations = lambda args: None
-        form = income_form(csrf_enabled=False)
-
-        payload = form.api_payload()
+        payload = self.payload(IncomeForm, {})
 
         self.assertIn('you', payload)
         self.assertIn('partner', payload)
