@@ -331,8 +331,6 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data.update(self.flatten_dict('adaptations', adaptations_data))
 
-        print form_data
-
         payload = self.payload(ApplicationForm, form_data)
 
         self.assertEqual(payload['personal_details']['full_name'], 'Full Name')
