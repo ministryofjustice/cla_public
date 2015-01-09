@@ -124,7 +124,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         validators=[
             IgnoreIf('in_dispute', FieldValueOrNone(YES)),
             InputRequired(message=gettext(u'Please choose Yes or No'))])
-    aged_60_or_over = YesNoField(_(u'Are you aged 60 or over?'))
+    aged_60_or_over = YesNoField(_(u'Are you or your partner aged 60 or over?'))
 
     def api_payload(self):
         def value_or_zero(field, dependant_field):
@@ -450,10 +450,10 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
     rent = PartnerMoneyIntervalField(
         label=_(u'Rent'),
         description=_(u"Money you pay your landlord for rent. Do not include "
-                      u"rent that is paid by housing benefit"),
+                      u"rent that is paid by Housing Benefit"),
         partner_description=_(u"Money you and your partner pay your landlord "
                               u"for rent. Do not include rent that is paid by "
-                              u"housing benefit"),
+                              u"Housing Benefit"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
     maintenance = PartnerMoneyIntervalField(
