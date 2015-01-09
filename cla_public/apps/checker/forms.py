@@ -127,15 +127,22 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
     aged_60_or_over = YesNoField(_(u'Are you aged 60 or over?'))
 
     def api_payload(self):
+        def value_or_zero(field, dependant_field):
+            if dependant_field.data == YES and field.data:
+                return field.data
+            return 0
+
         payload = {
-            'dependants_young': self.num_children.data or 0,
-            'dependants_old': self.num_dependants.data or 0,
+            'dependants_young': value_or_zero(self.num_children, self.have_children),
+            'dependants_old': value_or_zero(self.num_dependants, self.have_dependants),
             'is_you_or_your_partner_over_60': self.aged_60_or_over.data,
             'has_partner': self.have_partner.data,
             'you': {'income': {
                 'self_employed': self.is_self_employed.data}}
         }
-        if self.have_partner.data and not self.in_dispute.data and self.partner_is_self_employed.data:
+
+        if self.have_partner.data == YES and self.in_dispute.data != YES \
+                and self.partner_is_self_employed.data == YES:
             payload['partner'] = {'income': {
                                   'self_employed': self.partner_is_self_employed.data}}
         return payload
@@ -200,7 +207,7 @@ class PropertyForm(NoCsrfForm):
             'mortgage_left': self.mortgage_remaining.data,
             'share': share,
             'disputed': self.in_dispute.data,
-            'rent': self.rent_amount.data,
+            'rent': self.rent_amount.data if self.is_rented.data == YES else money_interval(0),
             'main': self.is_main_home.data
         }
 
