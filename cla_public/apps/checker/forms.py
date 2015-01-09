@@ -291,18 +291,26 @@ class SavingsForm(ConfigFormMixin, Honeypot, Form):
             message=gettext(u'Enter 0 if you have no investments')
         )])
     valuables = MoneyField(
-        _(u'Total value of items worth over £500 each'))
+        _(u'Total value of items worth over £500 each'),
+        min_val=50000,
+        validators=[InputRequired(
+            message=gettext(u'Enter 0 if you have no valuables')
+        )])
+
+    def __init__(self, *args, **kwargs):
+        super(SavingsForm, self).__init__(*args, **kwargs)
+        if not session.has_valuables:
+            del self.valuables
+
+        if not session.has_savings:
+            del self.savings
+            del self.investments
 
     def api_payload(self):
-        # rather than showing an error message, just ignore values less than
-        # £500
-        valuables = self.valuables.data
-        if valuables < 50000:
-            valuables = 0
         return {'you': {'savings': {
-            'bank_balance': self.savings.data,
-            'investment_balance': self.investments.data,
-            'asset_balance': valuables
+            'bank_balance': self.savings.data if self.savings else 0,
+            'investment_balance': self.investments.data if self.investments else 0,
+            'asset_balance': self.valuables.data if self.valuables else 0
         }}}
 
 

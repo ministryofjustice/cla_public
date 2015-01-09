@@ -158,6 +158,8 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['property_set'][0]['main'], YES)
 
     def test_saving_form(self):
+        session['AboutYouForm_have_savings'] = YES
+        session['AboutYouForm_have_valuables'] = YES
         form_data = {
             'savings': '100',
             'investments': '100',
@@ -170,16 +172,18 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['savings']['investment_balance'], 10000)
         self.assertEqual(payload['you']['savings']['asset_balance'], 50000)
 
-        form_data = {
-            'savings': '100',
-            'investments': '100',
-            'valuables': '499.99',
-        }
-
+        session['AboutYouForm_have_valuables'] = NO
         payload = self.payload(SavingsForm, form_data)
 
         self.assertEqual(payload['you']['savings']['asset_balance'], 0,
-                         msg=u'Disregard valuables less than £500')
+                         msg=u'Should be 0 if user selected no valuables')
+
+        session['AboutYouForm_have_savings'] = NO
+        session['AboutYouForm_have_valuables'] = YES
+        payload = self.payload(SavingsForm, form_data)
+
+        self.assertEqual(payload['you']['savings']['bank_balance'], 0)
+        self.assertEqual(payload['you']['savings']['investment_balance'], 0)
 
     def test_tax_credit_form(self):
         form_mi_data = {
