@@ -56,6 +56,19 @@ class TestApiPayloads(unittest.TestCase):
         self.assertTrue(payload['specific_benefits']['income_support'])
         self.assertTrue(payload['on_passported_benefits'])
 
+        # Test income - make sure all income vals are zero after pasported benifit
+        self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['earnings']['interval_period'], 'per_month')
+        self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['tax_credits']['interval_period'], 'per_month')
+        self.assertEqual(payload['you']['income']['maintenance_received']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['pension']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['other_income']['per_interval_value'], 0)
+
+        self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], 0)
+
     def test_your_benefits_form_multiple_passported(self):
         form_data = {'benefits': ['income_support', 'pension_credit']}
         payload = self.payload(YourBenefitsForm, form_data)
