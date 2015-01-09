@@ -43,7 +43,7 @@
       {
         "page": "savings",
         "fields": {
-          "savings": 7499.91,
+          "savings": 7499.94,
           "investments": 0.02,
           "valuables": 500.02
         }
@@ -142,7 +142,7 @@
       {
         "page": "savings",
         "fields": {
-          "savings": 7499.91,
+          "savings": 7499.94,
           "investments": 0.02,
           "valuables": 500.02
         }
@@ -160,7 +160,7 @@
       {
         "page": "income",
         "fields": {
-          "your_income-earnings-per_interval_value": 2565.99,
+          "your_income-earnings-per_interval_value": 2656.99,
           "your_income-earnings-interval_period": "per_month",
           "your_income-income_tax-per_interval_value": 0,
           "your_income-income_tax-interval_period": "per_month",
@@ -250,7 +250,7 @@
       {
         "page": "savings",
         "fields": {
-          "savings": 7499.91,
+          "savings": 7499.94,
           "investments": 0.02,
           "valuables": 500.02
         }
@@ -341,7 +341,7 @@
       {
         "page": "savings",
         "fields": {
-          "savings": 7499.91,
+          "savings": 7499.94,
           "investments": 0.02,
           "valuables": 500.02
         }
