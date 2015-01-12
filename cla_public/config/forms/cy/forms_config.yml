@@ -6,10 +6,10 @@ forms:
       categories:
         field_options:
           violence:
-            selected_notification: If you are in immediate danger you can ask us to [call you back](/call-me-back).
+            selected_notification: Os ydych mewn perygl uniongyrchol, gallwch ofyn i ni [eich ffonio’n ôl](/call-me-back).
 
           family:
-            selected_notification: If you are a parent of a child who the local authority is trying to take in to care, ask us to [call you back](/call-me-back).
+            selected_notification: Os ydych yn rhiant i blentyn y mae’r awdurdod lleol yn ceisio ei ddwyn i’w gofal, gofynnwch i ni [eich ffonio’n ôl](/call-me-back).
 
   AboutYouForm:
     fields:

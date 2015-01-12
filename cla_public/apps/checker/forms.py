@@ -24,7 +24,7 @@ from cla_public.libs.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone
+    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone, NotRequired
 
 
 log = logging.getLogger(__name__)
@@ -279,12 +279,14 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
 
 class SavingsForm(ConfigFormMixin, Honeypot, Form):
     savings = MoneyField(
+        _('Savings'),
         description=_(
             u"The total amount of savings in cash, bank or building society"),
         validators=[InputRequired(
             message=gettext(u'Enter 0 if you have no savings')
         )])
     investments = MoneyField(
+        _('Investments'),
         description=_(
             u"This includes stocks, shares, bonds (but not property)"),
         validators=[InputRequired(
