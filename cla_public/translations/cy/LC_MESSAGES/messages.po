@@ -474,7 +474,7 @@ msgid ""
 "Your partner is your husband, wife, civil partner (unless you have "
 "permanently separated) or someone you live with as if you’re married"
 msgstr ""
-"Eich partner yw’ch g?r, gwraig, partner sifil (oni bai eich bod wedi "
+"Eich partner yw’ch gŵr, gwraig, partner sifil (oni bai eich bod wedi "
 "gwahanu yn barhaol) neu rywun sy’n byw gyda chi fel pe baech chi wedi "
 "priodi."
 
@@ -515,7 +515,7 @@ msgstr "Os oes, faint?"
 
 #: cla_public/apps/checker/forms.py:86
 msgid "Do you have any dependants aged 16 or over?"
-msgstr "Oes gennych chi unrhyw ddibynyddion sy’n 16 oed neu’n h?n"
+msgstr "Oes gennych chi unrhyw ddibynyddion sy’n 16 oed neu’n hŷn"
 
 #: cla_public/apps/checker/forms.py:87
 msgid ""
@@ -539,7 +539,7 @@ msgstr "Ydych chi’n berchen ar unrhyw eiddo?"
 
 #: cla_public/apps/checker/forms.py:100
 msgid "For example, a house, static caravan or flat"
-msgstr "Er enghraifft, t?, fflat neu garafán sefydlog"
+msgstr "Er enghraifft, tŷ, fflat neu garafán sefydlog"
 
 #: cla_public/apps/checker/forms.py:102
 msgid "Are you employed?"

@@ -16,8 +16,7 @@ forms:
 
       have_children:
         more_info: >
-          Young people aged 16 or over who live with you and who you support financially should
-          be included in the next question under “Do you have any dependants aged 16 or over?”
+          Dylech gynnwys pobl ifanc 16 oed neu hŷn sy’n byw gyda chi a’ch bod yn eu cynnal yn ariannol yn y cwestiwn nesaf o dan “Oes gennych unrhyw ddibynyddion sy’n 16 oed neu hŷn?”
 
   PropertyForm:
     fields:
