@@ -4,7 +4,8 @@
 import logging
 import datetime
 
-from flask import render_template, redirect, url_for, session, jsonify
+from flask import current_app, jsonify, redirect, render_template, session, \
+    url_for
 from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_public.apps.base import base
@@ -78,3 +79,13 @@ def session_end():
     return jsonify({
         'session': 'CLEAR'
     })
+
+
+@base.route('/start')
+def get_started():
+    """
+    Redirect to checker unless currently disabled
+    """
+    if current_app.config.get('CALLMEBACK_ONLY'):
+        return redirect(url_for('callmeback.request_callback'))
+    return redirect(url_for('checker.problem'))

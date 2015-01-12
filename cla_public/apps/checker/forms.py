@@ -6,22 +6,18 @@ import logging
 from flask import session, request
 from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, gettext
-import pytz
 from wtforms import Form as NoCsrfForm
-from wtforms import IntegerField, StringField, \
-    TextAreaField, FormField, RadioField
-from wtforms.validators import InputRequired, NumberRange, Optional
+from wtforms import IntegerField, FormField
+from wtforms.validators import InputRequired, NumberRange
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO, CONTACT_SAFETY, \
-    PASSPORTED_BENEFITS
+    NON_INCOME_BENEFITS, YES, NO, PASSPORTED_BENEFITS
 from cla_public.apps.checker.fields import (
-    AvailabilityCheckerField, DescriptionRadioField, MoneyIntervalField,
+    DescriptionRadioField, MoneyIntervalField,
     YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
     PropertyList, money_interval_to_monthly,
-    AdaptationsForm,
     PassKwargsToFormField)
 from cla_public.libs.form_config_parser import ConfigFormMixin
 from cla_public.apps.checker.honeypot import Honeypot
@@ -485,55 +481,3 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
                 self.income_contribution.data,
             'childcare': self.childcare.data
         }}}
-
-
-class ApplicationForm(Honeypot, Form):
-    full_name = StringField(
-        _(u'Full name'),
-        description=_(u'For example: John Smith'),
-        validators=[InputRequired()])
-    contact_number = StringField(
-        _(u'Contact phone number'),
-        validators=[InputRequired()])
-    safe_to_contact = RadioField(
-        _(u'Is it safe for us to leave a message on this number?'),
-        choices=CONTACT_SAFETY,
-        validators=[InputRequired(message=gettext(u'Please choose Yes or No'))],
-    )
-    post_code = StringField(_(u'Postcode'))
-    address = TextAreaField(_(u'Address'))
-    extra_notes = TextAreaField(
-        _(u'Help the operator to understand your situation'),
-        description=(
-            _(u"If you’d like to tell us more about your problem, please do so in the "
-              u"box below. The Civil Legal Advice operator will read this before "
-              u"they call you.")),
-        validators=[Optional()])
-    adaptations = FormField(
-        AdaptationsForm,
-        _(u'Do you have any special communication needs?'))
-
-    time = AvailabilityCheckerField(_(u'Select a time for us to call you'))
-
-    def api_payload(self):
-        time = self.time.scheduled_time().replace(tzinfo=pytz.utc)
-        return {
-            'personal_details': {
-                'full_name': self.full_name.data,
-                'postcode': self.post_code.data,
-                'mobile_phone': self.contact_number.data,
-                'street': self.address.data,
-                'safe_to_contact': self.safe_to_contact.data
-            },
-            'adaptation_details': {
-                'bsl_webcam': self.adaptations.bsl_webcam.data,
-                'minicom': self.adaptations.minicom.data,
-                'text_relay': self.adaptations.text_relay.data,
-                'language':
-                    self.adaptations.welsh.data and 'WELSH'
-                    or self.adaptations.other_language.data,
-                'notes': self.adaptations.other_adaptation.data
-                    if self.adaptations.is_other_adaptation.data else ''
-            },
-            'requires_action_at': time.isoformat(),
-        }

@@ -11,7 +11,7 @@ from raven.contrib.flask import Sentry
 from cla_public.django_to_jinja import change_jinja_templates
 from cla_public.apps.addressfinder_proxy.views import addressfinder
 from cla_public.apps.base.views import base
-#from cla_public.apps.callmeback.views import callmeback
+from cla_public.apps.callmeback.views import callmeback
 from cla_public.apps.checker.views import checker
 from cla_public.apps.checker.session import CheckerSessionInterface
 from cla_public.middleware import StatsdMiddleware
@@ -43,8 +43,9 @@ def create_app(config_file=None):
 
     app.register_blueprint(base)
     app.register_blueprint(addressfinder)
-    #app.register_blueprint(callmeback)
-    app.register_blueprint(checker)
+    app.register_blueprint(callmeback)
+    if not app.config.get('CALLMEBACK_ONLY'):
+        app.register_blueprint(checker)
 
     logging.config.dictConfig(app.config['LOGGING'])
 
