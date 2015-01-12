@@ -87,5 +87,6 @@ def get_started():
     Redirect to checker unless currently disabled
     """
     if current_app.config.get('CALLMEBACK_ONLY'):
+        session['callmeback_only'] = 'yes'
         return redirect(url_for('callmeback.request_callback'))
     return redirect(url_for('checker.problem'))
