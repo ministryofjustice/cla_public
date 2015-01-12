@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-12 09:49+0000\n"
+"POT-Creation-Date: 2015-01-12 10:53+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -1492,6 +1492,7 @@ msgid "You’re unlikely to get legal aid"
 msgstr "Nid yw’n debygol y byddwch chi’n cael cymorth cyfreithiol"
 
 #: cla_public/templates/help-organisations.html:8
+#, python-format
 msgid ""
 "From\n"
 "    what you have told us today it looks like you won't be able to get\n"
@@ -2550,6 +2551,7 @@ msgstr ""
 "gwybodaeth. "
 
 #: cla_public/templates/privacy.html:328
+#, python-format
 msgid ""
 "You can read more about <a href=\"%(cookie_url)s\">how cookies are "
 "used</a>."
@@ -3420,167 +3422,159 @@ msgstr ""
 #: wtforms/validators.py:55
 #, python-format
 msgid "Invalid field name '%s'."
-msgstr ""
+msgstr "Enw maes annilys '%s'."
 
 #: wtforms/validators.py:63
 #, python-format
 msgid "Field must be equal to %(other_name)s."
-msgstr ""
+msgstr "Rhaid i'r maes fod yr un fath â/ag %(other_name)."
 
 #: wtforms/validators.py:96
 #, python-format
 msgid "Field must be at least %(min)d character long."
 msgid_plural "Field must be at least %(min)d characters long."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "Rhaid i'r maes fod o leiaf %(min)d nod."
+msgstr[1] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
+msgstr[2] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
+msgstr[3] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
+msgstr[4] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
 
 #: wtforms/validators.py:99
 #, python-format
 msgid "Field cannot be longer than %(max)d character."
 msgid_plural "Field cannot be longer than %(max)d characters."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "Ni all y maes fod yn fwy na %(max)d nod."
+msgstr[1] "Ni all y maes fod yn fwy na %(max)d o nodau."
+msgstr[2] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
+msgstr[3] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
+msgstr[4] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
 
 #: wtforms/validators.py:102
 #, python-format
 msgid "Field must be between %(min)d and %(max)d characters long."
-msgstr ""
+msgstr "Rhaid i'r maes fod rhwng %(min)d a %(max)d o nodau"
 
 #: wtforms/validators.py:138
 #, python-format
 msgid "Number must be at least %(min)s."
-msgstr ""
+msgstr "Rhaid i'r rhif fod o leiaf %(min)s."
 
 #: wtforms/validators.py:140
 #, python-format
 msgid "Number must be at most %(max)s."
-msgstr ""
+msgstr "Ni chaiff y rhif fod yn fwy na %(max)s. "
 
 #: wtforms/validators.py:142
 #, python-format
 msgid "Number must be between %(min)s and %(max)s."
-msgstr ""
+msgstr "Rhaid i'r rhif fod rhwng %(min)s a %(max)s. "
 
 #: wtforms/validators.py:198 wtforms/validators.py:233
 msgid "This field is required."
-msgstr ""
+msgstr "Rhaid cwblhau'r maes hwn."
 
 #: wtforms/validators.py:264
 msgid "Invalid input."
-msgstr ""
+msgstr "Mewnbwn annilys"
 
 #: wtforms/validators.py:286
-#, fuzzy
 msgid "Invalid email address."
-msgstr "Dod o hyd i gyfeiriad yn y DU"
+msgstr "Cyfeiriad e-bost annilys"
 
 #: wtforms/validators.py:318
-#, fuzzy
 msgid "Invalid IP address."
-msgstr "Dod o hyd i gyfeiriad yn y DU"
+msgstr "Cyfeiriad IP annilys"
 
 #: wtforms/validators.py:367
-#, fuzzy
 msgid "Invalid Mac address."
-msgstr "Dod o hyd i gyfeiriad yn y DU"
+msgstr "Cyfeiriad Mac annilys"
 
 #: wtforms/validators.py:393
 msgid "Invalid URL."
-msgstr ""
+msgstr "URL annilys"
 
 #: wtforms/validators.py:412
 msgid "Invalid UUID."
-msgstr ""
+msgstr "UUID annilys"
 
 #: wtforms/validators.py:440
 #, python-format
 msgid "Invalid value, must be one of: %(values)s."
-msgstr ""
+msgstr "Gwerth annilys, rhaid i'r gwerth fod yn un o'r canlynol: %(values)s."
 
 #: wtforms/validators.py:472
 #, python-format
 msgid "Invalid value, can't be any of: %(values)s."
-msgstr ""
+msgstr "Gwerth annilys, ni all fod yn un o'r canlynol: %(values)s"
 
 #: wtforms/csrf/core.py:83 wtforms/ext/csrf/form.py:47
 msgid "Invalid CSRF Token"
-msgstr ""
+msgstr "Tocyn CSRF annilys"
 
 #: wtforms/csrf/session.py:61 wtforms/ext/csrf/session.py:58
 msgid "CSRF token missing"
-msgstr ""
+msgstr "Tocyn CSRF ar goll"
 
 #: wtforms/csrf/session.py:69 wtforms/ext/csrf/session.py:66
 msgid "CSRF failed"
-msgstr ""
+msgstr "CSRF wedi methu"
 
 #: wtforms/csrf/session.py:74 wtforms/ext/csrf/session.py:71
-#, fuzzy
 msgid "CSRF token expired"
-msgstr "Sesiwn wedi dod i ben"
+msgstr "Tocyn CSRF wedi dod i ben"
 
 #: wtforms/ext/appengine/fields.py:185
-#, fuzzy
 msgid "Not a valid list"
-msgstr "Nid yw hwn yn amser dilys"
+msgstr "Rhestr annilys"
 
 #: wtforms/ext/appengine/fields.py:204
-#, fuzzy
 msgid "Not a valid integer list"
-msgstr "Nid yw hwn yn amser dilys"
+msgstr "Rhestr integer annilys"
 
 #: wtforms/ext/dateutil/fields.py:63
 msgid "Please input a date/time value"
-msgstr ""
+msgstr "Rhowch werth dyddiad/amser"
 
 #: wtforms/ext/dateutil/fields.py:75 wtforms/ext/dateutil/fields.py:83
 msgid "Invalid date/time input"
-msgstr ""
+msgstr "Dyddiad/amser annilys"
 
 #: wtforms/ext/sqlalchemy/validators.py:34
 msgid "Already exists."
-msgstr ""
+msgstr "Bodoli'n barod."
 
 #: wtforms/fields/core.py:449
 msgid "Invalid Choice: could not coerce"
-msgstr ""
+msgstr "Dewis annilys: ddim yn bosib gweithredu"
 
 #: wtforms/fields/core.py:482
 msgid "Invalid choice(s): one or more data inputs could not be coerced"
 msgstr ""
+"Dewis(iadau) annilys: ddim yn bosib gweithredu un neu ragor o fewnbynnau "
+"data"
 
 #: wtforms/fields/core.py:489
 #, python-format
 msgid "'%(value)s' is not a valid choice for this field"
-msgstr ""
+msgstr "Nid yw '%(value)s' yn ddewis dilys ar gyfer y maes hwn"
 
 #: wtforms/fields/core.py:572
-#, fuzzy
 msgid "Not a valid integer value"
-msgstr "Nid yw hwn yn amser dilys"
+msgstr "Gwerth integer annilys"
 
 #: wtforms/fields/core.py:638
-#, fuzzy
 msgid "Not a valid decimal value"
-msgstr "Nid yw hwn yn amser dilys"
+msgstr "Gwerth degolyn annilys"
 
 #: wtforms/fields/core.py:665
-#, fuzzy
 msgid "Not a valid float value"
-msgstr "Nid yw hwn yn ddyddiad dilys"
+msgstr "Gwerth float annilys"
 
 #: wtforms/fields/core.py:724
-#, fuzzy
 msgid "Not a valid datetime value"
-msgstr "Nid yw hwn yn amser dilys"
+msgstr "Gwerth dyddiad/amser annilys"
 
 #: wtforms/fields/core.py:741
-#, fuzzy
 msgid "Not a valid date value"
-msgstr "Nid yw hwn yn ddyddiad dilys"
+msgstr "Gwerth dyddiad annilys"
+
