@@ -20,7 +20,7 @@ from cla_public.apps.checker.fields import (
     PropertyList, money_interval_to_monthly,
     PassKwargsToFormField)
 from cla_public.libs.form_config_parser import ConfigFormMixin
-from cla_public.apps.checker.honeypot import Honeypot
+from cla_public.libs.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \

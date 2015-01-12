@@ -16,6 +16,7 @@ from cla_public.apps.checker.views import checker
 from cla_public.apps.checker.session import CheckerSessionInterface, \
     CustomJSONEncoder
 from cla_public.middleware import StatsdMiddleware
+from cla_public.libs import honeypot
 from cla_public.libs.utils import get_locale
 
 
@@ -31,7 +32,7 @@ def create_app(config_file=None):
         Sentry().init_app(app)
 
     app.babel = Babel(app)
-    app.babel_instance.localeselector(get_locale)
+    app.babel.localeselector(get_locale)
 
     app.cache = Cache(app)
 
@@ -42,6 +43,10 @@ def create_app(config_file=None):
     app.json_encoder = CustomJSONEncoder
 
     register_error_handlers(app)
+
+    app.add_template_global(
+        honeypot.FIELD_NAME,
+        name='honeypot_field_name')
 
     app.register_blueprint(base)
     app.register_blueprint(addressfinder)

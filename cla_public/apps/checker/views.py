@@ -18,7 +18,6 @@ from cla_public.apps.checker.decorators import form_view, \
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
     OutgoingsForm
-from cla_public.libs.honeypot import FIELD_NAME as HONEYPOT_FIELD_NAME
 from cla_public.libs.utils import override_locale
 
 
@@ -31,11 +30,6 @@ def proceed(next_step, **kwargs):
 
 def outcome(outcome):
     return proceed('result', outcome=outcome)
-
-
-checker.add_app_template_global(
-    HONEYPOT_FIELD_NAME,
-    name='honeypot_field_name')
 
 
 @checker.after_request
