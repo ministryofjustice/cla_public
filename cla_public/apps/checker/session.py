@@ -1,4 +1,6 @@
 import datetime
+
+from flask.json import JSONEncoder
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 
 
@@ -15,10 +17,15 @@ def namespace(ns):
     return prefix_key
 
 
-class Struct(object):
+class CustomJSONEncoder(JSONEncoder):
 
-    def __init__(self, **entries):
-        self.__dict__.update(entries)
+    def default(self, obj):
+        if any([isinstance(obj, datetime.date),
+                isinstance(obj, datetime.time),
+                isinstance(obj, datetime.datetime)]):
+            return obj.isoformat()
+        return super(CustomJSONEncoder, self).default(obj)
+
 
 
 class CheckerSession(SecureCookieSession):
@@ -113,6 +120,10 @@ class CheckerSession(SecureCookieSession):
     def partner_is_self_employed(self):
         return self.has_partner and self.get('AboutYouForm_partner_is_self_employed', NO) == YES
 
+    @property
+    def callback_time(self):
+        return self.get('CallMeBackForm_time')
+
     def add_note(self, note):
         notes = self.get('notes', [])
         notes.append(note)
@@ -139,15 +150,11 @@ class CheckerSession(SecureCookieSession):
             if key in self:
                 del self[key]
 
-    def get_form_data(self, form_class_name, as_object=False):
+    def get_form_data(self, form_class_name):
         ns = '{0}_'.format(form_class_name)
         namespaced = lambda (key, val): key.startswith(ns)
         strip_ns = lambda (key, val): (key.replace(ns, ''), val)
         form_data = dict(map(strip_ns, filter(namespaced, self.items())))
-
-        if as_object:
-            form_data = Struct(**form_data)
-
         return form_data
 
 

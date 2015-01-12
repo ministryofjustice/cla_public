@@ -13,7 +13,8 @@ from wtforms.validators import InputRequired
 
 from cla_public.apps.base.constants import FEEL_ABOUT_SERVICE, \
     HELP_FILLING_IN_FORM
-from cla_public.apps.checker.honeypot import Honeypot
+from cla_public.libs.honeypot import Honeypot
+
 
 class FeedbackForm(Honeypot, Form):
     difficulty = TextAreaField(_(u'Did you have any difficulty with this service?'))

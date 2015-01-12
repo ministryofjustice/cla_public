@@ -9,6 +9,9 @@ DEBUG = False
 
 TESTING = False
 
+# Disable eligibility check and allow users to request a callback only
+CALLMEBACK_ONLY = os.environ.get('CALLMEBACK_ONLY', False)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -71,9 +74,7 @@ ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 
 GA_ID = os.environ.get('GA_ID')
 
-CACHE_CONFIG = {
-    'CACHE_TYPE': 'simple'
-}
+CACHE_TYPE = 'simple'
 
 STATSD_PREFIX = 'public'
 STATSD_HOST = os.environ.get('STATSD_HOST', 'localhost')

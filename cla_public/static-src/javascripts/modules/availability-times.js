@@ -68,9 +68,6 @@
       this.$todayTimeSelect
         .on('focus', check(this.$today));
 
-      this.$tomorrowTimeSelect
-        .on('focus', check(this.$tomorrow));
-
       moj.Events.on('render AvailabilityTimes.render', this.render);
     },
 
@@ -78,9 +75,7 @@
       this.$daySelect = $(this.el);
       this.$timeSelect = $('[name=time_in_day]');
       this.$todayTimeSelect = $('[name=time_today]');
-      this.$tomorrowTimeSelect = $('[name=time_tomorrow]');
       this.$today = $('[name=specific_day][value=today]');
-      this.$tomorrow = $('[name=specific_day][value=tomorrow]');
       this.$specificDay = $('[name=specific_day][value=specific_day]');
     },
 
