@@ -54,19 +54,21 @@
     bindEvents: function () {
       function check(el) {
         return function () {
-          el.prop('checked', true);
+          el
+            .prop('checked', true)
+            .trigger('label-select');
         };
       }
 
       this.$daySelect
         .on('change', this.render)
-        .on('focus', check(this.$specificDay));
+        .on('change', check(this.$specificDay));
 
       this.$timeSelect
-        .on('focus', check(this.$specificDay));
+        .on('change', check(this.$specificDay));
 
       this.$todayTimeSelect
-        .on('focus', check(this.$today));
+        .on('change', check(this.$today));
 
       moj.Events.on('render AvailabilityTimes.render', this.render);
     },
