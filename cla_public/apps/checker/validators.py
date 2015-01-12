@@ -20,7 +20,8 @@ class IgnoreIf(object):
         depfield = getattr(form, self.field_name)
         for dependency in self.dependencies:
             if callable(dependency) and dependency(depfield, form=form):
-                if not field.raw_data or isinstance(field.raw_data[0], string_types):
+                if not field.raw_data or isinstance(
+                        field.raw_data[0], string_types):
                     if hasattr(field, 'clear_errors'):
                         field.clear_errors()
                     else:

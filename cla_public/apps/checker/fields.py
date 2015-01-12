@@ -24,7 +24,8 @@ class PartnerMixin(object):
 
     def __init__(self, *args, **kwargs):
         partner_label = kwargs.pop('partner_label', kwargs.get('label'))
-        partner_description = kwargs.pop('partner_description', kwargs.get('description'))
+        partner_description = kwargs.pop(
+            'partner_description', kwargs.get('description'))
         if session.has_partner:
             kwargs['label'] = partner_label
             kwargs['description'] = partner_description
@@ -79,7 +80,8 @@ class YesNoField(RadioField):
     def __init__(self, label=None, validators=None, **kwargs):
         choices = [(YES, 'Yes'), (NO, 'No')]
         if validators is None:
-            validators = [InputRequired(message=gettext(u'Please choose Yes or No'))]
+            validators = [
+                InputRequired(message=gettext(u'Please choose Yes or No'))]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=text_type,
             choices=choices, **kwargs)
@@ -205,13 +207,15 @@ class MoneyIntervalField(PassKwargsToFormField):
         choices = kwargs.pop('choices', None)
 
         super(MoneyIntervalField, self).__init__(
-            MoneyIntervalForm, form_kwargs={'choices': choices}, *args, **kwargs)
+            MoneyIntervalForm,
+            form_kwargs={'choices': choices},
+            *args, **kwargs)
 
     def as_monthly(self):
         return money_interval_to_monthly(self.data)
 
     def validate(self, form, extra_validators=None):
-        stop_validation = self._run_validation_chain(form, self.validators)
+        self._run_validation_chain(form, self.validators)
         return len(self.errors) == 0
 
     @property
@@ -242,11 +246,15 @@ class PropertyList(FieldList):
     def validate(self, form, extra_validators=tuple()):
         super(PropertyList, self).validate(form, extra_validators)
 
-        main_properties = filter(lambda x: x.is_main_home.data == YES, self.entries)
+        main_properties = filter(
+            lambda x: x.is_main_home.data == YES,
+            self.entries)
 
         if len(main_properties) > 1:
             message = self.gettext('You can only have 1 main Property')
-            map(lambda x: x.is_main_home.errors.append(message), main_properties)
+            map(
+                lambda x: x.is_main_home.errors.append(message),
+                main_properties)
             self.errors.append(message)
 
         return len(self.errors) == 0
