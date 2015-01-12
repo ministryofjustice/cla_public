@@ -4,7 +4,6 @@
 from flask import session
 from flask.ext.babel import lazy_gettext as _, gettext
 from flask_wtf import Form
-import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, FormField, RadioField, SelectField, \
     StringField, TextAreaField
@@ -84,7 +83,6 @@ class CallMeBackForm(Honeypot, Form):
 
     def api_payload(self):
         "Form data as data structure ready to send to API"
-        time = self.time.scheduled_time().replace(tzinfo=pytz.utc)
         return {
             'personal_details': {
                 'full_name': self.full_name.data,
@@ -103,5 +101,5 @@ class CallMeBackForm(Honeypot, Form):
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
             },
-            'requires_action_at': time.isoformat(),
+            'requires_action_at': self.time.data.isoformat(),
         }

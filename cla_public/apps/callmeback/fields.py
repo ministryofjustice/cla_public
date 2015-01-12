@@ -4,6 +4,7 @@
 import datetime
 
 from flask.ext.babel import lazy_gettext as _
+import pytz
 from wtforms import FormField, RadioField, SelectField
 from wtforms import Form as NoCsrfForm
 from wtforms.validators import InputRequired, ValidationError
@@ -175,8 +176,9 @@ class AvailabilityCheckerField(FormField):
         super(AvailabilityCheckerField, self).__init__(
             AvailabilityCheckerForm, *args, **kwargs)
 
-    def scheduled_time(self):
+    @property
+    def data(self):
         """
         Get the datetime of the selected day and timeslot
         """
-        return self.form.scheduled_time()
+        return self.form.scheduled_time().replace(tzinfo=pytz.utc)

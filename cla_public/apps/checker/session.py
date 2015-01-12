@@ -120,6 +120,10 @@ class CheckerSession(SecureCookieSession):
     def partner_is_self_employed(self):
         return self.has_partner and self.get('AboutYouForm_partner_is_self_employed', NO) == YES
 
+    @property
+    def callback_time(self):
+        return self.get('CallMeBackForm_time')
+
     def add_note(self, note):
         notes = self.get('notes', [])
         notes.append(note)
