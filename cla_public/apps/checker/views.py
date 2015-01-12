@@ -224,15 +224,17 @@ def help_organisations(category_name):
 
     # force english as knowledge base languages are in english
     with override_locale('en'):
-        requested = lambda slug, name, desc: name == category_name
-        category, name, desc = next(iter(filter(requested, CATEGORIES)), None)
+        requested = lambda (slug, name, desc): name == category_name
+        category, name, desc = next(
+            iter(filter(requested, CATEGORIES)),
+            (None, None, None))
 
         if category is None:
             abort(404)
 
     category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
 
-    organisations = get_organisation_list(article_category__name=name)
+    organisations = get_organisation_list(article_category__name=unicode(name))
     return render_template(
         'help-organisations.html',
         organisations=organisations,
