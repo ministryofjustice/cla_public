@@ -28,7 +28,7 @@ module.exports = {
 
   'Eligible page (request callback)': function(client) {
     client
-      .waitForElementVisible('form[action="/result/eligible"]', 2000)
+      .waitForElementVisible('form[action="/call-me-back"]', 2000)
       .assert.urlContains('/result/eligible')
       .assert.containsText('h1', 'You might qualify for legal aid')
       .assert.containsText('h2', 'Request a callback')

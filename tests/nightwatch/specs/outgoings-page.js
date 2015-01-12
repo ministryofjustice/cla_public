@@ -123,7 +123,7 @@ module.exports = {
     client
       .setValue('input[name="income_contribution"]', 0)
       .submitForm('form')
-      .waitForElementPresent('form[action="/result/eligible"]', 2000)
+      .waitForElementPresent('form[action="/call-me-back"]', 2000)
       .assert.urlContains('/result/eligible')
     ;
 
