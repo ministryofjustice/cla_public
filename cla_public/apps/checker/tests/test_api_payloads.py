@@ -325,7 +325,6 @@ class TestApiPayloads(unittest.TestCase):
 
             'specific_day': 'today',
             'time_today': '1945',
-            'time_tomorrow': '',
             'day': '',
             'time_in_day': '',
         }
