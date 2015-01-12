@@ -10,7 +10,7 @@ DEBUG = False
 TESTING = False
 
 # Disable eligibility check and allow users to request a callback only
-CALLMEBACK_ONLY = os.environ.get('CALLMEBACK_ONLY', False)
+CALLMEBACK_ONLY = os.environ.get('CALLMEBACK_ONLY', False) == 'True'
 
 LOGGING = {
     'version': 1,
