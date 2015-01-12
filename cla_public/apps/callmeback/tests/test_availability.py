@@ -6,9 +6,9 @@ import unittest
 from wtforms.validators import ValidationError
 
 from cla_public.libs import call_centre_availability
-from cla_public.apps.checker.constants import DAY_TODAY, DAY_TOMORROW, \
+from cla_public.apps.callmeback.constants import DAY_TODAY, DAY_TOMORROW, \
     DAY_SPECIFIC
-from cla_public.apps.checker.validators import AvailableSlot
+from cla_public.apps.callmeback.fields import AvailableSlot
 
 
 @contextmanager
