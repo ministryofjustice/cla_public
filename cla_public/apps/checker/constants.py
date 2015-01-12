@@ -146,15 +146,6 @@ ORGANISATION_CATEGORY_MAPPING = {
     'Trouble with the police': 'Action against police',
 }
 
-DAY_TODAY = 'today'
-DAY_TOMORROW = 'tomorrow'
-DAY_SPECIFIC = 'specific_day'
-DAY_CHOICES = (
-    (DAY_TODAY, _('Call me today at')),
-    (DAY_TOMORROW, _('Call me tomorrow at')),
-    (DAY_SPECIFIC, _('Call me in the next week on'))
-)
-
 CONTACT_SAFETY = (
     ('SAFE', _('Yes')),
     ('NO_MESSAGE', _('No')),

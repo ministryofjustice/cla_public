@@ -1,12 +1,9 @@
-import datetime
+# -*- coding: utf-8 -*-
+"Custom validators"
+# TODO - none of this is exclusive to checker app
 
 from wtforms.compat import string_types
 from wtforms.validators import StopValidation, ValidationError, Optional
-
-from cla_public.apps.checker.constants import DAY_TODAY, DAY_TOMORROW, \
-    DAY_SPECIFIC
-from cla_public.libs import call_centre_availability
-from cla_public.libs.call_centre_availability import available
 
 
 class IgnoreIf(object):
@@ -23,7 +20,8 @@ class IgnoreIf(object):
         depfield = getattr(form, self.field_name)
         for dependency in self.dependencies:
             if callable(dependency) and dependency(depfield, form=form):
-                if not field.raw_data or isinstance(field.raw_data[0], string_types):
+                if not field.raw_data or isinstance(
+                        field.raw_data[0], string_types):
                     if hasattr(field, 'clear_errors'):
                         field.clear_errors()
                     else:
@@ -101,27 +99,8 @@ class ValidMoneyInterval(object):
             raise ValidationError(field.gettext(u'Not a valid amount'))
 
         if not interval_selected and nonzero_amount:
-            raise ValidationError(field.gettext(u'Please select a time period from the drop down'))
-
-
-class AvailableSlot(object):
-    """
-    Validates whether the selected time slot is available.
-    """
-
-    def __init__(self, day):
-        self.day = day
-
-    def __call__(self, form, field):
-        date = call_centre_availability.current_datetime()
-        if self.day == DAY_TOMORROW:
-            date = date + datetime.timedelta(days=1)
-        if self.day == DAY_SPECIFIC:
-            date = form.day.data
-        time = datetime.datetime.combine(date, field.data)
-        if not available(time):
-            raise ValidationError(
-                field.gettext(u"Can't schedule a callback at the requested time"))
+            raise ValidationError(field.gettext(
+                u'Please select a time period from the drop down'))
 
 
 class NotRequired(Optional):

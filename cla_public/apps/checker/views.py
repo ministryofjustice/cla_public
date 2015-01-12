@@ -10,14 +10,14 @@ from flask import abort, render_template, redirect, \
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, get_organisation_list
-from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, ORGANISATION_CATEGORY_MAPPING, \
-    NO_CALLBACK_CATEGORIES
-from cla_public.apps.checker.decorators import form_view, override_session_vars, redirect_if_no_session, \
-    redirect_if_ineligible
+from cla_public.apps.callmeback.forms import CallMeBackForm
+from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, \
+    ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
+from cla_public.apps.checker.decorators import form_view, \
+    redirect_if_no_session, redirect_if_ineligible
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
-    OutgoingsForm, ApplicationForm
-from cla_public.apps.checker.honeypot import FIELD_NAME as HONEYPOT_FIELD_NAME
+    OutgoingsForm
 from cla_public.libs.utils import override_locale
 
 
@@ -30,9 +30,6 @@ def proceed(next_step, **kwargs):
 
 def outcome(outcome):
     return proceed('result', outcome=outcome)
-
-
-checker.add_app_template_global(HONEYPOT_FIELD_NAME, name='honeypot_field_name')
 
 
 @checker.after_request
@@ -188,36 +185,34 @@ def result(outcome):
         session.clear()
         return render_template('result/eligible-no-callback.html')
 
-    form = ApplicationForm()
+    form = CallMeBackForm()
     if form.validate_on_submit():
         if form.extra_notes.data:
-            session.add_note(u'User problem:\n{0}'.format(form.extra_notes.data))
+            session.add_note(
+                u'User problem:\n{0}'.format(form.extra_notes.data))
 
         post_to_eligibility_check_api(session.notes_object())
         post_to_case_api(form)
 
-        session['time_to_callback'] = form.time.scheduled_time()
-
         return redirect(url_for('.result', outcome='confirmation'))
+
+    category_name = 'your issue'
+    if session.category:
+        category_name = session.category_name
+
+    is_unknown = session.get('is_eligible') == ELIGIBILITY_STATES.UNKNOWN
 
     response = render_template(
         'result/%s.html' % outcome,
         form=form,
         category=session.category,
-        category_name=session.category_name if session.category else 'your issue',
-        eligibility_unknown=session.get('is_eligible', None) == ELIGIBILITY_STATES.UNKNOWN)
+        category_name=category_name,
+        eligibility_unknown=is_unknown)
 
     if outcome in ['confirmation', 'face-to-face']:
         session.clear()
 
     return response
-
-
-@checker.route('/call-me-back', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(ApplicationForm, 'call-me-back.html')
-def call_me_back(user):
-    return outcome('confirmation')
 
 
 @checker.route('/help-organisations/<category_name>', methods=['GET'])
@@ -229,13 +224,16 @@ def help_organisations(category_name):
 
     # force english as knowledge base languages are in english
     with override_locale('en'):
-        valid_outcomes = [name for field, name, description in CATEGORIES]
-        if category_name not in valid_outcomes:
+        requested = lambda slug, name, desc: name == category_name
+        category, name, desc = next(iter(filter(requested, CATEGORIES)), None)
+
+        if category is None:
             abort(404)
 
-        category = (field for field, name, description in CATEGORIES if name == category_name).next()
+    category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
 
-    category_name = ORGANISATION_CATEGORY_MAPPING.get(category_name, category_name)
-
-    organisations = get_organisation_list(article_category__name=category_name)
-    return render_template('help-organisations.html', organisations=organisations, category=category)
+    organisations = get_organisation_list(article_category__name=name)
+    return render_template(
+        'help-organisations.html',
+        organisations=organisations,
+        category=category)

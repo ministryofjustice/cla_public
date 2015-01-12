@@ -23,7 +23,7 @@
     </p>
   {% endblock %}
 
-  <form method="POST" action="{{ url_for('.result', outcome='eligible') }}">
+  <form method="POST" action="{{ url_for('callmeback.request_callback') }}">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
