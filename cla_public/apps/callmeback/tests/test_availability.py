@@ -6,8 +6,7 @@ import unittest
 from wtforms.validators import ValidationError
 
 from cla_public.libs import call_centre_availability
-from cla_public.apps.callmeback.constants import DAY_TODAY, DAY_TOMORROW, \
-    DAY_SPECIFIC
+from cla_public.apps.callmeback.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.callmeback.fields import AvailableSlot
 
 
@@ -58,20 +57,6 @@ class TestAvailability(unittest.TestCase):
     def test_available_slot_today_after_8pm(self):
         self.validator = AvailableSlot(DAY_TODAY)
         self.assertNotAvailable(datetime.time(20, 0))
-
-    def test_available_slot_tomorrow_9am(self):
-        self.validator = AvailableSlot(DAY_TOMORROW)
-        self.assertAvailable(datetime.time(9, 0))
-
-    def test_available_slot_tomorrow_saturday_after_1230pm(self):
-        self.now = datetime.datetime(2014, 11, 21, 9, 0)
-        self.validator = AvailableSlot(DAY_TOMORROW)
-        self.assertNotAvailable(datetime.time(13, 0))
-
-    def test_available_slot_tomorrow_sunday(self):
-        self.now = datetime.datetime(2014, 11, 22, 9, 0)
-        self.validator = AvailableSlot(DAY_TOMORROW)
-        self.assertNotAvailable(datetime.time(13, 0))
 
     def test_available_slot_specific_day(self):
         self.validator = AvailableSlot(DAY_SPECIFIC)

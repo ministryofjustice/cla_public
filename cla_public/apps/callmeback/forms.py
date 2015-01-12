@@ -10,8 +10,6 @@ from wtforms import BooleanField, FormField, RadioField, SelectField, \
 from wtforms.validators import InputRequired, Optional
 
 from cla_common.constants import ADAPTATION_LANGUAGES
-from cla_public.apps.callmeback.constants import DAY_CHOICES, \
-    DAY_TOMORROW, DAY_SPECIFIC
 from cla_public.apps.callmeback.fields import AvailabilityCheckerField
 from cla_public.apps.checker.constants import CONTACT_SAFETY
 from cla_public.libs.honeypot import Honeypot
