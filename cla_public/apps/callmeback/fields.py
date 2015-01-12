@@ -10,12 +10,11 @@ from wtforms import Form as NoCsrfForm
 from wtforms.validators import InputRequired, ValidationError
 
 from cla_public.apps.callmeback.constants import DAY_CHOICES, DAY_TODAY, \
-    DAY_TOMORROW, DAY_SPECIFIC
+    DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs import call_centre_availability
 from cla_public.libs.call_centre_availability import available, \
-    available_days, day_choice, time_choice, time_slots, today_slots, \
-    tomorrow_slots
+    available_days, day_choice, time_choice, time_slots, today_slots
 
 
 class FormattedChoiceField(object):
@@ -91,8 +90,6 @@ class AvailableSlot(object):
 
     def __call__(self, form, field):
         date = call_centre_availability.current_datetime()
-        if self.day == DAY_TOMORROW:
-            date = date + datetime.timedelta(days=1)
         if self.day == DAY_SPECIFIC:
             date = form.day.data
         time = datetime.datetime.combine(date, field.data)
@@ -118,12 +115,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
             IgnoreIf('specific_day', FieldValueNot(DAY_TODAY)),
             AvailableSlot(DAY_TODAY)],
         id='id_time_today')
-    time_tomorrow = TimeChoiceField(
-        tomorrow_slots,
-        validators=[
-            IgnoreIf('specific_day', FieldValueNot(DAY_TOMORROW)),
-            AvailableSlot(DAY_TOMORROW)],
-        id='id_time_tomorrow')
     day = DayChoiceField(
         validators=[
             IgnoreIf('specific_day', FieldValueNot(DAY_SPECIFIC)),
@@ -140,9 +131,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
         kwargs['prefix'] = ''
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
-            self.specific_day.data = DAY_TOMORROW
-        if not self.time_tomorrow.choices and \
-                self.specific_day.data == DAY_TOMORROW:
             self.specific_day.data = DAY_SPECIFIC
 
     def scheduled_time(self, today=None):
@@ -154,10 +142,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
 
         if self.specific_day.data == DAY_TODAY:
             time = self.time_today.data
-
-        if self.specific_day.data == DAY_TOMORROW:
-            date += datetime.timedelta(days=1)
-            time = self.time_tomorrow.data
 
         if self.specific_day.data == DAY_SPECIFIC:
             date = self.day.data

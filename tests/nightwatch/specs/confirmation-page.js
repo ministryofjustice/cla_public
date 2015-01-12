@@ -66,21 +66,6 @@ module.exports = {
     }
   },
 
-  'Check callback tomorrow': function(client) {
-    eligibleJourney(client);
-
-    var now = moment();
-    if(now.day() !== 6) {
-      client
-        .click('input[name="specific_day"][value="tomorrow"]')
-        .getValue('select[name="time_tomorrow"]', function(result) {
-        checkCallbackTime(client, now.add(1, 'days'), result.value);
-      });
-    } else {
-      console.log('Tomorrow not available on Saturday, test skipped');
-    }
-  },
-
   'Check callback specific day': function(client) {
     eligibleJourney(client);
 
