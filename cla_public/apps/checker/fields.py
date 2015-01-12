@@ -3,7 +3,6 @@
 
 import logging
 import re
-import datetime
 
 from flask import session
 from flask.ext.babel import lazy_gettext as _, gettext

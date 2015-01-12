@@ -1,4 +1,6 @@
 import datetime
+
+from flask.json import JSONEncoder
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 
 
@@ -13,6 +15,17 @@ def namespace(ns):
         key, value = item
         return ('{0}_{1}'.format(ns, key), value)
     return prefix_key
+
+
+class CustomJSONEncoder(JSONEncoder):
+
+    def default(self, obj):
+        if any([isinstance(obj, datetime.date),
+                isinstance(obj, datetime.time),
+                isinstance(obj, datetime.datetime)]):
+            return obj.isoformat()
+        return super(CustomJSONEncoder, self).default(obj)
+
 
 
 class CheckerSession(SecureCookieSession):

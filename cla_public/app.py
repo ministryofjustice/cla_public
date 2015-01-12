@@ -13,7 +13,8 @@ from cla_public.apps.addressfinder_proxy.views import addressfinder
 from cla_public.apps.base.views import base
 from cla_public.apps.callmeback.views import callmeback
 from cla_public.apps.checker.views import checker
-from cla_public.apps.checker.session import CheckerSessionInterface
+from cla_public.apps.checker.session import CheckerSessionInterface, \
+    CustomJSONEncoder
 from cla_public.middleware import StatsdMiddleware
 from cla_public.libs.utils import get_locale
 
@@ -38,6 +39,7 @@ def create_app(config_file=None):
         extension.init_app(app)
 
     app.session_interface = CheckerSessionInterface()
+    app.json_encoder = CustomJSONEncoder
 
     register_error_handlers(app)
 
