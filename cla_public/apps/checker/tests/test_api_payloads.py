@@ -8,9 +8,10 @@ from werkzeug.datastructures import MultiDict
 
 from cla_public import app
 from cla_public.apps.checker.constants import NO, YES
+from cla_public.apps.callmeback.forms import CallMeBackForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm, \
-    IncomeAndTaxForm, income_form, OutgoingsForm, ApplicationForm
+    IncomeAndTaxForm, income_form, OutgoingsForm
 
 
 def get_en_locale():
@@ -331,7 +332,7 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data.update(self.flatten_dict('adaptations', adaptations_data))
 
-        payload = self.payload(ApplicationForm, form_data)
+        payload = self.payload(CallMeBackForm, form_data)
 
         self.assertEqual(payload['personal_details']['full_name'], 'Full Name')
         self.assertEqual(payload['personal_details']['postcode'], 'POSTCODE')

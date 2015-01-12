@@ -3,41 +3,29 @@
 
 import logging
 import re
-import datetime
 
 from flask import session
 from flask.ext.babel import lazy_gettext as _, gettext
-import pytz
-from wtforms import Form as NoCsrfForm, TextAreaField
-from wtforms import FormField, BooleanField, IntegerField, Label, RadioField, \
-    SelectField, SelectMultipleField, widgets, FieldList, StringField
+from wtforms import Form as NoCsrfForm
+from wtforms import FormField, IntegerField, RadioField, \
+    SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.compat import text_type
-from wtforms.validators import Optional, StopValidation, InputRequired
+from wtforms.validators import Optional, InputRequired
 
-from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_common.money_interval.models import MoneyInterval
-from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES, \
-    DAY_CHOICES, DAY_TODAY, DAY_TOMORROW, DAY_SPECIFIC
-from cla_public.apps.checker.validators import ValidMoneyInterval, IgnoreIf, \
-    FieldValue, FieldValueNot, AvailableSlot
-from cla_public.libs.call_centre_availability import day_choice, \
-    available_days, time_choice, today_slots, \
-    tomorrow_slots, time_slots, available
+from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
+from cla_public.apps.checker.validators import ValidMoneyInterval
 
 
 log = logging.getLogger(__name__)
-
-
-LANG_CHOICES = filter(
-    lambda x: x[0] not in ('ENGLISH', 'WELSH'),
-    [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
 
 
 class PartnerMixin(object):
 
     def __init__(self, *args, **kwargs):
         partner_label = kwargs.pop('partner_label', kwargs.get('label'))
-        partner_description = kwargs.pop('partner_description', kwargs.get('description'))
+        partner_description = kwargs.pop(
+            'partner_description', kwargs.get('description'))
         if session.has_partner:
             kwargs['label'] = partner_label
             kwargs['description'] = partner_description
@@ -92,7 +80,8 @@ class YesNoField(RadioField):
     def __init__(self, label=None, validators=None, **kwargs):
         choices = [(YES, 'Yes'), (NO, 'No')]
         if validators is None:
-            validators = [InputRequired(message=gettext(u'Please choose Yes or No'))]
+            validators = [
+                InputRequired(message=gettext(u'Please choose Yes or No'))]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=text_type,
             choices=choices, **kwargs)
@@ -218,13 +207,15 @@ class MoneyIntervalField(PassKwargsToFormField):
         choices = kwargs.pop('choices', None)
 
         super(MoneyIntervalField, self).__init__(
-            MoneyIntervalForm, form_kwargs={'choices': choices}, *args, **kwargs)
+            MoneyIntervalForm,
+            form_kwargs={'choices': choices},
+            *args, **kwargs)
 
     def as_monthly(self):
         return money_interval_to_monthly(self.data)
 
     def validate(self, form, extra_validators=None):
-        stop_validation = self._run_validation_chain(form, self.validators)
+        self._run_validation_chain(form, self.validators)
         return len(self.errors) == 0
 
     @property
@@ -255,11 +246,15 @@ class PropertyList(FieldList):
     def validate(self, form, extra_validators=tuple()):
         super(PropertyList, self).validate(form, extra_validators)
 
-        main_properties = filter(lambda x: x.is_main_home.data == YES, self.entries)
+        main_properties = filter(
+            lambda x: x.is_main_home.data == YES,
+            self.entries)
 
         if len(main_properties) > 1:
             message = self.gettext('You can only have 1 main Property')
-            map(lambda x: x.is_main_home.errors.append(message), main_properties)
+            map(
+                lambda x: x.is_main_home.errors.append(message),
+                main_properties)
             self.errors.append(message)
 
         return len(self.errors) == 0
@@ -281,145 +276,5 @@ class PartnerMultiCheckboxField(PartnerMixin, MultiCheckboxField):
     pass
 
 
-class AdaptationsForm(NoCsrfForm):
-    bsl_webcam = BooleanField(_(u'BSL - Webcam'))
-    minicom = BooleanField(_(u'Minicom'))
-    text_relay = BooleanField(_(u'Text Relay'))
-    welsh = BooleanField(_(u'Welsh'))
-    is_other_language = BooleanField(_(u'Other language'))
-    other_language = SelectField(
-        _(u'Language required:'),
-        choices=(LANG_CHOICES))
-    is_other_adaptation = BooleanField(_(u'Any other communication needs'))
-    other_adaptation = TextAreaField(
-        _(u'Other communication needs'),
-        description=_(u'Please tell us what you need in the box below'))
-
-
 class PartnerMoneyField(PartnerMixin, MoneyField):
     pass
-
-
-class FormattedChoiceField(object):
-
-    def process_data(self, value):
-        self.data = value
-        if value:
-            self.data = self._format(value)
-
-    def pre_validate(self, form):
-        choice_values = (v for v, _ in self.choices)
-        if self._format(self.data) not in choice_values:
-            raise ValueError(self.gettext('Not a valid choice'))
-
-
-class DayChoiceField(FormattedChoiceField, SelectField):
-
-    def __init__(self, num_days=6, *args, **kwargs):
-        super(DayChoiceField, self).__init__(*args, **kwargs)
-        self.choices = map(day_choice, available_days(num_days))
-
-    def process_formdata(self, valuelist):
-        if valuelist:
-            try:
-                year = int(valuelist[0][:4])
-                month = int(valuelist[0][4:6])
-                day = int(valuelist[0][6:])
-                self.data = datetime.date(year, month, day)
-            except ValueError:
-                self.data = None
-                raise ValueError(self.gettext('Not a valid date'))
-
-    def _format(self, value):
-        return '{:%Y%m%d}'.format(value)
-
-
-class TimeChoiceField(FormattedChoiceField, SelectField):
-
-    def __init__(self, choices_callback=None, validators=None, **kwargs):
-        super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
-        self.choices = map(time_choice, choices_callback())
-
-    def process_formdata(self, valuelist):
-        if valuelist:
-            try:
-                hour = int(valuelist[0][:2])
-                minute = int(valuelist[0][2:])
-                self.data = datetime.time(hour, minute)
-            except ValueError:
-                self.data = None
-                raise ValueError(self.gettext('Not a valid time'))
-
-    def _format(self, value):
-        return '{:%H%M}'.format(value)
-
-
-class AvailabilityCheckerForm(NoCsrfForm):
-    specific_day = RadioField(
-        label=_(u'Arrange a callback time'),
-        choices=DAY_CHOICES,
-        default=DAY_TODAY)
-
-    # choices must be set dynamically as cache is not available at runtime
-    time_today = TimeChoiceField(
-        today_slots,
-        validators=[
-            IgnoreIf('specific_day', FieldValueNot(DAY_TODAY)),
-            AvailableSlot(DAY_TODAY)],
-        id='id_time_today')
-    time_tomorrow = TimeChoiceField(
-        tomorrow_slots,
-        validators=[
-            IgnoreIf('specific_day', FieldValueNot(DAY_TOMORROW)),
-            AvailableSlot(DAY_TOMORROW)],
-        id='id_time_tomorrow')
-    day = DayChoiceField(
-        validators=[
-            IgnoreIf('specific_day', FieldValueNot(DAY_SPECIFIC)),
-            InputRequired()],
-        id='id_day')
-    time_in_day = TimeChoiceField(
-        time_slots,
-        validators=[
-            IgnoreIf('specific_day', FieldValueNot(DAY_SPECIFIC)),
-            AvailableSlot(DAY_SPECIFIC)],
-        id='id_time_in_day')
-
-    def __init__(self, *args, **kwargs):
-        kwargs['prefix'] = ''
-        super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
-        if not self.time_today.choices:
-            self.specific_day.data = DAY_TOMORROW
-        if not self.time_tomorrow.choices and self.specific_day.data == DAY_TOMORROW:
-            self.specific_day.data = DAY_SPECIFIC
-
-    def scheduled_time(self, today=None):
-        date = today or datetime.date.today()
-        time = None
-
-        if self.specific_day.data == DAY_TODAY:
-            time = self.time_today.data
-
-        if self.specific_day.data == DAY_TOMORROW:
-            date += datetime.timedelta(days=1)
-            time = self.time_tomorrow.data
-
-        if self.specific_day.data == DAY_SPECIFIC:
-            date = self.day.data
-            time = self.time_in_day.data
-
-        if date and time:
-            return datetime.datetime.combine(date, time)
-
-        return None
-
-
-class AvailabilityCheckerField(FormField):
-    """Convenience class for FormField(AvailabilityCheckerForm"""
-
-    def __init__(self, *args, **kwargs):
-        super(AvailabilityCheckerField, self).__init__(
-            AvailabilityCheckerForm, *args, **kwargs)
-
-    def scheduled_time(self):
-        return self.form.scheduled_time()

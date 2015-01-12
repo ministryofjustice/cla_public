@@ -2,7 +2,7 @@ from collections import OrderedDict
 import slumber
 import urllib
 from flask import current_app, session
-from cla_public.apps.base.decorators import api_proxy
+from cla_public.libs.api_proxy import on_timeout
 from cla_public.apps.checker.constants import CATEGORIES
 from cla_common.constants import ELIGIBILITY_STATES
 
@@ -99,7 +99,7 @@ def post_to_eligibility_check_api(form):
         backend.eligibility_check(reference).patch(payload)
 
 
-@api_proxy(return_value=ELIGIBILITY_STATES.UNKNOWN)
+@on_timeout(response=ELIGIBILITY_STATES.UNKNOWN)
 def post_to_is_eligible_api():
     backend = get_api_connection()
     reference = session.get('eligibility_check')
@@ -121,7 +121,7 @@ def post_to_case_api(form):
     session['case_ref'] = response['reference']
 
 
-@api_proxy(return_value=[])
+@on_timeout(response='[]')
 def get_organisation_list(**kwargs):
     kwargs['page_size'] = 100
     key = 'organisation_list_%s' % urllib.urlencode(kwargs)
