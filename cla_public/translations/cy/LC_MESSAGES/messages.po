@@ -3435,9 +3435,6 @@ msgid "Field must be at least %(min)d character long."
 msgid_plural "Field must be at least %(min)d characters long."
 msgstr[0] "Rhaid i'r maes fod o leiaf %(min)d nod."
 msgstr[1] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
-msgstr[2] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
-msgstr[3] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
-msgstr[4] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
 
 #: wtforms/validators.py:99
 #, python-format
@@ -3445,9 +3442,6 @@ msgid "Field cannot be longer than %(max)d character."
 msgid_plural "Field cannot be longer than %(max)d characters."
 msgstr[0] "Ni all y maes fod yn fwy na %(max)d nod."
 msgstr[1] "Ni all y maes fod yn fwy na %(max)d o nodau."
-msgstr[2] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
-msgstr[3] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
-msgstr[4] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
 
 #: wtforms/validators.py:102
 #, python-format
@@ -3523,6 +3517,14 @@ msgstr "CSRF wedi methu"
 msgid "CSRF token expired"
 msgstr "Tocyn CSRF wedi dod i ben"
 
+#: wtforms/ext/appengine/fields.py:87 wtforms/ext/appengine/fields.py:164
+#: wtforms/ext/appengine/fields.py:166 wtforms/ext/django/fields.py:96
+#: wtforms/ext/sqlalchemy/fields.py:125 wtforms/ext/sqlalchemy/fields.py:127
+#: wtforms/ext/sqlalchemy/fields.py:177 wtforms/ext/sqlalchemy/fields.py:182
+#: wtforms/fields/core.py:456
+msgid "Not a valid choice"
+msgstr "Dewis annilys"
+
 #: wtforms/ext/appengine/fields.py:185
 msgid "Not a valid list"
 msgstr "Rhestr annilys"
@@ -3549,9 +3551,7 @@ msgstr "Dewis annilys: ddim yn bosib gweithredu"
 
 #: wtforms/fields/core.py:482
 msgid "Invalid choice(s): one or more data inputs could not be coerced"
-msgstr ""
-"Dewis(iadau) annilys: ddim yn bosib gweithredu un neu ragor o fewnbynnau "
-"data"
+msgstr "Dewis(iadau) annilys: ddim yn bosib gweithredu un neu ragor o fewnbynnau data"
 
 #: wtforms/fields/core.py:489
 #, python-format
