@@ -50,11 +50,12 @@ module.exports = {
 
   'Test outcomes': function(client) {
     BENEFITS.forEach(function(item) {
-      var destination = (item === 'other-benefit' ? '/benefits-tax-credits' : '/call-me-back');
+      var destination = (item === 'other-benefit' ? '/benefits-tax-credits' : '/result/eligible');
+      var action = (item === 'other-benefit' ? '/benefits-tax-credits' : '/call-me-back');
       client
         .click(util.format('input[value="%s"]', item))
         .submitForm('form')
-        .waitForElementVisible(util.format('form[action="%s"]', destination), 2000)
+        .waitForElementVisible(util.format('form[action="%s"]', action), 2000)
         .assert.urlContains(destination, util.format('Goes to %s when %s is checked', destination, item))
         .back()
         .waitForElementVisible('form[action="/benefits"]', 2000)
