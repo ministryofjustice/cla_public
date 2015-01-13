@@ -1,0 +1,26 @@
+source 'https://rubygems.org'
+
+gem 'sculptor', '0.0.11.1'
+gem 'middleman', '~>3.3'
+gem 'middleman-pry'
+gem 'middleman-deploy'
+gem 'nokogiri'
+gem 'rest_client'
+gem 'sass', '~>3.4'
+gem 'compass', github: 'chriseppstein/compass'
+gem 'sass-css-importer'
+gem 'slim'
+gem 'bourbon'
+gem 'susy'
+gem 'breakpoint'
+gem 'oj'
+
+gem 'middleman-syntax', github: 'middleman/middleman-syntax'
+
+# Custom LiveReload (animate transitions)
+gem 'rack-livereload',
+  github: 'tyom/rack-livereload',
+  branch: 'livereload-animate'
+gem 'middleman-livereload',
+  github: 'tyom/middleman-livereload',
+  branch: 'animate-transitions'

@@ -1,0 +1,77 @@
+.glypto-model-utils {
+  > menu {
+    @include clearfix;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    margin: 0;
+    padding: 6px 0;
+    position: relative;
+    border-bottom: 2px solid white;
+
+    > a,
+    > button {
+      text-transform: uppercase;
+      padding: 5px 8px 3px;
+      border-radius: 3px;
+      background: none;
+
+      &:hover {
+        color: #666;
+        background: rgba(white, .7);
+      }
+      &:active {
+        color: #555;
+        background: rgba(black, .1);
+      }
+
+      &.__active {
+        color: white;
+        background: rgba(black, .3);
+
+        &:active {
+          background: rgba(black, .5);
+          color: white;
+        }
+      }
+
+      .fa {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  ._tab-toggle {
+    float: left;
+    border: none;
+    outline: none;
+    margin-right: 3px;
+  }
+
+  ._isolated {
+    float: right;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  ._container {
+    max-height: 40rem;
+    overflow: auto;
+  }
+
+  ._panel {
+    padding: 10px;
+    display: none;
+
+    &.__shown {
+      display: block;
+      background: rgba(black, .05);
+    }
+  }
+
+  pre {
+    font: 12px/1.4 Menlo, monospace;
+    white-space: pre-wrap;
+    margin: 0;
+  }
+}

@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta charset='utf-8'
+    title = current_page.data.title || yield_content(:page_title) || resource_file(current_page)
+    meta name='viewport' content='width=device-width'
+    = yield_content :stylesheets
+    = include_stylesheets(current_page.data.stylesheets || current_page.data.stylesheet)
+
+  body class="#{yield_content(:body_class)}"
+    = yield_content :model
+
+    = yield_content :javascripts
+    = include_javascripts(current_page.data.javascripts || current_page.data.javascript)
+    = yield_content :post_body

@@ -1,0 +1,12 @@
+{
+  "name": "sculptor",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "normalize.css": "*",
+    "angular": "~1.2.16",
+    "lodash": "*",
+    "mousetrap": "~1.4.6",
+    "store": "~2.1.6"
+  }
+}

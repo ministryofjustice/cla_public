@@ -1,0 +1,14 @@
+@import 'CSS:normalize';
+@import 'bourbon';
+
+* {
+  &,
+  &:before,
+  &:after {
+    @include box-sizing(border-box);
+  }
+}
+
+body.glypto-model-stage {
+  padding: 1rem;
+}

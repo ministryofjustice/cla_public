@@ -1,0 +1,19 @@
+- content_for :page_title,  'CLA ELements'
+- content_for :ng_app,      'glyptotheque'
+- content_for :stylesheets,  stylesheet_link_tag('glyptotheque')
+
+= wrap_layout :layout do
+  - if resource_tree('/').any?
+    = partial 'glyptotheque/nav'
+
+  main.glyptotheque
+    - if current_page.data.title
+      header
+        h1 = current_page.data.title
+    = yield
+
+  javascript:
+    APP_CONTEXT = {
+      sitemap: #{partial 'sitemap.json'},
+      current_url: "#{current_page.url}"
+    }

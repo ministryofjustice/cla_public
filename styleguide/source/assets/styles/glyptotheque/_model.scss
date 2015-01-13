@@ -1,0 +1,49 @@
+@import 'bourbon';
+@import 'pygments/github';
+
+.glypto-model {
+  margin: 20px 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  > .glypto-model-stage {
+    position: relative;
+    background: white;
+
+    > figure,
+    > iframe {
+      @include transition(300ms);
+      display: block;
+      margin: 0;
+    }
+
+    > figure {
+      @include clearfix;
+      padding: 10px;
+    }
+
+    ._component {
+      @include transition(200ms max-width);
+      overflow: hidden;
+      padding: 5px;
+
+      &.__small {
+        max-width: 320px;
+      }
+
+      &.__medium {
+        max-width: 640px;
+      }
+
+      &.__large {
+        max-width: 1280px;
+      }
+
+      &.__default {
+        max-width: 100%;
+      }
+    }
+  }
+}

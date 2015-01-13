@@ -1,0 +1,31 @@
+javascript:
+  // If necessary insert a placeholder before the real menu is created
+  if(!store.get('glypto-menu-hidden')) {
+    var e = document.createElement('div');
+    e.id = 'glypto-nav-placeholder';
+    document.body.insertBefore(e, document.body.childNodes[0]);
+  }
+
+glypto-menu
+
+/ Use inline templates to avoid dealing with relative templateUrls
+
+script type="text/ng-template" id="glyptotheque/menu.html"
+  nav.glypto-nav ng-class="{'s-hidden' : hidden}"
+    button.glypto-nav-toggle ng-click="toggle()" title="Toggle menu: Command + Shift + E"
+    = link_to yield_content(:page_title), url_for('/index.html'), class: '_logo'
+    .search: input.mousetrap(ng-model="search" type="search" placeholder="Search (/ to focus)" glypto-search)
+
+    glypto-menu-tree items="items" filter="search"
+
+
+script type="text/ng-template" id="glyptotheque/menu-tree.html"
+  ul
+    glypto-menu-node ng-repeat="node in items|filter:filter"
+
+
+script type="text/ng-template" id="glyptotheque/menu-node.html"
+  li ng-class="{'_index': node.children, 's-selected': isSelected}"
+    = link_to '{{node.path}}'
+      | {{node.title}}
+      span._count ng-if="node.children.length" {{node.children.length}}
