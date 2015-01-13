@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-13 09:53+0000\n"
+"POT-Creation-Date: 2015-01-13 10:24+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -56,25 +56,149 @@ msgstr "Defnyddiais offer hygyrchedd megis darllenydd sgrîn"
 msgid "I had some other kind of help"
 msgstr "Cefais rhyw fath arall o help"
 
-#: cla_public/apps/base/forms.py:19
+#: cla_public/apps/base/forms.py:20
 msgid "Did you have any difficulty with this service?"
 msgstr "A gawsoch unrhyw anhawster gyda'r gwasanaeth hwn?"
 
-#: cla_public/apps/base/forms.py:21
+#: cla_public/apps/base/forms.py:22
 msgid "Do you have any ideas for how it could be improved?"
 msgstr "A oes gennych unrhyw syniadau o ran sut i'w wella?"
 
-#: cla_public/apps/base/forms.py:24
+#: cla_public/apps/base/forms.py:25
 msgid "Overall, how did you feel about the service you received today?"
 msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
 
-#: cla_public/apps/base/forms.py:29
+#: cla_public/apps/base/forms.py:30
 msgid "Did you have any help filling in this form?"
 msgstr "A gawsoch unrhyw help i lenwi'r ffurflen hon?"
 
-#: cla_public/apps/base/views.py:53
+#: cla_public/apps/base/views.py:48
 msgid "Something went wrong. Please try again."
 msgstr ""
+
+#: cla_public/apps/callmeback/constants.py:10
+msgid "Call me today at"
+msgstr "Ffoniwch fi heddiw am"
+
+#: cla_public/apps/callmeback/constants.py:11
+msgid "Call me in the next week on"
+msgstr "Ffoniwch fi'r wythnos nesaf ar"
+
+#: cla_public/apps/callmeback/fields.py:33 wtforms/ext/appengine/fields.py:87
+#: wtforms/ext/appengine/fields.py:164 wtforms/ext/appengine/fields.py:166
+#: wtforms/ext/django/fields.py:96 wtforms/ext/sqlalchemy/fields.py:125
+#: wtforms/ext/sqlalchemy/fields.py:127 wtforms/ext/sqlalchemy/fields.py:177
+#: wtforms/ext/sqlalchemy/fields.py:182 wtforms/fields/core.py:456
+msgid "Not a valid choice"
+msgstr "Nid yw hwn yn ddewis dilys"
+
+#: cla_public/apps/callmeback/fields.py:54
+msgid "Not a valid date"
+msgstr "Nid yw hwn yn ddyddiad dilys"
+
+#: cla_public/apps/callmeback/fields.py:77
+msgid "Not a valid time"
+msgstr "Nid yw hwn yn amser dilys"
+
+#: cla_public/apps/callmeback/fields.py:98
+msgid "Can't schedule a callback at the requested time"
+msgstr "Methu trefnu i'ch ffonio'n ôl ar yr amser a nodwyd yn eich cais"
+
+#: cla_public/apps/callmeback/fields.py:107
+msgid "Arrange a callback time"
+msgstr "Trefnu amser i ffonio'n ôl"
+
+#: cla_public/apps/callmeback/forms.py:20
+msgid "-- Choose a language --"
+msgstr "Dewiswch iaith"
+
+#: cla_public/apps/callmeback/forms.py:27
+msgid "BSL - Webcam"
+msgstr "Iaith Arwyddion Prydain – Gwe-gamera"
+
+#: cla_public/apps/callmeback/forms.py:28
+msgid "Minicom"
+msgstr "Minicom"
+
+#: cla_public/apps/callmeback/forms.py:29
+msgid "Text Relay"
+msgstr "Gwasanaeth cyfnewid testun"
+
+#: cla_public/apps/callmeback/forms.py:30
+msgid "Welsh"
+msgstr "Cymraeg"
+
+#: cla_public/apps/callmeback/forms.py:31
+msgid "Other language"
+msgstr "Iaith arall"
+
+#: cla_public/apps/callmeback/forms.py:33
+msgid "Language required:"
+msgstr "Iaith sydd ei hangen:"
+
+#: cla_public/apps/callmeback/forms.py:35
+msgid "Any other communication needs"
+msgstr "Unrhyw anghenion cyfathrebu eraill"
+
+#: cla_public/apps/callmeback/forms.py:37
+msgid "Other communication needs"
+msgstr "Anghenion cyfathrebu eraill"
+
+#: cla_public/apps/callmeback/forms.py:38
+msgid "Please tell us what you need in the box below"
+msgstr "Dywedwch wrthym beth sydd arnoch ei angen yn y blwch isod"
+
+#: cla_public/apps/callmeback/forms.py:46 cla_public/templates/privacy.html:435
+msgid "Full name"
+msgstr "Enw llawn"
+
+#: cla_public/apps/callmeback/forms.py:47
+msgid "For example: John Smith"
+msgstr "Er enghraifft: John Smith"
+
+#: cla_public/apps/callmeback/forms.py:50
+msgid "Contact phone number"
+msgstr "Rhif ffôn cyswllt"
+
+#: cla_public/apps/callmeback/forms.py:53
+msgid "Is it safe for us to leave a message on this number?"
+msgstr "A yw’n ddiogel i ni adael neges ar y rhif hwn?"
+
+#: cla_public/apps/callmeback/forms.py:56 cla_public/apps/checker/fields.py:86
+#: cla_public/apps/checker/forms.py:72 cla_public/apps/checker/forms.py:129
+#: cla_public/apps/checker/forms.py:146
+msgid "Please choose Yes or No"
+msgstr "Dewisiwch Ydw neu Nac ydw"
+
+#: cla_public/apps/callmeback/forms.py:58
+msgid "Postcode"
+msgstr "Cod post "
+
+#: cla_public/apps/callmeback/forms.py:59 cla_public/templates/privacy.html:436
+msgid "Address"
+msgstr "Cyfeiriad "
+
+#: cla_public/apps/callmeback/forms.py:61
+msgid "Help the operator to understand your situation"
+msgstr "Helpwch y gweithredwr i ddeall eich sefyllfa"
+
+#: cla_public/apps/callmeback/forms.py:62
+msgid ""
+"If you’d like to tell us more about your problem, please do so in the box"
+" below. The Civil Legal Advice operator will read this before they call "
+"you."
+msgstr ""
+"Yn eich geiriau’ch hun, eglurwch beth yn union yw’r broblem yn y blwch "
+"isod. Bydd y gweithredwr Cyngor Cyfreithiol Sifil yn darllen hyn cyn eich"
+" ffonio"
+
+#: cla_public/apps/callmeback/forms.py:69
+msgid "Do you have any special communication needs?"
+msgstr "Oes gennych chi unrhyw anghenion cyfathrebu arbennig?"
+
+#: cla_public/apps/callmeback/forms.py:71
+msgid "Select a time for us to call you"
+msgstr "Dewiswch amser i ni eich ffonio"
 
 #: cla_public/apps/checker/constants.py:10
 msgid "Clinical negligence"
@@ -358,128 +482,50 @@ msgstr "Taliadau’r Gronfa Gymdeithasol"
 msgid "War Pension"
 msgstr "Pensiwn Rhyfel"
 
-#: cla_public/apps/checker/constants.py:152
-msgid "Call me today at"
-msgstr "Ffoniwch fi heddiw am"
-
-#: cla_public/apps/checker/constants.py:153
-msgid "Call me tomorrow at"
-msgstr "Ffoniwch fi yfory am"
-
-#: cla_public/apps/checker/constants.py:154
-msgid "Call me in the next week on"
-msgstr "Ffoniwch fi'r wythnos nesaf ar"
-
-#: cla_public/apps/checker/constants.py:158
+#: cla_public/apps/checker/constants.py:149
 msgctxt "It is"
 msgid "Yes"
 msgstr "Ydy"
 
-#: cla_public/apps/checker/constants.py:159
+#: cla_public/apps/checker/constants.py:150
 msgctxt "It isn’t"
 msgid "No"
 msgstr "Nac ydy"
 
-#: cla_public/apps/checker/fields.py:33
-msgid "-- Choose a language --"
-msgstr "Dewiswch iaith"
-
-#: cla_public/apps/checker/fields.py:92
+#: cla_public/apps/checker/fields.py:81
 msgid "Yes"
 msgstr "le"
 
-#: cla_public/apps/checker/fields.py:93
+#: cla_public/apps/checker/fields.py:82
 msgid "No"
 msgstr "Na"
 
-#: cla_public/apps/checker/fields.py:96 cla_public/apps/checker/forms.py:74
-#: cla_public/apps/checker/forms.py:130 cla_public/apps/checker/forms.py:147
-#: cla_public/apps/checker/forms.py:549
-msgid "Please choose Yes or No"
-msgstr "Dewisiwch Ydw neu Nac ydw"
-
-#: cla_public/apps/checker/fields.py:118 cla_public/apps/checker/fields.py:129
-#: cla_public/apps/checker/validators.py:101
+#: cla_public/apps/checker/fields.py:108 cla_public/apps/checker/fields.py:119
+#: cla_public/apps/checker/validators.py:99
 msgid "Not a valid amount"
 msgstr "Nid yw’n swm dilys"
 
-#: cla_public/apps/checker/fields.py:134
+#: cla_public/apps/checker/fields.py:124
 msgid "This amount must be more than £{:.0f}"
 msgstr "Mae'n rhaid i'r swm hwn fod yn fwy na "
 
-#: cla_public/apps/checker/fields.py:140
+#: cla_public/apps/checker/fields.py:130
 msgid "This amount must be less than £{:.0f}"
 msgstr "Mae'n rhaid i'r swm hwn fod yn llai na"
 
-#: cla_public/apps/checker/fields.py:262
+#: cla_public/apps/checker/fields.py:256
 msgid "You can only have 1 main Property"
 msgstr ""
 
-#: cla_public/apps/checker/fields.py:286
-msgid "BSL - Webcam"
-msgstr "Iaith Arwyddion Prydain – Gwe-gamera"
-
-#: cla_public/apps/checker/fields.py:287
-msgid "Minicom"
-msgstr "Minicom"
-
-#: cla_public/apps/checker/fields.py:288
-msgid "Text Relay"
-msgstr "Gwasanaeth cyfnewid testun"
-
-#: cla_public/apps/checker/fields.py:289
-msgid "Welsh"
-msgstr "Cymraeg"
-
-#: cla_public/apps/checker/fields.py:290
-msgid "Other language"
-msgstr "Iaith arall"
-
-#: cla_public/apps/checker/fields.py:292
-msgid "Language required:"
-msgstr "Iaith sydd ei hangen:"
-
-#: cla_public/apps/checker/fields.py:294
-msgid "Any other communication needs"
-msgstr "Unrhyw anghenion cyfathrebu eraill"
-
-#: cla_public/apps/checker/fields.py:296
-msgid "Other communication needs"
-msgstr "Anghenion cyfathrebu eraill"
-
-#: cla_public/apps/checker/fields.py:297
-msgid "Please tell us what you need in the box below"
-msgstr "Dywedwch wrthym beth sydd arnoch ei angen yn y blwch isod"
-
-#: cla_public/apps/checker/fields.py:314 wtforms/ext/appengine/fields.py:87
-#: wtforms/ext/appengine/fields.py:164 wtforms/ext/appengine/fields.py:166
-#: wtforms/ext/django/fields.py:96 wtforms/ext/sqlalchemy/fields.py:125
-#: wtforms/ext/sqlalchemy/fields.py:127 wtforms/ext/sqlalchemy/fields.py:177
-#: wtforms/ext/sqlalchemy/fields.py:182 wtforms/fields/core.py:456
-msgid "Not a valid choice"
-msgstr "Nid yw hwn yn ddewis dilys"
-
-#: cla_public/apps/checker/fields.py:332
-msgid "Not a valid date"
-msgstr "Nid yw hwn yn ddyddiad dilys"
-
-#: cla_public/apps/checker/fields.py:352
-msgid "Not a valid time"
-msgstr "Nid yw hwn yn amser dilys"
-
-#: cla_public/apps/checker/fields.py:360
-msgid "Arrange a callback time"
-msgstr "Trefnu amser i ffonio'n ôl"
-
-#: cla_public/apps/checker/forms.py:40 cla_public/templates/problem.html:6
+#: cla_public/apps/checker/forms.py:38 cla_public/templates/problem.html:6
 msgid "What do you need help with?"
 msgstr "Ar gyfer beth y mae arnoch chi angen cymorth?"
 
-#: cla_public/apps/checker/forms.py:58
+#: cla_public/apps/checker/forms.py:56
 msgid "Do you have a partner?"
 msgstr "Oes gennych chi bartner?"
 
-#: cla_public/apps/checker/forms.py:60
+#: cla_public/apps/checker/forms.py:58
 msgid ""
 "Your partner is your husband, wife, civil partner (unless you have "
 "permanently separated) or someone you live with as if you’re married"
@@ -488,29 +534,29 @@ msgstr ""
 "gwahanu yn barhaol) neu rywun sy’n byw gyda chi fel pe baech chi wedi "
 "priodi."
 
-#: cla_public/apps/checker/forms.py:63 cla_public/apps/checker/forms.py:87
-#: cla_public/apps/checker/forms.py:98 cla_public/apps/checker/forms.py:107
-#: cla_public/apps/checker/forms.py:111 cla_public/apps/checker/forms.py:131
-#: cla_public/apps/checker/forms.py:148 cla_public/apps/checker/forms.py:204
-#: cla_public/apps/checker/forms.py:233
+#: cla_public/apps/checker/forms.py:61 cla_public/apps/checker/forms.py:85
+#: cla_public/apps/checker/forms.py:97 cla_public/apps/checker/forms.py:106
+#: cla_public/apps/checker/forms.py:110 cla_public/apps/checker/forms.py:130
+#: cla_public/apps/checker/forms.py:147 cla_public/apps/checker/forms.py:208
+#: cla_public/apps/checker/forms.py:245
 msgctxt "There is/are"
 msgid "Yes"
 msgstr "Oes"
 
-#: cla_public/apps/checker/forms.py:64 cla_public/apps/checker/forms.py:88
-#: cla_public/apps/checker/forms.py:99 cla_public/apps/checker/forms.py:108
-#: cla_public/apps/checker/forms.py:112 cla_public/apps/checker/forms.py:132
-#: cla_public/apps/checker/forms.py:149 cla_public/apps/checker/forms.py:205
-#: cla_public/apps/checker/forms.py:234
+#: cla_public/apps/checker/forms.py:62 cla_public/apps/checker/forms.py:86
+#: cla_public/apps/checker/forms.py:98 cla_public/apps/checker/forms.py:107
+#: cla_public/apps/checker/forms.py:111 cla_public/apps/checker/forms.py:131
+#: cla_public/apps/checker/forms.py:148 cla_public/apps/checker/forms.py:209
+#: cla_public/apps/checker/forms.py:246
 msgctxt "There is/are not"
 msgid "No"
 msgstr "Nac oes"
 
-#: cla_public/apps/checker/forms.py:67
+#: cla_public/apps/checker/forms.py:65
 msgid "If Yes, are you in a dispute with your partner?"
 msgstr "Os ydych, ydych chi mewn anghydfod â’ch partner?"
 
-#: cla_public/apps/checker/forms.py:69
+#: cla_public/apps/checker/forms.py:67
 msgid ""
 "This means your partner is the opponent in the dispute you need help "
 "with, for example a dispute over money or property "
@@ -519,49 +565,49 @@ msgstr ""
 "mae arnoch angen cymorth ar ei gyfer, er enghraifft anghydfod am arian "
 "neu eiddo."
 
-#: cla_public/apps/checker/forms.py:76 cla_public/apps/checker/forms.py:82
-#: cla_public/apps/checker/forms.py:121 cla_public/apps/checker/forms.py:138
-#: cla_public/apps/checker/forms.py:152 cla_public/apps/checker/forms.py:221
-#: cla_public/apps/checker/forms.py:361
+#: cla_public/apps/checker/forms.py:74 cla_public/apps/checker/forms.py:80
+#: cla_public/apps/checker/forms.py:120 cla_public/apps/checker/forms.py:137
+#: cla_public/apps/checker/forms.py:151 cla_public/apps/checker/forms.py:233
+#: cla_public/apps/checker/forms.py:376
 msgctxt "I am"
 msgid "Yes"
 msgstr "Ydw"
 
-#: cla_public/apps/checker/forms.py:77 cla_public/apps/checker/forms.py:83
-#: cla_public/apps/checker/forms.py:122 cla_public/apps/checker/forms.py:139
-#: cla_public/apps/checker/forms.py:153 cla_public/apps/checker/forms.py:222
-#: cla_public/apps/checker/forms.py:362
+#: cla_public/apps/checker/forms.py:75 cla_public/apps/checker/forms.py:81
+#: cla_public/apps/checker/forms.py:121 cla_public/apps/checker/forms.py:138
+#: cla_public/apps/checker/forms.py:152 cla_public/apps/checker/forms.py:234
+#: cla_public/apps/checker/forms.py:377
 msgctxt "I’m not"
 msgid "No"
 msgstr "Nac ydw"
 
-#: cla_public/apps/checker/forms.py:79
+#: cla_public/apps/checker/forms.py:77
 msgid "Do you receive any benefits (including Child Benefit)?"
 msgstr "Ydych chi’n cael unrhyw fudd-daliadau (gan gynnwys Budd-dal Plant)?"
 
-#: cla_public/apps/checker/forms.py:81
+#: cla_public/apps/checker/forms.py:79
 msgid "Being on some benefits can help you qualify for legal aid"
 msgstr ""
 "Os ydych chi’n cael rhai budd-daliadau, gall hynny eich helpu i gymhwyso "
 "ar gyfer cymorth cyfreithiol"
 
-#: cla_public/apps/checker/forms.py:85
+#: cla_public/apps/checker/forms.py:83
 msgid "Do you have any children aged 15 or under?"
 msgstr "Oes gennych chi blant sy’n 15 oed neu’n iau?"
 
-#: cla_public/apps/checker/forms.py:86
+#: cla_public/apps/checker/forms.py:84
 msgid "Don't include any children who don't live with you"
 msgstr "Peidiwch â chynnwys plant nad ydyn nhw’n byw gyda chi "
 
-#: cla_public/apps/checker/forms.py:90 cla_public/apps/checker/forms.py:101
+#: cla_public/apps/checker/forms.py:88 cla_public/apps/checker/forms.py:100
 msgid "If Yes, how many?"
 msgstr "Os oes, faint?"
 
-#: cla_public/apps/checker/forms.py:95
+#: cla_public/apps/checker/forms.py:93
 msgid "Do you have any dependants aged 16 or over?"
 msgstr "Oes gennych chi unrhyw ddibynyddion sy’n 16 oed neu’n hŷn"
 
-#: cla_public/apps/checker/forms.py:96
+#: cla_public/apps/checker/forms.py:94
 msgid ""
 "People who you live with and support financially. This could be a young "
 "person for whom you get Child Benefit"
@@ -569,27 +615,27 @@ msgstr ""
 "Pobl sy’n byw gyda chi ac sy’n cael cymorth ariannol gennych chi. Gallai "
 "fod yn berson ifanc yr ydych chi’n cael Budd-dal Plant ar ei gyfer "
 
-#: cla_public/apps/checker/forms.py:106
+#: cla_public/apps/checker/forms.py:105
 msgid "Do you have any savings or investments?"
 msgstr "Oes gennych chi unrhyw gynilion neu fuddsoddiadau?"
 
-#: cla_public/apps/checker/forms.py:110
+#: cla_public/apps/checker/forms.py:109
 msgid "Do you have any valuable items worth over £500 each?"
 msgstr "Oes gennych chi unrhyw eitemau gwerthfawr sy’n werth mwy na £500 yr un?"
 
-#: cla_public/apps/checker/forms.py:114
+#: cla_public/apps/checker/forms.py:113
 msgid "Do you own any property?"
 msgstr "Ydych chi’n berchen ar unrhyw eiddo?"
 
-#: cla_public/apps/checker/forms.py:115
+#: cla_public/apps/checker/forms.py:114
 msgid "For example, a house, static caravan or flat"
 msgstr "Er enghraifft, tŷ, fflat neu garafán sefydlog"
 
-#: cla_public/apps/checker/forms.py:117
+#: cla_public/apps/checker/forms.py:116
 msgid "Are you employed?"
 msgstr "Ydych chi’n gyflogedig?"
 
-#: cla_public/apps/checker/forms.py:119
+#: cla_public/apps/checker/forms.py:118
 msgid ""
 "This means working as an employee - you may be both employed and self-"
 "employed"
@@ -597,11 +643,11 @@ msgstr ""
 "Mae hyn yn golygu gweithio fel cyflogai - gallech chi fod yn gyflogedig "
 "ac yn hunangyflogedig"
 
-#: cla_public/apps/checker/forms.py:124
+#: cla_public/apps/checker/forms.py:123
 msgid "Is your partner employed?"
 msgstr "Ydy’ch partner yn gyflogedig?"
 
-#: cla_public/apps/checker/forms.py:126
+#: cla_public/apps/checker/forms.py:124
 msgid ""
 "This means working as an employee - your partner may be both employed and"
 " self-employed"
@@ -609,11 +655,11 @@ msgstr ""
 "Mae hyn yn golygu gweithio fel cyflogai - gallech chi fod yn gyflogedig "
 "ac yn hunangyflogedig"
 
-#: cla_public/apps/checker/forms.py:134
+#: cla_public/apps/checker/forms.py:133
 msgid "Are you self-employed?"
 msgstr "Ydych chi’n hunangyflogedig?"
 
-#: cla_public/apps/checker/forms.py:136
+#: cla_public/apps/checker/forms.py:135
 msgid ""
 "This means working for yourself - you may be both employed and self-"
 "employed"
@@ -621,11 +667,11 @@ msgstr ""
 "Mae hyn yn golygu gweithio i chi’ch hun - gallech chi fod yn gyflogedig "
 "ac yn hunangyflogedig"
 
-#: cla_public/apps/checker/forms.py:141
+#: cla_public/apps/checker/forms.py:140
 msgid "Is your partner self-employed?"
 msgstr "Ydy’ch partner yn hunangyflogedig?"
 
-#: cla_public/apps/checker/forms.py:143
+#: cla_public/apps/checker/forms.py:141
 msgid ""
 "This means working for yourself - your partner may be both employed and "
 "self-employed"
@@ -633,23 +679,23 @@ msgstr ""
 "Mae hyn yn golygu gweithio i chi’ch hun - gallech chi fod yn gyflogedig "
 "ac yn hunangyflogedig"
 
-#: cla_public/apps/checker/forms.py:151
+#: cla_public/apps/checker/forms.py:150
 msgid "Are you or your partner (if you have one) aged 60 or over?"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:179
+#: cla_public/apps/checker/forms.py:178
 msgid "Are you on any of these benefits?"
 msgstr "Ydych chi’n cael unrhyw un o’r budd-daliadau hyn?"
 
-#: cla_public/apps/checker/forms.py:180
+#: cla_public/apps/checker/forms.py:179
 msgid "Are you or your partner on any of these benefits?"
 msgstr "Ydych chi neu eich partner yn cael unrhyw un o'r budd-daliadau hyn?"
 
-#: cla_public/apps/checker/forms.py:196
+#: cla_public/apps/checker/forms.py:195
 msgid "Is this property your main home?"
 msgstr "Ai’r eiddo hwn yw’ch prif gartref?"
 
-#: cla_public/apps/checker/forms.py:198
+#: cla_public/apps/checker/forms.py:197
 msgid ""
 "If you are separated and no longer live in the property you own, please "
 "answer ‘no’"
@@ -657,7 +703,7 @@ msgstr ""
 "Os ydych chi wedi gwahanu ac os nad ydych chi bellach yn byw yn yr eiddo "
 "yr ydych chi’n berchen arno, rhowch ‘na’ yn ateb"
 
-#: cla_public/apps/checker/forms.py:201
+#: cla_public/apps/checker/forms.py:200
 msgid "Does anyone else (other than you) own a share of the property?"
 msgstr ""
 "A oes unrhyw un arall (heblaw chi neu’ch partner) sy’n berchen ar gyfran "
@@ -669,7 +715,7 @@ msgstr ""
 "Rhowch ‘oes’ yn ateb os ydych chi’n rhannu perchenogaeth â ffrind, "
 "perthynas neu gynbartner"
 
-#: cla_public/apps/checker/forms.py:203
+#: cla_public/apps/checker/forms.py:205
 msgid ""
 "Does anyone else (other than you or your partner) own a share of the "
 "property?"
@@ -677,123 +723,123 @@ msgstr ""
 "A oes unrhyw un arall (heblaw chi neu’ch partner) sy’n berchen ar gyfran "
 "o’r eiddo?"
 
-#: cla_public/apps/checker/forms.py:207
+#: cla_public/apps/checker/forms.py:211
 msgid "How much is the property worth?"
 msgstr "Beth yw gwerth yr eiddo?"
 
-#: cla_public/apps/checker/forms.py:208
+#: cla_public/apps/checker/forms.py:212
 msgid "Use a property website or the Land Registry house prices website."
 msgstr "Defnyddiwch wefan eiddo neu wefan prisiau tai’r Gofrestrfa Tir"
 
-#: cla_public/apps/checker/forms.py:209
+#: cla_public/apps/checker/forms.py:216
 msgid "Please enter a valid amount"
 msgstr "Nodwch swm dilys"
 
-#: cla_public/apps/checker/forms.py:211
+#: cla_public/apps/checker/forms.py:219
 msgid "How much is left to pay on the mortgage?"
 msgstr "Pa swm sy’n weddill i’w dalu ar y morgais? "
 
-#: cla_public/apps/checker/forms.py:213
+#: cla_public/apps/checker/forms.py:221
 msgid "Include the full amount owed, even if the property has shared ownership"
 msgstr ""
 "Rhowch y cyfanswm sy’n ddyledus, hyd yn oed os yw perchenogaeth yr eiddo "
 "wedi’i rhannu"
 
-#: cla_public/apps/checker/forms.py:215
+#: cla_public/apps/checker/forms.py:224
 msgid "Please enter 0 if you have no mortgage"
 msgstr "Rhowch 0 os nad oes gennych forgais"
 
-#: cla_public/apps/checker/forms.py:217
+#: cla_public/apps/checker/forms.py:227
 msgid "How much are your monthly mortgage repayments?"
 msgstr "Beth yw swm yr ad-daliadau misol ar y morgais?"
 
-#: cla_public/apps/checker/forms.py:220
+#: cla_public/apps/checker/forms.py:232
 msgid "Do you rent out any part of this property?"
 msgstr "Ydych chi’n gosod unrhyw ran o’r eiddo hwn ar rent?"
 
-#: cla_public/apps/checker/forms.py:224
+#: cla_public/apps/checker/forms.py:236
 msgid "If Yes, how much rent do you receive?"
 msgstr "Os ydych chi, pa swm o rent yr ydych chi’n ei dderbyn"
 
-#: cla_public/apps/checker/forms.py:230
+#: cla_public/apps/checker/forms.py:242
 msgid "Is your share of the property in dispute?"
 msgstr "A oes anghydfod ynghylch eich cyfran chi o’r eiddo?"
 
-#: cla_public/apps/checker/forms.py:232
+#: cla_public/apps/checker/forms.py:243
 msgid "For example, as part of the financial settlement of a divorce"
 msgstr "Er enghraifft, fel rhan o’r setliad ariannol mewn ysgariad"
 
-#: cla_public/apps/checker/forms.py:301
+#: cla_public/apps/checker/forms.py:315
 msgid "Savings"
 msgstr "Cynilion"
 
-#: cla_public/apps/checker/forms.py:303
+#: cla_public/apps/checker/forms.py:316
 msgid "The total amount of savings in cash, bank or building society"
 msgstr ""
 "Cyfanswm y cynilion mewn arian parod, yn y banc neu mewn cymdeithas "
 "adeiladu"
 
-#: cla_public/apps/checker/forms.py:305
+#: cla_public/apps/checker/forms.py:319
 msgid "Enter 0 if you have no savings"
 msgstr "Rhowch 0 os nad oes gennych gynilion"
 
-#: cla_public/apps/checker/forms.py:308
+#: cla_public/apps/checker/forms.py:322
 msgid "Investments"
 msgstr "Buddsoddiadau"
 
-#: cla_public/apps/checker/forms.py:309
+#: cla_public/apps/checker/forms.py:323
 msgid "This includes stocks, shares, bonds (but not property)"
 msgstr "Mae hyn yn cynnwys stociau, cyfrannau, bondiau (ond nid eiddo)"
 
-#: cla_public/apps/checker/forms.py:311
+#: cla_public/apps/checker/forms.py:326
 msgid "Enter 0 if you have no investments"
 msgstr "Rhowch 0 os nad oes gennych fuddsoddiadau"
 
-#: cla_public/apps/checker/forms.py:314
+#: cla_public/apps/checker/forms.py:329
 msgid "Total value of items worth over £500 each"
 msgstr "Cyfanswm gwerth eitemau sy’n werth mwy na £500 yr un"
 
-#: cla_public/apps/checker/forms.py:317
+#: cla_public/apps/checker/forms.py:332
 msgid "Enter 0 if you have no valuables"
 msgstr "Rhowch 0 os nad oes gennych fuddsoddiadau"
 
-#: cla_public/apps/checker/forms.py:339
+#: cla_public/apps/checker/forms.py:354
 msgid "Child Benefit"
 msgstr "Budd-dal Plant"
 
-#: cla_public/apps/checker/forms.py:340 cla_public/apps/checker/forms.py:345
+#: cla_public/apps/checker/forms.py:355 cla_public/apps/checker/forms.py:360
 msgid "The total amount you get for all your children"
 msgstr "Y cyfanswm yr ydych chi’n ei gael ar gyfer eich holl blant"
 
-#: cla_public/apps/checker/forms.py:344
+#: cla_public/apps/checker/forms.py:359
 msgid "Child Tax Credit"
 msgstr "Credyd Treth Plant"
 
-#: cla_public/apps/checker/forms.py:349
+#: cla_public/apps/checker/forms.py:364
 msgid "Do you get any of these benefits?"
 msgstr "Ydych chi yn cael unrhyw un o’r budd-daliadau hyn?"
 
-#: cla_public/apps/checker/forms.py:350
+#: cla_public/apps/checker/forms.py:365
 msgid "Do you or your partner get any of these benefits?"
 msgstr "Ydych chi neu’ch partner yn cael unrhyw un o’r budd-daliadau hyn?"
 
-#: cla_public/apps/checker/forms.py:351
+#: cla_public/apps/checker/forms.py:366
 msgid "These benefits don’t count as income. Please tick the ones you receive."
 msgstr ""
 "Nid yw’r budd-daliadau hyn yn cael eu cyfrif yn incwm. Ticiwch y rhai yr "
 "ydych chi’n eu cael."
 
-#: cla_public/apps/checker/forms.py:355
+#: cla_public/apps/checker/forms.py:370
 msgid "Do you receive any other benefits not listed above? "
 msgstr "Ydych chi yn cael unrhyw fudd-daliadau eraill sydd heb eu rhestru uchod?"
 
-#: cla_public/apps/checker/forms.py:356
+#: cla_public/apps/checker/forms.py:371
 msgid "Do you or your partner receive any other benefits not listed above? "
 msgstr ""
 "Ydych chi neu’ch partner yn cael unrhyw fudd-daliadau eraill sydd heb eu "
 "rhestru uchod?"
 
-#: cla_public/apps/checker/forms.py:358
+#: cla_public/apps/checker/forms.py:373
 msgid ""
 "For example, National Asylum Support Service Benefit, Incapacity Benefit,"
 " Contribution-based Jobseeker's Allowance"
@@ -801,25 +847,25 @@ msgstr ""
 "Er enghraifft, Credyd Treth Gwaith, Budd-dal Analluogrwydd, Lwfans Ceisio"
 " Gwaith yn Seiliedig ar Gyfraniadau"
 
-#: cla_public/apps/checker/forms.py:364
+#: cla_public/apps/checker/forms.py:379
 msgid "If Yes, total amount of benefits not listed above"
 msgstr "Os ydych chi, cyfanswm y budd-daliadau sydd heb eu rhestru uchod"
 
-#: cla_public/apps/checker/forms.py:391
+#: cla_public/apps/checker/forms.py:406
 msgid "Wages before tax"
 msgstr "Cyflog cyn treth"
 
-#: cla_public/apps/checker/forms.py:393
+#: cla_public/apps/checker/forms.py:408
 msgid "This includes all your wages and any earnings from self-employment"
 msgstr ""
 "Mae hyn yn cynnwys eich cyflog i gyd ac unrhyw enillion o fod yn "
 "hunangyflogedig"
 
-#: cla_public/apps/checker/forms.py:397
+#: cla_public/apps/checker/forms.py:412
 msgid "Income tax"
 msgstr "Treth incwm"
 
-#: cla_public/apps/checker/forms.py:399
+#: cla_public/apps/checker/forms.py:414
 msgid ""
 "Tax paid directly out of your wages and any tax you pay on self-employed "
 "earnings"
@@ -827,11 +873,11 @@ msgstr ""
 "Treth sy’n cael ei thalu’n uniongyrchol o’ch cyflog ac unrhyw dreth yr "
 "ydych chi’n ei thalu ar enillion o fod yn hunangyflogedig"
 
-#: cla_public/apps/checker/forms.py:403
+#: cla_public/apps/checker/forms.py:418
 msgid "National Insurance contributions"
 msgstr "Cyfraniadau Yswiriant Gwladol"
 
-#: cla_public/apps/checker/forms.py:405
+#: cla_public/apps/checker/forms.py:420
 msgid ""
 "Check your payslip or your National Insurance statement if you’re self-"
 "employed"
@@ -839,53 +885,53 @@ msgstr ""
 "Edrychwch ar eich slip cyflog neu’ch datganiad Yswiriant Gwladol os ydych"
 " chi’n hunangyflogedig"
 
-#: cla_public/apps/checker/forms.py:409
+#: cla_public/apps/checker/forms.py:424
 msgid "Working Tax Credit"
 msgstr "Credyd Treth Gwaith"
 
-#: cla_public/apps/checker/forms.py:410
+#: cla_public/apps/checker/forms.py:425
 msgid "Extra money for people who work and have a low income"
 msgstr "Arian ychwanegol i bobl sy’n gweithio ac sydd ar incwm isel"
 
-#: cla_public/apps/checker/forms.py:413
+#: cla_public/apps/checker/forms.py:429
 msgid "Maintenance received"
 msgstr "Taliadau Cynhaliaeth yr ydych chi’n eu cael"
 
-#: cla_public/apps/checker/forms.py:414
+#: cla_public/apps/checker/forms.py:430
 msgid "Payments you get from an ex-partner"
 msgstr "Taliadau yr ydych chi'n eu cael gan gynbartner"
 
-#: cla_public/apps/checker/forms.py:417
+#: cla_public/apps/checker/forms.py:433
 msgid "Pension received"
 msgstr "Pensiwn yr ydych chi’n ei gael"
 
-#: cla_public/apps/checker/forms.py:418
+#: cla_public/apps/checker/forms.py:434
 msgid "Payments you receive if you’re retired"
 msgstr "Taliadau yr ydych chi'n eu cael os ydych chi wedi ymddeol"
 
-#: cla_public/apps/checker/forms.py:421
+#: cla_public/apps/checker/forms.py:437
 msgid "Any other income"
 msgstr "Unrhyw incwm arall"
 
-#: cla_public/apps/checker/forms.py:423
+#: cla_public/apps/checker/forms.py:438
 msgid "For example, student grants, income from trust funds, dividends"
 msgstr ""
 "Er enghraifft, grantiau myfyriwr, incwm o gronfeydd ymddiriedolaeth, "
 "difidendau"
 
-#: cla_public/apps/checker/forms.py:469
+#: cla_public/apps/checker/forms.py:486
 msgid "Your personal income"
 msgstr "Eich incwm personol"
 
-#: cla_public/apps/checker/forms.py:492
+#: cla_public/apps/checker/forms.py:509
 msgid "Your partner‘s income"
 msgstr "Arian y mae eich partner yn ei ennill"
 
-#: cla_public/apps/checker/forms.py:499
+#: cla_public/apps/checker/forms.py:516
 msgid "Rent"
 msgstr "Rhent"
 
-#: cla_public/apps/checker/forms.py:500
+#: cla_public/apps/checker/forms.py:517
 msgid ""
 "Money you pay your landlord for rent. Do not include rent that is paid by"
 " Housing Benefit"
@@ -893,7 +939,7 @@ msgstr ""
 "Arian yr ydych chi yn ei dalu i’ch landlord fel rhent. Peidiwch â "
 "chynnwys rhent sy’n cael ei dalu gan fudd-dal tai"
 
-#: cla_public/apps/checker/forms.py:502
+#: cla_public/apps/checker/forms.py:519
 msgid ""
 "Money you and your partner pay your landlord for rent. Do not include "
 "rent that is paid by Housing Benefit"
@@ -901,27 +947,27 @@ msgstr ""
 "Arian yr ydych chi a’ch partner yn ei dalu i’ch landlord fel rhent. "
 "Peidiwch â chynnwys rhent sy’n cael ei dalu gan fudd-dal tai"
 
-#: cla_public/apps/checker/forms.py:508
+#: cla_public/apps/checker/forms.py:525
 msgid "Maintenance"
 msgstr "Cynhaliaeth"
 
-#: cla_public/apps/checker/forms.py:509
+#: cla_public/apps/checker/forms.py:526
 msgid "Money you pay to an ex-partner for their living costs"
 msgstr "Arian yr ydych chi yn ei dalu i gynbartner at gostau byw"
 
-#: cla_public/apps/checker/forms.py:510
+#: cla_public/apps/checker/forms.py:528
 msgid "Money you and/or your partner pay to an ex-partner for their living costs"
 msgstr "Arian yr ydych chi a/neu’ch partner yn ei dalu i gynbartner at gostau byw"
 
-#: cla_public/apps/checker/forms.py:514
+#: cla_public/apps/checker/forms.py:532
 msgid "Monthly Income Contribution Order"
 msgstr "Gorchymyn Cyfrannu Incwm Misol"
 
-#: cla_public/apps/checker/forms.py:515
+#: cla_public/apps/checker/forms.py:533
 msgid "Money you pay per month towards your criminal legal aid"
 msgstr "Arian yr ydych chi yn ei dalu at eich cymorth cyfreithiol troseddol"
 
-#: cla_public/apps/checker/forms.py:516
+#: cla_public/apps/checker/forms.py:535
 msgid ""
 "Money you and/or your partner pay per month towards your criminal legal "
 "aid"
@@ -929,11 +975,11 @@ msgstr ""
 "Arian yr ydych chi a/neu’ch partner yn ei dalu at eich cymorth "
 "cyfreithiol troseddol"
 
-#: cla_public/apps/checker/forms.py:519
+#: cla_public/apps/checker/forms.py:538
 msgid "Childcare"
 msgstr "Gofal plant"
 
-#: cla_public/apps/checker/forms.py:520
+#: cla_public/apps/checker/forms.py:539
 msgid ""
 "Money you pay for your child to be looked after while you work or study "
 "outside of your home"
@@ -941,7 +987,7 @@ msgstr ""
 "Arian yr ydych chi yn ei dalu i rywun warchod eich plentyn tra'r ydych "
 "chi’n gweithio neu astudio y tu allan i’ch cartref"
 
-#: cla_public/apps/checker/forms.py:522
+#: cla_public/apps/checker/forms.py:542
 msgid ""
 "Money you and your partner pay for your child to be looked after while "
 "you work or study outside of your home"
@@ -949,77 +995,27 @@ msgstr ""
 "Arian yr ydych chi a’ch partner yn ei dalu i rywun warchod eich plentyn "
 "tra'r ydych chi’n gweithio neu astudio y tu allan i’ch cartref"
 
-#: cla_public/apps/checker/forms.py:540 cla_public/templates/privacy.html:435
-msgid "Full name"
-msgstr "Enw llawn"
-
-#: cla_public/apps/checker/forms.py:541
-msgid "For example: John Smith"
-msgstr "Er enghraifft: John Smith"
-
-#: cla_public/apps/checker/forms.py:544
-msgid "Contact phone number"
-msgstr "Rhif ffôn cyswllt"
-
-#: cla_public/apps/checker/forms.py:547
-msgid "Is it safe for us to leave a message on this number?"
-msgstr "A yw’n ddiogel i ni adael neges ar y rhif hwn?"
-
-#: cla_public/apps/checker/forms.py:551
-msgid "Postcode"
-msgstr "Cod post "
-
-#: cla_public/apps/checker/forms.py:552 cla_public/templates/privacy.html:436
-msgid "Address"
-msgstr "Cyfeiriad "
-
-#: cla_public/apps/checker/forms.py:554
-msgid "Help the operator to understand your situation"
-msgstr "Helpwch y gweithredwr i ddeall eich sefyllfa"
-
-#: cla_public/apps/checker/forms.py:556
-msgid ""
-"If you’d like to tell us more about your problem, please do so in the box"
-" below. The Civil Legal Advice operator will read this before they call "
-"you."
-msgstr ""
-"Yn eich geiriau’ch hun, eglurwch beth yn union yw’r broblem yn y blwch "
-"isod. Bydd y gweithredwr Cyngor Cyfreithiol Sifil yn darllen hyn cyn eich"
-" ffonio"
-
-#: cla_public/apps/checker/forms.py:562
-msgid "Do you have any special communication needs?"
-msgstr "Oes gennych chi unrhyw anghenion cyfathrebu arbennig?"
-
-#: cla_public/apps/checker/forms.py:564
-msgid "Select a time for us to call you"
-msgstr "Dewiswch amser i ni eich ffonio"
-
-#: cla_public/apps/checker/honeypot.py:30
+#: cla_public/apps/checker/honeypot.py:30 cla_public/libs/honeypot.py:30
 msgid "This field must be left empty"
 msgstr "Rhaid gadael y maes hwn yn wag"
 
-#: cla_public/apps/checker/honeypot.py:39
+#: cla_public/apps/checker/honeypot.py:39 cla_public/libs/honeypot.py:39
 msgid "Leave this field empty"
 msgstr "Gadewch y maes hwn yn wag"
 
-#: cla_public/apps/checker/validators.py:70
+#: cla_public/apps/checker/validators.py:68
 msgid "Must select at least one option."
 msgstr "Dewiswch o leiaf un opsiwn"
 
-#: cla_public/apps/checker/validators.py:79
+#: cla_public/apps/checker/validators.py:77
 msgid "Please provide an amount"
 msgstr "Rhowch swm"
 
-#: cla_public/apps/checker/validators.py:104
+#: cla_public/apps/checker/validators.py:102
 msgid "Please select a time period from the drop down"
 msgstr "Dewiswch gyfnod o’r gwymplen"
 
-#: cla_public/apps/checker/validators.py:124
-msgid "Can't schedule a callback at the requested time"
-msgstr "Methu trefnu i'ch ffonio'n ôl ar yr amser a nodwyd yn eich cais"
-
-#: cla_public/config/common.py:52 cla_public/config/common.py:53
+#: cla_public/config/common.py:55 cla_public/config/common.py:56
 #: cla_public/templates/_sidebar.html:7
 #: cla_public/templates/call-me-back.html:38
 msgid "Civil Legal Advice"
@@ -3647,4 +3643,7 @@ msgstr "Gwerth dyddiad annilys"
 
 #~ msgid "I am not"
 #~ msgstr ""
+
+#~ msgid "Call me tomorrow at"
+#~ msgstr "Ffoniwch fi yfory am"
 
