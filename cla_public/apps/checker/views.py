@@ -23,14 +23,6 @@ from cla_public.libs.utils import override_locale
 log = logging.getLogger(__name__)
 
 
-def proceed(next_step, **kwargs):
-    return redirect(url_for('.{0}'.format(next_step), **kwargs))
-
-
-def outcome(outcome):
-    return proceed('result', outcome=outcome)
-
-
 @checker.after_request
 def add_header(response):
     """
@@ -46,9 +38,9 @@ def add_header(response):
 def problem(user):
 
     if user.needs_face_to_face:
-        return outcome('face-to-face')
+        return redirect(url_for('.result', outcome='face-to-face'))
 
-    return proceed('about')
+    return redirect(url_for('.about'))
 
 
 @checker.route('/about', methods=['GET', 'POST'])
@@ -56,21 +48,21 @@ def problem(user):
 @form_view(AboutYouForm, 'about.html')
 def about(user):
 
-    next_step = 'income'
+    next_step = '.income'
 
     if user.children_or_tax_credits:
-        next_step = 'benefits_tax_credits'
+        next_step = '.benefits_tax_credits'
 
     if user.has_savings_or_valuables:
-        next_step = 'savings'
+        next_step = '.savings'
 
     if user.owns_property:
-        next_step = 'property'
+        next_step = '.property'
 
     if user.is_on_benefits:
-        next_step = 'benefits'
+        next_step = '.benefits'
 
-    return proceed(next_step)
+    return redirect(url_for(next_step))
 
 
 @checker.route('/benefits', methods=['GET', 'POST'])
@@ -78,26 +70,26 @@ def about(user):
 @form_view(YourBenefitsForm, 'benefits.html')
 def benefits(user):
 
-    next_step = 'income'
+    next_step = '.income'
 
     kwargs = {}
     if user.is_on_passported_benefits:
         kwargs['outcome'] = 'eligible'
-        next_step = 'result'
+        next_step = '.result'
 
     if user.children_or_tax_credits:
         kwargs = {}
-        next_step = 'benefits_tax_credits'
+        next_step = '.benefits_tax_credits'
 
     if user.has_savings_or_valuables:
         kwargs = {}
-        next_step = 'savings'
+        next_step = '.savings'
 
     if user.owns_property:
         kwargs = {}
-        next_step = 'property'
+        next_step = '.property'
 
-    return proceed(next_step, **kwargs)
+    return redirect(url_for(next_step, **kwargs))
 
 
 @checker.route('/property', methods=['GET', 'POST'])
@@ -105,61 +97,61 @@ def benefits(user):
 @form_view(PropertiesForm, 'property.html')
 def property(user):
 
-    next_step = 'income'
+    next_step = '.income'
 
     kwargs = {}
     if user.is_on_passported_benefits:
         kwargs['outcome'] = 'eligible'
-        next_step = 'result'
+        next_step = '.result'
 
     if session.children_or_tax_credits:
         kwargs = {}
-        next_step = 'benefits_tax_credits'
+        next_step = '.benefits_tax_credits'
 
     if session.has_savings_or_valuables:
         kwargs = {}
-        next_step = 'savings'
+        next_step = '.savings'
 
-    return proceed(next_step, **kwargs)
+    return redirect(url_for(next_step, **kwargs))
 
 
 @checker.route('/savings', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(SavingsForm, 'savings.html')
 def savings(user):
-    next_step = 'income'
+    next_step = '.income'
 
     kwargs = {}
     if user.is_on_passported_benefits:
         kwargs['outcome'] = 'eligible'
-        next_step = 'result'
+        next_step = '.result'
 
     if user.children_or_tax_credits:
         kwargs = {}
-        next_step = 'benefits_tax_credits'
+        next_step = '.benefits_tax_credits'
 
-    return proceed(next_step, **kwargs)
+    return redirect(url_for(next_step, **kwargs))
 
 
 @checker.route('/benefits-tax-credits', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(TaxCreditsForm, 'benefits-tax-credits.html')
 def benefits_tax_credits(user):
-    next_step = 'income'
+    next_step = '.income'
 
     kwargs = {}
     if user.is_on_passported_benefits:
         kwargs['outcome'] = 'eligible'
-        next_step = 'result'
+        next_step = '.result'
 
-    return proceed(next_step, **kwargs)
+    return redirect(url_for(next_step, **kwargs))
 
 
 @checker.route('/income', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(income_form, 'income.html')
 def income(user):
-    return proceed('outgoings')
+    return redirect(url_for('.outgoings'))
 
 
 @checker.route('/outgoings', methods=['GET', 'POST'])
@@ -167,7 +159,7 @@ def income(user):
 @form_view(OutgoingsForm, 'outgoings.html')
 @redirect_if_ineligible()
 def outgoings(user):
-    return outcome('eligible')
+    return redirect(url_for('.result', outcome='eligible'))
 
 
 @checker.route('/result/<outcome>', methods=['GET', 'POST'])
