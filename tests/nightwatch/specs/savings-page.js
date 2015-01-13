@@ -2,6 +2,7 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
+var VALUABLES_MINIMUM = require('../modules/constants').VALUABLES_MINIMUM;
 var SAVINGS_THRESHOLD = require('../modules/constants').SAVINGS_THRESHOLD;
 var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
 SAVINGS_QUESTIONS.ALL = SAVINGS_QUESTIONS.MONEY.concat(SAVINGS_QUESTIONS.VALUABLES);
@@ -98,8 +99,20 @@ module.exports = {
       // set all to 0
       common.setAllSavingsFieldsToValue(client, 0);
       // set this item to SAVINGS_THRESHOLD
+      if(item.name === 'valuables') {
+        client
+          .clearValue(util.format('input[name="%s"]', item.name))
+          .setValue(util.format('input[name="%s"]', item.name), SAVINGS_THRESHOLD)
+        ;
+      } else {
+        client
+          .clearValue('input[name="valuables"]')
+          .clearValue(util.format('input[name="%s"]', item.name))
+          .setValue('input[name="valuables"]', VALUABLES_MINIMUM)
+          .setValue(util.format('input[name="%s"]', item.name), SAVINGS_THRESHOLD - VALUABLES_MINIMUM)
+        ;
+      }
       client
-        .setValue(util.format('input[name="%s"]', item.name), SAVINGS_THRESHOLD)
         .submitForm('form')
         .waitForElementVisible('form[action="/income"]', 2000)
         .assert.urlContains('/income', util.format('Should arrive at income page when %s field set to %s and others to £0', item.name, SAVINGS_THRESHOLD))
@@ -123,8 +136,20 @@ module.exports = {
       // set all to 0
       common.setAllSavingsFieldsToValue(client, 0);
       // set this item to SAVINGS_THRESHOLD+1
+      if(item.name === 'valuables') {
+        client
+          .clearValue(util.format('input[name="%s"]', item.name))
+          .setValue(util.format('input[name="%s"]', item.name), SAVINGS_THRESHOLD + 1)
+        ;
+      } else {
+        client
+          .clearValue('input[name="valuables"]')
+          .clearValue(util.format('input[name="%s"]', item.name))
+          .setValue('input[name="valuables"]', VALUABLES_MINIMUM)
+          .setValue(util.format('input[name="%s"]', item.name), SAVINGS_THRESHOLD - VALUABLES_MINIMUM + 1)
+        ;
+      }
       client
-        .setValue(util.format('input[name="%s"]', item.name), SAVINGS_THRESHOLD + 1)
         .submitForm('form')
         .waitForElementPresent('form[action="/income"]', 2000)
         .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)

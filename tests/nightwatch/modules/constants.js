@@ -1,6 +1,7 @@
 'use strict';
 
 exports.SAVINGS_THRESHOLD = 8000;
+exports.VALUABLES_MINIMUM = 500;
 
 exports.CATEGORIES_OF_LAW = [
   {
