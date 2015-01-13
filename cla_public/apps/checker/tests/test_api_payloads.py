@@ -11,7 +11,7 @@ from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.callmeback.forms import CallMeBackForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm, \
-    IncomeAndTaxForm, income_form, OutgoingsForm
+    IncomeForm, OutgoingsForm
 
 
 def get_en_locale():
@@ -55,6 +55,19 @@ class TestApiPayloads(unittest.TestCase):
         payload = self.payload(YourBenefitsForm, form_data)
         self.assertTrue(payload['specific_benefits']['income_support'])
         self.assertTrue(payload['on_passported_benefits'])
+
+        # Test income - make sure all income vals are zero after pasported benifit
+        self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['earnings']['interval_period'], 'per_month')
+        self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['tax_credits']['interval_period'], 'per_month')
+        self.assertEqual(payload['you']['income']['maintenance_received']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['pension']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['other_income']['per_interval_value'], 0)
+
+        self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], 0)
 
     def test_your_benefits_form_multiple_passported(self):
         form_data = {'benefits': ['income_support', 'pension_credit']}
@@ -119,6 +132,50 @@ class TestApiPayloads(unittest.TestCase):
         payload = self.payload(AboutYouForm, form_data)
         self.assertEqual(payload['dependants_young'], 0)
         self.assertEqual(payload['dependants_old'], 0)
+
+        # Test zero and null values
+
+        # Test income
+        self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], None)
+        self.assertEqual(payload['you']['income']['earnings']['interval_period'], None)
+        self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['tax_credits']['interval_period'], 'per_month')
+        self.assertEqual(payload['you']['income']['maintenance_received']['per_interval_value'], None)
+        self.assertEqual(payload['you']['income']['pension']['per_interval_value'], None)
+        self.assertEqual(payload['you']['income']['other_income']['per_interval_value'], None)
+
+        self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], None)
+        self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], None)
+
+        # Test savings
+        self.assertEqual(payload['you']['savings']['bank_balance'], 0)
+        self.assertEqual(payload['you']['savings']['investment_balance'], 0)
+        self.assertEqual(payload['you']['savings']['asset_balance'], 0)
+
+        form_data['have_savings'] = YES
+        form_data['have_valuables'] = YES
+        session['AboutYouForm_have_savings'] = YES
+        session['AboutYouForm_have_valuables'] = YES
+        payload = self.payload(AboutYouForm, form_data)
+        self.assertEqual(payload['you']['savings']['bank_balance'], None)
+        self.assertEqual(payload['you']['savings']['investment_balance'], None)
+        self.assertEqual(payload['you']['savings']['asset_balance'], None)
+
+        # Test null property
+        self.assertEqual(len(payload['property_set']), 0)
+
+        form_data['own_property'] = YES
+        payload = self.payload(AboutYouForm, form_data)
+        self.assertEqual(len(payload['property_set']), 1)
+
+        self.assertEqual(payload['property_set'][0]['value'], None)
+        self.assertEqual(payload['property_set'][0]['mortgage_left'], None)
+        self.assertEqual(payload['property_set'][0]['share'], None)
+        self.assertEqual(payload['property_set'][0]['disputed'], None)
+        self.assertEqual(payload['property_set'][0]['rent']['per_interval_value'], 0)
+        self.assertEqual(payload['property_set'][0]['rent']['interval_period'], 'per_month')
+        self.assertEqual(payload['property_set'][0]['main'], None)
 
     def test_property_form(self):
         rent_amount = {
@@ -267,10 +324,7 @@ class TestApiPayloads(unittest.TestCase):
         session['AboutYouForm_have_partner'] = YES
         session['AboutYouForm_in_dispute'] = NO
 
-        IncomeAndTaxForm._get_translations = lambda args: None
-        form = income_form(csrf_enabled=False)
-
-        payload = form.api_payload()
+        payload = self.payload(IncomeForm, {})
 
         self.assertIn('you', payload)
         self.assertIn('partner', payload)

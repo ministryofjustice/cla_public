@@ -10,7 +10,6 @@ from flask.ext.babel import lazy_gettext as _, gettext
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
-from wtforms.compat import text_type
 from wtforms.validators import Optional, InputRequired
 
 from cla_common.money_interval.models import MoneyInterval
@@ -19,6 +18,10 @@ from cla_public.apps.checker.validators import ValidMoneyInterval
 
 
 log = logging.getLogger(__name__)
+
+
+def coerce_unicode_if_value(value):
+    return unicode(value) if value is not None else None
 
 
 class PartnerMixin(object):
@@ -85,11 +88,30 @@ class YesNoField(RadioField):
             validators = [
                 InputRequired(message=gettext(u'Please choose Yes or No'))]
         super(YesNoField, self).__init__(
-            label=label, validators=validators, coerce=text_type,
+            label=label, validators=validators, coerce=coerce_unicode_if_value,
             choices=choices, **kwargs)
 
 
-class MoneyField(IntegerField):
+def set_zero_values(form):
+    """Set values on a form to zero"""
+    def set_zero(field):
+        if hasattr(field, 'set_zero'):
+            field.set_zero()
+    map(set_zero, form._fields.itervalues())
+    return form
+
+
+class SetZeroIntegerField(IntegerField):
+    def set_zero(self):
+        self.data = 0
+
+
+class SetZeroFormField(FormField):
+    def set_zero(self):
+        set_zero_values(self.form)
+
+
+class MoneyField(SetZeroIntegerField):
 
     def __init__(self, label=None, validators=None, min_val=0, max_val=None,
                  **kwargs):
@@ -141,7 +163,10 @@ class MoneyField(IntegerField):
 class MoneyIntervalForm(NoCsrfForm):
     """Money amount and interval subform"""
     per_interval_value = MoneyField(validators=[Optional()])
-    interval_period = SelectField('', choices=MONEY_INTERVALS)
+    interval_period = SelectField(
+        '',
+        choices=MONEY_INTERVALS,
+        coerce=coerce_unicode_if_value)
 
     def __init__(self, *args, **kwargs):
         # Enable choices to be passed through
@@ -179,7 +204,7 @@ def money_interval_to_monthly(data):
     }
 
 
-class PassKwargsToFormField(FormField):
+class PassKwargsToFormField(SetZeroFormField):
 
     def __init__(self, *args, **kwargs):
         form_kwargs = kwargs.pop('form_kwargs', {})
@@ -228,6 +253,10 @@ class MoneyIntervalField(PassKwargsToFormField):
     def errors(self, _errors):
         self._errors = _errors
 
+    def set_zero(self):
+        self.form.per_interval_value.data = 0
+        self.form.interval_period.data = 'per_month'
+
 
 class MultiCheckboxField(SelectMultipleField):
     """
@@ -261,12 +290,15 @@ class PropertyList(FieldList):
 
         return len(self.errors) == 0
 
+    def set_zero(self):
+        self.entries = []
+
 
 class PartnerMoneyIntervalField(PartnerMixin, MoneyIntervalField):
     pass
 
 
-class PartnerIntegerField(PartnerMixin, IntegerField):
+class PartnerIntegerField(PartnerMixin, SetZeroIntegerField):
     pass
 
 

@@ -15,8 +15,8 @@ from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, \
 from cla_public.apps.checker.decorators import form_view, \
     redirect_if_no_session, redirect_if_ineligible
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, income_form, \
-    OutgoingsForm
+    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
+    IncomeForm
 from cla_public.libs.utils import override_locale
 
 
@@ -149,7 +149,7 @@ def benefits_tax_credits(user):
 
 @checker.route('/income', methods=['GET', 'POST'])
 @redirect_if_no_session()
-@form_view(income_form, 'income.html')
+@form_view(IncomeForm, 'income.html')
 def income(user):
     return redirect(url_for('.outgoings'))
 
