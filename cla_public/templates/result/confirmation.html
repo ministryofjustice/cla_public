@@ -18,7 +18,7 @@
   <p>
     {% trans %}Your details have been submitted and an operator will call you back
       around the time you requested{% endtrans %}
-      (<strong>{{ session.time_to_callback|datetime('full') }}</strong>).
+      (<strong>{{ session.callback_time|datetime('full') }}</strong>).
   </p>
   {% if category in ['debt', 'housing', 'violence', 'discrimination', 'education', 'family'] %}
     <p>
