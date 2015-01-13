@@ -5,7 +5,7 @@ import logging
 
 from flask import session, request
 from flask_wtf import Form
-from flask.ext.babel import lazy_gettext as _, gettext, lazy_pgettext
+from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from werkzeug.datastructures import MultiDict
 from wtforms import Form as NoCsrfForm
 from wtforms.validators import InputRequired, NumberRange
@@ -25,8 +25,9 @@ from cla_public.libs.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone, NotRequired
+    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone
 from cla_public.libs.utils import recursive_dict_update
+from cla_public.apps.base.forms import BabelTranslationsFormMixin
 
 
 log = logging.getLogger(__name__)
@@ -61,7 +62,7 @@ class FormSessionDataMixin(object):
         return set_zero_values(cls()).api_payload()
 
 
-class ProblemForm(ConfigFormMixin, Honeypot, Form):
+class ProblemForm(ConfigFormMixin, Honeypot, Form, BabelTranslationsFormMixin):
     """Area of law choice"""
 
     categories = DescriptionRadioField(
@@ -81,7 +82,7 @@ class ProblemForm(ConfigFormMixin, Honeypot, Form):
         }
 
 
-class AboutYouForm(ConfigFormMixin, Honeypot, Form):
+class AboutYouForm(ConfigFormMixin, Honeypot, Form, BabelTranslationsFormMixin):
     have_partner = YesNoField(
         _(u'Do you have a partner?'),
         description=(
@@ -99,7 +100,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
               u"property ")),
         validators=[
             IgnoreIf('have_partner', FieldValue(NO)),
-            InputRequired(message=gettext(u'Please choose Yes or No'))
+            InputRequired(message=_(u'Please choose Yes or No'))
         ],
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
@@ -156,7 +157,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             u"employed and self-employed"),
         validators=[
             IgnoreIf('in_dispute', FieldValueOrNone(YES)),
-            InputRequired(message=gettext(u'Please choose Yes or No'))],
+            InputRequired(message=_(u'Please choose Yes or No'))],
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     is_self_employed = YesNoField(
@@ -173,7 +174,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             u"employed and self-employed"),
         validators=[
             IgnoreIf('in_dispute', FieldValueOrNone(YES)),
-            InputRequired(message=gettext(u'Please choose Yes or No'))],
+            InputRequired(message=_(u'Please choose Yes or No'))],
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     aged_60_or_over = YesNoField(
@@ -223,7 +224,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         return self.have_savings.data == YES or self.have_valuables.data == YES
 
 
-class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
+class YourBenefitsForm(ConfigFormMixin, Honeypot, Form, BabelTranslationsFormMixin):
     benefits = PartnerMultiCheckboxField(
         label=_(u'Are you on any of these benefits?'),
         partner_label=_(u'Are you or your partner on any of these benefits?'),
@@ -245,8 +246,9 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, Form):
 
         return payload
 
+from speaklater import is_lazy_string
 
-class PropertyForm(NoCsrfForm, FormSessionDataMixin):
+class PropertyForm(NoCsrfForm, FormSessionDataMixin, BabelTranslationsFormMixin):
     is_main_home = YesNoField(
         _(u'Is this property your main home?'),
         description=(
@@ -269,7 +271,7 @@ class PropertyForm(NoCsrfForm, FormSessionDataMixin):
             u"Use a property website or the Land Registry house prices "
             u"website."),
         validators=[
-            InputRequired(gettext(u'Please enter a valid amount')),
+            InputRequired(_(u'Please enter a valid amount')),
             NumberRange(min=0)])
     mortgage_remaining = MoneyField(
         _(u'How much is left to pay on the mortgage?'),
@@ -277,7 +279,7 @@ class PropertyForm(NoCsrfForm, FormSessionDataMixin):
             _(u"Include the full amount owed, even if the property has "
               u"shared ownership")),
         validators=[
-            InputRequired(gettext(u'Please enter 0 if you have no mortgage')),
+            InputRequired(_(u'Please enter 0 if you have no mortgage')),
             NumberRange(min=0)])
     mortgage_payments = MoneyField(
         _(u'How much are your monthly mortgage repayments?'),
@@ -325,7 +327,7 @@ def sum_rents(rents):
     return reduce(sum_money_intervals, rents, money_interval(0))
 
 
-class PropertiesForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
+class PropertiesForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin, BabelTranslationsFormMixin):
     properties = PropertyList(
         SetZeroFormField(PropertyForm), min_entries=1, max_entries=3)
 
@@ -366,26 +368,26 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
         }
 
 
-class SavingsForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
+class SavingsForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin, BabelTranslationsFormMixin):
     savings = MoneyField(
         _('Savings'),
         description=_(
             u"The total amount of savings in cash, bank or building society"),
         validators=[InputRequired(
-            message=gettext(u'Enter 0 if you have no savings')
+            message=_(u'Enter 0 if you have no savings')
         )])
     investments = MoneyField(
         _('Investments'),
         description=_(
             u"This includes stocks, shares, bonds (but not property)"),
         validators=[InputRequired(
-            message=gettext(u'Enter 0 if you have no investments')
+            message=_(u'Enter 0 if you have no investments')
         )])
     valuables = MoneyField(
         _(u'Total value of items worth over £500 each'),
         min_val=50000,
         validators=[InputRequired(
-            message=gettext(u'Enter 0 if you have no valuables')
+            message=_(u'Enter 0 if you have no valuables')
         )])
 
     def __init__(self, *args, **kwargs):
@@ -405,7 +407,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
         }}}
 
 
-class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
+class TaxCreditsForm(ConfigFormMixin, Honeypot, Form, BabelTranslationsFormMixin):
     child_benefit = MoneyIntervalField(
         _(u'Child Benefit'),
         description=_(u"The total amount you get for all your children"),
@@ -452,7 +454,7 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
         }
 
 
-class IncomeFieldForm(NoCsrfForm, FormSessionDataMixin):
+class IncomeFieldForm(NoCsrfForm, FormSessionDataMixin, BabelTranslationsFormMixin):
 
     def __init__(self, *args, **kwargs):
         self.is_partner = kwargs.pop('is_partner', False)
@@ -538,7 +540,7 @@ class IncomeFieldForm(NoCsrfForm, FormSessionDataMixin):
         }
 
 
-class IncomeForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
+class IncomeForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin, BabelTranslationsFormMixin):
     your_income = SetZeroFormField(IncomeFieldForm, label=_(u'Your personal income'))
     partner_income = PassKwargsToFormField(
         IncomeFieldForm,
@@ -562,7 +564,7 @@ class IncomeForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
         return api_payload
 
 
-class OutgoingsForm(ConfigFormMixin, Honeypot, Form):
+class OutgoingsForm(ConfigFormMixin, Honeypot, Form, BabelTranslationsFormMixin):
     rent = PartnerMoneyIntervalField(
         label=_(u'Rent'),
         description=_(u"Money you pay your landlord for rent. Do not include "

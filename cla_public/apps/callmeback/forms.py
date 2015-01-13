@@ -12,6 +12,7 @@ from wtforms.validators import InputRequired, Optional
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.callmeback.fields import AvailabilityCheckerField
 from cla_public.apps.checker.constants import CONTACT_SAFETY
+from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.libs.honeypot import Honeypot
 
 
@@ -20,7 +21,7 @@ LANG_CHOICES = filter(
     [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
 
 
-class AdaptationsForm(NoCsrfForm):
+class AdaptationsForm(NoCsrfForm, BabelTranslationsFormMixin):
     """
     Subform for adaptations
     """
@@ -38,7 +39,7 @@ class AdaptationsForm(NoCsrfForm):
         description=_(u'Please tell us what you need in the box below'))
 
 
-class CallMeBackForm(Honeypot, Form):
+class CallMeBackForm(Honeypot, Form, BabelTranslationsFormMixin):
     """
     Form to request a callback
     """

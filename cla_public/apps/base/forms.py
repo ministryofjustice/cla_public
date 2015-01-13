@@ -7,7 +7,7 @@ import json
 from flask import render_template
 
 from flask_wtf import Form
-from flask.ext.babel import lazy_gettext as _
+from flask.ext.babel import lazy_gettext as _, gettext, ngettext
 from wtforms import StringField, TextAreaField, RadioField
 from wtforms.validators import InputRequired
 
@@ -16,7 +16,20 @@ from cla_public.apps.base.constants import FEEL_ABOUT_SERVICE, \
 from cla_public.libs.honeypot import Honeypot
 
 
-class FeedbackForm(Honeypot, Form):
+class BabelTranslations(object):
+    def gettext(self, string):
+        return gettext(string)
+
+    def ngettext(self, singular, plural, n):
+        return ngettext(singular, plural, n)
+
+
+class BabelTranslationsFormMixin(object):
+    def _get_translations(self):
+        return BabelTranslations()
+
+
+class FeedbackForm(Honeypot, Form, BabelTranslationsFormMixin):
     difficulty = TextAreaField(_(u'Did you have any difficulty with this service?'))
 
     ideas = TextAreaField(_(u'Do you have any ideas for how it could be improved?'))
