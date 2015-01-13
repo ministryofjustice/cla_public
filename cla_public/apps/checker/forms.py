@@ -246,7 +246,6 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Fo
 
         return payload
 
-from speaklater import is_lazy_string
 
 class PropertyForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMixin):
     is_main_home = YesNoField(
