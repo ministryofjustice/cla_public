@@ -5,7 +5,8 @@ import logging
 
 from flask import session, request
 from flask_wtf import Form
-from flask.ext.babel import lazy_gettext as _, gettext
+from flask.ext.babel import lazy_gettext as _, gettext, lazy_pgettext
+import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import IntegerField, FormField
 from wtforms.validators import InputRequired, NumberRange
@@ -24,7 +25,7 @@ from cla_public.libs.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone
+    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone, NotRequired
 
 
 log = logging.getLogger(__name__)
@@ -56,7 +57,10 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         description=(
             _(u"Your partner is your husband, wife, civil partner (unless "
               u"you have permanently separated) or someone you live with "
-              u"as if you’re married")))
+              u"as if you’re married")),
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'),
+        )
     in_dispute = YesNoField(
         _(u'If Yes, are you in a dispute with your partner?'),
         description=(
@@ -66,14 +70,20 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         validators=[
             IgnoreIf('have_partner', FieldValue(NO)),
             InputRequired(message=gettext(u'Please choose Yes or No'))
-        ])
+        ],
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
     on_benefits = YesNoField(
         _(u'Do you receive any benefits (including Child Benefit)?'),
         description=(
-            _(u"Being on some benefits can help you qualify for legal aid")))
+            _(u"Being on some benefits can help you qualify for legal aid")),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
     have_children = YesNoField(
         _(u'Do you have any children aged 15 or under?'),
-        description=_(u"Don't include any children who don't live with you"))
+        description=_(u"Don't include any children who don't live with you"),
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'))
     num_children = IntegerField(
         _(u'If Yes, how many?'),
         validators=[
@@ -83,16 +93,22 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         _(u'Do you have any dependants aged 16 or over?'),
         description=_(
             u"People who you live with and support financially. This could be "
-            u"a young person for whom you get Child Benefit"))
+            u"a young person for whom you get Child Benefit"),
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'))
     num_dependants = IntegerField(
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_dependants', FieldValue(NO)),
             NumberRange(min=1)])
     have_savings = YesNoField(
-        _(u'Do you have any savings or investments?'))
+        _(u'Do you have any savings or investments?'),
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'))
     have_valuables = YesNoField(
-        _(u'Do you have any valuable items worth over £500 each?'))
+        _(u'Do you have any valuable items worth over £500 each?'),
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'))
     own_property = YesNoField(
         _(u'Do you own any property?'),
         description=_(u"For example, a house, static caravan or flat"))
@@ -100,7 +116,9 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         _(u'Are you employed?'),
         description=(
             _(u"This means working as an employee - you may be both employed "
-              u"and self-employed")))
+              u"and self-employed")),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
     partner_is_employed = YesNoField(
         _(u'Is your partner employed?'),
         description=_(
@@ -108,12 +126,16 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             u"employed and self-employed"),
         validators=[
             IgnoreIf('in_dispute', FieldValueOrNone(YES)),
-            InputRequired(message=gettext(u'Please choose Yes or No'))])
+            InputRequired(message=gettext(u'Please choose Yes or No'))],
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'))
     is_self_employed = YesNoField(
         _(u'Are you self-employed?'),
         description=(
             _(u"This means working for yourself - you may be both employed "
-              u"and self-employed")))
+              u"and self-employed")),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
     partner_is_self_employed = YesNoField(
         _(u'Is your partner self-employed?'),
         description=_(
@@ -121,8 +143,13 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             u"employed and self-employed"),
         validators=[
             IgnoreIf('in_dispute', FieldValueOrNone(YES)),
-            InputRequired(message=gettext(u'Please choose Yes or No'))])
-    aged_60_or_over = YesNoField(_(u'Are you or your partner aged 60 or over?'))
+            InputRequired(message=gettext(u'Please choose Yes or No'))],
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'))
+    aged_60_or_over = YesNoField(
+        _(u'Are you or your partner (if you have one) aged 60 or over?'),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
 
     def api_payload(self):
         def value_or_zero(field, dependant_field):
@@ -177,7 +204,9 @@ class PropertyForm(NoCsrfForm):
             u"ex-partner"),
         partner_label=_(
             u'Does anyone else (other than you or your partner) own a share '
-            u'of the property?'))
+            u'of the property?'),
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'))
     property_value = MoneyField(
         _(u'How much is the property worth?'),
         description=_(
@@ -199,7 +228,10 @@ class PropertyForm(NoCsrfForm):
         validators=[
             IgnoreIf('mortgage_remaining', FieldValue(0)),
             NumberRange(min=0)])
-    is_rented = YesNoField(_(u'Do you rent out any part of this property?'))
+    is_rented = YesNoField(
+        _(u'Do you rent out any part of this property?'),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
     rent_amount = MoneyIntervalField(
         _(u'If Yes, how much rent do you receive?'),
         choices=money_intervals_except('per_4week'),
@@ -209,7 +241,9 @@ class PropertyForm(NoCsrfForm):
     in_dispute = YesNoField(
         _(u'Is your share of the property in dispute?'),
         description=_(
-            u"For example, as part of the financial settlement of a divorce"))
+            u"For example, as part of the financial settlement of a divorce"),
+        yes_text=lazy_pgettext(u'There is/are', u'Yes'),
+        no_text=lazy_pgettext(u'There is/are not', u'No'))
 
     def api_payload(self):
         share = 100 if self.other_shareholders.data == NO else None
@@ -278,30 +312,40 @@ class PropertiesForm(ConfigFormMixin, Honeypot, Form):
 
 class SavingsForm(ConfigFormMixin, Honeypot, Form):
     savings = MoneyField(
+        _('Savings'),
         description=_(
             u"The total amount of savings in cash, bank or building society"),
         validators=[InputRequired(
             message=gettext(u'Enter 0 if you have no savings')
         )])
     investments = MoneyField(
+        _('Investments'),
         description=_(
             u"This includes stocks, shares, bonds (but not property)"),
         validators=[InputRequired(
             message=gettext(u'Enter 0 if you have no investments')
         )])
     valuables = MoneyField(
-        _(u'Total value of items worth over £500 each'))
+        _(u'Total value of items worth over £500 each'),
+        min_val=50000,
+        validators=[InputRequired(
+            message=gettext(u'Enter 0 if you have no valuables')
+        )])
+
+    def __init__(self, *args, **kwargs):
+        super(SavingsForm, self).__init__(*args, **kwargs)
+        if not session.has_valuables:
+            del self.valuables
+
+        if not session.has_savings:
+            del self.savings
+            del self.investments
 
     def api_payload(self):
-        # rather than showing an error message, just ignore values less than
-        # £500
-        valuables = self.valuables.data
-        if valuables < 50000:
-            valuables = 0
         return {'you': {'savings': {
-            'bank_balance': self.savings.data,
-            'investment_balance': self.investments.data,
-            'asset_balance': valuables
+            'bank_balance': self.savings.data if self.savings else 0,
+            'investment_balance': self.investments.data if self.investments else 0,
+            'asset_balance': self.valuables.data if self.valuables else 0
         }}}
 
 
@@ -324,12 +368,13 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, Form):
         choices=NON_INCOME_BENEFITS)
     other_benefits = PartnerYesNoField(
         label=_(u'Do you receive any other benefits not listed above? '),
-        partner_label=_(
-            u'Do you or your partner receive any other benefits not listed '
-            u'above? '),
-        description=_(
-            u'For example, Incapacity Benefit, Contribution-based '
-            u'Jobseeker\'s Allowance'))
+        partner_label=_(u'Do you or your partner receive any other benefits '
+                        u'not listed above? '),
+        description=_(u'For example, National Asylum Support Service Benefit, '
+                      u'Incapacity Benefit, Contribution-based Jobseeker\'s '
+                      u'Allowance'),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
     total_other_benefit = MoneyIntervalField(
         _(u'If Yes, total amount of benefits not listed above'),
         choices=money_intervals_except('per_month'),

@@ -6,18 +6,17 @@ forms:
       categories:
         field_options:
           violence:
-            selected_notification: If you are in immediate danger you can ask us to [call you back](/call-me-back).
+            selected_notification: Os ydych mewn perygl uniongyrchol, gallwch ofyn i ni [eich ffonio’n ôl](/call-me-back).
 
           family:
-            selected_notification: If you are a parent of a child who the local authority is trying to take in to care, ask us to [call you back](/call-me-back).
+            selected_notification: Os ydych yn rhiant i blentyn y mae’r awdurdod lleol yn ceisio ei ddwyn i’w gofal, gofynnwch i ni [eich ffonio’n ôl](/call-me-back).
 
   AboutYouForm:
     fields:
 
       have_children:
         more_info: >
-          Young people aged 16 or over who live with you and who you support financially should
-          be included in the next question under “Do you have any dependants aged 16 or over?”
+          Dylech gynnwys pobl ifanc 16 oed neu hŷn sy’n byw gyda chi a’ch bod yn eu cynnal yn ariannol yn y cwestiwn nesaf o dan “Oes gennych unrhyw ddibynyddion sy’n 16 oed neu hŷn?”
 
   PropertyForm:
     fields:

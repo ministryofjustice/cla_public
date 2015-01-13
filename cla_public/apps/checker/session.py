@@ -1,6 +1,7 @@
 import datetime
 
 from flask.json import JSONEncoder
+from cla_common.constants import ELIGIBILITY_STATES
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 
 
@@ -36,6 +37,18 @@ class CheckerSession(SecureCookieSession):
     @property
     def needs_face_to_face(self):
         return self.get('ProblemForm_categories') in F2F_CATEGORIES
+
+    @property
+    def need_more_info(self):
+        """Show we need more information page instead of eligible"""
+        if self.get('is_eligible', None) == ELIGIBILITY_STATES.UNKNOWN:
+            return True
+        properties = self.get('PropertiesForm_properties', [])
+        if properties:
+            return any(
+                [p['in_dispute'] == YES or p['other_shareholders'] == YES for p in properties]
+            )
+        return False
 
     @property
     def category(self):
