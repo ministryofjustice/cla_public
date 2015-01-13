@@ -155,10 +155,12 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data['have_savings'] = YES
         form_data['have_valuables'] = YES
+        session['AboutYouForm_have_savings'] = YES
+        session['AboutYouForm_have_valuables'] = YES
         payload = self.payload(AboutYouForm, form_data)
         self.assertEqual(payload['you']['savings']['bank_balance'], None)
         self.assertEqual(payload['you']['savings']['investment_balance'], None)
-        self.assertEqual(payload['you']['savings']['asset_balance'], 0)
+        self.assertEqual(payload['you']['savings']['asset_balance'], None)
 
         # Test null property
         self.assertEqual(len(payload['property_set']), 0)
