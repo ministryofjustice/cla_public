@@ -3088,26 +3088,3 @@ msgstr ""
 
 #~ msgid "I am not"
 #~ msgstr ""
-
-#~ msgid "Call me tomorrow at"
-#~ msgstr ""
-
-#~ msgid "Your partner‘s income"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "If you miss the call or you need advice urgently, you can call us on\n"
-#~ "    0345 345 4 345. Find out about call charges\n"
-#~ "    <a href=\"https://www.gov.uk/call-charges\">here</a>."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Legal aid is not usually available "
-#~ "for advice about personal injury. You"
-#~ " may be able to get\n"
-#~ "        legal aid in exceptional cases."
-#~ " You could seek advice from a "
-#~ "legal adviser about whether\n"
-#~ "        an application might succeed in your case and how to apply."
-#~ msgstr ""
-
