@@ -7,8 +7,7 @@ from flask import session, request
 from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, gettext, lazy_pgettext
 from werkzeug.datastructures import MultiDict
-from wtforms import Form as NoCsrfForm, FieldList
-from wtforms import IntegerField, FormField
+from wtforms import Form as NoCsrfForm
 from wtforms.validators import InputRequired, NumberRange
 
 from cla_public.apps.checker.api import money_interval
@@ -19,7 +18,8 @@ from cla_public.apps.checker.fields import (
     YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
     PropertyList, money_interval_to_monthly,
-    PassKwargsToFormField)
+    PassKwargsToFormField, SetZeroIntegerField, set_zero_values,
+    SetZeroFormField)
 from cla_public.libs.form_config_parser import ConfigFormMixin
 from cla_public.libs.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, \
@@ -30,22 +30,6 @@ from cla_public.libs.utils import recursive_dict_update
 
 
 log = logging.getLogger(__name__)
-
-
-def set_zero_values(form):
-    """Set values on a form to zero"""
-    def set_zero(field):
-        if isinstance(field, MoneyField) or isinstance(field, IntegerField):
-            field.data = 0
-        elif isinstance(field, MoneyIntervalField):
-            field.form.per_interval_value.data = 0
-            field.form.interval_period.data = 'per_month'
-        elif isinstance(field, FormField):
-            field.form = set_zero_values(field.form)
-        elif isinstance(field, FieldList):
-            field.entries = []
-    map(set_zero, form._fields.itervalues())
-    return form
 
 
 class FormSessionDataMixin(object):
@@ -130,7 +114,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
         description=_(u"Don't include any children who don't live with you"),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
-    num_children = IntegerField(
+    num_children = SetZeroIntegerField(
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_children', FieldValue(NO)),
@@ -142,7 +126,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             u"a young person for whom you get Child Benefit"),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
-    num_dependants = IntegerField(
+    num_dependants = SetZeroIntegerField(
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_dependants', FieldValue(NO)),
@@ -217,20 +201,16 @@ class AboutYouForm(ConfigFormMixin, Honeypot, Form):
             payload['partner'] = {'income': {
                 'self_employed': self.partner_is_self_employed.data}}
 
-        # need to delete properties if user changes to no property
-        # also need to save a blank property now if user selects owns_property
-        properties_data = PropertiesForm.get_session_as_api_payload() if \
-            self.require_properties else PropertiesForm.get_zero_api_payload()
-        recursive_dict_update(payload, properties_data)
+        def update_payload(form_class, cond=True):
+            if cond:
+                form_data = form_class.get_session_as_api_payload()
+            else:
+                form_data = form_class.get_zero_api_payload()
+            recursive_dict_update(payload, form_data)
 
-        # set savings to zero/null depending on has_savings/has_valuables
-        savings_data = SavingsForm.get_session_as_api_payload() if \
-            self.require_savings else SavingsForm.get_zero_api_payload()
-        recursive_dict_update(payload, savings_data)
-
-        # add null/session income and set to 0 if on passported benefits later
-        income = IncomeForm().get_session_as_api_payload()
-        recursive_dict_update(payload, income)
+        update_payload(PropertiesForm, cond=self.require_properties)
+        update_payload(SavingsForm, cond=self.require_savings)
+        update_payload(IncomeForm)
 
         return payload
 
@@ -347,7 +327,7 @@ def sum_rents(rents):
 
 class PropertiesForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
     properties = PropertyList(
-        FormField(PropertyForm), min_entries=1, max_entries=3)
+        SetZeroFormField(PropertyForm), min_entries=1, max_entries=3)
 
     _submitted = None
 
@@ -559,10 +539,11 @@ class IncomeFieldForm(NoCsrfForm, FormSessionDataMixin):
 
 
 class IncomeForm(ConfigFormMixin, Honeypot, Form, FormSessionDataMixin):
-    your_income = FormField(IncomeFieldForm, label=_(u'Your personal income'))
-    partner_income = PassKwargsToFormField(IncomeFieldForm,
-                                           form_kwargs={'is_partner': True},
-                                           label=_(u'Your partner‘s income'))
+    your_income = SetZeroFormField(IncomeFieldForm, label=_(u'Your personal income'))
+    partner_income = PassKwargsToFormField(
+        IncomeFieldForm,
+        form_kwargs={'is_partner': True},
+        label=_(u'Your partner’s income'))
 
     def __init__(self, *args, **kwargs):
         """Dynamically remove partner subform if user has no partner"""
