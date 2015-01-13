@@ -51,7 +51,7 @@ module.exports = {
       common.submitAndCheckForFieldError(client, item.name, item.errorText);
     });
     SAVINGS_QUESTIONS.VALUABLES.forEach(function(item) {
-      client.assert.hidden(util.format('input[name="%s"]', item.name));
+      client.assert.elementNotPresent(util.format('input[name="%s"]', item.name));
     });
     client.end();
   },
@@ -70,7 +70,7 @@ module.exports = {
       common.submitAndCheckForFieldError(client, item.name, item.errorText);
     });
     SAVINGS_QUESTIONS.MONEY.forEach(function(item) {
-      client.assert.hidden(util.format('input[name="%s"]', item.name));
+      client.assert.elementNotPresent(util.format('input[name="%s"]', item.name));
     });
     client.end();
   },

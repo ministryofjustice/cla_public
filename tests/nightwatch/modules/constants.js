@@ -119,7 +119,7 @@ exports.SAVINGS_QUESTIONS = {
   VALUABLES: [
     {
       name: 'valuables',
-      errorText: 'Not a valid amount'
+      errorText: 'Enter 0 if you have no valuables'
     }
   ]
 };
