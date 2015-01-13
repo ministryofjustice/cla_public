@@ -5,6 +5,7 @@ import logging
 import re
 
 from flask import session
+
 from flask.ext.babel import lazy_gettext as _, gettext
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, RadioField, \
@@ -77,8 +78,9 @@ class DescriptionRadioField(RadioField):
 class YesNoField(RadioField):
     """Yes/No radio button field"""
 
-    def __init__(self, label=None, validators=None, **kwargs):
-        choices = [(YES, 'Yes'), (NO, 'No')]
+    def __init__(self, label=None, validators=None, yes_text=_('Yes'),
+                 no_text=_('No'), **kwargs):
+        choices = [(YES, yes_text), (NO, no_text)]
         if validators is None:
             validators = [
                 InputRequired(message=gettext(u'Please choose Yes or No'))]

@@ -34,11 +34,28 @@ def test():
         venv=VENV)
     run(nosetests)
 
+def add_msgctxt(**format_kwargs):
+    """add msgctxt to pot file as babel doesn't seem to correctly add this for pgettext"""
+    run("""sed -i '' -e 's/msgid \"{context}\"/msgctxt \"{context}\"\\
+msgid \"{message}\"/' cla_public/translations/messages.pot""".format(**format_kwargs))
 
 @manager.command
 def make_messages():
     """compile po file."""
-    run('{venv}/bin/pybabel extract -F babel.cfg -k lazy_gettext -o cla_public/translations/messages.pot .'.format(venv=VENV))
+    run('{venv}/bin/pybabel extract -F babel.cfg -k pgettext -k lazy_pgettext -k '
+        'gettext -k lazy_gettext -o cla_public/translations/messages.pot .'.format(venv=VENV))
+
+    pgettexts = [
+        {'context': 'There is\/are', 'message': 'Yes'},
+        {'context': 'There is\/are not', 'message': 'No'},
+        {'context': 'It is', 'message': 'Yes'},
+        {'context': 'It isn’t', 'message': 'No'},
+        {'context': 'I am', 'message': 'Yes'},
+        {'context': 'I’m not', 'message': 'No'},
+    ]
+    for trans in pgettexts:
+        add_msgctxt(**trans)
+
     run('cat cla_public/translations/wtforms.pot >> cla_public/translations/messages.pot')
     for language_code in app.config.get('LANGUAGES').keys():
         run('{venv}/bin/pybabel update -i cla_public/translations/messages.pot -d cla_public/translations -l {language_code}'

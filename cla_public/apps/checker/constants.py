@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask.ext.babel import lazy_gettext as _
+from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 
 
 "Categories the user needs help with"
@@ -146,6 +146,6 @@ ORGANISATION_CATEGORY_MAPPING = {
 }
 
 CONTACT_SAFETY = (
-    ('SAFE', _('Yes')),
-    ('NO_MESSAGE', _('No')),
+    ('SAFE', lazy_pgettext(context=u'It is', string=u'Yes')),
+    ('NO_MESSAGE', lazy_pgettext(context=u"It isn’t", string=u'No')),
 )
