@@ -2,7 +2,7 @@
 "CallMeBack forms"
 
 from flask import session
-from flask.ext.babel import lazy_gettext as _, gettext
+from flask.ext.babel import lazy_gettext as _
 from flask_wtf import Form
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, FormField, RadioField, SelectField, \
@@ -21,7 +21,7 @@ LANG_CHOICES = filter(
     [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
 
 
-class AdaptationsForm(NoCsrfForm, BabelTranslationsFormMixin):
+class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     """
     Subform for adaptations
     """
@@ -39,7 +39,7 @@ class AdaptationsForm(NoCsrfForm, BabelTranslationsFormMixin):
         description=_(u'Please tell us what you need in the box below'))
 
 
-class CallMeBackForm(Honeypot, Form, BabelTranslationsFormMixin):
+class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Form to request a callback
     """
@@ -54,7 +54,7 @@ class CallMeBackForm(Honeypot, Form, BabelTranslationsFormMixin):
         _(u'Is it safe for us to leave a message on this number?'),
         choices=CONTACT_SAFETY,
         validators=[
-            InputRequired(message=gettext(u'Please choose Yes or No'))],
+            InputRequired(message=_(u'Please choose Yes or No'))],
     )
     post_code = StringField(_(u'Postcode'))
     address = TextAreaField(_(u'Address'))

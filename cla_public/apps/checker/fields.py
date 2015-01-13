@@ -87,7 +87,7 @@ class YesNoField(RadioField):
         choices = [(YES, yes_text), (NO, no_text)]
         if validators is None:
             validators = [
-                InputRequired(message=self.gettext(u'Please choose Yes or No'))]
+                InputRequired(message=_(u'Please choose Yes or No'))]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=coerce_unicode_if_value,
             choices=choices, **kwargs)
@@ -161,7 +161,7 @@ class MoneyField(SetZeroIntegerField):
             self.data = '{0}.{1:02}'.format(pounds, pence)
 
 
-class MoneyIntervalForm(NoCsrfForm, BabelTranslationsFormMixin):
+class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
     """Money amount and interval subform"""
     per_interval_value = MoneyField(validators=[Optional()])
     interval_period = SelectField(
