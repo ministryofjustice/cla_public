@@ -111,12 +111,21 @@ def post_to_is_eligible_api():
         return is_eligible
 
 
+def should_attach_eligibility_check():
+    return session.category is not None
+
+
+def attach_eligibility_check(payload):
+    payload['eligibility_check'] = session.get('eligibility_check')
+
+
 def post_to_case_api(form):
     backend = get_api_connection()
-    reference = session.get('eligibility_check')
     payload = form.api_payload()
 
-    payload['eligibility_check'] = reference
+    if should_attach_eligibility_check():
+        attach_eligibility_check(payload)
+
     response = backend.case.post(payload)
     session['case_ref'] = response['reference']
 
