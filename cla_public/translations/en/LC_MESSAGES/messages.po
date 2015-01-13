@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-13 16:53+0000\n"
+"POT-Creation-Date: 2015-01-13 17:14+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -53,19 +53,19 @@ msgstr ""
 msgid "I had some other kind of help"
 msgstr ""
 
-#: cla_public/apps/base/forms.py:40
+#: cla_public/apps/base/forms.py:37
 msgid "Did you have any difficulty with this service?"
 msgstr ""
 
-#: cla_public/apps/base/forms.py:42
+#: cla_public/apps/base/forms.py:39
 msgid "Do you have any ideas for how it could be improved?"
 msgstr ""
 
-#: cla_public/apps/base/forms.py:45
+#: cla_public/apps/base/forms.py:42
 msgid "Overall, how did you feel about the service you received today?"
 msgstr ""
 
-#: cla_public/apps/base/forms.py:50
+#: cla_public/apps/base/forms.py:47
 msgid "Did you have any help filling in this form?"
 msgstr ""
 
@@ -930,7 +930,7 @@ msgstr ""
 
 #: cla_public/config/common.py:55 cla_public/config/common.py:56
 #: cla_public/templates/_sidebar.html:7
-#: cla_public/templates/call-me-back.html:38
+#: cla_public/templates/call-me-back.html:43
 msgid "Civil Legal Advice"
 msgstr ""
 
@@ -1100,6 +1100,12 @@ msgstr ""
 
 #: cla_public/templates/call-me-back.html:13
 msgid ""
+"The full service is currently unavailable. However, you can still request"
+" a call back using the form below."
+msgstr ""
+
+#: cla_public/templates/call-me-back.html:18
+msgid ""
 "Fill in your personal details to get a callback from Civil Legal Advice "
 "to find out if you\n"
 "      qualify for specialist advice on debt, education, discrimination, "
@@ -1107,45 +1113,45 @@ msgid ""
 "      funded by <a href=\"https://www.gov.uk/legal-aid\">legal aid</a>."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:18
+#: cla_public/templates/call-me-back.html:23
 msgid ""
 "We will try and call you at least once. If we cannot speak to you we will"
 " leave you a message\n"
 "      unless you tell us below not to."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:22
+#: cla_public/templates/call-me-back.html:27
 msgid ""
 "If we can’t speak to you please book another call back here or call us on"
 " 0345 345 4 345."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:37
+#: cla_public/templates/call-me-back.html:42
 msgid "If you don’t have a number we can call you on, please contact"
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:65
+#: cla_public/templates/call-me-back.html:70
 msgid ""
 "If the operator you speak to thinks you might qualify, they will put you\n"
 "        through to a CLA specialist adviser immediately."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:69
+#: cla_public/templates/call-me-back.html:74
 msgid ""
 "If CLA can’t help we will suggest other places that might be able to "
 "assist you."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:74
+#: cla_public/templates/call-me-back.html:79
 msgid "Request callback"
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:79
+#: cla_public/templates/call-me-back.html:84
 #: cla_public/templates/result/confirmation.html:17
 msgid "What happens next?"
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:82
+#: cla_public/templates/call-me-back.html:87
 msgid ""
 "The first person you speak to will be an operator. They will ask you "
 "questions about\n"
@@ -1153,27 +1159,27 @@ msgid ""
 "circumstances."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:87
+#: cla_public/templates/call-me-back.html:92
 msgid ""
 "If it looks like you might qualify you will be put through to a CLA "
 "specialist\n"
 "      adviser immediately."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:92
+#: cla_public/templates/call-me-back.html:97
 msgid ""
 "If CLA can’t help you we will always suggest where else you might get "
 "help."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:96
+#: cla_public/templates/call-me-back.html:101
 msgid ""
 "If we can do anything to make it easier for you to communicate with us "
 "due to your\n"
 "      disability please tell the Operator."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:101
+#: cla_public/templates/call-me-back.html:106
 msgid ""
 "Protecting your personal data and your privacy is important to us. We are"
 " asking for\n"
@@ -1183,7 +1189,7 @@ msgid ""
 "Statement here</a>."
 msgstr ""
 
-#: cla_public/templates/call-me-back.html:116
+#: cla_public/templates/call-me-back.html:121
 msgid "Find UK address"
 msgstr ""
 
