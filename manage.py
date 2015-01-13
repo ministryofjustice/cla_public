@@ -36,8 +36,7 @@ def test():
 
 def add_msgctxt(**format_kwargs):
     """add msgctxt to pot file as babel doesn't seem to correctly add this for pgettext"""
-    run("""sed -i '' -e 's/msgid \"{context}\"/msgctxt \"{context}\"\\
-msgid \"{message}\"/' cla_public/translations/messages.pot""".format(**format_kwargs))
+    run("sed -i '' -e 's/msgid \"{context}\"/msgctxt \"{context}\"\\\nmsgid \"{message}\"/' cla_public/translations/messages.pot".format(**format_kwargs))
 
 @manager.command
 def make_messages():
