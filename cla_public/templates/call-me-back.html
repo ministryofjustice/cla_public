@@ -8,6 +8,11 @@
 
 {% block inner_content %}
   {% block page_text %}
+    {% if config.CALLMEBACK_ONLY %}
+      {% call Element.alert() %}
+        <p>{{ _('The full service is currently unavailable. However, you can still request a call back using the form below.') }}</p>
+      {% endcall %}
+    {% endif %}
     <h1>{{ title }}</h1>
     <p>
       {% trans %}Fill in your personal details to get a callback from Civil Legal Advice to find out if you
