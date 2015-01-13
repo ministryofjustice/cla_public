@@ -6,13 +6,14 @@ import re
 
 from flask import session
 
-from flask.ext.babel import lazy_gettext as _, gettext
+from flask.ext.babel import lazy_gettext as _
 from wtforms import Form as NoCsrfForm
 from wtforms import FormField, IntegerField, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.validators import Optional, InputRequired
 
 from cla_common.money_interval.models import MoneyInterval
+from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 from cla_public.apps.checker.validators import ValidMoneyInterval
 
@@ -86,7 +87,7 @@ class YesNoField(RadioField):
         choices = [(YES, yes_text), (NO, no_text)]
         if validators is None:
             validators = [
-                InputRequired(message=gettext(u'Please choose Yes or No'))]
+                InputRequired(message=_(u'Please choose Yes or No'))]
         super(YesNoField, self).__init__(
             label=label, validators=validators, coerce=coerce_unicode_if_value,
             choices=choices, **kwargs)
@@ -160,7 +161,7 @@ class MoneyField(SetZeroIntegerField):
             self.data = '{0}.{1:02}'.format(pounds, pence)
 
 
-class MoneyIntervalForm(NoCsrfForm):
+class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
     """Money amount and interval subform"""
     per_interval_value = MoneyField(validators=[Optional()])
     interval_period = SelectField(

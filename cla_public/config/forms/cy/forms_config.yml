@@ -22,6 +22,4 @@ forms:
     fields:
       in_dispute:
         more_info: >
-          A disputed property is one whose ownership is disputed by someone eg an ex-partner wants
-          to claim a share in it as part of a divorce or separation, or a creditor or mortgage
-          company wants to force the sale of it to repay a debt.
+          Eiddo sy’n destun dadl yw lle mae rhywun yn dadlau dros ei berchnogaeth e.e. cyn partner sydd eisiau hawlio cyfran fel rhan o ysgariad neu wahaniad, neu gredydwr neu gwmni morgais sydd eisiau gorfodi gwerthiant er mwyn talu dyled.

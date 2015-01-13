@@ -18,7 +18,7 @@
 
     {% if form.errors %}
       {% call Element.alert('error', icon='cross') %}
-        <p>Please select at least one option.</p>
+        <p>{{ _('Please select at least one option.') }}</p>
       {% endcall %}
     {% endif %}
 

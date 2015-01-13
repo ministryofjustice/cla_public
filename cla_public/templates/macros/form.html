@@ -451,7 +451,7 @@
   <div class="field-error">
     {% set errors = errors.values() if errors is mapping else errors %}
     {% for error in errors %}
-      {% if error is string %}
+      {% if error is string or error == error|string %}
         <p>{{error}}</p>
       {% else %}
         {% for line in error %}
@@ -488,8 +488,8 @@
 {% macro handle_errors(form) %}
   {% if form.errors %}
     {% call Element.alert('error', icon='cross') %}
-      <p>This form has errors.</p>
-      <p>Please see below for the errors you need to correct.</p>
+      <p>{{  _('This form has errors.') }}</p>
+      <p>{{ _('Please see below for the errors you need to correct.') }}</p>
     {% endcall %}
   {% endif %}
 {% endmacro %}
