@@ -20,8 +20,7 @@ log = logging.getLogger(__name__)
 
 @base.route('/')
 def index():
-    session.clear()
-    return render_template('index.html')
+    return get_started()
 
 
 @base.route('/cookies')
@@ -86,6 +85,7 @@ def get_started():
     """
     Redirect to checker unless currently disabled
     """
+    session.clear()
     if current_app.config.get('CALLMEBACK_ONLY'):
         session['callmeback_only'] = 'yes'
         return redirect(url_for('callmeback.request_callback'))
