@@ -1,11 +1,10 @@
 <div class="phase-banner">
+  {% if form and config.DEBUG -%}
+    {% include "_context-debugger.html" %}
+  {%- endif -%}
   <p>
     <strong class="phase-tag">{{ _('BETA') }}</strong>
     <span>{% trans url=url_for('base.feedback') %}This is a new service – your <a href="{{ url }}">feedback</a>
       will help us to improve it.{% endtrans %}</span>
   </p>
-
-  {% if form and config.DEBUG -%}
-    {% include "_context-debugger.html" %}
-  {%- endif -%}
 </div>
