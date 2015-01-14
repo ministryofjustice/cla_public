@@ -39,5 +39,9 @@
     {{ Form.actions(_('Continue')) }}
   </form>
 
-  <a href="{{ url_for('base.toggle_welsh') }}">{% if request.cookies.get('welsh') == 'True' %}English{% else %}Cymraeg{% endif %}</a>
+  {% if request.cookies.get('welsh') %}
+  <a href="{{ url_for('base.set_locale', locale='en') }}">English</a>
+  {% else %}
+  <a href="{{ url_for('base.set_locale', locale='cy') }}">Cymraeg</a>
+  {% endif %}
 {% endblock %}
