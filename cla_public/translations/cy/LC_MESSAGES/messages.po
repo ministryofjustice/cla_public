@@ -1030,7 +1030,7 @@ msgstr "BETA"
 msgid ""
 "This is a new service – your <a href=\"%(url)s\">feedback</a>\n"
 "      will help us to improve it."
-msgstr "Mae hwn yn wasanaeth newydd - bydd eich adborth yn ein helpu i'w wella"
+msgstr "Mae hwn yn wasanaeth newydd - bydd <a href=\"%(url)s\">eich adborth</a> yn ein helpu i'w wella"
 
 #: cla_public/templates/_sidebar.html:4
 msgid "Resources"
