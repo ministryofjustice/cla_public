@@ -5,7 +5,7 @@ import logging
 import datetime
 
 from flask import current_app, jsonify, redirect, render_template, session, \
-    url_for
+    url_for, request
 from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_public.apps.base import base
@@ -92,3 +92,17 @@ def get_started():
         session['callmeback_only'] = 'yes'
         return redirect(url_for('callmeback.request_callback'))
     return redirect(url_for('checker.problem'))
+
+
+@base.route('/toggle-welsh')
+def toggle_welsh():
+    """
+    Toggle welsh cookie
+    """
+    welsh = request.cookies.get('welsh', False) == "True"
+    response = redirect(url_for('.index'))
+    expires = 0
+    if not welsh:
+        expires = datetime.datetime.now() + datetime.timedelta(days=30)
+    response.set_cookie('welsh', 'True', expires=expires)
+    return response
