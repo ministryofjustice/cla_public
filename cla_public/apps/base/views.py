@@ -109,16 +109,16 @@ def next_url():
     return url_for('.index')
 
 
-@base.route('/set-locale/<locale>')
+@base.route('/locale/<locale>')
 def set_locale(locale):
     """
-    Set welsh cookie
+    Set locale cookie
     """
-    welsh = request.cookies.get('welsh')
+    welsh = request.cookies.get('locale') == 'cy_GB'
     response = redirect(next_url())
-    if locale == 'cy' and not welsh:
+    if locale == 'cy_GB' and not welsh:
         expires = datetime.datetime.now() + datetime.timedelta(days=30)
-        response.set_cookie('welsh', '1', expires=expires)
-    elif locale == 'en' and welsh:
-        response.set_cookie('welsh', '', expires=0)
+        response.set_cookie('locale', 'cy_GB', expires=expires)
+    elif locale == 'en_GB' and welsh:
+        response.set_cookie('locale', '', expires=0)
     return response
