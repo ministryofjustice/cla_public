@@ -1,74 +1,315 @@
-from decimal import Decimal, InvalidOperation
-from django import forms
-from django.core import validators
-from django.utils.translation import ugettext_lazy as _
+# -*- coding: utf-8 -*-
+"Custom form fields"
 
-BOOL_CHOICES = ((1, _('Yes')), (0, _('No')))
+import logging
+import re
 
-TWO_DP = Decimal('.01')
-ZERO_DP = Decimal('1')
+from flask import session
+
+from flask.ext.babel import lazy_gettext as _
+from wtforms import Form as NoCsrfForm
+from wtforms import FormField, IntegerField, RadioField, \
+    SelectField, SelectMultipleField, widgets, FieldList
+from wtforms.validators import Optional, InputRequired
+
+from cla_common.money_interval.models import MoneyInterval
+from cla_public.apps.base.forms import BabelTranslationsFormMixin
+from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
+from cla_public.apps.checker.validators import ValidMoneyInterval
 
 
-class RadioBooleanField(forms.TypedChoiceField):
+log = logging.getLogger(__name__)
+
+
+def coerce_unicode_if_value(value):
+    return unicode(value) if value is not None else None
+
+
+class PartnerMixin(object):
+
     def __init__(self, *args, **kwargs):
-        kwargs['coerce'] = kwargs.pop('coerce', int)
-        kwargs['widget'] = forms.RadioSelect
-        kwargs['choices'] = kwargs.pop('choices', BOOL_CHOICES)
+        partner_label = kwargs.pop('partner_label', kwargs.get('label'))
+        partner_description = kwargs.pop(
+            'partner_description', kwargs.get('description'))
+        if session.has_partner:
+            kwargs['label'] = partner_label
+            kwargs['description'] = partner_description
+        super(PartnerMixin, self).__init__(*args, **kwargs)
 
-        super(RadioBooleanField, self).__init__(*args, **kwargs)
+
+class DescriptionRadioField(RadioField):
+    """RadioField with a description for each radio button, not just for the
+    group.
+
+    The choices kwargs field takes a list of triples.
+
+    Format:
+
+    choices=[(name, label, description), ...]
+    """
+
+    def __init__(self, *args, **kwargs):
+        self.options_attributes = []
+        self.field_names = []
+        self.descriptions = []
+        choices = []
+        for name, label, description in kwargs.get('choices', []):
+            self.field_names.append(name)
+            self.descriptions.append(description)
+            choices.append((name, label))
+        if choices:
+            kwargs['choices'] = choices
+        super(DescriptionRadioField, self).__init__(*args, **kwargs)
+
+    def __iter__(self):
+        options = super(DescriptionRadioField, self).__iter__()
+        for index, option in enumerate(options):
+            option.description = self.descriptions[index]
+            option.field_name = self.field_names[index]
+
+            try:
+                option_attributes = self.options_attributes[index]
+                option.__dict__.update(option_attributes)
+            except IndexError:
+                pass
+
+            yield option
+
+    def add_options_attributes(self, options_attributes):
+        self.options_attributes = options_attributes
 
 
-class MoneyField(forms.Field):
-    default_error_messages = {
-        'invalid': _('Enter a number with up to two decimal places.'),
+class YesNoField(RadioField):
+    """Yes/No radio button field"""
+
+    def __init__(self, label=None, validators=None, yes_text=_('Yes'),
+                 no_text=_('No'), **kwargs):
+        choices = [(YES, yes_text), (NO, no_text)]
+        if validators is None:
+            validators = [
+                InputRequired(message=_(u'Please choose Yes or No'))]
+        super(YesNoField, self).__init__(
+            label=label, validators=validators, coerce=coerce_unicode_if_value,
+            choices=choices, **kwargs)
+
+
+def set_zero_values(form):
+    """Set values on a form to zero"""
+    def set_zero(field):
+        if hasattr(field, 'set_zero'):
+            field.set_zero()
+    map(set_zero, form._fields.itervalues())
+    return form
+
+
+class SetZeroIntegerField(IntegerField):
+    def set_zero(self):
+        self.data = 0
+
+
+class SetZeroFormField(FormField):
+    def set_zero(self):
+        set_zero_values(self.form)
+
+
+class MoneyField(SetZeroIntegerField):
+
+    def __init__(self, label=None, validators=None, min_val=0, max_val=None,
+                 **kwargs):
+        super(MoneyField, self).__init__(label, validators, **kwargs)
+        self.min_val = min_val
+        self.max_val = max_val
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            pounds, _, pence = valuelist[0].strip().partition('.')
+            pounds = re.sub(r'[\s,]+', '', pounds)
+
+            if pence:
+                if len(pence) > 2:
+                    self.data = None
+                    raise ValueError(self.gettext(u'Not a valid amount'))
+
+                if len(pence) == 1:
+                    pence = '{0}0'.format(pence)
+
+            try:
+                self.data = int(pounds) * 100
+                if pence:
+                    self.data += int(pence)
+            except ValueError:
+                self.data = None
+                raise ValueError(self.gettext(u'Not a valid amount'))
+
+            if self.min_val is not None and self.data < self.min_val:
+                self.data = None
+                raise ValueError(self.gettext(
+                    u'This amount must be more than £{:.0f}').format(
+                        self.min_val / 100.0))
+
+            if self.max_val is not None and self.data > self.max_val:
+                self.data = None
+                raise ValueError(self.gettext(
+                    u'This amount must be less than £{:.0f}').format(
+                        self.max_val / 100.0))
+
+    def process_data(self, value):
+        self.data = value
+        if value:
+            pence = value % 100
+            pounds = value / 100
+            self.data = '{0}.{1:02}'.format(pounds, pence)
+
+
+class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
+    """Money amount and interval subform"""
+    per_interval_value = MoneyField(validators=[Optional()])
+    interval_period = SelectField(
+        '',
+        choices=MONEY_INTERVALS,
+        coerce=coerce_unicode_if_value)
+
+    def __init__(self, *args, **kwargs):
+        # Enable choices to be passed through
+        choices = kwargs.pop('choices', None)
+        super(MoneyIntervalForm, self).__init__(*args, **kwargs)
+        if choices:
+            self.interval_period.choices = choices
+
+    @property
+    def data(self):
+        data = super(MoneyIntervalForm, self).data
+        if data['per_interval_value'] is 0 and not data['interval_period']:
+            data['interval_period'] = MONEY_INTERVALS[1][0]
+        return data
+
+
+def money_interval_to_monthly(data):
+    amount = data['per_interval_value']
+    interval = data['interval_period']
+
+    if amount is None or interval == '':
+        return {
+            'per_interval_value': 0,
+            'interval_period': 'per_month'
+        }
+
+    if interval == 'per_month':
+        return data
+
+    multiplier = MoneyInterval._intervals_dict[interval]['multiply_factor']
+
+    return {
+        'per_interval_value': amount * multiplier,
+        'interval_period': 'per_month'
     }
 
-    def __init__(self, max_value=9999999999, min_value=0, step=None, *args, **kwargs):
-        self.max_value, self.min_value, self.step = max_value, min_value, step or '0.01'
-        kwargs.setdefault('widget', forms.NumberInput if not kwargs.get('localize') else self.widget)
-        super(MoneyField, self).__init__(*args, **kwargs)
 
-        if max_value is not None:
-            self.validators.append(validators.MaxValueValidator(max_value))
-        if min_value is not None:
-            self.validators.append(validators.MinValueValidator(min_value))
+class PassKwargsToFormField(SetZeroFormField):
 
-    def to_python(self, value):
-        """
-        Validates that int() can be called on the input. Returns the result
-        of int(). Returns None for empty values.
-        """
-        value = super(MoneyField, self).to_python(value)
-        if value in self.empty_values:
-            return None
+    def __init__(self, *args, **kwargs):
+        form_kwargs = kwargs.pop('form_kwargs', {})
 
-        if isinstance(value, bool):
-            return None
+        super(PassKwargsToFormField, self).__init__(*args, **kwargs)
+        self._form_class = self.form_class
 
-        if self.localize:
-            value = forms.formats.sanitize_separators(value)
-        try:
-            value = int(Decimal(value).quantize(TWO_DP) * 100)
-        except (ValueError, TypeError, InvalidOperation):
-            raise forms.ValidationError(self.error_messages['invalid'], code='invalid')
-        return value
+        def form_class_proxy(*f_args, **f_kwargs):
+            f_kwargs.update(form_kwargs)
+            return self._form_class(*f_args, **f_kwargs)
 
-    def clean(self, value):
-        value = super(MoneyField, self).clean(value)
-        if value:
-            value = int(Decimal(value).quantize(ZERO_DP))
+        self.form_class = form_class_proxy
 
-        return value
 
-    def widget_attrs(self, widget):
-        attrs = super(MoneyField, self).widget_attrs(widget)
+class MoneyIntervalField(PassKwargsToFormField):
+    """Convenience class for FormField(MoneyIntervalForm)"""
 
-        if isinstance(widget, forms.NumberInput):
-            if self.min_value is not None:
-                attrs['min'] = self.min_value
-            if self.max_value is not None:
-                attrs['max'] = self.max_value
-            if self.step is not None:
-                attrs['step'] = self.step
+    def __init__(self, *args, **kwargs):
+        self._errors = []
+        self.validators = []
+        if 'validators' in kwargs:
+            self.validators.extend(kwargs['validators'])
+            del kwargs['validators']
+        self.validators.append(ValidMoneyInterval())
 
-        return attrs
+        # Enable kwarg choices to be passed through to interval field
+        choices = kwargs.pop('choices', None)
+
+        super(MoneyIntervalField, self).__init__(
+            MoneyIntervalForm,
+            form_kwargs={'choices': choices},
+            *args, **kwargs)
+
+    def as_monthly(self):
+        return money_interval_to_monthly(self.data)
+
+    def validate(self, form, extra_validators=None):
+        self._run_validation_chain(form, self.validators)
+        return len(self.errors) == 0
+
+    @property
+    def errors(self):
+        return self._errors
+
+    @errors.setter
+    def errors(self, _errors):
+        self._errors = _errors
+
+    def set_zero(self):
+        self.form.per_interval_value.data = 0
+        self.form.interval_period.data = 'per_month'
+
+
+class MultiCheckboxField(SelectMultipleField):
+    """
+    A multiple-select, except displays a list of checkboxes.
+
+    Iterating the field will produce subfields, allowing custom rendering of
+    the enclosed checkbox fields.
+    """
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
+
+
+class PropertyList(FieldList):
+    def remove(self, index):
+        del self.entries[index]
+        self.last_index -= 1
+
+    def validate(self, form, extra_validators=tuple()):
+        super(PropertyList, self).validate(form, extra_validators)
+
+        main_properties = filter(
+            lambda x: x.is_main_home.data == YES,
+            self.entries)
+
+        if len(main_properties) > 1:
+            message = self.gettext('You can only have 1 main Property')
+            map(
+                lambda x: x.is_main_home.errors.append(message),
+                main_properties)
+            self.errors.append(message)
+
+        return len(self.errors) == 0
+
+    def set_zero(self):
+        self.entries = []
+
+
+class PartnerMoneyIntervalField(PartnerMixin, MoneyIntervalField):
+    pass
+
+
+class PartnerIntegerField(PartnerMixin, SetZeroIntegerField):
+    pass
+
+
+class PartnerYesNoField(PartnerMixin, YesNoField):
+    pass
+
+
+class PartnerMultiCheckboxField(PartnerMixin, MultiCheckboxField):
+    pass
+
+
+class PartnerMoneyField(PartnerMixin, MoneyField):
+    pass

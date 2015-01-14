@@ -1,0 +1,44 @@
+.alert {
+  @mixin _style-alert($border-colour, $bg-colour) {
+    background: $bg-colour;
+    border-left: 4px solid $border-colour;
+  }
+
+  padding: 20px;
+  margin: 25px 0;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .icon {
+    float: left;
+    margin: 3px 20px 0 0;
+  }
+
+  .alert-message {
+    overflow: hidden;
+
+    .alert-header,
+    p {
+      margin: 10px 0 0;
+    }
+
+    .alert-header {
+      @include core-24;
+      font-weight: bold;
+    }
+
+    p:first-child {
+      margin: 0;
+    }
+  }
+
+  &-info {
+    @include _style-alert($grey-2, $grey-4);
+  }
+
+  &-error {
+    @include _style-alert($mellow-red, lighten($mellow-red, 40));
+  }
+}

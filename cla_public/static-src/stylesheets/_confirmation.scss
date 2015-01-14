@@ -1,0 +1,28 @@
+.confirmation {
+  background: $turquoise;
+  padding: 20px;
+  margin: 30px 0;
+  color: white;
+  text-align: center;
+
+  @media print {
+    margin: .3cm 0;
+    background: none;
+    border: 2px solid $black;
+
+    h1 {
+      font-size: 1.4em;
+      margin: .1cm 0;
+    }
+
+    p {
+      margin: .1cm 0;
+    }
+  }
+}
+
+.confirmation-ref-number {
+  display: block;
+  font-size: 1.3em;
+  margin-top: 5px;
+}

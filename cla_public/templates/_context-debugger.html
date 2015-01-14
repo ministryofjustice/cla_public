@@ -1,0 +1,54 @@
+<div class="context-debugger">
+  <button tabindex="-1">Debugger</button>
+  <menu>
+    <li>
+      Has partner
+      <span class="_options">
+        <a href="?AboutYouForm_have_partner=1&amp;&amp;AboutYouForm_in_dispute=0" {% if session.has_partner %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_partner=0&amp;AboutYouForm_in_dispute=0" {% if not session.has_partner %} class="_selected"{% endif %}>No</a>
+      </span>
+    </li>
+    <li>
+      On benefits
+      <span class="_options">
+        <a href="?AboutYouForm_on_benefits=1" {% if session.is_on_benefits %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_on_benefits=0" {% if not session.is_on_benefits %} class="_selected"{% endif %}>No</a>
+      </span>
+    </li>
+    <li>
+      Has savings
+      <span class="_options">
+        <a href="?AboutYouForm_have_savings=1" {% if session.has_savings %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_savings=0" {% if not session.has_savings %} class="_selected"{% endif %}>No</a>
+      </span>
+    </li>
+    <li>
+      Has children
+      <span class="_options">
+        <a href="?AboutYouForm_have_children=1&amp;AboutYouForm_num_children=1"{% if session.has_children %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_children=0&amp;AboutYouForm_num_children="{% if not session.has_children %} class="_selected"{% endif %}>No</a>
+      </span>
+    </li>
+    <li>
+      Owns property
+      <span class="_options">
+        <a href="?AboutYouForm_own_property=1"{% if session.owns_property %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_own_property=0"{% if not session.owns_property %} class="_selected"{% endif %}>No</a>
+      </span>
+    </li>
+    <li>
+      Is employed
+      <span class="_options">
+        <a href="?AboutYouForm_is_employed=1"{% if session.is_employed %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_is_employed=0"{% if not session.is_employed %} class="_selected"{% endif %}>No</a>
+      </span>
+    </li>
+    <li>
+      Is self-employed
+      <span class="_options">
+        <a href="?AboutYouForm_is_self_employed=1"{% if session.is_self_employed %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_is_self_employed=0"{% if not session.is_self_employed %} class="_selected"{% endif %}>No</a>
+      </span>
+    </li>
+  </menu>
+</div>

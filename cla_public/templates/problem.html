@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% import "macros/form.html" as Form %}
+{% import "macros/element.html" as Element %}
+
+{% set title = _('What do you need help with?') %}
+
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+  <p class="subtitle">{{ _('To qualify for legal aid, you must have a problem that is covered by legal aid.') }}</p>
+
+  <form method="POST" action="{{ url_for('.problem') }}">
+    {{ form.csrf_token }}
+
+    {% if form.errors %}
+      {% call Element.alert('error', icon='cross') %}
+        <p>{{ _('Please select the area of law you need help with.') }}</p>
+      {% endcall %}
+    {% endif %}
+
+    <fieldset class="fieldset-group">
+      <legend class="fieldset-label">{{ _('Choose one of the options') }}</legend>
+      <div class="form-row">
+        {{ Form.option_list(form.categories, label_type='block') }}
+      </div>
+    </fieldset>
+
+    {% call Element.alert() %}
+      <p>{{ _('If you have more than one problem, you can complete this service more than once.') }}</p>
+      <p>
+        {{ _('If you’re really not sure what to choose, ask us to') }}
+        <a href="{{ url_for('callmeback.request_callback') }}" id="callback-link">{{ _('call you back') }}</a>.
+      </p>
+    {% endcall %}
+
+    {{ Form.honeypot(form) }}
+    {{ Form.actions(_('Continue')) }}
+  </form>
+{% endblock %}

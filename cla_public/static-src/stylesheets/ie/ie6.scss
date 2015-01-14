@@ -1,0 +1,37 @@
+@import 'ie-common';
+
+.button-get-started {
+  background-image: none;
+  padding: {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+fieldset {
+  &.fieldset-group {
+    position: relative;
+    margin: 0 0 25px;
+  }
+
+  .fieldset-label {
+    color: black;
+  }
+
+  header {
+    position: relative;
+
+    .button-small {
+      position: absolute;
+      top: 7px;
+      right: 20px;
+    }
+  }
+}
+
+.block-label {
+  input {
+    position: absolute;
+    left: 15px;
+  }
+}

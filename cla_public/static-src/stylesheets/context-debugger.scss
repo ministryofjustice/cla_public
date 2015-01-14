@@ -1,0 +1,82 @@
+.context-debugger {
+  float: right;
+  font-size: 14px;
+  margin-left: 10px;
+  position: relative;
+
+  &.s-expanded {
+    > menu {
+      display: block;
+    }
+
+    > button {
+      background: #6f777b;
+      box-shadow: inset 0 0 2px rgba(black, .5);
+      border-color: rgba(black, .5);
+      color: white;
+    }
+  }
+
+  button  {
+    float: right;
+    font-size: inherit;
+    border: 1px solid #6f777b;
+    background: #ddd;
+    cursor: pointer;
+    height: 22px;
+    line-height: 20px;
+
+    &:active {
+      background: #ccc;
+      border-color: rgba(black, .4);
+      color: inherit;
+      box-shadow: inset 0 0 2px rgba(black, .3);
+    }
+  }
+
+  menu {
+    width: 250px;
+    display: none;
+    position: absolute;
+    top: 28px;
+    right: 0;
+    list-style: none;
+    clear: both;
+    margin: 0;
+    padding: 0;
+    background: #eee;
+    padding: 5px 10px;
+    box-shadow: 0 1px 3px rgba(black, .2);
+
+    li {
+      padding: 5px 0;
+      border-top: 1px solid #ddd;
+
+      &:first-child {
+        border: 0;
+      }
+    }
+
+    ._options {
+      float: right;
+      margin-left: 10px;
+
+      a {
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 0 6px;
+        color: #6f777b;
+        border: 1px solid #6f777b;
+
+        &:focus {
+          background: white;
+        }
+
+        &._selected {
+          background: #6f777b;
+          color: white;
+        }
+      }
+    }
+  }
+}

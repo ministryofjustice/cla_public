@@ -1,0 +1,24 @@
+from flask_debugtoolbar import DebugToolbarExtension
+
+from .common import *
+
+
+DEBUG = True
+SESSION_COOKIE_SECURE = False
+
+DEBUG_TB_INTERCEPT_REDIRECTS = False
+EXTENSIONS.append(DebugToolbarExtension())
+
+ADDRESSFINDER_API_HOST = os.environ.get(
+    'ADDRESSFINDER_API_HOST',
+    'http://your_service_host/')
+ADDRESSFINDER_API_TOKEN = os.environ.get(
+    'ADDRESSFINDER_API_TOKEN',
+    'your_service_token')
+
+ZENDESK_API_USERNAME = os.environ.get(
+    'ZENDESK_USERNAME',
+    'your_service_username')
+ZENDESK_API_TOKEN = os.environ.get(
+    'ZENDESK_API_TOKEN',
+    'your_service_token')

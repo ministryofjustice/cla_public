@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% set title = _('You might qualify for legal aid') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+  <h2>
+    {{ _('Based on the answers you’ve given today, you might qualify financially for legal aid.') }}
+  </h2>
+  <p>
+    {% trans %}To get advice about appealing a decision made by the social security tribunal about your
+    benefits to the Upper Tribunal, Court of Appeal or Supreme Court you should contact your
+    nearest legal adviser.{% endtrans %}
+  </p>
+  <p>
+    {{ _('They will check whether you qualify for legal aid. You should not have to pay for this check.') }}
+  </p>
+  <p>
+    <a class="button button-large" href="http://find-legal-advice.justice.gov.uk/">
+      {{ _('Find a legal adviser') }}
+    </a>
+  </p>
+{% endblock %}

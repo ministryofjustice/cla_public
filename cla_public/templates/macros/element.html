@@ -1,0 +1,40 @@
+{#
+  Generic alert element
+
+  Params:
+    - type <string> (default: info)
+        Type of alert (sets CSS class `alert-{type}`)
+    - icon <string> (default: none)
+        Alert icon (sets CSS class `icon-{icon}`)
+    - title <string> (default: None)
+        Alert title
+#}
+{% macro alert(type='info', icon=None, title=None) %}
+  <div class="alert alert-{{type}}"
+    role="alert"
+    {% if title %}aria-labelledby="alert-heading-{{type}}"{% endif %}
+  >
+    {% if icon %}
+      <span class="icon icon-{{icon}}" aria-hidden="true"></span>
+    {% endif %}
+    <div class="alert-message">
+      {% if title %}
+        <h3 class="alert-header" id="alert-heading-{{type}}">{{title}}</h3>
+      {% endif %}
+      {{ caller() }}
+    </div>
+  </div>
+{% endmacro %}
+
+
+{#
+  Call me back link
+#}
+{%  macro call_me_back_link() %}
+  {% call alert() %}
+    <p>
+      {{ _('If you’re having trouble completing this form, ask us to') }}
+      <a href="{{ url_for('callmeback.request_callback') }}" id="callback-link">{{ _('call you back') }}</a>.
+    </p>
+  {% endcall %}
+{% endmacro %}

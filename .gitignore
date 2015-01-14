@@ -25,6 +25,12 @@ pip-log.txt
 .coverage
 .tox
 nosetests.xml
+nightwatch.xml
+
+*.log
+
+tests/reports/nightwatch/*.xml
+tests/reports/nightwatch/screenshots
 
 # Translations
 *.mo
@@ -49,32 +55,18 @@ env*
 venv
 
 # intellij
+.idea/
 *.ipr
 *.iml
 *.iws
-
-cla_public/settings/local.py
-
-# collect static output directory
-cla_public/assets/
-cla_public/static/
 
 .DS_Store
 
 # node
 node_modules/
 
-# bower packages
-cla_public/assets-src/vendor/
+.sass-cache/
 
-# test results
-xunit.xml
-
-# ignore generated handlebars templates
-cla_public/assets-src/javascripts/templates.js
-/reports/
-
-/phantomjsdriver.log
-/selenium-debug.log
-
-/.sass-cache/
+cla_public/config/local.py
+cla_public/static-src/vendor/**
+cla_public/static/

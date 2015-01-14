@@ -1,4 +1,3 @@
 {
-  "directory": "cla_public/assets-src/vendor",
-  "interactive": false
+  "directory" : "cla_public/static-src/vendor"
 }

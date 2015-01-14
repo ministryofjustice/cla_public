@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% set title = 'Confirmation' %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <header class="confirmation">
+    <h1>{{ _('We will call you back') }}</h1>
+    <p>
+      {{ _('Your reference number is') }}
+      <strong class="confirmation-ref-number">
+        {{session.case_ref}}
+      </strong>
+    </p>
+  </header>
+
+  <h2>{{ _('What happens next?') }}</h2>
+  <p>
+    {% trans %}Your details have been submitted and an operator will call you back
+      around the time you requested{% endtrans %}
+      (<strong>{{ session.callback_time|datetime('full') }}</strong>).
+  </p>
+  {% if category in ['debt', 'housing', 'violence', 'discrimination', 'education', 'family'] %}
+    <p>
+      {% trans %}We will try and call you once. If we cannot speak to you we will
+      leave you a message unless you have said it is unsafe to do so.{% endtrans %}
+    </p>
+
+    {% if category == 'violence' %}
+      <p>
+        {% trans %}If you need to urgently protect you or your family you should
+        try and get advice as soon as possible.{% endtrans %}
+      </p>
+    {% endif %}
+
+    <p>
+      {% trans %}If the operator you speak to thinks you might qualify, they will
+      put you through to a CLA specialist adviser. Your CLA specialist adviser will
+      ask you more questions before making the final decision about whether you
+      qualify for legal aid.{% endtrans %}
+    </p>
+
+    <p>
+      {% trans %}You will need to provide evidence of your financial circumstances
+      and maybe your problem. Your CLA specialist adviser will explain
+      what is needed.{% endtrans %}
+    </p>
+
+    <p>
+      {% trans %}If your CLA specialist adviser takes your case on they will
+      communicate with you by telephone, email or post.{% endtrans %}
+    </p>
+
+    <p>
+      {% trans %}If your CLA adviser decides that you need to speak to someone in
+      person or if you need someone to represent you in court, they
+      will organise this.{% endtrans %}
+    </p>
+
+    {% if category in ['debt', 'housing'] %}
+      <p>
+        {% trans %}If you have a court hearing date it is important that you get
+        advice as soon as possible. You may be able to get last-minute
+        help on the day of the hearing from an adviser in the court building.{% endtrans %}
+      </p>
+    {% endif %}
+  {% else %}
+    <p>
+      {% trans %}If the operator you speak to thinks you can get legal aid, they will find
+      you specialist legal help, like a phone call with a solicitor or
+      support from a family mediation service.{% endtrans %}
+    </p>
+  {% endif %}
+
+  <h2>{{ _('What if I miss the operator’s call?') }}</h2>
+  <p>
+    {% trans %}If you miss the call or you need advice urgently, you can call us on
+    0345 345 4 345. Find out about <a href="https://www.gov.uk/call-charges">call charges</a>.{% endtrans %}
+  </p>
+
+  <h2>{{ _('What do you think about this service?') }}</h2>
+  <p>
+    {% trans %}Your feedback will improve this service.
+    Please <a href="https://www.gov.uk/done/check-legal-aid">send us your thoughts</a>.{% endtrans %}
+  </p>
+{% endblock %}

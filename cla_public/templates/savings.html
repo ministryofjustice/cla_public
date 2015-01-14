@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% set sidebar = 'reminder' %}
+
+{% import "macros/element.html" as Element %}
+{% import "macros/form.html" as Form %}
+
+{% block inner_content %}
+  <h1>
+    {%- if session.has_partner -%}
+      {{ _('You and your partner’s savings') }}
+    {%- else -%}
+      {{ _('Your savings') }}
+    {%- endif -%}
+  </h1>
+
+  {% if session.has_partner %}
+    <p>{{ _('Any cash, savings or investments held in your name, your partner’s name or both your names.') }}</p>
+  {% else %}
+    <p>{{ _('We need to know about any money you have saved or invested.') }}</p>
+  {% endif %}
+
+  <form method="POST" action="{{ url_for('.savings') }}">
+    {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
+
+    {% with skip = not session.has_savings %}
+      {{ Form.text_input_fieldset(form.savings, prefix="£", skip=skip, class_='m-small') }}
+      {{ Form.text_input_fieldset(form.investments, prefix="£", skip=skip, class_='m-small') }}
+    {% endwith %}
+
+    {% with skip = not session.has_valuables %}
+      {% if skip %}
+        {{ Form.text_input(form.valuables, skip=skip) }}
+      {% else %}
+        {% call Form.fieldset(form.valuables, class_='fieldset-group') %}
+          {{ Form.text_input(form.valuables, prefix="£", skip=skip, class_='m-small') }}
+          {% include '_valuables-info.html' %}
+        {% endcall %}
+      {% endif %}
+    {% endwith %}
+
+
+    {{ Element.call_me_back_link() }}
+
+    {{ Form.honeypot(form) }}
+    {{ Form.actions(_('Continue')) }}
+  </form>
+{% endblock %}

@@ -1,0 +1,20 @@
+.field-help {
+  font-size: .9em;
+  color: $grey-1;
+
+  p {
+    margin: 8px 0 0;
+  }
+
+  &.s-expanded {
+    .field-more-info {
+      display: block;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+

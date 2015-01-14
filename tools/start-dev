@@ -1,0 +1,4 @@
+dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+parentdir=$(dirname "$dir")
+
+(foreman start -f "$parentdir/Procfile.dev")

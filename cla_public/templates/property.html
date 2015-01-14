@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% import "macros/element.html" as Element %}
+{% import "macros/form.html" as Form %}
+
+{% if session.has_partner %}
+  {% set title = _('You and your partner’s property') %}
+{% else %}
+  {% set title = _('Your property') %}
+{% endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+
+  {% if session.has_partner %}
+    <p>{{ _('Please tell us about any property owned by you, your partner or both of you.') }}</p>
+    <p>{{ _('If you or your partner own more than one property, you can add more properties below.') }}</p>
+  {% else %}
+    <p>{{ _('If you own more than one property, you can add more properties below.') }}</p>
+  {% endif %}
+
+  <form method="POST" action="{{ url_for('.property') }}">
+    {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
+
+    {% for property in form.properties %}
+      <fieldset class="fieldset-group" id="property-set-{{loop.index}}">
+        {% if form.properties|count > 1 %}
+          <header>
+            <h3>Property {{loop.index}}</h3>
+            {% if loop.index != 1 %}
+              <input class="button-secondary button-small" name="remove-property-{{loop.index0}}" type="submit" value="{{ _('Remove property') }}" />
+            {% endif %}
+          </header>
+        {% endif %}
+
+        {{ Form.yesno_fieldset(property.is_main_home) }}
+        {{ Form.yesno_fieldset(property.other_shareholders) }}
+        {{ Form.text_input_fieldset(property.property_value, prefix="£", class_='m-small') }}
+        {{ Form.text_input_fieldset(property.mortgage_remaining, prefix="£", class_='m-small') }}
+        {{ Form.text_input_fieldset(property.mortgage_payments, prefix="£", class_='m-small') }}
+        {% call Form.fieldset(property.is_rented) %}
+          {{ Form.yesno(property.is_rented) }}
+          {{ Form.money_interval_fieldset(property.rent_amount, is_subfield=True, controlled_by=property.is_rented) }}
+        {% endcall %}
+        {{ Form.yesno_fieldset(property.in_dispute) }}
+
+      </fieldset>
+    {% endfor %}
+
+    {% if form.properties|count < 3 %}
+      <p>
+        <input type="submit" class="button-secondary button-large" name="add-property" value="{{ _('Add another property') }}">
+      </p>
+    {% endif %}
+
+    {{ Element.call_me_back_link() }}
+
+    {{ Form.honeypot(form) }}
+    {{ Form.actions(_('Continue')) }}
+  </form>
+
+  <script>
+    window.CONDITIONAL_LABELS = {
+      'properties-0-rent_amount': '{{ _('How much rent do you receive?') }}',
+      'properties-1-rent_amount': '{{ _('How much rent do you receive?') }}',
+      'properties-2-rent_amount': '{{ _('How much rent do you receive?') }}'
+    };
+  </script>
+{% endblock %}

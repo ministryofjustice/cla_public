@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% import "macros/element.html" as Element %}
+{% import "macros/form.html" as Form %}
+
+{% if session.has_partner %}
+  {% set title = _('You and your partner’s outgoings') %}
+{% else %}
+  {% set title = _('Your outgoings') %}
+{% endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+  <p>{{ _('We only need to know about certain things you pay for, to work out if you may be able to get legal aid.') }}</p>
+
+  <form method="POST" action="{{ url_for('.outgoings') }}">
+    {{ form.csrf_token }}
+
+    {{ Form.handle_errors(form) }}
+
+    {{ Form.money_interval_fieldset(form.rent) }}
+    {{ Form.money_interval_fieldset(form.maintenance) }}
+    {{ Form.text_input_fieldset(form.income_contribution, prefix="£", class_='m-small') }}
+    {{ Form.money_interval_fieldset(form.childcare, skip=not session.has_children) }}
+
+    {{ Element.call_me_back_link() }}
+
+    {{ Form.honeypot(form) }}
+    {{ Form.actions(_('Submit')) }}
+  </form>
+{% endblock %}
