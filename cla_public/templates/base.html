@@ -46,7 +46,7 @@
 {% endblock %}
 
 {% block footer_support_links %}
-  <li><a href="{{ url_for('base.privacy') }}">Privacy Policy</a></li>
-  <li><a href="{{ url_for('base.cookies') }}">Cookies</a></li>
-  <li><a href="{{ url_for('base.feedback') }}">Feedback</a></li>
+  <li><a href="{{ url_for('base.privacy') }}">{{ _('Privacy Policy') }}</a></li>
+  <li><a href="{{ url_for('base.cookies') }}">{{ _('Cookies') }}</a></li>
+  <li><a href="{{ url_for('base.feedback') }}">{{ _('Feedback') }}</a></li>
 {% endblock %}
