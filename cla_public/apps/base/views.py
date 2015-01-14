@@ -20,7 +20,8 @@ log = logging.getLogger(__name__)
 
 @base.route('/')
 def index():
-    return get_started()
+    session.clear()
+    return render_template('index.html')
 
 
 @base.route('/cookies')
