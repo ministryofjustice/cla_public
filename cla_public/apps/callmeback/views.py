@@ -19,7 +19,6 @@ def add_no_cache_headers(response):
 
 
 @callmeback.route('/call-me-back', methods=['GET', 'POST'])
-@redirect_if_no_session()
 def request_callback():
     form_session_data = session.get_form_data('CallMeBackForm')
     form = CallMeBackForm(request.form, **form_session_data)
