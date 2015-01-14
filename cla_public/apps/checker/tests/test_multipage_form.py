@@ -37,6 +37,7 @@ class TestMultiPageForm(unittest.TestCase):
         # Test that POSTing to a single page will store the form data
         # against the session.
         with self.app.test_client() as c:
+            c.get(url_for('base.get_started'))
             uri = url_for('checker.problem')
             choice = 'debt'
             resp = c.post(uri, data={'categories': choice})
@@ -52,6 +53,7 @@ class TestMultiPageForm(unittest.TestCase):
         # Test that POSTing to a single page -- and fail the form
         # validation requirements
         with self.app.test_client() as c:
+            c.get(url_for('base.get_started'))
             # POST correct details
             uri = url_for('checker.problem')
             # Make an invalid choice
@@ -78,6 +80,7 @@ class TestMultiPageForm(unittest.TestCase):
             self.assertEquals(resp.status_code, 302)
 
         with self.app.test_client() as c:
+            c.get(url_for('base.get_started'))
             problem_data = {'categories': 'debt'}
             post_form_page('checker.problem', problem_data)
 
