@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-13 17:49+0000\n"
+"POT-Creation-Date: 2015-01-14 12:11+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -72,7 +72,7 @@ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw
 msgid "Did you have any help filling in this form?"
 msgstr "A gawsoch unrhyw help i lenwi'r ffurflen hon?"
 
-#: cla_public/apps/base/views.py:48
+#: cla_public/apps/base/views.py:49
 msgid "Something went wrong. Please try again."
 msgstr "Mae rhywbeth wedi mynd o'i le. Rhowch gynnig arall arni."
 
@@ -1021,11 +1021,11 @@ msgstr "Dewiswch gyfnod o’r gwymplen"
 msgid "Civil Legal Advice"
 msgstr "Cyngor Cyfreithiol Sifil"
 
-#: cla_public/templates/_phase-tag.html:3
+#: cla_public/templates/_phase-tag.html:15
 msgid "BETA"
 msgstr "BETA"
 
-#: cla_public/templates/_phase-tag.html:4
+#: cla_public/templates/_phase-tag.html:16
 #, python-format
 msgid ""
 "This is a new service – your <a href=\"%(url)s\">feedback</a>\n"
@@ -1158,6 +1158,18 @@ msgstr "Ydych chi mewn anghydfod â’ch partner?"
 #: cla_public/templates/about.html:63 cla_public/templates/about.html:64
 msgid "How many?"
 msgstr "Faint?"
+
+#: cla_public/templates/base.html:49
+msgid "Privacy Policy"
+msgstr "Polisi preifatrwydd"
+
+#: cla_public/templates/base.html:50 cla_public/templates/cookies.html:5
+msgid "Cookies"
+msgstr "Cwcis"
+
+#: cla_public/templates/base.html:51
+msgid "Feedback"
+msgstr "Eich adborth"
 
 #: cla_public/templates/benefits-tax-credits.html:7
 msgid "You and your partner’s benefits and tax credits"
@@ -1321,10 +1333,6 @@ msgstr ""
 #: cla_public/templates/call-me-back.html:121
 msgid "Find UK address"
 msgstr "Dod o hyd i gyfeiriad yn y DU"
-
-#: cla_public/templates/cookies.html:5
-msgid "Cookies"
-msgstr "Cwcis"
 
 #: cla_public/templates/cookies.html:11
 msgid ""
@@ -3247,8 +3255,8 @@ msgid ""
 "charges\">call charges</a>."
 msgstr ""
 "Os byddwch yn methu’r alwad neu angen cyngor ar frys, gallwch ein ffonio "
-"ar 0345 345 4 345. <a href=\"https://www.gov.uk/call-"
-"charges\">Mae gwybodaeth am gostau'r galwadau i'w cael yma.</a>"
+"ar 0345 345 4 345. <a href=\"https://www.gov.uk/call-charges\">Mae "
+"gwybodaeth am gostau'r galwadau i'w cael yma.</a>"
 
 #: cla_public/templates/result/confirmation.html:81
 msgid "What do you think about this service?"

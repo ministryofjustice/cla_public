@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-13 17:49+0000\n"
+"POT-Creation-Date: 2015-01-14 12:11+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Did you have any help filling in this form?"
 msgstr ""
 
-#: cla_public/apps/base/views.py:48
+#: cla_public/apps/base/views.py:49
 msgid "Something went wrong. Please try again."
 msgstr ""
 
@@ -934,11 +934,11 @@ msgstr ""
 msgid "Civil Legal Advice"
 msgstr ""
 
-#: cla_public/templates/_phase-tag.html:3
+#: cla_public/templates/_phase-tag.html:15
 msgid "BETA"
 msgstr ""
 
-#: cla_public/templates/_phase-tag.html:4
+#: cla_public/templates/_phase-tag.html:16
 #, python-format
 msgid ""
 "This is a new service – your <a href=\"%(url)s\">feedback</a>\n"
@@ -1060,6 +1060,18 @@ msgstr ""
 
 #: cla_public/templates/about.html:63 cla_public/templates/about.html:64
 msgid "How many?"
+msgstr ""
+
+#: cla_public/templates/base.html:49
+msgid "Privacy Policy"
+msgstr ""
+
+#: cla_public/templates/base.html:50 cla_public/templates/cookies.html:5
+msgid "Cookies"
+msgstr ""
+
+#: cla_public/templates/base.html:51
+msgid "Feedback"
 msgstr ""
 
 #: cla_public/templates/benefits-tax-credits.html:7
@@ -1191,10 +1203,6 @@ msgstr ""
 
 #: cla_public/templates/call-me-back.html:121
 msgid "Find UK address"
-msgstr ""
-
-#: cla_public/templates/cookies.html:5
-msgid "Cookies"
 msgstr ""
 
 #: cla_public/templates/cookies.html:11
@@ -3088,3 +3096,4 @@ msgstr ""
 
 #~ msgid "I am not"
 #~ msgstr ""
+
