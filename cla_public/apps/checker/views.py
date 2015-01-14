@@ -34,6 +34,7 @@ def add_header(response):
 
 
 @checker.route('/problem', methods=['GET', 'POST'])
+@redirect_if_no_session()
 @form_view(ProblemForm, 'problem.html')
 def problem(user):
 
