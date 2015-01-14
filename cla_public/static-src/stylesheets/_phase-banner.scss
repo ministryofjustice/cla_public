@@ -26,6 +26,7 @@
 
   .language-picker {
     @include core-16;
+    line-height: inherit;
     float: right;
   }
 }
