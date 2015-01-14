@@ -5,9 +5,9 @@ from flask.ext.babel import refresh
 
 
 def get_locale():
-    language_keys = current_app.config.get('LANGUAGES').keys()
-    # make english the first choice (dicts have no order)
-    language_keys.insert(0, language_keys.pop(language_keys.index('en')))
+    if request and request.cookies.get('locale') == 'cy_GB':
+        return 'cy'
+    language_keys = [key for key, _ in current_app.config.get('LANGUAGES')]
     return request.accept_languages.best_match(
         language_keys
     ) or 'en'

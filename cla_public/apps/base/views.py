@@ -3,9 +3,10 @@
 
 import logging
 import datetime
+from urlparse import urlparse, urljoin
 
 from flask import current_app, jsonify, redirect, render_template, session, \
-    url_for
+    url_for, request
 from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_public.apps.base import base
@@ -92,3 +93,32 @@ def get_started():
         session['callmeback_only'] = 'yes'
         return redirect(url_for('callmeback.request_callback'))
     return redirect(url_for('checker.problem'))
+
+
+def is_safe_url(url):
+    ref_url = urlparse(request.host_url)
+    test_url = urlparse(urljoin(request.host_url, url))
+    return test_url.scheme in ('http', 'https') and \
+        ref_url.netloc == test_url.netloc
+
+
+def next_url():
+    for url in request.values.get('next'), request.referrer:
+        if url and is_safe_url(url):
+            return url
+    return url_for('.index')
+
+
+@base.route('/locale/<locale>')
+def set_locale(locale):
+    """
+    Set locale cookie
+    """
+    welsh = request.cookies.get('locale') == 'cy_GB'
+    response = redirect(next_url())
+    if locale == 'cy_GB' and not welsh:
+        expires = datetime.datetime.now() + datetime.timedelta(days=30)
+        response.set_cookie('locale', 'cy_GB', expires=expires)
+    elif locale == 'en_GB' and welsh:
+        response.set_cookie('locale', '', expires=0)
+    return response

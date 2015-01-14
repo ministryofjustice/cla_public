@@ -13,6 +13,9 @@
   <!--[if IE 8]>
     <link rel="stylesheet" href="{{ asset('stylesheets/ie/ie8.css') }}">
   <![endif]-->
+  {% if config.DEBUG %}
+    <link rel="stylesheet" href="{{ asset('stylesheets/context-debugger.css') }}">
+  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -43,7 +46,7 @@
 {% endblock %}
 
 {% block footer_support_links %}
-  <li><a href="{{ url_for('base.privacy') }}">Privacy Policy</a></li>
-  <li><a href="{{ url_for('base.cookies') }}">Cookies</a></li>
-  <li><a href="{{ url_for('base.feedback') }}">Feedback</a></li>
+  <li><a href="{{ url_for('base.privacy') }}">{{ _('Privacy Policy') }}</a></li>
+  <li><a href="{{ url_for('base.cookies') }}">{{ _('Cookies') }}</a></li>
+  <li><a href="{{ url_for('base.feedback') }}">{{ _('Feedback') }}</a></li>
 {% endblock %}

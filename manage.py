@@ -56,7 +56,7 @@ def make_messages():
         add_msgctxt(**trans)
 
     run('cat cla_public/translations/wtforms.pot >> cla_public/translations/messages.pot')
-    for language_code in app.config.get('LANGUAGES').keys():
+    for language_code, _ in app.config.get('LANGUAGES'):
         run('{venv}/bin/pybabel update -i cla_public/translations/messages.pot -d cla_public/translations -l {language_code}'
             .format(venv=VENV, language_code=language_code))
 

@@ -82,14 +82,14 @@ STATSD_PORT = os.environ.get('STATSD_PORT', 8125)
 
 EXTENSIONS = []
 
-LANGUAGES = {
-    'en': 'English',
-    'cy': 'Welsh',
-}
+LANGUAGES = [
+    ('en', 'English'),
+    ('cy', 'Welsh'),
+]
 
 config_path = lambda x: os.path.join(PROJECT_ROOT, 'config', 'forms', x, 'forms_config.yml')
 
-FORM_CONFIG_TRANSLATIONS = {l: config_path(l) for l, label in LANGUAGES.items()}
+FORM_CONFIG_TRANSLATIONS = {l: config_path(l) for l, label in LANGUAGES}
 
 # local.py overrides all the common settings.
 try:
