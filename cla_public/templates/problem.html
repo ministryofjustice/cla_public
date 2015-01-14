@@ -38,4 +38,6 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
+
+  <a href="{{ url_for('base.toggle_welsh') }}">{% if request.cookies.get('welsh') == 'True' %}English{% else %}Cymraeg{% endif %}</a>
 {% endblock %}

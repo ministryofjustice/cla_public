@@ -3,6 +3,7 @@
 
 import logging
 import datetime
+from urlparse import urlparse, urljoin
 
 from flask import current_app, jsonify, redirect, render_template, session, \
     url_for, request
@@ -94,13 +95,27 @@ def get_started():
     return redirect(url_for('checker.problem'))
 
 
+def is_safe_url(url):
+    ref_url = urlparse(request.host_url)
+    test_url = urlparse(urljoin(request.host_url, url))
+    return test_url.scheme in ('http', 'https') and \
+        ref_url.netloc == test_url.netloc
+
+
+def next_url():
+    for url in request.values.get('next'), request.referrer:
+        if url and is_safe_url(url):
+            return url
+    return url_for('.index')
+
+
 @base.route('/toggle-welsh')
 def toggle_welsh():
     """
     Toggle welsh cookie
     """
     welsh = request.cookies.get('welsh', False) == "True"
-    response = redirect(url_for('.index'))
+    response = redirect(next_url())
     expires = 0
     if not welsh:
         expires = datetime.datetime.now() + datetime.timedelta(days=30)
