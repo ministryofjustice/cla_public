@@ -22,12 +22,12 @@ var FIELDS_WITH_SUBFIELDS = [
   {
     field_name: 'have_children',
     subfield_name: 'num_children',
-    errorText: 'Number must be at least 1.'
+    errorText: 'Number must be at least 1'
   },
   {
     field_name: 'have_dependants',
     subfield_name: 'num_dependants',
-    errorText: 'Number must be at least 1.'
+    errorText: 'Number must be at least 1'
   }
 ];
 
