@@ -8,7 +8,7 @@ from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from werkzeug.datastructures import MultiDict
 from wtforms import Form as NoCsrfForm
-from wtforms.validators import InputRequired, NumberRange
+from wtforms.validators import InputRequired, NumberRange, Required
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
@@ -118,8 +118,9 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
     num_children = SetZeroIntegerField(
         _(u'If Yes, how many?'),
         validators=[
+            Required(_(u'Number must be at least 1')),
             IgnoreIf('have_children', FieldValue(NO)),
-            NumberRange(min=1)])
+            NumberRange(min=1, message=_(u'Number must be at least 1'))])
     have_dependants = YesNoField(
         _(u'Do you have any dependants aged 16 or over?'),
         description=_(
@@ -130,6 +131,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
     num_dependants = SetZeroIntegerField(
         _(u'If Yes, how many?'),
         validators=[
+            Required(_(u'Number must be at least 1')),
             IgnoreIf('have_dependants', FieldValue(NO)),
             NumberRange(min=1)])
     have_savings = YesNoField(
