@@ -2,6 +2,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from .common import *
 
+SECRET_KEY = 'secret'
 
 DEBUG = True
 SESSION_COOKIE_SECURE = False
