@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-15 11:09+0000\n"
+"POT-Creation-Date: 2015-01-15 14:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1291,17 +1291,17 @@ msgid "Google Analytics sets the following cookies:"
 msgstr ""
 
 #: cla_public/templates/cookies.html:49 cla_public/templates/cookies.html:71
-#: cla_public/templates/cookies.html:90
+#: cla_public/templates/cookies.html:90 cla_public/templates/cookies.html:109
 msgid "Name"
 msgstr ""
 
 #: cla_public/templates/cookies.html:50 cla_public/templates/cookies.html:72
-#: cla_public/templates/cookies.html:91
+#: cla_public/templates/cookies.html:91 cla_public/templates/cookies.html:110
 msgid "Purpose"
 msgstr ""
 
 #: cla_public/templates/cookies.html:51 cla_public/templates/cookies.html:73
-#: cla_public/templates/cookies.html:92
+#: cla_public/templates/cookies.html:92 cla_public/templates/cookies.html:111
 msgid "Expires"
 msgstr ""
 
@@ -1340,7 +1340,7 @@ msgstr ""
 msgid "Saves a message to let us know that you have seen our cookie message"
 msgstr ""
 
-#: cla_public/templates/cookies.html:80
+#: cla_public/templates/cookies.html:80 cla_public/templates/cookies.html:118
 msgid "1 month"
 msgstr ""
 
@@ -1363,7 +1363,22 @@ msgstr ""
 msgid "At the end of the session"
 msgstr ""
 
+#: cla_public/templates/cookies.html:104
+msgid "Welsh language selection"
+msgstr ""
+
 #: cla_public/templates/cookies.html:105
+msgid ""
+"You can choose to view this service in Welsh instead of English. If you "
+"choose Welsh, we set a cookie to remember that you have made this "
+"selection."
+msgstr ""
+
+#: cla_public/templates/cookies.html:117
+msgid "To remember your selection of Welsh language"
+msgstr ""
+
+#: cla_public/templates/cookies.html:124
 msgid ""
 "You can read more about\n"
 "    <a href=\"https://www.gov.uk/help/cookies\" rel=\"external\" "
