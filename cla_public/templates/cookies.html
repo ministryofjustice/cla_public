@@ -101,6 +101,25 @@
     </tbody>
   </table>
 
+  <h3>{{ _('Welsh language selection') }}</h3>
+  <p>{{ _('You can choose to view this service in Welsh instead of English. If you choose Welsh, we set a cookie to remember that you have made this selection.') }}</p>
+  <table>
+    <thead>
+      <tr>
+        <th>{{ _('Name') }}</th>
+        <th>{{ _('Purpose') }}</th>
+        <th>{{ _('Expires') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="u-width-20">locale</td>
+        <td>{{ _('To remember your selection of Welsh language') }}</td>
+        <td>{{ _('1 month') }}</td>
+      </tr>
+    </tbody>
+  </table>
+
   <p>
     {% trans %}You can read more about
     <a href="https://www.gov.uk/help/cookies" rel="external" target="_blank">how cookies are used on gov.uk</a>.{% endtrans %}
