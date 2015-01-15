@@ -8,7 +8,7 @@ from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from werkzeug.datastructures import MultiDict
 from wtforms import Form as NoCsrfForm
-from wtforms.validators import InputRequired, NumberRange
+from wtforms.validators import InputRequired, NumberRange, DataRequired
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
@@ -119,7 +119,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_children', FieldValue(NO)),
-            NumberRange(min=1)])
+            DataRequired(_(u'Number must be at least 1')),
+            NumberRange(min=1, message=_(u'Number must be at least 1'))])
     have_dependants = YesNoField(
         _(u'Do you have any dependants aged 16 or over?'),
         description=_(
@@ -131,7 +132,8 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_dependants', FieldValue(NO)),
-            NumberRange(min=1)])
+            DataRequired(_(u'Number must be at least 1')),
+            NumberRange(min=1, message=_(u'Number must be at least 1'))])
     have_savings = YesNoField(
         _(u'Do you have any savings or investments?'),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
@@ -386,7 +388,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, F
         _(u'Total value of items worth over £500 each'),
         min_val=50000,
         validators=[InputRequired(
-            message=_(u'Enter 0 if you have no valuables')
+            message=_(u'Valuable items must be at least £500')
         )])
 
     def __init__(self, *args, **kwargs):

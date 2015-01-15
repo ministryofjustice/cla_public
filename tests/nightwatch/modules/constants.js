@@ -120,7 +120,7 @@ exports.SAVINGS_QUESTIONS = {
   VALUABLES: [
     {
       name: 'valuables',
-      errorText: 'Enter 0 if you have no valuables'
+      errorText: 'Valuable items must be at least £500'
     }
   ]
 };
