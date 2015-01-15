@@ -388,7 +388,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, F
         _(u'Total value of items worth over £500 each'),
         min_val=50000,
         validators=[InputRequired(
-            message=_(u'Enter 0 if you have no valuables')
+            message=_(u'Valuable items must be at least £500')
         )])
 
     def __init__(self, *args, **kwargs):
