@@ -133,7 +133,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         validators=[
             IgnoreIf('have_dependants', FieldValue(NO)),
             DataRequired(_(u'Number must be at least 1')),
-            NumberRange(min=1)])
+            NumberRange(min=1, message=_(u'Number must be at least 1'))])
     have_savings = YesNoField(
         _(u'Do you have any savings or investments?'),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
