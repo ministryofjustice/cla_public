@@ -6,17 +6,15 @@
   text-align: center;
 
   @media print {
-    margin: .3cm 0;
     background: none;
     border: 2px solid $black;
 
-    h1 {
-      font-size: 1.4em;
-      margin: .1cm 0;
+    .confirmation-ref-number {
+      font-size: 17pt;
     }
 
-    p {
-      margin: .1cm 0;
+    .print-page-button {
+      display: none;
     }
   }
 }
