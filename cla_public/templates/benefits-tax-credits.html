@@ -16,7 +16,7 @@
     {% trans %}We need to know about any benefits and tax credits your whole household receives.
     Please answer these questions as fully and accurately as you can.{% endtrans %}
   </p>
-  <form method="POST" action="{{ url_for('.benefits_tax_credits') }}">
+  <form method="POST">
     {{ form.csrf_token }}
 
     {{ Form.handle_errors(form) }}

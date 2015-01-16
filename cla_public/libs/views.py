@@ -121,7 +121,10 @@ class FormWizard(SessionBackedFormView):
         relevant = lambda step: step != self.step and not self.skip(step)
         step = ifilter(relevant, dropwhile(previous, self.steps)).next()
 
-        return url_for('.{0}'.format(self.name), step=step.name)
+        return self.url_for(step.name)
+
+    def url_for(self, step_name):
+        return url_for('.{0}'.format(self.name), step=step_name)
 
     def skip(self, step):
         """

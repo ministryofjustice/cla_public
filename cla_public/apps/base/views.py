@@ -92,7 +92,7 @@ def get_started():
     if current_app.config.get('CALLMEBACK_ONLY'):
         session['callmeback_only'] = 'yes'
         return redirect(url_for('callmeback.request_callback'))
-    return redirect(url_for('checker.problem'))
+    return redirect(url_for('checker.wizard', step='problem'))
 
 
 def is_safe_url(url):

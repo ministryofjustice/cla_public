@@ -18,6 +18,8 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm
 from cla_public.libs.utils import override_locale
+from cla_public.libs.views import AllowSessionOverride, FormWizard, \
+    FormWizardStep
 
 
 log = logging.getLogger(__name__)
@@ -33,138 +35,55 @@ def add_header(response):
     return response
 
 
-@checker.route('/problem', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(ProblemForm, 'problem.html')
-def problem(user):
+class CheckerStep(FormWizardStep):
 
-    if user.needs_face_to_face:
-        return redirect(url_for('.result', outcome='face-to-face'))
+    def on_valid_submit(self):
 
-    return redirect(url_for('.about'))
+        if session.needs_face_to_face:
+            return redirect(self.wizard.url_for('face-to-face'))
 
+        if session.is_on_passported_benefits:
+            return redirect(self.wizard.url_for('eligible'))
 
-@checker.route('/about', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(AboutYouForm, 'about.html')
-def about(user):
+        if self.name == 'outgoings':
+            return redirect(url_for('.result', outcome='eligible'))
 
-    next_step = '.income'
-
-    if user.children_or_tax_credits:
-        next_step = '.benefits_tax_credits'
-
-    if user.has_savings_or_valuables:
-        next_step = '.savings'
-
-    if user.owns_property:
-        next_step = '.property'
-
-    if user.is_on_benefits:
-        next_step = '.benefits'
-
-    return redirect(url_for(next_step))
+        return super(CheckerStep, self).on_valid_submit()
 
 
-@checker.route('/benefits', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(YourBenefitsForm, 'benefits.html')
-def benefits(user):
+class CheckerWizard(FormWizard):
 
-    next_step = '.income'
+    steps = [
+        ('problem', CheckerStep(ProblemForm, 'problem.html')),
+        ('about', CheckerStep(AboutYouForm, 'about.html')),
+        ('benefits', CheckerStep(YourBenefitsForm, 'benefits.html')),
+        ('property', CheckerStep(PropertiesForm, 'property.html')),
+        ('savings', CheckerStep(SavingsForm, 'savings.html')),
+        ('benefits_tax_credits', CheckerStep(
+            TaxCreditsForm, 'benefits-tax-credits.html')),
+        ('income', CheckerStep(IncomeForm, 'income.html')),
+        ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html'))
+    ]
 
-    kwargs = {}
-    if user.is_on_passported_benefits:
-        kwargs['outcome'] = 'eligible'
-        next_step = '.result'
+    def skip(self, step):
+        user = session
 
-    if user.children_or_tax_credits:
-        kwargs = {}
-        next_step = '.benefits_tax_credits'
+        if step.name == 'benefits':
+            return not user.is_on_benefits
 
-    if user.has_savings_or_valuables:
-        kwargs = {}
-        next_step = '.savings'
+        if step.name == 'property':
+            return not user.owns_property
 
-    if user.owns_property:
-        kwargs = {}
-        next_step = '.property'
+        if step.name == 'savings':
+            return not user.has_savings_or_valuables
 
-    return redirect(url_for(next_step, **kwargs))
+        if step.name == 'benefits_tax_credits':
+            return not user.children_or_tax_credits
 
-
-@checker.route('/property', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(PropertiesForm, 'property.html')
-@redirect_if_ineligible()
-def property(user):
-
-    next_step = '.income'
-
-    kwargs = {}
-    if user.is_on_passported_benefits:
-        kwargs['outcome'] = 'eligible'
-        next_step = '.result'
-
-    if session.children_or_tax_credits:
-        kwargs = {}
-        next_step = '.benefits_tax_credits'
-
-    if session.has_savings_or_valuables:
-        kwargs = {}
-        next_step = '.savings'
-
-    return redirect(url_for(next_step, **kwargs))
+        return False
 
 
-@checker.route('/savings', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(SavingsForm, 'savings.html')
-@redirect_if_ineligible()
-def savings(user):
-    next_step = '.income'
-
-    kwargs = {}
-    if user.is_on_passported_benefits:
-        kwargs['outcome'] = 'eligible'
-        next_step = '.result'
-
-    if user.children_or_tax_credits:
-        kwargs = {}
-        next_step = '.benefits_tax_credits'
-
-    return redirect(url_for(next_step, **kwargs))
-
-
-@checker.route('/benefits-tax-credits', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(TaxCreditsForm, 'benefits-tax-credits.html')
-@redirect_if_ineligible()
-def benefits_tax_credits(user):
-    next_step = '.income'
-
-    kwargs = {}
-    if user.is_on_passported_benefits:
-        kwargs['outcome'] = 'eligible'
-        next_step = '.result'
-
-    return redirect(url_for(next_step, **kwargs))
-
-
-@checker.route('/income', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(IncomeForm, 'income.html')
-@redirect_if_ineligible()
-def income(user):
-    return redirect(url_for('.outgoings'))
-
-
-@checker.route('/outgoings', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@form_view(OutgoingsForm, 'outgoings.html')
-@redirect_if_ineligible()
-def outgoings(user):
-    return redirect(url_for('.result', outcome='eligible'))
+checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
 
 
 @checker.route('/result/<outcome>', methods=['GET', 'POST'])

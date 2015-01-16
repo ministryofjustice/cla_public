@@ -8,7 +8,7 @@
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
-  <form method="POST" action="{{ url_for('.about') }}">
+  <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
