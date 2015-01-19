@@ -100,56 +100,35 @@ class BenefitsFormMixin(object):
 
 
 class PropertiesFormMixin(object):
-    # PropertyForm
-
-    def propertyform_is_main_home(self):
-        return
-
-    def propertyform_other_shareholders(self):
-        return
-
-    def propertyform_property_value(self):
-        return
-
-    def propertyform_mortgage_remaining(self):
-        return
-
-    def propertyform_mortgage_payments(self):
-        return
-
-    def propertyform_is_rented(self):
-        return
-
-    def propertyform_in_dispute(self):
-        return
-
     # PropertiesForm
 
     def propertiesform_properties(self):
-        mt_fields = ['value', 'mortgage', 'joint', 'disputed', 'share']
         properties = []
-        for n in range(1, 3):
+        number_properties = sum([1 for n in range(1, 3) if unicode(getattr(self, '_prop%s_value' % n))])
+        for n in range(1, number_properties + 1):
             value = getattr(self, '_prop%s_value' % n)
-            if self.n_greater_than_zero(value):
-                rent_amount = {
-                    'per_interval_value': '30',
-                    'interval_period': 'per_week'
-                }
+            property = {
+                'is_main_home': YES if n == 1 else NO,
+                'other_shareholders': NO if getattr(self, '_prop%s_share' % n) == 100 else YES,
+                'property_value': value,
+                'mortgage_remaining': getattr(self, '_prop%s_mortgage' % n),
+                'mortgage_payments': self._mortgage_deduction if n == 1 and self._mortgage_deduction else 0,
+                'is_rented': NO,
+                'in_dispute': self.yes_or_no(getattr(self, '_prop%s_disputed' % n)),
+            }
 
-                property = {
-                    'is_main_home': YES,
-                    'other_shareholders': NO,
-                    'property_value': '100',
-                    'mortgage_remaining': '99',
-                    'mortgage_payments': '1',
-                    'is_rented': YES,
-                    'in_dispute': NO
-                }
+            properties.append(property)
 
-                property.update(flatten_dict('rent_amount', rent_amount))
+        return properties
 
-                properties.append(property)
+    def propertiesform_data(self):
+        def flattern_rent(p):
+            if 'rent_amount' in p:
+                p.update(flatten_dict('rent_amount', p['rent_amount']))
+                del p['rent_amount']
+            return p
 
+        properties = map(flattern_rent, self.propertiesform_properties())
         return flatten_list_of_dicts('properties', properties)
 
 

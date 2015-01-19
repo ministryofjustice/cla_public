@@ -9,6 +9,7 @@ import re
 import requests
 import unittest
 import urlparse
+from werkzeug.datastructures import MultiDict
 import xlrd
 
 from cla_public import app
@@ -49,6 +50,9 @@ class MeansTestEntry(
         return getattr(self, '%s_%s' % (form_class.__name__.lower(), field))()
 
     def get_form_data(self, form_class):
+        method_name = '%s_data' % form_class.__name__.lower()
+        if hasattr(self, method_name):
+            return getattr(self, method_name)()
         return {name: self.get_value(form_class, name)
                 for name in form_class()._fields.iterkeys()
                 if name not in NON_FORM_FIELDS}
@@ -124,7 +128,6 @@ class TestApiPayloads(unittest.TestCase):
     def post_to_form(self, test_case, client):
         form_class = FORMS[self.current_location]
         form_class_name = form_class.__name__
-        form = form_class()
         form_data = test_case.get_form_data(form_class)
         print 'Posting form %s on %s' % (form_class_name, self.current_location)
         resp = client.post(self.current_location, data=form_data)
@@ -133,20 +136,8 @@ class TestApiPayloads(unittest.TestCase):
             msg='Form validation error for line %s on form %s' %
                 (test_case.line_number, form_class_name))
 
-        for field_name in form._fields.iterkeys():
-            if field_name not in NON_FORM_FIELDS:
-                mt_field_value = test_case.get_value(form_class, field_name)
-                self.assertEquals(
-                    session.get('%s_%s' % (form_class_name, field_name)),
-                    mt_field_value,
-                    msg='Field not in session for line %s on form %s and '
-                        'field %s: %s != %s' % (
-                        test_case.line_number,
-                        form_class_name,
-                        field_name,
-                        session.get('%s_%s' % (form_class_name, field_name)),
-                        mt_field_value))
-            self.current_location = urlparse.urlparse(resp.location).path
+
+        self.current_location = urlparse.urlparse(resp.location).path
 
     def test_means_test(self):
         for test_case in self.means_test_list:
