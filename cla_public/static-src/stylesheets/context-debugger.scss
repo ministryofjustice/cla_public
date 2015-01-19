@@ -3,6 +3,7 @@
   font-size: 14px;
   margin-left: 10px;
   position: relative;
+  z-index: 10;
 
   &.s-expanded {
     > menu {
@@ -55,6 +56,10 @@
       &:first-child {
         border: 0;
       }
+    }
+
+    ._separator {
+      padding: 0;
     }
 
     ._options {
