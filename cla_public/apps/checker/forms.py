@@ -119,7 +119,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_children', FieldValue(NO)),
-            DataRequired(_(u'Number must be at least 1')),
+            DataRequired(_(u'Number must be between 1 and 50')),
             NumberRange(min=1, max=50, message=_(
                 u'Number must be between 1 and 50'))])
     have_dependants = YesNoField(
@@ -133,7 +133,7 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_dependants', FieldValue(NO)),
-            DataRequired(_(u'Number must be at least 1')),
+            DataRequired(_(u'Number must be between 1 and 50')),
             NumberRange(min=1, max=50, message=_(
                 u'Number must be between 1 and 50'))])
     have_savings = YesNoField(
