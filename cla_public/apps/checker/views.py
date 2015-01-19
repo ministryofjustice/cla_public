@@ -228,4 +228,5 @@ def help_organisations(category_name):
     return render_template(
         'help-organisations.html',
         organisations=organisations,
-        category=category)
+        category=category,
+        category_name=category_name)
