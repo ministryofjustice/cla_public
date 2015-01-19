@@ -50,11 +50,12 @@ class TestMoneyField(unittest.TestCase):
             form.default_moneyfield.process_errors,
             '{0} is not too low'.format(amount))
 
-    def assertAmountTooHigh(self, amount):
-        form = submit(max_val_moneyfield=amount)
+    def assertAmountTooHigh(self, amount, field='max_val_moneyfield'):
+        form = submit(**{field: amount})
+        max_val = getattr(form, field).max_val / 100.0
         self.assertIn(
-            u'This amount must be less than £5',
-            form.max_val_moneyfield.process_errors,
+            u'This amount must be less than £{:.0f}'.format(max_val),
+            getattr(form, field).process_errors,
             '{0} is not too high'.format(amount))
 
     def test_integer(self):
@@ -109,3 +110,6 @@ class TestMoneyField(unittest.TestCase):
 
     def test_above_max_val(self):
         self.assertAmountTooHigh('600')
+
+    def test_default_max(self):
+        self.assertAmountTooHigh('100000000.00', field='default_moneyfield')
