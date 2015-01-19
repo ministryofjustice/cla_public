@@ -134,6 +134,10 @@ class CheckerSession(SecureCookieSession):
         return self.has_partner and self.get('AboutYouForm_partner_is_self_employed', NO) == YES
 
     @property
+    def aged_60_or_over(self):
+        return self.get('AboutYouForm_aged_60_or_over', NO) == YES
+
+    @property
     def callback_time(self):
         return self.get('CallMeBackForm_time')
 
