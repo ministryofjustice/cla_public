@@ -51,6 +51,7 @@
 
   {% if organisations %}
     <div class="org-list">
+      <h2>{{ _('Help organisations for problems about %(category_name)s', category_name=category_name|lower) }}</h2>
       <ul>
         {% for org in organisations %}
           <li class="vcard">
