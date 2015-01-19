@@ -114,8 +114,8 @@ class SetZeroFormField(FormField):
 
 class MoneyField(SetZeroIntegerField):
 
-    def __init__(self, label=None, validators=None, min_val=0, max_val=None,
-                 **kwargs):
+    def __init__(self, label=None, validators=None, min_val=0,
+                 max_val=9999999999, **kwargs):
         super(MoneyField, self).__init__(label, validators, **kwargs)
         self.min_val = min_val
         self.max_val = max_val
