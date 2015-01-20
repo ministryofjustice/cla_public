@@ -138,7 +138,7 @@ class TestApiPayloads(unittest.TestCase):
         ]
 
         for row_index in xrange(2, sheet.nrows):
-            # If there is a test number - so is a teszt
+            # If there is a test number is a test
             if sheet.cell(row_index, 0).value:
                 d = {'_%s' % keys[col_index]: sheet.cell(row_index, col_index).value
                      for col_index in xrange(sheet.ncols) if keys[col_index]}
@@ -157,22 +157,6 @@ class TestApiPayloads(unittest.TestCase):
             msg='Form validation error for line %s on form %s' %
                 (test_case.line_number, form_class_name))
 
-        # form = form_class()
-        # form.process(MultiDict(form_data))
-        # form.validate()
-        # for field_name, field in form._fields.iteritems():
-        #     if field_name not in NON_FORM_FIELDS:
-        #         self.assertEquals(
-        #             session.get('%s_%s' % (form_class_name, field_name)),
-        #             field.data,
-        #             msg='Field not in session for line %s on form %s and '
-        #                 'field %s: %s != %s' % (
-        #                 test_case.line_number,
-        #                 form_class_name,
-        #                 field_name,
-        #                 session.get('%s_%s' % (form_class_name, field_name)),
-        #                 field.data))
-
         self.current_location = urlparse.urlparse(resp.location).path
 
     def test_means_test(self):
@@ -183,12 +167,15 @@ class TestApiPayloads(unittest.TestCase):
                 while self.current_location in FORMS:
                     self.post_to_form(test_case, client)
 
-                if test_case._expected in END_PAGES:
-                    expected_page = END_PAGES[test_case._expected]
+                if test_case._actual in END_PAGES:
+                    expected_page = END_PAGES[test_case._actual]
                     if expected_page not in self.current_location:
-                        self.errors.append('Line: %s, %s, expected: %s and got %s'
-                                           % (test_case.line_number, test_case._description,
-                                              expected_page, self.current_location))
+                        self.errors.append(
+                            'Line: %s, %s, expected: %s and got %s. RESULT: %s'
+                            % (test_case.line_number, test_case._description,
+                                expected_page, self.current_location,
+                                session.get('is_eligible', '(not set)')))
+
         for e in self.errors:
             print e
 

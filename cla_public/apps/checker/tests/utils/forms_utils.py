@@ -55,7 +55,7 @@ class AboutYouFormMixin(object):
         return self.n_to_yes_no(self._earnings_1)
 
     def aboutyouform_have_partner(self):
-        return self.n_to_yes_no(self._partner)
+        return self.yes_or_no(self._partner)
 
     def aboutyouform_have_dependants(self):
         return self.yes_or_no(
@@ -75,13 +75,13 @@ class AboutYouFormMixin(object):
                       self.n_greater_than(self.savingsform_investments()) else NO
 
     def aboutyouform_partner_is_self_employed(self):
-        return self.yes_or_no(self._selfemp)
+        return self.yes_or_no(self._pselfemp)
 
     def aboutyouform_partner_is_employed(self):
         return self.n_to_yes_no(self._partner_earnings)
 
     def aboutyouform_aged_60_or_over(self):
-        return self.n_to_yes_no(self._60_or_over)
+        return self.yes_or_no(self._60_or_over)
 
     def aboutyouform_is_self_employed(self):
         return self.yes_or_no(self._selfemp)
@@ -148,15 +148,11 @@ class SavingsFormMixin(object):
     """SavingsForm"""
 
     def savingsform_savings(self):
-        s = float(self._savings or 0)
+        s = self.get_total_if_partner(self._savings, self._psavings)
         if self.savingsform_valuables() and not \
                 self.n_greater_than(self.savingsform_valuables(), x=500):
             s += float(self.savingsform_valuables())
-        if self._owed:
-            s += float(self._owed)
-        if session.has_partner:
-            if self._powed:
-                s += float(self._powed)
+        s += self.get_total_if_partner(self._owed, self._powed)
         return s
 
     def savingsform_investments(self):
@@ -206,7 +202,7 @@ class IncomeFormMixin(object):
             'income_tax': money_interval(self._tax or 0),
             'national_insurance': money_interval(self._ni or 0),
             'working_tax_credit': money_interval(0),
-            'maintenance': money_interval(self._maint or 0),
+            'maintenance': money_interval(0),
             'pension': money_interval(0),
             'other_income': money_interval(self._other_income or 0),
         }
@@ -217,7 +213,7 @@ class IncomeFormMixin(object):
             'income_tax': money_interval(self._ptax or 0),
             'national_insurance': money_interval(self._pni or 0),
             'working_tax_credit': money_interval(0),
-            'maintenance': money_interval(self._pmaint or 0),
+            'maintenance': money_interval(0),
             'pension': money_interval(0),
             'other_income': money_interval(self._partner_other_income or 0),
         }
