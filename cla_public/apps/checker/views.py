@@ -6,14 +6,16 @@ import logging
 from flask import abort, render_template, redirect, \
     session, url_for
 
+from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_case_api, \
-    post_to_eligibility_check_api, get_organisation_list
+    post_to_eligibility_check_api, get_organisation_list, \
+    post_to_is_eligible_api, ineligible
 from cla_public.apps.callmeback.forms import CallMeBackForm
 from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
-from cla_public.apps.checker.decorators import form_view, \
-    redirect_if_no_session, redirect_if_ineligible
+from cla_public.apps.checker.decorators import redirect_if_no_session, \
+    redirect_if_ineligible
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm
@@ -38,6 +40,12 @@ def add_header(response):
 class CheckerStep(FormWizardStep):
 
     def on_valid_submit(self):
+        log.info('CheckerStep')
+
+        if not session:
+            return redirect('/session-expired')
+
+        post_to_eligibility_check_api(self.wizard.form)
 
         if session.needs_face_to_face:
             return redirect(self.wizard.url_for('face-to-face'))
@@ -51,6 +59,26 @@ class CheckerStep(FormWizardStep):
         return super(CheckerStep, self).on_valid_submit()
 
 
+class ShortcutIneligible(object):
+
+    def on_valid_submit(self):
+        log.info('ShortcutIneligible')
+
+        if ineligible():
+            return redirect(url_for(
+                '.help_organisations',
+                category_name=session.category_slug))
+
+        return super(ShortcutIneligible, self).on_valid_submit()
+
+
+class OutgoingsStep(ShortcutIneligible, CheckerStep, FormWizardStep):
+
+    def on_valid_submit(self):
+        log.info('OutgoingsStep')
+        return super(OutgoingsStep, self).on_valid_submit()
+
+
 class CheckerWizard(FormWizard):
 
     steps = [
@@ -62,7 +90,7 @@ class CheckerWizard(FormWizard):
         ('benefits_tax_credits', CheckerStep(
             TaxCreditsForm, 'benefits-tax-credits.html')),
         ('income', CheckerStep(IncomeForm, 'income.html')),
-        ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html'))
+        ('outgoings', OutgoingsStep(OutgoingsForm, 'outgoings.html'))
     ]
 
     def skip(self, step):

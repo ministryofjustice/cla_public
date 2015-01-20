@@ -114,6 +114,10 @@ def post_to_is_eligible_api():
         return is_eligible
 
 
+def ineligible():
+    return post_to_is_eligible_api() == ELIGIBILITY_STATES.NO
+
+
 def should_attach_eligibility_check():
     return session.category is not None
 
