@@ -13,6 +13,7 @@ from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.callmeback.fields import AvailabilityCheckerField
 from cla_public.apps.checker.constants import CONTACT_SAFETY
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
+from cla_public.apps.checker.validators import NotRequired
 from cla_public.libs.honeypot import Honeypot
 
 
@@ -64,7 +65,7 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
             u"If you’d like to tell us more about your problem, please do so "
             u"in the box below. The Civil Legal Advice operator will read "
             u"this before they call you.")),
-        validators=[Optional()])
+        validators=[NotRequired()])
     adaptations = FormField(
         AdaptationsForm,
         _(u'Do you have any special communication needs?'))
