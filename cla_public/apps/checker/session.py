@@ -56,14 +56,18 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def category_name(self):
-        return (name for field, name, description in CATEGORIES if field == self.category).next()
+        try:
+            return (name for field, name, description in CATEGORIES if field == self.category).next()
+        except StopIteration:
+            pass
 
     @property
     def category_slug(self):
         # force english translation for slug
-        with override_locale('en'):
-            slug = self.category_name.lower().replace(' ', '-')
-        return slug
+        if self.category_name:
+            with override_locale('en'):
+                slug = self.category_name.lower().replace(' ', '-')
+            return slug
 
     @property
     def has_savings(self):
