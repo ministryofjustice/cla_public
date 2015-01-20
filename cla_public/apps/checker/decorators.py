@@ -2,10 +2,12 @@
 "CLA Public decorators"
 
 import functools
-from cla_common.constants import ELIGIBILITY_STATES
 
 from flask import current_app, render_template, request, session, url_for, redirect
+from flask.ext.babel import lazy_gettext as _, lazy_pgettext
+from requests.exceptions import ConnectionError, Timeout
 
+from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.api import post_to_eligibility_check_api, post_to_is_eligible_api
 
 
@@ -35,7 +37,12 @@ def form_view(form_class, form_template):
 
                 if form.validate():
                     session.update_form_data(form)
-                    post_to_eligibility_check_api(form)
+                    try:
+                        post_to_eligibility_check_api(form)
+                    except ConnectionError, Timeout:
+                        form.errors['timeout'] = _(
+                            u'Server did not respond, please try again')
+                        return render_template(form_template, form=form)
                     return fn(session)
 
                 else:

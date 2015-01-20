@@ -18,7 +18,11 @@
 
     {% if form.errors %}
       {% call Element.alert('error', icon='cross') %}
+        {% if form.errors.timeout %}
+        <p>{{ form.errors.timeout }}</p>
+        {% else %}
         <p>{{ _('Please select at least one option.') }}</p>
+        {% endif %}
       {% endcall %}
     {% endif %}
 
