@@ -19,13 +19,14 @@ BENEFITS_MAPPING = {
 NON_FORM_FIELDS = ['csrf_token', 'comment']
 
 
-
 def flatten_dict(field_name, data_dict):
-        return {'%s-%s' % (field_name, key): val for key, val in data_dict.items()}
+        return {'%s-%s' % (field_name, key): val for key, val in
+                data_dict.items()}
 
 
 def flatten_list_of_dicts(field_name, data_list):
-    return {'%s-%s-%s' % (field_name, num, key): val for num, d in enumerate(data_list) for key, val in d.items()}
+    return {'%s-%s-%s' % (field_name, num, key): val for num, d in
+            enumerate(data_list) for key, val in d.items()}
 
 
 class ProblemFormMixin(object):
@@ -39,7 +40,8 @@ class AboutYouFormMixin(object):
     """AboutYouForm"""
 
     def aboutyouform_have_valuables(self):
-        return YES if self.n_greater_than(self.savingsform_valuables(), x=500) else NO
+        return YES if self.n_greater_than(
+            self.savingsform_valuables(), x=500) else NO
 
     def aboutyouform_have_children(self):
         return self.yes_or_no(
@@ -72,7 +74,8 @@ class AboutYouFormMixin(object):
 
     def aboutyouform_have_savings(self):
         return YES if self.n_greater_than(self.savingsform_savings()) or \
-                      self.n_greater_than(self.savingsform_investments()) else NO
+                      self.n_greater_than(self.savingsform_investments()) \
+                      else NO
 
     def aboutyouform_partner_is_self_employed(self):
         return self.yes_or_no(self._pselfemp)
@@ -106,7 +109,9 @@ class BenefitsFormMixin(object):
 class PropertiesFormMixin(object):
     """PropertiesForm"""
 
-    def propertyform_mortgage_payments(self):
+    def propertyform_mortgage_payments(self, n):
+        if n > 1:
+            return 0
         val = 0.00
         if self._mortgage_deduction:
             val += float(self._mortgage_deduction)
@@ -114,19 +119,26 @@ class PropertiesFormMixin(object):
             val += float(self._pmortgage)
         return val
 
+    def propertyform_other_shareholders(self, n):
+        return NO if getattr(self, '_prop%s_share' % n) == 100 else YES
+
+    def propertyform_in_dispute(self, n):
+        return self.yes_or_no(getattr(self, '_prop%s_disputed' % n))
+
     def propertiesform_properties(self):
         properties = []
-        number_properties = sum([1 for n in range(1, 3) if unicode(getattr(self, '_prop%s_value' % n))])
+        number_properties = sum([1 for n in range(1, 3) if
+                                 unicode(getattr(self, '_prop%s_value' % n))])
         for n in range(1, number_properties + 1):
             value = getattr(self, '_prop%s_value' % n)
             property = {
                 'is_main_home': YES if n == 1 else NO,
-                'other_shareholders': NO if getattr(self, '_prop%s_share' % n) == 100 else YES,
+                'other_shareholders': self.propertyform_other_shareholders(n),
                 'property_value': value,
                 'mortgage_remaining': getattr(self, '_prop%s_mortgage' % n),
-                'mortgage_payments': self.propertyform_mortgage_payments() if n == 1 else 0,
+                'mortgage_payments': self.propertyform_mortgage_payments(n),
                 'is_rented': NO,
-                'in_dispute': self.yes_or_no(getattr(self, '_prop%s_disputed' % n)),
+                'in_dispute': self.propertyform_in_dispute(n),
             }
 
             properties.append(property)
@@ -186,9 +198,12 @@ class TaxCreditsFormMixin(object):
             'other_benefits': self.taxcreditsform_other_benefits()
         }
 
-        d.update(flatten_dict('child_benefit', self.taxcreditsform_child_benefit()))
-        d.update(flatten_dict('child_tax_credit', self.taxcreditsform_child_tax_credit()))
-        d.update(flatten_dict('total_other_benefit', self.taxcreditsform_total_other_benefit()))
+        d.update(flatten_dict(
+            'child_benefit', self.taxcreditsform_child_benefit()))
+        d.update(flatten_dict(
+            'child_tax_credit', self.taxcreditsform_child_tax_credit()))
+        d.update(flatten_dict(
+            'total_other_benefit', self.taxcreditsform_total_other_benefit()))
 
         return d
 
@@ -222,7 +237,8 @@ class IncomeFormMixin(object):
         d = flatten_dict('your_income', self.incomeform_your_income())
 
         if session.has_partner:
-            d.update(flatten_dict('partner_income', self.incomeform_partner_income()))
+            d.update(flatten_dict(
+                'partner_income', self.incomeform_partner_income()))
 
         data = {}
         for key, value in d.iteritems():
@@ -243,7 +259,8 @@ class OutgoingsFormMixin(object):
             self.get_total_if_partner(self._maint, self._pmaint))
 
     def outgoingsform_income_contribution(self):
-        return self.get_total_if_partner(self._contribution, self._pcontribution)
+        return self.get_total_if_partner(
+            self._contribution, self._pcontribution)
 
     def outgoingsform_childcare(self):
         return money_interval(

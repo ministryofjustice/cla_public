@@ -142,7 +142,8 @@ class TestApiPayloads(unittest.TestCase):
             if sheet.cell(row_index, 0).value:
                 d = {'_%s' % keys[col_index]: sheet.cell(row_index, col_index).value
                      for col_index in xrange(sheet.ncols) if keys[col_index]}
-                if d['_law_area'] and d['_law_area'] in CATEGORY_MAPPING and not d['_non_public_tests']:
+                if d['_law_area'] and d['_law_area'] in CATEGORY_MAPPING \
+                        and not d['_non_public_tests']:
                     d['line_number'] = row_index + 1
                     mt = MeansTestEntry(**d)
                     self.means_test_list.append(mt)
