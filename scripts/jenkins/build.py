@@ -135,9 +135,6 @@ def run_server(
 
 def run_tests(venv_path, threshold_tests=False):
     config = 'CLA_PUBLIC_CONFIG=config/jenkins.py'
-    run('{conf} {venv}/bin/nosetests --with-xunit'.format(
-        venv=venv_path,
-        conf=config))
     port = next(_port())
     os.environ['CLA_PUBLIC_PORT'] = '{0}'.format(port)
     run(
@@ -147,6 +144,9 @@ def run_tests(venv_path, threshold_tests=False):
             port=port),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=port))
+    run('{conf} {venv}/bin/nosetests --with-xunit'.format(
+        venv=venv_path,
+        conf=config))
     nightwatch_config = 'jenkins.json'
     if threshold_tests:
         nightwatch_config = 'jenkins-threshold.json'
