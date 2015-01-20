@@ -216,6 +216,7 @@ class AboutYouForm(Honeypot, BabelTranslationsFormMixin, Form):
         update_payload(PropertiesForm, cond=self.require_properties)
         update_payload(SavingsForm, cond=self.require_savings)
         update_payload(IncomeForm)
+        update_payload(OutgoingsForm)
 
         return payload
 
@@ -247,6 +248,8 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Fo
         if passported(self.benefits.data):
             income = IncomeForm().get_zero_api_payload()
             recursive_dict_update(payload, income)
+            outgoings = OutgoingsForm().get_zero_api_payload()
+            recursive_dict_update(payload, outgoings)
 
         return payload
 
@@ -567,7 +570,8 @@ class IncomeForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, Fo
         return api_payload
 
 
-class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
+class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin,
+                    Form, FormSessionDataMixin):
     rent = PartnerMoneyIntervalField(
         label=_(u'Rent'),
         description=_(u"Money you pay your landlord for rent. Do not include "
