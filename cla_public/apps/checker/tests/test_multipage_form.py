@@ -16,7 +16,7 @@ def mock_api_connection():
     return conn
 
 
-api.get_api_connection = mock_api_connection
+# api.get_api_connection = mock_api_connection
 
 
 def make_key(form, field):
