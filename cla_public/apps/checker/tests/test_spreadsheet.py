@@ -100,7 +100,7 @@ class TestApiPayloads(unittest.TestCase):
 
         self.app = app.create_app('config/testing.py')
 
-        self.download_from_google()
+        # self.download_from_google()
         self.parse_book()
 
         self._ctx = self.app.test_request_context()
