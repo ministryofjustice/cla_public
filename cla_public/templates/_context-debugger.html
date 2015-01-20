@@ -109,9 +109,11 @@
         >No</a>
       </span>
     </li>
-    <li class="_separator"></li>
-    <li>
-      <a href="/help-organisations/{{session.category_slug}}">Ineligible</a>
-    </li>
+    {% if session.category_slug %}
+      <li class="_separator"></li>
+      <li>
+        <a href="/help-organisations/{{session.category_slug}}">Ineligible</a>
+      </li>
+    {% endif %}
   </menu>
 </div>
