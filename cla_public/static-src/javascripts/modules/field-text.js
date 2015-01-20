@@ -28,7 +28,7 @@
     addMoreInfoLink: function() {
       $.each(this.moreInfos, function(i, el) {
         $(this).attr('aria-expanded', 'false');
-        $('<a class="field-more-info-toggle" role="button">more info</a>')
+        $($('#moreInfoButtonLink').html())
           .insertBefore($(el));
       });
     },

@@ -43,6 +43,9 @@
   {% if config.DEBUG %}
     <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
   {% endif %}
+  <script type="text/html" id="moreInfoButtonLink">
+    <a class="field-more-info-toggle" role="button">{{ _('more info') }}</a>
+  </script>
 {% endblock %}
 
 {% block footer_support_links %}
