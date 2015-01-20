@@ -84,3 +84,13 @@
     Please <a href="https://www.gov.uk/done/check-legal-aid">send us your thoughts</a>.{% endtrans %}
   </p>
 {% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+
+  <script type="text/html" id="printButtonTemplate">
+    <p class="print-page-button">
+      <button type="button" class="button button-large button-secondary">Print this page</button>
+    </p>
+  </script>
+{% endblock %}
