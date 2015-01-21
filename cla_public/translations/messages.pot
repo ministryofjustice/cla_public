@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-20 12:20+0000\n"
+"POT-Creation-Date: 2015-01-21 16:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -453,6 +453,10 @@ msgstr ""
 #: cla_public/apps/checker/constants.py:150
 msgctxt "It isn’t"
 msgid "No"
+msgstr ""
+
+#: cla_public/apps/checker/decorators.py:43
+msgid "Server did not respond, please try again"
 msgstr ""
 
 #: cla_public/apps/checker/fields.py:85
@@ -1049,8 +1053,8 @@ msgstr ""
 
 #: cla_public/templates/about.html:57
 #: cla_public/templates/benefits-tax-credits.html:35
-#: cla_public/templates/benefits.html:30 cla_public/templates/income.html:75
-#: cla_public/templates/problem.html:39 cla_public/templates/property.html:61
+#: cla_public/templates/benefits.html:34 cla_public/templates/income.html:75
+#: cla_public/templates/problem.html:43 cla_public/templates/property.html:61
 #: cla_public/templates/savings.html:47
 msgid "Continue"
 msgstr ""
@@ -1106,7 +1110,7 @@ msgstr ""
 msgid "Your benefits"
 msgstr ""
 
-#: cla_public/templates/benefits.html:21
+#: cla_public/templates/benefits.html:24
 msgid "Please select at least one option."
 msgstr ""
 
@@ -1482,11 +1486,16 @@ msgid ""
 "    from these organisations."
 msgstr ""
 
-#: cla_public/templates/help-organisations.html:61
+#: cla_public/templates/help-organisations.html:54
+#, python-format
+msgid "Help organisations for problems about %(category_name)s"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:62
 msgid "Helpline"
 msgstr ""
 
-#: cla_public/templates/help-organisations.html:68
+#: cla_public/templates/help-organisations.html:69
 msgid ""
 "There has been a problem with listing help organisations. Please refresh "
 "this page or try again later."
@@ -2511,25 +2520,25 @@ msgid ""
 "legal aid."
 msgstr ""
 
-#: cla_public/templates/problem.html:19
+#: cla_public/templates/problem.html:22
 msgid "Please select the area of law you need help with."
 msgstr ""
 
-#: cla_public/templates/problem.html:24
+#: cla_public/templates/problem.html:28
 msgid "Choose one of the options"
 msgstr ""
 
-#: cla_public/templates/problem.html:31
+#: cla_public/templates/problem.html:35
 msgid ""
 "If you have more than one problem, you can complete this service more "
 "than once."
 msgstr ""
 
-#: cla_public/templates/problem.html:33
+#: cla_public/templates/problem.html:37
 msgid "If you’re really not sure what to choose, ask us to"
 msgstr ""
 
-#: cla_public/templates/problem.html:34
+#: cla_public/templates/problem.html:38
 #: cla_public/templates/macros/element.html:37
 msgid "call you back"
 msgstr ""
@@ -2667,11 +2676,11 @@ msgstr ""
 msgid "If you’re having trouble completing this form, ask us to"
 msgstr ""
 
-#: cla_public/templates/macros/form.html:491
+#: cla_public/templates/macros/form.html:494
 msgid "This form has errors."
 msgstr ""
 
-#: cla_public/templates/macros/form.html:492
+#: cla_public/templates/macros/form.html:495
 msgid "Please see below for the errors you need to correct."
 msgstr ""
 
@@ -2767,6 +2776,10 @@ msgid ""
 "Your feedback will improve this service.\n"
 "    Please <a href=\"https://www.gov.uk/done/check-legal-aid\">send us "
 "your thoughts</a>."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:93
+msgid "Print this page"
 msgstr ""
 
 #: cla_public/templates/result/eligible-no-callback.html:3
