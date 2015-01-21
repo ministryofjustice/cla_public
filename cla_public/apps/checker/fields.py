@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 "Custom form fields"
 
-import logging
 import re
 
 from flask import session
@@ -16,9 +15,6 @@ from cla_common.money_interval.models import MoneyInterval
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 from cla_public.apps.checker.validators import ValidMoneyInterval
-
-
-log = logging.getLogger(__name__)
 
 
 def coerce_unicode_if_value(value):
@@ -243,14 +239,13 @@ class MoneyIntervalField(PassKwargsToFormField):
         return money_interval_to_monthly(self.data)
 
     def validate(self, form, extra_validators=None):
+        form_valid = self.form.validate()
         self._run_validation_chain(form, self.validators)
-        return len(self.errors) == 0
+        return form_valid and len(self.errors) == 0
 
     @property
     def errors(self):
-        return (
-            self._errors +
-            [error for error in self.form.per_interval_value.errors])
+        return self._errors
 
     @errors.setter
     def errors(self, _errors):
