@@ -39,7 +39,7 @@ def form_view(form_class, form_template):
                     session.update_form_data(form)
                     try:
                         post_to_eligibility_check_api(form)
-                    except ConnectionError, Timeout:
+                    except (ConnectionError, Timeout):
                         form.errors['timeout'] = _(
                             u'Server did not respond, please try again')
                         return render_template(form_template, form=form)
