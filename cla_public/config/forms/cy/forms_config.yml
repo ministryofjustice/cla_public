@@ -10,9 +10,3 @@ forms:
 
           family:
             selected_notification: Os ydych yn rhiant i blentyn y mae’r awdurdod lleol yn ceisio ei ddwyn i’w gofal, gofynnwch i ni [eich ffonio’n ôl](/call-me-back).
-
-  PropertyForm:
-    fields:
-      in_dispute:
-        more_info: >
-          Eiddo sy’n destun dadl yw lle mae rhywun yn dadlau dros ei berchnogaeth e.e. cyn partner sydd eisiau hawlio cyfran fel rhan o ysgariad neu wahaniad, neu gredydwr neu gwmni morgais sydd eisiau gorfodi gwerthiant er mwyn talu dyled.
