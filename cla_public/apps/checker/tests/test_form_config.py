@@ -86,10 +86,3 @@ class TestFormConfig(unittest.TestCase):
                     '<h1>Heading for Debt Markdown</h1>\n\n<ul>\n<li>List'
                     ' One</li>\n<li>Lisr Two</li>\n</ul>\n\n<p>Standard text</p>\n'
                 )
-
-    def test_about_you_more_info(self):
-        form = AboutYouForm()
-        have_children = form._fields['have_children']
-        self.assertTrue(bool(have_children.more_info))
-
-

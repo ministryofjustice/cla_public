@@ -82,7 +82,7 @@ class ProblemForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         }
 
 
-class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
+class AboutYouForm(Honeypot, BabelTranslationsFormMixin, Form):
     have_partner = YesNoField(
         _(u'Do you have a partner?'),
         description=(
