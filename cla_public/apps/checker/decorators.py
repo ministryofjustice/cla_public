@@ -59,7 +59,10 @@ def redirect_if_ineligible():
     def view(fn):
         @functools.wraps(fn)
         def wrapper(*args, **kwargs):
-            is_eligible = post_to_is_eligible_api()
+            try:
+                is_eligible = post_to_is_eligible_api()
+            except (ConnectionError, Timeout):
+                is_eligible = ELIGIBILITY_STATES.UNKNOWN
             if is_eligible == ELIGIBILITY_STATES.NO:
                 return redirect(
                     url_for(
