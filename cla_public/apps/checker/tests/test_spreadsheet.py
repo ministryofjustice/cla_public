@@ -1,22 +1,15 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import os
-import urllib2
 from flask import url_for, session
-
-from mock import Mock, patch
-import re
-import requests
 import unittest
 import urlparse
-from werkzeug.datastructures import MultiDict
 import xlrd
 
 from cla_public import app
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.checker.forms import ProblemForm, AboutYouForm, \
     YourBenefitsForm, PropertiesForm, SavingsForm, TaxCreditsForm, \
-    IncomeForm, OutgoingsForm, PropertyForm
+    IncomeForm, OutgoingsForm
 from cla_public.apps.checker.tests.utils.forms_utils import \
     ProblemFormMixin, NON_FORM_FIELDS, \
     CATEGORY_MAPPING, AboutYouFormMixin, BenefitsFormMixin, \
@@ -93,6 +86,12 @@ class MeansTestEntry(
 
 
 class TestApiPayloads(unittest.TestCase):
+    """
+    Test outcomes from google spreadsheet.
+
+    To download the latest spreadsheet run:
+    `python manage.py download_means_test`
+    """
 
     def setUp(self):
         self.book = xlrd.open_workbook(FILE_PATH)
@@ -100,7 +99,6 @@ class TestApiPayloads(unittest.TestCase):
 
         self.app = app.create_app('config/testing.py')
 
-        # self.download_from_google()
         self.parse_book()
 
         self._ctx = self.app.test_request_context()
@@ -113,20 +111,6 @@ class TestApiPayloads(unittest.TestCase):
 
     def to_key(self, key):
         return unicode(key).lower().replace(' ', '_')
-
-    def download_from_google(self):
-        try:
-            spreadsheet_id = '1idIleO4-mNTM0pW6-aOcMwXgK_0yjrpL7YkHHeuWL5c'
-            response = requests.get(
-                'https://docs.google.com/spreadsheets/d/%s/export?format=xlsx'
-                % spreadsheet_id)
-            assert response.status_code == 200, 'Wrong status code'
-            s = file(FILE_PATH, 'w')
-            s.write(response.content)
-            s.close()
-        except AssertionError:
-            print 'Could not download'
-            pass
 
     def parse_book(self):
         sheet = self.book.sheet_by_index(0)

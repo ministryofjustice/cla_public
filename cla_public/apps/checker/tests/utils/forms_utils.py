@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from flask import session
 
 from cla_public.apps.checker.api import money_interval
