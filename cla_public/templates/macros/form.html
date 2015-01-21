@@ -488,8 +488,12 @@
 {% macro handle_errors(form) %}
   {% if form.errors %}
     {% call Element.alert('error', icon='cross') %}
+      {% if form.errors.timeout %}
+      <p>{{ form.errors.timeout }}</p>
+      {% else %}
       <p>{{  _('This form has errors.') }}</p>
       <p>{{ _('Please see below for the errors you need to correct.') }}</p>
+      {% endif %}
     {% endcall %}
   {% endif %}
 {% endmacro %}

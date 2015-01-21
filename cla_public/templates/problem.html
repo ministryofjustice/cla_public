@@ -16,7 +16,11 @@
 
     {% if form.errors %}
       {% call Element.alert('error', icon='cross') %}
+        {% if form.errors.timeout %}
+        <p>{{ form.errors.timeout }}</p>
+        {% else %}
         <p>{{ _('Please select the area of law you need help with.') }}</p>
+        {% endif %}
       {% endcall %}
     {% endif %}
 
