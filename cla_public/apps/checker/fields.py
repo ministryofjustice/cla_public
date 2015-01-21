@@ -144,13 +144,13 @@ class MoneyField(SetZeroIntegerField):
             if self.min_val is not None and self.data < self.min_val:
                 self.data = None
                 raise ValueError(self.gettext(
-                    u'This amount must be more than £{:.0f}').format(
+                    u'This amount must be more than £{:,.0f}').format(
                         self.min_val / 100.0))
 
             if self.max_val is not None and self.data > self.max_val:
                 self.data = None
                 raise ValueError(self.gettext(
-                    u'This amount must be less than £{:.0f}').format(
+                    u'This amount must be less than £{:,.0f}').format(
                         self.max_val / 100.0))
 
     def process_data(self, value):
