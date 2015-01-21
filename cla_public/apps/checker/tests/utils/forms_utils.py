@@ -145,14 +145,7 @@ class PropertiesFormMixin(object):
         return properties
 
     def propertiesform_data(self):
-        def flattern_rent(p):
-            if 'rent_amount' in p:
-                p.update(flatten_dict('rent_amount', p['rent_amount']))
-                del p['rent_amount']
-            return p
-
-        properties = map(flattern_rent, self.propertiesform_properties())
-        return flatten_list_of_dicts('properties', properties)
+        return flatten_list_of_dicts('properties', self.propertiesform_properties())
 
 
 class SavingsFormMixin(object):
