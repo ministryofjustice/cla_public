@@ -5,6 +5,8 @@ import logging
 
 from flask import abort, render_template, redirect, \
     session, url_for
+from flask.ext.babel import lazy_gettext as _, lazy_pgettext
+from requests.exceptions import ConnectionError, Timeout
 
 from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker import checker
@@ -45,7 +47,13 @@ class CheckerStep(FormWizardStep):
         if not session:
             return redirect('/session-expired')
 
-        post_to_eligibility_check_api(self.wizard.form)
+        try:
+            post_to_eligibility_check_api(self.wizard.form)
+        except (ConnectionError, Timeout):
+            self.wizard.form.errors['timeout'] = _(
+                u'Server did not respond, please try again')
+            return self.wizard.get(step=self.name)
+
 
         if session.needs_face_to_face:
             return redirect(self.wizard.url_for('face-to-face'))
