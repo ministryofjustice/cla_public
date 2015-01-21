@@ -72,8 +72,9 @@ class AtLeastOne(object):
 class MoneyIntervalAmountRequired(object):
 
     def __call__(self, form, field):
-        amount = field.form.per_interval_value.data
-        if amount is None:
+        amount = field.form.per_interval_value
+
+        if not amount.errors and amount.data is None:
             raise ValidationError(field.gettext(u'Please provide an amount'))
 
 
@@ -90,10 +91,8 @@ class ValidMoneyInterval(object):
         nonzero_amount = amount.data > 0
         interval_selected = interval.data != ''
 
-        try:
-            amount.validate(field.form)
-        except ValidationError as e:
-            raise e
+        if amount.errors:
+            raise ValidationError(amount.errors[0])
 
         if interval_selected and amount_not_set:
             raise ValidationError(field.gettext(u'Not a valid amount'))

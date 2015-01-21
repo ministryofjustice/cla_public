@@ -54,7 +54,7 @@ class TestMoneyField(unittest.TestCase):
         form = submit(**{field: amount})
         max_val = getattr(form, field).max_val / 100.0
         self.assertIn(
-            u'This amount must be less than £{:.0f}'.format(max_val),
+            u'This amount must be less than £{:,.0f}'.format(max_val),
             getattr(form, field).process_errors,
             '{0} is not too high'.format(amount))
 
