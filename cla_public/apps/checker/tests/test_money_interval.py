@@ -1,11 +1,16 @@
+# -*- coding: utf-8 -*-
 from mock import Mock
 import unittest
 
+from werkzeug.datastructures import MultiDict
+from wtforms import Form
 from wtforms.validators import StopValidation, ValidationError
 
 from cla_public import app
 from cla_public.apps.checker.constants import MONEY_INTERVALS
-from cla_public.apps.checker.validators import MoneyIntervalAmountRequired, ValidMoneyInterval
+from cla_public.apps.checker.fields import MoneyIntervalField
+from cla_public.apps.checker.validators import MoneyIntervalAmountRequired, \
+    ValidMoneyInterval
 
 
 class TestMoneyInterval(unittest.TestCase):
@@ -78,3 +83,18 @@ class TestMoneyInterval(unittest.TestCase):
         field = Mock()
         field.form.per_interval_value.data = None
         self.assertValidationError(form, field)
+
+    def test_money_interval_max_val(self):
+
+        class TestForm(Form):
+            rent = MoneyIntervalField()
+
+        form = TestForm(MultiDict({
+            'rent-per_interval_value': '100,000,000.00',
+            'rent-interval_period': 'per_week'}))
+
+        form.validate()
+
+        self.assertIn(
+            u'This amount must be less than £100,000,000',
+            form.rent.errors)
