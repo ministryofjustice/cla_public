@@ -248,7 +248,9 @@ class MoneyIntervalField(PassKwargsToFormField):
 
     @property
     def errors(self):
-        return self._errors
+        return (
+            self._errors +
+            [error for error in self.form.per_interval_value.errors])
 
     @errors.setter
     def errors(self, _errors):
