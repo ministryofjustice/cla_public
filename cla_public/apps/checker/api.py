@@ -82,6 +82,7 @@ def initialise_eligibility_check(check):
     set_(check, 'dependants_old', 0)
     set_(check, 'on_passported_benefits', False)
     set_(check, 'on_nass_benefits', False)
+    set_(check, 'specific_benefits', {})
 
     return check
 
