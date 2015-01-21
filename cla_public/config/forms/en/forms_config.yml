@@ -11,14 +11,6 @@ forms:
           family:
             selected_notification: If you are a parent of a child who the local authority is trying to take in to care, ask us to [call you back](/call-me-back).
 
-  AboutYouForm:
-    fields:
-
-      have_children:
-        more_info: >
-          Young people aged 16 or over who live with you and who you support financially should
-          be included in the next question under “Do you have any dependants aged 16 or over?”
-
   PropertyForm:
     fields:
       in_dispute:
