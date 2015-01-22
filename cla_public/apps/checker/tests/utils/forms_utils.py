@@ -129,11 +129,10 @@ class PropertiesFormMixin(object):
         number_properties = sum([1 for n in range(1, 3) if
                                  unicode(getattr(self, '_prop%s_value' % n))])
         for n in range(1, number_properties + 1):
-            value = getattr(self, '_prop%s_value' % n)
             property = {
                 'is_main_home': YES if n == 1 else NO,
                 'other_shareholders': self.propertyform_other_shareholders(n),
-                'property_value': value,
+                'property_value': getattr(self, '_prop%s_value' % n),
                 'mortgage_remaining': getattr(self, '_prop%s_mortgage' % n),
                 'mortgage_payments': self.propertyform_mortgage_payments(n),
                 'is_rented': NO,
