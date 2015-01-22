@@ -172,10 +172,10 @@ class TaxCreditsFormMixin(object):
     """TaxCreditsForm"""
 
     def taxcreditsform_child_benefit(self):
-        return money_interval(0)
+        return money_interval(0, 'per_week')
 
     def taxcreditsform_child_tax_credit(self):
-        return money_interval(0)
+        return money_interval(0, 'per_week')
 
     def taxcreditsform_benefits(self):
         return []
@@ -184,7 +184,7 @@ class TaxCreditsFormMixin(object):
         return NO
 
     def taxcreditsform_total_other_benefit(self):
-        return money_interval(0)
+        return money_interval(0, 'per_week')
 
     def taxcreditsform_data(self):
         d = {
