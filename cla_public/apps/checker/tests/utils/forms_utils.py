@@ -140,6 +140,8 @@ class PropertiesFormMixin(object):
                 'in_dispute': self.propertyform_in_dispute(n),
             }
 
+            property.update(flatten_dict('rent_amount', money_interval(0)))
+
             properties.append(property)
 
         return properties
