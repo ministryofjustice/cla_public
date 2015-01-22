@@ -111,11 +111,11 @@ class PropertiesFormMixin(object):
     def propertyform_mortgage_payments(self, n):
         if n > 1:
             return 0
-        val = 0.00
+        val = 0
         if self._mortgage_deduction:
-            val += float(self._mortgage_deduction)
+            val += self._mortgage_deduction
         if session.has_partner and self._pmortgage:
-            val += float(self._pmortgage)
+            val += self._pmortgage
         return val
 
     def propertyform_other_shareholders(self, n):
@@ -157,7 +157,7 @@ class SavingsFormMixin(object):
         s = self.get_total_if_partner(self._savings, self._psavings)
         if self.savingsform_valuables() and not \
                 self.n_greater_than(self.savingsform_valuables(), x=500):
-            s += float(self.savingsform_valuables())
+            s += self.savingsform_valuables()
         s += self.get_total_if_partner(self._owed, self._powed)
         return s
 

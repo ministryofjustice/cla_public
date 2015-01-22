@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from decimal import Decimal, InvalidOperation
 from flask import url_for, session
 import unittest
 import urlparse
@@ -69,19 +70,19 @@ class MeansTestEntry(
 
     def n_greater_than(self, n, x=0):
         try:
-            return True if float(n) > x else False
-        except (ValueError):
+            return True if n > x else False
+        except InvalidOperation:
             return False
 
     def number_if_yes(self, n, d):
         return int(n) if n and int(n) > 0 and d == YES else None
 
     def get_total_if_partner(self, your_value, partner_value):
-        val = 0.00
+        val = 0
         if your_value:
-            val += float(your_value)
+            val += your_value
         if session.has_partner and partner_value:
-            val += float(partner_value)
+            val += partner_value
         return val
 
 
@@ -124,7 +125,9 @@ class TestApiPayloads(unittest.TestCase):
         for row_index in xrange(2, sheet.nrows):
             # If there is a test number is a test
             if sheet.cell(row_index, 0).value:
-                d = {'_%s' % keys[col_index]: sheet.cell(row_index, col_index).value
+                d = {'_%s' % keys[col_index]: Decimal(str(sheet.cell(row_index, col_index).value))
+                     if isinstance(sheet.cell(row_index, col_index).value, float)
+                     else sheet.cell(row_index, col_index).value
                      for col_index in xrange(sheet.ncols) if keys[col_index]}
                 if d['_law_area'] and d['_law_area'] in CATEGORY_MAPPING \
                         and not d['_non_public_tests']:
