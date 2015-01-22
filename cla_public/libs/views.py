@@ -2,9 +2,13 @@
 "Flask pluggable view mixins"
 
 from itertools import dropwhile, ifilter
+import logging
 
 from flask import current_app, redirect, render_template, request, session, \
     url_for, views
+
+
+log = logging.getLogger(__name__)
 
 
 class SessionBackedFormView(views.MethodView, object):
@@ -12,11 +16,18 @@ class SessionBackedFormView(views.MethodView, object):
     Saves and loads form data to and from the session
     """
 
-    def __init__(self, form_class=None, template=None):
-        self.form_class = form_class
-        self.template = template
+    session_expired_url = '/session-expired'
+    form_class = None
+    template = None
+
+    def __init__(self):
         self._form = None
         super(SessionBackedFormView, self).__init__()
+
+    def dispatch_request(self, *args, **kwargs):
+        if not session:
+            return redirect(self.session_expired_url)
+        return super(SessionBackedFormView, self).dispatch_request(*args, **kwargs)
 
     @property
     def form(self):
