@@ -3,6 +3,13 @@
   @include phase-banner(beta);
   z-index: 2;
 
+  span {
+    @include media(mobile) {
+      margin-top: 8px;
+      width: auto;
+    }
+  }
+
   @media print {
     margin: 0;
     padding: 0 0 2mm;
