@@ -39,21 +39,28 @@ def add_header(response):
     return response
 
 
-class CheckerStep(FormWizardStep):
+class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
-        log.info('CheckerStep')
-
-        if not session:
-            return redirect('/session-expired')
-
         try:
-            post_to_eligibility_check_api(self.wizard.form)
+            post_to_eligibility_check_api(self.form)
         except (ConnectionError, Timeout):
-            self.wizard.form.errors['timeout'] = _(
+            self.form.errors['timeout'] = _(
                 u'Server did not respond, please try again')
-            return self.wizard.get(step=self.name)
+            return self.get(step=self.name)
+        return super(UpdatesMeansTest, self).on_valid_submit()
 
+
+class CheckerStep(UpdatesMeansTest, FormWizardStep):
+
+    @property
+    def form(self):
+        return self.wizard.form
+
+    def get(self, **kwargs):
+        return self.wizard.get(**kwargs)
+
+    def on_valid_submit(self):
 
         if session.needs_face_to_face:
             return redirect(self.wizard.url_for('face-to-face'))
@@ -70,7 +77,6 @@ class CheckerStep(FormWizardStep):
 class ShortcutIneligible(object):
 
     def on_valid_submit(self):
-        log.info('ShortcutIneligible')
 
         if ineligible():
             return redirect(url_for(
@@ -83,7 +89,6 @@ class ShortcutIneligible(object):
 class OutgoingsStep(ShortcutIneligible, CheckerStep, FormWizardStep):
 
     def on_valid_submit(self):
-        log.info('OutgoingsStep')
         return super(OutgoingsStep, self).on_valid_submit()
 
 
