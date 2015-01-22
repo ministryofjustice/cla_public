@@ -86,7 +86,7 @@ class MeansTestEntry(
         return val
 
 
-class TestApiPayloads(unittest.TestCase):
+class TestMeansTestSpreadsheet(unittest.TestCase):
     """
     Test outcomes from google spreadsheet.
 
