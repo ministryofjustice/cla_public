@@ -7,7 +7,7 @@ from flask_wtf import Form
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, FormField, RadioField, SelectField, \
     StringField, TextAreaField
-from wtforms.validators import InputRequired, Optional
+from wtforms.validators import InputRequired, Optional, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.callmeback.fields import AvailabilityCheckerField
@@ -50,7 +50,10 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[InputRequired()])
     contact_number = StringField(
         _(u'Contact phone number'),
-        validators=[InputRequired()])
+        validators=[
+            Length(max=20, message=_(u'Your telephone number must be 20 '
+                                     u'characters or less')),
+            InputRequired()])
     safe_to_contact = RadioField(
         _(u'Is it safe for us to leave a message on this number?'),
         choices=CONTACT_SAFETY,
