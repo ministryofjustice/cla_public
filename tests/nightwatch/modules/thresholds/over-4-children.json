@@ -91,18 +91,6 @@
           "partner_income-other_income-per_interval_value": 0.01,
           "partner_income-other_income-interval_period": "per_month"
         }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 0,
-          "rent-interval_period": "per_month",
-          "maintenance-per_interval_value": 0,
-          "maintenance-interval_period": "per_month",
-          "income_contribution": 0,
-          "childcare-per_interval_value": 0,
-          "childcare-interval_period": "per_month"
-        }
       }
     ],
     "expected_result": "fail"
@@ -308,18 +296,6 @@
           "partner_income-pension-interval_period": "per_month",
           "partner_income-other_income-per_interval_value": 0.01,
           "partner_income-other_income-interval_period": "per_month"
-        }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 0,
-          "rent-interval_period": "per_month",
-          "maintenance-per_interval_value": 0,
-          "maintenance-interval_period": "per_month",
-          "income_contribution": 0,
-          "childcare-per_interval_value": 0,
-          "childcare-interval_period": "per_month"
         }
       }
     ],
@@ -528,18 +504,6 @@
           "partner_income-other_income-per_interval_value": 0.01,
           "partner_income-other_income-interval_period": "per_month"
         }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 0,
-          "rent-interval_period": "per_month",
-          "maintenance-per_interval_value": 0,
-          "maintenance-interval_period": "per_month",
-          "income_contribution": 0,
-          "childcare-per_interval_value": 0,
-          "childcare-interval_period": "per_month"
-        }
       }
     ],
     "expected_result": "fail"
@@ -747,18 +711,6 @@
           "partner_income-pension-interval_period": "per_month",
           "partner_income-other_income-per_interval_value": 0.01,
           "partner_income-other_income-interval_period": "per_month"
-        }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 0,
-          "rent-interval_period": "per_month",
-          "maintenance-per_interval_value": 0,
-          "maintenance-interval_period": "per_month",
-          "income_contribution": 0,
-          "childcare-per_interval_value": 0,
-          "childcare-interval_period": "per_month"
         }
       }
     ],
