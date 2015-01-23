@@ -276,21 +276,17 @@ class PropertyForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMixin)
             u"Use a property website or the Land Registry house prices "
             u"website."),
         validators=[
-            InputRequired(_(u'Please enter a valid amount')),
-            NumberRange(min=0)])
+            InputRequired(_(u'Please enter a valid amount'))])
     mortgage_remaining = MoneyField(
         _(u'How much is left to pay on the mortgage?'),
         description=(
             _(u"Include the full amount owed, even if the property has "
               u"shared ownership")),
         validators=[
-            InputRequired(_(u'Please enter 0 if you have no mortgage')),
-            NumberRange(min=0)])
+            InputRequired(_(u'Please enter 0 if you have no mortgage'))])
     mortgage_payments = MoneyField(
         _(u'How much are your monthly mortgage repayments?'),
-        validators=[
-            IgnoreIf('mortgage_remaining', FieldValue(0)),
-            NumberRange(min=0)])
+        validators=[IgnoreIf('mortgage_remaining', FieldValue(0))])
     is_rented = YesNoField(
         _(u'Do you rent out any part of this property?'),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
