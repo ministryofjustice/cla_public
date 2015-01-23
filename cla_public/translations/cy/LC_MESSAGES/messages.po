@@ -3569,7 +3569,7 @@ msgstr "Enw maes annilys '%s'."
 #: wtforms/validators.py:63
 #, python-format
 msgid "Field must be equal to %(other_name)s."
-msgstr "Rhaid i'r maes fod yr un fath â/ag %(other_name)."
+msgstr "Rhaid i'r maes fod yr un fath â/ag %(other_name)s."
 
 #: wtforms/validators.py:96
 #, python-format
