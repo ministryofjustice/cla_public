@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 "Base forms"
 
-from flask import render_template
+from flask import render_template, current_app
 
 from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, get_translations
@@ -49,11 +49,17 @@ class FeedbackForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[InputRequired()])
 
     def api_payload(self):
+        environment = current_app.config['CLA_ENV']
         comment_body = render_template('zendesk-feedback.txt', form=self)
+        subject = 'CLA Public Feedback'
+
+        if environment != 'prod':
+            subject = '[TEST] - ' + subject
+
         return {
             'ticket': {
                 'requester_id': 649762516,
-                'subject': 'CLA Public Feedback',
+                'subject': subject,
                 'comment': {
                     'body': comment_body
                 },
