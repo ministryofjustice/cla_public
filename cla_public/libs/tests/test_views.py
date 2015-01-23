@@ -32,6 +32,8 @@ class TestSessionBackedFormView(unittest.TestCase):
         app.config['SECRET_KEY'] = 'test'
         app.add_url_rule('/', view_func=FormView.as_view('form'))
         self.client = app.test_client()
+        with self.client.session_transaction() as session:
+            session['foo'] = 'bar'
 
     def test_get_form(self):
         self.assertEqual(
@@ -59,15 +61,22 @@ class TestSessionBackedFormView(unittest.TestCase):
             self.assertEqual('Test', flask.session['TestForm']['name'])
 
     def test_form_data_from_session(self):
-        with self.client as client:
+        with self.client.session_transaction() as session:
+            session['TestForm'] = {
+                'name': 'Test'}
 
-            with client.session_transaction() as session:
-                session['TestForm'] = {
-                    'name': 'Test'}
+        self.assertEqual(
+            '<input id="name" name="name" type="text" value="Test">',
+            self.client.get('/').data)
 
-            self.assertEqual(
-                '<input id="name" name="name" type="text" value="Test">',
-                self.client.get('/').data)
+    def test_redirect_if_no_session(self):
+        with self.client.session_transaction() as session:
+            session.clear()
+
+        response = self.client.get('/')
+        self.assertEqual(
+            'http://localhost/session-expired',
+            response.headers['Location'])
 
 
 class TestForm2(Form):
@@ -102,6 +111,8 @@ class TestFormWizard(unittest.TestCase):
         app.config['SECRET_KEY'] = 'test'
         app.add_url_rule('/<step>', view_func=TestWizard.as_view('wizard'))
         self.client = app.test_client()
+        with self.client.session_transaction() as session:
+            session['foo'] = 'bar'
 
     def test_wizard_start(self):
         self.assertEqual(
