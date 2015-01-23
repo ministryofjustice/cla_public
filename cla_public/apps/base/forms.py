@@ -64,6 +64,6 @@ class FeedbackForm(Honeypot, BabelTranslationsFormMixin, Form):
                     'body': comment_body
                 },
                 'group_id': 23832817,
-                'tags': ['feedback'],
+                'tags': ['feedback', 'civil_legal_advice_public'],
             }
         }
