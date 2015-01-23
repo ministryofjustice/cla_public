@@ -28,12 +28,11 @@ body {
 
 @media print {
   body {
-    font-size: 7pt !important;
+    background: white;
   }
 
   #global-header {
     margin: 0 0 1mm;
-    font-size: 14pt;
   }
 
   .language-picker {
