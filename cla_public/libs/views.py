@@ -11,23 +11,30 @@ from flask import current_app, redirect, render_template, request, session, \
 log = logging.getLogger(__name__)
 
 
-class SessionBackedFormView(views.MethodView, object):
+class RequiresSession(object):
+    """
+    View mixin which redirects to session expired page if no session
+    """
+
+    session_expired_url = '/session-expired'
+
+    def dispatch_request(self, *args, **kwargs):
+        if not session:
+            return redirect(self.session_expired_url)
+        return super(RequiresSession, self).dispatch_request(*args, **kwargs)
+
+
+class SessionBackedFormView(RequiresSession, views.MethodView, object):
     """
     Saves and loads form data to and from the session
     """
 
-    session_expired_url = '/session-expired'
     form_class = None
     template = None
 
     def __init__(self):
         self._form = None
         super(SessionBackedFormView, self).__init__()
-
-    def dispatch_request(self, *args, **kwargs):
-        if not session:
-            return redirect(self.session_expired_url)
-        return super(SessionBackedFormView, self).dispatch_request(*args, **kwargs)
 
     @property
     def form(self):
