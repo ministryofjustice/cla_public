@@ -16,9 +16,11 @@
 
   <h2>{{ _('What happens next?') }}</h2>
   <p>
-    {% trans %}Your details have been submitted and an operator will call you back
-      around the time you requested{% endtrans %}
+    {% trans %}Your details have been submitted and an operator will try to call
+      you back around the time you requested {% endtrans %}
       (<strong>{{ session.callback_time|datetime('full') }}</strong>).
+    {% trans %}If this is not possible, we will always call you back by the
+      next working day.{% endtrans %}
   </p>
   {% if category in ['debt', 'housing', 'violence', 'discrimination', 'education', 'family'] %}
     <p>

@@ -73,7 +73,11 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         AdaptationsForm,
         _(u'Do you have any special communication needs?'))
 
-    time = AvailabilityCheckerField(_(u'Select a time for us to call you'))
+    time = AvailabilityCheckerField(
+        _(u'Select a time for us to call you'),
+        description=_(u'We will try to call you back around the time you '
+                      u'request, but this may not always be possible. We will '
+                      u'always call you back by the next working day.'))
 
     def validate(self):
         """
