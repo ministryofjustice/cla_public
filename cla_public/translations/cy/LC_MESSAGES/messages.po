@@ -1603,7 +1603,7 @@ msgid ""
 "    legal aid %(fromcla)sas you don’t qualify financially"
 msgstr ""
 "O'r hyn yr ydych wedi ei ddweud wrthym heddiw, mae'n debyg na fyddwch yn "
-"gallu cael cymorth cyfreithiol gan nad ydych yn gymwys yn ariannol."
+"gallu cael cymorth cyfreithiol %(fromcla)s gan nad ydych yn gymwys yn ariannol."
 
 #: cla_public/templates/help-organisations.html:11
 msgid "for the advice they can provide"
