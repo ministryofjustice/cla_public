@@ -134,16 +134,6 @@
           "investments": 100,
           "valuables": 1500
         }
-      },
-      {
-        "page": "benefits-tax-credits",
-        "fields": {
-          "child_benefit-per_interval_value": 0,
-          "child_benefit-interval_period": "per_week",
-          "child_tax_credit-per_interval_value": 0,
-          "child_tax_credit-interval_period": "per_week",
-          "other_benefits": 0
-        }
       }
     ],
     "expected_result": "fail"
@@ -187,16 +177,6 @@
           "savings": 6561.23,
           "investments": 100,
           "valuables": 1500
-        }
-      },
-      {
-        "page": "benefits-tax-credits",
-        "fields": {
-          "child_benefit-per_interval_value": 0,
-          "child_benefit-interval_period": "per_week",
-          "child_tax_credit-per_interval_value": 0,
-          "child_tax_credit-interval_period": "per_week",
-          "other_benefits": 0
         }
       }
     ],
@@ -274,16 +254,6 @@
         "fields": {
           "savings": 240.86,
           "investments": 0
-        }
-      },
-      {
-        "page": "benefits-tax-credits",
-        "fields": {
-          "child_benefit-per_interval_value": 0,
-          "child_benefit-interval_period": "per_week",
-          "child_tax_credit-per_interval_value": 0,
-          "child_tax_credit-interval_period": "per_week",
-          "other_benefits": 0
         }
       }
     ],
@@ -412,18 +382,6 @@
           "your_income-pension-interval_period": "per_month",
           "your_income-other_income-per_interval_value": 0,
           "your_income-other_income-interval_period": "per_month"
-        }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 900,
-          "rent-interval_period": "per_month",
-          "maintenance-per_interval_value": 247.56,
-          "maintenance-interval_period": "per_month",
-          "income_contribution": 0,
-          "childcare-per_interval_value": 0,
-          "childcare-interval_period": "per_month"
         }
       }
     ],

@@ -4,7 +4,6 @@ import unittest
 
 from flask import url_for, session
 from cla_public import app
-from cla_public.apps.checker import api
 
 
 def mock_api_connection():
@@ -16,9 +15,6 @@ def mock_api_connection():
     return conn
 
 
-api.get_api_connection = mock_api_connection
-
-
 def make_key(form, field):
     return '{form}_{field}'.format(form=form, field=field)
 
@@ -26,12 +22,16 @@ def make_key(form, field):
 class TestMultiPageForm(unittest.TestCase):
 
     def setUp(self):
+        self.patcher = mock.patch(
+            'cla_public.apps.checker.api.get_api_connection',
+            mock_api_connection)
+        self.patcher.start()
         self.app = app.create_app('config/testing.py')
         self._ctx = self.app.test_request_context()
         self._ctx.push()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_session_single_page_valid_form(self):
         # Test that POSTing to a single page will store the form data

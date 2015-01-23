@@ -135,11 +135,11 @@ def run_server(
 
 def run_tests(venv_path, threshold_tests=False):
     config = 'CLA_PUBLIC_CONFIG=config/jenkins.py'
+    port = next(_port())
+    os.environ['CLA_PUBLIC_PORT'] = '{0}'.format(port)
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
-    port = next(_port())
-    os.environ['CLA_PUBLIC_PORT'] = '{0}'.format(port)
     run(
         '{conf} {venv}/bin/python manage.py runserver -p {port} -D -R'.format(
             venv=venv_path,

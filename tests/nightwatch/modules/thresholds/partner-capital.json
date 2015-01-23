@@ -46,25 +46,6 @@
           "savings": 8000.01,
           "investments": 0
         }
-      },
-      {
-        "page": "income",
-        "fields": {
-          "your_income-maintenance-per_interval_value": 0,
-          "your_income-pension-per_interval_value": 0,
-          "your_income-other_income-per_interval_value": 0,
-          "partner_income-maintenance-per_interval_value": 0,
-          "partner_income-pension-per_interval_value": 0,
-          "partner_income-other_income-per_interval_value": 0
-        }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 0,
-          "maintenance-per_interval_value": 0,
-          "income_contribution": 0
-        }
       }
     ],
     "expected_result": "fail"
@@ -116,25 +97,6 @@
         "fields": {
           "savings": 8000,
           "investments": 0.01
-        }
-      },
-      {
-        "page": "income",
-        "fields": {
-          "your_income-maintenance-per_interval_value": 0,
-          "your_income-pension-per_interval_value": 0,
-          "your_income-other_income-per_interval_value": 0,
-          "partner_income-maintenance-per_interval_value": 0,
-          "partner_income-pension-per_interval_value": 0,
-          "partner_income-other_income-per_interval_value": 0
-        }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 0,
-          "maintenance-per_interval_value": 0,
-          "income_contribution": 0
         }
       }
     ],
@@ -188,25 +150,6 @@
           "savings": 7500,
           "investments": 0,
           "valuables": 500.01
-        }
-      },
-      {
-        "page": "income",
-        "fields": {
-          "your_income-maintenance-per_interval_value": 0,
-          "your_income-pension-per_interval_value": 0,
-          "your_income-other_income-per_interval_value": 0,
-          "partner_income-maintenance-per_interval_value": 0,
-          "partner_income-pension-per_interval_value": 0,
-          "partner_income-other_income-per_interval_value": 0
-        }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 0,
-          "maintenance-per_interval_value": 0,
-          "income_contribution": 0
         }
       }
     ],
@@ -330,25 +273,6 @@
         "fields": {
           "savings": 8000,
           "investments": 0
-        }
-      },
-      {
-        "page": "income",
-        "fields": {
-          "your_income-maintenance-per_interval_value": 0,
-          "your_income-pension-per_interval_value": 0,
-          "your_income-other_income-per_interval_value": 0,
-          "partner_income-maintenance-per_interval_value": 0,
-          "partner_income-pension-per_interval_value": 0,
-          "partner_income-other_income-per_interval_value": 0
-        }
-      },
-      {
-        "page": "outgoings",
-        "fields": {
-          "rent-per_interval_value": 0,
-          "maintenance-per_interval_value": 0,
-          "income_contribution": 0
         }
       }
     ],

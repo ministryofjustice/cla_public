@@ -62,6 +62,14 @@ class FormSessionDataMixin(object):
         return set_zero_values(cls()).api_payload()
 
 
+def update_payload(form_payload, form_class, cond=True):
+    if cond:
+        form_data = form_class.get_session_as_api_payload()
+    else:
+        form_data = form_class.get_zero_api_payload()
+    recursive_dict_update(form_payload, form_data)
+
+
 class ProblemForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
     """Area of law choice"""
 
@@ -206,16 +214,10 @@ class AboutYouForm(Honeypot, BabelTranslationsFormMixin, Form):
             payload['partner'] = {'income': {
                 'self_employed': self.partner_is_self_employed.data}}
 
-        def update_payload(form_class, cond=True):
-            if cond:
-                form_data = form_class.get_session_as_api_payload()
-            else:
-                form_data = form_class.get_zero_api_payload()
-            recursive_dict_update(payload, form_data)
-
-        update_payload(PropertiesForm, cond=self.require_properties)
-        update_payload(SavingsForm, cond=self.require_savings)
-        update_payload(IncomeForm)
+        update_payload(payload, PropertiesForm, cond=self.require_properties)
+        update_payload(payload, SavingsForm, cond=self.require_savings)
+        update_payload(payload, IncomeForm)
+        update_payload(payload, OutgoingsForm)
 
         return payload
 
@@ -245,8 +247,8 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Fo
         }
 
         if passported(self.benefits.data):
-            income = IncomeForm().get_zero_api_payload()
-            recursive_dict_update(payload, income)
+            update_payload(payload, IncomeForm, cond=False)
+            update_payload(payload, OutgoingsForm, cond=False)
 
         return payload
 
@@ -567,7 +569,8 @@ class IncomeForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, Fo
         return api_payload
 
 
-class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
+class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin,
+                    Form, FormSessionDataMixin):
     rent = PartnerMoneyIntervalField(
         label=_(u'Rent'),
         description=_(u"Money you pay your landlord for rent. Do not include "
