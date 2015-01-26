@@ -82,6 +82,8 @@ STATSD_PORT = os.environ.get('STATSD_PORT', 8125)
 
 EXTENSIONS = []
 
+CLA_ENV = os.environ.get('CLA_ENV', 'dev')
+
 LANGUAGES = [
     ('en', 'English'),
     ('cy', 'Welsh'),
