@@ -20,7 +20,6 @@ raven==4.2.3
 requests==2.4.3
 six==1.8.0
 statsd==3.0.1
-xlrd==0.9.3
 
 # Temporarily install slumber from fork until https://github.com/samgiles/slumber/pull/100 is accepted
 # so we can add a timeout on requests
