@@ -29,11 +29,13 @@ def run(command, **kwargs):
 
 
 @manager.command
-def test():
-    """Run the tests."""
-    nosetests = '{venv}/bin/nosetests'.format(
-        venv=VENV)
+def test(i=False):
+    """Run the tests. Pass -i to run integration tests as well"""
+    ignore_integration = '' if i else ' -e=*_integration.py'
+    nosetests = '{venv}/bin/nosetests{integration}'.format(
+        venv=VENV, integration=ignore_integration)
     run(nosetests)
+
 
 def add_msgctxt(**format_kwargs):
     """add msgctxt to pot file as babel doesn't seem to correctly add this for pgettext"""
