@@ -23,7 +23,7 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     IncomeForm
 from cla_public.libs.utils import override_locale
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
-    FormWizardStep
+    FormWizardStep, RequiresSession
 
 
 log = logging.getLogger(__name__)
@@ -63,32 +63,21 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
     def on_valid_submit(self):
 
         if session.needs_face_to_face:
-            return redirect(self.wizard.url_for('face-to-face'))
+            return redirect(url_for('.face-to-face'))
 
         if session.is_on_passported_benefits:
-            return redirect(self.wizard.url_for('eligible'))
+            return redirect(url_for('.eligible'))
 
         if self.name == 'outgoings':
-            return redirect(url_for('.result', outcome='eligible'))
+            return redirect(url_for('.eligible'))
 
         return super(CheckerStep, self).on_valid_submit()
-
-
-class ShortcutIneligible(object):
-
-    def on_valid_submit(self):
-
-        if ineligible():
-            return redirect(url_for(
-                '.help_organisations',
-                category_name=session.category_slug))
-
-        return super(ShortcutIneligible, self).on_valid_submit()
 
 
 class OutgoingsStep(ShortcutIneligible, CheckerStep, FormWizardStep):
 
     def on_valid_submit(self):
+        redirect_if_ineligible()
         return super(OutgoingsStep, self).on_valid_submit()
 
 
@@ -127,46 +116,33 @@ class CheckerWizard(FormWizard):
 checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
 
 
-@checker.route('/result/<outcome>', methods=['GET', 'POST'])
-@redirect_if_no_session()
-@redirect_if_ineligible()
-def result(outcome):
-    "Display the outcome of the means test"
+class FaceToFace(RequiresSession, views.MethodView, object):
 
-    valid_outcomes = (result for (result, _) in RESULT_OPTIONS)
-    if outcome not in valid_outcomes:
-        abort(404)
+    def get(self):
+        if not session.category:
+            session.category_name = 'your issue'
 
-    if session.category in NO_CALLBACK_CATEGORIES:
+        response = render_template('result/face-to-face.html')
         session.clear()
-        return render_template('result/eligible-no-callback.html')
+        return response
 
-    form = CallMeBackForm()
-    if form.validate_on_submit():
-        if form.extra_notes.data:
-            session.add_note(
-                u'User problem:\n{0}'.format(form.extra_notes.data))
 
-        post_to_eligibility_check_api(session.notes_object())
-        post_to_case_api(form)
+checker.add_url_rule(
+    '/result/face-to-face', view_func=FaceToFace.as_view('face_to_face'))
 
-        return redirect(url_for('.result', outcome='confirmation'))
 
-    category_name = 'your issue'
-    if session.category:
-        category_name = session.category_name
+class Eligible(RequiresSession, views.MethodView, object):
 
-    response = render_template(
-        'result/%s.html' % outcome,
-        form=form,
-        category=session.category,
-        category_name=category_name,
-        need_more_info=session.need_more_info)
+    def get(self):
+        if session.category in NO_CALLBACK_CATEGORIES:
+            session.clear()
+            return render_template('result/eligible-no-callback.html')
 
-    if outcome == 'face-to-face':
-        session.clear()
+        return redirect(url_for('callmeback.request_callback'))
 
-    return response
+
+checker.add_url_rule(
+    '/result/eligible', view_func=Eligible.as_view('eligible'))
 
 
 @checker.route('/help-organisations/<category_name>', methods=['GET'])
