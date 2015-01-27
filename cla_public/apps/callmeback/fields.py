@@ -9,12 +9,16 @@ from wtforms import FormField, RadioField, SelectField
 from wtforms import Form as NoCsrfForm
 from wtforms.validators import InputRequired, ValidationError
 
+from cla_common import call_centre_availability
+from cla_common.call_centre_availability import OpeningHours
+from cla_public.config import common as settings
 from cla_public.apps.callmeback.constants import DAY_CHOICES, DAY_TODAY, \
     DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
-from cla_public.libs import call_centre_availability
-from cla_public.libs.call_centre_availability import available, \
-    available_days, day_choice, time_choice, time_slots, today_slots
+from cla_public.libs.call_centre_availability import day_choice, time_choice
+
+
+OPERATOR_HOURS = OpeningHours(**settings.OPERATOR_HOURS)
 
 
 class FormattedChoiceField(object):
@@ -40,7 +44,7 @@ class DayChoiceField(FormattedChoiceField, SelectField):
 
     def __init__(self, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
-        self.choices = map(day_choice, available_days(num_days))
+        self.choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
 
     def process_formdata(self, valuelist):
         if valuelist:
@@ -93,7 +97,7 @@ class AvailableSlot(object):
         if self.day == DAY_SPECIFIC:
             date = form.day.data
         time = datetime.datetime.combine(date, field.data)
-        if not available(time):
+        if time not in OPERATOR_HOURS:
             raise ValidationError(
                 field.gettext(
                     u"Can't schedule a callback at the requested time"))
@@ -110,7 +114,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
 
     # choices must be set dynamically as cache is not available at runtime
     time_today = TimeChoiceField(
-        today_slots,
+        OPERATOR_HOURS.today_slots,
         validators=[
             IgnoreIf('specific_day', FieldValueNot(DAY_TODAY)),
             AvailableSlot(DAY_TODAY)],
@@ -121,7 +125,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
             InputRequired()],
         id='id_day')
     time_in_day = TimeChoiceField(
-        time_slots,
+        OPERATOR_HOURS.time_slots,
         validators=[
             IgnoreIf('specific_day', FieldValueNot(DAY_SPECIFIC)),
             AvailableSlot(DAY_SPECIFIC)],

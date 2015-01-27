@@ -93,6 +93,13 @@ config_path = lambda x: os.path.join(PROJECT_ROOT, 'config', 'forms', x, 'forms_
 
 FORM_CONFIG_TRANSLATIONS = {l: config_path(l) for l, label in LANGUAGES}
 
+OPERATOR_HOURS = {
+    'weekday': (datetime.time(9, 0), datetime.time(20, 0)),
+    'saturday': (datetime.time(9, 0), datetime.time(12, 30)),
+    '2014-12-24': (datetime.time(9, 0), datetime.time(18, 30)),
+    '2014-12-31': (datetime.time(9, 0), datetime.time(18, 30)),
+}
+
 # local.py overrides all the common settings.
 try:
     from cla_public.config.local import *
