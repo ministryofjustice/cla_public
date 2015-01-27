@@ -3,6 +3,7 @@ import os
 import sys
 
 from flask import Blueprint, url_for
+from flask.ext.markdown import Markdown
 import jinja2
 
 
@@ -19,6 +20,8 @@ def change_jinja_templates(app):
 
     app.jinja_env.add_extension("jinja2.ext.do")
     app.jinja_env.add_extension("jinja2.ext.i18n")
+
+    md = Markdown(app, extensions=['fenced_code'])
 
     app.jinja_loader = moj_loader
 

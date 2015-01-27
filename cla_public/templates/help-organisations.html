@@ -58,8 +58,16 @@
             <a class="org" href="{{ org.website }}" rel="external">
               {{ org.service_name }}
             </a>
-            {% if org.helpline and org.helpline|lower|trim != 'n/a' %}
-              <p>{{ _('Helpline') }}: <span class="tel">{{ org.helpline }}</span></p>
+            <p>{{ org.public_description|markdown }}</p>
+            {% if org.telephone_numbers %}
+              <p>
+                {{ _('Helpline') }}: <span class="tel">{{ org.helpline }}</span>
+                {% for telephone_number in org.telephone_numbers %}
+                  {% if telephone_number.name %}({{ telephone_number.name }}) {% endif %}
+                  <span class="tel">{{ telephone_number.number }}</span>
+                  {% if not loop.last %}, {% endif %}
+                {% endfor %}
+              </p>
             {% endif %}
           </li>
         {% endfor %}
