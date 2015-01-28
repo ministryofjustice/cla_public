@@ -96,3 +96,7 @@
     </p>
   </script>
 {% endblock %}
+
+{% block ga_pageview %}
+  ga('send', 'pageview', '/result/confirmation/{{session.is_eligible|default('unknown')}}');
+{% endblock %}

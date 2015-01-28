@@ -203,7 +203,7 @@ def result(outcome):
         category_name=category_name,
         need_more_info=session.need_more_info)
 
-    if outcome in ['confirmation', 'face-to-face']:
+    if outcome == 'face-to-face':
         session.clear()
 
     return response
