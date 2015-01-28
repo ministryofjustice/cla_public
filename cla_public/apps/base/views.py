@@ -56,6 +56,13 @@ def feedback_confirmation():
     return render_template('feedback-confirmation.html')
 
 
+@base.route('/session')
+def show_session():
+    if current_app.debug:
+        return jsonify(session)
+    abort(404)
+
+
 @base.route('/session-expired')
 def session_expired():
     return render_template('session-expired.html')
