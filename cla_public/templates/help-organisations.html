@@ -2,6 +2,8 @@
 
 {% block page_title %}{{ _('Help organisations') }} - {{ super() }}{% endblock %}
 
+{% import "macros/element.html" as Element %}
+
 {% block inner_content %}
   <h1>{{ _('You’re unlikely to get legal aid') }}</h1>
   <p>
@@ -50,24 +52,51 @@
   </p>
 
   {% if organisations %}
-    <div class="org-list">
+    <div class="help-organisations">
       <h2>{{ _('Help organisations for problems about %(category_name)s', category_name=category_name|lower) }}</h2>
-      <ul>
+      <ul class="org-list">
         {% for org in organisations %}
+          {% set has_contact_details = org.telephone_numbers or org.email %}
           <li class="vcard">
-            <a class="org" href="{{ org.website }}" rel="external">
-              {{ org.service_name }}
-            </a>
-            <p>{{ org.public_description|markdown }}</p>
-            {% if org.telephone_numbers %}
-              <p>
-                {{ _('Helpline') }}: <span class="tel">{{ org.helpline }}</span>
-                {% for telephone_number in org.telephone_numbers %}
-                  {% if telephone_number.name %}({{ telephone_number.name }}) {% endif %}
-                  <span class="tel">{{ telephone_number.number }}</span>
-                  {% if not loop.last %}, {% endif %}
-                {% endfor %}
-              </p>
+            <h3>
+              <a class="url fn org" href="{{ org.website }}" rel="external">
+                {{ org.service_name }}
+              </a>
+            </h3>
+            <div class="org-description">
+              {{ org.public_description|markdown }}
+            </div>
+            {% if has_contact_details %}
+              {% call Element.alert() %}
+                {% if org.telephone_numbers %}
+                  <p>
+                    <strong>{{ _('Helpline') }}:</strong>
+                    {% for telephone_number in org.telephone_numbers %}
+                      <span class="tel">{{ telephone_number.number }}</span>
+                      {%- if telephone_number.name %} ({{ telephone_number.name }}){% endif -%}
+                      {%- if not loop.last %}, {% endif %}
+                    {% endfor %}
+                  </p>
+                {% endif %}
+                {% if org.opening_hours %}
+                  <p>
+                    <strong>{{ _('Opening hours') }}:</strong>
+                    <span>{{ org.opening_hours }}</span>
+                  </p>
+                {% endif %}
+                {% if org.email %}
+                  <p>
+                    <strong>{{ _('Email') }}:</strong>
+                    <a class="email" href="mailto:{{ org.email }}">{{ org.email }}</a>
+                  </p>
+                {% endif %}
+                {% if org.address %}
+                  <p>
+                    <strong>{{ _('Address') }}:</strong>
+                    <span class="adr">{{ org.address }}</span>
+                  </p>
+                {% endif %}
+              {% endcall %}
             {% endif %}
           </li>
         {% endfor %}
