@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-23 16:15+0000\n"
+"POT-Creation-Date: 2015-01-28 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,23 +81,23 @@ msgstr ""
 msgid "Call me in the next week on"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:33
+#: cla_public/apps/callmeback/fields.py:37
 msgid "Not a valid choice"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:54
+#: cla_public/apps/callmeback/fields.py:58
 msgid "Not a valid date"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:77
+#: cla_public/apps/callmeback/fields.py:81
 msgid "Not a valid time"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:98
+#: cla_public/apps/callmeback/fields.py:102
 msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:107
+#: cla_public/apps/callmeback/fields.py:111
 msgid "Arrange a callback time"
 msgstr ""
 
@@ -1078,19 +1078,19 @@ msgstr ""
 msgid "How many?"
 msgstr ""
 
-#: cla_public/templates/base.html:47
+#: cla_public/templates/base.html:59
 msgid "more info"
 msgstr ""
 
-#: cla_public/templates/base.html:52
+#: cla_public/templates/base.html:64
 msgid "Privacy Policy"
 msgstr ""
 
-#: cla_public/templates/base.html:53 cla_public/templates/cookies.html:5
+#: cla_public/templates/base.html:65 cla_public/templates/cookies.html:5
 msgid "Cookies"
 msgstr ""
 
-#: cla_public/templates/base.html:54
+#: cla_public/templates/base.html:66
 msgid "Feedback"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-23 16:15+0000\n"
+"POT-Creation-Date: 2015-01-28 14:22+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -84,7 +84,7 @@ msgstr "Ffoniwch fi heddiw am"
 msgid "Call me in the next week on"
 msgstr "Ffoniwch fi'r wythnos nesaf ar"
 
-#: cla_public/apps/callmeback/fields.py:33 wtforms/ext/appengine/fields.py:87
+#: cla_public/apps/callmeback/fields.py:37 wtforms/ext/appengine/fields.py:87
 #: wtforms/ext/appengine/fields.py:164 wtforms/ext/appengine/fields.py:166
 #: wtforms/ext/django/fields.py:96 wtforms/ext/sqlalchemy/fields.py:125
 #: wtforms/ext/sqlalchemy/fields.py:127 wtforms/ext/sqlalchemy/fields.py:177
@@ -92,19 +92,19 @@ msgstr "Ffoniwch fi'r wythnos nesaf ar"
 msgid "Not a valid choice"
 msgstr "Nid yw hwn yn ddewis dilys"
 
-#: cla_public/apps/callmeback/fields.py:54
+#: cla_public/apps/callmeback/fields.py:58
 msgid "Not a valid date"
 msgstr "Nid yw hwn yn ddyddiad dilys"
 
-#: cla_public/apps/callmeback/fields.py:77
+#: cla_public/apps/callmeback/fields.py:81
 msgid "Not a valid time"
 msgstr "Nid yw hwn yn amser dilys"
 
-#: cla_public/apps/callmeback/fields.py:98
+#: cla_public/apps/callmeback/fields.py:102
 msgid "Can't schedule a callback at the requested time"
 msgstr "Methu trefnu i'ch ffonio'n ôl ar yr amser a nodwyd yn eich cais"
 
-#: cla_public/apps/callmeback/fields.py:107
+#: cla_public/apps/callmeback/fields.py:111
 msgid "Arrange a callback time"
 msgstr "Trefnu amser i ffonio'n ôl"
 
@@ -210,6 +210,9 @@ msgid ""
 "not always be possible. We will always call you back by the next working "
 "day."
 msgstr ""
+"Byddwn yn ceisio eich ffonio'n ôl o gwmpas yr adeg y byddwch yn gofyn, "
+"ond efallai na fydd hyn bob amser yn bosibl. Byddwn bob amser yn eich "
+"ffonio'n ôl erbyn y diwrnod gwaith nesaf."
 
 #: cla_public/apps/checker/constants.py:10
 msgid "Clinical negligence"
@@ -505,7 +508,7 @@ msgstr "Nac ydy"
 
 #: cla_public/apps/checker/decorators.py:43
 msgid "Server did not respond, please try again"
-msgstr ""
+msgstr "Gweinydd heb ymateb, os gwelwch yn dda ceisiwch eto"
 
 #: cla_public/apps/checker/fields.py:81
 msgid "Yes"
@@ -821,7 +824,7 @@ msgstr "Cyfanswm gwerth eitemau sy’n werth mwy na £500 yr un"
 
 #: cla_public/apps/checker/forms.py:391
 msgid "Valuable items must be at least £500"
-msgstr ""
+msgstr "Rhaid i eitemau gwerthfawr fod o leiaf £500"
 
 #: cla_public/apps/checker/forms.py:413
 msgid "Child Benefit"
@@ -1181,19 +1184,19 @@ msgstr "Ydych chi mewn anghydfod â’ch partner?"
 msgid "How many?"
 msgstr "Faint?"
 
-#: cla_public/templates/base.html:47
+#: cla_public/templates/base.html:59
 msgid "more info"
 msgstr "rhagor o wybodaeth"
 
-#: cla_public/templates/base.html:52
+#: cla_public/templates/base.html:64
 msgid "Privacy Policy"
 msgstr "Polisi preifatrwydd"
 
-#: cla_public/templates/base.html:53 cla_public/templates/cookies.html:5
+#: cla_public/templates/base.html:65 cla_public/templates/cookies.html:5
 msgid "Cookies"
 msgstr "Cwcis"
 
-#: cla_public/templates/base.html:54
+#: cla_public/templates/base.html:66
 msgid "Feedback"
 msgstr "Eich adborth"
 
@@ -1687,7 +1690,7 @@ msgstr ""
 #: cla_public/templates/help-organisations.html:54
 #, python-format
 msgid "Help organisations for problems about %(category_name)s"
-msgstr ""
+msgstr "Sefydliadau cymorth ar gyfer problemau ynghylch %(category_name)s"
 
 #: cla_public/templates/help-organisations.html:62
 msgid "Helpline"
@@ -3335,7 +3338,7 @@ msgstr ""
 
 #: cla_public/templates/result/confirmation.html:95
 msgid "Print this page"
-msgstr ""
+msgstr "Argraffu'r dudalen hon"
 
 #: cla_public/templates/result/eligible-no-callback.html:3
 #: cla_public/templates/result/eligible.html:8

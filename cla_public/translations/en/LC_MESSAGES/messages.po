@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-23 16:15+0000\n"
+"POT-Creation-Date: 2015-01-28 14:22+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -81,7 +81,7 @@ msgstr ""
 msgid "Call me in the next week on"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:33 wtforms/ext/appengine/fields.py:87
+#: cla_public/apps/callmeback/fields.py:37 wtforms/ext/appengine/fields.py:87
 #: wtforms/ext/appengine/fields.py:164 wtforms/ext/appengine/fields.py:166
 #: wtforms/ext/django/fields.py:96 wtforms/ext/sqlalchemy/fields.py:125
 #: wtforms/ext/sqlalchemy/fields.py:127 wtforms/ext/sqlalchemy/fields.py:177
@@ -89,19 +89,19 @@ msgstr ""
 msgid "Not a valid choice"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:54
+#: cla_public/apps/callmeback/fields.py:58
 msgid "Not a valid date"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:77
+#: cla_public/apps/callmeback/fields.py:81
 msgid "Not a valid time"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:98
+#: cla_public/apps/callmeback/fields.py:102
 msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:107
+#: cla_public/apps/callmeback/fields.py:111
 msgid "Arrange a callback time"
 msgstr ""
 
@@ -1082,19 +1082,19 @@ msgstr ""
 msgid "How many?"
 msgstr ""
 
-#: cla_public/templates/base.html:47
+#: cla_public/templates/base.html:59
 msgid "more info"
 msgstr ""
 
-#: cla_public/templates/base.html:52
+#: cla_public/templates/base.html:64
 msgid "Privacy Policy"
 msgstr ""
 
-#: cla_public/templates/base.html:53 cla_public/templates/cookies.html:5
+#: cla_public/templates/base.html:65 cla_public/templates/cookies.html:5
 msgid "Cookies"
 msgstr ""
 
-#: cla_public/templates/base.html:54
+#: cla_public/templates/base.html:66
 msgid "Feedback"
 msgstr ""
 
@@ -3168,7 +3168,5 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid ""
-#~ "Your details have been submitted and an operator will call you back\n"
-#~ "      around the time you requested"
 #~ msgstr ""
 
