@@ -6,6 +6,7 @@ import subprocess
 import sys
 
 from flask.ext.script import Manager, Shell, Server
+import requests
 
 from cla_public.app import create_app
 
@@ -28,11 +29,13 @@ def run(command, **kwargs):
 
 
 @manager.command
-def test():
-    """Run the tests."""
-    nosetests = '{venv}/bin/nosetests'.format(
-        venv=VENV)
+def test(i=False):
+    """Run the tests. Pass -i to run integration tests as well"""
+    ignore_integration = '' if i else ' -e=*_integration.py'
+    nosetests = '{venv}/bin/nosetests{integration}'.format(
+        venv=VENV, integration=ignore_integration)
     run(nosetests)
+
 
 def add_msgctxt(**format_kwargs):
     """add msgctxt to pot file as babel doesn't seem to correctly add this for pgettext"""
@@ -65,6 +68,20 @@ def make_messages():
 def compile_messages():
     """compile po file."""
     run('{venv}/bin/pybabel compile -d cla_public/translations'.format(venv=VENV))
+
+
+@manager.command
+def download_means_test():
+    file_path = os.path.join(os.path.dirname(__file__), 'cla_public', 'apps',
+                             'checker', 'tests', 'data', 'means_test.xlsx')
+    spreadsheet_id = '1idIleO4-mNTM0pW6-aOcMwXgK_0yjrpL7YkHHeuWL5c'
+    response = requests.get(
+        'https://docs.google.com/spreadsheets/d/%s/export?format=xlsx' %
+        spreadsheet_id)
+    assert response.status_code == 200, 'Wrong status code'
+    s = file(file_path, 'w')
+    s.write(response.content)
+    s.close()
 
 
 def _make_context():

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 "Custom form fields"
 
-import logging
 import re
 
 from flask import session
@@ -16,9 +15,6 @@ from cla_common.money_interval.models import MoneyInterval
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 from cla_public.apps.checker.validators import ValidMoneyInterval
-
-
-log = logging.getLogger(__name__)
 
 
 def coerce_unicode_if_value(value):
@@ -114,8 +110,8 @@ class SetZeroFormField(FormField):
 
 class MoneyField(SetZeroIntegerField):
 
-    def __init__(self, label=None, validators=None, min_val=0, max_val=None,
-                 **kwargs):
+    def __init__(self, label=None, validators=None, min_val=0,
+                 max_val=9999999999, **kwargs):
         super(MoneyField, self).__init__(label, validators, **kwargs)
         self.min_val = min_val
         self.max_val = max_val
@@ -144,13 +140,13 @@ class MoneyField(SetZeroIntegerField):
             if self.min_val is not None and self.data < self.min_val:
                 self.data = None
                 raise ValueError(self.gettext(
-                    u'This amount must be more than £{:.0f}').format(
+                    u'This amount must be more than £{:,.0f}').format(
                         self.min_val / 100.0))
 
             if self.max_val is not None and self.data > self.max_val:
                 self.data = None
                 raise ValueError(self.gettext(
-                    u'This amount must be less than £{:.0f}').format(
+                    u'This amount must be less than £{:,.0f}').format(
                         self.max_val / 100.0))
 
     def process_data(self, value):
@@ -243,8 +239,9 @@ class MoneyIntervalField(PassKwargsToFormField):
         return money_interval_to_monthly(self.data)
 
     def validate(self, form, extra_validators=None):
+        form_valid = self.form.validate()
         self._run_validation_chain(form, self.validators)
-        return len(self.errors) == 0
+        return form_valid and len(self.errors) == 0
 
     @property
     def errors(self):

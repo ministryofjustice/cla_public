@@ -12,6 +12,8 @@ from cla_public.apps.callmeback.forms import CallMeBackForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm, \
     IncomeForm, OutgoingsForm
+from cla_public.apps.checker.tests.utils.forms_utils import flatten_dict, \
+    flatten_list_of_dicts
 
 
 def get_en_locale():
@@ -31,15 +33,9 @@ class TestApiPayloads(unittest.TestCase):
     def tearDown(self):
         self.patcher.stop()
 
-    def flatten_dict(self, field_name, data_dict):
-        return {'%s-%s' % (field_name, key): val for key, val in data_dict.items()}
-
-    def flatten_list_of_dicts(self, field_name, data_list):
-        return {'%s-%s-%s' % (field_name, num, key): val for num, d in enumerate(data_list) for key, val in d.items()}
-
     def merge_money_intervals(self, form_data, form_mi_data):
         for field_name, money_interval_dict in form_mi_data.items():
-            form_data.update(self.flatten_dict(field_name, money_interval_dict))
+            form_data.update(flatten_dict(field_name, money_interval_dict))
         return form_data
 
     def form(self, form_class, form_data):
@@ -193,14 +189,14 @@ class TestApiPayloads(unittest.TestCase):
             'in_dispute': NO
         }
 
-        property_one.update(self.flatten_dict('rent_amount', rent_amount))
+        property_one.update(flatten_dict('rent_amount', rent_amount))
 
         properties = [
             property_one,
         ]
 
         # need to convert FieldList to flat fields to load in to form
-        form_data = self.flatten_list_of_dicts('properties', properties)
+        form_data = flatten_list_of_dicts('properties', properties)
 
         payload = self.payload(PropertiesForm, form_data)
 
@@ -387,7 +383,7 @@ class TestApiPayloads(unittest.TestCase):
             'time_in_day': '',
         }
 
-        form_data.update(self.flatten_dict('adaptations', adaptations_data))
+        form_data.update(flatten_dict('adaptations', adaptations_data))
 
         payload = self.payload(CallMeBackForm, form_data)
 

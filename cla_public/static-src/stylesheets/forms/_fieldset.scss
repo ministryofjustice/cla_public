@@ -10,6 +10,14 @@ fieldset {
     border: 1px solid $grey-3;
     padding: 10px 20px;
     margin: 25px -20px;
+
+    @include media(mobile) {
+      border-left: 0;
+      border-right: 0;
+      margin-left: -15px;
+      margin-right: -15px;
+      padding: 5px 15px;
+    }
   }
 
   .fieldset-label {
@@ -18,7 +26,7 @@ fieldset {
     line-height: 1;
     cursor: default;
     font-size: 1.1em;
-    color: inherit;
+    color: black;
   }
 
   header {

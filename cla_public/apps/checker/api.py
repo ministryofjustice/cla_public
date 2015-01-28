@@ -1,10 +1,12 @@
 from collections import OrderedDict
-import slumber
 import urllib
+
 from flask import current_app, session
-from cla_public.libs.api_proxy import on_timeout
-from cla_public.apps.checker.constants import CATEGORIES
+import slumber
+
 from cla_common.constants import ELIGIBILITY_STATES
+from cla_public.apps.checker.constants import CATEGORIES
+from cla_public.libs.api_proxy import on_timeout
 
 
 def get_api_connection():

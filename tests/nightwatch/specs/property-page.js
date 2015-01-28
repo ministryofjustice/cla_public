@@ -51,7 +51,7 @@ module.exports = {
     });
     common.submitAndCheckForFieldError(client, 'properties-0-property_value', 'Please enter a valid amount');
     common.submitAndCheckForFieldError(client, 'properties-0-mortgage_remaining', 'Please enter 0 if you have no mortgage');
-    common.submitAndCheckForFieldError(client, 'properties-0-mortgage_payments', 'Number must be at least 0.');
+    common.submitAndCheckForFieldError(client, 'properties-0-mortgage_payments', 'Not a valid amount');
 
     common.setYesNoFields(client, PROPERTY_QUESTIONS, 1);
     client

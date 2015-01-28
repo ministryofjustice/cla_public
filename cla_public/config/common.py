@@ -82,6 +82,8 @@ STATSD_PORT = os.environ.get('STATSD_PORT', 8125)
 
 EXTENSIONS = []
 
+CLA_ENV = os.environ.get('CLA_ENV', 'dev')
+
 LANGUAGES = [
     ('en', 'English'),
     ('cy', 'Welsh'),
@@ -90,6 +92,13 @@ LANGUAGES = [
 config_path = lambda x: os.path.join(PROJECT_ROOT, 'config', 'forms', x, 'forms_config.yml')
 
 FORM_CONFIG_TRANSLATIONS = {l: config_path(l) for l, label in LANGUAGES}
+
+OPERATOR_HOURS = {
+    'weekday': (datetime.time(9, 0), datetime.time(20, 0)),
+    'saturday': (datetime.time(9, 0), datetime.time(12, 30)),
+    '2014-12-24': (datetime.time(9, 0), datetime.time(18, 30)),
+    '2014-12-31': (datetime.time(9, 0), datetime.time(18, 30)),
+}
 
 # local.py overrides all the common settings.
 try:

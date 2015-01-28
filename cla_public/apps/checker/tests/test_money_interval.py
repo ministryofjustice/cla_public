@@ -1,11 +1,28 @@
+# -*- coding: utf-8 -*-
 from mock import Mock
 import unittest
 
+from werkzeug.datastructures import MultiDict
+from wtforms import Form
 from wtforms.validators import StopValidation, ValidationError
 
 from cla_public import app
 from cla_public.apps.checker.constants import MONEY_INTERVALS
-from cla_public.apps.checker.validators import MoneyIntervalAmountRequired, ValidMoneyInterval
+from cla_public.apps.checker.fields import MoneyIntervalField
+from cla_public.apps.checker.validators import MoneyIntervalAmountRequired, \
+    ValidMoneyInterval
+
+
+def test_form(**kwargs):
+
+    class TestForm(Form):
+        money_interval = MoneyIntervalField(**kwargs)
+
+        @classmethod
+        def submit(cls, data):
+            return cls(MultiDict(data))
+
+    return TestForm
 
 
 class TestMoneyInterval(unittest.TestCase):
@@ -32,6 +49,7 @@ class TestMoneyInterval(unittest.TestCase):
         form = Mock()
         field = Mock()
         field.form.per_interval_value.data = None
+        field.form.per_interval_value.errors = []
         field.form.interval_period.data = ''
         self.assertValidationPasses(form, field)
 
@@ -39,7 +57,7 @@ class TestMoneyInterval(unittest.TestCase):
         self.validator = ValidMoneyInterval()
         form = Mock()
         field = Mock()
-        field.form.per_interval_value.validate = Mock(side_effect=ValidationError())
+        field.form.per_interval_value.errors = ['Invalid amount']
         self.assertValidationError(form, field)
 
     def test_money_interval_validator_amount_not_set_interval_selected(self):
@@ -47,6 +65,7 @@ class TestMoneyInterval(unittest.TestCase):
         form = Mock()
         field = Mock()
         field.form.per_interval_value.data = None
+        field.form.per_interval_value.errors = []
         field.form.interval_period.data = 'per_week'
         self.assertValidationError(form, field)
 
@@ -55,6 +74,7 @@ class TestMoneyInterval(unittest.TestCase):
         form = Mock()
         field = Mock()
         field.form.per_interval_value.data = 100
+        field.form.per_interval_value.errors = []
         field.form.interval_period.data = ''
         self.assertValidationError(form, field)
 
@@ -70,6 +90,7 @@ class TestMoneyInterval(unittest.TestCase):
         for interval, _ in MONEY_INTERVALS:
             if interval != '':
                 field.form.interval_period.data = interval
+                field.form.per_interval_value.errors = []
                 self.assertValidationPasses(form, field)
 
     def test_money_interval_amount_required(self):
@@ -77,4 +98,15 @@ class TestMoneyInterval(unittest.TestCase):
         form = Mock()
         field = Mock()
         field.form.per_interval_value.data = None
+        field.form.per_interval_value.errors = []
         self.assertValidationError(form, field)
+
+    def test_money_interval_max_val(self):
+        form = test_form().submit({
+            'money_interval-per_interval_value': '100,000,000.00',
+            'money_interval-interval_period': 'per_week'})
+        form.validate()
+
+        self.assertIn(
+            u'This amount must be less than £100,000,000',
+            form.money_interval.errors)

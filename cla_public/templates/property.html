@@ -28,7 +28,7 @@
       <fieldset class="fieldset-group" id="property-set-{{loop.index}}">
         {% if form.properties|count > 1 %}
           <header>
-            <h3>Property {{loop.index}}</h3>
+            <h3>{{ _('Property') }} {{loop.index}}</h3>
             {% if loop.index != 1 %}
               <input class="button-secondary button-small" name="remove-property-{{loop.index0}}" type="submit" value="{{ _('Remove property') }}" />
             {% endif %}

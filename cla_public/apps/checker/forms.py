@@ -8,7 +8,7 @@ from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from werkzeug.datastructures import MultiDict
 from wtforms import Form as NoCsrfForm
-from wtforms.validators import InputRequired, NumberRange
+from wtforms.validators import InputRequired, NumberRange, DataRequired
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
@@ -62,6 +62,14 @@ class FormSessionDataMixin(object):
         return set_zero_values(cls()).api_payload()
 
 
+def update_payload(form_payload, form_class, cond=True):
+    if cond:
+        form_data = form_class.get_session_as_api_payload()
+    else:
+        form_data = form_class.get_zero_api_payload()
+    recursive_dict_update(form_payload, form_data)
+
+
 class ProblemForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
     """Area of law choice"""
 
@@ -82,7 +90,7 @@ class ProblemForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         }
 
 
-class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
+class AboutYouForm(Honeypot, BabelTranslationsFormMixin, Form):
     have_partner = YesNoField(
         _(u'Do you have a partner?'),
         description=(
@@ -119,7 +127,9 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_children', FieldValue(NO)),
-            NumberRange(min=1)])
+            DataRequired(_(u'Number must be between 1 and 50')),
+            NumberRange(min=1, max=50, message=_(
+                u'Number must be between 1 and 50'))])
     have_dependants = YesNoField(
         _(u'Do you have any dependants aged 16 or over?'),
         description=_(
@@ -131,7 +141,9 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         _(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_dependants', FieldValue(NO)),
-            NumberRange(min=1)])
+            DataRequired(_(u'Number must be between 1 and 50')),
+            NumberRange(min=1, max=50, message=_(
+                u'Number must be between 1 and 50'))])
     have_savings = YesNoField(
         _(u'Do you have any savings or investments?'),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
@@ -202,16 +214,10 @@ class AboutYouForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
             payload['partner'] = {'income': {
                 'self_employed': self.partner_is_self_employed.data}}
 
-        def update_payload(form_class, cond=True):
-            if cond:
-                form_data = form_class.get_session_as_api_payload()
-            else:
-                form_data = form_class.get_zero_api_payload()
-            recursive_dict_update(payload, form_data)
-
-        update_payload(PropertiesForm, cond=self.require_properties)
-        update_payload(SavingsForm, cond=self.require_savings)
-        update_payload(IncomeForm)
+        update_payload(payload, PropertiesForm, cond=self.require_properties)
+        update_payload(payload, SavingsForm, cond=self.require_savings)
+        update_payload(payload, IncomeForm)
+        update_payload(payload, OutgoingsForm)
 
         return payload
 
@@ -241,8 +247,8 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Fo
         }
 
         if passported(self.benefits.data):
-            income = IncomeForm().get_zero_api_payload()
-            recursive_dict_update(payload, income)
+            update_payload(payload, IncomeForm, cond=False)
+            update_payload(payload, OutgoingsForm, cond=False)
 
         return payload
 
@@ -270,21 +276,17 @@ class PropertyForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMixin)
             u"Use a property website or the Land Registry house prices "
             u"website."),
         validators=[
-            InputRequired(_(u'Please enter a valid amount')),
-            NumberRange(min=0)])
+            InputRequired(_(u'Please enter a valid amount'))])
     mortgage_remaining = MoneyField(
         _(u'How much is left to pay on the mortgage?'),
         description=(
             _(u"Include the full amount owed, even if the property has "
               u"shared ownership")),
         validators=[
-            InputRequired(_(u'Please enter 0 if you have no mortgage')),
-            NumberRange(min=0)])
+            InputRequired(_(u'Please enter 0 if you have no mortgage'))])
     mortgage_payments = MoneyField(
         _(u'How much are your monthly mortgage repayments?'),
-        validators=[
-            IgnoreIf('mortgage_remaining', FieldValue(0)),
-            NumberRange(min=0)])
+        validators=[IgnoreIf('mortgage_remaining', FieldValue(0))])
     is_rented = YesNoField(
         _(u'Do you rent out any part of this property?'),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
@@ -386,7 +388,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, F
         _(u'Total value of items worth over £500 each'),
         min_val=50000,
         validators=[InputRequired(
-            message=_(u'Enter 0 if you have no valuables')
+            message=_(u'Valuable items must be at least £500')
         )])
 
     def __init__(self, *args, **kwargs):
@@ -563,7 +565,8 @@ class IncomeForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, Fo
         return api_payload
 
 
-class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
+class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin,
+                    Form, FormSessionDataMixin):
     rent = PartnerMoneyIntervalField(
         label=_(u'Rent'),
         description=_(u"Money you pay your landlord for rent. Do not include "

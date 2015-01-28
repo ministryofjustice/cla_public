@@ -5,7 +5,8 @@ import unittest
 
 from wtforms.validators import ValidationError
 
-from cla_public.libs import call_centre_availability
+from cla_common import call_centre_availability
+from cla_public.app import create_app
 from cla_public.apps.callmeback.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.callmeback.fields import AvailableSlot
 
@@ -19,13 +20,12 @@ def override_current_time(dt):
     call_centre_availability.current_datetime = original
 
 
-def pretty(time):
-    return '{:%a, %d %b %I:%M %p}'.format(time)
-
-
 class TestAvailability(unittest.TestCase):
 
     def setUp(self):
+        self.app = create_app('config/testing.py')
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
         self.now = datetime.datetime(2014, 11, 24, 9, 0)
         self.validator = None
         call_centre_availability.bank_holidays = lambda: \
@@ -36,19 +36,28 @@ class TestAvailability(unittest.TestCase):
         field = Mock()
         field.data = time
         with override_current_time(self.now):
-            self.validator(form, field)
+            try:
+                self.validator(form, field)
+            except ValidationError as e:
+                self.fail('{time} was not available at {now}: {exc}'.format(
+                    time=time, now=self.now, exc=e))
 
     def assertNotAvailable(self, time, form=None):
         form = form or Mock()
         field = Mock()
         field.data = time
         with override_current_time(self.now):
-            with self.assertRaises(ValidationError):
+            try:
                 self.validator(form, field)
+            except ValidationError as e:
+                pass
+            else:
+                self.fail('{time} was available at {now}'.format(
+                    time=time, now=self.now))
 
     def test_available_slot_today_next_slot(self):
         self.validator = AvailableSlot(DAY_TODAY)
-        self.assertAvailable(datetime.time(10, 15))
+        self.assertAvailable(datetime.time(11, 30))
 
     def test_available_slot_today_before_9am(self):
         self.validator = AvailableSlot(DAY_TODAY)

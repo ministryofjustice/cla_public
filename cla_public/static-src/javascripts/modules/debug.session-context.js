@@ -19,7 +19,16 @@
         .on('click', '> button', $.proxy(this.handleToggle, this))
         .on('click', '._options a', function(evt) {
           evt.preventDefault();
-          self.handleRequest(this.href, $.proxy(self.init, self));
+
+          var formAction = $(this).data('form-action');
+
+          self.handleRequest(this.href, function() {
+            $.proxy(self.init, self);
+
+            if(formAction) {
+              $('form').trigger(formAction);
+            }
+          });
         });
     },
 

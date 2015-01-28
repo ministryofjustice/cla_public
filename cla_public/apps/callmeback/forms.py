@@ -7,12 +7,13 @@ from flask_wtf import Form
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, FormField, RadioField, SelectField, \
     StringField, TextAreaField
-from wtforms.validators import InputRequired, Optional
+from wtforms.validators import InputRequired, Optional, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.callmeback.fields import AvailabilityCheckerField
 from cla_public.apps.checker.constants import CONTACT_SAFETY
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
+from cla_public.apps.checker.validators import NotRequired
 from cla_public.libs.honeypot import Honeypot
 
 
@@ -49,7 +50,10 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[InputRequired()])
     contact_number = StringField(
         _(u'Contact phone number'),
-        validators=[InputRequired()])
+        validators=[
+            Length(max=20, message=_(u'Your telephone number must be 20 '
+                                     u'characters or less')),
+            InputRequired()])
     safe_to_contact = RadioField(
         _(u'Is it safe for us to leave a message on this number?'),
         choices=CONTACT_SAFETY,
@@ -64,12 +68,16 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
             u"If you’d like to tell us more about your problem, please do so "
             u"in the box below. The Civil Legal Advice operator will read "
             u"this before they call you.")),
-        validators=[Optional()])
+        validators=[NotRequired()])
     adaptations = FormField(
         AdaptationsForm,
         _(u'Do you have any special communication needs?'))
 
-    time = AvailabilityCheckerField(_(u'Select a time for us to call you'))
+    time = AvailabilityCheckerField(
+        _(u'Select a time for us to call you'),
+        description=_(u'We will try to call you back around the time you '
+                      u'request, but this may not always be possible. We will '
+                      u'always call you back by the next working day.'))
 
     def validate(self):
         """

@@ -96,6 +96,7 @@ def benefits(user):
 @checker.route('/property', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(PropertiesForm, 'property.html')
+@redirect_if_ineligible()
 def property(user):
 
     next_step = '.income'
@@ -119,6 +120,7 @@ def property(user):
 @checker.route('/savings', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(SavingsForm, 'savings.html')
+@redirect_if_ineligible()
 def savings(user):
     next_step = '.income'
 
@@ -137,6 +139,7 @@ def savings(user):
 @checker.route('/benefits-tax-credits', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(TaxCreditsForm, 'benefits-tax-credits.html')
+@redirect_if_ineligible()
 def benefits_tax_credits(user):
     next_step = '.income'
 
@@ -151,6 +154,7 @@ def benefits_tax_credits(user):
 @checker.route('/income', methods=['GET', 'POST'])
 @redirect_if_no_session()
 @form_view(IncomeForm, 'income.html')
+@redirect_if_ineligible()
 def income(user):
     return redirect(url_for('.outgoings'))
 
@@ -199,7 +203,7 @@ def result(outcome):
         category_name=category_name,
         need_more_info=session.need_more_info)
 
-    if outcome in ['confirmation', 'face-to-face']:
+    if outcome == 'face-to-face':
         session.clear()
 
     return response
@@ -228,4 +232,5 @@ def help_organisations(category_name):
     return render_template(
         'help-organisations.html',
         organisations=organisations,
-        category=category)
+        category=category,
+        category_name=category_name)
