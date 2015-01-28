@@ -3,8 +3,7 @@
 
 import logging
 
-from flask import abort, render_template, redirect, \
-    session, url_for
+from flask import abort, render_template, redirect, session, url_for, views
 from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from requests.exceptions import ConnectionError, Timeout
 
@@ -74,7 +73,7 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
         return super(CheckerStep, self).on_valid_submit()
 
 
-class OutgoingsStep(ShortcutIneligible, CheckerStep, FormWizardStep):
+class OutgoingsStep(CheckerStep, FormWizardStep):
 
     def on_valid_submit(self):
         redirect_if_ineligible()
