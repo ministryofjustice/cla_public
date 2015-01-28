@@ -21,7 +21,7 @@
     "moj": true,
     "CLA": true,
     "_": true,
-    "Handlebars": true
+    "numeral": true
   },
 
   "maxparams": 4,
