@@ -378,9 +378,8 @@ class TestApiPayloads(unittest.TestCase):
             'extra_notes': 'Extra notes',
 
             'specific_day': 'today',
-            'time_today': '1945',
-            'day': '',
-            'time_in_day': '',
+            'day': '20150129',
+            'time_in_day': '1945',
         }
 
         form_data.update(flatten_dict('adaptations', adaptations_data))
