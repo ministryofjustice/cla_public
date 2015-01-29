@@ -72,6 +72,20 @@ def make_messages():
 
 
 @manager.command
+def push_messages():
+    """Push messages to transifex"""
+    # Append ' -f --no-interactive' to force push. Otherwise it wil skip if
+    # the modification date on thiersw is newer
+    run('tx push -s -t')
+
+
+@manager.command
+def pull_messages():
+    """Pull messages to transifex"""
+    run('tx pull')
+
+
+@manager.command
 def compile_messages():
     """compile po file."""
     run('{venv}/bin/pybabel compile -d cla_public/translations'.format(venv=VENV))
