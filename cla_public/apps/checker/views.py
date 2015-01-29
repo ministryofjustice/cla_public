@@ -226,9 +226,11 @@ def help_organisations(category_name):
         if category is None:
             abort(404)
 
+        name = unicode(name)
+
     category_name = ORGANISATION_CATEGORY_MAPPING.get(str(name), str(name))
 
-    organisations = get_organisation_list(article_category__name=category_name)
+    organisations = get_organisation_list(article_category__name=name)
     return render_template(
         'help-organisations.html',
         organisations=organisations,

@@ -28,7 +28,7 @@ module.exports = {
         .waitForElementVisible('a[href="https://www.gov.uk/find-a-legal-adviser"]', 2000)
         .assert.urlContains('/help-organisations/' + item.category.label.toLowerCase().replace(/ /g, '-'))
 
-        .assert.containsText('.org-list ul', item.link.text)
+        .assert.containsText('.help-organisations ul', item.link.text)
 
         // skipping this assertion for now as the data is iffy at present
         // .useXpath()
