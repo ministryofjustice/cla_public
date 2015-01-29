@@ -6,7 +6,6 @@ Flask-Markdown==0.3
 Jinja2==2.7.3
 MarkupSafe==0.23
 PyYAML==3.11
-WTForms==2.0.1
 Werkzeug==0.9.6
 argparse==1.2.1
 blinker==1.3
@@ -21,10 +20,13 @@ raven==4.2.3
 requests==2.4.3
 six==1.8.0
 statsd==3.0.1
+wsgiref==0.1.2
+Babel==1.3
 
 # Temporarily install slumber from fork until https://github.com/samgiles/slumber/pull/100 is accepted
 # so we can add a timeout on requests
 # slumber==0.6.0
 git+git://github.com/s-block/slumber.git@ec7dcd75f5d7d3680df51f56ce4312a1375f34e6
-wsgiref==0.1.2
-Babel==1.3
+
+# Fork of WTForms with welsh translations - PR added
+git+git://github.com/s-block/wtforms.git@47f9f6d789cdb3eef3bf659e047f1bbd1f42af24

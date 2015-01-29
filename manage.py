@@ -4,7 +4,6 @@ import logging
 import os
 import subprocess
 import sys
-from distutils.sysconfig import get_python_lib
 
 from flask.ext.script import Manager, Shell, Server
 import requests
@@ -45,15 +44,10 @@ def add_msgctxt(**format_kwargs):
 @manager.command
 def make_messages():
     """compile po file."""
-    wtforms_dir = os.path.join(get_python_lib(), 'wtforms')
-    run('cp -R {wtforms_dir} wtforms'.format(wtforms_dir=wtforms_dir))
-
     run('{venv}/bin/pybabel extract -F babel.cfg -k pgettext -k lazy_pgettext -k '
         'gettext -k lazy_gettext -k ugettext -k ungettext -k pugettext -k '
         'lazy_pugettext -o cla_public/translations/messages.pot'
         ' .'.format(venv=VENV))
-
-    run('rm -rf wtforms')
 
     pgettexts = [
         {'context': 'There is\/are', 'message': 'Yes'},
