@@ -66,11 +66,12 @@ def make_messages():
 
 
 @manager.command
-def push_messages():
+def push_messages(force=False):
     """Push messages to transifex"""
-    # Append ' -f --no-interactive' to force push. Otherwise it wil skip if
-    # the modification date on thiersw is newer
-    run('tx push -s -t')
+    command = 'tx push -s -t'
+    if force:
+        command += ' -f --no-interactive'
+    run(command)
 
 
 @manager.command
