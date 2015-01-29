@@ -7,12 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-29 10:42+0000\n"
+"POT-Creation-Date: 2015-01-29 11:25+0000\n"
 "PO-Revision-Date: 2014-12-04 12:48+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
-"Plural-Forms: nplurals=5; plural=(n==1 ? 1 : n==2 ? 2 : n==3 ? 3 : n==6 ?"
-" 4 : 0)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3559,7 +3558,7 @@ msgstr ""
 "gwiriad hwn."
 
 #: cla_public/templates/result/face-to-face.html:47
-#,
+#, 
 msgid ""
 "You may be able to get legal aid in exceptional cases. You could seek "
 "advice from a legal\n"
@@ -3607,9 +3606,6 @@ msgid "Field must be at least %(min)d character long."
 msgid_plural "Field must be at least %(min)d characters long."
 msgstr[0] "Rhaid i'r maes fod o leiaf %(min)d nod."
 msgstr[1] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
 
 #: wtforms/validators.py:100
 #, python-format
@@ -3617,9 +3613,6 @@ msgid "Field cannot be longer than %(max)d character."
 msgid_plural "Field cannot be longer than %(max)d characters."
 msgstr[0] "Ni all y maes fod yn fwy na %(max)d nod."
 msgstr[1] "Ni all y maes fod yn fwy na %(max)d o nodau."
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
 
 #: wtforms/validators.py:103
 #, python-format
