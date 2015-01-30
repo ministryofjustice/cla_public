@@ -150,7 +150,7 @@ def run_tests(venv_path, threshold_tests=False):
     nightwatch_config = 'jenkins.json'
     if threshold_tests:
         nightwatch_config = 'jenkins-threshold.json'
-    run('./nightwatch -c tests/nightwatch/{0}'.format(nightwatch_config))
+    run('./nightwatch -c tests/nightwatch/{0} -M'.format(nightwatch_config))
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
