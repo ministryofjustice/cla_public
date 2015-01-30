@@ -11,7 +11,7 @@ from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, get_organisation_list, \
-    post_to_is_eligible_api, ineligible
+    post_to_is_eligible_api
 from cla_public.apps.callmeback.forms import CallMeBackForm
 from cla_public.apps.checker.constants import RESULT_OPTIONS, CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
