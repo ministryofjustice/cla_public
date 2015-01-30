@@ -387,9 +387,7 @@ class TestApiPayloads(unittest.TestCase):
             'extra_notes': 'Extra notes',
 
             'specific_day': 'today',
-            'time_today': '1945',
-            'day': '',
-            'time_in_day': '',
+            'time_today': '1930',
         }
 
         form_data.update(flatten_dict('adaptations', adaptations_data))
@@ -408,6 +406,5 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
             self.assertEqual(payload['adaptation_details']['notes'], 'other')
 
-            time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 45))
+            time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 30))
             self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
-
