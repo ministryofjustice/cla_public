@@ -58,7 +58,8 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
         """
         Update session with form data if valid, remove from session if not.
         """
-        if self.form.validate():
+        is_submitted = getattr(self.form, 'is_submitted', lambda: True)
+        if is_submitted() and self.form.validate():
             self.save_form_data_in_session()
             return self.on_valid_submit()
 
