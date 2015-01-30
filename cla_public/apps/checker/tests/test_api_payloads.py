@@ -7,6 +7,8 @@ import pytz
 from werkzeug.datastructures import MultiDict
 
 from cla_public import app
+from cla_public.apps.callmeback.tests.test_availability import \
+    override_current_time
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.callmeback.forms import CallMeBackForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
@@ -28,7 +30,8 @@ class TestApiPayloads(unittest.TestCase):
         self.app = app.create_app('config/testing.py')
         self._ctx = self.app.test_request_context()
         self._ctx.push()
-        self.app = self.app.test_client()
+        self.client = self.app.test_client()
+        self.now = datetime.datetime(2015, 1, 26, 9, 0)
 
     def tearDown(self):
         self.patcher.stop()
@@ -378,26 +381,27 @@ class TestApiPayloads(unittest.TestCase):
             'extra_notes': 'Extra notes',
 
             'specific_day': 'today',
-            'day': '20150129',
-            'time_in_day': '1945',
+            'time_today': '1945',
+            'day': '',
+            'time_in_day': '',
         }
 
         form_data.update(flatten_dict('adaptations', adaptations_data))
+        with override_current_time(self.now):
+            payload = self.payload(CallMeBackForm, form_data)
 
-        payload = self.payload(CallMeBackForm, form_data)
+            self.assertEqual(payload['personal_details']['full_name'], 'Full Name')
+            self.assertEqual(payload['personal_details']['postcode'], 'POSTCODE')
+            self.assertEqual(payload['personal_details']['mobile_phone'], '000000000')
+            self.assertEqual(payload['personal_details']['street'], '21 Jump Street')
+            self.assertEqual(payload['personal_details']['safe_to_contact'], YES)
 
-        self.assertEqual(payload['personal_details']['full_name'], 'Full Name')
-        self.assertEqual(payload['personal_details']['postcode'], 'POSTCODE')
-        self.assertEqual(payload['personal_details']['mobile_phone'], '000000000')
-        self.assertEqual(payload['personal_details']['street'], '21 Jump Street')
-        self.assertEqual(payload['personal_details']['safe_to_contact'], YES)
+            self.assertEqual(payload['adaptation_details']['bsl_webcam'], True)
+            self.assertEqual(payload['adaptation_details']['minicom'], True)
+            self.assertEqual(payload['adaptation_details']['text_relay'], True)
+            self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
+            self.assertEqual(payload['adaptation_details']['notes'], 'other')
 
-        self.assertEqual(payload['adaptation_details']['bsl_webcam'], True)
-        self.assertEqual(payload['adaptation_details']['minicom'], True)
-        self.assertEqual(payload['adaptation_details']['text_relay'], True)
-        self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
-        self.assertEqual(payload['adaptation_details']['notes'], 'other')
-
-        time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 45))
-        self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
+            time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 45))
+            self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
 
