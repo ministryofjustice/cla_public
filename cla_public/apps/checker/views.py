@@ -60,7 +60,7 @@ class ShortcutIneligible(object):
         if is_eligible == ELIGIBILITY_STATES.NO:
             return redirect(url_for(
                 '.help_organisations',
-                category=session.category_slug))
+                category_name=session.category_slug))
         return super(ShortcutIneligible, self).on_valid_submit()
 
 
