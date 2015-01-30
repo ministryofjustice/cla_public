@@ -50,7 +50,21 @@ class UpdatesMeansTest(object):
         return super(UpdatesMeansTest, self).on_valid_submit()
 
 
-class CheckerStep(UpdatesMeansTest, FormWizardStep):
+class ShortcutIneligible(object):
+
+    def on_valid_submit(self):
+        try:
+            is_eligible = post_to_is_eligible_api()
+        except (ConnectionError, Timeout):
+            is_eligible = ELIGIBILITY_STATES.UNKNOWN
+        if is_eligible == ELIGIBILITY_STATES.NO:
+            return redirect(url_for(
+                '.help_organisations',
+                category=session.category_slug))
+        return super(ShortcutIneligible, self).on_valid_submit()
+
+
+class BaseStep(FormWizardStep):
 
     @property
     def form(self):
@@ -70,14 +84,15 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
         if self.name == 'outgoings':
             return redirect(url_for('.eligible'))
 
-        return super(CheckerStep, self).on_valid_submit()
+        return super(BaseStep, self).on_valid_submit()
 
 
-class OutgoingsStep(CheckerStep, FormWizardStep):
+class CheckerStep(UpdatesMeansTest, BaseStep):
+    pass
 
-    def on_valid_submit(self):
-        redirect_if_ineligible()
-        return super(OutgoingsStep, self).on_valid_submit()
+
+class ShortcutCheckerStep(UpdatesMeansTest, ShortcutIneligible, BaseStep):
+    pass
 
 
 class CheckerWizard(FormWizard):
@@ -86,12 +101,12 @@ class CheckerWizard(FormWizard):
         ('problem', CheckerStep(ProblemForm, 'problem.html')),
         ('about', CheckerStep(AboutYouForm, 'about.html')),
         ('benefits', CheckerStep(YourBenefitsForm, 'benefits.html')),
-        ('property', CheckerStep(PropertiesForm, 'property.html')),
-        ('savings', CheckerStep(SavingsForm, 'savings.html')),
-        ('benefits_tax_credits', CheckerStep(
+        ('property', ShortcutCheckerStep(PropertiesForm, 'property.html')),
+        ('savings', ShortcutCheckerStep(SavingsForm, 'savings.html')),
+        ('benefits-tax-credits', ShortcutCheckerStep(
             TaxCreditsForm, 'benefits-tax-credits.html')),
-        ('income', CheckerStep(IncomeForm, 'income.html')),
-        ('outgoings', OutgoingsStep(OutgoingsForm, 'outgoings.html'))
+        ('income', ShortcutCheckerStep(IncomeForm, 'income.html')),
+        ('outgoings', ShortcutCheckerStep(OutgoingsForm, 'outgoings.html'))
     ]
 
     def skip(self, step):
