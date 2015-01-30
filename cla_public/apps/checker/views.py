@@ -152,7 +152,7 @@ class Eligible(RequiresSession, views.MethodView, object):
             session.clear()
             return render_template('result/eligible-no-callback.html')
 
-        return redirect(url_for('callmeback.request_callback'))
+        return render_template('result/eligible.html', form=CallMeBackForm())
 
 
 checker.add_url_rule(
