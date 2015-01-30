@@ -7,14 +7,17 @@ var ABOUT_YOU_QUESTIONS = require('../modules/constants').ABOUT_YOU_QUESTIONS;
 var OUTCOMES = [
   {
     question: 'on_benefits',
+    input: 'benefits',
     url: '/benefits'
   },
   {
     question: 'own_property',
+    input: 'properties-0-is_main_home',
     url: '/property'
   },
   {
     question: 'have_savings',
+    input: 'savings',
     url: '/savings'
   }
 ];
@@ -59,20 +62,20 @@ module.exports = {
     common.aboutPageSetAllToNo(client);
     client
       .submitForm('form')
-      .waitForElementVisible('form[action="/income"]', 2000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
       .assert.urlContains('/income', 'Goes to /income when all answers are No')
       .back()
-      .waitForElementVisible('form[action="/about"]', 2000)
+      .waitForElementVisible('input[name="have_partner"]', 2000)
     ;
     OUTCOMES.forEach(function(item) {
       common.aboutPageSetAllToNo(client);
       common.setYesNoFields(client, item.question, 1);
       client
         .submitForm('form')
-        .waitForElementVisible(util.format('form[action="%s"]', item.url), 5000)
+        .waitForElementVisible(util.format('input[name="%s"]', item.input), 5000)
         .assert.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
         .back()
-        .waitForElementVisible('form[action="/about"]', 2000)
+        .waitForElementVisible('input[name="have_partner"]', 2000)
       ;
     });
 

@@ -37,7 +37,7 @@ module.exports = {
 
   'Property page': function(client) {
     client
-      .waitForElementVisible('form[action="/property"]', 2000)
+      .waitForElementVisible('input[name="properties-0-is_main_home"]', 2000)
       .assert.urlContains('/property')
       .assert.containsText('h1', 'Your property')
     ;
