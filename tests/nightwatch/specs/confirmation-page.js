@@ -47,8 +47,11 @@ var checkCallbackTime = function(client, then, time) {
 module.exports = {
   'Check callback today (next available)': function(client) {
     eligibleJourney(client);
-
+    var timeIsMocked = process.argv.indexOf('tests/nightwatch/local.json') === -1
     var now = moment();
+    if (timeIsMocked) {
+      now = moment([2015, 0, 26, 9, 0]);
+    }
     if(now.day() !== 0) {
       if(now.hour() < 17) {
         if(now.day() === 6 && (now.hour() > 11 || (now.hour() === 11 && now.minute() > 14))) {
