@@ -141,7 +141,7 @@ def run_tests(venv_path, threshold_tests=False):
         venv=venv_path,
         conf=config))
     run(
-        '{conf} {venv}/bin/python manage.py runserver -p {port} -D -R'.format(
+        '{conf} {venv}/bin/python manage.py mockserver -p {port} -D -R'.format(
             venv=venv_path,
             conf=config,
             port=port),
