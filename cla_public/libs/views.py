@@ -4,8 +4,8 @@
 from itertools import dropwhile, ifilter
 import logging
 
-from flask import current_app, redirect, render_template, request, session, \
-    url_for, views
+from flask import abort, current_app, redirect, render_template, request, \
+    session, url_for, views
 
 
 log = logging.getLogger(__name__)
@@ -126,8 +126,11 @@ class FormWizard(SessionBackedFormView):
         """
         Get the form and template for the current step
         """
-        step = kwargs.get('step', self.steps[0].name)
-        self.step = self._steps.get(step, self.steps[0])
+        step = kwargs.get('step')
+        if step not in self._steps:
+            abort(404)
+
+        self.step = self._steps[step]
         self.form_class = self.step.form_class
         self.template = self.step.template
         return super(FormWizard, self).dispatch_request(*args, **kwargs)
