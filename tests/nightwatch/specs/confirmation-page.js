@@ -50,7 +50,7 @@ module.exports = {
 
     var now = moment();
     if(now.day() !== 0) {
-      if(now.hour() < 19) {
+      if(now.hour() < 17) {
         if(now.day() === 6 && (now.hour() > 11 || (now.hour() === 11 && now.minute() > 14))) {
           console.log('Today not available after 11.15am on a Saturday, test skipped');
         } else {
