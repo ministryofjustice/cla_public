@@ -121,7 +121,7 @@ class CheckerWizard(FormWizard):
         if step.name == 'savings':
             return not user.has_savings_or_valuables
 
-        if step.name == 'benefits_tax_credits':
+        if step.name == 'benefits-tax-credits':
             return not user.children_or_tax_credits
 
         return False
@@ -142,7 +142,7 @@ class FaceToFace(RequiresSession, views.MethodView, object):
 
 
 checker.add_url_rule(
-    '/result/face-to-face', view_func=FaceToFace.as_view('face_to_face'))
+    '/result/face-to-face', view_func=FaceToFace.as_view('face-to-face'))
 
 
 class Eligible(RequiresSession, views.MethodView, object):
