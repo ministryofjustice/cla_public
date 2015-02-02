@@ -26,7 +26,7 @@ class TestAvailability(unittest.TestCase):
         self.app = create_app('config/testing.py')
         self.ctx = self.app.test_request_context()
         self.ctx.push()
-        self.now = datetime.datetime(2014, 11, 24, 9, 0)
+        self.now = datetime.datetime(2014, 11, 24, 9, 30)
         self.validator = None
         call_centre_availability.bank_holidays = lambda: \
             [datetime.datetime(2014, 12, 25, 0, 0)]
@@ -57,6 +57,7 @@ class TestAvailability(unittest.TestCase):
 
     def test_available_slot_today_next_slot(self):
         self.validator = AvailableSlot(DAY_TODAY)
+        self.assertNotAvailable(datetime.time(11, 0))
         self.assertAvailable(datetime.time(11, 30))
 
     def test_available_slot_today_before_9am(self):
