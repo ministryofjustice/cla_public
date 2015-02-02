@@ -393,6 +393,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, F
 
     def __init__(self, *args, **kwargs):
         super(SavingsForm, self).__init__(*args, **kwargs)
+
         if not session.has_valuables:
             del self.valuables
 
