@@ -45,7 +45,9 @@ def add_msgctxt(**format_kwargs):
 def make_messages():
     """compile po file."""
     run('{venv}/bin/pybabel extract -F babel.cfg -k pgettext -k lazy_pgettext -k '
-        'gettext -k lazy_gettext -o cla_public/translations/messages.pot .'.format(venv=VENV))
+        'gettext -k lazy_gettext -k ugettext -k ungettext -k pugettext -k '
+        'lazy_pugettext -o cla_public/translations/messages.pot'
+        ' .'.format(venv=VENV))
 
     pgettexts = [
         {'context': 'There is\/are', 'message': 'Yes'},
@@ -58,10 +60,24 @@ def make_messages():
     for trans in pgettexts:
         add_msgctxt(**trans)
 
-    run('cat cla_public/translations/wtforms.pot >> cla_public/translations/messages.pot')
     for language_code, _ in app.config.get('LANGUAGES'):
         run('{venv}/bin/pybabel update -i cla_public/translations/messages.pot -d cla_public/translations -l {language_code}'
             .format(venv=VENV, language_code=language_code))
+
+
+@manager.command
+def push_messages(force=False):
+    """Push messages to transifex"""
+    command = 'tx push -s -t'
+    if force:
+        command += ' -f --no-interactive'
+    run(command)
+
+
+@manager.command
+def pull_messages():
+    """Pull messages to transifex"""
+    run('tx pull')
 
 
 @manager.command
