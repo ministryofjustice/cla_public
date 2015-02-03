@@ -9,18 +9,18 @@ module.exports = {
     INELIGIBLE_OUTCOMES.forEach(function(item) {
       common.startPage(client);
       client
-        .waitForElementVisible('form[action="/problem"]', 2000)
+        .waitForElementVisible('input[name="categories"]', 2000)
         .assert.urlContains('/problem')
         .click(util.format('input[name="categories"][value="%s"]', item.category.value))
         .submitForm('form')
-        .waitForElementVisible('form[action="/about"]', 2000)
+        .waitForElementVisible('input[name="have_partner"]', 2000)
         .assert.urlContains('/about')
       ;
       common.aboutPageSetAllToNo(client);
       common.setYesNoFields(client, 'have_savings', 1);
       client
         .submitForm('form')
-        .waitForElementVisible('form[action="/savings"]', 2000)
+        .waitForElementVisible('input[name="savings"]', 2000)
         .assert.urlContains('/savings')
         .setValue('input[name="savings"]', '50000')
         .setValue('input[name="investments"]', '50000')

@@ -1,0 +1,4 @@
+{% for field in form -%}
+    {{ field }}
+    {%- if field.errors %} {{ field.errors[0] }}{% endif -%}
+{%- endfor %}

@@ -172,4 +172,7 @@ class AvailabilityCheckerField(FormField):
         """
         Get the datetime of the selected day and timeslot
         """
+        return self.scheduled_time()
+
+    def scheduled_time(self):
         return self.form.scheduled_time().replace(tzinfo=pytz.utc)

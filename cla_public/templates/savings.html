@@ -20,7 +20,7 @@
     <p>{{ _('We need to know about any money you have saved or invested.') }}</p>
   {% endif %}
 
-  <form method="POST" action="{{ url_for('.savings') }}">
+  <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 

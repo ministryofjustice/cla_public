@@ -2,11 +2,16 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
+var constants = require('../modules/constants.js');
 var VERBOSE = false;
 var RESULTS = {
   pass: 'result/eligible',
   fail: 'help-organisations/'
 };
+
+function form_id(form_path) {
+  return constants.FORM_IDENTIFIERS[form_path] || "";
+}
 
 var SCENARIOS = []
   .concat(require('../modules/thresholds/single-person-capital'))
@@ -68,7 +73,7 @@ module.exports = {
       common.startPage(client, scenario.name);
       scenario.pages.forEach(function(page) {
         client
-          .waitForElementVisible(util.format('form[action="/%s"]', page.page), 2000)
+          .waitForElementVisible(form_id(page.page), 2000)
         ;
         if(page.page === 'property') {
           page.properties.forEach(function(property, i) {

@@ -108,5 +108,5 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
             },
-            'requires_action_at': self.time.data.isoformat(),
+            'requires_action_at': self.time.scheduled_time().isoformat(),
         }

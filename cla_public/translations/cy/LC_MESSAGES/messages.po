@@ -506,7 +506,7 @@ msgctxt "It isn’t"
 msgid "No"
 msgstr "Nac ydy"
 
-#: cla_public/apps/checker/decorators.py:43
+#: cla_public/apps/checker/views.py:45
 msgid "Server did not respond, please try again"
 msgstr "Gweinydd heb ymateb, os gwelwch yn dda ceisiwch eto"
 

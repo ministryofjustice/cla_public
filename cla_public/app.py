@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "CLA Public app"
 
+import logging
 import logging.config
 import os
 from flask import Flask, render_template
@@ -55,6 +56,8 @@ def create_app(config_file=None):
         app.register_blueprint(checker)
 
     logging.config.dictConfig(app.config['LOGGING'])
+    # quiet markdown module
+    logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
 
     app.wsgi_app = StatsdMiddleware(app.wsgi_app, app.config)
 

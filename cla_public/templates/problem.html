@@ -11,7 +11,7 @@
   <h1>{{ title }}</h1>
   <p class="subtitle">{{ _('To qualify for legal aid, you must have a problem that is covered by legal aid.') }}</p>
 
-  <form method="POST" action="{{ url_for('.problem') }}">
+  <form method="POST">
     {{ form.csrf_token }}
 
     {% if form.errors %}
