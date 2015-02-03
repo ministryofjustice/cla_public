@@ -9,7 +9,7 @@ import unittest
 import urlparse
 
 from bs4 import BeautifulSoup
-from flask import url_for
+from flask import session, url_for
 import xlrd
 
 from cla_public import app
@@ -36,11 +36,18 @@ class TestMeansTest(unittest.TestCase):
         ctx.push()
         self.client = self.app.test_client()
 
-    def checker_result(self, case):
+    def assertMeansTest(self, expected_result, case):
         with self.client as client:
 
             resp = client.get(url_for('base.get_started'))
             url = urlparse.urlparse(resp.location).path
+
+            def error_msg(msg):
+                return (
+                    '{msg}\n'
+                    'Session data: {data}\n').format(
+                        msg=msg,
+                        data=pformat(dict(session)))
 
             form_class = get_form(url)
             while form_class:
@@ -52,37 +59,32 @@ class TestMeansTest(unittest.TestCase):
                         error.text.strip() for error in
                         BeautifulSoup(response.data).select('.field-error')])
 
-                def error_msg():
-                    return (
-                        'Validation error in {form}\n'
-                        'POST data: {data}\n'
-                        'Errors:\n{errors}\n'
-                        'Case data:\n{case}').format(
-                            form=form_class.__name__,
-                            data=pformat(post_data),
-                            errors=form_errors(),
-                            case=pformat(case))
+                self.assertRedirectToNextForm(response, error_msg((
+                    'Validation error in {form}\n'
+                    'Errors:\n{errors}\n'
+                    'POST data:\n{data}').format(
+                        form=form_class.__name__,
+                        data=pformat(post_data),
+                        errors=form_errors())))
 
-                self.assert_redirect_to_next_form(response, error_msg())
                 url = urlparse.urlparse(response.location).path
                 form_class = get_form(url)
 
+            result = 'unknown'
+
             if '/result/eligible' in url:
-                return 'eligible'
+                result = 'eligible'
 
             if '/help-organisations/' in url:
-                return 'ineligible'
+                result = 'ineligible'
 
-            return 'unknown'
+            self.assertEqual(expected_result, result, error_msg(
+                'Expected {expected}, got {actual}'.format(
+                    expected=expected_result,
+                    actual=result)))
 
-    def assert_redirect_to_next_form(self, response, message):
+    def assertRedirectToNextForm(self, response, message):
         self.assertEquals(response.status_code, 302, message)
-
-    def assert_eligible(self, case):
-        self.assertEqual('eligible', self.checker_result(case))
-
-    def assert_ineligible(self, case):
-        self.assertEqual('ineligible', self.checker_result(case))
 
 
 def form_data(form_class, case):
@@ -167,9 +169,9 @@ def make_test(row):
         actual = row.get('_actual')
         if actual in ('P', 'F'):
             if actual == 'P':
-                self.assert_eligible(row)
+                self.assertMeansTest('eligible', row)
             else:
-                self.assert_ineligible(row)
+                self.assertMeansTest('ineligible', row)
     row_test.__doc__ = str(row.get('line_number')) + ': ' + row.get('_description')
     return row_test
 make_test.__test__ = False
