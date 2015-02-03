@@ -1,3 +1,4 @@
+from decimal import InvalidOperation
 from flask import session
 
 from cla_public.apps.checker.api import money_interval
@@ -146,7 +147,8 @@ class PropertiesFormMixin(object):
         return properties
 
     def propertiesform_data(self):
-        return flatten_list_of_dicts('properties', self.propertiesform_properties())
+        return flatten_list_of_dicts(
+            'properties', self.propertiesform_properties())
 
 
 class SavingsFormMixin(object):
@@ -269,3 +271,54 @@ class OutgoingsFormMixin(object):
         d.update(flatten_dict('childcare', self.outgoingsform_childcare()))
 
         return d
+
+
+class FormDataConverter(
+        ProblemFormMixin,
+        AboutYouFormMixin,
+        BenefitsFormMixin,
+        PropertiesFormMixin,
+        SavingsFormMixin,
+        TaxCreditsFormMixin,
+        IncomeFormMixin,
+        OutgoingsFormMixin):
+    """Process data row from means test row and return values for each form"""
+    def __init__(self, **values):
+        self.__dict__.update(values)
+
+    def get_value(self, form_class, field):
+        return getattr(self, '%s_%s' % (form_class.__name__.lower(), field))()
+
+    def get_form_data(self, form_class):
+        method_name = '%s_data' % form_class.__name__.lower()
+        if hasattr(self, method_name):
+            return getattr(self, method_name)()
+        ret = {}
+        needed = lambda field: field not in NON_FORM_FIELDS
+        fields = filter(needed, form_class()._fields.keys())
+        for field in fields:
+            ret[field] = self.get_value(form_class, field)
+        return ret
+
+    def yes_or_no(self, spreadsheet_value, extra_cond=True):
+        return YES if spreadsheet_value == 'Y' and extra_cond else NO
+
+    def n_to_yes_no(self, n):
+        return YES if self.n_greater_than(n) else NO
+
+    def n_greater_than(self, n, x=0):
+        try:
+            return True if n > x else False
+        except InvalidOperation:
+            return False
+
+    def number_if_yes(self, n, d):
+        return int(n) if n and int(n) > 0 and d == YES else None
+
+    def get_total_if_partner(self, your_value, partner_value):
+        val = 0
+        if your_value:
+            val += your_value
+        if session.has_partner and partner_value:
+            val += partner_value
+        return val
