@@ -109,13 +109,7 @@ def post_to_is_eligible_api():
 
     if reference:
         response = backend.eligibility_check(reference).is_eligible().post({})
-        is_eligible = response.get('is_eligible')
-        session['is_eligible'] = is_eligible
-        return is_eligible
-
-
-def ineligible():
-    return post_to_is_eligible_api() == ELIGIBILITY_STATES.NO
+        return response.get('is_eligible')
 
 
 def should_attach_eligibility_check():

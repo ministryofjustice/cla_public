@@ -1,10 +1,11 @@
 import datetime
 
 from flask.json import JSONEncoder
-from cla_common.constants import ELIGIBILITY_STATES
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
+from requests.exceptions import ConnectionError, Timeout
 
-
+from cla_common.constants import ELIGIBILITY_STATES
+from cla_public.apps.checker.api import post_to_is_eligible_api
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
     PASSPORTED_BENEFITS, YES, CATEGORIES
 from cla_public.apps.checker.utils import passported
@@ -26,6 +27,14 @@ class CheckerSession(SecureCookieSession):
 
     expires_override = None
 
+    def __init__(self, *args, **kwargs):
+        super(CheckerSession, self).__init__(*args, **kwargs)
+        self._eligibility = None
+
+    def __setitem__(self, *args, **kwargs):
+        super(CheckerSession, self).__setitem__(*args, **kwargs)
+        self._eligibility = None
+
     def field(self, form_name, field_name, default=None):
         return self.get(form_name, {}).get(field_name, default)
 
@@ -34,9 +43,22 @@ class CheckerSession(SecureCookieSession):
         return self.field('ProblemForm', 'categories') in F2F_CATEGORIES
 
     @property
+    def ineligible(self):
+        return self.eligibility == ELIGIBILITY_STATES.NO
+
+    @property
+    def eligibility(self):
+        if self._eligibility is None:
+            try:
+                self._eligibility = post_to_is_eligible_api()
+            except (ConnectionError, Timeout):
+                self._eligibility = ELIGIBILITY_STATES.UNKNOWN
+        return self._eligibility
+
+    @property
     def need_more_info(self):
         """Show we need more information page instead of eligible"""
-        if self.get('is_eligible') == ELIGIBILITY_STATES.UNKNOWN:
+        if self.eligibility == ELIGIBILITY_STATES.UNKNOWN:
             return True
         properties = self.field('PropertiesForm', 'properties')
         if properties:

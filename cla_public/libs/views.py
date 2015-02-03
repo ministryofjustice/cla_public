@@ -135,14 +135,19 @@ class FormWizard(SessionBackedFormView):
         self.template = self.step.template
         return super(FormWizard, self).dispatch_request(*args, **kwargs)
 
+    def remaining_steps(self):
+        """
+        Get a list of the remaining steps in the wizard
+        """
+        previous = lambda step: step != self.step
+        relevant = lambda step: step != self.step and not self.skip(step)
+        return ifilter(relevant, dropwhile(previous, self.steps))
+
     def next_url(self):
         """
         Get the URL for next step of the wizard
         """
-        previous = lambda step: step != self.step
-        relevant = lambda step: step != self.step and not self.skip(step)
-        step = ifilter(relevant, dropwhile(previous, self.steps)).next()
-
+        step = self.remaining_steps().next()
         return self.url_for(step.name)
 
     def url_for(self, step_name):
@@ -158,7 +163,13 @@ class FormWizard(SessionBackedFormView):
         """
         Delegate handling form submission to current state
         """
-        return self.step.on_valid_submit()
+        try:
+            return self.step.on_valid_submit()
+        except StopIteration:
+            return self.complete()
+
+    def complete(self):
+        raise NotImplementedError
 
     @classmethod
     def as_view(cls, name, *class_args, **class_kwargs):
@@ -193,6 +204,13 @@ class FormWizardStep(object):
         self.template = template
         self.wizard = None
         self.name = None
+
+    @property
+    def form(self):
+        return self.wizard.form
+
+    def get(self, **kwargs):
+        return self.wizard.get(**kwargs)
 
     def on_valid_submit(self):
         return redirect(self.wizard.next_url())
