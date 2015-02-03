@@ -141,7 +141,7 @@ def run_tests(venv_path, threshold_tests=False):
         venv=venv_path,
         conf=config))
     run(
-        '{conf} {venv}/bin/python manage.py runserver -p {port} -D -R'.format(
+        '{conf} {venv}/bin/python manage.py mockserver -p {port} -D -R'.format(
             venv=venv_path,
             conf=config,
             port=port),
@@ -150,7 +150,7 @@ def run_tests(venv_path, threshold_tests=False):
     nightwatch_config = 'jenkins.json'
     if threshold_tests:
         nightwatch_config = 'jenkins-threshold.json'
-    run('./nightwatch -c tests/nightwatch/{0}'.format(nightwatch_config))
+    run('./nightwatch -c tests/nightwatch/{0} -M'.format(nightwatch_config))
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
