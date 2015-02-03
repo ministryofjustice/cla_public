@@ -5,8 +5,8 @@ import logging
 import datetime
 from urlparse import urlparse, urljoin
 
-from flask import current_app, jsonify, redirect, render_template, session, \
-    url_for, request
+from flask import abort, current_app, jsonify, redirect, render_template, \
+    session, url_for, request
 from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_public.apps.base import base
