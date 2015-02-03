@@ -28,9 +28,10 @@ class FormattedChoiceField(object):
     """
 
     def process_data(self, value):
-        self.data = value
-        if value:
+        try:
             self.data = self._format(value)
+        except ValueError:
+            self.data = value
 
     def pre_validate(self, form):
         choice_values = (v for v, _ in self.choices)
