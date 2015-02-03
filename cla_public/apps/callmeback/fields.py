@@ -2,6 +2,7 @@
 "CallMeBack form fields"
 
 import datetime
+import random
 
 from flask.ext.babel import lazy_gettext as _
 import pytz
@@ -69,6 +70,7 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, choices_callback=None, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
+        self.default, display = random.choice(self.choices)
 
     def process_formdata(self, valuelist):
         if valuelist:
