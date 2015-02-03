@@ -44,7 +44,7 @@ LOGGING = {
     }
 }
 
-SECRET_KEY = os.urandom(24)
+SECRET_KEY = os.environ.get('SECRET_KEY', os.urandom(24))
 
 # Should be True when served over HTTPS, False otherwise (or CSRF will break)
 SESSION_COOKIE_SECURE = True
