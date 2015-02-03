@@ -98,8 +98,6 @@
       $.each(this.$timeSelect.children(), function () {
         setEnabled(this, available(self.slot($(this).val())));
       });
-
-      this.$timeSelect.children(':not(:disabled)').first().attr('selected', true);
     }
   };
 }());
