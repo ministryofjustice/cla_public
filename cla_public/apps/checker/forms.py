@@ -542,10 +542,19 @@ class IncomeFieldForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMix
         }
 
 
+class IncomeField(PassKwargsToFormField):
+
+    _income_field = True
+
+    def __init__(self, *args, **kwargs):
+        super(IncomeField, self).__init__(
+            IncomeFieldForm,
+            *args, **kwargs)
+
+
 class IncomeForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, FormSessionDataMixin):
-    your_income = SetZeroFormField(IncomeFieldForm, label=_(u'Your personal income'))
-    partner_income = PassKwargsToFormField(
-        IncomeFieldForm,
+    your_income = IncomeField(label=_(u'Your personal income'))
+    partner_income = IncomeField(
         form_kwargs={'is_partner': True},
         label=_(u'Your partner’s income'))
 
