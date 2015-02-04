@@ -141,19 +141,26 @@ class FormWizard(SessionBackedFormView):
         self.template = self.step.template
         return super(FormWizard, self).dispatch_request(*args, **kwargs)
 
-    def remaining_steps(self):
+    def remaining_steps(self, skip_current=False):
         """
         Get a list of the remaining steps in the wizard
         """
+        if not hasattr(self, 'step'):
+            self.step = self.steps[0]
         previous = lambda step: step != self.step
-        relevant = lambda step: step != self.step and not self.skip(step)
+
+        def relevant(step):
+            if step == self.step:
+                return not skip_current
+            return not self.skip(step)
+
         return ifilter(relevant, dropwhile(previous, self.steps))
 
     def next_url(self):
         """
         Get the URL for next step of the wizard
         """
-        step = self.remaining_steps().next()
+        step = self.remaining_steps(skip_current=True).next()
         return self.url_for(step.name)
 
     def url_for(self, step_name):
