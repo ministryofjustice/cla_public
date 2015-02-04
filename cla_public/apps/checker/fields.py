@@ -78,6 +78,8 @@ class DescriptionRadioField(RadioField):
 class YesNoField(RadioField):
     """Yes/No radio button field"""
 
+    _yes_no_field = True
+
     def __init__(self, label=None, validators=None, yes_text=_('Yes'),
                  no_text=_('No'), **kwargs):
         choices = [(YES, yes_text), (NO, no_text)]
@@ -109,6 +111,8 @@ class SetZeroFormField(FormField):
 
 
 class MoneyField(SetZeroIntegerField):
+
+    _money_field = True
 
     def __init__(self, label=None, validators=None, min_val=0,
                  max_val=9999999999, **kwargs):
@@ -219,6 +223,8 @@ class PassKwargsToFormField(SetZeroFormField):
 class MoneyIntervalField(PassKwargsToFormField):
     """Convenience class for FormField(MoneyIntervalForm)"""
 
+    _money_interval_field = True
+
     def __init__(self, *args, **kwargs):
         self._errors = []
         self.validators = []
@@ -268,6 +274,9 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class PropertyList(FieldList):
+
+    _property_list = True
+
     def remove(self, index):
         del self.entries[index]
         self.last_index -= 1
