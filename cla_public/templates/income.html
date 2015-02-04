@@ -5,16 +5,7 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% if session.has_partner %}
-  {% set title = _('You and your partner’s') %}
-{% else %}
-  {% set title = _('Your') %}
-{% endif %}
-{% if session.is_employed or session.is_self_employed %}
-  {% set title = title + ' ' + _('income and tax') %}
-{% else %}
-  {% set title = title + ' ' + _('money coming in') %}
-{%  endif %}
+{% set title = form.title %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
