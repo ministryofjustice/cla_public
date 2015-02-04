@@ -17,6 +17,7 @@ from cla_public.apps.checker.constants import CATEGORIES, \
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm
+from cla_public.apps.checker import honeypot
 from cla_public.libs.utils import override_locale, log_to_sentry
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
@@ -52,7 +53,20 @@ class UpdatesMeansTest(object):
 
 
 class CheckerStep(UpdatesMeansTest, FormWizardStep):
-    pass
+
+    def completed_fields(self):
+        session_data = session.get(self.form_class.__name__, {})
+        form = self.form_class(**session_data)
+
+        def user_completed(field):
+            name, field = field
+            if name in ['csrf_token', honeypot.FIELD_NAME]:
+                return False
+            return field.data is not None
+
+        fields = filter(user_completed, form._fields.items())
+        fields = map(lambda (name, field): (field.label.text, field), fields)
+        return fields
 
 
 class CheckerWizard(AllowSessionOverride, FormWizard):
