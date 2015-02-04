@@ -26,6 +26,14 @@ from cla_public.libs.views import AllowSessionOverride, FormWizard, \
 log = logging.getLogger(__name__)
 
 
+@checker.app_context_processor
+def choice_label():
+    def choice_label_fn(field, choice):
+        choices_dict = dict(field.choices)
+        return choices_dict.get(choice)
+    return {'choice_label': choice_label_fn}
+
+
 @checker.after_request
 def add_header(response):
     """
