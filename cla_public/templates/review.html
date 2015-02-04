@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% macro render_value(field) %}
+  {% if field._money_field %}
+    &pound;{{ field.data }}
+  {% elif field._money_interval_field %}
+    &pound;{{ field.data.per_interval_value }}
+    {{ choice_label(field.form.interval_period, field.data.interval_period) }}
+  {% elif field._property_list %}
+    {% for property in field %}
+      <h3>Property {{ loop.index }}</h3>
+      <dl>
+        {% for pfield_name, pfield in property.form._fields.items() %}
+          <dt>{{ pfield.label.text }}</dt>
+          <dd>{{ render_value(pfield) }}</dd>
+        {% endfor %}
+      </dl>
+    {% endfor %}
+  {% elif field._income_field %}
+    <dl>
+      {% for ifield_name, ifield in field.form._fields.items() %}
+        <dt>{{ ifield.label.text }}</dt>
+        <dd>{{ render_value(ifield) }}</dd>
+      {% endfor %}
+    </dl>
+  {% elif field.choices %}
+    {% if field.data is string %}
+      {{ choice_label(field, field.data) }}
+    {% else %}
+      <ul>
+        {% for item in field.data %}
+        <li>{{ choice_label(field, item) }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% else %}
+    {{ field.data }}
+  {% endif %}
+{% endmacro %}
+
+{% block inner_content %}
+  <h1>Summary</h1>
+
+  {% for step in steps %}
+  <h2><a href="{{ url_for('checker.wizard', step=step.name) }}">{{ step.form_class.title }}</a></h2>
+  <dl>
+    {% for field_name, field in step.completed_fields() %}
+    <dt>{{ field_name }}</dt>
+    <dd>
+      {{ render_value(field) }}
+    </dd>
+    {% endfor %}
+  </dl>
+  {% endfor %}
+{% endblock %}

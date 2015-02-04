@@ -101,7 +101,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
                 '.help_organisations',
                 category_name=session.category_slug))
 
-        return redirect(url_for('.eligible'))
+        return redirect(url_for('.review'))
 
     def skip(self, step):
 
@@ -131,6 +131,16 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
 
 
 checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
+
+
+class Review(RequiresSession, views.MethodView, object):
+
+    def get(self):
+        steps = CheckerWizard('wizard').remaining_steps()
+        return render_template('review.html', steps=steps)
+
+
+checker.add_url_rule('/review', view_func=Review.as_view('review'))
 
 
 class FaceToFace(RequiresSession, views.MethodView, object):
