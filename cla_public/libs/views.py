@@ -96,7 +96,13 @@ class AllowSessionOverride(object):
         Inject URL parameters into the session (if in debug mode)
         """
         if current_app.debug:
-            session.update(request.args)
+            parsed = {}
+            for arg, val in request.args.items():
+                form, _, field = arg.partition('_')
+                parsed[form] = parsed.get(form, {})
+                parsed[form].update({
+                    field: val})
+            session.update(parsed)
 
         return super(AllowSessionOverride, self).get(*args, **kwargs)
 
