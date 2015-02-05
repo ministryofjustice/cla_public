@@ -100,7 +100,7 @@ class AvailableSlot(object):
         if self.day == DAY_SPECIFIC:
             date = form.day.data
         time = datetime.datetime.combine(date, field.data)
-        if not OPERATOR_HOURS.can_schedule_callback(time):
+        if time not in OPERATOR_HOURS:
             raise ValidationError(
                 field.gettext(
                     u"Can't schedule a callback at the requested time"))
