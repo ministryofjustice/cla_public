@@ -1,40 +1,55 @@
 {% extends 'base.html' %}
 
-{% macro render_value(field) %}
+{% macro render_value(field_name, field) %}
   {% if field._money_field %}
-    &pound;{{ field.data }}
+    <th>{{ field_name }}</th>
+    <td>&pound;{{ field.data }}</td>
   {% elif field._money_interval_field %}
-    &pound;{{ field.data.per_interval_value }}
-    {{ choice_label(field.form.interval_period, field.data.interval_period) }}
+    <th>{{ field_name }}</th>
+    <td>&pound;{{ field.data.per_interval_value }}
+      {{ choice_label(field.form.interval_period, field.data.interval_period) }}</td>
   {% elif field._property_list %}
     {% for property in field %}
-      <h3>Property {{ loop.index }}</h3>
-      <dl>
-        {% for pfield_name, pfield in property.form._fields.items() %}
-          <dt>{{ pfield.label.text }}</dt>
-          <dd>{{ render_value(pfield) }}</dd>
-        {% endfor %}
-      </dl>
+      <td class="subheading" colspan="2">
+        <h3>Property {{ loop.index }}</h3>
+
+        <table class="review">
+          {% for pfield_name, pfield in property.form._fields.items() %}
+          <tr>
+            {{ render_value(pfield.label.text, pfield) }}
+          </tr>
+          {% endfor %}
+        </table>
+      </td>
     {% endfor %}
   {% elif field._income_field %}
-    <dl>
-      {% for ifield_name, ifield in field.form._fields.items() %}
-        <dt>{{ ifield.label.text }}</dt>
-        <dd>{{ render_value(ifield) }}</dd>
-      {% endfor %}
-    </dl>
+    <td class="subheading" colspan="2">
+      <h3>{{ field_name }}</h3>
+      <table class="review">
+        {% for ifield_name, ifield in field.form._fields.items() %}
+          <tr>
+            {{ render_value(ifield.label.text, ifield) }}
+          </tr>
+        {% endfor %}
+      </table>
+    </td>
   {% elif field.choices %}
     {% if field.data is string %}
-      {{ choice_label(field, field.data) }}
+      <th>{{ field_name }}</th>
+      <td>{{ choice_label(field, field.data) }}</td>
     {% else %}
-      <ul>
-        {% for item in field.data %}
-        <li>{{ choice_label(field, item) }}</li>
-        {% endfor %}
-      </ul>
+      <th>{{ field_name }}</th>
+      <td>
+        <ul>
+          {% for item in field.data %}
+          <li>{{ choice_label(field, item) }}</li>
+          {% endfor %}
+        </ul>
+      </td>
     {% endif %}
   {% else %}
-    {{ field.data }}
+    <th>{{ field_name }}</th>
+    <td>{{ field.data }}</td>
   {% endif %}
 {% endmacro %}
 
@@ -43,13 +58,12 @@
 
   {% for step in steps %}
   <h2><a href="{{ url_for('checker.wizard', step=step.name) }}">{{ step.form_class.title }}</a></h2>
-  <dl>
+  <table class="review">
     {% for field_name, field in step.completed_fields() %}
-    <dt>{{ field_name }}</dt>
-    <dd>
-      {{ render_value(field) }}
-    </dd>
+    <tr>
+      {{ render_value(field_name, field) }}
+    </tr>
     {% endfor %}
-  </dl>
+  </table>
   {% endfor %}
 {% endblock %}
