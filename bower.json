@@ -10,7 +10,7 @@
     "tests"
   ],
   "dependencies": {
-    "lodash": "~2.4.1",
+    "lodash": "~3.1.0",
     "numeral": "~1.5.3"
   }
 }

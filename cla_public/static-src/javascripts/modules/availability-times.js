@@ -54,6 +54,9 @@
     bindEvents: function () {
       function check(el) {
         return function () {
+          if(window.ga) {
+            window.ga('send', 'event', 'availability-times', 'select', this.name);
+          }
           el
             .prop('checked', true)
             .trigger('label-select');
