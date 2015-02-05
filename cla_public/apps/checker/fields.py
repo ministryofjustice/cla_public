@@ -158,7 +158,7 @@ class MoneyField(SetZeroIntegerField):
         if value:
             pence = value % 100
             pounds = value / 100
-            self.data = '{0}.{1:02}'.format(pounds, pence)
+            self.data = '{0:,}.{1:02}'.format(pounds, pence)
 
 
 class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
