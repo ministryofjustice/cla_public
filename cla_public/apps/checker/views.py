@@ -40,12 +40,11 @@ class UpdatesMeansTest(object):
     def on_valid_submit(self):
         try:
             post_to_eligibility_check_api(self.form)
-        except (ConnectionError, Timeout, SlumberBaseException):
+        except (ConnectionError, Timeout, SlumberBaseException) as e:
             self.form.errors['timeout'] = _(
                 u'Server did not respond, please try again')
             log.exception(
-                msg=u'Slumber Exception on %s page' % self.name,
-                extra={'stack': True})
+                msg=u'Slumber Exception on %s page: %s' % (self.name, e))
             return self.get(step=self.name)
         else:
             return super(UpdatesMeansTest, self).on_valid_submit()

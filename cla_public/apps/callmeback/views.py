@@ -38,12 +38,11 @@ class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         try:
             post_to_eligibility_check_api(session.notes_object())
             post_to_case_api(self.form)
-        except (ConnectionError, Timeout, SlumberBaseException):
+        except (ConnectionError, Timeout, SlumberBaseException) as e:
             self.form.errors['timeout'] = _(
                 u'Server did not respond, please try again')
             log.exception(
-                msg=u'Slumber Exception on CallMeBack page',
-                extra={'stack': True})
+                msg=u'Slumber Exception on CallMeBack page: %s' % e)
         else:
             return redirect(url_for('.confirmation'))
 

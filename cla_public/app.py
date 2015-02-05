@@ -30,7 +30,12 @@ def create_app(config_file=None):
         app.config.from_envvar('CLA_PUBLIC_CONFIG')
 
     if app.config.get('SENTRY_DSN'):
-        Sentry().init_app(app)
+        app.sentry = Sentry(
+            app,
+            dsn=app.config.get('SENTRY_DSN'),
+            logging=True,
+            level=logging.ERROR
+        )
 
     app.babel = Babel(app)
     app.babel.localeselector(get_locale)
