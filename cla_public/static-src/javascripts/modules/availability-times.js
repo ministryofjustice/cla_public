@@ -54,6 +54,9 @@
     bindEvents: function () {
       function check(el) {
         return function () {
+          if(window.ga) {
+            window.ga('send', 'event', 'availability-times', 'select', this.name);
+          }
           el
             .prop('checked', true)
             .trigger('label-select');
@@ -98,8 +101,6 @@
       $.each(this.$timeSelect.children(), function () {
         setEnabled(this, available(self.slot($(this).val())));
       });
-
-      this.$timeSelect.children(':not(:disabled)').first().attr('selected', true);
     }
   };
 }());
