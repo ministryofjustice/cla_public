@@ -16,7 +16,7 @@ from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
-    IncomeForm
+    IncomeForm, ReviewForm
 from cla_public.apps.checker import honeypot
 from cla_public.libs.utils import override_locale, log_to_sentry
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
@@ -77,6 +77,13 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
         return fields
 
 
+class ReviewStep(FormWizardStep):
+
+    def render(self, *args, **kwargs):
+        steps = list(CheckerWizard('').remaining_steps())[:-1]
+        return render_template(self.template, steps=steps)
+
+
 class CheckerWizard(AllowSessionOverride, FormWizard):
 
     steps = [
@@ -88,7 +95,8 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         ('benefits-tax-credits', CheckerStep(
             TaxCreditsForm, 'benefits-tax-credits.html')),
         ('income', CheckerStep(IncomeForm, 'income.html')),
-        ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html'))
+        ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html')),
+        ('review', ReviewStep(ReviewForm, 'review.html'))
     ]
 
     def complete(self):
@@ -101,9 +109,12 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
                 '.help_organisations',
                 category_name=session.category_slug))
 
-        return redirect(url_for('.review'))
+        return redirect(url_for('.eligible'))
 
     def skip(self, step):
+
+        if step.name == 'review':
+            return False
 
         if session.needs_face_to_face:
             return True
@@ -131,16 +142,6 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
 
 
 checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
-
-
-class Review(RequiresSession, views.MethodView, object):
-
-    def get(self):
-        steps = CheckerWizard('wizard').remaining_steps()
-        return render_template('review.html', steps=steps)
-
-
-checker.add_url_rule('/review', view_func=Review.as_view('review'))
 
 
 class FaceToFace(RequiresSession, views.MethodView, object):

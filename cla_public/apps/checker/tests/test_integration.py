@@ -15,7 +15,7 @@ import xlrd
 from cla_public import app
 from cla_public.apps.checker.forms import ProblemForm, AboutYouForm, \
     YourBenefitsForm, PropertiesForm, SavingsForm, TaxCreditsForm, \
-    IncomeForm, OutgoingsForm
+    IncomeForm, OutgoingsForm, ReviewForm
 from cla_public.apps.checker.tests.utils.forms_utils import CATEGORY_MAPPING, \
     FormDataConverter
 
@@ -103,7 +103,8 @@ def get_form(url):
         '/savings': SavingsForm,
         '/benefits-tax-credits': TaxCreditsForm,
         '/income': IncomeForm,
-        '/outgoings': OutgoingsForm
+        '/outgoings': OutgoingsForm,
+        '/review': ReviewForm
     }.get(url)
 
 

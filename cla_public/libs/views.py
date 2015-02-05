@@ -32,17 +32,13 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
     form_class = None
     template = None
 
-    def __init__(self):
-        self._form = None
-        super(SessionBackedFormView, self).__init__()
-
     @property
     def form(self):
         """
         Instance of the form for this view. Prepopulated with any POST and
         session data.
         """
-        if self._form is None:
+        if getattr(self, '_form', None) is None:
             self._form = self.form_class(
                 request.form,
                 **session.get(self.form_class.__name__, {}))
@@ -140,6 +136,12 @@ class FormWizard(SessionBackedFormView):
         self.form_class = self.step.form_class
         self.template = self.step.template
         return super(FormWizard, self).dispatch_request(*args, **kwargs)
+
+    def get(self, *args, **kwargs):
+        try:
+            return self.step.render(*args, **kwargs)
+        except AttributeError:
+            return super(FormWizard, self).get(*args, **kwargs)
 
     def remaining_steps(self, skip_current=False):
         """
