@@ -4,7 +4,8 @@
 import logging
 
 from flask import abort, render_template, redirect, session, url_for, views
-from flask.ext.babel import lazy_gettext as _, lazy_pgettext
+from flask.ext.babel import lazy_gettext as _
+from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
 
 from cla_public.apps.checker import checker
@@ -39,11 +40,15 @@ class UpdatesMeansTest(object):
     def on_valid_submit(self):
         try:
             post_to_eligibility_check_api(self.form)
-        except (ConnectionError, Timeout):
+        except (ConnectionError, Timeout, SlumberBaseException):
             self.form.errors['timeout'] = _(
                 u'Server did not respond, please try again')
+            log.exception(
+                msg=u'Slumber Exception on %s page' % self.name,
+                extra={'stack': True})
             return self.get(step=self.name)
-        return super(UpdatesMeansTest, self).on_valid_submit()
+        else:
+            return super(UpdatesMeansTest, self).on_valid_submit()
 
 
 class CheckerStep(UpdatesMeansTest, FormWizardStep):
