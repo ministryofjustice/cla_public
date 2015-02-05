@@ -18,6 +18,9 @@
 
       this.printButton.on('click', function() {
         window.print();
+        if(window.ga) {
+          window.ga('send', 'event', 'confirmation', 'printed');
+        }
       });
     },
 
