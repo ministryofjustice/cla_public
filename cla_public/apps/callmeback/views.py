@@ -43,6 +43,7 @@ class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 u'Server did not respond, please try again')
             log.exception(
                 msg=u'Slumber Exception on CallMeBack page: %s' % e)
+            return self.get()
         else:
             return redirect(url_for('.confirmation'))
 
