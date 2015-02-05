@@ -4,6 +4,9 @@
 import logging
 
 from flask import redirect, render_template, session, url_for, views
+from flask.ext.babel import lazy_gettext as _
+from slumber.exceptions import SlumberBaseException
+from requests.exceptions import ConnectionError, Timeout
 
 from cla_public.apps.callmeback import callmeback
 from cla_public.apps.callmeback.forms import CallMeBackForm
@@ -32,11 +35,19 @@ class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         if self.form.extra_notes.data:
             session.add_note(
                 u'User problem:\n{0}'.format(self.form.extra_notes.data))
+        try:
+            post_to_eligibility_check_api(session.notes_object())
+            post_to_case_api(self.form)
+        except (ConnectionError, Timeout, SlumberBaseException):
+            self.form.errors['timeout'] = _(
+                u'Server did not respond, please try again')
+            log.exception(
+                msg=u'Slumber Exception on CallMeBack page',
+                extra={'stack': True})
+        else:
+            return redirect(url_for('.confirmation'))
 
-        post_to_eligibility_check_api(session.notes_object())
-        post_to_case_api(self.form)
 
-        return redirect(url_for('.confirmation'))
 
 
 callmeback.add_url_rule(
