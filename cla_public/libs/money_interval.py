@@ -16,12 +16,13 @@ class MoneyInterval(dict):
                 init_val.update(
                     per_interval_value=args[0].get('per_interval_value'),
                     interval_period=args[0].get('interval_period', 'per_month'))
-            elif isinstance(args[0], int):
-                init_val['per_interval_value'] = args[0]
-            elif isinstance(args[0], float):
-                init_val['per_interval_value'] = int(args[0])
             else:
-                raise ValueError(args[0])
+                try:
+                    init_val['per_interval_value'] = int(args[0])
+                except ValueError:
+                    raise ValueError(
+                        'Invalid value for amount {0} ({1})'.format(
+                            args[0], type(args[0])))
 
             if len(args) > 1:
                 if args[1] in MIBase._intervals_dict:
