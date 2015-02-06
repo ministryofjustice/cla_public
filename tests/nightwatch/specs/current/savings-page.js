@@ -1,10 +1,10 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var VALUABLES_MINIMUM = require('../modules/constants').VALUABLES_MINIMUM;
-var SAVINGS_THRESHOLD = require('../modules/constants').SAVINGS_THRESHOLD;
-var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
+var common = require('../../modules/common-functions');
+var VALUABLES_MINIMUM = require('../../modules/constants').VALUABLES_MINIMUM;
+var SAVINGS_THRESHOLD = require('../../modules/constants').SAVINGS_THRESHOLD;
+var SAVINGS_QUESTIONS = require('../../modules/constants').SAVINGS_QUESTIONS;
 SAVINGS_QUESTIONS.ALL = SAVINGS_QUESTIONS.MONEY.concat(SAVINGS_QUESTIONS.VALUABLES);
 
 module.exports = {

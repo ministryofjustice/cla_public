@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var ABOUT_YOU_QUESTIONS = require('../modules/constants').ABOUT_YOU_QUESTIONS;
+var common = require('../../modules/common-functions');
+var ABOUT_YOU_QUESTIONS = require('../../modules/constants').ABOUT_YOU_QUESTIONS;
 
 var OUTCOMES = [
   {

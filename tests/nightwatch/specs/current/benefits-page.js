@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var BENEFITS = require('../modules/constants').BENEFITS;
+var common = require('../../modules/common-functions');
+var BENEFITS = require('../../modules/constants').BENEFITS;
 
 module.exports = {
   'Start page': common.startPage,

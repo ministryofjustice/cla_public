@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
+var common = require('../../modules/common-functions');
 
 module.exports = {
   'Start page': common.startPage,
