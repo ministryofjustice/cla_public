@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-29 14:46+0000\n"
+"POT-Creation-Date: 2015-02-06 14:51+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -81,23 +81,23 @@ msgstr ""
 msgid "Call me in the next week on"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:37
+#: cla_public/apps/callmeback/fields.py:39
 msgid "Not a valid choice"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:58
+#: cla_public/apps/callmeback/fields.py:60
 msgid "Not a valid date"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:81
+#: cla_public/apps/callmeback/fields.py:85
 msgid "Not a valid time"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:102
+#: cla_public/apps/callmeback/fields.py:106
 msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
-#: cla_public/apps/callmeback/fields.py:111
+#: cla_public/apps/callmeback/fields.py:115
 msgid "Arrange a callback time"
 msgstr ""
 
@@ -201,6 +201,10 @@ msgid ""
 "We will try to call you back around the time you request, but this may "
 "not always be possible. We will always call you back by the next working "
 "day."
+msgstr ""
+
+#: cla_public/apps/callmeback/views.py:43 cla_public/apps/checker/views.py:44
+msgid "There was an error submitting your data. Please check and try again."
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:10
@@ -468,10 +472,6 @@ msgctxt "It isn’t"
 msgid "No"
 msgstr ""
 
-#: cla_public/apps/checker/views.py:45
-msgid "Server did not respond, please try again"
-msgstr ""
-
 #: cla_public/apps/checker/fields.py:81
 msgid "Yes"
 msgstr ""
@@ -542,7 +542,7 @@ msgstr ""
 #: cla_public/apps/checker/forms.py:113 cla_public/apps/checker/forms.py:119
 #: cla_public/apps/checker/forms.py:163 cla_public/apps/checker/forms.py:180
 #: cla_public/apps/checker/forms.py:194 cla_public/apps/checker/forms.py:292
-#: cla_public/apps/checker/forms.py:435
+#: cla_public/apps/checker/forms.py:436
 msgctxt "I am"
 msgid "Yes"
 msgstr ""
@@ -550,7 +550,7 @@ msgstr ""
 #: cla_public/apps/checker/forms.py:114 cla_public/apps/checker/forms.py:120
 #: cla_public/apps/checker/forms.py:164 cla_public/apps/checker/forms.py:181
 #: cla_public/apps/checker/forms.py:195 cla_public/apps/checker/forms.py:293
-#: cla_public/apps/checker/forms.py:436
+#: cla_public/apps/checker/forms.py:437
 msgctxt "I’m not"
 msgid "No"
 msgstr ""
@@ -758,169 +758,169 @@ msgstr ""
 msgid "Valuable items must be at least £500"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:413
+#: cla_public/apps/checker/forms.py:414
 msgid "Child Benefit"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:414 cla_public/apps/checker/forms.py:419
+#: cla_public/apps/checker/forms.py:415 cla_public/apps/checker/forms.py:420
 msgid "The total amount you get for all your children"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:418
+#: cla_public/apps/checker/forms.py:419
 msgid "Child Tax Credit"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:423
+#: cla_public/apps/checker/forms.py:424
 msgid "Do you get any of these benefits?"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:424
+#: cla_public/apps/checker/forms.py:425
 msgid "Do you or your partner get any of these benefits?"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:425
+#: cla_public/apps/checker/forms.py:426
 msgid "These benefits don’t count as income. Please tick the ones you receive."
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:429
+#: cla_public/apps/checker/forms.py:430
 msgid "Do you receive any other benefits not listed above? "
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:430
+#: cla_public/apps/checker/forms.py:431
 msgid "Do you or your partner receive any other benefits not listed above? "
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:432
+#: cla_public/apps/checker/forms.py:433
 msgid ""
 "For example, National Asylum Support Service Benefit, Incapacity Benefit,"
 " Contribution-based Jobseeker's Allowance"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:438
+#: cla_public/apps/checker/forms.py:439
 msgid "If Yes, total amount of benefits not listed above"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:465
+#: cla_public/apps/checker/forms.py:466
 msgid "Wages before tax"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:467
+#: cla_public/apps/checker/forms.py:468
 msgid "This includes all your wages and any earnings from self-employment"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:471
+#: cla_public/apps/checker/forms.py:472
 msgid "Income tax"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:473
+#: cla_public/apps/checker/forms.py:474
 msgid ""
 "Tax paid directly out of your wages and any tax you pay on self-employed "
 "earnings"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:477
+#: cla_public/apps/checker/forms.py:478
 msgid "National Insurance contributions"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:479
+#: cla_public/apps/checker/forms.py:480
 msgid ""
 "Check your payslip or your National Insurance statement if you’re self-"
 "employed"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:483
+#: cla_public/apps/checker/forms.py:484
 msgid "Working Tax Credit"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:484
+#: cla_public/apps/checker/forms.py:485
 msgid "Extra money for people who work and have a low income"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:488
+#: cla_public/apps/checker/forms.py:489
 msgid "Maintenance received"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:489
+#: cla_public/apps/checker/forms.py:490
 msgid "Payments you get from an ex-partner"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:492
+#: cla_public/apps/checker/forms.py:493
 msgid "Pension received"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:493
+#: cla_public/apps/checker/forms.py:494
 msgid "Payments you receive if you’re retired"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:496
+#: cla_public/apps/checker/forms.py:497
 msgid "Any other income"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:497
+#: cla_public/apps/checker/forms.py:498
 msgid "For example, student grants, income from trust funds, dividends"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:545
+#: cla_public/apps/checker/forms.py:546
 msgid "Your personal income"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:549
+#: cla_public/apps/checker/forms.py:550
 msgid "Your partner’s income"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:571
+#: cla_public/apps/checker/forms.py:572
 msgid "Rent"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:572
+#: cla_public/apps/checker/forms.py:573
 msgid ""
 "Money you pay your landlord for rent. Do not include rent that is paid by"
 " Housing Benefit"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:574
+#: cla_public/apps/checker/forms.py:575
 msgid ""
 "Money you and your partner pay your landlord for rent. Do not include "
 "rent that is paid by Housing Benefit"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:580
+#: cla_public/apps/checker/forms.py:581
 msgid "Maintenance"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:581
+#: cla_public/apps/checker/forms.py:582
 msgid "Money you pay to an ex-partner for their living costs"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:583
+#: cla_public/apps/checker/forms.py:584
 msgid "Money you and/or your partner pay to an ex-partner for their living costs"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:587
+#: cla_public/apps/checker/forms.py:588
 msgid "Monthly Income Contribution Order"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:588
+#: cla_public/apps/checker/forms.py:589
 msgid "Money you pay per month towards your criminal legal aid"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:590
+#: cla_public/apps/checker/forms.py:591
 msgid ""
 "Money you and/or your partner pay per month towards your criminal legal "
 "aid"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:593
+#: cla_public/apps/checker/forms.py:594
 msgid "Childcare"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:594
+#: cla_public/apps/checker/forms.py:595
 msgid ""
 "Money you pay for your child to be looked after while you work or study "
 "outside of your home"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:597
+#: cla_public/apps/checker/forms.py:598
 msgid ""
 "Money you and your partner pay for your child to be looked after while "
 "you work or study outside of your home"
@@ -956,7 +956,7 @@ msgstr ""
 msgid "BETA"
 msgstr ""
 
-#: cla_public/templates/_phase-tag.html:16
+#: cla_public/templates/_phase-tag.html:17
 #, python-format
 msgid ""
 "This is a new service – your <a href=\"%(url)s\">feedback</a>\n"
@@ -2988,3 +2988,16 @@ msgid ""
 "      adviser about whether an application might succeed in your case and"
 " how to apply."
 msgstr ""
+
+#~ msgid "Server did not respond, please try again"
+#~ msgstr ""
+
+#~ msgid ""
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "      This is a new service – your <a href=\"%(url)s\">feedback</a>\n"
+#~ "      will help us to improve it."
+#~ msgstr ""
+
