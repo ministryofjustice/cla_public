@@ -81,7 +81,7 @@ class ReviewStep(FormWizardStep):
 
     def render(self, *args, **kwargs):
         steps = list(CheckerWizard('').remaining_steps())[:-1]
-        return render_template(self.template, steps=steps)
+        return render_template(self.template, steps=steps, form=self.form)
 
 
 class CheckerWizard(AllowSessionOverride, FormWizard):

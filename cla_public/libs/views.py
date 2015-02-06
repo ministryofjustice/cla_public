@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "Flask pluggable view mixins"
 
+import copy
 from itertools import dropwhile, ifilter
 import logging
 
@@ -117,6 +118,7 @@ class FormWizard(SessionBackedFormView):
 
         def add_step(step):
             name, step = step
+            step = copy.copy(step)
             step.wizard = self
             step.name = name
             self._steps[name] = step
@@ -138,10 +140,9 @@ class FormWizard(SessionBackedFormView):
         return super(FormWizard, self).dispatch_request(*args, **kwargs)
 
     def get(self, *args, **kwargs):
-        try:
+        if hasattr(self.step, 'render'):
             return self.step.render(*args, **kwargs)
-        except AttributeError:
-            return super(FormWizard, self).get(*args, **kwargs)
+        return super(FormWizard, self).get(*args, **kwargs)
 
     def remaining_steps(self, skip_current=False):
         """

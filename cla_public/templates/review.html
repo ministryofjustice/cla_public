@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% import "macros/form.html" as Form %}
+
 {% macro render_value(field_name, field) %}
   {% if field._money_field %}
     <th>{{ field_name }}</th>
@@ -66,4 +68,10 @@
     {% endfor %}
   </table>
   {% endfor %}
+
+  <form method="POST">
+    {{ form.csrf_token }}
+    {{ Form.honeypot(form) }}
+    {{ Form.actions(_('Submit')) }}
+  </form>
 {% endblock %}
