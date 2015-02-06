@@ -12,6 +12,7 @@
     "default" : {
       "launch_url" : "http://localhost:5000",
       "silent": true,
+      "exclude": ["thresholds.js"],
       "desiredCapabilities": {
         "browserName": "phantomjs",
         "javascriptEnabled" : true,
