@@ -3,7 +3,8 @@
 
 import logging
 
-from flask import redirect, render_template, session, url_for, views
+from flask import redirect, render_template, session, url_for, views, \
+    current_app
 from flask.ext.babel import lazy_gettext as _
 from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
@@ -41,8 +42,8 @@ class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         except (ConnectionError, Timeout, SlumberBaseException) as e:
             self.form.errors['timeout'] = _(
                 u'Server did not respond, please try again')
-            log.exception(
-                msg=u'Slumber Exception on CallMeBack page: %s' % e)
+            current_app.sentry.captureMessage(
+                u'Slumber Exception on CallMeBack page: %s' % e)
             return self.get()
         else:
             return redirect(url_for('.confirmation'))

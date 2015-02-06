@@ -3,7 +3,8 @@
 
 import logging
 
-from flask import abort, render_template, redirect, session, url_for, views
+from flask import abort, render_template, redirect, session, url_for, views, \
+    current_app
 from flask.ext.babel import lazy_gettext as _
 from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
@@ -43,8 +44,8 @@ class UpdatesMeansTest(object):
         except (ConnectionError, Timeout, SlumberBaseException) as e:
             self.form.errors['timeout'] = _(
                 u'Server did not respond, please try again')
-            log.exception(
-                msg=u'Slumber Exception on %s page: %s' % (self.name, e))
+            current_app.sentry.captureMessage(
+                u'Slumber Exception on %s page: %s' % (self.name, e))
             return self.get(step=self.name)
         else:
             return super(UpdatesMeansTest, self).on_valid_submit()
