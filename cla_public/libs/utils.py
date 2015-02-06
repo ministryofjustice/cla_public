@@ -43,3 +43,8 @@ def recursive_dict_update(orig, new):
         else:
             orig[key] = new[key]
     return orig
+
+
+def log_to_sentry(message):
+    if hasattr(current_app, 'sentry'):
+        current_app.sentry.captureMessage(message)

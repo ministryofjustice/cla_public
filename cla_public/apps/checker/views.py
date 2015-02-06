@@ -3,8 +3,7 @@
 
 import logging
 
-from flask import abort, render_template, redirect, session, url_for, views, \
-    current_app
+from flask import abort, render_template, redirect, session, url_for, views
 from flask.ext.babel import lazy_gettext as _
 from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
@@ -18,7 +17,7 @@ from cla_public.apps.checker.constants import CATEGORIES, \
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm
-from cla_public.libs.utils import override_locale
+from cla_public.libs.utils import override_locale, log_to_sentry
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
 
@@ -43,8 +42,9 @@ class UpdatesMeansTest(object):
             post_to_eligibility_check_api(self.form)
         except (ConnectionError, Timeout, SlumberBaseException) as e:
             self.form.errors['timeout'] = _(
-                u'Server did not respond, please try again')
-            current_app.sentry.captureMessage(
+                u'There was an error submitting your data. '
+                u'Please check and try again.')
+            log_to_sentry(
                 u'Slumber Exception on %s page: %s' % (self.name, e))
             return self.get(step=self.name)
         else:
