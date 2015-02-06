@@ -65,7 +65,7 @@ def make_messages():
         add_msgctxt(**trans)
 
     for language_code, _ in app.config.get('LANGUAGES'):
-        run('{venv}/bin/pybabel update -i cla_public/translations/messages.pot -d cla_public/translations -l {language_code}'
+        run('{venv}/bin/pybabel update -i cla_public/translations/messages.pot -d cla_public/translations -l {language_code} --no-wrap'
             .format(venv=VENV, language_code=language_code))
 
 
