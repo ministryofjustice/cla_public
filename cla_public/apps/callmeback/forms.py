@@ -47,7 +47,10 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
     full_name = StringField(
         _(u'Full name'),
         description=_(u'For example: John Smith'),
-        validators=[InputRequired()])
+        validators=[
+            Length(max=400, message=_(u'Your full name must be 400 '
+                                      u'characters or less')),
+            InputRequired()])
     contact_number = StringField(
         _(u'Contact phone number'),
         validators=[
@@ -60,15 +63,28 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[
             InputRequired(message=_(u'Please choose Yes or No'))],
     )
-    post_code = StringField(_(u'Postcode'))
-    address = TextAreaField(_(u'Address'))
+    post_code = StringField(
+        _(u'Postcode'),
+        validators=[
+            Length(max=12, message=_(u'Your postcode must be 12 characters '
+                                     u'or less')),
+            InputRequired()])
+    address = TextAreaField(
+        _(u'Address'),
+        validators=[
+            Length(max=255, message=_(u'Your address must be 255 characters '
+                                      u'or less')),
+            InputRequired()])
     extra_notes = TextAreaField(
         _(u'Help the operator to understand your situation'),
         description=(_(
             u"If you’d like to tell us more about your problem, please do so "
             u"in the box below. The Civil Legal Advice operator will read "
             u"this before they call you.")),
-        validators=[NotRequired()])
+        validators=[
+            Length(max=5000, message=_(u'Your notes must be 5000 characters '
+                                       u'or less')),
+            NotRequired()])
     adaptations = FormField(
         AdaptationsForm,
         _(u'Do you have any special communication needs?'))
