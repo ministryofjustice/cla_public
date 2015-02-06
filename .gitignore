@@ -29,8 +29,7 @@ nightwatch.xml
 
 *.log
 
-tests/reports/nightwatch/*.xml
-tests/reports/nightwatch/screenshots
+tests/reports/nightwatch/*
 
 # Translations
 *.mo
