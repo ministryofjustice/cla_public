@@ -97,10 +97,20 @@
 
     render: function () {
       var self = this;
+      var availableTimes = [];
 
       $.each(this.$timeSelect.children(), function () {
-        setEnabled(this, available(self.slot($(this).val())));
+        var isAvailable = available(self.slot($(this).val()));
+        setEnabled(this, isAvailable);
+        if (isAvailable) {
+          availableTimes.push($(this).val());
+        } else if ($(this).prop('selected')) {
+          self.$timeSelect.val(
+            availableTimes[Math.floor(Math.random()*availableTimes.length)]
+          );
+        }
       });
+
     }
   };
 }());
