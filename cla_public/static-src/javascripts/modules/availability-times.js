@@ -5,19 +5,6 @@
     return time.getDay() === 6;
   };
 
-  var isToday = function (time) {
-    var today = new Date();
-    return time.getFullYear() === today.getFullYear() &&
-      time.getMonth() === today.getMonth() &&
-      time.getDate() === today.getDate();
-  };
-
-  var tooLate = function (time) {
-    var cutOff = new Date();
-    cutOff.setHours(cutOff.getHours() + 1);
-    return time <= cutOff;
-  };
-
   var after1230 = function (time) {
     var twelveThirty = new Date(time);
     twelveThirty.setHours(12, 30, 0, 0);
@@ -27,10 +14,6 @@
   var available = function (time) {
 
     if (onSaturday(time) && after1230(time)) {
-      return false;
-    }
-
-    if (isToday(time) && tooLate(time)) {
       return false;
     }
 
@@ -97,10 +80,20 @@
 
     render: function () {
       var self = this;
+      var availableTimes = [];
 
       $.each(this.$timeSelect.children(), function () {
-        setEnabled(this, available(self.slot($(this).val())));
+        var isAvailable = available(self.slot($(this).val()));
+        setEnabled(this, isAvailable);
+        if (isAvailable) {
+          availableTimes.push($(this).val());
+        } else if ($(this).prop('selected')) {
+          self.$timeSelect.val(
+            availableTimes[Math.floor(Math.random()*availableTimes.length)]
+          );
+        }
       });
+
     }
   };
 }());
