@@ -46,10 +46,20 @@ to `serve` task.
 Test
 ----
 
-To run unit tests, use the following:
+To run Python unit tests, use the following:
 
     ./manage.py test
 
-To run browser test run in PhantomJS use the following respectively:
+To run the NIghtwatch automated tests in PhantomJS use:
 
-    ./nightwatch -c tests/nightwatch/local.json
+    make test
+
+To run just the legacy Nightwatch tests (at time of writing, this consists of the threshold tests) use:
+
+    make test-legacy
+
+And to run all the Nightwatch tests use:
+
+    make test-all
+
+See the `Makefile` for other self-explanatory commands.
