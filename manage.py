@@ -50,7 +50,7 @@ def make_messages():
     """compile po file."""
     run('{venv}/bin/pybabel extract -F babel.cfg -k pgettext -k lazy_pgettext -k '
         'gettext -k lazy_gettext -k ugettext -k ungettext -k pugettext -k '
-        'lazy_pugettext -o cla_public/translations/messages.pot'
+        'lazy_pugettext -o cla_public/translations/messages.pot --no-wrap'
         ' .'.format(venv=VENV))
 
     pgettexts = [
