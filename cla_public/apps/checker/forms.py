@@ -341,10 +341,7 @@ class PropertiesForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form
     def api_payload(self):
         properties = [prop.form.api_payload() for prop in self.properties]
         rents = [prop['rent'] for prop in properties]
-        if rents:
-            total_rent = sum(rents)
-        else:
-            total_rent = MoneyInterval(0)
+        total_rent = sum(rents, MoneyInterval(0))
 
         total_mortgage = sum(
             [p.mortgage_payments.data for p in self.properties
@@ -514,7 +511,7 @@ class IncomeFieldForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMix
         if session.owns_property:
             rents = [p['rent_amount'] for p in session.get(
                 'PropertiesForm_properties', [])]
-            total_rent = sum_rents(rents)
+            total_rent = sum(rents, MoneyInterval(0))
             other_income = other_income + total_rent
 
         return {
