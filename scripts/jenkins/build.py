@@ -147,10 +147,10 @@ def run_tests(venv_path, threshold_tests=False):
             port=port),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=port))
-    nightwatch_config = 'jenkins.json'
+    skipgroup = ' -s legacy'
     if threshold_tests:
-        nightwatch_config = 'jenkins-threshold.json'
-    run('./nightwatch -c tests/nightwatch/{0} -M'.format(nightwatch_config))
+        skipgroup = ''
+    run('./nightwatch -c tests/nightwatch/jenkins.json{0} -M'.format(skipgroup))
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
