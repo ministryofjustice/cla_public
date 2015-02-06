@@ -11,7 +11,7 @@ from wtforms import FormField, IntegerField, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.validators import Optional, InputRequired
 
-from cla_common.money_interval.models import MoneyInterval
+from cla_public.libs.money_interval import MoneyInterval
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 from cla_public.apps.checker.validators import ValidMoneyInterval
@@ -177,28 +177,7 @@ class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
         data = super(MoneyIntervalForm, self).data
         if data['per_interval_value'] is 0 and not data['interval_period']:
             data['interval_period'] = MONEY_INTERVALS[1][0]
-        return data
-
-
-def money_interval_to_monthly(data):
-    amount = data['per_interval_value']
-    interval = data['interval_period']
-
-    if amount is None or interval == '':
-        return {
-            'per_interval_value': 0,
-            'interval_period': 'per_month'
-        }
-
-    if interval == 'per_month':
-        return data
-
-    multiplier = MoneyInterval._intervals_dict[interval]['multiply_factor']
-
-    return {
-        'per_interval_value': amount * multiplier,
-        'interval_period': 'per_month'
-    }
+        return MoneyInterval(data)
 
 
 class PassKwargsToFormField(SetZeroFormField):
@@ -236,7 +215,7 @@ class MoneyIntervalField(PassKwargsToFormField):
             *args, **kwargs)
 
     def as_monthly(self):
-        return money_interval_to_monthly(self.data)
+        return self.data.per_month()
 
     def validate(self, form, extra_validators=None):
         form_valid = self.form.validate()

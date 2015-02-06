@@ -7,6 +7,7 @@ import slumber
 from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.constants import CATEGORIES
 from cla_public.libs.api_proxy import on_timeout
+from cla_public.libs.money_interval import MoneyInterval
 
 
 def get_api_connection():
@@ -14,13 +15,6 @@ def get_api_connection():
         current_app.config['BACKEND_API']['url'],
         timeout=current_app.config['API_CLIENT_TIMEOUT']
     )
-
-
-def money_interval(amount, interval='per_month'):
-    return {
-        'per_interval_value': amount,
-        'interval_period': interval
-    }
 
 
 def initialise_eligibility_check(check):
@@ -36,14 +30,14 @@ def initialise_eligibility_check(check):
         else:
             dict_[key] = dict_.get(key, value)
 
-    set_(check, 'you.income.earnings', money_interval(0))
-    set_(check, 'you.income.benefits', money_interval(0))
-    set_(check, 'you.income.tax_credits', money_interval(0))
-    set_(check, 'you.income.child_benefits', money_interval(0))
-    set_(check, 'you.income.other_income', money_interval(0))
-    set_(check, 'you.income.self_employment_drawings', money_interval(0))
-    set_(check, 'you.income.maintenance_received', money_interval(0))
-    set_(check, 'you.income.pension', money_interval(0))
+    set_(check, 'you.income.earnings', MoneyInterval(0))
+    set_(check, 'you.income.benefits', MoneyInterval(0))
+    set_(check, 'you.income.tax_credits', MoneyInterval(0))
+    set_(check, 'you.income.child_benefits', MoneyInterval(0))
+    set_(check, 'you.income.other_income', MoneyInterval(0))
+    set_(check, 'you.income.self_employment_drawings', MoneyInterval(0))
+    set_(check, 'you.income.maintenance_received', MoneyInterval(0))
+    set_(check, 'you.income.pension', MoneyInterval(0))
     set_(check, 'you.income.total', 0)
     set_(check, 'you.income.self_employed', False)
     set_(check, 'you.savings.credit_balance', 0)
@@ -51,21 +45,21 @@ def initialise_eligibility_check(check):
     set_(check, 'you.savings.total', 0)
     set_(check, 'you.savings.asset_balance', 0)
     set_(check, 'you.savings.bank_balance', 0)
-    set_(check, 'you.deductions.income_tax', money_interval(0))
-    set_(check, 'you.deductions.mortgage', money_interval(0))
-    set_(check, 'you.deductions.childcare', money_interval(0))
-    set_(check, 'you.deductions.rent', money_interval(0))
-    set_(check, 'you.deductions.maintenance', money_interval(0))
-    set_(check, 'you.deductions.national_insurance', money_interval(0))
+    set_(check, 'you.deductions.income_tax', MoneyInterval(0))
+    set_(check, 'you.deductions.mortgage', MoneyInterval(0))
+    set_(check, 'you.deductions.childcare', MoneyInterval(0))
+    set_(check, 'you.deductions.rent', MoneyInterval(0))
+    set_(check, 'you.deductions.maintenance', MoneyInterval(0))
+    set_(check, 'you.deductions.national_insurance', MoneyInterval(0))
     set_(check, 'you.deductions.criminal_legalaid_contributions', 0)
-    set_(check, 'partner.income.earnings', money_interval(0))
-    set_(check, 'partner.income.benefits', money_interval(0))
-    set_(check, 'partner.income.tax_credits', money_interval(0))
-    set_(check, 'partner.income.child_benefits', money_interval(0))
-    set_(check, 'partner.income.other_income', money_interval(0))
-    set_(check, 'partner.income.self_employment_drawings', money_interval(0))
-    set_(check, 'partner.income.maintenance_received', money_interval(0))
-    set_(check, 'partner.income.pension', money_interval(0))
+    set_(check, 'partner.income.earnings', MoneyInterval(0))
+    set_(check, 'partner.income.benefits', MoneyInterval(0))
+    set_(check, 'partner.income.tax_credits', MoneyInterval(0))
+    set_(check, 'partner.income.child_benefits', MoneyInterval(0))
+    set_(check, 'partner.income.other_income', MoneyInterval(0))
+    set_(check, 'partner.income.self_employment_drawings', MoneyInterval(0))
+    set_(check, 'partner.income.maintenance_received', MoneyInterval(0))
+    set_(check, 'partner.income.pension', MoneyInterval(0))
     set_(check, 'partner.income.total', 0)
     set_(check, 'partner.income.self_employed', False)
     set_(check, 'partner.savings.credit_balance', 0)
@@ -73,12 +67,12 @@ def initialise_eligibility_check(check):
     set_(check, 'partner.savings.total', 0)
     set_(check, 'partner.savings.asset_balance', 0)
     set_(check, 'partner.savings.bank_balance', 0)
-    set_(check, 'partner.deductions.income_tax', money_interval(0))
-    set_(check, 'partner.deductions.mortgage', money_interval(0))
-    set_(check, 'partner.deductions.childcare', money_interval(0))
-    set_(check, 'partner.deductions.rent', money_interval(0))
-    set_(check, 'partner.deductions.maintenance', money_interval(0))
-    set_(check, 'partner.deductions.national_insurance', money_interval(0))
+    set_(check, 'partner.deductions.income_tax', MoneyInterval(0))
+    set_(check, 'partner.deductions.mortgage', MoneyInterval(0))
+    set_(check, 'partner.deductions.childcare', MoneyInterval(0))
+    set_(check, 'partner.deductions.rent', MoneyInterval(0))
+    set_(check, 'partner.deductions.maintenance', MoneyInterval(0))
+    set_(check, 'partner.deductions.national_insurance', MoneyInterval(0))
     set_(check, 'partner.deductions.criminal_legalaid_contributions', 0)
     set_(check, 'dependants_young', 0)
     set_(check, 'dependants_old', 0)

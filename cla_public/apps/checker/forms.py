@@ -10,24 +10,24 @@ from werkzeug.datastructures import MultiDict
 from wtforms import Form as NoCsrfForm
 from wtforms.validators import InputRequired, NumberRange, DataRequired
 
-from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
     NON_INCOME_BENEFITS, YES, NO, PASSPORTED_BENEFITS
 from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField,
     YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
-    PropertyList, money_interval_to_monthly,
+    PropertyList,
     PassKwargsToFormField, SetZeroIntegerField, set_zero_values,
     SetZeroFormField)
-from cla_public.libs.form_config_parser import ConfigFormMixin
-from cla_public.libs.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
     FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone
-from cla_public.libs.utils import recursive_dict_update
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
+from cla_public.libs.honeypot import Honeypot
+from cla_public.libs.form_config_parser import ConfigFormMixin
+from cla_public.libs.money_interval import MoneyInterval
+from cla_public.libs.utils import recursive_dict_update
 
 
 log = logging.getLogger(__name__)
@@ -311,21 +311,9 @@ class PropertyForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMixin)
             'mortgage_left': self.mortgage_remaining.data,
             'share': share,
             'disputed': self.in_dispute.data,
-            'rent': self.rent_amount.data if self.is_rented.data == YES else money_interval(0),
+            'rent': self.rent_amount.data if self.is_rented.data == YES else MoneyInterval(0),
             'main': self.is_main_home.data
         }
-
-
-def sum_money_intervals(first, second):
-    first = money_interval_to_monthly(first)
-    second = money_interval_to_monthly(second)
-    return money_interval(
-        first['per_interval_value'] + second['per_interval_value'],
-        first['interval_period'])
-
-
-def sum_rents(rents):
-    return reduce(sum_money_intervals, rents, money_interval(0))
 
 
 class PropertiesForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, FormSessionDataMixin):
@@ -353,7 +341,10 @@ class PropertiesForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form
     def api_payload(self):
         properties = [prop.form.api_payload() for prop in self.properties]
         rents = [prop['rent'] for prop in properties]
-        total_rent = sum_rents(rents)
+        if rents:
+            total_rent = sum(rents)
+        else:
+            total_rent = MoneyInterval(0)
 
         total_mortgage = sum(
             [p.mortgage_payments.data for p in self.properties
@@ -364,7 +355,7 @@ class PropertiesForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form
             'you': {
                 'income': {'other_income': total_rent},
                 'deductions': {
-                    'mortgage': money_interval(total_mortgage, 'per_month')}
+                    'mortgage': MoneyInterval(total_mortgage, 'per_month')}
             }
         }
 
@@ -451,7 +442,7 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form
                 'child_benefits': self.child_benefit.data,
                 'tax_credits': self.child_tax_credit.data,
                 'benefits': self.total_other_benefit.data if
-                self.other_benefits.data == YES else money_interval(0)
+                self.other_benefits.data == YES else MoneyInterval(0)
             }}
         }
 
@@ -503,9 +494,9 @@ class IncomeFieldForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMix
     def api_payload(self):
         tax_credits = self.working_tax_credit.data
         child_tax_credit = session.get(
-            'TaxCreditsForm_child_tax_credit', money_interval(0))
+            'TaxCreditsForm_child_tax_credit', MoneyInterval(0))
         if not self.is_partner:
-            tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
+            tax_credits = tax_credits + child_tax_credit
 
         is_self_employed = session.is_self_employed
         is_employed = session.is_employed
@@ -514,7 +505,7 @@ class IncomeFieldForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMix
             is_employed = session.partner_is_employed
 
         earnings = self.earnings.data
-        self_employed_drawings = money_interval(0)
+        self_employed_drawings = MoneyInterval(0)
         # Switch all earnings to self employed drawings if only self employed
         if is_self_employed and not is_employed:
             earnings, self_employed_drawings = self_employed_drawings, earnings
@@ -524,7 +515,7 @@ class IncomeFieldForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMix
             rents = [p['rent_amount'] for p in session.get(
                 'PropertiesForm_properties', [])]
             total_rent = sum_rents(rents)
-            other_income = sum_money_intervals(other_income, total_rent)
+            other_income = other_income + total_rent
 
         return {
             'income': {

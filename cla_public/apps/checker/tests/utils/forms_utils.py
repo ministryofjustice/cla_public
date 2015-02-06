@@ -1,8 +1,8 @@
 from decimal import InvalidOperation
 from flask import session
 
-from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import YES, NO
+from cla_public.libs.money_interval import MoneyInterval
 
 
 CATEGORY_MAPPING = {
@@ -140,7 +140,7 @@ class PropertiesFormMixin(object):
                 'in_dispute': self.propertyform_in_dispute(n),
             }
 
-            property.update(flatten_dict('rent_amount', money_interval(0)))
+            property.update(flatten_dict('rent_amount', MoneyInterval(0)))
 
             properties.append(property)
 
@@ -173,10 +173,10 @@ class TaxCreditsFormMixin(object):
     """TaxCreditsForm"""
 
     def taxcreditsform_child_benefit(self):
-        return money_interval(0, 'per_week')
+        return MoneyInterval(0, 'per_week')
 
     def taxcreditsform_child_tax_credit(self):
-        return money_interval(0, 'per_week')
+        return MoneyInterval(0, 'per_week')
 
     def taxcreditsform_benefits(self):
         return []
@@ -185,7 +185,7 @@ class TaxCreditsFormMixin(object):
         return NO
 
     def taxcreditsform_total_other_benefit(self):
-        return money_interval(0, 'per_week')
+        return MoneyInterval(0, 'per_week')
 
     def taxcreditsform_data(self):
         d = {
@@ -208,24 +208,24 @@ class IncomeFormMixin(object):
 
     def incomeform_your_income(self):
         return {
-            'earnings': money_interval(self._earnings_1 or 0),
-            'income_tax': money_interval(self._tax or 0),
-            'national_insurance': money_interval(self._ni or 0),
-            'working_tax_credit': money_interval(0),
-            'maintenance': money_interval(0),
-            'pension': money_interval(0),
-            'other_income': money_interval(self._other_income or 0),
+            'earnings': MoneyInterval(self._earnings_1 or 0),
+            'income_tax': MoneyInterval(self._tax or 0),
+            'national_insurance': MoneyInterval(self._ni or 0),
+            'working_tax_credit': MoneyInterval(0),
+            'maintenance': MoneyInterval(0),
+            'pension': MoneyInterval(0),
+            'other_income': MoneyInterval(self._other_income or 0),
         }
 
     def incomeform_partner_income(self):
         return {
-            'earnings': money_interval(self._partner_earnings or 0),
-            'income_tax': money_interval(self._ptax or 0),
-            'national_insurance': money_interval(self._pni or 0),
-            'working_tax_credit': money_interval(0),
-            'maintenance': money_interval(0),
-            'pension': money_interval(0),
-            'other_income': money_interval(self._partner_other_income or 0),
+            'earnings': MoneyInterval(self._partner_earnings or 0),
+            'income_tax': MoneyInterval(self._ptax or 0),
+            'national_insurance': MoneyInterval(self._pni or 0),
+            'working_tax_credit': MoneyInterval(0),
+            'maintenance': MoneyInterval(0),
+            'pension': MoneyInterval(0),
+            'other_income': MoneyInterval(self._partner_other_income or 0),
         }
 
     def incomeform_data(self):
@@ -246,11 +246,11 @@ class OutgoingsFormMixin(object):
     """OutgoingsForm"""
 
     def outgoingsform_rent(self):
-        return money_interval(
+        return MoneyInterval(
             self.get_total_if_partner(self._rent, self._prent))
 
     def outgoingsform_maintenance(self):
-        return money_interval(
+        return MoneyInterval(
             self.get_total_if_partner(self._maint, self._pmaint))
 
     def outgoingsform_income_contribution(self):
@@ -258,7 +258,7 @@ class OutgoingsFormMixin(object):
             self._contribution, self._pcontribution)
 
     def outgoingsform_childcare(self):
-        return money_interval(
+        return MoneyInterval(
             self.get_total_if_partner(self._childcare, self._pchildcare))
 
     def outgoingsform_data(self):
