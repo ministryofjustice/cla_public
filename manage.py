@@ -79,9 +79,12 @@ def push_messages(force=False):
 
 
 @manager.command
-def pull_messages():
+def pull_messages(force=False):
     """Pull messages to transifex"""
-    run('tx pull')
+    command = 'tx pull'
+    if force:
+        command += ' -f'
+    run(command)
 
 
 @manager.command
