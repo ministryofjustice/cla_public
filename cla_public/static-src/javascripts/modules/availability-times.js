@@ -15,7 +15,7 @@
   var tooLate = function (time) {
     var cutOff = new Date();
     cutOff.setHours(cutOff.getHours() + 1);
-    return time <= cutOff;
+    return time < cutOff;
   };
 
   var after1230 = function (time) {
