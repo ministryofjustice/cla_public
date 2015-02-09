@@ -5,8 +5,8 @@ from flask.ext.babel import refresh
 
 
 def get_locale():
-    if request and request.cookies.get('locale') == 'cy_GB':
-        return 'cy'
+    if request and request.cookies.get('locale'):
+        return request.cookies.get('locale')[:2]
     language_keys = [key for key, _ in current_app.config.get('LANGUAGES', {})]
     return request.accept_languages.best_match(
         language_keys
