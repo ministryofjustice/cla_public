@@ -68,13 +68,13 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[
             Length(max=12, message=_(u'Your postcode must be 12 characters '
                                      u'or less')),
-            InputRequired()])
+            Optional()])
     address = TextAreaField(
         _(u'Address'),
         validators=[
             Length(max=255, message=_(u'Your address must be 255 characters '
                                       u'or less')),
-            InputRequired()])
+            Optional()])
     extra_notes = TextAreaField(
         _(u'Help the operator to understand your situation'),
         description=(_(
@@ -84,7 +84,7 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[
             Length(max=5000, message=_(u'Your notes must be 5000 characters '
                                        u'or less')),
-            NotRequired()])
+            Optional()])
     adaptations = FormField(
         AdaptationsForm,
         _(u'Do you have any special communication needs?'))
