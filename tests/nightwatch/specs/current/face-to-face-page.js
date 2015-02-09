@@ -17,6 +17,13 @@ module.exports = {
     ;
   },
 
+  'Review page': function(client) {
+    client
+      .waitForElementVisible('form[name="review_submit"]', 2000)
+      .submitForm('form')
+    ;
+  },
+
   'Face-to-face page': function(client) {
     client
       .waitForElementVisible('a[href="http://find-legal-advice.justice.gov.uk/"]', 5000)

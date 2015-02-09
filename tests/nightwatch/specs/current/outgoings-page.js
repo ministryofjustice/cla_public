@@ -135,6 +135,8 @@ module.exports = {
     client
       .setValue('input[name="income_contribution"]', 0)
       .submitForm('form')
+      .waitForElementVisible('form[name="review_submit"]', 5000)
+      .submitForm('form')
       .waitForElementPresent('input[name="callback-contact_number"]', 5000)
       .assert.urlContains('/result/eligible')
     ;

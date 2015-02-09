@@ -26,6 +26,13 @@ module.exports = {
     ;
   },
 
+  'Review page': function(client) {
+    client
+      .waitForElementVisible('form[name="review_submit"]', 2000)
+      .submitForm('form')
+    ;
+  },
+
   'Eligible page (request callback)': function(client) {
     client
       .assert.urlContains('/result/eligible')

@@ -19,6 +19,8 @@ var eligibleJourney = function(client) {
     .assert.containsText('body', 'Are you on any of these benefits?')
     .click('input[value="income_support"]')
     .submitForm('form')
+    .waitForElementVisible('form[name="review_submit"]', 5000)
+    .submitForm('form')
     .waitForElementVisible('input[name="callback_requested"]', 5000)
     .assert.urlContains('/result/eligible')
     .assert.containsText('h1', 'You might qualify for legal aid')
