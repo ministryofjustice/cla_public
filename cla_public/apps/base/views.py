@@ -5,8 +5,8 @@ import logging
 import datetime
 from urlparse import urlparse, urljoin
 
-from flask import current_app, jsonify, redirect, render_template, session, \
-    url_for, request
+from flask import abort, current_app, jsonify, redirect, render_template, \
+    session, url_for, request
 from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_public.apps.base import base
@@ -56,6 +56,13 @@ def feedback_confirmation():
     return render_template('feedback-confirmation.html')
 
 
+@base.route('/session')
+def show_session():
+    if current_app.debug:
+        return jsonify(session)
+    abort(404)
+
+
 @base.route('/session-expired')
 def session_expired():
     return render_template('session-expired.html')
@@ -92,7 +99,7 @@ def get_started():
     if current_app.config.get('CALLMEBACK_ONLY'):
         session['callmeback_only'] = 'yes'
         return redirect(url_for('callmeback.request_callback'))
-    return redirect(url_for('checker.problem'))
+    return redirect(url_for('checker.wizard', step='problem'))
 
 
 def is_safe_url(url):

@@ -1,18 +1,20 @@
-# Welsh translations for PROJECT.
-# Copyright (C) 2014 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# Welsh translations for CLA.
+# Copyright (C) 2015 ORGANIZATION
+# This file is distributed under the same license as the CLA project.
 #
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-28 14:22+0000\n"
-"PO-Revision-Date: 2014-12-04 12:48+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: cy <LL@li.org>\n"
-"Plural-Forms: nplurals=5; plural=(n==1 ? 1 : n==2 ? 2 : n==3 ? 3 : n==6 ?"
-" 4 : 0)\n"
+"POT-Creation-Date: 2015-01-29 14:46+0000\n"
+"PO-Revision-Date: 2015-01-29 12:27+0000\n"
+"Last-Translator: Josh Rowe <josh.rowe@digital.justice.gov.uk>\n"
+"Language-Team: Welsh (http://www.transifex.com/projects/p/cla-"
+"public/language/cy/)\n"
+"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n "
+"!= 11) ? 2 : 3\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -84,11 +86,7 @@ msgstr "Ffoniwch fi heddiw am"
 msgid "Call me in the next week on"
 msgstr "Ffoniwch fi'r wythnos nesaf ar"
 
-#: cla_public/apps/callmeback/fields.py:37 wtforms/ext/appengine/fields.py:87
-#: wtforms/ext/appengine/fields.py:164 wtforms/ext/appengine/fields.py:166
-#: wtforms/ext/django/fields.py:96 wtforms/ext/sqlalchemy/fields.py:125
-#: wtforms/ext/sqlalchemy/fields.py:127 wtforms/ext/sqlalchemy/fields.py:177
-#: wtforms/ext/sqlalchemy/fields.py:182 wtforms/fields/core.py:456
+#: cla_public/apps/callmeback/fields.py:37
 msgid "Not a valid choice"
 msgstr "Nid yw hwn yn ddewis dilys"
 
@@ -178,7 +176,9 @@ msgstr "Dewisiwch Ydw neu Nac ydw"
 msgid "Postcode"
 msgstr "Cod post "
 
-#: cla_public/apps/callmeback/forms.py:64 cla_public/templates/privacy.html:436
+#: cla_public/apps/callmeback/forms.py:64
+#: cla_public/templates/help-organisations.html:95
+#: cla_public/templates/privacy.html:436
 msgid "Address"
 msgstr "Cyfeiriad "
 
@@ -506,7 +506,7 @@ msgctxt "It isn’t"
 msgid "No"
 msgstr "Nac ydy"
 
-#: cla_public/apps/checker/decorators.py:43
+#: cla_public/apps/checker/views.py:45
 msgid "Server did not respond, please try again"
 msgstr "Gweinydd heb ymateb, os gwelwch yn dda ceisiwch eto"
 
@@ -1605,11 +1605,11 @@ msgstr "Anfon adborth"
 msgid "Help organisations"
 msgstr "Sefydliadau cymorth"
 
-#: cla_public/templates/help-organisations.html:6
+#: cla_public/templates/help-organisations.html:8
 msgid "You’re unlikely to get legal aid"
 msgstr "Nid yw’n debygol y byddwch chi’n cael cymorth cyfreithiol"
 
-#: cla_public/templates/help-organisations.html:8
+#: cla_public/templates/help-organisations.html:10
 #, python-format
 msgid ""
 "From\n"
@@ -1620,11 +1620,11 @@ msgstr ""
 "gallu cael cymorth cyfreithiol %(fromcla)s gan nad ydych yn gymwys yn "
 "ariannol."
 
-#: cla_public/templates/help-organisations.html:11
+#: cla_public/templates/help-organisations.html:13
 msgid "for the advice they can provide"
 msgstr "i’r cyngor y gallant ei ddarparu"
 
-#: cla_public/templates/help-organisations.html:16
+#: cla_public/templates/help-organisations.html:18
 msgid ""
 "If you want to make an application to court about a family matter\n"
 "      you need to first of all see if family mediation will help. Use the"
@@ -1640,7 +1640,7 @@ msgstr ""
 "cyfeirlyfr Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr ac i wneud "
 "apwyntiad am Gyfarfod Asesu a Gwybodaeth am Gyfryngu (MIAM)."
 
-#: cla_public/templates/help-organisations.html:26
+#: cla_public/templates/help-organisations.html:28
 msgid ""
 "You may still qualify for legal aid to seek a court order for protection."
 " To find out if you\n"
@@ -1650,7 +1650,7 @@ msgstr ""
 " orchymyn llys ar gyfer diogelu. Er mwyn cael gwybod a allech chi fod yn "
 "gymwys, cysylltwch â chynghorydd cyfreithiol yn eich ardal."
 
-#: cla_public/templates/help-organisations.html:30
+#: cla_public/templates/help-organisations.html:32
 msgid ""
 "You can also seek advice from a legal adviser - you will have to\n"
 "      pay for this advice."
@@ -1658,7 +1658,7 @@ msgstr ""
 "Gallwch chi hefyd ofyn am gyngor gan gynghorydd cyfreithiol - bydd yn "
 "rhaid i chi dalu am y cyngor hwn"
 
-#: cla_public/templates/help-organisations.html:36
+#: cla_public/templates/help-organisations.html:38
 msgid ""
 "If you have a court hearing date it is important that you get advice\n"
 "      as soon as possible. You may be able to get last-minute help on the"
@@ -1669,13 +1669,13 @@ msgstr ""
 "cyngor cyn gynted â phosib. Efallai y cewch gymorth ar fyr rybudd ar "
 "ddiwrnod y gwrandawiad gan gynghorydd yn adeilad y llys."
 
-#: cla_public/templates/help-organisations.html:43
+#: cla_public/templates/help-organisations.html:45
 #: cla_public/templates/result/eligible-no-callback.html:21
 #: cla_public/templates/result/face-to-face.html:65
 msgid "Find a legal adviser"
 msgstr "Dod o hyd i gynghorydd cyfreithiol"
 
-#: cla_public/templates/help-organisations.html:47
+#: cla_public/templates/help-organisations.html:49
 msgid ""
 "You may still get free help and advice from the organisations listed\n"
 "    below. You don’t have to qualify for legal aid to get help and advice"
@@ -1687,16 +1687,25 @@ msgstr ""
 " gael cymorth cyfreithiol er mwyn cael help a chyngor gan y sefydliadau "
 "hyn"
 
-#: cla_public/templates/help-organisations.html:54
+#: cla_public/templates/help-organisations.html:56
 #, python-format
 msgid "Help organisations for problems about %(category_name)s"
 msgstr "Sefydliadau cymorth ar gyfer problemau ynghylch %(category_name)s"
 
-#: cla_public/templates/help-organisations.html:62
+#: cla_public/templates/help-organisations.html:73
 msgid "Helpline"
 msgstr "Llinell Gymorth"
 
-#: cla_public/templates/help-organisations.html:69
+#: cla_public/templates/help-organisations.html:83
+msgid "Opening hours"
+msgstr "Oriau agor"
+
+#: cla_public/templates/help-organisations.html:89
+#: cla_public/templates/privacy.html:233
+msgid "Email"
+msgstr "E-bost"
+
+#: cla_public/templates/help-organisations.html:106
 msgid ""
 "There has been a problem with listing help organisations. Please refresh "
 "this page or try again later."
@@ -2451,10 +2460,6 @@ msgstr ""
 "data’n ddiogel. Ar eich menter eich hun y byddwch chi’n trosglwyddo "
 "unrhyw ddata. Mae CLA wedi rhoi gweithdrefnau a chyfleusterau diogelwch "
 "ar waith i gadw’ch data’n ddiogel wedi i ni eu cael."
-
-#: cla_public/templates/privacy.html:233
-msgid "Email"
-msgstr "E-bost"
 
 #: cla_public/templates/privacy.html:235
 msgid ""
@@ -3552,7 +3557,6 @@ msgstr ""
 "gwiriad hwn."
 
 #: cla_public/templates/result/face-to-face.html:47
-#,
 msgid ""
 "You may be able to get legal aid in exceptional cases. You could seek "
 "advice from a legal\n"
@@ -3583,190 +3587,4 @@ msgstr ""
 "eithriadol. Gallech chi ofyn am gyngor gan gynghorydd cyfreithiol "
 "ynghylch a fydd cais am gymorth cyfreithiol yn debygol o lwyddo yn eich "
 "achos chi a sut i wneud cais."
-
-#: wtforms/validators.py:55
-#, python-format
-msgid "Invalid field name '%s'."
-msgstr "Enw maes annilys '%s'."
-
-#: wtforms/validators.py:63
-#, python-format
-msgid "Field must be equal to %(other_name)s."
-msgstr "Rhaid i'r maes fod yr un fath â/ag %(other_name)s."
-
-#: wtforms/validators.py:96
-#, python-format
-msgid "Field must be at least %(min)d character long."
-msgid_plural "Field must be at least %(min)d characters long."
-msgstr[0] "Rhaid i'r maes fod o leiaf %(min)d nod."
-msgstr[1] "Rhaid i'r maes fod o leiaf %(min)d o nodau."
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-
-#: wtforms/validators.py:99
-#, python-format
-msgid "Field cannot be longer than %(max)d character."
-msgid_plural "Field cannot be longer than %(max)d characters."
-msgstr[0] "Ni all y maes fod yn fwy na %(max)d nod."
-msgstr[1] "Ni all y maes fod yn fwy na %(max)d o nodau."
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-
-#: wtforms/validators.py:102
-#, python-format
-msgid "Field must be between %(min)d and %(max)d characters long."
-msgstr "Rhaid i'r maes fod rhwng %(min)d a %(max)d o nodau"
-
-#: wtforms/validators.py:138
-#, python-format
-msgid "Number must be at least %(min)s."
-msgstr "Rhaid i'r rhif fod o leiaf %(min)s."
-
-#: wtforms/validators.py:140
-#, python-format
-msgid "Number must be at most %(max)s."
-msgstr "Ni chaiff y rhif fod yn fwy na %(max)s. "
-
-#: wtforms/validators.py:142
-#, python-format
-msgid "Number must be between %(min)s and %(max)s."
-msgstr "Rhaid i'r rhif fod rhwng %(min)s a %(max)s. "
-
-#: wtforms/validators.py:198 wtforms/validators.py:233
-msgid "This field is required."
-msgstr "Rhaid cwblhau'r maes hwn."
-
-#: wtforms/validators.py:264
-msgid "Invalid input."
-msgstr "Mewnbwn annilys"
-
-#: wtforms/validators.py:286
-msgid "Invalid email address."
-msgstr "Cyfeiriad e-bost annilys"
-
-#: wtforms/validators.py:318
-msgid "Invalid IP address."
-msgstr "Cyfeiriad IP annilys"
-
-#: wtforms/validators.py:367
-msgid "Invalid Mac address."
-msgstr "Cyfeiriad Mac annilys"
-
-#: wtforms/validators.py:393
-msgid "Invalid URL."
-msgstr "URL annilys"
-
-#: wtforms/validators.py:412
-msgid "Invalid UUID."
-msgstr "UUID annilys"
-
-#: wtforms/validators.py:440
-#, python-format
-msgid "Invalid value, must be one of: %(values)s."
-msgstr "Gwerth annilys, rhaid i'r gwerth fod yn un o'r canlynol: %(values)s."
-
-#: wtforms/validators.py:472
-#, python-format
-msgid "Invalid value, can't be any of: %(values)s."
-msgstr "Gwerth annilys, ni all fod yn un o'r canlynol: %(values)s"
-
-#: wtforms/csrf/core.py:83 wtforms/ext/csrf/form.py:47
-msgid "Invalid CSRF Token"
-msgstr "Tocyn CSRF annilys"
-
-#: wtforms/csrf/session.py:61 wtforms/ext/csrf/session.py:58
-msgid "CSRF token missing"
-msgstr "Tocyn CSRF ar goll"
-
-#: wtforms/csrf/session.py:69 wtforms/ext/csrf/session.py:66
-msgid "CSRF failed"
-msgstr "CSRF wedi methu"
-
-#: wtforms/csrf/session.py:74 wtforms/ext/csrf/session.py:71
-msgid "CSRF token expired"
-msgstr "Tocyn CSRF wedi dod i ben"
-
-#: wtforms/ext/appengine/fields.py:185
-msgid "Not a valid list"
-msgstr "Rhestr annilys"
-
-#: wtforms/ext/appengine/fields.py:204
-msgid "Not a valid integer list"
-msgstr "Rhestr integer annilys"
-
-#: wtforms/ext/dateutil/fields.py:63
-msgid "Please input a date/time value"
-msgstr "Rhowch werth dyddiad/amser"
-
-#: wtforms/ext/dateutil/fields.py:75 wtforms/ext/dateutil/fields.py:83
-msgid "Invalid date/time input"
-msgstr "Dyddiad/amser annilys"
-
-#: wtforms/ext/sqlalchemy/validators.py:34
-msgid "Already exists."
-msgstr "Bodoli'n barod."
-
-#: wtforms/fields/core.py:449
-msgid "Invalid Choice: could not coerce"
-msgstr "Dewis annilys: ddim yn bosib gweithredu"
-
-#: wtforms/fields/core.py:482
-msgid "Invalid choice(s): one or more data inputs could not be coerced"
-msgstr ""
-"Dewis(iadau) annilys: ddim yn bosib gweithredu un neu ragor o fewnbynnau "
-"data"
-
-#: wtforms/fields/core.py:489
-#, python-format
-msgid "'%(value)s' is not a valid choice for this field"
-msgstr "Nid yw '%(value)s' yn ddewis dilys ar gyfer y maes hwn"
-
-#: wtforms/fields/core.py:572
-msgid "Not a valid integer value"
-msgstr "Gwerth integer annilys"
-
-#: wtforms/fields/core.py:638
-msgid "Not a valid decimal value"
-msgstr "Gwerth degolyn annilys"
-
-#: wtforms/fields/core.py:665
-msgid "Not a valid float value"
-msgstr "Gwerth float annilys"
-
-#: wtforms/fields/core.py:724
-msgid "Not a valid datetime value"
-msgstr "Gwerth dyddiad/amser annilys"
-
-#: wtforms/fields/core.py:741
-msgid "Not a valid date value"
-msgstr "Gwerth dyddiad annilys"
-
-#~ msgid "It is"
-#~ msgstr ""
-
-#~ msgid "It isn’t"
-#~ msgstr ""
-
-#~ msgid "There is/are"
-#~ msgstr ""
-
-#~ msgid "There is/are not"
-#~ msgstr ""
-
-#~ msgid "I am"
-#~ msgstr ""
-
-#~ msgid "I am not"
-#~ msgstr ""
-
-#~ msgid "Call me tomorrow at"
-#~ msgstr "Ffoniwch fi yfory am"
-
-#~ msgid "Enter 0 if you have no valuables"
-#~ msgstr "Rhowch 0 os nad oes gennych unrhyw beth gwerthfawr"
-
-#~ msgid "Number must be at least 1"
-#~ msgstr "Rhaid i'r rhif fod o leiaf 1"
 

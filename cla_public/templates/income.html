@@ -24,7 +24,7 @@
     whether or not you can get legal aid. Please answer these questions as
     fully and accurately as you can.{% endtrans %}
   </p>
-  <form method="POST" action="{{ url_for('.income') }}">
+  <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 

@@ -101,7 +101,7 @@ class AvailableSlot(object):
         if self.day == DAY_SPECIFIC:
             date = form.day.data
         time = datetime.datetime.combine(date, field.data)
-        if time not in OPERATOR_HOURS:
+        if not OPERATOR_HOURS.can_schedule_callback(time):
             raise ValidationError(
                 field.gettext(
                     u"Can't schedule a callback at the requested time"))
@@ -173,4 +173,7 @@ class AvailabilityCheckerField(FormField):
         """
         Get the datetime of the selected day and timeslot
         """
+        return self.scheduled_time()
+
+    def scheduled_time(self):
         return self.form.scheduled_time().replace(tzinfo=pytz.utc)

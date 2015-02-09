@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
 {% block inner_content %}
-  <h1>{{ _('We do not provide advice about issues related to') }} {{ category_name|lower }}</h1>
+  <h1>{{ _('We do not provide advice about issues related to') }} {{ session.category_name|lower }}</h1>
 
   <p class="subtitle">
-    {% if category == 'clinneg' %}
+    {% if session.category == 'clinneg' %}
       {% trans %}You will usually only get Legal Aid for advice about Clinical Negligence if
       your child has been severely injured during birth or in the first 8 weeks of life{% endtrans %}
-    {% elif category == 'pi' %}
+    {% elif session.category == 'pi' %}
       {{ _('Legal Aid is not usually available for advice about personal injury') }}
-    {%- elif category != 'employment' -%}
+    {%- elif session.category != 'employment' -%}
       {{ _('You may be able to get advice from a legal advisor in your area') }}
     {%- endif -%}
   </p>
 
-  {% if category == 'employment' %}
+  {% if session.category == 'employment' %}
     <p>
       {% trans %}If your employment problem relates to discrimination (for example, you have been treated
       unfairly because of your sex, age or other protected characteristic) we might be able to
@@ -37,12 +37,12 @@
     </p>
 
   {% else %}
-    {% if category == 'clinneg' %}
+    {% if session.category == 'clinneg' %}
       <p>
         {% trans %}To find out if you might qualify, contact a legal adviser in your area. They will check
         whether you qualify for legal aid. You should not have to pay for this check.{% endtrans %}
       </p>
-    {% elif category == 'pi' %}
+    {% elif session.category == 'pi' %}
       <p>
         {% trans %}You may be able to get legal aid in exceptional cases. You could seek advice from a legal
         adviser about whether an application might succeed in your case and how to apply.{% endtrans %}
@@ -65,7 +65,7 @@
     <a class="button button-large" href="http://find-legal-advice.justice.gov.uk/">{{ _('Find a legal adviser') }}</a>
   </p>
 
-  {% if category == 'employment' %}
+  {% if session.category == 'employment' %}
     <p>
       {% trans %}Legal aid may still be available in exceptional cases. You could seek advice from a legal
       adviser about whether an application might succeed in your case and how to apply.{% endtrans %}

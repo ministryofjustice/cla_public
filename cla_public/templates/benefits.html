@@ -13,7 +13,7 @@
 {% block inner_content %}
   <h1>{{ title }}</h1>
 
-  <form method="POST" action="{{ url_for('.benefits') }}">
+  <form method="POST">
     {{ form.csrf_token }}
 
     {% if form.errors %}

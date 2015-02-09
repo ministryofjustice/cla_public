@@ -154,8 +154,10 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data['have_savings'] = YES
         form_data['have_valuables'] = YES
-        session['AboutYouForm_have_savings'] = YES
-        session['AboutYouForm_have_valuables'] = YES
+        session['AboutYouForm'] = session.get('AboutYouForm', {})
+        session['AboutYouForm'].update(
+            have_savings=YES,
+            have_valuables=YES)
         payload = self.payload(AboutYouForm, form_data)
         self.assertEqual(payload['you']['savings']['bank_balance'], None)
         self.assertEqual(payload['you']['savings']['investment_balance'], None)
@@ -214,8 +216,10 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['property_set'][0]['main'], YES)
 
     def test_saving_form(self):
-        session['AboutYouForm_have_savings'] = YES
-        session['AboutYouForm_have_valuables'] = YES
+        session['AboutYouForm'] = session.get('AboutYouForm', {})
+        session['AboutYouForm'].update(
+            have_savings=YES,
+            have_valuables=YES)
         form_data = {
             'savings': '100',
             'investments': '100',
@@ -228,14 +232,14 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['savings']['investment_balance'], 10000)
         self.assertEqual(payload['you']['savings']['asset_balance'], 50000)
 
-        session['AboutYouForm_have_valuables'] = NO
+        session['AboutYouForm']['have_valuables'] = NO
         payload = self.payload(SavingsForm, form_data)
 
         self.assertEqual(payload['you']['savings']['asset_balance'], 0,
                          msg=u'Should be 0 if user selected no valuables')
 
-        session['AboutYouForm_have_savings'] = NO
-        session['AboutYouForm_have_valuables'] = YES
+        session['AboutYouForm']['have_savings'] = NO
+        session['AboutYouForm']['have_valuables'] = YES
         payload = self.payload(SavingsForm, form_data)
 
         self.assertEqual(payload['you']['savings']['bank_balance'], 0)
@@ -320,8 +324,10 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['deductions']['national_insurance']['per_interval_value'], 300)
 
     def test_income_and_tax_form(self):
-        session['AboutYouForm_have_partner'] = YES
-        session['AboutYouForm_in_dispute'] = NO
+        session['AboutYouForm'] = session.get('AboutYouForm', {})
+        session['AboutYouForm'].update(
+            have_partner=YES,
+            in_dispute=NO)
 
         payload = self.payload(IncomeForm, {})
 
@@ -381,9 +387,7 @@ class TestApiPayloads(unittest.TestCase):
             'extra_notes': 'Extra notes',
 
             'specific_day': 'today',
-            'time_today': '1945',
-            'day': '',
-            'time_in_day': '',
+            'time_today': '1930',
         }
 
         form_data.update(flatten_dict('adaptations', adaptations_data))
@@ -402,6 +406,5 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
             self.assertEqual(payload['adaptation_details']['notes'], 'other')
 
-            time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 45))
+            time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 30))
             self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
-

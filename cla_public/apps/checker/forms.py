@@ -41,7 +41,7 @@ class FormSessionDataMixin(object):
 
     @classmethod
     def get_session_data(cls):
-        return session.get_form_data(cls.__name__)
+        return session.get(cls.__name__, {})
 
     @classmethod
     def get_session_as_api_payload(cls):
@@ -393,6 +393,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, F
 
     def __init__(self, *args, **kwargs):
         super(SavingsForm, self).__init__(*args, **kwargs)
+
         if not session.has_valuables:
             del self.valuables
 

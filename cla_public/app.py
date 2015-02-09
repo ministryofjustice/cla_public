@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "CLA Public app"
 
+import logging
 import logging.config
 import os
 from flask import Flask, render_template
@@ -29,7 +30,12 @@ def create_app(config_file=None):
         app.config.from_envvar('CLA_PUBLIC_CONFIG')
 
     if app.config.get('SENTRY_DSN'):
-        Sentry().init_app(app)
+        app.sentry = Sentry(
+            app,
+            dsn=app.config.get('SENTRY_DSN'),
+            logging=True,
+            level=logging.ERROR
+        )
 
     app.babel = Babel(app)
     app.babel.localeselector(get_locale)
@@ -55,6 +61,8 @@ def create_app(config_file=None):
         app.register_blueprint(checker)
 
     logging.config.dictConfig(app.config['LOGGING'])
+    # quiet markdown module
+    logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
 
     app.wsgi_app = StatsdMiddleware(app.wsgi_app, app.config)
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var common = require('../modules/common-functions');
+var common = require('../../modules/common-functions');
 
 module.exports = {
   'Start page': common.startPage,
@@ -9,7 +9,7 @@ module.exports = {
 
   'About you': function(client) {
     client
-      .waitForElementVisible('form[action="/about"]', 2000)
+      .waitForElementVisible('input[name="have_partner"]', 2000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
       .end()
@@ -28,7 +28,7 @@ module.exports = {
 
   'Check debt category NOT selected': function(client) {
     client
-      .waitForElementVisible('form[action="/problem"]', 2000)
+      .waitForElementVisible('input[name="categories"]', 2000)
       .assert.urlContains('/problem')
     ;
     common.checkAttributeIsNotPresent(client, 'input[name="categories"][value="debt"]', 'checked');

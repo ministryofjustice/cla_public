@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
+var common = require('../../modules/common-functions');
 
 module.exports = {
   'Start page': common.startPage,
@@ -17,7 +17,7 @@ module.exports = {
 
   'Benefits': function(client) {
     client
-      .waitForElementVisible('form[action="/benefits"]', 2000)
+      .waitForElementVisible('input[name="benefits"]', 2000)
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
       .assert.containsText('body', 'Are you on any of these benefits?')
@@ -28,7 +28,7 @@ module.exports = {
 
   'Eligible page (request callback)': function(client) {
     client
-      .waitForElementVisible('form[action="/call-me-back"]', 2000)
+      .waitForElementVisible('input[name="contact_number"]', 2000)
       .assert.urlContains('/result/eligible')
       .assert.containsText('h1', 'You might qualify for legal aid')
       .assert.containsText('h2', 'Request a callback')

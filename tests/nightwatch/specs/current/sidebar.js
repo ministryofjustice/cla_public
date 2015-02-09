@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
+var common = require('../../modules/common-functions');
+var SAVINGS_QUESTIONS = require('../../modules/constants').SAVINGS_QUESTIONS;
 
 function testSidebar(client, headline) {
   client
@@ -35,7 +35,7 @@ module.exports = {
 
   'Savings page': function(client) {
     client
-      .waitForElementVisible('form[action="/savings"]', 2000)
+      .waitForElementVisible('input[name="savings"]', 2000)
       .assert.urlContains('/savings')
       .assert.containsText('h1', 'Your savings')
     ;
@@ -48,7 +48,7 @@ module.exports = {
 
   'Income page': function(client) {
     client
-      .waitForElementVisible('form[action="/income"]', 2000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
       .assert.urlContains('/income')
       .assert.containsText('h1', 'Your income')
     ;

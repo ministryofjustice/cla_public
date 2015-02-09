@@ -1,21 +1,15 @@
 import datetime
 
 from flask.json import JSONEncoder
-from cla_common.constants import ELIGIBILITY_STATES
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
+from requests.exceptions import ConnectionError, Timeout
 
-
+from cla_common.constants import ELIGIBILITY_STATES
+from cla_public.apps.checker.api import post_to_is_eligible_api
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
     PASSPORTED_BENEFITS, YES, CATEGORIES
 from cla_public.apps.checker.utils import passported
 from cla_public.libs.utils import override_locale
-
-
-def namespace(ns):
-    def prefix_key(item):
-        key, value = item
-        return ('{0}_{1}'.format(ns, key), value)
-    return prefix_key
 
 
 class CustomJSONEncoder(JSONEncoder):
@@ -28,54 +22,81 @@ class CustomJSONEncoder(JSONEncoder):
         return super(CustomJSONEncoder, self).default(obj)
 
 
-
 class CheckerSession(SecureCookieSession):
     "Provides some convenience properties for inter-page logic"
 
     expires_override = None
 
+    def __init__(self, *args, **kwargs):
+        super(CheckerSession, self).__init__(*args, **kwargs)
+        self._eligibility = None
+
+    def __setitem__(self, *args, **kwargs):
+        super(CheckerSession, self).__setitem__(*args, **kwargs)
+        self._eligibility = None
+
+    def field(self, form_name, field_name, default=None):
+        return self.get(form_name, {}).get(field_name, default)
+
     @property
     def needs_face_to_face(self):
-        return self.get('ProblemForm_categories') in F2F_CATEGORIES
+        return self.field('ProblemForm', 'categories') in F2F_CATEGORIES
+
+    @property
+    def ineligible(self):
+        return self.eligibility == ELIGIBILITY_STATES.NO
+
+    @property
+    def eligibility(self):
+        if self._eligibility is None:
+            try:
+                self._eligibility = post_to_is_eligible_api()
+            except (ConnectionError, Timeout):
+                self._eligibility = ELIGIBILITY_STATES.UNKNOWN
+        return self._eligibility
 
     @property
     def need_more_info(self):
         """Show we need more information page instead of eligible"""
-        if self.get('is_eligible', None) == ELIGIBILITY_STATES.UNKNOWN:
+        if self.eligibility == ELIGIBILITY_STATES.UNKNOWN:
             return True
-        properties = self.get('PropertiesForm_properties', [])
+        properties = self.field('PropertiesForm', 'properties')
         if properties:
             return any(
-                [p['in_dispute'] == YES or p['other_shareholders'] == YES for p in properties]
+                [p['in_dispute'] == YES or p['other_shareholders'] == YES
+                 for p in properties]
             )
         return False
 
     @property
     def category(self):
-        return self.get('ProblemForm_categories')
+        return self.field('ProblemForm', 'categories')
 
     @property
     def category_name(self):
-        try:
-            return (name for field, name, description in CATEGORIES if field == self.category).next()
-        except StopIteration:
-            pass
+        selected_name = lambda (slug, name, _): slug == self.category and name
+        selected = filter(None, map(selected_name, CATEGORIES))
+        return selected[0] if selected else None
 
     @property
     def category_slug(self):
         # force english translation for slug
-        if self.category_name:
+        cat_name = self.category_name
+        if cat_name:
             with override_locale('en'):
-                slug = self.category_name.lower().replace(' ', '-')
+                slug = cat_name.lower().replace(' ', '-')
             return slug
+
+    def is_yes(self, form, field):
+        return self.field(form, field, NO) == YES
 
     @property
     def has_savings(self):
-        return self.get('AboutYouForm_have_savings', NO) == YES
+        return self.is_yes('AboutYouForm', 'have_savings')
 
     @property
     def has_valuables(self):
-        return self.get('AboutYouForm_have_valuables', NO) == YES
+        return self.is_yes('AboutYouForm', 'have_valuables')
 
     @property
     def has_savings_or_valuables(self):
@@ -83,31 +104,31 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def owns_property(self):
-        return self.get('AboutYouForm_own_property', NO) == YES
+        return self.is_yes('AboutYouForm', 'own_property')
 
     @property
     def is_on_benefits(self):
-        return self.get('AboutYouForm_on_benefits', NO) == YES
+        return self.is_yes('AboutYouForm', 'on_benefits')
 
     @property
     def is_on_passported_benefits(self):
-        return passported(self.get('YourBenefitsForm_benefits', []))
+        return passported(self.field('YourBenefitsForm', 'benefits', []))
 
     @property
     def has_tax_credits(self):
-        has_children = self.get('AboutYouForm_have_children', NO) == YES
-        is_carer = self.get('AboutYouForm_have_dependants', NO) == YES
-        benefits = set(self.get('YourBenefitsForm_benefits', []))
+        has_children = self.is_yes('AboutYouForm', 'have_children')
+        is_carer = self.is_yes('AboutYouForm', 'have_dependants')
+        benefits = set(self.field('YourBenefitsForm', 'benefits', []))
         other_benefits = bool(benefits.difference(PASSPORTED_BENEFITS))
         return has_children or is_carer or other_benefits
 
     @property
     def has_children(self):
-        return self.get('AboutYouForm_have_children', NO) == YES
+        return self.is_yes('AboutYouForm', 'have_children')
 
     @property
     def has_dependants(self):
-        return self.get('AboutYouForm_have_dependants', NO) == YES
+        return self.is_yes('AboutYouForm', 'have_dependants')
 
     @property
     def children_or_tax_credits(self):
@@ -117,33 +138,35 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def has_partner(self):
-        partner = self.get('AboutYouForm_have_partner', NO) == YES
-        in_dispute = self.get('AboutYouForm_in_dispute', NO) == YES
+        partner = self.is_yes('AboutYouForm', 'have_partner')
+        in_dispute = self.is_yes('AboutYouForm', 'in_dispute')
         return partner and not in_dispute
 
     @property
     def is_employed(self):
-        return self.get('AboutYouForm_is_employed', NO) == YES
+        return self.is_yes('AboutYouForm', 'is_employed')
 
     @property
     def is_self_employed(self):
-        return self.get('AboutYouForm_is_self_employed', NO) == YES
+        return self.is_yes('AboutYouForm', 'is_self_employed')
 
     @property
     def partner_is_employed(self):
-        return self.has_partner and self.get('AboutYouForm_partner_is_employed', NO) == YES
+        return self.has_partner and \
+            self.is_yes('AboutYouForm', 'partner_is_employed')
 
     @property
     def partner_is_self_employed(self):
-        return self.has_partner and self.get('AboutYouForm_partner_is_self_employed', NO) == YES
+        return self.has_partner and \
+            self.is_yes('AboutYouForm', 'partner_is_self_employed')
 
     @property
     def aged_60_or_over(self):
-        return self.get('AboutYouForm_aged_60_or_over', NO) == YES
+        return self.is_yes('AboutYouForm', 'aged_60_or_over')
 
     @property
     def callback_time(self):
-        return self.get('CallMeBackForm_time')
+        return self.field('CallMeBackForm', 'time')
 
     def add_note(self, note):
         notes = self.get('notes', [])
@@ -158,25 +181,6 @@ class CheckerSession(SecureCookieSession):
                 return {'notes': '\n\n'.join(session.get('notes', []))}
 
         return Notes()
-
-    def update_form_data(self, form):
-        classname = form.__class__.__name__
-        form_data = map(namespace(classname), form.data.items())
-        self.update(form_data)
-
-    def clear_form_data(self, form):
-        classname = form.__class__.__name__
-        form_data = dict(map(namespace(classname), form.data.items()))
-        for key in form_data.keys():
-            if key in self:
-                del self[key]
-
-    def get_form_data(self, form_class_name):
-        ns = '{0}_'.format(form_class_name)
-        namespaced = lambda (key, val): key.startswith(ns)
-        strip_ns = lambda (key, val): (key.replace(ns, ''), val)
-        form_data = dict(map(strip_ns, filter(namespaced, self.items())))
-        return form_data
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):

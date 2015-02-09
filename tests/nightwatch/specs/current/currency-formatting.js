@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var PROPERTY_QUESTIONS = require('../modules/constants').PROPERTY_QUESTIONS;
+var common = require('../../modules/common-functions');
+var PROPERTY_QUESTIONS = require('../../modules/constants').PROPERTY_QUESTIONS;
 var CURRENCY_CHECKS = [
   ['1', '1.00'],
   ['00001', '1.00'],
@@ -37,7 +37,7 @@ module.exports = {
 
   'Property page': function(client) {
     client
-      .waitForElementVisible('form[action="/property"]', 2000)
+      .waitForElementVisible('input[name="properties-0-is_main_home"]', 2000)
       .assert.urlContains('/property')
       .assert.containsText('h1', 'Your property')
     ;

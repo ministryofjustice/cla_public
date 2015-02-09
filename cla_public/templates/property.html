@@ -20,7 +20,7 @@
     <p>{{ _('If you own more than one property, you can add more properties below.') }}</p>
   {% endif %}
 
-  <form method="POST" action="{{ url_for('.property') }}">
+  <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 

@@ -13,7 +13,6 @@
     "default" : {
       "launch_url" : "http://public-integration.cla.dsd.io",
       "silent": true,
-      "exclude": ["thresholds.js"],
       "screenshots" : {
         "enabled" : true,
         "path" : "tests/reports/nightwatch"

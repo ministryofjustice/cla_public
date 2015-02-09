@@ -141,16 +141,16 @@ def run_tests(venv_path, threshold_tests=False):
         venv=venv_path,
         conf=config))
     run(
-        '{conf} {venv}/bin/python manage.py runserver -p {port} -D -R'.format(
+        '{conf} {venv}/bin/python manage.py mockserver -p {port} -D -R'.format(
             venv=venv_path,
             conf=config,
             port=port),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=port))
-    nightwatch_config = 'jenkins.json'
+    skipgroup = ' -s legacy'
     if threshold_tests:
-        nightwatch_config = 'jenkins-threshold.json'
-    run('./nightwatch -c tests/nightwatch/{0}'.format(nightwatch_config))
+        skipgroup = ''
+    run('./nightwatch -c tests/nightwatch/jenkins.json{0} -M'.format(skipgroup))
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):

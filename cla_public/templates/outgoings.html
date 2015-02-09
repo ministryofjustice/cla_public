@@ -14,7 +14,7 @@
   <h1>{{ title }}</h1>
   <p>{{ _('We only need to know about certain things you pay for, to work out if you may be able to get legal aid.') }}</p>
 
-  <form method="POST" action="{{ url_for('.outgoings') }}">
+  <form method="POST">
     {{ form.csrf_token }}
 
     {{ Form.handle_errors(form) }}

@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var OUTGOINGS_QUESTIONS = require('../modules/constants').OUTGOINGS_QUESTIONS;
+var common = require('../../modules/common-functions');
+var OUTGOINGS_QUESTIONS = require('../../modules/constants').OUTGOINGS_QUESTIONS;
 
 module.exports = {
   'Start page': common.startPage,
@@ -17,7 +17,7 @@ module.exports = {
 
   'Income': function(client) {
     client
-      .waitForElementVisible('form[action="/income"]', 2000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
       .assert.urlContains('/income')
       .assert.containsText('h1', 'Your money coming in')
       .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
@@ -29,7 +29,7 @@ module.exports = {
 
   'Outgoings': function(client) {
     client
-      .waitForElementVisible('form[action="/outgoings"]', 2000)
+      .waitForElementVisible('input[name="income_contribution"]', 2000)
       .assert.urlContains('/outgoings')
       .assert.containsText('h1', 'Your outgoings')
     ;
@@ -40,22 +40,22 @@ module.exports = {
       .assert.hidden('input[name="childcare-per_interval_value"]')
       .assert.hidden('input[name="childcare-interval_period"]')
       .back()
-      .waitForElementPresent('form[action="/income"]', 2000)
+      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 2000)
       .back()
-      .waitForElementPresent('form[action="/about"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 2000)
     ;
     common.setYesNoFields(client, 'have_children', 1);
     client
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
-      .waitForElementVisible('form[action="/benefits-tax-credits"]', 2000)
+      .waitForElementVisible('input[name="other_benefits"]', 2000)
     ;
     common.setYesNoFields(client, 'other_benefits', 0);
     client
       .setValue('input[name="child_benefit-per_interval_value"]', 0)
       .setValue('input[name="child_tax_credit-per_interval_value"]', 0)
       .submitForm('form')
-      .waitForElementVisible('form[action="/income"]', 2000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
       .clearValue('input[name="your_income-maintenance-per_interval_value"]')
       .clearValue('input[name="your_income-pension-per_interval_value"]')
       .clearValue('input[name="your_income-other_income-per_interval_value"]')
@@ -63,7 +63,7 @@ module.exports = {
       .setValue('input[name="your_income-pension-per_interval_value"]', 0)
       .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
       .submitForm('form')
-      .waitForElementVisible('form[action="/outgoings"]', 2000)
+      .waitForElementVisible('input[name="income_contribution"]', 2000)
       .assert.visible('input[name="childcare-per_interval_value"]')
       .assert.visible('select[name="childcare-interval_period"]')
     ;
@@ -76,20 +76,20 @@ module.exports = {
       .assert.containsText('body', 'Money you pay per month towards your criminal legal aid')
       .assert.containsText('body', 'Money you pay for your child to be looked after while you work or study')
       .back()
-      .waitForElementVisible('form[action="/income"]', 2000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
       .back()
-      .waitForElementVisible('form[action="/benefits-tax-credits"]', 2000)
+      .waitForElementVisible('input[name="other_benefits"]', 2000)
       .back()
-      .waitForElementPresent('form[action="/about"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 2000)
     ;
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, 'in_dispute', 0);
     common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
     client
       .submitForm('form')
-      .waitForElementPresent('form[action="/benefits-tax-credits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 2000)
       .submitForm('form')
-      .waitForElementPresent('form[action="/income"]', 2000)
+      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 2000)
 
       .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
       .setValue('input[name="your_income-pension-per_interval_value"]', 0)
@@ -99,7 +99,7 @@ module.exports = {
       .setValue('input[name="partner_income-other_income-per_interval_value"]', 0)
 
       .submitForm('form')
-      .waitForElementPresent('form[action="/outgoings"]', 2000)
+      .waitForElementPresent('input[name="income_contribution"]', 2000)
       .assert.urlContains('/outgoings')
       .assert.containsText('h1', 'You and your partner’s outgoings')
       .assert.containsText('body', 'Money you and your partner pay your landlord')
@@ -126,7 +126,7 @@ module.exports = {
     client
       .setValue('input[name="income_contribution"]', 0)
       .submitForm('form')
-      .waitForElementPresent('form[action="/call-me-back"]', 2000)
+      .waitForElementPresent('input[name="contact_number"]', 2000)
       .assert.urlContains('/result/eligible')
     ;
 

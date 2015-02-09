@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
+var common = require('../../modules/common-functions');
 var moment = require('moment');
 
 var eligibleJourney = function(client) {
@@ -13,13 +13,13 @@ var eligibleJourney = function(client) {
   common.setYesNoFields(client, 'on_benefits', 1);
   client
     .submitForm('form')
-    .waitForElementVisible('form[action="/benefits"]', 2000)
+    .waitForElementVisible('input[name="benefits"]', 2000)
     .assert.urlContains('/benefits')
     .assert.containsText('h1', 'Your benefits')
     .assert.containsText('body', 'Are you on any of these benefits?')
     .click('input[value="income_support"]')
     .submitForm('form')
-    .waitForElementVisible('form[action="/call-me-back"]', 2000)
+    .waitForElementVisible('input[name="contact_number"]', 2000)
     .assert.urlContains('/result/eligible')
     .assert.containsText('h1', 'You might qualify for legal aid')
     .assert.containsText('h2', 'Request a callback')
@@ -47,8 +47,12 @@ var checkCallbackTime = function(client, then, time) {
 module.exports = {
   'Check callback today (next available)': function(client) {
     eligibleJourney(client);
-
+    var timeIsMocked = process.argv.indexOf('-M') !== -1;
     var now = moment();
+    if (timeIsMocked) {
+      now = moment([2015, 0, 26, 9, 0]);
+      console.log('MOCKING TIME TO 2015-1-26 9:00 - must be running ./manage.py mockserver');
+    }
     if(now.day() !== 0) {
       if(now.hour() < 17) {
         if(now.day() === 6 && (now.hour() > 11 || (now.hour() === 11 && now.minute() > 14))) {

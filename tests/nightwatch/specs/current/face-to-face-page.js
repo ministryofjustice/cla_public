@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var OUTGOINGS_QUESTIONS = require('../modules/constants').OUTGOINGS_QUESTIONS;
+var common = require('../../modules/common-functions');
+var OUTGOINGS_QUESTIONS = require('../../modules/constants').OUTGOINGS_QUESTIONS;
 
 module.exports = {
   'Start page': common.startPage,

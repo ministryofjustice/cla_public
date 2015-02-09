@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var CHILD_BENEFIT_QUESTIONS = require('../modules/constants').CHILD_BENEFIT_QUESTIONS;
+var common = require('../../modules/common-functions');
+var CHILD_BENEFIT_QUESTIONS = require('../../modules/constants').CHILD_BENEFIT_QUESTIONS;
 
 module.exports = {
   'Start page': common.startPage,
@@ -18,7 +18,7 @@ module.exports = {
 
   'Benefits': function(client) {
     client
-      .waitForElementVisible('form[action="/benefits"]', 2000)
+      .waitForElementVisible('input[name="benefits"]', 2000)
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
       .assert.containsText('body', 'Are you on any of these benefits?')
@@ -29,7 +29,7 @@ module.exports = {
 
   'Benefits and tax credits page': function(client) {
     client
-      .waitForElementVisible('form[action="/benefits-tax-credits"]', 2000)
+      .waitForElementVisible('input[name="other_benefits"]', 2000)
       .assert.urlContains('/benefits-tax-credits')
     ;
     common.checkTextIsEqual(client, 'h1', 'Your benefits and tax credits');
@@ -38,18 +38,18 @@ module.exports = {
   'Context-dependent text for partner': function(client) {
     client
       .back()
-      .waitForElementPresent('form[action="/benefits"]', 2000)
+      .waitForElementPresent('input[name="benefits"]', 2000)
       .back()
-      .waitForElementPresent('form[action="/about"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 2000)
     ;
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, 'in_dispute', 0);
     common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
     client
       .submitForm('form')
-      .waitForElementPresent('form[action="/benefits"]', 2000)
+      .waitForElementPresent('input[name="benefits"]', 2000)
       .submitForm('form')
-      .waitForElementPresent('form[action="/benefits-tax-credits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 2000)
     ;
     common.checkTextIsEqual(client, 'h1', 'You and your partner’s benefits and tax credits');
   },
@@ -61,17 +61,17 @@ module.exports = {
     });
     client
       .back()
-      .waitForElementPresent('form[action="/benefits"]', 2000)
+      .waitForElementPresent('input[name="benefits"]', 2000)
       .back()
-      .waitForElementPresent('form[action="/about"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 2000)
     ;
     common.setYesNoFields(client, 'have_children', 1);
     client
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
-      .waitForElementPresent('form[action="/benefits"]', 2000)
+      .waitForElementPresent('input[name="benefits"]', 2000)
       .submitForm('form')
-      .waitForElementPresent('form[action="/benefits-tax-credits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 2000)
     ;
     CHILD_BENEFIT_QUESTIONS.forEach(function(item) {
       client.assert.visible(util.format('input[name="%s-per_interval_value"]', item));
@@ -112,7 +112,7 @@ module.exports = {
     client
       .setValue('input[name="total_other_benefit-per_interval_value"]', '100')
       .submitForm('form')
-      .waitForElementPresent('form[action="/income"]', 2000)
+      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 2000)
       .assert.urlContains('/income')
     ;
   },
@@ -122,7 +122,7 @@ module.exports = {
     common.selectDebtCategory(client);
 
     client
-      .waitForElementPresent('form[action="/about"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 2000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
     ;
@@ -131,7 +131,7 @@ module.exports = {
     client
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
-      .waitForElementPresent('form[action="/benefits-tax-credits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 2000)
       .assert.urlContains('/benefits-tax-credits')
     ;
 
@@ -142,7 +142,7 @@ module.exports = {
     common.selectDebtCategory(client);
 
     client
-      .waitForElementPresent('form[action="/about"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 2000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
     ;
@@ -151,7 +151,7 @@ module.exports = {
     client
       .setValue('input[name="num_dependants"]', 1)
       .submitForm('form')
-      .waitForElementPresent('form[action="/benefits-tax-credits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 2000)
       .assert.urlContains('/benefits-tax-credits')
     ;
 
