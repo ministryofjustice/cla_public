@@ -54,6 +54,9 @@ class MoneyInterval(dict):
         self['interval_period'] = value
 
     def __add__(self, other):
+        if other == 0:
+            other = MoneyInterval(0)
+
         if not isinstance(other, MoneyInterval):
             raise ValueError(other)
 
@@ -63,8 +66,6 @@ class MoneyInterval(dict):
         return MoneyInterval(first.amount + second.amount)
 
     def __radd__(self, other):
-        if other == 0:
-            return self.__add__(MoneyInterval(0))
         return self.__add__(other)
 
     def per_month(self):
