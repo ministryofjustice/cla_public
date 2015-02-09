@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var PROPERTY_QUESTIONS = require('../modules/constants').PROPERTY_QUESTIONS;
+var common = require('../../modules/common-functions');
+var PROPERTY_QUESTIONS = require('../../modules/constants').PROPERTY_QUESTIONS;
 var CURRENCY_CHECKS = [
   ['1', '1.00'],
   ['00001', '1.00'],

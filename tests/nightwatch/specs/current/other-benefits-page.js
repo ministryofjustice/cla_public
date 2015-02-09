@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var CHILD_BENEFIT_QUESTIONS = require('../modules/constants').CHILD_BENEFIT_QUESTIONS;
+var common = require('../../modules/common-functions');
+var CHILD_BENEFIT_QUESTIONS = require('../../modules/constants').CHILD_BENEFIT_QUESTIONS;
 
 module.exports = {
   'Start page': common.startPage,

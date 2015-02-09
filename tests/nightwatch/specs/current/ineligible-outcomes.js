@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var INELIGIBLE_OUTCOMES = require('../modules/constants').INELIGIBLE_OUTCOMES;
+var common = require('../../modules/common-functions');
+var INELIGIBLE_OUTCOMES = require('../../modules/constants').INELIGIBLE_OUTCOMES;
 
 module.exports = {
   'Loop through eligible categories': function(client) {

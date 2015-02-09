@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var EMPLOYMENT_QUESTIONS = require('../modules/constants').EMPLOYMENT_QUESTIONS;
+var common = require('../../modules/common-functions');
+var EMPLOYMENT_QUESTIONS = require('../../modules/constants').EMPLOYMENT_QUESTIONS;
 EMPLOYMENT_QUESTIONS.EMPLOYED = EMPLOYMENT_QUESTIONS.EMPLOYED_MANDATORY.concat(EMPLOYMENT_QUESTIONS.EMPLOYED_OPTIONAL);
 EMPLOYMENT_QUESTIONS.ALL = EMPLOYMENT_QUESTIONS.EMPLOYED.concat(EMPLOYMENT_QUESTIONS.COMMON);
 var other_income_amount = 'input[name="your_income-other_income-per_interval_value"]';

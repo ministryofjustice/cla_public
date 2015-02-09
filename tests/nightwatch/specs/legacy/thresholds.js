@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var constants = require('../modules/constants.js');
+var common = require('../../modules/common-functions');
+var constants = require('../../modules/constants.js');
 var VERBOSE = false;
 var RESULTS = {
   pass: 'result/eligible',
@@ -14,20 +14,20 @@ function form_id(form_path) {
 }
 
 var SCENARIOS = []
-  .concat(require('../modules/thresholds/single-person-capital'))
-  .concat(require('../modules/thresholds/partner-capital'))
-  .concat(require('../modules/thresholds/single-gross-income'))
-  .concat(require('../modules/thresholds/joint-gross-income'))
-  .concat(require('../modules/thresholds/over-4-children'))
-  .concat(require('../modules/thresholds/cap-on-housing'))
-  .concat(require('../modules/thresholds/employment-allowance'))
-  .concat(require('../modules/thresholds/partner-allowance'))
-  .concat(require('../modules/thresholds/own-expenses'))
-  .concat(require('../modules/thresholds/partner-expenses'))
-  .concat(require('../modules/thresholds/pensioner-disregard'))
-  .concat(require('../modules/thresholds/multiple-properties'))
-  .concat(require('../modules/thresholds/user-test-scenarios'))
-  .concat(require('../modules/thresholds/additional-scenarios'))
+  .concat(require('../../modules/thresholds/single-person-capital'))
+  .concat(require('../../modules/thresholds/partner-capital'))
+  .concat(require('../../modules/thresholds/single-gross-income'))
+  .concat(require('../../modules/thresholds/joint-gross-income'))
+  .concat(require('../../modules/thresholds/over-4-children'))
+  .concat(require('../../modules/thresholds/cap-on-housing'))
+  .concat(require('../../modules/thresholds/employment-allowance'))
+  .concat(require('../../modules/thresholds/partner-allowance'))
+  .concat(require('../../modules/thresholds/own-expenses'))
+  .concat(require('../../modules/thresholds/partner-expenses'))
+  .concat(require('../../modules/thresholds/pensioner-disregard'))
+  .concat(require('../../modules/thresholds/multiple-properties'))
+  .concat(require('../../modules/thresholds/user-test-scenarios'))
+  .concat(require('../../modules/thresholds/additional-scenarios'))
 ;
 
 module.exports = {

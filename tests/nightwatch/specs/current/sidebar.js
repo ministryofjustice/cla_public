@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../modules/common-functions');
-var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
+var common = require('../../modules/common-functions');
+var SAVINGS_QUESTIONS = require('../../modules/constants').SAVINGS_QUESTIONS;
 
 function testSidebar(client, headline) {
   client

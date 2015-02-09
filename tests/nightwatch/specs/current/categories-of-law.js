@@ -2,8 +2,8 @@
 
 var _ = require('lodash');
 var util = require('util');
-var common = require('../modules/common-functions');
-var CATEGORIES_OF_LAW = require('../modules/constants').CATEGORIES_OF_LAW;
+var common = require('../../modules/common-functions');
+var CATEGORIES_OF_LAW = require('../../modules/constants').CATEGORIES_OF_LAW;
 
 module.exports = {
   'Start page': common.startPage,
