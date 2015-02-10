@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 "CallMeBack form fields"
+from collections import OrderedDict
 
 import datetime
 import random
@@ -46,7 +47,12 @@ class DayChoiceField(FormattedChoiceField, SelectField):
 
     def __init__(self, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
-        self.choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
+        day_choices = OPERATOR_HOURS.available_days(num_days)
+        self.choices = map(day_choice, day_choices)
+        self.day_time_choices = {}
+        for dc in day_choices:
+            self.day_time_choices[self._format(dc)] = OrderedDict(
+                map(time_choice, OPERATOR_HOURS.time_slots(dc.date())))
 
     def process_formdata(self, valuelist):
         if valuelist:
@@ -59,7 +65,8 @@ class DayChoiceField(FormattedChoiceField, SelectField):
                 self.data = None
                 raise ValueError(self.gettext('Not a valid date'))
 
-    def _format(self, value):
+    @classmethod
+    def _format(cls, value):
         return '{:%Y%m%d}'.format(value)
 
 
@@ -84,7 +91,8 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
                 self.data = None
                 raise ValueError(self.gettext('Not a valid time'))
 
-    def _format(self, value):
+    @classmethod
+    def _format(cls, value):
         return '{:%H%M}'.format(value)
 
 
