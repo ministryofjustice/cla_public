@@ -42,4 +42,5 @@ class TestApiTimeout(unittest.TestCase):
         except ConnectionError:
             self.fail('ConnectionError not caught')
 
-        assert 'Server did not respond, please try again' in response.data
+        self.assertIn('There was an error submitting your data. Please check '
+                      'and try again.', response.data)

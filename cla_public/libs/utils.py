@@ -1,7 +1,11 @@
 import contextlib
+import logging
 from collections import Mapping
 from flask import current_app, request
 from flask.ext.babel import refresh
+
+
+log = logging.getLogger(__name__)
 
 
 def get_locale():
@@ -43,3 +47,10 @@ def recursive_dict_update(orig, new):
         else:
             orig[key] = new[key]
     return orig
+
+
+def log_to_sentry(message):
+    try:
+        current_app.sentry.captureMessage(message)
+    except AttributeError:
+        log.warning(message)
