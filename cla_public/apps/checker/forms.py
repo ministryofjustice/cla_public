@@ -33,6 +33,14 @@ from cla_public.apps.base.forms import BabelTranslationsFormMixin
 log = logging.getLogger(__name__)
 
 
+class BaseForm(BabelTranslationsFormMixin, Honeypot, Form):
+    pass
+
+
+class BaseNoCsrfForm(BabelTranslationsFormMixin, NoCsrfForm):
+    pass
+
+
 class classproperty(object):
     """
     A decorator for a class method to make it appear to be a class property
@@ -81,7 +89,7 @@ def update_payload(form_payload, form_class, cond=True):
     recursive_dict_update(form_payload, form_data)
 
 
-class ProblemForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
+class ProblemForm(ConfigFormMixin, BaseForm):
     """Area of law choice"""
 
     title = _(u'What do you need help with?')
@@ -103,7 +111,7 @@ class ProblemForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         }
 
 
-class AboutYouForm(Honeypot, BabelTranslationsFormMixin, Form):
+class AboutYouForm(BaseForm):
 
     title = _(u'About you')
 
@@ -246,7 +254,7 @@ class AboutYouForm(Honeypot, BabelTranslationsFormMixin, Form):
         return self.have_savings.data == YES or self.have_valuables.data == YES
 
 
-class YourBenefitsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
+class YourBenefitsForm(BaseForm):
 
     @classproperty
     def title(self):
@@ -276,7 +284,7 @@ class YourBenefitsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Fo
         return payload
 
 
-class PropertyForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMixin):
+class PropertyForm(BaseNoCsrfForm, FormSessionDataMixin):
 
     is_main_home = YesNoField(
         _(u'Is this property your main home?'),
@@ -352,7 +360,7 @@ def sum_rents(rents):
     return reduce(sum_money_intervals, rents, money_interval(0))
 
 
-class PropertiesForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, FormSessionDataMixin):
+class PropertiesForm(BaseForm, FormSessionDataMixin):
 
     @classproperty
     def title(self):
@@ -400,7 +408,7 @@ class PropertiesForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form
         }
 
 
-class SavingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, FormSessionDataMixin):
+class SavingsForm(BaseForm, FormSessionDataMixin):
 
     @classproperty
     def title(self):
@@ -447,7 +455,7 @@ class SavingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, F
         }}}
 
 
-class TaxCreditsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
+class TaxCreditsForm(BaseForm):
 
     @classproperty
     def title(self):
@@ -501,7 +509,7 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form
         }
 
 
-class IncomeFieldForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMixin):
+class IncomeFieldForm(BaseNoCsrfForm, FormSessionDataMixin):
 
     def __init__(self, *args, **kwargs):
         self.is_partner = kwargs.pop('is_partner', False)
@@ -597,7 +605,7 @@ class IncomeField(PassKwargsToFormField):
             *args, **kwargs)
 
 
-class IncomeForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, FormSessionDataMixin):
+class IncomeForm(BaseForm, FormSessionDataMixin):
 
     @classproperty
     def title(self):
@@ -633,8 +641,7 @@ class IncomeForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form, Fo
         return api_payload
 
 
-class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin,
-                    Form, FormSessionDataMixin):
+class OutgoingsForm(BaseForm, FormSessionDataMixin):
 
     @classproperty
     def title(self):
@@ -686,5 +693,5 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin,
         }}}
 
 
-class ReviewForm(Honeypot, BabelTranslationsFormMixin, Form):
+class ReviewForm(BaseForm):
     title = _(u'Review your answers')
