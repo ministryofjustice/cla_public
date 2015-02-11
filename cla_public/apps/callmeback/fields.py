@@ -17,10 +17,13 @@ from cla_public.config import common as settings
 from cla_public.apps.callmeback.constants import DAY_CHOICES, DAY_TODAY, \
     DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
-from cla_public.libs.call_centre_availability import day_choice, time_choice
+from cla_public.libs.call_centre_availability import day_choice, time_choice, \
+    monday_before_11am_between_eod_friday_and_monday
 
 
 OPERATOR_HOURS = OpeningHours(**settings.OPERATOR_HOURS)
+OPERATOR_HOURS.day_hours.insert(0, (
+    monday_before_11am_between_eod_friday_and_monday, None))
 
 
 class FormattedChoiceField(object):
