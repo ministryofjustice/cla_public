@@ -50,12 +50,14 @@ class DayChoiceField(FormattedChoiceField, SelectField):
 
     def __init__(self, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
-        day_choices = OPERATOR_HOURS.available_days(num_days)
-        self.choices = map(day_choice, day_choices)
-        self.day_time_choices = {}
-        for dc in day_choices:
-            self.day_time_choices[self._format(dc)] = OrderedDict(
-                map(time_choice, OPERATOR_HOURS.time_slots(dc.date())))
+        self.choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
+
+    def day_time_choices(self, num_days=6):
+        days = OPERATOR_HOURS.available_days(num_days)
+        time_slots = lambda day: (self._format(day), filter(
+            OPERATOR_HOURS.can_schedule_callback,
+            OPERATOR_HOURS.time_slots(day)))
+        return dict(map(time_slots, days))
 
     def process_formdata(self, valuelist):
         if valuelist:
