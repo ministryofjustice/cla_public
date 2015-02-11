@@ -8,7 +8,7 @@ from wtforms.validators import ValidationError
 from cla_common import call_centre_availability
 from cla_public.app import create_app
 from cla_public.apps.callmeback.constants import DAY_TODAY, DAY_SPECIFIC
-from cla_public.apps.callmeback.fields import AvailableSlot
+from cla_public.apps.callmeback.fields import AvailableSlot, DayChoiceField
 
 
 @contextmanager
@@ -99,3 +99,26 @@ class TestAvailability(unittest.TestCase):
             form = Mock()
             form.day.data = monday
             self.assertMondayMorningUnavailable(form)
+
+
+class TestDayTimeChoices(unittest.TestCase):
+
+    def test_day_time_choices(self):
+        with override_current_time(datetime.datetime(2015, 2, 13, 21)):
+            form = Mock()
+            field = DayChoiceField()
+            field = field.bind(form, 'day')
+            choices = field.day_time_choices
+            self.assertEqual([
+                '20150214',
+                '20150216',
+                '20150217',
+                '20150218',
+                '20150219',
+                '20150220'], sorted(choices.keys()))
+            # half day on saturday
+            self.assertEqual(7, len(choices['20150214']))
+            # can't book before 11am on monday because we're after hours friday
+            self.assertEqual(18, len(choices['20150216']))
+            # can book any slot on tuesday
+            self.assertEqual(22, len(choices['20150217']))
