@@ -49,6 +49,10 @@ class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         else:
             return redirect(url_for('.confirmation'))
 
+    def dispatch_request(self, *args, **kwargs):
+        if not session:
+            session['force_session'] = True
+        return super(CallMeBack, self).dispatch_request(*args, **kwargs)
 
 
 
