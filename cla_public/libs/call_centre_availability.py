@@ -4,7 +4,7 @@ from flask import current_app
 
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import BankHolidays, available, \
-    available_days, current_datetime, time_slots, today_slots
+    available_days, time_slots, today_slots
 
 
 class FlaskCacheBankHolidays(BankHolidays):
