@@ -79,3 +79,23 @@ class TestAvailability(unittest.TestCase):
 
         form.day.data = datetime.date(2014, 11, 30)
         self.assertNotAvailable(datetime.time(9, 0), form=form)
+
+    def assertMondayMorningUnavailable(self, form):
+        self.assertNotAvailable(datetime.time(9, 0), form=form)
+        self.assertNotAvailable(datetime.time(9, 30), form=form)
+        self.assertNotAvailable(datetime.time(10, 0), form=form)
+        self.assertNotAvailable(datetime.time(10, 30), form=form)
+
+    def test_monday_9to11_unavailable_after_eod_friday(self):
+        times = {
+            'after_hours_friday': datetime.datetime(2015, 2, 6, 20, 1),
+            'saturday': datetime.datetime(2015, 2, 7, 9, 0),
+            'sunday': datetime.datetime(2015, 2, 8, 9, 0)
+        }
+        monday = datetime.date(2015, 2, 9)
+        for time in times.values():
+            self.now = time
+            self.validator = AvailableSlot(DAY_SPECIFIC)
+            form = Mock()
+            form.day.data = monday
+            self.assertMondayMorningUnavailable(form)
