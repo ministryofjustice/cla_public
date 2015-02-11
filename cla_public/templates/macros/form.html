@@ -328,7 +328,9 @@
             {% if radio.id == 'specific_day-0' %}
               {{ field.time_today(class_='form-control') }}
             {% else %}
-              {{ field.day(class_='form-control') }} at {{ field.time_in_day(class_='form-control') }}
+              {{ field.day(class_='form-control', **{
+                'data-day-time-choices': field.day.day_time_choices|tojson|safe
+              }) }} at {{ field.time_in_day(class_='form-control') }}
             {%  endif %}
           </li>
         {% endif %}

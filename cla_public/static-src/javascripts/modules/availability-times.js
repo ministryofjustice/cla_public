@@ -1,36 +1,13 @@
 (function () {
   'use strict';
 
-  var onSaturday = function (time) {
-    return time.getDay() === 6;
-  };
-
-  var after1230 = function (time) {
-    var twelveThirty = new Date(time);
-    twelveThirty.setHours(12, 30, 0, 0);
-    return time >= twelveThirty;
-  };
-
-  var available = function (time) {
-
-    if (onSaturday(time) && after1230(time)) {
-      return false;
-    }
-
-    return true;
-  };
-
-  var setEnabled = function (option, enabled) {
-    option.disabled = !enabled;
-    $(option).toggle(enabled);
-  };
-
   moj.Modules.AvailabilityTimes = {
     el: '#id_day',
 
     init: function () {
       _.bindAll(this, 'render');
       this.cacheEls();
+      this.cacheData();
       this.bindEvents();
     },
 
@@ -67,33 +44,26 @@
       this.$specificDay = $('[name=specific_day][value=specific_day]');
     },
 
-    slot: function (time) {
-      var date = this.$daySelect.val();
-      time = time || this.$timeSelect.val();
-      var year = date.slice(0, 4);
-      var month = parseInt(date.slice(4, 6)) - 1;  // JS months start at 0
-      var day = date.slice(6);
-      var hour = time.slice(0, 2);
-      var minute = time.slice(2);
-      return new Date(year, month, day, hour, minute);
+    cacheData: function () {
+      this.dayTimeHours = this.$daySelect.data('day-time-choices');
     },
 
     render: function () {
       var self = this;
-      var availableTimes = [];
 
-      $.each(this.$timeSelect.children(), function () {
-        var isAvailable = available(self.slot($(this).val()));
-        setEnabled(this, isAvailable);
-        if (isAvailable) {
-          availableTimes.push($(this).val());
-        } else if ($(this).prop('selected')) {
-          self.$timeSelect.val(
-            availableTimes[Math.floor(Math.random()*availableTimes.length)]
-          );
-        }
-      });
+      if (this.$daySelect.val()) {
+        var dayTimes = this.dayTimeHours[this.$daySelect.val()];
+        var timeOptions = Object.keys(dayTimes).sort();
 
+        this.$timeSelect.html('');
+        $.each(timeOptions, function(i, v){
+          var d = dayTimes[v];
+          self.$timeSelect.append($("<option>", {value: v, html: d}));
+        });
+        this.$timeSelect.val(
+          timeOptions[Math.floor(Math.random()*timeOptions.length)]
+        );
+      }
     }
   };
 }());
