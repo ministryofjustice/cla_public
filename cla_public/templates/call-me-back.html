@@ -65,15 +65,8 @@
 
     {{ Form.adaptations(form.adaptations) }}
 
-    {% call Element.alert(title='What happens next') %}
-      <p>
-        {% trans %}If the operator you speak to thinks you might qualify, they will put you
-        through to a CLA specialist adviser immediately.{% endtrans %}
-      </p>
-      <p>
-        {{ _('If CLA can’t help we will suggest other places that might be able to assist you.') }}
-      </p>
-    {% endcall %}
+    {% block what_happens_next_alert %}
+    {% endblock %}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Request callback')) }}
@@ -99,7 +92,7 @@
 
     <p>
       {% trans %}If we can do anything to make it easier for you to communicate with us due to your
-      disability please tell the Operator.{% endtrans %}
+      disability please tell the operator.{% endtrans %}
     </p>
 
     <p>
