@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% import "macros/form.html" as Form %}
+{% import "macros/subform.html" as Subform %}
 {% import "macros/element.html" as Element %}
 
-{% set title = _('Request a callback') %}
+{% set title = _('Contact Civil Legal Advice') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
@@ -15,16 +16,14 @@
     {% endif %}
     <h1>{{ title }}</h1>
     <p>
-      {% trans %}Fill in your personal details to get a callback from Civil Legal Advice to find out if you
-      qualify for specialist advice on debt, education, discrimination, housing or family problems
-      funded by <a href="https://www.gov.uk/legal-aid">legal aid</a>.{% endtrans %}
+      {% trans %}Speak to someone from  Civil Legal Advice (CLA) to find out if you qualify for
+       specialist advice on debt, education, discrimination, housing or family problems funded by
+       <a href="https://www.gov.uk/legal-aid" rel="external" target="_blank">legal aid</a>.{% endtrans %}
     </p>
     <p>
-      {% trans %}We will try and call you at least once. If we cannot speak to you we will leave you a message
-      unless you tell us below not to.{% endtrans %}
-    </p>
-    <p>
-      {{ _('If we can’t speak to you please book another call back here or call us on 0345 345 4 345.') }}
+      {% trans %}You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -
+      <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
+      or ask us to call you back, which is free for you.{% endtrans %}
     </p>
   {% endblock %}
 
@@ -33,40 +32,49 @@
     {{ Form.handle_errors(form) }}
 
     {{ Form.text_input_fieldset(form.full_name, class_='m-large') }}
-    {% call Form.fieldset(form.contact_number, as_label=True) %}
-      {{ Form.text_input(form.contact_number, class_='m-large') }}
 
-      {% call Form.fieldset(form.safe_to_contact, is_subfield=True) %}
-        {{ Form.yesno(form.safe_to_contact) }}
-        <p style="margin: 10px 0 0">
-          {{ _('If you don’t have a number we can call you on, please contact') }}
-          <a href="https://www.gov.uk/civil-legal-advice" target="_blank">{{ _('Civil Legal Advice') }}</a>.
-        </p>
+    {% call Form.fieldset(form.callback_requested) %}
+      {{ Form.yesno(form.callback_requested) }}
+
+{#       <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="0">
+        {% trans %}Please submit your details to get your personal case reference number. You will need
+        to quote this number when you call CLA.{% endtrans %}
+      </p>
+
+      <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="1">
+        {% trans %}We will try to call you at least once. If we cannot speak to you we will leave you a message,
+        unless you tell us not to below. If you miss the call, please complete this form again to book another
+        callback or call us directly.{% endtrans %}
+      </p>
+ #}
+      {% call Form.fieldset(
+        is_subfield=True,
+        controlled_by=form.callback_requested,
+        control_value="1",
+        use_row=False,
+        persist_values=True
+      ) %}
+        {{ Subform.callback(form.callback) }}
       {% endcall %}
     {% endcall %}
 
-    {{ Form.availability_checker(form.time) }}
+    {% call Form.fieldset(form.post_code, as_label=True) %}
+      <div class="address-finder">
+        {{ form.post_code(class_='form-control m-small', **{ 'data-address-el': '#address' }) }}
+      </div>
+    {% endcall %}
 
-    <fieldset class="fieldset-group">
-      {% call Form.fieldset(form.post_code, as_label=True) %}
-          <div class="address-finder">
-            {{ form.post_code(class_='form-control m-small', **{ 'data-address-el': '#address' }) }}
-          </div>
-      {% endcall %}
-
-      {% call Form.fieldset(form.address, as_label=True) %}
-        {{ form.address(class_='form-control m-large', rows=5) }}
-      {% endcall %}
-    </fieldset>
+    {% call Form.fieldset(form.address, as_label=True) %}
+      {{ form.address(class_='form-control m-large', rows=5) }}
+    {% endcall %}
 
     {% call Form.fieldset(form.extra_notes, as_label=True) %}
-      {{ form.extra_notes(class_='form-control m-full', rows=8) }}
+      {{ form.extra_notes(class_='form-control m-full', rows=6) }}
     {% endcall %}
 
-    {{ Form.adaptations(form.adaptations) }}
+    {{ Subform.adaptations(form.adaptations) }}
 
-    {% block what_happens_next_alert %}
-    {% endblock %}
+    {% block what_happens_next_alert %}{% endblock %}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Request callback')) }}

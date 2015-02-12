@@ -1,6 +1,6 @@
 .confirmation {
   background: $turquoise;
-  padding: 20px;
+  padding: 40px;
   margin: 30px 0;
   color: white;
   text-align: center;
@@ -16,6 +16,10 @@
     .print-page-button {
       display: none;
     }
+  }
+
+  .print-page-button {
+    margin-bottom: 0;
   }
 }
 

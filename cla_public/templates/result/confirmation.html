@@ -5,7 +5,13 @@
 
 {% block inner_content %}
   <header class="confirmation">
-    <h1>{{ _('We will call you back') }}</h1>
+    <h1>
+      {% if session.contact_preference == 'CALL' %}
+        {{ _('Your details have been submitted') }}
+      {% else %}
+        {{ _('We will call you back') }}
+      {% endif %}
+    </h1>
     <p>
       {{ _('Your reference number is') }}
       <strong class="confirmation-ref-number">
@@ -14,15 +20,31 @@
     </p>
   </header>
 
+  {% if session.contact_preference == 'CALL' %}
+    <p>
+      {% trans %}You can now call CLA on 0345 345 4 345. Please quote your reference
+      number when you call. Find out about call charges.{% endtrans %}
+    </p>
+  {% endif %}
+
   <h2>{{ _('What happens next?') }}</h2>
-  <p>
-    {% trans %}Your details have been submitted and an operator will try to call
-      you back around the time you requested {% endtrans %}
-      (<strong>{{ session.callback_time|datetime('full') }}</strong>).
-    {% trans %}If this is not possible, we will always call you back by the
-      next working day.{% endtrans %}
-  </p>
-  {% if category in ['debt', 'housing', 'violence', 'discrimination', 'education', 'family'] %}
+  {% if session.contact_preference == 'CALLBACK' %}
+    <p>
+      {% trans %}Your details have been submitted and an operator will try to call
+        you back around the time you requested {% endtrans %}
+        (<strong>{{ session.callback_time|datetime('full') }}</strong>).
+      {% trans %}If this is not possible, we will always call you back by the
+        next working day.{% endtrans %}
+    </p>
+  {% endif %}
+
+  {% if category == 'benefits' %}
+    <p>
+      {% trans %}If the operator you speak to thinks you can get legal aid, they will find
+      you specialist legal help, like a phone call with a solicitor or
+      support from a family mediation service.{% endtrans %}
+    </p>
+  {% else %}
     <p>
       {% trans %}We will try and call you once. If we cannot speak to you we will
       leave you a message unless you have said it is unsafe to do so.{% endtrans %}
@@ -66,12 +88,6 @@
         help on the day of the hearing from an adviser in the court building.{% endtrans %}
       </p>
     {% endif %}
-  {% else %}
-    <p>
-      {% trans %}If the operator you speak to thinks you can get legal aid, they will find
-      you specialist legal help, like a phone call with a solicitor or
-      support from a family mediation service.{% endtrans %}
-    </p>
   {% endif %}
 
   <h2>{{ _('What if I miss the operator’s call?') }}</h2>

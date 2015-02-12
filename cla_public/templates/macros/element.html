@@ -34,7 +34,7 @@
   {% call alert() %}
     <p>
       {{ _('If you’re having trouble completing this form, ask us to') }}
-      <a href="{{ url_for('callmeback.request_callback') }}" id="callback-link">{{ _('call you back') }}</a>.
+      <a href="{{ url_for('callmeback.request_callback') }}?callback_requested=1" id="callback-link">{{ _('call you back') }}</a>.
     </p>
   {% endcall %}
 {% endmacro %}

@@ -29,7 +29,7 @@ def add_no_cache_headers(response):
 
 class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
     form_class = CallMeBackForm
-    template = 'call-me-back.html'
+    template = 'contact.html'
 
     def on_valid_submit(self):
 
@@ -57,7 +57,7 @@ class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
 
 
 callmeback.add_url_rule(
-    '/call-me-back',
+    '/contact',
     view_func=CallMeBack.as_view('request_callback'))
 
 

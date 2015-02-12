@@ -60,13 +60,17 @@
     {% endif %}
 
     {% if field and has_label %}
-      <legend class="fieldset-label" id="field-label-{{ field.id }}">
+      <legend class="fieldset-label {%- if field and field.errors %} m-error{% endif %}" id="field-label-{{ field.id }}">
         {% if as_label %}
           {{ field_label }}
         {% else %}
             <span>{{ label_text }}</span>
         {% endif %}
       </legend>
+    {% endif %}
+
+    {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
+      {{ field_errors(field.errors) }}
     {% endif %}
 
     {% if field and (field.description or field.help_text) %}
@@ -93,13 +97,6 @@
         {{ caller() }}
       {% endif %}
     {% endif %}
-
-    {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
-      <div class="form-row">
-        {{ field_errors(field.errors) }}
-      </div>
-    {% endif %}
-
   </fieldset>
 {% endmacro %}
 
@@ -138,9 +135,10 @@
   field,
   is_hidden=False,
   controlled_by=None,
-  control_value='1'
+  control_value='1',
+  class_=None
 ) %}
-  {% call fieldset(field, is_hidden=is_hidden, controlled_by=controlled_by, control_value=control_value) %}
+  {% call fieldset(field, is_hidden=is_hidden, controlled_by=controlled_by, control_value=control_value, class_=class_) %}
     {{ yesno(field) }}
   {% endcall %}
 {% endmacro %}
@@ -202,6 +200,8 @@
         WTForm field which controls the visibility of the fieldset
     - as_label <boolean> (default: False)
         Whether fieldset legend should contain label element
+    - fieldset_class <string> (default: None)
+        Fieldset CSS class
 #}
 {% macro text_input_fieldset(
   field,
@@ -213,12 +213,13 @@
   is_subfield=None,
   controlled_by=None,
   control_value=None,
-  as_label=True
+  as_label=True,
+  fieldset_class=None
 ) %}
   {% if skip %}
     {{ text_input(field, skip=skip) }}
   {% else %}
-    {% call fieldset(field, is_subfield=is_subfield, controlled_by=controlled_by, control_value=control_value, as_label=as_label) %}
+    {% call fieldset(field, is_subfield=is_subfield, controlled_by=controlled_by, control_value=control_value, as_label=as_label, class_=fieldset_class) %}
       {{ text_input(field, prefix, suffix, class_, skip, default_value) }}
     {% endcall %}
   {% endif %}
@@ -321,97 +322,6 @@
 
 
 {#
-  Availability checker fieldset.
-  Renders a list of days as radios and time options as select elements
-
-  Params:
-    - field <object>
-        WTForm field
-#}
-{% macro availability_checker(field) %}
-  {% call fieldset(field, class_='fieldset-group') %}
-    <ul class="form-option-list" role="radiogroup">
-      {% for radio in field.specific_day %}
-        {% if (radio.id == 'specific_day-0' and field.time_today.choices) or
-        (radio.id == 'specific_day-1' and field.day.choices) %}
-          <li>
-            <label class="radio-inline" for="{{radio.id}}">
-              {{ radio }} {{ radio.label.text }}
-            </label>
-            {% if radio.id == 'specific_day-0' %}
-              {{ field.time_today(class_='form-control') }}
-            {% else %}
-              {{ field.day(class_='form-control', **{
-                'data-day-time-choices': field.day.day_time_choices|tojson|safe
-              }) }} at {{ field.time_in_day(class_='form-control') }}
-            {%  endif %}
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  {% endcall %}
-{% endmacro %}
-
-
-{#
-  Adaptations fieldset.
-  Renders a list of communication needs options with subfields
-
-  Params:
-    - field <object>
-        WTForm field
-#}
-{% macro adaptations(field) %}
-  {% call fieldset(field, class_='fieldset-group') %}
-    <ul class="form-option-list">
-      <li>
-        <label class="radio-inline" for="{{field.bsl_webcam.id}}">
-          {{ field.bsl_webcam }}
-          {{ field.bsl_webcam.label.text }}
-        </label>
-      </li>
-      <li>
-        <label class="radio-inline" for="{{field.minicom.id}}">
-          {{ field.minicom }}
-          {{ field.minicom.label.text }}
-        </label>
-      </li>
-      <li>
-        <label class="radio-inline" for="{{field.text_relay.id}}">
-          {{ field.text_relay }}
-          {{ field.text_relay.label.text }}
-        </label>
-      </li>
-      <li>
-        <label class="radio-inline" for="{{field.welsh.id}}">
-          {{ field.welsh }}
-          {{ field.welsh.label.text }}
-        </label>
-      </li>
-      <li>
-        <label class="radio-inline" for="{{field.is_other_language.id}}">
-          {{ field.is_other_language }}
-          {{ field.is_other_language.label.text }}
-        </label>
-        {% call fieldset(field.other_language, is_subfield=True, controlled_by=field.is_other_language, control_value='y', has_label=False) %}
-          {{ field.other_language(class_='form-control') }}
-        {% endcall %}
-      </li>
-      <li>
-        <label class="radio-inline" for="{{field.is_other_adaptation.id}}">
-          {{ field.is_other_adaptation }}
-          {{ field.is_other_adaptation.label.text }}
-        </label>
-        {% call fieldset(field.other_adaptation, is_subfield=True, controlled_by=field.is_other_adaptation, control_value='y', has_label=False) %}
-          {{ field.other_adaptation(class_='form-control m-large') }}
-        {% endcall %}
-      </li>
-    </ul>
-  {% endcall %}
-{% endmacro %}
-
-
-{#
   Block level label used for single options per line
 
   Params:
@@ -463,7 +373,7 @@
     - errors <object> WTForm field.errors
 #}
 {% macro field_errors(errors) %}
-  <div class="field-error">
+  <div class="form-row field-error">
     {% set errors = errors.values() if errors is mapping else errors %}
     {% for error in errors %}
       {% if error is string or error == error|string %}

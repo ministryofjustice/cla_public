@@ -11,9 +11,10 @@ from wtforms.validators import InputRequired, Optional, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.callmeback.fields import AvailabilityCheckerField
-from cla_public.apps.checker.constants import CONTACT_SAFETY
+from cla_public.apps.checker.constants import CONTACT_SAFETY, CONTACT_PREFERENCE, \
+    YES, NO
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
-from cla_public.apps.checker.validators import NotRequired
+from cla_public.apps.checker.validators import NotRequired, IgnoreIf, FieldValue
 from cla_public.libs.honeypot import Honeypot
 
 
@@ -40,6 +41,54 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
         description=_(u'Please tell us what you need in the box below'))
 
 
+class RequestCallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
+    """
+    Subform to request callback
+    """
+    contact_number = StringField(
+        _(u'Contact phone number'),
+        validators=[
+            InputRequired(),
+            Length(max=20, message=_(u'Your telephone number must be 20 '
+                                     u'characters or less'))]
+    )
+    safe_to_contact = RadioField(
+        _(u'Is it safe for us to leave a message on this number?'),
+        choices=CONTACT_SAFETY,
+        default='', # Backend doesn't accept `None` as valid value
+        validators=[
+            InputRequired(message=_(u'Please choose Yes or No'))],
+    )
+    time = AvailabilityCheckerField(
+        _(u'Select a time for us to call you'),
+        description=_(u'We will try to call you back around the time you '
+                      u'request, but this may not always be possible. We will '
+                      u'always call you back by the next working day.'))
+
+
+class ValidatedFormField(FormField):
+    def __init__(self, form_class, *args, **kwargs):
+        self._errors = []
+        self.validators = kwargs.pop('validators', [])
+
+        super(ValidatedFormField, self).__init__(
+            form_class, *args, **kwargs)
+
+    def validate(self, form, extra_validators=None):
+        if self._run_validation_chain(form, self.validators):
+            return len(self.errors) == 0
+        form_valid = self.form.validate()
+        return form_valid and len(self.errors) == 0
+
+    @property
+    def errors(self):
+        return self._errors + self.form.errors.items()
+
+    @errors.setter
+    def errors(self, _errors):
+        self._errors = _errors
+
+
 class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Form to request a callback
@@ -51,18 +100,17 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
             Length(max=400, message=_(u'Your full name must be 400 '
                                       u'characters or less')),
             InputRequired()])
-    contact_number = StringField(
-        _(u'Contact phone number'),
+    callback_requested = RadioField(
+        _(u'Contact preference'),
+        choices=CONTACT_PREFERENCE,
         validators=[
-            Length(max=20, message=_(u'Your telephone number must be 20 '
-                                     u'characters or less')),
-            InputRequired()])
-    safe_to_contact = RadioField(
-        _(u'Is it safe for us to leave a message on this number?'),
-        choices=CONTACT_SAFETY,
-        validators=[
-            InputRequired(message=_(u'Please choose Yes or No'))],
+            InputRequired(message=_(u'Please choose one of the options'))],
     )
+    callback = ValidatedFormField(
+        RequestCallBackForm,
+        validators=[
+            IgnoreIf('callback_requested', FieldValue(NO))
+        ])
     post_code = StringField(
         _(u'Postcode'),
         validators=[
@@ -89,30 +137,15 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         AdaptationsForm,
         _(u'Do you have any special communication needs?'))
 
-    time = AvailabilityCheckerField(
-        _(u'Select a time for us to call you'),
-        description=_(u'We will try to call you back around the time you '
-                      u'request, but this may not always be possible. We will '
-                      u'always call you back by the next working day.'))
-
-    def validate(self):
-        """
-        Put the callback time into the session on success
-        """
-        valid = super(CallMeBackForm, self).validate()
-        if valid:
-            session['time_to_callback'] = self.time.scheduled_time()
-        return valid
-
     def api_payload(self):
         "Form data as data structure ready to send to API"
-        return {
+        data = {
             'personal_details': {
                 'full_name': self.full_name.data,
                 'postcode': self.post_code.data,
-                'mobile_phone': self.contact_number.data,
+                'mobile_phone': self.callback.form.contact_number.data,
                 'street': self.address.data,
-                'safe_to_contact': self.safe_to_contact.data
+                'safe_to_contact': self.callback.form.safe_to_contact.data
             },
             'adaptation_details': {
                 'bsl_webcam': self.adaptations.bsl_webcam.data,
@@ -123,6 +156,9 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
                     or self.adaptations.other_language.data,
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
-            },
-            'requires_action_at': self.time.scheduled_time().isoformat(),
+            }
         }
+        if self.callback_requested.data == YES:
+            data['requires_action_at'] = self.callback.form.time.scheduled_time().isoformat()
+
+        return data
