@@ -261,7 +261,7 @@ class PropertyForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMixin)
               u"own, please answer ‘no’")))
     other_shareholders = PartnerYesNoField(
         label=_(
-            u'Does anyone else (other than you) own a share of the property?'),
+            u'Does anyone else own a share of the property?'),
         description=_(
             u"Select 'Yes' if you share ownership with a friend, relative or "
             u"ex-partner"),

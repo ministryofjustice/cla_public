@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-12 11:20+0000\n"
+"POT-Creation-Date: 2015-02-12 14:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -648,7 +648,7 @@ msgid "If you are separated and no longer live in the property you own, please a
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:263
-msgid "Does anyone else (other than you) own a share of the property?"
+msgid "Does anyone else own a share of the property?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:265
