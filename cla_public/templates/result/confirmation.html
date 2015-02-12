@@ -98,5 +98,5 @@
 {% endblock %}
 
 {% block ga_pageview %}
-  ga('send', 'pageview', '/result/confirmation/{{session.is_eligible|default('unknown')}}');
+  ga('send', 'pageview', '/result/confirmation/{{session.eligibility|default('unknown')}}');
 {% endblock %}
