@@ -121,11 +121,9 @@ def set_locale(locale):
     """
     Set locale cookie
     """
-    welsh = request.cookies.get('locale') == 'cy_GB'
+    if locale[:2] not in [l for l, d in current_app.config['LANGUAGES']]:
+        abort(404)
     response = redirect(next_url())
-    if locale == 'cy_GB' and not welsh:
-        expires = datetime.datetime.now() + datetime.timedelta(days=30)
-        response.set_cookie('locale', 'cy_GB', expires=expires)
-    elif locale == 'en_GB' and welsh:
-        response.set_cookie('locale', '', expires=0)
+    expires = datetime.datetime.now() + datetime.timedelta(days=30)
+    response.set_cookie('locale', locale, expires=expires)
     return response

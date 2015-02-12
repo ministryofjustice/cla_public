@@ -30,6 +30,21 @@
       circumstances and to find out if your specific problem is covered by legal aid.{% endtrans %}
     </p>
   {% endif %}
+  <p>
+    {{ _('If we can’t speak to you please book another call back here or call us on 0345 345 4 345.') }}
+  </p>
+{% endblock %}
+
+{% block what_happens_next_alert %}
+  {% call Element.alert(title='What happens next') %}
+    <p>
+      {% trans %}If the operator you speak to thinks you might qualify, they will put you
+      through to a CLA specialist adviser immediately.{% endtrans %}
+    </p>
+    <p>
+      {{ _('If CLA can’t help we will suggest other places that might be able to assist you.') }}
+    </p>
+  {% endcall %}
 {% endblock %}
 
 {% block javascripts %}

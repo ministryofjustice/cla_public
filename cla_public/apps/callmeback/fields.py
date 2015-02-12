@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 "CallMeBack form fields"
+from collections import OrderedDict
 
 import datetime
 import random
@@ -16,10 +17,13 @@ from cla_public.config import common as settings
 from cla_public.apps.callmeback.constants import DAY_CHOICES, DAY_TODAY, \
     DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
-from cla_public.libs.call_centre_availability import day_choice, time_choice
+from cla_public.libs.call_centre_availability import day_choice, time_choice, \
+    monday_before_11am_between_eod_friday_and_monday
 
 
 OPERATOR_HOURS = OpeningHours(**settings.OPERATOR_HOURS)
+OPERATOR_HOURS.day_hours.insert(0, (
+    monday_before_11am_between_eod_friday_and_monday, None))
 
 
 class FormattedChoiceField(object):
@@ -48,6 +52,18 @@ class DayChoiceField(FormattedChoiceField, SelectField):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
 
+    @property
+    def day_time_choices(self, num_days=6):
+        days = OPERATOR_HOURS.available_days(num_days)
+
+        def time_slots(day):
+            slots = OPERATOR_HOURS.time_slots(day.date())
+            slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
+            slots = OrderedDict(map(time_choice, slots))
+            return (self._format(day), slots)
+
+        return dict(map(time_slots, days))
+
     def process_formdata(self, valuelist):
         if valuelist:
             try:
@@ -59,7 +75,8 @@ class DayChoiceField(FormattedChoiceField, SelectField):
                 self.data = None
                 raise ValueError(self.gettext('Not a valid date'))
 
-    def _format(self, value):
+    @classmethod
+    def _format(cls, value):
         return '{:%Y%m%d}'.format(value)
 
 
@@ -84,7 +101,8 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
                 self.data = None
                 raise ValueError(self.gettext('Not a valid time'))
 
-    def _format(self, value):
+    @classmethod
+    def _format(cls, value):
         return '{:%H%M}'.format(value)
 
 

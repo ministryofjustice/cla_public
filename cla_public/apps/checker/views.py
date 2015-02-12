@@ -17,7 +17,7 @@ from cla_public.apps.checker.constants import CATEGORIES, \
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm
-from cla_public.libs.utils import override_locale
+from cla_public.libs.utils import override_locale, log_to_sentry
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
 
@@ -42,9 +42,10 @@ class UpdatesMeansTest(object):
             post_to_eligibility_check_api(self.form)
         except (ConnectionError, Timeout, SlumberBaseException) as e:
             self.form.errors['timeout'] = _(
-                u'Server did not respond, please try again')
-            log.exception(
-                msg=u'Slumber Exception on %s page: %s' % (self.name, e))
+                u'There was an error submitting your data. '
+                u'Please check and try again.')
+            log_to_sentry(
+                u'Slumber Exception on %s page: %s' % (self.name, e))
             return self.get(step=self.name)
         else:
             return super(UpdatesMeansTest, self).on_valid_submit()

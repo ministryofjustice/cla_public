@@ -50,7 +50,7 @@ def make_messages():
     """compile po file."""
     run('{venv}/bin/pybabel extract -F babel.cfg -k pgettext -k lazy_pgettext -k '
         'gettext -k lazy_gettext -k ugettext -k ungettext -k pugettext -k '
-        'lazy_pugettext -o cla_public/translations/messages.pot'
+        'lazy_pugettext -o cla_public/translations/messages.pot --no-wrap'
         ' .'.format(venv=VENV))
 
     pgettexts = [
@@ -65,7 +65,7 @@ def make_messages():
         add_msgctxt(**trans)
 
     for language_code, _ in app.config.get('LANGUAGES'):
-        run('{venv}/bin/pybabel update -i cla_public/translations/messages.pot -d cla_public/translations -l {language_code}'
+        run('{venv}/bin/pybabel update -i cla_public/translations/messages.pot -d cla_public/translations -l {language_code} --no-wrap'
             .format(venv=VENV, language_code=language_code))
 
 
@@ -79,9 +79,12 @@ def push_messages(force=False):
 
 
 @manager.command
-def pull_messages():
+def pull_messages(force=False):
     """Pull messages to transifex"""
-    run('tx pull')
+    command = 'tx pull'
+    if force:
+        command += ' -f'
+    run(command)
 
 
 @manager.command

@@ -4,7 +4,7 @@ from flask import current_app
 
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import BankHolidays, available, \
-    available_days, current_datetime, time_slots, today_slots
+    available_days, time_slots, today_slots
 
 
 class FlaskCacheBankHolidays(BankHolidays):
@@ -40,3 +40,11 @@ def day_choice(day):
             day.strftime('%A'),
             day.strftime('%d').lstrip('0'),
             suffix(day.day)))
+
+
+def monday_before_11am_between_eod_friday_and_monday(dt):
+    now = call_centre_availability.current_datetime()
+    after_hours_friday = now.weekday() == 4 and now.hour > 19
+    weekend = now.weekday() in (5, 6)
+    monday_before_11am = dt.weekday() == 0 and dt.hour < 11
+    return (after_hours_friday or weekend) and monday_before_11am
