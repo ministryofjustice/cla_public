@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 import datetime
+import logging
 from mock import Mock
 import unittest
 
@@ -8,7 +9,12 @@ from wtforms.validators import ValidationError
 from cla_common import call_centre_availability
 from cla_public.app import create_app
 from cla_public.apps.callmeback.constants import DAY_TODAY, DAY_SPECIFIC
-from cla_public.apps.callmeback.fields import AvailableSlot, DayChoiceField
+from cla_public.apps.callmeback.fields import AvailableSlot, DayChoiceField, \
+    OPERATOR_HOURS
+from cla_public.apps.callmeback.forms import CallMeBackForm
+
+
+logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
 
 
 @contextmanager
@@ -109,16 +115,31 @@ class TestDayTimeChoices(unittest.TestCase):
             field = DayChoiceField()
             field = field.bind(form, 'day')
             choices = field.day_time_choices
-            self.assertEqual([
-                '20150214',
-                '20150216',
-                '20150217',
-                '20150218',
-                '20150219',
-                '20150220'], sorted(choices.keys()))
             # half day on saturday
             self.assertEqual(7, len(choices['20150214']))
             # can't book before 11am on monday because we're after hours friday
             self.assertEqual(18, len(choices['20150216']))
             # can book any slot on tuesday
             self.assertEqual(22, len(choices['20150217']))
+
+
+class TestCallbackInPastBug(unittest.TestCase):
+    """
+    Had 2 cases in which callbacks were requested in the past:
+    EU-5247-5578 created 2015-02-11 23:03 for 2015-02-11 10:30
+    YJ-4697-7619 created 2015-02-11 22:19 for 2015-02-11 11:00
+    """
+
+    def setUp(self):
+        self.app = create_app('config/testing.py')
+        self.app.test_request_context().push()
+
+    def test_EU_5247_5578(self):
+        with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
+            form = CallMeBackForm()
+            self.assertEqual([], form.time.form.time_today.choices)
+
+    def test_YJ_4697_7619(self):
+        with override_current_time(datetime.datetime(2015, 2, 11, 22, 19)):
+            form = CallMeBackForm()
+            self.assertEqual([], form.time.form.time_today.choices)
