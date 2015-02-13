@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-12 11:20+0000\n"
+"POT-Creation-Date: 2015-02-12 14:20+0000\n"
 "PO-Revision-Date: 2015-02-06 14:57+0000\n"
 "Last-Translator: Josh Rowe <josh.rowe@digital.justice.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/projects/p/cla-public/language/cy/)\n"
@@ -650,8 +650,8 @@ msgid "If you are separated and no longer live in the property you own, please a
 msgstr "Os ydych chi wedi gwahanu ac os nad ydych chi bellach yn byw yn yr eiddo yr ydych chi’n berchen arno, rhowch ‘na’ yn ateb"
 
 #: cla_public/apps/checker/forms.py:263
-msgid "Does anyone else (other than you) own a share of the property?"
-msgstr "A oes unrhyw un arall (heblaw chi neu’ch partner) sy’n berchen ar gyfran o’r eiddo?"
+msgid "Does anyone else own a share of the property?"
+msgstr "A oes unrhyw un arall sy’n berchen ar gyfran o’r eiddo?"
 
 #: cla_public/apps/checker/forms.py:265
 msgid "Select 'Yes' if you share ownership with a friend, relative or ex-partner"
