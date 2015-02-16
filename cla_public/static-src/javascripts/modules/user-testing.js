@@ -33,6 +33,10 @@
       {
         name: 'immigration',
         checkerStartFilename: 'immigration.html'
+      },
+      {
+        name: 'benefits',
+        checkerStartFilename: 'welfare_benefits.html'
       }
     ],
 
@@ -92,13 +96,13 @@
       return $c;
     },
 
-    openScopeChecker: function(page) {
+    openScopeChecker: function(page, category) {
       var self = this;
       this.spawnedWindow = open(this.scopeCheckerUrl + page);
       this.spawnedWindow.focus();
 
       this.spawnedWindow.onunload = function() {
-        self.realSubmit();
+        self.realSubmit(category);
       };
     },
 
@@ -115,15 +119,19 @@
 
       if(startPage !== '') {
         moj.log('open prototype');
-        self.openScopeChecker(startPage);
+        self.openScopeChecker(startPage, c.val());
       } else {
         moj.log('stay in app');
         self.realSubmit();
       }
     },
 
-    realSubmit: function() {
+    realSubmit: function(category) {
       $('.fake-submit').hide();
+      if(category && category === 'immigration') { // switch to housing category for means test as immigration goes to face-to-face
+        this.$form.find('[name="categories"][value="housing"]').trigger('click');
+      }
+
       this.$submit.show().trigger('click');
     }
 
