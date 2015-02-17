@@ -118,3 +118,15 @@ address.adr {
 .u-text-right {
   text-align: right;
 }
+
+
+.js-enabled .s-hidden {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+}
+
+.js-enabled .s-expanded {
+  @include transition(opacity, ease, 300ms);
+  opacity: 1;
+}
