@@ -108,7 +108,7 @@
   </script>
 
   <script type="text/html" id="addressFinderList">
-    <dd class="form-row address-list">
+    <div class="form-row address-list">
       <select name="address" class="form-control">
         <option value="" disabled><%= count %> addresses found</option>
         <option value="">-- Choose address --</option>
@@ -116,6 +116,6 @@
           <option value="<%= index %>"><%= address %></option>
         <% }); %>
       </select>
-    </dd>
+    </div>
   </script>
 {% endblock %}
