@@ -58,7 +58,7 @@
         this.$timeSelect.html('');
         $.each(timeOptions, function(i, v){
           var d = dayTimes[v];
-          self.$timeSelect.append($("<option>", {value: v, html: d}));
+          self.$timeSelect.append($('<option>', {value: v, html: d}));
         });
         this.$timeSelect.val(
           timeOptions[Math.floor(Math.random()*timeOptions.length)]
