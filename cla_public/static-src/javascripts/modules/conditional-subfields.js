@@ -75,7 +75,7 @@
           'aria-hidden': !isVisible
         });
 
-      if(!isVisible) {
+      if(!isVisible && !$field.data('persist-values')) {
         $field.find('input')
           .prop('checked', false)
           .trigger('label-select');

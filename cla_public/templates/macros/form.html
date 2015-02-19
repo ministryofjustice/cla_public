@@ -22,6 +22,8 @@
         Whether to show the `legend/label` elements
     - use_row <boolean> (default: True)
         Whether to wrap the 'caller' in `.form-row` div
+    - persist_values <boolean> (default: False)
+        Whether to persist input values when fieldset is hidden
 #}
 {% macro fieldset(
   field=None,
@@ -32,7 +34,8 @@
   as_label=False,
   class_='',
   has_label=True,
-  use_row=True
+  use_row=True,
+  persist_values=False
 ) %}
   <fieldset class="{% if class_ %}{{ class_ }}{% else %}form-group{% endif %}
     {%- if field and field.errors %} m-error{% endif %}
@@ -40,6 +43,7 @@
     {%- if is_hidden == True or controlled_by and control_value %} s-hidden{% endif %}"
     {% if controlled_by %}data-controlled-by="{{ controlled_by.id }}" data-control-value="{{ control_value }}"{% endif %}
     {% if field %}id="field-{{ field.id }}"{% endif %}
+    {% if persist_values %}data-persist-values="true"{% endif %}
   >
     {% if field %}
       {% if field.flags.optional %}
