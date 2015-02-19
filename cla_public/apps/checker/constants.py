@@ -151,6 +151,6 @@ CONTACT_SAFETY = (
 )
 
 CONTACT_PREFERENCE = (
-    (NO, _(u'I’ll call myself')),
+    (NO, _(u'I’ll call CLA')),
     (YES, _(u'Call me back')),
 )

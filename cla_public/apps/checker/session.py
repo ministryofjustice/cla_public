@@ -183,8 +183,8 @@ class CheckerSession(SecureCookieSession):
         return Notes()
 
     @property
-    def contact_preference(self):
-        return self.field('CallMeBackForm', 'callback_requested')
+    def callback_requested(self):
+        return self.is_yes('CallMeBackForm', 'callback_requested')
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):

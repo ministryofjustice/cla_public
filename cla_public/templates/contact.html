@@ -11,14 +11,13 @@
   {% block page_text %}
     {% if config.CALLMEBACK_ONLY %}
       {% call Element.alert() %}
-        <p>{{ _('The full service is currently unavailable. However, you can still request a call back using the form below.') }}</p>
+        <p>{{ _('The full service is currently unavailable. However, you can still get in touch using the form below.') }}</p>
       {% endcall %}
     {% endif %}
     <h1>{{ title }}</h1>
     <p>
-      {% trans %}Speak to someone from  Civil Legal Advice (CLA) to find out if you qualify for
-       specialist advice on debt, education, discrimination, housing or family problems funded by
-       <a href="https://www.gov.uk/legal-aid" rel="external" target="_blank">legal aid</a>.{% endtrans %}
+      {% trans %}Please submit your details to get your personal case reference number.
+      You will need to quote this number when you call CLA.{% endtrans %}
     </p>
     <p>
       {% trans %}You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -
@@ -36,17 +35,12 @@
     {% call Form.fieldset(form.callback_requested) %}
       {{ Form.yesno(form.callback_requested) }}
 
-{#       <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="0">
-        {% trans %}Please submit your details to get your personal case reference number. You will need
-        to quote this number when you call CLA.{% endtrans %}
-      </p>
-
       <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="1">
         {% trans %}We will try to call you at least once. If we cannot speak to you we will leave you a message,
         unless you tell us not to below. If you miss the call, please complete this form again to book another
         callback or call us directly.{% endtrans %}
       </p>
- #}
+
       {% call Form.fieldset(
         is_subfield=True,
         controlled_by=form.callback_requested,
@@ -77,7 +71,7 @@
     {% block what_happens_next_alert %}{% endblock %}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Request callback')) }}
+    {{ Form.actions(_('Submit details')) }}
   </form>
 
   {% block below_form %}
