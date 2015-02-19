@@ -20,37 +20,42 @@
         Fieldset CSS class
     - has_label <boolean> (default: True)
         Whether to show the `legend/label` elements
+    - use_row <boolean> (default: True)
+        Whether to wrap the 'caller' in `.form-row` div
 #}
 {% macro fieldset(
-  field,
+  field=None,
   is_subfield=False,
   is_hidden=False,
   controlled_by=None,
   control_value='1',
   as_label=False,
   class_='',
-  has_label=True
+  has_label=True,
+  use_row=True
 ) %}
   <fieldset class="{% if class_ %}{{ class_ }}{% else %}form-group{% endif %}
-    {%- if field.errors %} m-error{% endif %}
+    {%- if field and field.errors %} m-error{% endif %}
     {%- if is_subfield %} form-subfield{% endif %}
     {%- if is_hidden == True or controlled_by and control_value %} s-hidden{% endif %}"
     {% if controlled_by %}data-controlled-by="{{ controlled_by.id }}" data-control-value="{{ control_value }}"{% endif %}
-    id="field-{{ field.id }}"
+    {% if field %}id="field-{{ field.id }}"{% endif %}
   >
-    {% if field.flags.optional %}
-      {% set label_text = field.label.text + ' (optional)' %}
-    {% else %}
-      {% set label_text = field.label.text %}
+    {% if field %}
+      {% if field.flags.optional %}
+        {% set label_text = field.label.text + ' (optional)' %}
+      {% else %}
+        {% set label_text = field.label.text %}
+      {% endif %}
+
+      {% set field_label = field.label(
+          for=field.per_interval_value.id if field.per_interval_value else field.id,
+          text=label_text
+        )
+      %}
     {% endif %}
 
-    {% set field_label = field.label(
-        for=field.per_interval_value.id if field.per_interval_value else field.id,
-        text=label_text
-      )
-    %}
-
-    {% if has_label %}
+    {% if field and has_label %}
       <legend class="fieldset-label" id="field-label-{{ field.id }}">
         {% if as_label %}
           {{ field_label }}
@@ -60,7 +65,7 @@
       </legend>
     {% endif %}
 
-    {% if field.description or field.help_text %}
+    {% if field and (field.description or field.help_text) %}
       <div class="form-row field-help">
         {%- if field.description %}
           <span class="field-description">
@@ -76,12 +81,16 @@
     {%- endif -%}
 
     {% if caller %}
-      <div class="form-row">
+      {% if use_row %}
+        <div class="form-row">
+          {{ caller() }}
+        </div>
+      {% else %}
         {{ caller() }}
-      </div>
+      {% endif %}
     {% endif %}
 
-    {% if field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by %}
+    {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
       <div class="form-row">
         {{ field_errors(field.errors) }}
       </div>
