@@ -380,17 +380,25 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data = {
             'full_name': 'Full Name',
-            'contact_number': '000000000',
-            'safe_to_contact': YES,
-            'post_code': 'POSTCODE',
-            'address': '21 Jump Street',
             'extra_notes': 'Extra notes',
-
+            'callback_requested': YES,
             'specific_day': 'today',
             'time_today': '1930',
         }
 
+        callback_data = {
+            'contact_number': '000000000',
+            'safe_to_contact': YES,
+        }
+
+        address_data = {
+            'post_code': 'POSTCODE',
+            'street_address': '21 Jump Street',
+        }
+
         form_data.update(flatten_dict('adaptations', adaptations_data))
+        form_data.update(flatten_dict('callback', callback_data))
+        form_data.update(flatten_dict('address', address_data))
         with override_current_time(self.now):
             payload = self.payload(CallMeBackForm, form_data)
 
@@ -407,4 +415,5 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload['adaptation_details']['notes'], 'other')
 
             time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 30))
+
             self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())

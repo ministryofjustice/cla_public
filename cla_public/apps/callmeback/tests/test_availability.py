@@ -137,9 +137,9 @@ class TestCallbackInPastBug(unittest.TestCase):
     def test_EU_5247_5578(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
             form = CallMeBackForm()
-            self.assertEqual([], form.time.form.time_today.choices)
+            self.assertEqual([], form.callback.time.form.time_today.choices)
 
     def test_YJ_4697_7619(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 22, 19)):
             form = CallMeBackForm()
-            self.assertEqual([], form.time.form.time_today.choices)
+            self.assertEqual([], form.callback.time.form.time_today.choices)
