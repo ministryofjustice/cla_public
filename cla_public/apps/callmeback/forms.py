@@ -120,9 +120,10 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
             Length(max=5000, message=_(u'Your notes must be 5000 characters '
                                        u'or less')),
             Optional()])
-    adaptations = FormField(
+    adaptations = ValidatedFormField(
         AdaptationsForm,
-        _(u'Do you have any special communication needs?'))
+        _(u'Do you have any special communication needs?'),
+        validators=[Optional()])
 
     def api_payload(self):
         "Form data as data structure ready to send to API"
