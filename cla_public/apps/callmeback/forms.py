@@ -10,7 +10,8 @@ from wtforms import BooleanField, FormField, RadioField, SelectField, \
 from wtforms.validators import InputRequired, Optional, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES
-from cla_public.apps.callmeback.fields import AvailabilityCheckerField
+from cla_public.apps.callmeback.fields import AvailabilityCheckerField, \
+    ValidatedFormField
 from cla_public.apps.checker.constants import CONTACT_SAFETY, CONTACT_PREFERENCE, \
     YES, NO
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
@@ -66,27 +67,6 @@ class RequestCallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
                       u'always call you back by the next working day.'))
 
 
-class ValidatedFormField(FormField):
-    def __init__(self, form_class, *args, **kwargs):
-        self._errors = []
-        self.validators = kwargs.pop('validators', [])
-
-        super(ValidatedFormField, self).__init__(
-            form_class, *args, **kwargs)
-
-    def validate(self, form, extra_validators=None):
-        if self._run_validation_chain(form, self.validators):
-            return len(self.errors) == 0
-        form_valid = self.form.validate()
-        return form_valid and len(self.errors) == 0
-
-    @property
-    def errors(self):
-        return self._errors + self.form.errors.items()
-
-    @errors.setter
-    def errors(self, _errors):
-        self._errors = _errors
 
 
 class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
