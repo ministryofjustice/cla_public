@@ -13,5 +13,11 @@
     &:last-child {
       margin-bottom: 0;
     }
+
+    &.m-separate {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid $grey-3;
+    }
   }
 }
