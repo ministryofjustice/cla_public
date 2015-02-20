@@ -3,7 +3,7 @@
 
 import logging
 
-from flask import redirect, render_template, session, url_for, views
+from flask import abort, redirect, render_template, session, url_for, views
 from flask.ext.babel import lazy_gettext as _
 from cla_public.libs.utils import log_to_sentry
 from slumber.exceptions import SlumberBaseException
@@ -61,13 +61,13 @@ callmeback.add_url_rule(
     view_func=CallMeBack.as_view('request_callback'))
 
 
-class CallMeBackConfirmation(views.MethodView, object):
+class CallMeBackConfirmation(views.MethodView):
 
     def get(self):
-        # render template before clearing session, as we use it in the template
-        response = render_template('result/confirmation.html')
-        session.clear()
-        return response
+        session.clear_and_store_ref()
+        if not session.get('stored_case_ref'):
+            abort(404)
+        return render_template('result/confirmation.html')
 
 
 callmeback.add_url_rule(

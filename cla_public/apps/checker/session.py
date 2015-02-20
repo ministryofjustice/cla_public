@@ -166,7 +166,7 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def callback_time(self):
-        return self.field('CallMeBackForm', 'time')
+        return self.field('CallMeBackForm', 'callback', {}).get('time', None)
 
     def add_note(self, note):
         notes = self.get('notes', [])
@@ -185,6 +185,19 @@ class CheckerSession(SecureCookieSession):
     @property
     def callback_requested(self):
         return self.is_yes('CallMeBackForm', 'callback_requested')
+
+    def clear_and_store_ref(self):
+        if not self.get('is_expired', False):
+            store = {
+                'is_expired': True,
+                'stored_case_ref': self.get('case_ref'),
+                'stored_callback_time': self.callback_time,
+                'stored_callback_requested': self.callback_requested,
+                'stored_category': self.category,
+                'stored_eligibility': self.eligibility
+            }
+            self.clear()
+            self.update(store)
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):

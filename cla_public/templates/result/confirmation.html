@@ -6,7 +6,7 @@
 {% block inner_content %}
   <header class="confirmation">
     <h1>
-      {% if session.callback_requested %}
+      {% if session.stored_callback_requested %}
         {{ _('We will call you back') }}
       {% else %}
         {{ _('Your details have been submitted') }}
@@ -15,7 +15,7 @@
     <p>
       {{ _('Your reference number is') }}
       <strong class="confirmation-ref-number">
-        {{session.case_ref}}
+        {{ session.stored_case_ref }}
       </strong>
     </p>
     {% if not session.stored_callback_requested %}
@@ -28,23 +28,23 @@
   </header>
 
   <h2>{{ _('What happens next?') }}</h2>
-  {% if session.callback_requested %}
+  {% if session.stored_callback_requested %}
     <p>
       {% trans %}Your details have been submitted and an operator will try to call
         you back around the time you requested {% endtrans %}
-        (<strong>{{ session.callback_time|datetime('full') }}</strong>).
+        (<strong>{{ session.stored_callback_time|datetime('full') }}</strong>).
       {% trans %}If this is not possible, we will always call you back by the
         next working day.{% endtrans %}
     </p>
 
-    {% if category == 'benefits' %}
+    {% if session.stored_category == 'benefits' %}
       <p>
         {% trans %}If the operator you speak to thinks you can get legal aid, they will find
         you specialist legal help, like a phone call with a solicitor or
         support from a family mediation service.{% endtrans %}
       </p>
     {% else %}
-      {% if category == 'violence' %}
+      {% if session.stored_category == 'violence' %}
         <p>
           {% trans %}If you need to urgently protect you or your family you should
           try and get advice as soon as possible.{% endtrans %}
@@ -75,7 +75,7 @@
         will organise this.{% endtrans %}
       </p>
 
-      {% if category in ['debt', 'housing'] %}
+      {% if session.stored_category in ['debt', 'housing'] %}
         <p>
           {% trans %}If you have a court hearing date it is important that you get
           advice as soon as possible. You may be able to get last-minute
@@ -115,5 +115,5 @@
 {% endblock %}
 
 {% block ga_pageview %}
-  ga('send', 'pageview', '/result/confirmation/{{session.eligibility|default('unknown')}}');
+  ga('send', 'pageview', '/result/confirmation/{{session.stored_eligibility|default('unknown')}}');
 {% endblock %}
