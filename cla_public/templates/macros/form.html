@@ -248,7 +248,7 @@
         WTForm field
 #}
 {% macro option_list_fieldset(field, label_type='inline', input_type='checkbox') %}
-  {% call fieldset(field, class_='fieldset-group') %}
+  {% call fieldset(field) %}
     {{ option_list(field, label_type, input_type) }}
   {% endcall %}
 {% endmacro %}
