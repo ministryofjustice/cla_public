@@ -1,6 +1,6 @@
 .confirmation {
   background: $turquoise;
-  padding: 40px;
+  padding: 30px;
   margin: 30px 0;
   color: white;
   text-align: center;
@@ -27,4 +27,15 @@
   display: block;
   font-size: 1.3em;
   margin-top: 5px;
+}
+
+.confirmation-inset {
+  background: lighten($turquoise, 50);
+  color: $black;
+  padding: 20px;
+  margin: 20px -10px;
+
+  @media print {
+    border-top: 2px solid $black;
+  }
 }

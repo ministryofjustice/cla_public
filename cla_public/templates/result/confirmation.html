@@ -18,15 +18,14 @@
         {{session.case_ref}}
       </strong>
     </p>
+    {% if not session.stored_callback_requested %}
+      <p class="confirmation-inset">
+        {% trans %}You can now call CLA on <strong>0345 345 4 345</strong>.<br>
+        Please quote your reference number when you call. Find out about
+        <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
+      </p>
+    {% endif %}
   </header>
-
-
-  {% if not session.callback_requested %}
-    <p>
-      {% trans %}You can now call CLA on 0345 345 4 345. Please quote your reference
-      number when you call. Find out about call charges.{% endtrans %}
-    </p>
-  {% endif %}
 
   <h2>{{ _('What happens next?') }}</h2>
   {% if session.callback_requested %}
