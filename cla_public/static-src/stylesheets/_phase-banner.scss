@@ -16,18 +16,11 @@
     border-color: $black;
 
     .phase-tag {
-      margin-bottom: 2mm;
-      font-size: 7pt;
-      padding: 1pt 2pt 0;
-      line-height: 1;
+      font-size: 10pt;
       border: 2px solid $black;
       color: $black;
-    }
-
-    span {
-      display: block;
-      width: auto;
-      font-size: 7pt;
+      background: none;
+      margin: 5pt 5pt 0 0;
     }
   }
 
