@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-20 11:55+0000\n"
+"POT-Creation-Date: 2015-02-20 17:01+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -1389,7 +1389,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/help-organisations.html:56
-#: cla_public/templates/result/eligible-no-callback.html:32
+#: cla_public/templates/result/eligible-no-callback.html:29
 #: cla_public/templates/result/face-to-face.html:66
 msgid "Find a legal adviser"
 msgstr ""
@@ -2496,19 +2496,14 @@ msgstr ""
 msgid "You might qualify for legal aid"
 msgstr ""
 
-#: cla_public/templates/result/eligible-no-callback.html:9
-#: cla_public/templates/result/eligible.html:13
-msgid "Based on the answers you’ve given today, you might qualify financially for legal aid."
-msgstr ""
-
-#: cla_public/templates/result/eligible-no-callback.html:13
+#: cla_public/templates/result/eligible-no-callback.html:10
 msgid ""
 "Civil Legal Advice does not provide advice about issues\n"
 "      related to welfare benefits but you may be able to get free advice from\n"
 "      a legal adviser in your area. "
 msgstr ""
 
-#: cla_public/templates/result/eligible-no-callback.html:19
+#: cla_public/templates/result/eligible-no-callback.html:16
 #: cla_public/templates/result/face-to-face.html:54
 msgid ""
 "Your adviser will check whether you qualify for legal aid at\n"
@@ -2516,7 +2511,7 @@ msgid ""
 "      for legal advice."
 msgstr ""
 
-#: cla_public/templates/result/eligible-no-callback.html:25
+#: cla_public/templates/result/eligible-no-callback.html:22
 #: cla_public/templates/result/face-to-face.html:60
 msgid ""
 "If you don't qualify for legal aid, you will have to pay for\n"
@@ -2526,6 +2521,10 @@ msgstr ""
 
 #: cla_public/templates/result/eligible.html:6
 msgid "We need more information"
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:13
+msgid "Based on the answers you’ve given today, you might qualify financially for legal aid."
 msgstr ""
 
 #: cla_public/templates/result/eligible.html:15
@@ -2621,7 +2620,7 @@ msgstr ""
 msgid ""
 "You will usually only get legal aid for advice about\n"
 "        clinical negligence if your child has been severely injured during\n"
-"        birth or in the first 8 weeks of life."
+"        birth or in the first eight weeks of life."
 msgstr ""
 
 #: cla_public/templates/result/face-to-face.html:33
@@ -2670,21 +2669,10 @@ msgstr ""
 #~ msgid "Does anyone else (other than you) own a share of the property?"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "To get advice about appealing a decision made by the social security tribunal about your\n"
-#~ "    benefits to the Upper Tribunal, Court of Appeal or Supreme Court you should contact your\n"
-#~ "    nearest legal adviser."
-#~ msgstr ""
-
 #~ msgid "They will check whether you qualify for legal aid. You should not have to pay for this check."
 #~ msgstr ""
 
 #~ msgid "We do not provide advice about issues related to"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "You will usually only get Legal Aid for advice about Clinical Negligence if\n"
-#~ "      your child has been severely injured during birth or in the first 8 weeks of life"
 #~ msgstr ""
 
 #~ msgid "Legal Aid is not usually available for advice about personal injury"
@@ -2693,38 +2681,12 @@ msgstr ""
 #~ msgid "You may be able to get advice from a legal advisor in your area"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "If your employment problem relates to discrimination (for example, you have been treated\n"
-#~ "      unfairly because of your sex, age or other protected characteristic) we might be able to\n"
-#~ "      help. Please go back to <a href=\"/\">start</a> page and click discrimination."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "If your employment problem is not connected to discrimination, legal aid is not usually\n"
-#~ "      available."
-#~ msgstr ""
-
 #~ msgid "You may be able to get free help from:"
 #~ msgstr ""
 
 #~ msgid "You can also seek advice from a legal adviser – you will have to pay for this advice."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "To find out if you might qualify, contact a legal adviser in your area. They will check\n"
-#~ "        whether you qualify for legal aid. You should not have to pay for this check."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "You may be able to get legal aid in exceptional cases. You could seek advice from a legal\n"
-#~ "        adviser about whether an application might succeed in your case and how to apply."
-#~ msgstr ""
-
 #~ msgid "If you don’t qualify for legal aid, you should speak to your adviser about the cost of advice."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Legal aid may still be available in exceptional cases. You could seek advice from a legal\n"
-#~ "      adviser about whether an application might succeed in your case and how to apply."
 #~ msgstr ""
 

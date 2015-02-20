@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-20 11:55+0000\n"
+"POT-Creation-Date: 2015-02-20 17:01+0000\n"
 "PO-Revision-Date: 2015-02-06 14:57+0000\n"
 "Last-Translator: Josh Rowe <josh.rowe@digital.justice.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/projects/p/cla-public/language/cy/)\n"
@@ -1391,7 +1391,7 @@ msgid ""
 msgstr "Os oes gennych ddyddiad gwrandawiad llys, mae’n bwysig eich bod yn cael cyngor cyn gynted â phosib. Efallai y cewch gymorth ar fyr rybudd ar ddiwrnod y gwrandawiad gan gynghorydd yn adeilad y llys."
 
 #: cla_public/templates/help-organisations.html:56
-#: cla_public/templates/result/eligible-no-callback.html:32
+#: cla_public/templates/result/eligible-no-callback.html:29
 #: cla_public/templates/result/face-to-face.html:66
 msgid "Find a legal adviser"
 msgstr "Dod o hyd i gynghorydd cyfreithiol"
@@ -2498,19 +2498,14 @@ msgstr "Argraffu'r dudalen hon"
 msgid "You might qualify for legal aid"
 msgstr "Gallech chi fod yn gymwys i gael cymorth cyfreithiol"
 
-#: cla_public/templates/result/eligible-no-callback.html:9
-#: cla_public/templates/result/eligible.html:13
-msgid "Based on the answers you’ve given today, you might qualify financially for legal aid."
-msgstr "Ar sail yr atebion yr ydych chi wedi’u rhoi heddiw, mae’n bosibl y byddwch chi’n gymwys i gael cymorth cyfreithiol o ganlyniad i’ch sefyllfa ariannol."
-
-#: cla_public/templates/result/eligible-no-callback.html:13
+#: cla_public/templates/result/eligible-no-callback.html:10
 msgid ""
 "Civil Legal Advice does not provide advice about issues\n"
 "      related to welfare benefits but you may be able to get free advice from\n"
 "      a legal adviser in your area. "
 msgstr ""
 
-#: cla_public/templates/result/eligible-no-callback.html:19
+#: cla_public/templates/result/eligible-no-callback.html:16
 #: cla_public/templates/result/face-to-face.html:54
 msgid ""
 "Your adviser will check whether you qualify for legal aid at\n"
@@ -2518,7 +2513,7 @@ msgid ""
 "      for legal advice."
 msgstr "Bydd y cynghorydd cyfreithiol yn gweld a ydych chi’n gymwys i gael cymorth cyfreithiol. Ni ddylech chi orfod talu am y gwiriad hwn. "
 
-#: cla_public/templates/result/eligible-no-callback.html:25
+#: cla_public/templates/result/eligible-no-callback.html:22
 #: cla_public/templates/result/face-to-face.html:60
 msgid ""
 "If you don't qualify for legal aid, you will have to pay for\n"
@@ -2529,6 +2524,10 @@ msgstr "Os na fyddwch chi’n gymwys i gael cymorth cyfreithiol, dylech chi siar
 #: cla_public/templates/result/eligible.html:6
 msgid "We need more information"
 msgstr "Mae angen i ni gael rhagor o wybodaeth"
+
+#: cla_public/templates/result/eligible.html:13
+msgid "Based on the answers you’ve given today, you might qualify financially for legal aid."
+msgstr "Ar sail yr atebion yr ydych chi wedi’u rhoi heddiw, mae’n bosibl y byddwch chi’n gymwys i gael cymorth cyfreithiol o ganlyniad i’ch sefyllfa ariannol."
 
 #: cla_public/templates/result/eligible.html:15
 msgid "Please submit your details below so we can call you back."
@@ -2623,7 +2622,7 @@ msgstr "Efallai y gallwch gael cyngor gan gynghorydd cyfreithiol yn eich ardal"
 msgid ""
 "You will usually only get legal aid for advice about\n"
 "        clinical negligence if your child has been severely injured during\n"
-"        birth or in the first 8 weeks of life."
+"        birth or in the first eight weeks of life."
 msgstr "Fel arfer dim ond os yw’ch plentyn wedi cael ei anafu’n ddifrifol wrth ei eni neu yn ystod wyth wythnos gyntaf ei fywyd y byddwch chi’n cael cymorth cyfreithiol ar gyfer cyngor ar esgeuluster clinigol"
 
 #: cla_public/templates/result/face-to-face.html:33
@@ -2662,3 +2661,4 @@ msgstr "Y Gwasanaeth Cynghori, Cymodi a Chyflafareddu (Acas)"
 #: cla_public/templates/result/face-to-face.html:75
 msgid "Law Centres Network"
 msgstr "Rhwydwaith Canolfannau'r Gyfraith"
+

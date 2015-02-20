@@ -5,9 +5,6 @@
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
-  <h2>
-    {{ _('Based on the answers you’ve given today, you might qualify financially for legal aid.') }}
-  </h2>
 
   <p>
     {% trans %}Civil Legal Advice does not provide advice about issues
@@ -26,7 +23,7 @@
       legal advice. You should ask your adviser about the cost of their
       advice.{% endtrans %}
   </p>
-  
+
   <p>
     <a class="button button-large" href="http://find-legal-advice.justice.gov.uk/">
       {{ _('Find a legal adviser') }}
