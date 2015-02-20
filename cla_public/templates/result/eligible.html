@@ -45,8 +45,9 @@
   </script>
 {% endblock %}
 
-{% block below_form %}
+{% block notice_content %}
   {% if session.need_more_info %}
+    <h2>{{ _('What happens next?') }}</h2>
     <p>
       {% trans %}Your CLA specialist adviser will ask you more questions before making the final decision about
       whether you qualify for legal aid.{% endtrans %}

@@ -55,7 +55,7 @@
     {{ Subform.address(form.address) }}
 
     {% call Form.fieldset(form.extra_notes, as_label=True) %}
-      {{ form.extra_notes(class_='form-control m-full', rows=6) }}
+      {{ form.extra_notes(class_='form-control m-full', rows=7) }}
     {% endcall %}
 
     {{ Subform.adaptations(form.adaptations) }}
@@ -66,28 +66,32 @@
     {{ Form.actions(_('Submit details')) }}
   </form>
 
-  {% block below_form %}
-    <h2>{{ _('What happens next?') }}</h2>
-    <p>
-      {% trans %}The first person you speak to will be an operator. They will ask you questions about
-      you and your problem, including you and your partner's financial circumstances.{% endtrans %}
-    </p>
-    <p>
-      {% trans %}If it looks like you might qualify you will be put through to a CLA specialist
-      adviser immediately.{% endtrans %}
-    </p>
-    <p>
-      {{ _('If CLA can’t help you we will always suggest where else you might get help.') }}
-    </p>
-    <p>
-      {% trans %}If we can do anything to make it easier for you to communicate with us due to your
-      disability please tell the operator.{% endtrans %}
-    </p>
-    <p>
-      {% trans %}Protecting your personal data and your privacy is important to us. We are asking for
-      some information from you now so that when we call you back we know who you are. You
-      can read the full <a href="/privacy">Civil Legal Advice Privacy Statement here</a>.{% endtrans %}
-    </p>
+  {% block notice %}
+    <div class="notice">
+      {% block notice_content %}
+      <h2>{{ _('What happens next?') }}</h2>
+      <p>
+        {% trans %}The first person you speak to will be an operator. They will ask you questions about
+        you and your problem, including you and your partner's financial circumstances.{% endtrans %}
+      </p>
+      <p>
+        {% trans %}If it looks like you might qualify you will be put through to a CLA specialist
+        adviser immediately.{% endtrans %}
+      </p>
+      <p>
+        {{ _('If CLA can’t help you we will always suggest where else you might get help.') }}
+      </p>
+      <p>
+        {% trans %}If we can do anything to make it easier for you to communicate with us due to your
+        disability please tell the operator.{% endtrans %}
+      </p>
+      <p>
+        {% trans %}Protecting your personal data and your privacy is important to us. We are asking for
+        some information from you now so that when we call you back we know who you are. You
+        can read the full <a href="/privacy">Civil Legal Advice Privacy Statement here</a>.{% endtrans %}
+      </p>
+      {% endblock %}
+    </div>
   {% endblock %}
 {% endblock %}
 
