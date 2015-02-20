@@ -67,6 +67,22 @@ class RequestCallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
                       u'always call you back by the next working day.'))
 
 
+class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
+    """
+    Subform for address fields
+    """
+    post_code = StringField(
+        _(u'Postcode'),
+        validators=[
+            Length(max=12, message=_(u'Your postcode must be 12 characters '
+                                     u'or less')),
+            NotRequired()])
+    street_address = TextAreaField(
+        _(u'Street address'),
+        validators=[
+            Length(max=255, message=_(u'Your address must be 255 characters '
+                                      u'or less')),
+            NotRequired()])
 
 
 class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
@@ -91,18 +107,9 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[
             IgnoreIf('callback_requested', FieldValue(NO))
         ])
-    post_code = StringField(
-        _(u'Postcode'),
-        validators=[
-            Length(max=12, message=_(u'Your postcode must be 12 characters '
-                                     u'or less')),
-            Optional()])
-    address = TextAreaField(
-        _(u'Address'),
-        validators=[
-            Length(max=255, message=_(u'Your address must be 255 characters '
-                                      u'or less')),
-            Optional()])
+    address = ValidatedFormField(
+        AddressForm,
+        validators=[Optional()])
     extra_notes = TextAreaField(
         _(u'Help the operator to understand your situation'),
         description=(_(
@@ -122,9 +129,9 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
         data = {
             'personal_details': {
                 'full_name': self.full_name.data,
-                'postcode': self.post_code.data,
+                'postcode': self.address.form.post_code.data,
                 'mobile_phone': self.callback.form.contact_number.data,
-                'street': self.address.data,
+                'street': self.address.form.street_address.data,
                 'safe_to_contact': self.callback.form.safe_to_contact.data
             },
             'adaptation_details': {

@@ -52,15 +52,7 @@
       {% endcall %}
     {% endcall %}
 
-    {% call Form.fieldset(form.post_code, as_label=True) %}
-      <div class="address-finder">
-        {{ form.post_code(class_='form-control m-small', **{ 'data-address-el': '#address' }) }}
-      </div>
-    {% endcall %}
-
-    {% call Form.fieldset(form.address, as_label=True) %}
-      {{ form.address(class_='form-control m-large', rows=5) }}
-    {% endcall %}
+    {{ Subform.address(form.address) }}
 
     {% call Form.fieldset(form.extra_notes, as_label=True) %}
       {{ form.extra_notes(class_='form-control m-full', rows=6) }}
