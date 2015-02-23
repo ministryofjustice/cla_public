@@ -135,7 +135,8 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         if step.name == 'benefits-tax-credits':
             return not session.children_or_tax_credits
 
-        if session.is_on_passported_benefits:
+        if session.is_on_passported_benefits \
+                and step.name not in ('problem', 'about', 'benefits'):
             return True
 
         return False
