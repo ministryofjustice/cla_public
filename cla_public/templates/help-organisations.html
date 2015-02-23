@@ -6,12 +6,23 @@
 
 {% block inner_content %}
   <h1>{{ _('You’re unlikely to get legal aid') }}</h1>
+
   <p>
     {% trans fromcla = 'from CLA ' if category == 'violence' else '' %}From
     what you have told us today it looks like you won't be able to get
     legal aid {{ fromcla }}as you don’t qualify financially{% endtrans %}
     {% if category == 'violence' %} {{ _('for the advice they can provide') }}{% endif %}.
   </p>
+
+  <p>{{ _('To qualify for legal aid, you must meet all of the following conditions:') }}</p>
+  <ul>
+    <li>{{ _('your income (or combined income if you have a partner) should not be more than £2,657 a month before tax') }}</li>
+    <li>{{ _('your savings (or combined savings if you have a partner) should not be more than £8,000') }}</li>
+    <li>
+      {% trans %}you (and your partner if you have one) should have no more than £733 a month left after we've taken
+      certain living expenses into account{% endtrans %}
+    </li>
+  </ul>
 
   {% if category == 'family' %}
     <p>

@@ -7,72 +7,86 @@ exports.CATEGORIES_OF_LAW = [
   {
     value: 'clinneg',
     name: 'Clinical negligence',
-    covered: false
+    covered: false,
+    headline: 'You may be able to get free advice from a legal adviser'
   },
   {
     value: 'commcare',
     name: 'Community care',
-    covered: false
+    covered: false,
+    headline: 'You may be able to get free advice from a legal adviser'
   },
   {
     value: 'debt',
     name: 'Debt',
-    covered: true
+    covered: true,
+    headline: ''
   },
   {
     value: 'discrimination',
     name: 'Discrimination',
-    covered: true
+    covered: true,
+    headline: ''
   },
   {
     value: 'education',
     name: 'Education',
-    covered: true
+    covered: true,
+    headline: ''
   },
   {
     value: 'family',
     name: 'Family',
-    covered: true
+    covered: true,
+    headline: ''
   },
   {
     value: 'housing',
     name: 'Housing',
-    covered: true
+    covered: true,
+    headline: ''
   },
   {
     value: 'immigration',
     name: 'Immigration and asylum',
-    covered: false
+    covered: false,
+    headline: 'You may be able to get free advice from a legal adviser',
   },
   {
     value: 'mentalhealth',
     name: 'Mental health',
-    covered: false
+    covered: false,
+    headline: 'You may be able to get free advice from a legal adviser',
   },
   {
     value: 'pi',
     name: 'Personal injury',
-    covered: false
+    covered: false,
+    headline: 'Legal aid is not usually available for advice about personal injury',
   },
   {
     value: 'publiclaw',
     name: 'Public law',
-    covered: false
+    covered: false,
+    headline: 'You may be able to get free advice from a legal adviser',
   },
   {
     value: 'aap',
     name: 'Trouble with the police',
-    covered: false
+    covered: false,
+    headline: 'You may be able to get free advice from a legal adviser',
   },
   {
     value: 'violence',
     name: 'Domestic violence',
-    covered: true
+    covered: true,
+    headline: ''
   },
   {
     value: 'benefits',
     name: 'Welfare benefits appeals',
-    covered: true
+    covered: true,
+    headline: ''
   }
 ];
 
