@@ -59,14 +59,18 @@
   <h1>Summary</h1>
 
   {% for step in steps %}
+  {% with fields = step.completed_fields() %}
+  {% if fields %}
   <h2><a href="{{ url_for('checker.wizard', step=step.name) }}">{{ step.form_class.title }}</a></h2>
   <table class="review">
-    {% for field_name, field in step.completed_fields() %}
+    {% for field_name, field in fields %}
     <tr>
       {{ render_value(field_name, field) }}
     </tr>
     {% endfor %}
   </table>
+  {% endif %}
+  {% endwith %}
   {% endfor %}
 
   <form method="POST" name="review_submit">
