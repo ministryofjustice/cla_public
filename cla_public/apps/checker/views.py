@@ -60,6 +60,26 @@ class UpdatesMeansTest(object):
             return super(UpdatesMeansTest, self).on_valid_submit()
 
 
+def is_null(field):
+
+    if field.data is None:
+        return True
+
+    if hasattr(field, '_money_interval_field'):
+        if field.data['per_interval_value'] is None:
+            return True
+
+    if isinstance(field.data, list):
+        if len(field.data) == 0:
+            return True
+
+    if hasattr(field, 'form'):
+        if all(map(is_null, field.form._fields.values())):
+            return True
+
+    return False
+
+
 class CheckerStep(UpdatesMeansTest, FormWizardStep):
 
     def completed_fields(self):
@@ -70,7 +90,8 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
             name, field = field
             if name in ['csrf_token', honeypot.FIELD_NAME]:
                 return False
-            return field.data is not None
+
+            return not is_null(field)
 
         fields = filter(user_completed, form._fields.items())
         fields = map(lambda (name, field): (field.label.text, field), fields)
