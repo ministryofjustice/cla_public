@@ -4,10 +4,10 @@
 
 {% macro render_value(field_name, field) %}
   {% if field._money_field %}
-    <th>{{ field_name }}</th>
+    <th data-field="{{ field.name }}">{{ field_name }}</th>
     <td>&pound;{{ field.data }}</td>
   {% elif field._money_interval_field %}
-    <th>{{ field_name }}</th>
+    <th data-field="{{ field.name }}">{{ field_name }}</th>
     <td>&pound;{{ field.data.per_interval_value }}
       {{ choice_label(field.form.interval_period, field.data.interval_period) }}</td>
   {% elif field._property_list %}
@@ -37,10 +37,10 @@
     </td>
   {% elif field.choices %}
     {% if field.data is string %}
-      <th>{{ field_name }}</th>
+      <th data-field="{{ field.name }}">{{ field_name }}</th>
       <td>{{ choice_label(field, field.data) }}</td>
     {% else %}
-      <th>{{ field_name }}</th>
+      <th data-field="{{ field.name }}">{{ field_name }}</th>
       <td>
         <ul>
           {% for item in field.data %}
@@ -50,7 +50,7 @@
       </td>
     {% endif %}
   {% else %}
-    <th>{{ field_name }}</th>
+    <th data-field="{{ field.name }}">{{ field_name }}</th>
     <td>{{ field.data }}</td>
   {% endif %}
 {% endmacro %}

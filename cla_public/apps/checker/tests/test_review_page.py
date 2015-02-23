@@ -19,10 +19,19 @@ class TestReviewPage(unittest.TestCase):
 
     def assertReviewSection(self, url, html):
         soup = BeautifulSoup(html)
-        sections = soup.select('.main-content h2 a[href="{0}"]'.format(url))
-        self.assertEqual(
-            1, len(sections),
+        section = next(
+            iter(soup.select('.main-content h2 a[href="{0}"]'.format(url))),
+            None)
+        self.assertIsNotNone(
+            section,
             'Section not present: {0}'.format(url))
+
+    def assertQuestionNotShown(self, question, html):
+        soup = BeautifulSoup(html)
+        questions = soup.find_all('th', {'data-field': question})
+        self.assertIsNone(
+            next(iter(questions), None),
+            'Question "{0}" is shown'.format(question))
 
     def setProblem(self, problem):
         with self.client.session_transaction() as session:
@@ -44,6 +53,10 @@ class TestReviewPage(unittest.TestCase):
             session['YourBenefitsForm'] = {
                 'benefits': benefits}
 
+    def setBenefitsTaxCreditsAnswers(self, **answers):
+        with self.client.session_transaction() as session:
+            session['TaxCreditsForm'] = answers
+
     def test_review_page_about_you(self):
         self.setProblem('debt')
         self.setAboutYouAnswers(on_benefits=YES)
@@ -57,3 +70,11 @@ class TestReviewPage(unittest.TestCase):
         self.setBenefits(passported=True)
         response = self.client.get('/review')
         self.assertReviewSection('/about', response.data)
+
+    def test_default_values_not_shown(self):
+        self.setProblem('debt')
+        self.setAboutYouAnswers(on_benefits=YES)
+        self.setBenefits(passported=False)
+        self.setBenefitsTaxCreditsAnswers(other_benefits=NO)
+        response = self.client.get('/review')
+        self.assertQuestionNotShown('total_other_benefit', response.data)
