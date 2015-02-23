@@ -19,15 +19,16 @@ var eligibleJourney = function(client) {
     .assert.containsText('body', 'Are you on any of these benefits?')
     .click('input[value="income_support"]')
     .submitForm('form')
-    .waitForElementVisible('input[name="contact_number"]', 2000)
+    .waitForElementVisible('input[name="callback_requested"]', 2000)
     .assert.urlContains('/result/eligible')
     .assert.containsText('h1', 'You might qualify for legal aid')
-    .assert.containsText('h2', 'Request a callback')
+    .assert.containsText('h2', 'Contact Civil Legal Advice')
+    .click('input[name="callback_requested"][value="1"]')
     .setValue('input[name="full_name"]', 'John Smith')
-    .setValue('input[name="contact_number"]', '01234 567890')
-    .click('input[name="safe_to_contact"][value="SAFE"]')
-    .setValue('input[name="post_code"]', 'E18 1JA')
-    .setValue('textarea[name="address"]', '3 Crescent Road\nLondon')
+    .setValue('input[name="callback-contact_number"]', '01234 567890')
+    .click('input[name="callback-safe_to_contact"][value="SAFE"]')
+    .setValue('input[name="address-post_code"]', 'E18 1JA')
+    .setValue('textarea[name="address-street_address"]', '3 Crescent Road\nLondon')
   ;
 };
 

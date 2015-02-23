@@ -126,7 +126,7 @@ module.exports = {
     client
       .setValue('input[name="income_contribution"]', 0)
       .submitForm('form')
-      .waitForElementPresent('input[name="contact_number"]', 2000)
+      .waitForElementPresent('input[name="callback-contact_number"]', 2000)
       .assert.urlContains('/result/eligible')
     ;
 
