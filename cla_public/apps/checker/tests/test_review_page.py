@@ -64,17 +64,42 @@ class TestReviewPage(unittest.TestCase):
         response = self.client.get('/review')
         self.assertReviewSection('/about', response.data)
 
-    def test_review_page_bug_passported_about_you_missing(self):
+    def test_bug_passported_about_you_missing(self):
         self.setProblem('debt')
         self.setAboutYouAnswers(on_benefits=YES)
         self.setBenefits(passported=True)
         response = self.client.get('/review')
         self.assertReviewSection('/about', response.data)
 
-    def test_default_values_not_shown(self):
+    def find_question(self, question, html):
+        soup = BeautifulSoup(html)
+        return next(
+            iter(soup.find_all('th', {'data-field': question})),
+            None)
+
+    def assertAnswerShown(self, question, html):
+        self.assertIsNotNone(
+            self.find_question(question, html),
+            '"{0}" is not shown'.format(question))
+
+    def assertAnswerNotShown(self, question, html):
+        self.assertIsNone(
+            self.find_question(question, html),
+            '"{0}" is shown'.format(question))
+
+    def test_null_default_values_shown(self):
         self.setProblem('debt')
         self.setAboutYouAnswers(on_benefits=YES)
         self.setBenefits(passported=False)
         self.setBenefitsTaxCreditsAnswers(other_benefits=NO)
         response = self.client.get('/review')
-        self.assertQuestionNotShown('total_other_benefit', response.data)
+        self.assertAnswerNotShown('total_other_benefit', response.data)
+
+    def test_children_not_shown_after_deselected(self):
+        self.setProblem('debt')
+        self.setAboutYouAnswers(have_children=YES, num_children=1)
+        response = self.client.get('/review')
+        self.assertAnswerShown('num_children', response.data)
+        self.setAboutYouAnswers(have_children=NO)
+        response = self.client.get('/review')
+        self.assertAnswerNotShown('num_children', response.data)
