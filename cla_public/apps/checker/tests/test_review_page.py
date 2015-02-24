@@ -95,7 +95,5 @@ class TestReviewPage(unittest.TestCase):
 
     def test_children_not_shown_after_deselected(self):
         self.set_problem('debt')
-        self.set_about_you_answers(have_children=YES, num_children=1)
-        self.assert_answer_shown('num_children')
-        self.set_about_you_answers(have_children=NO)
+        self.set_about_you_answers(have_children=NO, num_children=1)
         self.assert_answer_not_shown('num_children')

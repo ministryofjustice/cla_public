@@ -7,6 +7,7 @@ from flask import abort, render_template, redirect, session, url_for, views
 from flask.ext.babel import lazy_gettext as _
 from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
+from wtforms.validators import StopValidation
 
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_eligibility_check_api, \
@@ -17,6 +18,7 @@ from cla_public.apps.checker.constants import CATEGORIES, \
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm, ReviewForm
+from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
 from cla_public.libs.utils import override_locale, log_to_sentry
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
@@ -89,6 +91,23 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
         def user_completed(field):
             name, field = field
             if name in ['csrf_token', honeypot.FIELD_NAME]:
+                return False
+
+            def should_ignore(field):
+                ignore_validators = filter(
+                    lambda v: isinstance(v, IgnoreIf),
+                    field.validators)
+
+                def triggered(v):
+                    try:
+                        v(form, field)
+                    except StopValidation:
+                        return True
+                    return False
+
+                return any(map(triggered, ignore_validators))
+
+            if should_ignore(field):
                 return False
 
             return not is_null(field)
