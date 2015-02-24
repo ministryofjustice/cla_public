@@ -7,9 +7,13 @@
     <th data-field="{{ field.name }}">{{ field_name }}</th>
     <td>&pound;{{ field.data }}</td>
   {% elif field._money_interval_field %}
+    {% if field.data.per_interval_value != None %}
     <th data-field="{{ field.name }}">{{ field_name }}</th>
     <td>&pound;{{ field.data.per_interval_value }}
-      {{ choice_label(field.form.interval_period, field.data.interval_period) }}</td>
+      {% if field.data.per_interval_value != 0 -%}
+        {{ choice_label(field.form.interval_period, field.data.interval_period) }}
+      {%- endif %}</td>
+    {% endif %}
   {% elif field._property_list %}
     {% for property in field %}
       <td class="subheading" colspan="2">
