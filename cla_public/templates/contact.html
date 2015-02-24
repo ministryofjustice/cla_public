@@ -9,7 +9,7 @@
 
 {% block inner_content %}
   {% block page_text %}
-    {% if config.CALLMEBACK_ONLY %}
+    {% if config.CONTACT_ONLY %}
       {% call Element.alert() %}
         <p>{{ _('The full service is currently unavailable. However, you can still get in touch using the form below.') }}</p>
       {% endcall %}
@@ -26,7 +26,7 @@
     </p>
   {% endblock %}
 
-  <form method="POST" action="{{ url_for('callmeback.request_callback') }}">
+  <form method="POST" action="{{ url_for('contact.get_in_touch') }}">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 

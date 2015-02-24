@@ -8,10 +8,10 @@ from wtforms.validators import ValidationError
 
 from cla_common import call_centre_availability
 from cla_public.app import create_app
-from cla_public.apps.callmeback.constants import DAY_TODAY, DAY_SPECIFIC
-from cla_public.apps.callmeback.fields import AvailableSlot, DayChoiceField, \
+from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
+from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, \
     OPERATOR_HOURS
-from cla_public.apps.callmeback.forms import CallMeBackForm
+from cla_public.apps.contact.forms import ContactForm
 
 
 logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
@@ -136,10 +136,10 @@ class TestCallbackInPastBug(unittest.TestCase):
 
     def test_EU_5247_5578(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
-            form = CallMeBackForm()
+            form = ContactForm()
             self.assertEqual([], form.callback.time.form.time_today.choices)
 
     def test_YJ_4697_7619(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 22, 19)):
-            form = CallMeBackForm()
+            form = ContactForm()
             self.assertEqual([], form.callback.time.form.time_today.choices)

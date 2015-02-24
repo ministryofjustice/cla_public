@@ -7,10 +7,10 @@ import pytz
 from werkzeug.datastructures import MultiDict
 
 from cla_public import app
-from cla_public.apps.callmeback.tests.test_availability import \
+from cla_public.apps.contact.tests.test_availability import \
     override_current_time
 from cla_public.apps.checker.constants import NO, YES
-from cla_public.apps.callmeback.forms import CallMeBackForm
+from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm, \
     IncomeForm, OutgoingsForm
@@ -400,7 +400,7 @@ class TestApiPayloads(unittest.TestCase):
         form_data.update(flatten_dict('callback', callback_data))
         form_data.update(flatten_dict('address', address_data))
         with override_current_time(self.now):
-            payload = self.payload(CallMeBackForm, form_data)
+            payload = self.payload(ContactForm, form_data)
 
             self.assertEqual(payload['personal_details']['full_name'], 'Full Name')
             self.assertEqual(payload['personal_details']['postcode'], 'POSTCODE')

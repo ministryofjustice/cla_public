@@ -96,9 +96,9 @@ def get_started():
     """
     session.clear()
     session['started'] = datetime.datetime.now()
-    if current_app.config.get('CALLMEBACK_ONLY'):
-        session['callmeback_only'] = 'yes'
-        return redirect(url_for('callmeback.request_callback'))
+    if current_app.config.get('CONTACT_ONLY'):
+        session['contact_only'] = 'yes'
+        return redirect(url_for('contact.get_in_touch'))
     return redirect(url_for('checker.wizard', step='problem'))
 
 

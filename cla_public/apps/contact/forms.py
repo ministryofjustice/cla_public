@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"CallMeBack forms"
+"Contact forms"
 
 from flask import session
 from flask.ext.babel import lazy_gettext as _
@@ -10,7 +10,7 @@ from wtforms import BooleanField, FormField, RadioField, SelectField, \
 from wtforms.validators import InputRequired, Optional, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES
-from cla_public.apps.callmeback.fields import AvailabilityCheckerField, \
+from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
 from cla_public.apps.checker.constants import CONTACT_SAFETY, CONTACT_PREFERENCE, \
     YES, NO
@@ -42,7 +42,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
         description=_(u'Please tell us what you need in the box below'))
 
 
-class RequestCallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
+class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     """
     Subform to request callback
     """
@@ -85,7 +85,7 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
             NotRequired()])
 
 
-class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
+class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Form to request a callback
     """
@@ -103,7 +103,7 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
             InputRequired(message=_(u'Please choose one of the options'))],
     )
     callback = ValidatedFormField(
-        RequestCallBackForm,
+        CallBackForm,
         validators=[
             IgnoreIf('callback_requested', FieldValue(NO))
         ])

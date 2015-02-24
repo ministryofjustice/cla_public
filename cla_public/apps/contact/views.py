@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"CallMeBack views"
+"Contact views"
 
 import logging
 
@@ -9,8 +9,8 @@ from cla_public.libs.utils import log_to_sentry
 from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
 
-from cla_public.apps.callmeback import callmeback
-from cla_public.apps.callmeback.forms import CallMeBackForm
+from cla_public.apps.contact import contact
+from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api
 from cla_public.apps.checker.views import UpdatesMeansTest
@@ -20,15 +20,15 @@ from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView
 log = logging.getLogger(__name__)
 
 
-@callmeback.after_request
+@contact.after_request
 def add_no_cache_headers(response):
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
     response.headers['Pragma'] = 'no-cache'
     return response
 
 
-class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
-    form_class = CallMeBackForm
+class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
+    form_class = ContactForm
     template = 'contact.html'
 
     def on_valid_submit(self):
@@ -44,7 +44,7 @@ class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 u'There was an error submitting your data. '
                 u'Please check and try again.')
             log_to_sentry(
-                u'Slumber Exception on CallMeBack page: %s' % e)
+                u'Slumber Exception on Contact page: %s' % e)
             return self.get()
         else:
             return redirect(url_for('.confirmation'))
@@ -52,16 +52,16 @@ class CallMeBack(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
     def dispatch_request(self, *args, **kwargs):
         if not session:
             session['force_session'] = True
-        return super(CallMeBack, self).dispatch_request(*args, **kwargs)
+        return super(Contact, self).dispatch_request(*args, **kwargs)
 
 
 
-callmeback.add_url_rule(
+contact.add_url_rule(
     '/contact',
-    view_func=CallMeBack.as_view('request_callback'))
+    view_func=Contact.as_view('get_in_touch'))
 
 
-class CallMeBackConfirmation(views.MethodView):
+class ContactConfirmation(views.MethodView):
 
     def get(self):
         session.clear_and_store_ref()
@@ -70,6 +70,6 @@ class CallMeBackConfirmation(views.MethodView):
         return render_template('result/confirmation.html')
 
 
-callmeback.add_url_rule(
+contact.add_url_rule(
     '/result/confirmation',
-    view_func=CallMeBackConfirmation.as_view('confirmation'))
+    view_func=ContactConfirmation.as_view('confirmation'))

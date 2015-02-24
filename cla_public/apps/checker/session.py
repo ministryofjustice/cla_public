@@ -166,7 +166,7 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def callback_time(self):
-        return self.field('CallMeBackForm', 'callback', {}).get('time', None)
+        return self.field('ContactForm', 'callback', {}).get('time', None)
 
     def add_note(self, note):
         notes = self.get('notes', [])
@@ -184,7 +184,7 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def callback_requested(self):
-        return self.is_yes('CallMeBackForm', 'callback_requested')
+        return self.is_yes('ContactForm', 'callback_requested')
 
     def clear_and_store_ref(self):
         if not self.get('is_expired', False):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"CallMeBack constants"
+"Contact constants"
 
 from flask.ext.babel import lazy_gettext as _
 
