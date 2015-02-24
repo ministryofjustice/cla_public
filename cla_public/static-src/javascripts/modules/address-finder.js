@@ -130,7 +130,8 @@
         .addClass('m-error')
         .find('.fieldset-label')
         .addClass('m-error');
-      this.$formGroup.prepend($('<div class="form-row field-error"><p>' + msg + '</p></div>'));
+      this.$formGroup.find('.form-row')
+        .before($('<div class="form-row field-error"><p>' + msg + '</p></div>'));
     },
 
     reset: function () {
