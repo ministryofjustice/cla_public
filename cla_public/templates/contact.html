@@ -17,12 +17,12 @@
     <h1>{{ title }}</h1>
     <p>
       {% trans %}Please submit your details to get your personal case reference number.
-      You will need to quote this number when you call CLA.{% endtrans %}
+      You will need to quote this number when you speak with CLA.{% endtrans %}
     </p>
     <p>
       {% trans %}You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -
       <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
-      or ask us to call you back, which is free for you.{% endtrans %}
+      or ask us to call you back, which is free.{% endtrans %}
     </p>
   {% endblock %}
 
@@ -75,8 +75,7 @@
         you and your problem, including you and your partner's financial circumstances.{% endtrans %}
       </p>
       <p>
-        {% trans %}If it looks like you might qualify you will be put through to a CLA specialist
-        adviser immediately.{% endtrans %}
+        {{ _('If it looks like you might qualify you will be put through to a CLA specialist adviser.') }}
       </p>
       <p>
         {{ _('If CLA can’t help you we will always suggest where else you might get help.') }}

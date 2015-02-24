@@ -20,8 +20,8 @@
     </p>
     {% if not session.stored_callback_requested %}
       <p class="confirmation-inset">
-        {% trans %}You can now call CLA on <strong>0345 345 4 345</strong>.<br>
-        Please quote your reference number when you call. Find out about
+        {{ _('You can now call CLA on') }} <strong>0345 345 4 345</strong>.<br>
+        {% trans %}Please quote your reference number when you call. Find out about
         <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
       </p>
     {% endif %}
@@ -46,7 +46,7 @@
     {% else %}
       {% if session.stored_category == 'violence' %}
         <p>
-          {% trans %}If you need to urgently protect you or your family you should
+          {% trans %}If you need to urgently protect yourself or your family you should
           try and get advice as soon as possible.{% endtrans %}
         </p>
       {% endif %}

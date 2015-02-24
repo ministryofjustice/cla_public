@@ -6,7 +6,7 @@ forms:
       categories:
         field_options:
           violence:
-            selected_notification: If you are in immediate danger you can ask us to [call you back](/contact).
+            selected_notification: If you are in immediate danger you can [get in touch](/contact).
 
           family:
-            selected_notification: If you are a parent of a child who the local authority is trying to take in to care, ask us to [call you back](/contact).
+            selected_notification: If you are a parent of a child who the local authority is trying to take in to care, [get in touch](/contact).
