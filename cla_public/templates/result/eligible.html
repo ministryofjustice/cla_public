@@ -1,4 +1,4 @@
-{% extends "call-me-back.html" %}
+{% extends "contact.html" %}
 
 {% block page_text %}
   <h1>
@@ -8,43 +8,33 @@
       {{ _('You might qualify for legal aid') }}
     {%- endif -%}
   </h1>
-  <h2>{{ _('Request a callback') }}</h2>
-  {% if not session.need_more_info %}
-    <p>{{ _('Based on the answers you’ve given today, you might qualify financially for legal aid.') }}</p>
-
-    <p>{{ _('Please submit your details below so we can call you back.') }}</p>
-
-    <p>
-      {% trans %}The first person you speak to will be a Civil Legal Advice operator. They will check the
-      information you’ve given us. They will also ask you some more questions to find out if
-      your specific problem is covered by legal aid.{% endtrans %}
-    </p>
-  {% else %}
+  <h2>{{ _('Contact Civil Legal Advice') }}</h2>
+  {% if session.need_more_info %}
     <p>
       {% trans %}In order to decide whether you might qualify for legal aid, we need more information about
-      your financial circumstances.{% endtrans %}
+      your financial circumstances. You should contact Civil Legal Advice.{% endtrans %}
     </p>
     <p>
-      {% trans %}The first person you speak to will be a Civil Legal Advice operator. They will check what
+      {% trans %}The first person you speak to will be a CLA operator. They will check what
       you told us already. They will also ask you some more questions about your financial
       circumstances and to find out if your specific problem is covered by legal aid.{% endtrans %}
     </p>
+  {% else %}
+    <p>
+      {% trans %}Based on the answers you’ve given today, you might qualify financially for legal aid.
+      Call Civil Legal Advice (CLA), a national helpline for England and Wales, to find out for certain
+      if you qualify, and get specialist advice if you do.{% endtrans %}
+    </p>
   {% endif %}
   <p>
-    {{ _('If we can’t speak to you please book another call back here or call us on 0345 345 4 345.') }}
+    {% trans %}Please submit your details to get your personal case reference number.
+    You will need to quote this number when you speak with CLA.{% endtrans %}
   </p>
-{% endblock %}
-
-{% block what_happens_next_alert %}
-  {% call Element.alert(title='What happens next') %}
-    <p>
-      {% trans %}If the operator you speak to thinks you might qualify, they will put you
-      through to a CLA specialist adviser immediately.{% endtrans %}
-    </p>
-    <p>
-      {{ _('If CLA can’t help we will suggest other places that might be able to assist you.') }}
-    </p>
-  {% endcall %}
+  <p>
+    {% trans %}You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -
+    <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
+    or ask us to call you back, which is free.{% endtrans %}
+  </p>
 {% endblock %}
 
 {% block javascripts %}
@@ -55,8 +45,9 @@
   </script>
 {% endblock %}
 
-{% block below_form %}
+{% block notice_content %}
   {% if session.need_more_info %}
+    <h2>{{ _('What happens next?') }}</h2>
     <p>
       {% trans %}Your CLA specialist adviser will ask you more questions before making the final decision about
       whether you qualify for legal aid.{% endtrans %}
@@ -80,5 +71,7 @@
       {% trans %}If your Civil Legal Advice adviser decides that you need to speak to someone in person or if
       you need someone to represent you in court, they will organise this for you.{% endtrans %}
     </p>
+  {% else %}
+    {{ super() }}
   {% endif %}
 {% endblock %}

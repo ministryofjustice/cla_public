@@ -8,6 +8,7 @@
       _.bindAll(this, 'render');
       this.cacheEls();
       this.bindEvents();
+      this.processQueryString();
     },
 
     bindEvents: function() {
@@ -36,13 +37,29 @@
       this.$options = $(this.el).find('input[type=radio], input[type=checkbox]');
     },
 
-    render: function() {
-      // keep current state
-      this.$options.each(function () {
-        var $el = $(this);
-        if($el.is(':checked')){
-          $el.parent().addClass('s-selected');
+    processQueryString: function() {
+      var queryString = _.chain(location.search.slice(1).split('&'))
+        .map(function(item) {
+          if(item) {
+            var pair = item.split('=');
+            return pair[1] ? pair : '';
+          }
+        })
+        .compact()
+        .object()
+        .value();
+
+      // Select fields found in query string
+      _.forOwn(queryString, function(value, key) {
+        if(value) {
+          $('[name="' + key + '"][value="' + value + '"]').click();
         }
+      });
+    },
+
+    render: function() {
+      this.$options.filter(':checked').each(function(){
+        $(this).parent().addClass('s-selected');
       });
     }
   };

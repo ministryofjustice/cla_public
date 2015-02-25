@@ -1,0 +1,102 @@
+{% import "macros/form.html" as Form %}
+
+{#
+  Callback subform
+
+  Params:
+    - subform <object>
+        WTForm field
+#}
+{% macro callback(subform) %}
+  {{ Form.text_input_fieldset(subform.contact_number, class_='m-large', fieldset_class="fieldset-group") }}
+  {{ Form.yesno_fieldset(subform.safe_to_contact, class_='fieldset-group') }}
+
+  {% with field = subform.time %}
+    {% call Form.fieldset(field, class_='fieldset-group') %}
+      <ul class="form-option-list" role="radiogroup">
+        {% for radio in field.specific_day %}
+          {% if (radio.id == 'specific_day-0' and field.time_today.choices) or
+          (radio.id == 'specific_day-1' and field.day.choices) %}
+            <li>
+              <label class="radio-inline" for="{{radio.id}}">
+                {{ radio }} {{ radio.label.text }}
+              </label>
+              {% if radio.id == 'specific_day-0' %}
+                {{ field.time_today(class_='form-control') }}
+              {% else %}
+                {{ field.day(class_='form-control', **{
+                  'data-day-time-choices': field.day.day_time_choices|tojson|safe
+                }) }} at {{ field.time_in_day(class_='form-control') }}
+              {%  endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endcall %}
+  {% endwith %}
+{% endmacro %}
+
+
+{% macro adaptations(subform) %}
+  {% call Form.fieldset(subform) %}
+    <ul class="form-option-list">
+      <li>
+        <label class="radio-inline" for="{{subform.bsl_webcam.id}}">
+          {{ subform.bsl_webcam }}
+          {{ subform.bsl_webcam.label.text }}
+        </label>
+      </li>
+      <li>
+        <label class="radio-inline" for="{{subform.minicom.id}}">
+          {{ subform.minicom }}
+          {{ subform.minicom.label.text }}
+        </label>
+      </li>
+      <li>
+        <label class="radio-inline" for="{{subform.text_relay.id}}">
+          {{ subform.text_relay }}
+          {{ subform.text_relay.label.text }}
+        </label>
+      </li>
+      <li>
+        <label class="radio-inline" for="{{subform.welsh.id}}">
+          {{ subform.welsh }}
+          {{ subform.welsh.label.text }}
+        </label>
+      </li>
+      <li>
+        <label class="radio-inline" for="{{subform.is_other_language.id}}">
+          {{ subform.is_other_language }}
+          {{ subform.is_other_language.label.text }}
+        </label>
+        {% call Form.fieldset(subform.other_language, is_subfield=True, controlled_by=subform.is_other_language, control_value='y', has_label=False) %}
+          {{ subform.other_language(class_='form-control') }}
+        {% endcall %}
+      </li>
+      <li>
+        <label class="radio-inline" for="{{subform.is_other_adaptation.id}}">
+          {{ subform.is_other_adaptation }}
+          {{ subform.is_other_adaptation.label.text }}
+        </label>
+        {% call Form.fieldset(subform.other_adaptation, is_subfield=True, controlled_by=subform.is_other_adaptation, control_value='y', has_label=False) %}
+          {{ subform.other_adaptation(class_='form-control m-large') }}
+        {% endcall %}
+      </li>
+    </ul>
+  {% endcall %}
+{% endmacro %}
+
+
+{% macro address(subform) %}
+  {% call Form.fieldset(subform, class_='fieldset-group', use_row=False) %}
+    {% call Form.fieldset(subform.post_code, as_label=True, class_='form-group-plain') %}
+      <div class="address-finder">
+        {{ subform.post_code(class_='form-control m-small', **{ 'data-address-el': '#address-street_address' }) }}
+      </div>
+    {% endcall %}
+
+    {% call Form.fieldset(subform.street_address, as_label=True, class_='form-group-plain') %}
+      {{ subform.street_address(class_='form-control m-large', rows=5) }}
+    {% endcall %}
+  {% endcall %}
+{% endmacro %}

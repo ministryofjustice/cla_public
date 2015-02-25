@@ -11,7 +11,7 @@ from requests.exceptions import ConnectionError, Timeout
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_eligibility_check_api, \
     get_organisation_list
-from cla_public.apps.callmeback.forms import CallMeBackForm
+from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
@@ -133,7 +133,7 @@ class Eligible(RequiresSession, views.MethodView, object):
             session.clear()
             return render_template('result/eligible-no-callback.html')
 
-        return render_template('result/eligible.html', form=CallMeBackForm())
+        return render_template('result/eligible.html', form=ContactForm())
 
 
 checker.add_url_rule(

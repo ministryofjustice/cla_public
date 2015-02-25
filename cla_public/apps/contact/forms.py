@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"CallMeBack forms"
+"Contact forms"
 
 from flask import session
 from flask.ext.babel import lazy_gettext as _
@@ -10,10 +10,12 @@ from wtforms import BooleanField, FormField, RadioField, SelectField, \
 from wtforms.validators import InputRequired, Optional, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES
-from cla_public.apps.callmeback.fields import AvailabilityCheckerField
-from cla_public.apps.checker.constants import CONTACT_SAFETY
+from cla_public.apps.contact.fields import AvailabilityCheckerField, \
+    ValidatedFormField
+from cla_public.apps.checker.constants import CONTACT_SAFETY, CONTACT_PREFERENCE, \
+    YES, NO
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
-from cla_public.apps.checker.validators import NotRequired
+from cla_public.apps.checker.validators import NotRequired, IgnoreIf, FieldValue
 from cla_public.libs.honeypot import Honeypot
 
 
@@ -40,7 +42,50 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
         description=_(u'Please tell us what you need in the box below'))
 
 
-class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
+class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
+    """
+    Subform to request callback
+    """
+    contact_number = StringField(
+        _(u'Contact phone number'),
+        validators=[
+            InputRequired(),
+            Length(max=20, message=_(u'Your telephone number must be 20 '
+                                     u'characters or less'))]
+    )
+    safe_to_contact = RadioField(
+        _(u'Is it safe for us to leave a message on this number?'),
+        choices=CONTACT_SAFETY,
+        default='', # Backend doesn't accept `None` as valid value
+        validators=[
+            InputRequired(message=_(u'Please choose Yes or No'))],
+    )
+    time = AvailabilityCheckerField(
+        _(u'Select a time for us to call you'),
+        description=_(u'We will try to call you back around the time you '
+                      u'request, but this may not always be possible. We will '
+                      u'always call you back by the next working day.'))
+
+
+class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
+    """
+    Subform for address fields
+    """
+    post_code = StringField(
+        _(u'Postcode'),
+        validators=[
+            Length(max=12, message=_(u'Your postcode must be 12 characters '
+                                     u'or less')),
+            NotRequired()])
+    street_address = TextAreaField(
+        _(u'Street address'),
+        validators=[
+            Length(max=255, message=_(u'Your address must be 255 characters '
+                                      u'or less')),
+            NotRequired()])
+
+
+class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Form to request a callback
     """
@@ -51,30 +96,20 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
             Length(max=400, message=_(u'Your full name must be 400 '
                                       u'characters or less')),
             InputRequired()])
-    contact_number = StringField(
-        _(u'Contact phone number'),
+    callback_requested = RadioField(
+        _(u'Contact preference'),
+        choices=CONTACT_PREFERENCE,
         validators=[
-            Length(max=20, message=_(u'Your telephone number must be 20 '
-                                     u'characters or less')),
-            InputRequired()])
-    safe_to_contact = RadioField(
-        _(u'Is it safe for us to leave a message on this number?'),
-        choices=CONTACT_SAFETY,
-        validators=[
-            InputRequired(message=_(u'Please choose Yes or No'))],
+            InputRequired(message=_(u'Please choose one of the options'))],
     )
-    post_code = StringField(
-        _(u'Postcode'),
+    callback = ValidatedFormField(
+        CallBackForm,
         validators=[
-            Length(max=12, message=_(u'Your postcode must be 12 characters '
-                                     u'or less')),
-            Optional()])
-    address = TextAreaField(
-        _(u'Address'),
-        validators=[
-            Length(max=255, message=_(u'Your address must be 255 characters '
-                                      u'or less')),
-            Optional()])
+            IgnoreIf('callback_requested', FieldValue(NO))
+        ])
+    address = ValidatedFormField(
+        AddressForm,
+        validators=[Optional()])
     extra_notes = TextAreaField(
         _(u'Help the operator to understand your situation'),
         description=(_(
@@ -85,34 +120,20 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
             Length(max=5000, message=_(u'Your notes must be 5000 characters '
                                        u'or less')),
             Optional()])
-    adaptations = FormField(
+    adaptations = ValidatedFormField(
         AdaptationsForm,
-        _(u'Do you have any special communication needs?'))
-
-    time = AvailabilityCheckerField(
-        _(u'Select a time for us to call you'),
-        description=_(u'We will try to call you back around the time you '
-                      u'request, but this may not always be possible. We will '
-                      u'always call you back by the next working day.'))
-
-    def validate(self):
-        """
-        Put the callback time into the session on success
-        """
-        valid = super(CallMeBackForm, self).validate()
-        if valid:
-            session['time_to_callback'] = self.time.scheduled_time()
-        return valid
+        _(u'Do you have any special communication needs?'),
+        validators=[Optional()])
 
     def api_payload(self):
         "Form data as data structure ready to send to API"
-        return {
+        data = {
             'personal_details': {
                 'full_name': self.full_name.data,
-                'postcode': self.post_code.data,
-                'mobile_phone': self.contact_number.data,
-                'street': self.address.data,
-                'safe_to_contact': self.safe_to_contact.data
+                'postcode': self.address.form.post_code.data,
+                'mobile_phone': self.callback.form.contact_number.data,
+                'street': self.address.form.street_address.data,
+                'safe_to_contact': self.callback.form.safe_to_contact.data
             },
             'adaptation_details': {
                 'bsl_webcam': self.adaptations.bsl_webcam.data,
@@ -123,6 +144,9 @@ class CallMeBackForm(Honeypot, BabelTranslationsFormMixin, Form):
                     or self.adaptations.other_language.data,
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
-            },
-            'requires_action_at': self.time.scheduled_time().isoformat(),
+            }
         }
+        if self.callback_requested.data == YES:
+            data['requires_action_at'] = self.callback.form.time.scheduled_time().isoformat()
+
+        return data

@@ -24,7 +24,7 @@
     {{ Form.text_input_fieldset(form.income_contribution, prefix="£", class_='m-small') }}
     {{ Form.money_interval_fieldset(form.childcare, skip=not session.has_children) }}
 
-    {{ Element.call_me_back_link() }}
+    {{ Element.get_in_touch_alert() }}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Submit')) }}

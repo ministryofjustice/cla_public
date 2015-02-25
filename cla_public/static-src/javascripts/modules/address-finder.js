@@ -17,7 +17,7 @@
       this.$postcode = $(this.el).find('input[type="text"]');
       this.$addressField = $(this.$postcode.data('address-el'));
       this.$postcodeRow = this.$postcode.closest('.form-row');
-      this.$formGroup = this.$postcode.closest('.form-group');
+      this.$formGroup = this.$postcode.closest('.form-group-plain');
       this.$form = this.$postcode.parents('form');
     },
 
@@ -126,14 +126,18 @@
     },
 
     showError: function (msg) {
-      this.$formGroup.addClass('m-error');
-      this.$formGroup.append($('<dd class="form-row"><div class="field-error">' + msg + '</div></dd>'));
+      this.$formGroup
+        .addClass('m-error')
+        .find('.fieldset-label')
+        .addClass('m-error');
+      this.$formGroup.find('.form-row')
+        .before($('<div class="form-row field-error"><p>' + msg + '</p></div>'));
     },
 
     reset: function () {
       this.$formGroup
         .removeClass('m-error')
-        .find('.field-error').parent().remove();
+        .find('.field-error').remove();
 
       $('.address-list').remove();
     },

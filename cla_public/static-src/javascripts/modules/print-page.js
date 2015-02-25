@@ -16,7 +16,7 @@
 
       contentArea.append(this.printButton);
 
-      this.printButton.on('click', function() {
+      this.printButton.on('click', '.button', function() {
         window.print();
         if(window.ga) {
           window.ga('send', 'event', 'confirmation', 'printed');
