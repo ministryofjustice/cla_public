@@ -29,7 +29,7 @@
       {{ Form.money_interval_fieldset(form.total_other_benefit, is_subfield=True, controlled_by=form.other_benefits) }}
     {% endcall %}
 
-    {{ Element.call_me_back_link() }}
+    {{ Element.get_in_touch_alert() }}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}

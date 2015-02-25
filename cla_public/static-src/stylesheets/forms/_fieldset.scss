@@ -4,6 +4,10 @@ fieldset {
 
   &.form-group {
     border-top: 1px solid $grey-3;
+
+    .form-row .form-group .fieldset-group {
+      margin: -1px -1px -1px -20px;
+    }
   }
 
   &.fieldset-group {
@@ -48,46 +52,23 @@ fieldset {
 
   .form-subfield .fieldset-label {
     float: left;
-    margin: 10px 0;
-    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   // Errors
   &.m-error {
-    border-color: $mellow-red;
-    border-width: 1px 0 0 4px;
-    border-style: solid;
-    position: relative;
-    padding-left: 11px;
-    margin-left: -15px;
-
-    .fieldset-label {
-      padding-left: 6px;
-      margin-left: -6px;
+    .fieldset-label.m-error {
+      background: url(../images/icons/icon-small-cross.png) 10px .25em no-repeat;
+      background: url(../images/icons/icon-small-cross-2x.png) 10px .25em/10px no-repeat;
+      color: $mellow-red;
+      font-weight: bold;
+      padding-left: 30px;
     }
 
     &.form-subfield {
-      border-color: $mellow-red;
       border-top: 0;
       margin-left: 0;
-
-      &:before {
-        content: '';
-        top: 0;
-        width: 9px;
-        position: absolute;
-        left: -4px;
-        border-top: 1px solid $mellow-red;
-      }
-    }
-
-    &:after {
-      content: '';
-      border-bottom: 1px solid $mellow-red;
-      width: 9px;
-      position: absolute;
-      left: -4px;
-      bottom: 0;
     }
   }
 

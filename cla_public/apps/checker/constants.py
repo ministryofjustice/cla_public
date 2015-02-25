@@ -149,3 +149,8 @@ CONTACT_SAFETY = (
     ('SAFE', lazy_pgettext(context=u'It is', string=u'Yes')),
     ('NO_MESSAGE', lazy_pgettext(context=u"It isn’t", string=u'No')),
 )
+
+CONTACT_PREFERENCE = (
+    (NO, _(u'I’ll call CLA')),
+    (YES, _(u'Call me back')),
+)

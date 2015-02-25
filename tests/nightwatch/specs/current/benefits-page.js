@@ -51,7 +51,7 @@ module.exports = {
   'Test outcomes': function(client) {
     BENEFITS.forEach(function(item) {
       var destination = (item === 'other-benefit' ? '/benefits-tax-credits' : '/result/eligible');
-      var input = (item === 'other-benefit' ? 'other_benefits' : 'contact_number');
+      var input = (item === 'other-benefit' ? 'other_benefits' : 'callback_requested');
       client
         .click(util.format('input[value="%s"]', item))
         .submitForm('form')

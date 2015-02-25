@@ -34,8 +34,8 @@
     {% call Element.alert() %}
       <p>{{ _('If you have more than one problem, you can complete this service more than once.') }}</p>
       <p>
-        {{ _('If you’re really not sure what to choose, ask us to') }}
-        <a href="{{ url_for('callmeback.request_callback') }}" id="callback-link">{{ _('call you back') }}</a>.
+        {{ _('If you’re really not sure what to choose') }},
+        <a href="{{ url_for('contact.get_in_touch') }}" id="callback-link">{{ _('get in touch') }}</a>.
       </p>
     {% endcall %}
 

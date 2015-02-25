@@ -21,7 +21,7 @@ module.exports = {
     client
       .waitForElementVisible('a[href="http://find-legal-advice.justice.gov.uk/"]', 2000)
       .assert.urlContains('/face-to-face')
-      .assert.containsText('h1', 'We do not provide advice about issues related to clinical negligence')
+      .assert.containsText('h1', 'You may be able to get free advice from a legal adviser')
     ;
 
     client.end();

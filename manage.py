@@ -11,7 +11,7 @@ from flask.ext.script import Manager, Shell, Server
 import requests
 
 from cla_public.app import create_app
-from cla_public.apps.callmeback.tests.test_availability import \
+from cla_public.apps.contact.tests.test_availability import \
     override_current_time
 
 

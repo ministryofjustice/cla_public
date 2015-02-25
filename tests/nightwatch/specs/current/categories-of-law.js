@@ -28,7 +28,7 @@ module.exports = {
       if (!item.covered) {
         url = '/face-to-face';
         el = 'a[href="http://find-legal-advice.justice.gov.uk/"]';
-        headline = util.format('We do not provide advice about issues related to %s', item.name.toLowerCase());
+        headline = item.headline ||  'You may be able to get free advice from a legal adviser';
       }
 
       common.startPage(client);

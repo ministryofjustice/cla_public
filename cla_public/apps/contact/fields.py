@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"CallMeBack form fields"
+"Contact form fields"
 from collections import OrderedDict
 
 import datetime
@@ -14,7 +14,7 @@ from wtforms.validators import InputRequired, ValidationError
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import OpeningHours
 from cla_public.config import common as settings
-from cla_public.apps.callmeback.constants import DAY_CHOICES, DAY_TODAY, \
+from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, \
     DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import day_choice, time_choice, \
@@ -195,3 +195,26 @@ class AvailabilityCheckerField(FormField):
 
     def scheduled_time(self):
         return self.form.scheduled_time().replace(tzinfo=pytz.utc)
+
+
+class ValidatedFormField(FormField):
+    def __init__(self, form_class, *args, **kwargs):
+        self._errors = []
+        self.validators = kwargs.pop('validators', [])
+
+        super(ValidatedFormField, self).__init__(
+            form_class, *args, **kwargs)
+
+    def validate(self, form, extra_validators=None):
+        if self._run_validation_chain(form, self.validators):
+            return len(self.errors) == 0
+        form_valid = self.form.validate()
+        return form_valid and len(self.errors) == 0
+
+    @property
+    def errors(self):
+        return self._errors + self.form.errors.items()
+
+    @errors.setter
+    def errors(self, _errors):
+        self._errors = _errors

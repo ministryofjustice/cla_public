@@ -28,11 +28,11 @@ module.exports = {
 
   'Eligible page (request callback)': function(client) {
     client
-      .waitForElementVisible('input[name="contact_number"]', 2000)
       .assert.urlContains('/result/eligible')
+      .waitForElementVisible('input[name="callback_requested"]', 2000)
       .assert.containsText('h1', 'You might qualify for legal aid')
-      .assert.containsText('h2', 'Request a callback')
-      .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify financially for legal aid.\nPlease submit your details below so we can call you back.')
+      .assert.containsText('h2', 'Contact Civil Legal Advice')
+      .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify financially for legal aid.')
     ;
   },
 
@@ -42,49 +42,51 @@ module.exports = {
     ;
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
-    ['full_name', 'contact_number'].forEach(function(item) {
+    client.click('input[name="callback_requested"][value="1"]');
+
+    ['full_name', 'callback-contact_number'].forEach(function(item) {
       common.submitAndCheckForFieldError(client, item, 'This field is required.');
     });
     client
       .setValue('input[name="full_name"]', 'John Doe')
-      .setValue('input[name="contact_number"]', '12345')
-    common.submitAndCheckForFieldError(client, 'safe_to_contact', 'Please choose Yes or No');
+      .setValue('input[name="callback-contact_number"]', '12345');
+    common.submitAndCheckForFieldError(client, 'callback-safe_to_contact', 'Please choose Yes or No');
   },
 
   'Postcode address finder': function(client) {
     client
       // test for list of addresses for known postcode
-      .setValue('input[name="post_code"]', 'e181ja')
+      .setValue('input[name="address-post_code"]', 'e181ja')
       .click('.address-finder-button')
       .click('body')
-      .waitForElementVisible('dd.address-list', 25000, false, function() {}, 'Element %s was not in the page for %d ms')
-      .assert.value('input[name="post_code"]', 'E18 1JA')
-      .assert.visible('dd.address-list')
-      .assert.elementPresent('dd.address-list option[value="0"]')
-      .assert.containsText('dd.address-list option[value="0"]', '3 Crescent Road, London, E18 1JA')
-      .click('dd.address-list option[value="0"]')
+      .waitForElementVisible('div.address-list', 25000, false, function() {}, 'Element %s was not in the page for %d ms')
+      .assert.value('input[name="address-post_code"]', 'E18 1JA')
+      .assert.visible('div.address-list')
+      .assert.elementPresent('div.address-list option[value="0"]')
+      .assert.containsText('div.address-list option[value="0"]', '3 Crescent Road, London, E18 1JA')
+      .click('div.address-list option[value="0"]')
       .click('body')
-      .assert.value('#address', '3 Crescent Road\nLondon')
+      .assert.value('#address-street_address', '3 Crescent Road\nLondon')
 
       // test for single address for known postcode
-      .clearValue('input[name="post_code"]')
-      .clearValue('#address')
-      .setValue('input[name="post_code"]', 'sw1h9aj')
+      .clearValue('input[name="address-post_code"]')
+      .clearValue('#address-street_address')
+      .setValue('input[name="address-post_code"]', 'sw1h9aj')
       .click('.address-finder-button')
       .click('body')
-      .waitForElementNotPresent('dd.address-list', 25000, false, function() {}, 'Element %s was removed from the page after %d ms')
+      .waitForElementNotPresent('div.address-list', 25000, false, function() {}, 'Element %s was removed from the page after %d ms')
       .pause(1000)
-      .assert.value('#address', 'Ministry of Justice\n102 Petty France\nLondon')
+      .assert.value('#address-street_address', 'Ministry of Justice\n102 Petty France\nLondon')
 
       // test for invalid postcode
-      .clearValue('input[name="post_code"]')
-      .clearValue('#address')
-      .setValue('input[name="post_code"]', 'abcdefg')
+      .clearValue('input[name="address-post_code"]')
+      .clearValue('#address-street_address')
+      .setValue('input[name="address-post_code"]', 'abcdefg')
       .click('.address-finder-button')
       .click('body')
       .useXpath()
-      .waitForElementVisible('//input[@id="post_code"]/ancestor::fieldset//div[@class="field-error"]', 25000)
-      .assert.containsText('//input[@id="post_code"]/ancestor::fieldset//div[@class="field-error"]', 'No addresses were found with that postcode')
+      .waitForElementVisible('//input[@id="address-post_code"]/ancestor::fieldset//div[@class="form-row field-error"]', 25000)
+      .assert.containsText('//input[@id="address-post_code"]/ancestor::fieldset//div[@class="form-row field-error"]', 'No addresses were found with that postcode')
       .useCss()
     ;
 

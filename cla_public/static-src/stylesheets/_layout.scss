@@ -1,0 +1,35 @@
+#content {
+  .inner-block {
+    @extend %site-width-container;
+    margin-top: 40px;
+
+    h1 {
+      margin: 0;
+    }
+  }
+}
+
+.m-has-sidebar {
+  @extend %grid-row;
+
+  .main-content,
+  .sidebar {
+    @include media(tablet) {
+      float: left;
+    }
+  }
+
+  .main-content {
+    @include media(tablet) {
+      width: 66%;
+      padding-right: 4%;
+    }
+  }
+
+  .sidebar {
+    @include media(tablet) {
+      margin-top: 12px;
+      width: 30%;
+    }
+  }
+}

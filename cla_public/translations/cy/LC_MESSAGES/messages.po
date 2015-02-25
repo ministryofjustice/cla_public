@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-12 14:20+0000\n"
+"POT-Creation-Date: 2015-02-25 14:25+0000\n"
 "PO-Revision-Date: 2015-02-06 14:57+0000\n"
 "Last-Translator: Josh Rowe <josh.rowe@digital.justice.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/projects/p/cla-public/language/cy/)\n"
@@ -74,150 +74,6 @@ msgstr "A gawsoch unrhyw help i lenwi'r ffurflen hon?"
 #: cla_public/apps/base/views.py:49
 msgid "Something went wrong. Please try again."
 msgstr "Mae rhywbeth wedi mynd o'i le. Rhowch gynnig arall arni."
-
-#: cla_public/apps/callmeback/constants.py:10
-msgid "Call me today at"
-msgstr "Ffoniwch fi heddiw am"
-
-#: cla_public/apps/callmeback/constants.py:11
-msgid "Call me in the next week on"
-msgstr "Ffoniwch fi'r wythnos nesaf ar"
-
-#: cla_public/apps/callmeback/fields.py:43
-msgid "Not a valid choice"
-msgstr "Nid yw hwn yn ddewis dilys"
-
-#: cla_public/apps/callmeback/fields.py:76
-msgid "Not a valid date"
-msgstr "Nid yw hwn yn ddyddiad dilys"
-
-#: cla_public/apps/callmeback/fields.py:102
-msgid "Not a valid time"
-msgstr "Nid yw hwn yn amser dilys"
-
-#: cla_public/apps/callmeback/fields.py:124
-msgid "Can't schedule a callback at the requested time"
-msgstr "Methu trefnu i'ch ffonio'n ôl ar yr amser a nodwyd yn eich cais"
-
-#: cla_public/apps/callmeback/fields.py:133
-msgid "Arrange a callback time"
-msgstr "Trefnu amser i ffonio'n ôl"
-
-#: cla_public/apps/callmeback/forms.py:22
-msgid "-- Choose a language --"
-msgstr "Dewiswch iaith"
-
-#: cla_public/apps/callmeback/forms.py:29
-msgid "BSL - Webcam"
-msgstr "Iaith Arwyddion Prydain – Gwe-gamera"
-
-#: cla_public/apps/callmeback/forms.py:30
-msgid "Minicom"
-msgstr "Minicom"
-
-#: cla_public/apps/callmeback/forms.py:31
-msgid "Text Relay"
-msgstr "Gwasanaeth cyfnewid testun"
-
-#: cla_public/apps/callmeback/forms.py:32
-msgid "Welsh"
-msgstr "Cymraeg"
-
-#: cla_public/apps/callmeback/forms.py:33
-msgid "Other language"
-msgstr "Iaith arall"
-
-#: cla_public/apps/callmeback/forms.py:35
-msgid "Language required:"
-msgstr "Iaith sydd ei hangen:"
-
-#: cla_public/apps/callmeback/forms.py:37
-msgid "Any other communication needs"
-msgstr "Unrhyw anghenion cyfathrebu eraill"
-
-#: cla_public/apps/callmeback/forms.py:39
-msgid "Other communication needs"
-msgstr "Anghenion cyfathrebu eraill"
-
-#: cla_public/apps/callmeback/forms.py:40
-msgid "Please tell us what you need in the box below"
-msgstr "Dywedwch wrthym beth sydd arnoch ei angen yn y blwch isod"
-
-#: cla_public/apps/callmeback/forms.py:48 cla_public/templates/privacy.html:435
-msgid "Full name"
-msgstr "Enw llawn"
-
-#: cla_public/apps/callmeback/forms.py:49
-msgid "For example: John Smith"
-msgstr "Er enghraifft: John Smith"
-
-#: cla_public/apps/callmeback/forms.py:51
-msgid "Your full name must be 400 characters or less"
-msgstr ""
-
-#: cla_public/apps/callmeback/forms.py:55
-msgid "Contact phone number"
-msgstr "Rhif ffôn cyswllt"
-
-#: cla_public/apps/callmeback/forms.py:57
-msgid "Your telephone number must be 20 characters or less"
-msgstr "Rhaid i'ch rhif ffôn fod yn 20 llythyren neu lai"
-
-#: cla_public/apps/callmeback/forms.py:61
-msgid "Is it safe for us to leave a message on this number?"
-msgstr "A yw’n ddiogel i ni adael neges ar y rhif hwn?"
-
-#: cla_public/apps/callmeback/forms.py:64 cla_public/apps/checker/fields.py:86
-#: cla_public/apps/checker/forms.py:111 cla_public/apps/checker/forms.py:172
-#: cla_public/apps/checker/forms.py:189
-msgid "Please choose Yes or No"
-msgstr "Dewisiwch Ydw neu Nac ydw"
-
-#: cla_public/apps/callmeback/forms.py:67
-msgid "Postcode"
-msgstr "Cod post "
-
-#: cla_public/apps/callmeback/forms.py:69
-msgid "Your postcode must be 12 characters or less"
-msgstr ""
-
-#: cla_public/apps/callmeback/forms.py:73
-#: cla_public/templates/help-organisations.html:95
-#: cla_public/templates/privacy.html:436
-msgid "Address"
-msgstr "Cyfeiriad "
-
-#: cla_public/apps/callmeback/forms.py:75
-msgid "Your address must be 255 characters or less"
-msgstr ""
-
-#: cla_public/apps/callmeback/forms.py:79
-msgid "Help the operator to understand your situation"
-msgstr "Helpwch y gweithredwr i ddeall eich sefyllfa"
-
-#: cla_public/apps/callmeback/forms.py:80
-msgid "If you’d like to tell us more about your problem, please do so in the box below. The Civil Legal Advice operator will read this before they call you."
-msgstr "Yn eich geiriau’ch hun, eglurwch beth yn union yw’r broblem yn y blwch isod. Bydd y gweithredwr Cyngor Cyfreithiol Sifil yn darllen hyn cyn eich ffonio"
-
-#: cla_public/apps/callmeback/forms.py:85
-msgid "Your notes must be 5000 characters or less"
-msgstr ""
-
-#: cla_public/apps/callmeback/forms.py:90
-msgid "Do you have any special communication needs?"
-msgstr "Oes gennych chi unrhyw anghenion cyfathrebu arbennig?"
-
-#: cla_public/apps/callmeback/forms.py:93
-msgid "Select a time for us to call you"
-msgstr "Dewiswch amser i ni eich ffonio"
-
-#: cla_public/apps/callmeback/forms.py:94
-msgid "We will try to call you back around the time you request, but this may not always be possible. We will always call you back by the next working day."
-msgstr "Byddwn yn ceisio eich ffonio'n ôl o gwmpas yr adeg y byddwch yn gofyn, ond efallai na fydd hyn bob amser yn bosibl. Byddwn bob amser yn eich ffonio'n ôl erbyn y diwrnod gwaith nesaf."
-
-#: cla_public/apps/callmeback/views.py:43 cla_public/apps/checker/views.py:44
-msgid "There was an error submitting your data. Please check and try again."
-msgstr "Roedd gwall wrth gyflwyno eich data. Gwiriwch a cheisiwch eto."
 
 #: cla_public/apps/checker/constants.py:10
 msgid "Clinical negligence"
@@ -469,6 +325,14 @@ msgctxt "It isn’t"
 msgid "No"
 msgstr "Nac ydy"
 
+#: cla_public/apps/checker/constants.py:154
+msgid "I’ll call CLA"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:155
+msgid "Call me back"
+msgstr "eich ffonio'n ôl "
+
 #: cla_public/apps/checker/fields.py:81
 msgid "Yes"
 msgstr "le"
@@ -476,6 +340,12 @@ msgstr "le"
 #: cla_public/apps/checker/fields.py:82
 msgid "No"
 msgstr "Na"
+
+#: cla_public/apps/checker/fields.py:86 cla_public/apps/checker/forms.py:111
+#: cla_public/apps/checker/forms.py:172 cla_public/apps/checker/forms.py:189
+#: cla_public/apps/contact/forms.py:61
+msgid "Please choose Yes or No"
+msgstr "Dewisiwch Ydw neu Nac ydw"
 
 #: cla_public/apps/checker/fields.py:127 cla_public/apps/checker/fields.py:138
 #: cla_public/apps/checker/validators.py:98
@@ -909,9 +779,152 @@ msgstr "Rhowch swm"
 msgid "Please select a time period from the drop down"
 msgstr "Dewiswch gyfnod o’r gwymplen"
 
+#: cla_public/apps/checker/views.py:44 cla_public/apps/contact/views.py:43
+msgid "There was an error submitting your data. Please check and try again."
+msgstr "Roedd gwall wrth gyflwyno eich data. Gwiriwch a cheisiwch eto."
+
+#: cla_public/apps/contact/constants.py:10
+msgid "Call me today at"
+msgstr "Ffoniwch fi heddiw am"
+
+#: cla_public/apps/contact/constants.py:11
+msgid "Call me in the next week on"
+msgstr "Ffoniwch fi'r wythnos nesaf ar"
+
+#: cla_public/apps/contact/fields.py:43
+msgid "Not a valid choice"
+msgstr "Nid yw hwn yn ddewis dilys"
+
+#: cla_public/apps/contact/fields.py:76
+msgid "Not a valid date"
+msgstr "Nid yw hwn yn ddyddiad dilys"
+
+#: cla_public/apps/contact/fields.py:102
+msgid "Not a valid time"
+msgstr "Nid yw hwn yn amser dilys"
+
+#: cla_public/apps/contact/fields.py:124
+msgid "Can't schedule a callback at the requested time"
+msgstr "Methu trefnu i'ch ffonio'n ôl ar yr amser a nodwyd yn eich cais"
+
+#: cla_public/apps/contact/fields.py:133
+msgid "Arrange a callback time"
+msgstr "Trefnu amser i ffonio'n ôl"
+
+#: cla_public/apps/contact/forms.py:24
+msgid "-- Choose a language --"
+msgstr "Dewiswch iaith"
+
+#: cla_public/apps/contact/forms.py:31
+msgid "BSL - Webcam"
+msgstr "Iaith Arwyddion Prydain – Gwe-gamera"
+
+#: cla_public/apps/contact/forms.py:32
+msgid "Minicom"
+msgstr "Minicom"
+
+#: cla_public/apps/contact/forms.py:33
+msgid "Text Relay"
+msgstr "Gwasanaeth cyfnewid testun"
+
+#: cla_public/apps/contact/forms.py:34
+msgid "Welsh"
+msgstr "Cymraeg"
+
+#: cla_public/apps/contact/forms.py:35
+msgid "Other language"
+msgstr "Iaith arall"
+
+#: cla_public/apps/contact/forms.py:37
+msgid "Language required:"
+msgstr "Iaith sydd ei hangen:"
+
+#: cla_public/apps/contact/forms.py:39
+msgid "Any other communication needs"
+msgstr "Unrhyw anghenion cyfathrebu eraill"
+
+#: cla_public/apps/contact/forms.py:41
+msgid "Other communication needs"
+msgstr "Anghenion cyfathrebu eraill"
+
+#: cla_public/apps/contact/forms.py:42
+msgid "Please tell us what you need in the box below"
+msgstr "Dywedwch wrthym beth sydd arnoch ei angen yn y blwch isod"
+
+#: cla_public/apps/contact/forms.py:50
+msgid "Contact phone number"
+msgstr "Rhif ffôn cyswllt"
+
+#: cla_public/apps/contact/forms.py:53
+msgid "Your telephone number must be 20 characters or less"
+msgstr "Rhaid i'ch rhif ffôn fod yn 20 llythyren neu lai"
+
+#: cla_public/apps/contact/forms.py:57
+msgid "Is it safe for us to leave a message on this number?"
+msgstr "A yw’n ddiogel i ni adael neges ar y rhif hwn?"
+
+#: cla_public/apps/contact/forms.py:64
+msgid "Select a time for us to call you"
+msgstr "Dewiswch amser i ni eich ffonio"
+
+#: cla_public/apps/contact/forms.py:65
+msgid "We will try to call you back around the time you request, but this may not always be possible. We will always call you back by the next working day."
+msgstr "Byddwn yn ceisio eich ffonio'n ôl o gwmpas yr adeg y byddwch yn gofyn, ond efallai na fydd hyn bob amser yn bosibl. Byddwn bob amser yn eich ffonio'n ôl erbyn y diwrnod gwaith nesaf."
+
+#: cla_public/apps/contact/forms.py:75
+msgid "Postcode"
+msgstr "Cod post "
+
+#: cla_public/apps/contact/forms.py:77
+msgid "Your postcode must be 12 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:81
+msgid "Street address"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:83
+msgid "Your address must be 255 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:93 cla_public/templates/privacy.html:435
+msgid "Full name"
+msgstr "Enw llawn"
+
+#: cla_public/apps/contact/forms.py:94
+msgid "For example: John Smith"
+msgstr "Er enghraifft: John Smith"
+
+#: cla_public/apps/contact/forms.py:96
+msgid "Your full name must be 400 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:100
+msgid "Contact preference"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:103
+msgid "Please choose one of the options"
+msgstr "Dewiswch o leiaf un opsiwn"
+
+#: cla_public/apps/contact/forms.py:114
+msgid "Help the operator to understand your situation"
+msgstr "Helpwch y gweithredwr i ddeall eich sefyllfa"
+
+#: cla_public/apps/contact/forms.py:115
+msgid "If you’d like to tell us more about your problem, please do so in the box below. The Civil Legal Advice operator will read this before they call you."
+msgstr "Yn eich geiriau’ch hun, eglurwch beth yn union yw’r broblem yn y blwch isod. Bydd y gweithredwr Cyngor Cyfreithiol Sifil yn darllen hyn cyn eich ffonio"
+
+#: cla_public/apps/contact/forms.py:120
+msgid "Your notes must be 5000 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:125
+msgid "Do you have any special communication needs?"
+msgstr "Oes gennych chi unrhyw anghenion cyfathrebu arbennig?"
+
 #: cla_public/config/common.py:55 cla_public/config/common.py:56
 #: cla_public/templates/_sidebar.html:7
-#: cla_public/templates/call-me-back.html:43
 msgid "Civil Legal Advice"
 msgstr "Cyngor Cyfreithiol Sifil"
 
@@ -951,10 +964,12 @@ msgid "your area of law must be covered by Civil Legal Advice"
 msgstr "Dylai eich maes cyfreithiol fod yn un y mae Cyngor Cyfreithiol Sifil yn ymdrin ag ef."
 
 #: cla_public/templates/_sidebar.html:17
+#: cla_public/templates/help-organisations.html:19
 msgid "your income (or combined income if you have a partner) should not be more than £2,657 a month before tax"
 msgstr "rhaid i’ch incwm (neu incwm ar y cyd os oes partner gennych) fod yn ddim mwy na £2,657 y mis cyn talu treth"
 
 #: cla_public/templates/_sidebar.html:18
+#: cla_public/templates/help-organisations.html:20
 msgid "your savings (or combined savings if you have a partner) should not be more than £8,000"
 msgstr "rhaid i’ch cynilion (neu gynilion ar y cyd os oes partner gennych) fod yn ddim mwy na £8,000"
 
@@ -1082,76 +1097,73 @@ msgstr "Eich budd-daliadau"
 msgid "Please select at least one option."
 msgstr "Dewiswch o leiaf un opsiwn"
 
-#: cla_public/templates/call-me-back.html:6
+#: cla_public/templates/contact.html:7
 #: cla_public/templates/result/eligible.html:11
-msgid "Request a callback"
-msgstr "Gwneud cais i ni ffonio’n ôl"
+msgid "Contact Civil Legal Advice"
+msgstr "Cyngor Cyfreithiol Sifil"
 
-#: cla_public/templates/call-me-back.html:13
-msgid "The full service is currently unavailable. However, you can still request a call back using the form below."
+#: cla_public/templates/contact.html:14
+msgid "The full service is currently unavailable. However, you can still get in touch using the form below."
 msgstr "Nid yw’r gwasanaeth llawn ar gael ar hyn o bryd. Fodd bynnag, gallwch barhau i wneud cais i ni eich ffonio’n ôl gan ddefnyddio’r ffurflen isod."
 
-#: cla_public/templates/call-me-back.html:18
+#: cla_public/templates/contact.html:19
 msgid ""
-"Fill in your personal details to get a callback from Civil Legal Advice to find out if you\n"
-"      qualify for specialist advice on debt, education, discrimination, housing or family problems\n"
-"      funded by <a href=\"https://www.gov.uk/legal-aid\">legal aid</a>."
-msgstr "Llenwch eich manylion personol er mwyn i Gyngor Cyfreithiol Sifil eich ffonio’n ôl a gweld a ydych chi’n gymwys i gael cyngor arbenigol wedi’i ariannu drwy gymorth cyfreithiol ar broblemau sy’n ymwneud â dyled, addysg, gwahaniaethu, tai neu’r teulu."
+"Please submit your details to get your personal case reference number.\n"
+"      You will need to quote this number when you speak with CLA."
+msgstr ""
 
-#: cla_public/templates/call-me-back.html:23
+#: cla_public/templates/contact.html:23
 msgid ""
-"We will try and call you at least once. If we cannot speak to you we will leave you a message\n"
-"      unless you tell us below not to."
-msgstr "Byddwn ni’n ceisio’ch ffonio unwaith. Os na fyddwn ni’n gallu siarad â chi, byddwn ni’n gadael neges oni bai eich bod wedi nodi nad yw'n ddiogel i ni wneud hynny"
+"You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+"      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
+"      or ask us to call you back, which is free."
+msgstr ""
 
-#: cla_public/templates/call-me-back.html:27
-#: cla_public/templates/result/eligible.html:34
-msgid "If we can’t speak to you please book another call back here or call us on 0345 345 4 345."
-msgstr "Os nad ydyn ni’n gallu siarad â chi, archebwch alwad arall yma neu ffoniwch ni ar 0345 345 4 345"
+#: cla_public/templates/contact.html:39
+msgid ""
+"We will try to call you at least once. If we cannot speak to you we will leave you a message,\n"
+"        unless you tell us not to below. If you miss the call, please complete this form again to book another\n"
+"        callback or call us directly."
+msgstr ""
 
-#: cla_public/templates/call-me-back.html:42
-msgid "If you don’t have a number we can call you on, please contact"
-msgstr "Os nad oes rhif ffôn y gallwn ni gysylltu â chi arno, cysylltwch â’r "
+#: cla_public/templates/contact.html:66
+msgid "Submit details"
+msgstr ""
 
-#: cla_public/templates/call-me-back.html:72
-msgid "Request callback"
-msgstr "Gwneud cais i ni ffonio'n ôl"
-
-#: cla_public/templates/call-me-back.html:77
-#: cla_public/templates/result/confirmation.html:17
+#: cla_public/templates/contact.html:72
+#: cla_public/templates/result/confirmation.html:30
+#: cla_public/templates/result/eligible.html:50
 msgid "What happens next?"
 msgstr "Beth fydd yn digwydd nesaf?"
 
-#: cla_public/templates/call-me-back.html:80
+#: cla_public/templates/contact.html:74
 msgid ""
 "The first person you speak to will be an operator. They will ask you questions about\n"
-"      you and your problem, including you and your partner's financial circumstances."
+"        you and your problem, including you and your partner's financial circumstances."
 msgstr "Yr unigolyn cyntaf fydd yn siarad â chi fydd gweithredwr. Byddant yn gofyn cwestiynau i chi amdanoch chi a'ch problem, gan gynnwys amgylchiadau ariannol eich partner a chithau"
 
-#: cla_public/templates/call-me-back.html:85
-msgid ""
-"If it looks like you might qualify you will be put through to a CLA specialist\n"
-"      adviser immediately."
+#: cla_public/templates/contact.html:78
+msgid "If it looks like you might qualify you will be put through to a CLA specialist adviser."
 msgstr "Os yw’n ymddangos y gallech chi fod yn gymwys, fe’ch trosglwyddir ar unwaith i un o gynghorwyr arbenigol CLA"
 
-#: cla_public/templates/call-me-back.html:90
+#: cla_public/templates/contact.html:81
 msgid "If CLA can’t help you we will always suggest where else you might get help."
 msgstr "Os nad yw CLA yn gallu helpu, byddwn ni bob amser yn awgrymu rhywle arall allai’ch helpu."
 
-#: cla_public/templates/call-me-back.html:94
+#: cla_public/templates/contact.html:84
 msgid ""
 "If we can do anything to make it easier for you to communicate with us due to your\n"
-"      disability please tell the operator."
+"        disability please tell the operator."
 msgstr "Os gallwn wneud unrhyw beth i’w gwneud hi’n haws i chi gyfathrebu gyda ni oherwydd eich anabledd, dywedwch wrth y Gweithredwr."
 
-#: cla_public/templates/call-me-back.html:99
+#: cla_public/templates/contact.html:88
 msgid ""
 "Protecting your personal data and your privacy is important to us. We are asking for\n"
-"      some information from you now so that when we call you back we know who you are. You\n"
-"      can read the full <a href=\"/privacy\">Civil Legal Advice Privacy Statement here</a>."
+"        some information from you now so that when we call you back we know who you are. You\n"
+"        can read the full <a href=\"/privacy\">Civil Legal Advice Privacy Statement here</a>."
 msgstr "Mae diogelu’ch data personol a phreifatrwydd yn bwysig i ni. Rydym yn gofyn i chi am ychydig o wybodaeth yn awr fel ein bod yn gwybod pwy ydych chi pan fyddwn yn eich ffonio’n ôl. Darllenwch Ddatganiad Preifatrwydd Cyngor Cyfreithiol Sifil yn llawn yma."
 
-#: cla_public/templates/call-me-back.html:114
+#: cla_public/templates/contact.html:103
 msgid "Find UK address"
 msgstr "Dod o hyd i gyfeiriad yn y DU"
 
@@ -1338,7 +1350,7 @@ msgstr "Sefydliadau cymorth"
 msgid "You’re unlikely to get legal aid"
 msgstr "Nid yw’n debygol y byddwch chi’n cael cymorth cyfreithiol"
 
-#: cla_public/templates/help-organisations.html:10
+#: cla_public/templates/help-organisations.html:11
 #, python-format
 msgid ""
 "From\n"
@@ -1346,11 +1358,21 @@ msgid ""
 "    legal aid %(fromcla)sas you don’t qualify financially"
 msgstr "O'r hyn yr ydych wedi ei ddweud wrthym heddiw, mae'n debyg na fyddwch yn gallu cael cymorth cyfreithiol %(fromcla)s gan nad ydych yn gymwys yn ariannol."
 
-#: cla_public/templates/help-organisations.html:13
+#: cla_public/templates/help-organisations.html:14
 msgid "for the advice they can provide"
 msgstr "i’r cyngor y gallant ei ddarparu"
 
-#: cla_public/templates/help-organisations.html:18
+#: cla_public/templates/help-organisations.html:17
+msgid "To qualify for legal aid, you must meet all of the following conditions:"
+msgstr "Er mwyn bod yn gymwys i gael cymorth cyfreithiol, rhaid i’ch problem fod yn un y mae cymorth cyfreithiol ar gael ar ei chyfer. "
+
+#: cla_public/templates/help-organisations.html:22
+msgid ""
+"you (and your partner if you have one) should have no more than £733 a month left after we've taken\n"
+"      certain living expenses into account"
+msgstr "rhaid i chi (â'ch partner os oes gennych un) fod â dim mwy na £733 y mis yn weddill ar ôl i ni ystyried costau byw penodol"
+
+#: cla_public/templates/help-organisations.html:29
 msgid ""
 "If you want to make an application to court about a family matter\n"
 "      you need to first of all see if family mediation will help. Use the\n"
@@ -1359,57 +1381,62 @@ msgid ""
 "      Information and Assessment Meeting (MIAM)."
 msgstr "Os ydych chi eisiau gwneud cais i’r llys ynghylch mater teuluol, i ddechrau dylech weld a fyddai cyfryngu teuluol o gymorth. Defnyddiwch y cyfeirlyfr Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Asesu a Gwybodaeth am Gyfryngu (MIAM)."
 
-#: cla_public/templates/help-organisations.html:28
+#: cla_public/templates/help-organisations.html:39
 msgid ""
 "You may still qualify for legal aid to seek a court order for protection. To find out if you\n"
 "      might qualify, contact a legal adviser in your area."
 msgstr "Efallai y byddwch yn dal yn gymwys i gael cymorth cyfreithiol i geisio am orchymyn llys ar gyfer diogelu. Er mwyn cael gwybod a allech chi fod yn gymwys, cysylltwch â chynghorydd cyfreithiol yn eich ardal."
 
-#: cla_public/templates/help-organisations.html:32
+#: cla_public/templates/help-organisations.html:43
 msgid ""
 "You can also seek advice from a legal adviser - you will have to\n"
 "      pay for this advice."
 msgstr "Gallwch chi hefyd ofyn am gyngor gan gynghorydd cyfreithiol - bydd yn rhaid i chi dalu am y cyngor hwn"
 
-#: cla_public/templates/help-organisations.html:38
+#: cla_public/templates/help-organisations.html:49
 msgid ""
 "If you have a court hearing date it is important that you get advice\n"
 "      as soon as possible. You may be able to get last-minute help on the\n"
 "      day of the hearing from an adviser in the court building."
 msgstr "Os oes gennych ddyddiad gwrandawiad llys, mae’n bwysig eich bod yn cael cyngor cyn gynted â phosib. Efallai y cewch gymorth ar fyr rybudd ar ddiwrnod y gwrandawiad gan gynghorydd yn adeilad y llys."
 
-#: cla_public/templates/help-organisations.html:45
-#: cla_public/templates/result/eligible-no-callback.html:21
-#: cla_public/templates/result/face-to-face.html:65
+#: cla_public/templates/help-organisations.html:56
+#: cla_public/templates/result/eligible-no-callback.html:29
+#: cla_public/templates/result/face-to-face.html:66
 msgid "Find a legal adviser"
 msgstr "Dod o hyd i gynghorydd cyfreithiol"
 
-#: cla_public/templates/help-organisations.html:49
+#: cla_public/templates/help-organisations.html:60
 msgid ""
 "You may still get free help and advice from the organisations listed\n"
 "    below. You don’t have to qualify for legal aid to get help and advice\n"
 "    from these organisations."
 msgstr "Efallai y byddwch chi’n gallu cael help a chyngor di-dâl gan y sefydliadau sydd wedi’u rhestru isod. Nid oes rhaid i chi fod yn gymwys i gael cymorth cyfreithiol er mwyn cael help a chyngor gan y sefydliadau hyn"
 
-#: cla_public/templates/help-organisations.html:56
+#: cla_public/templates/help-organisations.html:67
 #, python-format
 msgid "Help organisations for problems about %(category_name)s"
 msgstr "Sefydliadau cymorth ar gyfer problemau ynghylch %(category_name)s"
 
-#: cla_public/templates/help-organisations.html:73
+#: cla_public/templates/help-organisations.html:84
 msgid "Helpline"
 msgstr "Llinell Gymorth"
 
-#: cla_public/templates/help-organisations.html:83
+#: cla_public/templates/help-organisations.html:94
 msgid "Opening hours"
 msgstr "Oriau agor"
 
-#: cla_public/templates/help-organisations.html:89
+#: cla_public/templates/help-organisations.html:100
 #: cla_public/templates/privacy.html:233
 msgid "Email"
 msgstr "E-bost"
 
 #: cla_public/templates/help-organisations.html:106
+#: cla_public/templates/privacy.html:436
+msgid "Address"
+msgstr "Cyfeiriad "
+
+#: cla_public/templates/help-organisations.html:117
 msgid "There has been a problem with listing help organisations. Please refresh this page or try again later."
 msgstr "Cafwyd problem gyda rhestru sefydliadau cymorth. Adnewyddwch y dudalen neu rhowch gynnig arall yn nes ymlaen"
 
@@ -2246,13 +2273,13 @@ msgid "If you have more than one problem, you can complete this service more tha
 msgstr "Os oes gennych chi fwy nag un broblem, gallwch chi lenwi’r cais hwn am wasanaeth fwy nag unwaith"
 
 #: cla_public/templates/problem.html:37
-msgid "If you’re really not sure what to choose, ask us to"
+msgid "If you’re really not sure what to choose"
 msgstr "Os nad ydych chi’n sicr beth i’w ddewis, gofynnwch i ni "
 
 #: cla_public/templates/problem.html:38
 #: cla_public/templates/macros/element.html:37
-msgid "call you back"
-msgstr "eich ffonio'n ôl "
+msgid "get in touch"
+msgstr ""
 
 #: cla_public/templates/property.html:7
 msgid "You and your partner’s property"
@@ -2372,112 +2399,128 @@ msgid "This service is only available if you are a resident of England or Wales.
 msgstr "Mae'r gwasanaeth hwn ar gael os ydych yn preswylio yng Nghymru a Lloegr yn unig"
 
 #: cla_public/templates/macros/element.html:36
-msgid "If you’re having trouble completing this form, ask us to"
+msgid "If you’re having trouble completing this form"
 msgstr "Os ydych yn cael problemau wrth lenwi'r ffurflen hon, gofynnwch i ni"
 
-#: cla_public/templates/macros/form.html:496
+#: cla_public/templates/macros/form.html:419
 msgid "This form has errors."
 msgstr "Mae gwallau ar y ffurflen hon"
 
-#: cla_public/templates/macros/form.html:497
+#: cla_public/templates/macros/form.html:420
 msgid "Please see below for the errors you need to correct."
 msgstr "Gweler isod y gwallau sydd angen i chi eu cywiro"
 
-#: cla_public/templates/result/confirmation.html:8
+#: cla_public/templates/result/confirmation.html:10
 msgid "We will call you back"
 msgstr "Byddwn yn eich ffonio'n ôl"
 
-#: cla_public/templates/result/confirmation.html:10
+#: cla_public/templates/result/confirmation.html:12
+msgid "Your details have been submitted"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:16
 msgid "Your reference number is"
 msgstr "Eich cyfeirnod yw"
 
-#: cla_public/templates/result/confirmation.html:19
-msgid ""
-"Your details have been submitted and an operator will try to call\n"
-"      you back around the time you requested "
-msgstr "Mae’ch manylion wedi cael eu cyflwyno a bydd gweithredwr yn ffonio’n ôl tua’r amser yr oeddech wedi gofyn amdano"
+#: cla_public/templates/result/confirmation.html:23
+msgid "You can now call CLA on"
+msgstr ""
 
-#: cla_public/templates/result/confirmation.html:22
+#: cla_public/templates/result/confirmation.html:24
 msgid ""
-"If this is not possible, we will always call you back by the\n"
-"      next working day."
-msgstr "Os nad yw hyn yn bosibl, byddwn bob amser yn eich ffonio'n ôl erbyn y diwrnod gwaith nesaf."
-
-#: cla_public/templates/result/confirmation.html:27
-msgid ""
-"We will try and call you once. If we cannot speak to you we will\n"
-"      leave you a message unless you have said it is unsafe to do so."
-msgstr "Byddwn ni’n ceisio’ch ffonio unwaith. Os na fyddwn ni’n gallu siarad â chi, byddwn ni’n gadael neges oni bai eich bod wedi nodi nad yw'n ddiogel i ni wneud hynny"
+"Please quote your reference number when you call. Find out about\n"
+"        <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a>."
+msgstr "Mae rhagor o wybodaeth am y ffordd y <a href=\"https://www.gov.uk/help/cookies\" rel=\"external\" target=\"_blank\">mae cwcis yn cael eu defnyddio ar gov.uk</a>."
 
 #: cla_public/templates/result/confirmation.html:33
 msgid ""
-"If you need to urgently protect you or your family you should\n"
-"        try and get advice as soon as possible."
-msgstr "Os oes arnoch angen diogelu chi'ch hun neu eich teulu ar frys, dylech geisio cael cymorth cyn gynted â phosib"
+"Your details have been submitted and an operator will try to call\n"
+"        you back around the time you requested "
+msgstr "Mae’ch manylion wedi cael eu cyflwyno a bydd gweithredwr yn ffonio’n ôl tua’r amser yr oeddech wedi gofyn amdano"
 
-#: cla_public/templates/result/confirmation.html:39
+#: cla_public/templates/result/confirmation.html:36
 msgid ""
-"If the operator you speak to thinks you might qualify, they will\n"
-"      put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
-"      ask you more questions before making the final decision about whether you\n"
-"      qualify for legal aid."
-msgstr "Os bydd y gweithredwr rydych yn siarad ag o'n credu y gallwch fod yn gymwys, cewch eich trosglwyddo i siarad â chynghorydd arbenigol y CLA. Bydd eich cynghorydd arbenigol CLA yn gofyn rhagor o gwestiynau i chi cyn gwneud y penderfyniad terfynol pa un a ydych yn gymwys i gael cymorth cyfreithiol ai peidio."
+"If this is not possible, we will always call you back by the\n"
+"        next working day."
+msgstr "Os nad yw hyn yn bosibl, byddwn bob amser yn eich ffonio'n ôl erbyn y diwrnod gwaith nesaf."
 
-#: cla_public/templates/result/confirmation.html:46
-msgid ""
-"You will need to provide evidence of your financial circumstances\n"
-"      and maybe your problem. Your CLA specialist adviser will explain\n"
-"      what is needed."
-msgstr "Bydd angen i chi ddarparu tystiolaeth o’ch amgylchiadau ariannol ac efallai eich problem. Bydd y cynghorydd arbenigol CLA yn egluro beth sydd ei angen. "
-
-#: cla_public/templates/result/confirmation.html:52
-msgid ""
-"If your CLA specialist adviser takes your case on they will\n"
-"      communicate with you by telephone, email or post."
-msgstr "Os bydd y cynghorydd arbenigol CLA yn ymgymryd â’ch achos, bydd yn cyfathrebu â chi dros y ffôn neu drwy’r post neu e-bost."
-
-#: cla_public/templates/result/confirmation.html:57
-msgid ""
-"If your CLA adviser decides that you need to speak to someone in\n"
-"      person or if you need someone to represent you in court, they\n"
-"      will organise this."
-msgstr "Os bydd y cynghorydd Cyngor Cyfreithiol Sifil yn penderfynu bod angen i chi siarad â rhywun eich hun neu os bydd arnoch chi angen rhywun i’ch cynrychioli yn y llys, fe fydd yn trefnu hyn."
-
-#: cla_public/templates/result/confirmation.html:64
-msgid ""
-"If you have a court hearing date it is important that you get\n"
-"        advice as soon as possible. You may be able to get last-minute\n"
-"        help on the day of the hearing from an adviser in the court building."
-msgstr "Os oes gennych ddyddiad i wrandawiad llys, mae’n bwysig eich  bod yn cael cyngor cyn gynted â phosib. Efallai y cewch gymorth ar fyr rybudd ar ddiwrnod y gwrandawiad gan gynghorydd yn adeilad y llys."
-
-#: cla_public/templates/result/confirmation.html:71
+#: cla_public/templates/result/confirmation.html:42
 msgid ""
 "If the operator you speak to thinks you can get legal aid, they will find\n"
-"      you specialist legal help, like a phone call with a solicitor or\n"
-"      support from a family mediation service."
+"        you specialist legal help, like a phone call with a solicitor or\n"
+"        support from a family mediation service."
 msgstr "Os yw'r gweithredwr yr ydych yn siarad ag ef yn credu y gallwch gael cymorth cyfreithiol, byddant yn dod o hyd i gyngor cyfreithiol arbenigol ar eich cyfer, megis galwad ffôn gan gynghorydd cyfreithiol ac/neu gefnogaeth gan y gwasanaeth cyfryngu teuluol."
 
-#: cla_public/templates/result/confirmation.html:77
+#: cla_public/templates/result/confirmation.html:49
+msgid ""
+"If you need to urgently protect yourself or your family you should\n"
+"          try and get advice as soon as possible."
+msgstr "Os oes arnoch angen diogelu chi'ch hun neu eich teulu ar frys, dylech geisio cael cymorth cyn gynted â phosib"
+
+#: cla_public/templates/result/confirmation.html:55
+msgid ""
+"If the operator you speak to thinks you might qualify, they will\n"
+"        put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
+"        ask you more questions before making the final decision about whether you\n"
+"        qualify for legal aid."
+msgstr "Os bydd y gweithredwr rydych yn siarad ag o'n credu y gallwch fod yn gymwys, cewch eich trosglwyddo i siarad â chynghorydd arbenigol y CLA. Bydd eich cynghorydd arbenigol CLA yn gofyn rhagor o gwestiynau i chi cyn gwneud y penderfyniad terfynol pa un a ydych yn gymwys i gael cymorth cyfreithiol ai peidio."
+
+#: cla_public/templates/result/confirmation.html:62
+msgid ""
+"You will need to provide evidence of your financial circumstances\n"
+"        and maybe your problem. Your CLA specialist adviser will explain\n"
+"        what is needed."
+msgstr "Bydd angen i chi ddarparu tystiolaeth o’ch amgylchiadau ariannol ac efallai eich problem. Bydd y cynghorydd arbenigol CLA yn egluro beth sydd ei angen. "
+
+#: cla_public/templates/result/confirmation.html:68
+msgid ""
+"If your CLA specialist adviser takes your case on they will\n"
+"        communicate with you by telephone, email or post."
+msgstr "Os bydd y cynghorydd arbenigol CLA yn ymgymryd â’ch achos, bydd yn cyfathrebu â chi dros y ffôn neu drwy’r post neu e-bost."
+
+#: cla_public/templates/result/confirmation.html:73
+msgid ""
+"If your CLA adviser decides that you need to speak to someone in\n"
+"        person or if you need someone to represent you in court, they\n"
+"        will organise this."
+msgstr "Os bydd y cynghorydd Cyngor Cyfreithiol Sifil yn penderfynu bod angen i chi siarad â rhywun eich hun neu os bydd arnoch chi angen rhywun i’ch cynrychioli yn y llys, fe fydd yn trefnu hyn."
+
+#: cla_public/templates/result/confirmation.html:80
+msgid ""
+"If you have a court hearing date it is important that you get\n"
+"          advice as soon as possible. You may be able to get last-minute\n"
+"          help on the day of the hearing from an adviser in the court building."
+msgstr "Os oes gennych ddyddiad i wrandawiad llys, mae’n bwysig eich  bod yn cael cyngor cyn gynted â phosib. Efallai y cewch gymorth ar fyr rybudd ar ddiwrnod y gwrandawiad gan gynghorydd yn adeilad y llys."
+
+#: cla_public/templates/result/confirmation.html:87
 msgid "What if I miss the operator’s call?"
 msgstr "Beth fydd yn digwydd os byddaf yn methu galwad y gweithredwr?"
 
-#: cla_public/templates/result/confirmation.html:79
+#: cla_public/templates/result/confirmation.html:89
 msgid ""
 "If you miss the call or you need advice urgently, you can call us on\n"
-"    0345 345 4 345. Find out about <a href=\"https://www.gov.uk/call-charges\">call charges</a>."
+"      <strong>0345 345 4 345</strong>. Find out about\n"
+"      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a>."
 msgstr "Os byddwch yn methu’r alwad neu angen cyngor ar frys, gallwch ein ffonio ar 0345 345 4 345. <a href=\"https://www.gov.uk/call-charges\">Mae gwybodaeth am gostau'r galwadau i'w cael yma.</a>"
 
-#: cla_public/templates/result/confirmation.html:83
+#: cla_public/templates/result/confirmation.html:95
+msgid ""
+"If the operator you speak to thinks you can get legal aid, they will\n"
+"      find you specialist legal help, like a phone call with a solicitor or support from\n"
+"      a family mediation service."
+msgstr "Os yw'r gweithredwr yr ydych yn siarad ag ef yn credu y gallwch gael cymorth cyfreithiol, byddant yn dod o hyd i gyngor cyfreithiol arbenigol ar eich cyfer, megis galwad ffôn gan gynghorydd cyfreithiol ac/neu gefnogaeth gan y gwasanaeth cyfryngu teuluol."
+
+#: cla_public/templates/result/confirmation.html:101
 msgid "What do you think about this service?"
 msgstr "A gawsoch unrhyw anhawster gyda'r gwasanaeth hwn?"
 
-#: cla_public/templates/result/confirmation.html:85
+#: cla_public/templates/result/confirmation.html:103
 msgid ""
 "Your feedback will improve this service.\n"
 "    Please <a href=\"https://www.gov.uk/done/check-legal-aid\">send us your thoughts</a>."
 msgstr "Bydd eich adborth yn gwella’r gwasanaeth hwn. Anfonwch <a href=\"https://www.gov.uk/done/check-legal-aid\">eich barn atom</a>"
 
-#: cla_public/templates/result/confirmation.html:95
+#: cla_public/templates/result/confirmation.html:113
 msgid "Print this page"
 msgstr "Argraffu'r dudalen hon"
 
@@ -2486,156 +2529,161 @@ msgstr "Argraffu'r dudalen hon"
 msgid "You might qualify for legal aid"
 msgstr "Gallech chi fod yn gymwys i gael cymorth cyfreithiol"
 
-#: cla_public/templates/result/eligible-no-callback.html:9
-#: cla_public/templates/result/eligible.html:13
-msgid "Based on the answers you’ve given today, you might qualify financially for legal aid."
-msgstr "Ar sail yr atebion yr ydych chi wedi’u rhoi heddiw, mae’n bosibl y byddwch chi’n gymwys i gael cymorth cyfreithiol o ganlyniad i’ch sefyllfa ariannol."
-
-#: cla_public/templates/result/eligible-no-callback.html:12
+#: cla_public/templates/result/eligible-no-callback.html:10
 msgid ""
-"To get advice about appealing a decision made by the social security tribunal about your\n"
-"    benefits to the Upper Tribunal, Court of Appeal or Supreme Court you should contact your\n"
-"    nearest legal adviser."
-msgstr "I gael cyngor am apelio yn erbyn penderfyniad gan y tribiwnlys nawdd cymdeithasol ynghylch eich budd-daliadau i’r Uwch Dribiwnlys, y Llys Apêl neu’r Goruchaf Lys, dylech gysylltu â’ch cynghorydd cyfreithiol agosaf."
+"Civil Legal Advice does not provide advice about issues\n"
+"      related to welfare benefits but you may be able to get free advice from\n"
+"      a legal adviser in your area. "
+msgstr ""
 
-#: cla_public/templates/result/eligible-no-callback.html:17
-#: cla_public/templates/result/face-to-face.html:56
-msgid "They will check whether you qualify for legal aid. You should not have to pay for this check."
+#: cla_public/templates/result/eligible-no-callback.html:16
+#: cla_public/templates/result/face-to-face.html:54
+msgid ""
+"Your adviser will check whether you qualify for legal aid at\n"
+"    no cost to you. If you qualify for legal aid, you will not have to pay\n"
+"      for legal advice."
 msgstr "Bydd y cynghorydd cyfreithiol yn gweld a ydych chi’n gymwys i gael cymorth cyfreithiol. Ni ddylech chi orfod talu am y gwiriad hwn. "
+
+#: cla_public/templates/result/eligible-no-callback.html:22
+#: cla_public/templates/result/face-to-face.html:60
+msgid ""
+"If you don't qualify for legal aid, you will have to pay for\n"
+"      legal advice. You should ask your adviser about the cost of their\n"
+"      advice."
+msgstr "Os na fyddwch chi’n gymwys i gael cymorth cyfreithiol, dylech chi siarad â’ch cynghorydd am y gost o gael cyngor"
 
 #: cla_public/templates/result/eligible.html:6
 msgid "We need more information"
 msgstr "Mae angen i ni gael rhagor o wybodaeth"
 
-#: cla_public/templates/result/eligible.html:15
-msgid "Please submit your details below so we can call you back."
-msgstr "Cyflwynwch eich manylion isod fel y gallwn eich ffonio'n ôl"
+#: cla_public/templates/result/eligible.html:14
+msgid ""
+"In order to decide whether you might qualify for legal aid, we need more information about\n"
+"      your financial circumstances. You should contact Civil Legal Advice."
+msgstr "Er mwyn penderfynu a allech chi fod yn gymwys i gael cymorth cyfreithiol, mae angen i ni gael rhagor o wybodaeth am eich amgylchiadau ariannol. "
 
 #: cla_public/templates/result/eligible.html:18
 msgid ""
-"The first person you speak to will be a Civil Legal Advice operator. They will check the\n"
-"      information you’ve given us. They will also ask you some more questions to find out if\n"
-"      your specific problem is covered by legal aid."
-msgstr "Yr unigolyn cyntaf fydd yn siarad â chi fydd un o weithredwyr Cyngor Cyfreithiol Sifil. Bydd y gweithredwr yn gwirio’r wybodaeth yr ydych chi wedi’i rhoi i ni’n barod. Bydd hefyd yn gofyn rhagor o gwestiynau i chi am eich amgylchiadau ariannol ac i gael gwybod a yw cymorth cyfreithiol ar gael ar gyfer y broblem benodol sydd gennych chi."
+"The first person you speak to will be a CLA operator. They will check what\n"
+"      you told us already. They will also ask you some more questions about your financial\n"
+"      circumstances and to find out if your specific problem is covered by legal aid."
+msgstr ""
 
 #: cla_public/templates/result/eligible.html:24
 msgid ""
-"In order to decide whether you might qualify for legal aid, we need more information about\n"
-"      your financial circumstances."
-msgstr "Er mwyn penderfynu a allech chi fod yn gymwys i gael cymorth cyfreithiol, mae angen i ni gael rhagor o wybodaeth am eich amgylchiadau ariannol. "
+"Based on the answers you’ve given today, you might qualify financially for legal aid.\n"
+"      Call Civil Legal Advice (CLA), a national helpline for England and Wales, to find out for certain\n"
+"      if you qualify, and get specialist advice if you do."
+msgstr ""
 
-#: cla_public/templates/result/eligible.html:28
+#: cla_public/templates/result/eligible.html:30
 msgid ""
-"The first person you speak to will be a Civil Legal Advice operator. They will check what\n"
-"      you told us already. They will also ask you some more questions about your financial\n"
-"      circumstances and to find out if your specific problem is covered by legal aid."
-msgstr "Yr unigolyn cyntaf fydd yn siarad â chi fydd un o weithredwyr Cyngor Cyfreithiol Sifil. Bydd y gweithredwr yn gwirio’r wybodaeth yr ydych chi wedi’i rhoi i ni’n barod. Bydd hefyd yn gofyn rhagor o gwestiynau i chi am eich amgylchiadau ariannol ac i gael gwybod a yw cymorth cyfreithiol ar gael ar gyfer y broblem benodol sydd gennych chi."
+"Please submit your details to get your personal case reference number.\n"
+"    You will need to quote this number when you speak with CLA."
+msgstr ""
 
-#: cla_public/templates/result/eligible.html:41
+#: cla_public/templates/result/eligible.html:34
 msgid ""
-"If the operator you speak to thinks you might qualify, they will put you\n"
-"      through to a CLA specialist adviser immediately."
-msgstr "Os bydd y gweithredwr sy’n siarad â chi’n credu y gallech chi fod yn gymwys, bydd yn eich trosglwyddo ar unwaith i un o gynghorwyr arbenigol y CLA"
+"You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+"    <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
+"    or ask us to call you back, which is free."
+msgstr ""
 
-#: cla_public/templates/result/eligible.html:45
-msgid "If CLA can’t help we will suggest other places that might be able to assist you."
-msgstr "Os nad yw’r CLA yn gallu helpu, byddwn ni yn awgrymu lleoedd eraill a allai’ch helpu."
-
-#: cla_public/templates/result/eligible.html:61
+#: cla_public/templates/result/eligible.html:52
 msgid ""
 "Your CLA specialist adviser will ask you more questions before making the final decision about\n"
 "      whether you qualify for legal aid."
 msgstr "Bydd y cynghorydd arbenigol CLA yn gofyn rhagor o gwestiynau i chi cyn penderfynu’n derfynol a ydych chi’n gymwys i gael cymorth cyfreithiol. "
 
-#: cla_public/templates/result/eligible.html:66
+#: cla_public/templates/result/eligible.html:57
 msgid ""
 "You will need to provide evidence of your financial circumstances and maybe your problem.\n"
 "      Your CLA specialist adviser will explain what is needed."
 msgstr "Bydd angen i chi ddarparu tystiolaeth o’ch amgylchiadau ariannol ac efallai eich problem. Bydd y cynghorydd arbenigol CLA yn egluro beth sydd ei angen."
 
-#: cla_public/templates/result/eligible.html:71
+#: cla_public/templates/result/eligible.html:62
 msgid ""
 "If your CLA specialist adviser takes your case on they will communicate with you by telephone,\n"
 "      email or post."
 msgstr "Os bydd y cynghorydd arbenigol CLA yn ymgymryd â’ch achos, bydd yn cyfathrebu â chi dros y ffôn neu drwy’r post neu e-bost."
 
-#: cla_public/templates/result/eligible.html:76
+#: cla_public/templates/result/eligible.html:67
 msgid "If CLA can’t help we will always suggest other places that might be able to."
 msgstr "Os nad yw CLA yn gallu helpu, byddwn ni bob amser yn awgrymu lleoedd eraill a allai’ch helpu."
 
-#: cla_public/templates/result/eligible.html:80
+#: cla_public/templates/result/eligible.html:71
 msgid ""
 "If your Civil Legal Advice adviser decides that you need to speak to someone in person or if\n"
 "      you need someone to represent you in court, they will organise this for you."
 msgstr "Os bydd y cynghorydd Cyngor Cyfreithiol Sifil yn penderfynu bod angen i chi siarad â rhywun eich hun neu os bydd arnoch chi angen rhywun i’ch cynrychioli yn y llys, fe fydd yn trefnu hyn i chi."
 
-#: cla_public/templates/result/face-to-face.html:4
-msgid "We do not provide advice about issues related to"
-msgstr "Nid ydym yn darparu cyngor am faterion sy’n ymwneud â/ag "
+#: cla_public/templates/result/face-to-face.html:6
+msgid "You might be able to get legal aid if your problem is about discrimination"
+msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:8
+#: cla_public/templates/result/face-to-face.html:9
 msgid ""
-"You will usually only get Legal Aid for advice about Clinical Negligence if\n"
-"      your child has been severely injured during birth or in the first 8 weeks of life"
-msgstr "Fel arfer dim ond os yw’ch plentyn wedi cael ei anafu’n ddifrifol wrth ei eni neu yn ystod wyth wythnos gyntaf ei fywyd y byddwch chi’n cael cymorth cyfreithiol ar gyfer cyngor ar esgeuluster clinigol"
+"If you feel you’ve been discriminated against at work, we\n"
+"        might be able to help. Please go back to the <a href=\"/\">start</a> and choose\n"
+"        ‘Discrimination’ from the list of problem areas."
+msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:11
-msgid "Legal Aid is not usually available for advice about personal injury"
+#: cla_public/templates/result/face-to-face.html:15
+msgid "Legal aid is not usually available for other employment problems."
 msgstr "Fel arfer ni fydd cymorth cyfreithiol ar gael ar gyfer cyngor ar anafiadau personol."
-
-#: cla_public/templates/result/face-to-face.html:13
-msgid "You may be able to get advice from a legal advisor in your area"
-msgstr "Efallai y gallwch gael cyngor gan gynghorydd cyfreithiol yn eich ardal"
 
 #: cla_public/templates/result/face-to-face.html:19
 msgid ""
-"If your employment problem relates to discrimination (for example, you have been treated\n"
-"      unfairly because of your sex, age or other protected characteristic) we might be able to\n"
-"      help. Please go back to <a href=\"/\">start</a> page and click discrimination."
-msgstr "Os oes gennych chi broblem yng nghyswllt cyflogaeth sy’n ymwneud â gwahaniaethu (er enghraifft, os ydych chi wedi cael eich trin yn annheg o ganlyniad i’ch rhyw, oed neu nodwedd warchodedig arall), mae’n bosibl y byddwn ni’n gallu helpu. Ewch yn ôl i dudalen Dechrau a chliciwch ar y pwnc gwahaniaethu."
+"You may still be able to get legal aid in exceptional cases.\n"
+"        You could seek advice from a legal adviser about whether an\n"
+"        application might succeed in your case and how to apply."
+msgstr "Efallai y bydd cymorth cyfreithiol yn dal ar gael mewn achosion eithriadol. Gallech chi ofyn am gyngor gan gynghorydd cyfreithiol ynghylch a fydd cais am gymorth cyfreithiol yn debygol o lwyddo yn eich achos chi a sut i wneud cais."
 
-#: cla_public/templates/result/face-to-face.html:25
+#: cla_public/templates/result/face-to-face.html:24
+#: cla_public/templates/result/face-to-face.html:45
+msgid "You may be able to get free advice from a legal adviser"
+msgstr "Efallai y gallwch gael cyngor gan gynghorydd cyfreithiol yn eich ardal"
+
+#: cla_public/templates/result/face-to-face.html:27
 msgid ""
-"If your employment problem is not connected to discrimination, legal aid is not usually\n"
-"      available."
-msgstr "Os nad yw eich problem cyflogaeth yn ymwneud â gwahaniaethu, ni fydd cymorth cyfreithiol ar gael fel arfer."
+"You will usually only get legal aid for advice about\n"
+"        clinical negligence if your child has been severely injured during\n"
+"        birth or in the first 8 weeks of life."
+msgstr "Fel arfer dim ond os yw’ch plentyn wedi cael ei anafu’n ddifrifol wrth ei eni neu yn ystod wyth wythnos gyntaf ei fywyd y byddwch chi’n cael cymorth cyfreithiol ar gyfer cyngor ar esgeuluster clinigol"
 
-#: cla_public/templates/result/face-to-face.html:29
-msgid "You may be able to get free help from:"
+#: cla_public/templates/result/face-to-face.html:33
+msgid ""
+"Civil Legal Advice doesn't provide advice on issues related\n"
+"        to clinical negligence, but a legal adviser may be able to help."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:37
+msgid "Legal aid is not usually available for advice about personal injury"
+msgstr "Fel arfer ni fydd cymorth cyfreithiol ar gael ar gyfer cyngor ar anafiadau personol."
+
+#: cla_public/templates/result/face-to-face.html:40
+msgid ""
+"You may be able to get legal aid in exceptional cases. You\n"
+"        could seek advice from a legal adviser about whether an application\n"
+"        might succeed in your case and how to apply."
+msgstr "Efallai y bydd cymorth cyfreithiol yn dal ar gael mewn achosion eithriadol. Gallech chi ofyn am gyngor gan gynghorydd cyfreithiol ynghylch a fydd cais am gymorth cyfreithiol yn debygol o lwyddo yn eich achos chi a sut i wneud cais."
+
+#: cla_public/templates/result/face-to-face.html:48
+msgid "Civil Legal Advice doesn’t provide advice on issues related to"
+msgstr "Nid ydym yn darparu cyngor am faterion sy’n ymwneud â/ag "
+
+#: cla_public/templates/result/face-to-face.html:49
+msgid "but a legal adviser may be able to help."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:71
+msgid "You may also be able to get free help from:"
 msgstr "Efallai y gallwch gael cymorth yn rhad ac am ddim."
 
-#: cla_public/templates/result/face-to-face.html:31
+#: cla_public/templates/result/face-to-face.html:74
 msgid "Advisery, Conciliation and Arbitration Service (Acas)"
 msgstr "Y Gwasanaeth Cynghori, Cymodi a Chyflafareddu (Acas)"
 
-#: cla_public/templates/result/face-to-face.html:32
+#: cla_public/templates/result/face-to-face.html:75
 msgid "Law Centres Network"
 msgstr "Rhwydwaith Canolfannau'r Gyfraith"
-
-#: cla_public/templates/result/face-to-face.html:36
-msgid "You can also seek advice from a legal adviser – you will have to pay for this advice."
-msgstr "Gallwch chi hefyd ofyn am gyngor gan gynghorydd cyfreithiol - bydd yn rhaid i chi dalu am y cyngor hwn. "
-
-#: cla_public/templates/result/face-to-face.html:42
-#: cla_public/templates/result/face-to-face.html:51
-msgid ""
-"To find out if you might qualify, contact a legal adviser in your area. They will check\n"
-"        whether you qualify for legal aid. You should not have to pay for this check."
-msgstr "I ganfod os ydych yn gymwys am gymorth cyfreithiol, cysylltwch â chynghorydd cyfreithiol yn eich ardal.  Byddant yn gwirio pa un ai a ydych yn gymwys i gael cymorth cyfreithiol. Ni ddylech orfod talu am y gwiriad hwn."
-
-#: cla_public/templates/result/face-to-face.html:47
-msgid ""
-"You may be able to get legal aid in exceptional cases. You could seek advice from a legal\n"
-"        adviser about whether an application might succeed in your case and how to apply."
-msgstr "Efallai y bydd cymorth cyfreithiol yn dal ar gael mewn achosion eithriadol. Gallech chi ofyn am gyngor gan gynghorydd cyfreithiol ynghylch a fydd cais am gymorth cyfreithiol yn debygol o lwyddo yn eich achos chi a sut i wneud cais."
-
-#: cla_public/templates/result/face-to-face.html:60
-msgid "If you don’t qualify for legal aid, you should speak to your adviser about the cost of advice."
-msgstr "Os na fyddwch chi’n gymwys i gael cymorth cyfreithiol, dylech chi siarad â’ch cynghorydd am y gost o gael cyngor"
-
-#: cla_public/templates/result/face-to-face.html:70
-msgid ""
-"Legal aid may still be available in exceptional cases. You could seek advice from a legal\n"
-"      adviser about whether an application might succeed in your case and how to apply."
-msgstr "Efallai y bydd cymorth cyfreithiol yn dal ar gael mewn achosion eithriadol. Gallech chi ofyn am gyngor gan gynghorydd cyfreithiol ynghylch a fydd cais am gymorth cyfreithiol yn debygol o lwyddo yn eich achos chi a sut i wneud cais."
-

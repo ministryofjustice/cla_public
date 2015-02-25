@@ -28,13 +28,13 @@
 
 
 {#
-  Call me back link
+  Alert block with link to contact page
 #}
-{%  macro call_me_back_link() %}
+{%  macro get_in_touch_alert() %}
   {% call alert() %}
     <p>
-      {{ _('If you’re having trouble completing this form, ask us to') }}
-      <a href="{{ url_for('callmeback.request_callback') }}" id="callback-link">{{ _('call you back') }}</a>.
+      {{ _('If you’re having trouble completing this form') }},
+      <a href="{{ url_for('contact.get_in_touch') }}" id="callback-link">{{ _('get in touch') }}</a>.
     </p>
   {% endcall %}
 {% endmacro %}
