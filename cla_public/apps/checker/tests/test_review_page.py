@@ -30,7 +30,7 @@ class TestReviewPage(unittest.TestCase):
     def assert_review_section(self, url):
         soup = BeautifulSoup(self.review_page_html)
         section = next(
-            iter(soup.select('.main-content h2 a[href="{0}"]'.format(url))),
+            iter(soup.select('section header a[href="{0}"]'.format(url))),
             None)
         self.assertIsNotNone(
             section,
