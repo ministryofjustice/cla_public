@@ -127,3 +127,7 @@ def set_locale(locale):
     expires = datetime.datetime.now() + datetime.timedelta(days=30)
     response.set_cookie('locale', locale, expires=expires)
     return response
+
+@base.route('/call-me-back')
+def redirect_to_contact():
+    return redirect(url_for('contact.get_in_touch'))
