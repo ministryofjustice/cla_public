@@ -9,6 +9,8 @@ DEBUG = False
 
 TESTING = False
 
+CLEAR_SESSION = True
+
 # Disable eligibility check and allow users to request a callback only
 CONTACT_ONLY = os.environ.get('CALLMEBACK_ONLY', False) == 'True'
 
