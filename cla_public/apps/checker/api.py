@@ -113,7 +113,7 @@ def post_to_is_eligible_api():
 
 
 def should_attach_eligibility_check():
-    return session.category is not None
+    return 'eligibility_check' in session
 
 
 def attach_eligibility_check(payload):
