@@ -597,8 +597,6 @@ class IncomeFieldForm(BaseNoCsrfForm, FormSessionDataMixin):
 
 class IncomeField(PassKwargsToFormField):
 
-    _income_field = True
-
     def __init__(self, *args, **kwargs):
         super(IncomeField, self).__init__(
             IncomeFieldForm,

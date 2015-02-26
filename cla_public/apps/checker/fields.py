@@ -112,8 +112,6 @@ class SetZeroFormField(FormField):
 
 class MoneyField(SetZeroIntegerField):
 
-    _money_field = True
-
     def __init__(self, label=None, validators=None, min_val=0,
                  max_val=9999999999, **kwargs):
         super(MoneyField, self).__init__(label, validators, **kwargs)
@@ -223,8 +221,6 @@ class PassKwargsToFormField(SetZeroFormField):
 class MoneyIntervalField(PassKwargsToFormField):
     """Convenience class for FormField(MoneyIntervalForm)"""
 
-    _money_interval_field = True
-
     def __init__(self, *args, **kwargs):
         self._errors = []
         self.validators = []
@@ -274,8 +270,6 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class PropertyList(FieldList):
-
-    _property_list = True
 
     def remove(self, index):
         del self.entries[index]

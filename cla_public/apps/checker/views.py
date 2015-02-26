@@ -29,11 +29,13 @@ log = logging.getLogger(__name__)
 
 
 @checker.app_context_processor
-def choice_label():
-    def choice_label_fn(field, choice):
-        choices_dict = dict(field.choices)
-        return choices_dict.get(choice)
-    return {'choice_label': choice_label_fn}
+def get_selected_option():
+    def option_label_fn(field, selected=None):
+        options_dict = dict(field.choices)
+        if not selected:
+            selected = field.data
+        return options_dict.get(selected)
+    return {'selected_option': option_label_fn}
 
 
 @checker.after_request
@@ -113,7 +115,7 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
             return not is_null(field)
 
         fields = filter(user_completed, form._fields.items())
-        fields = map(lambda (name, field): (field.label.text, field), fields)
+        fields = map(lambda (name, field): (field), fields)
         return fields
 
 
