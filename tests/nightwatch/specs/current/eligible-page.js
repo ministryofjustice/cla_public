@@ -28,7 +28,7 @@ module.exports = {
 
   'Review page': function(client) {
     client
-      .waitForElementVisible('form[name="review_submit"]', 2000)
+      .waitForElementVisible('.answers-summary', 2000)
       .submitForm('form')
     ;
   },

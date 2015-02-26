@@ -25,7 +25,7 @@ module.exports = {
         .setValue('input[name="savings"]', '50000')
         .setValue('input[name="investments"]', '50000')
         .submitForm('form')
-        .waitForElementVisible('form[name="review_submit"]', 5000)
+        .waitForElementVisible('.answers-summary', 5000)
         .submitForm('form')
         .waitForElementVisible('a[href="https://www.gov.uk/find-a-legal-adviser"]', 5000)
         .assert.urlContains('/help-organisations/' + item.category.label.toLowerCase().replace(/ /g, '-'))

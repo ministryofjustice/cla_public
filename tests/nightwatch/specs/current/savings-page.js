@@ -161,7 +161,7 @@ module.exports = {
       }
       client
         .submitForm('form')
-        .waitForElementVisible('form[name="review_submit"]', 5000)
+        .waitForElementVisible('.answers-summary', 5000)
         .submitForm('form')
         .waitForElementVisible('a[href="https://www.gov.uk/find-a-legal-adviser"]', 5000)
         .assert.urlContains('/help-organisations', util.format('Result ineligible when %s field set to £%s', item.name, (SAVINGS_THRESHOLD + 1)))

@@ -39,9 +39,9 @@ module.exports = {
         .click(util.format('input[name="categories"][value="%s"]', item.value))
         .submitForm('form')
       ;
-      if(url !== '/about') {
+      if(url !== '/about' && url !== '/face-to-face') {
         client
-          .waitForElementVisible('form[name="review_submit"]', 5000)
+          .waitForElementVisible('.answers-summary', 5000)
           .submitForm('form')
         ;
       }
