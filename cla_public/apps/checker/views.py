@@ -153,11 +153,11 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
 
     def skip(self, step):
 
-        if step.name == 'review':
-            return False
-
         if session.needs_face_to_face:
             return True
+
+        if step.name == 'review':
+            return False
 
         if step.name not in ('problem', 'about', 'benefits') \
                 and session.ineligible:
