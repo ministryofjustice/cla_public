@@ -1,85 +1,109 @@
 {% extends 'base.html' %}
 
+{% set title = _('Summary of your answers') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
 {% import "macros/form.html" as Form %}
 
-{% macro render_value(field_name, field) %}
-  {% if field._money_field %}
-    <th data-field="{{ field.name }}">{{ field_name }}</th>
-    <td>&pound;{{ field.data }}</td>
-  {% elif field._money_interval_field %}
-    {% if field.data.per_interval_value != None %}
-    <th data-field="{{ field.name }}">{{ field_name }}</th>
-    <td>&pound;{{ field.data.per_interval_value }}
-      {% if field.data.per_interval_value != 0 -%}
-        {{ choice_label(field.form.interval_period, field.data.interval_period) }}
-      {%- endif %}</td>
-    {% endif %}
-  {% elif field._property_list %}
+{% macro render_field(field, step_title) %}
+  {% if 'Property' in field.type %}
     {% for property in field %}
-      <td class="subheading" colspan="2">
-        <h3>Property {{ loop.index }}</h3>
-
-        <table class="review">
-          {% for pfield_name, pfield in property.form._fields.items() %}
-          <tr>
-            {{ render_value(pfield.label.text, pfield) }}
-          </tr>
-          {% endfor %}
-        </table>
-      </td>
-    {% endfor %}
-  {% elif field._income_field %}
-    <td class="subheading" colspan="2">
-      <h3>{{ field_name }}</h3>
-      <table class="review">
-        {% for ifield_name, ifield in field.form._fields.items() %}
-          <tr>
-            {{ render_value(ifield.label.text, ifield) }}
-          </tr>
-        {% endfor %}
-      </table>
-    </td>
-  {% elif field.choices %}
-    {% if field.data is string %}
-      <th data-field="{{ field.name }}">{{ field_name }}</th>
-      <td>{{ choice_label(field, field.data) }}</td>
-    {% else %}
-      <th data-field="{{ field.name }}">{{ field_name }}</th>
-      <td>
-        <ul>
-          {% for item in field.data %}
-          <li>{{ choice_label(field, item) }}</li>
+      <li>
+        {% if field|length > 1 %}
+          <h3>Property {{ loop.index }}</h3>
+        {% endif %}
+        <ul class="answers">
+          {% for field_name, field in property.form._fields.items() if field.data.per_interval_value != None %}
+            {{ render_field(field) }}
           {% endfor %}
         </ul>
-      </td>
-    {% endif %}
+      </li>
+    {% endfor %}
+  {% elif 'Income' in field.type %}
+    <li>
+      <h3>{{ field.label}}</h3>
+      <ul class="answers">
+        {% for field_name, field in field.form._fields.items() %}
+          {{ render_field(field) }}
+        {% endfor %}
+      </ul>
+    </li>
   {% else %}
-    <th data-field="{{ field.name }}">{{ field_name }}</th>
-    <td>{{ field.data }}</td>
+    <li class="answers-item">{{ render_answer(field, step_title) }}</li>
   {% endif %}
 {% endmacro %}
 
-{% block inner_content %}
-  <h1>Summary</h1>
-
-  {% for step in steps %}
-  {% with fields = step.completed_fields() %}
-  {% if fields %}
-  <h2><a href="{{ url_for('checker.wizard', step=step.name) }}">{{ step.form_class.title }}</a></h2>
-  <table class="review">
-    {% for field_name, field in fields %}
-    <tr>
-      {{ render_value(field_name, field) }}
-    </tr>
-    {% endfor %}
-  </table>
+{% macro render_answer(field, step_title) %}
+  {% if step_title != field.label.text %}
+    <div class="question">{{ field.label.text }}</div>
   {% endif %}
-  {% endwith %}
-  {% endfor %}
+  <div class="answer">
+    {% if field.choices %}
+      {{ render_choices(field) }}
+    {% elif 'Money' in field.type %}
+      {{ render_money_field(field) }}
+    {% else %}
+      <strong>{{ field.data}}</strong>
+    {% endif %}
+  </div>
+{% endmacro %}
 
-  <form method="POST" name="review_submit">
+{% macro render_choices(field) %}
+  {% if field.data is string %}
+    <strong>{{ selected_option(field) }}</strong>
+  {% else %}
+    <ul class="multiple-answers">
+      {% for item in field.data %}
+        <li>
+          <strong>{{ selected_option(field, item) }}</strong>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{% macro render_money_field(field) %}
+  <span class="currency">&pound;</span>
+  {%- if 'Interval' in field.type -%}
+    <strong class="money-value">{{ field.data.per_interval_value }}</strong>
+    {%- if field.data.per_interval_value != 0 %}
+      <span class="money-interval">{{ selected_option(field.interval_period) }}</span>
+    {%- endif %}
+  {%- else -%}
+    <strong class="money-value">{{ field.data }}</strong>
+  {% endif %}
+{% endmacro %}
+
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+
+  <form method="POST" class="answers-summary">
+    {% for step in steps %}
+      {% set answers = step.completed_fields() %}
+      {% with step_title = step.form_class.title %}
+        <section id="step-{{ step.name }}">
+          <header>
+            <h2>{{ step_title }}</h2>
+            <a class="button-secondary button-small" href="{{ url_for('checker.wizard', step=step.name) }}">
+              {% if step.name == 'property' or answers|length > 1 %}
+                {{ _('Change answers') }}
+              {% else %}
+                {{ _('Change answer') }}
+              {% endif %}
+            </a>
+          </header>
+          <ul class="answers">
+            {% for field in answers %}
+              {{ render_field(field, step_title) }}
+            {% endfor %}
+          </ul>
+        </section>
+      {% endwith %}
+    {% endfor %}
+
     {{ form.csrf_token }}
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Submit')) }}
+    {{ Form.actions(_('Confirm')) }}
   </form>
 {% endblock %}
