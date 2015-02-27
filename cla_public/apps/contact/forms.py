@@ -115,7 +115,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         description=(_(
             u"If you’d like to tell us more about your problem, please do so "
             u"in the box below. The Civil Legal Advice operator will read "
-            u"this before they call you.")),
+            u"this to help them understand your problem.")),
         validators=[
             Length(max=5000, message=_(u'Your notes must be 5000 characters '
                                        u'or less')),
