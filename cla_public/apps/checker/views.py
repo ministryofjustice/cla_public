@@ -18,6 +18,7 @@ from cla_public.apps.checker.constants import CATEGORIES, \
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm, ReviewForm
+from cla_public.apps.checker.means_test import MeansTest
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
 from cla_public.libs.utils import override_locale, log_to_sentry
@@ -51,8 +52,10 @@ def add_header(response):
 class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
+        means_test = session.get('means_test', MeansTest())
+        means_test.update(self.form.api_payload())
         try:
-            post_to_eligibility_check_api(self.form)
+            means_test.save()
         except (ConnectionError, Timeout, SlumberBaseException) as e:
             self.form.errors['timeout'] = _(
                 u'There was an error submitting your data. '
