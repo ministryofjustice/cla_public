@@ -1,4 +1,5 @@
 from collections import Mapping
+from copy import deepcopy
 
 from cla_public.apps.checker.api import get_api_connection
 from cla_public.apps.checker.constants import YES, NO
@@ -9,32 +10,27 @@ def recursive_update(orig, other):
     for key, val in other.iteritems():
 
         if key not in orig:
-            print 'recursive_update', key, 'val:', val
-            orig[key] = val
+            if isinstance(val, Mapping):
+                orig[key] = deepcopy(val)
+            else:
+                orig[key] = val
 
         elif orig[key] == val:
-            print 'recursive_update', key, 'orig:', orig[key], 'val:', val
             continue
 
         elif key == 'notes' and orig[key] != val:
-            print 'recursive_update', key
             orig[key] = '{0}\n\n{1}'.format(orig[key], val)
 
         elif isinstance(val, Mapping):
             if MoneyInterval.is_money_interval(val):
-                print 'recursive_update', key, 'orig:', orig[key], 'val:', val
                 orig[key] = MoneyInterval(val)
             elif val != {}:
-                print 'recursive_update', key, '>>'
                 orig[key] = recursive_update(orig[key], val)
-                print 'recursive_update', key, '<<'
 
         elif isinstance(val, list):
-            print 'recursive_update', key, 'orig:', orig[key], 'val:', val
             orig[key] = orig.get(key, []) + val
 
         else:
-            print 'recursive_update', key, 'orig:', orig[key], 'val:', val
             orig[key] = val
 
     return orig
@@ -82,8 +78,8 @@ class MeansTest(dict):
         }
 
         self.update({
-            'you': dict(zero_finances),
-            'partner': dict(zero_finances),
+            'you': deepcopy(zero_finances),
+            'partner': deepcopy(zero_finances),
             'dependants_young': 0,
             'dependants_old': 0,
             'on_passported_benefits': NO,

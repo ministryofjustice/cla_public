@@ -233,10 +233,11 @@ class AboutYouForm(BaseForm):
                 'self_employed': self.is_self_employed.data}}
         }
 
-        if self.have_partner.data == YES and self.in_dispute.data != YES \
-                and self.partner_is_self_employed.data == YES:
+        if self.have_partner.data == YES and self.in_dispute.data != YES:
             payload['partner'] = {'income': {
                 'self_employed': self.partner_is_self_employed.data}}
+        else:
+            payload['partner'] = None
 
         update_payload(payload, PropertiesForm, cond=self.require_properties)
         update_payload(payload, SavingsForm, cond=self.require_savings)

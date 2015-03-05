@@ -109,11 +109,15 @@ class TestMeansTest(unittest.TestCase):
 
     def assertNullFinances(self, person):
         self.assertZeroIncome(person, override={
+            'earnings': MoneyInterval(),
             'other_income': MoneyInterval(),
             'pension': MoneyInterval(),
             'maintenance_received': MoneyInterval()
         })
         self.assertZeroOutgoings(person, override={
+            'income_tax': MoneyInterval(),
+            'childcare': MoneyInterval(),
+            'national_insurance': MoneyInterval(),
             'rent': MoneyInterval(),
             'maintenance': MoneyInterval(),
             'criminal_legalaid_contributions': None
@@ -152,8 +156,23 @@ class TestMeansTest(unittest.TestCase):
         self.assertEqual(NO, mt['has_partner'])
         self.assertEqual(NO, mt['you']['income']['self_employed'])
 
-        self.assertNullFinances(mt['you'])
-        self.assertNullFinances(mt['partner'])
+        # fields that will need to be filled in must be set to null
+        self.assertZeroIncome(mt['you'], override={
+            'earnings': MoneyInterval(),
+            'pension': MoneyInterval(),
+            'maintenance_received': MoneyInterval(),
+            'other_income': MoneyInterval()
+        })
+        self.assertZeroOutgoings(mt['you'], override={
+            'income_tax': MoneyInterval(),
+            'childcare': MoneyInterval(),
+            'rent': MoneyInterval(),
+            'maintenance': MoneyInterval(),
+            'national_insurance': MoneyInterval(),
+            'criminal_legalaid_contributions': None,
+        })
+        self.assertZeroSavings(mt['you'])
+        self.assertIsNone(mt['partner'])
 
         self.assertEqual([], mt['property_set'])
 
@@ -169,16 +188,13 @@ class TestMeansTest(unittest.TestCase):
             have_partner=YES,
             in_dispute=NO,
             partner_is_self_employed=YES)
-        print 'PAYLOAD', payload
-        print 'mt/partner/income/self_employed', mt['partner']['income']['self_employed']
         mt.update(payload)
-        print 'mt/partner/income/self_employed', mt['partner']['income']['self_employed']
 
         self.assertEqual(YES, mt['partner']['income']['self_employed'])
 
-        #mt.update(about_you_payload(
-            #have_partner=YES,
-            #in_dispute=YES,
-            #partner_is_self_employed=YES))
+        mt.update(about_you_payload(
+            have_partner=YES,
+            in_dispute=YES,
+            partner_is_self_employed=YES))
 
-        #self.assertEqual(NO, mt['partner']['income']['self_employed'])
+        self.assertIsNone(mt['partner'])
