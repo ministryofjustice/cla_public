@@ -28,6 +28,7 @@
   </header>
 
   <h2>{{ _('What happens next?') }}</h2>
+
   {% if session.stored_callback_requested %}
     <p>
       {% trans %}Your details have been submitted and an operator will try to call
@@ -36,73 +37,62 @@
       {% trans %}If this is not possible, we will always call you back by the
         next working day.{% endtrans %}
     </p>
+  {% endif %}
 
-    {% if session.stored_category == 'benefits' %}
-      <p>
-        {% trans %}If the operator you speak to thinks you can get legal aid, they will find
-        you specialist legal help, like a phone call with a solicitor or
-        support from a family mediation service.{% endtrans %}
-      </p>
-    {% else %}
-      {% if session.stored_category == 'violence' %}
-        <p>
-          {% trans %}If you need to urgently protect yourself or your family you should
-          try and get advice as soon as possible.{% endtrans %}
-        </p>
-      {% endif %}
-
-      <p>
-        {% trans %}If the operator you speak to thinks you might qualify, they will
-        put you through to a CLA specialist adviser. Your CLA specialist adviser will
-        ask you more questions before making the final decision about whether you
-        qualify for legal aid.{% endtrans %}
-      </p>
-
-      <p>
-        {% trans %}You will need to provide evidence of your financial circumstances
-        and maybe your problem. Your CLA specialist adviser will explain
-        what is needed.{% endtrans %}
-      </p>
-
-      <p>
-        {% trans %}If your CLA specialist adviser takes your case on they will
-        communicate with you by telephone, email or post.{% endtrans %}
-      </p>
-
-      <p>
-        {% trans %}If your CLA adviser decides that you need to speak to someone in
-        person or if you need someone to represent you in court, they
-        will organise this.{% endtrans %}
-      </p>
-
-      {% if session.stored_category in ['debt', 'housing'] %}
-        <p>
-          {% trans %}If you have a court hearing date it is important that you get
-          advice as soon as possible. You may be able to get last-minute
-          help on the day of the hearing from an adviser in the court building.{% endtrans %}
-        </p>
-      {% endif %}
-    {% endif %}
-
-    <h2>{{ _('What if I miss the operator’s call?') }}</h2>
+  {% if session.stored_category in ['debt', 'housing'] %}
     <p>
-      {% trans %}If you miss the call or you need advice urgently, you can call us on
-      <strong>0345 345 4 345</strong>. Find out about
-      <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
-    </p>
-  {% else %}
-    <p>
-      {% trans %}If the operator you speak to thinks you can get legal aid, they will
-      find you specialist legal help, like a phone call with a solicitor or support from
-      a family mediation service.{% endtrans %}
+      {% trans %}If you have a court hearing date it is important that you get
+      advice as soon as possible. You may be able to get last-minute
+      help on the day of the hearing from an adviser in the court building.{% endtrans %}
     </p>
   {% endif %}
+
+  {% if session.stored_category == 'violence' %}
+    <p>
+      {% trans %}If you need to urgently protect yourself or your family you should
+      try and get advice as soon as possible.{% endtrans %}
+    </p>
+  {% endif %}
+
+  <p>
+    {% trans %}If the operator you speak to thinks you might qualify, they will
+    put you through to a CLA specialist adviser. Your CLA specialist adviser will
+    ask you more questions before making the final decision about whether you
+    qualify for legal aid.{% endtrans %}
+  </p>
+
+  <p>
+    {% trans %}You will need to provide evidence of your financial circumstances
+    and maybe your problem. Your CLA specialist adviser will explain
+    what is needed.{% endtrans %}
+  </p>
+
+  <p>
+    {% trans %}If your CLA specialist adviser takes your case on they will
+    communicate with you by telephone, email or post.{% endtrans %}
+  </p>
+
+  <p>
+    {% trans %}If your CLA adviser decides that you need to speak to someone in
+    person or if you need someone to represent you in court, they
+    will organise this.{% endtrans %}
+  </p>
 
   <h2>{{ _('What do you think about this service?') }}</h2>
   <p>
     {% trans %}Your feedback will improve this service.
     Please <a href="https://www.gov.uk/done/check-legal-aid">send us your thoughts</a>.{% endtrans %}
   </p>
+
+  {% if session.stored_callback_requested %}
+    <h2>{{ _('What if I miss the operator’s call?') }}</h2>
+    <p>
+      {% trans %}If you miss the call or you need advice urgently, you can call us on
+      <strong>0345 345 4 345</strong>. Find out about
+      <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
+    </p>
+  {% endif %}
+
 {% endblock %}
 
 {% block javascripts %}
