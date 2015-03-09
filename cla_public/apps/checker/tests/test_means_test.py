@@ -1,4 +1,5 @@
 from collections import defaultdict
+from itertools import chain
 import logging
 import unittest
 
@@ -39,6 +40,16 @@ def about_you_payload(**kwargs):
         'aged_60_or_over': NO}
     post_data.update(kwargs)
     return form_payload('AboutYouForm', post_data)
+
+
+def properties_payload(*properties):
+    update_key = lambda i: \
+        lambda (key, val): ('properties-%d-%s' % (i, key), val)
+    prop = lambda (i, prop): map(update_key(i), prop.items())
+    props = map(prop, enumerate(properties))
+    print props
+    post_data = dict(chain(*props))
+    return form_payload('PropertiesForm', post_data)
 
 
 class TestMeansTest(unittest.TestCase):
@@ -110,17 +121,17 @@ class TestMeansTest(unittest.TestCase):
     def assertNullFinances(self, person):
         self.assertZeroIncome(person, override={
             'earnings': MoneyInterval(),
-            'other_income': MoneyInterval(),
             'pension': MoneyInterval(),
-            'maintenance_received': MoneyInterval()
+            'maintenance_received': MoneyInterval(),
+            'other_income': MoneyInterval()
         })
         self.assertZeroOutgoings(person, override={
             'income_tax': MoneyInterval(),
             'childcare': MoneyInterval(),
-            'national_insurance': MoneyInterval(),
             'rent': MoneyInterval(),
             'maintenance': MoneyInterval(),
-            'criminal_legalaid_contributions': None
+            'national_insurance': MoneyInterval(),
+            'criminal_legalaid_contributions': None,
         })
         self.assertZeroSavings(person)
 
@@ -157,21 +168,7 @@ class TestMeansTest(unittest.TestCase):
         self.assertEqual(NO, mt['you']['income']['self_employed'])
 
         # fields that will need to be filled in must be set to null
-        self.assertZeroIncome(mt['you'], override={
-            'earnings': MoneyInterval(),
-            'pension': MoneyInterval(),
-            'maintenance_received': MoneyInterval(),
-            'other_income': MoneyInterval()
-        })
-        self.assertZeroOutgoings(mt['you'], override={
-            'income_tax': MoneyInterval(),
-            'childcare': MoneyInterval(),
-            'rent': MoneyInterval(),
-            'maintenance': MoneyInterval(),
-            'national_insurance': MoneyInterval(),
-            'criminal_legalaid_contributions': None,
-        })
-        self.assertZeroSavings(mt['you'])
+        self.assertNullFinances(mt['you'])
         self.assertIsNone(mt['partner'])
 
         self.assertEqual([], mt['property_set'])
@@ -198,3 +195,158 @@ class TestMeansTest(unittest.TestCase):
             partner_is_self_employed=YES))
 
         self.assertIsNone(mt['partner'])
+
+        self.assertEqual([], mt['property_set'])
+
+    def test_benefits_passported(self):
+        mt = MeansTest()
+        mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
+        mt.update(about_you_payload(
+            on_benefits=YES))
+        mt.update(form_payload('YourBenefitsForm', {
+            'benefits': 'income_support'}))
+
+        self.assertTrue(mt['on_passported_benefits'])
+        expected = {
+            'income_support': True,
+            'job_seekers_allowance': False,
+            'pension_credit': False,
+            'universal_credit': False,
+            'employment_support': False
+        }
+        self.assertEqual(expected, mt['specific_benefits'])
+
+        self.assertZeroIncome(mt['you'])
+        self.assertZeroOutgoings(mt['you'])
+        self.assertZeroSavings(mt['you'])
+        self.assertIsNone(mt['partner'])
+
+        self.assertEqual([], mt['property_set'])
+
+    def test_benefits_not_passported(self):
+        mt = MeansTest()
+        mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
+        mt.update(about_you_payload(on_benefits=YES))
+        mt.update(form_payload('YourBenefitsForm', {
+            'benefits': 'other-benefit'}))
+
+        self.assertFalse(mt['on_passported_benefits'])
+        expected = {
+            'income_support': False,
+            'job_seekers_allowance': False,
+            'pension_credit': False,
+            'universal_credit': False,
+            'employment_support': False
+        }
+        self.assertEqual(expected, mt['specific_benefits'])
+
+        self.assertNullFinances(mt['you'])
+        self.assertIsNone(mt['partner'])
+
+        self.assertEqual([], mt['property_set'])
+
+    def test_property(self):
+        mt = MeansTest()
+        mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
+        mt.update(about_you_payload(own_property=YES))
+        mt.update(properties_payload(
+            {
+                'is_main_home': YES,
+                'other_shareholders': NO,
+                'property_value': '100,000.00',
+                'mortgage_remaining': '90,000.00',
+                'mortgage_payments': '800.00',
+                'is_rented': NO,
+                'rent_amount': MoneyInterval(),
+                'in_dispute': NO
+            }
+        ))
+
+        self.assertZeroIncome(mt['you'], override={
+            'earnings': MoneyInterval(),
+            'pension': MoneyInterval(),
+            'maintenance_received': MoneyInterval()
+        })
+        self.assertZeroOutgoings(mt['you'], override={
+            'income_tax': MoneyInterval(),
+            'childcare': MoneyInterval(),
+            'rent': MoneyInterval(),
+            'maintenance': MoneyInterval(),
+            'national_insurance': MoneyInterval(),
+            'criminal_legalaid_contributions': None,
+            'mortgage': MoneyInterval(80000, 'per_month')
+        })
+        self.assertZeroSavings(mt['you'])
+        self.assertIsNone(mt['partner'])
+
+        expected = [{
+            'value': 10000000,
+            'mortgage_left': 9000000,
+            'share': 100,
+            'disputed': NO,
+            'rent': MoneyInterval(0),
+            'main': YES
+        }]
+        self.assertDictEqual(expected[0], mt['property_set'][0])
+
+    def test_multiple_property(self):
+        mt = MeansTest()
+        mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
+        mt.update(about_you_payload(own_property=YES))
+        mt.update(properties_payload(
+            {
+                'is_main_home': YES,
+                'other_shareholders': NO,
+                'property_value': '50,000.00',
+                'mortgage_remaining': '40,000.00',
+                'mortgage_payments': '800.00',
+                'is_rented': NO,
+                'rent_amount': MoneyInterval(),
+                'in_dispute': NO
+            },
+            {
+                'is_main_home': YES,
+                'other_shareholders': NO,
+                'property_value': '50,000.00',
+                'mortgage_remaining': '30,000.00',
+                'mortgage_payments': '700.00',
+                'is_rented': NO,
+                'rent_amount': MoneyInterval(),
+                'in_dispute': NO
+            }
+        ))
+
+        self.assertZeroIncome(mt['you'], override={
+            'earnings': MoneyInterval(),
+            'pension': MoneyInterval(),
+            'maintenance_received': MoneyInterval()
+        })
+        self.assertZeroOutgoings(mt['you'], override={
+            'income_tax': MoneyInterval(),
+            'childcare': MoneyInterval(),
+            'rent': MoneyInterval(),
+            'maintenance': MoneyInterval(),
+            'national_insurance': MoneyInterval(),
+            'criminal_legalaid_contributions': None,
+            'mortgage': MoneyInterval(150000, 'per_month')
+        })
+        self.assertZeroSavings(mt['you'])
+        self.assertIsNone(mt['partner'])
+
+        expected = [{
+            'value': 5000000,
+            'mortgage_left': 4000000,
+            'share': 100,
+            'disputed': NO,
+            'rent': MoneyInterval(0),
+            'main': YES
+        }, {
+            'value': 5000000,
+            'mortgage_left': 3000000,
+            'share': 100,
+            'disputed': NO,
+            'rent': MoneyInterval(0),
+            'main': YES
+        }]
+        self.assertDictEqual(expected[0], mt['property_set'][0])
+        self.assertDictEqual(expected[1], mt['property_set'][1])
