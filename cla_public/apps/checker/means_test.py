@@ -28,7 +28,7 @@ def recursive_update(orig, other):
                 orig[key] = recursive_update(orig[key], val)
 
         elif isinstance(val, list):
-            orig[key] = orig.get(key, []) + val
+            orig[key] = val
 
         else:
             orig[key] = val
