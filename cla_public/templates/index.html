@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/element.html" as Element %}
 
 {% set sidebar = 'resources' %}
 
@@ -27,15 +28,15 @@
 
   <p>This service is only for adults. If you’re under 18, ask CLA to <a href="/contact">call you back</a>.</p>
 
-  <div class="info-notice">
+  {% call Element.alert() %}
     <p>You’ll only get guidance on whether or not <abbr title="Civil Legal Advice">CLA</abbr> might be able to help - you won’t get a final decision until you speak to an adviser.</p>
-  </div>
+  {% endcall %}
 
   <p>You can’t get help from <abbr title="Civil Legal Advice">CLA</abbr> if you’ve been charged with a crime - ask your solicitor or barrister if you are able to get criminal legal aid.</p>
 
-  <div class="info-notice">
+  {% call Element.alert() %}
     <p>Legal aid is different in <a rel="external" href="http://www.slab.org.uk/public/advice/index.html">Scotland</a> and <a rel="external" href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm">Northern Ireland.</a></p>
-  </div>
+  {% endcall %}
 
   <div class="meta-data group">
     <p class="modified-date">Last updated: 27 February 2015</p>
