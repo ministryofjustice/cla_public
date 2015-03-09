@@ -503,7 +503,7 @@ class IncomeFieldForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMix
     def api_payload(self):
         tax_credits = self.working_tax_credit.data
         child_tax_credit = session.get(
-            'TaxCreditsForm_child_tax_credit', money_interval(0))
+            'TaxCreditsForm', {}).get('child_tax_credit', money_interval(0))
         if not self.is_partner:
             tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
 
@@ -522,7 +522,7 @@ class IncomeFieldForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMix
         other_income = self.other_income.data
         if session.owns_property:
             rents = [p['rent_amount'] for p in session.get(
-                'PropertiesForm_properties', [])]
+                'PropertiesForm', {}).get('properties', [])]
             total_rent = sum_rents(rents)
             other_income = sum_money_intervals(other_income, total_rent)
 
