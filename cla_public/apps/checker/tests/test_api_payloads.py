@@ -22,6 +22,13 @@ def get_en_locale():
     return 'en'
 
 
+def money_interval(amount=None, interval='per_month'):
+    return {
+        'per_interval_value': amount,
+        'interval_period': interval
+    }
+
+
 class TestApiPayloads(unittest.TestCase):
 
     def setUp(self):
@@ -322,6 +329,87 @@ class TestApiPayloads(unittest.TestCase):
 
         self.assertEqual(payload['deductions']['income_tax']['per_interval_value'], 200)
         self.assertEqual(payload['deductions']['national_insurance']['per_interval_value'], 300)
+
+    def test_total_rents_and_other_income(self):
+        session['AboutYouForm'] = {
+            'own_property': YES}
+        session['PropertiesForm'] = {
+            'properties': [
+                {
+                    'is_main_home': YES,
+                    'other_shareholders': NO,
+                    'property_value': '20,000.00',
+                    'mortgage_remaining': '10,000.00',
+                    'mortgage_payments': '700.00',
+                    'is_rented': YES,
+                    'rent_amount': {
+                        'per_interval_value': 10000,
+                        'interval_period': 'per_month'
+                    },
+                    'in_dispute': NO
+                },
+                {
+                    'is_main_home': NO,
+                    'other_shareholders': NO,
+                    'property_value': '20,000.00',
+                    'mortgage_remaining': '10,000.00',
+                    'mortgage_payments': '800.00',
+                    'is_rented': YES,
+                    'rent_amount': money_interval(5000),
+                    'in_dispute': NO
+                }
+            ]
+        }
+
+        def post_money_interval(key, amount=None, interval='per_month'):
+            val = {}
+            val['your_income-%s-per_interval_value' % key] = amount
+            val['your_income-%s-interval_period' % key] = interval
+            return val
+
+        post_data = {}
+        post_data.update(post_money_interval('earnings', '10.00'))
+        post_data.update(post_money_interval('income_tax', '0'))
+        post_data.update(post_money_interval('national_insurance', '0'))
+        post_data.update(post_money_interval('working_tax_credit', '0'))
+        post_data.update(post_money_interval('maintenance', '0'))
+        post_data.update(post_money_interval('pension', '0'))
+        post_data.update(post_money_interval('other_income', '200.00'))
+        payload = self.payload(IncomeForm, post_data)
+
+        self.assertEqual(
+            money_interval(35000),
+            payload['you']['income']['other_income'])
+
+    def test_total_tax_credits(self):
+        session['AboutYouForm'] = {
+            'have_children': YES,
+            'num_children': 1}
+        session['TaxCreditsForm'] = {
+            'child_benefit': money_interval(0),
+            'child_tax_credit': money_interval(1000),
+            'benefits': [],
+            'other_benefits': NO}
+
+        def post_money_interval(key, amount=None, interval='per_month'):
+            val = {}
+            val['your_income-%s-per_interval_value' % key] = amount
+            val['your_income-%s-interval_period' % key] = interval
+            return val
+
+        post_data = {}
+        post_data.update(post_money_interval('earnings', '10.00'))
+        post_data.update(post_money_interval('income_tax', '0'))
+        post_data.update(post_money_interval('national_insurance', '0'))
+        post_data.update(post_money_interval('working_tax_credit', '5.00'))
+        post_data.update(post_money_interval('maintenance', '0'))
+        post_data.update(post_money_interval('pension', '0'))
+        post_data.update(post_money_interval('other_income', '200.00'))
+        payload = self.payload(IncomeForm, post_data)
+
+        self.assertEqual(
+            money_interval(1500),
+            payload['you']['income']['tax_credits'])
 
     def test_income_and_tax_form(self):
         session['AboutYouForm'] = session.get('AboutYouForm', {})
