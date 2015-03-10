@@ -107,55 +107,55 @@ class TestMeansTest(unittest.TestCase):
         with self.client.session_transaction() as session:
             session['foo'] = 'bar'
 
-    def assertDictValues(self, dict_, expected=defaultdict(int)):
-        for key, val in dict_.items():
+    def assertDictValues(self, expected, actual):
+        for key, val in actual.items():
             self.assertEqual(
                 expected[key], val,
                 '%s is %r, not %r' % (key, val, expected[key]))
 
-    def assertZeroIncome(self, person, override={}):
+    def assertIncome(self, income, default=None, **override):
         expected = set([
             'earnings', 'benefits', 'tax_credits', 'child_benefits',
             'other_income', 'self_employment_drawings', 'total',
             'maintenance_received', 'pension', 'self_employed'])
         self.assertSetEqual(
-            expected, set(person['income'].keys()))
+            expected, set(income.keys()))
 
-        expected = defaultdict(lambda: MoneyInterval(0))
+        expected = defaultdict(lambda: default)
         expected['total'] = 0
         expected['self_employed'] = NO
         expected.update(override)
-        self.assertDictValues(person['income'], expected=expected)
+        self.assertDictValues(expected, income)
 
-    def assertZeroOutgoings(self, person, override={}):
+    def assertOutgoings(self, outgoings, default=None, **override):
         expected = set([
             'income_tax', 'mortgage', 'childcare', 'rent', 'maintenance',
             'national_insurance', 'criminal_legalaid_contributions'])
         self.assertSetEqual(
-            expected, set(person['deductions'].keys()))
+            expected, set(outgoings.keys()))
 
-        expected = defaultdict(lambda: MoneyInterval(0))
+        expected = defaultdict(lambda: default)
         expected['criminal_legalaid_contributions'] = 0
         expected.update(override)
-        self.assertDictValues(person['deductions'], expected=expected)
+        self.assertDictValues(expected, outgoings)
 
-    def assertZeroSavings(self, person, override={}):
+    def assertSavings(self, savings, default=None, **override):
         expected = set([
             'credit_balance', 'investment_balance', 'asset_balance',
             'bank_balance', 'total'])
         self.assertSetEqual(
-            expected, set(person['savings'].keys()))
+            expected, set(savings.keys()))
 
-        expected = defaultdict(int)
+        expected = defaultdict(lambda: default)
         expected.update(override)
-        self.assertDictValues(person['savings'], expected=expected)
+        self.assertDictValues(expected, savings)
 
     def assertZeroFinances(self, person):
         expected = set(['income', 'savings', 'deductions'])
         self.assertSetEqual(expected, set(person.keys()))
-        self.assertZeroIncome(person)
-        self.assertZeroOutgoings(person)
-        self.assertZeroSavings(person)
+        self.assertIncome(person['income'], default=MoneyInterval(0))
+        self.assertOutgoings(person['deductions'], default=MoneyInterval(0))
+        self.assertSavings(person['savings'], default=0)
 
     def assertMeansTestInitialized(self, mt):
         self.assertEqual(0, mt['dependants_young'])
@@ -167,21 +167,21 @@ class TestMeansTest(unittest.TestCase):
         self.assertZeroFinances(mt['partner'])
 
     def assertNullFinances(self, person):
-        self.assertZeroIncome(person, override={
-            'earnings': MoneyInterval(),
-            'pension': MoneyInterval(),
-            'maintenance_received': MoneyInterval(),
-            'other_income': MoneyInterval()
-        })
-        self.assertZeroOutgoings(person, override={
-            'income_tax': MoneyInterval(),
-            'childcare': MoneyInterval(),
-            'rent': MoneyInterval(),
-            'maintenance': MoneyInterval(),
-            'national_insurance': MoneyInterval(),
-            'criminal_legalaid_contributions': None,
-        })
-        self.assertZeroSavings(person)
+        self.assertIncome(
+            person['income'],
+            default=MoneyInterval(0),
+            earnings=MoneyInterval(),
+            pension=MoneyInterval(),
+            maintenance_received=MoneyInterval(),
+            other_income=MoneyInterval()
+        )
+        self.assertOutgoings(
+            person['deductions'],
+            default=MoneyInterval(),
+            mortgage=MoneyInterval(0),
+            criminal_legalaid_contributions=None
+        )
+        self.assertSavings(person['savings'], default=0)
 
     def test_initialization(self):
         mt = MeansTest()
@@ -264,9 +264,9 @@ class TestMeansTest(unittest.TestCase):
         }
         self.assertEqual(expected, mt['specific_benefits'])
 
-        self.assertZeroIncome(mt['you'])
-        self.assertZeroOutgoings(mt['you'])
-        self.assertZeroSavings(mt['you'])
+        self.assertIncome(mt['you']['income'], default=MoneyInterval(0))
+        self.assertOutgoings(mt['you']['deductions'], default=MoneyInterval(0))
+        self.assertSavings(mt['you']['savings'], default=0)
         self.assertIsNone(mt['partner'])
 
         self.assertEqual([], mt['property_set'])
@@ -299,21 +299,20 @@ class TestMeansTest(unittest.TestCase):
         mt.update(about_you_payload(own_property=YES))
         mt.update(properties_payload(first_property))
 
-        self.assertZeroIncome(mt['you'], override={
-            'earnings': MoneyInterval(),
-            'pension': MoneyInterval(),
-            'maintenance_received': MoneyInterval()
-        })
-        self.assertZeroOutgoings(mt['you'], override={
-            'income_tax': MoneyInterval(),
-            'childcare': MoneyInterval(),
-            'rent': MoneyInterval(),
-            'maintenance': MoneyInterval(),
-            'national_insurance': MoneyInterval(),
-            'criminal_legalaid_contributions': None,
-            'mortgage': MoneyInterval('800.00', 'per_month')
-        })
-        self.assertZeroSavings(mt['you'])
+        self.assertIncome(
+            mt['you']['income'],
+            default=MoneyInterval(0),
+            earnings=MoneyInterval(),
+            pension=MoneyInterval(),
+            maintenance_received=MoneyInterval()
+        )
+        self.assertOutgoings(
+            mt['you']['deductions'],
+            default=MoneyInterval(),
+            criminal_legalaid_contributions=None,
+            mortgage=MoneyInterval('800.00', 'per_month')
+        )
+        self.assertSavings(mt['you']['savings'], default=0)
         self.assertIsNone(mt['partner'])
 
         expected = [{
@@ -332,21 +331,20 @@ class TestMeansTest(unittest.TestCase):
         mt.update(about_you_payload(own_property=YES))
         mt.update(properties_payload(first_property, second_property))
 
-        self.assertZeroIncome(mt['you'], override={
-            'earnings': MoneyInterval(),
-            'pension': MoneyInterval(),
-            'maintenance_received': MoneyInterval()
-        })
-        self.assertZeroOutgoings(mt['you'], override={
-            'income_tax': MoneyInterval(),
-            'childcare': MoneyInterval(),
-            'rent': MoneyInterval(),
-            'maintenance': MoneyInterval(),
-            'national_insurance': MoneyInterval(),
-            'criminal_legalaid_contributions': None,
-            'mortgage': MoneyInterval('1500.00', 'per_month')
-        })
-        self.assertZeroSavings(mt['you'])
+        self.assertIncome(
+            mt['you']['income'],
+            default=MoneyInterval(0),
+            earnings=MoneyInterval(),
+            pension=MoneyInterval(),
+            maintenance_received=MoneyInterval()
+        )
+        self.assertOutgoings(
+            mt['you']['deductions'],
+            default=MoneyInterval(),
+            criminal_legalaid_contributions=None,
+            mortgage=MoneyInterval('1500.00', 'per_month')
+        )
+        self.assertSavings(mt['you']['savings'], default=0)
         self.assertIsNone(mt['partner'])
 
         expected = [{
@@ -383,12 +381,14 @@ class TestMeansTest(unittest.TestCase):
         session['PropertiesForm'] = {
             'properties': [prop]}
 
-        self.assertZeroIncome(mt['you'], override={
-            'earnings': MoneyInterval(),
-            'pension': MoneyInterval(),
-            'maintenance_received': MoneyInterval(),
-            'other_income': MoneyInterval('100.00')
-        })
+        self.assertIncome(
+            mt['you']['income'],
+            default=MoneyInterval(0),
+            earnings=MoneyInterval(),
+            pension=MoneyInterval(),
+            maintenance_received=MoneyInterval(),
+            other_income=MoneyInterval('100.00')
+        )
 
     def test_multiple_rents(self):
         mt = MeansTest()
@@ -404,9 +404,11 @@ class TestMeansTest(unittest.TestCase):
         session['PropertiesForm'] = {
             'properties': [prop1, prop2]}
 
-        self.assertZeroIncome(mt['you'], override={
-            'earnings': MoneyInterval(),
-            'pension': MoneyInterval(),
-            'maintenance_received': MoneyInterval(),
-            'other_income': MoneyInterval('150.00')
-        })
+        self.assertIncome(
+            mt['you']['income'],
+            default=MoneyInterval(0),
+            earnings=MoneyInterval(),
+            pension=MoneyInterval(),
+            maintenance_received=MoneyInterval(),
+            other_income=MoneyInterval('150.00')
+        )
