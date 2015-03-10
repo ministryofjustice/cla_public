@@ -3,6 +3,7 @@ from itertools import chain
 import logging
 import unittest
 
+from flask import session
 from werkzeug.datastructures import MultiDict
 
 from cla_public.app import create_app
@@ -13,6 +14,13 @@ from cla_public.libs.money_interval import MoneyInterval
 
 
 logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
+
+
+def post_money_interval(amount=None, interval='per_month'):
+    return {
+        'per_interval_value': amount,
+        'interval_period': interval
+    }
 
 
 def form_payload(form_class, post_data):
@@ -42,22 +50,62 @@ def about_you_payload(**kwargs):
     return form_payload('AboutYouForm', post_data)
 
 
+def flatten(dict_, prefix=[]):
+    out = []
+    for key, val in dict_.items():
+        if isinstance(val, dict):
+            out.extend(flatten(val, prefix + [key]))
+        else:
+            out.append(('-'.join(prefix + [key]),  val))
+    return out
+
+
 def properties_payload(*properties):
-    update_key = lambda i: \
-        lambda (key, val): ('properties-%d-%s' % (i, key), val)
-    prop = lambda (i, prop): map(update_key(i), prop.items())
-    props = map(prop, enumerate(properties))
+    prop = lambda (i, p): flatten(p, ['properties', str(i)])
+    props = dict(chain(*map(prop, enumerate(properties))))
     print props
-    post_data = dict(chain(*props))
-    return form_payload('PropertiesForm', post_data)
+    return form_payload('PropertiesForm', props)
+
+
+first_property = {
+    'is_main_home': YES,
+    'other_shareholders': NO,
+    'property_value': '10,000.00',
+    'mortgage_remaining': '9,000.00',
+    'mortgage_payments': '800.00',
+    'is_rented': NO,
+    'rent_amount': post_money_interval(''),
+    'in_dispute': NO
+}
+
+
+second_property = {
+    'is_main_home': YES,
+    'other_shareholders': NO,
+    'property_value': '20,000.00',
+    'mortgage_remaining': '10,000.00',
+    'mortgage_payments': '700.00',
+    'is_rented': NO,
+    'rent_amount': post_money_interval(''),
+    'in_dispute': NO
+}
+
+
+def rented(prop, rent):
+    nprop = dict(prop)
+    nprop['is_rented'] = YES
+    nprop['rent_amount'] = rent
+    return nprop
 
 
 class TestMeansTest(unittest.TestCase):
 
     def setUp(self):
-        app = create_app('config/testing.py')
-        self.client = app.test_client()
-        app.test_request_context().push()
+        self.app = create_app('config/testing.py')
+        self.client = self.app.test_client()
+        self.app.test_request_context().push()
+        with self.client.session_transaction() as session:
+            session['foo'] = 'bar'
 
     def assertDictValues(self, dict_, expected=defaultdict(int)):
         for key, val in dict_.items():
@@ -249,18 +297,7 @@ class TestMeansTest(unittest.TestCase):
         mt = MeansTest()
         mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
         mt.update(about_you_payload(own_property=YES))
-        mt.update(properties_payload(
-            {
-                'is_main_home': YES,
-                'other_shareholders': NO,
-                'property_value': '100,000.00',
-                'mortgage_remaining': '90,000.00',
-                'mortgage_payments': '800.00',
-                'is_rented': NO,
-                'rent_amount': MoneyInterval(),
-                'in_dispute': NO
-            }
-        ))
+        mt.update(properties_payload(first_property))
 
         self.assertZeroIncome(mt['you'], override={
             'earnings': MoneyInterval(),
@@ -274,14 +311,14 @@ class TestMeansTest(unittest.TestCase):
             'maintenance': MoneyInterval(),
             'national_insurance': MoneyInterval(),
             'criminal_legalaid_contributions': None,
-            'mortgage': MoneyInterval(80000, 'per_month')
+            'mortgage': MoneyInterval('800.00', 'per_month')
         })
         self.assertZeroSavings(mt['you'])
         self.assertIsNone(mt['partner'])
 
         expected = [{
-            'value': 10000000,
-            'mortgage_left': 9000000,
+            'value': 1000000,
+            'mortgage_left': 900000,
             'share': 100,
             'disputed': NO,
             'rent': MoneyInterval(0),
@@ -293,28 +330,7 @@ class TestMeansTest(unittest.TestCase):
         mt = MeansTest()
         mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
         mt.update(about_you_payload(own_property=YES))
-        mt.update(properties_payload(
-            {
-                'is_main_home': YES,
-                'other_shareholders': NO,
-                'property_value': '50,000.00',
-                'mortgage_remaining': '40,000.00',
-                'mortgage_payments': '800.00',
-                'is_rented': NO,
-                'rent_amount': MoneyInterval(),
-                'in_dispute': NO
-            },
-            {
-                'is_main_home': YES,
-                'other_shareholders': NO,
-                'property_value': '50,000.00',
-                'mortgage_remaining': '30,000.00',
-                'mortgage_payments': '700.00',
-                'is_rented': NO,
-                'rent_amount': MoneyInterval(),
-                'in_dispute': NO
-            }
-        ))
+        mt.update(properties_payload(first_property, second_property))
 
         self.assertZeroIncome(mt['you'], override={
             'earnings': MoneyInterval(),
@@ -328,21 +344,21 @@ class TestMeansTest(unittest.TestCase):
             'maintenance': MoneyInterval(),
             'national_insurance': MoneyInterval(),
             'criminal_legalaid_contributions': None,
-            'mortgage': MoneyInterval(150000, 'per_month')
+            'mortgage': MoneyInterval('1500.00', 'per_month')
         })
         self.assertZeroSavings(mt['you'])
         self.assertIsNone(mt['partner'])
 
         expected = [{
-            'value': 5000000,
-            'mortgage_left': 4000000,
+            'value': 1000000,
+            'mortgage_left': 900000,
             'share': 100,
             'disputed': NO,
             'rent': MoneyInterval(0),
             'main': YES
         }, {
-            'value': 5000000,
-            'mortgage_left': 3000000,
+            'value': 2000000,
+            'mortgage_left': 1000000,
             'share': 100,
             'disputed': NO,
             'rent': MoneyInterval(0),
@@ -350,3 +366,47 @@ class TestMeansTest(unittest.TestCase):
         }]
         self.assertDictEqual(expected[0], mt['property_set'][0])
         self.assertDictEqual(expected[1], mt['property_set'][1])
+
+    def test_rent(self):
+        mt = MeansTest()
+        mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
+
+        mt.update(about_you_payload(own_property=YES))
+        session['AboutYouForm'] = {
+            'have_partner': NO,
+            'own_property': YES}
+
+        prop = rented(first_property, post_money_interval('100.00'))
+        payload = properties_payload(prop)
+        print payload
+        mt.update(payload)
+        session['PropertiesForm'] = {
+            'properties': [prop]}
+
+        self.assertZeroIncome(mt['you'], override={
+            'earnings': MoneyInterval(),
+            'pension': MoneyInterval(),
+            'maintenance_received': MoneyInterval(),
+            'other_income': MoneyInterval('100.00')
+        })
+
+    def test_multiple_rents(self):
+        mt = MeansTest()
+        mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
+        mt.update(about_you_payload(own_property=YES))
+        session['AboutYouForm'] = {
+            'have_partner': NO,
+            'own_property': YES}
+
+        prop1 = rented(first_property, post_money_interval('100.00'))
+        prop2 = rented(second_property, post_money_interval('50.00'))
+        mt.update(properties_payload(prop1, prop2))
+        session['PropertiesForm'] = {
+            'properties': [prop1, prop2]}
+
+        self.assertZeroIncome(mt['you'], override={
+            'earnings': MoneyInterval(),
+            'pension': MoneyInterval(),
+            'maintenance_received': MoneyInterval(),
+            'other_income': MoneyInterval('150.00')
+        })

@@ -339,12 +339,15 @@ class PropertyForm(BaseNoCsrfForm, FormSessionDataMixin):
 
     def api_payload(self):
         share = 100 if self.other_shareholders.data == NO else None
+        rent = money_interval(0)
+        if self.is_rented.data == YES:
+            rent = self.rent_amount.data
         return {
             'value': self.property_value.data,
             'mortgage_left': self.mortgage_remaining.data,
             'share': share,
             'disputed': self.in_dispute.data,
-            'rent': self.rent_amount.data if self.is_rented.data == YES else money_interval(0),
+            'rent': rent,
             'main': self.is_main_home.data
         }
 
