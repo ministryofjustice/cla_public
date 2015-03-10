@@ -1,0 +1,218 @@
+$results-sidebar-size: 40%;
+
+.find-legal-adviser {
+  .legal-adviser-search {
+    padding: 10px 15px;
+    margin: 20px 0;
+    background: #eee;
+
+    fieldset {
+      margin-top: 10px;
+    }
+
+    @media print {
+      display: none;
+    }
+  }
+
+  .results-summary {
+    padding-bottom: 10px;
+    color: $grey-1;
+  }
+
+  .search-results-list {
+    .org-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: .9em;
+    }
+
+    .org-item {
+      border-top: 1px solid $grey-3;
+      padding: 15px 0 15px 25px;
+      display: block;
+
+      &:first-child {
+        border: 0;
+      }
+
+      header {
+        @extend %contain-floats;
+        padding-right: 80px;
+      }
+
+      .marker {
+        width: 16px;
+        height: 16px;
+        text-align: center;
+        line-height: 18px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #4a4a4a;
+        border-radius: 100%;
+        border: 2px solid #ae4f47;
+        float: left;
+        margin: -2px 0 0 -26px;
+        background: white;
+      }
+
+      .adr {
+        white-space: pre;
+      }
+    }
+
+    .org-title {
+      margin: 0;
+      font-size: 1em;
+      line-height: 1.1;
+      float: left;
+    }
+
+    .distance {
+      color: $grey-1;
+      font-size: .8em;
+      float: right;
+      margin-right: -80px;
+    }
+
+    p {
+      margin: 5px 0 0;
+    }
+  }
+
+  .org-type {
+    color: $grey-1;
+  }
+
+  .areas-of-law {
+    padding: 0;
+    margin: 3px 0 0;
+    font-size: .9em;
+
+    li {
+      margin-top: 2px;
+      display: inline-block;
+      padding: 2px 5px 0;
+      border: 1px solid $grey-2;
+      background: white;
+    }
+  }
+}
+
+.find-legal-adviser .map {
+  display: none;
+
+  @include media(tablet) {
+    height: 100%;
+    width: 100% - $results-sidebar-size;
+    float: left;
+  }
+
+  @include media(mobile) {
+    height: 300px;
+  }
+
+  h3 {
+    margin: 5px 0;
+  }
+
+  p {
+    margin: 5px 0 0;
+  }
+
+  .marker,
+  .distance {
+    display: none;
+  }
+
+  .adr {
+    white-space: pre;
+  }
+}
+
+
+.js-enabled .find-legal-adviser {
+  .map {
+    display: block;
+  }
+
+  @include media(tablet) {
+    .search-results {
+      overflow: hidden;
+      margin: 0 -1px;
+      border: 1px solid $grey-2;
+      height: 460px;
+    }
+
+    .search-results-list {
+      background: white;
+      float: right;
+      position: relative;
+      width: $results-sidebar-size;
+      height: 100%;
+      overflow: auto;
+      border-left: 1px solid $grey-2;
+      margin-left: -1px;
+
+      .fn {
+        color: $link-colour;
+      }
+
+      .org-details {
+        font-size: .9em;
+        display: none;
+        margin-top: 5px;
+      }
+
+      .s-highlighted .org-details {
+        display: block;
+      }
+
+      .org-item {
+        padding: 10px 10px 10px 35px;
+        cursor: pointer;
+
+        &:hover {
+          background: $grey-4;
+        }
+
+        &.s-highlighted {
+          background: $grey-3;
+        }
+      }
+    }
+  }
+}
+
+@media print {
+  .find-legal-adviser {
+    page-break-before: always;
+
+    .map {
+      height: 460px;
+      float: none;
+      width: auto;
+      margin-bottom: 5mm;
+
+      a:after {
+        content: none;
+      }
+    }
+
+    .search-results {
+      height: auto !important;
+      border: 0 !important;
+    }
+
+    .search-results-list {
+      float: none !important;
+      width: auto !important;
+      border: 0 !important;
+
+      .org-details {
+        display: block !important;
+      }
+    }
+  }
+}

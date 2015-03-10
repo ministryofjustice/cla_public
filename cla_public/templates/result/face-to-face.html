@@ -64,10 +64,6 @@
       advice.{% endtrans %}
   </p>
 
-  <p>
-    <a class="button button-large" href="http://find-legal-advice.justice.gov.uk/">{{ _('Find a legal adviser') }}</a>
-  </p>
-
   {% if session.category == 'employment' %}
     <p>
       {{ _('You may also be able to get free help from:') }}
@@ -78,5 +74,12 @@
     </ul>
   {% endif %}
 
+  {% include "result/_find-legal-adviser.html" %}
+
   {{ Element.satisfaction_survey_prompt() }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
 {% endblock %}

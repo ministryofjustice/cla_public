@@ -155,3 +155,8 @@ CONTACT_PREFERENCE = (
     (NO, _(u'I’ll call CLA')),
     (YES, _(u'Call me back')),
 )
+
+LEGAL_ADVISER_SEARCH_PREFERENCE = (
+    ('location', _(u'Location')),
+    ('organisation', _(u'Organisation')),
+)

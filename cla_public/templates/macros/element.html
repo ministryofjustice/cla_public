@@ -44,9 +44,10 @@
   Prompt to complete the satisfaction survey on gov.uk
 #}
 {%  macro satisfaction_survey_prompt() %}
-  <h2>{{ _('What do you think about this service?') }}</h2>
-  <p>
-    {% trans %}Your feedback will improve this service.
-    Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">send us your thoughts</a>.{% endtrans %}
-  </p>
+  {% call alert(title=_('What do you think about this service?')) %}
+    <p>
+      {% trans %}Your feedback will improve this service.
+      Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">send us your thoughts</a>.{% endtrans %}
+    </p>
+  {% endcall %}
 {% endmacro %}

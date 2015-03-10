@@ -3,6 +3,8 @@
 {% set title = _('You might qualify for legal aid') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
+{% import "macros/element.html" as Element %}
+
 {% block inner_content %}
   <h1>{{ title }}</h1>
 
@@ -31,9 +33,10 @@
       advice.{% endtrans %}
   </p>
 
-  <p>
-    <a class="button button-large" href="http://find-legal-advice.justice.gov.uk/">
-      {{ _('Find a legal adviser') }}
-    </a>
-  </p>
+  {% include 'result/_find-legal-adviser.html' %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
 {% endblock %}

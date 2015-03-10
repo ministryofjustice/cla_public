@@ -1,0 +1,185 @@
+meta:
+  location:
+    address:
+      postcode: NW6 4PQ
+    position:
+      lat: '51.546551'
+      lon: '-0.2204606'
+results:
+  -
+    name: Sbg Solicitors
+    type: Solicitor
+    distance: 0.63 miles
+    address: |
+      1St Floor
+      227 High Road
+      Willesden
+      London
+      NW10 2RY
+    phone: 0208 451 4518
+    areas_of_law:
+      - Crime
+      - Immigration or asylum
+      - Family
+    position:
+      lat: '51.547561305392'
+      lon: '-0.236133603577'
+  -
+    name: 'Malik & Malik Solicitors'
+    type: Solicitor
+    distance: 0.67 miles
+    address: |
+      232 High Road
+      London
+      NW10 2NX
+    phone: 0208 830 3050
+    areas_of_law:
+      - Crime
+    position:
+      lat: '51.548097617328'
+      lon: '-0.236890977313'
+  -
+    name: Brent Community Law Centre Ltd
+    type: Private company
+    distance: 0.73 miles
+    address: |
+      270-272 High Road
+      Willesden
+      London
+      NW10 2EY
+    phone: 0208 438 1211
+    areas_of_law:
+      - Debt
+      - Housing
+      - Immigration or asylum
+    position:
+      lat: '51.548664651273'
+      lon: '-0.238236779578'
+  -
+    name: Brent Private Tenants' Rights Group Ltd
+    type: Private company
+    distance: 0.73 miles
+    address: |
+      270-272 High Road
+      Willesden
+      London
+      NW10 2EY
+    phone: 08450 505 250
+    website: http://www.bptrg.org/
+    areas_of_law:
+      - Debt
+      - Housing
+    position:
+      lat: '51.548664651273'
+      lon: '-0.238236779578'
+  -
+    name: 'Chabra Cass & Co'
+    type: Solicitor
+    distance: 0.76 miles
+    address: |
+      149 Cricklewood Broadway
+      London
+      NW2 3HY
+    phone: 0208 450 9833
+    areas_of_law:
+      - Crime
+    position:
+      lat: '51.556059089138'
+      lon: '-0.214862554356'
+  -
+    name: Community Law Clinic Solicitors
+    type: Private company
+    distance: 0.82 miles
+    address: |
+      101 Chamberlayne Road
+      Kensal Rise
+      London
+      NW10 3NP
+    phone: 0208 960 3200
+    areas_of_law:
+      - Debt
+      - Housing
+    position:
+      lat: '51.534184457142'
+      lon: '-0.21938032547'
+  -
+    name: 'P. Krama & Company'
+    type: Solicitor
+    distance: 0.82 miles
+    address: |
+      346-348A Kilburn High Road
+      Kilburn
+      London
+      NW6 2QJ
+    phone: 020 7624 8814
+    areas_of_law:
+      - Immigration or asylum
+    position:
+      lat: '51.546257607176'
+      lon: '-0.202669454291'
+  -
+    name: Brent Community Law Centre Ltd
+    type: Private company
+    distance: 0.85 miles
+    address: |
+      389 High Road
+      Willesden
+      London
+      NW10 2JR
+    phone: 0208 208 5706
+    areas_of_law:
+      - Community care
+      - Debt
+      - Housing
+      - Immigration or asylum
+      - Public law
+    position:
+      lat: '51.548270529035'
+      lon: '-0.241146989551'
+  -
+    name: 'Daniel & Harris'
+    type: Private company
+    distance: 0.87 miles
+    address: |
+      338 Kilburn High Road
+      London
+      NW6 2QN
+    phone: 0207 625 0202
+    website: http://www.danielandharris.co.uk/
+    areas_of_law:
+      - Family
+    position:
+      lat: '51.545251201788'
+      lon: '-0.201647778068'
+  -
+    name: 'Gordon Shine & Co'
+    type: Solicitor
+    distance: 0.88 miles
+    address: |
+      61-63 Chamberlayne Road
+      London
+      NW10 3NG
+    phone: 0208 969 7033
+    areas_of_law:
+      - Crime
+    position:
+      lat: '51.533285750530'
+      lon: '-0.219415394455'
+  # -
+  #   name: Powell Spencer And Partners
+  #   type: Solicitor
+  #   distance: 0.88 miles
+  #   address: |
+  #     290 Kilburn High Road
+  #     London
+  #     NW6 2DD
+  #   phone: 0207 604 5600
+  #   website: http://www.psplaw.co.uk/
+  #   areas_of_law:
+  #     - Crime
+  #     - Prison law
+  #     - Family
+  #     - Clinical negligence
+  #   position:
+  #     lat: '51.543806360342'
+  #     lon: '-0.201698864263'

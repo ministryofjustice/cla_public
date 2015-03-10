@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 
+import os, yaml
 from flask import abort, render_template, redirect, session, url_for, views, \
-    current_app
+    current_app, request
 from flask.ext.babel import lazy_gettext as _
 
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_eligibility_check_api, \
     get_organisation_list, ApiError
+from werkzeug.datastructures import MultiDict
+from cla_public.apps.checker.forms import FindLegalAdviserForm
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
@@ -106,10 +109,19 @@ checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
 class FaceToFace(RequiresSession, views.MethodView, object):
 
     def get(self):
+        mock_data = {}
+
+        args = MultiDict(filter(lambda (k, v): v != '', request.args.items()))
+
+        if 'location' in args:
+            with open(os.path.join(os.path.dirname(__file__), 'mock_data.yml')) as f:
+                mock_data = yaml.load(f.read())
+
         if not session.category:
             session.category_name = 'your issue'
 
-        response = render_template('result/face-to-face.html')
+        response = render_template('result/face-to-face.html',
+            data=mock_data, form=FindLegalAdviserForm(request.args))
         session.clear()
         return response
 
@@ -123,13 +135,21 @@ class Eligible(RequiresSession, views.MethodView, object):
     def get(self):
         if session.category in NO_CALLBACK_CATEGORIES:
             session.clear()
-            return render_template('result/eligible-no-callback.html')
+            mock_data = {}
+
+            args = MultiDict(filter(lambda (k, v): v != '', request.args.items()))
+
+            if 'location' in args:
+                with open(os.path.join(os.path.dirname(__file__), 'mock_data.yml')) as f:
+                    mock_data = yaml.load(f.read())
+
+            return render_template('result/eligible-no-callback.html',
+                data=mock_data, form=FindLegalAdviserForm(request.args))
 
         return render_template('result/eligible.html', form=ContactForm())
 
-
 checker.add_url_rule(
-    '/result/eligible', view_func=Eligible.as_view('eligible'))
+    '/result/eligible', view_func=Eligible.as_view('eligible'), methods=['GET', 'POST'])
 
 
 @checker.route('/help-organisations/<category_name>', methods=['GET'])
