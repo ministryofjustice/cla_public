@@ -1,41 +1,45 @@
 {% extends "base.html" %}
+{% import "macros/element.html" as Element %}
 
 {% set sidebar = 'resources' %}
 
 {% block inner_content %}
-  <h1>{{ _('Find out if Civil Legal Advice can help you') }}</h1>
-  <p class="subtitle">{{ _('If you qualify for legal aid, you may be able to get help from Civil Legal Advice (CLA), a national advice line for England and Wales.') }}</p>
+  <h1>Check if Civil Legal Advice can help you</h1>
 
-  <p>{{ _('You will be asked general questions about your problem and detailed questions about your finances.') }}</p>
+  <p>You might be able to get legal advice from Civil Legal Advice (CLA) if you qualify for legal aid and have a relevant problem. CLA is a national helpline in England and Wales.</p>
 
-  <p>{{ _('If it looks like you might qualify for legal aid, the next step will be to speak to a Civil Legal Advice operator.') }}</p>
+  <p>You’ll be asked questions about your problem and your financial situation. If it looks like you might qualify for help, you’ll be able to speak to CLA.</p>
 
-  <p>{{ _('If CLA can’t help, you’ll get suggestions of other places you could go for advice.') }}</p>
+  <p>
+    <a class="button button-get-started" href="{{ url_for('base.get_started') }}" id="start">Start now</a>
+    <span class="destination"> on the Civil Legal Advice checker</span>
+  </p>
 
-  <p><a class="button button-get-started" href="{{ url_for('base.get_started') }}" id="start">{{ _('Start') }}</a></p>
 
-  <h3>{{ _('Before you start') }}</h3>
-  <p>{{ _('To use this service, you’ll need details of the following, for you and your partner, if you have one') }}:</p>
+  <h3>Before you start</h3>
+  <p>You and your partner (if you have one) will need:</p>
   <ul>
-    <li>{{ _('your income, income tax and National Insurance contributions') }}</li>
-    <li>{{ _('value of any property you own and mortgage details') }}</li>
-    <li>{{ _('any savings, investments or valuable items') }}</li>
-    <li>{{ _('any benefits you receive') }}</li>
+    <li>recent payslips (if you’re working) and bank statements</li>
+    <li>a summary of your income tax and National Insurance contributions</li>
+    <li>details of any savings and investments you have</li>
+    <li>details of any benefits you receive</li>
+    <li>mortgage statements and a current valuation for any property you own</li>
   </ul>
 
-  <p>{{ _('It might be useful to have your last month’s payslips (if you’re working), bank statements, recent benefit letters, current valuation for any property you own and  mortgage statements to hand.') }}</p>
+  <p>This service is only for adults. If you’re under 18, ask CLA to <a href="/contact">call you back</a>.</p>
 
-  <p>{{ _('Please answer all questions accurately and honestly. You may need to provide evidence of what you say later.') }}</p>
+  {% call Element.alert() %}
+    <p>You’ll only get guidance on whether or not <abbr title="Civil Legal Advice">CLA</abbr> might be able to help - you won’t get a final decision until you speak to an adviser.</p>
+  {% endcall %}
 
-  <p>{{ _('At the end you will get an indication of whether you might qualify for advice from CLA – but you won’t get a final decision until you speak to us.') }}</p>
+  <p>You can’t get help from <abbr title="Civil Legal Advice">CLA</abbr> if you’ve been charged with a crime - ask your solicitor or barrister if you are able to get criminal legal aid.</p>
 
-  <p>{{ _('You can do a quick <a href="https://www.gov.uk/check-legal-aid">check</a> to see if you can get legal aid for your specific problem and find out whether CLA is your best option for help.') }}</p>
+  {% call Element.alert() %}
+    <p>Legal aid is different in <a rel="external" href="http://www.slab.org.uk/public/advice/index.html">Scotland</a> and <a rel="external" href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm">Northern Ireland.</a></p>
+  {% endcall %}
 
-  <h3>{{ _('Who this service is for') }}</h3>
+  <div class="meta-data group">
+    <p class="modified-date">Last updated: 27 February 2015</p>
+  </div>
 
-  <p>{{ _('This service is for England and Wales. Legal aid is different in <a href="http://www.slab.org.uk/public/civil/eligibility/" rel="external">Scotland</a> and <a href="http://www.dojni.gov.uk/index/public-consultations/current-consultations/consultation-on-scope-of-civil-legal-aid.htm" rel="external">Northern Ireland</a>.') }}</p>
-
-  <p>{{ _('If you’ve been charged with a crime, this service doesn’t apply to you. Ask your solicitor or barrister about criminal legal aid.') }}</p>
-
-  <p>{{ _('This online service is only for adults. If you’re under 18, please contact <a href="https://www.gov.uk/civil-legal-advice">Civil Legal Advice</a>.') }}</p>
 {% endblock %}
