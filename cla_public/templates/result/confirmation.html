@@ -80,8 +80,6 @@
     </p>
   {% endif %}
 
-  {{ Element.satisfaction_survey_prompt() }}
-
   {% if session.stored_callback_requested %}
     <h2>{{ _('What if I miss the operator’s call?') }}</h2>
     <p>
@@ -90,6 +88,8 @@
       <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
     </p>
   {% endif %}
+
+  {{ Element.satisfaction_survey_prompt() }}
 
 {% endblock %}
 
