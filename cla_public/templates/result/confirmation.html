@@ -39,14 +39,6 @@
     </p>
   {% endif %}
 
-  {% if session.stored_category in ['debt', 'housing'] %}
-    <p>
-      {% trans %}If you have a court hearing date it is important that you get
-      advice as soon as possible. You may be able to get last-minute
-      help on the day of the hearing from an adviser in the court building.{% endtrans %}
-    </p>
-  {% endif %}
-
   {% if session.stored_category == 'violence' %}
     <p>
       {% trans %}If you need to urgently protect yourself or your family you should
@@ -77,6 +69,14 @@
     person or if you need someone to represent you in court, they
     will organise this.{% endtrans %}
   </p>
+
+  {% if session.stored_category in ['debt', 'housing'] %}
+    <p>
+      {% trans %}If you have a court hearing date it is important that you get
+      advice as soon as possible. You may be able to get last-minute
+      help on the day of the hearing from an adviser in the court building.{% endtrans %}
+    </p>
+  {% endif %}
 
   <h2>{{ _('What do you think about this service?') }}</h2>
   <p>
