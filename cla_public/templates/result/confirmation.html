@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% import "macros/element.html" as Element %}
+
 {% set title = 'Confirmation' %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
@@ -78,12 +80,6 @@
     </p>
   {% endif %}
 
-  <h2>{{ _('What do you think about this service?') }}</h2>
-  <p>
-    {% trans %}Your feedback will improve this service.
-    Please <a href="https://www.gov.uk/done/check-legal-aid">send us your thoughts</a>.{% endtrans %}
-  </p>
-
   {% if session.stored_callback_requested %}
     <h2>{{ _('What if I miss the operator’s call?') }}</h2>
     <p>
@@ -92,6 +88,8 @@
       <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
     </p>
   {% endif %}
+
+  {{ Element.satisfaction_survey_prompt() }}
 
 {% endblock %}
 
