@@ -35,9 +35,9 @@ def about_you_payload(**kwargs):
         'in_dispute': NO,
         'on_benefits': NO,
         'have_children': NO,
-        'num_children': '',
+        'num_children': '0',
         'have_dependants': NO,
-        'num_dependants': '',
+        'num_dependants': '0',
         'have_savings': NO,
         'have_valuables': NO,
         'own_property': NO,
@@ -63,7 +63,6 @@ def flatten(dict_, prefix=[]):
 def properties_payload(*properties):
     prop = lambda (i, p): flatten(p, ['properties', str(i)])
     props = dict(chain(*map(prop, enumerate(properties))))
-    print props
     return form_payload('PropertiesForm', props)
 
 
@@ -105,7 +104,7 @@ class TestMeansTest(unittest.TestCase):
         self.client = self.app.test_client()
         self.app.test_request_context().push()
         with self.client.session_transaction() as session:
-            session['foo'] = 'bar'
+            session.clear()
 
     def assertDictValues(self, expected, actual):
         for key, val in actual.items():
@@ -375,9 +374,7 @@ class TestMeansTest(unittest.TestCase):
             'own_property': YES}
 
         prop = rented(first_property, post_money_interval('100.00'))
-        payload = properties_payload(prop)
-        print payload
-        mt.update(payload)
+        mt.update(properties_payload(prop))
         session['PropertiesForm'] = {
             'properties': [prop]}
 
@@ -412,3 +409,162 @@ class TestMeansTest(unittest.TestCase):
             maintenance_received=MoneyInterval(),
             other_income=MoneyInterval('150.00')
         )
+
+    def test_savings(self):
+        mt = MeansTest()
+        mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
+        mt.update(about_you_payload(have_savings=YES, have_valuables=YES))
+        session['AboutYouForm'] = {
+            'have_savings': YES,
+            'have_valuables': YES}
+
+        mt.update(form_payload('SavingsForm', {
+            'savings': '1,000.00',
+            'investments': '0.00',
+            'valuables': '500.00'}))
+
+        self.assertEqual(100000, mt['you']['savings']['bank_balance'])
+        self.assertEqual(0, mt['you']['savings']['investment_balance'])
+        self.assertEqual(50000, mt['you']['savings']['asset_balance'])
+
+    def test_tax_credits(self):
+        mt = MeansTest()
+        mt.update(form_payload('ProblemForm', {'categories': 'debt'}))
+        mt.update(about_you_payload())
+        mt.update(form_payload('TaxCreditsForm', dict(flatten({
+            'child_benefit': post_money_interval('1', 'per_week'),
+            'child_tax_credit': post_money_interval('2', 'per_week'),
+            'benefits': [],
+            'other_benefits': YES,
+            'total_other_benefit': post_money_interval('3', 'per_week')
+        }))))
+
+        self.assertFalse(mt['on_nass_benefits'])
+        self.assertEqual(
+            MoneyInterval(100, 'per_week'),
+            mt['you']['income']['child_benefits'])
+        self.assertEqual(
+            MoneyInterval(200, 'per_week'),
+            mt['you']['income']['tax_credits'])
+        self.assertEqual(
+            MoneyInterval(300, 'per_week'),
+            mt['you']['income']['benefits'])
+
+    def test_nass_benefits(self):
+        mt = MeansTest()
+        mt.update(form_payload('TaxCreditsForm', dict(flatten({
+            'child_benefit': post_money_interval('0'),
+            'child_tax_credit': post_money_interval('0'),
+            'benefits': ['asylum-support'],
+            'other_benefits': NO,
+            'total_other_benefit': post_money_interval('0')}))))
+
+        self.assertTrue(mt['on_nass_benefits'])
+
+    def test_child_tax_credits_and_working_tax_credits(self):
+        session['TaxCreditsForm'] = {
+            'child_tax_credit': MoneyInterval(1000, 'per_week')}
+
+        mt = MeansTest()
+        mt.update(form_payload('IncomeForm', dict(flatten({
+            'your_income': {
+                'earnings': post_money_interval('0'),
+                'income_tax': post_money_interval('0'),
+                'national_insurance': post_money_interval('0'),
+                'working_tax_credit': post_money_interval('10.00'),
+                'maintenance': post_money_interval('0'),
+                'pension': post_money_interval('0'),
+                'other_income': post_money_interval('0')
+            }
+        }))))
+
+        self.assertEqual(
+            MoneyInterval(5333),
+            mt['you']['income']['tax_credits'])
+
+    def test_income_self_employed(self):
+        session['AboutYouForm'] = {'is_self_employed': YES}
+
+        mt = MeansTest()
+        mt.update(form_payload('IncomeForm', dict(flatten({
+            'your_income': {
+                'earnings': post_money_interval('1'),
+                'income_tax': post_money_interval('2'),
+                'national_insurance': post_money_interval('3'),
+                'working_tax_credit': post_money_interval('4'),
+                'maintenance': post_money_interval('5'),
+                'pension': post_money_interval('6'),
+                'other_income': post_money_interval('7')
+            }}))))
+
+        self.assertEqual(MoneyInterval(0), mt['you']['income']['earnings'])
+        self.assertEqual(
+            MoneyInterval(100),
+            mt['you']['income']['self_employment_drawings'])
+        self.assertEqual(
+            MoneyInterval(200),
+            mt['you']['deductions']['income_tax'])
+        self.assertEqual(
+            MoneyInterval(300),
+            mt['you']['deductions']['national_insurance'])
+        self.assertEqual(
+            MoneyInterval(400),
+            mt['you']['income']['tax_credits'])
+        self.assertEqual(
+            MoneyInterval(500),
+            mt['you']['income']['maintenance_received'])
+        self.assertEqual(
+            MoneyInterval(600),
+            mt['you']['income']['pension'])
+        self.assertEqual(
+            MoneyInterval(700),
+            mt['you']['income']['other_income'])
+
+        def test_partner_income(self):
+            session['AboutYouForm'] = {
+                'have_partner': YES,
+                'partner_is_employed': YES}
+
+            mt = MeansTest()
+            mt.update(form_payload('IncomeForm', dict(flatten({
+                'your_income': {
+                    'earnings': post_money_interval('0'),
+                    'income_tax': post_money_interval('0'),
+                    'national_insurance': post_money_interval('0'),
+                    'working_tax_credit': post_money_interval('0'),
+                    'maintenance': post_money_interval('0'),
+                    'pension': post_money_interval('0'),
+                    'other_income': post_money_interval('0')
+                },
+                'partner_income': {
+                    'earnings': post_money_interval('1'),
+                    'income_tax': post_money_interval('2'),
+                    'national_insurance': post_money_interval('3'),
+                    'working_tax_credit': post_money_interval('4'),
+                    'maintenance': post_money_interval('5'),
+                    'pension': post_money_interval('6'),
+                    'other_income': post_money_interval('7')
+                }
+            }))))
+
+            self.assertEqual(
+                MoneyInterval(100),
+                mt['partner']['income']['earnings'])
+            self.assertEqual(
+                MoneyInterval(200),
+                mt['partner']['deductions']['income_tax'])
+            self.assertEqual(
+                MoneyInterval(300),
+                mt['partner']['deductions']['national_insurance'])
+            self.assertEqual(
+                MoneyInterval(400),
+                mt['partner']['income']['tax_credits'])
+            self.assertEqual(
+                MoneyInterval(500),
+                mt['partner']['income']['maintenance_received'])
+            self.assertEqual(
+                MoneyInterval(600),
+                mt['partner']['income']['pension'])
+            self.assertEqual(
+                MoneyInterval(700),
+                mt['partner']['income']['other_income'])
