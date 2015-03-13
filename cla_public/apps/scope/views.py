@@ -15,10 +15,6 @@ class ScopeDiagnosisApiProxy(RequiresSession, views.MethodView):
 
     def request_args(self):
         return {
-            'headers': {
-                'Authorization': 'Token {token}'.format(
-                    token=current_app.config['ADDRESSFINDER_API_TOKEN'])
-            },
             'timeout': current_app.config.get('API_CLIENT_TIMEOUT', None)
         }
 
@@ -27,7 +23,9 @@ class ScopeDiagnosisApiProxy(RequiresSession, views.MethodView):
         return response.text
 
     def post(self):
-        response = requests.post(self.request_path(), **self.request_args())
+        request_args = self.request_args()
+        request_args['data'] = request.form
+        response = requests.post(self.request_path(), **request_args)
         return response.text
 
 
