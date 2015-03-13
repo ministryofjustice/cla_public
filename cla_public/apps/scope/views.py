@@ -18,10 +18,6 @@ class ScopeDiagnosisApiProxy(RequiresSession, views.MethodView):
             'timeout': current_app.config.get('API_CLIENT_TIMEOUT', None)
         }
 
-    def get(self):
-        response = requests.get(self.request_path(), **self.request_args())
-        return response.text
-
     def post(self):
         request_args = self.request_args()
         request_args['data'] = request.form
