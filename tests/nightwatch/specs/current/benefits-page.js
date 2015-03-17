@@ -57,7 +57,7 @@ module.exports = {
         .submitForm('form')
         .waitForElementVisible(util.format('input[name="%s"]', input), 2000)
         .assert.urlContains(destination, util.format('Goes to %s when %s is checked', destination, item))
-        .back()
+        .url(client.launch_url + '/benefits')
         .waitForElementVisible('input[name="benefits"]', 2000)
         .click(util.format('input[value="%s"]', item))
     });

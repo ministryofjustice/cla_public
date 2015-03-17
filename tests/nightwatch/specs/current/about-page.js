@@ -64,7 +64,7 @@ module.exports = {
       .submitForm('form')
       .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
       .assert.urlContains('/income', 'Goes to /income when all answers are No')
-      .back()
+      .url(client.launch_url + '/about')
       .waitForElementVisible('input[name="have_partner"]', 2000)
     ;
     OUTCOMES.forEach(function(item) {
@@ -74,7 +74,7 @@ module.exports = {
         .submitForm('form')
         .waitForElementVisible(util.format('input[name="%s"]', item.input), 5000)
         .assert.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
-        .back()
+        .url(client.launch_url + '/about')
         .waitForElementVisible('input[name="have_partner"]', 2000)
       ;
     });

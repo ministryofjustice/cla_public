@@ -1,0 +1,103 @@
+{
+  "src_folders" : "tests/nightwatch/specs",
+  "output_folder" : "tests/reports/nightwatch",
+  "custom_assertions_path" : "tests/nightwatch/custom_assertions",
+
+  "selenium" : {
+    "start_process" : false,
+    "host" : "hub.browserstack.com",
+    "port" : 80
+  },
+
+  "test_settings" : {
+    "default" : {
+      "launch_url" : "http://public-integration.cla.dsd.io",
+      "selenium_port": 80,
+      "selenium_host": "hub.browserstack.com",
+      "silent": true,
+
+      "desiredCapabilities": {
+        "platform": "MAC",
+        "os": "OS X",
+        "os_version": "Yosemite",
+        "browser": "chrome"
+      }
+    },
+
+    "chromewin" : {
+      "desiredCapabilities": {
+        "os": "WINDOWS",
+        "os_version": "XP",
+        "browser": "chrome"
+      }
+    },
+
+    "ffwin" : {
+      "desiredCapabilities": {
+        "os": "WINDOWS",
+        "os_version": "XP",
+        "browser": "firefox"
+      }
+    },
+
+    "ffmac" : {
+      "desiredCapabilities": {
+        "platform": "MAC",
+        "os": "OS X",
+        "os_version": "Yosemite",
+        "browser": "firefox",
+        "browser_version": "35"
+      }
+    },
+
+    "ie7" : {
+      "desiredCapabilities": {
+        "platform": "WINDOWS",
+        "os": "WINDOWS",
+        "os_version": "XP",
+        "browser": "IE",
+        "browser_version": "7"
+      }
+    },
+
+    "ie8" : {
+      "desiredCapabilities": {
+        "platform": "WINDOWS",
+        "os": "WINDOWS",
+        "os_version": "7",
+        "browser": "IE",
+        "browser_version": "8"
+      }
+    },
+
+    "ie9" : {
+      "desiredCapabilities": {
+        "platform": "WINDOWS",
+        "os": "WINDOWS",
+        "os_version": "7",
+        "browser": "IE",
+        "browser_version": "9"
+      }
+    },
+
+    "ie10" : {
+      "desiredCapabilities": {
+        "platform": "WINDOWS",
+        "os": "WINDOWS",
+        "os_version": "7",
+        "browserName": "IE",
+        "browser_version": "10"
+      }
+    },
+
+    "ie11" : {
+      "desiredCapabilities": {
+        "platform": "WINDOWS",
+        "os": "WINDOWS",
+        "os_version": "8.1",
+        "browserName": "IE",
+        "browser_version": "11"
+      }
+    }
+  }
+}

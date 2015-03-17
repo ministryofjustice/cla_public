@@ -76,22 +76,19 @@ module.exports = {
 
     client
       .click('input[name="specific_day"][value="specific_day"]')
-      .click('select#id_day')
-      .click('select#id_day option:last-child')
-      .click('select#id_time_in_day')
-      .click('select#id_time_in_day option:last-child')
+      .click('select#id_day option:first-child')
       .click('body')
-      .getValue('select#id_day option:last-child', function(result) {
+      .click('select#id_time_in_day option:first-child')
+      .click('body')
+      .getValue('select#id_day option:first-child', function(result) {
         var selectedDate = result.value;
-        client.getValue('select#id_time_in_day option:last-child', function(result) {
+        client.getValue('select#id_time_in_day option:first-child', function(result) {
           var then = moment([selectedDate.substr(0, 4), parseInt(selectedDate.substr(4, 2))-1, selectedDate.substr(6, 2)]);
           checkCallbackTime(client, then, result.value);
         });
       })
     ;
-  },
 
-  'end': function(client) {
     client.end();
   }
 
