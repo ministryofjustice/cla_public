@@ -25,7 +25,6 @@ def to_amount(value):
 
 
 class MoneyInterval(dict):
-
     def __init__(self, *args, **kwargs):
         super(MoneyInterval, self).__init__({
             'per_interval_value': None,
@@ -90,7 +89,10 @@ class MoneyInterval(dict):
             other = MoneyInterval(0)
 
         if not isinstance(other, MoneyInterval):
-            raise ValueError(other)
+            if self.is_money_interval(other):
+                other = MoneyInterval(other)
+            else:
+                raise ValueError(other)
 
         first = self.per_month()
         second = other.per_month()
