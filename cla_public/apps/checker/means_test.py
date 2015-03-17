@@ -524,7 +524,7 @@ class MeansTest(dict):
                 self.update_from_form(form, session[form], session)
 
     def save(self):
-        sentry = getattr(current_app, 'sentry')
+        sentry = getattr(current_app, 'sentry', None)
         try:
             backend = get_api_connection()
 
@@ -541,7 +541,7 @@ class MeansTest(dict):
             raise MeansTestError()
 
     def is_eligible(self):
-        sentry = getattr(current_app, 'sentry')
+        sentry = getattr(current_app, 'sentry', None)
         try:
             backend = get_api_connection()
 
