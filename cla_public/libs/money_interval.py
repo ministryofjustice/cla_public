@@ -3,6 +3,27 @@ from decimal import Decimal, InvalidOperation
 from cla_common.money_interval.models import MoneyInterval as MIBase
 
 
+def to_amount(value):
+    amount = None
+
+    if value is None:
+        amount = None
+
+    elif isinstance(value, basestring):
+        amount = to_amount(Decimal(value.replace(',', '').replace(' ', '')))
+
+    elif isinstance(value, float):
+        amount = int(value * 100)
+
+    elif isinstance(value, Decimal):
+        amount = int(value * 100)
+
+    else:
+        amount = int(value)
+
+    return amount
+
+
 class MoneyInterval(dict):
 
     def __init__(self, *args, **kwargs):
@@ -45,20 +66,7 @@ class MoneyInterval(dict):
         """
 
         try:
-            if value is None:
-                self['per_interval_value'] = None
-
-            elif isinstance(value, basestring):
-                self.amount = Decimal(value)
-
-            elif isinstance(value, float):
-                self.amount = int(value * 100)
-
-            elif isinstance(value, Decimal):
-                self.amount = int(value * 100)
-
-            else:
-                self['per_interval_value'] = int(value)
+            self['per_interval_value'] = to_amount(value)
 
         except (InvalidOperation, ValueError):
             raise ValueError(
