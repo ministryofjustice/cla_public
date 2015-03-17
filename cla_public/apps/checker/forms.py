@@ -26,7 +26,7 @@ from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
     FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone
-from cla_public.libs.utils import recursive_dict_update
+from cla_public.libs.utils import recursive_dict_update, classproperty
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 
 
@@ -39,17 +39,6 @@ class BaseForm(BabelTranslationsFormMixin, Honeypot, Form):
 
 class BaseNoCsrfForm(BabelTranslationsFormMixin, NoCsrfForm):
     pass
-
-
-class classproperty(object):
-    """
-    A decorator for a class method to make it appear to be a class property
-    """
-    def __init__(self, getter):
-        self.getter = getter
-
-    def __get__(self, instance, owner):
-        return self.getter(owner)
 
 
 class FormSessionDataMixin(object):

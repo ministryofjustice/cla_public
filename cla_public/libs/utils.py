@@ -8,6 +8,17 @@ from flask.ext.babel import refresh
 log = logging.getLogger(__name__)
 
 
+class classproperty(object):
+    """
+    A decorator for a class method to make it appear to be a class property
+    """
+    def __init__(self, getter):
+        self.getter = getter
+
+    def __get__(self, instance, owner):
+        return self.getter(owner)
+
+
 def get_locale():
     if request and request.cookies.get('locale'):
         return request.cookies.get('locale')[:2]
