@@ -10,7 +10,7 @@ module.exports = {
 
   'Categories of law (Your problem)': function(client) {
     client
-      .waitForElementVisible('input[name="categories"]', 2000)
+      .waitForElementVisible('input[name="categories"]', 5000)
       .assert.urlContains('/problem')
       .assert.containsText('h1', 'What do you need help with?')
     ;
@@ -33,12 +33,12 @@ module.exports = {
 
       common.startPage(client);
       client
-        .waitForElementVisible('input[name="categories"]', 2000)
+        .waitForElementVisible('input[name="categories"]', 5000)
         .assert.urlContains('/problem')
         .assert.containsText('h1', 'What do you need help with?')
         .click(util.format('input[name="categories"][value="%s"]', item.value))
         .submitForm('form')
-        .waitForElementVisible(el, 2000)
+        .waitForElementVisible(el, 5000)
         .assert.urlContains(url,
           util.format('Goes to %s when ‘%s’ is selected', url, item.name)
         )
