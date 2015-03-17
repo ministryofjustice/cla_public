@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 "Contact forms"
 
-from flask import current_app, session
+from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 from flask_wtf import Form
 import pytz
 from wtforms import Form as NoCsrfForm
-from wtforms import BooleanField, FormField, RadioField, SelectField, \
+from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
-from wtforms.validators import InputRequired, Optional, Length
+from wtforms.validators import InputRequired, Optional, Required, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
+from cla_public.apps.checker.fields import YesNoField
+from cla_public.apps.contact.constants import THIRD_PARTY_RELATIONSHIPS
 from cla_public.apps.checker.constants import CONTACT_SAFETY, \
     CONTACT_PREFERENCE, YES, NO
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
-from cla_public.apps.checker.validators import NotRequired, IgnoreIf, \
+from cla_public.apps.checker.validators import IgnoreIf, \
     FieldValue
 from cla_public.libs.honeypot import Honeypot
 
@@ -87,12 +89,37 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
             Optional()])
 
 
+class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
+    """
+    Subform for third-party fields
+    """
+    third_party_name = StringField(
+           _(u'Name of the helping person'),
+           description=_(u'For example: John Smith'),
+           validators=[
+                Length(max=400, message=_(u'Your full name must be 400 '
+                                         u'characters or less')),
+                InputRequired()])
+    relationship = SelectField(
+        _(u'Relationship'),
+        choices=(THIRD_PARTY_RELATIONSHIPS),
+        validators=[Required()])
+
+
 class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
-    Form to request a callback
+    Form to contact CLA
     """
-    full_name = StringField(
-        _(u'Full name'),
+    third_party_handled = YesNoField(
+        _(u'Has anyone helped to fill in this form')
+    )
+    third_party = ValidatedFormField(
+        ThirdPartyForm,
+        validators=[
+            IgnoreIf('third_party_handled', FieldValue(NO))
+        ])
+    applicant_name = StringField(
+        _(u'Name of the applicant'),
         description=_(u'For example: John Smith'),
         validators=[
             Length(max=400, message=_(u'Your full name must be 400 '
@@ -128,9 +155,10 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     def api_payload(self):
         "Form data as data structure ready to send to API"
+
         data = {
             'personal_details': {
-                'full_name': self.full_name.data,
+                'full_name': self.applicant_name.data,
                 'postcode': self.address.form.post_code.data,
                 'mobile_phone': self.callback.form.contact_number.data,
                 'street': self.address.form.street_address.data,
@@ -145,6 +173,14 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                     or self.adaptations.other_language.data,
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
+            },
+            'thirdparty_details': {
+                'personal_details': {
+                    'full_name': '!!!!!',
+                    'mobile_phone': '123123123'
+                },
+                'passphrase': 'asdasd',
+                'personal_relationship': 'asdasd'
             }
         }
         if self.callback_requested.data == YES:
@@ -155,5 +191,8 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             local_tz = pytz.timezone(current_app.config['TIMEZONE'])
             local = local_tz.localize(naive)
             data['requires_action_at'] = local.astimezone(pytz.utc).isoformat()
+
+        if self.third_party_handled.data == YES:
+            data['personal_details']['full_name'] = self.third_party.applicant_name.data
 
         return data
