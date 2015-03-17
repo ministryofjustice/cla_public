@@ -122,7 +122,7 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
 class ReviewStep(FormWizardStep):
 
     def render(self, *args, **kwargs):
-        steps = list(CheckerWizard('').steps)[:-1]
+        steps = CheckerWizard('').relevant_steps[:-1]
         return render_template(self.template, steps=steps, form=self.form)
 
 
@@ -140,6 +140,10 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html')),
         ('review', ReviewStep(ReviewForm, 'review.html'))
     ]
+
+    @property
+    def relevant_steps(self):
+        return filter(lambda s: not self.skip(s), self.steps)
 
     def complete(self):
 
