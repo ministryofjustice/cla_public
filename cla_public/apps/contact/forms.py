@@ -174,14 +174,6 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
             },
-            'thirdparty_details': {
-                'personal_details': {
-                    'full_name': '!!!!!',
-                    'mobile_phone': '123123123'
-                },
-                'passphrase': 'asdasd',
-                'personal_relationship': 'asdasd'
-            }
         }
         if self.callback_requested.data == YES:
 
@@ -193,6 +185,10 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             data['requires_action_at'] = local.astimezone(pytz.utc).isoformat()
 
         if self.third_party_handled.data == YES:
-            data['personal_details']['full_name'] = self.third_party.applicant_name.data
+            data['thirdparty_details'] = {
+                'personal_details': {}
+            }
+            data['thirdparty_details']['personal_details']['full_name'] = self.third_party.third_party_name.data
+            data['thirdparty_details']['personal_relationship'] = self.third_party.relationship.data
 
         return data

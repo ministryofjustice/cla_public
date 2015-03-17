@@ -11,11 +11,12 @@ DAY_CHOICES = (
     (DAY_SPECIFIC, _('Call me in the next week on'))
 )
 
+# TODO: GET this from cla_common
 THIRD_PARTY_RELATIONSHIPS = (
     ('', _(u'--- Please select ---')),
-    ('parent_guardian', _(u'Parent or guardian')),
-    ('family_friend', _(u'Family member or friend')),
-    ('professional', _(u'Professional')),
-    ('legal_adviser', _(u'Legal adviser')),
-    ('other', _(u'Other')),
+    ('PARENT_GUARDIAN', _(u'Parent or guardian')),
+    ('FAMILY_FRIEND', _(u'Family member or friend')),
+    ('PROFESSIONAL', _(u'Professional')),
+    ('LEGAL_ADVISOR', _(u'Legal adviser')),
+    ('OTHER', _(u'Other')),
 )
