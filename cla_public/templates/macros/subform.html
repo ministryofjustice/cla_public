@@ -9,7 +9,7 @@
 #}
 {% macro callback(subform) %}
   {{ Form.text_input_fieldset(subform.contact_number, class_='m-large', fieldset_class="fieldset-group") }}
-  {{ Form.yesno_fieldset(subform.safe_to_contact, class_='fieldset-group') }}
+  {{ Form.radio_buttons_fieldset(subform.safe_to_contact, class_='fieldset-group') }}
 
   {% with field = subform.time %}
     {% call Form.fieldset(field, class_='fieldset-group') %}
