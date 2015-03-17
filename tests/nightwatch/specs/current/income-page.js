@@ -20,7 +20,7 @@ module.exports = {
 
   'Income': function(client) {
     client
-      .waitForElementVisible(other_income_amount, 2000)
+      .waitForElementVisible(other_income_amount, 5000)
       .assert.urlContains('/income')
       .assert.containsText('h1', 'Your money coming in')
     ;
@@ -36,12 +36,12 @@ module.exports = {
     });
     client
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 2000)
+      .waitForElementVisible('input[name="have_partner"]', 5000)
     ;
     common.setYesNoFields(client, 'is_employed', 1);
     client
       .submitForm('form')
-      .waitForElementVisible(other_income_amount, 2000)
+      .waitForElementVisible(other_income_amount, 5000)
     ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
@@ -51,13 +51,13 @@ module.exports = {
     });
     client
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 2000)
+      .waitForElementVisible('input[name="have_partner"]', 5000)
     ;
     common.setYesNoFields(client, 'is_employed', 0);
     common.setYesNoFields(client, 'is_self_employed', 1);
     client
       .submitForm('form')
-      .waitForElementVisible(other_income_amount, 2000)
+      .waitForElementVisible(other_income_amount, 5000)
     ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
@@ -82,14 +82,14 @@ module.exports = {
 
     client
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 2000)
+      .waitForElementVisible('input[name="have_partner"]', 5000)
     ;
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, ['is_self_employed', 'in_dispute', 'partner_is_self_employed'], 0);
     common.setYesNoFields(client, 'partner_is_employed', 1);
     client
       .submitForm('form')
-      .waitForElementVisible(other_income_amount, 2000)
+      .waitForElementVisible(other_income_amount, 5000)
       .assert.containsText('h1', 'You and your partner’s money coming in')
       .assert.containsText('body', 'Your money coming in')
       .assert.containsText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record money coming in for your partner, if you have one, in the next section.')
@@ -102,12 +102,12 @@ module.exports = {
     });
     client
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 2000)
+      .waitForElementVisible('input[name="have_partner"]', 5000)
     ;
     common.setYesNoFields(client, 'is_employed', 1);
     client
       .submitForm('form')
-      .waitForElementVisible(other_income_amount, 2000)
+      .waitForElementVisible(other_income_amount, 5000)
     ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
@@ -149,7 +149,7 @@ module.exports = {
     client
       .click('body')
       .submitForm('form')
-      .waitForElementVisible('input[name="income_contribution"]', 2000)
+      .waitForElementVisible('input[name="income_contribution"]', 5000)
       .assert.urlContains('/outgoings')
     ;
 

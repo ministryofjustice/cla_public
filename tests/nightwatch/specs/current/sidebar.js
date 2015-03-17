@@ -35,7 +35,7 @@ module.exports = {
 
   'Savings page': function(client) {
     client
-      .waitForElementVisible('input[name="savings"]', 2000)
+      .waitForElementVisible('input[name="savings"]', 5000)
       .assert.urlContains('/savings')
       .assert.containsText('h1', 'Your savings')
     ;
@@ -48,7 +48,7 @@ module.exports = {
 
   'Income page': function(client) {
     client
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
       .assert.urlContains('/income')
       .assert.containsText('h1', 'Your income')
     ;

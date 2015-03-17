@@ -12,7 +12,7 @@ module.exports = {
       .deleteCookies()
       .init()
       .maximizeWindow()
-      .waitForElementVisible('body', 1000)
+      .waitForElementVisible('body', 5000)
       .click('a#start', function() {
         if(msg) {
           console.log('\n' + msg + '\n');
@@ -24,7 +24,7 @@ module.exports = {
   // select a 'pass' category (debt) and move on to next page
   selectDebtCategory: function(client) {
     client
-      .waitForElementVisible('input[name="categories"]', 2000)
+      .waitForElementVisible('input[name="categories"]', 5000)
       .assert.urlContains('/problem')
       .assert.containsText('h1', 'What do you need help with?')
       .click('input[name="categories"][value="debt"]')
@@ -35,7 +35,7 @@ module.exports = {
 
   aboutPage: function(client) {
     client
-      .waitForElementVisible('input[name="have_partner"]', 2000)
+      .waitForElementVisible('input[name="have_partner"]', 5000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
     ;

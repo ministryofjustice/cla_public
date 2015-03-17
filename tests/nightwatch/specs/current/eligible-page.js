@@ -17,7 +17,7 @@ module.exports = {
 
   'Benefits': function(client) {
     client
-      .waitForElementVisible('input[name="benefits"]', 2000)
+      .waitForElementVisible('input[name="benefits"]', 5000)
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
       .assert.containsText('body', 'Are you on any of these benefits?')
@@ -29,7 +29,7 @@ module.exports = {
   'Eligible page (request callback)': function(client) {
     client
       .assert.urlContains('/result/eligible')
-      .waitForElementVisible('input[name="callback_requested"]', 2000)
+      .waitForElementVisible('input[name="callback_requested"]', 5000)
       .assert.containsText('h1', 'You might qualify for legal aid')
       .assert.containsText('h2', 'Contact Civil Legal Advice')
       .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify financially for legal aid.')
@@ -66,7 +66,8 @@ module.exports = {
       .assert.containsText('div.address-list option[value="0"]', '3 Crescent Road, London, E18 1JA')
       .click('div.address-list option[value="0"]')
       .click('body')
-      .assert.value('#address-street_address', '3 Crescent Road\nLondon')
+      .assert.valueContains('#address-street_address', '3 Crescent Road')
+      .assert.valueContains('#address-street_address', 'London')
 
       // test for single address for known postcode
       .clearValue('input[name="address-post_code"]')
@@ -76,7 +77,9 @@ module.exports = {
       .click('body')
       .waitForElementNotPresent('div.address-list', 25000, false, function() {}, 'Element %s was removed from the page after %d ms')
       .pause(1000)
-      .assert.value('#address-street_address', 'Ministry of Justice\n102 Petty France\nLondon')
+      .assert.valueContains('#address-street_address', 'Ministry of Justice')
+      .assert.valueContains('#address-street_address', '102 Petty France')
+      .assert.valueContains('#address-street_address', 'London')
 
       // test for invalid postcode
       .clearValue('input[name="address-post_code"]')
