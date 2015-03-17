@@ -41,43 +41,6 @@ class BaseNoCsrfForm(BabelTranslationsFormMixin, NoCsrfForm):
     pass
 
 
-class FormSessionDataMixin(object):
-    """
-    Mixin for pre-populating the api payload with null or zero data
-    Also loads session data if there is any available
-    """
-
-    @classmethod
-    def get_session_data(cls):
-        return session.get(cls.__name__, {})
-
-    @classmethod
-    def get_session_as_api_payload(cls):
-        f = cls(MultiDict({}), cls.get_session_data())
-        f.process()
-        return f.api_payload()
-
-    @classmethod
-    def get_null_api_payload(cls):
-        return cls().api_payload()
-
-    @classmethod
-    def get_zero_api_payload(cls):
-        """
-        Populate a form and nested forms with Zero values so if they don't
-        need to be filled out
-        """
-        return set_zero_values(cls()).api_payload()
-
-
-def update_payload(form_payload, form_class, cond=True):
-    if cond:
-        form_data = form_class.get_session_as_api_payload()
-    else:
-        form_data = form_class.get_zero_api_payload()
-    recursive_dict_update(form_payload, form_data)
-
-
 class ProblemForm(ConfigFormMixin, BaseForm):
     """Area of law choice"""
 
@@ -88,16 +51,6 @@ class ProblemForm(ConfigFormMixin, BaseForm):
         choices=CATEGORIES,
         coerce=unicode,
         validators=[InputRequired()])
-
-    def api_payload(self):
-        category = self.categories.data
-        if category == 'violence':
-            category = 'family'
-        session.add_note(u'User selected category: {0}'.format(
-            self.categories.data))
-        return {
-            'category': category
-        }
 
 
 class AboutYouForm(BaseForm):
@@ -207,42 +160,6 @@ class AboutYouForm(BaseForm):
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
 
-    def api_payload(self):
-        def value_or_zero(field, dependant_field):
-            if dependant_field.data == YES and field.data:
-                return field.data
-            return 0
-
-        payload = {
-            'dependants_young': value_or_zero(self.num_children, self.have_children),
-            'dependants_old': value_or_zero(self.num_dependants, self.have_dependants),
-            'is_you_or_your_partner_over_60': self.aged_60_or_over.data,
-            'has_partner': self.have_partner.data,
-            'you': {'income': {
-                'self_employed': self.is_self_employed.data}}
-        }
-
-        if self.have_partner.data == YES and self.in_dispute.data != YES:
-            payload['partner'] = {'income': {
-                'self_employed': self.partner_is_self_employed.data}}
-        else:
-            payload['partner'] = None
-
-        update_payload(payload, PropertiesForm, cond=self.require_properties)
-        update_payload(payload, SavingsForm, cond=self.require_savings)
-        update_payload(payload, IncomeForm)
-        update_payload(payload, OutgoingsForm)
-
-        return payload
-
-    @property
-    def require_properties(self):
-        return self.own_property.data == YES
-
-    @property
-    def require_savings(self):
-        return self.have_savings.data == YES or self.have_valuables.data == YES
-
 
 class YourBenefitsForm(BaseForm):
 
@@ -258,23 +175,8 @@ class YourBenefitsForm(BaseForm):
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
 
-    def api_payload(self):
-        is_selected = lambda benefit: benefit in self.benefits.data
-        as_tuple = lambda benefit: (benefit, is_selected(benefit))
-        benefits = dict(map(as_tuple, PASSPORTED_BENEFITS))
-        payload = {
-            'specific_benefits': benefits,
-            'on_passported_benefits': passported(self.benefits.data)
-        }
 
-        if passported(self.benefits.data):
-            update_payload(payload, IncomeForm, cond=False)
-            update_payload(payload, OutgoingsForm, cond=False)
-
-        return payload
-
-
-class PropertyForm(BaseNoCsrfForm, FormSessionDataMixin):
+class PropertyForm(BaseNoCsrfForm):
 
     is_main_home = YesNoField(
         _(u'Is this property your main home?'),
@@ -326,34 +228,8 @@ class PropertyForm(BaseNoCsrfForm, FormSessionDataMixin):
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
 
-    def api_payload(self):
-        share = 100 if self.other_shareholders.data == NO else None
-        rent = money_interval(0)
-        if self.is_rented.data == YES:
-            rent = self.rent_amount.data
-        return {
-            'value': self.property_value.data,
-            'mortgage_left': self.mortgage_remaining.data,
-            'share': share,
-            'disputed': self.in_dispute.data,
-            'rent': rent,
-            'main': self.is_main_home.data
-        }
 
-
-def sum_money_intervals(first, second):
-    first = money_interval_to_monthly(first)
-    second = money_interval_to_monthly(second)
-    return money_interval(
-        first['per_interval_value'] + second['per_interval_value'],
-        first['interval_period'])
-
-
-def sum_rents(rents):
-    return reduce(sum_money_intervals, rents, money_interval(0))
-
-
-class PropertiesForm(BaseForm, FormSessionDataMixin):
+class PropertiesForm(BaseForm):
 
     @classproperty
     def title(self):
@@ -382,26 +258,8 @@ class PropertiesForm(BaseForm, FormSessionDataMixin):
                 self._submitted = super(PropertiesForm, self).is_submitted()
         return self._submitted
 
-    def api_payload(self):
-        properties = [prop.form.api_payload() for prop in self.properties]
-        rents = [prop['rent'] for prop in properties]
-        total_rent = sum_rents(rents)
 
-        total_mortgage = sum(
-            [p.mortgage_payments.data for p in self.properties
-                if p.mortgage_payments.data is not None]
-        )
-        return {
-            'property_set': properties,
-            'you': {
-                'income': {'other_income': total_rent},
-                'deductions': {
-                    'mortgage': money_interval(total_mortgage, 'per_month')}
-            }
-        }
-
-
-class SavingsForm(BaseForm, FormSessionDataMixin):
+class SavingsForm(BaseForm):
 
     @classproperty
     def title(self):
@@ -439,13 +297,6 @@ class SavingsForm(BaseForm, FormSessionDataMixin):
         if not session.has_savings:
             del self.savings
             del self.investments
-
-    def api_payload(self):
-        return {'you': {'savings': {
-            'bank_balance': self.savings.data if self.savings else 0,
-            'investment_balance': self.investments.data if self.investments else 0,
-            'asset_balance': self.valuables.data if self.valuables else 0
-        }}}
 
 
 class TaxCreditsForm(BaseForm):
@@ -488,21 +339,8 @@ class TaxCreditsForm(BaseForm):
             IgnoreIf('other_benefits', FieldValue(NO)),
             MoneyIntervalAmountRequired()])
 
-    def api_payload(self):
-        session.add_note(u'Other benefits:\n{0}'.format('\n'.join([
-            u' - {0}'.format(benefit) for benefit in self.benefits.data])))
-        return {
-            'on_nass_benefits': nass(self.benefits.data),
-            'you': {'income': {
-                'child_benefits': self.child_benefit.data,
-                'tax_credits': self.child_tax_credit.data,
-                'benefits': self.total_other_benefit.data if
-                self.other_benefits.data == YES else money_interval(0)
-            }}
-        }
 
-
-class IncomeFieldForm(BaseNoCsrfForm, FormSessionDataMixin):
+class IncomeFieldForm(BaseNoCsrfForm):
 
     def __init__(self, *args, **kwargs):
         self.is_partner = kwargs.pop('is_partner', False)
@@ -546,47 +384,6 @@ class IncomeFieldForm(BaseNoCsrfForm, FormSessionDataMixin):
             u"dividends"),
         validators=[MoneyIntervalAmountRequired()])
 
-    def api_payload(self):
-        tax_credits = self.working_tax_credit.data
-        child_tax_credit = session.get(
-            'TaxCreditsForm', {}).get('child_tax_credit', money_interval(0))
-        if not self.is_partner:
-            tax_credits = sum_money_intervals(tax_credits, child_tax_credit)
-
-        is_self_employed = session.is_self_employed
-        is_employed = session.is_employed
-        if self.is_partner:
-            is_self_employed = session.partner_is_self_employed
-            is_employed = session.partner_is_employed
-
-        earnings = self.earnings.data
-        self_employed_drawings = money_interval(0)
-        # Switch all earnings to self employed drawings if only self employed
-        if is_self_employed and not is_employed:
-            earnings, self_employed_drawings = self_employed_drawings, earnings
-
-        other_income = self.other_income.data
-        if session.owns_property:
-            rents = [p['rent_amount'] for p in session.get(
-                'PropertiesForm', {}).get('properties', [])]
-            total_rent = sum_rents(rents)
-            other_income = sum_money_intervals(other_income, total_rent)
-
-        return {
-            'income': {
-                'earnings': earnings,
-                'self_employment_drawings': self_employed_drawings,
-                'tax_credits': tax_credits,
-                'maintenance_received': self.maintenance.data,
-                'pension': self.pension.data,
-                'other_income': other_income
-            },
-            'deductions': {
-                'income_tax': self.income_tax.data,
-                'national_insurance': self.national_insurance.data,
-            }
-        }
-
 
 class IncomeField(PassKwargsToFormField):
 
@@ -596,7 +393,7 @@ class IncomeField(PassKwargsToFormField):
             *args, **kwargs)
 
 
-class IncomeForm(BaseForm, FormSessionDataMixin):
+class IncomeForm(BaseForm):
 
     @classproperty
     def title(self):
@@ -621,18 +418,8 @@ class IncomeForm(BaseForm, FormSessionDataMixin):
         if not session.has_partner:
             del self.partner_income
 
-    def api_payload(self):
-        api_payload = {
-            'you': self.your_income.form.api_payload(),
-        }
-        partner_income = getattr(self, 'partner_income', None)
-        if partner_income:
-            api_payload['partner'] = partner_income.form.api_payload()
 
-        return api_payload
-
-
-class OutgoingsForm(BaseForm, FormSessionDataMixin):
+class OutgoingsForm(BaseForm):
 
     @classproperty
     def title(self):
@@ -673,15 +460,6 @@ class OutgoingsForm(BaseForm, FormSessionDataMixin):
             u"of your home"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
-
-    def api_payload(self):
-        return {'you': {'deductions': {
-            'rent': self.rent.data,
-            'maintenance': self.maintenance.data,
-            'criminal_legalaid_contributions':
-                self.income_contribution.data,
-            'childcare': self.childcare.data
-        }}}
 
 
 class ReviewForm(BaseForm):

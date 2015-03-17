@@ -10,15 +10,14 @@ from requests.exceptions import ConnectionError, Timeout
 from wtforms.validators import StopValidation
 
 from cla_public.apps.checker import checker
-from cla_public.apps.checker.api import post_to_eligibility_check_api, \
-    get_organisation_list
+from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm, ReviewForm
-from cla_public.apps.checker.means_test import MeansTest
+from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
 from cla_public.libs.utils import override_locale, log_to_sentry
@@ -53,15 +52,13 @@ class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
         means_test = session.get('means_test', MeansTest())
-        means_test.update(self.form.api_payload())
+        means_test.update_from_session(session)
         try:
             means_test.save()
-        except (ConnectionError, Timeout, SlumberBaseException) as e:
+        except MeansTestError:
             self.form.errors['timeout'] = _(
                 u'There was an error submitting your data. '
                 u'Please check and try again.')
-            log_to_sentry(
-                u'Slumber Exception on %s page: %s' % (self.name, e))
             return self.get(step=self.name)
         else:
             return super(UpdatesMeansTest, self).on_valid_submit()
@@ -125,7 +122,7 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
 class ReviewStep(FormWizardStep):
 
     def render(self, *args, **kwargs):
-        steps = list(CheckerWizard('').remaining_steps())[:-1]
+        steps = list(CheckerWizard('').steps)[:-1]
         return render_template(self.template, steps=steps, form=self.form)
 
 
