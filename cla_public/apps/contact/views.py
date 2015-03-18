@@ -57,7 +57,7 @@ class ContactConfirmation(views.MethodView):
         session.clear_and_store_ref()
         if not session.get('stored_case_ref'):
             abort(404)
-        return render_template('result/confirmation.html')
+        return render_template('checker/result/confirmation.html')
 
 
 contact.add_url_rule(

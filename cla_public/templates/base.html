@@ -21,16 +21,12 @@
 {% block content %}
   {% include "_phase-tag.html" %}
 
-  <div class="inner-block {% if sidebar %}m-has-sidebar{% endif %}">
+  <div class="inner-block {% if self.sidebar() %}m-has-sidebar{% endif %}">
     <article class="main-content">
       {% block inner_content %}{% endblock %}
     </article>
 
-    {% block sidebar %}
-      {% if sidebar %}
-        {% include '_sidebar.html' %}
-      {% endif %}
-    {% endblock %}
+    {% block sidebar %}{% endblock %}
   </div>
 {% endblock %}
 

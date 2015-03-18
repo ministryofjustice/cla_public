@@ -1,0 +1,70 @@
+{% set current_step = request.view_args.step %}
+{% set has_remaining_forms = steps|rejectattr('is_completed')|list|length > 0 %}
+{% set total_step_count = steps|count %}
+{% set completed_step_count = steps|selectattr('is_completed')|list|count %}
+{% set completion_percentage = completed_step_count / total_step_count * 100 %}
+
+{% macro step_status(is_completed=False) %}
+  <span class="step-status">{% if is_completed %}{{ _('(completed)') }}{% endif %}</span>
+{% endmacro %}
+
+<div class="progress">
+  <div class="progress-bar">
+    <div class="progress-value" style="width:{{ completion_percentage }}%;"></div>
+  </div>
+
+  <h2>{{ _('Your progress') }}</h2>
+
+  <ul class="progress-steps">
+    {% for step in steps if step.name in ['problem', 'about'] or (session.AboutYouForm and session.AboutYouForm.is_completed) %}
+      {% set is_active = current_step == step.name %}
+
+      <li class="
+        progress-step
+        {% if step.is_completed %}m-completed{% endif %}
+        {% if is_active %}m-current{% endif %}"
+      >
+        {% if step.is_completed %}
+          <a class="step-name" href="{{ url_for('checker.wizard', step=step.name) }}">
+            {{ step_status(step.is_completed) }}
+            {{ step.form_class.title }}
+          </a>
+        {% else %}
+          <span class="step-name">
+            {{ step_status(step.is_completed) }}
+            {{ step.form_class.title }}
+          </span>
+        {% endif %}
+      </li>
+    {% endfor %}
+    {% if current_step in ['problem', 'about'] and not (session.AboutYouForm and session.AboutYouForm.is_completed) %}
+      {% for n in range(3) %}
+        <li class="progress-step"><span class="step-name m-dummy"></span></li>
+      {% endfor %}
+    {% endif %}
+    <li class="
+      progress-step
+      {% if current_step == 'review' %}m-current{% endif %}
+      {% if not has_remaining_forms and current_step != 'review' %}m-completed{% endif %}"
+    >
+      {% if has_remaining_forms %}
+        <span class="step-name">
+      {% else %}
+        <a class="step-name" href="{{ url_for('checker.wizard', step='review') }}">
+      {% endif %}
+        {{ step_status(not has_remaining_forms) }}
+        {{ _('Review your answers') }}
+      {% if has_remaining_forms %}
+        </span>
+      {% else %}
+        </a>
+      {% endif %}
+    </li>
+    <li class="progress-step {% if request.path.startswith('/result') %}m-current{% endif %}">
+      <span class="step-name">
+        {{ step_status() }}
+        {{ _('Contact information') }}
+      </span>
+    </li>
+  </ul>
+</div>

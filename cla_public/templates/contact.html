@@ -1,4 +1,8 @@
-{% extends "base.html" %}
+{% if request.path.startswith('/result') %}
+  {% extends 'checker/base.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
 
 {% import "macros/form.html" as Form %}
 {% import "macros/subform.html" as Subform %}

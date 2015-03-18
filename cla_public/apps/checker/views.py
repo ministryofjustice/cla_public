@@ -21,6 +21,7 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
+from cla_public.apps.checker import filters
 from cla_public.libs.utils import override_locale
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
@@ -138,6 +139,14 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
         fields = map(lambda (name, field): (field), fields)
         return fields
 
+    @property
+    def is_completed(self):
+        return session.get(self.form_class.__name__, {}).get('is_completed', False)
+
+    def render(self, *args, **kwargs):
+        steps = CheckerWizard('').relevant_steps[:-1]
+        return render_template(self.template, steps=steps, form=self.form)
+
 
 class ReviewStep(FormWizardStep):
 
@@ -149,16 +158,16 @@ class ReviewStep(FormWizardStep):
 class CheckerWizard(AllowSessionOverride, FormWizard):
 
     steps = [
-        ('problem', CheckerStep(ProblemForm, 'problem.html')),
-        ('about', CheckerStep(AboutYouForm, 'about.html')),
-        ('benefits', CheckerStep(YourBenefitsForm, 'benefits.html')),
-        ('property', CheckerStep(PropertiesForm, 'property.html')),
-        ('savings', CheckerStep(SavingsForm, 'savings.html')),
+        ('problem', CheckerStep(ProblemForm, 'checker/problem.html')),
+        ('about', CheckerStep(AboutYouForm, 'checker/about.html')),
+        ('benefits', CheckerStep(YourBenefitsForm, 'checker/benefits.html')),
+        ('property', CheckerStep(PropertiesForm, 'checker/property.html')),
+        ('savings', CheckerStep(SavingsForm, 'checker/savings.html')),
         ('benefits-tax-credits', CheckerStep(
-            TaxCreditsForm, 'benefits-tax-credits.html')),
-        ('income', CheckerStep(IncomeForm, 'income.html')),
-        ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html')),
-        ('review', ReviewStep(ReviewForm, 'review.html'))
+            TaxCreditsForm, 'checker/benefits-tax-credits.html')),
+        ('income', CheckerStep(IncomeForm, 'checker/income.html')),
+        ('outgoings', CheckerStep(OutgoingsForm, 'checker/outgoings.html')),
+        ('review', ReviewStep(ReviewForm, 'checker/review.html'))
     ]
 
     @property
@@ -223,7 +232,7 @@ class FaceToFace(views.MethodView, object):
         else:
             category_name = 'your issue'
 
-        response = render_template('result/face-to-face.html',
+        response = render_template('checker/result/face-to-face.html',
             data=data, form=form, category_name=category_name)
 
         session.clear()
@@ -243,7 +252,7 @@ class EligibleNoCallBack(views.MethodView, object):
         session.clear()
         session.update({ 'ProblemForm': { 'categories': request.args.get('category') }})
 
-        return render_template('result/eligible-no-callback.html',
+        return render_template('checker/result/eligible-no-callback.html',
             data=data, form=form, category_name=session.category_name)
 
 checker.add_url_rule(
@@ -253,10 +262,11 @@ checker.add_url_rule(
 class Eligible(RequiresSession, views.MethodView, object):
 
     def get(self):
+        steps = steps = CheckerWizard('').relevant_steps[:-1]
         if session.category in NO_CALLBACK_CATEGORIES:
             return redirect(url_for('.find-legal-adviser', category=session.category))
 
-        return render_template('result/eligible.html', form=ContactForm())
+        return render_template('checker/result/eligible.html', steps=steps, form=ContactForm())
 
 checker.add_url_rule(
     '/result/eligible', view_func=Eligible.as_view('eligible'), methods=['GET', 'POST'])

@@ -68,6 +68,7 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
         Store the form data in the session
         """
         session[self.form_class.__name__] = dict(self.form.data.items())
+        session[self.form_class.__name__]['is_completed'] = True
 
     def remove_form_data_from_session(self):
         """
