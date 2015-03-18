@@ -50,7 +50,7 @@ class TestApiPayloads(unittest.TestCase):
         return form.api_payload()
 
     def payload(self, payload_class, form_data):
-        return payload_class(MultiDict(form_data), session=session)
+        return payload_class(MultiDict(form_data))
 
     def test_your_benefits_form_passported(self):
         form_data = {'benefits': {'income_support': True}}

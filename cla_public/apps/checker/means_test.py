@@ -6,7 +6,7 @@ from copy import deepcopy
 import logging
 import sys
 
-from flask import current_app
+from flask import current_app, session
 from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
 
@@ -63,7 +63,7 @@ def recursive_update(orig, other):
 
 class ProblemPayload(dict):
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(ProblemPayload, self).__init__()
 
         category = form_data['categories']
@@ -79,7 +79,7 @@ class ProblemPayload(dict):
 
 class AboutYouPayload(dict):
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(AboutYouPayload, self).__init__()
 
         yes = lambda field: form_data.get(field) == YES
@@ -112,26 +112,26 @@ class AboutYouPayload(dict):
         if yes('own_property'):
             payload = recursive_update(
                 payload,
-                PropertiesPayload(session=session))
+                PropertiesPayload())
         else:
             payload = recursive_update(payload, PropertiesPayload.default)
 
         if yes('have_savings') or yes('have_valuables'):
             payload = recursive_update(
                 payload,
-                SavingsPayload(session=session))
+                SavingsPayload())
         else:
             payload = recursive_update(payload, SavingsPayload.default)
 
-        payload = recursive_update(payload, IncomePayload(session=session))
-        payload = recursive_update(payload, OutgoingsPayload(session=session))
+        payload = recursive_update(payload, IncomePayload())
+        payload = recursive_update(payload, OutgoingsPayload())
 
         self.update(payload)
 
 
 class YourBenefitsPayload(dict):
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(YourBenefitsPayload, self).__init__()
 
         is_selected = lambda ben: ben in form_data['benefits']
@@ -155,7 +155,7 @@ class YourBenefitsPayload(dict):
 
 class PropertyPayload(dict):
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(PropertyPayload, self).__init__()
 
         val = lambda field: form_data.get(field)
@@ -200,7 +200,7 @@ class PropertiesPayload(dict):
             }
         }
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(PropertiesPayload, self).__init__()
 
         def prop(index):
@@ -252,7 +252,7 @@ class SavingsPayload(dict):
             }
         }
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(SavingsPayload, self).__init__()
 
         val = lambda field: form_data.get(field)
@@ -285,7 +285,7 @@ class SavingsPayload(dict):
 
 class TaxCreditsPayload(dict):
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(TaxCreditsPayload, self).__init__()
 
         val = lambda field: form_data.get(field)
@@ -341,7 +341,7 @@ class IncomePayload(dict):
             'partner': income()
         }
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(IncomePayload, self).__init__()
 
         def income(person, prefix_, self_employed=False):
@@ -427,7 +427,7 @@ class OutgoingsPayload(dict):
             }
         }
 
-    def __init__(self, form_data={}, session=None):
+    def __init__(self, form_data={}):
         super(OutgoingsPayload, self).__init__()
 
         val = lambda field: form_data.get(field)
@@ -513,10 +513,10 @@ class MeansTest(dict):
         other.update(kwargs)
         recursive_update(self, other)
 
-    def update_from_form(self, form, form_data, session=None):
+    def update_from_form(self, form, form_data):
         payload_class = '{0}Payload'.format(form.replace('Form', ''))
         payload = getattr(sys.modules[__name__], payload_class)
-        self.update(payload(form_data, session=session))
+        self.update(payload(form_data, ))
 
     def update_from_session(self, session):
 
@@ -533,7 +533,7 @@ class MeansTest(dict):
 
         for form in forms:
             if form in session:
-                self.update_from_form(form, session[form], session)
+                self.update_from_form(form, session[form])
 
     def save(self):
         sentry = getattr(current_app, 'sentry', None)
