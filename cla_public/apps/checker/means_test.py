@@ -159,8 +159,8 @@ class PropertyPayload(dict):
         super(PropertyPayload, self).__init__()
 
         val = lambda field: form_data.get(field)
-        yes = lambda field: form_data[field] == YES
-        no = lambda field: form_data[field] == NO
+        yes = lambda field: form_data.get(field) == YES
+        no = lambda field: form_data.get(field) == NO
 
         self.update({
             'value':
@@ -212,6 +212,8 @@ class PropertiesPayload(dict):
             return PropertyPayload(prop_data)
 
         properties = filter(None, map(prop, range(3)))
+        if not properties and session.owns_property:
+            properties.append(PropertyPayload())
 
         def mortgage(index):
             return MoneyInterval(
