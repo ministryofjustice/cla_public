@@ -293,6 +293,9 @@ class TaxCreditsPayload(dict):
 
         benefits = val('benefits')
 
+        if not isinstance(benefits, list):
+            benefits = [benefits]
+
         payload = {
             'on_nass_benefits':
                 nass(benefits),

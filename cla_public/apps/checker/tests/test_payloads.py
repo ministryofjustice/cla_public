@@ -11,9 +11,6 @@ from cla_public.apps.contact.tests.test_availability import \
     override_current_time
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.contact.forms import ContactForm
-from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
-    PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm, \
-    IncomeForm, OutgoingsForm
 from cla_public.apps.checker.means_test import ProblemPayload, \
     AboutYouPayload, YourBenefitsPayload, PropertiesPayload, PropertyPayload, \
     SavingsPayload, TaxCreditsPayload, IncomePayload, OutgoingsPayload
@@ -270,7 +267,7 @@ class TestApiPayloads(unittest.TestCase):
         }
 
         form_data = {
-            'benefits': 'asylum-support',
+            'benefits': ['asylum-support', 'war-pension'],
             'other_benefits': YES,
         }
 
