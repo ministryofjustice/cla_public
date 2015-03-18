@@ -53,7 +53,7 @@ class TestApiPayloads(unittest.TestCase):
         return payload_class(MultiDict(form_data), session=session)
 
     def test_your_benefits_form_passported(self):
-        form_data = {'benefits': ['income_support']}
+        form_data = {'benefits': {'income_support': True}}
         payload = self.payload(YourBenefitsPayload, form_data)
         self.assertTrue(payload['specific_benefits']['income_support'])
         self.assertTrue(payload['on_passported_benefits'])
@@ -72,14 +72,14 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], 0)
 
     def test_your_benefits_form_multiple_passported(self):
-        form_data = {'benefits': ['income_support', 'pension_credit']}
+        form_data = {'benefits': {'income_support': True, 'pension_credit': True}}
         payload = self.payload(YourBenefitsPayload, form_data)
         self.assertTrue(payload['specific_benefits']['income_support'])
         self.assertTrue(payload['specific_benefits']['pension_credit'])
         self.assertTrue(payload['on_passported_benefits'])
 
     def test_your_benefits_form_no_passported(self):
-        form_data = {'benefits': ['other-benefit']}
+        form_data = {'benefits': {'other-benefit': True}}
         payload = self.payload(YourBenefitsPayload, form_data)
         are_false = lambda (benefit, selected): not selected
         self.assertTrue(
@@ -267,7 +267,7 @@ class TestApiPayloads(unittest.TestCase):
         }
 
         form_data = {
-            'benefits': ['asylum-support', 'war-pension'],
+            'benefits': {'asylum-support': True, 'war-pension': True},
             'other_benefits': YES,
         }
 
