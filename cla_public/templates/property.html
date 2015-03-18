@@ -35,16 +35,16 @@
           </header>
         {% endif %}
 
-        {{ Form.yesno_fieldset(property.is_main_home) }}
-        {{ Form.yesno_fieldset(property.other_shareholders) }}
+        {{ Form.radio_buttons_fieldset(property.is_main_home) }}
+        {{ Form.radio_buttons_fieldset(property.other_shareholders) }}
         {{ Form.text_input_fieldset(property.property_value, prefix="£", class_='m-small') }}
         {{ Form.text_input_fieldset(property.mortgage_remaining, prefix="£", class_='m-small') }}
         {{ Form.text_input_fieldset(property.mortgage_payments, prefix="£", class_='m-small') }}
         {% call Form.fieldset(property.is_rented) %}
-          {{ Form.yesno(property.is_rented) }}
+          {{ Form.radio_buttons(property.is_rented) }}
           {{ Form.money_interval_fieldset(property.rent_amount, is_subfield=True, controlled_by=property.is_rented) }}
         {% endcall %}
-        {{ Form.yesno_fieldset(property.in_dispute) }}
+        {{ Form.radio_buttons_fieldset(property.in_dispute) }}
 
       </fieldset>
     {% endfor %}

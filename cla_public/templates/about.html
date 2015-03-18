@@ -13,17 +13,17 @@
     {{ Form.handle_errors(form) }}
 
     {% call Form.fieldset(form.have_partner) %}
-      {{ Form.yesno(form.have_partner) }}
+      {{ Form.radio_buttons(form.have_partner) }}
 
       {% call Form.fieldset(form.in_dispute, is_subfield=True, controlled_by=form.have_partner) %}
-        {{ Form.yesno(form.in_dispute) }}
+        {{ Form.radio_buttons(form.in_dispute) }}
       {% endcall %}
     {% endcall %}
 
-    {{ Form.yesno_fieldset(form.on_benefits) }}
+    {{ Form.radio_buttons_fieldset(form.on_benefits) }}
 
     {% call Form.fieldset(form.have_children) %}
-      {{ Form.yesno(form.have_children) }}
+      {{ Form.radio_buttons(form.have_children) }}
 
       {% call Form.fieldset(form.num_children, is_subfield=True, controlled_by=form.have_children, as_label=True) %}
         {{ form.num_children(class_='form-control m-small') }}
@@ -31,23 +31,23 @@
     {% endcall %}
 
     {% call Form.fieldset(form.have_dependants) %}
-      {{ Form.yesno(form.have_dependants) }}
+      {{ Form.radio_buttons(form.have_dependants) }}
 
       {% call Form.fieldset(form.num_dependants, is_subfield=True, controlled_by=form.have_dependants, as_label=True) %}
         {{ form.num_dependants(class_='form-control m-small') }}
       {% endcall %}
     {% endcall %}
 
-    {{ Form.yesno_fieldset(form.own_property) }}
-    {{ Form.yesno_fieldset(form.is_employed) }}
-    {{ Form.yesno_fieldset(form.partner_is_employed, controlled_by=form.in_dispute, control_value='0') }}
-    {{ Form.yesno_fieldset(form.is_self_employed) }}
-    {{ Form.yesno_fieldset(form.partner_is_self_employed, controlled_by=form.in_dispute, control_value='0') }}
-    {{ Form.yesno_fieldset(form.aged_60_or_over) }}
-    {{ Form.yesno_fieldset(form.have_savings) }}
+    {{ Form.radio_buttons_fieldset(form.own_property) }}
+    {{ Form.radio_buttons_fieldset(form.is_employed) }}
+    {{ Form.radio_buttons_fieldset(form.partner_is_employed, controlled_by=form.in_dispute, control_value='0') }}
+    {{ Form.radio_buttons_fieldset(form.is_self_employed) }}
+    {{ Form.radio_buttons_fieldset(form.partner_is_self_employed, controlled_by=form.in_dispute, control_value='0') }}
+    {{ Form.radio_buttons_fieldset(form.aged_60_or_over) }}
+    {{ Form.radio_buttons_fieldset(form.have_savings) }}
 
     {% call Form.fieldset(form.have_valuables) %}
-      {{ Form.yesno(form.have_valuables) }}
+      {{ Form.radio_buttons(form.have_valuables) }}
       {% include '_valuables-info.html' %}
     {% endcall %}
 
