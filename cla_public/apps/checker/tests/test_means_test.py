@@ -113,7 +113,7 @@ class TestMeansTest(unittest.TestCase):
     def assertIncome(self, income, default=None, **override):
         expected = set([
             'earnings', 'benefits', 'tax_credits', 'child_benefits',
-            'other_income', 'self_employment_drawings', 'total',
+            'other_income', 'self_employment_drawings',
             'maintenance_received', 'pension', 'self_employed'])
         self.assertSetEqual(
             expected, set(income.keys()))
@@ -139,7 +139,7 @@ class TestMeansTest(unittest.TestCase):
     def assertSavings(self, savings, default=None, **override):
         expected = set([
             'credit_balance', 'investment_balance', 'asset_balance',
-            'bank_balance', 'total'])
+            'bank_balance'])
         self.assertSetEqual(
             expected, set(savings.keys()))
 

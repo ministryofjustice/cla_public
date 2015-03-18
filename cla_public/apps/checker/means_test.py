@@ -475,7 +475,6 @@ class MeansTest(dict):
                     'self_employment_drawings': MoneyInterval(0),
                     'maintenance_received': MoneyInterval(0),
                     'pension': MoneyInterval(0),
-                    'total': 0,
                     'self_employed': NO
                 },
                 'savings': {
@@ -483,7 +482,6 @@ class MeansTest(dict):
                     'investment_balance': 0,
                     'asset_balance': 0,
                     'bank_balance': 0,
-                    'total': 0
                 },
                 'deductions': {
                     'income_tax': MoneyInterval(0),
