@@ -52,7 +52,7 @@ class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
         means_test = session.get('means_test', MeansTest())
-        means_test.update_from_session(session)
+        means_test.update_from_session()
         try:
             means_test.save()
         except MeansTestError:

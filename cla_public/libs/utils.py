@@ -65,3 +65,26 @@ def log_to_sentry(message):
         current_app.sentry.captureMessage(message)
     except AttributeError:
         log.warning(message)
+
+
+def flatten_dict(field_name, data_dict):
+        return {'%s-%s' % (field_name, key): val for key, val in
+                data_dict.items()}
+
+
+def flatten_list_of_dicts(field_name, data_list):
+    return {'%s-%s-%s' % (field_name, num, key): val for num, d in
+            enumerate(data_list) for key, val in d.items()}
+
+
+def flatten(dict_, prefix=''):
+    out = {}
+    for key, val in dict_.items():
+        new_key = '-'.join(filter(lambda x: x, [prefix, key]))
+        if isinstance(val, Mapping):
+            out.update(flatten(flatten_dict(new_key, val)))
+        elif isinstance(val, list):
+            out.update(flatten(flatten_list_of_dicts(new_key, val)))
+        else:
+            out.update({new_key: val})
+    return out

@@ -45,11 +45,12 @@ class TestMeansTest(unittest.TestCase):
 
             def error_msg(msg):
                 mt = MeansTest()
-                mt.update_from_session(session)
+                mt.update_from_session()
                 return (
-                    '{msg}\n'
+                    '{msg} ({session_eligibility})\n'
                     'Means test: {data}\n').format(
                         msg=msg,
+                        session_eligibility=session.eligibility,
                         data=pformat(dict(mt)))
 
             form_class = get_form(url)

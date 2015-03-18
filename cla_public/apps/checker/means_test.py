@@ -4,6 +4,7 @@
 from collections import Mapping
 from copy import deepcopy
 import logging
+from pprint import pformat
 import sys
 
 from flask import current_app, session
@@ -14,7 +15,7 @@ from cla_public.apps.checker.api import get_api_connection
 from cla_public.apps.checker.constants import YES, NO, PASSPORTED_BENEFITS
 from cla_public.apps.checker.utils import nass, passported
 from cla_public.libs.money_interval import MoneyInterval, to_amount
-from cla_public.libs.utils import classproperty
+from cla_public.libs.utils import classproperty, flatten
 
 
 log = logging.getLogger(__name__)
@@ -520,7 +521,7 @@ class MeansTest(dict):
         payload = getattr(sys.modules[__name__], payload_class)
         self.update(payload(form_data, ))
 
-    def update_from_session(self, session):
+    def update_from_session(self):
 
         forms = [
             'ProblemForm',
@@ -535,7 +536,7 @@ class MeansTest(dict):
 
         for form in forms:
             if form in session:
-                self.update_from_form(form, session[form])
+                self.update_from_form(form, flatten(session[form]))
 
     def save(self):
         sentry = getattr(current_app, 'sentry', None)
