@@ -253,19 +253,22 @@ class SavingsPayload(dict):
     def __init__(self, form_data={}, session=None):
         super(SavingsPayload, self).__init__()
 
-        val = lambda field: form_data.get(field, 0)
+        savings = None if session.has_savings else 0
+        valuables = None if session.has_valuables else 0
+
+        val = lambda field, default=0: form_data.get(field, default)
 
         self.update({
             'you': {
                 'savings': {
                     'bank_balance':
-                        to_amount(val('savings')),
+                        to_amount(val('savings', savings)),
 
                     'investment_balance':
-                        to_amount(val('investments')),
+                        to_amount(val('investments', savings)),
 
                     'asset_balance':
-                        to_amount(val('valuables'))
+                        to_amount(val('valuables', valuables))
                 }
             }
         })
