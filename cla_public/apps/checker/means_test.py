@@ -498,13 +498,17 @@ class MeansTest(dict):
 
         self.update({
             'you': zero_finances(),
-            'partner': zero_finances(),
             'dependants_young': 0,
             'dependants_old': 0,
             'on_passported_benefits': NO,
             'on_nass_benefits': NO,
             'specific_benefits': {}
         })
+
+        if session.has_partner:
+            self.update({
+                'partner': zero_finances(),
+            })
 
     def update(self, other={}, **kwargs):
         """

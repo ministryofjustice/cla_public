@@ -91,14 +91,18 @@ def rented(prop, rent):
     return nprop
 
 
+def update_session(form, **kwargs):
+    session[form] = session.get(form, {})
+    session[form].update(**kwargs)
+
+
 class TestMeansTest(unittest.TestCase):
 
     def setUp(self):
         self.app = create_app('config/testing.py')
         self.client = self.app.test_client()
         self.app.test_request_context().push()
-        # with self.client.session_transaction() as session:
-        #     session.clear()
+        session.clear()
 
     def assertDictValues(self, expected, actual):
         for key, val in actual.items():
@@ -143,7 +147,7 @@ class TestMeansTest(unittest.TestCase):
         expected.update(override)
         self.assertDictValues(expected, savings)
 
-    def assertMeansTestInitialized(self, mt):
+    def assertMeansTestInitialized(self, mt, partner=False):
         self.assertEqual(0, mt['dependants_young'])
         self.assertEqual(0, mt['dependants_old'])
         self.assertEqual(NO, mt['on_passported_benefits'])
@@ -154,10 +158,11 @@ class TestMeansTest(unittest.TestCase):
         self.assertIncome(mt['you']['income'], default=MoneyInterval(0))
         self.assertOutgoings(mt['you']['deductions'], default=MoneyInterval(0))
         self.assertSavings(mt['you']['savings'], default=0)
-        self.assertIncome(mt['partner']['income'], default=MoneyInterval(0))
-        self.assertOutgoings(
-            mt['partner']['deductions'], default=MoneyInterval(0))
-        self.assertSavings(mt['partner']['savings'], default=0)
+        if partner:
+            self.assertIncome(mt['partner']['income'], default=MoneyInterval(0))
+            self.assertOutgoings(
+                mt['partner']['deductions'], default=MoneyInterval(0))
+            self.assertSavings(mt['partner']['savings'], default=0)
 
     def assertNullFinances(self, person):
         self.assertIncome(
@@ -177,6 +182,14 @@ class TestMeansTest(unittest.TestCase):
         self.assertSavings(person['savings'], default=0)
 
     def test_initialization(self):
+        mt = MeansTest()
+        self.assertMeansTestInitialized(mt)
+
+        update_session(
+            'AboutYouForm',
+            have_partner=YES,
+            in_dispute=NO)
+
         mt = MeansTest()
         self.assertMeansTestInitialized(mt)
 
@@ -210,14 +223,15 @@ class TestMeansTest(unittest.TestCase):
 
         # fields that will need to be filled in must be set to null
         self.assertNullFinances(mt['you'])
-        self.assertIncome(mt['partner']['income'], default=MoneyInterval(0))
-        self.assertOutgoings(
-            mt['partner']['deductions'], default=MoneyInterval(0))
-        self.assertSavings(mt['partner']['savings'], default=0)
+        self.assertNotIn('partner', mt)
 
         self.assertEqual([], mt['property_set'])
 
     def test_about_you_have_partner(self):
+        update_session(
+            'AboutYouForm',
+            have_partner=YES,
+            in_dispute=NO)
         mt = MeansTest()
         mt.update_from_form(
             'ProblemForm', {'categories': 'debt'})
@@ -226,7 +240,18 @@ class TestMeansTest(unittest.TestCase):
                 have_partner=YES, in_dispute=NO))
 
         self.assertEqual(YES, mt['has_partner'])
+
         self.assertEqual(NO, mt['partner']['income']['self_employed'])
+
+        update_session(
+            'AboutYouForm',
+            have_partner=YES,
+            in_dispute=NO,
+            partner_is_self_employed=YES)
+
+        mt = MeansTest()
+        mt.update_from_form(
+            'ProblemForm', {'categories': 'debt'})
 
         mt.update_from_form(
             'AboutYouForm', about_you_post_data(
@@ -236,18 +261,22 @@ class TestMeansTest(unittest.TestCase):
 
         self.assertEqual(YES, mt['partner']['income']['self_employed'])
 
+        update_session(
+            'AboutYouForm',
+            have_partner=YES,
+            in_dispute=YES,
+            partner_is_self_employed=YES)
+
+        mt = MeansTest()
+        mt.update_from_form(
+            'ProblemForm', {'categories': 'debt'})
+
         mt.update_from_form('AboutYouForm', about_you_post_data(
             have_partner=YES,
             in_dispute=YES,
             partner_is_self_employed=YES))
 
-        self.assertIncome(
-            mt['partner']['income'],
-            default=MoneyInterval(0),
-            self_employed=YES)
-        self.assertOutgoings(
-            mt['partner']['deductions'], default=MoneyInterval(0))
-        self.assertSavings(mt['partner']['savings'], default=0)
+        self.assertNotIn('partner', mt)
 
         self.assertEqual([], mt['property_set'])
 
