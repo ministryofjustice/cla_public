@@ -5,7 +5,7 @@ ifdef spec
 endif
 
 # bsb = browserstack browser. specify for single or use ie for all IEs, good for others. omit for default (chrome on mac)
-# browserstack only lets us run 5 parallel tests, so can't run all at once
+# our browserstack account currently only lets us run 5 parallel tests, so can't run all at once
 ifdef bsb
 	ifeq ($(bsb),ie)
 		browserstack_browser = -e ie11,ie10,ie9,ie8,ie7
@@ -28,6 +28,6 @@ test-legacy:
 test-all:
 	./nightwatch -c tests/nightwatch/local.json
 
-# running tests on Browserstack - set credentials in env vars
+# running tests on Browserstack - set credentials in env vars BS_USER and BS_PASS
 test-bs:
 	./nightwatch -c tests/nightwatch/browserstack-integration.conf.js -s legacy ${browserstack_browser} ${specific_test}
