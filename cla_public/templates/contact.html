@@ -35,6 +35,10 @@
     {% call Form.fieldset(form.callback_requested) %}
       {{ Form.radio_buttons(form.callback_requested) }}
 
+      <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="0">
+        {% trans %}You will be given the CLA phone number when you submit your details below.{% endtrans %}
+      </p>
+
       <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="1">
         {% trans %}We will try to call you at least once. If we cannot speak to you we will leave you a message,
         unless you tell us not to below. If you miss the call, please complete this form again to book another
@@ -72,7 +76,7 @@
       <h2>{{ _('What happens next?') }}</h2>
       <p>
         {% trans %}The first person you speak to will be an operator. They will ask you questions about
-        you and your problem, including you and your partner's financial circumstances.{% endtrans %}
+        yourself and your problem, including your financial circumstances (and your partner's, if you have one).{% endtrans %}
       </p>
       <p>
         {{ _('If it looks like you might qualify you will be put through to a CLA specialist adviser.') }}
