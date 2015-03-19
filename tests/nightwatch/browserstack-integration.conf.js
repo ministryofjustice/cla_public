@@ -1,9 +1,12 @@
 'use strict';
 
+var execSync = require('child_process').execSync;
+var gitRev = execSync('git rev-parse HEAD', {encoding: 'utf8'});
+
 module.exports = (function(settings) {
 
   for(var x in settings.test_settings) {
-    settings.test_settings[x].desiredCapabilities.build = "latest integration";
+    settings.test_settings[x].desiredCapabilities.build = gitRev;
     settings.test_settings[x].desiredCapabilities.project = "CLA Public";
     settings.test_settings[x].desiredCapabilities.javascriptEnabled = true;
     settings.test_settings[x].desiredCapabilities.acceptSslCerts = true;
