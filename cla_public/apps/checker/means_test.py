@@ -463,7 +463,7 @@ class MeansTest(dict):
     def __init__(self, *args, **kwargs):
         super(MeansTest, self).__init__(*args, **kwargs)
 
-        self.reference = None
+        self.reference = session.get('eligibility_check', None)
 
         def zero_finances():
             return {
@@ -548,6 +548,7 @@ class MeansTest(dict):
             else:
                 response = backend.eligibility_check.post(self)
                 self.reference = response['reference']
+                session['eligibility_check'] = self.reference
         except (ConnectionError, Timeout, SlumberBaseException) as e:
             if sentry:
                 sentry.captureException()
