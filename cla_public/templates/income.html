@@ -24,6 +24,9 @@
     whether or not you can get legal aid. Please answer these questions as
     fully and accurately as you can.{% endtrans %}
   </p>
+  <p>
+    <strong>{% trans %}We only need to know about any income you received last month.{% endtrans %}</strong>
+  </p>
   <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
