@@ -67,24 +67,32 @@ def log_to_sentry(message):
         log.warning(message)
 
 
-def flatten_dict(field_name, data_dict):
-        return {'%s-%s' % (field_name, key): val for key, val in
-                data_dict.items()}
+def flatten_dict(prefix, data_dict):
+    return {'%s-%s' % (prefix, key): val for key, val in
+            data_dict.items()}
 
 
-def flatten_list_of_dicts(field_name, data_list):
-    return {'%s-%s-%s' % (field_name, num, key): val for num, d in
-            enumerate(data_list) for key, val in d.items()}
+def flatten_list(prefix, data_list):
+    out = {}
+    for num, d in enumerate(data_list):
+        p = '%s-%s' % (prefix, num)
+        if isinstance(d, Mapping):
+            out.update(flatten_dict(p, d))
+        elif isinstance(d, list):
+            out.update(flatten_list(p, d))
+        else:
+            out.update({d: True})
+    return out
 
 
 def flatten(dict_, prefix=''):
     out = {}
     for key, val in dict_.items():
-        new_key = '-'.join(filter(lambda x: x, [prefix, key]))
+        new_prefix = '-'.join(filter(lambda x: x, [prefix, key]))
         if isinstance(val, Mapping):
-            out.update(flatten(flatten_dict(new_key, val)))
-        elif isinstance(val, list):
-            out.update(flatten(flatten_list_of_dicts(new_key, val)))
+            out.update(flatten(flatten_dict(new_prefix, val)))
+        elif isinstance(val, list) and not (len(val) > 0 and isinstance(val[0], basestring)):
+            out.update(flatten(flatten_list(new_prefix, val)))
         else:
-            out.update({new_key: val})
+            out.update({new_prefix: val})
     return out
