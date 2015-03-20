@@ -43,9 +43,15 @@ module.exports = {
 
   'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
+    var questions = [];
     ABOUT_YOU_QUESTIONS.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item, 'Please choose Yes or No');
+      questions.push({
+        name: item,
+        errorText: 'Please choose Yes or No'
+      });
     });
+    common.submitAndCheckForFieldError(client, questions);
+
     FIELDS_WITH_SUBFIELDS.forEach(function(item) {
       common.aboutPageSetAllToNo(client);
       client.assert.hidden(util.format('input[name="%s"]', item.subfield_name));
@@ -54,7 +60,10 @@ module.exports = {
       common.setYesNoFields(client, item.field_name, 0);
       client.assert.hidden(util.format('input[name="%s"]', item.subfield_name));
       common.setYesNoFields(client, item.field_name, 1);
-      common.submitAndCheckForFieldError(client, item.field_name, item.errorText);
+      common.submitAndCheckForFieldError(client, [{
+        name: item.field_name,
+        errorText: item.errorText
+      }]);
     });
   },
 

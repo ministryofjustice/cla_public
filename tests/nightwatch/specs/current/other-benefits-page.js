@@ -86,29 +86,47 @@ module.exports = {
       client
         .setValue(util.format('input[name="%s-per_interval_value"]', item), '100')
       ;
-      common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Please select a time period from the drop down');
+      common.submitAndCheckForFieldError(client, [{
+        name: item + '-per_interval_value',
+        errorText: 'Please select a time period from the drop down'
+      }]);
       client
         .clearValue(util.format('input[name="%s-per_interval_value"]', item))
         .click(util.format('select[name="%s-interval_period"]', item))
         .click(util.format('select[name="%s-interval_period"] option:first-child + option', item))
       ;
-      common.submitAndCheckForFieldError(client, item + '-interval_period', 'Not a valid amount', 'select');
+      common.submitAndCheckForFieldError(client, [{
+        name: item + '-interval_period',
+        errorText: 'Not a valid amount'
+      }], 'select');
       client
         .setValue(util.format('input[name="%s-per_interval_value"]', item), '100')
       ;
     });
 
-    common.submitAndCheckForFieldError(client, 'other_benefits', 'Please choose Yes or No');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'other_benefits',
+      errorText: 'Please choose Yes or No'
+    }]);
     client.click('input[name="other_benefits"][value="1"]');
-    common.submitAndCheckForFieldError(client, 'other_benefits', 'Please provide an amount');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'other_benefits',
+      errorText: 'Please provide an amount'
+    }]);
     client.setValue('input[name="total_other_benefit-per_interval_value"]', '100');
-    common.submitAndCheckForFieldError(client, 'other_benefits', 'Please select a time period from the drop down');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'other_benefits',
+      errorText: 'Please select a time period from the drop down'
+    }]);
     client
       .clearValue('input[name="total_other_benefit-per_interval_value"]')
       .click('select[name="total_other_benefit-interval_period"]')
       .click('select[name="total_other_benefit-interval_period"] option:first-child + option')
     ;
-    common.submitAndCheckForFieldError(client, 'other_benefits', 'Not a valid amount');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'other_benefits',
+      errorText: 'Not a valid amount'
+    }]);
     client
       .setValue('input[name="total_other_benefit-per_interval_value"]', '100')
       .submitForm('form')

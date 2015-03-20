@@ -112,13 +112,22 @@ module.exports = {
   'Validation': function(client) {
     OUTGOINGS_QUESTIONS.forEach(function(item) {
       client.setValue(util.format('input[name=%s-per_interval_value]', item), '500');
-      common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Please select a time period from the drop down');
+      common.submitAndCheckForFieldError(client, [{
+        name: item + '-per_interval_value',
+        errorText: 'Please select a time period from the drop down'
+      }]);
       client.clearValue(util.format('input[name=%s-per_interval_value]', item));
       common.setDropdownValue(client, item + '-interval_period', 'per_month');
-      common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Not a valid amount');
+      common.submitAndCheckForFieldError(client, [{
+        name: item + '-per_interval_value',
+        errorText: 'Not a valid amount'
+      }]);
     });
 
-    common.submitAndCheckForFieldError(client, 'income_contribution', 'Not a valid amount');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'income_contribution',
+      errorText: 'Not a valid amount'
+    }]);
 
     OUTGOINGS_QUESTIONS.forEach(function(item) {
       client.setValue(util.format('input[name=%s-per_interval_value]', item), '500');

@@ -79,14 +79,16 @@ module.exports = {
   },
 
   // check specific field group for error text
-  submitAndCheckForFieldError: function(client, fieldName, errorText, tag) {
+  submitAndCheckForFieldError: function(client, fields, tag) {
     tag = tag || "input";
     client
       .submitForm('form')
       .useXpath()
-      .assert.containsText(util.format('//%s[@name="%s"]/ancestor::fieldset', tag, fieldName), errorText)
-      .useCss()
     ;
+    fields.forEach(function(field) {
+      client.assert.containsText(util.format('//%s[@name="%s"]/ancestor::fieldset', tag, field.name), field.errorText);
+    });
+    client.useCss();
   },
 
   checkTextIsEqual: function(client, field, expectedText, xpath) {

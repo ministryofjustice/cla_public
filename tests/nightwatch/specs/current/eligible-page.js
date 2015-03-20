@@ -45,12 +45,18 @@ module.exports = {
     client.click('input[name="callback_requested"][value="1"]');
 
     ['full_name', 'callback-contact_number'].forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item, 'This field is required.');
+      common.submitAndCheckForFieldError(client, [{
+        name: item,
+        errorText: 'This field is required.'
+      }]);
     });
     client
       .setValue('input[name="full_name"]', 'John Doe')
       .setValue('input[name="callback-contact_number"]', '12345');
-    common.submitAndCheckForFieldError(client, 'callback-safe_to_contact', 'Please choose Yes or No');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'callback-safe_to_contact',
+      errorText: 'Please choose Yes or No'
+    }]);
   },
 
   'Postcode address finder': function(client) {
