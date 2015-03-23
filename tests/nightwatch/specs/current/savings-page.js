@@ -48,9 +48,14 @@ module.exports = {
   'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
+    var questions = [];
     SAVINGS_QUESTIONS.MONEY.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item.name, item.errorText);
+      questions.push({
+        name: item.name,
+        errorText: item.errorText
+      });
     });
+    common.submitAndCheckForFieldError(client, questions);
     SAVINGS_QUESTIONS.VALUABLES.forEach(function(item) {
       client.assert.elementNotPresent(util.format('input[name="%s"]', item.name));
     });
@@ -67,9 +72,14 @@ module.exports = {
       .submitForm('form')
       .waitForElementVisible('input[name="valuables"]', 5000)
     ;
+    var questions = [];
     SAVINGS_QUESTIONS.VALUABLES.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item.name, item.errorText);
+      questions.push({
+        name: item.name,
+        errorText: item.errorText
+      });
     });
+    common.submitAndCheckForFieldError(client, questions);
     SAVINGS_QUESTIONS.MONEY.forEach(function(item) {
       client.assert.elementNotPresent(util.format('input[name="%s"]', item.name));
     });

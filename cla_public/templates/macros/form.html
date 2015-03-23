@@ -102,13 +102,13 @@
 
 
 {#
-  Yes/No field
+  Radio inline buttons
 
   Params:
     - field <object>
         WTForm field
 #}
-{% macro yesno(field) %}
+{% macro radio_buttons(field) %}
   {%- for option in field -%}
     <label class="radio-inline" for="{{option.id}}">
       {{ option }}
@@ -131,7 +131,7 @@
     - control_value <string> (default: '1')
         Input value which shows the fieldset when toggled
 #}
-{% macro yesno_fieldset(
+{% macro radio_buttons_fieldset(
   field,
   is_hidden=False,
   controlled_by=None,
@@ -139,7 +139,7 @@
   class_=None
 ) %}
   {% call fieldset(field, is_hidden=is_hidden, controlled_by=controlled_by, control_value=control_value, class_=class_) %}
-    {{ yesno(field) }}
+    {{ radio_buttons(field) }}
   {% endcall %}
 {% endmacro %}
 
@@ -198,6 +198,8 @@
         Whether to treat the fieldset as subfield
     - controlled_by <object> (default: None)
         WTForm field which controls the visibility of the fieldset
+    - control_value <string> (default: '')
+        Input value which shows the fieldset when toggled
     - as_label <boolean> (default: False)
         Whether fieldset legend should contain label element
     - fieldset_class <string> (default: None)
@@ -212,7 +214,7 @@
   default_value='0',
   is_subfield=None,
   controlled_by=None,
-  control_value=None,
+  control_value='',
   as_label=True,
   fieldset_class=None
 ) %}

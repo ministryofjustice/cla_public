@@ -118,23 +118,34 @@ module.exports = {
   },
 
   'Test validation': function(client) {
-
+    var questions = [];
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.EMPLOYED_MANDATORY.forEach(function(item) {
-        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-per_interval_value', person, item), 'Please provide an amount');
+        // common.submitAndCheckForFieldError(client, util.format('%s_income-%s-per_interval_value', person, item), 'Please provide an amount');
+        questions.push({
+          name: util.format('%s_income-%s-per_interval_value', person, item),
+          errorText: 'Please provide an amount'
+        });
       });
     });
+    common.submitAndCheckForFieldError(client, questions);
 
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.ALL.forEach(function(item) {
         client.setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '250');
-        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-per_interval_value', person, item), 'Please select a time period from the drop down');
+        common.submitAndCheckForFieldError(client, [{
+          name: util.format('%s_income-%s-per_interval_value', person, item),
+          errorText: 'Please select a time period from the drop down'
+        }]);
         client
           .clearValue(util.format('[name=%s_income-%s-per_interval_value]', person, item))
           .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
           .click('body')
         ;
-        common.submitAndCheckForFieldError(client, util.format('%s_income-%s-interval_period', person, item), 'Not a valid amount', 'select');
+        common.submitAndCheckForFieldError(client, [{
+          name: util.format('%s_income-%s-interval_period', person, item),
+          errorText: 'Not a valid amount'
+        }], 'select');
       });
     });
 

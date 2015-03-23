@@ -76,13 +76,13 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
         validators=[
             Length(max=12, message=_(u'Your postcode must be 12 characters '
                                      u'or less')),
-            NotRequired()])
+            Optional()])
     street_address = TextAreaField(
         _(u'Street address'),
         validators=[
             Length(max=255, message=_(u'Your address must be 255 characters '
                                       u'or less')),
-            NotRequired()])
+            Optional()])
 
 
 class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
@@ -108,8 +108,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             IgnoreIf('callback_requested', FieldValue(NO))
         ])
     address = ValidatedFormField(
-        AddressForm,
-        validators=[Optional()])
+        AddressForm)
     extra_notes = TextAreaField(
         _(u'Help the operator to understand your situation'),
         description=(_(

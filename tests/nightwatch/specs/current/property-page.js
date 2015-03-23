@@ -46,12 +46,26 @@ module.exports = {
   'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
+    var questions = [];
     PROPERTY_QUESTIONS.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item, 'Please choose Yes or No');
+      questions.push({
+        name: item,
+        errorText: 'Please choose Yes or No'
+      });
     });
-    common.submitAndCheckForFieldError(client, 'properties-0-property_value', 'Please enter a valid amount');
-    common.submitAndCheckForFieldError(client, 'properties-0-mortgage_remaining', 'Please enter 0 if you have no mortgage');
-    common.submitAndCheckForFieldError(client, 'properties-0-mortgage_payments', 'Not a valid amount');
+    questions.push({
+      name: 'properties-0-property_value',
+      errorText: 'Please enter a valid amount'
+    });
+    questions.push({
+      name: 'properties-0-mortgage_remaining',
+      errorText: 'Please enter 0 if you have no mortgage'
+    });
+    questions.push({
+      name: 'properties-0-mortgage_payments',
+      errorText: 'Not a valid amount'
+    });
+    common.submitAndCheckForFieldError(client, questions);
 
     common.setYesNoFields(client, PROPERTY_QUESTIONS, 1);
     client
@@ -61,7 +75,10 @@ module.exports = {
       .setValue('#properties-0-rent_amount-per_interval_value', '')
       .setValue('#properties-0-rent_amount-interval_period', 'per month')
     ;
-    common.submitAndCheckForFieldError(client, 'properties-0-is_rented', 'Not a valid amount');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'properties-0-is_rented',
+      errorText: 'Not a valid amount'
+    }]);
     client
       .click(util.format('input[name="%s"][value="%s"]', 'properties-0-is_rented', 0))
       .submitForm('form')
