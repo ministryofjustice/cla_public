@@ -47,7 +47,12 @@ module.exports = {
 
   setYesNoFields: function(client, fields, val) {
     var clickOption = function(client, field, val) {
-      client.click(util.format('input[name="%s"][value="%s"]', field, val));
+      var el = util.format('input[name="%s"][value="%s"]', field, val);
+      client.isVisible(el, function(result) {
+        if(result.value === true) {
+          client.click(el);
+        }
+      });
     };
 
     if(fields.constructor === Array) {
