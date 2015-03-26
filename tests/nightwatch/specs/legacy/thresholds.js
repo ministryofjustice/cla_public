@@ -73,7 +73,7 @@ module.exports = {
       common.startPage(client, scenario.name);
       scenario.pages.forEach(function(page) {
         client
-          .waitForElementVisible(form_id(page.page), 2000)
+          .waitForElementVisible(form_id(page.page), 5000)
         ;
         if(page.page === 'property') {
           page.properties.forEach(function(property, i) {

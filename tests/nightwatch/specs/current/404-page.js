@@ -4,9 +4,9 @@ module.exports = {
   '404 page': function(client) {
     client
       .deleteCookies()
-      .init(client.launch_url + '/qwertyuiopasdfghjklzxcvbnm')
+      .init(client.launch_url + '/notfound')
       .maximizeWindow()
-      .waitForElementVisible('body', 1000)
+      .waitForElementVisible('body', 5000)
       .assert.containsText('h1', 'Sorry, this page doesn’t exist')
       .end()
     ;
