@@ -24,6 +24,8 @@
       <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
       or ask us to call you back, which is free.{% endtrans %}
     </p>
+    <p>{{ _('When you speak to CLA, you will need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+    <p><strong>{{ _('When a CLA operator calls you, the call will come from an anonymous number.') }}</strong></p>
   {% endblock %}
 
   <form method="POST" action="{{ url_for('contact.get_in_touch') }}">
