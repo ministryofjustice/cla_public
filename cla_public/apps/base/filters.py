@@ -2,6 +2,7 @@
 "Jinja custom filters"
 
 import re
+from urlparse import urlparse, parse_qs
 from cla_public.apps.base import base
 from babel.dates import format_datetime
 
