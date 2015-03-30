@@ -14,7 +14,10 @@
         return;
       }
 
-      this.bindEvents();
+      // Bind events for functionality that relies on media queries
+      if(window.matchMedia) {
+        this.bindEvents();
+      }
 
       this.renderMap(this.resultsMap.data('lat'), this.resultsMap.data('lon'));
 

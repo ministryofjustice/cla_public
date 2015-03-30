@@ -1,5 +1,5 @@
 $results-sidebar-width: 40%;
-$results-height: 460px;
+$map-height: 460px;
 
 .find-legal-adviser {
   .legal-adviser-search {
@@ -14,11 +14,6 @@ $results-height: 460px;
     @media print {
       display: none;
     }
-  }
-
-  .results-summary {
-    padding-bottom: 10px;
-    color: $grey-1;
   }
 
   .search-results-list {
@@ -82,8 +77,16 @@ $results-height: 460px;
   }
 
   .search-results-pagination {
+    overflow: hidden;
     border-top: 2px solid $grey-3;
-    background: $grey-4;
+    margin: 1em 0;
+    padding: 10px;
+
+    @include media(tablet) {
+      background: $grey-4;
+      margin: 0;
+      padding: 0;
+    }
 
     ul {
       list-style: none;
@@ -118,10 +121,6 @@ $results-height: 460px;
     float: left;
   }
 
-  @include media(mobile) {
-    height: 300px;
-  }
-
   h3 {
     margin: 5px 0;
   }
@@ -144,16 +143,25 @@ $results-height: 460px;
 .js-enabled .find-legal-adviser {
   .map {
     display: block;
+    height: $map-height;
+    margin-bottom: 1em;
+
+    @include media(mobile) {
+      height: $map-height - 100;
+    }
   }
 
   @include media(tablet) {
     $_pagination-height: 35px;
 
+    .map {
+      margin: 0;
+    }
+
     .search-results-container {
       overflow: hidden;
       margin: 0 -1px;
       border: 1px solid $grey-2;
-      height: $results-height;
     }
 
     .search-results {
@@ -162,7 +170,6 @@ $results-height: 460px;
       float: right;
       position: relative;
       width: $results-sidebar-width;
-      height: 100%;
       border-left: 1px solid $grey-2;
       margin-left: -1px;
 
@@ -202,11 +209,11 @@ $results-height: 460px;
 
     .search-results-list {
       overflow: auto;
-      height: $results-height - $_pagination-height;
+      height: $map-height - $_pagination-height;
     }
 
     .search-results-pagination {
-      height: $_pagination-height - 6;
+      height: $_pagination-height - 6 - 2;
       padding: 3px;
     }
   }
@@ -217,7 +224,6 @@ $results-height: 460px;
     page-break-before: always;
 
     .map {
-      height: 460px;
       float: none;
       width: auto;
       margin-bottom: 5mm;

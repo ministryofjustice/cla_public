@@ -10,9 +10,9 @@
   </form>
 
   {% if data.results %}
-    <div class="results-summary">
+    <p class="results-summary">
       Showing {{ data.results|length }} results around {{ data.origin.postcode }}
-    </div>
+    </p>
 
     <div class="search-results-container">
       <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
