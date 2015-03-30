@@ -612,14 +612,7 @@ class OutgoingsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin,
 
 
 class FindLegalAdviserForm(Honeypot, BabelTranslationsFormMixin, Form):
-    search_by = RadioField(
-        _(u'Search by'),
-        choices=LEGAL_ADVISER_SEARCH_PREFERENCE,
-        default='location',
-        validators=[
-            InputRequired(message=_(u'Please choose one of the options'))],
-    )
-    location = StringField(
-        _(u'Postcode, city or town'),
+    postcode = StringField(
+        _(u'Enter postcode'),
         validators=[InputRequired()]
     )
