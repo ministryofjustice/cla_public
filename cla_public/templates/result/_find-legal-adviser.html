@@ -1,58 +1,85 @@
 {% import "macros/form.html" as Form %}
+
 <section class="find-legal-adviser">
   <h2>Find a legal adviser</h2>
   <form class="legal-adviser-search" method="GET">
-    {% call Form.fieldset(form.location, as_label=True, class_=' ') %}
-      {{ Form.text_input(form.location) }}
+    {% call Form.fieldset(form.postcode, as_label=True, class_=' ') %}
+      {{ Form.text_input(form.postcode) }}
       <button class="button" type="submit">Search</button>
     {% endcall %}
   </form>
 
-  {% if data.meta and data.meta.location %}
+  {% if data.results %}
     <div class="results-summary">
-      Showing {{ data.results|length }} results in {{ data.meta.location.address.postcode }}
+      Showing {{ data.results|length }} results around {{ data.origin.postcode }}
     </div>
 
-    <div class="search-results">
-      <div id="resultsMap" class="map" data-lat="{{ data.meta.location.position.lat }}" data-lon="{{ data.meta.location.position.lon }}"></div>
-      <div class="search-results-list">
-        <ul class="org-list">
-          {% for org in data.results %}
-            <li class="org-item vcard" data-lat="{{ org.position.lat }}" data-lon="{{ org.position.lon }}" data-id="{{ loop.index }}">
-              <header>
-                <h3 class="org-title">
-                  <span class="marker">{{ loop.index }}</span>
-                  <span class="fn org">{{ org.name }}</span>
-                </h3>
-                <div class="distance">{{ org.distance }}</div>
-              </header>
-              <div class="org-details">
-                <p class="org-type">{{ org.type }}</p>
-                {% if org.areas_of_law|length > 0 %}
-                  <ul class="areas-of-law">
-                    {% for area in org.areas_of_law %}
-                      <li>{{ area }}</li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-                <p>
-                  <span class="visuallyhidden">{{ _('Address') }}:</span>
-                  <span class="adr">{{ org.address }}</span>
-                </p>
-                <p>
-                  <span>{{ _('Helpline') }}:</span>
-                  <span class="tel">{{ org.phone }}</span>
-                </p>
-                {% if org.website %}
+    <div class="search-results-container">
+      <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
+      <div class="search-results">
+        <div class="search-results-list">
+          <ul class="org-list">
+            {% for item in data.results %}
+              <li class="org-list-item vcard" data-lat="{{ item.location.point.coordinates[1] }}" data-lon="{{ item.location.point.coordinates[0] }}" data-id="{{ loop.index }}">
+                <header>
+                  <h3 class="org-title">
+                    <span class="marker">{{ loop.index }}</span>
+                    <span class="fn org">{{ item.organisation.name }}</span>
+                  </h3>
+                  <div class="distance">{{ item.distance|round(2) }} miles</div>
+                </header>
+                <div class="org-details">
                   <p>
-                    <span>{{ _('Website') }}:</span>
-                    <a class="url" href="{{ org.website }}" target="_blank">{{ org.website|humanize_url }}</a>
+                    <span class="visuallyhidden">{{ _('Address') }}:</span>
+                    <span class="adr">
+                      <span class="street-address">{{ item.location.address }}</span>
+                      <span class="postal-code">{{ item.location.postcode }}</span>
+                      <span class="city">{{ item.location.city }}</span>
+                    </span>
                   </p>
-                {% endif %}
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
+                  <p>
+                    <span>{{ _('Helpline') }}:</span>
+                    <span class="tel">{{ item.telephone }}</span>
+                  </p>
+                  {% if item.organisation.website %}
+                    <p>
+                      <span>{{ _('Website') }}:</span>
+                      <a class="url" href="{{ item.organisation.website|human_to_url }}" target="_blank">
+                        {{ item.organisation.website|url_to_human }}
+                      </a>
+                    </p>
+                  {% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <nav class="search-results-pagination">
+          <ul>
+            {% if data.previous %}
+              {% set prev_page = data.previous|query_to_dict('page') %}
+              <li class="results-nav results-nav-prev">
+                <a
+                  href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode'], page=prev_page) }}"
+                  data-page="{{prev_page}}"
+                >
+                  Previous
+                </a>
+              </li>
+            {% endif %}
+            {% if data.next %}
+              {% set next_page = data.next|query_to_dict('page') %}
+              <li class="results-nav results-nav-next">
+                <a
+                  href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode'], page=next_page) }}"
+                  data-page="{{next_page}}"
+                >
+                  Next
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
       </div>
     </div>
   {% endif %}

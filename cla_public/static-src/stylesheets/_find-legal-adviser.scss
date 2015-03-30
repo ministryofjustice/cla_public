@@ -1,4 +1,5 @@
-$results-sidebar-size: 40%;
+$results-sidebar-width: 40%;
+$results-height: 460px;
 
 .find-legal-adviser {
   .legal-adviser-search {
@@ -25,10 +26,9 @@ $results-sidebar-size: 40%;
       margin: 0;
       padding: 0;
       list-style: none;
-      font-size: .9em;
     }
 
-    .org-item {
+    .org-list-item {
       border-top: 1px solid $grey-3;
       padding: 15px 0 15px 25px;
       display: block;
@@ -57,7 +57,7 @@ $results-sidebar-size: 40%;
         background: white;
       }
 
-      .adr {
+      .street-address {
         white-space: pre;
       }
     }
@@ -81,21 +81,30 @@ $results-sidebar-size: 40%;
     }
   }
 
-  .org-type {
-    color: $grey-1;
-  }
+  .search-results-pagination {
+    border-top: 2px solid $grey-3;
+    background: $grey-4;
 
-  .areas-of-law {
-    padding: 0;
-    margin: 3px 0 0;
-    font-size: .9em;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-    li {
-      margin-top: 2px;
-      display: inline-block;
-      padding: 2px 5px 0;
-      border: 1px solid $grey-2;
-      background: white;
+    .results-nav a {
+      font-size: .9em;
+      line-height: 27px;
+      display: block;
+      padding: 0 8px;
+      font-weight: bold;
+    }
+
+    .results-nav-prev {
+      float: left;
+    }
+
+    .results-nav-next {
+      float: right;
     }
   }
 }
@@ -105,7 +114,7 @@ $results-sidebar-size: 40%;
 
   @include media(tablet) {
     height: 100%;
-    width: 100% - $results-sidebar-size;
+    width: 100% - $results-sidebar-width;
     float: left;
   }
 
@@ -126,7 +135,7 @@ $results-sidebar-size: 40%;
     display: none;
   }
 
-  .adr {
+  .address {
     white-space: pre;
   }
 }
@@ -138,20 +147,22 @@ $results-sidebar-size: 40%;
   }
 
   @include media(tablet) {
-    .search-results {
+    $_pagination-height: 35px;
+
+    .search-results-container {
       overflow: hidden;
       margin: 0 -1px;
       border: 1px solid $grey-2;
-      height: 460px;
+      height: $results-height;
     }
 
-    .search-results-list {
+    .search-results {
+      font-size: .9em;
       background: white;
       float: right;
       position: relative;
-      width: $results-sidebar-size;
+      width: $results-sidebar-width;
       height: 100%;
-      overflow: auto;
       border-left: 1px solid $grey-2;
       margin-left: -1px;
 
@@ -165,11 +176,17 @@ $results-sidebar-size: 40%;
         margin-top: 5px;
       }
 
-      .s-highlighted .org-details {
-        display: block;
+      .s-highlighted {
+        .fn {
+          color: $black;
+        }
+
+        .org-details {
+          display: block;
+        }
       }
 
-      .org-item {
+      .org-list-item {
         padding: 10px 10px 10px 35px;
         cursor: pointer;
 
@@ -181,6 +198,16 @@ $results-sidebar-size: 40%;
           background: $grey-3;
         }
       }
+    }
+
+    .search-results-list {
+      overflow: auto;
+      height: $results-height - $_pagination-height;
+    }
+
+    .search-results-pagination {
+      height: $_pagination-height - 6;
+      padding: 3px;
     }
   }
 }
@@ -213,6 +240,10 @@ $results-sidebar-size: 40%;
       .org-details {
         display: block !important;
       }
+    }
+
+    .search-results-pagination {
+      display: none;
     }
   }
 }

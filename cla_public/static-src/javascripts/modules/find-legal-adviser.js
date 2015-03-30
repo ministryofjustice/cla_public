@@ -32,10 +32,6 @@
       });
 
       this.addMarkers(organisations);
-
-      $(window).load($.proxy(function() {
-        this._scrollToResults();
-      }, this));
     },
 
     bindEvents: function() {
@@ -43,12 +39,24 @@
       this.organisationListItems.on('click', function(evt) {
         self._handleItemHighlight(evt, this);
       });
+
+      this.resultsPagination.on('click', function(evt) {
+        evt.preventDefault();
+
+        self._fetchPage(evt.target.href);
+      });
     },
 
-    _scrollToResults: function() {
-      $('html, body').animate({
-        scrollTop: this.findLegalAdviserContainer.offset().top - 10
-      }, 120);
+    _fetchPage: function(url) {
+      var self = this;
+
+      $.get(url)
+        .success(function(data) {
+          self.findLegalAdviserContainer.replaceWith(data);
+          self.markers = [];
+          self.init();
+        })
+        .error();
     },
 
     _closeOpenInfoWindow: function() {
@@ -207,6 +215,7 @@
       this.resultsMap = $(this.el);
       this.findLegalAdviserContainer = $('.find-legal-adviser');
       this.organisationListItems = $('.search-results-list .vcard');
+      this.resultsPagination = $('.search-results-pagination');
     }
   };
 }());
