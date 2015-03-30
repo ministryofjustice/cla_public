@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 
-import os, yaml
+import os
 from flask import abort, render_template, redirect, session, url_for, views, \
     current_app, request
 from flask.ext.babel import lazy_gettext as _
@@ -20,6 +20,7 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
 from cla_public.libs.utils import override_locale
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
+from cla_public.libs import laalaa
 
 
 @checker.after_request
@@ -109,19 +110,22 @@ checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
 class FaceToFace(RequiresSession, views.MethodView, object):
 
     def get(self):
-        mock_data = {}
+        data = {}
 
         args = MultiDict(filter(lambda (k, v): v != '', request.args.items()))
 
-        if 'location' in args:
-            with open(os.path.join(os.path.dirname(__file__), 'mock_data.yml')) as f:
-                mock_data = yaml.load(f.read())
+        if 'postcode' in args:
+            page = 1
+
+            if 'page' in args and args['page'].isdigit():
+                page = args['page']
+            data = laalaa.find(args['postcode'], page)
 
         if not session.category:
             session.category_name = 'your issue'
 
         response = render_template('result/face-to-face.html',
-            data=mock_data, form=FindLegalAdviserForm(request.args))
+            data=data, form=FindLegalAdviserForm(request.args))
         session.clear()
         return response
 
@@ -135,16 +139,18 @@ class Eligible(RequiresSession, views.MethodView, object):
     def get(self):
         if session.category in NO_CALLBACK_CATEGORIES:
             session.clear()
-            mock_data = {}
+            data = {}
 
             args = MultiDict(filter(lambda (k, v): v != '', request.args.items()))
 
-            if 'location' in args:
-                with open(os.path.join(os.path.dirname(__file__), 'mock_data.yml')) as f:
-                    mock_data = yaml.load(f.read())
+            if 'postcode' in args:
+                page = 1
+                if 'page' in args and args['page'].isdigit():
+                    page = args['page']
+                data = laalaa.find(args['postcode'], page)
 
             return render_template('result/eligible-no-callback.html',
-                data=mock_data, form=FindLegalAdviserForm(request.args))
+                data=data, form=FindLegalAdviserForm(request.args))
 
         return render_template('result/eligible.html', form=ContactForm())
 
