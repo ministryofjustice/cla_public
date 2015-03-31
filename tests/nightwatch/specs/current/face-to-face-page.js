@@ -19,7 +19,7 @@ module.exports = {
 
   'Face-to-face page': function(client) {
     client
-      .waitForElementVisible('a[href="http://find-legal-advice.justice.gov.uk/"]', 5000)
+      .waitForElementVisible('.legal-adviser-search', 5000)
       .assert.urlContains('/face-to-face')
       .assert.containsText('h1', 'You may be able to get free advice from a legal adviser')
     ;
