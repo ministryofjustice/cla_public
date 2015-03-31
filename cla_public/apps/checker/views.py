@@ -33,6 +33,20 @@ def add_header(response):
     return response
 
 
+def handle_find_legal_adviser_form(form, args):
+    data = {}
+    page = 1
+
+    if 'postcode' in args:
+        if form.validate():
+            if 'page' in args and args['page'].isdigit():
+                page = args['page']
+            data = laalaa.find(args['postcode'], page)
+            if 'error' in data:
+                form.postcode.errors.append(data['error'])
+    return data
+
+
 class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
@@ -110,22 +124,14 @@ checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
 class FaceToFace(RequiresSession, views.MethodView, object):
 
     def get(self):
-        data = {}
-
-        args = MultiDict(filter(lambda (k, v): v != '', request.args.items()))
-
-        if 'postcode' in args:
-            page = 1
-
-            if 'page' in args and args['page'].isdigit():
-                page = args['page']
-            data = laalaa.find(args['postcode'], page)
+        form = FindLegalAdviserForm(request.args, csrf_enabled=False)
+        data = handle_find_legal_adviser_form(form, request.args)
 
         if not session.category:
             session.category_name = 'your issue'
 
         response = render_template('result/face-to-face.html',
-            data=data, form=FindLegalAdviserForm(request.args))
+            data=data, form=form)
         session.clear()
         return response
 
@@ -139,18 +145,12 @@ class Eligible(RequiresSession, views.MethodView, object):
     def get(self):
         if session.category in NO_CALLBACK_CATEGORIES:
             session.clear()
-            data = {}
 
-            args = MultiDict(filter(lambda (k, v): v != '', request.args.items()))
-
-            if 'postcode' in args:
-                page = 1
-                if 'page' in args and args['page'].isdigit():
-                    page = args['page']
-                data = laalaa.find(args['postcode'], page)
+            form = FindLegalAdviserForm(request.args, csrf_enabled=False)
+            data = handle_find_legal_adviser_form(form, request.args)
 
             return render_template('result/eligible-no-callback.html',
-                data=data, form=FindLegalAdviserForm(request.args))
+                data=data, form=form)
 
         return render_template('result/eligible.html', form=ContactForm())
 
