@@ -43,8 +43,12 @@
         self._handleItemHighlight(evt, this);
       });
 
-      this.resultsPagination.on('click', function(evt) {
+      this.resultsPagination.on('click', 'a', function(evt) {
         evt.preventDefault();
+
+        if(window.LABELS && window.LABELS.loading) {
+          $(evt.target).replaceWith('<span>' + window.LABELS.loading + '</span>');
+        }
 
         self._fetchPage(evt.target.href);
       });

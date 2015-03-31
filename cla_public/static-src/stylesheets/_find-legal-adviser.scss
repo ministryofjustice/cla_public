@@ -94,12 +94,21 @@ $map-height: 460px;
       padding: 0;
     }
 
-    .results-nav a {
-      font-size: .9em;
-      line-height: 27px;
-      display: block;
-      padding: 0 8px;
-      font-weight: bold;
+    .results-nav {
+      a,
+      span {
+        font-size: .9em;
+        line-height: 27px;
+        display: block;
+        padding: 0 8px;
+        font-weight: bold;
+      }
+
+      span {
+        font-weight: normal;
+        color: $grey-1;
+        cursor: default;
+      }
     }
 
     .results-nav-prev {
