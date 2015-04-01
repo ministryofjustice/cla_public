@@ -10,31 +10,17 @@
     init: function() {
       this.cacheEls();
 
-      if(!this.resultsMap.length) {
-        return;
-      }
-
       // Bind events for functionality that relies on media queries
       if(window.matchMedia) {
         this.bindEvents();
       }
 
+      if(!this.resultsMap.length) {
+        return;
+      }
+
       this.renderMap(this.resultsMap.data('lat'), this.resultsMap.data('lon'));
-
-      var organisations = $.map(this.organisationListItems, function(item) {
-        var $item = $(item);
-        return {
-          id: $item.data('id'),
-          position: {
-            lat: parseFloat($item.data('lat')),
-            lng: parseFloat($item.data('lon'))
-          },
-          title: $item.find('.fn').text(),
-          content: $item.html()
-        };
-      });
-
-      this.addMarkers(organisations);
+      this._prepareMarkers();
     },
 
     bindEvents: function() {
@@ -51,7 +37,26 @@
         }
 
         self._fetchPage(evt.target.href);
+
+        if(window.history && history.pushState) {
+          history.pushState(null, null, evt.target.href);
+        }
       });
+
+      this.findLegalAdviserForm.submit(function(evt) {
+        evt.preventDefault();
+
+        var url = document.location.pathname + '?' + $(this).serialize();
+        self._fetchPage(url);
+
+        if(window.history && history.pushState) {
+          history.pushState(null, null, url);
+        }
+      });
+
+      window.onpopstate = function() {
+        self._fetchPage(document.location.href);
+      };
     },
 
     _fetchPage: function(url) {
@@ -70,6 +75,23 @@
       if(this.openInfoWindow) {
         this.openInfoWindow.close();
       }
+    },
+
+    _prepareMarkers: function() {
+      var organisations = $.map(this.organisationListItems, function(item) {
+        var $item = $(item);
+        return {
+          id: $item.data('id'),
+          position: {
+            lat: parseFloat($item.data('lat')),
+            lng: parseFloat($item.data('lon'))
+          },
+          title: $item.find('.fn').text(),
+          content: $item.html()
+        };
+      });
+
+      this.addMarkers(organisations);
     },
 
     _fitAllMarkers: function() {
@@ -221,6 +243,7 @@
     cacheEls: function() {
       this.resultsMap = $(this.el);
       this.findLegalAdviserContainer = $('.find-legal-adviser');
+      this.findLegalAdviserForm = $('.legal-adviser-search');
       this.organisationListItems = $('.search-results-list .vcard');
       this.resultsPagination = $('.search-results-pagination');
     }
