@@ -18,7 +18,7 @@ module.exports = {
 
   'Benefits': function(client) {
     client
-      .waitForElementVisible('input[name="benefits"]', 2000)
+      .waitForElementVisible('input[name="benefits"]', 5000)
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
       .assert.containsText('body', 'Are you on any of these benefits?')
@@ -29,7 +29,7 @@ module.exports = {
 
   'Benefits and tax credits page': function(client) {
     client
-      .waitForElementVisible('input[name="other_benefits"]', 2000)
+      .waitForElementVisible('input[name="other_benefits"]', 5000)
       .assert.urlContains('/benefits-tax-credits')
     ;
     common.checkTextIsEqual(client, 'h1', 'Your benefits and tax credits');
@@ -38,18 +38,18 @@ module.exports = {
   'Context-dependent text for partner': function(client) {
     client
       .back()
-      .waitForElementPresent('input[name="benefits"]', 2000)
+      .waitForElementPresent('input[name="benefits"]', 5000)
       .back()
-      .waitForElementPresent('input[name="have_partner"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 5000)
     ;
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, 'in_dispute', 0);
     common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
     client
       .submitForm('form')
-      .waitForElementPresent('input[name="benefits"]', 2000)
+      .waitForElementPresent('input[name="benefits"]', 5000)
       .submitForm('form')
-      .waitForElementPresent('input[name="other_benefits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 5000)
     ;
     common.checkTextIsEqual(client, 'h1', 'You and your partner’s benefits and tax credits');
   },
@@ -61,17 +61,17 @@ module.exports = {
     });
     client
       .back()
-      .waitForElementPresent('input[name="benefits"]', 2000)
+      .waitForElementPresent('input[name="benefits"]', 5000)
       .back()
-      .waitForElementPresent('input[name="have_partner"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 5000)
     ;
     common.setYesNoFields(client, 'have_children', 1);
     client
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
-      .waitForElementPresent('input[name="benefits"]', 2000)
+      .waitForElementPresent('input[name="benefits"]', 5000)
       .submitForm('form')
-      .waitForElementPresent('input[name="other_benefits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 5000)
     ;
     CHILD_BENEFIT_QUESTIONS.forEach(function(item) {
       client.assert.visible(util.format('input[name="%s-per_interval_value"]', item));
@@ -86,33 +86,51 @@ module.exports = {
       client
         .setValue(util.format('input[name="%s-per_interval_value"]', item), '100')
       ;
-      common.submitAndCheckForFieldError(client, item + '-per_interval_value', 'Please select a time period from the drop down');
+      common.submitAndCheckForFieldError(client, [{
+        name: item + '-per_interval_value',
+        errorText: 'Please select a time period from the drop down'
+      }]);
       client
         .clearValue(util.format('input[name="%s-per_interval_value"]', item))
         .click(util.format('select[name="%s-interval_period"]', item))
-        .click(util.format('select[name="%s-interval_period"] option:last-child', item))
+        .click(util.format('select[name="%s-interval_period"] option:first-child + option', item))
       ;
-      common.submitAndCheckForFieldError(client, item + '-interval_period', 'Not a valid amount', 'select');
+      common.submitAndCheckForFieldError(client, [{
+        name: item + '-interval_period',
+        errorText: 'Not a valid amount'
+      }], 'select');
       client
         .setValue(util.format('input[name="%s-per_interval_value"]', item), '100')
       ;
     });
 
-    common.submitAndCheckForFieldError(client, 'other_benefits', 'Please choose Yes or No');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'other_benefits',
+      errorText: 'Please choose Yes or No'
+    }]);
     client.click('input[name="other_benefits"][value="1"]');
-    common.submitAndCheckForFieldError(client, 'other_benefits', 'Please provide an amount');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'other_benefits',
+      errorText: 'Please provide an amount'
+    }]);
     client.setValue('input[name="total_other_benefit-per_interval_value"]', '100');
-    common.submitAndCheckForFieldError(client, 'other_benefits', 'Please select a time period from the drop down');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'other_benefits',
+      errorText: 'Please select a time period from the drop down'
+    }]);
     client
       .clearValue('input[name="total_other_benefit-per_interval_value"]')
       .click('select[name="total_other_benefit-interval_period"]')
-      .click('select[name="total_other_benefit-interval_period"] option:last-child')
+      .click('select[name="total_other_benefit-interval_period"] option:first-child + option')
     ;
-    common.submitAndCheckForFieldError(client, 'other_benefits', 'Not a valid amount');
+    common.submitAndCheckForFieldError(client, [{
+      name: 'other_benefits',
+      errorText: 'Not a valid amount'
+    }]);
     client
       .setValue('input[name="total_other_benefit-per_interval_value"]', '100')
       .submitForm('form')
-      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 2000)
+      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
       .assert.urlContains('/income')
     ;
   },
@@ -122,7 +140,7 @@ module.exports = {
     common.selectDebtCategory(client);
 
     client
-      .waitForElementPresent('input[name="have_partner"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 5000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
     ;
@@ -131,7 +149,7 @@ module.exports = {
     client
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
-      .waitForElementPresent('input[name="other_benefits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 5000)
       .assert.urlContains('/benefits-tax-credits')
     ;
 
@@ -142,7 +160,7 @@ module.exports = {
     common.selectDebtCategory(client);
 
     client
-      .waitForElementPresent('input[name="have_partner"]', 2000)
+      .waitForElementPresent('input[name="have_partner"]', 5000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
     ;
@@ -151,7 +169,7 @@ module.exports = {
     client
       .setValue('input[name="num_dependants"]', 1)
       .submitForm('form')
-      .waitForElementPresent('input[name="other_benefits"]', 2000)
+      .waitForElementPresent('input[name="other_benefits"]', 5000)
       .assert.urlContains('/benefits-tax-credits')
     ;
 

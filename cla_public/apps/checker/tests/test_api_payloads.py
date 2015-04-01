@@ -6,6 +6,7 @@ import unittest
 import pytz
 from werkzeug.datastructures import MultiDict
 
+from cla_common import call_centre_availability
 from cla_public import app
 from cla_public.apps.contact.tests.test_availability import \
     override_current_time
@@ -454,7 +455,7 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['deductions']['childcare']['per_interval_value'], 4900)
         self.assertEqual(payload['you']['deductions']['childcare']['interval_period'], 'per_week')
 
-    def test_application_form(self):
+    def application_form_data(self):
         adaptations_data = {
             'bsl_webcam': YES,
             'minicom': YES,
@@ -487,6 +488,11 @@ class TestApiPayloads(unittest.TestCase):
         form_data.update(flatten_dict('adaptations', adaptations_data))
         form_data.update(flatten_dict('callback', callback_data))
         form_data.update(flatten_dict('address', address_data))
+
+        return form_data
+
+    def test_application_form(self):
+        form_data = self.application_form_data()
         with override_current_time(self.now):
             payload = self.payload(ContactForm, form_data)
 
@@ -502,6 +508,29 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
             self.assertEqual(payload['adaptation_details']['notes'], 'other')
 
-            time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 30))
+            time = datetime.datetime.combine(
+                call_centre_availability.current_datetime().date(),
+                datetime.time(19, 30))
 
             self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
+
+    def test_callback_timezone_change(self):
+        london = pytz.timezone('Europe/London')
+        local = lambda *args: london.localize(datetime.datetime(*args))
+        to_utc = lambda dt: dt.astimezone(pytz.utc)
+        utc = lambda *args: datetime.datetime(*args).replace(tzinfo=pytz.utc)
+        naive = lambda dt: dt.replace(tzinfo=None)
+
+        winter_time = naive(to_utc(local(2015, 3, 27, 17, 30)))
+        summer_time = naive(to_utc(local(2015, 3, 30, 17, 30)))
+
+        def assertScheduledTime(expected, now):
+            with override_current_time(now):
+                form_data = self.application_form_data()
+                payload = self.payload(ContactForm, form_data)
+                expected = expected.isoformat()
+                self.assertEqual(payload['requires_action_at'], expected)
+
+        assertScheduledTime(utc(2015, 3, 27, 19, 30), winter_time)
+
+        assertScheduledTime(utc(2015, 3, 30, 18, 30), summer_time)

@@ -6,7 +6,6 @@ import datetime
 import random
 
 from flask.ext.babel import lazy_gettext as _
-import pytz
 from wtforms import FormField, RadioField, SelectField
 from wtforms import Form as NoCsrfForm
 from wtforms.validators import InputRequired, ValidationError
@@ -163,7 +162,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
         """
         Get the datetime of the selected day and timeslot
         """
-        date = today or datetime.date.today()
+        date = today or call_centre_availability.current_datetime().date()
         time = None
 
         if self.specific_day.data == DAY_TODAY:
@@ -194,7 +193,7 @@ class AvailabilityCheckerField(FormField):
         return self.scheduled_time()
 
     def scheduled_time(self):
-        return self.form.scheduled_time().replace(tzinfo=pytz.utc)
+        return self.form.scheduled_time()
 
 
 class ValidatedFormField(FormField):

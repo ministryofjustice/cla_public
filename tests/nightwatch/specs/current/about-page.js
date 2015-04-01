@@ -43,9 +43,15 @@ module.exports = {
 
   'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
+    var questions = [];
     ABOUT_YOU_QUESTIONS.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item, 'Please choose Yes or No');
+      questions.push({
+        name: item,
+        errorText: 'Please choose Yes or No'
+      });
     });
+    common.submitAndCheckForFieldError(client, questions);
+
     FIELDS_WITH_SUBFIELDS.forEach(function(item) {
       common.aboutPageSetAllToNo(client);
       client.assert.hidden(util.format('input[name="%s"]', item.subfield_name));
@@ -54,7 +60,10 @@ module.exports = {
       common.setYesNoFields(client, item.field_name, 0);
       client.assert.hidden(util.format('input[name="%s"]', item.subfield_name));
       common.setYesNoFields(client, item.field_name, 1);
-      common.submitAndCheckForFieldError(client, item.field_name, item.errorText);
+      common.submitAndCheckForFieldError(client, [{
+        name: item.field_name,
+        errorText: item.errorText
+      }]);
     });
   },
 
@@ -62,10 +71,10 @@ module.exports = {
     common.aboutPageSetAllToNo(client);
     client
       .submitForm('form')
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
       .assert.urlContains('/income', 'Goes to /income when all answers are No')
-      .back()
-      .waitForElementVisible('input[name="have_partner"]', 2000)
+      .url(client.launch_url + '/about')
+      .waitForElementVisible('input[name="have_partner"]', 5000)
     ;
     OUTCOMES.forEach(function(item) {
       common.aboutPageSetAllToNo(client);
@@ -74,8 +83,8 @@ module.exports = {
         .submitForm('form')
         .waitForElementVisible(util.format('input[name="%s"]', item.input), 5000)
         .assert.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
-        .back()
-        .waitForElementVisible('input[name="have_partner"]', 2000)
+        .url(client.launch_url + '/about')
+        .waitForElementVisible('input[name="have_partner"]', 5000)
       ;
     });
 

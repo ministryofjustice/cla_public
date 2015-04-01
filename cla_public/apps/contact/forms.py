@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 "Contact forms"
 
-from flask import session
+from flask import current_app, session
 from flask.ext.babel import lazy_gettext as _
 from flask_wtf import Form
+import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, FormField, RadioField, SelectField, \
     StringField, TextAreaField
@@ -12,10 +13,11 @@ from wtforms.validators import InputRequired, Optional, Length
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
-from cla_public.apps.checker.constants import CONTACT_SAFETY, CONTACT_PREFERENCE, \
-    YES, NO
+from cla_public.apps.checker.constants import CONTACT_SAFETY, \
+    CONTACT_PREFERENCE, YES, NO
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
-from cla_public.apps.checker.validators import NotRequired, IgnoreIf, FieldValue
+from cla_public.apps.checker.validators import NotRequired, IgnoreIf, \
+    FieldValue
 from cla_public.libs.honeypot import Honeypot
 
 
@@ -76,13 +78,13 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
         validators=[
             Length(max=12, message=_(u'Your postcode must be 12 characters '
                                      u'or less')),
-            NotRequired()])
+            Optional()])
     street_address = TextAreaField(
         _(u'Street address'),
         validators=[
             Length(max=255, message=_(u'Your address must be 255 characters '
                                       u'or less')),
-            NotRequired()])
+            Optional()])
 
 
 class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
@@ -108,8 +110,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             IgnoreIf('callback_requested', FieldValue(NO))
         ])
     address = ValidatedFormField(
-        AddressForm,
-        validators=[Optional()])
+        AddressForm)
     extra_notes = TextAreaField(
         _(u'Help the operator to understand your situation'),
         description=(_(
@@ -147,6 +148,12 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             }
         }
         if self.callback_requested.data == YES:
-            data['requires_action_at'] = self.callback.form.time.scheduled_time().isoformat()
+
+            # all time slots are timezone naive (local time)
+            # so we convert them to UTC for the backend
+            naive = self.callback.form.time.scheduled_time()
+            local_tz = pytz.timezone(current_app.config['TIMEZONE'])
+            local = local_tz.localize(naive)
+            data['requires_action_at'] = local.astimezone(pytz.utc).isoformat()
 
         return data
