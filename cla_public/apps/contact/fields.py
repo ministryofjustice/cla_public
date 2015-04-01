@@ -79,6 +79,11 @@ class DayChoiceField(FormattedChoiceField, SelectField):
         return '{:%Y%m%d}'.format(value)
 
 
+# XXX - temporarily disable 0900 and 0930 while bug being fixed
+def not_before_10am(time):
+    return time.time() >= datetime.time(10)
+
+
 class TimeChoiceField(FormattedChoiceField, SelectField):
     """
     Select field with available time slots for a specific day as options
@@ -86,7 +91,10 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
 
     def __init__(self, choices_callback=None, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
-        self.choices = map(time_choice, choices_callback())
+        # XXX
+        self.choices = map(
+            time_choice,
+            filter(not_before_10am, choices_callback()))
         if self.choices:
             self.default, display = random.choice(self.choices)
 
