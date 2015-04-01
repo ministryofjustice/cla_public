@@ -21,7 +21,7 @@ module.exports = {
 
   'Savings page': function(client) {
     client
-      .waitForElementVisible('input[name="savings"]', 2000)
+      .waitForElementVisible('input[name="savings"]', 5000)
       .assert.urlContains('/savings')
       .assert.containsText('h1', 'Your savings')
     ;
@@ -31,14 +31,14 @@ module.exports = {
     client
       .assert.containsText('body', 'We need to know about any money you have saved or invested.')
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 2000)
+      .waitForElementVisible('input[name="have_partner"]', 5000)
     ;
     common.setYesNoFields(client, 'have_partner', 1);
     common.setYesNoFields(client, 'in_dispute', 0);
     common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
     client
       .submitForm('form')
-      .waitForElementVisible('input[name="savings"]', 2000)
+      .waitForElementVisible('input[name="savings"]', 5000)
       .assert.urlContains('/savings')
       .assert.containsText('h1', 'You and your partner’s savings')
       .assert.containsText('body', 'Any cash, savings or investments held in your name, your partner’s name or both your names')
@@ -48,9 +48,14 @@ module.exports = {
   'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
+    var questions = [];
     SAVINGS_QUESTIONS.MONEY.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item.name, item.errorText);
+      questions.push({
+        name: item.name,
+        errorText: item.errorText
+      });
     });
+    common.submitAndCheckForFieldError(client, questions);
     SAVINGS_QUESTIONS.VALUABLES.forEach(function(item) {
       client.assert.elementNotPresent(util.format('input[name="%s"]', item.name));
     });
@@ -65,11 +70,16 @@ module.exports = {
     common.setYesNoFields(client, 'have_valuables', 1);
     client
       .submitForm('form')
-      .waitForElementVisible('input[name="valuables"]', 2000)
+      .waitForElementVisible('input[name="valuables"]', 5000)
     ;
+    var questions = [];
     SAVINGS_QUESTIONS.VALUABLES.forEach(function(item) {
-      common.submitAndCheckForFieldError(client, item.name, item.errorText);
+      questions.push({
+        name: item.name,
+        errorText: item.errorText
+      });
     });
+    common.submitAndCheckForFieldError(client, questions);
     SAVINGS_QUESTIONS.MONEY.forEach(function(item) {
       client.assert.elementNotPresent(util.format('input[name="%s"]', item.name));
     });
@@ -84,15 +94,15 @@ module.exports = {
     common.setYesNoFields(client, ['have_valuables', 'have_savings'], 1);
     client
       .submitForm('form')
-      .waitForElementVisible('input[name="savings"]', 2000)
+      .waitForElementVisible('input[name="savings"]', 5000)
     ;
     common.setAllSavingsFieldsToValue(client, 500);
     client
       .submitForm('form')
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
       .assert.urlContains('/income', 'Should arrive at income page when all savings/money fields set to £500')
       .back()
-      .waitForElementVisible('input[name="savings"]', 2000)
+      .waitForElementVisible('input[name="savings"]', 5000)
     ;
 
     SAVINGS_QUESTIONS.ALL.forEach(function(item) {
@@ -114,10 +124,10 @@ module.exports = {
       }
       client
         .submitForm('form')
-        .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 2000)
+        .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
         .assert.urlContains('/income', util.format('Should arrive at income page when %s field set to %s and others to £0', item.name, SAVINGS_THRESHOLD))
         .back()
-        .waitForElementVisible('input[name="savings"]', 2000)
+        .waitForElementVisible('input[name="savings"]', 5000)
       ;
     });
 
@@ -131,7 +141,7 @@ module.exports = {
       common.setYesNoFields(client, ['have_savings', 'have_valuables'], 1);
       client
         .submitForm('form')
-        .waitForElementVisible('input[name="savings"]', 2000)
+        .waitForElementVisible('input[name="savings"]', 5000)
       ;
       // set all to 0
       common.setAllSavingsFieldsToValue(client, 0);
@@ -151,7 +161,7 @@ module.exports = {
       }
       client
         .submitForm('form')
-        .waitForElementVisible('a[href="https://www.gov.uk/find-a-legal-adviser"]', 2000)
+        .waitForElementVisible('a[href="https://www.gov.uk/find-a-legal-adviser"]', 5000)
         .assert.urlContains('/help-organisations', util.format('Result ineligible when %s field set to £%s', item.name, (SAVINGS_THRESHOLD + 1)))
       ;
     });

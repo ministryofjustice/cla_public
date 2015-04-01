@@ -100,6 +100,8 @@ OPERATOR_HOURS = {
     '2014-12-31': (datetime.time(9, 0), datetime.time(18, 30)),
 }
 
+TIMEZONE = 'Europe/London'
+
 # local.py overrides all the common settings.
 try:
     from cla_public.config.local import *

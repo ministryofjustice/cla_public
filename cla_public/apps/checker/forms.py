@@ -285,14 +285,14 @@ class PropertyForm(BabelTranslationsFormMixin, NoCsrfForm, FormSessionDataMixin)
         validators=[
             InputRequired(_(u'Please enter 0 if you have no mortgage'))])
     mortgage_payments = MoneyField(
-        _(u'How much are your monthly mortgage repayments?'),
+        _(u'How much was your monthly mortgage repayment last month?'),
         validators=[IgnoreIf('mortgage_remaining', FieldValue(0))])
     is_rented = YesNoField(
         _(u'Do you rent out any part of this property?'),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
     rent_amount = MoneyIntervalField(
-        _(u'If Yes, how much rent do you receive?'),
+        _(u'If Yes, how much rent did you receive last month?'),
         choices=money_intervals_except('per_4week'),
         validators=[
             IgnoreIf('is_rented', FieldValue(NO)),

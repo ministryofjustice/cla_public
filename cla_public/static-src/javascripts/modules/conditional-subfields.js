@@ -16,7 +16,8 @@
 
       this.conditionalFields
         .each(function() {
-          var $fields = $('[name="' + $(this).data().controlledBy + '"]');
+          var $fields = $('[name="' + $(this).data('controlled-by') + '"]');
+
           $fields = $fields.filter(function() {
             // Unchecked checkbox or checked radio button
             return this.type === 'checkbox' || $(this).is(':checked');
@@ -42,7 +43,7 @@
       var self = this;
 
       var controllers = $.unique(this.conditionalFields.map(function() {
-        return $(this).data().controlledBy;
+        return $(this).data('controlled-by');
       }));
 
       $.each(controllers, function() {
@@ -59,9 +60,16 @@
     },
 
     _handleField: function($field) {
-      var controlInputName = $field.data().controlledBy;
-      var controlInputValue = $field.data().controlValue + '';
-      var $controlInput = $('[name="' + controlInputName + '"][value="' + controlInputValue + '"]');
+      // `controlled-by` specifies the field name which controls the visibility of element
+      var controlInputName = $field.data('controlled-by');
+      // `control-value` is the value which should trigger the visibility of element
+      var controlInputValue = $field.data('control-value') + '';
+      var $controlInput = $('[name="' + controlInputName + '"]');
+
+      // control visibility only for specified value (unless it's a wildcard `*`)
+      if(controlInputValue && controlInputValue !== '*') {
+        $controlInput = $controlInput.filter('[value="' + controlInputValue + '"]');
+      }
 
       this._toggleField($field, $controlInput.is(':checked'));
     },

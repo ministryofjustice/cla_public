@@ -6,6 +6,7 @@ import unittest
 import pytz
 from werkzeug.datastructures import MultiDict
 
+from cla_common import call_centre_availability
 from cla_public import app
 from cla_public.apps.contact.tests.test_availability import \
     override_current_time
@@ -20,6 +21,13 @@ from cla_public.apps.checker.tests.utils.forms_utils import flatten_dict, \
 
 def get_en_locale():
     return 'en'
+
+
+def money_interval(amount=None, interval='per_month'):
+    return {
+        'per_interval_value': amount,
+        'interval_period': interval
+    }
 
 
 class TestApiPayloads(unittest.TestCase):
@@ -323,6 +331,87 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['deductions']['income_tax']['per_interval_value'], 200)
         self.assertEqual(payload['deductions']['national_insurance']['per_interval_value'], 300)
 
+    def test_total_rents_and_other_income(self):
+        session['AboutYouForm'] = {
+            'own_property': YES}
+        session['PropertiesForm'] = {
+            'properties': [
+                {
+                    'is_main_home': YES,
+                    'other_shareholders': NO,
+                    'property_value': '20,000.00',
+                    'mortgage_remaining': '10,000.00',
+                    'mortgage_payments': '700.00',
+                    'is_rented': YES,
+                    'rent_amount': {
+                        'per_interval_value': 10000,
+                        'interval_period': 'per_month'
+                    },
+                    'in_dispute': NO
+                },
+                {
+                    'is_main_home': NO,
+                    'other_shareholders': NO,
+                    'property_value': '20,000.00',
+                    'mortgage_remaining': '10,000.00',
+                    'mortgage_payments': '800.00',
+                    'is_rented': YES,
+                    'rent_amount': money_interval(5000),
+                    'in_dispute': NO
+                }
+            ]
+        }
+
+        def post_money_interval(key, amount=None, interval='per_month'):
+            val = {}
+            val['your_income-%s-per_interval_value' % key] = amount
+            val['your_income-%s-interval_period' % key] = interval
+            return val
+
+        post_data = {}
+        post_data.update(post_money_interval('earnings', '10.00'))
+        post_data.update(post_money_interval('income_tax', '0'))
+        post_data.update(post_money_interval('national_insurance', '0'))
+        post_data.update(post_money_interval('working_tax_credit', '0'))
+        post_data.update(post_money_interval('maintenance', '0'))
+        post_data.update(post_money_interval('pension', '0'))
+        post_data.update(post_money_interval('other_income', '200.00'))
+        payload = self.payload(IncomeForm, post_data)
+
+        self.assertEqual(
+            money_interval(35000),
+            payload['you']['income']['other_income'])
+
+    def test_total_tax_credits(self):
+        session['AboutYouForm'] = {
+            'have_children': YES,
+            'num_children': 1}
+        session['TaxCreditsForm'] = {
+            'child_benefit': money_interval(0),
+            'child_tax_credit': money_interval(1000),
+            'benefits': [],
+            'other_benefits': NO}
+
+        def post_money_interval(key, amount=None, interval='per_month'):
+            val = {}
+            val['your_income-%s-per_interval_value' % key] = amount
+            val['your_income-%s-interval_period' % key] = interval
+            return val
+
+        post_data = {}
+        post_data.update(post_money_interval('earnings', '10.00'))
+        post_data.update(post_money_interval('income_tax', '0'))
+        post_data.update(post_money_interval('national_insurance', '0'))
+        post_data.update(post_money_interval('working_tax_credit', '5.00'))
+        post_data.update(post_money_interval('maintenance', '0'))
+        post_data.update(post_money_interval('pension', '0'))
+        post_data.update(post_money_interval('other_income', '200.00'))
+        payload = self.payload(IncomeForm, post_data)
+
+        self.assertEqual(
+            money_interval(1500),
+            payload['you']['income']['tax_credits'])
+
     def test_income_and_tax_form(self):
         session['AboutYouForm'] = session.get('AboutYouForm', {})
         session['AboutYouForm'].update(
@@ -366,7 +455,7 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['deductions']['childcare']['per_interval_value'], 4900)
         self.assertEqual(payload['you']['deductions']['childcare']['interval_period'], 'per_week')
 
-    def test_application_form(self):
+    def application_form_data(self):
         adaptations_data = {
             'bsl_webcam': YES,
             'minicom': YES,
@@ -399,6 +488,11 @@ class TestApiPayloads(unittest.TestCase):
         form_data.update(flatten_dict('adaptations', adaptations_data))
         form_data.update(flatten_dict('callback', callback_data))
         form_data.update(flatten_dict('address', address_data))
+
+        return form_data
+
+    def test_application_form(self):
+        form_data = self.application_form_data()
         with override_current_time(self.now):
             payload = self.payload(ContactForm, form_data)
 
@@ -414,6 +508,29 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
             self.assertEqual(payload['adaptation_details']['notes'], 'other')
 
-            time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 30))
+            time = datetime.datetime.combine(
+                call_centre_availability.current_datetime().date(),
+                datetime.time(19, 30))
 
             self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
+
+    def test_callback_timezone_change(self):
+        london = pytz.timezone('Europe/London')
+        local = lambda *args: london.localize(datetime.datetime(*args))
+        to_utc = lambda dt: dt.astimezone(pytz.utc)
+        utc = lambda *args: datetime.datetime(*args).replace(tzinfo=pytz.utc)
+        naive = lambda dt: dt.replace(tzinfo=None)
+
+        winter_time = naive(to_utc(local(2015, 3, 27, 17, 30)))
+        summer_time = naive(to_utc(local(2015, 3, 30, 17, 30)))
+
+        def assertScheduledTime(expected, now):
+            with override_current_time(now):
+                form_data = self.application_form_data()
+                payload = self.payload(ContactForm, form_data)
+                expected = expected.isoformat()
+                self.assertEqual(payload['requires_action_at'], expected)
+
+        assertScheduledTime(utc(2015, 3, 27, 19, 30), winter_time)
+
+        assertScheduledTime(utc(2015, 3, 30, 18, 30), summer_time)

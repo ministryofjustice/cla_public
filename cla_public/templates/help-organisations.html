@@ -56,15 +56,14 @@
     <a class="button" href="https://www.gov.uk/find-a-legal-adviser">{{ _('Find a legal adviser') }}</a>
   </p>
 
-  <p>
-    {% trans %}You may still get free help and advice from the organisations listed
-    below. You don’t have to qualify for legal aid to get help and advice
-    from these organisations.{% endtrans %}
-  </p>
-
   {% if organisations %}
     <div class="help-organisations">
-      <h2>{{ _('Help organisations for problems about %(category_name)s', category_name=category_name|lower) }}</h2>
+      <h2>{{ _('Free help organisations for problems about %(category_name)s', category_name=(category_name if category != 'violence' else 'domestic violence')|lower) }}</h2>
+      <p>
+        {% trans %}You may still get free help and advice from the organisations listed
+        below. You don’t have to qualify for legal aid to get help and advice
+        from these organisations.{% endtrans %}
+      </p>
       <ul class="org-list">
         {% for org in organisations %}
           {% set has_contact_details = org.telephone_numbers or org.email %}
@@ -116,4 +115,6 @@
   {% else %}
     <p>{{ _('There has been a problem with listing help organisations. Please refresh this page or try again later.') }}</p>
   {% endif %}
+
+  {{ Element.satisfaction_survey_prompt() }}
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% import "macros/element.html" as Element %}
+
 {% block inner_content %}
 
   {% if session.category == 'employment' %}
@@ -75,4 +77,6 @@
       <li><a href="http://www.lawcentres.org.uk" rel="external">{{ _('Law Centres Network') }}</a></li>
     </ul>
   {% endif %}
+
+  {{ Element.satisfaction_survey_prompt() }}
 {% endblock %}

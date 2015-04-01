@@ -16,6 +16,8 @@
     {% trans %}We need to know about any benefits and tax credits your whole household receives.
     Please answer these questions as fully and accurately as you can.{% endtrans %}
   </p>
+  <p>{{ _('When you speak to CLA, you will need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+
   <form method="POST">
     {{ form.csrf_token }}
 
@@ -25,7 +27,7 @@
     {{ Form.money_interval_fieldset(form.child_tax_credit, not session.has_children) }}
     {{ Form.option_list_fieldset(form.benefits) }}
     {% call Form.fieldset(form.other_benefits) %}
-      {{ Form.yesno(form.other_benefits) }}
+      {{ Form.radio_buttons(form.other_benefits) }}
       {{ Form.money_interval_fieldset(form.total_other_benefit, is_subfield=True, controlled_by=form.other_benefits) }}
     {% endcall %}
 

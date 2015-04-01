@@ -13,13 +13,13 @@ var eligibleJourney = function(client) {
   common.setYesNoFields(client, 'on_benefits', 1);
   client
     .submitForm('form')
-    .waitForElementVisible('input[name="benefits"]', 2000)
+    .waitForElementVisible('input[name="benefits"]', 5000)
     .assert.urlContains('/benefits')
     .assert.containsText('h1', 'Your benefits')
     .assert.containsText('body', 'Are you on any of these benefits?')
     .click('input[value="income_support"]')
     .submitForm('form')
-    .waitForElementVisible('input[name="callback_requested"]', 2000)
+    .waitForElementVisible('input[name="callback_requested"]', 5000)
     .assert.urlContains('/result/eligible')
     .assert.containsText('h1', 'You might qualify for legal aid')
     .assert.containsText('h2', 'Contact Civil Legal Advice')
@@ -39,7 +39,7 @@ var checkCallbackTime = function(client, then, time) {
 
   client
     .submitForm('form')
-    .waitForElementVisible('header.confirmation', 2000)
+    .waitForElementVisible('header.confirmation', 5000)
     .assert.containsText('h1', 'We will call you back')
     .verify.containsText('.main-content', formattedCallbackTime)
   ;
@@ -76,22 +76,19 @@ module.exports = {
 
     client
       .click('input[name="specific_day"][value="specific_day"]')
-      .click('select#id_day')
-      .click('select#id_day option:last-child')
-      .click('select#id_time_in_day')
-      .click('select#id_time_in_day option:last-child')
+      .click('select#id_day option:first-child')
       .click('body')
-      .getValue('select#id_day option:last-child', function(result) {
+      .click('select#id_time_in_day option:first-child')
+      .click('body')
+      .getValue('select#id_day option:first-child', function(result) {
         var selectedDate = result.value;
-        client.getValue('select#id_time_in_day option:last-child', function(result) {
+        client.getValue('select#id_time_in_day option:first-child', function(result) {
           var then = moment([selectedDate.substr(0, 4), parseInt(selectedDate.substr(4, 2))-1, selectedDate.substr(6, 2)]);
           checkCallbackTime(client, then, result.value);
         });
       })
     ;
-  },
 
-  'end': function(client) {
     client.end();
   }
 
