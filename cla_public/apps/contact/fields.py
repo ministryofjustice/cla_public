@@ -163,7 +163,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
         """
         Get the datetime of the selected day and timeslot
         """
-        date = today or datetime.date.today()
+        date = today or call_centre_availability.current_datetime().date()
         time = None
 
         if self.specific_day.data == DAY_TODAY:
