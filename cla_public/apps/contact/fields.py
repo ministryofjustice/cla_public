@@ -6,7 +6,6 @@ import datetime
 import random
 
 from flask.ext.babel import lazy_gettext as _
-import pytz
 from wtforms import FormField, RadioField, SelectField
 from wtforms import Form as NoCsrfForm
 from wtforms.validators import InputRequired, ValidationError
