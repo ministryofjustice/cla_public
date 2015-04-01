@@ -194,7 +194,7 @@ class AvailabilityCheckerField(FormField):
         return self.scheduled_time()
 
     def scheduled_time(self):
-        return self.form.scheduled_time().replace(tzinfo=pytz.utc)
+        return self.form.scheduled_time()
 
 
 class ValidatedFormField(FormField):
