@@ -6,6 +6,15 @@
 
   {% import "macros/element.html" as Element %}
 
+  {% if data.origin %}
+    {% set title_prefix = _('Results for ') + data.origin.postcode + ' | ' %}
+  {% else %}
+    {% set title_prefix = '' %}
+  {% endif %}
+
+  {% set title = title_prefix + _('Seek legal advice') %}
+  {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
   {% block inner_content %}
 
     {% if session.category == 'employment' %}
