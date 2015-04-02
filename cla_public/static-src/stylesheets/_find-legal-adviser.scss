@@ -80,7 +80,7 @@ $map-height: 460px;
     overflow: hidden;
     border-top: 2px solid $grey-3;
     margin: 1em 0;
-    padding: 10px;
+    padding-top: 10px;
 
     @include media(tablet) {
       background: $grey-4;
@@ -150,6 +150,12 @@ $map-height: 460px;
 
 
 .js-enabled .find-legal-adviser {
+  .results-location {
+    padding-left: 20px;
+    background: url(../images/icons/icon-location.png) .17em .17em no-repeat;
+    background: url(../images/icons/icon-location-2x.png) .2em .2em / 16px no-repeat;
+  }
+
   .map {
     display: block;
     height: $map-height;

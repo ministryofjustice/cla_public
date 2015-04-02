@@ -11,7 +11,8 @@
 
   {% if data.results %}
     <p class="results-summary">
-      Showing {{ data.results|length }} results around {{ data.origin.postcode }}
+      Showing {{ data.results|length }} results around
+      <span class="results-location">{{ data.origin.postcode }}</span>
     </p>
 
     <div class="search-results-container">
