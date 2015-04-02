@@ -11,12 +11,11 @@
     init: function() {
       this.cacheEls();
 
+      this._handleMQTest();
 
       if(!this.resultsMap.length) {
         return;
       }
-
-      this._handleMQTest();
 
       this.renderMap(this.resultsMap.data('lat'), this.resultsMap.data('lon'));
       this._prepareMarkers();
@@ -64,6 +63,10 @@
 
         if(window.history && history.pushState) {
           history.pushState(null, null, url);
+        }
+
+        if(!self.resultsMap.length) {
+          $('<p class="loading">' + window.LABELS.loading + '</p>').insertAfter($(this));
         }
       });
 
