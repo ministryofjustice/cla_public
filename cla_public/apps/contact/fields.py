@@ -25,6 +25,11 @@ OPERATOR_HOURS.day_hours.insert(0, (
     monday_before_11am_between_eod_friday_and_monday, None))
 
 
+# XXX - disable time slots before 10am while UTC/BST bug exists
+def not_before_10am(slot):
+    return slot.time() >= datetime.time(10)
+
+
 class FormattedChoiceField(object):
     """
     Mixin for fields applying a formatting function to values
@@ -58,6 +63,8 @@ class DayChoiceField(FormattedChoiceField, SelectField):
         def time_slots(day):
             slots = OPERATOR_HOURS.time_slots(day.date())
             slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
+            # XXX
+            slots = filter(not_before_10am, slots)
             slots = OrderedDict(map(time_choice, slots))
             return (self._format(day), slots)
 
@@ -86,7 +93,10 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
 
     def __init__(self, choices_callback=None, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
-        self.choices = map(time_choice, choices_callback())
+        # XXX
+        self.choices = map(
+            time_choice,
+            filter(not_before_10am, choices_callback()))
         if self.choices:
             self.default, display = random.choice(self.choices)
 
