@@ -115,12 +115,13 @@ class TestDayTimeChoices(unittest.TestCase):
             field = DayChoiceField()
             field = field.bind(form, 'day')
             choices = field.day_time_choices
+            # XXX - choices restricted temporarily
             # half day on saturday
-            self.assertEqual(7, len(choices['20150214']))
+            self.assertEqual(5, len(choices['20150214']))
             # can't book before 11am on monday because we're after hours friday
             self.assertEqual(18, len(choices['20150216']))
             # can book any slot on tuesday
-            self.assertEqual(22, len(choices['20150217']))
+            self.assertEqual(20, len(choices['20150217']))
 
 
 class TestCallbackInPastBug(unittest.TestCase):
