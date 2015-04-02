@@ -6,25 +6,38 @@
     markers: [],
     searchLocationMarker: null,
     openInfoWindow: null,
+    eventsBound: false,
 
     init: function() {
       this.cacheEls();
 
-      // Bind events for functionality that relies on media queries
-      if(window.matchMedia) {
-        this.bindEvents();
-      }
 
       if(!this.resultsMap.length) {
         return;
       }
 
+      this._handleMQTest();
+
       this.renderMap(this.resultsMap.data('lat'), this.resultsMap.data('lon'));
       this._prepareMarkers();
+
+      $(window).resize(_.debounce($.proxy(this._handleMQTest, this), 500));
+    },
+
+    // Handle eventsw which rely on media queries
+    _handleMQTest: function() {
+      if(window.Modernizr.mq('(min-width: 641px)')) {
+        if(!this.eventsBound) {
+          this.bindEvents();
+        }
+      } else if(this.eventsBound) {
+        this._unbindEvents();
+      }
     },
 
     bindEvents: function() {
       var self = this;
+
       this.organisationListItems.on('click', function(evt) {
         self._handleItemHighlight(evt, this);
       });
@@ -57,6 +70,17 @@
       window.onpopstate = function() {
         self._fetchPage(document.location.href);
       };
+
+      this.eventsBound = true;
+    },
+
+    _unbindEvents: function() {
+      this.organisationListItems.unbind('click');
+      this.resultsPagination.unbind('click');
+      this.findLegalAdviserForm.unbind('submit');
+      window.onpopstate = null;
+
+      this.eventsBound = false;
     },
 
     _fetchPage: function(url) {
@@ -66,6 +90,7 @@
         .success(function(data) {
           self.findLegalAdviserContainer.replaceWith(data);
           self.markers = [];
+          self.eventsBound = false;
           self.init();
         })
         .error();
