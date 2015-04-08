@@ -124,6 +124,9 @@ class AboutYouPayload(dict):
         else:
             payload = recursive_update(payload, SavingsPayload.default)
 
+        if not yes('on_benefits'):
+            payload = recursive_update(payload, YourBenefitsPayload.default)
+
         payload = recursive_update(payload, IncomePayload())
         payload = recursive_update(payload, OutgoingsPayload())
 
@@ -131,6 +134,12 @@ class AboutYouPayload(dict):
 
 
 class YourBenefitsPayload(dict):
+    @classproperty
+    def default(cls):
+        return {
+            'specific_benefits': {},
+            'on_passported_benefits': NO
+        }
 
     def __init__(self, form_data={}):
         super(YourBenefitsPayload, self).__init__()
