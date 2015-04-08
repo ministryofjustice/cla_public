@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+from cla_common import call_centre_availability
 from flask import session
 from mock import Mock, patch
 import unittest
@@ -419,7 +420,9 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
             self.assertEqual(payload['adaptation_details']['notes'], 'other')
 
-            time = datetime.datetime.combine(datetime.date.today(), datetime.time(19, 30))
+            time = datetime.datetime.combine(
+                call_centre_availability.current_datetime().date(),
+                datetime.time(19, 30))
 
             self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
 
