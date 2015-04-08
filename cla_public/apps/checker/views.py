@@ -162,7 +162,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         if session.needs_face_to_face:
             return True
 
-        if step.name == 'review':
+        if step.name == 'review' and not session.ineligible:
             return False
 
         if step.name not in ('problem', 'about', 'benefits') \
