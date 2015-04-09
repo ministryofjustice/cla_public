@@ -82,7 +82,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     def complete(self):
 
         if session.needs_face_to_face:
-            return redirect(url_for('.face-to-face'))
+            return redirect(url_for('.face-to-face', category=session.category))
 
         if session.ineligible:
             return redirect(url_for(
@@ -121,18 +121,23 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
 checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
 
 
-class FaceToFace(RequiresSession, views.MethodView, object):
-
+class FaceToFace(views.MethodView, object):
     def get(self):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
         data = handle_find_legal_adviser_form(form, request.args)
 
-        if not session.category:
-            session.category_name = 'your issue'
+        session.update({ 'ProblemForm': { 'categories': request.args.get('category') }})
+
+        if session.category:
+            category_name = session.category_name
+        else:
+            category_name = 'your issue'
 
         response = render_template('result/face-to-face.html',
-            data=data, form=form)
+            data=data, form=form, category_name=category_name)
+
         session.clear()
+
         return response
 
 
