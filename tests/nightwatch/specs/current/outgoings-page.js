@@ -37,8 +37,6 @@ module.exports = {
 
   'Childcare fields': function(client) {
     client
-      .assert.hidden('input[name="childcare-per_interval_value"]')
-      .assert.hidden('input[name="childcare-interval_period"]')
       .back()
       .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
       .back()
