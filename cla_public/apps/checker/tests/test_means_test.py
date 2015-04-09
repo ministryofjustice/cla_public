@@ -207,9 +207,15 @@ class TestMeansTest(unittest.TestCase):
         self.assertEqual('family', mt['category'])
 
     def test_about_you_all_no(self):
+        update_session(
+            'AboutYouForm',
+            is_employed=YES,
+            have_children=YES
+        )
+
         mt = MeansTest()
         mt.update_from_form('ProblemForm', {'categories': 'debt'})
-        mt.update_from_form('AboutYouForm', about_you_post_data())
+        mt.update_from_form('AboutYouForm', about_you_post_data(is_employed=YES))
 
         self.assertEqual(NO, mt['on_passported_benefits'])
         self.assertEqual(NO, mt['on_nass_benefits'])
@@ -308,6 +314,11 @@ class TestMeansTest(unittest.TestCase):
         self.assertEqual([], mt['property_set'])
 
     def test_benefits_not_passported(self):
+        update_session(
+            'AboutYouForm',
+            is_employed=YES,
+            have_children=YES
+        )
         mt = MeansTest()
         mt.update_from_form(
             'ProblemForm', {'categories': 'debt'})
@@ -331,6 +342,11 @@ class TestMeansTest(unittest.TestCase):
         self.assertEqual([], mt['property_set'])
 
     def test_property(self):
+        update_session(
+            'AboutYouForm',
+            is_employed=YES,
+            have_children=YES
+        )
         mt = MeansTest()
         mt.update_from_form(
             'ProblemForm', {'categories': 'debt'})
@@ -366,6 +382,11 @@ class TestMeansTest(unittest.TestCase):
         self.assertDictEqual(expected[0], mt['property_set'][0])
 
     def test_multiple_property(self):
+        update_session(
+            'AboutYouForm',
+            is_employed=YES,
+            have_children=YES
+        )
         mt = MeansTest()
         mt.update_from_form(
             'ProblemForm', {'categories': 'debt'})
@@ -429,7 +450,7 @@ class TestMeansTest(unittest.TestCase):
         self.assertIncome(
             mt['you']['income'],
             default=MoneyInterval(0),
-            earnings=MoneyInterval(),
+            earnings=MoneyInterval(0),
             pension=MoneyInterval(),
             maintenance_received=MoneyInterval(),
             other_income=MoneyInterval('100.00'),
@@ -437,6 +458,11 @@ class TestMeansTest(unittest.TestCase):
         )
 
     def test_multiple_rents(self):
+        update_session(
+            'AboutYouForm',
+            is_employed=YES,
+            have_children=YES
+        )
         mt = MeansTest()
         mt.update_from_form(
             'ProblemForm', {'categories': 'debt'})
@@ -520,6 +546,12 @@ class TestMeansTest(unittest.TestCase):
         self.assertTrue(mt['on_nass_benefits'])
 
     def test_child_tax_credits_and_working_tax_credits(self):
+        update_session(
+            'AboutYouForm',
+            is_employed=YES,
+            have_children=YES
+        )
+
         session['TaxCreditsForm'] = {
             'child_tax_credit': MoneyInterval(1000, 'per_week')}
 

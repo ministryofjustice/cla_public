@@ -354,7 +354,7 @@ class IncomePayload(dict):
     def __init__(self, form_data={}):
         super(IncomePayload, self).__init__()
 
-        def income(person, prefix_, self_employed=False):
+        def income(person, prefix_, self_employed=False, employed=False):
             prefix = lambda field: '{0}-{1}'.format(prefix_, field)
             val = lambda field: form_data.get(prefix(field))
             payload = {
@@ -394,12 +394,22 @@ class IncomePayload(dict):
                 payload[person]['income']['self_employment_drawings'] = \
                     MoneyInterval(mi('earnings', val))
 
+            if not employed:
+                payload[person]['income']['earnings'] = MoneyInterval(0)
+                payload[person]['income']['self_employment_drawings'] = \
+                    MoneyInterval(0)
+                payload[person]['income']['tax_credits'] = MoneyInterval(0)
+                payload[person]['deductions']['income_tax'] = MoneyInterval(0)
+                payload[person]['deductions']['national_insurance'] = \
+                    MoneyInterval(0)
+
             return payload
 
         payload = income(
             'you',
             'your_income',
-            session.is_self_employed and not session.is_employed)
+            session.is_self_employed and not session.is_employed,
+            session.is_self_employed or session.is_employed)
 
         child_tax_credit = session.get('TaxCreditsForm', {}).get(
             'child_tax_credit', MoneyInterval(0))
@@ -416,6 +426,8 @@ class IncomePayload(dict):
                 'partner',
                 'partner_income',
                 session.partner_is_self_employed and not
+                session.partner_is_employed,
+                session.partner_is_self_employed or
                 session.partner_is_employed)
             payload = recursive_update(payload, partner_payload)
 
@@ -458,6 +470,8 @@ class OutgoingsPayload(dict):
                 }
             }
         })
+        if not session.has_children and not session.has_dependants:
+            self['you']['deductions']['childcare'] = MoneyInterval(0)
 
 
 class MeansTestError(Exception):

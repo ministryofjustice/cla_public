@@ -345,6 +345,12 @@ class IncomeFieldForm(BaseNoCsrfForm):
     def __init__(self, *args, **kwargs):
         self.is_partner = kwargs.pop('is_partner', False)
         super(IncomeFieldForm, self).__init__(*args, **kwargs)
+        if (not (session.is_employed or session.is_self_employed) and not self.is_partner) or \
+           (not (session.partner_is_employed or session.partner_is_self_employed) and self.is_partner):
+            del self.earnings
+            del self.income_tax
+            del self.national_insurance
+            del self.working_tax_credit
 
     earnings = MoneyIntervalField(
         _(u'Wages before tax'),
@@ -460,6 +466,11 @@ class OutgoingsForm(BaseForm):
             u"of your home"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
+
+    def __init__(self, *args, **kwargs):
+        super(OutgoingsForm, self).__init__(*args, **kwargs)
+        if not session.has_children and not session.has_dependants:
+            del self.childcare
 
 
 class ReviewForm(BaseForm):

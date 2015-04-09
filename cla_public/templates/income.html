@@ -34,10 +34,12 @@
             You should record money coming in for your partner, if you have one, in the next section.{% endtrans %}
           </p>
       {% endif %}
-        {{ Form.money_interval_fieldset(form.your_income.earnings, skip=skip) }}
-        {{ Form.money_interval_fieldset(form.your_income.income_tax, skip=skip) }}
-        {{ Form.money_interval_fieldset(form.your_income.national_insurance, skip=skip) }}
-        {{ Form.money_interval_fieldset(form.your_income.working_tax_credit, skip=skip) }}
+        {% if not skip %}
+          {{ Form.money_interval_fieldset(form.your_income.earnings, skip=skip) }}
+          {{ Form.money_interval_fieldset(form.your_income.income_tax, skip=skip) }}
+          {{ Form.money_interval_fieldset(form.your_income.national_insurance, skip=skip) }}
+          {{ Form.money_interval_fieldset(form.your_income.working_tax_credit, skip=skip) }}
+        {% endif %}
         {{ Form.money_interval_fieldset(form.your_income.maintenance) }}
         {{ Form.money_interval_fieldset(form.your_income.pension) }}
         {{ Form.money_interval_fieldset(form.your_income.other_income) }}
@@ -52,10 +54,12 @@
             <h3>{{ _('Your partner’s money coming in') }}</h3>
           </header>
           <fieldset class="group">
-            {{ Form.money_interval_fieldset(form.partner_income.earnings, skip=skip_for_partner) }}
-            {{ Form.money_interval_fieldset(form.partner_income.income_tax, skip=skip_for_partner) }}
-            {{ Form.money_interval_fieldset(form.partner_income.national_insurance, skip=skip_for_partner) }}
-            {{ Form.money_interval_fieldset(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
+            {% if not skip_for_partner %}
+              {{ Form.money_interval_fieldset(form.partner_income.earnings, skip=skip_for_partner) }}
+              {{ Form.money_interval_fieldset(form.partner_income.income_tax, skip=skip_for_partner) }}
+              {{ Form.money_interval_fieldset(form.partner_income.national_insurance, skip=skip_for_partner) }}
+              {{ Form.money_interval_fieldset(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
+            {% endif %}
             {{ Form.money_interval_fieldset(form.partner_income.maintenance) }}
             {{ Form.money_interval_fieldset(form.partner_income.pension) }}
             {{ Form.money_interval_fieldset(form.partner_income.other_income) }}

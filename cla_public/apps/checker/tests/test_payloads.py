@@ -139,7 +139,7 @@ class TestApiPayloads(unittest.TestCase):
         # Test zero and null values
 
         # Test income
-        self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], None)
+        self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], 0)
         self.assertEqual(payload['you']['income']['earnings']['interval_period'], 'per_month')
         self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
         self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 0)
@@ -148,8 +148,8 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['income']['pension']['per_interval_value'], None)
         self.assertEqual(payload['you']['income']['other_income']['per_interval_value'], None)
 
-        self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], None)
-        self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], None)
+        self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], 0)
 
         # Test savings
         self.assertEqual(payload['you']['savings']['bank_balance'], 0)
@@ -282,6 +282,9 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['income']['benefits']['per_interval_value'], 4300)
 
     def test_income_form(self):
+        session['AboutYouForm'] = session.get('AboutYouForm', {})
+        session['AboutYouForm'].update(is_employed=YES)
+
         form_mi_data = {
             'your_income-earnings': {
                 'per_interval_value': '1',
@@ -341,6 +344,9 @@ class TestApiPayloads(unittest.TestCase):
         self.assertIn('partner', payload)
 
     def test_outgoing_form(self):
+        session['AboutYouForm'] = session.get('AboutYouForm', {})
+        session['AboutYouForm'].update(have_children=YES)
+
         form_mi_data = {
             'rent': {
                 'per_interval_value': '27',
