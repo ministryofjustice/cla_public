@@ -1,23 +1,16 @@
 # -*- coding: utf-8 -*-
 "Contact views"
 
-import logging
-
-from flask import abort, redirect, render_template, session, url_for, views
+from flask import abort, redirect, render_template, session, url_for, views, \
+    current_app
 from flask.ext.babel import lazy_gettext as _
-from cla_public.libs.utils import log_to_sentry
-from slumber.exceptions import SlumberBaseException
-from requests.exceptions import ConnectionError, Timeout
 
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.api import post_to_case_api, \
-    post_to_eligibility_check_api
+    post_to_eligibility_check_api, ApiError
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView
-
-
-log = logging.getLogger(__name__)
 
 
 @contact.after_request
@@ -39,12 +32,10 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         try:
             post_to_eligibility_check_api(session.notes_object())
             post_to_case_api(self.form)
-        except (ConnectionError, Timeout, SlumberBaseException) as e:
+        except ApiError:
             self.form.errors['timeout'] = _(
                 u'There was an error submitting your data. '
                 u'Please check and try again.')
-            log_to_sentry(
-                u'Slumber Exception on Contact page: %s' % e)
             return self.get()
         else:
             return redirect(url_for('.confirmation'))

@@ -1,12 +1,22 @@
 from collections import OrderedDict
+import logging
 import urllib
 
 from flask import current_app, session
+from requests.exceptions import ConnectionError, Timeout
 import slumber
+from slumber.exceptions import SlumberBaseException
 
 from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.constants import CATEGORIES
 from cla_public.libs.api_proxy import on_timeout
+
+
+log = logging.getLogger(__name__)
+
+
+class ApiError(Exception):
+    pass
 
 
 def get_api_connection():
@@ -89,6 +99,24 @@ def initialise_eligibility_check(check):
     return check
 
 
+def log_api_errors_to_sentry(fn):
+
+    def wrapped(*args, **kwargs):
+        sentry = getattr(current_app, 'sentry', None)
+        try:
+            fn(*args, **kwargs)
+        except (ConnectionError, Timeout, SlumberBaseException) as e:
+            if sentry:
+                sentry.captureException()
+            else:
+                log.warning(
+                    'Failed posting to API: {0}'.format(e))
+            raise ApiError(e)
+
+    return wrapped
+
+
+@log_api_errors_to_sentry
 def post_to_eligibility_check_api(form):
     backend = get_api_connection()
     reference = session.get('eligibility_check')
@@ -120,6 +148,7 @@ def attach_eligibility_check(payload):
     payload['eligibility_check'] = session.get('eligibility_check')
 
 
+@log_api_errors_to_sentry
 def post_to_case_api(form):
     backend = get_api_connection()
     payload = form.api_payload()

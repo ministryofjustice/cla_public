@@ -1,28 +1,22 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 
-import logging
-
-from flask import abort, render_template, redirect, session, url_for, views
+from flask import abort, render_template, redirect, session, url_for, views, \
+    current_app
 from flask.ext.babel import lazy_gettext as _
-from slumber.exceptions import SlumberBaseException
-from requests.exceptions import ConnectionError, Timeout
 
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import post_to_eligibility_check_api, \
-    get_organisation_list
+    get_organisation_list, ApiError
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm
-from cla_public.libs.utils import override_locale, log_to_sentry
+from cla_public.libs.utils import override_locale
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
-
-
-log = logging.getLogger(__name__)
 
 
 @checker.after_request
@@ -40,12 +34,10 @@ class UpdatesMeansTest(object):
     def on_valid_submit(self):
         try:
             post_to_eligibility_check_api(self.form)
-        except (ConnectionError, Timeout, SlumberBaseException) as e:
+        except ApiError:
             self.form.errors['timeout'] = _(
                 u'There was an error submitting your data. '
                 u'Please check and try again.')
-            log_to_sentry(
-                u'Slumber Exception on %s page: %s' % (self.name, e))
             return self.get(step=self.name)
         else:
             return super(UpdatesMeansTest, self).on_valid_submit()

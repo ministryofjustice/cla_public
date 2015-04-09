@@ -47,10 +47,3 @@ def recursive_dict_update(orig, new):
         else:
             orig[key] = new[key]
     return orig
-
-
-def log_to_sentry(message):
-    try:
-        current_app.sentry.captureMessage(message)
-    except AttributeError:
-        log.warning(message)
