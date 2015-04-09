@@ -119,6 +119,7 @@ NON_INCOME_BENEFITS = [
     ('personal-indep', _(u'Personal Independent Payments')),
     ('severe-disablement', _(u'Severe Disablement Allowance')),
     ('social-fund', _(u'Social Fund Payments')),
+    ('special-ed-needs', _(u'Special Education Needs (SEN) direct payment')),
     ('war-pension', _(u'War Pension')),
 ]
 
