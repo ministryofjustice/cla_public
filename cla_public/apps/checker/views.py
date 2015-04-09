@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 "Checker views"
-
 import logging
 
 from flask import abort, render_template, redirect, session, url_for, views
 from flask.ext.babel import lazy_gettext as _
-from slumber.exceptions import SlumberBaseException
-from requests.exceptions import ConnectionError, Timeout
 from wtforms.validators import StopValidation
 
 from cla_public.apps.checker import checker
@@ -20,7 +17,7 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
-from cla_public.libs.utils import override_locale, log_to_sentry
+from cla_public.libs.utils import override_locale
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
 
