@@ -145,17 +145,25 @@ checker.add_url_rule(
     '/result/face-to-face', view_func=FaceToFace.as_view('face-to-face'))
 
 
+class EligibleNoCallBack(views.MethodView, object):
+    def get(self):
+        form = FindLegalAdviserForm(request.args, csrf_enabled=False)
+        data = handle_find_legal_adviser_form(form, request.args)
+
+        session.clear()
+
+        return render_template('result/eligible-no-callback.html',
+            data=data, form=form)
+
+checker.add_url_rule(
+    '/find-legal-adviser', view_func=EligibleNoCallBack.as_view('find-legal-adviser'))
+
+
 class Eligible(RequiresSession, views.MethodView, object):
 
     def get(self):
         if session.category in NO_CALLBACK_CATEGORIES:
-            session.clear()
-
-            form = FindLegalAdviserForm(request.args, csrf_enabled=False)
-            data = handle_find_legal_adviser_form(form, request.args)
-
-            return render_template('result/eligible-no-callback.html',
-                data=data, form=form)
+            return redirect(url_for('.find-legal-adviser'))
 
         return render_template('result/eligible.html', form=ContactForm())
 
