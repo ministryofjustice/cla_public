@@ -36,6 +36,10 @@ class TestMoneyInterval(unittest.TestCase):
         with self.assertRaises(ValidationError):
             self.validator(form, field)
 
+    def assertStopValidationError(self, form, field):
+        with self.assertRaises(StopValidation):
+            self.validator(form, field)
+
     def assertValidationPasses(self, form, field, message=None):
         try:
             self.validator(form, field)
@@ -99,7 +103,7 @@ class TestMoneyInterval(unittest.TestCase):
         field = Mock()
         field.form.per_interval_value.data = None
         field.form.per_interval_value.errors = []
-        self.assertValidationError(form, field)
+        self.assertStopValidationError(form, field)
 
     def test_money_interval_max_val(self):
         form = test_form().submit({
@@ -110,3 +114,13 @@ class TestMoneyInterval(unittest.TestCase):
         self.assertIn(
             u'This amount must be less than £100,000,000',
             form.money_interval.errors)
+
+    def test_money_interval_only_one_error_if_amount_missing(self):
+        form = test_form(validators=[MoneyIntervalAmountRequired()]).submit({
+            'money_interval-per_interval_value': '',
+            'money_interval-interval_period': 'per_week'})
+        form.validate()
+        self.assertIn(
+            u'Please provide an amount',
+            form.money_interval.errors)
+        self.assertEqual(1, len(form.money_interval.errors))

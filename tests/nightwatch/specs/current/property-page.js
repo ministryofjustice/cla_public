@@ -75,10 +75,7 @@ module.exports = {
       .setValue('#properties-0-rent_amount-per_interval_value', '')
       .setValue('#properties-0-rent_amount-interval_period', 'per month')
     ;
-    common.submitAndCheckForFieldError(client, [{
-      name: 'properties-0-is_rented',
-      errorText: 'Not a valid amount'
-    }]);
+
     client
       .click(util.format('input[name="%s"][value="%s"]', 'properties-0-is_rented', 0))
       .submitForm('form')

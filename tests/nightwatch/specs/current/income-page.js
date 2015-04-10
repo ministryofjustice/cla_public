@@ -121,7 +121,6 @@ module.exports = {
     var questions = [];
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.EMPLOYED_MANDATORY.forEach(function(item) {
-        // common.submitAndCheckForFieldError(client, util.format('%s_income-%s-per_interval_value', person, item), 'Please provide an amount');
         questions.push({
           name: util.format('%s_income-%s-per_interval_value', person, item),
           errorText: 'Please provide an amount'
@@ -144,7 +143,7 @@ module.exports = {
         ;
         common.submitAndCheckForFieldError(client, [{
           name: util.format('%s_income-%s-interval_period', person, item),
-          errorText: 'Not a valid amount'
+          errorText: 'Please provide an amount'
         }], 'select');
       });
     });

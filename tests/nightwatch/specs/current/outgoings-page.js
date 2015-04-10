@@ -120,7 +120,7 @@ module.exports = {
       common.setDropdownValue(client, item + '-interval_period', 'per_month');
       common.submitAndCheckForFieldError(client, [{
         name: item + '-per_interval_value',
-        errorText: 'Not a valid amount'
+        errorText: 'Please provide an amount'
       }]);
     });
 
