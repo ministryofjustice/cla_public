@@ -1,6 +1,5 @@
 'use strict';
 
-var util = require('util');
 var common = require('../../modules/common-functions');
 
 module.exports = {
@@ -42,16 +41,19 @@ module.exports = {
     ;
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
-    client.click('input[name="callback_requested"][value="1"]');
+    client
+      .click('input[name="third_party_handled"][value="1"]')
+      .click('input[name="callback_requested"][value="1"]')
+    ;
 
-    ['full_name', 'callback-contact_number'].forEach(function(item) {
+    ['applicant_name', 'callback-contact_number'].forEach(function(item) {
       common.submitAndCheckForFieldError(client, [{
         name: item,
         errorText: 'This field is required.'
       }]);
     });
     client
-      .setValue('input[name="full_name"]', 'John Doe')
+      .thirdparty(false)
       .setValue('input[name="callback-contact_number"]', '12345');
     common.submitAndCheckForFieldError(client, [{
       name: 'callback-safe_to_contact',
