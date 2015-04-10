@@ -6,4 +6,7 @@ scope.add_url_rule(
     'diagnosis', view_func=ScopeDiagnosis.as_view('diagnosis'))
 
 scope.add_url_rule(
+    'diagnosis/<path:choices>', view_func=ScopeDiagnosis.as_view('diagnosis-path'))
+
+scope.add_url_rule(
     'api', view_func=ScopeDiagnosisApiProxy.as_view('diagnosis-api-proxy'))
