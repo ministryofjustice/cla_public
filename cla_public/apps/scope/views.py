@@ -69,7 +69,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
             choices_list = [choice['id']]
             if choices:
                 choices_list.insert(0, choices.strip('/'))
-            choice['url'] = url_for('.diagnosis-path',
+            choice['url'] = url_for('.diagnosis',
                                     choices='/'.join(choices_list))
             return choice
 
