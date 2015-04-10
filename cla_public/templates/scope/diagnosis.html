@@ -6,17 +6,14 @@
 {% block inner_content %}
 
   <h1>Scope Diagnosis</h1>
-  <form action="" method="post">
-    {% for choice in response_json.choices %}
-      <input id="{{ choice.id }}" type="radio" name="choice" value="{{ choice.id }}">
-      <label for="{{ choice.id }}">{{ choice.label }}</label>
-      <div>
-      <h3>{{ choice.title }}</h3>
-        {{ choice.help_text }}
-      </div>
-    {% endfor %}
-    <input type="submit" value="Next">
-  </form>
+  {% for choice in choices %}
+    <div>
+      <h3><a href="{{ choice.url }}">{{ choice.label|safe }}</a></h3>
+      {% if choice.help_text %}
+        {{ choice.help_text|safe }}
+      {% endif %}
+    </div>
+  {% endfor %}
 
   <pre>{{ response_json }}</pre>
 
