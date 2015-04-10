@@ -1,0 +1,26 @@
+{% if sidebar is iterable %}
+  <aside class="sidebar">
+    {% if 'resources' in sidebar %}
+      <h2>{{ _('Resources') }}</h2>
+      <nav>
+        <ul>
+          <li><a target="_blank" href="https://www.gov.uk/civil-legal-advice">{{ _('Civil Legal Advice') }}</a></li>
+          <li><a target="_blank" href="https://www.gov.uk/legal-aid">{{ _('Legal aid') }}</a></li>
+          <li><a target="_blank" href="https://www.gov.uk/legal-aid/how-to-claim">{{ _('Criminal legal aid') }}</a></li>
+          <li><a href="{{ url_for('base.privacy') }}">{{ _('How this service protects your privacy') }}</a></li>
+        </ul>
+      </nav>
+    {% elif 'reminder' in sidebar %}
+      <h2>{{ _('Who can get legal aid?') }}</h2>
+      <ul>
+        <li>{{ _('your area of law must be covered by Civil Legal Advice') }}</li>
+        <li>{{ _('your income (or combined income if you have a partner) should not be more than £2,657 a month before tax') }}</li>
+        <li>{{ _('your savings (or combined savings if you have a partner) should not be more than £8,000') }}</li>
+        <li>
+          {% trans %}you (and your partner if you have one) should have no more than £733 a month left after we've taken
+          certain living expenses into account{% endtrans %}
+        </li>
+      </ul>
+    {% endif %}
+  </aside>
+{% endif %}

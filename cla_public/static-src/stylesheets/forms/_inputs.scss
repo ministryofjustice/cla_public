@@ -1,0 +1,47 @@
+.form-control {
+  @include core-19;
+  @include box-sizing(border-box);
+  border: 1px solid $grey-2;
+  width: 50%;
+  max-width: 100%;
+  padding: 4px;
+  vertical-align: middle;
+
+  &.m-small {
+    width: 8em;
+  }
+
+  &.m-large {
+    width: 25em;
+  }
+
+  &.m-full {
+    width: 100%;
+  }
+}
+
+select.form-control {
+  background: $white;
+  width: auto;
+  height: 36px;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.input {
+  &-prefix,
+  &-suffix {
+    display: inline-block;
+    text-align: center;
+  }
+
+  &-prefix {
+    margin-right: 5px;
+  }
+
+  &-suffix {
+    margin-left: 5px;
+  }
+}

@@ -1,0 +1,43 @@
+.confirmation {
+  background: $turquoise;
+  padding: 30px;
+  margin: 30px 0;
+  color: white;
+  text-align: center;
+
+  @media print {
+    background: none;
+    border: 2px solid $black;
+
+    .confirmation-ref-number {
+      font-size: 17pt;
+    }
+
+    .print-page-button {
+      display: none;
+    }
+  }
+
+  .print-page-button {
+    margin: 30px 0 0;
+  }
+}
+
+.confirmation-ref-number {
+  display: block;
+  font-size: 1.3em;
+  margin-top: 5px;
+}
+
+.confirmation-inset {
+  background: lighten($turquoise, 50);
+  color: $black;
+  padding: 20px;
+  margin: 20px 0 0;
+
+  @media print {
+    border-top: 1px solid $black;
+    background: none;
+    padding-bottom: 0;
+  }
+}

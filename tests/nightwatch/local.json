@@ -1,0 +1,43 @@
+{
+  "src_folders" : "tests/nightwatch/specs",
+  "output_folder" : "tests/reports/nightwatch",
+  "custom_assertions_path" : "tests/nightwatch/custom_assertions",
+
+  "selenium" : {
+    "start_process" : true,
+    "server_path" : "node_modules/selenium-standalone/.selenium/2.43.1/server.jar"
+  },
+
+  "test_settings" : {
+    "default" : {
+      "launch_url" : "http://localhost:5000",
+      "silent": true,
+      "desiredCapabilities": {
+        "browserName": "phantomjs",
+        "javascriptEnabled" : true,
+        "acceptSslCerts" : true,
+        "phantomjs.binary.path" : "node_modules/phantomjs/bin/phantomjs"
+      }
+    },
+
+    "firefox" : {
+      "screenshots" : {
+        "enabled" : true,
+        "path" : "tests/reports/nightwatch/screenshots"
+      },
+      "desiredCapabilities": {
+        "browserName": "firefox"
+      }
+    },
+
+    "chrome" : {
+      "screenshots" : {
+        "enabled" : true,
+        "path" : "tests/reports/nightwatch/screenshots"
+      },
+      "desiredCapabilities": {
+        "browserName": "chrome"
+      }
+    }
+  }
+}

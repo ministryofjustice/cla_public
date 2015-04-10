@@ -1,0 +1,68 @@
+@import "govuk_frontend_toolkit/stylesheets/colours";
+@import "govuk_frontend_toolkit/stylesheets/grid_layout";
+@import "govuk_frontend_toolkit/stylesheets/typography";
+
+@import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
+@import "govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
+
+@import 'phase-banner';
+@import 'typography';
+@import 'forms';
+@import 'alerts';
+@import 'icons';
+@import 'tables';
+@import 'confirmation';
+@import 'help-organisations';
+@import 'sidebar';
+@import 'split-panels';
+@import 'notice';
+@import 'utilities';
+@import 'layout';
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: white;
+  background-image: linear-gradient(white 400px, $grey-3 400px);
+  min-height: 100%;
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  #global-header {
+    margin: 0 0 1mm;
+  }
+
+  .language-picker {
+    display: none;
+  }
+
+  #content > .inner-block {
+    margin: 0;
+  }
+}
+
+.adr {
+  font-style: normal;
+
+  span {
+    display: block;
+  }
+}
+
+.js-enabled .s-hidden {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.js-enabled .s-expanded {
+  @include transition(opacity, ease, 300ms);
+  opacity: 1;
+}

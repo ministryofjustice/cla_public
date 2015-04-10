@@ -27,18 +27,7 @@ RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-
 RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full && \
   chown -R www-data:www-data /var/lib/nginx
 
-ADD ./docker/htpassword /etc/nginx/conf.d/htpassword
-RUN rm -f /etc/nginx/sites-enabled/default && chown www-data:www-data /etc/nginx/conf.d/htpassword
-
-# Install ruby
-RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:brightbox/ruby-ng && apt-get update
-RUN DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends  ruby2.1 ruby2.1-dev
-
-RUN gem2.1 install sass --no-rdoc --no-ri
-
-# INstall Node.js
-RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository -y ppa:chris-lea/node.js && apt-get update
-RUN DEBIAN_FRONTEND='noninteractive' apt-get purge -y  g++ make &&  apt-get install -y nodejs
+RUN rm -f /etc/nginx/sites-enabled/default
 
 #Pip install Python packages
 
@@ -61,27 +50,15 @@ VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi", "/var/log/cla_public"]
 EXPOSE 80
 
 # APP_HOME
-ENV APP_HOME /home/app/django
+ENV APP_HOME /home/app/flask
 
 # Add project directory to docker
-ADD ./ /home/app/django
+ADD ./ /home/app/flask
 
 # awaiting docker fix
-#WORKDIR /home/app/django
+#WORKDIR /home/app/flask
 
 # PIP INSTALL APPLICATION
-RUN cd /home/app/django && pip install -r requirements/production.txt && find . -name '*.pyc' -delete
-
-RUN ln -s /home/app/django/cla_public/settings/docker.py /home/app/django/cla_public/settings/local.py
-
-#NPM bower and gulp
-RUN npm install -g bower gulp && \
-  cd /home/app/django && bower install --allow-root && \
-  npm install
-
-# gulp build
-RUN export LANG='en_US.UTF-8' && cd /home/app/django && gulp build
-
-RUN locale-gen --purge  en_US.UTF-8 && echo export LANG=''
+RUN cd /home/app/flask && pip install -r requirements.txt && find . -name '*.pyc' -delete && pybabel compile -d cla_public/translations
 
 ADD ./docker/nginx.conf /etc/nginx/nginx.conf

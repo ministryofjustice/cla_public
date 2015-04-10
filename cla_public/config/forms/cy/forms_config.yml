@@ -1,0 +1,12 @@
+forms:
+
+  ProblemForm:
+    fields:
+
+      categories:
+        field_options:
+          violence:
+            selected_notification: Os ydych mewn perygl uniongyrchol, gallwch ofyn i ni [eich ffonio’n ôl](/contact).
+
+          family:
+            selected_notification: Os ydych yn rhiant i blentyn y mae’r awdurdod lleol yn ceisio ei ddwyn i’w gofal, gofynnwch i ni [eich ffonio’n ôl](/contact).

@@ -1,0 +1,2854 @@
+# English translations for PROJECT.
+# Copyright (C) 2014 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2015-04-10 13:29+0100\n"
+"PO-Revision-Date: 2014-12-04 12:47+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+#: cla_public/apps/base/constants.py:6
+msgid "Very satisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:7
+msgid "Satisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:8
+msgid "Neither satisfied or dissatisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:9
+msgid "Dissatisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:10
+msgid "Very dissatisfied"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:17
+msgid "No, I filled in this form myself"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:18
+msgid "I have difficulty using computers so someone filled in this form for me"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:19
+msgid "I used an accessibility tool such as a screen reader"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:20
+msgid "I had some other kind of help"
+msgstr ""
+
+#: cla_public/apps/base/forms.py:37
+msgid "Did you have any difficulty with this service?"
+msgstr ""
+
+#: cla_public/apps/base/forms.py:39
+msgid "Do you have any ideas for how it could be improved?"
+msgstr ""
+
+#: cla_public/apps/base/forms.py:42
+msgid "Overall, how did you feel about the service you received today?"
+msgstr ""
+
+#: cla_public/apps/base/forms.py:47
+msgid "Did you have any help filling in this form?"
+msgstr ""
+
+#: cla_public/apps/base/views.py:49
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:10
+msgid "Clinical negligence"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:11
+msgid "Doctors and nurses not treating you with due care during medical treatment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:14
+msgid "Community care"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:15
+msgid "You’re unhappy with the care being provided for yourself or a relative due to age, disability or special educational needs - for example, in a care home or your own home"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:20
+msgid "Debt"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:21
+msgid "Bankruptcy, repossession, mortgage debt that is putting your home at risk"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:24
+msgid "Domestic violence"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:25
+msgid "Abuse at home, child abuse, harassment by an ex-partner, forced marriage"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:28
+msgid "Discrimination"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:29
+msgid "Being treated unfairly because of your race, sex, sexual orientation"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:33
+msgid "Education"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:34
+msgid "Special educational needs, problems with school places, exclusions, learning difficulties"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:38
+msgid "Employment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:39
+msgid "Being treated unfairly at work, unfair dismissal, employment tribunals"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:42
+msgid "Family"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:43
+msgid "Divorce, separation, arrangements for your children, children being taken into care"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:46
+msgid "Housing"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:47
+msgid "Eviction, homelessness, losing your rented home, rent arrears, harassment by a landlord or neighbour, health and safety issues with your home"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:51
+msgid "Immigration and asylum"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:52
+msgid "Applying for asylum or permission to stay in the UK, including for victims of human trafficking"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:56
+msgid "Mental health"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:57
+msgid "Help with mental health and mental capacity legal issues"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:60
+msgid "Personal injury"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:61
+msgid "An accident that was not your fault"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:64
+msgid "Public law"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:65
+msgid "Taking legal action against a public body, like your local council"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:68
+msgid "Trouble with the police"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:69
+msgid "Being treated unlawfully by authorities who detain, imprison and prosecute (for example, the police), abuse in care cases"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:73
+msgid "Welfare benefits"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:74
+msgid "Appealing a decision made by the social security tribunal about your benefits to the Upper Tribunal, Court of Appeal or Supreme Court"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:80
+msgid "Eligible"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:81
+msgid "Face-to-face"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:82
+msgid "Confirmation"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:87
+msgid "Income Support"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:88
+msgid "Income-based Jobseeker’s Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:89
+msgid "Guarantee Credit"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:90
+msgid "Universal Credit"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:91
+msgid "Income-related Employment and Support Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:92
+msgid "A different benefit not listed above"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:99
+msgid "-- Please select --"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:100
+msgid "per week"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:101
+msgid "4 weekly"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:102
+msgid "per month"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:103
+msgid "per year"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:107
+msgid "Armed Forces Independence payment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:108
+msgid "Attendance Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:109
+msgid "Back to Work Bonus"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:110
+msgid "Care in the community Direct Payment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:111
+msgid "Carers’ Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:112
+msgid "Constant Attendance Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:113
+msgid "Council Tax Benefits"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:114
+msgid "Disability Living Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:115
+msgid "Exceptionally Severe Disablement Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:116
+msgid "Fostering Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:117
+msgid "Housing Benefit"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:118
+msgid "Independent Living Funds payment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:119
+msgid "Personal Independent Payments"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:120
+msgid "Severe Disablement Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:121
+msgid "Social Fund Payments"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:122
+msgid "Special Education Needs (SEN) direct payment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:123
+msgid "War Pension"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:150
+msgctxt "It is"
+msgid "Yes"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:151
+msgctxt "It isn’t"
+msgid "No"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:155
+msgid "I’ll call CLA"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:156
+msgid "Call me back"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:81
+msgid "Yes"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:82
+msgid "No"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:86 cla_public/apps/checker/forms.py:111
+#: cla_public/apps/checker/forms.py:172 cla_public/apps/checker/forms.py:189
+#: cla_public/apps/contact/forms.py:63
+msgid "Please choose Yes or No"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:127 cla_public/apps/checker/fields.py:138
+#: cla_public/apps/checker/validators.py:98
+msgid "Not a valid amount"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:142
+msgid "This amount must be more than £{:,.0f}"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:148
+msgid "This amount must be less than £{:,.0f}"
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:283
+msgid "You can only have 1 main Property"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:77 cla_public/templates/problem.html:6
+msgid "What do you need help with?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:95
+msgid "Do you have a partner?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:97
+msgid "Your partner is your husband, wife, civil partner (unless you have permanently separated) or someone you live with as if you’re married"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:100 cla_public/apps/checker/forms.py:124
+#: cla_public/apps/checker/forms.py:138 cla_public/apps/checker/forms.py:149
+#: cla_public/apps/checker/forms.py:153 cla_public/apps/checker/forms.py:173
+#: cla_public/apps/checker/forms.py:190 cla_public/apps/checker/forms.py:271
+#: cla_public/apps/checker/forms.py:304
+msgctxt "There is/are"
+msgid "Yes"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:101 cla_public/apps/checker/forms.py:125
+#: cla_public/apps/checker/forms.py:139 cla_public/apps/checker/forms.py:150
+#: cla_public/apps/checker/forms.py:154 cla_public/apps/checker/forms.py:174
+#: cla_public/apps/checker/forms.py:191 cla_public/apps/checker/forms.py:272
+#: cla_public/apps/checker/forms.py:305
+msgctxt "There is/are not"
+msgid "No"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:104
+msgid "If Yes, are you in a dispute with your partner?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:106
+msgid "This means your partner is the opponent in the dispute you need help with, for example a dispute over money or property "
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:113 cla_public/apps/checker/forms.py:119
+#: cla_public/apps/checker/forms.py:163 cla_public/apps/checker/forms.py:180
+#: cla_public/apps/checker/forms.py:194 cla_public/apps/checker/forms.py:292
+#: cla_public/apps/checker/forms.py:436
+msgctxt "I am"
+msgid "Yes"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:114 cla_public/apps/checker/forms.py:120
+#: cla_public/apps/checker/forms.py:164 cla_public/apps/checker/forms.py:181
+#: cla_public/apps/checker/forms.py:195 cla_public/apps/checker/forms.py:293
+#: cla_public/apps/checker/forms.py:437
+msgctxt "I’m not"
+msgid "No"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:116
+msgid "Do you receive any benefits (including Child Benefit)?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:118
+msgid "Being on some benefits can help you qualify for legal aid"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:122
+msgid "Do you have any children aged 15 or under?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:123
+msgid "Don't include any children who don't live with you"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:127 cla_public/apps/checker/forms.py:141
+msgid "If Yes, how many?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:130 cla_public/apps/checker/forms.py:131
+#: cla_public/apps/checker/forms.py:144 cla_public/apps/checker/forms.py:145
+msgid "Number must be between 1 and 50"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:134
+msgid "Do you have any dependants aged 16 or over?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:135
+msgid "People who you live with and support financially. This could be a young person for whom you get Child Benefit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:148
+msgid "Do you have any savings or investments?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:152
+msgid "Do you have any valuable items worth over £500 each?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:156
+msgid "Do you own any property?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:157
+msgid "For example, a house, static caravan or flat"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:159
+msgid "Are you employed?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:161
+msgid "This means working as an employee - you may be both employed and self-employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:166
+msgid "Is your partner employed?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:167
+msgid "This means working as an employee - your partner may be both employed and self-employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:176
+msgid "Are you self-employed?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:178
+msgid "This means working for yourself - you may be both employed and self-employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:183
+msgid "Is your partner self-employed?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:184
+msgid "This means working for yourself - your partner may be both employed and self-employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:193
+msgid "Are you or your partner (if you have one) aged 60 or over?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:235
+msgid "Are you on any of these benefits?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:236
+msgid "Are you or your partner on any of these benefits?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:258
+msgid "Is this property your main home?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:260
+msgid "If you are separated and no longer live in the property you own, please answer ‘no’"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:263
+msgid "Does anyone else own a share of the property?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:265
+msgid "Select 'Yes' if you share ownership with a friend, relative or ex-partner"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:268
+msgid "Does anyone else (other than you or your partner) own a share of the property?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:274
+msgid "How much is the property worth?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:275
+msgid "Use a property website or the Land Registry house prices website."
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:279
+msgid "Please enter a valid amount"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:281
+msgid "How much is left to pay on the mortgage?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:283
+msgid "Include the full amount owed, even if the property has shared ownership"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:286
+msgid "Please enter 0 if you have no mortgage"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:288
+msgid "How much was your monthly mortgage repayment last month?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:291
+msgid "Do you rent out any part of this property?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:295
+msgid "If Yes, how much rent did you receive last month?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:301
+msgid "Is your share of the property in dispute?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:302
+msgid "For example, as part of the financial settlement of a divorce"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:374
+msgid "Savings"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:375
+msgid "The total amount of savings in cash, bank or building society"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:378
+msgid "Enter 0 if you have no savings"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:381
+msgid "Investments"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:382
+msgid "This includes stocks, shares, bonds (but not property)"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:385
+msgid "Enter 0 if you have no investments"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:388
+msgid "Total value of items worth over £500 each"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:391
+msgid "Valuable items must be at least £500"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:414
+msgid "Child Benefit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:415 cla_public/apps/checker/forms.py:420
+msgid "The total amount you get for all your children"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:419
+msgid "Child Tax Credit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:424
+msgid "Do you get any of these benefits?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:425
+msgid "Do you or your partner get any of these benefits?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:426
+msgid "These benefits don’t count as income. Please tick the ones you receive."
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:430
+msgid "Do you receive any other benefits not listed above? "
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:431
+msgid "Do you or your partner receive any other benefits not listed above? "
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:433
+msgid "For example, National Asylum Support Service Benefit, Incapacity Benefit, Contribution-based Jobseeker's Allowance"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:439
+msgid "If Yes, total amount of benefits not listed above"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:466
+msgid "Wages before tax"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:468
+msgid "This includes all your wages and any earnings from self-employment"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:472
+msgid "Income tax"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:474
+msgid "Tax paid directly out of your wages and any tax you pay on self-employed earnings"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:478
+msgid "National Insurance contributions"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:480
+msgid "Check your payslip or your National Insurance statement if you’re self-employed"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:484
+msgid "Working Tax Credit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:485
+msgid "Extra money for people who work and have a low income"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:489
+msgid "Maintenance received"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:490
+msgid "Payments you get from an ex-partner"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:493
+msgid "Pension received"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:494
+msgid "Payments you receive if you’re retired"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:497
+msgid "Any other income"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:498
+msgid "For example, student grants, income from trust funds, dividends"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:546
+msgid "Your personal income"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:550
+msgid "Your partner’s income"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:572
+msgid "Rent"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:573
+msgid "Money you pay your landlord for rent. Do not include rent that is paid by Housing Benefit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:575
+msgid "Money you and your partner pay your landlord for rent. Do not include rent that is paid by Housing Benefit"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:581
+msgid "Maintenance"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:582
+msgid "Money you pay to an ex-partner for their living costs"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:584
+msgid "Money you and/or your partner pay to an ex-partner for their living costs"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:588
+msgid "Monthly Income Contribution Order"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:589
+msgid "Money you pay per month towards your criminal legal aid"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:591
+msgid "Money you and/or your partner pay per month towards your criminal legal aid"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:594
+msgid "Childcare"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:595
+msgid "Money you pay for your child to be looked after while you work or study outside of your home"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:598
+msgid "Money you and your partner pay for your child to be looked after while you work or study outside of your home"
+msgstr ""
+
+#: cla_public/apps/checker/honeypot.py:30 cla_public/libs/honeypot.py:30
+msgid "This field must be left empty"
+msgstr ""
+
+#: cla_public/apps/checker/honeypot.py:39 cla_public/libs/honeypot.py:39
+msgid "Leave this field empty"
+msgstr ""
+
+#: cla_public/apps/checker/validators.py:68
+msgid "Must select at least one option."
+msgstr ""
+
+#: cla_public/apps/checker/validators.py:78
+msgid "Please provide an amount"
+msgstr ""
+
+#: cla_public/apps/checker/validators.py:101
+msgid "Please select a time period from the drop down"
+msgstr ""
+
+#: cla_public/apps/checker/views.py:38 cla_public/apps/contact/views.py:36
+msgid "There was an error submitting your data. Please check and try again."
+msgstr ""
+
+#: cla_public/apps/contact/constants.py:10
+msgid "Call me today at"
+msgstr ""
+
+#: cla_public/apps/contact/constants.py:11
+msgid "Call me in the next week on"
+msgstr ""
+
+#: cla_public/apps/contact/fields.py:42
+msgid "Not a valid choice"
+msgstr ""
+
+#: cla_public/apps/contact/fields.py:75
+msgid "Not a valid date"
+msgstr ""
+
+#: cla_public/apps/contact/fields.py:101
+msgid "Not a valid time"
+msgstr ""
+
+#: cla_public/apps/contact/fields.py:123
+msgid "Can't schedule a callback at the requested time"
+msgstr ""
+
+#: cla_public/apps/contact/fields.py:132
+msgid "Arrange a callback time"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:26
+msgid "-- Choose a language --"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:33
+msgid "BSL - Webcam"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:34
+msgid "Minicom"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:35
+msgid "Text Relay"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:36
+msgid "Welsh"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:37
+msgid "Other language"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:39
+msgid "Language required:"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:41
+msgid "Any other communication needs"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:43
+msgid "Other communication needs"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:44
+msgid "Please tell us what you need in the box below"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:52
+msgid "Contact phone number"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:55
+msgid "Your telephone number must be 20 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:59
+msgid "Is it safe for us to leave a message on this number?"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:66
+msgid "Select a time for us to call you"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:67
+msgid "We will try to call you back around the time you request, but this may not always be possible. We will always call you back by the next working day."
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:77
+msgid "Postcode"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:79
+msgid "Your postcode must be 12 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:83
+msgid "Street address"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:85
+msgid "Your address must be 255 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:95 cla_public/templates/privacy.html:435
+msgid "Full name"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:96
+msgid "For example: John Smith"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:98
+msgid "Your full name must be 400 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:102
+msgid "Contact preference"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:105
+msgid "Please choose one of the options"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:115
+msgid "Help the operator to understand your situation"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:116
+msgid "If you’d like to tell us more about your problem, please do so in the box below. The Civil Legal Advice operator will read this to help them understand your problem."
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:121
+msgid "Your notes must be 5000 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:126
+msgid "Do you have any special communication needs?"
+msgstr ""
+
+#: cla_public/config/common.py:55 cla_public/config/common.py:56
+#: cla_public/templates/_sidebar.html:7
+msgid "Civil Legal Advice"
+msgstr ""
+
+#: cla_public/templates/_phase-tag.html:15
+msgid "BETA"
+msgstr ""
+
+#: cla_public/templates/_phase-tag.html:17
+#, python-format
+msgid ""
+"This is a new service – your <a href=\"%(url)s\">feedback</a>\n"
+"      will help us to improve it."
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:4
+msgid "Resources"
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:8
+msgid "Legal aid"
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:9
+msgid "Criminal legal aid"
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:10
+msgid "How this service protects your privacy"
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:14
+msgid "Who can get legal aid?"
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:16
+msgid "your area of law must be covered by Civil Legal Advice"
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:17
+#: cla_public/templates/help-organisations.html:19
+msgid "your income (or combined income if you have a partner) should not be more than £2,657 a month before tax"
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:18
+#: cla_public/templates/help-organisations.html:20
+msgid "your savings (or combined savings if you have a partner) should not be more than £8,000"
+msgstr ""
+
+#: cla_public/templates/_sidebar.html:20
+msgid ""
+"you (and your partner if you have one) should have no more than £733 a month left after we've taken\n"
+"          certain living expenses into account"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:3
+msgid "Don’t include"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:5
+msgid "Furniture and appliances"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:6
+msgid "Your TV"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:7
+msgid "Mobile phones, laptops and other devices"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:8
+msgid "Clothing"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:9
+msgid "The vehicle you use every day, unless it is a classic car or luxury vehicle"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:10
+msgid "Equipment or tools you use for your work"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:14
+msgid "Do include"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:16
+msgid "Jewellery"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:17
+msgid "Art"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:18
+msgid "Antiques"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:19
+msgid "Caravans and other vehicles you don’t use every day"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:20
+msgid "Musical instruments, unless you’re a professional musician"
+msgstr ""
+
+#: cla_public/templates/about.html:6
+msgid "About you"
+msgstr ""
+
+#: cla_public/templates/about.html:57
+#: cla_public/templates/benefits-tax-credits.html:37
+#: cla_public/templates/benefits.html:34 cla_public/templates/income.html:79
+#: cla_public/templates/problem.html:43 cla_public/templates/property.html:62
+#: cla_public/templates/savings.html:48
+msgid "Continue"
+msgstr ""
+
+#: cla_public/templates/about.html:62
+msgid "Are you in a dispute with your partner?"
+msgstr ""
+
+#: cla_public/templates/about.html:63 cla_public/templates/about.html:64
+msgid "How many?"
+msgstr ""
+
+#: cla_public/templates/base.html:59
+msgid "more info"
+msgstr ""
+
+#: cla_public/templates/base.html:64
+msgid "Privacy Policy"
+msgstr ""
+
+#: cla_public/templates/base.html:65 cla_public/templates/cookies.html:5
+msgid "Cookies"
+msgstr ""
+
+#: cla_public/templates/base.html:66
+msgid "Feedback"
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:7
+msgid "You and your partner’s benefits and tax credits"
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:9
+msgid "Your benefits and tax credits"
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:16
+msgid ""
+"We need to know about any benefits and tax credits your whole household receives.\n"
+"    Please answer these questions as fully and accurately as you can."
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:19
+#: cla_public/templates/contact.html:27 cla_public/templates/income.html:27
+#: cla_public/templates/outgoings.html:16 cla_public/templates/property.html:22
+#: cla_public/templates/savings.html:22
+msgid "When you speak to CLA, you will need to provide evidence of the financial information you’ve given us through this service."
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:42
+msgid "Total amount of benefits not listed above"
+msgstr ""
+
+#: cla_public/templates/benefits.html:7
+msgid "You and your partner’s benefits"
+msgstr ""
+
+#: cla_public/templates/benefits.html:9
+msgid "Your benefits"
+msgstr ""
+
+#: cla_public/templates/benefits.html:24
+msgid "Please select at least one option."
+msgstr ""
+
+#: cla_public/templates/contact.html:7
+#: cla_public/templates/result/eligible.html:11
+msgid "Contact Civil Legal Advice"
+msgstr ""
+
+#: cla_public/templates/contact.html:14
+msgid "The full service is currently unavailable. However, you can still get in touch using the form below."
+msgstr ""
+
+#: cla_public/templates/contact.html:19
+msgid ""
+"Please submit your details to get your personal case reference number.\n"
+"      You will need to quote this number when you speak with CLA."
+msgstr ""
+
+#: cla_public/templates/contact.html:23
+msgid ""
+"You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+"      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
+"      or ask us to call you back, which is free."
+msgstr ""
+
+#: cla_public/templates/contact.html:28
+msgid "When a CLA operator calls you, the call will come from an anonymous number."
+msgstr ""
+
+#: cla_public/templates/contact.html:41
+msgid "You will be given the CLA phone number when you submit your details below."
+msgstr ""
+
+#: cla_public/templates/contact.html:45
+msgid ""
+"We will try to call you at least once. If we cannot speak to you we will leave you a message,\n"
+"        unless you tell us not to below. If you miss the call, please complete this form again to book another\n"
+"        callback or call us directly."
+msgstr ""
+
+#: cla_public/templates/contact.html:72
+msgid "Submit details"
+msgstr ""
+
+#: cla_public/templates/contact.html:78
+#: cla_public/templates/result/confirmation.html:32
+#: cla_public/templates/result/eligible.html:50
+msgid "What happens next?"
+msgstr ""
+
+#: cla_public/templates/contact.html:80
+msgid ""
+"The first person you speak to will be an operator. They will ask you questions about\n"
+"        yourself and your problem, including your financial circumstances (and your partner's, if you have one)."
+msgstr ""
+
+#: cla_public/templates/contact.html:84
+msgid "If it looks like you might qualify you will be put through to a CLA specialist adviser."
+msgstr ""
+
+#: cla_public/templates/contact.html:87
+msgid "If CLA can’t help you we will always suggest where else you might get help."
+msgstr ""
+
+#: cla_public/templates/contact.html:90
+msgid ""
+"If we can do anything to make it easier for you to communicate with us due to your\n"
+"        disability please tell the operator."
+msgstr ""
+
+#: cla_public/templates/contact.html:94
+msgid ""
+"Protecting your personal data and your privacy is important to us. We are asking for\n"
+"        some information from you now so that when we speak to you we know who you are. You\n"
+"        can read the full <a href=\"/privacy\">Civil Legal Advice Privacy Statement</a>."
+msgstr ""
+
+#: cla_public/templates/contact.html:109
+msgid "Find UK address"
+msgstr ""
+
+#: cla_public/templates/cookies.html:11
+msgid "GOV.UK puts small files (known as ’cookies’) onto your computer to collect information about how you browse the site."
+msgstr ""
+
+#: cla_public/templates/cookies.html:12
+msgid "Cookies are used to:"
+msgstr ""
+
+#: cla_public/templates/cookies.html:15
+msgid "measure how you use the website so it can be updated and improved based on your needs"
+msgstr ""
+
+#: cla_public/templates/cookies.html:16
+msgid "remember the notifications you’ve seen so that we don’t show them to you again"
+msgstr ""
+
+#: cla_public/templates/cookies.html:20
+msgid "GOV.UK cookies aren’t used to identify you personally."
+msgstr ""
+
+#: cla_public/templates/cookies.html:23
+msgid "You’ll normally see a message on the site before we store a cookie on your computer."
+msgstr ""
+
+#: cla_public/templates/cookies.html:24
+msgid "Find out more about <a href=\"http://www.aboutcookies.org/\" rel=\"external\">how to manage cookies</a>."
+msgstr ""
+
+#: cla_public/templates/cookies.html:27
+msgid "How cookies are used on GOV.UK"
+msgstr ""
+
+#: cla_public/templates/cookies.html:28
+msgid "Measuring website usage (Google Analytics)"
+msgstr ""
+
+#: cla_public/templates/cookies.html:30
+msgid "We use Google Analytics software to collect information about how you use GOV.UK. We do this to help make sure the site is meeting the needs of its users and to help us make improvements."
+msgstr ""
+
+#: cla_public/templates/cookies.html:31
+msgid "Google Analytics stores information about:"
+msgstr ""
+
+#: cla_public/templates/cookies.html:34
+msgid "the pages you visit on GOV.UK - how long you spend on each GOV.UK page"
+msgstr ""
+
+#: cla_public/templates/cookies.html:35
+msgid "how you got to the site"
+msgstr ""
+
+#: cla_public/templates/cookies.html:36
+msgid "what you click on while you’re visiting the site."
+msgstr ""
+
+#: cla_public/templates/cookies.html:40
+msgid "We don’t collect or store your personal information so this information can’t be used to identify who you are. For more information visit our <a href=\"/privacy\">Privacy policy</a>."
+msgstr ""
+
+#: cla_public/templates/cookies.html:43
+msgid "We don’t allow Google to use or share our analytics data."
+msgstr ""
+
+#: cla_public/templates/cookies.html:44
+msgid "Google Analytics sets the following cookies:"
+msgstr ""
+
+#: cla_public/templates/cookies.html:49 cla_public/templates/cookies.html:71
+#: cla_public/templates/cookies.html:90 cla_public/templates/cookies.html:109
+msgid "Name"
+msgstr ""
+
+#: cla_public/templates/cookies.html:50 cla_public/templates/cookies.html:72
+#: cla_public/templates/cookies.html:91 cla_public/templates/cookies.html:110
+msgid "Purpose"
+msgstr ""
+
+#: cla_public/templates/cookies.html:51 cla_public/templates/cookies.html:73
+#: cla_public/templates/cookies.html:92 cla_public/templates/cookies.html:111
+msgid "Expires"
+msgstr ""
+
+#: cla_public/templates/cookies.html:56
+msgid "and"
+msgstr ""
+
+#: cla_public/templates/cookies.html:57
+msgid "This is a google analytics cookie that helps us understand how the service is being used in detail. Your data is anonymised."
+msgstr ""
+
+#: cla_public/templates/cookies.html:58
+msgid "2 years"
+msgstr ""
+
+#: cla_public/templates/cookies.html:63
+msgid "You can <a href=\"https://tools.google.com/dlpage/gaoptout\" rel=\"external\">opt out of Google Analytics cookies</a>."
+msgstr ""
+
+#: cla_public/templates/cookies.html:66
+msgid "Our introductory message"
+msgstr ""
+
+#: cla_public/templates/cookies.html:67
+msgid "You may see a pop-up welcome message when you first visit GOV.UK. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again."
+msgstr ""
+
+#: cla_public/templates/cookies.html:79
+msgid "Saves a message to let us know that you have seen our cookie message"
+msgstr ""
+
+#: cla_public/templates/cookies.html:80 cla_public/templates/cookies.html:118
+msgid "1 month"
+msgstr ""
+
+#: cla_public/templates/cookies.html:85
+msgid "Your progress when using the service"
+msgstr ""
+
+#: cla_public/templates/cookies.html:86
+msgid "When you use the “Can I get legal aid?” service, we’ll set a cookie to remember your progress through the forms. These cookies don’t store your personal data and are deleted once you’ve completed the transaction."
+msgstr ""
+
+#: cla_public/templates/cookies.html:98
+msgid "An identifier for your session"
+msgstr ""
+
+#: cla_public/templates/cookies.html:99
+msgid "At the end of the session"
+msgstr ""
+
+#: cla_public/templates/cookies.html:104
+msgid "Welsh language selection"
+msgstr ""
+
+#: cla_public/templates/cookies.html:105
+msgid "You can choose to view this service in Welsh instead of English. If you choose Welsh, we set a cookie to remember that you have made this selection."
+msgstr ""
+
+#: cla_public/templates/cookies.html:117
+msgid "To remember your selection of Welsh language"
+msgstr ""
+
+#: cla_public/templates/cookies.html:124
+msgid ""
+"You can read more about\n"
+"    <a href=\"https://www.gov.uk/help/cookies\" rel=\"external\" target=\"_blank\">how cookies are used on gov.uk</a>."
+msgstr ""
+
+#: cla_public/templates/feedback-confirmation.html:6
+msgid "Thanks for your feedback"
+msgstr ""
+
+#: cla_public/templates/feedback-confirmation.html:11
+msgid "We use the feedback to improve the service."
+msgstr ""
+
+#: cla_public/templates/feedback-confirmation.html:15
+msgid "Back to home page"
+msgstr ""
+
+#: cla_public/templates/feedback.html:6
+msgid "Your feedback"
+msgstr ""
+
+#: cla_public/templates/feedback.html:12
+msgid ""
+"Please don't include any personal or financial details,\n"
+"    for example, your National Insurance or credit card numbers."
+msgstr ""
+
+#: cla_public/templates/feedback.html:32
+msgid "Send feedback"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:3
+msgid "Help organisations"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:8
+msgid "You’re unlikely to get legal aid"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:11
+#, python-format
+msgid ""
+"From\n"
+"    what you have told us today it looks like you won't be able to get\n"
+"    legal aid %(fromcla)sas you don’t qualify financially"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:14
+msgid "for the advice they can provide"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:17
+msgid "To qualify for legal aid, you must meet all of the following conditions:"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:22
+msgid ""
+"you (and your partner if you have one) should have no more than £733 a month left after we've taken\n"
+"      certain living expenses into account"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:29
+msgid ""
+"If you want to make an application to court about a family matter\n"
+"      you need to first of all see if family mediation will help. Use the\n"
+"      <a href=\"http://www.familymediationcouncil.org.uk/\" rel=\"external\">Family Mediation Council</a>\n"
+"      directory to find a mediator and make an appointment for a Mediation\n"
+"      Information and Assessment Meeting (MIAM)."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:39
+msgid ""
+"You may still qualify for legal aid to seek a court order for protection. To find out if you\n"
+"      might qualify, contact a legal adviser in your area."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:43
+msgid ""
+"You can also seek advice from a legal adviser - you will have to\n"
+"      pay for this advice."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:49
+msgid ""
+"If you have a court hearing date it is important that you get advice\n"
+"      as soon as possible. You may be able to get last-minute help on the\n"
+"      day of the hearing from an adviser in the court building."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:56
+#: cla_public/templates/result/eligible-no-callback.html:36
+#: cla_public/templates/result/face-to-face.html:68
+msgid "Find a legal adviser"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:61
+#, python-format
+msgid "Free help organisations for problems about %(category_name)s"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:63
+msgid ""
+"You may still get free help and advice from the organisations listed\n"
+"        below. You don’t have to qualify for legal aid to get help and advice\n"
+"        from these organisations."
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:83
+msgid "Helpline"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:93
+msgid "Opening hours"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:99
+#: cla_public/templates/privacy.html:233
+msgid "Email"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:105
+#: cla_public/templates/privacy.html:436
+msgid "Address"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:116
+msgid "There has been a problem with listing help organisations. Please refresh this page or try again later."
+msgstr ""
+
+#: cla_public/templates/income.html:9
+msgid "You and your partner’s"
+msgstr ""
+
+#: cla_public/templates/income.html:11
+msgid "Your"
+msgstr ""
+
+#: cla_public/templates/income.html:14
+msgid "income and tax"
+msgstr ""
+
+#: cla_public/templates/income.html:16
+msgid "money coming in"
+msgstr ""
+
+#: cla_public/templates/income.html:23
+msgid ""
+"We need to know how much money you have coming in, because this affects\n"
+"    whether or not you can get legal aid. Please answer these questions as\n"
+"    fully and accurately as you can."
+msgstr ""
+
+#: cla_public/templates/income.html:29
+msgid "We only need to know about any income you received last month, even if your income varies from month to month."
+msgstr ""
+
+#: cla_public/templates/income.html:39
+msgid "Your money coming in"
+msgstr ""
+
+#: cla_public/templates/income.html:42
+msgid ""
+"This section is for any money that is paid to you personally - for example, your wages.\n"
+"            You should record money coming in for your partner, if you have one, in the next section."
+msgstr ""
+
+#: cla_public/templates/income.html:61
+msgid "Your partner’s money coming in"
+msgstr ""
+
+#: cla_public/templates/outgoings.html:7
+msgid "You and your partner’s outgoings"
+msgstr ""
+
+#: cla_public/templates/outgoings.html:9
+msgid "Your outgoings"
+msgstr ""
+
+#: cla_public/templates/outgoings.html:15
+msgid "We only need to know about certain things you pay for, to work out if you may be able to get legal aid."
+msgstr ""
+
+#: cla_public/templates/outgoings.html:18
+msgid "We only need to know about your outgoings for last month."
+msgstr ""
+
+#: cla_public/templates/outgoings.html:34
+msgid "Submit"
+msgstr ""
+
+#: cla_public/templates/privacy.html:3
+msgid "Privacy Statement"
+msgstr ""
+
+#: cla_public/templates/privacy.html:6
+msgid "Terms and conditions and privacy"
+msgstr ""
+
+#: cla_public/templates/privacy.html:9
+msgid ""
+"When using this service you agree to the terms of use for both <a href=\"http://gov.uk/help/terms-conditions\">gov.uk/help/terms-conditions</a> as well as\n"
+"    the terms and conditions specific to this service found below."
+msgstr ""
+
+#: cla_public/templates/privacy.html:13
+msgid "If you do not agree to these terms please do not use this service."
+msgstr ""
+
+#: cla_public/templates/privacy.html:15
+msgid "Who manages this digital service and Civil Legal Advice"
+msgstr ""
+
+#: cla_public/templates/privacy.html:17
+msgid ""
+"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other\n"
+"    organisations who deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> service. For example this digital service is managed by the Ministry of\n"
+"    Justice."
+msgstr ""
+
+#: cla_public/templates/privacy.html:23
+msgid ""
+"When you first make contact with <abbr title=\"Civil Legal Advice\">CLA</abbr> you will communicate with the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service, which is delivered by\n"
+"    Agilisys (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr> to Agilisys on behalf of Freedom Communications (a contractor\n"
+"    employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr> to deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service)."
+msgstr ""
+
+#: cla_public/templates/privacy.html:28
+msgid "Complaints"
+msgstr ""
+
+#: cla_public/templates/privacy.html:30
+msgid "If you would like to make a complaint about this service or Civil Legal Advice please contact <abbr title=\"Civil Legal Advice\">CLA</abbr> on 0345 345 4 345."
+msgstr ""
+
+#: cla_public/templates/privacy.html:33
+msgid "How is my privacy protected?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:35
+msgid ""
+"Protecting your privacy is important to us. You can use this service to find out if you might qualify for\n"
+"    legal aid without providing any personal information that could identify you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:40
+msgid ""
+"We only save the information you enter if you decide to request a callback from a Civil Legal Advice\n"
+"    operator."
+msgstr ""
+
+#: cla_public/templates/privacy.html:45
+msgid ""
+"At this point, you will need to tell us your name and phone number and all the information you've entered will\n"
+"    be stored when you click 'Submit your application'. We store this information so that the operator can see it\n"
+"    when they speak to you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:51
+msgid ""
+"If you don't want to speak to an operator, you don't need to enter any personal details and we don't store\n"
+"    any of the information you have entered."
+msgstr ""
+
+#: cla_public/templates/privacy.html:56
+msgid ""
+"To provide you with the best service that we can, Civil Legal Advice may share some information about you\n"
+"    with other organisations. But we will only do this if you have given us permission."
+msgstr ""
+
+#: cla_public/templates/privacy.html:61
+msgid ""
+"In exceptional circumstances, we may share limited information about you without your consent. This would\n"
+"    only be to prevent fraud, help detect crime, if it is required by law or by a court order or If we are\n"
+"    very worried about your safety or the safety of others."
+msgstr ""
+
+#: cla_public/templates/privacy.html:67
+msgid "Read the full Civil Legal Advice Privacy Statement here."
+msgstr ""
+
+#: cla_public/templates/privacy.html:71
+msgid "Civil Legal Advice Privacy Statement"
+msgstr ""
+
+#: cla_public/templates/privacy.html:73
+msgid ""
+"In order to provide a service to you, Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>)\n"
+"    may need to view, collect, record and hold (‘process’) personal data about you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:77
+msgid ""
+"Personal data is information about you that can be used to identify you in some way\n"
+"    e.g. your name or telephone number. You can look at the\n"
+"    <a href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions#personal-data\" rel=\"external\" target=\"_blank\">full legal definition</a>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:82
+msgid ""
+"<abbr title=\"Civil Legal Advice\">CLA</abbr> is committed to protecting your personal data and respecting your privacy.\n"
+"    We are legally bound by the Data Protection Act 1998 to ensure that we only use your personal\n"
+"    data for the reasons we tell you about. We must also hold it securely."
+msgstr ""
+
+#: cla_public/templates/privacy.html:87
+msgid ""
+"This statement explains how <abbr>CLA</abbr> will process any personal data that we collect\n"
+"    from you or that you provide to us."
+msgstr ""
+
+#: cla_public/templates/privacy.html:92
+msgid "What is Civil Legal Advice?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:94
+msgid "is a national adviceline for England and Wales, paid for by Legal Aid."
+msgstr ""
+
+#: cla_public/templates/privacy.html:97
+msgid ""
+"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
+"    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller\n"
+"    for the purposes of the Data Protection Act 1998. They are responsible for determining the purposes for which\n"
+"    and the manner in which any personal data are, or are to be processed."
+msgstr ""
+
+#: cla_public/templates/privacy.html:103
+msgid ""
+"For a more comprehensive explanation see\n"
+"    <a href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions#personal-data\" rel=\"external\" target=\"_blank\">this guide</a>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:107
+msgid ""
+"The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
+"    For example when you first make contact with <abbr>CLA</abbr> you will communicate with\n"
+"    the <abbr>CLA</abbr> Operator Service, which is delivered by Agilisys\n"
+"    (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr> to [  ])."
+msgstr ""
+
+#: cla_public/templates/privacy.html:113
+msgid ""
+"If after contacting the <abbr>CLA</abbr> Operator Service it is determined that you\n"
+"    qualify for the <abbr>CLA</abbr> specialist advice service you may be put through\n"
+"    to one of a number of <abbr>CLA</abbr> Specialist Advice Providers. If you do not qualify to receive\n"
+"    <abbr>CLA</abbr> specialist advice we will inform you accordingly and\n"
+"    direct you to alternative help."
+msgstr ""
+
+#: cla_public/templates/privacy.html:120
+msgid ""
+"These organisations are Data Processors for the purposes of the Data Protection Act 1998 which\n"
+"    means that they process data on behalf of the <abbr>LAA</abbr> and <abbr title=\"The Ministry of Justice\">MoJ</abbr>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:124
+msgid ""
+"The <abbr>CLA</abbr> service is committed to following this Privacy Statement.\n"
+"    <abbr>CLA</abbr> Specialists must also adhere to their own internal privacy policy."
+msgstr ""
+
+#: cla_public/templates/privacy.html:129
+msgid "What data will <abbr>CLA</abbr> collect?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:131
+msgid ""
+"<abbr>CLA</abbr> will only collect the minimum amount of information necessary in order\n"
+"    to deliver the <abbr>CLA</abbr> service to you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:135
+msgid "The kind of information <abbr>CLA</abbr> may collect about you includes:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:139
+msgid ""
+"Personal details including your name, address, date of birth, contact details, diversity\n"
+"      monitoring information and national insurance number;"
+msgstr ""
+
+#: cla_public/templates/privacy.html:143
+msgid "Financial information needed to determine if you qualify for legal aid;"
+msgstr ""
+
+#: cla_public/templates/privacy.html:146
+msgid "Reason for contacting <abbr>CLA</abbr>, such as the nature of your problem or specific details about your situation;"
+msgstr ""
+
+#: cla_public/templates/privacy.html:149
+msgid "Details of any specific needs that you may have in order to access the <abbr>CLA</abbr> service;"
+msgstr ""
+
+#: cla_public/templates/privacy.html:152
+msgid ""
+"Responses to any customer satisfaction survey or details of any feedback, complaints or requests\n"
+"      for a review of our decision about whether you qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/privacy.html:157
+msgid ""
+"The amount of information <abbr>CLA</abbr> will collect will depend on whether you qualify for the <abbr>CLA</abbr>\n"
+"    service and/or your specific needs. For example you will be asked to provide more information\n"
+"    before we can transfer you through to a <abbr>CLA</abbr> Specialist."
+msgstr ""
+
+#: cla_public/templates/privacy.html:163
+msgid "What does <abbr>CLA</abbr> use the data for?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:164
+msgid "collects and records information about you to:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:166
+msgid "Work out whether you qualify for legal aid"
+msgstr ""
+
+#: cla_public/templates/privacy.html:167
+msgid "Provide information and/or advice services to you"
+msgstr ""
+
+#: cla_public/templates/privacy.html:168
+msgid "Save you from repeating information every time you contact us"
+msgstr ""
+
+#: cla_public/templates/privacy.html:169
+msgid "Help us monitor and improve our service"
+msgstr ""
+
+#: cla_public/templates/privacy.html:171
+msgid ""
+"Build statistics about the <abbr>CLA</abbr> service, monitor fraud and justify public expenditure.\n"
+"      This information is collated in an anonymous format."
+msgstr ""
+
+#: cla_public/templates/privacy.html:175
+msgid ""
+"Collect views on the <abbr>CLA</abbr> service and any improvements considered necessary.\n"
+"      Where consent is provided <abbr>CLA</abbr> User contact details may be passed onto an independent research agency."
+msgstr ""
+
+#: cla_public/templates/privacy.html:178
+msgid "Prevent or detect crime or fraud"
+msgstr ""
+
+#: cla_public/templates/privacy.html:181
+msgid ""
+"Given the purposes for which your personal data may be used (as referred to above)\n"
+"    it is essential that the information you provide is accurate and complete."
+msgstr ""
+
+#: cla_public/templates/privacy.html:186
+msgid "How does <abbr>CLA</abbr> collect your personal data and keep it safe?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:188
+msgid ""
+"<abbr>CLA</abbr> may collect personal data about you by phone, online, email or post (see table below).\n"
+"    Any personal data will be recorded and stored within a secure system that meets required Government standards."
+msgstr ""
+
+#: cla_public/templates/privacy.html:192
+msgid ""
+"<abbr>CLA</abbr> will be able to view and verify the information that you provide and where\n"
+"    necessary will amend it to maintain its accuracy."
+msgstr ""
+
+#: cla_public/templates/privacy.html:196
+msgid ""
+"The minimum amount of personal data that <abbr>CLA</abbr> will ask to collect is your name and one other piece\n"
+"    of personal information that could be used to identify you e.g. postcode, date of birth or telephone number."
+msgstr ""
+
+#: cla_public/templates/privacy.html:200
+msgid ""
+"All personal data will be stored on secure servers in the UK. It may also be stored outside of Europe,\n"
+"    where it could be viewed by our staff or specialist providers."
+msgstr ""
+
+#: cla_public/templates/privacy.html:204
+msgid ""
+"By submitting your personal data, you agree to information being recorded, used and stored\n"
+"    as outlined in this Privacy Statement."
+msgstr ""
+
+#: cla_public/templates/privacy.html:208
+msgid "How we collect and store your personal data"
+msgstr ""
+
+#: cla_public/templates/privacy.html:211
+msgid "Phone"
+msgstr ""
+
+#: cla_public/templates/privacy.html:213
+msgid ""
+"When you call <abbr>CLA</abbr> we will record relevant personal data that you provide within a secure digital system.\n"
+"        <br><br>\n"
+"        We may also record your calls. But you can choose to opt out of this or choose whether or not\n"
+"        to continue with the call.\n"
+"        <br><br>\n"
+"        If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information\n"
+"        required in order to contact you back."
+msgstr ""
+
+#: cla_public/templates/privacy.html:223
+msgid "Online"
+msgstr ""
+
+#: cla_public/templates/privacy.html:225
+msgid ""
+"When you contact <abbr>CLA</abbr> online the personal data that you provide will be recorded within a secure digital system.\n"
+"        <br><br>\n"
+"        Please note that transmitting information over the internet is generally not completely secure, and\n"
+"        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
+"        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
+msgstr ""
+
+#: cla_public/templates/privacy.html:235
+msgid ""
+"Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the\n"
+"        security of your data. Any data you transmit is at your own risk.\n"
+"        <br><br>\n"
+"        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
+"        <br><br>\n"
+"        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
+"        <br><br>\n"
+"        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software,"
+msgstr ""
+
+#: cla_public/templates/privacy.html:246
+msgid "Post"
+msgstr ""
+
+#: cla_public/templates/privacy.html:248
+msgid ""
+"When <abbr>CLA</abbr> receives post we may record relevant personal data included within a secure digital system.\n"
+"        <br><br>\n"
+"        <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked\n"
+"        filing cabinet. Digital copies of letters may be scanned and stored."
+msgstr ""
+
+#: cla_public/templates/privacy.html:257
+msgid "Keeping your personal data safe from others"
+msgstr ""
+
+#: cla_public/templates/privacy.html:260
+msgid "Repeat Contacts"
+msgstr ""
+
+#: cla_public/templates/privacy.html:262
+msgid ""
+"<abbr>CLA</abbr> will not disclose any personal information to anyone contacting the <abbr>CLA</abbr> service until\n"
+"        they have successfully verified that their identity matches that of an existing record."
+msgstr ""
+
+#: cla_public/templates/privacy.html:267
+msgid "Third-parties"
+msgstr ""
+
+#: cla_public/templates/privacy.html:269
+msgid ""
+"<abbr>CLA</abbr> will accept contact made by a third-party on behalf of another person. The third party has to\n"
+"        demonstrate they have appropriate authority to act on your behalf.\n"
+"        <br><br>\n"
+"        <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice\n"
+"        and whether they are authorised to act on their behalf.\n"
+"        <br><br>\n"
+"        They must also agree a password to verify the identity of the third-party if they contact the service again."
+msgstr ""
+
+#: cla_public/templates/privacy.html:279
+msgid "Outgoing Communications"
+msgstr ""
+
+#: cla_public/templates/privacy.html:281
+msgid "<abbr>CLA</abbr> may need to contact you directly."
+msgstr ""
+
+#: cla_public/templates/privacy.html:283
+msgid "In order to protect privacy <abbr>CLA</abbr> will always check with you what forms of outgoing communication are acceptable and appropriate and whether messages can be left."
+msgstr ""
+
+#: cla_public/templates/privacy.html:285
+msgid "When making outgoing calls to you <abbr>CLA</abbr> will ensure that:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:288
+msgid ""
+"Call backs are only made where you have agreed to this. Authorised third parties\n"
+"            acting on your behalf can give agreement."
+msgstr ""
+
+#: cla_public/templates/privacy.html:292
+msgid ""
+"Where a call back is made to you and there is no answer and a message taker is available,\n"
+"            no message will be left unless you have previously given specific instructions that this would be acceptable."
+msgstr ""
+
+#: cla_public/templates/privacy.html:296
+msgid ""
+"Where the phone is answered and someone other than you answers the phone and says that you are\n"
+"            unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say\n"
+"            that they are calling from <abbr>CLA</abbr>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:306
+msgid "How we use cookies"
+msgstr ""
+
+#: cla_public/templates/privacy.html:308
+msgid ""
+"When you use our online services we may store a small file, known as a cookie, on your\n"
+"    <abbr title=\"Personal Computer\">PC</abbr> or digital device."
+msgstr ""
+
+#: cla_public/templates/privacy.html:311
+msgid "You may see a message before we store a cookie on your computer."
+msgstr ""
+
+#: cla_public/templates/privacy.html:312
+msgid "The cookies are not used to identify you personally."
+msgstr ""
+
+#: cla_public/templates/privacy.html:313
+msgid "We use these cookies to:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:315
+msgid "Help your <abbr>PC</abbr> or digital device to interact with us more quickly"
+msgstr ""
+
+#: cla_public/templates/privacy.html:316
+msgid "Measure how you use our service so it can be updated and improved based on your needs"
+msgstr ""
+
+#: cla_public/templates/privacy.html:317
+msgid "Remember the notifications you’ve seen so that we don’t show them to you again"
+msgstr ""
+
+#: cla_public/templates/privacy.html:319
+msgid ""
+"Remember how you progress through our service. These cookies don't store your personal\n"
+"      data and are deleted once you've completed the service."
+msgstr ""
+
+#: cla_public/templates/privacy.html:323
+msgid ""
+"Protect your security by ensuring that third parties cannot create sites that pose as\n"
+"      a gov.uk service in an attempt to gather your information."
+msgstr ""
+
+#: cla_public/templates/privacy.html:328
+#, python-format
+msgid "You can read more about <a href=\"%(cookie_url)s\">how cookies are used</a>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:331
+msgid ""
+"You can read about\n"
+"    <a href=\"http://www.aboutcookies.org/\" rel=\"external\" target=\"_blank\">how to manage cookies</a>."
+msgstr ""
+
+#: cla_public/templates/privacy.html:336
+msgid "When will we share information about you outside <abbr>CLA</abbr>?"
+msgstr ""
+
+#: cla_public/templates/privacy.html:337
+msgid "Confidentiality means ensuring information is only accessible by those allowed to have access to it."
+msgstr ""
+
+#: cla_public/templates/privacy.html:339
+msgid ""
+"We want to keep your contact with <abbr>CLA</abbr> confidential, which means you can feel safe talking to us.\n"
+"    But we sometimes need to share some information outside <abbr>CLA</abbr> which we explain below."
+msgstr ""
+
+#: cla_public/templates/privacy.html:343
+msgid ""
+"In order to provide you with the best service that we can we may share some information about\n"
+"    you with the organisations mentioned below. But we will only do this if you have given us consent\n"
+"    when the operator asks for it."
+msgstr ""
+
+#: cla_public/templates/privacy.html:350 cla_public/templates/privacy.html:397
+msgid "Who"
+msgstr ""
+
+#: cla_public/templates/privacy.html:351 cla_public/templates/privacy.html:398
+msgid "Why"
+msgstr ""
+
+#: cla_public/templates/privacy.html:357
+msgid ""
+"External research organisations engaged by <abbr title=\"The Legal Aid Agency\">LAA</abbr>\n"
+"          or <abbr title=\"The Ministry of Justice\">MoJ</abbr>"
+msgstr ""
+
+#: cla_public/templates/privacy.html:361
+msgid ""
+"To inform future government policy on legal aid. Such research will not identify\n"
+"          individuals whose data has been used for research purposes."
+msgstr ""
+
+#: cla_public/templates/privacy.html:367 cla_public/templates/privacy.html:404
+msgid "Other government organisations"
+msgstr ""
+
+#: cla_public/templates/privacy.html:370
+msgid "To verify information provided by you and check whether you qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/privacy.html:375
+msgid "Other advice organisations"
+msgstr ""
+
+#: cla_public/templates/privacy.html:378
+msgid "To help you get further help and advice from appropriate organisations."
+msgstr ""
+
+#: cla_public/templates/privacy.html:385
+msgid ""
+"In exceptional circumstances we may share limited information without your consent,\n"
+"    for example if it is a legal requirement or a court compels us to do so."
+msgstr ""
+
+#: cla_public/templates/privacy.html:388
+msgid "If we do this we will wherever possible:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:390
+msgid "Talk to you first"
+msgstr ""
+
+#: cla_public/templates/privacy.html:391
+msgid "Give you as much control as possible over how we do this"
+msgstr ""
+
+#: cla_public/templates/privacy.html:392
+msgid "Only share information on a ‘need to know’ basis."
+msgstr ""
+
+#: cla_public/templates/privacy.html:407
+msgid "To prevent fraud and help detect crime."
+msgstr ""
+
+#: cla_public/templates/privacy.html:409
+msgid "Or where it is required by law or by a court order"
+msgstr ""
+
+#: cla_public/templates/privacy.html:414
+msgid "External protection organisations"
+msgstr ""
+
+#: cla_public/templates/privacy.html:417
+msgid ""
+"If we are very worried about your safety or the safety of other people we may need to let others know.\n"
+"          <br><br>\n"
+"          For example if we think it necessary in order to protect a child, young person or vulnerable adult\n"
+"          from abuse or if we think that there is an immediate risk of harm."
+msgstr ""
+
+#: cla_public/templates/privacy.html:427
+msgid "Requests to view and amend <abbr>CLA</abbr> Data"
+msgstr ""
+
+#: cla_public/templates/privacy.html:428
+msgid "You have the right to request details about the personal information <abbr>CLA</abbr> holds about you."
+msgstr ""
+
+#: cla_public/templates/privacy.html:429
+msgid "You can also request us to correct any personal information if it is found to be inaccurate or out of date."
+msgstr ""
+
+#: cla_public/templates/privacy.html:432
+msgid "Requests to view personal data held by <abbr>CLA</abbr>"
+msgstr ""
+
+#: cla_public/templates/privacy.html:433
+msgid "If you want to view your record, please make a request in writing including your."
+msgstr ""
+
+#: cla_public/templates/privacy.html:437
+msgid "Date of birth"
+msgstr ""
+
+#: cla_public/templates/privacy.html:438
+msgid "What you contacted <abbr>CLA</abbr> about"
+msgstr ""
+
+#: cla_public/templates/privacy.html:439
+msgid "When you contacted <abbr>CLA</abbr>"
+msgstr ""
+
+#: cla_public/templates/privacy.html:440
+msgid "What information you want to see"
+msgstr ""
+
+#: cla_public/templates/privacy.html:442
+msgid ""
+"Any additional information that might help us to check your identity e.g. <abbr>CLA</abbr> case reference number.\n"
+"      This is to help us protect your privacy by ensuring that we only give data out to the person it relates to\n"
+"      (or their appropriately authorised representative)."
+msgstr ""
+
+#: cla_public/templates/privacy.html:448
+msgid ""
+"Please note that we cannot give out any information unless the details that you provide match our records.\n"
+"    If you used a fake name or pseudonym when you contacted <abbr>CLA</abbr> you will need to prove your identity."
+msgstr ""
+
+#: cla_public/templates/privacy.html:452
+msgid ""
+"If you gave us enough information to identify you, <abbr>CLA</abbr> will send you your personal information as soon as\n"
+"    possible but within a maximum of 40 days."
+msgstr ""
+
+#: cla_public/templates/privacy.html:456
+msgid "You can contact us by email at <a class=\"email\" href=\"mailto:data.access@justice.gsi.gov.uk\">data.access@justice.gsi.gov.uk</a> or in writing to"
+msgstr ""
+
+#: cla_public/templates/privacy.html:470
+msgid "Requests to delete personal data"
+msgstr ""
+
+#: cla_public/templates/privacy.html:472
+msgid "<abbr>CLA</abbr> will only keep a record of your personal data where you have consented to this and we will handle it carefully."
+msgstr ""
+
+#: cla_public/templates/privacy.html:475
+msgid "We will consider requests to delete some or all of your personal data but please note that as a minimum <abbr>CLA</abbr> will usually retain:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:479
+msgid ""
+"For everyone that uses our service we will retain a name and one other piece of personal data e.g.\n"
+"      date of birth and details of what we did for you"
+msgstr ""
+
+#: cla_public/templates/privacy.html:483
+msgid ""
+"For everyone that asks <abbr>CLA</abbr> to check whether they qualify for legal aid in order to seek advice from a\n"
+"      <abbr>CLA</abbr> Specialist we will also retain details of any financial information and case details used to prove that\n"
+"      you qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/privacy.html:489
+msgid ""
+"Please note that if you qualify to receive advice from a <abbr>CLA</abbr> Specialist, they will also need to retain\n"
+"    additional personal data about you within their own Case Handling System. Such data shall be sufficient\n"
+"    to justify the provision of legal aid advice and meet professional requirements."
+msgstr ""
+
+#: cla_public/templates/privacy.html:495
+msgid "Changes to the statement"
+msgstr ""
+
+#: cla_public/templates/privacy.html:497
+msgid ""
+"This policy is under regular review. Any changes made to the privacy policy will be posted here and,\n"
+"    where appropriate, <abbr>CLA</abbr> staff will be notified by email."
+msgstr ""
+
+#: cla_public/templates/privacy.html:502
+msgid "Complaints about this statement"
+msgstr ""
+
+#: cla_public/templates/privacy.html:504
+msgid ""
+"If you would like to make a complaint about this statement and how it applies to you then please\n"
+"    contact <abbr title=\"Civil Legal Advice\">CLA</abbr> on <span class=\"tel\">0345 345 4 345</span>."
+msgstr ""
+
+#: cla_public/templates/problem.html:12
+msgid "To qualify for legal aid, you must have a problem that is covered by legal aid."
+msgstr ""
+
+#: cla_public/templates/problem.html:22
+msgid "Please select the area of law you need help with."
+msgstr ""
+
+#: cla_public/templates/problem.html:28
+msgid "Choose one of the options"
+msgstr ""
+
+#: cla_public/templates/problem.html:35
+msgid "If you have more than one problem, you can complete this service more than once."
+msgstr ""
+
+#: cla_public/templates/problem.html:37
+msgid "If you’re really not sure what to choose"
+msgstr ""
+
+#: cla_public/templates/problem.html:38
+#: cla_public/templates/macros/element.html:37
+msgid "get in touch"
+msgstr ""
+
+#: cla_public/templates/property.html:7
+msgid "You and your partner’s property"
+msgstr ""
+
+#: cla_public/templates/property.html:9
+msgid "Your property"
+msgstr ""
+
+#: cla_public/templates/property.html:17
+msgid "Please tell us about any property owned by you, your partner or both of you."
+msgstr ""
+
+#: cla_public/templates/property.html:18
+msgid "If you or your partner own more than one property, you can add more properties below."
+msgstr ""
+
+#: cla_public/templates/property.html:20
+msgid "If you own more than one property, you can add more properties below."
+msgstr ""
+
+#: cla_public/templates/property.html:32
+msgid "Property"
+msgstr ""
+
+#: cla_public/templates/property.html:34
+msgid "Remove property"
+msgstr ""
+
+#: cla_public/templates/property.html:55
+msgid "Add another property"
+msgstr ""
+
+#: cla_public/templates/property.html:67 cla_public/templates/property.html:68
+#: cla_public/templates/property.html:69
+msgid "How much rent did you receive last month?"
+msgstr ""
+
+#: cla_public/templates/savings.html:11
+msgid "You and your partner’s savings"
+msgstr ""
+
+#: cla_public/templates/savings.html:13
+msgid "Your savings"
+msgstr ""
+
+#: cla_public/templates/savings.html:18
+msgid "Any cash, savings or investments held in your name, your partner’s name or both your names."
+msgstr ""
+
+#: cla_public/templates/savings.html:20
+msgid "We need to know about any money you have saved or invested."
+msgstr ""
+
+#: cla_public/templates/session-expired.html:3
+msgid "Session expired"
+msgstr ""
+
+#: cla_public/templates/session-expired.html:6
+msgid "Your session has expired"
+msgstr ""
+
+#: cla_public/templates/session-expired.html:8
+msgid "You can start again by clicking the button below."
+msgstr ""
+
+#: cla_public/templates/session-expired.html:12
+msgid "Start again"
+msgstr ""
+
+#: cla_public/templates/errors/404.html:3
+msgid "Page not found"
+msgstr ""
+
+#: cla_public/templates/errors/404.html:6
+msgid "Sorry, this page doesn’t exist"
+msgstr ""
+
+#: cla_public/templates/errors/404.html:7
+msgid "Please return to the <a href=\"/\">Can I get legal aid?</a> page and try again."
+msgstr ""
+
+#: cla_public/templates/errors/4xx.html:8
+msgid "Please return to the <a href=\"/\">Find out if Civil Legal Advice can help you </a> page and try again."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:3
+msgid "Service unavailable"
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:6
+msgid "This service is temporarily unavailable"
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:7
+msgid "This service is not available right now, but we’re working hard to get things up and running again."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:8
+msgid "You can try again later or call us on 0345 345 4 345."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:9
+msgid "Minicom: 0345 609 6677"
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:10
+msgid "Or text <strong>legalaid</strong> and your name to 80010."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:11
+msgid "Find out about call charges here</a>."
+msgstr ""
+
+#: cla_public/templates/errors/5xx.html:12
+msgid "This service is only available if you are a resident of England or Wales."
+msgstr ""
+
+#: cla_public/templates/macros/element.html:36
+msgid "If you’re having trouble completing this form"
+msgstr ""
+
+#: cla_public/templates/macros/element.html:47
+msgid "What do you think about this service?"
+msgstr ""
+
+#: cla_public/templates/macros/element.html:49
+msgid ""
+"Your feedback will improve this service.\n"
+"    Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">send us your thoughts</a>."
+msgstr ""
+
+#: cla_public/templates/macros/form.html:421
+msgid "This form has errors."
+msgstr ""
+
+#: cla_public/templates/macros/form.html:422
+msgid "Please see below for the errors you need to correct."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:12
+msgid "We will call you back"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:14
+msgid "Your details have been submitted"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:18
+msgid "Your reference number is"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:25
+msgid "You can now call CLA on"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:26
+msgid ""
+"Please quote your reference number when you call. Find out about\n"
+"        <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a>."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:36
+msgid ""
+"Your details have been submitted and an operator will try to call\n"
+"        you back around the time you requested "
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:39
+msgid ""
+"If this is not possible, we will always call you back by the\n"
+"        next working day."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:46
+msgid ""
+"If you need to urgently protect yourself or your family you should\n"
+"      try and get advice as soon as possible."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:52
+msgid ""
+"If the operator you speak to thinks you might qualify, they will\n"
+"    put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
+"    ask you more questions before making the final decision about whether you\n"
+"    qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:59
+msgid ""
+"You will need to provide evidence of your financial circumstances\n"
+"    and maybe your problem. Your CLA specialist adviser will explain\n"
+"    what is needed."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:65
+msgid ""
+"If your CLA specialist adviser takes your case on they will\n"
+"    communicate with you by telephone, email or post."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:70
+msgid ""
+"If your CLA adviser decides that you need to speak to someone in\n"
+"    person or if you need someone to represent you in court, they\n"
+"    will organise this."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:77
+msgid ""
+"If you have a court hearing date it is important that you get\n"
+"      advice as soon as possible. You may be able to get last-minute\n"
+"      help on the day of the hearing from an adviser in the court building."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:84
+msgid "What if I miss the operator’s call?"
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:86
+msgid ""
+"If you miss the call or you need advice urgently, you can call us on\n"
+"      <strong>0345 345 4 345</strong>. Find out about\n"
+"      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a>."
+msgstr ""
+
+#: cla_public/templates/result/confirmation.html:101
+msgid "Print this page"
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:3
+#: cla_public/templates/result/eligible.html:8
+msgid "You might qualify for legal aid"
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:10
+msgid ""
+"Civil Legal Advice does not provide advice about issues\n"
+"      related to welfare benefits but you may be able to get free advice from\n"
+"      a legal adviser in your area. "
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:16
+msgid ""
+"To get advice about appealing a decision made by the social\n"
+"      security tribunal about your benefits to the Upper Tribunal, Court of\n"
+"      Appeal or Supreme Court, you should contact a legal adviser.\n"
+"    "
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:23
+#: cla_public/templates/result/face-to-face.html:56
+msgid ""
+"Your adviser will check whether you qualify for legal aid at\n"
+"    no cost to you. If you qualify for legal aid, you will not have to pay\n"
+"      for legal advice."
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:29
+#: cla_public/templates/result/face-to-face.html:62
+msgid ""
+"If you don't qualify for legal aid, you will have to pay for\n"
+"      legal advice. You should ask your adviser about the cost of their\n"
+"      advice."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:6
+msgid "We need more information"
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:14
+msgid ""
+"In order to decide whether you might qualify for legal aid, we need more information about\n"
+"      your financial circumstances. You should contact Civil Legal Advice."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:18
+msgid ""
+"The first person you speak to will be a CLA operator. They will check what\n"
+"      you told us already. They will also ask you some more questions about your financial\n"
+"      circumstances and to find out if your specific problem is covered by legal aid."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:24
+msgid ""
+"Based on the answers you’ve given today, you might qualify financially for legal aid.\n"
+"      Contact Civil Legal Advice (CLA), a national helpline for England and Wales, to find out for certain\n"
+"      if you qualify, and get specialist advice if you do."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:30
+msgid ""
+"Please submit your details to get your personal case reference number.\n"
+"    You will need to quote this number when you speak with CLA."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:34
+msgid ""
+"You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+"    <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
+"    or ask us to call you back, which is free."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:52
+msgid ""
+"Your CLA specialist adviser will ask you more questions before making the final decision about\n"
+"      whether you qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:57
+msgid ""
+"You will need to provide evidence of your financial circumstances and maybe your problem.\n"
+"      Your CLA specialist adviser will explain what is needed."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:62
+msgid ""
+"If your CLA specialist adviser takes your case on they will communicate with you by telephone,\n"
+"      email or post."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:67
+msgid "If CLA can’t help we will always suggest other places that might be able to."
+msgstr ""
+
+#: cla_public/templates/result/eligible.html:71
+msgid ""
+"If your Civil Legal Advice adviser decides that you need to speak to someone in person or if\n"
+"      you need someone to represent you in court, they will organise this for you."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:8
+msgid "You might be able to get legal aid if your problem is about discrimination"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:11
+msgid ""
+"If you feel you’ve been discriminated against at work, we\n"
+"        might be able to help. Please go back to the <a href=\"/\">start</a> and choose\n"
+"        ‘Discrimination’ from the list of problem areas."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:17
+msgid "Legal aid is not usually available for other employment problems."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:21
+msgid ""
+"You may still be able to get legal aid in exceptional cases.\n"
+"        You could seek advice from a legal adviser about whether an\n"
+"        application might succeed in your case and how to apply."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:26
+#: cla_public/templates/result/face-to-face.html:47
+msgid "You may be able to get free advice from a legal adviser"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:29
+msgid ""
+"You will usually only get legal aid for advice about\n"
+"        clinical negligence if your child has been severely injured during\n"
+"        birth or in the first 8 weeks of life."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:35
+msgid ""
+"Civil Legal Advice doesn't provide advice on issues related\n"
+"        to clinical negligence, but a legal adviser may be able to help."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:39
+msgid "Legal aid is not usually available for advice about personal injury"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:42
+msgid ""
+"You may be able to get legal aid in exceptional cases. You\n"
+"        could seek advice from a legal adviser about whether an application\n"
+"        might succeed in your case and how to apply."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:50
+msgid "Civil Legal Advice doesn’t provide advice on issues related to"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:51
+msgid "but a legal adviser may be able to help."
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:73
+msgid "You may also be able to get free help from:"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:76
+msgid "Advisery, Conciliation and Arbitration Service (Acas)"
+msgstr ""
+
+#: cla_public/templates/result/face-to-face.html:77
+msgid "Law Centres Network"
+msgstr ""
+
+#~ msgid "Server did not respond, please try again"
+#~ msgstr ""
+
+#~ msgid ""
+#~ msgstr ""
+
+#~ msgid "Does anyone else (other than you) own a share of the property?"
+#~ msgstr ""
+
+#~ msgid "They will check whether you qualify for legal aid. You should not have to pay for this check."
+#~ msgstr ""
+
+#~ msgid "We do not provide advice about issues related to"
+#~ msgstr ""
+
+#~ msgid "Legal Aid is not usually available for advice about personal injury"
+#~ msgstr ""
+
+#~ msgid "You may be able to get advice from a legal advisor in your area"
+#~ msgstr ""
+
+#~ msgid "You may be able to get free help from:"
+#~ msgstr ""
+
+#~ msgid "You can also seek advice from a legal adviser – you will have to pay for this advice."
+#~ msgstr ""
+
+#~ msgid "If you don’t qualify for legal aid, you should speak to your adviser about the cost of advice."
+#~ msgstr ""
+
+#~ msgid "Request a callback"
+#~ msgstr ""
+
+#~ msgid "The full service is currently unavailable. However, you can still request a call back using the form below."
+#~ msgstr ""
+
+#~ msgid "If we can’t speak to you please book another call back here or call us on 0345 345 4 345."
+#~ msgstr ""
+
+#~ msgid "If you don’t have a number we can call you on, please contact"
+#~ msgstr ""
+
+#~ msgid "Request callback"
+#~ msgstr ""
+
+#~ msgid "If you’re really not sure what to choose, ask us to"
+#~ msgstr ""
+
+#~ msgid "call you back"
+#~ msgstr ""
+
+#~ msgid "If you’re having trouble completing this form, ask us to"
+#~ msgstr ""
+
+#~ msgid "Based on the answers you’ve given today, you might qualify financially for legal aid."
+#~ msgstr ""
+
+#~ msgid "Please submit your details below so we can call you back."
+#~ msgstr ""
+
+#~ msgid "If CLA can’t help we will suggest other places that might be able to assist you."
+#~ msgstr ""
+
+#~ msgid "How much are your monthly mortgage repayments?"
+#~ msgstr ""
+
+#~ msgid "If Yes, how much rent do you receive?"
+#~ msgstr ""
+
+#~ msgid "If you’d like to tell us more about your problem, please do so in the box below. The Civil Legal Advice operator will read this before they call you."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+#~ "      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
+#~ "      or ask us to call you back, which is free."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The first person you speak to will be an operator. They will ask you questions about\n"
+#~ "        you and your problem, including you and your partner's financial circumstances."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Protecting your personal data and your privacy is important to us. We are asking for\n"
+#~ "        some information from you now so that when we call you back we know who you are. You\n"
+#~ "        can read the full <a href=\"/privacy\">Civil Legal Advice Privacy Statement here</a>."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You may still get free help and advice from the organisations listed\n"
+#~ "    below. You don’t have to qualify for legal aid to get help and advice\n"
+#~ "    from these organisations."
+#~ msgstr ""
+
+#~ msgid "Help organisations for problems about %(category_name)s"
+#~ msgstr ""
+
+#~ msgid "Find out if Civil Legal Advice can help you"
+#~ msgstr ""
+
+#~ msgid "If you qualify for legal aid, you may be able to get help from Civil Legal Advice (CLA), a national advice line for England and Wales."
+#~ msgstr ""
+
+#~ msgid "You will be asked general questions about your problem and detailed questions about your finances."
+#~ msgstr ""
+
+#~ msgid "If it looks like you might qualify for legal aid, the next step will be to speak to a Civil Legal Advice operator."
+#~ msgstr ""
+
+#~ msgid "If CLA can’t help, you’ll get suggestions of other places you could go for advice."
+#~ msgstr ""
+
+#~ msgid "Start"
+#~ msgstr ""
+
+#~ msgid "Before you start"
+#~ msgstr ""
+
+#~ msgid "To use this service, you’ll need details of the following, for you and your partner, if you have one"
+#~ msgstr ""
+
+#~ msgid "your income, income tax and National Insurance contributions"
+#~ msgstr ""
+
+#~ msgid "value of any property you own and mortgage details"
+#~ msgstr ""
+
+#~ msgid "any savings, investments or valuable items"
+#~ msgstr ""
+
+#~ msgid "any benefits you receive"
+#~ msgstr ""
+
+#~ msgid "It might be useful to have your last month’s payslips (if you’re working), bank statements, recent benefit letters, current valuation for any property you own and  mortgage statements to hand."
+#~ msgstr ""
+
+#~ msgid "Please answer all questions accurately and honestly. You may need to provide evidence of what you say later."
+#~ msgstr ""
+
+#~ msgid "At the end you will get an indication of whether you might qualify for advice from CLA – but you won’t get a final decision until you speak to us."
+#~ msgstr ""
+
+#~ msgid "You can do a quick <a href=\"https://www.gov.uk/check-legal-aid\">check</a> to see if you can get legal aid for your specific problem and find out whether CLA is your best option for help."
+#~ msgstr ""
+
+#~ msgid "Who this service is for"
+#~ msgstr ""
+
+#~ msgid "This service is for England and Wales. Legal aid is different in <a href=\"http://www.slab.org.uk/public/civil/eligibility/\" rel=\"external\">Scotland</a> and <a href=\"http://www.dojni.gov.uk/index/public-consultations/current-consultations/consultation-on-scope-of-civil-legal-aid.htm\" rel=\"external\">Northern Ireland</a>."
+#~ msgstr ""
+
+#~ msgid "If you’ve been charged with a crime, this service doesn’t apply to you. Ask your solicitor or barrister about criminal legal aid."
+#~ msgstr ""
+
+#~ msgid "This online service is only for adults. If you’re under 18, please contact <a href=\"https://www.gov.uk/civil-legal-advice\">Civil Legal Advice</a>."
+#~ msgstr ""
+
+#~ msgid "How much rent do you receive?"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If the operator you speak to thinks you can get legal aid, they will find\n"
+#~ "        you specialist legal help, like a phone call with a solicitor or\n"
+#~ "        support from a family mediation service."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you need to urgently protect yourself or your family you should\n"
+#~ "          try and get advice as soon as possible."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If the operator you speak to thinks you might qualify, they will\n"
+#~ "        put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
+#~ "        ask you more questions before making the final decision about whether you\n"
+#~ "        qualify for legal aid."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You will need to provide evidence of your financial circumstances\n"
+#~ "        and maybe your problem. Your CLA specialist adviser will explain\n"
+#~ "        what is needed."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If your CLA specialist adviser takes your case on they will\n"
+#~ "        communicate with you by telephone, email or post."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If your CLA adviser decides that you need to speak to someone in\n"
+#~ "        person or if you need someone to represent you in court, they\n"
+#~ "        will organise this."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you have a court hearing date it is important that you get\n"
+#~ "          advice as soon as possible. You may be able to get last-minute\n"
+#~ "          help on the day of the hearing from an adviser in the court building."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If the operator you speak to thinks you can get legal aid, they will\n"
+#~ "      find you specialist legal help, like a phone call with a solicitor or support from\n"
+#~ "      a family mediation service."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your feedback will improve this service.\n"
+#~ "    Please <a href=\"https://www.gov.uk/done/check-legal-aid\">send us your thoughts</a>."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Based on the answers you’ve given today, you might qualify financially for legal aid.\n"
+#~ "      Call Civil Legal Advice (CLA), a national helpline for England and Wales, to find out for certain\n"
+#~ "      if you qualify, and get specialist advice if you do."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+#~ "    <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
+#~ "    or ask us to call you back, which is free."
+#~ msgstr ""
+

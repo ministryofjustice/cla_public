@@ -1,0 +1,25 @@
+.sidebar {
+  margin-top: 40px;
+
+  h2 {
+    margin: 0 0 10px;
+    padding-top: 15px;
+    border-top: 10px solid $govuk-blue;
+    font-size: 22px;
+  }
+
+  ul {
+    font-size: .9em;
+    margin: 0;
+    padding: 0 0 0 20px;
+  }
+
+  li {
+    margin: 5px 0;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+}

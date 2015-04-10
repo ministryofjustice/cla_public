@@ -1,0 +1,40 @@
+body {
+  @include core-19;
+}
+
+h1 {
+  @include core-48;
+}
+
+h2 {
+  @include core-36;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.subtitle {
+  @include core-24;
+}
+
+h3 {
+  margin: 30px 0 10px;
+}
+
+.destination {
+  @include core-14;
+  display: block;
+  margin-top: 0.5em;
+  max-width: 13em;
+}
+
+.meta-data {
+  color: $grey-1;
+  p {
+    @include core-16;
+  }
+}

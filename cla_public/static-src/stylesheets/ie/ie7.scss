@@ -1,0 +1,11 @@
+@import 'ie-common';
+
+fieldset header {
+  position: relative;
+
+  .button-small {
+    position: absolute;
+    top: 7px;
+    right: 20px;
+  }
+}

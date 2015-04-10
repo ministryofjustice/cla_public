@@ -1,0 +1,52 @@
+{#
+  Generic alert element
+
+  Params:
+    - type <string> (default: info)
+        Type of alert (sets CSS class `alert-{type}`)
+    - icon <string> (default: none)
+        Alert icon (sets CSS class `icon-{icon}`)
+    - title <string> (default: None)
+        Alert title
+#}
+{% macro alert(type='info', icon=None, title=None) %}
+  <div class="alert alert-{{type}}"
+    role="alert"
+    {% if title %}aria-labelledby="alert-heading-{{type}}"{% endif %}
+  >
+    {% if icon %}
+      <span class="icon icon-{{icon}}" aria-hidden="true"></span>
+    {% endif %}
+    <div class="alert-message">
+      {% if title %}
+        <h3 class="alert-header" id="alert-heading-{{type}}">{{title}}</h3>
+      {% endif %}
+      {{ caller() }}
+    </div>
+  </div>
+{% endmacro %}
+
+
+{#
+  Alert block with link to contact page
+#}
+{%  macro get_in_touch_alert() %}
+  {% call alert() %}
+    <p>
+      {{ _('If you’re having trouble completing this form') }},
+      <a href="{{ url_for('contact.get_in_touch') }}" id="callback-link">{{ _('get in touch') }}</a>.
+    </p>
+  {% endcall %}
+{% endmacro %}
+
+
+{#
+  Prompt to complete the satisfaction survey on gov.uk
+#}
+{%  macro satisfaction_survey_prompt() %}
+  <h2>{{ _('What do you think about this service?') }}</h2>
+  <p>
+    {% trans %}Your feedback will improve this service.
+    Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">send us your thoughts</a>.{% endtrans %}
+  </p>
+{% endmacro %}

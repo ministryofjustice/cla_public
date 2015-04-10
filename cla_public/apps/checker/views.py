@@ -1,252 +1,162 @@
-from api.client import connection
-from django.forms.util import ErrorList
-from django.shortcuts import redirect, render
-from django.http import Http404
-from django.core.urlresolvers import reverse
-from django.views.generic import TemplateView
+# -*- coding: utf-8 -*-
+"Checker views"
 
-from django.contrib.formtools.wizard.views import NamedUrlSessionWizardView, StepsHelper
-from django.contrib.formtools.wizard.storage import get_storage
+from flask import abort, render_template, redirect, session, url_for, views, \
+    current_app
+from flask.ext.babel import lazy_gettext as _
 
-from .helpers import SessionCheckerHelper
-from .forms import YourProblemForm, YourDetailsForm, \
-    YourCapitalForm, YourIncomeForm, YourAllowancesForm, \
-    ApplyForm, YourBenefitsForm, YourFinancesNullForm
-from .exceptions import InconsistentStateException
-
-class BreadCrumb(object):
-    def __init__(self, wizard):
-        self.wizard = wizard
-
-    @property
-    def all(self):
-        current_form = self.wizard.get_form()
-        l = [
-            {
-                'name': 'Your Problem',
-                'step': 'your_problem',
-                'active': current_form.form_tag == 'your_problem',
-                'is_previous': False,
-            },
-            {
-                'name': 'Your Details',
-                'step': 'your_details',
-                'active': current_form.form_tag == 'your_details',
-                'is_previous': False,
-            },
-            {
-                'name': 'Your Finances',
-                'step': 'your_capital',
-                'active': current_form.form_tag in \
-                    ('your_finances', 'your_finances_interstitial'),
-                'is_previous': False,
-            },
-            {
-                'name': 'Result',
-                'step': 'result',
-                'active': current_form.form_tag == 'result',
-                'is_previous': False,
-            }
-        ]
-
-        active_index = 0
-
-        for index, item in enumerate(l):
-            if item['active']:
-                active_index = index
-                break
-
-        if active_index > 0:
-            l[active_index-1]['is_previous'] = True
-
-        return l
-
-    @property
-    def index(self):
-        for index, item in enumerate(self.all, 1):
-            if item['active']:
-                return index
-        return 0
-
-    @property
-    def length(self):
-        return len(self.all)
+from cla_public.apps.checker import checker
+from cla_public.apps.checker.api import post_to_eligibility_check_api, \
+    get_organisation_list, ApiError
+from cla_public.apps.contact.forms import ContactForm
+from cla_public.apps.checker.constants import CATEGORIES, \
+    ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
+from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
+    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
+    IncomeForm
+from cla_public.libs.utils import override_locale
+from cla_public.libs.views import AllowSessionOverride, FormWizard, \
+    FormWizardStep, RequiresSession
 
 
-class CheckerWizard(NamedUrlSessionWizardView):
-    storage_name = 'checker.storage.CheckerSessionStorage'
-    condition_dict = {'your_benefits': YourBenefitsForm.ask_about_benefits }
+@checker.after_request
+def add_header(response):
+    """
+    Add no-cache headers
+    """
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    return response
 
-    form_list = [
-        ("your_problem", YourProblemForm),
-        ("your_finances_interstitial", YourFinancesNullForm),
-        ("your_details", YourDetailsForm),
-        ("your_benefits", YourBenefitsForm),
-        ("your_capital", YourCapitalForm),
-        ("your_income", YourIncomeForm),
-        ("your_allowances", YourAllowancesForm),
-        ("result", ApplyForm),
+
+class UpdatesMeansTest(object):
+
+    def on_valid_submit(self):
+        try:
+            post_to_eligibility_check_api(self.form)
+        except ApiError:
+            self.form.errors['timeout'] = _(
+                u'There was an error submitting your data. '
+                u'Please check and try again.')
+            return self.get(step=self.name)
+        else:
+            return super(UpdatesMeansTest, self).on_valid_submit()
+
+
+class CheckerStep(UpdatesMeansTest, FormWizardStep):
+    pass
+
+
+class CheckerWizard(AllowSessionOverride, FormWizard):
+
+    steps = [
+        ('problem', CheckerStep(ProblemForm, 'problem.html')),
+        ('about', CheckerStep(AboutYouForm, 'about.html')),
+        ('benefits', CheckerStep(YourBenefitsForm, 'benefits.html')),
+        ('property', CheckerStep(PropertiesForm, 'property.html')),
+        ('savings', CheckerStep(SavingsForm, 'savings.html')),
+        ('benefits-tax-credits', CheckerStep(
+            TaxCreditsForm, 'benefits-tax-credits.html')),
+        ('income', CheckerStep(IncomeForm, 'income.html')),
+        ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html'))
     ]
 
-    TEMPLATES = {
-        "your_problem": "checker/your_problem.html",
-        "your_details": "checker/your_details.html",
-        "your_benefits": "checker/your_benefits.html",
-        "your_finances_interstitial":
-            "checker/interstitials/your_finances.html",
-        "your_capital": "checker/your_capital.html",
-        "your_income": "checker/your_income.html",
-        "your_allowances": "checker/your_allowances.html",
-        "result": "checker/result.html"
-    }
+    def complete(self):
 
-    def get_template_names(self):
-        return [self.TEMPLATES[self.steps.current]]
+        if session.needs_face_to_face:
+            return redirect(url_for('.face-to-face'))
 
-    def get_all_cleaned_data_dicts(self):
-        data = {}
-        for step in self.steps.all:
-            _data = self.get_cleaned_data_for_step(step)
-            if _data:
-                data[step] = _data
-        return data
+        if session.ineligible:
+            return redirect(url_for(
+                '.help_organisations',
+                category_name=session.category_slug))
 
-    def get_context_data(self, form, **kwargs):
-        context = super(CheckerWizard, self).get_context_data(form, **kwargs)
+        return redirect(url_for('.eligible'))
 
-        history_data = self.get_all_cleaned_data_dicts()
-        # if self.storage.current_step in history_data:
-        #     del history_data[self.storage.current_step]
+    def skip(self, step):
 
-        context['history_data'] = history_data
-        context.update(form.get_context_data())
+        if session.needs_face_to_face:
+            return True
 
-        # steps
-        context['steps'] = self.steps.all[:-2]
-        context['breadcrumb'] = BreadCrumb(self)
+        if step.name not in ('problem', 'about', 'benefits') \
+                and session.ineligible:
+            return True
 
-        if self.steps.current == u'result':
-            context['eligibility_check'] = connection.eligibility_check(self.storage.get_eligibility_check_reference()).get()
+        if step.name == 'benefits':
+            return not session.is_on_benefits
 
-        return context
+        if step.name == 'property':
+            return not session.owns_property
 
-    def get_form_kwargs(self, step=None):
-        kwargs = super(CheckerWizard, self).get_form_kwargs(step=step)
-        kwargs['reference'] = self.storage.get_eligibility_check_reference()
-        if self.form_list[step].form_tag == 'your_finances':
-            details_data = self.get_cleaned_data_for_step('your_details')
-            if details_data:
-                kwargs['has_partner'] = bool(details_data['has_partner'])
-                kwargs['has_children'] = bool(details_data['has_children'])
-                kwargs['has_property'] = bool(details_data['own_property'])
-                kwargs['has_benefits'] = bool(details_data['has_benefits'])
-        return kwargs
+        if step.name == 'savings':
+            return not session.has_savings_or_valuables
 
-    def render_next_step(self, form, **kwargs):
-        response = self.render_redirect(form)
-        if not response:
-            response = super(CheckerWizard, self).render_next_step(form, **kwargs)
+        if step.name == 'benefits-tax-credits':
+            return not session.children_or_tax_credits
+
+        if session.is_on_passported_benefits:
+            return True
+
+        return False
+
+
+checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
+
+
+class FaceToFace(RequiresSession, views.MethodView, object):
+
+    def get(self):
+        if not session.category:
+            session.category_name = 'your issue'
+
+        response = render_template('result/face-to-face.html')
+        session.clear()
         return response
 
-    def render_done(self, form, **kwargs):
-        response = self.render_redirect(form)
-        if not response:
-            if kwargs.get('step', None) != self.done_step_name:
-                return redirect(self.get_step_url(self.done_step_name))
 
-            final_form_list = []
-            # walk through the form list and try to validate the data again.
-            for form_key in self.get_form_list():
-                form_obj = self.get_form(step=form_key,
-                                         data=self.storage.get_step_data(form_key),
-                                         files=self.storage.get_step_files(form_key))
-                if not form_obj.is_valid():
-                    if (hasattr(form, 'is_eligibility_unknown') and form.is_eligibility_unknown()) \
-                            or not hasattr(form, 'is_eligibility_unknown'):
-                        return self.render_revalidation_failure(form_key, form_obj, **kwargs)
-                final_form_list.append(form_obj)
-
-            # render the done view and reset the wizard before returning the
-            # response. This is needed to prevent from rendering done with the
-            # same data twice.
-            response = self.done(final_form_list, **kwargs)
-            self.storage.reset()
-        return response
-
-    def process_step(self, form):
-        response_data = form.save()
-
-        # saving eligibility check AND / OR case references in the session
-        eligibility_check = response_data.get('eligibility_check')
-        case = response_data.get('case')
-
-        if eligibility_check:
-            self.storage.set_eligibility_check_reference(eligibility_check['reference'])
-
-        if case:
-            self.storage.set_case_reference(case['reference'])
-
-        return super(CheckerWizard, self).process_step(form)
-
-    def done(self, *args, **kwargs):
-        forms_data = self.get_all_cleaned_data_dicts()
-
-        # save everything in the session
-        session_helper = SessionCheckerHelper(self.request)
-        session_helper.store_forms_data(forms_data)
-        session_helper.store_eligibility_check_reference(self.storage.get_eligibility_check_reference())
-        session_helper.store_case_reference(self.storage.get_case_reference())
-
-        return redirect(reverse('checker:confirmation'))
-
-    def render_redirect(self, form):
-        if getattr(self, 'redirect_to_self', False):
-            return self.render_goto_step(self.steps.current)
-
-        if (form.form_tag == 'your_finances' \
-            or form.form_tag == 'your_benefits') \
-            and not form.is_eligibility_unknown():
-            return self.render_goto_step('result')
-
-    def render(self, form=None, **kwargs):
-        try:
-            return super(CheckerWizard, self).render(form, **kwargs)
-        except InconsistentStateException:
-            # should be "Eligibility Reference cannot be None"
-
-            return self.render_goto_step(self.steps.first)
+checker.add_url_rule(
+    '/result/face-to-face', view_func=FaceToFace.as_view('face-to-face'))
 
 
-class StartPageView(TemplateView):
-    template_name = 'checker/start_page.html'
+class Eligible(RequiresSession, views.MethodView, object):
+
+    def get(self):
+        if session.category in NO_CALLBACK_CATEGORIES:
+            session.clear()
+            return render_template('result/eligible-no-callback.html')
+
+        return render_template('result/eligible.html', form=ContactForm())
 
 
-class ThresholdView(TemplateView):
-    template_name = 'checker/threshold.html'
+checker.add_url_rule(
+    '/result/eligible', view_func=Eligible.as_view('eligible'))
 
 
-class ConfirmationView(TemplateView):
-    template_name = 'checker/confirmation.html'
+@checker.route('/help-organisations/<category_name>', methods=['GET'])
+def help_organisations(category_name):
+    if session:
+        session.clear()
 
-    def dispatch(self, request, *args, **kwargs):
-        """
-        If case reference not found in the session => 404
-        """
-        self.session_helper = SessionCheckerHelper(self.request)
+    category_name = category_name.replace('-', ' ').capitalize()
 
-        if not self.session_helper.get_case_reference():
-            raise Http404()
+    # force english as knowledge base languages are in english
+    with override_locale('en'):
+        requested = lambda (slug, name, desc): name == category_name
+        category, name, desc = next(
+            iter(filter(requested, CATEGORIES)),
+            (None, None, None))
 
-        return super(ConfirmationView, self).dispatch(request, *args, **kwargs)
+        if category is None:
+            abort(404)
 
-    def get_context_data(self, **kwargs):
-        context = super(ConfirmationView, self).get_context_data(**kwargs)
+        name = unicode(name)
 
-        check_ref = self.session_helper.get_eligibility_check_reference()
-        check = connection.eligibility_check(check_ref).get()
-        context.update({
-            'eligibility_check': check,
-            'history_data': self.session_helper.get_forms_data(),
-            'case_reference': self.session_helper.get_case_reference()
-        })
-        return context
+        category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
+    trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
+
+    organisations = get_organisation_list(article_category__name=category_name)
+    return render_template(
+        'help-organisations.html',
+        organisations=organisations,
+        category=category,
+        category_name=trans_category_name)

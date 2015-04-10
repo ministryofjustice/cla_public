@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% import "macros/element.html" as Element %}
+
+{% set sidebar = 'resources' %}
+
+{% block inner_content %}
+  <h1>Check if Civil Legal Advice can help you</h1>
+
+  <p>You might be able to get legal advice from Civil Legal Advice (CLA) if you qualify for legal aid and have a relevant problem. CLA is a national helpline in England and Wales.</p>
+
+  <p>You’ll be asked questions about your problem and your financial situation. If it looks like you might qualify for help, you’ll be able to speak to CLA.</p>
+
+  <p>
+    <a class="button button-get-started" href="{{ url_for('base.get_started') }}" id="start">Start now</a>
+    <span class="destination"> on the Civil Legal Advice checker</span>
+  </p>
+
+
+  <h3>Before you start</h3>
+  <p>You and your partner (if you have one) will need:</p>
+  <ul>
+    <li>recent payslips (if you’re working) and bank statements</li>
+    <li>a summary of your income tax and National Insurance contributions</li>
+    <li>details of any savings and investments you have</li>
+    <li>details of any benefits you receive</li>
+    <li>mortgage statements and a current valuation for any property you own</li>
+  </ul>
+
+  <p>This service is only for adults. If you’re under 18, <a href="/contact">get in touch with CLA</a>.</p>
+
+  {% call Element.alert() %}
+    <p>You’ll only get guidance on whether or not <abbr title="Civil Legal Advice">CLA</abbr> might be able to help - you won’t get a final decision until you speak to an adviser.</p>
+  {% endcall %}
+
+  <p>You can’t get help from <abbr title="Civil Legal Advice">CLA</abbr> if you’ve been charged with a crime - ask your solicitor or barrister if you are able to get criminal legal aid.</p>
+
+  {% call Element.alert() %}
+    <p>Legal aid is different in <a rel="external" href="http://www.slab.org.uk/public/advice/index.html">Scotland</a> and <a rel="external" href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm">Northern Ireland.</a></p>
+  {% endcall %}
+
+  <div class="meta-data group">
+    <p class="modified-date">Last updated: 27 February 2015</p>
+  </div>
+
+{% endblock %}

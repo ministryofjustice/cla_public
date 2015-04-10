@@ -1,7 +1,8 @@
 #!/bin/bash
 exec 2>&1
-cd /home/app/django
 
-python manage.py collectstatic --noinput
+! $([[  "$CLA_ENV" == "prod" || "$CLA_ENV" == "staging" ]]) ||  grep sentry /etc/hosts > /dev/null 2>&1 || echo "$SENTRY_IPADDRESS $SENTRY_HOSTNAME" >> /etc/hosts
+
+cd /home/app/flask
 
 exec /usr/local/bin/uwsgi --ini /etc/wsgi/conf.d/cla_public.ini

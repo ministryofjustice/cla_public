@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% import "macros/form.html" as Form %}
+{% import "macros/element.html" as Element %}
+
+{% set title = _('Your feedback') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+  <p class="subtitle">
+    {% trans %}Please don't include any personal or financial details,
+    for example, your National Insurance or credit card numbers.{% endtrans %}
+  </p>
+
+  <form method="POST" action="{{ url_for('.feedback') }}">
+    {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
+
+    {% if zd_error %}
+      {% call Element.alert('error', icon='cross') %}
+        <p>{{ zd_error }}</p>
+      {% endcall %}
+    {% endif %}
+
+    {{ Form.option_list_fieldset(form.feel_about_service) }}
+    {{ Form.option_list_fieldset(form.help_filling_in_form) }}
+    {{ Form.textarea_fieldset(form.difficulty, class_='m-full', rows=6) }}
+    {{ Form.textarea_fieldset(form.ideas, class_='m-full', rows=6) }}
+
+    {{ Form.honeypot(form) }}
+    {{ Form.actions(_('Send feedback')) }}
+  </form>
+{% endblock %}

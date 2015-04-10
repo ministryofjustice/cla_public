@@ -1,0 +1,75 @@
+fieldset {
+  border: 0;
+  margin: 0;
+
+  &.form-group {
+    border-top: 1px solid $grey-3;
+
+    .form-row .form-group .fieldset-group {
+      margin: -1px -1px -1px -20px;
+    }
+  }
+
+  &.fieldset-group {
+    border: 1px solid $grey-3;
+    padding: 10px 20px;
+    margin: 25px -20px;
+
+    @include media(mobile) {
+      border-left: 0;
+      border-right: 0;
+      margin-left: -15px;
+      margin-right: -15px;
+      padding: 5px 15px;
+    }
+  }
+
+  .fieldset-label {
+    padding: 0 10px;
+    margin-left: -10px;
+    line-height: 1;
+    cursor: default;
+    font-size: 1.1em;
+    color: black;
+  }
+
+  header {
+    padding: 10px 20px;
+    margin: -10px -20px 20px;
+    background: $grey-4;
+
+    h3 {
+      display: inline;
+      margin: 0;
+      font-size: 23px;
+    }
+
+    .button-small {
+      margin-left: 10px;
+      float: right;
+    }
+  }
+
+  .form-subfield .fieldset-label {
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  // Errors
+  &.m-error {
+    .fieldset-label.m-error {
+      background: url(../images/icons/icon-small-cross.png) 10px .25em no-repeat;
+      background: url(../images/icons/icon-small-cross-2x.png) 10px .25em/10px no-repeat;
+      color: $mellow-red;
+      font-weight: bold;
+      padding-left: 30px;
+    }
+
+    &.form-subfield {
+      border-top: 0;
+      margin-left: 0;
+    }
+  }
+
+}

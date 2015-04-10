@@ -1,0 +1,32 @@
+.phase-banner {
+  @extend %site-width-container;
+  @include phase-banner(beta);
+  z-index: 2;
+
+  span {
+    @include media(mobile) {
+      margin-top: 8px;
+      width: auto;
+    }
+  }
+
+  @media print {
+    margin: 0;
+    padding: 0 0 2mm;
+    border-color: $black;
+
+    .phase-tag {
+      font-size: 10pt;
+      border: 2px solid $black;
+      color: $black;
+      background: none;
+      margin: 5pt 5pt 0 0;
+    }
+  }
+
+  .language-picker {
+    @include core-16;
+    line-height: inherit;
+    float: right;
+  }
+}

@@ -1,1 +1,67 @@
-{% extends 'moj_template/base.html' %}
+{% extends "moj_template/base.jinja" %}
+
+{% block page_title %}{{ app_title }}{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('stylesheets/main.css') }}">
+  <!--[if IE 6]>
+    <link rel="stylesheet" href="{{ asset('stylesheets/ie/ie6.css') }}">
+  <![endif]-->
+  <!--[if IE 7]>
+    <link rel="stylesheet" href="{{ asset('stylesheets/ie/ie7.css') }}">
+  <![endif]-->
+  <!--[if IE 8]>
+    <link rel="stylesheet" href="{{ asset('stylesheets/ie/ie8.css') }}">
+  <![endif]-->
+  {% if config.DEBUG %}
+    <link rel="stylesheet" href="{{ asset('stylesheets/context-debugger.css') }}">
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% include "_phase-tag.html" %}
+
+  <div class="inner-block {% if sidebar %}m-has-sidebar{% endif %}">
+    <article class="main-content">
+      {% block inner_content %}{% endblock %}
+    </article>
+
+    {% block sidebar %}
+      {% if sidebar %}
+        {% include '_sidebar.html' %}
+      {% endif %}
+    {% endblock %}
+  </div>
+{% endblock %}
+
+{% block head %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', '{{ config.GA_ID }}', 'auto');
+    ga('set', 'anonymizeIp', true);
+
+    {% block ga_pageview -%}
+      ga('send', 'pageview');
+    {%- endblock %}
+  </script>
+{%- endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset(filename='javascripts/cla.js') }}"></script>
+  {% if config.DEBUG %}
+    <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
+  {% endif %}
+  <script type="text/html" id="moreInfoButtonLink">
+    <a class="field-more-info-toggle" role="button">{{ _('more info') }}</a>
+  </script>
+{% endblock %}
+
+{% block footer_support_links %}
+  <li><a href="{{ url_for('base.privacy') }}">{{ _('Privacy Policy') }}</a></li>
+  <li><a href="{{ url_for('base.cookies') }}">{{ _('Cookies') }}</a></li>
+  <li><a href="{{ url_for('base.feedback') }}">{{ _('Feedback') }}</a></li>
+{% endblock %}

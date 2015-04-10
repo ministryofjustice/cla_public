@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ _('Help organisations') }} - {{ super() }}{% endblock %}
+
+{% import "macros/element.html" as Element %}
+
+{% block inner_content %}
+  <h1>{{ _('You’re unlikely to get legal aid') }}</h1>
+
+  <p>
+    {% trans fromcla = 'from CLA ' if category == 'violence' else '' %}From
+    what you have told us today it looks like you won't be able to get
+    legal aid {{ fromcla }}as you don’t qualify financially{% endtrans %}
+    {% if category == 'violence' %} {{ _('for the advice they can provide') }}{% endif %}.
+  </p>
+
+  <p>{{ _('To qualify for legal aid, you must meet all of the following conditions:') }}</p>
+  <ul>
+    <li>{{ _('your income (or combined income if you have a partner) should not be more than £2,657 a month before tax') }}</li>
+    <li>{{ _('your savings (or combined savings if you have a partner) should not be more than £8,000') }}</li>
+    <li>
+      {% trans %}you (and your partner if you have one) should have no more than £733 a month left after we've taken
+      certain living expenses into account{% endtrans %}
+    </li>
+  </ul>
+
+  {% if category == 'family' %}
+    <p>
+      {% trans %}If you want to make an application to court about a family matter
+      you need to first of all see if family mediation will help. Use the
+      <a href="http://www.familymediationcouncil.org.uk/" rel="external">Family Mediation Council</a>
+      directory to find a mediator and make an appointment for a Mediation
+      Information and Assessment Meeting (MIAM).{% endtrans %}
+    </p>
+  {% endif %}
+
+  {% if category == 'violence' %}
+    <p>
+      {% trans %}You may still qualify for legal aid to seek a court order for protection. To find out if you
+      might qualify, contact a legal adviser in your area.{% endtrans %}
+    </p>
+  {% else %}
+    <p>{% trans %}You can also seek advice from a legal adviser - you will have to
+      pay for this advice.{% endtrans %}</p>
+  {% endif %}
+
+  {% if category not in ['debt', 'violence', 'discrimination', 'education', 'family', 'housing', 'benefits'] %}
+    <p>
+      {% trans %}If you have a court hearing date it is important that you get advice
+      as soon as possible. You may be able to get last-minute help on the
+      day of the hearing from an adviser in the court building.{% endtrans %}
+    </p>
+  {% endif %}
+
+  <p>
+    <a class="button" href="https://www.gov.uk/find-a-legal-adviser">{{ _('Find a legal adviser') }}</a>
+  </p>
+
+  {% if organisations %}
+    <div class="help-organisations">
+      <h2>{{ _('Free help organisations for problems about %(category_name)s', category_name=(category_name if category != 'violence' else 'domestic violence')|lower) }}</h2>
+      <p>
+        {% trans %}You may still get free help and advice from the organisations listed
+        below. You don’t have to qualify for legal aid to get help and advice
+        from these organisations.{% endtrans %}
+      </p>
+      <ul class="org-list">
+        {% for org in organisations %}
+          {% set has_contact_details = org.telephone_numbers or org.email %}
+          <li class="vcard">
+            <h3>
+              <a class="url fn org" href="{{ org.website }}" rel="external">
+                {{ org.service_name }}
+              </a>
+            </h3>
+            <div class="org-description">
+              {{ org.public_description|markdown }}
+            </div>
+            {% if has_contact_details %}
+              {% call Element.alert() %}
+                {% if org.telephone_numbers %}
+                  <p>
+                    <strong>{{ _('Helpline') }}:</strong>
+                    {% for telephone_number in org.telephone_numbers %}
+                      <span class="tel">{{ telephone_number.number }}</span>
+                      {%- if telephone_number.name %} ({{ telephone_number.name }}){% endif -%}
+                      {%- if not loop.last %}, {% endif %}
+                    {% endfor %}
+                  </p>
+                {% endif %}
+                {% if org.opening_hours %}
+                  <p>
+                    <strong>{{ _('Opening hours') }}:</strong>
+                    <span>{{ org.opening_hours }}</span>
+                  </p>
+                {% endif %}
+                {% if org.email %}
+                  <p>
+                    <strong>{{ _('Email') }}:</strong>
+                    <a class="email" href="mailto:{{ org.email }}">{{ org.email }}</a>
+                  </p>
+                {% endif %}
+                {% if org.address %}
+                  <p>
+                    <strong>{{ _('Address') }}:</strong>
+                    <span class="adr">{{ org.address }}</span>
+                  </p>
+                {% endif %}
+              {% endcall %}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% else %}
+    <p>{{ _('There has been a problem with listing help organisations. Please refresh this page or try again later.') }}</p>
+  {% endif %}
+
+  {{ Element.satisfaction_survey_prompt() }}
+{% endblock %}
