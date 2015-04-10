@@ -561,11 +561,11 @@ msgstr "Rhowch 0 os nad oes gennych forgais"
 
 #: cla_public/apps/checker/forms.py:288
 msgid "How much was your monthly mortgage repayment last month?"
-msgstr "Beth yw swm yr ad-daliadau misol ar y morgais?"
+msgstr ""
 
 #: cla_public/apps/checker/forms.py:291
 msgid "Do you rent out any part of this property?"
-msgstr "Ydych chi’n gosod unrhyw ran o’r eiddo hwn ar rent?"
+msgstr ""
 
 #: cla_public/apps/checker/forms.py:295
 msgid "If Yes, how much rent did you receive last month?"
