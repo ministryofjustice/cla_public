@@ -569,7 +569,7 @@ msgstr ""
 
 #: cla_public/apps/checker/forms.py:295
 msgid "If Yes, how much rent did you receive last month?"
-msgstr "Os ydych chi, pa swm o rent yr ydych chi’n ei dderbyn"
+msgstr ""
 
 #: cla_public/apps/checker/forms.py:301
 msgid "Is your share of the property in dispute?"
