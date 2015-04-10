@@ -1,1 +1,23 @@
-<h1>Scope Diagnosis</h1>
+{% extends "base.html" %}
+
+{% set title = _('About you') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+
+  <h1>Scope Diagnosis</h1>
+  <form action="" method="post">
+    {% for choice in response_json.choices %}
+      <input id="{{ choice.id }}" type="radio" name="choice" value="{{ choice.id }}">
+      <label for="{{ choice.id }}">{{ choice.label }}</label>
+      <div>
+      <h3>{{ choice.title }}</h3>
+        {{ choice.help_text }}
+      </div>
+    {% endfor %}
+    <input type="submit" value="Next">
+  </form>
+
+  <pre>{{ response_json }}</pre>
+
+{% endblock %}
