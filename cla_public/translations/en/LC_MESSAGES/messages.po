@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-25 14:25+0000\n"
+"POT-Creation-Date: 2015-04-10 13:29+0100\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -310,24 +310,28 @@ msgid "Social Fund Payments"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:122
+msgid "Special Education Needs (SEN) direct payment"
+msgstr ""
+
+#: cla_public/apps/checker/constants.py:123
 msgid "War Pension"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:149
+#: cla_public/apps/checker/constants.py:150
 msgctxt "It is"
 msgid "Yes"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:150
+#: cla_public/apps/checker/constants.py:151
 msgctxt "It isn’t"
 msgid "No"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:154
+#: cla_public/apps/checker/constants.py:155
 msgid "I’ll call CLA"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:155
+#: cla_public/apps/checker/constants.py:156
 msgid "Call me back"
 msgstr ""
 
@@ -341,7 +345,7 @@ msgstr ""
 
 #: cla_public/apps/checker/fields.py:86 cla_public/apps/checker/forms.py:111
 #: cla_public/apps/checker/forms.py:172 cla_public/apps/checker/forms.py:189
-#: cla_public/apps/contact/forms.py:61
+#: cla_public/apps/contact/forms.py:63
 msgid "Please choose Yes or No"
 msgstr ""
 
@@ -554,7 +558,7 @@ msgid "Please enter 0 if you have no mortgage"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:288
-msgid "How much are your monthly mortgage repayments?"
+msgid "How much was your monthly mortgage repayment last month?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:291
@@ -562,7 +566,7 @@ msgid "Do you rent out any part of this property?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:295
-msgid "If Yes, how much rent do you receive?"
+msgid "If Yes, how much rent did you receive last month?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:301
@@ -777,7 +781,7 @@ msgstr ""
 msgid "Please select a time period from the drop down"
 msgstr ""
 
-#: cla_public/apps/checker/views.py:44 cla_public/apps/contact/views.py:43
+#: cla_public/apps/checker/views.py:38 cla_public/apps/contact/views.py:36
 msgid "There was an error submitting your data. Please check and try again."
 msgstr ""
 
@@ -789,135 +793,135 @@ msgstr ""
 msgid "Call me in the next week on"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:43
+#: cla_public/apps/contact/fields.py:42
 msgid "Not a valid choice"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:76
+#: cla_public/apps/contact/fields.py:75
 msgid "Not a valid date"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:102
+#: cla_public/apps/contact/fields.py:101
 msgid "Not a valid time"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:124
+#: cla_public/apps/contact/fields.py:123
 msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:133
+#: cla_public/apps/contact/fields.py:132
 msgid "Arrange a callback time"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:24
+#: cla_public/apps/contact/forms.py:26
 msgid "-- Choose a language --"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:31
+#: cla_public/apps/contact/forms.py:33
 msgid "BSL - Webcam"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:32
+#: cla_public/apps/contact/forms.py:34
 msgid "Minicom"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:33
+#: cla_public/apps/contact/forms.py:35
 msgid "Text Relay"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:34
+#: cla_public/apps/contact/forms.py:36
 msgid "Welsh"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:35
+#: cla_public/apps/contact/forms.py:37
 msgid "Other language"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:37
+#: cla_public/apps/contact/forms.py:39
 msgid "Language required:"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:39
+#: cla_public/apps/contact/forms.py:41
 msgid "Any other communication needs"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:41
+#: cla_public/apps/contact/forms.py:43
 msgid "Other communication needs"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:42
+#: cla_public/apps/contact/forms.py:44
 msgid "Please tell us what you need in the box below"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:50
+#: cla_public/apps/contact/forms.py:52
 msgid "Contact phone number"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:53
+#: cla_public/apps/contact/forms.py:55
 msgid "Your telephone number must be 20 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:57
+#: cla_public/apps/contact/forms.py:59
 msgid "Is it safe for us to leave a message on this number?"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:64
+#: cla_public/apps/contact/forms.py:66
 msgid "Select a time for us to call you"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:65
+#: cla_public/apps/contact/forms.py:67
 msgid "We will try to call you back around the time you request, but this may not always be possible. We will always call you back by the next working day."
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:75
+#: cla_public/apps/contact/forms.py:77
 msgid "Postcode"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:77
+#: cla_public/apps/contact/forms.py:79
 msgid "Your postcode must be 12 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:81
+#: cla_public/apps/contact/forms.py:83
 msgid "Street address"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:83
+#: cla_public/apps/contact/forms.py:85
 msgid "Your address must be 255 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:93 cla_public/templates/privacy.html:435
+#: cla_public/apps/contact/forms.py:95 cla_public/templates/privacy.html:435
 msgid "Full name"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:94
+#: cla_public/apps/contact/forms.py:96
 msgid "For example: John Smith"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:96
+#: cla_public/apps/contact/forms.py:98
 msgid "Your full name must be 400 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:100
+#: cla_public/apps/contact/forms.py:102
 msgid "Contact preference"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:103
+#: cla_public/apps/contact/forms.py:105
 msgid "Please choose one of the options"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:114
+#: cla_public/apps/contact/forms.py:115
 msgid "Help the operator to understand your situation"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:115
-msgid "If you’d like to tell us more about your problem, please do so in the box below. The Civil Legal Advice operator will read this before they call you."
+#: cla_public/apps/contact/forms.py:116
+msgid "If you’d like to tell us more about your problem, please do so in the box below. The Civil Legal Advice operator will read this to help them understand your problem."
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:120
+#: cla_public/apps/contact/forms.py:121
 msgid "Your notes must be 5000 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:125
+#: cla_public/apps/contact/forms.py:126
 msgid "Do you have any special communication needs?"
 msgstr ""
 
@@ -1034,10 +1038,10 @@ msgid "About you"
 msgstr ""
 
 #: cla_public/templates/about.html:57
-#: cla_public/templates/benefits-tax-credits.html:35
-#: cla_public/templates/benefits.html:34 cla_public/templates/income.html:75
-#: cla_public/templates/problem.html:43 cla_public/templates/property.html:61
-#: cla_public/templates/savings.html:47
+#: cla_public/templates/benefits-tax-credits.html:37
+#: cla_public/templates/benefits.html:34 cla_public/templates/income.html:79
+#: cla_public/templates/problem.html:43 cla_public/templates/property.html:62
+#: cla_public/templates/savings.html:48
 msgid "Continue"
 msgstr ""
 
@@ -1079,7 +1083,14 @@ msgid ""
 "    Please answer these questions as fully and accurately as you can."
 msgstr ""
 
-#: cla_public/templates/benefits-tax-credits.html:40
+#: cla_public/templates/benefits-tax-credits.html:19
+#: cla_public/templates/contact.html:27 cla_public/templates/income.html:27
+#: cla_public/templates/outgoings.html:16 cla_public/templates/property.html:22
+#: cla_public/templates/savings.html:22
+msgid "When you speak to CLA, you will need to provide evidence of the financial information you’ve given us through this service."
+msgstr ""
+
+#: cla_public/templates/benefits-tax-credits.html:42
 msgid "Total amount of benefits not listed above"
 msgstr ""
 
@@ -1112,56 +1123,64 @@ msgstr ""
 
 #: cla_public/templates/contact.html:23
 msgid ""
-"You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+"You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -\n"
 "      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
 "      or ask us to call you back, which is free."
 msgstr ""
 
-#: cla_public/templates/contact.html:39
+#: cla_public/templates/contact.html:28
+msgid "When a CLA operator calls you, the call will come from an anonymous number."
+msgstr ""
+
+#: cla_public/templates/contact.html:41
+msgid "You will be given the CLA phone number when you submit your details below."
+msgstr ""
+
+#: cla_public/templates/contact.html:45
 msgid ""
 "We will try to call you at least once. If we cannot speak to you we will leave you a message,\n"
 "        unless you tell us not to below. If you miss the call, please complete this form again to book another\n"
 "        callback or call us directly."
 msgstr ""
 
-#: cla_public/templates/contact.html:66
+#: cla_public/templates/contact.html:72
 msgid "Submit details"
 msgstr ""
 
-#: cla_public/templates/contact.html:72
-#: cla_public/templates/result/confirmation.html:30
+#: cla_public/templates/contact.html:78
+#: cla_public/templates/result/confirmation.html:32
 #: cla_public/templates/result/eligible.html:50
 msgid "What happens next?"
 msgstr ""
 
-#: cla_public/templates/contact.html:74
+#: cla_public/templates/contact.html:80
 msgid ""
 "The first person you speak to will be an operator. They will ask you questions about\n"
-"        you and your problem, including you and your partner's financial circumstances."
-msgstr ""
-
-#: cla_public/templates/contact.html:78
-msgid "If it looks like you might qualify you will be put through to a CLA specialist adviser."
-msgstr ""
-
-#: cla_public/templates/contact.html:81
-msgid "If CLA can’t help you we will always suggest where else you might get help."
+"        yourself and your problem, including your financial circumstances (and your partner's, if you have one)."
 msgstr ""
 
 #: cla_public/templates/contact.html:84
+msgid "If it looks like you might qualify you will be put through to a CLA specialist adviser."
+msgstr ""
+
+#: cla_public/templates/contact.html:87
+msgid "If CLA can’t help you we will always suggest where else you might get help."
+msgstr ""
+
+#: cla_public/templates/contact.html:90
 msgid ""
 "If we can do anything to make it easier for you to communicate with us due to your\n"
 "        disability please tell the operator."
 msgstr ""
 
-#: cla_public/templates/contact.html:88
+#: cla_public/templates/contact.html:94
 msgid ""
 "Protecting your personal data and your privacy is important to us. We are asking for\n"
-"        some information from you now so that when we call you back we know who you are. You\n"
-"        can read the full <a href=\"/privacy\">Civil Legal Advice Privacy Statement here</a>."
+"        some information from you now so that when we speak to you we know who you are. You\n"
+"        can read the full <a href=\"/privacy\">Civil Legal Advice Privacy Statement</a>."
 msgstr ""
 
-#: cla_public/templates/contact.html:103
+#: cla_public/templates/contact.html:109
 msgid "Find UK address"
 msgstr ""
 
@@ -1399,42 +1418,42 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/help-organisations.html:56
-#: cla_public/templates/result/eligible-no-callback.html:29
-#: cla_public/templates/result/face-to-face.html:66
+#: cla_public/templates/result/eligible-no-callback.html:36
+#: cla_public/templates/result/face-to-face.html:68
 msgid "Find a legal adviser"
 msgstr ""
 
-#: cla_public/templates/help-organisations.html:60
+#: cla_public/templates/help-organisations.html:61
+#, python-format
+msgid "Free help organisations for problems about %(category_name)s"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:63
 msgid ""
 "You may still get free help and advice from the organisations listed\n"
-"    below. You don’t have to qualify for legal aid to get help and advice\n"
-"    from these organisations."
+"        below. You don’t have to qualify for legal aid to get help and advice\n"
+"        from these organisations."
 msgstr ""
 
-#: cla_public/templates/help-organisations.html:67
-#, python-format
-msgid "Help organisations for problems about %(category_name)s"
-msgstr ""
-
-#: cla_public/templates/help-organisations.html:84
+#: cla_public/templates/help-organisations.html:83
 msgid "Helpline"
 msgstr ""
 
-#: cla_public/templates/help-organisations.html:94
+#: cla_public/templates/help-organisations.html:93
 msgid "Opening hours"
 msgstr ""
 
-#: cla_public/templates/help-organisations.html:100
+#: cla_public/templates/help-organisations.html:99
 #: cla_public/templates/privacy.html:233
 msgid "Email"
 msgstr ""
 
-#: cla_public/templates/help-organisations.html:106
+#: cla_public/templates/help-organisations.html:105
 #: cla_public/templates/privacy.html:436
 msgid "Address"
 msgstr ""
 
-#: cla_public/templates/help-organisations.html:117
+#: cla_public/templates/help-organisations.html:116
 msgid "There has been a problem with listing help organisations. Please refresh this page or try again later."
 msgstr ""
 
@@ -1461,98 +1480,22 @@ msgid ""
 "    fully and accurately as you can."
 msgstr ""
 
-#: cla_public/templates/income.html:35
+#: cla_public/templates/income.html:29
+msgid "We only need to know about any income you received last month, even if your income varies from month to month."
+msgstr ""
+
+#: cla_public/templates/income.html:39
 msgid "Your money coming in"
 msgstr ""
 
-#: cla_public/templates/income.html:38
+#: cla_public/templates/income.html:42
 msgid ""
 "This section is for any money that is paid to you personally - for example, your wages.\n"
 "            You should record money coming in for your partner, if you have one, in the next section."
 msgstr ""
 
-#: cla_public/templates/income.html:57
+#: cla_public/templates/income.html:61
 msgid "Your partner’s money coming in"
-msgstr ""
-
-#: cla_public/templates/index.html:6
-msgid "Find out if Civil Legal Advice can help you"
-msgstr ""
-
-#: cla_public/templates/index.html:7
-msgid "If you qualify for legal aid, you may be able to get help from Civil Legal Advice (CLA), a national advice line for England and Wales."
-msgstr ""
-
-#: cla_public/templates/index.html:9
-msgid "You will be asked general questions about your problem and detailed questions about your finances."
-msgstr ""
-
-#: cla_public/templates/index.html:11
-msgid "If it looks like you might qualify for legal aid, the next step will be to speak to a Civil Legal Advice operator."
-msgstr ""
-
-#: cla_public/templates/index.html:13
-msgid "If CLA can’t help, you’ll get suggestions of other places you could go for advice."
-msgstr ""
-
-#: cla_public/templates/index.html:15
-msgid "Start"
-msgstr ""
-
-#: cla_public/templates/index.html:17
-msgid "Before you start"
-msgstr ""
-
-#: cla_public/templates/index.html:18
-msgid "To use this service, you’ll need details of the following, for you and your partner, if you have one"
-msgstr ""
-
-#: cla_public/templates/index.html:20
-msgid "your income, income tax and National Insurance contributions"
-msgstr ""
-
-#: cla_public/templates/index.html:21
-msgid "value of any property you own and mortgage details"
-msgstr ""
-
-#: cla_public/templates/index.html:22
-msgid "any savings, investments or valuable items"
-msgstr ""
-
-#: cla_public/templates/index.html:23
-msgid "any benefits you receive"
-msgstr ""
-
-#: cla_public/templates/index.html:26
-msgid "It might be useful to have your last month’s payslips (if you’re working), bank statements, recent benefit letters, current valuation for any property you own and  mortgage statements to hand."
-msgstr ""
-
-#: cla_public/templates/index.html:28
-msgid "Please answer all questions accurately and honestly. You may need to provide evidence of what you say later."
-msgstr ""
-
-#: cla_public/templates/index.html:30
-msgid "At the end you will get an indication of whether you might qualify for advice from CLA – but you won’t get a final decision until you speak to us."
-msgstr ""
-
-#: cla_public/templates/index.html:32
-msgid "You can do a quick <a href=\"https://www.gov.uk/check-legal-aid\">check</a> to see if you can get legal aid for your specific problem and find out whether CLA is your best option for help."
-msgstr ""
-
-#: cla_public/templates/index.html:34
-msgid "Who this service is for"
-msgstr ""
-
-#: cla_public/templates/index.html:36
-msgid "This service is for England and Wales. Legal aid is different in <a href=\"http://www.slab.org.uk/public/civil/eligibility/\" rel=\"external\">Scotland</a> and <a href=\"http://www.dojni.gov.uk/index/public-consultations/current-consultations/consultation-on-scope-of-civil-legal-aid.htm\" rel=\"external\">Northern Ireland</a>."
-msgstr ""
-
-#: cla_public/templates/index.html:38
-msgid "If you’ve been charged with a crime, this service doesn’t apply to you. Ask your solicitor or barrister about criminal legal aid."
-msgstr ""
-
-#: cla_public/templates/index.html:40
-msgid "This online service is only for adults. If you’re under 18, please contact <a href=\"https://www.gov.uk/civil-legal-advice\">Civil Legal Advice</a>."
 msgstr ""
 
 #: cla_public/templates/outgoings.html:7
@@ -1567,7 +1510,11 @@ msgstr ""
 msgid "We only need to know about certain things you pay for, to work out if you may be able to get legal aid."
 msgstr ""
 
-#: cla_public/templates/outgoings.html:30
+#: cla_public/templates/outgoings.html:18
+msgid "We only need to know about your outgoings for last month."
+msgstr ""
+
+#: cla_public/templates/outgoings.html:34
 msgid "Submit"
 msgstr ""
 
@@ -2299,21 +2246,21 @@ msgstr ""
 msgid "If you own more than one property, you can add more properties below."
 msgstr ""
 
-#: cla_public/templates/property.html:31
+#: cla_public/templates/property.html:32
 msgid "Property"
 msgstr ""
 
-#: cla_public/templates/property.html:33
+#: cla_public/templates/property.html:34
 msgid "Remove property"
 msgstr ""
 
-#: cla_public/templates/property.html:54
+#: cla_public/templates/property.html:55
 msgid "Add another property"
 msgstr ""
 
-#: cla_public/templates/property.html:66 cla_public/templates/property.html:67
-#: cla_public/templates/property.html:68
-msgid "How much rent do you receive?"
+#: cla_public/templates/property.html:67 cla_public/templates/property.html:68
+#: cla_public/templates/property.html:69
+msgid "How much rent did you receive last month?"
 msgstr ""
 
 #: cla_public/templates/savings.html:11
@@ -2400,125 +2347,111 @@ msgstr ""
 msgid "If you’re having trouble completing this form"
 msgstr ""
 
-#: cla_public/templates/macros/form.html:419
+#: cla_public/templates/macros/element.html:47
+msgid "What do you think about this service?"
+msgstr ""
+
+#: cla_public/templates/macros/element.html:49
+msgid ""
+"Your feedback will improve this service.\n"
+"    Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">send us your thoughts</a>."
+msgstr ""
+
+#: cla_public/templates/macros/form.html:421
 msgid "This form has errors."
 msgstr ""
 
-#: cla_public/templates/macros/form.html:420
+#: cla_public/templates/macros/form.html:422
 msgid "Please see below for the errors you need to correct."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:10
+#: cla_public/templates/result/confirmation.html:12
 msgid "We will call you back"
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:12
+#: cla_public/templates/result/confirmation.html:14
 msgid "Your details have been submitted"
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:16
+#: cla_public/templates/result/confirmation.html:18
 msgid "Your reference number is"
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:23
+#: cla_public/templates/result/confirmation.html:25
 msgid "You can now call CLA on"
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:24
+#: cla_public/templates/result/confirmation.html:26
 msgid ""
 "Please quote your reference number when you call. Find out about\n"
 "        <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a>."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:33
+#: cla_public/templates/result/confirmation.html:36
 msgid ""
 "Your details have been submitted and an operator will try to call\n"
 "        you back around the time you requested "
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:36
+#: cla_public/templates/result/confirmation.html:39
 msgid ""
 "If this is not possible, we will always call you back by the\n"
 "        next working day."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:42
-msgid ""
-"If the operator you speak to thinks you can get legal aid, they will find\n"
-"        you specialist legal help, like a phone call with a solicitor or\n"
-"        support from a family mediation service."
-msgstr ""
-
-#: cla_public/templates/result/confirmation.html:49
+#: cla_public/templates/result/confirmation.html:46
 msgid ""
 "If you need to urgently protect yourself or your family you should\n"
-"          try and get advice as soon as possible."
+"      try and get advice as soon as possible."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:55
+#: cla_public/templates/result/confirmation.html:52
 msgid ""
 "If the operator you speak to thinks you might qualify, they will\n"
-"        put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
-"        ask you more questions before making the final decision about whether you\n"
-"        qualify for legal aid."
+"    put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
+"    ask you more questions before making the final decision about whether you\n"
+"    qualify for legal aid."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:62
+#: cla_public/templates/result/confirmation.html:59
 msgid ""
 "You will need to provide evidence of your financial circumstances\n"
-"        and maybe your problem. Your CLA specialist adviser will explain\n"
-"        what is needed."
+"    and maybe your problem. Your CLA specialist adviser will explain\n"
+"    what is needed."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:68
+#: cla_public/templates/result/confirmation.html:65
 msgid ""
 "If your CLA specialist adviser takes your case on they will\n"
-"        communicate with you by telephone, email or post."
+"    communicate with you by telephone, email or post."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:73
+#: cla_public/templates/result/confirmation.html:70
 msgid ""
 "If your CLA adviser decides that you need to speak to someone in\n"
-"        person or if you need someone to represent you in court, they\n"
-"        will organise this."
+"    person or if you need someone to represent you in court, they\n"
+"    will organise this."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:80
+#: cla_public/templates/result/confirmation.html:77
 msgid ""
 "If you have a court hearing date it is important that you get\n"
-"          advice as soon as possible. You may be able to get last-minute\n"
-"          help on the day of the hearing from an adviser in the court building."
+"      advice as soon as possible. You may be able to get last-minute\n"
+"      help on the day of the hearing from an adviser in the court building."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:87
+#: cla_public/templates/result/confirmation.html:84
 msgid "What if I miss the operator’s call?"
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:89
+#: cla_public/templates/result/confirmation.html:86
 msgid ""
 "If you miss the call or you need advice urgently, you can call us on\n"
 "      <strong>0345 345 4 345</strong>. Find out about\n"
 "      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a>."
 msgstr ""
 
-#: cla_public/templates/result/confirmation.html:95
-msgid ""
-"If the operator you speak to thinks you can get legal aid, they will\n"
-"      find you specialist legal help, like a phone call with a solicitor or support from\n"
-"      a family mediation service."
-msgstr ""
-
 #: cla_public/templates/result/confirmation.html:101
-msgid "What do you think about this service?"
-msgstr ""
-
-#: cla_public/templates/result/confirmation.html:103
-msgid ""
-"Your feedback will improve this service.\n"
-"    Please <a href=\"https://www.gov.uk/done/check-legal-aid\">send us your thoughts</a>."
-msgstr ""
-
-#: cla_public/templates/result/confirmation.html:113
 msgid "Print this page"
 msgstr ""
 
@@ -2535,15 +2468,23 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/result/eligible-no-callback.html:16
-#: cla_public/templates/result/face-to-face.html:54
+msgid ""
+"To get advice about appealing a decision made by the social\n"
+"      security tribunal about your benefits to the Upper Tribunal, Court of\n"
+"      Appeal or Supreme Court, you should contact a legal adviser.\n"
+"    "
+msgstr ""
+
+#: cla_public/templates/result/eligible-no-callback.html:23
+#: cla_public/templates/result/face-to-face.html:56
 msgid ""
 "Your adviser will check whether you qualify for legal aid at\n"
 "    no cost to you. If you qualify for legal aid, you will not have to pay\n"
 "      for legal advice."
 msgstr ""
 
-#: cla_public/templates/result/eligible-no-callback.html:22
-#: cla_public/templates/result/face-to-face.html:60
+#: cla_public/templates/result/eligible-no-callback.html:29
+#: cla_public/templates/result/face-to-face.html:62
 msgid ""
 "If you don't qualify for legal aid, you will have to pay for\n"
 "      legal advice. You should ask your adviser about the cost of their\n"
@@ -2570,7 +2511,7 @@ msgstr ""
 #: cla_public/templates/result/eligible.html:24
 msgid ""
 "Based on the answers you’ve given today, you might qualify financially for legal aid.\n"
-"      Call Civil Legal Advice (CLA), a national helpline for England and Wales, to find out for certain\n"
+"      Contact Civil Legal Advice (CLA), a national helpline for England and Wales, to find out for certain\n"
 "      if you qualify, and get specialist advice if you do."
 msgstr ""
 
@@ -2582,7 +2523,7 @@ msgstr ""
 
 #: cla_public/templates/result/eligible.html:34
 msgid ""
-"You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+"You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -\n"
 "    <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
 "    or ask us to call you back, which is free."
 msgstr ""
@@ -2615,74 +2556,74 @@ msgid ""
 "      you need someone to represent you in court, they will organise this for you."
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:6
+#: cla_public/templates/result/face-to-face.html:8
 msgid "You might be able to get legal aid if your problem is about discrimination"
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:9
+#: cla_public/templates/result/face-to-face.html:11
 msgid ""
 "If you feel you’ve been discriminated against at work, we\n"
 "        might be able to help. Please go back to the <a href=\"/\">start</a> and choose\n"
 "        ‘Discrimination’ from the list of problem areas."
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:15
+#: cla_public/templates/result/face-to-face.html:17
 msgid "Legal aid is not usually available for other employment problems."
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:19
+#: cla_public/templates/result/face-to-face.html:21
 msgid ""
 "You may still be able to get legal aid in exceptional cases.\n"
 "        You could seek advice from a legal adviser about whether an\n"
 "        application might succeed in your case and how to apply."
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:24
-#: cla_public/templates/result/face-to-face.html:45
+#: cla_public/templates/result/face-to-face.html:26
+#: cla_public/templates/result/face-to-face.html:47
 msgid "You may be able to get free advice from a legal adviser"
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:27
+#: cla_public/templates/result/face-to-face.html:29
 msgid ""
 "You will usually only get legal aid for advice about\n"
 "        clinical negligence if your child has been severely injured during\n"
 "        birth or in the first 8 weeks of life."
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:33
+#: cla_public/templates/result/face-to-face.html:35
 msgid ""
 "Civil Legal Advice doesn't provide advice on issues related\n"
 "        to clinical negligence, but a legal adviser may be able to help."
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:37
+#: cla_public/templates/result/face-to-face.html:39
 msgid "Legal aid is not usually available for advice about personal injury"
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:40
+#: cla_public/templates/result/face-to-face.html:42
 msgid ""
 "You may be able to get legal aid in exceptional cases. You\n"
 "        could seek advice from a legal adviser about whether an application\n"
 "        might succeed in your case and how to apply."
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:48
+#: cla_public/templates/result/face-to-face.html:50
 msgid "Civil Legal Advice doesn’t provide advice on issues related to"
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:49
+#: cla_public/templates/result/face-to-face.html:51
 msgid "but a legal adviser may be able to help."
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:71
+#: cla_public/templates/result/face-to-face.html:73
 msgid "You may also be able to get free help from:"
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:74
+#: cla_public/templates/result/face-to-face.html:76
 msgid "Advisery, Conciliation and Arbitration Service (Acas)"
 msgstr ""
 
-#: cla_public/templates/result/face-to-face.html:75
+#: cla_public/templates/result/face-to-face.html:77
 msgid "Law Centres Network"
 msgstr ""
 
@@ -2747,5 +2688,167 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "If CLA can’t help we will suggest other places that might be able to assist you."
+#~ msgstr ""
+
+#~ msgid "How much are your monthly mortgage repayments?"
+#~ msgstr ""
+
+#~ msgid "If Yes, how much rent do you receive?"
+#~ msgstr ""
+
+#~ msgid "If you’d like to tell us more about your problem, please do so in the box below. The Civil Legal Advice operator will read this before they call you."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+#~ "      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
+#~ "      or ask us to call you back, which is free."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The first person you speak to will be an operator. They will ask you questions about\n"
+#~ "        you and your problem, including you and your partner's financial circumstances."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Protecting your personal data and your privacy is important to us. We are asking for\n"
+#~ "        some information from you now so that when we call you back we know who you are. You\n"
+#~ "        can read the full <a href=\"/privacy\">Civil Legal Advice Privacy Statement here</a>."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You may still get free help and advice from the organisations listed\n"
+#~ "    below. You don’t have to qualify for legal aid to get help and advice\n"
+#~ "    from these organisations."
+#~ msgstr ""
+
+#~ msgid "Help organisations for problems about %(category_name)s"
+#~ msgstr ""
+
+#~ msgid "Find out if Civil Legal Advice can help you"
+#~ msgstr ""
+
+#~ msgid "If you qualify for legal aid, you may be able to get help from Civil Legal Advice (CLA), a national advice line for England and Wales."
+#~ msgstr ""
+
+#~ msgid "You will be asked general questions about your problem and detailed questions about your finances."
+#~ msgstr ""
+
+#~ msgid "If it looks like you might qualify for legal aid, the next step will be to speak to a Civil Legal Advice operator."
+#~ msgstr ""
+
+#~ msgid "If CLA can’t help, you’ll get suggestions of other places you could go for advice."
+#~ msgstr ""
+
+#~ msgid "Start"
+#~ msgstr ""
+
+#~ msgid "Before you start"
+#~ msgstr ""
+
+#~ msgid "To use this service, you’ll need details of the following, for you and your partner, if you have one"
+#~ msgstr ""
+
+#~ msgid "your income, income tax and National Insurance contributions"
+#~ msgstr ""
+
+#~ msgid "value of any property you own and mortgage details"
+#~ msgstr ""
+
+#~ msgid "any savings, investments or valuable items"
+#~ msgstr ""
+
+#~ msgid "any benefits you receive"
+#~ msgstr ""
+
+#~ msgid "It might be useful to have your last month’s payslips (if you’re working), bank statements, recent benefit letters, current valuation for any property you own and  mortgage statements to hand."
+#~ msgstr ""
+
+#~ msgid "Please answer all questions accurately and honestly. You may need to provide evidence of what you say later."
+#~ msgstr ""
+
+#~ msgid "At the end you will get an indication of whether you might qualify for advice from CLA – but you won’t get a final decision until you speak to us."
+#~ msgstr ""
+
+#~ msgid "You can do a quick <a href=\"https://www.gov.uk/check-legal-aid\">check</a> to see if you can get legal aid for your specific problem and find out whether CLA is your best option for help."
+#~ msgstr ""
+
+#~ msgid "Who this service is for"
+#~ msgstr ""
+
+#~ msgid "This service is for England and Wales. Legal aid is different in <a href=\"http://www.slab.org.uk/public/civil/eligibility/\" rel=\"external\">Scotland</a> and <a href=\"http://www.dojni.gov.uk/index/public-consultations/current-consultations/consultation-on-scope-of-civil-legal-aid.htm\" rel=\"external\">Northern Ireland</a>."
+#~ msgstr ""
+
+#~ msgid "If you’ve been charged with a crime, this service doesn’t apply to you. Ask your solicitor or barrister about criminal legal aid."
+#~ msgstr ""
+
+#~ msgid "This online service is only for adults. If you’re under 18, please contact <a href=\"https://www.gov.uk/civil-legal-advice\">Civil Legal Advice</a>."
+#~ msgstr ""
+
+#~ msgid "How much rent do you receive?"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If the operator you speak to thinks you can get legal aid, they will find\n"
+#~ "        you specialist legal help, like a phone call with a solicitor or\n"
+#~ "        support from a family mediation service."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you need to urgently protect yourself or your family you should\n"
+#~ "          try and get advice as soon as possible."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If the operator you speak to thinks you might qualify, they will\n"
+#~ "        put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
+#~ "        ask you more questions before making the final decision about whether you\n"
+#~ "        qualify for legal aid."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You will need to provide evidence of your financial circumstances\n"
+#~ "        and maybe your problem. Your CLA specialist adviser will explain\n"
+#~ "        what is needed."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If your CLA specialist adviser takes your case on they will\n"
+#~ "        communicate with you by telephone, email or post."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If your CLA adviser decides that you need to speak to someone in\n"
+#~ "        person or if you need someone to represent you in court, they\n"
+#~ "        will organise this."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you have a court hearing date it is important that you get\n"
+#~ "          advice as soon as possible. You may be able to get last-minute\n"
+#~ "          help on the day of the hearing from an adviser in the court building."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If the operator you speak to thinks you can get legal aid, they will\n"
+#~ "      find you specialist legal help, like a phone call with a solicitor or support from\n"
+#~ "      a family mediation service."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your feedback will improve this service.\n"
+#~ "    Please <a href=\"https://www.gov.uk/done/check-legal-aid\">send us your thoughts</a>."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Based on the answers you’ve given today, you might qualify financially for legal aid.\n"
+#~ "      Call Civil Legal Advice (CLA), a national helpline for England and Wales, to find out for certain\n"
+#~ "      if you qualify, and get specialist advice if you do."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can choose to call CLA yourself and speak to someone immediately (this is an 0345 number -\n"
+#~ "    <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a> apply)\n"
+#~ "    or ask us to call you back, which is free."
 #~ msgstr ""
 
