@@ -3,8 +3,8 @@ import urllib
 import requests
 from cla_public.apps.checker.api import create_case
 from cla_public.libs.views import RequiresSession
-from flask import views, render_template, current_app, request, redirect, \
-    session, url_for
+from flask import views, render_template, current_app, request, session, \
+    url_for
 
 
 class ScopeApiMixin(object):
@@ -59,17 +59,24 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
 
         response = self.move_down(payload)
 
+        # Temporary for debugging
         try:
-            return render_template('scope/diagnosis.html', response_json=response.json())
+            response_json = response.json()
         except ValueError:
             return response.text
 
-    def post(self, choices='', *args, **kwargs):
-        choices_list = [request.form['choice']]
-        if choices:
-            choices_list.insert(0, choices.strip('/'))
-        next_choices = '/'.join(choices_list)
-        return redirect(url_for('.diagnosis-path', choices=next_choices))
+        def add_link(choice):
+            choices_list = [choice['id']]
+            if choices:
+                choices_list.insert(0, choices.strip('/'))
+            choice['url'] = url_for('.diagnosis-path',
+                                    choices='/'.join(choices_list))
+            return choice
+
+        display_choices = map(add_link, response_json.get('choices', []))
+
+        return render_template('scope/diagnosis.html',
+                               choices=display_choices)
 
 
 
