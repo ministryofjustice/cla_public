@@ -118,7 +118,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             u"in the box below. The Civil Legal Advice operator will read "
             u"this to help them understand your problem.")),
         validators=[
-            Length(max=5000, message=_(u'Your notes must be 5000 characters '
+            Length(max=4000, message=_(u'Your notes must be 4000 characters '
                                        u'or less')),
             Optional()])
     adaptations = ValidatedFormField(
