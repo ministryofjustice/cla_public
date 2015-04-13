@@ -14,7 +14,8 @@
           "have_partner": 1,
           "in_dispute": 0,
           "on_benefits": 0,
-          "have_children": 0,
+          "have_children": 1,
+          "num_children": 3,
           "have_dependants": 0,
           "own_property": 1,
           "aged_60_or_over": 0,
@@ -46,6 +47,16 @@
           "savings": 7499.94,
           "investments": 0.02,
           "valuables": 500.02
+        }
+      },
+      {
+        "page": "benefits-tax-credits",
+        "fields": {
+          "child_benefit-per_interval_value": 0,
+          "child_benefit-interval_period": "per_week",
+          "child_tax_credit-per_interval_value": 0,
+          "child_tax_credit-interval_period": "per_week",
+          "other_benefits": 0
         }
       },
       {
@@ -209,7 +220,8 @@
           "have_partner": 1,
           "in_dispute": 0,
           "on_benefits": 0,
-          "have_children": 0,
+          "have_children": 1,
+          "num_children": 3,
           "have_dependants": 0,
           "own_property": 1,
           "aged_60_or_over": 0,
@@ -241,6 +253,16 @@
           "savings": 7499.94,
           "investments": 0.02,
           "valuables": 500.02
+        }
+      },
+      {
+        "page": "benefits-tax-credits",
+        "fields": {
+          "child_benefit-per_interval_value": 0,
+          "child_benefit-interval_period": "per_week",
+          "child_tax_credit-per_interval_value": 0,
+          "child_tax_credit-interval_period": "per_week",
+          "other_benefits": 0
         }
       },
       {
