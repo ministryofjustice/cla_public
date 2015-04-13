@@ -13,7 +13,7 @@ def add_header(response):
     """
     Add no-cache headers
     """
-    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
+    response.headers['Cache-Control'] = 'no-cache, must-revalidate, no-store, max-age=0'
     response.headers['Pragma'] = 'no-cache'
     return response
 
@@ -54,13 +54,15 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         session['diagnosis_ref'] = response.json()['reference']
         return response
 
-    def move_down(self, payload={}):
-        return self.post_to_scope('move_down/', payload=payload)
+    def move(self, payload={}, direction='down'):
+        return self.post_to_scope('move_%s/' % direction, payload=payload)
 
     def get(self, choices='', *args, **kwargs):
         payload = {}
 
         choices_list = choices.strip('/').split('/')
+        previous_choices = session.get('diagnosis_previous_choices', [])
+        session['diagnosis_previous_choices'] = choices_list
         if choices_list:
             last_choice = choices_list[-1]
             payload['current_node_id'] = last_choice
@@ -68,7 +70,10 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         if 'case_ref' not in session or 'diagnosis_ref' not in session:
             self.create_diagnosis()
 
-        response = self.move_down(payload)
+        if len(previous_choices) > len(choices_list):
+            response = self.move(payload, 'up')
+        else:
+            response = self.move(payload)
 
         # Temporary for debugging
         try:
