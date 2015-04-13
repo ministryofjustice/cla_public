@@ -41,11 +41,6 @@ class ScopeApiMixin(object):
         return requests.post(self.request_path(path), **request_args)
 
 
-class ScopeDiagnosisApiProxy(RequiresSession, views.MethodView, ScopeApiMixin):
-    def post(self, *args, **kwargs):
-        return self.post_to_scope().text
-
-
 class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
 
     def create_diagnosis(self):
