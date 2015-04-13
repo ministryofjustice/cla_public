@@ -13,7 +13,8 @@ def add_header(response):
     """
     Add no-cache headers
     """
-    response.headers['Cache-Control'] = 'no-cache, must-revalidate, no-store, max-age=0'
+    response.headers['Cache-Control'] = \
+        'no-cache, must-revalidate, no-store, max-age=0'
     response.headers['Pragma'] = 'no-cache'
     return response
 
@@ -31,13 +32,10 @@ class ScopeApiMixin(object):
             'timeout': current_app.config.get('API_CLIENT_TIMEOUT', None)
         }
 
-    def get_post_data(self):
-        return request.form
-
     def post_to_scope(self, path='', payload={}):
         path = 'case/%s/diagnosis/%s' % (session['case_ref'], path)
         request_args = self.request_args()
-        request_args['json'] = payload#self.get_post_data()
+        request_args['json'] = payload
         return requests.post(self.request_path(path), **request_args)
 
 
@@ -54,7 +52,8 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         session['diagnosis_ref'] = response.json()['reference']
         return response
 
-    def move(self, payload={}, direction='down'):
+    def move(self, payload={}, up=False):
+        direction = 'up' if up else 'down'
         return self.post_to_scope('move_%s/' % direction, payload=payload)
 
     def get(self, choices='', *args, **kwargs):
@@ -70,10 +69,9 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         if 'case_ref' not in session or 'diagnosis_ref' not in session:
             self.create_diagnosis()
 
-        if len(previous_choices) > len(choices_list):
-            response = self.move(payload, 'up')
-        else:
-            response = self.move(payload)
+        response = self.move(
+            payload,
+            len(previous_choices) > len(choices_list))
 
         # Temporary for debugging
         try:
