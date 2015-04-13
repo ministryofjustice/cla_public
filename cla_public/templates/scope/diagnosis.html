@@ -8,7 +8,7 @@
   <h1>Scope Diagnosis</h1>
   {% for choice in choices %}
     <div>
-      <h3><a href="{{ choice.url|escape }}">{{ choice.label|safe }}</a></h3>
+      <h3><a href="{{ choice.url }}">{{ choice.label|safe }}</a></h3>
       {% if choice.help_text %}
         {{ choice.help_text|safe }}
       {% endif %}
