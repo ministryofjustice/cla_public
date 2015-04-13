@@ -27,8 +27,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
     def on_valid_submit(self):
 
         if self.form.extra_notes.data:
-            session.add_note(
-                u'User problem:\n{0}'.format(self.form.extra_notes.data))
+            session.add_note(u'User problem', self.form.extra_notes.data)
         try:
             post_to_eligibility_check_api(session.notes_object())
             post_to_case_api(self.form)
