@@ -3,20 +3,20 @@
 root = true
 
 [*]
-    charset = utf-8
-    end_of_line = lf
-    indent_style = space
-    insert_final_newline = true
-    trim_trailing_whitespace = true
+charset = utf-8
+end_of_line = lf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 [*.py]
-    indent_size = 4
+indent_size = 4
 
 [*.{js,scss,html,jinja}]
-    indent_size = 2
+indent_size = 2
 
 [*.md]
-    trim_trailing_whitespace = false
+trim_trailing_whitespace = false
 
 [Makefile]
-    indent_style = tab
+indent_style = tab
