@@ -10,11 +10,10 @@ from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
 from wtforms.validators import InputRequired, Optional, Required, Length
 
-from cla_common.constants import ADAPTATION_LANGUAGES
+from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
 from cla_public.apps.checker.fields import YesNoField
-from cla_public.apps.contact.constants import THIRD_PARTY_RELATIONSHIPS
 from cla_public.apps.checker.constants import CONTACT_SAFETY, \
     CONTACT_PREFERENCE, YES, NO
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
@@ -26,6 +25,9 @@ from cla_public.libs.honeypot import Honeypot
 LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
     [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
+
+THIRDPARTY_RELATIONSHIP = map(lambda (name, value): (name, _(value)), THIRDPARTY_RELATIONSHIP)
+THIRDPARTY_RELATIONSHIP_CHOICES = [('', _('-- Please select --'))] + THIRDPARTY_RELATIONSHIP
 
 
 class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -102,7 +104,7 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
                 InputRequired()])
     relationship = SelectField(
         _(u'Relationship'),
-        choices=(THIRD_PARTY_RELATIONSHIPS),
+        choices=(THIRDPARTY_RELATIONSHIP_CHOICES),
         validators=[Required()])
 
 
