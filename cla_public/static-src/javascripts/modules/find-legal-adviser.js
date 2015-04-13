@@ -95,6 +95,10 @@
           self.markers = [];
           self.eventsBound = false;
           self.init();
+
+          $('html, body').delay(300).animate({
+            'scrollTop': self.findLegalAdviserContainer.offset().top - 10
+          }, 160);
         })
         .error();
     },
