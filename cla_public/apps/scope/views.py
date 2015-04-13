@@ -2,9 +2,20 @@
 import urllib
 import requests
 from cla_public.apps.checker.api import create_case
+from cla_public.apps.scope import scope
 from cla_public.libs.views import RequiresSession
 from flask import views, render_template, current_app, request, session, \
     url_for
+
+
+@scope.after_request
+def add_header(response):
+    """
+    Add no-cache headers
+    """
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    return response
 
 
 class ScopeApiMixin(object):
