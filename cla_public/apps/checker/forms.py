@@ -83,8 +83,7 @@ class ProblemForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form):
         category = self.categories.data
         if category == 'violence':
             category = 'family'
-        session.add_note(u'User selected category: {0}'.format(
-            self.categories.data))
+        session.add_note(u'User selected category', self.categories.data)
         return {
             'category': category
         }
@@ -443,8 +442,8 @@ class TaxCreditsForm(ConfigFormMixin, Honeypot, BabelTranslationsFormMixin, Form
             MoneyIntervalAmountRequired()])
 
     def api_payload(self):
-        session.add_note(u'Other benefits:\n{0}'.format('\n'.join([
-            u' - {0}'.format(benefit) for benefit in self.benefits.data])))
+        session.add_note(u'Other benefits', '\n'.join([
+            u' - {0}'.format(benefit) for benefit in self.benefits.data]))
         return {
             'on_nass_benefits': nass(self.benefits.data),
             'you': {'income': {
