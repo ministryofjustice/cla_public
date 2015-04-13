@@ -176,7 +176,7 @@ class CheckerSession(SecureCookieSession):
 
     def notes_object(self):
         session = self
-        format_note = lambda key, note: '{key}:\n{note}'.format(
+        format_note = lambda (key, note): '{key}:\n{note}'.format(
             key=key, note=note)
 
         class Notes(object):
