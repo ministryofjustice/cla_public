@@ -6,7 +6,7 @@ from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 from requests.exceptions import ConnectionError, Timeout
 
 from cla_common.constants import ELIGIBILITY_STATES
-from cla_public.apps.checker.api import post_to_is_eligible_api
+from cla_public.apps.checker.api import post_to_is_eligible_api, ApiError
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
     PASSPORTED_BENEFITS, YES, CATEGORIES
 from cla_public.apps.checker.utils import passported
@@ -52,7 +52,7 @@ class CheckerSession(SecureCookieSession):
         if self._eligibility is None:
             try:
                 self._eligibility = post_to_is_eligible_api()
-            except (ConnectionError, Timeout):
+            except ApiError:
                 self._eligibility = ELIGIBILITY_STATES.UNKNOWN
         return self._eligibility
 
