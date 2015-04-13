@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import urllib
+from cla_common.constants import DIAGNOSIS_SCOPE
 import requests
-from cla_public.apps.checker.api import create_case
+from cla_public.apps.checker.api import create_case, \
+    post_to_eligibility_check_api
 from cla_public.apps.scope import scope
 from cla_public.libs.views import RequiresSession
 from flask import views, render_template, current_app, request, session, \
-    url_for
+    url_for, redirect
 
 
 @scope.after_request
@@ -78,6 +80,23 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
             response_json = response.json()
         except ValueError:
             return response.text
+
+        if response_json['state'] != DIAGNOSIS_SCOPE.UNKNOWN:
+            category = response_json['category']
+            if category == 'violence':
+                category = 'family'
+            session['ProblemForm'] = session.get('AboutYouForm', {})
+            session['ProblemForm']['categories'] = category
+            session.add_note(u'User selected category: {0}'.format(category))
+            payload = {
+                'category': category
+            }
+            post_to_eligibility_check_api(payload=payload)
+
+            if response_json['state'] == DIAGNOSIS_SCOPE.INSCOPE:
+                return redirect('/about')
+            elif response_json['state'] == DIAGNOSIS_SCOPE.OUTOFSCOPE:
+                return redirect('/result/face-to-face')
 
         def add_link(choice):
             choices_list = [choice['id']]
