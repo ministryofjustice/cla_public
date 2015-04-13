@@ -117,10 +117,10 @@ def log_api_errors_to_sentry(fn):
 
 
 @log_api_errors_to_sentry
-def post_to_eligibility_check_api(form):
+def post_to_eligibility_check_api(form=None, payload={}):
     backend = get_api_connection()
     reference = session.checker.get('eligibility_check')
-    payload = form.api_payload()
+    payload = form.api_payload() if form else payload
 
     if reference is None:
         payload = initialise_eligibility_check(payload)
@@ -166,8 +166,6 @@ def create_case():
             'personal_details': {
             }
         }
-
-        attach_eligibility_check(payload)
 
         response = backend.case.post(payload)
         session['case_ref'] = response['reference']
