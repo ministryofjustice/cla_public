@@ -1,17 +1,17 @@
 {% import "macros/form.html" as Form %}
 
 <section class="find-legal-adviser">
-  <h2>Find a legal adviser</h2>
+  <h2>{{ _('Find a legal adviser') }}</h2>
   <form class="legal-adviser-search" method="GET">
     {% call Form.fieldset(form.postcode, as_label=True, class_=' ') %}
       {{ Form.text_input(form.postcode) }}
-      <button class="button" type="submit">Search</button>
+      <button class="button" type="submit">{{ _('Search') }}</button>
     {% endcall %}
   </form>
 
   {% if data.results %}
     <p class="results-summary">
-      Showing {{ data.results|length }} results around
+      {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
       <span class="results-location">{{ data.origin.postcode }}</span>
     </p>
 
@@ -27,7 +27,9 @@
                     <span class="marker">{{ loop.index }}</span>
                     <span class="fn org">{{ item.organisation.name }}</span>
                   </h3>
-                  <div class="distance">{{ item.distance|round(2) }} miles</div>
+                  <div class="distance">
+                    {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
+                  </div>
                 </header>
                 <div class="org-details">
                   <p>
@@ -64,7 +66,7 @@
                   href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode'], page=prev_page) }}"
                   data-page="{{prev_page}}"
                 >
-                  Previous
+                  {{ _('Previous') }}
                 </a>
               </li>
             {% endif %}
@@ -75,7 +77,7 @@
                   href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode'], page=next_page) }}"
                   data-page="{{next_page}}"
                 >
-                  Next
+                  {{ _('Next') }}
                 </a>
               </li>
             {% endif %}
