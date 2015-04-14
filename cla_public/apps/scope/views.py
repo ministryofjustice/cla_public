@@ -35,7 +35,10 @@ class ScopeApiMixin(object):
         }
 
     def post_to_scope(self, path='', payload={}):
-        path = 'case/%s/diagnosis/%s' % (session['case_ref'], path)
+        if 'diagnosis_ref' in session:
+            path = 'diagnosis/%s/%s' % (session['diagnosis_ref'], path)
+        else:
+            path = 'diagnosis/%s' % path
         request_args = self.request_args()
         request_args['json'] = payload
         return requests.post(self.request_path(path), **request_args)
@@ -44,7 +47,6 @@ class ScopeApiMixin(object):
 class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
 
     def create_diagnosis(self):
-        create_case()
         response = self.post_to_scope()
         session['diagnosis_ref'] = response.json()['reference']
         return response
@@ -63,7 +65,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
             last_choice = choices_list[-1]
             payload['current_node_id'] = last_choice
 
-        if 'case_ref' not in session or 'diagnosis_ref' not in session:
+        if 'diagnosis_ref' not in session:
             self.create_diagnosis()
 
         response = self.move(
