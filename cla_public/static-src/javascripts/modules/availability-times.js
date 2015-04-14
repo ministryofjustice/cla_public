@@ -5,7 +5,7 @@
     el: '#id_day',
 
     init: function () {
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'onChange');
       this.cacheEls();
       this.cacheData();
       this.bindEvents();
@@ -24,7 +24,7 @@
       }
 
       this.$daySelect
-        .on('change', this.render)
+        .on('change', this.onChange)
         .on('change', check(this.$specificDay));
 
       this.$timeSelect
@@ -33,7 +33,7 @@
       this.$todayTimeSelect
         .on('change', check(this.$today));
 
-      moj.Events.on('render AvailabilityTimes.render', this.render);
+      moj.Events.on('AvailabilityTimes.render', this.onChange);
     },
 
     cacheEls: function () {
@@ -48,7 +48,7 @@
       this.dayTimeHours = this.$daySelect.data('day-time-choices');
     },
 
-    render: function () {
+    onChange: function () {
       var self = this;
 
       if (this.$daySelect.val()) {
