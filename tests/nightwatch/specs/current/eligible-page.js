@@ -46,7 +46,7 @@ module.exports = {
       .click('input[name="callback_requested"][value="1"]')
     ;
 
-    ['applicant_name', 'callback-contact_number'].forEach(function(item) {
+    ['full_name', 'callback-contact_number'].forEach(function(item) {
       common.submitAndCheckForFieldError(client, [{
         name: item,
         errorText: 'This field is required.'

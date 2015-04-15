@@ -469,7 +469,7 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data = {
             'third_party_handled': YES,
-            'applicant_name': 'Applicant Full Name',
+            'full_name': 'Applicant Full Name',
             'extra_notes': 'Extra notes',
             'callback_requested': YES,
             'specific_day': 'today',

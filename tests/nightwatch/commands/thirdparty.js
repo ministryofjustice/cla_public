@@ -7,8 +7,8 @@ exports.command = function(isThirdparty, callback) {
     if(isThirdparty) {
       client
         .click('input[name="third_party_handled"][value="1"]')
-        .waitForElementVisible('#applicant_name', 5000)
-        .setValue('#applicant_name', 'John Smith')
+        .waitForElementVisible('#full_name', 5000)
+        .setValue('#full_name', 'John Smith')
         .waitForElementVisible('#third_party-third_party_name', 5000)
         .setValue('#third_party-third_party_name', 'James Bond')
         .waitForElementVisible('#third_party-relationship', 5000)
@@ -17,8 +17,8 @@ exports.command = function(isThirdparty, callback) {
     } else {
       client
         .click('input[name="third_party_handled"][value="0"]')
-        .waitForElementVisible('#applicant_name', 5000)
-        .setValue('#applicant_name', 'John Smith')
+        .waitForElementVisible('#full_name', 5000)
+        .setValue('#full_name', 'John Smith')
       ;
     }
   });

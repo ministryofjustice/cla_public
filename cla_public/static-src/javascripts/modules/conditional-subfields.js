@@ -31,7 +31,7 @@
     // replace fields on page load.
 
     // e.g. If non-JS page has a label "If Yes, how many?" (referring to previous field)
-    // Adding `CONDITIONAL_LABELS['applicant_name'] = 'Your name'` would change label to 'Your name'
+    // Adding `CONDITIONAL_LABELS['num_children'] = 'How many?'` would change label to 'How many?'
     // when JS kicks in.
     replaceLabels: function() {
       if(!window.CONDITIONAL_LABELS) {

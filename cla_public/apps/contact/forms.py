@@ -119,7 +119,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[
             IgnoreIf('third_party_handled', FieldValue(NO))
         ])
-    applicant_name = StringField(
+    full_name = StringField(
         _(u'Your full name'),
         validators=[
             Length(max=400, message=_(u'Your full name must be 400 '
@@ -158,7 +158,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
         data = {
             'personal_details': {
-                'full_name': self.applicant_name.data,
+                'full_name': self.full_name.data,
                 'postcode': self.address.form.post_code.data,
                 'mobile_phone': self.callback.form.contact_number.data,
                 'street': self.address.form.street_address.data,
