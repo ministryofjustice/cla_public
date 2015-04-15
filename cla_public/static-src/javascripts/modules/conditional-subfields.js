@@ -27,6 +27,12 @@
         });
     },
 
+    // If CONDITIONAL_LABELS constant exists its contents will be used to
+    // replace fields on page load.
+
+    // e.g. If non-JS page has a label "If Yes, how many?" (referring to previous field)
+    // Adding `CONDITIONAL_LABELS['applicant_name'] = 'Your name'` would change label to 'Your name'
+    // when JS kicks in.
     replaceLabels: function() {
       if(!window.CONDITIONAL_LABELS) {
         return;
