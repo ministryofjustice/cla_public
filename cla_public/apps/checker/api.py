@@ -150,28 +150,6 @@ def attach_eligibility_check(payload):
 
 
 @log_api_errors_to_sentry
-def create_case():
-    if 'case_ref' not in session:
-        backend = get_api_connection()
-
-        reference = session.get('eligibility_check')
-
-        if reference is None:
-            payload = initialise_eligibility_check({})
-            response = backend.eligibility_check.post(payload)
-            session['eligibility_check'] = response['reference']
-
-
-        payload = {
-            'personal_details': {
-            }
-        }
-
-        response = backend.case.post(payload)
-        session['case_ref'] = response['reference']
-
-
-@log_api_errors_to_sentry
 def post_to_case_api(form):
     backend = get_api_connection()
     payload = form.api_payload()
