@@ -1,10 +1,9 @@
 'use strict';
 
-var util = require('util');
 var common = require('../../modules/common-functions.js');
 
 function text(n) {
-  return Array(n + 1).join('x');
+  return new Array(n + 1).join('x');
 }
 
 function contactPage(client) {
@@ -17,6 +16,7 @@ function willCallWithNotes(client, notes_text) {
   var notes = 'textarea[name="extra_notes"]';
   var length = notes_text.length;
   client
+    .click('input[name="third_party_handled"][value="0"]')
     .setValue('input#full_name', 'John Smith')
     .click('input[name="callback_requested"][value="0"]')
     .setValue(notes, notes_text)
@@ -48,26 +48,4 @@ module.exports = {
 
     client.end();
   }
-}
-
-//function assertNotes(length, assertFn) {
-  //module.exports['Notes length ' + length] = function (client) {
-    //contactPage(client);
-    //willCallWithNotes(client, text(length));
-    //assertFn(client);
-    //client.end();
-  //};
-//}
-
-//function assertNotesPass(length) {
-  //assertNotes(length, assertConfirmation);
-//}
-
-//function assertNotesFail(length) {
-  //assertNotes(length, assertNotesError);
-//}
-
-//!function () {
-  //[0, 1, 5, 100, 1000, 4000].forEach(assertNotesPass);
-  //[4001, 5000, 10000].forEach(assertNotesFail);
-//}();
+};
