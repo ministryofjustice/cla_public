@@ -96,14 +96,13 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform for third-party fields
     """
     third_party_name = StringField(
-           _(u'Name of the helping person'),
-           description=_(u'For example: John Smith'),
+           _(u'If Yes, name of person who helped you'),
            validators=[
                 Length(max=400, message=_(u'Your full name must be 400 '
                                          u'characters or less')),
                 InputRequired()])
     relationship = SelectField(
-        _(u'Relationship'),
+        _(u'If Yes, relationship to you'),
         choices=(THIRDPARTY_RELATIONSHIP_CHOICES),
         validators=[Required()])
 
@@ -121,8 +120,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             IgnoreIf('third_party_handled', FieldValue(NO))
         ])
     applicant_name = StringField(
-        _(u'Name of the applicant'),
-        description=_(u'For example: John Smith'),
+        _(u'Your full name'),
         validators=[
             Length(max=400, message=_(u'Your full name must be 400 '
                                       u'characters or less')),
