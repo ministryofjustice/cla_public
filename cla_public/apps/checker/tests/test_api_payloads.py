@@ -468,7 +468,8 @@ class TestApiPayloads(unittest.TestCase):
         }
 
         form_data = {
-            'full_name': 'Full Name',
+            'third_party_handled': YES,
+            'full_name': 'Applicant Full Name',
             'extra_notes': 'Extra notes',
             'callback_requested': YES,
             'specific_day': 'today',
@@ -485,9 +486,15 @@ class TestApiPayloads(unittest.TestCase):
             'street_address': '21 Jump Street',
         }
 
+        thirdparty_data = {
+            'third_party_name': 'Thirdparty Full Name',
+            'relationship': 'OTHER'
+        }
+
         form_data.update(flatten_dict('adaptations', adaptations_data))
         form_data.update(flatten_dict('callback', callback_data))
         form_data.update(flatten_dict('address', address_data))
+        form_data.update(flatten_dict('third_party', thirdparty_data))
 
         return form_data
 
@@ -496,7 +503,8 @@ class TestApiPayloads(unittest.TestCase):
         with override_current_time(self.now):
             payload = self.payload(ContactForm, form_data)
 
-            self.assertEqual(payload['personal_details']['full_name'], 'Full Name')
+            self.assertEqual(payload['personal_details']['full_name'],
+                'Applicant Full Name')
             self.assertEqual(payload['personal_details']['postcode'], 'POSTCODE')
             self.assertEqual(payload['personal_details']['mobile_phone'], '000000000')
             self.assertEqual(payload['personal_details']['street'], '21 Jump Street')
@@ -507,6 +515,10 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload['adaptation_details']['text_relay'], True)
             self.assertEqual(payload['adaptation_details']['language'], 'WELSH')
             self.assertEqual(payload['adaptation_details']['notes'], 'other')
+
+            self.assertEqual(payload['thirdparty_details']['personal_relationship'], 'OTHER')
+            self.assertEqual(payload['thirdparty_details']['personal_details']['full_name'],
+                'Thirdparty Full Name')
 
             time = datetime.datetime.combine(
                 call_centre_availability.current_datetime().date(),
