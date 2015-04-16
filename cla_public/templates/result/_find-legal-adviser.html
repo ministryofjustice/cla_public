@@ -5,6 +5,9 @@
   <form class="legal-adviser-search" method="GET">
     {% call Form.fieldset(form.postcode, as_label=True, class_=' ') %}
       {{ Form.text_input(form.postcode) }}
+      {% if session.category %}
+        <input type="hidden" name="category" value="{{session.category}}" />
+      {% endif %}
       <button class="button" type="submit">{{ _('Search') }}</button>
     {% endcall %}
   </form>
@@ -63,7 +66,10 @@
               {% set prev_page = data.previous|query_to_dict('page') %}
               <li class="results-nav results-nav-prev">
                 <a
-                  href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode'], page=prev_page) }}"
+                  href="{{ url_for(request.url_rule.endpoint,
+                    postcode=request.args['postcode'],
+                    page=prev_page,
+                    category=session.category) }}"
                   data-page="{{prev_page}}"
                 >
                   {{ _('Previous') }}
@@ -74,7 +80,10 @@
               {% set next_page = data.next|query_to_dict('page') %}
               <li class="results-nav results-nav-next">
                 <a
-                  href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode'], page=next_page) }}"
+                  href="{{ url_for(request.url_rule.endpoint,
+                    postcode=request.args['postcode'],
+                    page=next_page,
+                    category=session.category) }}"
                   data-page="{{next_page}}"
                 >
                   {{ _('Next') }}
