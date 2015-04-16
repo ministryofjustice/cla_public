@@ -13,6 +13,11 @@ from flask import views, render_template, current_app, request, session, \
 REF_KEY = 'diagnosis_ref'
 PREV_KEY = 'diagnosis_previous_choices'
 
+OUTCOME_URLS = {
+    DIAGNOSIS_SCOPE.INSCOPE: '/about',
+    DIAGNOSIS_SCOPE.OUTOFSCOPE: '/result/face-to-face'
+}
+
 
 @scope.after_request
 def add_header(response):
@@ -39,8 +44,8 @@ class ScopeApiMixin(object):
         }
 
     def post_to_scope(self, path='', payload={}):
-        if 'diagnosis_ref' in session:
-            path = 'diagnosis/%s/%s' % (session['diagnosis_ref'], path)
+        if REF_KEY in session:
+            path = 'diagnosis/%s/%s' % (session[REF_KEY], path)
         else:
             path = 'diagnosis/%s' % path
         request_args = self.request_args()
@@ -59,12 +64,11 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         direction = 'up' if up else 'down'
         return self.post_to_scope('move_%s/' % direction, payload=payload)
 
-    def get(self, choices='', *args, **kwargs):
-        if not session.get(REF_KEY):
-            self.create_diagnosis()
+    def add_node_to_payload(self, payload, choices):
+        return payload
 
+    def do_move(self, choices):
         payload = {}
-
         choices_list = choices.strip('/').split('/')
         previous_choices = session.get(PREV_KEY, [])
         session[PREV_KEY] = choices_list
@@ -72,9 +76,26 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
             last_choice = choices_list[-1]
             payload['current_node_id'] = last_choice
 
-        response = self.move(
+        return self.move(
             payload,
             len(previous_choices) > len(choices_list))
+
+    def save_category(self, category):
+        if category == 'violence':
+            category = 'family'
+        session['category'] = category
+        session.add_note(
+            u'User selected category:',
+            unicode(session.category_name))
+        post_to_eligibility_check_api(payload={
+            'category': category
+        })
+
+    def get(self, choices='', *args, **kwargs):
+        if not session.get(REF_KEY):
+            self.create_diagnosis()
+
+        response = self.do_move(choices)
 
         try:
             response_json = response.json()
@@ -86,21 +107,9 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         state = response_json.get('state')
 
         if state and state != DIAGNOSIS_SCOPE.UNKNOWN:
-            category = response_json['category']
-            if category == 'violence':
-                category = 'family'
-            session['category'] = category
-            session.add_note(
-                u'User selected category: {0}'.format(session.category_name))
-            payload = {
-                'category': category
-            }
-            post_to_eligibility_check_api(payload=payload)
+            self.save_category(response_json['category'])
 
-            if state == DIAGNOSIS_SCOPE.INSCOPE:
-                return redirect('/about')
-            elif state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
-                return redirect('/result/face-to-face')
+            return redirect(OUTCOME_URLS[state])
 
         def add_link(choice):
             choices_list = [choice['id']]
