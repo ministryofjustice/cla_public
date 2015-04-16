@@ -14,10 +14,11 @@ from flask import session, url_for
 import xlrd
 
 from cla_public import app
-from cla_public.apps.checker.forms import ProblemForm, AboutYouForm, \
-    YourBenefitsForm, PropertiesForm, SavingsForm, TaxCreditsForm, \
-    IncomeForm, OutgoingsForm, ReviewForm
 from cla_public.apps.checker.means_test import MeansTest
+from cla_public.apps.checker.api import post_to_eligibility_check_api
+from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
+    PropertiesForm, SavingsForm, TaxCreditsForm, IncomeForm, OutgoingsForm, \
+    ReviewForm
 from cla_public.apps.checker.tests.utils.forms_utils import CATEGORY_MAPPING, \
     FormDataConverter
 
@@ -28,6 +29,12 @@ logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
 SPREADSHEET_PATH = os.path.join(
     os.path.dirname(__file__),
     'data/means_test.xlsx')
+
+
+SCOPE_PATHS = {
+    'debt': ['n65::n2', 'n4'],
+    'benefits': ['n65::n13', 'n23']
+}
 
 
 def error_msg(msg):
@@ -50,8 +57,26 @@ def form_errors(response):
 Step = namedtuple('Step', ['form_class', 'post_data', 'response', 'url'])
 
 
+def run_scope_with_category(client, category='debt'):
+        """Category now set in scope diagnosis"""
+        client.get(url_for('base.get_started'))
+        payload = {
+            'category': category
+        }
+        post_to_eligibility_check_api(payload=payload)
+        path = '/scope/diagnosis'
+        resp = client.get(path)
+        for choice in SCOPE_PATHS[category]:
+            path += '/%s' % choice
+            resp = client.get(path)
+        return resp
+
+
 def wizard(client, case):
-    response = client.get(url_for('base.get_started'))
+    response = run_scope_with_category(
+                client,
+                CATEGORY_MAPPING[case.get('_law_area', 'Debt')])
+
     url = urlparse.urlparse(response.location).path
     form_class = get_form(url)
 
@@ -114,7 +139,6 @@ def form_data(form_class, case):
 
 def get_form(url):
     return {
-        '/problem': ProblemForm,
         '/about': AboutYouForm,
         '/benefits': YourBenefitsForm,
         '/property': PropertiesForm,

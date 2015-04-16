@@ -56,7 +56,6 @@ class ProblemForm(ConfigFormMixin, BaseForm):
 class AboutYouForm(BaseForm):
 
     title = _(u'About you')
-
     have_partner = YesNoField(
         _(u'Do you have a partner?'),
         description=(

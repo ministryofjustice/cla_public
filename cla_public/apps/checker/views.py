@@ -11,14 +11,13 @@ from wtforms.validators import StopValidation
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.checker.forms import FindLegalAdviserForm
-
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES, \
     LAALAA_PROVIDER_CATEGORIES_MAP
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
-    IncomeForm, ReviewForm
+    PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, IncomeForm, \
+    ReviewForm
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
@@ -154,7 +153,6 @@ class ReviewStep(FormWizardStep):
 class CheckerWizard(AllowSessionOverride, FormWizard):
 
     steps = [
-        ('problem', CheckerStep(ProblemForm, 'checker/problem.html')),
         ('about', CheckerStep(AboutYouForm, 'checker/about.html')),
         ('benefits', CheckerStep(YourBenefitsForm, 'checker/benefits.html')),
         ('property', CheckerStep(PropertiesForm, 'checker/property.html')),
