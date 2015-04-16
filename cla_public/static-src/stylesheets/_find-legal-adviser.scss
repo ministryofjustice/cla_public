@@ -114,6 +114,14 @@ $map-height: 460px;
       float: right;
     }
   }
+
+  .org-category {
+    font-size: 11px;
+    display: inline-block;
+    padding: 1px 5px;
+    background: $yellow-25;
+    text-transform: uppercase;
+  }
 }
 
 .find-legal-adviser .map {
