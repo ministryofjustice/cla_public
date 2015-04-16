@@ -37,8 +37,8 @@
     bindEvents: function() {
       var self = this;
 
-      this.organisationListItems.on('click', function(evt) {
-        self._handleItemHighlight(evt, this);
+      this.organisationListItems.on('click', 'header', function(evt) {
+        self._handleItemHighlight(evt, $(this).closest('li'));
       });
 
       this.resultsPagination.on('click', 'a', function(evt) {
@@ -163,14 +163,8 @@
       this.map.fitBounds(pairBounds);
     },
 
-    _handleItemHighlight: function(evt, item) {
-      var $item = $(item);
+    _handleItemHighlight: function(evt, $item) {
       var $container = $item.closest('.search-results-list');
-
-      // Exclude links
-      if($(evt.target).is('a')) {
-        return;
-      }
 
       if($item.hasClass('s-highlighted')) {
         this.organisationListItems.removeClass('s-highlighted');
