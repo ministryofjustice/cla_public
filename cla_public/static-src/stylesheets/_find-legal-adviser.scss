@@ -25,7 +25,7 @@ $map-height: 460px;
 
     .org-list-item {
       border-top: 1px solid $grey-3;
-      padding: 15px 0 15px 25px;
+      padding: 10px;
       display: block;
 
       &:first-child {
@@ -34,7 +34,8 @@ $map-height: 460px;
 
       header {
         @extend %contain-floats;
-        padding-right: 80px;
+        padding: 0 80px 0 25px;
+        margin-bottom: 8px;
       }
 
       .marker {
@@ -81,12 +82,6 @@ $map-height: 460px;
     border-top: 2px solid $grey-3;
     margin: 1em 0;
     padding-top: 10px;
-
-    @include media(tablet) {
-      background: $grey-4;
-      margin: 0;
-      padding: 0;
-    }
 
     ul {
       list-style: none;
@@ -195,7 +190,8 @@ $map-height: 460px;
       .org-details {
         font-size: .9em;
         display: none;
-        margin-top: 5px;
+        padding: 8px 8px 8px 30px;
+        background: white;
       }
 
       .s-highlighted {
@@ -209,8 +205,13 @@ $map-height: 460px;
       }
 
       .org-list-item {
-        padding: 10px 10px 10px 35px;
-        cursor: pointer;
+        padding: 4px;
+
+        header {
+          cursor: pointer;
+          margin: -4px;
+          padding: 8px 88px 8px 34px;
+        }
 
         &:hover {
           background: $grey-4;
@@ -230,6 +231,11 @@ $map-height: 460px;
     .search-results-pagination {
       height: $_pagination-height - 6 - 2;
       padding: 3px;
+
+      @include media(tablet) {
+        background: $grey-4;
+        margin: 0;
+      }
     }
   }
 }
