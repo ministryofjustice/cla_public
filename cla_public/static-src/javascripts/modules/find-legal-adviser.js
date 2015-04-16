@@ -59,7 +59,7 @@
         evt.preventDefault();
 
         var url = document.location.pathname + '?' + $(this).serialize();
-        self._fetchPage(url);
+        self._fetchPage(url, true);
 
         if(window.history && history.pushState) {
           history.pushState(null, null, url);
@@ -86,7 +86,7 @@
       this.eventsBound = false;
     },
 
-    _fetchPage: function(url) {
+    _fetchPage: function(url, scrollToResults) {
       var self = this;
 
       $.get(url)
@@ -96,9 +96,11 @@
           self.eventsBound = false;
           self.init();
 
-          $('html, body').delay(300).animate({
-            'scrollTop': self.findLegalAdviserContainer.offset().top - 10
-          }, 160);
+          if(scrollToResults) {
+            $('html, body').delay(300).animate({
+              'scrollTop': self.findLegalAdviserContainer.offset().top - 10
+            }, 160);
+          }
         })
         .error();
     },
