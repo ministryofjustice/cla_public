@@ -1,6 +1,5 @@
 'use strict';
 
-var util = require('util');
 var common = require('../../modules/common-functions');
 
 module.exports = {
@@ -21,6 +20,16 @@ module.exports = {
       .waitForElementVisible('.legal-adviser-search', 5000)
       .assert.urlContains('/face-to-face')
       .assert.containsText('h1', 'You may be able to get free advice from a legal adviser')
+    ;
+  },
+
+  'Find legal adviser search': function(client) {
+    client
+      .setValue('input[name="postcode"]', 'w22dd')
+      .submitForm('form')
+      .assert.urlContains('/face-to-face')
+      .waitForElementVisible('.search-results-container', 5000)
+      .assert.containsText('.results-location', 'W2 2DD')
     ;
 
     client.end();
