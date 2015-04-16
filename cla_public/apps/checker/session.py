@@ -48,7 +48,7 @@ class CheckerSessionObject(dict):
 
     @property
     def needs_face_to_face(self):
-        return self.field('ProblemForm', 'categories') in F2F_CATEGORIES
+        return self.category in F2F_CATEGORIES
 
     @property
     def ineligible_reasons(self):
@@ -82,7 +82,7 @@ class CheckerSessionObject(dict):
 
     @property
     def category(self):
-        return self.field('ProblemForm', 'categories')
+        return self.get('category')
 
     @property
     def category_name(self):

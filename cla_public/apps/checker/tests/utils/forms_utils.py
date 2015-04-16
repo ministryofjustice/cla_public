@@ -29,13 +29,6 @@ def flatten_list_of_dicts(field_name, data_list):
             enumerate(data_list) for key, val in d.items()}
 
 
-class ProblemFormMixin(object):
-    """ProblemForm"""
-
-    def problemform_categories(self):
-        return CATEGORY_MAPPING[self._law_area]
-
-
 class AboutYouFormMixin(object):
     """AboutYouForm"""
 
@@ -274,7 +267,6 @@ class OutgoingsFormMixin(object):
 
 
 class FormDataConverter(
-        ProblemFormMixin,
         AboutYouFormMixin,
         BenefitsFormMixin,
         PropertiesFormMixin,

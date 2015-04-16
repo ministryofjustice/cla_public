@@ -6,7 +6,6 @@ from mock import patch
 
 from cla_public import app
 from cla_public.apps.checker.fields import DescriptionRadioField
-from cla_public.apps.checker.forms import ProblemForm
 from cla_public.libs.form_config_parser import ConfigFormMixin
 
 
@@ -86,9 +85,3 @@ class TestFormConfig(unittest.TestCase):
                     '<h1>Heading for Debt Markdown</h1>\n\n<ul>\n<li>List'
                     ' One</li>\n<li>Lisr Two</li>\n</ul>\n\n<p>Standard text</p>\n'
                 )
-
-    def test_problem_selected_notification(self):
-        form = ProblemForm()
-        violence_option = (option for option in form._fields['categories']
-                           if option.field_name == 'violence').next()
-        self.assertTrue(bool(violence_option.selected_notification))

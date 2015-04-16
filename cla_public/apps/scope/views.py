@@ -2,12 +2,15 @@
 import urllib
 from cla_common.constants import DIAGNOSIS_SCOPE
 import requests
-from cla_public.apps.checker.api import create_case, \
-    post_to_eligibility_check_api
+from cla_public.apps.checker.api import post_to_eligibility_check_api
 from cla_public.apps.scope import scope
 from cla_public.libs.views import RequiresSession
 from flask import views, render_template, current_app, request, session, \
     url_for, redirect
+
+# keys in session
+REF_KEY = 'diagnosis_ref'
+PREV_KEY = 'diagnosis_previous_choices'
 
 
 @scope.after_request
@@ -45,46 +48,48 @@ class ScopeApiMixin(object):
 
 
 class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
+    response = None
 
     def create_diagnosis(self):
         response = self.post_to_scope()
-        session['diagnosis_ref'] = response.json()['reference']
-        return response
+        session[REF_KEY] = response.json().get('reference')
 
     def move(self, payload={}, up=False):
         direction = 'up' if up else 'down'
         return self.post_to_scope('move_%s/' % direction, payload=payload)
 
     def get(self, choices='', *args, **kwargs):
+        if not session.get(REF_KEY):
+            self.create_diagnosis()
+
         payload = {}
 
         choices_list = choices.strip('/').split('/')
-        previous_choices = session.get('diagnosis_previous_choices', [])
-        session['diagnosis_previous_choices'] = choices_list
+        previous_choices = session.get(PREV_KEY, [])
+        session[PREV_KEY] = choices_list
         if choices_list:
             last_choice = choices_list[-1]
             payload['current_node_id'] = last_choice
-
-        if 'diagnosis_ref' not in session:
-            self.create_diagnosis()
 
         response = self.move(
             payload,
             len(previous_choices) > len(choices_list))
 
-        # Temporary for debugging
         try:
             response_json = response.json()
         except ValueError:
-            return response.text
+            if current_app.config['DEBUG']:
+                return response.text
+            raise
 
-        if response_json['state'] != DIAGNOSIS_SCOPE.UNKNOWN:
+        state = response_json.get('state')
+
+        if state and state != DIAGNOSIS_SCOPE.UNKNOWN:
             category = response_json['category']
             if category == 'violence':
                 category = 'family'
-            session['ProblemForm'] = session.get('AboutYouForm', {})
-            session['ProblemForm']['categories'] = category
-            session.add_note(u'User selected category: {0}'.format(category))
+            session['category'] = category
+            session.add_note(u'User selected category: {0}'.format(session.category_name))
             payload = {
                 'category': category
             }
