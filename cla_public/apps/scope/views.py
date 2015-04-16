@@ -8,6 +8,7 @@ from cla_public.libs.views import RequiresSession
 from flask import views, render_template, current_app, request, session, \
     url_for, redirect
 
+
 # keys in session
 REF_KEY = 'diagnosis_ref'
 PREV_KEY = 'diagnosis_previous_choices'
@@ -89,15 +90,16 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
             if category == 'violence':
                 category = 'family'
             session['category'] = category
-            session.add_note(u'User selected category: {0}'.format(session.category_name))
+            session.add_note(
+                u'User selected category: {0}'.format(session.category_name))
             payload = {
                 'category': category
             }
             post_to_eligibility_check_api(payload=payload)
 
-            if response_json['state'] == DIAGNOSIS_SCOPE.INSCOPE:
+            if state == DIAGNOSIS_SCOPE.INSCOPE:
                 return redirect('/about')
-            elif response_json['state'] == DIAGNOSIS_SCOPE.OUTOFSCOPE:
+            elif state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
                 return redirect('/result/face-to-face')
 
         def add_link(choice):
