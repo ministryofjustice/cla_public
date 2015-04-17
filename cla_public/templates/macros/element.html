@@ -62,7 +62,7 @@
 #}
 {%  macro previous_selections(nodes) %}
   <div class="previous">
-    {% set url = '/scope/diagnosis/' %}
+    {% set url = '/scope/diagnosis' %}
     {% for node in nodes %}
       {% set question = 'What do you need help with?' if loop.index0 == 0 else nodes[loop.index0 - 1].heading %}
       <a class="goBack" href="{{ url }}">
@@ -74,7 +74,7 @@
           </li>
         </ul>
       </a>
-      {% set url = url + node.id + '/' %}
+      {% set url = url + '/' + node.id %}
     {% endfor %}
   </div>
 {% endmacro %}
