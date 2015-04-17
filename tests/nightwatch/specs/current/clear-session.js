@@ -5,13 +5,17 @@ var common = require('../../modules/common-functions');
 module.exports = {
   'Start page': common.startPage,
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': common.selectDebtCategory,
 
   'About you': function(client) {
     client
       .waitForElementVisible('input[name="have_partner"]', 5000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
+    ;
+    common.aboutPageSetAllToNo(client);
+    client
+      .submitForm('form')
       .end()
     ;
   },
@@ -26,12 +30,14 @@ module.exports = {
     ;
   },
 
-  'Check debt category NOT selected': function(client) {
+  'Scope diagnosis again': common.selectDebtCategory,
+
+  'Check option is not selected': function(client) {
     client
-      .waitForElementVisible('input[name="categories"]', 5000)
-      .assert.urlContains('/problem')
+      .waitForElementVisible('input[name="have_partner"]', 5000)
+      .assert.urlContains('/about')
     ;
-    common.checkAttributeIsNotPresent(client, 'input[name="categories"][value="debt"]', 'checked');
+    common.checkAttributeIsNotPresent(client, 'input[name="have_partner"]', 'checked');
 
     client.end();
   }

@@ -26,7 +26,7 @@ var CURRENCY_CHECKS = [
 module.exports = {
   'Start page': common.startPage,
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': common.selectDebtCategory,
 
   'About you': function(client) {
     common.aboutPage(client);

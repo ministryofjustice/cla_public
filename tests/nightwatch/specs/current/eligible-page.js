@@ -5,7 +5,7 @@ var common = require('../../modules/common-functions');
 module.exports = {
   'Start page': common.startPage,
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': common.selectDebtCategory,
 
   'About you': function(client) {
     common.aboutPage(client);

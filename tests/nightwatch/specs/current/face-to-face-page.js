@@ -5,13 +5,13 @@ var common = require('../../modules/common-functions');
 module.exports = {
   'Start page': common.startPage,
 
-  'Categories of law (Your problem)': function(client) {
+  'Scope diagnosis': function(client) {
     client
-      .assert.urlContains('/problem')
+      .assert.urlContains('/scope/diagnosis')
       .assert.containsText('h1', 'What do you need help with?')
-      .click('input[name="categories"][value="clinneg"]')
-      .assert.attributeEquals('input[name="categories"][value="clinneg"]', 'checked', 'true')
-      .submitForm('form')
+      .useXpath()
+      .click('//a[@href="/scope/diagnosis/n65::n0"]')
+      .useCss()
     ;
   },
 
