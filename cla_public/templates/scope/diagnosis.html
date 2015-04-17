@@ -1,18 +1,24 @@
 {% extends "base.html" %}
+{% import "macros/element.html" as Element %}
 
+{% set heading = nodes[-1].heading if nodes else 'Choose one of the options' %}
 {% set title = _('About you') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
 
-  <h1>Scope Diagnosis</h1>
-  <div class="previous">
-    {% for node in nodes %}
-      {{ node }}
-    {% endfor %}
-  </div>
+
+
+  {% if nodes %}
+    <strong>Your selections so far:</strong>
+    {{ Element.previous_selections(nodes) }}
+  {% else %}
+    <h1>What do you need help with</h1>
+    <p class="subtitle">To qualify for legal aid, you must have a problem that is covered by legal aid.</p>
+  {% endif %}
+
   <div class="scope-options">
-    <p class="subhead">HEADING: {{ heading }}</p>
+    <h2>{{ heading }}</h2>
     <ul>
       {% for choice in choices %}
         <li>
