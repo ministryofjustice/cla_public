@@ -16,6 +16,33 @@ $map-height: 460px;
     }
   }
 
+  .results-filter {
+    display: inline-block;
+    line-height: 1;
+    padding: 0 5px;
+    background: $grey-4;
+    line-height: 24px;
+    border: 1px solid $grey-2;
+
+    .filter-remove {
+      border-left: 1px solid $grey-2;
+      text-indent: -999em;
+      float: right;
+      width: 16px;
+      height: 16px;
+      padding: 4px;
+      margin: 0 -5px 0 5px;
+
+      &:hover {
+        background: $grey-3;
+      }
+
+      .icon {
+        float: left;
+      }
+    }
+  }
+
   .search-results-list {
     .org-list {
       margin: 0;

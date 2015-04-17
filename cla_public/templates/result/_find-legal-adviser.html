@@ -17,6 +17,20 @@
     <p class="results-summary">
       {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
       <span class="results-location">{{ data.origin.postcode }}</span>
+      {% if session.category %}
+        {{ _('for') }}
+        <span class="results-filter">
+          {{ session.category_name }}
+          <a
+            class="filter-remove"
+            href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode']) }}"
+            title="Remove filter"
+          >
+            <i class="icon icon-remove"></i>
+            remove
+          </a>
+        </span>
+      {% endif %}
     </p>
 
     <div class="search-results-container">
