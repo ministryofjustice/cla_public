@@ -13,7 +13,8 @@ from werkzeug.datastructures import MultiDict
 from cla_public.apps.checker.forms import FindLegalAdviserForm
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
-    ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES
+    ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES, \
+    LAALAA_PROVIDER_CATEGORIES_MAP
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
     IncomeForm
@@ -35,13 +36,17 @@ def add_header(response):
 
 def handle_find_legal_adviser_form(form, args):
     data = {}
+    category = ''
     page = 1
+
+    if 'category' in args:
+        category = LAALAA_PROVIDER_CATEGORIES_MAP.get(args['category'])
 
     if 'postcode' in args:
         if form.validate():
             if 'page' in args and args['page'].isdigit():
                 page = args['page']
-            data = laalaa.find(args['postcode'], page)
+            data = laalaa.find(args['postcode'], category, page)
             if 'error' in data:
                 form.postcode.errors.append(data['error'])
     return data
@@ -151,9 +156,10 @@ class EligibleNoCallBack(views.MethodView, object):
         data = handle_find_legal_adviser_form(form, request.args)
 
         session.clear()
+        session.update({ 'ProblemForm': { 'categories': request.args.get('category') }})
 
         return render_template('result/eligible-no-callback.html',
-            data=data, form=form)
+            data=data, form=form, category_name=session.category_name)
 
 checker.add_url_rule(
     '/find-legal-adviser', view_func=EligibleNoCallBack.as_view('find-legal-adviser'))
@@ -163,7 +169,7 @@ class Eligible(RequiresSession, views.MethodView, object):
 
     def get(self):
         if session.category in NO_CALLBACK_CATEGORIES:
-            return redirect(url_for('.find-legal-adviser'))
+            return redirect(url_for('.find-legal-adviser', category=session.category))
 
         return render_template('result/eligible.html', form=ContactForm())
 

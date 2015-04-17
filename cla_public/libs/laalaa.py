@@ -25,23 +25,24 @@ class LaaLaaError(Exception):
     pass
 
 
-def find(postcode, page=1):
+def find(postcode, category, page=1):
     def decode_category(code):
         return PROVIDER_CATEGORIES.get(code.lower())
 
     try:
         response = requests.get(
-            '{host}/legal-advisers/?postcode={postcode}&format=json&page={page}'
+            '{host}/legal-advisers/?postcode={postcode}&page={page}&category={category}&format=json'
             .format(
                 host=current_app.config['LAALAA_API_HOST'],
                 postcode=postcode,
+                category=category,
                 page=page
             )
         )
         try:
             data = response.json()
 
-            for result in data['results']:
+            for result in data.get('results', []):
                 if result.get('categories'):
                     result['categories'] = map(decode_category, result['categories'])
 
