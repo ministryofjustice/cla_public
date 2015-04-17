@@ -5,6 +5,14 @@
 {% block inner_content %}
   <h1>{{ _('Your session has expired') }}</h1>
 
+  <p>{% trans %}This means that you've already reached the end of our service and clicked
+    the back button, or your connection to our service has been lost.{% endtrans %}
+  </p>
+  <p>
+    {% trans %}For your security, when your session expires we automatically delete all
+    the information you’ve entered.{% endtrans %}
+  </p>
+
   <p>{{ _('You can start again by clicking the button below.') }}</p>
 
   <p>
