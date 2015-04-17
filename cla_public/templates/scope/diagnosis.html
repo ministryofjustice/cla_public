@@ -13,7 +13,7 @@
     <strong>Your selections so far:</strong>
     {{ Element.previous_selections(nodes) }}
   {% else %}
-    <h1>What do you need help with</h1>
+    <h1>What do you need help with?</h1>
     <p class="subtitle">To qualify for legal aid, you must have a problem that is covered by legal aid.</p>
   {% endif %}
 
@@ -23,13 +23,14 @@
       {% for choice in choices %}
         <li>
           <a href="{{ choice.url }}">
-            {{ choice.label|safe }}
+            {{ choice.label|safe|striptags }}
             {% if choice.help_text %}
-              <span>{{ choice.help_text|safe }}</span>
+              <span>{{ choice.help_text|safe|striptags }}</span>
             {% endif %}
             <i></i>
           </a>
         </li>
+        <p>{{ choice }}</p>
       {% endfor %}
     </ul>
   </div>
