@@ -1,6 +1,6 @@
 [
   {
-    "name": "SCENARIO: Self-employed+self-emp partner->733+179.46+545=1457.46",
+    "name": "SCENARIO: Self-employed+self-emp partner->733+181.91+545=1459.91",
     "pages": [
       {
         "page": "problem",
@@ -51,7 +51,7 @@
       {
         "page": "income",
         "fields": {
-          "your_income-earnings-per_interval_value": 1457.44,
+          "your_income-earnings-per_interval_value": 1459.89,
           "your_income-earnings-interval_period": "per_month",
           "your_income-income_tax-per_interval_value": 0,
           "your_income-income_tax-interval_period": "per_month",
@@ -149,7 +149,7 @@
       {
         "page": "income",
         "fields": {
-          "your_income-earnings-per_interval_value": 1457.43,
+          "your_income-earnings-per_interval_value": 1459.88,
           "your_income-earnings-interval_period": "per_month",
           "your_income-income_tax-per_interval_value": 0,
           "your_income-income_tax-interval_period": "per_month",
@@ -196,7 +196,7 @@
   },
 
   {
-    "name": "SCENARIO: Self-employed+emp partner->733+179.46+545+45=1502.46",
+    "name": "SCENARIO: Self-employed+emp partner->733+181.91+545+45=1502.46",
     "pages": [
       {
         "page": "problem",
@@ -247,7 +247,7 @@
       {
         "page": "income",
         "fields": {
-          "your_income-earnings-per_interval_value": 1502.44,
+          "your_income-earnings-per_interval_value": 1504.89,
           "your_income-earnings-interval_period": "per_month",
           "your_income-income_tax-per_interval_value": 0,
           "your_income-income_tax-interval_period": "per_month",
@@ -345,7 +345,7 @@
       {
         "page": "income",
         "fields": {
-          "your_income-earnings-per_interval_value": 1502.43,
+          "your_income-earnings-per_interval_value": 1504.88,
           "your_income-earnings-interval_period": "per_month",
           "your_income-income_tax-per_interval_value": 0,
           "your_income-income_tax-interval_period": "per_month",
@@ -392,7 +392,7 @@
   },
 
   {
-    "name": "SCENARIO: Employed+emp partner->733+179.46+545+90=1547.46",
+    "name": "SCENARIO: Employed+emp partner->733+181.91+545+90=1549.91",
     "pages": [
       {
         "page": "problem",
@@ -443,7 +443,7 @@
       {
         "page": "income",
         "fields": {
-          "your_income-earnings-per_interval_value": 1547.44,
+          "your_income-earnings-per_interval_value": 1549.89,
           "your_income-earnings-interval_period": "per_month",
           "your_income-income_tax-per_interval_value": 0,
           "your_income-income_tax-interval_period": "per_month",
@@ -541,7 +541,7 @@
       {
         "page": "income",
         "fields": {
-          "your_income-earnings-per_interval_value": 1502.43,
+          "your_income-earnings-per_interval_value": 1549.88,
           "your_income-earnings-interval_period": "per_month",
           "your_income-income_tax-per_interval_value": 0,
           "your_income-income_tax-interval_period": "per_month",

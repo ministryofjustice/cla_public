@@ -97,7 +97,7 @@ module.exports = {
       ;
       common.submitAndCheckForFieldError(client, [{
         name: item + '-interval_period',
-        errorText: 'Not a valid amount'
+        errorText: 'Please provide an amount'
       }], 'select');
       client
         .setValue(util.format('input[name="%s-per_interval_value"]', item), '100')
@@ -125,7 +125,7 @@ module.exports = {
     ;
     common.submitAndCheckForFieldError(client, [{
       name: 'other_benefits',
-      errorText: 'Not a valid amount'
+      errorText: 'Please provide an amount'
     }]);
     client
       .setValue('input[name="total_other_benefit-per_interval_value"]', '100')

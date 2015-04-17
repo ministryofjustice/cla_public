@@ -1,10 +1,9 @@
 'use strict';
 
-var util = require('util');
 var common = require('../../modules/common-functions');
 var moment = require('moment');
 
-var eligibleJourney = function(client) {
+var eligibleJourney = function(client, isThirdParty) {
   common.startPage(client);
 
   common.selectDebtCategory(client);
@@ -26,7 +25,7 @@ var eligibleJourney = function(client) {
     .assert.containsText('h1', 'You might qualify for legal aid')
     .assert.containsText('h2', 'Contact Civil Legal Advice')
     .click('input[name="callback_requested"][value="1"]')
-    .setValue('input[name="full_name"]', 'John Smith')
+    .thirdparty(isThirdParty)
     .setValue('input[name="callback-contact_number"]', '01234 567890')
     .click('input[name="callback-safe_to_contact"][value="SAFE"]')
     .setValue('input[name="address-post_code"]', 'E18 1JA')
@@ -89,6 +88,22 @@ module.exports = {
           checkCallbackTime(client, then, result.value);
         });
       })
+    ;
+
+    client.end();
+  },
+
+  'Check request callback by third party': function(client) {
+    eligibleJourney(client, true);
+
+    client
+      .click('input[name="specific_day"][value="specific_day"]')
+      .click('select#id_day option:first-child')
+      .click('body')
+      .click('select#id_time_in_day option:first-child')
+      .submitForm('form')
+      .waitForElementVisible('header.confirmation', 5000)
+      .assert.containsText('h1', 'We will call you back')
     ;
 
     client.end();

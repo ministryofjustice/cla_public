@@ -78,7 +78,7 @@ class MoneyIntervalAmountRequired(object):
         amount = field.form.per_interval_value
 
         if not amount.errors and amount.data is None:
-            raise ValidationError(field.gettext(u'Please provide an amount'))
+            raise StopValidation(field.gettext(u'Please provide an amount'))
 
 
 class ValidMoneyInterval(object):

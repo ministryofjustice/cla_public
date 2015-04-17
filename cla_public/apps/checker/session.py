@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import datetime
 
 from flask import current_app
@@ -171,17 +172,20 @@ class CheckerSession(SecureCookieSession):
     def callback_time(self):
         return self.field('ContactForm', 'callback', {}).get('time', None)
 
-    def add_note(self, note):
-        notes = self.get('notes', [])
-        notes.append(note)
+    def add_note(self, key, note):
+        notes = self.get('notes', OrderedDict())
+        notes[key] = note
         self['notes'] = notes
 
     def notes_object(self):
         session = self
+        format_note = lambda (key, note): u'{key}:\n{note}'.format(
+            key=key, note=note)
 
         class Notes(object):
             def api_payload(self):
-                return {'notes': '\n\n'.join(session.get('notes', []))}
+                return {'notes': u'\n\n'.join(
+                    map(format_note, session.get('notes', {}).items()))}
 
         return Notes()
 

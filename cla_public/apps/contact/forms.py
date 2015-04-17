@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
 "Contact forms"
 
-from flask import current_app, session
+from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 from flask_wtf import Form
 import pytz
 from wtforms import Form as NoCsrfForm
-from wtforms import BooleanField, FormField, RadioField, SelectField, \
+from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
-from wtforms.validators import InputRequired, Optional, Length
+from wtforms.validators import InputRequired, Optional, Required, Length
 
-from cla_common.constants import ADAPTATION_LANGUAGES
+from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
+from cla_public.apps.checker.fields import YesNoField
 from cla_public.apps.checker.constants import CONTACT_SAFETY, \
     CONTACT_PREFERENCE, YES, NO
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
-from cla_public.apps.checker.validators import NotRequired, IgnoreIf, \
+from cla_public.apps.checker.validators import IgnoreIf, \
     FieldValue
 from cla_public.libs.honeypot import Honeypot
 
@@ -24,6 +25,9 @@ from cla_public.libs.honeypot import Honeypot
 LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
     [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
+
+THIRDPARTY_RELATIONSHIP = map(lambda (name, value): (name, _(value)), THIRDPARTY_RELATIONSHIP)
+THIRDPARTY_RELATIONSHIP_CHOICES = [('', _('-- Please select --'))] + THIRDPARTY_RELATIONSHIP
 
 
 class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -87,13 +91,36 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
             Optional()])
 
 
+class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
+    """
+    Subform for third-party fields
+    """
+    third_party_name = StringField(
+           _(u'If Yes, name of person who helped you'),
+           validators=[
+                Length(max=400, message=_(u'Your full name must be 400 '
+                                         u'characters or less')),
+                InputRequired()])
+    relationship = SelectField(
+        _(u'If Yes, relationship to you'),
+        choices=(THIRDPARTY_RELATIONSHIP_CHOICES),
+        validators=[Required()])
+
+
 class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
-    Form to request a callback
+    Form to contact CLA
     """
+    third_party_handled = YesNoField(
+        _(u'Has anyone helped to fill in this form')
+    )
+    third_party = ValidatedFormField(
+        ThirdPartyForm,
+        validators=[
+            IgnoreIf('third_party_handled', FieldValue(NO))
+        ])
     full_name = StringField(
-        _(u'Full name'),
-        description=_(u'For example: John Smith'),
+        _(u'Your full name'),
         validators=[
             Length(max=400, message=_(u'Your full name must be 400 '
                                       u'characters or less')),
@@ -118,7 +145,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             u"in the box below. The Civil Legal Advice operator will read "
             u"this to help them understand your problem.")),
         validators=[
-            Length(max=5000, message=_(u'Your notes must be 5000 characters '
+            Length(max=4000, message=_(u'Your notes must be 4000 characters '
                                        u'or less')),
             Optional()])
     adaptations = ValidatedFormField(
@@ -128,6 +155,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     def api_payload(self):
         "Form data as data structure ready to send to API"
+
         data = {
             'personal_details': {
                 'full_name': self.full_name.data,
@@ -145,7 +173,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                     or self.adaptations.other_language.data,
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
-            }
+            },
         }
         if self.callback_requested.data == YES:
 
@@ -155,5 +183,12 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             local_tz = pytz.timezone(current_app.config['TIMEZONE'])
             local = local_tz.localize(naive)
             data['requires_action_at'] = local.astimezone(pytz.utc).isoformat()
+
+        if self.third_party_handled.data == YES:
+            data['thirdparty_details'] = {
+                'personal_details': {}
+            }
+            data['thirdparty_details']['personal_details']['full_name'] = self.third_party.third_party_name.data
+            data['thirdparty_details']['personal_relationship'] = self.third_party.relationship.data
 
         return data

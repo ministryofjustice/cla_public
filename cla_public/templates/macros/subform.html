@@ -96,7 +96,44 @@
     {% endcall %}
 
     {% call Form.fieldset(subform.street_address, as_label=True, class_='form-group-plain') %}
-      {{ subform.street_address(class_='form-control m-large', rows=5) }}
+      {{ subform.street_address(class_='form-control m-large', rows=4) }}
+    {% endcall %}
+  {% endcall %}
+{% endmacro %}
+
+
+{% macro help_filling_in(form, subform) %}
+  {% set controller = form.third_party_handled %}
+
+  {% call Form.fieldset(
+    is_subfield=True,
+    controlled_by=controller,
+    control_value='*',
+    use_row=False,
+    persist_values=True
+  ) %}
+
+    {{ Form.text_input_fieldset(
+      form.full_name,
+      class_='m-large',
+      fieldset_class=' '
+    ) }}
+
+    {{ Form.text_input_fieldset(
+      subform.third_party_name,
+      class_='m-large',
+      fieldset_class=' ',
+      controlled_by=controller,
+      control_value='1'
+    ) }}
+
+    {% call Form.fieldset(
+      subform.relationship,
+      controlled_by=controller,
+      control_value='1',
+      class_=' '
+    ) %}
+      {{ subform.relationship(class_='form-control') }}
     {% endcall %}
   {% endcall %}
 {% endmacro %}

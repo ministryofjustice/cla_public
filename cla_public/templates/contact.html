@@ -32,7 +32,11 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.text_input_fieldset(form.full_name, class_='m-large') }}
+    {% call Form.fieldset(form.third_party_handled) %}
+      {{ Form.radio_buttons(form.third_party_handled) }}
+
+      {{ Subform.help_filling_in(form, form.third_party) }}
+    {% endcall %}
 
     {% call Form.fieldset(form.callback_requested) %}
       {{ Form.radio_buttons(form.callback_requested) }}
@@ -98,6 +102,13 @@
       {% endblock %}
     </div>
   {% endblock %}
+
+  <script>
+    window.CONDITIONAL_LABELS = {
+      'third_party-third_party_name': '{{ _("Name of the person who helped you") }}',
+      'third_party-relationship': '{{ _("Relationship to you") }}'
+    };
+  </script>
 {% endblock %}
 
 
