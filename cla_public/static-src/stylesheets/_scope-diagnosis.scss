@@ -5,6 +5,14 @@
     margin: 0;
   }
 
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    #content & {
+      margin-top: 2em;
+    }
+  }
+
   ul {
     list-style-type: none;
     margin: 2em 0;
@@ -52,6 +60,56 @@
           color: $grey-1;
           content: "〉";
         }
+      }
+    }
+  }
+}
+
+.previous {
+  margin-top: 12px;
+  padding: 0;
+
+  a {
+    margin: 0 0 10px;
+    padding: 10px 25px;
+    border: 1px solid $grey-3;
+    background-color: $grey-3;
+    display: block;
+    color: $grey-1;
+    text-decoration: none;
+    font-size: 16px;
+
+    .change {
+      float: right;
+      font-weight: normal;
+    }
+
+    &:hover {
+      border: 1px solid $grey-1;
+
+      .change {
+        color: $black;
+      }
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+    }
+
+    .preva {
+      font-weight: bold;
+
+      a {
+        font-weight: normal;
+        font-size: 14px;
+        display: inline-block;
+        margin-left: 8px;
       }
     }
   }
