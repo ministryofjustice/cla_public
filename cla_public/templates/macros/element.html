@@ -65,7 +65,7 @@
     {% set url = '/scope/diagnosis' %}
     {% for node in nodes %}
       {% set question = 'What do you need help with?' if loop.index0 == 0 else nodes[loop.index0 - 1].heading %}
-      <a class="goBack" href="{{ url }}">
+      <a class="goBack cf" href="{{ url }}">
         <ul class="prev">
           <li class="prevq">{{ question }}</li>
           <li class="preva">
