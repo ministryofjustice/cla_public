@@ -6,14 +6,27 @@
 {% block inner_content %}
 
   <h1>Scope Diagnosis</h1>
-  {% for choice in choices %}
-    <div>
-      <h3><a href="{{ choice.url }}">{{ choice.label|safe }}</a></h3>
-      {% if choice.help_text %}
-        {{ choice.help_text|safe }}
-      {% endif %}
-    </div>
-  {% endfor %}
+  <div class="previous">
+    {% for node in nodes %}
+      {{ node }}
+    {% endfor %}
+  </div>
+  <div class="scope-options">
+    <p class="subhead">HEADING: {{ heading }}</p>
+    <ul>
+      {% for choice in choices %}
+        <li>
+          <a href="{{ choice.url }}">
+            {{ choice.label|safe }}
+            {% if choice.help_text %}
+              <span>{{ choice.help_text|safe }}</span>
+            {% endif %}
+            <i></i>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 
   <pre>{{ response_json }}</pre>
 

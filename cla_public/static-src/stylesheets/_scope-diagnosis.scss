@@ -1,0 +1,58 @@
+
+.scope-options {
+
+  p {
+    margin: 0;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 2em 0;
+    padding: 0;
+
+    li {
+      font-size: 19px;
+      margin-bottom: 10px;
+      background-color: $grey-3;
+      border: 1px solid $grey-3;
+      padding: 0;
+      position: relative;
+
+      &:hover {
+        border: 1px solid $grey-1;
+
+        i::before {
+          color: $black;
+        }
+      }
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: $black;
+        padding: 10px 47px 10px 25px;
+
+        span {
+          font-size: 16px;
+          font-weight: normal;
+          color: $grey-1;
+          display: block;
+        }
+
+        i::before {
+          font-size: 32px;
+          font-family: arial;
+          font-style: normal;
+          font-weight: bold;
+          position: absolute;
+          right: 5px;
+          top: 50%;
+          margin-top: -20px;
+          display: block;
+          color: $grey-1;
+          content: "〉";
+        }
+      }
+    }
+  }
+}
