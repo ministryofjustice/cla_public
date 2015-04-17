@@ -21,16 +21,28 @@ module.exports = {
     ;
   },
 
-  // select a 'pass' category (debt) and move on to next page
+  // move through scope diagnosis by selecting 'Debt' then 'You are homeless'
   selectDebtCategory: function(client) {
     client
-      .waitForElementVisible('input[name="categories"]', 5000)
-      .assert.urlContains('/problem')
+      .waitForElementVisible('.scope-options', 5000)
+      .assert.urlContains('/scope/diagnosis')
       .assert.containsText('h1', 'What do you need help with?')
-      .click('input[name="categories"][value="debt"]')
-      .assert.attributeEquals('input[name="categories"][value="debt"]', 'checked', 'true')
-      .submitForm('form')
+      .useXpath()
+      .click('//a[@href="/scope/diagnosis/n65::n2"]')
+      .useCss()
+      .waitForElementVisible('.previous', 5000)
+      .useXpath()
+      .click('//a[@href="/scope/diagnosis/n65::n2/n4"]')
+      .useCss()
     ;
+    // client
+    //   .waitForElementVisible('input[name="categories"]', 5000)
+    //   .assert.urlContains('/problem')
+    //   .assert.containsText('h1', 'What do you need help with?')
+    //   .click('input[name="categories"][value="debt"]')
+    //   .assert.attributeEquals('input[name="categories"][value="debt"]', 'checked', 'true')
+    //   .submitForm('form')
+    // ;
   },
 
   aboutPage: function(client) {
