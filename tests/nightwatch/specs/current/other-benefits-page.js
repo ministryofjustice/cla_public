@@ -7,7 +7,7 @@ var CHILD_BENEFIT_QUESTIONS = require('../../modules/constants').CHILD_BENEFIT_Q
 module.exports = {
   'Start page': common.startPage,
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': common.selectDebtCategory,
 
   'About you': function(client) {
     common.aboutPage(client);

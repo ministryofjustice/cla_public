@@ -10,7 +10,7 @@ var other_income_amount = 'input[name="your_income-other_income-per_interval_val
 module.exports = {
   'Start page': common.startPage,
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': common.selectDebtCategory,
 
   'About you': function(client) {
     common.aboutPage(client);

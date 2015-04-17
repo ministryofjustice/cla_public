@@ -35,14 +35,6 @@ module.exports = {
       .click('//a[@href="/scope/diagnosis/n65::n2/n4"]')
       .useCss()
     ;
-    // client
-    //   .waitForElementVisible('input[name="categories"]', 5000)
-    //   .assert.urlContains('/problem')
-    //   .assert.containsText('h1', 'What do you need help with?')
-    //   .click('input[name="categories"][value="debt"]')
-    //   .assert.attributeEquals('input[name="categories"][value="debt"]', 'checked', 'true')
-    //   .submitForm('form')
-    // ;
   },
 
   aboutPage: function(client) {
