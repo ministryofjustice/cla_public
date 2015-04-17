@@ -122,7 +122,8 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         display_choices = map(add_link, response_json.get('choices', []))
 
         return render_template('scope/diagnosis.html',
-                               choices=display_choices)
+                               choices=display_choices,
+                               nodes=response_json.get('nodes', []))
 
 
 
