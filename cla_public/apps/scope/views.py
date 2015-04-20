@@ -14,7 +14,7 @@ REF_KEY = 'diagnosis_ref'
 PREV_KEY = 'diagnosis_previous_choices'
 
 OUTCOME_URLS = {
-    DIAGNOSIS_SCOPE.INSCOPE: '/about',
+    DIAGNOSIS_SCOPE.INSCOPE: '/scope/in-scope',
     DIAGNOSIS_SCOPE.OUTOFSCOPE: '/result/face-to-face'
 }
 
