@@ -61,29 +61,44 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         response = self.post_to_scope()
         session[REF_KEY] = response.json().get('reference')
 
-    def move(self, payload={}, up=False):
-        direction = 'up' if up else 'down'
-        return self.post_to_scope('move_%s/' % direction, payload=payload)
+    def move(self, previous_choices=[], choices_list=[]):
+        """
+        This enables a user to jump to parts of the diagnosis and we send a
+        request to the api for each step. The api only allows the user to
+        move up or down 1 step at a time.
 
-    def do_move(self, choices):
-        payload = {}
-        choices_list = [c for c in choices.strip('/').split('/') if c]
-        previous_choices = session.get(PREV_KEY, [])
-        session[PREV_KEY] = choices_list
-        if choices_list:
-            last_choice = choices_list[-1]
-            payload['current_node_id'] = last_choice
-
+        :param previous_choices - choices on last request (saved in session):
+        :param choices_list - new choices (from url):
+        :return requests Response object:
+        """
         prev = len(previous_choices)
         now = len(choices_list)
-
         if prev == now:
             # reload page - same choices as before
             return requests.get(self.request_path(), **self.request_args())
+        elif prev > now:
+            direction = 'up'
+            diff = now - prev
+            steps = reversed(previous_choices[diff:])
         else:
-            return self.move(
-                payload,
-                prev > now)
+            direction = 'down'
+            diff = prev - now
+            steps = choices_list[diff:]
+
+        for s in steps:
+            payload = {}
+            payload['current_node_id'] = s
+            resp = self.post_to_scope('move_%s/' % direction, payload=payload)
+        return resp
+
+    def do_move(self, choices):
+        choices_list = [c for c in choices.strip('/').split('/') if c]
+        previous_choices = session.get(PREV_KEY, [])
+        session[PREV_KEY] = choices_list
+
+        return self.move(
+                previous_choices,
+                choices_list)
 
     def save_category(self, category):
         if category == 'violence':
