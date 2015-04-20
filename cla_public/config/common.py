@@ -9,6 +9,8 @@ DEBUG = False
 
 TESTING = False
 
+CLEAR_SESSION = True
+
 # Disable eligibility check and allow users to request a callback only
 CONTACT_ONLY = os.environ.get('CALLMEBACK_ONLY', False) == 'True'
 
@@ -101,6 +103,10 @@ OPERATOR_HOURS = {
 }
 
 TIMEZONE = 'Europe/London'
+
+LAALAA_API_HOST = os.environ.get(
+    'LAALAA_API_HOST',
+    'https://prod.laalaa.dsd.io')
 
 # local.py overrides all the common settings.
 try:

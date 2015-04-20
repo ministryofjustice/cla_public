@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import datetime
 
+from flask import current_app
 from flask.json import JSONEncoder
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 from requests.exceptions import ConnectionError, Timeout
@@ -202,6 +203,10 @@ class CheckerSession(SecureCookieSession):
             }
             self.clear()
             self.update(store)
+
+    def clear(self):
+        if current_app.config['CLEAR_SESSION']:
+            super(CheckerSession, self).clear()
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):

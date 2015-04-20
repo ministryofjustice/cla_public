@@ -40,6 +40,28 @@
     }
   }
 
+  li {
+    @extend %contain-floats;
+  }
+
+  .org-details {
+    padding: 0 20px;
+    margin-top: 10px;
+    border-left: 4px solid #eee;
+    float: left;
+
+    p {
+      margin-top: .5em;
+    }
+  }
+
+  .map {
+    height: 200px;
+    width: 300px;
+    float: right;
+    background: #ddd;
+  }
+
   .alert {
     p {
       margin-top: .5em

@@ -1,0 +1,134 @@
+{% import "macros/form.html" as Form %}
+{% import "macros/element.html" as Element %}
+
+<section class="find-legal-adviser">
+  <h2>{{ _('Find a legal adviser') }}</h2>
+  <form class="legal-adviser-search" method="GET">
+    {% call Form.fieldset(form.postcode, as_label=True, class_=' ') %}
+      {{ Form.text_input(form.postcode) }}
+      {% if session.category %}
+        <input type="hidden" name="category" value="{{session.category}}" />
+      {% endif %}
+      <button class="button" type="submit">{{ _('Search') }}</button>
+    {% endcall %}
+  </form>
+
+  {% if data and data.count and data.count > 0 %}
+    <p class="results-summary">
+      {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
+      <span class="results-location">{{ data.origin.postcode }}</span>
+      {% if session.category %}
+        {{ _('for') }}
+        <span class="results-filter">
+          {{ session.category_name }}
+          <a
+            class="filter-remove"
+            href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode']) }}"
+            title="Remove filter"
+          >
+            <i class="icon icon-remove"></i>
+            remove
+          </a>
+        </span>
+      {% endif %}
+    </p>
+
+    <div class="search-results-container">
+      <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
+      <div class="search-results">
+        <div class="search-results-list">
+          <ul class="org-list">
+            {% for item in data.results %}
+              <li class="org-list-item vcard" data-lat="{{ item.location.point.coordinates[1] }}" data-lon="{{ item.location.point.coordinates[0] }}" data-id="{{ loop.index }}">
+                <header>
+                  <h3 class="org-title">
+                    <span class="marker">{{ loop.index }}</span>
+                    <span class="fn org">{{ item.organisation.name }}</span>
+                  </h3>
+                  <div class="distance">
+                    {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
+                  </div>
+                </header>
+                <div class="org-details">
+                  {% if item.categories|length %}
+                    <div class="org-categories">
+                      {% for cat in item.categories if cat %}
+                        <span class="org-category">{{ cat }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                  <p>
+                    <span class="visuallyhidden">{{ _('Address') }}:</span>
+                    <span class="adr">
+                      <span class="street-address">{{ item.location.address }}</span>
+                      <span class="postal-code">{{ item.location.postcode }}</span>
+                      <span class="city">{{ item.location.city }}</span>
+                    </span>
+                  </p>
+                  <p>
+                    <span>{{ _('Helpline') }}:</span>
+                    <span class="tel">{{ item.telephone }}</span>
+                  </p>
+                  {% if item.organisation.website %}
+                    <p>
+                      <span>{{ _('Website') }}:</span>
+                      <a class="url" href="{{ item.organisation.website|human_to_url }}" target="_blank">
+                        {{ item.organisation.website|url_to_human }}
+                      </a>
+                    </p>
+                  {% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <nav class="search-results-pagination">
+          <ul>
+            {% if data.previous %}
+              {% set prev_page = data.previous|query_to_dict('page') %}
+              <li class="results-nav results-nav-prev">
+                <a
+                  href="{{ url_for(request.url_rule.endpoint,
+                    postcode=request.args['postcode'],
+                    page=prev_page,
+                    category=session.category) }}"
+                  data-page="{{prev_page}}"
+                >
+                  {{ _('Previous') }}
+                </a>
+              </li>
+            {% endif %}
+            {% if data.next %}
+              {% set next_page = data.next|query_to_dict('page') %}
+              <li class="results-nav results-nav-next">
+                <a
+                  href="{{ url_for(request.url_rule.endpoint,
+                    postcode=request.args['postcode'],
+                    page=next_page,
+                    category=session.category) }}"
+                  data-page="{{next_page}}"
+                >
+                  {{ _('Next') }}
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  {% elif 'count' in data and data.count == 0 %}
+    {% call Element.alert('error', title=_('No results')) %}
+      <p>
+        {% trans %}We couldn't find any results for your search.
+        We are constantly updating our records so please try again later.{% endtrans %}
+      </p>
+    {% endcall %}
+  {% endif %}
+
+  <script>
+    window.LABELS = {
+      loading: "{{ _('Loading…') }}"
+    };
+  </script>
+
+</section>
