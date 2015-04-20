@@ -15,7 +15,8 @@ PREV_KEY = 'diagnosis_previous_choices'
 
 OUTCOME_URLS = {
     DIAGNOSIS_SCOPE.INSCOPE: '/scope/in-scope',
-    DIAGNOSIS_SCOPE.OUTOFSCOPE: '/result/face-to-face'
+    DIAGNOSIS_SCOPE.OUTOFSCOPE: '/result/face-to-face',
+    DIAGNOSIS_SCOPE.CONTACT: '/contact',
 }
 
 
@@ -128,6 +129,11 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         return render_template('scope/diagnosis.html',
                                choices=display_choices,
                                nodes=response_json.get('nodes', []))
+
+
+class ScopeInScope(views.MethodView):
+    def get(self, *args, **kwargs):
+        return render_template('scope/in-scope.html')
 
 
 
