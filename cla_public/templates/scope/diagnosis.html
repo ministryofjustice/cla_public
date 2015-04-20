@@ -2,7 +2,7 @@
 {% import "macros/element.html" as Element %}
 
 {% set heading = nodes[-1].heading if nodes else 'Choose one of the options' %}
-{% set title = _('About you') %}
+{% set title = _('What do you need help with?') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
