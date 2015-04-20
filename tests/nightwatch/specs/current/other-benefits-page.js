@@ -140,6 +140,8 @@ module.exports = {
     common.selectDebtCategory(client);
 
     client
+      .waitForElementVisible('a.continue', 5000)
+      .click('a.continue')
       .waitForElementPresent('input[name="have_partner"]', 5000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
@@ -160,6 +162,8 @@ module.exports = {
     common.selectDebtCategory(client);
 
     client
+      .waitForElementVisible('a.continue', 5000)
+      .click('a.continue')
       .waitForElementPresent('input[name="have_partner"]', 5000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
