@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "macros/element.html" as Element %}
+
+{% set title = _('About you') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+
+  <h1>Legal aid is available for this type of problem</h1>
+  <p class="subtitle">You may be able to get help and advice with this problem from Civil Legal Advice (CLA), a national helpline in England and Wales. However, CLA can only help if you’re financially eligible for legal aid.</p>
+  <p>Check if you are financially eligible for legal aid.</p>
+
+  <a class="continue button button-larger" href="/about">Continue</a>
+
+  <h2>Before you start</h2>
+  <p>You and your partner (if you have one) will need:</p>
+  <ul>
+    <li>recent payslips (if you’re working) and bank statements</li>
+    <li>a summary of your income tax and National Insurance contributions</li>
+    <li>details of any savings and investments you have</li>
+    <li>details of any benefits you receive</li>
+    <li>mortgage statements and a current valuation for any property you own</li>
+  </ul>
+
+{% endblock %}
