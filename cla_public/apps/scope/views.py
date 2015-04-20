@@ -32,7 +32,11 @@ def add_header(response):
 
 class ScopeApiMixin(object):
 
-    def request_path(self, path):
+    def request_path(self, path=''):
+        if REF_KEY in session:
+            path = 'diagnosis/%s/%s' % (session[REF_KEY], path)
+        else:
+            path = 'diagnosis/%s' % path
         return '{host}{path}?{params}'.format(
             host=current_app.config['BACKEND_API']['url'],
             path=path,
@@ -44,10 +48,6 @@ class ScopeApiMixin(object):
         }
 
     def post_to_scope(self, path='', payload={}):
-        if REF_KEY in session:
-            path = 'diagnosis/%s/%s' % (session[REF_KEY], path)
-        else:
-            path = 'diagnosis/%s' % path
         request_args = self.request_args()
         request_args['json'] = payload
         return requests.post(self.request_path(path), **request_args)
@@ -64,21 +64,25 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         direction = 'up' if up else 'down'
         return self.post_to_scope('move_%s/' % direction, payload=payload)
 
-    def add_node_to_payload(self, payload, choices):
-        return payload
-
     def do_move(self, choices):
         payload = {}
-        choices_list = choices.strip('/').split('/')
+        choices_list = [c for c in choices.strip('/').split('/') if c]
         previous_choices = session.get(PREV_KEY, [])
         session[PREV_KEY] = choices_list
         if choices_list:
             last_choice = choices_list[-1]
             payload['current_node_id'] = last_choice
 
-        return self.move(
-            payload,
-            len(previous_choices) > len(choices_list))
+        prev = len(previous_choices)
+        now = len(choices_list)
+
+        if prev == now:
+            # reload page - same choices as before
+            return requests.get(self.request_path(), **self.request_args())
+        else:
+            return self.move(
+                payload,
+                prev > now)
 
     def save_category(self, category):
         if category == 'violence':
