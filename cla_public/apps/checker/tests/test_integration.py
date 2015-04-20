@@ -65,10 +65,12 @@ def run_scope_with_category(client, category='debt'):
         }
         post_to_eligibility_check_api(payload=payload)
         path = '/scope/diagnosis'
-        resp = client.get(path)
+        client.get(path)
         for choice in SCOPE_PATHS[category]:
             path += '/%s' % choice
-            resp = client.get(path)
+            client.get(path)
+        resp = client.get('/about')
+        resp.location = '/about'
         return resp
 
 
