@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import urllib
 from cla_common.constants import DIAGNOSIS_SCOPE
+from django.template.defaultfilters import striptags
 import requests
 from cla_public.apps.checker.api import post_to_eligibility_check_api
 from cla_public.apps.scope import scope
@@ -100,13 +101,17 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
                 previous_choices,
                 choices_list)
 
-    def save_category(self, category):
+    def save_category(self, category, note=None):
         if category == 'violence':
             category = 'family'
         session['category'] = category
         session.add_note(
             u'User selected category:',
             unicode(session.category_name))
+        if note:
+            session.add_note(
+                u'Public Diagnosis note:',
+                note)
         post_to_eligibility_check_api(payload={
             'category': category
         })
@@ -125,9 +130,13 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
             raise
 
         state = response_json.get('state')
+        nodes = response_json.get('nodes', [])
 
         if state and state != DIAGNOSIS_SCOPE.UNKNOWN:
-            self.save_category(response_json['category'])
+            note = None
+            if state == DIAGNOSIS_SCOPE.CONTACT and nodes:
+                note = striptags(nodes[-1]['help_text'])
+            self.save_category(response_json['category'], note)
 
             return redirect(OUTCOME_URLS[state])
 
@@ -143,7 +152,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
 
         return render_template('scope/diagnosis.html',
                                choices=display_choices,
-                               nodes=response_json.get('nodes', []))
+                               nodes=nodes)
 
 
 class ScopeInScope(views.MethodView):
