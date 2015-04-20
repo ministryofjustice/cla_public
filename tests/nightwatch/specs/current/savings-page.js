@@ -137,6 +137,10 @@ module.exports = {
       // start from scratch because result pages clear session
       common.startPage(client);
       common.selectDebtCategory(client);
+      client
+        .waitForElementVisible('a.continue', 5000)
+        .click('a.continue')
+      ;
       common.aboutPageSetAllToNo(client);
       common.setYesNoFields(client, ['have_savings', 'have_valuables'], 1);
       client

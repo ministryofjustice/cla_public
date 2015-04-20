@@ -9,6 +9,8 @@ module.exports = {
 
   'About you': function(client) {
     client
+      .waitForElementVisible('a.continue', 5000)
+      .click('a.continue')
       .waitForElementVisible('input[name="have_partner"]', 5000)
       .assert.urlContains('/about')
       .assert.containsText('h1', 'About you')
@@ -34,6 +36,8 @@ module.exports = {
 
   'Check option is not selected': function(client) {
     client
+      .waitForElementVisible('a.continue', 5000)
+      .click('a.continue')
       .waitForElementVisible('input[name="have_partner"]', 5000)
       .assert.urlContains('/about')
     ;
