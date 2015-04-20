@@ -104,6 +104,10 @@ OPERATOR_HOURS = {
 
 TIMEZONE = 'Europe/London'
 
+LAALAA_API_HOST = os.environ.get(
+    'LAALAA_API_HOST',
+    'https://prod.laalaa.dsd.io')
+
 # local.py overrides all the common settings.
 try:
     from cla_public.config.local import *

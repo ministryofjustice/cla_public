@@ -27,7 +27,7 @@ module.exports = {
       var headline = 'About you';
       if (!item.covered) {
         url = '/face-to-face';
-        el = 'a[href="http://find-legal-advice.justice.gov.uk/"]';
+        el = '.legal-adviser-search';
         headline = item.headline ||  'You may be able to get free advice from a legal adviser';
       }
 

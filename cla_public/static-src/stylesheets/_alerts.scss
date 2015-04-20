@@ -27,6 +27,7 @@
     .alert-header {
       @include core-24;
       font-weight: bold;
+      margin: 0;
     }
 
     p:first-child {

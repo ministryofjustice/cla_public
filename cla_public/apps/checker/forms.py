@@ -7,12 +7,12 @@ from flask import session, request
 from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from werkzeug.datastructures import MultiDict
-from wtforms import Form as NoCsrfForm
+from wtforms import Form as NoCsrfForm, StringField, RadioField
 from wtforms.validators import InputRequired, NumberRange, DataRequired
 
 from cla_public.apps.checker.api import money_interval
 from cla_public.apps.checker.constants import CATEGORIES, BENEFITS_CHOICES, \
-    NON_INCOME_BENEFITS, YES, NO, PASSPORTED_BENEFITS
+    NON_INCOME_BENEFITS, YES, NO, PASSPORTED_BENEFITS, LEGAL_ADVISER_SEARCH_PREFERENCE
 from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField,
     YesNoField, PartnerYesNoField, MoneyField,
@@ -475,3 +475,10 @@ class OutgoingsForm(BaseForm):
 
 class ReviewForm(BaseForm):
     title = _(u'Review your answers')
+
+
+class FindLegalAdviserForm(Honeypot, BabelTranslationsFormMixin, Form):
+    postcode = StringField(
+        _(u'Enter postcode'),
+        validators=[InputRequired()]
+    )
