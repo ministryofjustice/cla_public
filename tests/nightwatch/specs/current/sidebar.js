@@ -13,9 +13,9 @@ module.exports = {
       .startService()
       .waitForElementVisible('.progress-bar', 1000, 'Progress sidebar exists')
 
-      .assert.containsText('.progress-step.m-current', 'What do you need help with?',
-        'Progress step is Problem page')
-      .selectCategory('debt', true)
+      // .assert.containsText('.progress-step.m-current', 'What do you need help with?',
+      //   'Progress step is Problem page')
+      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'], true)
 
       .assert.containsText('.progress-step.m-current', 'About you',
         'Progress step is About page')
