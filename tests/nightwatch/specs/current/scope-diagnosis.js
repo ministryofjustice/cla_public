@@ -37,6 +37,7 @@ module.exports = {
       common.startPage(client);
       client
         .scopeDiagnosis(scenario.name, scenario.nodes, scenario.continue)
+        .pause(1000)
         .assert.urlContains(scenario.destination,
           'Destination page URL contains ' + scenario.destination)
       ;
