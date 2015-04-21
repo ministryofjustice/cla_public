@@ -21,7 +21,7 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
-from cla_public.apps.checker import filters
+from cla_public.apps.checker import filters # Used in templates
 from cla_public.libs.utils import override_locale
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
@@ -29,16 +29,6 @@ from cla_public.libs import laalaa
 
 
 log = logging.getLogger(__name__)
-
-
-@checker.app_context_processor
-def get_selected_option():
-    def option_label_fn(field, selected=None):
-        options_dict = dict(field.choices)
-        if not selected:
-            selected = field.data
-        return options_dict.get(selected)
-    return {'selected_option': option_label_fn}
 
 
 @checker.after_request
@@ -141,7 +131,10 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
 
     @property
     def is_completed(self):
-        return session.get(self.form_class.__name__, {}).get('is_completed', False)
+        return session.get(
+            self.form_class.__name__,
+            {}
+        ).get('is_completed', False)
 
     def render(self, *args, **kwargs):
         steps = CheckerWizard('').relevant_steps[:-1]
@@ -177,7 +170,9 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     def complete(self):
 
         if session.needs_face_to_face:
-            return redirect(url_for('.face-to-face', category=session.category))
+            return redirect(
+                url_for('.face-to-face', category=session.category)
+            )
 
         if session.ineligible:
             return redirect(url_for(
@@ -225,7 +220,9 @@ class FaceToFace(views.MethodView, object):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
         data = handle_find_legal_adviser_form(form, request.args)
 
-        session.update({ 'ProblemForm': { 'categories': request.args.get('category') }})
+        session.update({
+            'ProblemForm': {'categories': request.args.get('category')}
+        })
 
         if session.category:
             category_name = session.category_name
@@ -245,18 +242,23 @@ checker.add_url_rule(
 
 
 class EligibleNoCallBack(views.MethodView, object):
+
     def get(self):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
         data = handle_find_legal_adviser_form(form, request.args)
 
         session.clear()
-        session.update({ 'ProblemForm': { 'categories': request.args.get('category') }})
+        session.update({
+            'ProblemForm': {'categories': request.args.get('category')}
+        })
 
         return render_template('checker/result/eligible-no-callback.html',
             data=data, form=form, category_name=session.category_name)
 
 checker.add_url_rule(
-    '/find-legal-adviser', view_func=EligibleNoCallBack.as_view('find-legal-adviser'))
+    '/find-legal-adviser',
+    view_func=EligibleNoCallBack.as_view('find-legal-adviser')
+)
 
 
 class Eligible(RequiresSession, views.MethodView, object):
@@ -264,12 +266,21 @@ class Eligible(RequiresSession, views.MethodView, object):
     def get(self):
         steps = steps = CheckerWizard('').relevant_steps[:-1]
         if session.category in NO_CALLBACK_CATEGORIES:
-            return redirect(url_for('.find-legal-adviser', category=session.category))
+            return redirect(
+                url_for('.find-legal-adviser', category=session.category)
+            )
 
-        return render_template('checker/result/eligible.html', steps=steps, form=ContactForm())
+        return render_template(
+            'checker/result/eligible.html',
+            steps=steps,
+            form=ContactForm()
+        )
 
 checker.add_url_rule(
-    '/result/eligible', view_func=Eligible.as_view('eligible'), methods=['GET', 'POST'])
+    '/result/eligible',
+    view_func=Eligible.as_view('eligible'),
+    methods=['GET', 'POST']
+)
 
 
 @checker.route('/help-organisations/<category_name>', methods=['GET'])
