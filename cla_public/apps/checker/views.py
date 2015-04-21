@@ -31,16 +31,6 @@ from cla_public.libs import laalaa
 log = logging.getLogger(__name__)
 
 
-@checker.app_context_processor
-def get_selected_option():
-    def option_label_fn(field, selected=None):
-        options_dict = dict(field.choices)
-        if not selected:
-            selected = field.data
-        return options_dict.get(selected)
-    return {'selected_option': option_label_fn}
-
-
 @checker.after_request
 def add_header(response):
     """
