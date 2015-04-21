@@ -3,7 +3,9 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
-{% set title = form.title %}
+{% if form.title %}
+  {% set title = form.title %}
+{% endif %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block sidebar %}
