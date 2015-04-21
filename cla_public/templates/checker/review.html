@@ -1,0 +1,38 @@
+{% extends "checker/base.html" %}
+
+{% set title = _('Summary of your answers') %}
+
+{% import "macros/review.html" as Review %}
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+
+  <form method="POST" class="answers-summary">
+    {% for step in steps %}
+      {% set answers = step.completed_fields() %}
+      {% with step_title = step.form_class.title %}
+        <section id="step-{{ step.name }}">
+          <header>
+            <h2>{{ step_title }}</h2>
+            <a class="button-secondary button-small" href="{{ url_for('checker.wizard', step=step.name) }}">
+              {% if step.name == 'property' or answers|length > 1 %}
+                {{ _('Change answers') }}
+              {% else %}
+                {{ _('Change answer') }}
+              {% endif %}
+            </a>
+          </header>
+          <ul class="answers">
+            {% for field in answers %}
+              {{ Review.render_field(field, step_title) }}
+            {% endfor %}
+          </ul>
+        </section>
+      {% endwith %}
+    {% endfor %}
+
+    {{ form.csrf_token }}
+    {{ Form.honeypot(form) }}
+    {{ Form.actions(_('Confirm')) }}
+  </form>
+{% endblock %}

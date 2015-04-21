@@ -1,5 +1,5 @@
 {% if request.is_xhr %}
-  {% include "result/_find-legal-adviser.html" %}
+  {% include "checker/result/_find-legal-adviser.html" %}
 {% else %}
 
   {% extends "base.html" %}
@@ -37,7 +37,7 @@
         advice.{% endtrans %}
     </p>
 
-    {% include 'result/_find-legal-adviser.html' %}
+    {% include 'checker/result/_find-legal-adviser.html' %}
   {% endblock %}
 
   {% block javascripts %}

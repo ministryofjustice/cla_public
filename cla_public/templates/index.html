@@ -1,7 +1,19 @@
 {% extends "base.html" %}
 {% import "macros/element.html" as Element %}
 
-{% set sidebar = 'resources' %}
+{% block sidebar %}
+  <aside class="sidebar">
+    <h2>{{ _('Resources') }}</h2>
+    <nav>
+      <ul>
+        <li><a target="_blank" href="https://www.gov.uk/civil-legal-advice">{{ _('Civil Legal Advice') }}</a></li>
+        <li><a target="_blank" href="https://www.gov.uk/legal-aid">{{ _('Legal aid') }}</a></li>
+        <li><a target="_blank" href="https://www.gov.uk/legal-aid/how-to-claim">{{ _('Criminal legal aid') }}</a></li>
+        <li><a href="{{ url_for('base.privacy') }}">{{ _('How this service protects your privacy') }}</a></li>
+      </ul>
+    </nav>
+  </aside>
+{% endblock %}
 
 {% block inner_content %}
   <h1>Check if Civil Legal Advice can help you</h1>

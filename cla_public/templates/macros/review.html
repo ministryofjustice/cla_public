@@ -1,10 +1,3 @@
-{% extends 'base.html' %}
-
-{% set title = _('Summary of your answers') %}
-{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
-
-{% import "macros/form.html" as Form %}
-
 {% macro render_field(field, step_title) %}
   {% if 'Property' in field.type %}
     {% for property in field %}
@@ -50,12 +43,12 @@
 
 {% macro render_choices(field) %}
   {% if field.data is string %}
-    <strong>{{ selected_option(field) }}</strong>
+    <strong>{{ field|selected_option }}</strong>
   {% else %}
     <ul class="multiple-answers">
       {% for item in field.data %}
         <li>
-          <strong>{{ selected_option(field, item) }}</strong>
+          <strong>{{ field|selected_option(item) }}</strong>
         </li>
       {% endfor %}
     </ul>
@@ -67,43 +60,9 @@
   {%- if 'Interval' in field.type -%}
     <strong class="money-value">{{ field.data.per_interval_value }}</strong>
     {%- if field.data.per_interval_value != 0 %}
-      <span class="money-interval">{{ selected_option(field.interval_period) }}</span>
+      <span class="money-interval">{{ field.interval_period|selected_option }}</span>
     {%- endif %}
   {%- else -%}
     <strong class="money-value">{{ field.data }}</strong>
   {% endif %}
 {% endmacro %}
-
-
-{% block inner_content %}
-  <h1>{{ title }}</h1>
-
-  <form method="POST" class="answers-summary">
-    {% for step in steps %}
-      {% set answers = step.completed_fields() %}
-      {% with step_title = step.form_class.title %}
-        <section id="step-{{ step.name }}">
-          <header>
-            <h2>{{ step_title }}</h2>
-            <a class="button-secondary button-small" href="{{ url_for('checker.wizard', step=step.name) }}">
-              {% if step.name == 'property' or answers|length > 1 %}
-                {{ _('Change answers') }}
-              {% else %}
-                {{ _('Change answer') }}
-              {% endif %}
-            </a>
-          </header>
-          <ul class="answers">
-            {% for field in answers %}
-              {{ render_field(field, step_title) }}
-            {% endfor %}
-          </ul>
-        </section>
-      {% endwith %}
-    {% endfor %}
-
-    {{ form.csrf_token }}
-    {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Confirm')) }}
-  </form>
-{% endblock %}
