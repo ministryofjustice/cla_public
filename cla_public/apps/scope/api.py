@@ -14,11 +14,16 @@ PREV_KEY = 'diagnosis_previous_choices'
 
 
 class DiagnosisApiClient(object):
-    def request_path(self, path=''):
+
+    @property
+    def basepath(self):
+        path = 'diagnosis/'
         if REF_KEY in session:
-            path = 'diagnosis/%s/%s' % (session[REF_KEY], path)
-        else:
-            path = 'diagnosis/%s' % path
+            path = '%s%s/' % (path, session[REF_KEY])
+        return path
+
+    def request_path(self, path=''):
+        path = '%s%s' % (self.basepath,  path)
         return '{host}{path}?{params}'.format(
             host=current_app.config['BACKEND_API']['url'],
             path=path,
@@ -39,7 +44,23 @@ class DiagnosisApiClient(object):
             response = self.post_to_scope()
             session[REF_KEY] = response.json().get('reference')
 
-    def move(self, previous_choices=[], choices_list=[]):
+    def get_steps_and_direction(self, previous_choices=[], choices_list=[]):
+        """
+        Returns the steps and direction to traverse the api
+        :param previous_choices - choices on last request (saved in session):
+        :param choices_list - new choices (from url):
+        :return: tuple (steps: list, direction: string)
+        """
+        diff = len(choices_list) - len(previous_choices)
+        if diff < 0:
+            direction = 'up'
+            steps = reversed(previous_choices[diff:])
+        else:
+            direction = 'down'
+            steps = choices_list[-diff:]
+        return (steps, direction)
+
+    def traverse(self, previous_choices=[], choices_list=[]):
         """
         This enables a user to jump to parts of the diagnosis and we send a
         request to the api for each step. The api only allows the user to
@@ -49,18 +70,12 @@ class DiagnosisApiClient(object):
         :param choices_list - new choices (from url):
         :return requests Response object:
         """
-        prev = len(previous_choices)
-        now = len(choices_list)
-        diff = now - prev
-        if prev == now:
+        if len(previous_choices) == len(choices_list):
             # reload page - same choices as before
             return requests.get(self.request_path(), **self.request_args())
-        elif prev > now:
-            direction = 'up'
-            steps = reversed(previous_choices[diff:])
-        else:
-            direction = 'down'
-            steps = choices_list[-diff:]
+
+        steps, direction = self.get_steps_and_direction(
+            previous_choices, choices_list)
 
         for s in steps:
             payload = {}
@@ -68,12 +83,12 @@ class DiagnosisApiClient(object):
             resp = self.post_to_scope('move_%s/' % direction, payload=payload)
         return resp
 
-    def do_move(self, choices):
+    def move(self, choices):
         choices_list = [c for c in choices.strip('/').split('/') if c]
         previous_choices = session.get(PREV_KEY, [])
         session[PREV_KEY] = choices_list
 
-        return self.move(
+        return self.traverse(
                 previous_choices,
                 choices_list)
 
