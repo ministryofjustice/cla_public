@@ -38,6 +38,14 @@ module.exports = {
         .assert.containsText('h1', 'What do you need help with?')
         .click(util.format('input[name="categories"][value="%s"]', item.value))
         .submitForm('form')
+      ;
+      if(url !== '/about' && url !== '/face-to-face') {
+        client
+          .waitForElementVisible('.answers-summary', 5000)
+          .submitForm('form')
+        ;
+      }
+      client
         .waitForElementVisible(el, 5000)
         .assert.urlContains(url,
           util.format('Goes to %s when ‘%s’ is selected', url, item.name)

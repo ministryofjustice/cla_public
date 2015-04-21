@@ -25,7 +25,10 @@ class IgnoreIf(object):
                     if hasattr(field, 'clear_errors'):
                         field.clear_errors()
                     else:
-                        field.errors[:] = []
+                        if isinstance(field.errors, list):
+                            field.errors[:] = []
+                        else:
+                            field.errors = []
                 raise StopValidation()
 
 

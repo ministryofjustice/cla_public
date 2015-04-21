@@ -15,7 +15,8 @@ import xlrd
 from cla_public import app
 from cla_public.apps.checker.forms import ProblemForm, AboutYouForm, \
     YourBenefitsForm, PropertiesForm, SavingsForm, TaxCreditsForm, \
-    IncomeForm, OutgoingsForm
+    IncomeForm, OutgoingsForm, ReviewForm
+from cla_public.apps.checker.means_test import MeansTest
 from cla_public.apps.checker.tests.utils.forms_utils import CATEGORY_MAPPING, \
     FormDataConverter
 
@@ -43,11 +44,14 @@ class TestMeansTest(unittest.TestCase):
             url = urlparse.urlparse(resp.location).path
 
             def error_msg(msg):
+                mt = MeansTest()
+                mt.update_from_session()
                 return (
-                    '{msg}\n'
-                    'Session data: {data}\n').format(
+                    '{msg} ({session_eligibility})\n'
+                    'Means test: {data}\n').format(
                         msg=msg,
-                        data=pformat(dict(session)))
+                        session_eligibility=session.eligibility,
+                        data=pformat(dict(mt)))
 
             form_class = get_form(url)
             while form_class:
@@ -103,7 +107,8 @@ def get_form(url):
         '/savings': SavingsForm,
         '/benefits-tax-credits': TaxCreditsForm,
         '/income': IncomeForm,
-        '/outgoings': OutgoingsForm
+        '/outgoings': OutgoingsForm,
+        '/review': ReviewForm
     }.get(url)
 
 

@@ -1,27 +1,43 @@
 # -*- coding: utf-8 -*-
 "Checker views"
+import logging
 
-import os
 from flask import abort, render_template, redirect, session, url_for, views, \
-    current_app, request
-from flask.ext.babel import lazy_gettext as _
+    request
 
+from flask.ext.babel import lazy_gettext as _
+from wtforms.validators import StopValidation
 from cla_public.apps.checker import checker
-from cla_public.apps.checker.api import post_to_eligibility_check_api, \
-    get_organisation_list, ApiError
-from werkzeug.datastructures import MultiDict
+from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.checker.forms import FindLegalAdviserForm
+
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES, \
     LAALAA_PROVIDER_CATEGORIES_MAP
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
-    IncomeForm
+    IncomeForm, ReviewForm
+from cla_public.apps.checker.means_test import MeansTest, MeansTestError
+from cla_public.apps.checker.validators import IgnoreIf
+from cla_public.apps.checker import honeypot
 from cla_public.libs.utils import override_locale
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
 from cla_public.libs import laalaa
+
+
+log = logging.getLogger(__name__)
+
+
+@checker.app_context_processor
+def get_selected_option():
+    def option_label_fn(field, selected=None):
+        options_dict = dict(field.choices)
+        if not selected:
+            selected = field.data
+        return options_dict.get(selected)
+    return {'selected_option': option_label_fn}
 
 
 @checker.after_request
@@ -55,9 +71,11 @@ def handle_find_legal_adviser_form(form, args):
 class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
+        means_test = session.get('means_test', MeansTest())
+        means_test.update_from_session()
         try:
-            post_to_eligibility_check_api(self.form)
-        except ApiError:
+            means_test.save()
+        except MeansTestError:
             self.form.errors['timeout'] = _(
                 u'There was an error submitting your data. '
                 u'Please check and try again.')
@@ -66,8 +84,66 @@ class UpdatesMeansTest(object):
             return super(UpdatesMeansTest, self).on_valid_submit()
 
 
+def is_null(field):
+
+    if field.data is None:
+        return True
+
+    if hasattr(field, '_money_interval_field'):
+        if field.data['per_interval_value'] is None:
+            return True
+
+    if isinstance(field.data, list):
+        if len(field.data) == 0:
+            return True
+
+    if hasattr(field, 'form'):
+        if all(map(is_null, field.form._fields.values())):
+            return True
+
+    return False
+
+
 class CheckerStep(UpdatesMeansTest, FormWizardStep):
-    pass
+
+    def completed_fields(self):
+        session_data = session.get(self.form_class.__name__, {})
+        form = self.form_class(**session_data)
+
+        def user_completed(field):
+            name, field = field
+            if name in ['csrf_token', honeypot.FIELD_NAME]:
+                return False
+
+            def should_ignore(field):
+                ignore_validators = filter(
+                    lambda v: isinstance(v, IgnoreIf),
+                    field.validators)
+
+                def triggered(v):
+                    try:
+                        v(form, field)
+                    except StopValidation:
+                        return True
+                    return False
+
+                return any(map(triggered, ignore_validators))
+
+            if should_ignore(field):
+                return False
+
+            return not is_null(field)
+
+        fields = filter(user_completed, form._fields.items())
+        fields = map(lambda (name, field): (field), fields)
+        return fields
+
+
+class ReviewStep(FormWizardStep):
+
+    def render(self, *args, **kwargs):
+        steps = CheckerWizard('').relevant_steps[:-1]
+        return render_template(self.template, steps=steps, form=self.form)
 
 
 class CheckerWizard(AllowSessionOverride, FormWizard):
@@ -81,8 +157,13 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         ('benefits-tax-credits', CheckerStep(
             TaxCreditsForm, 'benefits-tax-credits.html')),
         ('income', CheckerStep(IncomeForm, 'income.html')),
-        ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html'))
+        ('outgoings', CheckerStep(OutgoingsForm, 'outgoings.html')),
+        ('review', ReviewStep(ReviewForm, 'review.html'))
     ]
+
+    @property
+    def relevant_steps(self):
+        return filter(lambda s: not self.skip(s), self.steps)
 
     def complete(self):
 
@@ -101,6 +182,9 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         if session.needs_face_to_face:
             return True
 
+        if step.name == 'review' and not session.ineligible:
+            return False
+
         if step.name not in ('problem', 'about', 'benefits') \
                 and session.ineligible:
             return True
@@ -117,7 +201,8 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         if step.name == 'benefits-tax-credits':
             return not session.children_or_tax_credits
 
-        if session.is_on_passported_benefits:
+        if session.is_on_passported_benefits \
+                and step.name not in ('problem', 'about', 'benefits'):
             return True
 
         return False

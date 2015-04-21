@@ -28,12 +28,6 @@ module.exports = {
 
   'Context-dependent questions for employment status': function(client) {
 
-    EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
-      client
-        .assert.hidden(util.format('[name="your_income-%s-per_interval_value"]', item))
-        .assert.hidden(util.format('[name="your_income-%s-interval_period"]', item))
-      ;
-    });
     client
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)

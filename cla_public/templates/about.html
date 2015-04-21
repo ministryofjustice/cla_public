@@ -3,7 +3,7 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/form.html" as Form %}
 
-{% set title = _('About you') %}
+{% set title = form.title %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}

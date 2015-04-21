@@ -7,7 +7,9 @@ def passported(benefits):
 
 
 def nass(benefits):
-    return bool(set(benefits).intersection(NASS_BENEFITS))
+    if benefits:
+        return bool(set(benefits).intersection(NASS_BENEFITS))
+    return False
 
 
 def money_intervals_except(*fields):

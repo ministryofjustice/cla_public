@@ -7,11 +7,7 @@
 
 {% block inner_content %}
   <h1>
-    {%- if session.has_partner -%}
-      {{ _('You and your partner’s savings') }}
-    {%- else -%}
-      {{ _('Your savings') }}
-    {%- endif -%}
+    {{ form.title }}
   </h1>
 
   {% if session.has_partner %}
