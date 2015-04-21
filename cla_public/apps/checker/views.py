@@ -11,10 +11,10 @@ from wtforms.validators import StopValidation
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.checker.forms import FindLegalAdviserForm
+from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.apps.contact.forms import ContactForm
-from cla_public.apps.checker.constants import CATEGORIES, \
-    ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES, \
-    LAALAA_PROVIDER_CATEGORIES_MAP
+from cla_public.apps.checker.constants import ORGANISATION_CATEGORY_MAPPING, \
+    NO_CALLBACK_CATEGORIES, LAALAA_PROVIDER_CATEGORIES_MAP
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, IncomeForm, \
     ReviewForm
@@ -304,10 +304,7 @@ def help_organisations(category_name):
 
     # force english as knowledge base languages are in english
     with override_locale('en'):
-        requested = lambda (slug, name, desc): name == category_name
-        category, name, desc = next(
-            iter(filter(requested, CATEGORIES)),
-            (None, None, None))
+        category, name, desc = category_option_from_name(category_name)
 
         if category is None:
             abort(404)

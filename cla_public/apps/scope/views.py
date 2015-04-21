@@ -4,7 +4,9 @@ from cla_common.constants import DIAGNOSIS_SCOPE
 from django.template.defaultfilters import striptags
 import requests
 from cla_public.apps.checker.api import post_to_eligibility_check_api
+from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.apps.scope import scope
+from cla_public.libs.utils import override_locale
 from cla_public.libs.views import RequiresSession
 from flask import views, render_template, current_app, request, session, \
     url_for, redirect
@@ -74,17 +76,16 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
         """
         prev = len(previous_choices)
         now = len(choices_list)
+        diff = now - prev
         if prev == now:
             # reload page - same choices as before
             return requests.get(self.request_path(), **self.request_args())
         elif prev > now:
             direction = 'up'
-            diff = now - prev
             steps = reversed(previous_choices[diff:])
         else:
             direction = 'down'
-            diff = prev - now
-            steps = choices_list[diff:]
+            steps = choices_list[-diff:]
 
         for s in steps:
             payload = {}
@@ -101,10 +102,18 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
                 previous_choices,
                 choices_list)
 
+    def get_category(self, response_json):
+        category = response_json['category']
+        if not category:
+            category_name = striptags(response_json['nodes'][0]['label'])
+            with override_locale('en'):
+                category, name, desc = category_option_from_name(category_name)
+        return category
+
     def save_category(self, category, note=None):
+        session['category'] = category
         if category == 'violence':
             category = 'family'
-        session['category'] = category
         session.add_note(
             u'User selected category:',
             unicode(session.category_name))
@@ -136,7 +145,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView, ScopeApiMixin):
             note = None
             if state == DIAGNOSIS_SCOPE.CONTACT and nodes:
                 note = striptags(nodes[-1]['help_text'])
-            self.save_category(response_json['category'], note)
+            self.save_category(self.get_category(response_json), note)
 
             return redirect(OUTCOME_URLS[state])
 

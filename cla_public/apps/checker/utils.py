@@ -1,5 +1,5 @@
 from cla_public.apps.checker.constants import PASSPORTED_BENEFITS, \
-    NASS_BENEFITS, MONEY_INTERVALS
+    NASS_BENEFITS, MONEY_INTERVALS, CATEGORIES
 
 
 def passported(benefits):
@@ -18,3 +18,10 @@ def money_intervals_except(*fields):
 
 def money_intervals(*fields):
     return [(key, display) for key, display in MONEY_INTERVALS if key in fields]
+
+
+def category_option_from_name(category_name):
+    requested = lambda (slug, name, desc): name == category_name
+    return next(
+        iter(filter(requested, CATEGORIES)),
+        (None, None, None))
