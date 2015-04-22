@@ -54,22 +54,23 @@ class DiagnosisApiClient(object):
         diff = len(choices_list) - len(previous_choices)
         if diff < 0:
             direction = 'up'
-            steps = reversed(previous_choices[diff:])
+            steps = list(reversed(previous_choices[diff:]))
         else:
             direction = 'down'
             steps = choices_list[-diff:]
         return (steps, direction)
 
-    def traverse(self, previous_choices=[], choices_list=[]):
+    def move(self, choices_list=[]):
         """
         This enables a user to jump to parts of the diagnosis and we send a
         request to the api for each step. The api only allows the user to
         move up or down 1 step at a time.
 
-        :param previous_choices - choices on last request (saved in session):
         :param choices_list - new choices (from url):
         :return requests Response object:
         """
+        previous_choices = session.get(PREV_KEY, [])
+        session[PREV_KEY] = choices_list
         if len(previous_choices) == len(choices_list):
             # reload page - same choices as before
             return requests.get(self.request_path(), **self.request_args())
@@ -82,15 +83,6 @@ class DiagnosisApiClient(object):
             payload['current_node_id'] = s
             resp = self.post_to_scope('move_%s/' % direction, payload=payload)
         return resp
-
-    def move(self, choices):
-        choices_list = [c for c in choices.strip('/').split('/') if c]
-        previous_choices = session.get(PREV_KEY, [])
-        session[PREV_KEY] = choices_list
-
-        return self.traverse(
-                previous_choices,
-                choices_list)
 
     def get_category(self, response_json):
         category = response_json['category']
