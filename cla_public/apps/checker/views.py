@@ -144,8 +144,10 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
 class ReviewStep(FormWizardStep):
 
     def render(self, *args, **kwargs):
-        steps = CheckerWizard('').review_steps
-        return render_template(self.template, steps=steps, form=self.form)
+        review_steps = CheckerWizard('').review_steps
+        steps = review_steps or CheckerWizard('').relevant_steps[:-1]
+        return render_template(self.template, steps=steps,
+                               review_steps=review_steps, form=self.form)
 
 
 class CheckerWizard(AllowSessionOverride, FormWizard):
