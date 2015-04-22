@@ -53,11 +53,15 @@ class TestReviewPage(unittest.TestCase):
     def set_problem(self, problem):
         with self.client.session_transaction() as session:
             session['ProblemForm'] = {
-                'categories': problem}
+                'categories': problem,
+                'is_completed': True}
 
     def set_about_you_answers(self, **kwargs):
         answers = defaultdict(lambda: NO)
         answers.update(kwargs)
+        answers.update({
+            'is_completed': True
+        })
         with self.client.session_transaction() as session:
             session['AboutYouForm'] = answers
 
@@ -68,9 +72,13 @@ class TestReviewPage(unittest.TestCase):
             benefits = ['other-benefit']
         with self.client.session_transaction() as session:
             session['YourBenefitsForm'] = {
-                'benefits': benefits}
+                'benefits': benefits,
+                'is_completed': True}
 
     def set_benefits_tax_credits_answers(self, **answers):
+        answers.update({
+            'is_completed': True
+        })
         with self.client.session_transaction() as session:
             session['TaxCreditsForm'] = answers
 
