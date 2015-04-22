@@ -224,8 +224,6 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return False
 
 
-
-
 checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
 
 
