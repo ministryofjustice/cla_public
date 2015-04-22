@@ -108,6 +108,16 @@ LAALAA_API_HOST = os.environ.get(
     'LAALAA_API_HOST',
     'https://prod.laalaa.dsd.io')
 
+
+MAILGUN_API_TOKEN = os.environ.get(
+    'MAILGUN_API_TOKEN',
+    '')
+
+MAILGUN_DOMAIN = os.environ.get(
+    'MAILGUN_DOMAIN',
+    '')
+
+
 # local.py overrides all the common settings.
 try:
     from cla_public.config.local import *

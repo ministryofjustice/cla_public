@@ -66,6 +66,8 @@
       {% endcall %}
     {% endcall %}
 
+    {{ Form.text_input_fieldset(form.email, class_='m-large') }}
+
     {{ Subform.address(form.address) }}
 
     {% call Form.fieldset(form.extra_notes, as_label=True) %}

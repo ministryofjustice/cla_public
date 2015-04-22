@@ -112,6 +112,18 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[
             IgnoreIf('callback_requested', FieldValue(NO))
         ])
+    email = StringField(
+        _(u'Email address'),
+        description=_(
+            u'If you add your email we will send you the '
+            u'reference number when you submit your details'
+        ),
+        validators=[
+            Length(max=255, message=_(
+                u'Your address must be 255 characters '
+                u'or less')),
+            Optional()]
+    )
     address = ValidatedFormField(
         AddressForm)
     extra_notes = TextAreaField(
@@ -131,6 +143,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         data = {
             'personal_details': {
                 'full_name': self.full_name.data,
+                'email': self.email.data,
                 'postcode': self.address.form.post_code.data,
                 'mobile_phone': self.callback.form.contact_number.data,
                 'street': self.address.form.street_address.data,

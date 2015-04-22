@@ -1,0 +1,37 @@
+{%- if data.callback_requested -%}
+
+Dear {{ data.full_name }},
+
+Your details have been submitted to Civil Legal Advice (CLA) and we will call you back.
+
+Your reference number is {{ data.case_ref }}.
+
+An operator will try to call you back on {{ data.contact_number }} around the time you selected ({{ data.callback_time }}).
+
+{% if data.safe_to_contact -%}
+We will leave a message when we call.
+{%- else -%}
+We will not leave a message when we call, as you have told us not to.
+{%- endif %}
+
+If you miss the call or you need advice urgently, you can call us on 0345 345 4 345. Please quote your reference number when you call.
+
+---
+
+This is an automated email. Please do not reply to this email address.
+
+{%- else -%}
+
+Dear {{ data.full_name }},
+
+Your details have been submitted to Civil Legal Advice (CLA).
+
+Your reference number is {{ data.case_ref }}.
+
+You can now call CLA on 0345 345 4 345. Please quote your reference number when you call.
+
+---
+
+This is an automated email. Please do not reply to this email address.
+
+{%- endif -%}

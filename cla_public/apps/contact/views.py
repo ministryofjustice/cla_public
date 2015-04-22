@@ -9,8 +9,10 @@ from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, ApiError
+from cla_public.apps.checker.constants import YES
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView
+from cla_public.libs.mailgun import send_email
 
 
 @contact.after_request
@@ -18,6 +20,33 @@ def add_no_cache_headers(response):
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
     response.headers['Pragma'] = 'no-cache'
     return response
+
+
+def handle_confirmation_email(form):
+    data = {
+        'case_ref': session['case_ref'],
+        'full_name': form.full_name.data,
+        'email': form.email.data,
+        'callback_requested': form.callback_requested.data == YES,
+        'contact_number': form.callback.contact_number.data,
+        'safe_to_contact': form.callback.safe_to_contact.data == YES,
+        'callback_time':
+            form.callback.time.data.strftime('%A, %d %B at %H:%M')
+    }
+
+    email_template = render_template(
+        'emails/confirmation.txt',
+        data=data
+    )
+
+    send_email(
+        '{full_name} <{email}>'.format(
+            full_name=data['full_name'],
+            email=data['email']
+        ),
+        gettext(u'Your Civil Legal Advice reference number'),
+        email_template
+    )
 
 
 class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
