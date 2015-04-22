@@ -144,7 +144,7 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
 class ReviewStep(FormWizardStep):
 
     def render(self, *args, **kwargs):
-        steps = CheckerWizard('').relevant_steps[:-1]
+        steps = CheckerWizard('').review_steps
         return render_template(self.template, steps=steps, form=self.form)
 
 
@@ -167,6 +167,10 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     def relevant_steps(self):
         return filter(lambda s: not self.skip(s), self.steps)
 
+    @property
+    def review_steps(self):
+        return filter(lambda s: not self.skip_on_review(s), self.steps)
+
     def complete(self):
 
         if session.needs_face_to_face:
@@ -181,15 +185,16 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
 
         return redirect(url_for('.eligible'))
 
-    def skip(self, step):
+    def skip(self, step, for_review_page=False):
 
         if session.needs_face_to_face:
             return True
 
-        if step.name == 'review' and not session.ineligible:
+        if step.name == 'review':
             return False
 
-        if step.name not in ('problem', 'about', 'benefits') \
+        if not for_review_page \
+                and step.name not in ('problem', 'about', 'benefits') \
                 and session.ineligible:
             return True
 
@@ -210,6 +215,13 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
             return True
 
         return False
+
+    def skip_on_review(self, step):
+        if self.skip(step, for_review_page=True) or not step.is_completed:
+            return True
+        return False
+
+
 
 
 checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
