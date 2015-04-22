@@ -58,6 +58,16 @@ class TestReviewPage(unittest.TestCase):
         self.assertEqual(steps, [3, 4, 5])
         self.assertEqual(direction, 'down')
 
+    def test_get_category(self):
+        response_json = {
+            'nodes': [{
+                'label': 'Domestic violence'
+            }],
+            'category': None,
+        }
+
+        self.assertEqual(api.get_category(response_json), 'violence')
+
 
 
 
