@@ -1,1 +1,8 @@
 @import 'ie-common';
+
+.progress .progress-step {
+  &:before,
+  &:after {
+    content: none;
+  }
+}

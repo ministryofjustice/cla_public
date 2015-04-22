@@ -19,6 +19,7 @@
     margin: 0;
     line-height: 1;
     border-top: 1px solid #ddd;
+    position: relative;
 
     &.m-current {
       font-weight: bold;
@@ -33,26 +34,6 @@
       }
     }
 
-    &.m-completed .step-name:hover:not(:focus),
-    &.m-current.m-completed .step-name {
-      &:after {
-        border-top-color: $grey-4;
-      }
-    }
-
-    &:last-child .step-name {
-      &:before,
-      &:after {
-        content: none;
-      }
-    }
-  }
-
-  .step-name {
-    position: relative;
-    padding: 15px 0 15px 35px;
-    display: block;
-
     &:before,
     &:after {
       content: '';
@@ -66,13 +47,37 @@
       border-style: solid;
       border-width: 7px 7px 0 7px;
       border-color: lighten($grey-2, 8) transparent transparent transparent;
-      z-index: 1;
+      z-index: 2;
     }
 
     &:after {
       border-top-color: white;
       bottom: -6px;
     }
+
+    &:last-child {
+      &:before,
+      &:after {
+        content: none;
+      }
+    }
+
+    &.s-focused:before {
+      border-top-color: $yellow;
+    }
+
+    &.m-completed.s-hovered:not(.s-focused),
+    &.m-current.m-completed {
+      &:after {
+        border-top-color: $grey-4;
+      }
+    }
+  }
+
+  .step-name {
+    padding: 15px 15px 15px 35px;
+    display: block;
+    overflow: hidden;
 
     &.m-dummy {
       padding: 4px;
@@ -89,6 +94,7 @@
 
   a.step-name:focus,
   a.step-name:active, {
+    position: relative;
     background: white;
     z-index: 2;
   }
