@@ -30,7 +30,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
     def get(self, choices='', *args, **kwargs):
         api.create_diagnosis()
 
-        response = api.move(choices)
+        response = api.move([c for c in choices.strip('/').split('/') if c])
 
         try:
             response_json = response.json()
