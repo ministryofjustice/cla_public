@@ -79,8 +79,9 @@ class DiagnosisApiClient(object):
             previous_choices, choices_list)
 
         for s in steps:
-            payload = {}
-            payload['current_node_id'] = s
+            payload = {
+                'current_node_id': s
+            }
             resp = self.post_to_scope('move_%s/' % direction, payload=payload)
         return resp
 
