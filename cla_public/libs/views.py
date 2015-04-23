@@ -215,6 +215,7 @@ class FormWizardStep(object):
     """
     A step in a form wizard
     """
+    is_completed = False
 
     def __init__(self, form_class, template):
         self.form_class = form_class

@@ -8,7 +8,7 @@
   <h1>{{ title }}</h1>
 
   <form method="POST" class="answers-summary">
-    {% for step in steps %}
+    {% for step in review_steps %}
       {% set answers = step.completed_fields() %}
       {% with step_title = step.form_class.title %}
         <section id="step-{{ step.name }}">
