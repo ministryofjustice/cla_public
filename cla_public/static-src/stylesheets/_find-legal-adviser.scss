@@ -16,25 +16,36 @@ $map-height: 460px;
     }
   }
 
-  .results-filter {
+  .org-category {
+    font-size: 11px;
     display: inline-block;
-    line-height: 1;
-    padding: 0 5px;
-    background: $grey-4;
-    line-height: 24px;
-    border: 1px solid $grey-2;
+    padding: 1px 5px;
+    background: $yellow-25;
+    text-transform: uppercase;
+  }
+
+  .results-filter {
+    cursor: default;
+    display: inline-block;
+    font-size: 13px;
+    padding: 3px 5px;
 
     .filter-remove {
-      border-left: 1px solid $grey-2;
       text-indent: -999em;
       float: right;
       width: 16px;
       height: 16px;
-      padding: 4px;
-      margin: 0 -5px 0 5px;
+      padding: 3px;
+      margin: -3px -5px -3px 4px;
+      opacity: .6;
+      border-left: 1px solid white;
 
       &:hover {
-        background: $grey-3;
+        opacity: 1;
+      }
+
+      &:focus {
+        outline: none;
       }
 
       .icon {
@@ -140,14 +151,6 @@ $map-height: 460px;
     .results-nav-next {
       float: right;
     }
-  }
-
-  .org-category {
-    font-size: 11px;
-    display: inline-block;
-    padding: 1px 5px;
-    background: $yellow-25;
-    text-transform: uppercase;
   }
 }
 
