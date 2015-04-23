@@ -24,7 +24,7 @@
         {% if step.is_completed %}m-completed{% endif %}
         {% if is_active %}m-current{% endif %}"
       >
-        {% if step.is_completed %}
+        {% if step.is_completed or steps[loop.index0 - 1].is_completed %}
           <a class="step-name" href="{{ url_for('checker.wizard', step=step.name) }}">
             {{ step_status(step.is_completed) }}
             {{ step.form_class.title }}
