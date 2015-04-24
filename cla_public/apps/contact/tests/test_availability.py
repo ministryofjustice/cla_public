@@ -159,3 +159,5 @@ class TestTimeChoiceField(unittest.TestCase):
         # one of the options should be selected
         self.assertTrue(any([x[2] for x in self.field.iter_choices()]))
 
+    def test_data_is_time_object(self):
+        self.assertTrue(isinstance(self.field.data, datetime.time))
