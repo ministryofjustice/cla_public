@@ -15,15 +15,22 @@
   </p>
 
   {% if ELIGIBILITY_REASONS.DISPOSABLE_CAPITAL in ineligible_reasons %}
-    <h3>DISPOSABLE_CAPITAL</h3>
+    <p>{% trans %}This is because you/you and your partner have too much disposable
+      capital, based on what you have told us.{% endtrans %}</p>
+    <p>{% trans %}Disposable capital includes savings, valuable items and the
+      equity in any property you own.{% endtrans %}</p>
   {% endif %}
 
   {% if ELIGIBILITY_REASONS.GROSS_INCOME in ineligible_reasons %}
-    <h3>GROSS_INCOME</h3>
+    <p>{% trans %}This is because you/you and your partner’s gross income is more than
+      the maximum allowed, based on what you have told us.{% endtrans %}</p>
   {% endif %}
 
   {% if ELIGIBILITY_REASONS.DISPOSABLE_INCOME in ineligible_reasons %}
-    <h3>DISPOSABLE_INCOME</h3>
+    <p>{% trans %}This is because you/you and your partner’s disposable income is
+      higher than the limit we allow, based on what you have told us. {% endtrans %}</p>
+    <p>{% trans %}Disposable income is the money you have left after we’ve accounted
+      for certain living expenses, like rent or mortgage payments.{% endtrans %}</p>
   {% endif %}
 
   <p>{{ _('To qualify for legal aid, you must meet all of the following conditions:') }}</p>
