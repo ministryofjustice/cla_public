@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 import logging
+from cla_common.constants import ELIGIBILITY_REASONS
 
 from flask import abort, render_template, redirect, session, url_for, views, \
     request
@@ -183,7 +184,8 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         if session.checker.ineligible:
             return redirect(url_for(
                 '.help_organisations',
-                category_name=session.checker.category_slug))
+                category_name=session.checker.category_slug,
+                ineligible_reasons=session.checker.ineligible_reasons))
 
         return redirect(url_for('.eligible'))
 
@@ -317,9 +319,15 @@ def help_organisations(category_name):
         category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
     trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
 
+    ineligible_reasons = request.args.getlist('ineligible_reasons')
+    print ineligible_reasons
+
     organisations = get_organisation_list(article_category__name=category_name)
     return render_template(
         'help-organisations.html',
         organisations=organisations,
         category=category,
-        category_name=trans_category_name)
+        category_name=trans_category_name,
+        ELIGIBILITY_REASONS=ELIGIBILITY_REASONS,
+        ineligible_reasons=ineligible_reasons
+        )
