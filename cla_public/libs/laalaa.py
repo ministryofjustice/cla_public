@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import requests
+import urllib
+
 from flask import current_app
 from flask.ext.babel import lazy_gettext as _
+import requests
 
 
 PROVIDER_CATEGORIES = {
@@ -21,35 +23,45 @@ PROVIDER_CATEGORIES = {
     'wb': _('Welfare benefits')
 }
 
+
 class LaaLaaError(Exception):
     pass
 
 
-def find(postcode, category, page=1):
-    def decode_category(code):
-        return PROVIDER_CATEGORIES.get(code.lower())
+def laalaa_search(**kwargs):
+    kwargs = dict(filter(lambda kwarg: kwarg[1], kwargs.items()))
+    params = urllib.urlencode(kwargs)
 
     try:
         response = requests.get(
-            '{host}/legal-advisers/?postcode={postcode}&page={page}&category={category}&format=json'
-            .format(
+            '{host}/legal-advisers/?{params}'.format(
                 host=current_app.config['LAALAA_API_HOST'],
-                postcode=postcode,
-                category=category,
-                page=page
-            )
-        )
-        try:
-            data = response.json()
-
-            for result in data.get('results', []):
-                if result.get('categories'):
-                    result['categories'] = map(decode_category, result['categories'])
-
-            return data
-
-        except ValueError:
-            raise LaaLaaError
+                params=params))
     except (requests.exceptions.ConnectionError,
             requests.exceptions.Timeout) as e:
         raise LaaLaaError(e)
+
+    return response.json()
+
+
+def decode_category(category):
+    if category and isinstance(category, basestring):
+        return PROVIDER_CATEGORIES.get(category.lower())
+
+
+def decode_categories(result):
+    result['categories'] = filter(None, map(
+        decode_category,
+        result.get('categories', [])))
+
+
+def find(postcode, category=None, page=1):
+
+    data = laalaa_search(
+        postcode=postcode,
+        category=category,
+        page=page)
+
+    data['results'] = map(decode_categories, data.get('results', []))
+
+    return data
