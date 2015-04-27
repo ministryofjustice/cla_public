@@ -100,7 +100,7 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform for third-party fields
     """
     third_party_name = StringField(
-           _(u'If Yes, name of person who helped you'),
+           _(u'If Yes, name of the person speaking for you'),
            validators=[
                 Length(max=400, message=_(u'Your full name must be 400 '
                                          u'characters or less')),
@@ -116,7 +116,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     Form to contact CLA
     """
     third_party_handled = YesNoField(
-        _(u'Has anyone helped to fill in this form')
+        _(u'Do you want someone else to speak to us on your behalf?')
     )
     third_party = ValidatedFormField(
         ThirdPartyForm,
