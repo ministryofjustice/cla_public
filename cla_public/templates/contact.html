@@ -31,7 +31,7 @@
     </p>
   {% endblock %}
 
-  <form method="POST" action="{{ url_for('contact.get_in_touch') }}">
+  <form method="POST" action="{{ url_for('contact.get_in_touch') }}" class="contact-form">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
