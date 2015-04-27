@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from cla_common.constants import DIAGNOSIS_SCOPE
 from django.template.defaultfilters import striptags
+from cla_public.apps.checker.views import HelpOrganisations
 from cla_public.apps.scope import scope
 from cla_public.apps.scope.api import diagnosis_api_client as api
 from cla_public.libs.views import RequiresSession
@@ -72,10 +73,7 @@ class ScopeInScope(RequiresSession, views.MethodView):
     def get(self, *args, **kwargs):
         return render_template('scope/in-scope.html')
 
-class ScopeIneligible(RequiresSession, views.MethodView):
-    def get(self, *args, **kwargs):
-        return render_template('scope/ineligible.html')
 
-
-
+class ScopeIneligible(HelpOrganisations):
+    _template = 'scope/ineligible.html'
 
