@@ -2,8 +2,8 @@
 "Contact views"
 
 from flask import abort, redirect, render_template, session, url_for, views, \
-    current_app
-from flask.ext.babel import lazy_gettext as _
+    current_app, flash
+from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm
@@ -11,6 +11,7 @@ from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, ApiError
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView
+from cla_public.apps.base.constants import END_SERVICE_FLASH_MESSAGE
 
 
 @contact.after_request
@@ -37,13 +38,14 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 u'Please check and try again.')
             return self.get()
         else:
+            flash(END_SERVICE_FLASH_MESSAGE)
+
             return redirect(url_for('.confirmation'))
 
     def dispatch_request(self, *args, **kwargs):
         if not session:
             session.checker['force_session'] = True
         return super(Contact, self).dispatch_request(*args, **kwargs)
-
 
 
 contact.add_url_rule(

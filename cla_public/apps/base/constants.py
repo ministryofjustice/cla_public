@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask.ext.babel import lazy_gettext as _
+from flask.ext.babel import lazy_gettext as _, gettext
 
 # Feedback: feel about service
 FEEL_ABOUT_SERVICE_LABELS = [
@@ -22,3 +22,9 @@ HELP_FILLING_IN_FORM_LABELS = [
 
 HELP_FILLING_IN_FORM = zip(HELP_FILLING_IN_FORM_LABELS,
         HELP_FILLING_IN_FORM_LABELS)
+
+END_SERVICE_FLASH_MESSAGE = gettext(
+    u'You’ve reached the end of this service.'
+    u'The information you’ve entered was automatically '
+    u'deleted for your security.'
+)
