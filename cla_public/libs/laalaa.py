@@ -28,15 +28,20 @@ class LaaLaaError(Exception):
     pass
 
 
-def laalaa_search(**kwargs):
+def kwargs_to_urlparams(**kwargs):
     kwargs = dict(filter(lambda kwarg: kwarg[1], kwargs.items()))
-    params = urllib.urlencode(kwargs)
+    return urllib.urlencode(kwargs)
 
+
+def laalaa_url(**kwargs):
+    return '{host}/legal-advisers/?{params}'.format(
+        host=current_app.config['LAALAA_API_HOST'],
+        params=kwargs_to_urlparams(**kwargs))
+
+
+def laalaa_search(**kwargs):
     try:
-        response = requests.get(
-            '{host}/legal-advisers/?{params}'.format(
-                host=current_app.config['LAALAA_API_HOST'],
-                params=params))
+        response = requests.get(laalaa_url(**kwargs))
     except (requests.exceptions.ConnectionError,
             requests.exceptions.Timeout) as e:
         raise LaaLaaError(e)
@@ -53,6 +58,7 @@ def decode_categories(result):
     result['categories'] = filter(None, map(
         decode_category,
         result.get('categories', [])))
+    return result
 
 
 def find(postcode, category=None, page=1):
