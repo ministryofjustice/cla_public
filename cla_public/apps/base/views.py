@@ -128,6 +128,43 @@ def set_locale(locale):
     response.set_cookie('locale', locale, expires=expires)
     return response
 
+
 @base.route('/call-me-back')
 def redirect_to_contact():
     return redirect(url_for('contact.get_in_touch'))
+
+
+@base.route('/status.json')
+def smoke_tests():
+    """
+    Run smoke tests and return results as JSON datastructure
+    """
+
+    import unittest
+    from cla_public.apps.checker.tests.smoketests import SmokeTests
+    suite = unittest.TestLoader().loadTestsFromTestCase(SmokeTests)
+    result = unittest.TestResult()
+    suite.run(result)
+
+    status = 'failure'
+    if result.wasSuccessful():
+        status = 'success'
+
+    def format_result(test):
+        test, output = test
+        return {
+            'name': test._testMethodName,
+            'doc': test._testMethodDoc,
+            'output': output
+        }
+
+    return jsonify({
+        'result': {
+            'status': status,
+            'tests_run': result.testsRun,
+            'detail': {
+                'errors': map(format_result, result.errors),
+                'failures': map(format_result, result.failures),
+            }
+        }
+    })
