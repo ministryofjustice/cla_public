@@ -35,6 +35,11 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
+    {{ Form.text_input_fieldset(
+      form.full_name,
+      class_='m-large'
+    ) }}
+
     {% call Form.fieldset(form.third_party_handled) %}
       {{ Form.radio_buttons(form.third_party_handled) }}
 
