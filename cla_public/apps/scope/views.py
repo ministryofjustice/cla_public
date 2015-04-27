@@ -10,6 +10,7 @@ from flask import views, render_template, current_app, url_for, \
 
 OUTCOME_URLS = {
     DIAGNOSIS_SCOPE.INSCOPE: '/scope/in-scope',
+    DIAGNOSIS_SCOPE.INELIGIBLE: '/scope/ineligible',
     DIAGNOSIS_SCOPE.OUTOFSCOPE: '/result/face-to-face',
     DIAGNOSIS_SCOPE.CONTACT: '/contact',
 }
@@ -70,6 +71,10 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
 class ScopeInScope(RequiresSession, views.MethodView):
     def get(self, *args, **kwargs):
         return render_template('scope/in-scope.html')
+
+class ScopeIneligible(RequiresSession, views.MethodView):
+    def get(self, *args, **kwargs):
+        return render_template('scope/ineligible.html')
 
 
 
