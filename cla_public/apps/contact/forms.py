@@ -53,7 +53,7 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform to request callback
     """
     contact_number = StringField(
-        _(u'Contact phone number'),
+        _(u'Phone number for your callback'),
         description=_(
             u'Please enter your full phone number including area code, '
             u'using only numbers. For example 020 8123 4567'
@@ -72,9 +72,8 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     )
     time = AvailabilityCheckerField(
         _(u'Select a time for us to call you'),
-        description=_(u'We will try to call you back around the time you '
-                      u'request, but this may not always be possible. We will '
-                      u'always call you back by the next working day.'))
+        description=_(u'We’ll try to call you back at the time you '
+                      u'request, but this may not always be possible.'))
 
 
 class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -106,7 +105,7 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
                                          u'characters or less')),
                 InputRequired()])
     relationship = SelectField(
-        _(u'If Yes, relationship to you'),
+        _(u'If Yes, their relationship to you'),
         choices=(THIRDPARTY_RELATIONSHIP_CHOICES),
         validators=[Required()])
 
@@ -116,7 +115,8 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     Form to contact CLA
     """
     third_party_handled = YesNoField(
-        _(u'Do you want someone else to speak to us on your behalf?')
+        _(u'Would you like someone else to speak to us for you?'),
+        description=_(u'For example, a friend, relative or lawyer')
     )
     third_party = ValidatedFormField(
         ThirdPartyForm,
@@ -130,7 +130,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                                       u'characters or less')),
             InputRequired()])
     callback_requested = RadioField(
-        _(u'Contact preference'),
+        _(u'Contact options'),
         choices=CONTACT_PREFERENCE,
         validators=[
             InputRequired(message=_(u'Please choose one of the options'))],
@@ -143,11 +143,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     address = ValidatedFormField(
         AddressForm)
     extra_notes = TextAreaField(
-        _(u'Help the operator to understand your situation'),
-        description=(_(
-            u"If you’d like to tell us more about your problem, please do so "
-            u"in the box below. The Civil Legal Advice operator will read "
-            u"this to help them understand your problem.")),
+        _(u'Tell us more about your problem'),
         validators=[
             Length(max=4000, message=_(u'Your notes must be 4000 characters '
                                        u'or less')),
