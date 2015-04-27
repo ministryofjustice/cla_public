@@ -54,6 +54,10 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     """
     contact_number = StringField(
         _(u'Contact phone number'),
+        description=_(
+            u'Please enter your full phone number including area code, '
+            u'using only numbers. For example 020 8123 4567'
+        ),
         validators=[
             InputRequired(),
             Length(max=20, message=_(u'Your telephone number must be 20 '
