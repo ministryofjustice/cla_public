@@ -9,6 +9,7 @@ from flask import abort, current_app, jsonify, redirect, render_template, \
     session, url_for, request
 from flask.ext.babel import lazy_gettext as _, gettext
 
+from cla_common.smoketest import smoketest
 from cla_public.apps.base import base
 from cla_public.apps.base.forms import FeedbackForm
 import cla_public.apps.base.filters
@@ -140,31 +141,7 @@ def smoke_tests():
     Run smoke tests and return results as JSON datastructure
     """
 
-    import unittest
+    from cla_common.smoketest import smoketest
     from cla_public.apps.checker.tests.smoketests import SmokeTests
-    suite = unittest.TestLoader().loadTestsFromTestCase(SmokeTests)
-    result = unittest.TestResult()
-    suite.run(result)
 
-    status = 'failure'
-    if result.wasSuccessful():
-        status = 'success'
-
-    def format_result(test):
-        test, output = test
-        return {
-            'name': test._testMethodName,
-            'doc': test._testMethodDoc,
-            'output': output
-        }
-
-    return jsonify({
-        'result': {
-            'status': status,
-            'tests_run': result.testsRun,
-            'detail': {
-                'errors': map(format_result, result.errors),
-                'failures': map(format_result, result.failures),
-            }
-        }
-    })
+    return jsonify(smoketest(SmokeTests))
