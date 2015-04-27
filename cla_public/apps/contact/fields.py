@@ -94,7 +94,12 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
         if self.choices:
-            self.default, display = random.choice(self.choices)
+            self.default, _ = random.choice(self.choices)
+
+    def process_data(self, value):
+        if isinstance(value, basestring):
+            return self.process_formdata([value])
+        self.data = value
 
     def process_formdata(self, valuelist):
         if valuelist:
