@@ -285,6 +285,7 @@ class Eligible(RequiresSession, views.MethodView, object):
             form=ContactForm()
         )
 
+
 checker.add_url_rule(
     '/result/eligible',
     view_func=Eligible.as_view('eligible'),
@@ -292,36 +293,48 @@ checker.add_url_rule(
 )
 
 
-@checker.route('/help-organisations/<category_name>', methods=['GET'])
-def help_organisations(category_name):
-    if session.checker:
-        session.store({
-            'has_partner': session.checker.has_partner
-        })
-        session.clear_checker()
+class HelpOrganisations(views.MethodView):
+    _template = 'help-organisations.html'
 
-    category_name = category_name.replace('-', ' ').capitalize()
+    def get_context(self, category_name):
+        category_name = category_name.replace('-', ' ').capitalize()
 
-    # force english as knowledge base languages are in english
-    with override_locale('en'):
-        category, name, desc = category_option_from_name(category_name)
+        # force english as knowledge base languages are in english
+        with override_locale('en'):
+            category, name, desc = category_option_from_name(category_name)
 
-        if category is None:
-            abort(404)
+            if category is None:
+                abort(404)
 
-        name = unicode(name)
+            name = unicode(name)
 
-        category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
-    trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
+            category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
+        trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
 
-    ineligible_reasons = session.stored.get('ineligible_reasons', [])
+        ineligible_reasons = session.stored.get('ineligible_reasons', [])
 
-    organisations = get_organisation_list(article_category__name=category_name)
-    return render_template(
-        'help-organisations.html',
-        organisations=organisations,
-        category=category,
-        category_name=trans_category_name,
-        ELIGIBILITY_REASONS=ELIGIBILITY_REASONS,
-        ineligible_reasons=ineligible_reasons
+        organisations = get_organisation_list(article_category__name=category_name)
+
+        return {
+            'organisations':organisations,
+            'category': category,
+            'category_name': trans_category_name,
+            'ELIGIBILITY_REASONS': ELIGIBILITY_REASONS,
+            'ineligible_reasons': ineligible_reasons
+        }
+
+    def get(self, category_name):
+        if session.checker:
+            session.clear_checker()
+
+        return render_template(
+            self._template,
+            **self.get_context(category_name)
         )
+
+
+checker.add_url_rule(
+    '/help-organisations/<category_name>',
+    view_func=HelpOrganisations.as_view('help_organisations'),
+    methods=['GET']
+)
