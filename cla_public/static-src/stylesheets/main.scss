@@ -70,3 +70,19 @@ body {
   @include transition(opacity, ease, 300ms);
   opacity: 1;
 }
+
+.form-notice {
+  background: $grey-4;
+  font-size: .9em;
+  padding: .4em 20px;
+  margin: 13px 0;
+
+  p {
+    margin: .4em 0;
+  }
+}
+
+
+.contact-form {
+  margin-top: 40px;
+}

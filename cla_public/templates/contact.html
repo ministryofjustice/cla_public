@@ -38,21 +38,29 @@
     {% call Form.fieldset(form.third_party_handled) %}
       {{ Form.radio_buttons(form.third_party_handled) }}
 
+      <div class="form-notice" data-controlled-by="third_party_handled" data-control-value="1">
+        <p>
+          {{ _('You will need to be with this person when they speak to us.') }}
+        </p>
+      </div>
+
       {{ Subform.help_filling_in(form, form.third_party) }}
     {% endcall %}
 
     {% call Form.fieldset(form.callback_requested) %}
       {{ Form.radio_buttons(form.callback_requested) }}
 
-      <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="0">
-        {% trans %}You will be given the CLA phone number when you submit your details below.{% endtrans %}
-      </p>
-
-      <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="1">
-        {% trans %}We will try to call you at least once. If we cannot speak to you we will leave you a message,
-        unless you tell us not to below. If you miss the call, please complete this form again to book another
-        callback or call us directly.{% endtrans %}
-      </p>
+      <div class="form-notice" data-controlled-by="callback_requested" data-control-value="*">
+        <p data-controlled-by="callback_requested" data-control-value="0">
+          {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
+        </p>
+        <p data-controlled-by="callback_requested" data-control-value="1">
+          {{ _('We will try to call you at least once. If you miss the call you’ll need to complete this form again.') }}
+        </p>
+        <p data-controlled-by="callback_requested" data-control-value="1">
+          {{ _('When a CLA operator calls you, the call will come from an anonymous number.') }}
+        </p>
+      </div>
 
       {% call Form.fieldset(
         is_subfield=True,
