@@ -52,7 +52,10 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
                 api.get_category(response_json),
                 note)
 
-            return redirect(OUTCOME_URLS[state])
+            outcome_url = OUTCOME_URLS[state]
+            if state == 'INELIGIBLE':
+                outcome_url = '/'.join([outcome_url, api.get_category(response_json)])
+            return redirect(outcome_url)
 
         def add_link(choice):
             choices_list = [choice['id']]
