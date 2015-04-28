@@ -54,7 +54,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
 
             category = api.get_category(response_json)
             if category == 'violence':
-                category = 'family'
+                category = 'domestic-violence'
             if category == 'benefits':
                 category = 'welfare-benefits'
 
