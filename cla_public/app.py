@@ -7,6 +7,7 @@ import os
 from flask import Flask, render_template
 from flask.ext.babel import Babel
 from flask.ext.cache import Cache
+from flask.ext.mail import Mail
 from raven.contrib.flask import Sentry
 
 from cla_public.django_to_jinja import change_jinja_templates
@@ -41,6 +42,8 @@ def create_app(config_file=None):
     app.babel.localeselector(get_locale)
 
     app.cache = Cache(app)
+
+    app.mail = Mail(app)
 
     for extension in app.config['EXTENSIONS']:
         extension.init_app(app)

@@ -4,6 +4,7 @@
 from flask import abort, redirect, render_template, session, url_for, views, \
     current_app
 from flask.ext.babel import lazy_gettext as _, gettext
+from flask.ext.mail import Message
 
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm
@@ -12,7 +13,6 @@ from cla_public.apps.checker.api import post_to_case_api, \
 from cla_public.apps.checker.constants import YES
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView
-from cla_public.libs.mailgun import send_email
 
 
 @contact.after_request
@@ -34,19 +34,18 @@ def handle_confirmation_email(form):
             form.callback.time.data.strftime('%A, %d %B at %H:%M')
     }
 
-    email_template = render_template(
+    email_body = render_template(
         'emails/confirmation.txt',
         data=data
     )
 
-    send_email(
-        '{full_name} <{email}>'.format(
-            full_name=data['full_name'],
-            email=data['email']
-        ),
+    msg = Message(
         gettext(u'Your Civil Legal Advice reference number'),
-        email_template
+        recipients=[(data['full_name'], data['email'])],
+        body=email_body
     )
+
+    current_app.mail.send(msg)
 
 
 class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):

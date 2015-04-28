@@ -109,13 +109,19 @@ LAALAA_API_HOST = os.environ.get(
     'https://prod.laalaa.dsd.io')
 
 
-MAILGUN_API_TOKEN = os.environ.get(
-    'MAILGUN_API_TOKEN',
-    '')
+MAIL_SERVER = os.environ.get(
+    'MAIL_SERVER',
+    'smtp.sendgrid.net')
 
-MAILGUN_DOMAIN = os.environ.get(
-    'MAILGUN_DOMAIN',
-    '')
+MAIL_PORT = os.environ.get('MAIL_PORT', 465)
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+
+MAIL_USERNAME = os.environ.get('MAIL_USERNAME', '')
+MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', '')
+
+MAIL_DEFAULT_SENDER = ('Civil Legal Advice',
+    'no-reply@civillegaladvice.service.gov.uk')
 
 
 # local.py overrides all the common settings.
