@@ -25,27 +25,33 @@ class SmokeTests(unittest.TestCase):
         self.ctx = None
 
     def test_can_access_addressfinder(self):
+        "lookup a postcode with AddressFinder"
         with self.app.test_client() as client:
             addressfinder_proxy.lookup_postcode('sw1a1aa')
 
     def test_can_access_zendesk(self):
+        "connect to Zendesk"
         with self.app.test_client() as client:
             zendesk.tickets()
 
     def test_can_access_laalaa(self):
+        "search for legal advisers on LAALAA"
         with self.app.test_client() as client:
             laalaa.find('sw1a1aa')
 
     @unittest.skip('not merged yet')
     def test_can_access_mailgun(self):
+        "connect to Mailgun"
         with self.app.test_client() as client:
             self.fail()
 
     def test_can_access_backend(self):
+        "connect to the backend"
         with self.app.test_client() as client:
             conn = api.get_api_connection()
 
     def test_can_set_category(self):
+        "submit the problem form"
         with self.app.test_client() as client:
             response = client.get(url_for('base.get_started'))
             url = urlparse.urlparse(response.location).path
