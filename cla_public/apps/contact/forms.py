@@ -8,7 +8,8 @@ import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
-from wtforms.validators import InputRequired, Optional, Required, Length
+from wtforms.validators import InputRequired, Optional, Required, \
+    Length, Email
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
@@ -129,6 +130,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             Length(max=255, message=_(
                 u'Your address must be 255 characters '
                 u'or less')),
+            Email(message=_(u'Invalid email address')),
             Optional()]
     )
     address = ValidatedFormField(
