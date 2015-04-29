@@ -102,7 +102,7 @@
 {% endmacro %}
 
 
-{% macro help_filling_in(form, subform) %}
+{% macro thirdparty(form, subform) %}
   {% set controller = form.third_party_handled %}
 
   {% call Form.fieldset(
@@ -115,12 +115,16 @@
     {{ Form.text_input_fieldset(
       subform.third_party_name,
       class_='m-large',
-      fieldset_class=' '
+      fieldset_class='fieldset-group',
+      controlled_by=controller,
+      control_value='1'
     ) }}
 
     {% call Form.fieldset(
       subform.relationship,
-      controlled_by=controller
+      controlled_by=controller,
+      control_value='1',
+      class_='fieldset-group'
     ) %}
       {{ subform.relationship(class_='form-control') }}
     {% endcall %}
