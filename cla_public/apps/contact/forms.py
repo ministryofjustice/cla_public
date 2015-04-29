@@ -53,7 +53,7 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
         _(u'Phone number for your callback'),
         description=_(
             u'Please enter your full phone number including area code, '
-            u'using only numbers. For example 020 8123 4567'
+            u'using only numbers. For example 020 7946 0492'
         ),
         validators=[
             InputRequired(),
