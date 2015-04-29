@@ -12,7 +12,8 @@ module.exports = {
       .deleteCookies()
       .init()
       .maximizeWindow()
-      .waitForElementVisible('body', 5000)
+      .waitForElementVisible('body', 5000,
+        '- Page body is visible')
       .click('a#start', function() {
         if(msg) {
           console.log('\n' + msg + '\n');
