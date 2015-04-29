@@ -49,7 +49,6 @@ module.exports = {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
     client
-      .click('input[name="third_party_handled"][value="1"]')
       .click('input[name="callback_requested"][value="1"]')
     ;
 
@@ -60,7 +59,6 @@ module.exports = {
       }]);
     });
     client
-      .thirdparty(false)
       .setValue('input[name="callback-contact_number"]', '12345');
     common.submitAndCheckForFieldError(client, [{
       name: 'callback-safe_to_contact',

@@ -59,14 +59,34 @@ body {
   }
 }
 
-.js-enabled .s-hidden {
+.js-enabled .s-hidden,
+[data-control-value]:not(.s-expanded) {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  width: 1px;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .js-enabled .s-expanded {
   @include transition(opacity, ease, 300ms);
   opacity: 1;
+}
+
+.form-notice {
+  background: $grey-4;
+  font-size: .9em;
+  padding: .4em 20px;
+  margin: 13px 0;
+
+  p {
+    margin: .4em 0;
+  }
+}
+
+
+.contact-form {
+  margin-top: 40px;
 }

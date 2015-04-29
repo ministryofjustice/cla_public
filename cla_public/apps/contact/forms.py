@@ -10,7 +10,7 @@ from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
 from wtforms.validators import InputRequired, Optional, Required, Length
 
-from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
+from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
 from cla_public.apps.checker.fields import YesNoField
@@ -25,9 +25,6 @@ from cla_public.libs.honeypot import Honeypot
 LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
     [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
-
-THIRDPARTY_RELATIONSHIP = map(lambda (name, value): (name, _(value)), THIRDPARTY_RELATIONSHIP)
-THIRDPARTY_RELATIONSHIP_CHOICES = [('', _('-- Please select --'))] + THIRDPARTY_RELATIONSHIP
 
 
 class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -53,10 +50,10 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform to request callback
     """
     contact_number = StringField(
-        _(u'Contact phone number'),
+        _(u'Phone number for your callback'),
         description=_(
             u'Please enter your full phone number including area code, '
-            u'using only numbers. For example 020 8123 4567'
+            u'using only numbers. For example 020 7946 0492'
         ),
         validators=[
             InputRequired(),
@@ -72,9 +69,8 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     )
     time = AvailabilityCheckerField(
         _(u'Select a time for us to call you'),
-        description=_(u'We will try to call you back around the time you '
-                      u'request, but this may not always be possible. We will '
-                      u'always call you back by the next working day.'))
+        description=_(u'We’ll try to call you back at the time you '
+                      u'request, but this may not always be possible.'))
 
 
 class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -95,34 +91,10 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
             Optional()])
 
 
-class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
-    """
-    Subform for third-party fields
-    """
-    third_party_name = StringField(
-           _(u'If Yes, name of person who helped you'),
-           validators=[
-                Length(max=400, message=_(u'Your full name must be 400 '
-                                         u'characters or less')),
-                InputRequired()])
-    relationship = SelectField(
-        _(u'If Yes, relationship to you'),
-        choices=(THIRDPARTY_RELATIONSHIP_CHOICES),
-        validators=[Required()])
-
-
 class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Form to contact CLA
     """
-    third_party_handled = YesNoField(
-        _(u'Has anyone helped to fill in this form')
-    )
-    third_party = ValidatedFormField(
-        ThirdPartyForm,
-        validators=[
-            IgnoreIf('third_party_handled', FieldValue(NO))
-        ])
     full_name = StringField(
         _(u'Your full name'),
         validators=[
@@ -130,7 +102,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                                       u'characters or less')),
             InputRequired()])
     callback_requested = RadioField(
-        _(u'Contact preference'),
+        _(u'Contact options'),
         choices=CONTACT_PREFERENCE,
         validators=[
             InputRequired(message=_(u'Please choose one of the options'))],
@@ -143,11 +115,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     address = ValidatedFormField(
         AddressForm)
     extra_notes = TextAreaField(
-        _(u'Help the operator to understand your situation'),
-        description=(_(
-            u"If you’d like to tell us more about your problem, please do so "
-            u"in the box below. The Civil Legal Advice operator will read "
-            u"this to help them understand your problem.")),
+        _(u'Tell us more about your problem'),
         validators=[
             Length(max=4000, message=_(u'Your notes must be 4000 characters '
                                        u'or less')),
@@ -187,12 +155,5 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             local_tz = pytz.timezone(current_app.config['TIMEZONE'])
             local = local_tz.localize(naive)
             data['requires_action_at'] = local.astimezone(pytz.utc).isoformat()
-
-        if self.third_party_handled.data == YES:
-            data['thirdparty_details'] = {
-                'personal_details': {}
-            }
-            data['thirdparty_details']['personal_details']['full_name'] = self.third_party.third_party_name.data
-            data['thirdparty_details']['personal_relationship'] = self.third_party.relationship.data
 
         return data

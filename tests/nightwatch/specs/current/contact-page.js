@@ -16,7 +16,6 @@ function willCallWithNotes(client, notes_text) {
   var notes = 'textarea[name="extra_notes"]';
   var length = notes_text.length;
   client
-    .click('input[name="third_party_handled"][value="0"]')
     .setValue('input#full_name', 'John Smith')
     .click('input[name="callback_requested"][value="0"]')
     .setValue(notes, notes_text)

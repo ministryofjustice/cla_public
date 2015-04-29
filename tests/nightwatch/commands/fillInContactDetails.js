@@ -17,7 +17,7 @@ exports.command = function(eligibility, shouldSubmitForm, callback) {
     client
       .assert.urlContains(path,
         '  - Contact page URL ' + path + ' is correct')
-      .thirdparty()
+      .setValue('#full_name', 'John Smith')
       .click('input[name="callback_requested"][value="0"]')
       .conditionalFormSubmit(shouldSubmitForm)
     ;

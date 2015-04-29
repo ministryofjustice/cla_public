@@ -21,39 +21,39 @@
     <h1>{{ title }}</h1>
     <p>
       {% trans %}Please submit your details to get your personal case reference number.
-      You will need to quote this number when you speak with CLA.{% endtrans %}
+      You will need to quote this number when you speak with CLA. You’ll need to provide evidence of
+      any financial information you’ve given us.{% endtrans %}
     </p>
     <p>
       {% trans %}You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
       <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
       or ask us to call you back, which is free.{% endtrans %}
     </p>
-    <p>{{ _('When you speak to CLA, you will need to provide evidence of the financial information you’ve given us through this service.') }}</p>
-    <p><strong>{{ _('When a CLA operator calls you, the call will come from an anonymous number.') }}</strong></p>
   {% endblock %}
 
-  <form method="POST" action="{{ url_for('contact.get_in_touch') }}">
+  <form method="POST" action="{{ url_for('contact.get_in_touch') }}" class="contact-form">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% call Form.fieldset(form.third_party_handled) %}
-      {{ Form.radio_buttons(form.third_party_handled) }}
-
-      {{ Subform.help_filling_in(form, form.third_party) }}
-    {% endcall %}
+    {{ Form.text_input_fieldset(
+      form.full_name,
+      class_='m-large'
+    ) }}
 
     {% call Form.fieldset(form.callback_requested) %}
       {{ Form.radio_buttons(form.callback_requested) }}
 
-      <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="0">
-        {% trans %}You will be given the CLA phone number when you submit your details below.{% endtrans %}
-      </p>
-
-      <p class="form-subfield field-help" data-controlled-by="callback_requested" data-control-value="1">
-        {% trans %}We will try to call you at least once. If we cannot speak to you we will leave you a message,
-        unless you tell us not to below. If you miss the call, please complete this form again to book another
-        callback or call us directly.{% endtrans %}
-      </p>
+      <div class="form-notice" data-controlled-by="callback_requested" data-control-value="*">
+        <p data-controlled-by="callback_requested" data-control-value="0">
+          {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
+        </p>
+        <p data-controlled-by="callback_requested" data-control-value="1">
+          {{ _('We will try to call you at least once. If you miss the call you’ll need to complete this form again.') }}
+        </p>
+        <p data-controlled-by="callback_requested" data-control-value="1">
+          {{ _('When a CLA operator calls you, the call will come from an anonymous number.') }}
+        </p>
+      </div>
 
       {% call Form.fieldset(
         is_subfield=True,
@@ -106,13 +106,6 @@
       {% endblock %}
     </div>
   {% endblock %}
-
-  <script>
-    window.CONDITIONAL_LABELS = {
-      'third_party-third_party_name': '{{ _("Name of the person who helped you") }}',
-      'third_party-relationship': '{{ _("Relationship to you") }}'
-    };
-  </script>
 {% endblock %}
 
 

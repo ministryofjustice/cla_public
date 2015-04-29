@@ -5,7 +5,7 @@
     {%- if session.need_more_info -%}
       {{ _('We need more information') }}
     {%- else -%}
-      {{ _('You might qualify for legal aid') }}
+      {% trans %}You might qualify for <span>legal aid</span>{% endtrans %}
     {%- endif -%}
   </h1>
   <h2>{{ _('Contact Civil Legal Advice') }}</h2>
