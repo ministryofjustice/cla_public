@@ -39,12 +39,6 @@ class SmokeTests(unittest.TestCase):
         with self.app.test_client() as client:
             laalaa.find('sw1a1aa')
 
-    @unittest.skip('not merged yet')
-    def test_can_access_mailgun(self):
-        "connect to Mailgun"
-        with self.app.test_client() as client:
-            self.fail()
-
     def test_can_access_backend(self):
         "connect to the backend"
         with self.app.test_client() as client:
