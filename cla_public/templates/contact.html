@@ -40,18 +40,6 @@
       class_='m-large'
     ) }}
 
-    {% call Form.fieldset(form.third_party_handled) %}
-      {{ Form.radio_buttons(form.third_party_handled) }}
-
-      <div class="form-notice" data-controlled-by="third_party_handled" data-control-value="1">
-        <p>
-          {{ _('You will need to be with this person when they speak to us.') }}
-        </p>
-      </div>
-
-      {{ Subform.thirdparty(form, form.third_party) }}
-    {% endcall %}
-
     {% call Form.fieldset(form.callback_requested) %}
       {{ Form.radio_buttons(form.callback_requested) }}
 
@@ -118,13 +106,6 @@
       {% endblock %}
     </div>
   {% endblock %}
-
-  <script>
-    window.CONDITIONAL_LABELS = {
-      'third_party-third_party_name': '{{ _("Name of the person speaking for you") }}',
-      'third_party-relationship': '{{ _("Their relationship to you") }}'
-    };
-  </script>
 {% endblock %}
 
 

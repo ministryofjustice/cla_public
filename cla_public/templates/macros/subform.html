@@ -100,33 +100,3 @@
     {% endcall %}
   {% endcall %}
 {% endmacro %}
-
-
-{% macro thirdparty(form, subform) %}
-  {% set controller = form.third_party_handled %}
-
-  {% call Form.fieldset(
-    is_subfield=True,
-    controlled_by=controller,
-    control_value='1',
-    use_row=False,
-    persist_values=True
-  ) %}
-    {{ Form.text_input_fieldset(
-      subform.third_party_name,
-      class_='m-large',
-      fieldset_class='fieldset-group',
-      controlled_by=controller,
-      control_value='1'
-    ) }}
-
-    {% call Form.fieldset(
-      subform.relationship,
-      controlled_by=controller,
-      control_value='1',
-      class_='fieldset-group'
-    ) %}
-      {{ subform.relationship(class_='form-control') }}
-    {% endcall %}
-  {% endcall %}
-{% endmacro %}

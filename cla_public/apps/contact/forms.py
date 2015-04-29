@@ -10,7 +10,7 @@ from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
 from wtforms.validators import InputRequired, Optional, Required, Length
 
-from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
+from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
 from cla_public.apps.checker.fields import YesNoField
@@ -25,9 +25,6 @@ from cla_public.libs.honeypot import Honeypot
 LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
     [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
-
-THIRDPARTY_RELATIONSHIP = map(lambda (name, value): (name, _(value)), THIRDPARTY_RELATIONSHIP)
-THIRDPARTY_RELATIONSHIP_CHOICES = [('', _('-- Please select --'))] + THIRDPARTY_RELATIONSHIP
 
 
 class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -94,35 +91,10 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
             Optional()])
 
 
-class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
-    """
-    Subform for third-party fields
-    """
-    third_party_name = StringField(
-           _(u'If Yes, name of the person speaking for you'),
-           validators=[
-                Length(max=400, message=_(u'Your full name must be 400 '
-                                         u'characters or less')),
-                InputRequired()])
-    relationship = SelectField(
-        _(u'If Yes, their relationship to you'),
-        choices=(THIRDPARTY_RELATIONSHIP_CHOICES),
-        validators=[Required()])
-
-
 class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Form to contact CLA
     """
-    third_party_handled = YesNoField(
-        _(u'Would you like someone else to speak to us for you?'),
-        description=_(u'For example, a friend, relative or lawyer')
-    )
-    third_party = ValidatedFormField(
-        ThirdPartyForm,
-        validators=[
-            IgnoreIf('third_party_handled', FieldValue(NO))
-        ])
     full_name = StringField(
         _(u'Your full name'),
         validators=[
@@ -183,12 +155,5 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             local_tz = pytz.timezone(current_app.config['TIMEZONE'])
             local = local_tz.localize(naive)
             data['requires_action_at'] = local.astimezone(pytz.utc).isoformat()
-
-        if self.third_party_handled.data == YES:
-            data['thirdparty_details'] = {
-                'personal_details': {}
-            }
-            data['thirdparty_details']['personal_details']['full_name'] = self.third_party.third_party_name.data
-            data['thirdparty_details']['personal_relationship'] = self.third_party.relationship.data
 
         return data
