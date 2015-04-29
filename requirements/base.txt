@@ -22,6 +22,7 @@ six==1.8.0
 statsd==3.0.1
 wsgiref==0.1.2
 Babel==1.3
+beautifulsoup4==4.3.2
 
 # Temporarily install slumber from fork until https://github.com/samgiles/slumber/pull/100 is accepted
 # so we can add a timeout on requests
