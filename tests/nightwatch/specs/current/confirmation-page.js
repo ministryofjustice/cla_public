@@ -1,6 +1,5 @@
 'use strict';
 
-var util = require('util');
 var common = require('../../modules/common-functions');
 var moment = require('moment');
 
@@ -19,12 +18,14 @@ var eligibleJourney = function(client) {
     .assert.containsText('body', 'Are you on any of these benefits?')
     .click('input[value="income_support"]')
     .submitForm('form')
+    .waitForElementVisible('.answers-summary', 5000)
+    .submitForm('form')
     .waitForElementVisible('input[name="callback_requested"]', 5000)
     .assert.urlContains('/result/eligible')
     .assert.containsText('h1', 'You might qualify for legal aid')
     .assert.containsText('h2', 'Contact Civil Legal Advice')
+    .setValue('#full_name', 'John Smith')
     .click('input[name="callback_requested"][value="1"]')
-    .setValue('input[name="full_name"]', 'John Smith')
     .setValue('input[name="callback-contact_number"]', '01234 567890')
     .click('input[name="callback-safe_to_contact"][value="SAFE"]')
     .setValue('input[name="address-post_code"]', 'E18 1JA')
@@ -91,5 +92,4 @@ module.exports = {
 
     client.end();
   }
-
 };

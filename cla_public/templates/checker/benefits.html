@@ -1,14 +1,4 @@
-{% extends "base.html" %}
-
-{% import "macros/form.html" as Form %}
-{% import "macros/element.html" as Element %}
-
-{% if session.has_partner %}
-  {% set title = _('You and your partner’s benefits') %}
-{% else %}
-  {% set title = _('Your benefits') %}
-{% endif %}
-{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+{% extends "checker/base.html" %}
 
 {% block inner_content %}
   <h1>{{ title }}</h1>

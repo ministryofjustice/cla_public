@@ -36,6 +36,10 @@ class FormattedChoiceField(object):
         except ValueError:
             self.data = value
 
+    def iter_choices(self):
+        for value, label in self.choices:
+            yield (value, label, self.coerce(value) == self._format(self.data))
+
     def pre_validate(self, form):
         choice_values = (v for v, _ in self.choices)
         if self._format(self.data) not in choice_values:
@@ -76,7 +80,9 @@ class DayChoiceField(FormattedChoiceField, SelectField):
 
     @classmethod
     def _format(cls, value):
-        return '{:%Y%m%d}'.format(value)
+        if value and not isinstance(value, basestring):
+            return '{:%Y%m%d}'.format(value)
+        return value
 
 
 class TimeChoiceField(FormattedChoiceField, SelectField):
@@ -88,7 +94,12 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
         if self.choices:
-            self.default, display = random.choice(self.choices)
+            self.default, _ = random.choice(self.choices)
+
+    def process_data(self, value):
+        if isinstance(value, basestring):
+            return self.process_formdata([value])
+        self.data = value
 
     def process_formdata(self, valuelist):
         if valuelist:
@@ -102,7 +113,9 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
 
     @classmethod
     def _format(cls, value):
-        return '{:%H%M}'.format(value)
+        if value and not isinstance(value, basestring):
+            return '{:%H%M}'.format(value)
+        return value
 
 
 class AvailableSlot(object):

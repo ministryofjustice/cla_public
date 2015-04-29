@@ -50,12 +50,12 @@ module.exports = {
 
   'Test outcomes': function(client) {
     BENEFITS.forEach(function(item) {
-      var destination = (item === 'other-benefit' ? '/benefits-tax-credits' : '/result/eligible');
-      var input = (item === 'other-benefit' ? 'other_benefits' : 'callback_requested');
+      var destination = (item === 'other-benefit' ? '/benefits-tax-credits' : '/review');
+      var waitElement = (item === 'other-benefit' ? 'input[name="other_benefits"]' : '.answers-summary');
       client
         .click(util.format('input[value="%s"]', item))
         .submitForm('form')
-        .waitForElementVisible(util.format('input[name="%s"]', input), 5000)
+        .waitForElementVisible(waitElement, 5000)
         .assert.urlContains(destination, util.format('Goes to %s when %s is checked', destination, item))
         .url(client.launch_url + '/benefits')
         .waitForElementVisible('input[name="benefits"]', 5000)

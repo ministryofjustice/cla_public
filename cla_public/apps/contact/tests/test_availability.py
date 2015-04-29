@@ -4,13 +4,14 @@ import logging
 from mock import Mock
 import unittest
 
-from wtforms.validators import ValidationError
+from wtforms import Form
+from wtforms.validators import InputRequired, ValidationError
 
 from cla_common import call_centre_availability
 from cla_public.app import create_app
 from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, \
-    OPERATOR_HOURS
+    OPERATOR_HOURS, TimeChoiceField
 from cla_public.apps.contact.forms import ContactForm
 
 
@@ -143,3 +144,20 @@ class TestCallbackInPastBug(unittest.TestCase):
         with override_current_time(datetime.datetime(2015, 2, 11, 22, 19)):
             form = ContactForm()
             self.assertEqual([], form.callback.time.form.time_today.choices)
+
+
+class TestTimeChoiceField(unittest.TestCase):
+
+    def setUp(self):
+        self.form = Form()
+        with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
+            field = TimeChoiceField(choices_callback=OPERATOR_HOURS.time_slots, validators=[InputRequired()])
+            self.field = field.bind(self.form, 'a')
+            self.field.process(None)
+
+    def test_process_valid(self):
+        # one of the options should be selected
+        self.assertTrue(any([x[2] for x in self.field.iter_choices()]))
+
+    def test_data_is_time_object(self):
+        self.assertTrue(isinstance(self.field.data, datetime.time))

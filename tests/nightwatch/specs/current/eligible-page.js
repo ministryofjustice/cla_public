@@ -1,6 +1,5 @@
 'use strict';
 
-var util = require('util');
 var common = require('../../modules/common-functions');
 
 module.exports = {
@@ -26,6 +25,13 @@ module.exports = {
     ;
   },
 
+  'Review page': function(client) {
+    client
+      .waitForElementVisible('.answers-summary', 2000)
+      .submitForm('form')
+    ;
+  },
+
   'Eligible page (request callback)': function(client) {
     client
       .assert.urlContains('/result/eligible')
@@ -42,7 +48,9 @@ module.exports = {
     ;
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
 
-    client.click('input[name="callback_requested"][value="1"]');
+    client
+      .click('input[name="callback_requested"][value="1"]')
+    ;
 
     ['full_name', 'callback-contact_number'].forEach(function(item) {
       common.submitAndCheckForFieldError(client, [{
@@ -51,7 +59,6 @@ module.exports = {
       }]);
     });
     client
-      .setValue('input[name="full_name"]', 'John Doe')
       .setValue('input[name="callback-contact_number"]', '12345');
     common.submitAndCheckForFieldError(client, [{
       name: 'callback-safe_to_contact',

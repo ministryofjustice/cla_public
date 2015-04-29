@@ -9,6 +9,7 @@ from flask import abort, current_app, jsonify, redirect, render_template, \
     session, url_for, request
 from flask.ext.babel import lazy_gettext as _, gettext
 
+from cla_common.smoketest import smoketest
 from cla_public.apps.base import base
 from cla_public.apps.base.forms import FeedbackForm
 import cla_public.apps.base.filters
@@ -128,6 +129,19 @@ def set_locale(locale):
     response.set_cookie('locale', locale, expires=expires)
     return response
 
+
 @base.route('/call-me-back')
 def redirect_to_contact():
     return redirect(url_for('contact.get_in_touch'))
+
+
+@base.route('/status.json')
+def smoke_tests():
+    """
+    Run smoke tests and return results as JSON datastructure
+    """
+
+    from cla_common.smoketest import smoketest
+    from cla_public.apps.checker.tests.smoketests import SmokeTests
+
+    return jsonify(smoketest(SmokeTests))

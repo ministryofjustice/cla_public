@@ -28,12 +28,6 @@ module.exports = {
 
   'Context-dependent questions for employment status': function(client) {
 
-    EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
-      client
-        .assert.hidden(util.format('[name="your_income-%s-per_interval_value"]', item))
-        .assert.hidden(util.format('[name="your_income-%s-interval_period"]', item))
-      ;
-    });
     client
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
@@ -121,7 +115,6 @@ module.exports = {
     var questions = [];
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.EMPLOYED_MANDATORY.forEach(function(item) {
-        // common.submitAndCheckForFieldError(client, util.format('%s_income-%s-per_interval_value', person, item), 'Please provide an amount');
         questions.push({
           name: util.format('%s_income-%s-per_interval_value', person, item),
           errorText: 'Please provide an amount'
@@ -144,7 +137,7 @@ module.exports = {
         ;
         common.submitAndCheckForFieldError(client, [{
           name: util.format('%s_income-%s-interval_period', person, item),
-          errorText: 'Not a valid amount'
+          errorText: 'Please provide an amount'
         }], 'select');
       });
     });

@@ -1,0 +1,68 @@
+{% macro render_field(field, step_title) %}
+  {% if 'Property' in field.type %}
+    {% for property in field %}
+      <li>
+        {% if field|length > 1 %}
+          <h3>Property {{ loop.index }}</h3>
+        {% endif %}
+        <ul class="answers">
+          {% for field_name, field in property.form._fields.items() if field.data.per_interval_value != None %}
+            {{ render_field(field) }}
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  {% elif 'Income' in field.type %}
+    <li>
+      <h3>{{ field.label}}</h3>
+      <ul class="answers">
+        {% for field_name, field in field.form._fields.items() %}
+          {{ render_field(field) }}
+        {% endfor %}
+      </ul>
+    </li>
+  {% else %}
+    <li class="answers-item">{{ render_answer(field, step_title) }}</li>
+  {% endif %}
+{% endmacro %}
+
+{% macro render_answer(field, step_title) %}
+  {% if step_title != field.label.text %}
+    <div class="question">{{ field.label.text }}</div>
+  {% endif %}
+  <div class="answer">
+    {% if field.choices %}
+      {{ render_choices(field) }}
+    {% elif 'Money' in field.type %}
+      {{ render_money_field(field) }}
+    {% else %}
+      <strong>{{ field.data}}</strong>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro render_choices(field) %}
+  {% if field.data is string %}
+    <strong>{{ field|selected_option }}</strong>
+  {% else %}
+    <ul class="multiple-answers">
+      {% for item in field.data %}
+        <li>
+          <strong>{{ field|selected_option(item) }}</strong>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{% macro render_money_field(field) %}
+  <span class="currency">&pound;</span>
+  {%- if 'Interval' in field.type -%}
+    <strong class="money-value">{{ field.data.per_interval_value }}</strong>
+    {%- if field.data.per_interval_value != 0 %}
+      <span class="money-interval">{{ field.interval_period|selected_option }}</span>
+    {%- endif %}
+  {%- else -%}
+    <strong class="money-value">{{ field.data }}</strong>
+  {% endif %}
+{% endmacro %}

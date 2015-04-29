@@ -1,9 +1,5 @@
 'use strict';
 
-var util = require('util');
-var common = require('../../modules/common-functions');
-var SAVINGS_QUESTIONS = require('../../modules/constants').SAVINGS_QUESTIONS;
-
 function testSidebar(client, headline) {
   client
     .assert.visible('aside.sidebar')
@@ -12,7 +8,7 @@ function testSidebar(client, headline) {
 }
 
 module.exports = {
-  startPage: function(client) {
+  'Start page': function(client) {
     client
       .deleteCookies()
       .init()
@@ -23,37 +19,53 @@ module.exports = {
     client.click('a#start');
   },
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
-
-  'About you': function(client) {
-    common.aboutPage(client);
-    common.aboutPageSetAllToNo(client);
-    common.setYesNoFields(client, 'is_employed', 1);
-    common.setYesNoFields(client, 'have_savings', 1);
-    client.submitForm('form');
-  },
-
-  'Savings page': function(client) {
+  'Progress indicator': function(client) {
     client
-      .waitForElementVisible('input[name="savings"]', 5000)
-      .assert.urlContains('/savings')
-      .assert.containsText('h1', 'Your savings')
-    ;
-    testSidebar(client, 'Who can get legal aid?');
-    SAVINGS_QUESTIONS.MONEY.forEach(function(item) {
-      client.setValue(util.format('input[name="%s"]', item.name), 100);
-    });
-    client.submitForm('form');
-  },
+      .waitForElementVisible('.progress-bar', 1000, 'Progress sidebar exists')
 
-  'Income page': function(client) {
-    client
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
-      .assert.urlContains('/income')
-      .assert.containsText('h1', 'Your income')
-    ;
-    testSidebar(client, 'Who can get legal aid?');
+      .assert.containsText('.progress-step.m-current', 'What do you need help with?',
+        'Progress step is Problem page')
+      .selectCategory('debt', true)
 
+      .assert.containsText('.progress-step.m-current', 'About you',
+        'Progress step is About page')
+      .aboutSetAllToYes(true)
+
+      .assert.containsText('.progress-step.m-current', 'You and your partner’s benefits',
+        'Progress step is You and your partner’s benefits page')
+      .selectBenefit('other-benefit', true)
+
+      .assert.containsText('.progress-step.m-current', 'You and your partner’s property',
+        'Progress step is You and your partner’s property')
+      .fillInProperty(true)
+
+      .assert.containsText('.progress-step.m-current', 'You and your partner’s savings',
+        'Progress step is You and your partner’s savings')
+      .fillInSavings(true)
+
+      .assert.containsText('.progress-step.m-current', 'You and your partner’s benefits and tax credits',
+        'Progress step is You and your partner’s benefits and tax credits')
+      .fillInBenefitsAndTaxCredits(true)
+
+      .assert.containsText('.progress-step.m-current', 'You and your partner’s income and tax',
+        'Progress step is You and your partner’s income and tax')
+      .fillInIncome(true, true)
+
+      .assert.containsText('.progress-step.m-current', 'You and your partner’s outgoings',
+        'Progress step is You and your partner’s outgoings')
+      .fillInOutgoings(true)
+
+      .assert.containsText('.progress-step.m-current', 'Review your answers',
+        'Progress step is Review your answers')
+      .conditionalFormSubmit(true)
+
+      .assert.containsText('.progress-step.m-current', 'Contact information',
+        'Progress step is Contact information')
+      .fillInContactDetails('eligible', true)
+
+      .assert.urlContains('/result/confirmation',
+        'Confirmation page URL is correct')
+    ;
     client.end();
   }
 };

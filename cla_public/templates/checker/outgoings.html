@@ -1,14 +1,4 @@
-{% extends "base.html" %}
-
-{% import "macros/element.html" as Element %}
-{% import "macros/form.html" as Form %}
-
-{% if session.has_partner %}
-  {% set title = _('You and your partner’s outgoings') %}
-{% else %}
-  {% set title = _('Your outgoings') %}
-{% endif %}
-{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+{% extends "checker/base.html" %}
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
@@ -26,11 +16,13 @@
     {{ Form.money_interval_fieldset(form.rent) }}
     {{ Form.money_interval_fieldset(form.maintenance) }}
     {{ Form.text_input_fieldset(form.income_contribution, prefix="£", class_='m-small') }}
-    {{ Form.money_interval_fieldset(form.childcare, skip=not session.has_children) }}
+    {% if session.has_children or session.has_dependants %}
+      {{ Form.money_interval_fieldset(form.childcare, skip=not session.has_children and not session.has_dependants) }}
+    {% endif %}
 
     {{ Element.get_in_touch_alert() }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Submit')) }}
+    {{ Form.actions(_('Review your answers')) }}
   </form>
 {% endblock %}

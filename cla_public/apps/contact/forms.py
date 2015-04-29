@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
 "Contact forms"
 
-from flask import current_app, session
+from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 from flask_wtf import Form
 import pytz
 from wtforms import Form as NoCsrfForm
-from wtforms import BooleanField, FormField, RadioField, SelectField, \
+from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
-from wtforms.validators import InputRequired, Optional, Length
+from wtforms.validators import InputRequired, Optional, Required, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
+from cla_public.apps.checker.fields import YesNoField
 from cla_public.apps.checker.constants import CONTACT_SAFETY, \
     CONTACT_PREFERENCE, YES, NO
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
-from cla_public.apps.checker.validators import NotRequired, IgnoreIf, \
+from cla_public.apps.checker.validators import IgnoreIf, \
     FieldValue
 from cla_public.libs.honeypot import Honeypot
 
@@ -49,7 +50,11 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform to request callback
     """
     contact_number = StringField(
-        _(u'Contact phone number'),
+        _(u'Phone number for your callback'),
+        description=_(
+            u'Please enter your full phone number including area code, '
+            u'using only numbers. For example 020 7946 0492'
+        ),
         validators=[
             InputRequired(),
             Length(max=20, message=_(u'Your telephone number must be 20 '
@@ -64,9 +69,8 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     )
     time = AvailabilityCheckerField(
         _(u'Select a time for us to call you'),
-        description=_(u'We will try to call you back around the time you '
-                      u'request, but this may not always be possible. We will '
-                      u'always call you back by the next working day.'))
+        description=_(u'We’ll try to call you back at the time you '
+                      u'request, but this may not always be possible.'))
 
 
 class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -89,17 +93,16 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
 
 class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
-    Form to request a callback
+    Form to contact CLA
     """
     full_name = StringField(
-        _(u'Full name'),
-        description=_(u'For example: John Smith'),
+        _(u'Your full name'),
         validators=[
             Length(max=400, message=_(u'Your full name must be 400 '
                                       u'characters or less')),
             InputRequired()])
     callback_requested = RadioField(
-        _(u'Contact preference'),
+        _(u'Contact options'),
         choices=CONTACT_PREFERENCE,
         validators=[
             InputRequired(message=_(u'Please choose one of the options'))],
@@ -112,11 +115,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     address = ValidatedFormField(
         AddressForm)
     extra_notes = TextAreaField(
-        _(u'Help the operator to understand your situation'),
-        description=(_(
-            u"If you’d like to tell us more about your problem, please do so "
-            u"in the box below. The Civil Legal Advice operator will read "
-            u"this to help them understand your problem.")),
+        _(u'Tell us more about your problem'),
         validators=[
             Length(max=4000, message=_(u'Your notes must be 4000 characters '
                                        u'or less')),
@@ -128,6 +127,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     def api_payload(self):
         "Form data as data structure ready to send to API"
+
         data = {
             'personal_details': {
                 'full_name': self.full_name.data,
@@ -145,7 +145,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                     or self.adaptations.other_language.data,
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
-            }
+            },
         }
         if self.callback_requested.data == YES:
 

@@ -1,33 +1,26 @@
 # -*- coding: utf-8 -*-
 import datetime
+from cla_common import call_centre_availability
 from flask import session
 from mock import Mock, patch
 import unittest
 import pytz
 from werkzeug.datastructures import MultiDict
 
-from cla_common import call_centre_availability
 from cla_public import app
 from cla_public.apps.contact.tests.test_availability import \
     override_current_time
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.contact.forms import ContactForm
-from cla_public.apps.checker.forms import YourBenefitsForm, AboutYouForm, \
-    PropertiesForm, SavingsForm, TaxCreditsForm, IncomeFieldForm, \
-    IncomeForm, OutgoingsForm
+from cla_public.apps.checker.means_test import ProblemPayload, \
+    AboutYouPayload, YourBenefitsPayload, PropertiesPayload, PropertyPayload, \
+    SavingsPayload, TaxCreditsPayload, IncomePayload, OutgoingsPayload
 from cla_public.apps.checker.tests.utils.forms_utils import flatten_dict, \
     flatten_list_of_dicts
 
 
 def get_en_locale():
     return 'en'
-
-
-def money_interval(amount=None, interval='per_month'):
-    return {
-        'per_interval_value': amount,
-        'interval_period': interval
-    }
 
 
 class TestApiPayloads(unittest.TestCase):
@@ -53,13 +46,16 @@ class TestApiPayloads(unittest.TestCase):
         form_class._get_translations = lambda args: None
         return form_class(MultiDict(form_data), csrf_enabled=False)
 
-    def payload(self, form_class, form_data):
+    def form_payload(self, form_class, form_data):
         form = self.form(form_class, form_data)
         return form.api_payload()
 
+    def payload(self, payload_class, form_data):
+        return payload_class(MultiDict(form_data))
+
     def test_your_benefits_form_passported(self):
-        form_data = {'benefits': ['income_support']}
-        payload = self.payload(YourBenefitsForm, form_data)
+        form_data = {'benefits': {'income_support': True}}
+        payload = self.payload(YourBenefitsPayload, form_data)
         self.assertTrue(payload['specific_benefits']['income_support'])
         self.assertTrue(payload['on_passported_benefits'])
 
@@ -77,15 +73,15 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], 0)
 
     def test_your_benefits_form_multiple_passported(self):
-        form_data = {'benefits': ['income_support', 'pension_credit']}
-        payload = self.payload(YourBenefitsForm, form_data)
+        form_data = {'benefits': {'income_support': True, 'pension_credit': True}}
+        payload = self.payload(YourBenefitsPayload, form_data)
         self.assertTrue(payload['specific_benefits']['income_support'])
         self.assertTrue(payload['specific_benefits']['pension_credit'])
         self.assertTrue(payload['on_passported_benefits'])
 
     def test_your_benefits_form_no_passported(self):
-        form_data = {'benefits': ['other-benefit']}
-        payload = self.payload(YourBenefitsForm, form_data)
+        form_data = {'benefits': {'other-benefit': True}}
+        payload = self.payload(YourBenefitsPayload, form_data)
         are_false = lambda (benefit, selected): not selected
         self.assertTrue(
             all(map(are_false, payload['specific_benefits'].items())))
@@ -109,7 +105,7 @@ class TestApiPayloads(unittest.TestCase):
             'own_property': NO,
         }
 
-        payload = self.payload(AboutYouForm, form_data)
+        payload = self.payload(AboutYouPayload, form_data)
         self.assertEqual(payload['partner']['income']['self_employed'], YES)
 
         self.assertEqual(payload['dependants_young'], 0)
@@ -119,7 +115,7 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['income']['self_employed'], NO)
 
         form_data['have_partner'] = NO
-        payload = self.payload(AboutYouForm, form_data)
+        payload = self.payload(AboutYouPayload, form_data)
         self.assertNotIn('partner', payload)
 
         form_data.update({
@@ -128,7 +124,7 @@ class TestApiPayloads(unittest.TestCase):
             'have_children': YES,
             'num_children': 3,
         })
-        payload = self.payload(AboutYouForm, form_data)
+        payload = self.payload(AboutYouPayload, form_data)
         self.assertEqual(payload['dependants_young'], 3)
         self.assertEqual(payload['dependants_old'], 2)
 
@@ -136,15 +132,15 @@ class TestApiPayloads(unittest.TestCase):
             'have_dependants': NO,
             'have_children': NO,
         })
-        payload = self.payload(AboutYouForm, form_data)
+        payload = self.payload(AboutYouPayload, form_data)
         self.assertEqual(payload['dependants_young'], 0)
         self.assertEqual(payload['dependants_old'], 0)
 
         # Test zero and null values
 
         # Test income
-        self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], None)
-        self.assertEqual(payload['you']['income']['earnings']['interval_period'], None)
+        self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['earnings']['interval_period'], 'per_month')
         self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
         self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 0)
         self.assertEqual(payload['you']['income']['tax_credits']['interval_period'], 'per_month')
@@ -152,8 +148,8 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['income']['pension']['per_interval_value'], None)
         self.assertEqual(payload['you']['income']['other_income']['per_interval_value'], None)
 
-        self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], None)
-        self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], None)
+        self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], 0)
 
         # Test savings
         self.assertEqual(payload['you']['savings']['bank_balance'], 0)
@@ -166,7 +162,7 @@ class TestApiPayloads(unittest.TestCase):
         session['AboutYouForm'].update(
             have_savings=YES,
             have_valuables=YES)
-        payload = self.payload(AboutYouForm, form_data)
+        payload = self.payload(AboutYouPayload, form_data)
         self.assertEqual(payload['you']['savings']['bank_balance'], None)
         self.assertEqual(payload['you']['savings']['investment_balance'], None)
         self.assertEqual(payload['you']['savings']['asset_balance'], None)
@@ -175,7 +171,9 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(len(payload['property_set']), 0)
 
         form_data['own_property'] = YES
-        payload = self.payload(AboutYouForm, form_data)
+        session['AboutYouForm'].update(
+            own_property=YES)
+        payload = self.payload(AboutYouPayload, form_data)
         self.assertEqual(len(payload['property_set']), 1)
 
         self.assertEqual(payload['property_set'][0]['value'], None)
@@ -211,7 +209,7 @@ class TestApiPayloads(unittest.TestCase):
         # need to convert FieldList to flat fields to load in to form
         form_data = flatten_list_of_dicts('properties', properties)
 
-        payload = self.payload(PropertiesForm, form_data)
+        payload = self.payload(PropertiesPayload, form_data)
 
         self.assertEqual(len(payload['property_set']), 1)
 
@@ -234,21 +232,21 @@ class TestApiPayloads(unittest.TestCase):
             'valuables': '500',
         }
 
-        payload = self.payload(SavingsForm, form_data)
+        payload = self.payload(SavingsPayload, form_data)
 
         self.assertEqual(payload['you']['savings']['bank_balance'], 10000)
         self.assertEqual(payload['you']['savings']['investment_balance'], 10000)
         self.assertEqual(payload['you']['savings']['asset_balance'], 50000)
 
         session['AboutYouForm']['have_valuables'] = NO
-        payload = self.payload(SavingsForm, form_data)
+        payload = self.payload(SavingsPayload, form_data)
 
         self.assertEqual(payload['you']['savings']['asset_balance'], 0,
                          msg=u'Should be 0 if user selected no valuables')
 
         session['AboutYouForm']['have_savings'] = NO
         session['AboutYouForm']['have_valuables'] = YES
-        payload = self.payload(SavingsForm, form_data)
+        payload = self.payload(SavingsPayload, form_data)
 
         self.assertEqual(payload['you']['savings']['bank_balance'], 0)
         self.assertEqual(payload['you']['savings']['investment_balance'], 0)
@@ -270,13 +268,13 @@ class TestApiPayloads(unittest.TestCase):
         }
 
         form_data = {
-            'benefits': 'asylum-support',
+            'benefits': {'asylum-support': True, 'war-pension': True},
             'other_benefits': YES,
         }
 
         form_data = self.merge_money_intervals(form_data, form_mi_data)
 
-        payload = self.payload(TaxCreditsForm, form_data)
+        payload = self.payload(TaxCreditsPayload, form_data)
 
         self.assertEqual(payload['on_nass_benefits'], True)
         self.assertEqual(payload['you']['income']['child_benefits']['per_interval_value'], 2100)
@@ -284,32 +282,35 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['income']['benefits']['per_interval_value'], 4300)
 
     def test_income_form(self):
+        session['AboutYouForm'] = session.get('AboutYouForm', {})
+        session['AboutYouForm'].update(is_employed=YES)
+
         form_mi_data = {
-            'earnings': {
+            'your_income-earnings': {
                 'per_interval_value': '1',
                 'interval_period': 'per_week'
             },
-            'income_tax': {
+            'your_income-income_tax': {
                 'per_interval_value': '2',
                 'interval_period': 'per_week'
             },
-            'national_insurance': {
+            'your_income-national_insurance': {
                 'per_interval_value': '3',
                 'interval_period': 'per_week'
             },
-            'working_tax_credit': {
+            'your_income-working_tax_credit': {
                 'per_interval_value': '4',
                 'interval_period': 'per_month'
             },
-            'maintenance': {
+            'your_income-maintenance': {
                 'per_interval_value': '5',
                 'interval_period': 'per_week'
             },
-            'pension': {
+            'your_income-pension': {
                 'per_interval_value': '6',
                 'interval_period': 'per_week'
             },
-            'other_income': {
+            'your_income-other_income': {
                 'per_interval_value': '7',
                 'interval_period': 'per_week'
             },
@@ -317,100 +318,19 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data = self.merge_money_intervals({}, form_mi_data)
 
-        payload = self.payload(IncomeFieldForm, form_data)
+        payload = self.payload(IncomePayload, form_data)
 
-        self.assertEqual(payload['income']['earnings']['per_interval_value'], 100)
-        self.assertEqual(payload['income']['earnings']['interval_period'], 'per_week')
-        self.assertEqual(payload['income']['self_employment_drawings']['per_interval_value'], 0)
-        self.assertEqual(payload['income']['tax_credits']['per_interval_value'], 400)
-        self.assertEqual(payload['income']['tax_credits']['interval_period'], 'per_month')
-        self.assertEqual(payload['income']['maintenance_received']['per_interval_value'], 500)
-        self.assertEqual(payload['income']['pension']['per_interval_value'], 600)
-        self.assertEqual(payload['income']['other_income']['per_interval_value'], 700)
+        self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], 100)
+        self.assertEqual(payload['you']['income']['earnings']['interval_period'], 'per_week')
+        self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
+        self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 400)
+        self.assertEqual(payload['you']['income']['tax_credits']['interval_period'], 'per_month')
+        self.assertEqual(payload['you']['income']['maintenance_received']['per_interval_value'], 500)
+        self.assertEqual(payload['you']['income']['pension']['per_interval_value'], 600)
+        self.assertEqual(payload['you']['income']['other_income']['per_interval_value'], 700)
 
-        self.assertEqual(payload['deductions']['income_tax']['per_interval_value'], 200)
-        self.assertEqual(payload['deductions']['national_insurance']['per_interval_value'], 300)
-
-    def test_total_rents_and_other_income(self):
-        session['AboutYouForm'] = {
-            'own_property': YES}
-        session['PropertiesForm'] = {
-            'properties': [
-                {
-                    'is_main_home': YES,
-                    'other_shareholders': NO,
-                    'property_value': '20,000.00',
-                    'mortgage_remaining': '10,000.00',
-                    'mortgage_payments': '700.00',
-                    'is_rented': YES,
-                    'rent_amount': {
-                        'per_interval_value': 10000,
-                        'interval_period': 'per_month'
-                    },
-                    'in_dispute': NO
-                },
-                {
-                    'is_main_home': NO,
-                    'other_shareholders': NO,
-                    'property_value': '20,000.00',
-                    'mortgage_remaining': '10,000.00',
-                    'mortgage_payments': '800.00',
-                    'is_rented': YES,
-                    'rent_amount': money_interval(5000),
-                    'in_dispute': NO
-                }
-            ]
-        }
-
-        def post_money_interval(key, amount=None, interval='per_month'):
-            val = {}
-            val['your_income-%s-per_interval_value' % key] = amount
-            val['your_income-%s-interval_period' % key] = interval
-            return val
-
-        post_data = {}
-        post_data.update(post_money_interval('earnings', '10.00'))
-        post_data.update(post_money_interval('income_tax', '0'))
-        post_data.update(post_money_interval('national_insurance', '0'))
-        post_data.update(post_money_interval('working_tax_credit', '0'))
-        post_data.update(post_money_interval('maintenance', '0'))
-        post_data.update(post_money_interval('pension', '0'))
-        post_data.update(post_money_interval('other_income', '200.00'))
-        payload = self.payload(IncomeForm, post_data)
-
-        self.assertEqual(
-            money_interval(35000),
-            payload['you']['income']['other_income'])
-
-    def test_total_tax_credits(self):
-        session['AboutYouForm'] = {
-            'have_children': YES,
-            'num_children': 1}
-        session['TaxCreditsForm'] = {
-            'child_benefit': money_interval(0),
-            'child_tax_credit': money_interval(1000),
-            'benefits': [],
-            'other_benefits': NO}
-
-        def post_money_interval(key, amount=None, interval='per_month'):
-            val = {}
-            val['your_income-%s-per_interval_value' % key] = amount
-            val['your_income-%s-interval_period' % key] = interval
-            return val
-
-        post_data = {}
-        post_data.update(post_money_interval('earnings', '10.00'))
-        post_data.update(post_money_interval('income_tax', '0'))
-        post_data.update(post_money_interval('national_insurance', '0'))
-        post_data.update(post_money_interval('working_tax_credit', '5.00'))
-        post_data.update(post_money_interval('maintenance', '0'))
-        post_data.update(post_money_interval('pension', '0'))
-        post_data.update(post_money_interval('other_income', '200.00'))
-        payload = self.payload(IncomeForm, post_data)
-
-        self.assertEqual(
-            money_interval(1500),
-            payload['you']['income']['tax_credits'])
+        self.assertEqual(payload['you']['deductions']['income_tax']['per_interval_value'], 200)
+        self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], 300)
 
     def test_income_and_tax_form(self):
         session['AboutYouForm'] = session.get('AboutYouForm', {})
@@ -418,12 +338,15 @@ class TestApiPayloads(unittest.TestCase):
             have_partner=YES,
             in_dispute=NO)
 
-        payload = self.payload(IncomeForm, {})
+        payload = self.payload(IncomePayload, {})
 
         self.assertIn('you', payload)
         self.assertIn('partner', payload)
 
     def test_outgoing_form(self):
+        session['AboutYouForm'] = session.get('AboutYouForm', {})
+        session['AboutYouForm'].update(have_children=YES)
+
         form_mi_data = {
             'rent': {
                 'per_interval_value': '27',
@@ -445,7 +368,7 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data = self.merge_money_intervals(form_data, form_mi_data)
 
-        payload = self.payload(OutgoingsForm, form_data)
+        payload = self.payload(OutgoingsPayload, form_data)
 
         self.assertEqual(payload['you']['deductions']['rent']['per_interval_value'], 2700)
         self.assertEqual(payload['you']['deductions']['rent']['interval_period'], 'per_month')
@@ -468,7 +391,7 @@ class TestApiPayloads(unittest.TestCase):
         }
 
         form_data = {
-            'full_name': 'Full Name',
+            'full_name': 'Applicant Full Name',
             'extra_notes': 'Extra notes',
             'callback_requested': YES,
             'specific_day': 'today',
@@ -494,9 +417,10 @@ class TestApiPayloads(unittest.TestCase):
     def test_application_form(self):
         form_data = self.application_form_data()
         with override_current_time(self.now):
-            payload = self.payload(ContactForm, form_data)
+            payload = self.form_payload(ContactForm, form_data)
 
-            self.assertEqual(payload['personal_details']['full_name'], 'Full Name')
+            self.assertEqual(payload['personal_details']['full_name'],
+                'Applicant Full Name')
             self.assertEqual(payload['personal_details']['postcode'], 'POSTCODE')
             self.assertEqual(payload['personal_details']['mobile_phone'], '000000000')
             self.assertEqual(payload['personal_details']['street'], '21 Jump Street')
@@ -514,23 +438,3 @@ class TestApiPayloads(unittest.TestCase):
 
             self.assertEqual(payload['requires_action_at'], time.replace(tzinfo=pytz.utc).isoformat())
 
-    def test_callback_timezone_change(self):
-        london = pytz.timezone('Europe/London')
-        local = lambda *args: london.localize(datetime.datetime(*args))
-        to_utc = lambda dt: dt.astimezone(pytz.utc)
-        utc = lambda *args: datetime.datetime(*args).replace(tzinfo=pytz.utc)
-        naive = lambda dt: dt.replace(tzinfo=None)
-
-        winter_time = naive(to_utc(local(2015, 3, 27, 17, 30)))
-        summer_time = naive(to_utc(local(2015, 3, 30, 17, 30)))
-
-        def assertScheduledTime(expected, now):
-            with override_current_time(now):
-                form_data = self.application_form_data()
-                payload = self.payload(ContactForm, form_data)
-                expected = expected.isoformat()
-                self.assertEqual(payload['requires_action_at'], expected)
-
-        assertScheduledTime(utc(2015, 3, 27, 19, 30), winter_time)
-
-        assertScheduledTime(utc(2015, 3, 30, 18, 30), summer_time)

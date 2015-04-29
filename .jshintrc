@@ -21,7 +21,8 @@
     "moj": true,
     "CLA": true,
     "_": true,
-    "numeral": true
+    "numeral": true,
+    "google": true
   },
 
   "maxparams": 4,

@@ -37,8 +37,6 @@ module.exports = {
 
   'Childcare fields': function(client) {
     client
-      .assert.hidden('input[name="childcare-per_interval_value"]')
-      .assert.hidden('input[name="childcare-interval_period"]')
       .back()
       .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
       .back()
@@ -120,7 +118,7 @@ module.exports = {
       common.setDropdownValue(client, item + '-interval_period', 'per_month');
       common.submitAndCheckForFieldError(client, [{
         name: item + '-per_interval_value',
-        errorText: 'Not a valid amount'
+        errorText: 'Please provide an amount'
       }]);
     });
 
@@ -134,6 +132,8 @@ module.exports = {
     });
     client
       .setValue('input[name="income_contribution"]', 0)
+      .submitForm('form')
+      .waitForElementVisible('.answers-summary', 5000)
       .submitForm('form')
       .waitForElementPresent('input[name="callback-contact_number"]', 5000)
       .assert.urlContains('/result/eligible')

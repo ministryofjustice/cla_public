@@ -155,3 +155,22 @@ CONTACT_PREFERENCE = (
     (NO, _(u'I’ll call CLA')),
     (YES, _(u'Call me back')),
 )
+
+LEGAL_ADVISER_SEARCH_PREFERENCE = (
+    ('location', _(u'Location')),
+    ('organisation', _(u'Organisation')),
+)
+
+LAALAA_PROVIDER_CATEGORIES_MAP = {
+    'aap': 'aap',
+    'clinneg': 'med',
+    'commcare': 'com',
+    'debt': 'deb',
+    'family': 'mat',
+    'family': 'fmed',
+    'housing': 'hou',
+    'immigration': 'immas',
+    'mentalhealth': 'mhe',
+    'publiclaw': 'pub',
+    'benefits': 'wb'
+}

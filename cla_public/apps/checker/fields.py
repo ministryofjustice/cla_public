@@ -11,10 +11,10 @@ from wtforms import FormField, IntegerField, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.validators import Optional, InputRequired
 
-from cla_common.money_interval.models import MoneyInterval
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.constants import MONEY_INTERVALS, NO, YES
 from cla_public.apps.checker.validators import ValidMoneyInterval
+from cla_public.libs.money_interval import MoneyInterval
 
 
 def coerce_unicode_if_value(value):
@@ -77,6 +77,8 @@ class DescriptionRadioField(RadioField):
 
 class YesNoField(RadioField):
     """Yes/No radio button field"""
+
+    _yes_no_field = True
 
     def __init__(self, label=None, validators=None, yes_text=_('Yes'),
                  no_text=_('No'), **kwargs):
@@ -154,7 +156,7 @@ class MoneyField(SetZeroIntegerField):
         if value:
             pence = value % 100
             pounds = value / 100
-            self.data = '{0}.{1:02}'.format(pounds, pence)
+            self.data = '{0:,}.{1:02}'.format(pounds, pence)
 
 
 class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -181,24 +183,7 @@ class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
 
 
 def money_interval_to_monthly(data):
-    amount = data['per_interval_value']
-    interval = data['interval_period']
-
-    if amount is None or interval == '':
-        return {
-            'per_interval_value': 0,
-            'interval_period': 'per_month'
-        }
-
-    if interval == 'per_month':
-        return data
-
-    multiplier = MoneyInterval._intervals_dict[interval]['multiply_factor']
-
-    return {
-        'per_interval_value': amount * multiplier,
-        'interval_period': 'per_month'
-    }
+    return MoneyInterval(data).per_month()
 
 
 class PassKwargsToFormField(SetZeroFormField):
@@ -268,6 +253,7 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class PropertyList(FieldList):
+
     def remove(self, index):
         del self.entries[index]
         self.last_index -= 1

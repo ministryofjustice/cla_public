@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import datetime
 
+from flask import current_app
 from flask.json import JSONEncoder
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 from requests.exceptions import ConnectionError, Timeout
@@ -113,14 +114,16 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def is_on_passported_benefits(self):
-        return passported(self.field('YourBenefitsForm', 'benefits', []))
+        return self.is_on_benefits and \
+               passported(self.field('YourBenefitsForm', 'benefits', []))
 
     @property
     def has_tax_credits(self):
         has_children = self.is_yes('AboutYouForm', 'have_children')
         is_carer = self.is_yes('AboutYouForm', 'have_dependants')
         benefits = set(self.field('YourBenefitsForm', 'benefits', []))
-        other_benefits = bool(benefits.difference(PASSPORTED_BENEFITS))
+        other_benefits = self.is_on_benefits and \
+                         bool(benefits.difference(PASSPORTED_BENEFITS))
         return has_children or is_carer or other_benefits
 
     @property
@@ -202,6 +205,10 @@ class CheckerSession(SecureCookieSession):
             }
             self.clear()
             self.update(store)
+
+    def clear(self):
+        if current_app.config['CLEAR_SESSION']:
+            super(CheckerSession, self).clear()
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):

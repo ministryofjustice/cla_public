@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import namedtuple
 from decimal import Decimal
 import logging
 import os
@@ -15,7 +16,8 @@ import xlrd
 from cla_public import app
 from cla_public.apps.checker.forms import ProblemForm, AboutYouForm, \
     YourBenefitsForm, PropertiesForm, SavingsForm, TaxCreditsForm, \
-    IncomeForm, OutgoingsForm
+    IncomeForm, OutgoingsForm, ReviewForm
+from cla_public.apps.checker.means_test import MeansTest
 from cla_public.apps.checker.tests.utils.forms_utils import CATEGORY_MAPPING, \
     FormDataConverter
 
@@ -28,6 +30,51 @@ SPREADSHEET_PATH = os.path.join(
     'data/means_test.xlsx')
 
 
+def error_msg(msg):
+    mt = MeansTest()
+    mt.update_from_session()
+    return (
+        '{msg} ({session_eligibility})\n'
+        'Means test: {data}\n').format(
+            msg=msg,
+            session_eligibility=session.eligibility,
+            data=pformat(dict(mt)))
+
+
+def form_errors(response):
+    return ' * ' + '\n * '.join([
+        error.text.strip() for error in
+        BeautifulSoup(response.data).select('.field-error')])
+
+
+Step = namedtuple('Step', ['form_class', 'post_data', 'response', 'url'])
+
+
+def wizard(client, case):
+    response = client.get(url_for('base.get_started'))
+    url = urlparse.urlparse(response.location).path
+    form_class = get_form(url)
+
+    while form_class:
+        post_data = form_data(form_class, case)
+        response = client.post(url, data=post_data)
+        url = urlparse.urlparse(response.location).path
+        yield Step(form_class, post_data, response, url)
+        form_class = get_form(url)
+
+
+def is_eligible(acc, step):
+    result = 'unknown'
+
+    if '/result/eligible' in step.url:
+        result = 'eligible'
+
+    if '/help-organisations/' in step.url:
+        result = 'ineligible'
+
+    return result
+
+
 class TestMeansTest(unittest.TestCase):
 
     def setUp(self):
@@ -37,54 +84,25 @@ class TestMeansTest(unittest.TestCase):
         self.client = self.app.test_client()
 
     def assertMeansTest(self, expected_result, case):
+
+        def debug_is_eligible(acc, step):
+            self.assertEquals(step.response.status_code, 302, error_msg((
+                'Validation error in {form}\n'
+                'Errors:\n{errors}\n'
+                'POST data:\n{data}').format(
+                    form=step.form_class.__name__,
+                    data=pformat(step.post_data),
+                    errors=form_errors(step.response))))
+
+            return is_eligible(acc, step)
+
         with self.client as client:
+            result = reduce(debug_is_eligible, wizard(client, case))
 
-            resp = client.get(url_for('base.get_started'))
-            url = urlparse.urlparse(resp.location).path
-
-            def error_msg(msg):
-                return (
-                    '{msg}\n'
-                    'Session data: {data}\n').format(
-                        msg=msg,
-                        data=pformat(dict(session)))
-
-            form_class = get_form(url)
-            while form_class:
-                post_data = form_data(form_class, case)
-                response = client.post(url, data=post_data)
-
-                def form_errors():
-                    return ' * ' + '\n * '.join([
-                        error.text.strip() for error in
-                        BeautifulSoup(response.data).select('.field-error')])
-
-                self.assertRedirectToNextForm(response, error_msg((
-                    'Validation error in {form}\n'
-                    'Errors:\n{errors}\n'
-                    'POST data:\n{data}').format(
-                        form=form_class.__name__,
-                        data=pformat(post_data),
-                        errors=form_errors())))
-
-                url = urlparse.urlparse(response.location).path
-                form_class = get_form(url)
-
-            result = 'unknown'
-
-            if '/result/eligible' in url:
-                result = 'eligible'
-
-            if '/help-organisations/' in url:
-                result = 'ineligible'
-
-            self.assertEqual(expected_result, result, error_msg(
-                'Expected {expected}, got {actual}'.format(
-                    expected=expected_result,
-                    actual=result)))
-
-    def assertRedirectToNextForm(self, response, message):
-        self.assertEquals(response.status_code, 302, message)
+        self.assertEqual(expected_result, result, error_msg(
+            'Expected {expected}, got {actual}'.format(
+                expected=expected_result,
+                actual=result)))
 
 
 def form_data(form_class, case):
@@ -103,7 +121,8 @@ def get_form(url):
         '/savings': SavingsForm,
         '/benefits-tax-credits': TaxCreditsForm,
         '/income': IncomeForm,
-        '/outgoings': OutgoingsForm
+        '/outgoings': OutgoingsForm,
+        '/review': ReviewForm
     }.get(url)
 
 

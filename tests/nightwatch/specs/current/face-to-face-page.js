@@ -1,8 +1,6 @@
 'use strict';
 
-var util = require('util');
 var common = require('../../modules/common-functions');
-var OUTGOINGS_QUESTIONS = require('../../modules/constants').OUTGOINGS_QUESTIONS;
 
 module.exports = {
   'Start page': common.startPage,
@@ -19,9 +17,19 @@ module.exports = {
 
   'Face-to-face page': function(client) {
     client
-      .waitForElementVisible('a[href="http://find-legal-advice.justice.gov.uk/"]', 5000)
+      .waitForElementVisible('.legal-adviser-search', 5000)
       .assert.urlContains('/face-to-face')
       .assert.containsText('h1', 'You may be able to get free advice from a legal adviser')
+    ;
+  },
+
+  'Find legal adviser search': function(client) {
+    client
+      .setValue('input[name="postcode"]', 'w22dd')
+      .submitForm('form')
+      .assert.urlContains('/face-to-face')
+      .waitForElementVisible('.search-results-container', 5000)
+      .assert.containsText('.results-location', 'W2 2DD')
     ;
 
     client.end();

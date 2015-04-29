@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% import "macros/element.html" as Element %}
+{% import "macros/form.html" as Form %}
+
+{% if form.title %}
+  {% set title = form.title %}
+{% endif %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block sidebar %}
+  <aside class="sidebar">
+    {% include 'checker/_progress.html' %}
+  </aside>
+{% endblock %}
