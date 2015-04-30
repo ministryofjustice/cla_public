@@ -1,7 +1,7 @@
 'use strict';
 
 exports.SAVINGS_THRESHOLD = 8000;
-exports.VALUABLES_MINIMUM = 500;
+exports.VALUABLES_MINIMUM = 501;
 
 exports.CATEGORIES_OF_LAW = [
   {
@@ -134,7 +134,7 @@ exports.SAVINGS_QUESTIONS = {
   VALUABLES: [
     {
       name: 'valuables',
-      errorText: 'Valuable items must be at least £500'
+      errorText: 'Enter 0 if you have no valuable items worth over £500 each'
     }
   ]
 };
