@@ -25,7 +25,7 @@ from cla_public.libs.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone
+    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone, ZeroOrMoreThan
 from cla_public.libs.utils import recursive_dict_update, classproperty
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 
@@ -283,12 +283,11 @@ class SavingsForm(BaseForm):
         )])
     valuables = MoneyField(
         _(u'Total value of items worth over £500 each'),
-        min_val=50001,
         validators=[
             InputRequired(message=_(
                 u'Enter 0 if you have no valuable items worth over £500 each'
             )),
-            IgnoreIf('valuables', FieldValue(0))
+            ZeroOrMoreThan(50000)
         ])
 
     def __init__(self, *args, **kwargs):
