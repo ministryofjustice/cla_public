@@ -107,3 +107,14 @@ class ValidMoneyInterval(object):
 
 class NotRequired(Optional):
     field_flags = ()
+
+
+class ZeroOrMoreThan(object):
+
+    def __init__(self, minvalue):
+        self.minvalue = minvalue
+
+    def __call__(self, form, field):
+        if field.data != 0 and field.data <= self.minvalue:
+            raise ValidationError(field.gettext(
+                u'Enter 0 if you have no valuable items worth over £500 each'))
