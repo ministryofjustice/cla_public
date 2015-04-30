@@ -96,11 +96,11 @@ module.exports = {
       .submitForm('form')
       .waitForElementVisible('input[name="savings"]', 5000)
     ;
-    common.setAllSavingsFieldsToValue(client, 500);
+    common.setAllSavingsFieldsToValue(client, 501);
     client
       .submitForm('form')
       .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
-      .assert.urlContains('/income', 'Should arrive at income page when all savings/money fields set to £500')
+      .assert.urlContains('/income', 'Should arrive at income page when all savings/money fields set to £501')
       .back()
       .waitForElementVisible('input[name="savings"]', 5000)
     ;
