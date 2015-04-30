@@ -283,10 +283,13 @@ class SavingsForm(BaseForm):
         )])
     valuables = MoneyField(
         _(u'Total value of items worth over £500 each'),
-        min_val=50000,
-        validators=[InputRequired(
-            message=_(u'Valuable items must be at least £500')
-        )])
+        min_val=50001,
+        validators=[
+            InputRequired(message=_(
+                u'Enter 0 if you have no valuable items worth over £500 each'
+            )),
+            IgnoreIf('valuables', FieldValue(0))
+        ])
 
     def __init__(self, *args, **kwargs):
         super(SavingsForm, self).__init__(*args, **kwargs)
