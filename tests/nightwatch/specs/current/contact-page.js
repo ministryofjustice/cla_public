@@ -37,11 +37,6 @@ module.exports = {
   'Notes max length is 4000 chars': function (client) {
     contactPage(client);
 
-    willCallWithNotes(client, text(4001));
-    assertNotesError(client);
-
-    client.clearValue('textarea[name="extra_notes"]');
-
     willCallWithNotes(client, text(4000));
     assertConfirmation(client);
   },
