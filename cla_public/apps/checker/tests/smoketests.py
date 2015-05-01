@@ -1,6 +1,8 @@
+import os
 import unittest
 import urlparse
 
+from bs4 import BeautifulSoup
 from flask import url_for, _request_ctx_stack
 
 from cla_public import app
@@ -13,7 +15,10 @@ from cla_public.libs import laalaa, zendesk
 class SmokeTests(unittest.TestCase):
 
     def setUp(self):
-        self.app = app.create_app('config/testing.py')
+        config_file = 'config/docker.py'
+        if os.environ.get('CLA_ENV') is None:
+            config_file = 'config/common.py'
+        self.app = app.create_app(config_file)
         self.app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
         self.ctx = self.app.test_request_context()
         self.ctx.push()
@@ -50,7 +55,10 @@ class SmokeTests(unittest.TestCase):
             response = client.get(url_for('base.get_started'))
             url = urlparse.urlparse(response.location).path
             form_class = util.get_form(url)
+            response = client.get(url)
+            csrf_token = BeautifulSoup(response.data).find(id='csrf_token')['value']
 
             post_data = util.form_data(form_class, {'_law_area': 'Debt'})
+            post_data['csrf_token'] = csrf_token
             response = client.post(url, data=post_data)
             self.assertEquals(response.status_code, 302)
