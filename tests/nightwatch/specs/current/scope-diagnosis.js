@@ -119,9 +119,6 @@ var categories = [
           ['Age', '18 or over', 'At a private club'],
           ['Age', '18 or over', 'When someone was carrying out a public function'],
           ['Age', '18 or over', 'At university'],
-          ['Age', 'Under 18', 'At work'],
-          ['Age', 'Under 18', 'At a private club'],
-          ['Age', 'Under 18', 'At university'],
           ['Disability', 'At work'],
           ['Disability', 'While you were using a service'],
           ['Disability', 'At a private club'],
@@ -159,7 +156,6 @@ var categories = [
         type: 'ineligible',
         paths: [
           ['Age', '18 or over', 'Other'],
-          ['Age', 'Under 18', 'Other'],
           ['Disability', 'Other'],
           ['Gender, gender reassignment or sexual orientation', 'Other'],
           ['Marriage or civil partnership', 'Other'],
@@ -167,6 +163,12 @@ var categories = [
           ['Race', 'Other'],
           ['Religion, belief, or lack of religion or belief', 'Other'],
           ['None of the above']
+        ]
+      },
+      {
+        type: 'contact',
+        paths: [
+          ['Age', 'Under 18']
         ]
       }
     ]
@@ -226,18 +228,18 @@ var categories = [
         type: 'contact',
         paths: [
           ['Your local council is involved', 'Yes'],
-          ['A problem with your ex-partner', 'Divorce or separation', 'Domestic abuse', 'Yes']
+          ['A problem with your ex-partner', 'Divorce or separation', 'Domestic abuse', 'Yes'],
+          ['A problem with your ex-partner', 'Divorce or separation', 'You are under 18'],
+          ['A problem with your ex-partner', 'Disputes over children', 'You are under 18'],
+          ['A problem with your ex-partner', 'Financial settlement', 'You are under 18']
         ]
       },
       {
         type: 'inscope',
         paths: [
           ['Your local council is involved', 'No'],
-          ['A problem with your ex-partner', 'Divorce or separation', 'You are under 18'],
           ['A problem with your ex-partner', 'Divorce or separation', 'Domestic abuse', 'No'],
-          ['A problem with your ex-partner', 'Disputes over children', 'You are under 18'],
           ['A problem with your ex-partner', 'Disputes over children', 'Domestic abuse', 'No'],
-          ['A problem with your ex-partner', 'Financial settlement', 'You are under 18'],
           ['A problem with your ex-partner', 'Financial settlement', 'Domestic abuse', 'No'],
           ['A problem with your ex-partner', 'Financial settlement', 'International Family Maintenance'],
           ['Child abduction']
