@@ -69,7 +69,9 @@
     {{ Subform.address(form.address) }}
 
     {% call Form.fieldset(form.extra_notes, as_label=True) %}
-      {{ form.extra_notes(class_='form-control m-full', rows=7) }}
+      {% set max_length_validator = form.extra_notes.validators|selectattr('max')|first %}
+      {% set max_length = max_length_validator.max if max_length_validator %}
+      {{ form.extra_notes(class_='form-control m-full', rows=7, **{ 'data-character-count': max_length }) }}
     {% endcall %}
 
     {{ Subform.adaptations(form.adaptations) }}
@@ -127,6 +129,12 @@
           <option value="<%= index %>"><%= address %></option>
         <% }); %>
       </select>
+    </div>
+  </script>
+
+  <script type="text/html" id="characterCounter">
+    <div class="character-counter <%= counter_class %>">
+      <%= count %> {{ _('characters remaining') }}
     </div>
   </script>
 {% endblock %}
