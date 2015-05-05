@@ -224,17 +224,16 @@ class CheckerSession(SecureCookieSession, SessionMixin):
         return not self.get('is_expired', False) and self.checker
 
     def clear_and_store_ref(self):
-        if not self.get('is_expired', False):
-            store = {
-                'is_expired': True,
-                'stored_case_ref': self.checker.get('case_ref'),
-                'stored_callback_time': self.checker.callback_time,
-                'stored_callback_requested': self.checker.callback_requested,
-                'stored_category': self.checker.category,
-                'stored_eligibility': self.checker.eligibility
+        if self.checker:
+            stored = {
+                'case_ref': self.checker.get('case_ref'),
+                'callback_time': self.checker.callback_time,
+                'callback_requested': self.checker.callback_requested,
+                'category': self.checker.category,
+                'eligibility': self.checker.eligibility
             }
             self.clear_checker()
-            self.update(store)
+            self.update({'stored': stored})
 
     def clear_checker(self):
         self.checker = CheckerSessionObject()
@@ -249,9 +248,9 @@ class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
     def dumps(self, value):
         def _tag(value):
             if isinstance(value, CheckerSessionObject):
-                return {' ch': dict(value)}
+                return {' ch': dict((k, _tag(v)) for k, v in iteritems(value))}
             elif isinstance(value, MeansTest):
-                return {' mt': dict(value)}
+                return {' mt': dict((k, _tag(v)) for k, v in iteritems(value))}
             elif isinstance(value, tuple):
                 return {' t': [_tag(x) for x in value]}
             elif isinstance(value, uuid.UUID):

@@ -55,7 +55,7 @@ class ContactConfirmation(views.MethodView):
 
     def get(self):
         session.clear_and_store_ref()
-        if not session.get('stored_case_ref'):
+        if not session.get('stored', {}).get('case_ref'):
             abort(404)
         return render_template('checker/result/confirmation.html')
 
