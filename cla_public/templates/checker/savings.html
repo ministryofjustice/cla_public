@@ -5,7 +5,7 @@
     {{ form.title }}
   </h1>
 
-  {% if session.has_partner %}
+  {% if session.checker.has_partner %}
     <p>{{ _('Any cash, savings or investments held in your name, your partner’s name or both your names.') }}</p>
   {% else %}
     <p>{{ _('We need to know about any money you have saved or invested.') }}</p>
@@ -16,12 +16,12 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% with skip = not session.has_savings %}
+    {% with skip = not session.checker.has_savings %}
       {{ Form.text_input_fieldset(form.savings, prefix="£", skip=skip, class_='m-small') }}
       {{ Form.text_input_fieldset(form.investments, prefix="£", skip=skip, class_='m-small') }}
     {% endwith %}
 
-    {% with skip = not session.has_valuables %}
+    {% with skip = not session.checker.has_valuables %}
       {% if skip %}
         {{ Form.text_input(form.valuables, skip=skip) }}
       {% else %}

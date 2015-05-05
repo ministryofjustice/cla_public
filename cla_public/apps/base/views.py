@@ -96,9 +96,9 @@ def get_started():
     Redirect to checker unless currently disabled
     """
     session.clear()
-    session['started'] = datetime.datetime.now()
+    session.checker['started'] = datetime.datetime.now()
     if current_app.config.get('CONTACT_ONLY'):
-        session['contact_only'] = 'yes'
+        session.checker['contact_only'] = 'yes'
         return redirect(url_for('contact.get_in_touch'))
     return redirect(url_for('checker.wizard', step='problem'))
 

@@ -1,10 +1,13 @@
 from mock import Mock
 import unittest
 
-import flask
+from flask import session, Flask
 from jinja2 import TemplateNotFound
 from wtforms import Form, StringField
 from wtforms.validators import InputRequired
+from cla_public import app
+from cla_public.apps.checker.session import CheckerSessionInterface, \
+    CustomJSONEncoder
 
 from cla_public.libs.views import FormWizard, FormWizardStep, \
     SessionBackedFormView
@@ -28,12 +31,14 @@ class FormView(SessionBackedFormView):
 class TestSessionBackedFormView(unittest.TestCase):
 
     def setUp(self):
-        app = flask.Flask(__name__)
+        app = Flask(__name__)
+        app.session_interface = CheckerSessionInterface()
+        app.json_encoder = CustomJSONEncoder
         app.config['SECRET_KEY'] = 'test'
         app.add_url_rule('/', view_func=FormView.as_view('form'))
         self.client = app.test_client()
-        with self.client.session_transaction() as session:
-            session['foo'] = 'bar'
+        with self.client.session_transaction() as sess:
+            sess.checker['foo'] = 'bar'
 
     def test_get_form(self):
         self.assertEqual(
@@ -47,7 +52,7 @@ class TestSessionBackedFormView(unittest.TestCase):
                 '<input id="name" name="name" type="text" value=""> '
                 'This field is required.',
                 client.post('/', data=form_data).data)
-            self.assertFalse('TestForm' in flask.session)
+            self.assertFalse('TestForm' in session.checker)
 
     def test_post_form_valid(self):
         with self.client as client:
@@ -56,13 +61,13 @@ class TestSessionBackedFormView(unittest.TestCase):
             self.assertEqual(
                 'Foo',
                 client.post('/', data=form_data).data)
-            self.assertTrue('TestForm' in flask.session)
-            self.assertTrue('name' in flask.session['TestForm'])
-            self.assertEqual('Test', flask.session['TestForm']['name'])
+            self.assertTrue('TestForm' in session.checker)
+            self.assertTrue('name' in session.checker['TestForm'])
+            self.assertEqual('Test', session.checker['TestForm']['name'])
 
     def test_form_data_from_session(self):
-        with self.client.session_transaction() as session:
-            session['TestForm'] = {
+        with self.client.session_transaction() as sess:
+            sess.checker['TestForm'] = {
                 'name': 'Test'}
 
         self.assertEqual(
@@ -70,8 +75,8 @@ class TestSessionBackedFormView(unittest.TestCase):
             self.client.get('/').data)
 
     def test_redirect_if_no_session(self):
-        with self.client.session_transaction() as session:
-            session.clear()
+        with self.client.session_transaction() as sess:
+            sess.clear_checker()
 
         response = self.client.get('/')
         self.assertEqual(
@@ -107,12 +112,14 @@ class TestWizard(FormWizard):
 class TestFormWizard(unittest.TestCase):
 
     def setUp(self):
-        app = flask.Flask(__name__)
+        app = Flask(__name__)
+        app.session_interface = CheckerSessionInterface()
+        app.json_encoder = CustomJSONEncoder
         app.config['SECRET_KEY'] = 'test'
         app.add_url_rule('/<step>', view_func=TestWizard.as_view('wizard'))
         self.client = app.test_client()
-        with self.client.session_transaction() as session:
-            session['foo'] = 'bar'
+        with self.client.session_transaction() as sess:
+            sess.checker['foo'] = 'bar'
 
     def test_wizard_start(self):
         self.assertEqual(

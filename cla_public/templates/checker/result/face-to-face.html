@@ -17,7 +17,7 @@
 
   {% block inner_content %}
 
-    {% if session.category == 'employment' %}
+    {% if session.checker.category == 'employment' %}
       <h1>{{ _('You might be able to get legal aid if your problem is about discrimination') }}</h1>
 
       <p>
@@ -35,7 +35,7 @@
           You could seek advice from a legal adviser about whether an
           application might succeed in your case and how to apply.{% endtrans %}
       </p>
-    {% elif session.category == 'clinneg' %}
+    {% elif session.checker.category == 'clinneg' %}
       <h1>{{ _('You may be able to get free advice from a legal adviser') }}</h1>
 
       <p>
@@ -48,7 +48,7 @@
         {% trans %}Civil Legal Advice doesn't provide advice on issues related
           to clinical negligence, but a legal adviser may be able to help.{% endtrans %}
       </p>
-    {% elif session.category == 'pi' %}
+    {% elif session.checker.category == 'pi' %}
       <h1>{{ _('Legal aid is not usually available for advice about personal injury') }}</h1>
 
       <p>
@@ -77,7 +77,7 @@
         advice.{% endtrans %}
     </p>
 
-    {% if session.category == 'employment' %}
+    {% if session.checker.category == 'employment' %}
       <p>
         {{ _('You may also be able to get free help from:') }}
       </p>

@@ -20,7 +20,7 @@ class RequiresSession(object):
     session_expired_url = '/session-expired'
 
     def dispatch_request(self, *args, **kwargs):
-        if not session or session.get('is_expired', False):
+        if not session or not session.is_current:
             return redirect(self.session_expired_url)
         return super(RequiresSession, self).dispatch_request(*args, **kwargs)
 
@@ -42,7 +42,7 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
         if getattr(self, '_form', None) is None:
             self._form = self.form_class(
                 request.form,
-                **session.get(self.form_class.__name__, {}))
+                **session.checker.get(self.form_class.__name__, {}))
         return self._form
 
     def get(self, *args, **kwargs):
@@ -67,15 +67,15 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
         """
         Store the form data in the session
         """
-        session[self.form_class.__name__] = dict(self.form.data.items())
-        session[self.form_class.__name__]['is_completed'] = True
+        session.checker[self.form_class.__name__] = dict(self.form.data.items())
+        session.checker[self.form_class.__name__]['is_completed'] = True
 
     def remove_form_data_from_session(self):
         """
         Remove the form data from the session
         """
         if self.form_class.__name__ in session:
-            del session[self.form_class.__name__]
+            del session.checker[self.form_class.__name__]
 
     def on_valid_submit(self):
         """
@@ -100,7 +100,7 @@ class AllowSessionOverride(object):
                 parsed[form] = parsed.get(form, {})
                 parsed[form].update({
                     field: val})
-            session.update(parsed)
+            session.checker.update(parsed)
 
         return super(AllowSessionOverride, self).get(*args, **kwargs)
 
