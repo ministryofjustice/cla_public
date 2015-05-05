@@ -16,7 +16,7 @@
     {{ Form.handle_errors(form) }}
 
     {% with skip = not (session.checker.is_employed or session.checker.is_self_employed) %}
-      {% if session.has_partner %}
+      {% if session.checker.has_partner %}
         <fieldset class="fieldset-group">
           <header>
             <h3>{{ _('Your money coming in') }}</h3>
