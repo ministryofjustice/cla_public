@@ -165,7 +165,7 @@ class YourBenefitsForm(BaseForm):
 
     @classproperty
     def title(self):
-        if session and session.has_partner:
+        if session and session.checker.has_partner:
             return _(u'You and your partner’s benefits')
         return _(u'Your benefits')
 
@@ -233,7 +233,7 @@ class PropertiesForm(BaseForm):
 
     @classproperty
     def title(self):
-        if session and session.has_partner:
+        if session and session.checker.has_partner:
             return _(u'You and your partner’s property')
         return _(u'Your property')
 
@@ -263,7 +263,7 @@ class SavingsForm(BaseForm):
 
     @classproperty
     def title(self):
-        if session and session.has_partner:
+        if session and session.checker.has_partner:
             return _(u'You and your partner’s savings')
         return _(u'Your savings')
 
@@ -293,10 +293,10 @@ class SavingsForm(BaseForm):
     def __init__(self, *args, **kwargs):
         super(SavingsForm, self).__init__(*args, **kwargs)
 
-        if not session.has_valuables:
+        if not session.checker.has_valuables:
             del self.valuables
 
-        if not session.has_savings:
+        if not session.checker.has_savings:
             del self.savings
             del self.investments
 
@@ -305,7 +305,7 @@ class TaxCreditsForm(BaseForm):
 
     @classproperty
     def title(self):
-        if session and session.has_partner:
+        if session and session.checker.has_partner:
             return _(u'You and your partner’s benefits and tax credits')
         return _(u'Your benefits and tax credits')
 
@@ -347,8 +347,8 @@ class IncomeFieldForm(BaseNoCsrfForm):
     def __init__(self, *args, **kwargs):
         self.is_partner = kwargs.pop('is_partner', False)
         super(IncomeFieldForm, self).__init__(*args, **kwargs)
-        if (not (session.is_employed or session.is_self_employed) and not self.is_partner) or \
-           (not (session.partner_is_employed or session.partner_is_self_employed) and self.is_partner):
+        if (not (session.checker.is_employed or session.checker.is_self_employed) and not self.is_partner) or \
+           (not (session.checker.partner_is_employed or session.checker.partner_is_self_employed) and self.is_partner):
             del self.earnings
             del self.income_tax
             del self.national_insurance
@@ -405,8 +405,8 @@ class IncomeForm(BaseForm):
 
     @classproperty
     def title(self):
-        has_partner = session and session.has_partner
-        employed = session and (session.is_employed or session.is_self_employed)
+        has_partner = session and session.checker.has_partner
+        employed = session and (session.checker.is_employed or session.checker.is_self_employed)
         if has_partner:
             if employed:
                 return _(u'You and your partner’s income and tax')
@@ -423,7 +423,7 @@ class IncomeForm(BaseForm):
     def __init__(self, *args, **kwargs):
         """Dynamically remove partner subform if user has no partner"""
         super(IncomeForm, self).__init__(*args, **kwargs)
-        if not session.has_partner:
+        if not session.checker.has_partner:
             del self.partner_income
 
 
@@ -431,7 +431,7 @@ class OutgoingsForm(BaseForm):
 
     @classproperty
     def title(self):
-        if session and session.has_partner:
+        if session and session.checker.has_partner:
             return _(u'You and your partner’s outgoings')
         return _(u'Your outgoings')
 
@@ -471,7 +471,7 @@ class OutgoingsForm(BaseForm):
 
     def __init__(self, *args, **kwargs):
         super(OutgoingsForm, self).__init__(*args, **kwargs)
-        if not session.has_children and not session.has_dependants:
+        if not session.checker.has_children and not session.checker.has_dependants:
             del self.childcare
 
 

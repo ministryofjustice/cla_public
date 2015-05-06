@@ -4,89 +4,89 @@
     <li>
       Has partner
       <span class="_options">
-        <a href="?AboutYouForm_have_partner=1&amp;&amp;AboutYouForm_in_dispute=0" {% if session.has_partner %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_have_partner=0&amp;AboutYouForm_in_dispute=0" {% if not session.has_partner %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_have_partner=1&amp;&amp;AboutYouForm_in_dispute=0" {% if session.checker.has_partner %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_partner=0&amp;AboutYouForm_in_dispute=0" {% if not session.checker.has_partner %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
       On benefits
       <span class="_options">
-        <a href="?AboutYouForm_on_benefits=1" {% if session.is_on_benefits %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_on_benefits=0" {% if not session.is_on_benefits %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_on_benefits=1" {% if session.checker.is_on_benefits %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_on_benefits=0" {% if not session.checker.is_on_benefits %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
       Has children
       <span class="_options">
-        <a href="?AboutYouForm_have_children=1&amp;AboutYouForm_num_children=1"{% if session.has_children %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_have_children=0&amp;AboutYouForm_num_children="{% if not session.has_children %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_have_children=1&amp;AboutYouForm_num_children=1"{% if session.checker.has_children %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_children=0&amp;AboutYouForm_num_children="{% if not session.checker.has_children %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
       Has dependants
       <span class="_options">
-        <a href="?AboutYouForm_have_dependants=1&amp;AboutYouForm_num_dependants=1"{% if session.has_dependants %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_have_dependants=0&amp;AboutYouForm_num_dependants="{% if not session.has_dependants %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_have_dependants=1&amp;AboutYouForm_num_dependants=1"{% if session.checker.has_dependants %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_dependants=0&amp;AboutYouForm_num_dependants="{% if not session.checker.has_dependants %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
       Owns property
       <span class="_options">
-        <a href="?AboutYouForm_own_property=1"{% if session.owns_property %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_own_property=0"{% if not session.owns_property %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_own_property=1"{% if session.checker.owns_property %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_own_property=0"{% if not session.checker.owns_property %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
       Is employed
       <span class="_options">
-        <a href="?AboutYouForm_is_employed=1"{% if session.is_employed %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_is_employed=0"{% if not session.is_employed %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_is_employed=1"{% if session.checker.is_employed %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_is_employed=0"{% if not session.checker.is_employed %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
-    {% if session.has_partner %}
+    {% if session.checker.has_partner %}
       <li>
         Partner employed
         <span class="_options">
-          <a href="?AboutYouForm_partner_is_employed=1"{% if session.partner_is_employed %} class="_selected"{% endif %}>Yes</a>
-          <a href="?AboutYouForm_partner_is_employed=0"{% if not session.partner_is_employed %} class="_selected"{% endif %}>No</a>
+          <a href="?AboutYouForm_partner_is_employed=1"{% if session.checker.partner_is_employed %} class="_selected"{% endif %}>Yes</a>
+          <a href="?AboutYouForm_partner_is_employed=0"{% if not session.checker.partner_is_employed %} class="_selected"{% endif %}>No</a>
         </span>
       </li>
     {% endif %}
     <li>
       Is self-employed
       <span class="_options">
-        <a href="?AboutYouForm_is_self_employed=1"{% if session.is_self_employed %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_is_self_employed=0"{% if not session.is_self_employed %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_is_self_employed=1"{% if session.checker.is_self_employed %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_is_self_employed=0"{% if not session.checker.is_self_employed %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
-    {% if session.has_partner %}
+    {% if session.checker.has_partner %}
       <li>
         Partner self-employed
         <span class="_options">
-          <a href="?AboutYouForm_partner_is_self_employed=1"{% if session.partner_is_self_employed %} class="_selected"{% endif %}>Yes</a>
-          <a href="?AboutYouForm_partner_is_self_employed=0"{% if not session.partner_is_self_employed %} class="_selected"{% endif %}>No</a>
+          <a href="?AboutYouForm_partner_is_self_employed=1"{% if session.checker.partner_is_self_employed %} class="_selected"{% endif %}>Yes</a>
+          <a href="?AboutYouForm_partner_is_self_employed=0"{% if not session.checker.partner_is_self_employed %} class="_selected"{% endif %}>No</a>
         </span>
       </li>
     {% endif %}
     <li>
       Aged 60 or over
       <span class="_options">
-        <a href="?AboutYouForm_aged_60_or_over=1"{% if session.aged_60_or_over %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_aged_60_or_over=0"{% if not session.aged_60_or_over %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_aged_60_or_over=1"{% if session.checker.aged_60_or_over %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_aged_60_or_over=0"{% if not session.checker.aged_60_or_over %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
       Has savings
       <span class="_options">
-        <a href="?AboutYouForm_have_savings=1" {% if session.has_savings %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_have_savings=0" {% if not session.has_savings %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_have_savings=1" {% if session.checker.has_savings %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_savings=0" {% if not session.checker.has_savings %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     <li>
       Has valuables
       <span class="_options">
-        <a href="?AboutYouForm_have_valuables=1" {% if session.has_valuables %} class="_selected"{% endif %}>Yes</a>
-        <a href="?AboutYouForm_have_valuables=0" {% if not session.has_valuables %} class="_selected"{% endif %}>No</a>
+        <a href="?AboutYouForm_have_valuables=1" {% if session.checker.has_valuables %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_valuables=0" {% if not session.checker.has_valuables %} class="_selected"{% endif %}>No</a>
       </span>
     </li>
     {% if request.path == '/about' %}
@@ -97,24 +97,24 @@
           <a href="
             ?AboutYouForm_have_partner=1&amp;AboutYouForm_in_dispute=0&amp;AboutYouForm_on_benefits=1&amp;AboutYouForm_have_children=1&amp;AboutYouForm_num_children=1&amp;AboutYouForm_have_dependants=1&amp;AboutYouForm_num_dependants=1&amp;AboutYouForm_own_property=1&amp;AboutYouForm_is_employed=1&amp;AboutYouForm_partner_is_employed=1&amp;AboutYouForm_is_self_employed=1&amp;AboutYouForm_partner_is_self_employed=1&amp;AboutYouForm_aged_60_or_over=1&amp;AboutYouForm_have_savings=1&amp;AboutYouForm_have_valuables=1
             "
-            {% if session.has_partner and session.is_on_benefits and session.has_savings and session.has_children and session.has_dependants and session.owns_property and session.is_employed and session.partner_is_employed and session.is_self_employed and session.partner_is_self_employed and session.aged_60_or_over and session.has_savings and session.has_valuables %}
+            {% if session.checker.has_partner and session.checker.is_on_benefits and session.checker.has_savings and session.checker.has_children and session.checker.has_dependants and session.checker.owns_property and session.checker.is_employed and session.checker.partner_is_employed and session.checker.is_self_employed and session.checker.partner_is_self_employed and session.checker.aged_60_or_over and session.checker.has_savings and session.checker.has_valuables %}
               class="_selected"
             {% endif %}
           data-form-action="submit">Yes</a>
           <a href="
             ?AboutYouForm_have_partner=0&amp;AboutYouForm_on_benefits=0&amp;AboutYouForm_have_children=0&amp;AboutYouForm_have_dependants=0&amp;AboutYouForm_own_property=0&amp;AboutYouForm_is_employed=0&amp;AboutYouForm_is_self_employed=0&amp;AboutYouForm_partner_is_self_employed=0&amp;AboutYouForm_partner_is_employed=0&amp;AboutYouForm_aged_60_or_over=0&amp;AboutYouForm_have_savings=0&amp;AboutYouForm_have_valuables=0
             "
-            {% if not session.has_partner and not session.is_on_benefits and not session.has_savings and not session.has_children and not session.has_dependants and not session.owns_property and not session.is_employed and not session.partner_is_employed and not session.is_self_employed and not session.partner_is_self_employed and not session.aged_60_or_over and not session.has_savings and not session.has_valuables %}
+            {% if not session.checker.has_partner and not session.checker.is_on_benefits and not session.checker.has_savings and not session.checker.has_children and not session.checker.has_dependants and not session.checker.owns_property and not session.checker.is_employed and not session.checker.partner_is_employed and not session.checker.is_self_employed and not session.checker.partner_is_self_employed and not session.checker.aged_60_or_over and not session.checker.has_savings and not session.checker.has_valuables %}
               class="_selected"
             {% endif %}
           data-form-action="submit">No</a>
         </span>
       </li>
     {% endif %}
-    {% if session.category_slug %}
+    {% if session.checker.category_slug %}
       <li class="_separator"></li>
       <li>
-        <a href="/help-organisations/{{session.category_slug}}">Ineligible</a>
+        <a href="/help-organisations/{{session.checker.category_slug}}">Ineligible</a>
       </li>
     {% endif %}
   </menu>

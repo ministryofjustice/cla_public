@@ -52,7 +52,7 @@ class TestReviewPage(unittest.TestCase):
 
     def set_problem(self, problem):
         with self.client.session_transaction() as session:
-            session['ProblemForm'] = {
+            session.checker['ProblemForm'] = {
                 'categories': problem,
                 'is_completed': True}
 
@@ -63,7 +63,7 @@ class TestReviewPage(unittest.TestCase):
             'is_completed': True
         })
         with self.client.session_transaction() as session:
-            session['AboutYouForm'] = answers
+            session.checker['AboutYouForm'] = answers
 
     def set_benefits(self, passported=None, *benefits):
         if passported is True:
@@ -71,7 +71,7 @@ class TestReviewPage(unittest.TestCase):
         elif passported is False:
             benefits = ['other-benefit']
         with self.client.session_transaction() as session:
-            session['YourBenefitsForm'] = {
+            session.checker['YourBenefitsForm'] = {
                 'benefits': benefits,
                 'is_completed': True}
 
@@ -80,7 +80,7 @@ class TestReviewPage(unittest.TestCase):
             'is_completed': True
         })
         with self.client.session_transaction() as session:
-            session['TaxCreditsForm'] = answers
+            session.checker['TaxCreditsForm'] = answers
 
     def test_review_page_about_you(self):
         self.set_problem('debt')

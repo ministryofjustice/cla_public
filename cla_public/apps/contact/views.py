@@ -27,9 +27,9 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
     def on_valid_submit(self):
 
         if self.form.extra_notes.data:
-            session.add_note(u'User problem', self.form.extra_notes.data)
+            session.checker.add_note(u'User problem', self.form.extra_notes.data)
         try:
-            post_to_eligibility_check_api(session.notes_object())
+            post_to_eligibility_check_api(session.checker.notes_object())
             post_to_case_api(self.form)
         except ApiError:
             self.form.errors['timeout'] = _(
@@ -41,7 +41,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
 
     def dispatch_request(self, *args, **kwargs):
         if not session:
-            session['force_session'] = True
+            session.checker['force_session'] = True
         return super(Contact, self).dispatch_request(*args, **kwargs)
 
 
@@ -55,7 +55,7 @@ class ContactConfirmation(views.MethodView):
 
     def get(self):
         session.clear_and_store_ref()
-        if not session.get('stored_case_ref'):
+        if not session.get('stored', {}).get('case_ref'):
             abort(404)
         return render_template('checker/result/confirmation.html')
 

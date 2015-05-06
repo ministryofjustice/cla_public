@@ -16,7 +16,7 @@
   <h2>{{ _('Your progress') }}</h2>
 
   <ul class="progress-steps">
-    {% for step in steps if step.name in ['problem', 'about'] or (session.AboutYouForm and session.AboutYouForm.is_completed) %}
+    {% for step in steps if step.name in ['problem', 'about'] or (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
       {% set is_active = current_step == step.name %}
 
       <li class="
@@ -37,7 +37,7 @@
         {% endif %}
       </li>
     {% endfor %}
-    {% if current_step in ['problem', 'about'] and not (session.AboutYouForm and session.AboutYouForm.is_completed) %}
+    {% if current_step in ['problem', 'about'] and not (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
       {% for n in range(3) %}
         <li class="progress-step"><span class="step-name m-dummy"></span></li>
       {% endfor %}

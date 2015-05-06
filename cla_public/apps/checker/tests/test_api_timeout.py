@@ -14,6 +14,7 @@ class TestApiTimeout(unittest.TestCase):
         self.client = app.test_client()
         with self.client.session_transaction() as session:
             session['test'] = True
+            session.checker['test'] = True
 
     def test_form_error_on_api_timeout(self):
         def timeout(*args, **kwargs):

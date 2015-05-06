@@ -92,8 +92,8 @@ def rented(prop, rent):
 
 
 def update_session(form, **kwargs):
-    session[form] = session.get(form, {})
-    session[form].update(**kwargs)
+    session.checker[form] = session.checker.get(form, {})
+    session.checker[form].update(**kwargs)
 
 
 class TestMeansTest(unittest.TestCase):
@@ -437,14 +437,14 @@ class TestMeansTest(unittest.TestCase):
 
         mt.update_from_form(
             'AboutYouForm', dict(own_property=YES))
-        session['AboutYouForm'] = {
+        session.checker['AboutYouForm'] = {
             'have_partner': NO,
             'own_property': YES}
 
         prop = rented(first_property, post_money_interval('100.00'))
         mt.update_from_form(
             'PropertiesForm', properties_post_data(prop))
-        session['PropertiesForm'] = {
+        session.checker['PropertiesForm'] = {
             'properties': [prop]}
 
         self.assertIncome(
@@ -468,14 +468,14 @@ class TestMeansTest(unittest.TestCase):
             'ProblemForm', {'categories': 'debt'})
         mt.update_from_form(
             'AboutYouForm', dict(own_property=YES))
-        session['AboutYouForm'] = {
+        session.checker['AboutYouForm'] = {
             'own_property': YES}
 
         prop1 = rented(first_property, post_money_interval('100.00'))
         prop2 = rented(second_property, post_money_interval('50.00'))
         mt.update_from_form(
             'PropertiesForm', properties_post_data(prop1, prop2))
-        session['PropertiesForm'] = {
+        session.checker['PropertiesForm'] = {
             'properties': [prop1, prop2]}
 
         self.assertIncome(
@@ -496,7 +496,7 @@ class TestMeansTest(unittest.TestCase):
             'have_savings': YES,
             'have_valuables': YES}
         mt.update_from_form('AboutYouForm', about_data)
-        session['AboutYouForm'] = about_data
+        session.checker['AboutYouForm'] = about_data
 
         mt.update_from_form('SavingsForm', {
             'savings': '1,000.00',
@@ -552,7 +552,7 @@ class TestMeansTest(unittest.TestCase):
             have_children=YES
         )
 
-        session['TaxCreditsForm'] = {
+        session.checker['TaxCreditsForm'] = {
             'child_tax_credit': MoneyInterval(1000, 'per_week')}
 
         mt = MeansTest()
@@ -573,7 +573,7 @@ class TestMeansTest(unittest.TestCase):
             mt['you']['income']['tax_credits'])
 
     def test_income_self_employed(self):
-        session['AboutYouForm'] = {
+        session.checker['AboutYouForm'] = {
             'is_self_employed': YES,
             'is_employed': NO}
 
@@ -617,7 +617,7 @@ class TestMeansTest(unittest.TestCase):
             mt['you']['income']['other_income'])
 
     def test_partner_income(self):
-        session['AboutYouForm'] = {
+        session.checker['AboutYouForm'] = {
             'have_partner': YES,
             'partner_is_employed': YES}
 
