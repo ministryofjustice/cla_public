@@ -99,10 +99,10 @@ class TestMeansTest(unittest.TestCase):
         with self.client as client:
             result = reduce(debug_is_eligible, wizard(client, case))
 
-            self.assertEqual(expected_result, result, error_msg(
-                'Expected {expected}, got {actual}'.format(
-                    expected=expected_result,
-                    actual=result)))
+        self.assertEqual(expected_result, result, error_msg(
+            'Expected {expected}, got {actual}'.format(
+                expected=expected_result,
+                actual=result)))
 
 
 def form_data(form_class, case):
