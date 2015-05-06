@@ -11,7 +11,7 @@ from flask.json import JSONEncoder
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface, \
     SessionMixin, TaggedJSONSerializer
 
-from cla_common.constants import ELIGIBILITY_STATES
+from cla_common.constants import ELIGIBILITY_STATES, ELIGIBILITY_REASONS
 from cla_public.apps.checker.api import post_to_is_eligible_api, ApiError
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
     PASSPORTED_BENEFITS, YES, CATEGORIES
@@ -37,10 +37,12 @@ class CheckerSessionObject(dict):
     def __init__(self, *args, **kwargs):
         super(CheckerSessionObject, self).__init__(*args, **kwargs)
         self._eligibility = None
+        self._reasons = None
 
     def __setitem__(self, *args, **kwargs):
         super(CheckerSessionObject, self).__setitem__(*args, **kwargs)
         self._eligibility = None
+        self._reasons = None
 
     def field(self, form_name, field_name, default=None):
         return self.get(form_name, {}).get(field_name, default)
@@ -50,6 +52,10 @@ class CheckerSessionObject(dict):
         return self.field('ProblemForm', 'categories') in F2F_CATEGORIES
 
     @property
+    def ineligible_reasons(self):
+        return self._reasons or []
+
+    @property
     def ineligible(self):
         return self.eligibility == ELIGIBILITY_STATES.NO
 
@@ -57,7 +63,7 @@ class CheckerSessionObject(dict):
     def eligibility(self):
         if self._eligibility is None:
             try:
-                self._eligibility = post_to_is_eligible_api()
+                self._eligibility, self._reasons = post_to_is_eligible_api()
             except ApiError:
                 self._eligibility = ELIGIBILITY_STATES.UNKNOWN
         return self._eligibility
@@ -203,10 +209,12 @@ class CheckerSession(SecureCookieSession, SessionMixin):
     "Provides some convenience properties for inter-page logic"
 
     _key = 'checker'
+    _stored_key = 'stored'
     expires_override = None
 
     def __init__(self, *args, **kwargs):
         self.checker = CheckerSessionObject()
+        self.stored = {}
         super(CheckerSession, self).__init__(*args, **kwargs)
 
     @property
@@ -218,6 +226,15 @@ class CheckerSession(SecureCookieSession, SessionMixin):
         checker = CheckerSessionObject()
         checker.update(value)
         self[self._key] = value
+
+    @property
+    def stored(self):
+        return self[self._stored_key]
+
+    @stored.setter
+    def stored(self, value):
+        assert isinstance(value, dict)
+        self[self._stored_key] = value
 
     @property
     def is_current(self):
@@ -233,7 +250,10 @@ class CheckerSession(SecureCookieSession, SessionMixin):
                 'eligibility': self.checker.eligibility
             }
             self.clear_checker()
-            self.update({'stored': stored})
+            self.stored = stored
+
+    def store(self, values_dict):
+        self.stored.update(values_dict)
 
     def clear_checker(self):
         self.checker = CheckerSessionObject()

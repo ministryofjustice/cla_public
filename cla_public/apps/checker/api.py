@@ -130,14 +130,15 @@ def post_to_eligibility_check_api(form):
         backend.eligibility_check(reference).patch(payload)
 
 
-@on_timeout(response=ELIGIBILITY_STATES.UNKNOWN)
+@on_timeout(response=(ELIGIBILITY_STATES.UNKNOWN, []))
 def post_to_is_eligible_api():
     backend = get_api_connection()
     reference = session.checker.get('eligibility_check')
 
     if reference:
         response = backend.eligibility_check(reference).is_eligible().post({})
-        return response.get('is_eligible')
+        return response.get('is_eligible'), response.get('reasons')
+    return None, None
 
 
 def should_attach_eligibility_check():

@@ -4,6 +4,11 @@
 
 {% import "macros/element.html" as Element %}
 
+{% set partner_text = _('you and your partner') if session.stored.has_partner else _('you') %}
+{% set partner_text_plural = _('you and your partner’s') if session.stored.has_partner else _('your') %}
+{% set multi = ineligible_reasons|length > 1 %}
+{% set _tag = 'li' if multi else 'p' %}
+
 {% block inner_content %}
   <h1>{{ _('You’re unlikely to get legal aid') }}</h1>
 
@@ -14,15 +19,33 @@
     {% if category == 'violence' %} {{ _('for the advice they can provide') }}{% endif %}.
   </p>
 
-  <p>{{ _('To qualify for legal aid, you must meet all of the following conditions:') }}</p>
-  <ul>
-    <li>{{ _('your income (or combined income if you have a partner) should not be more than £2,657 a month before tax') }}</li>
-    <li>{{ _('your savings (or combined savings if you have a partner) should not be more than £8,000') }}</li>
-    <li>
-      {% trans %}you (and your partner if you have one) should have no more than £733 a month left after we've taken
-      certain living expenses into account{% endtrans %}
-    </li>
-  </ul>
+  <p>{{ _('This is because') }}{% if multi %}:</p><ul>{% endif %}
+  {% if ELIGIBILITY_REASONS.DISPOSABLE_CAPITAL in ineligible_reasons %}
+    {% if multi %}<{{ _tag }}>{% endif %}{{ partner_text }} {% trans %}have too much disposable
+      capital{% endtrans %}{% if not multi %}.{% endif %}</{{ _tag }}>
+  {% endif %}
+
+  {% if ELIGIBILITY_REASONS.GROSS_INCOME in ineligible_reasons %}
+    {% if multi %}<{{ _tag }}>{% endif %}{{ partner_text_plural }} {% trans %}gross income is more than
+      the maximum allowed{% endtrans %}{% if not multi %}.{% endif %}</{{ _tag }}>
+  {% endif %}
+
+  {% if ELIGIBILITY_REASONS.DISPOSABLE_INCOME in ineligible_reasons %}
+    {% if multi %}<{{ _tag }}>{% endif %}{{ partner_text_plural }} {% trans %}disposable income is
+      higher than the limit we allow{% endtrans %}{% if not multi %}.{% endif %}</{{ _tag }}>
+  {% endif %}
+
+  {% if multi %}</ul>{% endif %}
+
+  {% if ELIGIBILITY_REASONS.DISPOSABLE_CAPITAL in ineligible_reasons %}
+    <p>{% trans %}Disposable capital includes savings, valuable items and the
+      equity in any property you own.{% endtrans %}</p>
+  {% endif %}
+
+  {% if ELIGIBILITY_REASONS.DISPOSABLE_INCOME in ineligible_reasons %}
+    <p>{% trans %}Disposable income is the money you have left after we’ve accounted
+      for certain living expenses, like rent or mortgage payments.{% endtrans %}</p>
+  {% endif %}
 
   {% if category == 'family' %}
     <p>
@@ -33,6 +56,8 @@
       Information and Assessment Meeting (MIAM).{% endtrans %}
     </p>
   {% endif %}
+
+  <h2>{{ _('Other sources of help') }}</h2>
 
   {% if category == 'violence' %}
     <p>
@@ -74,7 +99,7 @@
               </a>
             </h3>
             <div class="org-description">
-              {{ org.public_description|markdown }}
+              {% if org.public_description %}{{ org.public_description|markdown }}{% endif %}
             </div>
             {% if has_contact_details %}
               {% call Element.alert() %}
