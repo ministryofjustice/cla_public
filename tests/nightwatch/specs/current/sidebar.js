@@ -51,7 +51,7 @@ module.exports = {
 
       .assert.containsText('.progress-step.m-current', 'Contact information',
         'Progress step is Contact information')
-      .fillInContactDetails('eligible', true)
+      .fillInContactDetails(true)
 
       .assert.urlContains('/result/confirmation',
         'Confirmation page URL is correct')
