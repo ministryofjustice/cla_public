@@ -4,6 +4,14 @@
 
 {% import "macros/element.html" as Element %}
 
+{% if session.stored.has_partner %}
+  {% set partner_text = 'you and your partner' %}
+  {% set partner_text_plural = 'you and your partner’s' %}
+{% else %}
+  {% set partner_text = 'you' %}
+  {% set partner_text_plural = 'your' %}
+{% endif %}
+
 {% block inner_content %}
   <h1>{{ _('You’re unlikely to get legal aid') }}</h1>
 
@@ -15,19 +23,19 @@
   </p>
 
   {% if ELIGIBILITY_REASONS.DISPOSABLE_CAPITAL in ineligible_reasons %}
-    <p>{% trans %}This is because you/you and your partner have too much disposable
+    <p>{% trans %}This is because {{ partner_text }} have too much disposable
       capital, based on what you have told us.{% endtrans %}</p>
     <p>{% trans %}Disposable capital includes savings, valuable items and the
       equity in any property you own.{% endtrans %}</p>
   {% endif %}
 
   {% if ELIGIBILITY_REASONS.GROSS_INCOME in ineligible_reasons %}
-    <p>{% trans %}This is because you/you and your partner’s gross income is more than
+    <p>{% trans %}This is because {{ partner_text_plural }} gross income is more than
       the maximum allowed, based on what you have told us.{% endtrans %}</p>
   {% endif %}
 
   {% if ELIGIBILITY_REASONS.DISPOSABLE_INCOME in ineligible_reasons %}
-    <p>{% trans %}This is because you/you and your partner’s disposable income is
+    <p>{% trans %}This is because {{ partner_text_plural }} disposable income is
       higher than the limit we allow, based on what you have told us. {% endtrans %}</p>
     <p>{% trans %}Disposable income is the money you have left after we’ve accounted
       for certain living expenses, like rent or mortgage payments.{% endtrans %}</p>

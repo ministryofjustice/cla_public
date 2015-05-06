@@ -299,7 +299,10 @@ checker.add_url_rule(
 
 @checker.route('/help-organisations/<category_name>', methods=['GET'])
 def help_organisations(category_name):
-    if session:
+    if session.checker:
+        session.store({
+            'has_partner': session.checker.has_partner
+        })
         session.clear_checker()
 
     category_name = category_name.replace('-', ' ').capitalize()

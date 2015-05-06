@@ -209,10 +209,12 @@ class CheckerSession(SecureCookieSession, SessionMixin):
     "Provides some convenience properties for inter-page logic"
 
     _key = 'checker'
+    _stored_key = 'stored'
     expires_override = None
 
     def __init__(self, *args, **kwargs):
         self.checker = CheckerSessionObject()
+        self.stored = {}
         super(CheckerSession, self).__init__(*args, **kwargs)
 
     @property
@@ -224,6 +226,15 @@ class CheckerSession(SecureCookieSession, SessionMixin):
         checker = CheckerSessionObject()
         checker.update(value)
         self[self._key] = value
+
+    @property
+    def stored(self):
+        return self[self._stored_key]
+
+    @stored.setter
+    def stored(self, value):
+        assert isinstance(value, dict)
+        self[self._stored_key] = value
 
     @property
     def is_current(self):
@@ -239,7 +250,10 @@ class CheckerSession(SecureCookieSession, SessionMixin):
                 'eligibility': self.checker.eligibility
             }
             self.clear_checker()
-            self.update({'stored': stored})
+            self.stored = stored
+
+    def store(self, values_dict):
+        self.stored.update(values_dict)
 
     def clear_checker(self):
         self.checker = CheckerSessionObject()
