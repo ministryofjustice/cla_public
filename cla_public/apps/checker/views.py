@@ -323,7 +323,6 @@ def help_organisations(category_name):
     trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
 
     ineligible_reasons = request.args.getlist('ineligible_reasons')
-    print ineligible_reasons
 
     organisations = get_organisation_list(article_category__name=category_name)
     return render_template(
