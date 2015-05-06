@@ -127,5 +127,14 @@ module.exports = {
         }
       })
     ;
+  },
+
+  humaniseValue: function(value) {
+    var yesNo = {
+      '1': 'Yes',
+      '0': 'No'
+    };
+
+    return yesNo[value] || value;
   }
 };
