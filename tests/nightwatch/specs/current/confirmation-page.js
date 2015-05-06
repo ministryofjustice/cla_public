@@ -18,17 +18,6 @@ var eligibleJourney = function(client) {
   ;
 };
 
-var checkFlashMessage = function(client) {
-  client
-    .assert.elementPresent('.flash-messages',
-      'Has flash message informing about clearing the session')
-    // Refresh page
-    .url(function(result) { this.url(result.value); })
-    .assert.elementNotPresent('.flash-messages',
-      'Flash message is gone after refresh')
-  ;
-};
-
 var checkCallbackTime = function(client, then, time) {
   then.hours(time.substr(0, 2));
   then.minutes(time.substr(2, 2));
@@ -39,9 +28,8 @@ var checkCallbackTime = function(client, then, time) {
     .waitForElementVisible('header.confirmation', 5000)
     .assert.containsText('h1', 'We will call you back')
     .verify.containsText('.main-content', formattedCallbackTime)
+    .checkFlashMessage()
   ;
-
-  checkFlashMessage(client);
 };
 
 module.exports = {

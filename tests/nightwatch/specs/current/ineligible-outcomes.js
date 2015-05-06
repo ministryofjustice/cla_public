@@ -32,6 +32,8 @@ module.exports = {
 
         .assert.containsText('.help-organisations ul', item.link.text)
 
+        .checkFlashMessage()
+
         // skipping this assertion for now as the data is iffy at present
         // .useXpath()
         // .assert.elementPresent(util.format('//div[@class="org-list"]/ul/li/a[@href="%s"]', encodeURI(item.link.href)))
