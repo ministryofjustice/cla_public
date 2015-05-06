@@ -8,19 +8,9 @@ function testSidebar(client, headline) {
 }
 
 module.exports = {
-  'Start page': function(client) {
-    client
-      .deleteCookies()
-      .init()
-      .maximizeWindow()
-      .waitForElementVisible('body', 1000)
-    ;
-    testSidebar(client, 'Resources');
-    client.click('a#start');
-  },
-
   'Progress indicator': function(client) {
     client
+      .startService()
       .waitForElementVisible('.progress-bar', 1000, 'Progress sidebar exists')
 
       .assert.containsText('.progress-step.m-current', 'What do you need help with?',
