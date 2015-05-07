@@ -2,8 +2,12 @@
 
 .progress .progress-step {
   &:before,
-  &:after {
+  &:after, {
     content: none;
+  }
+
+  &.m-collapsed {
+    display: none;
   }
 
   .step-status {
