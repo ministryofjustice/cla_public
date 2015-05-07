@@ -1,7 +1,7 @@
 {% set current_step = request.view_args.step %}
 {% set has_remaining_forms = steps|rejectattr('is_completed')|list|length > 0 %}
-{% set total_step_count = steps|count %}
-{% set completed_step_count = steps|selectattr('is_completed')|list|count %}
+{% set total_step_count = steps|count + 1 %}
+{% set completed_step_count = steps|selectattr('is_completed')|list|count + 1 %}
 {% set completion_percentage = completed_step_count / total_step_count * 100 %}
 
 {% macro step_status(is_completed=False) %}
@@ -9,6 +9,10 @@
 {% endmacro %}
 
 <div class="progress">
+  <div class="progress-bar">
+    <div class="progress-value" style="width:{{ completion_percentage }}%;"></div>
+  </div>
+
   <h2>{{ _('Your problem area') }}</h2>
   <ul class="progress-steps">
     <li class="progress-step m-completed">
@@ -21,10 +25,6 @@
 </div>
 
 <div class="progress">
-  <div class="progress-bar">
-    <div class="progress-value" style="width:{{ completion_percentage }}%;"></div>
-  </div>
-
   <h2>{{ _('Your progress') }}</h2>
 
   <ul class="progress-steps">
