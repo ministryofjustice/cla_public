@@ -5,15 +5,15 @@
 {% set title = _('What do you need help with?') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
+
 {% block sidebar %}
-  <aside class="sidebar">
-    {% if nodes|length > 0 %}
+  {% if nodes|length > 0 %}
+    <aside class="sidebar">
       {{ Element.previous_selections(nodes) }}
-    {% else %}
-      {% include '_resources.html' %}
-    {% endif %}
-  </aside>
+    </aside>
+  {% endif %}
 {% endblock %}
+
 
 {% block inner_content %}
 

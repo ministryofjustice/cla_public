@@ -21,7 +21,7 @@
 {% block content %}
   {% include "_phase-tag.html" %}
 
-  <div class="inner-block {% if self.sidebar() %}m-has-sidebar{% endif %}">
+  <div class="inner-block {% if self.sidebar()|trim %}m-has-sidebar{% endif %}">
     <article class="main-content">
       {% with flash_messages = get_flashed_messages() %}
         {% if flash_messages %}
