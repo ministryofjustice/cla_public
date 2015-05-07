@@ -4,7 +4,7 @@ import logging
 from cla_common.constants import ELIGIBILITY_REASONS
 
 from flask import abort, render_template, redirect, session, url_for, views, \
-    request
+    request, flash
 
 from flask.ext.babel import lazy_gettext as _
 from wtforms.validators import StopValidation
@@ -12,6 +12,7 @@ from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.checker.forms import FindLegalAdviserForm
 
+from cla_public.apps.base.constants import END_SERVICE_FLASH_MESSAGE
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES, \
@@ -175,6 +176,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return filter(lambda s: not self.skip_on_review(s), self.steps)
 
     def complete(self):
+        flash(unicode(END_SERVICE_FLASH_MESSAGE))
 
         if session.checker.needs_face_to_face:
             return redirect(
