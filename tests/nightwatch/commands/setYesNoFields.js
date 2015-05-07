@@ -6,7 +6,7 @@ exports.command = function(fields, value, callback) {
   var client = this;
 
   this.perform(function() {
-    client.clickOption = function(field, value) {
+    var clickOption = function(field, value) {
       var el = util.format('input[name="%s"][value="%s"]', field, value);
       client.isVisible(el, function(result) {
         if(result.value === true) {
@@ -17,10 +17,10 @@ exports.command = function(fields, value, callback) {
 
     if(fields.constructor === Array) {
       fields.forEach(function(field) {
-        client.clickOption(field, value);
+        clickOption(field, value);
       });
     } else {
-      client.clickOption(fields, value);
+      clickOption(fields, value);
     }
   });
 

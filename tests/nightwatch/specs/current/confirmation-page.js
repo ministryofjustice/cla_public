@@ -1,35 +1,20 @@
 'use strict';
 
-var common = require('../../modules/common-functions');
 var moment = require('moment');
 
 var eligibleJourney = function(client) {
-  common.startPage(client);
-
-  common.selectDebtCategory(client);
-  common.aboutPage(client);
-  common.aboutPageSetAllToNo(client);
-  common.setYesNoFields(client, 'on_benefits', 1);
   client
-    .submitForm('form')
-    .waitForElementVisible('input[name="benefits"]', 5000)
-    .assert.urlContains('/benefits')
-    .assert.containsText('h1', 'Your benefits')
-    .assert.containsText('body', 'Are you on any of these benefits?')
-    .click('input[value="income_support"]')
-    .submitForm('form')
-    .waitForElementVisible('.answers-summary', 5000)
-    .submitForm('form')
-    .waitForElementVisible('input[name="callback_requested"]', 5000)
-    .assert.urlContains('/result/eligible')
-    .assert.containsText('h1', 'You might qualify for legal aid')
-    .assert.containsText('h2', 'Contact Civil Legal Advice')
-    .setValue('#full_name', 'John Smith')
-    .click('input[name="callback_requested"][value="1"]')
-    .setValue('input[name="callback-contact_number"]', '01234 567890')
-    .click('input[name="callback-safe_to_contact"][value="SAFE"]')
-    .setValue('input[name="address-post_code"]', 'E18 1JA')
-    .setValue('textarea[name="address-street_address"]', '3 Crescent Road\nLondon')
+    .startService()
+    .selectCategory('debt', true)
+    .aboutSetAllToNo(true, {
+      'on_benefits': 1
+    })
+    .selectBenefit('income_support', true)
+    .confirmReviewPage()
+    .fillInContactDetails(false, {
+      callback_requested: 1,
+      'callback-safe_to_contact': 'SAFE'
+    })
   ;
 };
 
@@ -43,12 +28,12 @@ var checkCallbackTime = function(client, then, time) {
     .waitForElementVisible('header.confirmation', 5000)
     .assert.containsText('h1', 'We will call you back')
     .verify.containsText('.main-content', formattedCallbackTime)
+    .checkFlashMessage()
   ;
 };
 
 module.exports = {
   'Check callback today (next available)': function(client) {
-    eligibleJourney(client);
     var timeIsMocked = process.argv.indexOf('-M') !== -1;
     var now = moment();
     if (timeIsMocked) {
@@ -60,6 +45,7 @@ module.exports = {
         if(now.day() === 6 && (now.hour() > 11 || (now.hour() === 11 && now.minute() > 14))) {
           console.log('Today not available after 11.15am on a Saturday, test skipped');
         } else {
+          eligibleJourney(client);
           client.getValue('select[name="time_today"]', function(result) {
             checkCallbackTime(client, now, result.value);
           });
@@ -89,7 +75,5 @@ module.exports = {
         });
       })
     ;
-
-    client.end();
   }
 };
