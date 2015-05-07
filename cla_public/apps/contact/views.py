@@ -22,30 +22,13 @@ def add_no_cache_headers(response):
     return response
 
 
-def handle_confirmation_email(form):
-    data = {
-        'case_ref': session['case_ref'],
-        'full_name': form.full_name.data,
-        'email': form.email.data,
-        'callback_requested': form.callback_requested.data == YES,
-        'contact_number': form.callback.contact_number.data,
-        'safe_to_contact': form.callback.safe_to_contact.data == YES,
-        'callback_time':
-            form.callback.time.data.strftime('%A, %d %B at %H:%M')
-    }
-
-    email_body = render_template(
-        'emails/confirmation.txt',
-        data=data
-    )
-
-    msg = Message(
+def confirmation_email(data):
+    data['callback_requested'] = data['callback_requested'] == YES
+    data['safe_to_contact'] = data.get('safe_to_contact') == YES
+    return Message(
         gettext(u'Your Civil Legal Advice reference number'),
         recipients=[(data['full_name'], data['email'])],
-        body=email_body
-    )
-
-    current_app.mail.send(msg)
+        body=render_template('emails/confirmation.txt', data=data))
 
 
 class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
