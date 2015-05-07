@@ -4,7 +4,7 @@ Dear {{ data.full_name }},
 
 Your details have been submitted to Civil Legal Advice (CLA) and we will call you back.
 
-Your reference number is {{ session.case_ref }}.
+Your reference number is {{ data.case_ref }}.
 
 An operator will try to call you back on {{ data.contact_number }} around the time you selected ({{ data.callback_time.strftime('%A, %d %B at %H:%M') }}).
 
@@ -26,7 +26,7 @@ Dear {{ data.full_name }},
 
 Your details have been submitted to Civil Legal Advice (CLA).
 
-Your reference number is {{ session.case_ref }}.
+Your reference number is {{ data.case_ref }}.
 
 You can now call CLA on 0345 345 4 345. Please quote your reference number when you call.
 

@@ -23,6 +23,7 @@ def add_no_cache_headers(response):
 
 
 def confirmation_email(data):
+    data['case_ref'] = session.checker['case_ref']
     data['callback_requested'] = data['callback_requested'] == YES
     data['safe_to_contact'] = data.get('safe_to_contact') == YES
     return Message(

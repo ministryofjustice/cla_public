@@ -19,7 +19,7 @@ class TestMail(unittest.TestCase):
         self.ctx = self.app.test_request_context()
         self.ctx.push()
         self.client = self.app.test_client()
-        session['case_ref'] = 'XX-XXXX-XXXX'
+        session.checker['case_ref'] = 'XX-XXXX-XXXX'
 
         self.form_data = {
             'full_name': 'John Smith',
