@@ -10,14 +10,14 @@ fieldset header {
   }
 }
 
-.progress .m-dummy {
-  display: none;
-}
-
 .progress .progress-step {
   &:before,
   &:after {
     content: none;
+  }
+
+  &.m-collapsed {
+    display: none;
   }
 
   .step-status {

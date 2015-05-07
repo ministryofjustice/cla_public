@@ -1,4 +1,52 @@
 .progress {
+  @mixin add_pointer($border-colour: $grey-3, $hover-colour: $grey-4, $clear-last: true) {
+    border-top: 1px solid $border-colour;
+    position: relative;
+    overflow: visible;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      margin: auto;
+      border-style: solid;
+      border-width: 7px 7px 0 7px;
+      border-color: darken($border-colour, 5) transparent transparent transparent;
+      z-index: 2;
+    }
+
+    &:after {
+      border-top-color: white;
+      bottom: -6px;
+    }
+
+    @if $clear-last {
+      &:last-child {
+        &:before,
+        &:after {
+          content: none;
+        }
+      }
+    }
+
+    &.s-focused:before {
+      border-top-color: $yellow;
+    }
+
+    &.s-hovered:not(.s-focused),
+    &.m-current {
+      &:after {
+        border-top-color: $hover-colour;
+      }
+    }
+  }
+
+
   .progress-bar {
     margin-top: -10px;
     background: $grey-2;
@@ -16,10 +64,10 @@
   }
 
   .progress-step {
+    @include add_pointer;
     margin: 0;
     line-height: 1;
-    border-top: 1px solid #ddd;
-    position: relative;
+    cursor: default;
 
     &.m-current {
       font-weight: bold;
@@ -34,42 +82,28 @@
       }
     }
 
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -7px;
-      left: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      margin: auto;
-      border-style: solid;
-      border-width: 7px 7px 0 7px;
-      border-color: lighten($grey-2, 8) transparent transparent transparent;
-      z-index: 2;
-    }
+    &.m-collapsed {
+      z-index: 1;
 
-    &:after {
-      border-top-color: white;
-      bottom: -6px;
-    }
-
-    &:last-child {
       &:before,
       &:after {
         content: none;
       }
-    }
 
-    &.s-focused:before {
-      border-top-color: $yellow;
-    }
+      .step-name {
+        @include add_pointer($clear-last: false);
+        padding: 2px 0 3px;
 
-    &.m-completed.s-hovered:not(.s-focused),
-    &.m-current.m-completed {
-      &:after {
-        border-top-color: $grey-4;
+        &:nth-child(1) {
+          border: 0;
+          z-index: 3;
+        }
+        &:nth-child(2) {
+          z-index: 2;
+        }
+        &:nth-child(3) {
+          z-index: 1;
+        }
       }
     }
   }
@@ -78,10 +112,6 @@
     padding: 15px 15px 15px 35px;
     display: block;
     overflow: hidden;
-
-    &.m-dummy {
-      padding: 4px;
-    }
   }
 
   span.step-name {
