@@ -5,17 +5,20 @@
 {% set title = _('What do you need help with?') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
+{% block sidebar %}
+  <aside class="sidebar">
+    {% if nodes|length > 0 %}
+      {{ Element.previous_selections(nodes) }}
+    {% else %}
+      {% include '_resources.html' %}
+    {% endif %}
+  </aside>
+{% endblock %}
+
 {% block inner_content %}
 
-
-
-  {% if nodes %}
-    <strong>Your selections so far:</strong>
-    {{ Element.previous_selections(nodes) }}
-  {% else %}
-    <h1>What do you need help with?</h1>
-    <p class="subtitle">To qualify for legal aid, you must have a problem that is covered by legal aid.</p>
-  {% endif %}
+  <h1>What do you need help with?</h1>
+  <p class="subtitle">To qualify for legal aid, you must have a problem that is covered by legal aid.</p>
 
   <div class="scope-options">
     <h2>{{ heading }}</h2>
