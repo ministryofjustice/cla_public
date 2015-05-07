@@ -18,8 +18,8 @@ class DiagnosisApiClient(object):
     @property
     def basepath(self):
         path = 'diagnosis/'
-        if REF_KEY in session:
-            path = '%s%s/' % (path, session[REF_KEY])
+        if REF_KEY in session.checker:
+            path = '%s%s/' % (path, session.checker[REF_KEY])
         return path
 
     def request_path(self, path=''):
@@ -40,9 +40,9 @@ class DiagnosisApiClient(object):
         return requests.post(self.request_path(path), **request_args)
 
     def create_diagnosis(self):
-        if not session.get(REF_KEY):
+        if not session.checker.get(REF_KEY):
             response = self.post_to_scope()
-            session[REF_KEY] = response.json().get('reference')
+            session.checker[REF_KEY] = response.json().get('reference')
 
     def get_steps_and_direction(self, previous_choices=[], choices_list=[]):
         """
@@ -69,8 +69,8 @@ class DiagnosisApiClient(object):
         :param choices_list - new choices (from url):
         :return requests Response object:
         """
-        previous_choices = session.get(PREV_KEY, [])
-        session[PREV_KEY] = choices_list
+        previous_choices = session.checker.get(PREV_KEY, [])
+        session.checker[PREV_KEY] = choices_list
         if len(previous_choices) == len(choices_list):
             # reload page - same choices as before
             return requests.get(self.request_path(), **self.request_args())
@@ -94,14 +94,14 @@ class DiagnosisApiClient(object):
         return category
 
     def save_category(self, category, note=None):
-        session['category'] = category
+        session.checker['category'] = category
         if category == 'violence':
             category = 'family'
-        session.add_note(
+        session.checker.add_note(
             u'User selected category:',
-            unicode(session.category_name))
+            unicode(session.checker.category_name))
         if note:
-            session.add_note(
+            session.checker.add_note(
                 u'Public Diagnosis note:',
                 note)
         post_to_eligibility_check_api(payload={
