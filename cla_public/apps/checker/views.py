@@ -176,7 +176,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return filter(lambda s: not self.skip_on_review(s), self.steps)
 
     def complete(self):
-        flash(END_SERVICE_FLASH_MESSAGE)
+        flash(unicode(END_SERVICE_FLASH_MESSAGE))
 
         if session.checker.needs_face_to_face:
             return redirect(

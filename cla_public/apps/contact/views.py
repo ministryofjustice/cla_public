@@ -38,7 +38,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 u'Please check and try again.')
             return self.get()
         else:
-            flash(END_SERVICE_FLASH_MESSAGE)
+            flash(unicode(END_SERVICE_FLASH_MESSAGE))
 
             return redirect(url_for('.confirmation'))
 
