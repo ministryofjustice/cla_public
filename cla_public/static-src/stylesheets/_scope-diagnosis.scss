@@ -10,12 +10,13 @@
     font-weight: bold;
     #content & {
       margin-top: 2em;
+      margin-bottom: 10px;
     }
   }
 
   ul {
     list-style-type: none;
-    margin: 2em 0;
+    margin: 0 0 2em;
     padding: 0;
 
     li {
@@ -65,52 +66,26 @@
   }
 }
 
-.previous {
-  margin-top: 12px;
-  padding: 0;
-
-  a {
-    margin: 0 0 10px;
-    padding: 10px 25px;
-    border: 1px solid $grey-3;
-    background-color: $grey-4;
-    display: block;
-    color: $grey-1;
-    text-decoration: none;
-    font-size: 16px;
-
-    .change {
-      float: right;
-      font-weight: normal;
-    }
-
-    &:hover {
-      border: 1px solid $grey-1;
-
-      .change {
-        color: $black;
-      }
-    }
+.previous.progress {
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
   }
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  .step-name {
+    text-decoration: none;
 
-    li {
-      margin: 0;
+    span {
+      margin-top: 2px;
     }
-
-    .preva {
-      font-weight: bold;
-
-      a {
-        font-weight: normal;
-        font-size: 14px;
-        display: inline-block;
-        margin-left: 8px;
-      }
-    }
+  }
+  .scope-question {
+    padding-right: 10px;
+    display: inline-block;
+    text-decoration: underline;
+    margin-bottom: 4px;
+  }
+  .scope-answer {
+    display: inline-block;
   }
 }
