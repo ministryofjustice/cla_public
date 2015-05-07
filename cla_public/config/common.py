@@ -109,16 +109,13 @@ LAALAA_API_HOST = os.environ.get(
     'https://prod.laalaa.dsd.io')
 
 
-MAIL_SERVER = os.environ.get(
-    'MAIL_SERVER',
-    'smtp.sendgrid.net')
-
-MAIL_PORT = os.environ.get('MAIL_PORT', 465)
+MAIL_SERVER = os.environ.get('SMTP_HOST', '')
+MAIL_PORT = os.environ.get('SMTP_PORT', 465)
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 
-MAIL_USERNAME = os.environ.get('MAIL_USERNAME', '')
-MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', '')
+MAIL_USERNAME = os.environ.get('SMTP_USER', '')
+MAIL_PASSWORD = os.environ.get('SMTP_PASSWORD', '')
 
 MAIL_DEFAULT_SENDER = ('Civil Legal Advice',
     'no-reply@civillegaladvice.service.gov.uk')
