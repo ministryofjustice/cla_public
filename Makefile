@@ -4,6 +4,10 @@ ifdef spec
 	specific_test = -t ${SPECS_PATH}/${spec}.js
 endif
 
+ifdef browser
+	environment = --env ${browser}
+endif
+
 # bsb = browserstack browser. specify for single or use ie for all IEs, good for others. omit for default (chrome on mac)
 # our browserstack account currently only lets us run 5 parallel tests, so can't run all at once
 ifdef bsb
@@ -18,7 +22,7 @@ endif
 
 # running tests on local env
 test:
-	./nightwatch -c tests/nightwatch/local.json -s legacy ${specific_test}
+	./nightwatch -c tests/nightwatch/local.json -s legacy ${environment} ${specific_test}
 test-chrome:
 	./nightwatch -c tests/nightwatch/local.json -s legacy --env chrome ${specific_test}
 test-firefox:
