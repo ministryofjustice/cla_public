@@ -323,9 +323,12 @@ class HelpOrganisations(views.MethodView):
             'ineligible_reasons': ineligible_reasons
         }
 
-    def get(self, category_name):
+    def clear_session(self):
         if session.checker:
             session.clear_checker()
+
+    def get(self, category_name):
+        self.clear_session()
 
         return render_template(
             self._template,
