@@ -68,9 +68,8 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
                                nodes=nodes)
 
 
-class ScopeInScope(RequiresSession, views.MethodView):
-    def get(self, *args, **kwargs):
-        return render_template('scope/in-scope.html')
+class ScopeInScope(RequiresSession, HelpOrganisations):
+    _template = 'scope/in-scope.html'
 
 
 class ScopeIneligible(HelpOrganisations):
