@@ -184,10 +184,12 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
             )
 
         if session.checker.ineligible:
+            session.store({
+                'ineligible_reasons': session.checker.ineligible_reasons
+            })
             return redirect(url_for(
                 '.help_organisations',
-                category_name=session.checker.category_slug,
-                ineligible_reasons=session.checker.ineligible_reasons))
+                category_name=session.checker.category_slug))
 
         return redirect(url_for('.eligible'))
 
@@ -324,7 +326,7 @@ def help_organisations(category_name):
         category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
     trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
 
-    ineligible_reasons = request.args.getlist('ineligible_reasons')
+    ineligible_reasons = session.stored.get('ineligible_reasons', [])
 
     organisations = get_organisation_list(article_category__name=category_name)
     return render_template(
