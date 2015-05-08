@@ -18,7 +18,7 @@ var scenario_types = {
   },
   contact: {
     destination: '/contact',
-    identifier: 'input[name="third_party_handled"]'
+    identifier: 'input[name="callback_requested"]'
   }
 };
 
