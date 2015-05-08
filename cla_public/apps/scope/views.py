@@ -47,7 +47,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
             api.save(response_json)
 
             outcome_url = OUTCOME_URLS[state]
-            if state == 'INELIGIBLE':
+            if state in [DIAGNOSIS_SCOPE.INELIGIBLE, DIAGNOSIS_SCOPE.INSCOPE]:
                 outcome_url = '%s/%s' % (
                     outcome_url,
                     session.checker.category_slug)
