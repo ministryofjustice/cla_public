@@ -62,22 +62,6 @@ def recursive_update(orig, other):
     return orig
 
 
-class ProblemPayload(dict):
-
-    def __init__(self, form_data={}):
-        super(ProblemPayload, self).__init__()
-
-        category = form_data['categories']
-
-        self.update({
-            'category':
-                'family' if category == 'violence' else category,
-
-            'notes':
-                u'User selected category: {0}'.format(category)
-        })
-
-
 class AboutYouPayload(dict):
 
     def __init__(self, form_data={}):
@@ -532,6 +516,9 @@ class MeansTest(dict):
                 'partner': zero_finances(),
             })
 
+        if 'category' in session.checker:
+            self['category'] = session.checker['category']
+
     def update(self, other={}, **kwargs):
         """
         Recursively merge dicts into self
@@ -547,7 +534,6 @@ class MeansTest(dict):
     def update_from_session(self):
 
         forms = [
-            'ProblemForm',
             'AboutYouForm',
             'YourBenefitsForm',
             'PropertiesForm',

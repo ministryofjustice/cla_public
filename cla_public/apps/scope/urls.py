@@ -12,3 +12,5 @@ scope.add_url_rule('diagnosis/<path:choices>', view_func=view)
 scope.add_url_rule('in-scope/', view_func=ScopeInScope.as_view('in-scope'))
 
 scope.add_url_rule('ineligible/<category_name>', view_func=ScopeIneligible.as_view('ineligible'))
+
+

@@ -41,18 +41,6 @@ class BaseNoCsrfForm(BabelTranslationsFormMixin, NoCsrfForm):
     pass
 
 
-class ProblemForm(ConfigFormMixin, BaseForm):
-    """Area of law choice"""
-
-    title = _(u'What do you need help with?')
-
-    categories = DescriptionRadioField(
-        _(u'What do you need help with?'),
-        choices=CATEGORIES,
-        coerce=unicode,
-        validators=[InputRequired()])
-
-
 class AboutYouForm(BaseForm):
 
     title = _(u'About you')
