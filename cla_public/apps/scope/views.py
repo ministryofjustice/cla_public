@@ -6,7 +6,7 @@ from cla_public.apps.scope import scope
 from cla_public.apps.scope.api import diagnosis_api_client as api
 from cla_public.libs.views import RequiresSession
 from flask import views, render_template, current_app, url_for, \
-    redirect
+    redirect, session
 
 
 OUTCOME_URLS = {
@@ -52,15 +52,11 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
                 api.get_category(response_json),
                 note)
 
-            category = api.get_category(response_json)
-            if category == 'violence':
-                category = 'domestic-violence'
-            if category == 'benefits':
-                category = 'welfare-benefits'
-
             outcome_url = OUTCOME_URLS[state]
             if state == 'INELIGIBLE':
-                outcome_url = '/'.join([outcome_url, category])
+                outcome_url = '%s/%s' % (
+                    outcome_url,
+                    session.checker.category_slug)
             return redirect(outcome_url)
 
         def add_link(choice):

@@ -197,7 +197,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
             return False
 
         if not for_review_page \
-                and step.name not in ('problem', 'about', 'benefits') \
+                and step.name not in ('about', 'benefits') \
                 and session.checker.ineligible:
             return True
 
@@ -214,7 +214,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
             return not session.checker.children_or_tax_credits
 
         if session.checker.is_on_passported_benefits \
-                and step.name not in ('problem', 'about', 'benefits'):
+                and step.name not in ('about', 'benefits'):
             return True
 
         return False
