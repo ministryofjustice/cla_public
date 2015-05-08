@@ -69,6 +69,10 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
 
 
 class ScopeInScope(RequiresSession, HelpOrganisations):
+    def clear_session(self):
+        """ Don't clear session """
+        pass
+
     _template = 'scope/in-scope.html'
 
 
