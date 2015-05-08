@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from cla_common.constants import DIAGNOSIS_SCOPE
-from django.template.defaultfilters import striptags
 from cla_public.apps.checker.views import HelpOrganisations
 from cla_public.apps.scope import scope
 from cla_public.apps.scope.api import diagnosis_api_client as api
@@ -45,12 +44,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
         nodes = response_json.get('nodes', [])
 
         if state and state != DIAGNOSIS_SCOPE.UNKNOWN:
-            note = None
-            if state == DIAGNOSIS_SCOPE.CONTACT and nodes:
-                note = striptags(nodes[-1]['help_text'])
-            api.save_category(
-                api.get_category(response_json),
-                note)
+            api.save(response_json)
 
             outcome_url = OUTCOME_URLS[state]
             if state == 'INELIGIBLE':

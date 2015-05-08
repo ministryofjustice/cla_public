@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import urllib
+from cla_common.constants import DIAGNOSIS_SCOPE
 from django.template.defaultfilters import striptags
 import requests
 from cla_public.apps.checker.api import post_to_eligibility_check_api
@@ -107,6 +108,32 @@ class DiagnosisApiClient(object):
         post_to_eligibility_check_api(payload={
             'category': category
         })
+
+    def save(self, response_json):
+        state = response_json.get('state')
+        nodes = response_json.get('nodes', [])
+        note = None
+        if state == DIAGNOSIS_SCOPE.CONTACT and nodes:
+            note = striptags(nodes[-1]['help_text'])
+
+        self.save_category(
+            self.get_category(response_json),
+            note)
+
+        prev = None
+        step_notes = []
+        for node in nodes:
+            n = striptags(node['label'])
+            if prev and prev['heading']:
+                n = '%s: %s' % (prev['heading'], n)
+            step_notes.append(n)
+            prev = node
+
+
+        steps = '\n'.join(step_notes)
+        session.checker.add_note(
+            u'Public Diagnosis nodes:',
+            steps)
 
 
 diagnosis_api_client = DiagnosisApiClient()
