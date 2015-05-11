@@ -17,4 +17,4 @@ def addressfinder_proxy_view(path):
     if current_app.config.get('TESTING'):
         return mock_addressfinder(request.args)
 
-    return lookup(path, **request.args)
+    return lookup(path, **dict(request.args.items()))
