@@ -22,7 +22,7 @@ class TestReviewPage(unittest.TestCase):
         paths = [
             ('INSCOPE', ['n65::n14', 'n76', 'n82', 'n87', 'n22']),
             ('CONTACT', ['n65::n14', 'n76', 'n82', 'n87', 'n21']),
-            ('OUTOFSCOPE', ['n65::n14', 'n76', 'n85'])
+            ('INELIGIBLE', ['n65::n14', 'n76', 'n85']),
         ]
 
         for outcome, choices in paths:
