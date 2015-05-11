@@ -1,13 +1,12 @@
 'use strict';
 
 var log = require('../modules/log');
-var CATEGORIES = require('../modules/constants').CATEGORIES_OF_LAW;
 
-exports.command = function(nodes, shouldContinue, callback) {
+exports.command = function(scenario, nodes, shouldContinue, callback) {
   var client = this;
 
   this.perform(function() {
-    log.command('Processing Scope diagnosis - nodes: ' + nodes.join(' > '));
+    log.command('Processing Scope diagnosis - scenario: ' + scenario);
 
     client
       .assert.urlContains('/scope/diagnosis',

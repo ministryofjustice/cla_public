@@ -1,22 +1,25 @@
 'use strict';
 
 var common = require('../../modules/common-functions');
-var log = require('../../modules/log');
 
-var scenario_types = {
+var scenarioTypes = {
   ineligible: {
+    label: 'Ineligible',
     destination: '/scope/ineligible',
     identifier: 'a[href="https://www.gov.uk/find-a-legal-adviser"]'
   },
   inscope: {
+    label: 'In scope',
     destination: '/scope/in-scope',
     identifier: 'a.continue'
   },
   f2f: {
+    label: 'Face to Face',
     destination: '/result/face-to-face',
     identifier: 'input[name="postcode"]'
   },
   contact: {
+    label: 'Contact',
     destination: '/contact',
     identifier: 'input[name="callback_requested"]'
   }
@@ -24,7 +27,7 @@ var scenario_types = {
 
 var categories = [
   {
-    name: "Clinical negligence",
+    name: 'Clinical negligence',
     scenarios: [
       {
         type: 'f2f',
@@ -35,7 +38,7 @@ var categories = [
     ]
   },
   {
-    name: "Community care",
+    name: 'Community care',
     scenarios: [
       {
         type: 'f2f',
@@ -46,7 +49,7 @@ var categories = [
     ]
   },
   {
-    name: "Debt",
+    name: 'Debt',
     scenarios: [
       {
         type: 'inscope',
@@ -258,7 +261,7 @@ var categories = [
     ]
   },
   {
-    name: "Housing",
+    name: 'Housing',
     scenarios: [
       {
         type: 'inscope',
@@ -308,7 +311,7 @@ var categories = [
     ]
   },
   {
-    name: "Mental health",
+    name: 'Mental health',
     scenarios: [
       {
         type: 'f2f',
@@ -319,7 +322,7 @@ var categories = [
     ]
   },
   {
-    name: "Personal injury",
+    name: 'Personal injury',
     scenarios: [
       {
         type: 'f2f',
@@ -330,7 +333,7 @@ var categories = [
     ]
   },
   {
-    name: "Public law",
+    name: 'Public law',
     scenarios: [
       {
         type: 'f2f',
@@ -341,7 +344,7 @@ var categories = [
     ]
   },
   {
-    name: "Trouble with the police",
+    name: 'Trouble with the police',
     scenarios: [
       {
         type: 'f2f',
@@ -352,7 +355,7 @@ var categories = [
     ]
   },
   {
-    name: "Welfare benefits",
+    name: 'Welfare benefits',
     scenarios: [
       {
         type: 'inscope',
@@ -380,11 +383,11 @@ module.exports = {
         scenario.paths.forEach(function(path) {
           common.startPage(client);
           client
-            .scopeDiagnosis([category.name].concat(path))
-            .waitForElementVisible(scenario_types[scenario.type].identifier, 5000,
-              '  - Element ' + scenario_types[scenario.type].identifier + ' is present')
-            .assert.urlContains(scenario_types[scenario.type].destination,
-              '  - Destination page URL contains ' + scenario_types[scenario.type].destination)
+            .scopeDiagnosis(scenarioTypes[scenario.type].label, [category.name].concat(path))
+            .waitForElementVisible(scenarioTypes[scenario.type].identifier, 5000,
+              '  - Element ' + scenarioTypes[scenario.type].identifier + ' is present')
+            .assert.urlContains(scenarioTypes[scenario.type].destination,
+              '  - Destination page URL contains ' + scenarioTypes[scenario.type].destination);
         });
       });
     });
