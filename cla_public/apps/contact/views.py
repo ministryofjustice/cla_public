@@ -51,6 +51,8 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 u'Please check and try again.')
             return self.get()
         else:
+            if self.form.email.data and current_app.config['MAIL_SERVER']:
+                current_app.mail.send(confirmation_email(self.form.data))
             return redirect(url_for('.confirmation'))
 
     def dispatch_request(self, *args, **kwargs):
