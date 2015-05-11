@@ -74,7 +74,7 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
         """
         Remove the form data from the session
         """
-        if self.form_class.__name__ in session:
+        if self.form_class.__name__ in session.checker:
             del session.checker[self.form_class.__name__]
 
     def on_valid_submit(self):
