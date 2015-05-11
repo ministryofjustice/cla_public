@@ -142,7 +142,7 @@ def post_to_is_eligible_api():
 
 
 def should_attach_eligibility_check():
-    return 'eligibility_check' in session
+    return 'eligibility_check' in session.checker
 
 
 def attach_eligibility_check(payload):
