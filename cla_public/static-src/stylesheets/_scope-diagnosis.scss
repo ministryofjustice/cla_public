@@ -1,91 +1,50 @@
-
-.scope-options {
-
-  p {
-    margin: 0;
-  }
-
-  h2 {
-    font-size: 24px;
-    font-weight: bold;
-    #content & {
-      margin-top: 2em;
-      margin-bottom: 10px;
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 0 0 2em;
-    padding: 0;
-
-    li {
-      font-size: 19px;
-      margin-bottom: 10px;
-      background-color: $grey-3;
-      border: 1px solid $grey-3;
-      padding: 0;
-      position: relative;
-
-      &:hover {
-        border: 1px solid $grey-1;
-
-        i::before {
-          color: $black;
-        }
-      }
-
-      a {
-        display: block;
-        text-decoration: none;
-        color: $black;
-        padding: 10px 47px 10px 25px;
-
-        span {
-          font-size: 16px;
-          font-weight: normal;
-          color: $grey-1;
-          display: block;
-        }
-
-        i::before {
-          font-size: 32px;
-          font-family: arial;
-          font-style: normal;
-          font-weight: bold;
-          position: absolute;
-          right: 5px;
-          top: 50%;
-          margin-top: -20px;
-          display: block;
-          color: $grey-1;
-          content: "〉";
-        }
-      }
-    }
-  }
+.scope-options-list {
+  list-style-type: none;
+  margin: 1em 0 2em;
+  padding: 0;
 }
 
-.previous.progress {
-  h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
+.scope-options-list-item {
+  margin-bottom: 10px;
+  background-color: $grey-3;
+  padding: 0;
+  position: relative;
 
-  .step-name {
+  a {
+    display: block;
     text-decoration: none;
+    color: black;
+    padding: 13px 60px 10px 25px;
+    border: 1px solid transparent;
 
-    span {
-      margin-top: 2px;
+    &:before {
+      $_icon-size: 32px;
+
+      font-size: $_icon-size;
+      height: $_icon-size;
+      line-height: 1.2;
+      position: absolute;
+      top: 0;
+      right: 5px;
+      bottom: 0;
+      margin: auto;
+      color: $grey-1;
+      content: "〉";
     }
-  }
-  .scope-question {
-    padding-right: 10px;
-    display: inline-block;
-    text-decoration: underline;
-    margin-bottom: 4px;
-  }
-  .scope-answer {
-    display: inline-block;
+
+    &:active,
+    &:focus,
+    &:hover {
+      border: 1px solid $grey-1;
+      background: inherit;
+
+      &::before {
+        color: black;
+      }
+    }
+
+    &:active {
+      background: white;
+    }
   }
 }
