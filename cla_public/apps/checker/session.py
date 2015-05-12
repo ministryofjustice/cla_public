@@ -17,8 +17,7 @@ from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
     PASSPORTED_BENEFITS, YES, CATEGORIES
 from cla_public.apps.checker.means_test import MeansTest
 from cla_public.apps.checker.utils import passported
-from cla_public.libs.utils import override_locale
-
+from cla_public.libs.utils import override_locale, category_id_to_name
 
 class CustomJSONEncoder(JSONEncoder):
 
@@ -87,9 +86,7 @@ class CheckerSessionObject(dict):
 
     @property
     def category_name(self):
-        selected_name = lambda (slug, name, _): slug == self.category and name
-        selected = filter(None, map(selected_name, CATEGORIES))
-        return selected[0] if selected else None
+        return category_id_to_name(self.category)
 
     @property
     def category_slug(self):

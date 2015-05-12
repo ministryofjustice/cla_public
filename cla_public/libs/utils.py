@@ -3,6 +3,7 @@ import logging
 from collections import Mapping
 from flask import current_app, request
 from flask.ext.babel import refresh
+from cla_public.apps.checker.constants import CATEGORIES
 
 
 log = logging.getLogger(__name__)
@@ -96,3 +97,8 @@ def flatten(dict_, prefix=''):
         else:
             out.update({new_prefix: val})
     return out
+
+def category_id_to_name(category_id):
+    selected_name = lambda (slug, name, _): slug == category_id and name
+    selected = filter(None, map(selected_name, CATEGORIES))
+    return selected[0] if selected else None
