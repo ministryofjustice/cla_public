@@ -44,6 +44,11 @@ class SmokeTests(unittest.TestCase):
         with self.app.test_client() as client:
             laalaa.find('sw1a1aa')
 
+    def test_can_access_sendgrid(self):
+        "connect to SendGrid"
+        with self.app.test_client() as client:
+            self.app.mail.connect()
+
     def test_can_access_backend(self):
         "connect to the backend"
         with self.app.test_client() as client:
