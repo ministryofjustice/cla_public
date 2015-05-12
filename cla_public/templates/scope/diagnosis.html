@@ -21,16 +21,15 @@
   <p class="subtitle">To qualify for legal aid, you must have a problem that is covered by legal aid.</p>
 
   <div class="scope-options">
-    <h2>{{ heading }}</h2>
-    <ul>
+    <h2 class="subtitle">{{ heading }}</h2>
+    <ul class="scope-options-list">
       {% for choice in choices %}
-        <li>
+        <li class="scope-options-list-item">
           <a href="{{ choice.url }}">
-            {{ choice.label|safe|striptags }}
+            <span class="option-label">{{ choice.label|safe|striptags }}</span>
             {% if choice.help_text %}
-              <span>{{ choice.help_text|safe|striptags }}</span>
+              <div class="field-help">{{ choice.help_text|safe|striptags }}</div>
             {% endif %}
-            <i></i>
           </a>
         </li>
       {% endfor %}

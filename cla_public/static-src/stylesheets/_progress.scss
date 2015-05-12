@@ -109,9 +109,10 @@
   }
 
   .step-name {
-    padding: 15px 15px 15px 35px;
+    padding: 15px 15px 13px 35px;
     display: block;
     overflow: hidden;
+    text-decoration: none;
   }
 
   span.step-name {
@@ -142,6 +143,11 @@
     text-align: center;
     font-weight: normal;
     text-indent: -999em;
+  }
+
+  .step-name-subtitle {
+    margin-top: 5px;
+    color: $grey-1;
   }
 
   .progress-step.m-completed .step-status {
