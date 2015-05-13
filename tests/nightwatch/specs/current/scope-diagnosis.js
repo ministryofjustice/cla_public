@@ -10,8 +10,8 @@ var scenarioTypes = {
   },
   inscope: {
     label: 'In scope',
-    destination: '/scope/in-scope',
-    identifier: 'a.continue'
+    destination: '/about',
+    identifier: 'input[name="have_partner"]'
   },
   f2f: {
     label: 'Face to Face',
