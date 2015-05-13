@@ -60,6 +60,8 @@
     </ul>
   </div>
 
-  {{ Element.get_in_touch_alert() }}
-
+  <p>
+    {{ _('If you’re having trouble completing this form') }},
+    <a href="{{ url_for('contact.get_in_touch') }}" id="callback-link">{{ _('get in touch') }}</a>.
+  </p>
 {% endblock %}
