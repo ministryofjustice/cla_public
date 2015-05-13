@@ -35,11 +35,13 @@ var FIELDS_WITH_SUBFIELDS = [
 ];
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Scope diagnosis': common.selectDebtCategory,
-
-  'About you': common.aboutPage,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
@@ -53,13 +55,15 @@ module.exports = {
     common.submitAndCheckForFieldError(client, questions);
 
     FIELDS_WITH_SUBFIELDS.forEach(function(item) {
-      common.aboutPageSetAllToNo(client);
-      client.assert.hidden(util.format('input[name="%s"]', item.subfield_name));
-      common.setYesNoFields(client, item.field_name, 1);
-      client.assert.visible(util.format('input[name="%s"]', item.subfield_name));
-      common.setYesNoFields(client, item.field_name, 0);
-      client.assert.hidden(util.format('input[name="%s"]', item.subfield_name));
-      common.setYesNoFields(client, item.field_name, 1);
+      client
+        .aboutSetAllToNo(false)
+        .assert.hidden(util.format('input[name="%s"]', item.subfield_name))
+        .setYesNoFields(item.field_name, 1)
+        .assert.visible(util.format('input[name="%s"]', item.subfield_name))
+        .setYesNoFields(item.field_name, 0)
+        .assert.hidden(util.format('input[name="%s"]', item.subfield_name))
+        .setYesNoFields(item.field_name, 1)
+      ;
       common.submitAndCheckForFieldError(client, [{
         name: item.field_name,
         errorText: item.errorText
@@ -68,19 +72,18 @@ module.exports = {
   },
 
   'Test outcomes': function(client) {
-    common.aboutPageSetAllToNo(client);
     client
-      .submitForm('form')
+      .aboutSetAllToNo(true)
       .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
       .assert.urlContains('/income', 'Goes to /income when all answers are No')
       .url(client.launch_url + '/about')
       .waitForElementVisible('input[name="have_partner"]', 5000)
     ;
     OUTCOMES.forEach(function(item) {
-      common.aboutPageSetAllToNo(client);
-      common.setYesNoFields(client, item.question, 1);
+      var selection = {};
+      selection[item.question] = 1;
       client
-        .submitForm('form')
+        .aboutSetAllToNo(true, selection)
         .waitForElementVisible(util.format('input[name="%s"]', item.input), 5000)
         .assert.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
         .url(client.launch_url + '/about')

@@ -3,15 +3,18 @@
 var common = require('../../modules/common-functions');
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Scope diagnosis': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    common.aboutPage(client);
-    common.aboutPageSetAllToNo(client);
-    common.setYesNoFields(client, 'on_benefits', 1);
-    client.submitForm('form');
+    client.aboutSetAllToNo(true, {
+      'on_benefits': 1
+    });
   },
 
   'Benefits': function(client) {

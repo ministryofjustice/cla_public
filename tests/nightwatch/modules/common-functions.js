@@ -1,76 +1,10 @@
 'use strict';
 
 var util = require('util');
-var ABOUT_YOU_QUESTIONS = require('../modules/constants').ABOUT_YOU_QUESTIONS;
 var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
 SAVINGS_QUESTIONS.ALL = SAVINGS_QUESTIONS.MONEY.concat(SAVINGS_QUESTIONS.VALUABLES);
 
 module.exports = {
-  // skip start page
-  startPage: function(client, msg) {
-    client
-      .deleteCookies()
-      .init()
-      .maximizeWindow()
-      .waitForElementVisible('body', 5000,
-        '- Page body is visible')
-      .click('a#start', function() {
-        if(msg) {
-          console.log('\n' + msg + '\n');
-        }
-      })
-    ;
-  },
-
-  // move through scope diagnosis by selecting 'Debt' then 'You are homeless'
-  selectDebtCategory: function(client) {
-    client
-      .waitForElementVisible('.scope-options', 5000)
-      .assert.urlContains('/scope/diagnosis')
-      .assert.containsText('h1', 'What do you need help with?')
-      .useXpath()
-      .click('//a[@href="/scope/diagnosis/n65::n2"]')
-      .useCss()
-      .waitForElementVisible('.previous', 5000)
-      .useXpath()
-      .click('//a[@href="/scope/diagnosis/n65::n2/n4"]')
-      .useCss()
-    ;
-  },
-
-  aboutPage: function(client) {
-    client
-      .waitForElementVisible('a.continue', 5000)
-      .click('a.continue')
-      .waitForElementVisible('input[name="have_partner"]', 5000)
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-    ;
-  },
-
-  aboutPageSetAllToNo: function(client) {
-    this.setYesNoFields(client, ABOUT_YOU_QUESTIONS, 0);
-  },
-
-  setYesNoFields: function(client, fields, val) {
-    var clickOption = function(client, field, val) {
-      var el = util.format('input[name="%s"][value="%s"]', field, val);
-      client.isVisible(el, function(result) {
-        if(result.value === true) {
-          client.click(el);
-        }
-      });
-    };
-
-    if(fields.constructor === Array) {
-      fields.forEach(function(field) {
-        clickOption(client, field, val);
-      });
-    } else {
-      clickOption(client, fields, val);
-    }
-  },
-
   setAllSavingsFieldsToValue: function(client, val) {
     SAVINGS_QUESTIONS.ALL.forEach(function(item) {
       client

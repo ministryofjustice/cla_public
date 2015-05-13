@@ -1,7 +1,5 @@
 'use strict';
 
-var common = require('../../modules/common-functions');
-
 var scenarioTypes = {
   ineligible: {
     label: 'Ineligible',
@@ -381,8 +379,8 @@ module.exports = {
     categories.forEach(function(category) {
       category.scenarios.forEach(function(scenario) {
         scenario.paths.forEach(function(path) {
-          common.startPage(client);
           client
+            .startService()
             .scopeDiagnosis(scenarioTypes[scenario.type].label, [category.name].concat(path))
             .waitForElementVisible(scenarioTypes[scenario.type].identifier, 5000,
               '  - Element ' + scenarioTypes[scenario.type].identifier + ' is present')
