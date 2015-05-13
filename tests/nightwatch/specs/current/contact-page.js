@@ -1,15 +1,14 @@
 'use strict';
 
-var common = require('../../modules/common-functions.js');
-
 function text(n) {
   return new Array(n + 1).join('x');
 }
 
 function contactPage(client) {
-  common.startPage(client);
   client
-    .click('#callback-link');
+    .startService()
+    .click('#callback-link')
+  ;
 }
 
 function willCallWithNotes(client, notes_text) {
@@ -21,11 +20,6 @@ function willCallWithNotes(client, notes_text) {
     .setValue(notes, notes_text)
     .assert.value(notes, notes_text, 'Notes set to ' + length + ' chars')
     .submitForm('form');
-}
-
-function assertNotesError(client) {
-  client
-    .assert.containsText('#field-extra_notes .field-error', 'Your notes must be 4000 characters or less');
 }
 
 function assertConfirmation(client) {

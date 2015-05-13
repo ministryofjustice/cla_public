@@ -5,7 +5,7 @@ var moment = require('moment');
 var eligibleJourney = function(client) {
   client
     .startService()
-    .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'], true)
+    .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
     .aboutSetAllToNo(true, {
       'on_benefits': 1
     })

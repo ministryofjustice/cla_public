@@ -3,23 +3,16 @@
 var common = require('../../modules/common-functions');
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Scope diagnosis': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    client
-      .waitForElementVisible('a.continue', 5000)
-      .click('a.continue')
-      .waitForElementVisible('input[name="have_partner"]', 5000)
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-    ;
-    common.aboutPageSetAllToNo(client);
-    client
-      .submitForm('form')
-      .end()
-    ;
+    client.aboutSetAllToNo(true);
   },
 
   'Start page again': function(client) {
@@ -32,15 +25,11 @@ module.exports = {
     ;
   },
 
-  'Scope diagnosis again': common.selectDebtCategory,
+  'Scope diagnosis again': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'Check option is not selected': function(client) {
-    client
-      .waitForElementVisible('a.continue', 5000)
-      .click('a.continue')
-      .waitForElementVisible('input[name="have_partner"]', 5000)
-      .assert.urlContains('/about')
-    ;
     common.checkAttributeIsNotPresent(client, 'input[name="have_partner"]', 'checked');
 
     client.end();

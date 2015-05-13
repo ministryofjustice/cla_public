@@ -1,18 +1,12 @@
 'use strict';
 
-var common = require('../../modules/common-functions');
-
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
   'Scope diagnosis': function(client) {
-    client
-      .assert.urlContains('/scope/diagnosis')
-      .assert.containsText('h1', 'What do you need help with?')
-      .useXpath()
-      .click('//a[@href="/scope/diagnosis/n65::n0"]')
-      .useCss()
-    ;
+    client.scopeDiagnosis('In scope', ['Clinical negligence']);
   },
 
   'Face-to-face page': function(client) {

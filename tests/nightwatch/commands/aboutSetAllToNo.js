@@ -13,6 +13,8 @@ exports.command = function(shouldSubmitForm, options, callback) {
     log.command('Processing About you page…');
 
     client
+      .assert.urlContains('/about',
+        '  - About you page URL is correct')
       .setYesNoFields(ABOUT_YOU_QUESTIONS, 0, function() {
         console.log('     • All values set to ‘No’');
       })

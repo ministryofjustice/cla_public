@@ -4,7 +4,7 @@ module.exports = {
   'Means test progress indicator': function(client) {
     client
       .startService()
-      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'], true)
+      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
       .waitForElementVisible('.progress-bar', 1000, 'Progress sidebar exists')
 
       .assert.containsText('.progress-step.m-current', 'About you',

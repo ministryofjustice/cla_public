@@ -2,7 +2,7 @@
 
 var log = require('../modules/log');
 
-exports.command = function(scenario, nodes, shouldContinue, callback) {
+exports.command = function(scenario, nodes, callback) {
   var client = this;
 
   this.perform(function() {
@@ -23,10 +23,6 @@ exports.command = function(scenario, nodes, shouldContinue, callback) {
     });
 
     client.useCss();
-
-    if(shouldContinue) {
-      client.click('a.continue');
-    }
   });
 
   if (typeof callback === 'function') {
