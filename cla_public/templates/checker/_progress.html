@@ -13,21 +13,20 @@
     <div class="progress-value" style="width:{{ completion_percentage }}%;"></div>
   </div>
 
-  <h2>{{ _('Your problem area') }}</h2>
-  <ul class="progress-steps">
-    <li class="progress-step m-completed">
-      <a class="step-name" href="{{ url_for('scope.diagnosis') }}">
-        {{ step_status(true) }}
-        {{ session.checker.category_name }}
-      </a>
-    </li>
-  </ul>
-</div>
-
-<div class="progress">
   <h2>{{ _('Your progress') }}</h2>
 
   <ul class="progress-steps">
+    {% if session.checker.category_name %}
+      <li class="progress-step m-completed">
+        <a class="step-name" href="{{ url_for('scope.diagnosis') }}">
+          {{ step_status(true) }}
+          <span class="step-name-title">{{ _('Your problem area') }}</span>
+          <div class="step-name-subtitle">
+            {{ session.checker.category_name }}
+          </div>
+        </a>
+      </li>
+    {% endif %}
     {% for step in steps if step.name in ['problem', 'about'] or (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
       {% set is_active = current_step == step.name %}
 
