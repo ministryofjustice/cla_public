@@ -37,9 +37,12 @@
 
 
 {% block inner_content %}
-
-  <h1>What do you need help with?</h1>
-  <p class="subtitle">To qualify for legal aid, you must have a problem that is covered by legal aid.</p>
+  <h1>{{ _('What do you need help with?') }}</h1>
+  {% if not nodes|length %}
+    <p>
+      {{ _('To qualify for legal aid, you must have a problem that is covered by legal aid.') }}
+    </p>
+  {% endif %}
 
   <div class="scope-options">
     <h2 class="subtitle">{{ heading }}</h2>
