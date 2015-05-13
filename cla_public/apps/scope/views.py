@@ -9,7 +9,7 @@ from flask import views, render_template, current_app, url_for, \
 
 
 OUTCOME_URLS = {
-    DIAGNOSIS_SCOPE.INSCOPE: '/scope/in-scope',
+    DIAGNOSIS_SCOPE.INSCOPE: '/about',
     DIAGNOSIS_SCOPE.INELIGIBLE: '/scope/ineligible',
     DIAGNOSIS_SCOPE.OUTOFSCOPE: '/result/face-to-face',
     DIAGNOSIS_SCOPE.CONTACT: '/contact',
@@ -47,7 +47,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
             api.save(response_json)
 
             outcome_url = OUTCOME_URLS[state]
-            if state in [DIAGNOSIS_SCOPE.INELIGIBLE, DIAGNOSIS_SCOPE.INSCOPE]:
+            if state == DIAGNOSIS_SCOPE.INELIGIBLE:
                 outcome_url = '%s/%s' % (
                     outcome_url,
                     session.checker.category_slug)
@@ -68,14 +68,5 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
                                nodes=nodes)
 
 
-class ScopeInScope(RequiresSession, HelpOrganisations):
-    def clear_session(self):
-        """ Don't clear session """
-        pass
-
-    _template = 'scope/in-scope.html'
-
-
 class ScopeIneligible(HelpOrganisations):
     _template = 'scope/ineligible.html'
-
