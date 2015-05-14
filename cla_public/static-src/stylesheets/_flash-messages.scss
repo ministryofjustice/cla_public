@@ -1,9 +1,9 @@
 .flash-messages {
   position: relative;
+  top: -40px;
   background: $yellow-25;
   padding: 10px 20px;
   font-size: .9em;
-  margin: -10px 0 30px;
   padding-right: 40px;
 
   .flash-messages-close {
