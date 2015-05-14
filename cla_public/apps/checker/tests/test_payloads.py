@@ -118,6 +118,11 @@ class TestApiPayloads(unittest.TestCase):
         payload = self.payload(AboutYouPayload, form_data)
         self.assertNotIn('partner', payload)
 
+        form_data['have_partner'] = YES
+        form_data['in_dispute'] = YES
+        payload = self.payload(AboutYouPayload, form_data)
+        self.assertEqual(payload['has_partner'], NO)
+
         form_data.update({
             'have_dependants': YES,
             'num_dependants': 2,
