@@ -174,3 +174,9 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     'publiclaw': 'pub',
     'benefits': 'wb'
 }
+
+END_SERVICE_FLASH_MESSAGE = _(
+    u'You’ve reached the end of this service. '
+    u'The information you’ve entered was automatically '
+    u'deleted for your security.'
+)

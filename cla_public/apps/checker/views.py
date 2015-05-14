@@ -4,7 +4,7 @@ import logging
 from cla_common.constants import ELIGIBILITY_REASONS
 
 from flask import abort, render_template, redirect, session, url_for, views, \
-    request, flash
+    request
 
 from flask.ext.babel import lazy_gettext as _
 from wtforms.validators import StopValidation
@@ -12,7 +12,6 @@ from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.checker.forms import FindLegalAdviserForm
 
-from cla_public.apps.base.constants import END_SERVICE_FLASH_MESSAGE
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import CATEGORIES, \
     ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES, \
@@ -24,7 +23,7 @@ from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
 from cla_public.apps.checker import filters # Used in templates
-from cla_public.libs.utils import override_locale
+from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
 from cla_public.libs import laalaa
@@ -176,8 +175,6 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return filter(lambda s: not self.skip_on_review(s), self.steps)
 
     def complete(self):
-        flash(unicode(END_SERVICE_FLASH_MESSAGE))
-
         if session.checker.needs_face_to_face:
             return redirect(
                 url_for('.face-to-face', category=session.checker.category)
@@ -238,19 +235,17 @@ class FaceToFace(views.MethodView, object):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
         data = handle_find_legal_adviser_form(form, request.args)
 
-        session.checker.update({
-            'ProblemForm': {'categories': request.args.get('category')}
-        })
+        session.store({'category': request.args.get('category') })
 
-        if session.checker.category:
-            category_name = session.checker.category_name
-        else:
-            category_name = 'your issue'
+        category_name = 'your issue'
+
+        if session.stored['category']:
+            category_name = category_id_to_name(session.stored['category'])
+
+        session.clear_checker()
 
         response = render_template('checker/result/face-to-face.html',
             data=data, form=form, category_name=category_name)
-
-        session.clear_checker()
 
         return response
 
@@ -266,9 +261,7 @@ class EligibleNoCallBack(views.MethodView, object):
         data = handle_find_legal_adviser_form(form, request.args)
 
         session.clear_checker()
-        session.checker.update({
-            'ProblemForm': {'categories': request.args.get('category')}
-        })
+        session.store({'category': request.args.get('category')})
 
         return render_template('checker/result/eligible-no-callback.html',
             data=data, form=form, category_name=session.checker.category_name)

@@ -6,19 +6,18 @@ from werkzeug.http import http_date, parse_date
 from flask import Markup, json
 from flask._compat import iteritems, text_type
 from flask.debughelpers import UnexpectedUnicodeError
-from flask import current_app
+from flask import current_app, flash
 from flask.json import JSONEncoder
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface, \
     SessionMixin, TaggedJSONSerializer
 
-from cla_common.constants import ELIGIBILITY_STATES, ELIGIBILITY_REASONS
+from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.api import post_to_is_eligible_api, ApiError
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
-    PASSPORTED_BENEFITS, YES, CATEGORIES
+    PASSPORTED_BENEFITS, YES, END_SERVICE_FLASH_MESSAGE
 from cla_public.apps.checker.means_test import MeansTest
 from cla_public.apps.checker.utils import passported
-from cla_public.libs.utils import override_locale
-
+from cla_public.libs.utils import override_locale, category_id_to_name
 
 class CustomJSONEncoder(JSONEncoder):
 
@@ -87,9 +86,7 @@ class CheckerSessionObject(dict):
 
     @property
     def category_name(self):
-        selected_name = lambda (slug, name, _): slug == self.category and name
-        selected = filter(None, map(selected_name, CATEGORIES))
-        return selected[0] if selected else None
+        return category_id_to_name(self.category)
 
     @property
     def category_slug(self):
@@ -256,6 +253,8 @@ class CheckerSession(SecureCookieSession, SessionMixin):
         self.stored.update(values_dict)
 
     def clear_checker(self):
+        if self.checker:
+            flash(unicode(END_SERVICE_FLASH_MESSAGE))
         self.checker = CheckerSessionObject()
 
     def clear(self):
