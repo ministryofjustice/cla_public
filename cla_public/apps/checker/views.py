@@ -260,9 +260,11 @@ class EligibleNoCallBack(views.MethodView, object):
 
         session.clear_checker()
         session.store({'category': request.args.get('category')})
+        if session.stored['category']:
+            category_name = category_id_to_name(session.stored['category'])
 
         return render_template('checker/result/eligible-no-callback.html',
-            data=data, form=form, category_name=session.checker.category_name)
+            data=data, form=form, category_name=category_name)
 
 checker.add_url_rule(
     '/find-legal-adviser',
