@@ -97,7 +97,7 @@ class AboutYouPayload(dict):
                 val('aged_60_or_over'),
 
             'has_partner':
-                val('have_partner'),
+                val('have_partner') and not yes('in_dispute'),
 
             'you': {
                 'income': {
