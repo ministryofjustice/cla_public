@@ -51,7 +51,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
                 outcome_url = '%s/%s' % (
                     outcome_url,
                     session.checker.category_slug)
-            if state in [DIAGNOSIS_SCOPE.INELIGIBLE, DIAGNOSIS_SCOPE.OUTOFSCOPE]:
+            elif state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
                 outcome_url = '%s?category=%s' % (
                     outcome_url,
                     session.checker.category)
