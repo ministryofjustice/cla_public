@@ -4,6 +4,7 @@ from cla_common.constants import DIAGNOSIS_SCOPE
 from django.template.defaultfilters import striptags
 import requests
 from cla_public.apps.checker.api import post_to_eligibility_check_api
+from cla_public.apps.checker.constants import CATEGORY_ID_MAPPING
 from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.libs.utils import override_locale
 from flask import current_app, request, session
@@ -97,8 +98,7 @@ class DiagnosisApiClient(object):
 
     def save_category(self, category, note=None):
         session.checker['category'] = category
-        if category == 'violence':
-            category = 'family'
+        category = CATEGORY_ID_MAPPING.get(category, category)
         session.checker.add_note(
             u'User selected category',
             unicode(session.checker.category_name))

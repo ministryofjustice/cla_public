@@ -12,7 +12,8 @@ from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
 
 from cla_public.apps.checker.api import get_api_connection
-from cla_public.apps.checker.constants import YES, NO, PASSPORTED_BENEFITS
+from cla_public.apps.checker.constants import YES, NO, PASSPORTED_BENEFITS, \
+    CATEGORY_ID_MAPPING
 from cla_public.apps.checker.utils import nass, passported
 from cla_public.libs.money_interval import MoneyInterval, to_amount
 from cla_public.libs.utils import classproperty, flatten
@@ -517,7 +518,8 @@ class MeansTest(dict):
             })
 
         if 'category' in session.checker:
-            self['category'] = session.checker['category']
+            category = session.checker['category']
+            self['category'] = CATEGORY_ID_MAPPING.get(category, category)
 
     def update(self, other={}, **kwargs):
         """
