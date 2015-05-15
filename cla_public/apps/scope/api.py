@@ -96,16 +96,9 @@ class DiagnosisApiClient(object):
                 category, name, desc = category_option_from_name(category_name)
         return category
 
-    def save_category(self, category, note=None):
+    def save_category(self, category):
         session.checker['category'] = category
         category = CATEGORY_ID_MAPPING.get(category, category)
-        session.checker.add_note(
-            u'User selected category',
-            unicode(session.checker.category_name))
-        if note:
-            session.checker.add_note(
-                u'Public Diagnosis note:',
-                note)
         post_to_eligibility_check_api(payload={
             'category': category
         })
@@ -113,13 +106,8 @@ class DiagnosisApiClient(object):
     def save(self, response_json):
         state = response_json.get('state')
         nodes = response_json.get('nodes', [])
-        note = None
-        if state == DIAGNOSIS_SCOPE.CONTACT and nodes:
-            note = striptags(nodes[-1]['help_text'])
 
-        self.save_category(
-            self.get_category(response_json),
-            note)
+        self.save_category(self.get_category(response_json))
 
         prev = None
         answers = []
@@ -137,15 +125,21 @@ class DiagnosisApiClient(object):
 
             prev = node
 
-        steps = '\n'.join(
+        steps = '\n\n'.join(
             ['%s: %s' % (i['question'], i['answer']) for i in answers]
         )
-        steps += '\nOutcome: %s' % state
+        steps += '\n\nOutcome: %s' % state
 
         session.checker.add_note(
-            u'Public Diagnosis nodes',
+            u'User selected',
             steps)
 
+        if state == DIAGNOSIS_SCOPE.CONTACT and nodes:
+            note = striptags(nodes[-1]['help_text'])
+            session.checker.add_note(
+                u'Public Diagnosis note',
+                note)
+            
         session.checker['scope_answers'] = answers
 
 diagnosis_api_client = DiagnosisApiClient()
