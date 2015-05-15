@@ -122,31 +122,30 @@ class DiagnosisApiClient(object):
             note)
 
         prev = None
-        step_notes = []
         answers = []
-        for node in nodes:
+        for node in nodes[:-1]:
+            question = gettext('What do you need help with?')
             answer = striptags(node['label'])
 
-            item = {
-                'question': gettext('What do you need help with?'),
-                'answer': answer
-            }
-
             if prev and prev['heading']:
-                item['question'] = prev['heading']
-                answer = '%s: %s' % (prev['heading'], answer)
+                question = prev['heading']
 
-            answers.append(item)
-            step_notes.append(answer)
+            answers.append({
+                'question': question,
+                'answer': answer
+            })
 
             prev = node
 
-        steps = '\n'.join(step_notes)
+        steps = '\n'.join(
+            ['%s: %s' % (i['question'], i['answer']) for i in answers]
+        )
+        steps += '\nOutcome: %s' % state
 
         session.checker.add_note(
             u'Public Diagnosis nodes',
             steps)
 
-        session.checker['scope_answers'] = answers[:-1]
+        session.checker['scope_answers'] = answers
 
 diagnosis_api_client = DiagnosisApiClient()
