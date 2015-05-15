@@ -50,7 +50,7 @@ class FeedbackForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     def api_payload(self):
         environment = current_app.config['CLA_ENV']
-        comment_body = render_template('zendesk-feedback.txt', form=self)
+        comment_body = render_template('emails/zendesk-feedback.txt', form=self)
         subject = 'CLA Public Feedback'
 
         if environment != 'prod':

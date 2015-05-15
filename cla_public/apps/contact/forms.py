@@ -8,7 +8,8 @@ import pytz
 from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
-from wtforms.validators import InputRequired, Optional, Required, Length
+from wtforms.validators import InputRequired, Optional, Required, \
+    Length, Email
 
 from cla_common.constants import ADAPTATION_LANGUAGES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
@@ -63,14 +64,18 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     safe_to_contact = RadioField(
         _(u'Is it safe for us to leave a message on this number?'),
         choices=CONTACT_SAFETY,
-        default='', # Backend doesn't accept `None` as valid value
+        default='',  # Backend doesn't accept `None` as valid value
         validators=[
-            InputRequired(message=_(u'Please choose Yes or No'))],
+            InputRequired(message=_(
+                u'Please choose Yes or No')
+            )
+        ],
     )
     time = AvailabilityCheckerField(
         _(u'Select a time for us to call you'),
-        description=_(u'We’ll try to call you back at the time you '
-                      u'request, but this may not always be possible.'))
+        description=_(
+            u'We’ll try to call you back at the time you '
+            u'request, but this may not always be possible.'))
 
 
 class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -80,14 +85,16 @@ class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
     post_code = StringField(
         _(u'Postcode'),
         validators=[
-            Length(max=12, message=_(u'Your postcode must be 12 characters '
-                                     u'or less')),
+            Length(max=12, message=_(
+                u'Your postcode must be 12 characters '
+                u'or less')),
             Optional()])
     street_address = TextAreaField(
         _(u'Street address'),
         validators=[
-            Length(max=255, message=_(u'Your address must be 255 characters '
-                                      u'or less')),
+            Length(max=255, message=_(
+                u'Your address must be 255 characters '
+                u'or less')),
             Optional()])
 
 
@@ -98,8 +105,9 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     full_name = StringField(
         _(u'Your full name'),
         validators=[
-            Length(max=400, message=_(u'Your full name must be 400 '
-                                      u'characters or less')),
+            Length(max=400, message=_(
+                u'Your full name must be 400 '
+                u'characters or less')),
             InputRequired()])
     callback_requested = RadioField(
         _(u'Contact options'),
@@ -112,13 +120,27 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         validators=[
             IgnoreIf('callback_requested', FieldValue(NO))
         ])
+    email = StringField(
+        _(u'Email address'),
+        description=_(
+            u'If you add your email we will send you the '
+            u'reference number when you submit your details'
+        ),
+        validators=[
+            Length(max=255, message=_(
+                u'Your address must be 255 characters '
+                u'or less')),
+            Email(message=_(u'Invalid email address')),
+            Optional()]
+    )
     address = ValidatedFormField(
         AddressForm)
     extra_notes = TextAreaField(
         _(u'Tell us more about your problem'),
         validators=[
-            Length(max=4000, message=_(u'Your notes must be 4000 characters '
-                                       u'or less')),
+            Length(max=4000, message=_(
+                u'Your notes must be 4000 characters '
+                u'or less')),
             Optional()])
     adaptations = ValidatedFormField(
         AdaptationsForm,
@@ -131,6 +153,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         data = {
             'personal_details': {
                 'full_name': self.full_name.data,
+                'email': self.email.data,
                 'postcode': self.address.form.post_code.data,
                 'mobile_phone': self.callback.form.contact_number.data,
                 'street': self.address.form.street_address.data,

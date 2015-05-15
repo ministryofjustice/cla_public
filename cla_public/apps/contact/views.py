@@ -4,11 +4,13 @@
 from flask import abort, redirect, render_template, session, url_for, views, \
     current_app
 from flask.ext.babel import lazy_gettext as _, gettext
+from flask.ext.mail import Message
 
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, ApiError
+from cla_public.apps.checker.constants import YES
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView
 
@@ -18,6 +20,18 @@ def add_no_cache_headers(response):
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0'
     response.headers['Pragma'] = 'no-cache'
     return response
+
+
+def confirmation_email(data):
+    data['case_ref'] = session.checker['case_ref']
+    data['callback_requested'] = data['callback_requested'] == YES
+    if data['callback_requested']:
+        data['safe_to_contact'] = data['callback']['safe_to_contact'] == 'SAFE'
+
+    return Message(
+        gettext(u'Your Civil Legal Advice reference number'),
+        recipients=[(data['full_name'], data['email'])],
+        body=render_template('emails/confirmation.txt', data=data))
 
 
 class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
@@ -37,6 +51,8 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 u'Please check and try again.')
             return self.get()
         else:
+            if self.form.email.data and current_app.config['MAIL_SERVER']:
+                current_app.mail.send(confirmation_email(self.form.data))
             return redirect(url_for('.confirmation'))
 
     def dispatch_request(self, *args, **kwargs):
