@@ -176,7 +176,6 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
 }
 
 END_SERVICE_FLASH_MESSAGE = _(
-    u'You’ve reached the end of this service. '
-    u'The information you’ve entered was automatically '
-    u'deleted for your security.'
+    u'For your security, the information you have entered has not '
+    u'been stored on your computer or mobile device.'
 )
