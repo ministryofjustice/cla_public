@@ -47,13 +47,18 @@ var categories = [
       {
         type: 'ineligible',
         paths: [
-          ['You\'re living in rented accommodation', 'Your home is in a serious state of disrepair', 'No']
+          ['You own your own home', 'No']
         ]
-      },
+      }
+    ]
+  },
+  {
+    name: 'Domestic violence',
+    scenarios: [
       {
         type: 'contact',
         paths: [
-          ['You\'re living in rented accommodation', 'Harassment', 'A partner, ex-partner or family member', 'Yes']
+          ['Domestic violence', 'Yes']
         ]
       }
     ]
