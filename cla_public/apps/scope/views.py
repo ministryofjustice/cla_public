@@ -13,6 +13,7 @@ OUTCOME_URLS = {
     DIAGNOSIS_SCOPE.INELIGIBLE: '/scope/ineligible',
     DIAGNOSIS_SCOPE.OUTOFSCOPE: '/result/face-to-face',
     DIAGNOSIS_SCOPE.CONTACT: '/contact',
+    DIAGNOSIS_SCOPE.MEDIATION: '/scope/mediation',
 }
 
 
@@ -74,3 +75,8 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
 
 class ScopeIneligible(HelpOrganisations):
     _template = 'scope/ineligible.html'
+
+
+class ScopeMediation(RequiresSession, views.MethodView):
+    def get(self):
+        return render_template('scope/mediation.html')
