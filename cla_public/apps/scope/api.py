@@ -7,6 +7,7 @@ from cla_public.apps.checker.api import post_to_eligibility_check_api
 from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.libs.utils import override_locale
 from flask import current_app, request, session
+from flask.ext.babel import gettext
 
 
 # keys in session
@@ -99,7 +100,7 @@ class DiagnosisApiClient(object):
         if category == 'violence':
             category = 'family'
         session.checker.add_note(
-            u'User selected category:',
+            u'User selected category',
             unicode(session.checker.category_name))
         if note:
             session.checker.add_note(
@@ -122,18 +123,30 @@ class DiagnosisApiClient(object):
 
         prev = None
         step_notes = []
+        answers = []
         for node in nodes:
-            n = striptags(node['label'])
+            answer = striptags(node['label'])
+
+            item = {
+                'question': gettext('What do you need help with?'),
+                'answer': answer
+            }
+
             if prev and prev['heading']:
-                n = '%s: %s' % (prev['heading'], n)
-            step_notes.append(n)
+                item['question'] = prev['heading']
+                answer = '%s: %s' % (prev['heading'], answer)
+
+            answers.append(item)
+            step_notes.append(answer)
+
             prev = node
 
-
         steps = '\n'.join(step_notes)
+
         session.checker.add_note(
-            u'Public Diagnosis nodes:',
+            u'Public Diagnosis nodes',
             steps)
 
+        session.checker['scope_answers'] = answers[:-1]
 
 diagnosis_api_client = DiagnosisApiClient()
