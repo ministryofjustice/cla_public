@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "macros/element.html" as Element %}
+
+{% set title = _('Family mediation') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+
+  <h1>{{ _('You may be able to get legal aid for family mediation') }}</h1>
+  <p class="subtitle">
+    {{ _('Search for a family mediator in your area to find out if you qualify.') }}
+  </p>
+
+  <a class="button button-larger" href="http://www.familymediationcouncil.org.uk/find-local-mediator/" target="_blank">
+    {{ _('Find your local mediator') }}
+  </a>
+
+  {{ Element.satisfaction_survey_prompt() }}
+
+{% endblock %}
