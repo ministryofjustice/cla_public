@@ -132,7 +132,7 @@ class TestAvailability(unittest.TestCase):
                 self.assertMondayMorningUnavailable(form)
 
     def test_bank_holiday_monday_before_11(self):
-        with override_current_time(datetime.datetime(2015, 5, 24, 9, 30)):
+        with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
             tuesday_after_bank_holiday = datetime.datetime(2015, 5, 26, 9, 30)
             self.assertTrue(
                 monday_before_11am_between_eod_friday_and_monday(
@@ -153,7 +153,7 @@ class TestAvailability(unittest.TestCase):
 
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(wed_after_bank_holiday))
 
-        with override_current_time(datetime.datetime(2015, 5, 9, 9, 30)):
+        with override_current_time(datetime.datetime(2015, 5, 9, 10, 30)):
             monday = datetime.datetime(2015, 5, 11, 9, 30)
             self.assertTrue(
                 monday_before_11am_between_eod_friday_and_monday(
