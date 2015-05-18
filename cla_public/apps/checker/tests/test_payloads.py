@@ -163,8 +163,8 @@ class TestApiPayloads(unittest.TestCase):
 
         form_data['have_savings'] = YES
         form_data['have_valuables'] = YES
-        session['AboutYouForm'] = session.get('AboutYouForm', {})
-        session['AboutYouForm'].update(
+        session.checker['AboutYouForm'] = session.checker.get('AboutYouForm', {})
+        session.checker['AboutYouForm'].update(
             have_savings=YES,
             have_valuables=YES)
         payload = self.payload(AboutYouPayload, form_data)
@@ -176,7 +176,7 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(len(payload['property_set']), 0)
 
         form_data['own_property'] = YES
-        session['AboutYouForm'].update(
+        session.checker['AboutYouForm'].update(
             own_property=YES)
         payload = self.payload(AboutYouPayload, form_data)
         self.assertEqual(len(payload['property_set']), 1)
@@ -227,8 +227,8 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['property_set'][0]['main'], YES)
 
     def test_saving_form(self):
-        session['AboutYouForm'] = session.get('AboutYouForm', {})
-        session['AboutYouForm'].update(
+        session.checker['AboutYouForm'] = session.checker.get('AboutYouForm', {})
+        session.checker['AboutYouForm'].update(
             have_savings=YES,
             have_valuables=YES)
         form_data = {
@@ -243,14 +243,14 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['savings']['investment_balance'], 10000)
         self.assertEqual(payload['you']['savings']['asset_balance'], 50000)
 
-        session['AboutYouForm']['have_valuables'] = NO
+        session.checker['AboutYouForm']['have_valuables'] = NO
         payload = self.payload(SavingsPayload, form_data)
 
         self.assertEqual(payload['you']['savings']['asset_balance'], 0,
                          msg=u'Should be 0 if user selected no valuables')
 
-        session['AboutYouForm']['have_savings'] = NO
-        session['AboutYouForm']['have_valuables'] = YES
+        session.checker['AboutYouForm']['have_savings'] = NO
+        session.checker['AboutYouForm']['have_valuables'] = YES
         payload = self.payload(SavingsPayload, form_data)
 
         self.assertEqual(payload['you']['savings']['bank_balance'], 0)
@@ -287,8 +287,8 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['income']['benefits']['per_interval_value'], 4300)
 
     def test_income_form(self):
-        session['AboutYouForm'] = session.get('AboutYouForm', {})
-        session['AboutYouForm'].update(is_employed=YES)
+        session.checker['AboutYouForm'] = session.checker.get('AboutYouForm', {})
+        session.checker['AboutYouForm'].update(is_employed=YES)
 
         form_mi_data = {
             'your_income-earnings': {
@@ -338,8 +338,8 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['deductions']['national_insurance']['per_interval_value'], 300)
 
     def test_income_and_tax_form(self):
-        session['AboutYouForm'] = session.get('AboutYouForm', {})
-        session['AboutYouForm'].update(
+        session.checker['AboutYouForm'] = session.checker.get('AboutYouForm', {})
+        session.checker['AboutYouForm'].update(
             have_partner=YES,
             in_dispute=NO)
 
@@ -349,8 +349,8 @@ class TestApiPayloads(unittest.TestCase):
         self.assertIn('partner', payload)
 
     def test_outgoing_form(self):
-        session['AboutYouForm'] = session.get('AboutYouForm', {})
-        session['AboutYouForm'].update(have_children=YES)
+        session.checker['AboutYouForm'] = session.checker.get('AboutYouForm', {})
+        session.checker['AboutYouForm'].update(have_children=YES)
 
         form_mi_data = {
             'rent': {

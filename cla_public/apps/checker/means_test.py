@@ -222,7 +222,7 @@ class PropertiesPayload(dict):
             return PropertyPayload(prop_data)
 
         properties = filter(None, map(prop, range(3)))
-        if not properties and session.owns_property:
+        if not properties and session.checker.owns_property:
             properties.append(PropertyPayload())
 
         def mortgage(index):
@@ -271,10 +271,10 @@ class SavingsPayload(dict):
         investments = 0
         valuables = 0
 
-        if session.has_savings:
+        if session.checker.has_savings:
             savings = val('savings')
             investments = val('investments')
-        if session.has_valuables:
+        if session.checker.has_valuables:
             valuables = val('valuables')
 
         self.update({
@@ -408,27 +408,27 @@ class IncomePayload(dict):
         payload = income(
             'you',
             'your_income',
-            session.is_self_employed and not session.is_employed,
-            session.is_self_employed or session.is_employed)
+            session.checker.is_self_employed and not session.checker.is_employed,
+            session.checker.is_self_employed or session.checker.is_employed)
 
-        child_tax_credit = session.get('TaxCreditsForm', {}).get(
+        child_tax_credit = session.checker.get('TaxCreditsForm', {}).get(
             'child_tax_credit', MoneyInterval(0))
         payload['you']['income']['tax_credits'] += child_tax_credit
 
-        if session.owns_property:
-            rents = [MoneyInterval(p['rent_amount']) for p in session.get(
+        if session.checker.owns_property:
+            rents = [MoneyInterval(p['rent_amount']) for p in session.checker.get(
                 'PropertiesForm', {}).get('properties', [])]
             total_rent = sum(rents)
             payload['you']['income']['other_income'] += total_rent
 
-        if session.has_partner:
+        if session.checker.has_partner:
             partner_payload = income(
                 'partner',
                 'partner_income',
-                session.partner_is_self_employed and not
-                session.partner_is_employed,
-                session.partner_is_self_employed or
-                session.partner_is_employed)
+                session.checker.partner_is_self_employed and not
+                session.checker.partner_is_employed,
+                session.checker.partner_is_self_employed or
+                session.checker.partner_is_employed)
             payload = recursive_update(payload, partner_payload)
 
         self.update(payload)
@@ -470,7 +470,7 @@ class OutgoingsPayload(dict):
                 }
             }
         })
-        if not session.has_children and not session.has_dependants:
+        if not session.checker.has_children and not session.checker.has_dependants:
             self['you']['deductions']['childcare'] = MoneyInterval(0)
 
 
@@ -486,7 +486,7 @@ class MeansTest(dict):
     def __init__(self, *args, **kwargs):
         super(MeansTest, self).__init__(*args, **kwargs)
 
-        self.reference = session.get('eligibility_check', None)
+        self.reference = session.checker.get('eligibility_check', None)
 
         def zero_finances():
             return {
@@ -527,7 +527,7 @@ class MeansTest(dict):
             'specific_benefits': {}
         })
 
-        if session.has_partner:
+        if session.checker.has_partner:
             self.update({
                 'partner': zero_finances(),
             })
@@ -558,8 +558,8 @@ class MeansTest(dict):
         ]
 
         for form in forms:
-            if form in session:
-                self.update_from_form(form, flatten(session[form]))
+            if form in session.checker:
+                self.update_from_form(form, flatten(session.checker[form]))
 
     def save(self):
         sentry = getattr(current_app, 'sentry', None)
@@ -571,7 +571,7 @@ class MeansTest(dict):
             else:
                 response = backend.eligibility_check.post(self)
                 self.reference = response['reference']
-                session['eligibility_check'] = self.reference
+                session.checker['eligibility_check'] = self.reference
         except (ConnectionError, Timeout, SlumberBaseException) as e:
             if sentry:
                 sentry.captureException()

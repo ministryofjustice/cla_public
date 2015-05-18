@@ -30,7 +30,7 @@
     },
 
     cacheEls: function() {
-      this.progressStepLinks = $('.progress-step.m-completed a');
+      this.progressStepLinks = $('.progress-step a');
     }
   };
 }());

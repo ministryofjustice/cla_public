@@ -115,7 +115,7 @@ class PropertiesFormMixin(object):
         val = 0
         if self._mortgage_deduction:
             val += self._mortgage_deduction
-        if session.has_partner and self._pmortgage:
+        if session.checker.has_partner and self._pmortgage:
             val += self._pmortgage
         return val
 
@@ -231,7 +231,7 @@ class IncomeFormMixin(object):
     def incomeform_data(self):
         d = flatten_dict('your_income', self.incomeform_your_income())
 
-        if session.has_partner:
+        if session.checker.has_partner:
             d.update(flatten_dict(
                 'partner_income', self.incomeform_partner_income()))
 
@@ -319,6 +319,6 @@ class FormDataConverter(
         val = 0
         if your_value:
             val += your_value
-        if session.has_partner and partner_value:
+        if session.checker.has_partner and partner_value:
             val += partner_value
         return val

@@ -174,3 +174,8 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     'publiclaw': 'pub',
     'benefits': 'wb'
 }
+
+END_SERVICE_FLASH_MESSAGE = _(
+    u'For your security, the information you have entered has not '
+    u'been stored on your computer or mobile device.'
+)

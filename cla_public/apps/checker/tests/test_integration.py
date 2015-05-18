@@ -37,7 +37,7 @@ def error_msg(msg):
         '{msg} ({session_eligibility})\n'
         'Means test: {data}\n').format(
             msg=msg,
-            session_eligibility=session.eligibility,
+            session_eligibility=session.checker.eligibility,
             data=pformat(dict(mt)))
 
 

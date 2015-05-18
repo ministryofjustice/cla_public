@@ -20,7 +20,7 @@ RUN echo "Europe/London" > /etc/timezone  &&  dpkg-reconfigure -f noninteractive
 RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
   apt-get -y --force-yes install apt-utils python-pip \
   python-dev build-essential git software-properties-common \
-  python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev
+  python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev
 
 # Install Nginx.
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update

@@ -1,41 +1,47 @@
 from collections import OrderedDict
-import datetime
-
-from flask import current_app
+import uuid
+from base64 import b64encode, b64decode
+from datetime import datetime, date, time
+from werkzeug.http import http_date, parse_date
+from flask import Markup, json
+from flask._compat import iteritems, text_type
+from flask.debughelpers import UnexpectedUnicodeError
+from flask import current_app, flash
 from flask.json import JSONEncoder
-from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
-from requests.exceptions import ConnectionError, Timeout
+from flask.sessions import SecureCookieSession, SecureCookieSessionInterface, \
+    SessionMixin, TaggedJSONSerializer
 
 from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.api import post_to_is_eligible_api, ApiError
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
-    PASSPORTED_BENEFITS, YES, CATEGORIES
+    PASSPORTED_BENEFITS, YES, END_SERVICE_FLASH_MESSAGE
+from cla_public.apps.checker.means_test import MeansTest
 from cla_public.apps.checker.utils import passported
-from cla_public.libs.utils import override_locale
-
+from cla_public.libs.utils import override_locale, category_id_to_name
 
 class CustomJSONEncoder(JSONEncoder):
 
     def default(self, obj):
-        if any([isinstance(obj, datetime.date),
-                isinstance(obj, datetime.time),
-                isinstance(obj, datetime.datetime)]):
+        if any([isinstance(obj, date),
+                isinstance(obj, time),
+                isinstance(obj, datetime)]):
             return obj.isoformat()
         return super(CustomJSONEncoder, self).default(obj)
 
 
-class CheckerSession(SecureCookieSession):
+class CheckerSessionObject(dict):
     "Provides some convenience properties for inter-page logic"
-
-    expires_override = None
+    _eligibility = None
 
     def __init__(self, *args, **kwargs):
-        super(CheckerSession, self).__init__(*args, **kwargs)
+        super(CheckerSessionObject, self).__init__(*args, **kwargs)
         self._eligibility = None
+        self._reasons = None
 
     def __setitem__(self, *args, **kwargs):
-        super(CheckerSession, self).__setitem__(*args, **kwargs)
+        super(CheckerSessionObject, self).__setitem__(*args, **kwargs)
         self._eligibility = None
+        self._reasons = None
 
     def field(self, form_name, field_name, default=None):
         return self.get(form_name, {}).get(field_name, default)
@@ -45,6 +51,10 @@ class CheckerSession(SecureCookieSession):
         return self.field('ProblemForm', 'categories') in F2F_CATEGORIES
 
     @property
+    def ineligible_reasons(self):
+        return self._reasons or []
+
+    @property
     def ineligible(self):
         return self.eligibility == ELIGIBILITY_STATES.NO
 
@@ -52,7 +62,7 @@ class CheckerSession(SecureCookieSession):
     def eligibility(self):
         if self._eligibility is None:
             try:
-                self._eligibility = post_to_is_eligible_api()
+                self._eligibility, self._reasons = post_to_is_eligible_api()
             except ApiError:
                 self._eligibility = ELIGIBILITY_STATES.UNKNOWN
         return self._eligibility
@@ -76,9 +86,7 @@ class CheckerSession(SecureCookieSession):
 
     @property
     def category_name(self):
-        selected_name = lambda (slug, name, _): slug == self.category and name
-        selected = filter(None, map(selected_name, CATEGORIES))
-        return selected[0] if selected else None
+        return category_id_to_name(self.category)
 
     @property
     def category_slug(self):
@@ -193,26 +201,133 @@ class CheckerSession(SecureCookieSession):
     def callback_requested(self):
         return self.is_yes('ContactForm', 'callback_requested')
 
+
+class CheckerSession(SecureCookieSession, SessionMixin):
+    "Provides some convenience properties for inter-page logic"
+
+    _key = 'checker'
+    _stored_key = 'stored'
+    expires_override = None
+
+    def __init__(self, *args, **kwargs):
+        self.checker = CheckerSessionObject()
+        self.stored = {}
+        super(CheckerSession, self).__init__(*args, **kwargs)
+
+    @property
+    def checker(self):
+        return self[self._key]
+
+    @checker.setter
+    def checker(self, value):
+        checker = CheckerSessionObject()
+        checker.update(value)
+        self[self._key] = value
+
+    @property
+    def stored(self):
+        return self[self._stored_key]
+
+    @stored.setter
+    def stored(self, value):
+        assert isinstance(value, dict)
+        self[self._stored_key] = value
+
+    @property
+    def is_current(self):
+        return not self.get('is_expired', False) and self.checker
+
     def clear_and_store_ref(self):
-        if not self.get('is_expired', False):
-            store = {
-                'is_expired': True,
-                'stored_case_ref': self.get('case_ref'),
-                'stored_callback_time': self.callback_time,
-                'stored_callback_requested': self.callback_requested,
-                'stored_category': self.category,
-                'stored_eligibility': self.eligibility
+        if self.checker:
+            stored = {
+                'case_ref': self.checker.get('case_ref'),
+                'callback_time': self.checker.callback_time,
+                'callback_requested': self.checker.callback_requested,
+                'category': self.checker.category,
+                'eligibility': self.checker.eligibility
             }
-            self.clear()
-            self.update(store)
+            self.clear_checker()
+            self.stored = stored
+
+    def store(self, values_dict):
+        self.stored.update(values_dict)
+
+    def clear_checker(self):
+        if self.checker:
+            flash(unicode(END_SERVICE_FLASH_MESSAGE))
+        self.checker = CheckerSessionObject()
 
     def clear(self):
         if current_app.config['CLEAR_SESSION']:
             super(CheckerSession, self).clear()
+            self.checker = CheckerSessionObject()
+
+
+class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
+    def dumps(self, value):
+        def _tag(value):
+            if isinstance(value, CheckerSessionObject):
+                return {' ch': dict((k, _tag(v)) for k, v in iteritems(value))}
+            elif isinstance(value, MeansTest):
+                return {' mt': dict((k, _tag(v)) for k, v in iteritems(value))}
+            elif isinstance(value, tuple):
+                return {' t': [_tag(x) for x in value]}
+            elif isinstance(value, uuid.UUID):
+                return {' u': value.hex}
+            elif isinstance(value, bytes):
+                return {' b': b64encode(value).decode('ascii')}
+            elif callable(getattr(value, '__html__', None)):
+                return {' m': text_type(value.__html__())}
+            elif isinstance(value, list):
+                return [_tag(x) for x in value]
+            elif isinstance(value, datetime):
+                return {' d': http_date(value)}
+            elif isinstance(value, dict):
+                return dict((k, _tag(v)) for k, v in iteritems(value))
+            elif isinstance(value, str):
+                try:
+                    return text_type(value)
+                except UnicodeError:
+                    raise UnexpectedUnicodeError(u'A byte string with '
+                        u'non-ASCII data was passed to the session system '
+                        u'which can only store unicode strings.  Consider '
+                        u'base64 encoding your string (String was %r)' % value)
+            return value
+        return json.dumps(_tag(value), separators=(',', ':'))
+
+    def loads(self, value):
+        def object_hook(obj):
+            if len(obj) != 1:
+                return obj
+            the_key, the_value = next(iteritems(obj))
+            if the_key == ' t':
+                return tuple(the_value)
+            elif the_key == ' u':
+                return uuid.UUID(the_value)
+            elif the_key == ' b':
+                return b64decode(the_value)
+            elif the_key == ' m':
+                return Markup(the_value)
+            elif the_key == ' d':
+                return parse_date(the_value)
+            elif the_key == ' ch':
+                c = CheckerSessionObject()
+                c.update(the_value)
+                return c
+            elif the_key == ' mt':
+                m = MeansTest()
+                m.update(the_value)
+                return m
+            return obj
+        return json.loads(value, object_hook=object_hook)
+
+
+checker_session_serializer = CheckerTaggedJSONSerializer()
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):
     session_class = CheckerSession
+    serializer = checker_session_serializer
 
     # Need to override the expires so that we can set the
     # session to expire 20 seconds from page close
@@ -221,4 +336,4 @@ class CheckerSessionInterface(SecureCookieSessionInterface):
             if session.expires_override:
                 return session.expires_override
 
-            return datetime.datetime.utcnow() + app.permanent_session_lifetime
+            return datetime.utcnow() + app.permanent_session_lifetime

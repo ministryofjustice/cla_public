@@ -119,33 +119,34 @@ def log_api_errors_to_sentry(fn):
 @log_api_errors_to_sentry
 def post_to_eligibility_check_api(form):
     backend = get_api_connection()
-    reference = session.get('eligibility_check')
+    reference = session.checker.get('eligibility_check')
     payload = form.api_payload()
 
     if reference is None:
         payload = initialise_eligibility_check(payload)
         response = backend.eligibility_check.post(payload)
-        session['eligibility_check'] = response['reference']
+        session.checker['eligibility_check'] = response['reference']
     else:
         backend.eligibility_check(reference).patch(payload)
 
 
-@on_timeout(response=ELIGIBILITY_STATES.UNKNOWN)
+@on_timeout(response=(ELIGIBILITY_STATES.UNKNOWN, []))
 def post_to_is_eligible_api():
     backend = get_api_connection()
-    reference = session.get('eligibility_check')
+    reference = session.checker.get('eligibility_check')
 
     if reference:
         response = backend.eligibility_check(reference).is_eligible().post({})
-        return response.get('is_eligible')
+        return response.get('is_eligible'), response.get('reasons')
+    return None, None
 
 
 def should_attach_eligibility_check():
-    return 'eligibility_check' in session
+    return 'eligibility_check' in session.checker
 
 
 def attach_eligibility_check(payload):
-    payload['eligibility_check'] = session.get('eligibility_check')
+    payload['eligibility_check'] = session.checker.get('eligibility_check')
 
 
 @log_api_errors_to_sentry
@@ -157,7 +158,7 @@ def post_to_case_api(form):
         attach_eligibility_check(payload)
 
     response = backend.case.post(payload)
-    session['case_ref'] = response['reference']
+    session.checker['case_ref'] = response['reference']
 
 
 @on_timeout(response='[]')

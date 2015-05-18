@@ -7,7 +7,9 @@ import os
 from flask import Flask, render_template
 from flask.ext.babel import Babel
 from flask.ext.cache import Cache
+from flask.ext.mail import Mail
 from raven.contrib.flask import Sentry
+import urllib3.contrib.pyopenssl
 
 from cla_public.django_to_jinja import change_jinja_templates
 from cla_public.apps.addressfinder_proxy.views import addressfinder
@@ -41,6 +43,8 @@ def create_app(config_file=None):
     app.babel.localeselector(get_locale)
 
     app.cache = Cache(app)
+
+    app.mail = Mail(app)
 
     for extension in app.config['EXTENSIONS']:
         extension.init_app(app)
@@ -95,3 +99,6 @@ def register_error_handlers(app):
             app.register_error_handler(code, make_handler(code, template))
 
     return app
+
+
+urllib3.contrib.pyopenssl.inject_into_urllib3()

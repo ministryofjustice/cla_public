@@ -20,6 +20,7 @@ module.exports = {
       .waitForElementVisible('.legal-adviser-search', 5000)
       .assert.urlContains('/face-to-face')
       .assert.containsText('h1', 'You may be able to get free advice from a legal adviser')
+      .checkFlashMessage()
     ;
   },
 

@@ -27,7 +27,7 @@ class PartnerMixin(object):
         partner_label = kwargs.pop('partner_label', kwargs.get('label'))
         partner_description = kwargs.pop(
             'partner_description', kwargs.get('description'))
-        if session.has_partner:
+        if session.checker.has_partner:
             kwargs['label'] = partner_label
             kwargs['description'] = partner_description
         super(PartnerMixin, self).__init__(*args, **kwargs)

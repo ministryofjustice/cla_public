@@ -16,8 +16,8 @@
     {{ Form.money_interval_fieldset(form.rent) }}
     {{ Form.money_interval_fieldset(form.maintenance) }}
     {{ Form.text_input_fieldset(form.income_contribution, prefix="£", class_='m-small') }}
-    {% if session.has_children or session.has_dependants %}
-      {{ Form.money_interval_fieldset(form.childcare, skip=not session.has_children and not session.has_dependants) }}
+    {% if session.checker.has_children or session.checker.has_dependants %}
+      {{ Form.money_interval_fieldset(form.childcare, skip=not session.checker.has_children and not session.checker.has_dependants) }}
     {% endif %}
 
     {{ Element.get_in_touch_alert() }}

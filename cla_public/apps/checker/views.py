@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "Checker views"
 import logging
+from cla_common.constants import ELIGIBILITY_REASONS
 
 from flask import abort, render_template, redirect, session, url_for, views, \
     request
@@ -22,7 +23,7 @@ from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
 from cla_public.apps.checker import filters # Used in templates
-from cla_public.libs.utils import override_locale
+from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession
 from cla_public.libs import laalaa
@@ -62,7 +63,7 @@ def handle_find_legal_adviser_form(form, args):
 class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
-        means_test = session.get('means_test', MeansTest())
+        means_test = session.checker.get('means_test', MeansTest())
         means_test.update_from_session()
         try:
             means_test.save()
@@ -98,7 +99,7 @@ def is_null(field):
 class CheckerStep(UpdatesMeansTest, FormWizardStep):
 
     def completed_fields(self):
-        session_data = session.get(self.form_class.__name__, {})
+        session_data = session.checker.get(self.form_class.__name__, {})
         form = self.form_class(**session_data)
 
         def user_completed(field):
@@ -131,7 +132,7 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
 
     @property
     def is_completed(self):
-        return session.get(
+        return session.checker.get(
             self.form_class.__name__,
             {}
         ).get('is_completed', False)
@@ -174,22 +175,24 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return filter(lambda s: not self.skip_on_review(s), self.steps)
 
     def complete(self):
-
-        if session.needs_face_to_face:
+        if session.checker.needs_face_to_face:
             return redirect(
-                url_for('.face-to-face', category=session.category)
+                url_for('.face-to-face', category=session.checker.category)
             )
 
-        if session.ineligible:
+        if session.checker.ineligible:
+            session.store({
+                'ineligible_reasons': session.checker.ineligible_reasons
+            })
             return redirect(url_for(
                 '.help_organisations',
-                category_name=session.category_slug))
+                category_name=session.checker.category_slug))
 
         return redirect(url_for('.eligible'))
 
     def skip(self, step, for_review_page=False):
 
-        if session.needs_face_to_face:
+        if session.checker.needs_face_to_face:
             return True
 
         if step.name == 'review':
@@ -197,22 +200,22 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
 
         if not for_review_page \
                 and step.name not in ('problem', 'about', 'benefits') \
-                and session.ineligible:
+                and session.checker.ineligible:
             return True
 
         if step.name == 'benefits':
-            return not session.is_on_benefits
+            return not session.checker.is_on_benefits
 
         if step.name == 'property':
-            return not session.owns_property
+            return not session.checker.owns_property
 
         if step.name == 'savings':
-            return not session.has_savings_or_valuables
+            return not session.checker.has_savings_or_valuables
 
         if step.name == 'benefits-tax-credits':
-            return not session.children_or_tax_credits
+            return not session.checker.children_or_tax_credits
 
-        if session.is_on_passported_benefits \
+        if session.checker.is_on_passported_benefits \
                 and step.name not in ('problem', 'about', 'benefits'):
             return True
 
@@ -232,19 +235,17 @@ class FaceToFace(views.MethodView, object):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
         data = handle_find_legal_adviser_form(form, request.args)
 
-        session.update({
-            'ProblemForm': {'categories': request.args.get('category')}
-        })
+        session.store({'category': request.args.get('category') })
 
-        if session.category:
-            category_name = session.category_name
-        else:
-            category_name = 'your issue'
+        category_name = 'your issue'
+
+        if session.stored['category']:
+            category_name = category_id_to_name(session.stored['category'])
+
+        session.clear_checker()
 
         response = render_template('checker/result/face-to-face.html',
             data=data, form=form, category_name=category_name)
-
-        session.clear()
 
         return response
 
@@ -259,13 +260,11 @@ class EligibleNoCallBack(views.MethodView, object):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
         data = handle_find_legal_adviser_form(form, request.args)
 
-        session.clear()
-        session.update({
-            'ProblemForm': {'categories': request.args.get('category')}
-        })
+        session.clear_checker()
+        session.store({'category': request.args.get('category')})
 
         return render_template('checker/result/eligible-no-callback.html',
-            data=data, form=form, category_name=session.category_name)
+            data=data, form=form, category_name=session.checker.category_name)
 
 checker.add_url_rule(
     '/find-legal-adviser',
@@ -277,9 +276,9 @@ class Eligible(RequiresSession, views.MethodView, object):
 
     def get(self):
         steps = steps = CheckerWizard('').relevant_steps[:-1]
-        if session.category in NO_CALLBACK_CATEGORIES:
+        if session.checker.category in NO_CALLBACK_CATEGORIES:
             return redirect(
-                url_for('.find-legal-adviser', category=session.category)
+                url_for('.find-legal-adviser', category=session.checker.category)
             )
 
         return render_template(
@@ -297,8 +296,11 @@ checker.add_url_rule(
 
 @checker.route('/help-organisations/<category_name>', methods=['GET'])
 def help_organisations(category_name):
-    if session:
-        session.clear()
+    if session.checker:
+        session.store({
+            'has_partner': session.checker.has_partner
+        })
+        session.clear_checker()
 
     category_name = category_name.replace('-', ' ').capitalize()
 
@@ -317,9 +319,14 @@ def help_organisations(category_name):
         category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
     trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
 
+    ineligible_reasons = session.stored.get('ineligible_reasons', [])
+
     organisations = get_organisation_list(article_category__name=category_name)
     return render_template(
         'help-organisations.html',
         organisations=organisations,
         category=category,
-        category_name=trans_category_name)
+        category_name=trans_category_name,
+        ELIGIBILITY_REASONS=ELIGIBILITY_REASONS,
+        ineligible_reasons=ineligible_reasons
+        )

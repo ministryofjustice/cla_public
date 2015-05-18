@@ -1,0 +1,28 @@
+.character-counter {
+  font-size: 13px;
+  color: $grey-1;
+  margin-top: 5px;
+
+  &.counter-low {
+    -webkit-animation: pulsate 220ms infinite alternate;
+    animation: pulsate 220ms infinite alternate;
+    color: $mellow-red;
+  }
+}
+
+@-webkit-keyframes pulsate {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: .7;
+  }
+}
+@keyframes pulsate {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: .7;
+  }
+}

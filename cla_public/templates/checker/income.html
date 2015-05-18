@@ -15,8 +15,8 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% with skip = not (session.is_employed or session.is_self_employed) %}
-      {% if session.has_partner %}
+    {% with skip = not (session.checker.is_employed or session.checker.is_self_employed) %}
+      {% if session.checker.has_partner %}
         <fieldset class="fieldset-group">
           <header>
             <h3>{{ _('Your money coming in') }}</h3>
@@ -35,13 +35,13 @@
         {{ Form.money_interval_fieldset(form.your_income.maintenance) }}
         {{ Form.money_interval_fieldset(form.your_income.pension) }}
         {{ Form.money_interval_fieldset(form.your_income.other_income) }}
-      {% if session.has_partner %}
+      {% if session.checker.has_partner %}
         </fieldset>
       {% endif %}
     {% endwith %}
-    {% if session.has_partner %}
+    {% if session.checker.has_partner %}
       <fieldset class="fieldset-group">
-        {% with skip_for_partner = not (session.partner_is_employed or session.partner_is_self_employed) %}
+        {% with skip_for_partner = not (session.checker.partner_is_employed or session.checker.partner_is_self_employed) %}
           <header>
             <h3>{{ _('Your partner’s money coming in') }}</h3>
           </header>
