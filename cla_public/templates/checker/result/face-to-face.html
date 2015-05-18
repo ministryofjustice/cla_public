@@ -65,6 +65,14 @@
       </p>
     {% endif %}
 
+    {% if session.stored.category == 'mentalhealth' %}
+    <p>
+      {% trans %}If you're applying for legal aid for a mental health issue,
+        the requirements for the financial assessment are less rigorous than
+        for other legal aid problems.{% endtrans %}
+    </p>
+    {% endif %}
+
     <p>
       {% trans %}Your adviser will check whether you qualify for legal aid at
       no cost to you. If you qualify for legal aid, you will not have to pay
