@@ -50,24 +50,39 @@
 
   <p>
     {% trans %}If the operator you speak to thinks you might qualify, they will
-    put you through to a CLA specialist adviser. Your CLA specialist adviser will
+    put you through to a specialist adviser. Your specialist adviser will
     ask you more questions before making the final decision about whether you
     qualify for legal aid.{% endtrans %}
   </p>
 
-  <p>
-    {% trans %}You will need to provide evidence of your financial circumstances
-    and maybe your problem. Your CLA specialist adviser will explain
-    what is needed.{% endtrans %}
-  </p>
+  {% if session.stored.category == 'violence' %}
+    <p>
+      {% trans %}Please be aware that the specialist adviser will need
+      evidence of the domestic violence before they can make a decision
+      on your case.{% endtrans %}
+      <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external" target="_blank">
+        {{ _('Find out what you can use as evidence') }}</a>.
+    </p>
+    <p>
+      {% trans %}You will also need to provide evidence of your financial
+      circumstances. Your specialist adviser will explain what is
+      needed.{% endtrans %}
+    </p>
+  {% else %}
+    <p>
+      {% trans %}You will need to provide evidence of your financial circumstances
+      and maybe your problem. Your specialist adviser will explain
+      what is needed.{% endtrans %}
+    </p>
+  {% endif %}
 
   <p>
-    {% trans %}If your CLA specialist adviser takes your case on they will
+    {% trans %}If your specialist adviser takes your case on they will
     communicate with you by telephone, email or post.{% endtrans %}
   </p>
 
   <p>
-    {% trans %}If your CLA adviser decides that you need to speak to someone in
+    {% trans %}If your adviser decides that you need to speak to someone in
     person or if you need someone to represent you in court, they
     will organise this.{% endtrans %}
   </p>
