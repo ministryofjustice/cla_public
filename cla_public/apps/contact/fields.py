@@ -17,12 +17,14 @@ from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, \
     DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import day_choice, time_choice, \
-    monday_before_11am_between_eod_friday_and_monday
+    monday_before_11am_between_eod_friday_and_monday, monday_after_11_hours
 
 
 OPERATOR_HOURS = OpeningHours(**settings.OPERATOR_HOURS)
 OPERATOR_HOURS.day_hours.insert(0, (
-    monday_before_11am_between_eod_friday_and_monday, None))
+    monday_before_11am_between_eod_friday_and_monday,
+    monday_after_11_hours()
+))
 
 
 class FormattedChoiceField(object):
@@ -46,6 +48,12 @@ class FormattedChoiceField(object):
             raise ValueError(self.gettext('Not a valid choice'))
 
 
+def time_slots_for_day(day):
+    slots = OPERATOR_HOURS.time_slots(day)
+    slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
+    return map(time_choice, slots)
+
+
 class DayChoiceField(FormattedChoiceField, SelectField):
     """
     Select field with next `num_days` days as options
@@ -60,9 +68,7 @@ class DayChoiceField(FormattedChoiceField, SelectField):
         days = OPERATOR_HOURS.available_days(num_days)
 
         def time_slots(day):
-            slots = OPERATOR_HOURS.time_slots(day.date())
-            slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
-            slots = OrderedDict(map(time_choice, slots))
+            slots = OrderedDict(time_slots_for_day(day.date()))
             return (self._format(day), slots)
 
         return dict(map(time_slots, days))
@@ -95,6 +101,10 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
         self.choices = map(time_choice, choices_callback())
         if self.choices:
             self.default, _ = random.choice(self.choices)
+
+    def set_day_choices(self, day):
+        self.choices = time_slots_for_day(day)
+        self.default, _ = random.choice(self.choices)
 
     def process_data(self, value):
         if isinstance(value, basestring):
@@ -170,6 +180,10 @@ class AvailabilityCheckerForm(NoCsrfForm):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC
+
+        day = datetime.datetime.strptime(self.day.choices[0][0], "%Y%m%d").date()
+        self.time_in_day.set_day_choices(day)
+
 
     def scheduled_time(self, today=None):
         """
