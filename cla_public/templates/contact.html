@@ -19,15 +19,34 @@
       {% endcall %}
     {% endif %}
     <h1>{{ title }}</h1>
-    <p>
-      {% trans %}Please submit your details to get in touch with Civil Legal Advice (CLA).{% endtrans %}
-    </p>
-    <p>
-      {% trans %}You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
-      <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
-      or ask us to call you back, which is free.{% endtrans %}
-    </p>
-    <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+    {#
+      'n18' is the index of the node which corresponds to 'yes' in response
+      to question 'Are you at immediate risk of harm?'
+    #}
+    {% if 'n18' in session.checker.diagnosis_previous_choices %}
+      <h2 class="subtitle">
+        {% trans %}If you're in immediate danger please call Civil Legal
+        Advice on 0345 345 4 345. Call charges apply.{% endtrans %}
+      </h2>
+      <p>
+        {% trans %}You can also ask us to call you back using the form below,
+        which is free.{% endtrans %}
+      </p>
+      <p>
+        {% trans %}If you're in an emergency situation, please call the police
+        on 999.{% endtrans %}
+      </p>
+    {% else %}
+      <p>
+        {% trans %}Please submit your details to get in touch with Civil Legal Advice (CLA).{% endtrans %}
+      </p>
+      <p>
+        {% trans %}You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
+        <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
+        or ask us to call you back, which is free.{% endtrans %}
+      </p>
+      <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+    {% endif %}
   {% endblock %}
 
   <form method="POST" action="{{ url_for('contact.get_in_touch') }}" class="contact-form">
