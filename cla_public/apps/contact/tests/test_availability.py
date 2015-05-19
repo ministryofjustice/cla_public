@@ -167,6 +167,8 @@ class TestAvailability(unittest.TestCase):
 
 
 class TestDayTimeChoices(unittest.TestCase):
+    def assertDayInChoices(self, day, choices):
+        self.assertIn(day, [d for d, _ in choices])
 
     def test_day_time_choices(self):
         with override_current_time(datetime.datetime(2015, 2, 13, 21)):
@@ -180,6 +182,25 @@ class TestDayTimeChoices(unittest.TestCase):
             self.assertEqual(18, len(choices['20150216']))
             # can book any slot on tuesday
             self.assertEqual(22, len(choices['20150217']))
+
+    def test_monday_available_before_11_on_saturday(self):
+        with override_current_time(datetime.datetime(2015, 5, 9, 10, 30)):
+            form = Mock()
+            field = DayChoiceField()
+            field = field.bind(form, 'day')
+            self.assertDayInChoices('20150511', field.choices)
+
+        with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
+            form = Mock()
+            field = DayChoiceField()
+            field = field.bind(form, 'day')
+            print field.choices
+            self.assertDayInChoices('20150526', field.choices)
+
+    def test_available_days(self):
+        with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
+            days = OPERATOR_HOURS.available_days()
+            self.assertIn(datetime.datetime(2015, 5, 26, 10, 30), days)
 
 
 class TestCallbackInPastBug(unittest.TestCase):
