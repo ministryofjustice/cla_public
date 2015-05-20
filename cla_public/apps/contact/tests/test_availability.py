@@ -3,6 +3,7 @@ import datetime
 import logging
 from mock import Mock
 import unittest
+import mock
 
 from wtforms import Form
 from wtforms.validators import InputRequired, ValidationError
@@ -13,6 +14,8 @@ from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, \
     OPERATOR_HOURS, TimeChoiceField
 from cla_public.apps.contact.forms import ContactForm
+from cla_public.libs.call_centre_availability import \
+    monday_before_11am_between_eod_friday_and_monday
 
 
 logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
@@ -27,6 +30,13 @@ def override_current_time(dt):
     call_centre_availability.current_datetime = original
 
 
+def bank_holidays():
+    return [
+        datetime.datetime(2014, 12, 25, 0, 0),
+        datetime.datetime(2015, 5, 25, 0, 0)
+    ]
+
+
 class TestAvailability(unittest.TestCase):
 
     def setUp(self):
@@ -35,8 +45,11 @@ class TestAvailability(unittest.TestCase):
         self.ctx.push()
         self.now = datetime.datetime(2014, 11, 24, 9, 30)
         self.validator = None
-        call_centre_availability.bank_holidays = lambda: \
-            [datetime.datetime(2014, 12, 25, 0, 0)]
+        self.patcher = mock.patch('cla_common.call_centre_availability.bank_holidays', bank_holidays)
+        self.patcher.start()
+
+    def tearDown(self):
+        self.patcher.stop()
 
     def assertAvailable(self, time, form=None):
         form = form or Mock()
@@ -63,6 +76,7 @@ class TestAvailability(unittest.TestCase):
                     time=time, now=self.now))
 
     def test_available_slot_today_next_slot(self):
+
         self.validator = AvailableSlot(DAY_TODAY)
         self.assertNotAvailable(datetime.time(11, 0))
         self.assertAvailable(datetime.time(11, 30))
@@ -107,8 +121,54 @@ class TestAvailability(unittest.TestCase):
             form.day.data = monday
             self.assertMondayMorningUnavailable(form)
 
+        # Tuesday after bank holiday
+        with override_current_time(datetime.datetime(2015, 5, 24, 9, 30)):
+            tuesday = datetime.date(2015, 5, 25)
+            for time in times.values():
+                self.now = time
+                self.validator = AvailableSlot(DAY_SPECIFIC)
+                form = Mock()
+                form.day.data = tuesday
+                self.assertMondayMorningUnavailable(form)
+
+    def test_bank_holiday_monday_before_11(self):
+        with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
+            tuesday_after_bank_holiday = datetime.datetime(2015, 5, 26, 9, 30)
+            self.assertTrue(
+                monday_before_11am_between_eod_friday_and_monday(
+                    tuesday_after_bank_holiday))
+
+            self.assertFalse(OPERATOR_HOURS.can_schedule_callback(tuesday_after_bank_holiday))
+
+            tuesday_after_bank_holiday_after_11 = datetime.datetime(2015, 5, 26, 11, 30)
+            self.assertFalse(
+                monday_before_11am_between_eod_friday_and_monday(
+                    tuesday_after_bank_holiday_after_11))
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(tuesday_after_bank_holiday_after_11))
+
+            wed_after_bank_holiday = datetime.datetime(2015, 5, 27, 9, 30)
+            self.assertFalse(
+                monday_before_11am_between_eod_friday_and_monday(
+                    wed_after_bank_holiday))
+
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(wed_after_bank_holiday))
+
+        with override_current_time(datetime.datetime(2015, 5, 9, 10, 30)):
+            monday = datetime.datetime(2015, 5, 11, 9, 30)
+            self.assertTrue(
+                monday_before_11am_between_eod_friday_and_monday(
+                    monday))
+
+            self.assertFalse(OPERATOR_HOURS.can_schedule_callback(monday))
+
+            monday_after_11 = datetime.datetime(2015, 5, 11, 11, 30)
+
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(monday_after_11))
+
 
 class TestDayTimeChoices(unittest.TestCase):
+    def assertDayInChoices(self, day, choices):
+        self.assertIn(day, [d for d, _ in choices])
 
     def test_day_time_choices(self):
         with override_current_time(datetime.datetime(2015, 2, 13, 21)):
@@ -122,6 +182,25 @@ class TestDayTimeChoices(unittest.TestCase):
             self.assertEqual(18, len(choices['20150216']))
             # can book any slot on tuesday
             self.assertEqual(22, len(choices['20150217']))
+
+    def test_monday_available_before_11_on_saturday(self):
+        with override_current_time(datetime.datetime(2015, 5, 9, 10, 30)):
+            form = Mock()
+            field = DayChoiceField()
+            field = field.bind(form, 'day')
+            self.assertDayInChoices('20150511', field.choices)
+
+        with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
+            form = Mock()
+            field = DayChoiceField()
+            field = field.bind(form, 'day')
+            print field.choices
+            self.assertDayInChoices('20150526', field.choices)
+
+    def test_available_days(self):
+        with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
+            days = OPERATOR_HOURS.available_days()
+            self.assertIn(datetime.datetime(2015, 5, 26, 10, 30), days)
 
 
 class TestCallbackInPastBug(unittest.TestCase):
