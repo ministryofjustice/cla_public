@@ -30,7 +30,7 @@
                   <div class="step-name-subtitle">{{ node.label|striptags }}</div>
                 </a>
               </li>
-            {% set url = url + '/' + node.id %}
+            {% set url = [url, node.id]|join('/') %}
             {% set lasturl = url %}
           {% endfor %}
         {% endif %}
