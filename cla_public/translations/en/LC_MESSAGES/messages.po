@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-05-06 13:47+0100\n"
+"POT-Creation-Date: 2015-05-20 10:08+0100\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -343,6 +343,10 @@ msgstr ""
 msgid "Organisation"
 msgstr ""
 
+#: cla_public/apps/checker/constants.py:178
+msgid "For your security, the information you have entered has not been stored on your computer or mobile device."
+msgstr ""
+
 #: cla_public/apps/checker/fields.py:83
 msgid "Yes"
 msgstr ""
@@ -353,7 +357,7 @@ msgstr ""
 
 #: cla_public/apps/checker/fields.py:88 cla_public/apps/checker/forms.py:77
 #: cla_public/apps/checker/forms.py:138 cla_public/apps/checker/forms.py:155
-#: cla_public/apps/contact/forms.py:68
+#: cla_public/apps/contact/forms.py:69
 msgid "Please choose Yes or No"
 msgstr ""
 
@@ -832,7 +836,7 @@ msgid "Money you and your partner pay for your child to be looked after while yo
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:479
-#: cla_public/templates/checker/_progress.html:56
+#: cla_public/templates/checker/_progress.html:58
 #: cla_public/templates/checker/outgoings.html:26
 msgid "Review your answers"
 msgstr ""
@@ -861,7 +865,7 @@ msgstr ""
 msgid "Please select a time period from the drop down"
 msgstr ""
 
-#: cla_public/apps/checker/views.py:71 cla_public/apps/contact/views.py:35
+#: cla_public/apps/checker/views.py:71 cla_public/apps/contact/views.py:49
 msgid "There was an error submitting your data. Please check and try again."
 msgstr ""
 
@@ -873,132 +877,148 @@ msgstr ""
 msgid "Call me on"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:46
+#: cla_public/apps/contact/fields.py:48
 msgid "Not a valid choice"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:79
+#: cla_public/apps/contact/fields.py:85
 msgid "Not a valid date"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:112
+#: cla_public/apps/contact/fields.py:122
 msgid "Not a valid time"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:136
+#: cla_public/apps/contact/fields.py:146
 msgid "Can't schedule a callback at the requested time"
 msgstr ""
 
-#: cla_public/apps/contact/fields.py:145
+#: cla_public/apps/contact/fields.py:155
 msgid "Arrange a callback time"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:27
+#: cla_public/apps/contact/forms.py:28
 msgid "-- Choose a language --"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:34
+#: cla_public/apps/contact/forms.py:35
 msgid "BSL - Webcam"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:35
+#: cla_public/apps/contact/forms.py:36
 msgid "Minicom"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:36
+#: cla_public/apps/contact/forms.py:37
 msgid "Text Relay"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:37
+#: cla_public/apps/contact/forms.py:38
 msgid "Welsh"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:38
+#: cla_public/apps/contact/forms.py:39
 msgid "Other language"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:40
+#: cla_public/apps/contact/forms.py:41
 msgid "Language required:"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:42
+#: cla_public/apps/contact/forms.py:43
 msgid "Any other communication needs"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:44
+#: cla_public/apps/contact/forms.py:45
 msgid "Other communication needs"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:45
+#: cla_public/apps/contact/forms.py:46
 msgid "Please tell us what you need in the box below"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:53
+#: cla_public/apps/contact/forms.py:54
 msgid "Phone number for your callback"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:54
+#: cla_public/apps/contact/forms.py:55
 msgid "Please enter your full phone number including area code, using only numbers. For example 020 7946 0492"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:60
+#: cla_public/apps/contact/forms.py:61
 msgid "Your telephone number must be 20 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:64
+#: cla_public/apps/contact/forms.py:65
 msgid "Is it safe for us to leave a message on this number?"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:71
+#: cla_public/apps/contact/forms.py:75
 msgid "Select a time for us to call you"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:72
+#: cla_public/apps/contact/forms.py:76
 msgid "We’ll try to call you back at the time you request, but this may not always be possible."
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:81
+#: cla_public/apps/contact/forms.py:86
 msgid "Postcode"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:83
+#: cla_public/apps/contact/forms.py:88
 msgid "Your postcode must be 12 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:87
+#: cla_public/apps/contact/forms.py:93
 msgid "Street address"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:89
+#: cla_public/apps/contact/forms.py:95 cla_public/apps/contact/forms.py:130
 msgid "Your address must be 255 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:99
+#: cla_public/apps/contact/forms.py:106
 msgid "Your full name"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:101
+#: cla_public/apps/contact/forms.py:108
 msgid "Your full name must be 400 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:105
+#: cla_public/apps/contact/forms.py:113
 msgid "Contact options"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:108
+#: cla_public/apps/contact/forms.py:116
 msgid "Please choose one of the options"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:118
-msgid "Tell us more about your problem"
-msgstr ""
-
-#: cla_public/apps/contact/forms.py:120
-msgid "Your notes must be 4000 characters or less"
+#: cla_public/apps/contact/forms.py:124
+msgid "Email address"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:125
+msgid "If you add your email we will send you the reference number when you submit your details"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:133
+msgid "Invalid email address"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:139
+msgid "Tell us more about your problem"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:141
+msgid "Your notes must be 4000 characters or less"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:147
 msgid "Do you have any special communication needs?"
+msgstr ""
+
+#: cla_public/apps/contact/views.py:32
+msgid "Your Civil Legal Advice reference number"
 msgstr ""
 
 #: cla_public/config/common.py:57 cla_public/config/common.py:58
@@ -1089,19 +1109,23 @@ msgstr ""
 msgid "Musical instruments, unless you’re a professional musician"
 msgstr ""
 
-#: cla_public/templates/base.html:60
+#: cla_public/templates/base.html:72
 msgid "more info"
 msgstr ""
 
-#: cla_public/templates/base.html:65
+#: cla_public/templates/base.html:76
+msgid "Close"
+msgstr ""
+
+#: cla_public/templates/base.html:82
 msgid "Privacy Policy"
 msgstr ""
 
-#: cla_public/templates/base.html:66 cla_public/templates/cookies.html:5
+#: cla_public/templates/base.html:83 cla_public/templates/cookies.html:5
 msgid "Cookies"
 msgstr ""
 
-#: cla_public/templates/base.html:67
+#: cla_public/templates/base.html:84
 msgid "Feedback"
 msgstr ""
 
@@ -1140,48 +1164,48 @@ msgstr ""
 msgid "When a CLA operator calls you, the call will come from an anonymous number."
 msgstr ""
 
-#: cla_public/templates/contact.html:82
+#: cla_public/templates/contact.html:84
 msgid "Submit details"
 msgstr ""
 
-#: cla_public/templates/contact.html:88
+#: cla_public/templates/contact.html:90
 #: cla_public/templates/checker/result/confirmation.html:32
 #: cla_public/templates/checker/result/eligible.html:50
 msgid "What happens next?"
 msgstr ""
 
-#: cla_public/templates/contact.html:90
+#: cla_public/templates/contact.html:92
 msgid ""
 "The first person you speak to will be an operator. They will ask you questions about\n"
 "        yourself and your problem, including your financial circumstances (and your partner's, if you have one)."
 msgstr ""
 
-#: cla_public/templates/contact.html:94
+#: cla_public/templates/contact.html:96
 msgid "If it looks like you might qualify you will be put through to a CLA specialist adviser."
 msgstr ""
 
-#: cla_public/templates/contact.html:97
+#: cla_public/templates/contact.html:99
 msgid "If CLA can’t help you we will always suggest where else you might get help."
 msgstr ""
 
-#: cla_public/templates/contact.html:100
+#: cla_public/templates/contact.html:102
 msgid ""
 "If we can do anything to make it easier for you to communicate with us due to your\n"
 "        disability please tell the operator."
 msgstr ""
 
-#: cla_public/templates/contact.html:104
+#: cla_public/templates/contact.html:106
 msgid ""
 "Protecting your personal data and your privacy is important to us. We are asking for\n"
 "        some information from you now so that when we speak to you we know who you are. You\n"
 "        can read the full <a href=\"/privacy\">Civil Legal Advice Privacy Statement</a>."
 msgstr ""
 
-#: cla_public/templates/contact.html:119
+#: cla_public/templates/contact.html:121
 msgid "Find UK address"
 msgstr ""
 
-#: cla_public/templates/contact.html:137
+#: cla_public/templates/contact.html:139
 msgid "characters remaining"
 msgstr ""
 
@@ -2236,7 +2260,7 @@ msgstr ""
 msgid "Your progress"
 msgstr ""
 
-#: cla_public/templates/checker/_progress.html:66
+#: cla_public/templates/checker/_progress.html:68
 msgid "Contact information"
 msgstr ""
 
@@ -2476,50 +2500,68 @@ msgstr ""
 #: cla_public/templates/checker/result/confirmation.html:52
 msgid ""
 "If the operator you speak to thinks you might qualify, they will\n"
-"    put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
+"    put you through to a specialist adviser. Your specialist adviser will\n"
 "    ask you more questions before making the final decision about whether you\n"
 "    qualify for legal aid."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:59
+#: cla_public/templates/checker/result/confirmation.html:60
 msgid ""
-"You will need to provide evidence of your financial circumstances\n"
-"    and maybe your problem. Your CLA specialist adviser will explain\n"
-"    what is needed."
+"Please be aware that the specialist adviser will need\n"
+"      evidence of the domestic violence before they can make a decision\n"
+"      on your case."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:65
+#: cla_public/templates/checker/result/confirmation.html:64
+msgid "Find out what you can use as evidence"
+msgstr ""
+
+#: cla_public/templates/checker/result/confirmation.html:67
 msgid ""
-"If your CLA specialist adviser takes your case on they will\n"
+"You will also need to provide evidence of your financial\n"
+"      circumstances. Your specialist adviser will explain what is\n"
+"      needed."
+msgstr ""
+
+#: cla_public/templates/checker/result/confirmation.html:73
+msgid ""
+"You will need to provide evidence of your financial circumstances\n"
+"      and maybe your problem. Your specialist adviser will explain\n"
+"      what is needed."
+msgstr ""
+
+#: cla_public/templates/checker/result/confirmation.html:80
+msgid ""
+"If your specialist adviser takes your case on they will\n"
 "    communicate with you by telephone, email or post."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:70
+#: cla_public/templates/checker/result/confirmation.html:85
 msgid ""
-"If your CLA adviser decides that you need to speak to someone in\n"
+"If your adviser decides that you need to speak to someone in\n"
 "    person or if you need someone to represent you in court, they\n"
 "    will organise this."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:77
+#: cla_public/templates/checker/result/confirmation.html:92
 msgid ""
 "If you have a court hearing date it is important that you get\n"
 "      advice as soon as possible. You may be able to get last-minute\n"
 "      help on the day of the hearing from an adviser in the court building."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:84
+#: cla_public/templates/checker/result/confirmation.html:99
 msgid "What if I miss the operator’s call?"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:86
+#: cla_public/templates/checker/result/confirmation.html:101
 msgid ""
 "If you miss the call or you need advice urgently, you can call us on\n"
 "      <strong>0345 345 4 345</strong>. Find out about\n"
 "      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a>."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:101
+#: cla_public/templates/checker/result/confirmation.html:116
 msgid "Print this page"
 msgstr ""
 
@@ -2543,7 +2585,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/checker/result/eligible-no-callback.html:29
-#: cla_public/templates/checker/result/face-to-face.html:69
+#: cla_public/templates/checker/result/face-to-face.html:77
 msgid ""
 "Your adviser will check whether you qualify for legal aid at\n"
 "      no cost to you. If you qualify for legal aid, you will not have to pay\n"
@@ -2551,7 +2593,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/checker/result/eligible-no-callback.html:35
-#: cla_public/templates/checker/result/face-to-face.html:75
+#: cla_public/templates/checker/result/face-to-face.html:83
 msgid ""
 "If you don't qualify for legal aid, you will have to pay for\n"
 "        legal advice. You should ask your adviser about the cost of their\n"
@@ -2694,15 +2736,22 @@ msgstr ""
 msgid "but a legal adviser may be able to help."
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:82
+#: cla_public/templates/checker/result/face-to-face.html:70
+msgid ""
+"If you're applying for legal aid for a mental health issue,\n"
+"        the requirements for the financial assessment are less rigorous than\n"
+"        for other legal aid problems."
+msgstr ""
+
+#: cla_public/templates/checker/result/face-to-face.html:90
 msgid "You may also be able to get free help from:"
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:85
+#: cla_public/templates/checker/result/face-to-face.html:93
 msgid "Advisery, Conciliation and Arbitration Service (Acas)"
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:86
+#: cla_public/templates/checker/result/face-to-face.html:94
 msgid "Law Centres Network"
 msgstr ""
 
@@ -2974,39 +3023,13 @@ msgstr ""
 #~ msgid "If you’d like to tell us more about your problem, please do so in the box below. The Civil Legal Advice operator will read this to help them understand your problem."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "Please submit your details to get your personal case reference number.\n"
-#~ "      You will need to quote this number when you speak with CLA."
-#~ msgstr ""
-
 #~ msgid "You will be given the CLA phone number when you submit your details below."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "We will try to call you at least once. If we cannot speak to you we will leave you a message,\n"
-#~ "        unless you tell us not to below. If you miss the call, please complete this form again to book another\n"
-#~ "        callback or call us directly."
 #~ msgstr ""
 
 #~ msgid "Name of the person who helped you"
 #~ msgstr ""
 
 #~ msgid "Relationship to you"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "This is because you/you and your partner have too much disposable\n"
-#~ "      capital, based on what you have told us."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "This is because you/you and your partner’s gross income is more than\n"
-#~ "      the maximum allowed, based on what you have told us."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "This is because you/you and your partner’s disposable income is\n"
-#~ "      higher than the limit we allow, based on what you have told us. "
 #~ msgstr ""
 
 #~ msgid "To qualify for legal aid, you must meet all of the following conditions:"
@@ -3018,21 +3041,30 @@ msgstr ""
 #~ msgid "your savings (or combined savings if you have a partner) should not be more than £8,000"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "you (and your partner if you have one) should have no more than £733 a month left after we've taken\n"
-#~ "      certain living expenses into account"
-#~ msgstr ""
-
 #~ msgid "Your session has expired"
 #~ msgstr ""
 
 #~ msgid ""
-#~ "This means that you've already reached the end of our service and clicked\n"
-#~ "    the back button, or your connection to our service has been lost."
+#~ "If the operator you speak to thinks you might qualify, they will\n"
+#~ "    put you through to a CLA specialist adviser. Your CLA specialist adviser will\n"
+#~ "    ask you more questions before making the final decision about whether you\n"
+#~ "    qualify for legal aid."
 #~ msgstr ""
 
 #~ msgid ""
-#~ "For your security, when your session expires we automatically delete all\n"
-#~ "    the information you’ve entered."
+#~ "You will need to provide evidence of your financial circumstances\n"
+#~ "    and maybe your problem. Your CLA specialist adviser will explain\n"
+#~ "    what is needed."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If your CLA specialist adviser takes your case on they will\n"
+#~ "    communicate with you by telephone, email or post."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If your CLA adviser decides that you need to speak to someone in\n"
+#~ "    person or if you need someone to represent you in court, they\n"
+#~ "    will organise this."
 #~ msgstr ""
 
