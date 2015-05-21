@@ -6,7 +6,7 @@ from itertools import dropwhile, ifilter
 import logging
 
 from flask import abort, current_app, redirect, render_template, request, \
-    session, url_for, views
+    session, url_for, views, jsonify, Response
 
 
 log = logging.getLogger(__name__)
@@ -62,6 +62,18 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
 
         self.remove_form_data_from_session()
         return self.get(*args, **kwargs)
+
+    def options(self, *args, **kwargs):
+        """
+        Returns validation errors if a form is submitted to it otherwise
+        returns Response with allowed methods
+        """
+        if request.content_type == 'application/x-www-form-urlencoded':
+            self.form.validate()
+            return jsonify(self.form.errors)
+        rv = Response()
+        rv.allow.update(self.methods)
+        return rv
 
     def save_form_data_in_session(self):
         """
