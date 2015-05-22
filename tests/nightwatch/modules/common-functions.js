@@ -1,69 +1,11 @@
 'use strict';
 
 var util = require('util');
-var ABOUT_YOU_QUESTIONS = require('../modules/constants').ABOUT_YOU_QUESTIONS;
+var _ = require('lodash');
 var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
 SAVINGS_QUESTIONS.ALL = SAVINGS_QUESTIONS.MONEY.concat(SAVINGS_QUESTIONS.VALUABLES);
 
 module.exports = {
-  // skip start page
-  startPage: function(client, msg) {
-    client
-      .deleteCookies()
-      .init()
-      .maximizeWindow()
-      .waitForElementVisible('body', 5000)
-      .click('a#start', function() {
-        if(msg) {
-          console.log('\n' + msg + '\n');
-        }
-      })
-    ;
-  },
-
-  // select a 'pass' category (debt) and move on to next page
-  selectDebtCategory: function(client) {
-    client
-      .waitForElementVisible('input[name="categories"]', 5000)
-      .assert.urlContains('/problem')
-      .assert.containsText('h1', 'What do you need help with?')
-      .click('input[name="categories"][value="debt"]')
-      .assert.attributeEquals('input[name="categories"][value="debt"]', 'checked', 'true')
-      .submitForm('form')
-    ;
-  },
-
-  aboutPage: function(client) {
-    client
-      .waitForElementVisible('input[name="have_partner"]', 5000)
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-    ;
-  },
-
-  aboutPageSetAllToNo: function(client) {
-    this.setYesNoFields(client, ABOUT_YOU_QUESTIONS, 0);
-  },
-
-  setYesNoFields: function(client, fields, val) {
-    var clickOption = function(client, field, val) {
-      var el = util.format('input[name="%s"][value="%s"]', field, val);
-      client.isVisible(el, function(result) {
-        if(result.value === true) {
-          client.click(el);
-        }
-      });
-    };
-
-    if(fields.constructor === Array) {
-      fields.forEach(function(field) {
-        clickOption(client, field, val);
-      });
-    } else {
-      clickOption(client, fields, val);
-    }
-  },
-
   setAllSavingsFieldsToValue: function(client, val) {
     SAVINGS_QUESTIONS.ALL.forEach(function(item) {
       client
@@ -136,5 +78,42 @@ module.exports = {
     };
 
     return yesNo[value] || value;
+  },
+
+  formatMoneyInputs: function(prefix, inputs) {
+    var result = {};
+    _.each(inputs, function(v, k) {
+      if(_.isObject(v)) {
+        _.map(v, function(value, period) {
+          result[util.format('%s%s-per_interval_value', prefix, k)] = value;
+          result[util.format('%s%s-interval_period', prefix, k)] = period;
+        });
+      } else {
+        result[util.format('%s%s', prefix, k)] = v;
+      }
+    });
+    return result;
+  },
+
+  fillInMoneyForm: function(client, inputs, type) {
+    _.each(inputs, function(v, k) {
+      var selector = util.format('[name="%s"]', k);
+      client.elements('css selector', selector, function(result) {
+        if(!result.value.length) {
+          return;
+        }
+
+        if(typeof v === 'number') {
+          client.setValue(selector, v, function() {
+            console.log('     • %s: %s is £%d', type, k, v);
+          });
+        } else {
+          selector += util.format(' [value="%s"]', v);
+          client.click(selector, function() {
+            console.log('       • %s selected', v);
+          });
+        }
+      });
+    });
   }
 };

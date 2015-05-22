@@ -5,26 +5,22 @@ var common = require('../../modules/common-functions');
 var CHILD_BENEFIT_QUESTIONS = require('../../modules/constants').CHILD_BENEFIT_QUESTIONS;
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    common.aboutPage(client);
-    common.aboutPageSetAllToNo(client);
-    common.setYesNoFields(client, 'on_benefits', 1);
-    client.submitForm('form');
+    client.aboutSetAllToNo(true, {
+      'on_benefits': 1
+    });
   },
 
   'Benefits': function(client) {
-    client
-      .waitForElementVisible('input[name="benefits"]', 5000)
-      .assert.urlContains('/benefits')
-      .assert.containsText('h1', 'Your benefits')
-      .assert.containsText('body', 'Are you on any of these benefits?')
-      .click('input[value="other-benefit"]')
-      .submitForm('form')
-    ;
+    client.selectBenefit('other-benefit', true);
   },
 
   'Benefits and tax credits page': function(client) {
@@ -41,11 +37,8 @@ module.exports = {
       .waitForElementPresent('input[name="benefits"]', 5000)
       .back()
       .waitForElementPresent('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'have_partner', 1);
-    common.setYesNoFields(client, 'in_dispute', 0);
-    common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
-    client
+      .setYesNoFields('have_partner', 1)
+      .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
       .submitForm('form')
       .waitForElementPresent('input[name="benefits"]', 5000)
       .submitForm('form')
@@ -64,9 +57,7 @@ module.exports = {
       .waitForElementPresent('input[name="benefits"]', 5000)
       .back()
       .waitForElementPresent('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'have_children', 1);
-    client
+      .setYesNoFields('have_children', 1)
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
       .waitForElementPresent('input[name="benefits"]', 5000)
@@ -136,17 +127,12 @@ module.exports = {
   },
 
   'Should also see page if benefits=no but children=yes': function(client) {
-    common.startPage(client);
-    common.selectDebtCategory(client);
-
     client
-      .waitForElementPresent('input[name="have_partner"]', 5000)
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-    ;
-    common.aboutPageSetAllToNo(client);
-    common.setYesNoFields(client, 'have_children', 1);
-    client
+      .startService()
+      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .aboutSetAllToNo(false, {
+        'have_children': 1
+      })
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
       .waitForElementPresent('input[name="other_benefits"]', 5000)
@@ -156,17 +142,12 @@ module.exports = {
   },
 
   'Should also see page if benefits=no but dependants=yes': function(client) {
-    common.startPage(client);
-    common.selectDebtCategory(client);
-
     client
-      .waitForElementPresent('input[name="have_partner"]', 5000)
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-    ;
-    common.aboutPageSetAllToNo(client);
-    common.setYesNoFields(client, 'have_dependants', 1);
-    client
+      .startService()
+      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .aboutSetAllToNo(false, {
+        'have_dependants': 1
+      })
       .setValue('input[name="num_dependants"]', 1)
       .submitForm('form')
       .waitForElementPresent('input[name="other_benefits"]', 5000)

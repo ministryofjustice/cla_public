@@ -1,7 +1,7 @@
 {% set current_step = request.view_args.step %}
 {% set has_remaining_forms = steps|rejectattr('is_completed')|list|length > 0 %}
-{% set total_step_count = steps|count %}
-{% set completed_step_count = steps|selectattr('is_completed')|list|count %}
+{% set total_step_count = steps|count + 1 %}
+{% set completed_step_count = steps|selectattr('is_completed')|list|count + 1 %}
 {% set completion_percentage = completed_step_count / total_step_count * 100 %}
 
 {% macro step_status(is_completed=False) %}
@@ -16,6 +16,17 @@
   <h2>{{ _('Your progress') }}</h2>
 
   <ul class="progress-steps">
+    {% if session.checker.category_name %}
+      <li class="progress-step m-completed">
+        <a class="step-name" href="{{ url_for('scope.diagnosis') }}">
+          {{ step_status(true) }}
+          <span class="step-name-title">{{ _('Your problem area') }}</span>
+          <div class="step-name-subtitle">
+            {{ session.checker.category_name }}
+          </div>
+        </a>
+      </li>
+    {% endif %}
     {% for step in steps if step.name in ['problem', 'about'] or (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
       {% set is_active = current_step == step.name %}
 

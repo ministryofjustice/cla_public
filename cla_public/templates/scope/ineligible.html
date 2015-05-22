@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% set title = _('Legal aid is not available for this type of problem') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+
+  <h1>{{ _('Legal aid is not available for this type of problem') }}</h1>
+  <p class="subtitle">
+    {{ _('You can still seek advice from a legal adviser - you will have to pay for this advice.') }}
+  </p>
+
+  <a class="button button-larger" href="https://www.gov.uk/find-a-legal-adviser" target="_blank">
+    {{ _('Find a legal adviser') }}
+  </a>
+
+  {% include '_help-orgs.html' %}
+
+{% endblock %}

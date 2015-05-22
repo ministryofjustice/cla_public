@@ -1,0 +1,50 @@
+.scope-options-list {
+  list-style-type: none;
+  margin: 1em 0 2em;
+  padding: 0;
+}
+
+.scope-options-list-item {
+  margin-bottom: 10px;
+  background-color: $grey-3;
+  padding: 0;
+  position: relative;
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 13px 60px 10px 25px;
+    border: 1px solid transparent;
+
+    &:before {
+      $_icon-size: 32px;
+
+      font-size: $_icon-size;
+      height: $_icon-size;
+      line-height: 1.2;
+      position: absolute;
+      top: 0;
+      right: 5px;
+      bottom: 0;
+      margin: auto;
+      color: $grey-1;
+      content: "〉";
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      border: 1px solid $grey-1;
+      background: inherit;
+
+      &::before {
+        color: black;
+      }
+    }
+
+    &:active {
+      background: white;
+    }
+  }
+}
