@@ -22,7 +22,7 @@ module.exports = {
     client
       .waitForElementVisible(other_income_amount, 5000)
       .assert.urlContains('/income')
-      .assert.containsText('h1', 'Your money coming in')
+      .assert.containsText('h1', 'Your money')
     ;
   },
 
@@ -63,7 +63,7 @@ module.exports = {
 
   'Context-dependent text and questions for partner': function(client) {
     client
-      .assert.doesNotContainText('body', 'Your money coming in')
+      .assert.doesNotContainText('body', 'Your money')
       .assert.doesNotContainText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.')
     ;
 
@@ -85,8 +85,8 @@ module.exports = {
       .submitForm('form')
       .waitForElementVisible(other_income_amount, 5000)
       .assert.containsText('h1', 'You and your partner’s money coming in')
-      .assert.containsText('body', 'Your money coming in')
-      .assert.containsText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record money coming in for your partner, if you have one, in the next section.')
+      .assert.containsText('body', 'Your money')
+      .assert.containsText('body', 'Give details of any money that is paid to you personally, like your wages. Record money coming in for your partner in the next section.')
     ;
     EMPLOYMENT_QUESTIONS.COMMON.forEach(function(item) {
       client
