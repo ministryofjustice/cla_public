@@ -16,7 +16,7 @@
       {% endcall %}
     {% endif %}
 
-    {{ Form.option_list_fieldset(form.benefits) }}
+    {{ Form.option_list_fieldset(form.benefits, separated_options=['other-benefit']) }}
 
     {{ Element.get_in_touch_alert() }}
 

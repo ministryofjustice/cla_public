@@ -11,7 +11,7 @@ from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_common.smoketest import smoketest
 from cla_public.apps.base import base
-from cla_public.apps.base.forms import FeedbackForm
+from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 import cla_public.apps.base.filters
 import cla_public.apps.base.extensions
 from cla_public.libs import zendesk
@@ -70,6 +70,26 @@ base.add_url_rule(
 @base.route('/feedback/confirmation')
 def feedback_confirmation():
     return render_template('feedback-confirmation.html')
+
+
+@base.route('/reasons-for-contacting', methods=['GET', 'POST'])
+def reasons_for_contacting():
+    """
+    Interstitial form to ascertain why users are dropping out of
+    the checker service
+    """
+    form = ReasonsForContactingForm(data={'referrer': request.referrer or 'Unknown'})
+    error = None
+
+    if form.validate_on_submit():
+        response = zendesk.create_ticket(form.api_payload())
+
+        if response.status_code < 300:
+            return redirect(url_for('contact.get_in_touch'))
+        else:
+            error = _('Something went wrong. Please try again.')
+
+    return render_template('reasons-for-contacting.html', form=form, zd_error=error)
 
 
 @base.route('/session')

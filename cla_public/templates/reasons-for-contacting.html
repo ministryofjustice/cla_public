@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% import "macros/form.html" as Form %}
+{% import "macros/element.html" as Element %}
+
+{% set title = _('Before you contact Civil Legal Advice') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ title }}</h1>
+  <p class="subtitle">
+    {% trans %}In order to improve this service, we’d like to understand if any of the following options are relevant to you.{% endtrans %}
+  </p>
+
+  <form method="POST" action="{{ url_for('.reasons_for_contacting') }}">
+    {{ form.csrf_token }}
+    {{ form.referrer }}
+
+    {{ Form.handle_errors(form) }}
+
+    {% if zd_error %}
+      {% call Element.alert('error', icon='cross') %}
+        <p>{{ zd_error }}</p>
+      {% endcall %}
+    {% endif %}
+
+    {{ Form.option_list_fieldset(form.reasons, separated_options=[form.REASONS_FOR_CONTACTING_NONE]) }}
+
+    <div data-controlled-by="reasons" data-control-value="{{ form.REASONS_FOR_CONTACTING_OTHER }}">
+      {{ Form.textarea_fieldset(form.other_reasons, class_='m-full', rows=6) }}
+    </div>
+
+    {{ Form.honeypot(form) }}
+    {{ Form.actions(_('Continue')) }}
+  </form>
+
+  {# {% call Element.alert() %} #}
+    <p><a href="{{ url_for('contact.get_in_touch') }}">{{ _('Skip to contact details') }}</a></p>
+  {# {% endcall %} #}
+
+{% endblock %}

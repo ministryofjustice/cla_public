@@ -22,3 +22,19 @@ HELP_FILLING_IN_FORM_LABELS = [
 
 HELP_FILLING_IN_FORM = zip(HELP_FILLING_IN_FORM_LABELS,
         HELP_FILLING_IN_FORM_LABELS)
+
+
+REASONS_FOR_CONTACTING_OTHER = u'Other reason (please specify)'
+REASONS_FOR_CONTACTING_NONE = u'None of the above'
+REASONS_FOR_CONTACTING = [
+    u'I didn’t know how to answer a question',
+    u'I don’t have the necessary paperwork with me',
+    u'I’d prefer to speak to someone',
+    u'I have difficulty in using online services without help',
+    u'I don’t understand how this service can help me',
+    u'It didn’t cover or mention my problem area',
+    REASONS_FOR_CONTACTING_OTHER,
+    REASONS_FOR_CONTACTING_NONE,
+]
+# NB: keys are deliberately not localised
+REASONS_FOR_CONTACTING = map(lambda reason: (reason, _(reason)), REASONS_FOR_CONTACTING)
