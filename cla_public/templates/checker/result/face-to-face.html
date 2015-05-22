@@ -27,7 +27,7 @@
       </p>
     {% else %}
       {% if session.stored.category == 'clinneg' %}
-        <h1>{{ _('You may be able to get free advice from a legal adviser') }}</h1>
+        <h1>{{ _('You may be able to get advice from a legal adviser') }}</h1>
 
         <p>
           {% trans %}You will usually only get legal aid for advice about
@@ -48,7 +48,7 @@
             might succeed in your case and how to apply.{% endtrans %}
         </p>
       {% else %}
-        <h1>{{ _('You may be able to get free advice from a legal adviser') }}</h1>
+        <h1>{{ _('You may be able to get advice from a legal adviser') }}</h1>
 
         <p>
           {{ _('Civil Legal Advice doesn’t provide advice on issues related to') }} {{ category_name|lower }},
