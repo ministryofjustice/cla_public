@@ -26,7 +26,7 @@ module.exports = {
 
   'Context-dependent text for partner': function(client) {
     client
-      .assert.containsText('body', 'If you own more than one property, you can add more properties below.')
+      .assert.containsText('body', 'You can add more than one property below.')
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
     ;
@@ -39,7 +39,7 @@ module.exports = {
       .assert.urlContains('/property')
       .assert.containsText('h1', 'You and your partner’s property')
       .assert.containsText('body', 'Please tell us about any property owned by you, your partner or both of you.')
-      .assert.containsText('body', 'If you or your partner own more than one property, you can add more properties below.')
+      .assert.containsText('body', 'You can add more than one property below.')
     ;
   },
 

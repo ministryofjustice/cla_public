@@ -36,9 +36,8 @@ module.exports = {
     client
       .assert.urlContains('/result/eligible')
       .waitForElementVisible('input[name="callback_requested"]', 5000)
-      .assert.containsText('h1', 'You might qualify for legal aid')
-      .assert.containsText('h2', 'Contact Civil Legal Advice')
-      .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify financially for legal aid.')
+      .assert.containsText('h1', 'Contact Civil Legal Advice')
+      .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify for legal aid.')
     ;
   },
 

@@ -2,12 +2,7 @@
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
-  <p>
-    {% trans %}We need to know how much money you have coming in, because this affects
-    whether or not you can get legal aid. Please answer these questions as
-    fully and accurately as you can.{% endtrans %}
-  </p>
-  <p>{{ _('When you speak to CLA, you will need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+  <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
   <p>
     <strong>{% trans %}We only need to know about any income you received last month, even if your income varies from month to month.{% endtrans %}</strong>
   </p>
@@ -19,11 +14,12 @@
       {% if session.checker.has_partner %}
         <fieldset class="fieldset-group">
           <header>
-            <h3>{{ _('Your money coming in') }}</h3>
+            <h3>{{ _('Your money') }}</h3>
           </header>
           <p class="form-row">
-            {% trans %}This section is for any money that is paid to you personally - for example, your wages.
-            You should record money coming in for your partner, if you have one, in the next section.{% endtrans %}
+            {% trans %}Give details of any money that is paid to you
+            personally, like your wages. Record money coming in for your
+            partner in the next section.{% endtrans %}
           </p>
       {% endif %}
         {% if not skip %}
@@ -43,7 +39,7 @@
       <fieldset class="fieldset-group">
         {% with skip_for_partner = not (session.checker.partner_is_employed or session.checker.partner_is_self_employed) %}
           <header>
-            <h3>{{ _('Your partner’s money coming in') }}</h3>
+            <h3>{{ _('Your partner’s money') }}</h3>
           </header>
           <fieldset class="group">
             {% if not skip_for_partner %}

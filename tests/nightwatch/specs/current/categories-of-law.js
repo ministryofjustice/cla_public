@@ -28,7 +28,7 @@ module.exports = {
       if (!item.covered) {
         url = '/face-to-face';
         el = '.legal-adviser-search';
-        headline = item.headline ||  'You may be able to get free advice from a legal adviser';
+        headline = item.headline ||  'You may be able to get advice from a legal adviser';
       }
 
       common.startPage(client);
