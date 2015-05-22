@@ -79,7 +79,7 @@ module.exports = {
       .setYesNoFields('partner_is_employed', 1)
       .submitForm('form')
       .waitForElementVisible(other_income_amount, 5000)
-      .assert.containsText('h1', 'You and your partner’s money coming in')
+      .assert.containsText('h1', 'You and your partner’s money')
       .assert.containsText('body', 'Your money')
       .assert.containsText('body', 'Give details of any money that is paid to you personally, like your wages. Record money coming in for your partner in the next section.')
     ;
