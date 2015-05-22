@@ -12,6 +12,9 @@ from flask import abort, current_app, redirect, render_template, request, \
 log = logging.getLogger(__name__)
 
 
+
+
+
 class RequiresSession(object):
     """
     View mixin which redirects to session expired page if no session
@@ -25,7 +28,26 @@ class RequiresSession(object):
         return super(RequiresSession, self).dispatch_request(*args, **kwargs)
 
 
-class SessionBackedFormView(RequiresSession, views.MethodView, object):
+class ValidFormOnOptions(object):
+    def options(self, *args, **kwargs):
+        """
+        Returns validation errors if a form is submitted to it otherwise
+        returns Response with allowed methods
+        """
+        if request.content_type == 'application/x-www-form-urlencoded':
+            self.form.validate()
+            return jsonify(self.form.errors)
+        rv = Response()
+        rv.allow.update(self.methods)
+        return rv
+
+
+class SessionBackedFormView(
+    RequiresSession,
+    views.MethodView,
+    ValidFormOnOptions,
+    object
+):
     """
     Saves and loads form data to and from the session
     """
@@ -62,18 +84,6 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
 
         self.remove_form_data_from_session()
         return self.get(*args, **kwargs)
-
-    def options(self, *args, **kwargs):
-        """
-        Returns validation errors if a form is submitted to it otherwise
-        returns Response with allowed methods
-        """
-        if request.content_type == 'application/x-www-form-urlencoded':
-            self.form.validate()
-            return jsonify(self.form.errors)
-        rv = Response()
-        rv.allow.update(self.methods)
-        return rv
 
     def save_form_data_in_session(self):
         """

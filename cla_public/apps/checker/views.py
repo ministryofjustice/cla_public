@@ -24,7 +24,7 @@ from cla_public.apps.checker import honeypot
 from cla_public.apps.checker import filters # Used in templates
 from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
-    FormWizardStep, RequiresSession
+    FormWizardStep, RequiresSession, ValidFormOnOptions
 from cla_public.libs import laalaa
 
 
@@ -95,7 +95,7 @@ def is_null(field):
     return False
 
 
-class CheckerStep(UpdatesMeansTest, FormWizardStep):
+class CheckerStep(ValidFormOnOptions, UpdatesMeansTest, FormWizardStep):
 
     def completed_fields(self):
         session_data = session.checker.get(self.form_class.__name__, {})
@@ -225,7 +225,8 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return False
 
 
-checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
+checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'),
+                     methods=('GET', 'POST', 'OPTIONS'))
 
 
 class FaceToFace(views.MethodView, object):
@@ -272,7 +273,7 @@ checker.add_url_rule(
 )
 
 
-class Eligible(RequiresSession, views.MethodView, object):
+class Eligible(RequiresSession, views.MethodView, ValidFormOnOptions, object):
 
     def get(self):
         steps = steps = CheckerWizard('').relevant_steps[:-1]
