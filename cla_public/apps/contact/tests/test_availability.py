@@ -3,6 +3,7 @@ import datetime
 import logging
 from mock import Mock
 import unittest
+import mock
 
 from wtforms import Form
 from wtforms.validators import InputRequired, ValidationError
@@ -13,6 +14,8 @@ from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, \
     OPERATOR_HOURS, TimeChoiceField
 from cla_public.apps.contact.forms import ContactForm
+from cla_public.libs.call_centre_availability import \
+    monday_before_11am_between_eod_friday_and_monday
 
 
 logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
@@ -27,6 +30,13 @@ def override_current_time(dt):
     call_centre_availability.current_datetime = original
 
 
+def bank_holidays():
+    return [
+        datetime.datetime(2014, 12, 25, 0, 0),
+        datetime.datetime(2015, 5, 25, 0, 0)
+    ]
+
+
 class TestAvailability(unittest.TestCase):
 
     def setUp(self):
@@ -35,8 +45,11 @@ class TestAvailability(unittest.TestCase):
         self.ctx.push()
         self.now = datetime.datetime(2014, 11, 24, 9, 30)
         self.validator = None
-        call_centre_availability.bank_holidays = lambda: \
-            [datetime.datetime(2014, 12, 25, 0, 0)]
+        self.patcher = mock.patch('cla_common.call_centre_availability.bank_holidays', bank_holidays)
+        self.patcher.start()
+
+    def tearDown(self):
+        self.patcher.stop()
 
     def assertAvailable(self, time, form=None):
         form = form or Mock()
@@ -63,6 +76,7 @@ class TestAvailability(unittest.TestCase):
                     time=time, now=self.now))
 
     def test_available_slot_today_next_slot(self):
+
         self.validator = AvailableSlot(DAY_TODAY)
         self.assertNotAvailable(datetime.time(11, 0))
         self.assertAvailable(datetime.time(11, 30))
@@ -106,6 +120,22 @@ class TestAvailability(unittest.TestCase):
             form = Mock()
             form.day.data = monday
             self.assertMondayMorningUnavailable(form)
+
+    def test_bank_holiday_monday_before_11(self):
+        tuesday_after_bank_holiday = datetime.datetime(2015, 5, 26, 9, 30)
+        self.assertTrue(
+            monday_before_11am_between_eod_friday_and_monday(
+                tuesday_after_bank_holiday))
+
+        wed_after_bank_holiday = datetime.datetime(2015, 5, 27, 9, 30)
+        self.assertFalse(
+            monday_before_11am_between_eod_friday_and_monday(
+                wed_after_bank_holiday))
+
+        monday = datetime.datetime(2015, 5, 11, 9, 30)
+        self.assertTrue(
+            monday_before_11am_between_eod_friday_and_monday(
+                monday))
 
 
 class TestDayTimeChoices(unittest.TestCase):
