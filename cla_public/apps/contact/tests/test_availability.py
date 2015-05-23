@@ -121,6 +121,16 @@ class TestAvailability(unittest.TestCase):
             form.day.data = monday
             self.assertMondayMorningUnavailable(form)
 
+        # Tuesday after bank holiday
+        with override_current_time(datetime.datetime(2015, 5, 24, 9, 30)):
+            tuesday = datetime.date(2015, 5, 25)
+            for time in times.values():
+                self.now = time
+                self.validator = AvailableSlot(DAY_SPECIFIC)
+                form = Mock()
+                form.day.data = tuesday
+                self.assertMondayMorningUnavailable(form)
+
     def test_bank_holiday_monday_before_11(self):
         with override_current_time(datetime.datetime(2015, 5, 24, 9, 30)):
             tuesday_after_bank_holiday = datetime.datetime(2015, 5, 26, 9, 30)
@@ -128,16 +138,32 @@ class TestAvailability(unittest.TestCase):
                 monday_before_11am_between_eod_friday_and_monday(
                     tuesday_after_bank_holiday))
 
+            self.assertFalse(OPERATOR_HOURS.can_schedule_callback(tuesday_after_bank_holiday))
+
+            tuesday_after_bank_holiday_after_11 = datetime.datetime(2015, 5, 26, 11, 30)
+            self.assertFalse(
+                monday_before_11am_between_eod_friday_and_monday(
+                    tuesday_after_bank_holiday_after_11))
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(tuesday_after_bank_holiday_after_11))
+
             wed_after_bank_holiday = datetime.datetime(2015, 5, 27, 9, 30)
             self.assertFalse(
                 monday_before_11am_between_eod_friday_and_monday(
                     wed_after_bank_holiday))
+
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(wed_after_bank_holiday))
 
         with override_current_time(datetime.datetime(2015, 5, 9, 9, 30)):
             monday = datetime.datetime(2015, 5, 11, 9, 30)
             self.assertTrue(
                 monday_before_11am_between_eod_friday_and_monday(
                     monday))
+
+            self.assertFalse(OPERATOR_HOURS.can_schedule_callback(monday))
+
+            monday_after_11 = datetime.datetime(2015, 5, 11, 11, 30)
+
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(monday_after_11))
 
 
 class TestDayTimeChoices(unittest.TestCase):
