@@ -96,6 +96,13 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
         if self.choices:
             self.default, _ = random.choice(self.choices)
 
+    def set_day_choices(self, day):
+        slots = OPERATOR_HOURS.time_slots(day)
+        slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
+        slots = map(time_choice, slots)
+        self.choices = slots
+        self.default, _ = random.choice(slots)
+
     def process_data(self, value):
         if isinstance(value, basestring):
             return self.process_formdata([value])
@@ -170,6 +177,10 @@ class AvailabilityCheckerForm(NoCsrfForm):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC
+
+        day = datetime.datetime.strptime(self.day.choices[0][0], "%Y%m%d").date()
+        self.time_in_day.set_day_choices(day)
+
 
     def scheduled_time(self, today=None):
         """
