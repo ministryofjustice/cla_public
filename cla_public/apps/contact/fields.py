@@ -46,6 +46,12 @@ class FormattedChoiceField(object):
             raise ValueError(self.gettext('Not a valid choice'))
 
 
+def time_slots_for_day(day):
+    slots = OPERATOR_HOURS.time_slots(day)
+    slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
+    return map(time_choice, slots)
+
+
 class DayChoiceField(FormattedChoiceField, SelectField):
     """
     Select field with next `num_days` days as options
@@ -60,9 +66,7 @@ class DayChoiceField(FormattedChoiceField, SelectField):
         days = OPERATOR_HOURS.available_days(num_days)
 
         def time_slots(day):
-            slots = OPERATOR_HOURS.time_slots(day.date())
-            slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
-            slots = OrderedDict(map(time_choice, slots))
+            slots = OrderedDict(time_slots_for_day(day.date()))
             return (self._format(day), slots)
 
         return dict(map(time_slots, days))
@@ -97,11 +101,8 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
             self.default, _ = random.choice(self.choices)
 
     def set_day_choices(self, day):
-        slots = OPERATOR_HOURS.time_slots(day)
-        slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
-        slots = map(time_choice, slots)
-        self.choices = slots
-        self.default, _ = random.choice(slots)
+        self.choices = time_slots_for_day(day)
+        self.default, _ = random.choice(self.choices)
 
     def process_data(self, value):
         if isinstance(value, basestring):
