@@ -60,10 +60,18 @@
 
       for (var id in errorFields) {
         $('#field-' + id).addClass('m-error');
-        $('#field-label-' + id).addClass('m-error');
+
+        var $labelElement = $('#field-label-' + id);
+        $labelElement.addClass('m-error');
+
+        var $fieldErrors = $('<div class="form-row field-error"/>');
+
+        for (var i = 0; i <  errorFields[id].length; i++ ) {
+          $fieldErrors.append($('<p/>').text(errorFields[id][i]));
+        }
+
+        $labelElement.after($fieldErrors);
       }
-
-
     }
   };
 }());
