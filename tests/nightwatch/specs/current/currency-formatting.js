@@ -1,8 +1,6 @@
 'use strict';
 
 var util = require('util');
-var common = require('../../modules/common-functions');
-var PROPERTY_QUESTIONS = require('../../modules/constants').PROPERTY_QUESTIONS;
 var CURRENCY_CHECKS = [
   ['1', '1.00'],
   ['00001', '1.00'],
@@ -24,15 +22,18 @@ var CURRENCY_CHECKS = [
 ];
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    common.aboutPage(client);
-    common.aboutPageSetAllToNo(client);
-    common.setYesNoFields(client, 'own_property', 1);
-    client.submitForm('form');
+    client.aboutSetAllToNo(true, {
+      'own_property': 1
+    });
   },
 
   'Property page': function(client) {

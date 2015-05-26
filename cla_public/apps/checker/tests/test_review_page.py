@@ -52,9 +52,7 @@ class TestReviewPage(unittest.TestCase):
 
     def set_problem(self, problem):
         with self.client.session_transaction() as session:
-            session.checker['ProblemForm'] = {
-                'categories': problem,
-                'is_completed': True}
+            session.checker['category'] = problem
 
     def set_about_you_answers(self, **kwargs):
         answers = defaultdict(lambda: NO)

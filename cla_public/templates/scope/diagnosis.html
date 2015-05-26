@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% import "macros/element.html" as Element %}
+
+{% set heading = nodes[-1].heading if nodes else 'Choose one of the options' %}
+{% set title = _('What do you need help with?') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+
+{% block sidebar %}
+
+  <aside class="sidebar">
+    <div class="progress">
+      <div class="progress-bar">
+        <div class="progress-value" style="width:0"></div>
+      </div>
+
+      <h2>Your answers so far</h2>
+
+      {% set url = '/scope/diagnosis' %}
+      {% set firstquestion = 'What do you need help with?' %}
+
+      <ul class="progress-steps">
+        {% if nodes|length > 0 %}
+          {% for node in nodes %}
+            {% set question = firstquestion if loop.index0 == 0 else nodes[loop.index0 - 1].heading %}
+              <li class="progress-step m-completed">
+                <a class="step-name" href="{{ url }}">
+                  <span class="step-status">(completed)</span>
+                  <span class="step-name-title">{{ question }}</span>
+                  <div class="step-name-subtitle">{{ node.label|striptags }}</div>
+                </a>
+              </li>
+            {% set url = [url, node.id]|join('/') %}
+            {% set lasturl = url %}
+          {% endfor %}
+        {% endif %}
+        <li class="progress-step m-current">
+          <a class="step-name" href="{{ lasturl }}">
+            <span class="step-status">(current)</span>
+            <span class="step-name-title">{{ heading if nodes|length > 0 else firstquestion }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+{% endblock %}
+
+
+{% block inner_content %}
+  <h1>{{ _('What do you need help with?') }}</h1>
+  {% if not nodes|length %}
+    <p>
+      {{ _('Legal aid only covers some types of problem.') }}
+    </p>
+  {% endif %}
+
+  <div class="scope-options">
+    <h2 class="subtitle">{{ heading }}</h2>
+    <ul class="scope-options-list">
+      {% for choice in choices %}
+        <li class="scope-options-list-item">
+          <a href="{{ choice.url }}">
+            <span class="option-label">{{ choice.label|safe|striptags }}</span>
+            {% if choice.help_text %}
+              <div class="field-help">{{ choice.help_text|safe|striptags }}</div>
+            {% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <p>
+    {{ _('If you’re having trouble completing this form') }},
+    <a href="{{ url_for('contact.get_in_touch') }}" id="callback-link">{{ _('get in touch') }}</a>.
+  </p>
+{% endblock %}

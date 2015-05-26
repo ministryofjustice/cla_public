@@ -12,8 +12,8 @@ from cla_public.apps.contact.tests.test_availability import \
     override_current_time
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.contact.forms import ContactForm
-from cla_public.apps.checker.means_test import ProblemPayload, \
-    AboutYouPayload, YourBenefitsPayload, PropertiesPayload, PropertyPayload, \
+from cla_public.apps.checker.means_test import AboutYouPayload, \
+    YourBenefitsPayload, PropertiesPayload, PropertyPayload, \
     SavingsPayload, TaxCreditsPayload, IncomePayload, OutgoingsPayload
 from cla_public.apps.checker.tests.utils.forms_utils import flatten_dict, \
     flatten_list_of_dicts

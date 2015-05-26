@@ -1,5 +1,5 @@
 <div class="phase-banner">
-  {% if form and config.DEBUG and request.path != '/problem' -%}
+  {% if form and config.DEBUG and 'diagnosis' not in request.path -%}
     {% include "_context-debugger.html" %}
   {%- endif -%}
 

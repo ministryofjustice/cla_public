@@ -100,7 +100,7 @@ def get_started():
     if current_app.config.get('CONTACT_ONLY'):
         session.checker['contact_only'] = 'yes'
         return redirect(url_for('contact.get_in_touch'))
-    return redirect(url_for('checker.wizard', step='problem'))
+    return redirect(url_for('scope.diagnosis'))
 
 
 def is_safe_url(url):

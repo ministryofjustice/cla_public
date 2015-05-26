@@ -8,14 +8,16 @@ EMPLOYMENT_QUESTIONS.ALL = EMPLOYMENT_QUESTIONS.EMPLOYED.concat(EMPLOYMENT_QUEST
 var other_income_amount = 'input[name="your_income-other_income-per_interval_value"]';
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    common.aboutPage(client);
-    common.aboutPageSetAllToNo(client);
-    client.submitForm('form');
+    client.aboutSetAllToNo(true);
   },
 
   'Income': function(client) {
@@ -27,13 +29,10 @@ module.exports = {
   },
 
   'Context-dependent questions for employment status': function(client) {
-
     client
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'is_employed', 1);
-    client
+      .setYesNoFields('is_employed', 1)
       .submitForm('form')
       .waitForElementVisible(other_income_amount, 5000)
     ;
@@ -43,13 +42,12 @@ module.exports = {
         .assert.visible(util.format('[name="your_income-%s-interval_period"]', item))
       ;
     });
+
     client
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'is_employed', 0);
-    common.setYesNoFields(client, 'is_self_employed', 1);
-    client
+      .setYesNoFields('is_employed', 0)
+      .setYesNoFields('is_self_employed', 1)
       .submitForm('form')
       .waitForElementVisible(other_income_amount, 5000)
     ;
@@ -66,7 +64,6 @@ module.exports = {
       .assert.doesNotContainText('body', 'Your money')
       .assert.doesNotContainText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.')
     ;
-
     EMPLOYMENT_QUESTIONS.EMPLOYED.concat(EMPLOYMENT_QUESTIONS.COMMON).forEach(function(item) {
       client
         .assert.elementNotPresent(util.format('[name="partner_income-%s-per_interval_value"]', item))
@@ -77,14 +74,12 @@ module.exports = {
     client
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'have_partner', 1);
-    common.setYesNoFields(client, ['is_self_employed', 'in_dispute', 'partner_is_self_employed'], 0);
-    common.setYesNoFields(client, 'partner_is_employed', 1);
-    client
+      .setYesNoFields('have_partner', 1)
+      .setYesNoFields(['in_dispute', 'is_self_employed', 'partner_is_self_employed'], 0)
+      .setYesNoFields('partner_is_employed', 1)
       .submitForm('form')
       .waitForElementVisible(other_income_amount, 5000)
-      .assert.containsText('h1', 'You and your partner’s money coming in')
+      .assert.containsText('h1', 'You and your partner’s money')
       .assert.containsText('body', 'Your money')
       .assert.containsText('body', 'Give details of any money that is paid to you personally, like your wages. Record money coming in for your partner in the next section.')
     ;
@@ -97,9 +92,7 @@ module.exports = {
     client
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'is_employed', 1);
-    client
+      .setYesNoFields('is_employed', 1)
       .submitForm('form')
       .waitForElementVisible(other_income_amount, 5000)
     ;

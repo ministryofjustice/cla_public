@@ -16,6 +16,7 @@ from cla_public.apps.addressfinder_proxy.views import addressfinder
 from cla_public.apps.base.views import base
 from cla_public.apps.contact.views import contact
 from cla_public.apps.checker.views import checker
+from cla_public.apps.scope.urls import scope
 from cla_public.apps.checker.session import CheckerSessionInterface, \
     CustomJSONEncoder
 from cla_public.middleware import StatsdMiddleware
@@ -61,6 +62,7 @@ def create_app(config_file=None):
     app.register_blueprint(base)
     app.register_blueprint(addressfinder)
     app.register_blueprint(contact)
+    app.register_blueprint(scope)
     if not app.config.get('CONTACT_ONLY'):
         app.register_blueprint(checker)
 

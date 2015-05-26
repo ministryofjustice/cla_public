@@ -4,6 +4,7 @@ from mock import patch
 from requests.exceptions import ConnectionError, Timeout
 
 from cla_public.app import create_app
+from cla_public.apps.checker.constants import NO, YES
 
 
 class TestApiTimeout(unittest.TestCase):
@@ -21,8 +22,22 @@ class TestApiTimeout(unittest.TestCase):
             raise Timeout()
         with patch('requests.Session.send', timeout) as t:
             try:
-                response = self.client.post('/problem', data={
-                    'categories': ['debt']})
+                response = self.client.post('/about', data={
+                    'have_valuables': NO,
+                    'have_children': NO,
+                    'csrf_token': NO,
+                    'is_employed': NO,
+                    'have_partner': YES,
+                    'have_dependants': NO,
+                    'in_dispute': NO,
+                    'have_savings': NO,
+                    'partner_is_self_employed': YES,
+                    'partner_is_employed': NO,
+                    'aged_60_or_over': NO,
+                    'is_self_employed': NO,
+                    'on_benefits': NO,
+                    'own_property': NO,
+                })
             except Timeout:
                 self.fail('Timeout not caught')
             except ConnectionError:

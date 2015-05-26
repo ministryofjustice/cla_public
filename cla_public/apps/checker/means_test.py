@@ -12,7 +12,8 @@ from slumber.exceptions import SlumberBaseException
 from requests.exceptions import ConnectionError, Timeout
 
 from cla_public.apps.checker.api import get_api_connection
-from cla_public.apps.checker.constants import YES, NO, PASSPORTED_BENEFITS
+from cla_public.apps.checker.constants import YES, NO, PASSPORTED_BENEFITS, \
+    CATEGORY_ID_MAPPING
 from cla_public.apps.checker.utils import nass, passported
 from cla_public.libs.money_interval import MoneyInterval, to_amount
 from cla_public.libs.utils import classproperty, flatten
@@ -60,22 +61,6 @@ def recursive_update(orig, other):
             orig[key] = val
 
     return orig
-
-
-class ProblemPayload(dict):
-
-    def __init__(self, form_data={}):
-        super(ProblemPayload, self).__init__()
-
-        category = form_data['categories']
-
-        self.update({
-            'category':
-                'family' if category == 'violence' else category,
-
-            'notes':
-                u'User selected category: {0}'.format(category)
-        })
 
 
 class AboutYouPayload(dict):
@@ -532,6 +517,10 @@ class MeansTest(dict):
                 'partner': zero_finances(),
             })
 
+        if 'category' in session.checker:
+            category = session.checker['category']
+            self['category'] = CATEGORY_ID_MAPPING.get(category, category)
+
     def update(self, other={}, **kwargs):
         """
         Recursively merge dicts into self
@@ -547,7 +536,6 @@ class MeansTest(dict):
     def update_from_session(self):
 
         forms = [
-            'ProblemForm',
             'AboutYouForm',
             'YourBenefitsForm',
             'PropertiesForm',

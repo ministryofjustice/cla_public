@@ -140,6 +140,10 @@ NO_CALLBACK_CATEGORIES = ('benefits',)
 YES = '1'
 NO = '0'
 
+CATEGORY_ID_MAPPING = {
+    'violence': 'family'
+}
+
 ORGANISATION_CATEGORY_MAPPING = {
     'Domestic violence': 'Family',
     'Public law': 'Public',
