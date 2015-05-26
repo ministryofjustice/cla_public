@@ -24,7 +24,7 @@ from cla_public.apps.checker import honeypot
 from cla_public.apps.checker import filters # Used in templates
 from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
-    FormWizardStep, RequiresSession, ValidFormOnOptions
+    FormWizardStep, RequiresSession, ValidFormOnOptions, HasFormMixin
 from cla_public.libs import laalaa
 
 
@@ -273,7 +273,9 @@ checker.add_url_rule(
 )
 
 
-class Eligible(RequiresSession, views.MethodView, ValidFormOnOptions, object):
+class Eligible(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptions, object):
+
+    form_class = ContactForm
 
     def get(self):
         steps = steps = CheckerWizard('').relevant_steps[:-1]
@@ -285,14 +287,14 @@ class Eligible(RequiresSession, views.MethodView, ValidFormOnOptions, object):
         return render_template(
             'checker/result/eligible.html',
             steps=steps,
-            form=ContactForm()
+            form=self.form
         )
 
 
 checker.add_url_rule(
     '/result/eligible',
     view_func=Eligible.as_view('eligible'),
-    methods=['GET', 'POST']
+    methods=('GET', 'POST', 'OPTIONS')
 )
 
 
