@@ -12,9 +12,6 @@ from flask import abort, current_app, redirect, render_template, request, \
 log = logging.getLogger(__name__)
 
 
-
-
-
 class RequiresSession(object):
     """
     View mixin which redirects to session expired page if no session
@@ -58,7 +55,6 @@ class HasFormMixin(object):
                 request.form,
                 **session.checker.get(self.form_class.__name__, {}))
         return self._form
-
 
 
 class SessionBackedFormView(
