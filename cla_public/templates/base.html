@@ -76,6 +76,15 @@
       {{ _('Close') }}
     </button>
   </script>
+  <script type="text/html" id="mainFormError">
+    <div class="alert alert-error" role="alert">
+      <span class="icon icon-cross" aria-hidden="true"></span>
+      <div class="alert-message">
+        <p>This form has errors.</p>
+        <p>Please see below for the errors you need to correct.</p>
+      </div>
+    </div>
+  </script>
 {% endblock %}
 
 {% block footer_support_links %}

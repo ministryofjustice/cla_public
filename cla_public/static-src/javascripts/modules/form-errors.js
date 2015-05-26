@@ -4,6 +4,7 @@
   moj.Modules.FormErrors = {
     init: function() {
       this.bindEvents();
+      this.loadTemplates();
     },
 
     bindEvents: function() {
@@ -32,7 +33,7 @@
       if (!$.isEmptyObject(errors)) {
         this.loadErrors(errors);
         $('html, body').animate({
-            scrollTop: $('.m-error:visible:first').offset().top - 50
+            scrollTop: $('.alert-error:visible:first').offset().top - 50
         }, 300);
       } else {
         this.$form.submit();
@@ -78,6 +79,12 @@
 
         $labelElement.after($fieldErrors);
       }
+
+      this.$form.prepend(this.mainFormError);
+    },
+
+    loadTemplates: function () {
+      this.mainFormError = _.template($('#mainFormError').html());
     }
   };
 }());
