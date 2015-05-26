@@ -20,9 +20,9 @@ class TestReviewPage(unittest.TestCase):
 
     def test_outcome(self):
         paths = [
-            ('INSCOPE', ['n65::n14', 'n76', 'n82', 'n87', 'n22']),
-            ('CONTACT', ['n65::n14', 'n76', 'n82', 'n87', 'n21']),
-            ('INELIGIBLE', ['n65::n14', 'n76', 'n85']),
+            ('INSCOPE', ['n44::n14', 'n106', 'n107', 'n63', 'n19']),
+            ('CONTACT', ['n44::n14', 'n106', 'n107', 'n63', 'n18']),
+            ('INELIGIBLE', ['n44::n14', 'n54']),
         ]
 
         for outcome, choices in paths:
@@ -33,13 +33,13 @@ class TestReviewPage(unittest.TestCase):
             self.assertEqual(resp.json().get('state'), outcome)
 
     def test_direct_link(self):
-        resp = api.move(['n65::n14', 'n76', 'n82', 'n87'])
+        resp = api.move(['n44::n14', 'n52', 'n58', 'n60'])
         self.assertResponseHasNNodes(resp, 4)
 
-        resp = api.move(['n65::n14', 'n76'])
+        resp = api.move(['n44::n14', 'n52'])
         self.assertResponseHasNNodes(resp, 2)
 
-        resp = api.move(['n65::n14'])
+        resp = api.move(['n44::n14'])
         self.assertResponseHasNNodes(resp, 1)
 
         resp = api.move([])
