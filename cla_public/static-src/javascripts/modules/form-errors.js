@@ -43,7 +43,7 @@
       this.$form.submit();
     },
 
-    loadErrors: function (errors) {
+    formatErrors: function (errors) {
       var errorFields = {};
 
       (function fieldName (errorsObj, prefix) {
@@ -57,6 +57,12 @@
           }
         }
       })(errors);
+
+      return errorFields;
+    },
+
+    loadErrors: function (errors) {
+      var errorFields = this.formatErrors(errors);
 
       for (var id in errorFields) {
         $('#field-' + id).addClass('m-error');
