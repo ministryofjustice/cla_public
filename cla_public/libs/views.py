@@ -29,6 +29,7 @@ class RequiresSession(object):
 
 
 class ValidFormOnOptions(object):
+
     def options(self, *args, **kwargs):
         """
         Returns validation errors if a form is submitted to it otherwise
@@ -42,18 +43,8 @@ class ValidFormOnOptions(object):
         return rv
 
 
-class SessionBackedFormView(
-    RequiresSession,
-    views.MethodView,
-    ValidFormOnOptions,
-    object
-):
-    """
-    Saves and loads form data to and from the session
-    """
-
+class HasFormMixin(object):
     form_class = None
-    template = None
 
     @property
     def form(self):
@@ -66,6 +57,21 @@ class SessionBackedFormView(
                 request.form,
                 **session.checker.get(self.form_class.__name__, {}))
         return self._form
+
+
+
+class SessionBackedFormView(
+    HasFormMixin,
+    RequiresSession,
+    views.MethodView,
+    ValidFormOnOptions,
+    object
+):
+    """
+    Saves and loads form data to and from the session
+    """
+
+    template = None
 
     def get(self, *args, **kwargs):
         """
