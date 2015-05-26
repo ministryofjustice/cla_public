@@ -201,8 +201,8 @@ class CheckerSessionObject(dict):
         return Notes()
 
     @property
-    def callback_requested(self):
-        return self.is_yes('ContactForm', 'callback_requested')
+    def contact_type(self):
+        return self.get('ContactForm', {}).get('contact_type')
 
 
 class CheckerSession(SecureCookieSession, SessionMixin):
@@ -245,7 +245,10 @@ class CheckerSession(SecureCookieSession, SessionMixin):
             stored = {
                 'case_ref': self.checker.get('case_ref'),
                 'callback_time': self.checker.callback_time,
-                'callback_requested': self.checker.callback_requested,
+                'callback_requested': self.checker.contact_type in [
+                    'callback',
+                    'thirdparty'
+                ],
                 'category': self.checker.category,
                 'eligibility': self.checker.eligibility
             }

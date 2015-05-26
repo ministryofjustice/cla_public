@@ -25,9 +25,10 @@ def add_no_cache_headers(response):
 
 def confirmation_email(data):
     data['case_ref'] = session.checker['case_ref']
-    data['callback_requested'] = data['callback_requested'] == YES
+    data['callback_requested'] = data['contact_type'] in ['callback', 'thirdparty']
     if data['callback_requested']:
-        data['safe_to_contact'] = data['callback']['safe_to_contact'] == 'SAFE'
+        data['safe_to_contact'] = data['callback']['safe_to_contact'] == 'SAFE' \
+            or data['thirdparty']['safe_to_contact'] == 'SAFE'
 
     return Message(
         gettext(u'Your Civil Legal Advice reference number'),
