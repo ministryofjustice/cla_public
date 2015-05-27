@@ -33,7 +33,7 @@ class ValidFormOnOptions(object):
         Returns validation errors if a form is submitted to it otherwise
         returns Response with allowed methods
         """
-        if request.content_type == 'application/x-www-form-urlencoded':
+        if 'application/x-www-form-urlencoded' in request.content_type:
             self.form.validate()
             return jsonify(self.form.errors)
         rv = Response()
