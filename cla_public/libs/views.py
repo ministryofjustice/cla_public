@@ -20,7 +20,7 @@ class RequiresSession(object):
     session_expired_url = '/session-expired'
 
     def dispatch_request(self, *args, **kwargs):
-        if not (session or session.is_current) \
+        if (not session or not session.is_current) \
                 and request.method.lower() != 'options':
             return redirect(self.session_expired_url)
         return super(RequiresSession, self).dispatch_request(*args, **kwargs)
