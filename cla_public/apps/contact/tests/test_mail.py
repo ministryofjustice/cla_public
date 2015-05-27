@@ -6,7 +6,6 @@ from flask import session
 from werkzeug.datastructures import MultiDict
 
 from cla_public.app import create_app
-from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.contact.views import confirmation_email
 from cla_public.apps.contact.forms import ContactForm
 
@@ -18,7 +17,7 @@ def submit(**kwargs):
     data = {
         'full_name': 'John Smith',
         'email': 'john.smith@example.com',
-        'callback_requested': YES,
+        'contact_type': 'callback',
         'callback-contact_number': '0123456789',
         'time_today': '1130',
         'specific_day': 'today',
@@ -69,7 +68,7 @@ class TestMail(unittest.TestCase):
 
     def test_confirmation_email_no_callback(self):
         with self.client:
-            form = submit(callback_requested=NO)
+            form = submit(contact_type='call')
             msg = confirmation_email(form.data)
             msg = self.receive_email(msg)
 
