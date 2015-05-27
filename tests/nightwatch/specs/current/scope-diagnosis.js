@@ -19,7 +19,7 @@ var scenarioTypes = {
   contact: {
     label: 'Contact',
     destination: '/contact',
-    identifier: 'input[name="callback_requested"]'
+    identifier: 'input[name="contact_type"]'
   }
 };
 

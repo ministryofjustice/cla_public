@@ -16,7 +16,7 @@ function willCallWithNotes(client, notes_text) {
   var length = notes_text.length;
   client
     .setValue('input#full_name', 'John Smith')
-    .click('input[name="callback_requested"][value="0"]')
+    .click('input[name="contact_type"][value="call"]')
     .setValue(notes, notes_text)
     .assert.value(notes, notes_text, 'Notes set to ' + length + ' chars')
     .submitForm('form');
