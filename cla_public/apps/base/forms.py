@@ -115,8 +115,8 @@ class ReasonsForContactingForm(ZendeskForm):
     REASONS_FOR_CONTACTING_NONE = REASONS_FOR_CONTACTING_NONE
 
     def validate_reasons(self, field):
-        if not field.data:
-            raise ValidationError(u'You need to select at least one option')
+        # if not field.data:
+        #     raise ValidationError(u'You need to select at least one option')
         if REASONS_FOR_CONTACTING_NONE in field.data and len(field.data) > 1:
             raise ValidationError(u'You cannot select “%s” and other options together'
                                   % REASONS_FOR_CONTACTING_NONE)

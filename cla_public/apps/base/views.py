@@ -82,6 +82,10 @@ def reasons_for_contacting():
     error = None
 
     if form.validate_on_submit():
+        if len(form.reasons.data) == 0:
+            # allows skipping form if nothing is selected
+            return redirect(url_for('contact.get_in_touch'))
+
         response = zendesk.create_ticket(form.api_payload())
 
         if response.status_code < 300:
