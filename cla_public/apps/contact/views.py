@@ -10,7 +10,6 @@ from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, ApiError
-from cla_public.apps.checker.constants import YES
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, \
     ValidFormOnOptions
