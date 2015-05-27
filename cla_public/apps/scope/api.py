@@ -6,7 +6,7 @@ import requests
 from cla_public.apps.checker.api import post_to_eligibility_check_api
 from cla_public.apps.checker.constants import CATEGORY_ID_MAPPING
 from cla_public.apps.checker.utils import category_option_from_name
-from cla_public.libs.utils import override_locale
+from cla_public.libs.utils import get_locale, override_locale
 from flask import current_app, request, session
 from flask.ext.babel import gettext
 
@@ -34,7 +34,8 @@ class DiagnosisApiClient(object):
 
     def request_args(self):
         return {
-            'timeout': current_app.config.get('API_CLIENT_TIMEOUT', None)
+            'timeout': current_app.config.get('API_CLIENT_TIMEOUT', None),
+            'headers': {'Accept-Language': get_locale()},
         }
 
     def post_to_scope(self, path='', payload={}):
