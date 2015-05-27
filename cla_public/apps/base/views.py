@@ -6,7 +6,7 @@ import datetime
 from urlparse import urlparse, urljoin
 
 from flask import abort, current_app, jsonify, redirect, render_template, \
-    session, url_for, request
+    session, url_for, request, views
 from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_common.smoketest import smoketest
@@ -15,6 +15,7 @@ from cla_public.apps.base.forms import FeedbackForm
 import cla_public.apps.base.filters
 import cla_public.apps.base.extensions
 from cla_public.libs import zendesk
+from cla_public.libs.views import HasFormMixin, ValidFormOnOptions
 
 
 log = logging.getLogger(__name__)
@@ -36,20 +37,34 @@ def privacy():
     return render_template('privacy.html')
 
 
-@base.route('/feedback', methods=['GET', 'POST'])
-def feedback():
-    form = FeedbackForm()
-    error = None
+class Feedback(HasFormMixin, views.MethodView, ValidFormOnOptions, object):
 
-    if form.validate_on_submit():
-        response = zendesk.create_ticket(form.api_payload())
+    form_class = FeedbackForm
 
-        if response.status_code < 300:
-            return redirect(url_for('.feedback_confirmation'))
-        else:
-            error = _('Something went wrong. Please try again.')
+    def get(self):
+        return self.render()
 
-    return render_template('feedback.html', form=form, zd_error=error)
+    def post(self):
+        error = None
+
+        if self.form.validate_on_submit():
+            response = zendesk.create_ticket(self.form.api_payload())
+
+            if response.status_code < 300:
+                return redirect(url_for('.feedback_confirmation'))
+            else:
+                error = _('Something went wrong. Please try again.')
+
+        return self.render(error)
+
+    def render(self, error=None):
+        return render_template('feedback.html', form=self.form, zd_error=error)
+
+base.add_url_rule(
+    '/feedback',
+    view_func=Feedback.as_view('feedback'),
+    methods=('GET', 'POST', 'OPTIONS')
+)
 
 
 @base.route('/feedback/confirmation')
