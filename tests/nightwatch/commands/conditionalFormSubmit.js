@@ -14,7 +14,7 @@ exports.command = function(shouldSubmitForm, callback) {
 
     if(shouldSubmitForm) {
       client.submitForm('form', function() {
-        console.log('     ◇ Form submitted');
+        console.log('     ⟡ Form submitted');
 
         this.assert.elementNotPresent('form > .alert-error',
           '    - No form errors');
