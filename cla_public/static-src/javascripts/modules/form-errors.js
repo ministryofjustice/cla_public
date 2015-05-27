@@ -12,6 +12,7 @@
     },
 
     postToFormErrors: function(e) {
+      this.clearErrors();
       this.$form = $(e.currentTarget).closest('form');
       if (this.$form.length) {
         e.preventDefault();
@@ -85,6 +86,12 @@
 
     loadTemplates: function () {
       this.mainFormError = _.template($('#mainFormError').html());
+    },
+
+    clearErrors: function () {
+      $('.form-row.field-error').remove();
+      $('.alert.alert-error').remove();
+      $('.m-error').removeClass('m-error');
     }
   };
 }());
