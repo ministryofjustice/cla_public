@@ -73,7 +73,7 @@
       this.addresses = data;
 
       if (data.length < 1) {
-        this.showError('No addresses were found with that postcode');
+        this.showHelp('No addresses were found with that postcode, but you can still enter your address manually');
       } else if (data.length === 1) {
         this.updatePostcode(data);
         this.updateAddress(0);
@@ -132,6 +132,11 @@
         .addClass('m-error');
       this.$formGroup.find('.form-row')
         .before($('<div class="form-row field-error"><p>' + msg + '</p></div>'));
+    },
+
+    showHelp: function (msg) {
+      this.$formGroup.find('.form-row')
+        .before($('<div class="form-row field-help"><p>' + msg + '</p></div>'));
     },
 
     reset: function () {
