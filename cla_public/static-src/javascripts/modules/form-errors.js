@@ -65,14 +65,29 @@
 
     loadErrors: function (errors) {
       var errorFields = this.formatErrors(errors);
+      var self = this;
 
-      for (var id in errorFields) {
-        $('#field-' + id).addClass('m-error');
-
-        $('#field-label-' + id)
-          .addClass('m-error')
-          .after(this.fieldError({errors: errorFields[id]}));
+      function addErrors(errors, fieldName) {
+        if (_.isString(errors[0])) {
+          $('#field-' + fieldName).addClass('m-error');
+          $('#field-label-' + fieldName)
+            .addClass('m-error')
+            .after(self.fieldError({ errors: errors }));
+        } else if(_.isObject(errors[0]) && !_.isArray(errors[0])) {
+          // Multiple forms (e.g. properties)
+          _.each(errors, function(errors, i) {
+            _.each(errors, function(subformErrors, subformFieldName) {
+              addErrors(subformErrors, fieldName + '-' + i + '-' + subformFieldName);
+            });
+          });
+        } else {
+          _.each(errors, function(subformErrors) {
+            addErrors(subformErrors[1], fieldName + '-' + subformErrors[0]);
+          });
+        }
       }
+
+      _.each(errorFields, addErrors);
 
       this.$form.prepend(this.mainFormError());
     },
