@@ -48,8 +48,19 @@
 
 
   .progress-bar {
+    position: relative;
     margin-top: -10px;
     background: $grey-2;
+
+    &:before {
+      background: rgba(black, .2);
+      height: 100%;
+      content: '';
+      position: absolute;
+      opacity: .7;
+      width: 20%;
+      border-right: 1px solid rgba(white, .7);
+    }
   }
 
   .progress-value {
@@ -150,9 +161,15 @@
     color: $grey-1;
   }
 
-  .progress-step.m-completed .step-status {
-    background-color: lighten($green, 10);
-    border-color: lighten($green, 10);
+  .progress-step.m-completed {
+    .step-status {
+      background-color: lighten($green, 10);
+      border-color: lighten($green, 10);
+    }
+
+    span.step-name {
+      color: inherit;
+    }
   }
 
   .progress-step.m-current .step-status {

@@ -7,11 +7,10 @@
 
 
 {% block sidebar %}
-
   <aside class="sidebar">
     <div class="progress">
       <div class="progress-bar">
-        <div class="progress-value" style="width:0"></div>
+        <div class="progress-value" style="width:{{ 5 + nodes|length * 3 }}%"></div>
       </div>
 
       <h2>Your progress</h2>
@@ -43,7 +42,6 @@
       </ul>
     </div>
   </aside>
-
 {% endblock %}
 
 
