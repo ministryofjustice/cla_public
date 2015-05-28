@@ -136,18 +136,50 @@ class CheckerStep(ValidFormOnOptions, UpdatesMeansTest, FormWizardStep):
             {}
         ).get('is_completed', False)
 
+    @property
+    def is_current(self):
+        if request.view_args:
+            return self.name == request.view_args['step']
+        else:
+            return False
+
+    @property
+    def count(self):
+        steps = CheckerWizard('').relevant_steps[:-1]
+        for index, item in enumerate(steps):
+            if item.name == self.name:
+                return index + 1
+        return None
+
     def render(self, *args, **kwargs):
         steps = CheckerWizard('').relevant_steps[:-1]
-        return render_template(self.template, steps=steps, form=self.form)
+        current_step = None
+        if self.count:
+            current_step = steps[self.count-1]
+
+        return render_template(
+            self.template,
+            steps=steps,
+            current_step=current_step,
+            form=self.form
+        )
 
 
-class ReviewStep(FormWizardStep):
+class ReviewStep(CheckerStep):
+    @property
+    def count(self):
+        steps = CheckerWizard('').relevant_steps[:-1]
+        return len(steps) + 1
 
     def render(self, *args, **kwargs):
-        review_steps = CheckerWizard('').review_steps
-        steps = review_steps or CheckerWizard('').relevant_steps[:-1]
-        return render_template(self.template, steps=steps,
-                               review_steps=review_steps, form=self.form)
+        steps = CheckerWizard('').relevant_steps[:-1]
+        current_step = self
+        return render_template(
+            self.template,
+            steps=steps,
+            current_step=current_step,
+            form=self.form
+        )
 
 
 class CheckerWizard(AllowSessionOverride, FormWizard):
@@ -278,14 +310,21 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptio
     form_class = ContactForm
 
     def get(self):
-        steps = steps = CheckerWizard('').relevant_steps[:-1]
+        steps = CheckerWizard('').relevant_steps[:-1]
         if session.checker.category in NO_CALLBACK_CATEGORIES:
             return redirect(
                 url_for('.find-legal-adviser', category=session.checker.category)
             )
 
+        current_step = {
+            'count': len(steps) + 1,
+            'is_current': True,
+            'is_completed': False
+        }
+
         return render_template(
             'checker/result/eligible.html',
+            current_step=current_step,
             steps=steps,
             form=self.form
         )

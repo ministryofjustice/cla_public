@@ -29,7 +29,7 @@
       </section>
     {% endif %}
 
-    {% for step in review_steps %}
+    {% for step in steps %}
       {% set answers = step.completed_fields() %}
       {% with step_title = step.form_class.title %}
         <section id="step-{{ step.name }}">

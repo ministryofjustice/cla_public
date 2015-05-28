@@ -51,20 +51,24 @@
     position: relative;
     margin-top: -10px;
     background: $grey-2;
+    height: 10px;
 
-    &:before {
-      background: rgba(black, .2);
-      height: 100%;
-      content: '';
+    .m-completed {
       position: absolute;
-      opacity: .7;
-      width: 20%;
-      border-right: 1px solid rgba(white, .7);
+      top: 0;
+      bottom: 0;
+    }
+
+    .m-current {
+      position: absolute;
+      top: -2px;
+      bottom: -2px;
+      background: none;
+      border-right: 4px solid $orange;
     }
   }
 
   .progress-value {
-    height: 10px;
     background: lighten($green, 10);
   }
 
@@ -116,6 +120,18 @@
           z-index: 1;
         }
       }
+    }
+
+    &.m-category .step-name {
+      border: 1px solid $grey-3;
+      margin: 2px 0;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background: white;
+    }
+
+    &.m-category a.step-name:hover {
+      background: $grey-4;
     }
   }
 
