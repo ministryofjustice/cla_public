@@ -1,19 +1,31 @@
-(function () {
+(function() {
   'use strict';
 
   moj.Modules.FormErrors = {
     init: function() {
+      _.bindAll(this, 'postToFormErrors', 'onAjaxSuccess', 'onAjaxError');
       this.bindEvents();
       this.loadTemplates();
     },
 
     bindEvents: function() {
-      $('button[type="submit"]', $('form')).on('click',  $.proxy(this.postToFormErrors, this));
+      $('form').on('submit', this.postToFormErrors);
+      $('[type=submit]').on('click', function(e) {
+        var $target = $(e.target);
+        $target.closest('form').attr('submit-name', $target.attr('name'));
+      });
     },
 
     postToFormErrors: function(e) {
       this.clearErrors();
-      this.$form = $(e.currentTarget).closest('form');
+      this.$form = $(e.target);
+
+      // Return if button has a name, which is attached as form attribute on click
+      // (assuming secondary buttons)
+      if(this.$form.attr('submit-name')) {
+        return;
+      }
+
       if (this.$form.length) {
         e.preventDefault();
         e.stopPropagation();
@@ -22,30 +34,30 @@
           url: '',
           contentType: 'application/x-www-form-urlencoded',
           data: this.$form.serialize()
-        }).done(
-          $.proxy(this.onAjaxSuccess, this)
-        ).fail(
-          $.proxy(this.onAjaxError, this)
-        );
+        })
+        .done(this.onAjaxSuccess)
+        .fail(this.onAjaxError);
       }
     },
 
-    onAjaxSuccess: function (errors) {
+    onAjaxSuccess: function(errors) {
       if (!$.isEmptyObject(errors)) {
         this.loadErrors(errors);
         $('html, body').animate({
-            scrollTop: $('.alert-error:visible:first').offset().top - 50
+          scrollTop: $('.alert-error:visible:first').offset().top - 50
         }, 300);
       } else {
+        this.$form.off('submit');
         this.$form.submit();
       }
     },
 
-    onAjaxError: function () {
+    onAjaxError: function() {
+      this.$form.off('submit');
       this.$form.submit();
     },
 
-    formatErrors: function (errors) {
+    formatErrors: function(errors) {
       var errorFields = {};
 
       (function fieldName (errorsObj, prefix) {
@@ -63,7 +75,7 @@
       return errorFields;
     },
 
-    loadErrors: function (errors) {
+    loadErrors: function(errors) {
       var errorFields = this.formatErrors(errors);
       var self = this;
 
@@ -92,12 +104,12 @@
       this.$form.prepend(this.mainFormError());
     },
 
-    loadTemplates: function () {
+    loadTemplates: function() {
       this.mainFormError = _.template($('#mainFormError').html());
       this.fieldError = _.template($('#fieldError').html());
     },
 
-    clearErrors: function () {
+    clearErrors: function() {
       $('.form-row.field-error').remove();
       $('.alert.alert-error').remove();
       $('.m-error').removeClass('m-error');
