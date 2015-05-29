@@ -51,3 +51,25 @@
     </p>
   {% endcall %}
 {% endmacro %}
+
+
+{#
+  Progress bar
+
+  Params:
+    - current <Number>
+    - completed <Number>
+#}
+
+{%  macro progress_bar(current, completed, offset=-5) %}
+  {% if current is number or completed is number %}
+    <div class="progress-bar">
+      {% if completed %}
+        <div class="progress-value m-completed" style="width:{{ completed + offset }}%;"></div>
+      {% endif %}
+      {% if current %}
+        <div class="progress-value m-current" style="left:{{ current + offset }}%;"></div>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endmacro %}

@@ -3,19 +3,14 @@
 
 {% set heading = nodes[-1].heading if nodes else 'Choose one of the options' %}
 {% set title = _('What do you need help with?') %}
-
-{% set current_percentage = nodes|length * 2.5 + 6 %}
-{% set completion_perc_offset = 0 if is_contact_page else -5 %}
+{% set current_percentage = nodes|length * 3 + 5 %} {# Emulate percentage progress for scope nodes  #}
 
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block sidebar %}
   <aside class="sidebar">
     <div class="progress">
-      <div class="progress-bar">
-        <div class="progress-value m-completed" style="width:{{ current_percentage }}%;"></div>
-        <div class="progress-value m-current" style="width:{{ current_percentage }}%;"></div>
-      </div>
+      {{ Element.progress_bar(current_percentage, current_percentage, 0) }}
 
       <h2>Your progress</h2>
 
