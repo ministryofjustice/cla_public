@@ -1,7 +1,6 @@
 .field-error {
   color: $mellow-red;
   font-size: .9em;
-  padding-left: 20px;
 
   p {
     margin: 5px 0 0;
@@ -10,4 +9,8 @@
       margin: 0;
     }
   }
+}
+
+.fieldset-label.m-error + .field-error {
+  padding-left: 20px;
 }

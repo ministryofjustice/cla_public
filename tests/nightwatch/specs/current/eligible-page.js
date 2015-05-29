@@ -104,7 +104,7 @@ module.exports = {
       .click('body')
       .useXpath()
       .waitForElementVisible('//input[@id="address-post_code"]/ancestor::fieldset//div[@class="form-row field-error"]', 25000)
-      .assert.containsText('//input[@id="address-post_code"]/ancestor::fieldset//div[@class="form-row field-error"]', 'No addresses were found with that postcode')
+      .assert.containsText('//input[@id="address-post_code"]/ancestor::fieldset//div[@class="form-row field-error"]', 'No addresses were found with that postcode, but you can still enter your address manually')
       .useCss()
     ;
 

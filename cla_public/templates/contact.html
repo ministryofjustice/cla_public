@@ -145,4 +145,28 @@
       <%= count %> {{ _('characters remaining') }}
     </div>
   </script>
+
+  <script type="text/html" id="postcodeNotEnteredText">
+    <div class="form-row field-error">
+      <p>
+        {{ _('Must contain a valid postcode') }}
+      </p>
+    </div>
+  </script>
+
+  <script type="text/html" id="noAddressesFoundText">
+    <div class="form-row field-error">
+      <p>
+        {{ _('No addresses were found with that postcode, but you can still enter your address manually') }}
+      </p>
+    </div>
+  </script>
+
+  <script type="text/html" id="requestFailedText">
+    <div class="form-row field-error">
+      <p>
+        {{ _('Request failed: ') }} <%= textStatus %>, <%= error %>
+      </p>
+    </div>
+  </script>
 {% endblock %}
