@@ -12,7 +12,8 @@ from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, ApiError
 from cla_public.apps.checker.constants import YES
 from cla_public.apps.checker.views import UpdatesMeansTest
-from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView
+from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, \
+    ValidFormOnOptions
 
 
 @contact.after_request
@@ -34,7 +35,11 @@ def confirmation_email(data):
         body=render_template('emails/confirmation.txt', data=data))
 
 
-class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
+class Contact(
+    AllowSessionOverride,
+    UpdatesMeansTest,
+    SessionBackedFormView
+):
     form_class = ContactForm
     template = 'contact.html'
 
@@ -63,7 +68,8 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
 
 contact.add_url_rule(
     '/contact',
-    view_func=Contact.as_view('get_in_touch'))
+    view_func=Contact.as_view('get_in_touch'),
+    methods=('GET', 'POST', 'OPTIONS'))
 
 
 class ContactConfirmation(views.MethodView):
