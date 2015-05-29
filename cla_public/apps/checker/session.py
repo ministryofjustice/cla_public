@@ -181,6 +181,8 @@ class CheckerSessionObject(dict):
 
     @property
     def callback_time(self):
+        if self.contact_type == 'thirdparty':
+            return self.field('ContactForm', 'thirdparty', {}).get('time', None)
         return self.field('ContactForm', 'callback', {}).get('time', None)
 
     def add_note(self, key, note):
@@ -249,6 +251,7 @@ class CheckerSession(SecureCookieSession, SessionMixin):
                     'callback',
                     'thirdparty'
                 ],
+                'contact_type': self.checker.contact_type,
                 'category': self.checker.category,
                 'eligibility': self.checker.eligibility
             }
