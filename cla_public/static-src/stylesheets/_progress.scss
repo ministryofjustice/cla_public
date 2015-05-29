@@ -61,10 +61,13 @@
 
     .m-current {
       position: absolute;
-      top: -2px;
-      bottom: -2px;
-      background: none;
-      border-right: 4px solid $orange;
+      top: 0;
+      bottom: 0;
+      background: $orange;
+      margin-left: -7px;
+      border: solid white;
+      border-width: 0 1px;
+      width: 6px;
     }
   }
 
