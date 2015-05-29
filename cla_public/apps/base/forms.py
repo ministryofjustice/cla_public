@@ -6,8 +6,8 @@ from flask import render_template, current_app, request
 from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, get_translations
 from wtforms import TextAreaField, RadioField, SelectMultipleField, \
-    StringField, widgets, ValidationError
-from wtforms.validators import InputRequired
+    StringField, widgets
+from wtforms.validators import InputRequired, Length
 
 from cla_public.apps.base.constants import FEEL_ABOUT_SERVICE, HELP_FILLING_IN_FORM, \
     REASONS_FOR_CONTACTING, REASONS_FOR_CONTACTING_OTHER
@@ -35,6 +35,11 @@ class BabelTranslationsFormMixin(object):
 
 
 class ZendeskForm(Honeypot, BabelTranslationsFormMixin, Form):
+    _textarea_length_validator = Length(
+        max=1000,
+        message=u'Field cannot contain more than %(max)d characters',
+    )
+
     @classmethod
     def _make_referrer_field(cls, referrer_url):
         return {
@@ -74,9 +79,11 @@ class FeedbackForm(ZendeskForm):
         widget=widgets.HiddenInput(),
         validators=[InputRequired()],
     )
-    difficulty = TextAreaField(_(u'Did you have any difficulty with this service?'))
+    difficulty = TextAreaField(label=_(u'Did you have any difficulty with this service?'),
+                               validators=[ZendeskForm._textarea_length_validator])
 
-    ideas = TextAreaField(_(u'Do you have any ideas for how it could be improved?'))
+    ideas = TextAreaField(label=_(u'Do you have any ideas for how it could be improved?'),
+                          validators=[ZendeskForm._textarea_length_validator])
 
     feel_about_service = RadioField(
         _(u'Overall, how did you feel about the service you received today?'),
@@ -109,13 +116,12 @@ class ReasonsForContactingForm(ZendeskForm):
         widget=widgets.ListWidget(prefix_label=False),
         option_widget=widgets.CheckboxInput(),
     )
-    other_reasons = TextAreaField(_(u'Other reasons'))
+    other_reasons = TextAreaField(
+        label=_(u'Please specify'),
+        validators=[ZendeskForm._textarea_length_validator],
+    )
 
     REASONS_FOR_CONTACTING_OTHER = REASONS_FOR_CONTACTING_OTHER
-
-    def validate_other_reasons(self, field):
-        if REASONS_FOR_CONTACTING_OTHER in self.reasons.data and not field.data:
-            raise ValidationError(u'Please specify the other reasons')
 
     def api_payload(self):
         return self._make_api_payload(

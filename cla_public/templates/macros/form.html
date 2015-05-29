@@ -41,7 +41,7 @@
     {%- if field and field.errors %} m-error{% endif %}
     {%- if is_subfield %} form-subfield{% endif %}
     {%- if is_hidden == True or controlled_by and control_value %} s-hidden{% endif %}"
-    {% if controlled_by %}data-controlled-by="{{ controlled_by.id }}" data-control-value="{{ control_value }}"{% endif %}
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
     {% if field %}id="field-{{ field.id }}"{% endif %}
     {% if persist_values %}data-persist-values="true"{% endif %}
   >

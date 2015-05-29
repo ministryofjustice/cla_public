@@ -24,14 +24,26 @@
       {% endcall %}
     {% endif %}
 
-    {{ Form.option_list_fieldset(form.reasons, separated_options=[form.REASONS_FOR_CONTACTING_OTHER]) }}
-
-    <div data-controlled-by="reasons" data-control-value="{{ form.REASONS_FOR_CONTACTING_OTHER }}">
-      {{ Form.textarea_fieldset(form.other_reasons, class_='m-full', rows=6) }}
-    </div>
+    {% call Form.fieldset(form.reasons) %}
+        <ul class="form-option-list" role="group" aria-labelledby="field-label-reasons">
+            {% for reason in form.reasons %}
+                <li>
+                    <label class="radio-inline" for="{{ reason.id }}">
+                      {{ reason }}
+                      {{ reason.label.text }}
+                    </label>
+                    {% if reason.data == form.REASONS_FOR_CONTACTING_OTHER %}
+                        {% call Form.fieldset(form.other_reasons, is_subfield=True, controlled_by=reason, control_value=reason.data) %}
+                          {{ form.other_reasons(class_='form-control') }}
+                        {% endcall %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endcall %}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Continue')) }}
+    {{ Form.actions(_('Continue to contact CLA')) }}
   </form>
 
   {# <p><a href="{{ url_for('contact.get_in_touch') }}" data-ga="event:reasons-for-contacting/skipped">{{ _('Skip to contact details') }}</a></p> #}
