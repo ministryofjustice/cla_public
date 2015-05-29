@@ -158,7 +158,7 @@ CONTACT_SAFETY = (
 CONTACT_PREFERENCE = (
     ('call', _(u'I’ll call CLA')),
     ('callback', _(u'Call me back')),
-    ('thirdparty', _(u'Call someone else on my behalf')),
+    ('thirdparty', _(u'Call someone else instead of me')),
 )
 
 LEGAL_ADVISER_SEARCH_PREFERENCE = (

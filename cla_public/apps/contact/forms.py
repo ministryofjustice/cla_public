@@ -66,9 +66,9 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform to request callback
     """
     contact_number = StringField(
-        _(u'Phone number for your callback'),
+        _(u'Phone number for the callback'),
         description=_(
-            u'Please enter your full phone number including area code, '
+            u'Please enter full phone number including area code, '
             u'using only numbers. For example 020 7946 0492'
         ),
         validators=[
@@ -87,10 +87,10 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
         ],
     )
     time = AvailabilityCheckerField(
-        _(u'Select a time for us to call you'),
+        _(u'Select a time for us to call'),
         description=_(
-            u'We’ll try to call you back at the time you '
-            u'request, but this may not always be possible.'))
+            u'We’ll try to call at the time you '
+            u'request, but this may not always be possible'))
 
 
 class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -109,9 +109,9 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
         choices=(THIRDPARTY_RELATIONSHIP_CHOICES),
         validators=[Required()])
     contact_number = StringField(
-        _(u'Phone number for your callback'),
+        _(u'Phone number for the callback'),
         description=_(
-            u'Please enter your full phone number including area code, '
+            u'Please enter full phone number including area code, '
             u'using only numbers. For example 020 7946 0492'
         ),
         validators=[
@@ -130,9 +130,9 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
         ],
     )
     time = AvailabilityCheckerField(
-        _(u'Select a time for us to call you'),
+        _(u'Select a time for us to call'),
         description=_(
-            u'We’ll try to call you back at the time you '
+            u'We’ll try to call at the time you '
             u'request, but this may not always be possible.'))
 
 
@@ -168,7 +168,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                 u'characters or less')),
             InputRequired()])
     contact_type = RadioField(
-        _(u'Contact options'),
+        _(u'Select a contact option'),
         choices=CONTACT_PREFERENCE,
         validators=[
             InputRequired(message=_(u'Please choose one of the options'))],
