@@ -5,14 +5,16 @@ var common = require('../../modules/common-functions');
 var OUTGOINGS_QUESTIONS = require('../../modules/constants').OUTGOINGS_QUESTIONS;
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    common.aboutPage(client);
-    common.aboutPageSetAllToNo(client);
-    client.submitForm('form');
+    client.aboutSetAllToNo(true);
   },
 
   'Income': function(client) {
@@ -41,15 +43,11 @@ module.exports = {
       .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
       .back()
       .waitForElementPresent('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'have_children', 1);
-    client
+      .setYesNoFields('have_children', 1)
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
       .waitForElementVisible('input[name="other_benefits"]', 5000)
-    ;
-    common.setYesNoFields(client, 'other_benefits', 0);
-    client
+      .setYesNoFields('other_benefits', 0)
       .setValue('input[name="child_benefit-per_interval_value"]', 0)
       .setValue('input[name="child_tax_credit-per_interval_value"]', 0)
       .submitForm('form')
@@ -79,11 +77,8 @@ module.exports = {
       .waitForElementVisible('input[name="other_benefits"]', 5000)
       .back()
       .waitForElementPresent('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'have_partner', 1);
-    common.setYesNoFields(client, 'in_dispute', 0);
-    common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
-    client
+      .setYesNoFields('have_partner', 1)
+      .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
       .submitForm('form')
       .waitForElementPresent('input[name="other_benefits"]', 5000)
       .submitForm('form')

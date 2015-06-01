@@ -70,7 +70,9 @@ module.exports = {
     console.log(util.format('Running %s income threshold scenarios', SCENARIOS.length));
 
     SCENARIOS.forEach(function(scenario) {
-      common.startPage(client, scenario.name);
+      client.startService()
+      console.log('\n' + scenario.name + '\n');
+
       scenario.pages.forEach(function(page) {
         client
           .waitForElementVisible(form_id(page.page), 5000)

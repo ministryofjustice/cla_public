@@ -47,7 +47,7 @@
         $el.attr('disabled', true);
         this.queryAddressFinder(query);
       } else {
-        this.showError('must contain a valid postcode');
+        this.showError(this.postcodeNotEnteredTemplate());
       }
     },
 
@@ -73,7 +73,7 @@
       this.addresses = data;
 
       if (data.length < 1) {
-        this.showError('No addresses were found with that postcode');
+        this.showError(this.noAddressesFoundTemplate());
       } else if (data.length === 1) {
         this.updatePostcode(data);
         this.updateAddress(0);
@@ -86,7 +86,7 @@
     queryFail: function (jqxhr, textStatus, error) {
       this.$form.find('.address-finder-button').attr('disabled', false);
 
-      this.showError('Request failed: ' + textStatus + ', ' + error);
+      this.showError(this.requestFailedTemplate({textStatus: textStatus, error: error}));
     },
 
     updatePostcode: function (data) {
@@ -125,13 +125,11 @@
       $('.address-list .form-control').focus();
     },
 
-    showError: function (msg) {
+    showError: function (template) {
       this.$formGroup
-        .addClass('m-error')
-        .find('.fieldset-label')
         .addClass('m-error');
       this.$formGroup.find('.form-row')
-        .before($('<div class="form-row field-error"><p>' + msg + '</p></div>'));
+        .before(template);
     },
 
     reset: function () {
@@ -145,6 +143,9 @@
     templates: function () {
       this.listTemplate = _.template($('#addressFinderList').html());
       this.buttonTemplate = _.template($('#addressFinderButton').html());
+      this.postcodeNotEnteredTemplate = _.template($('#postcodeNotEnteredText').html());
+      this.noAddressesFoundTemplate = _.template($('#noAddressesFoundText').html());
+      this.requestFailedTemplate = _.template($('#requestFailedText').html());
     }
   };
 }());

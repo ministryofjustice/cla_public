@@ -21,6 +21,7 @@ from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, \
     FieldValue
 from cla_public.libs.honeypot import Honeypot
+from cla_public.libs.utils import get_locale
 
 
 LANG_CHOICES = filter(
@@ -44,6 +45,13 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     other_adaptation = TextAreaField(
         _(u'Other communication needs'),
         description=_(u'Please tell us what you need in the box below'))
+
+    def __init__(self, formdata=None, obj=None, prefix='', data=None, meta=None, **kwargs):
+        if data is None:
+            data = {
+                'welsh': get_locale()[:2] == 'cy'
+            }
+        super(AdaptationsForm, self).__init__(formdata, obj, prefix, data, meta, **kwargs)
 
 
 class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):

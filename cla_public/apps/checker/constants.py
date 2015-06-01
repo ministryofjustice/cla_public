@@ -89,7 +89,7 @@ BENEFITS_CHOICES = [
     ('pension_credit', _(u'Guarantee Credit')),
     ('universal_credit', _(u'Universal Credit')),
     ('employment_support', _(u'Income-related Employment and Support Allowance')),
-    ('other-benefit', _(u'A different benefit not listed above')),
+    ('other-benefit', _(u'A benefit not listed above')),
 ]
 
 PASSPORTED_BENEFITS = [benefit for benefit, label in BENEFITS_CHOICES[0:-1]]
@@ -139,6 +139,10 @@ NO_CALLBACK_CATEGORIES = ('benefits',)
 
 YES = '1'
 NO = '0'
+
+CATEGORY_ID_MAPPING = {
+    'violence': 'family'
+}
 
 ORGANISATION_CATEGORY_MAPPING = {
     'Domestic violence': 'Family',

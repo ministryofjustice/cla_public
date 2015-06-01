@@ -2,6 +2,7 @@ from collections import OrderedDict
 import uuid
 from base64 import b64encode, b64decode
 from datetime import datetime, date, time
+from speaklater import _LazyString
 from werkzeug.http import http_date, parse_date
 from flask import Markup, json
 from flask._compat import iteritems, text_type
@@ -26,6 +27,8 @@ class CustomJSONEncoder(JSONEncoder):
                 isinstance(obj, time),
                 isinstance(obj, datetime)]):
             return obj.isoformat()
+        elif isinstance(obj, _LazyString):
+            return unicode(obj)
         return super(CustomJSONEncoder, self).default(obj)
 
 
@@ -48,7 +51,7 @@ class CheckerSessionObject(dict):
 
     @property
     def needs_face_to_face(self):
-        return self.field('ProblemForm', 'categories') in F2F_CATEGORIES
+        return self.category in F2F_CATEGORIES
 
     @property
     def ineligible_reasons(self):
@@ -82,7 +85,7 @@ class CheckerSessionObject(dict):
 
     @property
     def category(self):
-        return self.field('ProblemForm', 'categories')
+        return self.get('category')
 
     @property
     def category_name(self):

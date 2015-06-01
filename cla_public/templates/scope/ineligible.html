@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% set title = _('Legal aid is not available for this type of problem') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  {% if category == 'employment' or category == 'education' %}
+    <h1>{{ _('Legal aid is not usually available for this type of problem') }}</h1>
+    {% if category == 'employment' %}
+      <p>
+        {{ _('You may still be able to get legal aid in exceptional cases.') }}
+      </p>
+      <p>
+        {{ _('You could seek advice from a legal adviser about whether an application might succeed in your case and how to apply.') }}
+      </p>
+    {% else %}
+      <p>
+        {{_('Legal aid may still be available in some circumstances if your case is going to a judicial review. Please check with a legal adviser in your area.') }}
+      </p>
+      <p>
+        {{_('If you can\'t get legal aid, you can still seek advice from a legal adviser. You will have to pay for this advice.') }}
+      </p>
+    {% endif %}
+  {% else %}
+    <h1>{{ _('Legal aid is not available for this type of problem') }}</h1>
+    <p class="subtitle">
+      {{ _('You can still seek advice from a legal adviser - you will have to pay for this advice.') }}
+    </p>
+  {% endif %}
+
+  <a class="button button-larger" href="https://www.gov.uk/find-a-legal-adviser" target="_blank">
+    {{ _('Find a legal adviser') }}
+  </a>
+
+  {% include '_help-orgs.html' %}
+
+{% endblock %}

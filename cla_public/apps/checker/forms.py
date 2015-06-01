@@ -41,26 +41,13 @@ class BaseNoCsrfForm(BabelTranslationsFormMixin, NoCsrfForm):
     pass
 
 
-class ProblemForm(ConfigFormMixin, BaseForm):
-    """Area of law choice"""
-
-    title = _(u'What do you need help with?')
-
-    categories = DescriptionRadioField(
-        _(u'What do you need help with?'),
-        choices=CATEGORIES,
-        coerce=unicode,
-        validators=[InputRequired()])
-
-
 class AboutYouForm(BaseForm):
 
     title = _(u'About you')
-
     have_partner = YesNoField(
         _(u'Do you have a partner?'),
         description=(
-            _(u"Your partner is your husband, wife, civil partner (unless "
+            _(u"Your husband, wife, civil partner (unless "
               u"you have permanently separated) or someone you live with "
               u"as if you’re married")),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),

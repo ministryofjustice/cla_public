@@ -193,19 +193,6 @@ class TestMeansTest(unittest.TestCase):
         mt = MeansTest()
         self.assertMeansTestInitialized(mt)
 
-    def test_set_problem_category(self):
-        mt = MeansTest()
-        mt.update_from_form('ProblemForm', {'categories': 'debt'})
-        self.assertMeansTestInitialized(mt)
-        self.assertEqual('debt', mt['category'])
-
-    def test_reset_problem_category(self):
-        mt = MeansTest()
-        mt.update_from_form('ProblemForm', {'categories': 'debt'})
-        mt.update_from_form('ProblemForm', {'categories': 'family'})
-        self.assertMeansTestInitialized(mt)
-        self.assertEqual('family', mt['category'])
-
     def test_about_you_all_no(self):
         update_session(
             'AboutYouForm',
@@ -213,8 +200,8 @@ class TestMeansTest(unittest.TestCase):
             have_children=YES
         )
 
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form('ProblemForm', {'categories': 'debt'})
         mt.update_from_form('AboutYouForm', about_you_post_data(is_employed=YES))
 
         self.assertEqual(NO, mt['on_passported_benefits'])
@@ -238,9 +225,8 @@ class TestMeansTest(unittest.TestCase):
             'AboutYouForm',
             have_partner=YES,
             in_dispute=NO)
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
         mt.update_from_form(
             'AboutYouForm', about_you_post_data(
                 have_partner=YES, in_dispute=NO))
@@ -255,9 +241,8 @@ class TestMeansTest(unittest.TestCase):
             in_dispute=NO,
             partner_is_self_employed=YES)
 
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
 
         mt.update_from_form(
             'AboutYouForm', about_you_post_data(
@@ -273,9 +258,8 @@ class TestMeansTest(unittest.TestCase):
             in_dispute=YES,
             partner_is_self_employed=YES)
 
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
 
         mt.update_from_form('AboutYouForm', about_you_post_data(
             have_partner=YES,
@@ -287,9 +271,8 @@ class TestMeansTest(unittest.TestCase):
         self.assertEqual([], mt['property_set'])
 
     def test_benefits_passported(self):
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
         mt.update_from_form(
             'AboutYouForm', about_you_post_data(
                 on_benefits=YES))
@@ -319,9 +302,8 @@ class TestMeansTest(unittest.TestCase):
             is_employed=YES,
             have_children=YES
         )
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
         mt.update_from_form(
             'AboutYouForm', about_you_post_data(
                 on_benefits=YES))
@@ -347,9 +329,8 @@ class TestMeansTest(unittest.TestCase):
             is_employed=YES,
             have_children=YES
         )
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
         mt.update_from_form(
             'AboutYouForm', dict(own_property=YES))
         mt.update_from_form(
@@ -387,9 +368,8 @@ class TestMeansTest(unittest.TestCase):
             is_employed=YES,
             have_children=YES
         )
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
         mt.update_from_form(
             'AboutYouForm', dict(own_property=YES))
         mt.update_from_form(
@@ -431,9 +411,8 @@ class TestMeansTest(unittest.TestCase):
         self.assertDictEqual(expected[1], mt['property_set'][1])
 
     def test_rent(self):
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
 
         mt.update_from_form(
             'AboutYouForm', dict(own_property=YES))
@@ -463,9 +442,8 @@ class TestMeansTest(unittest.TestCase):
             is_employed=YES,
             have_children=YES
         )
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
         mt.update_from_form(
             'AboutYouForm', dict(own_property=YES))
         session.checker['AboutYouForm'] = {
@@ -489,9 +467,8 @@ class TestMeansTest(unittest.TestCase):
         )
 
     def test_savings(self):
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
         about_data = {
             'have_savings': YES,
             'have_valuables': YES}
@@ -508,9 +485,8 @@ class TestMeansTest(unittest.TestCase):
         self.assertEqual(50000, mt['you']['savings']['asset_balance'])
 
     def test_tax_credits(self):
+        session.checker['category'] = 'debt'
         mt = MeansTest()
-        mt.update_from_form(
-            'ProblemForm', {'categories': 'debt'})
         mt.update_from_form(
             'AboutYouForm', about_you_post_data())
         post_data = dict(flatten({

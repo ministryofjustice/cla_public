@@ -29,6 +29,14 @@
     {% endif %}
   </header>
 
+  {% if session.stored.category in ['debt', 'housing'] %}
+    <p>
+      {% trans %}If you have a court hearing date it is important that you get
+      advice as soon as possible. You may be able to get last-minute
+      help on the day of the hearing from an adviser in the court building.{% endtrans %}
+    </p>
+  {% endif %}
+
   <h2>{{ _('What happens next?') }}</h2>
 
   {% if session.stored.callback_requested %}
@@ -36,8 +44,6 @@
       {% trans %}Your details have been submitted and an operator will try to call
         you back around the time you requested {% endtrans %}
         (<strong>{{ session.stored.callback_time|datetime('full') }}</strong>).
-      {% trans %}If this is not possible, we will always call you back by the
-        next working day.{% endtrans %}
     </p>
   {% endif %}
 
@@ -49,10 +55,10 @@
   {% endif %}
 
   <p>
-    {% trans %}If the operator you speak to thinks you might qualify, they will
-    put you through to a specialist adviser. Your specialist adviser will
-    ask you more questions before making the final decision about whether you
-    qualify for legal aid.{% endtrans %}
+    {% trans %}The first person you speak to will be an operator, who will ask you about your problem and your financial circumstances.{% endtrans %}
+  </p>
+  <p>
+    {% trans %}If it looks like you might qualify for legal aid, you’ll be put through to a specialist adviser, who will make the final decision on your case.{% endtrans %}
   </p>
 
   {% if session.stored.category == 'violence' %}
@@ -63,6 +69,14 @@
       <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external" target="_blank">
         {{ _('Find out what you can use as evidence') }}</a>.
     </p>
+  {% elif session.stored.category == 'family' %}
+    <p>
+      If your case involves domestic abuse or violence, the specialist adviser will need evidence of this before they can make a decision on your case. <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external" target="_blank">
+        {{ _('Find out what you can use as evidence') }}</a>.
+    </p>
+  {% endif %}
+
+  {% if session.stored.category == 'violence' or session.stored.category == 'family' %}
     <p>
       {% trans %}You will also need to provide evidence of your financial
       circumstances. Your specialist adviser will explain what is
@@ -77,23 +91,19 @@
   {% endif %}
 
   <p>
-    {% trans %}If your specialist adviser takes your case on they will
-    communicate with you by telephone, email or post.{% endtrans %}
+    {% trans %}If your specialist adviser thinks you need to speak to someone in person or have someone represent you in court, they will organise this.{% endtrans %}
   </p>
 
   <p>
-    {% trans %}If your adviser decides that you need to speak to someone in
-    person or if you need someone to represent you in court, they
-    will organise this.{% endtrans %}
+    {% trans %}If CLA can’t help you, we’ll always suggest where else you might get help.{% endtrans %}
   </p>
-
-  {% if session.stored.category in ['debt', 'housing'] %}
-    <p>
-      {% trans %}If you have a court hearing date it is important that you get
-      advice as soon as possible. You may be able to get last-minute
-      help on the day of the hearing from an adviser in the court building.{% endtrans %}
-    </p>
-  {% endif %}
+  <p>
+    {% trans %}If we can do anything to make it easier for you to communicate with us, please tell the operator.{% endtrans %}
+  </p>
+  <p>
+    {% trans %}Protecting your personal data and your privacy is important to us. Read the full
+    <a href="/privacy" target="_blank">Civil Legal Advice Privacy Statement</a>.{% endtrans %}
+  </p>
 
   {% if session.stored.callback_requested %}
     <h2>{{ _('What if I miss the operator’s call?') }}</h2>

@@ -5,15 +5,18 @@ var common = require('../../modules/common-functions');
 var PROPERTY_QUESTIONS = require('../../modules/constants').PROPERTY_QUESTIONS;
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    common.aboutPage(client);
-    common.aboutPageSetAllToNo(client);
-    common.setYesNoFields(client, 'own_property', 1);
-    client.submitForm('form');
+    client.aboutSetAllToNo(true, {
+      'own_property': 1
+    });
   },
 
   'Property page': function(client) {
@@ -26,20 +29,17 @@ module.exports = {
 
   'Context-dependent text for partner': function(client) {
     client
-      .assert.containsText('body', 'If you own more than one property, you can add more properties below.')
+      .assert.containsText('body', 'You can add more than one property below.')
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
-    ;
-    common.setYesNoFields(client, 'have_partner', 1);
-    common.setYesNoFields(client, 'in_dispute', 0);
-    common.setYesNoFields(client, ['partner_is_employed', 'partner_is_self_employed'], 0);
-    client
+      .setYesNoFields('have_partner', 1)
+      .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
       .submitForm('form')
       .waitForElementVisible('input[name="properties-0-is_main_home"]', 5000)
       .assert.urlContains('/property')
       .assert.containsText('h1', 'You and your partner’s property')
       .assert.containsText('body', 'Please tell us about any property owned by you, your partner or both of you.')
-      .assert.containsText('body', 'If you or your partner own more than one property, you can add more properties below.')
+      .assert.containsText('body', 'You can add more than one property below.')
     ;
   },
 
@@ -67,8 +67,8 @@ module.exports = {
     });
     common.submitAndCheckForFieldError(client, questions);
 
-    common.setYesNoFields(client, PROPERTY_QUESTIONS, 1);
     client
+      .setYesNoFields(PROPERTY_QUESTIONS, 1)
       .setValue('input[name="properties-0-property_value"]', '100000')
       .setValue('input[name="properties-0-mortgage_remaining"]', '90000')
       .setValue('input[name="properties-0-mortgage_payments"]', '1000')

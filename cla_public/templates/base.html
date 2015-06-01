@@ -21,7 +21,7 @@
 {% block content %}
   {% include "_phase-tag.html" %}
 
-  <div class="inner-block {% if self.sidebar() %}m-has-sidebar{% endif %}">
+  <div class="inner-block {% if self.sidebar()|trim %}m-has-sidebar{% endif %}">
     <article class="main-content">
       {% with flash_messages = get_flashed_messages() %}
         {% if flash_messages %}
@@ -68,14 +68,35 @@
   {% if config.DEBUG %}
     <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
   {% endif %}
+
   <script type="text/html" id="moreInfoButtonLink">
     <a class="field-more-info-toggle" role="button">{{ _('more info') }}</a>
   </script>
+
   <script type="text/html" id="flashMessageCloseButton">
     <button class="flash-messages-close icon icon-remove" type="button">
       {{ _('Close') }}
     </button>
   </script>
+
+  <script type="text/html" id="mainFormError">
+    <div class="alert alert-error" role="alert">
+      <span class="icon icon-cross" aria-hidden="true"></span>
+      <div class="alert-message">
+        <p>{{ _('This form has errors.') }}</p>
+        <p>{{ _('Please see below for the errors you need to correct.') }}</p>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/html" id="fieldError">
+    <div class="form-row field-error">
+      <% _.each(errors, function(error, index) { %>
+        <p><%= error %></p>
+      <% }); %>
+    </div>
+  </script>
+
 {% endblock %}
 
 {% block footer_support_links %}

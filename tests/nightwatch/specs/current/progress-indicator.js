@@ -1,21 +1,11 @@
 'use strict';
 
-function testSidebar(client, headline) {
-  client
-    .assert.visible('aside.sidebar')
-    .assert.containsText('aside.sidebar h2', headline)
-  ;
-}
-
 module.exports = {
-  'Progress indicator': function(client) {
+  'Means test progress indicator': function(client) {
     client
       .startService()
+      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
       .waitForElementVisible('.progress-bar', 1000, 'Progress sidebar exists')
-
-      .assert.containsText('.progress-step.m-current', 'What do you need help with?',
-        'Progress step is Problem page')
-      .selectCategory('debt', true)
 
       .assert.containsText('.progress-step.m-current', 'About you',
         'Progress step is About page')
@@ -39,11 +29,11 @@ module.exports = {
 
       .assert.containsText('.progress-step.m-current', 'You and your partner’s income and tax',
         'Progress step is You and your partner’s income and tax')
-      .fillInIncome(true, true)
+      .fillInIncome(undefined, undefined, true)
 
       .assert.containsText('.progress-step.m-current', 'You and your partner’s outgoings',
         'Progress step is You and your partner’s outgoings')
-      .fillInOutgoings(true)
+      .fillInOutgoings(undefined, true)
 
       .assert.containsText('.progress-step.m-current', 'Review your answers',
         'Progress step is Review your answers')

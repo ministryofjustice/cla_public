@@ -10,6 +10,7 @@ from slumber.exceptions import SlumberBaseException
 from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.constants import CATEGORIES
 from cla_public.libs.api_proxy import on_timeout
+from cla_public.libs.utils import get_locale
 
 
 log = logging.getLogger(__name__)
@@ -22,7 +23,8 @@ class ApiError(Exception):
 def get_api_connection():
     return slumber.API(
         current_app.config['BACKEND_API']['url'],
-        timeout=current_app.config['API_CLIENT_TIMEOUT']
+        timeout=current_app.config['API_CLIENT_TIMEOUT'],
+        extra_headers={'Accept-Language': get_locale()},
     )
 
 
@@ -117,10 +119,10 @@ def log_api_errors_to_sentry(fn):
 
 
 @log_api_errors_to_sentry
-def post_to_eligibility_check_api(form):
+def post_to_eligibility_check_api(form=None, payload={}):
     backend = get_api_connection()
     reference = session.checker.get('eligibility_check')
-    payload = form.api_payload()
+    payload = form.api_payload() if form else payload
 
     if reference is None:
         payload = initialise_eligibility_check(payload)

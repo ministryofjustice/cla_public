@@ -3,17 +3,16 @@
 var common = require('../../modules/common-functions');
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    client
-      .waitForElementVisible('input[name="have_partner"]', 5000)
-      .assert.urlContains('/about')
-      .assert.containsText('h1', 'About you')
-      .end()
-    ;
+    client.aboutSetAllToNo(true);
   },
 
   'Start page again': function(client) {
@@ -26,12 +25,12 @@ module.exports = {
     ;
   },
 
-  'Check debt category NOT selected': function(client) {
-    client
-      .waitForElementVisible('input[name="categories"]', 5000)
-      .assert.urlContains('/problem')
-    ;
-    common.checkAttributeIsNotPresent(client, 'input[name="categories"][value="debt"]', 'checked');
+  'Scope diagnosis again': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
+
+  'Check option is not selected': function(client) {
+    common.checkAttributeIsNotPresent(client, 'input[name="have_partner"]', 'checked');
 
     client.end();
   }

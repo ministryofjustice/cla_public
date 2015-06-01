@@ -11,21 +11,20 @@ from wtforms.validators import StopValidation
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.checker.forms import FindLegalAdviserForm
-
+from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.apps.contact.forms import ContactForm
-from cla_public.apps.checker.constants import CATEGORIES, \
-    ORGANISATION_CATEGORY_MAPPING, NO_CALLBACK_CATEGORIES, \
-    LAALAA_PROVIDER_CATEGORIES_MAP
+from cla_public.apps.checker.constants import ORGANISATION_CATEGORY_MAPPING, \
+    NO_CALLBACK_CATEGORIES, LAALAA_PROVIDER_CATEGORIES_MAP
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    ProblemForm, PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, \
-    IncomeForm, ReviewForm
+    PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, IncomeForm, \
+    ReviewForm
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
 from cla_public.apps.checker import filters # Used in templates
 from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
-    FormWizardStep, RequiresSession
+    FormWizardStep, RequiresSession, ValidFormOnOptions, HasFormMixin
 from cla_public.libs import laalaa
 
 
@@ -96,7 +95,7 @@ def is_null(field):
     return False
 
 
-class CheckerStep(UpdatesMeansTest, FormWizardStep):
+class CheckerStep(ValidFormOnOptions, UpdatesMeansTest, FormWizardStep):
 
     def completed_fields(self):
         session_data = session.checker.get(self.form_class.__name__, {})
@@ -154,7 +153,6 @@ class ReviewStep(FormWizardStep):
 class CheckerWizard(AllowSessionOverride, FormWizard):
 
     steps = [
-        ('problem', CheckerStep(ProblemForm, 'checker/problem.html')),
         ('about', CheckerStep(AboutYouForm, 'checker/about.html')),
         ('benefits', CheckerStep(YourBenefitsForm, 'checker/benefits.html')),
         ('property', CheckerStep(PropertiesForm, 'checker/property.html')),
@@ -199,7 +197,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
             return False
 
         if not for_review_page \
-                and step.name not in ('problem', 'about', 'benefits') \
+                and step.name not in ('about', 'benefits') \
                 and session.checker.ineligible:
             return True
 
@@ -216,7 +214,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
             return not session.checker.children_or_tax_credits
 
         if session.checker.is_on_passported_benefits \
-                and step.name not in ('problem', 'about', 'benefits'):
+                and step.name not in ('about', 'benefits'):
             return True
 
         return False
@@ -227,7 +225,8 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return False
 
 
-checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'))
+checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'),
+                     methods=('GET', 'POST', 'OPTIONS'))
 
 
 class FaceToFace(views.MethodView, object):
@@ -262,9 +261,11 @@ class EligibleNoCallBack(views.MethodView, object):
 
         session.clear_checker()
         session.store({'category': request.args.get('category')})
+        if session.stored['category']:
+            category_name = category_id_to_name(session.stored['category'])
 
         return render_template('checker/result/eligible-no-callback.html',
-            data=data, form=form, category_name=session.checker.category_name)
+            data=data, form=form, category_name=category_name)
 
 checker.add_url_rule(
     '/find-legal-adviser',
@@ -272,7 +273,9 @@ checker.add_url_rule(
 )
 
 
-class Eligible(RequiresSession, views.MethodView, object):
+class Eligible(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptions, object):
+
+    form_class = ContactForm
 
     def get(self):
         steps = steps = CheckerWizard('').relevant_steps[:-1]
@@ -284,49 +287,62 @@ class Eligible(RequiresSession, views.MethodView, object):
         return render_template(
             'checker/result/eligible.html',
             steps=steps,
-            form=ContactForm()
+            form=self.form
         )
+
 
 checker.add_url_rule(
     '/result/eligible',
     view_func=Eligible.as_view('eligible'),
-    methods=['GET', 'POST']
+    methods=('GET', 'POST', 'OPTIONS')
 )
 
 
-@checker.route('/help-organisations/<category_name>', methods=['GET'])
-def help_organisations(category_name):
-    if session.checker:
-        session.store({
-            'has_partner': session.checker.has_partner
-        })
-        session.clear_checker()
+class HelpOrganisations(views.MethodView):
+    _template = 'help-organisations.html'
 
-    category_name = category_name.replace('-', ' ').capitalize()
+    def get_context(self, category_name):
+        category_name = category_name.replace('-', ' ').capitalize()
 
-    # force english as knowledge base languages are in english
-    with override_locale('en'):
-        requested = lambda (slug, name, desc): name == category_name
-        category, name, desc = next(
-            iter(filter(requested, CATEGORIES)),
-            (None, None, None))
+        # force english as knowledge base languages are in english
+        with override_locale('en'):
+            category, name, desc = category_option_from_name(category_name)
 
-        if category is None:
-            abort(404)
+            if category is None:
+                abort(404)
 
-        name = unicode(name)
+            name = unicode(name)
 
-        category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
-    trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
+            category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
+        trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
 
-    ineligible_reasons = session.stored.get('ineligible_reasons', [])
+        ineligible_reasons = session.stored.get('ineligible_reasons', [])
 
-    organisations = get_organisation_list(article_category__name=category_name)
-    return render_template(
-        'help-organisations.html',
-        organisations=organisations,
-        category=category,
-        category_name=trans_category_name,
-        ELIGIBILITY_REASONS=ELIGIBILITY_REASONS,
-        ineligible_reasons=ineligible_reasons
+        organisations = get_organisation_list(article_category__name=category_name)
+
+        return {
+            'organisations':organisations,
+            'category': category,
+            'category_name': trans_category_name,
+            'ELIGIBILITY_REASONS': ELIGIBILITY_REASONS,
+            'ineligible_reasons': ineligible_reasons
+        }
+
+    def clear_session(self):
+        if session.checker:
+            session.clear_checker()
+
+    def get(self, category_name):
+        self.clear_session()
+
+        return render_template(
+            self._template,
+            **self.get_context(category_name)
         )
+
+
+checker.add_url_rule(
+    '/help-organisations/<category_name>',
+    view_func=HelpOrganisations.as_view('help_organisations'),
+    methods=['GET']
+)

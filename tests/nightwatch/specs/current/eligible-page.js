@@ -3,15 +3,18 @@
 var common = require('../../modules/common-functions');
 
 module.exports = {
-  'Start page': common.startPage,
+  'Start page': function(client) {
+    client.startService();
+  },
 
-  'Categories of law (Your problem)': common.selectDebtCategory,
+  'Scope diagnosis': function(client) {
+    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+  },
 
   'About you': function(client) {
-    common.aboutPage(client);
-    common.aboutPageSetAllToNo(client);
-    common.setYesNoFields(client, 'on_benefits', 1);
-    client.submitForm('form');
+    client.aboutSetAllToNo(true, {
+      'on_benefits': 1
+    });
   },
 
   'Benefits': function(client) {
@@ -36,9 +39,8 @@ module.exports = {
     client
       .assert.urlContains('/result/eligible')
       .waitForElementVisible('input[name="callback_requested"]', 5000)
-      .assert.containsText('h1', 'You might qualify for legal aid')
-      .assert.containsText('h2', 'Contact Civil Legal Advice')
-      .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify financially for legal aid.')
+      .assert.containsText('h1', 'Contact Civil Legal Advice')
+      .assert.containsText('body', 'Based on the answers you’ve given today, you might qualify for legal aid.')
     ;
   },
 
@@ -102,7 +104,7 @@ module.exports = {
       .click('body')
       .useXpath()
       .waitForElementVisible('//input[@id="address-post_code"]/ancestor::fieldset//div[@class="form-row field-error"]', 25000)
-      .assert.containsText('//input[@id="address-post_code"]/ancestor::fieldset//div[@class="form-row field-error"]', 'No addresses were found with that postcode')
+      .assert.containsText('//input[@id="address-post_code"]/ancestor::fieldset//div[@class="form-row field-error"]', 'No addresses were found with that postcode, but you can still enter your address manually')
       .useCss()
     ;
 

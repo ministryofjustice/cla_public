@@ -6,7 +6,7 @@ from itertools import dropwhile, ifilter
 import logging
 
 from flask import abort, current_app, redirect, render_template, request, \
-    session, url_for, views
+    session, url_for, views, jsonify, Response
 
 
 log = logging.getLogger(__name__)
@@ -20,18 +20,29 @@ class RequiresSession(object):
     session_expired_url = '/session-expired'
 
     def dispatch_request(self, *args, **kwargs):
-        if not session or not session.is_current:
+        if (not session or not session.is_current) \
+                and request.method.lower() != 'options':
             return redirect(self.session_expired_url)
         return super(RequiresSession, self).dispatch_request(*args, **kwargs)
 
 
-class SessionBackedFormView(RequiresSession, views.MethodView, object):
-    """
-    Saves and loads form data to and from the session
-    """
+class ValidFormOnOptions(object):
 
+    def options(self, *args, **kwargs):
+        """
+        Returns validation errors if a form is submitted to it otherwise
+        returns Response with allowed methods
+        """
+        if 'application/x-www-form-urlencoded' in request.content_type:
+            self.form.validate()
+            return jsonify(self.form.errors)
+        rv = Response()
+        rv.allow.update(self.methods)
+        return rv
+
+
+class HasFormMixin(object):
     form_class = None
-    template = None
 
     @property
     def form(self):
@@ -44,6 +55,20 @@ class SessionBackedFormView(RequiresSession, views.MethodView, object):
                 request.form,
                 **session.checker.get(self.form_class.__name__, {}))
         return self._form
+
+
+class SessionBackedFormView(
+    HasFormMixin,
+    RequiresSession,
+    views.MethodView,
+    ValidFormOnOptions,
+    object
+):
+    """
+    Saves and loads form data to and from the session
+    """
+
+    template = None
 
     def get(self, *args, **kwargs):
         """

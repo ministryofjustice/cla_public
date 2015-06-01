@@ -6,8 +6,8 @@
   <form class="legal-adviser-search" method="GET">
     {% call Form.fieldset(form.postcode, as_label=True, class_=' ') %}
       {{ Form.text_input(form.postcode) }}
-      {% if session.checker.category %}
-        <input type="hidden" name="category" value="{{session.checker.category}}" />
+      {% if session.stored.category %}
+        <input type="hidden" name="category" value="{{session.stored.category}}" />
       {% endif %}
       <button class="button" type="submit">{{ _('Search') }}</button>
     {% endcall %}
@@ -17,10 +17,10 @@
     <p class="results-summary">
       {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
       <span class="results-location">{{ data.origin.postcode }}</span>
-      {% if session.checker.category %}
+      {% if category_name %}
         {{ _('for') }}
         <span class="results-filter org-category">
-          {{ session.checker.category_name }}
+          {{ category_name }}
           <a
             class="filter-remove"
             href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode']) }}"
@@ -91,7 +91,7 @@
                   href="{{ url_for(request.url_rule.endpoint,
                     postcode=request.args['postcode'],
                     page=prev_page,
-                    category=session.checker.category) }}"
+                    category=session.stored.category) }}"
                   data-page="{{prev_page}}"
                 >
                   {{ _('Previous') }}
@@ -105,7 +105,7 @@
                   href="{{ url_for(request.url_rule.endpoint,
                     postcode=request.args['postcode'],
                     page=next_page,
-                    category=session.checker.category) }}"
+                    category=session.stored.category) }}"
                   data-page="{{next_page}}"
                 >
                   {{ _('Next') }}

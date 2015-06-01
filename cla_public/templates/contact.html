@@ -19,16 +19,34 @@
       {% endcall %}
     {% endif %}
     <h1>{{ title }}</h1>
-    <p>
-      {% trans %}Please submit your details to get your personal case reference number.
-      You will need to quote this number when you speak with CLA. You’ll need to provide evidence of
-      any financial information you’ve given us.{% endtrans %}
-    </p>
-    <p>
-      {% trans %}You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
-      <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
-      or ask us to call you back, which is free.{% endtrans %}
-    </p>
+    {#
+      'n18' is the index of the node which corresponds to 'yes' in response
+      to question 'Are you at immediate risk of harm?'
+    #}
+    {% if 'n18' in session.checker.diagnosis_previous_choices %}
+      <h2 class="subtitle">
+        {% trans %}If you're in immediate danger please call Civil Legal
+        Advice on 0345 345 4 345. Call charges apply.{% endtrans %}
+      </h2>
+      <p>
+        {% trans %}You can also ask us to call you back using the form below,
+        which is free.{% endtrans %}
+      </p>
+      <p>
+        {% trans %}If you're in an emergency situation, please call the police
+        on 999.{% endtrans %}
+      </p>
+    {% else %}
+      <p>
+        {% trans %}Please submit your details to get in touch with Civil Legal Advice (CLA).{% endtrans %}
+      </p>
+      <p>
+        {% trans %}You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
+        <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
+        or ask us to call you back, which is free.{% endtrans %}
+      </p>
+      <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+    {% endif %}
   {% endblock %}
 
   <form method="POST" action="{{ url_for('contact.get_in_touch') }}" class="contact-form">
@@ -45,7 +63,11 @@
 
       <div class="form-notice" data-controlled-by="callback_requested" data-control-value="*">
         <p data-controlled-by="callback_requested" data-control-value="0">
-          {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
+          {% if 'n18' in session.checker.diagnosis_previous_choices %}
+            {{ _('We’ll remind of you the CLA phone number when you submit your details below.') }}
+          {% else %}
+            {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
+          {% endif %}
         </p>
         <p data-controlled-by="callback_requested" data-control-value="1">
           {{ _('We will try to call you at least once. If you miss the call you’ll need to complete this form again.') }}
@@ -87,25 +109,9 @@
   {% block notice %}
     <div class="notice">
       {% block notice_content %}
-      <h2>{{ _('What happens next?') }}</h2>
       <p>
-        {% trans %}The first person you speak to will be an operator. They will ask you questions about
-        yourself and your problem, including your financial circumstances (and your partner's, if you have one).{% endtrans %}
-      </p>
-      <p>
-        {{ _('If it looks like you might qualify you will be put through to a CLA specialist adviser.') }}
-      </p>
-      <p>
-        {{ _('If CLA can’t help you we will always suggest where else you might get help.') }}
-      </p>
-      <p>
-        {% trans %}If we can do anything to make it easier for you to communicate with us due to your
-        disability please tell the operator.{% endtrans %}
-      </p>
-      <p>
-        {% trans %}Protecting your personal data and your privacy is important to us. We are asking for
-        some information from you now so that when we speak to you we know who you are. You
-        can read the full <a href="/privacy">Civil Legal Advice Privacy Statement</a>.{% endtrans %}
+        {% trans %}Protecting your personal data and your privacy is important to us.
+        Read the full <a href="/privacy" target="_blank">Civil Legal Advice Privacy Statement</a>.{% endtrans %}
       </p>
       {% endblock %}
     </div>
@@ -137,6 +143,30 @@
   <script type="text/html" id="characterCounter">
     <div class="character-counter <%= counter_class %>">
       <%= count %> {{ _('characters remaining') }}
+    </div>
+  </script>
+
+  <script type="text/html" id="postcodeNotEnteredText">
+    <div class="form-row field-error">
+      <p>
+        {{ _('Must contain a valid postcode') }}
+      </p>
+    </div>
+  </script>
+
+  <script type="text/html" id="noAddressesFoundText">
+    <div class="form-row field-error">
+      <p>
+        {{ _('No addresses were found with that postcode, but you can still enter your address manually') }}
+      </p>
+    </div>
+  </script>
+
+  <script type="text/html" id="requestFailedText">
+    <div class="form-row field-error">
+      <p>
+        {{ _('Request failed: ') }} <%= textStatus %>, <%= error %>
+      </p>
     </div>
   </script>
 {% endblock %}
