@@ -51,9 +51,11 @@ class HasFormMixin(object):
         session data.
         """
         if getattr(self, '_form', None) is None:
-            self._form = self.form_class(
-                request.form,
-                **session.checker.get(self.form_class.__name__, {}))
+            data = {}
+            if hasattr(self, 'default_form_data'):
+                data.update(self.default_form_data)
+            data = session.checker.get(self.form_class.__name__, data)
+            self._form = self.form_class(formdata=request.form, data=data)
         return self._form
 
 
