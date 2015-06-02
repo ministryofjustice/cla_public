@@ -12,7 +12,7 @@
     {% trans %}So we can improve this service, we'd like to understand why you want to contact <abbr title="Civil Legal Advice">CLA</abbr>.{% endtrans %}
   </p>
 
-  <form method="POST" action="{{ url_for('.reasons_for_contacting') }}">
+  <form method="POST" action="{{ url_for('.reasons_for_contacting') }}" class="reasons-for-contacting-form">
     {{ form.csrf_token }}
     {{ form.referrer }}
 

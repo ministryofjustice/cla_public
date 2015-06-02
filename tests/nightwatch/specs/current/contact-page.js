@@ -7,8 +7,14 @@ function text(n) {
 function contactPage(client) {
   client
     .startService()
-    .click('#callback-link')
-  ;
+    .click('#callback-link', function() {
+      console.log('     ⟡ "Get in touch" link clicked');
+    })
+    .waitForElementVisible('.reasons-for-contacting-form', 3000,
+      '  - "Reasons for contacting" form exists')
+    .submitForm('.reasons-for-contacting-form', function() {
+      console.log('     ⟡ "Continue to contact CLA" button clicked');
+    });
 }
 
 function willCallWithNotes(client, notes_text) {
