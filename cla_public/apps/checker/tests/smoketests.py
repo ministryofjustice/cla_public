@@ -54,16 +54,30 @@ class SmokeTests(unittest.TestCase):
         with self.app.test_client() as client:
             conn = api.get_api_connection()
 
-    def test_can_set_category(self):
-        "submit the problem form"
+    def test_can_use_scope_diagnosis(self):
+        "use scope diagnosis"
         with self.app.test_client() as client:
             response = client.get(url_for('base.get_started'))
             url = urlparse.urlparse(response.location).path
-            form_class = util.get_form(url)
             response = client.get(url)
-            csrf_token = BeautifulSoup(response.data).find(id='csrf_token')['value']
 
-            post_data = util.form_data(form_class, {'_law_area': 'Debt'})
-            post_data['csrf_token'] = csrf_token
-            response = client.post(url, data=post_data)
+            # Check the number of scope options
+            scope_options_item = BeautifulSoup(response.data).find_all(class_='scope-options-list-item')
+            self.assertEquals(len(scope_options_item), 15)
+
+            # Follow the third option's link (Debt) and check the
+            # number of options on the following screen
+            response = client.get(scope_options_item[2].find('a').get('href'))
+            scope_options_item = BeautifulSoup(response.data).find_all(class_='scope-options-list-item')
+            self.assertEquals(len(scope_options_item), 4)
+
+            # Follow the first option's link (You own your own home)
+            # and check the number of options on the following screen
+            response = client.get(scope_options_item[0].find('a').get('href'))
+            scope_options_item = BeautifulSoup(response.data).find_all(class_='scope-options-list-item')
+            self.assertEquals(response.status_code, 200)
+
+            # Follow the first option's link (Yes) and is redirected to About you page
+            response = client.get(scope_options_item[0].find('a').get('href'))
             self.assertEquals(response.status_code, 302)
+            self.assertTrue(str.find(response.data, '/about') > -1)
