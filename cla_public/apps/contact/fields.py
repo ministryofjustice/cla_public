@@ -140,8 +140,8 @@ class AvailableSlot(object):
         date = call_centre_availability.current_datetime()
         if self.day == DAY_SPECIFIC:
             date = form.day.data
-        time = datetime.datetime.combine(date, field.data)
-        if not OPERATOR_HOURS.can_schedule_callback(time):
+        time = datetime.datetime.combine(date, field.data) if date else None
+        if not (time and OPERATOR_HOURS.can_schedule_callback(time)):
             raise ValidationError(
                 field.gettext(
                     u"Can't schedule a callback at the requested time"))
