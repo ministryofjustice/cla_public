@@ -41,7 +41,7 @@
     {%- if field and field.errors %} m-error{% endif %}
     {%- if is_subfield %} form-subfield{% endif %}
     {%- if is_hidden == True or controlled_by and control_value %} s-hidden{% endif %}"
-    {% if controlled_by %}data-controlled-by="{{ controlled_by.id }}" data-control-value="{{ control_value }}"{% endif %}
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
     {% if field %}id="field-{{ field.id }}"{% endif %}
     {% if persist_values %}data-persist-values="true"{% endif %}
   >
@@ -235,13 +235,13 @@
     - field <object>
         WTForm field
 #}
-{% macro option_list(field, label_type='inline', input_type='checkbox') %}
+{% macro option_list(field, label_type='inline', input_type='checkbox', separated_options=[]) %}
   <ul class="form-option-list"
     {% if input_type == 'radio' %}role="radiogroup"{% else %}role="group"{% endif %}
     aria-labelledby="field-label-{{ field.id }}"
   >
     {% for option in field %}
-      <li{% if option.data in ['other-benefit'] %} class="m-separate"{% endif %}>
+      <li{% if option.data in separated_options %} class="m-separate"{% endif %}>
         {% if label_type == 'inline' %}
           <label class="radio-inline" for="{{option.id}}">
             {{ option }}
@@ -263,9 +263,9 @@
     - field <object>
         WTForm field
 #}
-{% macro option_list_fieldset(field, label_type='inline', input_type='checkbox') %}
+{% macro option_list_fieldset(field, label_type='inline', input_type='checkbox', separated_options=[]) %}
   {% call fieldset(field, class_='fieldset-group') %}
-    {{ option_list(field, label_type, input_type) }}
+    {{ option_list(field, label_type, input_type, separated_options) }}
   {% endcall %}
 {% endmacro %}
 

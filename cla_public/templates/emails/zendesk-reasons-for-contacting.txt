@@ -1,0 +1,13 @@
+** Reasons for contacting **
+{% for reason in form.reasons.data -%}
+- {{ reason }}
+{% endfor %}
+
+{%- if form.other_reasons.data %}
+** {{ form.other_reasons.label.text }} **
+{{ form.other_reasons.data }}
+{% endif %}
+
+** Additional information **
+Referrer URL: {{ form.referrer.data }}
+Browser:      {{ user_agent }}

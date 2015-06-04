@@ -13,3 +13,7 @@
     ** {{ form.ideas.label.text }} **
     {{ form.ideas.data }}
 {% endif %}
+
+** Additional information **
+Referrer URL: {{ form.referrer.data }}
+Browser:      {{ user_agent }}
