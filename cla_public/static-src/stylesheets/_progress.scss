@@ -48,12 +48,30 @@
 
 
   .progress-bar {
+    position: relative;
     margin-top: -10px;
     background: $grey-2;
+    height: 10px;
+
+    .m-completed {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+    }
+
+    .m-current {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background: $orange;
+      margin-left: -7px;
+      border: solid white;
+      border-width: 0 1px;
+      width: 6px;
+    }
   }
 
   .progress-value {
-    height: 10px;
     background: lighten($green, 10);
   }
 
@@ -106,6 +124,18 @@
         }
       }
     }
+
+    &.m-category .step-name {
+      border: 1px solid $grey-3;
+      margin: 2px 0;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background: white;
+    }
+
+    &.m-category a.step-name:hover {
+      background: $grey-4;
+    }
   }
 
   .step-name {
@@ -150,9 +180,15 @@
     color: $grey-1;
   }
 
-  .progress-step.m-completed .step-status {
-    background-color: lighten($green, 10);
-    border-color: lighten($green, 10);
+  .progress-step.m-completed {
+    .step-status {
+      background-color: lighten($green, 10);
+      border-color: lighten($green, 10);
+    }
+
+    span.step-name {
+      color: inherit;
+    }
   }
 
   .progress-step.m-current .step-status {
