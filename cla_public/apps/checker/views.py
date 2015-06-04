@@ -236,7 +236,7 @@ class FaceToFace(views.MethodView, object):
 
         session.store({'category': request.args.get('category') })
 
-        category_name = 'your issue'
+        category_name = None
 
         if session.stored['category']:
             category_name = category_id_to_name(session.stored['category'])
@@ -261,6 +261,7 @@ class EligibleNoCallBack(views.MethodView, object):
 
         session.clear_checker()
         session.store({'category': request.args.get('category')})
+        category_name = None
         if session.stored['category']:
             category_name = category_id_to_name(session.stored['category'])
 
