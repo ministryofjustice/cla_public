@@ -4,10 +4,6 @@ fieldset {
 
   &.form-group {
     border-top: 1px solid $grey-3;
-
-    .form-row .form-group .fieldset-group {
-      margin: -1px -1px -1px -20px;
-    }
   }
 
   &.fieldset-group {

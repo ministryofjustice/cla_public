@@ -2,68 +2,66 @@
   'use strict';
 
   moj.Modules.AvailabilityTimes = {
-    el: '#id_day',
+    el: '[data-day-time-choices]',
 
-    init: function () {
-      _.bindAll(this, 'onChange');
+    init: function() {
+      if($(this.el).length === 0) {
+        return;
+      }
+      _.bindAll(this, 'handleDayChange');
       this.cacheEls();
-      this.cacheData();
       this.bindEvents();
     },
 
-    bindEvents: function () {
-      function check(el) {
-        return function () {
-          if(window.ga) {
-            window.ga('send', 'event', 'availability-times', 'select', this.name);
-          }
-          el
-            .prop('checked', true)
-            .trigger('label-select');
-        };
+    bindEvents: function() {
+      this.$daySelectors.on('change', this.handleDayChange);
+      this.$timeSelectors.on('change', this.handleTimeRadioCheck);
+      this.$todayTimeSelectors.on('change', this.handleTimeRadioCheck);
+    },
+
+    cacheEls: function() {
+      this.$daySelectors = $(this.el);
+      this.$timeSelectors = $('[name$=time_in_day]');
+      this.$todayTimeSelectors = $('[name$=time_today]');
+    },
+
+    _populateDayTime: function($daySelector) {
+      var dayTimeHours = $daySelector.data('day-time-choices');
+      var dayValue = $daySelector.val();
+
+      if(!dayValue || !dayTimeHours) {
+        return;
       }
 
-      this.$daySelect
-        .on('change', this.onChange)
-        .on('change', check(this.$specificDay));
+      var dayTimes = dayTimeHours[dayValue];
+      var timeOptions = _.keys(dayTimes).sort();
+      var $timeSelector = $daySelector.closest('[role=radiogroup]').find(this.$timeSelectors);
+      var $options = _.map(timeOptions, function(v) {
+        var d = dayTimes[v];
+        return $('<option>', { value: v, html: d });
+      });
 
-      this.$timeSelect
-        .on('change', check(this.$specificDay));
-
-      this.$todayTimeSelect
-        .on('change', check(this.$today));
-
-      moj.Events.on('AvailabilityTimes.render', this.onChange);
+      $timeSelector
+        .html($options)
+        .val(timeOptions[Math.floor(Math.random() * timeOptions.length)]);
     },
 
-    cacheEls: function () {
-      this.$daySelect = $(this.el);
-      this.$timeSelect = $('[name=time_in_day]');
-      this.$todayTimeSelect = $('[name=time_today]');
-      this.$today = $('[name=specific_day][value=today]');
-      this.$specificDay = $('[name=specific_day][value=specific_day]');
-    },
+    handleTimeRadioCheck: function(evt) {
+      var $target = $(evt.target);
+      var $radioButton = $target.closest('li').find('[type=radio]');
 
-    cacheData: function () {
-      this.dayTimeHours = this.$daySelect.data('day-time-choices');
-    },
-
-    onChange: function () {
-      var self = this;
-
-      if (this.$daySelect.val()) {
-        var dayTimes = this.dayTimeHours[this.$daySelect.val()];
-        var timeOptions = _.keys(dayTimes).sort();
-
-        this.$timeSelect.html('');
-        $.each(timeOptions, function(i, v){
-          var d = dayTimes[v];
-          self.$timeSelect.append($('<option>', {value: v, html: d}));
-        });
-        this.$timeSelect.val(
-          timeOptions[Math.floor(Math.random()*timeOptions.length)]
-        );
+      var targetName = $target.attr('name');
+      if(window.ga && targetName) {
+        window.ga('send', 'event', 'availability-times', 'select', targetName);
       }
+      $radioButton
+        .prop('checked', true)
+        .trigger('label-select');
+    },
+
+    handleDayChange: function(evt) {
+      this._populateDayTime($(evt.target));
+      this.handleTimeRadioCheck(evt);
     }
   };
 }());

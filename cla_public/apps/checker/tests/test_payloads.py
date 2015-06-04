@@ -398,9 +398,9 @@ class TestApiPayloads(unittest.TestCase):
         form_data = {
             'full_name': 'Applicant Full Name',
             'extra_notes': 'Extra notes',
-            'callback_requested': YES,
-            'specific_day': 'today',
-            'time_today': '1930',
+            'contact_type': 'callback',
+            'callback-time-specific_day': 'today',
+            'callback-time-time_today': '1930',
         }
 
         callback_data = {

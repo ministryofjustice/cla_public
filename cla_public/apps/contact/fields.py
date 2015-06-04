@@ -161,22 +161,18 @@ class AvailabilityCheckerForm(NoCsrfForm):
         OPERATOR_HOURS.today_slots,
         validators=[
             IgnoreIf('specific_day', FieldValueNot(DAY_TODAY)),
-            AvailableSlot(DAY_TODAY)],
-        id='id_time_today')
+            AvailableSlot(DAY_TODAY)])
     day = DayChoiceField(
         validators=[
             IgnoreIf('specific_day', FieldValueNot(DAY_SPECIFIC)),
-            InputRequired()],
-        id='id_day')
+            InputRequired()])
     time_in_day = TimeChoiceField(
         OPERATOR_HOURS.time_slots,
         validators=[
             IgnoreIf('specific_day', FieldValueNot(DAY_SPECIFIC)),
-            AvailableSlot(DAY_SPECIFIC)],
-        id='id_time_in_day')
+            AvailableSlot(DAY_SPECIFIC)])
 
     def __init__(self, *args, **kwargs):
-        kwargs['prefix'] = ''
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC

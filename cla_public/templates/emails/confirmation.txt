@@ -1,4 +1,6 @@
 {%- if data.callback_requested -%}
+{%- set is_callback = data.contact_type == 'callback' -%}
+{%- set is_thirdparty = data.contact_type == 'thirdparty' -%}
 
 Dear {{ data.full_name }},
 
@@ -6,7 +8,7 @@ Your details have been submitted to Civil Legal Advice (CLA) and we will call yo
 
 Your reference number is {{ data.case_ref }}.
 
-An operator will try to call you back on {{ data.callback.contact_number }} around the time you selected ({{ data.callback.time.strftime('%A, %d %B at %H:%M') }}).
+An operator will try to call {{ 'you' if is_callback else data.thirdparty.full_name }} back on {{ data.callback.contact_number if is_callback else data.thirdparty.contact_number }} around the time you selected ({{ data.callback.time.strftime('%A, %d %B at %H:%M') if is_callback else data.thirdparty.time.strftime('%A, %d %B at %H:%M') }}).
 
 {% if data.safe_to_contact -%}
 We will leave a message when we call.

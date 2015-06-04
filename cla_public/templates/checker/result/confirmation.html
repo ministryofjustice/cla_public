@@ -4,6 +4,8 @@
 
 {% set title = 'Confirmation' %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+{% set is_callback = session.stored.contact_type == 'callback' %}
+{% set is_thirdparty = session.stored.contact_type == 'thirdparty' %}
 
 {% block inner_content %}
   <header class="confirmation">
@@ -41,9 +43,14 @@
 
   {% if session.stored.callback_requested %}
     <p>
-      {% trans %}Your details have been submitted and an operator will try to call
-        you back around the time you requested {% endtrans %}
-        (<strong>{{ session.stored.callback_time|datetime('full') }}</strong>).
+      {{ _('Your details have been submitted and') }}
+      {% if is_callback %}
+        {{ _('an operator will try to call you back') }}
+      {% else %}
+        {{ _('an operator will try to call the person you nominated back') }}
+      {% endif %}
+      {{ _('around the time you requested') }}
+      (<strong>{{ session.stored.callback_time|datetime('full') }}</strong>).
     </p>
   {% endif %}
 
@@ -55,10 +62,15 @@
   {% endif %}
 
   <p>
-    {% trans %}The first person you speak to will be an operator, who will ask you about your problem and your financial circumstances.{% endtrans %}
+    {{ _('The first person') }}
+    {{ _('you') if is_callback else _('they') }}
+    {{ _('speak to will be an operator') }},
+    {{ _('who will ask about your problem and your financial circumstances') }}.
   </p>
   <p>
-    {% trans %}If it looks like you might qualify for legal aid, you’ll be put through to a specialist adviser, who will make the final decision on your case.{% endtrans %}
+    {{ _('If it looks like you might qualify for legal aid') }},
+    {{ _('you’ll') if is_callback else _('they’ll') }}
+    {{ _('be put through to a specialist adviser, who will make the final decision on your case') }}.
   </p>
 
   {% if session.stored.category == 'violence' %}
