@@ -197,6 +197,7 @@ class PropertyForm(BaseNoCsrfForm):
             InputRequired(_(u'Please enter 0 if you have no mortgage'))])
     mortgage_payments = MoneyField(
         _(u'How much was your monthly mortgage repayment last month?'),
+        description=_(u"Please enter 0 if you have no mortgage"),
         validators=[IgnoreIf('mortgage_remaining', FieldValue(0))])
     is_rented = YesNoField(
         _(u'Do you rent out any part of this property?'),
@@ -362,21 +363,24 @@ class IncomeFieldForm(BaseNoCsrfForm):
     working_tax_credit = MoneyIntervalField(
         _(u'Working Tax Credit'),
         description=_(
-            u'Extra money for people who work and have a low income'),
+            u"Extra money for people who work and have a low income. "
+            u"Enter 0 if this doesn’t apply to you"),
         validators=[MoneyIntervalAmountRequired()])
     maintenance = MoneyIntervalField(
         _(u'Maintenance received'),
-        description=_(u"Payments you get from an ex-partner"),
+        description=_(u"Payments you get from an ex-partner. "
+                      u"Enter 0 if this doesn’t apply to you"),
         validators=[MoneyIntervalAmountRequired()])
     pension = MoneyIntervalField(
         _(u'Pension received'),
-        description=_(u"Payments you receive if you’re retired"),
+        description=_(u"Payments you receive if you’re retired. "
+                      u"Enter 0 if this doesn’t apply to you"),
         validators=[MoneyIntervalAmountRequired()])
     other_income = MoneyIntervalField(
         _(u'Any other income'),
         description=_(
             u"For example, student grants, income from trust funds, "
-            u"dividends"),
+            u"dividends. Enter 0 if this doesn’t apply to you"),
         validators=[MoneyIntervalAmountRequired()])
 
 
@@ -425,25 +429,31 @@ class OutgoingsForm(BaseForm):
     rent = PartnerMoneyIntervalField(
         label=_(u'Rent'),
         description=_(u"Money you pay your landlord for rent. Do not include "
-                      u"rent that is paid by Housing Benefit"),
+                      u"rent that is paid by Housing Benefit. Enter 0 if you "
+                      u"don’t pay rent"),
         partner_description=_(u"Money you and your partner pay your landlord "
                               u"for rent. Do not include rent that is paid by "
-                              u"Housing Benefit"),
+                              u"Housing Benefit. Enter 0 if you and your "
+                              u"partner don’t pay rent"),
         choices=money_intervals_except('per_4week'),
         validators=[MoneyIntervalAmountRequired()])
     maintenance = PartnerMoneyIntervalField(
         label=_(u'Maintenance'),
         description=_(
-            u"Money you pay to an ex-partner for their living costs"),
+            u"Money you pay to an ex-partner for their living costs. "
+            u"Enter 0 if this doesn’t apply to you"),
         partner_description=_(u"Money you and/or your partner pay to an "
-                              u"ex-partner for their living costs"),
+                              u"ex-partner for their living costs. "
+                              u"Enter 0 if this doesn’t apply to you"),
         validators=[MoneyIntervalAmountRequired()])
     income_contribution = PartnerMoneyField(
         label=_(u'Monthly Income Contribution Order'),
         description=_(
-            u"Money you pay per month towards your criminal legal aid"),
+            u"Money you pay per month towards your criminal legal aid. "
+            u"Enter 0 if this doesn’t apply to you"),
         partner_description=_(u"Money you and/or your partner pay per month "
-                              u"towards your criminal legal aid"))
+                              u"towards your criminal legal aid. "
+                              u"Enter 0 if this doesn’t apply to you"))
     childcare = PartnerMoneyIntervalField(
         label=_(u'Childcare'),
         description=_(
