@@ -17,6 +17,7 @@ from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField,
     YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
+    SelfEmployedMoneyIntervalField,
     PropertyList, money_interval_to_monthly,
     PassKwargsToFormField, SetZeroIntegerField, set_zero_values,
     SetZeroFormField)
@@ -342,23 +343,28 @@ class IncomeFieldForm(BaseNoCsrfForm):
             del self.national_insurance
             del self.working_tax_credit
 
-    earnings = MoneyIntervalField(
-        _(u'Wages before tax'),
-        description=(
-            _(u"This includes all your wages and any earnings from "
-              u"self-employment")),
+    earnings = SelfEmployedMoneyIntervalField(
+        label=_(u'Wages before tax'),
+        self_employed_descriptions={
+            'self_employed': _(u"This includes any earnings from self-employment"),
+            'both': _(u"This includes all your wages and any earnings from self-employment"),
+        },
         validators=[MoneyIntervalAmountRequired()])
-    income_tax = MoneyIntervalField(
-        _(u'Income tax'),
-        description=(
-            _(u"Tax paid directly out of your wages and any tax you pay on "
-              u"self-employed earnings")),
+    income_tax = SelfEmployedMoneyIntervalField(
+        label=_(u'Income tax'),
+        self_employed_descriptions={
+            'employed': _(u"Tax paid directly out of your wages"),
+            'self_employed': _(u"Any tax you pay on self-employed earnings"),
+            'both': _(u"Tax paid directly out of your wages and any tax you pay on self-employed earnings"),
+        },
         validators=[MoneyIntervalAmountRequired()])
-    national_insurance = MoneyIntervalField(
-        _(u'National Insurance contributions'),
-        description=(
-            _(u"Check your payslip or your National Insurance statement if "
-              u"you’re self-employed")),
+    national_insurance = SelfEmployedMoneyIntervalField(
+        label=_(u'National Insurance contributions'),
+        self_employed_descriptions={
+            'employed': _(u"Check your payslip"),
+            'self_employed': _(u"Check your National Insurance statement"),
+            'both': _(u"Check your payslip or your National Insurance statement if you’re self-employed"),
+        },
         validators=[MoneyIntervalAmountRequired()])
     working_tax_credit = MoneyIntervalField(
         _(u'Working Tax Credit'),
