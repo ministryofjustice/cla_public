@@ -63,7 +63,7 @@ module.exports = {
     });
     questions.push({
       name: 'properties-0-mortgage_payments',
-      errorText: 'Not a valid amount'
+      errorText: 'Please enter 0 if you have no mortgage'
     });
     common.submitAndCheckForFieldError(client, questions);
 

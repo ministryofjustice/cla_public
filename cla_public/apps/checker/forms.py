@@ -450,7 +450,7 @@ class OutgoingsForm(BaseForm):
             u"Money you pay per month towards your criminal legal aid"),
         partner_description=_(u"Money you and/or your partner pay per month "
                               u"towards your criminal legal aid"),
-        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
+        validators=[InputRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     childcare = PartnerMoneyIntervalField(
         label=_(u'Childcare'),
         description=_(

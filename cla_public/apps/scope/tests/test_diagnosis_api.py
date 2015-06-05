@@ -20,9 +20,12 @@ class TestReviewPage(unittest.TestCase):
 
     def test_outcome(self):
         paths = [
-            ('INSCOPE', ['n44::n14', 'n106', 'n107', 'n63', 'n19']),
-            ('CONTACT', ['n44::n14', 'n106', 'n107', 'n63', 'n18']),
-            ('INELIGIBLE', ['n44::n14', 'n54']),
+            # family > disputes over children > with ex over children > domestic abuse > no immediate harm risk
+            ('INSCOPE', ['n43::n14', 'n105', 'n106', 'n62', 'n19']),
+            # family > disputes over children > with ex over children > domestic abuse > immediate harm risk
+            ('CONTACT', ['n43::n14', 'n105', 'n106', 'n62', 'n18']),
+            # family > any other problem
+            ('INELIGIBLE', ['n43::n14', 'n53']),
         ]
 
         for outcome, choices in paths:
@@ -33,13 +36,16 @@ class TestReviewPage(unittest.TestCase):
             self.assertEqual(resp.json().get('state'), outcome)
 
     def test_direct_link(self):
-        resp = api.move(['n44::n14', 'n52', 'n58', 'n60'])
+        # family > problem with ex > dispute over children > family mediation
+        resp = api.move(['n43::n14', 'n51', 'n57', 'n59'])
         self.assertResponseHasNNodes(resp, 4)
 
-        resp = api.move(['n44::n14', 'n52'])
+        # family > problem with ex
+        resp = api.move(['n43::n14', 'n51'])
         self.assertResponseHasNNodes(resp, 2)
 
-        resp = api.move(['n44::n14'])
+        # family
+        resp = api.move(['n43::n14'])
         self.assertResponseHasNNodes(resp, 1)
 
         resp = api.move([])

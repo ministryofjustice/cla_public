@@ -3,6 +3,11 @@
 var util = require('util');
 var common = require('../../modules/common-functions');
 var OUTGOINGS_QUESTIONS = require('../../modules/constants').OUTGOINGS_QUESTIONS;
+var OUTGOINGS_QUESTION_ERRORS = {
+  'rent': 'Enter 0 if you don’t pay rent',
+  'maintenance': 'Enter 0 if this doesn’t apply to you',
+  'childcare': 'Please provide an amount'
+};
 
 module.exports = {
   'Start page': function(client) {
@@ -113,13 +118,13 @@ module.exports = {
       common.setDropdownValue(client, item + '-interval_period', 'per_month');
       common.submitAndCheckForFieldError(client, [{
         name: item + '-per_interval_value',
-        errorText: 'Please provide an amount'
+        errorText: OUTGOINGS_QUESTION_ERRORS[item]
       }]);
     });
 
     common.submitAndCheckForFieldError(client, [{
       name: 'income_contribution',
-      errorText: 'Not a valid amount'
+      errorText: 'Enter 0 if this doesn’t apply to you'
     }]);
 
     OUTGOINGS_QUESTIONS.forEach(function(item) {
