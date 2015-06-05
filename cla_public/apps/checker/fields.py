@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 "Custom form fields"
-
+from collections import defaultdict
 import re
 
 from flask import session
@@ -31,6 +31,31 @@ class PartnerMixin(object):
             kwargs['label'] = partner_label
             kwargs['description'] = partner_description
         super(PartnerMixin, self).__init__(*args, **kwargs)
+
+
+class SelfEmployedMixin(object):
+    def __init__(self, *args, **kwargs):
+        label = kwargs.get('label')
+        description = kwargs.get('description')
+        label_dict = defaultdict(lambda: label)
+        label_dict.update(kwargs.pop('self_employed_labels', {}))
+        description_dict = defaultdict(lambda: description)
+        description_dict.update(kwargs.pop('self_employed_descriptions', {}))
+
+        if session.checker.is_employed and session.checker.is_self_employed:
+            kwargs['label'] = label_dict['both']
+            kwargs['description'] = description_dict['both']
+        elif session.checker.is_employed:
+            kwargs['label'] = label_dict['employed']
+            kwargs['description'] = description_dict['employed']
+        elif session.checker.is_self_employed:
+            kwargs['label'] = label_dict['self_employed']
+            kwargs['description'] = description_dict['self_employed']
+        else:
+            kwargs['label'] = label_dict['neither']
+            kwargs['description'] = description_dict['neither']
+
+        super(SelfEmployedMixin, self).__init__(*args, **kwargs)
 
 
 class DescriptionRadioField(RadioField):
@@ -295,4 +320,8 @@ class PartnerMultiCheckboxField(PartnerMixin, MultiCheckboxField):
 
 
 class PartnerMoneyField(PartnerMixin, MoneyField):
+    pass
+
+
+class SelfEmployedMoneyIntervalField(SelfEmployedMixin, MoneyIntervalField):
     pass
