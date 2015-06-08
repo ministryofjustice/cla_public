@@ -32,8 +32,8 @@ SPREADSHEET_PATH = os.path.join(
 
 
 SCOPE_PATHS = {
-    'debt': ['n44::n2', 'n2'],
-    'benefits': ['n44::n13', 'n20']
+    'debt': ['n43::n2', 'n2'],
+    'benefits': ['n43::n13', 'n20']
 }
 
 
