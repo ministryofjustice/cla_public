@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 "Custom form fields"
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 import re
 
 from flask import session
 
 from flask.ext.babel import lazy_gettext as _
-from wtforms import Form as NoCsrfForm
+from wtforms import Form as NoCsrfForm, Label
 from wtforms import FormField, IntegerField, RadioField, \
     SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.validators import Optional, InputRequired
@@ -34,6 +34,13 @@ class PartnerMixin(object):
 
 
 class SelfEmployedMixin(object):
+    """
+    Mix-in to allow fields to show different labels and descriptions
+    based on employed/self-employed choices made by the applicant or
+    about their partner
+    """
+    EmploymentChoices = namedtuple('EmploymentChoices', 'employed self_employed')
+
     def __init__(self, *args, **kwargs):
         label = kwargs.get('label')
         description = kwargs.get('description')
@@ -41,21 +48,28 @@ class SelfEmployedMixin(object):
         label_dict.update(kwargs.pop('self_employed_labels', {}))
         description_dict = defaultdict(lambda: description)
         description_dict.update(kwargs.pop('self_employed_descriptions', {}))
-
-        if session.checker.is_employed and session.checker.is_self_employed:
-            kwargs['label'] = label_dict['both']
-            kwargs['description'] = description_dict['both']
-        elif session.checker.is_employed:
-            kwargs['label'] = label_dict['employed']
-            kwargs['description'] = description_dict['employed']
-        elif session.checker.is_self_employed:
-            kwargs['label'] = label_dict['self_employed']
-            kwargs['description'] = description_dict['self_employed']
-        else:
-            kwargs['label'] = label_dict['neither']
-            kwargs['description'] = description_dict['neither']
-
+        self._label_dict = label_dict
+        self._description_dict = description_dict
         super(SelfEmployedMixin, self).__init__(*args, **kwargs)
+
+    def set_self_employed_details(self, is_partner=False):
+        person_fields = ['is_employed', 'is_self_employed']
+        if is_partner:
+            person_fields = map(lambda f: 'partner_%s' % f, person_fields)
+        person_fields = self.EmploymentChoices(*map(lambda f: getattr(session.checker, f), person_fields))
+
+        if person_fields.employed and person_fields.self_employed:
+            self.label = Label(self.id, self._label_dict['both'])
+            self.description = self._description_dict['both']
+        elif person_fields.employed:
+            self.label = Label(self.id, self._label_dict['employed'])
+            self.description = self._description_dict['employed']
+        elif person_fields.self_employed:
+            self.label = Label(self.id, self._label_dict['self_employed'])
+            self.description = self._description_dict['self_employed']
+        else:
+            self.label = Label(self.id, self._label_dict['neither'])
+            self.description = self._description_dict['neither']
 
 
 class DescriptionRadioField(RadioField):

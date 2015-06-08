@@ -345,27 +345,31 @@ class IncomeFieldForm(BaseNoCsrfForm):
             del self.national_insurance
             del self.working_tax_credit
 
+        self_employed_fields = [field for field in self if isinstance(field, SelfEmployedMoneyIntervalField)]
+        for field in self_employed_fields:
+            field.set_self_employed_details(self.is_partner)
+
     earnings = SelfEmployedMoneyIntervalField(
         label=_(u'Wages before tax'),
         self_employed_descriptions={
             'self_employed': _(u"This includes any earnings from self-employment"),
-            'both': _(u"This includes all your wages and any earnings from self-employment"),
+            'both': _(u"This includes all wages and any earnings from self-employment"),
         },
         validators=[MoneyIntervalAmountRequired()])
     income_tax = SelfEmployedMoneyIntervalField(
         label=_(u'Income tax'),
         self_employed_descriptions={
-            'employed': _(u"Tax paid directly out of your wages"),
-            'self_employed': _(u"Any tax you pay on self-employed earnings"),
-            'both': _(u"Tax paid directly out of your wages and any tax you pay on self-employed earnings"),
+            'employed': _(u"Tax paid directly out of wages"),
+            'self_employed': _(u"Any tax paid on self-employed earnings"),
+            'both': _(u"Tax paid directly out of wages and any tax paid on self-employed earnings"),
         },
         validators=[MoneyIntervalAmountRequired()])
     national_insurance = SelfEmployedMoneyIntervalField(
         label=_(u'National Insurance contributions'),
         self_employed_descriptions={
-            'employed': _(u"Check your payslip"),
-            'self_employed': _(u"Check your National Insurance statement"),
-            'both': _(u"Check your payslip or your National Insurance statement if you’re self-employed"),
+            'employed': _(u"Check the payslip"),
+            'self_employed': _(u"Check the National Insurance statement"),
+            'both': _(u"Check the payslip or National Insurance statement if self-employed"),
         },
         validators=[MoneyIntervalAmountRequired()])
     working_tax_credit = MoneyIntervalField(
