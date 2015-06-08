@@ -53,39 +53,31 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.text_input_fieldset(
-      form.full_name,
-      class_='m-large'
-    ) }}
+    {{ Form.text_input_fieldset(form.full_name, class_='m-large') }}
 
-    {% call Form.fieldset(form.callback_requested) %}
-      {{ Form.radio_buttons(form.callback_requested) }}
+    {% call Form.fieldset(form.contact_type, class_='fieldset-group') %}
+      <ul class="form-option-list">
+        {%- for option in form.contact_type -%}
+          <li>
+            <label class="radio-inline" for="{{option.id}}">
+              {{ option }}
+              {{ option.label.text }}
+            </label>
 
-      <div class="form-notice" data-controlled-by="callback_requested" data-control-value="*">
-        <p data-controlled-by="callback_requested" data-control-value="0">
-          {% if 'n18' in session.checker.diagnosis_previous_choices %}
-            {{ _('We’ll remind of you the CLA phone number when you submit your details below.') }}
-          {% else %}
-            {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
-          {% endif %}
-        </p>
-        <p data-controlled-by="callback_requested" data-control-value="1">
-          {{ _('We will try to call you at least once. If you miss the call you’ll need to complete this form again.') }}
-        </p>
-        <p data-controlled-by="callback_requested" data-control-value="1">
-          {{ _('When a CLA operator calls you, the call will come from an anonymous number.') }}
-        </p>
-      </div>
-
-      {% call Form.fieldset(
-        is_subfield=True,
-        controlled_by=form.callback_requested,
-        control_value="1",
-        use_row=False,
-        persist_values=True
-      ) %}
-        {{ Subform.callback(form.callback) }}
-      {% endcall %}
+            {% if option.data == 'call' %}
+              <div class="form-group form-subfield form-notice" data-controlled-by="contact_type" data-control-value="call">
+                <p>
+                  {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
+                </p>
+              </div>
+            {% elif option.data == 'callback' %}
+              {{ Subform.callback(form) }}
+            {% elif option.data == 'thirdparty' %}
+              {{ Subform.thirdparty(form) }}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
     {% endcall %}
 
     {{ Form.text_input_fieldset(form.email, class_='m-large') }}
@@ -107,14 +99,10 @@
   </form>
 
   {% block notice %}
-    <div class="notice">
-      {% block notice_content %}
-      <p>
-        {% trans %}Protecting your personal data and your privacy is important to us.
-        Read the full <a href="/privacy" target="_blank">Civil Legal Advice Privacy Statement</a>.{% endtrans %}
-      </p>
-      {% endblock %}
-    </div>
+    <p class="notice">
+      {% trans %}Protecting your personal data and your privacy is important to us.
+      Read the full <a href="/privacy" target="_blank">Civil Legal Advice Privacy Statement</a>.{% endtrans %}
+    </p>
   {% endblock %}
 {% endblock %}
 
@@ -129,7 +117,7 @@
   </script>
 
   <script type="text/html" id="addressFinderList">
-    <div class="form-row address-list">
+    <div class="form-group form-subfield address-list">
       <select name="address" class="form-control">
         <option value="" disabled><%= count %> addresses found</option>
         <option value="">-- Choose address --</option>

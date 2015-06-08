@@ -4,39 +4,106 @@
   Callback subform
 
   Params:
-    - subform <object>
+    - form <object>
         WTForm field
 #}
-{% macro callback(subform) %}
-  {{ Form.text_input_fieldset(subform.contact_number, class_='m-large', fieldset_class="fieldset-group") }}
-  {{ Form.radio_buttons_fieldset(subform.safe_to_contact, class_='fieldset-group') }}
+{% macro callback(form) %}
+  {% call Form.fieldset(
+    is_subfield=True,
+    controlled_by=form.contact_type,
+    control_value="callback",
+    use_row=False,
+    persist_values=True
+  ) %}
+    <div class="form-notice">
+      <p>{{ _('We will try to call at least once. If you miss the call you’ll need to complete this form again.') }}</p>
+      <p>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</p>
+    </div>
 
-  {% with field = subform.time %}
-    {% call Form.fieldset(field, class_='fieldset-group') %}
-      <ul class="form-option-list" role="radiogroup">
-        {% for radio in field.specific_day %}
-          {% if (radio.id == 'specific_day-0' and field.time_today.choices) or
-          (radio.id == 'specific_day-1' and field.day.choices) %}
-            <li>
-              <label class="radio-inline" for="{{radio.id}}">
-                {{ radio }} {{ radio.label.text }}
-              </label>
-              {% if radio.id == 'specific_day-0' %}
-                {{ field.time_today(class_='form-control') }}
-              {% else %}
-                {{ field.day(class_='form-control', **{
-                  'data-day-time-choices': field.day.day_time_choices|tojson|safe
-                }) }} at {{ field.time_in_day(class_='form-control') }}
-              {%  endif %}
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% endcall %}
-  {% endwith %}
+    {{ Form.text_input_fieldset(form.callback.contact_number, class_='m-large', fieldset_class="fieldset-group") }}
+    {{ Form.radio_buttons_fieldset(form.callback.safe_to_contact, class_='fieldset-group') }}
+
+    {{ time_picker(form.callback.time) }}
+  {% endcall %}
 {% endmacro %}
 
 
+{#
+  Thirdparty subform
+
+  Params:
+    - subform <object>
+        WTForm field
+#}
+{% macro thirdparty(form) %}
+  {% call Form.fieldset(
+    is_subfield=True,
+    controlled_by=form.contact_type,
+    control_value="thirdparty",
+    use_row=False,
+    persist_values=True
+  ) %}
+    <div class="form-notice">
+      <p>
+      {% trans %}
+        We will try to call at least once. If your nominated person misses
+        the call you’ll need to complete this form again.
+      {% endtrans %}
+      </p>
+      <p>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</p>
+    </div>
+
+    {{ Form.text_input_fieldset(form.thirdparty.full_name, class_='m-large', fieldset_class="fieldset-group") }}
+    {% call Form.fieldset(form.thirdparty.relationship, class_='fieldset-group') %}
+      {{ form.thirdparty.relationship(class_='form-control') }}
+    {% endcall %}
+    {{ Form.text_input_fieldset(form.thirdparty.contact_number, class_='m-large', fieldset_class="fieldset-group") }}
+    {{ Form.radio_buttons_fieldset(form.thirdparty.safe_to_contact, class_='fieldset-group') }}
+
+    {{ time_picker(form.thirdparty.time) }}
+  {% endcall %}
+{% endmacro %}
+
+
+{#
+  Time picker subform
+
+  Params:
+    - field <object>
+        WTForm field
+#}
+{% macro time_picker(field) %}
+  {% call Form.fieldset(field, class_='fieldset-group') %}
+    <ul class="form-option-list" role="radiogroup">
+      {% for radio in field.specific_day %}
+        {% if (radio.data == 'today' and field.time_today.choices) or
+        (radio.data == 'specific_day' and field.day.choices) %}
+          <li>
+            <label class="radio-inline" for="{{radio.id}}">
+              {{ radio }} {{ radio.label.text }}
+            </label>
+            {% if radio.data == 'today' %}
+              {{ field.time_today(class_='form-control') }}
+            {% else %}
+              {{ field.day(class_='form-control', **{
+                'data-day-time-choices': field.day.day_time_choices|tojson|safe
+              }) }} at {{ field.time_in_day(class_='form-control') }}
+            {%  endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endcall %}
+{% endmacro %}
+
+
+{#
+  Adaptations subform
+
+  Params:
+    - field <object>
+        WTForm field
+#}
 {% macro adaptations(subform) %}
   {% call Form.fieldset(subform) %}
     <ul class="form-option-list">
@@ -87,6 +154,13 @@
 {% endmacro %}
 
 
+{#
+  Address subform
+
+  Params:
+    - field <object>
+        WTForm field
+#}
 {% macro address(subform) %}
   {% call Form.fieldset(subform, class_='fieldset-group', use_row=False) %}
     {% call Form.fieldset(subform.post_code, as_label=True, class_='form-group-plain') %}

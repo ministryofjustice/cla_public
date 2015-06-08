@@ -34,7 +34,7 @@
   {% call alert() %}
     <p>
       {{ _('If you’re having trouble completing this form') }},
-      <a href="{{ url_for('contact.get_in_touch') }}" id="callback-link">{{ _('get in touch') }}</a>.
+      <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link">{{ _('get in touch') }}</a>.
     </p>
   {% endcall %}
 {% endmacro %}
@@ -50,4 +50,26 @@
       Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">send us your thoughts</a>.{% endtrans %}
     </p>
   {% endcall %}
+{% endmacro %}
+
+
+{#
+  Progress bar
+
+  Params:
+    - current <Number>
+    - completed <Number>
+#}
+
+{%  macro progress_bar(current, completed, offset=-5) %}
+  {% if current is number or completed is number %}
+    <div class="progress-bar">
+      {% if completed %}
+        <div class="progress-value m-completed" style="width:{{ completed + offset }}%;"></div>
+      {% endif %}
+      {% if current %}
+        <div class="progress-value m-current" style="left:{{ current + offset }}%;"></div>
+      {% endif %}
+    </div>
+  {% endif %}
 {% endmacro %}

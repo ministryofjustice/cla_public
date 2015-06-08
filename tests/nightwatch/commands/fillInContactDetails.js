@@ -8,7 +8,7 @@ exports.command = function(shouldSubmitForm, options, callback) {
   var client = this;
 
   options = options || {
-    callback_requested: 0
+    contact_type: 'call'
   };
 
   this.perform(function() {

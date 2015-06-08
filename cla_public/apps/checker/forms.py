@@ -17,6 +17,7 @@ from cla_public.apps.checker.fields import (
     DescriptionRadioField, MoneyIntervalField,
     YesNoField, PartnerYesNoField, MoneyField,
     PartnerMoneyIntervalField, PartnerMultiCheckboxField, PartnerMoneyField,
+    SelfEmployedMoneyIntervalField,
     PropertyList, money_interval_to_monthly,
     PassKwargsToFormField, SetZeroIntegerField, set_zero_values,
     SetZeroFormField)
@@ -197,7 +198,10 @@ class PropertyForm(BaseNoCsrfForm):
             InputRequired(_(u'Please enter 0 if you have no mortgage'))])
     mortgage_payments = MoneyField(
         _(u'How much was your monthly mortgage repayment last month?'),
-        validators=[IgnoreIf('mortgage_remaining', FieldValue(0))])
+        validators=[
+            IgnoreIf('mortgage_remaining', FieldValue(0)),
+            InputRequired(_(u'Please enter 0 if you have no mortgage')),
+        ])
     is_rented = YesNoField(
         _(u'Do you rent out any part of this property?'),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
@@ -341,43 +345,49 @@ class IncomeFieldForm(BaseNoCsrfForm):
             del self.national_insurance
             del self.working_tax_credit
 
-    earnings = MoneyIntervalField(
-        _(u'Wages before tax'),
-        description=(
-            _(u"This includes all your wages and any earnings from "
-              u"self-employment")),
+        self_employed_fields = [field for field in self if isinstance(field, SelfEmployedMoneyIntervalField)]
+        for field in self_employed_fields:
+            field.set_self_employed_details(self.is_partner)
+
+    earnings = SelfEmployedMoneyIntervalField(
+        label=_(u'Wages before tax'),
+        self_employed_descriptions={
+            'self_employed': _(u"This includes any earnings from self-employment"),
+            'both': _(u"This includes all wages and any earnings from self-employment"),
+        },
         validators=[MoneyIntervalAmountRequired()])
-    income_tax = MoneyIntervalField(
-        _(u'Income tax'),
-        description=(
-            _(u"Tax paid directly out of your wages and any tax you pay on "
-              u"self-employed earnings")),
+    income_tax = SelfEmployedMoneyIntervalField(
+        label=_(u'Income tax'),
+        self_employed_descriptions={
+            'employed': _(u"Tax paid directly out of wages"),
+            'self_employed': _(u"Any tax paid on self-employed earnings"),
+            'both': _(u"Tax paid directly out of wages and any tax paid on self-employed earnings"),
+        },
         validators=[MoneyIntervalAmountRequired()])
-    national_insurance = MoneyIntervalField(
-        _(u'National Insurance contributions'),
-        description=(
-            _(u"Check your payslip or your National Insurance statement if "
-              u"you’re self-employed")),
+    national_insurance = SelfEmployedMoneyIntervalField(
+        label=_(u'National Insurance contributions'),
+        self_employed_descriptions={
+            'employed': _(u"Check the payslip"),
+            'self_employed': _(u"Check the National Insurance statement"),
+            'both': _(u"Check the payslip or National Insurance statement if self-employed"),
+        },
         validators=[MoneyIntervalAmountRequired()])
     working_tax_credit = MoneyIntervalField(
         _(u'Working Tax Credit'),
-        description=_(
-            u'Extra money for people who work and have a low income'),
-        validators=[MoneyIntervalAmountRequired()])
+        description=_(u"Extra money for people who work and have a low income"),
+        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     maintenance = MoneyIntervalField(
         _(u'Maintenance received'),
         description=_(u"Payments you get from an ex-partner"),
-        validators=[MoneyIntervalAmountRequired()])
+        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     pension = MoneyIntervalField(
         _(u'Pension received'),
         description=_(u"Payments you receive if you’re retired"),
-        validators=[MoneyIntervalAmountRequired()])
+        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     other_income = MoneyIntervalField(
         _(u'Any other income'),
-        description=_(
-            u"For example, student grants, income from trust funds, "
-            u"dividends"),
-        validators=[MoneyIntervalAmountRequired()])
+        description=_(u"For example, student grants, income from trust funds, dividends"),
+        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
 
 
 class IncomeField(PassKwargsToFormField):
@@ -430,20 +440,21 @@ class OutgoingsForm(BaseForm):
                               u"for rent. Do not include rent that is paid by "
                               u"Housing Benefit"),
         choices=money_intervals_except('per_4week'),
-        validators=[MoneyIntervalAmountRequired()])
+        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if you don’t pay rent"))])
     maintenance = PartnerMoneyIntervalField(
         label=_(u'Maintenance'),
         description=_(
             u"Money you pay to an ex-partner for their living costs"),
         partner_description=_(u"Money you and/or your partner pay to an "
                               u"ex-partner for their living costs"),
-        validators=[MoneyIntervalAmountRequired()])
+        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     income_contribution = PartnerMoneyField(
         label=_(u'Monthly Income Contribution Order'),
         description=_(
             u"Money you pay per month towards your criminal legal aid"),
         partner_description=_(u"Money you and/or your partner pay per month "
-                              u"towards your criminal legal aid"))
+                              u"towards your criminal legal aid"),
+        validators=[InputRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     childcare = PartnerMoneyIntervalField(
         label=_(u'Childcare'),
         description=_(

@@ -73,12 +73,15 @@ class AtLeastOne(object):
 
 
 class MoneyIntervalAmountRequired(object):
+    def __init__(self, message=None):
+        self.message = message
 
     def __call__(self, form, field):
         amount = field.form.per_interval_value
 
         if not amount.errors and amount.data is None:
-            raise StopValidation(field.gettext(u'Please provide an amount'))
+            message = self.message or field.gettext(u'Please provide an amount')
+            raise StopValidation(message)
 
 
 class ValidMoneyInterval(object):

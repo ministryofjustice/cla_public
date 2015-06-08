@@ -12,7 +12,7 @@ var eligibleJourney = function(client) {
     .selectBenefit('income_support', true)
     .confirmReviewPage()
     .fillInContactDetails(false, {
-      callback_requested: 1,
+      contact_type: 'callback',
       'callback-safe_to_contact': 'SAFE'
     })
   ;
@@ -46,7 +46,7 @@ module.exports = {
           console.log('Today not available after 11.15am on a Saturday, test skipped');
         } else {
           eligibleJourney(client);
-          client.getValue('select[name="time_today"]', function(result) {
+          client.getValue('select[name="callback-time-time_today"]', function(result) {
             checkCallbackTime(client, now, result.value);
           });
         }
@@ -62,14 +62,14 @@ module.exports = {
     eligibleJourney(client);
 
     client
-      .click('input[name="specific_day"][value="specific_day"]')
-      .click('select#id_day option:first-child')
+      .click('input[name="callback-time-specific_day"][value="specific_day"]')
+      .click('#callback-time-day option:first-child')
       .click('body')
-      .click('select#id_time_in_day option:first-child')
+      .click('#callback-time-time_in_day option:first-child')
       .click('body')
-      .getValue('select#id_day option:first-child', function(result) {
+      .getValue('#callback-time-day option:first-child', function(result) {
         var selectedDate = result.value;
-        client.getValue('select#id_time_in_day option:first-child', function(result) {
+        client.getValue('#callback-time-time_in_day option:first-child', function(result) {
           var then = moment([selectedDate.substr(0, 4), parseInt(selectedDate.substr(4, 2))-1, selectedDate.substr(6, 2)]);
           checkCallbackTime(client, then, result.value);
         });

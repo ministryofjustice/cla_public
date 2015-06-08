@@ -11,7 +11,7 @@ from flask.ext.babel import lazy_gettext as _, gettext
 
 from cla_common.smoketest import smoketest
 from cla_public.apps.base import base
-from cla_public.apps.base.forms import FeedbackForm
+from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 import cla_public.apps.base.filters
 import cla_public.apps.base.extensions
 from cla_public.libs import zendesk
@@ -37,12 +37,24 @@ def privacy():
     return render_template('privacy.html')
 
 
-class Feedback(HasFormMixin, views.MethodView, ValidFormOnOptions, object):
+class ZendeskView(HasFormMixin, views.MethodView, ValidFormOnOptions):
+    """
+    Abstract view for Zendesk forms
+    """
+    template = None
+    redirect_to = None
 
-    form_class = FeedbackForm
+    def __init__(self):
+        if not self.form_class or not self.template or not self.redirect_to:
+            raise NotImplementedError
+        super(ZendeskView, self).__init__()
+
+    @property
+    def default_form_data(self):
+        return {'referrer': request.referrer or 'Unknown'}
 
     def get(self):
-        return self.render()
+        return self.render_form()
 
     def post(self):
         error = None
@@ -51,14 +63,27 @@ class Feedback(HasFormMixin, views.MethodView, ValidFormOnOptions, object):
             response = zendesk.create_ticket(self.form.api_payload())
 
             if response.status_code < 300:
-                return redirect(url_for('.feedback_confirmation'))
+                return self.success_redirect()
             else:
                 error = _('Something went wrong. Please try again.')
 
-        return self.render(error)
+        return self.render_form(error)
 
-    def render(self, error=None):
-        return render_template('feedback.html', form=self.form, zd_error=error)
+    def render_form(self, error=None):
+        return render_template(self.template, form=self.form, zd_error=error)
+
+    def success_redirect(self):
+        return redirect(url_for(self.redirect_to))
+
+
+class Feedback(ZendeskView):
+    """
+    General feedback form
+    """
+    form_class = FeedbackForm
+    template = 'feedback.html'
+    redirect_to = '.feedback_confirmation'
+
 
 base.add_url_rule(
     '/feedback',
@@ -70,6 +95,30 @@ base.add_url_rule(
 @base.route('/feedback/confirmation')
 def feedback_confirmation():
     return render_template('feedback-confirmation.html')
+
+
+class ReasonsForContacting(ZendeskView):
+    """
+    Interstitial form to ascertain why users are dropping out of
+    the checker service
+    """
+    form_class = ReasonsForContactingForm
+    template = 'reasons-for-contacting.html'
+    redirect_to = 'contact.get_in_touch'
+
+    def post(self):
+        if self.form.validate_on_submit():
+            if len(self.form.reasons.data) == 0:
+                # allows skipping form if nothing is selected
+                return self.success_redirect()
+        return super(ReasonsForContacting, self).post()
+
+
+base.add_url_rule(
+    '/reasons-for-contacting',
+    view_func=ReasonsForContacting.as_view('reasons_for_contacting'),
+    methods=('GET', 'POST', 'OPTIONS')
+)
 
 
 @base.route('/session')
