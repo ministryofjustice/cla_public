@@ -1,0 +1,150 @@
+digraph Test {
+	compound 	= true
+	labelloc 	= "t"
+	ordering 	= "out"
+	splines 	= "ortho"
+	clusterrank = "local"
+	nodesep		= .5
+	ranksep 	= .5
+
+	label 		= "Civil Legal Advice - User Journey Map"
+	fontsize	= 16
+	size 		= "8x11"
+
+	graph [ style="rounded, filled" fillcolor=grey70 fontname=Helvetica penwidth=0]
+	node [ shape=box style=filled fillcolor=olivedrab2 fontname=Helvetica fontsize=13 height=1.2 width=3 ]
+	edge [ minlen=2 arrowsize=1.2 ]
+
+	subgraph cluster_digital_channel {
+		label="Digital Channel"
+
+		Browser [ label = "Web browser" ]
+	}
+
+	subgraph cluster_govuk_start {
+		label = "GOV.UK"
+
+		CLA_Start [ label="Check if Civil Legal\nAdvice can help you\n\n/start" ]
+	}
+
+	subgraph cluster_govuk_end {
+		label = "GOV.UK"
+
+		GOVUK_CLA_Feedback [ label="GOV.UK CLA Feedback" fillcolor=bisque ]
+	}
+
+	subgraph cluster_cla_digital_service {
+		label="CLA Digital Service"
+
+		CLA_Scope_Diagnosis [ shape=box3d label="What do you need help with?\n\n\n/scope/diagnosis" ]
+
+		CLA_About_You [ label="About you\n\n\n/about" ]
+		CLA_Income [ label="Your money coming in\n\n\n/income" ]
+		CLA_Outgoings [ label="Your outgoings\n\n\n/outgoings" ]
+		CLA_Review_Answers [ label="Review your answers\n\n\n/review" ]
+
+		CLA_Result_Ineligible [ label="You’re unlikely to get\nlegal aid\n\n/help-organisations/<category>" fillcolor=orange ]
+		CLA_Result_Face_To_Face [ label="You may be able to\nget free advice\nfrom a legal adviser\n\n/face-to-face" fillcolor=orange ]
+
+		subgraph cluster_contact {
+			label = "Contact CLA"
+			style="filled"
+			penwidth=1
+			color=grey40
+			fontcolor=grey60
+			fillcolor=grey85
+
+			CLA_Result_Eligible [ label="You might qualify\nfor legal aid\n\n/result/eligible" ]
+			CLA_Result_Eligible_More_Info [ label="We need more information\n\n\n/result/eligible" fillcolor=yellow ]
+			CLA_Contact [ label="Contact Civil Legal Advice\n\n\n/contact" fillcolor=yellow ]
+		}
+
+		CLA_Contact_Confirmation [ label="Contact Confirmation" ]
+		CLA_Feedback [ label="CLA Feedback" fillcolor=bisque ]
+	}
+
+	Exit [ shape=oval fontcolor=white fontsize=16 label="Exit" fillcolor=red2 penwidth=0 ]
+
+	subgraph cluster_confirmation {
+		label = "Outcomes"
+
+		Not_Complete_Digital [ shape=note fontcolor=white fontsize=16 label="Not Complete\n\nDigital" fillcolor=red2 ]
+		Not_Complete_Assisted_Digital [ shape=note fontsize=16 label="Not Complete\n\nAssisted Digital" fillcolor=yellow ]
+		Complete_Digital [ shape=note fontsize=16 label="Complete\n\nDigital" fillcolor=green ]
+		Success_Digital [ shape=note fontsize=16 label="Success\n\nDigital" fillcolor=orange ]
+	}
+
+
+	// Connections
+	// -----------
+
+	// Digital journey start
+	Browser -> CLA_Start
+
+	// GOV.UK journey
+	CLA_Start -> CLA_Scope_Diagnosis
+	CLA_Start -> CLA_Contact
+
+	// CLA in scope
+	CLA_Scope_Diagnosis
+		-> CLA_About_You
+		-> CLA_Income
+		-> CLA_Outgoings
+		-> CLA_Review_Answers
+
+	// Outcomes
+	CLA_Review_Answers -> {
+		CLA_Result_Eligible
+		CLA_Result_Eligible_More_Info
+		CLA_Result_Ineligible
+	}
+
+	// User journey problem (skip to contact)
+	{
+		CLA_Scope_Diagnosis
+		CLA_About_You
+		CLA_Income
+		CLA_Outgoings
+	} -> CLA_Contact
+
+	// Confirmations
+	CLA_Result_Eligible -> CLA_Contact_Confirmation
+	CLA_Result_Eligible_More_Info -> CLA_Contact_Confirmation
+	CLA_Contact -> CLA_Contact_Confirmation
+
+	// Out of scope
+	CLA_Scope_Diagnosis -> CLA_Result_Face_To_Face
+
+	// CLA Feedback
+	{
+		CLA_Scope_Diagnosis
+		CLA_About_You
+		CLA_Income
+		CLA_Outgoings
+		CLA_Review_Answers
+	} -> CLA_Feedback [ color=bisque4 ]
+
+	// GOV.UK CLA Feedback
+	{
+		CLA_Result_Eligible
+		CLA_Result_Eligible_More_Info
+		CLA_Result_Ineligible
+	} -> GOVUK_CLA_Feedback [ color=bisque4]
+
+	// Not Complete - user 'bails'
+	CLA_Start -> Exit [ style=invis ]
+	CLA_Scope_Diagnosis -> Exit [ style=invis ]
+	GOVUK_CLA_Feedback -> Exit [ style=invis ]
+
+	// Outcome categories
+	Exit -> Not_Complete_Digital [ color=red2 style=bold ]
+	CLA_Result_Eligible -> Complete_Digital [ color=green4 style=bold ]
+	{
+		CLA_Result_Eligible_More_Info
+		CLA_Contact
+	} -> Not_Complete_Assisted_Digital [ color=yellow4 style=bold ]
+	{
+		CLA_Result_Ineligible
+		CLA_Result_Face_To_Face
+	} -> Success_Digital [ color=orange3 style=bold ]
+}
