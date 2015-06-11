@@ -3,7 +3,7 @@ digraph Test {
 	labelloc 	= "t"
 	ordering 	= "out"
 	splines 	= "ortho"
-	clusterrank = "local"
+//	clusterrank = "local"
 	nodesep		= .5
 	ranksep 	= .5
 
@@ -11,7 +11,7 @@ digraph Test {
 	fontsize	= 16
 	size 		= "8x11"
 
-	graph [ style="rounded, filled" fillcolor=grey70 fontname=Helvetica penwidth=0]
+	graph [ style="rounded, filled" fillcolor=grey80 fontname=Helvetica penwidth=0]
 	node [ shape=box style=filled fillcolor=olivedrab2 fontname=Helvetica fontsize=13 height=1.2 width=3 ]
 	edge [ minlen=2 arrowsize=1.2 ]
 
@@ -36,11 +36,9 @@ digraph Test {
 	subgraph cluster_cla_digital_service {
 		label="CLA Digital Service"
 
-		CLA_Scope_Diagnosis [ shape=box3d label="What do you need help with?\n\n\n/scope/diagnosis" ]
+        CLA_Scope_Diagnosis [ shape=box3d label="What do you need help with?\n\n\n/scope/diagnosis" ]
+		CLA_Means_Test [ shape=box3d label="Means test" ]
 
-		CLA_About_You [ label="About you\n\n\n/about" ]
-		CLA_Income [ label="Your money coming in\n\n\n/income" ]
-		CLA_Outgoings [ label="Your outgoings\n\n\n/outgoings" ]
 		CLA_Review_Answers [ label="Review your answers\n\n\n/review" ]
 
 		CLA_Result_Ineligible [ label="You’re unlikely to get\nlegal aid\n\n/help-organisations/<category>" fillcolor=orange ]
@@ -59,11 +57,11 @@ digraph Test {
 			CLA_Contact [ label="Contact Civil Legal Advice\n\n\n/contact" fillcolor=yellow ]
 		}
 
+        CLA_Reasons_For_Contacting [ label="Before you contact\nCivil Legal Advice\n\n/reasons-for-contacting" fillcolor=yellow ]
+
 		CLA_Contact_Confirmation [ label="Contact Confirmation" ]
 		CLA_Feedback [ label="CLA Feedback" fillcolor=bisque ]
 	}
-
-	Exit [ shape=oval fontcolor=white fontsize=16 label="Exit" fillcolor=red2 penwidth=0 ]
 
 	subgraph cluster_confirmation {
 		label = "Outcomes"
@@ -73,6 +71,8 @@ digraph Test {
 		Complete_Digital [ shape=note fontsize=16 label="Complete\n\nDigital" fillcolor=green ]
 		Success_Digital [ shape=note fontsize=16 label="Success\n\nDigital" fillcolor=orange ]
 	}
+
+    Exit [ shape=oval fontcolor=white fontsize=16 label="Exit" fillcolor=red2 penwidth=0 ]
 
 
 	// Connections
@@ -86,11 +86,7 @@ digraph Test {
 	CLA_Start -> CLA_Contact
 
 	// CLA in scope
-	CLA_Scope_Diagnosis
-		-> CLA_About_You
-		-> CLA_Income
-		-> CLA_Outgoings
-		-> CLA_Review_Answers
+	CLA_Scope_Diagnosis -> CLA_Means_Test -> CLA_Review_Answers
 
 	// Outcomes
 	CLA_Review_Answers -> {
@@ -100,12 +96,8 @@ digraph Test {
 	}
 
 	// User journey problem (skip to contact)
-	{
-		CLA_Scope_Diagnosis
-		CLA_About_You
-		CLA_Income
-		CLA_Outgoings
-	} -> CLA_Contact
+	{ CLA_Scope_Diagnosis, CLA_Means_Test } -> CLA_Reasons_For_Contacting
+    CLA_Reasons_For_Contacting -> CLA_Contact
 
 	// Confirmations
 	CLA_Result_Eligible -> CLA_Contact_Confirmation
@@ -116,23 +108,17 @@ digraph Test {
 	CLA_Scope_Diagnosis -> CLA_Result_Face_To_Face
 
 	// CLA Feedback
-	{
-		CLA_Scope_Diagnosis
-		CLA_About_You
-		CLA_Income
-		CLA_Outgoings
-		CLA_Review_Answers
-	} -> CLA_Feedback [ color=bisque4 ]
+	{ CLA_Scope_Diagnosis, CLA_Means_Test, CLA_Review_Answers } -> CLA_Feedback [ color=bisque4 ]
 
 	// GOV.UK CLA Feedback
 	{
-		CLA_Result_Eligible
-		CLA_Result_Eligible_More_Info
-		CLA_Result_Ineligible
+		CLA_Result_Face_To_Face
+		CLA_Contact_Confirmation
+        CLA_Result_Ineligible
 	} -> GOVUK_CLA_Feedback [ color=bisque4]
 
 	// Not Complete - user 'bails'
-	CLA_Start -> Exit [ style=invis ]
+	//CLA_Start -> Exit [ style=invis ]
 	CLA_Scope_Diagnosis -> Exit [ style=invis ]
 	GOVUK_CLA_Feedback -> Exit [ style=invis ]
 
