@@ -143,6 +143,7 @@ digraph CLA_User_Journey {
 	} -> Not_Complete_Assisted_Digital [ color=yellow4 style="dotted,bold" arrowsize=.8 ]
 	{
 		CLA_Result_Ineligible
+        CLA_Scope_Ineligible
 		CLA_Result_Face_To_Face
 	} -> Referral_Digital [ color=orange3 style="dotted,bold" arrowsize=.8 ]
 }
