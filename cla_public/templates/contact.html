@@ -119,8 +119,8 @@
   <script type="text/html" id="addressFinderList">
     <div class="form-group form-subfield address-list">
       <select name="address" class="form-control">
-        <option value="" disabled><%= count %> addresses found</option>
-        <option value="">-- Choose address --</option>
+        <option value="" disabled><%= count %> {{ _('addresses found') }}</option>
+        <option value="">-- {{ _('Choose address') }} --</option>
         <% _.each(items, function(address, index) { %>
           <option value="<%= index %>"><%= address %></option>
         <% }); %>

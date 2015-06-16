@@ -43,13 +43,14 @@
 
   {% if session.stored.callback_requested %}
     <p>
-      {{ _('Your details have been submitted and') }}
       {% if is_callback %}
-        {{ _('an operator will try to call you back') }}
+        {% trans %}Your details have been submitted and an operator will try to call
+        you back around the time you requested{% endtrans %}
       {% else %}
-        {{ _('an operator will try to call the person you nominated back') }}
+        {% trans %}Your details have been submitted and an operator will try to call
+        the person you nominated back around the time you requested{% endtrans %}
       {% endif %}
-      {{ _('around the time you requested') }}
+
       (<strong>{{ session.stored.callback_time|datetime('full') }}</strong>).
     </p>
   {% endif %}
@@ -62,15 +63,24 @@
   {% endif %}
 
   <p>
-    {{ _('The first person') }}
-    {{ _('you') if is_callback else _('they') }}
-    {{ _('speak to will be an operator') }},
-    {{ _('who will ask about your problem and your financial circumstances') }}.
+    {% if is_callback %}
+        {% trans %}The first person you speak to will be an operator
+        who will ask about your problem and your financial circumstances{% endtrans %}
+    {% else %}
+        {% trans %}The first person they speak to will be an operator
+        who will ask about your problem and your financial circumstances{% endtrans %}
+    {% endif %}
   </p>
   <p>
-    {{ _('If it looks like you might qualify for legal aid') }},
-    {{ _('you’ll') if is_callback else _('they’ll') }}
-    {{ _('be put through to a specialist adviser, who will make the final decision on your case') }}.
+    {% if is_callback %}
+        {% trans %}If it looks like you might qualify for legal aid you’ll
+        be put through to a specialist adviser, who will make the
+        final decision on your case{% endtrans %}
+    {% else %}
+        {% trans %}If it looks like you might qualify for legal aid they’ll
+        be put through to a specialist adviser, who will make the
+        final decision on your case{% endtrans %}
+    {% endif %}
   </p>
 
   {% if session.stored.category == 'violence' %}
@@ -83,8 +93,11 @@
     </p>
   {% elif session.stored.category == 'family' %}
     <p>
-      If your case involves domestic abuse or violence, the specialist adviser will need evidence of this before they can make a decision on your case. <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external" target="_blank">
-        {{ _('Find out what you can use as evidence') }}</a>.
+      {% trans %}If your case involves domestic abuse or violence,
+      the specialist adviser will need evidence of this
+      before they can make a decision on your case.{% endtrans %}
+      <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external" target="_blank">
+      {{ _('Find out what you can use as evidence') }}</a>.
     </p>
   {% endif %}
 

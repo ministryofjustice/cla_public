@@ -1,39 +1,41 @@
 {%- if data.callback_requested -%}
-{%- set is_callback = data.contact_type == 'callback' -%}
-{%- set is_thirdparty = data.contact_type == 'thirdparty' -%}
 
-Dear {{ data.full_name }},
+{% trans full_name=data.full_name %}Dear {{ full_name }},{% endtrans %}
 
-Your details have been submitted to Civil Legal Advice (CLA) and we will call you back.
+{% trans %}Your details have been submitted to Civil Legal Advice (CLA) and we will call you back.{% endtrans %}
 
-Your reference number is {{ data.case_ref }}.
+{% trans case_ref=data.case_ref %}Your reference number is {{ case_ref }}.{% endtrans %}
 
-An operator will try to call {{ 'you' if is_callback else data.thirdparty.full_name }} back on {{ data.callback.contact_number if is_callback else data.thirdparty.contact_number }} around the time you selected ({{ data.callback.time.strftime('%A, %d %B at %H:%M') if is_callback else data.thirdparty.time.strftime('%A, %d %B at %H:%M') }}).
-
-{% if data.safe_to_contact -%}
-We will leave a message when we call.
+{% if data.contact_type == 'callback' -%}
+{% trans contact_number=data.callback.contact_number, date_time=data.callback.time.strftime('%A, %d %B at %H:%M') %}An operator will try to call you back on {{ contact_number }} around the time you selected ({{ date_time }}).{% endtrans %}
 {%- else -%}
-We will not leave a message when we call, as you have told us not to.
+{% trans full_name=data.thirdparty.full_name, contact_number=data.thirdparty.contact_number, date_time=data.thirdparty.time.strftime('%A, %d %B at %H:%M') %}An operator will try to call {{ full_name }} back on {{ contact_number }} around the time you selected ({{ date_time }}).{% endtrans %}
 {%- endif %}
 
-If you miss the call or you need advice urgently, you can call us on 0345 345 4 345. Please quote your reference number when you call.
+{% if data.safe_to_contact -%}
+{% trans %}We will leave a message when we call.{% endtrans %}
+{%- else -%}
+{% trans %}We will not leave a message when we call, as you have told us not to.{% endtrans %}
+{%- endif %}
+
+{% trans %}If you miss the call or you need advice urgently, you can call us on 0345 345 4 345. Please quote your reference number when you call.{% endtrans %}
 
 ---
 
-This is an automated email. Please do not reply to this email address.
+{% trans %}This is an automated email. Please do not reply to this email address.{% endtrans %}
 
 {%- else -%}
 
-Dear {{ data.full_name }},
+{% trans full_name=data.full_name %}Dear {{ full_name }},{% endtrans %}
 
-Your details have been submitted to Civil Legal Advice (CLA).
+{% trans %}Your details have been submitted to Civil Legal Advice (CLA).{% endtrans %}
 
-Your reference number is {{ data.case_ref }}.
+{% trans case_ref=data.case_ref %}Your reference number is {{ case_ref }}.{% endtrans %}
 
-You can now call CLA on 0345 345 4 345. Please quote your reference number when you call.
+{% trans %}You can now call CLA on 0345 345 4 345. Please quote your reference number when you call.{% endtrans %}
 
 ---
 
-This is an automated email. Please do not reply to this email address.
+{% trans %}This is an automated email. Please do not reply to this email address.{% endtrans %}
 
 {%- endif -%}
