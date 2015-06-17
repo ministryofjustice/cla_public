@@ -114,7 +114,7 @@
     {% if session.checker.category_slug %}
       <li class="_separator"></li>
       <li>
-        <a href="/help-organisations/{{session.checker.category_slug}}">Ineligible</a>
+        <a href="{{ url_for('checker.help_organisations', category_name=session.checker.category_slug) }}">Ineligible</a>
       </li>
     {% endif %}
   </menu>

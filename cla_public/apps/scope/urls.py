@@ -9,7 +9,7 @@ scope.add_url_rule('diagnosis/', view_func=view)
 
 scope.add_url_rule('diagnosis/<path:choices>', view_func=view)
 
-scope.add_url_rule('ineligible/<category_name>',
+scope.add_url_rule('refer/<category_name>',
                    view_func=ScopeIneligible.as_view('ineligible'))
 
-scope.add_url_rule('mediation', view_func=ScopeMediation.as_view('mediation'))
+scope.add_url_rule('refer/mediation', view_func=ScopeMediation.as_view('mediation'))

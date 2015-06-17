@@ -285,7 +285,7 @@ class FaceToFace(views.MethodView, object):
 
 
 checker.add_url_rule(
-    '/result/face-to-face', view_func=FaceToFace.as_view('face-to-face'))
+    '/scope/refer/legal-adviser', view_func=FaceToFace.as_view('face-to-face'))
 
 
 class EligibleFaceToFace(views.MethodView, object):
@@ -391,7 +391,7 @@ class HelpOrganisations(views.MethodView):
 
 
 checker.add_url_rule(
-    '/help-organisations/<category_name>',
+    '/result/refer/<category_name>',
     view_func=HelpOrganisations.as_view('help_organisations'),
     methods=['GET']
 )

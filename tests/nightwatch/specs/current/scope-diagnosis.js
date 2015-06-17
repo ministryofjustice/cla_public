@@ -3,7 +3,7 @@
 var scenarioTypes = {
   ineligible: {
     label: 'Ineligible',
-    destination: '/scope/ineligible',
+    destination: '/scope/refer',
     identifier: 'a[href="https://www.gov.uk/find-a-legal-adviser"]'
   },
   inscope: {
@@ -13,7 +13,7 @@ var scenarioTypes = {
   },
   f2f: {
     label: 'Face to Face',
-    destination: '/result/face-to-face',
+    destination: '/result/refer/face-to-face',
     identifier: 'input[name="postcode"]'
   },
   contact: {
