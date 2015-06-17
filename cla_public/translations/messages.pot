@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-06-15 14:17+0100\n"
+"POT-Creation-Date: 2015-06-17 11:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1072,6 +1072,7 @@ msgid "Your Civil Legal Advice reference number"
 msgstr ""
 
 #: cla_public/apps/scope/api.py:116 cla_public/templates/scope/diagnosis.html:5
+#: cla_public/templates/scope/diagnosis.html:18
 #: cla_public/templates/scope/diagnosis.html:48
 msgid "What do you need help with?"
 msgstr ""
@@ -1304,6 +1305,14 @@ msgstr ""
 msgid "Find UK address"
 msgstr ""
 
+#: cla_public/templates/contact.html:122
+msgid "addresses found"
+msgstr ""
+
+#: cla_public/templates/contact.html:123
+msgid "Choose address"
+msgstr ""
+
 #: cla_public/templates/contact.html:133
 msgid "characters remaining"
 msgstr ""
@@ -1504,7 +1513,6 @@ msgid "you and your partner"
 msgstr ""
 
 #: cla_public/templates/help-organisations.html:7
-#: cla_public/templates/checker/result/confirmation.html:66
 msgid "you"
 msgstr ""
 
@@ -1525,7 +1533,11 @@ msgstr ""
 msgid ""
 "From\n"
 "    what you have told us today it looks like you won't be able to get\n"
-"    legal aid %(fromcla)sas you don’t qualify financially"
+"    legal aid %(fromcla)s as you don’t qualify financially"
+msgstr ""
+
+#: cla_public/templates/help-organisations.html:16
+msgid "from CLA"
 msgstr ""
 
 #: cla_public/templates/help-organisations.html:21
@@ -2295,7 +2307,7 @@ msgstr ""
 msgid "So we can improve this service, we'd like to understand why you want to contact <abbr title=\"Civil Legal Advice\">CLA</abbr>."
 msgstr ""
 
-#: cla_public/templates/reasons-for-contacting.html:46
+#: cla_public/templates/reasons-for-contacting.html:48
 msgid "Continue to contact CLA"
 msgstr ""
 
@@ -2322,10 +2334,12 @@ msgid "Start again"
 msgstr ""
 
 #: cla_public/templates/checker/_progress.html:12
+#: cla_public/templates/scope/diagnosis.html:26
 msgid "(completed)"
 msgstr ""
 
 #: cla_public/templates/checker/_progress.html:18
+#: cla_public/templates/scope/diagnosis.html:15
 msgid "Your progress"
 msgstr ""
 
@@ -2392,6 +2406,7 @@ msgid "You can add more than one property below."
 msgstr ""
 
 #: cla_public/templates/checker/property.html:20
+#: cla_public/templates/macros/review.html:6
 msgid "Property"
 msgstr ""
 
@@ -2445,6 +2460,10 @@ msgstr ""
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:21
 msgid "for"
+msgstr ""
+
+#: cla_public/templates/checker/result/_find-legal-adviser.html:30
+msgid "Remove"
 msgstr ""
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:49
@@ -2511,116 +2530,113 @@ msgstr ""
 msgid "What happens next?"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:46
-msgid "Your details have been submitted and"
-msgstr ""
-
-#: cla_public/templates/checker/result/confirmation.html:48
-msgid "an operator will try to call you back"
+#: cla_public/templates/checker/result/confirmation.html:47
+msgid ""
+"Your details have been submitted and an operator will try to call\n"
+"        you back around the time you requested"
 msgstr ""
 
 #: cla_public/templates/checker/result/confirmation.html:50
-msgid "an operator will try to call the person you nominated back"
+msgid ""
+"Your details have been submitted and an operator will try to call\n"
+"        the person you nominated back around the time you requested"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:52
-msgid "around the time you requested"
-msgstr ""
-
-#: cla_public/templates/checker/result/confirmation.html:59
+#: cla_public/templates/checker/result/confirmation.html:60
 msgid ""
 "If you need to urgently protect yourself or your family you should\n"
 "      try and get advice as soon as possible."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:65
-msgid "The first person"
-msgstr ""
-
-#: cla_public/templates/checker/result/confirmation.html:66
-msgid "they"
-msgstr ""
-
 #: cla_public/templates/checker/result/confirmation.html:67
-msgid "speak to will be an operator"
+msgid ""
+"The first person you speak to will be an operator\n"
+"        who will ask about your problem and your financial circumstances"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:68
-msgid "who will ask about your problem and your financial circumstances"
+#: cla_public/templates/checker/result/confirmation.html:70
+msgid ""
+"The first person they speak to will be an operator\n"
+"        who will ask about your problem and your financial circumstances"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:71
-msgid "If it looks like you might qualify for legal aid"
+#: cla_public/templates/checker/result/confirmation.html:76
+msgid ""
+"If it looks like you might qualify for legal aid you’ll\n"
+"        be put through to a specialist adviser, who will make the\n"
+"        final decision on your case"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:72
-msgid "you’ll"
+#: cla_public/templates/checker/result/confirmation.html:80
+msgid ""
+"If it looks like you might qualify for legal aid they’ll\n"
+"        be put through to a specialist adviser, who will make the\n"
+"        final decision on your case"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:72
-msgid "they’ll"
-msgstr ""
-
-#: cla_public/templates/checker/result/confirmation.html:73
-msgid "be put through to a specialist adviser, who will make the final decision on your case"
-msgstr ""
-
-#: cla_public/templates/checker/result/confirmation.html:78
+#: cla_public/templates/checker/result/confirmation.html:88
 msgid ""
 "Please be aware that the specialist adviser will need\n"
 "      evidence of the domestic violence before they can make a decision\n"
 "      on your case."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:82
-#: cla_public/templates/checker/result/confirmation.html:87
+#: cla_public/templates/checker/result/confirmation.html:92
+#: cla_public/templates/checker/result/confirmation.html:100
 msgid "Find out what you can use as evidence"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:93
+#: cla_public/templates/checker/result/confirmation.html:96
+msgid ""
+"If your case involves domestic abuse or violence,\n"
+"      the specialist adviser will need evidence of this\n"
+"      before they can make a decision on your case."
+msgstr ""
+
+#: cla_public/templates/checker/result/confirmation.html:106
 msgid ""
 "You will also need to provide evidence of your financial\n"
 "      circumstances. Your specialist adviser will explain what is\n"
 "      needed."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:99
+#: cla_public/templates/checker/result/confirmation.html:112
 msgid ""
 "You will need to provide evidence of your financial circumstances\n"
 "      and maybe your problem. Your specialist adviser will explain\n"
 "      what is needed."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:106
+#: cla_public/templates/checker/result/confirmation.html:119
 msgid "If your specialist adviser thinks you need to speak to someone in person or have someone represent you in court, they will organise this."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:110
+#: cla_public/templates/checker/result/confirmation.html:123
 msgid "If CLA can’t help you, we’ll always suggest where else you might get help."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:113
+#: cla_public/templates/checker/result/confirmation.html:126
 msgid "If we can do anything to make it easier for you to communicate with us, please tell the operator."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:116
+#: cla_public/templates/checker/result/confirmation.html:129
 msgid ""
 "Protecting your personal data and your privacy is important to us. Read the full\n"
 "    <a href=\"/privacy\" target=\"_blank\">Civil Legal Advice Privacy Statement</a>."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:121
+#: cla_public/templates/checker/result/confirmation.html:134
 msgid "What if I miss the operator’s call?"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:123
+#: cla_public/templates/checker/result/confirmation.html:136
 msgid ""
 "If you miss the call or you need advice urgently, you can call us on\n"
 "      <strong>0345 345 4 345</strong>. Find out about\n"
 "      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\" target=\"_blank\">call charges</a>."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:138
+#: cla_public/templates/checker/result/confirmation.html:151
 msgid "Print this page"
 msgstr ""
 
@@ -2768,6 +2784,57 @@ msgid ""
 "          advice."
 msgstr ""
 
+#: cla_public/templates/emails/confirmation.txt:3
+#: cla_public/templates/emails/confirmation.txt:29
+#, python-format
+msgid "Dear %(full_name)s,"
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:5
+msgid "Your details have been submitted to Civil Legal Advice (CLA) and we will call you back."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:7
+#: cla_public/templates/emails/confirmation.txt:33
+#, python-format
+msgid "Your reference number is %(case_ref)s."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:10
+#, python-format
+msgid "An operator will try to call you back on %(contact_number)s around the time you selected (%(date_time)s)."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:12
+#, python-format
+msgid "An operator will try to call %(full_name)s back on %(contact_number)s around the time you selected (%(date_time)s)."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:16
+msgid "We will leave a message when we call."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:18
+msgid "We will not leave a message when we call, as you have told us not to."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:21
+msgid "If you miss the call or you need advice urgently, you can call us on 0345 345 4 345. Please quote your reference number when you call."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:25
+#: cla_public/templates/emails/confirmation.txt:39
+msgid "This is an automated email. Please do not reply to this email address."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:31
+msgid "Your details have been submitted to Civil Legal Advice (CLA)."
+msgstr ""
+
+#: cla_public/templates/emails/confirmation.txt:35
+msgid "You can now call CLA on 0345 345 4 345. Please quote your reference number when you call."
+msgstr ""
+
 #: cla_public/templates/errors/404.html:3
 msgid "Page not found"
 msgstr ""
@@ -2855,6 +2922,14 @@ msgid ""
 "        We will try to call at least once. If your nominated person misses\n"
 "        the call you’ll need to complete this form again.\n"
 "      "
+msgstr ""
+
+#: cla_public/templates/scope/diagnosis.html:4
+msgid "Choose one of the options"
+msgstr ""
+
+#: cla_public/templates/scope/diagnosis.html:37
+msgid "(current)"
 msgstr ""
 
 #: cla_public/templates/scope/diagnosis.html:51
