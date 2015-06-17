@@ -13,7 +13,7 @@ var scenarioTypes = {
   },
   f2f: {
     label: 'Face to Face',
-    destination: '/result/refer/face-to-face',
+    destination: '/scope/refer/legal-adviser',
     identifier: 'input[name="postcode"]'
   },
   contact: {
