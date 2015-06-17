@@ -1,18 +1,18 @@
 digraph CLA_User_Journey {
 	compound 	= true
-	labelloc 	= "t"
-	ordering 	= "out"
-	splines 	= "ortho"
-	nodesep		= 1.6
-	ranksep 	= .5
+	labelloc 	= t
+	ordering 	= out
+	splines 	= ortho
+	nodesep		= .4
+	ranksep 	= .4
 
 	label 		= "Civil Legal Advice - User Journey Map"
 	fontsize	= 16
-	size 		= "11x8"
+	size 		= "8x11"
 
 	graph  [ style="rounded, filled" fillcolor=grey80 fontname=Helvetica penwidth=0 ]
 	node   [ shape=box style=filled fillcolor=olivedrab2 fontname=Helvetica fontsize=13 height=1.2 width=3 ]
-	edge   [ minlen=2 arrowsize=1.2 ]
+	edge   [ minlen=2 arrowsize=1.2 fontname=Helvetica fontsize=12 fontcolor=grey40 ]
 
 	subgraph cluster_digital_channel {
 		label="Digital Channel"
@@ -53,13 +53,13 @@ digraph CLA_User_Journey {
 			fillcolor=grey90
 
 			CLA_Result_Eligible [ label="You might qualify\nfor legal aid\n\n/result/eligible" ]
-			CLA_Result_Eligible_More_Info [ label="We need more information\n\n\n/result/eligible" fillcolor=yellow ]
+			CLA_Result_Eligible_More_Info [ label="Provisionally eligible\nbut we need more information\n\n/result/eligible" fillcolor=yellow ]
 			CLA_Contact [ label="Contact Civil Legal Advice\n\n\n/contact" fillcolor=yellow ]
 		}
 
         CLA_Reasons_For_Contacting [ label="Before you contact\nCivil Legal Advice\n\n/reasons-for-contacting" fillcolor=yellow ]
 
-		CLA_Contact_Confirmation [ label="Contact Confirmation" ]
+		CLA_Contact_Confirmation [ label="Contact Confirmation" fillcolor="darkolivegreen1" ]
 	}
 
 	subgraph cluster_outcomes {
@@ -67,7 +67,7 @@ digraph CLA_User_Journey {
 
 		Not_Complete_Digital [ shape=note fontcolor=white fontsize=16 label="Not Complete\n\nDigital" fillcolor=red2 ]
 		Not_Complete_Assisted_Digital [ shape=note fontsize=16 label="Not Complete\n\nAssisted Digital" fillcolor=yellow ]
-		Complete_Digital [ shape=note fontsize=16 label="Complete\n\nDigital" fillcolor=green ]
+		Complete_Digital [ shape=note fontsize=16 label="Complete\n\nDigital" fillcolor=olivedrab2 ]
 		Referral_Digital [ shape=note fontsize=16 label="Referral\n\nDigital" fillcolor=orange ]
 	}
 
@@ -91,7 +91,7 @@ digraph CLA_User_Journey {
 	CLA_Start -> CLA_Contact
 
 	// CLA in scope
-	CLA_Scope_Diagnosis -> CLA_Means_Test -> CLA_Review_Answers
+	CLA_Scope_Diagnosis -> CLA_Means_Test -> CLA_Review_Answers [ label="Eligible path" ]
 
 	// Outcomes
 	CLA_Review_Answers -> {
@@ -103,24 +103,19 @@ digraph CLA_User_Journey {
     CLA_Scope_Diagnosis -> CLA_Scope_Ineligible
 
 	// User journey problem (skip to contact)
-	{ CLA_Scope_Diagnosis, CLA_Means_Test } -> CLA_Reasons_For_Contacting
+	{ CLA_Scope_Diagnosis, CLA_Means_Test } -> CLA_Reasons_For_Contacting [ label="Skip to contact" ]
     CLA_Reasons_For_Contacting -> CLA_Contact
 
 	// Confirmations
-//	CLA_Result_Eligible -> CLA_Contact_Confirmation
-//	CLA_Result_Eligible_More_Info -> CLA_Contact_Confirmation
-	CLA_Result_Eligible_More_Info -> CLA_Contact_Confirmation [ ltail=cluster_contact arrowtail=tee dir=both ]
+	CLA_Result_Eligible -> CLA_Contact_Confirmation [ ltail=cluster_contact arrowtail=tee dir=both ]
+	CLA_Result_Eligible_More_Info -> CLA_Contact_Confirmation [ ltail=cluster_contact style=invis ] // occupy space
 
 	// Out of scope
     CLA_Scope_Diagnosis -> CLA_Result_Face_To_Face
 
 	// CLA Feedback
-    CLA_Scope_Diagnosis -> CLA_Feedback [
-        arrowtail=tee
-        dir=both
-        ltail=cluster_cla_digital_service
-    ]
-    CLA_Feedback -> CLA_Start
+    CLA_Scope_Diagnosis -> CLA_Feedback [ arrowtail=tee dir=both ltail=cluster_cla_digital_service ]
+//    CLA_Feedback -> CLA_Start
 
 	// GOV.UK CLA Feedback
 	{
@@ -135,15 +130,15 @@ digraph CLA_User_Journey {
 	GOVUK_CLA_Feedback -> Exit [ style=invis ]
 
 	// Outcome categories
-	Exit -> Not_Complete_Digital [ color=red2 style="dotted,bold" arrowsize=.8 ]
-	CLA_Result_Eligible -> Complete_Digital [ color=green4 style="dotted,bold" arrowsize=.8 ]
+	Exit -> Not_Complete_Digital [ color=red2 style="dashed,bold" fillcolor=none ]
+	CLA_Result_Eligible -> Complete_Digital [ color=olivedrab4 style="dashed,bold" fillcolor=none ]
 	{
 		CLA_Result_Eligible_More_Info
 		CLA_Contact
-	} -> Not_Complete_Assisted_Digital [ color=yellow4 style="dotted,bold" arrowsize=.8 ]
+	} -> Not_Complete_Assisted_Digital [ color=yellow4 style="dashed,bold" fillcolor=none ]
 	{
 		CLA_Result_Ineligible
         CLA_Scope_Ineligible
 		CLA_Result_Face_To_Face
-	} -> Referral_Digital [ color=orange3 style="dotted,bold" arrowsize=.8 ]
+	} -> Referral_Digital [ color=orange2 style="dashed,bold" fillcolor=none ]
 }
