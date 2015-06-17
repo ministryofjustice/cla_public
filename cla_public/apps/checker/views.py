@@ -218,6 +218,9 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
                 '.help_organisations',
                 category_name=session.checker.category_slug))
 
+        if session.checker.need_more_info:
+            return redirect(url_for('.provisional'))
+
         return redirect(url_for('.eligible'))
 
     def skip(self, step, for_review_page=False):
@@ -334,6 +337,12 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptio
 checker.add_url_rule(
     '/result/eligible',
     view_func=Eligible.as_view('eligible'),
+    methods=('GET', 'POST', 'OPTIONS')
+)
+
+checker.add_url_rule(
+    '/result/provisional',
+    view_func=Eligible.as_view('provisional'),
     methods=('GET', 'POST', 'OPTIONS')
 )
 
