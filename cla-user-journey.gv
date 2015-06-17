@@ -35,14 +35,16 @@ digraph CLA_User_Journey {
 	subgraph cluster_cla_digital_service {
 		label="CLA Digital Service"
 
-        CLA_Scope_Diagnosis [ shape=box3d label="What do you need help with?\n\n\n/scope/diagnosis" ]
-		CLA_Means_Test [ shape=box3d label="Means test" ]
+        CLA_Scope_Diagnosis [ label="What do you need help with?\n\n\n/scope/diagnosis/…" peripheries=2 ]
+		CLA_Means_Test [ label="Means test" peripheries=2 ]
 
 		CLA_Review_Answers [ label="Review your answers\n\n\n/review" ]
 
-        CLA_Scope_Ineligible [ label="You’re unlikely to get\nlegal aid\n\n/scope/ineligible/<category>" fillcolor=orange ]
-		CLA_Result_Ineligible [ label="You’re unlikely to get\nlegal aid\n\n/help-organisations/<category>" fillcolor=orange ]
-		CLA_Result_Face_To_Face [ label="You may be able to\nget free advice\nfrom a legal adviser\n\n/face-to-face" fillcolor=orange ]
+        CLA_Scope_Ineligible [ label="You’re unlikely to get legal aid\n(ineligible)\n\n/scope/refer/<category>" fillcolor=orange ]
+        CLA_Scope_Face_To_Face [ label="You may be able to get free advice\n(face-to-face)\n\n/scope/refer/legal-adviser" fillcolor=orange ]
+        CLA_Scope_Mediation [ label="You may be able to get legal aid\n(family mediation)\n\n/scope/refer/mediation" fillcolor=orange ]
+        CLA_Result_Ineligible [ label="You’re unlikely to get legal aid\n(ineligible)\n\n/result/refer/<category>" fillcolor=orange ]
+		CLA_Result_Find_Legal_Adviser [ label="You might qualify for legal aid\n(face-to-face)\n\n/result/refer/legal-adviser" fillcolor=orange ]
 
 		subgraph cluster_contact {
 			label = "Contact CLA"
@@ -52,14 +54,14 @@ digraph CLA_User_Journey {
 			fontcolor=grey40
 			fillcolor=grey90
 
-			CLA_Result_Eligible [ label="You might qualify\nfor legal aid\n\n/result/eligible" ]
-			CLA_Result_Eligible_More_Info [ label="Provisionally eligible\nbut we need more information\n\n/result/eligible" fillcolor=yellow ]
-			CLA_Contact [ label="Contact Civil Legal Advice\n\n\n/contact" fillcolor=yellow ]
+			CLA_Result_Eligible [ label="You might qualify for legal aid\n(eligible)\n\n/result/eligible" ]
+			CLA_Result_Eligible_More_Info [ label="We need more information\n(provisionally eligible)\n\n/result/provisional" fillcolor=yellow ]
+			CLA_Contact [ label="Contact Civil Legal Advice\n(skipped digital process)\n\n/contact" fillcolor=yellow ]
 		}
 
         CLA_Reasons_For_Contacting [ label="Before you contact\nCivil Legal Advice\n\n/reasons-for-contacting" fillcolor=yellow ]
 
-		CLA_Contact_Confirmation [ label="Contact Confirmation" fillcolor="darkolivegreen1" ]
+		CLA_Contact_Confirmation [ label="Contact confirmation\n\n\n/result/confirmation" fillcolor="darkolivegreen1" ]
 	}
 
 	subgraph cluster_outcomes {
@@ -87,58 +89,63 @@ digraph CLA_User_Journey {
 	Browser -> CLA_Start
 
 	// GOV.UK journey
-	CLA_Start -> CLA_Scope_Diagnosis
-	CLA_Start -> CLA_Contact
+	CLA_Start -> { CLA_Scope_Diagnosis CLA_Contact }
 
 	// CLA in scope
-	CLA_Scope_Diagnosis -> CLA_Means_Test -> CLA_Review_Answers [ label="Eligible path" ]
+	CLA_Scope_Diagnosis -> CLA_Means_Test -> CLA_Review_Answers
 
 	// Outcomes
 	CLA_Review_Answers -> {
 		CLA_Result_Eligible
 		CLA_Result_Eligible_More_Info
 		CLA_Result_Ineligible
+        CLA_Result_Find_Legal_Adviser
 	}
 
     CLA_Scope_Diagnosis -> CLA_Scope_Ineligible
 
 	// User journey problem (skip to contact)
-	{ CLA_Scope_Diagnosis, CLA_Means_Test } -> CLA_Reasons_For_Contacting [ label="Skip to contact" ]
+	{ CLA_Scope_Diagnosis, CLA_Means_Test } -> CLA_Reasons_For_Contacting
     CLA_Reasons_For_Contacting -> CLA_Contact
 
 	// Confirmations
 	CLA_Result_Eligible -> CLA_Contact_Confirmation [ ltail=cluster_contact arrowtail=tee dir=both ]
-	CLA_Result_Eligible_More_Info -> CLA_Contact_Confirmation [ ltail=cluster_contact style=invis ] // occupy space
 
-	// Out of scope
-    CLA_Scope_Diagnosis -> CLA_Result_Face_To_Face
+	// Out of scope for CLA
+    CLA_Scope_Diagnosis -> { CLA_Scope_Mediation CLA_Scope_Face_To_Face }
 
 	// CLA Feedback
     CLA_Scope_Diagnosis -> CLA_Feedback [ arrowtail=tee dir=both ltail=cluster_cla_digital_service ]
-//    CLA_Feedback -> CLA_Start
 
 	// GOV.UK CLA Feedback
 	{
-		CLA_Result_Face_To_Face
+        CLA_Scope_Ineligible
+		CLA_Scope_Face_To_Face
+        CLA_Scope_Mediation
 		CLA_Contact_Confirmation
         CLA_Result_Ineligible
+        CLA_Result_Find_Legal_Adviser
 	} -> GOVUK_CLA_Feedback [ color=bisque4 ]
 
-	// Not Complete - user 'bails'
-	//CLA_Start -> Exit [ style=invis ]
+	// Not Complete - user 'bails out'
 	CLA_Scope_Diagnosis -> Exit [ style=invis ]
 	GOVUK_CLA_Feedback -> Exit [ style=invis ]
 
 	// Outcome categories
 	Exit -> Not_Complete_Digital [ color=red2 style="dashed,bold" fillcolor=none ]
-	CLA_Result_Eligible -> Complete_Digital [ color=olivedrab4 style="dashed,bold" fillcolor=none ]
+
+	CLA_Result_Eligible -> Complete_Digital [ color=green4 style="dashed,bold" fillcolor=none ]
+
 	{
 		CLA_Result_Eligible_More_Info
 		CLA_Contact
 	} -> Not_Complete_Assisted_Digital [ color=yellow4 style="dashed,bold" fillcolor=none ]
+
 	{
-		CLA_Result_Ineligible
         CLA_Scope_Ineligible
-		CLA_Result_Face_To_Face
+        CLA_Scope_Face_To_Face
+        CLA_Scope_Mediation
+		CLA_Result_Ineligible
+        CLA_Result_Find_Legal_Adviser
 	} -> Referral_Digital [ color=orange2 style="dashed,bold" fillcolor=none ]
 }
