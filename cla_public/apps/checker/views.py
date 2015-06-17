@@ -348,7 +348,7 @@ checker.add_url_rule(
 
 
 class HelpOrganisations(views.MethodView):
-    _template = 'help-organisations.html'
+    _template = 'checker/result/ineligible.html'
 
     def get_context(self, category_name):
         category_name = category_name.replace('-', ' ').capitalize()
