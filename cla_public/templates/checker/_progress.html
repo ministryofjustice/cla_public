@@ -2,7 +2,7 @@
 {% set total_step_count = steps|count + 1 %}
 {% set completed_step_count = steps|selectattr('is_completed')|list|count + 1 %}
 {% set completion_percentage = completed_step_count / total_step_count * 100 %}
-{% set current_percentage = current_step.count / total_step_count * 100 %}
+{% set current_percentage = current_step.count / total_step_count * 100 if current_step else 0 %}
 {% set is_contact_page = request.path.startswith('/result/') %}
 {% set completion_perc_offset = 0 if is_contact_page else -5 %}
 
