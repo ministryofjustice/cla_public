@@ -288,7 +288,7 @@ checker.add_url_rule(
     '/result/face-to-face', view_func=FaceToFace.as_view('face-to-face'))
 
 
-class EligibleNoCallBack(views.MethodView, object):
+class EligibleFaceToFace(views.MethodView, object):
 
     def get(self):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
@@ -304,8 +304,8 @@ class EligibleNoCallBack(views.MethodView, object):
             data=data, form=form, category_name=category_name)
 
 checker.add_url_rule(
-    '/find-legal-adviser',
-    view_func=EligibleNoCallBack.as_view('find-legal-adviser')
+    '/result/refer/legal-adviser',
+    view_func=EligibleFaceToFace.as_view('find-legal-adviser')
 )
 
 
