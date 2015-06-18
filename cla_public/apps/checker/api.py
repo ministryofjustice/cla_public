@@ -106,7 +106,7 @@ def log_api_errors_to_sentry(fn):
     def wrapped(*args, **kwargs):
         sentry = getattr(current_app, 'sentry', None)
         try:
-            fn(*args, **kwargs)
+            return fn(*args, **kwargs)
         except (ConnectionError, Timeout, SlumberBaseException) as e:
             if sentry:
                 sentry.captureException()
@@ -116,6 +116,16 @@ def log_api_errors_to_sentry(fn):
             raise ApiError(e)
 
     return wrapped
+
+
+def ignore_api_error(fun):
+    def inner(*args, **kwargs):
+        try:
+            return fun(*args, **kwargs)
+        except ApiError:
+            return None
+
+    return inner
 
 
 @log_api_errors_to_sentry
@@ -188,3 +198,19 @@ def get_ordered_organisations_by_category(**kwargs):
                 categories[cat['name']].append(organisation)
                 break
     return categories
+
+
+@ignore_api_error
+@log_api_errors_to_sentry
+def post_reasons_for_contacting(form=None, payload={}):
+    backend = get_api_connection()
+    payload = form.api_payload() if form else payload
+    return backend.reasons_for_contacting.post(payload)
+
+
+@ignore_api_error
+@log_api_errors_to_sentry
+def update_reasons_for_contacting(reference, form=None, payload={}):
+    backend = get_api_connection()
+    payload = form.api_payload() if form else payload
+    return backend.reasons_for_contacting(reference).patch(payload)

@@ -9,7 +9,7 @@ from flask.ext.mail import Message
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.api import post_to_case_api, \
-    post_to_eligibility_check_api, ApiError
+    post_to_eligibility_check_api, update_reasons_for_contacting, ApiError
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, \
     EnsureSessionExists
@@ -51,6 +51,9 @@ class Contact(
         try:
             post_to_eligibility_check_api(session.checker.notes_object())
             post_to_case_api(self.form)
+            if 'reasons_for_contacting' in session:
+                update_reasons_for_contacting(session['reasons_for_contacting'], payload={'case': session.checker['case_ref']})
+                del session['reasons_for_contacting']
         except ApiError:
             self.form.errors['timeout'] = _(
                 u'There was an error submitting your data. '
