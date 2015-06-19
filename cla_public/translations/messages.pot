@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-06-19 16:54+0100\n"
+"POT-Creation-Date: 2015-06-19 16:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2430,11 +2430,11 @@ msgstr ""
 
 #: cla_public/templates/checker/review.html:16
 #: cla_public/templates/checker/review.html:40
-msgid "Change answers"
+msgid "Go back and change answers"
 msgstr ""
 
 #: cla_public/templates/checker/review.html:42
-msgid "Change answer"
+msgid "Go back and change answer"
 msgstr ""
 
 #: cla_public/templates/checker/review.html:57
