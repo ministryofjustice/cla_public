@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-06-17 11:26+0100\n"
+"POT-Creation-Date: 2015-06-19 16:54+0100\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -939,15 +939,15 @@ msgid "-- Choose a language --"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:43
-msgid "BSL - Webcam"
+msgid "British Sign Language – Webcam"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:44
-msgid "Minicom"
+msgid "Minicom – for textphone users"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:45
-msgid "Text Relay"
+msgid "Text Relay – for people with hearing or speech impairments"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:46
@@ -3347,4 +3347,3 @@ msgstr ""
 
 #~ msgid "be put through to a specialist adviser, who will make the final decision on your case"
 #~ msgstr ""
-
