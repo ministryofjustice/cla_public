@@ -55,8 +55,9 @@ To run the NIghtwatch automated tests in PhantomJS use:
     make test
 
 This command accepts two parameters:
-    - `browser` - `chrome`, `firefox`, `default` (Phantom JS)
-    - `spec` - name of the spec file to run (within `tests/nightwatch/specs/` directory)
+
+ - `browser` - `chrome`, `firefox`, `default` (Phantom JS)
+ - `spec` - name of the spec file to run (within `tests/nightwatch/specs/` directory)
 
 Example:
 
