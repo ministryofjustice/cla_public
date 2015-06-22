@@ -13,7 +13,7 @@
         <header>
           <h2>{{ _('Your problem area') }}</h2>
           <a class="button-secondary button-small" href="{{ url_for('scope.diagnosis') }}">
-            {{ _('Change answers') }}
+            {{ _('Go back and change answers') }}
           </a>
         </header>
         <ul class="answers">
@@ -37,9 +37,9 @@
             <h2>{{ step_title }}</h2>
             <a class="button-secondary button-small" href="{{ url_for('checker.wizard', step=step.name) }}">
               {% if step.name in ['property', 'income'] or answers|length > 1 %}
-                {{ _('Change answers') }}
+                {{ _('Go back and change answers') }}
               {% else %}
-                {{ _('Change answer') }}
+                {{ _('Go back and change answer') }}
               {% endif %}
             </a>
           </header>

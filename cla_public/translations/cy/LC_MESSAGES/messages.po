@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-06-17 11:26+0100\n"
+"POT-Creation-Date: 2015-06-19 16:56+0100\n"
 "PO-Revision-Date: 2015-05-26 12:41+0000\n"
 "Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/projects/p/cla-public/language/cy/)\n"
@@ -942,16 +942,16 @@ msgid "-- Choose a language --"
 msgstr "Dewiswch iaith"
 
 #: cla_public/apps/contact/forms.py:43
-msgid "BSL - Webcam"
+msgid "British Sign Language – Webcam"
 msgstr "Iaith Arwyddion Prydain – Gwe-gamera"
 
 #: cla_public/apps/contact/forms.py:44
-msgid "Minicom"
-msgstr "Minicom"
+msgid "Minicom – for textphone users"
+msgstr ""
 
 #: cla_public/apps/contact/forms.py:45
-msgid "Text Relay"
-msgstr "Gwasanaeth cyfnewid testun"
+msgid "Text Relay – for people with hearing or speech impairments"
+msgstr ""
 
 #: cla_public/apps/contact/forms.py:46
 msgid "Welsh"
@@ -2445,12 +2445,12 @@ msgstr "Crynodeb o'ch atebion"
 
 #: cla_public/templates/checker/review.html:16
 #: cla_public/templates/checker/review.html:40
-msgid "Change answers"
-msgstr "Newid atebion"
+msgid "Go back and change answers"
+msgstr ""
 
 #: cla_public/templates/checker/review.html:42
-msgid "Change answer"
-msgstr "Newid ateb"
+msgid "Go back and change answer"
+msgstr ""
 
 #: cla_public/templates/checker/review.html:57
 msgid "Confirm"
@@ -3019,4 +3019,16 @@ msgstr ""
 #: cla_public/templates/scope/mediation.html:15
 msgid "Find your local mediator"
 msgstr ""
+
+#~ msgid "Minicom"
+#~ msgstr "Minicom"
+
+#~ msgid "Text Relay"
+#~ msgstr "Gwasanaeth cyfnewid testun"
+
+#~ msgid "Change answers"
+#~ msgstr "Newid atebion"
+
+#~ msgid "Change answer"
+#~ msgstr "Newid ateb"
 

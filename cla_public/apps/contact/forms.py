@@ -40,9 +40,9 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     """
     Subform for adaptations
     """
-    bsl_webcam = BooleanField(_(u'BSL - Webcam'))
-    minicom = BooleanField(_(u'Minicom'))
-    text_relay = BooleanField(_(u'Text Relay'))
+    bsl_webcam = BooleanField(_(u'British Sign Language – Webcam'))
+    minicom = BooleanField(_(u'Minicom – for textphone users'))
+    text_relay = BooleanField(_(u'Text Relay – for people with hearing or speech impairments'))
     welsh = BooleanField(_(u'Welsh'))
     is_other_language = BooleanField(_(u'Other language'))
     other_language = SelectField(
