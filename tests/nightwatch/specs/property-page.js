@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../../modules/common-functions');
-var PROPERTY_QUESTIONS = require('../../modules/constants').PROPERTY_QUESTIONS;
+var common = require('../modules/common-functions');
+var PROPERTY_QUESTIONS = require('../modules/constants').PROPERTY_QUESTIONS;
 
 module.exports = {
   'Start page': function(client) {

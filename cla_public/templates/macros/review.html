@@ -3,7 +3,7 @@
     {% for property in field %}
       <li>
         {% if field|length > 1 %}
-          <h3>Property {{ loop.index }}</h3>
+          <h3>{{ _('Property') }} {{ loop.index }}</h3>
         {% endif %}
         <ul class="answers">
           {% for field_name, field in property.form._fields.items() if field.data.per_interval_value != None %}

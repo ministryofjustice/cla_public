@@ -13,9 +13,9 @@
   <h1>{{ _('You’re unlikely to get legal aid') }}</h1>
 
   <p>
-    {% trans fromcla = 'from CLA ' if category == 'violence' else '' %}From
+    {% trans fromcla = _('from CLA') if category == 'violence' else '' %}From
     what you have told us today it looks like you won't be able to get
-    legal aid {{ fromcla }}as you don’t qualify financially{% endtrans %}.
+    legal aid {{ fromcla }} as you don’t qualify financially{% endtrans %}.
   </p>
 
   <p>{{ _('This is because') }}{% if multi %}:</p><ul>{% endif %}

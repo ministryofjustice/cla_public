@@ -218,6 +218,9 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
                 '.help_organisations',
                 category_name=session.checker.category_slug))
 
+        if session.checker.need_more_info:
+            return redirect(url_for('.provisional'))
+
         return redirect(url_for('.eligible'))
 
     def skip(self, step, for_review_page=False):
@@ -282,10 +285,10 @@ class FaceToFace(views.MethodView, object):
 
 
 checker.add_url_rule(
-    '/result/face-to-face', view_func=FaceToFace.as_view('face-to-face'))
+    '/scope/refer/legal-adviser', view_func=FaceToFace.as_view('face-to-face'))
 
 
-class EligibleNoCallBack(views.MethodView, object):
+class EligibleFaceToFace(views.MethodView, object):
 
     def get(self):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
@@ -301,8 +304,8 @@ class EligibleNoCallBack(views.MethodView, object):
             data=data, form=form, category_name=category_name)
 
 checker.add_url_rule(
-    '/find-legal-adviser',
-    view_func=EligibleNoCallBack.as_view('find-legal-adviser')
+    '/result/refer/legal-adviser',
+    view_func=EligibleFaceToFace.as_view('find-legal-adviser')
 )
 
 
@@ -337,9 +340,15 @@ checker.add_url_rule(
     methods=('GET', 'POST', 'OPTIONS')
 )
 
+checker.add_url_rule(
+    '/result/provisional',
+    view_func=Eligible.as_view('provisional'),
+    methods=('GET', 'POST', 'OPTIONS')
+)
+
 
 class HelpOrganisations(views.MethodView):
-    _template = 'help-organisations.html'
+    _template = 'checker/result/ineligible.html'
 
     def get_context(self, category_name):
         category_name = category_name.replace('-', ' ').capitalize()
@@ -382,7 +391,7 @@ class HelpOrganisations(views.MethodView):
 
 
 checker.add_url_rule(
-    '/help-organisations/<category_name>',
+    '/result/refer/<category_name>',
     view_func=HelpOrganisations.as_view('help_organisations'),
     methods=['GET']
 )

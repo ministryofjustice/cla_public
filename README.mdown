@@ -54,12 +54,14 @@ To run the NIghtwatch automated tests in PhantomJS use:
 
     make test
 
-To run just the legacy Nightwatch tests (at time of writing, this consists of the threshold tests) use:
+This command accepts two parameters:
 
-    make test-legacy
+ - `browser` - `chrome`, `firefox`, `default` (Phantom JS)
+ - `spec` - name of the spec file to run (within `tests/nightwatch/specs/` directory)
 
-And to run all the Nightwatch tests use:
+Example:
 
-    make test-all
+    make test browser=chrome spec=review-page
+
 
 See the `Makefile` for other self-explanatory commands.

@@ -1,8 +1,8 @@
 'use strict';
 
 var util = require('util');
-var common = require('../../modules/common-functions');
-var OUTGOINGS_QUESTIONS = require('../../modules/constants').OUTGOINGS_QUESTIONS;
+var common = require('../modules/common-functions');
+var OUTGOINGS_QUESTIONS = require('../modules/constants').OUTGOINGS_QUESTIONS;
 var OUTGOINGS_QUESTION_ERRORS = {
   'rent': 'Enter 0 if you don’t pay rent',
   'maintenance': 'Enter 0 if this doesn’t apply to you',

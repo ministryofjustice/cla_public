@@ -9,11 +9,11 @@ from flask import views, render_template, current_app, url_for, \
 
 
 OUTCOME_URLS = {
-    DIAGNOSIS_SCOPE.INSCOPE: '/about',
-    DIAGNOSIS_SCOPE.INELIGIBLE: '/scope/ineligible',
-    DIAGNOSIS_SCOPE.OUTOFSCOPE: '/result/face-to-face',
-    DIAGNOSIS_SCOPE.CONTACT: '/contact',
-    DIAGNOSIS_SCOPE.MEDIATION: '/scope/mediation',
+    DIAGNOSIS_SCOPE.INSCOPE:    '/about',
+    DIAGNOSIS_SCOPE.INELIGIBLE: '/scope/refer',
+    DIAGNOSIS_SCOPE.OUTOFSCOPE: '/scope/refer/legal-adviser',
+    DIAGNOSIS_SCOPE.MEDIATION:  '/scope/refer/mediation',
+    DIAGNOSIS_SCOPE.CONTACT:    '/contact',
 }
 
 

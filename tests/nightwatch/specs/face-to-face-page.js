@@ -12,7 +12,7 @@ module.exports = {
   'Face-to-face page': function(client) {
     client
       .waitForElementVisible('.legal-adviser-search', 5000)
-      .assert.urlContains('/face-to-face')
+      .assert.urlContains('/scope/refer/legal-adviser')
       .assert.containsText('h1', 'You may be able to get advice from a legal adviser')
       .checkFlashMessage()
     ;
@@ -22,7 +22,7 @@ module.exports = {
     client
       .setValue('input[name="postcode"]', 'w22dd')
       .submitForm('form')
-      .assert.urlContains('/face-to-face')
+      .assert.urlContains('/scope/refer/legal-adviser')
       .waitForElementVisible('.search-results-container', 5000)
       .assert.containsText('.results-location', 'W2 2DD')
     ;

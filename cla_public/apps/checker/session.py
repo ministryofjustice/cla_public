@@ -253,7 +253,9 @@ class CheckerSession(SecureCookieSession, SessionMixin):
                 ],
                 'contact_type': self.checker.contact_type,
                 'category': self.checker.category,
-                'eligibility': self.checker.eligibility
+                'eligibility': self.checker.eligibility,
+                'adaptations': [k for k, v in \
+                    self.checker['ContactForm']['adaptations'].items() if v]
             }
             self.clear_checker()
             self.stored = stored

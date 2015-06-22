@@ -19,9 +19,27 @@ def submit(**kwargs):
         'email': 'john.smith@example.com',
         'contact_type': 'callback',
         'callback-contact_number': '0123456789',
-        'time_today': '1130',
-        'specific_day': 'today',
         'callback-safe_to_contact': 'SAFE'}
+
+    if datetime.datetime.now().time() > datetime.time(hour=17, minute=30):
+        # use tomorrow because no more callbacks available today
+        another_day = datetime.date.today() + datetime.timedelta(days=1)
+        if another_day.weekday() in (5, 6):
+            # use monday or tuesday next week to avoid weekend
+            another_day += datetime.timedelta(days=2)
+        data.update({
+            'callback-time-specific_day': 'specific_day',
+            'callback-time-day': '%04d%02d%02d' % (another_day.year,
+                                                   another_day.month,
+                                                   another_day.day),
+            'callback-time-time_in_day': '0900',
+        })
+    else:
+        data.update({
+            'callback-time-specific_day': 'today',
+            'callback-time-time_today': '0900',
+        })
+
     data.update(kwargs)
     return ContactForm(MultiDict(data), csrf_enabled=False)
 

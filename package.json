@@ -9,7 +9,7 @@
     "node": ">=0.12.x"
   },
   "scripts": {
-    "test": "./nightwatch -c tests/nightwatch/local.json -s legacy"
+    "test": "./nightwatch -c tests/nightwatch/local.json"
   },
   "engineStrict": true,
   "devDependencies": {

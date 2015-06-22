@@ -32,8 +32,8 @@ SPREADSHEET_PATH = os.path.join(
 
 
 SCOPE_PATHS = {
-    'debt': ['n43::n2', 'n2'],
-    'benefits': ['n43::n13', 'n20']
+    'debt': ['n43n2', 'n2'],
+    'benefits': ['n43n13', 'n20']
 }
 
 
@@ -93,10 +93,10 @@ def wizard(client, case):
 def is_eligible(acc, step):
     result = 'unknown'
 
-    if '/result/eligible' in step.url:
+    if '/result/eligible' in step.url or '/result/provisional' in step.url:
         result = 'eligible'
 
-    if '/help-organisations/' in step.url:
+    if '/result/refer/' in step.url:
         result = 'ineligible'
 
     return result
