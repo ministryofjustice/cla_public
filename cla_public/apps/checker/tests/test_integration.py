@@ -93,10 +93,10 @@ def wizard(client, case):
 def is_eligible(acc, step):
     result = 'unknown'
 
-    if '/result/eligible' in step.url:
+    if '/result/eligible' in step.url or '/result/provisional' in step.url:
         result = 'eligible'
 
-    if '/help-organisations/' in step.url:
+    if '/result/refer/' in step.url:
         result = 'ineligible'
 
     return result

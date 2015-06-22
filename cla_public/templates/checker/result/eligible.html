@@ -35,7 +35,7 @@
 {% block javascripts %}
   {{ super() }}
   <script>
-    {% set event_label = 'unknown' if session.checker.need_more_info else 'eligible' %}
-    ga('send', 'event', 'result', 'callback', '{{ event_label }}');
+    {% set event_label = 'need-more-info' if session.checker.need_more_info else 'eligible' %}
+    ga('send', 'event', 'eligibility-result', '{{ event_label }}');
   </script>
 {% endblock %}

@@ -22,16 +22,12 @@ endif
 
 # running tests on local env
 test:
-	./nightwatch -c tests/nightwatch/local.json -s legacy ${environment} ${specific_test}
+	./nightwatch -c tests/nightwatch/local.json ${environment} ${specific_test}
 test-chrome:
-	./nightwatch -c tests/nightwatch/local.json -s legacy --env chrome ${specific_test}
+	./nightwatch -c tests/nightwatch/local.json --env chrome ${specific_test}
 test-firefox:
-	./nightwatch -c tests/nightwatch/local.json -s legacy --env firefox ${specific_test}
-test-legacy:
-	./nightwatch -c tests/nightwatch/local.json -s current ${specific_test}
-test-all:
-	./nightwatch -c tests/nightwatch/local.json
+	./nightwatch -c tests/nightwatch/local.json --env firefox ${specific_test}
 
 # running tests on Browserstack - set credentials in env vars BS_USER and BS_PASS
 test-bs:
-	./nightwatch -c tests/nightwatch/browserstack-integration.conf.js -s legacy ${browserstack_browser} ${specific_test}
+	./nightwatch -c tests/nightwatch/browserstack-integration.conf.js ${browserstack_browser} ${specific_test}
