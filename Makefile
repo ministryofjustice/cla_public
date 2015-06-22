@@ -1,4 +1,4 @@
-SPECS_PATH = ./tests/nightwatch/specs/current
+SPECS_PATH = ./tests/nightwatch/specs
 
 ifdef spec
 	specific_test = -t ${SPECS_PATH}/${spec}.js
