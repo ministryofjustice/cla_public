@@ -9,11 +9,11 @@ from flask import views, render_template, current_app, url_for, \
 
 
 OUTCOME_URLS = {
-    DIAGNOSIS_SCOPE.INSCOPE:    '/about',
-    DIAGNOSIS_SCOPE.INELIGIBLE: '/scope/refer',
-    DIAGNOSIS_SCOPE.OUTOFSCOPE: '/scope/refer/legal-adviser',
-    DIAGNOSIS_SCOPE.MEDIATION:  '/scope/refer/mediation',
-    DIAGNOSIS_SCOPE.CONTACT:    '/contact',
+    DIAGNOSIS_SCOPE.INSCOPE:    ('wizard', {'step': 'about'}),
+    DIAGNOSIS_SCOPE.INELIGIBLE: ('scope.ineligible', None),
+    DIAGNOSIS_SCOPE.OUTOFSCOPE: ('scope.ineligible', {'category_name': 'legal-adviser'}),
+    DIAGNOSIS_SCOPE.MEDIATION:  ('scope.ineligible', {'category_name': 'mediation'}),
+    DIAGNOSIS_SCOPE.CONTACT:    ('contact.get_in_touch', {}),
 }
 
 
@@ -49,13 +49,14 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
 
             outcome_url = OUTCOME_URLS[state]
             if state == DIAGNOSIS_SCOPE.INELIGIBLE:
-                outcome_url = '%s/%s' % (
-                    outcome_url,
-                    session.checker.category_slug)
-            elif state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
-                outcome_url = '%s?category=%s' % (
-                    outcome_url,
-                    session.checker.category)
+                outcome_url = url_for(outcome_url[0],
+                                      category_name=session.checker.category_slug)
+            else:
+                outcome_url = url_for(outcome_url[0], **outcome_url[1])
+                if state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
+                    outcome_url = '%s?category=%s' % (
+                        outcome_url,
+                        session.checker.category)
             return redirect(outcome_url)
 
         def add_link(choice):
