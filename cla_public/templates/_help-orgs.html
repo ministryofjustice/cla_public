@@ -2,7 +2,13 @@
 
 {% if organisations %}
   <div class="help-organisations">
-    <h2>{{ _('Help organisations for problems about %(category_name)s', category_name=(category_name if category != 'violence' else 'domestic violence')|lower) }}</h2>
+    <h2>
+      {% if category != 'violence' %}
+        {% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}
+      {% else %}
+        {% trans %}Help organisations for problems about domestic violence{% endtrans %}
+      {% endif %}
+    </h2>
     <p>
       {% trans %}You may still get help and advice from the organisations listed
       below. You don’t have to qualify for legal aid.{% endtrans %}

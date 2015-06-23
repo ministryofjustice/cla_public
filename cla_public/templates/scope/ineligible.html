@@ -1,30 +1,36 @@
 {% extends "base.html" %}
 
-{% set title = _('Legal aid is not available for this type of problem') %}
+{% set title = _('These organisations may be able to help') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
-{% block inner_content %}
-  <h1>{{ _('Legal aid is not usually available for this type of problem') }}</h1>
+{% block sidebar %}
+  <aside class="sidebar">
+    <h2>{% trans %}Exceptional cases{% endtrans %}</h2>
 
-  <p>
     {% if category == 'education' %}
-      {{ _('Legal aid may still be available in exceptional circumstances or if your case is going to a judicial review.') }}
+      <p>{% trans %}In exceptional cases or if your case is going to a judicial review, legal aid may still be available.{% endtrans %}</p>
     {% else %}
-      {{ _('Legal aid may still be available in exceptional cases.') }}
+      <p>{% trans %}In exceptional cases, legal aid may still be available.{% endtrans %}</p>
     {% endif %}
-    {{ _('You can ask a legal adviser if an application might succeed in your case and how to apply.') }}
-  </p>
-  <p>
-    {{ _('You can also <a href="https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding" rel="external" target="_blank">apply directly to the Legal Aid Agency</a>.') }}
-  </p>
-  <p>
-    {{ _("If you can't get legal aid, you can still seek advice from a legal adviser. You will have to pay for this advice.") }}
-  </p>
 
-  <a class="button button-larger" href="https://www.gov.uk/find-a-legal-adviser" target="_blank">
-    {{ _('Find a legal adviser') }}
-  </a>
+    <p>{% trans %}You can ask a legal adviser if an application might succeed in your case and how to apply.{% endtrans %}</p>
+
+    <p>{% trans %}You can also <a href="https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding" rel="external" target="_blank">apply directly to the Legal Aid Agency</a>.{% endtrans %}</p>
+
+    <a class="button button-larger" href="https://www.gov.uk/find-a-legal-adviser" target="_blank">
+      {{ _('Find a legal adviser') }}
+    </a>
+  </aside>
+{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ _('These organisations may be able to help') }}</h1>
+
+  <p>
+    {% trans %}Legal aid doesn’t usually cover your type of problem.
+      You may still get help and advice from the organisations listed below.
+      You don’t have to qualify for legal aid.{% endtrans %}
+  </p>
 
   {% include '_help-orgs.html' %}
-
 {% endblock %}
