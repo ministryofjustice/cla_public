@@ -9,7 +9,7 @@ from flask import views, render_template, current_app, url_for, \
 
 
 OUTCOME_URLS = {
-    DIAGNOSIS_SCOPE.INSCOPE:    ('wizard', {'step': 'about'}),
+    DIAGNOSIS_SCOPE.INSCOPE:    ('checker.interstitial', {}),
     DIAGNOSIS_SCOPE.INELIGIBLE: ('scope.ineligible', None),
     DIAGNOSIS_SCOPE.OUTOFSCOPE: ('scope.ineligible', {'category_name': 'legal-adviser'}),
     DIAGNOSIS_SCOPE.MEDIATION:  ('scope.ineligible', {'category_name': 'mediation'}),

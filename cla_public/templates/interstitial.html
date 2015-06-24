@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% set title = _('Legal aid is available for this type of problem') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+
+  <h1>{{ title }}</h1>
+
+  <p>{% trans %}However, you must also qualify financially.{% endtrans %}</p>
+  <p>{% trans %}If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA), a national helpline for legal aid problems in England and Wales.{% endtrans %}</p>
+  <p>{% trans %}To complete the financial assessment, you and your partner (if you have one) will need:{% endtrans %}</p>
+  <ul>
+    <li>{% trans %}recent payslips (if you’re working) and bank statements{% endtrans %}</li>
+    <li>{% trans %}a summary of your income tax and National Insurance contributions{% endtrans %}</li>
+    <li>{% trans %}details of any savings and investments you have{% endtrans %}</li>
+    <li>{% trans %}details of any benefits you receive{% endtrans %}</li>
+    <li>{% trans %}mortgage statements and a current valuation for any property you own{% endtrans %}</li>
+  </ul>
+  <p>{% trans url=url_for('contact.get_in_touch') %}If you’re under 18, you should <a href="{{ url }}">contact CLA</a> without completing the financial assessment.{% endtrans %}</p>
+
+  <p>
+    <a class="button button-get-started" href="{{ url_for('.wizard', step='about') }}">
+      {% trans %}Check if you qualify financially{% endtrans %}
+    </a>
+  </p>
+
+  <p>{% trans %}To qualify for legal aid:{% endtrans %}</p>
+  <ul>
+    <li>{% trans %}your income (or combined income if you have a partner) shouldn’t be more than £2,657 a month before tax{% endtrans %}</li>
+    <li>{% trans %}your savings (or combined savings if you have a partner) shouldn’t be more than £8,000{% endtrans %}</li>
+  </ul>
+  <p>{% trans %}These limits can vary in certain circumstances – for example, if you need advice about domestic abuse.{% endtrans %}</p>
+
+  {% if organisations %}
+
+    <h2>{% trans %}Other sources of help{% endtrans %}</h2>
+    <p>
+      {% trans count=organisations|count, category_name=category_name|lower %}You can also get advice from this alternative help organisation for issues related to {{ category_name }}.
+      {% pluralize %}You can also get advice from {{ count }} alternative help organisations for issues related to {{ category_name }}.
+      {% endtrans %}
+      {% trans %}You don't have to qualify for legal aid.{% endtrans %}
+    </p>
+    <p>
+      <a name="help-orgs"
+          class="field-more-info-toggle {% if show_help_orgs %}s-expanded{% endif %}"
+          data-toggle-box=".help-organisations-wrapper"
+          href="?{% if not show_help_orgs %}show{% endif %}#help-orgs">
+        <span class="{% if not show_help_orgs %}s-hidden{% endif %}">
+          {% trans %}Hide organisations list{% endtrans %}
+        </span>
+        <span class="{% if show_help_orgs %}s-hidden{% endif %}">
+          {% trans %}Show organisations list{% endtrans %}
+        </span>
+      </a>
+    </p>
+    <div class="help-organisations-wrapper {% if not show_help_orgs %}s-hidden{% endif %}">
+      {% include '_help-orgs.html' %}
+    </div>
+
+  {% endif %}
+
+{% endblock %}
