@@ -7,13 +7,13 @@ from urlparse import urlparse, urljoin
 
 from flask import abort, current_app, jsonify, redirect, render_template, \
     session, url_for, request, views
-from flask.ext.babel import lazy_gettext as _, gettext
+from flask.ext.babel import lazy_gettext as _
 
-from cla_common.smoketest import smoketest
 from cla_public.apps.base import base
 from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 import cla_public.apps.base.filters
 import cla_public.apps.base.extensions
+from cla_public.apps.checker.api import post_reasons_for_contacting
 from cla_public.libs import zendesk
 from cla_public.libs.views import HasFormMixin, ValidFormOnOptions
 
@@ -101,17 +101,34 @@ class ReasonsForContacting(ZendeskView):
     """
     Interstitial form to ascertain why users are dropping out of
     the checker service
+
+    NB: Shares code with Feedback view, but no longer in fact
+        posts to Zendesk. If feedback is ever redirected to the
+        database as well, move the code here up into ZendeskView
     """
+    MODEL_REF_SESSION_KEY = 'reason_for_contact'
+    GA_SESSION_KEY = 'reason_for_contact_ga'
+
     form_class = ReasonsForContactingForm
     template = 'reasons-for-contacting.html'
     redirect_to = 'contact.get_in_touch'
 
     def post(self):
+        error = None
         if self.form.validate_on_submit():
             if len(self.form.reasons.data) == 0:
                 # allows skipping form if nothing is selected
                 return self.success_redirect()
-        return super(ReasonsForContacting, self).post()
+
+            session[self.GA_SESSION_KEY] = ', '.join(self.form.reasons.data)
+            response = post_reasons_for_contacting(form=self.form)
+            # ignore if reasons not saved as they're not vital
+            if response and 'reference' in response:
+                session[self.MODEL_REF_SESSION_KEY] = response['reference']
+
+            return self.success_redirect()
+
+        return self.render_form(error)
 
 
 base.add_url_rule(
@@ -204,7 +221,6 @@ def smoke_tests():
     """
     Run smoke tests and return results as JSON datastructure
     """
-
     from cla_common.smoketest import smoketest
     from cla_public.apps.checker.tests.smoketests import SmokeTests
 

@@ -1,5 +1,5 @@
 ** Reasons for contacting **
-{% for reason in form.reasons.data -%}
+{% for reason in form.reason_descriptions -%}
 - {{ reason }}
 {% endfor %}
 
