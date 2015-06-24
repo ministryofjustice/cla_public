@@ -106,6 +106,9 @@ class ReasonsForContacting(ZendeskView):
         posts to Zendesk. If feedback is ever redirected to the
         database as well, move the code here up into ZendeskView
     """
+    MODEL_REF_SESSION_KEY = 'reason_for_contact'
+    GA_SESSION_KEY = 'reason_for_contact_ga'
+
     form_class = ReasonsForContactingForm
     template = 'reasons-for-contacting.html'
     redirect_to = 'contact.get_in_touch'
@@ -117,10 +120,11 @@ class ReasonsForContacting(ZendeskView):
                 # allows skipping form if nothing is selected
                 return self.success_redirect()
 
+            session[self.GA_SESSION_KEY] = ', '.join(self.form.reasons.data)
             response = post_reasons_for_contacting(form=self.form)
             # ignore if reasons not saved as they're not vital
             if response and 'reference' in response:
-                session['reasons_for_contacting'] = response['reference']
+                session[self.MODEL_REF_SESSION_KEY] = response['reference']
 
             return self.success_redirect()
 
