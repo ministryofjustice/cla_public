@@ -2,6 +2,7 @@
 "Flask pluggable view mixins"
 
 import copy
+import datetime
 from itertools import dropwhile, ifilter
 import logging
 
@@ -10,6 +11,19 @@ from flask import abort, current_app, redirect, render_template, request, \
 
 
 log = logging.getLogger(__name__)
+
+
+class EnsureSessionExists(object):
+    """
+    View mixin to create a session if no current one exists
+    Used on contact page which should be reachable directly
+    from a link on the start page
+    """
+    def dispatch_request(self, *args, **kwargs):
+        if not session or not session.is_current:
+            session.clear()
+            session.checker['started'] = datetime.datetime.now()
+        return super(EnsureSessionExists, self).dispatch_request(*args, **kwargs)
 
 
 class RequiresSession(object):
