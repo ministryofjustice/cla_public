@@ -300,7 +300,7 @@ class EligibleFaceToFace(views.MethodView, object):
         if session.stored['category']:
             category_name = category_id_to_name(session.stored['category'])
 
-        return render_template('checker/result/eligible-no-callback.html',
+        return render_template('checker/result/eligible-f2f.html',
             data=data, form=form, category_name=category_name)
 
 checker.add_url_rule(
