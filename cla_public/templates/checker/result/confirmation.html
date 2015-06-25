@@ -45,12 +45,12 @@
 
   {% if session.stored.callback_requested %}
     <p>
-      {% if is_callback %}
+      {% if is_thirdparty %}
         {% trans %}Your details have been submitted and an operator will try to call
-        you back around the time you requested{% endtrans %}
+        the person you nominated back around the time you requested.{% endtrans %}
       {% else %}
         {% trans %}Your details have been submitted and an operator will try to call
-        the person you nominated back around the time you requested{% endtrans %}
+        you back around the time you requested.{% endtrans %}
       {% endif %}
 
       (<strong>{{ session.stored.callback_time|datetime('full') }}</strong>).
@@ -65,23 +65,23 @@
   {% endif %}
 
   <p>
-    {% if is_callback %}
-        {% trans %}The first person you speak to will be an operator
-        who will ask about your problem and your financial circumstances{% endtrans %}
-    {% else %}
+    {% if is_thirdparty %}
         {% trans %}The first person they speak to will be an operator
-        who will ask about your problem and your financial circumstances{% endtrans %}
+        who will ask about your problem and your financial circumstances.{% endtrans %}
+    {% else %}
+        {% trans %}The first person you speak to will be an operator
+        who will ask about your problem and your financial circumstances.{% endtrans %}
     {% endif %}
   </p>
   <p>
-    {% if is_callback %}
-        {% trans %}If it looks like you might qualify for legal aid you’ll
-        be put through to a specialist adviser, who will make the
-        final decision on your case{% endtrans %}
-    {% else %}
+    {% if is_thirdparty %}
         {% trans %}If it looks like you might qualify for legal aid they’ll
         be put through to a specialist adviser, who will make the
-        final decision on your case{% endtrans %}
+        final decision on your case.{% endtrans %}
+    {% else %}
+        {% trans %}If it looks like you might qualify for legal aid you’ll
+        be put through to a specialist adviser, who will make the
+        final decision on your case.{% endtrans %}
     {% endif %}
   </p>
 
