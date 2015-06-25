@@ -8,12 +8,12 @@ from flask.ext.mail import Message
 
 from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
-from cla_public.apps.contact.forms import ContactForm
+from cla_public.apps.contact.forms import ContactForm, ConfirmationForm
 from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, update_reasons_for_contacting, ApiError
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, \
-    EnsureSessionExists
+    EnsureSessionExists, ValidFormOnOptions, HasFormMixin
 
 
 @contact.after_request
@@ -24,15 +24,20 @@ def add_no_cache_headers(response):
 
 
 def confirmation_email(data):
-    data['case_ref'] = session.checker['case_ref']
-    data['callback_requested'] = data['contact_type'] in ['callback', 'thirdparty']
+    session_data = session.get('stored', session.get('checker'))
+    data['case_ref'] = session_data.get('case_ref')
+    data['callback_requested'] = session_data.get('contact_type') in ['callback', 'thirdparty']
     if data['callback_requested']:
-        data['safe_to_contact'] = data['callback']['safe_to_contact'] == 'SAFE' \
-            or data['thirdparty']['safe_to_contact'] == 'SAFE'
+        data[session_data['contact_type']] = data.get(session_data['contact_type'], {}) \
+            .get('safe_to_contact') == 'SAFE'
+
+    recipient = data['email']
+    if data.get('full_name'):
+        recipient = (data['full_name'], data['email'])
 
     return Message(
         gettext(u'Your Civil Legal Advice reference number'),
-        recipients=[(data['full_name'], data['email'])],
+        recipients=[recipient],
         body=render_template('emails/confirmation.txt', data=data))
 
 
@@ -86,15 +91,33 @@ contact.add_url_rule(
     methods=('GET', 'POST', 'OPTIONS'))
 
 
-class ContactConfirmation(views.MethodView):
+class ContactConfirmation(HasFormMixin, ValidFormOnOptions, views.MethodView):
+
+    form_class = ConfirmationForm
 
     def get(self):
         session.clear_and_store_ref()
-        if not session.get('stored', {}).get('case_ref'):
+        confirmation_email = session.stored.get('confirmation_email', None)
+        if confirmation_email:
+            del session.stored['confirmation_email']
+        if not session.stored.get('case_ref'):
             abort(404)
-        return render_template('checker/result/confirmation.html')
+        return render_template('checker/result/confirmation.html',
+           form=self.form, confirmation_email=confirmation_email)
 
+    def post(self):
+        is_submitted = getattr(self.form, 'is_submitted', lambda: True)
+        if is_submitted() and self.form.validate():
+            return self.on_valid_submit()
+        return self.get()
+
+    def on_valid_submit(self):
+        if self.form.email.data and current_app.config['MAIL_SERVER']:
+            current_app.mail.send(confirmation_email(self.form.data))
+            session.store({'confirmation_email': self.form.data['email']})
+        return redirect(url_for('.confirmation'))
 
 contact.add_url_rule(
     '/result/confirmation',
-    view_func=ContactConfirmation.as_view('confirmation'))
+    view_func=ContactConfirmation.as_view('confirmation'),
+    methods=('GET', 'POST', 'OPTIONS'))

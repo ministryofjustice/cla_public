@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% import "macros/element.html" as Element %}
+{% import "macros/form.html" as Form %}
 
 {% set title = 'Confirmation' %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
@@ -32,6 +33,26 @@
 
     <div class="confirmation-actions"></div>
   </header>
+
+  <form method="POST" class="confirmation-email-form" data-error-banner="false">
+    {% if confirmation_email and not form.errors %}
+      <p>
+        {{ _('Your reference number was sent to') }}
+        <strong>{{ confirmation_email }}</strong>
+      </p>
+    {% else %}
+      <h3>{{ _('Receive this confirmation by email') }}</h3>
+      {{ form.csrf_token }}
+      {% call Form.fieldset(form.email, class_=' ', as_label=True) %}
+        {{ form.email(
+          class_='form-control',
+          autocomplete='off',
+          autofocus=True
+        ) }}
+        <button type="submit" class="button">{{ _('Send') }}</button>
+      {% endcall %}
+    {% endif %}
+  </form>
 
   {% if session.stored.category in ['debt', 'housing'] %}
     <p>

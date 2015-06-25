@@ -32,6 +32,21 @@
     padding-bottom: 0;
   }
 }
+
+.confirmation-email-form {
+  padding: 20px 30px;
+  margin-top: -33px;
+  border: 3px solid $turquoise;
+
+  h3 {
+    margin: 10px 0;
+  }
+
+  fieldset {
+    margin-top: 10px;
+  }
+}
+
 @media print {
   .main-content .confirmation {
     background: none;
@@ -42,3 +57,10 @@
       font-size: 17pt;
     }
   }
+
+  .confirmation-actions,
+  .confirmation-email-form,
+  .flash-messages {
+    display: none;
+  }
+}

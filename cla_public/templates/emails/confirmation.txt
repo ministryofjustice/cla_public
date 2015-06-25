@@ -1,15 +1,20 @@
 {%- if data.callback_requested -%}
 
-{% trans full_name=data.full_name %}Dear {{ full_name }},{% endtrans %}
+{% if data.full_name -%}
+    {% trans full_name=data.full_name %}Dear {{ full_name }},{% endtrans %}
+
+{% endif -%}
 
 {% trans %}Your details have been submitted to Civil Legal Advice (CLA) and we will call you back.{% endtrans %}
 
 {% trans case_ref=data.case_ref %}Your reference number is {{ case_ref }}.{% endtrans %}
 
+{%- if data.callback or data.thirdparty -%}
 {% if data.contact_type == 'callback' -%}
 {% trans contact_number=data.callback.contact_number, date_time=data.callback.time.strftime('%A, %d %B at %H:%M') %}An operator will try to call you back on {{ contact_number }} around the time you selected ({{ date_time }}).{% endtrans %}
 {%- else -%}
 {% trans full_name=data.thirdparty.full_name, contact_number=data.thirdparty.contact_number, date_time=data.thirdparty.time.strftime('%A, %d %B at %H:%M') %}An operator will try to call {{ full_name }} back on {{ contact_number }} around the time you selected ({{ date_time }}).{% endtrans %}
+{%- endif %}
 {%- endif %}
 
 {% if data.safe_to_contact -%}
@@ -25,8 +30,10 @@
 {% trans %}This is an automated email. Please do not reply to this email address.{% endtrans %}
 
 {%- else -%}
+{% if data.full_name -%}
+    {% trans full_name=data.full_name %}Dear {{ full_name }},{% endtrans %}
 
-{% trans full_name=data.full_name %}Dear {{ full_name }},{% endtrans %}
+{% endif -%}
 
 {% trans %}Your details have been submitted to Civil Legal Advice (CLA).{% endtrans %}
 
