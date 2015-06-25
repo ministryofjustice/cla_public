@@ -42,9 +42,15 @@
 
     onAjaxSuccess: function(errors) {
       if (!$.isEmptyObject(errors)) {
+        var errorBanner = $('.alert-error:visible:first');
         this.loadErrors(errors);
+
+        if(!errorBanner.length) {
+          return;
+        }
+
         $('html, body').animate({
-          scrollTop: $('.alert-error:visible:first').offset().top - 50
+          scrollTop: errorBanner.offset().top - 50
         }, 300);
       } else {
         this.$form.off('submit');
@@ -101,7 +107,9 @@
 
       _.each(errorFields, addErrors);
 
-      this.$form.prepend(this.mainFormError());
+      if(this.$form.data('error-banner') !== false) {
+        this.$form.prepend(this.mainFormError());
+      }
     },
 
     loadTemplates: function() {
