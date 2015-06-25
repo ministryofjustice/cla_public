@@ -46,14 +46,17 @@
 
 {% block inner_content %}
   <h1>{{ _('What do you need help with?') }}</h1>
-  {% if not nodes|length %}
-    <p>
-      {{ _('Legal aid only covers some types of problem.') }}
-    </p>
-  {% endif %}
 
   <div class="scope-options">
-    <h2 class="subtitle">{{ heading }}</h2>
+
+    <h2 class="subtitle">
+      {% if nodes|length %}
+        {{ heading }}
+      {% else %}
+        {% trans %}Select the area you most need help with{% endtrans %}
+      {% endif %}
+    </h2>
+
     <ul class="scope-options-list">
       {% for choice in choices %}
         <li class="scope-options-list-item">
