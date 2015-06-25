@@ -257,6 +257,11 @@ class CheckerSession(SecureCookieSession, SessionMixin):
                 'adaptations': [k for k, v in \
                     self.checker['ContactForm']['adaptations'].items() if v]
             }
+            if stored['callback_requested']:
+                stored[self.checker.contact_type] = {
+                    'safe_to_contact': self.checker['ContactForm'] \
+                        .get(self.checker.contact_type).get('safe_to_contact')
+                }
             self.clear_checker()
             self.stored = stored
 
