@@ -8,56 +8,30 @@
 {% endblock %}
 
 {% block inner_content %}
-  <h1>Check if Civil Legal Advice can help you</h1>
-  <p>You might be able to get legal advice from Civil Legal Advice (<abbr title="Civil Legal Advice">CLA</abbr>) if you qualify for legal aid and have problems with:</p>
+  <h1>Check if you can get legal aid</h1>
+  <p>Legal aid can help pay for legal advice, family mediation or representation in a court or tribunal.</p>
+  <p>This service will check that your problem is covered by legal aid.</p>
   <ul>
-    <li>debt, if your home is at risk</li>
-    <li>housing</li>
-    <li>domestic abuse</li>
-    <li>family, if you’ve been in an abusive relationship</li>
-    <li>special educational needs</li>
-    <li>discrimination</li>
-    <li>issues around a child being taken into care</li>
+    <li>If it looks like you can get legal aid, you’ll be able to get help over the phone or we’ll suggest that you speak to a legal adviser in person.</li>
+    <li>If it looks like you can’t get legal aid, we’ll point you towards other organisations who offer legal advice.</li>
   </ul>
-  <p><abbr title="Civil Legal Advice">CLA</abbr> is a national helpline in England and Wales.</p>
-  <p>You’ll be asked questions about your problem and financial situation. If it looks like you might qualify for help, you’ll be able to speak to <abbr title="Civil Legal Advice">CLA</abbr>.</p>
-  <p>Complete the online service before you call <abbr title="Civil Legal Advice">CLA</abbr> so they can help you more quickly.</p>
 
   <p>
     <a class="button button-get-started" href="{{ url_for('base.get_started') }}" id="start">Start now</a>
-    <span class="destination"> on the Civil Legal Advice checker</span>
   </p>
 
-  <h3>Before you start</h3>
-  <p>You and your partner (if you have one) will need:</p>
-  <ul>
-    <li>recent payslips (if you’re working) and bank statements</li>
-    <li>a summary of your income tax and National Insurance contributions</li>
-    <li>details of any savings and investments you have</li>
-    <li>details of any benefits you receive</li>
-    <li>mortgage statements and a current valuation for any property you own</li>
-  </ul>
-  <p>This service is only for adults. <a href="{{ url_for('contact.get_in_touch') }}">Contact <abbr title="Civil Legal Advice">CLA</abbr></a> if you’re under 18.</p>
-
   {% call Element.alert() %}
-    <p>You’ll only get guidance on whether or not <abbr title="Civil Legal Advice">CLA</abbr> might be able to help - you won’t get a final decision until you speak to an adviser.</p>
+    <p>You’ll only get guidance on whether or not you might qualify for legal aid – you won’t get a final decision until you speak to an adviser.</p>
   {% endcall %}
 
-  <h3>Check if you qualify for legal aid</h3>
-  <p>To qualify for legal aid:</p>
-  <ul>
-    <li>your income (or combined income if you have a partner) shouldn’t be more than £2,657 a month before tax </li>
-    <li>your savings (or combined savings if you have a partner) shouldn’t be more than £8,000</li>
-  </ul>
-  <p>These limits can vary in certain circumstances, eg if you need advice about domestic abuse.</p>
-  <p><abbr title="Civil Legal Advice">CLA</abbr> can’t help if you’ve been charged with a crime - ask your solicitor or barrister about criminal legal aid.</p>
+  <p>This service can’t help if you’ve been charged with a crime – ask your solicitor or barrister about criminal legal aid.</p>
 
   {% call Element.alert() %}
-    <p>Legal aid is different in <a rel="external" href="http://www.slab.org.uk/public/advice/index.html">Scotland</a> and <a rel="external" href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm">Northern Ireland.</a></p>
+    <p>Legal aid is different in <a href="http://www.slab.org.uk/public/advice/index.html" rel="external" target="_blank">Scotland</a> and <a href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm" rel="external" target="_blank">Northern Ireland.</a></p>
   {% endcall %}
 
   <div class="meta-data group">
-    <p class="modified-date">Last updated: 1 May 2015</p>
+    <p class="modified-date">Last updated: 23 June 2015</p>
   </div>
 
 {% endblock %}
