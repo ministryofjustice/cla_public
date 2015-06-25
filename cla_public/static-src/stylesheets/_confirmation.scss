@@ -5,21 +5,8 @@
   color: white;
   text-align: center;
 
-  @media print {
-    background: none;
-    border: 2px solid $black;
-
-    .confirmation-ref-number {
-      font-size: 17pt;
-    }
-
-    .print-page-button {
-      display: none;
-    }
-  }
-
-  .print-page-button {
-    margin: 30px 0 0;
+  .confirmation-actions {
+    margin-top: 30px;
   }
 
   .flash-messages + & {
@@ -45,3 +32,13 @@
     padding-bottom: 0;
   }
 }
+@media print {
+  .main-content .confirmation {
+    background: none;
+    border: 3px solid $black;
+    margin-top: -20px;
+
+    .confirmation-ref-number {
+      font-size: 17pt;
+    }
+  }

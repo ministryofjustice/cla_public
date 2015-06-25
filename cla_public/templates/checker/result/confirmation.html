@@ -29,6 +29,8 @@
         <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
       </p>
     {% endif %}
+
+    <div class="confirmation-actions"></div>
   </header>
 
   {% if session.stored.category in ['debt', 'housing'] %}
@@ -147,9 +149,7 @@
   {{ super() }}
 
   <script type="text/html" id="printButtonTemplate">
-    <p class="print-page-button">
-      <button type="button" class="button button-large button-secondary">{{ _('Print this page') }}</button>
-    </p>
+    <button type="button" class="button button-large button-secondary">{{ _('Print this page') }}</button>
   </script>
 
   <script>
