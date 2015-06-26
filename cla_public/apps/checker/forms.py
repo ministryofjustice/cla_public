@@ -163,6 +163,17 @@ class YourBenefitsForm(BaseForm):
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
 
+    def __init__(self, *args, **kwargs):
+        super(YourBenefitsForm, self).__init__(*args, **kwargs)
+        # remove child benefit option if has no children
+        if session and not session.checker.has_children:
+            self.benefits.choices = filter(lambda benefit: benefit[0] != 'child_benefit',
+                                           self.benefits.choices)
+        # sort by label
+        self.benefits.choices = sorted(self.benefits.choices[:-1],
+                                       key=lambda benefit: unicode(benefit[1])) + \
+            self.benefits.choices[-1:]
+
 
 class PropertyForm(BaseNoCsrfForm):
 

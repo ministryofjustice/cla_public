@@ -84,15 +84,17 @@ RESULT_OPTIONS = [
 
 "Benefits"
 BENEFITS_CHOICES = [
+    ('child_benefit', _(u'Child Benefit')),
+    ('pension_credit', _(u'Guarantee Credit')),
     ('income_support', _(u'Income Support')),
     ('job_seekers_allowance', _(u'Income-based Jobseeker’s Allowance')),
-    ('pension_credit', _(u'Guarantee Credit')),
-    ('universal_credit', _(u'Universal Credit')),
     ('employment_support', _(u'Income-related Employment and Support Allowance')),
+    ('universal_credit', _(u'Universal Credit')),
     ('other-benefit', _(u'A benefit not listed above')),
 ]
 
-PASSPORTED_BENEFITS = [benefit for benefit, label in BENEFITS_CHOICES[0:-1]]
+PASSPORTED_BENEFITS = [benefit for benefit, label in BENEFITS_CHOICES
+                       if benefit not in ['child_benefit', 'other-benefit']]
 NASS_BENEFITS = ('asylum-support',)
 
 MONEY_INTERVALS = [
