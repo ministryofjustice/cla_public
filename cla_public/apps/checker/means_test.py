@@ -352,7 +352,8 @@ class IncomePayload(dict):
                             MoneyInterval(0),
 
                         'tax_credits':
-                            MoneyInterval(mi('working_tax_credit', val)),
+                            MoneyInterval(mi('working_tax_credit', val)) +
+                            MoneyInterval(mi('child_tax_credit', val)),
 
                         'maintenance_received':
                             MoneyInterval(mi('maintenance', val)),
@@ -395,10 +396,6 @@ class IncomePayload(dict):
             'your_income',
             session.checker.is_self_employed and not session.checker.is_employed,
             session.checker.is_self_employed or session.checker.is_employed)
-
-        child_tax_credit = session.checker.get('TaxCreditsForm', {}).get(
-            'child_tax_credit', MoneyInterval(0))
-        payload['you']['income']['tax_credits'] += child_tax_credit
 
         if session.checker.owns_property:
             rents = [MoneyInterval(p['rent_amount']) for p in session.checker.get(

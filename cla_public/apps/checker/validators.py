@@ -53,6 +53,16 @@ class FieldValueNot(FieldValue):
         return field.data != self.value
 
 
+class FieldValueIn(FieldValue):
+    def __call__(self, field, **kwargs):
+        return self.value in field.data
+
+
+class FieldValueNotIn(FieldValue):
+    def __call__(self, field, **kwargs):
+        return self.value not in field.data
+
+
 class AtLeastOne(object):
     """
     Valid if at least one option is checked.
