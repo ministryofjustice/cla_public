@@ -153,6 +153,24 @@ class TestAvailability(unittest.TestCase):
 
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(wed_after_bank_holiday))
 
+    def test_booking_on_actual_bank_holiday(self):
+        with override_current_time(datetime.datetime(2015, 5, 25, 10, 30)):
+            tuesday = datetime.datetime(2015, 5, 26, 9, 30)
+            self.assertTrue(
+                monday_before_11am_between_eod_friday_and_monday(
+                    tuesday))
+
+            self.assertFalse(OPERATOR_HOURS.can_schedule_callback(tuesday))
+
+            tuesday_after_11 = datetime.datetime(2015, 5, 26, 11, 30)
+
+            self.assertFalse(
+                monday_before_11am_between_eod_friday_and_monday(
+                    tuesday_after_11))
+
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(tuesday_after_11))
+
+    def test_booking_on_non_bank_holiday(self):
         with override_current_time(datetime.datetime(2015, 5, 9, 10, 30)):
             monday = datetime.datetime(2015, 5, 11, 9, 30)
             self.assertTrue(
@@ -194,7 +212,6 @@ class TestDayTimeChoices(unittest.TestCase):
             form = Mock()
             field = DayChoiceField()
             field = field.bind(form, 'day')
-            print field.choices
             self.assertDayInChoices('20150526', field.choices)
 
     def test_available_days(self):

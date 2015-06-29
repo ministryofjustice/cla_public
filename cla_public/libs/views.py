@@ -83,14 +83,14 @@ class SessionBackedFormView(
     """
     Saves and loads form data to and from the session
     """
-
     template = None
+    template_context = {}
 
     def get(self, *args, **kwargs):
         """
         Render template with form
         """
-        return render_template(self.template, form=self.form)
+        return render_template(self.template, form=self.form, **self.template_context)
 
     def post(self, *args, **kwargs):
         """

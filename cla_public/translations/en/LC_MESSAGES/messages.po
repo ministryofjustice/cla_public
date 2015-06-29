@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-06-19 16:56+0100\n"
+"POT-Creation-Date: 2015-06-18 14:44+0100\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -17,40 +17,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: cla_public/apps/base/constants.py:6
+#: cla_public/apps/base/constants.py:7
 msgid "Very satisfied"
 msgstr ""
 
-#: cla_public/apps/base/constants.py:7
+#: cla_public/apps/base/constants.py:8
 msgid "Satisfied"
 msgstr ""
 
-#: cla_public/apps/base/constants.py:8
+#: cla_public/apps/base/constants.py:9
 msgid "Neither satisfied or dissatisfied"
 msgstr ""
 
-#: cla_public/apps/base/constants.py:9
+#: cla_public/apps/base/constants.py:10
 msgid "Dissatisfied"
 msgstr ""
 
-#: cla_public/apps/base/constants.py:10
+#: cla_public/apps/base/constants.py:11
 msgid "Very dissatisfied"
 msgstr ""
 
-#: cla_public/apps/base/constants.py:17
+#: cla_public/apps/base/constants.py:18
 msgid "No, I filled in this form myself"
 msgstr ""
 
-#: cla_public/apps/base/constants.py:18
+#: cla_public/apps/base/constants.py:19
 msgid "I have difficulty using computers so someone filled in this form for me"
 msgstr ""
 
-#: cla_public/apps/base/constants.py:19
+#: cla_public/apps/base/constants.py:20
 msgid "I used an accessibility tool such as a screen reader"
 msgstr ""
 
-#: cla_public/apps/base/constants.py:20
+#: cla_public/apps/base/constants.py:21
 msgid "I had some other kind of help"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:29
+msgid "I don’t know how to answer a question"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:30
+msgid "I don’t have the paperwork I need"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:31
+msgid "I’d prefer to speak to someone"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:32
+msgid "I have trouble using online services"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:33
+msgid "I don’t understand how this service can help me"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:34
+msgid "My problem area isn’t covered"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:35
+msgid "I’d prefer not to say"
+msgstr ""
+
+#: cla_public/apps/base/constants.py:36
+msgid "Another reason"
 msgstr ""
 
 #: cla_public/apps/base/forms.py:82

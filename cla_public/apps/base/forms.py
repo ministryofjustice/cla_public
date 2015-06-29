@@ -10,7 +10,7 @@ from wtforms import TextAreaField, RadioField, SelectMultipleField, \
 from wtforms.validators import InputRequired, Length
 
 from cla_public.apps.base.constants import FEEL_ABOUT_SERVICE, HELP_FILLING_IN_FORM, \
-    REASONS_FOR_CONTACTING, REASONS_FOR_CONTACTING_OTHER
+    REASONS_FOR_CONTACTING_CHOICES, REASONS_FOR_CONTACTING
 from cla_public.libs.honeypot import Honeypot
 
 
@@ -35,6 +35,7 @@ class BabelTranslationsFormMixin(object):
 
 
 class ZendeskForm(Honeypot, BabelTranslationsFormMixin, Form):
+    referrer = StringField(widget=widgets.HiddenInput())
     _textarea_length_validator = Length(
         max=1000,
         message=u'Field cannot contain more than %(max)d characters',
@@ -75,10 +76,6 @@ class ZendeskForm(Honeypot, BabelTranslationsFormMixin, Form):
 
 
 class FeedbackForm(ZendeskForm):
-    referrer = StringField(
-        widget=widgets.HiddenInput(),
-        validators=[InputRequired()],
-    )
     difficulty = TextAreaField(label=_(u'Did you have any difficulty with this service?'),
                                validators=[ZendeskForm._textarea_length_validator])
 
@@ -106,13 +103,17 @@ class FeedbackForm(ZendeskForm):
 
 
 class ReasonsForContactingForm(ZendeskForm):
-    referrer = StringField(
-        widget=widgets.HiddenInput(),
-        validators=[InputRequired()],
-    )
+    """
+    Interstitial form to ascertain why users are dropping out of
+    the checker service
+
+    NB: Shares code with Feedback form, but no longer in fact
+        posts to Zendesk. If feedback is ever redirected to the
+        database as well, move the code here up into ZendeskForm
+    """
     reasons = SelectMultipleField(
         label=_(u'You can select more than one option:'),
-        choices=REASONS_FOR_CONTACTING,
+        choices=REASONS_FOR_CONTACTING_CHOICES,
         widget=widgets.ListWidget(prefix_label=False),
         option_widget=widgets.CheckboxInput(),
     )
@@ -121,9 +122,22 @@ class ReasonsForContactingForm(ZendeskForm):
         validators=[ZendeskForm._textarea_length_validator],
     )
 
-    REASONS_FOR_CONTACTING_OTHER = REASONS_FOR_CONTACTING_OTHER
+    REASONS_FOR_CONTACTING_OTHER = REASONS_FOR_CONTACTING.OTHER
 
     def api_payload(self):
+        return {
+            'reasons': [{'category': category} for category in self.reasons.data],
+            'other_reasons': self.other_reasons.data or '',
+            'user_agent': request.headers.get('User-Agent') or 'Unknown',
+            'referrer': self.referrer.data or 'Unknown',
+        }
+
+    @property
+    def reason_descriptions(self):
+        choices = dict(REASONS_FOR_CONTACTING_CHOICES)
+        return [choices[reason_category] for reason_category in self.reasons.data]
+
+    def zendesk_api_payload(self):
         return self._make_api_payload(
             template='emails/zendesk-reasons-for-contacting.txt',
             subject='CLA Public - Reasons for Contacting',
