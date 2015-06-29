@@ -178,5 +178,8 @@
     {% if session.stored.adaptations %}
       ga('send', 'event', 'confirmation', 'adaptation', '{{ session.stored.adaptations|join(', ') }}');
     {% endif %}
+    {% if confirmation_email and not form.errors %}
+      ga('send', 'event', 'confirmation', 'email-sent');
+    {% endif %}
   </script>
 {% endblock %}
