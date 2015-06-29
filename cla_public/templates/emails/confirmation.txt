@@ -1,48 +1,62 @@
-{%- if data.callback_requested -%}
-
-{% if data.full_name -%}
-    {% trans full_name=data.full_name %}Dear {{ full_name }},{% endtrans %}
+{% if data.full_name %}
+    {%- trans full_name=data.full_name -%}
+      Dear {{ full_name }},
+    {%- endtrans %}
 
 {% endif -%}
 
-{% trans %}Your details have been submitted to Civil Legal Advice (CLA) and we will call you back.{% endtrans %}
+{% if data.callback_requested -%}
 
-{% trans case_ref=data.case_ref %}Your reference number is {{ case_ref }}.{% endtrans %}
+{{ _('Your details have been submitted to Civil Legal Advice (CLA) and we will call you back.') }}
 
-{%- if data.callback or data.thirdparty -%}
-{% if data.contact_type == 'callback' -%}
-{% trans contact_number=data.callback.contact_number, date_time=data.callback.time.strftime('%A, %d %B at %H:%M') %}An operator will try to call you back on {{ contact_number }} around the time you selected ({{ date_time }}).{% endtrans %}
+{% trans case_ref=data.case_ref -%}
+  Your reference number is {{ case_ref }}.
+
+{% endtrans -%}
+
+{%- if data.contact_type == 'callback' -%}
+  {%- if data.callback -%}
+    {%- trans contact_number=data.callback.contact_number, date_time=data.callback_time.strftime('%A, %d %B at %H:%M') -%}
+      An operator will try to call you back on {{ contact_number }} around the time you selected ({{ date_time }}).
+    {%- endtrans -%}
+  {%- else -%}
+    {%- trans date_time=data.callback_time.strftime('%A, %d %B at %H:%M') -%}
+      An operator will try to call you back around the time you selected ({{ date_time }}).
+    {%- endtrans -%}
+  {%- endif -%}
 {%- else -%}
-{% trans full_name=data.thirdparty.full_name, contact_number=data.thirdparty.contact_number, date_time=data.thirdparty.time.strftime('%A, %d %B at %H:%M') %}An operator will try to call {{ full_name }} back on {{ contact_number }} around the time you selected ({{ date_time }}).{% endtrans %}
-{%- endif %}
+  {%- if data.thirdparty -%}
+    {%- trans full_name=data.thirdparty.full_name, contact_number=data.thirdparty.contact_number, date_time=data.callback_time.strftime('%A, %d %B at %H:%M') -%}
+      An operator will try to call {{ full_name }} back on {{ contact_number }} around the time you selected ({{ date_time }}).
+    {%- endtrans -%}
+  {%- else -%}
+    {%- trans date_time=data.callback_time.strftime('%A, %d %B at %H:%M') -%}
+      An operator will try to call the person you nominated back around the time you selected ({{ date_time }}).
+    {%- endtrans -%}
+  {%- endif -%}
 {%- endif %}
 
 {% if data.safe_to_contact -%}
-{% trans %}We will leave a message when we call.{% endtrans %}
+  {{ _('We will leave a message when we call.') }}
 {%- else -%}
-{% trans %}We will not leave a message when we call, as you have told us not to.{% endtrans %}
+  {{ _('We will not leave a message when we call, as you have told us not to.') }}
 {%- endif %}
 
-{% trans %}If you miss the call or you need advice urgently, you can call us on 0345 345 4 345. Please quote your reference number when you call.{% endtrans %}
-
----
-
-{% trans %}This is an automated email. Please do not reply to this email address.{% endtrans %}
+{{ _('If you miss the call or you need advice urgently, you can call us on 0345 345 4345. Please quote your reference number when you call.') }}
 
 {%- else -%}
-{% if data.full_name -%}
-    {% trans full_name=data.full_name %}Dear {{ full_name }},{% endtrans %}
 
-{% endif -%}
+{{ _('Your details have been submitted to Civil Legal Advice (CLA).') }}
 
-{% trans %}Your details have been submitted to Civil Legal Advice (CLA).{% endtrans %}
+{% trans case_ref=data.case_ref -%}
+  Your reference number is {{ case_ref }}.
+{%- endtrans %}
 
-{% trans case_ref=data.case_ref %}Your reference number is {{ case_ref }}.{% endtrans %}
+{{ _('You can now call CLA on 0345 345 4 345. Please quote your reference number when you call.') }}
 
-{% trans %}You can now call CLA on 0345 345 4 345. Please quote your reference number when you call.{% endtrans %}
+{%- endif %}
+
 
 ---
 
-{% trans %}This is an automated email. Please do not reply to this email address.{% endtrans %}
-
-{%- endif -%}
+{{ _('This is an automated email. Please do not reply to this email address.') }}
