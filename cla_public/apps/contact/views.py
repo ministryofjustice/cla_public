@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 "Contact views"
+from smtplib import SMTPAuthenticationError
 
 from flask import abort, redirect, render_template, session, url_for, views, \
     current_app
@@ -23,17 +24,21 @@ def add_no_cache_headers(response):
     return response
 
 
-def confirmation_email(data):
-    session_data = session.get('stored', session.get('checker'))
+def create_confirmation_email(data):
+    session_data = session.get('stored')
+
     data['case_ref'] = session_data.get('case_ref')
-    data['callback_requested'] = session_data.get('contact_type') in ['callback', 'thirdparty']
+    data['callback_requested'] = session_data.get('callback_requested')
+    data['contact_type'] = session_data.get('contact_type')
     if data['callback_requested']:
-        data[session_data['contact_type']] = data.get(session_data['contact_type'], {}) \
-            .get('safe_to_contact') == 'SAFE'
+        data['safe_to_contact'] = session_data.get('safe_to_contact')
+        data['callback_time'] = session_data.get('callback_time')
 
     recipient = data['email']
     if data.get('full_name'):
         recipient = (data['full_name'], data['email'])
+
+    session['confirmation_email'] = data['email']
 
     return Message(
         gettext(u'Your Civil Legal Advice reference number'),
@@ -59,7 +64,6 @@ class Contact(
         return super(Contact, self).get(*args, **kwargs)
 
     def on_valid_submit(self):
-
         if self.form.extra_notes.data:
             session.checker.add_note(u'User problem', self.form.extra_notes.data)
         try:
@@ -69,15 +73,20 @@ class Contact(
                 update_reasons_for_contacting(session[ReasonsForContacting.MODEL_REF_SESSION_KEY],
                                               payload={'case': session.checker['case_ref']})
                 del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
+            session.store_checker_details()
+            if self.form.email.data and current_app.config['MAIL_SERVER']:
+                current_app.mail.send(create_confirmation_email(self.form.data))
+            return redirect(url_for('.confirmation'))
         except ApiError:
             self.form.errors['timeout'] = _(
                 u'There was an error submitting your data. '
                 u'Please check and try again.')
             return self.get()
-        else:
-            if self.form.email.data and current_app.config['MAIL_SERVER']:
-                current_app.mail.send(confirmation_email(self.form.data))
-            return redirect(url_for('.confirmation'))
+        except SMTPAuthenticationError:
+            self.form._fields['email'].errors.append(_(
+                u'There was an error submitting your email. '
+                u'Please check and try again or try without it.'))
+            return self.get()
 
     def dispatch_request(self, *args, **kwargs):
         if not session:
@@ -96,10 +105,11 @@ class ContactConfirmation(HasFormMixin, ValidFormOnOptions, views.MethodView):
     form_class = ConfirmationForm
 
     def get(self):
-        session.clear_and_store_ref()
-        confirmation_email = session.stored.get('confirmation_email', None)
+        session.clear_checker()
+
+        confirmation_email = session.get('confirmation_email', None)
         if confirmation_email:
-            del session.stored['confirmation_email']
+            del session['confirmation_email']
         if not session.stored.get('case_ref'):
             abort(404)
         return render_template('checker/result/confirmation.html',
@@ -113,8 +123,13 @@ class ContactConfirmation(HasFormMixin, ValidFormOnOptions, views.MethodView):
 
     def on_valid_submit(self):
         if self.form.email.data and current_app.config['MAIL_SERVER']:
-            current_app.mail.send(confirmation_email(self.form.data))
-            session.store({'confirmation_email': self.form.data['email']})
+            try:
+                current_app.mail.send(create_confirmation_email(self.form.data))
+            except SMTPAuthenticationError:
+                self.form._fields['email'].errors.append(_(
+                    u'There was an error submitting your email. '
+                    u'Please check and try again or try without it.'))
+                return self.get()
         return redirect(url_for('.confirmation'))
 
 contact.add_url_rule(
