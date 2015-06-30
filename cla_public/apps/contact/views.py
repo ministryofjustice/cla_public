@@ -25,18 +25,20 @@ def add_no_cache_headers(response):
 
 
 def create_confirmation_email(data):
-    session_data = session.get('stored')
+    data.update({
+        'case_ref': session.stored.get('case_ref'),
+        'callback_requested': session.stored.get('callback_requested'),
+        'contact_type': session.stored.get('contact_type'),
+    })
 
-    data['case_ref'] = session_data.get('case_ref')
-    data['callback_requested'] = session_data.get('callback_requested')
-    data['contact_type'] = session_data.get('contact_type')
-    if data['callback_requested']:
-        data['safe_to_contact'] = session_data.get('safe_to_contact')
-        data['callback_time'] = session_data.get('callback_time')
+    if data.get('callback_requested'):
+        data.update({
+            'safe_to_contact': session.stored.get('safe_to_contact'),
+            'callback_time': session.stored.get('callback_time')
+        })
 
-    recipient = data['email']
-    if data.get('full_name'):
-        recipient = (data['full_name'], data['email'])
+    recipient = (data['full_name'], data['email']) if data.get('full_name') \
+        else data['email']
 
     session['confirmation_email'] = data['email']
 
