@@ -106,18 +106,14 @@
   {% endblock %}
 {% endblock %}
 
-
-{% block ga_pageview -%}
-    {{ super() }}
-
-    {% if reasons_for_contacting -%}
-      ga('send', 'event', 'reasons_for_contacting', '{{ reasons_for_contacting }}');
-    {%- endif -%}
-{%- endblock %}
-
-
 {% block javascripts %}
   {{ super() }}
+
+  {% if reasons_for_contacting -%}
+    <script>
+      ga('send', 'event', 'reasons-for-contacting', '{{ reasons_for_contacting }}');
+    </script>
+  {%- endif -%}
 
   <script type="text/html" id="addressFinderButton">
     <button class="button-secondary address-finder-button" type="button">
