@@ -165,20 +165,29 @@ class YourBenefitsForm(BaseForm):
         validators=[AtLeastOne()])
 
     child_benefit = MoneyIntervalField(
-        label=_(u'Enter the total amount you get for all your children'),
+        label=_(u'If yes, enter the total amount you get for all your children'),
         choices=money_intervals('', 'per_week', 'per_4week'),
         validators=[
             IgnoreIf('benefits', FieldValueNotIn('child_benefit')),
             MoneyIntervalAmountRequired()])
 
+    other_benefits = PartnerYesNoField(
+        label=_(u'Do you receive any benefits NOT listed below?'),
+        partner_label=_(u'Do you or your partner receive any benefits NOT '
+                        u'listed below?'),
+        description=_(u'For example, National Asylum Support Service Benefit, '
+                      u'Incapacity Benefit, Contribution-based Jobseeker\'s '
+                      u'Allowance'),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
+
     total_other_benefit = PartnerMoneyIntervalField(
         label=_(u'If so, enter the total amount you receive'),
         partner_label=_(u'If so, enter the total amount you and your partner receive'),
-        description=_(u'Enter 0 if the benefits you receive are listed'),
-        partner_description=_(u'Enter 0 if the benefits you and your partner receive are listed'),
         choices=money_intervals_except('per_month'),
         validators=[
             IgnoreIf('benefits', FieldValueNotIn('other-benefit')),
+            IgnoreIf('other_benefits', FieldValue(NO)),
             MoneyIntervalAmountRequired()])
 
     @classmethod

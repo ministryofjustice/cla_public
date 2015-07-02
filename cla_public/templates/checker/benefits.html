@@ -8,26 +8,43 @@
   {% elif option.data == 'other-benefit' %}
 
     {% call Form.fieldset(
-      form.total_other_benefit,
-      controlled_by=field, control_value=option.data,
-      is_subfield=True, has_label=False, has_info=False, use_row=False) %}
-
-      <legend class="fieldset-label {% if form.total_other_benefit.errors %}m-error{% endif %}">
-        {% trans %}Do you receive any other benefits <strong>not</strong> listed below?{% endtrans %}
-      </legend>
-      <div class="form-row">
-        <ul class="non-income-benefits-list">
-          {% for other_benefit in form.get_non_income_benefits() %}
-            <li>{{ other_benefit }}</li>
-          {% endfor %}
-        </ul>
+      controlled_by=field,
+      control_value=option.data,
+      is_subfield=True,
+      has_label=False,
+      has_info=False,
+      use_row=False
+    ) %}
+      <fieldset
+        class="fieldset-group {%- if form.other_benefits.errors %} m-error{% endif %}"
+        id="field-{{ form.other_benefits.id }}">
+        <legend
+          class="fieldset-label {%- if form.other_benefits.errors %} m-error{% endif %}"
+          id="field-label-{{ form.other_benefits.id }}">
+          <span>{{ form.other_benefits.label.text }}</span>
+        </legend>
+        <div class="form-row">
+          <ul class="non-income-benefits-list">
+            {% for other_benefit in form.get_non_income_benefits() %}
+              <li>{{ other_benefit }}</li>
+            {% endfor %}
+          </ul>
+        </div>
         <div class="form-row field-help">
           <span class="field-description">
-            {% trans %}For example, National Asylum Support Service Benefit, Incapacity Benefit, Contribution-based Jobseeker’s Allowance{% endtrans %}
+            {{- form.other_benefits.description -}}
           </span>
         </div>
-        {{ Form.money_interval_fieldset(form.total_other_benefit) }}
-      </div>
+        <div class="form-row">
+          {{ Form.radio_buttons(form.other_benefits) }}
+        </div>
+      </fieldset>
+
+      {{ Form.money_interval_fieldset(
+        form.total_other_benefit, class_='fieldset-group',
+        controlled_by=form.other_benefits,
+        control_value=1,
+      )}}
 
     {% endcall %}
 
@@ -48,4 +65,15 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
+{% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+
+  <script>
+    window.CONDITIONAL_LABELS = {
+      'child_benefit': '{{ _('Enter the total amount you receive') }}',
+      'total_other_benefit': '{{ _('Enter the total amount you receive') }}'
+    };
+ </script>
 {% endblock %}
