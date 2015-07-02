@@ -416,10 +416,13 @@
   {% if form.errors %}
     {% call Element.alert('error', icon='cross') %}
       {% if form.errors.timeout %}
-      <p>{{ form.errors.timeout }}</p>
+        <p>{{ form.errors.timeout }}</p>
+      {% elif form.errors|length == 1 and form.errors.csrf_token %}
+        <p>{{  _('Sorry, something went wrong.') }}</p>
+        <p>{{  _('Please try submitting the form again.') }}</p>
       {% else %}
-      <p>{{  _('This form has errors.') }}</p>
-      <p>{{ _('Please see below for the errors you need to correct.') }}</p>
+        <p>{{  _('This form has errors.') }}</p>
+        <p>{{ _('Please see below for the errors you need to correct.') }}</p>
       {% endif %}
     {% endcall %}
   {% endif %}
