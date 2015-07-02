@@ -316,12 +316,20 @@
   skip=False,
   is_subfield=False,
   controlled_by=None,
-  control_value='1'
+  control_value='1',
+  class_=''
 ) %}
   {% if skip %}
     {{ money_interval(field, skip) }}
   {% else %}
-    {% call fieldset(field, is_subfield=is_subfield, controlled_by=controlled_by, control_value=control_value, as_label=True) %}
+    {% call fieldset(
+      field,
+      is_subfield=is_subfield,
+      controlled_by=controlled_by,
+      control_value=control_value,
+      as_label=True,
+      class_=class_
+    ) %}
       {{ money_interval(field) }}
     {% endcall %}
   {% endif %}
