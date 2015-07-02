@@ -90,7 +90,7 @@ BENEFITS_CHOICES = [
     ('job_seekers_allowance', _(u'Income-based Jobseeker’s Allowance')),
     ('employment_support', _(u'Income-related Employment and Support Allowance')),
     ('universal_credit', _(u'Universal Credit')),
-    ('other-benefit', _(u'A benefit not listed')),
+    ('other-benefit', _(u'Any other benefits')),
 ]
 
 PASSPORTED_BENEFITS = [benefit for benefit, label in BENEFITS_CHOICES
