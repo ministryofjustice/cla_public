@@ -14,7 +14,7 @@ from cla_public.apps.checker.forms import FindLegalAdviserForm
 from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import ORGANISATION_CATEGORY_MAPPING, \
-    NO_CALLBACK_CATEGORIES, LAALAA_PROVIDER_CATEGORIES_MAP
+    NO_CALLBACK_CATEGORIES, LAALAA_PROVIDER_CATEGORIES_MAP, CATEGORIES
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, IncomeForm, \
     ReviewForm
@@ -363,7 +363,7 @@ class HelpOrganisations(views.MethodView):
             name = unicode(name)
 
             category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
-        trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
+        trans_category_name = next(c[1] for c in CATEGORIES if c[0] == category)
 
         ineligible_reasons = session.stored.get('ineligible_reasons', [])
 
