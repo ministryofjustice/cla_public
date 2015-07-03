@@ -66,10 +66,10 @@ class SmokeTests(unittest.TestCase):
             self.assertEquals(len(scope_options_item), 15)
 
             # Follow the third option's link (Debt) and check the
-            # number of options on the following screen
+            # there are options on the following screen
             response = client.get(scope_options_item[2].find('a').get('href'))
             scope_options_item = BeautifulSoup(response.data).find_all(class_='scope-options-list-item')
-            self.assertEquals(len(scope_options_item), 4)
+            self.assertTrue(len(scope_options_item) > 0)
 
             # Follow the first option's link (You own your own home)
             # and check the number of options on the following screen
