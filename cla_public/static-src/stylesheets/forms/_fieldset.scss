@@ -11,6 +11,10 @@ fieldset {
     padding: 10px 20px;
     margin: 25px -20px;
 
+    .field-error {
+      margin-top: 0;
+    }
+
     @include media(mobile) {
       border-left: 0;
       border-right: 0;
