@@ -3,6 +3,7 @@
 {% block page_title %}{{ _('Help organisations') }} - {{ super() }}{% endblock %}
 
 {% import "macros/element.html" as Element %}
+{% import "macros/help-orgs.html" as HelpOrganisations %}
 
 {% set partner_text = _('you and your partner') if session.stored.has_partner else _('you') %}
 {% set partner_text_plural = _('you and your partner’s') if session.stored.has_partner else _('your') %}
@@ -85,7 +86,7 @@
     </a>
   </p>
 
-  {% include '_help-orgs.html' %}
+  {{ HelpOrganisations.org_list_container(organisations, category_name, truncate=5) }}
 
   {{ Element.satisfaction_survey_prompt() }}
 {% endblock %}
