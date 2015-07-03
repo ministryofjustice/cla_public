@@ -19,7 +19,7 @@
     {% endif %}
     <div class="alert-message">
       {% if title %}
-        <h3 class="alert-header" id="alert-heading-{{type}}">{{title}}</h3>
+        <h3 class="alert-header" id="alert-heading-{{type}}">{{ _(title) }}</h3>
       {% endif %}
       {{ caller() }}
     </div>
