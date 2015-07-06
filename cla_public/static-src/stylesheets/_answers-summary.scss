@@ -11,7 +11,7 @@
     header {
       border-bottom: 2px solid $grey-1;
       padding-bottom: 5px;
-      margin-bottom: 10px;
+      margin-bottom: -1px;
       padding-right: 7em;
       position: relative;
 
@@ -43,55 +43,56 @@
         }
       }
     }
+  }
 
-    .answers {
-      margin: 0;
-      padding: 0;
-      list-style: none;
+  .answers {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
-      h3 {
-        margin: 20px 0 10px;
-      }
+    h3 {
+      margin: 20px 0 10px;
     }
+  }
 
-    .answers-item {
-      padding: 10px 25px;
-      border-top: 1px solid $grey-3;
+  .answers-item {
+    padding: 10px 25px;
+    border-top: 1px solid $grey-3;
 
-      &:first-child {
-        border: 0;
-      }
+    // When combined with .progress (e.g. scope progress)
+    > .step-name {
+      margin: -10px -25px;
     }
+  }
 
-    .question,
-    .answer {
-      &:before {
-        float: left;
-        margin-left: -25px;
-        color: $grey-2;
-        width: 18px;
-        text-align: center;
-      }
+  .question,
+  .answer {
+    &:before {
+      float: left;
+      margin-left: -25px;
+      color: $grey-2;
+      width: 18px;
+      text-align: center;
     }
+  }
 
-    .question:before {
-      content: 'Q';
+  .question:before {
+    content: 'Q';
+  }
+
+  .answer {
+    margin-top: 5px;
+
+    &:before {
+      content: 'A';
     }
+  }
 
-    .answer {
-      margin-top: 5px;
+  .interval {
+    display: inline-block;
+  }
 
-      &:before {
-        content: 'A';
-      }
-    }
-
-    .interval {
-      display: inline-block;
-    }
-
-    .currency {
-      font-weight: bold;
-    }
+  .currency {
+    font-weight: bold;
   }
 }
