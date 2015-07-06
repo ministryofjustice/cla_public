@@ -36,8 +36,8 @@ class TestReviewPage(unittest.TestCase):
             self.assertEqual(resp.json().get('state'), outcome)
 
     def test_direct_link(self):
-        # family > problem with ex > dispute over children > family mediation
-        resp = api.move(['n43n14', 'n51', 'n57', 'n59'])
+        # family > dispute over children > in a dispute with ex-partner > family mediation
+        resp = api.move(['n43n14', 'n105', 'n106', 'n59'])
         self.assertResponseHasNNodes(resp, 4)
 
         # family > problem with ex

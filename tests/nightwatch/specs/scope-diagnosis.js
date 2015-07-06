@@ -53,12 +53,12 @@ var categories = [
     ]
   },
   {
-    name: 'Domestic violence',
+    name: 'Domestic abuse',
     scenarios: [
       {
         type: 'contact',
         paths: [
-          ['Domestic violence', 'Yes']
+          ['Domestic abuse', 'Yes']
         ]
       }
     ]
