@@ -16,7 +16,11 @@
 
   <p>
     {{ _('If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),
-    a national helpline for legal aid problems in England and Wales.') }}
+    a national helpline for certain legal aid problems in England and Wales.') }}
+  </p>
+  <p>
+    {{ _('The CLA operator will check all the information you’ve given through this service.') }}
+    {{ _('You will also need to provide evidence of your finances and explain why your problem is serious before your application can progress.') }}
   </p>
   <p>{{ _('To complete the financial assessment, you and your partner (if you have one) will need:') }}</p>
   <ul>
@@ -27,15 +31,15 @@
     <li>{{ _('mortgage statements and a current valuation for any property you own') }}</li>
   </ul>
 
+  <p>{% trans url=url_for('contact.get_in_touch') %}
+    If you’re under 18, you should <a href="{{ url }}">contact CLA</a>
+    without completing the financial assessment.{% endtrans %}
+  </p>
+
   <p class="form-actions">
     <a class="button button-get-started" href="{{ url_for('.wizard', step='about') }}">
       {{ _('Check if you qualify financially') }}
     </a>
-  </p>
-
-  <p>{% trans url=url_for('contact.get_in_touch') %}
-    If you’re under 18, you should <a href="{{ url }}">contact CLA</a>
-    without completing the financial assessment.{% endtrans %}
   </p>
 
   {% call Element.alert(title='To qualify for legal aid:') %}
@@ -57,7 +61,7 @@
           {% pluralize %}
           You can also get advice from alternative help organisations for issues related to {{ category_name }}.
         {% endtrans %}
-        {{ _("You don't have to qualify for legal aid.") }}
+        {{ _('You don’t have to qualify for legal aid.') }}
       </p>
     {% endcall %}
   {% endif %}
