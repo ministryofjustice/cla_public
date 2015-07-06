@@ -6,7 +6,7 @@ from flask import session
 from werkzeug.datastructures import MultiDict
 
 from cla_public.app import create_app
-from cla_public.apps.contact.views import confirmation_email
+from cla_public.apps.contact.views import create_confirmation_email
 from cla_public.apps.contact.forms import ContactForm
 
 
@@ -43,6 +43,11 @@ def submit(**kwargs):
     data.update(kwargs)
     return ContactForm(MultiDict(data), csrf_enabled=False)
 
+def submit_and_store_in_session(**kwargs):
+    form = submit(**kwargs)
+    session.checker['ContactForm'] = form.data
+    session.store_checker_details()
+    return form
 
 class TestMail(unittest.TestCase):
 
@@ -64,8 +69,8 @@ class TestMail(unittest.TestCase):
 
     def test_confirmation_email(self):
         with self.client:
-            form = submit()
-            msg = confirmation_email(form.data)
+            form = submit_and_store_in_session()
+            msg = create_confirmation_email(form.data)
             msg = self.receive_email(msg)
 
             assert msg.subject == 'Your Civil Legal Advice reference number'
@@ -78,16 +83,18 @@ class TestMail(unittest.TestCase):
 
     def test_confirmation_email_not_safe(self):
         with self.client:
-            form = submit(**{'callback-safe_to_contact': 'NO_MESSAGE'})
-            msg = confirmation_email(form.data)
+            form = submit_and_store_in_session(**{
+                'callback-safe_to_contact': 'NO_MESSAGE'
+            })
+            msg = create_confirmation_email(form.data)
             msg = self.receive_email(msg)
 
             assert 'We will not leave a message' in msg.body
 
     def test_confirmation_email_no_callback(self):
         with self.client:
-            form = submit(contact_type='call')
-            msg = confirmation_email(form.data)
+            form = submit_and_store_in_session(contact_type='call')
+            msg = create_confirmation_email(form.data)
             msg = self.receive_email(msg)
 
             assert 'reference number is XX-XXXX-XXXX' in msg.body

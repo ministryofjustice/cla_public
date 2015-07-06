@@ -5,21 +5,8 @@
   color: white;
   text-align: center;
 
-  @media print {
-    background: none;
-    border: 2px solid $black;
-
-    .confirmation-ref-number {
-      font-size: 17pt;
-    }
-
-    .print-page-button {
-      display: none;
-    }
-  }
-
-  .print-page-button {
-    margin: 30px 0 0;
+  .confirmation-actions {
+    margin-top: 30px;
   }
 
   .flash-messages + & {
@@ -43,5 +30,37 @@
     border-top: 1px solid $black;
     background: none;
     padding-bottom: 0;
+  }
+}
+
+.confirmation-email-form {
+  padding: 20px 30px;
+  margin-top: -33px;
+  border: 3px solid $turquoise;
+
+  h3 {
+    margin: 10px 0;
+  }
+
+  fieldset {
+    margin-top: 10px;
+  }
+}
+
+@media print {
+  .main-content .confirmation {
+    background: none;
+    border: 3px solid $black;
+    margin-top: -20px;
+
+    .confirmation-ref-number {
+      font-size: 17pt;
+    }
+  }
+
+  .confirmation-actions,
+  .confirmation-email-form,
+  .flash-messages {
+    display: none;
   }
 }
