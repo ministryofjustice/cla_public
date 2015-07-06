@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% set title = _('These organisations may be able to help') %}
+{% set title = _('Legal aid doesn’t usually cover your type of problem') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block sidebar %}
@@ -24,13 +24,13 @@
 {% endblock %}
 
 {% block inner_content %}
-  <h1>{{ _('These organisations may be able to help') }}</h1>
+  <h1>{{ title }}</h1>
 
   <p>
-    {% trans %}Legal aid doesn’t usually cover your type of problem.
-      You may still get help and advice from the organisations listed below.
-      You don’t have to qualify for legal aid.{% endtrans %}
+    {% trans %}You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid.{% endtrans %}
   </p>
 
-  {% include '_help-orgs.html' %}
+  {% with hide_help_orgs_intro=True %}
+    {% include '_help-orgs.html' %}
+  {% endwith %}
 {% endblock %}
