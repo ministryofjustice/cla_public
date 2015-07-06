@@ -179,7 +179,8 @@ class YourBenefitsForm(BaseForm):
                       u'Incapacity Benefit, Contribution-based Jobseeker\'s '
                       u'Allowance'),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
-        no_text=lazy_pgettext(u'I’m not', u'No'))
+        no_text=lazy_pgettext(u'I’m not', u'No'),
+        validators=[IgnoreIf('benefits', FieldValueNotIn('other-benefit'))])
 
     total_other_benefit = PartnerMoneyIntervalField(
         label=_(u'If so, enter the total amount you receive'),
