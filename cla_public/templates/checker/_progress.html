@@ -18,25 +18,6 @@
   <h2>{{ _('Your progress') }}</h2>
 
   <ul class="progress-steps">
-    {% if session.checker.category_name %}
-      <li class="progress-step m-completed m-category">
-        {% if is_contact_page %}
-          <span class="step-name">
-        {% else %}
-          <a class="step-name" href="{{ url_for('scope.diagnosis') }}">
-        {% endif %}
-          {{ step_status(True) }}
-          <span class="step-name-title">{{ _('Your problem area') }}</span>
-          <div class="step-name-subtitle">
-            {{ session.checker.category_name }}
-          </div>
-        {% if is_contact_page %}
-          </span>
-        {% else %}
-          </a>
-        {% endif %}
-      </li>
-    {% endif %}
     {% for step in steps if step.name in ['problem', 'about']
       or (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed)
     %}
