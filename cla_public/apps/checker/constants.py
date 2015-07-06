@@ -21,7 +21,7 @@ CATEGORIES = [
         _(u'Bankruptcy, repossession, mortgage debt that is putting your home at risk')),
     (
         'violence',
-        _(u'Domestic violence'),
+        _(u'Domestic abuse'),
         _(u'Abuse at home, child abuse, harassment by an ex-partner, forced marriage')),
     (
         'discrimination',
@@ -145,7 +145,7 @@ CATEGORY_ID_MAPPING = {
 }
 
 ORGANISATION_CATEGORY_MAPPING = {
-    'Domestic violence': 'Family',
+    'Domestic abuse': 'Family',
     'Public law': 'Public',
     'Trouble with the police': 'Action against police',
 }
