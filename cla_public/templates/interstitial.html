@@ -6,6 +6,17 @@
 {% import "macros/element.html" as Element %}
 {% import "macros/help-orgs.html" as HelpOrganisations %}
 
+{% block sidebar %}
+  <aside class="sidebar">
+    <h2>{{ _('To qualify for legal aid:') }}</h2>
+    <ul>
+      <li>{{ _('your income (or combined income if you have a partner) shouldn’t be more than £2,657 a month before tax') }}</li>
+      <li>{{ _('your savings (or combined savings if you have a partner) shouldn’t be more than £8,000') }}</li>
+    </ul>
+    <p><small>{{ _('These limits can vary in certain circumstances – for example, if you need advice about domestic abuse.') }}</small></p>
+  </aside>
+{% endblock %}
+
 {% block inner_content %}
 
   <h1>{{ title }}</h1>
@@ -41,14 +52,6 @@
       {{ _('Check if you qualify financially') }}
     </a>
   </p>
-
-  {% call Element.alert(title='To qualify for legal aid:') %}
-    <ul>
-      <li>{{ _('your income (or combined income if you have a partner) shouldn’t be more than £2,657 a month before tax') }}</li>
-      <li>{{ _('your savings (or combined savings if you have a partner) shouldn’t be more than £8,000') }}</li>
-    </ul>
-    <p>{{ _('These limits can vary in certain circumstances – for example, if you need advice about domestic abuse.') }}</p>
-  {% endcall %}
 
   {% if organisations %}
     <hr>
