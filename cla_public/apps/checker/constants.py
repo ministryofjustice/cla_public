@@ -181,6 +181,7 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
 }
 
 END_SERVICE_FLASH_MESSAGE = _(
-    u'For your security, the information you have entered has not '
-    u'been stored on your computer or mobile device.'
+    u'The information you’ve entered has not been stored on your computer or '
+    u'mobile device. If you are at risk of harm, you should delete your '
+    u'browser history.'
 )
