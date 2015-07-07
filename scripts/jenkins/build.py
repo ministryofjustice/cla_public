@@ -102,7 +102,13 @@ def run_server(
         env,
         project_name='cla_backend',
         port_env_var='CLA_BACKEND_PORT',
-        project_dir='/srv/jenkins/workspace/CLA Backend - integration'):
+        project_dir=None):
+
+    if not project_dir:
+        if env == 'production':
+            project_dir = '/srv/jenkins/workspace/CLA Backend - production'
+        else:
+            project_dir = '/srv/jenkins/workspace/CLA Backend - integration'
 
     port = next(_port())
     os.environ[port_env_var] = '{0}'.format(port)
