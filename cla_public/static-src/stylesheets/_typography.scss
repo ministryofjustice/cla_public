@@ -46,3 +46,8 @@ h3 {
 ul li {
   margin: 5px 0;
 }
+
+small {
+  @include core-16;
+  display: inline-block;
+}
