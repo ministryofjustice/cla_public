@@ -22,19 +22,19 @@
   {% include "_phase-tag.html" %}
 
   <div class="inner-block {% if self.sidebar()|trim %}m-has-sidebar{% endif %}">
+    {% with flash_messages = get_flashed_messages() %}
+      {% if flash_messages %}
+        <div class="flash-messages">
+          <ul class="flash-messages-list">
+          {% for message in flash_messages %}
+            <li class="flash-messages-item">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endwith %}
+    
     <article class="main-content">
-      {% with flash_messages = get_flashed_messages() %}
-        {% if flash_messages %}
-          <div class="flash-messages">
-            <ul class="flash-messages-list">
-            {% for message in flash_messages %}
-              <li class="flash-messages-item">{{ message }}</li>
-            {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-      {% endwith %}
-
       {% block inner_content %}{% endblock %}
     </article>
 
