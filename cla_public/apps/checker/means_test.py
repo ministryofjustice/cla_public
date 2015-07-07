@@ -144,6 +144,20 @@ class YourBenefitsPayload(dict):
         if is_passported:
             payload = recursive_update(payload, IncomePayload.default)
             payload = recursive_update(payload, OutgoingsPayload.default)
+        else:
+            val = lambda field: form_data.get(field)
+            yes = lambda field: form_data[field] == YES
+
+            payload['you'] = {
+                'income': {
+                    'child_benefits':
+                        MoneyInterval(mi('child_benefit', val)),
+
+                    'benefits':
+                        MoneyInterval(mi('total_other_benefit', val))
+                        if yes('other_benefits') else MoneyInterval(0)
+                }
+            }
 
         self.update(payload)
 
@@ -278,40 +292,6 @@ class SavingsPayload(dict):
         })
 
 
-class TaxCreditsPayload(dict):
-
-    def __init__(self, form_data={}):
-        super(TaxCreditsPayload, self).__init__()
-
-        val = lambda field: form_data.get(field)
-        yes = lambda field: form_data[field] == YES
-
-        benefits = val('benefits')
-
-        payload = {
-            'on_nass_benefits':
-                nass(benefits),
-
-            'you': {
-                'income': {
-                    'child_benefits':
-                        MoneyInterval(mi('child_benefit', val)),
-
-                    'tax_credits':
-                        MoneyInterval(mi('child_tax_credit', val)),
-
-                    'benefits':
-                        MoneyInterval(mi('total_other_benefit' ,val))
-                        if yes('other_benefits') else MoneyInterval(0)
-                }}}
-
-        if benefits:
-            payload['notes'] = u'Other benefits:\n - {0}'.format(
-                '\n - '.join(benefits))
-
-        self.update(payload)
-
-
 class IncomePayload(dict):
 
     @classproperty
@@ -353,7 +333,8 @@ class IncomePayload(dict):
 
                         'tax_credits':
                             MoneyInterval(mi('working_tax_credit', val)) +
-                            MoneyInterval(mi('child_tax_credit', val)),
+                            (MoneyInterval(mi('child_tax_credit', val))
+                             if person == 'you' else MoneyInterval(0)),
 
                         'maintenance_received':
                             MoneyInterval(mi('maintenance', val)),
@@ -537,7 +518,6 @@ class MeansTest(dict):
             'YourBenefitsForm',
             'PropertiesForm',
             'SavingsForm',
-            'TaxCreditsForm',
             'IncomeForm',
             'OutgoingsForm'
         ]

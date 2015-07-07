@@ -349,7 +349,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
             del self.income_tax
             del self.national_insurance
             del self.working_tax_credit
-        if not (session.checker.has_children or session.checker.has_dependants):
+        if self.is_partner or not (session.checker.has_children or session.checker.has_dependants):
             del self.child_tax_credit
 
         self_employed_fields = [field for field in self if isinstance(field, SelfEmployedMoneyIntervalField)]
