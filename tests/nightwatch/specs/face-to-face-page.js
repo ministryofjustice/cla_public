@@ -13,7 +13,7 @@ module.exports = {
     client
       .waitForElementVisible('.legal-adviser-search', 5000)
       .assert.urlContains('/scope/refer/legal-adviser')
-      .assert.containsText('h1', 'You may be able to get advice from a legal adviser')
+      .assert.containsText('h1', 'A legal adviser may be able to help you')
       .checkFlashMessage()
     ;
   },
