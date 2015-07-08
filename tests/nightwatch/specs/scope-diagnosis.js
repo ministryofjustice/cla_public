@@ -74,7 +74,11 @@ module.exports = {
         scenario.paths.forEach(function(path) {
           client
             .startService()
-            .scopeDiagnosis(scenarioTypes[scenario.type].label, [category.name].concat(path))
+            .scopeDiagnosis(scenarioTypes[scenario.type].label, [category.name].concat(path));
+          if(scenario.type === 'inscope') {
+            client.interstitialPage();
+          }
+          client
             .waitForElementVisible(scenarioTypes[scenario.type].identifier, 5000,
               '  - Element ' + scenarioTypes[scenario.type].identifier + ' is present')
             .assert.urlContains(scenarioTypes[scenario.type].destination,

@@ -6,6 +6,7 @@ var eligibleJourney = function(client) {
   client
     .startService()
     .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+    .interstitialPage()
     .aboutSetAllToNo(true, {
       'on_benefits': 1
     })

@@ -1,11 +1,8 @@
-from mock import Mock
 import unittest
 
 from flask import session, Flask
-from jinja2 import TemplateNotFound
 from wtforms import Form, StringField
 from wtforms.validators import InputRequired
-from cla_public import app
 from cla_public.apps.checker.session import CheckerSessionInterface, \
     CustomJSONEncoder
 
@@ -36,6 +33,8 @@ class TestSessionBackedFormView(unittest.TestCase):
         app.json_encoder = CustomJSONEncoder
         app.config['SECRET_KEY'] = 'test'
         app.add_url_rule('/', view_func=FormView.as_view('form'))
+        app.add_url_rule('/session-expired', endpoint='base.session_expired',
+                         view_func=lambda request: 'Session expired')
         self.client = app.test_client()
         with self.client.session_transaction() as sess:
             sess.checker['foo'] = 'bar'
@@ -117,6 +116,8 @@ class TestFormWizard(unittest.TestCase):
         app.json_encoder = CustomJSONEncoder
         app.config['SECRET_KEY'] = 'test'
         app.add_url_rule('/<step>', view_func=TestWizard.as_view('wizard'))
+        app.add_url_rule('/session-expired', endpoint='base.session_expired',
+                         view_func=lambda request: 'Session expired')
         self.client = app.test_client()
         with self.client.session_transaction() as sess:
             sess.checker['foo'] = 'bar'
