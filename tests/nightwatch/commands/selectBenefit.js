@@ -12,7 +12,7 @@ exports.command = function(benefitFieldName, shouldSubmitForm, callback) {
       .assert.urlContains('/benefits',
         '  - Benefits page URL is correct')
       .click('input[name="benefits"][value="' + benefitFieldName +'"]', function() {
-        console.log('     • Options selected ‘' + benefitFieldName + '’');
+        console.log('     • Option clicked ‘' + benefitFieldName + '’');
       })
       .conditionalFormSubmit(shouldSubmitForm)
     ;

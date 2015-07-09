@@ -15,6 +15,10 @@ module.exports = {
         'Progress step is You and your partner’s benefits page')
       .selectBenefit('other-benefit', true)
 
+      .assert.containsText('.progress-step.m-current', 'You and your partner’s additional benefits',
+        'Progress step is You and your partner’s additional benefits')
+      .fillInAdditionalBenefits(true)
+
       .assert.containsText('.progress-step.m-current', 'You and your partner’s property',
         'Progress step is You and your partner’s property')
       .fillInProperty(true)
@@ -22,10 +26,6 @@ module.exports = {
       .assert.containsText('.progress-step.m-current', 'You and your partner’s savings',
         'Progress step is You and your partner’s savings')
       .fillInSavings(true)
-
-      .assert.containsText('.progress-step.m-current', 'You and your partner’s benefits and tax credits',
-        'Progress step is You and your partner’s benefits and tax credits')
-      .fillInBenefitsAndTaxCredits(true)
 
       .assert.containsText('.progress-step.m-current', 'You and your partner’s income and tax',
         'Progress step is You and your partner’s income and tax')

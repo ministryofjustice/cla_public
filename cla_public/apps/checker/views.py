@@ -239,6 +239,9 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         if step.name == 'benefits':
             return not session.checker.is_on_benefits
 
+        if step.name == 'additional-benefits':
+            return not session.checker.is_on_other_benefits
+
         if step.name == 'property':
             return not session.checker.owns_property
 

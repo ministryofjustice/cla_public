@@ -73,12 +73,12 @@ class TestReviewPage(unittest.TestCase):
                 'benefits': benefits,
                 'is_completed': True}
 
-    def set_benefits_tax_credits_answers(self, **answers):
+    def set_additional_benefits_answers(self, **answers):
         answers.update({
             'is_completed': True
         })
         with self.client.session_transaction() as session:
-            session.checker['TaxCreditsForm'] = answers
+            session.checker['AdditionalBenefitsForm'] = answers
 
     def test_review_page_about_you(self):
         self.set_problem('debt')
@@ -96,7 +96,7 @@ class TestReviewPage(unittest.TestCase):
         self.set_problem('debt')
         self.set_about_you_answers(on_benefits=YES)
         self.set_benefits(passported=False)
-        self.set_benefits_tax_credits_answers(other_benefits=NO)
+        self.set_additional_benefits_answers(other_benefits=NO)
         self.assert_answer_not_shown('total_other_benefit')
 
     def test_children_not_shown_after_deselected(self):

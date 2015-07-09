@@ -130,13 +130,11 @@ class CheckerSessionObject(dict):
                passported(self.field('YourBenefitsForm', 'benefits', []))
 
     @property
-    def has_tax_credits(self):
-        has_children = self.is_yes('AboutYouForm', 'have_children')
-        is_carer = self.is_yes('AboutYouForm', 'have_dependants')
+    def is_on_other_benefits(self):
         benefits = set(self.field('YourBenefitsForm', 'benefits', []))
-        other_benefits = self.is_on_benefits and \
-                         bool(benefits.difference(PASSPORTED_BENEFITS))
-        return has_children or is_carer or other_benefits
+        other_benefits = benefits.difference(PASSPORTED_BENEFITS) \
+            .difference({'child_benefit'})
+        return self.is_on_benefits and bool(other_benefits)
 
     @property
     def has_children(self):
@@ -145,12 +143,6 @@ class CheckerSessionObject(dict):
     @property
     def has_dependants(self):
         return self.is_yes('AboutYouForm', 'have_dependants')
-
-    @property
-    def children_or_tax_credits(self):
-        return any([self.has_tax_credits,
-                    self.has_children,
-                    self.has_dependants])
 
     @property
     def has_partner(self):

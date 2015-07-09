@@ -94,9 +94,35 @@ class AboutYouFormMixin(object):
 class BenefitsFormMixin(object):
     """BenefitsForm"""
 
+    def yourbenefitsform_child_benefit(self):
+        return money_interval(0, 'per_week')
+
     def yourbenefitsform_benefits(self):
         return [BENEFITS_MAPPING[x.strip()] for x in self._benefit.split(';')
                 if x.strip() in BENEFITS_MAPPING]
+
+
+class AdditionalBenefitsFormMixin(object):
+    """AdditionalBenefitsForm"""
+
+    def additionalbenefitsform_benefits(self):
+        return []
+
+    def additionalbenefitsform_other_benefits(self):
+        return NO
+
+    def additionalbenefitsform_total_other_benefit(self):
+        return money_interval(0, 'per_week')
+
+    def additionalbenefitsform_data(self):
+        d = {
+            'benefits': self.additionalbenefitsform_benefits(),
+            'other_benefits': self.additionalbenefitsform_other_benefits()
+        }
+        d.update(flatten_dict(
+            'total_other_benefit', self.additionalbenefitsform_total_other_benefit()))
+
+        return d
 
 
 class PropertiesFormMixin(object):
@@ -162,40 +188,6 @@ class SavingsFormMixin(object):
         return self.get_total_if_partner(self._valuable, self._pvaluable)
 
 
-class TaxCreditsFormMixin(object):
-    """TaxCreditsForm"""
-
-    def taxcreditsform_child_benefit(self):
-        return money_interval(0, 'per_week')
-
-    def taxcreditsform_child_tax_credit(self):
-        return money_interval(0, 'per_week')
-
-    def taxcreditsform_benefits(self):
-        return []
-
-    def taxcreditsform_other_benefits(self):
-        return NO
-
-    def taxcreditsform_total_other_benefit(self):
-        return money_interval(0, 'per_week')
-
-    def taxcreditsform_data(self):
-        d = {
-            'benefits': self.taxcreditsform_benefits(),
-            'other_benefits': self.taxcreditsform_other_benefits()
-        }
-
-        d.update(flatten_dict(
-            'child_benefit', self.taxcreditsform_child_benefit()))
-        d.update(flatten_dict(
-            'child_tax_credit', self.taxcreditsform_child_tax_credit()))
-        d.update(flatten_dict(
-            'total_other_benefit', self.taxcreditsform_total_other_benefit()))
-
-        return d
-
-
 class IncomeFormMixin(object):
     """IncomeFormMixin"""
 
@@ -204,6 +196,7 @@ class IncomeFormMixin(object):
             'earnings': money_interval(self._earnings_1 or 0),
             'income_tax': money_interval(self._tax or 0),
             'national_insurance': money_interval(self._ni or 0),
+            'child_tax_credit': money_interval(0, 'per_week'),
             'working_tax_credit': money_interval(0),
             'maintenance': money_interval(0),
             'pension': money_interval(0),
@@ -269,9 +262,9 @@ class OutgoingsFormMixin(object):
 class FormDataConverter(
         AboutYouFormMixin,
         BenefitsFormMixin,
+        AdditionalBenefitsFormMixin,
         PropertiesFormMixin,
         SavingsFormMixin,
-        TaxCreditsFormMixin,
         IncomeFormMixin,
         OutgoingsFormMixin):
     """Process data row from means test row and return values for each form"""
@@ -289,7 +282,11 @@ class FormDataConverter(
         needed = lambda field: field not in NON_FORM_FIELDS
         fields = filter(needed, form_class()._fields.keys())
         for field in fields:
-            ret[field] = self.get_value(form_class, field)
+            value = self.get_value(form_class, field)
+            if isinstance(value, dict):
+                ret.update(flatten_dict(field, value))
+            else:
+                ret[field] = value
         return ret
 
     def yes_or_no(self, spreadsheet_value, extra_cond=True):

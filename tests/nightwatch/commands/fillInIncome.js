@@ -7,6 +7,7 @@ var ALL_INPUTS = {
   earnings: { per_month: 0 },
   income_tax: { per_month: 0 },
   national_insurance: { per_month: 0 },
+  child_tax_credit: { per_week: 0 },
   working_tax_credit: { per_month: 0 },
   maintenance: { per_month: 0 },
   pension: { per_month: 0 },
