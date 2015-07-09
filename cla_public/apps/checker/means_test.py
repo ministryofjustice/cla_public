@@ -4,7 +4,6 @@
 from collections import Mapping
 from copy import deepcopy
 import logging
-from pprint import pformat
 import sys
 
 from flask import current_app, session
@@ -146,18 +145,42 @@ class YourBenefitsPayload(dict):
             payload = recursive_update(payload, OutgoingsPayload.default)
         else:
             val = lambda field: form_data.get(field)
-            yes = lambda field: form_data[field] == YES
 
             payload['you'] = {
                 'income': {
                     'child_benefits':
                         MoneyInterval(mi('child_benefit', val)),
-
-                    'benefits':
-                        MoneyInterval(mi('total_other_benefit', val))
-                        if yes('other_benefits') else MoneyInterval(0)
                 }
             }
+
+        self.update(payload)
+
+
+class AdditionalBenefitsPayload(dict):
+
+    def __init__(self, form_data={}):
+        super(AdditionalBenefitsPayload, self).__init__()
+
+        val = lambda field: form_data.get(field)
+        yes = lambda field: form_data[field] == YES
+
+        benefits = val('benefits')
+
+        payload = {
+            'on_nass_benefits': nass(benefits),  # always False
+
+            'you': {
+                'income': {
+                    'benefits':
+                        MoneyInterval(mi('total_other_benefit', val))
+                        if yes('other_benefits') else MoneyInterval(0),
+                }
+            }
+        }
+
+        if benefits:
+            payload['notes'] = u'Other benefits:\n - {0}'.format(
+                '\n - '.join(benefits))
 
         self.update(payload)
 
@@ -516,6 +539,7 @@ class MeansTest(dict):
         forms = [
             'AboutYouForm',
             'YourBenefitsForm',
+            'AdditionalBenefitsForm',
             'PropertiesForm',
             'SavingsForm',
             'IncomeForm',

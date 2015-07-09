@@ -171,26 +171,6 @@ class YourBenefitsForm(BaseForm):
             IgnoreIf('benefits', FieldValueNotIn('child_benefit')),
             MoneyIntervalAmountRequired()])
 
-    other_benefits = PartnerYesNoField(
-        label=_(u'Do you receive any benefits NOT listed below?'),
-        partner_label=_(u'Do you or your partner receive any benefits NOT '
-                        u'listed below?'),
-        description=_(u'For example, National Asylum Support Service Benefit, '
-                      u'Incapacity Benefit, Contribution-based Jobseeker\'s '
-                      u'Allowance'),
-        yes_text=lazy_pgettext(u'I am', u'Yes'),
-        no_text=lazy_pgettext(u'I’m not', u'No'),
-        validators=[IgnoreIf('benefits', FieldValueNotIn('other-benefit'))])
-
-    total_other_benefit = PartnerMoneyIntervalField(
-        label=_(u'If so, enter the total amount you receive'),
-        partner_label=_(u'If so, enter the total amount you and your partner receive'),
-        choices=money_intervals_except('per_month'),
-        validators=[
-            IgnoreIf('benefits', FieldValueNotIn('other-benefit')),
-            IgnoreIf('other_benefits', FieldValue(NO)),
-            MoneyIntervalAmountRequired()])
-
     @classmethod
     def get_non_income_benefits(cls):
         return sorted([unicode(benefit[1]) for benefit in NON_INCOME_BENEFITS])
@@ -208,6 +188,36 @@ class YourBenefitsForm(BaseForm):
         self.benefits.choices = sorted(self.benefits.choices[:-1],
                                        key=lambda benefit: unicode(benefit[1])) + \
             self.benefits.choices[-1:]
+
+
+class AdditionalBenefitsForm(BaseForm):
+    @classproperty
+    def title(self):
+        if session and session.checker.has_partner:
+            return _(u'You and your partner’s additional benefits')
+        return _(u'Your additional benefits')
+
+    benefits = PartnerMultiCheckboxField(
+        label=_(u'Do you get any of these benefits?'),
+        partner_label=_(u'Do you or your partner get any of these benefits?'),
+        description=_(u"These benefits don’t count as income. Please tick "
+                      u"the ones you receive."),
+        choices=NON_INCOME_BENEFITS)
+    other_benefits = PartnerYesNoField(
+        label=_(u'Do you receive any other benefits not listed above? '),
+        partner_label=_(u'Do you or your partner receive any other benefits '
+                        u'not listed above? '),
+        description=_(u'For example, National Asylum Support Service Benefit, '
+                      u'Incapacity Benefit, Contribution-based Jobseeker\'s '
+                      u'Allowance'),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
+    total_other_benefit = MoneyIntervalField(
+        _(u'If Yes, total amount of benefits not listed above'),
+        choices=money_intervals_except('per_month'),
+        validators=[
+            IgnoreIf('other_benefits', FieldValue(NO)),
+            MoneyIntervalAmountRequired()])
 
 
 class PropertyForm(BaseNoCsrfForm):

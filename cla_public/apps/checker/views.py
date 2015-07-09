@@ -17,7 +17,7 @@ from cla_public.apps.checker.constants import ORGANISATION_CATEGORY_MAPPING, \
     NO_CALLBACK_CATEGORIES, LAALAA_PROVIDER_CATEGORIES_MAP, CATEGORIES
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     PropertiesForm, SavingsForm, OutgoingsForm, IncomeForm, \
-    ReviewForm
+    ReviewForm, AdditionalBenefitsForm
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
@@ -187,6 +187,8 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     steps = [
         ('about', CheckerStep(AboutYouForm, 'checker/about.html')),
         ('benefits', CheckerStep(YourBenefitsForm, 'checker/benefits.html')),
+        ('additional-benefits', CheckerStep(
+            AdditionalBenefitsForm, 'checker/additional-benefits.html')),
         ('property', CheckerStep(PropertiesForm, 'checker/property.html')),
         ('savings', CheckerStep(SavingsForm, 'checker/savings.html')),
         ('income', CheckerStep(IncomeForm, 'checker/income.html')),
