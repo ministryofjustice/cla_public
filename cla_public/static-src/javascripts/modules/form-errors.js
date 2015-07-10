@@ -22,7 +22,8 @@
 
       // Return if button has a name, which is attached as form attribute on click
       // (assuming secondary buttons)
-      if(this.$form.attr('submit-name')) {
+      if(this.$form.attr('submit-name') ||
+         this.$form.attr('method') && this.$form.attr('method').toLowerCase() === 'get') {
         return;
       }
 
