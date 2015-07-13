@@ -34,7 +34,6 @@
   as_label=False,
   class_='',
   has_label=True,
-  has_info=True,
   use_row=True,
   persist_values=False
 ) %}
@@ -74,7 +73,7 @@
       {{ field_errors(field.errors) }}
     {% endif %}
 
-    {% if field and has_info and (field.description or field.help_text) %}
+    {% if field and (field.description or field.help_text) %}
       <div class="form-row field-help">
         {%- if field.description %}
           <span class="field-description">
