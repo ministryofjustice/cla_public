@@ -104,9 +104,11 @@ module.exports = {
         }
 
         if(typeof v === 'number') {
-          client.setValue(selector, v, function() {
-            console.log('     • %s: %s is £%d', type, k, v);
-          });
+          client
+            .clearValue(selector)
+            .setValue(selector, v, function() {
+              console.log('     • %s: %s is £%d', type, k, v);
+            });
         } else {
           selector += util.format(' [value="%s"]', v);
           client.click(selector, function() {
