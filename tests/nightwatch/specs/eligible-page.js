@@ -22,7 +22,7 @@ module.exports = {
       .waitForElementVisible('input[name="benefits"]', 5000)
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
-      .assert.containsText('body', 'Are you on any of these benefits?')
+      .assert.containsText('body', 'Which benefits do you receive?')
       .click('input[value="income_support"]')
       .submitForm('form')
     ;

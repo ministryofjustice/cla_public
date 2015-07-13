@@ -155,11 +155,6 @@ exports.EMPLOYMENT_QUESTIONS = {
   ]
 };
 
-exports.CHILD_BENEFIT_QUESTIONS = [
-  'child_benefit',
-  'child_tax_credit'
-];
-
 exports.OUTGOINGS_QUESTIONS = [
   'rent',
   'maintenance',
@@ -243,9 +238,9 @@ exports.FORM_IDENTIFIERS = {
   'problem': 'input[name="categories"]',
   'about': 'input[name="have_partner"]',
   'benefits': 'input[name="benefits"][value="other-benefit"]',
+  'additional-benefits': 'input[name="other_benefits"]',
   'property': 'input[name="properties-0-is_main_home"]',
   'savings': 'input[name="savings"]',
-  'benefits-tax-credits': 'input[name="other_benefits"]',
   'income': 'input[name="your_income-other_income-per_interval_value"]',
   'outgoings': 'input[name="income_contribution"]'
 };

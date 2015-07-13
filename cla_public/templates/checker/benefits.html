@@ -1,26 +1,36 @@
 {% extends "checker/base.html" %}
 
+{% macro option_list_callback(field, option) %}
+  {% if option.data == 'child_benefit' %}
+
+    {{ Form.money_interval_fieldset(form.child_benefit, is_subfield=True, controlled_by=option, control_value=option.data) }}
+
+  {% endif %}
+{% endmacro %}
+
 {% block inner_content %}
   <h1>{{ title }}</h1>
 
   <form method="POST">
     {{ form.csrf_token }}
+    {{ Form.handle_errors(form) }}
 
-    {% if form.errors %}
-      {% call Element.alert('error', icon='cross') %}
-        {% if form.errors.timeout %}
-        <p>{{ form.errors.timeout }}</p>
-        {% else %}
-        <p>{{ _('Please select at least one option.') }}</p>
-        {% endif %}
-      {% endcall %}
-    {% endif %}
-
-    {{ Form.option_list_fieldset(form.benefits, separated_options=['other-benefit']) }}
+    {{ Form.option_list_fieldset(form.benefits, separated_options=['other-benefit'], callback=option_list_callback) }}
 
     {{ Element.get_in_touch_alert() }}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
+{% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+
+  <script>
+    window.CONDITIONAL_LABELS = {
+      'child_benefit': '{{ _('Enter the total amount you receive') }}',
+      'total_other_benefit': '{{ _('Enter the total amount you receive') }}'
+    };
+ </script>
 {% endblock %}

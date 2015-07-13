@@ -16,12 +16,12 @@ from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import ORGANISATION_CATEGORY_MAPPING, \
     NO_CALLBACK_CATEGORIES, LAALAA_PROVIDER_CATEGORIES_MAP, CATEGORIES
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, IncomeForm, \
-    ReviewForm
+    PropertiesForm, SavingsForm, OutgoingsForm, IncomeForm, \
+    ReviewForm, AdditionalBenefitsForm
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
-from cla_public.apps.checker import filters # Used in templates
+from cla_public.apps.checker import filters  # Used in templates
 from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession, ValidFormOnOptions, HasFormMixin
@@ -187,10 +187,10 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     steps = [
         ('about', CheckerStep(AboutYouForm, 'checker/about.html')),
         ('benefits', CheckerStep(YourBenefitsForm, 'checker/benefits.html')),
+        ('additional-benefits', CheckerStep(
+            AdditionalBenefitsForm, 'checker/additional-benefits.html')),
         ('property', CheckerStep(PropertiesForm, 'checker/property.html')),
         ('savings', CheckerStep(SavingsForm, 'checker/savings.html')),
-        ('benefits-tax-credits', CheckerStep(
-            TaxCreditsForm, 'checker/benefits-tax-credits.html')),
         ('income', CheckerStep(IncomeForm, 'checker/income.html')),
         ('outgoings', CheckerStep(OutgoingsForm, 'checker/outgoings.html')),
         ('review', ReviewStep(ReviewForm, 'checker/review.html'))
@@ -239,14 +239,14 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         if step.name == 'benefits':
             return not session.checker.is_on_benefits
 
+        if step.name == 'additional-benefits':
+            return not session.checker.is_on_other_benefits
+
         if step.name == 'property':
             return not session.checker.owns_property
 
         if step.name == 'savings':
             return not session.checker.has_savings_or_valuables
-
-        if step.name == 'benefits-tax-credits':
-            return not session.checker.children_or_tax_credits
 
         if session.checker.is_on_passported_benefits \
                 and step.name not in ('about', 'benefits'):

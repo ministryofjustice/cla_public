@@ -26,7 +26,8 @@ from cla_public.libs.honeypot import Honeypot
 from cla_public.apps.checker.utils import nass, passported, \
     money_intervals_except, money_intervals
 from cla_public.apps.checker.validators import AtLeastOne, IgnoreIf, \
-    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone, ZeroOrMoreThan
+    FieldValue, MoneyIntervalAmountRequired, FieldValueOrNone, ZeroOrMoreThan, \
+    FieldValueIn, FieldValueNotIn
 from cla_public.libs.utils import recursive_dict_update, classproperty
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 
@@ -158,10 +159,65 @@ class YourBenefitsForm(BaseForm):
         return _(u'Your benefits')
 
     benefits = PartnerMultiCheckboxField(
-        label=_(u'Are you on any of these benefits?'),
-        partner_label=_(u'Are you or your partner on any of these benefits?'),
+        label=_(u'Which benefits do you receive?'),
+        partner_label=_(u'Which benefits do you and your partner receive?'),
         choices=BENEFITS_CHOICES,
         validators=[AtLeastOne()])
+
+    child_benefit = MoneyIntervalField(
+        label=_(u'If yes, enter the total amount you get for all your children'),
+        choices=money_intervals('', 'per_week', 'per_4week'),
+        validators=[
+            IgnoreIf('benefits', FieldValueNotIn('child_benefit')),
+            MoneyIntervalAmountRequired()])
+
+    @classmethod
+    def get_non_income_benefits(cls):
+        return sorted([unicode(benefit[1]) for benefit in NON_INCOME_BENEFITS])
+
+    def __init__(self, *args, **kwargs):
+        super(YourBenefitsForm, self).__init__(*args, **kwargs)
+
+        # remove child benefit option if has no children/dependents
+        if not (session.checker.has_children or session.checker.has_dependants):
+            self.benefits.choices = filter(lambda benefit: benefit[0] != 'child_benefit',
+                                           self.benefits.choices)
+            del self.child_benefit
+
+        # sort benefits by label
+        self.benefits.choices = sorted(self.benefits.choices[:-1],
+                                       key=lambda benefit: unicode(benefit[1])) + \
+            self.benefits.choices[-1:]
+
+
+class AdditionalBenefitsForm(BaseForm):
+    @classproperty
+    def title(self):
+        if session and session.checker.has_partner:
+            return _(u'You and your partner’s additional benefits')
+        return _(u'Your additional benefits')
+
+    benefits = PartnerMultiCheckboxField(
+        label=_(u'Do you get any of these benefits?'),
+        partner_label=_(u'Do you or your partner get any of these benefits?'),
+        description=_(u"These benefits don’t count as income. Please tick "
+                      u"the ones you receive."),
+        choices=NON_INCOME_BENEFITS)
+    other_benefits = PartnerYesNoField(
+        label=_(u'Do you receive any other benefits not listed above? '),
+        partner_label=_(u'Do you or your partner receive any other benefits '
+                        u'not listed above? '),
+        description=_(u'For example, National Asylum Support Service Benefit, '
+                      u'Incapacity Benefit, Contribution-based Jobseeker\'s '
+                      u'Allowance'),
+        yes_text=lazy_pgettext(u'I am', u'Yes'),
+        no_text=lazy_pgettext(u'I’m not', u'No'))
+    total_other_benefit = MoneyIntervalField(
+        _(u'If Yes, total amount of benefits not listed above'),
+        choices=money_intervals_except('per_month'),
+        validators=[
+            IgnoreIf('other_benefits', FieldValue(NO)),
+            MoneyIntervalAmountRequired()])
 
 
 class PropertyForm(BaseNoCsrfForm):
@@ -292,47 +348,6 @@ class SavingsForm(BaseForm):
             del self.investments
 
 
-class TaxCreditsForm(BaseForm):
-
-    @classproperty
-    def title(self):
-        if session and session.checker.has_partner:
-            return _(u'You and your partner’s benefits and tax credits')
-        return _(u'Your benefits and tax credits')
-
-    child_benefit = MoneyIntervalField(
-        _(u'Child Benefit'),
-        description=_(u"The total amount you get for all your children"),
-        choices=money_intervals('', 'per_week', 'per_4week'),
-        validators=[MoneyIntervalAmountRequired()])
-    child_tax_credit = MoneyIntervalField(
-        _(u'Child Tax Credit'),
-        description=_(u"The total amount you get for all your children"),
-        choices=money_intervals_except('per_month'),
-        validators=[MoneyIntervalAmountRequired()])
-    benefits = PartnerMultiCheckboxField(
-        label=_(u'Do you get any of these benefits?'),
-        partner_label=_(u'Do you or your partner get any of these benefits?'),
-        description=_(u"These benefits don’t count as income. Please tick "
-                      u"the ones you receive."),
-        choices=NON_INCOME_BENEFITS)
-    other_benefits = PartnerYesNoField(
-        label=_(u'Do you receive any other benefits not listed above? '),
-        partner_label=_(u'Do you or your partner receive any other benefits '
-                        u'not listed above? '),
-        description=_(u'For example, National Asylum Support Service Benefit, '
-                      u'Incapacity Benefit, Contribution-based Jobseeker\'s '
-                      u'Allowance'),
-        yes_text=lazy_pgettext(u'I am', u'Yes'),
-        no_text=lazy_pgettext(u'I’m not', u'No'))
-    total_other_benefit = MoneyIntervalField(
-        _(u'If Yes, total amount of benefits not listed above'),
-        choices=money_intervals_except('per_month'),
-        validators=[
-            IgnoreIf('other_benefits', FieldValue(NO)),
-            MoneyIntervalAmountRequired()])
-
-
 class IncomeFieldForm(BaseNoCsrfForm):
 
     def __init__(self, *args, **kwargs):
@@ -344,6 +359,8 @@ class IncomeFieldForm(BaseNoCsrfForm):
             del self.income_tax
             del self.national_insurance
             del self.working_tax_credit
+        if self.is_partner or not (session.checker.has_children or session.checker.has_dependants):
+            del self.child_tax_credit
 
         self_employed_fields = [field for field in self if isinstance(field, SelfEmployedMoneyIntervalField)]
         for field in self_employed_fields:
@@ -375,6 +392,11 @@ class IncomeFieldForm(BaseNoCsrfForm):
     working_tax_credit = MoneyIntervalField(
         _(u'Working Tax Credit'),
         description=_(u"Extra money for people who work and have a low income"),
+        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
+    child_tax_credit = MoneyIntervalField(
+        _(u'Child Tax Credit'),
+        description=_(u"The total amount you get for all your children"),
+        choices=money_intervals_except('per_month'),
         validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     maintenance = MoneyIntervalField(
         _(u'Maintenance received'),
