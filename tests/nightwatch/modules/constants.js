@@ -8,13 +8,13 @@ exports.CATEGORIES_OF_LAW = [
     value: 'clinneg',
     name: 'Clinical negligence',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser'
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'commcare',
     name: 'Community care',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser'
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'debt',
@@ -50,31 +50,31 @@ exports.CATEGORIES_OF_LAW = [
     value: 'immigration',
     name: 'Immigration and asylum',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser',
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'mentalhealth',
     name: 'Mental health',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser',
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'pi',
     name: 'Personal injury',
     covered: false,
-    headline: 'Legal aid is not usually available for advice about personal injury',
+    headline: 'Legal aid is not usually available for advice about personal injury'
   },
   {
     value: 'publiclaw',
     name: 'Public law',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser',
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'aap',
     name: 'Trouble with the police',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser',
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'violence',
