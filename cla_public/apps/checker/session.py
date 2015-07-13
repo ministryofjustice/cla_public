@@ -253,11 +253,12 @@ class CheckerSession(SecureCookieSession, SessionMixin):
             'category': self.checker.category,
             'eligibility': self.checker.eligibility,
             'adaptations': [k for k, v in \
-                self.checker['ContactForm']['adaptations'].items() if v]
+                self.checker.get('ContactForm', {})
+                    .get('adaptations', {}).items() if v]
         }
         if self.stored['callback_requested']:
-            self.stored['safe_to_contact'] = self.checker['ContactForm'] \
-                .get(self.checker.contact_type) \
+            self.stored['safe_to_contact'] = self.checker.get(
+                'ContactForm', {}).get(self.checker.contact_type, {})\
                 .get('safe_to_contact') == CONTACT_SAFETY[0][0]
 
     def store(self, values_dict):
