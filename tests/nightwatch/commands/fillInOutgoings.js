@@ -30,7 +30,11 @@ exports.command = function(inputs, shouldSubmitForm, callback) {
   this.perform(function() {
     log.command('Processing Outgoings page…');
 
-    client.assert.urlContains('/outgoings', '  - Outgoings page URL is correct');
+    client
+      .waitForElementPresent('body.js-enabled', 3000, function() {
+        console.log('     - Waiting for page to fully load');
+      })
+      .assert.urlContains('/outgoings', '  - Outgoings page URL is correct');
     common.fillInMoneyForm(client, inputs, 'Applicant');
     client.conditionalFormSubmit(shouldSubmitForm);
   });

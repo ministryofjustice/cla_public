@@ -36,7 +36,11 @@ exports.command = function(yourIncome, partnerIncome, shouldSubmitForm, callback
   this.perform(function() {
     log.command('Processing Income page…');
 
-    client.assert.urlContains('/income', '  - Income page URL is correct');
+    client
+      .waitForElementPresent('body.js-enabled', 3000, function() {
+        console.log('     - Waiting for page to fully load');
+      })
+      .assert.urlContains('/income', '  - Income page URL is correct');
 
     common.fillInMoneyForm(client, yourInputs, 'Applicant');
 
