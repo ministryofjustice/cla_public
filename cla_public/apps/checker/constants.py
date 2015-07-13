@@ -21,7 +21,7 @@ CATEGORIES = [
         _(u'Bankruptcy, repossession, mortgage debt that is putting your home at risk')),
     (
         'violence',
-        _(u'Domestic violence'),
+        _(u'Domestic abuse'),
         _(u'Abuse at home, child abuse, harassment by an ex-partner, forced marriage')),
     (
         'discrimination',
@@ -84,15 +84,17 @@ RESULT_OPTIONS = [
 
 "Benefits"
 BENEFITS_CHOICES = [
+    ('child_benefit', _(u'Child Benefit')),
+    ('pension_credit', _(u'Guarantee Credit')),
     ('income_support', _(u'Income Support')),
     ('job_seekers_allowance', _(u'Income-based Jobseeker’s Allowance')),
-    ('pension_credit', _(u'Guarantee Credit')),
-    ('universal_credit', _(u'Universal Credit')),
     ('employment_support', _(u'Income-related Employment and Support Allowance')),
-    ('other-benefit', _(u'A benefit not listed above')),
+    ('universal_credit', _(u'Universal Credit')),
+    ('other-benefit', _(u'Any other benefits')),
 ]
 
-PASSPORTED_BENEFITS = [benefit for benefit, label in BENEFITS_CHOICES[0:-1]]
+PASSPORTED_BENEFITS = [benefit for benefit, label in BENEFITS_CHOICES
+                       if benefit not in ['child_benefit', 'other-benefit']]
 NASS_BENEFITS = ('asylum-support',)
 
 MONEY_INTERVALS = [
@@ -145,7 +147,7 @@ CATEGORY_ID_MAPPING = {
 }
 
 ORGANISATION_CATEGORY_MAPPING = {
-    'Domestic violence': 'Family',
+    'Domestic abuse': 'Family',
     'Public law': 'Public',
     'Trouble with the police': 'Action against police',
 }

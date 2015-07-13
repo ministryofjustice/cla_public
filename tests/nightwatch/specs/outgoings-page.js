@@ -18,6 +18,10 @@ module.exports = {
     client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
   },
 
+  'Interstitial page': function(client) {
+    client.interstitialPage();
+  },
+
   'About you': function(client) {
     client.aboutSetAllToNo(true);
   },
@@ -51,15 +55,11 @@ module.exports = {
       .setYesNoFields('have_children', 1)
       .setValue('input[name="num_children"]', 1)
       .submitForm('form')
-      .waitForElementVisible('input[name="other_benefits"]', 5000)
-      .setYesNoFields('other_benefits', 0)
-      .setValue('input[name="child_benefit-per_interval_value"]', 0)
-      .setValue('input[name="child_tax_credit-per_interval_value"]', 0)
-      .submitForm('form')
       .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
       .clearValue('input[name="your_income-maintenance-per_interval_value"]')
       .clearValue('input[name="your_income-pension-per_interval_value"]')
       .clearValue('input[name="your_income-other_income-per_interval_value"]')
+      .setValue('input[name="your_income-child_tax_credit-per_interval_value"]', 0)
       .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
       .setValue('input[name="your_income-pension-per_interval_value"]', 0)
       .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
@@ -79,13 +79,9 @@ module.exports = {
       .back()
       .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
       .back()
-      .waitForElementVisible('input[name="other_benefits"]', 5000)
-      .back()
       .waitForElementPresent('input[name="have_partner"]', 5000)
       .setYesNoFields('have_partner', 1)
       .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
-      .submitForm('form')
-      .waitForElementPresent('input[name="other_benefits"]', 5000)
       .submitForm('form')
       .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
 

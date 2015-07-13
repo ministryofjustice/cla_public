@@ -1,4 +1,6 @@
 .progress {
+  font-size: .9em;
+  
   @mixin add_pointer($border-colour: $grey-3, $hover-colour: $grey-4, $clear-last: true) {
     border-top: 1px solid $border-colour;
     position: relative;
@@ -123,18 +125,6 @@
           z-index: 1;
         }
       }
-    }
-
-    &.m-category .step-name {
-      border: 1px solid $grey-3;
-      margin: 2px 0;
-      padding-top: 12px;
-      padding-bottom: 12px;
-      background: white;
-    }
-
-    &.m-category a.step-name:hover {
-      background: $grey-4;
     }
   }
 

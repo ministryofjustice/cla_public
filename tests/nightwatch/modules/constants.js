@@ -8,13 +8,13 @@ exports.CATEGORIES_OF_LAW = [
     value: 'clinneg',
     name: 'Clinical negligence',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser'
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'commcare',
     name: 'Community care',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser'
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'debt',
@@ -50,31 +50,31 @@ exports.CATEGORIES_OF_LAW = [
     value: 'immigration',
     name: 'Immigration and asylum',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser',
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'mentalhealth',
     name: 'Mental health',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser',
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'pi',
     name: 'Personal injury',
     covered: false,
-    headline: 'Legal aid is not usually available for advice about personal injury',
+    headline: 'Legal aid is not usually available for advice about personal injury'
   },
   {
     value: 'publiclaw',
     name: 'Public law',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser',
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'aap',
     name: 'Trouble with the police',
     covered: false,
-    headline: 'You may be able to get advice from a legal adviser',
+    headline: 'A legal adviser may be able to help you'
   },
   {
     value: 'violence',
@@ -154,11 +154,6 @@ exports.EMPLOYMENT_QUESTIONS = {
     'working_tax_credit'
   ]
 };
-
-exports.CHILD_BENEFIT_QUESTIONS = [
-  'child_benefit',
-  'child_tax_credit'
-];
 
 exports.OUTGOINGS_QUESTIONS = [
   'rent',
@@ -243,9 +238,9 @@ exports.FORM_IDENTIFIERS = {
   'problem': 'input[name="categories"]',
   'about': 'input[name="have_partner"]',
   'benefits': 'input[name="benefits"][value="other-benefit"]',
+  'additional-benefits': 'input[name="other_benefits"]',
   'property': 'input[name="properties-0-is_main_home"]',
   'savings': 'input[name="savings"]',
-  'benefits-tax-credits': 'input[name="other_benefits"]',
   'income': 'input[name="your_income-other_income-per_interval_value"]',
   'outgoings': 'input[name="income_contribution"]'
 };

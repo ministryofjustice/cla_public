@@ -30,13 +30,12 @@ class RequiresSession(object):
     """
     View mixin which redirects to session expired page if no session
     """
-
-    session_expired_url = '/session-expired'
+    session_expired_url = 'base.session_expired'
 
     def dispatch_request(self, *args, **kwargs):
         if (not session or not session.is_current) \
                 and request.method.lower() != 'options':
-            return redirect(self.session_expired_url)
+            return redirect(url_for(self.session_expired_url))
         return super(RequiresSession, self).dispatch_request(*args, **kwargs)
 
 

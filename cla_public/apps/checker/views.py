@@ -14,14 +14,14 @@ from cla_public.apps.checker.forms import FindLegalAdviserForm
 from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import ORGANISATION_CATEGORY_MAPPING, \
-    NO_CALLBACK_CATEGORIES, LAALAA_PROVIDER_CATEGORIES_MAP
+    NO_CALLBACK_CATEGORIES, LAALAA_PROVIDER_CATEGORIES_MAP, CATEGORIES
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    PropertiesForm, SavingsForm, TaxCreditsForm, OutgoingsForm, IncomeForm, \
-    ReviewForm
+    PropertiesForm, SavingsForm, OutgoingsForm, IncomeForm, \
+    ReviewForm, AdditionalBenefitsForm
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import honeypot
-from cla_public.apps.checker import filters # Used in templates
+from cla_public.apps.checker import filters  # Used in templates
 from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession, ValidFormOnOptions, HasFormMixin
@@ -187,10 +187,10 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     steps = [
         ('about', CheckerStep(AboutYouForm, 'checker/about.html')),
         ('benefits', CheckerStep(YourBenefitsForm, 'checker/benefits.html')),
+        ('additional-benefits', CheckerStep(
+            AdditionalBenefitsForm, 'checker/additional-benefits.html')),
         ('property', CheckerStep(PropertiesForm, 'checker/property.html')),
         ('savings', CheckerStep(SavingsForm, 'checker/savings.html')),
-        ('benefits-tax-credits', CheckerStep(
-            TaxCreditsForm, 'checker/benefits-tax-credits.html')),
         ('income', CheckerStep(IncomeForm, 'checker/income.html')),
         ('outgoings', CheckerStep(OutgoingsForm, 'checker/outgoings.html')),
         ('review', ReviewStep(ReviewForm, 'checker/review.html'))
@@ -239,14 +239,14 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         if step.name == 'benefits':
             return not session.checker.is_on_benefits
 
+        if step.name == 'additional-benefits':
+            return not session.checker.is_on_other_benefits
+
         if step.name == 'property':
             return not session.checker.owns_property
 
         if step.name == 'savings':
             return not session.checker.has_savings_or_valuables
-
-        if step.name == 'benefits-tax-credits':
-            return not session.checker.children_or_tax_credits
 
         if session.checker.is_on_passported_benefits \
                 and step.name not in ('about', 'benefits'):
@@ -363,14 +363,14 @@ class HelpOrganisations(views.MethodView):
             name = unicode(name)
 
             category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
-        trans_category_name = ORGANISATION_CATEGORY_MAPPING.get(name, name)
+        trans_category_name = next(c[1] for c in CATEGORIES if c[0] == category)
 
         ineligible_reasons = session.stored.get('ineligible_reasons', [])
 
         organisations = get_organisation_list(article_category__name=category_name)
 
         return {
-            'organisations':organisations,
+            'organisations': organisations,
             'category': category,
             'category_name': trans_category_name,
             'ELIGIBILITY_REASONS': ELIGIBILITY_REASONS,
@@ -395,3 +395,28 @@ checker.add_url_rule(
     view_func=HelpOrganisations.as_view('help_organisations'),
     methods=['GET']
 )
+
+
+@checker.route('/legal-aid-available')
+def interstitial():
+    """
+    Interstitial page after passing scope test
+    """
+    if not session or not session.is_current or not session.checker.category:
+        return redirect(url_for('base.session_expired'))
+
+    category = session.checker.category
+    category_name = session.checker.category_name
+    with override_locale('en'):
+        category_name_english = unicode(session.checker.category_name)
+
+    organisations = get_organisation_list(article_category__name=category_name_english)
+
+    context = {
+        'category': category,
+        'category_name': category_name,
+        'organisations': organisations,
+        'hide_help_orgs_intro': True,
+        'show_help_orgs': 'show' in request.args,
+    }
+    return render_template('interstitial.html', **context)

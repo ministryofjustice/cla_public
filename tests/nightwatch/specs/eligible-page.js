@@ -11,6 +11,10 @@ module.exports = {
     client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
   },
 
+  'Interstitial page': function(client) {
+    client.interstitialPage();
+  },
+
   'About you': function(client) {
     client.aboutSetAllToNo(true, {
       'on_benefits': 1
@@ -22,7 +26,7 @@ module.exports = {
       .waitForElementVisible('input[name="benefits"]', 5000)
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
-      .assert.containsText('body', 'Are you on any of these benefits?')
+      .assert.containsText('body', 'Which benefits do you receive?')
       .click('input[value="income_support"]')
       .submitForm('form')
     ;

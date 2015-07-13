@@ -17,7 +17,7 @@ from cla_public import app
 from cla_public.apps.checker.means_test import MeansTest
 from cla_public.apps.checker.api import post_to_eligibility_check_api
 from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
-    PropertiesForm, SavingsForm, TaxCreditsForm, IncomeForm, OutgoingsForm, \
+    AdditionalBenefitsForm, PropertiesForm, SavingsForm, IncomeForm, OutgoingsForm, \
     ReviewForm
 from cla_public.apps.checker.tests.utils.forms_utils import CATEGORY_MAPPING, \
     FormDataConverter
@@ -143,9 +143,9 @@ def get_form(url):
     return {
         '/about': AboutYouForm,
         '/benefits': YourBenefitsForm,
+        '/additional-benefits': AdditionalBenefitsForm,
         '/property': PropertiesForm,
         '/savings': SavingsForm,
-        '/benefits-tax-credits': TaxCreditsForm,
         '/income': IncomeForm,
         '/outgoings': OutgoingsForm,
         '/review': ReviewForm

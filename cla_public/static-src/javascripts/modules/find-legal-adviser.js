@@ -13,17 +13,17 @@
 
       this._handleMQTest();
 
-      if(!this.resultsMap.length) {
+      if(!this.$resultsMap.length) {
         return;
       }
 
-      this.renderMap(this.resultsMap.data('lat'), this.resultsMap.data('lon'));
+      this.renderMap(this.$resultsMap.data('lat'), this.$resultsMap.data('lon'));
       this._prepareMarkers();
 
       $(window).resize(_.debounce($.proxy(this._handleMQTest, this), 500));
     },
 
-    // Handle eventsw which rely on media queries
+    // Handle events which rely on media queries
     _handleMQTest: function() {
       if(window.Modernizr.mq('(min-width: 641px)')) {
         if(!this.eventsBound) {
@@ -37,11 +37,11 @@
     bindEvents: function() {
       var self = this;
 
-      this.organisationListItems.on('click', 'header', function(evt) {
+      this.$organisationListItems.on('click', 'header', function(evt) {
         self._handleItemHighlight(evt, $(this).closest('li'));
       });
 
-      this.resultsPagination.on('click', 'a', function(evt) {
+      this.$resultsPagination.on('click', 'a', function(evt) {
         evt.preventDefault();
 
         if(window.LABELS && window.LABELS.loading) {
@@ -55,7 +55,7 @@
         }
       });
 
-      this.findLegalAdviserForm.submit(function(evt) {
+      this.$findLegalAdviserForm.submit(function(evt) {
         evt.preventDefault();
 
         var url = document.location.pathname + '?' + $(this).serialize();
@@ -65,7 +65,7 @@
           history.pushState(null, null, url);
         }
 
-        if(!self.resultsMap.length) {
+        if(!self.$resultsMap.length) {
           $('<p class="loading">' + window.LABELS.loading + '</p>').insertAfter($(this));
         }
       });
@@ -78,9 +78,9 @@
     },
 
     _unbindEvents: function() {
-      this.organisationListItems.unbind('click');
-      this.resultsPagination.unbind('click');
-      this.findLegalAdviserForm.unbind('submit');
+      this.$organisationListItems.unbind('click');
+      this.$resultsPagination.unbind('click');
+      this.$findLegalAdviserForm.unbind('submit');
       window.onpopstate = null;
 
       this.eventsBound = false;
@@ -91,14 +91,14 @@
 
       $.get(url)
         .success(function(data) {
-          self.findLegalAdviserContainer.replaceWith(data);
+          self.$findLegalAdviserContainer.replaceWith(data);
           self.markers = [];
           self.eventsBound = false;
           self.init();
 
           if(scrollToResults) {
             $('html, body').delay(300).animate({
-              'scrollTop': self.findLegalAdviserContainer.offset().top - 10
+              'scrollTop': self.$findLegalAdviserContainer.offset().top - 10
             }, 160);
           }
         })
@@ -112,7 +112,7 @@
     },
 
     _prepareMarkers: function() {
-      var organisations = $.map(this.organisationListItems, function(item) {
+      var organisations = $.map(this.$organisationListItems, function(item) {
         var $item = $(item);
         return {
           id: $item.data('id'),
@@ -169,12 +169,12 @@
       var $container = $item.closest('.search-results-list');
 
       if($item.hasClass('s-highlighted')) {
-        this.organisationListItems.removeClass('s-highlighted');
+        this.$organisationListItems.removeClass('s-highlighted');
         this._fitAllMarkers();
         return;
       }
 
-      this.organisationListItems.removeClass('s-highlighted');
+      this.$organisationListItems.removeClass('s-highlighted');
       $item.addClass('s-highlighted');
 
       this._handleMarkersZooming($item.data('id'));
@@ -197,7 +197,7 @@
         streetViewControl: false
       };
 
-      this.map = new google.maps.Map(this.resultsMap[0], mapOptions);
+      this.map = new google.maps.Map(this.$resultsMap[0], mapOptions);
       this.searchLocationMarker = this.addMarker(searchLocation, {
         title: 'Search location',
         icon: 'icon-location-2x'
@@ -269,11 +269,11 @@
     },
 
     cacheEls: function() {
-      this.resultsMap = $(this.el);
-      this.findLegalAdviserContainer = $('.find-legal-adviser');
-      this.findLegalAdviserForm = $('.legal-adviser-search');
-      this.organisationListItems = $('.search-results-list .vcard');
-      this.resultsPagination = $('.search-results-pagination');
+      this.$resultsMap = $(this.el);
+      this.$findLegalAdviserContainer = $('.find-legal-adviser');
+      this.$findLegalAdviserForm = $('.legal-adviser-search');
+      this.$organisationListItems = $('.search-results-list .vcard');
+      this.$resultsPagination = $('.search-results-pagination');
     }
   };
 }());

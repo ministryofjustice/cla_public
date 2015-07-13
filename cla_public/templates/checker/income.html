@@ -28,6 +28,9 @@
           {{ Form.money_interval_fieldset(form.your_income.national_insurance, skip=skip) }}
           {{ Form.money_interval_fieldset(form.your_income.working_tax_credit, skip=skip) }}
         {% endif %}
+        {% if session.checker.has_children or session.checker.has_dependants %}
+          {{ Form.money_interval_fieldset(form.your_income.child_tax_credit) }}
+        {% endif %}
         {{ Form.money_interval_fieldset(form.your_income.maintenance) }}
         {{ Form.money_interval_fieldset(form.your_income.pension) }}
         {{ Form.money_interval_fieldset(form.your_income.other_income) }}

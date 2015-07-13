@@ -22,7 +22,8 @@
 
       // Return if button has a name, which is attached as form attribute on click
       // (assuming secondary buttons)
-      if(this.$form.attr('submit-name')) {
+      if(this.$form.attr('submit-name') ||
+         this.$form.attr('method') && this.$form.attr('method').toLowerCase() === 'get') {
         return;
       }
 
@@ -42,9 +43,15 @@
 
     onAjaxSuccess: function(errors) {
       if (!$.isEmptyObject(errors)) {
+        var errorBanner = $('.alert-error:visible:first');
         this.loadErrors(errors);
+
+        if(!errorBanner.length) {
+          return;
+        }
+
         $('html, body').animate({
-          scrollTop: $('.alert-error:visible:first').offset().top - 50
+          scrollTop: errorBanner.offset().top - 50
         }, 300);
       } else {
         this.$form.off('submit');
@@ -101,7 +108,9 @@
 
       _.each(errorFields, addErrors);
 
-      this.$form.prepend(this.mainFormError());
+      if(this.$form.data('error-banner') !== false) {
+        this.$form.prepend(this.mainFormError());
+      }
     },
 
     loadTemplates: function() {

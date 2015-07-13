@@ -15,7 +15,8 @@ from flask.sessions import SecureCookieSession, SecureCookieSessionInterface, \
 from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.api import post_to_is_eligible_api, ApiError
 from cla_public.apps.checker.constants import F2F_CATEGORIES, NO, \
-    PASSPORTED_BENEFITS, YES, END_SERVICE_FLASH_MESSAGE
+    PASSPORTED_BENEFITS, YES, END_SERVICE_FLASH_MESSAGE, CONTACT_SAFETY, \
+    CONTACT_PREFERENCE
 from cla_public.apps.checker.means_test import MeansTest
 from cla_public.apps.checker.utils import passported
 from cla_public.libs.utils import override_locale, category_id_to_name
@@ -129,13 +130,11 @@ class CheckerSessionObject(dict):
                passported(self.field('YourBenefitsForm', 'benefits', []))
 
     @property
-    def has_tax_credits(self):
-        has_children = self.is_yes('AboutYouForm', 'have_children')
-        is_carer = self.is_yes('AboutYouForm', 'have_dependants')
+    def is_on_other_benefits(self):
         benefits = set(self.field('YourBenefitsForm', 'benefits', []))
-        other_benefits = self.is_on_benefits and \
-                         bool(benefits.difference(PASSPORTED_BENEFITS))
-        return has_children or is_carer or other_benefits
+        other_benefits = benefits.difference(PASSPORTED_BENEFITS) \
+            .difference({'child_benefit'})
+        return self.is_on_benefits and bool(other_benefits)
 
     @property
     def has_children(self):
@@ -144,12 +143,6 @@ class CheckerSessionObject(dict):
     @property
     def has_dependants(self):
         return self.is_yes('AboutYouForm', 'have_dependants')
-
-    @property
-    def children_or_tax_credits(self):
-        return any([self.has_tax_credits,
-                    self.has_children,
-                    self.has_dependants])
 
     @property
     def has_partner(self):
@@ -242,23 +235,23 @@ class CheckerSession(SecureCookieSession, SessionMixin):
     def is_current(self):
         return not self.get('is_expired', False) and self.checker
 
-    def clear_and_store_ref(self):
-        if self.checker:
-            stored = {
-                'case_ref': self.checker.get('case_ref'),
-                'callback_time': self.checker.callback_time,
-                'callback_requested': self.checker.contact_type in [
-                    'callback',
-                    'thirdparty'
-                ],
-                'contact_type': self.checker.contact_type,
-                'category': self.checker.category,
-                'eligibility': self.checker.eligibility,
-                'adaptations': [k for k, v in \
-                    self.checker['ContactForm']['adaptations'].items() if v]
-            }
-            self.clear_checker()
-            self.stored = stored
+    def store_checker_details(self):
+        self.stored = {
+            'case_ref': self.checker.get('case_ref'),
+            'callback_time': self.checker.callback_time,
+            'callback_requested': self.checker.contact_type in \
+                [type[0] for type in CONTACT_PREFERENCE if type[0] != 'call'],
+            'contact_type': self.checker.contact_type,
+            'category': self.checker.category,
+            'eligibility': self.checker.eligibility,
+            'adaptations': [k for k, v in \
+                self.checker.get('ContactForm', {})
+                    .get('adaptations', {}).items() if v]
+        }
+        if self.stored['callback_requested']:
+            self.stored['safe_to_contact'] = self.checker.get(
+                'ContactForm', {}).get(self.checker.contact_type, {})\
+                .get('safe_to_contact') == CONTACT_SAFETY[0][0]
 
     def store(self, values_dict):
         self.stored.update(values_dict)

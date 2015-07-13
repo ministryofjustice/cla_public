@@ -12,13 +12,17 @@ module.exports = {
     ;
   },
 
+  'Interstitial page': function(client) {
+    client.interstitialPage();
+  },
+
   'Means test': function(client) {
     client
       .aboutSetAllToYes(true)
       .selectBenefit('other-benefit', true)
+      .fillInAdditionalBenefits(true)
       .fillInProperty(true)
       .fillInSavings(true)
-      .fillInBenefitsAndTaxCredits(true)
       .fillInIncome(undefined, undefined, true)
       .fillInOutgoings(undefined, true)
     ;
@@ -30,10 +34,10 @@ module.exports = {
       .assert.elementPresent('#step-scope', 'Scope block is present')
       .assert.elementPresent('#step-about', 'About block is present')
       .assert.elementPresent('#step-benefits', 'Benefits block is present')
+      .assert.elementPresent('#step-additional-benefits',
+        'Additional benefits block is present')
       .assert.elementPresent('#step-property', 'Property block is present')
       .assert.elementPresent('#step-savings', 'Savings block is present')
-      .assert.elementPresent('#step-benefits-tax-credits',
-        'Benefits and tax credits block is present')
       .assert.elementPresent('#step-income', 'Income block is present')
       .assert.elementPresent('#step-outgoings', 'Outgoings block is present')
       .execute(function(selector) {

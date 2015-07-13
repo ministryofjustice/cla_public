@@ -2,7 +2,7 @@
 import datetime
 from cla_common import call_centre_availability
 from flask import session
-from mock import Mock, patch
+from mock import patch
 import unittest
 import pytz
 from werkzeug.datastructures import MultiDict
@@ -13,8 +13,8 @@ from cla_public.apps.contact.tests.test_availability import \
 from cla_public.apps.checker.constants import NO, YES
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.means_test import AboutYouPayload, \
-    YourBenefitsPayload, PropertiesPayload, PropertyPayload, \
-    SavingsPayload, TaxCreditsPayload, IncomePayload, OutgoingsPayload
+    YourBenefitsPayload, PropertiesPayload, \
+    AdditionalBenefitsPayload, SavingsPayload, IncomePayload, OutgoingsPayload
 from cla_public.apps.checker.tests.utils.forms_utils import flatten_dict, \
     flatten_list_of_dicts
 
@@ -59,7 +59,7 @@ class TestApiPayloads(unittest.TestCase):
         self.assertTrue(payload['specific_benefits']['income_support'])
         self.assertTrue(payload['on_passported_benefits'])
 
-        # Test income - make sure all income vals are zero after pasported benifit
+        # Test income - make sure all income vals are zero after pasported benefit
         self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], 0)
         self.assertEqual(payload['you']['income']['earnings']['interval_period'], 'per_month')
         self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
@@ -86,6 +86,28 @@ class TestApiPayloads(unittest.TestCase):
         self.assertTrue(
             all(map(are_false, payload['specific_benefits'].items())))
         self.assertFalse(payload['on_passported_benefits'])
+
+    def test_your_benefits_form_child_benefits(self):
+        form_mi_data = {
+            'child_benefit': {
+                'per_interval_value': '21',
+                'interval_period': 'per_week'
+            },
+        }
+        form_data = {'benefits': {'child_benefit': True}}
+        form_data = self.merge_money_intervals(form_data, form_mi_data)
+        payload = self.payload(YourBenefitsPayload, form_data)
+        are_false = lambda (benefit, selected): not selected
+        self.assertTrue(
+            all(map(are_false, payload['specific_benefits'].items())))
+        self.assertFalse(payload['on_passported_benefits'])
+        self.assertEqual(payload['you']['income']['child_benefits']['per_interval_value'], 2100)
+
+        form_data = {'benefits': {'child_benefit': True, 'income_support': True}}
+        form_data = self.merge_money_intervals(form_data, form_mi_data)
+        payload = self.payload(YourBenefitsPayload, form_data)
+        self.assertTrue(payload['specific_benefits']['income_support'])
+        self.assertTrue(payload['on_passported_benefits'])
 
     def test_about_you_form(self):
         form_data = {
@@ -256,34 +278,21 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['savings']['bank_balance'], 0)
         self.assertEqual(payload['you']['savings']['investment_balance'], 0)
 
-    def test_tax_credit_form(self):
+    def test_additional_benefits_form(self):
         form_mi_data = {
-            'child_benefit': {
-                'per_interval_value': '21',
-                'interval_period': 'per_week'
-            },
-            'child_tax_credit': {
-                'per_interval_value': '32',
-                'interval_period': 'per_week'
-            },
             'total_other_benefit': {
                 'per_interval_value': '43',
                 'interval_period': 'per_week'
             },
         }
-
         form_data = {
             'benefits': {'asylum-support': True, 'war-pension': True},
             'other_benefits': YES,
         }
-
         form_data = self.merge_money_intervals(form_data, form_mi_data)
-
-        payload = self.payload(TaxCreditsPayload, form_data)
+        payload = self.payload(AdditionalBenefitsPayload, form_data)
 
         self.assertEqual(payload['on_nass_benefits'], True)
-        self.assertEqual(payload['you']['income']['child_benefits']['per_interval_value'], 2100)
-        self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 3200)
         self.assertEqual(payload['you']['income']['benefits']['per_interval_value'], 4300)
 
     def test_income_form(self):
@@ -301,6 +310,10 @@ class TestApiPayloads(unittest.TestCase):
             },
             'your_income-national_insurance': {
                 'per_interval_value': '3',
+                'interval_period': 'per_week'
+            },
+            'your_income-child_tax_credit': {
+                'per_interval_value': '32',
                 'interval_period': 'per_week'
             },
             'your_income-working_tax_credit': {
@@ -328,7 +341,7 @@ class TestApiPayloads(unittest.TestCase):
         self.assertEqual(payload['you']['income']['earnings']['per_interval_value'], 100)
         self.assertEqual(payload['you']['income']['earnings']['interval_period'], 'per_week')
         self.assertEqual(payload['you']['income']['self_employment_drawings']['per_interval_value'], 0)
-        self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 400)
+        self.assertEqual(payload['you']['income']['tax_credits']['per_interval_value'], 14266)
         self.assertEqual(payload['you']['income']['tax_credits']['interval_period'], 'per_month')
         self.assertEqual(payload['you']['income']['maintenance_received']['per_interval_value'], 500)
         self.assertEqual(payload['you']['income']['pension']['per_interval_value'], 600)

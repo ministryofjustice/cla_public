@@ -3,6 +3,7 @@
 {% block page_title %}{{ _('Help organisations') }} - {{ super() }}{% endblock %}
 
 {% import "macros/element.html" as Element %}
+{% import "macros/help-orgs.html" as HelpOrganisations %}
 
 {% set partner_text = _('you and your partner') if session.stored.has_partner else _('you') %}
 {% set partner_text_plural = _('you and your partner’s') if session.stored.has_partner else _('your') %}
@@ -17,6 +18,8 @@
     what you have told us today it looks like you won't be able to get
     legal aid {{ fromcla }} as you don’t qualify financially{% endtrans %}.
   </p>
+
+  {% if ineligible_reasons %}
 
   <p>{{ _('This is because') }}{% if multi %}:</p><ul>{% endif %}
   {% if ELIGIBILITY_REASONS.DISPOSABLE_CAPITAL in ineligible_reasons %}
@@ -46,6 +49,8 @@
       for certain living expenses, like rent or mortgage payments.{% endtrans %}</p>
   {% endif %}
 
+  {% endif %}
+
   {% if category == 'family' %}
     <p>
       {% trans %}If you want to make an application to court about a family matter
@@ -56,7 +61,7 @@
     </p>
   {% endif %}
 
-  <h2>{{ _('Other sources of help') }}</h2>
+  <h2>{{ _('A legal adviser may still be able to help') }}</h2>
 
   {% if category == 'violence' %}
     <p>
@@ -64,8 +69,7 @@
       might qualify, contact a legal adviser in your area.{% endtrans %}
     </p>
   {% else %}
-    <p>{% trans %}You can also seek advice from a legal adviser - you will have to
-      pay for this advice.{% endtrans %}</p>
+    <p>{% trans %}You can still ask a legal adviser for help – you will have to pay for their advice.{% endtrans %}</p>
   {% endif %}
 
   {% if category not in ['debt', 'violence', 'discrimination', 'education', 'family', 'housing', 'benefits'] %}
@@ -82,7 +86,7 @@
     </a>
   </p>
 
-  {% include '_help-orgs.html' %}
+  {{ HelpOrganisations.org_list_container(organisations, category_name, truncate=5) }}
 
   {{ Element.satisfaction_survey_prompt() }}
 {% endblock %}

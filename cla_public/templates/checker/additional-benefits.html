@@ -9,8 +9,6 @@
 
     {{ Form.handle_errors(form) }}
 
-    {{ Form.money_interval_fieldset(form.child_benefit, not session.checker.has_children) }}
-    {{ Form.money_interval_fieldset(form.child_tax_credit, not session.checker.has_children) }}
     {{ Form.option_list_fieldset(form.benefits) }}
     {% call Form.fieldset(form.other_benefits) %}
       {{ Form.radio_buttons(form.other_benefits) }}

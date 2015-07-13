@@ -13,6 +13,10 @@ module.exports = {
     client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
   },
 
+  'Interstitial page': function(client) {
+    client.interstitialPage();
+  },
+
   'About you': function(client) {
     client.aboutSetAllToNo(true, {
       'on_benefits': 1
@@ -24,14 +28,14 @@ module.exports = {
       .waitForElementVisible('input[name="benefits"]', 5000)
       .assert.urlContains('/benefits')
       .assert.containsText('h1', 'Your benefits')
-      .assert.containsText('body', 'Are you on any of these benefits?')
+      .assert.containsText('body', 'Which benefits do you receive?')
     ;
   },
 
   'Context-dependent text and headline for partner': function(client) {
     client
       .assert.doesNotContainText('h1', 'You and your partner’s benefits')
-      .assert.doesNotContainText('body', 'Are you or your partner on any of these benefits?')
+      .assert.doesNotContainText('body', 'Which benefits do you and your partner receive?')
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
       .setYesNoFields('have_partner', 1)
@@ -39,18 +43,18 @@ module.exports = {
       .submitForm('form')
       .waitForElementVisible('input[name="benefits"]', 5000)
       .assert.containsText('h1', 'You and your partner’s benefits')
-      .assert.containsText('body', 'Are you or your partner on any of these benefits?')
+      .assert.containsText('body', 'Which benefits do you and your partner receive?')
     ;
   },
 
   'Test validation': function(client) {
     client.submitForm('form');
-    common.submitAndCheckForError(client, 'Please select at least one option.');
+    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
   },
 
   'Test outcomes': function(client) {
     BENEFITS.forEach(function(item) {
-      var destination = (item === 'other-benefit' ? '/benefits-tax-credits' : '/review');
+      var destination = (item === 'other-benefit' ? '/additional-benefits' : '/review');
       var waitElement = (item === 'other-benefit' ? 'input[name="other_benefits"]' : '.answers-summary');
       client
         .click(util.format('input[value="%s"]', item))

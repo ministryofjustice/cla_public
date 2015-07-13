@@ -43,6 +43,10 @@ module.exports = {
     client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
   },
 
+  'Interstitial page': function(client) {
+    client.interstitialPage();
+  },
+
   'Test validation': function(client) {
     common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
     var questions = [];

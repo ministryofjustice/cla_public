@@ -164,22 +164,25 @@ class TestMeansTest(unittest.TestCase):
                 mt['partner']['deductions'], default=MoneyInterval(0))
             self.assertSavings(mt['partner']['savings'], default=0)
 
-    def assertNullFinances(self, person):
+    def assertNullFinances(self, person, income_overrides={},
+                           outgoings_overrides={}, savings_overrides={}):
         self.assertIncome(
             person['income'],
             default=MoneyInterval(0),
             earnings=MoneyInterval(),
             pension=MoneyInterval(),
             maintenance_received=MoneyInterval(),
-            other_income=MoneyInterval()
+            other_income=MoneyInterval(),
+            **income_overrides
         )
         self.assertOutgoings(
             person['deductions'],
             default=MoneyInterval(),
             mortgage=MoneyInterval(0),
-            criminal_legalaid_contributions=None
+            criminal_legalaid_contributions=None,
+            **outgoings_overrides
         )
-        self.assertSavings(person['savings'], default=0)
+        self.assertSavings(person['savings'], default=0, **savings_overrides)
 
     def test_initialization(self):
         mt = MeansTest()
@@ -320,8 +323,26 @@ class TestMeansTest(unittest.TestCase):
             'employment_support': False
         }
         self.assertEqual(expected, mt['specific_benefits'])
-        self.assertNullFinances(mt['you'])
+        self.assertNullFinances(mt['you'], income_overrides={
+            'child_benefits':  MoneyInterval()
+        })
         self.assertEqual([], mt['property_set'])
+
+    def test_child_benefits(self):
+        session.checker['category'] = 'debt'
+        mt = MeansTest()
+        mt.update_from_form(
+            'AboutYouForm', about_you_post_data())
+        post_data = dict(flatten({
+            'child_benefit': post_money_interval('12', 'per_week'),
+            'benefits': ['child_benefit']}))
+        mt.update_from_form(
+            'YourBenefitsForm', post_data)
+
+        self.assertFalse(mt['on_passported_benefits'])
+        self.assertEqual(
+            MoneyInterval(1200, 'per_week'),
+            mt['you']['income']['child_benefits'])
 
     def test_property(self):
         update_session(
@@ -484,37 +505,29 @@ class TestMeansTest(unittest.TestCase):
         self.assertEqual(0, mt['you']['savings']['investment_balance'])
         self.assertEqual(50000, mt['you']['savings']['asset_balance'])
 
-    def test_tax_credits(self):
+    def test_additional_benefits(self):
         session.checker['category'] = 'debt'
         mt = MeansTest()
         mt.update_from_form(
             'AboutYouForm', about_you_post_data())
         post_data = dict(flatten({
-            'child_benefit': post_money_interval('1', 'per_week'),
-            'child_tax_credit': post_money_interval('2', 'per_week'),
             'benefits': [],
             'other_benefits': YES,
             'total_other_benefit': post_money_interval('3', 'per_week')}))
         mt.update_from_form(
-            'TaxCreditsForm', post_data)
+            'AdditionalBenefitsForm', post_data)
 
         self.assertFalse(mt['on_nass_benefits'])
-        self.assertEqual(
-            MoneyInterval(100, 'per_week'),
-            mt['you']['income']['child_benefits'])
-        self.assertEqual(
-            MoneyInterval(200, 'per_week'),
-            mt['you']['income']['tax_credits'])
         self.assertEqual(
             MoneyInterval(300, 'per_week'),
             mt['you']['income']['benefits'])
 
     def test_nass_benefits(self):
+        # NB: asylum support is no longer available in the benefits list
+
         mt = MeansTest()
         mt.update_from_form(
-            'TaxCreditsForm', dict(flatten({
-                'child_benefit': post_money_interval('0'),
-                'child_tax_credit': post_money_interval('0'),
+            'AdditionalBenefitsForm', dict(flatten({
                 'benefits': ['asylum-support'],
                 'other_benefits': NO,
                 'total_other_benefit': post_money_interval('0')})))
@@ -528,9 +541,6 @@ class TestMeansTest(unittest.TestCase):
             have_children=YES
         )
 
-        session.checker['TaxCreditsForm'] = {
-            'child_tax_credit': MoneyInterval(1000, 'per_week')}
-
         mt = MeansTest()
         mt.update_from_form(
             'IncomeForm', dict(flatten({
@@ -538,6 +548,7 @@ class TestMeansTest(unittest.TestCase):
                     'earnings': post_money_interval('0'),
                     'income_tax': post_money_interval('0'),
                     'national_insurance': post_money_interval('0'),
+                    'child_tax_credit': post_money_interval('10.00', 'per_week'),
                     'working_tax_credit': post_money_interval('10.00'),
                     'maintenance': post_money_interval('0'),
                     'pension': post_money_interval('0'),

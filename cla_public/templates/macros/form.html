@@ -235,7 +235,7 @@
     - field <object>
         WTForm field
 #}
-{% macro option_list(field, label_type='inline', input_type='checkbox', separated_options=[]) %}
+{% macro option_list(field, label_type='inline', input_type='checkbox', separated_options=[], callback=None) %}
   <ul class="form-option-list"
     {% if input_type == 'radio' %}role="radiogroup"{% else %}role="group"{% endif %}
     aria-labelledby="field-label-{{ field.id }}"
@@ -250,6 +250,10 @@
         {% else %}
           {{ block_label(option) }}
         {% endif %}
+
+        {% if callback %}
+          {{ callback(field, option) }}
+        {% endif %}
       </li>
     {% endfor %}
   </ul>
@@ -263,9 +267,9 @@
     - field <object>
         WTForm field
 #}
-{% macro option_list_fieldset(field, label_type='inline', input_type='checkbox', separated_options=[]) %}
+{% macro option_list_fieldset(field, label_type='inline', input_type='checkbox', separated_options=[], callback=None) %}
   {% call fieldset(field, class_='fieldset-group') %}
-    {{ option_list(field, label_type, input_type, separated_options) }}
+    {{ option_list(field, label_type, input_type, separated_options, callback=callback) }}
   {% endcall %}
 {% endmacro %}
 
@@ -311,12 +315,20 @@
   skip=False,
   is_subfield=False,
   controlled_by=None,
-  control_value='1'
+  control_value='1',
+  class_=''
 ) %}
   {% if skip %}
     {{ money_interval(field, skip) }}
   {% else %}
-    {% call fieldset(field, is_subfield=is_subfield, controlled_by=controlled_by, control_value=control_value, as_label=True) %}
+    {% call fieldset(
+      field,
+      is_subfield=is_subfield,
+      controlled_by=controlled_by,
+      control_value=control_value,
+      as_label=True,
+      class_=class_
+    ) %}
       {{ money_interval(field) }}
     {% endcall %}
   {% endif %}

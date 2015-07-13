@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% set title = _('Legal aid is available for this type of problem') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% import "macros/element.html" as Element %}
+{% import "macros/help-orgs.html" as HelpOrganisations %}
+
+{% block sidebar %}
+  <aside class="sidebar">
+    <h2>{{ _('To qualify for legal aid:') }}</h2>
+    <ul>
+      <li>{{ _('your income (or combined income if you have a partner) shouldn’t be more than £2,657 a month before tax') }}</li>
+      <li>{{ _('your savings (or combined savings if you have a partner) shouldn’t be more than £8,000') }}</li>
+    </ul>
+    <p><small>{{ _('These limits can vary in certain circumstances – for example, if you need advice about domestic abuse.') }}</small></p>
+  </aside>
+{% endblock %}
+
+{% block inner_content %}
+
+  <h1>{{ title }}</h1>
+
+  <p class="subtitle">
+    {{ _('However, you must also qualify financially.') }}
+  </p>
+
+  <p>
+    {{ _('If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),
+    a national helpline for certain legal aid problems in England and Wales.') }}
+  </p>
+  <p>
+    {{ _('The CLA operator will check all the information you’ve given through this service.') }}
+    {{ _('You’ll need to provide evidence of your finances and a specialist will ask you about your case in more detail before your application can progress.') }}
+  </p>
+  <p>{{ _('To complete the financial assessment, you and your partner (if you have one) will need:') }}</p>
+  <ul>
+    <li>{{ _('recent payslips (if you’re working) and bank statements') }}</li>
+    <li>{{ _('a summary of your income tax and National Insurance contributions') }}</li>
+    <li>{{ _('details of any savings and investments you have') }}</li>
+    <li>{{ _('details of any benefits you receive') }}</li>
+    <li>{{ _('mortgage statements and a current valuation for any property you own') }}</li>
+  </ul>
+
+  <p>{% trans url=url_for('contact.get_in_touch') %}
+    If you’re under 18, you should <a href="{{ url }}">contact CLA</a>
+    without completing the financial assessment.{% endtrans %}
+  </p>
+
+  <p class="form-actions">
+    <a class="button button-get-started" href="{{ url_for('.wizard', step='about') }}">
+      {{ _('Check if you qualify financially') }}
+    </a>
+  </p>
+
+  {% if organisations %}
+    <hr>
+
+    {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=1) %}
+      <h2>{{ _('Other sources of help') }}</h2>
+      <p>
+        {% trans category_name=category_name|lower %}
+          You can also get advice from this alternative help organisation for issues related to {{ category_name }}.
+          {% pluralize %}
+          You can also get advice from alternative help organisations for issues related to {{ category_name }}.
+        {% endtrans %}
+        {{ _('You don’t have to qualify for legal aid.') }}
+      </p>
+    {% endcall %}
+  {% endif %}
+
+{% endblock %}

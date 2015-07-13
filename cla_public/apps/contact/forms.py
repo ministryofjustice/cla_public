@@ -260,3 +260,15 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                 self.thirdparty.form.time)
 
         return data
+
+
+class ConfirmationForm(Honeypot, BabelTranslationsFormMixin, Form):
+    email = StringField(
+        _(u'Your email'),
+        validators=[
+            Length(max=255, message=_(
+                u'Your address must be 255 characters '
+                u'or less')),
+            Email(message=_(u'Invalid email address')),
+            InputRequired()]
+    )
