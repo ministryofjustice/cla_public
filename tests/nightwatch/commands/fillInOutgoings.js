@@ -19,12 +19,12 @@ var ALL_INPUTS = {
 // });
 // ```
 //
-// or `client.fillInOutgoings(undefined)` to use defaults (0s)
+// or `client.fillInOutgoings(true)` to use defaults (0s)
 
 exports.command = function(inputs, shouldSubmitForm, callback) {
   var client = this;
 
-  inputs = typeof inputs === 'undefined' ? ALL_INPUTS : inputs;
+  inputs = inputs === true ? ALL_INPUTS : inputs;
   inputs = common.formatMoneyInputs('', inputs);
 
   this.perform(function() {
