@@ -12,6 +12,10 @@ module.exports = {
     ;
   },
 
+  'Interstitial page': function(client) {
+    client.interstitialPage();
+  },
+
   'Means test': function(client) {
     client
       .aboutSetAllToYes(true)

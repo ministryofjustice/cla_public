@@ -1,4 +1,6 @@
 .progress {
+  font-size: .9em;
+  
   @mixin add_pointer($border-colour: $grey-3, $hover-colour: $grey-4, $clear-last: true) {
     border-top: 1px solid $border-colour;
     position: relative;

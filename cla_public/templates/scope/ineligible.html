@@ -3,6 +3,8 @@
 {% set title = _('Legal aid doesn’t usually cover your type of problem') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
+{% import "macros/help-orgs.html" as HelpOrganisations %}
+
 {% block sidebar %}
   <aside class="sidebar">
     <h2>{% trans %}Exceptional cases{% endtrans %}</h2>
@@ -30,7 +32,8 @@
     {% trans %}You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid.{% endtrans %}
   </p>
 
-  {% with hide_help_orgs_intro=True %}
-    {% include '_help-orgs.html' %}
-  {% endwith %}
+  {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=5) %}
+    <h2>{% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}</h2>
+  {% endcall %}
+
 {% endblock %}

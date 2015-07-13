@@ -14,6 +14,10 @@ module.exports = {
     client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
   },
 
+  'Interstitial page': function(client) {
+    client.interstitialPage();
+  },
+
   'About you': function(client) {
     client.aboutSetAllToNo(true, {
       'on_benefits': 1
@@ -100,6 +104,7 @@ module.exports = {
     client
       .startService()
       .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .interstitialPage()
       .aboutSetAllToNo(false, {
         'on_benefits': 1,
         'have_dependants': 1
@@ -120,6 +125,7 @@ module.exports = {
     client
       .startService()
       .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .interstitialPage()
       .aboutSetAllToNo(false, {
         'have_children': 1
       })
@@ -136,6 +142,7 @@ module.exports = {
     client
       .startService()
       .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .interstitialPage()
       .aboutSetAllToNo(false, {
         'have_dependants': 1
       })

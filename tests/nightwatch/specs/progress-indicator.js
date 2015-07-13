@@ -5,6 +5,7 @@ module.exports = {
     client
       .startService()
       .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .interstitialPage()
       .waitForElementVisible('.progress-bar', 1000, 'Progress sidebar exists')
 
       .assert.containsText('.progress-step.m-current', 'About you',

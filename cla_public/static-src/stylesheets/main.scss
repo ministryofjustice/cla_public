@@ -70,11 +70,13 @@ body {
   height: 0;
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 .js-enabled .s-expanded {
   @include transition(opacity, ease, 300ms);
   opacity: 1;
+  overflow: visible;
 }
 
 .form-notice {
@@ -91,4 +93,11 @@ body {
 
 .contact-form {
   margin-top: 40px;
+}
+
+hr {
+  border: 0;
+  height: 2px;
+  background: $grey-3;
+  margin: 40px 0;
 }

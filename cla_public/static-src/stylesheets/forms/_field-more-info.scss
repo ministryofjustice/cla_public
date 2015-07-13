@@ -25,7 +25,7 @@
     background-color: $yellow;
   }
 
-  .field-help.s-expanded & {
+  .field-help.s-expanded &, &.s-expanded {
     background-position: 0 -13px;
   }
 }
