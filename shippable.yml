@@ -1,7 +1,6 @@
 branches:
   only:
-    - master
-    - develop
+    - shippable
 
 language: python
 
