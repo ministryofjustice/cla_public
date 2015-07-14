@@ -24,9 +24,10 @@ install:
   - pip install -r requirements/jenkins.txt
   - sudo gem install sass
   - sudo npm install npm -g
-  - sudo npm install -g
+  - npm install
   - bower install
-  - gulp
+  - ls -l node_modules/gulp/bin/
+  - ./node_modules/gulp/bin/gulp
 
 before_script:
   - mkdir -p shippable/testresults
