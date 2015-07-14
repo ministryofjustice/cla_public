@@ -24,7 +24,7 @@ install:
   - pip install -r requirements/jenkins.txt
   - sudo gem install sass
   - sudo npm install npm -g
-  - npm install
+  - npm install -g
   - bower install
   - gulp
 
