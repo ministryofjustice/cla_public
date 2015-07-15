@@ -63,8 +63,9 @@ module.exports = {
         errorText: 'This field is required.'
       }]);
     });
-    client
-      .setValue('input[name="callback-contact_number"]', '12345');
+
+    client.setValue('input[name="callback-contact_number"]', '12345');
+
     common.submitAndCheckForFieldError(client, [{
       name: 'callback-safe_to_contact',
       errorText: 'Please choose Yes or No'
