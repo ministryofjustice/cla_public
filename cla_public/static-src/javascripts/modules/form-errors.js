@@ -43,8 +43,8 @@
 
     onAjaxSuccess: function(errors) {
       if (!$.isEmptyObject(errors)) {
-        var errorBanner = $('.alert-error:visible:first');
         this.loadErrors(errors);
+        var errorBanner = $('.alert-error:visible:first');
 
         if(!errorBanner.length) {
           return;
