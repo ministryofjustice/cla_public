@@ -9,3 +9,7 @@
 {% endblock %}
 
 {% block javascripts %}{% endblock %}
+
+{% block ga_pageview -%}
+  ga('send', 'pageview', '/{{ code }}' + window.location.pathname + window.location.search);
+{%- endblock %}
