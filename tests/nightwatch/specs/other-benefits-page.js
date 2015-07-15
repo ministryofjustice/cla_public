@@ -42,6 +42,7 @@ module.exports = {
       .back()
       .waitForElementPresent('input[name="have_partner"]', 5000)
       .setYesNoFields('have_partner', 1)
+      .pause(100)
       .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
       .submitForm('form')
       .waitForElementPresent('input[name="benefits"]', 5000)

@@ -65,8 +65,10 @@ module.exports = {
         .aboutSetAllToNo(false)
         .assert.hidden(util.format('input[name="%s"]', item.subfield_name))
         .setYesNoFields(item.field_name, 1)
+        .pause(100)
         .assert.visible(util.format('input[name="%s"]', item.subfield_name))
         .setYesNoFields(item.field_name, 0)
+        .pause(100)
         .assert.hidden(util.format('input[name="%s"]', item.subfield_name))
         .setYesNoFields(item.field_name, 1)
       ;
