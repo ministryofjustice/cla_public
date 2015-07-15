@@ -42,6 +42,8 @@ module.exports = {
 
   'Eligible page (request callback)': function(client) {
     client
+      .waitForElementVisible('.contact-form', 3000,
+        '  - "Contact form exists')
       .assert.urlContains('/result/eligible')
       .waitForElementVisible('input[name="contact_type"]', 5000)
       .assert.containsText('h1', 'Contact Civil Legal Advice')

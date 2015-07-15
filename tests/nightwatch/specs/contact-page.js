@@ -14,7 +14,10 @@ function contactPage(client) {
       '  - "Reasons for contacting" form exists')
     .submitForm('.reasons-for-contacting-form', function() {
       console.log('     ⟡ "Continue to contact CLA" button clicked');
-    });
+    })
+    .waitForElementVisible('.contact-form', 3000,
+      '  - "Contact form exists')
+  ;
 }
 
 function willCallWithNotes(client, notes_text) {

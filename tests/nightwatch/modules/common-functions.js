@@ -20,6 +20,9 @@ module.exports = {
     tag = tag || "input";
     client
       .submitForm('form')
+      .waitForElementPresent('.alert-error', 3000, function() {
+        console.log('    - Form has errors summary');
+      })
       .useXpath()
     ;
     fields.forEach(function(field) {
