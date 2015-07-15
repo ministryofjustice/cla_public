@@ -1,12 +1,14 @@
 'use strict';
 
+var constants = require('../modules/constants');
+
 module.exports = {
   'Start page': function(client) {
     client.startService();
   },
 
   'Scope diagnosis': function(client) {
-    client.scopeDiagnosis('In scope', ['Clinical negligence']);
+    client.scopeDiagnosis(constants.SCOPE_PATHS.clinnegFaceToFace);
   },
 
   'Face-to-face page': function(client) {
