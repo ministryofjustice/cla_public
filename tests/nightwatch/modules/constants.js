@@ -90,6 +90,31 @@ exports.CATEGORIES_OF_LAW = [
   }
 ];
 
+exports.SCOPE_PATHS = {
+  debtInScope: {
+    title: 'Debt in scope',
+    type: 'inScope',
+    nodes: ['Debt',
+      'You’re a home owner, and you’re at risk of losing your home due to bankruptcy, mortgage debt or repossession']
+  },
+  debtOutOfScope: {
+    title: 'Debt out of scope',
+    type: 'outOfScope',
+    nodes: ['Debt',
+      'You owe money (for example, bank loans, credit card debt) but this is not putting your home at risk']
+  },
+  clinnegFaceToFace: {
+    title: 'Clinical negligence',
+    type: 'faceToFace',
+    nodes: ['Clinical negligence']
+  },
+  domesticAbuseContact: {
+    title: 'Domestic abuse',
+    type: 'contact',
+    nodes: ['Domestic abuse', 'Domestic abuse', 'Yes']
+  }
+};
+
 exports.ABOUT_YOU_QUESTIONS = [
   'have_partner',
   'in_dispute',

@@ -1,6 +1,7 @@
 'use strict';
 
 var common = require('../modules/common-functions');
+var constants = require('../modules/constants');
 
 module.exports = {
   'Start page': function(client) {
@@ -8,7 +9,7 @@ module.exports = {
   },
 
   'Scope diagnosis': function(client) {
-    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+    client.scopeDiagnosis(constants.SCOPE_PATHS.debtInScope);
   },
 
   'Interstitial page': function(client) {

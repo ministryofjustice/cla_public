@@ -2,7 +2,9 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
-var OUTGOINGS_QUESTIONS = require('../modules/constants').OUTGOINGS_QUESTIONS;
+var constants = require('../modules/constants');
+
+var OUTGOINGS_QUESTIONS = constants.OUTGOINGS_QUESTIONS;
 var OUTGOINGS_QUESTION_ERRORS = {
   'rent': 'Enter 0 if you don’t pay rent',
   'maintenance': 'Enter 0 if this doesn’t apply to you',
@@ -15,7 +17,7 @@ module.exports = {
   },
 
   'Scope diagnosis': function(client) {
-    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+    client.scopeDiagnosis(constants.SCOPE_PATHS.debtInScope);
   },
 
   'Interstitial page': function(client) {

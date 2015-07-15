@@ -2,11 +2,11 @@
 
 var log = require('../modules/log');
 
-exports.command = function(scenario, nodes, callback) {
+exports.command = function(scenario, callback) {
   var client = this;
 
   this.perform(function() {
-    log.command('Processing Scope diagnosis - scenario: ' + scenario);
+    log.command('Processing Scope diagnosis - scenario: ' + scenario.title);
 
     client
       .assert.urlContains('/scope/diagnosis',
@@ -16,7 +16,7 @@ exports.command = function(scenario, nodes, callback) {
       .useXpath()
     ;
 
-    nodes.forEach(function(node) {
+    scenario.nodes.forEach(function(node) {
       client.click('//a[starts-with(normalize-space(.), "' + node + '")]', function() {
         console.log('     • node ‘' + node + '’ is clicked');
       });

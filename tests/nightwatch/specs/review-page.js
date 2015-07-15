@@ -1,14 +1,13 @@
 'use strict';
 
 var _ = require('lodash');
-
-var SCOPE_PATH = ['Debt', 'You own your own home', 'Yes'];
+var constants = require('../modules/constants');
 
 module.exports = {
   'Scope diagnosis': function(client) {
     client
       .startService()
-      .scopeDiagnosis('In scope', SCOPE_PATH)
+      .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
     ;
   },
 
@@ -43,7 +42,7 @@ module.exports = {
       .execute(function(selector) {
         return $(selector).map(function() { return $(this).text() });
       }, ['#step-scope .answers-item .answer strong'],function(result) {
-        this.assert.ok(_.difference(SCOPE_PATH, result.value).length === 0,
+        this.assert.ok(_.difference(constants.SCOPE_PATHS.debtInScope, result.value).length === 0,
           'Answers in the scope block are the same as initially answered');
       })
       .end()

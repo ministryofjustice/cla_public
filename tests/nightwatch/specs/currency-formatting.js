@@ -1,6 +1,8 @@
 'use strict';
 
 var util = require('util');
+var constants = require('../modules/constants');
+
 var CURRENCY_CHECKS = [
   ['1', '1.00'],
   ['00001', '1.00'],
@@ -27,7 +29,7 @@ module.exports = {
   },
 
   'Scope diagnosis': function(client) {
-    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+    client.scopeDiagnosis(constants.SCOPE_PATHS.debtInScope);
   },
 
   'Interstitial page': function(client) {

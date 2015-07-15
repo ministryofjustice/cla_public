@@ -1,10 +1,12 @@
 'use strict';
 
+var constants = require('../modules/constants');
+
 module.exports = {
   'Means test progress indicator': function(client) {
     client
       .startService()
-      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
       .interstitialPage()
       .waitForElementVisible('.progress-bar', 1000, 'Progress sidebar exists')
 

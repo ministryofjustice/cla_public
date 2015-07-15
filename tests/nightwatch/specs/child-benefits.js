@@ -2,6 +2,7 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
+var constants = require('../modules/constants');
 
 var income_page_sentinel = '[name="your_income-other_income-per_interval_value"]';
 
@@ -11,7 +12,7 @@ module.exports = {
   },
 
   'Scope diagnosis': function(client) {
-    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+    client.scopeDiagnosis(constants.SCOPE_PATHS.debtInScope);
   },
 
   'Interstitial page': function(client) {
@@ -103,7 +104,7 @@ module.exports = {
 
     client
       .startService()
-      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
       .interstitialPage()
       .aboutSetAllToNo(false, {
         'on_benefits': 1,
@@ -124,7 +125,7 @@ module.exports = {
   'Should also see fields if benefits=no but children=yes': function(client) {
     client
       .startService()
-      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
       .interstitialPage()
       .aboutSetAllToNo(false, {
         'have_children': 1
@@ -141,7 +142,7 @@ module.exports = {
   'Should also see fields if benefits=no but dependants=yes': function(client) {
     client
       .startService()
-      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
       .interstitialPage()
       .aboutSetAllToNo(false, {
         'have_dependants': 1
