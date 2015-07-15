@@ -1,7 +1,3 @@
-branches:
-  only:
-    - shippable
-
 language: python
 
 python:
