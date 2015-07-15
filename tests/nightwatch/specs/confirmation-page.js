@@ -1,11 +1,12 @@
 'use strict';
 
 var moment = require('moment');
+var constants = require('../modules/constants');
 
 var eligibleJourney = function(client) {
   client
     .startService()
-    .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+    .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
     .interstitialPage()
     .aboutSetAllToNo(true, {
       'on_benefits': 1

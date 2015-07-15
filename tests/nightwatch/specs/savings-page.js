@@ -2,9 +2,11 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
-var VALUABLES_MINIMUM = require('../modules/constants').VALUABLES_MINIMUM;
-var SAVINGS_THRESHOLD = require('../modules/constants').SAVINGS_THRESHOLD;
-var SAVINGS_QUESTIONS = require('../modules/constants').SAVINGS_QUESTIONS;
+var constants = require('../modules/constants');
+
+var VALUABLES_MINIMUM = constants.VALUABLES_MINIMUM;
+var SAVINGS_THRESHOLD = constants.SAVINGS_THRESHOLD;
+var SAVINGS_QUESTIONS = constants.SAVINGS_QUESTIONS;
 SAVINGS_QUESTIONS.ALL = SAVINGS_QUESTIONS.MONEY.concat(SAVINGS_QUESTIONS.VALUABLES);
 
 module.exports = {
@@ -13,7 +15,7 @@ module.exports = {
   },
 
   'Scope diagnosis': function(client) {
-    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+    client.scopeDiagnosis(constants.SCOPE_PATHS.debtInScope);
   },
 
   'Interstitial page': function(client) {
@@ -69,7 +71,7 @@ module.exports = {
   'More validation': function(client) {
     client
       .startService()
-      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
       .interstitialPage()
       .aboutSetAllToNo(true, {
         'have_valuables': 1
@@ -93,7 +95,7 @@ module.exports = {
   'Test outcomes': function(client) {
     client
       .startService()
-      .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+      .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
       .interstitialPage()
       .aboutSetAllToNo(true, {
         'have_valuables': 1,
@@ -141,7 +143,7 @@ module.exports = {
     SAVINGS_QUESTIONS.ALL.forEach(function(item) {
       client
         .startService()
-        .scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes'])
+        .scopeDiagnosis(constants.SCOPE_PATHS.debtInScope)
         .interstitialPage()
         .aboutSetAllToNo(true, {
           'have_valuables': 1,

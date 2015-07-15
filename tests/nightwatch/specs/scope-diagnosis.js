@@ -1,17 +1,19 @@
 'use strict';
 
+var constants = require('../modules/constants');
+
 var scenarioTypes = {
-  ineligible: {
-    label: 'Ineligible',
+  outOfScope: {
+    label: 'Out of scope',
     destination: '/scope/refer',
     identifier: 'a[href="https://www.gov.uk/find-a-legal-adviser"]'
   },
-  inscope: {
+  inScope: {
     label: 'In scope',
-    destination: '/about',
-    identifier: 'input[name="have_partner"]'
+    destination: '/legal-aid-available',
+    identifier: 'a.button-get-started'
   },
-  f2f: {
+  faceToFace: {
     label: 'Face to Face',
     destination: '/scope/refer/legal-adviser',
     identifier: 'input[name="postcode"]'
@@ -22,69 +24,27 @@ var scenarioTypes = {
     identifier: 'input[name="contact_type"]'
   }
 };
-
-var categories = [
-  {
-    name: 'Clinical negligence',
-    scenarios: [
-      {
-        type: 'f2f',
-        paths: [
-          []
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Debt',
-    scenarios: [
-      {
-        type: 'inscope',
-        paths: [
-          ['You own your own home', 'Yes']
-        ]
-      },
-      {
-        type: 'ineligible',
-        paths: [
-          ['You own your own home', 'No']
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Domestic abuse',
-    scenarios: [
-      {
-        type: 'contact',
-        paths: [
-          ['Domestic abuse', 'Yes']
-        ]
-      }
-    ]
-  }
+var scenarios = [
+  constants.SCOPE_PATHS.clinnegFaceToFace,
+  constants.SCOPE_PATHS.domesticAbuseContact,
+  constants.SCOPE_PATHS.debtOutOfScope,
+  constants.SCOPE_PATHS.debtInScope
 ];
 
 module.exports = {
 
   'Scope diagnosis scenarios': function(client) {
 
-    categories.forEach(function(category) {
-      category.scenarios.forEach(function(scenario) {
-        scenario.paths.forEach(function(path) {
-          client
-            .startService()
-            .scopeDiagnosis(scenarioTypes[scenario.type].label, [category.name].concat(path));
-          if(scenario.type === 'inscope') {
-            client.interstitialPage();
-          }
-          client
-            .waitForElementVisible(scenarioTypes[scenario.type].identifier, 5000,
-              '  - Element ' + scenarioTypes[scenario.type].identifier + ' is present')
-            .assert.urlContains(scenarioTypes[scenario.type].destination,
-              '  - Destination page URL contains ' + scenarioTypes[scenario.type].destination);
-        });
-      });
+    scenarios.forEach(function(scenario) {
+      var scenarioType = scenarioTypes[scenario.type];
+
+      client
+        .startService()
+        .scopeDiagnosis(scenario)
+        .waitForElementVisible(scenarioType.identifier, 5000,
+          '  - Element ' + scenarioType.identifier + ' is present')
+        .assert.urlContains(scenarioType.destination,
+          '  - Destination page URL contains ' + scenarioType.destination);
     });
 
     client.end();

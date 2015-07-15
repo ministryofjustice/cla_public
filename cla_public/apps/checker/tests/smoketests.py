@@ -8,7 +8,6 @@ from flask import url_for, _request_ctx_stack
 from cla_public import app
 from cla_public.apps import addressfinder_proxy
 from cla_public.apps.checker import api
-from cla_public.apps.checker.tests import test_integration as util
 from cla_public.libs import laalaa, zendesk
 
 
@@ -74,10 +73,5 @@ class SmokeTests(unittest.TestCase):
             # Follow the first option's link (You own your own home)
             # and check the number of options on the following screen
             response = client.get(scope_options_item[0].find('a').get('href'))
-            scope_options_item = BeautifulSoup(response.data).find_all(class_='scope-options-list-item')
-            self.assertEquals(response.status_code, 200)
-
-            # Follow the first option's link (Yes) and is redirected to About you page
-            response = client.get(scope_options_item[0].find('a').get('href'))
             self.assertEquals(response.status_code, 302)
-            self.assertTrue(str.find(response.data, '/about') > -1)
+            self.assertTrue(str.find(response.data, '/legal-aid-available') > -1)

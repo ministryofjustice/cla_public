@@ -2,7 +2,8 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
-var BENEFITS = require('../modules/constants').BENEFITS;
+var constants = require('../modules/constants');
+var BENEFITS = constants.BENEFITS;
 
 module.exports = {
   'Start page': function(client) {
@@ -10,7 +11,7 @@ module.exports = {
   },
 
   'Scope diagnosis': function(client) {
-    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+    client.scopeDiagnosis(constants.SCOPE_PATHS.debtInScope);
   },
 
   'Interstitial page': function(client) {

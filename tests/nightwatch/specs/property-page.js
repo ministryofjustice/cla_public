@@ -2,7 +2,9 @@
 
 var util = require('util');
 var common = require('../modules/common-functions');
-var PROPERTY_QUESTIONS = require('../modules/constants').PROPERTY_QUESTIONS;
+var constants = require('../modules/constants');
+
+var PROPERTY_QUESTIONS = constants.PROPERTY_QUESTIONS;
 
 module.exports = {
   'Start page': function(client) {
@@ -10,7 +12,7 @@ module.exports = {
   },
 
   'Scope diagnosis': function(client) {
-    client.scopeDiagnosis('In scope', ['Debt', 'You own your own home', 'Yes']);
+    client.scopeDiagnosis(constants.SCOPE_PATHS.debtInScope);
   },
 
   'Interstitial page': function(client) {
