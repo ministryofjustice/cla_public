@@ -51,11 +51,7 @@ module.exports = {
 
   'Validation': function(client) {
     client
-      .submitForm('form')
-    ;
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
-
-    client
+      .ensureFormValidation()
       .click('input[name="contact_type"][value="callback"]')
     ;
 

@@ -50,7 +50,7 @@ module.exports = {
   },
 
   'Test validation': function(client) {
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
+    client.ensureFormValidation();
 
     var questions = [];
     PROPERTY_QUESTIONS.forEach(function(item) {

@@ -49,8 +49,7 @@ module.exports = {
   },
 
   'Test validation': function(client) {
-    client.submitForm('form');
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
+    client.ensureFormValidation();
   },
 
   'Test outcomes': function(client) {

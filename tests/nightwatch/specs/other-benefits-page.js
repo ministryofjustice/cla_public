@@ -52,7 +52,7 @@ module.exports = {
   },
 
   'Test validation': function(client) {
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
+    client.ensureFormValidation();
 
     common.submitAndCheckForFieldError(client, [{
       name: 'other_benefits',
