@@ -19,7 +19,7 @@ exports.command = function(scenario, callback) {
     scenario.nodes.forEach(function(node) {
       var xpath = '//a[starts-with(normalize-space(.), "' + node + '")]';
       client
-        .waitForElementVisible(xpath, 1000, '  • node ‘' + node + '’ visible')
+        .waitForElementPresent(xpath, 3000, '  • node ‘' + node + '’ visible')
         .click(xpath, function() {
           console.log('     • node ‘' + node + '’ clicked');
         });

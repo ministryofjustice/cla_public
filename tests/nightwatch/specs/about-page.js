@@ -49,7 +49,8 @@ module.exports = {
   },
 
   'Test validation': function(client) {
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
+    client.ensureFormValidation();
+
     var questions = [];
     ABOUT_YOU_QUESTIONS.forEach(function(item) {
       questions.push({
@@ -64,8 +65,10 @@ module.exports = {
         .aboutSetAllToNo(false)
         .assert.hidden(util.format('input[name="%s"]', item.subfield_name))
         .setYesNoFields(item.field_name, 1)
+        .pause(100)
         .assert.visible(util.format('input[name="%s"]', item.subfield_name))
         .setYesNoFields(item.field_name, 0)
+        .pause(100)
         .assert.hidden(util.format('input[name="%s"]', item.subfield_name))
         .setYesNoFields(item.field_name, 1)
       ;

@@ -14,31 +14,33 @@ function contactPage(client) {
       '  - "Reasons for contacting" form exists')
     .submitForm('.reasons-for-contacting-form', function() {
       console.log('     ⟡ "Continue to contact CLA" button clicked');
-    });
+    })
+    .waitForElementVisible('.contact-form', 3000,
+      '  - "Contact form exists')
+  ;
 }
 
 function willCallWithNotes(client, notes_text) {
   var notes = 'textarea[name="extra_notes"]';
   var length = notes_text.length;
   client
-    .setValue('input#full_name', 'John Smith')
+    .setValue('input[name="full_name"]', 'John Smith')
     .click('input[name="contact_type"][value="call"]')
     .setValue(notes, notes_text)
     .assert.value(notes, notes_text, 'Notes set to ' + length + ' chars')
-    .submitForm('form');
-}
-
-function assertConfirmation(client) {
-  client
-    .assert.containsText('h1', 'Your details have been submitted');
+    .submitForm('form')
+  ;
 }
 
 module.exports = {
   'Notes max length is 4000 chars': function (client) {
     contactPage(client);
-
     willCallWithNotes(client, text(4000));
-    assertConfirmation(client);
+    client
+      .waitForElementVisible('.confirmation', 3000,
+        '  - "Confirmation block exists')
+      .assert.containsText('h1', 'Your details have been submitted')
+    ;
   },
 
   'Notes have counter': function(client) {

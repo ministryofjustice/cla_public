@@ -42,6 +42,8 @@ module.exports = {
 
   'Eligible page (request callback)': function(client) {
     client
+      .waitForElementVisible('.contact-form', 3000,
+        '  - "Contact form exists')
       .assert.urlContains('/result/eligible')
       .waitForElementVisible('input[name="contact_type"]', 5000)
       .assert.containsText('h1', 'Contact Civil Legal Advice')
@@ -51,11 +53,7 @@ module.exports = {
 
   'Validation': function(client) {
     client
-      .submitForm('form')
-    ;
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
-
-    client
+      .ensureFormValidation()
       .click('input[name="contact_type"][value="callback"]')
     ;
 
@@ -65,8 +63,9 @@ module.exports = {
         errorText: 'This field is required.'
       }]);
     });
-    client
-      .setValue('input[name="callback-contact_number"]', '12345');
+
+    client.setValue('input[name="callback-contact_number"]', '12345');
+
     common.submitAndCheckForFieldError(client, [{
       name: 'callback-safe_to_contact',
       errorText: 'Please choose Yes or No'

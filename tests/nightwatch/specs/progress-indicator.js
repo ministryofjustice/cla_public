@@ -32,11 +32,11 @@ module.exports = {
 
       .assert.containsText('.progress-step.m-current', 'You and your partner’s income and tax',
         'Progress step is You and your partner’s income and tax')
-      .fillInIncome(undefined, undefined, true)
+      .fillInIncome(true, true, true)
 
       .assert.containsText('.progress-step.m-current', 'You and your partner’s outgoings',
         'Progress step is You and your partner’s outgoings')
-      .fillInOutgoings(undefined, true)
+      .fillInOutgoings(true, true)
 
       .assert.containsText('.progress-step.m-current', 'Review your answers',
         'Progress step is Review your answers')
