@@ -20,12 +20,11 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ReviewForm, AdditionalBenefitsForm
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
-from cla_public.apps.checker import honeypot
 from cla_public.apps.checker import filters  # Used in templates
 from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession, ValidFormOnOptions, HasFormMixin
-from cla_public.libs import laalaa
+from cla_public.libs import laalaa, honeypot
 
 
 log = logging.getLogger(__name__)
