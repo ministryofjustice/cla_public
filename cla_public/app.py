@@ -92,7 +92,7 @@ def register_error_handlers(app):
     def make_handler(code, template):
 
         def handler(e):
-            return render_template(os.path.join('errors', template)), code
+            return render_template(os.path.join('errors', template), code=code), code
 
         return handler
 
