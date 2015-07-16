@@ -1,4 +1,5 @@
 from collections import OrderedDict
+import hashlib
 import uuid
 from base64 import b64encode, b64decode
 from datetime import datetime, date, time
@@ -330,6 +331,7 @@ checker_session_serializer = CheckerTaggedJSONSerializer()
 
 
 class CheckerSessionInterface(SecureCookieSessionInterface):
+    digest_method = staticmethod(hashlib.sha256)
     session_class = CheckerSession
     serializer = checker_session_serializer
 
