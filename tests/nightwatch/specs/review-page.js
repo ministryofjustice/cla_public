@@ -22,8 +22,8 @@ module.exports = {
       .fillInAdditionalBenefits(true)
       .fillInProperty(true)
       .fillInSavings(true)
-      .fillInIncome(undefined, undefined, true)
-      .fillInOutgoings(undefined, true)
+      .fillInIncome(true, true, true)
+      .fillInOutgoings(true, true)
     ;
   },
 

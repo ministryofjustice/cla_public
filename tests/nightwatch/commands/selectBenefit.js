@@ -9,6 +9,7 @@ exports.command = function(benefitFieldName, shouldSubmitForm, callback) {
     log.command('Processing Benefits page…');
 
     client
+      .waitForElementPresent('body', 3000)
       .assert.urlContains('/benefits',
         '  - Benefits page URL is correct')
       .click('input[name="benefits"][value="' + benefitFieldName +'"]', function() {

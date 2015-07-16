@@ -22,13 +22,13 @@ var ALL_INPUTS = {
 // });
 // ```
 //
-// or `client.fillInIncome(undefined)` to use defaults (0s)
+// or `client.fillInIncome(true, true)` to use defaults (0s for applicant and partner)
 
 exports.command = function(yourIncome, partnerIncome, shouldSubmitForm, callback) {
   var client = this;
 
-  yourIncome = typeof yourIncome === 'undefined' ? ALL_INPUTS : yourIncome;
-  partnerIncome = typeof partnerIncome === 'undefined' ? ALL_INPUTS : partnerIncome;
+  yourIncome = yourIncome === true ? ALL_INPUTS : yourIncome;
+  partnerIncome = partnerIncome === true ? ALL_INPUTS : partnerIncome;
 
   var yourInputs = common.formatMoneyInputs('your_income-', yourIncome);
   var partnerInputs = common.formatMoneyInputs('partner_income-', partnerIncome);
@@ -36,7 +36,11 @@ exports.command = function(yourIncome, partnerIncome, shouldSubmitForm, callback
   this.perform(function() {
     log.command('Processing Income page…');
 
-    client.assert.urlContains('/income', '  - Income page URL is correct');
+    client
+      .waitForElementPresent('body.js-enabled', 3000, function() {
+        console.log('     - Waiting for page to fully load');
+      })
+      .assert.urlContains('/income', '  - Income page URL is correct');
 
     common.fillInMoneyForm(client, yourInputs, 'Applicant');
 

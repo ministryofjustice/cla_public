@@ -15,21 +15,14 @@ module.exports = {
     });
   },
 
-  // Check validation
-  // Expected to run on invalid form
-  submitAndCheckForError: function(client, errorText) {
-    client
-      .submitForm('form')
-      .assert.visible('.alert-error')
-      .assert.containsText('.alert-error', errorText)
-    ;
-  },
-
   // check specific field group for error text
   submitAndCheckForFieldError: function(client, fields, tag) {
     tag = tag || "input";
     client
       .submitForm('form')
+      .waitForElementPresent('.alert-error', 3000, function() {
+        console.log('    - Form has errors summary');
+      })
       .useXpath()
     ;
     fields.forEach(function(field) {
@@ -104,9 +97,11 @@ module.exports = {
         }
 
         if(typeof v === 'number') {
-          client.setValue(selector, v, function() {
-            console.log('     • %s: %s is £%d', type, k, v);
-          });
+          client
+            .clearValue(selector)
+            .setValue(selector, v, function() {
+              console.log('     • %s: %s is £%d', type, k, v);
+            });
         } else {
           selector += util.format(' [value="%s"]', v);
           client.click(selector, function() {

@@ -42,6 +42,7 @@ module.exports = {
       .back()
       .waitForElementVisible('input[name="have_partner"]', 5000)
       .setYesNoFields('have_partner', 1)
+      .pause(100)
       .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
       .submitForm('form')
       .waitForElementVisible('input[name="savings"]', 5000)
@@ -52,7 +53,7 @@ module.exports = {
   },
 
   'Test validation': function(client) {
-    common.submitAndCheckForError(client, 'This form has errors.\nPlease see below for the errors you need to correct.');
+    client.ensureFormValidation();
 
     var questions = [];
     SAVINGS_QUESTIONS.MONEY.forEach(function(item) {

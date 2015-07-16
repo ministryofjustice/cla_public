@@ -18,7 +18,7 @@ exports.command = function(fields, value, callback) {
           });
         // Take into account transitions if element happens to be invisible straight away
         } else if(!attemptedOnce) {
-          client.pause(1000, function() {
+          client.pause(200, function() {
             clickOption(field, value);
             attemptedOnce = true;
           });
