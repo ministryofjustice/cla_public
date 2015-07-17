@@ -69,6 +69,13 @@
     </ul>
   </div>
 
+  {% if nodes and nodes[-1].data_safety %}
+    <p>
+      {% trans %}The information you enter into this service won’t be stored on your computer or mobile device.
+        If you’re at risk of harm, you should delete your browser history after using this service.{% endtrans %}
+    </p>
+  {% endif %}
+
   <p>
     {{ _('If you’re having trouble completing this form') }},
     <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link">{{ _('get in touch') }}</a>.
