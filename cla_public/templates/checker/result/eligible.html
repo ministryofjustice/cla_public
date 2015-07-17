@@ -2,16 +2,13 @@
 
 {% block page_text %}
   <h1>
-    {%- if session.checker.need_more_info -%}
-      {{ _('We need more information') }}
-    {%- else -%}
-      {% trans %}Contact Civil Legal Advice{% endtrans %}
-    {%- endif -%}
+    {% trans %}Contact Civil Legal Advice{% endtrans %}
   </h1>
   {% if session.checker.need_more_info %}
     <p>
       {% trans %}To decide whether you might qualify for legal aid, we need more information about
-      your financial circumstances.{% endtrans %}
+      your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and
+      Wales to get specialist advice.{% endtrans %}
     </p>
   {% else %}
     <p>
