@@ -18,14 +18,23 @@ RUN echo "Europe/London" > /etc/timezone  &&  dpkg-reconfigure -f noninteractive
 
 # Dependencies
 RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
-  apt-get -y --force-yes install apt-utils python-pip \
-  python-dev build-essential git software-properties-common \
-  python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev
+  apt-get -y --force-yes install apt-utils bash git \
+  build-essential git software-properties-common \
+  libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev wget libxslt-dev libxml2-dev
 
 # Install Nginx.
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update
 RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full && \
   chown -R www-data:www-data /var/lib/nginx
+
+
+RUN apt-get clean
+
+# Install latest python
+ADD ./docker/install_python.sh /install_python.sh
+RUN chmod 755 /install_python.sh
+RUN /install_python.sh
+
 
 RUN rm -f /etc/nginx/sites-enabled/default
 
@@ -52,13 +61,20 @@ EXPOSE 80
 # APP_HOME
 ENV APP_HOME /home/app/flask
 
+# PIP INSTALL APPLICATION
+ADD ./requirements /requirements
+RUN pip install -r /requirements/jenkins.txt
+
 # Add project directory to docker
 ADD ./ /home/app/flask
 
 # awaiting docker fix
 #WORKDIR /home/app/flask
 
-# PIP INSTALL APPLICATION
-RUN cd /home/app/flask && pip install -r requirements.txt && find . -name '*.pyc' -delete && pybabel compile -d cla_public/translations
+# COMPILE TRANSLATION
+RUN cd /home/app/flask && find . -name '*.pyc' -delete && pybabel compile -d cla_public/translations
 
 ADD ./docker/nginx.conf /etc/nginx/nginx.conf
+
+# RUN TESTS
+RUN cd /home/app/flask && VIRTUAL_ENV=/usr/local /usr/local/bin/python manage.py test
