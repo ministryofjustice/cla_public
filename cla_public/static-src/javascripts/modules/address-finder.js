@@ -3,7 +3,7 @@
 
   moj.Modules.AddressFinder = {
     el: '.address-finder',
-    url: '/addressfinder/addresses/',
+    url: '/addresses/',
 
     init: function () {
       _.bindAll(this, 'render', 'onEnter', 'onclickFindBtn', 'onchangeAddress', 'queryAddressFinder', 'queryFail', 'querySuccess');
@@ -58,10 +58,7 @@
     },
 
     queryAddressFinder: function (postcode) {
-      $.getJSON(this.url, {
-        'postcode': postcode,
-        'fields': 'formatted_address'
-      })
+      $.getJSON(this.url + postcode)
         .done(this.querySuccess)
         .fail(this.queryFail);
     },

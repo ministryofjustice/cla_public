@@ -29,6 +29,7 @@ urllib3==1.10.4
 pyopenssl==0.15.1
 ndg-httpsclient==0.4.0
 pyasn1==0.1.7
+postcodeinfo>=0.0,<0.1
 
 # Temporarily install slumber from fork until https://github.com/samgiles/slumber/pull/100 is accepted
 # so we can add a timeout on requests
