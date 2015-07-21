@@ -35,5 +35,9 @@
   {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=5) %}
     <h2>{% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}</h2>
   {% endcall %}
+{% endblock %}
 
+{% block javascripts %}
+  {{ super() }}
+  {% include '_ga-outcome-pageview.html' %}
 {% endblock %}

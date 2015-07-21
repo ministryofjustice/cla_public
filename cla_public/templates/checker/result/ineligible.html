@@ -90,3 +90,10 @@
 
   {{ Element.satisfaction_survey_prompt() }}
 {% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+  {% include '_ga-outcome-pageview.html' %}
+{% endblock %}
+
+
