@@ -88,6 +88,7 @@ class ScopeIneligible(HelpOrganisations):
     _template = 'scope/ineligible.html'
 
 
-class ScopeMediation(RequiresSession, views.MethodView):
+class ScopeMediation(views.MethodView):
     def get(self):
+        session.clear_checker()
         return render_template('scope/mediation.html')
