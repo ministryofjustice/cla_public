@@ -40,5 +40,13 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue to contact CLA')) }}
   </form>
+{% endblock %}
 
+{% block javascripts %}
+  {{ super() }}
+  <script>
+    {% if referrer %}
+      ga('send', 'event', 'skip-to-contact-referrer', '{{ referrer }}');
+    {% endif %}
+  </script>
 {% endblock %}
