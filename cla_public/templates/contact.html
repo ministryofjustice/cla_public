@@ -24,9 +24,9 @@
       to question 'Are you at immediate risk of harm?'
     #}
     {% if 'n18' in session.checker.diagnosis_previous_choices %}
-      <h2 class="subtitle">
+      <h2 class="subtitle vcard">
         {% trans %}If you're in immediate danger please call Civil Legal
-        Advice on 0345 345 4 345. Call charges apply.{% endtrans %}
+        Advice on <span class="tel">0345 345 4 345</span>. <a href="https://www.gov.uk/call-charges" rel="external">Call charges apply</a>.{% endtrans %}
       </h2>
       <p>
         {% trans %}You can also ask us to call you back using the form below,
