@@ -37,6 +37,11 @@ def privacy():
     return render_template('privacy.html')
 
 
+@base.route('/online-safety')
+def online_safety():
+    return render_template('online-safety.html')
+
+
 class ZendeskView(HasFormMixin, views.MethodView, ValidFormOnOptions):
     """
     Abstract view for Zendesk forms
