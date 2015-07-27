@@ -2,16 +2,13 @@
 
 {% block page_text %}
   <h1>
-    {%- if session.checker.need_more_info -%}
-      {{ _('We need more information') }}
-    {%- else -%}
-      {% trans %}Contact Civil Legal Advice{% endtrans %}
-    {%- endif -%}
+    {% trans %}Contact Civil Legal Advice{% endtrans %}
   </h1>
   {% if session.checker.need_more_info %}
     <p>
       {% trans %}To decide whether you might qualify for legal aid, we need more information about
-      your financial circumstances.{% endtrans %}
+      your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and
+      Wales to get specialist advice.{% endtrans %}
     </p>
   {% else %}
     <p>
@@ -30,12 +27,4 @@
     or ask us to call you back, which is free.{% endtrans %}
   </p>
   <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
-{% endblock %}
-
-{% block javascripts %}
-  {{ super() }}
-  <script>
-    {% set event_label = 'need-more-info' if session.checker.need_more_info else 'eligible' %}
-    ga('send', 'event', 'eligibility-result', '{{ event_label }}');
-  </script>
 {% endblock %}

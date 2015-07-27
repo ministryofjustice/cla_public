@@ -45,6 +45,12 @@
 {% block inner_content %}
   <h1>{{ _('What do you need help with?') }}</h1>
 
+  <p>{% trans link=url_for('base.online_safety') %}
+    The personal information you enter won’t be stored on your computer or mobile device.
+    Find out more about <a href="{{ link }}">staying safe online</a>.
+    {%  endtrans %}
+  </p>
+
   <div class="scope-options">
 
     <h2 class="subtitle">
@@ -68,6 +74,13 @@
       {% endfor %}
     </ul>
   </div>
+
+  {% if nodes and nodes[-1].data_safety %}
+    <p>
+      {% trans %}The information you enter into this service won’t be stored on your computer or mobile device.
+        If you’re at risk of harm, you should delete your browser history after using this service.{% endtrans %}
+    </p>
+  {% endif %}
 
   <p>
     {{ _('If you’re having trouble completing this form') }},

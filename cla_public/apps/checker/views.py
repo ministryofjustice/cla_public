@@ -20,12 +20,11 @@ from cla_public.apps.checker.forms import AboutYouForm, YourBenefitsForm, \
     ReviewForm, AdditionalBenefitsForm
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
-from cla_public.apps.checker import honeypot
 from cla_public.apps.checker import filters  # Used in templates
 from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession, ValidFormOnOptions, HasFormMixin
-from cla_public.libs import laalaa
+from cla_public.libs import laalaa, honeypot
 
 
 log = logging.getLogger(__name__)
@@ -206,21 +205,25 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
 
     def complete(self):
         if session.checker.needs_face_to_face:
+            session.store({'outcome': 'referred/f2f/means'})
             return redirect(
                 url_for('.face-to-face', category=session.checker.category)
             )
 
         if session.checker.ineligible:
             session.store({
-                'ineligible_reasons': session.checker.ineligible_reasons
+                'ineligible_reasons': session.checker.ineligible_reasons,
+                'outcome': 'referred/help-organisations/means'
             })
             return redirect(url_for(
                 '.help_organisations',
                 category_name=session.checker.category_slug))
 
         if session.checker.need_more_info:
+            session.store({'outcome': 'provisional'})
             return redirect(url_for('.provisional'))
 
+        session.store({'outcome': 'eligible'})
         return redirect(url_for('.eligible'))
 
     def skip(self, step, for_review_page=False):
@@ -269,7 +272,7 @@ class FaceToFace(views.MethodView, object):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
         data = handle_find_legal_adviser_form(form, request.args)
 
-        session.store({'category': request.args.get('category') })
+        session.store({'category': request.args.get('category')})
 
         category_name = None
 

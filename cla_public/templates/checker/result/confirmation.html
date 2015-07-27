@@ -8,6 +8,8 @@
 {% set is_callback = session.stored.contact_type == 'callback' %}
 {% set is_thirdparty = session.stored.contact_type == 'thirdparty' %}
 
+{% block sidebar %}{% endblock %}
+
 {% block inner_content %}
   <header class="confirmation">
     <h1>
@@ -182,4 +184,5 @@
       ga('send', 'event', 'confirmation', 'email-sent');
     {% endif %}
   </script>
+  {% include '_ga-outcome-pageview.html' %}
 {% endblock %}

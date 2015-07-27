@@ -3,6 +3,7 @@
 
 import logging
 import datetime
+import re
 from urlparse import urlparse, urljoin
 
 from flask import abort, current_app, jsonify, redirect, render_template, \
@@ -35,6 +36,11 @@ def cookies():
 @base.route('/privacy')
 def privacy():
     return render_template('privacy.html')
+
+
+@base.route('/online-safety')
+def online_safety():
+    return render_template('online-safety.html')
 
 
 class ZendeskView(HasFormMixin, views.MethodView, ValidFormOnOptions):
@@ -112,6 +118,10 @@ class ReasonsForContacting(ZendeskView):
     form_class = ReasonsForContactingForm
     template = 'reasons-for-contacting.html'
     redirect_to = 'contact.get_in_touch'
+
+    def render_form(self, error=None):
+        referrer = re.sub('^(.*:)//([A-Za-z0-9\-\.]+)(:[0-9]+)?/', '/', request.referrer)
+        return render_template(self.template, form=self.form, referrer=referrer)
 
     def post(self):
         error = None

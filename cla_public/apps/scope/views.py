@@ -9,11 +9,15 @@ from flask import views, render_template, current_app, url_for, \
 
 
 OUTCOME_URLS = {
-    DIAGNOSIS_SCOPE.INSCOPE:    ('checker.interstitial', {}),
-    DIAGNOSIS_SCOPE.INELIGIBLE: ('scope.ineligible', None),
-    DIAGNOSIS_SCOPE.OUTOFSCOPE: ('scope.ineligible', {'category_name': 'legal-adviser'}),
-    DIAGNOSIS_SCOPE.MEDIATION:  ('scope.ineligible', {'category_name': 'mediation'}),
-    DIAGNOSIS_SCOPE.CONTACT:    ('contact.get_in_touch', {}),
+    DIAGNOSIS_SCOPE.INSCOPE:    ('checker.interstitial', {}, None),
+    DIAGNOSIS_SCOPE.INELIGIBLE: ('scope.ineligible', None,
+                                 'referred/help-organisations/scope'),
+    DIAGNOSIS_SCOPE.OUTOFSCOPE: ('scope.ineligible', {'category_name': 'legal-adviser'},
+                                 'referred/f2f/scope'),
+    DIAGNOSIS_SCOPE.MEDIATION:  ('scope.ineligible', {'category_name': 'mediation'},
+                                 'referred/mediation/scope'),
+    DIAGNOSIS_SCOPE.CONTACT:    ('contact.get_in_touch', {},
+                                 'incomplete'),
 }
 
 
@@ -48,6 +52,11 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
             api.save(response_json)
 
             outcome_url = OUTCOME_URLS[state]
+            outcome = outcome_url[2]
+
+            if outcome:
+                session.store({'outcome': outcome})
+
             if state == DIAGNOSIS_SCOPE.INELIGIBLE:
                 outcome_url = url_for(outcome_url[0],
                                       category_name=session.checker.category_slug)
@@ -57,6 +66,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
                     outcome_url = '%s?category=%s' % (
                         outcome_url,
                         session.checker.category)
+
             return redirect(outcome_url)
 
         def add_link(choice):
@@ -78,6 +88,7 @@ class ScopeIneligible(HelpOrganisations):
     _template = 'scope/ineligible.html'
 
 
-class ScopeMediation(RequiresSession, views.MethodView):
+class ScopeMediation(views.MethodView):
     def get(self):
+        session.clear_checker()
         return render_template('scope/mediation.html')

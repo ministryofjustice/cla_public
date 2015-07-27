@@ -1,0 +1,3 @@
+{% if session.stored.outcome -%}
+  <script>ga('send', 'pageview', '/vpv/outcome/{{ session.stored.outcome }}');</script>
+{%- endif %}

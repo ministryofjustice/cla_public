@@ -9,7 +9,7 @@
 
 {% block inner_content %}
   <h1>Check if you can get legal aid</h1>
-  <p>Legal aid can help pay for legal advice or family mediation.</p>
+  <p>Legal aid can help pay for legal advice.</p>
   <p>This service will check that your problem is covered by legal aid.</p>
   <ul>
     <li>If it looks like you can get legal aid, you may be able to get help over the phone or we’ll suggest that you speak to an adviser face to face.</li>
@@ -19,6 +19,8 @@
   <p>
     <a class="button button-get-started" href="{{ url_for('base.get_started') }}" id="start">Start now</a>
   </p>
+
+  <p>The information you enter into this service won’t be stored on your computer or mobile device. If you’re at risk of harm, you should delete your browser history after using this service.</p>
 
   {% call Element.alert() %}
     <p>You’ll only get guidance on whether or not you might qualify for legal aid – you won’t get a final decision until you speak to an adviser.</p>
@@ -33,7 +35,7 @@
   {% endcall %}
 
   <div class="meta-data group">
-    <p class="modified-date">Last updated: 6 July 2015</p>
+    <p class="modified-date">Last updated: 17 July 2015</p>
   </div>
 
 {% endblock %}

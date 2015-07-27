@@ -43,6 +43,7 @@
   {% block javascripts %}
     {{ super() }}
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+    {% include '_ga-outcome-pageview.html' %}
   {% endblock %}
 
 {% endif %}
