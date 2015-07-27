@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ _('Staying safe online') }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1>{{ _('Staying safe online') }}</h1>
+
+  <p>{{ _('It can be easy for other people to see what you’re doing online, especially if you’re using a home computer.') }}</p>
+  <p>{{ _('You can use the tips below to cover your tracks. But if someone is very determined, they’ll find a way to see where you’ve been.') }}</p>
+  <p>{{ _('Your safest option is to use a different computer, eg at your local library or someone else’s mobile.</p>') }}</p>
+
+  <h2>{{ _('How others can see where you’ve been') }}</h2>
+  <p>{{ _('Every time you use the internet your browser stores a record of what you’ve done with:') }}</p>
+  <ul>
+    <li>{{ _('a list of the pages you’ve looked at and the files you’ve downloaded') }}</li>
+    <li>{{ _('text files called cookies which remember your settings for different sites') }}</li>
+  </ul>
+
+  <h2>{{ _('How to cover your tracks') }}</h2>
+  <p>{{ _('You can improve your safety by deleting your history. But you need to be careful because:') }}</p>
+  <ul>
+    <li>{{ _('deleting cookies will also get rid of stored passwords for online accounts') }}</li>
+    <li>{{ _('clearing your history could make someone more suspicious') }}</li>
+  </ul>
+  <p>{{ _('So just remove information about the websites you want to keep private. You can do that on:') }}</p>
+  <ul>
+    <li><a href="https://support.google.com/chrome/answer/95589?hl=en&rd=1" rel="external" target="_blank">{{ _('Google Chrome') }}</a></li>
+    <li><a href="http://windows.microsoft.com/en-gb/windows-vista/clear-the-history-of-websites-youve-visited" rel="external" target="_blank">{{ _('Internet Explorer') }}</a></li>
+    <li><a href="https://support.mozilla.org/en-US/kb/delete-browsing-search-download-history-firefox" rel="external" target="_blank">{{ _('Mozilla Firefox') }}</a></li>
+    <li><a href="https://support.apple.com/kb/PH19215?locale=en_US&viewlocale=en_US" rel="external" target="_blank">{{ _('Safari') }}</a></li>
+    <li><a href="http://www.opera.com/help/tutorials/security/sharing/" rel="external" target="_blank">{{ _('Opera') }}</a></li>
+  </ul>
+
+  <h2>{{ _('Browsing in private') }}</h2>
+  <p>
+    {{ _('You can also look at a website without information like cookies being stored by using the private browsing setting
+    in your browser. Go to the menu, click on ‘File’ and choose:') }}
+  </p>
+  <ul>
+    <li>{{ _('<strong>InPrivate</strong> on Internet Explorer') }}</li>
+    <li>{{ _('<strong>Private Browsing</strong> on Mozilla Firefox or Opera') }}</li>
+    <li>{{ _('<strong>Incognito</strong> on Google Chrome') }}</li>
+    <li>{{ _('<strong>Private Window</strong> on Safari') }}</li>
+  </ul>
+{% endblock %}
