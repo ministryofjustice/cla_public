@@ -8,6 +8,8 @@
 {% set is_callback = session.stored.contact_type == 'callback' %}
 {% set is_thirdparty = session.stored.contact_type == 'thirdparty' %}
 
+{% block sidebar %}{% endblock %}
+
 {% block inner_content %}
   <header class="confirmation">
     <h1>

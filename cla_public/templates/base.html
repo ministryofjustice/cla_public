@@ -33,12 +33,12 @@
         </div>
       {% endif %}
     {% endwith %}
-    
+
     <article class="main-content">
       {% block inner_content %}{% endblock %}
     </article>
 
-    {% block sidebar %}{% endblock %}
+    {% block sidebar %}<aside></aside>{% endblock %}
   </div>
 {% endblock %}
 
