@@ -237,6 +237,7 @@ class CheckerSession(SecureCookieSession, SessionMixin):
         return not self.get('is_expired', False) and self.checker
 
     def store_checker_details(self):
+        outcome = self.stored.get('outcome', 'incomplete')
         self.stored = {
             'case_ref': self.checker.get('case_ref'),
             'callback_time': self.checker.callback_time,
@@ -245,6 +246,7 @@ class CheckerSession(SecureCookieSession, SessionMixin):
             'contact_type': self.checker.contact_type,
             'category': self.checker.category,
             'eligibility': self.checker.eligibility,
+            'outcome': outcome,
             'adaptations': [k for k, v in \
                 self.checker.get('ContactForm', {})
                     .get('adaptations', {}).items() if v]

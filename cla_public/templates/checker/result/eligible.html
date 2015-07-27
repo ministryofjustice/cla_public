@@ -28,11 +28,3 @@
   </p>
   <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
 {% endblock %}
-
-{% block javascripts %}
-  {{ super() }}
-  <script>
-    {% set event_label = 'need-more-info' if session.checker.need_more_info else 'eligible' %}
-    ga('send', 'event', 'eligibility-result', '{{ event_label }}');
-  </script>
-{% endblock %}

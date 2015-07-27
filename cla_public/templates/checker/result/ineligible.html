@@ -81,7 +81,7 @@
   {% endif %}
 
   <p>
-    <a class="button button-larger" href="https://www.gov.uk/find-a-legal-adviser" target="_blank">
+    <a class="button" href="https://www.gov.uk/find-a-legal-adviser" target="_blank">
       {{ _('Find a legal adviser') }}
     </a>
   </p>
@@ -90,3 +90,10 @@
 
   {{ Element.satisfaction_survey_prompt() }}
 {% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+  {% include '_ga-outcome-pageview.html' %}
+{% endblock %}
+
+

@@ -32,13 +32,6 @@
                       {{ reason }}
                       {{ reason.label.text }}
                     </label>
-                    {#
-                    {% if reason.data == form.REASONS_FOR_CONTACTING_OTHER %}
-                        {% call Form.fieldset(form.other_reasons, is_subfield=True, controlled_by=reason, control_value=reason.data) %}
-                          {{ form.other_reasons(class_='form-control') }}
-                        {% endcall %}
-                    {% endif %}
-                    #}
                 </li>
             {% endfor %}
         </ul>
@@ -47,7 +40,13 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue to contact CLA')) }}
   </form>
+{% endblock %}
 
-  {# <p><a href="{{ url_for('contact.get_in_touch') }}" data-ga="event:reasons-for-contacting/skipped">{{ _('Skip to contact details') }}</a></p> #}
-
+{% block javascripts %}
+  {{ super() }}
+  <script>
+    {% if referrer %}
+      ga('send', 'event', 'skip-to-contact-referrer', '{{ referrer }}');
+    {% endif %}
+  </script>
 {% endblock %}
