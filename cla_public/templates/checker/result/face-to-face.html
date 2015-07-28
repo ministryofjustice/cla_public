@@ -6,6 +6,8 @@
 
   {% import "macros/element.html" as Element %}
 
+  {% block sidebar %}{% endblock %}
+
   {% if data.origin %}
     {% set title_prefix = _('Results for ') + data.origin.postcode + ' | ' %}
   {% else %}
