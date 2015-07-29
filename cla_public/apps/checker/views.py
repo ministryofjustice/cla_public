@@ -319,6 +319,7 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptio
     def get(self):
         steps = CheckerWizard('').relevant_steps[:-1]
         if session.checker.category in NO_CALLBACK_CATEGORIES:
+            session.store({'outcome': 'referred/f2f/means'})
             return redirect(
                 url_for('.find-legal-adviser', category=session.checker.category)
             )
