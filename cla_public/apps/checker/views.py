@@ -204,8 +204,8 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return filter(lambda s: not self.skip_on_review(s), self.steps)
 
     def complete(self):
+        # TODO: Is this still used now that scope diagnosis is taking care of F2F redirects for certain categories?
         if session.checker.needs_face_to_face:
-            session.store({'outcome': 'referred/f2f/means'})
             return redirect(
                 url_for('.face-to-face', category=session.checker.category)
             )
@@ -319,6 +319,7 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptio
     def get(self):
         steps = CheckerWizard('').relevant_steps[:-1]
         if session.checker.category in NO_CALLBACK_CATEGORIES:
+            session.store({'outcome': 'referred/f2f/means'})
             return redirect(
                 url_for('.find-legal-adviser', category=session.checker.category)
             )

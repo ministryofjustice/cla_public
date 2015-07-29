@@ -51,6 +51,7 @@ class CheckerSessionObject(dict):
     def field(self, form_name, field_name, default=None):
         return self.get(form_name, {}).get(field_name, default)
 
+    # TODO: Check if redundant because scope diagnosis manages F2F redirects
     @property
     def needs_face_to_face(self):
         return self.category in F2F_CATEGORIES
