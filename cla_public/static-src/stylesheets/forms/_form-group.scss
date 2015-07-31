@@ -22,12 +22,16 @@
     }
 
     .fieldset-group {
-      margin: 0 0 0 -20px;
+      margin: 0 0 0 -19px;
       border: 0;
       border-top: 1px solid $grey-3;
 
       &:first-child {
         border-top: 0;
+      }
+
+      &.s-targeted {
+        border-left: 4px solid $mellow-red;
       }
     }
 

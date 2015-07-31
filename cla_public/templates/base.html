@@ -84,8 +84,23 @@
     <div class="alert alert-error" role="alert">
       <span class="icon icon-cross" aria-hidden="true"></span>
       <div class="alert-message">
-        <p>{{ _('This form has errors.') }}</p>
-        <p>{{ _('Please see below for the errors you need to correct.') }}</p>
+        <h3 class="alert-header" id="alert-heading-error">
+          {{ _('This form has errors') }}
+        </h3>
+        <ul class="error-summary">
+        <% _.each(errors, function(field) { %>
+          <li>
+            <dl class="error-summary-details">
+              <dt>
+                <a href="#field-<%= field.name %>"><%= field.label %></a>
+              </dt>
+              <% _.each(field.errors, function(error) { %>
+                <dd><%= error %></dd>
+              <% }); %>
+            </dl>
+          </li>
+        <% }); %>
+        </ul>
       </div>
     </div>
   </script>
