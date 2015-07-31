@@ -17,7 +17,6 @@
     },
 
     postToFormErrors: function(e) {
-      this.clearErrors();
       this.$form = $(e.target);
 
       // Return if button has a name, which is attached as form attribute on click
@@ -85,6 +84,8 @@
     loadErrors: function(errors) {
       var errorFields = this.formatErrors(errors);
       var self = this;
+
+      this.clearErrors();
 
       function addErrors(errors, fieldName) {
         if (_.isString(errors[0])) {
