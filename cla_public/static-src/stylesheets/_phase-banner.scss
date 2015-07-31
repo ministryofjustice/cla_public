@@ -1,5 +1,4 @@
 .phase-banner {
-  @extend %site-width-container;
   @include phase-banner(beta);
   z-index: 2;
 

@@ -18,9 +18,13 @@
   {% endif %}
 {% endblock %}
 
-{% block content %}
-  {% include "_phase-tag.html" %}
+{% block before_content %}
+  <div class="container">
+    {% include "_phase-tag.html" %}
+  </div>
+{% endblock %}
 
+{% block content %}
   <div class="inner-block {% if self.sidebar()|trim %}m-has-sidebar{% endif %}">
     {% with flash_messages = get_flashed_messages() %}
       {% if flash_messages %}
