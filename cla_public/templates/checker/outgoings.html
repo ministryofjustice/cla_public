@@ -16,9 +16,9 @@
       {{ Form.money_interval_fieldset(form.childcare, skip=not session.checker.has_children and not session.checker.has_dependants) }}
     {% endif %}
 
-    {{ Element.get_in_touch_alert() }}
-
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Review your answers')) }}
   </form>
+
+  {{ Element.get_in_touch_link() }}
 {% endblock %}
