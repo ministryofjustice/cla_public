@@ -7,13 +7,20 @@
   padding: 20px;
   margin: 25px 0;
 
+  &:focus {
+    outline: 2px solid $yellow;
+  }
+
   h3 {
     margin-top: 0;
   }
 
   .icon {
     float: left;
-    margin: 3px 20px 0 0;
+    margin: -1px 15px 0 0;
+    padding: 5px;
+    border: 2px solid $mellow-red;
+    border-radius: 50%;
   }
 
   .alert-message {
@@ -27,7 +34,11 @@
     .alert-header {
       @include core-24;
       font-weight: bold;
-      margin: 0;
+      margin: 0 0 10px;
+    }
+
+    h4 {
+      margin-top: 10px;
     }
 
     p:first-child {

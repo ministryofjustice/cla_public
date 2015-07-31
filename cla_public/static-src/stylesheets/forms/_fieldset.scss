@@ -2,8 +2,23 @@ fieldset {
   border: 0;
   margin: 0;
 
+  &.m-error.s-targeted {
+    border-top: 3px solid $mellow-red;
+  }
+
   &.form-group {
     border-top: 1px solid $grey-3;
+
+    &.m-error.s-targeted {
+      > .fieldset-label {
+        margin-left: 10px;
+        padding-left: 10px;
+      }
+
+      > .field-error {
+        padding-left: 20px;
+      }
+    }
   }
 
   &.fieldset-group {
@@ -59,11 +74,8 @@ fieldset {
   // Errors
   &.m-error {
     .fieldset-label.m-error {
-      background: url(../images/icons/icon-small-cross.png) 10px .25em no-repeat;
-      background: url(../images/icons/icon-small-cross-2x.png) 10px .25em/10px no-repeat;
       color: $mellow-red;
       font-weight: bold;
-      padding-left: 30px;
     }
 
     &.form-subfield {
@@ -71,5 +83,4 @@ fieldset {
       margin-left: 0;
     }
   }
-
 }
