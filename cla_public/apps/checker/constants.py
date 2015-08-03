@@ -118,7 +118,7 @@ NON_INCOME_BENEFITS = [
     ('fostering', _(u'Fostering Allowance')),
     ('housing', _(u'Housing Benefit')),
     ('indep-living', _(u'Independent Living Funds payment')),
-    ('personal-indep', _(u'Personal Independent Payments')),
+    ('personal-indep', _(u'Personal Independence Payments')),
     ('severe-disablement', _(u'Severe Disablement Allowance')),
     ('social-fund', _(u'Social Fund Payments')),
     ('special-ed-needs', _(u'Special Education Needs (SEN) direct payment')),
