@@ -51,6 +51,6 @@
   }
 
   &-error {
-    @include _style-alert($mellow-red, lighten($mellow-red, 40));
+    @include _style-alert($mellow-red, lighten($mellow-red, 43));
   }
 }
