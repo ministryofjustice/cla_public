@@ -47,16 +47,6 @@
 
     {% else %}
       <h1>{{ _('A legal adviser may be able to help you') }}</h1>
-
-      <p>
-        {% if category_name %}
-          {% trans category_name=category_name|lower %}Civil Legal Advice doesn’t provide advice on issues related to
-            {{ category_name }} but a legal adviser may be able to help.{% endtrans %}
-        {% else %}
-          {% trans %}Civil Legal Advice doesn’t provide advice related to
-            your issue but a legal adviser may be able to help.{% endtrans %}
-        {% endif %}
-      </p>
     {% endif %}
 
     {% if session.stored.category == 'mentalhealth' %}
