@@ -1,10 +1,11 @@
 'use strict';
 
 var log = require('../modules/log');
+var util = require('util');
 
 exports.command = function(errorText, callback) {
   var client = this;
-  errorText = errorText || 'This form has errors.\nPlease see below for the errors you need to correct.';
+  errorText = errorText || 'This form has errors';
 
   this.perform(function() {
     log.command('Checking form validation…');
