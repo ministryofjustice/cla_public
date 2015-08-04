@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% import "macros/element.html" as Element %}
 
-{% set heading = nodes[-1].heading if nodes else _('Choose one of the options') %}
-{% set title = _('What do you need help with?') %}
+{% if nodes|length %}
+  {% set title = nodes[-1].heading %}
+{% else %}
+  {% set title = _('Choose the area you most need help with') %}
+{% endif %}
 {% set current_percentage = nodes|length * 3 + 5 %} {# Emulate percentage progress for scope nodes  #}
 
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
@@ -13,7 +16,7 @@
       <h2>{{ _('Your answers') }}</h2>
 
       {% set url = '/scope/diagnosis' %}
-      {% set firstquestion = _('Select the area you most need help with') %}
+      {% set firstquestion = _('Choose the area you most need help with') %}
 
       <ul class="answers">
         {% if nodes|length > 0 %}
@@ -33,7 +36,7 @@
         <li class="progress-step m-current">
           <span class="step-name">
             <span class="step-status">{{ _('(current)') }}</span>
-            <span class="step-name-title">{{ heading if nodes|length > 0 else firstquestion }}</span>
+            <span class="step-name-title">{{ title if nodes|length > 0 else firstquestion }}</span>
           </span>
         </li>
       </ul>
@@ -43,7 +46,7 @@
 
 
 {% block inner_content %}
-  <h1>{{ _('What do you need help with?') }}</h1>
+  <h1>{{ title }}</h1>
 
   {% if not nodes|length or nodes and nodes[-1].data_safety %}
     <p>{% trans link=url_for('base.online_safety') %}
@@ -54,15 +57,6 @@
   {% endif %}
 
   <div class="scope-options">
-
-    <h2 class="subtitle">
-      {% if nodes|length %}
-        {{ heading }}
-      {% else %}
-        {% trans %}Select the area you most need help with{% endtrans %}
-      {% endif %}
-    </h2>
-
     <ul class="scope-options-list">
       {% for choice in choices %}
         <li class="scope-options-list-item">
