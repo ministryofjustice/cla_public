@@ -43,9 +43,9 @@
 #}
 {%  macro satisfaction_survey_prompt() %}
   {% call alert(title=_('What do you think about this service?')) %}
-    <p>
+    <p id="aria-satisfaction-survey">
       {% trans %}Your feedback will improve this service.
-      Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">send us your thoughts</a>.{% endtrans %}
+      Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">send us your thoughts</a>.{% endtrans %}
     </p>
   {% endcall %}
 {% endmacro %}
