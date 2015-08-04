@@ -9,6 +9,9 @@ exports.command = function(scenario, callback) {
     log.command('Processing Scope diagnosis - scenario: ' + scenario.title);
 
     client
+      .waitForElementPresent('body.js-enabled', 3000, function() {
+        console.log('     - Waiting for page to fully load');
+      })
       .assert.urlContains('/scope/diagnosis',
         '  - Scope diagnosis URL is correct')
       .assert.containsText('h1', 'Choose the area you most need help with',
