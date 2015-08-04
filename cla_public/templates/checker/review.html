@@ -12,7 +12,8 @@
       <section id="step-scope">
         <header>
           <h2>{{ _('Your problem area') }}</h2>
-          <a class="button-secondary button-small" href="{{ url_for('scope.diagnosis') }}">
+          <a class="button-secondary button-small" href="{{ url_for('scope.diagnosis') }}"
+            aria-label="{{ _('Go back and change your answers in your problem area section') }}">
             {{ _('Go back and change answers') }}
           </a>
         </header>
@@ -31,25 +32,32 @@
 
     {% for step in steps %}
       {% set answers = step.completed_fields() %}
-      {% with step_title = step.form_class.title %}
-        <section id="step-{{ step.name }}">
-          <header>
-            <h2>{{ step_title }}</h2>
-            <a class="button-secondary button-small" href="{{ url_for('checker.wizard', step=step.name) }}">
-              {% if step.name in ['property', 'income'] or answers|length > 1 %}
-                {{ _('Go back and change answers') }}
-              {% else %}
-                {{ _('Go back and change answer') }}
-              {% endif %}
-            </a>
-          </header>
-          <ul class="answers">
-            {% for field in answers %}
-              {{ Review.render_field(field, step_title) }}
-            {% endfor %}
-          </ul>
-        </section>
-      {% endwith %}
+      {% set multiple_answers = step.name in ['property', 'income'] or answers|length > 1 %}
+      {% set step_title = step.form_class.title %}
+      <section id="step-{{ step.name }}">
+        <header>
+          <h2>{{ step_title }}</h2>
+          <a class="button-secondary button-small" href="{{ url_for('checker.wizard', step=step.name) }}"
+            aria-label="
+              {%- trans plural=multiple_answers, step_title=step_title|lower -%}
+                Go back and change your answer in {{ step_title }} section
+              {%- pluralize -%}
+                Go back and change your answers in {{ step_title }} section
+              {%- endtrans -%}
+            ">
+            {% if multiple_answers %}
+              {{ _('Go back and change answers') }}
+            {% else %}
+              {{ _('Go back and change answer') }}
+            {% endif %}
+          </a>
+        </header>
+        <ul class="answers">
+          {% for field in answers %}
+            {{ Review.render_field(field, step_title) }}
+          {% endfor %}
+        </ul>
+      </section>
     {% endfor %}
 
     {{ form.csrf_token }}
