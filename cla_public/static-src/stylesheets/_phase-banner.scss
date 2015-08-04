@@ -5,7 +5,7 @@
   span {
     @include media(mobile) {
       margin-top: 8px;
-      width: auto;
+      display: block;
     }
   }
 
