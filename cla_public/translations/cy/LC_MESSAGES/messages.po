@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-08-03 15:59+0100\n"
+"POT-Creation-Date: 2015-08-05 09:55+0100\n"
 "PO-Revision-Date: 2015-07-30 12:57+0000\n"
 "Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/ministry-of-justice/cla-public/language/cy/)\n"
@@ -1112,8 +1112,7 @@ msgstr "Eich cyfeirnod Cyngor Cyfreithiol Sifil "
 msgid "There was an error submitting your email. Please check and try again or try without it."
 msgstr ""
 
-#: cla_public/apps/scope/api.py:116 cla_public/templates/scope/diagnosis.html:5
-#: cla_public/templates/scope/diagnosis.html:46
+#: cla_public/apps/scope/api.py:116
 msgid "What do you need help with?"
 msgstr "Ar gyfer beth y mae arnoch chi angen cymorth?"
 
@@ -1157,9 +1156,9 @@ msgstr "BETA"
 #: cla_public/templates/_phase-tag.html:17
 #, python-format
 msgid ""
-"This is a new service – your <a href=\"%(url)s\">feedback</a>\n"
+"This is a new service – your <a href=\"%(url)s\" aria-labelledby=\"aria-feedback\">feedback</a>\n"
 "      will help us to improve it."
-msgstr "Mae hwn yn wasanaeth newydd - bydd <a href=\"%(url)s\">eich adborth</a> yn ein helpu i'w wella"
+msgstr "Mae hwn yn wasanaeth newydd - bydd <a href=\"%(url)s\" aria-labelledby=\"aria-feedback\">eich adborth</a> yn ein helpu i'w wella"
 
 #: cla_public/templates/_resources.html:1
 msgid "Resources"
@@ -1229,40 +1228,40 @@ msgstr "Carafannau a cherbydau eraill nad ydych chi’n eu defnyddio bob dydd"
 msgid "Musical instruments, unless you’re a professional musician"
 msgstr "Offerynnau cerddorol, oni bai’ch bod yn gerddor proffesiynol"
 
-#: cla_public/templates/base.html:73
+#: cla_public/templates/base.html:74
 msgid "more info"
 msgstr "rhagor o wybodaeth"
 
-#: cla_public/templates/base.html:78
+#: cla_public/templates/base.html:79
 msgid "Close"
 msgstr "Cau"
 
-#: cla_public/templates/base.html:86 cla_public/templates/macros/form.html:436
+#: cla_public/templates/base.html:87 cla_public/templates/macros/form.html:436
 msgid "This form has errors."
 msgstr "Mae gwallau ar y ffurflen hon"
 
-#: cla_public/templates/base.html:87 cla_public/templates/macros/form.html:437
+#: cla_public/templates/base.html:88 cla_public/templates/macros/form.html:437
 msgid "Please see below for the errors you need to correct."
 msgstr "Gweler isod y gwallau sydd angen i chi eu cywiro"
 
-#: cla_public/templates/base.html:103
+#: cla_public/templates/base.html:104
 msgid "Show {count} more"
 msgstr ""
 
-#: cla_public/templates/base.html:110 cla_public/templates/online-safety.html:3
+#: cla_public/templates/base.html:111 cla_public/templates/online-safety.html:3
 #: cla_public/templates/online-safety.html:6
 msgid "Staying safe online"
 msgstr ""
 
-#: cla_public/templates/base.html:111
+#: cla_public/templates/base.html:112
 msgid "Privacy Policy"
 msgstr "Polisi preifatrwydd"
 
-#: cla_public/templates/base.html:112 cla_public/templates/cookies.html:5
+#: cla_public/templates/base.html:113 cla_public/templates/cookies.html:5
 msgid "Cookies"
 msgstr "Cwcis"
 
-#: cla_public/templates/base.html:113
+#: cla_public/templates/base.html:114
 msgid "Feedback"
 msgstr "Eich adborth"
 
@@ -2427,26 +2426,19 @@ msgid "Continue to contact CLA"
 msgstr "Parhau i gysylltu â CLA"
 
 #: cla_public/templates/session-expired.html:3
-msgid "Session expired"
-msgstr "Sesiwn wedi dod i ben"
-
 #: cla_public/templates/session-expired.html:6
-msgid "Please start again"
-msgstr "Dechrau eto"
+msgid "You’ve reached the end of this service"
+msgstr ""
 
 #: cla_public/templates/session-expired.html:8
-msgid ""
-"For your security, the information you have entered is automatically\n"
-"    deleted when you reach the end of this service."
+msgid "For your security, the information you’ve entered has automatically been deleted."
 msgstr ""
-"Er eich diogelwch chi, mae'r wybodaeth a fewnbynnwyd gennych yn cael ei dileu'n awtomatig\n"
-"pan fyddwch wedi cyrraedd diwedd y gwasanaeth hwn."
 
-#: cla_public/templates/session-expired.html:12
-msgid "You can start again by clicking the button below."
-msgstr "Gallwch ddechrau eto drwy glicio ar y botwm isod"
+#: cla_public/templates/session-expired.html:9
+msgid "You can start again below."
+msgstr ""
 
-#: cla_public/templates/session-expired.html:16
+#: cla_public/templates/session-expired.html:13
 msgid "Start again"
 msgstr "Dechrau eto"
 
@@ -2553,15 +2545,28 @@ msgid "Your problem area"
 msgstr "Maes eich problem"
 
 #: cla_public/templates/checker/review.html:16
-#: cla_public/templates/checker/review.html:40
+msgid "Go back and change your answers in your problem area section"
+msgstr ""
+
+#: cla_public/templates/checker/review.html:17
+#: cla_public/templates/checker/review.html:49
 msgid "Go back and change answers"
 msgstr "Ewch yn ôl a newid eich atebion"
 
 #: cla_public/templates/checker/review.html:42
+#, python-format
+msgid "Go back and change your answer in %(step_title)s section"
+msgid_plural "Go back and change your answers in %(step_title)s section"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: cla_public/templates/checker/review.html:51
 msgid "Go back and change answer"
 msgstr "Ewch yn ôl a newid eich ateb"
 
-#: cla_public/templates/checker/review.html:57
+#: cla_public/templates/checker/review.html:65
 msgid "Confirm"
 msgstr "Cadarnhau"
 
@@ -3161,26 +3166,26 @@ msgid "This service is only available if you are a resident of England or Wales.
 msgstr "Mae'r gwasanaeth hwn ar gael os ydych yn preswylio yng Nghymru a Lloegr yn unig."
 
 #: cla_public/templates/macros/element.html:36
-#: cla_public/templates/scope/diagnosis.html:89
+#: cla_public/templates/scope/diagnosis.html:75
 msgid "If you’re having trouble completing this form"
 msgstr "Os ydych yn cael problemau wrth lenwi'r ffurflen hon, gofynnwch i ni"
 
-#: cla_public/templates/macros/element.html:37
-#: cla_public/templates/scope/diagnosis.html:90
+#: cla_public/templates/macros/element.html:38
+#: cla_public/templates/scope/diagnosis.html:76
 msgid "get in touch"
 msgstr "cysylltwch â ni"
 
-#: cla_public/templates/macros/element.html:47
+#: cla_public/templates/macros/element.html:48
 msgid "What do you think about this service?"
 msgstr "A gawsoch unrhyw anhawster gyda'r gwasanaeth hwn?"
 
-#: cla_public/templates/macros/element.html:49
+#: cla_public/templates/macros/element.html:50
 msgid ""
 "Your feedback will improve this service.\n"
-"      Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">send us your thoughts</a>."
+"      Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">send us your thoughts</a>."
 msgstr ""
 "Bydd eich adborth yn gwella’r gwasanaeth hwn. \n"
-"Anfonwch <a href=\"https://www.gov.uk/done/check-legal-aid\">eich sylwadau atom</a>."
+"Anfonwch <a href=\"https://www.gov.uk/done/check-legal-aid\" aria-labelledby=\"aria-satisfaction-survey\">eich sylwadau atom</a>."
 
 #: cla_public/templates/macros/form.html:433
 msgid "Sorry, something went wrong."
@@ -3234,30 +3239,25 @@ msgstr ""
 "Byddwn yn ceisio eich ffonio o leiaf unwaith. Os yw'r unigolyn a enwebwyd yn methu'r alwad,\n"
 "bydd arnoch angen llenwi'r ffurflen hon eto."
 
-#: cla_public/templates/scope/diagnosis.html:4
-msgid "Choose one of the options"
-msgstr "Dewiswch un o'r opsiynau"
-
-#: cla_public/templates/scope/diagnosis.html:13
-msgid "Your answers"
+#: cla_public/templates/scope/diagnosis.html:7
+#: cla_public/templates/scope/diagnosis.html:19
+msgid "Choose the area you most need help with"
 msgstr ""
 
 #: cla_public/templates/scope/diagnosis.html:16
-#: cla_public/templates/scope/diagnosis.html:62
-msgid "Select the area you most need help with"
-msgstr "Dewiswch y maes y mae arnoch chi angen y mwyaf o gymorth"
+msgid "Your answers"
+msgstr ""
 
-#: cla_public/templates/scope/diagnosis.html:35
+#: cla_public/templates/scope/diagnosis.html:38
 msgid "(current)"
 msgstr "(cyfredol)"
 
-#: cla_public/templates/scope/diagnosis.html:49
-#: cla_public/templates/scope/diagnosis.html:81
+#: cla_public/templates/scope/diagnosis.html:52
 #, python-format
 msgid ""
 "\n"
-"      The personal information you enter won’t be stored on your computer or mobile device.\n"
-"      Find out more about <a href=\"%(link)s\">staying safe online</a>.\n"
+"      The information you enter won’t be stored on this device.\n"
+"      Find out more about <a href=\"%(link)s\" target=\"_blank\">staying safe online</a>.\n"
 "      "
 msgstr ""
 
@@ -3325,98 +3325,14 @@ msgstr "Dod o hyd i gyfryngwr sy'n lleol i chi"
 #~ msgid "Your benefits and tax credits"
 #~ msgstr "Eich budd-daliadau a chredydau treth"
 
-#~ msgid ""
-#~ "You may still get help and advice from the organisations listed\n"
-#~ "      below. You don’t have to qualify for legal aid."
-#~ msgstr ""
-#~ "Efallai y byddwch chi dal yn gallu cael help a chyngor gan y sefydliadau sydd wedi'u rhestru\n"
-#~ "isod. Nid oes rhaid i chi fod yn gymwys i gael cymorth cyfreithiol."
-
-#~ msgid ""
-#~ "If you're in immediate danger please call Civil Legal\n"
-#~ "        Advice on 0345 345 4 345. Call charges apply."
-#~ msgstr "Os ydych mewn perygl uniongyrchol, ffoniwch Cyngor Cyfreithiol Sifil ar 0345 345 4 345. Mae cyfraddau galwadau yn berthnasol. "
-
 #~ msgid "Please select at least one option."
 #~ msgstr "Dewiswch o leiaf un opsiwn"
-
-#~ msgid ""
-#~ "Your details have been submitted and an operator will try to call\n"
-#~ "        you back around the time you requested"
-#~ msgstr ""
-#~ "Mae’ch manylion wedi cael eu cyflwyno a bydd gweithredwr yn ceisio eich ffonio’n \n"
-#~ "ôl tua’r amser yr oeddech wedi gofyn amdano"
-
-#~ msgid ""
-#~ "Your details have been submitted and an operator will try to call\n"
-#~ "        the person you nominated back around the time you requested"
-#~ msgstr ""
-#~ "Mae’ch manylion wedi cael eu cyflwyno a bydd gweithredwr yn ceisio ffonio’r\n"
-#~ "unigolyn a enwyd gennych chi tua’r amser yr oeddech wedi gofyn amdano"
-
-#~ msgid ""
-#~ "The first person you speak to will be an operator\n"
-#~ "        who will ask about your problem and your financial circumstances"
-#~ msgstr "Yr unigolyn cyntaf fydd yn siarad â chi fydd gweithredwr a fydd yn gofyn cwestiynau i chi am eich problem a'ch amgylchiadau ariannol"
-
-#~ msgid ""
-#~ "The first person they speak to will be an operator\n"
-#~ "        who will ask about your problem and your financial circumstances"
-#~ msgstr "Yr unigolyn cyntaf fydd yn siarad â hwy fydd gweithredwr a fydd yn gofyn cwestiynau am eich problem a'ch amgylchiadau ariannol"
-
-#~ msgid ""
-#~ "If it looks like you might qualify for legal aid you’ll\n"
-#~ "        be put through to a specialist adviser, who will make the\n"
-#~ "        final decision on your case"
-#~ msgstr "Os yw’n ymddangos y gallech chi fod yn gymwys am gymorth cyfreithiol, fe’ch trosglwyddir i un o gynghorwyr arbenigol a fydd yn gwneud y penderfyniad terfynol ynghylch eich achos"
-
-#~ msgid ""
-#~ "If it looks like you might qualify for legal aid they’ll\n"
-#~ "        be put through to a specialist adviser, who will make the\n"
-#~ "        final decision on your case"
-#~ msgstr "Os yw’n ymddangos y gallech chi fod yn gymwys am gymorth cyfreithiol, fe’ch trosglwyddir i un o gynghorwyr arbenigol a fydd yn gwneud y penderfyniad terfynol ynghylch eich achos"
 
 #~ msgid "We need more information"
 #~ msgstr "Mae angen i ni gael rhagor o wybodaeth"
 
-#~ msgid ""
-#~ "To decide whether you might qualify for legal aid, we need more information about\n"
-#~ "      your financial circumstances."
-#~ msgstr "Er mwyn penderfynu a allech chi fod yn gymwys i gael cymorth cyfreithiol, mae angen i ni gael rhagor o wybodaeth am eich amgylchiadau ariannol."
-
-#~ msgid ""
-#~ "You should contact a legal adviser in your area. Your legal\n"
-#~ "        adviser will ask about your problem and your financial circumstances,\n"
-#~ "        to check if you qualify for legal aid."
-#~ msgstr ""
-#~ "Dylech gysylltu â chynghorydd cyfreithiol yn eich ardal. Bydd eich cynghorydd cyfreithiol yn gofyn ynghylch eich problem a'ch amgylchiadau ariannol, \n"
-#~ "i wirio os byddwch yn gymwys am gymorth cyfreithiol."
-
 #~ msgid "You may be able to get advice from a legal adviser"
 #~ msgstr "Efallai y gallwch gael cyngor gan gynghorydd cyfreithiol"
-
-#~ msgid ""
-#~ "You will usually only get legal aid for advice about\n"
-#~ "            clinical negligence if your child has been severely injured during\n"
-#~ "            birth or in the first 8 weeks of life."
-#~ msgstr ""
-#~ "Fel arfer dim ond os yw’ch plentyn wedi cael ei anafu’n ddifrifol \n"
-#~ "wrth ei eni neu yn ystod 8 wythnos gyntaf ei fywyd y byddwch chi’n cael \n"
-#~ "cymorth cyfreithiol ar gyfer cyngor ar esgeuluster clinigol."
-
-#~ msgid ""
-#~ "Civil Legal Advice doesn't provide advice on issues related\n"
-#~ "            to clinical negligence, but a legal adviser may be able to help."
-#~ msgstr "Nid yw Cyngor Cyfreithiol Sifil yn darparu cyngor ar faterion sy'n gysylltiedig ag esgeuluster clinigol, ond efallai y gall gynghorydd cyfreithiol eich helpu."
-
-#~ msgid ""
-#~ "You may be able to get legal aid in exceptional cases. You\n"
-#~ "            could seek advice from a legal adviser about whether an application\n"
-#~ "            might succeed in your case and how to apply."
-#~ msgstr ""
-#~ "Efallai y bydd cymorth cyfreithiol yn dal ar gael mewn achosion eithriadol. Gallech chi \n"
-#~ "ofyn am gyngor gan gynghorydd cyfreithiol ynghylch a fydd cais am gymorth cyfreithiol \n"
-#~ "yn debygol o lwyddo yn eich achos chi a sut i wneud cais."
 
 #~ msgid "Civil Legal Advice doesn’t provide advice on issues related to"
 #~ msgstr "Nid ydym yn darparu cyngor am faterion sy’n ymwneud â/ag "
@@ -3426,38 +3342,6 @@ msgstr "Dod o hyd i gyfryngwr sy'n lleol i chi"
 
 #~ msgid "but a legal adviser may be able to help."
 #~ msgstr "ond efallai gall gynghorydd cyfreithiol gynorthwyo."
-
-#~ msgid ""
-#~ "If you're applying for legal aid for a mental health issue,\n"
-#~ "            the requirements for the financial assessment are less rigorous than\n"
-#~ "            for other legal aid problems."
-#~ msgstr ""
-#~ "Os ydych yn gwneud cais am gymorth cyfreithiol ar gyfer problem iechyd meddwl, \n"
-#~ "nid yw'r gofynion ar gyfer yr asesiad ariannol mor llym o'i gymharu â\n"
-#~ "phroblemau cymorth cyfreithiol eraill.   "
-
-#~ msgid ""
-#~ "Your adviser will check whether you qualify for legal aid at\n"
-#~ "        no cost to you. If you qualify for legal aid, you will not have to pay\n"
-#~ "          for legal advice."
-#~ msgstr ""
-#~ "Bydd eich cynghorydd yn gwirio a ydych chi’n gymwys i gael cymorth cyfreithiol \n"
-#~ "am ddim. Os ydych yn gymwys am gymorth cyfreithiol, ni ddylech chi orfod talu \n"
-#~ "am gyngor cyfreithiol."
-
-#~ msgid ""
-#~ "If you don't qualify for legal aid, you will have to pay for\n"
-#~ "          legal advice. You should ask your adviser about the cost of their\n"
-#~ "          advice."
-#~ msgstr ""
-#~ "Os nad ydych chi’n gymwys i gael cymorth cyfreithiol, bydd yn rhaid i chi dalu am \n"
-#~ "gyngor cyfreithiol. Dylech chi siarad â’ch cynghorydd am y gost \n"
-#~ "o gael cyngor ganddynt."
-
-#~ msgid ""
-#~ "You can also seek advice from a legal adviser - you will have to\n"
-#~ "      pay for this advice."
-#~ msgstr "Gallwch chi hefyd ofyn am gyngor gan gynghorydd cyfreithiol - bydd yn rhaid i chi dalu am y cyngor hwn"
 
 #~ msgid "If you miss the call or you need advice urgently, you can call us on 0345 345 4 345. Please quote your reference number when you call."
 #~ msgstr "Os byddwch yn methu’r alwad neu angen cyngor ar frys, gallwch ein ffonio ar 0345 345 4 345. Dyfynnwch eich cyfeirnod pan fyddwch yn ffonio."
@@ -3477,3 +3361,22 @@ msgstr "Dod o hyd i gyfryngwr sy'n lleol i chi"
 #~ msgid "If you can't get legal aid, you can still seek advice from a legal adviser. You will have to pay for this advice."
 #~ msgstr "Os na allwch gael cymorth cyfreithiol, gallwch chi dal gael cyngor gan gynghorydd cyfreithiol. Bydd yn rhaid i chi dalu am y cyngor hwn."
 
+#~ msgid "Session expired"
+#~ msgstr "Sesiwn wedi dod i ben"
+
+#~ msgid "Please start again"
+#~ msgstr "Dechrau eto"
+
+#~ msgid "For your security, the information you have entered is automatically\n"
+#~ "    deleted when you reach the end of this service."
+#~ msgstr "Er eich diogelwch chi, mae'r wybodaeth a fewnbynnwyd gennych yn cael ei dileu'n awtomatig\n"
+#~ "pan fyddwch wedi cyrraedd diwedd y gwasanaeth hwn."
+
+#~ msgid "You can start again by clicking the button below."
+#~ msgstr "Gallwch ddechrau eto drwy glicio ar y botwm isod"
+
+#~ msgid "Choose one of the options"
+#~ msgstr "Dewiswch un o'r opsiynau"
+
+#~ msgid "Select the area you most need help with"
+#~ msgstr "Dewiswch y maes y mae arnoch chi angen y mwyaf o gymorth"
