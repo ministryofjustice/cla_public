@@ -13,8 +13,8 @@
 
   <p>
     <strong class="phase-tag">{{ _('BETA') }}</strong>
-    <span>
-      {% trans url=url_for('base.feedback') %}This is a new service – your <a href="{{ url }}">feedback</a>
+    <span id="aria-feedback">
+      {% trans url=url_for('base.feedback') %}This is a new service – your <a href="{{ url }}" aria-labelledby="aria-feedback">feedback</a>
       will help us to improve it.{% endtrans %}</span>
   </p>
 </div>
