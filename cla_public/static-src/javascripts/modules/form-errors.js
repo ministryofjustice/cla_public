@@ -100,6 +100,30 @@
       return errorFields;
     },
 
+    createErrorSummary: function() {
+      var errorSummary = [];
+
+      // Loop through errors on the page to retain the fields order
+      $('fieldset.m-error').map(function() {
+        var $this = $(this);
+
+        if(!this.id || $this.hasClass('s-hidden') || $this.parent().hasClass('s-hidden')) {
+          return;
+        }
+        var name = this.id.replace(/^field-/, '');
+
+        errorSummary.push({
+          label: $this.find('> .fieldset-label').text(),
+          name: name,
+          errors: $this.find('> .field-error p').map(function() {
+            return $(this).text();
+          })
+        });
+      });
+
+      return errorSummary;
+    },
+
     loadErrors: function(errors) {
       var errorFields = this.formatErrors(errors);
       var self = this;
@@ -125,31 +149,10 @@
         }
       }
 
-      function createErrorSummary() {
-        var errorSummary = [];
-
-        // Loop through errors on the page to retain the fields order
-        $('fieldset.m-error:not(.s-hidden)').map(function() {
-          if(!this.id || $(this).parent().hasClass('s-hidden')) {
-            return;
-          }
-          var name = this.id.replace(/^field-/, '');
-          errorSummary.push({
-            label: $(this).find('> .fieldset-label').text(),
-            name: name,
-            errors: $(this).find('> .field-error p').map(function() {
-              return $(this).text();
-            })
-          });
-        });
-
-        return errorSummary;
-      }
-
       _.each(errorFields, addErrors);
 
       if(this.$form.data('error-banner') !== false) {
-        this.$form.prepend(this.mainFormError({ errors: createErrorSummary()}));
+        this.$form.prepend(this.mainFormError({ errors: this.createErrorSummary()}));
       }
     },
 
