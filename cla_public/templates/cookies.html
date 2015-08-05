@@ -21,9 +21,10 @@
   {% endcall %}
 
   <p>{{ _('You’ll normally see a message on the site before we store a cookie on your computer.') }}</p>
-  <p>{{ _('Find out more about <a href="http://www.aboutcookies.org/" rel="external" target="_blank">how to manage cookies</a>.') }}</p>
-
-
+  <p>
+    {% trans manage_cookies_link=Element.link_new_window('http://www.aboutcookies.org/', 'how to manage cookies', True) %}
+      Find out more about {{ manage_cookies_link }}.</p>
+    {% endtrans %}
   <h2>{{ _('How cookies are used on GOV.UK') }}</h2>
   <h3>{{ _('Measuring website usage (Google Analytics)') }}</h3>
 
@@ -60,7 +61,11 @@
     </tbody>
   </table>
 
-  <p>{{ _('You can <a href="https://tools.google.com/dlpage/gaoptout" rel="external" target="_blank">opt out of Google Analytics cookies</a>.') }}</p>
+  <p>
+    {% trans opt_out_link=Element.link_new_window('https://tools.google.com/dlpage/gaoptout', 'opt out of Google Analytics cookies', True) %}
+      You can {{ opt_out_link }}.
+    {% endtrans %}
+  </p>
 
 
   <h3>{{ _('Our introductory message') }}</h3>
@@ -121,7 +126,8 @@
   </table>
 
   <p>
-    {% trans %}You can read more about
-    <a href="https://www.gov.uk/help/cookies" rel="external" target="_blank">how cookies are used on gov.uk</a>.{% endtrans %}
+    {% trans govuk_cookies_link=Element.link_new_window('https://www.gov.uk/help/cookies', 'how cookies are used on gov.uk', True) %}
+      You can read more about {{ govuk_cookies_link }}.
+    {% endtrans %}
   </p>
 {% endblock %}

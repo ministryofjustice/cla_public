@@ -72,9 +72,7 @@
                   {% if item.organisation.website %}
                     <p>
                       <span>{{ _('Website') }}:</span>
-                      <a class="url" href="{{ item.organisation.website|human_to_url }}" target="_blank">
-                        {{ item.organisation.website|url_to_human }}
-                      </a>
+                      {{ Element.link_new_window(item.organisation.website|human_to_url, item.organisation.website|url_to_human, is_external=True, **{'class': 'url'}) }}
                     </p>
                   {% endif %}
                 </div>

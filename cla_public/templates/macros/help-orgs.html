@@ -39,14 +39,13 @@
     - organisations <list>
         List of help organisations
 #}
+{% import "macros/element.html" as Element %}
 {% macro org_list(organisations) %}
   <ul class="org-list">
     {% for org in organisations %}
       <li class="vcard">
         <h3>
-          <a class="url fn org" href="{{ org.website }}" rel="external" target="_blank">
-            {{ org.service_name }}
-          </a>
+          {{ Element.link_new_window(org.website, org.service_name, is_external=True, **{'class': 'url'}) }}
         </h3>
         {% if org.public_description %}
           <div class="org-description">

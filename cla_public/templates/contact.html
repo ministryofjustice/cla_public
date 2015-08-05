@@ -25,8 +25,10 @@
     #}
     {% if 'n18' in session.checker.diagnosis_previous_choices %}
       <h2 class="subtitle vcard">
-        {% trans %}If you're in immediate danger please call Civil Legal
-        Advice on <span class="tel">0345 345 4 345</span>. <a href="https://www.gov.uk/call-charges" rel="external">Call charges apply</a>.{% endtrans %}
+        {% trans call_charges_link=Element.link_new_window('https://www.gov.uk/call-charges', 'Call charges apply', True) %}
+          If you're in immediate danger please call Civil Legal Advice on <span class="tel">0345 345 4 345</span>.
+          {{ call_charges_link }}.
+        {% endtrans %}
       </h2>
       <p class="subtitle">
         {% trans %}You can also ask us to call you back using the form below,
@@ -41,9 +43,10 @@
         {% trans %}Please submit your details to get in touch with Civil Legal Advice (CLA).{% endtrans %}
       </p>
       <p>
-        {% trans %}You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
-        <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
-        or ask us to call you back, which is free.{% endtrans %}
+        {% trans call_charges_link=Element.link_new_window('https://www.gov.uk/call-charges', 'call charges', True) %}
+          You can choose to contact CLA yourself and speak to someone immediately
+          (this is an 0345 number - {{ call_charges_link }} apply) or ask us to call you back, which is free.
+        {% endtrans %}
       </p>
       <p>{{ _('You’ll need to provide evidence of the financial information (if any) you’ve given us through this service.') }}</p>
     {% endif %}
@@ -100,8 +103,10 @@
 
   {% block notice %}
     <p class="notice">
-      {% trans %}Protecting your personal data and your privacy is important to us.
-      Read the full <a href="/privacy" target="_blank">Civil Legal Advice Privacy Statement</a>.{% endtrans %}
+      {% trans privacy_link=Element.link_new_window(url_for('base.privacy'), 'Civil Legal Advice Privacy Statement') %}
+        Protecting your personal data and your privacy is important to us.
+        Read the full {{ privacy_link }}.
+      {% endtrans %}
     </p>
   {% endblock %}
 {% endblock %}

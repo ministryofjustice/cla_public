@@ -1,5 +1,7 @@
 {% extends "contact.html" %}
 
+{% import "macros/element.html" as Element %}
+
 {% block page_text %}
   <h1>
     {% trans %}Contact Civil Legal Advice{% endtrans %}
@@ -22,9 +24,10 @@
     below.{% endtrans %}
   </p>
   <p>
-    {% trans %}You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
-    <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a> apply)
-    or ask us to call you back, which is free.{% endtrans %}
+    {% trans call_charges_link=Element.link_new_window('https://www.gov.uk/call-charges', 'call charges', True) %}
+      You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
+      {{ call_charges_link }} apply) or ask us to call you back, which is free.
+    {% endtrans %}
   </p>
   <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
 {% endblock %}

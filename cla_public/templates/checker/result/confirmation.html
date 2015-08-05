@@ -29,7 +29,7 @@
       <p class="confirmation-inset">
         {{ _('You can now call CLA on') }} <strong>0345 345 4 345</strong>.<br>
         {% trans %}Please quote your reference number when you call. Find out about
-        <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
+        <a href="https://www.gov.uk/call-charges" rel="external">call charges</a>.{% endtrans %}
       </p>
     {% endif %}
 
@@ -113,7 +113,7 @@
       {% trans %}Please be aware that the specialist adviser will need
       evidence of the domestic violence before they can make a decision
       on your case.{% endtrans %}
-      <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external" target="_blank">
+      <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
         {{ _('Find out what you can use as evidence') }}</a>.
     </p>
   {% elif session.stored.category == 'family' %}
@@ -121,7 +121,7 @@
       {% trans %}If your case involves domestic abuse or violence,
       the specialist adviser will need evidence of this
       before they can make a decision on your case.{% endtrans %}
-      <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external" target="_blank">
+      <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
       {{ _('Find out what you can use as evidence') }}</a>.
     </p>
   {% endif %}
@@ -141,7 +141,10 @@
   {% endif %}
 
   <p>
-    {% trans %}If your specialist adviser thinks you need to speak to someone in person or have someone represent you in court, they will organise this.{% endtrans %}
+    {% trans %}
+      If your specialist adviser thinks you need to speak to someone in person or have
+      someone represent you in court, they will organise this.
+    {% endtrans %}
   </p>
 
   <p>
@@ -151,8 +154,10 @@
     {% trans %}If we can do anything to make it easier for you to communicate with us, please tell the operator.{% endtrans %}
   </p>
   <p>
-    {% trans %}Protecting your personal data and your privacy is important to us. Read the full
-    <a href="/privacy" target="_blank">Civil Legal Advice Privacy Statement</a>.{% endtrans %}
+    {% trans privacy_link=url_for('base.privacy') %}
+      Protecting your personal data and your privacy is important to us. Read the full
+      <a href="{{ privacy_link }}">Civil Legal Advice Privacy Statement</a>.
+    {% endtrans %}
   </p>
 
   {% if session.stored.callback_requested %}
@@ -160,7 +165,7 @@
     <p>
       {% trans %}If you miss the call or you need advice urgently, you can call us on
       <strong>0345 345 4 345</strong>. Find out about
-      <a href="https://www.gov.uk/call-charges" rel="external" target="_blank">call charges</a>.{% endtrans %}
+      <a href="https://www.gov.uk/call-charges" rel="external">call charges</a>.{% endtrans %}
     </p>
   {% endif %}
 
