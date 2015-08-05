@@ -149,7 +149,16 @@ class SetZeroFormField(FormField):
         set_zero_values(self.form)
 
 
+class MoneyTextInput(widgets.TextInput):
+    def __call__(self, field, **kwargs):
+        if field.label.text:
+            kwargs['aria-label'] = u'%s. %s' % \
+                (field.label.text, field.gettext(u'Enter 0 if this does not apply.'))
+        return super(MoneyTextInput, self).__call__(field, **kwargs)
+
+
 class MoneyField(SetZeroIntegerField):
+    widget = MoneyTextInput()
 
     def __init__(self, label=None, validators=None, min_val=0,
                  max_val=9999999999, **kwargs):
@@ -210,6 +219,7 @@ class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
         # Enable choices to be passed through
         choices = kwargs.pop('choices', None)
         super(MoneyIntervalForm, self).__init__(*args, **kwargs)
+        self.per_interval_value.label.text = kwargs.get('label')
         if choices:
             self.interval_period.choices = choices
 
@@ -256,7 +266,7 @@ class MoneyIntervalField(PassKwargsToFormField):
 
         super(MoneyIntervalField, self).__init__(
             MoneyIntervalForm,
-            form_kwargs={'choices': choices},
+            form_kwargs={'choices': choices, 'label': kwargs.get('label')},
             *args, **kwargs)
 
     def as_monthly(self):

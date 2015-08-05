@@ -47,7 +47,7 @@ class AboutYouForm(BaseForm):
 
     title = _(u'About you')
     have_partner = YesNoField(
-        _(u'Do you have a partner?'),
+        label=_(u'Do you have a partner?'),
         description=(
             _(u"Your husband, wife, civil partner (unless "
               u"you have permanently separated) or someone you live with "
@@ -56,7 +56,7 @@ class AboutYouForm(BaseForm):
         no_text=lazy_pgettext(u'There is/are not', u'No'),
         )
     in_dispute = YesNoField(
-        _(u'If Yes, are you in a dispute with your partner?'),
+        label=_(u'If Yes, are you in a dispute with your partner?'),
         description=(
             _(u"This means your partner is the opponent in the dispute "
               u"you need help with, for example a dispute over money or "
@@ -68,57 +68,57 @@ class AboutYouForm(BaseForm):
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
     on_benefits = YesNoField(
-        _(u'Do you receive any benefits (including Child Benefit)?'),
+        label=_(u'Do you receive any benefits (including Child Benefit)?'),
         description=(
             _(u"Being on some benefits can help you qualify for legal aid")),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
     have_children = YesNoField(
-        _(u'Do you have any children aged 15 or under?'),
+        label=_(u'Do you have any children aged 15 or under?'),
         description=_(u"Don't include any children who don't live with you"),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     num_children = SetZeroIntegerField(
-        _(u'If Yes, how many?'),
+        label=_(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_children', FieldValue(NO)),
             DataRequired(_(u'Number must be between 1 and 50')),
             NumberRange(min=1, max=50, message=_(
                 u'Number must be between 1 and 50'))])
     have_dependants = YesNoField(
-        _(u'Do you have any dependants aged 16 or over?'),
+        label=_(u'Do you have any dependants aged 16 or over?'),
         description=_(
             u"People who you live with and support financially. This could be "
             u"a young person for whom you get Child Benefit"),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     num_dependants = SetZeroIntegerField(
-        _(u'If Yes, how many?'),
+        label=_(u'If Yes, how many?'),
         validators=[
             IgnoreIf('have_dependants', FieldValue(NO)),
             DataRequired(_(u'Number must be between 1 and 50')),
             NumberRange(min=1, max=50, message=_(
                 u'Number must be between 1 and 50'))])
     have_savings = YesNoField(
-        _(u'Do you have any savings or investments?'),
+        label=_(u'Do you have any savings or investments?'),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     have_valuables = YesNoField(
-        _(u'Do you have any valuable items worth over £500 each?'),
+        label=_(u'Do you have any valuable items worth over £500 each?'),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     own_property = YesNoField(
-        _(u'Do you own any property?'),
+        label=_(u'Do you own any property?'),
         description=_(u"For example, a house, static caravan or flat"))
     is_employed = YesNoField(
-        _(u'Are you employed?'),
+        label=_(u'Are you employed?'),
         description=(
             _(u"This means working as an employee - you may be both employed "
               u"and self-employed")),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
     partner_is_employed = YesNoField(
-        _(u'Is your partner employed?'),
+        label=_(u'Is your partner employed?'),
         description=_(
             u"This means working as an employee - your partner may be both "
             u"employed and self-employed"),
@@ -128,14 +128,14 @@ class AboutYouForm(BaseForm):
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     is_self_employed = YesNoField(
-        _(u'Are you self-employed?'),
+        label=_(u'Are you self-employed?'),
         description=(
             _(u"This means working for yourself - you may be both employed "
               u"and self-employed")),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
     partner_is_self_employed = YesNoField(
-        _(u'Is your partner self-employed?'),
+        label=_(u'Is your partner self-employed?'),
         description=_(
             u"This means working for yourself - your partner may be both "
             u"employed and self-employed"),
@@ -145,7 +145,7 @@ class AboutYouForm(BaseForm):
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     aged_60_or_over = YesNoField(
-        _(u'Are you or your partner (if you have one) aged 60 or over?'),
+        label=_(u'Are you or your partner (if you have one) aged 60 or over?'),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
 
@@ -213,7 +213,7 @@ class AdditionalBenefitsForm(BaseForm):
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
     total_other_benefit = MoneyIntervalField(
-        _(u'If Yes, total amount of benefits not listed above'),
+        label=_(u'If Yes, total amount of benefits not listed above'),
         choices=money_intervals_except('per_month'),
         validators=[
             IgnoreIf('other_benefits', FieldValue(NO)),
@@ -223,7 +223,7 @@ class AdditionalBenefitsForm(BaseForm):
 class PropertyForm(BaseNoCsrfForm):
 
     is_main_home = YesNoField(
-        _(u'Is this property your main home?'),
+        label=_(u'Is this property your main home?'),
         description=(
             _(u"If you are separated and no longer live in the property you "
               u"own, please answer ‘no’")))
@@ -239,37 +239,37 @@ class PropertyForm(BaseNoCsrfForm):
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
         no_text=lazy_pgettext(u'There is/are not', u'No'))
     property_value = MoneyField(
-        _(u'How much is the property worth?'),
+        label=_(u'How much is the property worth?'),
         description=_(
             u"Use a property website or the Land Registry house prices "
             u"website."),
         validators=[
             InputRequired(_(u'Please enter a valid amount'))])
     mortgage_remaining = MoneyField(
-        _(u'How much is left to pay on the mortgage?'),
+        label=_(u'How much is left to pay on the mortgage?'),
         description=(
             _(u"Include the full amount owed, even if the property has "
               u"shared ownership")),
         validators=[
             InputRequired(_(u'Please enter 0 if you have no mortgage'))])
     mortgage_payments = MoneyField(
-        _(u'How much was your monthly mortgage repayment last month?'),
+        label=_(u'How much was your monthly mortgage repayment last month?'),
         validators=[
             IgnoreIf('mortgage_remaining', FieldValue(0)),
             InputRequired(_(u'Please enter 0 if you have no mortgage')),
         ])
     is_rented = YesNoField(
-        _(u'Do you rent out any part of this property?'),
+        label=_(u'Do you rent out any part of this property?'),
         yes_text=lazy_pgettext(u'I am', u'Yes'),
         no_text=lazy_pgettext(u'I’m not', u'No'))
     rent_amount = MoneyIntervalField(
-        _(u'If Yes, how much rent did you receive last month?'),
+        label=_(u'If Yes, how much rent did you receive last month?'),
         choices=money_intervals_except('per_4week'),
         validators=[
             IgnoreIf('is_rented', FieldValue(NO)),
             MoneyIntervalAmountRequired()])
     in_dispute = YesNoField(
-        _(u'Is your share of the property in dispute?'),
+        label=_(u'Is your share of the property in dispute?'),
         description=_(
             u"For example, as part of the financial settlement of a divorce"),
         yes_text=lazy_pgettext(u'There is/are', u'Yes'),
@@ -315,21 +315,21 @@ class SavingsForm(BaseForm):
         return _(u'Your savings')
 
     savings = MoneyField(
-        _('Savings'),
+        label=_('Savings'),
         description=_(
             u"The total amount of savings in cash, bank or building society"),
         validators=[InputRequired(
             message=_(u'Enter 0 if you have no savings')
         )])
     investments = MoneyField(
-        _('Investments'),
+        label=_('Investments'),
         description=_(
             u"This includes stocks, shares, bonds (but not property)"),
         validators=[InputRequired(
             message=_(u'Enter 0 if you have no investments')
         )])
     valuables = MoneyField(
-        _(u'Total value of items worth over £500 each'),
+        label=_(u'Total value of items worth over £500 each'),
         validators=[
             InputRequired(message=_(
                 u'Enter 0 if you have no valuable items worth over £500 each'
@@ -390,24 +390,24 @@ class IncomeFieldForm(BaseNoCsrfForm):
         },
         validators=[MoneyIntervalAmountRequired()])
     working_tax_credit = MoneyIntervalField(
-        _(u'Working Tax Credit'),
+        label=_(u'Working Tax Credit'),
         description=_(u"Extra money for people who work and have a low income"),
         validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     child_tax_credit = MoneyIntervalField(
-        _(u'Child Tax Credit'),
+        label=_(u'Child Tax Credit'),
         description=_(u"The total amount you get for all your children"),
         choices=money_intervals_except('per_month'),
         validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     maintenance = MoneyIntervalField(
-        _(u'Maintenance received'),
+        label=_(u'Maintenance received'),
         description=_(u"Payments you get from an ex-partner"),
         validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     pension = MoneyIntervalField(
-        _(u'Pension received'),
+        label=_(u'Pension received'),
         description=_(u"Payments you receive if you’re retired"),
         validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
     other_income = MoneyIntervalField(
-        _(u'Any other income'),
+        label=_(u'Any other income'),
         description=_(u"For example, student grants, income from trust funds, dividends"),
         validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))])
 
