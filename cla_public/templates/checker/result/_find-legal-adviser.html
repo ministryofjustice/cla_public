@@ -40,25 +40,27 @@
           <ul class="org-list">
             {% for item in data.results %}
               <li class="org-list-item vcard" data-lat="{{ item.location.point.coordinates[1] }}" data-lon="{{ item.location.point.coordinates[0] }}" data-id="{{ loop.index }}">
-                <header>
+                <header class="org-summary">
                   <h3 class="org-title">
                     <span class="marker">{{ loop.index }}</span>
                     <span class="fn org">{{ item.organisation.name }}</span>
                   </h3>
                   <div class="distance">
+                    <span class="sr-only">{{ _('Distance') }}</span>
                     {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
                   </div>
                 </header>
                 <div class="org-details">
                   {% if item.categories|length %}
-                    <div class="org-categories">
+                    <div class="org-categories" role="list">
+                      <div class="sr-only">{{ _('Categories of law') }}</div>
                       {% for cat in item.categories if cat %}
-                        <span class="org-category">{{ cat }}</span>
+                        <span class="org-category" role="listitem">{{ cat }}</span>
                       {% endfor %}
                     </div>
                   {% endif %}
                   <p>
-                    <span class="visuallyhidden">{{ _('Address') }}:</span>
+                    <span class="sr-only">{{ _('Address') }}:</span>
                     <span class="adr">
                       <span class="street-address">{{ item.location.address }}</span>
                       <span class="postal-code">{{ item.location.postcode }}</span>
@@ -97,7 +99,7 @@
               </li>
             {% endif %}
             {% if data.next %}
-              {% set next_page = data.next|query_to_dict('page') %}
+              {% set next_page = data.next|query_to_dict('page')|first %}
               <li class="results-nav results-nav-next">
                 <a
                   href="{{ url_for(request.url_rule.endpoint,
