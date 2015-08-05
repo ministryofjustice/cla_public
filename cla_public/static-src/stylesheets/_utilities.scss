@@ -17,3 +17,14 @@
 .u-text-right {
   text-align: right;
 }
+
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  position: absolute;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  width: 1px;
+  height: 1px;
+}
