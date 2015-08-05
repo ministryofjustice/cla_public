@@ -28,17 +28,14 @@
 
 
 {#
-  Alert block with link to contact page
+  'get in touch' link to contact page
 #}
-{%  macro get_in_touch_alert() %}
-  {% call alert() %}
-    <p>
-      {{ _('If you’re having trouble completing this form') }},
-      <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link">{{ _('get in touch') }}</a>.
-    </p>
-  {% endcall %}
+{% macro get_in_touch_link() %}
+  <p class="get-in-touch">
+    {{ _('If you’re having trouble completing this form') }},
+    <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link">{{ _('get in touch') }}</a>.
+  </p>
 {% endmacro %}
-
 
 {#
   Prompt to complete the satisfaction survey on gov.uk

@@ -45,11 +45,11 @@
       {% include '_valuables-info.html' %}
     {% endcall %}
 
-    {{ Element.get_in_touch_alert() }}
-
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
+
+  {{ Element.get_in_touch_link() }}
 
   <script>
     window.CONDITIONAL_LABELS = {
