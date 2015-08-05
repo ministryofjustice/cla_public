@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-08-05 09:55+0100\n"
+"POT-Creation-Date: 2015-08-05 12:33+0100\n"
 "PO-Revision-Date: 2015-07-30 12:57+0000\n"
 "Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/ministry-of-justice/cla-public/language/cy/)\n"
@@ -914,7 +914,7 @@ msgstr "Arian yr ydych chi a’ch partner yn ei dalu i rywun warchod eich plenty
 
 #: cla_public/apps/checker/forms.py:499
 #: cla_public/templates/checker/_progress.html:63
-#: cla_public/templates/checker/outgoings.html:22
+#: cla_public/templates/checker/outgoings.html:20
 msgid "Review your answers"
 msgstr "Adolygu eich atebion "
 
@@ -2454,12 +2454,12 @@ msgstr "Eich cynnydd "
 msgid "Contact information"
 msgstr "Gwybodaeth gyswllt"
 
-#: cla_public/templates/checker/about.html:51
-#: cla_public/templates/checker/additional-benefits.html:21
-#: cla_public/templates/checker/benefits.html:23
-#: cla_public/templates/checker/income.html:65
-#: cla_public/templates/checker/property.html:50
-#: cla_public/templates/checker/savings.html:39
+#: cla_public/templates/checker/about.html:49
+#: cla_public/templates/checker/additional-benefits.html:19
+#: cla_public/templates/checker/benefits.html:21
+#: cla_public/templates/checker/income.html:63
+#: cla_public/templates/checker/property.html:48
+#: cla_public/templates/checker/savings.html:36
 msgid "Continue"
 msgstr "Ymlaen"
 
@@ -3165,27 +3165,34 @@ msgstr "Cewch ragor o wybodaeth am gost galwadau ffôn yma"
 msgid "This service is only available if you are a resident of England or Wales."
 msgstr "Mae'r gwasanaeth hwn ar gael os ydych yn preswylio yng Nghymru a Lloegr yn unig."
 
-#: cla_public/templates/macros/element.html:36
-#: cla_public/templates/scope/diagnosis.html:75
+#: cla_public/templates/macros/element.html:35
 msgid "If you’re having trouble completing this form"
 msgstr "Os ydych yn cael problemau wrth lenwi'r ffurflen hon, gofynnwch i ni"
 
-#: cla_public/templates/macros/element.html:38
-#: cla_public/templates/scope/diagnosis.html:76
+#: cla_public/templates/macros/element.html:37
 msgid "get in touch"
 msgstr "cysylltwch â ni"
 
-#: cla_public/templates/macros/element.html:48
+#: cla_public/templates/macros/element.html:45
 msgid "What do you think about this service?"
 msgstr "A gawsoch unrhyw anhawster gyda'r gwasanaeth hwn?"
 
-#: cla_public/templates/macros/element.html:50
+#: cla_public/templates/macros/element.html:47
 msgid ""
 "Your feedback will improve this service.\n"
 "      Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">send us your thoughts</a>."
 msgstr ""
 "Bydd eich adborth yn gwella’r gwasanaeth hwn. \n"
 "Anfonwch <a href=\"https://www.gov.uk/done/check-legal-aid\" aria-labelledby=\"aria-satisfaction-survey\">eich sylwadau atom</a>."
+
+#: cla_public/templates/macros/element.html:80
+#, python-format
+msgid ""
+"\n"
+"    The information you enter won’t be stored on this device.\n"
+"    Find out more about <a href=\"%(link)s\" aria-labelledby=\"aria-staying-safe-online\" target=\"_blank\">staying safe online</a>.\n"
+"    "
+msgstr ""
 
 #: cla_public/templates/macros/form.html:433
 msgid "Sorry, something went wrong."
@@ -3251,15 +3258,6 @@ msgstr ""
 #: cla_public/templates/scope/diagnosis.html:38
 msgid "(current)"
 msgstr "(cyfredol)"
-
-#: cla_public/templates/scope/diagnosis.html:52
-#, python-format
-msgid ""
-"\n"
-"      The information you enter won’t be stored on this device.\n"
-"      Find out more about <a href=\"%(link)s\" target=\"_blank\">staying safe online</a>.\n"
-"      "
-msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:3
 msgid "Legal aid doesn’t usually cover your type of problem"

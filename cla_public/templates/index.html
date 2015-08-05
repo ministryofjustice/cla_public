@@ -20,10 +20,7 @@
     <a class="button button-get-started" href="{{ url_for('base.get_started') }}" id="start">Start now</a>
   </p>
 
-  <p>
-    The information you enter won’t be stored on this device.
-    Find out more about <a href="{{ url_for('base.online_safety') }}" target="_blank">staying safe online</a>.
-  </p>
+  {{ Element.staying_safe_online_link() }}
 
   {% call Element.alert() %}
     <p>You’ll only get guidance on whether or not you might qualify for legal aid – you won’t get a final decision until you speak to an adviser.</p>

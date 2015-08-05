@@ -49,11 +49,7 @@
   <h1>{{ title }}</h1>
 
   {% if not nodes|length or nodes and nodes[-1].data_safety %}
-    <p>{% trans link=url_for('base.online_safety') %}
-      The information you enter won’t be stored on this device.
-      Find out more about <a href="{{ link }}" target="_blank">staying safe online</a>.
-      {%  endtrans %}
-    </p>
+    {{ Element.staying_safe_online_link() }}
   {% endif %}
 
   <div class="scope-options">

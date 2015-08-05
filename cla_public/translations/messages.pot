@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-08-05 09:55+0100\n"
+"POT-Creation-Date: 2015-08-05 12:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -911,7 +911,7 @@ msgstr ""
 
 #: cla_public/apps/checker/forms.py:499
 #: cla_public/templates/checker/_progress.html:63
-#: cla_public/templates/checker/outgoings.html:22
+#: cla_public/templates/checker/outgoings.html:20
 msgid "Review your answers"
 msgstr ""
 
@@ -2439,12 +2439,12 @@ msgstr ""
 msgid "Contact information"
 msgstr ""
 
-#: cla_public/templates/checker/about.html:51
-#: cla_public/templates/checker/additional-benefits.html:21
-#: cla_public/templates/checker/benefits.html:23
-#: cla_public/templates/checker/income.html:65
-#: cla_public/templates/checker/property.html:50
-#: cla_public/templates/checker/savings.html:39
+#: cla_public/templates/checker/about.html:49
+#: cla_public/templates/checker/additional-benefits.html:19
+#: cla_public/templates/checker/benefits.html:21
+#: cla_public/templates/checker/income.html:63
+#: cla_public/templates/checker/property.html:48
+#: cla_public/templates/checker/savings.html:36
 msgid "Continue"
 msgstr ""
 
@@ -3103,24 +3103,31 @@ msgstr ""
 msgid "This service is only available if you are a resident of England or Wales."
 msgstr ""
 
-#: cla_public/templates/macros/element.html:36
-#: cla_public/templates/scope/diagnosis.html:75
+#: cla_public/templates/macros/element.html:35
 msgid "If you’re having trouble completing this form"
 msgstr ""
 
-#: cla_public/templates/macros/element.html:38
-#: cla_public/templates/scope/diagnosis.html:76
+#: cla_public/templates/macros/element.html:37
 msgid "get in touch"
 msgstr ""
 
-#: cla_public/templates/macros/element.html:48
+#: cla_public/templates/macros/element.html:45
 msgid "What do you think about this service?"
 msgstr ""
 
-#: cla_public/templates/macros/element.html:50
+#: cla_public/templates/macros/element.html:47
 msgid ""
 "Your feedback will improve this service.\n"
-"      Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction_survey\">send us your thoughts</a>."
+"      Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">send us your thoughts</a>."
+msgstr ""
+
+#: cla_public/templates/macros/element.html:80
+#, python-format
+msgid ""
+"\n"
+"    The information you enter won’t be stored on this device.\n"
+"    Find out more about <a href=\"%(link)s\" aria-labelledby=\"aria-staying-safe-online\" target=\"_blank\">staying safe online</a>.\n"
+"    "
 msgstr ""
 
 #: cla_public/templates/macros/form.html:433
@@ -3183,15 +3190,6 @@ msgstr ""
 
 #: cla_public/templates/scope/diagnosis.html:38
 msgid "(current)"
-msgstr ""
-
-#: cla_public/templates/scope/diagnosis.html:52
-#, python-format
-msgid ""
-"\n"
-"      The information you enter won’t be stored on this device.\n"
-"      Find out more about <a href=\"%(link)s\" target=\"_blank\">staying safe online</a>.\n"
-"      "
 msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:3
