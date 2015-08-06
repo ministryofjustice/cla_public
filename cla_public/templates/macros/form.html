@@ -35,8 +35,14 @@
   class_='',
   has_label=True,
   use_row=True,
-  persist_values=False
+  persist_values=False,
+  role=None
 ) %}
+  {% if field and field.description %}
+    {% set describedby = field.id %}
+  {% else %}
+    {% set describedby = kwargs.describedby %}
+  {% endif %}
   <fieldset class="{% if class_ %}{{ class_ }}{% else %}form-group{% endif %}
     {%- if field and field.errors %} m-error{% endif %}
     {%- if is_subfield %} form-subfield{% endif %}
@@ -44,6 +50,8 @@
     {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
     {% if field %}id="field-{{ field.id }}"{% endif %}
     {% if persist_values %}data-persist-values="true"{% endif %}
+    {% if role %}role="{{ role }}"{% endif %}
+    {% if describedby %}aria-describedby="field-description-{{ describedby }}"{% endif %}
   >
     {% if field %}
       {% if field.flags.optional %}
