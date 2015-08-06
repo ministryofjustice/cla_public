@@ -77,17 +77,16 @@
         $controlInput = $controlInput.filter('[value="' + controlInputValue + '"]');
       }
 
-      this._toggleField($field, $controlInput.is(':checked'));
+      this._toggleField($field, $controlInput);
     },
 
-    _toggleField: function($field, isVisible) {
+    _toggleField: function($field, $controlInput) {
+      var isVisible = $controlInput.is(':checked');
       $field
         .toggleClass('s-expanded', isVisible)
         .toggleClass('s-hidden', !isVisible)
-        .attr({
-          'aria-expanded': isVisible,
-          'aria-hidden': !isVisible
-        });
+        .attr('aria-hidden', !isVisible);
+      $controlInput.attr('aria-expanded', isVisible);
 
       if(!isVisible && !$field.data('persist-values')) {
         $field.find('input')
