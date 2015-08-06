@@ -92,6 +92,7 @@
 
 {% macro link_new_window(url, text, is_external=False) %}
   <a href="{{ url }}"
+     aria-label="{{ _(text) }} (Opens in new window)"
      {% if is_external %} rel="external"{% endif %}
      target="_blank"
      title="{{ _('Opens in new window') }}"
@@ -103,5 +104,5 @@
      {% endif %}
   >
     {{- text -}}
-    <span class="sr-only">{{ _('Opens in new window') }}</span></a>
+    <span class="sr-only"> {{ _('Opens in new window') }}</span></a>
 {%- endmacro %}
