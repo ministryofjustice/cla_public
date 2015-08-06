@@ -43,9 +43,9 @@ def online_safety():
     return render_template('online-safety.html')
 
 
-class ZendeskView(HasFormMixin, views.MethodView, ValidFormOnOptions):
+class AbstractFeedbackView(HasFormMixin, views.MethodView, ValidFormOnOptions):
     """
-    Abstract view for Zendesk forms
+    Abstract view for feedback forms
     """
     template = None
     redirect_to = None
@@ -53,7 +53,7 @@ class ZendeskView(HasFormMixin, views.MethodView, ValidFormOnOptions):
     def __init__(self):
         if not self.form_class or not self.template or not self.redirect_to:
             raise NotImplementedError
-        super(ZendeskView, self).__init__()
+        super(AbstractFeedbackView, self).__init__()
 
     @property
     def default_form_data(self):
@@ -61,6 +61,24 @@ class ZendeskView(HasFormMixin, views.MethodView, ValidFormOnOptions):
 
     def get(self):
         return self.render_form()
+
+    def post(self):
+        raise NotImplementedError
+
+    def render_form(self, error=None):
+        return render_template(self.template, form=self.form, zd_error=error)
+
+    def success_redirect(self):
+        return redirect(url_for(self.redirect_to))
+
+
+class Feedback(AbstractFeedbackView):
+    """
+    General feedback form, sending responses to Zendesk
+    """
+    form_class = FeedbackForm
+    template = 'feedback.html'
+    redirect_to = 'base.feedback_confirmation'
 
     def post(self):
         error = None
@@ -75,21 +93,6 @@ class ZendeskView(HasFormMixin, views.MethodView, ValidFormOnOptions):
 
         return self.render_form(error)
 
-    def render_form(self, error=None):
-        return render_template(self.template, form=self.form, zd_error=error)
-
-    def success_redirect(self):
-        return redirect(url_for(self.redirect_to))
-
-
-class Feedback(ZendeskView):
-    """
-    General feedback form
-    """
-    form_class = FeedbackForm
-    template = 'feedback.html'
-    redirect_to = '.feedback_confirmation'
-
 
 base.add_url_rule(
     '/feedback',
@@ -103,14 +106,10 @@ def feedback_confirmation():
     return render_template('feedback-confirmation.html')
 
 
-class ReasonsForContacting(ZendeskView):
+class ReasonsForContacting(AbstractFeedbackView):
     """
     Interstitial form to ascertain why users are dropping out of
     the checker service
-
-    NB: Shares code with Feedback view, but no longer in fact
-        posts to Zendesk. If feedback is ever redirected to the
-        database as well, move the code here up into ZendeskView
     """
     MODEL_REF_SESSION_KEY = 'reason_for_contact'
     GA_SESSION_KEY = 'reason_for_contact_ga'
