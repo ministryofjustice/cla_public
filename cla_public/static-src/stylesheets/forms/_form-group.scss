@@ -29,10 +29,15 @@
       &:first-child {
         border-top: 0;
       }
+    }
 
-      &.s-targeted {
-        border-left: 4px solid $mellow-red;
-      }
+    &.m-error:focus:before {
+      top: .7em;
+      left: -.2em;
+    }
+
+    .m-error:focus:before {
+      top: 1.2em;
     }
 
     .form-notice {

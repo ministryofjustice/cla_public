@@ -1,24 +1,24 @@
 fieldset {
   border: 0;
   margin: 0;
+  position: relative;
 
-  &.m-error.s-targeted {
-    border-top: 3px solid $mellow-red;
+  &:focus {
+    outline: 0;
+  }
+
+  &.m-error:focus:before {
+    position: absolute;
+    top: .1em;
+    left: -1.1em;
+    content: '';
+    border-style: solid;
+    border-width: 6px 0 6px 12px;
+    border-color: transparent transparent transparent $mellow-red;
   }
 
   &.form-group {
     border-top: 1px solid $grey-3;
-
-    &.m-error.s-targeted {
-      > .fieldset-label {
-        margin-left: 10px;
-        padding-left: 10px;
-      }
-
-      > .field-error {
-        padding-left: 20px;
-      }
-    }
   }
 
   &.fieldset-group {
@@ -28,6 +28,10 @@ fieldset {
 
     > .field-error {
       margin-top: 0;
+    }
+
+    &.m-error:focus:before {
+      left: 0;
     }
 
     @include media(mobile) {
