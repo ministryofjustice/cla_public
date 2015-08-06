@@ -22,7 +22,7 @@
 
   <p>{{ _('You’ll normally see a message on the site before we store a cookie on your computer.') }}</p>
   <p>
-    {% trans manage_cookies_link=Element.link_new_window('http://www.aboutcookies.org/', 'how to manage cookies', True) %}
+    {% trans manage_cookies_link=Element.link_new_window('http://www.aboutcookies.org/', _('how to manage cookies'), True) %}
       Find out more about {{ manage_cookies_link }}.</p>
     {% endtrans %}
   <h2>{{ _('How cookies are used on GOV.UK') }}</h2>
@@ -62,7 +62,7 @@
   </table>
 
   <p>
-    {% trans opt_out_link=Element.link_new_window('https://tools.google.com/dlpage/gaoptout', 'opt out of Google Analytics cookies', True) %}
+    {% trans opt_out_link=Element.link_new_window('https://tools.google.com/dlpage/gaoptout', _('opt out of Google Analytics cookies'), True) %}
       You can {{ opt_out_link }}.
     {% endtrans %}
   </p>
@@ -126,7 +126,7 @@
   </table>
 
   <p>
-    {% trans govuk_cookies_link=Element.link_new_window('https://www.gov.uk/help/cookies', 'how cookies are used on gov.uk', True) %}
+    {% trans govuk_cookies_link=Element.link_new_window('https://www.gov.uk/help/cookies', _('how cookies are used on gov.uk'), True) %}
       You can read more about {{ govuk_cookies_link }}.
     {% endtrans %}
   </p>

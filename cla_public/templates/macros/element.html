@@ -102,6 +102,6 @@
        {% endfor %}
      {% endif %}
   >
-    {{- _(text) -}}
-  </a>
+    {{- text -}}
+    <span class="sr-only">{{ _('Opens in new window') }}</span></a>
 {%- endmacro %}

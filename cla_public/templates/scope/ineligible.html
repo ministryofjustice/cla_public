@@ -20,12 +20,12 @@
     <p>{% trans %}You can ask a legal adviser if an application might succeed in your case and how to apply.{% endtrans %}</p>
 
     <p>
-      {% trans apply_directly_link=Element.link_new_window('https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding', 'apply directly', True) %}
+      {% trans apply_directly_link=Element.link_new_window('https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding', _('apply directly'), True) %}
        You can also {{ apply_directly_link }} to the Legal Aid Agency.
       {% endtrans %}
     </p>
 
-    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', 'Find a legal adviser', **{'class': 'button'}) }}
+    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a legal adviser'), **{'class': 'button'}) }}
   </aside>
 {% endblock %}
 
