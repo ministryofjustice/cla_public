@@ -146,7 +146,7 @@
   control_value='1',
   class_=None
 ) %}
-  {% call fieldset(field, is_hidden=is_hidden, controlled_by=controlled_by, control_value=control_value, class_=class_) %}
+  {% call fieldset(field, is_hidden=is_hidden, controlled_by=controlled_by, control_value=control_value, class_=class_, role='radiogroup') %}
     {{ radio_buttons(field) }}
   {% endcall %}
 {% endmacro %}
