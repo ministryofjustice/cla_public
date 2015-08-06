@@ -54,8 +54,8 @@ SESSION_COOKIE_SECURE = True
 PERMANENT_SESSION_LIFETIME = datetime.timedelta(minutes=5)
 
 APP_SETTINGS = {
-    'app_title': _('Civil Legal Advice'),
-    'proposition_title': _('Civil Legal Advice')
+    'app_title': _('Check if you can get legal aid'),
+    'proposition_title': _('Check if you can get legal aid'),
 }
 
 # Timeout for api get requests so they don't hang waiting for a response
