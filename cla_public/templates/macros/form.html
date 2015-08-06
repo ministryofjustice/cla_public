@@ -82,7 +82,7 @@
     {% endif %}
 
     {% if field and (field.description or field.help_text) %}
-      <div class="form-row field-help">
+      <div class="form-row field-help" id="field-description-{{ field.id }}">
         {%- if field.description %}
           <span class="field-description">
             {{- field.description -}}
@@ -118,7 +118,7 @@
 #}
 {% macro radio_buttons(field) %}
   {%- for option in field -%}
-    <label class="radio-inline" for="{{option.id}}">
+    <label class="radio-inline" for="{{option.id}}" {% if field.description %}aria-describedby="field-description-{{ field.id }}"{% endif %}>
       {{ option }}
       {{ option.label.text }}
     </label>
