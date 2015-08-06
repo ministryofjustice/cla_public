@@ -49,6 +49,12 @@
       <h1>{{ _('A legal adviser may be able to help you') }}</h1>
     {% endif %}
 
+    <p>
+      {% trans %}Your adviser will check whether you qualify for legal aid at
+          no cost to you by asking about your problem and your finances.{% endtrans %}
+      {% trans %}In some cases you may need to pay a contribution towards your legal aid.{% endtrans %}
+    </p>
+
     {% if session.stored.category == 'mentalhealth' %}
       <p>
         {% trans %}If you’re applying for legal aid for a mental health issue,
@@ -56,12 +62,6 @@
           for other legal aid problems.{% endtrans %}
       </p>
     {% endif %}
-
-    <p>
-      {% trans %}Your adviser will check whether you qualify for legal aid at
-          no cost to you by asking about your problem and your finances.{% endtrans %}
-      {% trans %}In some cases you may need to pay a contribution towards your legal aid.{% endtrans %}
-    </p>
 
     {% include "checker/result/_find-legal-adviser.html" %}
 
