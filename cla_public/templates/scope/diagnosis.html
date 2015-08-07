@@ -6,7 +6,6 @@
 {% else %}
   {% set title = _('Choose the area you most need help with') %}
 {% endif %}
-{% set current_percentage = nodes|length * 3 + 5 %} {# Emulate percentage progress for scope nodes  #}
 
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
