@@ -11,7 +11,7 @@ exports.command = function(scenario, callback) {
     client
       .assert.urlContains('/scope/diagnosis',
         '  - Scope diagnosis URL is correct')
-      .assert.containsText('h1', 'What do you need help with?',
+      .assert.containsText('h1', 'Choose the area you most need help with',
         '  - Scope diagnosis page title is correct')
       .useXpath()
     ;

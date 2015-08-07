@@ -31,9 +31,10 @@
   'get in touch' link to contact page
 #}
 {% macro get_in_touch_link() %}
-  <p class="get-in-touch">
+  <p id="aria-get-in-touch" class="get-in-touch">
     {{ _('If you’re having trouble completing this form') }},
-    <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link">{{ _('get in touch') }}</a>.
+    <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link" aria-labelledby="aria-get-in-touch">
+      {{ _('get in touch') }}</a>.
   </p>
 {% endmacro %}
 
@@ -42,9 +43,9 @@
 #}
 {%  macro satisfaction_survey_prompt() %}
   {% call alert(title=_('What do you think about this service?')) %}
-    <p>
+    <p id="aria-satisfaction-survey">
       {% trans %}Your feedback will improve this service.
-      Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">send us your thoughts</a>.{% endtrans %}
+      Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">send us your thoughts</a>.{% endtrans %}
     </p>
   {% endcall %}
 {% endmacro %}
@@ -69,4 +70,16 @@
       {% endif %}
     </div>
   {% endif %}
+{% endmacro %}
+
+
+{#
+  staying safe online link
+#}
+{% macro staying_safe_online_link() %}
+  <p id="aria-staying-safe-online">{% trans link=url_for('base.online_safety') %}
+    The information you enter won’t be stored on this device.
+    Find out more about <a href="{{ link }}" aria-labelledby="aria-staying-safe-online" target="_blank">staying safe online</a>.
+    {%  endtrans %}
+  </p>
 {% endmacro %}
