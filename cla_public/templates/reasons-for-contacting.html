@@ -18,12 +18,6 @@
 
     {{ Form.handle_errors(form) }}
 
-    {% if zd_error %}
-      {% call Element.alert('error', icon='cross') %}
-        <p>{{ zd_error }}</p>
-      {% endcall %}
-    {% endif %}
-
     {% call Form.fieldset(form.reasons) %}
         <ul class="form-option-list" role="group" aria-labelledby="field-label-reasons">
             {% for reason in form.reasons %}
