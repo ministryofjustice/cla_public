@@ -15,11 +15,11 @@
       {{ Form.money_interval_fieldset(form.total_other_benefit, is_subfield=True, controlled_by=form.other_benefits) }}
     {% endcall %}
 
-    {{ Element.get_in_touch_alert() }}
-
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
+
+  {{ Element.get_in_touch_link() }}
 
   <script>
     window.CONDITIONAL_LABELS = {

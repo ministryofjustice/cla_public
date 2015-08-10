@@ -17,11 +17,11 @@
 
     {{ Form.option_list_fieldset(form.benefits, separated_options=['other-benefit'], callback=option_list_callback) }}
 
-    {{ Element.get_in_touch_alert() }}
-
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
+
+  {{ Element.get_in_touch_link() }}
 {% endblock %}
 
 {% block javascripts %}

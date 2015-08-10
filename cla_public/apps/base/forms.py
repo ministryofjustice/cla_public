@@ -34,53 +34,20 @@ class BabelTranslationsFormMixin(object):
         return BabelTranslations()
 
 
-class ZendeskForm(Honeypot, BabelTranslationsFormMixin, Form):
+_textarea_length_validator = Length(
+    max=1000,
+    message=u'Field cannot contain more than %(max)d characters',
+)
+
+
+class FeedbackForm(Honeypot, BabelTranslationsFormMixin, Form):
     referrer = StringField(widget=widgets.HiddenInput())
-    _textarea_length_validator = Length(
-        max=1000,
-        message=u'Field cannot contain more than %(max)d characters',
-    )
 
-    @classmethod
-    def _make_referrer_field(cls, referrer_url):
-        return {
-            'id': 26047167,  # Referrer URL field
-            'value': referrer_url,
-        }
-
-    def _make_api_payload(self, template, subject, group_id, tags, requester_id=None, custom_fields=None):
-        user_agent = request.headers.get('User-Agent')
-        comment_body = render_template(template, form=self, user_agent=user_agent)
-
-        environment = current_app.config['CLA_ENV']
-        if environment != 'prod':
-            subject = '[TEST] - ' + subject
-
-        ticket = {
-            'requester_id': requester_id or current_app.config['ZENDESK_DEFAULT_REQUESTER'],
-            'subject': subject,
-            'comment': {
-                'body': comment_body
-            },
-            'group_id': group_id,
-            'tags': tags,
-            'custom_fields': [{
-                'id': 23791776,  # Browser field
-                'value': user_agent,
-            }],
-        }
-        if custom_fields:
-            ticket['custom_fields'].extend(custom_fields)
-
-        return {'ticket': ticket}
-
-
-class FeedbackForm(ZendeskForm):
     difficulty = TextAreaField(label=_(u'Did you have any difficulty with this service?'),
-                               validators=[ZendeskForm._textarea_length_validator])
+                               validators=[_textarea_length_validator])
 
     ideas = TextAreaField(label=_(u'Do you have any ideas for how it could be improved?'),
-                          validators=[ZendeskForm._textarea_length_validator])
+                          validators=[_textarea_length_validator])
 
     feel_about_service = RadioField(
         _(u'Overall, how did you feel about the service you received today?'),
@@ -93,24 +60,43 @@ class FeedbackForm(ZendeskForm):
         validators=[InputRequired()])
 
     def api_payload(self):
-        return self._make_api_payload(
-            template='emails/zendesk-feedback.txt',
-            subject='CLA Public Feedback',
-            group_id=23832817,  # CLA Public
-            tags=['feedback', 'civil_legal_advice_public'],
-            custom_fields=[self._make_referrer_field(self.referrer.data)],
-        )
+        user_agent = request.headers.get('User-Agent')
+        comment_body = render_template('emails/zendesk-feedback.txt', form=self, user_agent=user_agent)
+
+        environment = current_app.config['CLA_ENV']
+        subject = 'CLA Public Feedback'
+        if environment != 'prod':
+            subject = '[TEST] - ' + subject
+
+        ticket = {
+            'requester_id': current_app.config['ZENDESK_DEFAULT_REQUESTER'],
+            'subject': subject,
+            'comment': {
+                'body': comment_body
+            },
+            'group_id': 23832817,  # CLA Public
+            'tags': ['feedback', 'civil_legal_advice_public'],
+            'custom_fields': [
+                {
+                    'id': 23791776,  # Browser field
+                    'value': user_agent,
+                },
+                {
+                    'id': 26047167,  # Referrer URL field
+                    'value': self.referrer.data,
+                }
+            ],
+        }
+
+        return {'ticket': ticket}
 
 
-class ReasonsForContactingForm(ZendeskForm):
+class ReasonsForContactingForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Interstitial form to ascertain why users are dropping out of
     the checker service
-
-    NB: Shares code with Feedback form, but no longer in fact
-        posts to Zendesk. If feedback is ever redirected to the
-        database as well, move the code here up into ZendeskForm
     """
+    referrer = StringField(widget=widgets.HiddenInput())
     reasons = SelectMultipleField(
         label=_(u'You can select more than one option:'),
         choices=REASONS_FOR_CONTACTING_CHOICES,
@@ -119,7 +105,7 @@ class ReasonsForContactingForm(ZendeskForm):
     )
     other_reasons = TextAreaField(
         label=_(u'Please specify'),
-        validators=[ZendeskForm._textarea_length_validator],
+        validators=[_textarea_length_validator],
     )
 
     REASONS_FOR_CONTACTING_OTHER = REASONS_FOR_CONTACTING.OTHER
@@ -131,17 +117,3 @@ class ReasonsForContactingForm(ZendeskForm):
             'user_agent': request.headers.get('User-Agent') or 'Unknown',
             'referrer': self.referrer.data or 'Unknown',
         }
-
-    @property
-    def reason_descriptions(self):
-        choices = dict(REASONS_FOR_CONTACTING_CHOICES)
-        return [choices[reason_category] for reason_category in self.reasons.data]
-
-    def zendesk_api_payload(self):
-        return self._make_api_payload(
-            template='emails/zendesk-reasons-for-contacting.txt',
-            subject='CLA Public - Reasons for Contacting',
-            group_id=25707197,  # CLA Public reasons for contacting
-            tags=['reasons_for_contacting', 'civil_legal_advice_public'],
-            custom_fields=[self._make_referrer_field(self.referrer.data)],
-        )

@@ -44,7 +44,8 @@ ADD ./docker/uwsgi.service /etc/service/uwsgi/run
 ADD ./docker/nginx.service /etc/service/nginx/run
 
 # Define mountable directories.
-VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi", "/var/log/cla_public"]
+#VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi", "/var/log/cla_public"]
+RUN mkdir -p /var/log/nginx/cla_public
 
 # Expose ports.
 EXPOSE 80
