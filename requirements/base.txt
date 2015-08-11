@@ -30,10 +30,9 @@ pyopenssl==0.15.1
 ndg-httpsclient==0.4.0
 pyasn1==0.1.7
 
-# Temporarily install slumber from fork until https://github.com/samgiles/slumber/pull/100 is accepted
-# so we can add a timeout on requests
-# Now there's an additional need to pass in extra headers to python requests
-git+git://github.com/ushkarev/slumber.git@da38360d6d158ee7ed445b43228fefc6f7e430e6#egg=slumber==0.6.3iu
+# fork of https://github.com/samgiles/slumber
+# with custom parameters for timeouts and additional headers on requests
+git+git://github.com/ministryofjustice/slumber.git@da38360d6d158ee7ed445b43228fefc6f7e430e6#egg=slumber==0.6.3moj
 
 # Fork of WTForms with welsh translations - PR added
 git+git://github.com/s-block/wtforms.git@47f9f6d789cdb3eef3bf659e047f1bbd1f42af24
