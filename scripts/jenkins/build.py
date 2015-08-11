@@ -158,6 +158,10 @@ def run_tests(venv_path, threshold_tests=False):
         skipgroup = ''
     run('./nightwatch -c tests/nightwatch/jenkins.json{0} -M'.format(skipgroup))
 
+    # nightwatch fails to clean up these process
+    # NB: if two jobs are running on the same jenkins slave then one may break the other
+    run('killall phantomjs')
+
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
     ps_cmd = subprocess.Popen(
