@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 import urllib
 from cla_common.constants import DIAGNOSIS_SCOPE
-from django.template.defaultfilters import striptags
 import requests
 from cla_public.apps.checker.api import post_to_eligibility_check_api
 from cla_public.apps.checker.constants import CATEGORY_ID_MAPPING
 from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.libs.utils import get_locale, override_locale
-from flask import current_app, request, session
+from flask import current_app, request, session, Markup
 from flask.ext.babel import gettext
 
 
@@ -92,7 +91,7 @@ class DiagnosisApiClient(object):
     def get_category(self, response_json):
         category = response_json['category']
         if not category:
-            category_name = striptags(response_json['nodes'][0]['label'])
+            category_name = Markup(response_json['nodes'][0]['label']).striptags()
             with override_locale('en'):
                 category, name, desc = category_option_from_name(category_name)
         return category
@@ -114,7 +113,7 @@ class DiagnosisApiClient(object):
         answers = []
         for node in nodes[:-1]:
             question = gettext('What do you need help with?')
-            answer = striptags(node['label'])
+            answer = Markup(node['label']).striptags()
 
             if prev and prev['heading']:
                 question = prev['heading']
@@ -136,11 +135,11 @@ class DiagnosisApiClient(object):
             steps)
 
         if state == DIAGNOSIS_SCOPE.CONTACT and nodes:
-            note = striptags(nodes[-1]['help_text'])
+            note = Markup(nodes[-1]['help_text']).striptags()
             session.checker.add_note(
                 u'Public Diagnosis note',
                 note)
-            
+
         session.checker['scope_answers'] = answers
 
 diagnosis_api_client = DiagnosisApiClient()
