@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-08-05 12:33+0100\n"
+"POT-Creation-Date: 2015-08-13 12:18+0100\n"
 "PO-Revision-Date: 2015-07-30 12:57+0000\n"
 "Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/ministry-of-justice/cla-public/language/cy/)\n"
@@ -88,31 +88,31 @@ msgstr "Mae'n well gen i beidio â dweud"
 msgid "Another reason"
 msgstr "Rheswm arall"
 
-#: cla_public/apps/base/forms.py:79
+#: cla_public/apps/base/forms.py:46
 msgid "Did you have any difficulty with this service?"
 msgstr "A gawsoch unrhyw anhawster gyda'r gwasanaeth hwn?"
 
-#: cla_public/apps/base/forms.py:82
+#: cla_public/apps/base/forms.py:49
 msgid "Do you have any ideas for how it could be improved?"
 msgstr "A oes gennych unrhyw syniadau o ran sut i'w wella?"
 
-#: cla_public/apps/base/forms.py:86
+#: cla_public/apps/base/forms.py:53
 msgid "Overall, how did you feel about the service you received today?"
 msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
 
-#: cla_public/apps/base/forms.py:91
+#: cla_public/apps/base/forms.py:58
 msgid "Did you have any help filling in this form?"
 msgstr "A gawsoch unrhyw help i lenwi'r ffurflen hon?"
 
-#: cla_public/apps/base/forms.py:115
+#: cla_public/apps/base/forms.py:101
 msgid "You can select more than one option:"
 msgstr "Gallwch ddewis mwy nag un opsiwn:"
 
-#: cla_public/apps/base/forms.py:121
+#: cla_public/apps/base/forms.py:107
 msgid "Please specify"
 msgstr "Manylwch"
 
-#: cla_public/apps/base/views.py:74
+#: cla_public/apps/base/views.py:92
 msgid "Something went wrong. Please try again."
 msgstr "Mae rhywbeth wedi mynd o'i le. Rhowch gynnig arall arni."
 
@@ -408,24 +408,28 @@ msgstr "Na"
 
 #: cla_public/apps/checker/fields.py:127 cla_public/apps/checker/forms.py:66
 #: cla_public/apps/checker/forms.py:127 cla_public/apps/checker/forms.py:144
-#: cla_public/apps/contact/forms.py:84 cla_public/apps/contact/forms.py:127
+#: cla_public/apps/contact/forms.py:84 cla_public/apps/contact/forms.py:128
 msgid "Please choose Yes or No"
 msgstr "Dewisiwch Ydw neu Nac ydw"
 
-#: cla_public/apps/checker/fields.py:168 cla_public/apps/checker/fields.py:179
+#: cla_public/apps/checker/fields.py:156
+msgid "Enter 0 if this does not apply."
+msgstr ""
+
+#: cla_public/apps/checker/fields.py:177 cla_public/apps/checker/fields.py:188
 #: cla_public/apps/checker/validators.py:114
 msgid "Not a valid amount"
 msgstr "Nid yw’n swm dilys"
 
-#: cla_public/apps/checker/fields.py:183
+#: cla_public/apps/checker/fields.py:192
 msgid "This amount must be more than £{:,.0f}"
 msgstr "Mae'n rhaid i'r swm hwn fod yn fwy na £{:.0f}"
 
-#: cla_public/apps/checker/fields.py:189
+#: cla_public/apps/checker/fields.py:198
 msgid "This amount must be less than £{:,.0f}"
 msgstr "Mae'n rhaid i'r swm hwn fod yn llai na £{:.0f}"
 
-#: cla_public/apps/checker/fields.py:308
+#: cla_public/apps/checker/fields.py:318
 msgid "You can only have 1 main Property"
 msgstr "Dim ond un prif Eiddo allwch chi ei gael"
 
@@ -1006,101 +1010,101 @@ msgstr "Anghenion cyfathrebu eraill"
 msgid "Please tell us what you need in the box below"
 msgstr "Dywedwch wrthym beth sydd arnoch ei angen yn y blwch isod"
 
-#: cla_public/apps/contact/forms.py:69 cla_public/apps/contact/forms.py:112
+#: cla_public/apps/contact/forms.py:69 cla_public/apps/contact/forms.py:113
 msgid "Phone number for the callback"
 msgstr "Rhif ffôn ar gyfer eich ffonio'n ôl"
 
-#: cla_public/apps/contact/forms.py:70 cla_public/apps/contact/forms.py:113
+#: cla_public/apps/contact/forms.py:70 cla_public/apps/contact/forms.py:114
 msgid "Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
 msgstr "Rhowch eich rhif ffôn yn llawn, yn cynnwys cod yr ardal, gan ddefnyddio rhifau yn unig. Er enghraifft 020 7946 0492 "
 
-#: cla_public/apps/contact/forms.py:76 cla_public/apps/contact/forms.py:119
+#: cla_public/apps/contact/forms.py:76 cla_public/apps/contact/forms.py:120
 msgid "Your telephone number must be 20 characters or less"
 msgstr "Rhaid i'ch rhif ffôn fod yn 20 llythyren neu lai"
 
-#: cla_public/apps/contact/forms.py:80 cla_public/apps/contact/forms.py:123
+#: cla_public/apps/contact/forms.py:80 cla_public/apps/contact/forms.py:124
 msgid "Is it safe for us to leave a message on this number?"
 msgstr "A yw’n ddiogel i ni adael neges ar y rhif hwn?"
 
-#: cla_public/apps/contact/forms.py:90 cla_public/apps/contact/forms.py:133
+#: cla_public/apps/contact/forms.py:90 cla_public/apps/contact/forms.py:134
 msgid "Select a time for us to call"
 msgstr "Dewiswch amser i ni eich ffonio"
 
 #: cla_public/apps/contact/forms.py:91
-msgid "We’ll try to call at the time you request, but this may not always be possible"
-msgstr "Byddwn yn gwneud pob ymdrech i'ch ffonio'n ôl ar yr amser a nodwyd gennych, ond efallai na fydd hyn yn bosibl bob amser"
+msgid "We’ll try to call at the time you request or within half an hour of your selected time, but this may not always be possible"
+msgstr ""
 
-#: cla_public/apps/contact/forms.py:101
+#: cla_public/apps/contact/forms.py:102
 msgid "Full name of the person to call"
 msgstr "Enw llawn yr unigolion sydd i'w ffonio"
 
-#: cla_public/apps/contact/forms.py:103 cla_public/apps/contact/forms.py:166
+#: cla_public/apps/contact/forms.py:104 cla_public/apps/contact/forms.py:167
 msgid "Your full name must be 400 characters or less"
 msgstr "Rhaid i'ch enw llawn fod yn 400 nod neu lai"
 
-#: cla_public/apps/contact/forms.py:108
+#: cla_public/apps/contact/forms.py:109
 msgid "Relationship to you"
 msgstr "Ei berthynas/ pherthynas i chi"
 
-#: cla_public/apps/contact/forms.py:134
+#: cla_public/apps/contact/forms.py:135
 msgid "We’ll try to call at the time you request, but this may not always be possible."
 msgstr "Byddwn yn gwneud pob ymdrech i'ch ffonio'n ôl ar yr amser a nodwyd gennych, ond efallai na fydd hyn yn bosibl bob amser"
 
-#: cla_public/apps/contact/forms.py:144
+#: cla_public/apps/contact/forms.py:145
 msgid "Postcode"
 msgstr "Cod post "
 
-#: cla_public/apps/contact/forms.py:146
+#: cla_public/apps/contact/forms.py:147
 msgid "Your postcode must be 12 characters or less"
 msgstr "Rhaid i'ch cod post fod yn 12 nod neu lai"
 
-#: cla_public/apps/contact/forms.py:151
+#: cla_public/apps/contact/forms.py:152
 msgid "Street address"
 msgstr "Cyfeiriad y stryd"
 
-#: cla_public/apps/contact/forms.py:153 cla_public/apps/contact/forms.py:195
-#: cla_public/apps/contact/forms.py:269
+#: cla_public/apps/contact/forms.py:154 cla_public/apps/contact/forms.py:196
+#: cla_public/apps/contact/forms.py:270
 msgid "Your address must be 255 characters or less"
 msgstr "Rhaid i'ch cyfeiriad fod yn 255 nod neu lai"
 
-#: cla_public/apps/contact/forms.py:164
+#: cla_public/apps/contact/forms.py:165
 msgid "Your full name"
 msgstr "Eich enw llawn"
 
-#: cla_public/apps/contact/forms.py:171
+#: cla_public/apps/contact/forms.py:172
 msgid "Select a contact option"
 msgstr "Dewiswch opsiwn ar gyfer cysylltu"
 
-#: cla_public/apps/contact/forms.py:174
+#: cla_public/apps/contact/forms.py:175
 msgid "Please choose one of the options"
 msgstr "Dewiswch o leiaf un opsiwn"
 
-#: cla_public/apps/contact/forms.py:189 cla_public/templates/privacy.html:233
+#: cla_public/apps/contact/forms.py:190 cla_public/templates/privacy.html:233
 #: cla_public/templates/macros/help-orgs.html:80
 msgid "Email"
 msgstr "E-bost"
 
-#: cla_public/apps/contact/forms.py:190
+#: cla_public/apps/contact/forms.py:191
 msgid "If you add your email we will send you the reference number when you submit your details"
 msgstr "Os byddwch yn ychwanegu eich cyfeiriad e-bost, byddwn yn anfon y cyfeirnod atoch pan fyddwch yn cyflwyno eich manylion"
 
-#: cla_public/apps/contact/forms.py:198 cla_public/apps/contact/forms.py:272
+#: cla_public/apps/contact/forms.py:199 cla_public/apps/contact/forms.py:273
 msgid "Invalid email address"
 msgstr "Cyfeiriad e-bost annilys"
 
-#: cla_public/apps/contact/forms.py:204
+#: cla_public/apps/contact/forms.py:205
 msgid "Tell us more about your problem"
 msgstr "Dywedwch fwy wrthym am eich problem "
 
-#: cla_public/apps/contact/forms.py:206
+#: cla_public/apps/contact/forms.py:207
 msgid "Your notes must be 4000 characters or less"
 msgstr "Rhaid i'ch nodiadau fod yn 4000 nod neu lai"
 
-#: cla_public/apps/contact/forms.py:212
+#: cla_public/apps/contact/forms.py:213
 msgid "Do you have any special communication needs?"
 msgstr "Oes gennych chi unrhyw anghenion cyfathrebu arbennig?"
 
-#: cla_public/apps/contact/forms.py:267
+#: cla_public/apps/contact/forms.py:268
 msgid "Your email"
 msgstr ""
 
@@ -1117,9 +1121,8 @@ msgid "What do you need help with?"
 msgstr "Ar gyfer beth y mae arnoch chi angen cymorth?"
 
 #: cla_public/config/common.py:57 cla_public/config/common.py:58
-#: cla_public/templates/_resources.html:4
-msgid "Civil Legal Advice"
-msgstr "Cyngor Cyfreithiol Sifil"
+msgid "Check if you can get legal aid"
+msgstr ""
 
 #: cla_public/libs/honeypot.py:30
 msgid "This field must be left empty"
@@ -1163,6 +1166,10 @@ msgstr "Mae hwn yn wasanaeth newydd - bydd <a href=\"%(url)s\" aria-labelledby=\
 #: cla_public/templates/_resources.html:1
 msgid "Resources"
 msgstr "Adnoddau"
+
+#: cla_public/templates/_resources.html:4
+msgid "Civil Legal Advice"
+msgstr "Cyngor Cyfreithiol Sifil"
 
 #: cla_public/templates/_resources.html:5
 msgid "Legal aid"
@@ -2421,7 +2428,7 @@ msgstr "Cyn i chi gysylltu â Chyngor Cyfreithiol Sifil"
 msgid "So we can improve this service, we'd like to understand why you want to contact <abbr title=\"Civil Legal Advice\">CLA</abbr>."
 msgstr "Er mwyn i ni allu gwella'r gwasanaeth hwn, hoffwn ddeall pam eich bod eisiau cysylltu â <abbr title=\"Civil Legal Advice\">CLA</abbr>."
 
-#: cla_public/templates/reasons-for-contacting.html:41
+#: cla_public/templates/reasons-for-contacting.html:35
 msgid "Continue to contact CLA"
 msgstr "Parhau i gysylltu â CLA"
 
@@ -2696,6 +2703,12 @@ msgid ""
 "        you back around the time you requested."
 msgstr ""
 
+#: cla_public/templates/checker/result/confirmation.html:79
+#: cla_public/templates/macros/subform.html:20
+#: cla_public/templates/macros/subform.html:54
+msgid "When a CLA operator calls, the call will come from an anonymous number."
+msgstr "Pan fydd gweithredwr CLA yn eich ffonio, bydd rhif anhysbys yn ymddangos ar yr alwad."
+
 #: cla_public/templates/checker/result/confirmation.html:85
 msgid ""
 "If you need to urgently protect yourself or your family you should\n"
@@ -2925,21 +2938,21 @@ msgid ""
 "          might succeed in your case and how to apply."
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:54
-msgid ""
-"If you’re applying for legal aid for a mental health issue,\n"
-"          the requirements for the financial assessment are less rigorous than\n"
-"          for other legal aid problems."
-msgstr ""
-
-#: cla_public/templates/checker/result/face-to-face.html:61
+#: cla_public/templates/checker/result/face-to-face.html:53
 msgid ""
 "Your adviser will check whether you qualify for legal aid at\n"
 "          no cost to you by asking about your problem and your finances."
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:63
+#: cla_public/templates/checker/result/face-to-face.html:55
 msgid "In some cases you may need to pay a contribution towards your legal aid."
+msgstr ""
+
+#: cla_public/templates/checker/result/face-to-face.html:60
+msgid ""
+"If you’re applying for legal aid for a mental health issue,\n"
+"          the requirements for the financial assessment are less rigorous than\n"
+"          for other legal aid problems."
 msgstr ""
 
 #: cla_public/templates/checker/result/ineligible.html:3
@@ -3226,11 +3239,6 @@ msgstr "Oriau agor"
 msgid "We will try to call at least once. If you miss the call you’ll need to complete this form again."
 msgstr "Byddwn yn ceisio eich ffonio o leiaf unwaith.  Os byddwch yn methu'r alwad, bydd arnoch angen llenwi'r ffurflen hon eto."
 
-#: cla_public/templates/macros/subform.html:20
-#: cla_public/templates/macros/subform.html:54
-msgid "When a CLA operator calls, the call will come from an anonymous number."
-msgstr "Pan fydd gweithredwr CLA yn eich ffonio, bydd rhif anhysbys yn ymddangos ar yr alwad."
-
 #: cla_public/templates/macros/subform.html:47
 msgid "Please make sure you are with your nominated person at the time of the callback."
 msgstr "Gwnewch yn siŵr eich bod gyda'r unigolyn a enwebwyd ar yramser y byddwch yn cael yr alwad yn ôl."
@@ -3247,15 +3255,15 @@ msgstr ""
 "bydd arnoch angen llenwi'r ffurflen hon eto."
 
 #: cla_public/templates/scope/diagnosis.html:7
-#: cla_public/templates/scope/diagnosis.html:19
+#: cla_public/templates/scope/diagnosis.html:18
 msgid "Choose the area you most need help with"
 msgstr ""
 
-#: cla_public/templates/scope/diagnosis.html:16
+#: cla_public/templates/scope/diagnosis.html:15
 msgid "Your answers"
 msgstr ""
 
-#: cla_public/templates/scope/diagnosis.html:38
+#: cla_public/templates/scope/diagnosis.html:37
 msgid "(current)"
 msgstr "(cyfredol)"
 
@@ -3378,3 +3386,6 @@ msgstr "Dod o hyd i gyfryngwr sy'n lleol i chi"
 
 #~ msgid "Select the area you most need help with"
 #~ msgstr "Dewiswch y maes y mae arnoch chi angen y mwyaf o gymorth"
+
+#~ msgid "We’ll try to call at the time you request, but this may not always be possible"
+#~ msgstr "Byddwn yn gwneud pob ymdrech i'ch ffonio'n ôl ar yr amser a nodwyd gennych, ond efallai na fydd hyn yn bosibl bob amser"
