@@ -86,12 +86,7 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
             )
         ],
     )
-    time = AvailabilityCheckerField(
-        _(u'Select a time for us to call'),
-        description=_(
-            u'We’ll try to call at the time you request or '
-            u'within half an hour of your selected time, '
-            u'but this may not always be possible'))
+    time = AvailabilityCheckerField(label=_(u'Select a time for us to call'))
 
 
 class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -130,11 +125,7 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
             )
         ],
     )
-    time = AvailabilityCheckerField(
-        _(u'Select a time for us to call'),
-        description=_(
-            u'We’ll try to call at the time you '
-            u'request, but this may not always be possible.'))
+    time = AvailabilityCheckerField(label=_(u'Select a time for us to call'))
 
 
 class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):

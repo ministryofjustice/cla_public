@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-08-13 12:18+0100\n"
+"POT-Creation-Date: 2015-08-13 14:46+0100\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -405,7 +405,7 @@ msgstr ""
 
 #: cla_public/apps/checker/fields.py:127 cla_public/apps/checker/forms.py:66
 #: cla_public/apps/checker/forms.py:127 cla_public/apps/checker/forms.py:144
-#: cla_public/apps/contact/forms.py:84 cla_public/apps/contact/forms.py:128
+#: cla_public/apps/contact/forms.py:84 cla_public/apps/contact/forms.py:123
 msgid "Please choose Yes or No"
 msgstr ""
 
@@ -1007,101 +1007,93 @@ msgstr ""
 msgid "Please tell us what you need in the box below"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:69 cla_public/apps/contact/forms.py:113
+#: cla_public/apps/contact/forms.py:69 cla_public/apps/contact/forms.py:108
 msgid "Phone number for the callback"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:70 cla_public/apps/contact/forms.py:114
+#: cla_public/apps/contact/forms.py:70 cla_public/apps/contact/forms.py:109
 msgid "Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:76 cla_public/apps/contact/forms.py:120
+#: cla_public/apps/contact/forms.py:76 cla_public/apps/contact/forms.py:115
 msgid "Your telephone number must be 20 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:80 cla_public/apps/contact/forms.py:124
+#: cla_public/apps/contact/forms.py:80 cla_public/apps/contact/forms.py:119
 msgid "Is it safe for us to leave a message on this number?"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:90 cla_public/apps/contact/forms.py:134
+#: cla_public/apps/contact/forms.py:89 cla_public/apps/contact/forms.py:128
 msgid "Select a time for us to call"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:91
-msgid "We’ll try to call at the time you request or within half an hour of your selected time, but this may not always be possible"
-msgstr ""
-
-#: cla_public/apps/contact/forms.py:102
+#: cla_public/apps/contact/forms.py:97
 msgid "Full name of the person to call"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:104 cla_public/apps/contact/forms.py:167
+#: cla_public/apps/contact/forms.py:99 cla_public/apps/contact/forms.py:158
 msgid "Your full name must be 400 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:109
+#: cla_public/apps/contact/forms.py:104
 msgid "Relationship to you"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:135
-msgid "We’ll try to call at the time you request, but this may not always be possible."
-msgstr ""
-
-#: cla_public/apps/contact/forms.py:145
+#: cla_public/apps/contact/forms.py:136
 msgid "Postcode"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:147
+#: cla_public/apps/contact/forms.py:138
 msgid "Your postcode must be 12 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:152
+#: cla_public/apps/contact/forms.py:143
 msgid "Street address"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:154 cla_public/apps/contact/forms.py:196
-#: cla_public/apps/contact/forms.py:270
+#: cla_public/apps/contact/forms.py:145 cla_public/apps/contact/forms.py:187
+#: cla_public/apps/contact/forms.py:261
 msgid "Your address must be 255 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:165
+#: cla_public/apps/contact/forms.py:156
 msgid "Your full name"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:172
+#: cla_public/apps/contact/forms.py:163
 msgid "Select a contact option"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:175
+#: cla_public/apps/contact/forms.py:166
 msgid "Please choose one of the options"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:190 cla_public/templates/privacy.html:233
+#: cla_public/apps/contact/forms.py:181 cla_public/templates/privacy.html:233
 #: cla_public/templates/macros/help-orgs.html:80
 msgid "Email"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:191
+#: cla_public/apps/contact/forms.py:182
 msgid "If you add your email we will send you the reference number when you submit your details"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:199 cla_public/apps/contact/forms.py:273
+#: cla_public/apps/contact/forms.py:190 cla_public/apps/contact/forms.py:264
 msgid "Invalid email address"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:205
+#: cla_public/apps/contact/forms.py:196
 msgid "Tell us more about your problem"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:207
+#: cla_public/apps/contact/forms.py:198
 msgid "Your notes must be 4000 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:213
+#: cla_public/apps/contact/forms.py:204
 msgid "Do you have any special communication needs?"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:268
+#: cla_public/apps/contact/forms.py:259
 msgid "Your email"
 msgstr ""
 
@@ -2685,8 +2677,8 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/checker/result/confirmation.html:79
-#: cla_public/templates/macros/subform.html:20
-#: cla_public/templates/macros/subform.html:54
+#: cla_public/templates/macros/subform.html:21
+#: cla_public/templates/macros/subform.html:53
 msgid "When a CLA operator calls, the call will come from an anonymous number."
 msgstr ""
 
@@ -3171,20 +3163,21 @@ msgstr ""
 msgid "Opening hours"
 msgstr ""
 
-#: cla_public/templates/macros/subform.html:19
-msgid "We will try to call at least once. If you miss the call you’ll need to complete this form again."
+#: cla_public/templates/macros/subform.html:20
+#: cla_public/templates/macros/subform.html:52
+msgid "We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible."
 msgstr ""
 
-#: cla_public/templates/macros/subform.html:47
+#: cla_public/templates/macros/subform.html:22
+msgid "If you miss the call you’ll need to complete this form again."
+msgstr ""
+
+#: cla_public/templates/macros/subform.html:51
 msgid "Please make sure you are with your nominated person at the time of the callback."
 msgstr ""
 
-#: cla_public/templates/macros/subform.html:49
-msgid ""
-"\n"
-"        We will try to call at least once. If your nominated person misses\n"
-"        the call you’ll need to complete this form again.\n"
-"      "
+#: cla_public/templates/macros/subform.html:54
+msgid "If your nominated person misses the call you’ll need to complete this form again."
 msgstr ""
 
 #: cla_public/templates/scope/diagnosis.html:7
@@ -3239,7 +3232,4 @@ msgstr ""
 #: cla_public/templates/scope/mediation.html:15
 msgid "Find your local mediator"
 msgstr ""
-
-#~ msgid "We’ll try to call at the time you request, but this may not always be possible"
-#~ msgstr ""
 
