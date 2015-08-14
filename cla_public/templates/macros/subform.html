@@ -16,8 +16,11 @@
     persist_values=True
   ) %}
     <div class="form-notice">
-      <p>{{ _('We will try to call at least once. If you miss the call you’ll need to complete this form again.') }}</p>
-      <p>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</p>
+      <ul class="styled-list">
+        <li>{{ _('We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible.') }}</li>
+        <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
+        <li>{{ _('If you miss the call you’ll need to complete this form again.') }}</li>
+      </ul>
     </div>
 
     {{ Form.text_input_fieldset(form.callback.contact_number, class_='m-large', fieldset_class="fieldset-group") }}
@@ -44,14 +47,12 @@
     persist_values=True
   ) %}
     <div class="form-notice">
-      <p>{{ _('Please make sure you are with your nominated person at the time of the callback.') }}</p>
-      <p>
-      {% trans %}
-        We will try to call at least once. If your nominated person misses
-        the call you’ll need to complete this form again.
-      {% endtrans %}
-      </p>
-      <p>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</p>
+      <ul class="styled-list">
+        <li>{{ _('Please make sure you are with your nominated person at the time of the callback.') }}</li>
+        <li>{{ _('We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible.') }}</li>
+        <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
+        <li>{{ _('If your nominated person misses the call you’ll need to complete this form again.') }}</li>
+      </ul>
     </div>
 
     {{ Form.text_input_fieldset(form.thirdparty.full_name, class_='m-large', fieldset_class="fieldset-group") }}

@@ -75,8 +75,8 @@
         {% trans %}Your details have been submitted and an operator will try to call
         you back around the time you requested.{% endtrans %}
       {% endif %}
-
       (<strong>{{ session.stored.callback_time|datetime('full') }}</strong>).
+      {% trans %}When a CLA operator calls, the call will come from an anonymous number.{% endtrans %}
     </p>
   {% endif %}
 
