@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-
-import urllib
-
 from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 import requests
-
+from werkzeug.urls import url_encode
 
 PROVIDER_CATEGORIES = {
     'aap': _('Actions against the police'),
@@ -30,7 +27,7 @@ class LaaLaaError(Exception):
 
 def kwargs_to_urlparams(**kwargs):
     kwargs = dict(filter(lambda kwarg: kwarg[1], kwargs.items()))
-    return urllib.urlencode(kwargs)
+    return url_encode(kwargs)
 
 
 def laalaa_url(**kwargs):
@@ -42,11 +39,9 @@ def laalaa_url(**kwargs):
 def laalaa_search(**kwargs):
     try:
         response = requests.get(laalaa_url(**kwargs))
-    except (requests.exceptions.ConnectionError,
-            requests.exceptions.Timeout) as e:
+        return response.json()
+    except (requests.exceptions.RequestException, ValueError) as e:
         raise LaaLaaError(e)
-
-    return response.json()
 
 
 def decode_category(category):
