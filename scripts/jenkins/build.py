@@ -160,7 +160,7 @@ def run_tests(venv_path, threshold_tests=False):
 
     # nightwatch fails to clean up these process
     # NB: if two jobs are running on the same jenkins slave then one may break the other
-    run('killall phantomjs')
+    run('killall phantomjs || echo "No orphan phantomjs processes"')
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
