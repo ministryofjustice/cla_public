@@ -259,6 +259,13 @@ $map-height: 460px;
         }
       }
 
+      .url:after {
+        position: relative;
+        top: -.3em;
+        margin-left: .2em;
+        display: inline-block;
+      }
+
       .org-summary {
         display: block;
         overflow: hidden;
