@@ -23,8 +23,12 @@
             {% set question = firstquestion if loop.index0 == 0 else nodes[loop.index0 - 1].heading %}
               <li class="answers-item progress-step">
                 <a href="{{ url }}" class="question step-name">
-                  <div class="question">{{ question }}</div>
+                  <div class="question">
+                    <span class="review-ui-label">{{ _('Question') }}</span>
+                    {{ question }}
+                  </div>
                   <div class="answer">
+                    <span class="review-ui-label">{{ _('Answer') }}</span>
                     <strong>{{ node.label|striptags }}</strong>
                   </div>
                 </a>

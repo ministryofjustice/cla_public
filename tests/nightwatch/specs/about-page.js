@@ -82,7 +82,7 @@ module.exports = {
   'Test outcomes': function(client) {
     client
       .aboutSetAllToNo(true)
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
+      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
       .assert.urlContains('/income', 'Goes to /income when all answers are No')
       .url(client.launch_url + '/about')
       .waitForElementVisible('input[name="have_partner"]', 5000)
