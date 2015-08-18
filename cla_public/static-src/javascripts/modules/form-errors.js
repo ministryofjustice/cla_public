@@ -14,10 +14,26 @@
         var $target = $(e.target);
         $target.closest('form').attr('submit-name', $target.attr('name'));
       });
+
+      $('#content').on('click', '.error-summary a', function(e) {
+        e.preventDefault();
+        $('fieldset').removeClass('s-targeted');
+        var targetId = e.target.href.replace(/.*#/, '#');
+        if(targetId.length < 2) {
+          return;
+        }
+        var $target = $(targetId);
+        $target.addClass('s-targeted');
+
+        $('html, body').animate({
+          scrollTop: $target.offset().top - 20
+        }, 300, function() {
+          $target.attr('tabindex', -1).focus();
+        });
+      });
     },
 
     postToFormErrors: function(e) {
-      this.clearErrors();
       this.$form = $(e.target);
 
       // Return if button has a name, which is attached as form attribute on click
@@ -51,8 +67,10 @@
         }
 
         $('html, body').animate({
-          scrollTop: errorBanner.offset().top - 50
-        }, 300);
+          scrollTop: errorBanner.offset().top - 20
+        }, 300, function() {
+          errorBanner.attr({'tabindex': -1}).focus();
+        });
       } else {
         this.$form.off('submit');
         this.$form.submit();
@@ -82,16 +100,41 @@
       return errorFields;
     },
 
+    createErrorSummary: function() {
+      var errorSummary = [];
+
+      // Loop through errors on the page to retain the fields order
+      $('fieldset.m-error').map(function() {
+        var $this = $(this);
+
+        if(!this.id || $this.hasClass('s-hidden') || $this.parent().hasClass('s-hidden')) {
+          return;
+        }
+        var name = this.id.replace(/^field-/, '');
+
+        errorSummary.push({
+          label: $this.find('> .fieldset-label').text(),
+          name: name,
+          errors: $this.find('> .field-error p').map(function() {
+            return $(this).text();
+          })
+        });
+      });
+
+      return errorSummary;
+    },
+
     loadErrors: function(errors) {
       var errorFields = this.formatErrors(errors);
       var self = this;
 
+      this.clearErrors();
+
       function addErrors(errors, fieldName) {
         if (_.isString(errors[0])) {
           $('#field-' + fieldName).addClass('m-error');
-          $('#field-label-' + fieldName)
-            .addClass('m-error')
-            .after(self.fieldError({ errors: errors }));
+          var label = $('#field-label-' + fieldName).addClass('m-error');
+          label.after(self.fieldError({ errors: errors }));
         } else if(_.isObject(errors[0]) && !_.isArray(errors[0])) {
           // Multiple forms (e.g. properties)
           _.each(errors, function(errors, i) {
@@ -109,7 +152,7 @@
       _.each(errorFields, addErrors);
 
       if(this.$form.data('error-banner') !== false) {
-        this.$form.prepend(this.mainFormError());
+        this.$form.prepend(this.mainFormError({ errors: this.createErrorSummary()}));
       }
     },
 

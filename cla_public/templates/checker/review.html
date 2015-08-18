@@ -20,8 +20,12 @@
         <ul class="answers">
           {% for item in session.checker.scope_answers %}
             <li class="answers-item">
-              <div class="question">{{ item.question }}</div>
+              <div class="question">
+                <span class="review-ui-label">{{ _('Question') }}</span>
+                {{ item.question }}
+              </div>
               <div class="answer">
+                <span class="review-ui-label">{{ _('Answer') }}</span>
                 <strong>{{ item.answer }}</strong>
               </div>
             </li>

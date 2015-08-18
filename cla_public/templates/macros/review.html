@@ -28,9 +28,13 @@
 
 {% macro render_answer(field, step_title) %}
   {% if step_title != field.label.text %}
-    <div class="question">{{ field.label.text }}</div>
+    <div class="question">
+      <span class="review-ui-label">{{ _('Question') }}</span>
+      {{ field.label.text }}
+    </div>
   {% endif %}
   <div class="answer">
+    <span class="review-ui-label">{{ _('Answer') }}</span>
     {% if field.choices %}
       {{ render_choices(field) }}
     {% elif 'Money' in field.type %}

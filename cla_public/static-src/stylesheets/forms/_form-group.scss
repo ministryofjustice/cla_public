@@ -22,7 +22,7 @@
     }
 
     .fieldset-group {
-      margin: 0 0 0 -20px;
+      margin: 0 0 0 -19px;
       border: 0;
       border-top: 1px solid $grey-3;
 
@@ -31,8 +31,18 @@
       }
     }
 
+    &.m-error:focus:before {
+      top: .7em;
+      left: -.2em;
+    }
+
+    .m-error:focus:before {
+      top: 1.2em;
+    }
+
     .form-notice {
-      margin: 0 -20px -1px -20px;
+      margin: 0 -20px -1px -15px;
+      padding: 15px 0;
       position: relative;
     }
   }

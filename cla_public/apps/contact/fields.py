@@ -86,7 +86,7 @@ class DayChoiceField(FormattedChoiceField, SelectField):
 
     @classmethod
     def _format(cls, value):
-        if value and not isinstance(value, basestring):
+        if isinstance(value, (datetime.date, datetime.datetime)):
             return '{:%Y%m%d}'.format(value)
         return value
 
@@ -123,7 +123,7 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
 
     @classmethod
     def _format(cls, value):
-        if value and not isinstance(value, basestring):
+        if isinstance(value, datetime.time):
             return '{:%H%M}'.format(value)
         return value
 

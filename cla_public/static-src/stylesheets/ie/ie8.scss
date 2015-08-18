@@ -11,19 +11,9 @@
   }
 
   .step-status {
-    border: 0;
-    margin-top: 1px;
+    height: 11px;
+    width: 11px;
   }
-}
-
-.js-enabled .s-hidden {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  margin: 0;
 }
 
 .scope-options-list-item a:before {

@@ -52,9 +52,15 @@ def handle_find_legal_adviser_form(form, args):
         if form.validate():
             if 'page' in args and args['page'].isdigit():
                 page = args['page']
-            data = laalaa.find(args['postcode'], category, page)
-            if 'error' in data:
-                form.postcode.errors.append(data['error'])
+            try:
+                data = laalaa.find(args['postcode'], category, page)
+                if 'error' in data:
+                    form.postcode.errors.append(data['error'])
+            except laalaa.LaaLaaError:
+                form.postcode.errors.append(u"%s %s" % (
+                    _('Error looking up legal advisers.'),
+                    _('Please try again later.')
+                ))
     return data
 
 

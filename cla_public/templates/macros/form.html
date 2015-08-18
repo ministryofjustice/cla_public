@@ -426,18 +426,63 @@
 {% import "macros/element.html" as Element %}
 {% macro handle_errors(form) %}
   {% if form.errors %}
-    {% call Element.alert('error', icon='cross') %}
-      {% if form.errors.timeout %}
-        <p>{{ form.errors.timeout }}</p>
-      {% elif form.errors|length == 1 and form.errors.csrf_token %}
-        <p>{{  _('Sorry, something went wrong.') }}</p>
-        <p>{{  _('Please try submitting the form again.') }}</p>
-      {% else %}
-        <p>{{  _('This form has errors.') }}</p>
-        <p>{{ _('Please see below for the errors you need to correct.') }}</p>
-      {% endif %}
-    {% endcall %}
+    {% if form.errors.timeout %}
+      {% call Element.alert('error', icon='cross') %}
+        {% if form.errors.timeout %}
+          <p>{{ form.errors.timeout }}</p>
+        {% endif %}
+      {% endcall %}
+    {% elif form.errors|length == 1 and form.errors.csrf_token %}
+      {% call Element.alert('error', icon='cross', title=_('Sorry, something went wrong')) %}
+        <p>{{ _('Please try submitting the form again.') }}</p>
+      {% endcall %}
+    {% else%}
+      {% call Element.alert('error', icon='cross', title=_('This form has errors')) %}
+        {% if form['properties'] %}
+          {% for property_form in form['properties'] %}
+            {% if property_form.errors %}
+              {% if form['properties']|length > 1 %}
+                <h4>{{ _('Property') }} {{ loop.index }}</h4>
+              {% endif %}
+              <ul class="error-summary">
+                {% for field_name in property_form.errors.keys() %}
+                  <li>{{ show_field_error(property_form[field_name]) }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <ul class="error-summary">
+            {% for field_name in form.errors.keys() %}
+              <li>{{ show_field_error(form[field_name]) }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endcall %}
+    {% endif %}
   {% endif %}
+{% endmacro %}
+
+
+{% macro show_field_error(field) %}
+  <dl class="error-summary-details">
+    <dt>
+      {% if field.form and field.form.errors %}
+        {{ field.label.text }}
+      {% else %}
+        <a href="#field-{{ field.id }}">{{ field.label.text }}</a>
+      {% endif %}
+    </dt>
+    {% if field.form and field.form.errors %}
+      <dd>
+        {% for error in field.form.errors %}
+          {{ show_field_error(field.form[error]) }}
+        {% endfor %}
+      </dd>
+    {% else %}
+      <dd>{{ error }}</dd>
+    {% endif %}
+  </dl>
 {% endmacro %}
 
 

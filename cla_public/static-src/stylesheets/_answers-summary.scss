@@ -69,27 +69,19 @@
     }
   }
 
-  .question,
-  .answer {
-    &:before {
-      float: left;
-      margin-left: -25px;
-      color: $grey-2;
-      width: 18px;
-      text-align: center;
-    }
-  }
-
-  .question:before {
-    content: 'Q';
+  .review-ui-label {
+    float: left;
+    margin-left: -25px;
+    color: $grey-2;
+    letter-spacing: 1em;
+    text-indent: .2em;
+    width: 1em;
+    overflow: hidden;
+    text-align: center;
   }
 
   .answer {
     margin-top: 5px;
-
-    &:before {
-      content: 'A';
-    }
   }
 
   .interval {

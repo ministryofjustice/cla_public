@@ -18,9 +18,13 @@
   {% endif %}
 {% endblock %}
 
-{% block content %}
-  {% include "_phase-tag.html" %}
+{% block before_content %}
+  <div class="container">
+    {% include "_phase-tag.html" %}
+  </div>
+{% endblock %}
 
+{% block content %}
   <div class="inner-block {% if self.sidebar()|trim %}m-has-sidebar{% endif %}">
     {% with flash_messages = get_flashed_messages() %}
       {% if flash_messages %}
@@ -81,11 +85,26 @@
   </script>
 
   <script type="text/html" id="mainFormError">
-    <div class="alert alert-error" role="alert">
+    <div class="alert alert-error" role="alertdialog">
       <span class="icon icon-cross" aria-hidden="true"></span>
       <div class="alert-message">
-        <p>{{ _('This form has errors.') }}</p>
-        <p>{{ _('Please see below for the errors you need to correct.') }}</p>
+        <h3 class="alert-header" id="alert-heading-error">
+          {{ _('This form has errors') }}
+        </h3>
+        <ul class="error-summary">
+        <% _.each(errors, function(field) { %>
+          <li>
+            <dl class="error-summary-details">
+              <dt>
+                <a href="#field-<%= field.name %>"><%= field.label %></a>
+              </dt>
+              <% _.each(field.errors, function(error) { %>
+                <dd><%= error %></dd>
+              <% }); %>
+            </dl>
+          </li>
+        <% }); %>
+        </ul>
       </div>
     </div>
   </script>

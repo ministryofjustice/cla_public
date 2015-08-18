@@ -1,6 +1,21 @@
 fieldset {
   border: 0;
   margin: 0;
+  position: relative;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &.m-error:focus:before {
+    position: absolute;
+    top: .1em;
+    left: -1.1em;
+    content: '';
+    border-style: solid;
+    border-width: 6px 0 6px 12px;
+    border-color: transparent transparent transparent $mellow-red;
+  }
 
   &.form-group {
     border-top: 1px solid $grey-3;
@@ -13,6 +28,10 @@ fieldset {
 
     > .field-error {
       margin-top: 0;
+    }
+
+    &.m-error:focus:before {
+      left: 0;
     }
 
     @include media(mobile) {
@@ -59,17 +78,12 @@ fieldset {
   // Errors
   &.m-error {
     .fieldset-label.m-error {
-      background: url(../images/icons/icon-small-cross.png) 10px .25em no-repeat;
-      background: url(../images/icons/icon-small-cross-2x.png) 10px .25em/10px no-repeat;
       color: $mellow-red;
       font-weight: bold;
-      padding-left: 30px;
     }
 
     &.form-subfield {
       border-top: 0;
-      margin-left: 0;
     }
   }
-
 }
