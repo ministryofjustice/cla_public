@@ -176,7 +176,7 @@
     {% if prefix %}
       <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
     {% endif %}
-    {{ field(class_='form-control ' + class_, autocomplete='off') }}
+    {{ field(class_='form-control ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
     {% if suffix %}
       <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
     {% endif %}
@@ -297,7 +297,7 @@
     <input type="hidden" name="{{ field.interval_period.name }}" value="per_week">
   {% else %}
     <label class="input-prefix" for="{{field.per_interval_value.id}}">£</label>
-    {{ field.per_interval_value(class_='form-control m-small', autocomplete='off') }}
+    {{ field.per_interval_value(class_='form-control m-small', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
     {{ field.interval_period(class_='form-control') }}
   {% endif %}
 {% endmacro %}
