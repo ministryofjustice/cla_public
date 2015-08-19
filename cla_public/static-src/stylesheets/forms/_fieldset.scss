@@ -8,6 +8,7 @@ fieldset {
   }
 
   &.m-error:focus:before {
+    animation: 220ms reveal-arrow;
     position: absolute;
     top: .1em;
     left: -1.1em;
@@ -74,16 +75,19 @@ fieldset {
     margin-top: 10px;
     margin-bottom: 10px;
   }
+}
 
-  // Errors
-  &.m-error {
-    .fieldset-label.m-error {
-      color: $mellow-red;
-      font-weight: bold;
-    }
+@keyframes reveal-arrow {
+  0% {
+    opacity: 0;
+    transform: translateX(-1em) scale(1.7);
+  }
 
-    &.form-subfield {
-      border-top: 0;
-    }
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0) scale(1);
   }
 }
