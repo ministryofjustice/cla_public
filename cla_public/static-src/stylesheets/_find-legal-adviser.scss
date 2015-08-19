@@ -64,6 +64,7 @@ $map-height: 460px;
     .org-list-item {
       border-top: 1px solid $grey-3;
       padding: 10px;
+      margin: 0;
       display: block;
 
       &:first-child {
@@ -128,6 +129,8 @@ $map-height: 460px;
     }
 
     .results-nav {
+      margin: 0;
+
       a,
       span {
         font-size: .9em;
@@ -207,7 +210,7 @@ $map-height: 460px;
     }
 
     .search-results-container {
-      overflow: hidden;
+      height: $map-height;
       margin: 0 -1px;
       border: 1px solid $grey-2;
     }
@@ -230,6 +233,7 @@ $map-height: 460px;
         display: none;
         padding: 8px 8px 8px 30px;
         background: white;
+        outline: 0;
       }
 
       .s-highlighted {
@@ -239,31 +243,45 @@ $map-height: 460px;
 
         .org-details {
           display: block;
+          margin-top: 4px;
         }
       }
 
       .org-list-item {
         padding: 4px;
 
-        header {
-          cursor: pointer;
-          margin: -4px;
-          padding: 8px 88px 8px 34px;
-        }
-
         &:hover {
           background: $grey-4;
         }
 
         &.s-highlighted {
-          background: $grey-3;
+          background: $yellow;
         }
+      }
+
+      .url:after {
+        position: relative;
+        top: -.3em;
+        margin-left: .2em;
+        display: inline-block;
+      }
+
+      .org-summary {
+        display: block;
+        overflow: hidden;
+        outline: 0;
+        margin: -4px;
+        padding: 8px 88px 8px 34px;
       }
     }
 
     .search-results-list {
       overflow: auto;
       height: $map-height - $_pagination-height;
+
+      &:focus {
+        outline: 2px solid $yellow;
+      }
     }
 
     .search-results-pagination {

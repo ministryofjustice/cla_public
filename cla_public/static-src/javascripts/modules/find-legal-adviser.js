@@ -36,8 +36,14 @@
 
     bindEvents: function() {
       var self = this;
+      this.$organisationListItems.find('.org-summary').each(function() {
+        $(this).replaceWith('<a class="' + this.className + '" aria-expanded="false" href="#">' + $(this).html() + '</a>');
+      });
 
-      this.$organisationListItems.on('click', 'header', function(evt) {
+      this.$organisationListItems.on('click', '.org-summary', function(evt) {
+        evt.preventDefault();
+        self.$organisationListItems.find('.org-summary').attr('aria-expanded', false);
+        $(this).attr('aria-expanded', true);
         self._handleItemHighlight(evt, $(this).closest('li'));
       });
 
@@ -78,7 +84,13 @@
     },
 
     _unbindEvents: function() {
-      this.$organisationListItems.unbind('click');
+      this.$organisationListItems
+        .unbind('click')
+        .find('.org-summary')
+        .each(function() {
+          $(this).replaceWith('<header class="' + this.className + '">' + $(this).html() + '</header>');
+        });
+
       this.$resultsPagination.unbind('click');
       this.$findLegalAdviserForm.unbind('submit');
       window.onpopstate = null;
@@ -101,6 +113,8 @@
               'scrollTop': self.$findLegalAdviserContainer.offset().top - 10
             }, 160);
           }
+
+          $('.search-results-list').attr('tabindex', -1).focus();
         })
         .error();
     },
@@ -176,6 +190,8 @@
 
       this.$organisationListItems.removeClass('s-highlighted');
       $item.addClass('s-highlighted');
+
+      $item.find('.org-details').attr('tabindex', -1).focus();
 
       this._handleMarkersZooming($item.data('id'));
       this._handleHighlightedItemScroll($item, $container);

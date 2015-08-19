@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% import "macros/element.html" as Element %}
+
 {% set title = _('Legal aid doesn’t usually cover your type of problem') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
@@ -17,11 +19,13 @@
 
     <p>{% trans %}You can ask a legal adviser if an application might succeed in your case and how to apply.{% endtrans %}</p>
 
-    <p>{% trans %}You can also <a href="https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding" rel="external" target="_blank">apply directly to the Legal Aid Agency</a>.{% endtrans %}</p>
+    <p>
+      {% trans apply_directly_link=Element.link_new_window('https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding', _('apply directly'), True) %}
+       You can also {{ apply_directly_link }} to the Legal Aid Agency.
+      {% endtrans %}
+    </p>
 
-    <a class="button" href="https://www.gov.uk/find-a-legal-adviser" target="_blank">
-      {{ _('Find a legal adviser') }}
-    </a>
+    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a legal adviser'), **{'class': 'button'}) }}
   </aside>
 {% endblock %}
 
