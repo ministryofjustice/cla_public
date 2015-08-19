@@ -134,7 +134,7 @@
         if (_.isString(errors[0])) {
           $('#field-' + fieldName).addClass('m-error');
           var label = $('#field-label-' + fieldName).addClass('m-error');
-          label.after(self.fieldError({ errors: errors }));
+          label.after(self.fieldError({ errors: errors, fieldName: fieldName }));
         } else if(_.isObject(errors[0]) && !_.isArray(errors[0])) {
           // Multiple forms (e.g. properties)
           _.each(errors, function(errors, i) {

@@ -110,7 +110,7 @@
   </script>
 
   <script type="text/html" id="fieldError">
-    <div class="form-row field-error">
+    <div class="form-row field-error" id="error-<%= fieldName %>">
       <% _.each(errors, function(error, index) { %>
         <p><%= error %></p>
       <% }); %>
