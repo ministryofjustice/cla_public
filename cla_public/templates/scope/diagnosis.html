@@ -59,7 +59,7 @@
     <ul class="scope-options-list">
       {% for choice in choices %}
         <li class="scope-options-list-item">
-          <a href="{{ choice.url }}"{% if not nodes|length %} data-ga="event:category-of-law/{{ choice.label|striptags }}"{% endif %}>
+          <a href="{{ choice.url }}"{% if not nodes|length %} data-ga="event:category-of-law/{{ choice.label|striptags }}"{% endif %} role="button">
             <span class="option-label">{{ choice.label|safe|striptags }}</span>
             {% if choice.help_text %}
               <div class="field-help">{{ choice.help_text|safe|striptags }}</div>
