@@ -15,7 +15,7 @@
     use_row=False,
     persist_values=True
   ) %}
-    <div class="form-notice">
+    <div class="form-notice" role="alert">
       <ul class="styled-list">
         <li>{{ _('We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible.') }}</li>
         <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
@@ -46,7 +46,7 @@
     use_row=False,
     persist_values=True
   ) %}
-    <div class="form-notice">
+    <div class="form-notice" role="alert">
       <ul class="styled-list">
         <li>{{ _('Please make sure you are with your nominated person at the time of the callback.') }}</li>
         <li>{{ _('We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible.') }}</li>
@@ -108,47 +108,47 @@
 #}
 {% macro adaptations(subform) %}
   {% call Form.fieldset(subform) %}
-    <ul class="form-option-list">
-      <li>
+    <ul class="form-option-list" role="listbox" aria-labelledby="field-label-{{ subform.id }}" aria-multiselectable="true">
+      <li role="option">
         <label class="radio-inline" for="{{subform.bsl_webcam.id}}">
           {{ subform.bsl_webcam }}
           {{ subform.bsl_webcam.label.text }}
         </label>
       </li>
-      <li>
+      <li role="option">
         <label class="radio-inline" for="{{subform.minicom.id}}">
           {{ subform.minicom }}
           {{ subform.minicom.label.text }}
         </label>
       </li>
-      <li>
+      <li role="option">
         <label class="radio-inline" for="{{subform.text_relay.id}}">
           {{ subform.text_relay }}
           {{ subform.text_relay.label.text }}
         </label>
       </li>
-      <li>
+      <li role="option">
         <label class="radio-inline" for="{{subform.welsh.id}}">
           {{ subform.welsh }}
           {{ subform.welsh.label.text }}
         </label>
       </li>
-      <li>
+      <li role="option">
         <label class="radio-inline" for="{{subform.is_other_language.id}}">
-          {{ subform.is_other_language }}
+          {{ subform.is_other_language(**{'aria-controls': subform.other_language.id}) }}
           {{ subform.is_other_language.label.text }}
         </label>
         {% call Form.fieldset(subform.other_language, is_subfield=True, controlled_by=subform.is_other_language, control_value='y', has_label=False) %}
           {{ subform.other_language(class_='form-control') }}
         {% endcall %}
       </li>
-      <li>
+      <li role="option">
         <label class="radio-inline" for="{{subform.is_other_adaptation.id}}">
           {{ subform.is_other_adaptation }}
           {{ subform.is_other_adaptation.label.text }}
         </label>
         {% call Form.fieldset(subform.other_adaptation, is_subfield=True, controlled_by=subform.is_other_adaptation, control_value='y', has_label=False) %}
-          {{ subform.other_adaptation(class_='form-control m-large') }}
+          {{ subform.other_adaptation(class_='form-control m-large', **{'aria-label': subform.other_adaptation.label.text}) }}
         {% endcall %}
       </li>
     </ul>

@@ -6,10 +6,7 @@
 
   padding: 20px;
   margin: 25px 0;
-
-  &:focus {
-    outline: 2px solid $yellow;
-  }
+  outline: 0;
 
   h3 {
     margin-top: 0;
