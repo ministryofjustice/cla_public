@@ -19,16 +19,7 @@
     {{ Form.handle_errors(form) }}
 
     {% call Form.fieldset(form.reasons) %}
-        <ul class="form-option-list" role="group" aria-labelledby="field-label-reasons">
-            {% for reason in form.reasons %}
-                <li>
-                    <label class="radio-inline" for="{{ reason.id }}">
-                      {{ reason }}
-                      {{ reason.label.text }}
-                    </label>
-                </li>
-            {% endfor %}
-        </ul>
+      {{ Form.option_list(form.reasons) }}
     {% endcall %}
 
     {{ Form.honeypot(form) }}
