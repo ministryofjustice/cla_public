@@ -39,9 +39,7 @@
       }
 
       $.each(window.CONDITIONAL_LABELS, function(key, value) {
-        $('#field-' + key + '')
-          .find('.fieldset-label *')
-          .text(value);
+        $('#field-label-' + key + '').text(value);
       });
     },
 

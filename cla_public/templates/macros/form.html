@@ -178,7 +178,8 @@
       <div class="form-row {{ kwargs.row_class }}">
         {% if field %}
           {{ render_field(field, field_attrs) }}
-        {% elif caller %}
+        {% endif %}
+        {% if caller %}
           {{ caller() }}
         {% endif %}
       </div>
@@ -192,11 +193,10 @@
 
 
 {% macro render_field(field, field_attrs={}) %}
-  {% do field_attrs.update({'class': 'form-control %s' % field_attrs.class }) %}
-
-  {% if field.type == 'RadioField' %}
+  {% if field.type in ['YesNoField', 'RadioField'] %}
     {{ radio_buttons(field) }}
   {% else %}
+    {% do field_attrs.update(class='form-control %s' % field_attrs.class) %}
     {{ field(**field_attrs) }}
   {% endif %}
 {% endmacro %}
