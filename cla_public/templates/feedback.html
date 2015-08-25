@@ -25,10 +25,16 @@
       {% endcall %}
     {% endif %}
 
-    {{ Form.option_list_fieldset(form.feel_about_service) }}
-    {{ Form.option_list_fieldset(form.help_filling_in_form) }}
-    {{ Form.textarea_fieldset(form.difficulty, class_='m-full', rows=6) }}
-    {{ Form.textarea_fieldset(form.ideas, class_='m-full', rows=6) }}
+    {% call Form.fieldset(form.feel_about_service) %}
+      {{ Form.option_list(form.feel_about_service) }}
+    {% endcall %}
+
+    {% call Form.fieldset(form.help_filling_in_form) %}
+      {{ Form.option_list(form.help_filling_in_form) }}
+    {% endcall %}
+
+    {{ Form.group(form.difficulty, field_attrs={'class': 'm-full', 'rows': 6}) }}
+    {{ Form.group(form.ideas, field_attrs={'class': 'm-full', 'rows': 6}) }}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Send feedback')) }}
