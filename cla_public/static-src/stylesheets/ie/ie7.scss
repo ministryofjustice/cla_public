@@ -37,9 +37,8 @@ fieldset header {
 }
 
 
-fieldset .fieldset-label,
-fieldset .fieldset-label.m-error {
-  margin-left: -16px;
+fieldset legend {
+  margin-left: -.9em;
 }
 
 .answers-summary .answers-item .step-name {

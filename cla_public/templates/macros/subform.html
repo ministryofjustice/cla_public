@@ -7,14 +7,35 @@
     - form <object>
         WTForm field
 #}
+{#{% macro callback(form) %}#}
+{#  {% call Form.fieldset(#}
+{#    is_subfield=True,#}
+{#    controlled_by=form.contact_type,#}
+{#    control_value="callback",#}
+{#    use_row=False,#}
+{#    persist_values=True#}
+{#  ) %}#}
+{#    <div class="form-notice" role="alert">#}
+{#      <ul class="styled-list">#}
+{#        <li>{{ _('We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible.') }}</li>#}
+{#        <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>#}
+{#        <li>{{ _('If you miss the call you’ll need to complete this form again.') }}</li>#}
+{#      </ul>#}
+{#    </div>#}
+{##}
+{#    {{ Form.text_input_fieldset(form.callback.contact_number, class_='m-large', fieldset_class="fieldset-group") }}#}
+{#    {{ Form.radio_buttons_fieldset(form.callback.safe_to_contact, class_='fieldset-group') }}#}
+{##}
+{#    {{ time_picker(form.callback.time) }}#}
+{#  {% endcall %}#}
+{#{% endmacro %}#}
+
 {% macro callback(form) %}
-  {% call Form.fieldset(
-    is_subfield=True,
-    controlled_by=form.contact_type,
-    control_value="callback",
-    use_row=False,
-    persist_values=True
-  ) %}
+  {% call Form.form_group(None,
+      class_='form-subfield',
+      use_row=False,
+      controlled_by=form.contact_type,
+      control_value='callback') %}
     <div class="form-notice" role="alert">
       <ul class="styled-list">
         <li>{{ _('We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible.') }}</li>
@@ -22,10 +43,8 @@
         <li>{{ _('If you miss the call you’ll need to complete this form again.') }}</li>
       </ul>
     </div>
-
-    {{ Form.text_input_fieldset(form.callback.contact_number, class_='m-large', fieldset_class="fieldset-group") }}
-    {{ Form.radio_buttons_fieldset(form.callback.safe_to_contact, class_='fieldset-group') }}
-
+    {{ Form.form_group(form.callback.contact_number, field_attrs={'class': 'm-large'}) }}
+    {{ Form.form_group(form.callback.safe_to_contact) }}
     {{ time_picker(form.callback.time) }}
   {% endcall %}
 {% endmacro %}
@@ -39,13 +58,11 @@
         WTForm field
 #}
 {% macro thirdparty(form) %}
-  {% call Form.fieldset(
-    is_subfield=True,
-    controlled_by=form.contact_type,
-    control_value="thirdparty",
-    use_row=False,
-    persist_values=True
-  ) %}
+  {% call Form.form_group(None,
+      class_='form-subfield',
+      use_row=False,
+      controlled_by=form.contact_type,
+      control_value='thirdparty') %}
     <div class="form-notice" role="alert">
       <ul class="styled-list">
         <li>{{ _('Please make sure you are with your nominated person at the time of the callback.') }}</li>
@@ -54,16 +71,38 @@
         <li>{{ _('If your nominated person misses the call you’ll need to complete this form again.') }}</li>
       </ul>
     </div>
-
-    {{ Form.text_input_fieldset(form.thirdparty.full_name, class_='m-large', fieldset_class="fieldset-group") }}
-    {% call Form.fieldset(form.thirdparty.relationship, class_='fieldset-group') %}
-      {{ form.thirdparty.relationship(class_='form-control') }}
-    {% endcall %}
-    {{ Form.text_input_fieldset(form.thirdparty.contact_number, class_='m-large', fieldset_class="fieldset-group") }}
-    {{ Form.radio_buttons_fieldset(form.thirdparty.safe_to_contact, class_='fieldset-group') }}
-
+    {{ Form.group(form.thirdparty.full_name, field_attrs={'class': 'm-large'}) }}
+    {{ Form.group(form.thirdparty.relationship) }}
+    {{ Form.group(form.thirdparty.contact_number, field_attrs={'class': 'm-large'}) }}
+    {{ Form.group(form.thirdparty.safe_to_contact) }}
     {{ time_picker(form.thirdparty.time) }}
   {% endcall %}
+
+{#  {% call Form.fieldset(#}
+{#    is_subfield=True,#}
+{#    controlled_by=form.contact_type,#}
+{#    control_value="thirdparty",#}
+{#    use_row=False,#}
+{#    persist_values=True#}
+{#  ) %}#}
+{#    <div class="form-notice" role="alert">#}
+{#      <ul class="styled-list">#}
+{#        <li>{{ _('Please make sure you are with your nominated person at the time of the callback.') }}</li>#}
+{#        <li>{{ _('We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible.') }}</li>#}
+{#        <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>#}
+{#        <li>{{ _('If your nominated person misses the call you’ll need to complete this form again.') }}</li>#}
+{#      </ul>#}
+{#    </div>#}
+{##}
+{#    {{ Form.text_input_fieldset(form.thirdparty.full_name, class_='m-large', fieldset_class="fieldset-group") }}#}
+{#    {% call Form.fieldset(form.thirdparty.relationship, class_='fieldset-group') %}#}
+{#      {{ form.thirdparty.relationship(class_='form-control') }}#}
+{#    {% endcall %}#}
+{#    {{ Form.text_input_fieldset(form.thirdparty.contact_number, class_='m-large', fieldset_class="fieldset-group") }}#}
+{#    {{ Form.radio_buttons_fieldset(form.thirdparty.safe_to_contact, class_='fieldset-group') }}#}
+{##}
+{#    {{ time_picker(form.thirdparty.time) }}#}
+{#  {% endcall %}#}
 {% endmacro %}
 
 
@@ -74,22 +113,24 @@
     - field <object>
         WTForm field
 #}
-{% macro time_picker(field) %}
-  {% call Form.fieldset(field, class_='fieldset-group') %}
-    <ul class="form-option-list" role="radiogroup">
-      {% for radio in field.specific_day %}
-        {% if (radio.data == 'today' and field.time_today.choices) or
-        (radio.data == 'specific_day' and field.day.choices) %}
+{% macro time_picker(fields) %}
+  {% call Form.fieldset(fields, 'form-group') %}
+    <ul class="form-option-list form-row" role="radiogroup">
+      {% for radio in fields.specific_day %}
+        {% if (radio.data == 'today' and fields.time_today.choices) or
+        (radio.data == 'specific_day' and fields.day.choices) %}
           <li>
             <label class="radio-inline" for="{{radio.id}}">
               {{ radio }} {{ radio.label.text }}
             </label>
             {% if radio.data == 'today' %}
-              {{ field.time_today(class_='form-control') }}
+              {{ fields.time_today(class_='form-control') }}
             {% else %}
-              {{ field.day(class_='form-control', **{
-                'data-day-time-choices': field.day.day_time_choices|tojson|safe
-              }) }} at {{ field.time_in_day(class_='form-control') }}
+              <span class="block-inline">
+                {{ fields.day(class_='form-control', **{
+                  'data-day-time-choices': fields.day.day_time_choices|tojson|safe
+                }) }} at {{ fields.time_in_day(class_='form-control') }}
+              </span>
             {%  endif %}
           </li>
         {% endif %}
@@ -108,7 +149,7 @@
 #}
 {% macro adaptations(subform) %}
   {% call Form.fieldset(subform) %}
-    <ul class="form-option-list" role="listbox" aria-labelledby="field-label-{{ subform.id }}" aria-multiselectable="true">
+    <ul class="form-option-list form-row" role="listbox">
       <li role="option">
         <label class="radio-inline" for="{{subform.bsl_webcam.id}}">
           {{ subform.bsl_webcam }}
@@ -138,41 +179,22 @@
           {{ subform.is_other_language(**{'aria-controls': subform.other_language.id}) }}
           {{ subform.is_other_language.label.text }}
         </label>
-        {% call Form.fieldset(subform.other_language, is_subfield=True, controlled_by=subform.is_other_language, control_value='y', has_label=False) %}
-          {{ subform.other_language(class_='form-control') }}
-        {% endcall %}
+        {{ Form.form_group(subform.other_language, 'form-subfield',
+            controlled_by=subform.is_other_language,
+            control_value='y',
+            hide_label=True) }}
       </li>
       <li role="option">
         <label class="radio-inline" for="{{subform.is_other_adaptation.id}}">
           {{ subform.is_other_adaptation }}
           {{ subform.is_other_adaptation.label.text }}
         </label>
-        {% call Form.fieldset(subform.other_adaptation, is_subfield=True, controlled_by=subform.is_other_adaptation, control_value='y', has_label=False) %}
-          {{ subform.other_adaptation(class_='form-control m-large', **{'aria-label': subform.other_adaptation.label.text}) }}
-        {% endcall %}
+        {{ Form.form_group(subform.other_adaptation, 'form-subfield',
+            controlled_by=subform.is_other_adaptation,
+            control_value='y',
+            hide_label=True,
+            field_attrs={'class': 'm-large', 'rows': 4}) }}
       </li>
     </ul>
-  {% endcall %}
-{% endmacro %}
-
-
-{#
-  Address subform
-
-  Params:
-    - field <object>
-        WTForm field
-#}
-{% macro address(subform) %}
-  {% call Form.fieldset(subform, class_='fieldset-group', use_row=False) %}
-    {% call Form.fieldset(subform.post_code, as_label=True, class_='form-group-plain') %}
-      <div class="address-finder">
-        {{ subform.post_code(class_='form-control m-small', **{ 'data-address-el': '#address-street_address' }) }}
-      </div>
-    {% endcall %}
-
-    {% call Form.fieldset(subform.street_address, as_label=True, class_='form-group-plain') %}
-      {{ subform.street_address(class_='form-control m-large', rows=4) }}
-    {% endcall %}
   {% endcall %}
 {% endmacro %}

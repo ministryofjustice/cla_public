@@ -9,7 +9,28 @@
     },
 
     bindEvents: function() {
-      $('form').on('submit', this.postToFormErrors);
+      $('form')
+        .on('submit', this.postToFormErrors)
+        // Focus back on summary if fieldset is focused and escape key is pressed
+        .on('keyup', function(e) {
+          var $target = $(e.target);
+          if(e.keyCode === 27 && $target.is('.form-error')) {
+            $target.closest('form').find('> .alert').focus();
+          }
+        })
+        .on('blur', '.form-group', function(e) {
+          $(e.target).removeAttr('tabindex');
+        });
+
+        //// Add role=alert on error message when fieldset is focused
+        //.on('focus', 'fieldset.m-error', function(e) {
+        //  $(e.target).find('.field-error').attr('role', 'alert');
+        //})
+        //// Remove role=alert from error message when fieldset is blurred
+        //.on('blur', 'fieldset.m-error', function(e) {
+        //  $(e.target).find('.field-error').removeAttr('role');
+        //});
+
       $('[type=submit]').on('click', function(e) {
         var $target = $(e.target);
         $target.closest('form').attr('submit-name', $target.attr('name'));
@@ -103,7 +124,7 @@
       var errorSummary = [];
 
       // Loop through errors on the page to retain the fields order
-      $('fieldset.m-error').map(function() {
+      $('fieldset.m-error, .form-group.m-error').map(function() {
         var $this = $(this);
 
         if(!this.id || $this.hasClass('s-hidden') || $this.parent().hasClass('s-hidden')) {
@@ -112,7 +133,7 @@
         var name = this.id.replace(/^field-/, '');
 
         errorSummary.push({
-          label: $this.find('> .fieldset-label').text(),
+          label: $this.find('> .fieldset-label, > .form-group-label').text(),
           name: name,
           errors: $this.find('> .field-error p').map(function() {
             return $(this).text();

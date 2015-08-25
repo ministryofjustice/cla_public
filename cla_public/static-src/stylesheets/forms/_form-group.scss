@@ -1,53 +1,45 @@
 .form-group {
-  margin-top: 30px;
+  position: relative;
+  margin-top: 40px;
+  border-top: 1px solid #dee0e2;
+  outline: 0;
 
   &:first-child {
     margin-top: 10px;
   }
+}
 
-  // Subfields
-  &.form-subfield {
-    margin: 13px;
-    padding-left: 15px;
-    border: 0;
-    border-left: 4px solid $grey-2;
-    border-top: 0;
-    position: relative;
-    zoom: 1;
-    overflow: hidden;
+.form-group-plain {
+  margin-top: 30px;
 
-    .input-prefix {
-      margin: 0 5px 0 0;
-      display: inline-block;
-    }
+  &:first-of-type {
+    margin-top: 20px;
+  }
 
-    .fieldset-group {
-      margin: 0 0 0 -19px;
-      border: 0;
-      border-top: 1px solid $grey-3;
-
-      &:first-child {
-        border-top: 0;
-      }
-    }
-
-    &.m-error:focus:before {
-      top: .7em;
-      left: -.2em;
-    }
-
-    .m-error:focus:before {
-      top: 1.2em;
-    }
-
-    .form-notice {
-      margin-left: -15px;
-      position: relative;
-    }
+  .form-group-label {
+    float: none;
+    position: static;
   }
 }
 
+.form-group-label {
+  padding-right: 7px;
+  line-height: 1;
+  cursor: default;
+  font-size: 1.1em;
+  float: left;
+  position: relative;
+  top: -.55em;
+  background: white;
+}
 
-.form-group-plain {
-  margin-top: 20px;
+.form-group.m-error:focus:before {
+  animation: 220ms reveal-arrow;
+  position: absolute;
+  top: -.45em;
+  left: -1.1em;
+  content: '';
+  border-style: solid;
+  border-width: 6px 0 6px 12px;
+  border-color: transparent transparent transparent $mellow-red;
 }

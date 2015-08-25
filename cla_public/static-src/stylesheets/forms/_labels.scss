@@ -66,3 +66,9 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.block-inline {
+  display: inline-block;
+  padding: 6px 0;
+  white-space: nowrap;
+}

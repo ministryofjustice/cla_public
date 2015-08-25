@@ -1,0 +1,56 @@
+.form-subfield {
+  margin: 15px;
+  padding-left: 15px;
+  border: 0;
+  border-left: 4px solid $grey-2;
+  position: relative;
+  zoom: 1;
+
+  &.form-group.s-expanded {
+    overflow: hidden;
+  }
+
+  .input-prefix {
+    margin: 0 5px 0 0;
+    display: inline-block;
+  }
+
+  //.fieldset-group {
+  //  margin: 0 0 0 -19px;
+  //  border: 0;
+  //  border-top: 1px solid $grey-3;
+  //
+  //  &:first-child {
+  //    border-top: 0;
+  //  }
+  //}
+
+  .form-group {
+    padding: 10px 15px;
+    margin: 0 0 0 -15px;
+  }
+
+  .form-group-label {
+    position: static;
+    margin: 10px 0;
+  }
+
+  fieldset legend {
+    float: left;
+    margin: 10px 0;
+  }
+
+  &.m-error:focus:before {
+    top: .7em;
+    left: -.2em;
+  }
+
+  .m-error:focus:before {
+    top: 1.2em;
+  }
+
+  .form-notice {
+    margin-left: -15px;
+    position: relative;
+  }
+}

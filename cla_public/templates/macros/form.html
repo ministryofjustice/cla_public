@@ -25,57 +25,135 @@
     - persist_values <boolean> (default: False)
         Whether to persist input values when fieldset is hidden
 #}
-{% macro fieldset(
-  field=None,
-  is_subfield=False,
-  is_hidden=False,
-  controlled_by=None,
-  control_value='1',
-  as_label=False,
-  class_='',
-  has_label=True,
-  use_row=True,
-  persist_values=False,
-  role=None
-) %}
-  {% if field and field.description %}
-    {% set describedby = field.id %}
-  {% else %}
-    {% set describedby = kwargs.describedby %}
+{#{% macro fieldset(#}
+{#  field=None,#}
+{#  is_subfield=False,#}
+{#  is_hidden=False,#}
+{#  controlled_by=None,#}
+{#  control_value='1',#}
+{#  as_label=False,#}
+{#  class_='',#}
+{#  has_label=True,#}
+{#  use_row=True,#}
+{#  persist_values=False,#}
+{#  role=None#}
+{#) %}#}
+{#  {% if field and field.description %}#}
+{#    {% set describedby = field.id %}#}
+{#  {% else %}#}
+{#    {% set describedby = kwargs.describedby %}#}
+{#  {% endif %}#}
+{#  <fieldset class="{% if class_ %}{{ class_ }}{% else %}form-group{% endif %}#}
+{#    {%- if field and field.errors %} m-error{% endif %}#}
+{#    {%- if is_subfield %} form-subfield{% endif %}#}
+{#    {%- if is_hidden == True or controlled_by and control_value %} s-hidden{% endif %}"#}
+{#    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}#}
+{#    {% if field %}id="field-{{ field.id }}"{% endif %}#}
+{#    {% if persist_values %}data-persist-values="true"{% endif %}#}
+{#    {% if role %}role="{{ role }}"{% endif %}#}
+{#    {% if describedby %}aria-describedby="field-description-{{ describedby }}"{% endif %}#}
+{#  >#}
+{#    {% if field %}#}
+{#      {% if field.flags.optional %}#}
+{#        {% set label_text = field.label.text + ' (optional)' %}#}
+{#      {% else %}#}
+{#        {% set label_text = field.label.text %}#}
+{#      {% endif %}#}
+{##}
+{#      {% set field_label = field.label(#}
+{#          for=field.per_interval_value.id if field.per_interval_value else field.id,#}
+{#          text=label_text#}
+{#        )#}
+{#      %}#}
+{#    {% endif %}#}
+{##}
+{#    {% if field and has_label %}#}
+{#      <legend class="fieldset-label {%- if field and field.errors %} m-error{% endif %}" id="field-label-{{ field.id }}">#}
+{#        {% if as_label %}#}
+{#          {{ field_label }}#}
+{#        {% else %}#}
+{#            <span>{{ label_text }}</span>#}
+{#        {% endif %}#}
+{#      </legend>#}
+{#    {% endif %}#}
+{##}
+{#    {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}#}
+{#      {{ field_errors(field.errors) }}#}
+{#    {% endif %}#}
+{##}
+{#    {% if field and (field.description or field.help_text) %}#}
+{#      <div class="form-row field-help" id="field-description-{{ field.id }}">#}
+{#        {%- if field.description %}#}
+{#          <span class="field-description">#}
+{#            {{- field.description -}}#}
+{#          </span>#}
+{#        {%- endif %}#}
+{#        {%- if field.more_info -%}#}
+{#          <div class="field-more-info">#}
+{#            {{- field.more_info|safe -}}#}
+{#          </div>#}
+{#        {%- endif %}#}
+{#      </div>#}
+{#    {%- endif -%}#}
+{##}
+{#    {% if caller %}#}
+{#      {% if use_row %}#}
+{#        <div class="form-row">#}
+{#          {{ caller() }}#}
+{#        </div>#}
+{#      {% else %}#}
+{#        {{ caller() }}#}
+{#      {% endif %}#}
+{#    {% endif %}#}
+{#  </fieldset>#}
+{#{% endmacro %}#}
+
+
+{% macro fieldset(field=None, class_='fieldset-group') %}
+  <fieldset class="{{ class_ }}" {% if kwargs.html %}{{ kwargs.html|xmlattr }}{% endif %}{{ ' id=fieldset-' + field.id if field }}>
+    <legend>{{ field.label.text }}</legend>
+    {{ caller() }}
+  </fieldset>
+{% endmacro %}
+
+{#
+  Form group wrapper for form fields
+
+  Params:
+    - field <object>
+        WTForm field
+    - html <object>
+        HTML attributes passed onto form field element
+#}
+
+{% macro form_group(field=None, class_='', field_attrs={}) %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+  {% set use_row = kwargs.use_row if kwargs.use_row is defined else True %}
+  {% set group_class = class_ if class_.startswith('form-group') else 'form-group %s' % class_ %}
+
+  {% if field %}
+    {% if field.flags.optional %}
+      {% set label_text = field.label.text + ' (optional)' %}
+    {% else %}
+      {% set label_text = field.label.text %}
+    {% endif %}
+
+    {% set field_label = field.label(
+         for=field.per_interval_value.id if field.per_interval_value else field.id,
+         text=label_text,
+         class_='form-group-label' + (' sr-only' if kwargs.hide_label else ''),
+         id="field-label-%s" % field.id
+       )
+    %}
   {% endif %}
-  <fieldset class="{% if class_ %}{{ class_ }}{% else %}form-group{% endif %}
-    {%- if field and field.errors %} m-error{% endif %}
-    {%- if is_subfield %} form-subfield{% endif %}
-    {%- if is_hidden == True or controlled_by and control_value %} s-hidden{% endif %}"
-    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
-    {% if field %}id="field-{{ field.id }}"{% endif %}
-    {% if persist_values %}data-persist-values="true"{% endif %}
-    {% if role %}role="{{ role }}"{% endif %}
-    {% if describedby %}aria-describedby="field-description-{{ describedby }}"{% endif %}
+
+  <div class="{{ group_class }}"
+     {%- if field and field.errors %} m-error{% endif %}
+     {% if kwargs.controlled_by %}data-controlled-by="{{ kwargs.controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+     {% if field %}id="field-{{ field.id }}"{% endif %}
   >
-    {% if field %}
-      {% if field.flags.optional %}
-        {% set label_text = field.label.text + ' (optional)' %}
-      {% else %}
-        {% set label_text = field.label.text %}
-      {% endif %}
 
-      {% set field_label = field.label(
-          for=field.per_interval_value.id if field.per_interval_value else field.id,
-          text=label_text
-        )
-      %}
-    {% endif %}
-
-    {% if field and has_label %}
-      <legend class="fieldset-label {%- if field and field.errors %} m-error{% endif %}" id="field-label-{{ field.id }}">
-        {% if as_label %}
-          {{ field_label }}
-        {% else %}
-            <span>{{ label_text }}</span>
-        {% endif %}
-      </legend>
-    {% endif %}
+    {{ field_label }}
 
     {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
       {{ field_errors(field.errors) }}
@@ -96,18 +174,32 @@
       </div>
     {%- endif -%}
 
-    {% if caller %}
-      {% if use_row %}
-        <div class="form-row">
+    {% if use_row and (field or caller) %}
+      <div class="form-row {{ kwargs.row_class }}">
+        {% if field %}
+          {{ render_field(field, field_attrs) }}
+        {% elif caller %}
           {{ caller() }}
-        </div>
-      {% else %}
-        {{ caller() }}
-      {% endif %}
+        {% endif %}
+      </div>
+    {% elif caller %}
+      {{ caller() }}
+    {% elif field %}
+      {{ render_field(field, field_attrs) }}
     {% endif %}
-  </fieldset>
+  </div>
 {% endmacro %}
 
+
+{% macro render_field(field, field_attrs={}) %}
+  {% do field_attrs.update({'class': 'form-control %s' % field_attrs.class }) %}
+
+  {% if field.type == 'RadioField' %}
+    {{ radio_buttons(field) }}
+  {% else %}
+    {{ field(**field_attrs) }}
+  {% endif %}
+{% endmacro %}
 
 {#
   Radio inline buttons
@@ -139,17 +231,17 @@
     - control_value <string> (default: '1')
         Input value which shows the fieldset when toggled
 #}
-{% macro radio_buttons_fieldset(
-  field,
-  is_hidden=False,
-  controlled_by=None,
-  control_value='1',
-  class_=None
-) %}
-  {% call fieldset(field, is_hidden=is_hidden, controlled_by=controlled_by, control_value=control_value, class_=class_, role='radiogroup') %}
-    {{ radio_buttons(field) }}
-  {% endcall %}
-{% endmacro %}
+{#{% macro radio_buttons_fieldset(#}
+{#  field,#}
+{#  is_hidden=False,#}
+{#  controlled_by=None,#}
+{#  control_value='1',#}
+{#  class_=None#}
+{#) %}#}
+{#  {% call fieldset(field, is_hidden=is_hidden, controlled_by=controlled_by, control_value=control_value, class_=class_, role='radiogroup') %}#}
+{#    {{ radio_buttons(field) }}#}
+{#  {% endcall %}#}
+{#{% endmacro %}#}
 
 
 {#
@@ -213,27 +305,27 @@
     - fieldset_class <string> (default: None)
         Fieldset CSS class
 #}
-{% macro text_input_fieldset(
-  field,
-  prefix=None,
-  suffix=None,
-  class_='',
-  skip=False,
-  default_value='0',
-  is_subfield=None,
-  controlled_by=None,
-  control_value='',
-  as_label=True,
-  fieldset_class=None
-) %}
-  {% if skip %}
-    {{ text_input(field, skip=skip) }}
-  {% else %}
-    {% call fieldset(field, is_subfield=is_subfield, controlled_by=controlled_by, control_value=control_value, as_label=as_label, class_=fieldset_class) %}
-      {{ text_input(field, prefix, suffix, class_, skip, default_value) }}
-    {% endcall %}
-  {% endif %}
-{% endmacro %}
+{#{% macro text_input_fieldset(#}
+{#  field,#}
+{#  prefix=None,#}
+{#  suffix=None,#}
+{#  class_='',#}
+{#  skip=False,#}
+{#  default_value='0',#}
+{#  is_subfield=None,#}
+{#  controlled_by=None,#}
+{#  control_value='',#}
+{#  as_label=True,#}
+{#  fieldset_class=None#}
+{#) %}#}
+{#  {% if skip %}#}
+{#    {{ text_input(field, skip=skip) }}#}
+{#  {% else %}#}
+{#    {% call fieldset(field, is_subfield=is_subfield, controlled_by=controlled_by, control_value=control_value, as_label=as_label, class_=fieldset_class) %}#}
+{#      {{ text_input(field, prefix, suffix, class_, skip, default_value) }}#}
+{#    {% endcall %}#}
+{#  {% endif %}#}
+{#{% endmacro %}#}
 
 
 {#
@@ -275,11 +367,11 @@
     - field <object>
         WTForm field
 #}
-{% macro option_list_fieldset(field, label_type='inline', input_type='checkbox', separated_options=[], callback=None) %}
-  {% call fieldset(field, class_='fieldset-group') %}
-    {{ option_list(field, label_type, input_type, separated_options, callback=callback) }}
-  {% endcall %}
-{% endmacro %}
+{#{% macro option_list_fieldset(field, label_type='inline', input_type='checkbox', separated_options=[], callback=None) %}#}
+{#  {% call fieldset(field, class_='fieldset-group') %}#}
+{#    {{ option_list(field, label_type, input_type, separated_options, callback=callback) }}#}
+{#  {% endcall %}#}
+{#{% endmacro %}#}
 
 
 {#
@@ -318,29 +410,29 @@
     - control_value <string> (default: '1')
         Input value which shows the fieldset when toggled
 #}
-{% macro money_interval_fieldset(
-  field,
-  skip=False,
-  is_subfield=False,
-  controlled_by=None,
-  control_value='1',
-  class_=''
-) %}
-  {% if skip %}
-    {{ money_interval(field, skip) }}
-  {% else %}
-    {% call fieldset(
-      field,
-      is_subfield=is_subfield,
-      controlled_by=controlled_by,
-      control_value=control_value,
-      as_label=True,
-      class_=class_
-    ) %}
-      {{ money_interval(field) }}
-    {% endcall %}
-  {% endif %}
-{% endmacro %}
+{#{% macro money_interval_fieldset(#}
+{#  field,#}
+{#  skip=False,#}
+{#  is_subfield=False,#}
+{#  controlled_by=None,#}
+{#  control_value='1',#}
+{#  class_=''#}
+{#) %}#}
+{#  {% if skip %}#}
+{#    {{ money_interval(field, skip) }}#}
+{#  {% else %}#}
+{#    {% call fieldset(#}
+{#      field,#}
+{#      is_subfield=is_subfield,#}
+{#      controlled_by=controlled_by,#}
+{#      control_value=control_value,#}
+{#      as_label=True,#}
+{#      class_=class_#}
+{#    ) %}#}
+{#      {{ money_interval(field) }}#}
+{#    {% endcall %}#}
+{#  {% endif %}#}
+{#{% endmacro %}#}
 
 
 {#
@@ -380,11 +472,11 @@
     - rows <number> (default: 4)
         textarea HTML rows attribute
 #}
-{% macro textarea_fieldset(field, class_='', rows=4) %}
-  {% call fieldset(field, as_label=True) %}
-    {{ field(class_='form-control ' + class_, rows=rows) }}
-  {% endcall %}
-{% endmacro %}
+{#{% macro textarea_fieldset(field, class_='', rows=4) %}#}
+{#  {% call fieldset(field, as_label=True) %}#}
+{#    {{ field(class_='form-control ' + class_, rows=rows) }}#}
+{#  {% endcall %}#}
+{#{% endmacro %}#}
 
 
 {#
