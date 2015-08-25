@@ -2,9 +2,7 @@
 
 {% macro option_list_callback(field, option) %}
   {% if option.data == 'child_benefit' %}
-
-    {{ Form.money_interval_fieldset(form.child_benefit, is_subfield=True, controlled_by=option, control_value=option.data) }}
-
+    {{ Form.form_group(form.child_benefit, 'form-subfield', controlled_by=option, control_value=option.data) }}
   {% endif %}
 {% endmacro %}
 
@@ -15,7 +13,9 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.option_list_fieldset(form.benefits, separated_options=['other-benefit'], callback=option_list_callback) }}
+    {% call Form.fieldset(form.benefits) %}
+      {{ Form.option_list(form.benefits, separated_options=['other-benefit'], callback=option_list_callback) }}
+    {% endcall %}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
