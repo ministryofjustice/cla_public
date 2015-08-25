@@ -20,11 +20,11 @@
 
 .sr-only {
   clip: rect(0, 0, 0, 0);
-  overflow: hidden;
+  overflow: hidden !important;
   position: absolute;
   opacity: 0;
-  padding: 0;
-  margin: 0;
+  padding: 0 !important;
+  margin: 0 !important;
   width: 1px;
   height: 1px;
 }
