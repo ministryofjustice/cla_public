@@ -597,7 +597,6 @@
 #}
 {% macro honeypot(form) %}
   <div class="hp-field">
-    {{ form[honeypot_field_name].label }}&nbsp;
-    {{ text_input(form[honeypot_field_name]) }}
+    {{ form[honeypot_field_name].label }}{{ form[honeypot_field_name] }}
   </div>
 {% endmacro %}
