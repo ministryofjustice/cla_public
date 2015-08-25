@@ -15,15 +15,14 @@
         $target.closest('form').attr('submit-name', $target.attr('name'));
       });
 
+      // Focus on field with error
       $('#content').on('click', '.error-summary a', function(e) {
         e.preventDefault();
-        $('fieldset').removeClass('s-targeted');
         var targetId = e.target.href.replace(/.*#/, '#');
         if(targetId.length < 2) {
           return;
         }
         var $target = $(targetId);
-        $target.addClass('s-targeted');
 
         $('html, body').animate({
           scrollTop: $target.offset().top - 20
