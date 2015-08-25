@@ -27,17 +27,17 @@
           </header>
         {% endif %}
 
-          {{ Form.form_group(property.is_main_home) }}
-          {{ Form.form_group(property.other_shareholders) }}
-          {{ Form.form_group(property.property_value, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
-          {{ Form.form_group(property.mortgage_remaining, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
-          {{ Form.form_group(property.mortgage_payments, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
+          {{ Form.group(property.is_main_home) }}
+          {{ Form.group(property.other_shareholders) }}
+          {{ Form.group(property.property_value, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
+          {{ Form.group(property.mortgage_remaining, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
+          {{ Form.group(property.mortgage_payments, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
 
-          {% call Form.form_group(property.is_rented) %}
-            {{ Form.form_group(property.rent_amount, 'form-subfield', controlled_by=property.is_rented) }}
+          {% call Form.group(property.is_rented) %}
+            {{ Form.group(property.rent_amount, 'form-subfield', controlled_by=property.is_rented) }}
           {% endcall %}
 
-          {{ Form.form_group(property.in_dispute) }}
+          {{ Form.group(property.in_dispute) }}
       {% endcall %}
     {% endfor %}
 

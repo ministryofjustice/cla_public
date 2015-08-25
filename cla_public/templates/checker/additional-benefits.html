@@ -12,8 +12,8 @@
       {{ Form.option_list(form.benefits) }}
     {% endcall %}
 
-    {% call Form.form_group(form.other_benefits) %}
-      {{ Form.form_group(form.total_other_benefit, 'form-subfield', controlled_by=form.other_benefits) }}
+    {% call Form.group(form.other_benefits) %}
+      {{ Form.group(form.total_other_benefit, 'form-subfield', controlled_by=form.other_benefits) }}
     {% endcall %}
 
     {{ Form.honeypot(form) }}

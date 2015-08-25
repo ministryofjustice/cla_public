@@ -56,7 +56,7 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.form_group(form.full_name, field_attrs={'class': 'm-large'}) }}
+    {{ Form.group(form.full_name, field_attrs={'class': 'm-large'}) }}
 
     {% call Form.fieldset(form.contact_type) %}
       <ul class="form-option-list form-row">
@@ -85,47 +85,22 @@
       </ul>
     {% endcall %}
 
-{#    {% call Form.fieldset(form.contact_type) %}#}
-{#      <ul class="form-option-list">#}
-{#        {%- for option in form.contact_type -%}#}
-{#          <li>#}
-{#            <label class="radio-inline" for="{{option.id}}">#}
-{#              {{ option }}#}
-{#              {{ option.label.text }}#}
-{#            </label>#}
-{##}
-{#            {% if option.data == 'call' %}#}
-{#              <div class="form-group form-subfield form-notice" data-controlled-by="contact_type" data-control-value="call" role="alert">#}
-{#                <p>#}
-{#                  {{ _('We’ll give you the CLA phone number when you submit your details below.') }}#}
-{#                </p>#}
-{#              </div>#}
-{#            {% elif option.data == 'callback' %}#}
-{#              {{ Subform.callback(form) }}#}
-{#            {% elif option.data == 'thirdparty' %}#}
-{#              {{ Subform.thirdparty(form) }}#}
-{#            {% endif %}#}
-{#          </li>#}
-{#        {% endfor %}#}
-{#      </ul>#}
-{#    {% endcall %}#}
-
-    {{ Form.form_group(form.email, field_attrs={'class': 'm-large'}) }}
+    {{ Form.group(form.email, field_attrs={'class': 'm-large'}) }}
 
     {% call Form.fieldset(form.address, class_='fieldset-group') %}
-      {{ Form.form_group(form.address.post_code,
+      {{ Form.group(form.address.post_code,
           'form-group-plain',
           field_attrs={'class': 'm-small', 'data-address-el': '#address-street_address'},
           row_class='address-finder') }}
 
-      {{ Form.form_group(form.address.street_address,
+      {{ Form.group(form.address.street_address,
           'form-group-plain',
           field_attrs={'class': 'm-large', 'rows': 4}) }}
     {% endcall %}
 
     {% set max_length_validator = form.extra_notes.validators|selectattr('max')|first %}
     {% set max_length = max_length_validator.max if max_length_validator %}
-    {{ Form.form_group(form.extra_notes, field_attrs={'class': 'm-full', 'rows': 7, 'data-character-count': max_length}) }}
+    {{ Form.group(form.extra_notes, field_attrs={'class': 'm-full', 'rows': 7, 'data-character-count': max_length}) }}
 
     {{ Subform.adaptations(form.adaptations) }}
 

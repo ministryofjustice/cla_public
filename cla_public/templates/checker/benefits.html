@@ -2,7 +2,7 @@
 
 {% macro option_list_callback(field, option) %}
   {% if option.data == 'child_benefit' %}
-    {{ Form.form_group(form.child_benefit, 'form-subfield', controlled_by=option, control_value=option.data) }}
+    {{ Form.group(form.child_benefit, 'form-subfield', controlled_by=option, control_value=option.data) }}
   {% endif %}
 {% endmacro %}
 

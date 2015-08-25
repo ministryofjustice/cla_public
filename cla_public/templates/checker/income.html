@@ -23,17 +23,17 @@
           </p>
       {% endif %}
         {% if not skip %}
-          {{ Form.form_group(form.your_income.earnings, skip=skip) }}
-          {{ Form.form_group(form.your_income.income_tax, skip=skip) }}
-          {{ Form.form_group(form.your_income.national_insurance, skip=skip) }}
-          {{ Form.form_group(form.your_income.working_tax_credit, skip=skip) }}
+          {{ Form.group(form.your_income.earnings, skip=skip) }}
+          {{ Form.group(form.your_income.income_tax, skip=skip) }}
+          {{ Form.group(form.your_income.national_insurance, skip=skip) }}
+          {{ Form.group(form.your_income.working_tax_credit, skip=skip) }}
         {% endif %}
         {% if session.checker.has_children or session.checker.has_dependants %}
-          {{ Form.form_group(form.your_income.child_tax_credit) }}
+          {{ Form.group(form.your_income.child_tax_credit) }}
         {% endif %}
-          {{ Form.form_group(form.your_income.maintenance) }}
-          {{ Form.form_group(form.your_income.pension) }}
-          {{ Form.form_group(form.your_income.other_income) }}
+          {{ Form.group(form.your_income.maintenance) }}
+          {{ Form.group(form.your_income.pension) }}
+          {{ Form.group(form.your_income.other_income) }}
       {% if session.checker.has_partner %}
         </fieldset>
       {% endif %}
@@ -46,14 +46,14 @@
           </header>
           <fieldset class="group">
             {% if not skip_for_partner %}
-              {{ Form.form_group(form.partner_income.earnings, skip=skip_for_partner) }}
-              {{ Form.form_group(form.partner_income.income_tax, skip=skip_for_partner) }}
-              {{ Form.form_group(form.partner_income.national_insurance, skip=skip_for_partner) }}
-              {{ Form.form_group(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
+              {{ Form.group(form.partner_income.earnings, skip=skip_for_partner) }}
+              {{ Form.group(form.partner_income.income_tax, skip=skip_for_partner) }}
+              {{ Form.group(form.partner_income.national_insurance, skip=skip_for_partner) }}
+              {{ Form.group(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
             {% endif %}
-            {{ Form.form_group(form.partner_income.maintenance) }}
-            {{ Form.form_group(form.partner_income.pension) }}
-            {{ Form.form_group(form.partner_income.other_income) }}
+            {{ Form.group(form.partner_income.maintenance) }}
+            {{ Form.group(form.partner_income.pension) }}
+            {{ Form.group(form.partner_income.other_income) }}
           </fieldset>
         {% endwith %}
       </fieldset>
