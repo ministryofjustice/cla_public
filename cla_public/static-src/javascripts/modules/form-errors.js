@@ -106,7 +106,7 @@
       var errorFields = {};
 
       (function fieldName (errorsObj, prefix) {
-        prefix = (typeof prefix === 'undefined')? '': prefix + '-';
+        prefix = (typeof prefix === 'undefined') ? '' : prefix + '-';
         for (var key in errorsObj) {
           var field = prefix + key;
           if ($.isArray(errorsObj[key])) {
