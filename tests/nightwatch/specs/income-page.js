@@ -135,9 +135,18 @@ module.exports = {
           .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
           .click('body')
         ;
+
+        // Fields contain two different versions of error message
+        var errorTexts = [
+          'Please provide an amount',
+          'Enter 0 if this doesn’t apply to you'
+        ];
+        //Fields that contain 'enter 0' error message
+        var enter0 = ['working_tax_credit', 'maintenance', 'pension', 'other_income'];
+
         common.submitAndCheckForFieldError(client, [{
           name: util.format('%s_income-%s-interval_period', person, item),
-          errorText: 'Please provide an amount'
+          errorText: ~enter0.indexOf(item) ? errorTexts[1] : errorTexts[0]
         }], 'select');
       });
     });
