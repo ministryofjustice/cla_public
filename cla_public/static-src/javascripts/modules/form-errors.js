@@ -22,15 +22,6 @@
           $(e.target).removeAttr('tabindex');
         });
 
-        //// Add role=alert on error message when fieldset is focused
-        //.on('focus', 'fieldset.m-error', function(e) {
-        //  $(e.target).find('.field-error').attr('role', 'alert');
-        //})
-        //// Remove role=alert from error message when fieldset is blurred
-        //.on('blur', 'fieldset.m-error', function(e) {
-        //  $(e.target).find('.field-error').removeAttr('role');
-        //});
-
       $('[type=submit]').on('click', function(e) {
         var $target = $(e.target);
         $target.closest('form').attr('submit-name', $target.attr('name'));
