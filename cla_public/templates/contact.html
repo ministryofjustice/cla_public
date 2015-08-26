@@ -87,7 +87,7 @@
 
     {{ Form.group(form.email, field_attrs={'class': 'm-large'}) }}
 
-    {% call Form.fieldset(form.address, class_='fieldset-group') %}
+    {% call Form.fieldset(form.address) %}
       {{ Form.group(form.address.post_code,
           'form-group-plain',
           field_attrs={'class': 'm-small', 'data-address-el': '#address-street_address'},

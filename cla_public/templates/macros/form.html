@@ -13,13 +13,22 @@
     - attrs <object> (default: None)
         Custom HTML attributes for fieldset element
 #}
-{% macro fieldset(field=None, class_='fieldset-group', legend=None) %}
+{% macro fieldset(field=None, class_='form-group fieldset-group', legend=None) %}
   {% set legend_ = field.label.text if field else legend %}
-  <fieldset class="{{ class_ }}" {% if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif %}{{ ' id=fieldset-' + field.id if field }}>
+  <fieldset class="
+      {{- class_ -}}
+      {%- if field and field.errors %} form-error{% endif -%}
+    "
+    {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
+    {%- if field %}id="field-{{ field.id }}"{% endif -%}
+  >
     {% if legend_ %}
-      <legend>{{ legend_ }}</legend>
+      <legend{% if field %} id="field-label-{{ field.id }}"{% endif %}>{{ legend_ }}</legend>
     {% endif %}
+
+    {{ render_field_errors(field.errors) if field and field.errors}}
     {{ render_field_description(field) }}
+
     {{ caller() }}
   </fieldset>
 {% endmacro %}
@@ -43,14 +52,19 @@
         Optional CSS class for `form-row` element
 #}
 {% macro group(field=None, class_='', field_attrs={}) %}
+  {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
   {% set use_row = kwargs.use_row if kwargs.use_row is defined else True %}
   {% set group_class = class_ if class_.startswith('form-group') else 'form-group %s' % class_ %}
 
-  <div class="{{ group_class }}"
-     {%- if field and field.errors %} m-error{% endif %}
-     {% if kwargs.controlled_by %}data-controlled-by="{{ kwargs.controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
-     {% if field %}id="field-{{ field.id }}"{% endif %}>
+  <div class="
+      {{- group_class -}}
+      {%- if field and field.errors %} form-error{% endif -%}
+      {%- if controlled_by and control_value %} s-hidden{% endif -%}
+    "
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+    {% if field %}id="field-{{ field.id }}"{% endif %}
+  >
 
     {{ render_field_label(field) }}
 
@@ -152,6 +166,30 @@
 
     {{ field_label }}
   {% endif %}
+{% endmacro %}
+
+
+
+{#
+  Render field errors
+  (including mutli-fields)
+
+  Params:
+    - errors <object> WTForm field.errors
+#}
+{% macro render_field_errors(errors) %}
+  <div class="form-row field-error">
+    {% set errors = errors.values() if errors is mapping else errors %}
+    {% for error in errors %}
+      {% if error is string or error == error|string %}
+        <p>{{error}}</p>
+      {% else %}
+        {% for line in error %}
+          <p>{{line}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endmacro %}
 
 
@@ -286,28 +324,6 @@
       {% endcall %}
     {% endif %}
   </label>
-{% endmacro %}
-
-{#
-  Render field errors
-  (including mutli-fields)
-
-  Params:
-    - errors <object> WTForm field.errors
-#}
-{% macro render_field_errors(errors) %}
-  <div class="form-row field-error">
-    {% set errors = errors.values() if errors is mapping else errors %}
-    {% for error in errors %}
-      {% if error is string or error == error|string %}
-        <p>{{error}}</p>
-      {% else %}
-        {% for line in error %}
-          <p>{{line}}</p>
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-  </div>
 {% endmacro %}
 
 

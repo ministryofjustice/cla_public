@@ -33,14 +33,3 @@
   top: -.55em;
   background: white;
 }
-
-.form-group.m-error:focus:before {
-  animation: 220ms reveal-arrow;
-  position: absolute;
-  top: -.45em;
-  left: -1.1em;
-  content: '';
-  border-style: solid;
-  border-width: 6px 0 6px 12px;
-  border-color: transparent transparent transparent $mellow-red;
-}

@@ -11,7 +11,7 @@
     bindEvents: function() {
       $('form')
         .on('submit', this.postToFormErrors)
-        // Focus back on summary if fieldset is focused and escape key is pressed
+        // Focus back on summary if field-error is focused and escape key is pressed
         .on('keyup', function(e) {
           var $target = $(e.target);
           if(e.keyCode === 27 && $target.is('.form-error')) {
@@ -124,7 +124,7 @@
       var errorSummary = [];
 
       // Loop through errors on the page to retain the fields order
-      $('fieldset.m-error, .form-group.m-error').map(function() {
+      $('.form-error').map(function() {
         var $this = $(this);
 
         if(!this.id || $this.hasClass('s-hidden') || $this.parent().hasClass('s-hidden')) {
@@ -133,7 +133,7 @@
         var name = this.id.replace(/^field-/, '');
 
         errorSummary.push({
-          label: $this.find('> .fieldset-label, > .form-group-label').text(),
+          label: $this.find('> legend, > .form-group-label').text(),
           name: name,
           errors: $this.find('> .field-error p').map(function() {
             return $(this).text();
@@ -153,12 +153,12 @@
       function addErrors(errors, fieldName) {
         if (_.isString(errors[0])) {
           $('#field-' + fieldName)
-            .addClass('m-error')
+            .addClass('form-error')
             .attr({
               'aria-invalid': true,
               'aria-describedby': 'error-' + fieldName
             });
-          var label = $('#field-label-' + fieldName).addClass('m-error');
+          var label = $('#field-label-' + fieldName);
           label.after(self.fieldError({ errors: errors, fieldName: fieldName }));
         } else if(_.isObject(errors[0]) && !_.isArray(errors[0])) {
           // Multiple forms (e.g. properties)
@@ -189,8 +189,8 @@
     clearErrors: function() {
       $('.form-row.field-error').remove();
       $('.alert.alert-error').remove();
-      $('.m-error')
-        .removeClass('m-error')
+      $('.form-error')
+        .removeClass('form-error')
         .removeAttr('aria-invalid');
     }
   };

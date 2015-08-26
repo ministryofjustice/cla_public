@@ -1,0 +1,36 @@
+.form-error {
+  &:focus:before {
+    animation: 220ms slide-from-left;
+    position: absolute;
+    top: -.35em;
+    left: -19px;
+    content: '';
+    border-style: solid;
+    border-width: 6px 0 6px 12px;
+    border-color: transparent transparent transparent $mellow-red;
+  }
+
+  .form-subfield &:focus:before {
+    top: 1.15em;
+  }
+
+  &.fieldset-group:focus:before {
+    left: -5px;
+    top: .15em;
+  }
+}
+
+@keyframes slide-from-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-1em) scale(1.7);
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
