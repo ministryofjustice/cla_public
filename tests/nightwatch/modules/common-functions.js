@@ -26,7 +26,7 @@ module.exports = {
       .useXpath()
     ;
     fields.forEach(function(field) {
-      client.assert.containsText(util.format('//%s[@name="%s"]/ancestor::fieldset', tag, field.name), field.errorText);
+      client.assert.containsText(util.format('//%s[@name="%s"]/ancestor::*[contains(@class, "form-group")]', tag, field.name), field.errorText);
     });
     client.useCss();
   },

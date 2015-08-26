@@ -33,7 +33,7 @@ exports.command = function(errorText, callback) {
           }).length,
           summaryItemCount: $(errorSummaryItems).length
         };
-      }, ['fieldset.m-error', '.error-summary-details a', client.capabilities.browserName], function(result) {
+      }, ['.form-group.form-error', '.error-summary-details a', client.capabilities.browserName], function(result) {
         var value = result.value;
         this.assert.ok(value.formErrorCount > 0 && value.formErrorCount === value.summaryItemCount,
           util.format('Number of items in error summary (%s) matches number of form errors (%s)',
