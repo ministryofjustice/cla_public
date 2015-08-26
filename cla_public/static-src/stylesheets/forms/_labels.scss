@@ -1,5 +1,6 @@
-.block-label,
 .radio-inline {
+  padding: .7em 1.2em .55em 2.3em;
+  line-height: 1.2;
   border: 1px solid $grey-3;
   background: $grey-3;
   cursor: pointer;
@@ -23,43 +24,19 @@
     cursor: pointer;
     outline: none;
   }
-}
-
-.block-label {
-  display: block;
-  padding: 15px 15px 15px 45px;
 
   input,
   input[type] {
-    margin: 0;
-    position: absolute;
-    top: 18px;
-    left: 20px;
-  }
-
-  .alert {
-    font-size: .9em;
-    margin: 10px 0 0;
-
-    .js-enabled & {
-      display: none;
-    }
-  }
-
-  &.s-selected {
-    .alert {
-      display: block;
-    }
-  }
-
-  .field-help {
-    margin-bottom: 0;
+    font-size: 15px;
+    margin: .25em 0 0 -20px;
+    position: static;
+    padding: 0;
+    float: left;
   }
 }
 
 .radio-inline {
   display: inline-block;
-  padding: 13px 30px 10px;
   margin-right: 6px;
   -webkit-user-select: none;
   -moz-user-select: none;

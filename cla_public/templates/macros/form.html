@@ -246,8 +246,6 @@
   Params:
     - field <object>
         WTForm field
-    - label_type <object> (default: 'inline')
-        Type of the label used for option list
     - input_type <string> (default: 'checkbox')
         Used for assisted technology
     - separated_options <list> (default: [])
@@ -255,21 +253,17 @@
     - callback <macro> (default: None)
         Macro to insert inside the each option
 #}
-{% macro option_list(field, label_type='inline', input_type='checkbox', separated_options=[], callback=None) %}
+{% macro option_list(field, input_type='checkbox', separated_options=[], callback=None) %}
   <ul class="form-option-list form-row"
     {% if input_type == 'radio' %}role="radiogroup"{% else %}role="group"{% endif %}
     aria-labelledby="field-label-{{ field.id }}"
   >
     {% for option in field %}
       <li{% if option.data in separated_options %} class="m-separate"{% endif %}>
-        {% if label_type == 'inline' %}
-          <label class="radio-inline" for="{{option.id}}">
-            {{ option }}
-            {{ option.label.text }}
-          </label>
-        {% else %}
-          {{ block_label(option) }}
-        {% endif %}
+        <label class="radio-inline" for="{{option.id}}">
+          {{ option }}
+          {{ option.label.text }}
+        </label>
 
         {% if callback %}
           {{ callback(field, option) }}
@@ -298,32 +292,6 @@
     {{ field.per_interval_value(class_='form-control m-small', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
     {{ field.interval_period(class_='form-control') }}
   {% endif %}
-{% endmacro %}
-
-
-{#
-  Block level label used for single options per line
-
-  Params:
-    - field <object>
-        WTForm field
-#}
-{% macro block_label(field) %}
-  <label class="block-label" for="{{field.id}}">
-    {{ field }}
-    {{ field.label.text }}
-
-    {% if field.description %}
-      <div class="field-help">
-        {{field.description|safe}}
-      </div>
-    {% endif %}
-    {% if field.selected_notification %}
-      {% call Element.alert() %}
-        {{field.selected_notification|safe}}
-      {% endcall %}
-    {% endif %}
-  </label>
 {% endmacro %}
 
 
