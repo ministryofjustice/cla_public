@@ -66,7 +66,7 @@
     {% if field %}id="field-{{ field.id }}"{% endif %}
   >
 
-    {{ render_field_label(field) }}
+    {{ render_field_label(field, kwargs.hide_label) }}
 
     {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
       {{ render_field_errors(field.errors) }}
