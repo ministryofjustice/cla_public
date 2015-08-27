@@ -327,11 +327,11 @@
         {% endif %}
       {% endcall %}
     {% elif form.errors|length == 1 and form.errors.csrf_token %}
-      {% call Element.alert('error', icon='cross', title=_('Sorry, something went wrong')) %}
+      {% call Element.alert('error', title=_('Sorry, something went wrong')) %}
         <p>{{ _('Please try submitting the form again.') }}</p>
       {% endcall %}
     {% else%}
-      {% call Element.alert('error', icon='cross', title=_('This form has errors')) %}
+      {% call Element.alert('error', title=_('This form has errors')) %}
         {% if form['properties'] %}
           {% for property_form in form['properties'] %}
             {% if property_form.errors %}
