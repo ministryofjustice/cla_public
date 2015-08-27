@@ -60,6 +60,21 @@
       margin: 0;
     }
   }
+
+  @media print {
+    .s-hidden {
+      display: block !important;
+      visibility: visible !important;
+      width: auto !important;
+      height: auto !important;
+      opacity: 1 !important;
+      position: static !important;
+    }
+
+    .action {
+      display: none;
+    }
+  }
 }
 
 .help-organisations-wrapper {
