@@ -21,8 +21,8 @@
 .sr-only {
   clip: rect(0, 0, 0, 0);
   overflow: hidden !important;
-  position: absolute;
-  opacity: 0;
+  position: absolute !important;
+  opacity: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
   width: 1px;
