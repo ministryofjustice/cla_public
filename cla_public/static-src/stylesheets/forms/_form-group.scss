@@ -1,35 +1,50 @@
-.form-group {
+.form-group,
+.form-group-plain {
   position: relative;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  border-top: 1px solid #dee0e2;
+  margin: 40px 0 0;
   outline: 0;
 
-  &:first-child {
-    margin-top: 30px;
+  &:first-child,
+  legend + & {
+    margin-top: 20px;
   }
 }
 
-.form-group-plain {
-  margin-top: 30px;
+.form-group {
+  > .form-group-label {
+    overflow: hidden;
+    position: relative;
 
-  &:first-of-type {
-    margin-top: 20px;
-  }
+    label {
+      position: relative;
+      padding-right: 10px;
 
-  .form-group-label {
-    float: none;
-    position: static;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        right: -1000px;
+        bottom: .6em;
+        height: 1px;
+        background: $grey-3;
+      }
+    }
   }
 }
 
 .form-group-label {
-  padding-right: 7px;
-  line-height: 1;
   cursor: default;
   font-size: 1.1em;
-  float: left;
-  position: relative;
-  top: -.55em;
-  background: white;
+
+  .form-optional {
+    color: $grey-2;
+
+    &:before {
+      content: '(';
+    }
+
+    &:after {
+      content: ')';
+    }
+  }
 }

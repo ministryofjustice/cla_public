@@ -9,7 +9,6 @@
   .panel {
     float: left;
     width: 49.99%;
-    margin: 10px 0;
 
     @include media(mobile) {
       width: auto;

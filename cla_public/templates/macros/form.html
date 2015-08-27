@@ -115,6 +115,37 @@
 {% endmacro %}
 
 
+
+{#
+  Renders field label (if exists)
+
+  Params:
+    - field <object>
+        WTForm field
+    - hide_label <boolean> (default: False)
+        Whether to hide the label visually (still available for screen readers)
+#}
+{% macro render_field_label(field, hide_label=False) %}
+  {% if field %}
+    {% if field.flags.optional %}
+      {% set label_text = field.label.text + ' <span class="form-optional">optional</span>' %}
+    {% else %}
+      {% set label_text = field.label.text %}
+    {% endif %}
+
+    {% set field_label = field.label(
+         for=field.per_interval_value.id if field.per_interval_value else field.id,
+         text=label_text,
+         id="field-label-%s" % field.id
+       ) %}
+
+    <div class="form-group-label{{ (' sr-only' if hide_label) }}">
+      {{ field_label }}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
 {#
   Renders field description (if exists)
 
@@ -138,36 +169,6 @@
     </div>
   {%- endif -%}
 {% endmacro %}
-
-
-{#
-  Renders field label (if exists)
-
-  Params:
-    - field <object>
-        WTForm field
-    - hide_label <boolean> (default: False)
-        Whether to hide the label visually (still available for screen readers)
-#}
-{% macro render_field_label(field, hide_label=False) %}
-  {% if field %}
-    {% if field.flags.optional %}
-      {% set label_text = field.label.text + ' (optional)' %}
-    {% else %}
-      {% set label_text = field.label.text %}
-    {% endif %}
-
-    {% set field_label = field.label(
-         for=field.per_interval_value.id if field.per_interval_value else field.id,
-         text=label_text,
-         class_='form-group-label' + (' sr-only' if hide_label else ''),
-         id="field-label-%s" % field.id
-       ) %}
-
-    {{ field_label }}
-  {% endif %}
-{% endmacro %}
-
 
 
 {#

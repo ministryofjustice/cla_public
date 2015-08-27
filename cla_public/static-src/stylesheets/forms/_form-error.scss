@@ -2,21 +2,26 @@
   &:focus:before {
     animation: 220ms slide-from-left;
     position: absolute;
-    top: -.35em;
-    left: -19px;
+    top: .2em;
+    left: -.9em;
     content: '';
     border-style: solid;
     border-width: 6px 0 6px 12px;
     border-color: transparent transparent transparent $mellow-red;
   }
 
-  .form-subfield &:focus:before {
-    top: 1.15em;
+  &.fieldset-group:focus:before {
+    left: -.2em;
   }
 
-  &.fieldset-group:focus:before {
-    left: -5px;
-    top: .15em;
+  .form-subfield &:focus:before {
+    top: 25px;
+    left: 0;
+  }
+
+  &.form-subfield:focus:before {
+    top: 15px;
+    left: 0;
   }
 }
 

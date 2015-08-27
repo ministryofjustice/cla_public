@@ -1,6 +1,11 @@
 .form-row {
-  margin: 10px 0;
+  margin: 10px 0 0;
   clear: both;
+
+  &:first-child,
+  .sr-only + & {
+    margin-top: 0;
+  }
 
   [type="checkbox"],
   [type="radio"] {

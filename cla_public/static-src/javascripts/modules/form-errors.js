@@ -124,7 +124,7 @@
         var name = this.id.replace(/^field-/, '');
 
         errorSummary.push({
-          label: $this.find('> legend, > .form-group-label').text(),
+          label: $this.find('#field-label-' + name).text(),
           name: name,
           errors: $this.find('> .field-error p').map(function() {
             return $(this).text();
@@ -141,6 +141,13 @@
 
       this.clearErrors();
 
+      function insertError($afterElement, errors, fieldName) {
+        $afterElement.after(self.fieldError({
+          errors: errors,
+          fieldName: fieldName
+        }));
+      }
+
       function addErrors(errors, fieldName) {
         if (_.isString(errors[0])) {
           $('#field-' + fieldName)
@@ -150,7 +157,12 @@
               'aria-describedby': 'error-' + fieldName
             });
           var label = $('#field-label-' + fieldName);
-          label.after(self.fieldError({ errors: errors, fieldName: fieldName }));
+
+          if(label.is('legend')) {
+            insertError(label, errors, fieldName);
+          } else {
+            insertError(label.closest('.form-group-label'), errors, fieldName);
+          }
         } else if(_.isObject(errors[0]) && !_.isArray(errors[0])) {
           // Multiple forms (e.g. properties)
           _.each(errors, function(errors, i) {
