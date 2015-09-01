@@ -4,43 +4,57 @@
     el: '.context-debugger',
 
     init: function() {
-      this.cacheEls();
       this.bindEvents();
-    },
-
-    cacheEls: function() {
-      this.$contextDebugger = $(this.el);
     },
 
     bindEvents: function() {
       var self = this;
 
-      this.$contextDebugger
-        .on('click', '> button', $.proxy(this.handleToggle, this))
-        .on('click', '._options a', function(evt) {
-          evt.preventDefault();
+      $('body')
+        .on('click', function(e) {
+          var $contextDebugger = $('.context-debugger');
+          var $target = $(e.target);
+          if($contextDebugger.hasClass('s-expanded') && !$target.closest('.context-debugger').length) {
+            $contextDebugger.toggleClass('s-expanded');
+          }
+        })
+        .on('click', '.context-debugger > button', function() {
+          $(this).parent().toggleClass('s-expanded');
+        })
+        .on('click', '.context-debugger ._options a', function(e) {
+          e.preventDefault();
 
+          var $selectedOption = $(this);
+          var existingSelectedOptions = [];
           var formAction = $(this).data('form-action');
+          var url = this.href;
 
-          self.handleRequest(this.href, function() {
+          if(!formAction) {
+            $(this).closest('.context-debugger').find('._selected:not([data-form-action])').map(function() {
+              if($(this).closest('li').text() === $selectedOption.closest('li').text()) {
+                return;
+              }
+              existingSelectedOptions.push($(this).attr('href').replace(/^\?/, ''));
+            });
+            url = $selectedOption.attr('href') + '&' + existingSelectedOptions.join('&');
+          }
+
+          self.handleRequest(url, function () {
             $.proxy(self.init, self);
 
-            if(formAction) {
+            if (formAction) {
               $('form').trigger(formAction);
             }
           });
         });
     },
 
-    handleToggle: function() {
-      this.$contextDebugger.toggleClass('s-expanded');
-    },
-
     handleRequest: function(url, cb) {
       $.get(url, function(data) {
-        var $data = $(data).find('#content');
-        $data.find('.context-debugger').toggleClass('s-expanded');
-        $('#content').replaceWith($data);
+        var $formData = $(data).find('form');
+        var $debuggerMenu = $(data).find('.context-debugger > menu');
+        $('form').replaceWith($formData);
+        $('.context-debugger > menu').replaceWith($debuggerMenu);
 
         moj.Modules.ConditionalSubfields.init();
 
