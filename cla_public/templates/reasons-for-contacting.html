@@ -18,7 +18,7 @@
 
     {{ Form.handle_errors(form) }}
 
-    {% call Form.fieldset(form.reasons) %}
+    {% call Form.fieldset(form.reasons, field_as_label=True) %}
       {{ Form.option_list(form.reasons) }}
     {% endcall %}
 

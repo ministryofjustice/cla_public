@@ -64,23 +64,23 @@
     - field <object>
         WTForm field
 #}
-{% macro time_picker(fields) %}
-  {% call Form.fieldset(fields, 'form-group') %}
+{% macro time_picker(subform) %}
+  {% call Form.fieldset(legend=subform.label.text, class_='form-group') %}
     <ul class="form-option-list form-row" role="radiogroup">
-      {% for radio in fields.specific_day %}
-        {% if (radio.data == 'today' and fields.time_today.choices) or
-        (radio.data == 'specific_day' and fields.day.choices) %}
+      {% for radio in subform.specific_day %}
+        {% if (radio.data == 'today' and subform.time_today.choices) or
+        (radio.data == 'specific_day' and subform.day.choices) %}
           <li>
             <label class="radio-inline" for="{{radio.id}}">
               {{ radio }} {{ radio.label.text }}
             </label>
             {% if radio.data == 'today' %}
-              {{ fields.time_today(class_='form-control') }}
+              {{ subform.time_today(class_='form-control') }}
             {% else %}
               <span class="block-inline">
-                {{ fields.day(class_='form-control', **{
-                  'data-day-time-choices': fields.day.day_time_choices|tojson|safe
-                }) }} at {{ fields.time_in_day(class_='form-control') }}
+                {{ subform.day(class_='form-control', **{
+                  'data-day-time-choices': subform.day.day_time_choices|tojson|safe
+                }) }} at {{ subform.time_in_day(class_='form-control') }}
               </span>
             {%  endif %}
           </li>
@@ -99,7 +99,7 @@
         WTForm field
 #}
 {% macro adaptations(subform) %}
-  {% call Form.fieldset(subform) %}
+  {% call Form.fieldset(legend=subform.label.text) %}
     <ul class="form-option-list form-row" role="listbox">
       <li role="option">
         <label class="radio-inline" for="{{subform.bsl_webcam.id}}">

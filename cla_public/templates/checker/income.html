@@ -44,17 +44,15 @@
           <header>
             <h3>{{ _('Your partner’s money') }}</h3>
           </header>
-          <fieldset class="group">
-            {% if not skip_for_partner %}
-              {{ Form.group(form.partner_income.earnings, skip=skip_for_partner) }}
-              {{ Form.group(form.partner_income.income_tax, skip=skip_for_partner) }}
-              {{ Form.group(form.partner_income.national_insurance, skip=skip_for_partner) }}
-              {{ Form.group(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
-            {% endif %}
-            {{ Form.group(form.partner_income.maintenance) }}
-            {{ Form.group(form.partner_income.pension) }}
-            {{ Form.group(form.partner_income.other_income) }}
-          </fieldset>
+          {% if not skip_for_partner %}
+            {{ Form.group(form.partner_income.earnings, skip=skip_for_partner) }}
+            {{ Form.group(form.partner_income.income_tax, skip=skip_for_partner) }}
+            {{ Form.group(form.partner_income.national_insurance, skip=skip_for_partner) }}
+            {{ Form.group(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
+          {% endif %}
+          {{ Form.group(form.partner_income.maintenance) }}
+          {{ Form.group(form.partner_income.pension) }}
+          {{ Form.group(form.partner_income.other_income) }}
         {% endwith %}
       </fieldset>
     {% endif %}

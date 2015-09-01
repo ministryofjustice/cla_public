@@ -13,23 +13,39 @@
     - attrs <object> (default: None)
         Custom HTML attributes for fieldset element
 #}
-{% macro fieldset(field=None, class_='form-group fieldset-group', legend=None) %}
+{% macro fieldset(field=None, class_='form-group fieldset-group', legend=None, field_attrs={}) %}
   {% set legend_ = field.label.text if field else legend %}
+  {% set controlled_by = kwargs.controlled_by %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+
   <fieldset class="
       {{- class_ -}}
       {%- if field and field.errors %} form-error{% endif -%}
+      {%- if controlled_by and control_value %} s-hidden{% endif -%}
     "
     {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
     {%- if field %}id="field-{{ field.id }}"{% endif -%}
   >
     {% if legend_ %}
-      <legend{% if field %} id="field-label-{{ field.id }}"{% endif %}>{{ legend_ }}</legend>
+      <legend class="form-group-label" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
+        <span>{{ legend_ }}</span>
+      </legend>
     {% endif %}
 
     {{ render_field_errors(field.errors) if field and field.errors}}
     {{ render_field_description(field) }}
 
-    {{ caller() }}
+    {% if field or caller %}
+      <div class="form-row {{ kwargs.row_class }}">
+        {% if field and not kwargs.field_as_label %}
+          {{ render_field(field, field_attrs) }}
+        {% endif %}
+        {% if caller %}
+          {{ caller() }}
+        {% endif %}
+      </div>
+    {% endif %}
   </fieldset>
 {% endmacro %}
 
@@ -203,7 +219,7 @@
 #}
 {% macro radio_buttons(field) %}
   {%- for option in field -%}
-    <label class="radio-inline" for="{{option.id}}" {% if field.description %}aria-describedby="field-description-{{ field.id }}"{% endif %}>
+    <label class="radio-inline" for="{{option.id}}" {% if field.description %}aria-describedby="field-label-{{ field.id }}"{% endif %}>
       {{ option }}
       {{ option.label.text }}
     </label>

@@ -13,7 +13,7 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% call Form.fieldset(form.benefits) %}
+    {% call Form.fieldset(form.benefits, field_as_label=True) %}
       {{ Form.option_list(form.benefits, separated_options=['other-benefit'], callback=option_list_callback) }}
     {% endcall %}
 

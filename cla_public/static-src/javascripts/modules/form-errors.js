@@ -156,6 +156,7 @@
               'aria-invalid': true,
               'aria-describedby': 'error-' + fieldName
             });
+
           var label = $('#field-label-' + fieldName);
 
           if(label.is('legend')) {

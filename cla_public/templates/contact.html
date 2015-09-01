@@ -58,7 +58,7 @@
 
     {{ Form.group(form.full_name, field_attrs={'class': 'm-large'}) }}
 
-    {% call Form.fieldset(form.contact_type) %}
+    {% call Form.fieldset(form.contact_type, field_as_label=True) %}
       <ul class="form-option-list form-row">
         {%- for option in form.contact_type -%}
           <li>
@@ -87,7 +87,7 @@
 
     {{ Form.group(form.email, field_attrs={'class': 'm-large'}) }}
 
-    {% call Form.fieldset(form.address) %}
+    {% call Form.fieldset(form.address, field_as_label=True) %}
       {{ Form.group(form.address.post_code,
           'form-group-plain',
           field_attrs={'class': 'm-small', 'data-address-el': '#address-street_address'},

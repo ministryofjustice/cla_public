@@ -45,12 +45,7 @@
     {% else %}
       <h3>{{ _('Receive this confirmation by email') }}</h3>
       {{ form.csrf_token }}
-      {% call Form.fieldset(form.email, class_=' ', as_label=True) %}
-        {{ form.email(
-          class_='form-control',
-          autocomplete='off',
-          autofocus=True
-        ) }}
+      {% call Form.group(form.email, 'form-group-plain', field_attrs={'autocomplete': 'off'}) %}
         <button type="submit" class="button">{{ _('Send') }}</button>
       {% endcall %}
     {% endif %}

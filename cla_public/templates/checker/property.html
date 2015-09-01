@@ -27,17 +27,17 @@
           </header>
         {% endif %}
 
-          {{ Form.group(property.is_main_home) }}
-          {{ Form.group(property.other_shareholders) }}
+          {{ Form.fieldset(property.is_main_home, 'form-group') }}
+          {{ Form.fieldset(property.other_shareholders, 'form-group') }}
           {{ Form.group(property.property_value, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
           {{ Form.group(property.mortgage_remaining, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
           {{ Form.group(property.mortgage_payments, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
 
-          {% call Form.group(property.is_rented) %}
+          {% call Form.fieldset(property.is_rented, 'form-group') %}
             {{ Form.group(property.rent_amount, 'form-subfield', controlled_by=property.is_rented) }}
           {% endcall %}
 
-          {{ Form.group(property.in_dispute) }}
+          {{ Form.fieldset(property.in_dispute, 'form-group') }}
       {% endcall %}
     {% endfor %}
 

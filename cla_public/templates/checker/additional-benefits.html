@@ -8,11 +8,11 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% call Form.fieldset(form.benefits) %}
+    {% call Form.fieldset(form.benefits, field_as_label=True) %}
       {{ Form.option_list(form.benefits) }}
     {% endcall %}
 
-    {% call Form.group(form.other_benefits) %}
+    {% call Form.fieldset(form.other_benefits, 'form-group') %}
       {{ Form.group(form.total_other_benefit, 'form-subfield', controlled_by=form.other_benefits) }}
     {% endcall %}
 
