@@ -18,18 +18,17 @@
     border: 1px solid transparent;
 
     &:before {
-      $_icon-size: 32px;
-
-      font-size: $_icon-size;
-      height: $_icon-size;
-      line-height: 1.2;
       position: absolute;
       top: 0;
-      right: 5px;
       bottom: 0;
+      right: 15px;
       margin: auto;
-      color: $grey-1;
-      content: "〉";
+      width: 22px;
+      height: 22px;
+      background: url(../images/icons/icon-arrow-right.png) 50% no-repeat;
+      background: url(../images/icons/icon-arrow-right.png) 50%/22px no-repeat;
+      content: '';
+      opacity: .5;
     }
 
     &:active,
@@ -39,7 +38,7 @@
       background: inherit;
 
       &::before {
-        color: black;
+        opacity: 1;
       }
     }
 
