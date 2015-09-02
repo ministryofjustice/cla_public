@@ -30,6 +30,7 @@ pyopenssl==0.15.1
 ndg-httpsclient==0.4.0
 pyasn1==0.1.7
 wtforms==2.1
+postcodeinfo>=0.0,<0.1
 
 # fork of https://github.com/samgiles/slumber
 # with custom parameters for timeouts and additional headers on requests
