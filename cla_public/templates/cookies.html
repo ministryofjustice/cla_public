@@ -23,8 +23,9 @@
   <p>{{ _('You’ll normally see a message on the site before we store a cookie on your computer.') }}</p>
   <p>
     {% trans manage_cookies_link=Element.link_new_window('http://www.aboutcookies.org/', _('how to manage cookies'), True) %}
-      Find out more about {{ manage_cookies_link }}.</p>
+      Find out more about {{ manage_cookies_link }}.
     {% endtrans %}
+  </p>
   <h2>{{ _('How cookies are used on GOV.UK') }}</h2>
   <h3>{{ _('Measuring website usage (Google Analytics)') }}</h3>
 
