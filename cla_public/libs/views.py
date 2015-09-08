@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 class EnsureSessionExists(object):
     """
     View mixin to create a session if no current one exists
-    Used on contact page which should be reachable directly
+    Was used on contact page which needed to be reachable directly
     from a link on the start page
     """
     def dispatch_request(self, *args, **kwargs):
