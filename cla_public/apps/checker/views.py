@@ -40,30 +40,6 @@ def add_header(response):
     return response
 
 
-def handle_find_legal_adviser_form(form, args):
-    data = {}
-    category = ''
-    page = 1
-
-    if 'category' in args:
-        category = LAALAA_PROVIDER_CATEGORIES_MAP.get(args['category'])
-
-    if 'postcode' in args:
-        if form.validate():
-            if 'page' in args and args['page'].isdigit():
-                page = args['page']
-            try:
-                data = laalaa.find(args['postcode'], category, page)
-                if 'error' in data:
-                    form.postcode.errors.append(data['error'])
-            except laalaa.LaaLaaError:
-                form.postcode.errors.append(u"%s %s" % (
-                    _('Error looking up legal advisers.'),
-                    _('Please try again later.')
-                ))
-    return data
-
-
 class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
@@ -273,48 +249,113 @@ checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'),
                      methods=('GET', 'POST', 'OPTIONS'))
 
 
-class FaceToFace(views.MethodView, object):
+class LaaLaaView(views.MethodView):
+    template = None
+
+    @classmethod
+    def handle_find_legal_adviser_form(cls, form, args):
+        data = {}
+        category = ''
+        page = 1
+
+        if 'category' in args:
+            category = LAALAA_PROVIDER_CATEGORIES_MAP.get(args['category'])
+
+        if 'postcode' in args:
+            if form.validate():
+                if 'page' in args and args['page'].isdigit():
+                    page = args['page']
+                try:
+                    data = laalaa.find(args['postcode'], category, page)
+                    if 'error' in data:
+                        form.postcode.errors.append(data['error'])
+                except laalaa.LaaLaaError:
+                    form.postcode.errors.append(u"%s %s" % (
+                        _('Error looking up legal advisers.'),
+                        _('Please try again later.')
+                    ))
+        return data
+
     def get(self):
-        form = FindLegalAdviserForm(request.args, csrf_enabled=False)
-        data = handle_find_legal_adviser_form(form, request.args)
-
-        session.store({'category': request.args.get('category')})
-
-        category_name = None
-
-        if session.stored['category']:
-            category_name = category_id_to_name(session.stored['category'])
+        if not self.template:
+            raise NotImplementedError
 
         session.clear_checker()
+        category = request.args.get('category')
+        category_name = None
+        if category:
+            category_name = category_id_to_name(category)
 
-        response = render_template('checker/result/face-to-face.html',
-            data=data, form=form, category_name=category_name)
+        return self.render(category=category, category_name=category_name)
 
-        return response
+    def render(self, category, category_name, extra_context={}):
+        form = FindLegalAdviserForm(request.args, csrf_enabled=False)
+        data = self.handle_find_legal_adviser_form(form, request.args)
+
+        return render_template(self.template, category=category,
+                               category_name=category_name,
+                               data=data, form=form, **extra_context)
 
 
 checker.add_url_rule(
-    '/scope/refer/legal-adviser', view_func=FaceToFace.as_view('face-to-face'))
+    '/legal-adviser',
+    view_func=LaaLaaView.as_view('laalaa')
+)
 
 
-class EligibleFaceToFace(views.MethodView, object):
+class FaceToFace(LaaLaaView):
+    template = 'checker/result/face-to-face.html'
 
-    def get(self):
-        form = FindLegalAdviserForm(request.args, csrf_enabled=False)
-        data = handle_find_legal_adviser_form(form, request.args)
 
-        session.clear_checker()
-        session.store({'category': request.args.get('category')})
-        category_name = None
-        if session.stored['category']:
-            category_name = category_id_to_name(session.stored['category'])
+checker.add_url_rule(
+    '/scope/refer/legal-adviser',
+    view_func=FaceToFace.as_view('face-to-face'))
 
-        return render_template('checker/result/eligible-f2f.html',
-            data=data, form=form, category_name=category_name)
+
+class EligibleFaceToFace(LaaLaaView):
+    template = 'checker/result/eligible-f2f.html'
+
 
 checker.add_url_rule(
     '/result/refer/legal-adviser',
     view_func=EligibleFaceToFace.as_view('find-legal-adviser')
+)
+
+
+class InterstitialPage(LaaLaaView):
+    """
+    Interstitial page after passing scope test
+    """
+    template = 'interstitial.html'
+
+    def get(self):
+        if not session or not session.is_current or not session.checker.category:
+            return redirect(url_for('base.session_expired'))
+
+        category = session.checker.category
+        category_name = session.checker.category_name
+        with override_locale('en'):
+            category_name_english = unicode(session.checker.category_name)
+
+        organisations = get_organisation_list(article_category__name=category_name_english)
+
+        show_laalaa = category in ['family', 'housing']
+        context = {
+            'organisations': organisations,
+            'show_laalaa': show_laalaa,
+        }
+
+        if show_laalaa:
+            return self.render(category=category, category_name=category_name,
+                               extra_context=context)
+
+        context['category_name'] = category_name
+        return render_template(self.template, **context)
+
+
+checker.add_url_rule(
+    '/legal-aid-available',
+    view_func=InterstitialPage.as_view('interstitial')
 )
 
 
@@ -405,28 +446,3 @@ checker.add_url_rule(
     view_func=HelpOrganisations.as_view('help_organisations'),
     methods=['GET']
 )
-
-
-@checker.route('/legal-aid-available')
-def interstitial():
-    """
-    Interstitial page after passing scope test
-    """
-    if not session or not session.is_current or not session.checker.category:
-        return redirect(url_for('base.session_expired'))
-
-    category = session.checker.category
-    category_name = session.checker.category_name
-    with override_locale('en'):
-        category_name_english = unicode(session.checker.category_name)
-
-    organisations = get_organisation_list(article_category__name=category_name_english)
-
-    context = {
-        'category': category,
-        'category_name': category_name,
-        'organisations': organisations,
-        'hide_help_orgs_intro': True,
-        'show_help_orgs': 'show' in request.args,
-    }
-    return render_template('interstitial.html', **context)

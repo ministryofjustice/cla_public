@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  moj.Modules.BoxToggle = {
+  moj.Modules.TruncateList = {
     el: '[data-truncate]',
 
     init: function() {
