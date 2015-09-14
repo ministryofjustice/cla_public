@@ -173,7 +173,7 @@ def run_tests(venv_path):
             port=public_port),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=public_port))
-    run('./nightwatch -c tests/nightwatch/jenkins.json -M')
+    run('./nightwatch --env firefox -c tests/nightwatch/jenkins.json -M')
 
     # nightwatch fails to clean up these process
     # NB: if two jobs are running on the same jenkins slave then one may break the other
