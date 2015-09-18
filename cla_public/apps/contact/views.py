@@ -14,7 +14,7 @@ from cla_public.apps.checker.api import post_to_case_api, \
     post_to_eligibility_check_api, update_reasons_for_contacting, ApiError
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, \
-    EnsureSessionExists, ValidFormOnOptions, HasFormMixin
+    ValidFormOnOptions, HasFormMixin
 
 
 @contact.after_request
@@ -51,7 +51,6 @@ def create_confirmation_email(data):
 class Contact(
     AllowSessionOverride,
     UpdatesMeansTest,
-    EnsureSessionExists,
     SessionBackedFormView
 ):
     form_class = ContactForm
