@@ -25,12 +25,21 @@
       {% endtrans %}
     </p>
 
-    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a legal adviser'), **{'class': 'button'}) }}
+    {{ Element.link_new_window('http://find-legal-advice.justice.gov.uk/', _('Find a legal adviser'), **{'class': 'button'}) }}
   </aside>
 {% endblock %}
 
 {% block inner_content %}
   <h1>{{ title }}</h1>
+
+  {% if category == 'immigration' %}
+    <p>
+      {% trans %}You can still ask a solicitor for help – you will have to pay for their advice.{% endtrans %}
+    </p>
+    <p>
+      {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'button'}) }}
+    </p>
+  {% endif %}
 
   <p>
     {% trans %}You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid.{% endtrans %}
