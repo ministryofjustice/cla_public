@@ -1,7 +1,3 @@
-{% if show_laalaa and request.is_xhr %}
-  {% include "checker/result/_find-legal-adviser.html" %}
-{% else %}
-
 {% extends "base.html" %}
 
 {% set title = _('Legal aid is available for this type of problem') %}
@@ -64,14 +60,9 @@
       {{ _('Alternatively, you can also ask a legal aid adviser to take on your case.') }}
       {{ _('Your adviser will check whether you qualify for legal aid, and apply for legal aid on your behalf if you do.') }}
     </p>
-    {% if not data %}
-      <p>
-        <a class="field-more-info-toggle" href="#interstitial-find-legal-adviser" data-toggle-box="#interstitial-find-legal-adviser">{{ _('Find a legal adviser') }}</a>
-      </p>
-    {% endif %}
-    <div id="interstitial-find-legal-adviser" class="{% if not data %}s-hidden{% endif %}">
-      {% include "checker/result/_find-legal-adviser.html" %}
-    </div>
+    <p>
+      <a class="field-more-info-toggle" href="{{ url_for('.laalaa') }}?category={{ category }}">{{ _('Find a legal adviser') }}</a>
+    </p>
   {% endif %}
 
   {% if organisations %}
@@ -91,13 +82,3 @@
   {% endif %}
 
 {% endblock %}
-
-{% block javascripts %}
-  {{ super() }}
-
-  {% if show_laalaa %}
-    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
-  {% endif %}
-{% endblock %}
-
-{% endif %}

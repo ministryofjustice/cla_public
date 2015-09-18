@@ -250,7 +250,12 @@ checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'),
 
 
 class LaaLaaView(views.MethodView):
-    template = None
+    """
+    Find a legal adviser view
+    Requires no session so is directly accessible
+    """
+    template = 'laalaa.html'
+    view_clears_session = False
 
     @classmethod
     def handle_find_legal_adviser_form(cls, form, args):
@@ -277,10 +282,8 @@ class LaaLaaView(views.MethodView):
         return data
 
     def get(self):
-        if not self.template:
-            raise NotImplementedError
-
-        session.clear_checker()
+        if self.view_clears_session:
+            session.clear_checker()
         category = request.args.get('category')
         category_name = None
         if category:
@@ -298,13 +301,14 @@ class LaaLaaView(views.MethodView):
 
 
 checker.add_url_rule(
-    '/legal-adviser',
+    '/find-a-legal-adviser',
     view_func=LaaLaaView.as_view('laalaa')
 )
 
 
 class FaceToFace(LaaLaaView):
     template = 'checker/result/face-to-face.html'
+    view_clears_session = True
 
 
 checker.add_url_rule(
@@ -314,48 +318,12 @@ checker.add_url_rule(
 
 class EligibleFaceToFace(LaaLaaView):
     template = 'checker/result/eligible-f2f.html'
+    view_clears_session = True
 
 
 checker.add_url_rule(
     '/result/refer/legal-adviser',
     view_func=EligibleFaceToFace.as_view('find-legal-adviser')
-)
-
-
-class InterstitialPage(LaaLaaView):
-    """
-    Interstitial page after passing scope test
-    """
-    template = 'interstitial.html'
-
-    def get(self):
-        if not session or not session.is_current or not session.checker.category:
-            return redirect(url_for('base.session_expired'))
-
-        category = session.checker.category
-        category_name = session.checker.category_name
-        with override_locale('en'):
-            category_name_english = unicode(session.checker.category_name)
-
-        organisations = get_organisation_list(article_category__name=category_name_english)
-
-        show_laalaa = category in ['family', 'housing']
-        context = {
-            'organisations': organisations,
-            'show_laalaa': show_laalaa,
-        }
-
-        if show_laalaa:
-            return self.render(category=category, category_name=category_name,
-                               extra_context=context)
-
-        context['category_name'] = category_name
-        return render_template(self.template, **context)
-
-
-checker.add_url_rule(
-    '/legal-aid-available',
-    view_func=InterstitialPage.as_view('interstitial')
 )
 
 
@@ -446,3 +414,28 @@ checker.add_url_rule(
     view_func=HelpOrganisations.as_view('help_organisations'),
     methods=['GET']
 )
+
+
+@checker.route('/legal-aid-available')
+def interstitial():
+    """
+    Interstitial page after passing scope test
+    """
+    if not session or not session.is_current or not session.checker.category:
+        return redirect(url_for('base.session_expired'))
+
+    category = session.checker.category
+    category_name = session.checker.category_name
+    with override_locale('en'):
+        category_name_english = unicode(session.checker.category_name)
+
+    organisations = get_organisation_list(article_category__name=category_name_english)
+    show_laalaa = category in ['family', 'housing']
+
+    context = {
+        'category': category,
+        'category_name': category_name,
+        'organisations': organisations,
+        'show_laalaa': show_laalaa,
+    }
+    return render_template('interstitial.html', **context)

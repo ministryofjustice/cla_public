@@ -2,7 +2,9 @@
 {% import "macros/element.html" as Element %}
 
 <section class="find-legal-adviser">
-  <h2>{{ _('Find a legal adviser') }}</h2>
+  {% if not hide_subtitle %}
+    <h2>{{ _('Find a legal adviser') }}</h2>
+  {% endif %}
   <form class="legal-adviser-search" method="GET">
     {% call Form.fieldset(form.postcode, as_label=True, class_=' ') %}
       {{ Form.text_input(form.postcode) }}
