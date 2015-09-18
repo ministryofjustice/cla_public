@@ -1,10 +1,10 @@
 <div class="context-debugger">
-  <button tabindex="-1">Debugger</button>
+  <button tabindex="-1" aria-hidden="true">Debugger</button>
   <menu>
     <li>
       Has partner
       <span class="_options">
-        <a href="?AboutYouForm_have_partner=1&amp;&amp;AboutYouForm_in_dispute=0" {% if session.checker.has_partner %} class="_selected"{% endif %}>Yes</a>
+        <a href="?AboutYouForm_have_partner=1&amp;AboutYouForm_in_dispute=0" {% if session.checker.has_partner %} class="_selected"{% endif %}>Yes</a>
         <a href="?AboutYouForm_have_partner=0&amp;AboutYouForm_in_dispute=0" {% if not session.checker.has_partner %} class="_selected"{% endif %}>No</a>
       </span>
     </li>

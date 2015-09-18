@@ -29,8 +29,8 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full &
 
 RUN rm -f /etc/nginx/sites-enabled/default
 
-#Pip install Python packages
-
+# Pip install Python packages
+RUN pip install -U setuptools pip wheel
 RUN pip install GitPython uwsgi
 
 RUN mkdir -p /var/log/wsgi && chown -R www-data:www-data /var/log/wsgi && chmod -R g+s /var/log/wsgi

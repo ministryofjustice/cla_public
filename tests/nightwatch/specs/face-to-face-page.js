@@ -26,7 +26,8 @@ module.exports = {
       .submitForm('form')
       .assert.urlContains('/scope/refer/legal-adviser')
       .waitForElementVisible('.search-results-container', 5000)
-      .assert.containsText('.results-location', 'W2 2DD')
+      .assert.containsText('.results-summary', 'results around')
+      .assert.containsText('.results-filter', constants.SCOPE_PATHS.clinnegFaceToFace.title.toUpperCase())
     ;
 
     client.end();

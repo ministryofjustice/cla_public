@@ -82,11 +82,14 @@ body {
 .form-notice {
   background: $grey-4;
   font-size: .9em;
-  padding: .4em 20px;
-  margin: 13px 0;
+  padding: 15px;
 
-  p {
-    margin: .4em 0;
+  p:first-child {
+    margin: 0;
+  }
+
+  ul {
+    padding-left: 20px;
   }
 }
 

@@ -12,6 +12,10 @@
         var href = $(evt.target).attr('href');
         $(href).attr('tabindex', -1).focus();
       });
+
+      $('#content').on('blur', function() {
+        $(this).removeAttr('tabindex');
+      });
     }
   };
 }());

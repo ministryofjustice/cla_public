@@ -6,17 +6,17 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% call Form.fieldset(form.have_partner) %}
+    {% call Form.fieldset(form.have_partner, role='radiogroup') %}
       {{ Form.radio_buttons(form.have_partner) }}
 
-      {% call Form.fieldset(form.in_dispute, is_subfield=True, controlled_by=form.have_partner) %}
+      {% call Form.fieldset(form.in_dispute, is_subfield=True, controlled_by=form.have_partner, role='radiogroup') %}
         {{ Form.radio_buttons(form.in_dispute) }}
       {% endcall %}
     {% endcall %}
 
     {{ Form.radio_buttons_fieldset(form.on_benefits) }}
 
-    {% call Form.fieldset(form.have_children) %}
+    {% call Form.fieldset(form.have_children, role='radiogroup') %}
       {{ Form.radio_buttons(form.have_children) }}
 
       {% call Form.fieldset(form.num_children, is_subfield=True, controlled_by=form.have_children, as_label=True) %}
@@ -24,7 +24,7 @@
       {% endcall %}
     {% endcall %}
 
-    {% call Form.fieldset(form.have_dependants) %}
+    {% call Form.fieldset(form.have_dependants, role='radiogroup') %}
       {{ Form.radio_buttons(form.have_dependants) }}
 
       {% call Form.fieldset(form.num_dependants, is_subfield=True, controlled_by=form.have_dependants, as_label=True) %}
@@ -40,7 +40,7 @@
     {{ Form.radio_buttons_fieldset(form.aged_60_or_over) }}
     {{ Form.radio_buttons_fieldset(form.have_savings) }}
 
-    {% call Form.fieldset(form.have_valuables) %}
+    {% call Form.fieldset(form.have_valuables, role='radiogroup', describedby='valuables-info') %}
       {{ Form.radio_buttons(form.have_valuables) }}
       {% include '_valuables-info.html' %}
     {% endcall %}
