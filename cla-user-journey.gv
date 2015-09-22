@@ -3,7 +3,7 @@ digraph CLA_User_Journey {
 	labelloc 	= t
 	ordering 	= out
 	splines 	= ortho
-	nodesep		= .4
+	nodesep		= .6
 	ranksep 	= .4
 
 	label 		= "Civil Legal Advice - User Journey Map"
@@ -11,7 +11,7 @@ digraph CLA_User_Journey {
 	size 		= "8x11"
 
 	graph  [ style="rounded, filled" fillcolor=grey80 fontname=Helvetica penwidth=0 ]
-	node   [ shape=box style=filled fillcolor=olivedrab2 fontname=Helvetica fontsize=13 height=1.2 width=3 ]
+	node   [ shape=box style=filled fillcolor=bisque fontname=Helvetica fontsize=13 height=1.2 width=3 ]
 	edge   [ minlen=2 arrowsize=1.2 fontname=Helvetica fontsize=12 fontcolor=grey40 ]
 
 	subgraph cluster_digital_channel {
@@ -29,14 +29,14 @@ digraph CLA_User_Journey {
 	subgraph cluster_govuk_end {
 		label = "GOV.UK"
 
-		GOVUK_CLA_Feedback [ label="GOV.UK CLA Feedback" fillcolor=bisque ]
+		GOVUK_CLA_Feedback [ label="GOV.UK CLA Feedback" ]
 	}
 
 	subgraph cluster_cla_digital_service {
 		label="CLA Digital Service"
 
-        CLA_Scope_Diagnosis [ label="What do you need help with?\n\n\n/scope/diagnosis/…" peripheries=2 ]
-		CLA_Means_Test [ label="Means test" peripheries=2 ]
+        CLA_Scope_Diagnosis [ label="What do you need help with?\n\n\n/scope/diagnosis/…" peripheries=2 fillcolor=slategray1 ]
+		CLA_Means_Test [ label="Means test" peripheries=2 fillcolor=slategray1 ]
 
 		CLA_Review_Answers [ label="Review your answers\n\n\n/review" ]
 
@@ -54,14 +54,16 @@ digraph CLA_User_Journey {
 			fontcolor=grey40
 			fillcolor=grey90
 
-			CLA_Result_Eligible [ label="You might qualify for legal aid\n(eligible)\n\n/result/eligible" ]
-			CLA_Result_Eligible_More_Info [ label="We need more information\n(provisionally eligible)\n\n/result/provisional" fillcolor=yellow ]
+			CLA_Result_Eligible [ label="You might qualify for legal aid\n(eligible)\n\n/result/eligible" fillcolor=olivedrab2 ]
+			CLA_Result_Provisional [ label="We need more information\n(provisionally eligible)\n\n/result/provisional" fillcolor=yellow ]
 			CLA_Contact [ label="Contact Civil Legal Advice\n(skipped digital process)\n\n/contact" fillcolor=yellow ]
 		}
 
-        CLA_Reasons_For_Contacting [ label="Before you contact\nCivil Legal Advice\n\n/reasons-for-contacting" fillcolor=yellow ]
+        CLA_Reasons_For_Contacting [ label="Before you contact\nCivil Legal Advice\n\n/reasons-for-contacting" ]
 
-		CLA_Contact_Confirmation [ label="Contact confirmation\n\n\n/result/confirmation" fillcolor="darkolivegreen1" ]
+        CLA_Contact_Confirmation [ label="Contact confirmation\n\n\n/result/confirmation" fillcolor=turquoise ]
+
+		CLA_Interstitial [ label="Legal aid is available\n\n(interstitial page)" ]
 	}
 
 	subgraph cluster_outcomes {
@@ -76,7 +78,7 @@ digraph CLA_User_Journey {
     subgraph cluster_cla_digital_service_feedback {
         label = "CLA Digital Service"
 
-        CLA_Feedback [ label="CLA Feedback" fillcolor=bisque ]
+        CLA_Feedback [ label="CLA Feedback" ]
     }
 
     Exit [ shape=oval fontcolor=white fontsize=16 label="Exit" fillcolor=red2 penwidth=0 ]
@@ -89,15 +91,18 @@ digraph CLA_User_Journey {
 	Browser -> CLA_Start
 
 	// GOV.UK journey
-	CLA_Start -> { CLA_Scope_Diagnosis CLA_Contact }
+	CLA_Start -> { CLA_Scope_Diagnosis }
 
 	// CLA in scope
-	CLA_Scope_Diagnosis -> CLA_Means_Test -> CLA_Review_Answers
+	CLA_Scope_Diagnosis -> CLA_Interstitial -> CLA_Means_Test -> CLA_Review_Answers
+
+    CLA_Interstitial -> CLA_Contact
+    CLA_Scope_Diagnosis -> CLA_Contact
 
 	// Outcomes
 	CLA_Review_Answers -> {
 		CLA_Result_Eligible
-		CLA_Result_Eligible_More_Info
+		CLA_Result_Provisional
 		CLA_Result_Ineligible
         CLA_Result_Find_Legal_Adviser
 	}
@@ -137,7 +142,7 @@ digraph CLA_User_Journey {
 	CLA_Result_Eligible -> Complete_Digital [ color=green4 style="dashed,bold" fillcolor=none ]
 
 	{
-		CLA_Result_Eligible_More_Info
+		CLA_Result_Provisional
 		CLA_Contact
 	} -> Not_Complete_Assisted_Digital [ color=yellow4 style="dashed,bold" fillcolor=none ]
 
