@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-09-07 15:59+0100\n"
+"POT-Creation-Date: 2015-09-22 11:00+0100\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -943,7 +943,7 @@ msgstr ""
 msgid "Please try again later."
 msgstr ""
 
-#: cla_public/apps/checker/views.py:75 cla_public/apps/contact/views.py:83
+#: cla_public/apps/checker/views.py:75 cla_public/apps/contact/views.py:82
 msgid "There was an error submitting your data. Please check and try again."
 msgstr ""
 
@@ -1109,7 +1109,7 @@ msgstr ""
 msgid "Your Civil Legal Advice reference number"
 msgstr ""
 
-#: cla_public/apps/contact/views.py:88 cla_public/apps/contact/views.py:131
+#: cla_public/apps/contact/views.py:87 cla_public/apps/contact/views.py:130
 msgid "There was an error submitting your email. Please check and try again or try without it."
 msgstr ""
 
@@ -1282,7 +1282,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"          If you're in immediate danger please call Civil Legal Advice on <span class=\"tel\">0345 345 4 345</span>.\n"
+"          If you’re in immediate danger please call Civil Legal Advice on <span class=\"tel\">0345 345 4 345</span>.\n"
 "          %(call_charges_link)s.\n"
 "        "
 msgstr ""
@@ -1295,7 +1295,7 @@ msgstr ""
 
 #: cla_public/templates/contact.html:38
 msgid ""
-"If you're in an emergency situation, please call the police\n"
+"If you’re in an emergency situation, please call the police\n"
 "        on 999."
 msgstr ""
 
@@ -2859,7 +2859,7 @@ msgstr ""
 msgid ""
 "Civil Legal Advice does not provide advice about issues\n"
 "        related to welfare benefits but you may be able to get free advice from\n"
-"        a legal adviser in your area. "
+"        a legal adviser in your area."
 msgstr ""
 
 #: cla_public/templates/checker/result/eligible-f2f.html:24
@@ -3320,33 +3320,9 @@ msgstr ""
 msgid "Find your local mediator"
 msgstr ""
 
-#~ msgid "This form has errors."
-#~ msgstr ""
-
-#~ msgid "Please see below for the errors you need to correct."
-#~ msgstr ""
-
 #~ msgid ""
-#~ msgstr ""
-
-#~ msgid "Find out more about <a href=\"http://www.aboutcookies.org/\" rel=\"external\" target=\"_blank\">how to manage cookies</a>."
-#~ msgstr ""
-
-#~ msgid "You can <a href=\"https://tools.google.com/dlpage/gaoptout\" rel=\"external\" target=\"_blank\">opt out of Google Analytics cookies</a>."
-#~ msgstr ""
-
-#~ msgid "If your specialist adviser thinks you need to speak to someone in person or have someone represent you in court, they will organise this."
-#~ msgstr ""
-
-#~ msgid "Sorry, something went wrong."
-#~ msgstr ""
-
-#~ msgid "You can also <a href=\"https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding\" rel=\"external\" target=\"_blank\">apply directly to the Legal Aid Agency</a>."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "\n"
-#~ "      Find out more about %(manage_cookies_link)s.</p>\n"
-#~ "    "
+#~ "Civil Legal Advice does not provide advice about issues\n"
+#~ "        related to welfare benefits but you may be able to get free advice from\n"
+#~ "        a legal adviser in your area. "
 #~ msgstr ""
 
