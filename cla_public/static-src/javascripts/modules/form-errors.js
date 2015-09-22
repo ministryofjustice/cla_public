@@ -111,7 +111,7 @@
       return errorFields;
     },
 
-    createErrorSummary: function() {
+    createErrorSummary: function(unattachedErrors) {
       var errorSummary = [];
 
       // Loop through errors on the page to retain the fields order
@@ -132,12 +132,19 @@
         });
       });
 
+      _.each(unattachedErrors, function(error) {
+        errorSummary.push({
+          errors: [error]
+        });
+      });
+
       return errorSummary;
     },
 
     loadErrors: function(errors) {
       var errorFields = this.formatErrors(errors);
       var self = this;
+      var unattachedErrors = [];
 
       this.clearErrors();
 
@@ -148,40 +155,62 @@
         }));
       }
 
-      function addErrors(errors, fieldName) {
-        if (_.isString(errors[0])) {
-          $('#field-' + fieldName)
-            .addClass('form-error')
-            .attr({
-              'aria-invalid': true,
-              'aria-describedby': 'error-' + fieldName
-            });
-
-          var label = $('#field-label-' + fieldName);
-
-          if(label.is('legend')) {
-            insertError(label, errors, fieldName);
-          } else {
-            insertError(label.closest('.form-group-label'), errors, fieldName);
-          }
-        } else if(_.isObject(errors[0]) && !_.isArray(errors[0])) {
-          // Multiple forms (e.g. properties)
-          _.each(errors, function(errors, i) {
-            _.each(errors, function(subformErrors, subformFieldName) {
-              addErrors(subformErrors, fieldName + '-' + i + '-' + subformFieldName);
-            });
-          });
-        } else {
-          _.each(errors, function(subformErrors) {
-            addErrors(subformErrors[1], fieldName + '-' + subformErrors[0]);
-          });
+      function addSimpleErrors(errors, fieldName) {
+        if(!errors.length) {
+          return;
         }
+
+        $('#field-' + fieldName)
+          .addClass('form-error')
+          .attr({
+            'aria-invalid': true,
+            'aria-describedby': 'error-' + fieldName
+          });
+
+        var label = $('#field-label-' + fieldName);
+
+        if(!label.length) {
+          unattachedErrors = _.extend(unattachedErrors, errors);
+        } else if(label.is('legend')) {
+          insertError(label, errors, fieldName);
+        } else {
+          insertError(label.closest('.form-group-label'), errors, fieldName);
+        }
+      }
+
+      function addSubformErrors(errors, fieldName) {
+        if(!errors.length) {
+          return;
+        }
+        _.each(errors, function(subformErrors) {
+          addErrors(subformErrors[1], fieldName + '-' + subformErrors[0]);
+        });
+      }
+
+      function addRepeatedFieldErrors(errors, fieldName) {
+        if(!errors.length) {
+          return;
+        }
+        // Multiple forms (e.g. properties)
+        _.each(errors, function(errors) {
+          _.each(errors._errors, function(subformErrors, subformFieldName) {
+            addErrors(subformErrors, fieldName + '-' + errors._index + '-' + subformFieldName);
+          });
+        });
+      }
+
+      function addErrors(errors, fieldName) {
+        addSimpleErrors(_.filter(errors, _.isString), fieldName);
+        addSubformErrors(_.filter(errors, _.isArray), fieldName);
+        addRepeatedFieldErrors(_.filter(errors, function(error) {
+          return _.isObject(error) && !_.isArray(error);
+        }), fieldName);
       }
 
       _.each(errorFields, addErrors);
 
       if(this.$form.data('error-banner') !== false) {
-        this.$form.prepend(this.mainFormError({ errors: this.createErrorSummary()}));
+        this.$form.prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
       }
     },
 

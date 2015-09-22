@@ -92,9 +92,11 @@
         <% _.each(errors, function(field) { %>
         <li>
           <dl class="error-summary-details">
+            <% if(field.name) { %>
             <dt>
               <a href="#field-<%= field.name %>"><%= field.label %></a>
             </dt>
+            <% } %>
             <% _.each(field.errors, function(error) { %>
             <dd><%= error %></dd>
             <% }); %>
