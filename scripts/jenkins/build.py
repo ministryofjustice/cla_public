@@ -25,12 +25,11 @@ def parse_args():
     parser.add_argument('--backend-hash', type=str, default='',
                         help='cla_backend *commit hash* to run tests against; '
                              'defaults to latest develop branch commit')
+    parser.add_argument('--skip-integration-tests', action='store_true',
+                        help='do not run cla_public mock server and '
+                             'skip nightwatch tests')
 
-    args = parser.parse_args()
-    return {
-        'envname': args.envname,
-        'backend_hash': args.backend_hash,
-    }
+    return parser.parse_args()
 
 
 def run(command, background=False, **kwargs):
@@ -162,7 +161,7 @@ def run_server(env, backend_hash, jenkins_build_path):
         background=True)
 
 
-def run_tests(venv_path, jenkins_build_path):
+def run_tests(venv_path, jenkins_build_path, skip_integration_tests=False):
     wait_until_available('http://localhost:{port}/admin/'.format(
         port=os.environ.get('CLA_BACKEND_PORT'))
     )
@@ -177,6 +176,10 @@ def run_tests(venv_path, jenkins_build_path):
     run('{conf} {venv}/bin/nosetests --with-xunit'.format(
         venv=venv_path,
         conf=config))
+
+    if skip_integration_tests:
+        return
+
     run((
         '{conf} {venv}/bin/python manage.py mockserver -p {port} -D -R '
         '1> {log_stdout} '
@@ -226,8 +229,9 @@ def main():
         jenkins_build_path = os.path.abspath(jenkins_build_path)
 
         args = parse_args()
-        env = args['envname']
-        backend_hash = args['backend_hash']
+        env = args.envname
+        backend_hash = args.backend_hash
+        skip_integration_tests = args.skip_integration_tests
         venv_path = make_virtualenv(env)
         install_dependencies(venv_path)
         remove_old_static_assets()
@@ -235,7 +239,8 @@ def main():
         compile_messages(venv_path)
         clean_pyc()
         run_server(env, backend_hash, jenkins_build_path)
-        run_tests(venv_path, jenkins_build_path)
+        run_tests(venv_path, jenkins_build_path,
+                  skip_integration_tests=skip_integration_tests)
     finally:
         kill_all_background_processes()
 
