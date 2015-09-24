@@ -28,6 +28,8 @@ def parse_args():
     parser.add_argument('--skip-integration-tests', action='store_true',
                         help='do not run cla_public mock server and '
                              'skip nightwatch tests')
+    parser.add_argument('--test-browser', type=str, default='firefox',
+                        help='e.g. firefox, chrome, phantomjs')
 
     return parser.parse_args()
 
@@ -161,7 +163,7 @@ def run_server(env, backend_hash, jenkins_build_path):
         background=True)
 
 
-def run_tests(venv_path, jenkins_build_path, skip_integration_tests=False):
+def run_tests(venv_path, jenkins_build_path, browser, skip_integration_tests=False):
     wait_until_available('http://localhost:{port}/admin/'.format(
         port=os.environ.get('CLA_BACKEND_PORT'))
     )
@@ -192,7 +194,7 @@ def run_tests(venv_path, jenkins_build_path, skip_integration_tests=False):
         ),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=public_port))
-    run('./nightwatch --env firefox -c tests/nightwatch/jenkins.json -M')
+    run('./nightwatch --env {browser} -c tests/nightwatch/jenkins.json -M'.format(browser=browser))
 
     # nightwatch fails to clean up these process
     # NB: if two jobs are running on the same jenkins slave then one may break the other
@@ -240,6 +242,7 @@ def main():
         clean_pyc()
         run_server(env, backend_hash, jenkins_build_path)
         run_tests(venv_path, jenkins_build_path,
+                  browser=args.test_browser,
                   skip_integration_tests=skip_integration_tests)
     finally:
         kill_all_background_processes()
