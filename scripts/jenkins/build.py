@@ -25,11 +25,8 @@ def parse_args():
     parser.add_argument('--backend-hash', type=str, default='',
                         help='cla_backend *commit hash* to run tests against; '
                              'defaults to latest develop branch commit')
-    parser.add_argument('--skip-unit-tests', action='store_true',
-                        help='skip Python unit tests')
-    parser.add_argument('--skip-integration-tests', action='store_true',
-                        help='do not run cla_public mock server and '
-                             'skip nightwatch tests')
+    parser.add_argument('--skip-tests', type=str, default='',
+                        help='Skip tests e.g. integration, unit, all')
     parser.add_argument('--test-browser', type=str, default='firefox',
                         help='e.g. firefox, chrome, phantomjs')
 
@@ -165,7 +162,13 @@ def run_server(env, backend_hash, jenkins_build_path):
         background=True)
 
 
-def run_tests(venv_path, jenkins_build_path, browser, skip_integration_tests=False, skip_unit_tests=False):
+def run_tests(venv_path, jenkins_build_path, browser, skip_tests=''):
+    run('echo {skip_tests}'.format(skip_tests=skip_tests))
+    run('echo "--- RUNNING TESTS..."')
+    if all(x in skip_tests for x in ['integration', 'unit']):
+        run('echo "--- SKIPPED!"')
+        return
+
     wait_until_available('http://localhost:{port}/admin/'.format(
         port=os.environ.get('CLA_BACKEND_PORT'))
     )
@@ -177,14 +180,16 @@ def run_tests(venv_path, jenkins_build_path, browser, skip_integration_tests=Fal
     log_stdout = os.path.join(jenkins_build_path, 'cla_public.stdout.log')
     log_stderr = os.path.join(jenkins_build_path, 'cla_public.stderr.log')
 
-    if not skip_unit_tests
+    if skip_tests.find('unit') == -1:
+        run('echo "--- UNIT"')
         run('{conf} {venv}/bin/nosetests --with-xunit'.format(
             venv=venv_path,
             conf=config))
 
-    if skip_integration_tests:
+    if 'integration' in skip_tests:
         return
 
+    run('echo "--- INTEGRATION"')
     run((
         '{conf} {venv}/bin/python manage.py mockserver -p {port} -D -R '
         '1> {log_stdout} '
@@ -236,8 +241,7 @@ def main():
         args = parse_args()
         env = args.envname
         backend_hash = args.backend_hash
-        skip_integration_tests = args.skip_integration_tests
-        skip_unit_tests = args.skip_unit_tests
+        skip_tests = args.skip_tests
         venv_path = make_virtualenv(env)
         install_dependencies(venv_path)
         remove_old_static_assets()
@@ -247,8 +251,7 @@ def main():
         run_server(env, backend_hash, jenkins_build_path)
         run_tests(venv_path, jenkins_build_path,
                   browser=args.test_browser,
-                  skip_integration_tests=skip_integration_tests,
-                  skipt_unit_tests=skip_unit_tests)
+                  skip_tests=skip_tests)
     finally:
         kill_all_background_processes()
 
