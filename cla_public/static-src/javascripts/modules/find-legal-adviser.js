@@ -115,6 +115,8 @@
           }
 
           $('.search-results-list').attr('tabindex', -1).focus();
+
+          ga('send', 'pageview', url);
         })
         .error();
     },
@@ -195,6 +197,11 @@
 
       this._handleMarkersZooming($item.data('id'));
       this._handleHighlightedItemScroll($item, $container);
+
+      var count = $item.find('.marker').text();
+      var name = $item.find('.fn').text();
+
+      ga('send', 'event', 'find-legal-adviser', 'selected', count + ':' + name);
     },
 
     renderMap: function(lat, lon) {
