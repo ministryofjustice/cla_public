@@ -25,6 +25,8 @@ def parse_args():
     parser.add_argument('--backend-hash', type=str, default='',
                         help='cla_backend *commit hash* to run tests against; '
                              'defaults to latest develop branch commit')
+    parser.add_argument('--skip-unit-tests', action='store_true',
+                        help='skip Python unit tests')
     parser.add_argument('--skip-integration-tests', action='store_true',
                         help='do not run cla_public mock server and '
                              'skip nightwatch tests')
@@ -163,7 +165,7 @@ def run_server(env, backend_hash, jenkins_build_path):
         background=True)
 
 
-def run_tests(venv_path, jenkins_build_path, browser, skip_integration_tests=False):
+def run_tests(venv_path, jenkins_build_path, browser, skip_integration_tests=False, skip_unit_tests=False):
     wait_until_available('http://localhost:{port}/admin/'.format(
         port=os.environ.get('CLA_BACKEND_PORT'))
     )
@@ -175,9 +177,10 @@ def run_tests(venv_path, jenkins_build_path, browser, skip_integration_tests=Fal
     log_stdout = os.path.join(jenkins_build_path, 'cla_public.stdout.log')
     log_stderr = os.path.join(jenkins_build_path, 'cla_public.stderr.log')
 
-    run('{conf} {venv}/bin/nosetests --with-xunit'.format(
-        venv=venv_path,
-        conf=config))
+    if not skip_unit_tests
+        run('{conf} {venv}/bin/nosetests --with-xunit'.format(
+            venv=venv_path,
+            conf=config))
 
     if skip_integration_tests:
         return
@@ -234,6 +237,7 @@ def main():
         env = args.envname
         backend_hash = args.backend_hash
         skip_integration_tests = args.skip_integration_tests
+        skip_unit_tests = args.skip_unit_tests
         venv_path = make_virtualenv(env)
         install_dependencies(venv_path)
         remove_old_static_assets()
@@ -243,7 +247,8 @@ def main():
         run_server(env, backend_hash, jenkins_build_path)
         run_tests(venv_path, jenkins_build_path,
                   browser=args.test_browser,
-                  skip_integration_tests=skip_integration_tests)
+                  skip_integration_tests=skip_integration_tests,
+                  skipt_unit_tests=skip_unit_tests)
     finally:
         kill_all_background_processes()
 
