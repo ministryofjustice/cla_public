@@ -33,10 +33,18 @@
     },
 
     handleAddRemoveButton: function(button) {
+      var self = this;
+
       $.post('', this._injectFormData({
         name: button.name,
         value: button.value
-      })).success($.proxy(this._updateForm, this));
+      })).success(function(res) {
+        self._updateForm(res);
+
+        var totalProperties = self.$form.find('.fieldset-group').length;
+
+        window.ga('send', 'event', 'property', button.name + ' / total:' + totalProperties);
+      });
     },
 
     cacheEls: function() {
