@@ -26,7 +26,7 @@
           <a
             class="filter-remove"
             href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode']) }}"
-            title="Remove filter"
+            title="{{ _('Remove filter') }}"
           >
             <i class="icon icon-remove"></i>
             {{ _('Remove') }}

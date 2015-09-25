@@ -13,8 +13,8 @@ CATEGORIES = [
         'commcare',
         _(u'Community care'),
         _(u'You’re unhappy with the care being provided for yourself or a relative due '
-        u'to age, disability or special educational needs - for example, in a care '
-        u'home or your own home')),
+          u'to age, disability or special educational needs - for example, in a care '
+          u'home or your own home')),
     (
         'debt',
         _(u'Debt'),
@@ -27,12 +27,12 @@ CATEGORIES = [
         'discrimination',
         _(u'Discrimination'),
         _(u'Being treated unfairly because of your race, sex, sexual '
-        u'orientation')),
+          u'orientation')),
     (
         'education',
         _(u'Education'),
         _(u'Special educational needs, problems with school places, '
-        u'exclusions, learning difficulties')),
+          u'exclusions, learning difficulties')),
     (
         'employment',
         _(u'Employment'),
@@ -50,7 +50,7 @@ CATEGORIES = [
         'immigration',
         _(u'Immigration and asylum'),
         _(u'Applying for asylum or permission to stay in the UK, including for victims of '
-        u'human trafficking')),
+          u'human trafficking')),
     (
         'mentalhealth',
         _(u'Mental health'),
@@ -72,7 +72,7 @@ CATEGORIES = [
         'benefits',
         _(u'Welfare benefits'),
         _(u'Appealing a decision made by the social security tribunal about your benefits '
-        u'to the Upper Tribunal, Court of Appeal or Supreme Court'))
+          u'to the Upper Tribunal, Court of Appeal or Supreme Court'))
 ]
 
 "Outcomes of the checker"

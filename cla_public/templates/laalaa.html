@@ -4,7 +4,11 @@
 
   {% extends "base.html" %}
 
-  {% set title = _('Find a legal aid adviser') %}
+  {% if category == 'family' %}
+    {% set title = _('Find a legal aid adviser or family mediator') %}
+  {% else %}
+    {% set title = _('Find a legal aid adviser') %}
+  {% endif %}
   {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
   {% import "macros/element.html" as Element %}
@@ -15,7 +19,11 @@
     <h1>{{ title }}</h1>
 
     <p>
-      {% trans %}Search for a legal adviser with a legal aid contract in England and Wales.{% endtrans %}
+      {% if category == 'family' %}
+        {% trans %}Search for a legal adviser or family mediator with a legal aid contract in England and Wales.{% endtrans %}
+      {% else %}
+        {% trans %}Search for a legal adviser with a legal aid contract in England and Wales.{% endtrans %}
+      {% endif %}
     </p>
 
     {% set hide_subtitle = True %}
