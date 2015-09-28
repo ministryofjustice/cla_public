@@ -87,6 +87,7 @@ module.exports = {
       .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
       .submitForm('form')
 
+      .pause(200)
       .fillInIncome(true, true, true)
 
       .assert.urlContains('/outgoings')
