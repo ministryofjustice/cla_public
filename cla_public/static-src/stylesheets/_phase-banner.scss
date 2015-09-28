@@ -12,21 +12,11 @@
 
   @media print {
     margin: 0;
-    padding: 0;
     padding: 1mm 0 1mm 16mm;
     border-color: $black;
     border-style: solid;
     border-width: 1px 0;
     overflow: hidden;
-
-    .phase-tag {
-      font-size: 10pt;
-      border: 2px solid $black;
-      color: $black;
-      background: none;
-      margin: 0 3pt 0 -16mm;
-      float: left;
-    }
 
     span {
       padding-top: 2px;
