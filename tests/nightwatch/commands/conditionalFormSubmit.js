@@ -19,10 +19,13 @@ exports.command = function(shouldSubmitForm, callback) {
         this.waitForElementNotPresent('form > .alert-error', 500,
           '    - No form errors');
 
-        client.url(function(result) {
-          this.assert.urlNotEqual(urlBeforeSubmit,
-            '    • Next page: ' + url.parse(result.value).pathname);
-        });
+        client
+          .waitForElementPresent('body.js-enabled', 3000)
+          .url(function(result) {
+            this.assert.urlNotEqual(urlBeforeSubmit,
+              '    • Next page: ' + url.parse(result.value).pathname);
+          })
+        ;
       });
     }
   });
