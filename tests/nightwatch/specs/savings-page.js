@@ -29,26 +29,26 @@ module.exports = {
   },
 
   'Savings page': function(client) {
-    client
-      .waitForElementVisible('input[name="savings"]', 5000)
-      .assert.urlContains('/savings')
-      .assert.containsText('h1', 'Your savings')
-    ;
+    client.ensureCorrectPage('input[name="savings"]', '/savings', {
+      'h1': 'Your savings'
+    });
   },
 
   'Context-dependent text for partner': function(client) {
     client
-      .assert.containsText('body', 'We need to know about any money you have saved or invested.')
+      .ensureCorrectPage('body.js-enabled', '/savings', {
+        '.main-content': 'We need to know about any money you have saved or invested'
+      })
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 5000)
+      .ensureCorrectPage('#have_partner-0', '/about')
       .setYesNoFields('have_partner', 1)
       .pause(100)
       .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
-      .submitForm('form')
-      .waitForElementVisible('input[name="savings"]', 5000)
-      .assert.urlContains('/savings')
-      .assert.containsText('h1', 'You and your partner’s savings')
-      .assert.containsText('body', 'Any cash, savings or investments held in your name, your partner’s name or both your names')
+      .conditionalFormSubmit(true)
+      .ensureCorrectPage('body.js-enabled', '/savings', {
+        'h1': 'You and your partner’s savings',
+        'body': 'Any cash, savings or investments held in your name, your partner’s name or both your names'
+      })
     ;
   },
 
@@ -64,7 +64,9 @@ module.exports = {
     });
     common.submitAndCheckForFieldError(client, questions);
     SAVINGS_QUESTIONS.VALUABLES.forEach(function(item) {
-      client.assert.elementNotPresent(util.format('input[name="%s"]', item.name));
+      client.assert.elementNotPresent(util.format('input[name="%s"]', item.name),
+        util.format('    - `%s` is not present', item.name)
+      );
     });
     client.end();
   },
@@ -77,7 +79,6 @@ module.exports = {
       .aboutSetAllToNo(true, {
         'have_valuables': 1
       })
-      .waitForElementVisible('input[name="valuables"]', 5000)
     ;
     var questions = [];
     SAVINGS_QUESTIONS.VALUABLES.forEach(function(item) {
@@ -88,7 +89,9 @@ module.exports = {
     });
     common.submitAndCheckForFieldError(client, questions);
     SAVINGS_QUESTIONS.MONEY.forEach(function(item) {
-      client.assert.elementNotPresent(util.format('input[name="%s"]', item.name));
+      client.assert.elementNotPresent(util.format('input[name="%s"]', item.name),
+        util.format('    - `%s` is not present', item.name)
+      );
     });
     client.end();
   },
@@ -102,15 +105,16 @@ module.exports = {
         'have_valuables': 1,
         'have_savings': 1
       })
-      .waitForElementVisible('input[name="savings"]', 5000)
+      .ensureCorrectPage('input[name="savings"]', '/savings')
     ;
     common.setAllSavingsFieldsToValue(client, 501);
     client
-      .submitForm('form')
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
-      .assert.urlContains('/income', 'Should arrive at income page when all savings/money fields set to £501')
+      .conditionalFormSubmit(true)
+      .assert.urlContains('/income',
+        '  - Should arrive at income page when all savings/money fields set to £501'
+      )
       .back()
-      .waitForElementVisible('input[name="savings"]', 5000)
+      .ensureCorrectPage('input[name="savings"]', '/savings')
     ;
 
     SAVINGS_QUESTIONS.ALL.forEach(function(item) {
@@ -131,11 +135,12 @@ module.exports = {
         ;
       }
       client
-        .submitForm('form')
-        .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
-        .assert.urlContains('/income', util.format('Should arrive at income page when %s field set to %s and others to £0', item.name, SAVINGS_THRESHOLD))
+        .conditionalFormSubmit(true)
+        .assert.urlContains('/income',
+          util.format('  - Should arrive at income page when %s field set to %s and others to £0', item.name, SAVINGS_THRESHOLD)
+        )
         .back()
-        .waitForElementVisible('input[name="savings"]', 5000)
+        .ensureCorrectPage('input[name="savings"]', '/savings')
       ;
     });
 
@@ -150,7 +155,6 @@ module.exports = {
           'have_valuables': 1,
           'have_savings': 1
         })
-        .waitForElementVisible('input[name="savings"]', 5000)
       ;
       // set all to 0
       common.setAllSavingsFieldsToValue(client, 0);
@@ -169,11 +173,11 @@ module.exports = {
         ;
       }
       client
-        .submitForm('form')
-        .waitForElementVisible('.answers-summary', 5000)
-        .submitForm('form')
-        .waitForElementVisible('a[href="https://www.gov.uk/find-a-legal-adviser"]', 5000)
-        .assert.urlContains('/result/refer/', util.format('Result ineligible when %s field set to £%s', item.name, (SAVINGS_THRESHOLD + 1)))
+        .conditionalFormSubmit(true)  // review
+        .conditionalFormSubmit(true)
+        .assert.urlContains('/result/refer/',
+          util.format('  - Result ineligible when %s field set to £%s', item.name, (SAVINGS_THRESHOLD + 1))
+        )
       ;
     });
 

@@ -34,13 +34,9 @@ exports.command = function(yourIncome, partnerIncome, shouldSubmitForm, callback
   var partnerInputs = common.formatMoneyInputs('partner_income-', partnerIncome);
 
   this.perform(function() {
-    log.command('Processing Income page…');
+    log.command('Processing Income page...');
 
-    client
-      .waitForElementPresent('body.js-enabled', 3000, function() {
-        console.log('     - Waiting for page to fully load');
-      })
-      .assert.urlContains('/income', '  - Income page URL is correct');
+    client.ensureCorrectPage('body.js-enabled', '/income');
 
     common.fillInMoneyForm(client, yourInputs, 'Applicant');
 

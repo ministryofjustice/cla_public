@@ -43,11 +43,9 @@ module.exports = {
   },
 
   'Property page': function(client) {
-    client
-      .waitForElementVisible('input[name="properties-0-is_main_home"]', 5000)
-      .assert.urlContains('/property')
-      .assert.containsText('h1', 'Your property')
-    ;
+    client.ensureCorrectPage('#properties-0-is_main_home-0', '/property', {
+      'h1': 'Your property'
+    });
   },
 
   'Test currency formatting': function(client) {
@@ -57,9 +55,9 @@ module.exports = {
         .clearValue(field)
         .click(field)
         .setValue(field, [strIn, client.Keys.TAB])
-        .click('body')
-        .pause(200)
-        .assert.value(field, strOut, util.format('Check that currency value of %s is coverted to %s', strIn, strOut))
+        .assert.value(field, strOut,
+          util.format('  - Currency value of %s is converted to %s', strIn, strOut)
+        )
       ;
     };
 

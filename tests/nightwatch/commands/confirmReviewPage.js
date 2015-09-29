@@ -6,11 +6,12 @@ exports.command = function(shouldSubmitForm, callback) {
   var client = this;
 
   this.perform(function() {
-    log.command('Processing Review Answers page…');
+    log.command('Processing Review Answers page...');
 
     client
-      .assert.urlContains('/review',
-        '    - Review Answers page URL is correct')
+      .ensureCorrectPage('.answers-summary', '/review', {
+        'h1': 'Review your answers'
+      })
       .conditionalFormSubmit(true)
     ;
   });

@@ -8,16 +8,16 @@ exports.command = function(errorText, callback) {
   errorText = errorText || 'This form has errors';
 
   this.perform(function() {
-    log.command('Checking form validation…');
+    log.command('Checking form validation...');
 
     client
       .submitForm('form', function() {
         console.log('     ⟡ Form submitted');
       })
-      .waitForElementPresent('.alert-error', 5000, function() {
-        console.log('    - Form has errors summary');
-      })
-      .assert.containsText('.alert-error', errorText)
+      .waitForElementPresent('.alert-error', 5000,
+        '    - Form has errors summary')
+      .assert.containsText('.alert-error', errorText,
+        '    - Error summary contains text')
       .execute(function(formErrorFields, errorSummaryItems, browserName) {
         return {
           formErrorCount: $(formErrorFields).filter(function() {

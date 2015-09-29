@@ -14,16 +14,16 @@ exports.command = function(shouldSubmitForm, callback) {
 
     if(shouldSubmitForm) {
       client.submitForm('form', function() {
-        console.log('     ⟡ Form submitted');
+        console.log('     ⟡ Form submitted on', urlBeforeSubmit, 'page');
 
-        this.waitForElementNotPresent('form > .alert-error', 500,
-          '    - No form errors');
-
-        client
-          .waitForElementPresent('body.js-enabled', 3000)
+        this
+          .waitForElementNotPresent('form > .alert-error', 500,
+            '    - No form errors')
+          .waitForElementPresent('body.js-enabled', 3000,
+            '    - Next page is ready')
           .url(function(result) {
             this.assert.urlNotEqual(urlBeforeSubmit,
-              '    • Next page: ' + url.parse(result.value).pathname);
+              '    - Next page: ' + url.parse(result.value).pathname);
           })
         ;
       });

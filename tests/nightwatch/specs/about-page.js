@@ -63,13 +63,19 @@ module.exports = {
     FIELDS_WITH_SUBFIELDS.forEach(function(item) {
       client
         .aboutSetAllToNo(false)
-        .assert.hidden(util.format('input[name="%s"]', item.subfield_name))
+        .assert.hidden(util.format('input[name="%s"]', item.subfield_name),
+          util.format('    - `%s` field is hidden', item.subfield_name)
+        )
         .setYesNoFields(item.field_name, 1)
         .pause(100)
-        .assert.visible(util.format('input[name="%s"]', item.subfield_name))
+        .assert.visible(util.format('input[name="%s"]', item.subfield_name),
+          util.format('    - `%s` field is visible', item.subfield_name)
+        )
         .setYesNoFields(item.field_name, 0)
         .pause(100)
-        .assert.hidden(util.format('input[name="%s"]', item.subfield_name))
+        .assert.hidden(util.format('input[name="%s"]', item.subfield_name),
+          util.format('    - `%s` field is hidden again', item.subfield_name)
+        )
         .setYesNoFields(item.field_name, 1)
       ;
       common.submitAndCheckForFieldError(client, [{
@@ -82,20 +88,20 @@ module.exports = {
   'Test outcomes': function(client) {
     client
       .aboutSetAllToNo(true)
-      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
-      .assert.urlContains('/income', 'Goes to /income when all answers are No')
       .url(client.launch_url + '/about')
-      .waitForElementVisible('input[name="have_partner"]', 5000)
+      .waitForElementVisible('#have_partner-0', 5000,
+        '  ⟡ Go back to /about'
+      )
     ;
     OUTCOMES.forEach(function(item) {
       var selection = {};
       selection[item.question] = 1;
       client
         .aboutSetAllToNo(true, selection)
-        .waitForElementVisible(util.format('input[name="%s"]', item.input), 5000)
-        .assert.urlContains(item.url, util.format('Goes to %s when %s is Yes', item.url, item.question))
         .url(client.launch_url + '/about')
-        .waitForElementVisible('input[name="have_partner"]', 5000)
+        .waitForElementVisible('#have_partner-0', 5000,
+          '  ⟡ Go back to /about'
+        )
       ;
     });
 

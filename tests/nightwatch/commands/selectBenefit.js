@@ -6,12 +6,10 @@ exports.command = function(benefitFieldName, shouldSubmitForm, callback) {
   var client = this;
 
   this.perform(function() {
-    log.command('Processing Benefits page…');
+    log.command('Processing Benefits page...');
 
     client
-      .waitForElementPresent('body', 3000)
-      .assert.urlContains('/benefits',
-        '  - Benefits page URL is correct')
+      .ensureCorrectPage('body.js-enabled', '/benefits')
       .click('input[name="benefits"][value="' + benefitFieldName +'"]', function() {
         console.log('     • Option clicked ‘' + benefitFieldName + '’');
       })

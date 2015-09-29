@@ -28,55 +28,57 @@ module.exports = {
   'Child benefits and tax credits fields absent': function(client) {
     client
       // benefits page
-      .waitForElementPresent('input[name="benefits"]', 5000)
+      .waitForElementPresent('#benefits-0', 5000,
+        '  - Page is ready'
+      )
       .assert.elementNotPresent('input[name="benefits"][value="child_benefit"]',
-        'Child benefits should not be an option')
+        '  - Child benefits should not be an option')
       .selectBenefit('other-benefit', true)
 
       // additional benefits page
-      .waitForElementVisible('input[name="other_benefits"]', 5000)
+      .waitForElementVisible('#other_benefits-0', 5000,
+        '  - Other Benefits page is ready'
+      )
       .setYesNoFields('other_benefits', 0)
-      .submitForm('form')
-
+      .conditionalFormSubmit(true)
       // income page
-      .waitForElementVisible('[name="your_income-other_income-per_interval_value"]', 5000)
       .assert.elementNotPresent('input[name="your_income-child_tax_credit-per_interval_value"]',
-        'Child tax credits should not be present')
-      .assert.elementNotPresent('input[name="your_income-child_tax_credit-interval_period"]',
-        'Child tax credits should not be present');
+        '    - Child tax credits should not be present'
+      )
+    ;
   },
 
   'Child benefit fields': function(client) {
     client
       .back()
       // additional benefits page
-      .waitForElementPresent('input[name="benefits"]', 5000)
+      .waitForElementPresent('#benefits-0', 5000,
+        '  - Other Benefits page is ready'
+      )
       .back()
       // benefits page
-      .waitForElementPresent('input[name="benefits"]', 5000)
+      .waitForElementPresent('input[name="benefits"][value="pension_credit"]', 5000,
+        '  - Go back to Benefits page'
+      )
       .back()
       // about page
-      .waitForElementPresent('input[name="have_partner"]', 5000)
+      .waitForElementPresent('#have_partner-0', 5000,
+        '  - Go back to About you page'
+      )
       .setYesNoFields('have_children', 1)
       .setValue('input[name="num_children"]', 1)
-      .submitForm('form')
-
       // benefits page
-      .waitForElementVisible('input[name="benefits"][value="child_benefit"]', 5000,
-        'Child benefits should be an option')
+      .conditionalFormSubmit(true)
       .selectBenefit('child_benefit', false)
       .selectBenefit('other-benefit', false)
       .waitForElementVisible('input[name="child_benefit-per_interval_value"]', 5000,
-        'Child benefits amount should be visible')
+        '  - Child benefits amount should be visible')
       .setValue('[name="child_benefit-per_interval_value"]', '12')
       .setValue('[name="child_benefit-interval_period"]', 'per week')
-      .submitForm('form')
-
+      .conditionalFormSubmit(true)
       // income page
-      .waitForElementVisible(income_page_sentinel, 5000,
-        'Income page should show')
       .waitForElementVisible('[name="your_income-child_tax_credit-per_interval_value"]', 5000,
-        'Child tax credits should be present')
+        '    - Child tax credits should be present')
     ;
   },
 
@@ -111,11 +113,11 @@ module.exports = {
         'have_dependants': 1
       })
       .setValue('input[name="num_dependants"]', 1)
-      .submitForm('form')
+      .conditionalFormSubmit(true)
       .selectBenefit('child_benefit', false);
     checkField('child_benefit', 'Please provide an amount');
     client
-      .submitForm('form')
+      .conditionalFormSubmit(true)
       .fillInIncome(undefined, undefined, false)
       .clearValue('[name="your_income-child_tax_credit-per_interval_value"]')
       .click('select[name="your_income-child_tax_credit-interval_period"] option:first-child');
@@ -131,11 +133,9 @@ module.exports = {
         'have_children': 1
       })
       .setValue('input[name="num_children"]', 1)
-      .submitForm('form')
-      .waitForElementVisible(income_page_sentinel, 5000,
-        'Income page should show')
+      .conditionalFormSubmit(true)
       .waitForElementVisible('[name="your_income-child_tax_credit-per_interval_value"]', 5000,
-        'Child tax credits should be present')
+        '    - Child tax credits should be present')
     ;
   },
 
@@ -148,11 +148,9 @@ module.exports = {
         'have_dependants': 1
       })
       .setValue('input[name="num_dependants"]', 1)
-      .submitForm('form')
-      .waitForElementVisible(income_page_sentinel, 5000,
-        'Income page should show')
+      .conditionalFormSubmit(true)
       .waitForElementVisible('[name="your_income-child_tax_credit-per_interval_value"]', 5000,
-        'Child tax credits should be present')
+        '    - Child tax credits should be present')
     ;
     client.end();
   }
