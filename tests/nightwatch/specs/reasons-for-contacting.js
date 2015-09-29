@@ -12,7 +12,7 @@ function reasonsForContactingForm(client) {
 function submitReasonsForContacting(client) {
   client.submitForm('.reasons-for-contacting-form', function() {
     console.log('     ⟡ "Continue to contact CLA" button clicked');
-  }).waitForElementVisible('.contact-form', 3000,
+  }).waitForElementVisible('.contact-form', 5000,
     '  - Contact form loaded'
   );
 }

@@ -29,6 +29,7 @@ module.exports = {
 
   'Review page': function(client) {
     client
+      .waitForElementVisible('.answers-summary', 5000, 'Review form exists')
       .assert.urlContains('/review', 'Review page URL is correct')
       .assert.elementPresent('#step-scope', 'Scope block is present')
       .assert.elementPresent('#step-about', 'About block is present')

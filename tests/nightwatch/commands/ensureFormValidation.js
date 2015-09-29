@@ -14,7 +14,7 @@ exports.command = function(errorText, callback) {
       .submitForm('form', function() {
         console.log('     ⟡ Form submitted');
       })
-      .waitForElementPresent('.alert-error', 3000, function() {
+      .waitForElementPresent('.alert-error', 5000, function() {
         console.log('    - Form has errors summary');
       })
       .assert.containsText('.alert-error', errorText)
