@@ -6,6 +6,10 @@
   @include media(mobile) {
     padding: 0 15px;
   }
+
+  @media print {
+    padding: 0 3mm;
+  }
 }
 
 #content {
@@ -46,5 +50,13 @@
       margin-top: 12px;
       width: 30%;
     }
+  }
+}
+
+@media print {
+  .main-content,
+  .sidebar {
+    width: 100% !important;
+    float: none !important;
   }
 }
