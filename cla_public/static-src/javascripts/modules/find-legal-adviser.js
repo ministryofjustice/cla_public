@@ -116,7 +116,7 @@
 
           $('.search-results-list').attr('tabindex', -1).focus();
 
-          ga('send', 'pageview', url);
+          window.ga('send', 'pageview', url);
         })
         .error();
     },
@@ -198,10 +198,18 @@
       this._handleMarkersZooming($item.data('id'));
       this._handleHighlightedItemScroll($item, $container);
 
-      var count = $item.find('.marker').text();
+      var markerCount = parseInt($item.find('.marker').text(), 10);
+      var currentPage = parseInt($container.data('current-page'), 10);
       var name = $item.find('.fn').text();
+      var count;
 
-      ga('send', 'event', 'find-legal-adviser', 'selected', count + ':' + name);
+      if(markerCount && currentPage) {
+        count = markerCount + ((currentPage - 1) * 10);
+      }
+
+      name = (count ? count + ':' : '') + name;
+
+      window.ga('send', 'event', 'find-legal-adviser', 'selected', name);
     },
 
     renderMap: function(lat, lon) {

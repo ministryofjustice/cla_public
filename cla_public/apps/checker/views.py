@@ -279,6 +279,7 @@ class LaaLaaView(views.MethodView):
                         _('Error looking up legal advisers.'),
                         _('Please try again later.')
                     ))
+        data['current_page'] = page
         return data
 
     def get(self):
