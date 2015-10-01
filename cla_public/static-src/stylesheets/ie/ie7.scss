@@ -1,5 +1,9 @@
 @import 'ie-common';
 
+.form-group input[type="text"] {
+  height: 26px;
+}
+
 fieldset header {
   position: relative;
 
@@ -36,16 +40,28 @@ fieldset header {
   zoom: 1;
 }
 
-
-fieldset .fieldset-label,
-fieldset .fieldset-label.m-error {
-  margin-left: -16px;
-}
-
 .answers-summary .answers-item .step-name {
   position: relative;
   top: -10px;
   left: -25px;
   margin-bottom: -21px;
   width: 100%;
+}
+
+.radio-inline {
+  padding-bottom: .7em;
+
+  input,
+  input[type] {
+    margin-top: .05em;
+    margin-left: -1.4em;
+  }
+}
+
+.form-subfield {
+  padding-left: 15px;
+}
+
+.address-finder * {
+  vertical-align: middle;
 }

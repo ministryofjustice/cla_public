@@ -6,42 +6,31 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% call Form.fieldset(form.have_partner, role='radiogroup') %}
-      {{ Form.radio_buttons(form.have_partner) }}
-
-      {% call Form.fieldset(form.in_dispute, is_subfield=True, controlled_by=form.have_partner, role='radiogroup') %}
-        {{ Form.radio_buttons(form.in_dispute) }}
-      {% endcall %}
+    {% call Form.fieldset(form.have_partner, 'form-group') %}
+      {{ Form.fieldset(form.in_dispute, 'form-group form-subfield', controlled_by=form.have_partner) }}
     {% endcall %}
 
-    {{ Form.radio_buttons_fieldset(form.on_benefits) }}
+    {{ Form.fieldset(form.on_benefits, 'form-group') }}
 
-    {% call Form.fieldset(form.have_children, role='radiogroup') %}
-      {{ Form.radio_buttons(form.have_children) }}
-
-      {% call Form.fieldset(form.num_children, is_subfield=True, controlled_by=form.have_children, as_label=True) %}
-        {{ form.num_children(class_='form-control m-small') }}
-      {% endcall %}
+    {% call Form.fieldset(form.have_children, 'form-group') %}
+      {{ Form.group(form.num_children, 'form-subfield',
+          controlled_by=form.have_children, field_attrs={'class': 'm-small'}) }}
     {% endcall %}
 
-    {% call Form.fieldset(form.have_dependants, role='radiogroup') %}
-      {{ Form.radio_buttons(form.have_dependants) }}
-
-      {% call Form.fieldset(form.num_dependants, is_subfield=True, controlled_by=form.have_dependants, as_label=True) %}
-        {{ form.num_dependants(class_='form-control m-small') }}
-      {% endcall %}
+    {% call Form.fieldset(form.have_dependants, 'form-group') %}
+      {{ Form.group(form.num_dependants, 'form-subfield',
+          controlled_by=form.have_dependants, field_attrs={'class': 'm-small'}) }}
     {% endcall %}
 
-    {{ Form.radio_buttons_fieldset(form.own_property) }}
-    {{ Form.radio_buttons_fieldset(form.is_employed) }}
-    {{ Form.radio_buttons_fieldset(form.partner_is_employed, controlled_by=form.in_dispute, control_value='0') }}
-    {{ Form.radio_buttons_fieldset(form.is_self_employed) }}
-    {{ Form.radio_buttons_fieldset(form.partner_is_self_employed, controlled_by=form.in_dispute, control_value='0') }}
-    {{ Form.radio_buttons_fieldset(form.aged_60_or_over) }}
-    {{ Form.radio_buttons_fieldset(form.have_savings) }}
+    {{ Form.fieldset(form.own_property, 'form-group') }}
+    {{ Form.fieldset(form.is_employed, 'form-group') }}
+    {{ Form.fieldset(form.partner_is_employed, 'form-group', controlled_by=form.in_dispute, control_value='0') }}
+    {{ Form.fieldset(form.is_self_employed, 'form-group') }}
+    {{ Form.fieldset(form.partner_is_self_employed, 'form-group', controlled_by=form.in_dispute, control_value='0') }}
+    {{ Form.fieldset(form.aged_60_or_over, 'form-group') }}
+    {{ Form.fieldset(form.have_savings, 'form-group') }}
 
-    {% call Form.fieldset(form.have_valuables, role='radiogroup', describedby='valuables-info') %}
-      {{ Form.radio_buttons(form.have_valuables) }}
+    {% call Form.fieldset(form.have_valuables, 'form-group') %}
       {% include '_valuables-info.html' %}
     {% endcall %}
 

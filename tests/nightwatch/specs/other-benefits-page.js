@@ -28,28 +28,33 @@ module.exports = {
   },
 
   'Additional Benefits page': function(client) {
-    client
-      .waitForElementVisible('input[name="other_benefits"]', 5000)
-      .assert.urlContains('/additional-benefits')
-    ;
-    common.checkTextIsEqual(client, 'h1', 'Your additional benefits');
+    client.ensureCorrectPage('#other_benefits-0', '/additional-benefits', {
+      'h1': 'Your additional benefits'
+    });
   },
 
   'Context-dependent text for partner': function(client) {
     client
       .back()
-      .waitForElementPresent('input[name="benefits"]', 5000)
+      .waitForElementVisible('#benefits-0', 5000,
+        '  - Back to /benefits'
+      )
       .back()
-      .waitForElementPresent('input[name="have_partner"]', 5000)
+      .waitForElementVisible('#have_partner-0', 5000,
+        '  - Back to /about'
+      )
       .setYesNoFields('have_partner', 1)
       .pause(100)
       .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
-      .submitForm('form')
-      .waitForElementPresent('input[name="benefits"]', 5000)
-      .submitForm('form')
-      .waitForElementPresent('input[name="other_benefits"]', 5000)
+      .conditionalFormSubmit(true)
+      .waitForElementVisible('#benefits-0', 5000,
+        '  - Back to /benefits'
+      )
+      .conditionalFormSubmit(true)
+      .assert.containsText('h1', 'You and your partner’s additional benefits',
+        '  - Page heading is correct (includes partner)'
+      )
     ;
-    common.checkTextIsEqual(client, 'h1', 'You and your partner’s additional benefits');
   },
 
   'Test validation': function(client) {
@@ -69,20 +74,15 @@ module.exports = {
       name: 'other_benefits',
       errorText: 'Please select a time period from the drop down'
     }]);
-    client
-      .clearValue('input[name="total_other_benefit-per_interval_value"]')
-      .click('select[name="total_other_benefit-interval_period"]')
-      .click('select[name="total_other_benefit-interval_period"] option:first-child + option')
-    ;
+    client.clearValue('input[name="total_other_benefit-per_interval_value"]');
+    common.setDropdownValue(client, 'total_other_benefit-interval_period', 'per_week');
     common.submitAndCheckForFieldError(client, [{
       name: 'other_benefits',
       errorText: 'Please provide an amount'
     }]);
     client
       .setValue('input[name="total_other_benefit-per_interval_value"]', '100')
-      .submitForm('form')
-      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
-      .assert.urlContains('/income')
+      .conditionalFormSubmit(true)
     ;
   }
 

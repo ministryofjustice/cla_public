@@ -103,7 +103,7 @@
     },
 
     render: function () {
-      this.$postcode.after(this.buttonTemplate());
+      this.$postcode.after(' ' + $.trim(this.buttonTemplate()));
     },
 
     renderAddressList: function (addresses) {

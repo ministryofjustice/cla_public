@@ -8,16 +8,16 @@ exports.command = function(errorText, callback) {
   errorText = errorText || 'This form has errors';
 
   this.perform(function() {
-    log.command('Checking form validation…');
+    log.command('Checking form validation...');
 
     client
       .submitForm('form', function() {
         console.log('     ⟡ Form submitted');
       })
-      .waitForElementPresent('.alert-error', 3000, function() {
-        console.log('    - Form has errors summary');
-      })
-      .assert.containsText('.alert-error', errorText)
+      .waitForElementPresent('.alert-error', 5000,
+        '    - Form has errors summary')
+      .assert.containsText('.alert-error', errorText,
+        '    - Error summary contains text')
       .execute(function(formErrorFields, errorSummaryItems, browserName) {
         return {
           formErrorCount: $(formErrorFields).filter(function() {
@@ -33,7 +33,7 @@ exports.command = function(errorText, callback) {
           }).length,
           summaryItemCount: $(errorSummaryItems).length
         };
-      }, ['fieldset.m-error', '.error-summary-details a', client.capabilities.browserName], function(result) {
+      }, ['.form-group.form-error', '.error-summary-details a', client.capabilities.browserName], function(result) {
         var value = result.value;
         this.assert.ok(value.formErrorCount > 0 && value.formErrorCount === value.summaryItemCount,
           util.format('Number of items in error summary (%s) matches number of form errors (%s)',

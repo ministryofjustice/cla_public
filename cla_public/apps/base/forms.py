@@ -98,7 +98,7 @@ class ReasonsForContactingForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     referrer = StringField(widget=widgets.HiddenInput())
     reasons = SelectMultipleField(
-        label=_(u'You can select more than one option:'),
+        label=_(u'You can select more than one option'),
         choices=REASONS_FOR_CONTACTING_CHOICES,
         widget=widgets.ListWidget(prefix_label=False),
         option_widget=widgets.CheckboxInput(),

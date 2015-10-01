@@ -6,8 +6,9 @@ module.exports = {
       .deleteCookies()
       .init(client.launch_url + '/notfound')
       .maximizeWindow()
-      .waitForElementVisible('body', 5000)
-      .assert.containsText('h1', 'Sorry, this page doesn’t exist')
+      .ensureCorrectPage('body', '/notfound', {
+        'h1': 'Sorry, this page doesn’t exist'
+      })
       .end()
     ;
   }

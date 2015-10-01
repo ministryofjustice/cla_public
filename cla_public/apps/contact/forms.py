@@ -14,9 +14,8 @@ from wtforms.validators import InputRequired, Optional, Required, \
 from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
     ValidatedFormField
-from cla_public.apps.checker.fields import YesNoField
 from cla_public.apps.checker.constants import CONTACT_SAFETY, \
-    CONTACT_PREFERENCE, YES, NO
+    CONTACT_PREFERENCE
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, \
     FieldValue

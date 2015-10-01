@@ -29,16 +29,16 @@ module.exports = {
 
   'Review page': function(client) {
     client
-      .assert.urlContains('/review', 'Review page URL is correct')
-      .assert.elementPresent('#step-scope', 'Scope block is present')
-      .assert.elementPresent('#step-about', 'About block is present')
-      .assert.elementPresent('#step-benefits', 'Benefits block is present')
-      .assert.elementPresent('#step-additional-benefits',
-        'Additional benefits block is present')
-      .assert.elementPresent('#step-property', 'Property block is present')
-      .assert.elementPresent('#step-savings', 'Savings block is present')
-      .assert.elementPresent('#step-income', 'Income block is present')
-      .assert.elementPresent('#step-outgoings', 'Outgoings block is present')
+      .ensureCorrectPage('.answers-summary', '/review', {
+        '#step-scope h2': 'Your problem area',
+        '#step-about h2': 'About you',
+        '#step-benefits h2': 'You and your partner’s benefits',
+        '#step-additional-benefits': 'You and your partner’s additional benefits',
+        '#step-property': 'You and your partner’s property',
+        '#step-savings': 'You and your partner’s savings',
+        '#step-income': 'You and your partner’s income and tax',
+        '#step-outgoings': 'You and your partner’s outgoings'
+      })
       .execute(function(selector) {
         return $(selector).map(function() { return $(this).text() });
       }, ['#step-scope .answers-item .answer strong'],function(result) {

@@ -6,14 +6,13 @@
 
   <form method="POST">
     {{ form.csrf_token }}
-
     {{ Form.handle_errors(form) }}
 
-    {{ Form.money_interval_fieldset(form.rent) }}
-    {{ Form.money_interval_fieldset(form.maintenance) }}
-    {{ Form.text_input_fieldset(form.income_contribution, prefix="£", class_='m-small') }}
+    {{ Form.group(form.rent) }}
+    {{ Form.group(form.maintenance) }}
+    {{ Form.group(form.income_contribution, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
     {% if session.checker.has_children or session.checker.has_dependants %}
-      {{ Form.money_interval_fieldset(form.childcare, skip=not session.checker.has_children and not session.checker.has_dependants) }}
+      {{ Form.group(form.childcare, skip=not session.checker.has_children and not session.checker.has_dependants) }}
     {% endif %}
 
     {{ Form.honeypot(form) }}

@@ -1,0 +1,52 @@
+.form-subfield {
+  margin: 15px 20px;
+  padding: 10px 20px;
+  border: 0;
+  border-left: 4px solid $grey-2;
+  position: relative;
+  zoom: 1;
+  overflow: hidden;
+
+  > .form-group-label {
+    float: left;
+    margin-bottom: 10px;
+
+    label:after {
+      content: none;
+    }
+  }
+
+  .input-prefix {
+    margin: 0 5px 0 0;
+    display: inline-block;
+  }
+
+  .form-group {
+    border-top: 1px solid $grey-3;
+    padding: 20px;
+    margin: 0 0 0 -20px;
+
+    &:first-child {
+      border: 0;
+      margin-top: -10px;
+    }
+
+    &:last-child {
+      margin-bottom: -10px;
+    }
+
+    > .form-group-label label:after {
+      content: none;
+    }
+  }
+
+  fieldset legend {
+    float: left;
+    margin: 0 0 12px;
+    padding: 0;
+  }
+
+  fieldset & {
+    margin-bottom: 0;
+  }
+}

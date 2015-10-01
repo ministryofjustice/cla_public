@@ -26,10 +26,13 @@ var checkCallbackTime = function(client, then, time) {
   var formattedCallbackTime = then.format('dddd, D MMMM YYYY [at] HH:mm');
 
   client
-    .submitForm('form')
-    .waitForElementVisible('header.confirmation', 5000)
-    .assert.containsText('h1', 'We will call you back')
-    .verify.containsText('.main-content', formattedCallbackTime)
+    .submitForm('form', function() {
+      console.log('     ⟡ Form submitted');
+    })
+    .ensureCorrectPage('header.confirmation', '/result/confirmation', {
+      'h1': 'We will call you back',
+      '.main-content': formattedCallbackTime
+    })
     .checkFlashMessage()
   ;
 };

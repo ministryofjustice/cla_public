@@ -56,20 +56,22 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.text_input_fieldset(form.full_name, class_='m-large') }}
+    {{ Form.group(form.full_name, field_attrs={'class': 'm-large'}) }}
 
-    {% call Form.fieldset(form.contact_type, class_='fieldset-group') %}
-      <ul class="form-option-list">
+    {% call Form.fieldset(form.contact_type, field_as_label=True) %}
+      <ul class="form-option-list form-row">
         {%- for option in form.contact_type -%}
           <li>
-            <label class="radio-inline" for="{{option.id}}">
+            <label class="radio-inline" for="{{ option.id }}">
               {{ option }}
               {{ option.label.text }}
             </label>
 
             {% if option.data == 'call' %}
-              <div class="form-group form-subfield form-notice" data-controlled-by="contact_type" data-control-value="call" role="alert">
-                <p>
+              <div class="form-group form-subfield"
+                   data-controlled-by="contact_type"
+                   data-control-value="call" role="alert">
+                <p class="form-group form-notice">
                   {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
                 </p>
               </div>
@@ -83,19 +85,24 @@
       </ul>
     {% endcall %}
 
-    {{ Form.text_input_fieldset(form.email, class_='m-large') }}
+    {{ Form.group(form.email, field_attrs={'class': 'm-large'}) }}
 
-    {{ Subform.address(form.address) }}
+    {% call Form.fieldset(form.address, field_as_label=True) %}
+      {{ Form.group(form.address.post_code,
+          'form-group-plain',
+          field_attrs={'class': 'm-small', 'data-address-el': '#address-street_address'},
+          row_class='address-finder') }}
 
-    {% call Form.fieldset(form.extra_notes, as_label=True) %}
-      {% set max_length_validator = form.extra_notes.validators|selectattr('max')|first %}
-      {% set max_length = max_length_validator.max if max_length_validator %}
-      {{ form.extra_notes(class_='form-control m-full', rows=7, **{ 'data-character-count': max_length }) }}
+      {{ Form.group(form.address.street_address,
+          'form-group-plain',
+          field_attrs={'class': 'm-large', 'rows': 4}) }}
     {% endcall %}
 
-    {{ Subform.adaptations(form.adaptations) }}
+    {% set max_length_validator = form.extra_notes.validators|selectattr('max')|first %}
+    {% set max_length = max_length_validator.max if max_length_validator %}
+    {{ Form.group(form.extra_notes, field_attrs={'class': 'm-full', 'rows': 7, 'data-character-count': max_length}) }}
 
-    {% block what_happens_next_alert %}{% endblock %}
+    {{ Subform.adaptations(form.adaptations) }}
 
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Submit details')) }}
@@ -121,7 +128,7 @@
   {%- endif -%}
 
   <script type="text/html" id="addressFinderButton">
-    <button class="button-secondary address-finder-button" type="button">
+    <button class="button button-secondary address-finder-button" type="button">
       {{ _('Find UK address') }}
     </button>
   </script>

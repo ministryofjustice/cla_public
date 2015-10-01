@@ -12,7 +12,7 @@ exports.command = function(shouldSubmitForm, options, callback) {
   };
 
   this.perform(function() {
-    log.command('Processing Contact page…');
+    log.command('Processing Contact page...');
 
     client
       .waitForElementVisible('.contact-form', 3000,

@@ -28,85 +28,94 @@ module.exports = {
   },
 
   'Income': function(client) {
-    client
-      .waitForElementVisible(other_income_amount, 5000)
-      .assert.urlContains('/income')
-      .assert.containsText('h1', 'Your money')
-    ;
+    client.ensureCorrectPage('input[name="your_income-other_income-per_interval_value"]', '/income', {
+      'h1': 'Your money'
+    });
   },
 
   'Context-dependent questions for employment status': function(client) {
     client
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 5000)
+      .waitForElementVisible('#have_partner-0', 5000,
+        '  - Back to /about'
+      )
       .setYesNoFields('is_employed', 1)
-      .submitForm('form')
-      .waitForElementVisible(other_income_amount, 5000)
+      .conditionalFormSubmit(true)
     ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
-        .assert.visible(util.format('[name="your_income-%s-per_interval_value"]', item))
-        .assert.visible(util.format('[name="your_income-%s-interval_period"]', item))
+        .assert.visible(util.format('[name="your_income-%s-per_interval_value"]', item),
+          util.format('    - `your_income-%s-per_interval_value` is visible', item)
+        )
       ;
     });
 
     client
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 5000)
+      .waitForElementVisible('#have_partner-0', 5000,
+        '  - Back to /about'
+      )
       .setYesNoFields('is_employed', 0)
       .setYesNoFields('is_self_employed', 1)
-      .submitForm('form')
-      .waitForElementVisible(other_income_amount, 5000)
+      .conditionalFormSubmit(true)
     ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
-        .assert.visible(util.format('[name="your_income-%s-per_interval_value"]', item))
-        .assert.visible(util.format('[name="your_income-%s-interval_period"]', item))
+        .assert.visible(util.format('[name="your_income-%s-per_interval_value"]', item),
+          util.format('    - `your_income-%s-per_interval_value` is visible', item)
+        )
       ;
     });
   },
 
   'Context-dependent text and questions for partner': function(client) {
-    client
-      .assert.doesNotContainText('body', 'Your money')
-      .assert.doesNotContainText('body', 'This section is for any money that is paid to you personally - for example, your wages. You should record income for your partner, if you have one, in the next section.')
-    ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.concat(EMPLOYMENT_QUESTIONS.COMMON).forEach(function(item) {
       client
-        .assert.elementNotPresent(util.format('[name="partner_income-%s-per_interval_value"]', item))
-        .assert.elementNotPresent(util.format('[name="partner_income-%s-interval_period"]', item))
+        .assert.elementNotPresent(util.format('[name="partner_income-%s-per_interval_value"]', item),
+          util.format('    - `partner_income-%s-per_interval_value` is not present', item)
+        )
       ;
     });
 
     client
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 5000)
+      .waitForElementVisible('#have_partner-0', 5000,
+        '  - Back to /about'
+      )
       .setYesNoFields('have_partner', 1)
       .setYesNoFields(['in_dispute', 'is_self_employed', 'partner_is_self_employed'], 0)
       .setYesNoFields('partner_is_employed', 1)
-      .submitForm('form')
-      .waitForElementVisible(other_income_amount, 5000)
-      .assert.containsText('h1', 'You and your partner’s money')
-      .assert.containsText('body', 'Your money')
-      .assert.containsText('body', 'Give details of any money that is paid to you personally, like your wages. Record money coming in for your partner in the next section.')
+      .conditionalFormSubmit(true)
+      .assert.containsText('h1', 'You and your partner’s money',
+        '    - Page heading is correct'
+      )
+      .assert.containsText('form fieldset:nth-of-type(1) header', 'Your money',
+        '    - Your money section is present'
+      )
+      .assert.containsText('form fieldset:nth-of-type(2) header', 'Your partner’s money',
+        '    - Your partner’s money section is present'
+      )
     ;
     EMPLOYMENT_QUESTIONS.COMMON.forEach(function(item) {
       client
-        .assert.visible(util.format('[name="partner_income-%s-per_interval_value"]', item))
-        .assert.visible(util.format('[name="partner_income-%s-interval_period"]', item))
+        .assert.visible(util.format('[name="partner_income-%s-per_interval_value"]', item),
+          util.format('    - `partner_income-%s-per_interval_value` is visible', item)
+        )
       ;
     });
     client
       .back()
-      .waitForElementVisible('input[name="have_partner"]', 5000)
+      .waitForElementVisible('#have_partner-0', 5000,
+        '  - Back to /about'
+      )
       .setYesNoFields('is_employed', 1)
-      .submitForm('form')
-      .waitForElementVisible(other_income_amount, 5000)
+      .conditionalFormSubmit(true)
     ;
     EMPLOYMENT_QUESTIONS.EMPLOYED.forEach(function(item) {
       client
-        .assert.visible(util.format('[name="partner_income-%s-per_interval_value"]', item))
-        .assert.visible(util.format('[name="partner_income-%s-interval_period"]', item))
+        .assert.visible(util.format('[name="partner_income-%s-per_interval_value"]', item),
+          util.format('    - `partner_income-%s-per_interval_value` is visible', item)
+        )
       ;
     });
   },
@@ -121,6 +130,7 @@ module.exports = {
         });
       });
     });
+
     common.submitAndCheckForFieldError(client, questions);
 
     ['your', 'partner'].forEach(function(person) {
@@ -133,11 +143,20 @@ module.exports = {
         client
           .clearValue(util.format('[name=%s_income-%s-per_interval_value]', person, item))
           .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
-          .click('body')
+          .keys(['\uE006']) // enter
         ;
+
+        // Fields contain two different versions of error message
+        var errorTexts = [
+          'Please provide an amount',
+          'Enter 0 if this doesn’t apply to you'
+        ];
+        //Fields that contain 'enter 0' error message
+        var enter0 = ['working_tax_credit', 'maintenance', 'pension', 'other_income'];
+
         common.submitAndCheckForFieldError(client, [{
           name: util.format('%s_income-%s-interval_period', person, item),
-          errorText: 'Please provide an amount'
+          errorText: ~enter0.indexOf(item) ? errorTexts[1] : errorTexts[0]
         }], 'select');
       });
     });
@@ -147,17 +166,15 @@ module.exports = {
         client
           .setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '50')
           .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
+          .keys(['\uE006']) // enter
         ;
       });
     });
-    client
-      .click('body')
-      .submitForm('form')
-      .waitForElementVisible('input[name="income_contribution"]', 5000)
-      .assert.urlContains('/outgoings')
-    ;
 
-    client.end();
+    client
+      .conditionalFormSubmit(true)
+      .end()
+    ;
   }
 
 };

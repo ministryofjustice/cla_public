@@ -25,8 +25,10 @@ module.exports = {
     client
       .init()
       .maximizeWindow()
-      .waitForElementVisible('body', 1000)
-      .click('a#start')
+      .ensureCorrectPage('body', '/')
+      .click('a#start', function() {
+        console.log('     ⟡ Start button clicked');
+      })
     ;
   },
 

@@ -21,7 +21,7 @@ var scenarioTypes = {
   contact: {
     label: 'Contact',
     destination: '/contact',
-    identifier: 'input[name="contact_type"]'
+    identifier: '.contact-form'
   }
 };
 var scenarios = [
@@ -41,10 +41,8 @@ module.exports = {
       client
         .startService()
         .scopeDiagnosis(scenario)
-        .waitForElementVisible(scenarioType.identifier, 5000,
-          '  - Element ' + scenarioType.identifier + ' is present')
-        .assert.urlContains(scenarioType.destination,
-          '  - Destination page URL contains ' + scenarioType.destination);
+        .ensureCorrectPage(scenarioType.identifier, scenarioType.destination)
+      ;
     });
 
     client.end();

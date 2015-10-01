@@ -11,10 +11,6 @@
   overflow: visible;
 }
 
-.radio-inline {
-  padding: 10px 30px;
-}
-
 .form-row {
   input[type='radio'],
   input[type='checkbox'] {
@@ -22,12 +18,7 @@
   }
 }
 
-.block-label input[type='radio'] {
-  top: 17px;
-}
-
-
-.form-group.m-error {
+.form-group.form-error {
   &.form-subfield {
     &:before {
       top: 21px;
