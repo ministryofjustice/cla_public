@@ -40,30 +40,6 @@ def add_header(response):
     return response
 
 
-def handle_find_legal_adviser_form(form, args):
-    data = {}
-    category = ''
-    page = 1
-
-    if 'category' in args:
-        category = LAALAA_PROVIDER_CATEGORIES_MAP.get(args['category'])
-
-    if 'postcode' in args:
-        if form.validate():
-            if 'page' in args and args['page'].isdigit():
-                page = args['page']
-            try:
-                data = laalaa.find(args['postcode'], category, page)
-                if 'error' in data:
-                    form.postcode.errors.append(data['error'])
-            except laalaa.LaaLaaError:
-                form.postcode.errors.append(u"%s %s" % (
-                    _('Error looking up legal advisers.'),
-                    _('Please try again later.')
-                ))
-    return data
-
-
 class UpdatesMeansTest(object):
 
     def on_valid_submit(self):
@@ -273,44 +249,77 @@ checker.add_url_rule('/<step>', view_func=CheckerWizard.as_view('wizard'),
                      methods=('GET', 'POST', 'OPTIONS'))
 
 
-class FaceToFace(views.MethodView, object):
+class LaaLaaView(views.MethodView):
+    """
+    Find a legal adviser view
+    Requires no session so is directly accessible
+    """
+    template = 'laalaa.html'
+    view_clears_session = False
+
+    @classmethod
+    def handle_find_legal_adviser_form(cls, form, args):
+        data = {}
+        category = ''
+        page = 1
+
+        if 'category' in args:
+            category = LAALAA_PROVIDER_CATEGORIES_MAP.get(args['category'])
+
+        if 'postcode' in args:
+            if form.validate():
+                if 'page' in args and args['page'].isdigit():
+                    page = args['page']
+                try:
+                    data = laalaa.find(args['postcode'], category, page)
+                    if 'error' in data:
+                        form.postcode.errors.append(data['error'])
+                except laalaa.LaaLaaError:
+                    form.postcode.errors.append(u"%s %s" % (
+                        _('Error looking up legal advisers.'),
+                        _('Please try again later.')
+                    ))
+        return data
+
     def get(self):
-        form = FindLegalAdviserForm(request.args, csrf_enabled=False)
-        data = handle_find_legal_adviser_form(form, request.args)
-
-        session.store({'category': request.args.get('category')})
-
+        if self.view_clears_session:
+            session.clear_checker()
+        category = request.args.get('category')
         category_name = None
+        if category:
+            category_name = category_id_to_name(category)
 
-        if session.stored['category']:
-            category_name = category_id_to_name(session.stored['category'])
+        return self.render(category=category, category_name=category_name)
 
-        session.clear_checker()
+    def render(self, category, category_name, extra_context={}):
+        form = FindLegalAdviserForm(request.args, csrf_enabled=False)
+        data = self.handle_find_legal_adviser_form(form, request.args)
 
-        response = render_template('checker/result/face-to-face.html',
-            data=data, form=form, category_name=category_name)
-
-        return response
+        return render_template(self.template, category=category,
+                               category_name=category_name,
+                               data=data, form=form, **extra_context)
 
 
 checker.add_url_rule(
-    '/scope/refer/legal-adviser', view_func=FaceToFace.as_view('face-to-face'))
+    '/find-a-legal-adviser',
+    view_func=LaaLaaView.as_view('laalaa')
+)
 
 
-class EligibleFaceToFace(views.MethodView, object):
+class FaceToFace(LaaLaaView):
+    template = 'checker/result/face-to-face.html'
+    view_clears_session = True
 
-    def get(self):
-        form = FindLegalAdviserForm(request.args, csrf_enabled=False)
-        data = handle_find_legal_adviser_form(form, request.args)
 
-        session.clear_checker()
-        session.store({'category': request.args.get('category')})
-        category_name = None
-        if session.stored['category']:
-            category_name = category_id_to_name(session.stored['category'])
+checker.add_url_rule(
+    '/scope/refer/legal-adviser',
+    view_func=FaceToFace.as_view('face-to-face'))
 
-        return render_template('checker/result/eligible-f2f.html',
-            data=data, form=form, category_name=category_name)
+
+class EligibleFaceToFace(LaaLaaView):
+    template = 'checker/result/eligible-f2f.html'
+    view_clears_session = True
+
 
 checker.add_url_rule(
     '/result/refer/legal-adviser',
@@ -421,12 +430,12 @@ def interstitial():
         category_name_english = unicode(session.checker.category_name)
 
     organisations = get_organisation_list(article_category__name=category_name_english)
+    show_laalaa = category in ['family', 'housing']
 
     context = {
         'category': category,
         'category_name': category_name,
         'organisations': organisations,
-        'hide_help_orgs_intro': True,
-        'show_help_orgs': 'show' in request.args,
+        'show_laalaa': show_laalaa,
     }
     return render_template('interstitial.html', **context)

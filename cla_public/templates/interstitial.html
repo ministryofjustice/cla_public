@@ -53,6 +53,21 @@
     </a>
   </p>
 
+  {% if show_laalaa %}
+    <hr>
+
+    <p>
+      {{ _('Alternatively, you can ask a legal aid adviser to take on your case.') }}
+    </p>
+    <p>
+      {{ _('Your adviser will check whether you qualify for legal aid at no cost to you by asking about your problem and your finances.') }}
+      {{ _('If you qualify, in some cases you may need to pay a contribution towards your legal aid.') }}
+    </p>
+    <p>
+      <a class="field-more-info-toggle" href="{{ url_for('.laalaa') }}?category={{ category }}">{{ _('Find a legal adviser') }}</a>
+    </p>
+  {% endif %}
+
   {% if organisations %}
     <hr>
 

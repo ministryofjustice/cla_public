@@ -2,12 +2,14 @@
 {% import "macros/element.html" as Element %}
 
 <section class="find-legal-adviser">
-  <h2>{{ _('Find a legal adviser') }}</h2>
+  {% if not hide_subtitle %}
+    <h2>{{ _('Find a legal adviser') }}</h2>
+  {% endif %}
   <form class="legal-adviser-search" method="GET">
     {% call Form.fieldset(form.postcode, class_=' ', field_as_label=True) %}
       {{ Form.text_input(form.postcode) }}
-      {% if session.stored.category %}
-        <input type="hidden" name="category" value="{{session.stored.category}}" />
+      {% if category %}
+        <input type="hidden" name="category" value="{{ category }}" />
       {% endif %}
       <button class="button" type="submit">{{ _('Search') }}</button>
     {% endcall %}
@@ -24,7 +26,7 @@
           <a
             class="filter-remove"
             href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode']) }}"
-            title="Remove filter"
+            title="{{ _('Remove filter') }}"
           >
             <i class="icon icon-remove"></i>
             {{ _('Remove') }}
@@ -91,7 +93,7 @@
                   href="{{ url_for(request.url_rule.endpoint,
                     postcode=request.args['postcode'],
                     page=prev_page,
-                    category=session.stored.category) }}"
+                    category=category) }}"
                   data-page="{{prev_page}}"
                 >
                   {{ _('Previous') }}
@@ -105,7 +107,7 @@
                   href="{{ url_for(request.url_rule.endpoint,
                     postcode=request.args['postcode'],
                     page=next_page,
-                    category=session.stored.category) }}"
+                    category=category) }}"
                   data-page="{{next_page}}"
                 >
                   {{ _('Next') }}
