@@ -6,7 +6,7 @@ var scenarioTypes = {
   outOfScope: {
     label: 'Out of scope',
     destination: '/scope/refer',
-    identifier: 'a[href="https://www.gov.uk/find-a-legal-adviser"]'
+    identifier: 'a[href="http://find-legal-advice.justice.gov.uk/"]'
   },
   inScope: {
     label: 'In scope',
