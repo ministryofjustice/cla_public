@@ -5,6 +5,7 @@
   {% if not hide_subtitle %}
     <h2>{{ _('Find a legal adviser') }}</h2>
   {% endif %}
+
   <form class="legal-adviser-search" method="GET">
     {% call Form.fieldset(form.postcode, class_=' ', field_as_label=True) %}
       {{ Form.text_input(form.postcode) }}
@@ -38,7 +39,7 @@
     <div class="search-results-container">
       <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
       <div class="search-results">
-        <div class="search-results-list">
+        <div class="search-results-list" data-current-page="{{ data.current_page }}">
           <ul class="org-list">
             {% for item in data.results %}
               <li class="org-list-item vcard" data-lat="{{ item.location.point.coordinates[1] }}" data-lon="{{ item.location.point.coordinates[0] }}" data-id="{{ loop.index }}">

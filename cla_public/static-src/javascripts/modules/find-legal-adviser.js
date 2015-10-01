@@ -115,6 +115,8 @@
           }
 
           $('.search-results-list').attr('tabindex', -1).focus();
+
+          window.ga('send', 'pageview', url);
         })
         .error();
     },
@@ -195,6 +197,19 @@
 
       this._handleMarkersZooming($item.data('id'));
       this._handleHighlightedItemScroll($item, $container);
+
+      var markerCount = parseInt($item.find('.marker').text(), 10);
+      var currentPage = parseInt($container.data('current-page'), 10);
+      var name = $item.find('.fn').text();
+      var count;
+
+      if(markerCount && currentPage) {
+        count = markerCount + ((currentPage - 1) * 10);
+      }
+
+      name = (count ? count + ':' : '') + name;
+
+      window.ga('send', 'event', 'find-legal-adviser', 'selected', name);
     },
 
     renderMap: function(lat, lon) {
