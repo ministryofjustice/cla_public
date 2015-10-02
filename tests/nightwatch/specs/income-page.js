@@ -142,7 +142,7 @@ module.exports = {
         }]);
         client
           .clearValue(util.format('[name=%s_income-%s-per_interval_value]', person, item))
-          .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
+          .click(util.format('[name=%s_income-%s-interval_period] [value=per_month]', person, item))
           .keys(['\uE006']) // enter
         ;
 
@@ -165,7 +165,7 @@ module.exports = {
       EMPLOYMENT_QUESTIONS.ALL.forEach(function(item) {
         client
           .setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '50')
-          .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
+          .click(util.format('[name=%s_income-%s-interval_period] [value=per_month]', person, item))
           .keys(['\uE006']) // enter
         ;
       });
