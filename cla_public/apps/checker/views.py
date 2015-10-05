@@ -286,6 +286,8 @@ class LaaLaaView(views.MethodView):
         if self.view_clears_session:
             session.clear_checker()
         category = request.args.get('category')
+        if category == 'other':
+            category = ''
         category_name = None
         if category:
             category_name = category_id_to_name(category)
