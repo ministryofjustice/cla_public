@@ -1,116 +1,217 @@
 {#
-  Form fieldset, used as container for form fields.
+  Renders form fieldset. Used as container for form fields.
   Fieldset have `legend` element with optional `label` for single input
   elements (such as text input)
 
   Params:
     - field <object>
-        WTForm field
-    - is_subfield <boolean> (default: False)
-        Whether to treat the fieldset as subfield
-    - is_hidden <boolean> (default: False)
-        Whether to hide the field (CSS)
-    - controlled_by <object> (default: None)
-        WTForm field which controls the visibility of the fieldset
-    - control_value <string> (default: '1')
-        Input value which shows the fieldset when toggled
-    - as_label <boolean> (default: False)
-        Whether fieldset legend should contain label element
-    - class_ <string> (optional)
-        Fieldset CSS class
-    - has_label <boolean> (default: True)
-        Whether to show the `legend/label` elements
-    - use_row <boolean> (default: True)
-        Whether to wrap the 'caller' in `.form-row` div
-    - persist_values <boolean> (default: False)
-        Whether to persist input values when fieldset is hidden
+        WTForm field (optional)
+    - class_ <string> (default: 'fieldset-group')
+        CSS class for fieldset element
+    - legend <string> (default: None)
+        Custom legend text (if field is not provided)
+    - attrs <object> (default: None)
+        Custom HTML attributes for fieldset element
 #}
-{% macro fieldset(
-  field=None,
-  is_subfield=False,
-  is_hidden=False,
-  controlled_by=None,
-  control_value='1',
-  as_label=False,
-  class_='',
-  has_label=True,
-  use_row=True,
-  persist_values=False,
-  role=None
-) %}
-  {% if field and field.description %}
-    {% set describedby = field.id %}
-  {% else %}
-    {% set describedby = kwargs.describedby %}
-  {% endif %}
-  <fieldset class="{% if class_ %}{{ class_ }}{% else %}form-group{% endif %}
-    {%- if field and field.errors %} m-error{% endif %}
-    {%- if is_subfield %} form-subfield{% endif %}
-    {%- if is_hidden == True or controlled_by and control_value %} s-hidden{% endif %}"
+{% macro fieldset(field=None, class_='form-group fieldset-group', legend=None, field_attrs={}) %}
+  {% set legend_ = field.label.text if field else legend %}
+  {% set controlled_by = kwargs.controlled_by %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+
+  <fieldset class="
+      {{- class_ -}}
+      {%- if field and field.errors %} form-error{% endif -%}
+      {%- if controlled_by and control_value %} s-hidden{% endif -%}
+    "
+    {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
     {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
-    {% if field %}id="field-{{ field.id }}"{% endif %}
-    {% if persist_values %}data-persist-values="true"{% endif %}
-    {% if role %}role="{{ role }}"{% endif %}
-    {% if describedby %}aria-describedby="field-description-{{ describedby }}"{% endif %}
+    {%- if field %}id="field-{{ field.id }}"{% endif -%}
   >
-    {% if field %}
-      {% if field.flags.optional %}
-        {% set label_text = field.label.text + ' (optional)' %}
-      {% else %}
-        {% set label_text = field.label.text %}
-      {% endif %}
-
-      {% set field_label = field.label(
-          for=field.per_interval_value.id if field.per_interval_value else field.id,
-          text=label_text
-        )
-      %}
-    {% endif %}
-
-    {% if field and has_label %}
-      <legend class="fieldset-label {%- if field and field.errors %} m-error{% endif %}" id="field-label-{{ field.id }}">
-        {% if as_label %}
-          {{ field_label }}
-        {% else %}
-            <span>{{ label_text }}</span>
-        {% endif %}
+    {% if legend_ %}
+      <legend class="form-group-label" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
+        <span>{{ legend_ }}</span>
       </legend>
     {% endif %}
 
-    {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
-      {{ field_errors(field.errors) }}
-    {% endif %}
+    {{ render_field_errors(field.errors) if field and field.errors}}
+    {{ render_field_description(field) }}
 
-    {% if field and (field.description or field.help_text) %}
-      <div class="form-row field-help" id="field-description-{{ field.id }}">
-        {%- if field.description %}
-          <span class="field-description">
-            {{- field.description -}}
-          </span>
-        {%- endif %}
-        {%- if field.more_info -%}
-          <div class="field-more-info">
-            {{- field.more_info|safe -}}
-          </div>
-        {%- endif %}
-      </div>
-    {%- endif -%}
-
-    {% if caller %}
-      {% if use_row %}
-        <div class="form-row">
+    {% if field or caller %}
+      <div class="form-row {{ kwargs.row_class }}">
+        {% if field and not kwargs.field_as_label %}
+          {{ render_field(field, field_attrs) }}
+        {% endif %}
+        {% if caller %}
           {{ caller() }}
-        </div>
-      {% else %}
-        {{ caller() }}
-      {% endif %}
+        {% endif %}
+      </div>
     {% endif %}
   </fieldset>
 {% endmacro %}
 
 
 {#
-  Radio inline buttons
+  Renders `form-group` wrapper for form fields
+
+  Params:
+    - field <object> (optional)
+        WTForm field
+    - class_ <string> (default: '')
+        Additional CSS class (all form group wrappers get 'form-group' CSS class)
+    - field_attrs <object> (default: {})
+        Custom HTML attributes for field
+    - controlled_by <string> (default: None)
+        name of the field that controls the visibility of this container
+    - control_value <string> (default: None)
+        value of the field that controls the visibility of this field
+    - row_class <string> (default: '')
+        Optional CSS class for `form-row` element
+#}
+{% macro group(field=None, class_='', field_attrs={}) %}
+  {% set controlled_by = kwargs.controlled_by %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+  {% set use_row = kwargs.use_row if kwargs.use_row is defined else True %}
+  {% set group_class = class_ if class_.startswith('form-group') else 'form-group %s' % class_ %}
+
+  <div class="
+      {{- group_class -}}
+      {%- if field and field.errors %} form-error{% endif -%}
+      {%- if controlled_by and control_value %} s-hidden{% endif -%}
+    "
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+    {% if field %}id="field-{{ field.id }}"{% endif %}
+  >
+
+    {{ render_field_label(field, kwargs.hide_label) }}
+
+    {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
+      {{ render_field_errors(field.errors) }}
+    {% endif %}
+
+    {{ render_field_description(field) }}
+
+    {% if use_row and (field or caller) %}
+      <div class="form-row {{ kwargs.row_class }}">
+        {% if field %}
+          {{ render_field(field, field_attrs) }}
+        {% endif %}
+        {% if caller %}
+          {{ caller() }}
+        {% endif %}
+      </div>
+    {% elif caller %}
+      {{ caller() }}
+    {% elif field %}
+      {{ render_field(field, field_attrs) }}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{#
+  Renders appropriate input macro for a field
+
+  Params:
+    - field <object>
+        WTForm field
+    - field_attrs <object> (default: {})
+        Custom HTML attributes for field
+#}
+{% macro render_field(field, field_attrs={}) %}
+  {% if field.type in ['YesNoField', 'RadioField', 'PartnerYesNoField'] %}
+    {{ radio_buttons(field) }}
+  {% elif field.type in ['MoneyIntervalField', 'SelfEmployedMoneyIntervalField', 'PartnerMoneyIntervalField'] %}
+    {{ money_interval(field, kwargs.skip) }}
+  {% elif field.type in ['MoneyField', 'PartnerMoneyField'] %}
+    {{ text_input(field, **field_attrs) }}
+  {% else %}
+    {% do field_attrs.update(class='form-control %s' % field_attrs.class) %}
+    {{ field(**field_attrs) }}
+  {% endif %}
+{% endmacro %}
+
+
+
+{#
+  Renders field label (if exists)
+
+  Params:
+    - field <object>
+        WTForm field
+    - hide_label <boolean> (default: False)
+        Whether to hide the label visually (still available for screen readers)
+#}
+{% macro render_field_label(field, hide_label=False) %}
+  {% if field %}
+    {% if field.flags.optional %}
+      {% set label_text = field.label.text + ' <span class="form-optional">optional</span>' %}
+    {% else %}
+      {% set label_text = field.label.text %}
+    {% endif %}
+
+    {% set field_label = field.label(
+         for=field.per_interval_value.id if field.per_interval_value else field.id,
+         text=label_text,
+         id="field-label-%s" % field.id
+       ) %}
+
+    <div class="form-group-label{{ (' sr-only' if hide_label) }}">
+      {{ field_label }}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+  Renders field description (if exists)
+
+  Params:
+    - field <object>
+        WTForm field
+#}
+{% macro render_field_description(field) %}
+  {% if field and (field.description or field.help_text) %}
+    <div class="form-row field-help" id="field-description-{{ field.id }}">
+      {%- if field.description %}
+        <span class="field-description">
+            {{- field.description -}}
+          </span>
+      {%- endif %}
+      {%- if field.more_info -%}
+        <div class="field-more-info">
+          {{- field.more_info|safe -}}
+        </div>
+      {%- endif %}
+    </div>
+  {%- endif -%}
+{% endmacro %}
+
+
+{#
+  Render field errors
+  (including mutli-fields)
+
+  Params:
+    - errors <object> WTForm field.errors
+#}
+{% macro render_field_errors(errors) %}
+  <div class="form-row field-error">
+    {% set errors = errors.values() if errors is mapping else errors %}
+    {% for error in errors %}
+      {% if error is string or error == error|string %}
+        <p>{{error}}</p>
+      {% else %}
+        {% for line in error %}
+          <p>{{line}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+
+{#
+  Renders inline radio buttons
 
   Params:
     - field <object>
@@ -118,7 +219,7 @@
 #}
 {% macro radio_buttons(field) %}
   {%- for option in field -%}
-    <label class="radio-inline" for="{{option.id}}" {% if field.description %}aria-describedby="field-description-{{ field.id }}"{% endif %}>
+    <label class="radio-inline" for="{{option.id}}" {% if field.description %}aria-describedby="field-label-{{ field.id }}"{% endif %}>
       {{ option }}
       {{ option.label.text }}
     </label>
@@ -127,43 +228,15 @@
 
 
 {#
-  Yes/No fieldset
-
-  Params:
-    - field <object>
-        WTForm field
-    - is_hidden <boolean> (default: False)
-        Whether to hide the field (CSS)
-    - controlled_by <object> (default: None)
-        WTForm field which controls the visibility of the fieldset
-    - control_value <string> (default: '1')
-        Input value which shows the fieldset when toggled
-#}
-{% macro radio_buttons_fieldset(
-  field,
-  is_hidden=False,
-  controlled_by=None,
-  control_value='1',
-  class_=None
-) %}
-  {% call fieldset(field, is_hidden=is_hidden, controlled_by=controlled_by, control_value=control_value, class_=class_, role='radiogroup') %}
-    {{ radio_buttons(field) }}
-  {% endcall %}
-{% endmacro %}
-
-
-{#
-  Form text input
+  Renders text field
 
   Params:
     - field <object>
         WTForm field
     - prefix <string> (default: None)
-        Labeled text to prefix the input field
+        String used to prefix the input field (wrapped in label)
     - suffix <string> (default: None)
-        Labeled text to suffix the input field
-    - class_ <string> (optional)
-        Input CSS class
+        String used to suffix the input field (wrapped in label)
     - skip <boolean> (default: False)
         Whether to skip (render as hidden input) the text input
     - default_value <string> (default: '0')
@@ -185,79 +258,29 @@
 
 
 {#
-  Text input fieldset
-
-  Params:
-    - field <object>
-        WTForm field
-    - is_subfield <boolean> (default: False)
-        Whether to treat the fieldset as subfield
-    - prefix <string> (default: None)
-        Labeled text to prefix the input field
-    - suffix <string> (default: None)
-        Labeled text to suffix the input field
-    - class_ <string> (optional)
-        Input CSS class
-    - skip <boolean> (default: False)
-        Whether to skip (render as hidden input) the text input
-    - default_value <string> (default: '0')
-        Default value to use when the input is hidden. Only used when `skip=True`
-    - is_subfield <boolean> (default: False)
-        Whether to treat the fieldset as subfield
-    - controlled_by <object> (default: None)
-        WTForm field which controls the visibility of the fieldset
-    - control_value <string> (default: '')
-        Input value which shows the fieldset when toggled
-    - as_label <boolean> (default: False)
-        Whether fieldset legend should contain label element
-    - fieldset_class <string> (default: None)
-        Fieldset CSS class
-#}
-{% macro text_input_fieldset(
-  field,
-  prefix=None,
-  suffix=None,
-  class_='',
-  skip=False,
-  default_value='0',
-  is_subfield=None,
-  controlled_by=None,
-  control_value='',
-  as_label=True,
-  fieldset_class=None
-) %}
-  {% if skip %}
-    {{ text_input(field, skip=skip) }}
-  {% else %}
-    {% call fieldset(field, is_subfield=is_subfield, controlled_by=controlled_by, control_value=control_value, as_label=as_label, class_=fieldset_class) %}
-      {{ text_input(field, prefix, suffix, class_, skip, default_value) }}
-    {% endcall %}
-  {% endif %}
-{% endmacro %}
-
-
-{#
   A list of options (checkboxes/radios)
 
   Params:
     - field <object>
         WTForm field
+    - input_type <string> (default: 'checkbox')
+        Used for assisted technology
+    - separated_options <list> (default: [])
+        Name of fields to visually separate form others
+    - callback <macro> (default: None)
+        Macro to insert inside the each option
 #}
-{% macro option_list(field, label_type='inline', input_type='checkbox', separated_options=[], callback=None) %}
-  <ul class="form-option-list"
+{% macro option_list(field, input_type='checkbox', separated_options=[], callback=None) %}
+  <ul class="form-option-list form-row"
     {% if input_type == 'radio' %}role="radiogroup"{% else %}role="group"{% endif %}
     aria-labelledby="field-label-{{ field.id }}"
   >
     {% for option in field %}
       <li{% if option.data in separated_options %} class="m-separate"{% endif %}>
-        {% if label_type == 'inline' %}
-          <label class="radio-inline" for="{{option.id}}">
-            {{ option }}
-            {{ option.label.text }}
-          </label>
-        {% else %}
-          {{ block_label(option) }}
-        {% endif %}
+        <label class="radio-inline" for="{{option.id}}">
+          {{ option }}
+          {{ option.label.text }}
+        </label>
 
         {% if callback %}
           {{ callback(field, option) }}
@@ -265,20 +288,6 @@
       </li>
     {% endfor %}
   </ul>
-{% endmacro %}
-
-
-{#
-  A list of options (checkboxes/radios) fieldset
-
-  Params:
-    - field <object>
-        WTForm field
-#}
-{% macro option_list_fieldset(field, label_type='inline', input_type='checkbox', separated_options=[], callback=None) %}
-  {% call fieldset(field, class_='fieldset-group') %}
-    {{ option_list(field, label_type, input_type, separated_options, callback=callback) }}
-  {% endcall %}
 {% endmacro %}
 
 
@@ -300,113 +309,6 @@
     {{ field.per_interval_value(class_='form-control m-small', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
     {{ field.interval_period(class_='form-control') }}
   {% endif %}
-{% endmacro %}
-
-
-{#
-  Money field with period interval fieldset
-
-  Params:
-    - field <object>
-        WTForm field
-    - skip <boolean> (default: False)
-        Whether to skip (render as hidden input) the text input
-    - is_subfield <boolean> (default: False)
-        Whether to treat the fieldset as subfield
-    - controlled_by <object> (default: None)
-        WTForm field which controls the visibility of the fieldset
-    - control_value <string> (default: '1')
-        Input value which shows the fieldset when toggled
-#}
-{% macro money_interval_fieldset(
-  field,
-  skip=False,
-  is_subfield=False,
-  controlled_by=None,
-  control_value='1',
-  class_=''
-) %}
-  {% if skip %}
-    {{ money_interval(field, skip) }}
-  {% else %}
-    {% call fieldset(
-      field,
-      is_subfield=is_subfield,
-      controlled_by=controlled_by,
-      control_value=control_value,
-      as_label=True,
-      class_=class_
-    ) %}
-      {{ money_interval(field) }}
-    {% endcall %}
-  {% endif %}
-{% endmacro %}
-
-
-{#
-  Block level label used for single options per line
-
-  Params:
-    - field <object>
-        WTForm field
-#}
-{% macro block_label(field) %}
-  <label class="block-label" for="{{field.id}}">
-    {{ field }}
-    {{ field.label.text }}
-
-    {% if field.description %}
-      <div class="field-help">
-        {{field.description|safe}}
-      </div>
-    {% endif %}
-    {% if field.selected_notification %}
-      {% call Element.alert() %}
-        {{field.selected_notification|safe}}
-      {% endcall %}
-    {% endif %}
-  </label>
-{% endmacro %}
-
-
-{#
-  Textarea fieldset
-
-  Params:
-    - field <object>
-        WTForm field
-    - class_ <string> (optional)
-        textarea CSS class
-    - rows <number> (default: 4)
-        textarea HTML rows attribute
-#}
-{% macro textarea_fieldset(field, class_='', rows=4) %}
-  {% call fieldset(field, as_label=True) %}
-    {{ field(class_='form-control ' + class_, rows=rows) }}
-  {% endcall %}
-{% endmacro %}
-
-
-{#
-  Render field errors
-  (including mutli-fields)
-
-  Params:
-    - errors <object> WTForm field.errors
-#}
-{% macro field_errors(errors) %}
-  <div class="form-row field-error">
-    {% set errors = errors.values() if errors is mapping else errors %}
-    {% for error in errors %}
-      {% if error is string or error == error|string %}
-        <p>{{error}}</p>
-      {% else %}
-        {% for line in error %}
-          <p>{{line}}</p>
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-  </div>
 {% endmacro %}
 
 
@@ -441,11 +343,11 @@
         {% endif %}
       {% endcall %}
     {% elif form.errors|length == 1 and form.errors.csrf_token %}
-      {% call Element.alert('error', icon='cross', title=_('Sorry, something went wrong')) %}
+      {% call Element.alert('error', title=_('Sorry, something went wrong')) %}
         <p>{{ _('Please try submitting the form again.') }}</p>
       {% endcall %}
     {% else%}
-      {% call Element.alert('error', icon='cross', title=_('This form has errors')) %}
+      {% call Element.alert('error', title=_('This form has errors')) %}
         {% if form['properties'] %}
           {% for property_form in form['properties'] %}
             {% if property_form.errors %}
@@ -503,7 +405,6 @@
 #}
 {% macro honeypot(form) %}
   <div class="hp-field">
-    {{ form[honeypot_field_name].label }}&nbsp;
-    {{ text_input(form[honeypot_field_name]) }}
+    {{ form[honeypot_field_name].label }}{{ form[honeypot_field_name] }}
   </div>
 {% endmacro %}

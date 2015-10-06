@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "Custom form fields"
 from collections import defaultdict, namedtuple
+import itertools
 import re
 
 from flask import session
@@ -308,7 +309,17 @@ class PropertyList(FieldList):
         self.last_index -= 1
 
     def validate(self, form, extra_validators=tuple()):
-        super(PropertyList, self).validate(form, extra_validators)
+        self.errors = []
+
+        for index, subfield in enumerate(self.entries):
+            if not subfield.validate(form):
+                self.errors.append({
+                    '_index': index,
+                    '_errors': subfield.errors,
+                })
+
+        chain = itertools.chain(self.validators, extra_validators)
+        self._run_validation_chain(form, chain)
 
         main_properties = filter(
             lambda x: x.is_main_home.data == YES,

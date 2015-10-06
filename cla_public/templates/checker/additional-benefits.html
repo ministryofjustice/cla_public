@@ -6,13 +6,14 @@
 
   <form method="POST">
     {{ form.csrf_token }}
-
     {{ Form.handle_errors(form) }}
 
-    {{ Form.option_list_fieldset(form.benefits) }}
-    {% call Form.fieldset(form.other_benefits) %}
-      {{ Form.radio_buttons(form.other_benefits) }}
-      {{ Form.money_interval_fieldset(form.total_other_benefit, is_subfield=True, controlled_by=form.other_benefits) }}
+    {% call Form.fieldset(form.benefits, field_as_label=True) %}
+      {{ Form.option_list(form.benefits) }}
+    {% endcall %}
+
+    {% call Form.fieldset(form.other_benefits, 'form-group') %}
+      {{ Form.group(form.total_other_benefit, 'form-subfield', controlled_by=form.other_benefits) }}
     {% endcall %}
 
     {{ Form.honeypot(form) }}

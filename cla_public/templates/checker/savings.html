@@ -17,16 +17,15 @@
     {{ Form.handle_errors(form) }}
 
     {% with skip = not session.checker.has_savings %}
-      {{ Form.text_input_fieldset(form.savings, prefix="£", skip=skip, class_='m-small') }}
-      {{ Form.text_input_fieldset(form.investments, prefix="£", skip=skip, class_='m-small') }}
+      {{ Form.group(form.savings, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
+      {{ Form.group(form.investments, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
     {% endwith %}
 
     {% with skip = not session.checker.has_valuables %}
       {% if skip %}
         {{ Form.text_input(form.valuables, skip=skip) }}
       {% else %}
-        {% call Form.fieldset(form.valuables, class_='fieldset-group') %}
-          {{ Form.text_input(form.valuables, prefix="£", skip=skip, class_='m-small') }}
+        {% call Form.group(form.valuables, field_attrs={'prefix': '£', 'class_': 'm-small'}) %}
           {% include '_valuables-info.html' %}
         {% endcall %}
       {% endif %}

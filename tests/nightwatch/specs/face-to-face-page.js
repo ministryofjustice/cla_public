@@ -13,21 +13,31 @@ module.exports = {
 
   'Face-to-face page': function(client) {
     client
-      .waitForElementVisible('.legal-adviser-search', 5000)
-      .assert.urlContains('/scope/refer/legal-adviser')
-      .assert.containsText('h1', 'A legal adviser may be able to help you')
-      .checkFlashMessage()
+      .ensureCorrectPage('.legal-adviser-search', '/scope/refer/legal-adviser', {
+        'h1': 'A legal adviser may be able to help you'
+      })
+     .checkFlashMessage()
     ;
   },
 
   'Find legal adviser search': function(client) {
     client
-      .setValue('input[name="postcode"]', 'w22dd')
-      .submitForm('form')
-      .assert.urlContains('/scope/refer/legal-adviser')
-      .waitForElementVisible('.search-results-container', 5000)
-      .assert.containsText('.results-summary', 'results around')
-      .assert.containsText('.results-filter', constants.SCOPE_PATHS.clinnegFaceToFace.title.toUpperCase())
+      .setValue('input[name="postcode"]', 'w22dd', function() {
+        console.log('     • Enter postcode `w22dd`');
+      })
+      .conditionalFormSubmit(true)
+      .assert.urlContains('/scope/refer/legal-adviser',
+        '    - Page is ready'
+      )
+      .waitForElementVisible('.search-results-container', 5000,
+        '    - Search results are shown'
+      )
+      .assert.containsText('.results-summary', 'results around',
+        '    - Results summary has location'
+      )
+      .assert.containsText('.results-filter', constants.SCOPE_PATHS.clinnegFaceToFace.title.toUpperCase(),
+        '    - Filter contains category name'
+      )
     ;
 
     client.end();

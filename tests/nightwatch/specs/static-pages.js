@@ -4,35 +4,33 @@ var util = require('util');
 
 var STATIC_PAGES = [
   {
-    name: "cookies",
+    url: "/cookies",
     headline: "Cookies"
   },
   {
-    name: "privacy",
+    url: "/privacy",
     headline: "Terms and conditions and privacy"
   },
   {
-    name: "feedback",
+    url: "/feedback",
     headline: "Your feedback"
   }
 ];
 
 module.exports = {
   'Static pages': function(client) {
-    client
-      .deleteCookies()
-      .init()
-      .maximizeWindow()
-      .waitForElementVisible('body', 1000)
-    ;
+    client.startService();
+
     STATIC_PAGES.forEach(function(item) {
       client
         .useXpath()
-        .click(util.format('//footer//a[@href="/%s"]', item.name))
+        .click(util.format('//footer//a[@href="%s"]', item.url), function() {
+          console.log(util.format('  • Clicked on `%s` link', item.url));
+        })
         .useCss()
-        .waitForElementVisible('body', 1000)
-        .assert.containsText('h1', item.headline)
-        .pause(1000)
+        .ensureCorrectPage('body.js-enabled', item.url, {
+          'h1': item.headline
+        })
       ;
     });
     client.end();

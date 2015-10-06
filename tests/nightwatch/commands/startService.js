@@ -6,7 +6,7 @@ exports.command = function(callback) {
   var client = this;
 
   this.perform(function() {
-    log.command('Starting the service…');
+    log.command('Starting the service...');
 
     client
       .deleteCookies()

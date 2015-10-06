@@ -40,16 +40,21 @@ body {
   }
 
   #global-header {
-    margin: 0 0 1mm;
+    padding: 2mm 3mm;
+    margin: 0;
   }
 
   .language-picker {
     display: none;
   }
 
-  #content > .inner-block {
-    margin-left: 0;
-    margin-right: 0;
+  #content {
+    padding-top: 8mm;
+
+    > .inner-block {
+      margin-left: 3mm;
+      margin-right: 3mm;
+    }
   }
 }
 
@@ -82,7 +87,6 @@ body {
 .form-notice {
   background: $grey-4;
   font-size: .9em;
-  padding: 15px;
 
   p:first-child {
     margin: 0;
@@ -90,6 +94,7 @@ body {
 
   ul {
     padding-left: 20px;
+    margin: 0;
   }
 }
 
@@ -102,7 +107,6 @@ hr {
   border: 0;
   height: 2px;
   background: $grey-3;
-  margin: 40px 0;
 }
 
 .get-in-touch {

@@ -7,13 +7,14 @@ exports.command = function(shouldSubmitForm, callback) {
   var client = this;
 
   this.perform(function() {
-    log.command('Processing About you page…');
+    log.command('Processing About you page...');
 
     client
-      .assert.urlContains('/about',
-        '  - About you page URL is correct')
+      .ensureCorrectPage('#have_partner-0', '/about', {
+        'h1': 'About you'
+      })
       .setYesNoFields(ABOUT_YOU_QUESTIONS, 1, function() {
-        console.log('     • All values set to ‘Yes’');
+        console.log('     • Setting all values to ‘Yes’');
       })
       .click('input[name="in_dispute"][value="0"]', function() {
         console.log('     • In dispute with partner set to ‘No’');

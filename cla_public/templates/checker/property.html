@@ -14,33 +14,36 @@
     {{ Form.handle_errors(form) }}
 
     {% for property in form.properties %}
-      <fieldset class="fieldset-group" id="property-set-{{loop.index}}">
+      {% call Form.fieldset(attrs={'id': 'property-set-%d' % loop.index }) %}
         {% if form.properties|count > 1 %}
           <header>
-            <h3>{{ _('Property') }} {{loop.index}}</h3>
+            <h3>{{ _('Property') }} {{ loop.index }}</h3>
             {% if loop.index != 1 %}
-              <input class="button-secondary button-small" name="remove-property-{{loop.index0}}" type="submit" value="{{ _('Remove property') }}" />
+              <input class="button-secondary button-small"
+                     name="remove-property-{{ loop.index0 }}"
+                     type="submit"
+                     value="{{ _('Remove property') }}"/>
             {% endif %}
           </header>
         {% endif %}
 
-        {{ Form.radio_buttons_fieldset(property.is_main_home) }}
-        {{ Form.radio_buttons_fieldset(property.other_shareholders) }}
-        {{ Form.text_input_fieldset(property.property_value, prefix="£", class_='m-small') }}
-        {{ Form.text_input_fieldset(property.mortgage_remaining, prefix="£", class_='m-small') }}
-        {{ Form.text_input_fieldset(property.mortgage_payments, prefix="£", class_='m-small') }}
-        {% call Form.fieldset(property.is_rented) %}
-          {{ Form.radio_buttons(property.is_rented) }}
-          {{ Form.money_interval_fieldset(property.rent_amount, is_subfield=True, controlled_by=property.is_rented) }}
-        {% endcall %}
-        {{ Form.radio_buttons_fieldset(property.in_dispute) }}
+          {{ Form.fieldset(property.is_main_home, 'form-group') }}
+          {{ Form.fieldset(property.other_shareholders, 'form-group') }}
+          {{ Form.group(property.property_value, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
+          {{ Form.group(property.mortgage_remaining, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
+          {{ Form.group(property.mortgage_payments, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
 
-      </fieldset>
+          {% call Form.fieldset(property.is_rented, 'form-group') %}
+            {{ Form.group(property.rent_amount, 'form-subfield', controlled_by=property.is_rented) }}
+          {% endcall %}
+
+          {{ Form.fieldset(property.in_dispute, 'form-group') }}
+      {% endcall %}
     {% endfor %}
 
     {% if form.properties|count < 3 %}
       <p>
-        <input type="submit" class="button-secondary button-large" name="add-property" value="{{ _('Add another property') }}">
+        <input type="submit" class="button-secondary" name="add-property" value="{{ _('Add another property') }}">
       </p>
     {% endif %}
 

@@ -18,15 +18,18 @@ module.exports = {
   // check specific field group for error text
   submitAndCheckForFieldError: function(client, fields, tag) {
     tag = tag || "input";
+
     client
-      .submitForm('form')
-      .waitForElementPresent('.alert-error', 3000, function() {
-        console.log('    - Form has errors summary');
+      .submitForm('form', function() {
+        console.log('     ⟡ Form submitted');
       })
+      .waitForElementPresent('.alert-error', 3000,
+        '    - Form has errors summary')
       .useXpath()
     ;
     fields.forEach(function(field) {
-      client.assert.containsText(util.format('//%s[@name="%s"]/ancestor::fieldset', tag, field.name), field.errorText);
+      client.assert.containsText(util.format('//%s[@name="%s"]/ancestor::*[contains(@class, "form-group")]', tag, field.name), field.errorText,
+        util.format('    - `%s` has error message: `%s`', field.name, field.errorText));
     });
     client.useCss();
   },

@@ -1,0 +1,38 @@
+{% if request.is_xhr %}
+  {% include "checker/result/_find-legal-adviser.html" %}
+{% else %}
+
+  {% extends "base.html" %}
+
+  {% if category == 'family' %}
+    {% set title = _('Find a legal aid adviser or family mediator') %}
+  {% else %}
+    {% set title = _('Find a legal aid adviser') %}
+  {% endif %}
+  {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+  {% import "macros/element.html" as Element %}
+
+  {% block sidebar %}{% endblock %}
+
+  {% block inner_content %}
+    <h1>{{ title }}</h1>
+
+    <p>
+      {% if category == 'family' %}
+        {% trans %}Search for a legal adviser or family mediator with a legal aid contract in England and Wales.{% endtrans %}
+      {% else %}
+        {% trans %}Search for a legal adviser with a legal aid contract in England and Wales.{% endtrans %}
+      {% endif %}
+    </p>
+
+    {% set hide_subtitle = True %}
+    {% include 'checker/result/_find-legal-adviser.html' %}
+  {% endblock %}
+
+  {% block javascripts %}
+    {{ super() }}
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+  {% endblock %}
+
+{% endif %}

@@ -9,21 +9,32 @@
     },
 
     bindEvents: function() {
-      $('form').on('submit', this.postToFormErrors);
+      $('form')
+        .on('submit', this.postToFormErrors)
+        // Focus back on summary if field-error is focused and escape key is pressed
+        .on('keyup', function(e) {
+          var $target = $(e.target);
+          if(e.keyCode === 27 && $target.is('.form-error')) {
+            $target.closest('form').find('> .alert').focus();
+          }
+        })
+        .on('blur', '.form-group', function(e) {
+          $(e.target).removeAttr('tabindex');
+        });
+
       $('[type=submit]').on('click', function(e) {
         var $target = $(e.target);
         $target.closest('form').attr('submit-name', $target.attr('name'));
       });
 
+      // Focus on field with error
       $('#content').on('click', '.error-summary a', function(e) {
         e.preventDefault();
-        $('fieldset').removeClass('s-targeted');
         var targetId = e.target.href.replace(/.*#/, '#');
         if(targetId.length < 2) {
           return;
         }
         var $target = $(targetId);
-        $target.addClass('s-targeted');
 
         $('html, body').animate({
           scrollTop: $target.offset().top - 20
@@ -86,7 +97,7 @@
       var errorFields = {};
 
       (function fieldName (errorsObj, prefix) {
-        prefix = (typeof prefix === 'undefined')? '': prefix + '-';
+        prefix = (typeof prefix === 'undefined') ? '' : prefix + '-';
         for (var key in errorsObj) {
           var field = prefix + key;
           if ($.isArray(errorsObj[key])) {
@@ -100,11 +111,11 @@
       return errorFields;
     },
 
-    createErrorSummary: function() {
+    createErrorSummary: function(unattachedErrors) {
       var errorSummary = [];
 
       // Loop through errors on the page to retain the fields order
-      $('fieldset.m-error').map(function() {
+      $('.form-error').map(function() {
         var $this = $(this);
 
         if(!this.id || $this.hasClass('s-hidden') || $this.parent().hasClass('s-hidden')) {
@@ -113,11 +124,17 @@
         var name = this.id.replace(/^field-/, '');
 
         errorSummary.push({
-          label: $this.find('> .fieldset-label').text(),
+          label: $this.find('#field-label-' + name).text(),
           name: name,
           errors: $this.find('> .field-error p').map(function() {
             return $(this).text();
           })
+        });
+      });
+
+      _.each(unattachedErrors, function(error) {
+        errorSummary.push({
+          errors: [error]
         });
       });
 
@@ -127,37 +144,73 @@
     loadErrors: function(errors) {
       var errorFields = this.formatErrors(errors);
       var self = this;
+      var unattachedErrors = [];
 
       this.clearErrors();
 
-      function addErrors(errors, fieldName) {
-        if (_.isString(errors[0])) {
-          $('#field-' + fieldName)
-            .addClass('m-error')
-            .attr({
-              'aria-invalid': true,
-              'aria-describedby': 'error-' + fieldName
-            });
-          var label = $('#field-label-' + fieldName).addClass('m-error');
-          label.after(self.fieldError({ errors: errors, fieldName: fieldName }));
-        } else if(_.isObject(errors[0]) && !_.isArray(errors[0])) {
-          // Multiple forms (e.g. properties)
-          _.each(errors, function(errors, i) {
-            _.each(errors, function(subformErrors, subformFieldName) {
-              addErrors(subformErrors, fieldName + '-' + i + '-' + subformFieldName);
-            });
-          });
-        } else {
-          _.each(errors, function(subformErrors) {
-            addErrors(subformErrors[1], fieldName + '-' + subformErrors[0]);
-          });
+      function insertError($afterElement, errors, fieldName) {
+        $afterElement.after(self.fieldError({
+          errors: errors,
+          fieldName: fieldName
+        }));
+      }
+
+      function addSimpleErrors(errors, fieldName) {
+        if(!errors.length) {
+          return;
         }
+
+        $('#field-' + fieldName)
+          .addClass('form-error')
+          .attr({
+            'aria-invalid': true,
+            'aria-describedby': 'error-' + fieldName
+          });
+
+        var label = $('#field-label-' + fieldName);
+
+        if(!label.length) {
+          unattachedErrors = _.extend(unattachedErrors, errors);
+        } else if(label.is('legend')) {
+          insertError(label, errors, fieldName);
+        } else {
+          insertError(label.closest('.form-group-label'), errors, fieldName);
+        }
+      }
+
+      function addSubformErrors(errors, fieldName) {
+        if(!errors.length) {
+          return;
+        }
+        _.each(errors, function(subformErrors) {
+          addErrors(subformErrors[1], fieldName + '-' + subformErrors[0]);
+        });
+      }
+
+      function addRepeatedFieldErrors(errors, fieldName) {
+        if(!errors.length) {
+          return;
+        }
+        // Multiple forms (e.g. properties)
+        _.each(errors, function(errors) {
+          _.each(errors._errors, function(subformErrors, subformFieldName) {
+            addErrors(subformErrors, fieldName + '-' + errors._index + '-' + subformFieldName);
+          });
+        });
+      }
+
+      function addErrors(errors, fieldName) {
+        addSimpleErrors(_.filter(errors, _.isString), fieldName);
+        addSubformErrors(_.filter(errors, _.isArray), fieldName);
+        addRepeatedFieldErrors(_.filter(errors, function(error) {
+          return _.isObject(error) && !_.isArray(error);
+        }), fieldName);
       }
 
       _.each(errorFields, addErrors);
 
       if(this.$form.data('error-banner') !== false) {
-        this.$form.prepend(this.mainFormError({ errors: this.createErrorSummary()}));
+        this.$form.prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
       }
     },
 
@@ -169,8 +222,8 @@
     clearErrors: function() {
       $('.form-row.field-error').remove();
       $('.alert.alert-error').remove();
-      $('.m-error')
-        .removeClass('m-error')
+      $('.form-error')
+        .removeClass('form-error')
         .removeAttr('aria-invalid');
     }
   };

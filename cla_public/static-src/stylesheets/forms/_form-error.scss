@@ -1,0 +1,41 @@
+.form-error {
+  &:focus:before {
+    animation: 220ms slide-from-left;
+    position: absolute;
+    top: .2em;
+    left: -.9em;
+    content: '';
+    border-style: solid;
+    border-width: 6px 0 6px 12px;
+    border-color: transparent transparent transparent $mellow-red;
+  }
+
+  &.fieldset-group:focus:before {
+    left: -.2em;
+  }
+
+  .form-subfield &:focus:before {
+    top: 25px;
+    left: 0;
+  }
+
+  &.form-subfield:focus:before {
+    top: 15px;
+    left: 0;
+  }
+}
+
+@keyframes slide-from-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-1em) scale(1.7);
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}

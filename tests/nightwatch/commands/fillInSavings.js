@@ -6,11 +6,10 @@ exports.command = function(shouldSubmitForm, callback) {
   var client = this;
 
   this.perform(function() {
-    log.command('Processing Savings page…');
+    log.command('Processing Savings page...');
 
     client
-      .assert.urlContains('/savings',
-        '  - Savings page URL is correct')
+      .ensureCorrectPage('body.js-enabled', '/savings')
       .setValue('input[name="savings"]', 1000, function() {
         console.log('     • Savings is £1,000');
       })

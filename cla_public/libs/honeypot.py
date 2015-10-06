@@ -6,15 +6,12 @@ from flask.ext.babel import lazy_gettext as _
 # This should be something a bot would want to fill in
 FIELD_NAME = 'comment'
 
-# The CSS class name used to hide the field
-CSS_CLASS = 'hp_decoy'
-
 
 class HoneypotWidget(widgets.Input):
 
     def __call__(self, field, **kwargs):
         kwargs.setdefault('value', '')
-        kwargs.setdefault('class_', CSS_CLASS)
+        kwargs.setdefault('id', FIELD_NAME)
 
         return widgets.HTMLString('<input {params}></input>'.format(
             params=widgets.html_params(

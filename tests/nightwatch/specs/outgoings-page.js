@@ -30,34 +30,35 @@ module.exports = {
 
   'Income': function(client) {
     client
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
-      .assert.urlContains('/income')
-      .assert.containsText('h1', 'Your money coming in')
+      .ensureCorrectPage('input[name="your_income-other_income-per_interval_value"]', '/income', {
+        'h1': 'Your money coming in'
+      })
       .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
       .setValue('input[name="your_income-pension-per_interval_value"]', 0)
       .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
-      .submitForm('form')
+      .conditionalFormSubmit(true)
     ;
   },
 
   'Outgoings': function(client) {
-    client
-      .waitForElementVisible('input[name="income_contribution"]', 5000)
-      .assert.urlContains('/outgoings')
-      .assert.containsText('h1', 'Your outgoings')
-    ;
+    client.ensureCorrectPage('input[name="income_contribution"]', '/outgoings', {
+      'h1': 'Your outgoings'
+    });
   },
 
   'Childcare fields': function(client) {
     client
       .back()
-      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000)
+      .waitForElementPresent('input[name="your_income-other_income-per_interval_value"]', 5000,
+        '  - Back to /income'
+      )
       .back()
-      .waitForElementPresent('input[name="have_partner"]', 5000)
+      .waitForElementPresent('#have_partner-0', 5000,
+        '  - Back to /about'
+      )
       .setYesNoFields('have_children', 1)
       .setValue('input[name="num_children"]', 1)
-      .submitForm('form')
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
+      .conditionalFormSubmit(true)
       .clearValue('input[name="your_income-maintenance-per_interval_value"]')
       .clearValue('input[name="your_income-pension-per_interval_value"]')
       .clearValue('input[name="your_income-other_income-per_interval_value"]')
@@ -65,37 +66,55 @@ module.exports = {
       .setValue('input[name="your_income-maintenance-per_interval_value"]', 0)
       .setValue('input[name="your_income-pension-per_interval_value"]', 0)
       .setValue('input[name="your_income-other_income-per_interval_value"]', 0)
-      .submitForm('form')
-      .waitForElementVisible('input[name="income_contribution"]', 5000)
-      .assert.visible('input[name="childcare-per_interval_value"]')
-      .assert.visible('select[name="childcare-interval_period"]')
+      .conditionalFormSubmit(true)
+      .assert.visible('input[name="childcare-per_interval_value"]',
+        '    - Has childcare input field'
+      )
     ;
   },
 
   'Context-dependent text for partner': function(client) {
     client
-      .assert.containsText('body', 'Money you pay your landlord')
-      .assert.containsText('body', 'Money you pay to an ex-partner for their living costs')
-      .assert.containsText('body', 'Money you pay per month towards your criminal legal aid')
-      .assert.containsText('body', 'Money you pay for your child to be looked after while you work or study')
+      .assert.containsText('body', 'Money you pay your landlord',
+        '  - Has help text for Rent'
+      )
+      .assert.containsText('body', 'Money you pay to an ex-partner for their living costs',
+        '  - Has help text for Maintenance'
+      )
+      .assert.containsText('body', 'Money you pay per month towards your criminal legal aid',
+        '  - Has help text for Monthly Income Contribution Order'
+      )
+      .assert.containsText('body', 'Money you pay for your child to be looked after while you work or study',
+        '  - Has help text for Childcare'
+      )
       .back()
-      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000)
+      .waitForElementVisible('input[name="your_income-other_income-per_interval_value"]', 5000,
+        '  - Back to /income'
+      )
       .back()
-      .waitForElementPresent('input[name="have_partner"]', 5000)
+      .waitForElementPresent('#have_partner-0', 5000,
+        '  - Back to /about'
+      )
       .setYesNoFields('have_partner', 1)
       .pause(200)
       .setYesNoFields(['in_dispute', 'partner_is_employed', 'partner_is_self_employed'], 0)
-      .submitForm('form')
-
+      .conditionalFormSubmit(true)
       .fillInIncome(true, true, true)
-
-      .assert.urlContains('/outgoings')
-      .waitForElementPresent('input[name="income_contribution"]', 5000)
-      .assert.containsText('h1', 'You and your partner’s outgoings')
-      .assert.containsText('body', 'Money you and your partner pay your landlord')
-      .assert.containsText('body', 'Money you and/or your partner pay to an ex-partner for their living costs')
-      .assert.containsText('body', 'Money you and/or your partner pay per month towards your criminal legal aid')
-      .assert.containsText('body', 'Money you and your partner pay for your child to be looked after while you work or study')
+      .assert.containsText('h1', 'You and your partner’s outgoings',
+        '  - Has correct heading'
+      )
+      .assert.containsText('body', 'Money you and your partner pay your landlord',
+        '  - Has help text for Rent'
+      )
+      .assert.containsText('body', 'Money you and/or your partner pay to an ex-partner for their living costs',
+        '  - Has help text for Maintenance'
+      )
+      .assert.containsText('body', 'Money you and/or your partner pay per month towards your criminal legal aid',
+        '  - Has help text for Monthly Income Contribution Order'
+      )
+      .assert.containsText('body', 'Money you and your partner pay for your child to be looked after while you work or study',
+        '  - Has help text for Childcare'
+      )
     ;
   },
 
@@ -124,11 +143,8 @@ module.exports = {
     });
     client
       .setValue('input[name="income_contribution"]', 0)
-      .submitForm('form')
-      .waitForElementVisible('.answers-summary', 5000)
-      .submitForm('form')
-      .waitForElementPresent('input[name="callback-contact_number"]', 5000)
-      .assert.urlContains('/result/eligible')
+      .conditionalFormSubmit(true)
+      .conditionalFormSubmit(true)
     ;
 
     client.end();

@@ -2,7 +2,7 @@
   'use strict';
 
   moj.Modules.LabelFocus = {
-    el: '.block-label, .radio-inline',
+    el: '.radio-inline',
 
     init: function () {
       this.cacheEls();

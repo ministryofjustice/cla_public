@@ -6,11 +6,10 @@ exports.command = function(shouldSubmitForm, callback) {
   var client = this;
 
   this.perform(function() {
-    log.command('Processing Property page…');
+    log.command('Processing Property page...');
 
     client
-      .assert.urlContains('/property',
-        '  - Property page URL is correct')
+      .ensureCorrectPage('body.js-enabled', '/property')
       .click('input[name="properties-0-is_main_home"][value="1"]', function() {
         console.log('     • Selected main property is ‘Yes’');
       })
