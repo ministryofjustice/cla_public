@@ -2,7 +2,7 @@
 
 {% import "macros/element.html" as Element %}
 
-{% set title = _('Legal aid doesn’t usually cover your type of problem') %}
+{% set title = _('Legal aid doesn’t cover all types of problem') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% import "macros/help-orgs.html" as HelpOrganisations %}
@@ -39,6 +39,9 @@
     <p>
       {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'button'}) }}
     </p>
+  {% elif category == 'other' %}
+    <p>{{ _('From what you’ve told us today, it looks as though your problem is not covered.') }}</p>
+    <p>{{ _('You can still ask a solicitor for help - you will have to pay for their advice.') }}</p>
   {% endif %}
 
   <p>
