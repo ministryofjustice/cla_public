@@ -28,6 +28,11 @@
 
       this.$truncatedLists.each(function() {
         var listItems = $(this).find('> ul > li');
+
+        if(!listItems.length) {
+          return;
+        }
+
         this.remainingCount = listItems.length - this.truncateItemCount;
         listItems.slice(this.truncateItemCount).addClass('s-hidden');
 
