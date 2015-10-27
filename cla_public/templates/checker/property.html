@@ -9,7 +9,7 @@
   <p>{{ _('You can add more than one property below.') }}</p>
   <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
 
-  <form method="POST">
+  <form method="POST" id="{{ form.__class__.__name__ }}">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 

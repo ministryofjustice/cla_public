@@ -10,7 +10,8 @@
 #}
 {% macro org_list_container(organisations, category_name, truncate=False) %}
   <div class="help-organisations"
-    {% if truncate and truncate is number %}data-truncate="{{ truncate }}{% endif %}">
+    {% if truncate and truncate is number %}data-truncate="{{ truncate }}{% endif %}"
+    {% if category_name %}data-name="{{ category_name }}"{% endif %}>
     {% if organisations %}
       {% if caller %}
         {{ caller() }}

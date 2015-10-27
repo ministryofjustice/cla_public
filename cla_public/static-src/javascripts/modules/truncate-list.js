@@ -27,26 +27,32 @@
       var self = this;
 
       this.$truncatedLists.each(function() {
-        var listItems = $(this).find('> ul > li');
+        var $listItems = $(this).find('> ul > li');
 
-        if(!listItems.length) {
+        if(!$listItems.length) {
           return;
         }
 
-        this.remainingCount = listItems.length - this.truncateItemCount;
-        listItems.slice(this.truncateItemCount).addClass('s-hidden');
+        this.remainingCount = $listItems.length - this.truncateItemCount;
+        $listItems.slice(this.truncateItemCount).addClass('s-hidden');
 
-        self.addExpandLink(this, listItems);
+        $listItems.slice(this.truncateItemCount).addClass('s-hidden');
+
+        self.addExpandLink(this, $listItems);
       });
     },
 
-    addExpandLink: function(list, listItems) {
-      var expandButton = $(this.$expandButtonTemplate.replace('{count}', list.remainingCount));
-      expandButton.appendTo($(list));
+    addExpandLink: function(listContainer, $listItems) {
+      var expandButton = $(this.$expandButtonTemplate.replace('{count}', listContainer.remainingCount));
+      var $listContainer = $(listContainer);
+
+      expandButton.appendTo($listContainer);
 
       expandButton.on('click', function() {
-        listItems.removeClass('s-hidden').addClass('s-expanded');
+        $listItems.removeClass('s-hidden').addClass('s-expanded');
         expandButton.remove();
+
+        window.ga('send', 'event', 'org-list', 'expand', $listContainer.data('name'));
       });
     },
 
