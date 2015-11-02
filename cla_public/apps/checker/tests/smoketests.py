@@ -62,7 +62,7 @@ class SmokeTests(unittest.TestCase):
 
             # Check the number of scope options
             scope_options_item = BeautifulSoup(response.data).find_all(class_='scope-options-list-item')
-            self.assertEquals(len(scope_options_item), 15)
+            self.assertEquals(len(scope_options_item), 16)
 
             # Follow the third option's link (Debt) and check the
             # there are options on the following screen
