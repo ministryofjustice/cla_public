@@ -10,7 +10,8 @@
 #}
 {% macro org_list_container(organisations, category_name, truncate=False) %}
   <div class="help-organisations"
-    {% if truncate and truncate is number %}data-truncate="{{ truncate }}{% endif %}">
+    {% if truncate and truncate is number %}data-truncate="{{ truncate }}{% endif %}"
+    {% if category_name %}data-name="{{ category_name }}"{% endif %}>
     {% if organisations %}
       {% if caller %}
         {{ caller() }}
@@ -27,7 +28,9 @@
 
       {{ org_list(organisations) }}
     {% else %}
-      <p>{{ _('There has been a problem with listing help organisations. Please refresh this page or try again later.') }}</p>
+      {% call Element.alert() %}
+        <p>{{ _('There has been a problem with listing help organisations. Please refresh this page or try again later.') }}</p>
+      {% endcall %}
     {% endif %}
   </div>
 {% endmacro %}

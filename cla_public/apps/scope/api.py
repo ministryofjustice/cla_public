@@ -3,7 +3,8 @@ import urllib
 from cla_common.constants import DIAGNOSIS_SCOPE
 import requests
 from cla_public.apps.checker.api import post_to_eligibility_check_api
-from cla_public.apps.checker.constants import CATEGORY_ID_MAPPING
+from cla_public.apps.checker.constants import CATEGORY_ID_MAPPING, \
+    F2F_CATEGORIES
 from cla_public.apps.checker.utils import category_option_from_name
 from cla_public.libs.utils import get_locale, override_locale
 from flask import current_app, request, session, Markup
@@ -99,9 +100,10 @@ class DiagnosisApiClient(object):
     def save_category(self, category):
         session.checker['category'] = category
         category = CATEGORY_ID_MAPPING.get(category, category)
-        post_to_eligibility_check_api(payload={
-            'category': category
-        })
+        if category not in F2F_CATEGORIES:
+            post_to_eligibility_check_api(payload={
+                'category': category
+            })
 
     def save(self, response_json):
         state = response_json.get('state')

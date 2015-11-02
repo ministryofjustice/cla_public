@@ -72,7 +72,11 @@ CATEGORIES = [
         'benefits',
         _(u'Welfare benefits'),
         _(u'Appealing a decision made by the social security tribunal about your benefits '
-          u'to the Upper Tribunal, Court of Appeal or Supreme Court'))
+          u'to the Upper Tribunal, Court of Appeal or Supreme Court')),
+    (
+        'other',
+        _(u'Any other problem'),
+        '')
 ]
 
 "Outcomes of the checker"
@@ -134,6 +138,7 @@ F2F_CATEGORIES = (
     'publiclaw',
     'aap',
     'employment',
+    'other',
 )
 
 "Dont go to callback page for these cats"
@@ -179,7 +184,8 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     'immigration': 'immas',
     'mentalhealth': 'mhe',
     'publiclaw': 'pub',
-    'benefits': 'wb'
+    'benefits': 'wb',
+    'other': 'other'
 }
 
 END_SERVICE_FLASH_MESSAGE = _(
