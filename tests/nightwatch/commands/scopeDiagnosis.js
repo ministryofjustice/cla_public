@@ -19,7 +19,7 @@ exports.command = function(scenario, callback) {
       var xpath = '//a[starts-with(normalize-space(.), "' + node + '")]';
       client
         .waitForElementPresent(xpath, 3000, '  - node ‘' + node + '’ visible')
-        .pause(50) // KLUDGE: Wait a bit to ensure element is accessible before being clicked
+        .pause(200) // KLUDGE: Wait a bit to ensure element is accessible before being clicked
         .click(xpath, function() {
           console.log('     • node ‘' + node + '’ clicked');
         });
