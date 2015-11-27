@@ -29,7 +29,7 @@
     _updateForm: function(res) {
       this.$form.replaceWith($(res).find('#PropertiesForm'));
 
-      this.init();
+      moj.init();
     },
 
     handleAddRemoveButton: function(button) {
