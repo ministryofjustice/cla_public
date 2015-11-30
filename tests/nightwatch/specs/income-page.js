@@ -137,16 +137,15 @@ module.exports = {
 
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.ALL.forEach(function(item) {
-        client.disableTransitions();
-        client.setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '250');
+        client
+          .disableTransitions()
+          .setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '250')
+        ;
         common.submitAndCheckForFieldError(client, [{
           name: util.format('%s_income-%s-per_interval_value', person, item),
           errorText: 'Please select a time period from the drop down'
         }]);
-        client
-          .clearValue(util.format('[name=%s_income-%s-per_interval_value]', person, item))
-          .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
-        ;
+        client.setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month');
 
         // Fields contain two different versions of error message
         var errorTexts = [
