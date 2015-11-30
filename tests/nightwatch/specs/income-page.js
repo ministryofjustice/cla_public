@@ -122,6 +122,7 @@ module.exports = {
 
   'Test validation': function(client) {
     var questions = [];
+
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.EMPLOYED_MANDATORY.forEach(function(item) {
         questions.push({
@@ -131,10 +132,12 @@ module.exports = {
       });
     });
 
+    client.disableTransitions();
     common.submitAndCheckForFieldError(client, questions);
 
     ['your', 'partner'].forEach(function(person) {
       EMPLOYMENT_QUESTIONS.ALL.forEach(function(item) {
+        client.disableTransitions();
         client.setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '250');
         common.submitAndCheckForFieldError(client, [{
           name: util.format('%s_income-%s-per_interval_value', person, item),
@@ -153,6 +156,7 @@ module.exports = {
         //Fields that contain 'enter 0' error message
         var enter0 = ['working_tax_credit', 'maintenance', 'pension', 'other_income'];
 
+        client.disableTransitions();
         common.submitAndCheckForFieldError(client, [{
           name: util.format('%s_income-%s-interval_period', person, item),
           errorText: ~enter0.indexOf(item) ? errorTexts[1] : errorTexts[0]
