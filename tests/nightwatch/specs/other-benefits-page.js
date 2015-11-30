@@ -64,17 +64,24 @@ module.exports = {
       name: 'other_benefits',
       errorText: 'Please choose Yes or No'
     }]);
-    client.click('input[name="other_benefits"][value="1"]');
+    client
+      .disableTransitions()
+      .click('input[name="other_benefits"][value="1"]')
+    ;
     common.submitAndCheckForFieldError(client, [{
       name: 'other_benefits',
       errorText: 'Please provide an amount'
     }]);
-    client.setValue('input[name="total_other_benefit-per_interval_value"]', '100');
+    client
+      .disableTransitions()
+      .setValue('input[name="total_other_benefit-per_interval_value"]', '100')
+    ;
     common.submitAndCheckForFieldError(client, [{
       name: 'other_benefits',
       errorText: 'Please select a time period from the drop down'
     }]);
     client
+      .disableTransitions()
       .clearValue('input[name="total_other_benefit-per_interval_value"]')
       .setValue('[name="total_other_benefit-interval_period"]', 'per month')
     ;
@@ -83,6 +90,7 @@ module.exports = {
       errorText: 'Please provide an amount'
     }]);
     client
+      .disableTransitions()
       .setValue('input[name="total_other_benefit-per_interval_value"]', '100')
       .conditionalFormSubmit(true)
     ;
