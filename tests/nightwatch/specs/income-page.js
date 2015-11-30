@@ -142,8 +142,7 @@ module.exports = {
         }]);
         client
           .clearValue(util.format('[name=%s_income-%s-per_interval_value]', person, item))
-          .click(util.format('[name=%s_income-%s-interval_period] [value=per_month]', person, item))
-          .keys(['\uE006']) // enter
+          .setValue(util.format('[name=%s_income-%s-interval_period]', person, item), 'per month')
         ;
 
         // Fields contain two different versions of error message

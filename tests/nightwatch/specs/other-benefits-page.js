@@ -74,8 +74,10 @@ module.exports = {
       name: 'other_benefits',
       errorText: 'Please select a time period from the drop down'
     }]);
-    client.clearValue('input[name="total_other_benefit-per_interval_value"]');
-    common.setDropdownValue(client, 'total_other_benefit-interval_period', 'per_week');
+    client
+      .clearValue('input[name="total_other_benefit-per_interval_value"]')
+      .setValue('[name="total_other_benefit-interval_period"]', 'per month')
+    ;
     common.submitAndCheckForFieldError(client, [{
       name: 'other_benefits',
       errorText: 'Please provide an amount'
