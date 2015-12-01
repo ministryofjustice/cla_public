@@ -74,7 +74,7 @@ module.exports = {
       .waitForElementVisible('input[name="child_benefit-per_interval_value"]', 5000,
         '  - Child benefits amount should be visible')
       .setValue('[name="child_benefit-per_interval_value"]', '12')
-      .setValue('[name="child_benefit-interval_period"]', 'per week')
+      .selectDropdown('child_benefit-interval_period', 'per_week')
       .conditionalFormSubmit(true)
       // income page
       .waitForElementVisible('[name="your_income-child_tax_credit-per_interval_value"]', 5000,
@@ -93,7 +93,7 @@ module.exports = {
       }]);
       client
         .clearValue(util.format('input[name="%s-per_interval_value"]', field))
-        .click(util.format('select[name="%s-interval_period"] option:first-child + option', field))
+        .selectDropdown(util.format('%s-interval_period', field), 'per_week')
       ;
       common.submitAndCheckForFieldError(client, [{
         name: field + '-interval_period',
@@ -120,7 +120,7 @@ module.exports = {
       .conditionalFormSubmit(true)
       .fillInIncome(undefined, undefined, false)
       .clearValue('[name="your_income-child_tax_credit-per_interval_value"]')
-      .click('select[name="your_income-child_tax_credit-interval_period"] option:first-child');
+    ;
     checkField('your_income-child_tax_credit', 'Enter 0 if this doesn’t apply to you');
   },
 
