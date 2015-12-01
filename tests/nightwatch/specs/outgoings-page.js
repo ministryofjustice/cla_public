@@ -125,8 +125,10 @@ module.exports = {
         name: item + '-per_interval_value',
         errorText: 'Please select a time period from the drop down'
       }]);
-      client.clearValue(util.format('input[name=%s-per_interval_value]', item));
-      common.setDropdownValue(client, item + '-interval_period', 'per_month');
+      client
+        .clearValue(util.format('input[name=%s-per_interval_value]', item))
+        .selectDropdown(item + '-interval_period', 'per_month')
+      ;
       common.submitAndCheckForFieldError(client, [{
         name: item + '-per_interval_value',
         errorText: OUTGOINGS_QUESTION_ERRORS[item]

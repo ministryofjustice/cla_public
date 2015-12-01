@@ -54,19 +54,6 @@ module.exports = {
     ;
   },
 
-  // setValue on <select> items seems unreliable in nightwatch
-  setDropdownValue: function(client, fieldName, value, verbose) {
-    client
-      .click(util.format('select[name="%s"]', fieldName))
-      .click(util.format('select[name="%s"] option[value="%s"]', fieldName, value))
-      .setValue(util.format('select[name="%s"]', fieldName), client.Keys.ENTER, function() {
-        if(verbose && !!verbose) {
-          console.log(util.format('Set %s to %s', fieldName, value));
-        }
-      })
-    ;
-  },
-
   humaniseValue: function(value) {
     var yesNo = {
       '1': 'Yes',
