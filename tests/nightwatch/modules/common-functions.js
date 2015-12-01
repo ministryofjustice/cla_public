@@ -34,18 +34,6 @@ module.exports = {
     client.useCss();
   },
 
-  checkTextIsEqual: function(client, field, expectedText, xpath) {
-    if(xpath) { // this may come in handy using CSS selectors later on
-      client.useXpath();
-    }
-    client.getText(field, function(result) {
-      this.assert.equal(result.value, expectedText, util.format('Text of <%s> exactly matches "%s"', field, expectedText));
-    });
-    if(xpath) {
-      client.useCss();
-    }
-  },
-
   checkAttributeIsNotPresent: function(client, selector, attribute) {
     client
       .getAttribute(selector, attribute, function(result) {
