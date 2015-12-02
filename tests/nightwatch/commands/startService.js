@@ -19,6 +19,7 @@ exports.command = function(callback) {
       .click('a#start', function() {
         console.log('     ⟡ Start button clicked');
       })
+      .pause(200)
     ;
   });
 
