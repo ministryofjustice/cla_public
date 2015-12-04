@@ -162,7 +162,7 @@ $map-height: 460px;
 
   @include media(tablet) {
     height: 100%;
-    width: 100% - $results-sidebar-width;
+    width: 99.9% - $results-sidebar-width;
     float: left;
   }
 
