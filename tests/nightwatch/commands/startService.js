@@ -16,11 +16,10 @@ exports.command = function(callback) {
         '  - Page is ready')
       .assert.visible('aside.sidebar',
         '  - Page has sidebar')
-      .assert.containsText('aside.sidebar h2', 'Resources',
-        '  - Sidebar has the right title')
       .click('a#start', function() {
         console.log('     ⟡ Start button clicked');
       })
+      .pause(200)
     ;
   });
 

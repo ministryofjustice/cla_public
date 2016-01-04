@@ -34,35 +34,10 @@ module.exports = {
     client.useCss();
   },
 
-  checkTextIsEqual: function(client, field, expectedText, xpath) {
-    if(xpath) { // this may come in handy using CSS selectors later on
-      client.useXpath();
-    }
-    client.getText(field, function(result) {
-      this.assert.equal(result.value, expectedText, util.format('Text of <%s> exactly matches "%s"', field, expectedText));
-    });
-    if(xpath) {
-      client.useCss();
-    }
-  },
-
   checkAttributeIsNotPresent: function(client, selector, attribute) {
     client
       .getAttribute(selector, attribute, function(result) {
         this.assert.equal(result.value, null, util.format('Checking selector %s does NOT have attribute %s: %s', selector, attribute, (result.value === null)));
-      })
-    ;
-  },
-
-  // setValue on <select> items seems unreliable in nightwatch
-  setDropdownValue: function(client, fieldName, value, verbose) {
-    client
-      .click(util.format('select[name="%s"]', fieldName))
-      .click(util.format('select[name="%s"] option[value="%s"]', fieldName, value))
-      .setValue(util.format('select[name="%s"]', fieldName), client.Keys.ENTER, function() {
-        if(verbose && !!verbose) {
-          console.log(util.format('Set %s to %s', fieldName, value));
-        }
       })
     ;
   },

@@ -58,32 +58,36 @@ module.exports = {
   },
 
   'Test validation': function(client) {
+    function checkForErrors(fields, errorText) {
+      client.useXpath();
+      fields.map(function (field) {
+        client.assert.containsText(util.format('//*[@name="%s"]/ancestor::*[contains(@class, "form-group")]', field), errorText,
+          util.format('    - `%s` has error message: `%s`', field, errorText));
+      });
+      client.useCss();
+    }
+
     client.ensureFormValidation();
 
-    common.submitAndCheckForFieldError(client, [{
-      name: 'other_benefits',
-      errorText: 'Please choose Yes or No'
-    }]);
-    client.click('input[name="other_benefits"][value="1"]');
-    common.submitAndCheckForFieldError(client, [{
-      name: 'other_benefits',
-      errorText: 'Please provide an amount'
-    }]);
-    client.setValue('input[name="total_other_benefit-per_interval_value"]', '100');
-    common.submitAndCheckForFieldError(client, [{
-      name: 'other_benefits',
-      errorText: 'Please select a time period from the drop down'
-    }]);
-    client.clearValue('input[name="total_other_benefit-per_interval_value"]');
-    common.setDropdownValue(client, 'total_other_benefit-interval_period', 'per_week');
-    common.submitAndCheckForFieldError(client, [{
-      name: 'other_benefits',
-      errorText: 'Please provide an amount'
-    }]);
+    checkForErrors(['other_benefits'], 'Please choose Yes or No');
+
     client
-      .setValue('input[name="total_other_benefit-per_interval_value"]', '100')
+      .setYesNoFields('other_benefits', 1)
+      .ensureFormValidation()
+    ;
+
+    checkForErrors(['total_other_benefit-per_interval_value'], 'Please provide an amount');
+
+    client
+      .setValue('input[name="total_other_benefit-per_interval_value"]', 100)
+      .ensureFormValidation()
+    ;
+
+    checkForErrors(['total_other_benefit-interval_period'], 'Please select a time period from the drop down');
+
+    client
+      .selectDropdown('total_other_benefit-interval_period', 'per_week')
       .conditionalFormSubmit(true)
     ;
   }
-
 };

@@ -121,55 +121,59 @@ module.exports = {
   },
 
   'Test validation': function(client) {
-    var questions = [];
-    ['your', 'partner'].forEach(function(person) {
-      EMPLOYMENT_QUESTIONS.EMPLOYED_MANDATORY.forEach(function(item) {
-        questions.push({
-          name: util.format('%s_income-%s-per_interval_value', person, item),
-          errorText: 'Please provide an amount'
+    client.ensureFormValidation();
+
+    function checkForErrors(fields, errorText, includePartner) {
+      var persons = ['your'];
+
+      if(includePartner) {
+        persons.push('partner');
+      }
+
+      client.useXpath();
+
+      persons.map(function(person) {
+        fields.map(function (field) {
+          var fieldName = util.format('%s_income-%s-per_interval_value', person, field);
+          client.assert.containsText(util.format('//*[@name="%s"]/ancestor::*[contains(@class, "form-group")]', fieldName), errorText,
+            util.format('    - `%s` has error message: `%s`', fieldName, errorText));
         });
       });
-    });
 
-    common.submitAndCheckForFieldError(client, questions);
+      client.useCss();
+    }
 
-    ['your', 'partner'].forEach(function(person) {
-      EMPLOYMENT_QUESTIONS.ALL.forEach(function(item) {
-        client.setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '250');
-        common.submitAndCheckForFieldError(client, [{
-          name: util.format('%s_income-%s-per_interval_value', person, item),
-          errorText: 'Please select a time period from the drop down'
-        }]);
-        client
-          .clearValue(util.format('[name=%s_income-%s-per_interval_value]', person, item))
-          .click(util.format('[name=%s_income-%s-interval_period] [value=per_month]', person, item))
-          .keys(['\uE006']) // enter
-        ;
+    function setValues(fields, suffix, value, includePartner) {
+      var persons = ['your'];
 
-        // Fields contain two different versions of error message
-        var errorTexts = [
-          'Please provide an amount',
-          'Enter 0 if this doesn’t apply to you'
-        ];
-        //Fields that contain 'enter 0' error message
-        var enter0 = ['working_tax_credit', 'maintenance', 'pension', 'other_income'];
+      if(includePartner) {
+        persons.push('partner');
+      }
 
-        common.submitAndCheckForFieldError(client, [{
-          name: util.format('%s_income-%s-interval_period', person, item),
-          errorText: ~enter0.indexOf(item) ? errorTexts[1] : errorTexts[0]
-        }], 'select');
+      persons.map(function (person) {
+        fields.map(function (field) {
+          var fieldName = util.format('%s_income-%s-%s', person, field, suffix);
+
+          if(suffix === 'interval_period') {
+            client.selectDropdown(fieldName, value);
+          } else {
+            client.setValue(util.format('[name=%s]', fieldName), value, function () {
+              console.log(util.format('       • %s set to %s', fieldName, value));
+            });
+          }
+        })
       });
-    });
+    }
 
-    ['your', 'partner'].forEach(function(person) {
-      EMPLOYMENT_QUESTIONS.ALL.forEach(function(item) {
-        client
-          .setValue(util.format('[name=%s_income-%s-per_interval_value]', person, item), '50')
-          .click(util.format('[name=%s_income-%s-interval_period] [value=per_month]', person, item))
-          .keys(['\uE006']) // enter
-        ;
-      });
-    });
+    checkForErrors(EMPLOYMENT_QUESTIONS.EMPLOYED_MANDATORY, 'Please provide an amount', true);
+    checkForErrors(['working_tax_credit', 'maintenance', 'pension', 'other_income'], 'Enter 0 if this doesn’t apply to you', true);
+
+    setValues(EMPLOYMENT_QUESTIONS.ALL, 'per_interval_value', 250, true);
+
+    client.ensureFormValidation();
+
+    checkForErrors(EMPLOYMENT_QUESTIONS.ALL, 'Please select a time period from the drop down', true);
+    setValues(EMPLOYMENT_QUESTIONS.ALL, 'interval_period', 'per_month', true);
 
     client
       .conditionalFormSubmit(true)

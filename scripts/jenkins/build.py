@@ -66,6 +66,7 @@ def install_dependencies(venv_path):
     run('{venv}/bin/pip install -r requirements/jenkins.txt'.format(
         venv=venv_path))
     run('npm install')
+    run('npm update')
     run('bower install')
 
 
@@ -202,11 +203,14 @@ def run_tests(venv_path, jenkins_build_path, browser, skip_tests=''):
         ),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=public_port))
-    run('./nightwatch --env {browser} -c tests/nightwatch/jenkins.json -M'.format(browser=browser))
+    run('npm run update-selenium')
 
     # nightwatch fails to clean up these process
     # NB: if two jobs are running on the same jenkins slave then one may break the other
     run('killall phantomjs || echo "No orphan phantomjs processes"')
+    # for pid in $(ps -ef | grep "cla_public-TEST_ALL_AND_DOCKER/workspace/node_modules/phantomjs/lib/phantom/bin/phantomjs" | awk '{print $2}'); do pkill -9 $pid; done
+
+    run('./nightwatch --env {browser} -c tests/nightwatch/jenkins.json -M'.format(browser=browser))
 
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
