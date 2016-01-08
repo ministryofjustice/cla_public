@@ -65,7 +65,7 @@ To set up for running tests
 
     npm run update-selenium
 
-(At the moment Jenkins requires npm package selenium-standalone@4.7.2 which in turn installs 2.47.1-server.jar and 2.18-x64-chromedriver. These versions seem to run the tests successfully with firefox version 35.0, which must be installed on the Jenkins server)
+(At the moment Jenkins requires npm package selenium-standalone@~4.4 which in turn installs 2.45.0-server.jar and 2.15-x64-chromedriver. These versions seem to run the tests successfully with firefox version 34.0, which must be installed on the Jenkins server)
 
 To run the NIghtwatch automated tests in PhantomJS use:
 

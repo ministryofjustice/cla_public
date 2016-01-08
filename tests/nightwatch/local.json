@@ -6,7 +6,7 @@
 
   "selenium" : {
     "start_process" : true,
-    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/2.47.1-server.jar"
+    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/2.45.0-server.jar"
   },
 
   "test_settings" : {

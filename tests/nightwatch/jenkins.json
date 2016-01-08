@@ -7,9 +7,9 @@
   "selenium" : {
     "start_process" : true,
     "log_path": "tests/reports",
-    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/2.47.1-server.jar",
+    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/2.45.0-server.jar",
     "cli_args": {
-      "webdriver.chrome.driver": "node_modules/selenium-standalone/.selenium/chromedriver/2.18-x64-chromedriver"
+      "webdriver.chrome.driver": "node_modules/selenium-standalone/.selenium/chromedriver/2.15-x64-chromedriver"
     }
   },
 
