@@ -60,7 +60,7 @@ class FieldValueIn(FieldValue):
 
 class FieldValueNotIn(FieldValue):
     def __call__(self, field, **kwargs):
-        return self.value not in field.data
+        return field.data is None or self.value not in field.data
 
 
 class AtLeastOne(object):
