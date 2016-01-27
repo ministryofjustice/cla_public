@@ -37,7 +37,11 @@
     </p>
 
     <div class="search-results-container">
-      <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
+      {% if data.origin %}
+        <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
+      {% else %}
+        <div id="resultsMap" class="map"></div>
+      {% endif %}
       <div class="search-results">
         <div class="search-results-list" data-current-page="{{ data.current_page }}">
           <ul class="org-list">
@@ -50,7 +54,9 @@
                   </h3>
                   <div class="distance">
                     <span class="sr-only">{{ _('Distance') }}</span>
-                    {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
+                    {% if data.origin %}
+                      {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
+                    {% endif %}
                   </div>
                 </header>
                 <div class="org-details">
