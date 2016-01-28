@@ -70,11 +70,11 @@ module.exports = {
       .click('input[name="callback-time-specific_day"][value="specific_day"]')
       .click('#callback-time-day option:first-child')
       .click('body')
-      .click('#callback-time-time_in_day option:first-child')
+      .click('#callback-time-time_in_day option:last-child')
       .click('body')
       .getValue('#callback-time-day option:first-child', function(result) {
         var selectedDate = result.value;
-        client.getValue('#callback-time-time_in_day option:first-child', function(result) {
+        client.getValue('#callback-time-time_in_day option:last-child', function(result) {
           var then = moment([selectedDate.substr(0, 4), parseInt(selectedDate.substr(4, 2))-1, selectedDate.substr(6, 2)]);
           checkCallbackTime(client, then, result.value);
         });

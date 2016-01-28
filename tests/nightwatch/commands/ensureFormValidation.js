@@ -16,6 +16,7 @@ exports.command = function(errorText, callback) {
       })
       .waitForElementPresent('.alert-error', 5000,
         '    - Form has errors summary')
+      .pause(50)
       .assert.containsText('.alert-error', errorText,
         '    - Error summary contains text')
       .execute(function(formErrorFields, errorSummaryItems, browserName) {

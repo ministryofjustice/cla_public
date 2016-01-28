@@ -7,23 +7,15 @@ exports.command = function(fields, value, callback) {
   var client = this;
 
   this.perform(function() {
-    var attemptedOnce = false;
+    client.disableTransitions();
 
     function clickOption(field, value) {
       var el = util.format('input[name="%s"][value="%s"]', field, value);
-      client.isVisible(el, function(result) {
-        if(result.value === true) {
-          client.click(el, function() {
-            console.log('     • Setting ‘' + field + '’' + ' to ‘' + common.humaniseValue(value) + '’');
-          });
-        // Take into account transitions if element happens to be invisible straight away
-        } else if(!attemptedOnce) {
-          client.pause(200, function() {
-            clickOption(field, value);
-            attemptedOnce = true;
-          });
-        }
-      });
+      client
+        .click(el, function() {
+          console.log('     • Setting ‘' + field + '’' + ' to ‘' + common.humaniseValue(value) + '’');
+        })
+      ;
     }
 
     if(fields.constructor === Array) {

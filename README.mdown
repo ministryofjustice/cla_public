@@ -4,6 +4,17 @@
 Installation
 ------------
 
+Clone the repository:
+
+    git clone git@github.com:ministryofjustice/cla_public.git
+
+Next, create the environment and start it up:
+
+    cd cla_public
+    virtualenv env --prompt=\(cla_public\)
+
+    source env/bin/activate
+
     pip install -r requirements/local.txt
 
     npm install && bower install && gulp
@@ -49,6 +60,12 @@ Test
 To run Python unit tests, use the following:
 
     ./manage.py test
+
+To set up for running tests
+
+    npm run update-selenium
+
+(At the moment Jenkins requires npm package selenium-standalone@~4.4 which in turn installs 2.45.0-server.jar and 2.15-x64-chromedriver. These versions seem to run the tests successfully with firefox version 34.0, which must be installed on the Jenkins server)
 
 To run the NIghtwatch automated tests in PhantomJS use:
 
