@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "Contact views"
 from smtplib import SMTPAuthenticationError
+import itertools
 
 from flask import abort, redirect, render_template, session, url_for, views, \
     current_app
@@ -78,10 +79,19 @@ class Contact(
             if self.form.email.data and current_app.config['MAIL_SERVER']:
                 current_app.mail.send(create_confirmation_email(self.form.data))
             return redirect(url_for('.confirmation'))
-        except ApiError:
-            self.form.errors['timeout'] = _(
+        except ApiError as e:
+            errors = getattr(e, 'errors', {})
+            error_list = list(itertools.chain(*errors.values()))
+
+            error_text = _(
                 u'There was an error submitting your data. '
                 u'Please check and try again.')
+
+            if error_list:
+                error_text += ' - ' + ', '.join(error_list)
+
+            self.form.errors['timeout'] = error_text
+
             return self.get()
         except SMTPAuthenticationError:
             self.form._fields['email'].errors.append(_(

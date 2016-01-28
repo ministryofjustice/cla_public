@@ -6,6 +6,7 @@ from flask import current_app, session
 from requests.exceptions import ConnectionError, Timeout
 import slumber
 from slumber.exceptions import SlumberBaseException
+import json
 
 from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.constants import CATEGORIES
@@ -17,7 +18,10 @@ log = logging.getLogger(__name__)
 
 
 class ApiError(Exception):
-    pass
+    def __init__(self, *args, **kwargs):
+        for key, value in kwargs.iteritems():
+            setattr(self, key, value)
+        super(ApiError, self).__init__(*args)
 
 
 def get_api_connection():
@@ -101,6 +105,11 @@ def initialise_eligibility_check(check):
     return check
 
 
+API_MESSAGE_WARNINGS = [
+    'Case with this Eligibility check already exists.'
+]
+
+
 def log_api_errors_to_sentry(fn):
 
     def wrapped(*args, **kwargs):
@@ -108,12 +117,30 @@ def log_api_errors_to_sentry(fn):
         try:
             return fn(*args, **kwargs)
         except (ConnectionError, Timeout, SlumberBaseException) as e:
+            response = getattr(e, 'response', None)
+            content = getattr(e, 'content', '')
+
+            try:
+                errors = json.loads(content)
+            except ValueError:
+                errors = {}
+
             if sentry:
-                sentry.captureException()
+                if errors.get('eligibility_check', None) == API_MESSAGE_WARNINGS:
+                    sentry.captureMessage(
+                        message='%s (%s)' % (e, API_MESSAGE_WARNINGS[0]),
+                        data=errors,
+                        level=logging.WARN
+                    )
+                else:
+                    sentry.captureException(data=errors)
             else:
                 log.warning(
-                    'Failed posting to API: {0}'.format(e))
-            raise ApiError(e)
+                    'Failed posting to API: {0}, Response: {1}'.format(
+                        e,
+                        content))
+
+            raise ApiError(e, response=response, errors=errors)
 
     return wrapped
 
