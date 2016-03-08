@@ -210,8 +210,8 @@ def get_organisation_list(**kwargs):
         api_response = backend.organisation.get(**kwargs)
         organisation_list = api_response['results']
 
-        one_year = 365 * 24 * 60 * 60
-        current_app.cache.set(key, organisation_list, timeout=one_year)
+        one_day = 24 * 60 * 60
+        current_app.cache.set(key, organisation_list, timeout=one_day)
 
     return organisation_list
 
