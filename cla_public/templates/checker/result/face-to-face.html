@@ -19,7 +19,7 @@
 
   {% block inner_content %}
 
-    {% if session.stored.category == 'clinneg' %}
+    {% if category == 'clinneg' %}
       <h1>{{ _('A legal adviser may be able to help you') }}</h1>
 
       <p>
@@ -33,7 +33,7 @@
             who may be able to help.{% endtrans %}
       </p>
 
-    {% elif session.stored.category == 'pi' %}
+    {% elif category == 'pi' %}
       <h1>{{ _('Legal aid is not usually available for advice about personal injury') }}</h1>
 
       <p>
@@ -42,7 +42,7 @@
           might succeed in your case and how to apply.{% endtrans %}
       </p>
 
-    {% elif session.stored.category == 'debt' or session.stored.category == 'housing' %}
+    {% elif category == 'debt' or category == 'housing' %}
       <h1>{{ _('A legal adviser may be able to help you') }}</h1>
 
     {% else %}
@@ -55,7 +55,7 @@
       {% trans %}In some cases you may need to pay a contribution towards your legal aid.{% endtrans %}
     </p>
 
-    {% if session.stored.category == 'mentalhealth' %}
+    {% if category == 'mentalhealth' %}
       <p>
         {% trans %}If you’re applying for legal aid for a mental health issue,
           the requirements for the financial assessment are less rigorous than
