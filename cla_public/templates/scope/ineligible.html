@@ -38,19 +38,16 @@
     <p>
       {% trans %}You can still ask a solicitor for help – you will have to pay for their advice.{% endtrans %}
     </p>
-    <p>
-      {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'button'}) }}
-    </p>
   {% elif category == 'other' %}
     <p>{{ _('From what you’ve told us today, it looks as though your problem is not covered.') }}</p>
     <p>{{ _('You can still ask a solicitor for help - you will have to pay for their advice.') }}</p>
   {% endif %}
 
-  {% if category == 'other' %}
-    <p>
-      {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a legal adviser'), **{'class': 'button'}) }}
-    </p>
-  {% else %}
+  <p>
+    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a legal adviser'), **{'class': 'button'}) }}
+  </p>
+
+  {% if category != 'other' %}
     <p>
       {% trans %}You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid.{% endtrans %}
     </p>
