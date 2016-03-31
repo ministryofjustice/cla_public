@@ -34,11 +34,11 @@
 {% block inner_content %}
   <h1>{{ title }}</h1>
 
-  {% if category == 'immigration' %}
+  {% if category != 'other' %}
     <p>
       {% trans %}You can still ask a solicitor for help – you will have to pay for their advice.{% endtrans %}
     </p>
-  {% elif category == 'other' %}
+  {% else %}
     <p>{{ _('From what you’ve told us today, it looks as though your problem is not covered.') }}</p>
     <p>{{ _('You can still ask a solicitor for help - you will have to pay for their advice.') }}</p>
   {% endif %}
