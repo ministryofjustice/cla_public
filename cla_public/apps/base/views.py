@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 "Base app views"
 
+import os
 import logging
 import datetime
 import re
@@ -234,3 +235,13 @@ def smoke_tests():
     from cla_public.apps.checker.tests.smoketests import SmokeTests
 
     return jsonify(smoketest(SmokeTests))
+
+
+@base.route('/ping.json')
+def ping():
+    return jsonify({
+        'version_number': os.environ.get('APPVERSION'),
+        'build_date': os.environ.get('APP_BUILD_DATE'),
+        'commit_id': os.environ.get('APP_GIT_COMMIT'),
+        'build_tag': os.environ.get('APP_BUILD_TAG')
+    })
