@@ -11,17 +11,13 @@ TESTING = False
 
 CLEAR_SESSION = True
 
-# Irat healthcheck package settings
-
 HEALTHCHECKS = [
     'moj_irat.healthchecks.database_healthcheck',
-    # override default list of healthcheck callables
 ]
 
-AUTODISCOVER_HEALTHCHECKS = True  # whether to autodiscover and load healthcheck.py from all installed apps
+AUTODISCOVER_HEALTHCHECKS = True
 
-# For healthcheck.json requests
-BACKEND_BASE_URI = os.environ.get('BACKEND_BASE_URI', 'http://127.0.0.1:8000')
+BACKEND_BASE_URI = os.environ.get('BACKEND_BASE_URI', 'http://127.0.0.1:8000')  # For healthcheck.json requests
 
 # Disable eligibility check and allow users to request a callback only
 CONTACT_ONLY = os.environ.get('CALLMEBACK_ONLY', False) == 'True'
