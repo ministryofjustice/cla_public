@@ -6,6 +6,7 @@ import logging
 import datetime
 import re
 from urlparse import urlparse, urljoin
+import requests
 
 from flask import abort, current_app, jsonify, redirect, render_template, \
     session, url_for, request, views
@@ -18,6 +19,10 @@ import cla_public.apps.base.extensions
 from cla_public.apps.checker.api import post_reasons_for_contacting
 from cla_public.libs import zendesk
 from cla_public.libs.views import HasFormMixin, ValidFormOnOptions
+
+from moj_irat.views import HealthcheckView
+
+from django.conf import settings
 
 
 log = logging.getLogger(__name__)
@@ -245,3 +250,10 @@ def ping():
         'commit_id': os.environ.get('APP_GIT_COMMIT'),
         'build_tag': os.environ.get('APP_BUILD_TAG')
     })
+
+
+@base.route('/healthcheck.json')
+def healthcheck():
+    backend_healthcheck_uri = '%s/%s' % (current_app.config['BACKEND_BASE_URI'], 'status/healthcheck.json')
+    response = requests.get(backend_healthcheck_uri)
+    return jsonify(response.json())
