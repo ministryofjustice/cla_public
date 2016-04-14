@@ -20,10 +20,6 @@ from cla_public.apps.checker.api import post_reasons_for_contacting
 from cla_public.libs import zendesk
 from cla_public.libs.views import HasFormMixin, ValidFormOnOptions
 
-from moj_irat.views import HealthcheckView
-
-from django.conf import settings
-
 
 log = logging.getLogger(__name__)
 
@@ -255,5 +251,20 @@ def ping():
 @base.route('/healthcheck.json')
 def healthcheck():
     backend_healthcheck_uri = '%s/%s' % (current_app.config['BACKEND_BASE_URI'], 'status/healthcheck.json')
-    response = requests.get(backend_healthcheck_uri)
-    return jsonify(response.json())
+    backend_healthcheck_response = requests.get(backend_healthcheck_uri)
+    backend_healthcheck_json = backend_healthcheck_response.json()
+
+    response = {
+
+        'Backend API test': {
+
+            'status': True if backend_healthcheck_response.ok else backend_healthcheck_response.error,
+            'url': backend_healthcheck_uri,
+            'response': backend_healthcheck_json
+
+        }
+
+    }
+
+    print(type(backend_healthcheck_json))
+    return jsonify(response)

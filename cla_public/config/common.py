@@ -11,12 +11,6 @@ TESTING = False
 
 CLEAR_SESSION = True
 
-HEALTHCHECKS = [
-    'moj_irat.healthchecks.database_healthcheck',
-]
-
-AUTODISCOVER_HEALTHCHECKS = True
-
 BACKEND_BASE_URI = os.environ.get('BACKEND_BASE_URI', 'http://127.0.0.1:8000')  # For healthcheck.json requests
 
 # Disable eligibility check and allow users to request a callback only

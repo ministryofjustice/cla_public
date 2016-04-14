@@ -10,7 +10,7 @@ MAINTAINER Peter Idah <peter.idah@digital.justice.gov.uk>
 
 # Set correct environment variables.
 ENV HOME /root
-ENV BACKEND_BASE_URI http://ip-172-31-27-7.eu-west-1.compute.internal
+
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
 

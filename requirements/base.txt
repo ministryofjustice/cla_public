@@ -37,5 +37,3 @@ git+git://github.com/ministryofjustice/slumber.git@da38360d6d158ee7ed445b43228fe
 # Fork of WTForms with welsh translations - PR added
 git+git://github.com/s-block/wtforms.git@47f9f6d789cdb3eef3bf659e047f1bbd1f42af24
 
-#Irat healthcheck and ping package
-git+https://github.com/ministryofjustice/django-moj-irat.git
