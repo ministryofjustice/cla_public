@@ -10,7 +10,6 @@ MAINTAINER Peter Idah <peter.idah@digital.justice.gov.uk>
 
 # Set correct environment variables.
 ENV HOME /root
-
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
 
