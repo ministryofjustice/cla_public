@@ -12,7 +12,8 @@ from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm, ConfirmationForm
 from cla_public.apps.checker.api import post_to_case_api, \
-    post_to_eligibility_check_api, update_reasons_for_contacting, ApiError
+    post_to_eligibility_check_api, update_reasons_for_contacting, ApiError, \
+    AlreadySavedApiError, get_case_ref_from_api
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, \
     ValidFormOnOptions, HasFormMixin
@@ -65,6 +66,19 @@ class Contact(
             del session[ReasonsForContacting.GA_SESSION_KEY]
         return super(Contact, self).get(*args, **kwargs)
 
+    def already_saved(self):
+        try:
+            get_case_ref_from_api()
+            session.store_checker_details()
+            return redirect(url_for('.confirmation'))
+        except ApiError:
+            error_text = _(
+                u'There was an error submitting your data. '
+                u'Please check and try again.')
+
+            self.form.errors['timeout'] = error_text
+            return self.get()
+
     def on_valid_submit(self):
         if self.form.extra_notes.data:
             session.checker.add_note(u'User problem', self.form.extra_notes.data)
@@ -79,6 +93,8 @@ class Contact(
             if self.form.email.data and current_app.config['MAIL_SERVER']:
                 current_app.mail.send(create_confirmation_email(self.form.data))
             return redirect(url_for('.confirmation'))
+        except AlreadySavedApiError:
+            return self.already_saved()
         except ApiError as e:
             errors = getattr(e, 'errors', {})
             error_list = list(itertools.chain(*errors.values()))
