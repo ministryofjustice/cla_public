@@ -29,10 +29,8 @@ urllib3==1.10.4
 pyopenssl==0.15.1
 ndg-httpsclient==0.4.0
 pyasn1==0.1.7
+wtforms==2.1
 
 # fork of https://github.com/samgiles/slumber
 # with custom parameters for timeouts and additional headers on requests
 git+git://github.com/ministryofjustice/slumber.git@da38360d6d158ee7ed445b43228fefc6f7e430e6#egg=slumber==0.6.3moj
-
-# Fork of WTForms with welsh translations - PR added
-git+git://github.com/s-block/wtforms.git@47f9f6d789cdb3eef3bf659e047f1bbd1f42af24
