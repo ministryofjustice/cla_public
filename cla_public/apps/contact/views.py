@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 "Contact views"
 from smtplib import SMTPAuthenticationError
-import itertools
+from collections import Mapping
 
 from flask import abort, redirect, render_template, session, url_for, views, \
     current_app
@@ -97,7 +97,16 @@ class Contact(
             return self.already_saved()
         except ApiError as e:
             errors = getattr(e, 'errors', {})
-            error_list = list(itertools.chain(*errors.values()))
+            error_list = []
+
+            def add_errors(el):
+                for error in el:
+                    if isinstance(error, basestring):
+                        error_list.append(error)
+                    elif isinstance(error, Mapping):
+                        add_errors(error.values())
+
+            add_errors(errors.values())
 
             error_text = _(
                 u'There was an error submitting your data. '
