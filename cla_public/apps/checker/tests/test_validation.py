@@ -4,8 +4,11 @@ from mock import Mock
 
 import flask
 from werkzeug.datastructures import MultiDict
+from wtforms import ValidationError, Form
+from wtforms.fields.html5 import EmailField
 
 from cla_public.apps.checker.forms import AboutYouForm
+from cla_public.apps.contact.validators import EmailValidator
 from cla_public.libs.utils import override_locale
 
 
@@ -38,3 +41,31 @@ class TestValidation(unittest.TestCase):
             u'Number must be between 1 and 50',
             form.num_children.errors,
             '{0} is not too many kids'.format(num))
+
+    def test_email_validator(self):
+        form = Form()
+        field = EmailField()
+        message = u'Email incorrect.'
+        validator = EmailValidator(message=message)
+
+        field.data = 'emailwithspace @example.com'
+        self.assertRaises(ValidationError, validator, form, field)
+
+        field.data = ' emailwithspace@example.com'
+        self.assertRaises(ValidationError, validator, form, field)
+
+        field.data = 'email withspace@example.com'
+        self.assertRaises(ValidationError, validator, form, field)
+
+        field.data = 'emailwithspace@ example.com'
+        self.assertRaises(ValidationError, validator, form, field)
+
+        field.data = 'emailwithspace@example.com '
+        self.assertRaises(ValidationError, validator, form, field)
+
+        field.data = 'emailwithspace@example.com'
+        try:
+            validator(form, field)
+        except ValidationError:
+            self.fail(u'%s should not raise email validation error' %
+                      field.data)
