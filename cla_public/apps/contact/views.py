@@ -70,7 +70,7 @@ class Contact(
         try:
             get_case_ref_from_api()
             session.store_checker_details()
-            return redirect(url_for('.confirmation'))
+            return redirect(url_for('contact.confirmation'))
         except ApiError:
             error_text = _(
                 u'There was an error submitting your data. '
@@ -92,7 +92,7 @@ class Contact(
             session.store_checker_details()
             if self.form.email.data and current_app.config['MAIL_SERVER']:
                 current_app.mail.send(create_confirmation_email(self.form.data))
-            return redirect(url_for('.confirmation'))
+            return redirect(url_for('contact.confirmation'))
         except AlreadySavedApiError:
             return self.already_saved()
         except ApiError as e:
@@ -166,7 +166,7 @@ class ContactConfirmation(HasFormMixin, ValidFormOnOptions, views.MethodView):
                     u'There was an error submitting your email. '
                     u'Please check and try again or try without it.'))
                 return self.get()
-        return redirect(url_for('.confirmation'))
+        return redirect(url_for('contact.confirmation'))
 
 contact.add_url_rule(
     '/result/confirmation',
