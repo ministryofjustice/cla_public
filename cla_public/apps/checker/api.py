@@ -129,11 +129,11 @@ def log_api_errors_to_sentry(fn):
             except ValueError:
                 errors = {}
 
+            if errors.get('eligibility_check', None) == API_MESSAGE_WARNINGS:
+                raise AlreadySavedApiError(API_MESSAGE_WARNINGS[0])
+
             if sentry:
-                if errors.get('eligibility_check', None) == API_MESSAGE_WARNINGS:
-                    raise AlreadySavedApiError(API_MESSAGE_WARNINGS[0])
-                else:
-                    sentry.captureException(data=errors)
+                sentry.captureException(data=errors)
             else:
                 log.warning(
                     'Failed posting to API: {0}, Response: {1}'.format(
