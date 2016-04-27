@@ -48,7 +48,7 @@
 {% macro render_choices(field) %}
   {% if field.data is string %}
     <strong>{{ field|selected_option }}</strong>
-  {% else %}
+  {% elif field.data %}
     <ul class="multiple-answers">
       {% for item in field.data %}
         <li>

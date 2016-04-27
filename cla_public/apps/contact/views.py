@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 "Contact views"
 from smtplib import SMTPAuthenticationError
-import itertools
+from collections import Mapping
 
 from flask import abort, redirect, render_template, session, url_for, views, \
     current_app
@@ -12,7 +12,8 @@ from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm, ConfirmationForm
 from cla_public.apps.checker.api import post_to_case_api, \
-    post_to_eligibility_check_api, update_reasons_for_contacting, ApiError
+    post_to_eligibility_check_api, update_reasons_for_contacting, ApiError, \
+    AlreadySavedApiError, get_case_ref_from_api
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, \
     ValidFormOnOptions, HasFormMixin
@@ -65,6 +66,19 @@ class Contact(
             del session[ReasonsForContacting.GA_SESSION_KEY]
         return super(Contact, self).get(*args, **kwargs)
 
+    def already_saved(self):
+        try:
+            get_case_ref_from_api()
+            session.store_checker_details()
+            return redirect(url_for('contact.confirmation'))
+        except ApiError:
+            error_text = _(
+                u'There was an error submitting your data. '
+                u'Please check and try again.')
+
+            self.form.errors['timeout'] = error_text
+            return self.get()
+
     def on_valid_submit(self):
         if self.form.extra_notes.data:
             session.checker.add_note(u'User problem', self.form.extra_notes.data)
@@ -78,10 +92,21 @@ class Contact(
             session.store_checker_details()
             if self.form.email.data and current_app.config['MAIL_SERVER']:
                 current_app.mail.send(create_confirmation_email(self.form.data))
-            return redirect(url_for('.confirmation'))
+            return redirect(url_for('contact.confirmation'))
+        except AlreadySavedApiError:
+            return self.already_saved()
         except ApiError as e:
             errors = getattr(e, 'errors', {})
-            error_list = list(itertools.chain(*errors.values()))
+            error_list = []
+
+            def add_errors(el):
+                for error in el:
+                    if isinstance(error, basestring):
+                        error_list.append(error)
+                    elif isinstance(error, Mapping):
+                        add_errors(error.values())
+
+            add_errors(errors.values())
 
             error_text = _(
                 u'There was an error submitting your data. '
@@ -141,7 +166,7 @@ class ContactConfirmation(HasFormMixin, ValidFormOnOptions, views.MethodView):
                     u'There was an error submitting your email. '
                     u'Please check and try again or try without it.'))
                 return self.get()
-        return redirect(url_for('.confirmation'))
+        return redirect(url_for('contact.confirmation'))
 
 contact.add_url_rule(
     '/result/confirmation',
