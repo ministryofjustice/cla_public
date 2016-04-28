@@ -9,7 +9,7 @@ from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, RadioField, SelectField, \
     StringField, TextAreaField
 from wtforms.validators import InputRequired, Optional, Required, \
-    Length, Email
+    Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
 from cla_public.apps.contact.fields import AvailabilityCheckerField, \
@@ -19,6 +19,7 @@ from cla_public.apps.checker.constants import CONTACT_SAFETY, \
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, \
     FieldValue
+from cla_public.apps.contact.validators import EmailValidator
 from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
 
@@ -186,7 +187,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             Length(max=255, message=_(
                 u'Your address must be 255 characters '
                 u'or less')),
-            Email(message=_(u'Invalid email address')),
+            EmailValidator(message=_(u'Invalid email address')),
             Optional()]
     )
     address = ValidatedFormField(
@@ -260,6 +261,6 @@ class ConfirmationForm(Honeypot, BabelTranslationsFormMixin, Form):
             Length(max=255, message=_(
                 u'Your address must be 255 characters '
                 u'or less')),
-            Email(message=_(u'Invalid email address')),
+            EmailValidator(message=_(u'Invalid email address')),
             InputRequired()]
     )

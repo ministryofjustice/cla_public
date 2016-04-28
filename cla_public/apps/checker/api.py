@@ -24,6 +24,10 @@ class ApiError(Exception):
         super(ApiError, self).__init__(*args)
 
 
+class AlreadySavedApiError(Exception):
+    pass
+
+
 def get_api_connection():
     return slumber.API(
         current_app.config['BACKEND_API']['url'],
@@ -125,15 +129,11 @@ def log_api_errors_to_sentry(fn):
             except ValueError:
                 errors = {}
 
+            if errors.get('eligibility_check', None) == API_MESSAGE_WARNINGS:
+                raise AlreadySavedApiError(API_MESSAGE_WARNINGS[0])
+
             if sentry:
-                if errors.get('eligibility_check', None) == API_MESSAGE_WARNINGS:
-                    sentry.captureMessage(
-                        message='%s (%s)' % (e, API_MESSAGE_WARNINGS[0]),
-                        data=errors,
-                        level=logging.WARN
-                    )
-                else:
-                    sentry.captureException(data=errors)
+                sentry.captureException(data=errors)
             else:
                 log.warning(
                     'Failed posting to API: {0}, Response: {1}'.format(
@@ -153,6 +153,15 @@ def ignore_api_error(fun):
             return None
 
     return inner
+
+
+@log_api_errors_to_sentry
+def get_case_ref_from_api(form=None, payload={}):
+    backend = get_api_connection()
+    reference = session.checker.get('eligibility_check')
+
+    response = backend.eligibility_check(reference).case_ref.get()
+    session.checker['case_ref'] = response['reference']
 
 
 @log_api_errors_to_sentry

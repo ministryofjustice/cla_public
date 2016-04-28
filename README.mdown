@@ -19,7 +19,9 @@ Next, create the environment and start it up:
 
     npm install && bower install && gulp
 
-Then, copy ``cla_public/config/local.py.example`` and name it ``cla_public/config/local.py``.
+Create a ``local.py`` settings file from the example file:
+
+    ``cp cla_public/config/local.py.example cla_public/config/local.py``
 
 Next, you can run the management command like this:
 

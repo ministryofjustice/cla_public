@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 "Base app views"
 
+import os
 import logging
 import datetime
 import re
 from urlparse import urlparse, urljoin
+import requests
 
 from flask import abort, current_app, jsonify, redirect, render_template, \
     session, url_for, request, views
@@ -234,3 +236,35 @@ def smoke_tests():
     from cla_public.apps.checker.tests.smoketests import SmokeTests
 
     return jsonify(smoketest(SmokeTests))
+
+
+@base.route('/ping.json')
+def ping():
+    return jsonify({
+        'version_number': os.environ.get('APPVERSION'),
+        'build_date': os.environ.get('APP_BUILD_DATE'),
+        'commit_id': os.environ.get('APP_GIT_COMMIT'),
+        'build_tag': os.environ.get('APP_BUILD_TAG')
+    })
+
+
+@base.route('/healthcheck.json')
+def healthcheck():
+    backend_healthcheck_uri = '%s/%s' % (current_app.config['BACKEND_BASE_URI'], 'status/healthcheck.json')
+    backend_healthcheck_response = requests.get(backend_healthcheck_uri)
+    backend_healthcheck_json = backend_healthcheck_response.json()
+
+    response = {
+
+        'Backend API test': {
+
+            'status': True if backend_healthcheck_response.ok else backend_healthcheck_response.error,
+            'url': backend_healthcheck_uri,
+            'response': backend_healthcheck_json
+
+        }
+
+    }
+
+    print(type(backend_healthcheck_json))
+    return jsonify(response)
