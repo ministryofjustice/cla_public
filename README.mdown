@@ -21,7 +21,7 @@ Next, create the environment and start it up:
 
 Create a ``local.py`` settings file from the example file:
 
-    ``cp cla_public/config/local.py.example cla_public/config/local.py``
+    cp cla_public/config/local.py.example cla_public/config/local.py
 
 Next, you can run the management command like this:
 
