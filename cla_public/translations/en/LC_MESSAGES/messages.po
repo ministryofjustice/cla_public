@@ -3378,25 +3378,3 @@ msgstr ""
 #: cla_public/templates/scope/mediation.html:15
 msgid "Find your local mediator"
 msgstr ""
-
-#~ msgid ""
-#~ msgstr ""
-
-#~ msgid "You can select more than one option:"
-#~ msgstr ""
-
-#~ msgid "BETA"
-#~ msgstr ""
-
-#~ msgid "Sorry, something went wrong"
-#~ msgstr ""
-
-#~ msgid "Please try submitting the form again."
-#~ msgstr ""
-
-#~ msgid "Legal aid doesn’t usually cover your type of problem"
-#~ msgstr ""
-
-#~ msgid "You can ask a legal adviser if an application might succeed in your case and how to apply."
-#~ msgstr ""
-
