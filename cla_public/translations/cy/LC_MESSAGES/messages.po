@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-11 17:25+0100\n"
+"POT-Creation-Date: 2016-05-13 15:24+0100\n"
 "PO-Revision-Date: 2015-09-21 11:06+0000\n"
 "Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/ministry-of-justice/cla-public/language/cy/)\n"
@@ -280,7 +280,7 @@ msgstr "Credyd Cynhwysol"
 msgid "Any other benefits"
 msgstr "Unrhyw fudd-daliadau eraill"
 
-#: cla_public/apps/checker/constants.py:105 cla_public/apps/contact/forms.py:34
+#: cla_public/apps/checker/constants.py:105 cla_public/apps/contact/forms.py:35
 msgid "-- Please select --"
 msgstr "-- Dewiswch --"
 
@@ -412,7 +412,7 @@ msgstr "Na"
 
 #: cla_public/apps/checker/fields.py:128 cla_public/apps/checker/forms.py:66
 #: cla_public/apps/checker/forms.py:127 cla_public/apps/checker/forms.py:144
-#: cla_public/apps/contact/forms.py:83 cla_public/apps/contact/forms.py:122
+#: cla_public/apps/contact/forms.py:84 cla_public/apps/contact/forms.py:123
 msgid "Please choose Yes or No"
 msgstr "Dewisiwch Ydw neu Nac ydw"
 
@@ -942,7 +942,8 @@ msgstr "Rhowch swm"
 msgid "Please select a time period from the drop down"
 msgstr "Dewiswch gyfnod o’r gwymplen"
 
-#: cla_public/apps/checker/views.py:51 cla_public/apps/contact/views.py:86
+#: cla_public/apps/checker/views.py:51 cla_public/apps/contact/views.py:75
+#: cla_public/apps/contact/views.py:111
 msgid "There was an error submitting your data. Please check and try again."
 msgstr "Roedd gwall wrth gyflwyno eich data. Gwiriwch a cheisiwch eto."
 
@@ -982,141 +983,141 @@ msgstr "Methu trefnu i'ch ffonio'n ôl ar yr amser a nodwyd yn eich cais"
 msgid "Arrange a callback time"
 msgstr "Trefnu amser i ffonio'n ôl"
 
-#: cla_public/apps/contact/forms.py:28
+#: cla_public/apps/contact/forms.py:29
 msgid "-- Choose a language --"
 msgstr "Dewiswch iaith"
 
-#: cla_public/apps/contact/forms.py:42
+#: cla_public/apps/contact/forms.py:43
 msgid "British Sign Language – Webcam"
 msgstr "Iaith Arwyddion Prydain – Gwe-gamera"
 
-#: cla_public/apps/contact/forms.py:43
+#: cla_public/apps/contact/forms.py:44
 msgid "Minicom – for textphone users"
 msgstr "Minicom - ar gyfer defnyddwyr ffôn testun"
 
-#: cla_public/apps/contact/forms.py:44
+#: cla_public/apps/contact/forms.py:45
 msgid "Text Relay – for people with hearing or speech impairments"
 msgstr "Trosglwyddo Neges Destun - ar gyfer pobl sydd â nam ar y clyw neu ar y lleferydd"
 
-#: cla_public/apps/contact/forms.py:45
+#: cla_public/apps/contact/forms.py:46
 msgid "Welsh"
 msgstr "Cymraeg"
 
-#: cla_public/apps/contact/forms.py:46
+#: cla_public/apps/contact/forms.py:47
 msgid "Other language"
 msgstr "Iaith arall"
 
-#: cla_public/apps/contact/forms.py:48
+#: cla_public/apps/contact/forms.py:49
 msgid "Language required:"
 msgstr "Iaith sydd ei hangen:"
 
-#: cla_public/apps/contact/forms.py:50
+#: cla_public/apps/contact/forms.py:51
 msgid "Any other communication needs"
 msgstr "Unrhyw anghenion cyfathrebu eraill"
 
-#: cla_public/apps/contact/forms.py:52
+#: cla_public/apps/contact/forms.py:53
 msgid "Other communication needs"
 msgstr "Anghenion cyfathrebu eraill"
 
-#: cla_public/apps/contact/forms.py:53
+#: cla_public/apps/contact/forms.py:54
 msgid "Please tell us what you need in the box below"
 msgstr "Dywedwch wrthym beth sydd arnoch ei angen yn y blwch isod"
 
-#: cla_public/apps/contact/forms.py:68 cla_public/apps/contact/forms.py:107
+#: cla_public/apps/contact/forms.py:69 cla_public/apps/contact/forms.py:108
 msgid "Phone number for the callback"
 msgstr "Rhif ffôn ar gyfer eich ffonio'n ôl"
 
-#: cla_public/apps/contact/forms.py:69 cla_public/apps/contact/forms.py:108
+#: cla_public/apps/contact/forms.py:70 cla_public/apps/contact/forms.py:109
 msgid "Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
 msgstr "Rhowch eich rhif ffôn yn llawn, yn cynnwys cod yr ardal, gan ddefnyddio rhifau yn unig. Er enghraifft 020 7946 0492"
 
-#: cla_public/apps/contact/forms.py:75 cla_public/apps/contact/forms.py:114
+#: cla_public/apps/contact/forms.py:76 cla_public/apps/contact/forms.py:115
 msgid "Your telephone number must be 20 characters or less"
 msgstr "Rhaid i'ch rhif ffôn fod yn 20 llythyren neu lai"
 
-#: cla_public/apps/contact/forms.py:79 cla_public/apps/contact/forms.py:118
+#: cla_public/apps/contact/forms.py:80 cla_public/apps/contact/forms.py:119
 msgid "Is it safe for us to leave a message on this number?"
 msgstr "A yw’n ddiogel i ni adael neges ar y rhif hwn?"
 
-#: cla_public/apps/contact/forms.py:88 cla_public/apps/contact/forms.py:127
+#: cla_public/apps/contact/forms.py:89 cla_public/apps/contact/forms.py:128
 msgid "Select a time for us to call"
 msgstr "Dewiswch amser i ni eich ffonio"
 
-#: cla_public/apps/contact/forms.py:96
+#: cla_public/apps/contact/forms.py:97
 msgid "Full name of the person to call"
 msgstr "Enw llawn yr unigolion i'w ffonio"
 
-#: cla_public/apps/contact/forms.py:98 cla_public/apps/contact/forms.py:157
+#: cla_public/apps/contact/forms.py:99 cla_public/apps/contact/forms.py:158
 msgid "Your full name must be 400 characters or less"
 msgstr "Rhaid i'ch enw llawn fod yn 400 nod neu lai"
 
-#: cla_public/apps/contact/forms.py:103
+#: cla_public/apps/contact/forms.py:104
 msgid "Relationship to you"
 msgstr "Ei gysylltiad/chysylltiad â chi"
 
-#: cla_public/apps/contact/forms.py:135
+#: cla_public/apps/contact/forms.py:136
 msgid "Postcode"
 msgstr "Cod post"
 
-#: cla_public/apps/contact/forms.py:137
+#: cla_public/apps/contact/forms.py:138
 msgid "Your postcode must be 12 characters or less"
 msgstr "Rhaid i'ch cod post fod yn 12 nod neu lai"
 
-#: cla_public/apps/contact/forms.py:142
+#: cla_public/apps/contact/forms.py:143
 msgid "Street address"
 msgstr "Cyfeiriad y stryd"
 
-#: cla_public/apps/contact/forms.py:144 cla_public/apps/contact/forms.py:186
-#: cla_public/apps/contact/forms.py:260
+#: cla_public/apps/contact/forms.py:145 cla_public/apps/contact/forms.py:187
+#: cla_public/apps/contact/forms.py:261
 msgid "Your address must be 255 characters or less"
 msgstr "Rhaid i'ch cyfeiriad fod yn 255 nod neu lai"
 
-#: cla_public/apps/contact/forms.py:155
+#: cla_public/apps/contact/forms.py:156
 msgid "Your full name"
 msgstr "Eich enw llawn"
 
-#: cla_public/apps/contact/forms.py:162
+#: cla_public/apps/contact/forms.py:163
 msgid "Select a contact option"
 msgstr "Dewiswch opsiwn ar gyfer cysylltu"
 
-#: cla_public/apps/contact/forms.py:165
+#: cla_public/apps/contact/forms.py:166
 msgid "Please choose one of the options"
 msgstr "Dewiswch o leiaf un opsiwn"
 
-#: cla_public/apps/contact/forms.py:180 cla_public/templates/privacy.html:233
+#: cla_public/apps/contact/forms.py:181 cla_public/templates/privacy.html:233
 #: cla_public/templates/macros/help-orgs.html:82
 msgid "Email"
 msgstr "E-bost"
 
-#: cla_public/apps/contact/forms.py:181
+#: cla_public/apps/contact/forms.py:182
 msgid "If you add your email we will send you the reference number when you submit your details"
 msgstr "Os byddwch yn ychwanegu eich cyfeiriad e-bost, byddwn yn anfon y cyfeirnod atoch pan fyddwch yn cyflwyno eich manylion"
 
-#: cla_public/apps/contact/forms.py:189 cla_public/apps/contact/forms.py:263
+#: cla_public/apps/contact/forms.py:190 cla_public/apps/contact/forms.py:264
 msgid "Invalid email address"
 msgstr "Cyfeiriad e-bost annilys"
 
-#: cla_public/apps/contact/forms.py:195
+#: cla_public/apps/contact/forms.py:196
 msgid "Tell us more about your problem"
 msgstr "Dywedwch fwy wrthym am eich problem"
 
-#: cla_public/apps/contact/forms.py:197
+#: cla_public/apps/contact/forms.py:198
 msgid "Your notes must be 4000 characters or less"
 msgstr "Rhaid i'ch nodiadau fod yn 4000 nod neu lai"
 
-#: cla_public/apps/contact/forms.py:203
+#: cla_public/apps/contact/forms.py:204
 msgid "Do you have any special communication needs?"
 msgstr "Oes gennych chi unrhyw anghenion cyfathrebu arbennig?"
 
-#: cla_public/apps/contact/forms.py:258
+#: cla_public/apps/contact/forms.py:259
 msgid "Your email"
 msgstr "Eich cyfeiriad e-bost"
 
-#: cla_public/apps/contact/views.py:47
+#: cla_public/apps/contact/views.py:48
 msgid "Your Civil Legal Advice reference number"
 msgstr "Eich cyfeirnod Cyngor Cyfreithiol Sifil"
 
-#: cla_public/apps/contact/views.py:97 cla_public/apps/contact/views.py:140
+#: cla_public/apps/contact/views.py:122 cla_public/apps/contact/views.py:165
 msgid "There was an error submitting your email. Please check and try again or try without it."
 msgstr "Roedd gwall wrth anfon eich e-bost. Gwiriwch a cheisiwch eto, neu rhowch gynnig arni hebddo."
 
@@ -1684,8 +1685,6 @@ msgstr ""
 
 #: cla_public/templates/interstitial.html:73
 #: cla_public/templates/checker/result/_find-legal-adviser.html:6
-#: cla_public/templates/checker/result/ineligible.html:84
-#: cla_public/templates/scope/ineligible.html:51
 msgid "Find a legal adviser"
 msgstr "Dod o hyd i gynghorydd cyfreithiol"
 
@@ -3232,6 +3231,11 @@ msgid ""
 "      day of the hearing from an adviser in the court building."
 msgstr "Os oes gennych ddyddiad gwrandawiad llys, mae’n bwysig eich bod yn cael cyngor cyn gynted â phosib. Efallai y cewch gymorth ar fyr rybudd ar ddiwrnod y gwrandawiad gan gynghorydd yn adeilad y llys."
 
+#: cla_public/templates/checker/result/ineligible.html:84
+#: cla_public/templates/scope/ineligible.html:47
+msgid "Find a solicitor"
+msgstr ""
+
 #: cla_public/templates/emails/confirmation.txt:2
 #, python-format
 msgid "Dear %(full_name)s,"
@@ -3378,7 +3382,7 @@ msgid "Opens in new window"
 msgstr "Agor mewn ffenestr arall"
 
 #: cla_public/templates/macros/help-orgs.html:20
-#: cla_public/templates/scope/ineligible.html:59
+#: cla_public/templates/scope/ineligible.html:56
 #, python-format
 msgid "Help organisations for problems about %(category_name)s"
 msgstr "Sefydliadau cymorth ar gyfer problemau ynghylch %(category_name)s"
@@ -3474,18 +3478,14 @@ msgid "You can still ask a solicitor for help – you will have to pay for their
 msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:42
-msgid "Find a solicitor"
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:45
 msgid "From what you’ve told us today, it looks as though your problem is not covered."
 msgstr ""
 
-#: cla_public/templates/scope/ineligible.html:46
+#: cla_public/templates/scope/ineligible.html:43
 msgid "You can still ask a solicitor for help - you will have to pay for their advice."
 msgstr ""
 
-#: cla_public/templates/scope/ineligible.html:55
+#: cla_public/templates/scope/ineligible.html:52
 msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
 msgstr ""
 "Efallai y byddwch chi'n dal yn gallu cael help a chyngor gan y sefydliadau sydd wedi'u rhestru\n"
@@ -3502,6 +3502,4 @@ msgstr "Dod o hyd i gyfryngwr teulu yn eich ardal i ganfod a ydych yn gymwys."
 #: cla_public/templates/scope/mediation.html:15
 msgid "Find your local mediator"
 msgstr "Dod o hyd i gyfryngwr sy'n lleol i chi"
-
-
 

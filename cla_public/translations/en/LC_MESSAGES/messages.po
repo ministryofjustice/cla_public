@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-11 17:25+0100\n"
+"POT-Creation-Date: 2016-05-13 15:24+0100\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -277,7 +277,7 @@ msgstr ""
 msgid "Any other benefits"
 msgstr ""
 
-#: cla_public/apps/checker/constants.py:105 cla_public/apps/contact/forms.py:34
+#: cla_public/apps/checker/constants.py:105 cla_public/apps/contact/forms.py:35
 msgid "-- Please select --"
 msgstr ""
 
@@ -409,7 +409,7 @@ msgstr ""
 
 #: cla_public/apps/checker/fields.py:128 cla_public/apps/checker/forms.py:66
 #: cla_public/apps/checker/forms.py:127 cla_public/apps/checker/forms.py:144
-#: cla_public/apps/contact/forms.py:83 cla_public/apps/contact/forms.py:122
+#: cla_public/apps/contact/forms.py:84 cla_public/apps/contact/forms.py:123
 msgid "Please choose Yes or No"
 msgstr ""
 
@@ -939,7 +939,8 @@ msgstr ""
 msgid "Please select a time period from the drop down"
 msgstr ""
 
-#: cla_public/apps/checker/views.py:51 cla_public/apps/contact/views.py:86
+#: cla_public/apps/checker/views.py:51 cla_public/apps/contact/views.py:75
+#: cla_public/apps/contact/views.py:111
 msgid "There was an error submitting your data. Please check and try again."
 msgstr ""
 
@@ -979,141 +980,141 @@ msgstr ""
 msgid "Arrange a callback time"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:28
+#: cla_public/apps/contact/forms.py:29
 msgid "-- Choose a language --"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:42
+#: cla_public/apps/contact/forms.py:43
 msgid "British Sign Language – Webcam"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:43
+#: cla_public/apps/contact/forms.py:44
 msgid "Minicom – for textphone users"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:44
+#: cla_public/apps/contact/forms.py:45
 msgid "Text Relay – for people with hearing or speech impairments"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:45
+#: cla_public/apps/contact/forms.py:46
 msgid "Welsh"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:46
+#: cla_public/apps/contact/forms.py:47
 msgid "Other language"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:48
+#: cla_public/apps/contact/forms.py:49
 msgid "Language required:"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:50
+#: cla_public/apps/contact/forms.py:51
 msgid "Any other communication needs"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:52
+#: cla_public/apps/contact/forms.py:53
 msgid "Other communication needs"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:53
+#: cla_public/apps/contact/forms.py:54
 msgid "Please tell us what you need in the box below"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:68 cla_public/apps/contact/forms.py:107
+#: cla_public/apps/contact/forms.py:69 cla_public/apps/contact/forms.py:108
 msgid "Phone number for the callback"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:69 cla_public/apps/contact/forms.py:108
+#: cla_public/apps/contact/forms.py:70 cla_public/apps/contact/forms.py:109
 msgid "Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:75 cla_public/apps/contact/forms.py:114
+#: cla_public/apps/contact/forms.py:76 cla_public/apps/contact/forms.py:115
 msgid "Your telephone number must be 20 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:79 cla_public/apps/contact/forms.py:118
+#: cla_public/apps/contact/forms.py:80 cla_public/apps/contact/forms.py:119
 msgid "Is it safe for us to leave a message on this number?"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:88 cla_public/apps/contact/forms.py:127
+#: cla_public/apps/contact/forms.py:89 cla_public/apps/contact/forms.py:128
 msgid "Select a time for us to call"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:96
+#: cla_public/apps/contact/forms.py:97
 msgid "Full name of the person to call"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:98 cla_public/apps/contact/forms.py:157
+#: cla_public/apps/contact/forms.py:99 cla_public/apps/contact/forms.py:158
 msgid "Your full name must be 400 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:103
+#: cla_public/apps/contact/forms.py:104
 msgid "Relationship to you"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:135
+#: cla_public/apps/contact/forms.py:136
 msgid "Postcode"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:137
+#: cla_public/apps/contact/forms.py:138
 msgid "Your postcode must be 12 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:142
+#: cla_public/apps/contact/forms.py:143
 msgid "Street address"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:144 cla_public/apps/contact/forms.py:186
-#: cla_public/apps/contact/forms.py:260
+#: cla_public/apps/contact/forms.py:145 cla_public/apps/contact/forms.py:187
+#: cla_public/apps/contact/forms.py:261
 msgid "Your address must be 255 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:155
+#: cla_public/apps/contact/forms.py:156
 msgid "Your full name"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:162
+#: cla_public/apps/contact/forms.py:163
 msgid "Select a contact option"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:165
+#: cla_public/apps/contact/forms.py:166
 msgid "Please choose one of the options"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:180 cla_public/templates/privacy.html:233
+#: cla_public/apps/contact/forms.py:181 cla_public/templates/privacy.html:233
 #: cla_public/templates/macros/help-orgs.html:82
 msgid "Email"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:181
+#: cla_public/apps/contact/forms.py:182
 msgid "If you add your email we will send you the reference number when you submit your details"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:189 cla_public/apps/contact/forms.py:263
+#: cla_public/apps/contact/forms.py:190 cla_public/apps/contact/forms.py:264
 msgid "Invalid email address"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:195
+#: cla_public/apps/contact/forms.py:196
 msgid "Tell us more about your problem"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:197
+#: cla_public/apps/contact/forms.py:198
 msgid "Your notes must be 4000 characters or less"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:203
+#: cla_public/apps/contact/forms.py:204
 msgid "Do you have any special communication needs?"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:258
+#: cla_public/apps/contact/forms.py:259
 msgid "Your email"
 msgstr ""
 
-#: cla_public/apps/contact/views.py:47
+#: cla_public/apps/contact/views.py:48
 msgid "Your Civil Legal Advice reference number"
 msgstr ""
 
-#: cla_public/apps/contact/views.py:97 cla_public/apps/contact/views.py:140
+#: cla_public/apps/contact/views.py:122 cla_public/apps/contact/views.py:165
 msgid "There was an error submitting your email. Please check and try again or try without it."
 msgstr ""
 
@@ -1662,8 +1663,6 @@ msgstr ""
 
 #: cla_public/templates/interstitial.html:73
 #: cla_public/templates/checker/result/_find-legal-adviser.html:6
-#: cla_public/templates/checker/result/ineligible.html:84
-#: cla_public/templates/scope/ineligible.html:51
 msgid "Find a legal adviser"
 msgstr ""
 
@@ -3116,6 +3115,11 @@ msgid ""
 "      day of the hearing from an adviser in the court building."
 msgstr ""
 
+#: cla_public/templates/checker/result/ineligible.html:84
+#: cla_public/templates/scope/ineligible.html:47
+msgid "Find a solicitor"
+msgstr ""
+
 #: cla_public/templates/emails/confirmation.txt:2
 #, python-format
 msgid "Dear %(full_name)s,"
@@ -3258,7 +3262,7 @@ msgid "Opens in new window"
 msgstr ""
 
 #: cla_public/templates/macros/help-orgs.html:20
-#: cla_public/templates/scope/ineligible.html:59
+#: cla_public/templates/scope/ineligible.html:56
 #, python-format
 msgid "Help organisations for problems about %(category_name)s"
 msgstr ""
@@ -3352,18 +3356,14 @@ msgid "You can still ask a solicitor for help – you will have to pay for their
 msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:42
-msgid "Find a solicitor"
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:45
 msgid "From what you’ve told us today, it looks as though your problem is not covered."
 msgstr ""
 
-#: cla_public/templates/scope/ineligible.html:46
+#: cla_public/templates/scope/ineligible.html:43
 msgid "You can still ask a solicitor for help - you will have to pay for their advice."
 msgstr ""
 
-#: cla_public/templates/scope/ineligible.html:55
+#: cla_public/templates/scope/ineligible.html:52
 msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
 msgstr ""
 
@@ -3378,3 +3378,4 @@ msgstr ""
 #: cla_public/templates/scope/mediation.html:15
 msgid "Find your local mediator"
 msgstr ""
+
