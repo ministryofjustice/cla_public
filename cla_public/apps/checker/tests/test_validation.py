@@ -63,7 +63,10 @@ class TestValidation(unittest.TestCase):
         field.data = 'emailwithspace@example.com '
         self.assertRaises(ValidationError, validator, form, field)
 
-        field.data = 'emailwithspace@example.com'
+        field.data = 'emailwith,comma@example.com'
+        self.assertRaises(ValidationError, validator, form, field)
+
+        field.data = 'email.with-space@example.com'
         try:
             validator(form, field)
         except ValidationError:

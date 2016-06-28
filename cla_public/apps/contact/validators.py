@@ -11,6 +11,6 @@ class EmailValidator(Email):
             require_tld=True,
         )
         super(Email, self).__init__(
-            r'^[-0-9a-zA-Z.+_\'*+-/=?^_`{|}~]+@([^.@][^@]+)$',
+            r'^[-0-9a-zA-Z.+_\'*+/=?^_`{|}~]+@([^.@][^@]+)$',
             re.IGNORECASE,
             message)
