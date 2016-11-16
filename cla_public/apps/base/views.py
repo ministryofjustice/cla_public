@@ -266,5 +266,4 @@ def healthcheck():
 
     }
 
-    print(type(backend_healthcheck_json))
     return jsonify(response)
