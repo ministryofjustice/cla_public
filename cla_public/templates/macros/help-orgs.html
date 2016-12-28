@@ -26,7 +26,7 @@
         </p>
       {% endif %}
 
-      {{ org_list(organisations) }}
+      {{ org_list(organisations, category_name) }}
     {% else %}
       {% call Element.alert() %}
         <p>{{ _('There has been a problem with listing help organisations. Please refresh this page or try again later.') }}</p>
@@ -43,7 +43,7 @@
         List of help organisations
 #}
 {% import "macros/element.html" as Element %}
-{% macro org_list(organisations) %}
+{% macro org_list(organisations, category_name='') %}
   <ul class="org-list">
     {% for org in organisations %}
       <li class="vcard">
