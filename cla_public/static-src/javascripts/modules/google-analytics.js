@@ -21,21 +21,28 @@
       var that = this;
 
       $('a[data-ga]').on('click', function(evt) {
-        var gaData = $(this).data('ga');
+        var $link = $(this);
+        var exitLink = $link.attr('target') === '_blank';
+        var gaData = $link.data('ga');
         var gaTypeValuePair = gaData.split(':');
 
         var type = gaTypeValuePair[0];
         var value = gaTypeValuePair[1];
 
         if(window.ga && _.includes(['event', 'pageview'], type) && value) {
-          if(evt.preventDefault) {
-            evt.preventDefault();
-          } else {
-            evt.returnValue = false;
+
+          if (!exitLink) {
+            if (evt.preventDefault) {
+              evt.preventDefault();
+            } else {
+              evt.returnValue = false;
+            }
           }
 
           that.send(type, gaTypeValuePair[1], $.proxy(function() {
-            window.location.href = this.href;
+            if (!exitLink) {
+              window.location.href = this.href;
+            }
           }, this));
         }
       });
