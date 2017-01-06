@@ -18,13 +18,15 @@
     {% endif %}
 
     <p>
-      {% trans ask_legal_adviser_link=Element.link_new_window('http://find-legal-advice.justice.gov.uk/', _('ask a legal adviser'), True) %}
+      {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'ask a legal adviser') %}
+      {% trans ask_legal_adviser_link=Element.link_new_window('http://find-legal-advice.justice.gov.uk/', _('ask a legal adviser'), True, **{'data-ga': ga_event}) %}
         You can {{ ask_legal_adviser_link }} if an application might succeed in your case and how to apply.
       {% endtrans %}
     </p>
 
     <p>
-      {% trans apply_directly_link=Element.link_new_window('https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding', _('apply directly'), True) %}
+      {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'apply directly') %}
+      {% trans apply_directly_link=Element.link_new_window('https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding', _('apply directly'), True, **{'data-ga': ga_event}) %}
         You can also {{ apply_directly_link }} to the Legal Aid Agency.
       {% endtrans %}
     </p>
@@ -44,7 +46,8 @@
   {% endif %}
 
   <p>
-    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'button'}) }}
+    {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'Find a solicitor') %}
+    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'button', 'data-ga': ga_event}) }}
   </p>
 
   {% if category != 'other' %}
