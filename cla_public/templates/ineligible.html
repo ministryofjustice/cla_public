@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+  {{ super() }}
+  {{ CAIT.style(info_tools, cait_css) }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ super() }}
+  {% include '_ga-outcome-pageview.html' %}
+  {{ CAIT.script(info_tools, cait_variant) }}
+{% endblock %}

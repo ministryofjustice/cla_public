@@ -1,0 +1,95 @@
+{% macro survey(survey) %}
+{% if survey.heading %}
+ <div class="cait_survey_wrapper">
+  <div class="cait_survey">
+    <h2 class="heading-medium">{{ survey.heading | safe }}</h2>
+    <p>{{ survey.body | safe }}</p>
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro style(info_tools, css) %}
+{% if info_tools %}
+  <style>
+  .sidebar {
+    border-top: none;
+  }
+ .sidebar {
+   display: flex;
+   flex-direction: column-reverse;
+ }
+
+  .exceptional_cases,
+  .cait_survey {
+    border-top: 10px solid #005ea5;
+  }
+  .cait_survey {
+    background-color: #f6f6f6;
+    border-bottom: solid 1px #b1b4b6;
+    margin-bottom: 40px;
+    padding: 0.25em 1em 0.01em;
+  }
+   @media (min-width: 641px) {
+    .sidebar {
+      display: block;
+      position: relative;
+    }
+    .cait_survey {
+      margin: 40px 0 0;
+      position: relative;
+    }
+ }
+
+ {{ css }}
+
+  </style>
+{% endif %}
+{% endmacro %}
+
+{% macro script(info_tools, cait_variant = '') %}
+  <script>
+  var variant = '{{ cait_variant }}' || 'none'
+  function gaSendEvent(category, action, label) {
+    ga('send', 'event', category, action, label)
+  }
+  function gaSendOrgLink(label) {
+    label = variant + '|' + label
+    var userId = document.cookie.split('; ')
+                  .filter(function (i) { return i.indexOf('_ga=') === 0 })
+                  .map(function (i) { return i.replace('_ga=', '') })
+                  .join('')
+    gaSendEvent('External Link User', userId, label)
+  }
+  jQuery(document).ready(function(){
+    jQuery('#content a').on('click', function(e){
+      gaSendOrgLink(this.innerText.replace(/ Opens in .*/, ''))
+    })
+  })
+
+  {% if info_tools %}
+    {% if cait_variant %}
+    gaSendEvent('CAIT exit page', document.location.pathname, variant)
+    {% endif %}
+
+  if (jQuery(window).width() >= 641) {
+    var cait_survey
+    var topTarget = 0
+    jQuery(document).ready(function(){
+      cait_survey = jQuery('.cait_survey')
+      if (cait_survey.length) {
+        topTarget = cait_survey.offset().top - parseInt(cait_survey.css('margin-top'), 10)
+        jQuery(document).on('scroll', function(e) {
+          var scrolled = jQuery(this).scrollTop()
+          var topShift = scrolled - topTarget;
+          if (topShift < 0) {
+            topShift = 0
+          }
+          cait_survey.css('top', topShift + 'px')
+        })
+      }
+    })
+  }
+  {% endif %}
+  </script>
+{% endmacro %}
