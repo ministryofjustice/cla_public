@@ -26,6 +26,7 @@ from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession, ValidFormOnOptions, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 
+from .cait_intervention import get_cait_params
 
 log = logging.getLogger(__name__)
 
@@ -372,7 +373,7 @@ checker.add_url_rule(
 class HelpOrganisations(views.MethodView):
     _template = 'checker/result/ineligible.html'
 
-    def get_context(self, category_name):
+    def get_context(self, category_name, checker):
         category_name = category_name.replace('-', ' ').capitalize()
 
         # force english as knowledge base languages are in english
@@ -391,24 +392,27 @@ class HelpOrganisations(views.MethodView):
 
         organisations = get_organisation_list(article_category__name=category_name)
 
-        return {
+        params = {
             'organisations': organisations,
             'category': category,
             'category_name': trans_category_name,
             'ELIGIBILITY_REASONS': ELIGIBILITY_REASONS,
             'ineligible_reasons': ineligible_reasons
         }
+        params = get_cait_params(params, category_name, organisations, checker)
+        return params
 
     def clear_session(self):
         if session.checker:
             session.clear_checker()
 
     def get(self, category_name):
+        checker = session.checker
         self.clear_session()
 
         return render_template(
             self._template,
-            **self.get_context(category_name)
+            **self.get_context(category_name, checker)
         )
 
 
