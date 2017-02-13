@@ -19,7 +19,6 @@ python-dateutil==2.2
 pytz==2014.9
 raven==4.2.3
 requests==2.6.0
-six==1.8.0
 statsd==3.0.1
 wsgiref==0.1.2
 Babel==1.3
