@@ -12,7 +12,7 @@ from raven.contrib.flask import Sentry
 import urllib3.contrib.pyopenssl
 
 from cla_public.django_to_jinja import change_jinja_templates
-from cla_public.apps.addressfinder_proxy.views import addressfinder
+from cla_public.apps.geocoder.views import geocoder
 from cla_public.apps.base.views import base
 from cla_public.apps.contact.views import contact
 from cla_public.apps.checker.views import checker
@@ -60,7 +60,7 @@ def create_app(config_file=None):
         name='honeypot_field_name')
 
     app.register_blueprint(base)
-    app.register_blueprint(addressfinder)
+    app.register_blueprint(geocoder)
     app.register_blueprint(contact)
     app.register_blueprint(scope)
     if not app.config.get('CONTACT_ONLY'):

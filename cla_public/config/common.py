@@ -70,8 +70,11 @@ BACKEND_API = {
 SENTRY_DSN = os.environ.get('RAVEN_CONFIG_DSN', '')
 SENTRY_SITE_NAME = os.environ.get('RAVEN_CONFIG_SITE', '')
 
-ADDRESSFINDER_API_HOST = os.environ.get('ADDRESSFINDER_API_HOST')
-ADDRESSFINDER_API_TOKEN = os.environ.get('ADDRESSFINDER_API_TOKEN')
+POSTCODEINFO_API = {
+    'auth_token': os.environ.get('POSTCODEINFO_API_TOKEN'),
+    'api_url': os.environ.get('POSTCODEINFO_API_URL'),
+    'timeout': os.environ.get('POSTCODEINFO_API_TIMEOUT')
+}
 
 ZENDESK_API_USERNAME = os.environ.get('ZENDESK_API_USERNAME')
 ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
