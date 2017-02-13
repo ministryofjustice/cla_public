@@ -31,8 +31,8 @@ class SmokeTests(unittest.TestCase):
     def test_can_access_geocoder(self):
         "lookup a postcode with PostcodeInfo"
         client = postcodeinfo.Client()
-        postcode = client.lookup_postcode('sw1a1aa')
-        assert postcode.postcode == 'SW1A 1AA'
+        postcode = client.lookup_postcode('SW1A 1AA')
+        assert postcode.normalised == 'sw1a1aa'
 
     def test_can_access_zendesk(self):
         "connect to Zendesk"
