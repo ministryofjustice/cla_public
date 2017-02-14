@@ -1,8 +1,6 @@
 from flask import request
 import os
-import urllib2
-import ssl
-import json
+import requests
 import re
 
 config_branch = 'master'
@@ -14,14 +12,10 @@ config_url = 'https://raw.githubusercontent.com/ministryofjustice/cla_cait_inter
 cait_counter = 0
 cait_intervention_config = {}
 
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
-
 def get_cait_params(params, category_name, organisations, checker):
     try:
         global cait_intervention_config
-        global ctx
+        global cait_counter
         if category_name != 'Family':
             return params
 
@@ -29,11 +23,11 @@ def get_cait_params(params, category_name, organisations, checker):
             return params
 
         try:
-            response = urllib2.urlopen(config_url, context=ctx)
+            response = requests.get(config_url, verify=False)
         except:
             pass
         try:
-            cait_intervention_config = json.load(response)
+            cait_intervention_config = response.json()
         except:
             print 'Config file was not valid JSON'
             pass
