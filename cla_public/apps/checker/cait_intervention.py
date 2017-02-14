@@ -13,6 +13,8 @@ ctx.verify_mode = ssl.CERT_NONE
 
 def get_cait_params(params, category_name, organisations, checker):
     try:
+        global cait_intervention_config
+        global ctx
         if category_name != 'Family':
             return params
 
