@@ -1,8 +1,13 @@
 from flask import request
+import os
 import urllib2
 import ssl
 import json
 import re
+
+config_branch = 'master'
+if os.environ.get('CLA_ENV') is not 'prod':
+    config_branch = 'develop'
 
 cait_counter = 0
 cait_intervention_config = {}
@@ -22,7 +27,7 @@ def get_cait_params(params, category_name, organisations, checker):
             return params
 
         try:
-            response = urllib2.urlopen('https://raw.githubusercontent.com/ministryofjustice/cla_cait_intervention/master/cla_cait_intervention_config.json', context=ctx)
+            response = urllib2.urlopen('https://raw.githubusercontent.com/ministryofjustice/cla_cait_intervention/' + config_branch + '/cla_cait_intervention_config.json', context=ctx)
         except:
             pass
         try:
