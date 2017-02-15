@@ -61,7 +61,7 @@
       {% trans %}You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid.{% endtrans %}
     </p>
 
-    {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=5) %}
+    {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=truncate) %}
       <h2>{% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}</h2>
     {% endcall %}
   {% endif %}

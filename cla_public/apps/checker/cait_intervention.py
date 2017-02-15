@@ -81,6 +81,7 @@ def get_cait_params(params, category_name, organisations, checker):
                 variant = 'default' if cycle_count else 'variant-plain'
                 params['cait_variant'] = variant
                 if variant != 'default':
+                    params['truncate'] = params['truncate'] + 1
                     organisations.insert(0, links_config['cait'])
                     for org in organisations:
                         org_class = org['service_name'].replace(' ', '-').lower()

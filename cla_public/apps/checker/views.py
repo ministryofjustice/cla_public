@@ -397,7 +397,8 @@ class HelpOrganisations(views.MethodView):
             'category': category,
             'category_name': trans_category_name,
             'ELIGIBILITY_REASONS': ELIGIBILITY_REASONS,
-            'ineligible_reasons': ineligible_reasons
+            'ineligible_reasons': ineligible_reasons,
+            'truncate': 5
         }
         params = get_cait_params(params, category_name, organisations, checker)
         return params
