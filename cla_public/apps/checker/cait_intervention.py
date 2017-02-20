@@ -93,6 +93,6 @@ def get_cait_params(category_name, organisations, choices, truncate=5):
         if params.get('info_tools'):
             params['cait_css'] = css_config
     except:
-        pass
+        return {}
 
     return params
