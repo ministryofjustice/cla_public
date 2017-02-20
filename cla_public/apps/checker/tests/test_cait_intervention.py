@@ -11,7 +11,7 @@ from cla_public.apps.checker.cait_intervention import get_cait_params
 
 # Load dummy config data
 configs = {}
-for state in ['on', 'off', 'invalid']:
+for state in ['on', 'off']:
     with open(os.path.join(os.path.dirname(__file__), 'data/cait_intervention/cait_intervention_config-' + state + '.json')) as json_data:
         configs[state] = json.load(json_data)
 
@@ -45,7 +45,7 @@ class TestCaitIntervention(unittest.TestCase):
         self.assertEqual(params, default_params_out)
 
     # Simulate a config file being returned that is invalid
-    @mock.patch('cla_public.apps.checker.cait_intervention.requests.get', side_effect=setup_mock(configs['invalid'], 200))
+    @mock.patch('cla_public.apps.checker.cait_intervention.requests.get', side_effect=setup_mock(None, 200))
     def test_config_missing(self, mock_get):
         params = call_cait_params()
         self.assertEqual(params, default_params_out)
