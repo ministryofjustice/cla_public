@@ -373,7 +373,7 @@ checker.add_url_rule(
 class HelpOrganisations(views.MethodView):
     _template = 'checker/result/ineligible.html'
 
-    def get_context(self, category_name, checker):
+    def get_context(self, category_name, diagnosis_previous_choices):
         category_name = category_name.replace('-', ' ').capitalize()
 
         # force english as knowledge base languages are in english
@@ -400,7 +400,11 @@ class HelpOrganisations(views.MethodView):
             'ineligible_reasons': ineligible_reasons,
             'truncate': 5
         }
-        params = get_cait_params(params, category_name, organisations, checker)
+        params.update(
+            get_cait_params(category_name, organisations,
+                            diagnosis_previous_choices,
+                            truncate=params['truncate'])
+        )
         return params
 
     def clear_session(self):
@@ -408,12 +412,13 @@ class HelpOrganisations(views.MethodView):
             session.clear_checker()
 
     def get(self, category_name):
-        checker = session.checker
+        choices = session.checker.get('diagnosis_previous_choices', [])
+
         self.clear_session()
 
         return render_template(
             self._template,
-            **self.get_context(category_name, checker)
+            **self.get_context(category_name, choices)
         )
 
 

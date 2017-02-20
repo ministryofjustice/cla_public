@@ -1,66 +1,67 @@
-from flask import request
 import os
-import requests
 import re
 
-config_branch = 'master'
-if os.environ.get('CLA_ENV') is not 'prod':
-    config_branch = 'develop'
+from flask import current_app, request
+import requests
+from requests.exceptions import ConnectionError, Timeout
 
-config_url = 'https://raw.githubusercontent.com/ministryofjustice/cla_cait_intervention/' + config_branch + '/cla_cait_intervention_config.json'
 
-cait_counter = 0
-cait_intervention_config = {}
+def grt_config_url():
+    config_branch = 'master'
+    if os.environ.get('CLA_ENV') is not 'prod':
+        config_branch = 'develop'
 
-def get_cait_params(params, category_name, organisations, checker):
+    return 'https://raw.githubusercontent.com/ministryofjustice/cla_cait_' \
+           'intervention/%s/cla_cait_intervention_config.json' % config_branch
+
+
+def get_counter(increment=0):
+    key = 'cait_counter'
+    count = current_app.cache.get(key) or 0
+    if increment:
+        count += increment
+        current_app.cache.set(key, count)
+    return count
+
+
+def get_cait_params(category_name, organisations, choices, truncate=5):
+    params = {}
+    if category_name != 'Family' or request.path != '/scope/refer/family':
+        return params
+
     try:
-        global cait_intervention_config
-        global cait_counter
-        if category_name != 'Family':
-            return params
+        cait_intervention_config = requests.get(
+            grt_config_url(), timeout=5, verify=False).json()
+    except (ConnectionError, Timeout, ValueError):
+        return params
 
-        if request.path != '/scope/refer/family':
-            return params
+    try:
+        # Make sure any errors with the json/config do not effect the site
 
-        try:
-            response = requests.get(config_url, verify=False)
-        except:
-            pass
-        try:
-            cait_intervention_config = response.json()
-        except:
-            print 'Config file was not valid JSON'
-            pass
-
-        survey_config = cait_intervention_config.get('survey')
-        intervention_config = cait_intervention_config.get('intervention')
-        nodes_config = cait_intervention_config.get('nodes')
-        links_config = cait_intervention_config.get('links')
-        css_config = cait_intervention_config.get('css')
+        survey_config = cait_intervention_config.get('survey', {})
+        intervention_config = cait_intervention_config.get('intervention', {})
+        nodes_config = cait_intervention_config.get('nodes', {})
+        links_config = cait_intervention_config.get('links', {})
+        css_config = cait_intervention_config.get('css', '')
 
         # Survey
-        if survey_config and survey_config.get('run') == True:
-            global cait_counter
+        if survey_config.get('run') is True and len(choices) > 2:
             params['info_tools'] = True
             survey_urls = survey_config['urls']
             survey_url = survey_urls.get('default')
-            try:
-                choices = checker['diagnosis_previous_choices']
-                entrypoint = nodes_config[choices[1]]
-                if entrypoint:
-                    entrypoint_url = True
-                    nested = entrypoint.get('nested')
-                    if nested and choices[2] not in nested:
-                        entrypoint_url = False
-                    if entrypoint_url:
-                        try:
-                            survey_url = survey_urls[entrypoint['survey']]
-                        except:
-                            pass
-            except:
-                pass
-            survey_body = survey_config.get('body')
-            survey_body = re.sub(r'##(.*)##', r'<a href="' + survey_url + r'" target="cait_survey">\1</a>', survey_body)
+            entrypoint = nodes_config.get(choices[1], {})
+            survey = entrypoint.get('survey')
+
+            if entrypoint:
+                nested = entrypoint.get('nested', [])
+                if not nested or choices[2] in nested:
+                    survey_url = survey_urls.get(survey, '')
+
+            survey_body = re.sub(
+                r'##(.*)##',
+                r'<a href="%s" target="cait_survey">\1</a>' % survey_url,
+                survey_config.get('body', ''))
+
             params['cait_survey'] = {
                 'heading': survey_config.get('heading'),
                 'body': survey_body
@@ -69,28 +70,28 @@ def get_cait_params(params, category_name, organisations, checker):
             params['cait_survey'] = {}
 
         # CAIT link
-        if intervention_config and intervention_config.get('run') == True:
+        if intervention_config.get('run') is True:
             params['info_tools'] = True
             intervention_quota = intervention_config.get('quota')
             intervention_cycle = intervention_config.get('quota_cycle')
+
             if intervention_quota and intervention_cycle:
-                cait_counter += 1
-                cycle_count = cait_counter % intervention_cycle
+                cycle_count = get_counter(increment=1) % intervention_cycle
                 if cycle_count < intervention_quota:
                     cycle_count = 0
                 variant = 'default' if cycle_count else 'variant-plain'
                 params['cait_variant'] = variant
                 if variant != 'default':
-                    params['truncate'] = params['truncate'] + 1
+                    params['truncate'] = truncate + 1
+                    print params['truncate']
                     organisations.insert(0, links_config['cait'])
                     for org in organisations:
                         org_class = org['service_name'].replace(' ', '-').lower()
                         org.update({'classname': org_class})
 
         # Additional CSS injection
-        if params['info_tools']:
+        if params.get('info_tools'):
             params['cait_css'] = css_config
-
     except:
         pass
 
