@@ -26,7 +26,7 @@ from cla_public.libs.views import AllowSessionOverride, FormWizard, \
     FormWizardStep, RequiresSession, ValidFormOnOptions, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 
-from .cait_intervention import get_cait_params
+from cla_public.apps.checker.cait_intervention import get_cait_params
 
 log = logging.getLogger(__name__)
 
