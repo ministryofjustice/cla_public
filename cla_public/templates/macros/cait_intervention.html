@@ -1,5 +1,5 @@
 {% macro survey(survey) %}
-{% if survey.heading %}
+{% if survey and survey.heading %}
  <div class="cait_survey_wrapper">
   <div class="cait_survey">
     <h2 class="heading-medium">{{ survey.heading | safe }}</h2>

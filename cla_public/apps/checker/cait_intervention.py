@@ -6,6 +6,23 @@ import requests
 from requests.exceptions import ConnectionError, Timeout
 
 
+class ConfigException(Exception):
+    pass
+
+
+def get_config():
+    try:
+        cait_intervention_config = requests.get(
+            grt_config_url(), timeout=1, verify=False).json()
+        current_app.cache.set('cait_config', cait_intervention_config)
+        return cait_intervention_config
+    except (ConnectionError, Timeout, ValueError):
+        cached_config = current_app.cache.get('cait_config')
+        if cached_config:
+            return cached_config
+        raise ConfigException('Could not get config')
+    
+
 def grt_config_url():
     config_branch = 'master'
     if os.environ.get('CLA_ENV') is not 'prod':
@@ -24,15 +41,14 @@ def get_counter(increment=0):
     return count
 
 
-def get_cait_params(category_name, organisations, choices, truncate=5):
+def get_cait_params(category_name, organisations, choices=[], truncate=5):
     params = {}
     if category_name != 'Family' or request.path != '/scope/refer/family':
         return params
 
-    try:
-        cait_intervention_config = requests.get(
-            grt_config_url(), timeout=5, verify=False).json()
-    except (ConnectionError, Timeout, ValueError):
+    try:    
+        cait_intervention_config = get_config()
+    except ConfigException:
         return params
 
     try:
@@ -45,17 +61,22 @@ def get_cait_params(category_name, organisations, choices, truncate=5):
         css_config = cait_intervention_config.get('css', '')
 
         # Survey
-        if survey_config.get('run') is True and len(choices) > 2:
+        if survey_config.get('run') is True:
             params['info_tools'] = True
             survey_urls = survey_config['urls']
-            survey_url = survey_urls.get('default')
-            entrypoint = nodes_config.get(choices[1], {})
-            survey = entrypoint.get('survey')
+            survey_url = ''
 
-            if entrypoint:
-                nested = entrypoint.get('nested', [])
-                if not nested or choices[2] in nested:
-                    survey_url = survey_urls.get(survey, '')
+            if (len(choices) > 1):
+                entrypoint = nodes_config.get(choices[1], {})
+                survey = entrypoint.get('survey')
+
+                if entrypoint:
+                    nested = entrypoint.get('nested', [])
+                    if not nested or (len(choices) > 2 and choices[2] in nested):
+                        survey_url = survey_urls.get(survey)
+            
+            if not survey_url:
+                survey_url = survey_urls.get('default')
 
             survey_body = re.sub(
                 r'##(.*)##',
@@ -66,8 +87,6 @@ def get_cait_params(category_name, organisations, choices, truncate=5):
                 'heading': survey_config.get('heading'),
                 'body': survey_body
             }
-        else:
-            params['cait_survey'] = {}
 
         # CAIT link
         if intervention_config.get('run') is True:
@@ -83,7 +102,6 @@ def get_cait_params(category_name, organisations, choices, truncate=5):
                 params['cait_variant'] = variant
                 if variant != 'default':
                     params['truncate'] = truncate + 1
-                    print params['truncate']
                     organisations.insert(0, links_config['cait'])
                     for org in organisations:
                         org_class = org['service_name'].replace(' ', '-').lower()
@@ -93,6 +111,6 @@ def get_cait_params(category_name, organisations, choices, truncate=5):
         if params.get('info_tools'):
             params['cait_css'] = css_config
     except:
-        return {}
+        pass
 
     return params

@@ -35,15 +35,22 @@ def setup_mock(mock_json, mock_status):
 
 
 # Call the cait intervention code with standard params
-def call_cait_params():
-    return get_cait_params('Family', [], ['n10', 'n5', 'n5'])
+def call_cait_params(choices=[]):
+    return get_cait_params('Family', [], choices)
+    # return get_cait_params('Family', [], ['n10', 'n5', 'n5'])
 
 
-# Params unaffected by cait intervention
-DEFAULT_PARAMS_OUT = {'foo': 'bar', 'truncate': 5}
-PARAMS_OUT_WITH_SURVEY = {'foo': 'bar', 'truncate': 5, 'cait_survey':{}}
 # Path to requests.get
 REQUESTS_GET = 'cla_public.apps.checker.cait_intervention.requests.get'
+
+# Scope paths
+SCOPE_REFER = '/scope/refer/family'
+SCOPE_CHECKER = '/scope/checker/family'
+
+# Params unaffected by cait intervention
+DEFAULT_PARAMS_OUT = {'truncate': 5}
+
+DEFAULT_SURVEY = 'http://survey/default'
 
 
 class TestCaitIntervention(unittest.TestCase):
@@ -55,15 +62,15 @@ class TestCaitIntervention(unittest.TestCase):
     # Simulate a config file not being returned
     @mock.patch(REQUESTS_GET, setup_mock('', 404))
     def test_config_missing(self):
-        with self.app.test_request_context('/scope/refer/family'):
+        with self.app.test_request_context(SCOPE_REFER):
             params = copy(DEFAULT_PARAMS_OUT)
             params.update(call_cait_params())
             self.assertEqual(params, DEFAULT_PARAMS_OUT)
 
     # Simulate a config file being returned that is invalid
-    @mock.patch(REQUESTS_GET, setup_mock('', 200))
-    def test_config_invalid(self):
-        with self.app.test_request_context('/scope/refer/family'):
+    @mock.patch(REQUESTS_GET, setup_mock('{"fdfd', 200))
+    def test_invalid_json(self):
+        with self.app.test_request_context(SCOPE_REFER):
             params = copy(DEFAULT_PARAMS_OUT)
             params.update(call_cait_params())
             self.assertEqual(params, DEFAULT_PARAMS_OUT)
@@ -71,20 +78,19 @@ class TestCaitIntervention(unittest.TestCase):
     # Simulate a config file being returned that has off values
     @mock.patch(REQUESTS_GET, setup_mock(configs['off'], 200))
     def test_config_off(self):
-        with self.app.test_request_context('/scope/refer/family'):
+        with self.app.test_request_context(SCOPE_REFER):
             params = copy(DEFAULT_PARAMS_OUT)
             params.update(call_cait_params())
-            self.assertEqual(params, PARAMS_OUT_WITH_SURVEY)
+            self.assertEqual(params, DEFAULT_PARAMS_OUT)
 
     # Simulate a config file being returned that has on values
     @mock.patch(REQUESTS_GET, setup_mock(configs['on'], 200))
     def test_config_on(self):
 
         # Finally, check updated params
-        with self.app.test_request_context('/scope/refer/family'):
+        with self.app.test_request_context(SCOPE_REFER):
             params = copy(DEFAULT_PARAMS_OUT)
             params.update(call_cait_params())
-            self.assertEqual(params.get('foo'), 'bar')
             self.assertEqual(params.get('truncate'), 5)
             self.assertEqual(params.get('info_tools'), True)
             self.assertEqual(params.get('cait_variant'), 'default')
@@ -107,13 +113,32 @@ class TestCaitIntervention(unittest.TestCase):
             self.assertEqual(params.get('cait_variant'), 'default')
             self.assertEqual(params.get('truncate'), 5)
 
+            # level 1 node we want to match
+            params = copy(DEFAULT_PARAMS_OUT)
+            params.update(call_cait_params(['n4334', 'n105', 'n572']))
+            survey = params.get('cait_survey')
+            self.assertIn('http://survey/a', survey.get('body'))
+
+            # level 1 node we don't want to match
+            params = copy(DEFAULT_PARAMS_OUT)
+            params.update(call_cait_params(['n4334', 'n105a', 'n572']))
+            survey = params.get('cait_survey')
+            self.assertIn(DEFAULT_SURVEY, survey.get('body'))
+
+            # level 2 node we want to match
+            params = copy(DEFAULT_PARAMS_OUT)
+            params.update(call_cait_params(['n4334', 'n97', 'n49']))
+            survey = params.get('cait_survey')
+            self.assertIn('http://survey/d', survey.get('body'))
+
+            # level 2 node we don't want to match
+            params = copy(DEFAULT_PARAMS_OUT)
+            params.update(call_cait_params(['n4334', 'n97', 'n49a']))
+            survey = params.get('cait_survey')
+            self.assertIn(DEFAULT_SURVEY, survey.get('body'))
+
         # Shouldn't run if user has gone through financial check
-        with self.app.test_request_context('/scope/checker/family'):
+        with self.app.test_request_context(SCOPE_CHECKER):
             params = copy(DEFAULT_PARAMS_OUT)
             params.update(call_cait_params())
             self.assertEqual(params, DEFAULT_PARAMS_OUT)
-
-    @mock.patch(REQUESTS_GET, setup_mock('{"fdfd', 200))
-    def test_invalid_json(self):
-        params = call_cait_params()
-        self.assertEqual(params, {})
