@@ -1,6 +1,7 @@
-{% extends "base.html" %}
+{% extends "ineligible.html" %}
 
 {% import "macros/element.html" as Element %}
+{% import "macros/cait_intervention.html" as CAIT %}
 
 {% set title = _('Legal aid doesn’t cover all types of problem') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
@@ -9,6 +10,7 @@
 
 {% block sidebar %}
   <aside class="sidebar">
+    <div class="exceptional_cases">
     <h2>{% trans %}Exceptional cases{% endtrans %}</h2>
 
     {% if category == 'education' %}
@@ -30,6 +32,10 @@
         You can also {{ apply_directly_link }} to the Legal Aid Agency.
       {% endtrans %}
     </p>
+    </div>
+    {% if info_tools %}
+    {{ CAIT.survey(cait_survey) }}
+    {% endif %}
   </aside>
 {% endblock %}
 
@@ -55,13 +61,8 @@
       {% trans %}You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid.{% endtrans %}
     </p>
 
-    {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=5) %}
+    {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=truncate) %}
       <h2>{% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}</h2>
     {% endcall %}
   {% endif %}
-{% endblock %}
-
-{% block javascripts %}
-  {{ super() }}
-  {% include '_ga-outcome-pageview.html' %}
 {% endblock %}

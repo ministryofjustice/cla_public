@@ -1,0 +1,52 @@
+{
+  "nodes": {
+    "n105": {
+      "description": "Family > Disputes over children",
+      "survey": "a"
+    },
+    "n56": {
+      "description": "Family > Divorce, separation or dissolution",
+      "survey": "b"
+    },
+    "n58": {
+      "description": "Family > Financial settlement",
+      "survey": "c"
+    },
+    "n97": {
+      "description": "Family > Domestic abuse or harassment > Any other problem",
+      "survey": "d",
+      "nested": [
+        "n49"
+      ]
+    },
+    "n53": {
+      "description": "Family > Any other problem",
+      "survey": "b"
+    }
+  },
+  "survey": {
+    "run": true,
+    "urls": {
+      "default": "http://survey/default",
+      "a": "http://survey/a",
+      "b": "http://survey/b",
+      "c": "http://survey/c",
+      "d": "http://survey/d"
+    },
+    "heading": "heading",
+    "body": "body ##answer some questions##?"
+  },
+  "intervention": {
+    "run": true,
+    "quota": 1,
+    "quota_cycle": 2
+  },
+  "links": {
+    "cait": {
+      "website": "http://website",
+      "service_name": "service_name",
+      "public_description": "public_description"
+    }
+  },
+  "css": ""
+}
