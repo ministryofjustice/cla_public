@@ -46,7 +46,7 @@
 {% macro org_list(organisations, category_name='') %}
   <ul class="org-list">
     {% for org in organisations %}
-      <li class="vcard">
+      <li class="vcard {{ org.classname }}">
         <h3>
           {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', org.service_name) %}
           {{ Element.link_new_window(org.website, org.service_name, is_external=True, **{'class': 'url', 'data-ga': ga_event}) }}
