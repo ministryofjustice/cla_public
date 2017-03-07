@@ -25,7 +25,7 @@ def get_config():
 
 def grt_config_url():
     config_branch = 'master'
-    if os.environ.get('CLA_ENV') is not 'prod':
+    if os.environ.get('CLA_ENV') != 'prod':
         config_branch = 'develop'
 
     return 'https://raw.githubusercontent.com/ministryofjustice/cla_cait_' \
