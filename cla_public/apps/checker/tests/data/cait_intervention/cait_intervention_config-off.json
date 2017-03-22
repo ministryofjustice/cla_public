@@ -48,5 +48,6 @@
       "public_description": "public_description"
     }
   },
-  "css": ""
+  "css": "body { background: red; }",
+  "js": "alert('foo')"
 }

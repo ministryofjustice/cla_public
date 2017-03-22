@@ -1,5 +1,6 @@
 import os
 import re
+import uuid
 
 from flask import current_app, request
 import requests
@@ -21,7 +22,7 @@ def get_config():
         if cached_config:
             return cached_config
         raise ConfigException('Could not get config')
-    
+
 
 def grt_config_url():
     config_branch = 'master'
@@ -40,6 +41,8 @@ def get_counter(increment=0):
         current_app.cache.set(key, count)
     return count
 
+def get_uuid():
+    return uuid.uuid1()
 
 def get_cait_params(category_name, organisations, choices=[], truncate=5):
     params = {}
@@ -59,6 +62,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
         nodes_config = cait_intervention_config.get('nodes', {})
         links_config = cait_intervention_config.get('links', {})
         css_config = cait_intervention_config.get('css', '')
+        js_config = cait_intervention_config.get('js', '')
 
         # Survey
         if survey_config.get('run') is True:
@@ -66,7 +70,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
             survey_urls = survey_config['urls']
             survey_url = ''
 
-            if (len(choices) > 1):
+            if len(choices) > 1:
                 entrypoint = nodes_config.get(choices[1], {})
                 survey = entrypoint.get('survey')
 
@@ -74,7 +78,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
                     nested = entrypoint.get('nested', [])
                     if not nested or (len(choices) > 2 and choices[2] in nested):
                         survey_url = survey_urls.get(survey)
-            
+
             if not survey_url:
                 survey_url = survey_urls.get('default')
 
@@ -101,15 +105,22 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
                 variant = 'default' if cycle_count else 'variant-plain'
                 params['cait_variant'] = variant
                 if variant != 'default':
-                    params['truncate'] = truncate + 1
                     organisations.insert(0, links_config['cait'])
                     for org in organisations:
                         org_class = org['service_name'].replace(' ', '-').lower()
                         org.update({'classname': org_class})
+                    params['truncate'] = truncate + 1
+                    journey = {}
+                    journey['uuid'] = get_uuid()
+                    if len(choices) > 0:
+                        journey['nodes'] = '/'.join(choices)
+                        journey['last_node'] = choices[-1]
+                    params['cait_journey'] = journey
 
         # Additional CSS injection
         if params.get('info_tools'):
             params['cait_css'] = css_config
+            params['cait_js'] = js_config
     except:
         pass
 
