@@ -85,7 +85,6 @@ class TestCaitIntervention(unittest.TestCase):
 
     # Simulate a config file being returned that has on values
     @mock.patch(REQUESTS_GET, setup_mock(configs['on'], 200))
-    # @mock.patch(REQUESTS_GET, setup_mock(configs['on'], 200))
     def test_config_on(self):
 
         # Finally, check updated params

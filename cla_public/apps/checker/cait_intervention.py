@@ -110,11 +110,14 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
                         org_class = org['service_name'].replace(' ', '-').lower()
                         org.update({'classname': org_class})
                     params['truncate'] = truncate + 1
-                    journey = {}
-                    journey['uuid'] = get_uuid()
+                    journey = {
+                        'uuid': get_uuid()
+                    }
                     if len(choices) > 0:
-                        journey['nodes'] = '/'.join(choices)
-                        journey['last_node'] = choices[-1]
+                        journey.update({
+                            'nodes': '/'.join(choices),
+                            'last_node': choices[-1],
+                        })
                     params['cait_journey'] = journey
 
         # Additional CSS injection
