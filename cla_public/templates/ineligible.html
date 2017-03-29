@@ -8,5 +8,5 @@
 {% block javascripts %}
   {{ super() }}
   {% include '_ga-outcome-pageview.html' %}
-  {{ CAIT.script(info_tools, cait_variant) }}
+  {{ CAIT.script(info_tools, cait_variant, cait_journey, cait_js) }}
 {% endblock %}

@@ -41,55 +41,61 @@
     }
  }
 
- {{ css }}
+ {{ css | safe }}
 
   </style>
 {% endif %}
 {% endmacro %}
 
-{% macro script(info_tools, cait_variant = '') %}
+{% macro script(info_tools, cait_variant = '', cait_journey = {}, js = '') %}
   <script>
-  var variant = '{{ cait_variant }}' || 'none'
-  function gaSendEvent(category, action, label) {
-    ga('send', 'event', category, action, label)
-  }
-  function gaSendOrgLink(label) {
-    label = variant + '|' + label
-    var userId = document.cookie.split('; ')
-                  .filter(function (i) { return i.indexOf('_ga=') === 0 })
-                  .map(function (i) { return i.replace('_ga=', '') })
-                  .join('')
-    gaSendEvent('External Link User', userId, label)
-  }
-  jQuery(document).ready(function(){
-    jQuery('#content a').on('click', function(e){
-      gaSendOrgLink(this.innerText.replace(/ Opens in .*/, ''))
-    })
-  })
-
-  {% if info_tools %}
-    {% if cait_variant %}
-    gaSendEvent('CAIT exit page', document.location.pathname, variant)
-    {% endif %}
-
-  if (jQuery(window).width() >= 641) {
-    var cait_survey
-    var topTarget = 0
+  (function() {
+    var variant = '{{ cait_variant }}' || 'none'
+    function gaSendEvent(category, action, label) {
+      ga('send', 'event', category, action, label)
+    }
+    function gaSendOrgLink(label) {
+      label = variant + '|' + label
+      var userId = document.cookie.split('; ')
+                    .filter(function (i) { return i.indexOf('_ga=') === 0 })
+                    .map(function (i) { return i.replace('_ga=', '') })
+                    .join('')
+      gaSendEvent('External Link User', userId, label)
+    }
     jQuery(document).ready(function(){
-      cait_survey = jQuery('.cait_survey')
-      if (cait_survey.length) {
-        topTarget = cait_survey.offset().top - parseInt(cait_survey.css('margin-top'), 10)
-        jQuery(document).on('scroll', function(e) {
-          var scrolled = jQuery(this).scrollTop()
-          var topShift = scrolled - topTarget;
-          if (topShift < 0) {
-            topShift = 0
-          }
-          cait_survey.css('top', topShift + 'px')
-        })
-      }
+      jQuery('#content a').on('click', function(e){
+        gaSendOrgLink(this.innerText.replace(/ Opens in .*/, ''))
+      })
     })
-  }
-  {% endif %}
+
+    {% if info_tools %}
+      {% if cait_variant %}
+      gaSendEvent('CAIT exit page', document.location.pathname, variant)
+      {% endif %}
+
+    if (jQuery(window).width() >= 641) {
+      var cait_survey
+      var topTarget = 0
+      jQuery(document).ready(function(){
+        cait_survey = jQuery('.cait_survey')
+        if (cait_survey.length) {
+          topTarget = cait_survey.offset().top - parseInt(cait_survey.css('margin-top'), 10)
+          jQuery(document).on('scroll', function(e) {
+            var scrolled = jQuery(this).scrollTop()
+            var topShift = scrolled - topTarget;
+            if (topShift < 0) {
+              topShift = 0
+            }
+            cait_survey.css('top', topShift + 'px')
+          })
+        }
+      })
+    }
+    var nodes = '{{ cait_journey.nodes }}'
+    var last_node = '{{ cait_journey.last_node }}'
+    var uuid = '{{ cait_journey.uuid }}'
+    {{ js | safe }}
+    {% endif %}
+  })()
   </script>
 {% endmacro %}

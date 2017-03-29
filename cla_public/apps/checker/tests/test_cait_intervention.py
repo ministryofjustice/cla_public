@@ -100,12 +100,23 @@ class TestCaitIntervention(unittest.TestCase):
                 survey.get('body'),
                 'body <a href="http://survey/default" target="cait_survey">'
                 'answer some questions</a>?')
+            self.assertEqual(params.get('cait_css'), 'body { background: red; }')
+            self.assertEqual(params.get('cait_js'), "alert('foo')")
+            journey = params.get('cait_journey', {})
+            self.assertEqual(journey.get('uuid'), None)
+            self.assertEqual(journey.get('nodes'), None)
+            self.assertEqual(journey.get('last_node'), None)
 
             # call again and get the other variant
             params = copy(DEFAULT_PARAMS_OUT)
             params.update(call_cait_params())
             self.assertEqual(params.get('cait_variant'), 'variant-plain')
             self.assertEqual(params.get('truncate'), 6)
+            journey = params.get('cait_journey', {})
+            # should be a uuid, but no node info
+            self.assertNotEqual(journey.get('uuid'), None)
+            self.assertEqual(journey.get('nodes'), None)
+            self.assertEqual(journey.get('last_node'), None)
 
             # call again and get the default once more
             params = copy(DEFAULT_PARAMS_OUT)
@@ -118,6 +129,11 @@ class TestCaitIntervention(unittest.TestCase):
             params.update(call_cait_params(['n4334', 'n105', 'n572']))
             survey = params.get('cait_survey')
             self.assertIn('http://survey/a', survey.get('body'))
+            journey = params.get('cait_journey', {})
+            # should be a uuid and node info
+            self.assertNotEqual(journey.get('uuid'), None)
+            self.assertEqual(journey.get('nodes'), 'n4334/n105/n572')
+            self.assertEqual(journey.get('last_node'), 'n572')
 
             # level 1 node we don't want to match
             params = copy(DEFAULT_PARAMS_OUT)
