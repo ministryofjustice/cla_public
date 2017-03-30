@@ -57,7 +57,27 @@ class TestCaitIntervention(unittest.TestCase):
 
     def setUp(self):
         self.app = create_app('config/testing.py')
+        self.client = self.app.test_client()
         self.app.test_request_context().push()
+
+    def test_diagnosis_pathway(self):
+        diagnosis_paths = [
+            '/scope/diagnosis/',
+            '/scope/diagnosis/n43n14/',
+            '/scope/diagnosis/n43n14/n105/',
+            '/scope/diagnosis/n43n14/n105/n106/',
+            '/scope/refer/family',
+        ]
+
+        self.client.get('/start')
+
+        for path in diagnosis_paths:
+            response = self.client.get(path)
+            self.assertEqual(response.status_code, 200)
+
+    def test_direct_pathway(self):
+        response = self.client.get('/scope/refer/family')
+        self.assertEqual(response.status_code, 200)
 
     # Simulate a config file not being returned
     @mock.patch(REQUESTS_GET, setup_mock('', 404))
@@ -82,6 +102,10 @@ class TestCaitIntervention(unittest.TestCase):
             params = copy(DEFAULT_PARAMS_OUT)
             params.update(call_cait_params())
             self.assertEqual(params, DEFAULT_PARAMS_OUT)
+
+            # check the exit page actually renders
+            response = self.client.get('/scope/refer/family')
+            self.assertEqual(response.status_code, 200)
 
     # Simulate a config file being returned that has on values
     @mock.patch(REQUESTS_GET, setup_mock(configs['on'], 200))
@@ -152,6 +176,10 @@ class TestCaitIntervention(unittest.TestCase):
             params.update(call_cait_params(['n4334', 'n97', 'n49a']))
             survey = params.get('cait_survey')
             self.assertIn(DEFAULT_SURVEY, survey.get('body'))
+
+            # check the exit page actually renders
+            response = self.client.get('/scope/refer/family')
+            self.assertEqual(response.status_code, 200)
 
         # Shouldn't run if user has gone through financial check
         with self.app.test_request_context(SCOPE_CHECKER):

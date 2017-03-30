@@ -91,9 +91,11 @@
         }
       })
     }
+    {% if cait_journey %}
     var nodes = '{{ cait_journey.nodes }}'
     var last_node = '{{ cait_journey.last_node }}'
     var uuid = '{{ cait_journey.uuid }}'
+    {% endif %}
     {{ js | safe }}
     {% endif %}
   })()
