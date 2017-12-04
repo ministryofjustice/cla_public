@@ -241,7 +241,7 @@ def smoke_tests():
 @base.route('/ping.json')
 def ping():
     return jsonify({
-        'version_number': os.environ.get('APPVERSION'),
+        'version_number': os.environ.get('APPVERSION', os.environ.get('APP_VERSION')),
         'build_date': os.environ.get('APP_BUILD_DATE'),
         'commit_id': os.environ.get('APP_GIT_COMMIT'),
         'build_tag': os.environ.get('APP_BUILD_TAG')
