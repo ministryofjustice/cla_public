@@ -6,8 +6,6 @@
 # Pull base image.
 FROM phusion/baseimage:0.9.11
 
-MAINTAINER Peter Idah <peter.idah@digital.justice.gov.uk>
-
 # Set correct environment variables.
 ENV HOME /root
 # Use baseimage-docker's init process.
@@ -20,7 +18,8 @@ RUN echo "Europe/London" > /etc/timezone  &&  dpkg-reconfigure -f noninteractive
 RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
   apt-get -y --force-yes install apt-utils python-pip \
   python-dev build-essential git software-properties-common \
-  python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev
+  python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev \
+  nodejs npm ruby-bundler
 
 # Install Nginx.
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update
@@ -62,4 +61,5 @@ ADD ./ /home/app/flask
 # PIP INSTALL APPLICATION
 RUN cd /home/app/flask && pip install -r requirements.txt && find . -name '*.pyc' -delete && pybabel compile -d cla_public/translations
 
+RUN cd /home/app/flask && bundle install
 ADD ./docker/nginx.conf /etc/nginx/nginx.conf
