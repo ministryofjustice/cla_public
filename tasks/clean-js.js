@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var paths = require('./_paths');
 var del = require('del');
 
-gulp.task('clean-js', function(cb) {
+gulp.task('clean-js', function() {
   // Ensure the files are deleted before calling next task
-  del(paths.dest + 'javascripts', cb);
+  del(paths.dest + 'javascripts');
 });
