@@ -16,7 +16,7 @@
     "del": "^3.0.0",
     "govuk_frontend_toolkit": "^2.0.1",
     "gulp": "^3.8.11",
-    "gulp-clean-css": "^3.9.0",
+    "gulp-clean-css": "^3.9.2",
     "gulp-concat": "~2.6.1",
     "gulp-declare": "0.3.0",
     "gulp-define-module": "0.1.5",
