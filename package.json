@@ -23,7 +23,7 @@
     "gulp-filter": "^5.0.1",
     "gulp-ignore": "^2.0.2",
     "gulp-imagemin": "~4.0.0",
-    "gulp-jshint": "~2.0.4",
+    "gulp-jshint": "~2.1.0",
     "gulp-print": "^2.0.1",
     "gulp-rename": "~1.2.0",
     "gulp-ruby-sass": "~2.1.1",
