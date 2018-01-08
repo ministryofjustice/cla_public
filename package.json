@@ -14,7 +14,7 @@
     "browser-sync": "~2.23.2",
     "bs-html-injector": "^3.0.3",
     "del": "^3.0.0",
-    "govuk_frontend_toolkit": "^2.0.1",
+    "govuk_frontend_toolkit": "^7.2.0",
     "gulp": "^3.8.11",
     "gulp-clean-css": "^3.9.2",
     "gulp-concat": "~2.6.1",
