@@ -11,7 +11,7 @@
   "engineStrict": true,
   "devDependencies": {
     "bower": "^1.8.2",
-    "browser-sync": "~2.23.2",
+    "browser-sync": "~2.23.5",
     "bs-html-injector": "^3.0.3",
     "del": "^3.0.0",
     "govuk_frontend_toolkit": "^2.0.1",
