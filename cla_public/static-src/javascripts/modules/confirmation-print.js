@@ -1,35 +1,35 @@
-(function () {
-  'use strict';
+'use strict';
 
-  moj.Modules.ConfirmationPrint = {
-    init: function() {
-      this.initTemplates();
-      this.renderButton();
-    },
+var _ = require('lodash');
 
-    renderButton: function() {
-      var contentArea = $('.confirmation-actions');
+moj.Modules.ConfirmationPrint = {
+  init: function() {
+    this.initTemplates();
+    this.renderButton();
+  },
 
-      if(!contentArea.length || !this.printButton || !this.printButton.length) {
-        return;
-      }
+  renderButton: function() {
+    var contentArea = $('.confirmation-actions');
 
-      contentArea.append(this.printButton);
-
-      this.printButton.on('click', function() {
-        window.print();
-        if(window.ga) {
-          window.ga('send', 'event', 'confirmation', 'printed');
-        }
-      });
-    },
-
-    initTemplates: function() {
-      var template = $('#printButtonTemplate');
-
-      if(template.length) {
-        this.printButton = $(_.template(template.html())());
-      }
+    if(!contentArea.length || !this.printButton || !this.printButton.length) {
+      return;
     }
-  };
-}());
+
+    contentArea.append(this.printButton);
+
+    this.printButton.on('click', function() {
+      window.print();
+      if(window.ga) {
+        window.ga('send', 'event', 'confirmation', 'printed');
+      }
+    });
+  },
+
+  initTemplates: function() {
+    var template = $('#printButtonTemplate');
+
+    if(template.length) {
+      this.printButton = $(_.template(template.html())());
+    }
+  }
+};

@@ -1,21 +1,21 @@
-(function () {
-  'use strict';
+'use strict';
 
-  moj.Modules.SkipToContent = {
-    init: function() {
-      this.bindEvents();
-    },
+var _ = require('lodash');
 
-    bindEvents: function() {
-      $('.skiplink').on('click', function(evt) {
-        evt.preventDefault();
-        var href = $(evt.target).attr('href');
-        $(href).attr('tabindex', -1).focus();
-      });
+moj.Modules.SkipToContent = {
+  init: function() {
+    this.bindEvents();
+  },
 
-      $('#content').on('blur', function() {
-        $(this).removeAttr('tabindex');
-      });
-    }
-  };
-}());
+  bindEvents: function() {
+    $('.skiplink').on('click', function(evt) {
+      evt.preventDefault();
+      var href = $(evt.target).attr('href');
+      $(href).attr('tabindex', -1).focus();
+    });
+
+    $('#content').on('blur', function() {
+      $(this).removeAttr('tabindex');
+    });
+  }
+};

@@ -3,20 +3,31 @@
 var gulp = require('gulp');
 var paths = require('./_paths');
 var filter = require('gulp-filter');
-var concat = require('gulp-concat');
+var webpack = require('webpack-stream');
 
 gulp.task('scripts', ['clean-js'], function() {
-  var scripts = paths.vendor_scripts.concat(paths.scripts);
   var withoutDebug = filter(['**/*.js', '!**/*debug*'], { restore: true });
+  var withDebug = gulp.src(paths.scripts);
 
-  var stream = gulp.src(scripts)
+  var stream = gulp.src(paths.scripts)
     .pipe(withoutDebug)
-    .pipe(concat('cla.js'))
+    .pipe(webpack({
+      config : {
+        output: {
+          filename: 'cla.js'
+        }
+      }
+    }))
     .pipe(gulp.dest(paths.dest + 'javascripts'));
 
-  gulp.src(scripts)
-    .pipe(withoutDebug.restore)
-    .pipe(concat('cla-debug.js'))
+  withDebug
+    .pipe(webpack({
+      config : {
+        output: {
+          filename: 'cla-debug.js'
+        }
+      }
+    }))
     .pipe(gulp.dest(paths.dest + 'javascripts'));
 
   return stream;

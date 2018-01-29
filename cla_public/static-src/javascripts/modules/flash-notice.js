@@ -1,43 +1,43 @@
-(function () {
-  'use strict';
+'use strict';
 
-  moj.Modules.FlashNotice = {
-    $flashNotices: $(),
+var _ = require('lodash');
 
-    init: function() {
-      this.cacheEls();
-      this.templates();
-      this.bindEvents();
-      this.addCloseButton();
-    },
+moj.Modules.FlashNotice = {
+  $flashNotices: $(),
 
-    cacheEls: function () {
-      this.$flashNotices = $('.flash-messages');
-    },
+  init: function() {
+    this.cacheEls();
+    this.templates();
+    this.bindEvents();
+    this.addCloseButton();
+  },
 
-    bindEvents: function() {
-      this.$flashNotices.on('click', '.flash-messages-close', function() {
-        $(this).closest('.flash-messages').remove();
-      });
-    },
+  cacheEls: function () {
+    this.$flashNotices = $('.flash-messages');
+  },
 
-    addCloseButton: function() {
-      var self = this;
+  bindEvents: function() {
+    this.$flashNotices.on('click', '.flash-messages-close', function() {
+      $(this).closest('.flash-messages').remove();
+    });
+  },
 
-      if(!self.$closeButton) {
-        return;
-      }
+  addCloseButton: function() {
+    var self = this;
 
-      $.each(this.$flashNotices, function() {
-        $(this).append(self.$closeButton);
-      });
-    },
-
-    templates: function () {
-      var closeButton = _.template($('#flashMessageCloseButton').html());
-      if(closeButton) {
-        this.$closeButton = closeButton();
-      }
+    if(!self.$closeButton) {
+      return;
     }
-  };
-}());
+
+    $.each(this.$flashNotices, function() {
+      $(this).append(self.$closeButton);
+    });
+  },
+
+  templates: function () {
+    var closeButton = _.template($('#flashMessageCloseButton').html());
+    if(closeButton) {
+      this.$closeButton = closeButton();
+    }
+  }
+};

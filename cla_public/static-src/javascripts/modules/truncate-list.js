@@ -1,66 +1,66 @@
-(function() {
-  'use strict';
+'use strict';
 
-  moj.Modules.TruncateList = {
-    el: '[data-truncate]',
+var _ = require('lodash');
 
-    init: function() {
-      this.cacheEls();
-      this.templates();
-      this.processLists();
-    },
+moj.Modules.TruncateList = {
+  el: '[data-truncate]',
 
-    cacheEls: function() {
-      this.$truncatedLists = $(this.el).filter(function() {
-        var value = $(this).data('truncate');
-        var isValidCount = _.isNumber(value) && value > 0;
-        this.truncateItemCount = isValidCount ? value : 0;
-        return isValidCount;
-      });
-    },
+  init: function() {
+    this.cacheEls();
+    this.templates();
+    this.processLists();
+  },
 
-    processLists: function() {
-      if(!this.$truncatedLists.length) {
+  cacheEls: function() {
+    this.$truncatedLists = $(this.el).filter(function() {
+      var value = $(this).data('truncate');
+      var isValidCount = _.isNumber(value) && value > 0;
+      this.truncateItemCount = isValidCount ? value : 0;
+      return isValidCount;
+    });
+  },
+
+  processLists: function() {
+    if(!this.$truncatedLists.length) {
+      return;
+    }
+
+    var self = this;
+
+    this.$truncatedLists.each(function() {
+      var $listItems = $(this).find('> ul > li');
+
+      if(!$listItems.length) {
         return;
       }
 
-      var self = this;
+      this.remainingCount = $listItems.length - this.truncateItemCount;
+      $listItems.slice(this.truncateItemCount).addClass('s-hidden');
 
-      this.$truncatedLists.each(function() {
-        var $listItems = $(this).find('> ul > li');
+      $listItems.slice(this.truncateItemCount).addClass('s-hidden');
 
-        if(!$listItems.length) {
-          return;
-        }
+      self.addExpandLink(this, $listItems);
+    });
+  },
 
-        this.remainingCount = $listItems.length - this.truncateItemCount;
-        $listItems.slice(this.truncateItemCount).addClass('s-hidden');
+  addExpandLink: function(listContainer, $listItems) {
+    var expandButton = $(this.$expandButtonTemplate.replace('{count}', listContainer.remainingCount));
+    var $listContainer = $(listContainer);
 
-        $listItems.slice(this.truncateItemCount).addClass('s-hidden');
+    expandButton.appendTo($listContainer);
 
-        self.addExpandLink(this, $listItems);
-      });
-    },
+    expandButton.on('click', function() {
+      $listItems.removeClass('s-hidden').addClass('s-expanded');
+      expandButton.remove();
 
-    addExpandLink: function(listContainer, $listItems) {
-      var expandButton = $(this.$expandButtonTemplate.replace('{count}', listContainer.remainingCount));
-      var $listContainer = $(listContainer);
+      window.ga('send', 'event', 'org-list', 'expand', $listContainer.data('name'));
+    });
+  },
 
-      expandButton.appendTo($listContainer);
-
-      expandButton.on('click', function() {
-        $listItems.removeClass('s-hidden').addClass('s-expanded');
-        expandButton.remove();
-
-        window.ga('send', 'event', 'org-list', 'expand', $listContainer.data('name'));
-      });
-    },
-
-    templates: function () {
-      var template = _.template($('#truncateListExpandLink').html());
-      if(template) {
-        this.$expandButtonTemplate = template();
-      }
+  templates: function () {
+    var template = _.template($('#truncateListExpandLink').html());
+    if(template) {
+      this.$expandButtonTemplate = template();
     }
-  };
-}());
+  }
+};

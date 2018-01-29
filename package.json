@@ -6,7 +6,8 @@
   },
   "scripts": {
     "test": "./nightwatch -c tests/nightwatch/local.json",
-    "update-selenium": "./node_modules/selenium-standalone/bin/selenium-standalone install"
+    "update-selenium": "./node_modules/selenium-standalone/bin/selenium-standalone install",
+    "build:assets": "gulp build"
   },
   "engineStrict": true,
   "devDependencies": {
@@ -16,11 +17,9 @@
     "govuk_frontend_toolkit": "^2.0.1",
     "gulp": "^3.8.11",
     "gulp-clean-css": "^3.9.2",
-    "gulp-concat": "~2.6.1",
-    "gulp-declare": "0.3.0",
+    "gulp-debug": "^3.2.0",
     "gulp-define-module": "0.1.5",
     "gulp-filter": "^5.1.0",
-    "gulp-ignore": "^2.0.2",
     "gulp-imagemin": "~4.0.0",
     "gulp-jshint": "~2.1.0",
     "gulp-print": "^2.0.1",
@@ -30,10 +29,12 @@
     "jshint": "^2.9.5",
     "jshint-stylish": "~2.2.1",
     "moment": "^2.8.4",
-    "nightwatch": "0.9.19",
+    "nightwatch": "0.7.9",
     "phantomjs": "1.9.17",
     "require-dir": "^0.3.2",
-    "selenium-standalone": "~6.12.0",
+    "selenium-standalone": "~4.4",
+    "webpack": "^3.10.0",
+    "webpack-stream": "^4.0.0",
     "yargs": "^10.0.3"
   },
   "dependencies": {

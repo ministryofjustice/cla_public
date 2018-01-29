@@ -1,40 +1,38 @@
-(function () {
-  'use strict';
+'use strict';
 
-  moj.Modules.FieldHelp = {
-    moreInfos: [],
+moj.Modules.FieldHelp = {
+  moreInfos: [],
 
-    init: function() {
-      this.cacheEls();
-      this.bindEvents();
-      this.addMoreInfoLink();
-    },
+  init: function() {
+    this.cacheEls();
+    this.bindEvents();
+    this.addMoreInfoLink();
+  },
 
-    bindEvents: function() {
-      this.moreInfos.parent()
-        .on('click', 'a', this.handleToggle);
-    },
+  bindEvents: function() {
+    this.moreInfos.parent()
+      .on('click', 'a', this.handleToggle);
+  },
 
-    handleToggle: function(evt) {
-      var $fieldHelp = $(evt.target).parent();
-      $fieldHelp
-        .toggleClass('s-expanded')
-        .find('.field-more-info')
-          .attr('aria-expanded', function() {
-            return $(this).attr('aria-expanded') === 'false';
-          });
-    },
+  handleToggle: function(evt) {
+    var $fieldHelp = $(evt.target).parent();
+    $fieldHelp
+      .toggleClass('s-expanded')
+      .find('.field-more-info')
+        .attr('aria-expanded', function() {
+          return $(this).attr('aria-expanded') === 'false';
+        });
+  },
 
-    addMoreInfoLink: function() {
-      $.each(this.moreInfos, function(i, el) {
-        $(this).attr('aria-expanded', 'false');
-        $($('#moreInfoButtonLink').html())
-          .insertBefore($(el));
-      });
-    },
+  addMoreInfoLink: function() {
+    $.each(this.moreInfos, function(i, el) {
+      $(this).attr('aria-expanded', 'false');
+      $($('#moreInfoButtonLink').html())
+        .insertBefore($(el));
+    });
+  },
 
-    cacheEls: function() {
-      this.moreInfos = $('.field-more-info');
-    }
-  };
-}());
+  cacheEls: function() {
+    this.moreInfos = $('.field-more-info');
+  }
+};

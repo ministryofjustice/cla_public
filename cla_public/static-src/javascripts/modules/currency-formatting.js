@@ -1,32 +1,33 @@
-(function () {
-  'use strict';
+'use strict';
 
-  moj.Modules.CurrencyFormatting = {
-    currencyFields: [],
+//var numeral = require('numeral');
 
-    init: function() {
-      this.cacheEls();
-      this.bindEvents();
-      this.currencyFields.each(function(){
-        $(this).trigger('blur');
-      });
-    },
+moj.Modules.CurrencyFormatting = {
+  currencyFields: [],
 
-    bindEvents: function() {
-      this.currencyFields.on('blur', this.formatCurrency);
-    },
+  init: function() {
+    this.cacheEls();
+    this.bindEvents();
+    this.currencyFields.each(function(){
+      $(this).trigger('blur');
+    });
+  },
 
-    formatCurrency: function(evt) {
-      var $field = $(evt.target);
-      var entry = $field.val().toString().replace(/,/g, '');
+  bindEvents: function() {
+    this.currencyFields.on('blur', this.formatCurrency);
+  },
 
-      if(!isNaN(parseFloat(entry))) {
-        $field.val(numeral(entry).format('0,0.00'));
-      }
-    },
+  formatCurrency: function(evt) {
+    var $field = $(evt.target);
+    var entry = $field.val().toString().replace(/,/g, '');
 
-    cacheEls: function() {
-      this.currencyFields = $('.input-prefix:contains("£") + input');
+    if(!isNaN(parseFloat(entry))) {
+      $field.val(numeral(entry).format('0,0.00'));
     }
-  };
-}());
+  },
+
+  cacheEls: function() {
+    this.currencyFields = $('.input-prefix:contains("£") + input');
+  }
+};
+

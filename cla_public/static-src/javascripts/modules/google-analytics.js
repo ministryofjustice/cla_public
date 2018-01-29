@@ -1,5 +1,6 @@
-(function () {
-  'use strict';
+'use strict';
+
+var _ = require('lodash');
 
   // To send custom events:
   // <a href="/link" data-ga="event:category/action/label">Link</a>
@@ -10,95 +11,94 @@
 
   // Note: This script is not loaded in IE6
 
-  var HIT_TIMEOUT = 400;
+var HIT_TIMEOUT = 400;
 
-  moj.Modules.GA = {
-    init: function() {
-      this.bindEvents();
-    },
+moj.Modules.GA = {
+  init: function() {
+    this.bindEvents();
+  },
 
-    bindEvents: function () {
-      var that = this;
+  bindEvents: function () {
+    var that = this;
 
-      $('a[data-ga]').on('click', function(evt) {
-        var $link = $(this);
-        var exitLink = $link.attr('target') === '_blank';
-        var gaData = $link.data('ga');
-        var gaTypeValuePair = gaData.split(':');
+    $('a[data-ga]').on('click', function(evt) {
+      var $link = $(this);
+      var exitLink = $link.attr('target') === '_blank';
+      var gaData = $link.data('ga');
+      var gaTypeValuePair = gaData.split(':');
 
-        var type = gaTypeValuePair[0];
-        var value = gaTypeValuePair[1];
+      var type = gaTypeValuePair[0];
+      var value = gaTypeValuePair[1];
 
-        if(window.ga && _.includes(['event', 'pageview'], type) && value) {
+      if(window.ga && _.includes(['event', 'pageview'], type) && value) {
 
-          if (!exitLink) {
-            if (evt.preventDefault) {
-              evt.preventDefault();
-            } else {
-              evt.returnValue = false;
-            }
+        if (!exitLink) {
+          if (evt.preventDefault) {
+            evt.preventDefault();
+          } else {
+            evt.returnValue = false;
           }
-
-          that.send(type, gaTypeValuePair[1], $.proxy(function() {
-            if (!exitLink) {
-              window.location.href = this.href;
-            }
-          }, this));
         }
-      });
-    },
 
-    _prepareEvent: function(payload, value) {
-      var gaEvent = value.split('/');
-
-      payload.eventCategory = gaEvent[0];
-      payload.eventAction = gaEvent[1];
-
-      if(gaEvent[2]) {
-        payload.eventLabel = gaEvent[2];
+        that.send(type, gaTypeValuePair[1], $.proxy(function() {
+          if (!exitLink) {
+            window.location.href = this.href;
+          }
+        }, this));
       }
+    });
+  },
 
-      if(gaEvent[3]) {
-        payload.eventValue = gaEvent[3];
-      }
+  _prepareEvent: function(payload, value) {
+    var gaEvent = value.split('/');
 
-      return payload;
-    },
+    payload.eventCategory = gaEvent[0];
+    payload.eventAction = gaEvent[1];
 
-    send: function(type, value, cb) {
-      var hitTimeout = setTimeout(cb, HIT_TIMEOUT);
+    if(gaEvent[2]) {
+      payload.eventLabel = gaEvent[2];
+    }
 
-      function exit() {
-        clearTimeout(hitTimeout);
+    if(gaEvent[3]) {
+      payload.eventValue = gaEvent[3];
+    }
 
-        if(cb) {
-          cb();
-        }
-      }
+    return payload;
+  },
 
-      var payload = {
-        hitType: type
-      };
+  send: function(type, value, cb) {
+    var hitTimeout = setTimeout(cb, HIT_TIMEOUT);
 
-      if(type === 'event') {
-        payload = this._prepareEvent(payload, value);
+    function exit() {
+      clearTimeout(hitTimeout);
 
-        // Exit if category or action are not defined
-        if(!payload.eventCategory && !payload.eventAction) {
-          exit();
-        }
-      }
-
-      if(type === 'pageview') {
-        payload.page = value;
-      }
-
-      payload.hitCallback = exit;
-
-      // Only send GA event or pageview when required fields are specified
-      if(payload.page || (payload.eventCategory && payload.eventAction)) {
-        window.ga('send', payload);
+      if(cb) {
+        cb();
       }
     }
-  };
-}());
+
+    var payload = {
+      hitType: type
+    };
+
+    if(type === 'event') {
+      payload = this._prepareEvent(payload, value);
+
+      // Exit if category or action are not defined
+      if(!payload.eventCategory && !payload.eventAction) {
+        exit();
+      }
+    }
+
+    if(type === 'pageview') {
+      payload.page = value;
+    }
+
+    payload.hitCallback = exit;
+
+    // Only send GA event or pageview when required fields are specified
+    if(payload.page || (payload.eventCategory && payload.eventAction)) {
+      window.ga('send', payload);
+    }
+  }
+};

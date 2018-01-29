@@ -21,7 +21,6 @@ install:
   - sudo npm install npm -g
   - sudo npm install gulp -g
   - npm install
-  - bower install
   - gulp
 
 before_script:

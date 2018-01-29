@@ -51,10 +51,6 @@ CLAP is using [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tas
 - `sass` builds the SCSS and generates source maps
 - `serve` watches the files for changes and reloads the browser using [BrowserSync](http://www.browsersync.io/)
 
-If you have [Foreman](https://github.com/ddollar/foreman) installed you can run `./tools/start-server` which will start the CLA Flask server
-and run the `gulp serve` process, enabling you to concentrate on the code leaving building and reloading
-to `serve` task.
-
 
 Test
 ----

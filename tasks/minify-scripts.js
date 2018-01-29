@@ -8,7 +8,7 @@ var rename = require('gulp-rename');
 gulp.task('minify-scripts', ['scripts', 'lint'], function() {
   return gulp
     .src(paths.dest + 'javascripts/*.js')
-    .pipe(uglify({ mangle: false, compress: false })) // don't compress to prevent reorder
+    .pipe(uglify({ mangle: true, compress: true })) // don't compress to prevent reorder
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(paths.dest + 'javascripts'));
 });
