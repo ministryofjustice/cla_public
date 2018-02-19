@@ -4,7 +4,6 @@ import os
 import unittest
 
 import mock
-from requests.exceptions import ConnectionError, Timeout
 
 from cla_public.app import create_app
 from cla_public.apps.checker.cait_intervention import get_cait_params
@@ -21,7 +20,7 @@ for state in ['on', 'off']:
 
 
 # Provide a mock response for the tests
-def setup_mock(mock_json, mock_status):
+def setup_mock_response(mock_json, mock_status):
     def mocked_requests_get(*args, **kwargs):
         class MockResponse:
             def __init__(self, mock_json, mock_status):
@@ -34,6 +33,12 @@ def setup_mock(mock_json, mock_status):
     return mocked_requests_get
 
 
+def setup_organisation_list(organisation_list=[]):
+    def mocked_organisation_list(*args, **kwargs):
+        return organisation_list
+    return mocked_organisation_list
+
+
 # Call the cait intervention code with standard params
 def call_cait_params(choices=[]):
     return get_cait_params('Family', [], choices)
@@ -42,6 +47,7 @@ def call_cait_params(choices=[]):
 
 # Path to requests.get
 REQUESTS_GET = 'cla_public.apps.checker.cait_intervention.requests.get'
+ORGANISATION_LIST = 'cla_public.apps.checker.views.get_organisation_list'
 
 # Scope paths
 SCOPE_REFER = '/scope/refer/family'
@@ -60,27 +66,13 @@ class TestCaitIntervention(unittest.TestCase):
         self.client = self.app.test_client()
         self.app.test_request_context().push()
 
-    def test_diagnosis_pathway(self):
-        diagnosis_paths = [
-            '/scope/diagnosis/',
-            '/scope/diagnosis/n43n14/',
-            '/scope/diagnosis/n43n14/n105/',
-            '/scope/diagnosis/n43n14/n105/n106/',
-            '/scope/refer/family',
-        ]
-
-        self.client.get('/start')
-
-        for path in diagnosis_paths:
-            response = self.client.get(path)
-            self.assertEqual(response.status_code, 200)
-
+    @mock.patch(ORGANISATION_LIST, setup_organisation_list())
     def test_direct_pathway(self):
         response = self.client.get('/scope/refer/family')
         self.assertEqual(response.status_code, 200)
 
     # Simulate a config file not being returned
-    @mock.patch(REQUESTS_GET, setup_mock('', 404))
+    @mock.patch(REQUESTS_GET, setup_mock_response('', 404))
     def test_config_missing(self):
         with self.app.test_request_context(SCOPE_REFER):
             params = copy(DEFAULT_PARAMS_OUT)
@@ -88,7 +80,7 @@ class TestCaitIntervention(unittest.TestCase):
             self.assertEqual(params, DEFAULT_PARAMS_OUT)
 
     # Simulate a config file being returned that is invalid
-    @mock.patch(REQUESTS_GET, setup_mock('{"fdfd', 200))
+    @mock.patch(REQUESTS_GET, setup_mock_response('{"fdfd', 200))
     def test_invalid_json(self):
         with self.app.test_request_context(SCOPE_REFER):
             params = copy(DEFAULT_PARAMS_OUT)
@@ -96,7 +88,8 @@ class TestCaitIntervention(unittest.TestCase):
             self.assertEqual(params, DEFAULT_PARAMS_OUT)
 
     # Simulate a config file being returned that has off values
-    @mock.patch(REQUESTS_GET, setup_mock(configs['off'], 200))
+    @mock.patch(ORGANISATION_LIST, setup_organisation_list())
+    @mock.patch(REQUESTS_GET, setup_mock_response(configs['off'], 200))
     def test_config_off(self):
         with self.app.test_request_context(SCOPE_REFER):
             params = copy(DEFAULT_PARAMS_OUT)
@@ -108,7 +101,8 @@ class TestCaitIntervention(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
 
     # Simulate a config file being returned that has on values
-    @mock.patch(REQUESTS_GET, setup_mock(configs['on'], 200))
+    @mock.patch(ORGANISATION_LIST, setup_organisation_list())
+    @mock.patch(REQUESTS_GET, setup_mock_response(configs['on'], 200))
     def test_config_on(self):
 
         # Finally, check updated params

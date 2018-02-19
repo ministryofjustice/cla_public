@@ -18,6 +18,21 @@ class TestReviewPage(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.json().get('nodes')), n)
 
+    def test_diagnosis_pathway(self):
+        diagnosis_paths = [
+            '/scope/diagnosis/',
+            '/scope/diagnosis/n43n14/',
+            '/scope/diagnosis/n43n14/n105/',
+            '/scope/diagnosis/n43n14/n105/n106/',
+            '/scope/refer/family',
+        ]
+
+        self.client.get('/start')
+
+        for path in diagnosis_paths:
+            response = self.client.get(path)
+            self.assertEqual(response.status_code, 200)
+
     def test_outcome(self):
         paths = [
             # family > disputes over children > with ex over children > domestic abuse > no immediate harm risk
