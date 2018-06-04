@@ -37,6 +37,6 @@
     "phantomjs": "1.9.17",
     "require-dir": "^0.3.2",
     "selenium-standalone": "~6.12.0",
-    "yargs": "^10.0.3"
+    "yargs": "^11.0.0"
   }
 }
