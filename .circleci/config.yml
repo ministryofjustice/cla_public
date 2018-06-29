@@ -1,5 +1,18 @@
 version: 2
 jobs:
+  build:
+    docker:
+      - image: docker:18-git
+    environment:
+      CLA_DOCKER_REGISTRY: "cla-registry.dsd.io"
+      APP_NAME: "cla_public"
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: docker build --tag $CLA_DOCKER_REGISTRY/$APP_NAME:$CIRCLE_SHA1 .
+
   test:
     docker:
       - image: python:2.7-alpine3.7
@@ -32,8 +45,10 @@ jobs:
           command: |
             source env/bin/activate
             python manage.py test
+
 workflows:
   version: 2
   build_and_test:
     jobs:
       - test
+      - build
