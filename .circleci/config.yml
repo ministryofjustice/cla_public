@@ -4,14 +4,27 @@ jobs:
     docker:
       - image: docker:18-git
     environment:
-      CLA_DOCKER_REGISTRY: "cla-registry.dsd.io"
-      APP_NAME: "cla_public"
+      APP_NAME: "get-access/cla_public"
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to contrainer registry
+          command: |
+            apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ aws-cli
+            login="$(aws ecr get-login --region eu-west-1 --no-include-email)"
+            ${login}
       - run:
           name: Build Docker image
-          command: docker build --tag $CLA_DOCKER_REGISTRY/$APP_NAME:$CIRCLE_SHA1 .
+          command: |
+            docker build --tag $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 .
+            docker tag $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 $ECR_ENDPOINT/$APP_NAME:$CIRCLE_BRANCH
+      - run:
+          name: Push Docker image
+          command: |
+            docker push $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1
+            docker push $ECR_ENDPOINT/$APP_NAME:$CIRCLE_BRANCH
 
   test:
     docker:
