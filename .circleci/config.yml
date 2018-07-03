@@ -21,6 +21,10 @@ jobs:
             docker build --tag $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 .
             docker tag $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 $ECR_ENDPOINT/$APP_NAME:$CIRCLE_BRANCH
       - run:
+          name: Validate Python version
+          command: |
+            docker run --rm --tty --interactive $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 python --version | grep "2.7"
+      - run:
           name: Push Docker image
           command: |
             docker push $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1
