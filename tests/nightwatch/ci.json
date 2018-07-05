@@ -7,15 +7,15 @@
   "selenium" : {
     "start_process" : true,
     "log_path": "tests/reports",
-    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/2.45.0-server.jar",
+    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/3.7.1-server.jar",
     "cli_args": {
-      "webdriver.chrome.driver": "node_modules/selenium-standalone/.selenium/chromedriver/2.15-x64-chromedriver"
+      "webdriver.chrome.driver": "node_modules/selenium-standalone/.selenium/chromedriver/2.33-x64-chromedriver"
     }
   },
 
   "test_settings" : {
     "default" : {
-      "launch_url" : "http://localhost:${CLA_PUBLIC_PORT}",
+      "launch_url" : "http://localhost:5000",
       "silent": true,
       "desiredCapabilities": {
         "javascriptEnabled" : true,
