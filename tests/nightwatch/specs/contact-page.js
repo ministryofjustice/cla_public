@@ -30,6 +30,7 @@ function willCallWithNotes(client, notes_text) {
 }
 
 module.exports = {
+  '@disabled': true,
   'Notes max length is 4000 chars': function (client) {
     contactPage(client);
     willCallWithNotes(client, text(4000));

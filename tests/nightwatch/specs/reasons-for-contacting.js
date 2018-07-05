@@ -10,6 +10,7 @@ function reasonsForContactingForm(client) {
 }
 
 module.exports = {
+  '@disabled': true,
   'Reasons for contacting do not need to be filled in': function(client) {
     reasonsForContactingForm(client);
     client

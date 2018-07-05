@@ -32,9 +32,8 @@ var scenarios = [
 ];
 
 module.exports = {
-
+  '@disabled': true,
   'Scope diagnosis scenarios': function(client) {
-
     scenarios.forEach(function(scenario) {
       var scenarioType = scenarioTypes[scenario.type];
 
