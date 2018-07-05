@@ -1,0 +1,71 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:18-git
+    environment:
+      APP_NAME: "get-access/cla_public"
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to contrainer registry
+          command: |
+            apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ aws-cli
+            login="$(aws ecr get-login --region eu-west-1 --no-include-email)"
+            ${login}
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --tag $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 .
+            docker tag $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 $ECR_ENDPOINT/$APP_NAME:$CIRCLE_BRANCH
+      - run:
+          name: Validate Python version
+          command: |
+            docker run --rm --tty --interactive $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 python --version | grep "2.7"
+      - run:
+          name: Push Docker image
+          command: |
+            docker push $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1
+            docker push $ECR_ENDPOINT/$APP_NAME:$CIRCLE_BRANCH
+
+  test:
+    docker:
+      - image: python:2.7-alpine3.7
+    steps:
+      - run:
+          name: Setup environment
+          command: apk add --no-cache --no-progress build-base git libffi-dev openssh openssl-dev
+      - checkout
+      - run:
+          name: Setup Python environment
+          command: |
+            pip install virtualenv
+            virtualenv env
+
+      - restore_cache:
+          keys:
+            - pip-v1-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            source env/bin/activate
+            pip install --requirement requirements.txt --requirement requirements/test.txt
+      - save_cache:
+          key: pip-v1-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
+          paths:
+            - "~/.cache/pip"
+
+      - run:
+          name: Run unit tests
+          command: |
+            source env/bin/activate
+            python manage.py test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      - build
