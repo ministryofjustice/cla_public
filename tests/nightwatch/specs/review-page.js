@@ -4,6 +4,7 @@ var _ = require('lodash');
 var constants = require('../modules/constants');
 
 module.exports = {
+  '@disabled': true,
   'Scope diagnosis': function(client) {
     client
       .startService()

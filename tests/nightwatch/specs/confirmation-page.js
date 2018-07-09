@@ -38,6 +38,7 @@ var checkCallbackTime = function(client, then, time) {
 };
 
 module.exports = {
+  '@disabled': true,
   'Check callback today (next available)': function(client) {
     var timeIsMocked = process.argv.indexOf('-M') !== -1;
     var now = moment();

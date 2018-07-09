@@ -32,11 +32,8 @@ jobs:
 
   test:
     docker:
-      - image: python:2.7-alpine3.7
+      - image: circleci/python:2.7
     steps:
-      - run:
-          name: Setup environment
-          command: apk add --no-cache --no-progress build-base git libffi-dev openssh openssl-dev
       - checkout
       - run:
           name: Setup Python environment
@@ -46,14 +43,14 @@ jobs:
 
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
+            - pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
       - run:
           name: Install dependencies
           command: |
             source env/bin/activate
             pip install --requirement requirements.txt --requirement requirements/test.txt
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
+          key: pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
           paths:
             - "~/.cache/pip"
 
@@ -63,9 +60,70 @@ jobs:
             source env/bin/activate
             python manage.py test
 
+  browser-test:
+    docker:
+      - image: circleci/python:2.7-node-browsers
+    steps:
+      - checkout
+      - run:
+          name: Setup Python environment
+          command: |
+            pip install virtualenv
+            virtualenv env
+
+      - restore_cache:
+          keys:
+            - pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            source env/bin/activate
+            pip install --requirement requirements.txt --requirement requirements/test.txt
+      - save_cache:
+          key: pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
+          paths:
+            - "~/.cache/pip"
+
+      - restore_cache:
+          keys:
+            - npm-v1-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install javascript dependencies
+          command: |
+            npm install
+            ./node_modules/.bin/bower install
+            npm run update-selenium
+      - save_cache:
+          key: npm-v1-{{ checksum "package-lock.json" }}
+          paths:
+            - "./node_modules"
+
+      - run:
+          name: Compile assets
+          command: ./node_modules/.bin/gulp
+
+      - run:
+          name: Start server
+          background: true
+          command: |
+            source env/bin/activate
+            python manage.py runserver
+      - run:
+          name: Run browser tests
+          command: |
+            dockerize -wait tcp://localhost:5000
+            ./nightwatch -c tests/nightwatch/ci.json --env chrome
+      - store_artifacts:
+          path: tests/reports
+
+
 workflows:
   version: 2
   build_and_test:
     jobs:
       - test
-      - build
+      - browser-test
+      - build:
+          requires:
+            - test
+            - browser-test

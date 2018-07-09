@@ -7,6 +7,7 @@ module.exports = {
     client.startService();
   },
 
+  '@disabled': true,
   'Scope diagnosis': function(client) {
     client.scopeDiagnosis(constants.SCOPE_PATHS.clinnegFaceToFace);
   },
