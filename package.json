@@ -36,7 +36,7 @@
     "nightwatch": "0.9.19",
     "phantomjs": "1.9.17",
     "require-dir": "^0.3.2",
-    "selenium-standalone": "~6.12.0",
+    "selenium-standalone": "~6.14.1",
     "yargs": "^10.0.3"
   }
 }
