@@ -7,9 +7,9 @@
   "selenium" : {
     "start_process" : true,
     "log_path": "tests/reports",
-    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/3.7.1-server.jar",
+    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/3.12.0-server.jar",
     "cli_args": {
-      "webdriver.chrome.driver": "node_modules/selenium-standalone/.selenium/chromedriver/2.33-x64-chromedriver"
+      "webdriver.chrome.driver": "node_modules/selenium-standalone/.selenium/chromedriver/2.40-x64-chromedriver"
     }
   },
 
