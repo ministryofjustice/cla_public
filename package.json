@@ -25,7 +25,7 @@
     "gulp-imagemin": "~4.0.0",
     "gulp-jshint": "~2.1.0",
     "gulp-print": "^2.0.1",
-    "gulp-rename": "~1.2.0",
+    "gulp-rename": "~1.2.3",
     "gulp-ruby-sass": "~2.1.1",
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.9.5",
