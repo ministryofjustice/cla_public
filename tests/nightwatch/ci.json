@@ -19,22 +19,9 @@
       "silent": true,
       "desiredCapabilities": {
         "javascriptEnabled" : true,
-        "acceptSslCerts" : true,
-        "browserName": "phantomjs",
-        "phantomjs.binary.path" : "node_modules/phantomjs/bin/phantomjs"
+        "acceptSslCerts" : true
       }
     },
-
-    "firefox" : {
-      "screenshots" : {
-        "enabled" : true,
-        "path" : "tests/reports/nightwatch/screenshots/firefox"
-      },
-      "desiredCapabilities": {
-        "browserName": "firefox"
-      }
-    },
-
     "chrome" : {
       "screenshots" : {
         "enabled" : true,
@@ -42,13 +29,6 @@
       },
       "desiredCapabilities": {
         "browserName": "chrome"
-      }
-    },
-
-    "phantomjs": {
-      "desiredCapabilities": {
-        "browserName": "phantomjs",
-        "phantomjs.binary.path" : "node_modules/phantomjs/bin/phantomjs"
       }
     }
   }
