@@ -113,6 +113,8 @@ jobs:
           command: |
             dockerize -wait tcp://localhost:5000
             ./nightwatch -c tests/nightwatch/ci.json --env chrome
+      - store_artifacts:
+          path: tests/reports
 
 
 workflows:
