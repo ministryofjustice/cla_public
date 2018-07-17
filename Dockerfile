@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
   apt-get -y --force-yes install apt-utils python-pip \
   python-dev build-essential git software-properties-common \
   python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev \
-  nodejs npm ruby-bundler tzdata
+  nodejs npm tzdata
 
 # Set timezone
 RUN echo "Europe/London" > /etc/timezone  &&  dpkg-reconfigure -f noninteractive tzdata
@@ -59,9 +59,6 @@ WORKDIR /home/app/flask
 
 # PIP INSTALL APPLICATION
 RUN pip install -r requirements.txt && find . -name '*.pyc' -delete && pybabel compile -d cla_public/translations
-
-#install ruby-sass for gulp minify-css
-RUN bundle install
 
 RUN npm install -g n   # Install n globally
 RUN n 8.9.3       # Install and use v8.9.3
