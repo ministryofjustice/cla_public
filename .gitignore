@@ -59,6 +59,9 @@ venv
 *.iml
 *.iws
 
+# Visual Studio Code
+.vscode
+
 .DS_Store
 
 # node
