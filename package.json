@@ -34,7 +34,7 @@
     "main-bower-files": "^2.1.0",
     "moment": "^2.8.4",
     "nightwatch": "0.9.19",
-    "phantomjs": "1.9.17",
+    "phantomjs": "2.1.7",
     "require-dir": "^0.3.2",
     "selenium-standalone": "~6.12.0",
     "yargs": "^10.0.3"
