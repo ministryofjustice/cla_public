@@ -26,7 +26,7 @@
     "gulp-jshint": "~2.1.0",
     "gulp-print": "^2.0.1",
     "gulp-rename": "~1.2.0",
-    "gulp-ruby-sass": "~2.1.1",
+    "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.9.5",
     "jshint-stylish": "~2.2.1",
@@ -38,5 +38,6 @@
     "require-dir": "^0.3.2",
     "selenium-standalone": "~6.12.0",
     "yargs": "^10.0.3"
-  }
+  },
+  "dependencies": {}
 }
