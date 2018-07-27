@@ -1,8 +1,6 @@
- CLA Public
-============
+# CLA Public
 
-Installation
-------------
+## Installation
 
 Clone the repository:
 
@@ -39,8 +37,7 @@ to run the server with foreman, which will monitor and
 automatically reload CSS and JS changes and enables other whizzy things.
 
 
-Development
------------
+## Development
 
 Assets reside in `static-src` directory and compiled in `static` directory upon running build tasks.
 
@@ -56,8 +53,7 @@ and run the `gulp serve` process, enabling you to concentrate on the code leavin
 to `serve` task.
 
 
-Test
-----
+## Testing
 
 To run Python unit tests, use the following:
 
@@ -82,5 +78,18 @@ Example:
 
     make test browser=chrome spec=review-page
 
+Please see the `Makefile` for other commands.
 
-See the `Makefile` for other self-explanatory commands.
+## Releasing
+
+### Releasing to production
+
+1. [Create a pull request](https://github.com/ministryofjustice/cla_public/compare/master...develop) to merge the `develop` branch into the `master` branch.
+1. Wait for reviews and tests to all pass.
+1. Merge the pull request. (Please do not delete the `develop` branch.)
+1. Start [the Docker build on Jenkins](https://ci.service.dsd.io/view/CLA/job/BUILD-cla_public/build?delay=0sec) for the `master` branch.
+1. Once finished, [deploy `master` to **staging**](https://ci.service.dsd.io/view/CLA/job/DEPLOY-cla_public/build?delay=0sec).
+1. Check that the deploy was successful and staging contains the changes.
+1. [Deploy `master` to **prod**uction](https://ci.service.dsd.io/view/CLA/job/DEPLOY-cla_public/build?delay=0sec).
+
+:tada: :shipit:
