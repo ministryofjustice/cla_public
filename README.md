@@ -82,6 +82,14 @@ Please see the `Makefile` for other commands.
 
 ## Releasing
 
+### Releasing to non-production
+
+1. Check that [the Docker build on Jenkins](https://ci.service.dsd.io/view/CLA/job/BUILD-cla_public/) has finished for the branch that needs to be released.
+1. Once finished, [deploy the branch to an environment](https://ci.service.dsd.io/view/CLA/job/DEPLOY-cla_public/build?delay=0sec).
+    * `ENVIRONMENT` is the target environment, select depending on your needs, eg. "demo", "staging", etc.
+    * `CONTAINER_BRANCH` is the branch that needs to be released.
+    * `VERSION` is either `latest` for the last successful build on that branch, or a specific 7-character prefix of the Git SHA, eg. `35b275a`.
+
 ### Releasing to production
 
 1. [Create a pull request](https://github.com/ministryofjustice/cla_public/compare/master...develop) to merge the `develop` branch into the `master` branch.
