@@ -55,30 +55,33 @@ to `serve` task.
 
 ## Testing
 
+### Unit tests
+
 To run Python unit tests, use the following:
 
     ./manage.py test
 
-To set up for running tests
+### End to end browser tests
+The browser tests reside in https://github.com/ministryofjustice/laa-cla-e2e-tests. Follow the instructions to get these running on your local machine.
 
-    npm run update-selenium
+TODO: Make these tests run automatically when a new build of the `develop` branch is pushed to Docker registry.
 
-(At the moment Jenkins requires npm package selenium-standalone@~4.4 which in turn installs 2.45.0-server.jar and 2.15-x64-chromedriver. These versions seem to run the tests successfully with firefox version 34.0, which must be installed on the Jenkins server)
+If you want to run the tests whilst developing, you'll need to update `docker-compose.yml` from:
 
-To run the NIghtwatch automated tests in PhantomJS use:
+```
+cla_public:
+    image: [url_to_remote_image]
+```
 
-    make test
+to something like:
 
-This command accepts two parameters:
+```
+cla_public:
+    build:
+        context: ../cla_public
+```
 
- - `browser` - `chrome`, `firefox`, `default` (Phantom JS)
- - `spec` - name of the spec file to run (within `tests/nightwatch/specs/` directory)
-
-Example:
-
-    make test browser=chrome spec=review-page
-
-Please see the `Makefile` for other commands.
+where the `context` directory is set to the root of the cla_public directory.
 
 ## Releasing
 

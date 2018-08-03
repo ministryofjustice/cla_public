@@ -25,11 +25,8 @@ pip-log.txt
 .coverage
 .tox
 nosetests.xml
-nightwatch.xml
 
 *.log
-
-tests/reports/nightwatch/*
 
 # Translations
 *.mo

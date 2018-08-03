@@ -27,8 +27,6 @@ def parse_args():
                              'defaults to latest develop branch commit')
     parser.add_argument('--skip-tests', type=str, default='',
                         help='Skip tests e.g. integration, unit, all')
-    parser.add_argument('--test-browser', type=str, default='firefox',
-                        help='e.g. firefox, chrome, phantomjs')
 
     return parser.parse_args()
 
@@ -203,15 +201,6 @@ def run_tests(venv_path, jenkins_build_path, browser, skip_tests=''):
         ),
         background=True)
     wait_until_available('http://localhost:{port}/'.format(port=public_port))
-    run('npm run update-selenium')
-
-    # nightwatch fails to clean up these process
-    # NB: if two jobs are running on the same jenkins slave then one may break the other
-    run('killall phantomjs || echo "No orphan phantomjs processes"')
-    # for pid in $(ps -ef | grep "cla_public-TEST_ALL_AND_DOCKER/workspace/node_modules/phantomjs/lib/phantom/bin/phantomjs" | awk '{print $2}'); do pkill -9 $pid; done
-
-    run('./nightwatch --env {browser} -c tests/nightwatch/jenkins.json -M'.format(browser=browser))
-
 
 def kill_child_processes(pid, sig=signal.SIGTERM):
     ps_cmd = subprocess.Popen(
