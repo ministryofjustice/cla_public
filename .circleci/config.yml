@@ -2,18 +2,19 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:18-git
+      - image: docker:17.03-git
     environment:
       DOCKER_REGISTRY: "registry.service.dsd.io"
       DOCKER_IMAGE: "cla_public"
     steps:
       - checkout
       - setup_remote_docker:
+          version: 17.03.0-ce
           docker_layer_caching: true
       - run:
           name: Login to container registry
           command: |
-            echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DOCKER_REGISTRY
       - run:
           name: Build Docker image
           command: |
