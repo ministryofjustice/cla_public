@@ -2,33 +2,35 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:18-git
+      - image: docker:17.03-git
     environment:
-      APP_NAME: "get-access/cla_public"
+      DOCKER_REGISTRY: "registry.service.dsd.io"
+      DOCKER_IMAGE: "cla_public"
     steps:
       - checkout
       - setup_remote_docker:
+          version: 17.03.0-ce
           docker_layer_caching: true
       - run:
           name: Login to container registry
           command: |
-            apk add --no-cache --no-progress --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ aws-cli
-            login="$(aws ecr get-login --region eu-west-1 --no-include-email)"
-            ${login}
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DOCKER_REGISTRY
       - run:
           name: Build Docker image
           command: |
-            docker build --tag $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 .
-            docker tag $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 $ECR_ENDPOINT/$APP_NAME:$CIRCLE_BRANCH
+            docker build --tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 .
+            docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_BRANCH.$(git rev-parse --short=7 $CIRCLE_SHA1)
+            docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_BRANCH.latest
       - run:
           name: Validate Python version
           command: |
-            docker run --rm --tty --interactive $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1 python --version | grep "2.7"
+            docker run --rm --tty --interactive $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 python --version | grep "2.7"
       - run:
           name: Push Docker image
           command: |
-            docker push $ECR_ENDPOINT/$APP_NAME:$CIRCLE_SHA1
-            docker push $ECR_ENDPOINT/$APP_NAME:$CIRCLE_BRANCH
+            docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1
+            docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_BRANCH.$(git rev-parse --short=7 $CIRCLE_SHA1)
+            docker push $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_BRANCH.latest
 
   test:
     docker:
