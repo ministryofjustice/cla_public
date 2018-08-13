@@ -31,6 +31,7 @@ def human_to_url(value):
 @base.app_template_filter()
 def query_to_dict(value, prop=None):
     result = parse_qs(urlparse(value).query)
-    if prop:
-        result = result[prop]
-    return result
+    if not prop:
+        return result
+
+    return result.get(prop, [])
