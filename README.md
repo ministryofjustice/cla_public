@@ -31,10 +31,10 @@ You can run the server with:
 
 *OR*
 
-    tools/start-dev
+    CLA_PUBLIC_CONFIG=config/testing.py ./manage.py runserver
 
-to run the server with foreman, which will monitor and
-automatically reload CSS and JS changes and enables other whizzy things.
+With the `testing` configuration, you can use `CLA_BACKEND_PORT` and `LAALAA_PORT`
+environment variables to configure the dependent service API ports.
 
 
 ## Development
