@@ -253,4 +253,7 @@ def healthcheck():
         'disk': healthchecks.check_disk(),
         'Backend API test': healthchecks.check_backend_api(),
     }
-    return jsonify(response)
+    ok = all(item['status'] for _key, item in response.iteritems())
+    result = jsonify(response)
+    result.status_code = 200 if ok else 503
+    return result
