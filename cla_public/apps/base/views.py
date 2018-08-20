@@ -6,13 +6,12 @@ import logging
 import datetime
 import re
 from urlparse import urlparse, urljoin
-import requests
 
 from flask import abort, current_app, jsonify, redirect, render_template, \
     session, url_for, request, views
 from flask.ext.babel import lazy_gettext as _
 
-from cla_public.apps.base import base
+from cla_public.apps.base import base, healthchecks
 from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 import cla_public.apps.base.filters
 import cla_public.apps.base.extensions
@@ -250,20 +249,7 @@ def ping():
 
 @base.route('/healthcheck.json')
 def healthcheck():
-    backend_healthcheck_uri = '%s/%s' % (current_app.config['BACKEND_BASE_URI'], 'status/healthcheck.json')
-    backend_healthcheck_response = requests.get(backend_healthcheck_uri)
-    backend_healthcheck_json = backend_healthcheck_response.json()
-
     response = {
-
-        'Backend API test': {
-
-            'status': True if backend_healthcheck_response.ok else backend_healthcheck_response.error,
-            'url': backend_healthcheck_uri,
-            'response': backend_healthcheck_json
-
-        }
-
+        'Backend API test': healthchecks.check_backend_api(),
     }
-
     return jsonify(response)
