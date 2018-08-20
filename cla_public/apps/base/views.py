@@ -250,6 +250,7 @@ def ping():
 @base.route('/healthcheck.json')
 def healthcheck():
     response = {
+        'disk': healthchecks.check_disk(),
         'Backend API test': healthchecks.check_backend_api(),
     }
     return jsonify(response)

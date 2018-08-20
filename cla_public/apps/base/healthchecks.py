@@ -1,7 +1,24 @@
 # -*- coding: utf-8 -*-
 
+import os
 import requests
 from flask import current_app
+
+
+def check_disk():
+    stat = os.statvfs(os.getcwd())
+    available_mb = (stat.f_bavail * stat.f_frsize) / (1024.0 ** 2)
+    total_mb = (stat.f_blocks * stat.f_frsize) / (1024.0 ** 2)
+
+    available_percent = available_mb / total_mb * 100
+    status = True if available_percent > 2.0 else False
+
+    return {
+        'status': status,
+        'available_percent': available_percent,
+        'available_mb': available_mb,
+        'total_mb': total_mb,
+    }
 
 
 def check_backend_api():
