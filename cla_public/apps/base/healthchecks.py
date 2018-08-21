@@ -29,7 +29,8 @@ def check_backend_api():
 
     try:
         backend_healthcheck_response = requests.get(backend_healthcheck_url)
-        status = True if backend_healthcheck_response.ok else backend_healthcheck_response.error
+        if backend_healthcheck_response.ok:
+            status = True
         response_content = backend_healthcheck_response.json()
     except requests.exceptions.RequestException as e:
         status = False

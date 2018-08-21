@@ -68,3 +68,33 @@ class BackendAPIHealthcheckTest(unittest.TestCase):
         result = healthchecks.check_backend_api()
         self.assertDictContainsSubset(
             {'status': True, 'response': {'status': 'UP'}}, result)
+
+
+class HealthcheckEndpointTest(unittest.TestCase):
+    check_disk = 'cla_public.apps.base.healthchecks.check_disk'
+    check_backend_api = 'cla_public.apps.base.healthchecks.check_backend_api'
+
+    def setUp(self):
+        self.app = app.create_app('config/testing.py')
+        self.app.test_request_context().push()
+        self.client = self.app.test_client()
+
+    def assert_response_is_service_unavailable(self):
+        result = self.client.get('/healthcheck.json')
+        self.assertEquals(requests.codes.service_unavailable,
+                          result.status_code)
+
+    def test_healthcheck_returns_service_unavailable_if_any_or_all_checks_fail(self):
+        with mock.patch(self.check_disk, return_value={'status': False}), mock.patch(self.check_backend_api, return_value={'status': True}):
+            self.assert_response_is_service_unavailable()
+
+        with mock.patch(self.check_disk, return_value={'status': True}), mock.patch(self.check_backend_api, return_value={'status': False}):
+            self.assert_response_is_service_unavailable()
+
+        with mock.patch(self.check_disk, return_value={'status': False}), mock.patch(self.check_backend_api, return_value={'status': False}):
+            self.assert_response_is_service_unavailable()
+
+    def test_healthcheck_returns_ok_if_all_checks_pass(self):
+        with mock.patch(self.check_disk, return_value={'status': True}), mock.patch(self.check_backend_api, return_value={'status': True}):
+            result = self.client.get('/healthcheck.json')
+            self.assertEquals(requests.codes.ok, result.status_code)
