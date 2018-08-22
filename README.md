@@ -98,9 +98,13 @@ where the `context` directory is set to the root of the cla_public directory.
 1. [Create a pull request](https://github.com/ministryofjustice/cla_public/compare/master...develop) to merge the `develop` branch into the `master` branch.
 1. Wait for reviews and tests to all pass.
 1. Merge the pull request. (Please do not delete the `develop` branch.)
-1. Start [the Docker build on Jenkins](https://ci.service.dsd.io/view/CLA/job/BUILD-cla_public/build?delay=0sec) for the `master` branch.
-1. Once finished, [deploy `master` to **staging**](https://ci.service.dsd.io/view/CLA/job/DEPLOY-cla_public/build?delay=0sec).
+1. Wait for [the Docker build to complete on CircleCI](https://circleci.com/gh/ministryofjustice/cla_public/tree/master) for the `master` branch.
+1. Copy the `master.<sha>` reference from the `build` job's "Push Docker image" step. Eg:
+    ```
+    Pushing tag for rev [d64474359f5d] on {https://registry.service.dsd.io/v1/repositories/cla_public/tags/master.54c165b}
+    ```
+1. [Deploy `master.<sha>` to **staging**](https://ci.service.dsd.io/view/CLA/job/DEPLOY-cla_public/build?delay=0sec).
 1. Check that the deploy was successful and staging contains the changes.
-1. [Deploy `master` to **prod**uction](https://ci.service.dsd.io/view/CLA/job/DEPLOY-cla_public/build?delay=0sec).
+1. [Deploy `master.<sha>` to **prod**uction](https://ci.service.dsd.io/view/CLA/job/DEPLOY-cla_public/build?delay=0sec).
 
 :tada: :shipit:
