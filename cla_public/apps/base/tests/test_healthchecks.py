@@ -25,7 +25,7 @@ class DiskSpaceHealthcheckTest(unittest.TestCase):
 
         result = healthchecks.check_disk()
         self.assertDictContainsSubset(
-            {'status': True, 'available_percent': 3.0}, result)
+            {'status': 'healthy', 'available_percent': 3.0}, result)
 
     @mock.patch('os.statvfs')
     def test_disk_space_check_fails_when_less_than_2_percent_space_is_available(self, stat_mock):
@@ -35,7 +35,7 @@ class DiskSpaceHealthcheckTest(unittest.TestCase):
 
         result = healthchecks.check_disk()
         self.assertDictContainsSubset(
-            {'status': False, 'available_percent': 2.0}, result)
+            {'status': 'unhealthy', 'available_percent': 2.0}, result)
 
 
 class BackendAPIHealthcheckTest(unittest.TestCase):
@@ -49,7 +49,7 @@ class BackendAPIHealthcheckTest(unittest.TestCase):
 
         result = healthchecks.check_backend_api()
         self.assertDictContainsSubset(
-            {'status': False, 'response': 'ConnectionError'}, result)
+            {'status': 'unhealthy', 'response': 'ConnectionError'}, result)
 
     @mock.patch('requests.get')
     def test_backend_check_fails_if_backend_is_unhealthy(self, request_mock):
@@ -58,7 +58,7 @@ class BackendAPIHealthcheckTest(unittest.TestCase):
 
         result = healthchecks.check_backend_api()
         self.assertDictContainsSubset(
-            {'status': False, 'response': {'status': 'DOWN'}}, result)
+            {'status': 'unhealthy', 'response': {'status': 'DOWN'}}, result)
 
     @mock.patch('requests.get')
     def test_backend_check_passes_if_backend_is_healthy(self, request_mock):
@@ -67,7 +67,7 @@ class BackendAPIHealthcheckTest(unittest.TestCase):
 
         result = healthchecks.check_backend_api()
         self.assertDictContainsSubset(
-            {'status': True, 'response': {'status': 'UP'}}, result)
+            {'status': 'healthy', 'response': {'status': 'UP'}}, result)
 
 
 class HealthcheckEndpointTest(unittest.TestCase):
@@ -85,16 +85,16 @@ class HealthcheckEndpointTest(unittest.TestCase):
                           result.status_code)
 
     def test_healthcheck_returns_service_unavailable_if_any_or_all_checks_fail(self):
-        with mock.patch(self.check_disk, return_value={'status': False}), mock.patch(self.check_backend_api, return_value={'status': True}):
+        with mock.patch(self.check_disk, return_value={'status': 'unhealthy'}), mock.patch(self.check_backend_api, return_value={'status': 'healthy'}):
             self.assert_response_is_service_unavailable()
 
-        with mock.patch(self.check_disk, return_value={'status': True}), mock.patch(self.check_backend_api, return_value={'status': False}):
+        with mock.patch(self.check_disk, return_value={'status': 'healthy'}), mock.patch(self.check_backend_api, return_value={'status': 'unhealthy'}):
             self.assert_response_is_service_unavailable()
 
-        with mock.patch(self.check_disk, return_value={'status': False}), mock.patch(self.check_backend_api, return_value={'status': False}):
+        with mock.patch(self.check_disk, return_value={'status': 'unhealthy'}), mock.patch(self.check_backend_api, return_value={'status': 'unhealthy'}):
             self.assert_response_is_service_unavailable()
 
     def test_healthcheck_returns_ok_if_all_checks_pass(self):
-        with mock.patch(self.check_disk, return_value={'status': True}), mock.patch(self.check_backend_api, return_value={'status': True}):
+        with mock.patch(self.check_disk, return_value={'status': 'healthy'}), mock.patch(self.check_backend_api, return_value={'status': 'healthy'}):
             result = self.client.get('/healthcheck.json')
             self.assertEquals(requests.codes.ok, result.status_code)

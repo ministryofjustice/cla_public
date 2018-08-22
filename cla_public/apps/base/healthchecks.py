@@ -5,13 +5,17 @@ import requests
 from flask import current_app
 
 
+HEALTHY = 'healthy'
+UNHEALTHY = 'unhealthy'
+
+
 def check_disk():
     stat = os.statvfs(os.getcwd())
     available_mb = (stat.f_bavail * stat.f_frsize) / (1024.0 ** 2)
     total_mb = (stat.f_blocks * stat.f_frsize) / (1024.0 ** 2)
 
     available_percent = available_mb / total_mb * 100
-    status = True if available_percent > 2.0 else False
+    status = HEALTHY if available_percent > 2.0 else UNHEALTHY
 
     return {
         'status': status,
@@ -24,16 +28,16 @@ def check_disk():
 def check_backend_api():
     backend_healthcheck_url = '%s/%s' % (
         current_app.config['BACKEND_BASE_URI'], 'status/healthcheck.json')
-    status = False
+    status = UNHEALTHY
     response_content = None
 
     try:
         backend_healthcheck_response = requests.get(backend_healthcheck_url)
         if backend_healthcheck_response.ok:
-            status = True
+            status = HEALTHY
         response_content = backend_healthcheck_response.json()
     except requests.exceptions.RequestException as e:
-        status = False
+        status = UNHEALTHY
         response_content = e.__class__.__name__
 
     return {
