@@ -21,8 +21,10 @@ jobs:
             docker build --tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 .
       - run:
           name: Validate Python version
-          command: |
-            docker run --rm --tty --interactive $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 python --version | grep "2.7"
+          command: docker run --rm --tty --interactive $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 python --version | grep "2.7"
+      - run:
+          name: Validate that image runs on Europe/London timezone
+          command: docker run --rm --tty --interactive $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 stat --format=%N /etc/localtime | grep "Europe/London"
       - run:
           name: Tag and push Docker images
           command: |

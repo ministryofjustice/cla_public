@@ -19,7 +19,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
   nodejs npm tzdata
 
 # Set timezone
-RUN echo "Europe/London" > /etc/timezone  &&  dpkg-reconfigure -f noninteractive tzdata
+RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
 
 # Install Nginx.
 RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update
