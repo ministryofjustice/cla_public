@@ -28,7 +28,7 @@
     "jshint": "^2.9.5",
     "jshint-stylish": "~2.2.1",
     "main-bower-files": "^2.1.0",
-    "require-dir": "^0.3.2",
+    "require-dir": "^1.0.0",
     "yargs": "^10.0.3"
   },
   "dependencies": {}
