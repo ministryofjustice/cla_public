@@ -7,7 +7,7 @@
   "scripts": {},
   "engineStrict": true,
   "devDependencies": {
-    "bower": "^1.8.2",
+    "bower": "^1.8.4",
     "browser-sync": "~2.23.2",
     "bs-html-injector": "^3.0.3",
     "del": "^3.0.0",
