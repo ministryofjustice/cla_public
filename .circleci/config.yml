@@ -33,7 +33,7 @@ jobs:
           command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "2.7"
       - run:
           name: Validate that image runs on Europe/London timezone
-          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 stat --format=%N /etc/localtime | grep "Europe/London"
+          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 date '+%Z' | egrep "(GMT|BST)"
       - run:
           name: Tag and push Docker images
           command: |
