@@ -4,38 +4,48 @@ jobs:
     docker:
       - image: docker:17.03-git
     environment:
-      DOCKER_REGISTRY: "registry.service.dsd.io"
-      DOCKER_IMAGE: "cla_public"
+      DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
+      DSD_DOCKER_IMAGE: "cla_public"
+      ECR_DOCKER_REGISTRY: "627373361525.dkr.ecr.eu-west-1.amazonaws.com"
+      ECR_DOCKER_IMAGE: "get-access/cla_public"
     steps:
       - checkout
       - setup_remote_docker:
           version: 17.03.0-ce
           docker_layer_caching: true
       - run:
-          name: Login to container registry
+          name: Login to DSD and ECR Docker registries
           command: |
-            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DOCKER_REGISTRY
+            apk add --no-cache --no-progress py2-pip
+            pip install awscli
+            ecr_login="$(aws ecr get-login --region eu-west-1 --no-include-email)"
+            ${ecr_login}
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
       - run:
           name: Build Docker image
           command: |
-            docker build --tag $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 .
+            docker build --tag application:$CIRCLE_SHA1 .
       - run:
           name: Validate Python version
-          command: docker run --rm --tty --interactive $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 python --version | grep "2.7"
+          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "2.7"
       - run:
           name: Validate that image runs on Europe/London timezone
-          command: docker run --rm --tty --interactive $DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1 stat --format=%N /etc/localtime | grep "Europe/London"
+          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 stat --format=%N /etc/localtime | grep "Europe/London"
       - run:
           name: Tag and push Docker images
           command: |
-            export built_tag="$DOCKER_REGISTRY/$DOCKER_IMAGE:$CIRCLE_SHA1"
-            docker push $built_tag
+            built_tag="application:$CIRCLE_SHA1"
+            safe_git_branch=${CIRCLE_BRANCH//\//-}
+            short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
 
-            export safe_git_branch=${CIRCLE_BRANCH//\//-}
-            export branch_shortsha_tag="$DOCKER_REGISTRY/$DOCKER_IMAGE:$safe_git_branch.$(git rev-parse --short=7 $CIRCLE_SHA1)"
-            export branch_latest_tag="$DOCKER_REGISTRY/$DOCKER_IMAGE:$safe_git_branch.latest"
+            dsd_full_sha="$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$CIRCLE_SHA1"
+            dsd_branch_sha="$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.$short_sha"
+            dsd_branch_latest="$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.latest"
+            ecr_full_sha="$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$CIRCLE_SHA1"
+            ecr_branch_sha="$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch.$short_sha"
+            ecr_branch_latest="$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch.latest"
 
-            for tag in "$branch_shortsha_tag" "$branch_latest_tag"; do
+            for tag in "$dsd_full_sha" "$ecr_full_sha" "$dsd_branch_sha" "$ecr_branch_sha" "$dsd_branch_latest" "$ecr_branch_latest"; do
               echo "Tagging and pushing $tag..."
               docker tag $built_tag $tag
               docker push $tag
