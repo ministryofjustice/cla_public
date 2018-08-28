@@ -14,13 +14,16 @@ jobs:
           version: 17.03.0-ce
           docker_layer_caching: true
       - run:
-          name: Login to DSD and ECR Docker registries
+          name: Login to the DSD Docker registry
+          command: |
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
+      - run:
+          name: Login to the ECR Docker registry
           command: |
             apk add --no-cache --no-progress py2-pip
             pip install awscli
             ecr_login="$(aws ecr get-login --region eu-west-1 --no-include-email)"
             ${ecr_login}
-            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
       - run:
           name: Build Docker image
           command: |
