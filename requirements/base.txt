@@ -16,7 +16,7 @@ itsdangerous==0.24
 jinja-moj-template==0.19.0
 logstash_formatter==0.5.9
 markdown2==2.3.5
-python-dateutil==2.2
+python-dateutil==2.7.3
 pytz==2018.5
 raven==6.9.0
 requests==2.19.1
