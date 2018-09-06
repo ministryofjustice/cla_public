@@ -6,8 +6,8 @@ jobs:
     environment:
       DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
       DSD_DOCKER_IMAGE: "cla_public"
-      ECR_DOCKER_REGISTRY: "627373361525.dkr.ecr.eu-west-1.amazonaws.com"
-      ECR_DOCKER_IMAGE: "get-access/cla_public"
+      ECR_DOCKER_REGISTRY: "926803513772.dkr.ecr.eu-west-1.amazonaws.com"
+      ECR_DOCKER_IMAGE: "laa-get-access/laa-cla-public"
     steps:
       - checkout
       - setup_remote_docker:
@@ -41,18 +41,20 @@ jobs:
             safe_git_branch=${CIRCLE_BRANCH//\//-}
             short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
 
-            dsd_full_sha="$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$CIRCLE_SHA1"
-            dsd_branch_sha="$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.$short_sha"
-            dsd_branch_latest="$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.latest"
-            ecr_full_sha="$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$CIRCLE_SHA1"
-            ecr_branch_sha="$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch.$short_sha"
-            ecr_branch_latest="$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch.latest"
-
-            for tag in "$dsd_full_sha" "$ecr_full_sha" "$dsd_branch_sha" "$ecr_branch_sha" "$dsd_branch_latest" "$ecr_branch_latest"; do
+            function tag_and_push() {
+              tag="$1"
               echo "Tagging and pushing $tag..."
               docker tag $built_tag $tag
               docker push $tag
-            done
+            }
+
+            if [ "$CIRCLE_BRANCH" == "master" ]; then
+              tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$CIRCLE_SHA1"
+              tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$CIRCLE_SHA1"
+              tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.$short_sha"
+            fi
+            tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch"
+            tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.latest"
 
   test:
     docker:
