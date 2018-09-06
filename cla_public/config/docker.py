@@ -8,7 +8,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # TODO - change this to True when serving over HTTPS
 SESSION_COOKIE_SECURE = os.environ.get('CLA_ENV', '') in ['prod', 'staging']
 
-HOST_NAME = os.environ['HOST_NAME']
+HOST_NAME = os.environ.get('HOST_NAME') or os.environ.get('HOSTNAME')
 
 BACKEND_API = {
     'url': os.environ['BACKEND_BASE_URI'] + '/checker/api/v1/'
