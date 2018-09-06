@@ -17,3 +17,10 @@ spec:
         env:
         - name: ENV
           value: staging
+        - name: BACKEND_BASE_URI
+          value: https://staging-backend.cla.dsd.io/
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: clasecret
+              key: flask_secret_key
