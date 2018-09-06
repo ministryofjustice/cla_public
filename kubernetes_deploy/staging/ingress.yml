@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: laa-cla-public
+  namespace: laa-cla-public-staging
+spec:
+  rules:
+  - host: laa-cla-public-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: laa-cla-public
+          servicePort: 80
