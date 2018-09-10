@@ -87,6 +87,29 @@ jobs:
             source env/bin/activate
             python manage.py test
 
+  staging_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+        environment:
+          GITHUB_TEAM_NAME_SLUG: laa-get-access
+          APPLICATION_DEPLOY_NAME: laa-cla-public
+    steps:
+      - checkout
+      - run:
+          name: Kubectl deployment
+          command: |
+            setup-kube-auth
+            kubectl config use-context staging
+      - deploy:
+          name: Deploy laa-cla-public docker image
+          command: |
+            kubectl set image -f kubernetes_deploy/staging/deployment.yml \
+              app=${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} \
+              --local -o yaml | kubectl apply -f -
+            kubectl apply \
+                -f kubernetes_deploy/staging/service.yml \
+                -f kubernetes_deploy/staging/ingress.yml
+
 workflows:
   version: 2
   build_and_test:
@@ -95,3 +118,10 @@ workflows:
       - build:
           requires:
             - test
+      - staging_deploy_approval:
+          type: approval
+          requires:
+            - build
+      - staging_deploy:
+          requires:
+            - staging_deploy_approval
