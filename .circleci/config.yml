@@ -58,6 +58,7 @@ jobs:
               tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.$short_sha"
             fi
             tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch"
+            tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch.$short_sha"
             tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.latest"
 
   test:
@@ -107,12 +108,14 @@ jobs:
       - deploy:
           name: Deploy laa-cla-public docker image
           command: |
-            kubectl set image -f kubernetes_deploy/staging/deployment.yml \
-              app=${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} \
-              --local -o yaml | kubectl apply -f -
-            kubectl apply \
-                -f kubernetes_deploy/staging/service.yml \
-                -f kubernetes_deploy/staging/ingress.yml
+            short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
+
+            kubectl set image --filename=kubernetes_deploy/staging/deployment.yml --local --output=yaml \
+              app=${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:$short_sha | \
+              kubectl apply \
+                --filename=- \
+                --filename=kubernetes_deploy/staging/service.yml \
+                --filename=kubernetes_deploy/staging/ingress.yml
 
 workflows:
   version: 2
