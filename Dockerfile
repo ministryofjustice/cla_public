@@ -12,11 +12,11 @@ ENV HOME /root
 CMD ["/sbin/my_init"]
 
 # Dependencies
-RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
   apt-get -y --force-yes install apt-utils python-pip \
   python-dev build-essential git software-properties-common \
   python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev \
-  nodejs npm tzdata
+  nodejs tzdata
 
 # Set timezone
 RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
@@ -34,13 +34,10 @@ RUN pip install GitPython uwsgi
 
 RUN mkdir -p /var/log/wsgi && chown -R www-data:www-data /var/log/wsgi && chmod -R g+s /var/log/wsgi
 
-ADD ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
-
-# install service files for runit
-ADD ./docker/uwsgi.service /etc/service/uwsgi/run
-
-# install service files for runit
-ADD ./docker/nginx.service /etc/service/nginx/run
+COPY ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
+COPY ./docker/uwsgi.service /etc/service/uwsgi/run
+COPY ./docker/nginx.service /etc/service/nginx/run
+COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
 # Define mountable directories.
 #VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi", "/var/log/cla_public"]
@@ -51,25 +48,20 @@ EXPOSE 80
 
 # APP_HOME
 ENV APP_HOME /home/app/flask
-
-# Add project directory to docker
-ADD ./ /home/app/flask
-
 WORKDIR /home/app/flask
 
-# PIP INSTALL APPLICATION
-RUN pip install -r requirements.txt && find . -name '*.pyc' -delete && pybabel compile -d cla_public/translations
+# Install python packages
+COPY requirements.txt .
+COPY requirements/ requirements/
+RUN pip install -r requirements.txt
 
-RUN npm install -g n   # Install n globally
-RUN n 8.9.3       # Install and use v8.9.3
+# Install npm and bower packages
+COPY package.json package-lock.json .bowerrc bower.json ./
+RUN npm install && \
+    ./node_modules/.bin/bower --allow-root install
 
-# Rebuild npm because we changed the node version
-RUN npm rebuild && npm install
+COPY . .
 
-#Pull in Bower dependencies (Need to remove this Bower is BAD )
-RUN ./node_modules/.bin/bower --allow-root install
-
-# Compile frontend assets
-RUN ./node_modules/.bin/gulp build
-
-ADD ./docker/nginx.conf /etc/nginx/nginx.conf
+# Compile frontend assets and translations
+RUN ./node_modules/.bin/gulp build && \
+    pybabel compile -d cla_public/translations
