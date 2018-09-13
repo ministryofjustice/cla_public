@@ -27,7 +27,11 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build --tag application:$CIRCLE_SHA1 .
+            docker build --tag application:$CIRCLE_SHA1 \
+              --label build.git.sha=$CIRCLE_SHA1 \
+              --label build.git.branch=$CIRCLE_BRANCH \
+              --label build.url=$CIRCLE_BUILD_URL \
+              .
       - run:
           name: Validate Python version
           command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "2.7"

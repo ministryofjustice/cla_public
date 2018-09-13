@@ -6,70 +6,71 @@
 # Pull base image.
 FROM phusion/baseimage:0.9.22
 
-# Set correct environment variables.
-ENV HOME /root
-# Use baseimage-docker's init process.
-CMD ["/sbin/my_init"]
+LABEL name="Check If You Can Get Legal Aid (cla_public)" \
+      maintainer="LAA Get Access <laa-get-access@digital.justice.gov.uk>" \
+      version="1.0"
 
-# Dependencies
-RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
-  apt-get -y --force-yes install apt-utils python-pip \
-  python-dev build-essential git software-properties-common \
-  python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev \
-  nodejs npm tzdata
+ENV HOME /root
+
+# Install python and build packages
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get -y --force-yes install \
+      apt-utils \
+      build-essential \
+      g++ \
+      git \
+      libffi-dev \
+      libpcre3 \
+      libpcre3-dev \
+      libpq-dev \
+      make \
+      nodejs \
+      python-dev \
+      python-pip \
+      python-software-properties \
+      software-properties-common \
+      tzdata
 
 # Set timezone
 RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
 
-# Install Nginx.
-RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update
-RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full && \
-  chown -R www-data:www-data /var/lib/nginx
+# Install nginx
+RUN add-apt-repository ppa:nginx/stable && \
+    apt-get update && \
+    apt-get -y --force-yes install nginx-full && \
+    chown -R www-data:www-data /var/lib/nginx && \
+    rm -f /etc/nginx/sites-enabled/default && \
+    mkdir -p /var/log/nginx/cla_public
 
-RUN rm -f /etc/nginx/sites-enabled/default
+# Install uwsgi
+RUN pip install GitPython uwsgi && \
+    mkdir -p /var/log/wsgi && \
+    chown -R www-data:www-data /var/log/wsgi && \
+    chmod -R g+s /var/log/wsgi
 
-# Pip install Python packages
-RUN pip install -U setuptools pip wheel
-RUN pip install GitPython uwsgi
+COPY ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
+COPY ./docker/uwsgi.service /etc/service/uwsgi/run
+COPY ./docker/nginx.service /etc/service/nginx/run
+COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
-RUN mkdir -p /var/log/wsgi && chown -R www-data:www-data /var/log/wsgi && chmod -R g+s /var/log/wsgi
-
-ADD ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
-
-# install service files for runit
-ADD ./docker/uwsgi.service /etc/service/uwsgi/run
-
-# install service files for runit
-ADD ./docker/nginx.service /etc/service/nginx/run
-
-# Define mountable directories.
-#VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi", "/var/log/cla_public"]
-RUN mkdir -p /var/log/nginx/cla_public
-
-# Expose ports.
-EXPOSE 80
-
-# APP_HOME
 ENV APP_HOME /home/app/flask
-
-# Add project directory to docker
-ADD ./ /home/app/flask
-
 WORKDIR /home/app/flask
 
-# PIP INSTALL APPLICATION
-RUN pip install -r requirements.txt && find . -name '*.pyc' -delete && pybabel compile -d cla_public/translations
+# Install python packages
+COPY requirements.txt .
+COPY requirements/ requirements/
+RUN pip install -r requirements.txt
 
-RUN npm install -g n   # Install n globally
-RUN n 8.9.3       # Install and use v8.9.3
+# Install npm and bower packages
+COPY package.json package-lock.json .bowerrc bower.json ./
+RUN npm install && \
+    ./node_modules/.bin/bower --allow-root install
 
-# Rebuild npm because we changed the node version
-RUN npm rebuild && npm install
+COPY . .
 
-#Pull in Bower dependencies (Need to remove this Bower is BAD )
-RUN ./node_modules/.bin/bower --allow-root install
+# Compile frontend assets and translations
+RUN ./node_modules/.bin/gulp build && \
+    pybabel compile -d cla_public/translations
 
-# Compile frontend assets
-RUN ./node_modules/.bin/gulp build
-
-ADD ./docker/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["/sbin/my_init"]
