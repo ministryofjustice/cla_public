@@ -88,14 +88,15 @@ where the `context` directory is set to the root of the cla_public directory.
 ### Releasing to non-production
 
 1. Wait for [the Docker build to complete on CircleCI](https://circleci.com/gh/ministryofjustice/cla_public) for the feature branch.
-1. Copy the `feature_branch.<sha>` reference from the `build` job's "Push Docker image" step. Eg:
+1. Approve the pending staging deployment on CircleCI.
+    [Watch the how-to video:](https://www.youtube.com/watch?v=9JovuQK-XnA)<br/>
+    [![How to approve staging deployments](https://img.youtube.com/vi/9JovuQK-XnA/1.jpg)](https://www.youtube.com/watch?v=9JovuQK-XnA)
+1. :rotating_light: Unfortunately, our deployment process does not _yet_ fail the build if the deployment fails.
+    To see if the deploy was successful, follow Kubernetes deployments, pods and events for any feedback:
     ```
-    Pushing tag for rev [24519b4325d0] on {https://registry.service.dsd.io/v1/repositories/cla_public/tags/switch-default-branch-to-master.b8f57d9}
+    kubectl --namespace laa-cla-public-staging get pods,deployments -o wide
+    kubectl --namespace laa-cla-public-staging get events
     ```
-1. [Deploy `feature_branch.<sha>`](https://ci.service.dsd.io/job/DEPLOY-cla_public/build?delay=0sec).
-    * `ENVIRONMENT` is the target environment, select depending on your needs, eg. "demo", "staging", etc.
-    * `CONTAINER_BRANCH` is the branch that needs to be released (`switch-default-branch-to-master` in the above example).
-    * `VERSION` is either `latest` for the last successful build on that branch, or a specific 7-character prefix of the Git SHA (`b8f57d9` in the above example).
 
 ### Releasing to production
 
@@ -107,6 +108,9 @@ where the `context` directory is set to the root of the cla_public directory.
     Pushing tag for rev [d64474359f5d] on {https://registry.service.dsd.io/v1/repositories/cla_public/tags/master.54c165b}
     ```
 1. [Deploy `master.<sha>` to **prod**uction](https://ci.service.dsd.io/job/DEPLOY-cla_public/build?delay=0sec).
+    * `ENVIRONMENT` is the target environment, select depending on your needs. Select `prod` for production.
+    * `CONTAINER_BRANCH` is the branch that needs to be released (`master` in the above example).
+    * `VERSION` is the specific 7-character prefix of the Git SHA (`54c165b` in the above example).
 
 :tada: :shipit:
 
