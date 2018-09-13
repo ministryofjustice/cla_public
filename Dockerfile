@@ -42,9 +42,6 @@ RUN add-apt-repository ppa:nginx/stable && \
     rm -f /etc/nginx/sites-enabled/default && \
     mkdir -p /var/log/nginx/cla_public
 
-# Install global Python packages
-RUN pip install -U setuptools pip wheel
-
 # Install uwsgi
 RUN pip install GitPython uwsgi && \
     mkdir -p /var/log/wsgi && \
