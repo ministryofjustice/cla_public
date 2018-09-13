@@ -66,7 +66,7 @@ APP_SETTINGS = {
 API_CLIENT_TIMEOUT = 10
 
 BACKEND_API = {
-    'url': 'http://localhost:8000/checker/api/v1/'
+    'url': '{url}/checker/api/v1/'.format(url=BACKEND_BASE_URI)
 }
 
 SENTRY_DSN = os.environ.get('RAVEN_CONFIG_DSN', '')
@@ -112,10 +112,7 @@ OPERATOR_HOURS = {
 
 TIMEZONE = 'Europe/London'
 
-LAALAA_API_HOST = os.environ.get(
-    'LAALAA_API_HOST',
-    'https://prod.laalaa.dsd.io')
-
+LAALAA_API_HOST = os.environ.get('LAALAA_API_HOST', 'https://prod.laalaa.dsd.io')
 
 MAIL_SERVER = os.environ.get('SMTP_HOST')
 MAIL_PORT = os.environ.get('SMTP_PORT', 465)
