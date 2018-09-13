@@ -12,12 +12,24 @@ LABEL name="Check If You Can Get Legal Aid (cla_public)" \
 
 ENV HOME /root
 
-# Dependencies
+# Install python and build packages
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-  apt-get -y --force-yes install apt-utils python-pip \
-  python-dev build-essential git software-properties-common \
-  python-software-properties libpq-dev g++ make libpcre3 libpcre3-dev libffi-dev \
-  nodejs tzdata
+    apt-get -y --force-yes install \
+      apt-utils \
+      build-essential \
+      g++ \
+      git \
+      libffi-dev \
+      libpcre3 \
+      libpcre3-dev \
+      libpq-dev \
+      make \
+      nodejs \
+      python-dev \
+      python-pip \
+      python-software-properties \
+      software-properties-common \
+      tzdata
 
 # Set timezone
 RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
