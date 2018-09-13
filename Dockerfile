@@ -6,7 +6,10 @@
 # Pull base image.
 FROM phusion/baseimage:0.9.22
 
-# Set correct environment variables.
+LABEL name="Check If You Can Get Legal Aid (cla_public)" \
+      maintainer="LAA Get Access <laa-get-access@digital.justice.gov.uk>" \
+      version="1.0"
+
 ENV HOME /root
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
