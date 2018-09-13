@@ -114,7 +114,7 @@ jobs:
             kubectl set image --filename=kubernetes_deploy/staging/deployment.yml --local --output=yaml \
               app=${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${APPLICATION_DEPLOY_NAME}:$safe_git_branch.$short_sha | \
               kubectl apply \
-                --filename=- \
+                --filename=/dev/stdin \
                 --filename=kubernetes_deploy/staging/service.yml \
                 --filename=kubernetes_deploy/staging/ingress.yml
 
