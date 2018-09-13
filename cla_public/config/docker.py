@@ -14,32 +14,9 @@ BACKEND_BASE_URI = os.environ['BACKEND_BASE_URI']
 LAALAA_API_HOST = os.environ.get(
     'LAALAA_API_HOST', 'https://prod.laalaa.dsd.io')
 
-if DEBUG:
-    LOGGING['handlers']['debug_file'] = {
-        'level': 'DEBUG',
-        'class': 'logging.handlers.RotatingFileHandler',
-        'filename': '/var/log/wsgi/debug.log',
-        'maxBytes': 1024 * 1024 * 5,  # 5MB
-        'backupCount': 7,
-        'formatter': 'verbose'}
-    LOGGING['loggers'] = {
-        '': {
-            'handlers': ['debug_file'],
-            'level': 'DEBUG'
-        }
+LOGGING['loggers'] = {
+    '': {
+        'handlers': ['console'],
+        'level': os.environ.get('LOG_LEVEL', 'INFO')
     }
-
-else:
-    LOGGING['handlers']['production_file'] = {
-        'level': 'INFO',
-        'class': 'logging.handlers.RotatingFileHandler',
-        'filename': '/var/log/wsgi/app.log',
-        'maxBytes': 1024 * 1024 * 5,  # 5MB
-        'backupCount': 7,
-        'formatter': 'logstash'}
-    LOGGING['loggers'] = {
-        '': {
-            'handlers': ['production_file'],
-            'level': 'DEBUG'
-        }
-    }
+}

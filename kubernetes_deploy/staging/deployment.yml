@@ -27,6 +27,8 @@ spec:
           value: https://staging-backend.cla.dsd.io/
         - name: LAALAA_API_HOST
           value: https://staging.laalaa.dsd.io
+        - name: LOG_LEVEL
+          value: INFO
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
