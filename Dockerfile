@@ -11,8 +11,6 @@ LABEL name="Check If You Can Get Legal Aid (cla_public)" \
       version="1.0"
 
 ENV HOME /root
-# Use baseimage-docker's init process.
-CMD ["/sbin/my_init"]
 
 # Dependencies
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
@@ -46,10 +44,6 @@ COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 #VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi", "/var/log/cla_public"]
 RUN mkdir -p /var/log/nginx/cla_public
 
-# Expose ports.
-EXPOSE 80
-
-# APP_HOME
 ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
 
@@ -68,3 +62,6 @@ COPY . .
 # Compile frontend assets and translations
 RUN ./node_modules/.bin/gulp build && \
     pybabel compile -d cla_public/translations
+
+EXPOSE 80
+CMD ["/sbin/my_init"]
