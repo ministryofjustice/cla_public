@@ -58,6 +58,7 @@ jobs:
               tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.$short_sha"
             fi
             tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch"
+            tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch.$short_sha"
             tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.latest"
 
   test:
@@ -91,6 +92,32 @@ jobs:
             source env/bin/activate
             python manage.py test
 
+  staging_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+        environment:
+          GITHUB_TEAM_NAME_SLUG: laa-get-access
+          APPLICATION_DEPLOY_NAME: laa-cla-public
+    steps:
+      - checkout
+      - run:
+          name: Kubectl deployment
+          command: |
+            setup-kube-auth
+            kubectl config use-context staging
+      - deploy:
+          name: Deploy laa-cla-public docker image
+          command: |
+            safe_git_branch=${CIRCLE_BRANCH//\//-}
+            short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
+
+            kubectl set image --filename=kubernetes_deploy/staging/deployment.yml --local --output=yaml \
+              app=${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${APPLICATION_DEPLOY_NAME}:$safe_git_branch.$short_sha | \
+              kubectl apply \
+                --filename=/dev/stdin \
+                --filename=kubernetes_deploy/staging/service.yml \
+                --filename=kubernetes_deploy/staging/ingress.yml
+
 workflows:
   version: 2
   build_and_test:
@@ -99,3 +126,10 @@ workflows:
       - build:
           requires:
             - test
+      - staging_deploy_approval:
+          type: approval
+          requires:
+            - build
+      - staging_deploy:
+          requires:
+            - staging_deploy_approval

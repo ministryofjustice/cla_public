@@ -11,6 +11,12 @@ spec:
       containers:
       - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:master
         name: app
+        readinessProbe:
+          httpGet:
+            path: /ping.json
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
         ports:
         - containerPort: 80
           name: http
