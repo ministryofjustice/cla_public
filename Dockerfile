@@ -30,12 +30,14 @@ RUN add-apt-repository ppa:nginx/stable && \
     rm -f /etc/nginx/sites-enabled/default && \
     mkdir -p /var/log/nginx/cla_public
 
-
-# Pip install Python packages
+# Install global Python packages
 RUN pip install -U setuptools pip wheel
-RUN pip install GitPython uwsgi
 
-RUN mkdir -p /var/log/wsgi && chown -R www-data:www-data /var/log/wsgi && chmod -R g+s /var/log/wsgi
+# Install uwsgi
+RUN pip install GitPython uwsgi && \
+    mkdir -p /var/log/wsgi && \
+    chown -R www-data:www-data /var/log/wsgi && \
+    chmod -R g+s /var/log/wsgi
 
 COPY ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
 COPY ./docker/uwsgi.service /etc/service/uwsgi/run
