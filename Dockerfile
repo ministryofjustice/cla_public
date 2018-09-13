@@ -22,12 +22,14 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
 # Set timezone
 RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
 
-# Install Nginx.
-RUN DEBIAN_FRONTEND='noninteractive' add-apt-repository ppa:nginx/stable && apt-get update
-RUN DEBIAN_FRONTEND='noninteractive' apt-get -y --force-yes install nginx-full && \
-  chown -R www-data:www-data /var/lib/nginx
+# Install nginx
+RUN add-apt-repository ppa:nginx/stable && \
+    apt-get update && \
+    apt-get -y --force-yes install nginx-full && \
+    chown -R www-data:www-data /var/lib/nginx && \
+    rm -f /etc/nginx/sites-enabled/default && \
+    mkdir -p /var/log/nginx/cla_public
 
-RUN rm -f /etc/nginx/sites-enabled/default
 
 # Pip install Python packages
 RUN pip install -U setuptools pip wheel
@@ -39,10 +41,6 @@ COPY ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
 COPY ./docker/uwsgi.service /etc/service/uwsgi/run
 COPY ./docker/nginx.service /etc/service/nginx/run
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
-
-# Define mountable directories.
-#VOLUME ["/data", "/var/log/nginx", "/var/log/wsgi", "/var/log/cla_public"]
-RUN mkdir -p /var/log/nginx/cla_public
 
 ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
