@@ -1,6 +1,6 @@
 "Base app"
 import datetime
-from flask import Blueprint, after_this_request, request
+from flask import Blueprint, after_this_request, request, redirect
 
 base = Blueprint('base', __name__)
 
@@ -12,5 +12,6 @@ def detect_user_locale():
         @after_this_request
         def remember_locale(response):
             expires = datetime.datetime.now() + datetime.timedelta(days=30)
+            response = redirect(request.path)
             response.set_cookie('locale', locale, expires=expires)
             return response
