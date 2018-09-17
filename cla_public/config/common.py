@@ -11,6 +11,8 @@ TESTING = False
 
 CLEAR_SESSION = True
 
+GOV_UK_START_PAGE = 'https://www.gov.uk/check-legal-aid'
+
 BACKEND_BASE_URI = os.environ.get('BACKEND_BASE_URI', 'http://127.0.0.1:8000')  # For healthcheck.json requests
 
 # Disable eligibility check and allow users to request a callback only
