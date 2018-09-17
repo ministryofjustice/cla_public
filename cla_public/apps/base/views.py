@@ -26,8 +26,7 @@ log = logging.getLogger(__name__)
 @base.route('/')
 def index():
     session.clear()
-    return render_template('index.html')
-
+    return redirect(current_app.config.get('GOV_UK_START_PAGE'))
 
 @base.route('/cookies')
 def cookies():
