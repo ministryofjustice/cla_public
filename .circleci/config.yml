@@ -117,6 +117,21 @@ jobs:
                 --filename=/dev/stdin \
                 --filename=kubernetes_deploy/staging/service.yml \
                 --filename=kubernetes_deploy/staging/ingress.yml
+      - run:
+          name: Notify Slack channel
+          command: |
+            cat <<-END > payload.json
+            {
+              "text": ":tada: Deployed \`${GITHUB_TEAM_NAME_SLUG}/${APPLICATION_DEPLOY_NAME}:$safe_git_branch.$short_sha\` to *staging*.",
+              "attachments": [
+                {
+                  "fallback": "<$CIRCLE_BUILD_URL|View build>",
+                  "actions": [{"type": "button", "text": "View build", "url": "$CIRCLE_BUILD_URL"}]
+                }
+              ]
+            }
+            END
+            curl --request POST --data @payload.json --header "Content-Type: application/json" $SLACK_WEBHOOK_URL
 
 workflows:
   version: 2
