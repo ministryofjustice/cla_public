@@ -14,6 +14,7 @@ BACKEND_BASE_URI = os.environ['BACKEND_BASE_URI']
 LAALAA_API_HOST = os.environ.get(
     'LAALAA_API_HOST', 'https://prod.laalaa.dsd.io')
 
+LOGGING['handlers']['console']['formatter'] = 'logstash'
 LOGGING['loggers'] = {
     '': {
         'handlers': ['console'],
