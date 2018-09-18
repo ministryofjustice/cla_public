@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+source $(dirname "$0")/define_build_environment_variables
+built_tag="$1"
+
+function tag_and_push() {
+  tag="$1"
+  echo
+  echo "Tagging and pushing $tag..."
+  docker tag $built_tag $tag
+  docker push $tag
+}
+
+if [ "$CIRCLE_BRANCH" == "master" ]; then
+  tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$CIRCLE_SHA1"
+  tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$CIRCLE_SHA1"
+  tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.$short_sha"
+fi
+tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch"
+tag_and_push "$ECR_DEPLOY_IMAGE"
+tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.latest"

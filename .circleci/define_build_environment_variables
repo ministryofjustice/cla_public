@@ -1,0 +1,4 @@
+#!/bin/sh -e
+safe_git_branch=${CIRCLE_BRANCH//\//-}
+short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
+ECR_DEPLOY_IMAGE="$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch.$short_sha"

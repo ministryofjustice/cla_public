@@ -40,26 +40,7 @@ jobs:
           command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 date '+%Z' | egrep "(GMT|BST)"
       - run:
           name: Tag and push Docker images
-          command: |
-            built_tag="application:$CIRCLE_SHA1"
-            safe_git_branch=${CIRCLE_BRANCH//\//-}
-            short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
-
-            function tag_and_push() {
-              tag="$1"
-              echo "Tagging and pushing $tag..."
-              docker tag $built_tag $tag
-              docker push $tag
-            }
-
-            if [ "$CIRCLE_BRANCH" == "master" ]; then
-              tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$CIRCLE_SHA1"
-              tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$CIRCLE_SHA1"
-              tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.$short_sha"
-            fi
-            tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch"
-            tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch.$short_sha"
-            tag_and_push "$DSD_DOCKER_REGISTRY/$DSD_DOCKER_IMAGE:$safe_git_branch.latest"
+          command: .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1
 
   test:
     docker:
@@ -96,42 +77,23 @@ jobs:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
         environment:
+          ECR_DOCKER_REGISTRY: "926803513772.dkr.ecr.eu-west-1.amazonaws.com"
+          ECR_DOCKER_IMAGE: "laa-get-access/laa-cla-public"
           GITHUB_TEAM_NAME_SLUG: laa-get-access
           APPLICATION_DEPLOY_NAME: laa-cla-public
     steps:
       - checkout
       - run:
-          name: Kubectl deployment
+          name: Initialise Kubernetes staging context
           command: |
             setup-kube-auth
             kubectl config use-context staging
       - deploy:
-          name: Deploy laa-cla-public docker image
-          command: |
-            safe_git_branch=${CIRCLE_BRANCH//\//-}
-            short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
-
-            kubectl set image --filename=kubernetes_deploy/staging/deployment.yml --local --output=yaml \
-              app=${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${APPLICATION_DEPLOY_NAME}:$safe_git_branch.$short_sha | \
-              kubectl apply \
-                --filename=/dev/stdin \
-                --filename=kubernetes_deploy/staging/service.yml \
-                --filename=kubernetes_deploy/staging/ingress.yml
+          name: Deploy laa-cla-public to staging
+          command: .circleci/deploy_to_staging
       - run:
           name: Notify Slack channel
-          command: |
-            cat <<-END > payload.json
-            {
-              "text": ":tada: Deployed \`${GITHUB_TEAM_NAME_SLUG}/${APPLICATION_DEPLOY_NAME}:$safe_git_branch.$short_sha\` to *staging*.",
-              "attachments": [
-                {
-                  "fallback": "<$CIRCLE_BUILD_URL|View build>",
-                  "actions": [{"type": "button", "text": "View build", "url": "$CIRCLE_BUILD_URL"}]
-                }
-              ]
-            }
-            END
-            curl --request POST --data @payload.json --header "Content-Type: application/json" $SLACK_WEBHOOK_URL
+          command: .circleci/notify_slack_channel staging
 
 workflows:
   version: 2
