@@ -3,6 +3,8 @@
 root=$(dirname "$0")
 source $root/define_build_environment_variables
 
+echo "Deploying $ECR_DEPLOY_IMAGE to staging..."
+
 kubectl set image --filename=$root/../kubernetes_deploy/staging/deployment.yml --local --output=yaml \
   app=$ECR_DEPLOY_IMAGE | \
   kubectl apply \
