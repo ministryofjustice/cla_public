@@ -5,7 +5,7 @@ environment="$1"
 
 cat <<END > payload.json
 {
-  "text": ":tada: Deployed \`$ECR_DEPLOY_IMAGE\` to *$environment*.",
+  "text": ":tada: Deployed \`$deploy_image_and_tag\` to *$environment*.",
   "attachments": [
     {
       "fallback": "<$CIRCLE_BUILD_URL|View build>",
