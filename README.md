@@ -33,7 +33,7 @@ You can run the server with:
 
     CLA_PUBLIC_CONFIG=config/testing.py ./manage.py runserver
 
-With the `testing` configuration, you can use `CLA_BACKEND_PORT` and `LAALAA_PORT`
+With the `testing` configuration, you can use `BACKEND_BASE_URI` and `LAALAA_API_HOST`
 environment variables to configure the dependent service API ports.
 
 
