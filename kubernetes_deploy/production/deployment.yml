@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: laa-cla-public
+spec:
+  template:
+    metadata:
+      labels:
+        app: laa-cla-public-app
+    spec:
+      containers:
+      - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:latest
+        name: app
+        readinessProbe:
+          httpGet:
+            path: /ping.json
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: CLA_ENV
+          value: prod
+        - name: BACKEND_BASE_URI
+          value: https://fox.civillegaladvice.service.gov.uk
+        - name: LAALAA_API_HOST
+          value: https://prod.laalaa.dsd.io
+        - name: LOG_LEVEL
+          value: INFO
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: clasecret
+              key: flask_secret_key
