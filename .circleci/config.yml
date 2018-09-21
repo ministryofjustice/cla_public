@@ -104,7 +104,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Initialise Kubernetes staging context
+          name: Initialise Kubernetes production context
           command: |
             setup-kube-auth
             kubectl config use-context production
