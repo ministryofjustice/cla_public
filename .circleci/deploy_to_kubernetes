@@ -3,7 +3,7 @@
 root=$(dirname "$0")
 environment="$1"
 
-if ! [[ "$environment" =~ ^(staging|production)$ ]] ;
+if ! [[ "$environment" =~ ^(staging|production)$ ]] ; then
   echo
   echo -e "Argument not allowed. Use 'staging' or 'production'."
   exit 1
