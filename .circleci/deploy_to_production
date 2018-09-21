@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+root=$(dirname "$0")
+source $root/define_build_environment_variables
+
+echo "Deploying $ECR_DEPLOY_IMAGE to production..."
+
+kubectl set image --filename=$root/../kubernetes_deploy/production/deployment.yml --local --output=yaml \
+  app=$ECR_DEPLOY_IMAGE | \
+  kubectl apply \
+    --filename=/dev/stdin \
+    --filename=$root/../kubernetes_deploy/production/service.yml \
+    --filename=$root/../kubernetes_deploy/production/ingress.yml
