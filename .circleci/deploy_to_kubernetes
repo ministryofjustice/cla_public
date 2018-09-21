@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+root=$(dirname "$0")
+environment="$1"
+
+if ! [[ "$environment" =~ ^(staging|production)$ ]] ;
+  echo
+  echo -e "Argument not allowed. Use 'staging' or 'production'."
+  exit 1
+fi
+
+source $root/define_build_environment_variables
+
+echo "Deploying $ECR_DEPLOY_IMAGE to $environment..."
+
+kubectl set image --filename=$root/../kubernetes_deploy/$environment/deployment.yml --local --output=yaml \
+  app=$ECR_DEPLOY_IMAGE | \
+  kubectl apply \
+    --filename=/dev/stdin \
+    --filename=$root/../kubernetes_deploy/$environment/service.yml \
+    --filename=$root/../kubernetes_deploy/$environment/ingress.yml

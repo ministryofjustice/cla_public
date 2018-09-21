@@ -94,8 +94,8 @@ jobs:
             kubectl config use-context staging
       - deploy:
           name: Deploy laa-cla-public to staging
-          command: .circleci/deploy_to_staging
-      - run:
+          command: .circleci/deploy_to_kubernetes staging
+      - deploy:
           name: Notify Slack channel
           command: .circleci/notify_slack_channel staging
 
@@ -110,8 +110,8 @@ jobs:
             kubectl config use-context production
       - deploy:
           name: Deploy laa-cla-public to production
-          command: .circleci/deploy_to_production
-      - run:
+          command: .circleci/deploy_to_kubernetes production
+      - deploy:
           name: Notify Slack channel
           command: .circleci/notify_slack_channel production
 
