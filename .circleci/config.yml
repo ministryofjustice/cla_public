@@ -133,9 +133,11 @@ workflows:
       - production_deploy_approval:
           type: approval
           requires:
-            - build
             - staging_deploy
+          filters:
+            branches:
+              only:
+                - master
       - production_deploy:
           requires:
             - production_deploy_approval
-            - staging_deploy
