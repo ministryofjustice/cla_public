@@ -1,21 +1,21 @@
 #!/bin/sh -eu
 
-root=$(dirname "$0")
-environment="$1"
+ROOT=$(dirname "$0")
+ENVIRONMENT="$1"
+ENVIRONMENT_DIR="$ROOT/../kubernetes_deploy/$ENVIRONMENT"
 
-if [ "$environment" != "staging" && "$production" != "production" ]; then
-  echo
-  echo -e "Argument not allowed. Use 'staging' or 'production'."
-  exit 1
+if ! [ -d $ENVIRONMENT_DIR ] ; then
+  echo "$ENVIRONMENT_DIR not found"
+  exit 1;
 fi
 
-source $root/define_build_environment_variables
+source "$ROOT/define_build_environment_variables"
 
-echo "Deploying $ECR_DEPLOY_IMAGE to $environment..."
+echo "Deploying $ECR_DEPLOY_IMAGE to $ENVIRONMENT..."
 
-kubectl set image --filename=$root/../kubernetes_deploy/$environment/deployment.yml --local --output=yaml \
-  app=$ECR_DEPLOY_IMAGE | \
+kubectl set image --filename="$ENVIRONMENT_DIR/deployment.yml" --local --output=yaml \
+  app="$ECR_DEPLOY_IMAGE" | \
   kubectl apply \
     --filename=/dev/stdin \
-    --filename=$root/../kubernetes_deploy/$environment/service.yml \
-    --filename=$root/../kubernetes_deploy/$environment/ingress.yml
+    --filename="$ENVIRONMENT_DIR/service.yml" \
+    --filename="$ENVIRONMENT_DIR/ingress.yml"
