@@ -100,6 +100,7 @@ where the `context` directory is set to the root of the cla_public directory.
 
 ### Releasing to production
 
+#### Template Deploy
 1. Please make sure you tested on a non-production environment before merging.
 1. Merge your feature branch pull request to `master`.
 1. Wait for [the Docker build to complete on CircleCI](https://circleci.com/gh/ministryofjustice/cla_public/tree/master) for the `master` branch.
@@ -113,6 +114,22 @@ where the `context` directory is set to the root of the cla_public directory.
     * `VERSION` is the specific 7-character prefix of the Git SHA (`54c165b` in the above example).
 
 :tada: :shipit:
+
+#### Kubernetes Deploy
+
+**Note:** We currently have an offline production environment in Kubernetes. This will not be mapped to the public URL until further tasks have been completed.
+
+1. Please make sure you tested on a non-production environment before merging.
+1. Merge your feature branch pull request to `master`.
+1. Wait for [the Docker build to complete on CircleCI](https://circleci.com/gh/ministryofjustice/cla_public/tree/master) for the `master` branch.
+1. Approve the pending staging deployment on CircleCI (see 'Releasing to non-production above' video for more info).
+1. Approve the pending production deployment on CircleCI.
+1. :rotating_light: Unfortunately, our deployment process does not _yet_ fail the build if the deployment fails.
+    To see if the deploy was successful, follow Kubernetes deployments, pods and events for any feedback:
+    ```
+    kubectl --namespace laa-cla-public-production get pods,deployments -o wide
+    kubectl --namespace laa-cla-public-production get events
+    ```
 
 ## Monitoring
 
