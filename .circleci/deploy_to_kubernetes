@@ -1,0 +1,28 @@
+#!/bin/sh -eu
+
+ROOT=$(dirname "$0")
+NAMESPACE="$1"
+NAMESPACE_DIR="$ROOT/../kubernetes_deploy/$NAMESPACE"
+
+if ! [ $NAMESPACE ] ; then
+
+  echo "usage: deploy_to_kubernetes namespace\n"
+  echo "namespace is a directory in ../kubernetes_deploy/ directory"
+  exit 1;
+fi
+
+if ! [ -d $NAMESPACE_DIR ] ; then
+  echo "$NAMESPACE_DIR not found"
+  exit 1;
+fi
+
+source "$ROOT/define_build_environment_variables"
+
+echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
+
+kubectl set image --filename="$NAMESPACE_DIR/deployment.yml" --local --output=yaml \
+  app="$ECR_DEPLOY_IMAGE" | \
+  kubectl apply \
+    --filename=/dev/stdin \
+    --filename="$NAMESPACE_DIR/service.yml" \
+    --filename="$NAMESPACE_DIR/ingress.yml"
