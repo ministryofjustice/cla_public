@@ -5,6 +5,7 @@ NAMESPACE="$1"
 NAMESPACE_DIR="$ROOT/../kubernetes_deploy/$NAMESPACE"
 
 if ! [ $NAMESPACE ] ; then
+
   echo "usage: deploy_to_kubernetes namespace\n"
   echo "namespace is a directory in ../kubernetes_deploy/ directory"
   exit 1;
@@ -15,7 +16,7 @@ if ! [ -d $NAMESPACE_DIR ] ; then
   exit 1;
 fi
 
-source "$ROOT/define_build_NAMESPACE_variables"
+source "$ROOT/define_build_environment_variables"
 
 echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
 
