@@ -8,6 +8,7 @@ spec:
       labels:
         app: laa-cla-public-app
     spec:
+      replicas: 3
       containers:
       - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:master
         name: app
