@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: laa-cla-public
 spec:
+  replicas: 3
   template:
     metadata:
       labels:
@@ -15,8 +16,16 @@ spec:
           httpGet:
             path: /ping.json
             port: 80
-          initialDelaySeconds: 3
-          periodSeconds: 3
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /ping.json
+            port: 80
+          initialDelaySeconds: 10
+          timeoutSeconds: 1
+          periodSeconds: 10
         ports:
         - containerPort: 80
           name: http
