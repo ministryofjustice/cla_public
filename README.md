@@ -1,6 +1,41 @@
 # CLA Public
 
+## Important notices
+
+- `master` branch is the default branch
+
+## Table of contents
+
+[**Dependencies**](#dependencies)
+
+[**Installation Options**](#installation)
+  * [**Manual**](#manual-installation)
+  
+[**Development**](#development)
+
+[**Testing**](#testing)
+  * [**Unit tests**](#unit-tests)
+  * [**End-to-end browser tests**](#end-to-end-browser-tests)
+  
+[**Releasing**](#testing)
+  * [**Releasing to non-production**](#releasing-to-non-production)
+  * [**Releasing to production**](#releasing-to-production)
+    * [**Template Deploy**](#template-deploy)
+    * [**Kubernetes Deploy**](#kubernetes-deploy)
+    
+[**Monitoring**](#monitoring)
+  * [**Logs**](#logs)
+
+## Dependencies
+
+- [Virtualenv](http://www.virtualenv.org/en/latest/)
+- [Python 2.7](http://www.python.org/) (Can be installed using `brew`)
+- [nodejs.org](http://nodejs.org/) (v8.12 - can be installed using [nvm](https://github.com/creationix/nvm))
+- [docker](https://www.docker.com/) - Only required for running application from Docker
+
 ## Installation
+
+### Manual Installation
 
 Clone the repository:
 
@@ -36,21 +71,18 @@ You can run the server with:
 With the `testing` configuration, you can use `BACKEND_BASE_URI` and `LAALAA_API_HOST`
 environment variables to configure the dependent service API ports.
 
-
 ## Development
 
 Assets reside in `static-src` directory and compiled in `static` directory upon running build tasks.
 
-CLAP is using [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tasks are used in development:
+CLA Public is using [Gulp](http://gulpjs.com/) for build tasks. The following Gulp tasks are used in development:
 
 - `build` builds and minifies all assets and does all of the following
 - `lint` runs JS Hint on JS code
 - `sass` builds the SCSS and generates source maps
 - `serve` watches the files for changes and reloads the browser using [BrowserSync](http://www.browsersync.io/)
 
-If you have [Foreman](https://github.com/ddollar/foreman) installed you can run `./tools/start-server` which will start the CLA Flask server
-and run the `gulp serve` process, enabling you to concentrate on the code leaving building and reloading
-to `serve` task.
+If you have [Foreman](https://github.com/ddollar/foreman) installed you can run `./tools/start-server` which will start the CLA Flask server and run the `gulp serve` process, enabling you to concentrate on the code leaving building and reloading to `serve` task.
 
 
 ## Testing
@@ -133,7 +165,7 @@ where the `context` directory is set to the root of the cla_public directory.
 
 ## Monitoring
 
-### Where are the logs?
+### Logs
 
 Currently, logs on our environments (staging, production) are inside the running containers, in the following folders:
 
