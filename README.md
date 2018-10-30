@@ -13,12 +13,15 @@
 - [**Testing**](#testing)
   * [**Unit tests**](#unit-tests)
   * [**End-to-end browser tests**](#end-to-end-browser-tests)
+- [**Using Kubernetes**](#using-kubernetes)
+  * [**Setup kubectl**](#setup-kubectl)
+  * [**Kubernetes namespaces and admin role**](#kubernetes-namespaces-and-admin-role)
+  * [**Authenticating with AWS ECR repository**](#authenticating-with-aws-ecr-repository)
 - [**Releasing**](#testing)
   * [**Releasing to non-production**](#releasing-to-non-production)
   * [**Releasing to production**](#releasing-to-production)
     * [**Template Deploy**](#template-deploy)
     * [**Kubernetes Deploy**](#kubernetes-deploy)
-  * [**Work with Kubernetes**](#work-with-kubernetes)
 - [**Monitoring**](#monitoring)
   * [**Logs**](#logs)
   
@@ -111,6 +114,31 @@ cla_public:
 
 where the `context` directory is set to the root of the cla_public directory.
 
+## Using Kubernetes
+
+Read the following if you want to use Kubernetes from your local development environment.
+
+### Setup kubectl
+
+You'll need to install and configure `kubectl` CLI tool to interact with Kubernetes. There are [instructions on kubectl configuration](https://ministryofjustice.github.io/cloud-platform-user-docs/01-getting-started/001-kubectl-config/) in the Cloud Platform User Guide.
+
+### Kubernetes namespaces and admin role
+`cla_public` has two namespaces (environments):
+
+- [laa-cla-public-staging](https://github.com/ministryofjustice/cloud-platform-environments/tree/master/namespaces/cloud-platform-live-0.k8s.integration.dsd.io/laa-cla-public-staging)
+- [laa-cla-public-production](https://github.com/ministryofjustice/cloud-platform-environments/tree/master/namespaces/cloud-platform-live-0.k8s.integration.dsd.io/laa-cla-public-production)
+
+To gain the `ClusterRole - admin` role, you must be a member of the GitHub team `laa-get-access` - [find out more about roles](https://ministryofjustice.github.io/cloud-platform-user-docs/01-getting-started/002-env-create/#01-rbacyaml).
+
+### Authenticating with AWS ECR repository
+Docker images are stored in AWS ECR. To authenticate with the `cla_public` repository, fetch the credentials by typing the following:
+
+```
+kubectl --namespace laa-cla-public get secrets -o yaml
+```
+
+This command will return the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. You can find out more by reading [Authenticating with the repository](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/001-app-deploy/#authenticating-with-the-repository)
+
 ## Releasing
 
 ### Releasing to non-production
@@ -158,32 +186,6 @@ where the `context` directory is set to the root of the cla_public directory.
     kubectl --namespace laa-cla-public-production get pods,deployments -o wide
     kubectl --namespace laa-cla-public-production get events
     ```
-    
-### Work with Kubernetes
-
-Read the following if you want to use Kubernetes from your local development environment.
-
-**Get permission to access Kubernetes**
-You'll need to follow the instructions here to configure `kubectl` CLI tool.
-https://ministryofjustice.github.io/cloud-platform-user-docs/01-getting-started/001-kubectl-config/
-
-**Kubernetes namespace and permissions**
-`cla_public` has two namespaces (environments):
-
-- [laa-cla-public-staging](https://github.com/ministryofjustice/cloud-platform-environments/tree/master/namespaces/cloud-platform-live-0.k8s.integration.dsd.io/laa-cla-public-staging)
-- [laa-cla-public-production](https://github.com/ministryofjustice/cloud-platform-environments/tree/master/namespaces/cloud-platform-live-0.k8s.integration.dsd.io/laa-cla-public-production)
-
-To gain the `ClusterRole - admin` role, you must be a member of the GitHub team `laa-get-access` - [find out more about roles](https://ministryofjustice.github.io/cloud-platform-user-docs/01-getting-started/002-env-create/#01-rbacyaml).
-
-**Authenticate with the Docker repository**
-Docker images are stored in AWS ECR. To authenticate with the `cla_public` repository, fetch the credentials by typing the following:
-
-```
-kubectl --namespace laa-cla-public get secrets -o yaml
-```
-
-This command will return the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. You can find out more by reading [Authenticating with the repository](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/001-app-deploy/#authenticating-with-the-repository)
-
 
 ## Monitoring
 
