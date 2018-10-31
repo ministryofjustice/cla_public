@@ -1,30 +1,26 @@
 # CLA Public
 
-## Important notices
-
-- `master` branch is the default branch
-
 ## Table of contents
 
-- [**Dependencies**](#dependencies)
-- [**Installation Options**](#installation)
-  * [**Manual**](#manual-installation)
-- [**Development**](#development)
-- [**Testing**](#testing)
-  * [**Unit tests**](#unit-tests)
-  * [**End-to-end browser tests**](#end-to-end-browser-tests)
-- [**Using Kubernetes**](#using-kubernetes)
-  * [**Setup kubectl**](#setup-kubectl)
-  * [**Kubernetes namespaces**](#kubernetes-namespaces)
-  * [**Admin role**](#admin-role)
-  * [**Authenticating with AWS ECR repository**](#authenticating-with-aws-ecr-repository)
-- [**Releasing**](#testing)
-  * [**Releasing to non-production**](#releasing-to-non-production)
-  * [**Releasing to production**](#releasing-to-production)
-    * [**Template Deploy**](#template-deploy)
-    * [**Kubernetes Deploy**](#kubernetes-deploy)
-- [**Monitoring**](#monitoring)
-  * [**Logs**](#logs)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+  * [Manual Installation](#manual-installation)
+- [Development](#development)
+- [Testing](#testing)
+  * [Unit tests](#unit-tests)
+  * [End to end browser tests](#end-to-end-browser-tests)
+- [Using Kubernetes](#using-kubernetes)
+  * [Setup kubectl](#setup-kubectl)
+  * [Kubernetes namespaces](#kubernetes-namespaces)
+  * [Admin role](#admin-role)
+  * [Authenticating with the Docker registry](#authenticating-with-the-docker-registry)
+- [Releasing](#releasing)
+  * [Releasing to non-production](#releasing-to-non-production)
+  * [Releasing to production](#releasing-to-production)
+    + [Template Deploy](#template-deploy)
+    + [Deploy to Kubernetes using CircleCI](#deploy-to-kubernetes-using-circleci)
+- [Monitoring](#monitoring)
+  * [Logs](#logs)
   
 ## Dependencies
 
