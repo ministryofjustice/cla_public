@@ -15,7 +15,8 @@
   * [**End-to-end browser tests**](#end-to-end-browser-tests)
 - [**Using Kubernetes**](#using-kubernetes)
   * [**Setup kubectl**](#setup-kubectl)
-  * [**Kubernetes namespaces and admin role**](#kubernetes-namespaces-and-admin-role)
+  * [**Kubernetes namespaces**](#kubernetes-namespaces)
+  * [**Admin role**](#admin-role)
   * [**Authenticating with AWS ECR repository**](#authenticating-with-aws-ecr-repository)
 - [**Releasing**](#testing)
   * [**Releasing to non-production**](#releasing-to-non-production)
@@ -122,19 +123,29 @@ Read the following if you want to use Kubernetes from your local development env
 
 You'll need to install and configure `kubectl` CLI tool to interact with Kubernetes. There are [instructions on kubectl configuration](https://ministryofjustice.github.io/cloud-platform-user-docs/01-getting-started/001-kubectl-config/) in the Cloud Platform User Guide.
 
-### Kubernetes namespaces and admin role
+### Kubernetes namespaces
+
+
 `cla_public` has two namespaces (environments):
 
 - [laa-cla-public-staging](https://github.com/ministryofjustice/cloud-platform-environments/tree/master/namespaces/cloud-platform-live-0.k8s.integration.dsd.io/laa-cla-public-staging)
 - [laa-cla-public-production](https://github.com/ministryofjustice/cloud-platform-environments/tree/master/namespaces/cloud-platform-live-0.k8s.integration.dsd.io/laa-cla-public-production)
 
-To gain the `ClusterRole - admin` role, you must be a member of the GitHub team `laa-get-access` - [find out more about roles](https://ministryofjustice.github.io/cloud-platform-user-docs/01-getting-started/002-env-create/#01-rbacyaml).
+### Admin role
 
-### Authenticating with AWS ECR repository
+When you become a member of the GitHub team `laa-get-access`, you'll automatically get the `ClusterRole - admin` role.
+
+>**What is the ClusterRole -admin**
+>Allows admin access, intended to be granted within a namespace using a RoleBinding. If used in a RoleBinding, allows read/write access to most resources in a namespace, including the ability to create roles and rolebindings within the namespace. It does not allow write access to resource quota or to the namespace itself. https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings
+
+You can [find out more about roles](https://ministryofjustice.github.io/cloud-platform-user-docs/01-getting-started/002-env-create/#01-rbacyaml) in the Cloud Platform User Guide.
+
+
+### Authenticating with the Docker registry
 Docker images are stored in AWS ECR. To authenticate with the `cla_public` repository, fetch the credentials by typing the following:
 
 ```
-kubectl --namespace laa-cla-public get secrets -o yaml
+kubectl --namespace laa-cla-public-staging get secrets -o yaml
 ```
 
 This command will return the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. You can find out more by reading [Authenticating with the repository](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/001-app-deploy/#authenticating-with-the-repository)
@@ -171,7 +182,7 @@ This command will return the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. Yo
 
 :tada: :shipit:
 
-#### Deploy to Kubernetes using Circle CI
+#### Deploy to Kubernetes using CircleCI
 
 **Note:** We currently have an offline production environment in Kubernetes. This will not be mapped to the public URL until further tasks have been completed.
 
