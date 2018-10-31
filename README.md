@@ -148,7 +148,7 @@ Docker images are stored in AWS ECR. To authenticate with the `cla_public` repos
 kubectl --namespace laa-cla-public-staging get secrets -o yaml
 ```
 
-This command will return the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. You can find out more by reading [Authenticating with the repository](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/001-app-deploy/#authenticating-with-the-repository)
+This command will return the **encoded** `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. You can find out more by reading [Authenticating with the repository](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/001-app-deploy/#authenticating-with-the-repository). 
 
 ## Releasing
 
