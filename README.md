@@ -14,6 +14,7 @@
   * [Kubernetes namespaces](#kubernetes-namespaces)
   * [Admin role](#admin-role)
   * [Authenticating with the Docker registry](#authenticating-with-the-docker-registry)
+  * [Deploying to Kubernetes][#deploying-to-kubernetes]
 - [Releasing](#releasing)
   * [Releasing to non-production](#releasing-to-non-production)
   * [Releasing to production](#releasing-to-production)
@@ -144,7 +145,36 @@ Docker images are stored in AWS ECR. To authenticate with the `cla_public` repos
 kubectl --namespace laa-cla-public-staging get secrets -o yaml
 ```
 
-This command will return the **encoded** `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. You can find out more by reading [Authenticating with the repository](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/001-app-deploy/#authenticating-with-the-repository). 
+This command will return the **encoded** `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. You can find out more by reading [Authenticating with the repository](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/001-app-deploy/#authenticating-with-the-repository).
+
+### Deploying to Kubernetes
+
+The standard way of deploying is via CircleCI deploy jobs. See [Deploy to Kubernetes using CircleCI](#deploy-to-kubernetes-using-circleci).
+
+If you need to deploy manually because, for example, CircleCI is offline, follow these steps:
+
+1. Build the Docker image locally. For example:
+    ```
+    docker build -t cla_public:latest .
+    ```
+1. Tag the build. For example:
+    ```
+    docker tag cla_public:latest 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag
+    ```
+1. Push the docker image. For example:
+    ```
+    docker push 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag
+    ```
+1. Deploy changes to Kubernetes by applying changes to the `deployment.yml`. This example takes the `deployment.yml` as input, changes the value of `image` for the container named `app` to `926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag`, then pipes the updated yaml to the next command. The `kubectl apply` applies the yaml from stdin:
+    ```
+    kubectl set image --filename="kubernetes_deploy/staging/deployment.yml" --local --output=yaml app="926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag" | kubectl apply --filename=/dev/stdin
+    ```
+   A similiar technique is used in [deploy_to_kubernetes](https://github.com/ministryofjustice/cla_public/blob/master/.circleci/deploy_to_kubernetes) script. Of course, you could simply update the `deployment.yml` file directly and apply the changes.
+   
+   To use [deploy_to_kubernetes](https://github.com/ministryofjustice/cla_public/blob/master/.circleci/deploy_to_kubernetes), requires an environment variable called `ECR_DEPLOY_IMAGE` and a positional argument for the namespace to deploy to, i.e. `staging` or `production`. Here's an example:
+   ```
+   ECR_DEPLOY_IMAGE=926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag .circleci/deploy_to_kubernetes staging
+   ```
 
 ## Releasing
 
