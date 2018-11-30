@@ -106,8 +106,8 @@ FORM_CONFIG_TRANSLATIONS = {l: config_path(l) for l, label in LANGUAGES}
 OPERATOR_HOURS = {
     'weekday': (datetime.time(9, 0), datetime.time(20, 0)),
     'saturday': (datetime.time(9, 0), datetime.time(12, 30)),
-    '2014-12-24': (datetime.time(9, 0), datetime.time(18, 30)),
-    '2014-12-31': (datetime.time(9, 0), datetime.time(18, 30)),
+    '2018-12-24': (datetime.time(9, 0), datetime.time(17, 30)),
+    '2018-12-31': (datetime.time(9, 0), datetime.time(17, 30)),
 }
 
 TIMEZONE = 'Europe/London'
