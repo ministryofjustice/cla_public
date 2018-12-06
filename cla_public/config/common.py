@@ -78,6 +78,9 @@ POSTCODEINFO_API = {
     'timeout': os.environ.get('POSTCODEINFO_API_TIMEOUT')
 }
 
+OS_PLACES_API_URL = os.environ.get('OS_PLACES_API_URL', "https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode")
+OS_PLACES_API_KEY = os.environ.get('OS_PLACES_API_KEY')
+
 ZENDESK_API_USERNAME = os.environ.get('ZENDESK_API_USERNAME')
 ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 ZENDESK_DEFAULT_REQUESTER = 649762516  # anonymous feedback <noreply@ministryofjustice.zendesk.com>

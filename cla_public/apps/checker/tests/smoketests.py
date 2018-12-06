@@ -30,6 +30,7 @@ class SmokeTests(unittest.TestCase):
 
     def test_can_access_geocoder(self):
         "lookup a postcode with PostcodeInfo"
+        # TODO Replace with OS Places call
         client = postcodeinfo.Client()
         postcode = client.lookup_postcode('SW1A 1AA')
         assert postcode.normalised == 'sw1a1aa'
