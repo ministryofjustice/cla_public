@@ -1,66 +1,60 @@
 import json
-import mock
 import unittest
 
-import postcodeinfo
+import requests_mock
 
 from cla_public.app import create_app
 from cla_public.apps.geocoder.views import geocode
 
 
 class GeocoderTest(unittest.TestCase):
+    prerecorded_api_response = {'results': [{u'DPA': {u'ENTRY_DATE': u'20/06/2012',
+                                                      u'POSTAL_ADDRESS_CODE_DESCRIPTION': u'A record which is linked to PAF',
+                                                      u'LOCAL_CUSTODIAN_CODE_DESCRIPTION': u'CITY OF WESTMINSTER',
+                                                      u'LOCAL_CUSTODIAN_CODE': 5990,
+                                                      u'POSTCODE': u'SW1H 9AG',
+                                                      u'UPRN': u'10033617916',
+                                                      u'UDPRN': u'52712028',
+                                                      u'ORGANISATION_NAME': u'MINISTRY OF JUSTICE',
+                                                      u'POST_TOWN': u'LONDON',
+                                                      u'LANGUAGE': u'EN',
+                                                      u'CLASSIFICATION_CODE_DESCRIPTION': u'Office',
+                                                      u'THOROUGHFARE_NAME': u'QUEEN ANNES GATE',
+                                                      u'Y_COORDINATE': 179549.0,
+                                                      u'BUILDING_NUMBER': u'52',
+                                                      u'RPC': u'1',
+                                                      u'LAST_UPDATE_DATE': u'10/02/2016',
+                                                      u'LOGICAL_STATUS_CODE': u'1',
+                                                      u'BLPU_STATE_CODE_DESCRIPTION': u'In use',
+                                                      u'LNG': -0.1346249,
+                                                      u'MATCH_DESCRIPTION': u'EXACT',
+                                                      u'STATUS': u'APPROVED',
+                                                      u'TOPOGRAPHY_LAYER_TOID': u'osgb1000001796535716',
+                                                      u'BLPU_STATE_DATE': u'20/06/2012',
+                                                      u'X_COORDINATE': 529576.0,
+                                                      u'MATCH': 1.0,
+                                                      u'POSTAL_ADDRESS_CODE': u'D',
+                                                      u'ADDRESS': u'MINISTRY OF JUSTICE '
+                                                                  u'52'
+                                                                  u'QUEEN ANNES GATE'
+                                                                  u'LONDON'
+                                                                  u'SW1H 9AG',
+                                                      u'LAT': 51.5000351,
+                                                      u'BLPU_STATE_CODE': u'2'
+                                                      }
+                                             }]
+                                }
 
     def setUp(self):
-        self.patch_client = mock.patch('postcodeinfo.Client')
-        self.Client = self.patch_client.start()
-        self.client = self.Client.return_value
-
         app = create_app('config/testing.py')
-        app.config['TESTING'] = False
-        app.config['POSTCODEINFO_API'] = {
-                'api_url': 'test_url',
-                'auth_token': 'DUMMY_TOKEN'}
+        app.config['OS_PLACES_API_KEY'] = 'DUMMY_TOKEN'
         app.test_request_context().push()
 
-    def tearDown(self):
-        self.patch_client.stop()
+    def test_response_formatting(self):
+        postcode = 'SW1H9AG'
+        expected_formatted_result = json.dumps([{'formatted_address': u'52\nQueen Annes Gate\nLondon\nSW1H 9AG'}])
 
-    def test_lookup_addresses(self):
-        postcode = 'sw1a1aa'
-        address = 'Buckingham Palace\nLondon\nSW1A 1AA'
-        addresses = [
-            {'formatted_address': address}]
-
-        self.client.lookup_postcode.return_value.addresses = addresses
-
-        response = geocode(postcode)
-
-        self.Client.assert_called_with(
-            auth_token='DUMMY_TOKEN',
-            api_url='test_url')
-
-        self.client.lookup_postcode.assert_called_with(postcode)
-
-        self.assertEqual(json.dumps(addresses), response.data)
-
-    def test_server_error(self):
-
-        def raise_exception(exception):
-
-            def response(*args):
-                raise exception
-
-            return response
-
-        cases = [
-            postcodeinfo.NoResults,
-            postcodeinfo.ServerException,
-            postcodeinfo.ServiceUnavailable]
-
-        for exception in cases:
-            self.client.lookup_postcode.addresses.side_effect = \
-                raise_exception(exception)
-
-            response = geocode('sw1a1aa')
-
-            self.assertEqual(json.dumps([]), response.data)
+        with requests_mock.Mocker() as m:
+            m.get("https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode", json=self.prerecorded_api_response)
+            response = geocode(postcode)
+            self.assertEqual(response.data, expected_formatted_result)
