@@ -3,8 +3,8 @@ import unittest
 import urlparse
 
 from bs4 import BeautifulSoup
+from cla_common.address_lookup.ordnance_survey import OsAddressLookup
 from flask import url_for, _request_ctx_stack
-import postcodeinfo
 
 from cla_public import app
 from cla_public.apps.checker import api
@@ -28,12 +28,14 @@ class SmokeTests(unittest.TestCase):
         self.ctx.pop()
         self.ctx = None
 
-    def test_can_access_geocoder(self):
-        "lookup a postcode with PostcodeInfo"
-        # TODO Replace with OS Places call
-        client = postcodeinfo.Client()
-        postcode = client.lookup_postcode('SW1A 1AA')
-        assert postcode.normalised == 'sw1a1aa'
+    def test_can_lookup_postcode(self):
+        """Lookup a postcode with OS Places"""
+        postcode_to_lookup = 'SW1A 1AA'
+        os_places_key = self.app.config.get('OS_PLACES_API_KEY')
+        addresses = OsAddressLookup(key=os_places_key).lookup_postcode(postcode_to_lookup)
+        self.assertGreater(len(addresses), 0)
+        result_postcode = addresses[0].get('DPA', {}).get('POSTCODE')
+        self.assertEqual(result_postcode, postcode_to_lookup)
 
     def test_can_access_zendesk(self):
         "connect to Zendesk"
