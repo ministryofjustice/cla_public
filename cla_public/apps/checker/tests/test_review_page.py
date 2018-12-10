@@ -28,7 +28,7 @@ class TestReviewPage(unittest.TestCase):
         return self._html
 
     def assert_review_section(self, url):
-        soup = BeautifulSoup(self.review_page_html)
+        soup = BeautifulSoup(self.review_page_html, features="html.parser")
         section = next(
             iter(soup.select('section header a[href="{0}"]'.format(url))),
             None)
@@ -37,7 +37,7 @@ class TestReviewPage(unittest.TestCase):
             'Section not present: {0}'.format(url))
 
     def find_question(self, question):
-        soup = BeautifulSoup(self.review_page_html)
+        soup = BeautifulSoup(self.review_page_html, features="html.parser")
         return next(iter(soup.find_all('th', {'data-field': question})), None)
 
     def assert_answer_shown(self, question):
