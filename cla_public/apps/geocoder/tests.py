@@ -50,11 +50,11 @@ class GeocoderTest(unittest.TestCase):
         app.config['OS_PLACES_API_KEY'] = 'DUMMY_TOKEN'
         app.test_request_context().push()
 
-    def test_response_formatting(self):
+    def test_response_packaging(self):
         postcode = 'SW1H9AG'
-        expected_formatted_result = json.dumps([{'formatted_address': u'52\nQueen Annes Gate\nLondon\nSW1H 9AG'}])
+        expected_formatted_result = json.dumps([{'formatted_address': u'Ministry of Justice\n52 Queen Annes Gate\nLondon\nSW1H 9AG'}])
 
         with requests_mock.Mocker() as m:
             m.get("https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode", json=self.prerecorded_api_response)
             response = geocode(postcode)
-            self.assertEqual(response.data, expected_formatted_result)
+            self.assertEqual(expected_formatted_result, response.data)
