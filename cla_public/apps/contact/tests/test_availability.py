@@ -23,7 +23,7 @@ logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
 
 @contextmanager
 def override_current_time(dt):
-    override = lambda: dt
+    override = lambda: dt  # noqa: E731
     original = call_centre_availability.current_datetime
     call_centre_availability.current_datetime = override
     yield
@@ -69,7 +69,7 @@ class TestAvailability(unittest.TestCase):
         with override_current_time(self.now):
             try:
                 self.validator(form, field)
-            except ValidationError as e:
+            except ValidationError:
                 pass
             else:
                 self.fail('{time} was available at {now}'.format(

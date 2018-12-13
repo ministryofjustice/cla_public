@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 "Contact constants"
 
 from flask.ext.babel import lazy_gettext as _
