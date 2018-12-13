@@ -114,13 +114,13 @@ def _make_context():
 class MockDate(datetime.date):
     @classmethod
     def today(cls):
-        return cls(2015, 01, 26)
+        return cls(2015, 1, 26)
 
 
 class MockServer(Server):
     def __call__(self, *args, **kwargs):
-        with override_current_time(datetime.datetime(2015, 01, 26, 9, 0)):
             with mock.patch('datetime.date', MockDate):
+        with override_current_time(datetime.datetime(2015, 1, 26, 9, 0)):
                 super(MockServer, self).__call__(*args, **kwargs)
 
 
