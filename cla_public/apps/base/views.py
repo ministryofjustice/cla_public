@@ -117,7 +117,7 @@ class ReasonsForContacting(AbstractFeedbackView):
     redirect_to = "contact.get_in_touch"
 
     def render_form(self, error=None):
-        referrer = re.sub('^(.*:)//([A-Za-z0-9\-\.]+)(:[0-9]+)?/', '/', request.referrer or '')
+        referrer = re.sub(r"^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?/", "/", request.referrer or "")
         return render_template(self.template, form=self.form, referrer=referrer)
 
     def post(self):
