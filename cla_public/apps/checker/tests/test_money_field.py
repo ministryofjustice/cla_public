@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-import contextlib
+# coding: utf-8
 import unittest
 
 from werkzeug.datastructures import MultiDict

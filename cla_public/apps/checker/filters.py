@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 "Checker specific template filters"
 
 from cla_public.apps.base import base

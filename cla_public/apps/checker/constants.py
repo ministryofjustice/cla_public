@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 
 
