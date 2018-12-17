@@ -1,10 +1,11 @@
 import contextlib
 import logging
 from collections import Mapping
+
 from flask import current_app, request
 from flask.ext.babel import refresh
-from cla_public.apps.checker.constants import CATEGORIES
 
+from cla_public.apps.checker.constants import CATEGORIES
 
 log = logging.getLogger(__name__)
 
@@ -13,6 +14,7 @@ class classproperty(object):
     """
     A decorator for a class method to make it appear to be a class property
     """
+
     def __init__(self, getter):
         self.getter = getter
 
@@ -21,17 +23,14 @@ class classproperty(object):
 
 
 def get_locale():
-    if request and request.cookies.get('locale'):
-        return request.cookies.get('locale')[:2]
-    language_keys = [key for key, _ in current_app.config.get('LANGUAGES', {})]
-    return request.accept_languages.best_match(
-        language_keys
-    ) or 'en'
+    if request and request.cookies.get("locale"):
+        return request.cookies.get("locale")[:2]
+    language_keys = [key for key, _ in current_app.config.get("LANGUAGES", {})]
+    return request.accept_languages.best_match(language_keys) or "en"
 
 
 @contextlib.contextmanager
 def override_locale(locale):
-
     def set_locale_selector_func(fn):
         current_app.babel.locale_selector_func = None
         current_app.babel.localeselector(fn)
@@ -55,7 +54,7 @@ def recursive_dict_update(orig, new):
             tmp = recursive_dict_update(orig.get(key, {}), val)
             orig[key] = tmp
         elif isinstance(val, list):
-            orig[key] = (orig.get('key', []) + val)
+            orig[key] = orig.get("key", []) + val
         else:
             orig[key] = new[key]
     return orig
@@ -69,14 +68,13 @@ def log_to_sentry(message):
 
 
 def flatten_dict(prefix, data_dict):
-    return {'%s-%s' % (prefix, key): val for key, val in
-            data_dict.items()}
+    return {"%s-%s" % (prefix, key): val for key, val in data_dict.items()}
 
 
 def flatten_list(prefix, data_list):
     out = {}
     for num, d in enumerate(data_list):
-        p = '%s-%s' % (prefix, num)
+        p = "%s-%s" % (prefix, num)
         if isinstance(d, Mapping):
             out.update(flatten_dict(p, d))
         elif isinstance(d, list):
@@ -86,10 +84,10 @@ def flatten_list(prefix, data_list):
     return out
 
 
-def flatten(dict_, prefix=''):
+def flatten(dict_, prefix=""):
     out = {}
     for key, val in dict_.items():
-        new_prefix = '-'.join(filter(lambda x: x, [prefix, key]))
+        new_prefix = "-".join(filter(lambda x: x, [prefix, key]))
         if isinstance(val, Mapping):
             out.update(flatten(flatten_dict(new_prefix, val)))
         elif isinstance(val, list) and not (len(val) > 0 and isinstance(val[0], basestring)):
@@ -98,7 +96,8 @@ def flatten(dict_, prefix=''):
             out.update({new_prefix: val})
     return out
 
+
 def category_id_to_name(category_id):
-    selected_name = lambda (slug, name, _): slug == category_id and name
+    selected_name = lambda (slug, name, _): slug == category_id and name  # noqa: E731
     selected = filter(None, map(selected_name, CATEGORIES))
     return selected[0] if selected else None

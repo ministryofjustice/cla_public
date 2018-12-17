@@ -1,22 +1,18 @@
-from copy import copy
 import datetime
+
 import requests
-
 from flask import current_app
-
 from cla_common import call_centre_availability
-from cla_common.call_centre_availability import BankHolidays, available, \
-    available_days, time_slots, today_slots, on_bank_holiday, Hours
+from cla_common.call_centre_availability import BankHolidays, on_bank_holiday, Hours
 
 
 class FlaskCacheBankHolidays(BankHolidays):
-
     def init_cache(self):
         self._cache = current_app.cache
 
     def _load_dates(self):
-        timeout = current_app.config.get('API_CLIENT_TIMEOUT', None)
-        return requests.get(self.url, timeout=timeout).json()['events']
+        timeout = current_app.config.get("API_CLIENT_TIMEOUT", None)
+        return requests.get(self.url, timeout=timeout).json()["events"]
 
 
 # monkey patch cla_common to avoid invoking django code
@@ -24,24 +20,17 @@ call_centre_availability.bank_holidays = lambda: FlaskCacheBankHolidays()
 
 
 def time_choice(time):
-    return (
-        time.strftime('%H%M'),
-        time.strftime('%I:%M %p').lstrip('0'))
+    return time.strftime("%H%M"), time.strftime("%I:%M %p").lstrip("0")
 
 
 def suffix(d):
     if 11 <= d <= 13:
-        return 'th'
-    return {1: 'st', 2: 'nd', 3: 'rd'}.get(d % 10, 'th')
+        return "th"
+    return {1: "st", 2: "nd", 3: "rd"}.get(d % 10, "th")
 
 
 def day_choice(day):
-    return (
-        day.strftime('%Y%m%d'),
-        '%s %s%s' % (
-            day.strftime('%A'),
-            day.strftime('%d').lstrip('0'),
-            suffix(day.day)))
+    return day.strftime("%Y%m%d"), "%s %s%s" % (day.strftime("%A"), day.strftime("%d").lstrip("0"), suffix(day.day))
 
 
 def monday_after_11_hours():
@@ -53,7 +42,7 @@ def monday_before_11am_between_eod_friday_and_monday(dt):
     after_hours_friday = now.weekday() == 4 and now.hour > 19
     first_work_day = 0
     weekend_or_holidays = [5, 6]
-    while on_bank_holiday(dt - datetime.timedelta(days=first_work_day+1)):
+    while on_bank_holiday(dt - datetime.timedelta(days=first_work_day + 1)):
         first_work_day += 1
         last_off = weekend_or_holidays[-1]
         added_off_day = last_off + 1 if last_off < 6 else 0

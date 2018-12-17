@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 "Custom validators"
 # TODO - none of this is exclusive to checker app
 

@@ -1,9 +1,10 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 "CLA Public app"
 
 import logging
 import logging.config
 import os
+
 from flask import Flask, render_template
 from flask.ext.babel import Babel
 from flask.ext.cache import Cache
@@ -17,8 +18,7 @@ from cla_public.apps.base.views import base
 from cla_public.apps.contact.views import contact
 from cla_public.apps.checker.views import checker
 from cla_public.apps.scope.urls import scope
-from cla_public.apps.checker.session import CheckerSessionInterface, \
-    CustomJSONEncoder
+from cla_public.apps.checker.session import CheckerSessionInterface, CustomJSONEncoder
 from cla_public.middleware import StatsdMiddleware
 from cla_public.libs import honeypot
 from cla_public.libs.utils import get_locale
@@ -30,15 +30,10 @@ def create_app(config_file=None):
     if config_file:
         app.config.from_pyfile(config_file)
     else:
-        app.config.from_envvar('CLA_PUBLIC_CONFIG')
+        app.config.from_envvar("CLA_PUBLIC_CONFIG")
 
-    if app.config.get('SENTRY_DSN'):
-        app.sentry = Sentry(
-            app,
-            dsn=app.config.get('SENTRY_DSN'),
-            logging=True,
-            level=logging.ERROR
-        )
+    if app.config.get("SENTRY_DSN"):
+        app.sentry = Sentry(app, dsn=app.config.get("SENTRY_DSN"), logging=True, level=logging.ERROR)
 
     app.babel = Babel(app)
     app.babel.localeselector(get_locale)
@@ -47,7 +42,7 @@ def create_app(config_file=None):
 
     app.mail = Mail(app)
 
-    for extension in app.config['EXTENSIONS']:
+    for extension in app.config["EXTENSIONS"]:
         extension.init_app(app)
 
     app.session_interface = CheckerSessionInterface()
@@ -55,25 +50,24 @@ def create_app(config_file=None):
 
     register_error_handlers(app)
 
-    app.add_template_global(
-        honeypot.FIELD_NAME,
-        name='honeypot_field_name')
+    app.add_template_global(honeypot.FIELD_NAME, name="honeypot_field_name")
 
     app.register_blueprint(base)
     app.register_blueprint(geocoder)
     app.register_blueprint(contact)
     app.register_blueprint(scope)
-    if not app.config.get('CONTACT_ONLY'):
+    if not app.config.get("CONTACT_ONLY"):
         app.register_blueprint(checker)
 
-    logging.config.dictConfig(app.config['LOGGING'])
+    logging.config.dictConfig(app.config["LOGGING"])
     # quiet markdown module
-    logging.getLogger('MARKDOWN').setLevel(logging.WARNING)
+    logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
 
     app.wsgi_app = StatsdMiddleware(app.wsgi_app, app.config)
 
     if app.debug:
         from werkzeug.debug import DebuggedApplication
+
         app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
 
     return app
@@ -85,14 +79,14 @@ def register_error_handlers(app):
     """
 
     error_handlers = {
-        '404.html': [404],
-        '4xx.html': [401, 402, 405, 406, 407, 408, 409],
-        '5xx.html': [500, 501, 502, 503, 504, 505]}
+        "404.html": [404],
+        "4xx.html": [401, 402, 405, 406, 407, 408, 409],
+        "5xx.html": [500, 501, 502, 503, 504, 505],
+    }
 
     def make_handler(code, template):
-
         def handler(e):
-            return render_template(os.path.join('errors', template), code=code), code
+            return render_template(os.path.join("errors", template), code=code), code
 
         return handler
 
