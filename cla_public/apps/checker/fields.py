@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 "Custom form fields"
 from collections import defaultdict, namedtuple
 import itertools

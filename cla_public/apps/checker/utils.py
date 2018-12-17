@@ -21,7 +21,7 @@ def money_intervals(*fields):
 
 
 def category_option_from_name(category_name):
-    requested = lambda (slug, name, desc): name == category_name
+    requested = lambda (slug, name, desc): name == category_name  # noqa: E731
     return next(
         iter(filter(requested, CATEGORIES)),
         (None, None, None))

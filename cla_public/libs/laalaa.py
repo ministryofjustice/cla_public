@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 import requests

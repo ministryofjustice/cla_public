@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 "Contact forms"
 
 from flask import current_app
@@ -28,9 +28,7 @@ LANG_CHOICES = filter(
     lambda x: x[0] not in ('ENGLISH', 'WELSH'),
     [('', _('-- Choose a language --'))] + ADAPTATION_LANGUAGES)
 
-THIRDPARTY_RELATIONSHIP = map(
-    lambda (name, value): (name, _(value)),
-    THIRDPARTY_RELATIONSHIP)
+THIRDPARTY_RELATIONSHIP = map(lambda (name, value): (name, _(value)), THIRDPARTY_RELATIONSHIP)
 THIRDPARTY_RELATIONSHIP_CHOICES = [
     ('', _('-- Please select --'))
 ] + THIRDPARTY_RELATIONSHIP
@@ -229,8 +227,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                 'minicom': self.adaptations.minicom.data,
                 'text_relay': self.adaptations.text_relay.data,
                 'language':
-                    self.adaptations.welsh.data and 'WELSH'
-                    or self.adaptations.other_language.data,
+                    self.adaptations.welsh.data and 'WELSH' or self.adaptations.other_language.data,
                 'notes': self.adaptations.other_adaptation.data
                     if self.adaptations.is_other_adaptation.data else ''
             },

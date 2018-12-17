@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 "Contact form fields"
 from collections import OrderedDict
 
@@ -13,18 +13,18 @@ from wtforms.validators import InputRequired, ValidationError
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import OpeningHours
 from cla_public.config import common as settings
-from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, \
-    DAY_SPECIFIC
+from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
-from cla_public.libs.call_centre_availability import day_choice, time_choice, \
-    monday_before_11am_between_eod_friday_and_monday, monday_after_11_hours
+from cla_public.libs.call_centre_availability import (
+    day_choice,
+    time_choice,
+    monday_before_11am_between_eod_friday_and_monday,
+    monday_after_11_hours,
+)
 
 
 OPERATOR_HOURS = OpeningHours(**settings.OPERATOR_HOURS)
-OPERATOR_HOURS.day_hours.insert(0, (
-    monday_before_11am_between_eod_friday_and_monday,
-    monday_after_11_hours()
-))
+OPERATOR_HOURS.day_hours.insert(0, (monday_before_11am_between_eod_friday_and_monday, monday_after_11_hours()))
 
 
 class FormattedChoiceField(object):
@@ -45,7 +45,7 @@ class FormattedChoiceField(object):
     def pre_validate(self, form):
         choice_values = (v for v, _ in self.choices)
         if self._format(self.data) not in choice_values:
-            raise ValueError(self.gettext('Not a valid choice'))
+            raise ValueError(self.gettext("Not a valid choice"))
 
 
 def time_slots_for_day(day):
@@ -82,12 +82,12 @@ class DayChoiceField(FormattedChoiceField, SelectField):
                 self.data = datetime.date(year, month, day)
             except ValueError:
                 self.data = None
-                raise ValueError(self.gettext('Not a valid date'))
+                raise ValueError(self.gettext("Not a valid date"))
 
     @classmethod
     def _format(cls, value):
         if isinstance(value, (datetime.date, datetime.datetime)):
-            return '{:%Y%m%d}'.format(value)
+            return "{:%Y%m%d}".format(value)
         return value
 
 
@@ -119,12 +119,12 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
                 self.data = datetime.time(hour, minute)
             except ValueError:
                 self.data = None
-                raise ValueError(self.gettext('Not a valid time'))
+                raise ValueError(self.gettext("Not a valid time"))
 
     @classmethod
     def _format(cls, value):
         if isinstance(value, datetime.time):
-            return '{:%H%M}'.format(value)
+            return "{:%H%M}".format(value)
         return value
 
 
@@ -142,35 +142,26 @@ class AvailableSlot(object):
             date = form.day.data
         time = datetime.datetime.combine(date, field.data) if date else None
         if not (time and OPERATOR_HOURS.can_schedule_callback(time)):
-            raise ValidationError(
-                field.gettext(
-                    u"Can't schedule a callback at the requested time"))
+            raise ValidationError(field.gettext(u"Can't schedule a callback at the requested time"))
 
 
 class AvailabilityCheckerForm(NoCsrfForm):
     """
     Subform allowing the user to select a time and date for a callback
     """
-    specific_day = RadioField(
-        label=_(u'Arrange a callback time'),
-        choices=DAY_CHOICES,
-        default=DAY_TODAY)
+
+    specific_day = RadioField(label=_(u"Arrange a callback time"), choices=DAY_CHOICES, default=DAY_TODAY)
 
     # choices must be set dynamically as cache is not available at runtime
     time_today = TimeChoiceField(
         OPERATOR_HOURS.today_slots,
-        validators=[
-            IgnoreIf('specific_day', FieldValueNot(DAY_TODAY)),
-            AvailableSlot(DAY_TODAY)])
-    day = DayChoiceField(
-        validators=[
-            IgnoreIf('specific_day', FieldValueNot(DAY_SPECIFIC)),
-            InputRequired()])
+        validators=[IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)), AvailableSlot(DAY_TODAY)],
+    )
+    day = DayChoiceField(validators=[IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)), InputRequired()])
     time_in_day = TimeChoiceField(
         OPERATOR_HOURS.time_slots,
-        validators=[
-            IgnoreIf('specific_day', FieldValueNot(DAY_SPECIFIC)),
-            AvailableSlot(DAY_SPECIFIC)])
+        validators=[IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)), AvailableSlot(DAY_SPECIFIC)],
+    )
 
     def __init__(self, *args, **kwargs):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
@@ -179,7 +170,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
 
         day = datetime.datetime.strptime(self.day.choices[0][0], "%Y%m%d").date()
         self.time_in_day.set_day_choices(day)
-
 
     def scheduled_time(self, today=None):
         """
@@ -205,8 +195,7 @@ class AvailabilityCheckerField(FormField):
     """Convenience class for FormField(AvailabilityCheckerForm"""
 
     def __init__(self, *args, **kwargs):
-        super(AvailabilityCheckerField, self).__init__(
-            AvailabilityCheckerForm, *args, **kwargs)
+        super(AvailabilityCheckerField, self).__init__(AvailabilityCheckerForm, *args, **kwargs)
 
     @property
     def data(self):
@@ -222,10 +211,9 @@ class AvailabilityCheckerField(FormField):
 class ValidatedFormField(FormField):
     def __init__(self, form_class, *args, **kwargs):
         self._errors = []
-        self.validators = kwargs.pop('validators', [])
+        self.validators = kwargs.pop("validators", [])
 
-        super(ValidatedFormField, self).__init__(
-            form_class, *args, **kwargs)
+        super(ValidatedFormField, self).__init__(form_class, *args, **kwargs)
 
     def validate(self, form, extra_validators=None):
         if self._run_validation_chain(form, self.validators):

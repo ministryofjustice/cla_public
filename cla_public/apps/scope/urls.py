@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from cla_public.apps.scope import scope
 from cla_public.apps.scope.views import ScopeDiagnosis, ScopeIneligible, \
     ScopeMediation

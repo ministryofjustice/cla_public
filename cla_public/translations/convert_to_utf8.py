@@ -2,9 +2,8 @@ import sys
 import os
 import shutil
 
-
-TEMP_DIR = 'temp'
-CODECS = ['utf8', 'cp1252', 'win1251']
+TEMP_DIR = "temp"
+CODECS = ["utf8", "cp1252", "win1251"]
 
 
 class Utf8LineConverter(object):
@@ -16,12 +15,12 @@ class Utf8LineConverter(object):
         os.makedirs(TEMP_DIR)
 
         for num, line in enumerate(self.input_file.readlines()):
-            f = open(os.path.join(TEMP_DIR, "%06d.txt" % num), 'w+')
+            f = open(os.path.join(TEMP_DIR, "%06d.txt" % num), "w+")
             f.write(line)
             f.close()
 
-    def convert(self, output_path, encoding='utf8'):
-        self.output_file = file(output_path, 'w+')
+    def convert(self, output_path, encoding="utf8"):
+        self.output_file = file(output_path, "w+")
 
         self.split_lines()
 
@@ -33,15 +32,15 @@ class Utf8LineConverter(object):
                 for c in CODECS:
                     try:
                         write_line = read_line.decode(c).encode(encoding)
-                        print c
+                        print(c)
                         break
                     except (UnicodeEncodeError, UnicodeDecodeError):
                         pass
 
                 if not write_line:
-                    raise Exception(u'CANT ENCODE LINE: %s - %s' % (fn, read_line))
+                    raise Exception(u"CANT ENCODE LINE: %s - %s" % (fn, read_line))
                 self.output_file.write(write_line)
-                print fp
+                print(fp)
 
         shutil.rmtree(TEMP_DIR)
 
@@ -54,4 +53,3 @@ if __name__ == "__main__":
 
     converter = Utf8LineConverter(input_file)
     converter.convert(output_file)
-

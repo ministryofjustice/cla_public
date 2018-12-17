@@ -279,7 +279,7 @@ class FormDataConverter(
         if hasattr(self, method_name):
             return getattr(self, method_name)()
         ret = {}
-        needed = lambda field: field not in NON_FORM_FIELDS
+        needed = lambda field: field not in NON_FORM_FIELDS  # noqa: E731
         fields = filter(needed, form_class()._fields.keys())
         for field in fields:
             value = self.get_value(form_class, field)
