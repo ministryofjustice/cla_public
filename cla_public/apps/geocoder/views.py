@@ -12,10 +12,10 @@ from cla_public.apps.geocoder import geocoder
 log = logging.getLogger(__name__)
 
 
-@geocoder.route('/addresses/<postcode>', methods=['GET'])
+@geocoder.route("/addresses/<postcode>", methods=["GET"])
 def geocode(postcode):
     """Lookup addresses with the specified postcode"""
-    key = current_app.config.get('OS_PLACES_API_KEY')
+    key = current_app.config.get("OS_PLACES_API_KEY")
     formatted_addresses = FormattedAddressLookup(key=key).by_postcode(postcode)
-    response = [{'formatted_address': address} for address in formatted_addresses if address]
-    return Response(json.dumps(response), mimetype='application/json')
+    response = [{"formatted_address": address} for address in formatted_addresses if address]
+    return Response(json.dumps(response), mimetype="application/json")
