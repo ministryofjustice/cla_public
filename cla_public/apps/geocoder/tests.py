@@ -1,66 +1,23 @@
 import json
-import mock
 import unittest
 
-import postcodeinfo
-
+import mock
 from cla_public.app import create_app
 from cla_public.apps.geocoder.views import geocode
 
 
 class GeocoderTest(unittest.TestCase):
+    prerecorded_result = "Ministry of Justice\n52 Queen Annes Gate\nLondon\nSW1H 9AG"
 
     def setUp(self):
-        self.patch_client = mock.patch('postcodeinfo.Client')
-        self.Client = self.patch_client.start()
-        self.client = self.Client.return_value
-
-        app = create_app('config/testing.py')
-        app.config['TESTING'] = False
-        app.config['POSTCODEINFO_API'] = {
-                'api_url': 'test_url',
-                'auth_token': 'DUMMY_TOKEN'}
+        app = create_app("config/testing.py")
+        app.config["OS_PLACES_API_KEY"] = "DUMMY_TOKEN"
         app.test_request_context().push()
 
-    def tearDown(self):
-        self.patch_client.stop()
+    def test_response_packaging(self):
+        expected_formatted_result = json.dumps([{"formatted_address": self.prerecorded_result}])
 
-    def test_lookup_addresses(self):
-        postcode = 'sw1a1aa'
-        address = 'Buckingham Palace\nLondon\nSW1A 1AA'
-        addresses = [
-            {'formatted_address': address}]
-
-        self.client.lookup_postcode.return_value.addresses = addresses
-
-        response = geocode(postcode)
-
-        self.Client.assert_called_with(
-            auth_token='DUMMY_TOKEN',
-            api_url='test_url')
-
-        self.client.lookup_postcode.assert_called_with(postcode)
-
-        self.assertEqual(json.dumps(addresses), response.data)
-
-    def test_server_error(self):
-
-        def raise_exception(exception):
-
-            def response(*args):
-                raise exception
-
-            return response
-
-        cases = [
-            postcodeinfo.NoResults,
-            postcodeinfo.ServerException,
-            postcodeinfo.ServiceUnavailable]
-
-        for exception in cases:
-            self.client.lookup_postcode.addresses.side_effect = \
-                raise_exception(exception)
-
-            response = geocode('sw1a1aa')
-
-            self.assertEqual(json.dumps([]), response.data)
+        with mock.patch("cla_common.address_lookup.ordnance_survey.FormattedAddressLookup.by_postcode") as mock_method:
+            mock_method.return_value = [self.prerecorded_result]
+            response = geocode(postcode="MOOT")
+            self.assertEqual(expected_formatted_result, response.data)

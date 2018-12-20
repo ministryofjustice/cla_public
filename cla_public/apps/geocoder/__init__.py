@@ -2,4 +2,4 @@
 from flask import Blueprint
 
 
-geocoder = Blueprint('geocoder', __name__)
+geocoder = Blueprint("geocoder", __name__)
