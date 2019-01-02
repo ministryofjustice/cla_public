@@ -61,3 +61,18 @@ If you need to deploy manually because, for example, CircleCI is offline, follow
    ```
    ECR_DEPLOY_IMAGE=926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag .circleci/deploy_to_kubernetes staging
    ```
+
+
+## Secrets
+See the [Kubernetes Secrets documentation](https://kubernetes.io/docs/concepts/configuration/secret/)
+
+And keep the following in mind:
+
+Remember to namespace e.g. to list secrets
+
+```
+kubectl --namespace laa-cla-public-staging get secrets
+kubectl --namespace laa-cla-public-production get secrets
+```
+
+If adding a secret with a temp file, do *not* git commit the actual secret, whether base64 encoded or not!  
