@@ -7,7 +7,6 @@
   "scripts": {},
   "engineStrict": true,
   "devDependencies": {
-    "bower": "^1.8.2",
     "browser-sync": "~2.23.2",
     "bs-html-injector": "^3.0.3",
     "del": "^3.0.0",
@@ -27,9 +26,12 @@
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.9.5",
     "jshint-stylish": "~2.2.1",
-    "main-bower-files": "^2.1.0",
     "require-dir": "^0.3.2",
+    "webpack-stream": "^5.2.1",
     "yargs": "^10.0.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "numeral": "^2.0.6"
+  }
 }

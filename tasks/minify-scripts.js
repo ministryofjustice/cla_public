@@ -5,7 +5,7 @@ var paths = require('./_paths');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
-gulp.task('minify-scripts', ['scripts', 'lint'], function() {
+gulp.task('minify-scripts', ['webpack', 'scripts', 'lint'], function() {
   return gulp
     .src(paths.dest + 'javascripts/*.js')
     .pipe(uglify({ mangle: false, compress: false })) // don't compress to prevent reorder
