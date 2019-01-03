@@ -8,6 +8,9 @@ spec:
     metadata:
       labels:
         app: laa-cla-public-app
+        env: staging
+        service_area: laa-get-access
+        service_team: cla-fala
     spec:
       containers:
       - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:master
