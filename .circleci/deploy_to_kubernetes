@@ -16,7 +16,9 @@ if ! [ -d "$NAMESPACE_DIR" ] ; then
   exit 1
 fi
 
-source "$ROOT/define_build_environment_variables"
+if [ -z "$ECR_DEPLOY_IMAGE" ] ; then
+  source "$ROOT"/define_build_environment_variables
+fi
 
 echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
 
