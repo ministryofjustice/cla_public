@@ -7,10 +7,9 @@ var paths = {
   ie_styles: 'cla_public/static-src/ie/**/*.scss',
   scripts: [
     'cla_public/static-src/javascripts/**/*',
-    '!cla_public/static-src/javascripts/templates.js'
+    '!cla_public/static-src/javascripts/templates.js',
   ],
-  vendor_scripts: [],
-  webpack_entry: 'index.js',
+  vendor_scripts: ['cla_public/static-src/vendor/*'],
   images: 'cla_public/static-src/images/**/*',
   templates: 'cla_public/templates/**/*',
 };

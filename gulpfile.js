@@ -9,7 +9,7 @@ requireDir('./tasks');
 
 gulp.task('build', [
     'minify-css',
-    'minify-scripts',
+    'webpack',
     'images'
   ]
 );

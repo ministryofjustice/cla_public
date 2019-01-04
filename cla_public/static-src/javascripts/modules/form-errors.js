@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-
+  var _ = require('lodash');
   moj.Modules.FormErrors = {
     init: function() {
       _.bindAll(this, 'postToFormErrors', 'onAjaxSuccess', 'onAjaxError');

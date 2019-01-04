@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-
+  var _ = require('lodash');
   moj.Modules.ConfirmationPrint = {
     init: function() {
       this.initTemplates();

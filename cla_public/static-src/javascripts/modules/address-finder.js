@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-
+  var _ = require('lodash');
   moj.Modules.AddressFinder = {
     el: '.address-finder',
     url: '/addresses/',
@@ -146,3 +146,4 @@
     }
   };
 }());
+

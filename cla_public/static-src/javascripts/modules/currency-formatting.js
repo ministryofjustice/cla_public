@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-
+  var numeral = require('numeral')
   moj.Modules.CurrencyFormatting = {
     currencyFields: [],
 

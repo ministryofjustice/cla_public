@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-
+  var _ = require('lodash');
   moj.Modules.AvailabilityTimes = {
     el: '[data-day-time-choices]',
 
