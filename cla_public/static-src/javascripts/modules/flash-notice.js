@@ -1,5 +1,4 @@
-(function () {
-  'use strict';
+ 'use strict';
   var _ = require('lodash');
   moj.Modules.FlashNotice = {
     $flashNotices: $(),
@@ -40,4 +39,4 @@
       }
     }
   };
-}());
+

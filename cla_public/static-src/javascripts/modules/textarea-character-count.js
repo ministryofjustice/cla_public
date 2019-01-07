@@ -1,5 +1,4 @@
-(function () {
-  'use strict';
+ 'use strict';
   var _ = require('lodash');
   var LOW_CHAR_COUNT = 80;
 
@@ -66,4 +65,4 @@
       this.characterCounter = _.template($('#characterCounter').html());
     }
   };
-}());
+

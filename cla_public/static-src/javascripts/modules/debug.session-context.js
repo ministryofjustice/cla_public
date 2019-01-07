@@ -1,5 +1,4 @@
-(function(){
-  'use strict';
+ 'use strict';
   moj.Modules.Development = {
     el: '.context-debugger',
 
@@ -62,4 +61,4 @@
       });
     }
   };
-}());
+

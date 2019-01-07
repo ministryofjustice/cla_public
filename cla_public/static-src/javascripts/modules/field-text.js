@@ -1,5 +1,4 @@
-(function () {
-  'use strict';
+ 'use strict';
 
   moj.Modules.FieldHelp = {
     moreInfos: [],
@@ -37,4 +36,4 @@
       this.moreInfos = $('.field-more-info');
     }
   };
-}());
+

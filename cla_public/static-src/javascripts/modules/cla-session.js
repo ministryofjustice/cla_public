@@ -1,5 +1,4 @@
-(function () {
-  'use strict';
+ 'use strict';
 
   moj.Modules.CLASession = {
     validNavigation: false,
@@ -44,4 +43,4 @@
       });
     }
   };
-}());
+

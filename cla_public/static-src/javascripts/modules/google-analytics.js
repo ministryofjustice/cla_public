@@ -1,5 +1,4 @@
-(function () {
-  'use strict';
+ 'use strict';
   var _ = require('lodash');
   // To send custom events:
   // <a href="/link" data-ga="event:category/action/label">Link</a>
@@ -101,4 +100,4 @@
       }
     }
   };
-}());
+

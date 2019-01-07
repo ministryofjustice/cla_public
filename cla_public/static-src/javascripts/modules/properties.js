@@ -1,4 +1,3 @@
-(function () {
   'use strict';
 
   moj.Modules.Properties = {
@@ -51,4 +50,4 @@
       this.$form = $('#PropertiesForm');
     }
   };
-}());
+
