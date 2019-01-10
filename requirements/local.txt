@@ -1,3 +1,2 @@
 -r jenkins.txt
 Flask-DebugToolbar==0.9.2
-flake8==3.6.0
