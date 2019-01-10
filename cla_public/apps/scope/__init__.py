@@ -2,4 +2,4 @@
 from flask import Blueprint
 
 
-scope = Blueprint('scope', __name__, url_prefix="/scope/")
+scope = Blueprint("scope", __name__, url_prefix="/scope/")

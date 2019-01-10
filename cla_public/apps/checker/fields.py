@@ -8,8 +8,7 @@ from flask import session
 
 from flask.ext.babel import lazy_gettext as _
 from wtforms import Form as NoCsrfForm, Label
-from wtforms import FormField, IntegerField, RadioField, \
-    SelectField, SelectMultipleField, widgets, FieldList
+from wtforms import FormField, IntegerField, RadioField, SelectField, SelectMultipleField, widgets, FieldList
 from wtforms.validators import Optional, InputRequired
 
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
@@ -23,14 +22,12 @@ def coerce_unicode_if_value(value):
 
 
 class PartnerMixin(object):
-
     def __init__(self, *args, **kwargs):
-        partner_label = kwargs.pop('partner_label', kwargs.get('label'))
-        partner_description = kwargs.pop(
-            'partner_description', kwargs.get('description'))
+        partner_label = kwargs.pop("partner_label", kwargs.get("label"))
+        partner_description = kwargs.pop("partner_description", kwargs.get("description"))
         if session.checker.has_partner:
-            kwargs['label'] = partner_label
-            kwargs['description'] = partner_description
+            kwargs["label"] = partner_label
+            kwargs["description"] = partner_description
         super(PartnerMixin, self).__init__(*args, **kwargs)
 
 
@@ -40,37 +37,38 @@ class SelfEmployedMixin(object):
     based on employed/self-employed choices made by the applicant or
     about their partner
     """
-    EmploymentChoices = namedtuple('EmploymentChoices', 'employed self_employed')
+
+    EmploymentChoices = namedtuple("EmploymentChoices", "employed self_employed")
 
     def __init__(self, *args, **kwargs):
-        label = kwargs.get('label')
-        description = kwargs.get('description')
+        label = kwargs.get("label")
+        description = kwargs.get("description")
         label_dict = defaultdict(lambda: label)
-        label_dict.update(kwargs.pop('self_employed_labels', {}))
+        label_dict.update(kwargs.pop("self_employed_labels", {}))
         description_dict = defaultdict(lambda: description)
-        description_dict.update(kwargs.pop('self_employed_descriptions', {}))
+        description_dict.update(kwargs.pop("self_employed_descriptions", {}))
         self._label_dict = label_dict
         self._description_dict = description_dict
         super(SelfEmployedMixin, self).__init__(*args, **kwargs)
 
     def set_self_employed_details(self, is_partner=False):
-        person_fields = ['is_employed', 'is_self_employed']
+        person_fields = ["is_employed", "is_self_employed"]
         if is_partner:
-            person_fields = map(lambda f: 'partner_%s' % f, person_fields)
+            person_fields = map(lambda f: "partner_%s" % f, person_fields)
         person_fields = self.EmploymentChoices(*map(lambda f: getattr(session.checker, f), person_fields))
 
         if person_fields.employed and person_fields.self_employed:
-            self.label = Label(self.id, self._label_dict['both'])
-            self.description = self._description_dict['both']
+            self.label = Label(self.id, self._label_dict["both"])
+            self.description = self._description_dict["both"]
         elif person_fields.employed:
-            self.label = Label(self.id, self._label_dict['employed'])
-            self.description = self._description_dict['employed']
+            self.label = Label(self.id, self._label_dict["employed"])
+            self.description = self._description_dict["employed"]
         elif person_fields.self_employed:
-            self.label = Label(self.id, self._label_dict['self_employed'])
-            self.description = self._description_dict['self_employed']
+            self.label = Label(self.id, self._label_dict["self_employed"])
+            self.description = self._description_dict["self_employed"]
         else:
-            self.label = Label(self.id, self._label_dict['neither'])
-            self.description = self._description_dict['neither']
+            self.label = Label(self.id, self._label_dict["neither"])
+            self.description = self._description_dict["neither"]
 
 
 class DescriptionRadioField(RadioField):
@@ -89,12 +87,12 @@ class DescriptionRadioField(RadioField):
         self.field_names = []
         self.descriptions = []
         choices = []
-        for name, label, description in kwargs.get('choices', []):
+        for name, label, description in kwargs.get("choices", []):
             self.field_names.append(name)
             self.descriptions.append(description)
             choices.append((name, label))
         if choices:
-            kwargs['choices'] = choices
+            kwargs["choices"] = choices
         super(DescriptionRadioField, self).__init__(*args, **kwargs)
 
     def __iter__(self):
@@ -120,22 +118,22 @@ class YesNoField(RadioField):
 
     _yes_no_field = True
 
-    def __init__(self, label=None, validators=None, yes_text=_('Yes'),
-                 no_text=_('No'), **kwargs):
+    def __init__(self, label=None, validators=None, yes_text=_("Yes"), no_text=_("No"), **kwargs):
         choices = [(YES, yes_text), (NO, no_text)]
         if validators is None:
-            validators = [
-                InputRequired(message=_(u'Please choose Yes or No'))]
+            validators = [InputRequired(message=_(u"Please choose Yes or No"))]
         super(YesNoField, self).__init__(
-            label=label, validators=validators, coerce=coerce_unicode_if_value,
-            choices=choices, **kwargs)
+            label=label, validators=validators, coerce=coerce_unicode_if_value, choices=choices, **kwargs
+        )
 
 
 def set_zero_values(form):
     """Set values on a form to zero"""
+
     def set_zero(field):
-        if hasattr(field, 'set_zero'):
+        if hasattr(field, "set_zero"):
             field.set_zero()
+
     map(set_zero, form._fields.itervalues())
     return form
 
@@ -153,32 +151,30 @@ class SetZeroFormField(FormField):
 class MoneyTextInput(widgets.TextInput):
     def __call__(self, field, **kwargs):
         if field.label.text:
-            kwargs['aria-label'] = u'%s. %s' % \
-                (field.label.text, field.gettext(u'Enter 0 if this does not apply.'))
+            kwargs["aria-label"] = u"%s. %s" % (field.label.text, field.gettext(u"Enter 0 if this does not apply."))
         return super(MoneyTextInput, self).__call__(field, **kwargs)
 
 
 class MoneyField(SetZeroIntegerField):
     widget = MoneyTextInput()
 
-    def __init__(self, label=None, validators=None, min_val=0,
-                 max_val=9999999999, **kwargs):
+    def __init__(self, label=None, validators=None, min_val=0, max_val=9999999999, **kwargs):
         super(MoneyField, self).__init__(label, validators, **kwargs)
         self.min_val = min_val
         self.max_val = max_val
 
     def process_formdata(self, valuelist):
         if valuelist:
-            pounds, _, pence = valuelist[0].strip().partition('.')
-            pounds = re.sub(r'[\s,]+', '', pounds)
+            pounds, _, pence = valuelist[0].strip().partition(".")
+            pounds = re.sub(r"[\s,]+", "", pounds)
 
             if pence:
                 if len(pence) > 2:
                     self.data = None
-                    raise ValueError(self.gettext(u'Not a valid amount'))
+                    raise ValueError(self.gettext(u"Not a valid amount"))
 
                 if len(pence) == 1:
-                    pence = '{0}0'.format(pence)
+                    pence = "{0}0".format(pence)
 
             try:
                 self.data = int(pounds) * 100
@@ -186,49 +182,43 @@ class MoneyField(SetZeroIntegerField):
                     self.data += int(pence)
             except ValueError:
                 self.data = None
-                raise ValueError(self.gettext(u'Not a valid amount'))
+                raise ValueError(self.gettext(u"Not a valid amount"))
 
             if self.min_val is not None and self.data < self.min_val:
                 self.data = None
-                raise ValueError(self.gettext(
-                    u'This amount must be more than £{:,.0f}').format(
-                        self.min_val / 100.0))
+                raise ValueError(self.gettext(u"This amount must be more than £{:,.0f}").format(self.min_val / 100.0))
 
             if self.max_val is not None and self.data > self.max_val:
                 self.data = None
-                raise ValueError(self.gettext(
-                    u'This amount must be less than £{:,.0f}').format(
-                        self.max_val / 100.0))
+                raise ValueError(self.gettext(u"This amount must be less than £{:,.0f}").format(self.max_val / 100.0))
 
     def process_data(self, value):
         self.data = value
         if value:
             pence = value % 100
             pounds = value / 100
-            self.data = '{0:,}.{1:02}'.format(pounds, pence)
+            self.data = "{0:,}.{1:02}".format(pounds, pence)
 
 
 class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
     """Money amount and interval subform"""
+
     per_interval_value = MoneyField(validators=[Optional()])
-    interval_period = SelectField(
-        '',
-        choices=MONEY_INTERVALS,
-        coerce=coerce_unicode_if_value)
+    interval_period = SelectField("", choices=MONEY_INTERVALS, coerce=coerce_unicode_if_value)
 
     def __init__(self, *args, **kwargs):
         # Enable choices to be passed through
-        choices = kwargs.pop('choices', None)
+        choices = kwargs.pop("choices", None)
         super(MoneyIntervalForm, self).__init__(*args, **kwargs)
-        self.per_interval_value.label.text = kwargs.get('label')
+        self.per_interval_value.label.text = kwargs.get("label")
         if choices:
             self.interval_period.choices = choices
 
     @property
     def data(self):
         data = super(MoneyIntervalForm, self).data
-        if data['per_interval_value'] is 0 and not data['interval_period']:
-            data['interval_period'] = MONEY_INTERVALS[1][0]
+        if data["per_interval_value"] is 0 and not data["interval_period"]:
+            data["interval_period"] = MONEY_INTERVALS[1][0]
         return data
 
 
@@ -237,9 +227,8 @@ def money_interval_to_monthly(data):
 
 
 class PassKwargsToFormField(SetZeroFormField):
-
     def __init__(self, *args, **kwargs):
-        form_kwargs = kwargs.pop('form_kwargs', {})
+        form_kwargs = kwargs.pop("form_kwargs", {})
 
         super(PassKwargsToFormField, self).__init__(*args, **kwargs)
         self._form_class = self.form_class
@@ -257,18 +246,17 @@ class MoneyIntervalField(PassKwargsToFormField):
     def __init__(self, *args, **kwargs):
         self._errors = []
         self.validators = []
-        if 'validators' in kwargs:
-            self.validators.extend(kwargs['validators'])
-            del kwargs['validators']
+        if "validators" in kwargs:
+            self.validators.extend(kwargs["validators"])
+            del kwargs["validators"]
         self.validators.append(ValidMoneyInterval())
 
         # Enable kwarg choices to be passed through to interval field
-        choices = kwargs.pop('choices', None)
+        choices = kwargs.pop("choices", None)
 
         super(MoneyIntervalField, self).__init__(
-            MoneyIntervalForm,
-            form_kwargs={'choices': choices, 'label': kwargs.get('label')},
-            *args, **kwargs)
+            MoneyIntervalForm, form_kwargs={"choices": choices, "label": kwargs.get("label")}, *args, **kwargs
+        )
 
     def as_monthly(self):
         return money_interval_to_monthly(self.data)
@@ -288,7 +276,7 @@ class MoneyIntervalField(PassKwargsToFormField):
 
     def set_zero(self):
         self.form.per_interval_value.data = 0
-        self.form.interval_period.data = 'per_month'
+        self.form.interval_period.data = "per_month"
 
 
 class MultiCheckboxField(SelectMultipleField):
@@ -298,12 +286,12 @@ class MultiCheckboxField(SelectMultipleField):
     Iterating the field will produce subfields, allowing custom rendering of
     the enclosed checkbox fields.
     """
+
     widget = widgets.ListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
 
 
 class PropertyList(FieldList):
-
     def remove(self, index):
         del self.entries[index]
         self.last_index -= 1
@@ -313,23 +301,16 @@ class PropertyList(FieldList):
 
         for index, subfield in enumerate(self.entries):
             if not subfield.validate(form):
-                self.errors.append({
-                    '_index': index,
-                    '_errors': subfield.errors,
-                })
+                self.errors.append({"_index": index, "_errors": subfield.errors})
 
         chain = itertools.chain(self.validators, extra_validators)
         self._run_validation_chain(form, chain)
 
-        main_properties = filter(
-            lambda x: x.is_main_home.data == YES,
-            self.entries)
+        main_properties = filter(lambda x: x.is_main_home.data == YES, self.entries)
 
         if len(main_properties) > 1:
-            message = self.gettext('You can only have 1 main Property')
-            map(
-                lambda x: x.is_main_home.errors.append(message),
-                main_properties)
+            message = self.gettext("You can only have 1 main Property")
+            map(lambda x: x.is_main_home.errors.append(message), main_properties)
             self.errors.append(message)
 
         return len(self.errors) == 0

@@ -7,9 +7,7 @@ import logging
 from requests.exceptions import ConnectTimeout, ReadTimeout
 
 
-TIMEOUT_RESPONSE = json.dumps({
-    'error': 'Request timeout.'
-})
+TIMEOUT_RESPONSE = json.dumps({"error": "Request timeout."})
 
 
 log = logging.getLogger(__name__)
@@ -28,9 +26,9 @@ def on_timeout(response=TIMEOUT_RESPONSE):
             try:
                 return view_func(*args, **kwargs)
             except ConnectTimeout as conn_exception:
-                log.exception('Connection timeout for API: %s', conn_exception)
+                log.exception("Connection timeout for API: %s", conn_exception)
             except ReadTimeout as read_exception:
-                log.exception('Read timeout for API: %s', read_exception)
+                log.exception("Read timeout for API: %s", read_exception)
             return response
 
         return wrapper

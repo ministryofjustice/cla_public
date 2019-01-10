@@ -5,19 +5,19 @@ import requests
 from werkzeug.urls import url_encode
 
 PROVIDER_CATEGORIES = {
-    'aap': _('Actions against the police'),
-    'med': _('Clinical negligence'),
-    'com': _('Community care'),
-    'crm': _('Crime'),
-    'deb': _('Debt'),
-    'mat': _('Family'),
-    'fmed': _('Family mediation'),
-    'hou': _('Housing'),
-    'immas': _('Immigration or asylum'),
-    'mhe': _('Mental health'),
-    'pl': _('Prison law'),
-    'pub': _('Public law'),
-    'wb': _('Welfare benefits')
+    "aap": _("Actions against the police"),
+    "med": _("Clinical negligence"),
+    "com": _("Community care"),
+    "crm": _("Crime"),
+    "deb": _("Debt"),
+    "mat": _("Family"),
+    "fmed": _("Family mediation"),
+    "hou": _("Housing"),
+    "immas": _("Immigration or asylum"),
+    "mhe": _("Mental health"),
+    "pl": _("Prison law"),
+    "pub": _("Public law"),
+    "wb": _("Welfare benefits"),
 }
 
 
@@ -31,9 +31,9 @@ def kwargs_to_urlparams(**kwargs):
 
 
 def laalaa_url(**kwargs):
-    return '{host}/legal-advisers/?{params}'.format(
-        host=current_app.config['LAALAA_API_HOST'],
-        params=kwargs_to_urlparams(**kwargs))
+    return "{host}/legal-advisers/?{params}".format(
+        host=current_app.config["LAALAA_API_HOST"], params=kwargs_to_urlparams(**kwargs)
+    )
 
 
 def laalaa_search(**kwargs):
@@ -50,19 +50,14 @@ def decode_category(category):
 
 
 def decode_categories(result):
-    result['categories'] = filter(None, map(
-        decode_category,
-        result.get('categories', [])))
+    result["categories"] = filter(None, map(decode_category, result.get("categories", [])))
     return result
 
 
 def find(postcode, category=None, page=1):
 
-    data = laalaa_search(
-        postcode=postcode,
-        category=category,
-        page=page)
+    data = laalaa_search(postcode=postcode, category=category, page=page)
 
-    data['results'] = map(decode_categories, data.get('results', []))
+    data["results"] = map(decode_categories, data.get("results", []))
 
     return data

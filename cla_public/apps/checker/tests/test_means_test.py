@@ -50,8 +50,8 @@ def flatten(dict_, prefix=[]):
 
 
 def properties_post_data(*properties):
-    prop = lambda (i, p): flatten(p, ['properties', str(i)])  # noqa: E731
-    props = dict(chain(*map(prop, enumerate(properties))))
+    flatten_prop = lambda prop: flatten(prop[1], ["properties", str(prop[0])])  # noqa: E731
+    props = dict(chain(*map(flatten_prop, enumerate(properties))))
     return props
 
 

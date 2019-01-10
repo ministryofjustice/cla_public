@@ -6,190 +6,179 @@ from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 CATEGORIES = [
     # value, label, inline help text
     (
-        'clinneg',
-        _(u'Clinical negligence'),
-        _(u'Doctors and nurses not treating you with due care during medical treatment')),
+        "clinneg",
+        _(u"Clinical negligence"),
+        _(u"Doctors and nurses not treating you with due care during medical treatment"),
+    ),
     (
-        'commcare',
-        _(u'Community care'),
-        _(u'You’re unhappy with the care being provided for yourself or a relative due '
-          u'to age, disability or special educational needs - for example, in a care '
-          u'home or your own home')),
+        "commcare",
+        _(u"Community care"),
+        _(
+            u"You’re unhappy with the care being provided for yourself or a relative due "
+            u"to age, disability or special educational needs - for example, in a care "
+            u"home or your own home"
+        ),
+    ),
+    ("debt", _(u"Debt"), _(u"Bankruptcy, repossession, mortgage debt that is putting your home at risk")),
+    ("violence", _(u"Domestic abuse"), _(u"Abuse at home, child abuse, harassment by an ex-partner, forced marriage")),
     (
-        'debt',
-        _(u'Debt'),
-        _(u'Bankruptcy, repossession, mortgage debt that is putting your home at risk')),
+        "discrimination",
+        _(u"Discrimination"),
+        _(u"Being treated unfairly because of your race, sex, sexual " u"orientation"),
+    ),
     (
-        'violence',
-        _(u'Domestic abuse'),
-        _(u'Abuse at home, child abuse, harassment by an ex-partner, forced marriage')),
+        "education",
+        _(u"Education"),
+        _(u"Special educational needs, problems with school places, " u"exclusions, learning difficulties"),
+    ),
+    ("employment", _(u"Employment"), _(u"Being treated unfairly at work, unfair dismissal, employment tribunals")),
     (
-        'discrimination',
-        _(u'Discrimination'),
-        _(u'Being treated unfairly because of your race, sex, sexual '
-          u'orientation')),
+        "family",
+        _(u"Family"),
+        _(u"Divorce, separation, arrangements for your children, children being taken into care"),
+    ),
     (
-        'education',
-        _(u'Education'),
-        _(u'Special educational needs, problems with school places, '
-          u'exclusions, learning difficulties')),
+        "housing",
+        _(u"Housing"),
+        _(
+            u"Eviction, homelessness, losing your rented home, rent arrears, harassment "
+            u"by a landlord or neighbour, health and safety issues with your home"
+        ),
+    ),
     (
-        'employment',
-        _(u'Employment'),
-        _(u'Being treated unfairly at work, unfair dismissal, employment tribunals')),
+        "immigration",
+        _(u"Immigration and asylum"),
+        _(u"Applying for asylum or permission to stay in the UK, including for victims of " u"human trafficking"),
+    ),
+    ("mentalhealth", _(u"Mental health"), _(u"Help with mental health and mental capacity legal issues")),
+    ("pi", _(u"Personal injury"), _(u"An accident that was not your fault")),
+    ("publiclaw", _(u"Public law"), _(u"Taking legal action against a public body, like your local council")),
     (
-        'family',
-        _(u'Family'),
-        _(u'Divorce, separation, arrangements for your children, children being taken into care')),
+        "aap",
+        _(u"Trouble with the police"),
+        _(
+            u"Being treated unlawfully by authorities who detain, imprison and prosecute "
+            u"(for example, the police), abuse in care cases"
+        ),
+    ),
     (
-        'housing',
-        _(u'Housing'),
-        _(u'Eviction, homelessness, losing your rented home, rent arrears, harassment '
-          u'by a landlord or neighbour, health and safety issues with your home')),
-    (
-        'immigration',
-        _(u'Immigration and asylum'),
-        _(u'Applying for asylum or permission to stay in the UK, including for victims of '
-          u'human trafficking')),
-    (
-        'mentalhealth',
-        _(u'Mental health'),
-        _(u'Help with mental health and mental capacity legal issues')),
-    (
-        'pi',
-        _(u'Personal injury'),
-        _(u'An accident that was not your fault')),
-    (
-        'publiclaw',
-        _(u'Public law'),
-        _(u'Taking legal action against a public body, like your local council')),
-    (
-        'aap',
-        _(u'Trouble with the police'),
-        _(u'Being treated unlawfully by authorities who detain, imprison and prosecute '
-          u'(for example, the police), abuse in care cases')),
-    (
-        'benefits',
-        _(u'Welfare benefits'),
-        _(u'Appealing a decision made by the social security tribunal about your benefits '
-          u'to the Upper Tribunal, Court of Appeal or Supreme Court')),
-    (
-        'other',
-        _(u'Any other problem'),
-        '')
+        "benefits",
+        _(u"Welfare benefits"),
+        _(
+            u"Appealing a decision made by the social security tribunal about your benefits "
+            u"to the Upper Tribunal, Court of Appeal or Supreme Court"
+        ),
+    ),
+    ("other", _(u"Any other problem"), ""),
 ]
 
 "Outcomes of the checker"
 RESULT_OPTIONS = [
-    ('eligible', _(u'Eligible')),
-    ('face-to-face', _(u'Face-to-face')),
-    ('confirmation', _(u'Confirmation')),
+    ("eligible", _(u"Eligible")),
+    ("face-to-face", _(u"Face-to-face")),
+    ("confirmation", _(u"Confirmation")),
 ]
 
 "Benefits"
 BENEFITS_CHOICES = [
-    ('child_benefit', _(u'Child Benefit')),
-    ('pension_credit', _(u'Guarantee Credit')),
-    ('income_support', _(u'Income Support')),
-    ('job_seekers_allowance', _(u'Income-based Jobseeker’s Allowance')),
-    ('employment_support', _(u'Income-related Employment and Support Allowance')),
-    ('universal_credit', _(u'Universal Credit')),
-    ('other-benefit', _(u'Any other benefits')),
+    ("child_benefit", _(u"Child Benefit")),
+    ("pension_credit", _(u"Guarantee Credit")),
+    ("income_support", _(u"Income Support")),
+    ("job_seekers_allowance", _(u"Income-based Jobseeker’s Allowance")),
+    ("employment_support", _(u"Income-related Employment and Support Allowance")),
+    ("universal_credit", _(u"Universal Credit")),
+    ("other-benefit", _(u"Any other benefits")),
 ]
 
-PASSPORTED_BENEFITS = [benefit for benefit, label in BENEFITS_CHOICES
-                       if benefit not in ['child_benefit', 'other-benefit']]
-NASS_BENEFITS = ('asylum-support',)
+PASSPORTED_BENEFITS = [
+    benefit for benefit, label in BENEFITS_CHOICES if benefit not in ["child_benefit", "other-benefit"]
+]
+NASS_BENEFITS = ("asylum-support",)
 
 MONEY_INTERVALS = [
-    ('', _('-- Please select --')),
-    ('per_week', _('per week')),
-    ('per_4week', _('4 weekly')),
-    ('per_month', _('per month')),
-    ('per_year', _('per year'))
+    ("", _("-- Please select --")),
+    ("per_week", _("per week")),
+    ("per_4week", _("4 weekly")),
+    ("per_month", _("per month")),
+    ("per_year", _("per year")),
 ]
 
 NON_INCOME_BENEFITS = [
-    ('armed-forces-independance', _(u'Armed Forces Independence payment')),
-    ('attendance', _(u'Attendance Allowance')),
-    ('back-to-work-bonus', _(u'Back to Work Bonus')),
-    ('care-community', _(u'Care in the community Direct Payment')),
-    ('carers', _(u'Carers’ Allowance')),
-    ('constant-attendance', _(u'Constant Attendance Allowance')),
-    ('ctax-benefits', _(u'Council Tax Benefits')),
-    ('disability-living', _(u'Disability Living Allowance')),
-    ('ex-severe-disablement', _(u'Exceptionally Severe Disablement Allowance')),
-    ('fostering', _(u'Fostering Allowance')),
-    ('housing', _(u'Housing Benefit')),
-    ('indep-living', _(u'Independent Living Funds payment')),
-    ('personal-indep', _(u'Personal Independence Payments')),
-    ('severe-disablement', _(u'Severe Disablement Allowance')),
-    ('social-fund', _(u'Social Fund Payments')),
-    ('special-ed-needs', _(u'Special Education Needs (SEN) direct payment')),
-    ('war-pension', _(u'War Pension')),
+    ("armed-forces-independance", _(u"Armed Forces Independence payment")),
+    ("attendance", _(u"Attendance Allowance")),
+    ("back-to-work-bonus", _(u"Back to Work Bonus")),
+    ("care-community", _(u"Care in the community Direct Payment")),
+    ("carers", _(u"Carers’ Allowance")),
+    ("constant-attendance", _(u"Constant Attendance Allowance")),
+    ("ctax-benefits", _(u"Council Tax Benefits")),
+    ("disability-living", _(u"Disability Living Allowance")),
+    ("ex-severe-disablement", _(u"Exceptionally Severe Disablement Allowance")),
+    ("fostering", _(u"Fostering Allowance")),
+    ("housing", _(u"Housing Benefit")),
+    ("indep-living", _(u"Independent Living Funds payment")),
+    ("personal-indep", _(u"Personal Independence Payments")),
+    ("severe-disablement", _(u"Severe Disablement Allowance")),
+    ("social-fund", _(u"Social Fund Payments")),
+    ("special-ed-needs", _(u"Special Education Needs (SEN) direct payment")),
+    ("war-pension", _(u"War Pension")),
 ]
 
 F2F_CATEGORIES = (
-    'clinneg',
-    'commcare',
-    'immigration',
-    'mentalhealth',
-    'pi',
-    'publiclaw',
-    'aap',
-    'employment',
-    'other',
+    "clinneg",
+    "commcare",
+    "immigration",
+    "mentalhealth",
+    "pi",
+    "publiclaw",
+    "aap",
+    "employment",
+    "other",
 )
 
 "Dont go to callback page for these cats"
-NO_CALLBACK_CATEGORIES = ('benefits',)
+NO_CALLBACK_CATEGORIES = ("benefits",)
 
-YES = '1'
-NO = '0'
+YES = "1"
+NO = "0"
 
-CATEGORY_ID_MAPPING = {
-    'violence': 'family'
-}
+CATEGORY_ID_MAPPING = {"violence": "family"}
 
 ORGANISATION_CATEGORY_MAPPING = {
-    'Domestic abuse': 'Family',
-    'Public law': 'Public',
-    'Trouble with the police': 'Action against police',
+    "Domestic abuse": "Family",
+    "Public law": "Public",
+    "Trouble with the police": "Action against police",
 }
 
 CONTACT_SAFETY = (
-    ('SAFE', lazy_pgettext(context=u'It is', string=u'Yes')),
-    ('NO_MESSAGE', lazy_pgettext(context=u"It isn’t", string=u'No')),
+    ("SAFE", lazy_pgettext(context=u"It is", string=u"Yes")),
+    ("NO_MESSAGE", lazy_pgettext(context=u"It isn’t", string=u"No")),
 )
 
 CONTACT_PREFERENCE = (
-    ('call', _(u'I’ll call CLA')),
-    ('callback', _(u'Call me back')),
-    ('thirdparty', _(u'Call someone else instead of me')),
+    ("call", _(u"I’ll call CLA")),
+    ("callback", _(u"Call me back")),
+    ("thirdparty", _(u"Call someone else instead of me")),
 )
 
-LEGAL_ADVISER_SEARCH_PREFERENCE = (
-    ('location', _(u'Location')),
-    ('organisation', _(u'Organisation')),
-)
+LEGAL_ADVISER_SEARCH_PREFERENCE = (("location", _(u"Location")), ("organisation", _(u"Organisation")))
 
 LAALAA_PROVIDER_CATEGORIES_MAP = {
-    'aap': 'aap',
-    'clinneg': 'med',
-    'commcare': 'com',
-    'debt': 'deb',
-    'family': 'mat',
-    'family': 'fmed',
-    'housing': 'hou',
-    'immigration': 'immas',
-    'mentalhealth': 'mhe',
-    'publiclaw': 'pub',
-    'benefits': 'wb',
-    'other': 'other'
+    "aap": "aap",
+    "clinneg": "med",
+    "commcare": "com",
+    "debt": "deb",
+    "family": "mat",
+    "family": "fmed",
+    "housing": "hou",
+    "immigration": "immas",
+    "mentalhealth": "mhe",
+    "publiclaw": "pub",
+    "benefits": "wb",
+    "other": "other",
 }
 
 END_SERVICE_FLASH_MESSAGE = _(
-    u'The information you’ve entered has not been stored on your computer or '
-    u'mobile device. If you are at risk of harm, you should delete your '
-    u'browser history.'
+    u"The information you’ve entered has not been stored on your computer or "
+    u"mobile device. If you are at risk of harm, you should delete your "
+    u"browser history."
 )
