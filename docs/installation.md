@@ -22,6 +22,8 @@ Next, create the environment and start it up:
 
     pip install -r requirements/local.txt
 
+    npm install -g gulp
+
     npm install && bower install && gulp
 
 Create a ``local.py`` settings file from the example file:
