@@ -20,7 +20,7 @@ Next, create the environment and start it up:
 
     source env/bin/activate
 
-    pip install -r requirements/local.txt
+    pip install -r requirements/dev.txt
 
     npm install && bower install && gulp
 

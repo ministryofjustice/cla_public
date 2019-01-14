@@ -26,7 +26,7 @@ def mi(field, val):
     return {"per_interval_value": val(amount), "interval_period": val(period)}
 
 
-def recursive_update(orig, other):
+def recursive_update(orig, other):  # noqa: C901
     for key, val in other.iteritems():
 
         if key not in orig:
