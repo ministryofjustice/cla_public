@@ -7,8 +7,7 @@ from wtforms.validators import StopValidation, ValidationError, Optional
 
 
 class IgnoreIf(object):
-
-    def __init__(self, field_name, dependencies, message=''):
+    def __init__(self, field_name, dependencies, message=""):
         self.field_name = field_name
         self.message = message
         try:
@@ -20,9 +19,8 @@ class IgnoreIf(object):
         depfield = getattr(form, self.field_name)
         for dependency in self.dependencies:
             if callable(dependency) and dependency(depfield, form=form):
-                if not field.raw_data or isinstance(
-                        field.raw_data[0], string_types):
-                    if hasattr(field, 'clear_errors'):
+                if not field.raw_data or isinstance(field.raw_data[0], string_types):
+                    if hasattr(field, "clear_errors"):
                         field.clear_errors()
                     else:
                         if isinstance(field.errors, list):
@@ -33,7 +31,6 @@ class IgnoreIf(object):
 
 
 class FieldValue(object):
-
     def __init__(self, value):
         self.value = value
 
@@ -42,13 +39,11 @@ class FieldValue(object):
 
 
 class FieldValueOrNone(FieldValue):
-
     def __call__(self, field, **kwargs):
         return field.data == self.value or not field.raw_data
 
 
 class FieldValueNot(FieldValue):
-
     def __call__(self, field, **kwargs):
         return field.data != self.value
 
@@ -78,7 +73,7 @@ class AtLeastOne(object):
         if len(field.data) < 1:
             message = self.message
             if message is None:
-                message = field.gettext('Must select at least one option.')
+                message = field.gettext("Must select at least one option.")
             raise ValidationError(message)
 
 
@@ -90,7 +85,7 @@ class MoneyIntervalAmountRequired(object):
         amount = field.form.per_interval_value
 
         if not amount.errors and amount.data is None:
-            message = self.message or field.gettext(u'Please provide an amount')
+            message = self.message or field.gettext(u"Please provide an amount")
             raise StopValidation(message)
 
 
@@ -105,17 +100,16 @@ class ValidMoneyInterval(object):
         interval = field.form.interval_period
         amount_not_set = amount.data is None
         nonzero_amount = amount.data > 0
-        interval_selected = interval.data != ''
+        interval_selected = interval.data != ""
 
         if amount.errors:
             raise ValidationError(amount.errors[0])
 
         if interval_selected and amount_not_set:
-            raise ValidationError(field.gettext(u'Not a valid amount'))
+            raise ValidationError(field.gettext(u"Not a valid amount"))
 
         if not interval_selected and nonzero_amount:
-            raise ValidationError(field.gettext(
-                u'Please select a time period from the drop down'))
+            raise ValidationError(field.gettext(u"Please select a time period from the drop down"))
 
 
 class NotRequired(Optional):
@@ -123,11 +117,9 @@ class NotRequired(Optional):
 
 
 class ZeroOrMoreThan(object):
-
     def __init__(self, minvalue):
         self.minvalue = minvalue
 
     def __call__(self, form, field):
         if field.data != 0 and field.data <= self.minvalue:
-            raise ValidationError(field.gettext(
-                u'Enter 0 if you have no valuable items worth over £500 each'))
+            raise ValidationError(field.gettext(u"Enter 0 if you have no valuable items worth over £500 each"))

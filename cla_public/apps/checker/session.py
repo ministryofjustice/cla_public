@@ -183,7 +183,7 @@ class CheckerSessionObject(dict):
 
     def notes_object(self):
         session = self
-        format_note = lambda (key, note): u'{key}:\n{note}'.format(key=key, note=note)  # noqa: E731
+        format_note = lambda note_item: u"{key}:\n{note}".format(key=note_item[0], note=note_item[1])  # noqa: E731
 
         class Notes(object):
             def api_payload(self):
@@ -246,7 +246,7 @@ class CheckerSession(SecureCookieSession, SessionMixin):
         }
         if self.stored["callback_requested"]:
             form_value = self.checker.get("ContactForm", {}).get(self.checker.contact_type, {}).get("safe_to_contact")
-            self.stored["safe_to_contact"] = (form_value == CONTACT_SAFETY[0][0])
+            self.stored["safe_to_contact"] = form_value == CONTACT_SAFETY[0][0]
 
     def store(self, values_dict):
         self.stored.update(values_dict)

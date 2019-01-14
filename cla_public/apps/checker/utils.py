@@ -1,5 +1,4 @@
-from cla_public.apps.checker.constants import PASSPORTED_BENEFITS, \
-    NASS_BENEFITS, MONEY_INTERVALS, CATEGORIES
+from cla_public.apps.checker.constants import PASSPORTED_BENEFITS, NASS_BENEFITS, MONEY_INTERVALS, CATEGORIES
 
 
 def passported(benefits):
@@ -21,7 +20,5 @@ def money_intervals(*fields):
 
 
 def category_option_from_name(category_name):
-    requested = lambda (slug, name, desc): name == category_name  # noqa: E731
-    return next(
-        iter(filter(requested, CATEGORIES)),
-        (None, None, None))
+    requested = lambda category_tuple: category_tuple[1] == category_name  # noqa: E731
+    return next(iter(filter(requested, CATEGORIES)), (None, None, None))

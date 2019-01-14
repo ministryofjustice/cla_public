@@ -11,21 +11,18 @@ def submit(**kwargs):
 
 
 class NotesTest(unittest.TestCase):
-
     def setUp(self):
-        app = create_app('config/testing.py')
+        app = create_app("config/testing.py")
         app.test_request_context().push()
 
     def validate_notes(self, notes):
-        form = submit(
-            extra_notes=notes)
+        form = submit(extra_notes=notes)
         form.validate()
-        return u'Your notes must be 4000 characters or less' not in \
-            form.extra_notes.errors
+        return u"Your notes must be 4000 characters or less" not in form.extra_notes.errors
 
     def test_notes_max_length(self):
-        longest_allowed = 'x' * 4000
+        longest_allowed = "x" * 4000
         self.assertTrue(self.validate_notes(longest_allowed))
 
-        too_long = longest_allowed + 'x'
+        too_long = longest_allowed + "x"
         self.assertFalse(self.validate_notes(too_long))
