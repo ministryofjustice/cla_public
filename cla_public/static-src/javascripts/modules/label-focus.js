@@ -1,5 +1,4 @@
-(function () {
-  'use strict';
+ 'use strict';
 
   moj.Modules.LabelFocus = {
     el: '.radio-inline',
@@ -24,4 +23,4 @@
       this.$options = $(this.el).find('input[type=radio], input[type=checkbox]');
     }
   };
-}());
+

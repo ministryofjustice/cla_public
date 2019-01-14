@@ -59,10 +59,9 @@ COPY requirements.txt .
 COPY requirements/ requirements/
 RUN pip install -r requirements.txt
 
-# Install npm and bower packages
-COPY package.json package-lock.json .bowerrc bower.json ./
-RUN npm install && \
-    ./node_modules/.bin/bower --allow-root install
+# Install npm packages
+COPY package.json package-lock.json ./
+RUN npm install
 
 COPY . .
 

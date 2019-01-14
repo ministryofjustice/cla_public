@@ -1,8 +1,5 @@
 'use strict';
 
-var mainBowerFiles = require('main-bower-files');
-var vendorFiles = mainBowerFiles();
-
 var paths = {
   src: 'cla_public/static-src/',
   dest: 'cla_public/static/',
@@ -10,9 +7,9 @@ var paths = {
   ie_styles: 'cla_public/static-src/ie/**/*.scss',
   scripts: [
     'cla_public/static-src/javascripts/**/*',
-    '!cla_public/static-src/javascripts/templates.js'
+    '!cla_public/static-src/javascripts/templates.js',
   ],
-  vendor_scripts: vendorFiles,
+  vendor_scripts: ['cla_public/static-src/vendor/*'],
   images: 'cla_public/static-src/images/**/*',
   templates: 'cla_public/templates/**/*',
 };

@@ -1,6 +1,5 @@
-(function () {
-  'use strict';
-
+ 'use strict';
+  var _ = require('lodash');
   moj.Modules.AddressFinder = {
     el: '.address-finder',
     url: '/addresses/',
@@ -145,4 +144,5 @@
       this.requestFailedTemplate = _.template($('#requestFailedText').html());
     }
   };
-}());
+
+

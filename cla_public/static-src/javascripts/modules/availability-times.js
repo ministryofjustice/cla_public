@@ -1,6 +1,5 @@
-(function () {
-  'use strict';
-
+ 'use strict';
+  var _ = require('lodash');
   moj.Modules.AvailabilityTimes = {
     el: '[data-day-time-choices]',
 
@@ -64,4 +63,4 @@
       this.handleTimeRadioCheck(evt);
     }
   };
-}());
+

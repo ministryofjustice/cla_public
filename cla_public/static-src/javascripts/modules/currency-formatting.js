@@ -1,6 +1,5 @@
-(function () {
-  'use strict';
-
+ 'use strict';
+  var numeral = require('numeral')
   moj.Modules.CurrencyFormatting = {
     currencyFields: [],
 
@@ -29,4 +28,4 @@
       this.currencyFields = $('.input-prefix:contains("£") + input');
     }
   };
-}());
+

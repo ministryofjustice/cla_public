@@ -1,5 +1,4 @@
-(function () {
-  'use strict';
+ 'use strict';
 
   moj.Modules.Progress = {
     progressStepLinks: [],
@@ -33,4 +32,4 @@
       this.progressStepLinks = $('.progress-step a');
     }
   };
-}());
+

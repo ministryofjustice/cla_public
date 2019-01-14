@@ -1,4 +1,3 @@
-(function () {
   'use strict';
 
   moj.Modules.SkipToContent = {
@@ -18,4 +17,4 @@
       });
     }
   };
-}());
+

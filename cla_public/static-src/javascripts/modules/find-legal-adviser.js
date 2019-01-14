@@ -1,6 +1,5 @@
-(function () {
-  'use strict';
-
+ 'use strict';
+  var _ = require('lodash');
   moj.Modules.FindLegalAdviser = {
     el: '#resultsMap',
     markers: [],
@@ -307,4 +306,4 @@
       this.$resultsPagination = $('.search-results-pagination');
     }
   };
-}());
+

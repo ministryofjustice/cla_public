@@ -1,6 +1,5 @@
-(function () {
-  'use strict';
-
+ 'use strict';
+  var _ = require('lodash');
   moj.Modules.LabelSelect = {
     el: '.radio-inline',
 
@@ -63,4 +62,4 @@
       });
     }
   };
-}());
+

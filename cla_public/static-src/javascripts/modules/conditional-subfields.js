@@ -1,5 +1,4 @@
-(function () {
-  'use strict';
+ 'use strict';
 
   moj.Modules.ConditionalSubfields = {
     el: '[data-controlled-by]',
@@ -97,4 +96,3 @@
       this.conditionalFields = $(this.el);
     }
   };
-}());
