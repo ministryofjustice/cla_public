@@ -29,12 +29,12 @@
     "require-dir": "^0.3.2",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "unminified-webpack-plugin": "^2.0.0",
-    "webpack-merge": "^4.1.5",
-    "webpack-stream": "^5.1.1",
+    "webpack-merge": "^4.2.1",
+    "webpack-stream": "^5.2.1",
     "yargs": "^10.0.3"
   },
   "dependencies": {
-    "lodash": "^3.1.0",
+    "lodash": "^3.10.1",
     "numeral": "^1.5.6"
   }
 }
