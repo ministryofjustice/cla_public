@@ -78,7 +78,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             self.form.errors["timeout"] = error_text
             return self.get()
 
-    def on_valid_submit(self):
+    def on_valid_submit(self):  # noqa: C901
         if self.form.extra_notes.data:
             session.checker.add_note(u"User problem", self.form.extra_notes.data)
         try:

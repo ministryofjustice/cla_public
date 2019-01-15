@@ -167,8 +167,8 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     "clinneg": "med",
     "commcare": "com",
     "debt": "deb",
-    "family": "mat",
-    "family": "fmed",
+    "family": "mat",  # Pending investigation in LGA-444 # noqa: F601
+    "family": "fmed",  # noqa: F601
     "housing": "hou",
     "immigration": "immas",
     "mentalhealth": "mhe",

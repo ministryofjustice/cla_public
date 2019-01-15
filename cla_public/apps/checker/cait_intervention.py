@@ -47,7 +47,7 @@ def get_uuid():
     return uuid.uuid1()
 
 
-def get_cait_params(category_name, organisations, choices=[], truncate=5):
+def get_cait_params(category_name, organisations, choices=[], truncate=5):  # noqa: C901
     params = {}
     if category_name != "Family" or request.path != "/scope/refer/family":
         return params
