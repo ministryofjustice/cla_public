@@ -15,6 +15,10 @@
 
 ## Releasing to production
 
+:warning: This project is currently deployed to _both_ template-deploy and Kubernetes.
+
+:rotating_light: To ensure correctness for end users, please **always deploy to both environments**.
+
 ### Template Deploy
 1. Please make sure you tested on a non-production environment before merging.
 1. Merge your feature branch pull request to `master`.
