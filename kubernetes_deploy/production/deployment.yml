@@ -41,6 +41,8 @@ spec:
           value: https://prod.laalaa.dsd.io
         - name: LOG_LEVEL
           value: INFO
+        - name: GA_ID
+          value: UA-37377084-21
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
