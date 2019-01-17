@@ -26,7 +26,7 @@ def mi(field, val):
     return {"per_interval_value": val(amount), "interval_period": val(period)}
 
 
-def recursive_update(orig, other):  # noqa: C901
+def recursive_update(orig, other):
     for key, val in other.iteritems():
 
         if key not in orig:
@@ -48,10 +48,6 @@ def recursive_update(orig, other):  # noqa: C901
                 if not isinstance(orig[key], Mapping):
                     orig[key] = {}
                 orig[key] = recursive_update(orig[key], val)
-
-        elif isinstance(val, list):
-            orig[key] = val
-
         else:
             orig[key] = val
 

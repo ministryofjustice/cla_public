@@ -78,7 +78,14 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             self.form.errors["timeout"] = error_text
             return self.get()
 
-    def on_valid_submit(self):  # noqa: C901
+    def add_errors(self, el, error_list):
+        for error in el:
+            if isinstance(error, basestring):
+                error_list.append(error)
+            elif isinstance(error, Mapping):
+                self.add_errors(error.values(), error_list)
+
+    def on_valid_submit(self):
         if self.form.extra_notes.data:
             session.checker.add_note(u"User problem", self.form.extra_notes.data)
         try:
@@ -98,16 +105,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         except ApiError as e:
             errors = getattr(e, "errors", {})
             error_list = []
-
-            def add_errors(el):
-                for error in el:
-                    if isinstance(error, basestring):
-                        error_list.append(error)
-                    elif isinstance(error, Mapping):
-                        add_errors(error.values())
-
-            add_errors(errors.values())
-
+            self.add_errors(errors.values(), error_list)
             error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
 
             if error_list:
