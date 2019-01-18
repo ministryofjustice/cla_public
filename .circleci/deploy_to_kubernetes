@@ -25,4 +25,5 @@ kubectl set image --filename="$NAMESPACE_DIR/deployment.yml" --local --output=ya
   kubectl apply \
     --filename=/dev/stdin \
     --filename="$NAMESPACE_DIR/service.yml" \
-    --filename="$NAMESPACE_DIR/ingress.yml"
+    --filename="$NAMESPACE_DIR/ingress.yml" \
+    --filename="$NAMESPACE_DIR/dashboard.yml"
