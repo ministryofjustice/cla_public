@@ -183,7 +183,9 @@ class CheckerSessionObject(dict):
 
     def notes_object(self):
         session = self
-        format_note = lambda note_item: u"{key}:\n{note}".format(key=note_item[0], note=note_item[1])  # noqa: E731
+
+        def format_note(note_item):
+            return u"{key}:\n{note}".format(key=note_item[0], note=note_item[1])
 
         class Notes(object):
             def api_payload(self):

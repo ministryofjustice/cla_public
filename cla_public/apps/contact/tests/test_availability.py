@@ -21,7 +21,9 @@ logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
 
 @contextmanager
 def override_current_time(dt):
-    override = lambda: dt  # noqa: E731
+    def override():
+        return dt
+
     original = call_centre_availability.current_datetime
     call_centre_availability.current_datetime = override
     yield

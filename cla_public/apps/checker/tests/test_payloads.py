@@ -86,8 +86,7 @@ class TestApiPayloads(unittest.TestCase):
     def test_your_benefits_form_no_passported(self):
         form_data = {"benefits": {"other-benefit": True}}
         payload = self.payload(YourBenefitsPayload, form_data)
-        are_false = lambda (benefit, selected): not selected  # noqa: E731
-        self.assertTrue(all(map(are_false, payload["specific_benefits"].items())))
+        self.assertTrue(all(map(lambda (benefit, selected): not selected, payload["specific_benefits"].items())))
         self.assertFalse(payload["on_passported_benefits"])
 
     def test_your_benefits_form_child_benefits(self):
@@ -95,8 +94,7 @@ class TestApiPayloads(unittest.TestCase):
         form_data = {"benefits": {"child_benefit": True}}
         form_data = self.merge_money_intervals(form_data, form_mi_data)
         payload = self.payload(YourBenefitsPayload, form_data)
-        are_false = lambda (benefit, selected): not selected  # noqa: E731
-        self.assertTrue(all(map(are_false, payload["specific_benefits"].items())))
+        self.assertTrue(all(map(lambda (benefit, selected): not selected, payload["specific_benefits"].items())))
         self.assertFalse(payload["on_passported_benefits"])
         self.assertEqual(payload["you"]["income"]["child_benefits"]["per_interval_value"], 2100)
 

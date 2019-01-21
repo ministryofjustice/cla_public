@@ -1,5 +1,5 @@
 # coding: utf-8
-"Base app views"
+"""Base app views"""
 
 import os
 import logging
