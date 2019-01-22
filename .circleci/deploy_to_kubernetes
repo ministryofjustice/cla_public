@@ -1,4 +1,5 @@
 #!/bin/sh -eu
+set -o pipefail
 
 ROOT=$(dirname "$0")
 NAMESPACE="$1"
