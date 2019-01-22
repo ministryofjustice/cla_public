@@ -98,8 +98,8 @@ def flatten(dict_, prefix=""):
 
 
 def category_id_to_name(category_id):
-    def selected_name(slug, name, _):
-        return slug == category_id and name
+    def selected_name(category):
+        return category[0] == category_id and category[1]
 
     selected = filter(None, map(selected_name, CATEGORIES))
     return selected[0] if selected else None
