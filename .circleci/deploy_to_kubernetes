@@ -23,7 +23,7 @@ echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
 cat "$NAMESPACE_DIR/deployment.yml" | \
   kubectl set image app="$ECR_DEPLOY_IMAGE" --filename=/dev/stdin --local --output=yaml | \
   kubectl annotate kubernetes.io/change-cause="$CIRCLE_BUILD_URL" --filename=/dev/stdin --local --output=yaml | \
-  kubectl apply \
+  kubectl apply --record=false \
     --filename=/dev/stdin \
     --filename="$NAMESPACE_DIR/service.yml" \
     --filename="$NAMESPACE_DIR/ingress.yml"
