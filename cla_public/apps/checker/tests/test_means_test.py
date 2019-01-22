@@ -49,11 +49,8 @@ def flatten(dict_, prefix=[]):
     return out
 
 
-def flatten_prop(prop):
-    return flatten(prop[1], ["properties", str(prop[0])])
-
-
 def properties_post_data(*properties):
+    flatten_prop = lambda prop: flatten(prop[1], ["properties", str(prop[0])])  # noqa: E731
     props = dict(chain(*map(flatten_prop, enumerate(properties))))
     return props
 

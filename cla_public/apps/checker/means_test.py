@@ -58,11 +58,8 @@ class AboutYouPayload(dict):
     def __init__(self, form_data={}):
         super(AboutYouPayload, self).__init__()
 
-        def yes(field):
-            return form_data.get(field) == YES
-
-        def val(field):
-            return form_data.get(field)
+        yes = lambda field: form_data.get(field) == YES  # noqa: E731
+        val = lambda field: form_data.get(field)  # noqa: E731
 
         payload = {
             "dependants_young": val("num_children") if yes("have_children") else 0,
@@ -102,11 +99,9 @@ class YourBenefitsPayload(dict):
     def __init__(self, form_data={}):
         super(YourBenefitsPayload, self).__init__()
 
-        def is_selected(ben):
-            return ben in form_data["benefits"]
-
-        benefits = {ben: is_selected(ben) for ben in PASSPORTED_BENEFITS}
-        is_passported = passported(form_data["benefits"])
+        is_selected = lambda ben: ben in form_data["benefits"]  # noqa: E731
+        benefits = {ben: is_selected(ben) for ben in PASSPORTED_BENEFITS}  # noqa: E731
+        is_passported = passported(form_data["benefits"])  # noqa: E731
 
         payload = {"specific_benefits": benefits, "on_passported_benefits": is_passported}
 
@@ -114,9 +109,7 @@ class YourBenefitsPayload(dict):
             payload = recursive_update(payload, IncomePayload.default)
             payload = recursive_update(payload, OutgoingsPayload.default)
         else:
-
-            def val(field):
-                return form_data.get(field)
+            val = lambda field: form_data.get(field)  # noqa: E731
 
             payload["you"] = {"income": {"child_benefits": MoneyInterval(mi("child_benefit", val))}}
 
@@ -127,11 +120,8 @@ class AdditionalBenefitsPayload(dict):
     def __init__(self, form_data={}):
         super(AdditionalBenefitsPayload, self).__init__()
 
-        def val(field):
-            return form_data.get(field)
-
-        def yes(field):
-            return form_data[field] == YES
+        val = lambda field: form_data.get(field)  # noqa: E731
+        yes = lambda field: form_data[field] == YES  # noqa: E731
 
         benefits = val("benefits")
 
@@ -156,14 +146,9 @@ class PropertyPayload(dict):
     def __init__(self, form_data={}):
         super(PropertyPayload, self).__init__()
 
-        def val(field):
-            return form_data.get(field)
-
-        def yes(field):
-            return form_data.get(field) == YES
-
-        def no(field):
-            return form_data.get(field) == NO
+        val = lambda field: form_data.get(field)  # noqa: E731
+        yes = lambda field: form_data.get(field) == YES  # noqa: E731
+        no = lambda field: form_data.get(field) == NO  # noqa: E731
 
         self.update(
             {
@@ -223,8 +208,7 @@ class SavingsPayload(dict):
     def __init__(self, form_data={}):
         super(SavingsPayload, self).__init__()
 
-        def val(field):
-            return form_data.get(field)
+        val = lambda field: form_data.get(field)  # noqa: E731
 
         savings = 0
         investments = 0
@@ -250,9 +234,9 @@ class SavingsPayload(dict):
 
 
 class IncomePayload(dict):
-    @staticmethod
-    def income():
-        return {
+    @classproperty
+    def default(cls):
+        income = lambda: {  # noqa: E731
             "income": {
                 "earnings": MoneyInterval(0),
                 "tax_credits": MoneyInterval(0),
@@ -264,20 +248,14 @@ class IncomePayload(dict):
             "deductions": {"income_tax": MoneyInterval(0), "national_insurance": MoneyInterval(0)},
         }
 
-    @classproperty
-    def default(self):
-        return {"you": self.income(), "partner": self.income()}
+        return {"you": income(), "partner": income()}
 
     def __init__(self, form_data={}):
         super(IncomePayload, self).__init__()
 
         def income(person, prefix_, self_employed=False, employed=False):
-            def prefix(field):
-                return "{0}-{1}".format(prefix_, field)
-
-            def val(field):
-                return form_data.get(prefix(field))
-
+            prefix = lambda field: "{0}-{1}".format(prefix_, field)  # noqa: E731
+            val = lambda field: form_data.get(prefix(field))  # noqa: E731
             child_tax_credit = MoneyInterval(mi("child_tax_credit", val)) if person == "you" else MoneyInterval(0)
             payload = {
                 person: {
@@ -353,9 +331,7 @@ class OutgoingsPayload(dict):
     def __init__(self, form_data={}):
         super(OutgoingsPayload, self).__init__()
 
-        def val(field):
-            return form_data.get(field)
-
+        val = lambda field: form_data.get(field)  # noqa: E731
         self.update(
             {
                 "you": {
