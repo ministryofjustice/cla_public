@@ -1,11 +1,11 @@
 #!/bin/sh -eu
+set -o pipefail
 
 ROOT=$(dirname "$0")
 NAMESPACE="$1"
 NAMESPACE_DIR="$ROOT/../kubernetes_deploy/$NAMESPACE"
 
 if ! [ $NAMESPACE ] ; then
-
   echo "usage: deploy_to_kubernetes namespace\n"
   echo "namespace is a directory in ../kubernetes_deploy/ directory"
   exit 1;
@@ -20,9 +20,10 @@ source "$ROOT/define_build_environment_variables"
 
 echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
 
-kubectl set image --filename="$NAMESPACE_DIR/deployment.yml" --local --output=yaml \
-  app="$ECR_DEPLOY_IMAGE" | \
-  kubectl apply \
+cat "$NAMESPACE_DIR/deployment.yml" | \
+  kubectl set image app="$ECR_DEPLOY_IMAGE" --filename=/dev/stdin --local --output=yaml | \
+  kubectl annotate kubernetes.io/change-cause="$CIRCLE_BUILD_URL" --filename=/dev/stdin --local --output=yaml | \
+  kubectl apply --record=false \
     --filename=/dev/stdin \
     --filename="$NAMESPACE_DIR/service.yml" \
     --filename="$NAMESPACE_DIR/ingress.yml"
