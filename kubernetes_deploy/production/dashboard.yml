@@ -57,7 +57,7 @@ data:
       "gnetId": null,
       "graphTooltip": 1,
       "id": null,
-      "iteration": 1547824180269,
+      "iteration": 1548242989805,
       "links": [],
       "panels": [
         {
@@ -417,7 +417,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-5m",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {
@@ -447,7 +447,6 @@ data:
       },
       "timezone": "browser",
       "title": "LAA CLA public",
-      "uid": "54de8aa09ac1531a5ffbac20dde2e95ce9b0adba",
+      "uid": "54de8aa09ac1531a5ffbac20dde2e95ce9b0adbb",
       "version": 1
     }
-
