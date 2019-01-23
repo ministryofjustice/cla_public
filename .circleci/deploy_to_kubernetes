@@ -26,4 +26,5 @@ cat "$NAMESPACE_DIR/deployment.yml" | \
   kubectl apply --record=false \
     --filename=/dev/stdin \
     --filename="$NAMESPACE_DIR/service.yml" \
-    --filename="$NAMESPACE_DIR/ingress.yml"
+    --filename="$NAMESPACE_DIR/ingress.yml" \
+    --filename="$NAMESPACE_DIR/dashboard.yml"
