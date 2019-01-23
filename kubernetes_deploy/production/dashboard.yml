@@ -57,7 +57,7 @@ data:
       "gnetId": null,
       "graphTooltip": 1,
       "id": null,
-      "iteration": 1547824180269,
+      "iteration": 1548242989805,
       "links": [],
       "panels": [
         {
@@ -95,10 +95,11 @@ data:
             "alignAsTable": true,
             "avg": true,
             "current": true,
-            "max": false,
+            "max": true,
             "min": false,
             "rightSide": true,
             "show": true,
+            "sideWidth": 450,
             "total": false,
             "values": true
           },
@@ -188,6 +189,7 @@ data:
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
+          "decimals": null,
           "fill": 1,
           "gridPos": {
             "h": 8,
@@ -200,10 +202,11 @@ data:
             "alignAsTable": true,
             "avg": true,
             "current": true,
-            "max": false,
+            "max": true,
             "min": false,
             "rightSide": true,
             "show": true,
+            "sideWidth": 450,
             "total": false,
             "values": true
           },
@@ -221,7 +224,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pod_name)(rate(container_cpu_usage_seconds_total{namespace='$namespace'}[1m]))",
+              "expr": "sum by (pod_name)(rate(container_cpu_usage_seconds_total{namespace='$namespace'}[5m]))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "POD: {{ pod_name}}",
@@ -292,6 +295,7 @@ data:
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
+          "decimals": null,
           "fill": 1,
           "gridPos": {
             "h": 8,
@@ -304,10 +308,11 @@ data:
             "alignAsTable": true,
             "avg": true,
             "current": true,
-            "max": false,
+            "max": true,
             "min": false,
             "rightSide": true,
             "show": true,
+            "sideWidth": 450,
             "total": false,
             "values": true
           },
@@ -325,14 +330,14 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sort_desc(avg(sum by (pod_name) (rate(container_network_receive_bytes_total{namespace='$namespace'}[1m]))))",
+              "expr": "sort_desc(avg(sum by (pod_name) (rate(container_network_receive_bytes_total{namespace='$namespace'}[5m]))))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Recv",
               "refId": "A"
             },
             {
-              "expr": "sort_desc(avg(sum by (pod_name) (rate(container_network_transmit_bytes_total{namespace='$namespace'}[1m]))))",
+              "expr": "sort_desc(avg(sum by (pod_name) (rate(container_network_transmit_bytes_total{namespace='$namespace'}[5m]))))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Sent",
@@ -412,7 +417,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-5m",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {
@@ -442,7 +447,6 @@ data:
       },
       "timezone": "browser",
       "title": "LAA CLA public",
-      "uid": "54de8aa09ac1531a5ffbac20dde2e95ce9b0adba",
+      "uid": "54de8aa09ac1531a5ffbac20dde2e95ce9b0adbb",
       "version": 1
     }
-
