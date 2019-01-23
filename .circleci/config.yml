@@ -93,6 +93,8 @@ jobs:
           command: |
             pip install virtualenv
             virtualenv env
+            source env/bin/activate
+            pip install pip==18.1
 
       - restore_cache:
           keys:
