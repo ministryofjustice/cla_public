@@ -99,6 +99,7 @@ data:
             "min": false,
             "rightSide": true,
             "show": true,
+            "sideWidth": 450,
             "total": false,
             "values": true
           },
@@ -204,6 +205,7 @@ data:
             "min": false,
             "rightSide": true,
             "show": true,
+            "sideWidth": 450,
             "total": false,
             "values": true
           },
@@ -308,6 +310,7 @@ data:
             "min": false,
             "rightSide": true,
             "show": true,
+            "sideWidth": 450,
             "total": false,
             "values": true
           },
@@ -445,4 +448,3 @@ data:
       "uid": "54de8aa09ac1531a5ffbac20dde2e95ce9b0adba",
       "version": 1
     }
-
