@@ -15,34 +15,6 @@
 
 ## Releasing to production
 
-:warning: This project is currently deployed to _both_ template-deploy and Kubernetes.
-
-:rotating_light: To ensure correctness for end users, please **always deploy to both environments**.
-
-### Template Deploy
-
-1. Please make sure you tested on a non-production environment before merging.
-1. Merge your feature branch pull request to `master`.
-1. Wait for [the Docker build to complete on CircleCI](https://circleci.com/gh/ministryofjustice/cla_public/tree/master) for the `master` branch.
-1. Copy the `master.<sha>` reference from the `build` job's "Push Docker image" step. Eg:
-    ```
-    Pushing tag for rev [d64474359f5d] on {https://registry.service.dsd.io/v1/repositories/cla_public/tags/master.54c165b}
-    ```
-1. [Deploy `master.<sha>` to **prod**uction](https://ci.service.dsd.io/job/DEPLOY-cla_public/build?delay=0sec).
-    * `ENVIRONMENT` is the target environment, select depending on your needs. Select `prod` for production.
-    * `CONTAINER_BRANCH` is the branch that needs to be released (`master` in the above example).
-    * `VERSION` is the specific 7-character prefix of the Git SHA (`54c165b` in the above example).
-
-#### Rolling back
-
-1. Redo the last step above with the last known good `master` branch git SHA.
-
-:tada: :shipit:
-
-### Deploy to Kubernetes using CircleCI
-
-**Note:** We currently have an offline production environment in Kubernetes. This will not be mapped to the public URL until further tasks have been completed.
-
 1. Please make sure you tested on a non-production environment before merging.
 1. Merge your feature branch pull request to `master`.
 1. Wait for [the Docker build to complete on CircleCI](https://circleci.com/gh/ministryofjustice/cla_public/tree/master) for the `master` branch.
@@ -55,8 +27,9 @@
     kubectl --namespace laa-cla-public-production get events
     ```
 
-#### Rolling back
+## Rolling back
 
-1. Check the rollout history with `kubectl rollout history deployment/laa-cla-public --namespace=laa-cla-public-production`
-1. Roll back to the previous version with
-   `kubectl rollout undo deployment/laa-cla-public --namespace=laa-cla-public-production`
+1. Check the rollout history with `kubectl rollout history deployment/laa-cla-public --namespace=laa-cla-public-<environment>`
+1. Roll back to the previous version with `kubectl rollout undo deployment/laa-cla-public --namespace=laa-cla-public-<environment>`
+
+:memo: The `<environment>` above is either `staging` or `production`.
