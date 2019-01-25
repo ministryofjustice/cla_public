@@ -12,21 +12,14 @@ references:
 jobs:
   build:
     docker:
-      - image: docker:17.03-git
+      - image: docker:18.09-git
     environment:
-      DSD_DOCKER_REGISTRY: "registry.service.dsd.io"
-      DSD_DOCKER_IMAGE: "cla_public"
       ECR_DOCKER_REGISTRY: "926803513772.dkr.ecr.eu-west-1.amazonaws.com"
       ECR_DOCKER_IMAGE: "laa-get-access/laa-cla-public"
     steps:
       - checkout
       - setup_remote_docker:
-          version: 17.03.0-ce
           docker_layer_caching: true
-      - run:
-          name: Login to the DSD Docker registry
-          command: |
-            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD --email "${DOCKER_USERNAME}@digital.justice.gov.uk" $DSD_DOCKER_REGISTRY
       - run:
           name: Login to the ECR Docker registry
           command: |
