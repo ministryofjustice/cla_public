@@ -1,25 +1,30 @@
-#!/bin/sh -eu
+#!/bin/bash -e
 set -o pipefail
 
 ROOT=$(dirname "$0")
 NAMESPACE="$1"
 NAMESPACE_DIR="$ROOT/../kubernetes_deploy/$NAMESPACE"
 
-if ! [ $NAMESPACE ] ; then
-  echo "usage: deploy_to_kubernetes namespace\n"
+if [ -z "$NAMESPACE" ] ; then
+  printf "usage: deploy_to_kubernetes namespace\n"
   echo "namespace is a directory in ../kubernetes_deploy/ directory"
-  exit 1;
+  exit 1
 fi
 
-if ! [ -d $NAMESPACE_DIR ] ; then
+if ! [ -d "$NAMESPACE_DIR" ] ; then
   echo "$NAMESPACE_DIR not found"
-  exit 1;
+  exit 1
 fi
 
-source "$ROOT/define_build_environment_variables"
+if [ -z "$ECR_DEPLOY_IMAGE" ] ; then
+  source "$ROOT"/define_build_environment_variables
+fi
 
 echo "Deploying $ECR_DEPLOY_IMAGE to $NAMESPACE..."
 
+# shellcheck disable=SC2002 # Useless cat, https://www.shellcheck.net/wiki/SC2002
+# Using a separate cat command here helps in separating the pipe of
+# "altering" kubectl commands which all take something from stdin and write to stdout.
 cat "$NAMESPACE_DIR/deployment.yml" | \
   kubectl set image app="$ECR_DEPLOY_IMAGE" --filename=/dev/stdin --local --output=yaml | \
   kubectl annotate kubernetes.io/change-cause="$CIRCLE_BUILD_URL" --filename=/dev/stdin --local --output=yaml | \

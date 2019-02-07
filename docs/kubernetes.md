@@ -53,12 +53,13 @@ If you need to deploy manually because, for example, CircleCI is offline, follow
     ```
 1. Deploy changes to Kubernetes by applying changes to the `deployment.yml`. This example takes the `deployment.yml` as input, changes the value of `image` for the container named `app` to `926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag`, then pipes the updated yaml to the next command. The `kubectl apply` applies the yaml from stdin:
     ```
-    kubectl set image --filename="kubernetes_deploy/staging/deployment.yml" --local --output=yaml app="926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag" | kubectl apply --filename=/dev/stdin
+    kubectl set image --filename="kubernetes_deploy/staging/deployment.yml" --local --output=yaml app="926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag" | kubectl apply --namespace=laa-cla-public-staging --filename=/dev/stdin
     ```
    A similiar technique is used in [deploy_to_kubernetes](https://github.com/ministryofjustice/cla_public/blob/master/.circleci/deploy_to_kubernetes) script. Of course, you could simply update the `deployment.yml` file directly and apply the changes.
    
    To use [deploy_to_kubernetes](https://github.com/ministryofjustice/cla_public/blob/master/.circleci/deploy_to_kubernetes), requires an environment variable called `ECR_DEPLOY_IMAGE` and a positional argument for the namespace to deploy to, i.e. `staging` or `production`. Here's an example:
    ```
+   kubectl config set-context $(kubectl config current-context) --namespace=laa-cla-public-staging
    ECR_DEPLOY_IMAGE=926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:awesometag .circleci/deploy_to_kubernetes staging
    ```
 
