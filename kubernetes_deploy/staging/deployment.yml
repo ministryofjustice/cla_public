@@ -63,3 +63,18 @@ spec:
             secretKeyRef:
               name: zendesk-api
               key: ZENDESK_API_USERNAME
+        - name: SMTP_HOST
+          valueFrom:
+            secretKeyRef:
+              name: smtp-sendgrid
+              key: SMTP_HOST
+        - name: SMTP_USER
+          valueFrom:
+            secretKeyRef:
+              name: smtp-sendgrid
+              key: SMTP_USER
+        - name: SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: smtp-sendgrid
+              key: SMTP_PASSWORD
