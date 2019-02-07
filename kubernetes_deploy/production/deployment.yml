@@ -80,3 +80,13 @@ spec:
             secretKeyRef:
               name: smtp-sendgrid
               key: SMTP_PASSWORD
+        - name: RAVEN_CONFIG_DSN
+          valueFrom:
+            secretKeyRef:
+              name: raven-config
+              key: RAVEN_CONFIG_DSN
+        - name: RAVEN_CONFIG_SITE
+          valueFrom:
+            secretKeyRef:
+              name: raven-config
+              key: RAVEN_CONFIG_SITE
