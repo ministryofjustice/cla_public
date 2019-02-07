@@ -53,3 +53,38 @@ spec:
             secretKeyRef:
               name: os-places
               key: apiKey
+        - name: ZENDESK_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: zendesk-api
+              key: ZENDESK_API_TOKEN
+        - name: ZENDESK_API_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: zendesk-api
+              key: ZENDESK_API_USERNAME
+        - name: SMTP_HOST
+          valueFrom:
+            secretKeyRef:
+              name: smtp-sendgrid
+              key: SMTP_HOST
+        - name: SMTP_USER
+          valueFrom:
+            secretKeyRef:
+              name: smtp-sendgrid
+              key: SMTP_USER
+        - name: SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: smtp-sendgrid
+              key: SMTP_PASSWORD
+        - name: RAVEN_CONFIG_DSN
+          valueFrom:
+            secretKeyRef:
+              name: raven-config
+              key: RAVEN_CONFIG_DSN
+        - name: RAVEN_CONFIG_SITE
+          valueFrom:
+            secretKeyRef:
+              name: raven-config
+              key: RAVEN_CONFIG_SITE
