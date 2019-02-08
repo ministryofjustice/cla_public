@@ -15,6 +15,6 @@ The website address is https://checklegalaid.service.gov.uk/.
 * [Installation](docs/installation.md)
 * [Development](docs/development.md)
 * [Testing](docs/testing.md)
-* [Using Kubernetes](docs/testing.md)
+* [Using Kubernetes](docs/kubernetes.md)
 * [Releasing](docs/releasing.md)
 * [Monitoring](docs/monitoring.md)
