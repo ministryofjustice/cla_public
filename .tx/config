@@ -1,9 +1,8 @@
 [main]
 host = https://www.transifex.com
 
-[cla-public.master]
+[cla-public.messages]
 file_filter = cla_public/translations/<lang>/LC_MESSAGES/messages.po
 source_file = cla_public/translations/messages.pot
 source_lang = en
 type = PO
-
