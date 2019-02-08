@@ -1,3 +1,12 @@
+import os
+os.environ.setdefault("SMTP_HOST", "")
+os.environ.setdefault("SMTP_USER", "")
+os.environ.setdefault("SMTP_PASSWORD", "")
+os.environ.setdefault("RAVEN_CONFIG_DSN", "")
+os.environ.setdefault("RAVEN_CONFIG_SITE", "")
+os.environ.setdefault("ZENDESK_API_USERNAME", "")
+os.environ.setdefault("ZENDESK_API_TOKEN", "")
+
 from cla_public.config.common import *
 
 
