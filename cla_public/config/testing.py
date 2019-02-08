@@ -1,4 +1,5 @@
 import os
+
 os.environ.setdefault("SMTP_HOST", "")
 os.environ.setdefault("SMTP_USER", "")
 os.environ.setdefault("SMTP_PASSWORD", "")

@@ -1,4 +1,5 @@
 import datetime
+
 OPERATOR_HOURS = {
     "weekday": (datetime.time(9, 0), datetime.time(20, 0)),
     "saturday": (datetime.time(9, 0), datetime.time(12, 30)),
