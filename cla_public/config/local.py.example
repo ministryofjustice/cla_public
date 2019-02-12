@@ -17,5 +17,3 @@ DEBUG = True
 SESSION_COOKIE_SECURE = False
 
 DEBUG_TB_INTERCEPT_REDIRECTS = False
-#EXTENSIONS.append(DebugToolbarExtension())
-
