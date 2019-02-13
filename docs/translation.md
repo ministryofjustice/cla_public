@@ -4,6 +4,7 @@ This project uses pybabel to manage strings that need translation.
 
 Install the Transifex client
 
+    source env/bin/activate
     pip install requirements/dev.txt
 
 Extract translatable strings
