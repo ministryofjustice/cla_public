@@ -18,7 +18,7 @@
     "gulp-define-module": "0.1.5",
     "gulp-filter": "^5.1.0",
     "gulp-ignore": "^2.0.2",
-    "gulp-imagemin": "~4.0.0",
+    "gulp-imagemin": "~4.1.0",
     "gulp-jshint": "~2.1.0",
     "gulp-print": "^2.0.1",
     "gulp-rename": "~1.2.0",
