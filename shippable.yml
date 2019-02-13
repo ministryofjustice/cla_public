@@ -16,7 +16,8 @@ env:
 
 
 install:
-  - pip install -r requirements/jenkins.txt
+  - pip install -r requirements/base.txt
+  - pip install -r requirements/test.txt
   - sudo gem install sass
   - sudo npm install npm -g
   - sudo npm install gulp -g
