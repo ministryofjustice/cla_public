@@ -24,6 +24,7 @@ Create `~/.transifexrc` in the following format and insert the API token:
     api_hostname = https://api.transifex.com
     hostname = https://www.transifex.com
     password = INSERT_API_TOKEN_HERE
+    token = INSERT_API_TOKEN_HERE
     username = api
 
 Push to Transifex
