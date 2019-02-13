@@ -2,6 +2,7 @@ import os
 import datetime
 
 from flask.ext.babel import lazy_gettext as _
+from cla_public.config.operating_hours import *
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -54,8 +55,8 @@ API_CLIENT_TIMEOUT = 10
 
 BACKEND_API = {"url": "{url}/checker/api/v1/".format(url=BACKEND_BASE_URI)}
 
-SENTRY_DSN = os.environ.get("RAVEN_CONFIG_DSN", "")
-SENTRY_SITE_NAME = os.environ.get("RAVEN_CONFIG_SITE", "")
+SENTRY_DSN = os.environ["RAVEN_CONFIG_DSN"]
+SENTRY_SITE_NAME = os.environ["RAVEN_CONFIG_SITE"]
 
 POSTCODEINFO_API = {
     "auth_token": os.environ.get("POSTCODEINFO_API_TOKEN"),
@@ -65,8 +66,8 @@ POSTCODEINFO_API = {
 
 OS_PLACES_API_KEY = os.environ.get("OS_PLACES_API_KEY")
 
-ZENDESK_API_USERNAME = os.environ.get("ZENDESK_API_USERNAME")
-ZENDESK_API_TOKEN = os.environ.get("ZENDESK_API_TOKEN")
+ZENDESK_API_USERNAME = os.environ["ZENDESK_API_USERNAME"]
+ZENDESK_API_TOKEN = os.environ["ZENDESK_API_TOKEN"]
 ZENDESK_DEFAULT_REQUESTER = 649762516  # anonymous feedback <noreply@ministryofjustice.zendesk.com>
 
 GA_ID = os.environ.get("GA_ID")
@@ -99,13 +100,13 @@ TIMEZONE = "Europe/London"
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", "https://prod.laalaa.dsd.io")
 
-MAIL_SERVER = os.environ.get("SMTP_HOST")
+MAIL_SERVER = os.environ["SMTP_HOST"]
 MAIL_PORT = os.environ.get("SMTP_PORT", 465)
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 
-MAIL_USERNAME = os.environ.get("SMTP_USER")
-MAIL_PASSWORD = os.environ.get("SMTP_PASSWORD")
+MAIL_USERNAME = os.environ["SMTP_USER"]
+MAIL_PASSWORD = os.environ["SMTP_PASSWORD"]
 
 MAIL_DEFAULT_SENDER = ("Civil Legal Advice", "no-reply@civillegaladvice.service.gov.uk")
 
