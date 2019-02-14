@@ -15,10 +15,7 @@ from cla_common.call_centre_availability import OpeningHours
 from cla_public.config import operating_hours as settings
 from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
-from cla_public.libs.call_centre_availability import (
-    day_choice,
-    time_choice,
-)
+from cla_public.libs.call_centre_availability import day_choice, time_choice
 
 
 OPERATOR_HOURS = OpeningHours(**settings.OPERATOR_HOURS)
