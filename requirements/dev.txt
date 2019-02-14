@@ -1,5 +1,5 @@
 -r base.txt
 -r test.txt
-Flask-DebugToolbar==0.9.2
+Flask-DebugToolbar==0.10.1
 pre-commit==1.14.2
 transifex-client==0.11
