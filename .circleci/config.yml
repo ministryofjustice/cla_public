@@ -23,10 +23,14 @@ jobs:
       - run:
           name: Login to the ECR Docker registry
           command: |
-            apk add --no-cache --no-progress py2-pip
-            pip install awscli
-            ecr_login="$(aws ecr get-login --region eu-west-1 --no-include-email)"
-            ${ecr_login}
+            if [ -z "$CIRCLE_PR_NUMBER" ]; then
+              apk add --no-cache --no-progress py2-pip
+              pip install awscli
+              ecr_login="$(aws ecr get-login --region eu-west-1 --no-include-email)"
+              ${ecr_login}
+            else
+              echo "We do not need to authenticate for forked pull requests."
+            fi
       - run:
           name: Build Docker image
           command: |
@@ -43,7 +47,12 @@ jobs:
           command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 date '+%Z' | egrep "(GMT|BST)"
       - run:
           name: Tag and push Docker images
-          command: .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1
+          command: |
+            if [ -z "$CIRCLE_PR_NUMBER" ]; then
+              .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1
+            else
+              echo "We do not need to push Docker images for forked pull requests."
+            fi
   lint:
     docker:
       - image: circleci/python:3.7
