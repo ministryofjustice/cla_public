@@ -18,13 +18,10 @@ from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import (
     day_choice,
     time_choice,
-    monday_before_11am_between_eod_friday_and_monday,
-    monday_after_11_hours,
 )
 
 
 OPERATOR_HOURS = OpeningHours(**settings.OPERATOR_HOURS)
-OPERATOR_HOURS.day_hours.insert(0, (monday_before_11am_between_eod_friday_and_monday, monday_after_11_hours()))
 
 
 class FormattedChoiceField(object):
