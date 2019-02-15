@@ -15,7 +15,7 @@ git+git://github.com/ministryofjustice/cla_common.git@0.3.0#egg=cla_common==0.3.
 itsdangerous==0.24
 jinja-moj-template==0.19.0
 logstash_formatter==0.5.9
-markdown2==2.3.5
+markdown2==2.3.7
 python-dateutil==2.2
 pytz==2018.5
 raven==6.9.0
