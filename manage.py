@@ -41,11 +41,11 @@ def test(i=False):
 
 def add_msgctxt(**format_kwargs):
     """add msgctxt to pot file as babel doesn't seem to correctly add this for pgettext"""
-    run(
-        'sed -i \'\' -e \'s/msgid "{context}"/msgctxt "{context}"\\\nmsgid "{message}"/\' cla_public/translations/messages.pot'.format(
-            **format_kwargs
-        )
+    cmd = (
+        'sed -i \'\' -e \'s/msgid "{context}"/msgctxt "{context}"\\\nmsgid "{message}"/\' '
+        "cla_public/translations/messages.pot"
     )
+    run(cmd.format(**format_kwargs))
 
 
 @manager.command
@@ -59,8 +59,8 @@ def make_messages():
     )
 
     pgettexts = [
-        {"context": "There is/are", "message": "Yes"},
-        {"context": "There is/are not", "message": "No"},
+        {"context": "There is\/are", "message": "Yes"},
+        {"context": "There is\/are not", "message": "No"},
         {"context": "It is", "message": "Yes"},
         {"context": "It isn’t", "message": "No"},
         {"context": "I am", "message": "Yes"},
