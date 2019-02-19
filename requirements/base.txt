@@ -18,7 +18,7 @@ logstash_formatter==0.5.9
 markdown2==2.3.5
 python-dateutil==2.2
 pytz==2018.5
-raven==6.9.0
+raven==6.10.0
 requests==2.19.1
 wsgiref==0.1.2
 Babel==1.3
