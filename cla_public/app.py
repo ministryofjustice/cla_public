@@ -19,7 +19,6 @@ from cla_public.apps.contact.views import contact
 from cla_public.apps.checker.views import checker
 from cla_public.apps.scope.urls import scope
 from cla_public.apps.checker.session import CheckerSessionInterface, CustomJSONEncoder
-from cla_public.middleware import StatsdMiddleware
 from cla_public.libs import honeypot
 from cla_public.libs.utils import get_locale
 
@@ -62,8 +61,6 @@ def create_app(config_file=None):
     logging.config.dictConfig(app.config["LOGGING"])
     # quiet markdown module
     logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
-
-    app.wsgi_app = StatsdMiddleware(app.wsgi_app, app.config)
 
     if app.debug:
         from werkzeug.debug import DebuggedApplication
