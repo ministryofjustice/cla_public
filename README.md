@@ -12,7 +12,7 @@ The website address is https://checklegalaid.service.gov.uk/.
 
 ## Documentation
 
-* [Installation](docs/installation.md)
+* [Installation and running](docs/installation.md)
 * [Development](docs/development.md)
 * [Translation](docs/translation.md)
 * [Testing](docs/testing.md)

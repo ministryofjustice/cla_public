@@ -1,4 +1,4 @@
-# Installation
+# Installation and running
 
 ## Dependencies
 
@@ -44,3 +44,48 @@ You can run the server with:
 
 With the `testing` configuration, you can use `BACKEND_BASE_URI` and `LAALAA_API_HOST`
 environment variables to configure the dependent service API ports.
+
+## Running locally on Kubernetes
+
+### Preparation
+
+Our assumptions:
+
+- Development is on a Mac. Please amend accordingly for other operating systems.
+- The local Kubernetes cluster has privileges to create namespaces and permissions for everything in those namespaces.
+
+Steps:
+
+1. Enable Kubernetes in Docker for Mac.
+1. Switch to the `docker-for-desktop` Kubernetes context:
+    ```
+    $ kubectl config get-contexts
+    <snip, for reference>
+
+    $ kubectl config set-context docker-for-desktop
+    ```
+
+### Running
+
+1. Build a local Docker image:
+    ```
+    $ docker build --tag=cla_public_local .
+    ```
+1. Deploy to local Kubernetes cluster:
+    ```
+    $ ECR_DEPLOY_IMAGE=cla_public_local .circleci/deploy_to_kubernetes development
+    ```
+1. Wait for the pod to be up:
+    ```
+    $ kubectl get pods
+    NAME                              READY   STATUS    RESTARTS   AGE
+    laa-cla-public-6b8fd56bbd-mph26   1/1     Running   0          44s
+    ```
+1. Find out the local port from the service:
+    ```
+    $ kubectl get services
+    NAME             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+    kubernetes       ClusterIP   10.96.0.1        <none>        443/TCP        7h
+    laa-cla-public   NodePort    10.106.138.234   <none>        80:30000/TCP   2m
+    ```
+1. Open the service on the port above. In this example, the service is running on http://localhost:30000.
