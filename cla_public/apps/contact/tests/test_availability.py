@@ -13,7 +13,6 @@ from cla_public.app import create_app
 from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, OPERATOR_HOURS, TimeChoiceField
 from cla_public.apps.contact.forms import ContactForm
-from cla_public.libs.call_centre_availability import monday_before_11am_between_eod_friday_and_monday
 
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
@@ -95,13 +94,18 @@ class TestAvailability(unittest.TestCase):
         form.day.data = datetime.date(2014, 11, 30)
         self.assertNotAvailable(datetime.time(9, 0), form=form)
 
-    def assertMondayMorningUnavailable(self, form):
-        self.assertNotAvailable(datetime.time(9, 0), form=form)
-        self.assertNotAvailable(datetime.time(9, 30), form=form)
-        self.assertNotAvailable(datetime.time(10, 0), form=form)
-        self.assertNotAvailable(datetime.time(10, 30), form=form)
+    def assertMondayMorningAvailable(self, form):
+        self.assertAvailable(datetime.time(9, 0), form=form)
+        self.assertAvailable(datetime.time(9, 30), form=form)
+        self.assertAvailable(datetime.time(10, 0), form=form)
+        self.assertAvailable(datetime.time(10, 30), form=form)
 
-    def test_monday_9to11_unavailable_after_eod_friday(self):
+    def test_monday_9to11_available_after_eod_friday(self):
+        """
+        After removing Monday morning callback capping:
+        Test Monday morning callbacks can be booked after hours on Friday, and on Saturday and Sunday.
+        Test Tuesday morning callbacks, following a bank holiday Monday, can be booked 0900 - 1100.
+        """
         times = {
             "after_hours_friday": datetime.datetime(2015, 2, 6, 20, 1),
             "saturday": datetime.datetime(2015, 2, 7, 9, 0),
@@ -113,53 +117,46 @@ class TestAvailability(unittest.TestCase):
             self.validator = AvailableSlot(DAY_SPECIFIC)
             form = Mock()
             form.day.data = monday
-            self.assertMondayMorningUnavailable(form)
+            self.assertMondayMorningAvailable(form)
 
         # Tuesday after bank holiday
         with override_current_time(datetime.datetime(2015, 5, 24, 9, 30)):
-            tuesday = datetime.date(2015, 5, 25)
+            tuesday = datetime.date(2015, 5, 26)
             for time in times.values():
                 self.now = time
                 self.validator = AvailableSlot(DAY_SPECIFIC)
                 form = Mock()
                 form.day.data = tuesday
-                self.assertMondayMorningUnavailable(form)
+                self.assertMondayMorningAvailable(form)
 
     def test_bank_holiday_monday_before_11(self):
+        """
+        After removing Monday morning callback capping:
+        Test callbacks can be booked all usual working hours on Tuesday following a bank holiday.
+        """
         with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
             tuesday_after_bank_holiday = datetime.datetime(2015, 5, 26, 9, 30)
-            self.assertTrue(monday_before_11am_between_eod_friday_and_monday(tuesday_after_bank_holiday))
-
-            self.assertFalse(OPERATOR_HOURS.can_schedule_callback(tuesday_after_bank_holiday))
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(tuesday_after_bank_holiday))
 
             tuesday_after_bank_holiday_after_11 = datetime.datetime(2015, 5, 26, 11, 30)
-            self.assertFalse(monday_before_11am_between_eod_friday_and_monday(tuesday_after_bank_holiday_after_11))
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(tuesday_after_bank_holiday_after_11))
 
             wed_after_bank_holiday = datetime.datetime(2015, 5, 27, 9, 30)
-            self.assertFalse(monday_before_11am_between_eod_friday_and_monday(wed_after_bank_holiday))
-
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(wed_after_bank_holiday))
 
     def test_booking_on_actual_bank_holiday(self):
         with override_current_time(datetime.datetime(2015, 5, 25, 10, 30)):
             tuesday = datetime.datetime(2015, 5, 26, 9, 30)
-            self.assertTrue(monday_before_11am_between_eod_friday_and_monday(tuesday))
-
-            self.assertFalse(OPERATOR_HOURS.can_schedule_callback(tuesday))
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(tuesday))
 
             tuesday_after_11 = datetime.datetime(2015, 5, 26, 11, 30)
-
-            self.assertFalse(monday_before_11am_between_eod_friday_and_monday(tuesday_after_11))
 
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(tuesday_after_11))
 
     def test_booking_on_non_bank_holiday(self):
         with override_current_time(datetime.datetime(2015, 5, 9, 10, 30)):
             monday = datetime.datetime(2015, 5, 11, 9, 30)
-            self.assertTrue(monday_before_11am_between_eod_friday_and_monday(monday))
-
-            self.assertFalse(OPERATOR_HOURS.can_schedule_callback(monday))
+            self.assertTrue(OPERATOR_HOURS.can_schedule_callback(monday))
 
             monday_after_11 = datetime.datetime(2015, 5, 11, 11, 30)
 
@@ -178,8 +175,8 @@ class TestDayTimeChoices(unittest.TestCase):
             choices = field.day_time_choices
             # half day on saturday
             self.assertEqual(7, len(choices["20150214"]))
-            # can't book before 11am on monday because we're after hours friday
-            self.assertEqual(18, len(choices["20150216"]))
+            # can book before 11am on monday. Monday morning call back capping removed.
+            self.assertEqual(22, len(choices["20150216"]))
             # can book any slot on tuesday
             self.assertEqual(22, len(choices["20150217"]))
 

@@ -31,22 +31,3 @@ def suffix(d):
 
 def day_choice(day):
     return day.strftime("%Y%m%d"), "%s %s%s" % (day.strftime("%A"), day.strftime("%d").lstrip("0"), suffix(day.day))
-
-
-def monday_after_11_hours():
-    return Hours(datetime.time(11, 0), datetime.time(20, 0))
-
-
-def monday_before_11am_between_eod_friday_and_monday(dt):
-    now = call_centre_availability.current_datetime()
-    after_hours_friday = now.weekday() == 4 and now.hour > 19
-    first_work_day = 0
-    weekend_or_holidays = [5, 6]
-    while on_bank_holiday(dt - datetime.timedelta(days=first_work_day + 1)):
-        first_work_day += 1
-        last_off = weekend_or_holidays[-1]
-        added_off_day = last_off + 1 if last_off < 6 else 0
-        weekend_or_holidays.append(added_off_day)
-    on_weekend_or_holiday = now.weekday() in weekend_or_holidays
-    monday_before_11am = dt.weekday() == first_work_day and dt.hour < 11
-    return (after_hours_friday or on_weekend_or_holiday) and monday_before_11am
