@@ -1,5 +1,6 @@
 Dockerfile
 .git/
+.github/
 
 *.py[cod]
 
