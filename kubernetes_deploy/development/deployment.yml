@@ -13,7 +13,7 @@ spec:
         service_team: cla-fala
     spec:
       containers:
-      - image: cla_public_local
+      - image: "<to be set by deploy_to_kubernetes>"
         imagePullPolicy: Never
         name: app
         readinessProbe:

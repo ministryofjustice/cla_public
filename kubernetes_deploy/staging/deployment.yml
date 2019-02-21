@@ -15,7 +15,7 @@ spec:
         service_team: cla-fala
     spec:
       containers:
-      - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-get-access/laa-cla-public:master
+      - image: "<to be set by deploy_to_kubernetes>"
         name: app
         readinessProbe:
           httpGet:
