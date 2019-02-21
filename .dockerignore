@@ -70,3 +70,5 @@ node_modules/
 cla_public/config/local.py
 cla_public/static-src/vendor/**
 cla_public/static/
+docs/
+README.md
