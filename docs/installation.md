@@ -90,6 +90,7 @@ Steps:
     laa-cla-public   NodePort    10.106.138.234   <none>        80:30000/TCP   2m
     ```
 1. Open the service on the port above. In this example, the service is running on http://localhost:30000.
+1. For debugging, please see the [monitoring section](monitoring.md) of the documentation.
 
 ### Re-building
 
