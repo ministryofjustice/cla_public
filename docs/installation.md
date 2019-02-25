@@ -57,7 +57,7 @@ Our assumptions:
 Steps:
 
 1. Install [Docker for Mac](https://download.docker.com/mac/stable/Docker.dmg).
-1. Enable Kubernetes in Docker for Mac.
+1. [Enable Kubernetes](https://docs.docker.com/docker-for-mac/#kubernetes) in Docker for Mac.
 1. Switch to the `docker-for-desktop` Kubernetes context:
     ```
     $ kubectl config get-contexts
