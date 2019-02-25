@@ -90,3 +90,19 @@ Steps:
     laa-cla-public   NodePort    10.106.138.234   <none>        80:30000/TCP   2m
     ```
 1. Open the service on the port above. In this example, the service is running on http://localhost:30000.
+
+### Re-building
+
+1. Re-build the local Docker image:
+    ```
+    $ docker build --tag=cla_public_local .
+    ```
+1. Remove the previous pod(s) and deployment:
+    ```
+    $ kubectl delete deployment.apps/laa-cla-public
+    deployment.apps "laa-cla-public" deleted
+    ```
+1. Deploy again:
+    ```
+    $ ECR_DEPLOY_IMAGE=cla_public_local .circleci/deploy_to_kubernetes development
+    ```
