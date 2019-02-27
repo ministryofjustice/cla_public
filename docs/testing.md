@@ -7,6 +7,7 @@ To run Python unit tests, use the following:
     ./manage.py test
 
 ## End to end browser tests
+
 The browser tests reside in https://github.com/ministryofjustice/laa-cla-e2e-tests. Follow the instructions to get these running on your local machine.
 
 TODO: Make these tests run automatically when a new build of the `develop` branch is pushed to Docker registry.

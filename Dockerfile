@@ -51,6 +51,12 @@ RUN pip install GitPython uwsgi && \
     chown -R www-data:www-data /var/log/wsgi && \
     chmod -R g+s /var/log/wsgi
 
+# Copy service configurations
+COPY ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
+COPY ./docker/uwsgi.service /etc/service/uwsgi/run
+COPY ./docker/nginx.service /etc/service/nginx/run
+COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+
 ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
 
@@ -68,11 +74,6 @@ COPY . .
 # Compile frontend assets and translations
 RUN ./node_modules/.bin/gulp build && \
     pybabel compile -d cla_public/translations
-
-COPY ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
-COPY ./docker/uwsgi.service /etc/service/uwsgi/run
-COPY ./docker/nginx.service /etc/service/nginx/run
-COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 CMD ["/sbin/my_init"]
