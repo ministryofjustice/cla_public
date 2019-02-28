@@ -17,3 +17,17 @@
 
 1. Get the list of pods: `kubectl --namespace=laa-cla-public-<environment> get pods`
 1. Follow the logs for the pod: `kubectl --namespace=laa-cla-public-<environment> logs laa-cla-public-5c8f4d4f7f-9l2cp --follow`
+
+This method can only view logs for a single container within a single pod. See below for aggregated logs.
+
+### Aggregated logs from Kubernetes
+
+1. Install [stern](https://github.com/wercker/stern).
+1. Viewing all logs in the active namespace:
+    ```
+    stern laa-cla-public --exclude=kube-probe --exclude=session_keep_alive
+    ```
+    Viewing all logs with a specific namespace:
+    ```
+    stern laa-cla-public --exclude=kube-probe --exclude=session_keep_alive --namespace=laa-cla-public-<environment>
+    ```

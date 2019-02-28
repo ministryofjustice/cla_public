@@ -4,7 +4,7 @@ metadata:
   name: laa-cla-public-dashboard
   namespace: laa-cla-public-production
   labels:
-    cloud-platform.justice.gov.uk/grafana-dashboard: ""
+    grafana_dashboard: ""
 data:
   laa-cla-public-staging-dashboard.json: |
     {
@@ -82,7 +82,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 8,
@@ -188,7 +188,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "Prometheus",
           "decimals": null,
           "fill": 1,
           "gridPos": {
@@ -294,7 +294,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "Prometheus",
           "decimals": null,
           "fill": 1,
           "gridPos": {
@@ -395,7 +395,7 @@ data:
           {
             "allValue": null,
             "current": {},
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": "Prometheus",
             "definition": "label_values(kube_deployment_metadata_generation, namespace)",
             "hide": 0,
             "includeAll": false,
