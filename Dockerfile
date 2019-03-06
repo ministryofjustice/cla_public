@@ -67,7 +67,7 @@ COPY . .
 
 # Compile frontend assets and translations
 RUN ./node_modules/.bin/gulp build && \
-    pybabel compile -d cla_public/translations
+    pybabel compile -f -d cla_public/translations
 
 COPY ./docker/cla_public.ini /etc/wsgi/conf.d/cla_public.ini
 COPY ./docker/uwsgi.service /etc/service/uwsgi/run
