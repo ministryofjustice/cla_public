@@ -9,11 +9,7 @@ Install the Transifex client
 
 Extract translatable strings
 
-    pybabel extract -F babel.cfg -k lazy_gettext -o cla_public/translations/messages.pot .
-    
-Update
-
-    pybabel update -i cla_public/translations/messages.pot -d cla_public/translations
+    ./manage.py make_messages
 
 Using the a Transifex account that has been added as a Project maintainer to the `cla_public` project,
 fetch an API token from https://www.transifex.com/user/settings/api/
@@ -29,16 +25,16 @@ Create `~/.transifexrc` in the following format and insert the API token:
 
 Push to Transifex
         
-    tx push --source --translations
+    ./manage.py push_messages
 
 Wait for strings to be translated
 
 Pull from Transifex
 
-    tx pull --force --language=cy
+    ./manage.py pull_messages
         
 Compile the translations
 
-    pybabel compile -d cla_public/translations
+    pybabel compile -f -d cla_public/translations
 
 Commit translations

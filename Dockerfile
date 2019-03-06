@@ -73,7 +73,7 @@ COPY . .
 
 # Compile frontend assets and translations
 RUN ./node_modules/.bin/gulp build && \
-    pybabel compile -d cla_public/translations
+    pybabel compile -f -d cla_public/translations
 
 EXPOSE 80
 CMD ["/sbin/my_init"]
