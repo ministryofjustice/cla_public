@@ -106,6 +106,10 @@ jobs:
           command: |
             source env/bin/activate
             pip install --requirement requirements.txt --requirement requirements/test.txt
+      - run:
+          name: Check dependencies compatibility
+          command: |
+            source env/bin/activate
             pip check
       - save_cache:
           key: pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
