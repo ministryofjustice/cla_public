@@ -4,6 +4,9 @@ metadata:
   name: laa-cla-public
   namespace: laa-cla-public-staging
 spec:
+  tls:
+  - hosts:
+    - laa-cla-public-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
   rules:
   - host: laa-cla-public-staging.apps.cloud-platform-live-0.k8s.integration.dsd.io
     http:
