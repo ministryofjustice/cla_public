@@ -2,22 +2,35 @@
 
 {% import "macros/element.html" as Element %}
 
-{% block page_title %}{{ _('Service unavailable') }} - {{ super() }}{% endblock %}
+{% block page_title %}{{ _('Sorry, there is a problem with the service - Check if you can get legal aid - GOV.UK')}} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1>{{ _('This service is temporarily unavailable') }}</h1>
-  <p>{{ _('This service is not available right now, but we’re working hard to get things up and running again.') }}</p>
-  <p>{{ _('You can try again later or call us on 0345 345 4 345.') }}</p>
-  <p>{{ _('Minicom: 0345 609 6677') }}</p>
-  <p>{{ _('Or text <strong>legalaid</strong> and your name to 80010.') }}</p>
-  <p>
-    {{ Element.link_new_window('https://www.gov.uk/call-charges', _('Find out about call charges here'), True) }}.
-  </p>
-  <p>{{ _('This service is only available if you are a resident of England or Wales.') }}</p>
+<div class="govuk-width-container"" "></div>
+  <main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">{{ _('Sorry, there is a problem with the service') }}</h1>
+        <p class="govuk-body">{{ _('Try again later.') }}</p>
+        <p class="govuk-body">{{ _('We have not saved any information you have entered. When the service is available, you will have to start again.') }}</p>
+        <p class="govuk-body"></p>Contact the Civil Legal Advice Helpline if you need urgent information or advice.</div>
+        <p class="govuk-body">{{ _('Telephone:') }}</p>
+        <p class="govuk-body"><strong>{{ _('0345 345 4 345*') }}</strong></p>
+        <p class="govuk-body">{{ _('Textphone:') }}</p>
+        <p class="govuk-body"><strong>{{ _('0845 609 6677') }}</strong></p>
+        <p class="govuk-body">{{ _('Opening times:') }}</p>
+        <p class="govuk-body"><strong>{{ _('Monday to Friday: 9am to 8pm') }}<br>{{ _('Saturday: 9am to 12.30pm') }}</strong></p>
+        <p class="govuk-body">
+          {% trans %} * Calls will cost approximately 9p per minute from landline. Calls from mobiles may cost more.
+          If you are worried about the cost, you can request a call-back within 24 hours by either calling the helpline
+          or texting 'legal aid' and your name to 80010. {% endtrans %}
+        </p>
+      </div>
+    </div>
+  </main>
+</div>
 {% endblock %}
 
 {% block javascripts %}{% endblock %}
-
 {% block ga_pageview -%}
   ga('send', 'pageview', '/{{ code }}' + window.location.pathname + window.location.search);
 {%- endblock %}
