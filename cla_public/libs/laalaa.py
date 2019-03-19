@@ -54,10 +54,11 @@ def decode_categories(result):
     return result
 
 
-def find(postcode, category=None, page=1):
-
-    data = laalaa_search(postcode=postcode, category=category, page=page)
-
-    data["results"] = map(decode_categories, data.get("results", []))
-
-    return data
+def find(postcode, categories=None, page=1):
+    merged_data = {"results": []}
+    for category in categories:
+        data = laalaa_search(postcode=postcode, category=category, page=page)
+        data["results"] = map(decode_categories, data.get("results", []))
+        merged_data["results"].extend(data["results"])
+        merged_data["origin"] = data.get("origin")
+    return merged_data
