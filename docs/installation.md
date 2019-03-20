@@ -36,7 +36,7 @@ Next, you can run the management command like this:
 
 You can run the server with:
 
-    ./manage.py runserver
+    CLA_PUBLIC_CONFIG=config/local.py ./manage.py runserver
 
 *OR*
 
