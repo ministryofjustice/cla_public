@@ -58,7 +58,6 @@ def find(postcode, categories=None, page=1):
     merged_data = {"results": []}
     for category in categories:
         data = laalaa_search(postcode=postcode, category=category, page=page)
-        data["results"] = map(decode_categories, data.get("results", []))
-        merged_data["results"].extend(data["results"])
+        merged_data["results"].extend(map(decode_categories, data.get("results", [])))
         merged_data["origin"] = data.get("origin")
     return merged_data
