@@ -251,18 +251,15 @@ class LaaLaaView(views.MethodView):
     @classmethod
     def handle_find_legal_adviser_form(cls, form, args):
         data = {}
-        category = ""
         page = 1
-
-        if "category" in args:
-            category = LAALAA_PROVIDER_CATEGORIES_MAP.get(args["category"])
 
         if "postcode" in args:
             if form.validate():
                 if "page" in args and args["page"].isdigit():
                     page = args["page"]
                 try:
-                    data = laalaa.find(args["postcode"], category, page)
+                    categories = LAALAA_PROVIDER_CATEGORIES_MAP.get(args.get("category"))
+                    data = laalaa.find(args["postcode"], categories, page)
                     if "error" in data:
                         form.postcode.errors.append(data["error"])
                 except laalaa.LaaLaaError:

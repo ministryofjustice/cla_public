@@ -163,18 +163,17 @@ CONTACT_PREFERENCE = (
 LEGAL_ADVISER_SEARCH_PREFERENCE = (("location", _(u"Location")), ("organisation", _(u"Organisation")))
 
 LAALAA_PROVIDER_CATEGORIES_MAP = {
-    "aap": "aap",
-    "clinneg": "med",
-    "commcare": "com",
-    "debt": "deb",
-    "family": "mat",  # Pending investigation in LGA-444 # noqa: F601
-    "family": "fmed",  # noqa: F601
-    "housing": "hou",
-    "immigration": "immas",
-    "mentalhealth": "mhe",
-    "publiclaw": "pub",
-    "benefits": "wb",
-    "other": "other",
+    "aap": ["aap"],
+    "clinneg": ["med"],
+    "commcare": ["com"],
+    "debt": ["deb"],
+    "family": ["mat", "fmed"],
+    "housing": ["hou"],
+    "immigration": ["immas"],
+    "mentalhealth": ["mhe"],
+    "publiclaw": ["pub"],
+    "benefits": ["wb"],
+    "other": ["other"],
 }
 
 END_SERVICE_FLASH_MESSAGE = _(
