@@ -55,6 +55,8 @@ def decode_categories(result):
 
 
 def find(postcode, categories=None, page=1):
+    if not categories:
+        categories = [None]
     merged_data = {"results": [], "count": 0}
     for category in categories:
         data = laalaa_search(postcode=postcode, category=category, page=page)
