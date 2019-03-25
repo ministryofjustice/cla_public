@@ -1,5 +1,7 @@
+import json
 import logging
 import unittest
+from mock import patch
 
 from cla_public.app import create_app
 from cla_public.libs import laalaa
@@ -13,6 +15,100 @@ class LaaLaaTest(unittest.TestCase):
         self.app.config["LAALAA_API_HOST"] = "http://laalaa"
         self.ctx = self.app.test_request_context()
         self.ctx.push()
+        self.laalaa_search_result = json.loads(
+            """{
+            "count": 3,
+            "next": "https://prod.laalaa.dsd.io/legal-advisers/?category=med&page=2&postcode=SW1A+1AA",
+            "previous": null,
+            "results": [
+                {
+                    "telephone": "0207 657 1555",
+                    "location": {
+                        "address": "50-52 Chancery Lane",
+                        "city": "London",
+                        "postcode": "WC2A 1HL",
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                -0.112442,
+                                51.517
+                            ]
+                        },
+                        "type": "Office"
+                    },
+                    "organisation": {
+                        "name": "Slater & Gordon (Uk) LLP",
+                        "website": "www.rjw.co.uk"
+                    },
+                    "distance": 1.670832439304462,
+                    "categories": [
+                        "MED",
+                        "MAT",
+                        "CRM"
+                    ]
+                },
+                {
+                    "telephone": "0800 014 7070",
+                    "location": {
+                        "address": "55 Fleet Street",
+                        "city": "London",
+                        "postcode": "EC4Y 1JU",
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                -0.108555,
+                                51.514096
+                            ]
+                        },
+                        "type": "Office"
+                    },
+                    "organisation": {
+                        "name": "Hudgell Solicitors",
+                        "website": "www.hudgellsolicitors.co.uk"
+                    },
+                    "distance": 1.683935777043317,
+                    "categories": [
+                        "AAP",
+                        "MED"
+                    ]
+                },
+                {
+                    "telephone": "0207 405 2000",
+                    "location": {
+                        "address": "6 New Street Square",
+                        "city": "London",
+                        "postcode": "EC4A 3DJ",
+                        "point": {
+                            "type": "Point",
+                            "coordinates": [
+                                -0.108437,
+                                51.51591
+                            ]
+                        },
+                        "type": "Office"
+                    },
+                    "organisation": {
+                        "name": "Blake Morgan LLP",
+                        "website": "www.bllaw.co.uk"
+                    },
+                    "distance": 1.758514717561317,
+                    "categories": [
+                        "MED"
+                    ]
+                }
+            ],
+            "origin": {
+                "postcode": "SW1A 1AA",
+                "point": {
+                    "type": "Point",
+                    "coordinates": [
+                        -0.141588,
+                        51.501009
+                    ]
+                }
+            }
+        }"""
+        )
 
     def tearDown(self):
         self.ctx.pop()
@@ -49,3 +145,22 @@ class LaaLaaTest(unittest.TestCase):
         result = {}
         laalaa.decode_categories(result)
         self.assertEqual([], result["categories"])
+
+    @patch("cla_public.libs.laalaa.laalaa_search")
+    def test_count_in_results(self, mock_laalaa_search):
+        mock_laalaa_search.return_value = self.laalaa_search_result
+        result = laalaa.find(postcode="SW1A 1AA", categories=["clinneg"])
+        self.assertEquals(result["count"], 3)
+
+    @patch("cla_public.libs.laalaa.laalaa_search")
+    def test_search_with_no_category(self, mock_laalaa_search):
+        mock_laalaa_search.return_value = self.laalaa_search_result
+        result = laalaa.find(postcode="SW1A 1AA")
+        self.assertEquals(len(result["results"]), 3)
+
+    @patch("cla_public.libs.laalaa.laalaa_search")
+    def test_search_results_merged(self, mock_laalaa_search):
+        mock_laalaa_search.return_value = self.laalaa_search_result
+        result = laalaa.find(postcode="SW1A 1AA", categories=["a", "b"])
+        self.assertEquals(len(result["results"]), 6)
+        self.assertEquals(result["count"], 6)
