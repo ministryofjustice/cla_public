@@ -1,3 +1,19 @@
+import os
+
+settings_required = (
+    "ZENDESK_API_USERNAME",
+    "ZENDESK_API_TOKEN",
+    "SMTP_HOST",
+    "SMTP_USER",
+    "SMTP_PASSWORD",
+    "RAVEN_CONFIG_DSN",
+    "RAVEN_CONFIG_SITE",
+)
+
+for key in settings_required:
+    if key not in os.environ:
+        raise Exception("'{}' Environment variable is required. please provide".format(key))
+
 from cla_public.config.common import *
 
 
