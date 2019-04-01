@@ -89,6 +89,12 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         if self.form.extra_notes.data:
             session.checker.add_note(u"User problem", self.form.extra_notes.data)
         try:
+            if not self.form.adaptations.is_other_adaptation.data:
+                self.form.adaptations.other_adaptation.data = ""
+                try:
+                    session.checker["ContactForm"]["adaptations"]["other_adaptation"] = ""
+                except KeyError:
+                    pass
             post_to_eligibility_check_api(session.checker.notes_object())
             post_to_case_api(self.form)
             if ReasonsForContacting.MODEL_REF_SESSION_KEY in session:
