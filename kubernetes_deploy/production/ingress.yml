@@ -7,8 +7,19 @@ spec:
   tls:
   - hosts:
     - laa-cla-public-production.apps.cloud-platform-live-0.k8s.integration.dsd.io
+  - hosts:
+    - checklegalaid.service.gov.uk
+    secretName: laa-cla-public-production-tls-certificate
+
   rules:
   - host: laa-cla-public-production.apps.cloud-platform-live-0.k8s.integration.dsd.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: laa-cla-public
+          servicePort: 80
+  - host: checklegalaid.service.gov.uk
     http:
       paths:
       - path: /
