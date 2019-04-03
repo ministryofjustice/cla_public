@@ -13,7 +13,7 @@ from cla_public.libs import laalaa, zendesk
 
 class SmokeTests(unittest.TestCase):
     def setUp(self):
-        config_file = "config/docker.py"
+        config_file = "config/deployment.py"
         if os.environ.get("CLA_ENV") is None:
             config_file = "config/common.py"
         self.app = app.create_app(config_file)

@@ -116,7 +116,7 @@ jobs:
           name: Run unit tests
           command: |
             source env/bin/activate
-            CLA_PUBLIC_CONFIG=config/testing.py python manage.py test
+            python manage.py test
 
   staging_deploy:
     <<: *container_config

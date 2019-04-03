@@ -24,8 +24,6 @@ Next, create the environment and start it up:
 
     npm install -g gulp
 
-    npm install && gulp
-
 Create a ``local.py`` settings file from the example file:
 
     cp cla_public/config/local.py.example cla_public/config/local.py
