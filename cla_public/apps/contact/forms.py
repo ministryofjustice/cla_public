@@ -40,7 +40,13 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     other_language = SelectField(_(u"Language required:"), choices=(LANG_CHOICES))
     is_other_adaptation = BooleanField(_(u"Any other communication needs"))
     other_adaptation = TextAreaField(
-        _(u"Other communication needs"), description=_(u"Please tell us what you need in the box below")
+        _(u"Other communication needs"),
+        description=_(u"Please tell us what you need in the box below"),
+        validators=[
+            IgnoreIf("is_other_adaptation", FieldValue(False)),
+            Length(max=4000, message=_(u"Your other communication needs must be 4000 characters " u"or less")),
+            Optional(),
+        ],
     )
 
     def __init__(self, formdata=None, obj=None, prefix="", data=None, meta=None, **kwargs):
@@ -155,9 +161,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         _(u"Tell us more about your problem"),
         validators=[Length(max=4000, message=_(u"Your notes must be 4000 characters " u"or less")), Optional()],
     )
-    adaptations = ValidatedFormField(
-        AdaptationsForm, _(u"Do you have any special communication needs?"), validators=[Optional()]
-    )
+    adaptations = ValidatedFormField(AdaptationsForm, _(u"Do you have any special communication needs?"))
 
     def api_payload(self):
         "Form data as data structure ready to send to API"
