@@ -15,7 +15,11 @@
     {{ _('Find your local mediator') }}
   </a>
 
-  {{ Element.satisfaction_survey_prompt() }}
+       <p>
+      {% trans %}
+          <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">What did you think of this service?</a> (takes 30 seconds)
+      {% endtrans %}
+    </p>
 {% endblock %}
 
 {% block javascripts %}

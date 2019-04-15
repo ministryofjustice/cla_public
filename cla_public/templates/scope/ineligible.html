@@ -56,6 +56,12 @@
     {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'button', 'data-ga': ga_event}) }}
   </p>
 
+       <p>
+      {% trans %}
+          <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">What did you think of this service?</a> (takes 30 seconds)
+      {% endtrans %}
+    </p>
+
   {% if category != 'other' %}
     <p>
       {% trans %}You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid.{% endtrans %}

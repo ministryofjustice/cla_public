@@ -62,6 +62,12 @@
     </p>
   {% endif %}
 
+       <p>
+      {% trans %}
+          <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">What did you think of this service?</a> (takes 30 seconds)
+      {% endtrans %}
+    </p>
+
   <h2>{{ _('A legal adviser may still be able to help') }}</h2>
 
   {% if category == 'violence' %}
@@ -71,6 +77,7 @@
     </p>
   {% else %}
     <p>{% trans %}You can still ask a legal adviser for help – you will have to pay for their advice.{% endtrans %}</p>
+
   {% endif %}
 
   {% if category not in ['debt', 'violence', 'discrimination', 'education', 'family', 'housing', 'benefits'] %}
@@ -88,7 +95,6 @@
 
   {{ HelpOrganisations.org_list_container(organisations, category_name, truncate=5) }}
 
-  {{ Element.satisfaction_survey_prompt() }}
 {% endblock %}
 
 {% block javascripts %}
