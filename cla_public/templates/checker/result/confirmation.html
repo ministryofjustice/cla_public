@@ -178,6 +178,7 @@
   </script>
 
   <script>
+    ga('send', 'event', 'confirmation', 'survey', '{{ _('Finish') }}');
     ga('send', 'event', 'confirmation', 'contact-type', '{{ session.stored.contact_type }}');
     {% if session.stored.adaptations %}
       ga('send', 'event', 'confirmation', 'adaptation', '{{ session.stored.adaptations|join(', ') }}');
