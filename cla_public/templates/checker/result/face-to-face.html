@@ -55,17 +55,23 @@
       {% trans %}In some cases you may need to pay a contribution towards your legal aid.{% endtrans %}
     </p>
 
+    <p>
+      {% trans %}
+          <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">What did you think of this service?</a> (takes 30 seconds)
+      {% endtrans %}
+    </p>
+
     {% if category == 'mentalhealth' %}
       <p>
         {% trans %}If you’re applying for legal aid for a mental health issue,
           the requirements for the financial assessment are less rigorous than
           for other legal aid problems.{% endtrans %}
       </p>
+
     {% endif %}
 
     {% include "checker/result/_find-legal-adviser.html" %}
 
-    {{ Element.satisfaction_survey_prompt() }}
   {% endblock %}
 
   {% block javascripts %}
