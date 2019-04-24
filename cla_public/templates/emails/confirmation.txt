@@ -56,6 +56,9 @@
 
 {%- endif %}
 
+{{ _('Take a short survey. Help improve the service.') }}
+
+{{ _('https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you') }}
 
 ---
 
