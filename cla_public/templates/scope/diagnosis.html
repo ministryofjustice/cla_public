@@ -69,6 +69,11 @@
       {% endfor %}
     </ul>
   </div>
-
+  <p>
+    {% trans %}
+    Your session will time out after 5 minutes of inactivity. We do this for your security.
+    {% endtrans %}
+  </p>
   {{ Element.get_in_touch_link() }}
+  
 {% endblock %}
