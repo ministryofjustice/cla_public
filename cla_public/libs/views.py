@@ -46,7 +46,7 @@ class ValidFormOnOptions(object):
         """
         if "application/x-www-form-urlencoded" in request.content_type:
             self.form.validate()
-            return jsonify({k: v for k, v in self.form.errors.items() if k is not "csrf_token"})
+            return jsonify({k: v for k, v in self.form.errors.items() if k != "csrf_token"})
         rv = Response()
         rv.allow.update(self.methods)
         return rv
