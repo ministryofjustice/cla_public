@@ -56,7 +56,34 @@ jobs:
             else
               echo "We do not need to push Docker images for forked pull requests."
             fi
-  lint:
+  lint-with-py2-tools:
+    docker:
+      - image: circleci/python:2.7
+    steps:
+      - checkout
+      - run:
+          name: Setup Python environment
+          command: |
+            pip install virtualenv
+            virtualenv py2-lint-env
+      - restore_cache:
+          keys:
+            - pip-v1-{{ checksum "requirements/py2-lint.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            source py2-lint-env/bin/activate
+            pip install --requirement requirements/py2-lint.txt
+      - save_cache:
+          key: pip-v1-{{ checksum "requirements/py2-lint.txt" }}
+          paths:
+            - "~/.cache/pip"
+      - run:
+          name: Lint with flake8
+          command: |
+            source py2-lint-env/bin/activate
+            flake8 cla_public
+  lint-with-py3-tools:
     docker:
       - image: circleci/python:3.7
     steps:
@@ -65,28 +92,23 @@ jobs:
           name: Setup Python environment
           command: |
             pip install virtualenv
-            virtualenv lint-env
+            virtualenv py3-lint-env
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/lint.txt" }}
+            - pip-v1-{{ checksum "requirements/py3-lint.txt" }}
       - run:
           name: Install dependencies
           command: |
-            source lint-env/bin/activate
-            pip install --requirement requirements/lint.txt
+            source py3-lint-env/bin/activate
+            pip install --requirement requirements/py3-lint.txt
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/lint.txt" }}
+          key: pip-v1-{{ checksum "requirements/py3-lint.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
-          name: Lint with flake8
-          command: |
-            source lint-env/bin/activate
-            flake8 cla_public
-      - run:
           name: Check formatting with Black
           command: |
-            source lint-env/bin/activate
+            source py3-lint-env/bin/activate
             black --check cla_public
   test:
     docker:
@@ -153,12 +175,13 @@ workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
-      - lint
+      - lint-with-py2-tools
+      - lint-with-py3-tools
       - test
       - build:
           requires:
-            - lint
-            - test
+            - lint-with-py2-tools
+            - lint-with-py3-tools
       - staging_deploy_approval:
           type: approval
           requires:
