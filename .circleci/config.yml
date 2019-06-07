@@ -82,7 +82,7 @@ jobs:
           name: Lint with flake8
           command: |
             source lint-env/bin/activate
-            flake8 --exit-zero cla_public
+            flake8 cla_public
       - run:
           name: Check formatting with Black
           command: |
