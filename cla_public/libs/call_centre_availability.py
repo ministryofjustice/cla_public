@@ -1,9 +1,7 @@
-import datetime
-
 import requests
 from flask import current_app
 from cla_common import call_centre_availability
-from cla_common.call_centre_availability import BankHolidays, on_bank_holiday, Hours
+from cla_common.call_centre_availability import BankHolidays
 
 
 class FlaskCacheBankHolidays(BankHolidays):

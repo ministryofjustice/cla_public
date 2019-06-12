@@ -217,7 +217,7 @@ class MoneyIntervalForm(BabelTranslationsFormMixin, NoCsrfForm):
     @property
     def data(self):
         data = super(MoneyIntervalForm, self).data
-        if data["per_interval_value"] is 0 and not data["interval_period"]:
+        if data["per_interval_value"] == 0 and not data["interval_period"]:
             data["interval_period"] = MONEY_INTERVALS[1][0]
         return data
 
