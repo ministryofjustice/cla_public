@@ -80,7 +80,9 @@ CLA_ENV = os.environ.get("CLA_ENV", "dev")
 LANGUAGES = [("en", "English"), ("cy", "Welsh")]
 
 
-config_path = lambda x: os.path.join(PROJECT_ROOT, "config", "forms", x, "forms_config.yml")
+def config_path(x):
+    return os.path.join(PROJECT_ROOT, "config", "forms", x, "forms_config.yml")
+
 
 FORM_CONFIG_TRANSLATIONS = {l: config_path(l) for l, label in LANGUAGES}
 
