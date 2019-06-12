@@ -90,11 +90,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             session.checker.add_note(u"User problem", self.form.extra_notes.data)
         try:
             if not self.form.adaptations.is_other_adaptation.data:
-                self.form.adaptations.other_adaptation.data = ""
-                try:
-                    session.checker["ContactForm"]["adaptations"]["other_adaptation"] = ""
-                except KeyError:
-                    pass
+                self.clear_other_adaptation_data()
             post_to_eligibility_check_api(session.checker.notes_object())
             post_to_case_api(self.form)
             if ReasonsForContacting.MODEL_REF_SESSION_KEY in session:
@@ -130,6 +126,13 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         if not session:
             session.checker["force_session"] = True
         return super(Contact, self).dispatch_request(*args, **kwargs)
+
+    def clear_other_adaptation_data(self):
+        self.form.adaptations.other_adaptation.data = ""
+        try:
+            session.checker["ContactForm"]["adaptations"]["other_adaptation"] = ""
+        except KeyError:
+            pass
 
 
 contact.add_url_rule("/contact", view_func=Contact.as_view("get_in_touch"), methods=("GET", "POST", "OPTIONS"))
