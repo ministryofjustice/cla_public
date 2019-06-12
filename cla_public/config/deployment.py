@@ -1,5 +1,7 @@
 import os
 
+from cla_public.config.common import *  # noqa F100
+
 settings_required = (
     "ZENDESK_API_USERNAME",
     "ZENDESK_API_TOKEN",
@@ -16,14 +18,11 @@ for key in settings_required:
     if key not in os.environ:
         raise Exception("'{}' Environment variable is required. please provide".format(key))
 
-from cla_public.config.common import *
-
-
 DEBUG = os.environ.get("SET_DEBUG", False) == "True"
 
 SESSION_COOKIE_SECURE = os.environ.get("CLA_ENV", "") in ["prod", "staging"]
 
 HOST_NAME = os.environ.get("HOST_NAME") or os.environ.get("HOSTNAME")
 
-LOGGING["handlers"]["console"]["formatter"] = "logstash"
-LOGGING["loggers"] = {"": {"handlers": ["console"], "level": os.environ.get("LOG_LEVEL", "INFO")}}
+LOGGING["handlers"]["console"]["formatter"] = "logstash"  # noqa
+LOGGING["loggers"] = {"": {"handlers": ["console"], "level": os.environ.get("LOG_LEVEL", "INFO")}}  # noqa
