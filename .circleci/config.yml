@@ -182,6 +182,7 @@ workflows:
           requires:
             - lint-with-py2-tools
             - lint-with-py3-tools
+            - test
       - staging_deploy_approval:
           type: approval
           requires:
