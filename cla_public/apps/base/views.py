@@ -169,7 +169,7 @@ def session_end():
     if session:
         if not session.permanent:
             session.permanent = True
-        session.expires_override = datetime.datetime.utcnow() + datetime.timedelta(seconds=20)
+        session.expires_override = datetime.datetime.utcnow() - datetime.timedelta(seconds=20)
     return jsonify({"session": "CLEAR"})
 
 
