@@ -9,7 +9,7 @@ var paths = {
     'cla_public/static-src/javascripts/**/*',
     '!cla_public/static-src/javascripts/templates.js',
   ],
-  vendor_scripts: ['cla_public/static-src/vendor/govuk/*'],
+  vendor_scripts: ['cla_public/static-src/vendor/*'],
   images: 'cla_public/static-src/images/**/*',
   templates: 'cla_public/templates/**/*',
 };

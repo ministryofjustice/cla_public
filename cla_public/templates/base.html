@@ -41,7 +41,7 @@
     {% endwith %}
 
     <article class="main-content">
-      {% include "_timeout.html" %}
+      {% block session_timeout_dialog %} {% include "_timeout.html" %} {% endblock %}
       {% block inner_content %}{% endblock %}
     </article>
 
