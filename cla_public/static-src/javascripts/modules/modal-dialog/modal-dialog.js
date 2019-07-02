@@ -7,6 +7,9 @@
   // Modal dialog prototype
   GOVUK.modalDialog = {
     containerSelector: '#content',
+    redirectWarningMessage: 'You are about to be redirected',
+    keepYouSecureMessage: 'We do this to keep your information secure.',
+    warningMessage: 'We will reset your application if you do not respond in',
     el: document.getElementById('js-modal-dialog'),
     $el: $('#js-modal-dialog'),
     $lastFocusedEl: null,
@@ -156,8 +159,8 @@
 
           // Below string will get read out by screen readers every time the timeout refreshes (every 15 secs. See below).
           // Please add additional information in the modal body content or in below extraText which will get announced to AT the first time the time out opens
-          var text = 'We will reset your application if you do not respond in ' + minutesText + secondsText + '.'
-          var atText = 'We will reset your application if you do not respond in ' + atMinutesText
+          var text = GOVUK.modalDialog.warningMessage +  ' ' + minutesText + secondsText + '.'
+          var atText = GOVUK.modalDialog.warningMessage +  ' ' + atMinutesText
           if (atSecondsText) {
             if (minutesLeft > 0) {
               atText += ' and'
@@ -166,11 +169,11 @@
           } else {
             atText += '.'
           }
-          var extraText = ' We do this to keep your information secure.'
+          var extraText = ' ' + GOVUK.modalDialog.keepYouSecureMessage;
 
           if (timerExpired) {
-            $timer.text('You are about to be redirected')
-            $accessibleTimer.text('You are about to be redirected')
+            $timer.text(GOVUK.modalDialog.redirectWarningMessage)
+            $accessibleTimer.text(GOVUK.modalDialog.redirectWarningMessage)
             //TO DO: tell server to reset userlastinteractedwithpage
             if (window.localStorage) {
               window.localStorage.setItem('timeUserLastInteractedWithPage', '')
