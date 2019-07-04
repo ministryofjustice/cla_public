@@ -265,8 +265,7 @@
 
           var seconds = Math.abs((timeUserLastInteractedWithPage - new Date()) / 1000)
 
-          // TO DO: use both idlemin and timemodalvisible
-          if (seconds > GOVUK.modalDialog.idleMinutesBeforeTimeOut * 60) {
+          if (seconds > (GOVUK.modalDialog.idleMinutesBeforeTimeOut + GOVUK.modalDialog.minutesTimeOutModalVisible)  * 60) {
 
         //  if (seconds > 60) {
             GOVUK.modalDialog.redirect()
