@@ -154,6 +154,7 @@ def show_session():
 
 @base.route("/session-expired")
 def session_expired():
+    session.clear()
     return render_template("session-expired.html")
 
 
