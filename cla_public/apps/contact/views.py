@@ -7,6 +7,8 @@ from flask import abort, redirect, render_template, session, url_for, views, cur
 from flask.ext.babel import lazy_gettext as _, gettext
 from flask.ext.mail import Message
 
+from notifications_python_client.notifications import NotificationsAPIClient
+
 from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm, ConfirmationForm
@@ -46,7 +48,7 @@ def create_confirmation_email(data):
             }
         )
 
-    recipient = (data["full_name"], data["email"]) if data.get("full_name") else data["email"]
+    recipient = data["email"]
 
     session["confirmation_email"] = data["email"]
 
@@ -54,6 +56,23 @@ def create_confirmation_email(data):
         gettext(u"Your Civil Legal Advice reference number"),
         recipients=[recipient],
         body=render_template("emails/confirmation.txt", data=data),
+    )
+
+
+def get_notification_client():
+    return NotificationsAPIClient(current_app.config.get("GOV_NOTIFY_API_KEY"))
+
+
+def send_message(message, template_id, personalisation={}):
+    if not isinstance(message, Message):
+        raise TypeError("message must of type Message")
+
+    notifications_client = get_notification_client()
+    personalisations = {"body": message.body, "subject": message.subject}
+    personalisations.update(personalisation)
+    email_address = ", ".join(message.recipients)
+    return notifications_client.send_email_notification(
+        email_address=email_address, template_id=template_id, personalisation=personalisations
     )
 
 
@@ -85,7 +104,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             elif isinstance(error, Mapping):
                 self.add_errors(error.values(), error_list)
 
-    def on_valid_submit(self):
+    def on_valid_submit(self):  # noqa: C901
         if self.form.extra_notes.data:
             session.checker.add_note(u"User problem", self.form.extra_notes.data)
         try:
@@ -103,8 +122,9 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 )
                 del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
             session.store_checker_details()
-            if self.form.email.data and current_app.config["MAIL_SERVER"]:
-                current_app.mail.send(create_confirmation_email(self.form.data))
+            if self.form.email.data:
+                message = create_confirmation_email(self.form.data)
+                send_message(message, current_app.config["GOV_NOTIFY_TEMPLATES"]["confirmation"])
             return redirect(url_for("contact.confirmation"))
         except AlreadySavedApiError:
             return self.already_saved()
@@ -160,7 +180,9 @@ class ContactConfirmation(HasFormMixin, ValidFormOnOptions, views.MethodView):
     def on_valid_submit(self):
         if self.form.email.data and current_app.config["MAIL_SERVER"]:
             try:
-                current_app.mail.send(create_confirmation_email(self.form.data))
+                message = create_confirmation_email(self.form.data)
+                send_message(message, current_app.config["GOV_NOTIFY_TEMPLATES"]["confirmation"])
+
             except SMTPAuthenticationError:
                 self.form._fields["email"].errors.append(
                     _(u"There was an error submitting your email. " u"Please check and try again or try without it.")

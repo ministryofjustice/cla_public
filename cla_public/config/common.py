@@ -95,16 +95,8 @@ TIMEZONE = "Europe/London"
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", "https://prod.laalaa.dsd.io")
 
-MAIL_SERVER = os.environ.get("SMTP_HOST")
-MAIL_PORT = os.environ.get("SMTP_PORT", 465)
-MAIL_USE_TLS = False
-MAIL_USE_SSL = True
-
-MAIL_USERNAME = os.environ.get("SMTP_USER")
-MAIL_PASSWORD = os.environ.get("SMTP_PASSWORD")
-
-MAIL_DEFAULT_SENDER = ("Civil Legal Advice", "no-reply@civillegaladvice.service.gov.uk")
-
+GOV_NOTIFY_API_KEY = os.getenv("GOV_NOTIFY_API_KEY")
+GOV_NOTIFY_TEMPLATES = {"confirmation": "d82e9228-7dd4-4153-b43a-0d18be8203f7"}
 # local.py overrides all the common settings.
 try:
     from cla_public.config.local import *  # noqa: F401,F403

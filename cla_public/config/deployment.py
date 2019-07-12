@@ -3,13 +3,11 @@ import os
 settings_required = (
     "ZENDESK_API_USERNAME",
     "ZENDESK_API_TOKEN",
-    "SMTP_HOST",
-    "SMTP_USER",
-    "SMTP_PASSWORD",
     "RAVEN_CONFIG_DSN",
     "RAVEN_CONFIG_SITE",
     "BACKEND_BASE_URI",
     "LAALAA_API_HOST",
+    "GOV_NOTIFY_API_KEY",
 )
 
 for key in settings_required:
