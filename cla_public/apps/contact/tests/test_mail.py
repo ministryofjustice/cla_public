@@ -1,12 +1,13 @@
 import datetime
 import logging
 import unittest
+import mock
 
 from flask import session
 from werkzeug.datastructures import MultiDict
 
 from cla_public.app import create_app
-from cla_public.apps.contact.views import create_confirmation_email
+from cla_public.apps.contact.views import create_confirmation_email, send_message
 from cla_public.apps.contact.forms import ContactForm
 
 
@@ -60,11 +61,18 @@ class TestMail(unittest.TestCase):
     def tearDown(self):
         self.ctx.pop()
 
-    def receive_email(self, msg):
-        with self.app.mail.record_messages() as outbox:
-            self.app.mail.send(msg)
-            assert len(outbox) == 1
-            return outbox[0]
+    @mock.patch("cla_public.apps.contact.views.get_notification_client")
+    def receive_email(self, msg, get_notification_client_mock):
+        notification_client = mock.MagicMock()
+        notification_client.send_email_notification = mock.MagicMock(side_effect=self.send_email_notification)
+        get_notification_client_mock.return_value = notification_client
+        return send_message(msg, "confirmation")
+
+    def send_email_notification(self, email_address, template_id, personalisation):
+        response = mock.MagicMock()
+        response.subject = personalisation["subject"]
+        response.body = personalisation["body"]
+        return response
 
     def test_confirmation_email(self):
         with self.client:

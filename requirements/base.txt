@@ -34,3 +34,6 @@ postcodeinfo>=0.0,<0.1
 # fork of https://github.com/samgiles/slumber
 # with custom parameters for timeouts and additional headers on requests
 git+git://github.com/ministryofjustice/slumber.git@da38360d6d158ee7ed445b43228fefc6f7e430e6#egg=slumber==0.6.3moj
+
+# Gov-notify
+notifications-python-client==5.3.0
