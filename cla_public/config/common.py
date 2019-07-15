@@ -96,7 +96,7 @@ TIMEZONE = "Europe/London"
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", "https://prod.laalaa.dsd.io")
 
 GOV_NOTIFY_API_KEY = os.getenv("GOV_NOTIFY_API_KEY")
-GOV_NOTIFY_TEMPLATES = {"confirmation": "d82e9228-7dd4-4153-b43a-0d18be8203f7"}
+GOV_NOTIFY_TEMPLATES = {"confirmation": os.getenv("GOV_NOTIFY_TEMPLATE_CONFIRMATION")}
 # local.py overrides all the common settings.
 try:
     from cla_public.config.local import *  # noqa: F401,F403

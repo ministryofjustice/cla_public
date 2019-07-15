@@ -8,6 +8,7 @@ settings_required = (
     "BACKEND_BASE_URI",
     "LAALAA_API_HOST",
     "GOV_NOTIFY_API_KEY",
+    "GOV_NOTIFY_TEMPLATE_CONFIRMATION",
 )
 
 for key in settings_required:
