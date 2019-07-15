@@ -72,5 +72,11 @@
     {{ form.csrf_token }}
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Confirm')) }}
+
+    <p>
+    {% trans %}
+    Your session will time out after 30 minutes of inactivity. We do this for your security.
+    {% endtrans %}
+  </p>
   </form>
 {% endblock %}
