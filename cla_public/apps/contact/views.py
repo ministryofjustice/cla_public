@@ -104,28 +104,11 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             elif isinstance(error, Mapping):
                 self.add_errors(error.values(), error_list)
 
-    def on_valid_submit(self):  # noqa: C901
+    def on_valid_submit(self):
         if self.form.extra_notes.data:
             session.checker.add_note(u"User problem", self.form.extra_notes.data)
         try:
-            if not self.form.adaptations.is_other_adaptation.data:
-                self.form.adaptations.other_adaptation.data = ""
-                try:
-                    session.checker["ContactForm"]["adaptations"]["other_adaptation"] = ""
-                except KeyError:
-                    pass
-            post_to_eligibility_check_api(session.checker.notes_object())
-            post_to_case_api(self.form)
-            if ReasonsForContacting.MODEL_REF_SESSION_KEY in session:
-                update_reasons_for_contacting(
-                    session[ReasonsForContacting.MODEL_REF_SESSION_KEY], payload={"case": session.checker["case_ref"]}
-                )
-                del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
-            session.store_checker_details()
-            if self.form.email.data:
-                message = create_confirmation_email(self.form.data)
-                send_message(message, current_app.config["GOV_NOTIFY_TEMPLATES"]["confirmation"])
-            return redirect(url_for("contact.confirmation"))
+            return self.post_to_api()
         except AlreadySavedApiError:
             return self.already_saved()
         except ApiError as e:
@@ -145,6 +128,26 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
             )
             return self.get()
+
+    def post_to_api(self):
+        if not self.form.adaptations.is_other_adaptation.data:
+            self.form.adaptations.other_adaptation.data = ""
+            try:
+                session.checker["ContactForm"]["adaptations"]["other_adaptation"] = ""
+            except KeyError:
+                pass
+        post_to_eligibility_check_api(session.checker.notes_object())
+        post_to_case_api(self.form)
+        if ReasonsForContacting.MODEL_REF_SESSION_KEY in session:
+            update_reasons_for_contacting(
+                session[ReasonsForContacting.MODEL_REF_SESSION_KEY], payload={"case": session.checker["case_ref"]}
+            )
+            del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
+        session.store_checker_details()
+        if self.form.email.data:
+            message = create_confirmation_email(self.form.data)
+            send_message(message, current_app.config["GOV_NOTIFY_TEMPLATES"]["confirmation"])
+        return redirect(url_for("contact.confirmation"))
 
     def dispatch_request(self, *args, **kwargs):
         if not session:
