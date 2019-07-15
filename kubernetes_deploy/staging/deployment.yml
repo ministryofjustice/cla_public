@@ -88,3 +88,13 @@ spec:
             secretKeyRef:
               name: raven-config
               key: RAVEN_CONFIG_SITE
+        - name: GOV_NOTIFY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: gov-notify
+              key: API_KEY
+        - name: GOV_NOTIFY_TEMPLATE_CONFIRMATION
+          valueFrom:
+            secretKeyRef:
+              name: gov-notify
+              key: TEMPLATE_CONFIRMATION
