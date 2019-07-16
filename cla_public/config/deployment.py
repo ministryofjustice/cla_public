@@ -12,7 +12,7 @@ settings_required = (
 )
 
 for key in settings_required:
-    if key not in os.environ:
+    if not os.environ.get(key):
         raise Exception("'{}' Environment variable is required. please provide".format(key))
 
 from cla_public.config.common import *
