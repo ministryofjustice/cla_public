@@ -39,4 +39,5 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Send feedback')) }}
   </form>
+  {% include "checker/time-out-warning.html" %}
 {% endblock %}

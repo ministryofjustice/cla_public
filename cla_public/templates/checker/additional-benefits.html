@@ -19,11 +19,7 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
-  <p>
-    {% trans %}
-    Your session will time out after 30 minutes of inactivity. We do this for your security.
-    {% endtrans %}
-  </p>
+  {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
 
   <script>

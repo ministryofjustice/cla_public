@@ -94,7 +94,7 @@
   </p>
 
   {{ HelpOrganisations.org_list_container(organisations, category_name, truncate=5) }}
-
+  {% include "checker/time-out-warning.html" %}
 {% endblock %}
 
 {% block javascripts %}
