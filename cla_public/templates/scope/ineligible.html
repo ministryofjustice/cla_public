@@ -69,7 +69,7 @@
 
     {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=truncate) %}
       <h2>{% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}</h2>
-    {% include "checker/time-out-warning.html" %}
     {% endcall %}
   {% endif %}
+  {% include "checker/time-out-warning.html" %}
 {% endblock %}
