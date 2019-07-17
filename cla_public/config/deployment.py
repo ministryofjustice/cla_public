@@ -11,9 +11,10 @@ settings_required = (
     "GOV_NOTIFY_TEMPLATE_CONFIRMATION",
 )
 
-for key in settings_required:
-    if not os.environ.get(key):
-        raise Exception("'{}' Environment variable is required. please provide".format(key))
+if os.environ.get("CLA_ENV") != "development":
+    for key in settings_required:
+        if not os.environ.get(key):
+            raise Exception("'{}' Environment variable is required. please provide".format(key))
 
 from cla_public.config.common import *
 

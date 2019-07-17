@@ -60,3 +60,7 @@ spec:
           value: ""
         - name: RAVEN_CONFIG_SITE
           value: ""
+        - name: GOV_NOTIFY_API_KEY
+          value: ""
+        - name: GOV_NOTIFY_TEMPLATE_CONFIRMATION
+          value: ""
