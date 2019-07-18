@@ -49,7 +49,7 @@
 
 
 {% block inner_content %}
-  <h1>{{ title }}</h1>
+  <h1 class="page-title">{{ title }}</h1>
 
   {% if not nodes|length or nodes and nodes[-1].data_safety %}
     {{ Element.staying_safe_online_link() }}

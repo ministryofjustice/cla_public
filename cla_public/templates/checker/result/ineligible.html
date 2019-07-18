@@ -11,7 +11,7 @@
 {% set _tag = 'li' if multi else 'p' %}
 
 {% block inner_content %}
-  <h1>{{ _('You’re unlikely to get legal aid') }}</h1>
+  <h1 class="page-title">{{ _('You’re unlikely to get legal aid') }}</h1>
 
   <p>
     {% trans fromcla = _('from CLA') if category == 'violence' else '' %}From
