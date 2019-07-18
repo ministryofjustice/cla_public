@@ -37,7 +37,7 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
-
+  {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
 
   <script>
@@ -47,4 +47,5 @@
       num_dependants: '{{ _('How many?') }}'
     };
   </script>
+
 {% endblock %}

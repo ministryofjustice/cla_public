@@ -34,6 +34,6 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>
-
+    {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
 {% endblock %}

@@ -107,7 +107,7 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Submit details')) }}
   </form>
-
+  {% include "checker/time-out-warning.html" %}
   {% block notice %}
     <p class="notice">
       {% trans privacy_link=Element.link_new_window(url_for('base.privacy'), _('Civil Legal Advice Privacy Statement')) %}

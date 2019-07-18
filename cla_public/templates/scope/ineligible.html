@@ -71,4 +71,5 @@
       <h2>{% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}</h2>
     {% endcall %}
   {% endif %}
+  {% include "checker/time-out-warning.html" %}
 {% endblock %}

@@ -25,6 +25,7 @@
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue to contact CLA')) }}
   </form>
+  {% include "checker/time-out-warning.html" %}
 {% endblock %}
 
 {% block javascripts %}

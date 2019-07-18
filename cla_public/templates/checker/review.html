@@ -72,5 +72,7 @@
     {{ form.csrf_token }}
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Confirm')) }}
+
   </form>
+  {% include "checker/time-out-warning.html" %}
 {% endblock %}
