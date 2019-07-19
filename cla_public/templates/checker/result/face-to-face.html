@@ -20,7 +20,7 @@
   {% block inner_content %}
 
     {% if category == 'clinneg' %}
-      <h1>{{ _('A legal adviser may be able to help you') }}</h1>
+      <h1 class="page-title">{{ _('A legal adviser may be able to help you') }}</h1>
 
       <p>
         {% trans %}You will usually only get legal aid for advice about
@@ -34,7 +34,7 @@
       </p>
 
     {% elif category == 'pi' %}
-      <h1>{{ _('Legal aid is not usually available for advice about personal injury') }}</h1>
+      <h1 class="page-title">{{ _('Legal aid is not usually available for advice about personal injury') }}</h1>
 
       <p>
         {% trans %}You may be able to get legal aid in exceptional cases. You
@@ -43,10 +43,10 @@
       </p>
 
     {% elif category == 'debt' or category == 'housing' %}
-      <h1>{{ _('A legal adviser may be able to help you') }}</h1>
+      <h1 class="page-title">{{ _('A legal adviser may be able to help you') }}</h1>
 
     {% else %}
-      <h1>{{ _('A legal adviser may be able to help you') }}</h1>
+      <h1 class="page-title">{{ _('A legal adviser may be able to help you') }}</h1>
     {% endif %}
 
     <p>
