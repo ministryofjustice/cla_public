@@ -1,6 +1,7 @@
 import os
 import datetime
 
+from cla_common.constants import CALLBACK_WINDOW_TYPES
 from flask.ext.babel import lazy_gettext as _
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -93,6 +94,8 @@ OPERATOR_HOURS = {
     "2018-12-24": (datetime.time(9, 0), datetime.time(17, 30)),
     "2018-12-31": (datetime.time(9, 0), datetime.time(17, 30)),
 }
+
+CALLBACK_WINDOW_TYPE = os.environ.get("CALLBACK_WINDOW_TYPE", CALLBACK_WINDOW_TYPES.HALF_HOUR_EITHER_SIDE)
 
 TIMEZONE = "Europe/London"
 
