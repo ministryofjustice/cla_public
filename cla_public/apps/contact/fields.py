@@ -136,7 +136,7 @@ class AvailableSlot(object):
             date = form.day.data
         time = datetime.datetime.combine(date, field.data) if date else None
         if not (time and OPERATOR_HOURS.can_schedule_callback(time)):
-            raise ValidationError(field.gettext(u"Can't schedule a callback at the requested time"))
+            raise ValidationError([field.gettext(u"Can't schedule a callback at the requested time")])
 
 
 class AvailabilityCheckerForm(NoCsrfForm):
