@@ -55,6 +55,13 @@
     {{ Element.staying_safe_online_link() }}
   {% endif %}
 
+  <div class="edge-warning" style="display:none">
+    {% call Element.alert('error', icon='cross', title='This service does not currently support Microsoft Edge') %}
+      <p>Please use an alternative browser if you are using Microsoft Edge.</p>
+      <p>If you need information about installing a new browser, please visit the <a href="https://www.gov.uk/help/browsers">browser help page</a>.</p>
+    {% endcall %}
+  </div>
+
   <div class="scope-options">
     <ul class="scope-options-list">
       {% for choice in choices %}
@@ -72,4 +79,14 @@
   {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
   
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ super() }}
+  <script>
+    if(window.navigator.userAgent.indexOf("Edge") > -1) {
+        $('.edge-warning').show();
+    }
+  </script>
 {% endblock %}
