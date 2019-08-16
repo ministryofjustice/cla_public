@@ -1,7 +1,16 @@
 {% extends "checker/base.html" %}
+{% import "macros/element.html" as Element %}
 
 {% block inner_content %}
   <h1 class="page-title">{{ title }}</h1>
+
+  <div class="edge-warning" style="display:none">
+    {% call Element.alert('error', icon='cross', title='This service does not currently support Microsoft Edge') %}
+      <p>Please use an alternative browser if you are using Microsoft Edge.</p>
+      <p>If you need information about installing a new browser, please visit the <a href="https://www.gov.uk/help/browsers">browser help page</a>.</p>
+    {% endcall %}
+  </div>
+
   <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
@@ -48,4 +57,14 @@
     };
   </script>
 
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ super() }}
+  <script>
+    if(window.navigator.userAgent.indexOf("Edge") > -1) {
+        $('.edge-warning').show();
+    }
+  </script>
 {% endblock %}
