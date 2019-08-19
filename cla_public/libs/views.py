@@ -64,6 +64,10 @@ class SessionBackedFormView(HasFormMixin, RequiresSession, views.MethodView, obj
     template = None
     template_context = {}
 
+    @property
+    def ajax(self):
+        return request.headers.get("Is-Ajax") == "true"
+
     def get(self, *args, **kwargs):
         """
         Render template with form
@@ -153,10 +157,6 @@ class FormWizard(SessionBackedFormView):
             return step
 
         self.steps = map(add_step, self.steps)
-
-    @property
-    def ajax(self):
-        return request.headers.get("Is-Ajax") == "true"
 
     def dispatch_request(self, *args, **kwargs):
         """
