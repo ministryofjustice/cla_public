@@ -16,7 +16,7 @@ from cla_public.apps.base import base, healthchecks
 from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 from cla_public.apps.checker.api import post_reasons_for_contacting
 from cla_public.libs import zendesk
-from cla_public.libs.views import HasFormMixin, ValidFormOnOptions
+from cla_public.libs.views import HasFormMixin
 
 log = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ def online_safety():
     return render_template("online-safety.html")
 
 
-class AbstractFeedbackView(HasFormMixin, views.MethodView, ValidFormOnOptions):
+class AbstractFeedbackView(HasFormMixin, views.MethodView):
     """
     Abstract view for feedback forms
     """

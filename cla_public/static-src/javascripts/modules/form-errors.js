@@ -57,8 +57,9 @@
         e.preventDefault();
         e.stopPropagation();
         $.ajax({
-          type: 'OPTIONS',
+          type: 'POST',
           url: '',
+          headers: {'Is-Ajax':true},
           contentType: 'application/x-www-form-urlencoded',
           data: this.$form.serialize()
         })
@@ -67,9 +68,9 @@
       }
     },
 
-    onAjaxSuccess: function(errors) {
-      if (!$.isEmptyObject(errors)) {
-        this.loadErrors(errors);
+    onAjaxSuccess: function(data) {
+      if (data.errors) {
+        this.loadErrors(data.errors);
         var errorBanner = $('.alert-error:visible:first');
 
         if(!errorBanner.length) {
@@ -81,9 +82,8 @@
         }, 300, function() {
           errorBanner.attr({'tabindex': -1}).focus();
         });
-      } else {
-        this.$form.off('submit');
-        this.$form.submit();
+      } else if (data.redirect) {
+        window.location.href = data.redirect;
       }
     },
 

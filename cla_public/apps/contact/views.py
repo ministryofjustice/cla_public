@@ -19,7 +19,7 @@ from cla_public.apps.checker.api import (
     get_case_ref_from_api,
 )
 from cla_public.apps.checker.views import UpdatesMeansTest
-from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, ValidFormOnOptions, HasFormMixin
+from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, HasFormMixin
 
 
 @contact.after_request
@@ -138,7 +138,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
 contact.add_url_rule("/contact", view_func=Contact.as_view("get_in_touch"), methods=("GET", "POST", "OPTIONS"))
 
 
-class ContactConfirmation(HasFormMixin, ValidFormOnOptions, views.MethodView):
+class ContactConfirmation(HasFormMixin, views.MethodView):
 
     form_class = ConfirmationForm
 
