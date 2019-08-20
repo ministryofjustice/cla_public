@@ -229,7 +229,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return False
 
 
-checker.add_url_rule("/<step>", view_func=CheckerWizard.as_view("wizard"), methods=("GET", "POST", "OPTIONS"))
+checker.add_url_rule("/<step>", view_func=CheckerWizard.as_view("wizard"), methods=("GET", "POST"))
 
 
 class LaaLaaView(views.MethodView):
@@ -316,11 +316,9 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, object):
         return render_template("checker/result/eligible.html", current_step=current_step, steps=steps, form=self.form)
 
 
-checker.add_url_rule("/result/eligible", view_func=Eligible.as_view("eligible"), methods=("GET", "POST", "OPTIONS"))
+checker.add_url_rule("/result/eligible", view_func=Eligible.as_view("eligible"), methods=("GET", "POST"))
 
-checker.add_url_rule(
-    "/result/provisional", view_func=Eligible.as_view("provisional"), methods=("GET", "POST", "OPTIONS")
-)
+checker.add_url_rule("/result/provisional", view_func=Eligible.as_view("provisional"), methods=("GET", "POST"))
 
 
 class HelpOrganisations(views.MethodView):

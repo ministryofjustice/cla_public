@@ -135,7 +135,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             pass
 
 
-contact.add_url_rule("/contact", view_func=Contact.as_view("get_in_touch"), methods=("GET", "POST", "OPTIONS"))
+contact.add_url_rule("/contact", view_func=Contact.as_view("get_in_touch"), methods=("GET", "POST"))
 
 
 class ContactConfirmation(HasFormMixin, views.MethodView):
@@ -173,5 +173,5 @@ class ContactConfirmation(HasFormMixin, views.MethodView):
 
 
 contact.add_url_rule(
-    "/result/confirmation", view_func=ContactConfirmation.as_view("confirmation"), methods=("GET", "POST", "OPTIONS")
+    "/result/confirmation", view_func=ContactConfirmation.as_view("confirmation"), methods=("GET", "POST")
 )

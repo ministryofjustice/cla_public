@@ -95,7 +95,7 @@ class Feedback(AbstractFeedbackView):
         return self.render_form(error)
 
 
-base.add_url_rule("/feedback", view_func=Feedback.as_view("feedback"), methods=("GET", "POST", "OPTIONS"))
+base.add_url_rule("/feedback", view_func=Feedback.as_view("feedback"), methods=("GET", "POST"))
 
 
 @base.route("/feedback/confirmation")
@@ -141,7 +141,7 @@ class ReasonsForContacting(AbstractFeedbackView):
 base.add_url_rule(
     "/reasons-for-contacting",
     view_func=ReasonsForContacting.as_view("reasons_for_contacting"),
-    methods=("GET", "POST", "OPTIONS"),
+    methods=("GET", "POST"),
 )
 
 
