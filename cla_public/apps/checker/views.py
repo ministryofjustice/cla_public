@@ -177,7 +177,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     def complete(self):
         # TODO: Is this still used now that scope diagnosis is taking care of F2F redirects for certain categories?
         if session.checker.needs_face_to_face:
-            return redirect(url_for(".face-to-face", category=session.checker.category))
+            return self.redirect(url_for(".face-to-face", category=session.checker.category))
 
         if session.checker.ineligible:
             session.store(
@@ -186,14 +186,14 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
                     "outcome": "referred/help-organisations/means",
                 }
             )
-            return redirect(url_for(".help_organisations", category_name=session.checker.category_slug))
+            return self.redirect(url_for(".help_organisations", category_name=session.checker.category_slug))
 
         if session.checker.need_more_info:
             session.store({"outcome": "provisional"})
-            return redirect(url_for(".provisional"))
+            return self.redirect(url_for(".provisional"))
 
         session.store({"outcome": "eligible"})
-        return redirect(url_for(".eligible"))
+        return self.redirect(url_for(".eligible"))
 
     def skip(self, step, for_review_page=False):
 
