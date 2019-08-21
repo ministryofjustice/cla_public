@@ -56,17 +56,29 @@ class HasFormMixin(object):
         return self._form
 
 
-class SessionBackedFormView(HasFormMixin, RequiresSession, views.MethodView, object):
+class AjaxOrNormalMixin(object):
+    @property
+    def ajax(self):
+        return request.headers.get("Is-Ajax") == "true"
+
+    def redirect(self, url):
+        if self.ajax:
+            return jsonify({"redirect": url})
+        return redirect(url)
+
+    def return_form_errors(self, *args, **kwargs):
+        if self.ajax:
+            return jsonify({"errors": {k: v for k, v in self.form.errors.items() if k != "csrf_token"}})
+        return self.get(*args, **kwargs)
+
+
+class SessionBackedFormView(AjaxOrNormalMixin, HasFormMixin, RequiresSession, views.MethodView, object):
     """
     Saves and loads form data to and from the session
     """
 
     template = None
     template_context = {}
-
-    @property
-    def ajax(self):
-        return request.headers.get("Is-Ajax") == "true"
 
     def get(self, *args, **kwargs):
         """
@@ -111,9 +123,7 @@ class SessionBackedFormView(HasFormMixin, RequiresSession, views.MethodView, obj
 
     def on_invalid_submit(self, *args, **kwargs):
         self.remove_form_data_from_session()
-        if self.ajax:
-            return jsonify({"errors": {k: v for k, v in self.form.errors.items() if k != "csrf_token"}})
-        return self.get(*args, **kwargs)
+        return self.return_form_errors(*args, **kwargs)
 
 
 class AllowSessionOverride(object):
@@ -266,6 +276,4 @@ class FormWizardStep(object):
         return self.wizard.get(**kwargs)
 
     def on_valid_submit(self):
-        if self.wizard.ajax:
-            return jsonify({"redirect": self.wizard.next_url()})
-        return redirect(self.wizard.next_url())
+        return self.wizard.redirect(self.wizard.next_url())

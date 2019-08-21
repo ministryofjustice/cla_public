@@ -71,12 +71,12 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
         try:
             get_case_ref_from_api()
             session.store_checker_details()
-            return redirect(url_for("contact.confirmation"))
+            return self.redirect(url_for("contact.confirmation"))
         except ApiError:
             error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
 
             self.form.errors["timeout"] = error_text
-            return self.get()
+            return self.return_form_errors()
 
     def add_errors(self, el, error_list):
         for error in el:
@@ -101,7 +101,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             session.store_checker_details()
             if self.form.email.data and current_app.config["MAIL_SERVER"]:
                 current_app.mail.send(create_confirmation_email(self.form.data))
-            return redirect(url_for("contact.confirmation"))
+            return self.redirect(url_for("contact.confirmation"))
         except AlreadySavedApiError:
             return self.already_saved()
         except ApiError as e:
@@ -115,12 +115,12 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
 
             self.form.errors["timeout"] = error_text
 
-            return self.get()
+            return self.return_form_errors()
         except SMTPAuthenticationError:
             self.form._fields["email"].errors.append(
                 _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
             )
-            return self.get()
+            return self.return_form_errors()
 
     def dispatch_request(self, *args, **kwargs):
         if not session:
