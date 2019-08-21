@@ -92,7 +92,7 @@ msgid "Another reason"
 msgstr "Rheswm arall"
 
 #: cla_public/apps/base/forms.py:46
-msgid "Did you have any difficulty with this service?"
+msgid "Did you have any difficulty using this service? Tell us about the problem."
 msgstr "A gawsoch unrhyw anhawster gyda'r gwasanaeth hwn?"
 
 #: cla_public/apps/base/forms.py:49
