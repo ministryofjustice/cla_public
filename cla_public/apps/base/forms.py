@@ -44,7 +44,7 @@ class FeedbackForm(Honeypot, BabelTranslationsFormMixin, Form):
     referrer = StringField(widget=widgets.HiddenInput())
 
     difficulty = TextAreaField(
-        label=_(u"Did you have any difficulty with this service?"), validators=[_textarea_length_validator]
+        label=_(u"Did you have any difficulty using this service? Tell us about the problem."), validators=[_textarea_length_validator]
     )
 
     ideas = TextAreaField(
