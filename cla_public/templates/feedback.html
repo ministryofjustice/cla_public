@@ -3,7 +3,7 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% set title = _('Your feedback') %}
+{% set title = _('Contact us') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
@@ -34,7 +34,7 @@
     {{ Form.group(form.ideas, field_attrs={'class': 'm-full', 'rows': 6}) }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Send feedback')) }}
+    {{ Form.actions(_('Send')) }}
   </form>
   {% include "checker/time-out-warning.html" %}
 {% endblock %}
