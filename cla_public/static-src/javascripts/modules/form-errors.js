@@ -59,7 +59,6 @@
         $.ajax({
           type: 'POST',
           url: '',
-          headers: {'Is-Ajax':true},
           contentType: 'application/x-www-form-urlencoded',
           data: this.$form.serialize()
         })

@@ -59,7 +59,7 @@ class HasFormMixin(object):
 class AjaxOrNormalMixin(object):
     @property
     def ajax(self):
-        return request.headers.get("Is-Ajax") == "true"
+        return request.headers.get("X-Requested-With") == "XMLHttpRequest"
 
     def redirect(self, url):
         if self.ajax:
