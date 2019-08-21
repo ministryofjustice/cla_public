@@ -19,6 +19,7 @@ HELP_FILLING_IN_FORM_LABELS = [
     _(u"I had help filling in this form"),
     _(u"Someone else filled in this form for me"),
     _(u"I used an accessibility tool such as a screen reader"),
+]
 
 HELP_FILLING_IN_FORM = zip(HELP_FILLING_IN_FORM_LABELS, HELP_FILLING_IN_FORM_LABELS)
 
