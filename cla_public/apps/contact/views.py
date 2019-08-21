@@ -3,7 +3,7 @@
 from smtplib import SMTPAuthenticationError
 from collections import Mapping
 
-from flask import abort, redirect, render_template, session, url_for, views, current_app
+from flask import abort, render_template, session, url_for, views, current_app
 from flask.ext.babel import lazy_gettext as _, gettext
 from flask.ext.mail import Message
 
@@ -19,7 +19,7 @@ from cla_public.apps.checker.api import (
     get_case_ref_from_api,
 )
 from cla_public.apps.checker.views import UpdatesMeansTest
-from cla_public.libs.views import AllowSessionOverride, SessionBackedFormView, HasFormMixin
+from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
 
 
 @contact.after_request
@@ -138,7 +138,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
 contact.add_url_rule("/contact", view_func=Contact.as_view("get_in_touch"), methods=("GET", "POST"))
 
 
-class ContactConfirmation(HasFormMixin, views.MethodView):
+class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
 
     form_class = ConfirmationForm
 
@@ -158,7 +158,7 @@ class ContactConfirmation(HasFormMixin, views.MethodView):
         is_submitted = getattr(self.form, "is_submitted", lambda: True)
         if is_submitted() and self.form.validate():
             return self.on_valid_submit()
-        return self.get()
+        return self.return_form_errors()
 
     def on_valid_submit(self):
         if self.form.email.data and current_app.config["MAIL_SERVER"]:
@@ -168,8 +168,8 @@ class ContactConfirmation(HasFormMixin, views.MethodView):
                 self.form._fields["email"].errors.append(
                     _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
                 )
-                return self.get()
-        return redirect(url_for("contact.confirmation"))
+                return self.return_form_errors()
+        return self.redirect(url_for("contact.confirmation"))
 
 
 contact.add_url_rule(
