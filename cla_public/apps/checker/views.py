@@ -59,7 +59,7 @@ class UpdatesMeansTest(object):
             self.form.errors["timeout"] = _(
                 u"There was an error submitting your data. " u"Please check and try again."
             )
-            return self.get(step=self.name)
+            return self.return_form_errors(step=self.name)
         else:
             return super(UpdatesMeansTest, self).on_valid_submit()
 
