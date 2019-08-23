@@ -19,12 +19,11 @@
 
     {{ Form.handle_errors(form) }}
 
-    {% if zd_error %}
+    {% if non_field_error %}
       {% call Element.alert('error', icon='cross') %}
-        <p>{{ zd_error }}</p>
+        <p>{{ non_field_error }}</p>
       {% endcall %}
     {% endif %}
-
 
     {% call Form.fieldset(form.help_filling_in_form, field_as_label=True) %}
       {{ Form.option_list(form.help_filling_in_form) }}

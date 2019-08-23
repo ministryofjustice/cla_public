@@ -68,7 +68,13 @@ class AjaxOrNormalMixin(object):
 
     def return_form_errors(self, *args, **kwargs):
         if self.ajax:
-            return jsonify({"errors": {k: v for k, v in self.form.errors.items() if k != "csrf_token"}})
+            data = {"field_errors": self.form.errors}
+            try:
+                del data["field_errors"]["csrf_token"]
+            except KeyError:
+                pass
+            data.update(non_field_errors=kwargs.get("non_field_errors", []))
+            return jsonify(data)
         return self.get(*args, **kwargs)
 
 

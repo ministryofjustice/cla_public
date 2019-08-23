@@ -68,8 +68,11 @@
     },
 
     onAjaxSuccess: function(data) {
-      if (data.errors) {
-        this.loadErrors(data.errors);
+      if (data.redirect) {
+        window.location.href = data.redirect;
+      }
+      if (data.field_errors) {
+        this.loadErrors(data.field_errors);
         var errorBanner = $('.alert-error:visible:first');
 
         if(!errorBanner.length) {
@@ -81,8 +84,13 @@
         }, 300, function() {
           errorBanner.attr({'tabindex': -1}).focus();
         });
-      } else if (data.redirect) {
-        window.location.href = data.redirect;
+      }
+      if (data.non_field_errors.length) {
+        $('#non-field-error-ajax .alert-message').text(data.non_field_errors[0]);
+        $('#non-field-error-ajax').show();
+      }
+      else {
+        $('#non-field-error-ajax').hide()
       }
     },
 
@@ -230,7 +238,7 @@
 
     clearErrors: function() {
       $('.form-row.field-error').remove();
-      $('.alert.alert-error').remove();
+      $('form>.alert.alert-error').remove();
       $('.form-error')
         .removeClass('form-error')
         .removeAttr('aria-invalid');
