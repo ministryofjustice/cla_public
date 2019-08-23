@@ -283,3 +283,6 @@ class FormWizardStep(object):
 
     def on_valid_submit(self):
         return self.wizard.redirect(self.wizard.next_url())
+
+    def return_form_errors(self, **kwargs):
+        return self.wizard.return_form_errors(**kwargs)
