@@ -8,7 +8,7 @@
 {% block inner_content %}
   <h1 class="page-title">{{ title }}</h1>
 
-  <p>{{ _('GOV.UK puts small files (known as ’cookies’) onto your computer to collect information about how you browse the site.') }}</p>
+  <p>{{ _('The Check if you can get legal aid service puts small files (known as ’cookies’) onto your computer to collect information about how you browse the site.') }}</p>
   <p>{{ _('Cookies are used to:') }}</p>
 
   <ul>
@@ -17,7 +17,7 @@
   </ul>
 
   {% call Element.alert() %}
-    <p>{{ _('GOV.UK cookies aren’t used to identify you personally.') }}</p>
+    <p>{{ _('Check if you can get legal aid cookies aren’t used to identify you personally.') }}</p>
   {% endcall %}
 
   <p>{{ _('You’ll normally see a message on the site before we store a cookie on your computer.') }}</p>
@@ -26,14 +26,15 @@
       Find out more about {{ manage_cookies_link }}.
     {% endtrans %}
   </p>
-  <h2>{{ _('How cookies are used on GOV.UK') }}</h2>
+  <h2>{{ _('How cookies are used on Check if you can get legal aid') }}</h2>
   <h3>{{ _('Measuring website usage (Google Analytics)') }}</h3>
 
-  <p>{{ _('We use Google Analytics software to collect information about how you use GOV.UK. We do this to help make sure the site is meeting the needs of its users and to help us make improvements.') }}</p>
+  <p>{{ _('We use Google Analytics software to collect information about how you use Check if you can get legal aid. We do this to help make sure the service is meeting the needs of its users and to help us make improvements.') }}</p>
   <p>{{ _('Google Analytics stores information about:') }}</p>
 
   <ul>
-    <li>{{ _('the pages you visit on GOV.UK - how long you spend on each GOV.UK page') }}</li>
+    <li>{{ _('the pages you visit') }}</li>
+    <li>{{ _('how long you spend on each page') }}</li>
     <li>{{ _('how you got to the site') }}</li>
     <li>{{ _('what you click on while you’re visiting the site.') }}</li>
   </ul>
@@ -55,9 +56,19 @@
     </thead>
     <tbody>
       <tr>
-        <td>_ga {{ _('and') }} _gat</td>
-        <td>{{ _('This is a google analytics cookie that helps us understand how the service is being used in detail. Your data is anonymised.') }}</td>
+        <td>_ga</td>
+        <td>{{ _('This helps us count how many people visit the service. Your data is anonymised.') }}</td>
         <td class="u-text-right">{{ _('2 years') }}</td>
+      </tr>
+      <tr>
+        <td>_gat</td>
+        <td>{{ _('Used to manage the rate at which page view requests are made. Your data is anonymised.') }}</td>
+        <td class="u-text-right">{{ _('10 minutes') }}</td>
+      </tr>
+      <tr>
+        <td>_gid</td>
+        <td>{{ _('This helps us count how many people visit. Your data is anonymised.') }}</td>
+        <td class="u-text-right">{{ _('24 hours') }}</td>
       </tr>
     </tbody>
   </table>
@@ -89,7 +100,7 @@
   </table>
 
   <h3>{{ _('Your progress when using the service') }}</h3>
-  <p>{{ _('When you use the “Can I get legal aid?” service, we’ll set a cookie to remember your progress through the forms. These cookies don’t store your personal data and are deleted once you’ve completed the transaction.') }}</p>
+  <p>{{ _('When you use the Check if you can get legal aid service, we’ll set a cookie to remember your progress through the forms. These cookies don’t store your personal data and are deleted once you’ve completed the transaction.') }}</p>
   <table>
     <thead>
       <tr>
