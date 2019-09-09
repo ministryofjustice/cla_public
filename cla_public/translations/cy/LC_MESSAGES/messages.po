@@ -47,9 +47,8 @@ msgid "No, I filled in this form myself"
 msgstr "Na, llenwais y ffurflen hon fy hun"
 
 #: cla_public/apps/base/constants.py:19
-msgid ""
-"I had help filling in this form"
-msgstr ""
+msgid "I had help filling in this form"
+msgstr "Cefais rhyw fath arall o help"
 
 #: cla_public/apps/base/constants.py:20
 "Someone else filled in this form for me"
