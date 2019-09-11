@@ -396,7 +396,7 @@ def interstitial():
         category_name_english = unicode(session.checker.category_name)
 
     organisations = get_organisation_list(article_category__name=category_name_english)
-    show_laalaa = category in ["family", "housing"]
+    show_laalaa = category in get_show_laalaa_link_categories()
 
     context = {
         "category": category,
@@ -405,3 +405,7 @@ def interstitial():
         "show_laalaa": show_laalaa,
     }
     return render_template("interstitial.html", **context)
+
+
+def get_show_laalaa_link_categories():
+    return ["debt", "discrimination", "family", "housing", "violence"]
