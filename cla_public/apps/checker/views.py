@@ -408,4 +408,4 @@ def interstitial():
 
 
 def get_show_laalaa_link_categories():
-    return ["debt", "discrimination", "family", "housing", "violence"]
+    return ["debt", "discrimination", "education", "employment", "family", "housing", "violence"]
