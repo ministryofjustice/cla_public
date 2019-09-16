@@ -60,8 +60,16 @@
     ga('create', '{{ config.GA_ID }}', 'auto');
     ga('set', 'anonymizeIp', true);
 
+    // GDS CROSS DOMAIN ANALYTICS
+    ga('create', 'UA-145652997-1', 'auto', 'govuk_shared', {'allowLinker': true});
+    ga('govuk_shared.require', 'linker');
+    ga('govuk_shared.linker.set', 'anonymizeIp', true);
+    ga('govuk_shared.linker:autoLink', [‘www.gov.uk’]);
+
     {% block ga_pageview -%}
       ga('send', 'pageview');
+      // GDS CROSS DOMAIN ANALYTICS
+      ga('govuk_shared.send', 'pageview');
     {%- endblock %}
 
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
