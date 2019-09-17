@@ -20,6 +20,9 @@
   {% endif %}
 {% endblock %}
 
+{% block cookie_message %}
+{% include "cookie-popup.html" %}
+{% endblock %}
 {% block before_content %}
   <div class="container">
     {% include "_phase-tag.html" %}

@@ -12,7 +12,7 @@ gulp.task("sass", ["clean-css"], function() {
     .src(paths.src + "stylesheets/**/*.scss")
     .pipe(
       sass({
-        includePaths: "node_modules/govuk_frontend_toolkit/",
+        includePaths: ["node_modules/govuk_frontend_toolkit/", "node_modules/govuk-frontend", "node_modules/govuk_publishing_components/app/assets/stylesheets"],
         outputStyle: "compact"
       }).on("error", sass.logError)
     )

@@ -5,6 +5,23 @@
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
 
+/**
+ * govuk_frontend_toolkit has been deprecated
+ * Starting using recommended govuk_frontend
+ */
+$govuk-use-legacy-font: true;
+$govuk-typography-use-rem: false;
+@import "govuk/objects/all";
+@import "govuk/components/button/button";
+
+/**
+ * Some components are not yet part of govuk_frontend
+  * but are available in govuk_publishing_components
+ */
+@import "govuk_publishing_components/components/mixins/margins";
+@import "govuk_publishing_components/components/cookie-banner";
+@import "govuk_publishing_components/components/button";
+
 @import 'phase-banner';
 @import 'typography';
 @import 'forms';
