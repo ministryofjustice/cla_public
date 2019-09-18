@@ -57,7 +57,7 @@
 {%- endblock %}
 
 {% block javascripts %}
-  <script src="{{ asset(filename='javascripts/cla.min.js') }}"></script>
+  <script src="{{ asset(filename='javascripts/cla.js') }}"></script>
   {% if config.DEBUG %}
     <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
   {% endif %}
