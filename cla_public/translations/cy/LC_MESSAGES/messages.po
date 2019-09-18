@@ -47,17 +47,16 @@ msgid "No, I filled in this form myself"
 msgstr "Na, llenwais y ffurflen hon fy hun"
 
 #: cla_public/apps/base/constants.py:19
-msgid ""
-"I have difficulty using computers so someone filled in this form for me"
-msgstr "Rwyf yn cael trafferth defnyddio cyfrifiaduron, felly llenwodd rhywun arall y ffurflen hon ar fy rhan"
+msgid "I had help filling in this form"
+msgstr "Cefais rhyw fath arall o help"
 
 #: cla_public/apps/base/constants.py:20
-msgid "I used an accessibility tool such as a screen reader"
-msgstr "Defnyddiais offer hygyrchedd megis darllenydd sgrîn"
+"Someone else filled in this form for me"
+msgstr "Rwyf yn cael trafferth defnyddio cyfrifiaduron, felly llenwodd rhywun arall y ffurflen hon ar fy rhan"
 
 #: cla_public/apps/base/constants.py:21
-msgid "I had some other kind of help"
-msgstr "Cefais rhyw fath arall o help"
+msgid "I used an accessibility tool such as a screen reader"
+msgstr "Defnyddiais offer hygyrchedd megis darllenydd sgrîn"
 
 #: cla_public/apps/base/constants.py:29
 msgid "I don’t know how to answer a question"
@@ -92,7 +91,7 @@ msgid "Another reason"
 msgstr "Rheswm arall"
 
 #: cla_public/apps/base/forms.py:46
-msgid "Did you have any difficulty with this service?"
+msgid "Did you have difficulty using this service? Tell us about the problem."
 msgstr "A gawsoch unrhyw anhawster gyda'r gwasanaeth hwn?"
 
 #: cla_public/apps/base/forms.py:49

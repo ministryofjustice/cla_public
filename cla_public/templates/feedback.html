@@ -3,7 +3,7 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% set title = _('Your feedback') %}
+{% set title = _('Report a problem') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
@@ -25,9 +25,6 @@
       {% endcall %}
     {% endif %}
 
-    {% call Form.fieldset(form.feel_about_service, field_as_label=True) %}
-      {{ Form.option_list(form.feel_about_service) }}
-    {% endcall %}
 
     {% call Form.fieldset(form.help_filling_in_form, field_as_label=True) %}
       {{ Form.option_list(form.help_filling_in_form) }}
@@ -37,7 +34,7 @@
     {{ Form.group(form.ideas, field_attrs={'class': 'm-full', 'rows': 6}) }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Send feedback')) }}
+    {{ Form.actions(_('Continue to contact CLA')) }}
   </form>
   {% include "checker/time-out-warning.html" %}
 {% endblock %}
