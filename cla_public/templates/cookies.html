@@ -137,6 +137,8 @@
     </tbody>
   </table>
 
+  {% include 'cookie-consent-form.html' %}
+
   <p>
     {% trans govuk_cookies_link=Element.link_new_window('https://www.gov.uk/help/cookies', _('how cookies are used on gov.uk'), True) %}
       You can read more about {{ govuk_cookies_link }}.

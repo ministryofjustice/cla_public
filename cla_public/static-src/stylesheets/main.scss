@@ -13,6 +13,10 @@ $govuk-use-legacy-font: true;
 $govuk-typography-use-rem: false;
 @import "govuk/objects/all";
 @import "govuk/components/button/button";
+@import "govuk/components/radios/radios";
+@import "govuk/components/label/label";
+@import "govuk/components/fieldset/fieldset";
+@import "govuk/components/hint/hint";
 
 /**
  * Some components are not yet part of govuk_frontend
@@ -41,6 +45,7 @@ $govuk-typography-use-rem: false;
 @import 'flash-messages';
 @import 'scope-diagnosis';
 @import 'modal-dialog';
+@import 'cookie-settings';
 
 html {
   height: 100%;
