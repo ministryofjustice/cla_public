@@ -27,5 +27,9 @@
     window.GOVUK.setCookie('cookie_policy', JSON.stringify(approvedConsent), { days: 365 })
   }
 
+  window.GOVUK.Modules.CookieBanner.prototype.isInCookiesPage = function () {
+    return window.location.pathname === '/cookie-settings'
+  }
+
 
 
