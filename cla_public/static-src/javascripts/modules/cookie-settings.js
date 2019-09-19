@@ -85,8 +85,6 @@ window.GOVUK.Modules = window.GOVUK.Modules || {};
     var previousPageLink = document.querySelector('.cookie-settings__prev-page')
     var referrer = CookieSettings.prototype.getReferrerLink()
 
-    document.body.scrollTop = document.documentElement.scrollTop = 0
-
     if (referrer && referrer !== document.location.pathname) {
       previousPageLink.href = referrer
       previousPageLink.style.display = "block"
@@ -95,6 +93,8 @@ window.GOVUK.Modules = window.GOVUK.Modules || {};
     }
 
     confirmationMessage.style.display = "block"
+
+    document.querySelector(".cookie-settings__jump-link").scrollIntoView();
   }
 
   CookieSettings.prototype.getReferrerLink = function () {

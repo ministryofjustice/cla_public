@@ -17,6 +17,7 @@ $govuk-typography-use-rem: false;
 @import "govuk/components/label/label";
 @import "govuk/components/fieldset/fieldset";
 @import "govuk/components/hint/hint";
+@import "govuk/core/links";
 
 /**
  * Some components are not yet part of govuk_frontend
@@ -25,6 +26,7 @@ $govuk-typography-use-rem: false;
 @import "govuk_publishing_components/components/mixins/margins";
 @import "govuk_publishing_components/components/cookie-banner";
 @import "govuk_publishing_components/components/button";
+@import "govuk_publishing_components/components/notice";
 
 @import 'phase-banner';
 @import 'typography';
