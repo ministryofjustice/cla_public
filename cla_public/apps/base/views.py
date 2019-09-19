@@ -32,6 +32,11 @@ def cookies():
     return render_template("cookies.html")
 
 
+@base.route("/cookie-settings")
+def cookie_settings():
+    return render_template("cookie-settings.html")
+
+
 @base.route("/privacy")
 def privacy():
     return render_template("privacy.html")

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% import "macros/element.html" as Element %}
+
+{% set title = _('Cookies') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+  <h1 class="page-title">Change your cookie settings</h1>
+  {% include '_cookie-consent-form.html' %}
+{% endblock %}
