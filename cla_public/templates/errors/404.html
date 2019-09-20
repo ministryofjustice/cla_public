@@ -11,4 +11,6 @@
 
 {% block ga_pageview -%}
   ga('send', 'pageview', '/{{ code }}' + window.location.pathname + window.location.search);
+  // GDS CROSS DOMAIN ANALYTICS
+  ga('govuk_shared.send', 'pageview');
 {%- endblock %}
