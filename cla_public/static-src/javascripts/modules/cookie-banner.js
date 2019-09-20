@@ -30,6 +30,3 @@
   window.GOVUK.Modules.CookieBanner.prototype.isInCookiesPage = function () {
     return window.location.pathname === '/cookie-settings'
   }
-
-
-
