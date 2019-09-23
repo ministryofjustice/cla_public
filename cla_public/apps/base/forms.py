@@ -8,12 +8,7 @@ from flask.ext.babel import lazy_gettext as _, get_translations
 from wtforms import TextAreaField, RadioField, SelectMultipleField, StringField, widgets
 from wtforms.validators import InputRequired, Length
 
-from cla_public.apps.base.constants import (
-    FEEL_ABOUT_SERVICE,
-    HELP_FILLING_IN_FORM,
-    REASONS_FOR_CONTACTING_CHOICES,
-    REASONS_FOR_CONTACTING,
-)
+from cla_public.apps.base.constants import HELP_FILLING_IN_FORM, REASONS_FOR_CONTACTING_CHOICES, REASONS_FOR_CONTACTING
 from cla_public.libs.honeypot import Honeypot
 
 
@@ -50,12 +45,6 @@ class FeedbackForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     ideas = TextAreaField(
         label=_(u"Do you have any ideas for how it could be improved?"), validators=[_textarea_length_validator]
-    )
-
-    feel_about_service = RadioField(
-        _(u"Overall, how did you feel about the service you received today?"),
-        choices=FEEL_ABOUT_SERVICE,
-        validators=[InputRequired()],
     )
 
     help_filling_in_form = RadioField(
