@@ -6,7 +6,7 @@ import datetime
 from itertools import dropwhile, ifilter
 import logging
 
-from flask import abort, current_app, redirect, render_template, request, session, url_for, views, jsonify, Response
+from flask import abort, current_app, redirect, render_template, request, session, url_for, views, jsonify
 
 log = logging.getLogger(__name__)
 
@@ -38,20 +38,6 @@ class RequiresSession(object):
         return super(RequiresSession, self).dispatch_request(*args, **kwargs)
 
 
-class ValidFormOnOptions(object):
-    def options(self, *args, **kwargs):
-        """
-        Returns validation errors if a form is submitted to it otherwise
-        returns Response with allowed methods
-        """
-        if "application/x-www-form-urlencoded" in request.content_type:
-            self.form.validate()
-            return jsonify({k: v for k, v in self.form.errors.items() if k != "csrf_token"})
-        rv = Response()
-        rv.allow.update(self.methods)
-        return rv
-
-
 class HasFormMixin(object):
     form_class = None
 
@@ -70,7 +56,29 @@ class HasFormMixin(object):
         return self._form
 
 
-class SessionBackedFormView(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptions, object):
+class AjaxOrNormalMixin(object):
+    @property
+    def ajax(self):
+        return request.headers.get("X-Requested-With") == "XMLHttpRequest"
+
+    def redirect(self, url):
+        if self.ajax:
+            return jsonify({"redirect": url})
+        return redirect(url)
+
+    def return_form_errors(self, *args, **kwargs):
+        if self.ajax:
+            data = {"field_errors": self.form.errors}
+            try:
+                del data["field_errors"]["csrf_token"]
+            except KeyError:
+                pass
+            data.update(non_field_errors=kwargs.get("non_field_errors", []))
+            return jsonify(data)
+        return self.get(*args, **kwargs)
+
+
+class SessionBackedFormView(AjaxOrNormalMixin, HasFormMixin, RequiresSession, views.MethodView, object):
     """
     Saves and loads form data to and from the session
     """
@@ -89,9 +97,12 @@ class SessionBackedFormView(HasFormMixin, RequiresSession, views.MethodView, Val
         Update session with form data if valid, remove from session if not.
         """
         is_submitted = getattr(self.form, "is_submitted", lambda: True)
-        if is_submitted() and self.form.validate():
-            self.save_form_data_in_session()
-            return self.on_valid_submit()
+        if is_submitted():
+            if self.form.validate():
+                self.save_form_data_in_session()
+                return self.on_valid_submit()
+            else:
+                return self.on_invalid_submit(*args, **kwargs)
 
         self.remove_form_data_from_session()
         return self.get(*args, **kwargs)
@@ -115,6 +126,10 @@ class SessionBackedFormView(HasFormMixin, RequiresSession, views.MethodView, Val
         Handle a valid form submission
         """
         raise NotImplementedError
+
+    def on_invalid_submit(self, *args, **kwargs):
+        self.remove_form_data_from_session()
+        return self.return_form_errors(*args, **kwargs)
 
 
 class AllowSessionOverride(object):
@@ -267,4 +282,7 @@ class FormWizardStep(object):
         return self.wizard.get(**kwargs)
 
     def on_valid_submit(self):
-        return redirect(self.wizard.next_url())
+        return self.wizard.redirect(self.wizard.next_url())
+
+    def return_form_errors(self, **kwargs):
+        return self.wizard.return_form_errors(**kwargs)

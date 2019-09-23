@@ -1,6 +1,3 @@
-** {{ form.feel_about_service.label.text }} **
-{{ form.feel_about_service.data }}
-
 ** {{ form.help_filling_in_form.label.text }} **
 {{ form.help_filling_in_form.data }}
 

@@ -16,7 +16,7 @@ from cla_public.apps.base import base, healthchecks
 from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 from cla_public.apps.checker.api import post_reasons_for_contacting
 from cla_public.libs import zendesk
-from cla_public.libs.views import HasFormMixin, ValidFormOnOptions
+from cla_public.libs.views import AjaxOrNormalMixin, HasFormMixin
 
 log = logging.getLogger(__name__)
 
@@ -47,7 +47,7 @@ def online_safety():
     return render_template("online-safety.html")
 
 
-class AbstractFeedbackView(HasFormMixin, views.MethodView, ValidFormOnOptions):
+class AbstractFeedbackView(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
     """
     Abstract view for feedback forms
     """
@@ -64,17 +64,19 @@ class AbstractFeedbackView(HasFormMixin, views.MethodView, ValidFormOnOptions):
     def default_form_data(self):
         return {"referrer": request.referrer or "Unknown"}
 
-    def get(self):
-        return self.render_form()
+    def get(self, *args, **kwargs):
+        return self.render_form(*args, **kwargs)
 
     def post(self):
         raise NotImplementedError
 
-    def render_form(self, error=None):
-        return render_template(self.template, form=self.form, zd_error=error)
+    def render_form(self, *args, **kwargs):
+        non_field_errors = kwargs.get("non_field_errors")
+        non_field_error = non_field_errors[0] if non_field_errors else None
+        return render_template(self.template, form=self.form, non_field_error=non_field_error)
 
     def success_redirect(self):
-        return redirect(url_for(self.redirect_to))
+        return self.redirect(url_for(self.redirect_to))
 
 
 class Feedback(AbstractFeedbackView):
@@ -87,20 +89,19 @@ class Feedback(AbstractFeedbackView):
     redirect_to = "base.feedback_confirmation"
 
     def post(self):
-        error = None
-
+        kwargs = {}
         if self.form.validate_on_submit():
             response = zendesk.create_ticket(self.form.api_payload())
 
             if response.status_code < 300:
                 return self.success_redirect()
             else:
-                error = _("Something went wrong. Please try again.")
+                kwargs.update(non_field_errors=[_("Something went wrong. Please try again.")])
 
-        return self.render_form(error)
+        return self.return_form_errors(**kwargs)
 
 
-base.add_url_rule("/feedback", view_func=Feedback.as_view("feedback"), methods=("GET", "POST", "OPTIONS"))
+base.add_url_rule("/feedback", view_func=Feedback.as_view("feedback"), methods=("GET", "POST"))
 
 
 @base.route("/feedback/confirmation")
@@ -121,12 +122,11 @@ class ReasonsForContacting(AbstractFeedbackView):
     template = "reasons-for-contacting.html"
     redirect_to = "contact.get_in_touch"
 
-    def render_form(self, error=None):
+    def render_form(self):
         referrer = re.sub(r"^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?/", "/", request.referrer or "")
         return render_template(self.template, form=self.form, referrer=referrer)
 
     def post(self):
-        error = None
         if self.form.validate_on_submit():
             if len(self.form.reasons.data) == 0:
                 # allows skipping form if nothing is selected
@@ -140,13 +140,13 @@ class ReasonsForContacting(AbstractFeedbackView):
 
             return self.success_redirect()
 
-        return self.render_form(error)
+        return self.return_form_errors()
 
 
 base.add_url_rule(
     "/reasons-for-contacting",
     view_func=ReasonsForContacting.as_view("reasons_for_contacting"),
-    methods=("GET", "POST", "OPTIONS"),
+    methods=("GET", "POST"),
 )
 
 

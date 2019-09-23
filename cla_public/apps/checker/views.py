@@ -32,14 +32,7 @@ from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import filters  # noqa: F401
 from cla_public.libs.utils import override_locale, category_id_to_name
-from cla_public.libs.views import (
-    AllowSessionOverride,
-    FormWizard,
-    FormWizardStep,
-    RequiresSession,
-    ValidFormOnOptions,
-    HasFormMixin,
-)
+from cla_public.libs.views import AllowSessionOverride, FormWizard, FormWizardStep, RequiresSession, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 from cla_public.apps.checker.cait_intervention import get_cait_params
 
@@ -66,7 +59,7 @@ class UpdatesMeansTest(object):
             self.form.errors["timeout"] = _(
                 u"There was an error submitting your data. " u"Please check and try again."
             )
-            return self.get(step=self.name)
+            return self.return_form_errors(step=self.name)
         else:
             return super(UpdatesMeansTest, self).on_valid_submit()
 
@@ -90,7 +83,7 @@ def is_null(field):
     return False
 
 
-class CheckerStep(ValidFormOnOptions, UpdatesMeansTest, FormWizardStep):
+class CheckerStep(UpdatesMeansTest, FormWizardStep):
     def completed_fields(self):
         session_data = session.checker.get(self.form_class.__name__, {})
         form = self.form_class(**session_data)
@@ -184,7 +177,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     def complete(self):
         # TODO: Is this still used now that scope diagnosis is taking care of F2F redirects for certain categories?
         if session.checker.needs_face_to_face:
-            return redirect(url_for(".face-to-face", category=session.checker.category))
+            return self.redirect(url_for(".face-to-face", category=session.checker.category))
 
         if session.checker.ineligible:
             session.store(
@@ -193,14 +186,14 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
                     "outcome": "referred/help-organisations/means",
                 }
             )
-            return redirect(url_for(".help_organisations", category_name=session.checker.category_slug))
+            return self.redirect(url_for(".help_organisations", category_name=session.checker.category_slug))
 
         if session.checker.need_more_info:
             session.store({"outcome": "provisional"})
-            return redirect(url_for(".provisional"))
+            return self.redirect(url_for(".provisional"))
 
         session.store({"outcome": "eligible"})
-        return redirect(url_for(".eligible"))
+        return self.redirect(url_for(".eligible"))
 
     def skip(self, step, for_review_page=False):
 
@@ -236,7 +229,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
         return False
 
 
-checker.add_url_rule("/<step>", view_func=CheckerWizard.as_view("wizard"), methods=("GET", "POST", "OPTIONS"))
+checker.add_url_rule("/<step>", view_func=CheckerWizard.as_view("wizard"), methods=("GET", "POST"))
 
 
 class LaaLaaView(views.MethodView):
@@ -309,7 +302,7 @@ class EligibleFaceToFace(LaaLaaView):
 checker.add_url_rule("/result/refer/legal-adviser", view_func=EligibleFaceToFace.as_view("find-legal-adviser"))
 
 
-class Eligible(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptions, object):
+class Eligible(HasFormMixin, RequiresSession, views.MethodView, object):
     form_class = ContactForm
 
     def get(self):
@@ -323,11 +316,9 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, ValidFormOnOptio
         return render_template("checker/result/eligible.html", current_step=current_step, steps=steps, form=self.form)
 
 
-checker.add_url_rule("/result/eligible", view_func=Eligible.as_view("eligible"), methods=("GET", "POST", "OPTIONS"))
+checker.add_url_rule("/result/eligible", view_func=Eligible.as_view("eligible"), methods=("GET", "POST"))
 
-checker.add_url_rule(
-    "/result/provisional", view_func=Eligible.as_view("provisional"), methods=("GET", "POST", "OPTIONS")
-)
+checker.add_url_rule("/result/provisional", view_func=Eligible.as_view("provisional"), methods=("GET", "POST"))
 
 
 class HelpOrganisations(views.MethodView):
