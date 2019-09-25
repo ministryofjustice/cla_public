@@ -42,8 +42,10 @@ spec:
           value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
         - name: LOG_LEVEL
           value: DEBUG
-        - name: GA_ID
+        - name: MOJ_GA_ID
           value: UA-37377084-21
+        - name: GDS_GA_ID
+          value: UA-145652997-1
         - name: SECRET_KEY
           value: "secret"
         - name: OS_PLACES_API_KEY

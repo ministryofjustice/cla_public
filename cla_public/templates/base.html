@@ -70,13 +70,13 @@
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
     if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
-      ga('create', '{{ config.GA_ID }}', 'auto');
+      ga('create', '{{ config.MOJ_GA_ID }}', 'auto');
       ga('set', 'anonymizeIp', true);
     }
 
     if (window.GOVUK.checkConsentCookieCategory('', 'brexit')) {
       // GDS CROSS DOMAIN ANALYTICS
-      ga('create', 'UA-145652997-1', 'auto', 'govuk_shared', {'allowLinker': true});
+      ga('create', '{{ config.GDS_GA_ID }}', 'auto', 'govuk_shared', {'allowLinker': true});
       ga('govuk_shared.require', 'linker');
       ga('govuk_shared.linker.set', 'anonymizeIp', true);
       ga('govuk_shared.linker:autoLink', ['www.gov.uk']);

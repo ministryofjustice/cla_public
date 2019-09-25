@@ -69,7 +69,8 @@ ZENDESK_API_USERNAME = os.environ.get("ZENDESK_API_USERNAME")
 ZENDESK_API_TOKEN = os.environ.get("ZENDESK_API_TOKEN")
 ZENDESK_DEFAULT_REQUESTER = 649762516  # anonymous feedback <noreply@ministryofjustice.zendesk.com>
 
-GA_ID = os.environ.get("GA_ID")
+MOJ_GA_ID = os.environ.get("MOJ_GA_ID")
+GDS_GA_ID = os.environ.get("GDS_GA_ID")
 
 CACHE_TYPE = "simple"
 
