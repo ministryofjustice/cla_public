@@ -323,7 +323,13 @@
     </li>
   </ul>
   <p>
-    {% trans cookie_url = url_for('.cookies') %}You can read more about <a href="{{ cookie_url }}">how cookies are used</a>.{% endtrans %}
+    {% trans %}The online service also uses cookies used by the Government Digital Service (GDS) to collect your data to improve the user experience across government digital services.{% endtrans %}
+    <p>
+    {% trans %}You can change <a href="{{ cookie-settings_url }}">your cookie settings</a> to opt in or out of how different cookies are used.{% endtrans %}
+  </p>
+  <p>
+    {% trans cookie_url = url_for('.cookies') %}You can read more about <a href="{{ cookie_url }}">cookies used on 
+    check you can get legal aid</a>.{% endtrans %}
   </p>
   <p>
     {% trans %}You can read about
