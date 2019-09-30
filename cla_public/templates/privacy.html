@@ -325,7 +325,7 @@
   <p>
     {% trans %}The online service also uses cookies from the Government Digital Service (GDS). These cookies collect information to help improve the user experience across government digital services.{% endtrans %}
     <p>
-    {% trans %}You can change <a href="https://checklegalaid.service.gov.uk/cookie-settings">your cookie settings</a> to opt in or out of how different cookies are used.{% endtrans %}
+    {% trans cookie_settings_url = url_for('.cookie_settings') %}You can change <a href="{{ cookie_settings_url }}">your cookie settings</a> to opt in or out of how different cookies are used.{% endtrans %}
   </p>
   <p>
     {% trans cookie_url = url_for('.cookies') %}You can read more about <a href="{{ cookie_url }}">cookies used on 
