@@ -70,12 +70,6 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
             Length(max=20, message=_(u"Your telephone number must be 20 " u"characters or less")),
         ],
     )
-    safe_to_contact = RadioField(
-        _(u"Is it safe for us to leave a message on this number?"),
-        choices=CONTACT_SAFETY,
-        default="",  # Backend doesn't accept `None` as valid value
-        validators=[InputRequired(message=_(u"Please choose Yes or No"))],
-    )
     time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))
 
 
@@ -100,12 +94,6 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
             InputRequired(),
             Length(max=20, message=_(u"Your telephone number must be 20 " u"characters or less")),
         ],
-    )
-    safe_to_contact = RadioField(
-        _(u"Is it safe for us to leave a message on this number?"),
-        choices=CONTACT_SAFETY,
-        default="",  # Backend doesn't accept `None` as valid value
-        validators=[InputRequired(message=_(u"Please choose Yes or No"))],
     )
     time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))
 
@@ -181,7 +169,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                 "postcode": self.address.form.post_code.data,
                 "mobile_phone": self.callback.form.contact_number.data,
                 "street": self.address.form.street_address.data,
-                "safe_to_contact": self.callback.form.safe_to_contact.data,
+                "safe_to_contact": CONTACT_SAFETY[1][0],
             },
             "adaptation_details": {
                 "bsl_webcam": self.adaptations.bsl_webcam.data,
@@ -198,7 +186,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             data["thirdparty_details"] = {"personal_details": {}}
             data["thirdparty_details"]["personal_details"]["full_name"] = self.thirdparty.full_name.data
             data["thirdparty_details"]["personal_details"]["mobile_phone"] = self.thirdparty.contact_number.data
-            data["thirdparty_details"]["personal_details"]["safe_to_contact"] = self.thirdparty.safe_to_contact.data
+            data["thirdparty_details"]["personal_details"]["safe_to_contact"] = CONTACT_SAFETY[1][0]
             data["thirdparty_details"]["personal_relationship"] = self.thirdparty.relationship.data
 
             data["requires_action_at"] = process_selected_time(self.thirdparty.form.time)

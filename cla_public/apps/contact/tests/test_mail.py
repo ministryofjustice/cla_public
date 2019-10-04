@@ -19,7 +19,7 @@ def submit(**kwargs):
         "email": "john.smith@example.com",
         "contact_type": "callback",
         "callback-contact_number": "0123456789",
-        "callback-safe_to_contact": "SAFE",
+        "callback-safe_to_contact": "NO_MESSAGE",
     }
 
     if datetime.datetime.now().time() > datetime.time(hour=17, minute=30):
@@ -83,14 +83,6 @@ class TestMail(unittest.TestCase):
                 ),
                 msg.body,
             )
-            assert "We will leave a message" in msg.body
-
-    def test_confirmation_email_not_safe(self):
-        with self.client:
-            form = submit_and_store_in_session(**{"callback-safe_to_contact": "NO_MESSAGE"})
-            msg = create_confirmation_email(form.data)
-            msg = self.receive_email(msg)
-
             assert "We will not leave a message" in msg.body
 
     def test_confirmation_email_no_callback(self):

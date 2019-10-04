@@ -345,7 +345,7 @@ class TestApiPayloads(unittest.TestCase):
             "callback-time-time_today": "1930",
         }
 
-        callback_data = {"contact_number": "000000000", "safe_to_contact": YES}
+        callback_data = {"contact_number": "000000000", "safe_to_contact": "NO_MESSAGE"}
 
         address_data = {"post_code": "POSTCODE", "street_address": "21 Jump Street"}
 
@@ -364,7 +364,7 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload["personal_details"]["postcode"], "POSTCODE")
             self.assertEqual(payload["personal_details"]["mobile_phone"], "000000000")
             self.assertEqual(payload["personal_details"]["street"], "21 Jump Street")
-            self.assertEqual(payload["personal_details"]["safe_to_contact"], YES)
+            self.assertEqual(payload["personal_details"]["safe_to_contact"], "NO_MESSAGE")
 
             self.assertEqual(payload["adaptation_details"]["bsl_webcam"], True)
             self.assertEqual(payload["adaptation_details"]["minicom"], True)
