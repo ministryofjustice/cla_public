@@ -4,7 +4,6 @@ import requests
 from flask import current_app
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import BankHolidays
-from cla_common.constants import CALLBACK_WINDOW_TYPES
 
 
 class FlaskCacheBankHolidays(BankHolidays):
@@ -22,10 +21,8 @@ call_centre_availability.bank_holidays = lambda: FlaskCacheBankHolidays()
 
 def time_choice(time):
     display_format = "%I:%M %p"
-    display_string = time.strftime(display_format)
-    if current_app.config["CALLBACK_WINDOW_TYPE"] == CALLBACK_WINDOW_TYPES.HALF_HOUR_WINDOW:
-        end = time + datetime.timedelta(minutes=30)
-        display_string = display_string + " - " + end.strftime(display_format)
+    end = time + datetime.timedelta(minutes=30)
+    display_string = time.strftime(display_format) + " - " + end.strftime(display_format)
     return time.strftime("%H%M"), display_string.lstrip("0")
 
 

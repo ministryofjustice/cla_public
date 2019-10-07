@@ -193,7 +193,6 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         }
         if self.contact_type.data == "callback":
             data["requires_action_at"] = process_selected_time(self.callback.form.time)
-            data["callback_window_type"] = current_app.config["CALLBACK_WINDOW_TYPE"]
 
         if self.contact_type.data == "thirdparty":
             data["thirdparty_details"] = {"personal_details": {}}
@@ -203,7 +202,6 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             data["thirdparty_details"]["personal_relationship"] = self.thirdparty.relationship.data
 
             data["requires_action_at"] = process_selected_time(self.thirdparty.form.time)
-            data["callback_window_type"] = current_app.config["CALLBACK_WINDOW_TYPE"]
 
         return data
 
