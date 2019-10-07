@@ -16,22 +16,22 @@
 
 {%- if data.contact_type == 'callback' -%}
   {%- if data.callback -%}
-    {%- trans contact_number=data.callback.contact_number, date_time=data.callback_time.strftime('%A, %d %B at %H:%M') -%}
-      An operator will try to call you back on {{ contact_number }} around the time you selected ({{ date_time }}).
+    {%- trans contact_number=data.callback.contact_number, date_time=callback_time_string -%}
+      An operator will try to call you back on {{ contact_number }} during your chosen time ({{ date_time }}).
     {%- endtrans -%}
   {%- else -%}
-    {%- trans date_time=data.callback_time.strftime('%A, %d %B at %H:%M') -%}
-      An operator will try to call you back around the time you selected ({{ date_time }}).
+    {%- trans date_time=callback_time_string -%}
+      An operator will try to call you back during your chosen time ({{ date_time }}).
     {%- endtrans -%}
   {%- endif -%}
 {%- else -%}
   {%- if data.thirdparty -%}
-    {%- trans full_name=data.thirdparty.full_name, contact_number=data.thirdparty.contact_number, date_time=data.callback_time.strftime('%A, %d %B at %H:%M') -%}
-      An operator will try to call {{ full_name }} back on {{ contact_number }} around the time you selected ({{ date_time }}).
+    {%- trans full_name=data.thirdparty.full_name, contact_number=data.thirdparty.contact_number, date_time=callback_time_string -%}
+      An operator will try to call {{ full_name }} back on {{ contact_number }} during your chosen time ({{ date_time }}).
     {%- endtrans -%}
   {%- else -%}
-    {%- trans date_time=data.callback_time.strftime('%A, %d %B at %H:%M') -%}
-      An operator will try to call the person you nominated back around the time you selected ({{ date_time }}).
+    {%- trans date_time=callback_time_string -%}
+      An operator will try to call the person you nominated back during your chosen time ({{ date_time }}).
     {%- endtrans -%}
   {%- endif -%}
 {%- endif %}

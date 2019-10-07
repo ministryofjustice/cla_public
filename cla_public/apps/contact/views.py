@@ -1,5 +1,6 @@
 # coding: utf-8
 "Contact views"
+import datetime
 from smtplib import SMTPAuthenticationError
 from collections import Mapping
 
@@ -39,10 +40,12 @@ def create_confirmation_email(data):
     )
 
     if data.get("callback_requested"):
+        callback_time = session.stored.get("callback_time")
+        end_time = callback_time + datetime.timedelta(minutes=30)
         data.update(
             {
                 "safe_to_contact": session.stored.get("safe_to_contact"),
-                "callback_time": session.stored.get("callback_time"),
+                "callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M"),
             }
         )
 
