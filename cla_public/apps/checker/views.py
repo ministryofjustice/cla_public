@@ -28,6 +28,7 @@ from cla_public.apps.checker.forms import (
     ReviewForm,
     AdditionalBenefitsForm,
 )
+from cla_public.apps.checker.constants import CATEGORY_ID_MAPPING
 from cla_public.apps.checker.means_test import MeansTest, MeansTestError
 from cla_public.apps.checker.validators import IgnoreIf
 from cla_public.apps.checker import filters  # noqa: F401
@@ -381,22 +382,12 @@ def interstitial():
     if not session or not session.is_current or not session.checker.category:
         return redirect(url_for("base.session_expired"))
 
-    category = session.checker.category
+    category = CATEGORY_ID_MAPPING.get(session.checker.category, session.checker.category)
     category_name = session.checker.category_name
     with override_locale("en"):
         category_name_english = unicode(session.checker.category_name)
 
     organisations = get_organisation_list(article_category__name=category_name_english)
-    show_laalaa = category in get_show_laalaa_link_categories()
 
-    context = {
-        "category": category,
-        "category_name": category_name,
-        "organisations": organisations,
-        "show_laalaa": show_laalaa,
-    }
+    context = {"category": category, "category_name": category_name, "organisations": organisations}
     return render_template("interstitial.html", **context)
-
-
-def get_show_laalaa_link_categories():
-    return ["debt", "discrimination", "family", "housing", "violence"]
