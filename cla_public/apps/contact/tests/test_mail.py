@@ -76,7 +76,13 @@ class TestMail(unittest.TestCase):
             assert "Dear John Smith" in msg.body
             assert "reference number is XX-XXXX-XXXX" in msg.body
             assert "call you back on 0123456789" in msg.body
-            assert "time you selected ({0:%A, %d %B at %H:%M})".format(form.data["callback"]["time"]) in msg.body
+            callback_time = form.data["callback"]["time"]
+            self.assertIn(
+                "during your chosen time ({0:%A, %d %B at %H:%M} - {1:%H:%M})".format(
+                    callback_time, callback_time + datetime.timedelta(minutes=30)
+                ),
+                msg.body,
+            )
             assert "We will leave a message" in msg.body
 
     def test_confirmation_email_not_safe(self):
