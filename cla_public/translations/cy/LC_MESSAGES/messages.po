@@ -3331,31 +3331,23 @@ msgstr "Eich cyfeirnod yw %(case_ref)s.\n\n"
 
 #: cla_public/templates/emails/confirmation.txt:19
 #, python-format
-msgid ""
-"An operator will try to call you back on %(contact_number)s around the time "
-"you selected (%(date_time)s)."
-msgstr "Bydd gweithredwr yn ceisio eich ffonio'n ôl ar %(contact_number)s  tua'r amser a ddewiswyd gennych chi, sef (%(date_time)s)."
+msgid "An operator will try to call you back on %(contact_number)s during your chosen time (%(date_time)s)."
+msgstr "Bydd gweithredwr yn ceisio eich ffonio'n ôl ar %(contact_number)s yn ystod yr amser a ddewiswyd gennych, sef (%(date_time)s)."
 
 #: cla_public/templates/emails/confirmation.txt:23
 #, python-format
-msgid ""
-"An operator will try to call you back around the time you selected "
-"(%(date_time)s)."
-msgstr "Bydd gweithredwr yn ceisio eich ffonio'n ôl tua'r amser a ddewiswyd gennych chi, sef (%(date_time)s)."
+msgid "An operator will try to call you back during your chosen time (%(date_time)s)."
+msgstr "Bydd gweithredwr yn ceisio eich ffonio'n ôl yn ystod yr amser a ddewiswyd gennych, sef (%(date_time)s)."
 
 #: cla_public/templates/emails/confirmation.txt:29
 #, python-format
-msgid ""
-"An operator will try to call %(full_name)s back on %(contact_number)s around"
-" the time you selected (%(date_time)s)."
-msgstr "Bydd gweithredwr yn ceisio ffonio %(full_name)s yn ôl ar %(contact_number)s  tua'r amser a ddewiswyd gennych chi, sef (%(date_time)s)."
+msgid "An operator will try to call %(full_name)s back on %(contact_number)s during your chosen time (%(date_time)s)."
+msgstr "Bydd gweithredwr yn ceisio ffonio %(full_name)s yn ôl ar %(contact_number)s yn ystod yr amser a ddewiswyd gennych, sef (%(date_time)s)."
 
 #: cla_public/templates/emails/confirmation.txt:33
 #, python-format
-msgid ""
-"An operator will try to call the person you nominated back around the time "
-"you selected (%(date_time)s)."
-msgstr "Bydd gweithredwr yn ceisio ffonio'r unigolyn a enwebwyd gennych chi'n ôl tua'r amser a ddewiswyd gennych chi, sef (%(date_time)s)."
+msgid "An operator will try to call the person you nominated back during your chosen time (%(date_time)s)."
+msgstr "Bydd gweithredwr yn ceisio ffonio'r unigolyn a enwebwyd gennych chi'n ôl yn ystod yr amser a ddewiswyd gennych, sef (%(date_time)s)."
 
 #: cla_public/templates/emails/confirmation.txt:40
 msgid "We will leave a message when we call."
