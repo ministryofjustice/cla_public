@@ -2769,13 +2769,13 @@ msgstr ""
 #: cla_public/templates/checker/result/confirmation.html:67
 msgid ""
 "Your details have been submitted and an operator will try to call\n"
-"        the person you nominated back around the time you requested."
+"the person you nominated at least once during your chosen time, or as close to the time as possible."
 msgstr ""
 
 #: cla_public/templates/checker/result/confirmation.html:70
 msgid ""
 "Your details have been submitted and an operator will try to call\n"
-"        you back around the time you requested."
+"you at least once during your chosen time, or as close to the time as possible."
 msgstr ""
 
 #: cla_public/templates/checker/result/confirmation.html:74
@@ -3283,7 +3283,7 @@ msgstr ""
 
 #: cla_public/templates/macros/subform.html:18
 #: cla_public/templates/macros/subform.html:46
-msgid "We’ll try to call at least once at the time you request or within half an hour of your selected time, but this may not always be possible."
+msgid "We will call at least once during your chosen time, or as close to the time as possible."
 msgstr ""
 
 #: cla_public/templates/macros/subform.html:20
