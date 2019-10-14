@@ -22,8 +22,8 @@ call_centre_availability.bank_holidays = lambda: FlaskCacheBankHolidays()
 def time_choice(time):
     display_format = "%I:%M %p"
     end = time + datetime.timedelta(minutes=30)
-    display_string = time.strftime(display_format) + " - " + end.strftime(display_format)
-    return time.strftime("%H%M"), display_string.lstrip("0")
+    display_string = time.strftime(display_format).lstrip("0") + " - " + end.strftime(display_format).lstrip("0")
+    return time.strftime("%H%M"), display_string
 
 
 def suffix(d):
