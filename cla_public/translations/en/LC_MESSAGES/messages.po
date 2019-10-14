@@ -3284,7 +3284,7 @@ msgstr ""
 #: cla_public/templates/macros/subform.html:18
 #: cla_public/templates/macros/subform.html:46
 msgid "We will call at least once during your chosen time, or as close to the time as possible."
-msgstr "Byddwn yn ceisio ffonio o leiaf unwaith yn ystod yr amser a ddewiswyd gennych, neu mor agos at yr amser â phosibl."
+msgstr ""
 
 #: cla_public/templates/macros/subform.html:20
 msgid "If you miss the call you’ll need to complete this form again."
