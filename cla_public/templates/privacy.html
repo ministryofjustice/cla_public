@@ -21,8 +21,12 @@
 
   <p>
     {% trans %}When you first make contact with <abbr title="Civil Legal Advice">CLA</abbr> you will communicate with the <abbr title="Civil Legal Advice">CLA</abbr> Operator Service (CLAOS), which is delivered by
-    Agilisys (a contractor employed by the <abbr title="The Legal Aid Agency">LAA</abbr> on behalf of Freedom Communications, a contractor
-    employed to deliver the <abbr title="Civil Legal Advice">CLA</abbr> Operator Service).{% endtrans %}
+    Agilisys (a contractor employed by the <abbr title="The Legal Aid Agency">LAA</abbr> on behalf of Freedom Communications) and Hinduja Global Solutions UK Limited.{% endtrans %}
+  </p> 
+
+  <p>
+    {% trans %}Agilisys and Hinduja Global Solutions UK Limited are contractors employed by the <abbr title="The Legal Aid Agency">LAA</abbr>
+    to deliver the <abbr title="Civil Legal Advice">CLA</abbr> Operator Service).{% endtrans %}
   </p>
 
   <h3>{{ _('Complaints') }}</h3>
@@ -85,9 +89,10 @@
   <p>
     {% trans %}The <abbr title="The Legal Aid Agency">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.
     For example, when you first make contact with <abbr>CLA</abbr>, you will communicate with
-    the <abbr>CLA</abbr> Operator Service, which is delivered by Agilisys
-    (a contractor employed by the <abbr title="The Legal Aid Agency">LAA</abbr>).{% endtrans %}
+    the <abbr>CLA</abbr> Operator Service, which is delivered by both Agilisys and Hinduja Global Solutions UK Limited
+    (contractors employed by the <abbr title="The Legal Aid Agency">LAA</abbr>).{% endtrans %}
   </p>
+
   <p>
     {% trans %}Once you have contacted the <abbr>CLA</abbr> Operator Service, if you are likely to qualify for Legal Aid, the operator will transfer you to
      a <abbr>CLA</abbr> Specialist Provider. If you do not qualify to receive
@@ -318,7 +323,13 @@
     </li>
   </ul>
   <p>
-    {% trans cookie_url = url_for('.cookies') %}You can read more about <a href="{{ cookie_url }}">how cookies are used</a>.{% endtrans %}
+    {% trans %}The online service also uses cookies from the Government Digital Service (GDS). These cookies collect information to help improve the user experience across government digital services.{% endtrans %}
+    <p>
+    {% trans cookie_settings_url = url_for('.cookie_settings') %}You can change <a href="{{ cookie_settings_url }}">your cookie settings</a> to opt in or out of how different cookies are used.{% endtrans %}
+  </p>
+  <p>
+    {% trans cookie_url = url_for('.cookies') %}You can read more about <a href="{{ cookie_url }}">cookies used on 
+    check you can get legal aid</a>.{% endtrans %}
   </p>
   <p>
     {% trans %}You can read about
