@@ -167,6 +167,8 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     "clinneg": ["med"],
     "commcare": ["com"],
     "debt": ["deb"],
+    "discrimination": ["disc"],
+    "education": ["edu"],
     "family": ["mat", "fmed"],
     "housing": ["hou"],
     "immigration": ["immas"],

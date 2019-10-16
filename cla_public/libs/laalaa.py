@@ -4,25 +4,7 @@ from flask.ext.babel import lazy_gettext as _
 import requests
 from werkzeug.urls import url_encode
 
-PROVIDER_CATEGORIES = {
-    "aap": _("Actions against the police"),
-    "med": _("Clinical negligence"),
-    "com": _("Community care"),
-    "crm": _("Crime"),
-    "deb": _("Debt"),
-    "mat": _("Family"),
-    "fmed": _("Family mediation"),
-    "hou": _("Housing"),
-    "immas": _("Immigration or asylum"),
-    "mhe": _("Mental health"),
-    "pl": _("Prison law"),
-    "pub": _("Public law"),
-    "wb": _("Welfare benefits"),
-}
-
-
-class LaaLaaError(Exception):
-    pass
+from cla_common.laalaa import LaalaaProviderCategoriesApiClient, LaaLaaError
 
 
 def kwargs_to_urlparams(**kwargs):
@@ -44,9 +26,15 @@ def laalaa_search(**kwargs):
         raise LaaLaaError(e)
 
 
+def get_categories():
+    client = LaalaaProviderCategoriesApiClient.singleton(current_app.config["LAALAA_API_HOST"], category_translator=_)
+    return client.get_categories()
+
+
 def decode_category(category):
     if category and isinstance(category, basestring):
-        return PROVIDER_CATEGORIES.get(category.lower())
+        categories = get_categories()
+        return categories.get(category.lower())
 
 
 def decode_categories(result):
