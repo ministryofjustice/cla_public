@@ -1,3 +1,5 @@
+import datetime
+
 import requests
 from flask import current_app
 from cla_common import call_centre_availability
@@ -18,7 +20,10 @@ call_centre_availability.bank_holidays = lambda: FlaskCacheBankHolidays()
 
 
 def time_choice(time):
-    return time.strftime("%H%M"), time.strftime("%I:%M %p").lstrip("0")
+    display_format = "%I:%M %p"
+    end = time + datetime.timedelta(minutes=30)
+    display_string = time.strftime(display_format).lstrip("0") + " - " + end.strftime(display_format).lstrip("0")
+    return time.strftime("%H%M"), display_string
 
 
 def suffix(d):
