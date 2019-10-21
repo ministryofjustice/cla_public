@@ -186,10 +186,14 @@ def get_started():
     """
     session.clear()
     session.checker["started"] = datetime.datetime.now()
+    args = {}
+    if "_ga" in request.args:
+        args["_ga"] = request.args["_ga"]
+
     if current_app.config.get("CONTACT_ONLY"):
         session.checker["contact_only"] = "yes"
-        return redirect(url_for("contact.get_in_touch"))
-    return redirect(url_for("scope.diagnosis"))
+        return redirect(url_for("contact.get_in_touch", **args))
+    return redirect(url_for("scope.diagnosis", **args))
 
 
 def is_safe_url(url):
