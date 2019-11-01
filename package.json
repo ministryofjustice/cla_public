@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "govuk-frontend": "^3.2.0",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.13",
     "numeral": "^1.5.6",
     "govuk_publishing_components": "https://github.com/alphagov/govuk_publishing_components.git#v20.5.2"
   }
