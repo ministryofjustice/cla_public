@@ -15,6 +15,12 @@ class LaaLaaTest(unittest.TestCase):
         self.app.config["LAALAA_API_HOST"] = "http://laalaa"
         self.ctx = self.app.test_request_context()
         self.ctx.push()
+        self.laa_provider_categories_result = {
+            "mat": "Family",
+            "crm": "Crime",
+            "deb": "Debt",
+            "med": "Clinical negligence",
+        }
         self.laalaa_search_result = json.loads(
             """{
             "count": 3,
@@ -126,14 +132,18 @@ class LaaLaaTest(unittest.TestCase):
 
         self.assertEqual("http://laalaa/legal-advisers/?foo=1&bar=2", laalaa.laalaa_url(foo=1, bar=2))
 
-    def test_decode_category(self):
+    @patch("cla_public.libs.laalaa.get_categories")
+    def test_decode_category(self, mock_get_categories):
+        mock_get_categories.return_value = self.laa_provider_categories_result
         self.assertEqual("Crime", laalaa.decode_category("crm"))
         self.assertEqual("Debt", laalaa.decode_category("deb"))
         self.assertEqual(None, laalaa.decode_category("foo"))
         self.assertEqual(None, laalaa.decode_category(None))
         self.assertEqual(None, laalaa.decode_category(1))
 
-    def test_decode_categories(self):
+    @patch("cla_public.libs.laalaa.get_categories")
+    def test_decode_categories(self, mock_get_categories):
+        mock_get_categories.return_value = self.laa_provider_categories_result
         result = {"categories": ["crm", "deb"]}
         laalaa.decode_categories(result)
         self.assertEqual(["Crime", "Debt"], result["categories"])
@@ -149,18 +159,24 @@ class LaaLaaTest(unittest.TestCase):
     @patch("cla_public.libs.laalaa.laalaa_search")
     def test_count_in_results(self, mock_laalaa_search):
         mock_laalaa_search.return_value = self.laalaa_search_result
-        result = laalaa.find(postcode="SW1A 1AA", categories=["clinneg"])
-        self.assertEquals(result["count"], 3)
+        with patch("cla_public.libs.laalaa.get_categories") as mock_get_categories:
+            mock_get_categories.return_value = self.laa_provider_categories_result
+            result = laalaa.find(postcode="SW1A 1AA", categories=["clinneg"])
+            self.assertEquals(result["count"], 3)
 
     @patch("cla_public.libs.laalaa.laalaa_search")
     def test_search_with_no_category(self, mock_laalaa_search):
         mock_laalaa_search.return_value = self.laalaa_search_result
-        result = laalaa.find(postcode="SW1A 1AA")
-        self.assertEquals(len(result["results"]), 3)
+        with patch("cla_public.libs.laalaa.get_categories") as mock_get_categories:
+            mock_get_categories.return_value = self.laa_provider_categories_result
+            result = laalaa.find(postcode="SW1A 1AA")
+            self.assertEquals(len(result["results"]), 3)
 
     @patch("cla_public.libs.laalaa.laalaa_search")
     def test_search_results_merged(self, mock_laalaa_search):
         mock_laalaa_search.return_value = self.laalaa_search_result
-        result = laalaa.find(postcode="SW1A 1AA", categories=["a", "b"])
-        self.assertEquals(len(result["results"]), 6)
-        self.assertEquals(result["count"], 6)
+        with patch("cla_public.libs.laalaa.get_categories") as mock_get_categories:
+            mock_get_categories.return_value = self.laa_provider_categories_result
+            result = laalaa.find(postcode="SW1A 1AA", categories=["a", "b"])
+            self.assertEquals(len(result["results"]), 6)
+            self.assertEquals(result["count"], 6)
