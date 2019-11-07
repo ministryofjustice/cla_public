@@ -8,7 +8,7 @@
   
 Civil Legal Advice is a service provided to the general public in England and Wales where users can obtain free legal advice from specialist legal providers relating to a range of Civil matters. This is subject to the user's matter being within scope of the service and the user passing the means eligibility test. The advice can either be given via telephone or in person depending upon the client's unique circumstances. 
 
-The provision of the CLA Service is mandated in secondary legislation and is the required route (Gateway) to access any further civil legal aid services in Debt, Education and Discrimination categories of law.
+The provision of the Civil Legal Advice Service is mandated in secondary legislation and is the required route (Gateway) to access any further civil legal aid services in the "Debt" category of law.
 
 ## Public Website
 
