@@ -80,9 +80,4 @@
     {% include '_ga-outcome-pageview.html' %}
   {% endblock %}
 
-  {% block ga_pageview -%}
-    ga('set', 'title', stripP11(document.title));
-    ga('set', 'location', stripP11(window.location.href.replace));
-    {{ super() }}
-  {%- endblock %}
 {% endif %}

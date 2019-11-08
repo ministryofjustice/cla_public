@@ -83,6 +83,9 @@
     }
 
     {% block ga_pageview -%}
+      ga('set', 'title', stripP11(document.title));
+      ga('set', 'location', stripP11(window.location.href.replace));
+
       ga('send', 'pageview');
       // GDS CROSS DOMAIN ANALYTICS
       ga('govuk_shared.send', 'pageview');
