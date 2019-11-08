@@ -80,4 +80,9 @@
     {% include '_ga-outcome-pageview.html' %}
   {% endblock %}
 
+  {% block ga_pageview -%}
+    ga('set', 'title', 'Results for [postcode] | Seek legal advice');
+    ga('govuk_shared.set', 'title', 'Results for [postcode] | Seek legal advice');
+    {{ super() }}
+  {%- endblock %}
 {% endif %}
