@@ -35,4 +35,10 @@
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
   {% endblock %}
 
+  {% block ga_pageview -%}
+    ga('set', 'title', stripP11(document.title));
+    ga('set', 'location', stripP11(window.location.href.replace));
+    {{ super() }}
+  {%- endblock %}
+
 {% endif %}

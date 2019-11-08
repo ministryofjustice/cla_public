@@ -81,8 +81,8 @@
   {% endblock %}
 
   {% block ga_pageview -%}
-    ga('set', 'title', 'Results for [postcode redacted] | Seek legal advice');
-    ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));
+    ga('set', 'title', stripP11(document.title));
+    ga('set', 'location', stripP11(window.location.href.replace));
     {{ super() }}
   {%- endblock %}
 {% endif %}
