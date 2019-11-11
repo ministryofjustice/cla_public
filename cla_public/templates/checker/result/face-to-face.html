@@ -81,8 +81,8 @@
   {% endblock %}
 
   {% block ga_pageview -%}
-    ga('set', 'title', 'Results for [postcode redacted] | Seek legal advice');
-    ga('set', 'location', window.location.href.replace(/postcode=[^&]+/gi, 'postcode=redacted'));
+    ga('set', 'title', 'Results for [postcode] | Seek legal advice');
+    ga('govuk_shared.set', 'title', 'Results for [postcode] | Seek legal advice');
     {{ super() }}
   {%- endblock %}
 {% endif %}

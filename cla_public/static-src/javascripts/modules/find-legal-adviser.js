@@ -115,7 +115,7 @@
 
           $('.search-results-list').attr('tabindex', -1).focus();
 
-          window.ga('send', 'pageview', url);
+          window.ga('send', 'pageview', stripPII(url));
         })
         .error();
     },
