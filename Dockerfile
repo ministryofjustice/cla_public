@@ -10,7 +10,10 @@ LABEL name="Check If You Can Get Legal Aid (cla_public)" \
       maintainer="LAA Get Access <laa-get-access@digital.justice.gov.uk>" \
       version="1.0"
 
-ENV HOME /root
+# Runtime User
+RUN useradd --uid 1000 --user-group -m -d /home/app app
+
+ENV HOME /home/app
 
 # Install python and build packages
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
@@ -75,5 +78,6 @@ COPY . .
 RUN ./node_modules/.bin/gulp build && \
     pybabel compile -f -d cla_public/translations
 
+USER 1000
 EXPOSE 80
 CMD ["/sbin/my_init"]
