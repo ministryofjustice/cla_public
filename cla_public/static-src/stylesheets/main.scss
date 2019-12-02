@@ -48,6 +48,7 @@ $govuk-typography-use-rem: false;
 @import 'scope-diagnosis';
 @import 'modal-dialog';
 @import 'cookie-settings';
+@import 'govuk-frontend-3-4-0.min';
 
 html {
   height: 100%;
@@ -143,5 +144,3 @@ hr {
 .styled-list li {
     list-style: disc;
 }
-
-@import 'govuk-frontend-3.4.0.min';
