@@ -162,6 +162,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             local = local_tz.localize(naive)
             return local.astimezone(pytz.utc).isoformat()
 
+        safe_to_contact = CONTACT_SAFETY[0][0] if self.contact_type.data == CONTACT_PREFERENCE[1][0] else ""
         data = {
             "personal_details": {
                 "full_name": self.full_name.data,
@@ -169,7 +170,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                 "postcode": self.address.form.post_code.data,
                 "mobile_phone": self.callback.form.contact_number.data,
                 "street": self.address.form.street_address.data,
-                "safe_to_contact": CONTACT_SAFETY[1][0],
+                "safe_to_contact": safe_to_contact,
             },
             "adaptation_details": {
                 "bsl_webcam": self.adaptations.bsl_webcam.data,
@@ -186,7 +187,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             data["thirdparty_details"] = {"personal_details": {}}
             data["thirdparty_details"]["personal_details"]["full_name"] = self.thirdparty.full_name.data
             data["thirdparty_details"]["personal_details"]["mobile_phone"] = self.thirdparty.contact_number.data
-            data["thirdparty_details"]["personal_details"]["safe_to_contact"] = CONTACT_SAFETY[1][0]
+            data["thirdparty_details"]["personal_details"]["safe_to_contact"] = CONTACT_SAFETY[0][0]
             data["thirdparty_details"]["personal_relationship"] = self.thirdparty.relationship.data
 
             data["requires_action_at"] = process_selected_time(self.thirdparty.form.time)

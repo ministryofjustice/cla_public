@@ -19,7 +19,6 @@ def submit(**kwargs):
         "email": "john.smith@example.com",
         "contact_type": "callback",
         "callback-contact_number": "0123456789",
-        "callback-safe_to_contact": "NO_MESSAGE",
     }
 
     if datetime.datetime.now().time() > datetime.time(hour=17, minute=30):
