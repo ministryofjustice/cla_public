@@ -55,10 +55,6 @@ html {
   font-size:initial;
 }
 
-body {
-  min-height: 100%;
-}
-
 @media print {
   body {
     background: white;
@@ -141,5 +137,11 @@ hr {
 }
 
 .styled-list li {
-    list-style: disc;
+  list-style: disc;
+}
+
+.gem-c-button {
+  font-size: 19px;
+  line-height: 1;
+  border-width: 2px;
 }
