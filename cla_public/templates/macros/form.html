@@ -49,6 +49,29 @@
   </fieldset>
 {% endmacro %}
 
+{% macro tickboxes(field=None, class_='govuk-fieldset', legend=None, field_attrs={}) %}
+  {% set legend_ = field.label.text if field else legend %}
+  {% set controlled_by = kwargs.controlled_by %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+
+  <span id="{{ field.id }}-hint" class="govuk-hint">
+    Select all that apply.
+  </span>
+  {{ render_field_errors(field.errors) if field and field.errors}}
+  {{ render_field_description(field) }}
+
+  {% if field or caller %}
+    <div class="govuk-checkboxes {{ kwargs.row_class }}">
+      {% if field and not kwargs.field_as_label %}
+        {{ render_field(field, field_attrs) }}
+      {% endif %}
+      {% if caller %}
+        {{ caller() }}
+      {% endif %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
 
 {#
   Renders `form-group` wrapper for form fields
@@ -290,6 +313,39 @@
   </ul>
 {% endmacro %}
 
+{% macro radio_tick_list(field, input_type='checkbox', separated_options=[], callback=None) %}
+  {% if input_type == 'radio' %}
+    <div class="govuk-radios">
+    {% for option in field %}
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="{{option.id}}" type="radio" name="{{field.id}}" value="{{option.value}}" >
+        <label class="govuk-label govuk-radios__label" for="{{option.id}}">
+          {{ option.label.text }}
+        </label>
+
+        {% if callback %}
+          {{ callback(field, option) }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="govuk-checkboxes">
+    {% for option in field %}
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="{{option.id}}" type="checkbox" name="{{field.id}}" value="{{option.data}}" >
+        <label class="govuk-label govuk-checkboxes__label" for="{{option.id}}">
+          {{ option.label.text }}
+        </label>
+
+        {% if callback %}
+          {{ callback(field, option) }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+{% endmacro %}
+
 
 {#
   Money field with period interval
@@ -320,9 +376,9 @@
         Button label
 #}
 {% macro actions(button_label) %}
-  <p class="form-actions">
-    <button type="submit" class="button button-larger">{{ button_label }}</button>
-  </p>
+  <button class="govuk-button" data-module="govuk-button">
+    {{ button_label }}
+  </button>
 {% endmacro %}
 
 

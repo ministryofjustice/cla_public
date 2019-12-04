@@ -1,21 +1,21 @@
 <div class="cookie-settings__confirmation" data-cookie-confirmation="true">
 	<section class="gem-c-notice govuk-!-margin-bottom-8" aria-label="Notice" aria-live="polite" role="region">
 		<h2 class="gem-c-notice__title">Your cookie settings were saved</h2>
-		<p>Government services may set additional cookies and, if so, will have their own cookie policy and banner.</p>
+		<p class="govuk-body">Government services may set additional cookies and, if so, will have their own cookie policy and banner.</p>
 		<a class="govuk_link cookie-settings__prev-page" href="#" data-module="track-click" data-track-category="cookieSettings" data-track-action="Back to previous page">
         Go back to the page you were looking at
       </a>
 	</section>
 </div>
 
-<p>Cookies are files saved on your phone, tablet or computer when you visit a website.</p>
-<p>We use cookies to store information about how you use ‘Check you can get legal aid’, such as the pages you visit.</p>
+<p class="govuk-body">Cookies are files saved on your phone, tablet or computer when you visit a website.</p>
+<p class="govuk-body">We use cookies to store information about how you use ‘Check you can get legal aid’, such as the pages you visit.</p>
 
-<h2 class="gem-c-heading  gem-c-heading--padding  ">Cookie settings</h2>
+<h2 class="govuk-heading-l">Cookie settings</h2>
 <div class="cookie-settings__no-js">
 	<div class="gem-c-govspeak govuk-govspeak " data-module="govspeak">
-		<p>We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:</p>
-		<ul>
+		<p class="govuk-body">We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:</p>
+		<ul class="govuk-list">
 			<li>reloading the page</li>
 			<li>turning on Javascript in your browser</li>
 		</ul>
@@ -23,66 +23,75 @@
 </div>
 
 <div class="cookie-settings__form-wrapper">
-	<p>We use different types of cookies. You can choose which cookies you're happy for us to use and how the data is shared.</p>
+	<p class="govuk-body">We use different types of cookies. You can choose which cookies you're happy for us to use and how the data is shared.</p>
 	<form method="get" data-module="cookie-settings">
     <div class="gem-c-govspeak govuk-govspeak " data-module="govspeak">
-      <h2>Strictly necessary cookies</h2>
-      <p>We use essential cookies to help you use the ‘Check you can get legal aid’ service. These do things such as:</p>
-      <ul>
+      <h2 class="govuk-heading-l">Strictly necessary cookies</h2>
+      <p class="govuk-body">We use essential cookies to help you use the ‘Check you can get legal aid’ service. These do things such as:</p>
+      <ul class="govuk-list">
         <li>remember your progress through our service</li>
         <li>remember you have seen the cookies message</li>
         <li>remember the language you have selected to view our service</li>
       </ul>
-      <p>These cookies need to be on to give you the best experience using the service.</p>
-      <p><a href="/cookies">Read more about cookies on 'Check if you can get legal aid'</a></p>
+      <p class="govuk-body">These cookies need to be on to give you the best experience using the service.</p>
+      <p class="govuk-body"><a class="govuk-link" href="/cookies">Read more about cookies on 'Check if you can get legal aid'</a></p>
     </div>
 
     <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset">
+      <fieldset class="govuk-fieldset" aria-describedby="cookie-hint-1">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Cookies used to improve 'Check you can get legal aid'</legend>
-        <div class="gem-c-hint govuk-hint govuk-!-margin-bottom-3">
-          <p>We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs. We do not allow Google to use or share the data about how you use this site.</p>
-          <p>You agree to the Ministry of Justice using your data to help improve the 'Check if you can get legal aid' service.</p>
-        </div>
+        <span id="cookie-hint-1" class="govuk-hint">
+          <p>
+            We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs. 
+            We do not allow Google to use or share the data about how you use this site. 
+          </p>
+          <p>
+            You agree to the Ministry of Justice using your data to help improve the 'Check if you can get legal aid' service.
+          </p>
+        </span>
         <div class="govuk-radios govuk-radios--inline">
-          <div class="gem-c-radio govuk-radios__item">
+          <div class="govuk-radios__item">
             <input type="radio" name="cookies-usage" id="radio-0a97fdad-0" value="on" class="govuk-radios__input">
-              <label for="radio-0a97fdad-0" class="gem-c-label govuk-label govuk-radios__label">
-                <span>On</span>
-              </label>
-            </div>
-            <div class="gem-c-radio govuk-radios__item">
-              <input type="radio" name="cookies-usage" id="radio-0a97fdad-1" value="off" class="govuk-radios__input">
-                <label for="radio-0a97fdad-1" class="gem-c-label govuk-label govuk-radios__label">
-                  <span class="translation_missing" title="translation missing: en.cookies.off">Off</span>
-                </label>
-              </div>
-            </div>
-          </fieldset>
+            <label for="radio-0a97fdad-0" class="gem-c-label govuk-label govuk-radios__label">
+              On
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input type="radio" name="cookies-usage" id="radio-0a97fdad-1" value="off" class="govuk-radios__input">
+            <label for="radio-0a97fdad-1" class="gem-c-label govuk-label govuk-radios__label">
+              <span class="translation_missing" title="translation missing: en.cookies.off">Off</span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
     </div>
     <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset">
+      <fieldset class="govuk-fieldset"  aria-describedby="cookie-hint-2">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Cookies used by the Government Digital Service (GDS)</legend>
-        <div class="gem-c-hint govuk-hint govuk-!-margin-bottom-3">
-          <p>You agree to the Government Digital Service collecting your data to improve the user experience across government digital services.</p>
-        </div>
+        <span id="cookie-hint-1" class="govuk-hint">
+          You agree to the Government Digital Service collecting your data to improve the user experience across government digital services.
+        </span>
         <div class="govuk-radios govuk-radios--inline">
-          <div class="gem-c-radio govuk-radios__item">
+          <div class="govuk-radios__item">
             <input type="radio" name="cookies-brexit" id="radio-bdbf578a-0" value="on" class="govuk-radios__input">
-              <label for="radio-bdbf578a-0" class="gem-c-label govuk-label govuk-radios__label">
-                <span>On</span>
-              </label>
-            </div>
-            <div class="gem-c-radio govuk-radios__item">
-              <input type="radio" name="cookies-brexit" id="radio-bdbf578a-1" value="off" class="govuk-radios__input">
-                <label for="radio-bdbf578a-1" class="gem-c-label govuk-label govuk-radios__label">
-                  <span>Off</span>
-                </label>
-              </div>
-            </div>
-            <p><a href="/privacy">Find out how data is shared when you use this service</a> </p>
-          </fieldset>
+            <label for="radio-bdbf578a-0" class="gem-c-label govuk-label govuk-radios__label">
+              On
+            </label>
+          </div>
+          <div class="gem-c-radio govuk-radios__item">
+            <input type="radio" name="cookies-brexit" id="radio-bdbf578a-1" value="off" class="govuk-radios__input">
+            <label for="radio-bdbf578a-1" class="gem-c-label govuk-label govuk-radios__label">
+              <span>Off</span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
     </div>
-    <button class="gem-c-button govuk-button" type="submit">Save changes</button>
+    <p class="govuk-body">
+      <a href="/privacy">Find out how data is shared when you use this service</a>
+    </p>
+    <button class="govuk-button" type="submit" data-module="govuk-button">
+      Save changes
+    </button>
   </form>
 </div>
