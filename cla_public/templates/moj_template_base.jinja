@@ -111,12 +111,9 @@
       </div>
     </header>
     <!--end header-->
-    
-
-    <!--[if lte IE 6]><script>document.body.className = document.body.className.replace('js-enabled','');</script><![endif]-->
-    {% block before_content %}{% endblock %}
-
-    <div class="govuk-width-container ">
+    <div class="govuk-width-container">
+      <!--[if lte IE 6]><script>document.body.className = document.body.className.replace('js-enabled','');</script><![endif]-->
+      {% block before_content %}{% endblock %}
       {% block content %}{% endblock %}
     </div>
 
