@@ -129,9 +129,9 @@
             <ul class="govuk-footer__inline-list">
               <li class="govuk-footer__inline-list-item">
                 {% if request.cookies.get('locale') == 'cy_GB' %}
-                  <a lang="en" href="{{ url_for('base.set_locale', locale='en_GB') }}" data-ga="event:locale/switch/english">English</a>
+                  <a class="govuk-footer__link" lang="en" href="{{ url_for('base.set_locale', locale='en_GB') }}" data-ga="event:locale/switch/english">English</a>
                 {% else %}
-                  <a lang="cy" href="{{ url_for('base.set_locale', locale='cy_GB') }}" data-ga="event:locale/switch/welsh">Cymraeg</a>
+                  <a class="govuk-footer__link" lang="cy" href="{{ url_for('base.set_locale', locale='cy_GB') }}" data-ga="event:locale/switch/welsh">Cymraeg</a>
                 {% endif %}
               </li>
               {% block footer_support_links %}{% endblock %}
