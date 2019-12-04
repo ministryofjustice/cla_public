@@ -21,12 +21,10 @@
 {% endblock %}
 
 {% block cookie_message %}
-{% include "_cookie-popup.html" %}
+  {% include "_cookie-popup.html" %}
 {% endblock %}
 {% block before_content %}
-  <div class="container">
-    {% include "_phase-tag.html" %}
-  </div>
+  {% include "_phase-tag.html" %}
 {% endblock %}
 
 {% block content %}
