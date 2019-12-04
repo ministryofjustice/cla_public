@@ -28,6 +28,9 @@ $govuk-typography-use-rem: false;
 @import "govuk_publishing_components/components/button";
 @import "govuk_publishing_components/components/notice";
 
+@import "node_modules/govuk-frontend/govuk/all"; /*govuk frontend*/
+
+
 @import 'phase-banner';
 @import 'typography';
 @import 'forms';
@@ -48,7 +51,7 @@ $govuk-typography-use-rem: false;
 @import 'scope-diagnosis';
 @import 'modal-dialog';
 @import 'cookie-settings';
-@import 'gds';
+/*@import 'gds';*/
 
 html {
   height: 100%;
