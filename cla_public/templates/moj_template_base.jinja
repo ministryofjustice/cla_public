@@ -114,14 +114,10 @@
     
 
     <!--[if lte IE 6]><script>document.body.className = document.body.className.replace('js-enabled','');</script><![endif]-->
-    {% block after_header %}{% endblock %}
-
     {% block before_content %}{% endblock %}
 
     <div class="govuk-width-container ">
-      <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
-        {% block content %}{% endblock %}
-      </main>
+      {% block content %}{% endblock %}
     </div>
 
     <footer class="govuk-footer " role="contentinfo">
@@ -131,6 +127,13 @@
           <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
             <h2 class="govuk-visually-hidden">Support links</h2>
             <ul class="govuk-footer__inline-list">
+              <li class="govuk-footer__inline-list-item">
+                {% if request.cookies.get('locale') == 'cy_GB' %}
+                  <a lang="en" href="{{ url_for('base.set_locale', locale='en_GB') }}" data-ga="event:locale/switch/english">English</a>
+                {% else %}
+                  <a lang="cy" href="{{ url_for('base.set_locale', locale='cy_GB') }}" data-ga="event:locale/switch/welsh">Cymraeg</a>
+                {% endif %}
+              </li>
               {% block footer_support_links %}{% endblock %}
               <li class="govuk-footer__inline-list-item">
                 <a class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/"><abbr title="Ministry of Justice">MoJ</abbr> Digital Services</a>
