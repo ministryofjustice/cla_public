@@ -1,14 +1,16 @@
+/*
 @import "govuk_frontend_toolkit/stylesheets/colours";
 @import "govuk_frontend_toolkit/stylesheets/grid_layout";
 @import "govuk_frontend_toolkit/stylesheets/typography";
 
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
-
+*/
 /**
  * govuk_frontend_toolkit has been deprecated
  * Starting using recommended govuk_frontend
  */
+/*
 $govuk-use-legacy-font: true;
 $govuk-typography-use-rem: false;
 @import "govuk/objects/all";
@@ -18,19 +20,22 @@ $govuk-typography-use-rem: false;
 @import "govuk/components/fieldset/fieldset";
 @import "govuk/components/hint/hint";
 @import "govuk/core/links";
-
+*/
 /**
  * Some components are not yet part of govuk_frontend
   * but are available in govuk_publishing_components
  */
+ 
+ /*
 @import "govuk_publishing_components/components/mixins/margins";
 @import "govuk_publishing_components/components/cookie-banner";
 @import "govuk_publishing_components/components/button";
 @import "govuk_publishing_components/components/notice";
+*/
 
 @import "node_modules/govuk-frontend/govuk/all"; /*govuk frontend*/
 
-
+/*
 @import 'phase-banner';
 @import 'typography';
 @import 'forms';
@@ -51,6 +56,7 @@ $govuk-typography-use-rem: false;
 @import 'scope-diagnosis';
 @import 'modal-dialog';
 @import 'cookie-settings';
+*/
 /*@import 'gds';*/
 
 html {
@@ -147,4 +153,8 @@ hr {
   font-size: 19px;
   line-height: 1;
   border-width: 2px;
+}
+
+#xyz {
+  color:red!important;
 }
