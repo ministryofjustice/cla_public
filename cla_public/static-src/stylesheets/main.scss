@@ -1,3 +1,7 @@
+@import "govuk_frontend_toolkit/stylesheets/colours"; /*remove when update done*/
+@import "govuk_frontend_toolkit/stylesheets/grid_layout"; /*remove when update done*/
+@import "govuk_frontend_toolkit/stylesheets/typography"; /*remove when update done*/
+
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
 
@@ -18,6 +22,30 @@ $govuk-typography-use-rem: false;
 @import "govuk_publishing_components/components/button";
 @import "govuk_publishing_components/components/notice";
 
+
+
+@import 'phase-banner';
+@import 'typography';
+@import 'forms';
+@import 'alerts';
+@import 'icons';
+@import 'tables';
+@import 'confirmation';
+@import 'help-organisations';
+@import 'sidebar';
+@import 'split-panels';
+@import 'notice';
+@import 'answers-summary';
+@import 'progress';
+@import 'utilities';
+@import 'layout';
+@import 'find-legal-adviser';
+@import 'flash-messages';
+@import 'scope-diagnosis';
+@import 'modal-dialog';
+@import 'cookie-settings';
+
+
 html {
   height: 100%;
   font-size:initial;
@@ -31,6 +59,10 @@ html {
   #global-header {
     padding: 2mm 3mm;
     margin: 0;
+  }
+
+  .language-picker {
+    display: none;
   }
 
   #content {
@@ -104,27 +136,8 @@ hr {
   list-style: disc;
 }
 
-/*This is for the cookie banner and currently does not have a design system style*/
-
 .gem-c-button {
   font-size: 19px;
   line-height: 1;
   border-width: 2px;
-}
-
-.gem-c-button--secondary{
-  border:2px solid;
-  &:hover {
-    border-color: #00692f;
-    color: #00692f;
-    background-color: #f8f8f8;
-    text-decoration: none;
-  }
-  &:focus &:link:focus {
-    outline: none;
-    border-color: $govuk-focus-colour;
-    color: $govuk-link-active-colour;
-    background-color: $govuk-focus-colour;
-    box-shadow: 0 2px 0 $govuk-link-active-colour;
-  }
 }
