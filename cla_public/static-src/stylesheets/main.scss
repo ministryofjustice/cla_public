@@ -1,3 +1,7 @@
+@import "govuk_frontend_toolkit/stylesheets/colours";
+@import "govuk_frontend_toolkit/stylesheets/grid_layout";
+@import "govuk_frontend_toolkit/stylesheets/typography";
+
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
 
@@ -7,7 +11,13 @@
  */
 $govuk-use-legacy-font: true;
 $govuk-typography-use-rem: false;
-@import "govuk/all";
+@import "govuk/objects/all";
+@import "govuk/components/button/button";
+@import "govuk/components/radios/radios";
+@import "govuk/components/label/label";
+@import "govuk/components/fieldset/fieldset";
+@import "govuk/components/hint/hint";
+@import "govuk/core/links";
 
 /**
  * Some components are not yet part of govuk_frontend
@@ -40,6 +50,8 @@ $govuk-typography-use-rem: false;
 @import 'scope-diagnosis';
 @import 'modal-dialog';
 @import 'cookie-settings';
+
+@import "govuk/all";
 
 
 html {
