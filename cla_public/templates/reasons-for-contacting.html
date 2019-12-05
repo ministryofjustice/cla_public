@@ -15,7 +15,7 @@
       {{ Form.handle_errors(form) }}
 
       <div class="govuk-form-group">
-        {% call Form.tickboxes(form.reasons, form.{{ title }}, field_as_label=True) %}
+        {% call Form.tickboxes(form.reasons, field_as_label=True) %}
           {{ Form.radio_tick_list(form.reasons) }}
         {% endcall %}
 
