@@ -5,7 +5,6 @@
  * govuk_frontend_toolkit has been deprecated
  * Starting using recommended govuk_frontend
  */
-$govuk-use-legacy-font: true;
 $govuk-typography-use-rem: false;
 @import "govuk/objects/all";
 @import "govuk/components/button/button";
