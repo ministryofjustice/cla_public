@@ -33,10 +33,6 @@ html {
     margin: 0;
   }
 
-  .language-picker {
-    display: none;
-  }
-
   #content {
     padding-top: 8mm;
 
@@ -108,8 +104,25 @@ hr {
   list-style: disc;
 }
 
+/*This is for the cookie banner and currently does not have a design system style*/
+
 .gem-c-button {
   font-size: 19px;
   line-height: 1;
   border-width: 2px;
+}
+
+.gem-c-button--secondary{
+  &:hover {
+    border-color: #00692f;
+    color: #00692f;
+    background-color: #f8f8f8;
+    text-decoration: none;
+  }
+  &:focus {
+    border-color: $govuk-focus-colour;
+    color: $govuk-link-active-colour;
+    background-color: $govuk-focus-colour;
+    box-shadow: 0 2px 0 $govuk-link-active-colour;
+  }
 }
