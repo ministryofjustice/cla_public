@@ -15,24 +15,12 @@
       {{ Form.handle_errors(form) }}
 
       <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="contact-reason">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-            <h1 class="govuk-fieldset__heading">
-              {{ title }}
-            </h1>
-          </legend>
-          <span id="contact-reason" class="govuk-hint">
-            Select all that apply.
-          </span>
-          <div class="govuk-checkboxes">
-            {% call Form.tickboxes(form.reasons, field_as_label=True) %}
-              {{ Form.option_list(form.reasons) }}
-            {% endcall %}
+        {% call Form.tickboxes(form.reasons, field_as_label=True) %}
+          {{ Form.option_list(form.reasons) }}
+        {% endcall %}
 
-            {{ Form.honeypot(form) }}
-            {{ Form.actions(_('Continue to contact CLA')) }}
-          </div>
-        </fieldset>
+        {{ Form.honeypot(form) }}
+        {{ Form.actions(_('Continue to contact CLA')) }}
       </div>
 
 

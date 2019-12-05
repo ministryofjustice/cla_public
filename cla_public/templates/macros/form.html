@@ -309,23 +309,36 @@
         Macro to insert inside the each option
 #}
 {% macro option_list(field, input_type='checkbox', separated_options=[], callback=None) %}
-  <ul class="form-option-list form-row"
-    {% if input_type == 'radio' %}role="radiogroup"{% else %}role="group"{% endif %}
-    aria-labelledby="field-label-{{ field.id }}"
-  >
+  {% if input_type == 'radio' %}
+    <div class="govuk-radios">
     {% for option in field %}
-      <li{% if option.data in separated_options %} class="m-separate"{% endif %}>
-        <label class="radio-inline" for="{{option.id}}">
-          {{ option }}
+      <div class="govuk-radios__item">
+        {{ option }}
+        <label class="govuk-label govuk-radios__label" for="{{option.id}}">
           {{ option.label.text }}
         </label>
 
         {% if callback %}
           {{ callback(field, option) }}
         {% endif %}
-      </li>
+      </div>
     {% endfor %}
-  </ul>
+  {% else %}
+    <div class="govuk-checkboxes">
+    {% for option in field %}
+      <div class="govuk-checkboxes__item">
+        {{ option }}
+        <label class="govuk-label govuk-checkboxes__label" for="{{option.id}}">
+          {{ option.label.text }}
+        </label>
+
+        {% if callback %}
+          {{ callback(field, option) }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
 {% endmacro %}
 
 
