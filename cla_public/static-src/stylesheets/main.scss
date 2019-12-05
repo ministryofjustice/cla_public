@@ -132,16 +132,21 @@ hr {
   list-style: disc;
 }
 
-.gem-c-button {
-  font-size: 19px;
-  line-height: 1;
-  border-width: 2px;
+.gds-header__error {
+  border-bottom: 10px solid $govuk-error-colour;
 }
 
 
 /*******
 Added in these button stylings for cookie banner 12/2019 [MjB]
 *******/
+
+.gem-c-button {
+  font-size: 19px;
+  line-height: 1;
+  border-width: 2px;
+}
+
 .gem-c-button {
   font-size: 19px;
   line-height: 1;

@@ -93,7 +93,7 @@
       </div>
       <!--end global-cookie-message-->
       <header class="govuk-header " role="banner" data-module="govuk-header">
-        <div class="govuk-header__container govuk-width-container">
+        <div class="govuk-header__container govuk-width-container gds-header__error">
           <div class="govuk-header__logo">
             <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
               <span class="govuk-header__logotype">
@@ -121,9 +121,7 @@
         <div class="govuk-phase-banner">
           <p class="govuk-phase-banner__content">
             <span class="govuk-phase-banner__text" id="aria-feedback">
-            {% trans %}
               <a href="{{ url_for('base.reasons_for_contacting')}}">Report a problem</a> if you need help or would like to give feedback to improve this service
-            {% endtrans %}
             </span>
           </p>
         </div>
@@ -131,20 +129,20 @@
           <h1 class="govuk-heading-xl">This service is temporarily unavailable</h1>
           <p class="govuk-body">This service is not available right now, but we're working hard to get things up and running again.</p>
           <p class="govuk-body">You can try again later or contact us. </p>
-          <p class="govuk-body">{{ _('Telephone:') }}<br />
-            <strong class="govuk-!-font-weight-bold">{{ _('0345 345 4345') }}</strong>
+          <p class="govuk-body">Telephone:<br />
+            <strong class="govuk-!-font-weight-bold">0345 345 4345</strong>
           </p>
-          <p class="govuk-body">{{ _('Minicom:') }}<br />
-            <strong class="govuk-!-font-weight-bold">{{ _('0345 609 6677') }}</strong>
+          <p class="govuk-body">Minicom:<br />
+            <strong class="govuk-!-font-weight-bold">0345 609 6677</strong>
           </p>
-          <p class="govuk-body">{{ _('Textphone:') }}<br />
-            <strong class="govuk-!-font-weight-bold">{{ _('0845 609 6677') }}</strong>
+          <p class="govuk-body">Textphone:<br />
+            <strong class="govuk-!-font-weight-bold">0845 609 6677</strong>
           </p>
           <p class="govuk-body">
             <a href="https://www.gov.uk/call-charges">Find out about call charges here</a>.
           </p>
-          <p class="govuk-body">{{ _('Opening times:') }}<br />
-            <strong class="govuk-!-font-weight-bold">{{ _('Monday to Friday: 9am to 8pm') }}<br />{{ _('Saturday: 9am to 12.30pm') }}</strong>
+          <p class="govuk-body">Opening times:<br />
+            <strong class="govuk-!-font-weight-bold">Monday to Friday: 9am to 8pm<br />Saturday: 9am to 12.30pm</strong>
           </p>
           <div class="govuk-inset-text">
             This service is only available if you are a resident of England or Wales.
@@ -158,23 +156,16 @@
             <h2 class="govuk-visually-hidden">Support links</h2>
             <ul class="govuk-footer__inline-list">
               <li class="govuk-footer__inline-list-item">
-                {% if request.cookies.get('locale') == 'cy_GB' %}
-                  <a class="govuk-footer__link" lang="en" href="{{ url_for('base.set_locale', locale='en_GB') }}" data-ga="event:locale/switch/english">English</a>
-                {% else %}
-                  <a class="govuk-footer__link" lang="cy" href="{{ url_for('base.set_locale', locale='cy_GB') }}" data-ga="event:locale/switch/welsh">Cymraeg</a>
-                {% endif %}
+                <a class="govuk-footer__link"  href="/privacy">Privacy Policy</a>
               </li>
               <li class="govuk-footer__inline-list-item">
-                <a href="/privacy">Privacy Policy</a>
+                <a class="govuk-footer__link"  href="/cookies">Cookies</a>
               </li>
               <li class="govuk-footer__inline-list-item">
-                <a href="/cookies">Cookies</a>
+                <a class="govuk-footer__link"  href="/reasons-for-contacting">Contact us</a>
               </li>
               <li class="govuk-footer__inline-list-item">
-                <a href="/reasons-for-contacting">Contact us</a>
-              </li>
-              <li class="govuk-footer__inline-list-item">
-                <a class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/"><abbr title="Ministry of Justice">MoJ</abbr> Digital Services</a>
+                <a class="govuk-footer__link"  class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/"><abbr title="Ministry of Justice">MoJ</abbr> Digital Services</a>
               </li>
             </ul>
             <svg role="presentation" focusable="false" class="govuk-footer__licence-logo" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 483.2 195.7" height="17" width="41">
