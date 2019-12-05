@@ -49,6 +49,44 @@
   </fieldset>
 {% endmacro %}
 
+{% macro tickboxes(field=None, class_='govuk-fieldset', legend=None, field_attrs={}) %}
+  {% set legend_ = field.label.text if field else legend %}
+  {% set controlled_by = kwargs.controlled_by %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+
+  <fieldset aria-describedby="{{ field.id }}-hint" class="
+      {{- class_ -}}
+      {%- if field and field.errors %} form-error{% endif -%}
+      {%- if controlled_by and control_value %} s-hidden{% endif -%}
+    "
+    {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+    {%- if field %}id="field-{{ field.id }}"{% endif -%}
+  >
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+      <h1 class="govuk-fieldset__heading">
+        {{ title }}
+      </h1>
+    </legend>
+    <span id="{{ field.id }}-hint" class="govuk-hint">
+      Select all that apply.
+    </span>
+    {{ render_field_errors(field.errors) if field and field.errors}}
+    {{ render_field_description(field) }}
+
+    {% if field or caller %}
+      <div class="govuk-checkboxes {{ kwargs.row_class }}">
+        {% if field and not kwargs.field_as_label %}
+          {{ render_field(field, field_attrs) }}
+        {% endif %}
+        {% if caller %}
+          {{ caller() }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </fieldset>
+{% endmacro %}
+
 
 {#
   Renders `form-group` wrapper for form fields

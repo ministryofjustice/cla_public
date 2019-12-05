@@ -3,29 +3,49 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% set title = _('Before you contact Civil Legal Advice') %}
+{% set title = _('Why do you want to contact Civil Legal Advice?') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
-  <p class="subtitle">
-    {% trans %}So we can improve this service, we'd like to understand why you want to contact <abbr title="Civil Legal Advice">CLA</abbr>.{% endtrans %}
-  </p>
+  <div class="govuk-grid-column-two-thirds">
+    <form method="POST" action="{{ url_for('.reasons_for_contacting') }}" class="reasons-for-contacting-form">
+      {{ form.csrf_token }}
+      {{ form.referrer }}
 
-  <form method="POST" action="{{ url_for('.reasons_for_contacting') }}" class="reasons-for-contacting-form">
-    {{ form.csrf_token }}
-    {{ form.referrer }}
+      {{ Form.handle_errors(form) }}
 
-    {{ Form.handle_errors(form) }}
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="contact-reason">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <h1 class="govuk-fieldset__heading">
+              {{ title }}
+            </h1>
+          </legend>
+          <span id="contact-reason" class="govuk-hint">
+            Select all that apply.
+          </span>
+          <div class="govuk-checkboxes">
+            {% call Form.tickboxes(form.reasons, field_as_label=True) %}
+              {{ Form.option_list(form.reasons) }}
+            {% endcall %}
 
-    {% call Form.fieldset(form.reasons, field_as_label=True) %}
-      {{ Form.option_list(form.reasons) }}
-    {% endcall %}
+            {{ Form.honeypot(form) }}
+            {{ Form.actions(_('Continue to contact CLA')) }}
+          </div>
+        </fieldset>
+      </div>
 
-    {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Continue to contact CLA')) }}
-  </form>
-  {% include "checker/time-out-warning.html" %}
+
+<h1 class="govuk-heading-xl">{{ title }}</h1>
+    <p class="govuk-body">
+      {% trans %}So we can improve this service, we'd like to understand why you want to contact <abbr title="Civil Legal Advice">CLA</abbr>.{% endtrans %}
+    </p>
+
+   
+
+    </form>
+    {% include "checker/time-out-warning.html" %}
+  </div>
 {% endblock %}
 
 {% block javascripts %}
