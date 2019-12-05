@@ -113,13 +113,15 @@ hr {
 }
 
 .gem-c-button--secondary{
+  border:2px solid;
   &:hover {
     border-color: #00692f;
     color: #00692f;
     background-color: #f8f8f8;
     text-decoration: none;
   }
-  &:focus {
+  &:focus &:link:focus {
+    outline: none;
     border-color: $govuk-focus-colour;
     color: $govuk-link-active-colour;
     background-color: $govuk-focus-colour;
