@@ -28,8 +28,6 @@ $govuk-typography-use-rem: false;
 @import "govuk_publishing_components/components/button";
 @import "govuk_publishing_components/components/notice";
 
-
-
 @import 'phase-banner';
 @import 'typography';
 @import 'forms';
@@ -51,12 +49,14 @@ $govuk-typography-use-rem: false;
 @import 'modal-dialog';
 @import 'cookie-settings';
 
-@import "node_modules/govuk-frontend/govuk/all";
-
-
 html {
   height: 100%;
-  font-size:initial;
+}
+
+body {
+  background-color: white;
+  background-image: linear-gradient(white 400px, $grey-3 400px);
+  min-height: 100%;
 }
 
 @media print {
@@ -141,11 +141,5 @@ hr {
 }
 
 .styled-list li {
-  list-style: disc;
-}
-
-.gem-c-button {
-  font-size: 19px;
-  line-height: 1;
-  border-width: 2px;
+    list-style: disc;
 }
