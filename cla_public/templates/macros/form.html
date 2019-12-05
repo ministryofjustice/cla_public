@@ -313,8 +313,7 @@
     <div class="govuk-radios">
     {% for option in field %}
       <div class="govuk-radios__item">
-        <input lass="govuk-radios__input" id="{{option.id}}" type="radio" name="{{field.id}}" value="{{option.value}}" >
-        {{ option }}
+        <input class="govuk-radios__input" id="{{option.id}}" type="radio" name="{{field.id}}" value="{{option.value}}" >
         <label class="govuk-label govuk-radios__label" for="{{option.id}}">
           {{ option.label.text }}
         </label>
@@ -328,8 +327,7 @@
     <div class="govuk-checkboxes">
     {% for option in field %}
       <div class="govuk-checkboxes__item">
-        <input lass="govuk-checkboxes__input" id="{{option.id}}" type="checkbox" name="{{field.id}}" value="{{option.data}}" >
-        {{ option }}
+        <input class="govuk-checkboxes__input" id="{{option.id}}" type="checkbox" name="{{field.id}}" value="{{option.data}}" >
         <label class="govuk-label govuk-checkboxes__label" for="{{option.id}}">
           {{ option.label.text }}
         </label>
