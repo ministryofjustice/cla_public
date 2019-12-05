@@ -6,6 +6,12 @@
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1 class="page-title">Change your cookie settings</h1>
-  {% include '_cookie-consent-form.html' %}
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      {% trans %}
+        Change your cookie settings
+      {% endtrans %}
+    </h1>
+    {% include '_cookie-consent-form.html' %}
+  </div>
 {% endblock %}
