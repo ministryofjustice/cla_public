@@ -11,10 +11,10 @@
   <p class="govuk-body">{{ _('For your security, the information you’ve entered has automatically been deleted.') }}</p>
   <p class="govuk-body">{{ _('You can start again below.') }}</p>
 
-  <a href="{{ url_for("base.index") }}" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
-    {{ _('Start again') }}
-    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" role="presentation" focusable="false">
-      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-    </svg>
-  </a>
+  <p>
+    <a class="button button-get-started" href="{{ url_for("base.index") }}" role="button">
+      {{ _('Start again') }}
+    </a>
+  </p>
+
 {% endblock %}
