@@ -1,4 +1,5 @@
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
+@import "govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
 
 /**
  * govuk_frontend_toolkit has been deprecated
@@ -47,7 +48,6 @@ $govuk-typography-use-rem: false;
 @import 'cookie-settings';
 
 @import "govuk/all";
-
 
 html {
   height: 100%;
