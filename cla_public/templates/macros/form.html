@@ -328,7 +328,7 @@
     <div class="govuk-checkboxes">
     {% for option in field %}
       <div class="govuk-checkboxes__item">
-        <input lass="govuk-checkboxes__input" id="{{option.id}}" type="checkbox" name="{{field.id}}" value="{{option.label}}" >
+        <input lass="govuk-checkboxes__input" id="{{option.id}}" type="checkbox" name="{{field.id}}" value="{{option.val}}" >
         {{ option }}
         <label class="govuk-label govuk-checkboxes__label" for="{{option.id}}">
           {{ option.label.text }}
