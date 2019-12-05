@@ -8,15 +8,15 @@
 
 {% block inner_content %}
   <div class="govuk-grid-column-two-thirds">
-    <form method="POST" action="{{ url_for('.reasons_for_contacting') }}" class="reasons-for-contacting-form">
+    <form method="POST" action="{{ url_for('.reasons_for_contacting') }}" id="reasons-for-contacting-form">
       {{ form.csrf_token }}
       {{ form.referrer }}
 
       {{ Form.handle_errors(form) }}
 
       <div class="govuk-form-group">
-        {% call Form.tickboxes(form.reasons, field_as_label=True, title={{ title }}) %}
-          {{ Form.option_list(form.reasons) }}
+        {% call Form.tickboxes(form.reasons, form.{{ title }}, field_as_label=True) %}
+          {{ Form.radio_tick_list(form.reasons) }}
         {% endcall %}
 
         {{ Form.honeypot(form) }}
