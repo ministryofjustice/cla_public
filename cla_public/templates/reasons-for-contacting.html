@@ -15,22 +15,13 @@
       {{ Form.handle_errors(form) }}
 
       <div class="govuk-form-group">
-        {% call Form.tickboxes(form.reasons, field_as_label=True) %}
+        {% call Form.tickboxes(form.reasons, field_as_label=True, title={{ title }}) %}
           {{ Form.option_list(form.reasons) }}
         {% endcall %}
 
         {{ Form.honeypot(form) }}
         {{ Form.actions(_('Continue to contact CLA')) }}
       </div>
-
-
-<h1 class="govuk-heading-xl">{{ title }}</h1>
-    <p class="govuk-body">
-      {% trans %}So we can improve this service, we'd like to understand why you want to contact <abbr title="Civil Legal Advice">CLA</abbr>.{% endtrans %}
-    </p>
-
-   
-
     </form>
     {% include "checker/time-out-warning.html" %}
   </div>
