@@ -3,22 +3,10 @@ version: 2.1
 orbs:
   slack: circleci/slack@2.5.0
 
-references:
-  container_config: &container_config
-    docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-        environment:
-          ECR_DOCKER_REGISTRY: "926803513772.dkr.ecr.eu-west-1.amazonaws.com"
-          ECR_DOCKER_IMAGE: "laa-get-access/laa-cla-public"
-          GITHUB_TEAM_NAME_SLUG: laa-get-access
-          APPLICATION_DEPLOY_NAME: laa-cla-public
 jobs:
   build:
     docker:
       - image: docker:18.09-git
-    environment:
-      ECR_DOCKER_REGISTRY: "926803513772.dkr.ecr.eu-west-1.amazonaws.com"
-      ECR_DOCKER_IMAGE: "laa-get-access/laa-cla-public"
     steps:
       - checkout
       - setup_remote_docker:
@@ -143,8 +131,39 @@ jobs:
             source env/bin/activate
             python manage.py test
 
-  staging_deploy:
-    <<: *container_config
+  live_0_staging_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Initialise Kubernetes staging context
+          command: |
+            setup-kube-auth
+            kubectl config use-context staging
+      - deploy:
+          name: Deploy laa-cla-public to staging
+          command: .circleci/deploy_to_kubernetes_live_0 staging_live_0
+      - slack/status
+
+  live_0_production_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Initialise Kubernetes production context
+          command: |
+            setup-kube-auth
+            kubectl config use-context production
+      - deploy:
+          name: Deploy laa-cla-public to production
+          command: .circleci/deploy_to_kubernetes_live_0 production_live_0
+      - slack/status
+
+  live_1_staging_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
       - checkout
       - run:
@@ -157,8 +176,9 @@ jobs:
           command: .circleci/deploy_to_kubernetes staging
       - slack/status
 
-  production_deploy:
-    <<: *container_config
+  live_1_production_deploy:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
       - checkout
       - run:
@@ -179,28 +199,56 @@ workflows:
       - lint-with-py3-tools
       - test
       - build:
+          name: live_0_build
           requires:
             - lint-with-py2-tools
             - lint-with-py3-tools
             - test
           context: laa-cla-public-live-0
-      - staging_deploy_approval:
+      - live_0_staging_deploy_approval:
           type: approval
           requires:
-            - build
-      - staging_deploy:
+            - live_0_build
+      - live_0_staging_deploy:
           requires:
-            - staging_deploy_approval
+            - live_0_staging_deploy_approval
           context: laa-cla-public-live-0
-      - production_deploy_approval:
+      - live_0_production_deploy_approval:
           type: approval
           requires:
-            - staging_deploy
+            - live_0_staging_deploy
           filters:
             branches:
               only:
                 - master
-      - production_deploy:
+      - live_0_production_deploy:
           requires:
-            - production_deploy_approval
+            - live_0_production_deploy_approval
           context: laa-cla-public-live-0
+      - build:
+          name: live_1_build
+          requires:
+            - lint-with-py2-tools
+            - lint-with-py3-tools
+            - test
+          context: laa-cla-public-live-1
+      - live_1_staging_deploy_approval:
+          type: approval
+          requires:
+            - live_1_build
+      - live_1_staging_deploy:
+          requires:
+            - live_1_staging_deploy_approval
+          context: laa-cla-public-live-1
+      - live_1_production_deploy_approval:
+          type: approval
+          requires:
+            - live_1_staging_deploy
+          filters:
+            branches:
+              only:
+                - master
+      - live_1_production_deploy:
+          requires:
+            - live_1_production_deploy_approval
+          context: laa-cla-public-live-1
