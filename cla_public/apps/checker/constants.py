@@ -1,6 +1,6 @@
 # coding: utf-8
-from flask.ext.babel import lazy_gettext as _, lazy_pgettext
-
+from flask.ext.babel import lazy_gettext as _
+from extended_choices import Choices
 
 "Categories the user needs help with"
 CATEGORIES = [
@@ -149,15 +149,12 @@ ORGANISATION_CATEGORY_MAPPING = {
     "Trouble with the police": "Action against police",
 }
 
-CONTACT_SAFETY = (
-    ("SAFE", lazy_pgettext(context=u"It is", string=u"Yes")),
-    ("NO_MESSAGE", lazy_pgettext(context=u"It isn’t", string=u"No")),
-)
+SAFE_TO_CONTACT = "SAFE"
 
-CONTACT_PREFERENCE = (
-    ("call", _(u"I’ll call CLA")),
-    ("callback", _(u"Call me back")),
-    ("thirdparty", _(u"Call someone else instead of me")),
+CONTACT_PREFERENCE = Choices(
+    ("CALL", "call", _(u"I’ll call CLA")),
+    ("CALLBACK", "callback", _(u"Call me back")),
+    ("THIRDPARTY", "thirdparty", _(u"Call someone else instead of me")),
 )
 
 LEGAL_ADVISER_SEARCH_PREFERENCE = (("location", _(u"Location")), ("organisation", _(u"Organisation")))

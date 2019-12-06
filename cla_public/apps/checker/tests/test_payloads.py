@@ -11,7 +11,7 @@ from werkzeug.datastructures import MultiDict
 
 from cla_public import app
 from cla_public.apps.contact.tests.test_availability import override_current_time
-from cla_public.apps.checker.constants import NO, YES, CONTACT_SAFETY, CONTACT_PREFERENCE
+from cla_public.apps.checker.constants import NO, YES, SAFE_TO_CONTACT, CONTACT_PREFERENCE
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.means_test import (
     AboutYouPayload,
@@ -389,7 +389,7 @@ class TestApiPayloads(unittest.TestCase):
         form_data.pop("callback-contact_number")
         form_data.pop("callback-time-specific_day")
         form_data.pop("callback-time-time_today")
-        form_data["contact_type"] = CONTACT_PREFERENCE[0][0]
+        form_data["contact_type"] = CONTACT_PREFERENCE.CALL
 
         with override_current_time(self.now):
             payload = self.form_payload(ContactForm, form_data)
@@ -397,25 +397,24 @@ class TestApiPayloads(unittest.TestCase):
 
     def test_safe_to_contact_when_contact_type_is_callback(self):
         form_data = self.application_form_data()
-        form_data["contact_type"] = CONTACT_PREFERENCE[1][0]
+        form_data["contact_type"] = CONTACT_PREFERENCE.CALLBACK
 
         with override_current_time(self.now):
             payload = self.form_payload(ContactForm, form_data)
-            self.assertEqual(payload["personal_details"]["safe_to_contact"], CONTACT_SAFETY[0][0])
+            self.assertEqual(payload["personal_details"]["safe_to_contact"], SAFE_TO_CONTACT)
 
     def test_safe_to_contact_when_contact_type_is_thirdparty(self):
         form_data = self.application_form_data()
-        form_data["contact_type"] = CONTACT_PREFERENCE[2][0]
+        form_data["contact_type"] = CONTACT_PREFERENCE.THIRDPARTY
+        parent_guardian = THIRDPARTY_RELATIONSHIP[0][0]
         thirdparty = {
             "full_name": form_data["full_name"],
             "contact_number": "00000000000",
-            "relationship": THIRDPARTY_RELATIONSHIP[0][0],
+            "relationship": parent_guardian,
         }
         form_data.update(flatten_dict("thirdparty", thirdparty))
 
         with override_current_time(self.now):
             payload = self.form_payload(ContactForm, form_data)
             self.assertEqual(payload["personal_details"]["safe_to_contact"], "")
-            self.assertEqual(
-                payload["thirdparty_details"]["personal_details"]["safe_to_contact"], CONTACT_SAFETY[0][0]
-            )
+            self.assertEqual(payload["thirdparty_details"]["personal_details"]["safe_to_contact"], SAFE_TO_CONTACT)

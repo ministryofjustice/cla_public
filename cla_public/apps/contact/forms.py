@@ -11,7 +11,7 @@ from wtforms.validators import InputRequired, Optional, Required, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
 from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
-from cla_public.apps.checker.constants import CONTACT_SAFETY, CONTACT_PREFERENCE
+from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
@@ -162,7 +162,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             local = local_tz.localize(naive)
             return local.astimezone(pytz.utc).isoformat()
 
-        safe_to_contact = CONTACT_SAFETY[0][0] if self.contact_type.data == CONTACT_PREFERENCE[1][0] else ""
+        safe_to_contact = SAFE_TO_CONTACT if self.contact_type.data == CONTACT_PREFERENCE.CALLBACK else ""
         data = {
             "personal_details": {
                 "full_name": self.full_name.data,
@@ -187,7 +187,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             data["thirdparty_details"] = {"personal_details": {}}
             data["thirdparty_details"]["personal_details"]["full_name"] = self.thirdparty.full_name.data
             data["thirdparty_details"]["personal_details"]["mobile_phone"] = self.thirdparty.contact_number.data
-            data["thirdparty_details"]["personal_details"]["safe_to_contact"] = CONTACT_SAFETY[0][0]
+            data["thirdparty_details"]["personal_details"]["safe_to_contact"] = SAFE_TO_CONTACT
             data["thirdparty_details"]["personal_relationship"] = self.thirdparty.relationship.data
 
             data["requires_action_at"] = process_selected_time(self.thirdparty.form.time)
