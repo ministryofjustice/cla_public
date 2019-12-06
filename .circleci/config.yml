@@ -183,6 +183,7 @@ workflows:
             - lint-with-py2-tools
             - lint-with-py3-tools
             - test
+          context: laa-cla-public-live-0
       - staging_deploy_approval:
           type: approval
           requires:
@@ -190,6 +191,7 @@ workflows:
       - staging_deploy:
           requires:
             - staging_deploy_approval
+          context: laa-cla-public-live-0
       - production_deploy_approval:
           type: approval
           requires:
@@ -201,3 +203,4 @@ workflows:
       - production_deploy:
           requires:
             - production_deploy_approval
+          context: laa-cla-public-live-0
