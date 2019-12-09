@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: laa-cla-public
+  namespace: laa-cla-public-staging
+spec:
+  tls:
+  - hosts:
+    - laa-cla-public-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+  rules:
+  - host: laa-cla-public-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: laa-cla-public
+          servicePort: 80
