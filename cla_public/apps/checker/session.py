@@ -20,7 +20,6 @@ from cla_public.apps.checker.constants import (
     PASSPORTED_BENEFITS,
     YES,
     END_SERVICE_FLASH_MESSAGE,
-    CONTACT_SAFETY,
     CONTACT_PREFERENCE,
 )
 from cla_public.apps.checker.means_test import MeansTest
@@ -246,9 +245,6 @@ class CheckerSession(SecureCookieSession, SessionMixin):
             "outcome": outcome,
             "adaptations": [k for k, v in self.checker.get("ContactForm", {}).get("adaptations", {}).items() if v],
         }
-        if self.stored["callback_requested"]:
-            form_value = self.checker.get("ContactForm", {}).get(self.checker.contact_type, {}).get("safe_to_contact")
-            self.stored["safe_to_contact"] = form_value == CONTACT_SAFETY[0][0]
 
     def store(self, values_dict):
         self.stored.update(values_dict)

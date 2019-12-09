@@ -3354,8 +3354,8 @@ msgid "We will leave a message when we call."
 msgstr "Byddwn yn gadael neges pan fyddwn yn eich ffonio."
 
 #: cla_public/templates/emails/confirmation.txt:42
-msgid "We will not leave a message when we call, as you have told us not to."
-msgstr "Ni fyddwn yn gadael neges pan fyddwn yn eich ffonio, gan eich bod wedi dweud wrthym i beidio."
+msgid "We will not leave a message when we call."
+msgstr "Ni fyddwn yn gadael neges pan fyddwn yn eich ffonio."
 
 #: cla_public/templates/emails/confirmation.txt:45
 msgid ""

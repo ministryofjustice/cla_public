@@ -3161,7 +3161,7 @@ msgid "We will leave a message when we call."
 msgstr ""
 
 #: cla_public/templates/emails/confirmation.txt:42
-msgid "We will not leave a message when we call, as you have told us not to."
+msgid "We will not leave a message when we call."
 msgstr ""
 
 #: cla_public/templates/emails/confirmation.txt:45

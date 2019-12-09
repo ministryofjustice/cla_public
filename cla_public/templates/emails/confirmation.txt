@@ -36,11 +36,7 @@
   {%- endif -%}
 {%- endif %}
 
-{% if data.safe_to_contact -%}
-  {{ _('We will leave a message when we call.') }}
-{%- else -%}
-  {{ _('We will not leave a message when we call, as you have told us not to.') }}
-{%- endif %}
+{{ _('We will not leave a message when we call.') }}
 
 {{ _('If you miss the call or you need advice urgently, you can call us on 0345 345 4345. Please quote your reference number when you call.') }}
 

@@ -43,10 +43,7 @@ def create_confirmation_email(data):
         callback_time = session.stored.get("callback_time")
         end_time = callback_time + datetime.timedelta(minutes=30)
         data.update(
-            {
-                "safe_to_contact": session.stored.get("safe_to_contact"),
-                "callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M"),
-            }
+            {"callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")}
         )
 
     recipient = (data["full_name"], data["email"]) if data.get("full_name") else data["email"]

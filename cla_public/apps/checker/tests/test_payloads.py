@@ -3,6 +3,7 @@ import datetime
 import unittest
 
 from cla_common import call_centre_availability
+from cla_common.constants import THIRDPARTY_RELATIONSHIP
 from flask import session
 from mock import patch
 import pytz
@@ -10,7 +11,7 @@ from werkzeug.datastructures import MultiDict
 
 from cla_public import app
 from cla_public.apps.contact.tests.test_availability import override_current_time
-from cla_public.apps.checker.constants import NO, YES
+from cla_public.apps.checker.constants import NO, YES, SAFE_TO_CONTACT, CONTACT_PREFERENCE
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.means_test import (
     AboutYouPayload,
@@ -86,7 +87,11 @@ class TestApiPayloads(unittest.TestCase):
     def test_your_benefits_form_no_passported(self):
         form_data = {"benefits": {"other-benefit": True}}
         payload = self.payload(YourBenefitsPayload, form_data)
-        self.assertTrue(all(map(lambda (benefit, selected): not selected, payload["specific_benefits"].items())))
+
+        def get_selected(item):
+            return not item[1]
+
+        self.assertTrue(all(map(get_selected, payload["specific_benefits"].items())))
         self.assertFalse(payload["on_passported_benefits"])
 
     def test_your_benefits_form_child_benefits(self):
@@ -94,7 +99,11 @@ class TestApiPayloads(unittest.TestCase):
         form_data = {"benefits": {"child_benefit": True}}
         form_data = self.merge_money_intervals(form_data, form_mi_data)
         payload = self.payload(YourBenefitsPayload, form_data)
-        self.assertTrue(all(map(lambda (benefit, selected): not selected, payload["specific_benefits"].items())))
+
+        def get_selected(item):
+            return not item[1]
+
+        self.assertTrue(all(map(get_selected, payload["specific_benefits"].items())))
         self.assertFalse(payload["on_passported_benefits"])
         self.assertEqual(payload["you"]["income"]["child_benefits"]["per_interval_value"], 2100)
 
@@ -345,7 +354,7 @@ class TestApiPayloads(unittest.TestCase):
             "callback-time-time_today": "1930",
         }
 
-        callback_data = {"contact_number": "000000000", "safe_to_contact": YES}
+        callback_data = {"contact_number": "000000000"}
 
         address_data = {"post_code": "POSTCODE", "street_address": "21 Jump Street"}
 
@@ -364,7 +373,6 @@ class TestApiPayloads(unittest.TestCase):
             self.assertEqual(payload["personal_details"]["postcode"], "POSTCODE")
             self.assertEqual(payload["personal_details"]["mobile_phone"], "000000000")
             self.assertEqual(payload["personal_details"]["street"], "21 Jump Street")
-            self.assertEqual(payload["personal_details"]["safe_to_contact"], YES)
 
             self.assertEqual(payload["adaptation_details"]["bsl_webcam"], True)
             self.assertEqual(payload["adaptation_details"]["minicom"], True)
@@ -375,3 +383,38 @@ class TestApiPayloads(unittest.TestCase):
             time = datetime.datetime.combine(call_centre_availability.current_datetime().date(), datetime.time(19, 30))
 
             self.assertEqual(payload["requires_action_at"], time.replace(tzinfo=pytz.utc).isoformat())
+
+    def test_safe_to_contact_when_contact_type_is_call(self):
+        form_data = self.application_form_data()
+        form_data.pop("callback-contact_number")
+        form_data.pop("callback-time-specific_day")
+        form_data.pop("callback-time-time_today")
+        form_data["contact_type"] = CONTACT_PREFERENCE.CALL
+
+        with override_current_time(self.now):
+            payload = self.form_payload(ContactForm, form_data)
+            self.assertEqual(payload["personal_details"]["safe_to_contact"], "")
+
+    def test_safe_to_contact_when_contact_type_is_callback(self):
+        form_data = self.application_form_data()
+        form_data["contact_type"] = CONTACT_PREFERENCE.CALLBACK
+
+        with override_current_time(self.now):
+            payload = self.form_payload(ContactForm, form_data)
+            self.assertEqual(payload["personal_details"]["safe_to_contact"], SAFE_TO_CONTACT)
+
+    def test_safe_to_contact_when_contact_type_is_thirdparty(self):
+        form_data = self.application_form_data()
+        form_data["contact_type"] = CONTACT_PREFERENCE.THIRDPARTY
+        parent_guardian = THIRDPARTY_RELATIONSHIP[0][0]
+        thirdparty = {
+            "full_name": form_data["full_name"],
+            "contact_number": "00000000000",
+            "relationship": parent_guardian,
+        }
+        form_data.update(flatten_dict("thirdparty", thirdparty))
+
+        with override_current_time(self.now):
+            payload = self.form_payload(ContactForm, form_data)
+            self.assertEqual(payload["personal_details"]["safe_to_contact"], "")
+            self.assertEqual(payload["thirdparty_details"]["personal_details"]["safe_to_contact"], SAFE_TO_CONTACT)

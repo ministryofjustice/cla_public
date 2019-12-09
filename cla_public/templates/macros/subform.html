@@ -21,7 +21,6 @@
       </ul>
     </div>
     {{ Form.group(form.callback.contact_number, field_attrs={'class': 'm-large', 'autocomplete': 'tel', 'type': 'tel'}) }}
-    {{ Form.group(form.callback.safe_to_contact) }}
     {{ time_picker(form.callback.time) }}
   {% endcall %}
 {% endmacro %}
@@ -51,7 +50,6 @@
     {{ Form.group(form.thirdparty.full_name, field_attrs={'class': 'm-large'}) }}
     {{ Form.group(form.thirdparty.relationship) }}
     {{ Form.group(form.thirdparty.contact_number, field_attrs={'class': 'm-large', 'autocomplete': 'tel', 'type': 'tel'}) }}
-    {{ Form.group(form.thirdparty.safe_to_contact) }}
     {{ time_picker(form.thirdparty.time) }}
   {% endcall %}
 {% endmacro %}
