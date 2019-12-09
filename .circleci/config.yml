@@ -17,7 +17,7 @@ jobs:
             if [ -z "$CIRCLE_PR_NUMBER" ]; then
               apk add --no-cache --no-progress py2-pip
               pip install awscli
-              ecr_login="$(aws ecr get-login --region eu-west-1 --no-include-email)"
+              ecr_login="$(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)"
               ${ecr_login}
             else
               echo "We do not need to authenticate for forked pull requests."
