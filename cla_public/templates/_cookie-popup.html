@@ -1,18 +1,18 @@
    <div class="gem-c-cookie-banner__wrapper govuk-width-container">
-      <p class="gem-c-cookie-banner__message">We use cookies to make the site simpler.</p>
+      <p class="gem-c-cookie-banner__message">{% trans %}We use cookies to make the site simpler.{% endtrans %}</p>
       <div class="gem-c-cookie-banner__buttons">
         <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-accept">
-          <button class="gem-c-button govuk-button gem-c-button--secondary gem-c-button--inline" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">Accept cookies</button>
+          <button class="gem-c-button govuk-button gem-c-button--secondary gem-c-button--inline" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">{% trans %}Accept cookies{% endtrans %}</button>
         </div>
         <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-settings">
-          <a class="gem-c-button govuk-button gem-c-button--secondary gem-c-button--inline" role="button" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked" href="/cookie-settings">Cookie settings</a>
+          <a class="gem-c-button govuk-button gem-c-button--secondary gem-c-button--inline" role="button" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked" href="/cookie-settings">{% trans %}Cookie settings{% endtrans %}</a>
         </div>
       </div>
     </div>
 
   <div class="gem-c-cookie-banner__confirmation govuk-width-container" tabindex="-1">
     <p class="gem-c-cookie-banner__confirmation-message">
-      You’ve accepted all cookies. You can <a class="govuk-link" href="/cookie-settings" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked from confirmation">change your cookie settings</a> at any time.
+      {% trans %}You’ve accepted all cookies. You can <a class="govuk-link" href="/cookie-settings" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked from confirmation">change your cookie settings</a> at any time.{% endtrans %}
     </p>
-    <button class="gem-c-cookie-banner__hide-button" data-hide-cookie-banner="true" data-module="track-click" data-track-category="cookieBanner" data-track-action="Hide cookie banner">Hide</button>
+    <button class="gem-c-cookie-banner__hide-button" data-hide-cookie-banner="true" data-module="track-click" data-track-category="cookieBanner" data-track-action="Hide cookie banner">{% trans %}Hide{% endtrans %}</button>
   </div>
