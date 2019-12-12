@@ -3,39 +3,70 @@
 
 <section class="find-legal-adviser">
   {% if not hide_subtitle %}
-    <h2>{{ _('Find a legal adviser') }}</h2>
+    <h2 class="govuk-heading-m">{{ _('Find a legal adviser') }}</h2>
   {% endif %}
 
-  <form class="legal-adviser-search" method="GET">
-    {% call Form.fieldset(form.postcode, class_=' ', field_as_label=True) %}
-      {{ Form.text_input(form.postcode) }}
-      {% if category %}
-        <input type="hidden" name="category" value="{{ category }}" />
-      {% endif %}
-      <button class="button" type="submit">{{ _('Search') }}</button>
-    {% endcall %}
+  <form method="GET">
+    {{ Form.postcode_input(form.postcode) }}
+    {% if category %}
+      <div class="govuk-form-group">
+        <input class="govuk-input govuk-input--width-10" id="postcode" type="hidden" name="category" value="{{ category }}" />
+      </div>
+    {% endif %}
+    <button class="govuk-button" type="submit">
+      {{ _('Search') }}
+    </button>
   </form>
+  
+  {% if request and request.args and request.args.get('postcode') and request.args.get('postcode')|length > 2 and request.args.get('postcode')|length < 9 %}
+    {% set scot_postcode = "AB DD DG EH FK G1 G2 G3 G4 G5 G6 G7 G8 G9 G0 HS IV KA KW KY ML PA PH TD ZE" %}
+    {% set ni_postcode = "BT" %}
+    {% if request.args.get('postcode')[:2]|upper in scot_postcode 
+    or request.args.get('postcode')[:2]|upper in ni_postcode
+    or request.args.get('postcode')[:2]|upper == "IM" 
+    or request.args.get('postcode')[:2]|upper == "GY" 
+    or request.args.get('postcode')[:2]|upper == "JE"
+    %}
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Warning</span>
+          {% if request.args.get('postcode')[:2]|upper in scot_postcode %}
+            Legal Aid is different in Scotland. Visit 
+            <a class="govuk-link" href="https://www.mygov.scot/legal-aid/">mygov.scot</a> 
+            for more information.
+          {% elif request.args.get('postcode')[:2]|upper in ni_postcode %}
+            Legal Aid is different in Northern Ireland. Visit 
+            <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/legal-aid-schemes">nidirect.gov.uk</a> 
+            for more information.
+          {% elif request.args.get('postcode')[:2]|upper == "IM" %}
+            Legal Aid is different on the Isle of Man. Visit 
+            <a class="govuk-link" href="https://www.gov.im/categories/benefits-and-financial-support/legal-aid/">gov.im</a> 
+            for more information.
+          {% elif request.args.get('postcode')[:2]|upper == "JE"  %}
+            Legal Aid is different in Jersey. Visit 
+            <a class="govuk-link" href="https://www.legalaid.je/">legalaid.je</a> 
+            for more information.
+          {% elif request.args.get('postcode')[:2]|upper == "GY" %}
+            Legal Aid is different in Guernsey. Visit 
+            <a class="govuk-link" href="https://www.gov.gg/legalaid">gov.gg</a> 
+            for information about the process in Guernsey.
+          {% endif %}
+        </strong>
+      </div>
+    {% endif %}
+  {% endif %}
 
   {% if data and data.count and data.count > 0 %}
-    <p class="results-summary">
+    <p class="govuk-body">
       {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
       <span class="results-location">{{ data.origin.postcode }}</span>
       {% if category_name %}
         {{ _('for') }}
-        <span class="results-filter org-category">
-          {{ category_name }}
-          <a
-            class="filter-remove"
-            href="{{ url_for(request.url_rule.endpoint, postcode=request.args['postcode']) }}"
-            title="{{ _('Remove filter') }}"
-          >
-            <i class="icon icon-remove"></i>
-            {{ _('Remove') }}
-          </a>
-        </span>
+          <strong class="govuk-!-font-weight-bold">{{ category_name|lower }}</strong>.
       {% endif %}
     </p>
-
+    
     <div class="search-results-container">
       {% if data.origin %}
         <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
@@ -127,7 +158,7 @@
     </div>
   {% elif 'count' in data and data.count == 0 %}
     {% call Element.alert('error', title=_('No results')) %}
-      <p>
+      <p class="govuk-body">
         {% trans %}We couldn't find any results for your search.
         We are constantly updating our records so please try again later.{% endtrans %}
       </p>

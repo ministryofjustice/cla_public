@@ -3171,12 +3171,22 @@ msgstr "Dylech gysylltu â chynghorydd cymorth cyfreithiol yn eich ardal,\nall e
 msgid "Legal aid is not usually available for advice about personal injury"
 msgstr "Fel arfer ni fydd cymorth cyfreithiol ar gael ar gyfer cyngor ar anafiadau personol."
 
+#: cla_public/templates/checker/result/face-to-face.html:
+msgid "What happens next"
+msgstr "Beth fydd yn digwydd nesaf"
+
 #: cla_public/templates/checker/result/face-to-face.html:40
 msgid ""
 "You may be able to get legal aid in exceptional cases. You\n"
 "          could seek advice from a legal adviser about whether an application\n"
 "          might succeed in your case and how to apply."
 msgstr "Efallai y bydd cymorth cyfreithiol yn dal ar gael mewn achosion eithriadol. Gallech chi\nofyn am gyngor gan gynghorydd cyfreithiol ynghylch a fydd cais am gymorth cyfreithiol \nyn debygol o lwyddo yn eich achos chi a sut i wneud cais."
+
+#: cla_public/templates/checker/result/face-to-face.html:53
+msgid "\n"
+"        Your adviser will check whether you qualify for legal aid <strong>at\n"
+"        no cost to you</strong> by asking about your problem and your finances.\n      "
+msgstr "Bydd eich cynghorydd yn gwirio a ydych chi’n gymwys i gael cymorth cyfreithiol am ddim drwy ofyn cwestiynau i chi am eich problem a’ch amgylchiadau ariannol."
 
 #: cla_public/templates/checker/result/face-to-face.html:53
 msgid ""
