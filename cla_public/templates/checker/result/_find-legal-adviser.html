@@ -38,6 +38,17 @@
         </span>
       {% endif %}
     </p>
+    
+    {% if data.origin.postcode|slice:"0:2" = "ZE" }
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Warning</span>
+          Legal Aid is different in Scotland.
+        </strong>
+        <p class=govuk-body">Visit <a class="govuk-link" href="https://www.mygov.scot/legal-aid/">the mygov.scot website</a> for information about the process in Scotland.</p>
+      </div>
+    {% endif %}
 
     <div class="search-results-container">
       {% if data.origin %}
