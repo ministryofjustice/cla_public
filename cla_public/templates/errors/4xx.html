@@ -3,9 +3,11 @@
 {% set title = 'Bad request' %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
+{% block error_class %}gds-header__error{% endblock %}
+
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
-  <p>{{ _('Please return to the <a href="/">Find out if Civil Legal Advice can help you</a> page and try again.') }}</p>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <p class="govuk-body">{{ _('Please return to the <a class="govuk-link" href="/">Find out if Civil Legal Advice can help you</a> page and try again.') }}</p>
 {% endblock %}
 
 {% block javascripts %}{% endblock %}

@@ -1,6 +1,6 @@
-@import "govuk_frontend_toolkit/stylesheets/colours";
-@import "govuk_frontend_toolkit/stylesheets/grid_layout";
-@import "govuk_frontend_toolkit/stylesheets/typography";
+@import "govuk_frontend_toolkit/stylesheets/colours"; /*to be removed*/
+@import "govuk_frontend_toolkit/stylesheets/grid_layout"; /*to be removed*/
+@import "govuk_frontend_toolkit/stylesheets/typography"; /*to be removed*/
 
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
@@ -9,15 +9,11 @@
  * govuk_frontend_toolkit has been deprecated
  * Starting using recommended govuk_frontend
  */
-$govuk-use-legacy-font: true;
+$govuk-images-path: "/static/images/";
+$govuk-fonts-path: "/static/images/fonts/";
+$govuk-use-legacy-font: false;
 $govuk-typography-use-rem: false;
-@import "govuk/objects/all";
-@import "govuk/components/button/button";
-@import "govuk/components/radios/radios";
-@import "govuk/components/label/label";
-@import "govuk/components/fieldset/fieldset";
-@import "govuk/components/hint/hint";
-@import "govuk/core/links";
+@import "govuk/all";
 
 /**
  * Some components are not yet part of govuk_frontend
@@ -51,12 +47,7 @@ $govuk-typography-use-rem: false;
 
 html {
   height: 100%;
-}
-
-body {
-  background-color: white;
-  background-image: linear-gradient(white 400px, $grey-3 400px);
-  min-height: 100%;
+  font-size:initial;
 }
 
 @media print {
@@ -141,5 +132,38 @@ hr {
 }
 
 .styled-list li {
-    list-style: disc;
+  list-style: disc;
+}
+
+.gds-header__error {
+  border-bottom: 10px solid $govuk-error-colour;
+}
+
+.gem-c-button {
+  font-size: 19px;
+  line-height: 1;
+  border-width: 2px;
+}
+
+.gem-c-button {
+  font-size: 19px;
+  line-height: 1;
+  border-width: 2px;
+}
+
+.gem-c-button--secondary{
+  border:2px solid;
+  &:hover {
+    border-color: #00692f;
+    color: #00692f;
+    background-color: #f8f8f8;
+    text-decoration: none;
+  }
+  &:focus &:link:focus {
+    outline: none;
+    border-color: $govuk-focus-colour;
+    color: $govuk-link-active-colour;
+    background-color: $govuk-focus-colour;
+    box-shadow: 0 2px 0 $govuk-link-active-colour;
+  }
 }

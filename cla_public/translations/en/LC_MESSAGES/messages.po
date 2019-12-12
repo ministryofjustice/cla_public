@@ -3194,7 +3194,7 @@ msgid "Sorry, this page doesn’t exist"
 msgstr ""
 
 #: cla_public/templates/errors/404.html:7
-msgid "Please return to the <a href=\"/\">Can I get legal aid?</a> page and try again."
+msgid "Please return to the <a class=\"govuk-link\" href=\"/\">Can I get legal aid?</a> page and try again."
 msgstr ""
 
 #: cla_public/templates/errors/4xx.html:8
