@@ -22,7 +22,7 @@
     {% if category == 'clinneg' %}
       <div class="govuk-panel govuk-panel--confirmation">
         <h1 class="govuk-panel__title">
-          Application complete{{ _('A legal adviser may be able to help you') }}
+          {{ _('A legal adviser may be able to help you') }}
         </h1>
       </div>
       <p class="govuk-body">
@@ -30,7 +30,7 @@
           clinical negligence if your child has suffered a brain injury during pregnancy,
           birth or in the first 8 weeks of life.{% endtrans %}
       </p>
-
+      <h2 class="govuk-heading-m">What happens next</h2>
       <p class="govuk-body">
         {% trans %}You should contact a legal aid adviser in your area,
             who may be able to help.{% endtrans %}
@@ -47,30 +47,36 @@
           could seek advice from a legal adviser about whether an application
           might succeed in your case and how to apply.{% endtrans %}
       </p>
-
+      <h2 class="govuk-heading-m">What happens next</h2>
     {% elif category == 'debt' or category == 'housing' %}
        <div class="govuk-panel govuk-panel--confirmation">
         <h1 class="govuk-panel__title">
           {{ _('A legal adviser may be able to help you') }}
         </h1>
       </div>
+      <h2 class="govuk-heading-m">What happens next</h2>
     {% else %}
        <div class="govuk-panel govuk-panel--confirmation">
         <h1 class="govuk-panel__title">
           {{ _('A legal adviser may be able to help you') }}
         </h1>
       </div>
+      <h2 class="govuk-heading-m">What happens next</h2>
     {% endif %}
 
     <p class="govuk-body">
-      {% trans %}Your adviser will check whether you qualify for legal aid at
-          no cost to you by asking about your problem and your finances.{% endtrans %}
-      {% trans %}In some cases you may need to pay a contribution towards your legal aid.{% endtrans %}
+      {% trans %}
+        Your adviser will check whether you qualify for legal aid <strong>at
+        no cost to you</strong> by asking about your problem and your finances.
+      {% endtrans %}
+      {% trans %}
+        In some cases you may need to pay a contribution towards your legal aid.
+      {% endtrans %}
     </p>
 
     <p class="govuk-body">
       {% trans %}
-          <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">What did you think of this service?</a> (takes 30 seconds)
+        <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">What did you think of this service?</a> (takes 30 seconds)
       {% endtrans %}
     </p>
 
