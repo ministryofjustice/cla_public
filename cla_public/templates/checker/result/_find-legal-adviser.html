@@ -7,13 +7,11 @@
   {% endif %}
 
   <form class="legal-adviser-search" method="GET">
-    {% call Form.fieldset(form.postcode, class_=' ', field_as_label=True) %}
-      {{ Form.text_input(form.postcode) }}
-      {% if category %}
-        <input type="hidden" name="category" value="{{ category }}" />
-      {% endif %}
-      <button class="button" type="submit">{{ _('Search') }}</button>
-    {% endcall %}
+    {{ Form.text_input(form.postcode) }}
+    {% if category %}
+      <input type="hidden" name="category" value="{{ category }}" />
+    {% endif %}
+    <button class="button" type="submit">{{ _('Search') }}</button>
   </form>
 
   {% if data and data.count and data.count > 0 %}
