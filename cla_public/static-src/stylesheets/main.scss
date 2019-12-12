@@ -136,6 +136,13 @@ hr {
   border-bottom: 10px solid $govuk-error-colour;
 }
 
+.legal-aid-unavailable {
+  background-color: $govuk-error-colour;
+  
+  h1.govuk-panel__title:before {
+    content: "✗ ";
+  }
+}
 
 /*******
 Added in these button stylings for cookie banner 12/2019 [MjB]
