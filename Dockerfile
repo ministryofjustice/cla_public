@@ -37,7 +37,12 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
-COPY ./docker/supervisord-services.ini /etc/supervisor.d/
+
+RUN mkdir /var/run/supervisor/
+RUN chown -R www-data: /var/run/
+RUN chown -R www-data: /var/log/
+RUN chown -R www-data /var/tmp/nginx
+RUN chown -R www-data /var/lib/nginx/
 
 COPY . .
 
@@ -46,6 +51,6 @@ RUN ./node_modules/.bin/gulp build && \
     pybabel compile -f -d cla_public/translations
 
 USER 1000
-EXPOSE 80
+EXPOSE 8000
 
-CMD ["supervisord", "--nodaemon"]
+CMD ["supervisord", "--configuration=/home/app/flask/docker/supervisord.conf"]
