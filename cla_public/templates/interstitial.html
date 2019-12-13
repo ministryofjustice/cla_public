@@ -8,12 +8,14 @@
 
 {% block sidebar %}
   <aside class="sidebar">
-    <h2>{{ _('To qualify for legal aid:') }}</h2>
-    <ul>
+    <h2 class="govuk-heading-m">{{ _('To qualify for legal aid:') }}</h2>
+    <ul class="govuk-list govuk-list--bullet">
       <li>{{ _('your income (or combined income if you have a partner) shouldn’t be more than £2,657 a month before tax') }}</li>
       <li>{{ _('your savings (or combined savings if you have a partner) shouldn’t be more than £8,000') }}</li>
     </ul>
-    <p><small>{{ _('These limits can vary in certain circumstances – for example, if you need advice about domestic abuse.') }}</small></p>
+    <p class="govuk-body-s">
+      {{ _('These limits can vary in certain circumstances – for example, if you need advice about domestic abuse.') }}
+    </p>
   </aside>
 {% endblock %}
 
