@@ -19,22 +19,22 @@
 
 {% block inner_content %}
 
-  <h1 class="page-title">{{ title }}</h1>
-
-  <p class="subtitle">
+  <h1 class="govuk-heading-xl">>
+    {{ title }}
+  </h1>
+  <div class="govuk-inset-text">
     {{ _('However, you must also qualify financially.') }}
-  </p>
-
-  <p>
+  </div>
+  <p class="govuk-body">
     {{ _('If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),
     a national helpline for certain legal aid problems in England and Wales.') }}
   </p>
-  <p>
+  <p class="govuk-body">
     {{ _('The CLA operator will check all the information you’ve given through this service.') }}
     {{ _('You’ll need to provide evidence of your finances and a specialist will ask you about your case in more detail before your application can progress.') }}
   </p>
-  <p>{{ _('To complete the financial assessment, you and your partner (if you have one) will need:') }}</p>
-  <ul>
+  <p class="govuk-body">{{ _('To complete the financial assessment, you and your partner (if you have one) will need:') }}</p>
+  <ul class="govuk-list govuk-list--bullet">
     <li>{{ _('recent payslips (if you’re working) and bank statements') }}</li>
     <li>{{ _('a summary of your income tax and National Insurance contributions') }}</li>
     <li>{{ _('details of any savings and investments you have') }}</li>
@@ -42,15 +42,13 @@
     <li>{{ _('mortgage statements and a current valuation for any property you own') }}</li>
   </ul>
 
-  <p>{% trans url=url_for('contact.get_in_touch') %}
-    If you’re under 18, you should <a href="{{ url }}">contact CLA</a>
+  <p class="govuk-body">{% trans url=url_for('contact.get_in_touch') %}
+    If you’re under 18, you should <a class="govuk-link" href="{{ url }}">contact CLA</a>
     without completing the financial assessment.{% endtrans %}
   </p>
 
-  <p>
-    {% trans %}If you’re deaf or hard of hearing you can book a <a href="http://www.interpretingline.co.uk/vbooking.html">
-        British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will  get back
-        to you to complete the eligibility check and provide any further advice.{% endtrans %}
+  <p class="govuk-body">
+    {% trans %}If you’re deaf or hard of hearing you can book a <a class="govuk-link" href="http://www.interpretingline.co.uk/vbooking.html"> British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice.{% endtrans %}
   </p>
 
   <p class="form-actions">
@@ -59,26 +57,26 @@
     </a>
   </p>
 
-  <hr>
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-  <p>
+  <p class="govuk-body">
     {{ _('Alternatively, you can ask a legal aid adviser to take on your case.') }}
   </p>
-  <p>
+  <p class="govuk-body">
     {{ _('Your adviser will check whether you qualify for legal aid at no cost to you by asking about your problem and your finances.') }}
     {{ _('If you qualify, in some cases you may need to pay a contribution towards your legal aid.') }}
   </p>
-  <p>
+  <p class="govuk-body">
     {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'Find a legal adviser') %}
-    <a class="field-more-info-toggle" href="{{ url_for('.laalaa') }}?category={{ category }}" data-ga="{{ ga_event }}">{{ _('Find a legal adviser') }}</a>
   </p>
+  <a class="govuk-link" href="{{ url_for('.laalaa') }}?category={{ category }}" data-ga="{{ ga_event }}">{{ _('Find a legal adviser') }}</a>
 
   {% if organisations %}
-    <hr>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
     {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=1) %}
-      <h2>{{ _('Other sources of help') }}</h2>
-      <p>
+      <h2 class="govuk-heading-l">{{ _('Other sources of help') }}</h2>
+      <p class="govuk-body">
         {% trans category_name=category_name|lower %}
           You can also get advice from this alternative help organisation for issues related to {{ category_name }}.
           {% pluralize %}
