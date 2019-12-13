@@ -19,12 +19,12 @@
 
 {% block inner_content %}
 
-  <h1 class="govuk-heading-xl">>
+  <h1 class="govuk-heading-xl">
     {{ title }}
   </h1>
-  <div class="govuk-inset-text">
+  <p class="govuk-body-l">
     {{ _('However, you must also qualify financially.') }}
-  </div>
+  </p>
   <p class="govuk-body">
     {{ _('If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),
     a national helpline for certain legal aid problems in England and Wales.') }}
@@ -51,13 +51,14 @@
     {% trans %}If you’re deaf or hard of hearing you can book a <a class="govuk-link" href="http://www.interpretingline.co.uk/vbooking.html"> British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice.{% endtrans %}
   </p>
 
-  <p class="form-actions">
-    <a class="button button-get-started" href="{{ url_for('.wizard', step='about') }}" role="button">
-      {{ _('Check if you qualify financially') }}
-    </a>
-  </p>
+  <a class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" href="{{ url_for('.wizard', step='about') }}" role="button">
+    {{ _('Check if you qualify financially') }}
+    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" role="presentation" focusable="false">
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </a>
 
-  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+  <h2 class="govuk-heading-m">{% trans %}Before you start{% endtrans %}</h2>
 
   <p class="govuk-body">
     {{ _('Alternatively, you can ask a legal aid adviser to take on your case.') }}
@@ -72,10 +73,8 @@
   <a class="govuk-link" href="{{ url_for('.laalaa') }}?category={{ category }}" data-ga="{{ ga_event }}">{{ _('Find a legal adviser') }}</a>
 
   {% if organisations %}
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
     {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=1) %}
-      <h2 class="govuk-heading-l">{{ _('Other sources of help') }}</h2>
+      <h2 class="govuk-heading-m">{{ _('Other sources of help') }}</h2>
       <p class="govuk-body">
         {% trans category_name=category_name|lower %}
           You can also get advice from this alternative help organisation for issues related to {{ category_name }}.
