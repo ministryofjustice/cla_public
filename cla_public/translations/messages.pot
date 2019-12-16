@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-12-09 17:15+0000\n"
+"POT-Creation-Date: 2019-12-16 12:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1119,6 +1119,151 @@ msgstr ""
 msgid "Leave this field empty"
 msgstr ""
 
+#: cla_public/templates/_cookie-consent-form.html:3
+msgid "Your cookie settings were saved"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:4
+msgid "Government services may set additional cookies and, if so, will have their own cookie policy and banner."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:6
+msgid "Go back to the page you were looking at"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:11
+msgid "Cookies are files saved on your phone, tablet or computer when you visit a website."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:12
+msgid "We use cookies to store information about how you use ‘Check you can get legal aid’, such as the pages you visit."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:14
+#: cla_public/templates/_cookie-popup.html:8
+msgid "Cookie settings"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:17
+msgid "We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:19
+msgid "reloading the page"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:20
+msgid "turning on Javascript in your browser"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:26
+msgid "We use different types of cookies. You can choose which cookies you're happy for us to use and how the data is shared."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:29
+msgid "Strictly necessary cookies"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:30
+msgid "We use essential cookies to help you use the ‘Check you can get legal aid’ service. These do things such as:"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:32
+msgid "remember your progress through our service"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:33
+msgid "remember you have seen the cookies message"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:34
+msgid "remember the language you have selected to view our service"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:36
+msgid "These cookies need to be on to give you the best experience using the service."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:37
+msgid "Read more about cookies on 'Check if you can get legal aid'</a>"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:42
+msgid "Cookies used to improve 'Check you can get legal aid'"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:44
+msgid "We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs. We do not allow Google to use or share the data about how you use this site."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:45
+msgid "You agree to the Ministry of Justice using your data to help improve the 'Check if you can get legal aid' service."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:51
+#: cla_public/templates/_cookie-consent-form.html:73
+msgid "On"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:57
+#: cla_public/templates/_cookie-consent-form.html:79
+msgid "Off"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:65
+msgid "Cookies used by the Government Digital Service (GDS)"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:67
+msgid "You agree to the Government Digital Service collecting your data to improve the user experience across government digital services."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:83
+msgid "Find out how data is shared when you use this service"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:86
+msgid "Save changes"
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:2
+msgid "We use cookies to make the site simpler."
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:5
+msgid "Accept cookies"
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:15
+msgid "You’ve accepted all cookies. You can <a class=\"govuk-link\" href=\"/cookie-settings\" data-module=\"track-click\" data-track-category=\"cookieBanner\" data-track-action=\"Cookie banner settings clicked from confirmation\">change your cookie settings</a> at any time."
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:17
+msgid "Hide"
+msgstr ""
+
+#: cla_public/templates/_modal-dialog.html:5
+msgid "Your application will time out soon"
+msgstr ""
+
+#: cla_public/templates/_modal-dialog.html:12
+#: cla_public/templates/checker/about.html:38
+#: cla_public/templates/checker/additional-benefits.html:20
+#: cla_public/templates/checker/benefits.html:21
+#: cla_public/templates/checker/income.html:61
+#: cla_public/templates/checker/property.html:51
+#: cla_public/templates/checker/savings.html:35
+msgid "Continue"
+msgstr ""
+
+#: cla_public/templates/_modal-dialog.html:13
+msgid "Exit service"
+msgstr ""
+
+#: cla_public/templates/_phase-tag.html:16
+msgid "Contact us</a> if you need help or would like to give feedback to improve this service"
+msgstr ""
+
 #: cla_public/templates/_resources.html:1
 msgid "Resources"
 msgstr ""
@@ -1329,6 +1474,10 @@ msgstr ""
 
 #: cla_public/templates/contact.html:173
 msgid "Request failed: "
+msgstr ""
+
+#: cla_public/templates/cookie-settings.html:9
+msgid "Change your cookie settings"
 msgstr ""
 
 #: cla_public/templates/cookies.html:11
@@ -2569,6 +2718,10 @@ msgid ""
 "      you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
 msgstr ""
 
+#: cla_public/templates/privacy.html:625
+msgid "Tel: 0303 123 1113"
+msgstr ""
+
 #: cla_public/templates/privacy.html:631
 msgid "Changes to the statement"
 msgstr ""
@@ -2624,15 +2777,6 @@ msgstr ""
 
 #: cla_public/templates/checker/_progress.html:73
 msgid "Contact information"
-msgstr ""
-
-#: cla_public/templates/checker/about.html:38
-#: cla_public/templates/checker/additional-benefits.html:20
-#: cla_public/templates/checker/benefits.html:21
-#: cla_public/templates/checker/income.html:61
-#: cla_public/templates/checker/property.html:51
-#: cla_public/templates/checker/savings.html:35
-msgid "Continue"
 msgstr ""
 
 #: cla_public/templates/checker/about.html:45
