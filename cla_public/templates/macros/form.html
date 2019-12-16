@@ -55,7 +55,7 @@
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
 
   <span id="{{ field.id }}-hint" class="govuk-hint">
-    Select all that apply.
+    {{ trans }}Select all that apply{{ endtrans }}
   </span>
   {{ render_field_errors(field.errors) if field and field.errors}}
   {{ render_field_description(field) }}
@@ -218,18 +218,18 @@
     - errors <object> WTForm field.errors
 #}
 {% macro render_field_errors(errors) %}
-  <div class="form-row field-error">
-    {% set errors = errors.values() if errors is mapping else errors %}
+  {% set errors = errors.values() if errors is mapping else errors %}
+  <span id="passport-issued-error" class="govuk-error-message">
     {% for error in errors %}
       {% if error is string or error == error|string %}
-        <p>{{error}}</p>
+        <span class="govuk-visually-hidden">{{ trans }}Error{{ endtrans }}:</span> {{error}}
       {% else %}
         {% for line in error %}
-          <p>{{line}}</p>
+          <span class="govuk-visually-hidden">{{ trans }}Error{{ endtrans }}:</span> {{line}}
         {% endfor %}
       {% endif %}
     {% endfor %}
-  </div>
+  </span>
 {% endmacro %}
 
 
@@ -317,8 +317,11 @@
   {% if input_type == 'radio' %}
     <div class="govuk-radios">
     {% for option in field %}
+      {% if option.data in separated_options %}
+        <div class="govuk-radios__divider">or</div>
+      {% endif %}
       <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="{{option.id}}" type="radio" name="{{field.id}}" value="{{option.value}}" >
+        <input class="govuk-radios__input" id="{{option.id}}" type="radio" name="{{field.id}}" value="{{option.data}}" >
         <label class="govuk-label govuk-radios__label" for="{{option.id}}">
           {{ option.label.text }}
         </label>
@@ -331,8 +334,11 @@
   {% else %}
     <div class="govuk-checkboxes">
     {% for option in field %}
+      {% if option.data in separated_options %}
+        <div class="govuk-radios__divider">or</div>
+      {% endif %}
       <div class="govuk-checkboxes__item">
-        <input class="govuk-checkboxes__input" id="{{option.id}}" type="checkbox" name="{{field.id}}" value="{{option.data}}" >
+        <input class="govuk-checkboxes__input" {% if option.checked %}checked{% endif %} id="{{option.id}}" type="checkbox" name="{{field.id}}" value="{{option.data}}" >
         <label class="govuk-label govuk-checkboxes__label" for="{{option.id}}">
           {{ option.label.text }}
         </label>
@@ -410,19 +416,23 @@
               {% if form['properties']|length > 1 %}
                 <h4>{{ _('Property') }} {{ loop.index }}</h4>
               {% endif %}
-              <ul class="error-summary">
-                {% for field_name in property_form.errors.keys() %}
-                  <li>{{ show_field_error(property_form[field_name]) }}</li>
-                {% endfor %}
-              </ul>
+              <div class="govuk-error-summary__body">
+                <ul class="govuk-list govuk-error-summary__list">
+                  {% for field_name in property_form.errors.keys() %}
+                    <li>{{ show_field_error(property_form[field_name]) }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
             {% endif %}
           {% endfor %}
         {% else %}
-          <ul class="error-summary">
-            {% for field_name in form.errors.keys() %}
-              <li>{{ show_field_error(form[field_name]) }}</li>
-            {% endfor %}
-          </ul>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% for field_name in form.errors.keys() %}
+                <li>{{ show_field_error(form[field_name]) }}</li>
+              {% endfor %}
+            </ul>
+          </div>
         {% endif %}
       {% endcall %}
     {% endif %}

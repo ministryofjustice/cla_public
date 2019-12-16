@@ -7,16 +7,22 @@
 {% endmacro %}
 
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
-
   <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% call Form.fieldset(form.benefits, field_as_label=True) %}
-      {{ Form.option_list(form.benefits, separated_options=['other-benefit'], callback=option_list_callback) }}
-    {% endcall %}
-
+    <div class="govuk-form-group">
+      <fieldset aria-describedby="reasons-hint" class="govuk-fieldset {% if form.errors %}govuk-form-group--error{% endif %}" id="field-benefits">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl" id="field-label-benefits">
+          <h1 class="govuk-fieldset__heading">
+            {{ title }}
+          </h1>
+        </legend>
+        {% call Form.tickboxes(form.benefits, field_as_label=True) %}
+          {{ Form.radio_tick_list(form.benefits, separated_options=['other-benefit'], callback=option_list_callback) }}
+        {% endcall %}
+      </fieldset>
+    </div>
     {{ Form.honeypot(form) }}
     {{ Form.actions(_('Continue')) }}
   </form>

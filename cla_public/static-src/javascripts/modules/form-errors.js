@@ -177,6 +177,8 @@
 
         if(!label.length) {
           unattachedErrors = _.extend(unattachedErrors, errors);
+        } else if(label.parent().children(".govuk-hint").length) {
+          insertError(label.parent().children(".govuk-hint"), errors, fieldName);
         } else if(label.is('legend')) {
           insertError(label, errors, fieldName);
         } else {
@@ -237,9 +239,13 @@
     },
 
     clearErrors: function() {
+      $('.govuk-error-message').remove();
       $('.form-row.field-error').remove();
       $('form>.alert.alert-error').remove();
       $('.form-error')
+        .removeClass('form-error')
+        .removeAttr('aria-invalid');
+      $('.govuk-form-group--error')
         .removeClass('form-error')
         .removeAttr('aria-invalid');
     }
