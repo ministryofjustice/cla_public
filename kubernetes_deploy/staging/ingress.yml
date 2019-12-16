@@ -7,8 +7,19 @@ spec:
   tls:
   - hosts:
     - laa-cla-public-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+  - hosts:
+    - staging.checklegalaid.service.gov.uk
+    secretName: tls-certificate
+
   rules:
   - host: laa-cla-public-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: laa-cla-public
+          servicePort: 80
+  - host: staging.checklegalaid.service.gov.uk
     http:
       paths:
       - path: /
