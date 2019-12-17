@@ -43,7 +43,7 @@ class TestSessionBackedFormView(unittest.TestCase):
         with self.client as client:
             form_data = {}
             self.assertEqual(
-                '<input id="name" name="name" type="text" value=""> "{% trans %}This field is required.{% endtrans %}",
+                '<input id="name" name="name" type="text" value=""> "This field is required.",
                 client.post("/", data=form_data).data,
             )
             self.assertFalse("TestForm" in session.checker)
