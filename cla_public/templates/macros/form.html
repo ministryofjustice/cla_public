@@ -284,7 +284,7 @@
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
     {% if field and field.errors %}
       <span id="{{field.id}}-error" class="govuk-error-message">
-        <span class="govuk-visually-hidden">Error:</span> {{ field.errors[0] }}
+        <span class="govuk-visually-hidden">{{ trans }}Error{{ endtrans }}:</span> {{ field.errors[0] }}
       </span>
       {% set class_ = "govuk-input--error" %}
     {% endif %}
