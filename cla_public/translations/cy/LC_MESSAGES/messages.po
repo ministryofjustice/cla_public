@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-12-16 12:47+0000\n"
+"POT-Creation-Date: 2019-12-17 12:49+0000\n"
 "PO-Revision-Date: 2016-05-13 14:23+0000\n"
 "Last-Translator: Josh Rowe <josh.rowe@digital.justice.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/ministry-of-justice/cla-public/language/cy/)\n"
@@ -1177,8 +1177,8 @@ msgid "remember your progress through our service"
 msgstr "cofio sut rydych yn symud ymlaen wrth ddefnyddio’n gwasanaeth"
 
 #: cla_public/templates/_cookie-consent-form.html:33
-msgid "cofio eich bod wedi gweld y neges cwcis"
-msgstr ""
+msgid "remember you have seen the cookies message"
+msgstr "cofio eich bod wedi gweld y neges cwcis"
 
 #: cla_public/templates/_cookie-consent-form.html:34
 msgid "remember the language you have selected to view our service"
@@ -1564,7 +1564,7 @@ msgstr "yr hyn yr ydych yn glicio arno tra'r ydych yn ymweld â'r safle"
 
 #: cla_public/templates/cookies.html:43
 msgid "We don’t collect or store your personal information so this information can’t be used to identify who you are. For more information visit our <a href=\"/privacy\">Privacy policy</a>."
-msgstr "Nid ydym yn casglu nac yn storio eich gwybodaeth bersonol, felly ni ellir defnyddio'r wybodaeth hon i ddatgelu pwy ydych chi.  Am ragor o wybodaeth, darllenwch eich Polisi Preifatrwydd"
+msgstr "Nid ydym yn casglu nac yn storio eich gwybodaeth bersonol, felly ni ellir defnyddio'r wybodaeth hon i ddatgelu pwy ydych chi.  Am ragor o wybodaeth, darllenwch eich <a href=\"/privacy\">Polisi Preifatrwydd</a>"
 
 #: cla_public/templates/cookies.html:46
 msgid "We don’t allow Google to use or share our analytics data."
@@ -1982,9 +1982,7 @@ msgid ""
 "The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other\n"
 "    organisations who deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> service. For example this digital service is managed by the Ministry of\n"
 "    Justice."
-msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (CLA). 
-
-Mae’r Asiantaeth Cymorth Cyfreithiol yn gweithio gyda sefydliadau eraill sy’n darparu’r gwasanaeth CLA. Er enghraifft, mae’r gwasanaeth digidol hwn yn cael ei reoli gan y Weinyddiaeth Gyfiawnder."
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (CLA). Mae’r Asiantaeth Cymorth Cyfreithiol yn gweithio gyda sefydliadau eraill sy’n darparu’r gwasanaeth CLA. Er enghraifft, mae’r gwasanaeth digidol hwn yn cael ei reoli gan y Weinyddiaeth Gyfiawnder."
 
 #: cla_public/templates/privacy.html:23
 msgid ""
@@ -2153,9 +2151,7 @@ msgstr "Darparu gwybodaeth a/neu wasanaethau cyngor i chi;"
 
 #: cla_public/templates/privacy.html:146
 msgid "Save you from repeating information every time you contact us;"
-msgstr "Eich arbed rhag ailadrodd gwybodaeth bob tro y byddwch yn cysylltu â ni;
-
-"
+msgstr "Eich arbed rhag ailadrodd gwybodaeth bob tro y byddwch yn cysylltu â ni"
 
 #: cla_public/templates/privacy.html:147
 msgid "Help us monitor and improve our service;"
@@ -2165,17 +2161,13 @@ msgstr "Ein helpu i fonitro a gwella ein gwasanaeth;"
 msgid ""
 "Build statistics about the <abbr>CLA</abbr> service, monitor fraud and justify public expenditure.\n"
 "      This information is collated in an anonymous format;"
-msgstr "Adeiladu ystadegau am y gwasanaeth CLA, monitro twyll a chyfiawnhau gwariant cyhoeddus.
-
-Mae’r wybodaeth hon yn cael ei choladu mewn fformat dienw;"
+msgstr "Adeiladu ystadegau am y gwasanaeth CLA, monitro twyll a chyfiawnhau gwariant cyhoeddus. Mae’r wybodaeth hon yn cael ei choladu mewn fformat dienw;"
 
 #: cla_public/templates/privacy.html:153
 msgid ""
 "Collect views on the <abbr>CLA</abbr> service and any improvements considered necessary.\n"
 "      Where consent is provided, <abbr>CLA</abbr> User contact details may be passed onto an independent research agency;"
-msgstr "Casglu barn am y gwasanaeth CLA ac unrhyw welliannau y credir bod eu hangen.
-
-Lle rhoddir cydsyniad, mae’n bosibl y bydd manylion cysylltu defnyddiwr CLA yn cael eu pasio ymlaen i asiantaeth ymchwil annibynnol;"
+msgstr "Casglu barn am y gwasanaeth CLA ac unrhyw welliannau y credir bod eu hangen. Lle rhoddir cydsyniad, mae’n bosibl y bydd manylion cysylltu defnyddiwr CLA yn cael eu pasio ymlaen i asiantaeth ymchwil annibynnol;"
 
 #: cla_public/templates/privacy.html:156
 msgid "Prevent or detect crime or fraud; and"
@@ -2275,9 +2267,7 @@ msgid ""
 "        Please note that transmitting information over the internet is generally not completely secure, and\n"
 "        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
 "        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
-msgstr "Pan fyddwch yn cysylltu â CLA ar-lein, bydd y data personol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel.
-
-Sylwer nad yw trawsyrru gwybodaeth dros y rhyngrwyd yn gwbl ddiogel bob amser, ac ni all CLA warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru. Mae gan CLA weithdrefnau a nodweddion diogelwch er mwyn cadw eich data’n ddiogel ar ôl i ni eu derbyn."
+msgstr "Pan fyddwch yn cysylltu â CLA ar-lein, bydd y data personol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel. Sylwer nad yw trawsyrru gwybodaeth dros y rhyngrwyd yn gwbl ddiogel bob amser, ac ni all CLA warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru. Mae gan CLA weithdrefnau a nodweddion diogelwch er mwyn cadw eich data’n ddiogel ar ôl i ni eu derbyn."
 
 #: cla_public/templates/privacy.html:233
 msgid ""
@@ -2289,13 +2279,7 @@ msgid ""
 "        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
 "        <br><br>\n"
 "        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
-msgstr "Nid yw trawsyrru gwybodaeth drwy e-bost yn gwbl ddiogel bob amser, ac ni all CLA warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru.
-
-Mae gan CLA weithdrefnau a nodweddion diogelwch i gadw eich data’n ddiogel ar ôl i ni eu derbyn.
-
-Pan fyddwch yn anfon e-bost i CLA, bydd data personol perthnasol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel.
-
-Mae’n bosibl y bydd CLA yn monitro ac yn storio negeseuon e-bost y byddwch yn eu derbyn ac yn eu hanfon. Mae’n bosibl hefyd y byddwn yn defnyddio meddalwedd blocio."
+msgstr "Nid yw trawsyrru gwybodaeth drwy e-bost yn gwbl ddiogel bob amser, ac ni all CLA warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru. Mae gan CLA weithdrefnau a nodweddion diogelwch i gadw eich data’n ddiogel ar ôl i ni eu derbyn. Pan fyddwch yn anfon e-bost i CLA, bydd data personol perthnasol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel. Mae’n bosibl y bydd CLA yn monitro ac yn storio negeseuon e-bost y byddwch yn eu derbyn ac yn eu hanfon. Mae’n bosibl hefyd y byddwn yn defnyddio meddalwedd blocio."
 
 #: cla_public/templates/privacy.html:244
 msgid "Post"
@@ -2507,9 +2491,7 @@ msgstr "I’ch helpu i gael help a chyngor pellach gan sefydliadau priodol."
 
 #: cla_public/templates/privacy.html:387
 msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments.\n"
-msgstr "
-I wirio gwybodaeth a roddir gennych, wrth gynnal archwiliadau yn ymwneud â’n penderfyniadau ac asesiadau cymhwystra.
-"
+msgstr "I wirio gwybodaeth a roddir gennych, wrth gynnal archwiliadau yn ymwneud â’n penderfyniadau ac asesiadau cymhwystra."
 
 #: cla_public/templates/privacy.html:395
 msgid "When this is necessary, we will comply with all aspects of the relevant data protection laws."
@@ -2677,8 +2659,7 @@ msgstr "Ar gyfer pawb sy’n defnyddio’n gwasanaeth, enw a dau ddarn arall o d
 msgid ""
 "For everyone that asks <abbr>CLA</abbr> to check whether they qualify for legal aid in order to seek advice from a\n"
 "      <abbr>CLA</abbr> Specialist, details of any financial information and case details used to prove that you qualify for legal aid"
-msgstr "
-Ar gyfer pawb sy’n gofyn i CLA wirio a ydynt yn gymwys i gael cymorth cyfreithiol er mwyn gofyn am gyngor gan un o Arbenigwyr CLA, manylion unrhyw wybodaeth ariannol a manylion yr achos a ddefnyddir i brofi eich bod yn gymwys i gael cymorth cyfreithiol"
+msgstr "Ar gyfer pawb sy’n gofyn i CLA wirio a ydynt yn gymwys i gael cymorth cyfreithiol er mwyn gofyn am gyngor gan un o Arbenigwyr CLA, manylion unrhyw wybodaeth ariannol a manylion yr achos a ddefnyddir i brofi eich bod yn gymwys i gael cymorth cyfreithiol"
 
 #: cla_public/templates/privacy.html:530
 msgid ""
@@ -2707,17 +2688,15 @@ msgstr "Pan fyddwn yn casglu eich data personol, mae gennym ni gyfrifoldebau, ac
 
 #: cla_public/templates/privacy.html:550
 msgid "That you can withdraw consent at any time, where relevant;"
-msgstr Gallwch dynnu cydsyniad yn ôl unrhyw bryd, lle bo’n berthnasol;""
+msgstr "allwch dynnu cydsyniad yn ôl unrhyw bryd, lle bo’n berthnasol;""
 
 #: cla_public/templates/privacy.html:553
 msgid "That you can lodge a complaint with the supervisory authority;"
-msgstr "
-Gallwch gyflwyno cwyn i’r awdurdod sy’n goruchwylio;"
+msgstr "Gallwch gyflwyno cwyn i’r awdurdod sy’n goruchwylio;"
 
 #: cla_public/templates/privacy.html:556
 msgid "That we will protect and ensure that no unauthorised person has access to it;"
-msgstr "
-Byddwn yn cadw’r data’n ddiogel ac yn sicrhau na fydd neb yn cael mynediad atynt heb ganiatâd;"
+msgstr "Byddwn yn cadw’r data’n ddiogel ac yn sicrhau na fydd neb yn cael mynediad atynt heb ganiatâd;"
 
 #: cla_public/templates/privacy.html:559
 msgid "That your personal data is shared with other organisations only for legitimate purposes;"
@@ -3985,4 +3964,7 @@ msgstr "Dod o hyd i gyfryngwr sy'n lleol i chi"
 
 #~ msgid "This service is only available if you are a resident of England or Wales."
 #~ msgstr "Mae'r gwasanaeth hwn ar gael os ydych yn preswylio yng Nghymru a Lloegr yn unig."
+
+#~ msgid "cofio eich bod wedi gweld y neges cwcis"
+#~ msgstr ""
 
