@@ -1,5 +1,7 @@
 {% if request.is_xhr %}
-  {% include "checker/result/_find-legal-adviser.html" %}
+  {% with postcode_info=postcode_info  %}
+    {% include "checker/result/_find-legal-adviser.html" %}
+  {% endwith %}
 {% else %}
 
   {% extends "base.html" %}
@@ -68,7 +70,7 @@
         <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
           {% trans %}What did you think of this service?{% endtrans %}
         </a> ({% trans %}takes 30 seconds{% endtrans %})
-      
+
     </p>
 
     {% if category == 'mentalhealth' %}
@@ -80,7 +82,9 @@
 
     {% endif %}
 
+  {% with postcode_info=postcode_info  %}
     {% include "checker/result/_find-legal-adviser.html" %}
+  {% endwith %}
     {% include "checker/time-out-warning.html" %}
   {% endblock %}
 
