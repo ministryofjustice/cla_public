@@ -144,7 +144,7 @@
 {% macro render_field_label(field, hide_label=False) %}
   {% if field %}
     {% if field.flags.optional %}
-      {% set label_text = field.label.text + ' <span class="form-optional">{% trans %}optional{% endtrans %}</span>' %}
+      {% set label_text = field.label.text + ' <span class="form-optional">optional</span>' %}
     {% else %}
       {% set label_text = field.label.text %}
     {% endif %}
