@@ -5,7 +5,7 @@ metadata:
     kubernetes.io/change-cause: "<to be filled in deploy_to_kubernetes script>"
   name: laa-cla-public
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -36,13 +36,17 @@ spec:
           name: http
         env:
         - name: CLA_ENV
-          value: production
+          value: prod
         - name: BACKEND_BASE_URI
           value: https://fox.civillegaladvice.service.gov.uk
         - name: LAALAA_API_HOST
           value: https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk
         - name: LOG_LEVEL
           value: INFO
+        - name: MOJ_GA_ID
+          value: UA-37377084-21
+        - name: GDS_GA_ID
+          value: UA-145652997-1
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
