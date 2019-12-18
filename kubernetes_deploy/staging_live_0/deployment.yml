@@ -46,8 +46,8 @@ spec:
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
-              name: flask-secret-key
-              key: SECRET_KEY
+              name: clasecret
+              key: flask_secret_key
         - name: OS_PLACES_API_KEY
           valueFrom:
             secretKeyRef:
