@@ -20,19 +20,19 @@ spec:
         readinessProbe:
           httpGet:
             path: /ping.json
-            port: 80
+            port: 8000
           initialDelaySeconds: 5
           timeoutSeconds: 1
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /ping.json
-            port: 80
+            port: 8000
           initialDelaySeconds: 10
           timeoutSeconds: 1
           periodSeconds: 10
         ports:
-        - containerPort: 80
+        - containerPort: 8000
           name: http
         env:
         - name: CLA_ENV
@@ -50,8 +50,8 @@ spec:
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
-              name: clasecret
-              key: flask_secret_key
+              name: flask-secret-key
+              key: SECRET_KEY
         - name: OS_PLACES_API_KEY
           valueFrom:
             secretKeyRef:

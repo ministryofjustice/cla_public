@@ -5,12 +5,12 @@ metadata:
     kubernetes.io/change-cause: "<to be filled in deploy_to_kubernetes script>"
   name: laa-cla-public
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
         app: laa-cla-public-app
-        env: staging
+        env: production
         service_area: laa-get-access
         service_team: cla-fala
     spec:
@@ -36,18 +36,22 @@ spec:
           name: http
         env:
         - name: CLA_ENV
-          value: staging
+          value: prod
         - name: BACKEND_BASE_URI
-          value: https://staging-backend.cla.dsd.io/
+          value: https://fox.civillegaladvice.service.gov.uk
         - name: LAALAA_API_HOST
-          value: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+          value: https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk
         - name: LOG_LEVEL
           value: INFO
+        - name: MOJ_GA_ID
+          value: UA-37377084-21
+        - name: GDS_GA_ID
+          value: UA-145652997-1
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
-              name: flask-secret-key
-              key: SECRET_KEY
+              name: clasecret
+              key: flask_secret_key
         - name: OS_PLACES_API_KEY
           valueFrom:
             secretKeyRef:

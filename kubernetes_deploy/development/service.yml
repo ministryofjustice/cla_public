@@ -7,7 +7,7 @@ spec:
   ports:
   - port: 80
     name: http
-    targetPort: 80
+    targetPort: 8000
     nodePort: 30000
   selector:
     app: laa-cla-public-app

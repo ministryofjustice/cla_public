@@ -6,7 +6,7 @@ metadata:
   labels:
     grafana_dashboard: ""
 data:
-  laa-cla-public-staging-dashboard.json: |
+  laa-cla-public-production-dashboard.json: |
     {
       "__inputs": [
         {
@@ -446,7 +446,6 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "LAA CLA public",
-      "uid": "54de8aa09ac1531a5ffbac20dde2e95ce9b0adbb",
+      "title": "LAA CLA Public Production",
       "version": 1
     }

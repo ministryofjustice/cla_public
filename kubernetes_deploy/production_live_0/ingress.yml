@@ -2,24 +2,24 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: laa-cla-public
-  namespace: laa-cla-public-staging
+  namespace: laa-cla-public-production
 spec:
   tls:
   - hosts:
-    - laa-cla-public-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+    - laa-cla-public-production.apps.cloud-platform-live-0.k8s.integration.dsd.io
   - hosts:
-    - staging.checklegalaid.service.gov.uk
-    secretName: tls-certificate
+    - checklegalaid.service.gov.uk
+    secretName: laa-cla-public-production-tls-certificate
 
   rules:
-  - host: laa-cla-public-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+  - host: laa-cla-public-production.apps.cloud-platform-live-0.k8s.integration.dsd.io
     http:
       paths:
       - path: /
         backend:
           serviceName: laa-cla-public
           servicePort: 80
-  - host: staging.checklegalaid.service.gov.uk
+  - host: checklegalaid.service.gov.uk
     http:
       paths:
       - path: /

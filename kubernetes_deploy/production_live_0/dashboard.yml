@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: laa-cla-public-dashboard
-  namespace: laa-cla-public-staging
+  namespace: laa-cla-public-production
   labels:
     grafana_dashboard: ""
 data:
@@ -446,6 +446,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "LAA CLA Public Staging",
+      "title": "LAA CLA public",
+      "uid": "54de8aa09ac1531a5ffbac20dde2e95ce9b0adbb",
       "version": 1
     }
