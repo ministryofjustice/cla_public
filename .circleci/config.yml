@@ -131,7 +131,7 @@ jobs:
             source env/bin/activate
             python manage.py test
 
-  live_1_staging_deploy:
+  staging_deploy:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
@@ -146,7 +146,7 @@ jobs:
           command: .circleci/deploy_to_kubernetes staging
       - slack/status
 
-  live_1_production_deploy:
+  production_deploy:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
@@ -169,29 +169,28 @@ workflows:
       - lint-with-py3-tools
       - test
       - build:
-          name: live_1_build
           requires:
             - lint-with-py2-tools
             - lint-with-py3-tools
             - test
           context: laa-cla-public-live-1
-      - live_1_staging_deploy_approval:
+      - staging_deploy_approval:
           type: approval
           requires:
-            - live_1_build
-      - live_1_staging_deploy:
+            - build
+      - staging_deploy:
           requires:
-            - live_1_staging_deploy_approval
+            - staging_deploy_approval
           context: laa-cla-public-live-1
-      - live_1_production_deploy_approval:
+      - production_deploy_approval:
           type: approval
           requires:
-            - live_1_staging_deploy
+            - staging_deploy
           filters:
             branches:
               only:
                 - master
-      - live_1_production_deploy:
+      - production_deploy:
           requires:
-            - live_1_production_deploy_approval
+            - production_deploy_approval
           context: laa-cla-public-live-1
