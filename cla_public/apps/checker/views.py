@@ -289,9 +289,7 @@ class LaaLaaView(views.MethodView):
 
     @classmethod
     def get_extra_postcode_context(cls, postcode):
-        if not postcode:
-            return {}
-        prefix = postcode[:2].upper()
+        prefix = postcode[:2].upper() if postcode else ""
         scottish_postcode_prefix = cls.get_scottish_postcode_prefixes()
         return {
             "postcode_info": {
