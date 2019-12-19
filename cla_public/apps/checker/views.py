@@ -333,6 +333,7 @@ class LaaLaaView(views.MethodView):
             "ZE",
         ]
 
+
 checker.add_url_rule("/find-a-legal-adviser", view_func=LaaLaaView.as_view("laalaa"))
 
 
