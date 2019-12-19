@@ -276,7 +276,7 @@ class LaaLaaView(views.MethodView):
         return self.render(
             category=category,
             category_name=category_name,
-            extra_context=self._get_extra_postcode_context(request.args.get("postcode")),
+            extra_context=self.get_extra_postcode_context(request.args.get("postcode")),
         )
 
     def render(self, category, category_name, extra_context={}):
@@ -288,11 +288,24 @@ class LaaLaaView(views.MethodView):
         )
 
     @classmethod
-    def _get_extra_postcode_context(cls, postcode):
+    def get_extra_postcode_context(cls, postcode):
         if not postcode:
             return {}
         prefix = postcode[:2].upper()
-        scottish_postcode_prefix = [
+        scottish_postcode_prefix = cls.get_scottish_postcode_prefixes()
+        return {
+            "postcode_info": {
+                "is_scottish_postcode": prefix in scottish_postcode_prefix,
+                "is_ni_postcode": prefix == "BT",
+                "is_mann_postcode": prefix == "IM",
+                "is_jersey_postcode": prefix == "JE",
+                "is_guernsey_postcode": prefix == "GY",
+            }
+        }
+
+    @classmethod
+    def get_scottish_postcode_prefixes(cls):
+        return [
             "AB",
             "DD",
             "DG",
@@ -319,16 +332,6 @@ class LaaLaaView(views.MethodView):
             "TD",
             "ZE",
         ]
-        return {
-            "postcode_info": {
-                "is_scottish_postcode": prefix in scottish_postcode_prefix,
-                "is_ni_postcode": prefix == "BT",
-                "is_mann_postcode": prefix == "IM",
-                "is_jersey_postcode": prefix == "JE",
-                "is_guernsey_postcode": prefix == "GY",
-            }
-        }
-
 
 checker.add_url_rule("/find-a-legal-adviser", view_func=LaaLaaView.as_view("laalaa"))
 

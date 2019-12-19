@@ -5,6 +5,7 @@ from mock import patch
 
 from cla_public.app import create_app
 from cla_public.libs import laalaa
+from cla_public.apps.checker.views import LaaLaaView
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
 
@@ -180,3 +181,25 @@ class LaaLaaTest(unittest.TestCase):
             result = laalaa.find(postcode="SW1A 1AA", categories=["a", "b"])
             self.assertEquals(len(result["results"]), 6)
             self.assertEquals(result["count"], 6)
+
+    def test_postcode_info_is_scottish(self):
+        scottish_postcode_prefixes = LaaLaaView.get_scottish_postcode_prefixes()
+        for scottish_postcode_prefix in scottish_postcode_prefixes:
+            postcode_info = LaaLaaView.get_extra_postcode_context(scottish_postcode_prefix + "1AA")
+            self.assertTrue(postcode_info["postcode_info"]["is_scottish_postcode"])
+
+    def test_postcode_info_is_ni_postcode(self):
+        postcode_info = LaaLaaView.get_extra_postcode_context("BT1AA")
+        self.assertTrue(postcode_info["postcode_info"]["is_ni_postcode"])
+
+    def test_postcode_info_is_mann_postcode(self):
+        postcode_info = LaaLaaView.get_extra_postcode_context("IM1AA")
+        self.assertTrue(postcode_info["postcode_info"]["is_mann_postcode"])
+
+    def test_postcode_info_is_jersey_postcode(self):
+        postcode_info = LaaLaaView.get_extra_postcode_context("JE1AA")
+        self.assertTrue(postcode_info["postcode_info"]["is_jersey_postcode"])
+
+    def test_postcode_info_is_guernsey_postcode(self):
+        postcode_info = LaaLaaView.get_extra_postcode_context("GY1AA")
+        self.assertTrue(postcode_info["postcode_info"]["is_guernsey_postcode"])
