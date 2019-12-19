@@ -131,36 +131,6 @@ jobs:
             source env/bin/activate
             python manage.py test
 
-  live_0_staging_deploy:
-    docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-    steps:
-      - checkout
-      - run:
-          name: Initialise Kubernetes staging context
-          command: |
-            setup-kube-auth
-            kubectl config use-context staging
-      - deploy:
-          name: Deploy laa-cla-public to staging
-          command: .circleci/deploy_to_kubernetes_live_0 staging_live_0
-      - slack/status
-
-  live_0_production_deploy:
-    docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-    steps:
-      - checkout
-      - run:
-          name: Initialise Kubernetes production context
-          command: |
-            setup-kube-auth
-            kubectl config use-context production
-      - deploy:
-          name: Deploy laa-cla-public to production
-          command: .circleci/deploy_to_kubernetes_live_0 production_live_0
-      - slack/status
-
   live_1_staging_deploy:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
@@ -199,33 +169,6 @@ workflows:
       - lint-with-py3-tools
       - test
       - build:
-          name: live_0_build
-          requires:
-            - lint-with-py2-tools
-            - lint-with-py3-tools
-            - test
-          context: laa-cla-public-live-0
-      - live_0_staging_deploy_approval:
-          type: approval
-          requires:
-            - live_0_build
-      - live_0_staging_deploy:
-          requires:
-            - live_0_staging_deploy_approval
-          context: laa-cla-public-live-0
-      - live_0_production_deploy_approval:
-          type: approval
-          requires:
-            - live_0_staging_deploy
-          filters:
-            branches:
-              only:
-                - master
-      - live_0_production_deploy:
-          requires:
-            - live_0_production_deploy_approval
-          context: laa-cla-public-live-0
-      - build:
           name: live_1_build
           requires:
             - lint-with-py2-tools
@@ -248,7 +191,6 @@ workflows:
             branches:
               only:
                 - master
-                - feature/LGA-701-production-live-1
       - live_1_production_deploy:
           requires:
             - live_1_production_deploy_approval
