@@ -1,5 +1,7 @@
 {% if request.is_xhr %}
-  {% include "checker/result/_find-legal-adviser.html" %}
+  {% with postcode_info=postcode_info  %}
+    {% include "checker/result/_find-legal-adviser.html" %}
+  {% endwith %}
 {% else %}
 
   {% extends "base.html" %}
@@ -27,7 +29,9 @@
     </p>
 
     {% set hide_subtitle = True %}
-    {% include 'checker/result/_find-legal-adviser.html' %}
+    {% with postcode_info=postcode_info  %}
+      {% include "checker/result/_find-legal-adviser.html" %}
+    {% endwith %}
   {% endblock %}
 
   {% block javascripts %}

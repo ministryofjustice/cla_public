@@ -139,6 +139,14 @@ hr {
   border-bottom: 10px solid $govuk-error-colour;
 }
 
+.legal-aid-unavailable {
+  background-color: $govuk-error-colour;
+}
+
+.cla-postcode-text {
+  text-transform: uppercase;
+}
+
 .gem-c-button {
   font-size: 19px;
   line-height: 1;

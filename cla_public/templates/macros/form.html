@@ -279,6 +279,18 @@
   {% endif %}
 {% endmacro %}
 
+{% macro postcode_input(field, prefix=None, suffix=None, class_='', skip=False, default_value='0') %}
+  <div class="govuk-form-group {{"govuk-form-group--error" if field and field.errors}}">
+    <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
+    {% if field and field.errors %}
+      <span id="{{field.id}}-error" class="govuk-error-message">
+        <span class="govuk-visually-hidden">{{ trans }}Error{{ endtrans }}:</span> {{ field.errors[0] }}
+      </span>
+      {% set class_ = "govuk-input--error" %}
+    {% endif %}
+    {{ field(class_='govuk-input govuk-input--width-10 cla-postcode-text ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+  </div>
+{% endmacro %}
 
 {#
   A list of options (checkboxes/radios)
