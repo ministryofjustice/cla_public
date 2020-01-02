@@ -1746,15 +1746,12 @@ msgstr "datganiadau morgais a phrisiad cyfredol ar unrhyw eiddo yr ydych chi’n
 #, python-format
 msgid ""
 "\n"
-"    If you’re under 18, you should <a href=\"%(url)s\">contact CLA</a>\n"
+"    If you’re under 18, you should <a class=\"govuk-link\" href=\"%(url)s\">contact CLA</a>\n"
 "    without completing the financial assessment."
-msgstr "\n    Os ydych o dan 18 oed, dylech <a href=\"%(url)s\">gysylltu â’r CLA</a>\n    heb gwblhau’r asesiad ariannol."
+msgstr "\n    Os ydych o dan 18 oed, dylech <a class=\"govuk-link\" href=\"%(url)s\">gysylltu â’r CLA</a>\n    heb gwblhau’r asesiad ariannol."
 
 #: cla_public/templates/interstitial.html:51
-msgid ""
-"If you’re deaf or hard of hearing you can book a <a href=\"http://www.interpretingline.co.uk/vbooking.html\">\n"
-"        British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will  get back\n"
-"        to you to complete the eligibility check and provide any further advice."
+msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"http://www.interpretingline.co.uk/vbooking.html\"> British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
 msgstr ""
 
 #: cla_public/templates/interstitial.html:58
