@@ -2,7 +2,6 @@
 # coding: utf-8
 import logging
 import datetime
-import mock
 import os
 import subprocess
 import sys
@@ -11,7 +10,6 @@ from flask.ext.script import Manager, Shell, Server
 import requests
 
 from cla_public.app import create_app
-from cla_public.apps.contact.tests.test_availability import override_current_time
 
 
 log = logging.getLogger(__name__)
@@ -59,8 +57,8 @@ def make_messages():
     )
 
     pgettexts = [
-        {"context": "There is\/are", "message": "Yes"},
-        {"context": "There is\/are not", "message": "No"},
+        {"context": r"There is\/are", "message": "Yes"},
+        {"context": r"There is\/are not", "message": "No"},
         {"context": "It is", "message": "Yes"},
         {"context": "It isn’t", "message": "No"},
         {"context": "I am", "message": "Yes"},
@@ -123,14 +121,6 @@ class MockDate(datetime.date):
         return cls(2015, 1, 26)
 
 
-class MockServer(Server):
-    def __call__(self, *args, **kwargs):
-        with override_current_time(datetime.datetime(2015, 1, 26, 9, 0)):
-            with mock.patch("datetime.date", MockDate):
-                super(MockServer, self).__call__(*args, **kwargs)
-
-
-manager.add_command("mockserver", MockServer())
 manager.add_command("server", Server())
 manager.add_command("shell", Shell(make_context=_make_context))
 
