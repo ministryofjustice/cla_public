@@ -1,15 +1,19 @@
 {% extends "checker/base.html" %}
 
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
-  <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+  <h1 class="govuk-heading-xl">
+    {{ title }}
+  </h1>
+  <p class="govuk-body-l">
+    {{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}
+  </p>
 
   <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {% call Form.fieldset(form.benefits, field_as_label=True) %}
-      {{ Form.option_list(form.benefits) }}
+    {% call Form.tickbox_fieldset(form.benefits, field_as_label=True) %}
+      {{ Form.radio_tick_list(form.benefits) }}
     {% endcall %}
 
     {% call Form.fieldset(form.other_benefits, 'form-group') %}

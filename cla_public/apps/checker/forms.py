@@ -170,8 +170,8 @@ class YourBenefitsForm(BaseForm):
     @classproperty
     def title(self):
         if session and session.checker.has_partner:
-            return _(u"You and your partner’s benefits")
-        return _(u"Your benefits")
+            return _(u"Which benefits do you and your partner receive?")
+        return _(u"Which benefits do you receive?")
 
     benefits = PartnerMultiCheckboxField(
         label=_(u"Which benefits do you receive?"),
