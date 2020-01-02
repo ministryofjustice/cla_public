@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-12-19 11:48+0000\n"
+"POT-Creation-Date: 2020-01-02 12:28+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -1117,6 +1117,161 @@ msgstr ""
 
 #: cla_public/libs/honeypot.py:31
 msgid "Leave this field empty"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:3
+msgid "Your cookie settings were saved"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:4
+msgid "Government services may set additional cookies and, if so, will have their own cookie policy and banner."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:6
+msgid "Go back to the page you were looking at"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:11
+msgid "Cookies are files saved on your phone, tablet or computer when you visit a website."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:12
+msgid "We use cookies to store information about how you use ‘Check you can get legal aid’, such as the pages you visit."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:14
+#: cla_public/templates/_cookie-popup.html:8
+msgid "Cookie settings"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:17
+msgid "We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:19
+msgid "reloading the page"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:20
+msgid "turning on Javascript in your browser"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:26
+msgid "We use different types of cookies. You can choose which cookies you're happy for us to use and how the data is shared."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:29
+msgid "Strictly necessary cookies"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:30
+msgid "We use essential cookies to help you use the ‘Check you can get legal aid’ service. These do things such as:"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:32
+msgid "remember your progress through our service"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:33
+msgid "remember you have seen the cookies message"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:34
+msgid "remember the language you have selected to view our service"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:36
+msgid "These cookies need to be on to give you the best experience using the service."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:37
+msgid "Read more about cookies on 'Check if you can get legal aid'"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:42
+msgid "Cookies used to improve 'Check you can get legal aid'"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:45
+msgid ""
+"We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs. \n"
+"            We do not allow Google to use or share the data about how you use this site."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:49
+msgid "You agree to the Ministry of Justice using your data to help improve the 'Check if you can get legal aid' service."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:56
+#: cla_public/templates/_cookie-consent-form.html:78
+msgid "On"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:62
+#: cla_public/templates/_cookie-consent-form.html:84
+msgid "Off"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:70
+msgid "Cookies used by the Government Digital Service (GDS)"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:72
+msgid "You agree to the Government Digital Service collecting your data to improve the user experience across government digital services."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:91
+msgid "Find out how data is shared when you use this service"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:94
+msgid "Save changes"
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:2
+msgid "We use cookies to make the site simpler."
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:5
+msgid "Accept cookies"
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:15
+msgid "You’ve accepted all cookies. You can "
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:15
+msgid "change your cookie settings"
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:15
+msgid "at any time."
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:17
+msgid "Hide"
+msgstr ""
+
+#: cla_public/templates/_modal-dialog.html:5
+msgid "Your application will time out soon"
+msgstr ""
+
+#: cla_public/templates/_modal-dialog.html:12
+#: cla_public/templates/checker/about.html:38
+#: cla_public/templates/checker/additional-benefits.html:20
+#: cla_public/templates/checker/benefits.html:21
+#: cla_public/templates/checker/income.html:61
+#: cla_public/templates/checker/property.html:51
+#: cla_public/templates/checker/savings.html:35
+msgid "Continue"
+msgstr ""
+
+#: cla_public/templates/_modal-dialog.html:13
+msgid "Exit service"
+msgstr ""
+
+#: cla_public/templates/_phase-tag.html:13
+msgid "Contact us</a> if you need help or would like to give feedback to improve this service"
 msgstr ""
 
 #: cla_public/templates/_resources.html:1
@@ -2624,15 +2779,6 @@ msgstr ""
 msgid "Contact information"
 msgstr ""
 
-#: cla_public/templates/checker/about.html:38
-#: cla_public/templates/checker/additional-benefits.html:20
-#: cla_public/templates/checker/benefits.html:21
-#: cla_public/templates/checker/income.html:61
-#: cla_public/templates/checker/property.html:51
-#: cla_public/templates/checker/savings.html:35
-msgid "Continue"
-msgstr ""
-
 #: cla_public/templates/checker/about.html:45
 msgid "Are you in a dispute with your partner?"
 msgstr ""
@@ -3556,8 +3702,6 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid ""
-#~ "Your <a href=\"%(url)s\" aria-labelledby=\"aria-feedback\">feedback</a>\n"
-#~ "      will help us continue to improve this service."
 #~ msgstr ""
 
 #~ msgid "Feedback"
@@ -3594,55 +3738,14 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid ""
-#~ "\n"
-#~ "          You can also get advice from this alternative help organisation for issues related to %(category_name)s.\n"
-#~ "          "
 #~ msgid_plural ""
-#~ "\n"
-#~ "          You can also get advice from alternative help organisations for issues related to %(category_name)s.\n"
-#~ "        "
 #~ msgstr[0] ""
 #~ msgstr[1] ""
 
 #~ msgid "If you do not agree to these terms please do not use this service."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other\n"
-#~ "    organisations who deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> service. For example this digital service is managed by the Ministry of\n"
-#~ "    Justice."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "When you first make contact with <abbr title=\"Civil Legal Advice\">CLA</abbr> you will communicate with the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service, which is delivered by\n"
-#~ "    Agilisys (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr> on behalf of Freedom Communications, a contractor\n"
-#~ "    employed to deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service)."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "To provide you with the best service that we can, Civil Legal Advice may share some information about you\n"
-#~ "    with other organisations. But we will only do this if you have given us permission."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "In exceptional circumstances, we may share limited information about you without your consent. This would\n"
-#~ "    only be to prevent fraud, help detect crime, if it is required by law or by a court order or If we are\n"
-#~ "    very worried about your safety or the safety of others."
-#~ msgstr ""
-
 #~ msgid "Read the full Civil Legal Advice Privacy Statement here."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Personal data is information about you that can be used to identify you in some way\n"
-#~ "    e.g. your name or telephone number. You can look at the\n"
-#~ "    <a href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions#personal-data\" rel=\"external\">full legal definition</a>."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "<abbr title=\"Civil Legal Advice\">CLA</abbr> is committed to protecting your personal data and respecting your privacy.\n"
-#~ "    We are legally bound by the Data Protection Act 1998 to ensure that we only use your personal\n"
-#~ "    data for the reasons we tell you about. We must also hold it securely."
 #~ msgstr ""
 
 #~ msgid "What is Civil Legal Advice?"
@@ -3651,53 +3754,10 @@ msgstr ""
 #~ msgid "is a national adviceline for England and Wales, paid for by Legal Aid."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
-#~ "    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller\n"
-#~ "    for the purposes of the Data Protection Act 1998. They are responsible for determining the purposes for which\n"
-#~ "    and the manner in which any personal data are, or are to be processed."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "For a more comprehensive explanation see\n"
-#~ "    <a href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions#personal-data\" rel=\"external\">this guide</a>."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
-#~ "    For example when you first make contact with <abbr>CLA</abbr> you will communicate with\n"
-#~ "    the <abbr>CLA</abbr> Operator Service, which is delivered by Agilisys\n"
-#~ "    (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr> to [  ])."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "If after contacting the <abbr>CLA</abbr> Operator Service it is determined that you\n"
-#~ "    qualify for the <abbr>CLA</abbr> specialist advice service you may be put through\n"
-#~ "    to one of a number of <abbr>CLA</abbr> Specialist Advice Providers. If you do not qualify to receive\n"
-#~ "    <abbr>CLA</abbr> specialist advice we will inform you accordingly and\n"
-#~ "    direct you to alternative help."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "These organisations are Data Processors for the purposes of the Data Protection Act 1998 which\n"
-#~ "    means that they process data on behalf of the <abbr>LAA</abbr> and <abbr title=\"The Ministry of Justice\">MoJ</abbr>."
-#~ msgstr ""
-
 #~ msgid "What data will <abbr>CLA</abbr> collect?"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "<abbr>CLA</abbr> will only collect the minimum amount of information necessary in order\n"
-#~ "    to deliver the <abbr>CLA</abbr> service to you."
-#~ msgstr ""
-
 #~ msgid "Details of any specific needs that you may have in order to access the <abbr>CLA</abbr> service;"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The amount of information <abbr>CLA</abbr> will collect will depend on whether you qualify for the <abbr>CLA</abbr>\n"
-#~ "    service and/or your specific needs. For example you will be asked to provide more information\n"
-#~ "    before we can transfer you through to a <abbr>CLA</abbr> Specialist."
 #~ msgstr ""
 
 #~ msgid "What does <abbr>CLA</abbr> use the data for?"
@@ -3715,51 +3775,7 @@ msgstr ""
 #~ msgid "Help us monitor and improve our service"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "Build statistics about the <abbr>CLA</abbr> service, monitor fraud and justify public expenditure.\n"
-#~ "      This information is collated in an anonymous format."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Collect views on the <abbr>CLA</abbr> service and any improvements considered necessary.\n"
-#~ "      Where consent is provided <abbr>CLA</abbr> User contact details may be passed onto an independent research agency."
-#~ msgstr ""
-
 #~ msgid "Prevent or detect crime or fraud"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "<abbr>CLA</abbr> will be able to view and verify the information that you provide and where\n"
-#~ "    necessary will amend it to maintain its accuracy."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The minimum amount of personal data that <abbr>CLA</abbr> will ask to collect is your name and one other piece\n"
-#~ "    of personal information that could be used to identify you e.g. postcode, date of birth or telephone number."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "All personal data will be stored on secure servers in the UK. It may also be stored outside of Europe,\n"
-#~ "    where it could be viewed by our staff or specialist providers."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "When you contact <abbr>CLA</abbr> online the personal data that you provide will be recorded within a secure digital system.\n"
-#~ "        <br><br>\n"
-#~ "        Please note that transmitting information over the internet is generally not completely secure, and\n"
-#~ "        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
-#~ "        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the\n"
-#~ "        security of your data. Any data you transmit is at your own risk.\n"
-#~ "        <br><br>\n"
-#~ "        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
-#~ "        <br><br>\n"
-#~ "        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
-#~ "        <br><br>\n"
-#~ "        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software,"
 #~ msgstr ""
 
 #~ msgid "In order to protect privacy <abbr>CLA</abbr> will always check with you what forms of outgoing communication are acceptable and appropriate and whether messages can be left."
@@ -3768,18 +3784,7 @@ msgstr ""
 #~ msgid "When making outgoing calls to you <abbr>CLA</abbr> will ensure that:"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "Protect your security by ensuring that third parties cannot create sites that pose as\n"
-#~ "      a gov.uk service in an attempt to gather your information."
-#~ msgstr ""
-
 #~ msgid "You can read more about <a href=\"%(cookie_url)s\">how cookies are used</a>."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "In order to provide you with the best service that we can we may share some information about\n"
-#~ "    you with the organisations mentioned below. But we will only do this if you have given us consent\n"
-#~ "    when the operator asks for it."
 #~ msgstr ""
 
 #~ msgid "Other advice organisations"
@@ -3806,16 +3811,6 @@ msgstr ""
 #~ msgid "If you want to view your record, please make a request in writing including your."
 #~ msgstr ""
 
-#~ msgid ""
-#~ "Please note that we cannot give out any information unless the details that you provide match our records.\n"
-#~ "    If you used a fake name or pseudonym when you contacted <abbr>CLA</abbr> you will need to prove your identity."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "If you gave us enough information to identify you, <abbr>CLA</abbr> will send you your personal information as soon as\n"
-#~ "    possible but within a maximum of 40 days."
-#~ msgstr ""
-
 #~ msgid "You can contact us by email at <a class=\"email\" href=\"mailto:data.access@justice.gsi.gov.uk\">data.access@justice.gsi.gov.uk</a> or in writing to"
 #~ msgstr ""
 
@@ -3828,37 +3823,10 @@ msgstr ""
 #~ msgid "We will consider requests to delete some or all of your personal data but please note that as a minimum <abbr>CLA</abbr> will usually retain:"
 #~ msgstr ""
 
-#~ msgid ""
-#~ "For everyone that uses our service we will retain a name and one other piece of personal data e.g.\n"
-#~ "      date of birth and details of what we did for you"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "For everyone that asks <abbr>CLA</abbr> to check whether they qualify for legal aid in order to seek advice from a\n"
-#~ "      <abbr>CLA</abbr> Specialist we will also retain details of any financial information and case details used to prove that\n"
-#~ "      you qualify for legal aid."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Please note that if you qualify to receive advice from a <abbr>CLA</abbr> Specialist, they will also need to retain\n"
-#~ "    additional personal data about you within their own Case Handling System. Such data shall be sufficient\n"
-#~ "    to justify the provision of legal aid advice and meet professional requirements."
-#~ msgstr ""
-
 #~ msgid "Before you contact Civil Legal Advice"
 #~ msgstr ""
 
 #~ msgid "So we can improve this service, we'd like to understand why you want to contact <abbr title=\"Civil Legal Advice\">CLA</abbr>."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Your details have been submitted and an operator will try to call\n"
-#~ "the person you nominated at least once during your chosen time, or as close to the time as possible."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Your details have been submitted and an operator will try to call\n"
-#~ "you at least once during your chosen time, or as close to the time as possible."
 #~ msgstr ""
 
 #~ msgid "We will leave a message when we call."

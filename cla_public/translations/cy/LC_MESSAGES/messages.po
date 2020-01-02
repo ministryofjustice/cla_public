@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CLA Public\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-12-19 11:48+0000\n"
+"POT-Creation-Date: 2020-01-02 12:28+0000\n"
 "PO-Revision-Date: 2016-05-13 14:23+0000\n"
 "Last-Translator: Josh Rowe <josh.rowe@digital.justice.gov.uk>\n"
 "Language-Team: Welsh (http://www.transifex.com/ministry-of-justice/cla-public/language/cy/)\n"
@@ -1123,6 +1123,161 @@ msgstr "Rhaid gadael y maes hwn yn wag"
 msgid "Leave this field empty"
 msgstr "Gadewch y maes hwn yn wag"
 
+#: cla_public/templates/_cookie-consent-form.html:3
+msgid "Your cookie settings were saved"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:4
+msgid "Government services may set additional cookies and, if so, will have their own cookie policy and banner."
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:6
+msgid "Go back to the page you were looking at"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:11
+msgid "Cookies are files saved on your phone, tablet or computer when you visit a website."
+msgstr "Ffeiliau sy’n cael eu cadw ar eich ffôn, tabled neu gyfrifiadur pan fyddwch yn ymweld â gwefan yw cwcis."
+
+#: cla_public/templates/_cookie-consent-form.html:12
+msgid "We use cookies to store information about how you use ‘Check you can get legal aid’, such as the pages you visit."
+msgstr "Rydym yn defnyddio cwcis i storio gwybodaeth ynglŷn â sut rydych yn defnyddio ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’, er enghraifft y tudalennau rydych yn ymweld â nhw."
+
+#: cla_public/templates/_cookie-consent-form.html:14
+#: cla_public/templates/_cookie-popup.html:8
+msgid "Cookie settings"
+msgstr "Gosodiadau cwcis"
+
+#: cla_public/templates/_cookie-consent-form.html:17
+msgid "We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:19
+msgid "reloading the page"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:20
+msgid "turning on Javascript in your browser"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:26
+msgid "We use different types of cookies. You can choose which cookies you're happy for us to use and how the data is shared."
+msgstr "Rydym yn defnyddio gwahanol fathau o gwcis. Gallwch ddewis pa gwcis rydych yn fodlon i ni eu defnyddio a sut y rhennir y data."
+
+#: cla_public/templates/_cookie-consent-form.html:29
+msgid "Strictly necessary cookies"
+msgstr "Cwcis hollol angenrheidiol"
+
+#: cla_public/templates/_cookie-consent-form.html:30
+msgid "We use essential cookies to help you use the ‘Check you can get legal aid’ service. These do things such as:"
+msgstr "Rydym yn defnyddio cwcis hanfodol i’ch helpu i ddefnyddio’r gwasanaeth ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’. Mae’r rhain yn gwneud pethau fel:"
+
+#: cla_public/templates/_cookie-consent-form.html:32
+msgid "remember your progress through our service"
+msgstr "cofio sut rydych yn symud ymlaen wrth ddefnyddio’n gwasanaeth"
+
+#: cla_public/templates/_cookie-consent-form.html:33
+msgid "remember you have seen the cookies message"
+msgstr ""
+
+#: cla_public/templates/_cookie-consent-form.html:34
+msgid "remember the language you have selected to view our service"
+msgstr "cofio eich bod wedi gweld y neges cwcis"
+
+#: cla_public/templates/_cookie-consent-form.html:36
+msgid "These cookies need to be on to give you the best experience using the service."
+msgstr "Mae angen i’r cwcis hyn fod ar waith er mwyn i chi gael y profiad gorau wrth ddefnyddio’r gwasanaeth."
+
+#: cla_public/templates/_cookie-consent-form.html:37
+msgid "Read more about cookies on 'Check if you can get legal aid'"
+msgstr "Darllenwch fwy am ddefnyddio cwcis ar 'Gwirio os ydych yn gymwys i gael cymorth cyfreithiol'"
+
+#: cla_public/templates/_cookie-consent-form.html:42
+msgid "Cookies used to improve 'Check you can get legal aid'"
+msgstr "Cwcis sy’n cael eu defnyddio i wella ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol'"
+
+#: cla_public/templates/_cookie-consent-form.html:45
+msgid ""
+"We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs. \n"
+"            We do not allow Google to use or share the data about how you use this site."
+msgstr "Rydym yn defnyddio Google Analytics i fesur sut rydych yn defnyddio ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’ er mwyn i ni allu gwella’r gwasanaeth ar sail anghenion defnyddwyr. Nid ydym yn gadael i Google ddefnyddio na rhannu’r data ynglŷn â sut rydych yn defnyddio’r safle hwn."
+
+#: cla_public/templates/_cookie-consent-form.html:49
+msgid "You agree to the Ministry of Justice using your data to help improve the 'Check if you can get legal aid' service."
+msgstr "Rydych yn cytuno y gall y Weinyddiaeth Gyfiawnder ddefnyddio eich data i helpu i wella’r gwasanaeth 'Gwirio os ydych yn gymwys i gael cymorth cyfreithiol'."
+
+#: cla_public/templates/_cookie-consent-form.html:56
+#: cla_public/templates/_cookie-consent-form.html:78
+msgid "On"
+msgstr "Ar waith"
+
+#: cla_public/templates/_cookie-consent-form.html:62
+#: cla_public/templates/_cookie-consent-form.html:84
+msgid "Off"
+msgstr "Diffodd"
+
+#: cla_public/templates/_cookie-consent-form.html:70
+msgid "Cookies used by the Government Digital Service (GDS)"
+msgstr "Cwcis sy’n cael eu defnyddio gan Wasanaeth Digidol y Llywodraeth"
+
+#: cla_public/templates/_cookie-consent-form.html:72
+msgid "You agree to the Government Digital Service collecting your data to improve the user experience across government digital services."
+msgstr "Rydych yn cytuno y gall Gwasanaeth Digidol y Llywodraeth gasglu eich data er mwyn gwella profiad defnyddwyr ar draws gwasanaethau digidol y llywodraeth."
+
+#: cla_public/templates/_cookie-consent-form.html:91
+msgid "Find out how data is shared when you use this service"
+msgstr "Canfod sut mae data yn cael eu rhannu pan fyddwch yn defnyddio’r gwasanaeth hwn"
+
+#: cla_public/templates/_cookie-consent-form.html:94
+msgid "Save changes"
+msgstr "Cadw newidiadau"
+
+#: cla_public/templates/_cookie-popup.html:2
+msgid "We use cookies to make the site simpler."
+msgstr "Rydym yn defnyddio cwcis i wneud y safle’n fwy hwylus."
+
+#: cla_public/templates/_cookie-popup.html:5
+msgid "Accept cookies"
+msgstr "Derbyn cwcis"
+
+#: cla_public/templates/_cookie-popup.html:15
+msgid "You’ve accepted all cookies. You can "
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:15
+msgid "change your cookie settings"
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:15
+msgid "at any time."
+msgstr ""
+
+#: cla_public/templates/_cookie-popup.html:17
+msgid "Hide"
+msgstr ""
+
+#: cla_public/templates/_modal-dialog.html:5
+msgid "Your application will time out soon"
+msgstr "Bydd yr amser a neilltuwyd ar gyfer eich cais yn dod i ben cyn bo hir"
+
+#: cla_public/templates/_modal-dialog.html:12
+#: cla_public/templates/checker/about.html:38
+#: cla_public/templates/checker/additional-benefits.html:20
+#: cla_public/templates/checker/benefits.html:21
+#: cla_public/templates/checker/income.html:61
+#: cla_public/templates/checker/property.html:51
+#: cla_public/templates/checker/savings.html:35
+msgid "Continue"
+msgstr "Ymlaen"
+
+#: cla_public/templates/_modal-dialog.html:13
+msgid "Exit service"
+msgstr "Gadael y gwasanaeth"
+
+#: cla_public/templates/_phase-tag.html:13
+msgid "Contact us</a> if you need help or would like to give feedback to improve this service"
+msgstr "Cysylltwch â ni os oes arnoch angen help neu os hoffech roi adborth i’n helpu i wella’r gwasanaeth hwn"
+
 #: cla_public/templates/_resources.html:1
 msgid "Resources"
 msgstr "Adnoddau"
@@ -1348,11 +1503,11 @@ msgid ""
 "\n"
 "      Change your cookie settings\n"
 "    "
-msgstr ""
+msgstr "Newid eich gosodiadau cwcis"
 
 #: cla_public/templates/cookies.html:11
 msgid "The Check if you can get legal aid service puts small files (known as ’cookies’) onto your computer to collect information about how you browse the site."
-msgstr ""
+msgstr "Mae’r gwasanaeth ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’ yn rhoi ffeiliau bach (sy’n cael eu galw’n ‘cwcis’) ar eich cyfrifiadur i gasglu gwybodaeth ynglŷn â sut rydych yn pori drwy’r safle."
 
 #: cla_public/templates/cookies.html:12
 msgid "Cookies are used to:"
@@ -1368,7 +1523,7 @@ msgstr "cofio’r hysbysiadau yr ydych wedi’u gweld fel nad ydym yn eu dangos 
 
 #: cla_public/templates/cookies.html:20
 msgid "Check if you can get legal aid cookies aren’t used to identify you personally."
-msgstr ""
+msgstr "Nid yw cwcis ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’ yn cael eu defnyddio i’ch adnabod chi’n bersonol."
 
 #: cla_public/templates/cookies.html:23
 msgid "You’ll normally see a message on the site before we store a cookie on your computer."
@@ -1390,7 +1545,7 @@ msgstr ""
 
 #: cla_public/templates/cookies.html:29
 msgid "How cookies are used on Check if you can get legal aid"
-msgstr ""
+msgstr "Sut mae cwcis yn cael eu defnyddio ar ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/cookies.html:30
 msgid "Measuring website usage (Google Analytics)"
@@ -1398,7 +1553,7 @@ msgstr "Mesur y defnydd a wneir o’r wefan (Google Analytics)"
 
 #: cla_public/templates/cookies.html:32
 msgid "We use Google Analytics software to collect information about how you use Check if you can get legal aid. We do this to help make sure the service is meeting the needs of its users and to help us make improvements."
-msgstr ""
+msgstr "Rydym yn defnyddio meddalwedd Google Analytics i gasglu gwybodaeth ynglŷn â sut rydych yn defnyddio ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’. Rydym yn gwneud hyn i helpu i sicrhau bod y gwasanaeth yn diwallu anghenion ei ddefnyddwyr ac i’n helpu i wneud gwelliannau."
 
 #: cla_public/templates/cookies.html:33
 msgid "Google Analytics stores information about:"
@@ -1406,11 +1561,11 @@ msgstr "Mae Google Analytics yn storio gwybodaeth am y canlynol:"
 
 #: cla_public/templates/cookies.html:36
 msgid "the pages you visit"
-msgstr ""
+msgstr "y tudalennau rydych yn ymweld â nhw"
 
 #: cla_public/templates/cookies.html:37
 msgid "how long you spend on each page"
-msgstr ""
+msgstr "faint o amser rydych yn ei dreulio ar bob tudalen"
 
 #: cla_public/templates/cookies.html:38
 msgid "how you got to the site"
@@ -1449,7 +1604,7 @@ msgstr "Dod i ben"
 
 #: cla_public/templates/cookies.html:60
 msgid "This helps us count how many people visit the service. Your data is anonymised."
-msgstr ""
+msgstr "Mae hyn yn ein helpu i gyfri faint o bobl sy’n ymweld â’r gwasanaeth. Tynnir manylion adnabod o’ch data."
 
 #: cla_public/templates/cookies.html:61
 msgid "2 years"
@@ -1457,7 +1612,7 @@ msgstr "2 flynedd"
 
 #: cla_public/templates/cookies.html:65
 msgid "Used to manage the rate at which page view requests are made. Your data is anonymised."
-msgstr ""
+msgstr "Mae’n cael ei ddefnyddio i reoli ar ba raddfa y mae ceisiadau i weld tudalennau’n cael eu gwneud. Tynnir manylion adnabod o’ch data."
 
 #: cla_public/templates/cookies.html:66
 msgid "10 minutes"
@@ -1465,7 +1620,7 @@ msgstr ""
 
 #: cla_public/templates/cookies.html:70
 msgid "This helps us count how many people visit. Your data is anonymised."
-msgstr ""
+msgstr "Mae hyn yn ein helpu i gyfri faint o bobl sy’n ymweld. Tynnir manylion adnabod o’ch data."
 
 #: cla_public/templates/cookies.html:71
 msgid "24 hours"
@@ -1507,7 +1662,7 @@ msgstr "Eich cynnydd wrth ddefnyddio’r gwasanaeth"
 
 #: cla_public/templates/cookies.html:103
 msgid "When you use the Check if you can get legal aid service, we’ll set a cookie to remember your progress through the forms. These cookies don’t store your personal data and are deleted once you’ve completed the transaction."
-msgstr ""
+msgstr "Pan fyddwch yn defnyddio’r gwasanaeth ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’, byddwn yn gosod cwci i gofio sut rydych yn symud ymlaen drwy’r ffurflenni. Nid yw’r cwcis hyn yn storio eich data personol a byddant yn cael eu dileu ar ôl i chi gwblhau’r trafodiad."
 
 #: cla_public/templates/cookies.html:115
 msgid "An identifier for your session"
@@ -1643,8 +1798,11 @@ msgid ""
 msgstr "\n    Os ydych o dan 18 oed, dylech <a class=\"govuk-link\" href=\"%(url)s\">gysylltu â’r CLA</a>\n    heb gwblhau’r asesiad ariannol."
 
 #: cla_public/templates/interstitial.html:51
-msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"http://www.interpretingline.co.uk/vbooking.html\"> British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
-msgstr ""
+msgid ""
+"If you’re deaf or hard of hearing you can book a <a href=\"http://www.interpretingline.co.uk/vbooking.html\">\n"
+"        British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will  get back\n"
+"        to you to complete the eligibility check and provide any further advice."
+msgstr "Os ydych yn fyddar neu’n drwm eich clyw gallwch lenwi ffurflen gais i ofyn am ddehonglydd <a href=\"http://www.interpretingline.co.uk/vbooking.html\">Iaith Arwyddion Prydain</a>. Ar ôl i chi lenwi’r ffurflen, bydd y gweithredwr yn dod yn ôl atoch i gwblhau’r gwiriad cymhwystra a rhoi unrhyw gyngor arall."
 
 #: cla_public/templates/interstitial.html:58
 msgid "Check if you qualify financially"
@@ -1652,15 +1810,15 @@ msgstr "Gwirio a ydych yn gymwys yn ariannol"
 
 #: cla_public/templates/interstitial.html:65
 msgid "Alternatively, you can ask a legal aid adviser to take on your case."
-msgstr ""
+msgstr "Neu, gallwch ofyn i gynghorydd cymorth cyfreithiol ymdrin â’ch achos."
 
 #: cla_public/templates/interstitial.html:68
 msgid "Your adviser will check whether you qualify for legal aid at no cost to you by asking about your problem and your finances."
-msgstr ""
+msgstr "Bydd eich cynghorydd yn gwirio a ydych yn gymwys i gael cymorth cyfreithiol yn ddi-dâl drwy ofyn cwestiynau i chi ynglŷn â’r mater dan sylw a’ch sefyllfa ariannol."
 
 #: cla_public/templates/interstitial.html:69
 msgid "If you qualify, in some cases you may need to pay a contribution towards your legal aid."
-msgstr ""
+msgstr "Mewn rhai achosion, os ydych yn gymwys, mae’n bosibl y bydd angen i chi dalu cyfraniad tuag at eich cymorth cyfreithiol."
 
 #: cla_public/templates/interstitial.html:73
 #: cla_public/templates/checker/result/_find-legal-adviser.html:6
@@ -1689,7 +1847,7 @@ msgstr ""
 
 #: cla_public/templates/laalaa.html:10
 msgid "Find a legal aid adviser"
-msgstr ""
+msgstr "Dod o hyd i gynghorydd cymorth cyfreithiol"
 
 #: cla_public/templates/laalaa.html:23
 msgid "Search for a legal adviser or family mediator with a legal aid contract in England and Wales."
@@ -1697,7 +1855,7 @@ msgstr ""
 
 #: cla_public/templates/laalaa.html:25
 msgid "Search for a legal adviser with a legal aid contract in England and Wales."
-msgstr ""
+msgstr "Chwilio am gynghorydd cyfreithiol sydd â chontract cymorth cyfreithiol yng Nghymru a Lloegr."
 
 #: cla_public/templates/online-safety.html:8
 msgid "It can be easy for other people to see what you’re doing online, especially if you’re using a home computer."
@@ -1807,7 +1965,7 @@ msgstr "Pan fyddwch yn defnyddio’r gwasanaeth hwn, byddwch yn cytuno i delerau
 
 #: cla_public/templates/privacy.html:13
 msgid "If you do not agree to these terms and privacy policy, do not use this service."
-msgstr ""
+msgstr "Os nad ydych yn cytuno â’r telerau hyn a’r polisi preifatrwydd, peidiwch â defnyddio’r gwasanaeth hwn."
 
 #: cla_public/templates/privacy.html:15
 msgid "Who manages this digital service and Civil Legal Advice"
@@ -1818,19 +1976,19 @@ msgid ""
 "The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other\n"
 "    organisations who deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> service. For example this digital service is managed by the Ministry of\n"
 "    Justice."
-msgstr ""
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (CLA). Mae’r Asiantaeth Cymorth Cyfreithiol yn gweithio gyda sefydliadau eraill sy’n darparu’r gwasanaeth CLA. Er enghraifft, mae’r gwasanaeth digidol hwn yn cael ei reoli gan y Weinyddiaeth Gyfiawnder."
 
 #: cla_public/templates/privacy.html:23
 msgid ""
 "When you first make contact with <abbr title=\"Civil Legal Advice\">CLA</abbr> you will communicate with the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service (CLAOS), which is delivered by\n"
 "    Hinduja Global Solutions UK Limited."
-msgstr ""
+msgstr "Y tro cyntaf y byddwch yn dod i gysylltiad â CLA byddwch yn cyfathrebu â Gwasanaeth Gweithredwr y CLA (CLAOS), sy’n cael ei ddarparu gan Hinduja Global Solutions UK Limited."
 
 #: cla_public/templates/privacy.html:28
 msgid ""
 "Hinduja Global Solutions UK Limited is a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr>\n"
 "    to deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service."
-msgstr ""
+msgstr "Contractwr sy’n cael ei gyflogi gan yr Asiantaeth Cymorth Cyfreithiol i ddarparu Gwasanaeth Gweithredwr y CLA yw Hinduja Global Solutions UK Limited."
 
 #: cla_public/templates/privacy.html:32 cla_public/templates/privacy.html:612
 msgid "Complaints"
@@ -1873,14 +2031,14 @@ msgstr ""
 msgid ""
 "To provide you with the best service that we can, Civil Legal Advice may share some information about you\n"
 "    with other organisations. But we will only do this, if you have given us permission or when we have a lawful basis for doing so."
-msgstr ""
+msgstr "Er mwyn darparu’r gwasanaeth gorau posibl i chi, mae’n bosibl y bydd Cyngor Cyfreithiol Sifil yn rhannu rhywfaint o wybodaeth amdanoch gyda sefydliadau eraill. Ond ni fyddwn yn gwneud hyn oni bai eich bod wedi rhoi caniatâd i ni, neu os oes gennym sail gyfreithlon i wneud hynny."
 
 #: cla_public/templates/privacy.html:65
 msgid ""
 "In exceptional circumstances, we may share limited information about you without your consent. This would\n"
 "    only be to prevent fraud, to help detect crime, if it is required by law or by a court order or if we are\n"
 "    very worried about your safety or the safety of others."
-msgstr ""
+msgstr "Mewn amgylchiadau eithriadol, mae’n bosibl y byddwn yn rhannu ychydig o wybodaeth amdanoch heb eich caniatâd. Yr unig adeg y byddwn yn gwneud hyn yw er mwyn atal twyll, a helpu i ganfod troseddau, os yw’n ofynnol dan y gyfraith neu drwy orchymyn llys neu os ydym yn pryderu’n fawr am eich diogelwch chi neu ddiogelwch pobl eraill."
 
 #: cla_public/templates/privacy.html:71
 msgid ""
@@ -1890,7 +2048,7 @@ msgstr "Er mwyn darparu gwasanaeth i chi, mae’n bosibl y bydd angen i Gyngor C
 
 #: cla_public/templates/privacy.html:75
 msgid "Personal data is information about you as an individual. It can be your name, address or telephone number. It can also include the information that you have provided in this form, such as your financial circumstances."
-msgstr ""
+msgstr "Mae data personol yn wybodaeth amdanoch chi fel unigolyn. Gall gynnwys eich enw, eich cyfeiriad neu eich rhif ffôn. Gall hefyd gynnwys gwybodaeth rydych wedi’i rhoi yn y ffurflen hon, er enghraifft eich amgylchiadau ariannol."
 
 #: cla_public/templates/privacy.html:79
 msgid ""
@@ -1903,7 +2061,7 @@ msgid ""
 "The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
 "    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is an\n"
 "     Executive Agency of the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>)."
-msgstr ""
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth CLA, a’r Weinyddiaeth Gyfiawnder yw Rheolwr y Data. Mae’r Asiantaeth Cymorth Cyfreithiol  yn Asiantaeth Weithredol i’r Weinyddiaeth Gyfiawnder."
 
 #: cla_public/templates/privacy.html:90
 msgid ""
@@ -1911,14 +2069,14 @@ msgid ""
 "    For example, when you first make contact with <abbr>CLA</abbr>, you will communicate with\n"
 "    the <abbr>CLA</abbr> Operator Service, which is delivered by Hinduja Global Solutions UK Limited\n"
 "    (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr>)."
-msgstr ""
+msgstr "Mae’r Asiantaeth Cymorth Cyfreithiol yn gweithio gyda sefydliadau eraill sy’n darparu’r gwasanaeth CLA. Er enghraifft, y tro cyntaf y byddwch yn dod i gysylltiad â CLA, byddwch yn cyfathrebu â Gwasanaeth Gweithredwr y CLA, sy’n cael ei ddarparu gan Hinduja Global Solutions UK Limited (contractwr sy’n cael ei gyflogi gan yr Asiantaeth Cymorth Cyfreithiol)."
 
 #: cla_public/templates/privacy.html:97
 msgid ""
 "Once you have contacted the <abbr>CLA</abbr> Operator Service, if you are likely to qualify for Legal Aid, the operator will transfer you to\n"
 "     a <abbr>CLA</abbr> Specialist Provider. If you do not qualify to receive\n"
 "    <abbr>CLA</abbr> Specialist advice, the operator will inform you accordingly and direct you to alternative sources of help."
-msgstr ""
+msgstr "Ar ôl i chi gysylltu â Gwasanaeth Gweithredwr y CLA, os ydych yn debygol o fod yn gymwys i gael Cymorth Cyfreithiol bydd y gweithredwr yn eich trosglwyddo i Ddarparwr CLA Arbenigol. Os nad ydych yn gymwys i dderbyn cyngor Arbenigwr CLA, bydd y gweithredwr yn dweud wrthych ac yn eich cyfeirio at ffynonellau cymorth eraill."
 
 #: cla_public/templates/privacy.html:103
 msgid ""
@@ -1928,11 +2086,11 @@ msgstr "Mae gwasanaeth CLA wedi ymrwymo i gydymffurfio â’r Datganiad Preifatr
 
 #: cla_public/templates/privacy.html:108
 msgid "What types of personal data do we process?"
-msgstr ""
+msgstr "Pa fathau o ddata personol rydym yn eu prosesu? "
 
 #: cla_public/templates/privacy.html:110
 msgid "<abbr>CLA</abbr> will only collect the minimum amount of information that is necessary and relevant, in order to deliver the <abbr>CLA</abbr> service to you."
-msgstr ""
+msgstr "Ni fydd CLA yn casglu mwy o wybodaeth nag sy’n angenrheidiol ac yn berthnasol er mwyn darparu’r gwasanaeth CLA i chi."
 
 #: cla_public/templates/privacy.html:113
 msgid "The kind of information <abbr>CLA</abbr> may collect about you includes:"
@@ -1954,7 +2112,7 @@ msgstr "Y rheswm dros gysylltu â CLA, er enghraifft, natur eich problem neu fan
 
 #: cla_public/templates/privacy.html:127
 msgid "Details of any specific needs that you may have in order to access the <abbr>CLA</abbr> service; and"
-msgstr ""
+msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth CLA; a"
 
 #: cla_public/templates/privacy.html:130
 msgid ""
@@ -1967,11 +2125,11 @@ msgid ""
 "The amount of information <abbr>CLA</abbr> will collect will depend on whether you qualify for the <abbr>CLA</abbr>\n"
 "    service and/or your specific needs. For example, you will be asked to provide more information\n"
 "    before we can transfer you through to a <abbr>CLA</abbr> Specialist."
-msgstr ""
+msgstr "Bydd faint o wybodaeth y bydd CLA yn ei gasglu amdanoch yn amrywio gan ddibynnu a ydych yn gymwys ar gyfer y gwasanaeth CLA, a/neu a oes gennych anghenion penodol. Er enghraifft, gofynnir i chi roi mwy o wybodaeth cyn y gallwn eich trosglwyddo at Arbenigwr CLA."
 
 #: cla_public/templates/privacy.html:141
 msgid "How does <abbr>CLA</abbr> use your data and why?"
-msgstr ""
+msgstr "Sut mae CLA yn defnyddio eich data a pham?"
 
 #: cla_public/templates/privacy.html:142
 msgid "collects and records information about you to:"
@@ -1979,55 +2137,55 @@ msgstr "Mae CLA yn casglu ac yn cofnodi gwybodaeth amdanoch chi er mwyn:"
 
 #: cla_public/templates/privacy.html:144
 msgid "Work out whether you qualify for legal aid;"
-msgstr ""
+msgstr "Canfod a ydych yn gymwys i gael cymorth cyfreithiol;"
 
 #: cla_public/templates/privacy.html:145
 msgid "Provide information and/or advice services to you;"
-msgstr ""
+msgstr "Darparu gwybodaeth a/neu wasanaethau cyngor i chi;"
 
 #: cla_public/templates/privacy.html:146
 msgid "Save you from repeating information every time you contact us;"
-msgstr ""
+msgstr "Eich arbed rhag ailadrodd gwybodaeth bob tro y byddwch yn cysylltu â ni;"
 
 #: cla_public/templates/privacy.html:147
 msgid "Help us monitor and improve our service;"
-msgstr ""
+msgstr "Ein helpu i fonitro a gwella ein gwasanaeth;"
 
 #: cla_public/templates/privacy.html:149
 msgid ""
 "Build statistics about the <abbr>CLA</abbr> service, monitor fraud and justify public expenditure.\n"
 "      This information is collated in an anonymous format;"
-msgstr ""
+msgstr "Adeiladu ystadegau am y gwasanaeth CLA, monitro twyll a chyfiawnhau gwariant cyhoeddus. Mae’r wybodaeth hon yn cael ei choladu mewn fformat dienw;"
 
 #: cla_public/templates/privacy.html:153
 msgid ""
 "Collect views on the <abbr>CLA</abbr> service and any improvements considered necessary.\n"
 "      Where consent is provided, <abbr>CLA</abbr> User contact details may be passed onto an independent research agency;"
-msgstr ""
+msgstr "Casglu barn am y gwasanaeth CLA ac unrhyw welliannau y credir bod eu hangen. Lle rhoddir cydsyniad, mae’n bosibl y bydd manylion cysylltu defnyddiwr CLA yn cael eu pasio ymlaen i asiantaeth ymchwil annibynnol;"
 
 #: cla_public/templates/privacy.html:156
 msgid "Prevent or detect crime or fraud; and"
-msgstr ""
+msgstr "Atal neu ganfod troseddau neu dwyll;"
 
 #: cla_public/templates/privacy.html:157
 msgid "Conduct occasional assurance audits to ensure that the decisions we make are correct and accurate."
-msgstr ""
+msgstr "Cynnal archwiliadau sicrwydd achlysurol er mwyn sicrhau bod y penderfyniadau rydym yn eu gwneud yn gywir."
 
 #: cla_public/templates/privacy.html:161
 msgid "Without this information, <abbr>CLA</abbr> would not be able to conduct the activities above which are essential to the delivery of legal aid."
-msgstr ""
+msgstr "Heb yr wybodaeth hon, ni fyddai CLA yn gallu cynnal y gweithgareddau uchod sy’n hanfodol er mwyn darparu cymorth cyfreithiol."
 
 #: cla_public/templates/privacy.html:165
 msgid ""
 "The lawful basis for <abbr>CLA</abbr> collecting and processing your personal data is the result of the powers contained in legislation, specifically the Legal Aid, Sentencing\n"
 "     and Punishment of Offenders Act 2012."
-msgstr ""
+msgstr "Mae’r sail gyfreithlon sy’n caniatáu i CLA gasglu a phrosesu eich data personol yn deillio o’r pwerau sydd wedi’u cynnwys mewn deddfwriaeth, yn fwyaf penodol, Deddf Cymorth Cyfreithiol Dedfrydu a Chosbi Troseddwyr 2012."
 
 #: cla_public/templates/privacy.html:170
 msgid ""
 "<abbr>CLA</abbr> also collects ‘special categories of personal data’ for the purposes of monitoring equality. This is a legal requirement for public authorities, under the Equality Act 2010.\n"
 "     Special categories of personal data obtained for equality monitoring will be treated with the strictest confidence and any information published will not identify you or anyone else associated with your legal aid application."
-msgstr ""
+msgstr "Mae CLA hefyd yn casglu ‘categorïau arbennig o ddata personol’ at ddibenion monitro cydraddoldeb. Mae Deddf Cydraddoldeb 2010 yn nodi ei bod yn ofynnol i awdurdodau cyhoeddus wneud hyn. Byddwn yn trin categorïau arbennig o ddata personol a gesglir er mwyn monitro cydraddoldeb yn gwbl gyfrinachol ac ni fydd unrhyw wybodaeth a gyhoeddir yn nodi pwy ydych chi na neb arall sy’n gysylltiedig â’ch cais am gymorth cyfreithiol."
 
 #: cla_public/templates/privacy.html:175
 msgid ""
@@ -2049,23 +2207,23 @@ msgstr "Gall CLA gasglu data personol amdanoch chi dros y ffôn, ar-lein, drwy�
 msgid ""
 "<abbr>CLA</abbr> will be able to view and verify the information that you provide and, where\n"
 "    necessary, will amend it to maintain its accuracy."
-msgstr ""
+msgstr "Bydd CLA yn gallu gweld a gwirio’r wybodaeth y byddwch yn ei rhoi a, lle bo angen, bydd yn diwygio’r wybodaeth er mwyn sicrhau ei bod yn gywir."
 
 #: cla_public/templates/privacy.html:189
 msgid ""
 "The minimum amount of personal data that <abbr>CLA</abbr> will ask to collect is your name and two other pieces\n"
 "    of personal information that could be used to identify you, e.g. postcode, date of birth or telephone number."
-msgstr ""
+msgstr "Y data personol sylfaenol y bydd CLA yn gofyn amdanynt yw eich enw a dau ddarn arall o wybodaeth bersonol a allai gael eu defnyddio i’ch adnabod, e.e. cod post, dyddiad geni neu rif ffôn."
 
 #: cla_public/templates/privacy.html:193
 msgid ""
 "As your personal data is stored on our IT infrastructure, and shared with our data processors, it may be transferred\n"
 "     and stored securely outside the European Economic Area (EEA). Where that is the case, it will be subject to equivalent legal protection through the use of Model Contract Clauses."
-msgstr ""
+msgstr "Gan fod eich data personol yn cael eu storio ar ein seilwaith TG, ac yn cael eu rhannu â’n proseswyr data, mae’n bosibl y byddant yn cael eu trosglwyddo a’u storio’n ddiogel y tu allan i’r Ardal Economaidd Ewropeaidd (EEA). Os bydd hynny’n digwydd, byddant yn ddarostyngedig i amddiffyniad cyfreithiol cyfatebol drwy gyfrwng Cymalau Contract Enghreifftiol."
 
 #: cla_public/templates/privacy.html:198
 msgid "Any transfers made will be in full compliance with all aspects of the data protection law."
-msgstr ""
+msgstr "Bydd unrhyw drawsyrru data yn cydymffurfio’n llwyr â phob agwedd ar y gyfraith diogelu data."
 
 #: cla_public/templates/privacy.html:202
 msgid ""
@@ -2103,7 +2261,7 @@ msgid ""
 "        Please note that transmitting information over the internet is generally not completely secure, and\n"
 "        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
 "        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
-msgstr ""
+msgstr "Pan fyddwch yn cysylltu â CLA ar-lein, bydd y data personol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel. Sylwer nad yw trawsyrru gwybodaeth dros y rhyngrwyd yn gwbl ddiogel bob amser, ac ni all CLA warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru. Mae gan CLA weithdrefnau a nodweddion diogelwch er mwyn cadw eich data’n ddiogel ar ôl i ni eu derbyn."
 
 #: cla_public/templates/privacy.html:233
 msgid ""
@@ -2115,7 +2273,13 @@ msgid ""
 "        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
 "        <br><br>\n"
 "        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
-msgstr ""
+msgstr "Nid yw trawsyrru gwybodaeth drwy e-bost yn gwbl ddiogel bob amser, ac ni all CLA warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru.
+
+Mae gan CLA weithdrefnau a nodweddion diogelwch i gadw eich data’n ddiogel ar ôl i ni eu derbyn.
+
+Pan fyddwch yn anfon e-bost i CLA, bydd data personol perthnasol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel.
+
+Mae’n bosibl y bydd CLA yn monitro ac yn storio negeseuon e-bost y byddwch yn eu derbyn ac yn eu hanfon. Mae’n bosibl hefyd y byddwn yn defnyddio meddalwedd blocio."
 
 #: cla_public/templates/privacy.html:244
 msgid "Post"
@@ -2168,11 +2332,11 @@ msgstr "Mae’n bosibl y bydd angen i CLA gysylltu â chi’n uniongyrchol."
 
 #: cla_public/templates/privacy.html:281
 msgid "In order to protect privacy, <abbr>CLA</abbr> will always check with you what forms of outgoing communication are acceptable and appropriate and whether messages can be left."
-msgstr ""
+msgstr "Er mwyn sicrhau preifatrwydd, bydd CLA bob amser yn gofyn pa ddulliau cyfathrebu sy’n dderbyniol ac yn briodol i chi ac a oes modd gadael negeseuon."
 
 #: cla_public/templates/privacy.html:283
 msgid "When making outgoing calls to you, <abbr>CLA</abbr> will ensure that:"
-msgstr ""
+msgstr "Pan fydd CLA yn eich ffonio chi, bydd yn:"
 
 #: cla_public/templates/privacy.html:286
 msgid ""
@@ -2237,23 +2401,25 @@ msgstr "Cofio’r camau yr ydych chi’n eu cymryd drwy ein gwasanaeth. Nid yw�
 msgid ""
 "Protect your security by ensuring that third parties cannot create sites that pose as\n"
 "      a gov.uk service in an attempt to gather your information"
-msgstr ""
+msgstr "Gwarchod eich diogelwch drwy sicrhau na all trydydd partïon greu safleoedd sy’n cymryd arnynt eu bod yn un o wasanaethau gov.uk mewn ymdrech i gasglu eich gwybodaeth"
 
 #: cla_public/templates/privacy.html:326
 msgid "The online service also uses cookies from the Government Digital Service (GDS). These cookies collect information to help improve the user experience across government digital services."
-msgstr ""
+msgstr "Mae’r gwasanaeth ar-lein hefyd yn defnyddio cwcis o Wasanaeth Digidol y Llywodraeth. 
+
+Mae’r cwcis hyn yn casglu gwybodaeth i helpu i wella profiad defnyddwyr ar draws gwasanaethau digidol y llywodraeth."
 
 #: cla_public/templates/privacy.html:328
 #, python-format
 msgid "You can change <a href=\"%(cookie_settings_url)s\">your cookie settings</a> to opt in or out of how different cookies are used."
-msgstr ""
+msgstr "<a href=\"%(cookie_settings_url)s\">Gallwch newid eich gosodiadau cwcis er mwyn optio i mewn neu allan o’r ffordd y defnyddir gwahanol gwcis.</a>"
 
 #: cla_public/templates/privacy.html:331
 #, python-format
 msgid ""
 "You can read more about <a href=\"%(cookie_url)s\">cookies used on \n"
 "    check you can get legal aid</a>."
-msgstr ""
+msgstr "<a href=\"%(cookie_url)s\">Gallwch ddarllen mwy am y cwcis sy’n cael eu defnyddio ar ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’</a>"
 
 #: cla_public/templates/privacy.html:335
 msgid ""
@@ -2279,7 +2445,7 @@ msgstr "Rydyn ni am gadw’ch cysylltiad â CLA yn gyfrinachol: mae hyn yn golyg
 msgid ""
 "In order to provide you with the best service that we can we may share some information about\n"
 "    you with the organisations mentioned below. But we will only do this if you have given us permission, when the operator asks for it, or when it is lawful to do so."
-msgstr ""
+msgstr "Er mwyn darparu’r gwasanaeth gorau posibl i chi, mae’n bosibl y byddwn yn rhannu rhywfaint o wybodaeth amdanoch â’r sefydliadau y cyfeirir atynt isod. Ond ni fyddwn yn gwneud hyn oni bai eich bod wedi rhoi caniatâd i ni, pan fydd y gweithredwr yn gofyn am yr wybodaeth, neu pan mae’n gyfreithlon i ni wneud hynny."
 
 #: cla_public/templates/privacy.html:353 cla_public/templates/privacy.html:411
 msgid "Who"
@@ -2307,7 +2473,7 @@ msgstr "Sefydliadau llywodraeth eraill"
 
 #: cla_public/templates/privacy.html:372
 msgid "These organisations may include the Department of Work and Pensions (DWP), HM Courts and Tribunals Service (HMCTS), HM Revenue and Customs (HMRC)."
-msgstr ""
+msgstr "Gall y sefydliadau hyn gynnwys yr Adran Gwaith a Phensiynau, Gwasanaeth Llysoedd a Thribiwnlysoedd Ei Mawrhydi (GLlTEM), Cyllid a Thollau Ei Mawrhydi (CThEM)."
 
 #: cla_public/templates/privacy.html:375
 msgid "To verify information provided by you and check whether you qualify for legal aid."
@@ -2315,11 +2481,11 @@ msgstr "I ddilysu gwybodaeth yr ydych chi wedi’i darparu a gwirio a ydych chi�
 
 #: cla_public/templates/privacy.html:380
 msgid "Other advice organisations and non-governmental organisations"
-msgstr ""
+msgstr "Sefydliadu cyngor a chyrff anllywodraethol eraill"
 
 #: cla_public/templates/privacy.html:382
 msgid "These organisations may include credit reference agencies."
-msgstr ""
+msgstr "Gall y sefydliadau hyn gynnwys asiantaethau gwirio credyd. "
 
 #: cla_public/templates/privacy.html:385
 msgid "To help you get further help and advice from appropriate organisations."
@@ -2327,11 +2493,11 @@ msgstr "I’ch helpu i gael help a chyngor pellach gan sefydliadau priodol."
 
 #: cla_public/templates/privacy.html:387
 msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments.\n"
-msgstr ""
+msgstr "I wirio gwybodaeth a roddir gennych, wrth gynnal archwiliadau yn ymwneud â’n penderfyniadau ac asesiadau cymhwystra."
 
 #: cla_public/templates/privacy.html:395
 msgid "When this is necessary, we will comply with all aspects of the relevant data protection laws."
-msgstr ""
+msgstr "Pan fydd angen gwneud hyn, byddwn yn cydymffurfio â’r cyfreithiau diogelu data perthnasol yn eu cyfanrwydd."
 
 #: cla_public/templates/privacy.html:399
 msgid ""
@@ -2341,7 +2507,7 @@ msgstr "Mewn amgylchiadau eithriadol, gallwn ni rannu gwybodaeth benodol heb gae
 
 #: cla_public/templates/privacy.html:402
 msgid "If we do this, we will wherever possible:"
-msgstr ""
+msgstr "Os byddwn yn gwneud hyn, lle bynnag y bo modd, byddwn yn:"
 
 #: cla_public/templates/privacy.html:404
 msgid "Talk to you first"
@@ -2357,7 +2523,7 @@ msgstr "yn rhannu gwybodaeth ar sail ‘yr angen i wybod’ yn unig."
 
 #: cla_public/templates/privacy.html:421
 msgid "To prevent fraud and to help detect crime."
-msgstr ""
+msgstr "I atal twyll a helpu i ganfod troseddau."
 
 #: cla_public/templates/privacy.html:423
 msgid "Or where it is required by law or by a court order"
@@ -2377,21 +2543,21 @@ msgstr "Os ydyn ni’n pryderu’n fawr am eich diogelwch chi neu bobl eraill, m
 
 #: cla_public/templates/privacy.html:441
 msgid "Access to personal information"
-msgstr ""
+msgstr "Mynediad at wybodaeth bersonol"
 
 #: cla_public/templates/privacy.html:442
 msgid ""
 "You can find out if we hold any personal data about you and request a copy of this information by writing to the Legal Aid Agency to make a ‘subject access request’.\n"
 "   If you wish to make a subject access request, you will need to contact:"
-msgstr ""
+msgstr "Gallwch ddarganfod a ydym yn cadw unrhyw ddata personol amdanoch a gofyn am gopi o’r wybodaeth hon drwy ysgrifennu at yr Asiantaeth Cymorth Cyfreithiol i wneud ‘cais am fynediad at ddata gan y testun’. Er mwyn gwneud cais am fynediad at ddata gan y testun, bydd angen i chi gysylltu â’r Tîm Datgelu yn y cyfeiriad isod:"
 
 #: cla_public/templates/privacy.html:462
 msgid "You can also email at <a class=\"email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
-msgstr ""
+msgstr "Gallwch hefyd anfon e-bost i <a class=\"email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
 
 #: cla_public/templates/privacy.html:465
 msgid "When making a subject access request for a copy of your personal information, please provide the following information:"
-msgstr ""
+msgstr "Wrth wneud cais am fynediad at ddata gan y testun, er mwyn cael copi o’ch gwybodaeth bersonol, dylech roi’r wybodaeth a ganlyn:"
 
 #: cla_public/templates/privacy.html:468
 msgid "Full name"
@@ -2427,168 +2593,168 @@ msgstr "Unrhyw wybodaeth ychwanegol i’n helpu i wirio pwy ydych chi e.e. rhif 
 
 #: cla_public/templates/privacy.html:481
 msgid "You will also be required to provide proof of your identity. Acceptable forms of ID include:"
-msgstr ""
+msgstr "Bydd angen i chi hefyd gael tystiolaeth i gadarnhau pwy ydych chi. Mae’r dogfennau adnabod sy’n dderbyniol yn cynnwys:"
 
 #: cla_public/templates/privacy.html:484
 msgid "a photocopy of your passport or driving licence"
-msgstr ""
+msgstr "llungopi o’ch pasbort neu’ch trwydded yrru "
 
 #: cla_public/templates/privacy.html:485
 msgid "an electricity bill (the original bill, not a copy)"
-msgstr ""
+msgstr "bil trydan (y bil gwreiddiol, nid copi)"
 
 #: cla_public/templates/privacy.html:486
 msgid "a gas bill (the original bill, not a copy)"
-msgstr ""
+msgstr "bil nwy (y bil gwreiddiol, nid copi)"
 
 #: cla_public/templates/privacy.html:487
 msgid "a council tax bill (the original bill, not a copy)"
-msgstr ""
+msgstr "bil treth gyngor (y bil gwreiddiol, nid copi)"
 
 #: cla_public/templates/privacy.html:488
 msgid "any other bill in your full name (the original bill, not a copy)"
-msgstr ""
+msgstr "unrhyw fil arall yn eich enw llawn (y bil gwreiddiol, nid copi)"
 
 #: cla_public/templates/privacy.html:491
 msgid "Any bill you send us must be less than 6 months old."
-msgstr ""
+msgstr "Rhaid i unrhyw fil y byddwch yn ei anfon atom fod yn llai na 6 mis oed."
 
 #: cla_public/templates/privacy.html:494
 msgid ""
 "Please note that we cannot give out any information unless the details that you provide match our records.\n"
 "    If you used an alias or pseudonym when you contacted <abbr>CLA</abbr>, you will need to prove your identity."
-msgstr ""
+msgstr "Sylwer na allwn roi unrhyw wybodaeth oni bai fod y manylion rydych chi’n eu rhoi yn cyfateb i’n cofnodion ni. Os gwnaethoch roi enw arall neu ffugenw pan wnaethoch chi gysylltu â CLA, bydd angen i chi brofi pwy ydych chi."
 
 #: cla_public/templates/privacy.html:499
 msgid "Once we receive the subject access request, we will deal with the request without any undue delay within one calendar month."
-msgstr ""
+msgstr "Ar ôl i ni dderbyn y cais am fynediad at ddata gan y testun, fe wnawn ni ymdrin ag ef heb oedi diangen o fewn un mis calendr."
 
 #: cla_public/templates/privacy.html:503
 msgid "There is no charge for providing this information, however, if processing the subject access request is deemed to be excessive, we may charge a fee."
-msgstr ""
+msgstr "Nid ydym yn codi tâl am ddarparu’r wybodaeth hon, ond os byddwn yn credu bod prosesu’r cais am fynediad at ddata gan y testun yn gostus, mae gennym hawl i godi tâl."
 
 #: cla_public/templates/privacy.html:507
 msgid ""
 "You can also review our <a href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Personal Information Charter</a>\n"
 "     which contains important information on your rights to access your personal information."
-msgstr ""
+msgstr "Gallwch hefyd edrych ar ein Siarter Gwybodaeth Bersonol sy’n cynnwys gwybodaeth bwysig am eich hawl i gael mynediad at wybodaeth bersonol a gedwir amdanoch."
 
 #: cla_public/templates/privacy.html:511
 msgid "How you can request to have your personal data amended or deleted?"
-msgstr ""
+msgstr "Sut allwch chi wneud cais i gael newid neu ddileu eich data personol?"
 
 #: cla_public/templates/privacy.html:514
 msgid ""
 "Under data protection legislation, we are only allowed to keep your personal information when we have a lawful basis for processing it and only for as long as it is necessary for the purposes\n"
 "     for which it was collected."
-msgstr ""
+msgstr "Dan y ddeddfwriaeth diogelu data, nid oes gennym hawl i gadw eich gwybodaeth bersonol oni bai fod sail gyfreithlon dros ei phrosesu, ac ni chawn ei chadw am fwy o amser nag sy’n angenrheidiol ar gyfer y dibenion y casglwyd yr wybodaeth ar eu cyfer."
 
 #: cla_public/templates/privacy.html:518
 msgid "We will consider requests to delete some or all of your personal data but please note that, as a minimum, <abbr>CLA</abbr> will usually retain:"
-msgstr ""
+msgstr "Byddwn yn ystyried ceisiadau i ddileu eich holl ddata personol, neu rai data, ond dylech fod yn ymwybodol y bydd CLA fel arfer yn cadw’r canlynol o leiaf:"
 
 #: cla_public/templates/privacy.html:522
 msgid "For everyone that uses our service, a name and two other pieces of personal data, e.g. date of birth and postcode "
-msgstr ""
+msgstr "Ar gyfer pawb sy’n defnyddio’n gwasanaeth, enw a dau ddarn arall o ddata personol, e.e. dyddiad geni a chod post"
 
 #: cla_public/templates/privacy.html:525
 msgid ""
 "For everyone that asks <abbr>CLA</abbr> to check whether they qualify for legal aid in order to seek advice from a\n"
 "      <abbr>CLA</abbr> Specialist, details of any financial information and case details used to prove that you qualify for legal aid"
-msgstr ""
+msgstr "Ar gyfer pawb sy’n gofyn i CLA wirio a ydynt yn gymwys i gael cymorth cyfreithiol er mwyn gofyn am gyngor gan un o Arbenigwyr CLA, manylion unrhyw wybodaeth ariannol a manylion yr achos a ddefnyddir i brofi eich bod yn gymwys i gael cymorth cyfreithiol"
 
 #: cla_public/templates/privacy.html:530
 msgid ""
 "Please note that, if you qualify to receive advice from a <abbr>CLA</abbr> Specialist, they will also need to retain\n"
 "    additional personal data about you within their own Case Handling System. Such data shall be sufficient\n"
 "    to justify the provision of legal aid advice and meet professional requirements."
-msgstr ""
+msgstr "Sylwer, os byddwch yn gymwys i gael cyngor gan un o Arbenigwyr CLA, bydd angen iddynt hefyd gadw data personol ychwanegol amdanoch yn eu System Ymdrin ag Achosion. Bydd data o’r fath yn ddigon i gyfiawnhau darparu cyngor am gymorth cyfreithiol a bodloni gofynion proffesiynol."
 
 #: cla_public/templates/privacy.html:535
 msgid "If the information we hold about you is inaccurate for whatever reason, you can contact CLA to have your personal information amended."
-msgstr ""
+msgstr "Os yw’r wybodaeth rydym yn ei chadw amdanoch yn anghywir am unrhyw reswm, gallwch gysylltu â CLA i ofyn i ni newid eich gwybodaeth bersonol."
 
 #: cla_public/templates/privacy.html:538
 msgid "When we ask you for personal data"
-msgstr ""
+msgstr "Pan fyddwn yn gofyn am eich data personol"
 
 #: cla_public/templates/privacy.html:540
 msgid ""
 "We promise to inform you why we need your personal data and ask only for the personal data we need. We will not collect information that\n"
 "     is irrelevant or unnecessary."
-msgstr ""
+msgstr "Rydym yn addo dweud wrthych pam y mae arnom angen eich data personol a gofyn am ddim mwy na’r data personol y mae arnom eu hangen. Ni fyddwn yn casglu gwybodaeth sy’n amherthnasol neu nad oes ei hangen."
 
 #: cla_public/templates/privacy.html:545
 msgid "When we collect your personal data, we have responsibilities, and you have rights. These include:"
-msgstr ""
+msgstr "Pan fyddwn yn casglu eich data personol, mae gennym ni gyfrifoldebau, ac mae gennych chi hawliau. Mae’r rhain yn cynnwys y canlynol:"
 
 #: cla_public/templates/privacy.html:550
 msgid "That you can withdraw consent at any time, where relevant;"
-msgstr ""
+msgstr "Gallwch dynnu cydsyniad yn ôl unrhyw bryd, lle bo’n berthnasol;"
 
 #: cla_public/templates/privacy.html:553
 msgid "That you can lodge a complaint with the supervisory authority;"
-msgstr ""
+msgstr "Gallwch gyflwyno cwyn i’r awdurdod sy’n goruchwylio;"
 
 #: cla_public/templates/privacy.html:556
 msgid "That we will protect and ensure that no unauthorised person has access to it;"
-msgstr ""
+msgstr "Byddwn yn cadw’r data’n ddiogel ac yn sicrhau na fydd neb yn cael mynediad atynt heb ganiatâd;"
 
 #: cla_public/templates/privacy.html:559
 msgid "That your personal data is shared with other organisations only for legitimate purposes;"
-msgstr ""
+msgstr "Ni fydd eich data personol yn cael eu rhannu â sefydliadau eraill ac eithrio at ddibenion cyfreithlon;"
 
 #: cla_public/templates/privacy.html:562
 msgid "That we don’t keep it longer than is necessary;"
-msgstr ""
+msgstr "Ni fyddwn yn cadw’r data am fwy o amser nag sydd raid;"
 
 #: cla_public/templates/privacy.html:565
 msgid "That we will not make your personal data available for commercial use without your consent; and"
-msgstr ""
+msgstr "Ni fyddwn yn rhyddhau eich data personol at ddibenion masnachol heb eich caniatâd; a"
 
 #: cla_public/templates/privacy.html:568
 msgid "That we will consider your request to correct, stop processing or erase your personal data."
-msgstr ""
+msgstr "Byddwn yn ystyried eich cais i gywiro, rhoi’r gorau i brosesu neu ddileu eich data personol."
 
 #: cla_public/templates/privacy.html:572
 msgid "You can get more details on:"
-msgstr ""
+msgstr "Gallwch gael rhagor o fanylion am y canlynol:"
 
 #: cla_public/templates/privacy.html:576
 msgid "Agreements we have with other organisations for sharing information;"
-msgstr ""
+msgstr "Cytundebau sydd gennym â sefydliadau eraill er mwyn rhannu gwybodaeth;"
 
 #: cla_public/templates/privacy.html:579
 msgid ""
 "Circumstances where we can pass on personal information without telling you, for example, to help with the prevention \n"
 "      or detection of crime or to produce anonymised statistics;"
-msgstr ""
+msgstr "Amgylchiadau lle gallwn anfon gwybodaeth bersonol ymlaen heb ddweud wrthych, er enghraifft, i helpu i atal neu i ganfod troseddau neu er mwyn cynhyrchu ystadegau dienw;"
 
 #: cla_public/templates/privacy.html:583
 msgid "Our instructions to staff on how to collect, use or delete your personal information;"
-msgstr ""
+msgstr "Ein cyfarwyddiadau i staff ynglŷn â sut i gasglu, defnyddio neu ddileu eich gwybodaeth bersonol;"
 
 #: cla_public/templates/privacy.html:586
 msgid "How we check that the information we hold is accurate and up-to-date; and"
-msgstr ""
+msgstr "Sut i wirio bod yr wybodaeth rydym yn ei chadw yn gywir ac yn gyfredol; a"
 
 #: cla_public/templates/privacy.html:589
 msgid "How to make a complaint."
-msgstr ""
+msgstr "Sut i wneud cwyn."
 
 #: cla_public/templates/privacy.html:594
 msgid "For more information about the above issues, please contact the MoJ Data Protection Officer;"
-msgstr ""
+msgstr "I gael rhagor o wybodaeth am y materion uchod, cysylltwch â Swyddog Diogelu Data’r Weinyddiaeth Gyfiawnder;"
 
 #: cla_public/templates/privacy.html:609
 msgid "For more information on how and why your information is processed, please see the information provided when you accessed our services or were contacted by us."
-msgstr ""
+msgstr "I gael rhagor o wybodaeth ynglŷn â sut a pham mae eich gwybodaeth yn cael ei phrosesu, darllenwch yr wybodaeth a roddwyd i chi pan wnaethoch chi ddefnyddio ein gwasanaeth neu pan wnaethom ni gysylltu â chi."
 
 #: cla_public/templates/privacy.html:614
 msgid ""
 "When we ask you for information, we will comply with the law. If you consider that your information has been handled incorrectly, \n"
 "      you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
-msgstr ""
+msgstr "Pan fyddwn yn gofyn i chi am wybodaeth, byddwn yn cydymffurfio â’r gyfraith. Os ydych yn credu nad yw eich gwybodaeth wedi cael ei thrin yn iawn, gallwch gysylltu â’r Comisiynydd Gwybodaeth i gael cyngor annibynnol am ddiogelu data. Gallwch gysylltu â’r Comisiynydd Gwybodaeth yn y cyfeiriad isod:"
 
 #: cla_public/templates/privacy.html:631
 msgid "Changes to the statement"
@@ -2642,15 +2808,6 @@ msgstr "Eich cynnydd"
 #: cla_public/templates/checker/_progress.html:73
 msgid "Contact information"
 msgstr "Gwybodaeth gyswllt"
-
-#: cla_public/templates/checker/about.html:38
-#: cla_public/templates/checker/additional-benefits.html:20
-#: cla_public/templates/checker/benefits.html:21
-#: cla_public/templates/checker/income.html:61
-#: cla_public/templates/checker/property.html:51
-#: cla_public/templates/checker/savings.html:35
-msgid "Continue"
-msgstr "Ymlaen"
 
 #: cla_public/templates/checker/about.html:45
 msgid "Are you in a dispute with your partner?"
@@ -2790,7 +2947,7 @@ msgid ""
 "\n"
 "    Your session will time out after 30 minutes of inactivity. We do this for your security.\n"
 "  "
-msgstr ""
+msgstr "Bydd eich sesiwn yn dod i ben os yw wedi bod yn anweithredol am hanner awr. Rydym yn gwneud hyn er mwyn eich cadw’n ddiogel."
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:15
 msgid "Search"
@@ -3051,7 +3208,7 @@ msgstr "Os byddwch yn methu’r alwad neu angen cyngor ar frys, gallwch ein ffon
 #: cla_public/templates/checker/result/confirmation.html:168
 #: cla_public/templates/checker/result/confirmation.html:181
 msgid "Finish"
-msgstr ""
+msgstr "Gorffen"
 
 #: cla_public/templates/checker/result/confirmation.html:177
 msgid "Print this page"
@@ -3120,7 +3277,7 @@ msgstr ""
 
 #: cla_public/templates/checker/result/eligible.html:22
 msgid "In some cases, you may need to pay a contribution towards your legal aid."
-msgstr ""
+msgstr "Mewn rhai achosion, os ydych yn gymwys, mae’n bosibl y bydd angen i chi dalu cyfraniad tuag at eich cymorth cyfreithiol."
 
 #: cla_public/templates/checker/result/eligible.html:26
 msgid ""
@@ -3217,7 +3374,7 @@ msgid ""
 "\n"
 "          <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">What did you think of this service?</a> (takes 30 seconds)\n"
 "      "
-msgstr ""
+msgstr "<a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\>Beth oeddech chi’n feddwl o’r gwasanaeth hwn?</a> (mae’n cymryd 30 eiliad)"
 
 #: cla_public/templates/checker/result/face-to-face.html:66
 msgid ""
@@ -3349,7 +3506,7 @@ msgstr "Os oes gennych ddyddiad gwrandawiad llys, mae’n bwysig eich bod yn cae
 #: cla_public/templates/checker/result/ineligible.html:93
 #: cla_public/templates/scope/ineligible.html:56
 msgid "Find a solicitor"
-msgstr ""
+msgstr "Dod o hyd i gyfreithiwr"
 
 #: cla_public/templates/emails/confirmation.txt:2
 #, python-format
@@ -3412,7 +3569,7 @@ msgstr "Gallwch ffonio CLA nawr ar 0345 345 4 345. Dyfynnwch eich cyfeirnod pan 
 
 #: cla_public/templates/emails/confirmation.txt:55
 msgid "Take a short survey. Help improve the service."
-msgstr ""
+msgstr "Cymerwch ran mewn arolwg byr. Helpwch ni i wella’r gwasanaeth."
 
 #: cla_public/templates/emails/confirmation.txt:57
 msgid "https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you"
@@ -3453,7 +3610,7 @@ msgstr ""
 
 #: cla_public/templates/errors/5xx.html:12
 msgid "Telephone:"
-msgstr ""
+msgstr "Ffôn"
 
 #: cla_public/templates/errors/5xx.html:13
 msgid "0345 345 4345"
@@ -3572,7 +3729,7 @@ msgstr "(cyfredol)"
 
 #: cla_public/templates/scope/ineligible.html:6
 msgid "Legal aid doesn’t cover all types of problem"
-msgstr ""
+msgstr "Nid yw cymorth cyfreithiol yn gymwys ar gyfer pob math o broblem"
 
 #: cla_public/templates/scope/ineligible.html:14
 msgid "Exceptional cases"
@@ -3596,7 +3753,7 @@ msgid ""
 "\n"
 "        You can %(ask_legal_adviser_link)s if an application might succeed in your case and how to apply.\n"
 "      "
-msgstr ""
+msgstr "Gallwch ofyn i gynghorydd cyfreithiol a allai cais fod yn llwyddiannus yn eich achos chi a sut i wneud cais."
 
 #: cla_public/templates/scope/ineligible.html:31
 msgid "apply directly"
@@ -3612,7 +3769,7 @@ msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:47
 msgid "You can still ask a solicitor for help – you will have to pay for their advice."
-msgstr ""
+msgstr "Mae’n dal yn bosibl i chi ofyn i gyfreithiwr am help – bydd yn rhaid i chi dalu am ei gyngor."
 
 #: cla_public/templates/scope/ineligible.html:50
 msgid "From what you’ve told us today, it looks as though your problem is not covered."
@@ -3620,7 +3777,7 @@ msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:51
 msgid "You can still ask a solicitor for help - you will have to pay for their advice."
-msgstr ""
+msgstr "Mae’n dal yn bosibl i chi ofyn i gyfreithiwr am help – bydd yn rhaid i chi dalu am ei gyngor."
 
 #: cla_public/templates/scope/ineligible.html:67
 msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
@@ -3674,8 +3831,6 @@ msgstr "Dod o hyd i gyfryngwr sy’n lleol i chi"
 #~ msgstr "Cyfraith carchar"
 
 #~ msgid ""
-#~ "Your <a href=\"%(url)s\" aria-labelledby=\"aria-feedback\">feedback</a>\n"
-#~ "      will help us continue to improve this service."
 #~ msgstr ""
 
 #~ msgid "GOV.UK puts small files (known as ’cookies’) onto your computer to collect information about how you browse the site."
@@ -3709,337 +3864,126 @@ msgstr "Dod o hyd i gyfryngwr sy’n lleol i chi"
 #~ msgstr "Anfon adborth"
 
 #~ msgid ""
-#~ "\n"
-#~ "          You can also get advice from this alternative help organisation for issues related to %(category_name)s.\n"
-#~ "          "
 #~ msgid_plural ""
-#~ "\n"
-#~ "          You can also get advice from alternative help organisations for issues related to %(category_name)s.\n"
-#~ "        "
 #~ msgstr[0] ""
-#~ "\n"
-#~ "Hefyd, gallwch gael cyngor gan y sefydliad cymorth hwn ar gyfer materion sy’n berthnasol i %(category_name)s."
 #~ msgstr[1] ""
-#~ "\n"
-#~ "Hefyd, gallwch gael cyngor gan sefydliadau cymorth eraill ar gyfer materion sy’n berthnasol i %(category_name)s."
 #~ msgstr[2] ""
-#~ "\n"
-#~ "Hefyd, gallwch gael cyngor gan sefydliadau cymorth eraill ar gyfer materion sy’n berthnasol i %(category_name)s."
 #~ msgstr[3] ""
-#~ "\n"
-#~ "Hefyd, gallwch gael cyngor gan sefydliadau cymorth eraill ar gyfer materion sy’n berthnasol i %(category_name)s.\n"
-#~ "        "
 
 #~ msgid "If you do not agree to these terms please do not use this service."
-#~ msgstr "Os nad ydych yn cytuno i’r telerau hyn, peidiwch â defnyddio’r gwasanaeth hwn."
-
-#~ msgid ""
-#~ "The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other\n"
-#~ "    organisations who deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> service. For example this digital service is managed by the Ministry of\n"
-#~ "    Justice."
-#~ msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am wasanaeth Cyngor Cyfreithiol Sifil (CLA). Mae’r LAA yn cydweithio â sefydliadau eraill sy’n darparu gwasanaeth CLA. Er enghraifft, mae’r gwasanaeth digidol yn cael ei reoli gan y Weinyddiaeth Cyfiawnder."
-
-#~ msgid ""
-#~ "When you first make contact with <abbr title=\"Civil Legal Advice\">CLA</abbr> you will communicate with the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service, which is delivered by\n"
-#~ "    Agilisys (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr> on behalf of Freedom Communications, a contractor\n"
-#~ "    employed to deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service)."
-#~ msgstr ""
-#~ "Pan fyddwch yn cysylltu gyntaf â <abbr title=\"Civil Legal Advice\">CLA</abbr>, byddwch yn cyfathrebu â Gwasanaeth Gweithredwyr <abbr title=\"Civil Legal Advice\">CLA</abbr>, sy’n cael ei ddarparu gan \n"
-#~ "Agilisys (contractwr sy’n cael ei gyflogi gan yr <abbr title=\"The Legal Aid Agency\">LAA</abbr> ar ran Freedom Communications, sef contractwr a gyflogir i ddarparu Gwasanaeth Gweithredwyr <abbr title=\"Civil Legal Advice\">CLA</abbr>)."
-
-#~ msgid ""
-#~ "At this point, you will need to tell us your name and phone number and all the information you’ve entered will\n"
-#~ "    be stored when you click 'Submit your application'. We store this information so that the operator can see it\n"
-#~ "    when they speak to you."
-#~ msgstr "Yn awr, bydd angen i chi roi’ch enw a’ch rhif ffôn i ni a bydd yr holl wybodaeth yr ydych wedi’i rhoi’n cael ei storio pan fyddwch chi’n clicio ar ‘Cyflwyno’ch cais’. Rydyn ni’n storio’r wybodaeth hon fel y bydd y gweithredwr yn gallu ei gweld wrth siarad â chi."
-
-#~ msgid ""
-#~ "If you don't want to speak to an operator, you don't need to enter any personal details and we don’t store\n"
-#~ "    any of the information you have entered."
-#~ msgstr "Os nad ydych chi am siarad â gweithredwr, ni fydd angen i chi roi unrhyw fanylion personol a ni fyddwn ni’n storio unrhyw wybodaeth yr ydych chi wedi’i rhoi."
-
-#~ msgid ""
-#~ "To provide you with the best service that we can, Civil Legal Advice may share some information about you\n"
-#~ "    with other organisations. But we will only do this if you have given us permission."
-#~ msgstr "Er mwyn darparu’r gwasanaeth gorau posibl i chi, mae’n bosibl y bydd Cyngor Cyfreithiol Sifil yn rhannu rhywfaint o wybodaeth amdanoch chi â sefydliadau eraill. Ond dim ond os ydych chi wedi rhoi caniatâd i ni y byddwn ni’n gwneud hyn."
-
-#~ msgid ""
-#~ "In exceptional circumstances, we may share limited information about you without your consent. This would\n"
-#~ "    only be to prevent fraud, help detect crime, if it is required by law or by a court order or If we are\n"
-#~ "    very worried about your safety or the safety of others."
-#~ msgstr "Mewn amgylchiadau eithriadol, gallwn ni rannu gwybodaeth benodol amdanoch heb gael eich caniatâd. Yr unig reswm y bydden ni’n gwneud hyn yw er mwyn atal twyll, helpu i ddarganfod troseddu, os yw’n ofynnol o dan y gyfraith neu orchymyn llys neu os ydyn ni’n pryderu’n fawr am eich diogelwch chi neu bobl eraill."
+#~ msgstr "Os nad ydych yn cytuno â’r telerau hyn a’r polisi preifatrwydd, peidiwch â defnyddio’r gwasanaeth hwn."
 
 #~ msgid "Read the full Civil Legal Advice Privacy Statement here."
-#~ msgstr "Darllenwch Ddatganiad Preifatrwydd Cyngor Cyfreithiol Sifil yn llawn yma."
-
-#~ msgid ""
-#~ "Personal data is information about you that can be used to identify you in some way\n"
-#~ "    e.g. your name or telephone number. You can look at the\n"
-#~ "    <a href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions#personal-data\" rel=\"external\">full legal definition</a>."
-#~ msgstr "Data personol yw gwybodaeth amdanoch chi y gellir ei defnyddio i’ch adnabod mewn rhyw ffordd e.e. eich enw neu rif ffôn. Gallwch weld <a href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions#personal-data\" rel=\"external\">y diffiniad cyfreithiol llawn</a>."
-
-#~ msgid ""
-#~ "<abbr title=\"Civil Legal Advice\">CLA</abbr> is committed to protecting your personal data and respecting your privacy.\n"
-#~ "    We are legally bound by the Data Protection Act 1998 to ensure that we only use your personal\n"
-#~ "    data for the reasons we tell you about. We must also hold it securely."
-#~ msgstr "Mae CLA wedi ymrwymo i ddiogelu’ch data personol a pharchu’ch preifatrwydd. Rydym wedi cael ein rhwymo’n gyfreithiol gan Ddeddf Diogelu Data 1998 i sicrhau mai dim ond am y rhesymau y byddwn yn eu rhoi i chi y byddwn yn defnyddio’ch data personol. Hefyd rhaid i ni eu dal yn ddiogel."
+#~ msgstr "Mewn amgylchiadau eithriadol, gallwn ni rannu gwybodaeth benodol amdanoch heb gael eich caniatâd. Yr unig reswm y bydden ni’n gwneud hyn yw er mwyn atal twyll, helpu i ddarganfod troseddu, os yw’n ofynnol o dan y gyfraith neu orchymyn llys neu os ydyn ni’n pryderu’n fawr am eich diogelwch chi neu bobl eraill."
 
 #~ msgid "What is Civil Legal Advice?"
-#~ msgstr "Beth yw Cyngor Cyfreithiol Sifil?"
+#~ msgstr "Mae CLA wedi ymrwymo i ddiogelu’ch data personol a pharchu’ch preifatrwydd. Rydym wedi cael ein rhwymo’n gyfreithiol gan Ddeddf Diogelu Data 1998 i sicrhau mai dim ond am y rhesymau y byddwn yn eu rhoi i chi y byddwn yn defnyddio’ch data personol. Hefyd rhaid i ni eu dal yn ddiogel."
 
 #~ msgid "is a national adviceline for England and Wales, paid for by Legal Aid."
-#~ msgstr "Mae Cyngor Cyfreithiol Sifil (CLA) yn llinell gyngor cenedlaethol ar gyfer Cymru a Lloegr sy’n cael ei hariannu drwy Gymorth Cyfreithiol."
-
-#~ msgid ""
-#~ "The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
-#~ "    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller\n"
-#~ "    for the purposes of the Data Protection Act 1998. They are responsible for determining the purposes for which\n"
-#~ "    and the manner in which any personal data are, or are to be processed."
-#~ msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am wasanaeth CLA a’r Weinyddiaeth Cyfiawnder yw’r Rheolydd Data i ddibenion Deddf Diogelu Data 1998. Maent yn gyfrifol am bennu’r dibenion y mae neu y bydd unrhyw ddata personol yn cael eu prosesu ar eu cyfer a’r ffordd o wneud hynny."
-
-#~ msgid ""
-#~ "For a more comprehensive explanation see\n"
-#~ "    <a href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions#personal-data\" rel=\"external\">this guide</a>."
-#~ msgstr "<a href=\"http://ico.org.uk/for_organisations/data_protection/the_guide/key_definitions#personal-data\" rel=\"external\">Mae esboniad mwy cynhwysfawr ar gael drwy ddilyn y ddolen</a>."
-
-#~ msgid ""
-#~ "The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
-#~ "    For example when you first make contact with <abbr>CLA</abbr> you will communicate with\n"
-#~ "    the <abbr>CLA</abbr> Operator Service, which is delivered by Agilisys\n"
-#~ "    (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr> to [  ])."
-#~ msgstr "Mae’r LAA yn cydweithio â sefydliadau eraill sy’n darparu gwasanaeth CLA. Er enghraifft, pan fyddwch yn cysylltu gyntaf â CLA, byddwch yn cyfathrebu â Gwasanaeth Gweithredwyr CLA, sy’n cael ei ddarparu gan Agilisys ar ran Freedom Communications (contractwr sy’n cael ei gyflogi gan yr LAA i ddarparu Gwasanaeth Gweithredwyr CLA)."
-
-#~ msgid ""
-#~ "If after contacting the <abbr>CLA</abbr> Operator Service it is determined that you\n"
-#~ "    qualify for the <abbr>CLA</abbr> specialist advice service you may be put through\n"
-#~ "    to one of a number of <abbr>CLA</abbr> Specialist Advice Providers. If you do not qualify to receive\n"
-#~ "    <abbr>CLA</abbr> specialist advice we will inform you accordingly and\n"
-#~ "    direct you to alternative help."
-#~ msgstr "Os penderfynir, wedi i chi gysylltu â Gwasanaeth Gweithredwyr CLA, eich bod yn gymwys i dderbyn gwasanaeth cynghori arbenigol CLA, gallech gael eich trosglwyddo i un o nifer o Ddarparwyr Cyngor Arbenigol CLA.  Os nad ydych yn gymwys i gael cyngor arbenigol CLA, byddwn yn rhoi gwybod i chi am hynny ac yn eich cyfeirio at leoedd eraill sy’n cynnig help."
-
-#~ msgid ""
-#~ "These organisations are Data Processors for the purposes of the Data Protection Act 1998 which\n"
-#~ "    means that they process data on behalf of the <abbr>LAA</abbr> and <abbr title=\"The Ministry of Justice\">MoJ</abbr>."
-#~ msgstr "Mae’r sefydliadau hyn yn Broseswyr Data i ddibenion Deddf Diogelu Data 1998. Mae hyn yn golygu eu bod yn prosesu data ar ran yr LAA a’r Weinyddiaeth Cyfiawnder."
+#~ msgstr "Beth yw Cyngor Cyfreithiol Sifil?"
 
 #~ msgid "What data will <abbr>CLA</abbr> collect?"
-#~ msgstr "Pa ddata y bydd CLA yn eu casglu?"
-
-#~ msgid ""
-#~ "<abbr>CLA</abbr> will only collect the minimum amount of information necessary in order\n"
-#~ "    to deliver the <abbr>CLA</abbr> service to you."
-#~ msgstr "Dim ond y wybodaeth sydd ei hangen i ddarparu gwasanaeth CLA i chi y bydd CLA yn ei chasglu."
+#~ msgstr "Mae’r sefydliadau hyn yn Broseswyr Data i ddibenion Deddf Diogelu Data 1998. Mae hyn yn golygu eu bod yn prosesu data ar ran yr LAA a’r Weinyddiaeth Cyfiawnder."
 
 #~ msgid "Details of any specific needs that you may have in order to access the <abbr>CLA</abbr> service;"
-#~ msgstr "Manylion am unrhyw anghenion penodol sydd gennych er mwyn defnyddio gwasanaeth CLA;"
-
-#~ msgid ""
-#~ "The amount of information <abbr>CLA</abbr> will collect will depend on whether you qualify for the <abbr>CLA</abbr>\n"
-#~ "    service and/or your specific needs. For example you will be asked to provide more information\n"
-#~ "    before we can transfer you through to a <abbr>CLA</abbr> Specialist."
-#~ msgstr "Bydd maint y wybodaeth y mae CLA yn ei chasglu’n dibynnu ar ba un a ydych chi’n gymwys i gael gwasanaeth CLA neu beidio a/neu eich anghenion penodol. Er enghraifft, byddwn ni’n gofyn i chi ddarparu rhagor o wybodaeth cyn eich trosglwyddo i un o Arbenigwyr CLA."
+#~ msgstr "Dim ond y wybodaeth sydd ei hangen i ddarparu gwasanaeth CLA i chi y bydd CLA yn ei chasglu."
 
 #~ msgid "What does <abbr>CLA</abbr> use the data for?"
-#~ msgstr "Ar gyfer beth y mae CLA yn defnyddio’r data?"
+#~ msgstr "Bydd maint y wybodaeth y mae CLA yn ei chasglu’n dibynnu ar ba un a ydych chi’n gymwys i gael gwasanaeth CLA neu beidio a/neu eich anghenion penodol. Er enghraifft, byddwn ni’n gofyn i chi ddarparu rhagor o wybodaeth cyn eich trosglwyddo i un o Arbenigwyr CLA."
 
 #~ msgid "Work out whether you qualify for legal aid"
-#~ msgstr "Gweithio allan a ydych chi’n gymwys i gael cymorth cyfreithiol"
+#~ msgstr "Ar gyfer beth y mae CLA yn defnyddio’r data?"
 
 #~ msgid "Provide information and/or advice services to you"
-#~ msgstr "Darparu gwasanaethau gwybodaeth a/neu gyngor i chi"
+#~ msgstr "Gweithio allan a ydych chi’n gymwys i gael cymorth cyfreithiol"
 
 #~ msgid "Save you from repeating information every time you contact us"
-#~ msgstr "Eich arbed rhag ailadrodd gwybodaeth bob tro y byddwch chi’n cysylltu â ni"
+#~ msgstr "Darparu gwasanaethau gwybodaeth a/neu gyngor i chi"
 
 #~ msgid "Help us monitor and improve our service"
-#~ msgstr "Ein helpu i fonitro a gwella ein gwasanaeth"
-
-#~ msgid ""
-#~ "Build statistics about the <abbr>CLA</abbr> service, monitor fraud and justify public expenditure.\n"
-#~ "      This information is collated in an anonymous format."
-#~ msgstr "Cael ystadegau am wasanaeth CLA, monitro twyll a chyfiawnhau gwariant cyhoeddus. Mae’r wybodaeth hon yn cael ei chasglu heb gynnwys enwau."
-
-#~ msgid ""
-#~ "Collect views on the <abbr>CLA</abbr> service and any improvements considered necessary.\n"
-#~ "      Where consent is provided <abbr>CLA</abbr> User contact details may be passed onto an independent research agency."
-#~ msgstr "Casglu barn am wasanaeth CLA ac unrhyw welliannau sydd eu hangen. Os bydd defnyddwyr gwasanaeth CLA yn cydsynio, gellir trosglwyddo eu manylion cysylltu i asiantaeth ymchwil annibynnol."
+#~ msgstr "Eich arbed rhag ailadrodd gwybodaeth bob tro y byddwch chi’n cysylltu â ni"
 
 #~ msgid "Prevent or detect crime or fraud"
-#~ msgstr "Atal neu ddarganfod troseddu neu dwyll"
-
-#~ msgid ""
-#~ "<abbr>CLA</abbr> will be able to view and verify the information that you provide and where\n"
-#~ "    necessary will amend it to maintain its accuracy."
-#~ msgstr "Bydd CLA yn gallu gweld a dilysu’r wybodaeth yr ydych chi’n ei darparu ac, os bydd angen, bydd yn ei newid er mwyn ei chadw’n gywir."
-
-#~ msgid ""
-#~ "The minimum amount of personal data that <abbr>CLA</abbr> will ask to collect is your name and one other piece\n"
-#~ "    of personal information that could be used to identify you e.g. postcode, date of birth or telephone number."
-#~ msgstr "Y data personol lleiaf y bydd CLA yn gofyn am eu casglu yw’ch enw ac un eitem arall o wybodaeth bersonol i’w defnyddio i’ch adnabod os bydd angen e.e. cod post, dyddiad geni neu rif ffôn."
-
-#~ msgid ""
-#~ "All personal data will be stored on secure servers in the UK. It may also be stored outside of Europe,\n"
-#~ "    where it could be viewed by our staff or specialist providers."
-#~ msgstr "Bydd yr holl ddata personol yn cael eu storio ar weinyddion diogel yn y DU. Gellir eu storio y tu allan i Ewrop hefyd, lle y bydd ein staff neu ddarparwyr arbenigol yn gallu eu gweld."
-
-#~ msgid ""
-#~ "When you contact <abbr>CLA</abbr> online the personal data that you provide will be recorded within a secure digital system.\n"
-#~ "        <br><br>\n"
-#~ "        Please note that transmitting information over the internet is generally not completely secure, and\n"
-#~ "        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
-#~ "        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
-#~ msgstr "Pan fyddwch chi’n cysylltu â CLA ar-lein, bydd y data personol yr ydych chi’n eu darparu’n cael eu cofnodi mewn system ddigidol ddiogel. Cofiwch nad yw gwybodaeth sy’n cael ei throsglwyddo dros y rhyngrwyd yn hollol ddiogel yn gyffredinol, ac nid yw CLA yn gallu gwarantu y bydd eich data’n ddiogel. Ar eich menter eich hun y byddwch chi’n trosglwyddo unrhyw ddata. Mae CLA wedi rhoi gweithdrefnau a chyfleusterau diogelwch ar waith i gadw’ch data’n ddiogel wedi i ni eu cael."
-
-#~ msgid ""
-#~ "Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the\n"
-#~ "        security of your data. Any data you transmit is at your own risk.\n"
-#~ "        <br><br>\n"
-#~ "        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
-#~ "        <br><br>\n"
-#~ "        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
-#~ "        <br><br>\n"
-#~ "        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software,"
-#~ msgstr "Nid yw gwybodaeth sy’n cael ei throsglwyddo drwy’r e-bost yn hollol ddiogel yn gyffredinol, ac nid yw CLA yn gallu gwarantu y bydd eich data’n ddiogel. Ar eich menter eich hun y byddwch chi’n trosglwyddo unrhyw ddata. Mae CLA wedi rhoi gweithdrefnau a chyfleusterau diogelwch ar waith i gadw’ch data’n ddiogel wedi i ni eu cael. Pan fyddwch chi’n anfon neges e-bost i CLA, bydd data personol perthnasol yr ydych chi’n eu darparu yn cael eu cofnodi mewn system ddigidol ddiogel. Mae CLA yn gallu monitro a storio negeseuon e-bost oddi wrthych chi ac atoch chi. Hefyd gallwn ddefnyddio meddalwedd rhwystro."
+#~ msgstr "Casglu barn am wasanaeth CLA ac unrhyw welliannau sydd eu hangen. Os bydd defnyddwyr gwasanaeth CLA yn cydsynio, gellir trosglwyddo eu manylion cysylltu i asiantaeth ymchwil annibynnol."
 
 #~ msgid "In order to protect privacy <abbr>CLA</abbr> will always check with you what forms of outgoing communication are acceptable and appropriate and whether messages can be left."
-#~ msgstr "Er mwyn diogelu preifatrwydd, bydd CLA bob amser yn gofyn pa ddulliau o gyfathrebu â chi sy’n dderbyniol a phriodol ac a allwn ni adael negeseuon."
+#~ msgstr "Nid yw gwybodaeth sy’n cael ei throsglwyddo drwy’r e-bost yn hollol ddiogel yn gyffredinol, ac nid yw CLA yn gallu gwarantu y bydd eich data’n ddiogel. Ar eich menter eich hun y byddwch chi’n trosglwyddo unrhyw ddata. Mae CLA wedi rhoi gweithdrefnau a chyfleusterau diogelwch ar waith i gadw’ch data’n ddiogel wedi i ni eu cael. Pan fyddwch chi’n anfon neges e-bost i CLA, bydd data personol perthnasol yr ydych chi’n eu darparu yn cael eu cofnodi mewn system ddigidol ddiogel. Mae CLA yn gallu monitro a storio negeseuon e-bost oddi wrthych chi ac atoch chi. Hefyd gallwn ddefnyddio meddalwedd rhwystro."
 
 #~ msgid "When making outgoing calls to you <abbr>CLA</abbr> will ensure that:"
-#~ msgstr "Pan fydd CLA yn eich ffonio, bydd yn sicrhau:"
-
-#~ msgid ""
-#~ "Protect your security by ensuring that third parties cannot create sites that pose as\n"
-#~ "      a gov.uk service in an attempt to gather your information."
-#~ msgstr "Eich cadw’n ddiogel drwy sicrhau na fydd trydydd parti yn gallu creu gwefannau sy’n honni bod yn wasanaeth gov.uk er mwyn casglu’ch gwybodaeth."
+#~ msgstr "Er mwyn diogelu preifatrwydd, bydd CLA bob amser yn gofyn pa ddulliau o gyfathrebu â chi sy’n dderbyniol a phriodol ac a allwn ni adael negeseuon."
 
 #~ msgid "You can read more about <a href=\"%(cookie_url)s\">how cookies are used</a>."
-#~ msgstr "Mae rhagor o wybodaeth ar gael am y ffordd y <a href=\"%(cookie_url)s\">mae cwcis yn cael eu defnyddio</a>."
-
-#~ msgid ""
-#~ "In order to provide you with the best service that we can we may share some information about\n"
-#~ "    you with the organisations mentioned below. But we will only do this if you have given us consent\n"
-#~ "    when the operator asks for it."
-#~ msgstr "Er mwyn darparu’r gwasanaeth gorau posibl i chi, mae’n bosibl y byddwn ni’n rhannu rhywfaint o wybodaeth amdanoch chi â’r sefydliadau sydd wedi’u henwi isod. Ond ni fyddwn ni’n gwneud hyn oni bai’ch bod chi wedi rhoi caniatâd i ni pan fydd y gweithredwr yn gofyn amdano."
+#~ msgstr "Eich cadw’n ddiogel drwy sicrhau na fydd trydydd parti yn gallu creu gwefannau sy’n honni bod yn wasanaeth gov.uk er mwyn casglu’ch gwybodaeth."
 
 #~ msgid "Other advice organisations"
-#~ msgstr "Sefydliadau cynghori eraill"
+#~ msgstr "Er mwyn darparu’r gwasanaeth gorau posibl i chi, mae’n bosibl y byddwn ni’n rhannu rhywfaint o wybodaeth amdanoch chi â’r sefydliadau sydd wedi’u henwi isod. Ond ni fyddwn ni’n gwneud hyn oni bai’ch bod chi wedi rhoi caniatâd i ni pan fydd y gweithredwr yn gofyn amdano."
 
 #~ msgid "If we do this we will wherever possible:"
-#~ msgstr "Os byddwn ni’n gwneud hyn, lle bynnag y bo modd, byddwn:"
+#~ msgstr "Sefydliadau cynghori eraill"
 
 #~ msgid "To prevent fraud and help detect crime."
-#~ msgstr "I atal twyll a helpu i ddarganfod troseddu"
+#~ msgstr "Os byddwn ni’n gwneud hyn, lle bynnag y bo modd, byddwn:"
 
 #~ msgid "Requests to view and amend <abbr>CLA</abbr> Data"
-#~ msgstr "Ceisiadau i weld a diwygio Data CLA"
+#~ msgstr "I atal twyll a helpu i ddarganfod troseddu"
 
 #~ msgid "You have the right to request details about the personal information <abbr>CLA</abbr> holds about you."
-#~ msgstr "Mae gennych chi hawl i ofyn am fanylion y wybodaeth bersonol y mae CLA yn ei dal amdanoch chi."
+#~ msgstr "Ceisiadau i weld a diwygio Data CLA"
 
 #~ msgid "You can also request us to correct any personal information if it is found to be inaccurate or out of date."
-#~ msgstr "Gallwch chi hefyd ofyn i ni gywiro unrhyw wybodaeth bersonol os gwelir ei bod yn anghywir neu wedi dyddio."
+#~ msgstr "Mae gennych chi hawl i ofyn am fanylion y wybodaeth bersonol y mae CLA yn ei dal amdanoch chi."
 
 #~ msgid "Requests to view personal data held by <abbr>CLA</abbr>"
-#~ msgstr "Ceisiadau i weld data personol sy’n cael eu dal gan CLA"
+#~ msgstr "Gallwch chi hefyd ofyn i ni gywiro unrhyw wybodaeth bersonol os gwelir ei bod yn anghywir neu wedi dyddio."
 
 #~ msgid "If you want to view your record, please make a request in writing including your."
-#~ msgstr "Os ydych chi am weld eich cofnod, gwnewch gais drwy lythyr gan gynnwys eich."
-
-#~ msgid ""
-#~ "Please note that we cannot give out any information unless the details that you provide match our records.\n"
-#~ "    If you used a fake name or pseudonym when you contacted <abbr>CLA</abbr> you will need to prove your identity."
-#~ msgstr "Ni fyddwn ni’n gallu rhoi unrhyw wybodaeth oni bai fod y manylion yr ydych chi’n eu darparu’n cyfateb i’r rhai yn ein cofnodion. Os oeddech chi wedi defnyddio ffugenw wrth gysylltu â CLA, bydd angen i chi brofi pwy ydych chi."
-
-#~ msgid ""
-#~ "If you gave us enough information to identify you, <abbr>CLA</abbr> will send you your personal information as soon as\n"
-#~ "    possible but within a maximum of 40 days."
-#~ msgstr "Os byddwch chi wedi rhoi digon o wybodaeth i’ch adnabod, bydd CLA yn anfon eich gwybodaeth bersonol atoch chi cyn gynted â phosibl ac o fewn 40 diwrnod ar y mwyaf."
+#~ msgstr "Ceisiadau i weld data personol sy’n cael eu dal gan CLA"
 
 #~ msgid "You can contact us by email at <a class=\"email\" href=\"mailto:data.access@justice.gsi.gov.uk\">data.access@justice.gsi.gov.uk</a> or in writing to"
-#~ msgstr "Gallwch chi gysylltu â ni drwy’r e-bost yn data.access@justice.gsi.gov.uk neu drwy lythyr yn"
+#~ msgstr "Os byddwch chi wedi rhoi digon o wybodaeth i’ch adnabod, bydd CLA yn anfon eich gwybodaeth bersonol atoch chi cyn gynted â phosibl ac o fewn 40 diwrnod ar y mwyaf."
 
 #~ msgid "Requests to delete personal data"
-#~ msgstr "Ceisiadau i ddileu data personol"
+#~ msgstr "Gallwch chi gysylltu â ni drwy’r e-bost yn data.access@justice.gsi.gov.uk neu drwy lythyr yn"
 
 #~ msgid "<abbr>CLA</abbr> will only keep a record of your personal data where you have consented to this and we will handle it carefully."
-#~ msgstr "Dim ond os ydych chi wedi cydsynio i hynny y bydd CLA yn cadw cofnod o’ch data personol a byddwn ni’n ei drin yn ofalus."
+#~ msgstr "Ceisiadau i ddileu data personol"
 
 #~ msgid "We will consider requests to delete some or all of your personal data but please note that as a minimum <abbr>CLA</abbr> will usually retain:"
-#~ msgstr "Byddwn ni’n ystyried ceisiadau am ddileu rhai neu’r cyfan o’ch data personol ond fel arfer bydd CLA yn cadw’r canlynol o leiaf:"
-
-#~ msgid ""
-#~ "For everyone that uses our service we will retain a name and one other piece of personal data e.g.\n"
-#~ "      date of birth and details of what we did for you"
-#~ msgstr "Ar gyfer pawb sy’n defnyddio ein gwasanaeth, byddwn yn cadw enw ac un eitem arall o ddata personol e.e. dyddiad geni a manylion y gwasanaeth yr ydyn ni wedi’i roi i chi"
-
-#~ msgid ""
-#~ "For everyone that asks <abbr>CLA</abbr> to check whether they qualify for legal aid in order to seek advice from a\n"
-#~ "      <abbr>CLA</abbr> Specialist we will also retain details of any financial information and case details used to prove that\n"
-#~ "      you qualify for legal aid."
-#~ msgstr "Ar gyfer pawb sy’n gofyn i CLA wirio a ydyn nhw’n gymwys i gael cymorth cyfreithiol er mwyn gofyn am gyngor gan un o Arbenigwyr CLA, byddwn ni hefyd yn cadw manylion am unrhyw wybodaeth ariannol a manylion achosion a oedd wedi’u defnyddio i brofi eich bod yn gymwys i gael cymorth cyfreithiol."
-
-#~ msgid ""
-#~ "Please note that if you qualify to receive advice from a <abbr>CLA</abbr> Specialist, they will also need to retain\n"
-#~ "    additional personal data about you within their own Case Handling System. Such data shall be sufficient\n"
-#~ "    to justify the provision of legal aid advice and meet professional requirements."
-#~ msgstr "Os byddwch chi’n gymwys i gael cyngor gan un o Arbenigwyr CLA, bydd angen hefyd iddo gadw data personol ychwanegol amdanoch chi yn ei System Trafod Achosion ei hun.  Rhaid cadw digon o ddata o’r fath i gyfiawnhau darparu cyngor drwy gymorth cyfreithiol ac i gwrdd â gofynion proffesiynol."
+#~ msgstr "Dim ond os ydych chi wedi cydsynio i hynny y bydd CLA yn cadw cofnod o’ch data personol a byddwn ni’n ei drin yn ofalus."
 
 #~ msgid "Before you contact Civil Legal Advice"
-#~ msgstr "Cyn i chi gysylltu â Chyngor Cyfreithiol Sifil"
+#~ msgstr "Os byddwch chi’n gymwys i gael cyngor gan un o Arbenigwyr CLA, bydd angen hefyd iddo gadw data personol ychwanegol amdanoch chi yn ei System Trafod Achosion ei hun.  Rhaid cadw digon o ddata o’r fath i gyfiawnhau darparu cyngor drwy gymorth cyfreithiol ac i gwrdd â gofynion proffesiynol."
 
 #~ msgid "So we can improve this service, we'd like to understand why you want to contact <abbr title=\"Civil Legal Advice\">CLA</abbr>."
-#~ msgstr "Er mwyn i ni allu gwella’r gwasanaeth hwn, hoffwn ddeall pam eich bod eisiau cysylltu â <abbr title=\"Civil Legal Advice\">CLA</abbr>."
-
-#~ msgid ""
-#~ "Your details have been submitted and an operator will try to call\n"
-#~ "the person you nominated at least once during your chosen time, or as close to the time as possible."
-#~ msgstr ""
-#~ "Mae’ch manylion wedi cael eu cyflwyno a bydd gweithredwryn ceisio ffonio’r\n"
-#~ "unigolyn a enwebwyd gennych o leiaf unwaith yn ystod yr amser a ddewiswyd gennych, neu mor agos at yr amser â phosibl"
-
-#~ msgid ""
-#~ "Your details have been submitted and an operator will try to call\n"
-#~ "you at least once during your chosen time, or as close to the time as possible."
-#~ msgstr ""
-#~ "Mae’ch manylion wedi cael eu cyflwyno a bydd gweithredwr yn ceisio eich ffonio\n"
-#~ "o leiaf unwaith yn ystod yr amser a ddewiswyd gennych, neu mor agos at yr amser â phosibl"
-
-#~ msgid ""
-#~ "If you don’t qualify for legal aid, you will have to pay for\n"
-#~ "        legal advice. You should ask your adviser about the cost of their\n"
-#~ "        advice."
-#~ msgstr ""
-#~ "Os nad ydych chi’n gymwys i gael cymorth cyfreithiol, bydd yn rhaid i chi dalu am \n"
-#~ "gyngor cyfreithiol. Dylech chi siarad â’ch cynghorydd am y gost \n"
-#~ "o gael cyngor ganddynt."
+#~ msgstr "Cyn i chi gysylltu â Chyngor Cyfreithiol Sifil"
 
 #~ msgid "We will leave a message when we call."
-#~ msgstr "Byddwn yn gadael neges pan fyddwn yn eich ffonio."
+#~ msgstr ""
 
 #~ msgid "Please return to the <a href=\"/\">Find out if Civil Legal Advice can help you</a> page and try again."
-#~ msgstr "Ewch yn ôl i’r dudalen <a href=\"/\">Cael gwybod a yw Cyngor Cyfreithiol Sifil</a> yn gallu eich helpu, a rhowch gynnig arall arni."
+#~ msgstr "Byddwn yn gadael neges pan fyddwn yn eich ffonio."
 
 #~ msgid "Service unavailable"
-#~ msgstr "Nid yw’r gwasanaeth hwn ar gael"
+#~ msgstr "Ewch yn ôl i’r dudalen <a href=\"/\">Cael gwybod a yw Cyngor Cyfreithiol Sifil</a> yn gallu eich helpu, a rhowch gynnig arall arni."
 
 #~ msgid "This service is temporarily unavailable"
-#~ msgstr "Nid yw’r gwasanaeth hwn ar gael ar hyn o bryd"
+#~ msgstr "Nid yw’r gwasanaeth hwn ar gael"
 
 #~ msgid "This service is not available right now, but we’re working hard to get things up and running again."
-#~ msgstr "Nid yw’r gwasanaeth hwn ar gael ar hyn o bryd, ond rydym yn gweithio’n galed i geisio cael pethau i weithio eto"
+#~ msgstr "Nid yw’r gwasanaeth hwn ar gael ar hyn o bryd"
 
 #~ msgid "You can try again later or call us on 0345 345 4 345."
-#~ msgstr "Gallwch roi cynnig arall arni nes ymlaen, neu ein ffonio ar 0345 345 4 345"
+#~ msgstr "Nid yw’r gwasanaeth hwn ar gael ar hyn o bryd, ond rydym yn gweithio’n galed i geisio cael pethau i weithio eto"
 
 #~ msgid "Minicom: 0345 609 6677"
-#~ msgstr "Minicom: 0345 609 6677"
+#~ msgstr "Gallwch roi cynnig arall arni nes ymlaen, neu ein ffonio ar 0345 345 4 345"
 
 #~ msgid "Or text <strong>legalaid</strong> and your name to 80010."
-#~ msgstr "Neu anfonwch neges destun a’ch enw i 80010."
+#~ msgstr "Minicom: 0345 609 6677"
 
 #~ msgid "Find out about call charges here"
-#~ msgstr "Cewch ragor o wybodaeth am gost galwadau ffôn yma"
+#~ msgstr "Neu anfonwch neges destun a’ch enw i 80010."
 
 #~ msgid "This service is only available if you are a resident of England or Wales."
-#~ msgstr "Mae’r gwasanaeth hwn ar gael os ydych yn preswylio yng Nghymru a Lloegr yn unig."
+#~ msgstr "Cewch ragor o wybodaeth am gost galwadau ffôn yma"
 
