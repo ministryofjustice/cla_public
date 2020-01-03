@@ -35,3 +35,5 @@ django-extended-choices==0.3.0
 # fork of https://github.com/samgiles/slumber
 # with custom parameters for timeouts and additional headers on requests
 git+git://github.com/ministryofjustice/slumber.git@da38360d6d158ee7ed445b43228fefc6f7e430e6#egg=slumber==0.6.3moj
+
+Flask-Script==2.0.5
