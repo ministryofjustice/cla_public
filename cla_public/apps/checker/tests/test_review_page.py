@@ -28,8 +28,8 @@ class TestReviewPage(unittest.TestCase):
 
     def assert_review_section(self, url):
         soup = BeautifulSoup(self.review_page_html, features="html.parser")
-        section = next(iter(soup.select('section header a[href="{0}"]'.format(url))), None)
-        self.assertIsNotNone(section, "Section not present: {0}".format(url))
+        section = next(iter(soup.select('dl dd a[href^="{0}"]'.format(url))), None)
+        self.assertIsNotNone(section, "Section (DL) not present: {0}".format(url))
 
     def find_question(self, question):
         soup = BeautifulSoup(self.review_page_html, features="html.parser")

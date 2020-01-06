@@ -1,58 +1,64 @@
-{% macro render_field(field, step_title) %}
+{% macro render_field(field, step_title, url) %}
   {% if 'Property' in field.type %}
     {% for property in field %}
-      <li>
-        {% if field|length > 1 %}
-          <h3>{{ _('Property') }} {{ loop.index }}</h3>
-        {% endif %}
-        <ul class="answers">
-          {% for field_name, field in property.form._fields.items() if field.data.per_interval_value != None %}
-            {{ render_field(field) }}
-          {% endfor %}
-        </ul>
-      </li>
+      {% if field|length > 1 %}
+        <h3 class="govuk-heading-m">{{ _('Property') }} {{ loop.index }}</h3>
+      {% endif %}
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        {% for field_name, field in property.form._fields.items() if field.data.per_interval_value != None %}
+          {{ render_row(field, step_title, url) }}
+        {% endfor %}
+      </dl>
     {% endfor %}
   {% elif 'Income' in field.type %}
-    <li>
-      <h3>{{ field.label}}</h3>
-      <ul class="answers">
-        {% for field_name, field in field.form._fields.items() %}
-          {{ render_field(field) }}
-        {% endfor %}
-      </ul>
-    </li>
+    <h3 class="govuk-heading-m">{{ field.label.text }}</h3>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      {% for field_name, field in field.form._fields.items() %}
+        {{ render_row(field, step_title, url) }}
+      {% endfor %}
+    </dl>
   {% else %}
-    <li class="answers-item">{{ render_answer(field, step_title) }}</li>
+    {{ render_row(field, step_title, url)}}
   {% endif %}
 {% endmacro %}
 
-{% macro render_answer(field, step_title) %}
-  {% if step_title != field.label.text %}
-    <div class="question">
-      <span class="review-ui-label">{{ _('Question') }}</span>
-      {{ field.label.text }}
-    </div>
-  {% endif %}
-  <div class="answer">
-    <span class="review-ui-label">{{ _('Answer') }}</span>
-    {% if field.choices %}
-      {{ render_choices(field) }}
-    {% elif 'Money' in field.type %}
-      {{ render_money_field(field) }}
-    {% else %}
-      <strong>{{ field.data}}</strong>
-    {% endif %}
+
+{% macro render_row(field, step_title, url) %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      {{ field.label.text}}
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ render_answer(field, step_title) }}
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="{{ url }}#field-label-{{ field.id }}">
+        {% trans %}Change{% endtrans %} <span class="govuk-visually-hidden"> {% trans %}answer for{% endtrans %} {{ field.label.text }}</span>
+      </a>
+    </dd>
   </div>
+{% endmacro %}
+
+
+
+{% macro render_answer(field, step_title) %}
+  {% if field.choices %}
+    {{ render_choices(field) }}
+  {% elif 'Money' in field.type %}
+    {{ render_money_field(field) }}
+  {% else %}
+    {{ field.data}}
+  {% endif %}
 {% endmacro %}
 
 {% macro render_choices(field) %}
   {% if field.data is string %}
-    <strong>{{ field|selected_option }}</strong>
+    {{ field|selected_option }}
   {% elif field.data %}
-    <ul class="multiple-answers">
+    <ul class="govuk-list">
       {% for item in field.data %}
         <li>
-          <strong>{{ field|selected_option(item) }}</strong>
+          {{ field|selected_option(item) }}
         </li>
       {% endfor %}
     </ul>
@@ -60,13 +66,16 @@
 {% endmacro %}
 
 {% macro render_money_field(field) %}
-  <span class="currency">&pound;</span>
+  &pound;
   {%- if 'Interval' in field.type -%}
-    <strong class="money-value">{{ field.data.per_interval_value }}</strong>
+    {{ field.data.per_interval_value }}
     {%- if field.data.per_interval_value != 0 %}
-      <span class="money-interval">{{ field.interval_period|selected_option }}</span>
+      ({{ field.interval_period|selected_option }})
     {%- endif %}
   {%- else -%}
-    <strong class="money-value">{{ field.data }}</strong>
+    {{ field.data }}
+    {%- if (field.id == "income_contribution") and (field.data != 0) %}
+      ({% trans %}per month{% endtrans %})
+    {%- endif %}
   {% endif %}
 {% endmacro %}

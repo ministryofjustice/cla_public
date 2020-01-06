@@ -5,68 +5,45 @@
 {% import "macros/review.html" as Review %}
 
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
   <form method="POST" class="answers-summary">
     {% if session.checker.scope_answers %}
-      <section id="step-scope">
-        <header>
-          <h2 tabindex="1">{{ _('Your problem area') }}</h2>
-          <a class="button-secondary button-small" href="{{ url_for('scope.diagnosis') }}"
-            aria-label="{{ _('Go back and change your answers in your problem area section') }}"
-            role="button"
-            tabindex="3"
-          >
-            {{ _('Go back and change answers') }}
-          </a>
-        </header>
-        <ul class="answers" tabindex="2">
-          {% for item in session.checker.scope_answers %}
-            <li class="answers-item">
-              <div class="question">
-                <span class="review-ui-label">{{ _('Question') }}</span>
-                {{ item.question }}
-              </div>
-              <div class="answer">
-                <span class="review-ui-label">{{ _('Answer') }}</span>
-                <strong>{{ item.answer }}</strong>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
-      </section>
+      <h2 class="govuk-heading-l" id="step-scope">{{ _('Your problem area') }}</h2>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        {% for item in session.checker.scope_answers %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              {{ item.question }}
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ item.answer }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="{{ url_for('scope.diagnosis') }}">
+               {% trans %}Change{% endtrans %} <span class="govuk-visually-hidden"> {% trans %}answer for{% endtrans %} {{ item.question }}</span>
+              </a>
+            </dd>
+          </div>
+        {% endfor %}
+      </dl>
     {% endif %}
 
     {% for step in steps %}
       {% set answers = step.completed_fields() %}
       {% set multiple_answers = step.name in ['property', 'income'] or answers|length > 1 %}
+      {% set property_or_income = step.name in ['property', 'income'] %}
       {% set step_title = step.form_class.title %}
-      <section id="step-{{ step.name }}">
-        <header>
-          <h2 tabindex="{{ (loop.index * 3) + 1 }}">{{ step_title }}</h2>
-          <a class="button-secondary button-small" href="{{ url_for('checker.wizard', step=step.name) }}"
-            role="button"
-            tabindex="{{ (loop.index * 3) + 3 }}"
-            aria-label="
-              {%- trans plural=multiple_answers, step_title=step_title|lower -%}
-                Go back and change your answer in {{ step_title }} section
-              {%- pluralize -%}
-                Go back and change your answers in {{ step_title }} section
-              {%- endtrans -%}
-            ">
-            {% if multiple_answers %}
-              {{ _('Go back and change answers') }}
-            {% else %}
-              {{ _('Go back and change answer') }}
-            {% endif %}
-          </a>
-        </header>
-        <ul class="answers" tabindex="{{ (loop.index * 3) + 2 }}">
-          {% for field in answers %}
-            {{ Review.render_field(field, step_title) }}
-          {% endfor %}
-        </ul>
-      </section>
+      <h2 class="govuk-heading-l" id="step-{{ step.name }}">{{ step_title }}</h2>
+      {% if not property_or_income %}
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      {% endif %}
+      {% for field in answers %}
+        {{ Review.render_field(field, step_title, url_for('checker.wizard', step=step.name) ) }}
+      {% endfor %}
+      {% if not property_or_income %}
+        </dl>
+      {% endif %}
     {% endfor %}
 
     {{ form.csrf_token }}

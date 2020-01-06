@@ -2818,6 +2818,12 @@ msgstr[1] "Ewch yn ôl a newid eich ateb yn adran %(step_title)s"
 msgstr[2] "Ewch yn ôl a newid eich ateb yn adran %(step_title)s"
 msgstr[3] "Ewch yn ôl a newid eich atebion yn adran %(step_title)s"
 
+#: cla_public/templates/macro/review.html:28
+msgid "Change"
+msgstr "Newid"
+msgid "answer for"
+msgstr "ateb:"
+
 #: cla_public/templates/checker/review.html:60
 msgid "Go back and change answer"
 msgstr "Mynd yn ôl i newid ateb"
