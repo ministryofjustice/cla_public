@@ -1802,7 +1802,7 @@ msgid ""
 "If you’re deaf or hard of hearing you can book a <a href=\"http://www.interpretingline.co.uk/vbooking.html\">\n"
 "        British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will  get back\n"
 "        to you to complete the eligibility check and provide any further advice."
-msgstr "Os ydych yn fyddar neu’n drwm eich clyw gallwch lenwi ffurflen gais i ofyn am ddehonglydd <a href=\"http://www.interpretingline.co.uk/vbooking.html\">Iaith Arwyddion Prydain</a>. Ar ôl i chi lenwi’r ffurflen, bydd y gweithredwr yn dod yn ôl atoch i gwblhau’r gwiriad cymhwystra a rhoi unrhyw gyngor arall."
+msgstr "Os ydych yn fyddar neu’n drwm eich clyw gallwch lenwi ffurflen gais i ofyn am ddehonglydd <a href=\"%(url)s\">Iaith Arwyddion Prydain</a>. Ar ôl i chi lenwi’r ffurflen, bydd y gweithredwr yn dod yn ôl atoch i gwblhau’r gwiriad cymhwystra a rhoi unrhyw gyngor arall."
 
 #: cla_public/templates/interstitial.html:58
 msgid "Check if you qualify financially"
