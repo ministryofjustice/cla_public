@@ -32,15 +32,18 @@
     {% for step in steps %}
       {% set answers = step.completed_fields() %}
       {% set multiple_answers = step.name in ['property', 'income'] or answers|length > 1 %}
+      {% set property_or_income = step.name in ['property', 'income'] %}
       {% set step_title = step.form_class.title %}
       <h2 class="govuk-heading-l" id="step-{{ step.name }}">{{ step_title }}</h2>
-      <span class="amnswers"> {{ answers }} </span>
-      <span class="mult-answers"> {{ multiple_answers }} </span>
-      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-        {% for field in answers %}
-          {{ Review.render_field(field, step_title, url_for('checker.wizard', step=step.name) ) }}
-        {% endfor %}
-      </dl>
+      {% if not property_or_income %}
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      {% endif %}
+      {% for field in answers %}
+        {{ Review.render_field(field, step_title, url_for('checker.wizard', step=step.name) ) }}
+      {% endfor %}
+      {% if not property_or_income %}
+        </dl>
+      {% endif %}
     {% endfor %}
 
     {{ form.csrf_token }}

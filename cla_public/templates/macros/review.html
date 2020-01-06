@@ -2,25 +2,25 @@
   {% if 'Property' in field.type %}
     {% for property in field %}
       {% if field|length > 1 %}
-        </dl>
         <h3 class="govuk-heading-m">
           {{ _('Property') }} {{ loop.index }}
         </h3>
-        <dl class="govuk-summary-list">
       {% endif %}
-      {% for field_name, field in property.form._fields.items() if field.data.per_interval_value != None %}
-        {{ render_row(field, step_title, url) }}
-      {% endfor %}
+      <dl class="govuk-summary-list">
+        {% for field_name, field in property.form._fields.items() if field.data.per_interval_value != None %}
+          {{ render_row(field, step_title, url) }}
+        {% endfor %}
+      </dl>
     {% endfor %}
   {% elif 'Income' in field.type %}
-    </dl>
     <h3 class="govuk-heading-m">
       {{ field.label.text }}
     </h3>
     <dl class="govuk-summary-list">
-    {% for field_name, field in field.form._fields.items() %}
-      {{ render_row(field, step_title, url) }}
-    {% endfor %}
+      {% for field_name, field in field.form._fields.items() %}
+        {{ render_row(field, step_title, url) }}
+      {% endfor %}
+    </dl>
   {% else %}
     {{ render_row(field, step_title, url)}}
   {% endif %}
