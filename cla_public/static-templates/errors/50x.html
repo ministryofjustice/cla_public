@@ -87,7 +87,8 @@
       <div id="global-cookie-message">
         <div class="outer-block">
           <div class="inner-block">
-            <p>{% trans %}GOV.UK uses cookies to make the site simpler. <a href="https://www.gov.uk/help/cookies">Find out more about cookies{% endtrans %}</a></p>
+            <p>{% trans %}GOV.UK uses cookies to make the site simpler.{% endtrans %} 
+              <a href="https://www.gov.uk/help/cookies">{% trans %}Find out more about cookies{% endtrans %}</a></p>
           </div>
         </div>
       </div>
@@ -121,7 +122,7 @@
         <div class="govuk-phase-banner">
           <p class="govuk-phase-banner__content">
             <span class="govuk-phase-banner__text" id="aria-feedback">
-              <a href="{{ url_for('base.reasons_for_contacting')}}">{% trans %}Report a problem</a> if you need help or would like to give feedback to improve this service{% endtrans %}
+              {% trans %}<a href="{{ url_for('base.reasons_for_contacting')}}">Report a problem</a> if you need help or would like to give feedback to improve this service{% endtrans %}
             </span>
           </p>
         </div>
@@ -129,20 +130,20 @@
           <h1 class="govuk-heading-xl">{% trans %}This service is temporarily unavailable{% endtrans %}</h1>
           <p class="govuk-body">{% trans %}This service is not available right now, but we're working hard to get things up and running again.{% endtrans %}</p>
           <p class="govuk-body">{% trans %}You can try again later or contact us.{% endtrans %}</p>
-          <p class="govuk-body">{% trans %}Telephone:<br/>
-            <strong class="govuk-!-font-weight-bold">0345 345 4345{% endtrans %}</strong>
+          <p class="govuk-body">{% trans %}Telephone:{% endtrans %}<br/>
+            <strong class="govuk-!-font-weight-bold">0345 345 4345</strong>
           </p>
-          <p class="govuk-body">{% trans %}Minicom:<br/>
-            <strong class="govuk-!-font-weight-bold">0345 609 6677{% endtrans %}</strong>
+          <p class="govuk-body">{% trans %}Minicom:{% endtrans %}<br/>
+            <strong class="govuk-!-font-weight-bold">0345 609 6677</strong>
           </p>
-          <p class="govuk-body">{% trans %}Textphone:<br/>
-            <strong class="govuk-!-font-weight-bold">0845 609 6677{% endtrans %}</strong>
+          <p class="govuk-body">{% trans %}Textphone:{% endtrans %}<br/>
+            <strong class="govuk-!-font-weight-bold">0845 609 6677</strong>
           </p>
           <p class="govuk-body">
             <a href="https://www.gov.uk/call-charges">{% trans %}Find out about call charges here{% endtrans %}</a>.
           </p>
-          <p class="govuk-body">{% trans %}Opening times:<br />
-            <strong class="govuk-!-font-weight-bold">Monday to Friday: 9am to 8pm<br />Saturday: 9am to 12.30pm{% endtrans %}</strong>
+          <p class="govuk-body">{% trans %}Opening times:{% endtrans %}<br />
+            <strong class="govuk-!-font-weight-bold">{% trans %}Monday to Friday: 9am to 8pm{% endtrans %}<br />{% trans %}Saturday: 9am to 12.30pm{% endtrans %}</strong>
           </p>
           <div class="govuk-inset-text">{% trans %}
             This service is only available if you are a resident of England or Wales.{% endtrans %}
