@@ -6,14 +6,14 @@
   Params:
     - field <object>
         WTForm field (optional)
-    - class_ <string> (default: 'fieldset-group')
+    - class_ <string> (default: 'govuk-fieldset')
         CSS class for fieldset element
     - legend <string> (default: None)
         Custom legend text (if field is not provided)
     - attrs <object> (default: None)
         Custom HTML attributes for fieldset element
 #}
-{% macro fieldset(field=None, class_='form-group fieldset-group', legend=None, field_attrs={}) %}
+{% macro fieldset(field=None, class_='govuk-fieldset', legend=None, field_attrs={}) %}
   {% set legend_ = field.label.text if field else legend %}
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
@@ -130,12 +130,14 @@
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
   {% set use_row = kwargs.use_row if kwargs.use_row is defined else True %}
-  {% set group_class = class_ if class_.startswith('form-group') else 'form-group %s' % class_ %}
+  {% set group_class = 'govuk-form-group %s' % class_ %}
 
   <div class="
       {{- group_class -}}
-      {%- if field and field.errors %} form-error{% endif -%}
+      {%- if field and field.errors %} govuk-form-group--error{% endif -%}
       {%- if controlled_by and control_value %} s-hidden{% endif -%}
+      {{- ' ' -}}
+      {{- kwargs.row_class -}}
     "
     {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
     {% if field %}id="field-{{ field.id }}"{% endif %}
@@ -182,9 +184,17 @@
   {% elif field.type in ['MoneyIntervalField', 'SelfEmployedMoneyIntervalField', 'PartnerMoneyIntervalField'] %}
     {{ money_interval(field, kwargs.skip) }}
   {% elif field.type in ['MoneyField', 'PartnerMoneyField'] %}
-    {{ text_input(field, **field_attrs) }}
+    {{ money_input(field, **field_attrs) }}
   {% else %}
-    {% do field_attrs.update(class='form-control %s' % field_attrs.class) %}
+    {% if field.type == "SelectField" %}
+      {% do field_attrs.update(class='govuk-select %s' % field_attrs.class) %}
+    {% elif field.type == "TextAreaField" %}
+      {% do field_attrs.update(class='govuk-textarea %s' % field_attrs.class) %}
+    {% elif field.type  in ['StringField', 'SetZeroIntegerField'] %}
+      {% do field_attrs.update(class='govuk-input %s' % field_attrs.class) %}
+    {% else %}
+      {% do field_attrs.update(class='form-control %s' % field_attrs.class) %} <div style="display:none;">{{ field.type }}</div>
+    {% endif %}
     {{ field(**field_attrs) }}
   {% endif %}
 {% endmacro %}
@@ -203,7 +213,7 @@
 {% macro render_field_label(field, hide_label=False) %}
   {% if field %}
     {% if field.flags.optional %}
-      {% set label_text = field.label.text + ' <span class="form-optional">optional</span>' %}
+      {% set label_text = field.label.text + ' (optional)' %}
     {% else %}
       {% set label_text = field.label.text %}
     {% endif %}
@@ -211,7 +221,8 @@
     {% set field_label = field.label(
          for=field.per_interval_value.id if field.per_interval_value else field.id,
          text=label_text,
-         id="field-label-%s" % field.id
+         id="field-label-%s" % field.id,
+         class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
        ) %}
 
     <div class="form-group-label{{ (' sr-only' if hide_label) }}">
@@ -306,9 +317,24 @@
     {% if prefix %}
       <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
     {% endif %}
-    {{ field(class_='form-control ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+    {{ field(class_='govuk-input ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
     {% if suffix %}
       <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{% macro money_input(field, prefix='£', class_='', skip=False, default_value='0') %}
+  {% if skip %}
+    <input type="hidden" name="{{ field.name }}" value="{{ default_value }}">
+  {% else %}
+    {% if prefix %}
+      <div class="laa-currency">
+      <span class="laa-currency-prefix">{{prefix}}</span>
+    {% endif %}
+        {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+    {% if prefix %}
+      </div>
     {% endif %}
   {% endif %}
 {% endmacro %}
@@ -413,9 +439,11 @@
     <input type="hidden" name="{{ field.per_interval_value.name }}" value="0">
     <input type="hidden" name="{{ field.interval_period.name }}" value="per_week">
   {% else %}
-    <label class="input-prefix" for="{{field.per_interval_value.id}}">£</label>
-    {{ field.per_interval_value(class_='form-control m-small', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
-    {{ field.interval_period(class_='form-control') }}
+    <div class="laa-currency">
+      <span class="laa-currency-prefix">£</span>
+      {{ field.per_interval_value(class_='govuk-input govuk-input--width-10 ', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+    </div>
+    {{ field.interval_period(class_='govuk-select') }}
   {% endif %}
 {% endmacro %}
 

@@ -90,7 +90,7 @@
         $('#non-field-error-ajax').show();
       }
       else {
-        $('#non-field-error-ajax').hide()
+        $('#non-field-error-ajax').hide();
       }
     },
 
@@ -177,8 +177,8 @@
 
         if(!label.length) {
           unattachedErrors = _.extend(unattachedErrors, errors);
-        } else if(label.parent().children(".govuk-hint").length) {
-          insertError(label.parent().children(".govuk-hint"), errors, fieldName);
+        } else if(label.parent().children('.govuk-hint').length) {
+          insertError(label.parent().children('.govuk-hint'), errors, fieldName);
         } else if(label.is('legend')) {
           insertError(label, errors, fieldName);
         } else {

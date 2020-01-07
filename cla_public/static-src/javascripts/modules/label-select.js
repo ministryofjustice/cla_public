@@ -1,7 +1,7 @@
  'use strict';
   var _ = require('lodash');
   moj.Modules.LabelSelect = {
-    el: '.radio-inline',
+    el: '.radio-inline, .govuk-checkboxes__label',
 
     init: function() {
       _.bindAll(this, 'render');
