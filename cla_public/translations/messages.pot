@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-08 17:12+0000\n"
+"POT-Creation-Date: 2020-01-08 17:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1260,6 +1260,11 @@ msgstr ""
 
 #: cla_public/templates/_modal-dialog.html:13
 msgid "Exit service"
+msgstr ""
+
+#: cla_public/templates/_phase-tag.html:14
+#, python-format
+msgid "<a class=\"govuk-link\" href=\"%(contact_url)s\">Contact us</a> if you need help or would like to give feedback to improve this service"
 msgstr ""
 
 #: cla_public/templates/_resources.html:1
