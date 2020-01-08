@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-02 12:28+0000\n"
+"POT-Creation-Date: 2020-01-08 16:04+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -558,20 +558,12 @@ msgstr ""
 msgid "Are you or your partner (if you have one) aged 60 or over?"
 msgstr ""
 
-#: cla_public/apps/checker/forms.py:173
-msgid "You and your partner’s benefits"
-msgstr ""
-
-#: cla_public/apps/checker/forms.py:174
-msgid "Your benefits"
-msgstr ""
-
-#: cla_public/apps/checker/forms.py:177
-msgid "Which benefits do you receive?"
-msgstr ""
-
-#: cla_public/apps/checker/forms.py:178
+#: cla_public/apps/checker/forms.py:173 cla_public/apps/checker/forms.py:178
 msgid "Which benefits do you and your partner receive?"
+msgstr ""
+
+#: cla_public/apps/checker/forms.py:174 cla_public/apps/checker/forms.py:177
+msgid "Which benefits do you receive?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:184
@@ -1258,8 +1250,8 @@ msgstr ""
 
 #: cla_public/templates/_modal-dialog.html:12
 #: cla_public/templates/checker/about.html:38
-#: cla_public/templates/checker/additional-benefits.html:20
-#: cla_public/templates/checker/benefits.html:21
+#: cla_public/templates/checker/additional-benefits.html:24
+#: cla_public/templates/checker/benefits.html:27
 #: cla_public/templates/checker/income.html:61
 #: cla_public/templates/checker/property.html:51
 #: cla_public/templates/checker/savings.html:35
@@ -1268,10 +1260,6 @@ msgstr ""
 
 #: cla_public/templates/_modal-dialog.html:13
 msgid "Exit service"
-msgstr ""
-
-#: cla_public/templates/_phase-tag.html:13
-msgid "Contact us</a> if you need help or would like to give feedback to improve this service"
 msgstr ""
 
 #: cla_public/templates/_resources.html:1
@@ -1723,93 +1711,94 @@ msgstr ""
 msgid "your savings (or combined savings if you have a partner) shouldn’t be more than £8,000"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:16
+#: cla_public/templates/interstitial.html:17
 msgid "These limits can vary in certain circumstances – for example, if you need advice about domestic abuse."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:25
+#: cla_public/templates/interstitial.html:28
 msgid "However, you must also qualify financially."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:29
+#: cla_public/templates/interstitial.html:31
 msgid ""
 "If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),\n"
 "    a national helpline for certain legal aid problems in England and Wales."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:33
+#: cla_public/templates/interstitial.html:35
 msgid "The CLA operator will check all the information you’ve given through this service."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:34
+#: cla_public/templates/interstitial.html:36
 msgid "You’ll need to provide evidence of your finances and a specialist will ask you about your case in more detail before your application can progress."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:36
+#: cla_public/templates/interstitial.html:38
 msgid "To complete the financial assessment, you and your partner (if you have one) will need:"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:38
+#: cla_public/templates/interstitial.html:40
 msgid "recent payslips (if you’re working) and bank statements"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:39
+#: cla_public/templates/interstitial.html:41
 msgid "a summary of your income tax and National Insurance contributions"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:40
+#: cla_public/templates/interstitial.html:42
 msgid "details of any savings and investments you have"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:41
+#: cla_public/templates/interstitial.html:43
 msgid "details of any benefits you receive"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:42
+#: cla_public/templates/interstitial.html:44
 msgid "mortgage statements and a current valuation for any property you own"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:45
+#: cla_public/templates/interstitial.html:47
 #, python-format
 msgid ""
 "\n"
-"    If you’re under 18, you should <a href=\"%(url)s\">contact CLA</a>\n"
+"    If you’re under 18, you should <a class=\"govuk-link\" href=\"%(url)s\">contact CLA</a>\n"
 "    without completing the financial assessment."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:51
-msgid ""
-"If you’re deaf or hard of hearing you can book a <a href=\"http://www.interpretingline.co.uk/vbooking.html\">\n"
-"        British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will  get back\n"
-"        to you to complete the eligibility check and provide any further advice."
+#: cla_public/templates/interstitial.html:53
+msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"http://www.interpretingline.co.uk/vbooking.html\"> British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:58
+#: cla_public/templates/interstitial.html:57
 msgid "Check if you qualify financially"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:65
+#: cla_public/templates/interstitial.html:63
+msgid "Before you start"
+msgstr ""
+
+#: cla_public/templates/interstitial.html:66
 msgid "Alternatively, you can ask a legal aid adviser to take on your case."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:68
+#: cla_public/templates/interstitial.html:69
 msgid "Your adviser will check whether you qualify for legal aid at no cost to you by asking about your problem and your finances."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:69
+#: cla_public/templates/interstitial.html:70
 msgid "If you qualify, in some cases you may need to pay a contribution towards your legal aid."
 msgstr ""
 
-#: cla_public/templates/interstitial.html:73
+#: cla_public/templates/interstitial.html:75
 #: cla_public/templates/checker/result/_find-legal-adviser.html:6
 msgid "Find a legal adviser"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:80
+#: cla_public/templates/interstitial.html:79
 msgid "Other sources of help"
 msgstr ""
 
-#: cla_public/templates/interstitial.html:82
+#: cla_public/templates/interstitial.html:81
 #, python-format
 msgid ""
 "\n"
@@ -1817,23 +1806,23 @@ msgid ""
 "        "
 msgstr ""
 
-#: cla_public/templates/interstitial.html:85
+#: cla_public/templates/interstitial.html:84
 msgid "You don’t have to qualify for legal aid."
 msgstr ""
 
-#: cla_public/templates/laalaa.html:8
+#: cla_public/templates/laalaa.html:10
 msgid "Find a legal aid adviser or family mediator"
 msgstr ""
 
-#: cla_public/templates/laalaa.html:10
+#: cla_public/templates/laalaa.html:12
 msgid "Find a legal aid adviser"
 msgstr ""
 
-#: cla_public/templates/laalaa.html:23
+#: cla_public/templates/laalaa.html:25
 msgid "Search for a legal adviser or family mediator with a legal aid contract in England and Wales."
 msgstr ""
 
-#: cla_public/templates/laalaa.html:25
+#: cla_public/templates/laalaa.html:27
 msgid "Search for a legal adviser with a legal aid contract in England and Wales."
 msgstr ""
 
@@ -2534,7 +2523,7 @@ msgid "Full name"
 msgstr ""
 
 #: cla_public/templates/privacy.html:469
-#: cla_public/templates/checker/result/_find-legal-adviser.html:72
+#: cla_public/templates/checker/result/_find-legal-adviser.html:98
 msgid "Address"
 msgstr ""
 
@@ -2726,6 +2715,10 @@ msgid ""
 "      you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
 msgstr ""
 
+#: cla_public/templates/privacy.html:625
+msgid "Tel:"
+msgstr ""
+
 #: cla_public/templates/privacy.html:631
 msgid "Changes to the statement"
 msgstr ""
@@ -2788,7 +2781,7 @@ msgstr ""
 msgid "How many?"
 msgstr ""
 
-#: cla_public/templates/checker/additional-benefits.html:5
+#: cla_public/templates/checker/additional-benefits.html:8
 #: cla_public/templates/checker/income.html:5
 #: cla_public/templates/checker/outgoings.html:5
 #: cla_public/templates/checker/property.html:10
@@ -2797,12 +2790,12 @@ msgstr ""
 msgid "You’ll need to provide evidence of the financial information you’ve given us through this service."
 msgstr ""
 
-#: cla_public/templates/checker/additional-benefits.html:27
+#: cla_public/templates/checker/additional-benefits.html:31
 msgid "Total amount of benefits not listed above"
 msgstr ""
 
-#: cla_public/templates/checker/benefits.html:32
-#: cla_public/templates/checker/benefits.html:33
+#: cla_public/templates/checker/benefits.html:38
+#: cla_public/templates/checker/benefits.html:39
 msgid "Enter the total amount you receive"
 msgstr ""
 
@@ -2911,68 +2904,60 @@ msgid ""
 "  "
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:15
+#: cla_public/templates/checker/result/_find-legal-adviser.html:17
 msgid "Search"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:21
+#: cla_public/templates/checker/result/_find-legal-adviser.html:57
 #, python-format
 msgid "Showing %(count)s results around"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:24
+#: cla_public/templates/checker/result/_find-legal-adviser.html:60
 msgid "for"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:30
-msgid "Remove filter"
-msgstr ""
-
-#: cla_public/templates/checker/result/_find-legal-adviser.html:33
-msgid "Remove"
-msgstr ""
-
-#: cla_public/templates/checker/result/_find-legal-adviser.html:56
+#: cla_public/templates/checker/result/_find-legal-adviser.html:82
 msgid "Distance"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:58
+#: cla_public/templates/checker/result/_find-legal-adviser.html:84
 #, python-format
 msgid "%(miles)s miles"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:65
+#: cla_public/templates/checker/result/_find-legal-adviser.html:91
 msgid "Categories of law"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:80
+#: cla_public/templates/checker/result/_find-legal-adviser.html:106
 #: cla_public/templates/macros/help-orgs.html:65
 msgid "Helpline"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:85
+#: cla_public/templates/checker/result/_find-legal-adviser.html:111
 msgid "Website"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:106
+#: cla_public/templates/checker/result/_find-legal-adviser.html:132
 msgid "Previous"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:120
+#: cla_public/templates/checker/result/_find-legal-adviser.html:146
 msgid "Next"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:129
+#: cla_public/templates/checker/result/_find-legal-adviser.html:155
 msgid "No results"
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:131
+#: cla_public/templates/checker/result/_find-legal-adviser.html:157
 msgid ""
 "We couldn't find any results for your search.\n"
 "        We are constantly updating our records so please try again later."
 msgstr ""
 
-#: cla_public/templates/checker/result/_find-legal-adviser.html:139
+#: cla_public/templates/checker/result/_find-legal-adviser.html:165
 msgid "Loading…"
 msgstr ""
 
@@ -3149,18 +3134,18 @@ msgstr ""
 msgid "Print this page"
 msgstr ""
 
-#: cla_public/templates/checker/result/eligible-f2f.html:7
+#: cla_public/templates/checker/result/eligible-f2f.html:9
 msgid "You might qualify for legal aid"
 msgstr ""
 
-#: cla_public/templates/checker/result/eligible-f2f.html:18
+#: cla_public/templates/checker/result/eligible-f2f.html:20
 msgid ""
 "Civil Legal Advice does not provide advice about issues\n"
 "        related to welfare benefits but you may be able to get free advice from\n"
 "        a legal adviser in your area."
 msgstr ""
 
-#: cla_public/templates/checker/result/eligible-f2f.html:24
+#: cla_public/templates/checker/result/eligible-f2f.html:26
 msgid ""
 "To get advice about appealing a decision made by the social\n"
 "        security tribunal about your benefits to the Upper Tribunal, Court of\n"
@@ -3168,14 +3153,14 @@ msgid ""
 "      "
 msgstr ""
 
-#: cla_public/templates/checker/result/eligible-f2f.html:31
+#: cla_public/templates/checker/result/eligible-f2f.html:33
 msgid ""
 "Your adviser will check whether you qualify for legal aid at\n"
 "      no cost to you. If you qualify for legal aid, you will not have to pay\n"
 "        for legal advice."
 msgstr ""
 
-#: cla_public/templates/checker/result/eligible-f2f.html:37
+#: cla_public/templates/checker/result/eligible-f2f.html:39
 msgid ""
 "If you don't qualify for legal aid, you will have to pay for\n"
 "        legal advice. You should ask your adviser about the cost of their\n"
@@ -3215,65 +3200,70 @@ msgid ""
 "    "
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:12
+#: cla_public/templates/checker/result/face-to-face.html:14
 msgid "Results for "
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:17
+#: cla_public/templates/checker/result/face-to-face.html:19
 msgid "Seek legal advice"
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:23
-#: cla_public/templates/checker/result/face-to-face.html:46
-#: cla_public/templates/checker/result/face-to-face.html:49
+#: cla_public/templates/checker/result/face-to-face.html:26
+#: cla_public/templates/checker/result/face-to-face.html:51
+#: cla_public/templates/checker/result/face-to-face.html:56
 msgid "A legal adviser may be able to help you"
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:26
+#: cla_public/templates/checker/result/face-to-face.html:29
 msgid ""
 "You will usually only get legal aid for advice about\n"
 "          clinical negligence if your child has suffered a brain injury during pregnancy,\n"
 "          birth or in the first 8 weeks of life."
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:32
+#: cla_public/templates/checker/result/face-to-face.html:33
+#: cla_public/templates/checker/result/face-to-face.html:58
+msgid "What happens next"
+msgstr ""
+
+#: cla_public/templates/checker/result/face-to-face.html:35
 msgid ""
 "You should contact a legal aid adviser in your area,\n"
 "            who may be able to help."
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:37
+#: cla_public/templates/checker/result/face-to-face.html:41
 msgid "Legal aid is not usually available for advice about personal injury"
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:40
+#: cla_public/templates/checker/result/face-to-face.html:44
 msgid ""
 "You may be able to get legal aid in exceptional cases. You\n"
 "          could seek advice from a legal adviser about whether an application\n"
 "          might succeed in your case and how to apply."
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:53
-msgid ""
-"Your adviser will check whether you qualify for legal aid at\n"
-"          no cost to you by asking about your problem and your finances."
-msgstr ""
-
-#: cla_public/templates/checker/result/face-to-face.html:55
-msgid "In some cases you may need to pay a contribution towards your legal aid."
-msgstr ""
-
-#: cla_public/templates/checker/result/face-to-face.html:59
-#: cla_public/templates/checker/result/ineligible.html:66
-#: cla_public/templates/scope/ineligible.html:60
-#: cla_public/templates/scope/mediation.html:19
+#: cla_public/templates/checker/result/face-to-face.html:62
 msgid ""
 "\n"
-"          <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">What did you think of this service?</a> (takes 30 seconds)\n"
+"        Your adviser will check whether you qualify for legal aid <strong>at\n"
+"        no cost to you</strong> by asking about your problem and your finances.\n"
 "      "
 msgstr ""
 
 #: cla_public/templates/checker/result/face-to-face.html:66
+msgid "In some cases you may need to pay a contribution towards your legal aid."
+msgstr ""
+
+#: cla_public/templates/checker/result/face-to-face.html:71
+msgid "What did you think of this service?"
+msgstr ""
+
+#: cla_public/templates/checker/result/face-to-face.html:72
+msgid "takes 30 seconds"
+msgstr ""
+
+#: cla_public/templates/checker/result/face-to-face.html:78
 msgid ""
 "If you’re applying for legal aid for a mental health issue,\n"
 "          the requirements for the financial assessment are less rigorous than\n"
@@ -3361,6 +3351,15 @@ msgid ""
 "        If you want to make an application to court about a family matter you need to first of all\n"
 "        see if family mediation will help. Use the %(family_mediation_link)s directory to find a mediator\n"
 "        and make an appointment for a Mediation Information and Assessment Meeting (MIAM).\n"
+"      "
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:66
+#: cla_public/templates/scope/ineligible.html:60
+#: cla_public/templates/scope/mediation.html:19
+msgid ""
+"\n"
+"          <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">What did you think of this service?</a> (takes 30 seconds)\n"
 "      "
 msgstr ""
 
@@ -3857,5 +3856,20 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "This service is only available if you are a resident of England or Wales."
+#~ msgstr ""
+
+#~ msgid "You and your partner’s benefits"
+#~ msgstr ""
+
+#~ msgid "Your benefits"
+#~ msgstr ""
+
+#~ msgid "Remove filter"
+#~ msgstr ""
+
+#~ msgid "Remove"
+#~ msgstr ""
+
+#~ msgid "Contact us</a> if you need help or would like to give feedback to improve this service"
 #~ msgstr ""
 
