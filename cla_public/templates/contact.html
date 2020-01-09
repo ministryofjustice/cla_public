@@ -27,19 +27,17 @@
       <div class="govuk-warning-text">
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
         <strong class="govuk-warning-text__text">
-          {% trans call_charges_link=Element.link_new_window('https://www.gov.uk/call-charges', _('Call charges apply'), True) %}
-            If you’re in immediate danger please call Civil Legal Advice on <span class="tel">0345 345 4 345</span>.
-            {{ call_charges_link }}.
-          {% endtrans %}
+          {% trans %}If you’re in an emergency situation, please call the police on 999.{% endtrans %}
         </strong>
       </div>
-      <p class="govuk-body-l">
-        {% trans %}You can also ask us to call you back using the form below,
-        which is free.{% endtrans %}
+      <p class="govuk-body">
+        {% trans call_charges_link=Element.link_new_window('https://www.gov.uk/call-charges', _('Call charges apply'), True) %}
+            If you’re in immediate danger please call Civil Legal Advice on <strong class="laa-telephone">0345 345 4 345</strong>.
+            {{ call_charges_link }}.
+          {% endtrans %}
       </p>
       <p class="govuk-body">
-        {% trans %}If you’re in an emergency situation, please call the police
-        on 999.{% endtrans %}
+        {% trans %}You can also ask us to call you back using the form below, which is free.{% endtrans %}
       </p>
     {% else %}
       <p class="govuk-body">
