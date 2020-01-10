@@ -18,35 +18,37 @@
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
 
-  <fieldset class="
-      {{- class_ -}}
-      {%- if field and field.errors %} form-error{% endif -%}
-      {%- if controlled_by and control_value %} s-hidden{% endif -%}
-    "
-    {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
-    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
-    {%- if field %}id="field-{{ field.id }}"{% endif -%}
-  >
-    {% if legend_ %}
-      <legend class="form-group-label" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
-        <span>{{ legend_ }}</span>
-      </legend>
-    {% endif %}
+  <div class="govuk-form-group">
+    <fieldset class="
+        {{- class_ -}}
+        {%- if field and field.errors %} form-error{% endif -%}
+        {%- if controlled_by and control_value %} s-hidden{% endif -%}
+      "
+      {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
+      {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+      {%- if field %}id="field-{{ field.id }}"{% endif -%}
+    >
+      {% if legend_ %}
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
+          {{ legend_ }}
+        </legend>
+      {% endif %}
 
-    {{ render_field_errors(field.errors) if field and field.errors}}
-    {{ render_field_description(field) }}
+      {{ render_field_errors(field.errors) if field and field.errors}}
+      {{ render_field_description(field) }}
 
-    {% if field or caller %}
-      <div class="form-row {{ kwargs.row_class }}">
-        {% if field and not kwargs.field_as_label %}
-          {{ render_field(field, field_attrs) }}
-        {% endif %}
-        {% if caller %}
-          {{ caller() }}
-        {% endif %}
-      </div>
-    {% endif %}
-  </fieldset>
+      {% if field or caller %}
+        <div class="{{ kwargs.row_class }}">
+          {% if field and not kwargs.field_as_label %}
+            {{ render_field(field, field_attrs) }}
+          {% endif %}
+          {% if caller %}
+            {{ caller() }}
+          {% endif %}
+        </div>
+      {% endif %}
+    </fieldset>
+  </div>
 {% endmacro %}
 
 {% macro tickbox_fieldset(field=None, class_='govuk-fieldset', legend=None, field_attrs={}) %}
@@ -54,35 +56,37 @@
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
 
-  <fieldset class="
-      {{- class_ -}}
-      {%- if field and field.errors %} form-error{% endif -%}
-      {%- if controlled_by and control_value %} s-hidden{% endif -%}
-    "
-    {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
-    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
-    {%- if field %}id="field-{{ field.id }}"{% endif -%}
-  >
-    {% if legend_ %}
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
-        {{ legend_ }}
-      </legend>
-    {% endif %}
+  <div class="govuk-form-group">
+    <fieldset class="
+        {{- class_ -}}
+        {%- if field and field.errors %} form-error{% endif -%}
+        {%- if controlled_by and control_value %} s-hidden{% endif -%}
+      "
+      {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
+      {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+      {%- if field %}id="field-{{ field.id }}"{% endif -%}
+    >
+      {% if legend_ %}
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
+          {{ legend_ }}
+        </legend>
+      {% endif %}
 
-    {{ render_field_description(field) }}
-    {{ render_field_errors(field.errors) if field and field.errors}}
+      {{ render_field_description(field) }}
+      {{ render_field_errors(field.errors) if field and field.errors}}
 
-    {% if field or caller %}
-      <div class="govuk-checkboxes {{ kwargs.row_class }}">
-        {% if field and not kwargs.field_as_label %}
-          {{ render_field(field, field_attrs) }}
-        {% endif %}
-        {% if caller %}
-          {{ caller() }}
-        {% endif %}
-      </div>
-    {% endif %}
-  </fieldset>
+      {% if field or caller %}
+        <div class="govuk-checkboxes {{ kwargs.row_class }}">
+          {% if field and not kwargs.field_as_label %}
+            {{ render_field(field, field_attrs) }}
+          {% endif %}
+          {% if caller %}
+            {{ caller() }}
+          {% endif %}
+        </div>
+      {% endif %}
+    </fieldset>
+  </div>
 {% endmacro %}
 
 {% macro tickboxes(field=None, class_='govuk-fieldset', legend=None, field_attrs={}) %}
@@ -91,7 +95,7 @@
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
 
   <span id="{{ field.id }}-hint" class="govuk-hint">
-    {{ trans }}Select all that apply{{ endtrans }}
+    {% trans %}Select all that apply{% endtrans %}
   </span>
   {{ render_field_errors(field.errors) if field and field.errors}}
   {{ render_field_description(field) }}
@@ -143,7 +147,7 @@
     {% if field %}id="field-{{ field.id }}"{% endif %}
   >
 
-    {{ render_field_label(field, kwargs.hide_label) }}
+    {{ render_field_label(field, kwargs.hide_label, kwargs.custom_label) }}
 
     {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
       {{ render_field_errors(field.errors) }}
@@ -180,17 +184,19 @@
 #}
 {% macro render_field(field, field_attrs={}) %}
   {% if field.type in ['YesNoField', 'RadioField', 'PartnerYesNoField'] %}
-    {{ radio_buttons(field) }}
+    <div class="govuk-radios govuk-radios--inline">
+      {{ radio_buttons(field) }}
+    </div>
   {% elif field.type in ['MoneyIntervalField', 'SelfEmployedMoneyIntervalField', 'PartnerMoneyIntervalField'] %}
     {{ money_interval(field, kwargs.skip) }}
   {% elif field.type in ['MoneyField', 'PartnerMoneyField'] %}
     {{ money_input(field, **field_attrs) }}
   {% else %}
-    {% if field.type == "SelectField" %}
+    {% if field.type in ['SelectField', 'TimeChoiceField', 'DayChoiceField'] %}
       {% do field_attrs.update(class='govuk-select %s' % field_attrs.class) %}
     {% elif field.type == "TextAreaField" %}
       {% do field_attrs.update(class='govuk-textarea %s' % field_attrs.class) %}
-    {% elif field.type  in ['StringField', 'SetZeroIntegerField'] %}
+    {% elif field.type in ['StringField', 'SetZeroIntegerField'] %}
       {% do field_attrs.update(class='govuk-input %s' % field_attrs.class) %}
     {% else %}
       {% do field_attrs.update(class='form-control %s' % field_attrs.class) %} <div style="display:none;">{{ field.type }}</div>
@@ -210,12 +216,16 @@
     - hide_label <boolean> (default: False)
         Whether to hide the label visually (still available for screen readers)
 #}
-{% macro render_field_label(field, hide_label=False) %}
+{% macro render_field_label(field, hide_label=False, custom_label='') %}
   {% if field %}
-    {% if field.flags.optional %}
-      {% set label_text = field.label.text + ' (optional)' %}
+    {% if custom_label %}
+      {% set label_text = _(custom_label) %}
     {% else %}
       {% set label_text = field.label.text %}
+    {% endif %}
+
+    {% if field.flags.optional %}
+      {% set label_text = label_text + ' (optional)' %}
     {% endif %}
 
     {% set field_label = field.label(
@@ -267,10 +277,10 @@
   <span id="{{ field.id }}-error" class="govuk-error-message">
     {% for error in errors %}
       {% if error is string or error == error|string %}
-        <span class="govuk-visually-hidden">{{ trans }}Error{{ endtrans }}:</span> {{error}}
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span> {{error}}
       {% else %}
         {% for line in error %}
-          <span class="govuk-visually-hidden">{{ trans }}Error{{ endtrans }}:</span> {{line}}
+          <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span> {{line}}
         {% endfor %}
       {% endif %}
     {% endfor %}
@@ -287,10 +297,12 @@
 #}
 {% macro radio_buttons(field) %}
   {%- for option in field -%}
-    <label class="radio-inline" for="{{option.id}}" {% if field.description %}aria-describedby="field-label-{{ field.id }}"{% endif %}>
-      {{ option }}
-      {{ option.label.text }}
-    </label>
+    <div class="govuk-radios__item">
+      {{ option(**{"class": "govuk-radios__input"}) }}
+      <label class="govuk-label govuk-radios__label" for="{{ option.id }}" {% if field.description %}aria-describedby="field-label-{{ field.id }}"{% endif %}>
+        {{ option.label.text }}
+      </label>
+    </div>
   {% endfor -%}
 {% endmacro %}
 
@@ -344,7 +356,7 @@
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
     {% if field and field.errors %}
       <span id="{{field.id}}-error" class="govuk-error-message">
-        <span class="govuk-visually-hidden">{{ trans }}Error{{ endtrans }}:</span> {{ field.errors[0] }}
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span> {{ field.errors[0] }}
       </span>
       {% set class_ = "govuk-input--error" %}
     {% endif %}

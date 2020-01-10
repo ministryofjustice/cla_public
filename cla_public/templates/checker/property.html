@@ -34,7 +34,9 @@
           {{ Form.group(property.mortgage_payments, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
 
           {% call Form.fieldset(property.is_rented, 'form-group') %}
-            {{ Form.group(property.rent_amount, 'form-subfield', controlled_by=property.is_rented) }}
+            <div class="govuk-radios__conditional">
+              {{ Form.group(property.rent_amount, '', controlled_by=property.is_rented) }}
+            </div>
           {% endcall %}
 
           {{ Form.fieldset(property.in_dispute, 'form-group') }}

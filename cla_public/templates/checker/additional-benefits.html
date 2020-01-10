@@ -17,7 +17,9 @@
     {% endcall %}
 
     {% call Form.fieldset(form.other_benefits, 'form-group') %}
-      {{ Form.group(form.total_other_benefit, 'form-subfield', controlled_by=form.other_benefits) }}
+      <div class="govuk-radios__conditional">
+        {{ Form.group(form.total_other_benefit, '', controlled_by=form.other_benefits) }}
+      </div>
     {% endcall %}
 
     {{ Form.honeypot(form) }}

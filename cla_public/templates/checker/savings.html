@@ -1,33 +1,32 @@
 {% extends "checker/base.html" %}
 
 {% block inner_content %}
-  <h1 class="page-title">
+  <h1 class="govuk-heading-xl">
     {{ form.title }}
   </h1>
 
   {% if session.checker.has_partner %}
-    <p>{{ _('Any cash, savings or investments held in your name, your partner’s name or both your names.') }}</p>
+    <p class="govuk-body">{{ _('Any cash, savings or investments held in your name, your partner’s name or both your names.') }}</p>
   {% else %}
-    <p>{{ _('We need to know about any money you have saved or invested.') }}</p>
+    <p class="govuk-body">{{ _('We need to know about any money you have saved or invested.') }}</p>
   {% endif %}
-  <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+  <p class="govuk-body">{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
 
   <form method="POST">
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
     {% with skip = not session.checker.has_savings %}
-      {{ Form.group(form.savings, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
-      {{ Form.group(form.investments, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
+      {{ Form.group(form.savings, field_attrs={'prefix': '£', 'class_': 'govuk-!-width-one-third'}) }}
+      {{ Form.group(form.investments, field_attrs={'prefix': '£', 'class_': 'govuk-!-width-one-third'}) }}
     {% endwith %}
 
     {% with skip = not session.checker.has_valuables %}
       {% if skip %}
         {{ Form.text_input(form.valuables, skip=skip) }}
       {% else %}
-        {% call Form.group(form.valuables, field_attrs={'prefix': '£', 'class_': 'm-small'}) %}
-          {% include '_valuables-info.html' %}
-        {% endcall %}
+        {{ Form.group(form.valuables, field_attrs={'prefix': '£', 'class_': 'govuk-!-width-one-third'}) }}
+        {% include '_valuables-info.html' %}
       {% endif %}
     {% endwith %}
 

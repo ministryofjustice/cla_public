@@ -197,3 +197,18 @@ hr {
 .laa-telephone {
   white-space: nowrap;
 }
+dl.govuk-list.govuk-list--bullet {
+  dt {
+    font-weight: 700;
+    padding: 1em 0 0.5em;
+  }
+  dd {
+    list-style-type: disc;
+    display: list-item;
+    padding-left: 6px;
+    margin-left: 20px;
+  }
+}
+.form-group-label {
+  font-weight:bold;
+}

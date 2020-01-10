@@ -9,17 +9,15 @@
 #}
 {% macro callback(form) %}
   {% call Form.group(None,
-      class_='form-subfield',
+      class_='govuk-radios__conditional',
       use_row=False,
       controlled_by=form.contact_type,
       control_value='callback') %}
-    <div class="form-group form-notice" role="alert">
-      <ul class="styled-list">
-        <li>{{ _('We will call at least once during your chosen time, or as close to the time as possible.') }}</li>
-        <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
-        <li>{{ _('If you miss the call you’ll need to complete this form again.') }}</li>
-      </ul>
-    </div>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>{{ _('We will call at least once during your chosen time, or as close to the time as possible.') }}</li>
+      <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
+      <li>{{ _('If you miss the call you’ll need to complete this form again.') }}</li>
+    </ul>
     {{ Form.group(form.callback.contact_number, field_attrs={'class': 'm-large', 'autocomplete': 'tel', 'type': 'tel'}) }}
     {{ time_picker(form.callback.time) }}
   {% endcall %}
@@ -35,18 +33,16 @@
 #}
 {% macro thirdparty(form) %}
   {% call Form.group(None,
-      class_='form-subfield',
+      class_='govuk-radios__conditional',
       use_row=False,
       controlled_by=form.contact_type,
       control_value='thirdparty') %}
-    <div class="form-group form-notice" role="alert">
-      <ul class="styled-list">
-        <li>{{ _('Please make sure you are with your nominated person at the time of the callback.') }}</li>
-        <li>{{ _('We will call at least once during your chosen time, or as close to the time as possible.') }}</li>
-        <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
-        <li>{{ _('If your nominated person misses the call you’ll need to complete this form again.') }}</li>
-      </ul>
-    </div>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>{{ _('Please make sure you are with your nominated person at the time of the callback.') }}</li>
+      <li>{{ _('We will call at least once during your chosen time, or as close to the time as possible.') }}</li>
+      <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
+      <li>{{ _('If your nominated person misses the call you’ll need to complete this form again.') }}</li>
+    </ul>
     {{ Form.group(form.thirdparty.full_name, field_attrs={'class': 'm-large'}) }}
     {{ Form.group(form.thirdparty.relationship) }}
     {{ Form.group(form.thirdparty.contact_number, field_attrs={'class': 'm-large', 'autocomplete': 'tel', 'type': 'tel'}) }}
@@ -64,27 +60,39 @@
 #}
 {% macro time_picker(subform) %}
   {% call Form.fieldset(legend=subform.label.text, class_='form-group') %}
-    <ul class="form-option-list form-row" role="radiogroup">
+    <div class="govuk-radios">
       {% for radio in subform.specific_day %}
-        {% if (radio.data == 'today' and subform.time_today.choices) or
-        (radio.data == 'specific_day' and subform.day.choices) %}
-          <li>
-            <label class="radio-inline" for="{{radio.id}}">
-              {{ radio }} {{ radio.label.text }}
+        {% if (radio.data == 'today' and subform.time_today.choices) or (radio.data == 'specific_day' and subform.day.choices) %}
+          <div class="govuk-radios__item">
+            {{ radio(**{"class": "govuk-radios__input"}) }}
+            <label class="govuk-label govuk-radios__label" for="{{ radio.id }}">
+               {{ radio.label.text }}
             </label>
-            {% if radio.data == 'today' %}
-              {{ subform.time_today(class_='form-control') }}
-            {% else %}
-              <span class="block-inline">
-                {{ subform.day(class_='form-control', **{
-                  'data-day-time-choices': subform.day.day_time_choices|tojson|safe
-                }) }} at {{ subform.time_in_day(class_='form-control') }}
-              </span>
-            {%  endif %}
-          </li>
+          </div>
+          {% if radio.data == 'today' %}
+            {{ Form.group(subform.time_today,
+              'govuk-radios__conditional',
+              custom_label='Time',
+              controlled_by=subform.specific_day,
+              control_value='today',
+              row_class='') }}
+          {% else %}
+            {{ Form.group(subform.day,
+              'govuk-radios__conditional govuk-!-padding-bottom-4 govuk-!-margin-bottom-0',
+              {'data-day-time-choices': subform.day.day_time_choices|tojson|safe},
+              controlled_by=subform.specific_day,
+              control_value='specific_day',
+              row_class='') }}
+            {{ Form.group(subform.time_in_day,
+              'govuk-radios__conditional',
+              custom_label='Time',
+              controlled_by=subform.specific_day,
+              control_value='specific_day',
+              row_class='') }}
+          {% endif %}
         {% endif %}
       {% endfor %}
-    </ul>
+    </div>
   {% endcall %}
 {% endmacro %}
 
