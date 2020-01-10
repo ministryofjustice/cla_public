@@ -97,53 +97,53 @@
         WTForm field
 #}
 {% macro adaptations(subform) %}
-  {% call Form.fieldset(legend=subform.label.text) %}
-    <ul class="form-option-list form-row" role="listbox">
-      <li role="option">
-        <label class="radio-inline" for="{{subform.bsl_webcam.id}}">
-          {{ subform.bsl_webcam }}
-          {{ subform.bsl_webcam.label.text }}
-        </label>
-      </li>
-      <li role="option">
-        <label class="radio-inline" for="{{subform.minicom.id}}">
-          {{ subform.minicom }}
-          {{ subform.minicom.label.text }}
-        </label>
-      </li>
-      <li role="option">
-        <label class="radio-inline" for="{{subform.text_relay.id}}">
-          {{ subform.text_relay }}
-          {{ subform.text_relay.label.text }}
-        </label>
-      </li>
-      <li role="option">
-        <label class="radio-inline" for="{{subform.welsh.id}}">
-          {{ subform.welsh }}
-          {{ subform.welsh.label.text }}
-        </label>
-      </li>
-      <li role="option">
-        <label class="radio-inline" for="{{subform.is_other_language.id}}">
-          {{ subform.is_other_language(**{'aria-controls': subform.other_language.id}) }}
-          {{ subform.is_other_language.label.text }}
-        </label>
+  {% call Form.tickbox_fieldset(legend=subform.label.text) %}
+    <div class="govuk-checkboxes__item">
+      {{ subform.bsl_webcam(**{"class": "govuk-checkboxes__input"}) }}
+      <label class="govuk-label govuk-checkboxes__label" for="{{subform.bsl_webcam.id}}">
+        {{ subform.bsl_webcam.label.text }}
+      </label>
+    </div>
+    <div class="govuk-checkboxes__item">
+      {{ subform.minicom(**{"class": "govuk-checkboxes__input"}) }}
+      <label class="govuk-label govuk-checkboxes__label" for="{{subform.minicom.id}}">
+        {{ subform.minicom.label.text }}
+      </label>
+    </div>
+    <div class="govuk-checkboxes__item">
+      {{ subform.text_relay(**{"class": "govuk-checkboxes__input"}) }}
+      <label class="govuk-label govuk-checkboxes__label" for="{{subform.text_relay.id}}">
+        {{ subform.text_relay.label.text }}
+      </label>
+    </div>
+    <div class="govuk-checkboxes__item">
+      {{ subform.welsh(**{"class": "govuk-checkboxes__input"}) }}
+      <label class="govuk-label govuk-checkboxes__label" for="{{subform.welsh.id}}">
+        {{ subform.welsh.label.text }}
+      </label>
+    </div>
+    <div class="govuk-checkboxes__item">
+      {{ subform.is_other_language(**{'aria-controls': subform.other_language.id, "class": "govuk-checkboxes__input"}) }}
+      <label class="govuk-label govuk-checkboxes__label" for="{{subform.is_other_language.id}}">
+        {{ subform.is_other_language.label.text }}
+      </label>
+    </div>
         {{ Form.group(subform.other_language, 'form-subfield',
             controlled_by=subform.is_other_language,
             control_value='y',
-            hide_label=True) }}
-      </li>
-      <li role="option">
-        <label class="radio-inline" for="{{subform.is_other_adaptation.id}}">
-          {{ subform.is_other_adaptation }}
-          {{ subform.is_other_adaptation.label.text }}
-        </label>
+            hide_label=True,
+            row_class='') }}
+    <div class="govuk-checkboxes__item">
+      {{ subform.is_other_adaptation(**{'aria-controls': subform.other_adaptation.id, "class": "govuk-checkboxes__input"}) }}
+      <label class="govuk-label govuk-checkboxes__label" for="{{subform.is_other_adaptation.id}}">
+        {{ subform.is_other_adaptation.label.text }}
+      </label>
+    </div>
         {{ Form.group(subform.other_adaptation, 'form-subfield',
             controlled_by=subform.is_other_adaptation,
             control_value='y',
             hide_label=True,
-            field_attrs={'class': 'm-large', 'rows': 4}) }}
-      </li>
-    </ul>
+            field_attrs={'class': 'm-large', 'rows': 4},
+            row_class='') }}
   {% endcall %}
 {% endmacro %}

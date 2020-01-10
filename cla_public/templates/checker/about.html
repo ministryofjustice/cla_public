@@ -14,12 +14,12 @@
 
     {% call Form.fieldset(form.have_children, 'form-group') %}
       {{ Form.group(form.num_children, 'form-subfield',
-          controlled_by=form.have_children, field_attrs={'class': 'm-small'}) }}
+          controlled_by=form.have_children, field_attrs={'class': 'govuk-input--width-4'}) }}
     {% endcall %}
 
     {% call Form.fieldset(form.have_dependants, 'form-group') %}
       {{ Form.group(form.num_dependants, 'form-subfield',
-          controlled_by=form.have_dependants, field_attrs={'class': 'm-small'}) }}
+          controlled_by=form.have_dependants, field_attrs={'class': 'govuk-input--width-4'}) }}
     {% endcall %}
 
     {{ Form.fieldset(form.own_property, 'form-group') }}
