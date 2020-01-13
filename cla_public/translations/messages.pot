@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-13 15:44+0000\n"
+"POT-Creation-Date: 2020-01-13 16:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3437,6 +3437,7 @@ msgid "Opens in new window"
 msgstr ""
 
 #: cla_public/templates/macros/help-orgs.html:20
+#: cla_public/templates/scope/ineligible.html:71
 #, python-format
 msgid "Help organisations for problems about %(category_name)s"
 msgstr ""
@@ -3483,5 +3484,72 @@ msgstr ""
 
 #: cla_public/templates/scope/diagnosis.html:41
 msgid "(current)"
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:6
+msgid "Legal aid doesn’t cover all types of problem"
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:14
+msgid "Exceptional cases"
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:17
+msgid "In exceptional cases or if your case is going to a judicial review, legal aid may still be available."
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:19
+msgid "In exceptional cases, legal aid may still be available."
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:24
+msgid "ask a legal adviser"
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:24
+#, python-format
+msgid ""
+"\n"
+"        You can %(ask_legal_adviser_link)s if an application might succeed in your case and how to apply.\n"
+"      "
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:31
+msgid "apply directly"
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:31
+#, python-format
+msgid ""
+"\n"
+"        You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
+"      "
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:47
+msgid "You can still ask a solicitor for help – you will have to pay for their advice."
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:50
+msgid "From what you’ve told us today, it looks as though your problem is not covered."
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:51
+msgid "You can still ask a solicitor for help - you will have to pay for their advice."
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:56
+msgid "Find a solicitor"
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:60
+msgid ""
+"\n"
+"          <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">What did you think of this service?</a> (takes 30 seconds)\n"
+"      "
+msgstr ""
+
+#: cla_public/templates/scope/ineligible.html:67
+msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
 msgstr ""
 
