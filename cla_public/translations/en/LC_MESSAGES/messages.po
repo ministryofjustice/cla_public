@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-08 17:19+0000\n"
+"POT-Creation-Date: 2020-01-13 15:44+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -3260,138 +3260,17 @@ msgstr ""
 msgid "In some cases you may need to pay a contribution towards your legal aid."
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:71
-msgid "What did you think of this service?"
+#: cla_public/templates/checker/result/face-to-face.html:70
+msgid ""
+"<a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">\n"
+"          What did you think of this service?</a> (takes 30 seconds)"
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:72
-msgid "takes 30 seconds"
-msgstr ""
-
-#: cla_public/templates/checker/result/face-to-face.html:78
+#: cla_public/templates/checker/result/face-to-face.html:77
 msgid ""
 "If you’re applying for legal aid for a mental health issue,\n"
 "          the requirements for the financial assessment are less rigorous than\n"
 "          for other legal aid problems."
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:3
-msgid "Help organisations"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:8
-msgid "you and your partner"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:8
-msgid "you"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:9
-msgid "you and your partner’s"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:9
-msgid "your"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:14
-msgid "You’re unlikely to get legal aid"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:17
-#, python-format
-msgid ""
-"From\n"
-"    what you have told us today it looks like you won't be able to get\n"
-"    legal aid %(fromcla)s as you don’t qualify financially"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:17
-msgid "from CLA"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:24
-msgid "This is because"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:26
-msgid ""
-"have too much disposable\n"
-"      capital"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:31
-msgid ""
-"gross income is more than\n"
-"      the maximum allowed"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:36
-msgid ""
-"disposable income is\n"
-"      higher than the limit we allow"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:43
-msgid ""
-"Disposable capital includes savings, valuable items and the\n"
-"      equity in any property you own."
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:48
-msgid ""
-"Disposable income is the money you have left after we’ve accounted\n"
-"      for certain living expenses, like rent or mortgage payments."
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:57
-msgid "Family Mediation Council"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:57
-#, python-format
-msgid ""
-"\n"
-"        If you want to make an application to court about a family matter you need to first of all\n"
-"        see if family mediation will help. Use the %(family_mediation_link)s directory to find a mediator\n"
-"        and make an appointment for a Mediation Information and Assessment Meeting (MIAM).\n"
-"      "
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:66
-#: cla_public/templates/scope/ineligible.html:60
-#: cla_public/templates/scope/mediation.html:19
-msgid ""
-"\n"
-"          <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">What did you think of this service?</a> (takes 30 seconds)\n"
-"      "
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:71
-msgid "A legal adviser may still be able to help"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:75
-msgid ""
-"You may still qualify for legal aid to seek a court order for protection. To find out if you\n"
-"      might qualify, contact a legal adviser in your area."
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:79
-msgid "You can still ask a legal adviser for help – you will have to pay for their advice."
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:85
-msgid ""
-"If you have a court hearing date it is important that you get advice\n"
-"      as soon as possible. You may be able to get last-minute help on the\n"
-"      day of the hearing from an adviser in the court building."
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:93
-#: cla_public/templates/scope/ineligible.html:56
-msgid "Find a solicitor"
 msgstr ""
 
 #: cla_public/templates/emails/confirmation.txt:2
@@ -3558,7 +3437,6 @@ msgid "Opens in new window"
 msgstr ""
 
 #: cla_public/templates/macros/help-orgs.html:20
-#: cla_public/templates/scope/ineligible.html:71
 #, python-format
 msgid "Help organisations for problems about %(category_name)s"
 msgstr ""
@@ -3605,78 +3483,6 @@ msgstr ""
 
 #: cla_public/templates/scope/diagnosis.html:41
 msgid "(current)"
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:6
-msgid "Legal aid doesn’t cover all types of problem"
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:14
-msgid "Exceptional cases"
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:17
-msgid "In exceptional cases or if your case is going to a judicial review, legal aid may still be available."
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:19
-msgid "In exceptional cases, legal aid may still be available."
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:24
-msgid "ask a legal adviser"
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:24
-#, python-format
-msgid ""
-"\n"
-"        You can %(ask_legal_adviser_link)s if an application might succeed in your case and how to apply.\n"
-"      "
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:31
-msgid "apply directly"
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:31
-#, python-format
-msgid ""
-"\n"
-"        You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
-"      "
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:47
-msgid "You can still ask a solicitor for help – you will have to pay for their advice."
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:50
-msgid "From what you’ve told us today, it looks as though your problem is not covered."
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:51
-msgid "You can still ask a solicitor for help - you will have to pay for their advice."
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:67
-msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
-msgstr ""
-
-#: cla_public/templates/scope/mediation.html:4
-msgid "Family mediation"
-msgstr ""
-
-#: cla_public/templates/scope/mediation.html:9
-msgid "You may be able to get legal aid for family mediation"
-msgstr ""
-
-#: cla_public/templates/scope/mediation.html:11
-msgid "Search for a family mediator in your area to find out if you qualify."
-msgstr ""
-
-#: cla_public/templates/scope/mediation.html:15
-msgid "Find your local mediator"
 msgstr ""
 
 #~ msgid "Overall, how did you feel about the service you received today?"
@@ -3876,5 +3682,157 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Contact us</a> if you need help or would like to give feedback to improve this service"
+#~ msgstr ""
+
+#~ msgid "What did you think of this service?"
+#~ msgstr ""
+
+#~ msgid "takes 30 seconds"
+#~ msgstr ""
+
+#~ msgid "Help organisations"
+#~ msgstr ""
+
+#~ msgid "you and your partner"
+#~ msgstr ""
+
+#~ msgid "you"
+#~ msgstr ""
+
+#~ msgid "you and your partner’s"
+#~ msgstr ""
+
+#~ msgid "your"
+#~ msgstr ""
+
+#~ msgid "You’re unlikely to get legal aid"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "From\n"
+#~ "    what you have told us today it looks like you won't be able to get\n"
+#~ "    legal aid %(fromcla)s as you don’t qualify financially"
+#~ msgstr ""
+
+#~ msgid "from CLA"
+#~ msgstr ""
+
+#~ msgid "This is because"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "have too much disposable\n"
+#~ "      capital"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "gross income is more than\n"
+#~ "      the maximum allowed"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "disposable income is\n"
+#~ "      higher than the limit we allow"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Disposable capital includes savings, valuable items and the\n"
+#~ "      equity in any property you own."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Disposable income is the money you have left after we’ve accounted\n"
+#~ "      for certain living expenses, like rent or mortgage payments."
+#~ msgstr ""
+
+#~ msgid "Family Mediation Council"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "        If you want to make an application to court about a family matter you need to first of all\n"
+#~ "        see if family mediation will help. Use the %(family_mediation_link)s directory to find a mediator\n"
+#~ "        and make an appointment for a Mediation Information and Assessment Meeting (MIAM).\n"
+#~ "      "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "          <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">What did you think of this service?</a> (takes 30 seconds)\n"
+#~ "      "
+#~ msgstr ""
+
+#~ msgid "A legal adviser may still be able to help"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You may still qualify for legal aid to seek a court order for protection. To find out if you\n"
+#~ "      might qualify, contact a legal adviser in your area."
+#~ msgstr ""
+
+#~ msgid "You can still ask a legal adviser for help – you will have to pay for their advice."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you have a court hearing date it is important that you get advice\n"
+#~ "      as soon as possible. You may be able to get last-minute help on the\n"
+#~ "      day of the hearing from an adviser in the court building."
+#~ msgstr ""
+
+#~ msgid "Find a solicitor"
+#~ msgstr ""
+
+#~ msgid "Legal aid doesn’t cover all types of problem"
+#~ msgstr ""
+
+#~ msgid "Exceptional cases"
+#~ msgstr ""
+
+#~ msgid "In exceptional cases or if your case is going to a judicial review, legal aid may still be available."
+#~ msgstr ""
+
+#~ msgid "In exceptional cases, legal aid may still be available."
+#~ msgstr ""
+
+#~ msgid "ask a legal adviser"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "        You can %(ask_legal_adviser_link)s if an application might succeed in your case and how to apply.\n"
+#~ "      "
+#~ msgstr ""
+
+#~ msgid "apply directly"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "        You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
+#~ "      "
+#~ msgstr ""
+
+#~ msgid "You can still ask a solicitor for help – you will have to pay for their advice."
+#~ msgstr ""
+
+#~ msgid "From what you’ve told us today, it looks as though your problem is not covered."
+#~ msgstr ""
+
+#~ msgid "You can still ask a solicitor for help - you will have to pay for their advice."
+#~ msgstr ""
+
+#~ msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
+#~ msgstr ""
+
+#~ msgid "Family mediation"
+#~ msgstr ""
+
+#~ msgid "You may be able to get legal aid for family mediation"
+#~ msgstr ""
+
+#~ msgid "Search for a family mediator in your area to find out if you qualify."
+#~ msgstr ""
+
+#~ msgid "Find your local mediator"
 #~ msgstr ""
 
