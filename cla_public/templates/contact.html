@@ -62,30 +62,29 @@
     {{ Form.group(form.full_name, field_attrs={'class': 'm-large', 'spellcheck': "false"}) }}
 
     {% call Form.fieldset(form.contact_type, field_as_label=True) %}
-      <ul class="form-option-list form-row">
+      <div class="govuk-radios">
         {%- for option in form.contact_type -%}
-          <li>
-            <label class="radio-inline" for="{{ option.id }}">
-              {{ option }}
+          <div class="govuk-radios__item">
+            {{ option(**{"class": "govuk-radios__input"}) }}
+            <label class="govuk-label govuk-radios__label" for="{{ option.id }}">
               {{ option.label.text }}
             </label>
-
-            {% if option.data == 'call' %}
-              <div class="form-group form-subfield"
-                   data-controlled-by="contact_type"
-                   data-control-value="call" role="alert">
-                <p class="form-group form-notice">
-                  {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
-                </p>
-              </div>
-            {% elif option.data == 'callback' %}
-              {{ Subform.callback(form) }}
-            {% elif option.data == 'thirdparty' %}
-              {{ Subform.thirdparty(form) }}
-            {% endif %}
-          </li>
+          </div>
+          {% if option.data == 'call' %}
+            <div class="govuk-radios__conditional"
+                 data-controlled-by="contact_type"
+                 data-control-value="call" role="alert">
+              <p class="govuk-body">
+                {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
+              </p>
+            </div>
+          {% elif option.data == 'callback' %}
+            {{ Subform.callback(form) }}
+          {% elif option.data == 'thirdparty' %}
+            {{ Subform.thirdparty(form) }}
+          {% endif %}
         {% endfor %}
-      </ul>
+      </div>
     {% endcall %}
 
     {{ Form.group(form.email, field_attrs={'class': 'm-large'}) }}
