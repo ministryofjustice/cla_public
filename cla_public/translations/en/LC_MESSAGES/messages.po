@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-13 16:23+0000\n"
+"POT-Creation-Date: 2020-01-14 14:44+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -3434,6 +3434,11 @@ msgstr ""
 #: cla_public/templates/macros/element.html:98
 #: cla_public/templates/macros/element.html:107
 msgid "Opens in new window"
+msgstr ""
+
+#: cla_public/templates/macros/element.html:106
+#, python-format
+msgid "%(text)s"
 msgstr ""
 
 #: cla_public/templates/macros/help-orgs.html:20
