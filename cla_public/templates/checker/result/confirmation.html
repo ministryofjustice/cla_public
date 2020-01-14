@@ -45,9 +45,8 @@
     {% else %}
       <h3>{{ _('Receive this confirmation by email') }}</h3>
       {{ form.csrf_token }}
-      {% call Form.group(form.email, 'form-group-plain', field_attrs={'autocomplete': 'off'}) %}
-        <button type="submit" class="button">{{ _('Send') }}</button>
-      {% endcall %}
+      {{ Form.group(form.email, '', field_attrs={'autocomplete': 'off'}) }}
+      <button type="submit" class="govuk-button">{{ _('Send') }}</button>
     {% endif %}
   </form>
 
