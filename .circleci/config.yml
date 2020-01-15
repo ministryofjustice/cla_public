@@ -97,7 +97,7 @@ jobs:
           name: Check formatting with Black
           command: |
             source py3-lint-env/bin/activate
-            black --diff cla_public
+            black --check --diff cla_public
   test:
     docker:
       - image: circleci/python:2.7
