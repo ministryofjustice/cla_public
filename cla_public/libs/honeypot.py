@@ -12,11 +12,7 @@ class HoneypotWidget(widgets.Input):
         kwargs.setdefault("value", "")
         kwargs.setdefault("id", FIELD_NAME)
 
-        return widgets.HTMLString(
-            "<input {params}>".format(
-                params=widgets.html_params(name=field.name, **kwargs)
-            )
-        )
+        return widgets.HTMLString("<input {params}>".format(params=widgets.html_params(name=field.name, **kwargs)))
 
 
 class HoneypotField(StringField):
