@@ -225,7 +225,7 @@
     {% endif %}
 
     {% if field.flags.optional %}
-      {% set label_text = label_text + ' (optional)' %}
+      {% set label_text = label_text + ' (' + _('optional') + ')' %}
     {% endif %}
 
     {% set field_label = field.label(

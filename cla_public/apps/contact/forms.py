@@ -197,7 +197,8 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
 class ConfirmationForm(Honeypot, BabelTranslationsFormMixin, Form):
     email = StringField(
-        _(u"Your email"),
+        _(u"Receive this confirmation by email"),
+        description=_(u"Enter your email address"),
         validators=[
             Length(max=255, message=_(u"Your address must be 255 characters " u"or less")),
             EmailValidator(message=_(u"Invalid email address")),
