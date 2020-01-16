@@ -86,7 +86,7 @@ class DiagnosisApiClient(object):
     def get_category(self, response_json):
         category = response_json["category"]
         if not category:
-            category_name = Markup(response_json["nodes"][0]["label"]).striptags()
+            category_name = response_json["nodes"][0]["key"]
             with override_locale("en"):
                 category, name, desc = category_option_from_name(category_name)
         return category
