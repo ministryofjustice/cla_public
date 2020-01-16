@@ -63,9 +63,10 @@
   {% endif %}
 
        <p>
-      {% trans %}
-          {% trans %}<a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">What did you think of this service?</a> (takes 30 seconds){% endtrans %}
-      {% endtrans %}
+
+          <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
+            {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
+          </a>
     </p>
 
   <h2>{{ _('A legal adviser may still be able to help') }}</h2>

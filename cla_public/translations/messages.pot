@@ -1185,9 +1185,10 @@ msgid "Cookies used to improve 'Check you can get legal aid'"
 msgstr ""
 
 #: cla_public/templates/_cookie-consent-form.html:45
-msgid ""
-"We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs. \n"
-"            We do not allow Google to use or share the data about how you use this site."
+msgid "We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs"
+msgstr ""
+
+msgid "We do not allow Google to use or share the data about how you use this site."
 msgstr ""
 
 #: cla_public/templates/_cookie-consent-form.html:49
@@ -3261,9 +3262,10 @@ msgid "In some cases you may need to pay a contribution towards your legal aid."
 msgstr ""
 
 #: cla_public/templates/checker/result/face-to-face.html:70
-msgid ""
-"<a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">\n"
-"          What did you think of this service?</a> (takes 30 seconds)"
+msgid "What did you think of this service?"
+msgstr ""
+
+msgid "(takes 30 seconds)"
 msgstr ""
 
 #: cla_public/templates/checker/result/face-to-face.html:77
@@ -3548,10 +3550,10 @@ msgid "Find a solicitor"
 msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:60
-msgid ""
-"\n"
-"          <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">What did you think of this service?</a> (takes 30 seconds)\n"
-"      "
+msgid "What did you think of this service?"
+msgstr ""
+
+msgid "(takes 30 seconds)"
 msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:67

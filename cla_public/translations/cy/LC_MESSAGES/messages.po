@@ -1189,10 +1189,11 @@ msgid "Cookies used to improve 'Check you can get legal aid'"
 msgstr "Cwcis sy’n cael eu defnyddio i wella ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol'"
 
 #: cla_public/templates/_cookie-consent-form.html:45
-msgid ""
-"We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs. \n"
-"            We do not allow Google to use or share the data about how you use this site."
-msgstr "Rydym yn defnyddio Google Analytics i fesur sut rydych yn defnyddio ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’ er mwyn i ni allu gwella’r gwasanaeth ar sail anghenion defnyddwyr. Nid ydym yn gadael i Google ddefnyddio na rhannu’r data ynglŷn â sut rydych yn defnyddio’r safle hwn."
+msgid "We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs."
+msgstr "Rydym yn defnyddio Google Analytics i fesur sut rydych yn defnyddio ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’ er mwyn i ni allu gwella’r gwasanaeth ar sail anghenion defnyddwyr."
+
+msgid "We do not allow Google to use or share the data about how you use this site."
+msgstr "Nid ydym yn gadael i Google ddefnyddio na rhannu’r data ynglŷn â sut rydych yn defnyddio’r safle hwn."
 
 #: cla_public/templates/_cookie-consent-form.html:49
 msgid "You agree to the Ministry of Justice using your data to help improve the 'Check if you can get legal aid' service."
@@ -3344,10 +3345,11 @@ msgid "In some cases you may need to pay a contribution towards your legal aid."
 msgstr "Mewn rhai achosion, efallai y bydd yn rhaid i chi wneud cyfraniad ariannol tuag at eich cymorth cyfreithiol"
 
 #: cla_public/templates/checker/result/face-to-face.html:70
-msgid ""
-"<a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">\n"
-"          What did you think of this service?</a> (takes 30 seconds)"
-msgstr "<a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">Beth oeddech chi’n feddwl o’r gwasanaeth hwn?</a> (mae’n cymryd 30 eiliad)"
+msgid "What did you think of this service?"
+msgstr "Beth oeddech chi’n feddwl o’r gwasanaeth hwn?"
+
+msgid "(takes 30 seconds)"
+msgstr "(mae’n cymryd 30 eiliad)"
 
 #: cla_public/templates/checker/result/face-to-face.html:77
 msgid ""
@@ -3640,11 +3642,12 @@ msgid "Find a solicitor"
 msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:60
-msgid ""
-"\n"
-"          <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">What did you think of this service?</a> (takes 30 seconds)\n"
-"      "
-msgstr "<a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">Beth oeddech chi’n feddwl o’r gwasanaeth hwn?</a> (mae’n cymryd 30 eiliad)"
+
+msgid "What did you think of this service?"
+msgstr "Beth oeddech chi’n feddwl o’r gwasanaeth hwn?"
+
+msgid "(takes 30 seconds)"
+msgstr "(mae’n cymryd 30 eiliad)"
 
 #: cla_public/templates/scope/ineligible.html:67
 msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
