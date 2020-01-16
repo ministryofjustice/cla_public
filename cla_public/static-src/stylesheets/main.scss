@@ -212,3 +212,30 @@ dl.govuk-list.govuk-list--bullet {
 .form-group-label {
   font-weight:bold;
 }
+.laa-confirmation-button-link {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  &:hover{
+    color: #f3f2f1;
+    &:focus{
+      color: $govuk-text-colour;
+    }
+  }
+}
+.laa-confirmation-inset {
+  background: white;
+  color: $govuk-text-colour;
+  padding: 20px;
+  margin: 20px 0 0;
+}
+@media only screen {
+  a[rel="external"]:after {
+    content: "";
+  }
+}
+.govuk-label:not(.govuk-radios__label):not(.govuk-checkboxes__label) {
+  font-weight:700;
+}

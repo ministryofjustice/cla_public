@@ -11,58 +11,60 @@
 {% block sidebar %}{% endblock %}
 
 {% block inner_content %}
-  <header class="confirmation">
-    <h1 class="page-title">
+  <div class="govuk-panel govuk-panel--confirmation">
+    <h1 class="govuk-panel__title">
       {% if session.stored.callback_requested %}
         {{ _('We will call you back') }}
       {% else %}
         {{ _('Your details have been submitted') }}
       {% endif %}
     </h1>
-    <p>
-      {{ _('Your reference number is') }}
-      <strong class="confirmation-ref-number">
+    <div class="govuk-panel__body">
+      {{ _('Your reference number is') }}<br />
+      <strong>
         {{ session.stored.case_ref }}
       </strong>
-    </p>
+    </div>
     {% if not session.stored.callback_requested %}
-      <p class="confirmation-inset">
-        {{ _('You can now call CLA on') }} <strong>0345 345 4 345</strong>.<br>
+      <p class="laa-confirmation-inset">
+        {{ _('You can now call CLA on') }} <strong class="laa-telephone">0345 345 4 345</strong>.<br>
         {% trans %}Please quote your reference number when you call. Find out about
         <a href="https://www.gov.uk/call-charges" rel="external">call charges</a>.{% endtrans %}
       </p>
     {% endif %}
 
     <div class="confirmation-actions"></div>
-  </header>
+  </div>
 
-  <form method="POST" class="confirmation-email-form" data-error-banner="false">
-    {% if confirmation_email and not form.errors %}
-      <p>
-        {{ _('Your reference number was sent to') }}
-        <strong>{{ confirmation_email }}</strong>
-      </p>
-    {% else %}
-      <h3>{{ _('Receive this confirmation by email') }}</h3>
-      {{ form.csrf_token }}
-      {% call Form.group(form.email, 'form-group-plain', field_attrs={'autocomplete': 'off'}) %}
-        <button type="submit" class="button">{{ _('Send') }}</button>
-      {% endcall %}
-    {% endif %}
-  </form>
-
-  {% if session.stored.category in ['debt', 'housing'] %}
-    <p>
-      {% trans %}If you have a court hearing date it is important that you get
-      advice as soon as possible. You may be able to get last-minute
-      help on the day of the hearing from an adviser in the court building.{% endtrans %}
+  {% if confirmation_email and not form.errors %}
+    <p class="govuk-body">
+      {{ _('Your reference number was sent to') }}
+      <strong>{{ confirmation_email }}</strong>.
     </p>
+  {% else %}
+    <form method="POST" data-error-banner="false">
+      {{ form.csrf_token }}
+      {{ Form.group(form.email, '', field_attrs={'autocomplete': 'off'}) }}
+      <button type="submit" class="govuk-button">{{ _('Send') }}</button>
+    </form>
   {% endif %}
 
-  <h2>{{ _('What happens next?') }}</h2>
+  {% if session.stored.category in ['debt', 'housing'] %}
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">{{ _('Warning') }}</span>
+        {% trans %}If you have a court hearing date it is important that you get
+      advice as soon as possible. You may be able to get last-minute
+      help on the day of the hearing from an adviser in the court building.{% endtrans %}
+      </strong>
+    </div>
+  {% endif %}
+
+  <h2 class="govuk-heading-m">{{ _('What happens next?') }}</h2>
 
   {% if session.stored.callback_requested %}
-    <p>
+    <p class="govuk-body">
       {% if is_thirdparty %}
         {% trans %}Your details have been submitted and an operator will call
         the person you nominated at least once during your chosen time, or as close to the time as possible.{% endtrans %}
@@ -76,79 +78,84 @@
   {% endif %}
 
   {% if session.stored.category == 'violence' %}
-    <p>
+    <p class="govuk-body">
       {% trans %}If you need to urgently protect yourself or your family you should
       try and get advice as soon as possible.{% endtrans %}
     </p>
   {% endif %}
 
-  <p>
-    {% if is_thirdparty %}
+  <ul class="govuk-list govuk-list--bullet">
+    <li>
+      {% if is_thirdparty %}
         {% trans %}The first person they speak to will be an operator
         who will ask about your problem and your financial circumstances.{% endtrans %}
-    {% else %}
+      {% else %}
         {% trans %}The first person you speak to will be an operator
         who will ask about your problem and your financial circumstances.{% endtrans %}
-    {% endif %}
-  </p>
-  <p>
-    {% if is_thirdparty %}
+      {% endif %}
+    </li>
+    <li>
+      {% if is_thirdparty %}
         {% trans %}If it looks like you might qualify for legal aid they’ll
         be put through to a specialist adviser, who will make the
         final decision on your case.{% endtrans %}
-    {% else %}
+      {% else %}
         {% trans %}If it looks like you might qualify for legal aid you’ll
         be put through to a specialist adviser, who will make the
         final decision on your case.{% endtrans %}
+      {% endif %}
+
+      {% if session.stored.category in ['violence','family'] %}
+        <ul class="govuk-list">
+          {% if session.stored.category == 'violence' %}
+            <li>
+              {% trans %}Please be aware that the specialist adviser will need
+              evidence of the domestic violence before they can make a decision
+              on your case.{% endtrans %}
+              <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
+                {{ _('Find out what you can use as evidence') }}</a>.
+            </li>
+          {% elif session.stored.category == 'family' %}
+            <li>
+              {% trans %}If your case involves domestic abuse or violence,
+              the specialist adviser will need evidence of this
+              before they can make a decision on your case.{% endtrans %}
+              <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
+              {{ _('Find out what you can use as evidence') }}</a>.
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
+    </li>
+    {% if session.stored.category == 'violence' or session.stored.category == 'family' %}
+      <li>
+        {% trans %}You will also need to provide evidence of your financial
+        circumstances. Your specialist adviser will explain what is
+        needed.{% endtrans %}
+      </li>
+    {% else %}
+      <li>
+        {% trans %}You will need to provide evidence of your financial circumstances
+        and maybe your problem. Your specialist adviser will explain
+        what is needed.{% endtrans %}
+      </li>
     {% endif %}
-  </p>
 
-  {% if session.stored.category == 'violence' %}
-    <p>
-      {% trans %}Please be aware that the specialist adviser will need
-      evidence of the domestic violence before they can make a decision
-      on your case.{% endtrans %}
-      <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
-        {{ _('Find out what you can use as evidence') }}</a>.
-    </p>
-  {% elif session.stored.category == 'family' %}
-    <p>
-      {% trans %}If your case involves domestic abuse or violence,
-      the specialist adviser will need evidence of this
-      before they can make a decision on your case.{% endtrans %}
-      <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
-      {{ _('Find out what you can use as evidence') }}</a>.
-    </p>
-  {% endif %}
+    <li>
+      {% trans %}
+        If your specialist adviser thinks you need to speak to someone in person or have
+        someone represent you in court, they will organise this.
+      {% endtrans %}
+    </li>
+  </ul>
 
-  {% if session.stored.category == 'violence' or session.stored.category == 'family' %}
-    <p>
-      {% trans %}You will also need to provide evidence of your financial
-      circumstances. Your specialist adviser will explain what is
-      needed.{% endtrans %}
-    </p>
-  {% else %}
-    <p>
-      {% trans %}You will need to provide evidence of your financial circumstances
-      and maybe your problem. Your specialist adviser will explain
-      what is needed.{% endtrans %}
-    </p>
-  {% endif %}
-
-  <p>
-    {% trans %}
-      If your specialist adviser thinks you need to speak to someone in person or have
-      someone represent you in court, they will organise this.
-    {% endtrans %}
-  </p>
-
-  <p>
+  <p class="govuk-body">
     {% trans %}If CLA can’t help you, we’ll always suggest where else you might get help.{% endtrans %}
   </p>
-  <p>
+  <p class="govuk-body">
     {% trans %}If we can do anything to make it easier for you to communicate with us, please tell the operator.{% endtrans %}
   </p>
-  <p>
+  <p class="govuk-body">
     {% trans privacy_link=url_for('base.privacy') %}
       Protecting your personal data and your privacy is important to us. Read the full
       <a href="{{ privacy_link }}">Civil Legal Advice Privacy Statement</a>.
@@ -156,16 +163,16 @@
   </p>
 
   {% if session.stored.callback_requested %}
-    <h2>{{ _('What if I miss the operator’s call?') }}</h2>
-    <p>
+    <h2 class="govuk-heading-m">{{ _('What if I miss the operator’s call?') }}</h2>
+    <p class="govuk-body">
       {% trans %}If you miss the call or you need advice urgently, you can call us on
       <strong>0345 345 4 345</strong>. Find out about
       <a href="https://www.gov.uk/call-charges" rel="external">call charges</a>.{% endtrans %}
     </p>
   {% endif %}
 
-  <p>
-    <a class="button button-larger" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" role="button">{{ _('Finish') }}</a>
+  <p class="govuk-body">
+    <a class="govuk-button" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" role="button">{{ _('Finish') }}</a>
   </p>
 {% include "checker/time-out-warning.html" %}
 {% endblock %}
@@ -174,7 +181,7 @@
   {{ super() }}
 
   <script type="text/html" id="printButtonTemplate">
-    <button type="button" class="button button-large button-secondary">{{ _('Print this page') }}</button>
+    <button type="button" class="govuk-!-margin-top-6 govuk-!-font-size-19 govuk-link laa-confirmation-button-link ">{{ _('Print this page') }}</button>
   </script>
 
   <script>
