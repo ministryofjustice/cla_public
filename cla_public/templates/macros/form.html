@@ -18,10 +18,11 @@
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
 
-  <div class="govuk-form-group">
+  <div class="govuk-form-group
+    {%- if field and field.errors %} govuk-form-group--error{% endif -%}
+    ">
     <fieldset class="
         {{- class_ -}}
-        {%- if field and field.errors %} form-error{% endif -%}
         {%- if controlled_by and control_value %} s-hidden{% endif -%}
       "
       {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
@@ -56,10 +57,11 @@
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
 
-  <div class="govuk-form-group">
+  <div class="govuk-form-group
+    {%- if field and field.errors %} govuk-form-group--error{% endif -%}
+    ">
     <fieldset class="
         {{- class_ -}}
-        {%- if field and field.errors %} form-error{% endif -%}
         {%- if controlled_by and control_value %} s-hidden{% endif -%}
       "
       {%- if kwargs.attrs %}{{ kwargs.attrs|xmlattr }}{% endif -%}
@@ -67,7 +69,7 @@
       {%- if field %}id="field-{{ field.id }}"{% endif -%}
     >
       {% if legend_ %}
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
           {{ legend_ }}
         </legend>
       {% endif %}
@@ -274,13 +276,15 @@
 #}
 {% macro render_field_errors(errors) %}
   {% set errors = errors.values() if errors is mapping else errors %}
-  <span id="{{ field.id }}-error" class="govuk-error-message">
+  <span class="govuk-error-message">
     {% for error in errors %}
       {% if error is string or error == error|string %}
-        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span> {{error}}
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+        <span class="cla-error-message">{{error}}</span>
       {% else %}
         {% for line in error %}
-          <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span> {{line}}
+          <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+          <span class="cla-error-message">{{line}}</span>
         {% endfor %}
       {% endif %}
     {% endfor %}
@@ -356,7 +360,8 @@
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
     {% if field and field.errors %}
       <span id="{{field.id}}-error" class="govuk-error-message">
-        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span> {{ field.errors[0] }}
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+        <span class="cla-error-message">{{ field.errors[0] }}</span>
       </span>
       {% set class_ = "govuk-input--error" %}
     {% endif %}

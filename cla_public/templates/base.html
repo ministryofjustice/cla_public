@@ -114,7 +114,7 @@
 
   <script type="text/html" id="mainFormError">
     {% call Element.alert('error', title=_('This form has errors')) %}
-      <ul class="error-summary">
+      <ul class="govuk-list govuk-error-summary__list">
         <% _.each(errors, function(field) { %>
         <li>
           <dl class="error-summary-details">
@@ -134,11 +134,12 @@
   </script>
 
   <script type="text/html" id="fieldError">
-    <div class="form-row field-error" id="error-<%= fieldName %>">
-      <% _.each(errors, function(error, index) { %>
-        <p><%= error %></p>
+    <% _.each(errors, function(error, index) { %>
+      <span class="govuk-error-message" id="error-<%= fieldName %>">
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+        <span class="cla-error-message"><%= error %></span>
       <% }); %>
-    </div>
+    </span>
   </script>
 
   <script type="text/html" id="truncateListExpandLink">
