@@ -16,9 +16,9 @@
   </a>
 
        <p>
-      {% trans %}
-          <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">What did you think of this service?</a> (takes 30 seconds)
-      {% endtrans %}
+         <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
+           {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
+         </a>
     </p>
     {% include "checker/time-out-warning.html" %}
 {% endblock %}

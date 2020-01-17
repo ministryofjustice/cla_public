@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>
-      Service unavailable - Civil Legal Advice - GOV.UK
+      {% trans %}Service unavailable - Civil Legal Advice - GOV.UK{% endtrans %}
     </title>
     <script type="text/javascript">
       (function(){if(navigator.userAgent.match(/IEMobile\/10\.0/)){var d=document,c="appendChild",a=d.createElement("style");a[c](d.createTextNode("@-ms-viewport{width:auto!important}"));d.getElementsByTagName("head")[0][c](a);}})();
@@ -80,14 +80,15 @@
       </script>
       <div id="skiplink-container">
         <div>
-          <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+          <a href="#main-content" class="govuk-skip-link">{% trans %}Skip to main content{% endtrans %}</a>
         </div>
       </div>
 
       <div id="global-cookie-message">
         <div class="outer-block">
           <div class="inner-block">
-            <p>GOV.UK uses cookies to make the site simpler. <a href="https://www.gov.uk/help/cookies">Find out more about cookies</a></p>
+            <p>{% trans %}GOV.UK uses cookies to make the site simpler.{% endtrans %}
+              <a href="https://www.gov.uk/help/cookies">{% trans %}Find out more about cookies{% endtrans %}</a></p>
           </div>
         </div>
       </div>
@@ -109,7 +110,7 @@
           </div>
           <div class="govuk-header__content">
             <a href="/" class="govuk-header__link govuk-header__link--service-name">
-              Civil Legal Advice
+              {% trans %}Civil Legal Advice{% endtrans %}
             </a>
           </div>
         </div>
@@ -121,31 +122,31 @@
         <div class="govuk-phase-banner">
           <p class="govuk-phase-banner__content">
             <span class="govuk-phase-banner__text" id="aria-feedback">
-              <a href="{{ url_for('base.reasons_for_contacting')}}">Report a problem</a> if you need help or would like to give feedback to improve this service
+              {% trans %}<a href="{{ url_for('base.reasons_for_contacting')}}">Report a problem</a> if you need help or would like to give feedback to improve this service{% endtrans %}
             </span>
           </p>
         </div>
         <main class="govuk-main-wrapper " id="main-content" role="main">
-          <h1 class="govuk-heading-xl">This service is temporarily unavailable</h1>
-          <p class="govuk-body">This service is not available right now, but we're working hard to get things up and running again.</p>
-          <p class="govuk-body">You can try again later or contact us. </p>
-          <p class="govuk-body">Telephone:<br />
+          <h1 class="govuk-heading-xl">{% trans %}This service is temporarily unavailable{% endtrans %}</h1>
+          <p class="govuk-body">{% trans %}This service is not available right now, but we're working hard to get things up and running again.{% endtrans %}</p>
+          <p class="govuk-body">{% trans %}You can try again later or contact us.{% endtrans %}</p>
+          <p class="govuk-body">{% trans %}Telephone:{% endtrans %}<br/>
             <strong class="govuk-!-font-weight-bold">0345 345 4345</strong>
           </p>
-          <p class="govuk-body">Minicom:<br />
+          <p class="govuk-body">{% trans %}Minicom:{% endtrans %}<br/>
             <strong class="govuk-!-font-weight-bold">0345 609 6677</strong>
           </p>
-          <p class="govuk-body">Textphone:<br />
+          <p class="govuk-body">{% trans %}Textphone:{% endtrans %}<br/>
             <strong class="govuk-!-font-weight-bold">0845 609 6677</strong>
           </p>
           <p class="govuk-body">
-            <a href="https://www.gov.uk/call-charges">Find out about call charges here</a>.
+            <a href="https://www.gov.uk/call-charges">{% trans %}Find out about call charges here{% endtrans %}</a>.
           </p>
-          <p class="govuk-body">Opening times:<br />
-            <strong class="govuk-!-font-weight-bold">Monday to Friday: 9am to 8pm<br />Saturday: 9am to 12.30pm</strong>
+          <p class="govuk-body">{% trans %}Opening times:{% endtrans %}<br />
+            <strong class="govuk-!-font-weight-bold">{% trans %}Monday to Friday: 9am to 8pm{% endtrans %}<br />{% trans %}Saturday: 9am to 12.30pm{% endtrans %}</strong>
           </p>
           <div class="govuk-inset-text">
-            This service is only available if you are a resident of England or Wales.
+            {%- trans -%}This service is only available if you are a resident of England or Wales.{% endtrans %}
           </div>
         </main>
       </div>
@@ -153,19 +154,19 @@
       <div class="govuk-width-container ">
         <div class="govuk-footer__meta">
           <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
-            <h2 class="govuk-visually-hidden">Support links</h2>
+            <h2 class="govuk-visually-hidden">{% trans %}Support links{% endtrans %}</h2>
             <ul class="govuk-footer__inline-list">
               <li class="govuk-footer__inline-list-item">
-                <a class="govuk-footer__link"  href="/privacy">Privacy Policy</a>
+                <a class="govuk-footer__link"  href="/privacy">{% trans %}Privacy Policy{% endtrans %}</a>
               </li>
               <li class="govuk-footer__inline-list-item">
-                <a class="govuk-footer__link"  href="/cookies">Cookies</a>
+                <a class="govuk-footer__link"  href="/cookies">{% trans %}Cookies{% endtrans %}</a>
               </li>
               <li class="govuk-footer__inline-list-item">
-                <a class="govuk-footer__link"  href="/reasons-for-contacting">Contact us</a>
+                <a class="govuk-footer__link"  href="/reasons-for-contacting">{% trans %}Contact us{% endtrans %}</a>
               </li>
               <li class="govuk-footer__inline-list-item">
-                <a class="govuk-footer__link"  class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/"><abbr title="Ministry of Justice">MoJ</abbr> Digital Services</a>
+                <a class="govuk-footer__link"  class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/">{% trans %}<abbr title="Ministry of Justice">MoJ</abbr> Digital Services{% endtrans %}</a>
               </li>
             </ul>
             <svg role="presentation" focusable="false" class="govuk-footer__licence-logo" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 483.2 195.7" height="17" width="41">
@@ -173,7 +174,7 @@
             </svg>
             <span class="govuk-footer__licence-description">
               All content is available under the
-              <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, 
+              <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>,
               except where otherwise stated
             </span>
           </div>

@@ -79,9 +79,8 @@
 
 {% macro staying_safe_online_link() %}
   <p id="aria-staying-safe-online">
-    {%- trans link=link_new_window(url_for('base.online_safety'), 'staying safe online', **{'aria-labelledby': 'aria-staying-safe-online'}) -%}
-      The information you enter won’t be stored on this device. Find out more about {{ link }}.
-    {%- endtrans -%}
+    {%- set link=link_new_window(url_for('base.online_safety'), 'Staying safe online', **{'aria-labelledby': 'aria-staying-safe-online'}) -%}
+    {%- trans -%}The information you enter won’t be stored on this device. Find out more about {{ link }}.{%- endtrans -%}
   </p>
 {% endmacro %}
 
@@ -103,6 +102,6 @@
        {% endfor %}
      {% endif %}
   >
-    {{- text -}}
+    {{ _(text) }}
     <span class="sr-only"> {{ _('Opens in new window') }}</span></a>
 {%- endmacro %}
