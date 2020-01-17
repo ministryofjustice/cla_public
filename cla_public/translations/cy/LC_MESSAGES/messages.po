@@ -906,7 +906,7 @@ msgstr "Adolygu eich atebion"
 
 #: cla_public/apps/checker/forms.py:507
 msgid "Enter postcode"
-msgstr "Rhowch eich cod post"
+msgstr "Rhowch eich côd post"
 
 #: cla_public/apps/checker/validators.py:76
 msgid "Must select at least one option."
@@ -1035,11 +1035,11 @@ msgstr "Ei gysylltiad/chysylltiad â chi"
 
 #: cla_public/apps/contact/forms.py:107
 msgid "Postcode"
-msgstr "Cod post"
+msgstr "Côd post"
 
 #: cla_public/apps/contact/forms.py:108
 msgid "Your postcode must be 12 characters or less"
-msgstr "Rhaid i’ch cod post fod yn 12 nod neu lai"
+msgstr "Rhaid i’ch côd post fod yn 12 nod neu lai"
 
 #: cla_public/apps/contact/forms.py:111
 msgid "Street address"
@@ -1482,11 +1482,11 @@ msgstr "nodau ar ôl"
 
 #: cla_public/templates/contact.html:157
 msgid "Must contain a valid postcode"
-msgstr "Rhaid cynnwys cod post dilys"
+msgstr "Rhaid cynnwys côd post dilys"
 
 #: cla_public/templates/contact.html:165
 msgid "No addresses were found with that postcode, but you can still enter your address manually"
-msgstr "Ni ddaethpwyd o hyd i unrhyw gyfeiriadau gyda’r cod post hwn, ond gallwch roi eich cyfeiriad i mewn eich hun."
+msgstr "Ni ddaethpwyd o hyd i unrhyw gyfeiriadau gyda’r côd post hwn, ond gallwch roi eich cyfeiriad i mewn eich hun."
 
 #: cla_public/templates/contact.html:173
 msgid "Request failed: "
@@ -2208,7 +2208,7 @@ msgstr "Bydd CLA yn gallu gweld a gwirio’r wybodaeth y byddwch yn ei rhoi a, l
 msgid ""
 "The minimum amount of personal data that <abbr>CLA</abbr> will ask to collect is your name and two other pieces\n"
 "    of personal information that could be used to identify you, e.g. postcode, date of birth or telephone number."
-msgstr "Y data personol sylfaenol y bydd CLA yn gofyn amdanynt yw eich enw a dau ddarn arall o wybodaeth bersonol a allai gael eu defnyddio i’ch adnabod, e.e. cod post, dyddiad geni neu rif ffôn."
+msgstr "Y data personol sylfaenol y bydd CLA yn gofyn amdanynt yw eich enw a dau ddarn arall o wybodaeth bersonol a allai gael eu defnyddio i’ch adnabod, e.e. côd post, dyddiad geni neu rif ffôn."
 
 #: cla_public/templates/privacy.html:193
 msgid ""
@@ -3652,6 +3652,10 @@ msgstr "(mae’n cymryd 30 eiliad)"
 #: cla_public/templates/scope/ineligible.html:67
 msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
 msgstr ""
+
+#: cla_public/templates/macros/form.html:228
+msgid "optional"
+msgstr "dewisol"
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
