@@ -13,7 +13,7 @@
         // Focus back on summary if field-error is focused and escape key is pressed
         .on('keyup', function(e) {
           var $target = $(e.target);
-          if(e.keyCode === 27 && $target.is('.form-error')) {
+          if(e.keyCode === 27 && ($target.is('.govuk-form-group--error') || $target.parent().is('.govuk-form-group--error'))) {
             $target.closest('form').find('> .alert').focus();
           }
         })
@@ -73,7 +73,7 @@
       }
       if (data.field_errors) {
         this.loadErrors(data.field_errors);
-        var errorBanner = $('.alert-error:visible:first');
+        var errorBanner = $('.govuk-error-summary:visible:first');
 
         if(!errorBanner.length) {
           return;
@@ -121,7 +121,7 @@
       var errorSummary = [];
 
       // Loop through errors on the page to retain the fields order
-      $('.form-error').map(function() {
+      $('.govuk-form-group--error, .govuk-form-group--error>fieldset').map(function() {
         var $this = $(this);
 
         if(!this.id || $this.hasClass('s-hidden') || $this.parent().hasClass('s-hidden')) {
@@ -132,7 +132,7 @@
         errorSummary.push({
           label: $this.find('#field-label-' + name).text(),
           name: name,
-          errors: $this.find('> .field-error p').map(function() {
+          errors: $this.find('> .govuk-error-message > .cla-error-message').map(function() {
             return $(this).text();
           })
         });
@@ -167,11 +167,11 @@
         }
 
         $('#field-' + fieldName)
-          .addClass('form-error')
           .attr({
             'aria-invalid': true,
             'aria-describedby': 'error-' + fieldName
-          });
+          })
+          .closest('.govuk-form-group').addClass('govuk-form-group--error');
 
         var label = $('#field-label-' + fieldName);
 
@@ -242,11 +242,12 @@
       $('.govuk-error-message').remove();
       $('.form-row.field-error').remove();
       $('form>.alert.alert-error').remove();
+      $('form>.govuk-error-summary').remove();
       $('.form-error')
         .removeClass('form-error')
         .removeAttr('aria-invalid');
       $('.govuk-form-group--error')
-        .removeClass('form-error')
+        .removeClass('govuk-form-group--error')
         .removeAttr('aria-invalid');
     }
   };
