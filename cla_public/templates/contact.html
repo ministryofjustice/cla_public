@@ -155,21 +155,21 @@
 
   <script type="text/html" id="postcodeNotEnteredText">
     <span class="govuk-error-message">
-      <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+      <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
       <span class="cla-error-message">{{ _('Must contain a valid postcode') }}</span>
     </span>
   </script>
 
   <script type="text/html" id="noAddressesFoundText">
     <span class="govuk-error-message">
-      <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+      <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
       <span class="cla-error-message">{{ _('No addresses were found with that postcode, but you can still enter your address manually') }}</span>
     </span>
   </script>
 
   <script type="text/html" id="requestFailedText">
     <span class="govuk-error-message">
-      <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+      <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
       <span class="cla-error-message">{{ _('Request failed: ') }} <%= textStatus %>, <%= error %></span>
     </span>
   </script>
