@@ -89,7 +89,7 @@
 
     {{ Form.group(form.email, field_attrs={'class': 'm-large'}) }}
 
-    {% call Form.fieldset(form.address, field_as_label=True) %}
+    {% call Form.fieldset(form.address, field_as_label=True, legend_size='m') %}
       {{ Form.group(form.address.post_code,
           'form-group-plain',
           field_attrs={'class': 'govuk-input--width-10', 'data-address-el': '#address-street_address', 'autocomplete': "postal-code", 'spellcheck': "false"},
@@ -130,7 +130,7 @@
   {%- endif -%}
 
   <script type="text/html" id="addressFinderButton">
-    <button class="button button-secondary address-finder-button" type="button">
+    <button class="govuk-button govuk-button--secondary address-finder-button" type="button" data-module="govuk-button">
       {{ _('Find UK address') }}
     </button>
   </script>
