@@ -9,7 +9,6 @@
 #}
 {% macro callback(form) %}
   {% call Form.group(None,
-      class_='govuk-radios__conditional',
       use_row=False,
       controlled_by=form.contact_type,
       control_value='callback') %}
@@ -33,7 +32,6 @@
 #}
 {% macro thirdparty(form) %}
   {% call Form.group(None,
-      class_='govuk-radios__conditional',
       use_row=False,
       controlled_by=form.contact_type,
       control_value='thirdparty') %}
@@ -70,25 +68,29 @@
             </label>
           </div>
           {% if radio.data == 'today' %}
-            {{ Form.group(subform.time_today,
-              'govuk-radios__conditional',
-              custom_label='Time',
-              controlled_by=subform.specific_day,
-              control_value='today',
-              row_class='') }}
+            <div class="govuk-radios__conditional">
+              {{ Form.group(subform.time_today,
+                '',
+                custom_label='Time',
+                controlled_by=subform.specific_day,
+                control_value='today',
+                row_class='') }}
+            </div>
           {% else %}
-            {{ Form.group(subform.day,
-              'govuk-radios__conditional govuk-!-padding-bottom-4 govuk-!-margin-bottom-0',
-              {'data-day-time-choices': subform.day.day_time_choices|tojson|safe},
-              controlled_by=subform.specific_day,
-              control_value='specific_day',
-              row_class='') }}
-            {{ Form.group(subform.time_in_day,
-              'govuk-radios__conditional',
-              custom_label='Time',
-              controlled_by=subform.specific_day,
-              control_value='specific_day',
-              row_class='') }}
+            <div class="govuk-radios__conditional">
+                {{ Form.group(subform.day,
+                  'govuk-!-padding-bottom-4 govuk-!-margin-bottom-0',
+                  {'data-day-time-choices': subform.day.day_time_choices|tojson|safe},
+                  controlled_by=subform.specific_day,
+                  control_value='specific_day',
+                  row_class='') }}
+                {{ Form.group(subform.time_in_day,
+                  '',
+                  custom_label='Time',
+                  controlled_by=subform.specific_day,
+                  control_value='specific_day',
+                  row_class='') }}
+              </div>
           {% endif %}
         {% endif %}
       {% endfor %}
