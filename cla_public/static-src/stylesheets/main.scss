@@ -225,6 +225,20 @@ dl.govuk-list.govuk-list--bullet {
     }
   }
 }
+.laa-input-link {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: $govuk-link-colour;
+  text-decoration: underline;
+  padding: 0;
+  &:hover{
+    color: $govuk-link-hover-colour;
+    &:focus{
+      color: $govuk-focus-text-colour;
+    }
+  }
+}
 .laa-confirmation-inset {
   background: white;
   color: $govuk-text-colour;

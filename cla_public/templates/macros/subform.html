@@ -105,7 +105,7 @@
         WTForm field
 #}
 {% macro adaptations(subform) %}
-  {% call Form.tickbox_fieldset(legend=subform.label.text) %}
+  {% call Form.tickbox_fieldset(legend=subform.label.text, legend_size='m') %}
     <div class="govuk-checkboxes__item">
       {{ subform.bsl_webcam(**{"class": "govuk-checkboxes__input"}) }}
       <label class="govuk-label govuk-checkboxes__label" for="{{subform.bsl_webcam.id}}">

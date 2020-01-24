@@ -391,7 +391,7 @@ msgstr "Nid yw’r wybodaeth a ddarparwyd gennych wedi cael ei chadw ar eich cyf
 
 #: cla_public/apps/checker/fields.py:121
 msgid "Yes"
-msgstr "le"
+msgstr "Ie"
 
 #: cla_public/apps/checker/fields.py:121
 msgid "No"
