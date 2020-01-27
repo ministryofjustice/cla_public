@@ -12,6 +12,7 @@ settings_required = (
     "RAVEN_CONFIG_SITE",
     "BACKEND_BASE_URI",
     "LAALAA_API_HOST",
+    "GOOGLE_MAPS_API_KEY",
 )
 
 for key in settings_required:

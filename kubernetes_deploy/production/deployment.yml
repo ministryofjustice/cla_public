@@ -92,3 +92,5 @@ spec:
             secretKeyRef:
               name: raven-config
               key: RAVEN_CONFIG_SITE
+        - name: GOOGLE_MAPS_API_KEY
+          value: AIzaSyB_75-8mb5ZGgBh95USV07dupsoB8dxcDY
