@@ -89,7 +89,7 @@
 
   {% block javascripts %}
     {{ super() }}
-    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true&key={{config.GOOGLE_MAPS_API_KEY}}"></script>
     {% include '_ga-outcome-pageview.html' %}
   {% endblock %}
 

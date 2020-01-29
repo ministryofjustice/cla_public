@@ -102,6 +102,8 @@ MAIL_PASSWORD = os.environ.get("SMTP_PASSWORD")
 
 MAIL_DEFAULT_SENDER = ("Civil Legal Advice", "no-reply@civillegaladvice.service.gov.uk")
 
+GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
+
 # local.py overrides all the common settings.
 try:
     from cla_public.config.local import *  # noqa: F401,F403
