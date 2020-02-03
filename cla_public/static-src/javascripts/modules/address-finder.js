@@ -182,11 +182,10 @@
       } else {
         var england = true;
       }
-      if (!england)
+      if (!england) {
         if (addressCount === 1) $("#field-address-post_code").after(this.geoTemplate({place: country, link: anchor}));
         if (addressCount > 1) $(".address-list").after(this.geoTemplate({place: country, link: anchor}));
-
-
+      }
     },
 
     showError: function (template) {
