@@ -70,14 +70,15 @@
 
       if (data.length < 1) {
         this.showError(this.noAddressesFoundTemplate());
+        this.renderGeoError(1);
       } else if (data.length === 1) {
         this.updatePostcode(data);
         this.updateAddress(0);
-        this.renderGeoError(1)
+        this.renderGeoError(1);
       } else {
         this.updatePostcode(data);
         this.renderAddressList(data);
-        this.renderGeoError(data.length)
+        this.renderGeoError(data.length);
       }
     },
 
@@ -182,7 +183,7 @@
         var england = true;
       }
       if (!england)
-        if (addressCount === 1) $(".address-finder").after(this.geoTemplate({place: country, link: anchor}));
+        if (addressCount === 1) $("#field-address-post_code").after(this.geoTemplate({place: country, link: anchor}));
         if (addressCount > 1) $(".address-list").after(this.geoTemplate({place: country, link: anchor}));
 
 
