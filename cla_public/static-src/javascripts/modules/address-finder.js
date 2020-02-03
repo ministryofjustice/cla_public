@@ -70,7 +70,6 @@
 
       if (data.length < 1) {
         this.showError(this.noAddressesFoundTemplate());
-        this.renderGeoError(1);
       } else if (data.length === 1) {
         this.updatePostcode(data);
         this.updateAddress(0);
