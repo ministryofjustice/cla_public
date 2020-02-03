@@ -6,21 +6,21 @@
 
 {% block inner_content %}
 
-  <h1 class="page-title">{{ _('You may be able to get legal aid for family mediation') }}</h1>
-  <p class="subtitle">
+  <h1 class="govuk-heading-xl">{{ _('You may be able to get legal aid for family mediation') }}</h1>
+  <p class="govuk-body-l">
     {{ _('Search for a family mediator in your area to find out if you qualify.') }}
   </p>
 
-  <a class="button button-larger" href="http://www.familymediationcouncil.org.uk/find-local-mediator/" role="button">
+  <a class="govuk-button" href="http://www.familymediationcouncil.org.uk/find-local-mediator/" role="button">
     {{ _('Find your local mediator') }}
   </a>
 
-       <p>
-         <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
-           {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
-         </a>
-    </p>
-    {% include "checker/time-out-warning.html" %}
+  <p class="govuk-body">
+    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
+      {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
+    </a>
+  </p>
+  {% include "checker/time-out-warning.html" %}
 {% endblock %}
 
 {% block javascripts %}
