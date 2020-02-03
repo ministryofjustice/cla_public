@@ -11,27 +11,27 @@
 {% block sidebar %}
   <aside class="sidebar">
     <div class="exceptional_cases">
-    <h2>{% trans %}Exceptional cases{% endtrans %}</h2>
+      <h2 class="govuk-heading-m">{% trans %}Exceptional cases{% endtrans %}</h2>
 
-    {% if category == 'education' %}
-      <p>{% trans %}In exceptional cases or if your case is going to a judicial review, legal aid may still be available.{% endtrans %}</p>
-    {% else %}
-      <p>{% trans %}In exceptional cases, legal aid may still be available.{% endtrans %}</p>
-    {% endif %}
+      {% if category == 'education' %}
+        <p class="govuk-body">{% trans %}In exceptional cases or if your case is going to a judicial review, legal aid may still be available.{% endtrans %}</p>
+      {% else %}
+        <p class="govuk-body">{% trans %}In exceptional cases, legal aid may still be available.{% endtrans %}</p>
+      {% endif %}
 
-    <p>
-      {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'ask a legal adviser') %}
-      {% trans ask_legal_adviser_link=Element.link_new_window('http://find-legal-advice.justice.gov.uk/', _('ask a legal adviser'), True, **{'data-ga': ga_event}) %}
-        You can {{ ask_legal_adviser_link }} if an application might succeed in your case and how to apply.
-      {% endtrans %}
-    </p>
+      <p class="govuk-body">
+        {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'ask a legal adviser') %}
+        {% trans ask_legal_adviser_link=Element.link_new_window('http://find-legal-advice.justice.gov.uk/', _('ask a legal adviser'), True, **{'data-ga': ga_event}) %}
+          You can {{ ask_legal_adviser_link }} if an application might succeed in your case and how to apply.
+        {% endtrans %}
+      </p>
 
-    <p>
-      {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'apply directly') %}
-      {% trans apply_directly_link=Element.link_new_window('https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding', _('apply directly'), True, **{'data-ga': ga_event}) %}
-        You can also {{ apply_directly_link }} to the Legal Aid Agency.
-      {% endtrans %}
-    </p>
+      <p class="govuk-body">
+        {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'apply directly') %}
+        {% trans apply_directly_link=Element.link_new_window('https://www.gov.uk/legal-aid-apply-for-exceptional-case-funding', _('apply directly'), True, **{'data-ga': ga_event}) %}
+          You can also {{ apply_directly_link }} to the Legal Aid Agency.
+        {% endtrans %}
+      </p>
     </div>
     {% if info_tools %}
     {{ CAIT.survey(cait_survey) }}
@@ -40,36 +40,35 @@
 {% endblock %}
 
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
   {% if category != 'other' %}
-    <p>
+    <p class="govuk-body">
       {% trans %}You can still ask a solicitor for help – you will have to pay for their advice.{% endtrans %}
     </p>
   {% else %}
-    <p>{{ _('From what you’ve told us today, it looks as though your problem is not covered.') }}</p>
-    <p>{{ _('You can still ask a solicitor for help - you will have to pay for their advice.') }}</p>
+    <p class="govuk-body">{{ _('From what you’ve told us today, it looks as though your problem is not covered.') }}</p>
+    <p class="govuk-body">{{ _('You can still ask a solicitor for help - you will have to pay for their advice.') }}</p>
   {% endif %}
 
-  <p>
+  <p class="govuk-body">
     {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'Find a solicitor') %}
     {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'button', 'data-ga': ga_event}) }}
   </p>
 
-       <p>
-
-          <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
-            {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
-          </a>
-    </p>
+  <p class="govuk-body">
+    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
+      {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
+    </a>
+  </p>
 
   {% if category != 'other' %}
-    <p>
+    <p class="govuk-body">
       {% trans %}You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid.{% endtrans %}
     </p>
 
     {% call HelpOrganisations.org_list_container(organisations, category_name, truncate=truncate) %}
-      <h2>{% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}</h2>
+      <h2  class="govuk-heading-l">{% trans category_name=category_name|lower %}Help organisations for problems about {{ category_name }}{% endtrans %}</h2>
     {% endcall %}
   {% endif %}
   {% include "checker/time-out-warning.html" %}

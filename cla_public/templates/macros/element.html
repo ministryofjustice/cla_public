@@ -46,7 +46,7 @@
 {% macro get_in_touch_link() %}
   <p id="aria-get-in-touch" class="get-in-touch">
     {{ _('If you’re having trouble completing this form') }},
-    <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link" aria-labelledby="aria-get-in-touch">
+    <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link" class="govuk-link">
       {{ _('get in touch') }}</a>.
   </p>
 {% endmacro %}
@@ -57,8 +57,9 @@
 {%  macro satisfaction_survey_prompt() %}
   {% call alert(title=_('What do you think about this service?')) %}
     <p id="aria-satisfaction-survey">
-      {% trans %}Your feedback will improve this service.
-      Please <a href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">send us your thoughts</a>.{% endtrans %}
+      {% trans -%}
+        Your feedback will improve this service. Please <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">send us your thoughts</a>.
+      {%- endtrans %}
     </p>
   {% endcall %}
 {% endmacro %}
@@ -92,7 +93,7 @@
 
 {% macro staying_safe_online_link() %}
   <p id="aria-staying-safe-online">
-    {%- set link=link_new_window(url_for('base.online_safety'), 'Staying safe online', **{'aria-labelledby': 'aria-staying-safe-online'}) -%}
+    {%- set link=link_new_window(url_for('base.online_safety'), 'Staying safe online') -%}
     {%- trans -%}The information you enter won’t be stored on this device. Find out more about {{ link }}.{%- endtrans -%}
   </p>
 {% endmacro %}
@@ -104,7 +105,7 @@
 
 {% macro link_new_window(url, text, is_external=False) %}
   <a href="{{ url }}"
-     aria-label="{{ _(text) }} (Opens in new window)"
+     class="govuk-link"
      {% if is_external %} rel="external"{% endif %}
      target="_blank"
      title="{{ _('Opens in new window') }}"
@@ -116,5 +117,5 @@
      {% endif %}
   >
     {{ _(text) }}
-    <span class="sr-only"> {{ _('Opens in new window') }}</span></a>
+    <span class="govuk-visually-hidden"> {{ _('Opens in new window') }}</span></a>
 {%- endmacro %}

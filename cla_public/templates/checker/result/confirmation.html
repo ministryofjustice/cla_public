@@ -29,7 +29,7 @@
       <p class="laa-confirmation-inset">
         {{ _('You can now call CLA on') }} <strong class="laa-telephone">0345 345 4 345</strong>.<br>
         {% trans %}Please quote your reference number when you call. Find out about
-        <a href="https://www.gov.uk/call-charges" rel="external">call charges</a>.{% endtrans %}
+        <a class="govuk-link" href="https://www.gov.uk/call-charges" rel="external">call charges</a>.{% endtrans %}
       </p>
     {% endif %}
 
@@ -112,7 +112,7 @@
               {% trans %}Please be aware that the specialist adviser will need
               evidence of the domestic violence before they can make a decision
               on your case.{% endtrans %}
-              <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
+              <a class="govuk-link" href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
                 {{ _('Find out what you can use as evidence') }}</a>.
             </li>
           {% elif session.stored.category == 'family' %}
@@ -120,7 +120,7 @@
               {% trans %}If your case involves domestic abuse or violence,
               the specialist adviser will need evidence of this
               before they can make a decision on your case.{% endtrans %}
-              <a href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
+              <a class="govuk-link" href="https://www.gov.uk/legal-aid/domestic-abuse-or-violence" rel="external">
               {{ _('Find out what you can use as evidence') }}</a>.
             </li>
           {% endif %}
@@ -158,7 +158,7 @@
   <p class="govuk-body">
     {% trans privacy_link=url_for('base.privacy') %}
       Protecting your personal data and your privacy is important to us. Read the full
-      <a href="{{ privacy_link }}">Civil Legal Advice Privacy Statement</a>.
+      <a class="govuk-link" href="{{ privacy_link }}">Civil Legal Advice Privacy Statement</a>.
     {% endtrans %}
   </p>
 
@@ -167,7 +167,7 @@
     <p class="govuk-body">
       {% trans %}If you miss the call or you need advice urgently, you can call us on
       <strong>0345 345 4 345</strong>. Find out about
-      <a href="https://www.gov.uk/call-charges" rel="external">call charges</a>.{% endtrans %}
+      <a class="govuk-link" href="https://www.gov.uk/call-charges" rel="external">call charges</a>.{% endtrans %}
     </p>
   {% endif %}
 
