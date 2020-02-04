@@ -39,6 +39,12 @@
   {% endif %}
 {% endmacro %}
 
+{% macro inset() %}
+  <div class="govuk-inset-text">
+    {{ caller() }}
+  </div>
+{% endmacro %}
+
 
 {#
   'get in touch' link to contact page
