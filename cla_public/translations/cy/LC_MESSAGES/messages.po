@@ -2051,10 +2051,10 @@ msgstr "Mae’r datganiad hwn yn egluro sut y bydd CLA yn prosesu unrhyw ddata p
 
 #: cla_public/templates/privacy.html:84
 msgid ""
-"The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
-"    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is an\n"
-"     Executive Agency of the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>)."
-msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth CLA, a’r Weinyddiaeth Gyfiawnder yw Rheolwr y Data. Mae’r Asiantaeth Cymorth Cyfreithiol  yn Asiantaeth Weithredol i’r Weinyddiaeth Gyfiawnder."
+"The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for <abbr title=\"Civil Legal Advice\">CLA</abbr>\n"
+"    service and the Ministry of Justice (<abbr>MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is an\n"
+"    Executive Agency of the (<abbr title=\"Ministry of Justice\">MoJ</abbr>)."
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth <abbr>CLA</abbr>, a’r Weinyddiaeth Gyfiawnder yw Rheolwr y Data. Mae’r Asiantaeth Cymorth Cyfreithiol  yn Asiantaeth Weithredol i’r Weinyddiaeth Gyfiawnder."
 
 #: cla_public/templates/privacy.html:90
 msgid ""

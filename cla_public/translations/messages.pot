@@ -2031,9 +2031,9 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:84
 msgid ""
-"The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
-"    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is an\n"
-"     Executive Agency of the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>)."
+"The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for <abbr title=\"Civil Legal Advice\">CLA</abbr>\n"
+"    service and the Ministry of Justice (<abbr>MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is an\n"
+"    Executive Agency of the (<abbr title=\"Ministry of Justice\">MoJ</abbr>)."
 msgstr ""
 
 #: cla_public/templates/privacy.html:90
