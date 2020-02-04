@@ -385,23 +385,24 @@
         Macro to insert inside the each option
 #}
 {% macro option_list(field, input_type='checkbox', separated_options=[], callback=None) %}
-  <ul class="form-option-list form-row"
-    {% if input_type == 'radio' %}role="radiogroup"{% else %}role="group"{% endif %}
+  <div
+    {% if input_type == 'radio' %}role="radiogroup" class="govuk-radios form-row" {% else %}role="group" class="govuk-radios form-row" {% endif %}
     aria-labelledby="field-label-{{ field.id }}"
   >
     {% for option in field %}
-      <li{% if option.data in separated_options %} class="m-separate"{% endif %}>
-        <label class="radio-inline" for="{{option.id}}">
-          {{ option }}
+      {% if option.data in separated_options %}<div class="govuk-radios__divider">{% trans %}or{% endtrans %}</div>{% endif %}
+      <div class="govuk-radios__item">
+        {{ option(**{"class": "govuk-radios__input"}) }}
+        <label class="govuk-label govuk-radios__label" for="{{option.id}}">
           {{ option.label.text }}
         </label>
 
         {% if callback %}
           {{ callback(field, option) }}
         {% endif %}
-      </li>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endmacro %}
 
 {% macro radio_tick_list(field, input_type='checkbox', separated_options=[], callback=None) %}

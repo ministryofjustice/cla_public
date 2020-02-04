@@ -1693,7 +1693,7 @@ msgstr ""
 "Gallwch ddarllen mwy am %(govuk_cookies_link)s."
 
 #: cla_public/templates/feedback-confirmation.html:6
-msgid "Thanks for your feedback"
+msgid "Thank you for your feedback"
 msgstr "Diolch am eich adborth"
 
 #: cla_public/templates/feedback-confirmation.html:11
@@ -1709,10 +1709,8 @@ msgid "Report a problem"
 msgstr ""
 
 #: cla_public/templates/feedback.html:12
-msgid ""
-"Please don't include any personal or financial details,\n"
-"    for example, your National Insurance or credit card numbers."
-msgstr "Peidiwch â rhoi unrhyw fanylion personol neu fanylion ariannol, er enghraifft, eich rhif Yswiriant Gwladol neu rifau cardiau credyd"
+msgid "Do not include any personal or financial details, for example, your National Insurance or credit card numbers."
+msgstr "Peidiwch â rhoi unrhyw fanylion personol neu fanylion ariannol, er enghraifft, eich rhif Yswiriant Gwladol neu rifau cardiau credyd."
 
 #: cla_public/templates/feedback.html:36
 #: cla_public/templates/reasons-for-contacting.html:29

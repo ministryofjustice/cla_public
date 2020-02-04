@@ -1675,7 +1675,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/feedback-confirmation.html:6
-msgid "Thanks for your feedback"
+msgid "Thank you for your feedback"
 msgstr ""
 
 #: cla_public/templates/feedback-confirmation.html:11

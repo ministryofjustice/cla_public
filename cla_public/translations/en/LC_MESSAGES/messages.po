@@ -1691,9 +1691,7 @@ msgid "Report a problem"
 msgstr ""
 
 #: cla_public/templates/feedback.html:12
-msgid ""
-"Please don't include any personal or financial details,\n"
-"    for example, your National Insurance or credit card numbers."
+msgid "Please don't include any personal or financial details for example, your National Insurance or credit card numbers."
 msgstr ""
 
 #: cla_public/templates/feedback.html:36
