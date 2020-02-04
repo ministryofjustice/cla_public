@@ -386,7 +386,7 @@
 #}
 {% macro option_list(field, input_type='checkbox', separated_options=[], callback=None) %}
   <div
-    {% if input_type == 'radio' %}role="radiogroup" class="govuk-radios form-row" {% else %}role="group" class="govuk-radios form-row" {% endif %}
+    {% if input_type == 'radio' %}role="radiogroup" class="govuk-radios form-option-list" {% else %}role="group" class="govuk-radios form-option-list" {% endif %}
     aria-labelledby="field-label-{{ field.id }}"
   >
     {% for option in field %}
