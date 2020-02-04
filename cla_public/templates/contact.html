@@ -71,17 +71,22 @@
             </label>
           </div>
           {% if option.data == 'call' %}
-            <div class="govuk-radios__conditional"
-                 data-controlled-by="contact_type"
-                 data-control-value="call" role="alert">
-              <p class="govuk-body">
-                {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
-              </p>
+            <div class="govuk-radios__conditional">
+              <div data-controlled-by="contact_type"
+                   data-control-value="call" role="alert">
+                <p class="govuk-body">
+                  {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
+                </p>
+              </div>
             </div>
           {% elif option.data == 'callback' %}
-            {{ Subform.callback(form) }}
+            <div class="govuk-radios__conditional">
+              {{ Subform.callback(form) }}
+            </div>
           {% elif option.data == 'thirdparty' %}
-            {{ Subform.thirdparty(form) }}
+            <div class="govuk-radios__conditional">
+              {{ Subform.thirdparty(form) }}
+            </div>
           {% endif %}
         {% endfor %}
       </div>
@@ -92,7 +97,7 @@
     {% call Form.fieldset(form.address, field_as_label=True, legend_size='m') %}
       {{ Form.group(form.address.post_code,
           'form-group-plain',
-          field_attrs={'class': 'govuk-input--width-10', 'data-address-el': '#address-street_address', 'autocomplete': "postal-code", 'spellcheck': "false"},
+          field_attrs={'class': 'govuk-input--width-10 cla-postcode-text', 'data-address-el': '#address-street_address', 'autocomplete': "postal-code", 'spellcheck': "false"},
           row_class='address-finder') }}
 
       {{ Form.group(form.address.street_address,
@@ -136,10 +141,12 @@
   </script>
 
   <script type="text/html" id="addressFinderList">
-    <div class="form-group form-subfield address-list">
-      <select name="address" class="form-control">
-        <option value="" disabled><%= count %> {{ _('addresses found') }}</option>
-        <option value="">-- {{ _('Choose address') }} --</option>
+    <div class="govuk-radios__conditional address-list">
+      <label class="govuk-label" for="address-finder">
+        {{ _('Select an address') }}
+      </label>
+      <select name="address" class="govuk-select" id="address-finder" name="address-finder">
+        <option value=""><%= count %> {{ _('addresses found') }}</option>
         <% _.each(items, function(address, index) { %>
           <option value="<%= index %>"><%= address %></option>
         <% }); %>
@@ -154,21 +161,31 @@
   </script>
 
   <script type="text/html" id="postcodeNotEnteredText">
-    <span class="govuk-error-message">
+    <span class="govuk-error-message" role="alert">
       <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
       <span class="cla-error-message">{{ _('Must contain a valid postcode') }}</span>
     </span>
   </script>
 
+  <script type="text/html" id="geoWarning">
+    <div class="govuk-warning-text geographyWarning">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning </span>
+          Legal Aid is different in <%= place %>. Visit <%= link %> for more information.
+      </strong>
+    </div>
+  </script>
+
   <script type="text/html" id="noAddressesFoundText">
-    <span class="govuk-error-message">
+    <span class="govuk-error-message" role="alert">
       <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
       <span class="cla-error-message">{{ _('No addresses were found with that postcode, but you can still enter your address manually') }}</span>
     </span>
   </script>
 
   <script type="text/html" id="requestFailedText">
-    <span class="govuk-error-message">
+    <span class="govuk-error-message" role="alert">
       <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
       <span class="cla-error-message">{{ _('Request failed: ') }} <%= textStatus %>, <%= error %></span>
     </span>
