@@ -1930,7 +1930,7 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:9
 msgid ""
-"When using this service you agree to the terms of use for both <a href=\"http://gov.uk/help/terms-conditions\">gov.uk/help/terms-conditions</a> as well as\n"
+"When using this service you agree to the terms of use for both <a class=\"govuk-link\" href=\"http://gov.uk/help/terms-conditions\">gov.uk/help/terms-conditions</a> as well as\n"
 "    the terms and conditions specific to this service found below."
 msgstr ""
 
@@ -1944,9 +1944,9 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:17
 msgid ""
-"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other\n"
+"The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service. The <abbr title=\"Legal Aid Agency\">LAA</abbr> works with other\n"
 "    organisations who deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> service. For example this digital service is managed by the Ministry of\n"
-"    Justice."
+"    Justice (<abbr>MoJ</abbr>)."
 msgstr ""
 
 #: cla_public/templates/privacy.html:23
@@ -1957,7 +1957,7 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:28
 msgid ""
-"Hinduja Global Solutions UK Limited is a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr>\n"
+"Hinduja Global Solutions UK Limited is a contractor employed by the <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
 "    to deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service."
 msgstr ""
 
@@ -2029,17 +2029,17 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:84
 msgid ""
-"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
-"    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is an\n"
+"The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
+"    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is an\n"
 "     Executive Agency of the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>)."
 msgstr ""
 
 #: cla_public/templates/privacy.html:90
 msgid ""
-"The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
+"The <abbr title=\"Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
 "    For example, when you first make contact with <abbr>CLA</abbr>, you will communicate with\n"
 "    the <abbr>CLA</abbr> Operator Service, which is delivered by Hinduja Global Solutions UK Limited\n"
-"    (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr>)."
+"    (a contractor employed by the <abbr title=\"Legal Aid Agency\">LAA</abbr>)."
 msgstr ""
 
 #: cla_public/templates/privacy.html:97
@@ -2420,7 +2420,7 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:360
 msgid ""
-"External research organisations engaged by <abbr title=\"The Legal Aid Agency\">LAA</abbr>\n"
+"External research organisations engaged by <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
 "          or <abbr title=\"The Ministry of Justice\">MoJ</abbr>"
 msgstr ""
 
@@ -2455,7 +2455,7 @@ msgid "To help you get further help and advice from appropriate organisations."
 msgstr ""
 
 #: cla_public/templates/privacy.html:387
-msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments.\n"
+msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments."
 msgstr ""
 
 #: cla_public/templates/privacy.html:395
@@ -2706,7 +2706,7 @@ msgid "How to make a complaint."
 msgstr ""
 
 #: cla_public/templates/privacy.html:594
-msgid "For more information about the above issues, please contact the MoJ Data Protection Officer;"
+msgid "For more information about the above issues, please contact the <abbr>MoJ</abbr> Data Protection Officer:"
 msgstr ""
 
 #: cla_public/templates/privacy.html:609
@@ -2717,10 +2717,6 @@ msgstr ""
 msgid ""
 "When we ask you for information, we will comply with the law. If you consider that your information has been handled incorrectly, \n"
 "      you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
-msgstr ""
-
-#: cla_public/templates/privacy.html:625
-msgid "Tel:"
 msgstr ""
 
 #: cla_public/templates/privacy.html:631
@@ -3371,6 +3367,7 @@ msgstr ""
 msgid "We have not saved any information you have entered. When the service is available, you will have to start again."
 msgstr ""
 
+#: cla_public/templates/privacy.html:625
 #: cla_public/templates/errors/5xx.html:12
 msgid "Telephone:"
 msgstr ""

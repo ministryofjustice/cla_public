@@ -1952,9 +1952,9 @@ msgstr "Telerau ac Amodau a phreifatrwydd"
 
 #: cla_public/templates/privacy.html:9
 msgid ""
-"When using this service you agree to the terms of use for both <a href=\"http://gov.uk/help/terms-conditions\">gov.uk/help/terms-conditions</a> as well as\n"
+"When using this service you agree to the terms of use for both <a class=\"govuk-link\" href=\"http://gov.uk/help/terms-conditions\">gov.uk/help/terms-conditions</a> as well as\n"
 "    the terms and conditions specific to this service found below."
-msgstr "Pan fyddwch yn defnyddio’r gwasanaeth hwn, byddwch yn cytuno i delerau defnydd <a href=\"http://gov.uk/help/terms-conditions\">gov.uk</a> yn ogystal â thelerau ac amodau penodol ar gyfer y gwasanaeth hwn fel y nodir isod."
+msgstr "Pan fyddwch yn defnyddio’r gwasanaeth hwn, byddwch yn cytuno i delerau defnydd <a class=\"govuk-link\" href=\"http://gov.uk/help/terms-conditions\">gov.uk</a> yn ogystal â thelerau ac amodau penodol ar gyfer y gwasanaeth hwn fel y nodir isod."
 
 #: cla_public/templates/privacy.html:13
 msgid "If you do not agree to these terms and privacy policy, do not use this service."
@@ -1966,9 +1966,9 @@ msgstr "Pwy sy’n rheoli’r gwasanaeth digidol hwn a Chyngor Cyfreithiol Sifil
 
 #: cla_public/templates/privacy.html:17
 msgid ""
-"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other\n"
+"The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service. The <abbr title=\"Legal Aid Agency\">LAA</abbr> works with other\n"
 "    organisations who deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> service. For example this digital service is managed by the Ministry of\n"
-"    Justice."
+"    Justice (<abbr>MoJ</abbr>)."
 msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (CLA). Mae’r Asiantaeth Cymorth Cyfreithiol yn gweithio gyda sefydliadau eraill sy’n darparu’r gwasanaeth CLA. Er enghraifft, mae’r gwasanaeth digidol hwn yn cael ei reoli gan y Weinyddiaeth Gyfiawnder."
 
 #: cla_public/templates/privacy.html:23
@@ -1979,7 +1979,7 @@ msgstr "Y tro cyntaf y byddwch yn dod i gysylltiad â CLA byddwch yn cyfathrebu 
 
 #: cla_public/templates/privacy.html:28
 msgid ""
-"Hinduja Global Solutions UK Limited is a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr>\n"
+"Hinduja Global Solutions UK Limited is a contractor employed by the <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
 "    to deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service."
 msgstr "Contractwr sy’n cael ei gyflogi gan yr Asiantaeth Cymorth Cyfreithiol i ddarparu Gwasanaeth Gweithredwr y CLA yw Hinduja Global Solutions UK Limited."
 
@@ -2051,17 +2051,17 @@ msgstr "Mae’r datganiad hwn yn egluro sut y bydd CLA yn prosesu unrhyw ddata p
 
 #: cla_public/templates/privacy.html:84
 msgid ""
-"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
-"    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is an\n"
+"The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
+"    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is an\n"
 "     Executive Agency of the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>)."
 msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth CLA, a’r Weinyddiaeth Gyfiawnder yw Rheolwr y Data. Mae’r Asiantaeth Cymorth Cyfreithiol  yn Asiantaeth Weithredol i’r Weinyddiaeth Gyfiawnder."
 
 #: cla_public/templates/privacy.html:90
 msgid ""
-"The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
+"The <abbr title=\"Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
 "    For example, when you first make contact with <abbr>CLA</abbr>, you will communicate with\n"
 "    the <abbr>CLA</abbr> Operator Service, which is delivered by Hinduja Global Solutions UK Limited\n"
-"    (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr>)."
+"    (a contractor employed by the <abbr title=\"Legal Aid Agency\">LAA</abbr>)."
 msgstr "Mae’r Asiantaeth Cymorth Cyfreithiol yn gweithio gyda sefydliadau eraill sy’n darparu’r gwasanaeth CLA. Er enghraifft, y tro cyntaf y byddwch yn dod i gysylltiad â CLA, byddwch yn cyfathrebu â Gwasanaeth Gweithredwr y CLA, sy’n cael ei ddarparu gan Hinduja Global Solutions UK Limited (contractwr sy’n cael ei gyflogi gan yr Asiantaeth Cymorth Cyfreithiol)."
 
 #: cla_public/templates/privacy.html:97
@@ -2442,7 +2442,7 @@ msgstr "Pam"
 
 #: cla_public/templates/privacy.html:360
 msgid ""
-"External research organisations engaged by <abbr title=\"The Legal Aid Agency\">LAA</abbr>\n"
+"External research organisations engaged by <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
 "          or <abbr title=\"The Ministry of Justice\">MoJ</abbr>"
 msgstr "Sefydliadau ymchwil allanol sy’n gweithio i’r LAA neu’r Weinyddiaeth Cyfiawnder"
 
@@ -2477,7 +2477,7 @@ msgid "To help you get further help and advice from appropriate organisations."
 msgstr "I’ch helpu i gael help a chyngor pellach gan sefydliadau priodol."
 
 #: cla_public/templates/privacy.html:387
-msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments.\n"
+msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments."
 msgstr "I wirio gwybodaeth a roddir gennych, wrth gynnal archwiliadau yn ymwneud â’n penderfyniadau ac asesiadau cymhwystra."
 
 #: cla_public/templates/privacy.html:395
@@ -2728,8 +2728,8 @@ msgid "How to make a complaint."
 msgstr "Sut i wneud cwyn."
 
 #: cla_public/templates/privacy.html:594
-msgid "For more information about the above issues, please contact the MoJ Data Protection Officer;"
-msgstr "I gael rhagor o wybodaeth am y materion uchod, cysylltwch â Swyddog Diogelu Data’r Weinyddiaeth Gyfiawnder;"
+msgid "For more information about the above issues, please contact the <abbr>MoJ</abbr> Data Protection Officer:"
+msgstr "I gael rhagor o wybodaeth am y materion uchod, cysylltwch â Swyddog Diogelu Data’r Weinyddiaeth Gyfiawnder:"
 
 #: cla_public/templates/privacy.html:609
 msgid "For more information on how and why your information is processed, please see the information provided when you accessed our services or were contacted by us."
@@ -2740,10 +2740,6 @@ msgid ""
 "When we ask you for information, we will comply with the law. If you consider that your information has been handled incorrectly, \n"
 "      you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
 msgstr "Pan fyddwn yn gofyn i chi am wybodaeth, byddwn yn cydymffurfio â’r gyfraith. Os ydych yn credu nad yw eich gwybodaeth wedi cael ei thrin yn iawn, gallwch gysylltu â’r Comisiynydd Gwybodaeth i gael cyngor annibynnol am ddiogelu data. Gallwch gysylltu â’r Comisiynydd Gwybodaeth yn y cyfeiriad isod:"
-
-#: cla_public/templates/privacy.html:625
-msgid "Tel:"
-msgstr "Ffôn:"
 
 #: cla_public/templates/privacy.html:631
 msgid "Changes to the statement"
@@ -3459,6 +3455,7 @@ msgstr ""
 msgid "We have not saved any information you have entered. When the service is available, you will have to start again."
 msgstr ""
 
+#: cla_public/templates/privacy.html:625
 #: cla_public/templates/errors/5xx.html:12
 msgid "Telephone:"
 msgstr "Ffôn"
