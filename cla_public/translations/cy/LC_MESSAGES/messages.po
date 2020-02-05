@@ -1975,13 +1975,13 @@ msgstr "Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth 
 msgid ""
 "When you first make contact with <abbr title=\"Civil Legal Advice\">CLA</abbr> you will communicate with the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service (CLAOS), which is delivered by\n"
 "    Hinduja Global Solutions UK Limited."
-msgstr "Y tro cyntaf y byddwch yn dod i gysylltiad â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> byddwch yn cyfathrebu â Gwasanaeth Gweithredwr y CLA (CLAOS), sy’n cael ei ddarparu gan Hinduja Global Solutions UK Limited."
+msgstr "Y tro cyntaf y byddwch yn dod i gysylltiad â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> byddwch yn cyfathrebu â Gwasanaeth Gweithredwr y CLA (CLAOS), sy’n cael ei ddarparu gan Hinduja Global Solutions UK Limited."
 
 #: cla_public/templates/privacy.html:28
 msgid ""
 "Hinduja Global Solutions UK Limited is a contractor employed by the <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
 "    to deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service."
-msgstr "Contractwr sy’n cael ei gyflogi gan yr Asiantaeth Cymorth Cyfreithiol i ddarparu Gwasanaeth Gweithredwr y <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yw Hinduja Global Solutions UK Limited."
+msgstr "Contractwr sy’n cael ei gyflogi gan yr Asiantaeth Cymorth Cyfreithiol i ddarparu Gwasanaeth Gweithredwr y <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yw Hinduja Global Solutions UK Limited."
 
 #: cla_public/templates/privacy.html:32 cla_public/templates/privacy.html:612
 msgid "Complaints"
@@ -1989,7 +1989,7 @@ msgstr "Cwynion"
 
 #: cla_public/templates/privacy.html:34
 msgid "If you would like to make a complaint about this service or Civil Legal Advice please contact <abbr title=\"Civil Legal Advice\">CLA</abbr> on 0345 345 4 345."
-msgstr "Os ydych chi’n dymuno gwneud cwyn am y gwasanaeth hwn neu Gyngor Cyfreithiol Sifil, cysylltwch â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> ar 0345 345 4 345"
+msgstr "Os ydych chi’n dymuno gwneud cwyn am y gwasanaeth hwn neu Gyngor Cyfreithiol Sifil, cysylltwch â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> ar 0345 345 4 345"
 
 #: cla_public/templates/privacy.html:37
 msgid "How is my privacy protected?"
@@ -2054,7 +2054,7 @@ msgid ""
 "The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for <abbr title=\"Civil Legal Advice\">CLA</abbr>\n"
 "    service and the Ministry of Justice (<abbr>MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr>LAA</abbr>) is an\n"
 "    Executive Agency of the (<abbr title=\"Ministry of Justice\">MoJ</abbr>)."
-msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, a’r Weinyddiaeth Gyfiawnder yw Rheolwr y Data. Mae’r Asiantaeth Cymorth Cyfreithiol  yn Asiantaeth Weithredol i’r Weinyddiaeth Gyfiawnder."
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, a’r Weinyddiaeth Gyfiawnder yw Rheolwr y Data. Mae’r Asiantaeth Cymorth Cyfreithiol  yn Asiantaeth Weithredol i’r Weinyddiaeth Gyfiawnder."
 
 #: cla_public/templates/privacy.html:90
 msgid ""
@@ -2062,20 +2062,20 @@ msgid ""
 "    For example, when you first make contact with <abbr>CLA</abbr>, you will communicate with\n"
 "    the <abbr>CLA</abbr> Operator Service, which is delivered by Hinduja Global Solutions UK Limited\n"
 "    (a contractor employed by the <abbr title=\"Legal Aid Agency\">LAA</abbr>)."
-msgstr "Mae’r Asiantaeth Cymorth Cyfreithiol yn gweithio gyda sefydliadau eraill sy’n darparu’r gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>. Er enghraifft, y tro cyntaf y byddwch yn dod i gysylltiad â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, byddwch yn cyfathrebu â Gwasanaeth Gweithredwr y <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, sy’n cael ei ddarparu gan Hinduja Global Solutions UK Limited (contractwr sy’n cael ei gyflogi gan yr Asiantaeth Cymorth Cyfreithiol)."
+msgstr "Mae’r Asiantaeth Cymorth Cyfreithiol yn gweithio gyda sefydliadau eraill sy’n darparu’r gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>. Er enghraifft, y tro cyntaf y byddwch yn dod i gysylltiad â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, byddwch yn cyfathrebu â Gwasanaeth Gweithredwr y <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, sy’n cael ei ddarparu gan Hinduja Global Solutions UK Limited (contractwr sy’n cael ei gyflogi gan yr Asiantaeth Cymorth Cyfreithiol)."
 
 #: cla_public/templates/privacy.html:97
 msgid ""
 "Once you have contacted the <abbr>CLA</abbr> Operator Service, if you are likely to qualify for Legal Aid, the operator will transfer you to\n"
 "     a <abbr>CLA</abbr> Specialist Provider. If you do not qualify to receive\n"
 "    <abbr>CLA</abbr> Specialist advice, the operator will inform you accordingly and direct you to alternative sources of help."
-msgstr "Ar ôl i chi gysylltu â Gwasanaeth Gweithredwr y <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, os ydych yn debygol o fod yn gymwys i gael Cymorth Cyfreithiol bydd y gweithredwr yn eich trosglwyddo i Ddarparwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> Arbenigol. Os nad ydych yn gymwys i dderbyn cyngor Arbenigwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, bydd y gweithredwr yn dweud wrthych ac yn eich cyfeirio at ffynonellau cymorth eraill."
+msgstr "Ar ôl i chi gysylltu â Gwasanaeth Gweithredwr y <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, os ydych yn debygol o fod yn gymwys i gael Cymorth Cyfreithiol bydd y gweithredwr yn eich trosglwyddo i Ddarparwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> Arbenigol. Os nad ydych yn gymwys i dderbyn cyngor Arbenigwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, bydd y gweithredwr yn dweud wrthych ac yn eich cyfeirio at ffynonellau cymorth eraill."
 
 #: cla_public/templates/privacy.html:103
 msgid ""
 "The <abbr>CLA</abbr> service is committed to following this Privacy Statement.\n"
 "    <abbr>CLA</abbr> Specialists must also adhere to their own internal privacy policy."
-msgstr "Mae gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> wedi ymrwymo i gydymffurfio â’r Datganiad Preifatrwydd hwn. Hefyd rhaid i Arbenigwyr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> gydymffurfio â’u polisi preifatrwydd mewnol eu hunain."
+msgstr "Mae gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> wedi ymrwymo i gydymffurfio â’r Datganiad Preifatrwydd hwn. Hefyd rhaid i Arbenigwyr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gydymffurfio â’u polisi preifatrwydd mewnol eu hunain."
 
 #: cla_public/templates/privacy.html:108
 msgid "What types of personal data do we process?"
@@ -2083,11 +2083,11 @@ msgstr "Pa fathau o ddata personol rydym yn eu prosesu? "
 
 #: cla_public/templates/privacy.html:110
 msgid "<abbr>CLA</abbr> will only collect the minimum amount of information that is necessary and relevant, in order to deliver the <abbr>CLA</abbr> service to you."
-msgstr "Ni fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn casglu mwy o wybodaeth nag sy’n angenrheidiol ac yn berthnasol er mwyn darparu’r gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> i chi."
+msgstr "Ni fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn casglu mwy o wybodaeth nag sy’n angenrheidiol ac yn berthnasol er mwyn darparu’r gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> i chi."
 
 #: cla_public/templates/privacy.html:113
 msgid "The kind of information <abbr>CLA</abbr> may collect about you includes:"
-msgstr "Y math o wybodaeth y gall <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> ei chasglu amdanoch chi yw:"
+msgstr "Y math o wybodaeth y gall <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> ei chasglu amdanoch chi yw:"
 
 #: cla_public/templates/privacy.html:117
 msgid ""
@@ -2101,11 +2101,11 @@ msgstr "Gwybodaeth ariannol sydd ei hangen i bennu a ydych chi’n gymwys i gael
 
 #: cla_public/templates/privacy.html:124
 msgid "Reason for contacting <abbr>CLA</abbr>, such as the nature of your problem or specific details about your situation;"
-msgstr "Y rheswm dros gysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, er enghraifft, natur eich problem neu fanylion penodol am eich sefyllfa;"
+msgstr "Y rheswm dros gysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, er enghraifft, natur eich problem neu fanylion penodol am eich sefyllfa;"
 
 #: cla_public/templates/privacy.html:127
 msgid "Details of any specific needs that you may have in order to access the <abbr>CLA</abbr> service; and"
-msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>; a"
+msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>; a"
 
 #: cla_public/templates/privacy.html:130
 msgid ""
@@ -2118,15 +2118,15 @@ msgid ""
 "The amount of information <abbr>CLA</abbr> will collect will depend on whether you qualify for the <abbr>CLA</abbr>\n"
 "    service and/or your specific needs. For example, you will be asked to provide more information\n"
 "    before we can transfer you through to a <abbr>CLA</abbr> Specialist."
-msgstr "Bydd faint o wybodaeth y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn ei gasglu amdanoch yn amrywio gan ddibynnu a ydych yn gymwys ar gyfer y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, a/neu a oes gennych anghenion penodol. Er enghraifft, gofynnir i chi roi mwy o wybodaeth cyn y gallwn eich trosglwyddo at Arbenigwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>."
+msgstr "Bydd faint o wybodaeth y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn ei gasglu amdanoch yn amrywio gan ddibynnu a ydych yn gymwys ar gyfer y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, a/neu a oes gennych anghenion penodol. Er enghraifft, gofynnir i chi roi mwy o wybodaeth cyn y gallwn eich trosglwyddo at Arbenigwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>."
 
 #: cla_public/templates/privacy.html:141
 msgid "How does <abbr>CLA</abbr> use your data and why?"
-msgstr "Sut mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn defnyddio eich data a pham?"
+msgstr "Sut mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn defnyddio eich data a pham?"
 
 #: cla_public/templates/privacy.html:142
 msgid "collects and records information about you to:"
-msgstr "Mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn casglu ac yn cofnodi gwybodaeth amdanoch chi er mwyn:"
+msgstr "Mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn casglu ac yn cofnodi gwybodaeth amdanoch chi er mwyn:"
 
 #: cla_public/templates/privacy.html:144
 msgid "Work out whether you qualify for legal aid;"
@@ -2148,13 +2148,13 @@ msgstr "Ein helpu i fonitro a gwella ein gwasanaeth;"
 msgid ""
 "Build statistics about the <abbr>CLA</abbr> service, monitor fraud and justify public expenditure.\n"
 "      This information is collated in an anonymous format;"
-msgstr "Adeiladu ystadegau am y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, monitro twyll a chyfiawnhau gwariant cyhoeddus. Mae’r wybodaeth hon yn cael ei choladu mewn fformat dienw;"
+msgstr "Adeiladu ystadegau am y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, monitro twyll a chyfiawnhau gwariant cyhoeddus. Mae’r wybodaeth hon yn cael ei choladu mewn fformat dienw;"
 
 #: cla_public/templates/privacy.html:153
 msgid ""
 "Collect views on the <abbr>CLA</abbr> service and any improvements considered necessary.\n"
 "      Where consent is provided, <abbr>CLA</abbr> User contact details may be passed onto an independent research agency;"
-msgstr "Casglu barn am y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> ac unrhyw welliannau y credir bod eu hangen. Lle rhoddir cydsyniad, mae’n bosibl y bydd manylion cysylltu defnyddiwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn cael eu pasio ymlaen i asiantaeth ymchwil annibynnol;"
+msgstr "Casglu barn am y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> ac unrhyw welliannau y credir bod eu hangen. Lle rhoddir cydsyniad, mae’n bosibl y bydd manylion cysylltu defnyddiwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn cael eu pasio ymlaen i asiantaeth ymchwil annibynnol;"
 
 #: cla_public/templates/privacy.html:156
 msgid "Prevent or detect crime or fraud; and"
@@ -2166,19 +2166,19 @@ msgstr "Cynnal archwiliadau sicrwydd achlysurol er mwyn sicrhau bod y penderfyni
 
 #: cla_public/templates/privacy.html:161
 msgid "Without this information, <abbr>CLA</abbr> would not be able to conduct the activities above which are essential to the delivery of legal aid."
-msgstr "Heb yr wybodaeth hon, ni fyddai <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn gallu cynnal y gweithgareddau uchod sy’n hanfodol er mwyn darparu cymorth cyfreithiol."
+msgstr "Heb yr wybodaeth hon, ni fyddai <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn gallu cynnal y gweithgareddau uchod sy’n hanfodol er mwyn darparu cymorth cyfreithiol."
 
 #: cla_public/templates/privacy.html:165
 msgid ""
 "The lawful basis for <abbr>CLA</abbr> collecting and processing your personal data is the result of the powers contained in legislation, specifically the Legal Aid, Sentencing\n"
 "     and Punishment of Offenders Act 2012."
-msgstr "Mae’r sail gyfreithlon sy’n caniatáu i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> gasglu a phrosesu eich data personol yn deillio o’r pwerau sydd wedi’u cynnwys mewn deddfwriaeth, yn fwyaf penodol, Deddf Cymorth Cyfreithiol Dedfrydu a Chosbi Troseddwyr 2012."
+msgstr "Mae’r sail gyfreithlon sy’n caniatáu i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gasglu a phrosesu eich data personol yn deillio o’r pwerau sydd wedi’u cynnwys mewn deddfwriaeth, yn fwyaf penodol, Deddf Cymorth Cyfreithiol Dedfrydu a Chosbi Troseddwyr 2012."
 
 #: cla_public/templates/privacy.html:170
 msgid ""
 "<abbr>CLA</abbr> also collects ‘special categories of personal data’ for the purposes of monitoring equality. This is a legal requirement for public authorities, under the Equality Act 2010.\n"
 "     Special categories of personal data obtained for equality monitoring will be treated with the strictest confidence and any information published will not identify you or anyone else associated with your legal aid application."
-msgstr "Mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> hefyd yn casglu ‘categorïau arbennig o ddata personol’ at ddibenion monitro cydraddoldeb. Mae Deddf Cydraddoldeb 2010 yn nodi ei bod yn ofynnol i awdurdodau cyhoeddus wneud hyn. Byddwn yn trin categorïau arbennig o ddata personol a gesglir er mwyn monitro cydraddoldeb yn gwbl gyfrinachol ac ni fydd unrhyw wybodaeth a gyhoeddir yn nodi pwy ydych chi na neb arall sy’n gysylltiedig â’ch cais am gymorth cyfreithiol."
+msgstr "Mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> hefyd yn casglu ‘categorïau arbennig o ddata personol’ at ddibenion monitro cydraddoldeb. Mae Deddf Cydraddoldeb 2010 yn nodi ei bod yn ofynnol i awdurdodau cyhoeddus wneud hyn. Byddwn yn trin categorïau arbennig o ddata personol a gesglir er mwyn monitro cydraddoldeb yn gwbl gyfrinachol ac ni fydd unrhyw wybodaeth a gyhoeddir yn nodi pwy ydych chi na neb arall sy’n gysylltiedig â’ch cais am gymorth cyfreithiol."
 
 #: cla_public/templates/privacy.html:175
 msgid ""
@@ -2188,25 +2188,25 @@ msgstr "Oherwydd y dibenion y gellir defnyddio eich data personol ar eu cyfer (s
 
 #: cla_public/templates/privacy.html:179
 msgid "How does <abbr>CLA</abbr> collect your personal data and keep it safe?"
-msgstr "Sut y mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn casglu’ch data personol ac yn eu cadw’n ddiogel?"
+msgstr "Sut y mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn casglu’ch data personol ac yn eu cadw’n ddiogel?"
 
 #: cla_public/templates/privacy.html:181
 msgid ""
 "<abbr>CLA</abbr> may collect personal data about you by phone, online, email or post (see table below).\n"
 "    Any personal data will be recorded and stored within a secure system that meets required Government standards."
-msgstr "Gall <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> gasglu data personol amdanoch chi dros y ffôn, ar-lein, drwy’r post a’r e-bost (gweler y tabl isod). Bydd unrhyw ddata personol yn cael eu cofnodi a’u storio mewn system ddiogel sy’n cyrraedd safonau sydd wedi’u gosod gan y Llywodraeth."
+msgstr "Gall <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gasglu data personol amdanoch chi dros y ffôn, ar-lein, drwy’r post a’r e-bost (gweler y tabl isod). Bydd unrhyw ddata personol yn cael eu cofnodi a’u storio mewn system ddiogel sy’n cyrraedd safonau sydd wedi’u gosod gan y Llywodraeth."
 
 #: cla_public/templates/privacy.html:185
 msgid ""
 "<abbr>CLA</abbr> will be able to view and verify the information that you provide and, where\n"
 "    necessary, will amend it to maintain its accuracy."
-msgstr "Bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn gallu gweld a gwirio’r wybodaeth y byddwch yn ei rhoi a, lle bo angen, bydd yn diwygio’r wybodaeth er mwyn sicrhau ei bod yn gywir."
+msgstr "Bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn gallu gweld a gwirio’r wybodaeth y byddwch yn ei rhoi a, lle bo angen, bydd yn diwygio’r wybodaeth er mwyn sicrhau ei bod yn gywir."
 
 #: cla_public/templates/privacy.html:189
 msgid ""
 "The minimum amount of personal data that <abbr>CLA</abbr> will ask to collect is your name and two other pieces\n"
 "    of personal information that could be used to identify you, e.g. postcode, date of birth or telephone number."
-msgstr "Y data personol sylfaenol y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn gofyn amdanynt yw eich enw a dau ddarn arall o wybodaeth bersonol a allai gael eu defnyddio i’ch adnabod, e.e. côd post, dyddiad geni neu rif ffôn."
+msgstr "Y data personol sylfaenol y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn gofyn amdanynt yw eich enw a dau ddarn arall o wybodaeth bersonol a allai gael eu defnyddio i’ch adnabod, e.e. côd post, dyddiad geni neu rif ffôn."
 
 #: cla_public/templates/privacy.html:193
 msgid ""
@@ -2241,7 +2241,7 @@ msgid ""
 "        <br><br>\n"
 "        If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information\n"
 "        required in order to contact you back."
-msgstr "Pan fyddwch chi’n ffonio <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, byddwn ni’n cofnodi data personol perthnasol yr ydych chi’n eu rhoi mewn system ddigidol ddiogel. Gallwn recordio’ch galwadau hefyd. Ond cewch chi ddewis peidio ag ymuno â hyn neu ddewis a ydych chi am barhau â’r alwad neu beidio. Os byddwch chi’n gadael neges llais i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, byddwn ni’n cofnodi’r lleiaf o wybodaeth sydd ei hangen i gysylltu â chi wedyn."
+msgstr "Pan fyddwch chi’n ffonio <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, byddwn ni’n cofnodi data personol perthnasol yr ydych chi’n eu rhoi mewn system ddigidol ddiogel. Gallwn recordio’ch galwadau hefyd. Ond cewch chi ddewis peidio ag ymuno â hyn neu ddewis a ydych chi am barhau â’r alwad neu beidio. Os byddwch chi’n gadael neges llais i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, byddwn ni’n cofnodi’r lleiaf o wybodaeth sydd ei hangen i gysylltu â chi wedyn."
 
 #: cla_public/templates/privacy.html:221
 msgid "Online"
@@ -2254,7 +2254,7 @@ msgid ""
 "        Please note that transmitting information over the internet is generally not completely secure, and\n"
 "        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
 "        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
-msgstr "Pan fyddwch yn cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> ar-lein, bydd y data personol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel. Sylwer nad yw trawsyrru gwybodaeth dros y rhyngrwyd yn gwbl ddiogel bob amser, ac ni all <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru. Mae gan <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> weithdrefnau a nodweddion diogelwch er mwyn cadw eich data’n ddiogel ar ôl i ni eu derbyn."
+msgstr "Pan fyddwch yn cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> ar-lein, bydd y data personol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel. Sylwer nad yw trawsyrru gwybodaeth dros y rhyngrwyd yn gwbl ddiogel bob amser, ac ni all <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru. Mae gan <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> weithdrefnau a nodweddion diogelwch er mwyn cadw eich data’n ddiogel ar ôl i ni eu derbyn."
 
 #: cla_public/templates/privacy.html:233
 msgid ""
@@ -2266,7 +2266,7 @@ msgid ""
 "        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
 "        <br><br>\n"
 "        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
-msgstr "Nid yw trawsyrru gwybodaeth drwy e-bost yn gwbl ddiogel bob amser, ac ni all <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru"
+msgstr "Nid yw trawsyrru gwybodaeth drwy e-bost yn gwbl ddiogel bob amser, ac ni all <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru"
 
 #: cla_public/templates/privacy.html:244
 msgid "Post"
@@ -2278,7 +2278,7 @@ msgid ""
 "        <br><br>\n"
 "        <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked\n"
 "        filing cabinet. Digital copies of letters may be scanned and stored."
-msgstr "Pan fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn derbyn llythyrau, gallwn ni gofnodi data personol perthnasol sydd ynddynt mewn system ddigidol ddiogel. Hefyd gall <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> gadw llythyrau gwreiddiol sy’n cynnwys gwybodaeth a gyflwynwyd gennych chi. Rhaid storio’r rhain mewn cwpwrdd ffeiliau sydd wedi’i gloi. Gellir sganio copïau digidol o lythyrau a’u storio."
+msgstr "Pan fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn derbyn llythyrau, gallwn ni gofnodi data personol perthnasol sydd ynddynt mewn system ddigidol ddiogel. Hefyd gall <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gadw llythyrau gwreiddiol sy’n cynnwys gwybodaeth a gyflwynwyd gennych chi. Rhaid storio’r rhain mewn cwpwrdd ffeiliau sydd wedi’i gloi. Gellir sganio copïau digidol o lythyrau a’u storio."
 
 #: cla_public/templates/privacy.html:255
 msgid "Keeping your personal data safe from others"
@@ -2292,7 +2292,7 @@ msgstr "Ailgysylltu"
 msgid ""
 "<abbr>CLA</abbr> will not disclose any personal information to anyone contacting the <abbr>CLA</abbr> service until\n"
 "        they have successfully verified that their identity matches that of an existing record."
-msgstr "Ni fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn datgelu unrhyw wybodaeth bersonol i rywun sy’n cysylltu â gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> nes ei fod wedi cadarnhau bod ei hunaniaeth yn cyfateb i gofnod sy’n bodoli."
+msgstr "Ni fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn datgelu unrhyw wybodaeth bersonol i rywun sy’n cysylltu â gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> nes ei fod wedi cadarnhau bod ei hunaniaeth yn cyfateb i gofnod sy’n bodoli."
 
 #: cla_public/templates/privacy.html:265
 msgid "Third-parties"
@@ -2307,7 +2307,7 @@ msgid ""
 "        and whether they are authorised to act on their behalf.\n"
 "        <br><br>\n"
 "        They must also agree a password to verify the identity of the third-party if they contact the service again."
-msgstr "Bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn cydnabod trydydd parti sy’n cysylltu ar ran person arall. Mae’n rhaid i’r trydydd parti ddangos bod ganddynt yr awdurdod priodol i weithredu ar eich rhan. Rhaid i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> gofnodi’r berthynas rhwng y trydydd parti a’r unigolyn sy’n gofyn am gyngor ac a yw’r trydydd parti wedi’i awdurdodi i weithredu ar ei ran. Hefyd rhaid i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> gytuno ar gyfrinair er mwyn gwirio hunaniaeth y trydydd parti os bydd yn cysylltu â’r gwasanaeth eto."
+msgstr "Bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn cydnabod trydydd parti sy’n cysylltu ar ran person arall. Mae’n rhaid i’r trydydd parti ddangos bod ganddynt yr awdurdod priodol i weithredu ar eich rhan. Rhaid i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gofnodi’r berthynas rhwng y trydydd parti a’r unigolyn sy’n gofyn am gyngor ac a yw’r trydydd parti wedi’i awdurdodi i weithredu ar ei ran. Hefyd rhaid i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gytuno ar gyfrinair er mwyn gwirio hunaniaeth y trydydd parti os bydd yn cysylltu â’r gwasanaeth eto."
 
 #: cla_public/templates/privacy.html:277
 msgid "Outgoing Communications"
@@ -2315,15 +2315,15 @@ msgstr "Anfon negeseuon allan"
 
 #: cla_public/templates/privacy.html:279
 msgid "<abbr>CLA</abbr> may need to contact you directly."
-msgstr "Mae’n bosibl y bydd angen i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> gysylltu â chi’n uniongyrchol."
+msgstr "Mae’n bosibl y bydd angen i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gysylltu â chi’n uniongyrchol."
 
 #: cla_public/templates/privacy.html:281
 msgid "In order to protect privacy, <abbr>CLA</abbr> will always check with you what forms of outgoing communication are acceptable and appropriate and whether messages can be left."
-msgstr "Er mwyn sicrhau preifatrwydd, bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> bob amser yn gofyn pa ddulliau cyfathrebu sy’n dderbyniol ac yn briodol i chi ac a oes modd gadael negeseuon."
+msgstr "Er mwyn sicrhau preifatrwydd, bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> bob amser yn gofyn pa ddulliau cyfathrebu sy’n dderbyniol ac yn briodol i chi ac a oes modd gadael negeseuon."
 
 #: cla_public/templates/privacy.html:283
 msgid "When making outgoing calls to you, <abbr>CLA</abbr> will ensure that:"
-msgstr "Pan fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn eich ffonio chi, bydd yn:"
+msgstr "Pan fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn eich ffonio chi, bydd yn:"
 
 #: cla_public/templates/privacy.html:286
 msgid ""
@@ -2342,7 +2342,7 @@ msgid ""
 "Where the phone is answered and someone other than you answers the phone and says that you are\n"
 "            unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say\n"
 "            that they are calling from <abbr>CLA</abbr>."
-msgstr "Os bydd rhywun heblaw chi’n ateb y ffôn ac yn dweud nad ydych chi ar gael neu’n gofyn pwy sy’n galw, y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn dweud bod yr alwad yn gyfrinachol ac na fydd yn dweud ei fod yn ffonio o <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>."
+msgstr "Os bydd rhywun heblaw chi’n ateb y ffôn ac yn dweud nad ydych chi ar gael neu’n gofyn pwy sy’n galw, y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn dweud bod yr alwad yn gyfrinachol ac na fydd yn dweud ei fod yn ffonio o <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>."
 
 #: cla_public/templates/privacy.html:304
 msgid "How we use cookies"
@@ -2414,7 +2414,7 @@ msgstr "<a class=\"govuk-link\" href=\"http://www.aboutcookies.org/\" rel=\"exte
 
 #: cla_public/templates/privacy.html:340
 msgid "When will we share information about you outside <abbr>CLA</abbr>?"
-msgstr "Pryd y byddwn ni’n rhannu gwybodaeth amdanoch chi y tu allan i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>?"
+msgstr "Pryd y byddwn ni’n rhannu gwybodaeth amdanoch chi y tu allan i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>?"
 
 #: cla_public/templates/privacy.html:341
 msgid "Confidentiality means ensuring information is only accessible by those allowed to have access to it."
@@ -2424,7 +2424,7 @@ msgstr "Mae cyfrinachedd yn golygu sicrhau mai dim ond y rheini sydd â hawl i w
 msgid ""
 "We want to keep your contact with <abbr>CLA</abbr> confidential, which means you can feel safe talking to us.\n"
 "    But we sometimes need to share some information outside <abbr>CLA</abbr> which we explain below."
-msgstr "Rydyn ni am gadw’ch cysylltiad â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn gyfrinachol: mae hyn yn golygu y byddwch chi’n gallu teimlo’n ddiogel wrth siarad â ni. Ond weithiau bydd angen i ni rannu rhywfaint o wybodaeth y tu allan i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>. Rydyn ni’n egluro hyn isod."
+msgstr "Rydyn ni am gadw’ch cysylltiad â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn gyfrinachol: mae hyn yn golygu y byddwch chi’n gallu teimlo’n ddiogel wrth siarad â ni. Ond weithiau bydd angen i ni rannu rhywfaint o wybodaeth y tu allan i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>. Rydyn ni’n egluro hyn isod."
 
 #: cla_public/templates/privacy.html:347
 msgid ""
@@ -2559,11 +2559,11 @@ msgstr "Dyddiad geni"
 
 #: cla_public/templates/privacy.html:471
 msgid "What you contacted <abbr>CLA</abbr> about"
-msgstr "Y mater yr oeddech chi wedi cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn ei gylch"
+msgstr "Y mater yr oeddech chi wedi cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn ei gylch"
 
 #: cla_public/templates/privacy.html:472
 msgid "When you contacted <abbr>CLA</abbr>"
-msgstr "Pryd yr oeddech chi wedi cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>"
+msgstr "Pryd yr oeddech chi wedi cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>"
 
 #: cla_public/templates/privacy.html:473
 msgid "What information you want to see"
@@ -2574,7 +2574,7 @@ msgid ""
 "Any additional information that might help us to check your identity e.g. <abbr>CLA</abbr> case reference number.\n"
 "      This is to help us protect your privacy by ensuring that we only give data out to the person it relates to\n"
 "      (or their appropriately authorised representative)."
-msgstr "Unrhyw wybodaeth ychwanegol i’n helpu i wirio pwy ydych chi e.e. rhif cyfeirio achos <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>. Bydd hyn yn ein helpu i ddiogelu’ch preifatrwydd drwy sicrhau mai dim ond i’r person y mae’r data’n ymwneud ag ef (neu gynrychiolydd sydd wedi’i awdurdodi’n briodol) y byddwn ni’n rhoi’r data."
+msgstr "Unrhyw wybodaeth ychwanegol i’n helpu i wirio pwy ydych chi e.e. rhif cyfeirio achos <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>. Bydd hyn yn ein helpu i ddiogelu’ch preifatrwydd drwy sicrhau mai dim ond i’r person y mae’r data’n ymwneud ag ef (neu gynrychiolydd sydd wedi’i awdurdodi’n briodol) y byddwn ni’n rhoi’r data."
 
 #: cla_public/templates/privacy.html:481
 msgid "You will also be required to provide proof of your identity. Acceptable forms of ID include:"
@@ -2608,7 +2608,7 @@ msgstr "Rhaid i unrhyw fil y byddwch yn ei anfon atom fod yn llai na 6 mis oed."
 msgid ""
 "Please note that we cannot give out any information unless the details that you provide match our records.\n"
 "    If you used an alias or pseudonym when you contacted <abbr>CLA</abbr>, you will need to prove your identity."
-msgstr "Sylwer na allwn roi unrhyw wybodaeth oni bai fod y manylion rydych chi’n eu rhoi yn cyfateb i’n cofnodion ni. Os gwnaethoch roi enw arall neu ffugenw pan wnaethoch chi gysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, bydd angen i chi brofi pwy ydych chi."
+msgstr "Sylwer na allwn roi unrhyw wybodaeth oni bai fod y manylion rydych chi’n eu rhoi yn cyfateb i’n cofnodion ni. Os gwnaethoch roi enw arall neu ffugenw pan wnaethoch chi gysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, bydd angen i chi brofi pwy ydych chi."
 
 #: cla_public/templates/privacy.html:499
 msgid "Once we receive the subject access request, we will deal with the request without any undue delay within one calendar month."
@@ -2636,7 +2636,7 @@ msgstr "Dan y ddeddfwriaeth diogelu data, nid oes gennym hawl i gadw eich gwybod
 
 #: cla_public/templates/privacy.html:518
 msgid "We will consider requests to delete some or all of your personal data but please note that, as a minimum, <abbr>CLA</abbr> will usually retain:"
-msgstr "Byddwn yn ystyried ceisiadau i ddileu eich holl ddata personol, neu rai data, ond dylech fod yn ymwybodol y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> fel arfer yn cadw’r canlynol o leiaf:"
+msgstr "Byddwn yn ystyried ceisiadau i ddileu eich holl ddata personol, neu rai data, ond dylech fod yn ymwybodol y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> fel arfer yn cadw’r canlynol o leiaf:"
 
 #: cla_public/templates/privacy.html:522
 msgid "For everyone that uses our service, a name and two other pieces of personal data, e.g. date of birth and postcode "
@@ -2646,18 +2646,18 @@ msgstr "Ar gyfer pawb sy’n defnyddio’n gwasanaeth, enw a dau ddarn arall o d
 msgid ""
 "For everyone that asks <abbr>CLA</abbr> to check whether they qualify for legal aid in order to seek advice from a\n"
 "      <abbr>CLA</abbr> Specialist, details of any financial information and case details used to prove that you qualify for legal aid"
-msgstr "Ar gyfer pawb sy’n gofyn i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> wirio a ydynt yn gymwys i gael cymorth cyfreithiol er mwyn gofyn am gyngor gan un o Arbenigwyr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, manylion unrhyw wybodaeth ariannol a manylion yr achos a ddefnyddir i brofi eich bod yn gymwys i gael cymorth cyfreithiol"
+msgstr "Ar gyfer pawb sy’n gofyn i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> wirio a ydynt yn gymwys i gael cymorth cyfreithiol er mwyn gofyn am gyngor gan un o Arbenigwyr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, manylion unrhyw wybodaeth ariannol a manylion yr achos a ddefnyddir i brofi eich bod yn gymwys i gael cymorth cyfreithiol"
 
 #: cla_public/templates/privacy.html:530
 msgid ""
 "Please note that, if you qualify to receive advice from a <abbr>CLA</abbr> Specialist, they will also need to retain\n"
 "    additional personal data about you within their own Case Handling System. Such data shall be sufficient\n"
 "    to justify the provision of legal aid advice and meet professional requirements."
-msgstr "Sylwer, os byddwch yn gymwys i gael cyngor gan un o Arbenigwyr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr>, bydd angen iddynt hefyd gadw data personol ychwanegol amdanoch yn eu System Ymdrin ag Achosion. Bydd data o’r fath yn ddigon i gyfiawnhau darparu cyngor am gymorth cyfreithiol a bodloni gofynion proffesiynol."
+msgstr "Sylwer, os byddwch yn gymwys i gael cyngor gan un o Arbenigwyr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, bydd angen iddynt hefyd gadw data personol ychwanegol amdanoch yn eu System Ymdrin ag Achosion. Bydd data o’r fath yn ddigon i gyfiawnhau darparu cyngor am gymorth cyfreithiol a bodloni gofynion proffesiynol."
 
 #: cla_public/templates/privacy.html:535
 msgid "If the information we hold about you is inaccurate for whatever reason, you can contact CLA to have your personal information amended."
-msgstr "Os yw’r wybodaeth rydym yn ei chadw amdanoch yn anghywir am unrhyw reswm, gallwch gysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> i ofyn i ni newid eich gwybodaeth bersonol."
+msgstr "Os yw’r wybodaeth rydym yn ei chadw amdanoch yn anghywir am unrhyw reswm, gallwch gysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> i ofyn i ni newid eich gwybodaeth bersonol."
 
 #: cla_public/templates/privacy.html:538
 msgid "When we ask you for personal data"
@@ -2749,7 +2749,7 @@ msgstr "Newidiadau yn y datganiad"
 msgid ""
 "This policy is under regular review. Any changes made to the privacy policy will be posted here and,\n"
 "    where appropriate, <abbr>CLA</abbr> staff will be notified by email."
-msgstr "Mae’r polisi hwn yn cael ei adolygu’n rheolaidd. Bydd unrhyw newidiadau yn y polisi preifatrwydd yn cael eu dangos yma ac, os yw’n briodol, bydd staff <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn cael eu hysbysu drwy’r e-bost"
+msgstr "Mae’r polisi hwn yn cael ei adolygu’n rheolaidd. Bydd unrhyw newidiadau yn y polisi preifatrwydd yn cael eu dangos yma ac, os yw’n briodol, bydd staff <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn cael eu hysbysu drwy’r e-bost"
 
 #: cla_public/templates/privacy.html:637
 msgid "Complaints about this statement"
@@ -2759,7 +2759,7 @@ msgstr "Cwynion am y datganiad hwn"
 msgid ""
 "If you would like to make a complaint about this statement and how it applies to you then please\n"
 "    contact <abbr title=\"Civil Legal Advice\">CLA</abbr> on <span class=\"tel\">0345 345 4 345</span>."
-msgstr "Os ydych chi’n dymuno gwneud cwyn am y datganiad hwn a’r ffordd y mae’n cael ei gymhwyso i chi, cysylltwch â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> ar 0345 345 4 345."
+msgstr "Os ydych chi’n dymuno gwneud cwyn am y datganiad hwn a’r ffordd y mae’n cael ei gymhwyso i chi, cysylltwch â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> ar 0345 345 4 345."
 
 #: cla_public/templates/reasons-for-contacting.html:6
 msgid "Why do you want to contact Civil Legal Advice?"
@@ -3007,7 +3007,7 @@ msgstr "Eich cyfeirnod yw"
 
 #: cla_public/templates/checker/result/confirmation.html:30
 msgid "You can now call CLA on"
-msgstr "Gallwch ffonio <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn awr ar"
+msgstr "Gallwch ffonio <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn awr ar"
 
 #: cla_public/templates/checker/result/confirmation.html:31
 msgid ""
@@ -3054,7 +3054,7 @@ msgstr ""
 #: cla_public/templates/macros/subform.html:19
 #: cla_public/templates/macros/subform.html:46
 msgid "When a CLA operator calls, the call will come from an anonymous number."
-msgstr "Pan fydd gweithredwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn eich ffonio, bydd rhif anhysbys yn ymddangos ar yr alwad."
+msgstr "Pan fydd gweithredwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn eich ffonio, bydd rhif anhysbys yn ymddangos ar yr alwad."
 
 #: cla_public/templates/checker/result/confirmation.html:80
 msgid ""
@@ -3152,7 +3152,7 @@ msgstr ""
 
 #: cla_public/templates/checker/result/confirmation.html:146
 msgid "If CLA can’t help you, we’ll always suggest where else you might get help."
-msgstr "Os nad yw <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> yn gallu eich helpu, byddwn ni bob amser yn awgrymu rhywle arall allai’ch helpu."
+msgstr "Os nad yw <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn gallu eich helpu, byddwn ni bob amser yn awgrymu rhywle arall allai’ch helpu."
 
 #: cla_public/templates/checker/result/confirmation.html:149
 msgid "If we can do anything to make it easier for you to communicate with us, please tell the operator."
@@ -3273,7 +3273,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"Gallwch ddewis cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> eich hun a siarad â rhywun ar unwaith (mae hwn yn rhif 0345 - %(call_charges_link)s) neu gallwch ofyn i ni eich ffonio yn ôl, sydd yn rhad ac am ddim."
+"Gallwch ddewis cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> eich hun a siarad â rhywun ar unwaith (mae hwn yn rhif 0345 - %(call_charges_link)s) neu gallwch ofyn i ni eich ffonio yn ôl, sydd yn rhad ac am ddim."
 
 #: cla_public/templates/checker/result/face-to-face.html:14
 msgid "Results for "
@@ -3412,7 +3412,7 @@ msgstr "Eich cyfeirnod yw %(case_ref)s."
 
 #: cla_public/templates/emails/confirmation.txt:51
 msgid "You can now call CLA on 0345 345 4 345. Please quote your reference number when you call."
-msgstr "Gallwch ffonio <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA<abbr> nawr ar 0345 345 4 345. Dyfynnwch eich cyfeirnod pan fyddwch yn ffonio."
+msgstr "Gallwch ffonio <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> nawr ar 0345 345 4 345. Dyfynnwch eich cyfeirnod pan fyddwch yn ffonio."
 
 #: cla_public/templates/emails/confirmation.txt:55
 msgid "Take a short survey. Help improve the service."
