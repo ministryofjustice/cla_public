@@ -2120,9 +2120,10 @@ msgid ""
 "    before we can transfer you through to a <abbr>CLA</abbr> Specialist."
 msgstr "Bydd faint o wybodaeth y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn ei gasglu amdanoch yn amrywio gan ddibynnu a ydych yn gymwys ar gyfer y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, a/neu a oes gennych anghenion penodol. Er enghraifft, gofynnir i chi roi mwy o wybodaeth cyn y gallwn eich trosglwyddo at Arbenigwr <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>."
 
+#heading - do not add title attribute to abbr tag
 #: cla_public/templates/privacy.html:141
 msgid "How does <abbr>CLA</abbr> use your data and why?"
-msgstr "Sut mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn defnyddio eich data a pham?"
+msgstr "Sut mae <abbr>CLA</abbr> yn defnyddio eich data a pham?"
 
 #: cla_public/templates/privacy.html:142
 msgid "collects and records information about you to:"
@@ -3460,7 +3461,7 @@ msgstr ""
 #: cla_public/templates/privacy.html:625
 #: cla_public/templates/errors/5xx.html:12
 msgid "Telephone:"
-msgstr "Ffôn"
+msgstr "Ffôn:"
 
 #: cla_public/templates/errors/5xx.html:13
 msgid "0345 345 4345"
