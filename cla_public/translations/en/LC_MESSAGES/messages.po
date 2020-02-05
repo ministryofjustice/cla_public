@@ -1987,14 +1987,14 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:49
 msgid ""
-"At this point, you will need to tell us your name and phone number and all the information you've entered will\n"
+"At this point, you will need to tell us your name and phone number and all the information you’ve entered will\n"
 "    be stored when you click 'Submit your application'. We store this information so that the operator can see it\n"
 "    when they speak to you."
 msgstr ""
 
 #: cla_public/templates/privacy.html:55
 msgid ""
-"If you don't want to speak to an operator, you don't need to enter any personal details and we don't store\n"
+"If you don’t want to speak to an operator, you don’t need to enter any personal details and we don’t store\n"
 "    any of the information you have entered."
 msgstr ""
 
@@ -2030,7 +2030,7 @@ msgstr ""
 #: cla_public/templates/privacy.html:84
 msgid ""
 "The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for <abbr title=\"Civil Legal Advice\">CLA</abbr>\n"
-"    service and the Ministry of Justice (<abbr>MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is an\n"
+"    service and the Ministry of Justice (<abbr>MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr>LAA</abbr>) is an\n"
 "    Executive Agency of the (<abbr title=\"Ministry of Justice\">MoJ</abbr>)."
 msgstr ""
 
@@ -2515,7 +2515,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/privacy.html:462
-msgid "You can also email at <a class=\"email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
+msgid "You can also email at <a class=\"govuk-link email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
 msgstr ""
 
 #: cla_public/templates/privacy.html:465
@@ -2598,7 +2598,7 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:507
 msgid ""
-"You can also review our <a href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Personal Information Charter</a>\n"
+"You can also review our <a class=\"govuk-link\" href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Personal Information Charter</a>\n"
 "     which contains important information on your rights to access your personal information."
 msgstr ""
 

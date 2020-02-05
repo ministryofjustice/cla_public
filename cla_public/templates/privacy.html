@@ -46,13 +46,13 @@
   </p>
 
   <p class="govuk-body">
-    {% trans %}At this point, you will need to tell us your name and phone number and all the information you've entered will
+    {% trans %}At this point, you will need to tell us your name and phone number and all the information you’ve entered will
     be stored when you click 'Submit your application'. We store this information so that the operator can see it
     when they speak to you.{% endtrans %}
   </p>
 
   <p class="govuk-body">
-    {% trans %}If you don't want to speak to an operator, you don't need to enter any personal details and we don't store
+    {% trans %}If you don’t want to speak to an operator, you don’t need to enter any personal details and we don’t store
     any of the information you have entered.{% endtrans %}
   </p>
 
@@ -205,98 +205,102 @@
 
   <table class="govuk-table">
     <caption class="govuk-table__caption">{{ _('How we collect and store your personal data') }}</caption>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header u-width-20">{{ _('Phone') }}</th>
-      <td class="govuk-table__cell">
-        {% trans %}When you call <abbr>CLA</abbr> we will record relevant personal data that you provide within a secure digital system.
-        <br><br>
-        We may also record your calls. But you can choose to opt out of this or choose whether or not
-        to continue with the call.
-        <br><br>
-        If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information
-        required in order to contact you back.{% endtrans %}
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">{{ _('Online') }}</th>
-      <td class="govuk-table__cell">
-        {% trans %}When you contact <abbr>CLA</abbr> online, the personal data that you provide will be recorded within a secure digital system.
-        <br><br>
-        Please note that transmitting information over the internet is generally not completely secure, and
-        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.
-        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.{% endtrans %}
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">{{ _('Email') }}</th>
-      <td class="govuk-table__cell">
-        {% trans %}Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the
-        security of your data. Any data you transmit is at your own risk.
-        <br><br>
-        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.
-        <br><br>
-        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.
-        <br><br>
-        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software.{% endtrans %}
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">{{ _('Post') }}</th>
-      <td class="govuk-table__cell">
-        {% trans %}When <abbr>CLA</abbr> receives post we may record relevant personal data included within a secure digital system.
-        <br><br>
-        <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked
-        filing cabinet. Digital copies of letters may be scanned and stored.{% endtrans %}
-      </td>
-    </tr>
+    <tbody class="govuk-table__body govuk-!-font-size-16">
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header u-width-20">{{ _('Phone') }}</th>
+        <td class="govuk-table__cell">
+          {% trans %}When you call <abbr>CLA</abbr> we will record relevant personal data that you provide within a secure digital system.
+          <br><br>
+          We may also record your calls. But you can choose to opt out of this or choose whether or not
+          to continue with the call.
+          <br><br>
+          If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information
+          required in order to contact you back.{% endtrans %}
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">{{ _('Online') }}</th>
+        <td class="govuk-table__cell">
+          {% trans %}When you contact <abbr>CLA</abbr> online, the personal data that you provide will be recorded within a secure digital system.
+          <br><br>
+          Please note that transmitting information over the internet is generally not completely secure, and
+          <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.
+          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.{% endtrans %}
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">{{ _('Email') }}</th>
+        <td class="govuk-table__cell">
+          {% trans %}Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the
+          security of your data. Any data you transmit is at your own risk.
+          <br><br>
+          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.
+          <br><br>
+          When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.
+          <br><br>
+          <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software.{% endtrans %}
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">{{ _('Post') }}</th>
+        <td class="govuk-table__cell">
+          {% trans %}When <abbr>CLA</abbr> receives post we may record relevant personal data included within a secure digital system.
+          <br><br>
+          <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked
+          filing cabinet. Digital copies of letters may be scanned and stored.{% endtrans %}
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <table class="govuk-table">
     <caption class="govuk-table__caption">{{ _('Keeping your personal data safe from others') }}</caption>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header u-width-20">{{ _('Repeat Contacts') }}</th>
-      <td class="govuk-table__cell">
-        {% trans %}<abbr>CLA</abbr> will not disclose any personal information to anyone contacting the <abbr>CLA</abbr> service until
-        they have successfully verified that their identity matches that of an existing record.{% endtrans %}
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">{{ _('Third-parties') }}</th>
-      <td class="govuk-table__cell">
-        {% trans %}<abbr>CLA</abbr> will accept contact made by a third-party on behalf of another person. The third party has to
-        demonstrate they have appropriate authority to act on your behalf.
-        <br><br>
-        <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice
-        and whether they are authorised to act on their behalf.
-        <br><br>
-        They must also agree a password to verify the identity of the third-party if they contact the service again.{% endtrans %}
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">{{ _('Outgoing Communications') }}</th>
-      <td class="govuk-table__cell">
-        {{ _('<abbr>CLA</abbr> may need to contact you directly.') }}
-        <br><br>
-        {{ _('In order to protect privacy, <abbr>CLA</abbr> will always check with you what forms of outgoing communication are acceptable and appropriate and whether messages can be left.') }}
-        <br><br>
-        {{ _('When making outgoing calls to you, <abbr>CLA</abbr> will ensure that:') }}
-        <ul class="govuk-list govuk-list--bullet">
-          <li>
-            {% trans %}Call backs are only made where you have agreed to this. Authorised third parties
-            acting on your behalf can give agreement.{% endtrans %}
-          </li>
-          <li>
-            {% trans %}Where a call back is made to you and there is no answer and a message taker is available,
-            no message will be left unless you have previously given specific instructions that this would be acceptable.{% endtrans %}
-          </li>
-          <li>
-            {% trans %}Where the phone is answered and someone other than you answers the phone and says that you are
-            unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say
-            that they are calling from <abbr>CLA</abbr>.{% endtrans %}
-          </li>
-        </ul>
-      </td>
-    </tr>
+    <tbody class="govuk-table__body govuk-!-font-size-16">
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header u-width-20">{{ _('Repeat Contacts') }}</th>
+        <td class="govuk-table__cell">
+          {% trans %}<abbr>CLA</abbr> will not disclose any personal information to anyone contacting the <abbr>CLA</abbr> service until
+          they have successfully verified that their identity matches that of an existing record.{% endtrans %}
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">{{ _('Third-parties') }}</th>
+        <td class="govuk-table__cell">
+          {% trans %}<abbr>CLA</abbr> will accept contact made by a third-party on behalf of another person. The third party has to
+          demonstrate they have appropriate authority to act on your behalf.
+          <br><br>
+          <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice
+          and whether they are authorised to act on their behalf.
+          <br><br>
+          They must also agree a password to verify the identity of the third-party if they contact the service again.{% endtrans %}
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">{{ _('Outgoing Communications') }}</th>
+        <td class="govuk-table__cell">
+          {{ _('<abbr>CLA</abbr> may need to contact you directly.') }}
+          <br><br>
+          {{ _('In order to protect privacy, <abbr>CLA</abbr> will always check with you what forms of outgoing communication are acceptable and appropriate and whether messages can be left.') }}
+          <br><br>
+          {{ _('When making outgoing calls to you, <abbr>CLA</abbr> will ensure that:') }}
+          <ul class="govuk-list govuk-list--bullet govuk-table__body govuk-!-font-size-16">
+            <li>
+              {% trans %}Call backs are only made where you have agreed to this. Authorised third parties
+              acting on your behalf can give agreement.{% endtrans %}
+            </li>
+            <li>
+              {% trans %}Where a call back is made to you and there is no answer and a message taker is available,
+              no message will be left unless you have previously given specific instructions that this would be acceptable.{% endtrans %}
+            </li>
+            <li>
+              {% trans %}Where the phone is answered and someone other than you answers the phone and says that you are
+              unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say
+              that they are calling from <abbr>CLA</abbr>.{% endtrans %}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
 
@@ -348,13 +352,14 @@
     you with the organisations mentioned below. But we will only do this if you have given us permission, when the operator asks for it, or when it is lawful to do so.{% endtrans %}
   </p>
   <table class="govuk-table">
+    <caption class="govuk-table__caption">{{ _('Who we share information with') }}</caption>
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th scope="col" class="govuk-table__header u-width-50">{{ _('Who') }}</th>
         <th scope="col" class="govuk-table__header u-width-50">{{ _('Why') }}</th>
       </tr>
     </thead>
-    <tbody class="govuk-table__body">
+    <tbody class="govuk-table__body govuk-!-font-size-16">
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
           {% trans %}External research organisations engaged by <abbr title="Legal Aid Agency">LAA</abbr>
@@ -405,13 +410,14 @@
     <li>{{ _('Only share information on a ‘need to know’ basis.') }}</li>
   </ul>
   <table class="govuk-table">
+    <caption class="govuk-table__caption">{{ _('Who we share information with') }}</caption>
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th scope="col" class="govuk-table__header u-width-50">{{ _('Who') }}</th>
         <th scope="col" class="govuk-table__header u-width-50">{{ _('Why') }}</th>
       </tr>
     </thead>
-    <tbody class="govuk-table__body">
+    <tbody class="govuk-table__body govuk-!-font-size-16">
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
           {{ _('Other government organisations') }}
