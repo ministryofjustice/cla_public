@@ -2053,7 +2053,7 @@ msgstr "Mae’r datganiad hwn yn egluro sut y bydd CLA yn prosesu unrhyw ddata p
 msgid ""
 "The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for <abbr title=\"Civil Legal Advice\">CLA</abbr>\n"
 "    service and the Ministry of Justice (<abbr>MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr>LAA</abbr>) is an\n"
-"    Executive Agency of the (<abbr title=\"Ministry of Justice\">MoJ</abbr>)."
+"    Executive Agency of the <abbr title=\"Ministry of Justice\">MoJ</abbr>."
 msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, a’r Weinyddiaeth Gyfiawnder yw Rheolwr y Data. Mae’r Asiantaeth Cymorth Cyfreithiol  yn Asiantaeth Weithredol i’r Weinyddiaeth Gyfiawnder."
 
 #: cla_public/templates/privacy.html:90
@@ -2186,9 +2186,10 @@ msgid ""
 "    it is essential that the information you provide is accurate and complete."
 msgstr "Oherwydd y dibenion y gellir defnyddio eich data personol ar eu cyfer (sydd wedi’u nodi uchod), mae’n hanfodol eich bod yn darparu gwybodaeth sy’n gywir a chyflawn."
 
+#heading - do not add title attribute to abbr tag
 #: cla_public/templates/privacy.html:179
 msgid "How does <abbr>CLA</abbr> collect your personal data and keep it safe?"
-msgstr "Sut y mae <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn casglu’ch data personol ac yn eu cadw’n ddiogel?"
+msgstr "Sut y mae <abbr>CLA</abbr> yn casglu’ch data personol ac yn eu cadw’n ddiogel?"
 
 #: cla_public/templates/privacy.html:181
 msgid ""
@@ -2412,9 +2413,10 @@ msgid ""
 "    <a class=\"govuk-link\" href=\"http://www.aboutcookies.org/\" rel=\"external\">how to manage cookies</a>."
 msgstr "<a class=\"govuk-link\" href=\"http://www.aboutcookies.org/\" rel=\"external\">Mae gwybodaeth am ffyrdd o reoli cwcis yma</a>."
 
+#heading - do not add title attribute to abbr tag
 #: cla_public/templates/privacy.html:340
 msgid "When will we share information about you outside <abbr>CLA</abbr>?"
-msgstr "Pryd y byddwn ni’n rhannu gwybodaeth amdanoch chi y tu allan i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>?"
+msgstr "Pryd y byddwn ni’n rhannu gwybodaeth amdanoch chi y tu allan i <abbr>CLA</abbr>?"
 
 #: cla_public/templates/privacy.html:341
 msgid "Confidentiality means ensuring information is only accessible by those allowed to have access to it."
