@@ -2443,8 +2443,8 @@ msgstr "Pam"
 #: cla_public/templates/privacy.html:360
 msgid ""
 "External research organisations engaged by <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
-"          or <abbr title=\"The Ministry of Justice\">MoJ</abbr>"
-msgstr "Sefydliadau ymchwil allanol sy’n gweithio i’r LAA neu’r Weinyddiaeth Cyfiawnder"
+"          or the <abbr title=\"Ministry of Justice\">MoJ</abbr>"
+msgstr "Sefydliadau ymchwil allanol sy’n gweithio i’r <abbr title=\"Asiantaeth Cymorth Cyfreithiol\">LAA</abbr> neu’r Weinyddiaeth Cyfiawnder"
 
 #: cla_public/templates/privacy.html:364
 msgid ""

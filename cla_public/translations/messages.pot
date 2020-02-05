@@ -2423,7 +2423,7 @@ msgstr ""
 #: cla_public/templates/privacy.html:360
 msgid ""
 "External research organisations engaged by <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
-"          or <abbr title=\"The Ministry of Justice\">MoJ</abbr>"
+"          or the <abbr title=\"Ministry of Justice\">MoJ</abbr>"
 msgstr ""
 
 #: cla_public/templates/privacy.html:364
