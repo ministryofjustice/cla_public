@@ -2082,7 +2082,7 @@ msgid "What types of personal data do we process?"
 msgstr "Pa fathau o ddata personol rydym yn eu prosesu? "
 
 #: cla_public/templates/privacy.html:110
-msgid "<abbr>CLA</abbr> will only collect the minimum amount of information that is necessary and relevant, in order to deliver the <abbr>CLA</abbr> service to you."
+msgid "<abbr title=\"Civil Legal Advice\">CLA</abbr> will only collect the minimum amount of information that is necessary and relevant, in order to deliver the <abbr>CLA</abbr> service to you."
 msgstr "Ni fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn casglu mwy o wybodaeth nag sy’n angenrheidiol ac yn berthnasol er mwyn darparu’r gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> i chi."
 
 #: cla_public/templates/privacy.html:113

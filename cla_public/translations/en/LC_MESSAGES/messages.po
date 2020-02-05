@@ -2060,7 +2060,7 @@ msgid "What types of personal data do we process?"
 msgstr ""
 
 #: cla_public/templates/privacy.html:110
-msgid "<abbr>CLA</abbr> will only collect the minimum amount of information that is necessary and relevant, in order to deliver the <abbr>CLA</abbr> service to you."
+msgid "<abbr title=\"Civil Legal Advice\">CLA</abbr> will only collect the minimum amount of information that is necessary and relevant, in order to deliver the <abbr>CLA</abbr> service to you."
 msgstr ""
 
 #: cla_public/templates/privacy.html:113
