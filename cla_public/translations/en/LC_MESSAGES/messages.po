@@ -2314,8 +2314,8 @@ msgstr ""
 #: cla_public/templates/privacy.html:294
 msgid ""
 "Where the phone is answered and someone other than you answers the phone and says that you are\n"
-"            unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say\n"
-"            that they are calling from <abbr>CLA</abbr>."
+"              unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say\n"
+"              that they are calling from <abbr>CLA</abbr>."
 msgstr ""
 
 #: cla_public/templates/privacy.html:304

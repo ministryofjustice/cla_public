@@ -2338,8 +2338,8 @@ msgstr "Os yw’n ffonio’n ôl ac nad oes ateb, a bod recordydd negeseuon ar g
 #: cla_public/templates/privacy.html:294
 msgid ""
 "Where the phone is answered and someone other than you answers the phone and says that you are\n"
-"            unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say\n"
-"            that they are calling from <abbr>CLA</abbr>."
+"              unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say\n"
+"              that they are calling from <abbr>CLA</abbr>."
 msgstr "Os bydd rhywun heblaw chi’n ateb y ffôn ac yn dweud nad ydych chi ar gael neu’n gofyn pwy sy’n galw, y bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn dweud bod yr alwad yn gyfrinachol ac na fydd yn dweud ei fod yn ffonio o <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>."
 
 #: cla_public/templates/privacy.html:304
