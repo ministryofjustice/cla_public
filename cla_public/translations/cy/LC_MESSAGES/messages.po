@@ -2237,12 +2237,12 @@ msgstr "Ffôn"
 #: cla_public/templates/privacy.html:211
 msgid ""
 "When you call <abbr>CLA</abbr> we will record relevant personal data that you provide within a secure digital system.\n"
-"        <br><br>\n"
-"        We may also record your calls. But you can choose to opt out of this or choose whether or not\n"
-"        to continue with the call.\n"
-"        <br><br>\n"
-"        If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information\n"
-"        required in order to contact you back."
+"          <br><br>\n"
+"          We may also record your calls. But you can choose to opt out of this or choose whether or not\n"
+"          to continue with the call.\n"
+"          <br><br>\n"
+"          If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information\n"
+"          required in order to contact you back."
 msgstr "Pan fyddwch chi’n ffonio <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, byddwn ni’n cofnodi data personol perthnasol yr ydych chi’n eu rhoi mewn system ddigidol ddiogel. Gallwn recordio’ch galwadau hefyd. Ond cewch chi ddewis peidio ag ymuno â hyn neu ddewis a ydych chi am barhau â’r alwad neu beidio. Os byddwch chi’n gadael neges llais i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, byddwn ni’n cofnodi’r lleiaf o wybodaeth sydd ei hangen i gysylltu â chi wedyn."
 
 #: cla_public/templates/privacy.html:221
@@ -2252,22 +2252,22 @@ msgstr "Ar-lein"
 #: cla_public/templates/privacy.html:223
 msgid ""
 "When you contact <abbr>CLA</abbr> online, the personal data that you provide will be recorded within a secure digital system.\n"
-"        <br><br>\n"
-"        Please note that transmitting information over the internet is generally not completely secure, and\n"
-"        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
-"        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
+"          <br><br>\n"
+"          Please note that transmitting information over the internet is generally not completely secure, and\n"
+"          <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
+"          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
 msgstr "Pan fyddwch yn cysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> ar-lein, bydd y data personol y byddwch yn eu rhoi yn cael eu cofnodi mewn system ddigidol ddiogel. Sylwer nad yw trawsyrru gwybodaeth dros y rhyngrwyd yn gwbl ddiogel bob amser, ac ni all <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru. Mae gan <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> weithdrefnau a nodweddion diogelwch er mwyn cadw eich data’n ddiogel ar ôl i ni eu derbyn."
 
 #: cla_public/templates/privacy.html:233
 msgid ""
 "Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the\n"
-"        security of your data. Any data you transmit is at your own risk.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
-"        <br><br>\n"
-"        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
+"          security of your data. Any data you transmit is at your own risk.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
+"          <br><br>\n"
+"          When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
 msgstr "Nid yw trawsyrru gwybodaeth drwy e-bost yn gwbl ddiogel bob amser, ac ni all <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> warantu diogelwch eich data. Ni allwn fod yn gyfrifol am unrhyw ddata y byddwch yn eu trawsyrru"
 
 #: cla_public/templates/privacy.html:244
@@ -2277,9 +2277,9 @@ msgstr "Post"
 #: cla_public/templates/privacy.html:246
 msgid ""
 "When <abbr>CLA</abbr> receives post we may record relevant personal data included within a secure digital system.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked\n"
-"        filing cabinet. Digital copies of letters may be scanned and stored."
+"          <br><br>\n"
+"          <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked\n"
+"          filing cabinet. Digital copies of letters may be scanned and stored."
 msgstr "Pan fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn derbyn llythyrau, gallwn ni gofnodi data personol perthnasol sydd ynddynt mewn system ddigidol ddiogel. Hefyd gall <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gadw llythyrau gwreiddiol sy’n cynnwys gwybodaeth a gyflwynwyd gennych chi. Rhaid storio’r rhain mewn cwpwrdd ffeiliau sydd wedi’i gloi. Gellir sganio copïau digidol o lythyrau a’u storio."
 
 #: cla_public/templates/privacy.html:255
@@ -2293,7 +2293,7 @@ msgstr "Ailgysylltu"
 #: cla_public/templates/privacy.html:260
 msgid ""
 "<abbr>CLA</abbr> will not disclose any personal information to anyone contacting the <abbr>CLA</abbr> service until\n"
-"        they have successfully verified that their identity matches that of an existing record."
+"          they have successfully verified that their identity matches that of an existing record."
 msgstr "Ni fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn datgelu unrhyw wybodaeth bersonol i rywun sy’n cysylltu â gwasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> nes ei fod wedi cadarnhau bod ei hunaniaeth yn cyfateb i gofnod sy’n bodoli."
 
 #: cla_public/templates/privacy.html:265
@@ -2303,12 +2303,12 @@ msgstr "Trydydd parti"
 #: cla_public/templates/privacy.html:267
 msgid ""
 "<abbr>CLA</abbr> will accept contact made by a third-party on behalf of another person. The third party has to\n"
-"        demonstrate they have appropriate authority to act on your behalf.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice\n"
-"        and whether they are authorised to act on their behalf.\n"
-"        <br><br>\n"
-"        They must also agree a password to verify the identity of the third-party if they contact the service again."
+"          demonstrate they have appropriate authority to act on your behalf.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice\n"
+"          and whether they are authorised to act on their behalf.\n"
+"          <br><br>\n"
+"          They must also agree a password to verify the identity of the third-party if they contact the service again."
 msgstr "Bydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn cydnabod trydydd parti sy’n cysylltu ar ran person arall. Mae’n rhaid i’r trydydd parti ddangos bod ganddynt yr awdurdod priodol i weithredu ar eich rhan. Rhaid i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gofnodi’r berthynas rhwng y trydydd parti a’r unigolyn sy’n gofyn am gyngor ac a yw’r trydydd parti wedi’i awdurdodi i weithredu ar ei ran. Hefyd rhaid i <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> gytuno ar gyfrinair er mwyn gwirio hunaniaeth y trydydd parti os bydd yn cysylltu â’r gwasanaeth eto."
 
 #: cla_public/templates/privacy.html:277
@@ -2328,15 +2328,11 @@ msgid "When making outgoing calls to you, <abbr>CLA</abbr> will ensure that:"
 msgstr "Pan fydd <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn eich ffonio chi, bydd yn:"
 
 #: cla_public/templates/privacy.html:286
-msgid ""
-"Call backs are only made where you have agreed to this. Authorised third parties\n"
-"            acting on your behalf can give agreement."
+msgid "Call backs are only made where you have agreed to this. Authorised third parties acting on your behalf can give agreement."
 msgstr "Mai dim ond os ydych chi wedi cytuno ar hynny y byddwn ni’n ffonio’n ôl. Gall trydydd parti gytuno ar hyn os yw wedi’i awdurdodi i weithredu ar eich rhan."
 
 #: cla_public/templates/privacy.html:290
-msgid ""
-"Where a call back is made to you and there is no answer and a message taker is available,\n"
-"            no message will be left unless you have previously given specific instructions that this would be acceptable."
+msgid "Where a call back is made to you and there is no answer and a message taker is available, no message will be left unless you have previously given specific instructions that this would be acceptable."
 msgstr "Os yw’n ffonio’n ôl ac nad oes ateb, a bod recordydd negeseuon ar gael, na fydd yn gadael neges oni bai eich bod wedi rhoi cyfarwyddiadau penodol cyn hynny fod hyn yn dderbyniol."
 
 #: cla_public/templates/privacy.html:294
@@ -2461,7 +2457,7 @@ msgstr "Sefydliadau llywodraeth eraill"
 
 #: cla_public/templates/privacy.html:372
 msgid "These organisations may include the Department of Work and Pensions (DWP), HM Courts and Tribunals Service (HMCTS), HM Revenue and Customs (HMRC)."
-msgstr "Gall y sefydliadau hyn gynnwys yr Adran Gwaith a Phensiynau, Gwasanaeth Llysoedd a Thribiwnlysoedd Ei Mawrhydi (GLlTEM), Cyllid a Thollau Ei Mawrhydi (CThEM)."
+msgstr "Gall y sefydliadau hyn gynnwys yr Adran Gwaith a Phensiynau (<abbr>DWP</abbr>), Gwasanaeth Llysoedd a Thribiwnlysoedd Ei Mawrhydi (<abbr>HMCTS</abbr>), Cyllid a Thollau Ei Mawrhydi (<abbr>HMRC</abbr>)."
 
 #: cla_public/templates/privacy.html:375
 msgid "To verify information provided by you and check whether you qualify for legal aid."

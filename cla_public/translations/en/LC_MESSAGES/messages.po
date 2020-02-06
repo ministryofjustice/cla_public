@@ -2213,12 +2213,12 @@ msgstr ""
 #: cla_public/templates/privacy.html:211
 msgid ""
 "When you call <abbr>CLA</abbr> we will record relevant personal data that you provide within a secure digital system.\n"
-"        <br><br>\n"
-"        We may also record your calls. But you can choose to opt out of this or choose whether or not\n"
-"        to continue with the call.\n"
-"        <br><br>\n"
-"        If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information\n"
-"        required in order to contact you back."
+"          <br><br>\n"
+"          We may also record your calls. But you can choose to opt out of this or choose whether or not\n"
+"          to continue with the call.\n"
+"          <br><br>\n"
+"          If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information\n"
+"          required in order to contact you back."
 msgstr ""
 
 #: cla_public/templates/privacy.html:221
@@ -2228,22 +2228,22 @@ msgstr ""
 #: cla_public/templates/privacy.html:223
 msgid ""
 "When you contact <abbr>CLA</abbr> online, the personal data that you provide will be recorded within a secure digital system.\n"
-"        <br><br>\n"
-"        Please note that transmitting information over the internet is generally not completely secure, and\n"
-"        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
-"        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
+"          <br><br>\n"
+"          Please note that transmitting information over the internet is generally not completely secure, and\n"
+"          <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
+"          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
 msgstr ""
 
 #: cla_public/templates/privacy.html:233
 msgid ""
 "Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the\n"
-"        security of your data. Any data you transmit is at your own risk.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
-"        <br><br>\n"
-"        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
+"          security of your data. Any data you transmit is at your own risk.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
+"          <br><br>\n"
+"          When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
 msgstr ""
 
 #: cla_public/templates/privacy.html:244
@@ -2253,9 +2253,9 @@ msgstr ""
 #: cla_public/templates/privacy.html:246
 msgid ""
 "When <abbr>CLA</abbr> receives post we may record relevant personal data included within a secure digital system.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked\n"
-"        filing cabinet. Digital copies of letters may be scanned and stored."
+"          <br><br>\n"
+"          <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked\n"
+"          filing cabinet. Digital copies of letters may be scanned and stored."
 msgstr ""
 
 #: cla_public/templates/privacy.html:255
@@ -2279,12 +2279,12 @@ msgstr ""
 #: cla_public/templates/privacy.html:267
 msgid ""
 "<abbr>CLA</abbr> will accept contact made by a third-party on behalf of another person. The third party has to\n"
-"        demonstrate they have appropriate authority to act on your behalf.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice\n"
-"        and whether they are authorised to act on their behalf.\n"
-"        <br><br>\n"
-"        They must also agree a password to verify the identity of the third-party if they contact the service again."
+"          demonstrate they have appropriate authority to act on your behalf.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice\n"
+"          and whether they are authorised to act on their behalf.\n"
+"          <br><br>\n"
+"          They must also agree a password to verify the identity of the third-party if they contact the service again."
 msgstr ""
 
 #: cla_public/templates/privacy.html:277
@@ -2304,15 +2304,11 @@ msgid "When making outgoing calls to you, <abbr>CLA</abbr> will ensure that:"
 msgstr ""
 
 #: cla_public/templates/privacy.html:286
-msgid ""
-"Call backs are only made where you have agreed to this. Authorised third parties\n"
-"            acting on your behalf can give agreement."
+msgid "Call backs are only made where you have agreed to this. Authorised third parties acting on your behalf can give agreement."
 msgstr ""
 
 #: cla_public/templates/privacy.html:290
-msgid ""
-"Where a call back is made to you and there is no answer and a message taker is available,\n"
-"            no message will be left unless you have previously given specific instructions that this would be acceptable."
+msgid "Where a call back is made to you and there is no answer and a message taker is available, no message will be left unless you have previously given specific instructions that this would be acceptable."
 msgstr ""
 
 #: cla_public/templates/privacy.html:294
