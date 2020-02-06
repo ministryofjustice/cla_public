@@ -7,10 +7,9 @@
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
-  <p class="subtitle">
-    {% trans %}Please don't include any personal or financial details,
-    for example, your National Insurance or credit card numbers.{% endtrans %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <p class="govuk-body-l">
+    {% trans %}Do not include any personal or financial details, for example, your National Insurance or credit card numbers.{% endtrans %}
   </p>
 
   <form method="POST" action="{{ url_for('.feedback') }}">
@@ -21,7 +20,7 @@
 
     {% if non_field_error %}
       {% call Element.alert('error', icon='cross') %}
-        <p>{{ non_field_error }}</p>
+        <p class="govuk-body">{{ non_field_error }}</p>
       {% endcall %}
     {% endif %}
 

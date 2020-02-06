@@ -18,9 +18,9 @@
   {% block sidebar %}{% endblock %}
 
   {% block inner_content %}
-    <h1 class="page-title">{{ title }}</h1>
+    <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-    <p>
+    <p class="govuk-body">
       {% if category == 'family' %}
         {% trans %}Search for a legal adviser or family mediator with a legal aid contract in England and Wales.{% endtrans %}
       {% else %}

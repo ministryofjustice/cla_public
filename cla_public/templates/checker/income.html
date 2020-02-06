@@ -1,9 +1,9 @@
 {% extends "checker/base.html" %}
 
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
-  <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
-  <p>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <p class="govuk-body">{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+  <p class="govuk-body">
     <strong>{% trans %}We only need to know about any money you received last month, even if this varies from month to month.{% endtrans %}</strong>
   </p>
   <form method="POST">
@@ -12,11 +12,9 @@
 
     {% with skip = not (session.checker.is_employed or session.checker.is_self_employed) %}
       {% if session.checker.has_partner %}
-        <fieldset class="fieldset-group">
-          <header>
-            <h3>{{ _('Your money') }}</h3>
-          </header>
-          <p>
+        <fieldset class="govuk-fieldset">
+          <h2 class="govuk-heading-l">{{ _('Your money') }}</h3>
+          <p class="govuk-body">
             {% trans %}Give details of any money that is paid to you
             personally, like your wages. Record money coming in for your
             partner in the next section.{% endtrans %}
@@ -39,11 +37,9 @@
       {% endif %}
     {% endwith %}
     {% if session.checker.has_partner %}
-      <fieldset class="fieldset-group">
+      <fieldset class="govuk-fieldset">
         {% with skip_for_partner = not (session.checker.partner_is_employed or session.checker.partner_is_self_employed) %}
-          <header>
-            <h3>{{ _('Your partner’s money') }}</h3>
-          </header>
+          <h2 class="govuk-heading-l">{{ _('Your partner’s money') }}</h3>
           {% if not skip_for_partner %}
             {{ Form.group(form.partner_income.earnings, skip=skip_for_partner) }}
             {{ Form.group(form.partner_income.income_tax, skip=skip_for_partner) }}

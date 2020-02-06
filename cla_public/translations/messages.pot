@@ -1675,7 +1675,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/feedback-confirmation.html:6
-msgid "Thanks for your feedback"
+msgid "Thank you for your feedback"
 msgstr ""
 
 #: cla_public/templates/feedback-confirmation.html:11
@@ -1932,7 +1932,7 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:9
 msgid ""
-"When using this service you agree to the terms of use for both <a href=\"http://gov.uk/help/terms-conditions\">gov.uk/help/terms-conditions</a> as well as\n"
+"When using this service you agree to the terms of use for both <a class=\"govuk-link\" href=\"http://gov.uk/help/terms-conditions\">gov.uk/help/terms-conditions</a> as well as\n"
 "    the terms and conditions specific to this service found below."
 msgstr ""
 
@@ -1946,9 +1946,9 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:17
 msgid ""
-"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service. The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other\n"
+"The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service. The <abbr title=\"Legal Aid Agency\">LAA</abbr> works with other\n"
 "    organisations who deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> service. For example this digital service is managed by the Ministry of\n"
-"    Justice."
+"    Justice (<abbr>MoJ</abbr>)."
 msgstr ""
 
 #: cla_public/templates/privacy.html:23
@@ -1959,7 +1959,7 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:28
 msgid ""
-"Hinduja Global Solutions UK Limited is a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr>\n"
+"Hinduja Global Solutions UK Limited is a contractor employed by the <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
 "    to deliver the <abbr title=\"Civil Legal Advice\">CLA</abbr> Operator Service."
 msgstr ""
 
@@ -1989,14 +1989,14 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:49
 msgid ""
-"At this point, you will need to tell us your name and phone number and all the information you've entered will\n"
+"At this point, you will need to tell us your name and phone number and all the information you’ve entered will\n"
 "    be stored when you click 'Submit your application'. We store this information so that the operator can see it\n"
 "    when they speak to you."
 msgstr ""
 
 #: cla_public/templates/privacy.html:55
 msgid ""
-"If you don't want to speak to an operator, you don't need to enter any personal details and we don't store\n"
+"If you don’t want to speak to an operator, you don’t need to enter any personal details and we don’t store\n"
 "    any of the information you have entered."
 msgstr ""
 
@@ -2031,17 +2031,17 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:84
 msgid ""
-"The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is responsible for the <abbr>CLA</abbr>\n"
-"    service and the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr title=\"The Legal Aid Agency\">LAA</abbr>) is an\n"
-"     Executive Agency of the Ministry of Justice (<abbr title=\"The Ministry of Justice\">MoJ</abbr>)."
+"The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for <abbr title=\"Civil Legal Advice\">CLA</abbr>\n"
+"    service and the Ministry of Justice (<abbr>MoJ</abbr>) is the Data Controller. The Legal Aid Agency (<abbr>LAA</abbr>) is an\n"
+"    Executive Agency of the <abbr title=\"Ministry of Justice\">MoJ</abbr>."
 msgstr ""
 
 #: cla_public/templates/privacy.html:90
 msgid ""
-"The <abbr title=\"The Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
+"The <abbr title=\"Legal Aid Agency\">LAA</abbr> works with other organisations who deliver the <abbr>CLA</abbr> service.\n"
 "    For example, when you first make contact with <abbr>CLA</abbr>, you will communicate with\n"
 "    the <abbr>CLA</abbr> Operator Service, which is delivered by Hinduja Global Solutions UK Limited\n"
-"    (a contractor employed by the <abbr title=\"The Legal Aid Agency\">LAA</abbr>)."
+"    (a contractor employed by the <abbr title=\"Legal Aid Agency\">LAA</abbr>)."
 msgstr ""
 
 #: cla_public/templates/privacy.html:97
@@ -2062,7 +2062,7 @@ msgid "What types of personal data do we process?"
 msgstr ""
 
 #: cla_public/templates/privacy.html:110
-msgid "<abbr>CLA</abbr> will only collect the minimum amount of information that is necessary and relevant, in order to deliver the <abbr>CLA</abbr> service to you."
+msgid "<abbr title=\"Civil Legal Advice\">CLA</abbr> will only collect the minimum amount of information that is necessary and relevant, in order to deliver the <abbr>CLA</abbr> service to you."
 msgstr ""
 
 #: cla_public/templates/privacy.html:113
@@ -2215,12 +2215,12 @@ msgstr ""
 #: cla_public/templates/privacy.html:211
 msgid ""
 "When you call <abbr>CLA</abbr> we will record relevant personal data that you provide within a secure digital system.\n"
-"        <br><br>\n"
-"        We may also record your calls. But you can choose to opt out of this or choose whether or not\n"
-"        to continue with the call.\n"
-"        <br><br>\n"
-"        If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information\n"
-"        required in order to contact you back."
+"          <br><br>\n"
+"          We may also record your calls. But you can choose to opt out of this or choose whether or not\n"
+"          to continue with the call.\n"
+"          <br><br>\n"
+"          If you leave <abbr>CLA</abbr> a voice message we will record the minimum amount of information\n"
+"          required in order to contact you back."
 msgstr ""
 
 #: cla_public/templates/privacy.html:221
@@ -2230,22 +2230,22 @@ msgstr ""
 #: cla_public/templates/privacy.html:223
 msgid ""
 "When you contact <abbr>CLA</abbr> online, the personal data that you provide will be recorded within a secure digital system.\n"
-"        <br><br>\n"
-"        Please note that transmitting information over the internet is generally not completely secure, and\n"
-"        <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
-"        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
+"          <br><br>\n"
+"          Please note that transmitting information over the internet is generally not completely secure, and\n"
+"          <abbr>CLA</abbr> can’t guarantee the security of your data. Any data you transmit is at your own risk.\n"
+"          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
 msgstr ""
 
 #: cla_public/templates/privacy.html:233
 msgid ""
 "Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the\n"
-"        security of your data. Any data you transmit is at your own risk.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
-"        <br><br>\n"
-"        When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
+"          security of your data. Any data you transmit is at your own risk.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it.\n"
+"          <br><br>\n"
+"          When you email <abbr>CLA</abbr>, relevant personal data that you provide will be recorded within a secure digital system.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
 msgstr ""
 
 #: cla_public/templates/privacy.html:244
@@ -2255,9 +2255,9 @@ msgstr ""
 #: cla_public/templates/privacy.html:246
 msgid ""
 "When <abbr>CLA</abbr> receives post we may record relevant personal data included within a secure digital system.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked\n"
-"        filing cabinet. Digital copies of letters may be scanned and stored."
+"          <br><br>\n"
+"          <abbr>CLA</abbr> may also retain original hard-copies of information submitted by you. This must be stored in a locked\n"
+"          filing cabinet. Digital copies of letters may be scanned and stored."
 msgstr ""
 
 #: cla_public/templates/privacy.html:255
@@ -2281,12 +2281,12 @@ msgstr ""
 #: cla_public/templates/privacy.html:267
 msgid ""
 "<abbr>CLA</abbr> will accept contact made by a third-party on behalf of another person. The third party has to\n"
-"        demonstrate they have appropriate authority to act on your behalf.\n"
-"        <br><br>\n"
-"        <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice\n"
-"        and whether they are authorised to act on their behalf.\n"
-"        <br><br>\n"
-"        They must also agree a password to verify the identity of the third-party if they contact the service again."
+"          demonstrate they have appropriate authority to act on your behalf.\n"
+"          <br><br>\n"
+"          <abbr>CLA</abbr> must record the relationship between the third-party and the individual seeking advice\n"
+"          and whether they are authorised to act on their behalf.\n"
+"          <br><br>\n"
+"          They must also agree a password to verify the identity of the third-party if they contact the service again."
 msgstr ""
 
 #: cla_public/templates/privacy.html:277
@@ -2306,22 +2306,18 @@ msgid "When making outgoing calls to you, <abbr>CLA</abbr> will ensure that:"
 msgstr ""
 
 #: cla_public/templates/privacy.html:286
-msgid ""
-"Call backs are only made where you have agreed to this. Authorised third parties\n"
-"            acting on your behalf can give agreement."
+msgid "Call backs are only made where you have agreed to this. Authorised third parties acting on your behalf can give agreement."
 msgstr ""
 
 #: cla_public/templates/privacy.html:290
-msgid ""
-"Where a call back is made to you and there is no answer and a message taker is available,\n"
-"            no message will be left unless you have previously given specific instructions that this would be acceptable."
+msgid "Where a call back is made to you and there is no answer and a message taker is available, no message will be left unless you have previously given specific instructions that this would be acceptable."
 msgstr ""
 
 #: cla_public/templates/privacy.html:294
 msgid ""
 "Where the phone is answered and someone other than you answers the phone and says that you are\n"
-"            unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say\n"
-"            that they are calling from <abbr>CLA</abbr>."
+"              unavailable or asks who is calling, <abbr>CLA</abbr> will state that the call is confidential and will not say\n"
+"              that they are calling from <abbr>CLA</abbr>."
 msgstr ""
 
 #: cla_public/templates/privacy.html:304
@@ -2422,8 +2418,8 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:360
 msgid ""
-"External research organisations engaged by <abbr title=\"The Legal Aid Agency\">LAA</abbr>\n"
-"          or <abbr title=\"The Ministry of Justice\">MoJ</abbr>"
+"External research organisations engaged by <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
+"          or the <abbr title=\"Ministry of Justice\">MoJ</abbr>"
 msgstr ""
 
 #: cla_public/templates/privacy.html:364
@@ -2457,7 +2453,7 @@ msgid "To help you get further help and advice from appropriate organisations."
 msgstr ""
 
 #: cla_public/templates/privacy.html:387
-msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments.\n"
+msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments."
 msgstr ""
 
 #: cla_public/templates/privacy.html:395
@@ -2517,7 +2513,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/privacy.html:462
-msgid "You can also email at <a class=\"email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
+msgid "You can also email at <a class=\"govuk-link email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
 msgstr ""
 
 #: cla_public/templates/privacy.html:465
@@ -2600,7 +2596,7 @@ msgstr ""
 
 #: cla_public/templates/privacy.html:507
 msgid ""
-"You can also review our <a href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Personal Information Charter</a>\n"
+"You can also review our <a class=\"govuk-link\" href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Personal Information Charter</a>\n"
 "     which contains important information on your rights to access your personal information."
 msgstr ""
 
@@ -2708,7 +2704,7 @@ msgid "How to make a complaint."
 msgstr ""
 
 #: cla_public/templates/privacy.html:594
-msgid "For more information about the above issues, please contact the MoJ Data Protection Officer;"
+msgid "For more information about the above issues, please contact the <abbr>MoJ</abbr> Data Protection Officer:"
 msgstr ""
 
 #: cla_public/templates/privacy.html:609
@@ -2719,10 +2715,6 @@ msgstr ""
 msgid ""
 "When we ask you for information, we will comply with the law. If you consider that your information has been handled incorrectly, \n"
 "      you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
-msgstr ""
-
-#: cla_public/templates/privacy.html:625
-msgid "Tel:"
 msgstr ""
 
 #: cla_public/templates/privacy.html:631
@@ -3373,6 +3365,7 @@ msgstr ""
 msgid "We have not saved any information you have entered. When the service is available, you will have to start again."
 msgstr ""
 
+#: cla_public/templates/privacy.html:625
 #: cla_public/templates/errors/5xx.html:12
 msgid "Telephone:"
 msgstr ""

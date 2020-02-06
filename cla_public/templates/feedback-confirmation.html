@@ -3,15 +3,15 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% set title = _('Thanks for your feedback') %}
+{% set title = _('Thank you for your feedback') %}
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1 class="page-title">{{ title }}</h1>
-  <p>{{ _('We use the feedback to improve the service.')}} </p>
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <p class="govuk-body">{{ _('We use the feedback to improve the service.')}} </p>
 
-  <p>
-    <a href="https://gov.uk/check-if-civil-legal-advice-can-help-you" class="button" role="button">
+  <p class="govuk-body">
+    <a class="govuk-button" href="https://gov.uk/check-if-civil-legal-advice-can-help-you" role="button">
       {{ _('Back to home page') }}
     </a>
   </p>

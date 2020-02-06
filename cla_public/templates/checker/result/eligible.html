@@ -3,34 +3,34 @@
 {% import "macros/element.html" as Element %}
 
 {% block page_text %}
-  <h1 class="page-title">
+  <h1 class="govuk-heading-xl">
     {% trans %}Contact Civil Legal Advice{% endtrans %}
   </h1>
   {% if session.checker.need_more_info %}
-    <p>
+    <p class="govuk-body">
       {% trans %}To decide whether you might qualify for legal aid, we need more information about
       your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and
       Wales to get specialist advice.{% endtrans %}
     </p>
   {% else %}
-    <p>
+    <p class="govuk-body">
       {% trans %}Based on the answers you’ve given today, you might qualify for legal aid.
       Contact Civil Legal Advice (CLA), a national helpline for England and
       Wales, to confirm that you qualify, and get specialist advice if you do.{% endtrans %}
     </p>
-    <p>
+    <p class="govuk-body">
       {% trans %}In some cases, you may need to pay a contribution towards your legal aid.{% endtrans %}
     </p>
   {% endif %}
-  <p>
+  <p class="govuk-body">
     {% trans %}Complete your application by submitting your details
     below.{% endtrans %}
   </p>
-  <p>
+  <p class="govuk-body">
     {% trans call_charges_link=Element.link_new_window('https://www.gov.uk/call-charges', _('call charges'), True) %}
       You can choose to contact CLA yourself and speak to someone immediately (this is an 0345 number -
       {{ call_charges_link }} apply) or ask us to call you back, which is free.
     {% endtrans %}
   </p>
-  <p>{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
+  <p class="govuk-body">{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
 {% endblock %}
