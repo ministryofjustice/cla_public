@@ -129,8 +129,18 @@
         }
         var name = this.id.replace(/^field-/, '');
 
+        var labelField = $this.find('#field-label-' + name);
+
+        if (labelField.parents(".cla-currency-by-frequency").length) {
+          labelField = labelField.parents(".cla-currency-by-frequency").children("legend");
+        }
+
+        var labelText = labelField.text().replace(/if yes, /i,"").trim();
+
+        labelText = labelText.charAt(0).toUpperCase() + labelText.substr(1);
+
         errorSummary.push({
-          label: $this.find('#field-label-' + name).text(),
+          label: labelText,
           name: name,
           errors: $this.find('> .govuk-error-message > .cla-error-message').map(function() {
             return $(this).text();
@@ -174,6 +184,10 @@
           .closest('.govuk-form-group').addClass('govuk-form-group--error');
 
         var label = $('#field-label-' + fieldName);
+
+        if (label.parents(".cla-currency-by-frequency").length) {
+          label = label.parents(".cla-currency-by-frequency").children("legend");
+        }
 
         if(!label.length) {
           unattachedErrors = _.extend(unattachedErrors, errors);

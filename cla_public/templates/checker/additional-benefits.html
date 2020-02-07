@@ -18,7 +18,7 @@
 
     {% call Form.fieldset(form.other_benefits, 'form-group') %}
       <div class="govuk-radios__conditional">
-        {{ Form.group(form.total_other_benefit, '', controlled_by=form.other_benefits) }}
+        {{ Form.currency_fieldset(form.total_other_benefit, '', controlled_by=form.other_benefits) }}
       </div>
     {% endcall %}
 
@@ -28,9 +28,4 @@
   {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
 
-  <script>
-    window.CONDITIONAL_LABELS = {
-      'total_other_benefit': '{{ _('Total amount of benefits not listed above') }}'
-    };
-  </script>
 {% endblock %}

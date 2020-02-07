@@ -84,6 +84,9 @@
         .toggleClass('s-hidden', !isVisible)
         .attr('aria-hidden', !isVisible);
       $controlInput.attr('aria-expanded', isVisible);
+      $field.parent('.govuk-radios__conditional')
+        .toggleClass('s-expanded', isVisible)
+        .toggleClass('s-hidden', !isVisible);
 
       if(!isVisible && !$field.data('persist-values')) {
         $field.find('input')
