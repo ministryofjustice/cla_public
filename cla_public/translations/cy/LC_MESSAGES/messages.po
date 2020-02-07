@@ -2537,7 +2537,7 @@ msgstr "Gallwch ddarganfod a ydym yn cadw unrhyw ddata personol amdanoch a gofyn
 
 #: cla_public/templates/privacy.html:462
 msgid "You can also email at <a class=\"govuk-link email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
-msgstr "Gallwch hefyd anfon e-bost i <a class=\"email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
+msgstr "Gallwch hefyd anfon e-bost i <a class=\"govuk-link email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
 
 #: cla_public/templates/privacy.html:465
 msgid "When making a subject access request for a copy of your personal information, please provide the following information:"
@@ -2621,7 +2621,7 @@ msgstr "Nid ydym yn codi tâl am ddarparu’r wybodaeth hon, ond os byddwn yn cr
 msgid ""
 "You can also review our <a class=\"govuk-link\" href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Personal Information Charter</a>\n"
 "     which contains important information on your rights to access your personal information."
-msgstr "Gallwch hefyd edrych ar ein <a href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Siarter Gwybodaeth Bersonol</a> sy’n cynnwys gwybodaeth bwysig am eich hawl i gael mynediad at wybodaeth bersonol a gedwir amdanoch."
+msgstr "Gallwch hefyd edrych ar ein <a class=\"govuk-link\" href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Siarter Gwybodaeth Bersonol</a> sy’n cynnwys gwybodaeth bwysig am eich hawl i gael mynediad at wybodaeth bersonol a gedwir amdanoch."
 
 #: cla_public/templates/privacy.html:511
 msgid "How you can request to have your personal data amended or deleted?"
