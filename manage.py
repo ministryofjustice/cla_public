@@ -37,6 +37,14 @@ def test(i=False):
     run(nosetests)
 
 
+@manager.command
+def test_with_coverage():
+    """Run the tests. Pass -i to run integration tests as well"""
+    ignore_integration = " --with-coverage --cover-package=cla_public --cover-html --cover-html-dir=htmlcov -e=*_integration.py -e=*test_diagnosis_api* -e=*test_reasons_for_contacting*"
+    nosetests = "{venv}/bin/nosetests{integration}".format(venv=VENV, integration=ignore_integration)
+    run(nosetests)
+
+
 def add_msgctxt(**format_kwargs):
     """add msgctxt to pot file as babel doesn't seem to correctly add this for pgettext"""
     cmd = (

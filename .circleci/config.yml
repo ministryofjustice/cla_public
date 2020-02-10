@@ -130,6 +130,8 @@ jobs:
           command: |
             source env/bin/activate
             python manage.py test
+      - store_artifacts:
+          path: htmlcov
 
   staging_deploy:
     docker:
