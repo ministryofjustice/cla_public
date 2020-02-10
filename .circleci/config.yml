@@ -129,7 +129,7 @@ jobs:
           name: Run unit tests
           command: |
             source env/bin/activate
-            python manage.py test_with_coverage
+            python manage.py test
             coveralls
       - store_test_results:
           path: test-reports
