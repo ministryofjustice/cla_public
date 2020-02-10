@@ -35,13 +35,26 @@
     {% if nodes|length > 0 %}
       {% for node in nodes %}
         {% if loop.index == nodes|length %}
-          <a href="{{ url }}" class="govuk-back-link last">Back</a>
+          <a href="{{ url }}" class="govuk-back-link">Back</a>
         {% else %}
           {% set url = [url, node.id]|join('/') %}
         {% endif %}
       {% endfor %}
     {% endif %}
+  {% else %}
+    {% set url = '/about' %}
+    {% for step in steps if step.name in ['problem', 'about']
+      or (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed)
+    %}
+      {% if step.is_current %}
+          <a href="{{ url }}" class="govuk-back-link">Back</a>
+      {% else %}  
+          {% set url = url_for('checker.wizard', step=step.name) %}
+      {% endif %}
+    {% endfor %}
   {% endif %}
+  
+  
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     <div class="govuk-grid-row">
         {% with flash_messages = get_flashed_messages() %}
