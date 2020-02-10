@@ -43,13 +43,13 @@
     {% endif %}
   {% else %}
     {% set url = '/about' %}
-    {% for step in steps if step.name in ['problem', 'about']
-      or (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed)
-    %}
-      {% if step.is_current %}
+    {% for step in steps %}
+      {% if (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
+        {% if step.is_current %}
           <a href="{{ url }}" class="govuk-back-link">Back</a>
-      {% else %}  
+        {% else %}  
           {% set url = url_for('checker.wizard', step=step.name) %}
+        {% endif %}
       {% endif %}
     {% endfor %}
   {% endif %}
