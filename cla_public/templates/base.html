@@ -26,6 +26,9 @@
 {% block before_content %}
   {% include "_phase-tag.html" %}
 {% endblock %}
+{% block back_navigation %}
+  {% include "_back-navigation.html" %}
+{% endblock %}
 
 {% block content %}
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
