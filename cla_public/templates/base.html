@@ -31,10 +31,14 @@
 
 {% block content %}
   {% if 'diagnosis/n' in request.path -%}
+    {% set url = '/scope/diagnosis' %}
     {% if nodes|length > 0 %}
-      <a href="{{ url }}" class="govuk-back-link">Back</a>
       {% for node in nodes %}
-        {% set url = [url, node.id]|join('/') %}
+        {% if loop.index == nodes|length %}
+          <a href="{{ url }}" class="govuk-back-link last">Back</a>
+        {% else %}
+          {% set url = [url, node.id]|join('/') %}
+        {% endif %}
       {% endfor %}
     {% endif %}
   {% endif %}
