@@ -129,7 +129,8 @@ jobs:
           name: Run unit tests
           command: |
             source env/bin/activate
-            python manage.py test
+            python manage.py test_with_coverage
+            coveralls
       - store_artifacts:
           path: htmlcov
 
