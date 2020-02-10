@@ -40,7 +40,7 @@ def test(i=False):
 @manager.command
 def test_with_coverage():
     """Run the tests. Pass -i to run integration tests as well"""
-    ignore_integration = " --with-coverage --cover-package=cla_public --cover-html --cover-html-dir=htmlcov -e=*_integration.py -e=*test_diagnosis_api* -e=*test_reasons_for_contacting*"
+    ignore_integration = " --with-coverage --cover-package=cla_public --cover-html --cover-html-dir=htmlcov --cover-xml --cover-xml-file=test-results/junit.xml -e=*_integration.py -e=*test_diagnosis_api* -e=*test_reasons_for_contacting*"
     nosetests = "{venv}/bin/nosetests{integration}".format(venv=VENV, integration=ignore_integration)
     run(nosetests)
 
