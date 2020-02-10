@@ -26,11 +26,18 @@
 {% block before_content %}
   {% include "_phase-tag.html" %}
 {% endblock %}
-{% block back_navigation %}
-  {% include "_back-navigation.html" %}
-{% endblock %}
+{% block back_navigation %}{% endblock %}
+
 
 {% block content %}
+  {% if 'diagnosis/n' in request.path -%}
+    {% if nodes|length > 0 %}
+      <a href="{{ url }}" class="govuk-back-link">Back</a>
+      {% for node in nodes %}
+        {% set url = [url, node.id]|join('/') %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     <div class="govuk-grid-row">
         {% with flash_messages = get_flashed_messages() %}

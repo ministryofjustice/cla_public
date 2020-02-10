@@ -1,7 +1,0 @@
-{% if 'diagnosis/n' in request.path -%}
-  {% if nodes|length > 0 %}
-    {% for node in nodes %}
-      {% set url = [url, node.id]|join('/') %}
-    {% endfor %}
-  {% endif %}  <a href="{{ url }}" class="govuk-back-link">Back</a>
-{%- endif -%}
