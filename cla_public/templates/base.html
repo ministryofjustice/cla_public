@@ -43,20 +43,12 @@
     {% endif %}
   {% else %}
     {% if (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
-{#
-      For when the CYA screen is visible
-      But this will only work if we can also jump back to it on complete...
-
-      {% if not has_remaining_forms and current_step.name != 'review' %}
-        <a href="/review" class="govuk-back-link">Back</a>
-      {% else %}
-        below code goes here
-      {% endif %}
-#}
       {% set url = '/about' %}
       {% for step in steps %}
         {% if step.is_current %}
-          <a href="{{ url }}" class="govuk-back-link">Back</a>
+          {% if not step.name == 'about' %}
+            <a href="{{ url }}" class="govuk-back-link">Back</a>
+          {% endif %}
         {% else %}
           {% set url = url_for('checker.wizard', step=step.name) %}
         {% endif %}
