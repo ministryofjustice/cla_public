@@ -42,19 +42,28 @@
       {% endfor %}
     {% endif %}
   {% else %}
-    {% set url = '/about' %}
-    {% for step in steps %}
-      {% if (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
+    {% if (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
+{#
+      For when the CYA screen is visible
+      But this will only work if we can also jump back to it on complete...
+
+      {% if not has_remaining_forms and current_step.name != 'review' %}
+        <a href="/review" class="govuk-back-link">Back</a>
+      {% else %}
+        below code goes here
+      {% endif %}
+#}
+      {% set url = '/about' %}
+      {% for step in steps %}
         {% if step.is_current %}
           <a href="{{ url }}" class="govuk-back-link">Back</a>
-        {% else %}  
+        {% else %}
           {% set url = url_for('checker.wizard', step=step.name) %}
         {% endif %}
-      {% endif %}
-    {% endfor %}
+      {% endfor %}
+    {% endif %}
   {% endif %}
-  
-  
+
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     <div class="govuk-grid-row">
         {% with flash_messages = get_flashed_messages() %}
