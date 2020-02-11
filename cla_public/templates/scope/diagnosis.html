@@ -9,45 +9,6 @@
 
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
-{% block sidebar %}
-  <aside class="sidebar">
-    <div class="progress answers-summary">
-      <h2>{{ _('Your answers') }}</h2>
-
-      {% set url = '/scope/diagnosis' %}
-      {% set firstquestion = _('Choose the area you most need help with') %}
-
-      <ul class="answers">
-        {% if nodes|length > 0 %}
-          {% for node in nodes %}
-            {% set question = firstquestion if loop.index0 == 0 else nodes[loop.index0 - 1].heading %}
-              <li class="answers-item progress-step">
-                <a href="{{ url }}" class="question step-name">
-                  <div class="question">
-                    <span class="review-ui-label">{{ _('Question') }}</span>
-                    {{ question }}
-                  </div>
-                  <div class="answer">
-                    <span class="review-ui-label">{{ _('Answer') }}</span>
-                    <strong>{{ node.label|striptags }}</strong>
-                  </div>
-                </a>
-              </li>
-            {% set url = [url, node.id]|join('/') %}
-          {% endfor %}
-        {% endif %}
-        <li class="progress-step m-current">
-          <span class="step-name">
-            <span class="step-status">{{ _('(current)') }}</span>
-            <span class="step-name-title">{{ title if nodes|length > 0 else firstquestion }}</span>
-          </span>
-        </li>
-      </ul>
-    </div>
-  </aside>
-{% endblock %}
-
-
 {% block inner_content %}
   <h1 class="govuk-heading-xl">{{ title }}</h1>
 
