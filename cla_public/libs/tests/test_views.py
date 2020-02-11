@@ -32,6 +32,7 @@ class TestSessionBackedFormView(unittest.TestCase):
         app.add_url_rule(
             "/session-expired", endpoint="base.session_expired", view_func=lambda request: "Session expired"
         )
+        self.ctx = app.test_request_context()
         self.client = app.test_client()
         with self.client.session_transaction() as sess:
             sess.checker["foo"] = "bar"

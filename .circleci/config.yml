@@ -129,10 +129,13 @@ jobs:
           name: Run unit tests
           command: |
             source env/bin/activate
-            # nosetests doesn't --with-xunit doesn't create the test-reports directory if doesn't exist and complains about it
-            mkdir -p test-reports
-            python manage.py test
+            coverage run manage.py test
+            coverage report -m
+            coverage html
             coveralls
+      - store_artifacts:
+          path: htmlcov
+          destination: coverage
       - store_test_results:
           path: test-reports
       - store_artifacts:

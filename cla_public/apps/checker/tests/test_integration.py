@@ -235,6 +235,7 @@ def create_tests():
             setattr(TestMeansTest, test_name(row), make_test(row))
 
 
-create_tests.__test__ = False
+# create_tests.__test__ = False
 
-create_tests()
+# Skip this tests until request is mocked. These were ignored before with nosetests
+# create_tests()

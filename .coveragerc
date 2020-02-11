@@ -1,0 +1,6 @@
+[run]
+source = cla_public
+omit =
+ cla_public/config/*
+ */tests.py
+ */tests/*
