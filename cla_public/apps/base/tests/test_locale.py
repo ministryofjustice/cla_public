@@ -8,9 +8,12 @@ from cla_public.app import create_app
 class LocaleTest(unittest.TestCase):
     def setUp(self):
         self.app = create_app("config/testing.py")
-        ctx = self.app.test_request_context()
-        ctx.push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
         self.client = self.app.test_client()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def test_locale_cookie_is_set(self):
         with self.app.test_client() as client:

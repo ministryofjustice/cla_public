@@ -45,6 +45,7 @@ class TestAvailability(unittest.TestCase):
 
     def tearDown(self):
         self.patcher.stop()
+        self.ctx.pop()
 
     def assertAvailable(self, time, form=None):
         form = form or Mock()
@@ -208,7 +209,11 @@ class TestCallbackInPastBug(unittest.TestCase):
 
     def setUp(self):
         self.app = create_app("config/testing.py")
-        self.app.test_request_context().push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def test_EU_5247_5578(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):

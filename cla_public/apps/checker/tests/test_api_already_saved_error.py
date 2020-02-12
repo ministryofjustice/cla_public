@@ -42,6 +42,9 @@ class ApiAlreadySavedErrorTestCase(unittest.TestCase):
         self._ctx.push()
         self.client = self.app.test_client()
 
+    def tearDown(self):
+        self._ctx.pop()
+
     def test_mock_session_send_post_to_case_api(self):
         form = ContactForm()
         with patch("requests.Session.send", _mock_session_send), patch(

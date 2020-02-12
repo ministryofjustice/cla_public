@@ -97,8 +97,12 @@ class TestMeansTest(unittest.TestCase):
     def setUp(self):
         self.app = create_app("config/testing.py")
         self.client = self.app.test_client()
-        self.app.test_request_context().push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
         session.clear()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def assertDictValues(self, expected, actual):
         for key, val in actual.items():

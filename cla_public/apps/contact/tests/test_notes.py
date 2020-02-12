@@ -13,7 +13,11 @@ def submit(**kwargs):
 class NotesTest(unittest.TestCase):
     def setUp(self):
         app = create_app("config/testing.py")
-        app.test_request_context().push()
+        self.ctx = app.test_request_context()
+        self.ctx.push()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def validate_notes(self, notes):
         form = submit(extra_notes=notes)

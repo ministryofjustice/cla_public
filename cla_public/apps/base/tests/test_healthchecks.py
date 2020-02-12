@@ -38,7 +38,11 @@ class DiskSpaceHealthcheckTest(unittest.TestCase):
 class BackendAPIHealthcheckTest(unittest.TestCase):
     def setUp(self):
         self.app = app.create_app("config/testing.py")
-        self.app.test_request_context().push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     @mock.patch("requests.get")
     def test_backend_check_fails_if_request_fails(self, request_mock):
@@ -70,8 +74,12 @@ class HealthcheckEndpointTest(unittest.TestCase):
 
     def setUp(self):
         self.app = app.create_app("config/testing.py")
-        self.app.test_request_context().push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
         self.client = self.app.test_client()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def assert_response_is_service_unavailable(self):
         result = self.client.get("/healthcheck.json")

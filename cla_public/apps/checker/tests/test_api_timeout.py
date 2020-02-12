@@ -10,11 +10,15 @@ from cla_public.apps.checker.constants import NO, YES
 class TestApiTimeout(unittest.TestCase):
     def setUp(self):
         app = create_app("config/testing.py")
-        app.test_request_context().push()
+        self.ctx = app.test_request_context()
+        self.ctx.push()
         self.client = app.test_client()
         with self.client.session_transaction() as session:
             session["test"] = True
             session.checker["test"] = True
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def test_form_error_on_api_timeout(self):
         def timeout(*args, **kwargs):

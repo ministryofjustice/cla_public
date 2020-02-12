@@ -64,7 +64,11 @@ class TestCaitIntervention(unittest.TestCase):
     def setUp(self):
         self.app = create_app("config/testing.py")
         self.client = self.app.test_client()
-        self.app.test_request_context().push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     @mock.patch(ORGANISATION_LIST, setup_organisation_list())
     def test_direct_pathway(self):

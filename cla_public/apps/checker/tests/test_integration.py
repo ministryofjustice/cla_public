@@ -102,9 +102,12 @@ def is_eligible(acc, step):
 class TestMeansTest(unittest.TestCase):
     def setUp(self):
         self.app = app.create_app("config/testing.py")
-        ctx = self.app.test_request_context()
-        ctx.push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
         self.client = self.app.test_client()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def assertMeansTest(self, expected_result, case):
         def debug_is_eligible(acc, step):

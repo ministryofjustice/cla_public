@@ -41,6 +41,7 @@ class TestApiPayloads(unittest.TestCase):
 
     def tearDown(self):
         self.patcher.stop()
+        self._ctx.pop()
 
     def merge_money_intervals(self, form_data, form_mi_data):
         for field_name, money_interval_dict in form_mi_data.items():

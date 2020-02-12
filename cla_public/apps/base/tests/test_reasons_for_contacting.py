@@ -13,8 +13,12 @@ from cla_public.apps.checker.api import post_reasons_for_contacting
 class ReasonsForContactingTestCase(unittest.TestCase):
     def setUp(self):
         self.app = app.create_app("config/testing.py")
-        self.app.test_request_context().push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
         self.client = self.app.test_client()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     @unittest.skip("Skip this tests until request is mocked. These were ignored before with nosetests")
     def test_submission(self):

@@ -27,6 +27,10 @@ class TestValidation(unittest.TestCase):
         self.context = app.test_request_context()
         self.context.push()
 
+    def tearDown(self):
+        super(TestValidation, self).tearDown()
+        self.context.pop()
+
     def test_too_many_kids(self):
         num = 51
         form = submit(have_children=True, num_children=num)

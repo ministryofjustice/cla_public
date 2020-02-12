@@ -8,10 +8,13 @@ from cla_public.apps.scope.api import diagnosis_api_client as api
 class TestReviewPage(unittest.TestCase):
     def setUp(self):
         self.app = create_app("config/testing.py")
-        ctx = self.app.test_request_context()
-        ctx.push()
+        self.ctx = self.app.test_request_context()
+        self.ctx.push()
         self.client = self.app.test_client()
         api.create_diagnosis()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def assertResponseHasNNodes(self, resp, n):
         self.assertEqual(resp.status_code, 200)

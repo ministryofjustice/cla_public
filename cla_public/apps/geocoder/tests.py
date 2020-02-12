@@ -12,7 +12,11 @@ class GeocoderTest(unittest.TestCase):
     def setUp(self):
         app = create_app("config/testing.py")
         app.config["OS_PLACES_API_KEY"] = "DUMMY_TOKEN"
-        app.test_request_context().push()
+        self.ctx = app.test_request_context()
+        self.ctx.push()
+
+    def tearDown(self):
+        self.ctx.pop()
 
     def test_response_packaging(self):
         expected_formatted_result = json.dumps([{"formatted_address": self.prerecorded_result}])

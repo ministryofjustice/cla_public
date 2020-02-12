@@ -43,6 +43,7 @@ class TestFormConfig(unittest.TestCase):
 
     def tearDown(self):
         self.patcher.stop()
+        self._ctx.pop()
 
     def test_field_more_info(self):
         form = TestConfigForm(config_path=FORMS_CONFIG_PATH)

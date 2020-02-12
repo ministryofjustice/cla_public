@@ -34,7 +34,7 @@ def test():
     import xmlrunner
     import unittest
 
-    xmlrunner.XMLTestRunner(output="xml_test_result").run(unittest.TestLoader().discover("cla_public"))
+    xmlrunner.XMLTestRunner(output="test-reports", verbosity=3).run(unittest.TestLoader().discover("cla_public"))
 
 
 def add_msgctxt(**format_kwargs):
