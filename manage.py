@@ -31,7 +31,10 @@ def run(command, **kwargs):
 
 @manager.command
 def test():
-    run("python -m xmlrunner discover -t . -o test-reports")
+    import xmlrunner
+    import unittest
+
+    xmlrunner.XMLTestRunner(output="xml_test_result").run(unittest.TestLoader().discover("cla_public"))
 
 
 def add_msgctxt(**format_kwargs):
