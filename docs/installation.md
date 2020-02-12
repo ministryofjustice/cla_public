@@ -22,7 +22,15 @@ Next, create the environment and start it up:
 
     pip install -r requirements/dev.txt
 
+    nvm install v8.12
+
+    nvm use v8.12
+
     npm install -g gulp
+
+    npm install
+
+    gulp
 
 Create a ``local.py`` settings file from the example file:
 
