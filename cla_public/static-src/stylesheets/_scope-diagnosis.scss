@@ -6,19 +6,20 @@
   padding-inline-start: 0;
 }
 
-.scope-options-list-item {
+.cla-scope-options-list-item {
   margin-bottom: 10px;
-  background-color: #dee0e2;
   background-color: $grey-3;
+  background-color: #f3f2f1;
   padding: 0;
   position: relative;
 
-  a {
+  a.cla-scope-options-list-item-link {
     display: block;
     text-decoration: none;
     color: $govuk-text-colour;
     padding: 13px 60px 10px 25px;
     border: 1px solid transparent;
+    box-shadow: 0 2px 0 #929191;
 
     &:before {
       position: absolute;
@@ -49,13 +50,12 @@
       box-shadow: inset 0 0 0 1px $govuk-focus-colour;
     }
 
-    &:active {
-      top: 2px;
+    &:active:before {
+      right: 24px;
     }
 
     &:hover {
       background-color: #dbdad9;
-      background-color: $grey-4;
     }
   }
 }
