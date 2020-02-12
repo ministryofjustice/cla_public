@@ -20,9 +20,9 @@
     {% for choice in choices %}
       <li class="cla-scope-options-list-item">
         <a class="cla-scope-options-list-item-link" href="{{ choice.url }}"{% if not nodes|length %} data-ga="event:category-of-law/{{ choice.label|striptags }}"{% endif %} role="button">
-          <h2 class="govuk-heading-m">{{ choice.label|safe|striptags }}</h2>
+          <h2 class="govuk-heading-m govuk-!-margin-2">{{ choice.label|safe|striptags }}</h2>
           {% if choice.help_text %}
-            <p class="govuk-body">{{ choice.help_text|safe|striptags }}</p>
+            <p class="govuk-body govuk-!-margin-2">{{ choice.help_text|safe|striptags }}</p>
           {% endif %}
         </a>
       </li>
