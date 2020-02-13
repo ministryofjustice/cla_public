@@ -936,11 +936,11 @@ msgstr "Rhowch gynnig arni eto yn nes ymlaen."
 
 #: cla_public/apps/contact/constants.py:9
 msgid "Call today"
-msgstr ""
+msgstr "Ffoniwch heddiw"
 
 #: cla_public/apps/contact/constants.py:9
 msgid "Call on another day"
-msgstr ""
+msgstr "Ffoniwch ar ddiwrnod arall"
 
 #: cla_public/apps/contact/fields.py:43
 msgid "Not a valid choice"
@@ -3714,7 +3714,7 @@ msgid ""
 "\n"
 "          You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
 "        "
-msgstr ""
+msgstr "Gallwch hefyd gyflwyno cais yn uniongyrchol i’r Asiantaeth Cymorth Cyfreithiol."
 
 #: cla_public/templates/scope/ineligible.html:47
 msgid "You can still ask a solicitor for help – you will have to pay for their advice."
@@ -4167,7 +4167,7 @@ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 #~ "\n"
 #~ "        You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
 #~ "      "
-#~ msgstr ""
+#~ msgstr "Gallwch hefyd gyflwyno cais yn uniongyrchol i’r Asiantaeth Cymorth Cyfreithiol."
 
 #~ msgid "optional"
 #~ msgstr "dewisol"
