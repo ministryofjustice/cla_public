@@ -2,7 +2,9 @@
 
 {% macro option_list_callback(field, option) %}
   {% if option.data == 'child_benefit' %}
-    {{ Form.group(form.child_benefit, 'form-subfield', controlled_by=option, control_value=option.data) }}
+    <div class="govuk-radios__conditional">
+      {{ Form.currency_fieldset(form.child_benefit, ' ', controlled_by=option, control_value=option.data) }}
+    </div>
   {% endif %}
 {% endmacro %}
 
@@ -32,11 +34,4 @@
 
 {% block javascripts %}
   {{ super() }}
-
-  <script>
-    window.CONDITIONAL_LABELS = {
-      'child_benefit': '{{ _('Enter the total amount you receive') }}',
-      'total_other_benefit': '{{ _('Enter the total amount you receive') }}'
-    };
- </script>
 {% endblock %}

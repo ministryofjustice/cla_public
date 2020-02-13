@@ -119,6 +119,10 @@ fieldset.govuk-form-group--error {
   border-left:5px solid $govuk-error-colour;
 }
 
+.cla-currency-by-frequency .govuk-form-group {
+  margin-bottom: 8px;
+}
+
 .contact-form {
   margin-top: 40px;
 }
@@ -250,6 +254,12 @@ dl.govuk-list.govuk-list--bullet {
     content: "";
   }
 }
-.govuk-label:not(.govuk-radios__label):not(.govuk-checkboxes__label) {
+.govuk-label:not(.govuk-radios__label):not(.govuk-checkboxes__label),
+.govuk-fieldset__legend {
   font-weight:700;
+}
+.laa-currency-period-input__item {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 0;
 }

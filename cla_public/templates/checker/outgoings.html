@@ -8,11 +8,11 @@
     {{ form.csrf_token }}
     {{ Form.handle_errors(form) }}
 
-    {{ Form.group(form.rent) }}
-    {{ Form.group(form.maintenance) }}
+    {{ Form.currency_fieldset(form.rent) }}
+    {{ Form.currency_fieldset(form.maintenance) }}
     {{ Form.group(form.income_contribution, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
     {% if session.checker.has_children or session.checker.has_dependants %}
-      {{ Form.group(form.childcare, skip=not session.checker.has_children and not session.checker.has_dependants) }}
+      {{ Form.currency_fieldset(form.childcare, skip=not session.checker.has_children and not session.checker.has_dependants) }}
     {% endif %}
 
     {{ Form.honeypot(form) }}

@@ -176,6 +176,79 @@
   </div>
 {% endmacro %}
 
+{#
+  For currency per period
+#}
+{% macro currency_fieldset(field=None, class_='', field_attrs={}) %}
+  {% set controlled_by = kwargs.controlled_by %}
+  {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
+  {% set use_row = kwargs.use_row if kwargs.use_row is defined else True %}
+  {% set group_class = 'govuk-form-group %s' % class_ %}
+
+  <div class="
+      {{- group_class -}}
+      {%- if field and field.errors %} govuk-form-group--error{% endif -%}
+      {%- if controlled_by and control_value %} s-hidden{% endif -%}
+      {{- ' ' -}}
+      {{- kwargs.row_class -}}
+    "
+    {% if controlled_by %}data-controlled-by="{{ controlled_by.name }}" data-control-value="{{ control_value }}"{% endif %}
+    {% if field %}id="field-{{ field.id }}"{% endif %}
+  >
+    <fieldset class="govuk-fieldset cla-currency-by-frequency" role="group" aria-describedby="{{ field.id }}-hint">
+      <legend class="govuk-fieldset__legend">
+        {{ field.label.text }}
+      </legend>
+      {% if field.description %}
+        {{ render_field_description(field) }}
+      {% else %}
+        <span id="{{ field.id }}-hint" class="govuk-hint">
+          {% trans %}For example, £32.18 per week{% endtrans %}
+        </span>
+      {% endif %}
+      {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
+        {{ render_field_errors(field.errors) }}
+      {% endif %}
+      {% if use_row and (field or caller) %}
+        <div class="form-row {{ kwargs.row_class }}">
+          {% if field %}
+            {% if skip %}
+              <input type="hidden" name="{{ field.per_interval_value.name }}" value="0">
+              <input type="hidden" name="{{ field.interval_period.name }}" value="per_week">
+            {% else %}
+              <div class="govuk-form-group laa-currency-period-input__item">
+                {{ render_field_label(field, kwargs.hide_label, _('Amount')) }}
+                <div class="laa-currency">
+                  <span class="laa-currency-prefix">£</span>
+                  {{ field.per_interval_value(class_='govuk-input govuk-input--width-10 ', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+                </div>
+              </div>
+              <div class="govuk-form-group laa-currency-period-input__item">
+                {{
+                  field.label(
+                      for=field.interval_period.id if field.interval_period else field.id,
+                      text=_("Frequency"),
+                      id="field-label-frequency-%s" % field.id,
+                      class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
+                  )
+                }}
+                {{ field.interval_period(class_='govuk-select') }}
+              </div>
+            {% endif %}
+          {% endif %}
+          {% if caller %}
+            {{ caller() }}
+          {% endif %}
+        </div>
+      {% elif caller %}
+        {{ caller() }}
+      {% elif field %}
+        {{ render_field(field, field_attrs) }}
+      {% endif %}
+    </fieldset>
+  </div>
+{% endmacro %}
+
 
 {#
   Renders appropriate input macro for a field
@@ -435,10 +508,10 @@
           {{ option.label.text }}
         </label>
 
-        {% if callback %}
-          {{ callback(field, option) }}
-        {% endif %}
       </div>
+      {% if callback %}
+        {{ callback(field, option) }}
+      {% endif %}
     {% endfor %}
   {% endif %}
   </div>

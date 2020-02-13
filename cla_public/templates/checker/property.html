@@ -35,7 +35,7 @@
 
           {% call Form.fieldset(property.is_rented) %}
             <div class="govuk-radios__conditional">
-              {{ Form.group(property.rent_amount, '', controlled_by=property.is_rented) }}
+              {{ Form.currency_fieldset(property.rent_amount, '', controlled_by=property.is_rented) }}
             </div>
           {% endcall %}
 
@@ -59,11 +59,4 @@
   {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
 
-  <script>
-    window.CONDITIONAL_LABELS = {
-      'properties-0-rent_amount': '{{ _('How much rent did you receive last month?') }}',
-      'properties-1-rent_amount': '{{ _('How much rent did you receive last month?') }}',
-      'properties-2-rent_amount': '{{ _('How much rent did you receive last month?') }}'
-    };
-  </script>
 {% endblock %}

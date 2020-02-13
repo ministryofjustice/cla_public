@@ -20,18 +20,18 @@
             partner in the next section.{% endtrans %}
           </p>
       {% endif %}
-        {% if not skip %}
-          {{ Form.group(form.your_income.earnings, skip=skip) }}
-          {{ Form.group(form.your_income.income_tax, skip=skip) }}
-          {{ Form.group(form.your_income.national_insurance, skip=skip) }}
-          {{ Form.group(form.your_income.working_tax_credit, skip=skip) }}
-        {% endif %}
-        {% if session.checker.has_children or session.checker.has_dependants %}
-          {{ Form.group(form.your_income.child_tax_credit) }}
-        {% endif %}
-          {{ Form.group(form.your_income.maintenance) }}
-          {{ Form.group(form.your_income.pension) }}
-          {{ Form.group(form.your_income.other_income) }}
+      {% if not skip %}
+        {{ Form.currency_fieldset(form.your_income.earnings, skip=skip) }}
+        {{ Form.currency_fieldset(form.your_income.income_tax, skip=skip) }}
+        {{ Form.currency_fieldset(form.your_income.national_insurance, skip=skip) }}
+        {{ Form.currency_fieldset(form.your_income.working_tax_credit, skip=skip) }}
+      {% endif %}
+      {% if session.checker.has_children or session.checker.has_dependants %}
+        {{ Form.currency_fieldset(form.your_income.child_tax_credit) }}
+      {% endif %}
+      {{ Form.currency_fieldset(form.your_income.maintenance) }}
+      {{ Form.currency_fieldset(form.your_income.pension) }}
+      {{ Form.currency_fieldset(form.your_income.other_income) }}
       {% if session.checker.has_partner %}
         </fieldset>
       {% endif %}
@@ -41,14 +41,14 @@
         {% with skip_for_partner = not (session.checker.partner_is_employed or session.checker.partner_is_self_employed) %}
           <h2 class="govuk-heading-l">{{ _('Your partner’s money') }}</h3>
           {% if not skip_for_partner %}
-            {{ Form.group(form.partner_income.earnings, skip=skip_for_partner) }}
-            {{ Form.group(form.partner_income.income_tax, skip=skip_for_partner) }}
-            {{ Form.group(form.partner_income.national_insurance, skip=skip_for_partner) }}
-            {{ Form.group(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
+            {{ Form.currency_fieldset(form.partner_income.earnings, skip=skip_for_partner) }}
+            {{ Form.currency_fieldset(form.partner_income.income_tax, skip=skip_for_partner) }}
+            {{ Form.currency_fieldset(form.partner_income.national_insurance, skip=skip_for_partner) }}
+            {{ Form.currency_fieldset(form.partner_income.working_tax_credit, skip=skip_for_partner) }}
           {% endif %}
-          {{ Form.group(form.partner_income.maintenance) }}
-          {{ Form.group(form.partner_income.pension) }}
-          {{ Form.group(form.partner_income.other_income) }}
+          {{ Form.currency_fieldset(form.partner_income.maintenance) }}
+          {{ Form.currency_fieldset(form.partner_income.pension) }}
+          {{ Form.currency_fieldset(form.partner_income.other_income) }}
         {% endwith %}
       </fieldset>
     {% endif %}
