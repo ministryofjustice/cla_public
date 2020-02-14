@@ -28,6 +28,32 @@
 {% endblock %}
 
 {% block content %}
+  {% if 'diagnosis/n' in request.path -%}
+    {% set url = '/scope/diagnosis' %}
+    {% if nodes|length > 0 %}
+      {% for node in nodes %}
+        {% if loop.index == nodes|length %}
+          <a href="{{ url }}" class="govuk-back-link">{{ _('Back') }}</a>
+        {% else %}
+          {% set url = [url, node.id]|join('/') %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% else %}
+    {% if (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
+      {% set url = '/about' %}
+      {% for step in steps %}
+        {% if step.is_current %}
+          {% if not step.name == 'about' %}
+            <a href="{{ url }}" class="govuk-back-link">{{ _('Back') }}</a>
+          {% endif %}
+        {% else %}
+          {% set url = url_for('checker.wizard', step=step.name) %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     <div class="govuk-grid-row">
         {% with flash_messages = get_flashed_messages() %}
