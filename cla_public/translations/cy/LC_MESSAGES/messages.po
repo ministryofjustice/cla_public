@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: cla_public/templates/macros/form.html:305 - DO NOT DELETE
+#: cla_public/templates/macros/form.html:305 - DO NOT DELETE (can be deleted by the auto-update process)
 msgid "optional"
 msgstr "dewisol"
 
@@ -244,7 +244,7 @@ msgstr "Cymryd camau cyfreithiol yn erbyn corff cyhoeddus, fel y cyngor lleol"
 
 #: cla_public/apps/checker/constants.py:58
 msgid "Trouble with the police"
-msgstr "Trafferth gyda'r heddlu ac awdurdodau cyhoeddus eraill"
+msgstr "Trafferth gyda’r heddlu ac awdurdodau cyhoeddus eraill"
 
 #: cla_public/apps/checker/constants.py:59
 msgid "Being treated unlawfully by authorities who detain, imprison and prosecute (for example, the police), abuse in care cases"
@@ -397,7 +397,7 @@ msgstr "Mi wnâi ffonio’r CLA"
 
 #: cla_public/apps/checker/constants.py:156
 msgid "Call me back"
-msgstr "eich ffonio’n ôl"
+msgstr "Eich ffonio’n ôl"
 
 #: cla_public/apps/checker/constants.py:157
 msgid "Call someone else instead of me"
@@ -1440,7 +1440,7 @@ msgstr ""
 
 #: cla_public/templates/contact.html:40
 msgid "You can also ask us to call you back using the form below, which is free."
-msgstr ""
+msgstr "Gallwch hefyd ofyn i ni eich ffonio’n ôl gan ddefnyddio’r ffurflen isod, sydd yn rhad ac am ddim."
 
 #: cla_public/templates/contact.html:44
 msgid "Please submit your details to get in touch with Civil Legal Advice (CLA)."
@@ -3015,7 +3015,7 @@ msgstr "Gallwch ffonio <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr> yn aw
 msgid ""
 "Please quote your reference number when you call. Find out about\n"
 "        <a class=\"govuk-link\" href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
-msgstr ""
+msgstr "Dyfynnwch eich cyfeirnod pan fyddwch yn ffonio. <a href=\"https://www.gov.uk/costau-galwadau\" rel=\"external\">I gael rhagor o wybodaeth am gyfraddau galwadau</a>.""
 
 #: cla_public/templates/checker/result/confirmation.html:41
 msgid "Your reference number was sent to"
@@ -3095,7 +3095,7 @@ msgid ""
 "Please be aware that the specialist adviser will need\n"
 "              evidence of the domestic violence before they can make a decision\n"
 "              on your case."
-msgstr ""
+msgstr "Byddwch yn ymwybodol fod y cynghorydd arbenigol angen tystiolaeth o’r trais domestig cyn y gallant wneud penderfyniad ar eich achos."
 
 #: cla_public/templates/checker/result/confirmation.html:116
 #: cla_public/templates/checker/result/confirmation.html:124
@@ -3107,14 +3107,14 @@ msgid ""
 "If your case involves domestic abuse or violence,\n"
 "              the specialist adviser will need evidence of this\n"
 "              before they can make a decision on your case."
-msgstr ""
+msgstr "Os yw eich cais yn ymwneud â cham-drin neu drais domestig, bydd y cynghorydd arbenigol angen tystiolaeth o hyn cyn gwneud penderfyniad ynghylch eich achos."
 
 #: cla_public/templates/checker/result/confirmation.html:132
 msgid ""
 "You will also need to provide evidence of your financial\n"
 "        circumstances. Your specialist adviser will explain what is\n"
 "        needed."
-msgstr ""
+msgstr "Bydd angen i chi ddarparu tystiolaeth o’ch amgylchiadau ariannol hefyd. Bydd eich cynghorydd arbenigol yn egluro beth sydd ei angen."
 
 #: cla_public/templates/checker/result/confirmation.html:138
 msgid ""
@@ -3146,7 +3146,7 @@ msgid ""
 "      Protecting your personal data and your privacy is important to us. Read the full\n"
 "      <a class=\"govuk-link\" href=\"%(privacy_link)s\">Civil Legal Advice Privacy Statement</a>.\n"
 "    "
-msgstr ""
+msgstr "Mae diogelu’ch data personol a phreifatrwydd yn bwysig i ni. Darllennwch y <a class=\"govuk-link\" href=\"%(privacy_link)s\">Datganiad Preifatrwydd Cyngor Cyfreithiol yn llawn</a>."
 
 #: cla_public/templates/checker/result/confirmation.html:166
 msgid "What if I miss the operator’s call?"
@@ -3157,7 +3157,7 @@ msgid ""
 "If you miss the call or you need advice urgently, you can call us on\n"
 "      <strong>0345 345 4 345</strong>. Find out about\n"
 "      <a class=\"govuk-link\" href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
-msgstr ""
+msgstr "Os byddwch yn methu’r alwad neu angen cyngor ar frys, gallwch ein ffonio ar 0345 345 4 345. <a class=\"govuk-link\" href=\"https://www.gov.uk/costau-galwadau\">Mae gwybodaeth am gostau’r galwadau i’w cael yma.</a>"
 
 #: cla_public/templates/checker/result/confirmation.html:175
 #: cla_public/templates/checker/result/confirmation.html:188
