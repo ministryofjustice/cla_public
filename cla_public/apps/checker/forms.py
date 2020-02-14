@@ -85,7 +85,7 @@ class AboutYouForm(BaseForm):
     )
     have_children = YesNoField(
         label=_(u"Do you have any children aged 15 or under?"),
-        description=_(u"Don't include any children who don't live with you"),
+        description=_(u"Don’t include any children who don’t live with you"),
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )

@@ -17,6 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
+#: cla_public/templates/macros/form.html:228 - DO NOT DELETE
+msgid "optional"
+msgstr ""
+
 #: cla_public/apps/base/constants.py:7
 msgid "Very satisfied"
 msgstr ""
@@ -487,7 +491,7 @@ msgid "Do you have any children aged 15 or under?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:88
-msgid "Don't include any children who don't live with you"
+msgid "Don’t include any children who don’t live with you"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:93 cla_public/apps/checker/forms.py:110
@@ -2375,7 +2379,7 @@ msgstr ""
 #: cla_public/templates/privacy.html:318
 msgid ""
 "Remember how you progress through our service. These cookies don't store your personal\n"
-"      data and are deleted once you've completed the service."
+"      data and are deleted once you’ve completed the service."
 msgstr ""
 
 #: cla_public/templates/privacy.html:322
