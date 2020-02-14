@@ -33,7 +33,7 @@
     {% if nodes|length > 0 %}
       {% for node in nodes %}
         {% if loop.index == nodes|length %}
-          <a href="{{ url }}" class="govuk-back-link">Back</a>
+          <a href="{{ url }}" class="govuk-back-link">{{ _('Back') }}</a>
         {% else %}
           {% set url = [url, node.id]|join('/') %}
         {% endif %}
@@ -45,7 +45,7 @@
       {% for step in steps %}
         {% if step.is_current %}
           {% if not step.name == 'about' %}
-            <a href="{{ url }}" class="govuk-back-link">Back</a>
+            <a href="{{ url }}" class="govuk-back-link">{{ _('Back') }}</a>
           {% endif %}
         {% else %}
           {% set url = url_for('checker.wizard', step=step.name) %}
