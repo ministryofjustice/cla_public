@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-14 14:44+0000\n"
+"POT-Creation-Date: 2020-02-10 16:02+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -16,6 +16,31 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+
+#: cla_public/templates/macros/form.html:305 - DO NOT DELETE
+msgid "optional"
+msgstr ""
+
+#: cla_public/templates/macros/form.html:230
+msgid "Frequency"
+msgstr ""
+
+#: cla_public/templates/macros/form.html:220
+msgid "Amount"
+msgstr ""
+
+#: cla_public/templates/macros/form.html:102
+msgid "Select all that apply"
+msgstr ""
+
+#: cla_public/templates/macros/form.html:206
+msgid "For example, £32.18 per week"
+msgstr ""
+
+#: cla_public/templates/macros/base.html:36
+#: cla_public/templates/macros/base.html:48
+msgid "Back"
+msgstr ""
 
 #: cla_public/apps/base/constants.py:7
 msgid "Very satisfied"
@@ -286,6 +311,7 @@ msgid "4 weekly"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:102
+#: cla_public/templates/macros/review.html:78
 msgid "per month"
 msgstr ""
 
@@ -486,7 +512,7 @@ msgid "Do you have any children aged 15 or under?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:88
-msgid "Don't include any children who don't live with you"
+msgid "Don’t include any children who don’t live with you"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:93 cla_public/apps/checker/forms.py:110
@@ -930,11 +956,11 @@ msgid "Please try again later."
 msgstr ""
 
 #: cla_public/apps/contact/constants.py:9
-msgid "Call today at"
+msgid "Call today"
 msgstr ""
 
 #: cla_public/apps/contact/constants.py:9
-msgid "Call on"
+msgid "Call on another day"
 msgstr ""
 
 #: cla_public/apps/contact/fields.py:43
@@ -1042,7 +1068,7 @@ msgid "Street address"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:112 cla_public/apps/contact/forms.py:142
-#: cla_public/apps/contact/forms.py:202
+#: cla_public/apps/contact/forms.py:203
 msgid "Your address must be 255 characters or less"
 msgstr ""
 
@@ -1058,7 +1084,7 @@ msgstr ""
 msgid "Please choose one of the options"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:139 cla_public/templates/privacy.html:231
+#: cla_public/apps/contact/forms.py:139 cla_public/templates/privacy.html:232
 #: cla_public/templates/macros/help-orgs.html:83
 msgid "Email"
 msgstr ""
@@ -1067,7 +1093,7 @@ msgstr ""
 msgid "If you add your email we will send you the reference number when you submit your details"
 msgstr ""
 
-#: cla_public/apps/contact/forms.py:143 cla_public/apps/contact/forms.py:203
+#: cla_public/apps/contact/forms.py:143 cla_public/apps/contact/forms.py:204
 msgid "Invalid email address"
 msgstr ""
 
@@ -1084,7 +1110,11 @@ msgid "Do you have any special communication needs?"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:200
-msgid "Your email"
+msgid "Receive this confirmation by email"
+msgstr ""
+
+#: cla_public/apps/contact/forms.py:201
+msgid "Enter your email address"
 msgstr ""
 
 #: cla_public/apps/contact/views.py:54
@@ -1103,11 +1133,11 @@ msgstr ""
 msgid "Check if you can get legal aid"
 msgstr ""
 
-#: cla_public/libs/honeypot.py:25
+#: cla_public/libs/honeypot.py:23
 msgid "This field must be left empty"
 msgstr ""
 
-#: cla_public/libs/honeypot.py:31
+#: cla_public/libs/honeypot.py:29
 msgid "Leave this field empty"
 msgstr ""
 
@@ -1188,6 +1218,7 @@ msgstr ""
 msgid "We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs."
 msgstr ""
 
+#: cla_public/templates/_cookie-consent-form.html:46
 msgid "We do not allow Google to use or share the data about how you use this site."
 msgstr ""
 
@@ -1229,19 +1260,12 @@ msgstr ""
 msgid "Accept cookies"
 msgstr ""
 
-#: cla_public/templates/_cookie-popup.html:15
-msgid "You’ve accepted all cookies. You can "
+#: cla_public/templates/_cookie-popup.html:16
+#, python-format
+msgid "You’ve accepted all cookies. You can <a class=\"govuk-link\" href=\"%(cookie_settings_url)s\" data-module=\"track-click\" data-track-category=\"cookieBanner\" data-track-action=\"Cookie banner settings clicked from confirmation\">change your cookie settings</a> at any time."
 msgstr ""
 
-#: cla_public/templates/_cookie-popup.html:15
-msgid "change your cookie settings"
-msgstr ""
-
-#: cla_public/templates/_cookie-popup.html:15
-msgid "at any time."
-msgstr ""
-
-#: cla_public/templates/_cookie-popup.html:17
+#: cla_public/templates/_cookie-popup.html:18
 msgid "Hide"
 msgstr ""
 
@@ -1250,12 +1274,12 @@ msgid "Your application will time out soon"
 msgstr ""
 
 #: cla_public/templates/_modal-dialog.html:12
-#: cla_public/templates/checker/about.html:38
-#: cla_public/templates/checker/additional-benefits.html:24
+#: cla_public/templates/checker/about.html:42
+#: cla_public/templates/checker/additional-benefits.html:26
 #: cla_public/templates/checker/benefits.html:27
-#: cla_public/templates/checker/income.html:61
-#: cla_public/templates/checker/property.html:51
-#: cla_public/templates/checker/savings.html:35
+#: cla_public/templates/checker/income.html:57
+#: cla_public/templates/checker/property.html:57
+#: cla_public/templates/checker/savings.html:34
 msgid "Continue"
 msgstr ""
 
@@ -1288,55 +1312,59 @@ msgstr ""
 msgid "How this service protects your privacy"
 msgstr ""
 
-#: cla_public/templates/_valuables-info.html:3
-msgid "Don’t include"
-msgstr ""
-
-#: cla_public/templates/_valuables-info.html:5
-msgid "Furniture and appliances"
-msgstr ""
-
-#: cla_public/templates/_valuables-info.html:6
-msgid "Your TV"
-msgstr ""
-
-#: cla_public/templates/_valuables-info.html:7
-msgid "Mobile phones, laptops and other devices"
-msgstr ""
-
-#: cla_public/templates/_valuables-info.html:8
-msgid "Clothing"
+#: cla_public/templates/_valuables-info.html:4
+msgid "What valuable items should I include?"
 msgstr ""
 
 #: cla_public/templates/_valuables-info.html:9
-msgid "The vehicle you use every day, unless it is a classic car or luxury vehicle"
+msgid "Don’t include"
 msgstr ""
 
 #: cla_public/templates/_valuables-info.html:10
-msgid "Equipment or tools you use for your work"
+msgid "Furniture and appliances"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:11
+msgid "Your TV"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:12
+msgid "Mobile phones, laptops and other devices"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:13
+msgid "Clothing"
 msgstr ""
 
 #: cla_public/templates/_valuables-info.html:14
-msgid "Do include"
+msgid "The vehicle you use every day, unless it is a classic car or luxury vehicle"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:15
+msgid "Equipment or tools you use for your work"
 msgstr ""
 
 #: cla_public/templates/_valuables-info.html:16
-msgid "Jewellery"
+msgid "Do include"
 msgstr ""
 
 #: cla_public/templates/_valuables-info.html:17
-msgid "Art"
+msgid "Jewellery"
 msgstr ""
 
 #: cla_public/templates/_valuables-info.html:18
-msgid "Antiques"
+msgid "Art"
 msgstr ""
 
 #: cla_public/templates/_valuables-info.html:19
-msgid "Caravans and other vehicles you don’t use every day"
+msgid "Antiques"
 msgstr ""
 
 #: cla_public/templates/_valuables-info.html:20
+msgid "Caravans and other vehicles you don’t use every day"
+msgstr ""
+
+#: cla_public/templates/_valuables-info.html:21
 msgid "Musical instruments, unless you’re a professional musician"
 msgstr ""
 
@@ -1352,26 +1380,31 @@ msgstr ""
 msgid "This form has errors"
 msgstr ""
 
-#: cla_public/templates/base.html:147
+#: cla_public/templates/base.html:139 cla_public/templates/contact.html:165
+#: cla_public/templates/contact.html:182 cla_public/templates/contact.html:189
+msgid "Error"
+msgstr ""
+
+#: cla_public/templates/base.html:148
 msgid "Show {count} more"
 msgstr ""
 
-#: cla_public/templates/base.html:154 cla_public/templates/online-safety.html:3
+#: cla_public/templates/base.html:155 cla_public/templates/online-safety.html:3
 #: cla_public/templates/online-safety.html:6
 msgid "Staying safe online"
 msgstr ""
 
-#: cla_public/templates/base.html:155
+#: cla_public/templates/base.html:156
 msgid "Privacy Policy"
 msgstr ""
 
-#: cla_public/templates/base.html:156
+#: cla_public/templates/base.html:157
 #: cla_public/templates/cookie-settings.html:5
 #: cla_public/templates/cookies.html:5
 msgid "Cookies"
 msgstr ""
 
-#: cla_public/templates/base.html:157
+#: cla_public/templates/base.html:158
 msgid "Contact"
 msgstr ""
 
@@ -1384,41 +1417,37 @@ msgstr ""
 msgid "The full service is currently unavailable. However, you can still get in touch using the form below."
 msgstr ""
 
-#: cla_public/templates/contact.html:28
-msgid "Call charges apply"
-msgstr ""
-
-#: cla_public/templates/contact.html:28
-#, python-format
-msgid ""
-"\n"
-"          If you’re in immediate danger please call Civil Legal Advice on <span class=\"tel\">0345 345 4 345</span>.\n"
-"          %(call_charges_link)s.\n"
-"        "
+#: cla_public/templates/contact.html:30
+msgid "If you’re in an emergency situation, please call the police on 999."
 msgstr ""
 
 #: cla_public/templates/contact.html:34
-msgid ""
-"You can also ask us to call you back using the form below,\n"
-"        which is free."
+msgid "Call charges apply"
 msgstr ""
 
-#: cla_public/templates/contact.html:38
+#: cla_public/templates/contact.html:34
+#, python-format
 msgid ""
-"If you’re in an emergency situation, please call the police\n"
-"        on 999."
+"\n"
+"            If you’re in immediate danger please call Civil Legal Advice on <strong class=\"laa-telephone\">0345 345 4 345</strong>.\n"
+"            %(call_charges_link)s.\n"
+"          "
 msgstr ""
 
-#: cla_public/templates/contact.html:43
+#: cla_public/templates/contact.html:40
+msgid "You can also ask us to call you back using the form below, which is free."
+msgstr ""
+
+#: cla_public/templates/contact.html:44
 msgid "Please submit your details to get in touch with Civil Legal Advice (CLA)."
 msgstr ""
 
-#: cla_public/templates/contact.html:46
+#: cla_public/templates/contact.html:47
 #: cla_public/templates/checker/result/eligible.html:30
 msgid "call charges"
 msgstr ""
 
-#: cla_public/templates/contact.html:46
+#: cla_public/templates/contact.html:47
 #, python-format
 msgid ""
 "\n"
@@ -1427,23 +1456,23 @@ msgid ""
 "        "
 msgstr ""
 
-#: cla_public/templates/contact.html:51
+#: cla_public/templates/contact.html:53
 msgid "You’ll need to provide evidence of the financial information (if any) you’ve given us through this service."
 msgstr ""
 
-#: cla_public/templates/contact.html:75
+#: cla_public/templates/contact.html:78
 msgid "We’ll give you the CLA phone number when you submit your details below."
 msgstr ""
 
-#: cla_public/templates/contact.html:108
+#: cla_public/templates/contact.html:115
 msgid "Submit details"
 msgstr ""
 
-#: cla_public/templates/contact.html:113
+#: cla_public/templates/contact.html:120
 msgid "Civil Legal Advice Privacy Statement"
 msgstr ""
 
-#: cla_public/templates/contact.html:113
+#: cla_public/templates/contact.html:120
 #, python-format
 msgid ""
 "\n"
@@ -1452,31 +1481,31 @@ msgid ""
 "      "
 msgstr ""
 
-#: cla_public/templates/contact.html:132
+#: cla_public/templates/contact.html:139
 msgid "Find UK address"
 msgstr ""
 
-#: cla_public/templates/contact.html:139
+#: cla_public/templates/contact.html:146
+msgid "Select an address"
+msgstr ""
+
+#: cla_public/templates/contact.html:149
 msgid "addresses found"
 msgstr ""
 
-#: cla_public/templates/contact.html:140
-msgid "Choose address"
-msgstr ""
-
-#: cla_public/templates/contact.html:150
+#: cla_public/templates/contact.html:159
 msgid "characters remaining"
 msgstr ""
 
-#: cla_public/templates/contact.html:157
+#: cla_public/templates/contact.html:166
 msgid "Must contain a valid postcode"
 msgstr ""
 
-#: cla_public/templates/contact.html:165
+#: cla_public/templates/contact.html:183
 msgid "No addresses were found with that postcode, but you can still enter your address manually"
 msgstr ""
 
-#: cla_public/templates/contact.html:173
+#: cla_public/templates/contact.html:190
 msgid "Request failed: "
 msgstr ""
 
@@ -1567,50 +1596,54 @@ msgstr ""
 msgid "Google Analytics sets the following cookies:"
 msgstr ""
 
-#: cla_public/templates/cookies.html:52 cla_public/templates/cookies.html:88
-#: cla_public/templates/cookies.html:107 cla_public/templates/cookies.html:126
+#: cla_public/templates/cookies.html:50
+msgid "Google Analytics cookies"
+msgstr ""
+
+#: cla_public/templates/cookies.html:53 cla_public/templates/cookies.html:90
+#: cla_public/templates/cookies.html:110 cla_public/templates/cookies.html:130
 msgid "Name"
 msgstr ""
 
-#: cla_public/templates/cookies.html:53 cla_public/templates/cookies.html:89
-#: cla_public/templates/cookies.html:108 cla_public/templates/cookies.html:127
+#: cla_public/templates/cookies.html:54 cla_public/templates/cookies.html:91
+#: cla_public/templates/cookies.html:111 cla_public/templates/cookies.html:131
 msgid "Purpose"
 msgstr ""
 
-#: cla_public/templates/cookies.html:54 cla_public/templates/cookies.html:90
-#: cla_public/templates/cookies.html:109 cla_public/templates/cookies.html:128
+#: cla_public/templates/cookies.html:55 cla_public/templates/cookies.html:92
+#: cla_public/templates/cookies.html:112 cla_public/templates/cookies.html:132
 msgid "Expires"
 msgstr ""
 
-#: cla_public/templates/cookies.html:60
+#: cla_public/templates/cookies.html:61
 msgid "This helps us count how many people visit the service. Your data is anonymised."
 msgstr ""
 
-#: cla_public/templates/cookies.html:61
+#: cla_public/templates/cookies.html:62
 msgid "2 years"
 msgstr ""
 
-#: cla_public/templates/cookies.html:65
+#: cla_public/templates/cookies.html:66
 msgid "Used to manage the rate at which page view requests are made. Your data is anonymised."
 msgstr ""
 
-#: cla_public/templates/cookies.html:66
+#: cla_public/templates/cookies.html:67
 msgid "10 minutes"
 msgstr ""
 
-#: cla_public/templates/cookies.html:70
+#: cla_public/templates/cookies.html:71
 msgid "This helps us count how many people visit. Your data is anonymised."
 msgstr ""
 
-#: cla_public/templates/cookies.html:71
+#: cla_public/templates/cookies.html:72
 msgid "24 hours"
 msgstr ""
 
-#: cla_public/templates/cookies.html:77
+#: cla_public/templates/cookies.html:78
 msgid "opt out of Google Analytics cookies"
 msgstr ""
 
-#: cla_public/templates/cookies.html:77
+#: cla_public/templates/cookies.html:78
 #, python-format
 msgid ""
 "\n"
@@ -1618,55 +1651,67 @@ msgid ""
 "    "
 msgstr ""
 
-#: cla_public/templates/cookies.html:83
+#: cla_public/templates/cookies.html:84
 msgid "Our introductory message"
 msgstr ""
 
-#: cla_public/templates/cookies.html:84
+#: cla_public/templates/cookies.html:85
 msgid "You may see a pop-up welcome message when you first visit GOV.UK. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again."
 msgstr ""
 
-#: cla_public/templates/cookies.html:96
+#: cla_public/templates/cookies.html:87
+msgid "Introductory cookies"
+msgstr ""
+
+#: cla_public/templates/cookies.html:98
 msgid "Saves a message to let us know that you have seen our cookie message"
 msgstr ""
 
-#: cla_public/templates/cookies.html:97 cla_public/templates/cookies.html:135
+#: cla_public/templates/cookies.html:99 cla_public/templates/cookies.html:139
 msgid "1 month"
 msgstr ""
 
-#: cla_public/templates/cookies.html:102
+#: cla_public/templates/cookies.html:104
 msgid "Your progress when using the service"
 msgstr ""
 
-#: cla_public/templates/cookies.html:103
+#: cla_public/templates/cookies.html:105
 msgid "When you use the Check if you can get legal aid service, we’ll set a cookie to remember your progress through the forms. These cookies don’t store your personal data and are deleted once you’ve completed the transaction."
 msgstr ""
 
-#: cla_public/templates/cookies.html:115
+#: cla_public/templates/cookies.html:107
+msgid "Progress cookies"
+msgstr ""
+
+#: cla_public/templates/cookies.html:118
 msgid "An identifier for your session"
 msgstr ""
 
-#: cla_public/templates/cookies.html:116
+#: cla_public/templates/cookies.html:119
 msgid "At the end of the session"
 msgstr ""
 
-#: cla_public/templates/cookies.html:121
+#: cla_public/templates/cookies.html:124
 msgid "Welsh language selection"
 msgstr ""
 
-#: cla_public/templates/cookies.html:122
+#: cla_public/templates/cookies.html:125
 msgid "You can choose to view this service in Welsh instead of English. If you choose Welsh, we set a cookie to remember that you have made this selection."
 msgstr ""
 
-#: cla_public/templates/cookies.html:134
+#: cla_public/templates/cookies.html:127
+msgid "Welsh language cookies"
+msgstr ""
+
+#: cla_public/templates/cookies.html:138
 msgid "To remember your selection of Welsh language"
 msgstr ""
 
-#: cla_public/templates/cookies.html:141
+#: cla_public/templates/cookies.html:145
 msgid "how cookies are used on gov.uk"
 msgstr ""
 
-#: cla_public/templates/cookies.html:141
+#: cla_public/templates/cookies.html:145
 #, python-format
 msgid ""
 "\n"
@@ -1675,7 +1720,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/feedback-confirmation.html:6
-msgid "Thanks for your feedback"
+msgid "Thank you for your feedback"
 msgstr ""
 
 #: cla_public/templates/feedback-confirmation.html:11
@@ -1691,10 +1736,10 @@ msgid "Report a problem"
 msgstr ""
 
 #: cla_public/templates/feedback.html:12
-msgid "Please don't include any personal or financial details for example, your National Insurance or credit card numbers."
+msgid "Do not include any personal or financial details, for example, your National Insurance or credit card numbers."
 msgstr ""
 
-#: cla_public/templates/feedback.html:36
+#: cla_public/templates/feedback.html:35
 #: cla_public/templates/reasons-for-contacting.html:29
 msgid "Continue to contact CLA"
 msgstr ""
@@ -2202,15 +2247,15 @@ msgid ""
 "    as outlined in this Privacy Statement."
 msgstr ""
 
-#: cla_public/templates/privacy.html:206
+#: cla_public/templates/privacy.html:207
 msgid "How we collect and store your personal data"
 msgstr ""
 
-#: cla_public/templates/privacy.html:209
+#: cla_public/templates/privacy.html:210
 msgid "Phone"
 msgstr ""
 
-#: cla_public/templates/privacy.html:211
+#: cla_public/templates/privacy.html:212
 msgid ""
 "When you call <abbr>CLA</abbr> we will record relevant personal data that you provide within a secure digital system.\n"
 "          <br><br>\n"
@@ -2221,11 +2266,11 @@ msgid ""
 "          required in order to contact you back."
 msgstr ""
 
-#: cla_public/templates/privacy.html:221
+#: cla_public/templates/privacy.html:222
 msgid "Online"
 msgstr ""
 
-#: cla_public/templates/privacy.html:223
+#: cla_public/templates/privacy.html:224
 msgid ""
 "When you contact <abbr>CLA</abbr> online, the personal data that you provide will be recorded within a secure digital system.\n"
 "          <br><br>\n"
@@ -2234,7 +2279,7 @@ msgid ""
 "          <abbr>CLA</abbr> have procedures and security features in place to keep your data secure once we receive it."
 msgstr ""
 
-#: cla_public/templates/privacy.html:233
+#: cla_public/templates/privacy.html:234
 msgid ""
 "Transmitting information via email is generally not completely secure, and <abbr>CLA</abbr> can’t guarantee the\n"
 "          security of your data. Any data you transmit is at your own risk.\n"
@@ -2246,11 +2291,11 @@ msgid ""
 "          <abbr>CLA</abbr> may monitor and store both your incoming and outgoing emails. We may also use blocking software."
 msgstr ""
 
-#: cla_public/templates/privacy.html:244
+#: cla_public/templates/privacy.html:245
 msgid "Post"
 msgstr ""
 
-#: cla_public/templates/privacy.html:246
+#: cla_public/templates/privacy.html:247
 msgid ""
 "When <abbr>CLA</abbr> receives post we may record relevant personal data included within a secure digital system.\n"
 "          <br><br>\n"
@@ -2258,25 +2303,25 @@ msgid ""
 "          filing cabinet. Digital copies of letters may be scanned and stored."
 msgstr ""
 
-#: cla_public/templates/privacy.html:255
+#: cla_public/templates/privacy.html:257
 msgid "Keeping your personal data safe from others"
 msgstr ""
 
-#: cla_public/templates/privacy.html:258
+#: cla_public/templates/privacy.html:260
 msgid "Repeat Contacts"
 msgstr ""
 
-#: cla_public/templates/privacy.html:260
+#: cla_public/templates/privacy.html:262
 msgid ""
 "<abbr>CLA</abbr> will not disclose any personal information to anyone contacting the <abbr>CLA</abbr> service until\n"
-"        they have successfully verified that their identity matches that of an existing record."
-msgstr ""
-
-#: cla_public/templates/privacy.html:265
-msgid "Third-parties"
+"          they have successfully verified that their identity matches that of an existing record."
 msgstr ""
 
 #: cla_public/templates/privacy.html:267
+msgid "Third-parties"
+msgstr ""
+
+#: cla_public/templates/privacy.html:269
 msgid ""
 "<abbr>CLA</abbr> will accept contact made by a third-party on behalf of another person. The third party has to\n"
 "          demonstrate they have appropriate authority to act on your behalf.\n"
@@ -2287,27 +2332,27 @@ msgid ""
 "          They must also agree a password to verify the identity of the third-party if they contact the service again."
 msgstr ""
 
-#: cla_public/templates/privacy.html:277
+#: cla_public/templates/privacy.html:279
 msgid "Outgoing Communications"
 msgstr ""
 
-#: cla_public/templates/privacy.html:279
+#: cla_public/templates/privacy.html:281
 msgid "<abbr>CLA</abbr> may need to contact you directly."
 msgstr ""
 
-#: cla_public/templates/privacy.html:281
+#: cla_public/templates/privacy.html:283
 msgid "In order to protect privacy, <abbr>CLA</abbr> will always check with you what forms of outgoing communication are acceptable and appropriate and whether messages can be left."
 msgstr ""
 
-#: cla_public/templates/privacy.html:283
+#: cla_public/templates/privacy.html:285
 msgid "When making outgoing calls to you, <abbr>CLA</abbr> will ensure that:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:286
+#: cla_public/templates/privacy.html:288
 msgid "Call backs are only made where you have agreed to this. Authorised third parties acting on your behalf can give agreement."
 msgstr ""
 
-#: cla_public/templates/privacy.html:290
+#: cla_public/templates/privacy.html:291
 msgid "Where a call back is made to you and there is no answer and a message taker is available, no message will be left unless you have previously given specific instructions that this would be acceptable."
 msgstr ""
 
@@ -2318,181 +2363,185 @@ msgid ""
 "              that they are calling from <abbr>CLA</abbr>."
 msgstr ""
 
-#: cla_public/templates/privacy.html:304
+#: cla_public/templates/privacy.html:305
 msgid "How we use cookies"
 msgstr ""
 
-#: cla_public/templates/privacy.html:306
+#: cla_public/templates/privacy.html:307
 msgid ""
 "When you use our online services we may store a small file, known as a cookie, on your\n"
 "    <abbr title=\"Personal Computer\">PC</abbr> or digital device."
 msgstr ""
 
-#: cla_public/templates/privacy.html:309
+#: cla_public/templates/privacy.html:310
 msgid "You may see a message before we store a cookie on your computer."
 msgstr ""
 
-#: cla_public/templates/privacy.html:310
+#: cla_public/templates/privacy.html:311
 msgid "The cookies are not used to identify you personally."
 msgstr ""
 
-#: cla_public/templates/privacy.html:311
+#: cla_public/templates/privacy.html:312
 msgid "We use these cookies to:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:313
+#: cla_public/templates/privacy.html:314
 msgid "Help your <abbr>PC</abbr> or digital device to interact with us more quickly"
 msgstr ""
 
-#: cla_public/templates/privacy.html:314
+#: cla_public/templates/privacy.html:315
 msgid "Measure how you use our service so it can be updated and improved based on your needs"
 msgstr ""
 
-#: cla_public/templates/privacy.html:315
+#: cla_public/templates/privacy.html:316
 msgid "Remember the notifications you’ve seen so that we don’t show them to you again"
 msgstr ""
 
-#: cla_public/templates/privacy.html:317
+#: cla_public/templates/privacy.html:318
 msgid ""
 "Remember how you progress through our service. These cookies don't store your personal\n"
-"      data and are deleted once you've completed the service."
+"      data and are deleted once you’ve completed the service."
 msgstr ""
 
-#: cla_public/templates/privacy.html:321
+#: cla_public/templates/privacy.html:322
 msgid ""
 "Protect your security by ensuring that third parties cannot create sites that pose as\n"
 "      a gov.uk service in an attempt to gather your information"
 msgstr ""
 
-#: cla_public/templates/privacy.html:326
+#: cla_public/templates/privacy.html:327
 msgid "The online service also uses cookies from the Government Digital Service (GDS). These cookies collect information to help improve the user experience across government digital services."
 msgstr ""
 
-#: cla_public/templates/privacy.html:328
+#: cla_public/templates/privacy.html:330
 #, python-format
-msgid "You can change <a href=\"%(cookie_settings_url)s\">your cookie settings</a> to opt in or out of how different cookies are used."
+msgid "You can change <a class=\"govuk-link\" href=\"%(cookie_settings_url)s\">your cookie settings</a> to opt in or out of how different cookies are used."
 msgstr ""
 
-#: cla_public/templates/privacy.html:331
+#: cla_public/templates/privacy.html:333
 #, python-format
 msgid ""
-"You can read more about <a href=\"%(cookie_url)s\">cookies used on \n"
+"You can read more about <a class=\"govuk-link\" href=\"%(cookie_url)s\">cookies used on \n"
 "    check you can get legal aid</a>."
 msgstr ""
 
-#: cla_public/templates/privacy.html:335
+#: cla_public/templates/privacy.html:337
 msgid ""
 "You can read about\n"
-"    <a href=\"http://www.aboutcookies.org/\" rel=\"external\">how to manage cookies</a>."
+"    <a class=\"govuk-link\" href=\"http://www.aboutcookies.org/\" rel=\"external\">how to manage cookies</a>."
 msgstr ""
 
-#: cla_public/templates/privacy.html:340
+#: cla_public/templates/privacy.html:342
 msgid "When will we share information about you outside <abbr>CLA</abbr>?"
 msgstr ""
 
-#: cla_public/templates/privacy.html:341
+#: cla_public/templates/privacy.html:343
 msgid "Confidentiality means ensuring information is only accessible by those allowed to have access to it."
 msgstr ""
 
-#: cla_public/templates/privacy.html:343
+#: cla_public/templates/privacy.html:345
 msgid ""
 "We want to keep your contact with <abbr>CLA</abbr> confidential, which means you can feel safe talking to us.\n"
 "    But we sometimes need to share some information outside <abbr>CLA</abbr> which we explain below."
 msgstr ""
 
-#: cla_public/templates/privacy.html:347
+#: cla_public/templates/privacy.html:349
 msgid ""
 "In order to provide you with the best service that we can we may share some information about\n"
 "    you with the organisations mentioned below. But we will only do this if you have given us permission, when the operator asks for it, or when it is lawful to do so."
 msgstr ""
 
 #: cla_public/templates/privacy.html:353 cla_public/templates/privacy.html:411
+msgid "Who we share information with"
+msgstr ""
+
+#: cla_public/templates/privacy.html:356 cla_public/templates/privacy.html:414
 msgid "Who"
 msgstr ""
 
-#: cla_public/templates/privacy.html:354 cla_public/templates/privacy.html:412
+#: cla_public/templates/privacy.html:357 cla_public/templates/privacy.html:415
 msgid "Why"
 msgstr ""
 
-#: cla_public/templates/privacy.html:360
+#: cla_public/templates/privacy.html:363
 msgid ""
 "External research organisations engaged by <abbr title=\"Legal Aid Agency\">LAA</abbr>\n"
 "          or the <abbr title=\"Ministry of Justice\">MoJ</abbr>"
 msgstr ""
 
-#: cla_public/templates/privacy.html:364
+#: cla_public/templates/privacy.html:367
 msgid ""
 "To inform future government policy on legal aid. Such research will not identify\n"
 "          individuals whose data has been used for research purposes."
 msgstr ""
 
-#: cla_public/templates/privacy.html:370 cla_public/templates/privacy.html:418
+#: cla_public/templates/privacy.html:373 cla_public/templates/privacy.html:421
 msgid "Other government organisations"
 msgstr ""
 
-#: cla_public/templates/privacy.html:372
+#: cla_public/templates/privacy.html:375
 msgid "These organisations may include the Department of Work and Pensions (DWP), HM Courts and Tribunals Service (HMCTS), HM Revenue and Customs (HMRC)."
 msgstr ""
 
-#: cla_public/templates/privacy.html:375
+#: cla_public/templates/privacy.html:378
 msgid "To verify information provided by you and check whether you qualify for legal aid."
 msgstr ""
 
-#: cla_public/templates/privacy.html:380
+#: cla_public/templates/privacy.html:383
 msgid "Other advice organisations and non-governmental organisations"
 msgstr ""
 
-#: cla_public/templates/privacy.html:382
+#: cla_public/templates/privacy.html:385
 msgid "These organisations may include credit reference agencies."
 msgstr ""
 
-#: cla_public/templates/privacy.html:385
+#: cla_public/templates/privacy.html:388
 msgid "To help you get further help and advice from appropriate organisations."
 msgstr ""
 
-#: cla_public/templates/privacy.html:387
+#: cla_public/templates/privacy.html:390
 msgid "To verify information provided by you, when conducting audits on our decisions and eligibility assessments."
 msgstr ""
 
-#: cla_public/templates/privacy.html:395
+#: cla_public/templates/privacy.html:397
 msgid "When this is necessary, we will comply with all aspects of the relevant data protection laws."
 msgstr ""
 
-#: cla_public/templates/privacy.html:399
+#: cla_public/templates/privacy.html:401
 msgid ""
 "In exceptional circumstances we may share limited information without your consent,\n"
 "    for example if it is a legal requirement or a court compels us to do so."
 msgstr ""
 
-#: cla_public/templates/privacy.html:402
+#: cla_public/templates/privacy.html:404
 msgid "If we do this, we will wherever possible:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:404
+#: cla_public/templates/privacy.html:406
 msgid "Talk to you first"
 msgstr ""
 
-#: cla_public/templates/privacy.html:405
+#: cla_public/templates/privacy.html:407
 msgid "Give you as much control as possible over how we do this"
 msgstr ""
 
-#: cla_public/templates/privacy.html:406
+#: cla_public/templates/privacy.html:408
 msgid "Only share information on a ‘need to know’ basis."
 msgstr ""
 
-#: cla_public/templates/privacy.html:421
+#: cla_public/templates/privacy.html:424
 msgid "To prevent fraud and to help detect crime."
 msgstr ""
 
-#: cla_public/templates/privacy.html:423
+#: cla_public/templates/privacy.html:426
 msgid "Or where it is required by law or by a court order"
 msgstr ""
 
-#: cla_public/templates/privacy.html:428
+#: cla_public/templates/privacy.html:431
 msgid "External protection organisations"
 msgstr ""
 
-#: cla_public/templates/privacy.html:431
+#: cla_public/templates/privacy.html:434
 msgid ""
 "If we are very worried about your safety or the safety of other people we may need to let others know.\n"
 "          <br><br>\n"
@@ -2500,208 +2549,208 @@ msgid ""
 "          from abuse or if we think that there is an immediate risk of harm."
 msgstr ""
 
-#: cla_public/templates/privacy.html:441
+#: cla_public/templates/privacy.html:444
 msgid "Access to personal information"
 msgstr ""
 
-#: cla_public/templates/privacy.html:442
+#: cla_public/templates/privacy.html:445
 msgid ""
 "You can find out if we hold any personal data about you and request a copy of this information by writing to the Legal Aid Agency to make a ‘subject access request’.\n"
 "   If you wish to make a subject access request, you will need to contact:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:462
+#: cla_public/templates/privacy.html:460
 msgid "You can also email at <a class=\"govuk-link email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>."
 msgstr ""
 
-#: cla_public/templates/privacy.html:465
+#: cla_public/templates/privacy.html:463
 msgid "When making a subject access request for a copy of your personal information, please provide the following information:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:468
+#: cla_public/templates/privacy.html:466
 msgid "Full name"
 msgstr ""
 
-#: cla_public/templates/privacy.html:469
+#: cla_public/templates/privacy.html:467
 #: cla_public/templates/checker/result/_find-legal-adviser.html:98
 msgid "Address"
 msgstr ""
 
-#: cla_public/templates/privacy.html:470
+#: cla_public/templates/privacy.html:468
 msgid "Date of birth"
 msgstr ""
 
-#: cla_public/templates/privacy.html:471
+#: cla_public/templates/privacy.html:469
 msgid "What you contacted <abbr>CLA</abbr> about"
 msgstr ""
 
-#: cla_public/templates/privacy.html:472
+#: cla_public/templates/privacy.html:470
 msgid "When you contacted <abbr>CLA</abbr>"
 msgstr ""
 
-#: cla_public/templates/privacy.html:473
+#: cla_public/templates/privacy.html:471
 msgid "What information you want to see"
 msgstr ""
 
-#: cla_public/templates/privacy.html:475
+#: cla_public/templates/privacy.html:473
 msgid ""
 "Any additional information that might help us to check your identity e.g. <abbr>CLA</abbr> case reference number.\n"
 "      This is to help us protect your privacy by ensuring that we only give data out to the person it relates to\n"
 "      (or their appropriately authorised representative)."
 msgstr ""
 
-#: cla_public/templates/privacy.html:481
+#: cla_public/templates/privacy.html:479
 msgid "You will also be required to provide proof of your identity. Acceptable forms of ID include:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:484
+#: cla_public/templates/privacy.html:482
 msgid "a photocopy of your passport or driving licence"
 msgstr ""
 
-#: cla_public/templates/privacy.html:485
+#: cla_public/templates/privacy.html:483
 msgid "an electricity bill (the original bill, not a copy)"
 msgstr ""
 
-#: cla_public/templates/privacy.html:486
+#: cla_public/templates/privacy.html:484
 msgid "a gas bill (the original bill, not a copy)"
 msgstr ""
 
-#: cla_public/templates/privacy.html:487
+#: cla_public/templates/privacy.html:485
 msgid "a council tax bill (the original bill, not a copy)"
 msgstr ""
 
-#: cla_public/templates/privacy.html:488
+#: cla_public/templates/privacy.html:486
 msgid "any other bill in your full name (the original bill, not a copy)"
 msgstr ""
 
-#: cla_public/templates/privacy.html:491
+#: cla_public/templates/privacy.html:489
 msgid "Any bill you send us must be less than 6 months old."
 msgstr ""
 
-#: cla_public/templates/privacy.html:494
+#: cla_public/templates/privacy.html:492
 msgid ""
 "Please note that we cannot give out any information unless the details that you provide match our records.\n"
 "    If you used an alias or pseudonym when you contacted <abbr>CLA</abbr>, you will need to prove your identity."
 msgstr ""
 
-#: cla_public/templates/privacy.html:499
+#: cla_public/templates/privacy.html:497
 msgid "Once we receive the subject access request, we will deal with the request without any undue delay within one calendar month."
 msgstr ""
 
-#: cla_public/templates/privacy.html:503
+#: cla_public/templates/privacy.html:501
 msgid "There is no charge for providing this information, however, if processing the subject access request is deemed to be excessive, we may charge a fee."
 msgstr ""
 
-#: cla_public/templates/privacy.html:507
+#: cla_public/templates/privacy.html:505
 msgid ""
 "You can also review our <a class=\"govuk-link\" href=\"https://www.gov.uk/government/organisations/legal-aid-agency/about/personal-information-charter\" rel=\"external\">Personal Information Charter</a>\n"
 "     which contains important information on your rights to access your personal information."
 msgstr ""
 
-#: cla_public/templates/privacy.html:511
+#: cla_public/templates/privacy.html:509
 msgid "How you can request to have your personal data amended or deleted?"
 msgstr ""
 
-#: cla_public/templates/privacy.html:514
+#: cla_public/templates/privacy.html:512
 msgid ""
 "Under data protection legislation, we are only allowed to keep your personal information when we have a lawful basis for processing it and only for as long as it is necessary for the purposes\n"
 "     for which it was collected."
 msgstr ""
 
-#: cla_public/templates/privacy.html:518
+#: cla_public/templates/privacy.html:516
 msgid "We will consider requests to delete some or all of your personal data but please note that, as a minimum, <abbr>CLA</abbr> will usually retain:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:522
+#: cla_public/templates/privacy.html:520
 msgid "For everyone that uses our service, a name and two other pieces of personal data, e.g. date of birth and postcode "
 msgstr ""
 
-#: cla_public/templates/privacy.html:525
+#: cla_public/templates/privacy.html:523
 msgid ""
 "For everyone that asks <abbr>CLA</abbr> to check whether they qualify for legal aid in order to seek advice from a\n"
 "      <abbr>CLA</abbr> Specialist, details of any financial information and case details used to prove that you qualify for legal aid"
 msgstr ""
 
-#: cla_public/templates/privacy.html:530
+#: cla_public/templates/privacy.html:528
 msgid ""
 "Please note that, if you qualify to receive advice from a <abbr>CLA</abbr> Specialist, they will also need to retain\n"
 "    additional personal data about you within their own Case Handling System. Such data shall be sufficient\n"
 "    to justify the provision of legal aid advice and meet professional requirements."
 msgstr ""
 
-#: cla_public/templates/privacy.html:535
+#: cla_public/templates/privacy.html:533
 msgid "If the information we hold about you is inaccurate for whatever reason, you can contact CLA to have your personal information amended."
 msgstr ""
 
-#: cla_public/templates/privacy.html:538
+#: cla_public/templates/privacy.html:536
 msgid "When we ask you for personal data"
 msgstr ""
 
-#: cla_public/templates/privacy.html:540
+#: cla_public/templates/privacy.html:538
 msgid ""
 "We promise to inform you why we need your personal data and ask only for the personal data we need. We will not collect information that\n"
 "     is irrelevant or unnecessary."
 msgstr ""
 
-#: cla_public/templates/privacy.html:545
+#: cla_public/templates/privacy.html:543
 msgid "When we collect your personal data, we have responsibilities, and you have rights. These include:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:550
+#: cla_public/templates/privacy.html:548
 msgid "That you can withdraw consent at any time, where relevant;"
 msgstr ""
 
-#: cla_public/templates/privacy.html:553
+#: cla_public/templates/privacy.html:551
 msgid "That you can lodge a complaint with the supervisory authority;"
 msgstr ""
 
-#: cla_public/templates/privacy.html:556
+#: cla_public/templates/privacy.html:554
 msgid "That we will protect and ensure that no unauthorised person has access to it;"
 msgstr ""
 
-#: cla_public/templates/privacy.html:559
+#: cla_public/templates/privacy.html:557
 msgid "That your personal data is shared with other organisations only for legitimate purposes;"
 msgstr ""
 
-#: cla_public/templates/privacy.html:562
+#: cla_public/templates/privacy.html:560
 msgid "That we don’t keep it longer than is necessary;"
 msgstr ""
 
-#: cla_public/templates/privacy.html:565
+#: cla_public/templates/privacy.html:563
 msgid "That we will not make your personal data available for commercial use without your consent; and"
 msgstr ""
 
-#: cla_public/templates/privacy.html:568
+#: cla_public/templates/privacy.html:566
 msgid "That we will consider your request to correct, stop processing or erase your personal data."
 msgstr ""
 
-#: cla_public/templates/privacy.html:572
+#: cla_public/templates/privacy.html:570
 msgid "You can get more details on:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:576
+#: cla_public/templates/privacy.html:574
 msgid "Agreements we have with other organisations for sharing information;"
 msgstr ""
 
-#: cla_public/templates/privacy.html:579
+#: cla_public/templates/privacy.html:577
 msgid ""
 "Circumstances where we can pass on personal information without telling you, for example, to help with the prevention \n"
 "      or detection of crime or to produce anonymised statistics;"
 msgstr ""
 
-#: cla_public/templates/privacy.html:583
+#: cla_public/templates/privacy.html:581
 msgid "Our instructions to staff on how to collect, use or delete your personal information;"
 msgstr ""
 
-#: cla_public/templates/privacy.html:586
+#: cla_public/templates/privacy.html:584
 msgid "How we check that the information we hold is accurate and up-to-date; and"
 msgstr ""
 
-#: cla_public/templates/privacy.html:589
+#: cla_public/templates/privacy.html:587
 msgid "How to make a complaint."
 msgstr ""
 
-#: cla_public/templates/privacy.html:594
+#: cla_public/templates/privacy.html:592
 msgid "For more information about the above issues, please contact the <abbr>MoJ</abbr> Data Protection Officer:"
 msgstr ""
 
@@ -2715,21 +2764,26 @@ msgid ""
 "      you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
 msgstr ""
 
-#: cla_public/templates/privacy.html:631
+#: cla_public/templates/privacy.html:627
+#: cla_public/templates/errors/5xx.html:12
+msgid "Telephone:"
+msgstr ""
+
+#: cla_public/templates/privacy.html:634
 msgid "Changes to the statement"
 msgstr ""
 
-#: cla_public/templates/privacy.html:633
+#: cla_public/templates/privacy.html:636
 msgid ""
 "This policy is under regular review. Any changes made to the privacy policy will be posted here and,\n"
 "    where appropriate, <abbr>CLA</abbr> staff will be notified by email."
 msgstr ""
 
-#: cla_public/templates/privacy.html:637
+#: cla_public/templates/privacy.html:640
 msgid "Complaints about this statement"
 msgstr ""
 
-#: cla_public/templates/privacy.html:639
+#: cla_public/templates/privacy.html:642
 msgid ""
 "If you would like to make a complaint about this statement and how it applies to you then please\n"
 "    contact <abbr title=\"Civil Legal Advice\">CLA</abbr> on <span class=\"tel\">0345 345 4 345</span>."
@@ -2768,12 +2822,12 @@ msgstr ""
 msgid "Contact information"
 msgstr ""
 
-#: cla_public/templates/checker/about.html:45
+#: cla_public/templates/checker/about.html:49
 msgid "Are you in a dispute with your partner?"
 msgstr ""
 
-#: cla_public/templates/checker/about.html:46
-#: cla_public/templates/checker/about.html:47
+#: cla_public/templates/checker/about.html:50
+#: cla_public/templates/checker/about.html:51
 msgid "How many?"
 msgstr ""
 
@@ -2786,7 +2840,7 @@ msgstr ""
 msgid "You’ll need to provide evidence of the financial information you’ve given us through this service."
 msgstr ""
 
-#: cla_public/templates/checker/additional-benefits.html:31
+#: cla_public/templates/checker/additional-benefits.html:33
 msgid "Total amount of benefits not listed above"
 msgstr ""
 
@@ -2799,18 +2853,18 @@ msgstr ""
 msgid "We only need to know about any money you received last month, even if this varies from month to month."
 msgstr ""
 
-#: cla_public/templates/checker/income.html:17
+#: cla_public/templates/checker/income.html:16
 msgid "Your money"
 msgstr ""
 
-#: cla_public/templates/checker/income.html:20
+#: cla_public/templates/checker/income.html:18
 msgid ""
 "Give details of any money that is paid to you\n"
 "            personally, like your wages. Record money coming in for your\n"
 "            partner in the next section."
 msgstr ""
 
-#: cla_public/templates/checker/income.html:45
+#: cla_public/templates/checker/income.html:42
 msgid "Your partner’s money"
 msgstr ""
 
@@ -2823,21 +2877,21 @@ msgid "You can add more than one property below."
 msgstr ""
 
 #: cla_public/templates/checker/property.html:20
-#: cla_public/templates/macros/review.html:6
+#: cla_public/templates/macros/review.html:5
 msgid "Property"
 msgstr ""
 
-#: cla_public/templates/checker/property.html:25
+#: cla_public/templates/checker/property.html:26
 msgid "Remove property"
 msgstr ""
 
-#: cla_public/templates/checker/property.html:46
+#: cla_public/templates/checker/property.html:52
 msgid "Add another property"
 msgstr ""
 
-#: cla_public/templates/checker/property.html:58
-#: cla_public/templates/checker/property.html:59
-#: cla_public/templates/checker/property.html:60
+#: cla_public/templates/checker/property.html:64
+#: cla_public/templates/checker/property.html:65
+#: cla_public/templates/checker/property.html:66
 msgid "How much rent did you receive last month?"
 msgstr ""
 
@@ -2845,43 +2899,21 @@ msgstr ""
 msgid "Summary of your answers"
 msgstr ""
 
-#: cla_public/templates/checker/review.html:14
+#: cla_public/templates/checker/review.html:12
 msgid "Your problem area"
 msgstr ""
 
-#: cla_public/templates/checker/review.html:16
-msgid "Go back and change your answers in your problem area section"
+#: cla_public/templates/checker/review.html:24
+#: cla_public/templates/macros/review.html:36
+msgid "Change"
 msgstr ""
 
-#: cla_public/templates/checker/review.html:20
-#: cla_public/templates/checker/review.html:58
-msgid "Go back and change answers"
-msgstr ""
-
-#: cla_public/templates/checker/review.html:27
-#: cla_public/templates/macros/review.html:32
-#: cla_public/templates/scope/diagnosis.html:27
-msgid "Question"
-msgstr ""
-
-#: cla_public/templates/checker/review.html:31
-#: cla_public/templates/macros/review.html:37
-#: cla_public/templates/scope/diagnosis.html:31
-msgid "Answer"
+#: cla_public/templates/checker/review.html:24
+#: cla_public/templates/macros/review.html:36
+msgid "answer for"
 msgstr ""
 
 #: cla_public/templates/checker/review.html:51
-#, python-format
-msgid "Go back and change your answer in %(step_title)s section"
-msgid_plural "Go back and change your answers in %(step_title)s section"
-msgstr[0] ""
-msgstr[1] ""
-
-#: cla_public/templates/checker/review.html:60
-msgid "Go back and change answer"
-msgstr ""
-
-#: cla_public/templates/checker/review.html:74
 msgid "Confirm"
 msgstr ""
 
@@ -2976,157 +3008,157 @@ msgstr ""
 #: cla_public/templates/checker/result/confirmation.html:31
 msgid ""
 "Please quote your reference number when you call. Find out about\n"
-"        <a href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
+"        <a class=\"govuk-link\" href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:42
+#: cla_public/templates/checker/result/confirmation.html:41
 msgid "Your reference number was sent to"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:46
-msgid "Receive this confirmation by email"
-msgstr ""
-
-#: cla_public/templates/checker/result/confirmation.html:49
+#: cla_public/templates/checker/result/confirmation.html:48
 msgid "Send"
 msgstr ""
 
 #: cla_public/templates/checker/result/confirmation.html:56
+msgid "Warning"
+msgstr ""
+
+#: cla_public/templates/checker/result/confirmation.html:57
 msgid ""
 "If you have a court hearing date it is important that you get\n"
 "      advice as soon as possible. You may be able to get last-minute\n"
 "      help on the day of the hearing from an adviser in the court building."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:62
+#: cla_public/templates/checker/result/confirmation.html:64
 msgid "What happens next?"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:67
+#: cla_public/templates/checker/result/confirmation.html:69
 msgid ""
 "Your details have been submitted and an operator will call\n"
 "        the person you nominated at least once during your chosen time, or as close to the time as possible."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:70
+#: cla_public/templates/checker/result/confirmation.html:72
 msgid ""
 "Your details have been submitted and an operator will call\n"
 "        you at least once during your chosen time, or as close to the time as possible."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:74
-#: cla_public/templates/macros/subform.html:19
-#: cla_public/templates/macros/subform.html:46
+#: cla_public/templates/checker/result/confirmation.html:76
+#: cla_public/templates/macros/subform.html:17
+#: cla_public/templates/macros/subform.html:41
 msgid "When a CLA operator calls, the call will come from an anonymous number."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:80
+#: cla_public/templates/checker/result/confirmation.html:82
 msgid ""
 "If you need to urgently protect yourself or your family you should\n"
 "      try and get advice as soon as possible."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:87
+#: cla_public/templates/checker/result/confirmation.html:90
 msgid ""
 "The first person they speak to will be an operator\n"
 "        who will ask about your problem and your financial circumstances."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:90
+#: cla_public/templates/checker/result/confirmation.html:93
 msgid ""
 "The first person you speak to will be an operator\n"
 "        who will ask about your problem and your financial circumstances."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:96
+#: cla_public/templates/checker/result/confirmation.html:99
 msgid ""
 "If it looks like you might qualify for legal aid they’ll\n"
 "        be put through to a specialist adviser, who will make the\n"
 "        final decision on your case."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:100
+#: cla_public/templates/checker/result/confirmation.html:103
 msgid ""
 "If it looks like you might qualify for legal aid you’ll\n"
 "        be put through to a specialist adviser, who will make the\n"
 "        final decision on your case."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:108
+#: cla_public/templates/checker/result/confirmation.html:112
 msgid ""
 "Please be aware that the specialist adviser will need\n"
-"      evidence of the domestic violence before they can make a decision\n"
-"      on your case."
-msgstr ""
-
-#: cla_public/templates/checker/result/confirmation.html:112
-#: cla_public/templates/checker/result/confirmation.html:120
-msgid "Find out what you can use as evidence"
+"              evidence of the domestic violence before they can make a decision\n"
+"              on your case."
 msgstr ""
 
 #: cla_public/templates/checker/result/confirmation.html:116
-msgid ""
-"If your case involves domestic abuse or violence,\n"
-"      the specialist adviser will need evidence of this\n"
-"      before they can make a decision on your case."
+#: cla_public/templates/checker/result/confirmation.html:124
+msgid "Find out what you can use as evidence"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:126
+#: cla_public/templates/checker/result/confirmation.html:120
 msgid ""
-"You will also need to provide evidence of your financial\n"
-"      circumstances. Your specialist adviser will explain what is\n"
-"      needed."
+"If your case involves domestic abuse or violence,\n"
+"              the specialist adviser will need evidence of this\n"
+"              before they can make a decision on your case."
 msgstr ""
 
 #: cla_public/templates/checker/result/confirmation.html:132
 msgid ""
-"You will need to provide evidence of your financial circumstances\n"
-"      and maybe your problem. Your specialist adviser will explain\n"
-"      what is needed."
+"You will also need to provide evidence of your financial\n"
+"        circumstances. Your specialist adviser will explain what is\n"
+"        needed."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:139
+#: cla_public/templates/checker/result/confirmation.html:138
+msgid ""
+"You will need to provide evidence of your financial circumstances\n"
+"        and maybe your problem. Your specialist adviser will explain\n"
+"        what is needed."
+msgstr ""
+
+#: cla_public/templates/checker/result/confirmation.html:145
 msgid ""
 "\n"
-"      If your specialist adviser thinks you need to speak to someone in person or have\n"
-"      someone represent you in court, they will organise this.\n"
-"    "
+"        If your specialist adviser thinks you need to speak to someone in person or have\n"
+"        someone represent you in court, they will organise this.\n"
+"      "
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:146
+#: cla_public/templates/checker/result/confirmation.html:153
 msgid "If CLA can’t help you, we’ll always suggest where else you might get help."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:149
+#: cla_public/templates/checker/result/confirmation.html:156
 msgid "If we can do anything to make it easier for you to communicate with us, please tell the operator."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:152
+#: cla_public/templates/checker/result/confirmation.html:159
 #, python-format
 msgid ""
 "\n"
 "      Protecting your personal data and your privacy is important to us. Read the full\n"
-"      <a href=\"%(privacy_link)s\">Civil Legal Advice Privacy Statement</a>.\n"
+"      <a class=\"govuk-link\" href=\"%(privacy_link)s\">Civil Legal Advice Privacy Statement</a>.\n"
 "    "
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:159
+#: cla_public/templates/checker/result/confirmation.html:166
 msgid "What if I miss the operator’s call?"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:161
+#: cla_public/templates/checker/result/confirmation.html:168
 msgid ""
 "If you miss the call or you need advice urgently, you can call us on\n"
 "      <strong>0345 345 4 345</strong>. Find out about\n"
-"      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
+"      <a class=\"govuk-link\" href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:168
-#: cla_public/templates/checker/result/confirmation.html:181
+#: cla_public/templates/checker/result/confirmation.html:175
+#: cla_public/templates/checker/result/confirmation.html:188
 msgid "Finish"
 msgstr ""
 
-#: cla_public/templates/checker/result/confirmation.html:177
+#: cla_public/templates/checker/result/confirmation.html:184
 msgid "Print this page"
 msgstr ""
 
@@ -3251,10 +3283,17 @@ msgstr ""
 msgid "In some cases you may need to pay a contribution towards your legal aid."
 msgstr ""
 
-#: cla_public/templates/checker/result/face-to-face.html:70
+#: cla_public/templates/checker/result/face-to-face.html:71
+#: cla_public/templates/checker/result/ineligible.html:68
+#: cla_public/templates/scope/ineligible.html:61
+#: cla_public/templates/scope/mediation.html:20
 msgid "What did you think of this service?"
 msgstr ""
 
+#: cla_public/templates/checker/result/face-to-face.html:71
+#: cla_public/templates/checker/result/ineligible.html:68
+#: cla_public/templates/scope/ineligible.html:61
+#: cla_public/templates/scope/mediation.html:20
 msgid "(takes 30 seconds)"
 msgstr ""
 
@@ -3263,6 +3302,116 @@ msgid ""
 "If you’re applying for legal aid for a mental health issue,\n"
 "          the requirements for the financial assessment are less rigorous than\n"
 "          for other legal aid problems."
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:3
+msgid "Help organisations"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:8
+msgid "you and your partner"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:8
+msgid "you"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:9
+msgid "you and your partner’s"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:9
+msgid "your"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:14
+msgid "You’re unlikely to get legal aid"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:17
+#, python-format
+msgid ""
+"From\n"
+"    what you have told us today it looks like you won't be able to get\n"
+"    legal aid %(fromcla)s as you don’t qualify financially"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:17
+msgid "from CLA"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:24
+msgid "This is because"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:26
+msgid ""
+"have too much disposable\n"
+"      capital"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:31
+msgid ""
+"gross income is more than\n"
+"      the maximum allowed"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:36
+msgid ""
+"disposable income is\n"
+"      higher than the limit we allow"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:43
+msgid ""
+"Disposable capital includes savings, valuable items and the\n"
+"      equity in any property you own."
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:48
+msgid ""
+"Disposable income is the money you have left after we’ve accounted\n"
+"      for certain living expenses, like rent or mortgage payments."
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:57
+msgid "Family Mediation Council"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:57
+#, python-format
+msgid ""
+"\n"
+"        If you want to make an application to court about a family matter you need to first of all\n"
+"        see if family mediation will help. Use the %(family_mediation_link)s directory to find a mediator\n"
+"        and make an appointment for a Mediation Information and Assessment Meeting (MIAM).\n"
+"      "
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:72
+msgid "A legal adviser may still be able to help"
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:76
+msgid ""
+"You may still qualify for legal aid to seek a court order for protection. To find out if you\n"
+"      might qualify, contact a legal adviser in your area."
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:80
+msgid "You can still ask a legal adviser for help – you will have to pay for their advice."
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:86
+msgid ""
+"If you have a court hearing date it is important that you get advice\n"
+"      as soon as possible. You may be able to get last-minute help on the\n"
+"      day of the hearing from an adviser in the court building."
+msgstr ""
+
+#: cla_public/templates/checker/result/ineligible.html:94
+#: cla_public/templates/scope/ineligible.html:56
+msgid "Find a solicitor"
 msgstr ""
 
 #: cla_public/templates/emails/confirmation.txt:2
@@ -3363,11 +3512,6 @@ msgstr ""
 msgid "We have not saved any information you have entered. When the service is available, you will have to start again."
 msgstr ""
 
-#: cla_public/templates/privacy.html:625
-#: cla_public/templates/errors/5xx.html:12
-msgid "Telephone:"
-msgstr ""
-
 #: cla_public/templates/errors/5xx.html:13
 msgid "0345 345 4345"
 msgstr ""
@@ -3401,37 +3545,34 @@ msgstr ""
 msgid "Saturday: 9am to 12.30pm"
 msgstr ""
 
-#: cla_public/templates/macros/element.html:35
+#: cla_public/templates/macros/element.html:18
+msgid "There is a problem"
+msgstr ""
+
+#: cla_public/templates/macros/element.html:54
 msgid "If you’re having trouble completing this form"
 msgstr ""
 
-#: cla_public/templates/macros/element.html:37
+#: cla_public/templates/macros/element.html:56
 msgid "get in touch"
 msgstr ""
 
-#: cla_public/templates/macros/element.html:45
+#: cla_public/templates/macros/element.html:64
 msgid "What do you think about this service?"
 msgstr ""
 
-#: cla_public/templates/macros/element.html:47
-msgid ""
-"Your feedback will improve this service.\n"
-"      Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">send us your thoughts</a>."
+#: cla_public/templates/macros/element.html:66
+msgid "Your feedback will improve this service. Please <a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">send us your thoughts</a>."
 msgstr ""
 
-#: cla_public/templates/macros/element.html:82
+#: cla_public/templates/macros/element.html:103
 #, python-format
 msgid "The information you enter won’t be stored on this device. Find out more about %(link)s."
 msgstr ""
 
-#: cla_public/templates/macros/element.html:98
-#: cla_public/templates/macros/element.html:107
+#: cla_public/templates/macros/element.html:117
+#: cla_public/templates/macros/element.html:126
 msgid "Opens in new window"
-msgstr ""
-
-#: cla_public/templates/macros/element.html:106
-#, python-format
-msgid "%(text)s"
 msgstr ""
 
 #: cla_public/templates/macros/help-orgs.html:20
@@ -3454,20 +3595,20 @@ msgstr ""
 msgid "Opening hours"
 msgstr ""
 
-#: cla_public/templates/macros/subform.html:18
-#: cla_public/templates/macros/subform.html:45
+#: cla_public/templates/macros/subform.html:16
+#: cla_public/templates/macros/subform.html:40
 msgid "We will call at least once during your chosen time, or as close to the time as possible."
 msgstr ""
 
-#: cla_public/templates/macros/subform.html:20
+#: cla_public/templates/macros/subform.html:18
 msgid "If you miss the call you’ll need to complete this form again."
 msgstr ""
 
-#: cla_public/templates/macros/subform.html:44
+#: cla_public/templates/macros/subform.html:39
 msgid "Please make sure you are with your nominated person at the time of the callback."
 msgstr ""
 
-#: cla_public/templates/macros/subform.html:47
+#: cla_public/templates/macros/subform.html:42
 msgid "If your nominated person misses the call you’ll need to complete this form again."
 msgstr ""
 
@@ -3478,6 +3619,14 @@ msgstr ""
 
 #: cla_public/templates/scope/diagnosis.html:15
 msgid "Your answers"
+msgstr ""
+
+#: cla_public/templates/scope/diagnosis.html:27
+msgid "Question"
+msgstr ""
+
+#: cla_public/templates/scope/diagnosis.html:31
+msgid "Answer"
 msgstr ""
 
 #: cla_public/templates/scope/diagnosis.html:41
@@ -3508,8 +3657,8 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"        You can %(ask_legal_adviser_link)s if an application might succeed in your case and how to apply.\n"
-"      "
+"          You can %(ask_legal_adviser_link)s if an application might succeed in your case and how to apply.\n"
+"        "
 msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:31
@@ -3520,8 +3669,8 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"        You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
-"      "
+"          You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
+"        "
 msgstr ""
 
 #: cla_public/templates/scope/ineligible.html:47
@@ -3536,19 +3685,24 @@ msgstr ""
 msgid "You can still ask a solicitor for help - you will have to pay for their advice."
 msgstr ""
 
-#: cla_public/templates/scope/ineligible.html:56
-msgid "Find a solicitor"
-msgstr ""
-
-#: cla_public/templates/scope/ineligible.html:60
-msgid "What did you think of this service?"
-msgstr ""
-
-msgid "(takes 30 seconds)"
-msgstr ""
-
 #: cla_public/templates/scope/ineligible.html:67
 msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
+msgstr ""
+
+#: cla_public/templates/scope/mediation.html:4
+msgid "Family mediation"
+msgstr ""
+
+#: cla_public/templates/scope/mediation.html:9
+msgid "You may be able to get legal aid for family mediation"
+msgstr ""
+
+#: cla_public/templates/scope/mediation.html:11
+msgid "Search for a family mediator in your area to find out if you qualify."
+msgstr ""
+
+#: cla_public/templates/scope/mediation.html:15
+msgid "Find your local mediator"
 msgstr ""
 
 #~ msgid "Overall, how did you feel about the service you received today?"
@@ -3832,5 +3986,150 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Find your local mediator"
+#~ msgstr ""
+
+#~ msgid "Call today at"
+#~ msgstr ""
+
+#~ msgid "Call on"
+#~ msgstr ""
+
+#~ msgid "Your email"
+#~ msgstr ""
+
+#~ msgid "You’ve accepted all cookies. You can "
+#~ msgstr ""
+
+#~ msgid "change your cookie settings"
+#~ msgstr ""
+
+#~ msgid "at any time."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "          If you’re in immediate danger please call Civil Legal Advice on <span class=\"tel\">0345 345 4 345</span>.\n"
+#~ "          %(call_charges_link)s.\n"
+#~ "        "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can also ask us to call you back using the form below,\n"
+#~ "        which is free."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you’re in an emergency situation, please call the police\n"
+#~ "        on 999."
+#~ msgstr ""
+
+#~ msgid "Choose address"
+#~ msgstr ""
+
+#~ msgid "Thanks for your feedback"
+#~ msgstr ""
+
+#~ msgid "Please don't include any personal or financial details for example, your National Insurance or credit card numbers."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "<abbr>CLA</abbr> will not disclose any personal information to anyone contacting the <abbr>CLA</abbr> service until\n"
+#~ "        they have successfully verified that their identity matches that of an existing record."
+#~ msgstr ""
+
+#~ msgid "You can change <a href=\"%(cookie_settings_url)s\">your cookie settings</a> to opt in or out of how different cookies are used."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can read more about <a href=\"%(cookie_url)s\">cookies used on \n"
+#~ "    check you can get legal aid</a>."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can read about\n"
+#~ "    <a href=\"http://www.aboutcookies.org/\" rel=\"external\">how to manage cookies</a>."
+#~ msgstr ""
+
+#~ msgid "Go back and change your answers in your problem area section"
+#~ msgstr ""
+
+#~ msgid "Go back and change answers"
+#~ msgstr ""
+
+#~ msgid "Go back and change your answer in %(step_title)s section"
+#~ msgid_plural "Go back and change your answers in %(step_title)s section"
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Go back and change answer"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Please quote your reference number when you call. Find out about\n"
+#~ "        <a href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Please be aware that the specialist adviser will need\n"
+#~ "      evidence of the domestic violence before they can make a decision\n"
+#~ "      on your case."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If your case involves domestic abuse or violence,\n"
+#~ "      the specialist adviser will need evidence of this\n"
+#~ "      before they can make a decision on your case."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You will also need to provide evidence of your financial\n"
+#~ "      circumstances. Your specialist adviser will explain what is\n"
+#~ "      needed."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You will need to provide evidence of your financial circumstances\n"
+#~ "      and maybe your problem. Your specialist adviser will explain\n"
+#~ "      what is needed."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "      If your specialist adviser thinks you need to speak to someone in person or have\n"
+#~ "      someone represent you in court, they will organise this.\n"
+#~ "    "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "      Protecting your personal data and your privacy is important to us. Read the full\n"
+#~ "      <a href=\"%(privacy_link)s\">Civil Legal Advice Privacy Statement</a>.\n"
+#~ "    "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you miss the call or you need advice urgently, you can call us on\n"
+#~ "      <strong>0345 345 4 345</strong>. Find out about\n"
+#~ "      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your feedback will improve this service.\n"
+#~ "      Please <a href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\" aria-labelledby=\"aria-satisfaction-survey\">send us your thoughts</a>."
+#~ msgstr ""
+
+#~ msgid "%(text)s"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "        You can %(ask_legal_adviser_link)s if an application might succeed in your case and how to apply.\n"
+#~ "      "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "        You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
+#~ "      "
 #~ msgstr ""
 
