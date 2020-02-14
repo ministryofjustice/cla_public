@@ -1423,7 +1423,7 @@ msgstr "Nid yw’r gwasanaeth llawn ar gael ar hyn o bryd. Fodd bynnag, gallwch 
 
 #: cla_public/templates/contact.html:30
 msgid "If you’re in an emergency situation, please call the police on 999."
-msgstr ""
+msgstr "Os ydych mewn sefyllfa argyfwng, ffoniwch yr heddlu ar 999."
 
 #: cla_public/templates/contact.html:34
 msgid "Call charges apply"
@@ -1436,7 +1436,7 @@ msgid ""
 "            If you’re in immediate danger please call Civil Legal Advice on <strong class=\"laa-telephone\">0345 345 4 345</strong>.\n"
 "            %(call_charges_link)s.\n"
 "          "
-msgstr ""
+msgstr "Os ydych mewn perygl uniongyrchol, ffonwich Cyngor Cyfreithiol Sifil ar <span class=\"laa-telephone\">0345 345 4 345</span>. %(call_charges_link)s.""
 
 #: cla_public/templates/contact.html:40
 msgid "You can also ask us to call you back using the form below, which is free."
@@ -3971,33 +3971,6 @@ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 #~ msgid "apply directly"
 #~ msgstr "Mewn achosion eithriadol, os yw eich achos yn mynd i adolygiad barnwrol, mae’n dal yn bosib i gymorth cyfreithiol fod ar gael."
 
-#~ msgid "You can still ask a solicitor for help – you will have to pay for their advice."
-#~ msgstr "Gallwch dal ofyn i gyfreithiwr eich helpu - bydd rhaid ichi dalu am eu cyngor."
-
-#~ msgid "From what you’ve told us today, it looks as though your problem is not covered."
-#~ msgstr "O’r hyn rydych wedi dweud wrthym heddiw, mae’n ymddangos nad yw eich problem chi yn gymwys."
-
-#~ msgid "You can still ask a solicitor for help - you will have to pay for their advice."
-#~ msgstr "Gallwch dal ofyn i gyfreithiwr eich helpu - bydd rhaid ichi dalu am eu cyngor."
-
-#~ msgid "You may still get help and advice from the organisations listed below. You don’t have to qualify for legal aid."
-#~ msgstr "Er hynny, efallai y byddwch yn gallu cael help a chyngor gan y sefydliadau sydd wedi’u rhestru isod. Nid oes rhaid ichi fod yn gymwys i gael cymorth cyfreithiol."
-
-#~ msgid "Family mediation"
-#~ msgstr ""
-
-#~ msgid "You may be able to get legal aid for family mediation"
-#~ msgstr "Mae’n bosibl y byddwch yn gallu cael cymorth cyfreithiol ar gyfer cyfryngu mewn achos teulu"
-
-#~ msgid "Search for a family mediator in your area to find out if you qualify."
-#~ msgstr "Chwiliwch am gyfryngwr teulu yn eich ardal chi i ganfod a ydych yn gymwys ai peidio."
-
-#~ msgid "Find your local mediator"
-#~ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
-
-#~ msgid "You can also get advice from alternative help organisations for issues related to %(category_name)s."
-#~ msgstr "Gallwch hefyd gael cyngor gan sefydliadau cymorth amgen ar gyfer materion sy’n ymwneud â %(category_name)s."
-
 #~ msgid "Call today at"
 #~ msgstr "Ffoniwch heddiw am"
 
@@ -4006,35 +3979,6 @@ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 
 #~ msgid "Your email"
 #~ msgstr "Eich cyfeiriad e-bost"
-
-#~ msgid "You’ve accepted all cookies. You can "
-#~ msgstr ""
-
-#~ msgid "change your cookie settings"
-#~ msgstr ""
-
-#~ msgid "at any time."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "\n"
-#~ "          If you’re in immediate danger please call Civil Legal Advice on <span class=\"tel\">0345 345 4 345</span>.\n"
-#~ "          %(call_charges_link)s.\n"
-#~ "        "
-#~ msgstr ""
-#~ "\n"
-#~ "Os ydych mewn perygl uniongyrchol, ffonwich Cyngor Cyfreithiol Sifil ar <span class=\"tel\">0345 345 4 345</span>.\n"
-#~ "%(call_charges_link)s."
-
-#~ msgid ""
-#~ "You can also ask us to call you back using the form below,\n"
-#~ "        which is free."
-#~ msgstr "Gallwch hefyd ofyn i ni eich ffonio’n ôl gan ddefnyddio’r ffurflen isod, sydd yn rhad ac am ddim."
-
-#~ msgid ""
-#~ "If you’re in an emergency situation, please call the police\n"
-#~ "        on 999."
-#~ msgstr "Os ydych mewn sefyllfa argyfwng, ffoniwch yr heddlu ar 999."
 
 #~ msgid "Choose address"
 #~ msgstr "Dewis cyfeiriad"
@@ -4055,85 +3999,4 @@ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 #~ msgid "Go back and change answer"
 #~ msgstr "Mynd yn ôl i newid ateb"
 
-#~ msgid ""
-#~ "Please quote your reference number when you call. Find out about\n"
-#~ "        <a href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
-#~ msgstr "Dyfynnwch eich cyfeirnod pan fyddwch yn ffonio. <a href=\"https://www.gov.uk/costau-galwadau\" rel=\"external\">I gael rhagor o wybodaeth am gyfraddau galwadau</a>."
-
-#~ msgid ""
-#~ "Please be aware that the specialist adviser will need\n"
-#~ "      evidence of the domestic violence before they can make a decision\n"
-#~ "      on your case."
-#~ msgstr ""
-#~ "Byddwch yn ymwybodol fod y cynghorydd arbenigol angen\n"
-#~ "tystiolaeth o’r trais domestig cyn y gallant wneud penderfyniad\n"
-#~ "ar eich achos."
-
-#~ msgid ""
-#~ "If your case involves domestic abuse or violence,\n"
-#~ "      the specialist adviser will need evidence of this\n"
-#~ "      before they can make a decision on your case."
-#~ msgstr "Os yw eich cais yn ymwneud â cham-drin neu drais domestig, bydd y cynghorydd arbenigol angen tystiolaeth o hyn cyn gwneud penderfyniad ynghylch eich achos."
-
-#~ msgid ""
-#~ "You will also need to provide evidence of your financial\n"
-#~ "      circumstances. Your specialist adviser will explain what is\n"
-#~ "      needed."
-#~ msgstr ""
-#~ "Bydd angen i chi ddarparu tystiolaeth o’ch amgylchiadau \n"
-#~ "ariannol hefyd. Bydd eich cynghorydd arbenigol yn egluro beth\n"
-#~ "sydd ei angen."
-
-#~ msgid ""
-#~ "You will need to provide evidence of your financial circumstances\n"
-#~ "      and maybe your problem. Your specialist adviser will explain\n"
-#~ "      what is needed."
-#~ msgstr ""
-#~ "Bydd angen i chi ddarparu tystiolaeth o’ch amgylchiadau ariannol \n"
-#~ "ac efallai eich problem. Bydd eich cynghorydd arbenigol yn egluro \n"
-#~ "beth sydd ei angen."
-
-#~ msgid ""
-#~ "\n"
-#~ "      If your specialist adviser thinks you need to speak to someone in person or have\n"
-#~ "      someone represent you in court, they will organise this.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "Os bydd y cynghorydd yn penderfynu bod angen i chi siarad â rhywun eich hun neu os bydd arnoch chi angen rhywun i’ch cynrychioli yn y llys, byddant yn trefnu hyn."
-
-#~ msgid ""
-#~ "\n"
-#~ "      Protecting your personal data and your privacy is important to us. Read the full\n"
-#~ "      <a href=\"%(privacy_link)s\">Civil Legal Advice Privacy Statement</a>.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "Mae diogelu’ch data personol a phreifatrwydd yn bwysig i ni. \n"
-#~ "Darllennwch y \n"
-#~ "<a href=\"%(privacy_link)s\">Datganiad Preifatrwydd Cyngor Cyfreithiol yn llawn</a>."
-
-#~ msgid ""
-#~ "If you miss the call or you need advice urgently, you can call us on\n"
-#~ "      <strong>0345 345 4 345</strong>. Find out about\n"
-#~ "      <a href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
-#~ msgstr "Os byddwch yn methu’r alwad neu angen cyngor ar frys, gallwch ein ffonio ar 0345 345 4 345. <a href=\"https://www.gov.uk/costau-galwadau\">Mae gwybodaeth am gostau’r galwadau i’w cael yma.</a>"
-
-#~ msgid "%(text)s"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "\n"
-#~ "        You can %(ask_legal_adviser_link)s if an application might succeed in your case and how to apply.\n"
-#~ "      "
-#~ msgstr "Gallwch ofyn am gyngor gan gynghorydd cyfreithiol ynghylch a fydd cais am gymorth cyfreithiol yn debygol o lwyddo yn eich achos chi a sut i wneud cais."
-
-#~ msgid ""
-#~ "\n"
-#~ "        You can also %(apply_directly_link)s to the Legal Aid Agency.\n"
-#~ "      "
-#~ msgstr "Gallwch hefyd gyflwyno cais yn uniongyrchol i’r Asiantaeth Cymorth Cyfreithiol."
-
-#~ msgid "optional"
-#~ msgstr "dewisol"
 
