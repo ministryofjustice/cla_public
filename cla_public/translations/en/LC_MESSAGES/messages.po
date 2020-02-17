@@ -17,6 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
+#: Default error message translation - DO NOT DELETE
+msgid "This field is required."
+msgstr "This field is required"
+
 #: cla_public/templates/macros/form.html:305 - DO NOT DELETE
 msgid "optional"
 msgstr ""
