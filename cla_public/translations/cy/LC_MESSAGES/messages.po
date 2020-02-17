@@ -992,8 +992,8 @@ msgstr "Trefnu amser i ffonio’n ôl"
 msgid "Time"
 msgstr "Time in Welsh"
 
-msgid "Date"
-msgstr "Date in Welsh"
+msgid "Day"
+msgstr "Day in Welsh"
 
 #: cla_public/apps/contact/forms.py:23
 msgid "-- Choose a language --"
