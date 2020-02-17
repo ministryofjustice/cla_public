@@ -992,8 +992,6 @@ msgstr "Trefnu amser i ffonio’n ôl"
 msgid "Time"
 msgstr "Time in Welsh"
 
-#: cla_public/templates/macros/subform.html:74
-#: cla_public/templates/macros/subform.html:89
 msgid "Date"
 msgstr "Date in Welsh"
 
