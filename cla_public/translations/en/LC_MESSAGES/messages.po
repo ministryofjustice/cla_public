@@ -983,6 +983,15 @@ msgstr ""
 msgid "Arrange a callback time"
 msgstr ""
 
+#: cla_public/templates/macros/subform.html:74
+#: cla_public/templates/macros/subform.html:90
+msgid "Time"
+msgstr ""
+
+#: cla_public/templates/macros/subform.html:84
+msgid "Day"
+msgstr ""
+
 #: cla_public/apps/contact/forms.py:23
 msgid "-- Choose a language --"
 msgstr ""

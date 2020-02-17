@@ -988,12 +988,17 @@ msgid "Arrange a callback time"
 msgstr "Trefnu amser i ffonio’n ôl"
 
 #: cla_public/templates/macros/subform.html:74
-#: cla_public/templates/macros/subform.html:89
+#: cla_public/templates/macros/subform.html:90
 msgid "Time"
-msgstr "Time in Welsh"
+msgstr "Amser"
 
+#: cla_public/templates/macros/subform.html:84
 msgid "Day"
-msgstr "Day in Welsh"
+msgstr "Dydd"
+
+#: wtforms/validators.py:198 wtforms/validators.py:233
+msgid "This field is required."
+msgstr "Rhaid cwblhau'r maes hwn."
 
 #: cla_public/apps/contact/forms.py:23
 msgid "-- Choose a language --"
