@@ -23,7 +23,7 @@ msgstr ""
 
 #: Default error message translation - DO NOT DELETE
 msgid "This field is required."
-msgstr "Rhaid cwblhau'r maes hwn"
+msgstr "Rhaid cwblhau’r maes hwn"
 
 #: cla_public/templates/macros/form.html:305 - DO NOT DELETE (can be deleted by the auto-update process)
 msgid "optional"
