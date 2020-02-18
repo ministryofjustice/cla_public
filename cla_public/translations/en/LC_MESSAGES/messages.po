@@ -17,6 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
+#: Default error message translation - DO NOT DELETE
+msgid "This field is required."
+msgstr "This field is required"
+
 #: cla_public/templates/macros/form.html:305 - DO NOT DELETE
 msgid "optional"
 msgstr ""
@@ -981,6 +985,15 @@ msgstr ""
 
 #: cla_public/apps/contact/fields.py:148
 msgid "Arrange a callback time"
+msgstr ""
+
+#: cla_public/templates/macros/subform.html:74
+#: cla_public/templates/macros/subform.html:90
+msgid "Time"
+msgstr ""
+
+#: cla_public/templates/macros/subform.html:84
+msgid "Day"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:23

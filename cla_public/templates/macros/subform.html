@@ -71,7 +71,7 @@
             <div class="govuk-radios__conditional">
               {{ Form.group(subform.time_today,
                 '',
-                custom_label='Time',
+                custom_label=_('Time'),
                 controlled_by=subform.specific_day,
                 control_value='today',
                 row_class='') }}
@@ -81,12 +81,13 @@
                 {{ Form.group(subform.day,
                   'govuk-!-padding-bottom-4 govuk-!-margin-bottom-0',
                   {'data-day-time-choices': subform.day.day_time_choices|tojson|safe},
+                  custom_label=_('Day'),
                   controlled_by=subform.specific_day,
                   control_value='specific_day',
                   row_class='') }}
                 {{ Form.group(subform.time_in_day,
                   '',
-                  custom_label='Time',
+                  custom_label=_('Time'),
                   controlled_by=subform.specific_day,
                   control_value='specific_day',
                   row_class='') }}
