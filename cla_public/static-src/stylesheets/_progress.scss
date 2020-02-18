@@ -1,58 +1,8 @@
-.progress {
-  font-size: .9em;
-
-  @mixin add_pointer($border-colour: $grey-3, $hover-colour: $grey-4, $clear-last: true) {
-    border-top: 1px solid $border-colour;
-    position: relative;
-    overflow: visible;
-
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -7px;
-      left: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      margin: auto;
-      border-style: solid;
-      border-width: 7px 7px 0 7px;
-      border-color: darken($border-colour, 5) transparent transparent transparent;
-      z-index: 2;
-    }
-
-    &:after {
-      border-top-color: white;
-      bottom: -6px;
-    }
-
-    @if $clear-last {
-      &:last-child {
-        &:before,
-        &:after {
-          content: none;
-        }
-      }
-    }
-
-    &.s-focused:before {
-      border-top-color: $yellow;
-    }
-
-    &.s-hovered:not(.s-focused),
-    &.m-current {
-      &:after {
-        border-top-color: $hover-colour;
-      }
-    }
-  }
-
-
+div.progress {
   .progress-bar {
     position: relative;
     margin-top: -10px;
-    background: $grey-2;
+    background: #bfc1c3;
     height: 10px;
 
     .m-completed {
@@ -65,62 +15,208 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      background: $orange;
+      background: $govuk-brand-colour;
       margin-left: -7px;
-      border: solid white;
+      border: solid #fff;
       border-width: 0 1px;
       width: 6px;
     }
   }
 
   .progress-value {
-    background: lighten($green, 10);
+    background: #008848;
   }
 
   .progress-steps {
     list-style: none;
-    margin: 0;
     padding: 0;
   }
 
   .progress-step {
-    @include add_pointer;
     margin: 0;
-    line-height: 1;
-    cursor: default;
+
+    &.m-completed {
+      .step-status {
+        border-color: #00703C;
+        transform: rotate(-45deg);
+        border-style: solid;
+        width: 13px;
+        border-width: 0 0 4px 4px;
+        height: 5px;
+        border-radius: 0;
+        margin-top: 1px;
+        box-shadow: none;
+        background-color: inherit;
+      }
+
+      &.m-current .step-status {
+        background-color: inherit;
+      }
+    }
 
     &.m-current {
-      font-weight: bold;
+      .step-status {
+        background-color: $govuk-brand-colour;
+        border-color: $govuk-brand-colour;
+        box-shadow: inset 0 0 0 2px #f3f2f1;
+      }
+      &:not(.m-completed) .step-name:focus:not(:active):not(:hover) .step-status {
+        background-color: $govuk-text-colour;
+      }
+
+      > .step-name {
+        &:hover .step-status {
+          box-shadow: inset 0 0 0 2px #dbdad9;
+        }
+
+        &:focus:not(:active):not(:hover) .step-status {
+          box-shadow: inset 0 0 0 2px $govuk-focus-colour;
+        }
+      }
+    }
+
+    &:first-child {
+      border-top: 1px solid $govuk-border-colour;
+    }
+
+    &:last-child {
+      > .step-name {
+        border-bottom: none;
+      }
+
+      > .step-name:before {
+        content: none;
+      }
+    }
+
+    > {
 
       .step-name {
-        color: $black;
+        border-bottom: 1px solid $govuk-border-colour;
+        color: $govuk-text-colour;
+        position: relative;
+        overflow: visible;
+        margin: 0;
+        line-height: 1;
+        text-align: left;
+        background-color: #f3f2f1;
+        padding: 15px 15px 13px 35px;
+        display: block;
+        text-decoration: none;
+
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin: auto;
+          border-color: transparent transparent $govuk-border-colour $govuk-border-colour;
+          z-index: 20;
+          transform: rotate(-45deg);
+          border-style: solid;
+          width: 5px;
+          height: 5px;
+          border-width: 1px;
+          bottom: -4px;
+          background-color: #f3f2f1;
+
+        }
+
+        &:focus:not(:active):not(:hover) .step-status {
+          border-color: $govuk-text-colour;
+        }
       }
 
-      a.step-name {
-        text-decoration: none;
-        background: $grey-4;
+      div.step-name, span.step-name {
+        background: #fff;
+
+        &:before {
+          background: #fff;
+        }
       }
+      a.step-name {
+        &:active, &:focus {
+          position: relative;
+          background: #fff;
+        }
+
+        &:hover .step-status {
+          box-shadow: inset 0 0 0 2px #dbdad9;
+        }
+      }
+    }
+    &:not(.m-current):not(.m-completed)>a.step-name .step-status {
+      background-color: $govuk-border-colour;
+      box-shadow: inset 0 0 0 2px #f3f2f1;
+    }
+    &:not(.m-current):not(.m-completed)>a.step-name:focus:not(:hover):not(:active) .step-status {
+      background-color: $govuk-text-colour;
+      box-shadow: inset 0 0 0 2px $govuk-focus-colour;
+    }
+
+
+    > a.step-name {
+      &:focus {
+        border-bottom: $govuk-focus-colour 1px solid;
+        outline: $govuk-focus-colour 3px solid;
+        z-index: 30;
+
+        &:not(:active):not(:hover) {
+          border-bottom: $govuk-text-colour 1px solid;
+          outline: none;
+          box-shadow: 0 4px 0 0 $govuk-text-colour;
+          background-color: $govuk-focus-colour;
+          z-index: 10;
+
+          &:before {
+            border-color: transparent transparent $govuk-text-colour $govuk-text-colour;
+            border-width: 4px;
+            bottom: -7px;
+            background-color: $govuk-focus-colour;
+            background-color: initial;
+          }
+        }
+      }
+
+      &:hover {
+        background-color: #dbdad9;
+
+        &:before {
+          background-color: #dbdad9;
+        }
+      }
+
+      &:focus:before {
+        background-color: initial;
+        border-color: transparent transparent $govuk-focus-colour $govuk-focus-colour;
+        border-width: 3px;
+        bottom: -5.5px;
+      }
+    }
+
+    &.m-current {
+      font-weight: 700;
     }
 
     &.m-collapsed {
       z-index: 1;
 
-      &:before,
-      &:after {
+      &:before {
         content: none;
       }
 
       .step-name {
-        @include add_pointer($clear-last: false);
         padding: 2px 0 3px;
 
         &:nth-child(1) {
-          border: 0;
           z-index: 3;
         }
+
+        &:before,
         &:nth-child(2) {
           z-index: 2;
         }
+
         &:nth-child(3) {
           z-index: 1;
         }
@@ -128,61 +224,21 @@
     }
   }
 
-  .step-name {
-    padding: 15px 15px 13px 35px;
-    display: block;
-    overflow: hidden;
-    text-decoration: none;
-  }
-
-  span.step-name {
-    color: $grey-1;
-  }
-
-  a.step-name:hover {
-    background: $grey-4;
-  }
-
-  a.step-name:focus,
-  a.step-name:active, {
-    position: relative;
-    background: white;
-    z-index: 2;
-  }
-
   .step-status {
     float: left;
     margin: -1px 0 0 -25px;
     content: '';
-    border: 2px solid #ddd;
-    box-shadow: inset 0 0 0 2px white;
+    border: 2px solid $govuk-border-colour;
+    box-shadow: inset 0 0 0 2px #fff;
     height: 13px;
     width: 13px;
-    line-height: 12px;
     border-radius: 100%;
-    text-align: center;
-    font-weight: normal;
     text-indent: -999em;
   }
 
   .step-name-subtitle {
     margin-top: 5px;
-    color: $grey-1;
+    color: #6f777b;
   }
 
-  .progress-step.m-completed {
-    .step-status {
-      background-color: lighten($green, 10);
-      border-color: lighten($green, 10);
-    }
-
-    span.step-name {
-      color: inherit;
-    }
-  }
-
-  .progress-step.m-current .step-status {
-    background-color: $orange;
-    border-color: lighten($orange, 10);
-  }
 }
