@@ -1,6 +1,5 @@
 # coding: utf-8
 import datetime
-import unittest
 
 from cla_common import call_centre_availability
 from cla_common.constants import THIRDPARTY_RELATIONSHIP
@@ -9,7 +8,6 @@ from mock import patch
 import pytz
 from werkzeug.datastructures import MultiDict
 
-from cla_public import app
 from cla_public.apps.contact.tests.test_availability import override_current_time
 from cla_public.apps.checker.constants import NO, YES, SAFE_TO_CONTACT, CONTACT_PREFERENCE
 from cla_public.apps.contact.forms import ContactForm
@@ -23,25 +21,24 @@ from cla_public.apps.checker.means_test import (
     OutgoingsPayload,
 )
 from cla_public.apps.checker.tests.utils.forms_utils import flatten_dict, flatten_list_of_dicts
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
 def get_en_locale():
     return "en"
 
 
-class TestApiPayloads(unittest.TestCase):
+class TestApiPayloads(FlaskAppTestCase):
     def setUp(self):
         self.patcher = patch("cla_public.libs.utils.get_locale", get_en_locale)
         self.patcher.start()
-        self.app = app.create_app("config/testing.py")
-        self._ctx = self.app.test_request_context()
-        self._ctx.push()
+        super(TestApiPayloads, self).setUp()
         self.client = self.app.test_client()
         self.now = datetime.datetime(2015, 1, 26, 9, 0)
 
     def tearDown(self):
         self.patcher.stop()
-        self._ctx.pop()
+        super(TestApiPayloads, self).tearDown()
 
     def merge_money_intervals(self, form_data, form_mi_data):
         for field_name, money_interval_dict in form_mi_data.items():

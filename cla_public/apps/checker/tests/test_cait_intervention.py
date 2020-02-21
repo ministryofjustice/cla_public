@@ -1,12 +1,11 @@
 from copy import copy
 import json
 import os
-import unittest
-
 import mock
 
-from cla_public.app import create_app
 from cla_public.apps.checker.cait_intervention import get_cait_params
+from cla_public.apps.base.tests import FlaskAppTestCase
+
 
 # Load dummy config data
 configs = {}
@@ -60,15 +59,10 @@ DEFAULT_PARAMS_OUT = {"truncate": 5}
 DEFAULT_SURVEY = "http://survey/default"
 
 
-class TestCaitIntervention(unittest.TestCase):
+class TestCaitIntervention(FlaskAppTestCase):
     def setUp(self):
-        self.app = create_app("config/testing.py")
+        super(TestCaitIntervention, self).setUp()
         self.client = self.app.test_client()
-        self.ctx = self.app.test_request_context()
-        self.ctx.push()
-
-    def tearDown(self):
-        self.ctx.pop()
 
     @mock.patch(ORGANISATION_LIST, setup_organisation_list())
     def test_direct_pathway(self):

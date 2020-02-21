@@ -4,21 +4,16 @@ import unittest
 from flask import url_for
 from werkzeug.datastructures import MultiDict
 
-from cla_public import app
 from cla_public.apps.base.constants import REASONS_FOR_CONTACTING_CHOICES
 from cla_public.apps.base.forms import ReasonsForContactingForm
 from cla_public.apps.checker.api import post_reasons_for_contacting
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
-class ReasonsForContactingTestCase(unittest.TestCase):
+class ReasonsForContactingTestCase(FlaskAppTestCase):
     def setUp(self):
-        self.app = app.create_app("config/testing.py")
-        self.ctx = self.app.test_request_context()
-        self.ctx.push()
+        super(ReasonsForContactingTestCase, self).setUp()
         self.client = self.app.test_client()
-
-    def tearDown(self):
-        self.ctx.pop()
 
     @unittest.skip("Skip this tests until request is mocked. These were ignored before with nosetests")
     def test_submission(self):

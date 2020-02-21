@@ -1,5 +1,4 @@
 import os
-import unittest
 from mock import Mock
 
 import flask
@@ -9,27 +8,25 @@ from wtforms.fields.html5 import EmailField
 
 from cla_public.apps.checker.forms import AboutYouForm
 from cla_public.apps.contact.validators import EmailValidator
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
 def submit(**kwargs):
     return AboutYouForm(MultiDict(kwargs), csrf_enabled=False)
 
 
-class TestValidation(unittest.TestCase):
+class TestValidation(FlaskAppTestCase):
     def setUp(self):
-        app = flask.Flask(__name__)
-        app.config["TESTING"] = True
+        super(TestValidation, self).setUp()
+        self.app.config["TESTING"] = True
         config = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../config/forms/en/forms_config.yml"))
-        app.config["FORM_CONFIG_TRANSLATIONS"] = {"en": config}
-        app.babel = Mock()
-        app.babel.locale_selector_func.return_value = "en"
-        app.extensions["babel"] = app.babel
-        self.context = app.test_request_context()
-        self.context.push()
+        self.app.config["FORM_CONFIG_TRANSLATIONS"] = {"en": config}
+        self.app.babel = Mock()
+        self.app.babel.locale_selector_func.return_value = "en"
+        self.app.extensions["babel"] = self.app.babel
 
-    def tearDown(self):
-        super(TestValidation, self).tearDown()
-        self.context.pop()
+    def create_flask_app(self):
+        return flask.Flask(__name__)
 
     def test_too_many_kids(self):
         num = 51

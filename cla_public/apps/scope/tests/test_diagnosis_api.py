@@ -1,20 +1,13 @@
 # coding: utf-8
-import unittest
-
-from cla_public.app import create_app
 from cla_public.apps.scope.api import diagnosis_api_client as api
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
-class TestReviewPage(unittest.TestCase):
+class TestReviewPage(FlaskAppTestCase):
     def setUp(self):
-        self.app = create_app("config/testing.py")
-        self.ctx = self.app.test_request_context()
-        self.ctx.push()
+        super(TestReviewPage, self).setUp()
         self.client = self.app.test_client()
         api.create_diagnosis()
-
-    def tearDown(self):
-        self.ctx.pop()
 
     def assertResponseHasNNodes(self, resp, n):
         self.assertEqual(resp.status_code, 200)

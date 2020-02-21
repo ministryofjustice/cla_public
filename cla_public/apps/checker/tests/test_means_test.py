@@ -1,14 +1,14 @@
 from collections import defaultdict
 from itertools import chain
 import logging
-import unittest
 
 from flask import session
 
-from cla_public.app import create_app
 from cla_public.apps.checker.constants import YES, NO
 from cla_public.apps.checker.means_test import MeansTest
 from cla_public.libs.money_interval import MoneyInterval
+from cla_public.apps.base.tests import FlaskAppTestCase
+
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
 
@@ -93,16 +93,11 @@ def update_session(form, **kwargs):
     session.checker[form].update(**kwargs)
 
 
-class TestMeansTest(unittest.TestCase):
+class TestMeansTest(FlaskAppTestCase):
     def setUp(self):
-        self.app = create_app("config/testing.py")
+        super(TestMeansTest, self).setUp()
         self.client = self.app.test_client()
-        self.ctx = self.app.test_request_context()
-        self.ctx.push()
         session.clear()
-
-    def tearDown(self):
-        self.ctx.pop()
 
     def assertDictValues(self, expected, actual):
         for key, val in actual.items():

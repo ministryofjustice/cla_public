@@ -9,10 +9,10 @@ from wtforms import Form
 from wtforms.validators import InputRequired, ValidationError
 
 from cla_common import call_centre_availability
-from cla_public.app import create_app
 from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, OPERATOR_HOURS, TimeChoiceField
 from cla_public.apps.contact.forms import ContactForm
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
@@ -33,11 +33,9 @@ def bank_holidays():
     return [datetime.datetime(2014, 12, 25, 0, 0), datetime.datetime(2015, 5, 25, 0, 0)]
 
 
-class TestAvailability(unittest.TestCase):
+class TestAvailability(FlaskAppTestCase):
     def setUp(self):
-        self.app = create_app("config/testing.py")
-        self.ctx = self.app.test_request_context()
-        self.ctx.push()
+        super(TestAvailability, self).setUp()
         self.now = datetime.datetime(2014, 11, 24, 9, 30)
         self.validator = None
         self.patcher = mock.patch("cla_common.call_centre_availability.bank_holidays", bank_holidays)
@@ -45,7 +43,7 @@ class TestAvailability(unittest.TestCase):
 
     def tearDown(self):
         self.patcher.stop()
-        self.ctx.pop()
+        super(TestAvailability, self).tearDown()
 
     def assertAvailable(self, time, form=None):
         form = form or Mock()
@@ -200,20 +198,12 @@ class TestDayTimeChoices(unittest.TestCase):
             self.assertIn(datetime.datetime(2015, 5, 26, 10, 30), days)
 
 
-class TestCallbackInPastBug(unittest.TestCase):
+class TestCallbackInPastBug(FlaskAppTestCase):
     """
     Had 2 cases in which callbacks were requested in the past:
     EU-5247-5578 created 2015-02-11 23:03 for 2015-02-11 10:30
     YJ-4697-7619 created 2015-02-11 22:19 for 2015-02-11 11:00
     """
-
-    def setUp(self):
-        self.app = create_app("config/testing.py")
-        self.ctx = self.app.test_request_context()
-        self.ctx.push()
-
-    def tearDown(self):
-        self.ctx.pop()
 
     def test_EU_5247_5578(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
