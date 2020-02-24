@@ -41,8 +41,8 @@
       border-color: $govuk-focus-colour;
       color: $govuk-text-colour;
       background-color: $govuk-focus-colour;
-      -webkit-box-shadow: 0 2px 0 $govuk-text-colour;
-      box-shadow: 0 2px 0 $govuk-text-colour;
+      -webkit-box-shadow: 0 4px 0 $govuk-text-colour;
+      box-shadow: 0 4px 0 $govuk-text-colour;
     }
 
     &:focus {
