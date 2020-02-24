@@ -3,7 +3,7 @@
 .cla-scope-options-list {
   list-style-type: none;
   margin: 1em 0 2em;
-  padding-inline-start: 0;
+  padding: 0;
 }
 
 .cla-scope-options-list-item {
@@ -32,7 +32,9 @@
       content: '';
       border: $govuk-text-colour 4px;
       border-style: solid solid none none;
-      transform: rotateZ(45deg);
+      -sand-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
     }
 
     &:focus:not(:active):not(:hover) {
