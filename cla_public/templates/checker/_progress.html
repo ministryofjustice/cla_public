@@ -15,7 +15,8 @@
 <div class="progress">
   {{ Element.progress_bar(current_percentage, current_percentage, completion_perc_offset) }}
 
-  <h2>{{ _('Your progress') }}</h2>
+  <h2 class="govuk-heading-m">{{ _('Your progress') }}</h2>
+  <span class="govuk-visually-hidden">{{current_percentage}}%</span>
 
   <ul class="progress-steps">
     {% for step in steps if step.name in ['problem', 'about']
