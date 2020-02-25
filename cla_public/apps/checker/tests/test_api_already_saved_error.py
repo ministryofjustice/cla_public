@@ -1,15 +1,14 @@
 # coding: utf-8
 import json
-import unittest
 from cla_public.apps.contact.views import session
 from mock import patch
 from slumber.exceptions import SlumberHttpBaseException
 
 from cla_common.constants import ELIGIBILITY_STATES
-from cla_public import app
 from cla_public.apps.checker.api import post_to_case_api, AlreadySavedApiError
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.contact.views import Contact
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
 def _mock_session_send(*args, **kwargs):
@@ -35,15 +34,10 @@ def _mock_post_to_is_eligible_api(*args, **kwargs):
     return ELIGIBILITY_STATES.YES, []
 
 
-class ApiAlreadySavedErrorTestCase(unittest.TestCase):
+class ApiAlreadySavedErrorTestCase(FlaskAppTestCase):
     def setUp(self):
-        self.app = app.create_app("config/testing.py")
-        self._ctx = self.app.test_request_context()
-        self._ctx.push()
+        super(ApiAlreadySavedErrorTestCase, self).setUp()
         self.client = self.app.test_client()
-
-    def tearDown(self):
-        self._ctx.pop()
 
     def test_mock_session_send_post_to_case_api(self):
         form = ContactForm()
