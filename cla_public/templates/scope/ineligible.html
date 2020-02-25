@@ -53,7 +53,7 @@
 
   <p class="govuk-body">
     {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'Find a solicitor') %}
-    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'button', 'data-ga': ga_event}) }}
+    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'govuk-button', 'data-ga': ga_event}) }}
   </p>
 
   <p class="govuk-body">

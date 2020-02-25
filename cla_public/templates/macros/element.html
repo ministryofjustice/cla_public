@@ -111,17 +111,43 @@
 
 {% macro link_new_window(url, text, is_external=False) %}
   <a href="{{ url }}"
-     class="govuk-link"
-     {% if is_external %} rel="external"{% endif %}
-     target="_blank"
-     title="{{ _('Opens in new window') }}"
-     {% if kwargs %}
-       {% for attr in kwargs %}
-         {{ attr }}="{{ kwargs[attr] }}"
-         {% if attr == 'class' and kwargs[attr].startswith('button') %}role="button"{% endif %}
-       {% endfor %}
-     {% endif %}
+    {% if is_external %} rel="external"{% endif %}
+    target="_blank"
+    title="{{ _('Opens in new window') }}"
+    {% if kwargs %}
+      {% for attr in kwargs %}
+        {% if attr == 'class' %}
+          {% if kwargs[attr].startswith('govuk-button') %}
+            role="button"
+            class="govuk-link {{ kwargs[attr] }}"
+          {% endif %}
+        {% else %}
+          class="govuk-link"
+        {{ attr }}="{{ kwargs[attr] }}"
+        {% endif %}
+     {% endfor %}
+    {% endif %}
   >
     {{ _(text) }}
     <span class="govuk-visually-hidden"> {{ _('Opens in new window') }}</span></a>
+{%- endmacro %}
+
+{% macro link_same_window(url, text, is_external=False) %}
+  <a href="{{ url }}"
+    class="govuk-link"
+    {% if is_external %} rel="external"{% endif %}
+    {% if kwargs %}
+      {% for attr in kwargs %}
+        {{ attr }}="{{ kwargs[attr] }}"
+        {% if attr == 'class' %}
+          {% if kwargs[attr].startswith('govuk-button') %}
+            role="button"
+          {% endif %}
+        {% else %}
+          class="govuk-link"
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  >
+    {{ _(text) }}
 {%- endmacro %}
