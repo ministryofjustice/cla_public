@@ -31,7 +31,7 @@
         </strong>
       </div>
       <p class="govuk-body">
-        {% trans call_charges_link=Element.link_new_window('https://www.gov.uk/call-charges', _('Call charges apply'), True) %}
+        {% trans call_charges_link=Element.link_same_window('https://www.gov.uk/call-charges', _('Call charges apply'), True) %}
             If you’re in immediate danger please call Civil Legal Advice on <strong class="laa-telephone">0345 345 4 345</strong>.
             {{ call_charges_link }}.
           {% endtrans %}
@@ -44,7 +44,7 @@
         {% trans %}Please submit your details to get in touch with Civil Legal Advice (CLA).{% endtrans %}
       </p>
       <p class="govuk-body">
-        {% trans call_charges_link=Element.link_new_window('https://www.gov.uk/call-charges', _('call charges'), True) %}
+        {% trans call_charges_link=Element.link_same_window('https://www.gov.uk/call-charges', _('call charges'), True) %}
           You can choose to contact CLA yourself and speak to someone immediately
           (this is an 0345 number - {{ call_charges_link }} apply) or ask us to call you back, which is free.
         {% endtrans %}
@@ -117,7 +117,7 @@
   {% include "checker/time-out-warning.html" %}
   {% block notice %}
     <p class="notice">
-      {% trans privacy_link=Element.link_new_window(url_for('base.privacy'), _('Civil Legal Advice Privacy Statement')) %}
+      {% trans privacy_link=Element.link_same_window(url_for('base.privacy'), _('Civil Legal Advice Privacy Statement')) %}
         Protecting your personal data and your privacy is important to us.
         Read the full {{ privacy_link }}.
       {% endtrans %}

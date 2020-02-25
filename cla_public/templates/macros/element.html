@@ -98,8 +98,8 @@
 #}
 
 {% macro staying_safe_online_link() %}
-  <p id="aria-staying-safe-online">
-    {%- set link=link_new_window(url_for('base.online_safety'), 'Staying safe online') -%}
+  <p class="govuk-body" id="aria-staying-safe-online">
+    {%- set link=link_same_window(url_for('base.online_safety'), 'staying safe online') -%}
     {%- trans -%}The information you enter won’t be stored on this device. Find out more about {{ link }}.{%- endtrans -%}
   </p>
 {% endmacro %}
@@ -116,38 +116,29 @@
     title="{{ _('Opens in new window') }}"
     {% if kwargs %}
       {% for attr in kwargs %}
-        {% if attr == 'class' %}
-          {% if kwargs[attr].startswith('govuk-button') %}
-            role="button"
-            class="govuk-link {{ kwargs[attr] }}"
-          {% endif %}
-        {% else %}
-          class="govuk-link"
-        {{ attr }}="{{ kwargs[attr] }}"
+        {% if attr == 'class' and kwargs[attr].startswith('govuk-button') %}
+          role="button"
+          class="govuk-link {{ kwargs[attr] }}"
+          {{ attr }}="{{ kwargs[attr] }}"
         {% endif %}
-     {% endfor %}
+      {% endfor %}
     {% endif %}
-  >
-    {{ _(text) }}
-    <span class="govuk-visually-hidden"> {{ _('Opens in new window') }}</span></a>
+    class="govuk-link"
+  >{{ _(text) }}<span class="govuk-visually-hidden"> {{ _('Opens in new window') }}</span></a>
 {%- endmacro %}
 
 {% macro link_same_window(url, text, is_external=False) %}
   <a href="{{ url }}"
-    class="govuk-link"
     {% if is_external %} rel="external"{% endif %}
     {% if kwargs %}
       {% for attr in kwargs %}
-        {{ attr }}="{{ kwargs[attr] }}"
-        {% if attr == 'class' %}
-          {% if kwargs[attr].startswith('govuk-button') %}
-            role="button"
-          {% endif %}
-        {% else %}
-          class="govuk-link"
+        {% if attr == 'class' and kwargs[attr].startswith('govuk-button') %}
+          role="button"
+          class="govuk-link {{ kwargs[attr] }}"
+          {{ attr }}="{{ kwargs[attr] }}"
         {% endif %}
       {% endfor %}
     {% endif %}
-  >
-    {{ _(text) }}
+    class="govuk-link"
+  >{{ _(text) }}</a>
 {%- endmacro %}

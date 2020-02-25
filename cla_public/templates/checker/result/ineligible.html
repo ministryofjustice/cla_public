@@ -54,7 +54,7 @@
   {% if category == 'family' %}
     <p class="govuk-body">
       {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'Family Mediation Council') %}
-      {% trans family_mediation_link=Element.link_new_window('http://www.familymediationcouncil.org.uk/', _('Family Mediation Council'), True, **{'data-ga': ga_event}) %}
+      {% trans family_mediation_link=Element.link_same_window('http://www.familymediationcouncil.org.uk/', _('Family Mediation Council'), True, **{'data-ga': ga_event}) %}
         If you want to make an application to court about a family matter you need to first of all
         see if family mediation will help. Use the {{ family_mediation_link }} directory to find a mediator
         and make an appointment for a Mediation Information and Assessment Meeting (MIAM).
@@ -91,7 +91,7 @@
 
   <p class="govuk-body">
     {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'Find a solicitor') %}
-    {{ Element.link_new_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'govuk-button', 'data-ga': ga_event}) }}
+    {{ Element.link_same_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'govuk-button', 'data-ga': ga_event}) }}
   </p>
 
   {{ HelpOrganisations.org_list_container(organisations, category_name, truncate=5) }}

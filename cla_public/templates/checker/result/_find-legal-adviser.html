@@ -109,7 +109,7 @@
                   {% if item.organisation.website %}
                     <p>
                       <span>{{ _('Website') }}:</span>
-                      {{ Element.link_new_window(item.organisation.website|human_to_url, item.organisation.website|url_to_human, is_external=True, **{'class': 'url'}) }}
+                      {{ Element.link_same_window(item.organisation.website|human_to_url, item.organisation.website|url_to_human, is_external=True, **{'class': 'url'}) }}
                     </p>
                   {% endif %}
                 </div>
