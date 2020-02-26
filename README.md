@@ -3,6 +3,7 @@
 [![Logs](https://img.shields.io/badge/logs-view-005571.svg?logo=kibana)](https://kibana.apps.cloud-platform-live-0.k8s.integration.dsd.io/_plugin/kibana/goto/5593d9bee2fffcfbb6d93dabee450dfb)
 [![Feature tests](https://img.shields.io/badge/feature%20tests-view-brightgreen.svg?logo=github)](https://github.com/ministryofjustice/laa-cla-e2e-tests)
 [![CircleCI](https://circleci.com/gh/ministryofjustice/cla_public/tree/master.svg?style=svg)](https://circleci.com/gh/ministryofjustice/cla_public/tree/master)
+[![Coverage Status](https://coveralls.io/repos/github/ministryofjustice/cla_public/badge.svg?branch=master)](https://coveralls.io/github/ministryofjustice/cla_public?branch=master)
 
 # Civil Legal Advice
   

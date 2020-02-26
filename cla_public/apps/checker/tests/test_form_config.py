@@ -1,12 +1,11 @@
 import os
-import unittest
 from wtforms import StringField
 from flask_wtf import Form
 from mock import patch
 
-from cla_public import app
 from cla_public.apps.checker.fields import DescriptionRadioField
 from cla_public.libs.form_config_parser import ConfigFormMixin
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
 FORMS_CONFIG = "config/forms_config.yml"
@@ -33,15 +32,14 @@ class TestDescriptionRadioFieldForm(ConfigFormMixin, Form):
     radio_select = DescriptionRadioField(u"Description Radio Field", choices=CHOICES, coerce=unicode)
 
 
-class TestFormConfig(unittest.TestCase):
+class TestFormConfig(FlaskAppTestCase):
     def setUp(self):
+        super(TestFormConfig, self).setUp()
         self.patcher = patch("cla_public.libs.utils.get_locale", get_en_locale)
         self.patcher.start()
-        self.app = app.create_app("config/testing.py")
-        self._ctx = self.app.test_request_context()
-        self._ctx.push()
 
     def tearDown(self):
+        super(TestFormConfig, self).tearDown()
         self.patcher.stop()
 
     def test_field_more_info(self):

@@ -2,8 +2,8 @@ import unittest
 import mock
 import requests
 
-from cla_public import app
 from cla_public.apps.base import healthchecks
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
 class DiskSpaceHealthcheckTest(unittest.TestCase):
@@ -35,11 +35,7 @@ class DiskSpaceHealthcheckTest(unittest.TestCase):
         self.assertDictContainsSubset({"status": "unhealthy", "available_percent": 2.0}, result)
 
 
-class BackendAPIHealthcheckTest(unittest.TestCase):
-    def setUp(self):
-        self.app = app.create_app("config/testing.py")
-        self.app.test_request_context().push()
-
+class BackendAPIHealthcheckTest(FlaskAppTestCase):
     @mock.patch("requests.get")
     def test_backend_check_fails_if_request_fails(self, request_mock):
         request_mock.side_effect = requests.exceptions.ConnectionError()
@@ -64,13 +60,12 @@ class BackendAPIHealthcheckTest(unittest.TestCase):
         self.assertDictContainsSubset({"status": "healthy", "response": {"status": "UP"}}, result)
 
 
-class HealthcheckEndpointTest(unittest.TestCase):
+class HealthcheckEndpointTest(FlaskAppTestCase):
     check_disk = "cla_public.apps.base.healthchecks.check_disk"
     check_backend_api = "cla_public.apps.base.healthchecks.check_backend_api"
 
     def setUp(self):
-        self.app = app.create_app("config/testing.py")
-        self.app.test_request_context().push()
+        super(HealthcheckEndpointTest, self).setUp()
         self.client = self.app.test_client()
 
     def assert_response_is_service_unavailable(self):

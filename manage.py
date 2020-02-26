@@ -30,11 +30,11 @@ def run(command, **kwargs):
 
 
 @manager.command
-def test(i=False):
-    """Run the tests. Pass -i to run integration tests as well"""
-    ignore_integration = "" if i else " -e=*_integration.py -e=*test_diagnosis_api* -e=*test_reasons_for_contacting*"
-    nosetests = "{venv}/bin/nosetests{integration}".format(venv=VENV, integration=ignore_integration)
-    run(nosetests)
+def test():
+    import xmlrunner
+    import unittest
+
+    xmlrunner.XMLTestRunner(output="test-reports", verbosity=3).run(unittest.TestLoader().discover("cla_public"))
 
 
 def add_msgctxt(**format_kwargs):

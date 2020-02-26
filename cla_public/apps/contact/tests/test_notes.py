@@ -1,20 +1,14 @@
-import unittest
-
 from werkzeug.datastructures import MultiDict
 
-from cla_public.app import create_app
 from cla_public.apps.contact.forms import ContactForm
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
 def submit(**kwargs):
     return ContactForm(MultiDict(kwargs), csrf_enabled=False)
 
 
-class NotesTest(unittest.TestCase):
-    def setUp(self):
-        app = create_app("config/testing.py")
-        app.test_request_context().push()
-
+class NotesTest(FlaskAppTestCase):
     def validate_notes(self, notes):
         form = submit(extra_notes=notes)
         form.validate()

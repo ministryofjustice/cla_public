@@ -1,15 +1,11 @@
 # coding: utf-8
-import unittest
-
-from cla_public.app import create_app
 from cla_public.apps.scope.api import diagnosis_api_client as api
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
-class TestReviewPage(unittest.TestCase):
+class TestReviewPage(FlaskAppTestCase):
     def setUp(self):
-        self.app = create_app("config/testing.py")
-        ctx = self.app.test_request_context()
-        ctx.push()
+        super(TestReviewPage, self).setUp()
         self.client = self.app.test_client()
         api.create_diagnosis()
 

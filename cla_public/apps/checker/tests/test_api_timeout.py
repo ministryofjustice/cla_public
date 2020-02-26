@@ -1,17 +1,15 @@
-import unittest
 from mock import patch
 
 from requests.exceptions import ConnectionError, Timeout
 
-from cla_public.app import create_app
 from cla_public.apps.checker.constants import NO, YES
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
-class TestApiTimeout(unittest.TestCase):
+class TestApiTimeout(FlaskAppTestCase):
     def setUp(self):
-        app = create_app("config/testing.py")
-        app.test_request_context().push()
-        self.client = app.test_client()
+        super(TestApiTimeout, self).setUp()
+        self.client = self.app.test_client()
         with self.client.session_transaction() as session:
             session["test"] = True
             session.checker["test"] = True

@@ -1,15 +1,11 @@
-import unittest
-
 from werkzeug.http import parse_cookie
 
-from cla_public.app import create_app
+from cla_public.apps.base.tests import FlaskAppTestCase
 
 
-class LocaleTest(unittest.TestCase):
+class LocaleTest(FlaskAppTestCase):
     def setUp(self):
-        self.app = create_app("config/testing.py")
-        ctx = self.app.test_request_context()
-        ctx.push()
+        super(LocaleTest, self).setUp()
         self.client = self.app.test_client()
 
     def test_locale_cookie_is_set(self):
