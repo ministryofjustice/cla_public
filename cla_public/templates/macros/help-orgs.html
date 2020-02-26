@@ -16,11 +16,11 @@
       {% if caller %}
         {{ caller() }}
       {% else %}
-        <h2>
+        <h2 class="govuk-heading-l">
           {{ _('Help organisations for problems about %(category_name)s',
             category_name=category_name|lower) }}
         </h2>
-        <p>
+        <p class="govuk-body">
           {{ _('You may still get help and advice from the organisations listed
             below. You don’t have to qualify for legal aid.') }}
         </p>
@@ -29,7 +29,9 @@
       {{ org_list(organisations, category_name) }}
     {% else %}
       {% call Element.alert() %}
-        <p>{{ _('There has been a problem with listing help organisations. Please refresh this page or try again later.') }}</p>
+        <p class="govuk-body">
+          {{ _('There has been a problem with listing help organisations. Please refresh this page or try again later.') }}
+        </p>
       {% endcall %}
     {% endif %}
   </div>
@@ -47,9 +49,9 @@
   <ul class="org-list">
     {% for org in organisations %}
       <li class="vcard {{ org.classname }}">
-        <h3>
+        <h3 class="govuk-heading-m">
           {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', org.service_name) %}
-          {{ Element.link_new_window(org.website, org.service_name, is_external=True, **{'class': 'url', 'data-ga': ga_event}) }}
+          {{ Element.link_same_window(org.website, org.service_name, is_external=True, **{'class': 'url', 'data-ga': ga_event}) }}
         </h3>
         {% if org.public_description %}
           <div class="org-description">

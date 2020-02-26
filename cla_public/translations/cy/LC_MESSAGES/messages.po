@@ -1411,6 +1411,10 @@ msgstr "Dangos {count} mwy"
 msgid "Staying safe online"
 msgstr "Cadw’n ddiogel ar-lein"
 
+#: cla_public/templates/element.html:102
+msgid "staying safe online"
+msgstr "cadw’n ddiogel ar-lein"
+
 #: cla_public/templates/base.html:156
 msgid "Privacy Policy"
 msgstr "Polisi preifatrwydd"
