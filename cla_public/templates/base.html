@@ -111,7 +111,7 @@
       ga('set', 'location', stripPII(window.location.href));
     }
 
-    if (window.GOVUK.checkConsentCookieCategory('', 'brexit')) {
+    if (window.GOVUK.checkConsentCookieCategory('', 'gds')) {
       // GDS CROSS DOMAIN ANALYTICS
       ga('create', '{{ config.GDS_GA_ID }}', 'auto', 'govuk_shared', {'allowLinker': true});
       ga('govuk_shared.require', 'linker');
