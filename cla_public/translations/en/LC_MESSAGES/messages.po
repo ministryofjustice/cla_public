@@ -1560,7 +1560,9 @@ msgstr ""
 #: cla_public/templates/cookies.html:25
 msgid "how to manage cookies"
 msgstr ""
-
+#: cla_public/templates/cookies.html:25
+msgid "aboutcookies.org"
+msgstr "aboutcookies.org (Saesneg)"
 #: cla_public/templates/cookies.html:25
 #, python-format
 msgid ""
@@ -1718,6 +1720,14 @@ msgstr ""
 
 #: cla_public/templates/cookies.html:127
 msgid "Welsh language cookies"
+msgstr ""
+
+#: cla_public/templates/cookies.html:28
+msgid "Change cookie settings"
+msgstr ""
+
+#: cla_public/templates/moj_template_base.jinja:155
+msgid "Crown copyright"
 msgstr ""
 
 #: cla_public/templates/cookies.html:138

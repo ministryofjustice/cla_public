@@ -1475,9 +1475,7 @@ msgid ""
 "          You can choose to contact CLA yourself and speak to someone immediately\n"
 "          (this is an 0345 number - %(call_charges_link)s apply) or ask us to call you back, which is free.\n"
 "        "
-msgstr ""
-"\n"
-"Gallwch ddewis cysylltu â CLA eich hun a siarad â rhywun ar unwaith (mae hwn yn rhif 0345 - %(call_charges_link)s) neu gallwch ofyn i ni eich ffonio yn ôl, sydd yn rhad ac am ddim."
+msgstr "Gallwch ddewis cysylltu â CLA eich hun a siarad â rhywun ar unwaith (mae hwn yn rhif 0345 - %(call_charges_link)s) neu gallwch ofyn i ni eich ffonio yn ôl, sydd yn rhad ac am ddim."
 
 #: cla_public/templates/contact.html:53
 msgid "You’ll need to provide evidence of the financial information (if any) you’ve given us through this service."
@@ -1540,8 +1538,8 @@ msgid ""
 msgstr "Newid eich gosodiadau cwcis"
 
 #: cla_public/templates/cookies.html:11
-msgid "The Check if you can get legal aid service puts small files (known as ’cookies’) onto your computer to collect information about how you browse the site."
-msgstr "Mae’r gwasanaeth ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’ yn rhoi ffeiliau bach (sy’n cael eu galw’n ‘cwcis’) ar eich cyfrifiadur i gasglu gwybodaeth ynglŷn â sut rydych yn pori drwy’r safle."
+msgid "The Check if you can get legal aid service puts small files (known as “cookies”) onto your computer to collect information about how you browse the site."
+msgstr "Mae’r gwasanaeth ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’ yn rhoi ffeiliau bach (sy’n cael eu galw’n “cwcis”) ar eich cyfrifiadur i gasglu gwybodaeth ynglŷn â sut rydych yn pori drwy’r safle."
 
 #: cla_public/templates/cookies.html:12
 msgid "Cookies are used to:"
@@ -1568,12 +1566,13 @@ msgid "how to manage cookies"
 msgstr "sut i reoli cwcis"
 
 #: cla_public/templates/cookies.html:25
+msgid "aboutcookies.org"
+msgstr "aboutcookies.org (Saesneg)"
+
+#: cla_public/templates/cookies.html:25
 #, python-format
-msgid ""
-"\n"
-"      Find out more about %(manage_cookies_link)s.\n"
-"    "
-msgstr "Cael rhagor o wybodaeth ynghylch %(manage_cookies_link)s."
+msgid "Find out more about how to manage cookies at %(manage_cookies_link)s."
+msgstr "Cael rhagor o wybodaeth ynghylch sut i reoli cwcis: %(manage_cookies_link)s."
 
 #: cla_public/templates/cookies.html:29
 msgid "How cookies are used on Check if you can get legal aid"
@@ -1725,6 +1724,14 @@ msgstr "Gallwch ddewis i ddefnyddio’r gwasanaeth hwn yn Gymraeg yn lle Saesneg
 #: cla_public/templates/cookies.html:127
 msgid "Welsh language cookies"
 msgstr ""
+
+#: cla_public/templates/cookies.html:28
+msgid "Change cookie settings"
+msgstr "Newid gosodiadau cwcis"
+
+#: cla_public/templates/moj_template_base.jinja:155
+msgid "Crown copyright"
+msgstr "Hawlfraint y Goron"
 
 #: cla_public/templates/cookies.html:138
 msgid "To remember your selection of Welsh language"

@@ -1,14 +1,23 @@
-   <div class="gem-c-cookie-banner__wrapper govuk-width-container">
-      <p class="gem-c-cookie-banner__message">{% trans %}We use cookies to make the site simpler.{% endtrans %}</p>
-      <div class="gem-c-cookie-banner__buttons">
-        <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-accept">
-          <button class="gem-c-button gem-c-button--secondary gem-c-button--inline" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">{% trans %}Accept cookies{% endtrans %}</button>
+  <div class="gem-c-cookie-banner__wrapper govuk-width-container govuk-!-padding-top-3">
+    <div class="govuk-grid-row">
+      <div class=" govuk-grid-column-three-quarters">
+        <div class="gem-c-cookie-banner__message">
+          <span class="govuk-heading-m">{% trans %}Cookies on Check if you can get Legal Aid{% endtrans %}</span>
+          <p class="govuk-body">
+            {% set cookie_info_url = '/cookies' %}
+            {% trans %}We use <a class="govuk-link" href="{{ cookie_info_url }}">cookies to collect information</a> about how you use GOV.UK.{% endtrans %}
+            {% trans %}We use this information to make the website work as well as possible and improve government services.{% endtrans %}
+          </p>
         </div>
-        <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-settings">
-          <a class="gem-c-button gem-c-button--secondary gem-c-button--inline" role="button" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked" href="/cookie-settings">{% trans %}Cookie settings{% endtrans %}</a>
-        </div>
+        <button class="gem-c-button govuk-button gem-c-button--inline govuk-!-margin-bottom-4 govuk-!-margin-right-7" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">
+          {% trans %}Accept all cookies{% endtrans %}
+        </button>
+        <a class="gem-c-button govuk-button gem-c-button--inline govuk-button--secondary" role="button" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked" href="/cookie-settings">
+          {% trans %}Set cookie preferences{% endtrans %}
+        </a>
       </div>
     </div>
+  </div>
 
   <div class="gem-c-cookie-banner__confirmation govuk-width-container" tabindex="-1">
     <p class="gem-c-cookie-banner__confirmation-message">
@@ -17,3 +26,4 @@
     </p>
     <button class="gem-c-cookie-banner__hide-button" data-hide-cookie-banner="true" data-module="track-click" data-track-category="cookieBanner" data-track-action="Hide cookie banner">{% trans %}Hide{% endtrans %}</button>
   </div>
+</div>
