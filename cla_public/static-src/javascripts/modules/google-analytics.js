@@ -19,7 +19,7 @@
     bindEvents: function () {
       var that = this;
 
-      $('a[data-ga],button[data-ga]').on('click', function(evt) {
+      $('a[data-ga]').on('click', function(evt) {
         var $link = $(this);
         var exitLink = $link.attr('target') === '_blank';
         var gaData = $link.data('ga');
@@ -30,7 +30,7 @@
 
         if(window.ga && _.includes(['event', 'pageview'], type) && value) {
 
-          if (!exitLink && evt.target.type !== "submit") {
+          if (!exitLink) {
             if (evt.preventDefault) {
               evt.preventDefault();
             } else {
@@ -39,7 +39,7 @@
           }
 
           that.send(type, gaTypeValuePair[1], $.proxy(function() {
-            if (!exitLink && evt.target.type !== "submit") {
+            if (!exitLink) {
               window.location.href = this.href;
             }
           }, this));
@@ -98,7 +98,9 @@
       if(payload.page || (payload.eventCategory && payload.eventAction)) {
         var ga_trackers = window.ga_trackers || {}
         _.forEach(ga_trackers, function(values, id){
-          window.ga(values['name'] + '.send', payload);
+          if (window.GOVUK.checkConsentCookieCategory('', id)) {
+            window.ga(values['name'] + '.send', payload);
+          }
         });
 
       }

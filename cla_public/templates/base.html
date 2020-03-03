@@ -136,13 +136,13 @@
     });
 
     {% block ga_pageview -%}
-    if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
-      ga('moj.send', 'pageview');
-    }
-    if (window.GOVUK.checkConsentCookieCategory('', 'gds')) {
-      // GDS CROSS DOMAIN ANALYTICS
-      ga('govuk_shared.send', 'pageview');
-    }
+      if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
+        ga('moj.send', 'pageview');
+      }
+      if (window.GOVUK.checkConsentCookieCategory('', 'gds')) {
+        // GDS CROSS DOMAIN ANALYTICS
+        ga('govuk_shared.send', 'pageview');
+      }
     {%- endblock %}
 
   </script>

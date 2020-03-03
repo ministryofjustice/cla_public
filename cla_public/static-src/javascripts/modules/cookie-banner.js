@@ -28,6 +28,7 @@
     }
 
     window.GOVUK.setCookie('cookie_policy', JSON.stringify(approvedConsent), { days: 365 })
+    moj.Modules.GA.send("pageview", document.location.pathname);
   }
 
   /*
