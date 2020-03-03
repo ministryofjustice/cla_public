@@ -2,7 +2,7 @@
       <p class="gem-c-cookie-banner__message">{% trans %}We use cookies to make the site simpler.{% endtrans %}</p>
       <div class="gem-c-cookie-banner__buttons">
         <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-accept">
-          <button class="gem-c-button gem-c-button--secondary gem-c-button--inline" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted">{% trans %}Accept cookies{% endtrans %}</button>
+          <button class="gem-c-button gem-c-button--secondary gem-c-button--inline" type="submit" data-module="track-click" data-accept-cookies="true" data-track-category="cookieBanner" data-track-action="Cookie banner accepted" data-ga="pageview:{{ request.path }}">{% trans %}Accept cookies{% endtrans %}</button>
         </div>
         <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-settings">
           <a class="gem-c-button gem-c-button--secondary gem-c-button--inline" role="button" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked" href="/cookie-settings">{% trans %}Cookie settings{% endtrans %}</a>

@@ -90,7 +90,7 @@
     <p class="govuk-body">
       <a href="/privacy">{% trans %}Find out how data is shared when you use this service{% endtrans %}</a>
     </p>
-    <button class="govuk-button" type="submit" data-module="govuk-button">
+    <button class="govuk-button" type="submit" data-module="govuk-button" data-ga="pageview:{{ request.path }}">
       {% trans %}Save changes{% endtrans %}
     </button>
   </form>

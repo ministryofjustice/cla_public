@@ -19,7 +19,7 @@
     bindEvents: function () {
       var that = this;
 
-      $('a[data-ga]').on('click', function(evt) {
+      $('a[data-ga],button[data-ga]').on('click', function(evt) {
         var $link = $(this);
         var exitLink = $link.attr('target') === '_blank';
         var gaData = $link.data('ga');
@@ -30,7 +30,7 @@
 
         if(window.ga && _.includes(['event', 'pageview'], type) && value) {
 
-          if (!exitLink) {
+          if (!exitLink && evt.target.type !== "submit") {
             if (evt.preventDefault) {
               evt.preventDefault();
             } else {
@@ -39,7 +39,7 @@
           }
 
           that.send(type, gaTypeValuePair[1], $.proxy(function() {
-            if (!exitLink) {
+            if (!exitLink && evt.target.type !== "submit") {
               window.location.href = this.href;
             }
           }, this));
@@ -96,7 +96,11 @@
 
       // Only send GA event or pageview when required fields are specified
       if(payload.page || (payload.eventCategory && payload.eventAction)) {
-        window.ga('send', payload);
+        var ga_trackers = window.ga_trackers || {}
+        _.forEach(ga_trackers, function(values, id){
+          window.ga(values['name'] + '.send', payload);
+        });
+
       }
     }
   };
