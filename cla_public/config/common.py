@@ -2,6 +2,7 @@ import os
 import datetime
 
 from flask.ext.babel import lazy_gettext as _
+from cla_common.services import CacheAdapter, TranslationAdapter
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -103,6 +104,19 @@ MAIL_PASSWORD = os.environ.get("SMTP_PASSWORD")
 MAIL_DEFAULT_SENDER = ("Civil Legal Advice", "no-reply@civillegaladvice.service.gov.uk")
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
+
+
+def current_app_cache_factory(*args, **kwargs):
+    from flask import current_app  # noqa: E402
+
+    return current_app.cache
+
+
+# Use Flasks current_app.cache to cache bank holidays lookups
+CacheAdapter.set_adapter_factory(current_app_cache_factory)
+
+# Use the Flask babel extension to translate strings in cla_common
+TranslationAdapter.set_adapter_factory(lambda: _)
 
 # local.py overrides all the common settings.
 try:
