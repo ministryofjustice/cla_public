@@ -20,10 +20,10 @@
   </div>
 
   <div class="gem-c-cookie-banner__confirmation govuk-width-container" tabindex="-1">
-    <p class="gem-c-cookie-banner__confirmation-message">
+    <p class="govuk-body govuk-!-margin-top-2 gem-c-cookie-banner__confirmation-message">
       {% set cookie_settings_url = url_for('base.cookie_settings') %}
       {% trans %}You’ve accepted all cookies. You can <a class="govuk-link" href="{{ cookie_settings_url }}" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked from confirmation">change your cookie settings</a> at any time.{% endtrans %}
     </p>
-    <button class="gem-c-cookie-banner__hide-button" data-hide-cookie-banner="true" data-module="track-click" data-track-category="cookieBanner" data-track-action="Hide cookie banner">{% trans %}Hide{% endtrans %}</button>
+    <button class="govuk-link govuk-!-margin-top-2 gem-c-cookie-banner__hide-button" data-hide-cookie-banner="true" data-module="track-click" data-track-category="cookieBanner" data-track-action="Hide cookie banner">{% trans %}Hide{% endtrans %}</button>
   </div>
 </div>
