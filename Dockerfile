@@ -31,7 +31,7 @@ WORKDIR /home/app/flask
 
 COPY requirements.txt .
 COPY requirements/ requirements/
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt &&  pip install -r requirements/no-deps.txt --no-deps
 
 COPY package.json package-lock.json ./
 RUN npm install

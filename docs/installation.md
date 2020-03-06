@@ -20,7 +20,7 @@ Next, create the environment and start it up:
 
     source env/bin/activate
 
-    pip install -r requirements/dev.txt
+    pip install -r requirements/dev.txt  && pip install -r requirements/no-deps.txt --no-deps
 
     nvm install v8.12
 

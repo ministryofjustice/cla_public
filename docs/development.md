@@ -17,7 +17,7 @@ To lint with Black and flake8, install pre-commit hooks:
 
 ```
 . env/bin/activate
-pip install -r requirements/dev.txt
+pip install -r requirements/dev.txt &&  pip install -r requirements/no-deps.txt --no-deps
 pre-commit install
 ```
 
