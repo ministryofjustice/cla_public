@@ -4,7 +4,7 @@ Flask-Babel==0.9
 Flask-Cache==0.13.1
 Flask-Mail==0.9.1
 Flask-Markdown==0.3
-Jinja2==2.7.3
+Jinja2==2.10.1
 MarkupSafe==0.23
 PyYAML==3.11
 Werkzeug==0.9.6
