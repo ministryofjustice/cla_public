@@ -8,7 +8,7 @@
 {% block inner_content %}
   <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <p class="govuk-body">{{ _('The Check if you can get legal aid service puts small files (known as ’cookies’) onto your computer to collect information about how you browse the site.') }}</p>
+  <p class="govuk-body">{{ _('The Check if you can get legal aid service puts small files (known as “cookies”) onto your computer to collect information about how you browse the site.') }}</p>
   <p class="govuk-body">{{ _('Cookies are used to:') }}</p>
 
   <ul class="govuk-list govuk-list--bullet">
@@ -22,10 +22,12 @@
 
   <p class="govuk-body">{{ _('You’ll normally see a message on the site before we store a cookie on your computer.') }}</p>
   <p class="govuk-body">
-    {% trans manage_cookies_link=Element.link_same_window('http://www.aboutcookies.org/', _('how to manage cookies'), True) %}
-      Find out more about {{ manage_cookies_link }}.
-    {% endtrans %}
+    {% trans manage_cookies_link=Element.link_same_window('http://www.aboutcookies.org/', _('aboutcookies.org'), True) %}Find out more about how to manage cookies at {{ manage_cookies_link }}.{% endtrans %}
   </p>
+  <a class="govuk-button" role="button" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked" href="/cookie-settings">
+    {% trans %}Change cookie settings{% endtrans %}
+  </a>
+
   <h2>{{ _('How cookies are used on Check if you can get legal aid') }}</h2>
   <h3>{{ _('Measuring website usage (Google Analytics)') }}</h3>
 

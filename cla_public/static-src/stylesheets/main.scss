@@ -259,7 +259,15 @@ dl.govuk-list.govuk-list--bullet {
   font-weight:700;
 }
 .laa-currency-period-input__item {
-    display: inline-block;
-    margin-right: 20px;
-    margin-bottom: 0;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 0;
+}
+
+.no-js-hide-inline-block {
+  display: none;
+}
+
+.js-enabled .no-js-hide-inline-block {
+  display: inline-block;
 }

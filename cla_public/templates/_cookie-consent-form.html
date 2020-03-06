@@ -2,9 +2,9 @@
 	<section class="gem-c-notice govuk-!-margin-bottom-8" aria-label="Notice" aria-live="polite" role="region">
 		<h2 class="gem-c-notice__title">{% trans %}Your cookie settings were saved{% endtrans %}</h2>
 		<p class="govuk-body">{% trans %}Government services may set additional cookies and, if so, will have their own cookie policy and banner.{% endtrans %}</p>
-		<a class="govuk_link cookie-settings__prev-page" href="#" data-module="track-click" data-track-category="cookieSettings" data-track-action="Back to previous page">
-        {% trans %}Go back to the page you were looking at{% endtrans %}
-      </a>
+		<a class="govuk-button cookie-settings__prev-page govuk-!-margin-bottom-2" href="#" data-module="track-click" data-track-category="cookieSettings" data-track-action="Back to previous page">
+      {% trans %}Go back to the page you were looking at{% endtrans %}
+    </a>
 	</section>
 </div>
 
@@ -15,7 +15,7 @@
 <div class="cookie-settings__no-js">
 	<div class="gem-c-govspeak govuk-govspeak " data-module="govspeak">
 		<p class="govuk-body">{% trans %}We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:{% endtrans %}</p>
-		<ul class="govuk-list">
+		<ul class="govuk-list govuk-list--bullet">
 			<li>{% trans %}reloading the page{% endtrans %}</li>
 			<li>{% trans %}turning on Javascript in your browser{% endtrans %}</li>
 		</ul>
