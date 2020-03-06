@@ -96,7 +96,13 @@
 
       // Only send GA event or pageview when required fields are specified
       if(payload.page || (payload.eventCategory && payload.eventAction)) {
-        window.ga('send', payload);
+        var ga_trackers = window.ga_trackers || {}
+        _.forEach(ga_trackers, function(values, id){
+          if (window.GOVUK.checkConsentCookieCategory('', id)) {
+            window.ga(values['name'] + '.send', payload);
+          }
+        });
+
       }
     }
   };

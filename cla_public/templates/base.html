@@ -104,26 +104,45 @@
     function stripPII(input) {
       return input.replace(/postcode=[^&]+/gi, 'postcode=[postcode]');
     }
+    window.ga_trackers = {}
+    {% if config.GDS_GA_ID %}
+      window.ga_trackers["gds"] = {
+        id: '{{ config.GDS_GA_ID }}',
+        "domain": "auto",
+        "name": "govuk_shared",
+        "options": {'allowLinker': true},
+        "linker": true
+      }
+    {% endif %}
+    {% if config.MOJ_GA_ID %}
+      window.ga_trackers["usage"] = {
+        "id": '{{ config.MOJ_GA_ID }}',
+        "domain": "auto",
+        "name": "moj",
+        "options": {},
+        "linker": false
+      }
+    {% endif %}
 
-    if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
-      ga('create', '{{ config.MOJ_GA_ID }}', 'auto');
-      ga('set', 'anonymizeIp', true);
-      ga('set', 'location', stripPII(window.location.href));
-    }
-
-    if (window.GOVUK.checkConsentCookieCategory('', 'brexit')) {
-      // GDS CROSS DOMAIN ANALYTICS
-      ga('create', '{{ config.GDS_GA_ID }}', 'auto', 'govuk_shared', {'allowLinker': true});
-      ga('govuk_shared.require', 'linker');
-      ga('govuk_shared.linker.set', 'anonymizeIp', true);
-      ga('govuk_shared.set', 'location', stripPII(window.location.href));
-      ga('govuk_shared.linker:autoLink', ['www.gov.uk']);
-    }
+    _.forEach(window.ga_trackers, function(values, id){
+      ga('create', values["id"], values["domain"], values["name"], values["options"]);
+      ga(values["name"] + '.set', 'anonymizeIp', true);
+      ga(values["name"] + '.set', 'location', stripPII(window.location.href));
+      if (values["linker"]) {
+        ga(values["name"] + '.require', 'linker');
+        ga(values["name"] + '.linker.set', 'anonymizeIp', true);
+        ga(values["name"] + '.linker:autoLink', ['www.gov.uk']);
+      }
+    });
 
     {% block ga_pageview -%}
-      ga('send', 'pageview');
-      // GDS CROSS DOMAIN ANALYTICS
-      ga('govuk_shared.send', 'pageview');
+      if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
+        ga('moj.send', 'pageview');
+      }
+      if (window.GOVUK.checkConsentCookieCategory('', 'gds')) {
+        // GDS CROSS DOMAIN ANALYTICS
+        ga('govuk_shared.send', 'pageview');
+      }
     {%- endblock %}
 
   </script>
