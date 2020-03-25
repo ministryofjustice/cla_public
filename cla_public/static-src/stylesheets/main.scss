@@ -271,3 +271,27 @@ dl.govuk-list.govuk-list--bullet {
 .js-enabled .no-js-hide-inline-block {
   display: inline-block;
 }
+
+.js-enabled .laa-flee-button-container {
+  display:block;
+  float: right;
+  
+  .laa-flee-button-position {
+    position: fixed;
+    z-index:1000;
+    
+    .laa-flee-button {
+      width:100%;
+    }
+  }
+  
+  .laa-flee-button-sizing,
+  .exit-info-sizing {
+    visibility:hidden;
+  }
+}
+
+
+.laa-flee-button-container {
+  display:none;
+}
