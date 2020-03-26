@@ -3562,8 +3562,8 @@ msgid ""
 "    </p>\n"
 "    <p class=\"govuk-body\">\n"
 "      If you are worried about the cost, you can request a call-back within 24 hours by either calling the helpline\n"
-"      or texting 'legal aid' and your name to <strong class=\"govuk-!-font-weight-bold\">80010</strong>. "
-msgstr "Bydd galwadau yn costio oddeutu 9c y funud o linell dir. Bydd galwadau o ffonau symudol yn costio mwy fel arfer. </p><p class=\"govuk-body\">Os ydych yn pryderu am y gost, gallwch wneud cais i aelod o staff eich ffonio yn ôl o fewn 24 awr, un ai trwy ffonio’r llinell gymorth neu drwy anfon neges destun gyda’r geiriau ‘legal aid’ a’ch enw i <strong class=\"govuk-!-font-weight-bold\">80010</strong>."
+"      or texting 'legal aid' and your name to <strong class=\"govuk-!-font-weight-bold\">78900</strong>. "
+msgstr "Bydd galwadau yn costio oddeutu 9c y funud o linell dir. Bydd galwadau o ffonau symudol yn costio mwy fel arfer. </p><p class=\"govuk-body\">Os ydych yn pryderu am y gost, gallwch wneud cais i aelod o staff eich ffonio yn ôl o fewn 24 awr, un ai trwy ffonio’r llinell gymorth neu drwy anfon neges destun gyda’r geiriau ‘legal aid’ a’ch enw i <strong class=\"govuk-!-font-weight-bold\">78900</strong>."
 
 #: cla_public/templates/errors/5xx.html:27
 msgid "Opening times:"
@@ -3914,7 +3914,7 @@ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 #~ msgid "Minicom: 0345 609 6677"
 #~ msgstr "Os byddwch chi’n gymwys i gael cyngor gan un o Arbenigwyr CLA, bydd angen hefyd iddo gadw data personol ychwanegol amdanoch chi yn ei System Trafod Achosion ei hun.  Rhaid cadw digon o ddata o’r fath i gyfiawnhau darparu cyngor drwy gymorth cyfreithiol ac i gwrdd â gofynion proffesiynol."
 
-#~ msgid "Or text <strong>legalaid</strong> and your name to 80010."
+#~ msgid "Or text <strong>legalaid</strong> and your name to 78900."
 #~ msgstr "Cyn i chi gysylltu â Chyngor Cyfreithiol Sifil"
 
 #~ msgid "Find out about call charges here"
@@ -3942,7 +3942,7 @@ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 #~ msgstr "Minicom: 0345 609 6677"
 
 #~ msgid "Help organisations"
-#~ msgstr "Neu anfonwch neges destun a’ch enw i 80010."
+#~ msgstr "Neu anfonwch neges destun a’ch enw i 78900."
 
 #~ msgid "you and your partner"
 #~ msgstr "Beth oeddech chi’n feddwl o’r gwasanaeth hwn? "

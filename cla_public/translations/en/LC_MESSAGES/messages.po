@@ -3557,7 +3557,7 @@ msgid ""
 "    </p>\n"
 "    <p class=\"govuk-body\">\n"
 "      If you are worried about the cost, you can request a call-back within 24 hours by either calling the helpline\n"
-"      or texting 'legal aid' and your name to <strong class=\"govuk-!-font-weight-bold\">80010</strong>. "
+"      or texting 'legal aid' and your name to <strong class=\"govuk-!-font-weight-bold\">78900</strong>. "
 msgstr ""
 
 #: cla_public/templates/errors/5xx.html:27
@@ -3907,7 +3907,7 @@ msgstr ""
 #~ msgid "Minicom: 0345 609 6677"
 #~ msgstr ""
 
-#~ msgid "Or text <strong>legalaid</strong> and your name to 80010."
+#~ msgid "Or text <strong>legalaid</strong> and your name to 78900."
 #~ msgstr ""
 
 #~ msgid "Find out about call charges here"
