@@ -53,16 +53,16 @@
       {% endfor %}
     {% endif %}
   {% endif %}
-  <div class="laa-flee-button-container" style="float:right;">
+  <div class="laa-flee-button-container">
     <div class="laa-flee-button-position">
-      <button id="quick-exit" class="govuk-button govuk-button--warning laa-flee-button">
+      <button id="quick-exit" class="govuk-button govuk-button--warning govuk-!-margin-bottom-2 laa-flee-button">
         {{ _('Quick exit') }}
       </button>
-      <p class="exit-info govuk-body-s govuk-!-font-size-14">
+      <p class="laa-quick-exit-info govuk-body-s govuk-!-font-size-14">
         {{ _('Click to hide this page') }}
       </p>
     </div>
-    <button class="govuk-button govuk-button--warning laa-flee-button-sizing" style="visibility: hidden;">
+    <button class="govuk-button govuk-button--warning govuk-!-margin-bottom-2 laa-flee-button-sizing" style="visibility: hidden;">
       {{ _('Quick exit') }}
     </button>
     <p class="govuk-body-s govuk-!-font-size-14 exit-info-sizing" style="visibility: hidden;">
@@ -102,8 +102,9 @@
 {% block javascripts %}
   <script>
   $("#quick-exit").on("click", function() {
+    $("body").hide();
     window.open("http://bbc.co.uk/weather", "_newtab");
-    window.location.replace('http://regia.org');
+    window.location.replace("http://www.google.co.uk");
   });
   
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD

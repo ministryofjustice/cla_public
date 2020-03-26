@@ -272,25 +272,51 @@ dl.govuk-list.govuk-list--bullet {
   display: inline-block;
 }
 
-.js-enabled .laa-flee-button-container {
-  display:block;
-  float: right;
-  
-  .laa-flee-button-position {
-    position: fixed;
-    z-index:1000;
-    
-    .laa-flee-button {
-      width:100%;
+@media only screen {
+  .js-enabled .laa-flee-button-container {
+    display:block;
+    float: right;
+
+    .laa-flee-button-position {
+      position: fixed;
+      z-index:1000;
+
+      .laa-flee-button {
+        width:100%;
+      }
+
+      .laa-quick-exit-info {
+        text-align:center;
+      }
     }
-  }
-  
-  .laa-flee-button-sizing,
-  .exit-info-sizing {
-    visibility:hidden;
+
+    .laa-flee-button-sizing,
+    .exit-info-sizing {
+      visibility:hidden;
+    }
   }
 }
 
+@media only screen and (max-width: 640px) {
+  footer.govuk-footer {
+    padding-bottom: 95px;
+  }
+  .js-enabled .laa-flee-button-container {
+    float: none;
+
+    .laa-flee-button-position {
+      bottom: 0;
+      width: 100vw;
+      left: 0;
+      background: govuk-colour("light-grey");
+    }
+
+    .laa-flee-button-sizing,
+    .exit-info-sizing {
+      display:none;
+    }
+  }
+}
 
 .laa-flee-button-container {
   display:none;
