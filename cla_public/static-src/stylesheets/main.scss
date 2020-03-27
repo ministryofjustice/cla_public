@@ -280,6 +280,7 @@ dl.govuk-list.govuk-list--bullet {
     .laa-flee-button-position {
       position: fixed;
       z-index:1000;
+      background-color:govuk-colour("white");
 
       .laa-flee-button {
         width:100%;

@@ -54,7 +54,10 @@
     {% endif %}
   {% endif %}
   <div class="laa-flee-button-container
-    {% if 'n43n3' in session.checker.diagnosis_previous_choices %}
+    {%  if 'n43n3' in session.checker.diagnosis_previous_choices or 
+        if 'n86' in session.checker.diagnosis_previous_choices or
+        if 'n88' in session.checker.diagnosis_previous_choices
+    %}
       laa-fee-button-enabled
     {% endif %}
     ">
