@@ -57,16 +57,20 @@
     <div class="laa-flee-button-position">
       <button id="quick-exit" class="govuk-button govuk-button--warning govuk-!-margin-bottom-2 laa-flee-button">
         {{ _('Quick exit') }}
+        <br />
+        <span class="govuk-!-font-size-14">{{ _('Click to hide this page') }}</span>
       </button>
       <p class="laa-quick-exit-info govuk-body-s govuk-!-font-size-14">
-        {{ _('Click to hide this page') }}
+        ({{ _('Or press Esc key') }})
       </p>
     </div>
     <button class="govuk-button govuk-button--warning govuk-!-margin-bottom-2 laa-flee-button-sizing" style="visibility: hidden;">
       {{ _('Quick exit') }}
+        <br />
+      <span class="govuk-!-font-size-14">{{ _('Click to hide this page') }}</span>
     </button>
     <p class="govuk-body-s govuk-!-font-size-14 exit-info-sizing" style="visibility: hidden;">
-      {{ _('Click to hide this page') }}
+      {{ _('Or press Esc key') }}
     </p>
     <!-- identical with above to space out.-->
 
@@ -101,12 +105,20 @@
 
 {% block javascripts %}
   <script>
-  $("#quick-exit").on("click", function() {
-    $("body").hide();
-    window.open("http://bbc.co.uk/weather", "_newtab");
-    window.location.replace("http://www.google.co.uk");
-  });
-  
+    function flee() {
+      $("body").hide();
+      window.open("http://bbc.co.uk/weather", "_newtab");
+      window.location.replace("http://www.google.co.uk");
+    }
+    $("#quick-exit").on("click", function() {
+      flee();
+    });
+    $(document).keyup(function(e) {
+      if (e.keyCode == 27) { // escape key
+        flee();
+      }
+    });
+
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
      * Build: http://modernizr.com/download/#-mq-teststyles
      */
