@@ -105,6 +105,12 @@
 
 {% block javascripts %}
   <script>
+
+    var currentLocation = window.location.href;
+    if (currentLocation.indexOf("n43n3") > 0 || currentLocation.indexOf("n43n14/n97") > 0) {
+      $(".laa-flee-button-container").addClass("laa-fee-button-enabled");
+    }
+
     function flee() {
       $("body").hide();
       {#

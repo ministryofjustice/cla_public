@@ -273,7 +273,7 @@ dl.govuk-list.govuk-list--bullet {
 }
 
 @media only screen {
-  .js-enabled .laa-flee-button-container {
+  .js-enabled .laa-flee-button-container.laa-fee-button-enabled {
     display:block;
     float: right;
 
@@ -301,7 +301,7 @@ dl.govuk-list.govuk-list--bullet {
   footer.govuk-footer {
     padding-bottom: 95px;
   }
-  .js-enabled .laa-flee-button-container {
+  .js-enabled .laa-flee-button-container.laa-fee-button-enabled {
     float: none;
 
     .laa-flee-button-position {
