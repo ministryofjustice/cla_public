@@ -53,7 +53,11 @@
       {% endfor %}
     {% endif %}
   {% endif %}
-  <div class="laa-flee-button-container">
+  <div class="laa-flee-button-container
+    {% if 'n43n3' in session.checker.diagnosis_previous_choices %}
+      laa-fee-button-enabled
+    {% endif %}
+    ">
     <div class="laa-flee-button-position">
       <button id="quick-exit" class="govuk-button govuk-button--warning govuk-!-margin-bottom-2 laa-flee-button">
         <strong>{{ _('Quick exit') }}</strong>
