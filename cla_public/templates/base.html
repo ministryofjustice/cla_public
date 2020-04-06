@@ -124,7 +124,7 @@
       $(".laa-flee-button-container").addClass("laa-fee-button-enabled");
     }
 
-    function flee() {
+    function fleeFromPage() {
       $("body").hide();
       {#
         The below are all other possibilities but not necessarily the best approach. 
@@ -138,13 +138,13 @@
       window.location.replace("http://www.google.co.uk");
     }
     $("#quick-exit").on("click", function() {
-      flee();
       ga('moj-send', 'event', 'quick-exit', 'Mouse-click');
+      fleeFromPage();
     });
     $(document).keyup(function(e) {
       if (e.keyCode == 27) { // escape key
-        flee();
         ga('moj-send', 'event', 'quick-exit', 'Escape-key');
+        fleeFromPage();
       }
     });
 
