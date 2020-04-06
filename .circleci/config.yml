@@ -244,9 +244,13 @@ workflows:
           requires:
             - staging_deploy_approval
           context: laa-cla-public-live-1
+      - staging_deploy_helm_approval:
+          type: approval
+          requires:
+            - build
       - staging_deploy_helm:
           requires:
-            - staging_deploy_approval
+            - staging_deploy_helm_approval
           context: laa-cla-public-live-1
       - production_deploy_approval:
           type: approval
