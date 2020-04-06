@@ -295,10 +295,6 @@ dl.govuk-list.govuk-list--bullet {
     .exit-info-sizing {
       visibility:hidden;
     }
-
-    .laa-explanation-long {
-      display:inline;
-    }
   }
 }
 
@@ -321,6 +317,7 @@ dl.govuk-list.govuk-list--bullet {
       display:none;
     }
     
+    .laa-explanation-long,
     .laa-quick-exit-info,
     .exit-info-sizing {
       display:none;
@@ -332,7 +329,6 @@ dl.govuk-list.govuk-list--bullet {
   }
 }
 
-.laa-explanation-long,
 .laa-explanation-short {
   display:none;
 }
