@@ -138,12 +138,12 @@
     }
     $("#quick-exit").on("click", function() {
       flee();
-      ga('send', 'event', 'quick-exit', 'Mouse click');
+      ga('send', 'event', 'quick-exit', 'Mouse-click');
     });
     $(document).keyup(function(e) {
       if (e.keyCode == 27) { // escape key
         flee();
-        ga('send', 'event', 'quick-exit', 'Esc key');
+        ga('send', 'event', 'quick-exit', 'Escape-key');
       }
     });
 
