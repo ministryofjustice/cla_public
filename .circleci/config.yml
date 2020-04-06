@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@2.5.0
+  slack: circleci/slack@3.4.2
 
 jobs:
   build:
@@ -158,6 +158,54 @@ jobs:
           command: .circleci/deploy_to_kubernetes staging
       - slack/status
 
+  staging_deploy_helm:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Install helm v3
+          command: |
+            wget https://get.helm.sh/helm-v3.1.2-linux-amd64.tar.gz
+            tar -zxvf helm-v3.1.2-linux-amd64.tar.gz
+            mv linux-amd64/helm /usr/local/bin/helm
+      - run:
+          name: Initialise Kubernetes staging context
+          command: |
+            setup-kube-auth
+            kubectl config use-context staging
+      - deploy:
+          name: Deploy laa-cla-public to staging
+          command: |
+            source .circleci/define_build_environment_variables
+            ./bin/staging_deploy.sh
+            echo "export RELEASE_HOST=$RELEASE_HOST" >> $BASH_ENV
+      - slack/notify:
+          message: ':tada: Deployed branch $CIRCLE_BRANCH'
+          title: '$RELEASE_HOST'
+          title_link: 'https://$RELEASE_HOST/start/'
+
+  cleanup_merged:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+    steps:
+      - checkout
+      - run:
+          name: Install helm v3
+          command: |
+            wget https://get.helm.sh/helm-v3.1.2-linux-amd64.tar.gz
+            tar -zxvf helm-v3.1.2-linux-amd64.tar.gz
+            mv linux-amd64/helm /usr/local/bin/helm
+      - run:
+          name: Initialise Kubernetes staging context
+          command: |
+            setup-kube-auth
+            kubectl config use-context staging
+      - run:
+          name: Delete staging release
+          command: |
+            ./bin/delete_staging_release.sh
+
   production_deploy:
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
@@ -180,6 +228,8 @@ workflows:
       - lint-with-py2-tools
       - lint-with-py3-tools
       - test
+      - cleanup_merged:
+          context: laa-cla-public-live-1
       - build:
           requires:
             - lint-with-py2-tools
@@ -191,6 +241,10 @@ workflows:
           requires:
             - build
       - staging_deploy:
+          requires:
+            - staging_deploy_approval
+          context: laa-cla-public-live-1
+      - staging_deploy_helm:
           requires:
             - staging_deploy_approval
           context: laa-cla-public-live-1

@@ -1,6 +1,11 @@
-#!/bin/bash -eu
-short_sha="$(git rev-parse --short=7 "$CIRCLE_SHA1")"
-export short_sha
+#!/bin/sh -eu
+export DOCKER_REPOSITORY="$ECR_DOCKER_REPOSITORY"
+
 export safe_git_branch=${CIRCLE_BRANCH//\//-}
-export deploy_image_and_tag="$ECR_DOCKER_IMAGE:$safe_git_branch.$short_sha"
-export ECR_DEPLOY_IMAGE="$ECR_DOCKER_REGISTRY/$deploy_image_and_tag"
+export short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
+export IMAGE_TAG="$safe_git_branch.$short_sha"
+export ECR_DEPLOY_IMAGE="$DOCKER_REPOSITORY/$IMAGE_TAG"
+
+export CLEANED_BRANCH_NAME=$(echo $CIRCLE_BRANCH | sed 's/^feature[-/]//' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | tr '[:upper:]' '[:lower:]' | cut -c1-28 | sed 's/-$//')
+export RELEASE_NAME=${CLEANED_BRANCH_NAME}
+export RELEASE_HOST="$RELEASE_NAME-$STAGING_HOST"
