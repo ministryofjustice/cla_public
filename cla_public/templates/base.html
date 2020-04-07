@@ -55,6 +55,7 @@
   {% endif %}
   <div class="laa-flee-button-container
     {% if ('n43n3' in session.checker.diagnosis_previous_choices) or
+        ('n97' in session.checker.diagnosis_previous_choices) or
         ('n86' in session.checker.diagnosis_previous_choices) or
         ('n149' in session.checker.diagnosis_previous_choices) or
         ('n18' in session.checker.diagnosis_previous_choices) or
@@ -118,11 +119,6 @@
 
 {% block javascripts %}
   <script>
-
-  //  var currentLocation = window.location.href;
-  //  if (currentLocation.indexOf("n43n3") > 0 || currentLocation.indexOf("n43n14/n97") > 0 || currentLocation.indexOf("n88") > 0 || currentLocation.indexOf("n149") > 0 || currentLocation.indexOf("n86") > 0) {
-  //    $(".laa-flee-button-container").addClass("laa-fee-button-enabled");
-  //  }
 
     function fleeFromPage() {
       $("body").hide();
