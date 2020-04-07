@@ -122,14 +122,6 @@
 
     function fleeFromPage() {
       $("body").hide();
-      {#
-        The below are all other possibilities but not necessarily the best approach. 
-
-        var histLength = history.length;
-        window.history.go(-histLength);
-        history.pushState({page: 1}, "Cookies", "/cookies")
-        history.pushState({page: 2}, "Bank Holidays in the UK", "/bank-holidays")
-      #}
       window.open("http://bbc.co.uk/weather", "_newtab");
       window.location.replace("http://www.google.co.uk");
     }
