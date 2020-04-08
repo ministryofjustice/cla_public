@@ -2,7 +2,7 @@
 set -e
 
 ROOT=$(dirname "$0")
-HELM_DIR="$ROOT/../helm_deploy/cla-backend/"
+HELM_DIR="$ROOT/../helm_deploy/cla-public/"
 
 helm upgrade $RELEASE_NAME \
   $HELM_DIR \

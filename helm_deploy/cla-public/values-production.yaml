@@ -1,0 +1,21 @@
+# Default values for cla-public in a production environment.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  pullPolicy: IfNotPresent
+
+environment: production
+
+ingress:
+  enabled: true
+  # hosts:
+    # - host: laa-cla-public-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+      # paths: ['/']
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# Lists don't deep merge, so this list of envVars overrides anything defined in an earlier values file
+envVars:

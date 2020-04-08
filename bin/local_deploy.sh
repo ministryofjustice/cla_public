@@ -2,11 +2,11 @@
 set -e
 
 ROOT=$(dirname "$0")
-HELM_DIR="$ROOT/../helm_deploy/cla-backend/"
+HELM_DIR="$ROOT/../helm_deploy/cla-public/"
 
 kubectl config use-context docker-for-desktop
 
-helm upgrade cla-backend \
+helm upgrade cla-public \
   $HELM_DIR \
   --values ${HELM_DIR}/values-dev.yaml \
   --install
