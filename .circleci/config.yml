@@ -183,7 +183,7 @@ jobs:
       - slack/notify:
           message: ':tada: Deployed branch $CIRCLE_BRANCH'
           title: '$RELEASE_HOST'
-          title_link: 'https://$RELEASE_HOST/start/'
+          title_link: 'https://$RELEASE_HOST/start'
 
   cleanup_merged:
     docker:
