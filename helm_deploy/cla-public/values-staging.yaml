@@ -14,13 +14,7 @@ replicaCount: 2
 
 ingress:
   enabled: true
-  hosts:
-    - host: laa-cla-public-staging.apps.live-1.cloud-platform.service.justice.gov.uk
-      paths: ['/']
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  secretName: tls-certificate
 
 # Lists don't deep merge, so this list of envVars overrides anything defined in an earlier values file
 envVars:
