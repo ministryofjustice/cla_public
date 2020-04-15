@@ -14,7 +14,7 @@ replicaCount: 2
 
 ingress:
   enabled: true
-  secretName: tls-certificate
+  secretName: tls-wildcard-certificate
 
 # Lists don't deep merge, so this list of envVars overrides anything defined in an earlier values file
 envVars:
