@@ -18,6 +18,6 @@ def is_quick_exit_enabled(nodes, session=None):
     if "diagnosis_previous_choices" in session.checker:
         quick_exit_categories = ["n43n3", "n18", "n19", "n88", "n86", "n97", "n149"]
         for category in quick_exit_categories:
-            if category in session.checker["diagnosis_previous_choices"]:
+            return category in session.checker["diagnosis_previous_choices"]
                 return category
     return False
