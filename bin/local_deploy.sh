@@ -9,4 +9,5 @@ kubectl config use-context docker-for-desktop
 helm upgrade cla-public \
   $HELM_DIR \
   --values ${HELM_DIR}/values-dev.yaml \
+  --force \
   --install

@@ -12,4 +12,5 @@ helm upgrade $RELEASE_NAME \
   --set host=$RELEASE_HOST \
   --set image.repository=$DOCKER_REPOSITORY \
   --set image.tag=$IMAGE_TAG \
+  --force \
   --install
