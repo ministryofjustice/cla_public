@@ -7,10 +7,3 @@ export IMAGE_TAG="$safe_git_branch.$short_sha"
 export ECR_DEPLOY_IMAGE="$DOCKER_REPOSITORY/$IMAGE_TAG"
 
 export CLEANED_BRANCH_NAME=$(echo $CIRCLE_BRANCH | sed 's/^feature[-/]//' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | tr '[:upper:]' '[:lower:]' | cut -c1-28 | sed 's/-$//')
-export RELEASE_NAME=${CLEANED_BRANCH_NAME}
-if [[ $RELEASE_NAME == "master" ]]
-then
-    export RELEASE_HOST="$PRODUCTION_HOST"
-else
-    export RELEASE_HOST="$RELEASE_NAME.$STAGING_HOST"
-fi

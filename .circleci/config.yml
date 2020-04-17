@@ -159,6 +159,10 @@ jobs:
       - slack/status
 
   staging_deploy_helm:
+    parameters:
+      multideploy:
+        type: boolean
+        default: false
     docker:
       - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
     steps:
@@ -174,12 +178,24 @@ jobs:
           command: |
             setup-kube-auth
             kubectl config use-context staging
-      - deploy:
-          name: Deploy laa-cla-public to staging
-          command: |
-            source .circleci/define_build_environment_variables
-            ./bin/staging_deploy.sh
-            echo "export RELEASE_HOST=$RELEASE_HOST" >> $BASH_ENV
+      - unless:
+          condition: << parameters.multideploy >>
+          steps:
+            - deploy:
+              name: Deploy laa-cla-public to fixed staging
+              command: |
+                source .circleci/define_build_environment_variables
+                ./bin/staging_deploy.sh
+                echo "export RELEASE_HOST=$STAGING_HOST" >> $BASH_ENV
+      - when:
+          condition: << parameters.multideploy >>
+          steps:
+            - deploy:
+              name: Deploy laa-cla-public to multideploy staging
+              command: |
+                source .circleci/define_build_environment_variables
+                ./bin/staging_multideploy.sh
+                echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
       - slack/notify:
           message: ':tada: Deployed branch $CIRCLE_BRANCH'
           title: '$RELEASE_HOST'
@@ -252,6 +268,20 @@ workflows:
           requires:
             - staging_deploy_helm_approval
           context: laa-cla-public-live-1
+          multideploy: false
+          filters:
+            branches:
+              only:
+                - master
+      - staging_deploy_helm:
+          requires:
+            - staging_deploy_helm_approval
+          context: laa-cla-public-live-1
+          multideploy: true
+          filters:
+            branches:
+              ignore:
+                - master
       - production_deploy_approval:
           type: approval
           requires:
