@@ -126,12 +126,12 @@
       window.location.replace("http://www.google.co.uk");
     }
     $("#quick-exit").on("click", function() {
-      ga('moj.send', 'event', 'Quick-exit', 'Mouse-click');
+      ga('moj.send', 'event', 'Quick-exit', 'Quick exit by mouse click', 'Quick exit from '+stripPII(window.location.href));
       fleeFromPage();
     });
     $(document).keyup(function(e) {
       if (e.keyCode == 27) { // escape key
-        ga('moj.send', 'event', 'Quick-exit', 'Escape-key');
+        ga('moj.send', 'event', 'Quick-exit', 'Quick exit by escape key', 'Quick exit from '+stripPII(window.location.href));
         fleeFromPage();
       }
     });
