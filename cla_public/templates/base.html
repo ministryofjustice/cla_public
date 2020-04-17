@@ -120,8 +120,9 @@
 {% block javascripts %}
   <script>
 
-    function fleeFromPage() {
+    function fleeFromPage(fleeMethod) {
       $("body").hide();
+      ga('moj.send', 'event', 'Quick-exit', 'Quick exit by '+fleeMethod, 'Quick exit from '+stripPII(window.location.href));
       $.ajax({
         url: '/session_end',
       });
@@ -129,13 +130,11 @@
       window.location.replace("http://www.google.co.uk");
     }
     $("#quick-exit").on("click", function() {
-      ga('moj.send', 'event', 'Quick-exit', 'Quick exit by mouse click', 'Quick exit from '+stripPII(window.location.href));
-      fleeFromPage();
+      fleeFromPage("mouse click");
     });
     $(document).keyup(function(e) {
       if (e.keyCode == 27) { // escape key
-        ga('moj.send', 'event', 'Quick-exit', 'Quick exit by escape key', 'Quick exit from '+stripPII(window.location.href));
-        fleeFromPage();
+        fleeFromPage("escape key");
       }
     });
 
