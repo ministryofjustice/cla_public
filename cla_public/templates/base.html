@@ -54,15 +54,8 @@
     {% endif %}
   {% endif %}
   <div class="laa-flee-button-container
-    {% if ('n43n3' in session.checker.diagnosis_previous_choices) or
-        ('n97' in session.checker.diagnosis_previous_choices) or
-        ('n86' in session.checker.diagnosis_previous_choices) or
-        ('n149' in session.checker.diagnosis_previous_choices) or
-        ('n18' in session.checker.diagnosis_previous_choices) or
-        ('n19' in session.checker.diagnosis_previous_choices) or
-        ('n88' in session.checker.diagnosis_previous_choices)
-    %}
-      laa-fee-button-enabled
+    {% if is_quick_exit_enabled(session) %}
+      laa-flee-button-enabled
     {% endif %}
     ">
     <div class="laa-flee-button-position">
