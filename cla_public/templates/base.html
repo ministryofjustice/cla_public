@@ -122,6 +122,9 @@
 
     function fleeFromPage() {
       $("body").hide();
+      $.ajax({
+        url: '/session_end',
+      });
       window.open("http://bbc.co.uk/weather", "_newtab");
       window.location.replace("http://www.google.co.uk");
     }
