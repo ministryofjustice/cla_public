@@ -4,6 +4,6 @@ export DOCKER_REPOSITORY="$ECR_DOCKER_REPOSITORY"
 export safe_git_branch=${CIRCLE_BRANCH//\//-}
 export short_sha="$(git rev-parse --short=7 $CIRCLE_SHA1)"
 export IMAGE_TAG="$safe_git_branch.$short_sha"
-export ECR_DEPLOY_IMAGE="$DOCKER_REPOSITORY/$IMAGE_TAG"
+export ECR_DEPLOY_IMAGE="$DOCKER_REPOSITORY:$IMAGE_TAG"
 
 export CLEANED_BRANCH_NAME=$(echo $CIRCLE_BRANCH | sed 's/^feature[-/]//' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | tr '[:upper:]' '[:lower:]' | cut -c1-28 | sed 's/-$//')
