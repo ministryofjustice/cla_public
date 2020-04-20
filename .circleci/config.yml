@@ -182,20 +182,20 @@ jobs:
           condition: << parameters.multideploy >>
           steps:
             - deploy:
-              name: Deploy laa-cla-public to fixed staging
-              command: |
-                source .circleci/define_build_environment_variables
-                ./bin/staging_deploy.sh
-                echo "export RELEASE_HOST=$STAGING_HOST" >> $BASH_ENV
+                name: Deploy laa-cla-public to fixed staging
+                command: |
+                  source .circleci/define_build_environment_variables
+                  ./bin/staging_deploy.sh
+                  echo "export RELEASE_HOST=$STAGING_HOST" >> $BASH_ENV
       - when:
           condition: << parameters.multideploy >>
           steps:
             - deploy:
-              name: Deploy laa-cla-public to multideploy staging
-              command: |
-                source .circleci/define_build_environment_variables
-                ./bin/staging_multideploy.sh
-                echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
+                name: Deploy laa-cla-public to multideploy staging
+                command: |
+                  source .circleci/define_build_environment_variables
+                  ./bin/staging_multideploy.sh
+                  echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
       - slack/notify:
           message: ':tada: Deployed branch $CIRCLE_BRANCH'
           title: '$RELEASE_HOST'
