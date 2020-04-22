@@ -9,12 +9,7 @@ metadata:
     {{- include "cla-public.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
-    {{- if .Values.ingress.redirectFrom -}}
-    nginx.ingress.kubernetes.io/proxy-redirect-from: https://{{ .Values.ingress.redirectFrom }}
-    nginx.ingress.kubernetes.io/proxy-redirect-to: https://{{ .Values.hostName }}
-    {{- else -}}
     {{- toYaml . | nindent 4 }}
-    {{- end }}
   {{- end }}
 spec:
   tls:
