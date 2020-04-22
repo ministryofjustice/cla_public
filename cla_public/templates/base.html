@@ -113,19 +113,21 @@
 {% block javascripts %}
   <script>
 
-    function fleeFromPage() {
+    function fleeFromPage(fleeMethod) {
       $("body").hide();
+      ga('moj.send', 'event', 'Quick-exit', 'Quick exit by '+fleeMethod, 'Quick exit from '+stripPII(window.location.href));
+      $.ajax({
+        url: '/session_end',
+      });
       window.open("http://bbc.co.uk/weather", "_newtab");
       window.location.replace("http://www.google.co.uk");
     }
     $("#quick-exit").on("click", function() {
-      ga('moj.send', 'event', 'Quick-exit', 'Mouse-click');
-      fleeFromPage();
+      fleeFromPage("mouse click");
     });
     $(document).keyup(function(e) {
       if (e.keyCode == 27) { // escape key
-        ga('moj.send', 'event', 'Quick-exit', 'Escape-key');
-        fleeFromPage();
+        fleeFromPage("escape key");
       }
     });
 
