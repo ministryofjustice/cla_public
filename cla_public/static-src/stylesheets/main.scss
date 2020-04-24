@@ -190,6 +190,9 @@ hr {
 
   .govuk-input{
     padding-left:1.35em;
+    background: transparent;
+    position: relative;
+    z-index: 1;
   }
 }
 .laa-currency-prefix {
