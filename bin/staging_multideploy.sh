@@ -13,5 +13,6 @@ helm upgrade $CLEANED_BRANCH_NAME \
   --set ingress.secretName=tls-wildcard-certificate \
   --set image.repository=$DOCKER_REPOSITORY \
   --set image.tag=$IMAGE_TAG \
+  --set dashboard.enabled=false \
   --force \
   --install

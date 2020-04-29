@@ -42,6 +42,9 @@ service:
 
 host: 'localhost'
 
+dashboard:
+  enabled: true
+
 ingress:
   enabled: false
   annotations: {}
