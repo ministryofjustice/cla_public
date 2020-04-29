@@ -277,7 +277,7 @@ workflows:
           requires:
             - staging_deploy_helm_approval
           context: laa-cla-public-live-1
-          multideploy: false
+          multideploy: true
           filters:
             branches:
               ignore:
