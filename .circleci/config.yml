@@ -144,21 +144,6 @@ jobs:
           path: test-reports
 
   staging_deploy:
-    docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-    steps:
-      - checkout
-      - run:
-          name: Initialise Kubernetes staging context
-          command: |
-            setup-kube-auth
-            kubectl config use-context staging
-      - deploy:
-          name: Deploy laa-cla-public to staging
-          command: .circleci/deploy_to_kubernetes staging
-      - slack/status
-
-  staging_deploy_helm:
     parameters:
       multideploy:
         type: boolean
@@ -260,22 +245,15 @@ workflows:
           requires:
             - staging_deploy_approval
           context: laa-cla-public-live-1
-      - staging_deploy_helm_approval:
-          type: approval
-          requires:
-            - build
-      - staging_deploy_helm:
-          requires:
-            - staging_deploy_helm_approval
-          context: laa-cla-public-live-1
+          name: staging_deploy_master
           multideploy: false
           filters:
             branches:
               only:
                 - master
-      - staging_deploy_helm:
+      - staging_deploy:
           requires:
-            - staging_deploy_helm_approval
+            - staging_deploy_approval
           context: laa-cla-public-live-1
           multideploy: true
           filters:
@@ -285,7 +263,7 @@ workflows:
       - production_deploy_approval:
           type: approval
           requires:
-            - staging_deploy
+            - staging_deploy_master
           filters:
             branches:
               only:
