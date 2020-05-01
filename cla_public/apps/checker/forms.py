@@ -84,12 +84,14 @@ class AboutYouForm(BaseForm):
     on_benefits = YesNoField(
         label=_(u"Do you receive any benefits (including Child Benefit)?"),
         description=(_(u"Being on some benefits can help you qualify for legal aid")),
+        validators=[InputRequired(message=_(u"Tell us whether you receive benefits"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
     have_children = YesNoField(
         label=_(u"Do you have any children aged 15 or under?"),
         description=_(u"Don’t include any children who don’t live with you"),
+        validators=[InputRequired(message=_(u"Tell us whether you have any children under 16"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
@@ -97,7 +99,7 @@ class AboutYouForm(BaseForm):
         label=_(u"If Yes, how many?"),
         validators=[
             IgnoreIf("have_children", FieldValue(NO)),
-            DataRequired(_(u"Tell us how many children you have")),
+            DataRequired(_(u"Tell us how many children you have aged 15 or under")),
             NumberRange(min=1, max=50, message=_(u"Enter a number between 1 and 50")),
         ],
     )
@@ -107,6 +109,7 @@ class AboutYouForm(BaseForm):
             u"People who you live with and support financially. This could be "
             u"a young person for whom you get Child Benefit"
         ),
+        validators=[InputRequired(message=_(u"Tell us whether you have any children aged 16 or over"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
@@ -120,20 +123,25 @@ class AboutYouForm(BaseForm):
     )
     have_savings = YesNoField(
         label=_(u"Do you have any savings or investments?"),
+        validators=[InputRequired(message=_(u"Tell us whether you have savings or investments"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
     have_valuables = YesNoField(
         label=_(u"Do you have any valuable items worth over £500 each?"),
+        validators=[InputRequired(message=_(u"Tell us if you have valuable items"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
     own_property = YesNoField(
-        label=_(u"Do you own any property?"), description=_(u"For example, a house, static caravan or flat")
+        label=_(u"Do you own any property?"),
+        description=_(u"For example, a house, static caravan or flat"),
+        validators=[InputRequired(message=_(u"Tell us if you own any properties"))],
     )
     is_employed = YesNoField(
         label=_(u"Are you employed?"),
         description=(_(u"This means working as an employee - you may be both employed " u"and self-employed")),
+        validators=[InputRequired(message=_(u"Tell us if you are employed"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
@@ -142,7 +150,7 @@ class AboutYouForm(BaseForm):
         description=_(u"This means working as an employee - your partner may be both " u"employed and self-employed"),
         validators=[
             IgnoreIf("in_dispute", FieldValueOrNone(YES)),
-            InputRequired(message=_(u"Please choose Yes or No")),
+            InputRequired(message=_(u"Tell us whether your partner is employed")),
         ],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
@@ -150,6 +158,7 @@ class AboutYouForm(BaseForm):
     is_self_employed = YesNoField(
         label=_(u"Are you self-employed?"),
         description=(_(u"This means working for yourself - you may be both employed " u"and self-employed")),
+        validators=[InputRequired(message=_(u"Tell us if you are self-employed"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
@@ -158,13 +167,14 @@ class AboutYouForm(BaseForm):
         description=_(u"This means working for yourself - your partner may be both " u"employed and self-employed"),
         validators=[
             IgnoreIf("in_dispute", FieldValueOrNone(YES)),
-            InputRequired(message=_(u"Please choose Yes or No")),
+            InputRequired(message=_(u"Tell us whether your partner is self-employed")),
         ],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
     aged_60_or_over = YesNoField(
         label=_(u"Are you or your partner (if you have one) aged 60 or over?"),
+        validators=[InputRequired(message=_(u"Tell us if you are aged 60 or over"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
