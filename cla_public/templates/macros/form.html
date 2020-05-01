@@ -608,24 +608,20 @@
 
 
 {% macro show_field_error(field) %}
-  <dl class="error-summary-details">
-    <dt>
-      {% if field.form and field.form.errors %}
+  {% if field.form and field.form.errors %}
+    <dl class="error-summary-details">
+      <dt>
         {{ field.label.text }}
-      {% else %}
-        <a href="#field-{{ field.id }}">{{ field.label.text }}</a>
-      {% endif %}
-    </dt>
-    {% if field.form and field.form.errors %}
+      </dt>
       <dd>
         {% for error in field.form.errors %}
           {{ show_field_error(field.form[error]) }}
         {% endfor %}
       </dd>
-    {% else %}
-      <dd>{{ error }}</dd>
-    {% endif %}
-  </dl>
+    </dl>
+  {% else %}
+    <a href="#field-{{ field.id }}">{{ error }}</a>
+  {% endif %}
 {% endmacro %}
 
 

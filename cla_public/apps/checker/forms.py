@@ -93,8 +93,8 @@ class AboutYouForm(BaseForm):
         label=_(u"If Yes, how many?"),
         validators=[
             IgnoreIf("have_children", FieldValue(NO)),
-            DataRequired(_(u"Number must be between 1 and 50")),
-            NumberRange(min=1, max=50, message=_(u"Number must be between 1 and 50")),
+            DataRequired(_(u"Tell us how many children you have")),
+            NumberRange(min=1, max=50, message=_(u"Enter a number between 1 and 50")),
         ],
     )
     have_dependants = YesNoField(
