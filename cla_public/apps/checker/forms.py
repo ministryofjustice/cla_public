@@ -74,7 +74,10 @@ class AboutYouForm(BaseForm):
                 u"property "
             )
         ),
-        validators=[IgnoreIf("have_partner", FieldValue(NO)), InputRequired(message=_(u"Confirm whether you’re in dispute with your partner"))],
+        validators=[
+            IgnoreIf("have_partner", FieldValue(NO)),
+            InputRequired(message=_(u"Confirm whether you’re in dispute with your partner")),
+        ],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
