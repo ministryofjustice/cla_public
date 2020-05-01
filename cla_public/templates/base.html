@@ -233,16 +233,16 @@
       <ul class="govuk-list govuk-error-summary__list">
         <% _.each(errors, function(field) { %>
         <li>
-          <dl class="error-summary-details">
             <% if(field.name) { %>
-            <dt>
-              <a href="#field-<%= field.name %>"><%= field.label %></a>
-            </dt>
+              <% _.each(field.errors, function(error) { %>
+                <a href="#field-<%= field.name %>"><%= error %></a>
+              <% }); %>
             <% } %>
-            <% _.each(field.errors, function(error) { %>
-            <dd><%= error %></dd>
-            <% }); %>
-          </dl>
+            <% if(!field.name) { %>
+              <% _.each(field.errors, function(error) { %>
+                <%= error %>
+              <% }); %>
+            <% } %>
         </li>
         <% }); %>
       </ul>

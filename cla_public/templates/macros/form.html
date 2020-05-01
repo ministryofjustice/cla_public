@@ -620,7 +620,7 @@
       </dd>
     </dl>
   {% else %}
-    <a href="#field-{{ field.id }}">{{ error }}</a>
+    <a href="#field-{{ field.id }}">{{ field.label.text }}</a>
   {% endif %}
 {% endmacro %}
 
