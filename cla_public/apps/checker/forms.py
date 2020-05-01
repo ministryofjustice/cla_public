@@ -61,6 +61,7 @@ class AboutYouForm(BaseForm):
                 u"as if you’re married"
             )
         ),
+        validators=[InputRequired(message=_(u"Tell us whether you have a partner"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
@@ -73,7 +74,7 @@ class AboutYouForm(BaseForm):
                 u"property "
             )
         ),
-        validators=[IgnoreIf("have_partner", FieldValue(NO)), InputRequired(message=_(u"Please choose Yes or No"))],
+        validators=[IgnoreIf("have_partner", FieldValue(NO)), InputRequired(message=_(u"Confirm whether you’re in dispute with your partner"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
@@ -110,8 +111,8 @@ class AboutYouForm(BaseForm):
         label=_(u"If Yes, how many?"),
         validators=[
             IgnoreIf("have_dependants", FieldValue(NO)),
-            DataRequired(_(u"Number must be between 1 and 50")),
-            NumberRange(min=1, max=50, message=_(u"Number must be between 1 and 50")),
+            DataRequired(_(u"Tell us how many dependants you have aged 16 or over")),
+            NumberRange(min=1, max=50, message=_(u"Enter a number between 1 and 50")),
         ],
     )
     have_savings = YesNoField(
