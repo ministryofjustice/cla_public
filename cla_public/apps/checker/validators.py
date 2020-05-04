@@ -109,7 +109,7 @@ class ValidMoneyInterval(object):
             raise ValidationError(field.gettext(u"Not a valid amount"))
 
         if not interval_selected and nonzero_amount:
-            raise ValidationError(field.gettext(u"Please select a time period from the drop down"))
+            raise ValidationError(field.gettext(u"Select a time period from the drop down"))
 
 
 class NotRequired(Optional):
