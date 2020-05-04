@@ -241,6 +241,11 @@
       </button>
     </p>
   </script>
+
+  <script src="{{ asset(filename='javascripts/govuk.js') }}"></script>
+  <script>
+    window.GOVUKFrontend.initAll()
+  </script>
 {% endblock %}
 
 {% block footer_support_links %}
