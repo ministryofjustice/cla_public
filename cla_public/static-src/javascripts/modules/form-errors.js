@@ -136,6 +136,9 @@
         }
 
         var labelText = labelField.text().replace(/if yes, /i,"").trim();
+        var labelText = labelField.text().replace(/os ydych, /i,"").trim();
+        var labelText = labelField.text().replace(/os oes, /i,"").trim();
+        //above lines are stripping the "if yes" (and Welsh variants) from the error summary.
 
         labelText = labelText.charAt(0).toUpperCase() + labelText.substr(1);
 

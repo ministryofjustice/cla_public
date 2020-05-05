@@ -226,13 +226,17 @@
               <div class="govuk-form-group laa-currency-period-input__item">
                 {{
                   field.label(
-                      for=field.interval_period.id if field.interval_period else field.id,
-                      text=_("Frequency"),
-                      id="field-label-frequency-%s" % field.id,
-                      class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
+                    for=field.interval_period.id if field.interval_period else field.id,
+                    text=_("Frequency"),
+                    id="field-label-frequency-%s" % field.id,
+                    class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
                   )
                 }}
-                {{ field.interval_period(class_='govuk-select') }}
+                {{
+                  field.interval_period(
+                    class_="govuk-select%s" % (' govuk-select--error' if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) )
+                  ) 
+                }}
               </div>
             {% endif %}
           {% endif %}
@@ -354,11 +358,11 @@
   <span class="govuk-error-message">
     {% for error in errors %}
       {% if error is string or error == error|string %}
-        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>
         <span class="cla-error-message">{{error}}</span>
       {% else %}
         {% for line in error %}
-          <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+          <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>
           <span class="cla-error-message">{{line}}</span>
         {% endfor %}
       {% endif %}
