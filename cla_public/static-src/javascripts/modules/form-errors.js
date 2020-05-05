@@ -131,8 +131,17 @@
 
         var labelField = $this.find('#field-label-' + name);
 
+        $this.find(' .govuk-input').addClass("govuk-input--error");
+        $this.find(' .govuk-select').addClass("govuk-select--error");
+
         if (labelField.parents(".cla-currency-by-frequency").length) {
           labelField = labelField.parents(".cla-currency-by-frequency").children("legend");
+
+          $this.find(' .govuk-input, .govuk-select').filter(function () {
+            return ($(this).val())
+          })
+          .removeClass("govuk-select--error")
+          .removeClass("govuk-input--error");
         }
 
         var labelText = labelField.text().replace(/if yes, /i,"").trim();
@@ -141,6 +150,7 @@
         //above lines are stripping the "if yes" (and Welsh variants) from the error summary.
 
         labelText = labelText.charAt(0).toUpperCase() + labelText.substr(1);
+        //Ensures the first letter is uppercase.
 
         errorSummary.push({
           label: labelText,
@@ -266,6 +276,10 @@
       $('.govuk-form-group--error')
         .removeClass('govuk-form-group--error')
         .removeAttr('aria-invalid');
+      $(".govuk-input--error")
+        .removeClass("govuk-input--error");
+      $(".govuk-select--error")
+        .removeClass("govuk-select--error");
     }
   };
 
