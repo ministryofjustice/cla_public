@@ -131,8 +131,12 @@
 
         var labelField = $this.find('#field-label-' + name);
 
-        $this.find(' .govuk-input').addClass("govuk-input--error");
-        $this.find(' .govuk-select').addClass("govuk-select--error");
+        $this.find(' .govuk-input')
+          .not('.govuk-form-group--error .govuk-radios__conditional .govuk-input')
+          .addClass("govuk-input--error");
+        $this.find(' .govuk-select')
+          .not('.govuk-form-group--error .govuk-radios__conditional .govuk-select')
+          .addClass("govuk-select--error");
 
         if (labelField.parents(".cla-currency-by-frequency").length) {
           labelField = labelField.parents(".cla-currency-by-frequency").children("legend");
@@ -144,9 +148,7 @@
           .removeClass("govuk-input--error");
         }
 
-        var labelText = labelField.text().replace(/if yes, /i,"").trim();
-        var labelText = labelField.text().replace(/os ydych, /i,"").trim();
-        var labelText = labelField.text().replace(/os oes, /i,"").trim();
+        var labelText = labelField.text().replace(/if yes, /i,"").replace(/os ydych, /i,"").replace(/os oes, /i,"").trim();
         //above lines are stripping the "if yes" (and Welsh variants) from the error summary.
 
         labelText = labelText.charAt(0).toUpperCase() + labelText.substr(1);
