@@ -220,7 +220,13 @@
                 {{ render_field_label(field, kwargs.hide_label, _('Amount')) }}
                 <div class="laa-currency">
                   <span class="laa-currency-prefix">£</span>
-                  {{ field.per_interval_value(class_='govuk-input govuk-input--width-10 ', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+                  {{
+                    field.per_interval_value(
+                      class_='govuk-input govuk-input--width-10%s'  % (' govuk-select--error' if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) ),
+                      autocomplete='off',
+                      **{'aria-required': 'false' if field.flags.optional else 'true'}
+                    )
+                  }}
                 </div>
               </div>
               <div class="govuk-form-group laa-currency-period-input__item">
@@ -235,7 +241,7 @@
                 {{
                   field.interval_period(
                     class_="govuk-select%s" % (' govuk-select--error' if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) )
-                  ) 
+                  )
                 }}
               </div>
             {% endif %}
