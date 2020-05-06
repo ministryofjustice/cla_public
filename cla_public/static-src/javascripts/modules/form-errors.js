@@ -131,6 +131,8 @@
 
         var labelField = $this.find('#field-label-' + name);
 
+        var errorText = $this.find('#error-' + name + " .cla-error-message").text();
+
         $this.find(' .govuk-input')
           .not('.govuk-form-group--error .govuk-radios__conditional .govuk-input')
           .addClass("govuk-input--error");
@@ -148,11 +150,15 @@
           .removeClass("govuk-input--error");
         }
 
-        var labelText = labelField.text().replace(/if yes, /i,"").replace(/os ydych, /i,"").replace(/os oes, /i,"").trim();
-        //above lines are stripping the "if yes" (and Welsh variants) from the error summary.
+        if (errorText) {
+          var labelText = errorText;
+        } else {
+          var labelText = labelField.text().replace(/if yes, /i,"").replace(/os ydych, /i,"").replace(/os oes, /i,"").trim();
+          //above lines are stripping the "if yes" (and Welsh variants) from the error summary.
 
-        labelText = labelText.charAt(0).toUpperCase() + labelText.substr(1);
-        //Ensures the first letter is uppercase.
+          labelText = labelText.charAt(0).toUpperCase() + labelText.substr(1);
+          //Ensures the first letter is uppercase.
+        }
 
         errorSummary.push({
           label: labelText,
