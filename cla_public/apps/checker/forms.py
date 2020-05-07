@@ -202,6 +202,7 @@ class YourBenefitsForm(BaseForm):
             MoneyIntervalAmountRequired(
                 message=_(u"Enter the total amount of child benefit you receive"),
                 freq_message=_(u"Tell us how often you receive your child benefit"),
+                amount_message=_(u"Tell us how much child benefit you receive"),
             ),
         ],
     )

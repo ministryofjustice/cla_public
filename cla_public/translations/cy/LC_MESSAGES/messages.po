@@ -382,6 +382,18 @@ msgstr "pob mis"
 msgid "per year"
 msgstr "y flwyddyn"
 
+#: probe
+msgid "every week"
+msgstr "yr wythnos"
+
+#: probe
+msgid "every year"
+msgstr "y flwyddyn"
+
+#: probe
+msgid "Tell us how much child benefit you receive"
+msgstr "XXXXXXXXXXXX"
+
 #: cla_public/apps/checker/constants.py:107
 msgid "Armed Forces Independence payment"
 msgstr "Taliad Annibyniaeth y Lluoedd Arfog"
