@@ -248,13 +248,23 @@ class AdditionalBenefitsForm(BaseForm):
             u"Incapacity Benefit, Contribution-based Jobseeker's "
             u"Allowance"
         ),
+        validators=[InputRequired(message=_(u"Tell us whether you receive any other benefits"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
     total_other_benefit = MoneyIntervalField(
         label=_(u"If Yes, total amount of benefits not listed above"),
         choices=money_intervals_except("per_month"),
-        validators=[IgnoreIf("other_benefits", FieldValue(NO)), MoneyIntervalAmountRequired()],
+        validators=[
+            IgnoreIf("other_benefits", FieldValue(NO)),
+            MoneyIntervalAmountRequired(
+                message=_(u"Tell us how much you get in other benefits not listed here"),
+                freq_message=_(u"Tell us how often you get paid this benefit"),
+                amount_message=_(
+                    u"Tell us how much you get"
+                ),  # this is followed by the time period, e.g. "... every week"
+            ),
+        ],
     )
 
 
@@ -262,45 +272,60 @@ class PropertyForm(BaseNoCsrfForm):
 
     is_main_home = YesNoField(
         label=_(u"Is this property your main home?"),
-        description=(_(u"If you are separated and no longer live in the property you " u"own, please answer ‘no’")),
+        description=(_(u"If you are separated and no longer live in the property you own, please answer ‘no’")),
+        validators=[InputRequired(message=_(u"Tell us whether this is your main home"))],
     )
     other_shareholders = PartnerYesNoField(
         label=_(u"Does anyone else own a share of the property?"),
-        description=_(u"Select 'Yes' if you share ownership with a friend, relative or " u"ex-partner"),
-        partner_label=_(u"Does anyone else (other than you or your partner) own a share " u"of the property?"),
+        description=_(u"Select ‘Yes’ if you share ownership with a friend, relative or ex-partner"),
+        partner_label=_(u"Does anyone else (other than you or your partner) own a share of the property?"),
+        validators=[InputRequired(message=_(u"Tell us whether anyone else owns a share of this property"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
     property_value = MoneyField(
         label=_(u"How much is the property worth?"),
-        description=_(u"Use a property website or the Land Registry house prices " u"website."),
-        validators=[InputRequired(_(u"Please enter a valid amount"))],
+        description=_(u"Use a property website or the Land Registry house prices website."),
+        validators=[InputRequired(_(u"Tell us the approximate value of this property"))],
     )
     mortgage_remaining = MoneyField(
         label=_(u"How much is left to pay on the mortgage?"),
-        description=(_(u"Include the full amount owed, even if the property has " u"shared ownership")),
-        validators=[InputRequired(_(u"Please enter 0 if you have no mortgage"))],
+        description=(_(u"Include the full amount owed, even if the property has shared ownership")),
+        validators=[
+            InputRequired(_(u"Tell us how much is left to pay on the mortgage, or enter 0 if you have no mortgage"))
+        ],
     )
     mortgage_payments = MoneyField(
         label=_(u"How much was your monthly mortgage repayment last month?"),
         validators=[
             IgnoreIf("mortgage_remaining", FieldValue(0)),
-            InputRequired(_(u"Please enter 0 if you have no mortgage")),
+            InputRequired(_(u"Tell us how much your mortgage cost you last month")),
         ],
     )
     is_rented = YesNoField(
         label=_(u"Do you rent out any part of this property?"),
+        validators=[InputRequired(_(u"Tell us whether you rent out some of this property"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
     rent_amount = MoneyIntervalField(
         label=_(u"If Yes, how much rent did you receive last month?"),
         choices=money_intervals_except("per_4week"),
-        validators=[IgnoreIf("is_rented", FieldValue(NO)), MoneyIntervalAmountRequired()],
+        validators=[
+            IgnoreIf("is_rented", FieldValue(NO)),
+            MoneyIntervalAmountRequired(
+                message=_(u"Tell us how much rent you get from this property"),
+                freq_message=_(u"Tell us how often you charge this rent"),
+                amount_message=_(
+                    u"Tell us how much rent you get"
+                ),  # this is followed by the time period, e.g. "... every week"
+            ),
+        ],
     )
     in_dispute = YesNoField(
         label=_(u"Is your share of the property in dispute?"),
         description=_(u"For example, as part of the financial settlement of a divorce"),
+        validators=[InputRequired(_(u"Tell us whether this property is in dispute"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
@@ -344,17 +369,22 @@ class SavingsForm(BaseForm):
     savings = MoneyField(
         label=_("Savings"),
         description=_(u"The total amount of savings in cash, bank or building society"),
-        validators=[InputRequired(message=_(u"Enter 0 if you have no savings"))],
+        validators=[
+            InputRequired(message=_(u"Tell us how much money you have saved up, or enter 0 if you have no savings"))
+        ],
     )
     investments = MoneyField(
         label=_("Investments"),
         description=_(u"This includes stocks, shares, bonds (but not property)"),
-        validators=[InputRequired(message=_(u"Enter 0 if you have no investments"))],
+        validators=[
+            InputRequired(message=_(u"Tell us the value of your investments, or enter 0 if you have no investments"))
+        ],
     )
     valuables = MoneyField(
         label=_(u"Total value of items worth over £500 each"),
+        description=_(u"See below for examples of what valuable items to include"),
         validators=[
-            InputRequired(message=_(u"Enter 0 if you have no valuable items worth over £500 each")),
+            InputRequired(message=_(u"Tell us the total value of your valuable items")),
             ZeroOrMoreThan(50000),
         ],
     )
@@ -394,7 +424,15 @@ class IncomeFieldForm(BaseNoCsrfForm):
             "self_employed": _(u"This includes any earnings from self-employment"),
             "both": _(u"This includes all wages and any earnings from self-employment"),
         },
-        validators=[MoneyIntervalAmountRequired()],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(u"Enter the total amount of money you get paid"),
+                freq_message=_(u"Tell us how often you get paid this amount"),
+                amount_message=_(
+                    u"Tell us how much you get paid"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     income_tax = SelfEmployedMoneyIntervalField(
         label=_(u"Income tax"),
@@ -403,7 +441,15 @@ class IncomeFieldForm(BaseNoCsrfForm):
             "self_employed": _(u"Any tax paid on self-employed earnings"),
             "both": _(u"Tax paid directly out of wages and any tax paid on self-employed earnings"),
         },
-        validators=[MoneyIntervalAmountRequired()],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(u"Enter the total amount of income tax you pay, or 0 if this doesn’t apply to you"),
+                freq_message=_(u"Tell us how often you pay income tax"),
+                amount_message=_(
+                    u"Tell us how much income tax you pay"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     national_insurance = SelfEmployedMoneyIntervalField(
         label=_(u"National Insurance contributions"),
@@ -412,7 +458,17 @@ class IncomeFieldForm(BaseNoCsrfForm):
             "self_employed": _(u"Check the National Insurance statement"),
             "both": _(u"Check the payslip or National Insurance statement if self-employed"),
         },
-        validators=[MoneyIntervalAmountRequired()],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(
+                    u"Enter the total amount of National Insurance contributions you make, or 0 if this doesn’t apply to you"
+                ),
+                freq_message=_(u"Tell us how often you make your National Insurance contributions"),
+                amount_message=_(
+                    u"Tell us what National Insurance contributions you make"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     working_tax_credit = MoneyIntervalField(
         label=_(u"Working Tax Credit"),
@@ -420,7 +476,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
         validators=[
             MoneyIntervalAmountRequired(
                 message=_(
-                    u"Enter the total amount of Working Tax Credit you receive, enter 0 if this doesn’t apply to you"
+                    u"Enter the total amount of Working Tax Credit you receive, or 0 if this doesn’t apply to you"
                 ),
                 freq_message=_(u"Tell us how often you receive your Working Tax Credit"),
                 amount_message=_(
@@ -433,22 +489,56 @@ class IncomeFieldForm(BaseNoCsrfForm):
         label=_(u"Child Tax Credit"),
         description=_(u"The total amount you get for all your children"),
         choices=money_intervals_except("per_month"),
-        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(
+                    u"Enter the total amount of Child Tax Credit you receive, or 0 if this doesn’t apply to you"
+                ),
+                freq_message=_(u"Tell us how often you receive your Child Tax Credit"),
+                amount_message=_(
+                    u"Tell us how much Child Tax Credit you receive"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     maintenance = MoneyIntervalField(
         label=_(u"Maintenance received"),
         description=_(u"Payments you get from an ex-partner"),
-        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(u"Enter the total amount of Maintenance you receive, or 0 if this doesn’t apply to you"),
+                freq_message=_(u"Tell us how often you receive your Maintenance"),
+                amount_message=_(
+                    u"Tell us how much Maintenance you receive"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     pension = MoneyIntervalField(
         label=_(u"Pension received"),
         description=_(u"Payments you receive if you’re retired"),
-        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(u"Enter the total amount of pension you receive, or 0 if this doesn’t apply to you"),
+                freq_message=_(u"Tell us how often you receive your pension"),
+                amount_message=_(
+                    u"Tell us how much pension you receive"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     other_income = MoneyIntervalField(
         label=_(u"Any other income"),
         description=_(u"For example, student grants, income from trust funds, dividends"),
-        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(u"Enter the total amount of other income you receive, or 0 if this doesn’t apply to you"),
+                freq_message=_(u"Tell us how often you receive this income"),
+                amount_message=_(
+                    u"Tell us how much you receive"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
 
 
@@ -489,41 +579,65 @@ class OutgoingsForm(BaseForm):
 
     rent = PartnerMoneyIntervalField(
         label=_(u"Rent"),
-        description=_(
-            u"Money you pay your landlord for rent. Do not include " u"rent that is paid by Housing Benefit"
-        ),
+        description=_(u"Money you pay your landlord for rent. Do not include rent that is paid by Housing Benefit"),
         partner_description=_(
             u"Money you and your partner pay your landlord "
             u"for rent. Do not include rent that is paid by "
             u"Housing Benefit"
         ),
         choices=money_intervals_except("per_4week"),
-        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if you don’t pay rent"))],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(u"Tell us how much rent you pay, or enter 0 if you don’t pay rent"),
+                freq_message=_(u"Tell us how often you pay this rent"),
+                amount_message=_(
+                    u"Tell us how much rent you pay"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     maintenance = PartnerMoneyIntervalField(
         label=_(u"Maintenance"),
         description=_(u"Money you pay to an ex-partner for their living costs"),
-        partner_description=_(u"Money you and/or your partner pay to an " u"ex-partner for their living costs"),
-        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))],
+        partner_description=_(u"Money you and/or your partner pay to an ex-partner for their living costs"),
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(u"Tell us how much maintenance you pay, or enter 0 if this doesn’t apply to you"),
+                freq_message=_(u"Tell us how often you pay this maintenance"),
+                amount_message=_(
+                    u"Tell us how much maintenance you pay"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     income_contribution = PartnerMoneyField(
         label=_(u"Monthly Income Contribution Order"),
         description=_(u"Money you pay per month towards your criminal legal aid"),
-        partner_description=_(u"Money you and/or your partner pay per month " u"towards your criminal legal aid"),
-        validators=[InputRequired(_(u"Enter 0 if this doesn’t apply to you"))],
+        partner_description=_(u"Money you and/or your partner pay per month towards your criminal legal aid"),
+        validators=[
+            InputRequired(
+                _(u"Tell us how much you pay towards Criminal Legal Aid, enter 0 if this doesn’t apply to you")
+            )
+        ],
     )
     childcare = PartnerMoneyIntervalField(
         label=_(u"Childcare"),
-        description=_(
-            u"Money you pay for your child to be looked after while " u"you work or study outside of your home"
-        ),
+        description=_(u"Money you pay for your child to be looked after while you work or study outside of your home"),
         partner_description=_(
             u"Money you and your partner pay for your child to "
             u"be looked after while you work or study outside "
             u"of your home"
         ),
         choices=money_intervals_except("per_4week"),
-        validators=[MoneyIntervalAmountRequired()],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(u"Tell us how much childcare costs you pay, or enter 0 if this doesn’t apply to you"),
+                freq_message=_(u"Tell us how often you pay for childcare"),
+                amount_message=_(
+                    u"Tell us how much you pay for childcare"
+                ),  # this is followed by the time period, e.g. "... each week"
+            )
+        ],
     )
 
     def __init__(self, *args, **kwargs):

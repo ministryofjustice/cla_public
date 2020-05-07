@@ -383,7 +383,7 @@ msgid "per year"
 msgstr "y flwyddyn"
 
 #: cla_public/apps/checker/validators.py:95
-msgid "every week"
+msgid "each week"
 msgstr "yr wythnos"
 
 #: cla_public/apps/checker/validators.py:97
@@ -391,11 +391,11 @@ msgid "every 4 weeks"
 msgstr "pob 4 wythnos"
 
 #: cla_public/apps/checker/validators.py:99
-msgid "every month"
+msgid "each month"
 msgstr "pob mis"
 
 #: cla_public/apps/checker/validators.py:101
-msgid "every year"
+msgid "each year"
 msgstr "y flwyddyn"
 
 #: cla_public/apps/checker/constants.py:107
@@ -724,7 +724,7 @@ msgid "Does anyone else own a share of the property?"
 msgstr "A oes unrhyw un arall sy’n berchen ar gyfran o’r eiddo?"
 
 #: cla_public/apps/checker/forms.py:246
-msgid "Select 'Yes' if you share ownership with a friend, relative or ex-partner"
+msgid "Select ‘Yes’ if you share ownership with a friend, relative or ex-partner"
 msgstr "Rhowch ‘oes’ yn ateb os ydych chi’n rhannu perchenogaeth â ffrind, perthynas neu gynbartner"
 
 #: cla_public/apps/checker/forms.py:247
