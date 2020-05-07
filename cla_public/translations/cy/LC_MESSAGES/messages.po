@@ -382,17 +382,21 @@ msgstr "pob mis"
 msgid "per year"
 msgstr "y flwyddyn"
 
-#: probe
+#: cla_public/apps/checker/validators.py:95
 msgid "every week"
 msgstr "yr wythnos"
 
-#: probe
+#: cla_public/apps/checker/validators.py:97
+msgid "every 4 weeks"
+msgstr "pob 4 wythnos"
+
+#: cla_public/apps/checker/validators.py:99
+msgid "every month"
+msgstr "pob mis"
+
+#: cla_public/apps/checker/validators.py:101
 msgid "every year"
 msgstr "y flwyddyn"
-
-#: probe
-msgid "Tell us how much child benefit you receive"
-msgstr "XXXXXXXXXXXX"
 
 #: cla_public/apps/checker/constants.py:107
 msgid "Armed Forces Independence payment"

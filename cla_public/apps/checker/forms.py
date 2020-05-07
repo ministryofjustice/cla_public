@@ -200,9 +200,11 @@ class YourBenefitsForm(BaseForm):
         validators=[
             IgnoreIf("benefits", FieldValueNotIn("child_benefit"),),
             MoneyIntervalAmountRequired(
-                message=_(u"Enter the total amount of child benefit you receive"),
-                freq_message=_(u"Tell us how often you receive your child benefit"),
-                amount_message=_(u"Tell us how much child benefit you receive"),
+                message=_(u"Enter the total amount of Child Benefit you receive"),
+                freq_message=_(u"Tell us how often you receive your Child Benefit"),
+                amount_message=_(
+                    u"Tell us how much Child Benefit you receive"
+                ),  # this is followed by the time period, e.g. "... every week"
             ),
         ],
     )
@@ -415,7 +417,17 @@ class IncomeFieldForm(BaseNoCsrfForm):
     working_tax_credit = MoneyIntervalField(
         label=_(u"Working Tax Credit"),
         description=_(u"Extra money for people who work and have a low income"),
-        validators=[MoneyIntervalAmountRequired(_(u"Enter 0 if this doesn’t apply to you"))],
+        validators=[
+            MoneyIntervalAmountRequired(
+                message=_(
+                    u"Enter the total amount of Working Tax Credit you receive, enter 0 if this doesn’t apply to you"
+                ),
+                freq_message=_(u"Tell us how often you receive your Working Tax Credit"),
+                amount_message=_(
+                    u"Tell us how much Working Tax Credit you receive"
+                ),  # this is followed by the time period, e.g. "... every week"
+            )
+        ],
     )
     child_tax_credit = MoneyIntervalField(
         label=_(u"Child Tax Credit"),
