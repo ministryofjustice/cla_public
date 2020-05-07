@@ -19,13 +19,8 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "cla-public.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -52,8 +47,6 @@ spec:
             initialDelaySeconds: 5
             timeoutSeconds: 1
             periodSeconds: 10
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: ALLOWED_HOSTS
               value: "{{ .Values.host }}"
@@ -123,15 +116,3 @@ spec:
                   optional: {{ .Values.useDevValues }}
 
             {{- toYaml .Values.envVars | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
