@@ -73,14 +73,15 @@ class AtLeastOne(object):
         if len(field.data) < 1:
             message = self.message
             if message is None:
-                message = field.gettext("Select at least one option.")
+                message = field.gettext("Select at least one option")
             raise ValidationError(message)
 
 
 class MoneyIntervalAmountRequired(object):
-    def __init__(self, message=None, freq_message=None):
+    def __init__(self, message=None, freq_message=None, amount_message=None):
         self.message = message
         self.freq_message = freq_message
+        self.amount_message = amount_message
 
     def __call__(self, form, field):
         amount = field.form.per_interval_value
@@ -93,12 +94,11 @@ class MoneyIntervalAmountRequired(object):
             message = self.message or field.gettext(u"Type in a number")
             raise StopValidation(message)
 
-        if interval_selected and amount_not_set:
-            raise StopValidation(field.gettext(u"Type in a number"))
+        if interval_selected and amount_not_set and self.amount_message:
+            raise StopValidation(self.amount_message)
 
-        if not interval_selected and nonzero_amount:
-            freq_message = self.freq_message or field.gettext(u"Select a time period from the drop down")
-            raise StopValidation(freq_message)
+        if not interval_selected and nonzero_amount and self.freq_message:
+            raise StopValidation(self.freq_message)
 
 
 class ValidMoneyInterval(object):
