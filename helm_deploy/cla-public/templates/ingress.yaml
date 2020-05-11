@@ -1,0 +1,27 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "cla-public.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "cla-public.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  tls:
+    - hosts:
+       - "{{ .Values.host }}"
+      secretName: {{ .Values.ingress.secretName }}
+  rules:
+    - host: "{{ .Values.host }}"
+      http:
+        paths:
+          - path: "/"
+            backend:
+              serviceName: {{ $fullName }}-app
+              servicePort: {{ $svcPort }}
+{{- end }}

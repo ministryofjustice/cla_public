@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cla-public.fullname" . }}-app
+  labels:
+    {{- include "cla-public.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "cla-public.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "cla-public.selectorLabels" . | nindent 8 }}
+        app: web
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping.json
+              port: http
+              httpHeaders:
+                - name: Host
+                  value: "{{ .Values.host }}"
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping.json
+              port: http
+              httpHeaders:
+                - name: Host
+                  value: "{{ .Values.host }}"
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 10
+          env:
+            - name: ALLOWED_HOSTS
+              value: "{{ .Values.host }}"
+            - name: CLA_ENV
+              value: "{{ .Values.environment }}"
+            - name: BACKEND_BASE_URI
+              value: "{{ .Values.backend_base_uri }}"
+            - name: LAALAA_API_HOST
+              value: "{{ .Values.laalaa_api_host }}"
+            - name: GOOGLE_MAPS_API_KEY
+              value: "{{ .Values.google_maps_api_key }}"
+            - name: LOG_LEVEL
+              value: "{{ .Values.logLevel }}"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: flask-secret-key
+                  key: SECRET_KEY
+                  optional: {{ .Values.useDevValues }}
+            - name: OS_PLACES_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: os-places
+                  key: apiKey
+                  optional: {{ .Values.useDevValues }}
+            - name: ZENDESK_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: zendesk-api
+                  key: ZENDESK_API_TOKEN
+                  optional: {{ .Values.useDevValues }}
+            - name: ZENDESK_API_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: zendesk-api
+                  key: ZENDESK_API_USERNAME
+                  optional: {{ .Values.useDevValues }}
+            - name: SMTP_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-sendgrid
+                  key: SMTP_HOST
+                  optional: {{ .Values.useDevValues }}
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-sendgrid
+                  key: SMTP_USER
+                  optional: {{ .Values.useDevValues }}
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-sendgrid
+                  key: SMTP_PASSWORD
+                  optional: {{ .Values.useDevValues }}
+            - name: RAVEN_CONFIG_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: raven-config
+                  key: RAVEN_CONFIG_DSN
+                  optional: {{ .Values.useDevValues }}
+            - name: RAVEN_CONFIG_SITE
+              valueFrom:
+                secretKeyRef:
+                  name: raven-config
+                  key: RAVEN_CONFIG_SITE
+                  optional: {{ .Values.useDevValues }}
+
+            {{- toYaml .Values.envVars | nindent 12 }}

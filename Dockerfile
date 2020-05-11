@@ -21,7 +21,8 @@ RUN apk add --no-cache \
       nasm \
       openssl-dev \
       python2-dev \
-      zlib-dev
+      zlib-dev \
+      curl
 
 RUN cp /usr/share/zoneinfo/Europe/London /etc/localtime
 RUN pip install -U setuptools pip==18.1 wheel

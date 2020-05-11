@@ -11,8 +11,9 @@ function tag_and_push() {
   docker push $tag
 }
 
+tag_and_push "$ECR_DOCKER_REPOSITORY:$safe_git_branch.$short_sha"
+tag_and_push "$ECR_DOCKER_REPOSITORY:$safe_git_branch"
+
 if [ "$CIRCLE_BRANCH" == "master" ]; then
-  tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$CIRCLE_SHA1"
+  tag_and_push "$ECR_DOCKER_REPOSITORY:latest"
 fi
-tag_and_push "$ECR_DOCKER_REGISTRY/$ECR_DOCKER_IMAGE:$safe_git_branch"
-tag_and_push "$ECR_DEPLOY_IMAGE"

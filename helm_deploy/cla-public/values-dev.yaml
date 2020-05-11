@@ -1,0 +1,44 @@
+# Default values for cla-public in a dev environment.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: cla_public_local
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+
+environment: development
+backend_base_uri: https://staging-backend.cla.dsd.io/
+laalaa_api_host: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+google_maps_api_key: AIzaSyBVsZmfkiRFNNMJnPraN_8sBW3Dj-BFFNs
+logLevel: DEBUG
+useDevValues: true
+
+# Lists don't deep merge, so this list of envVars overrides anything defined in an earlier values file
+envVars:
+- name: MOJ_GA_ID
+  value: UA-37377084-21
+- name: GDS_GA_ID
+  value: UA-145652997-1
+- name: SECRET_KEY
+  value: "secret"
+- name: OS_PLACES_API_KEY
+  value: ""
+- name: ZENDESK_API_TOKEN
+  value: ""
+- name: ZENDESK_API_USERNAME
+  value: ""
+- name: SMTP_HOST
+  value: ""
+- name: SMTP_USER
+  value: ""
+- name: SMTP_PASSWORD
+  value: ""
+- name: RAVEN_CONFIG_DSN
+  value: ""
+- name: RAVEN_CONFIG_SITE
+  value: ""

@@ -1,0 +1,22 @@
+# Default values for cla-public in a staging environment.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  pullPolicy: IfNotPresent
+
+environment: staging
+backend_base_uri: https://staging-backend.cla.dsd.io/
+laalaa_api_host: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+google_maps_api_key: AIzaSyBVsZmfkiRFNNMJnPraN_8sBW3Dj-BFFNs
+
+replicaCount: 2
+
+ingress:
+  enabled: true
+  secretName: tls-certificate
+
+# Lists don't deep merge, so this list of envVars overrides anything defined in an earlier values file
+envVars:
+  - name: DEBUG
+    value: "False"
