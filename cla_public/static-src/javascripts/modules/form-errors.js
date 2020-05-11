@@ -143,11 +143,15 @@
         if (labelField.parents(".cla-currency-by-frequency").length) {
           labelField = labelField.parents(".cla-currency-by-frequency").children("legend");
 
-          $this.find(' .govuk-input, .govuk-select').filter(function () {
+          $this.find(' .govuk-input').filter(function () {
+            return ($(this).val() && Number($(this).val()) > 0)
+          })
+          .removeClass("govuk-input--error");
+
+          $this.find(' .govuk-select').filter(function () {
             return ($(this).val())
           })
           .removeClass("govuk-select--error")
-          .removeClass("govuk-input--error");
         }
 
         if (errorText) {

@@ -101,7 +101,7 @@ class MoneyIntervalAmountRequired(object):
                 interval_text = field.gettext(u"each year")
             raise StopValidation(self.amount_message + " " + interval_text)
 
-        if not amount.errors and amount.data is None:
+        if not amount.errors and amount_not_set:
             message = self.message or field.gettext(u"Type in a number")
             raise StopValidation(message)
 
