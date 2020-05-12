@@ -86,7 +86,7 @@ def config_path(x):
     return os.path.join(PROJECT_ROOT, "config", "forms", x, "forms_config.yml")
 
 
-FORM_CONFIG_TRANSLATIONS = {l: config_path(l) for l, label in LANGUAGES}
+FORM_CONFIG_TRANSLATIONS = {code: config_path(code) for code, label in LANGUAGES}
 
 
 TIMEZONE = "Europe/London"
