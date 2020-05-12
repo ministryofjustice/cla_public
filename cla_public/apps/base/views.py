@@ -214,7 +214,7 @@ def set_locale(locale):
     """
     Set locale cookie
     """
-    if locale[:2] not in [l for l, d in current_app.config["LANGUAGES"]]:
+    if locale[:2] not in [code for code, label in current_app.config["LANGUAGES"]]:
         abort(404)
     response = redirect(next_url())
     expires = datetime.datetime.now() + datetime.timedelta(days=30)
