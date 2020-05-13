@@ -8,7 +8,6 @@ You'll need to install and configure `kubectl` CLI tool to interact with Kuberne
 
 ## Kubernetes namespaces
 
-
 `cla_public` has two namespaces (environments):
 
 - [laa-cla-public-staging](https://github.com/ministryofjustice/cloud-platform-environments/tree/master/namespaces/cloud-platform-live-0.k8s.integration.dsd.io/laa-cla-public-staging)

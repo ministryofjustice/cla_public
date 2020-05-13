@@ -213,14 +213,25 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install helm v3
+          command: |
+            wget https://get.helm.sh/helm-v3.1.2-linux-amd64.tar.gz
+            tar -zxvf helm-v3.1.2-linux-amd64.tar.gz
+            mv linux-amd64/helm /usr/local/bin/helm
+      - run:
           name: Initialise Kubernetes production context
           command: |
             setup-kube-auth
             kubectl config use-context production
       - deploy:
           name: Deploy laa-cla-public to production
-          command: .circleci/deploy_to_kubernetes production
-      - slack/status
+          command: |
+            source .circleci/define_build_environment_variables
+            ./bin/production_deploy.sh
+      - slack/notify:
+          message: ':tada: Deployed to production'
+          title: '$PRODUCTION_HOST'
+          title_link: 'https://$PRODUCTION_HOST/start'
 
 workflows:
   version: 2
