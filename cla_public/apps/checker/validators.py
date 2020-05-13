@@ -90,7 +90,7 @@ class MoneyIntervalAmountRequired(object):
         nonzero_amount = amount.data > 0
         interval_selected = interval.data != ""
 
-        if interval_selected and amount_not_set and self.amount_message:
+        if not amount.errors and interval_selected and amount_not_set and self.amount_message:
             if interval.data == "per_week":
                 interval_text = field.gettext(u"each week")
             if interval.data == "per_4week":
