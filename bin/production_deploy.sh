@@ -9,7 +9,6 @@ helm upgrade cla-public \
   --namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
   --values ${HELM_DIR}/values-production.yaml \
   --set host=$PRODUCTION_HOST \
-  --set ingress.enabled=false \
   --set image.repository=$DOCKER_REPOSITORY \
   --set image.tag=$IMAGE_TAG \
   --force \
