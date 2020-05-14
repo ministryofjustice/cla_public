@@ -126,10 +126,8 @@
       fleeFromPage("mouse click");
     });
     $(document).keyup(function(e) {
-      if ($('.laa-flee-button-enabled').length) {
-        if (e.keyCode == 27) { // escape key
-          fleeFromPage("escape key");
-        }
+      if ($('.laa-flee-button-enabled').length && e.keyCode == 27) { // 27 = escape key
+        fleeFromPage("escape key");
       }
     });
 
