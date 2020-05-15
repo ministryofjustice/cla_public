@@ -171,7 +171,7 @@ class MoneyField(SetZeroIntegerField):
             if pence:
                 if len(pence) > 2:
                     self.data = None
-                    raise ValueError(self.gettext(u"Not a valid amount"))
+                    raise ValueError(self.gettext(u"Enter a number"))
 
                 if len(pence) == 1:
                     pence = "{0}0".format(pence)
@@ -182,15 +182,15 @@ class MoneyField(SetZeroIntegerField):
                     self.data += int(pence)
             except ValueError:
                 self.data = None
-                raise ValueError(self.gettext(u"Not a valid amount"))
+                raise ValueError(self.gettext(u"Enter a number"))
 
             if self.min_val is not None and self.data < self.min_val:
                 self.data = None
-                raise ValueError(self.gettext(u"This amount must be more than £{:,.0f}").format(self.min_val / 100.0))
+                raise ValueError(self.gettext(u"Enter a value of more than £{:,.0f}").format(self.min_val / 100.0))
 
             if self.max_val is not None and self.data > self.max_val:
                 self.data = None
-                raise ValueError(self.gettext(u"This amount must be less than £{:,.0f}").format(self.max_val / 100.0))
+                raise ValueError(self.gettext(u"Enter a value of less than £{:,.0f}").format(self.max_val / 100.0))
 
     def process_data(self, value):
         self.data = value

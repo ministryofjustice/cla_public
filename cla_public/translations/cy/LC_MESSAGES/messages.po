@@ -641,7 +641,7 @@ msgid "Tell us how much maintenance you receive"
 msgstr "Faint o arian cynhaliaeth rydych chi’n ei dderbyn"
 
 #: cla_public/apps/checker/forms.py:522
-msgid "Enter the total amount of pension you receive, or 0 if this doesn’t apply to you"
+msgid "Enter the pension you receive, or 0 if this doesn’t apply to you"
 msgstr "Rhowch gyfanswm y pensiwn rydych chi’n ei dderbyn, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:523

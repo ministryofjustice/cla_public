@@ -32,9 +32,7 @@ class TestValidation(FlaskAppTestCase):
         num = 51
         form = submit(have_children=True, num_children=num)
         form.validate()
-        self.assertIn(
-            u"Number must be between 1 and 50", form.num_children.errors, "{0} is not too many kids".format(num)
-        )
+        self.assertIn(u"Enter a number between 1 and 50", form.num_children.errors, "{0} is too many kids".format(num))
 
     def test_email_validator(self):
         form = Form()
