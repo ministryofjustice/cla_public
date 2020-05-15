@@ -75,7 +75,7 @@ class AboutYouForm(BaseForm):
             )
         ),
         validators=[
-            IgnoreIf("have_partner", FieldValue(NO)),
+            IgnoreIf("have_partner", FieldValueOrNone(NO)),
             InputRequired(message=_(u"Confirm whether you’re in dispute with your partner")),
         ],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
@@ -98,7 +98,7 @@ class AboutYouForm(BaseForm):
     num_children = SetZeroIntegerField(
         label=_(u"If Yes, how many?"),
         validators=[
-            IgnoreIf("have_children", FieldValue(NO)),
+            IgnoreIf("have_children", FieldValueOrNone(NO)),
             DataRequired(_(u"Tell us how many children you have aged 15 or under")),
             NumberRange(min=1, max=50, message=_(u"Enter a number between 1 and 50")),
         ],
@@ -116,7 +116,7 @@ class AboutYouForm(BaseForm):
     num_dependants = SetZeroIntegerField(
         label=_(u"If Yes, how many?"),
         validators=[
-            IgnoreIf("have_dependants", FieldValue(NO)),
+            IgnoreIf("have_dependants", FieldValueOrNone(NO)),
             DataRequired(_(u"Tell us how many dependants you have aged 16 or over")),
             NumberRange(min=1, max=50, message=_(u"Enter a number between 1 and 50")),
         ],
@@ -256,7 +256,7 @@ class AdditionalBenefitsForm(BaseForm):
         label=_(u"If Yes, total amount of benefits not listed above"),
         choices=money_intervals_except("per_month"),
         validators=[
-            IgnoreIf("other_benefits", FieldValue(NO)),
+            IgnoreIf("other_benefits", FieldValueOrNone(NO)),
             MoneyIntervalAmountRequired(
                 message=_(u"Tell us how much you get in other benefits not listed here"),
                 freq_message=_(u"Tell us how often you get paid this benefit"),
@@ -312,7 +312,7 @@ class PropertyForm(BaseNoCsrfForm):
         label=_(u"If Yes, how much rent did you receive last month?"),
         choices=money_intervals_except("per_4week"),
         validators=[
-            IgnoreIf("is_rented", FieldValue(NO)),
+            IgnoreIf("is_rented", FieldValueOrNone(NO)),
             MoneyIntervalAmountRequired(
                 message=_(u"Tell us how much rent you get from this property"),
                 freq_message=_(u"Tell us how often you charge this rent"),
