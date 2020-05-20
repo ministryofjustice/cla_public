@@ -113,6 +113,24 @@
 {% block javascripts %}
   <script>
 
+    function focusError(fieldID){
+      document.getElementById("field-"+fieldID).scrollIntoView();
+      if($("#"+fieldID+"-0").length) { // the error is a radio or tickbox - select the first option
+        focusElement = fieldID+"-0";
+      } else if($("#"+fieldID+"-per_interval_value.govuk-input--error").length) { // the error is a currency rate
+        focusElement = fieldID +"-per_interval_value";
+      } else if($("#"+fieldID+"-interval_period.govuk-select--error").length) { // the error is a currency rate but only the drop-down
+        focusElement = fieldID+"-interval_period";
+      } else if($("#"+fieldID+"-per_interval_value").length) { // the error is a currency rate (but no error style)
+        focusElement = fieldID +"-per_interval_value";
+      } else if($("#"+fieldID).length) { // the error is any other input
+        focusElement = fieldID;
+      } else { // shouldn't occur
+        focusElement = "#field-"+fieldID;
+      }
+      $("#"+focusElement).focus();
+    }
+
     function fleeFromPage(fleeMethod) {
       $("body").hide();
       ga('moj.send', 'event', 'Quick-exit', 'Quick exit by '+fleeMethod, 'Quick exit from '+stripPII(window.location.href));
@@ -236,10 +254,10 @@
             <% if(field.name) { %>
               <% if(field.errors.length) { %>
                 <% _.each(field.errors, function(error) { %>
-                  <a href="#field-<%= field.name %>"><%= error %></a>
+                  <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
                 <% }); %>
               <% } else { %>
-                <a href="#field-<%= field.name %>"><%= field.label %></a>
+                <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= field.label %></a>
               <% } %>
             <% } else { %>
               <% _.each(field.errors, function(error) { %>
