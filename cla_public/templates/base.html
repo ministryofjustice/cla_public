@@ -121,8 +121,8 @@
       $("#thirdparty-time-time_in_day, #thirdparty-time-time_today, #callback-time-time_in_day, #callback-time-time_today")
         .find("option:contains(7:30 PM), option:contains(6:30 PM), option:contains(5:30 PM)")
         .remove();
-      var d = new Date();
-      var n = d.getDay();
+      const d = new Date();
+      const n = d.getDay();
       if (n == 6 || n === 0) {
         /*if we are currently in a weekend*/
         $("#thirdparty-time-specific_day-0, #callback-time-specific_day-0").attr('disabled', 'disabled');
