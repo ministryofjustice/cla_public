@@ -120,7 +120,10 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     full_name = StringField(
         _(u"Your full name"),
-        validators=[Length(max=400, message=_(u"Your full name must be 400 " u"characters or less")), InputRequired()],
+        validators=[
+            Length(max=400, message=_(u"Your full name must be 400 characters or less")),
+            InputRequired(message=_(u"Tell us your name")),
+        ],
     )
     contact_type = RadioField(
         _(u"Select a contact option"),
