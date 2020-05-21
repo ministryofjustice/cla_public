@@ -123,7 +123,7 @@
         .remove();
       var d = new Date();
       var n = d.getDay();
-      if (n > 5) {
+      if (n == 6 || n === 0) {
         /*if we are currently in a weekend*/
         $("#thirdparty-time-specific_day-0, #callback-time-specific_day-0").attr('disabled', 'disabled');
         $("#thirdparty-time-specific_day-1, #callback-time-specific_day-1").prop('checked', true);
