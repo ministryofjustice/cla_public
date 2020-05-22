@@ -51,7 +51,7 @@ class BaseNoCsrfForm(BabelTranslationsFormMixin, NoCsrfForm):
 
 class AboutYouForm(BaseForm):
 
-    title = _(u"About you")
+    title = _(u"About you)
     have_partner = YesNoField(
         label=_(u"Do you have a partner?"),
         description=(
