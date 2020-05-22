@@ -597,7 +597,7 @@
             <ul class="govuk-list govuk-error-summary__list">
               {% for field_name in form.errors.keys() %}
                 <li>{{ show_field_error(form[field_name]) }}</li>
-              {% endfor %}
+              {{ endfor }}
             </ul>
           </div>
         {% endif %}
