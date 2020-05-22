@@ -171,6 +171,8 @@
       }
     {% endif %}
 
+    const localeLanguage = "{{ request.cookies.get('locale', 'en')[:2] }}"
+
     _.forEach(window.ga_trackers, function(values, id){
       ga('create', values["id"], values["domain"], values["name"], values["options"]);
       ga(values["name"] + '.set', 'anonymizeIp', true);
@@ -179,6 +181,9 @@
         ga(values["name"] + '.require', 'linker');
         ga(values["name"] + '.linker.set', 'anonymizeIp', true);
         ga(values["name"] + '.linker:autoLink', ['www.gov.uk']);
+      }
+      if(localeLanguage === 'cy') {
+        ga(values["name"] + '.set', 'language', 'cy')
       }
     });
 
