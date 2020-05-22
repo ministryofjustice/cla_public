@@ -76,7 +76,7 @@ class AboutYouForm(BaseForm):
         ),
         validators=[
             IgnoreIf("have_partner", FieldValueOrNone(NO)),
-            InputRequired(message=_(u"Confirm whether you’re in dispute with your partner")),
+            InputRequired(message=_(u"Tell us whether you’re in dispute with your partner")),
         ],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
@@ -91,7 +91,7 @@ class AboutYouForm(BaseForm):
     have_children = YesNoField(
         label=_(u"Do you have any children aged 15 or under?"),
         description=_(u"Don’t include any children who don’t live with you"),
-        validators=[InputRequired(message=_(u"Tell us whether you have any children under 16"))],
+        validators=[InputRequired(message=_(u"Tell us whether you have any children aged 15 or under"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
@@ -109,7 +109,7 @@ class AboutYouForm(BaseForm):
             u"People who you live with and support financially. This could be "
             u"a young person for whom you get Child Benefit"
         ),
-        validators=[InputRequired(message=_(u"Tell us whether you have any children aged 16 or over"))],
+        validators=[InputRequired(message=_(u"Tell us whether you have any dependants aged 16 or over"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
@@ -129,7 +129,7 @@ class AboutYouForm(BaseForm):
     )
     have_valuables = YesNoField(
         label=_(u"Do you have any valuable items worth over £500 each?"),
-        validators=[InputRequired(message=_(u"Tell us if you have valuable items"))],
+        validators=[InputRequired(message=_(u"Tell us if you have any valuable items worth over £500 each"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
     )
@@ -174,7 +174,7 @@ class AboutYouForm(BaseForm):
     )
     aged_60_or_over = YesNoField(
         label=_(u"Are you or your partner (if you have one) aged 60 or over?"),
-        validators=[InputRequired(message=_(u"Tell us if you are aged 60 or over"))],
+        validators=[InputRequired(message=_(u"Tell us if you or your partner are aged 60 or over"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
@@ -204,7 +204,7 @@ class YourBenefitsForm(BaseForm):
                 freq_message=_(u"Tell us how often you receive your Child Benefit"),
                 amount_message=_(
                     u"Tell us how much Child Benefit you receive"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             ),
         ],
     )
@@ -258,11 +258,11 @@ class AdditionalBenefitsForm(BaseForm):
         validators=[
             IgnoreIf("other_benefits", FieldValueOrNone(NO)),
             MoneyIntervalAmountRequired(
-                message=_(u"Tell us how much you get in other benefits not listed here"),
-                freq_message=_(u"Tell us how often you get paid this benefit"),
+                message=_(u"Tell us how much you receive in other benefits"),
+                freq_message=_(u"Tell us how often you receive these other benefits"),
                 amount_message=_(
-                    u"Tell us how much you get"
-                ),  # this is followed by the time period, e.g. "... every week"
+                    u"Tell us how much you receive in other benefits"
+                ),  # this is followed by the time period, e.g. "... each week"
             ),
         ],
     )
@@ -299,7 +299,7 @@ class PropertyForm(BaseNoCsrfForm):
         label=_(u"How much was your monthly mortgage repayment last month?"),
         validators=[
             IgnoreIf("mortgage_remaining", FieldValue(0)),
-            InputRequired(_(u"Tell us how much your mortgage cost you last month")),
+            InputRequired(_(u"Tell us your monthly mortgage repayment last month")),
         ],
     )
     is_rented = YesNoField(
@@ -317,8 +317,8 @@ class PropertyForm(BaseNoCsrfForm):
                 message=_(u"Tell us how much rent you get from this property"),
                 freq_message=_(u"Tell us how often you charge this rent"),
                 amount_message=_(
-                    u"Tell us how much rent you get"
-                ),  # this is followed by the time period, e.g. "... every week"
+                    u"Tell us how much rent you receive"
+                ),  # this is followed by the time period, e.g. "... each week"
             ),
         ],
     )
@@ -384,7 +384,7 @@ class SavingsForm(BaseForm):
         label=_(u"Total value of items worth over £500 each"),
         description=_(u"See below for examples of what valuable items to include"),
         validators=[
-            InputRequired(message=_(u"Tell us the total value of your valuable items")),
+            InputRequired(message=_(u"Enter the total of all valuable items over £500")),
             ZeroOrMoreThan(50000),
         ],
     )
@@ -430,7 +430,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 freq_message=_(u"Tell us how often you get paid this amount"),
                 amount_message=_(
                     u"Tell us how much you get paid"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -447,7 +447,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 freq_message=_(u"Tell us how often you pay income tax"),
                 amount_message=_(
                     u"Tell us how much income tax you pay"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -466,7 +466,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 freq_message=_(u"Tell us how often you make your National Insurance contributions"),
                 amount_message=_(
                     u"Tell us what National Insurance contributions you make"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -481,7 +481,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 freq_message=_(u"Tell us how often you receive your Working Tax Credit"),
                 amount_message=_(
                     u"Tell us how much Working Tax Credit you receive"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -497,7 +497,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 freq_message=_(u"Tell us how often you receive your Child Tax Credit"),
                 amount_message=_(
                     u"Tell us how much Child Tax Credit you receive"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -507,10 +507,10 @@ class IncomeFieldForm(BaseNoCsrfForm):
         validators=[
             MoneyIntervalAmountRequired(
                 message=_(u"Enter the total amount of maintenance you receive, or 0 if this doesn’t apply to you"),
-                freq_message=_(u"Tell us how often you receive your maintenance"),
+                freq_message=_(u"Tell us how often you receive maintenance"),
                 amount_message=_(
                     u"Tell us how much maintenance you receive"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -523,7 +523,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 freq_message=_(u"Tell us how often you receive your pension"),
                 amount_message=_(
                     u"Tell us how much pension you receive"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -533,10 +533,10 @@ class IncomeFieldForm(BaseNoCsrfForm):
         validators=[
             MoneyIntervalAmountRequired(
                 message=_(u"Enter the total amount of other income you receive, or 0 if this doesn’t apply to you"),
-                freq_message=_(u"Tell us how often you receive this income"),
+                freq_message=_(u"Tell us how often you receive this other income"),
                 amount_message=_(
-                    u"Tell us how much you receive"
-                ),  # this is followed by the time period, e.g. "... every week"
+                    u"Tell us how much other income you receive"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -592,7 +592,7 @@ class OutgoingsForm(BaseForm):
                 freq_message=_(u"Tell us how often you pay this rent"),
                 amount_message=_(
                     u"Tell us how much rent you pay"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -606,17 +606,17 @@ class OutgoingsForm(BaseForm):
                 freq_message=_(u"Tell us how often you pay this maintenance"),
                 amount_message=_(
                     u"Tell us how much maintenance you pay"
-                ),  # this is followed by the time period, e.g. "... every week"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
     income_contribution = PartnerMoneyField(
         label=_(u"Monthly Income Contribution Order"),
-        description=_(u"Money you pay per month towards your criminal legal aid"),
-        partner_description=_(u"Money you and/or your partner pay per month towards your criminal legal aid"),
+        description=_(u"Money you pay per month towards your Criminal Legal Aid"),
+        partner_description=_(u"Money you and/or your partner pay per month towards your Criminal Legal Aid"),
         validators=[
             InputRequired(
-                _(u"Tell us how much you pay towards Criminal Legal Aid, enter 0 if this doesn’t apply to you")
+                _(u"Tell us how much you pay towards Criminal Legal Aid, or enter 0 if this doesn’t apply to you")
             )
         ],
     )

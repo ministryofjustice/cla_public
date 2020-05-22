@@ -980,11 +980,11 @@ msgid "Monthly Income Contribution Order"
 msgstr "Gorchymyn Cyfrannu Incwm Misol"
 
 #: cla_public/apps/checker/forms.py:478
-msgid "Money you pay per month towards your criminal legal aid"
+msgid "Money you pay per month towards your Criminal Legal Aid"
 msgstr "Arian yr ydych chi yn ei dalu at eich cymorth cyfreithiol troseddol"
 
 #: cla_public/apps/checker/forms.py:479
-msgid "Money you and/or your partner pay per month towards your criminal legal aid"
+msgid "Money you and/or your partner pay per month towards your Criminal Legal Aid"
 msgstr "Arian yr ydych chi a/neu’ch partner yn ei dalu at eich cymorth cyfreithiol troseddol"
 
 #: cla_public/apps/checker/forms.py:483
