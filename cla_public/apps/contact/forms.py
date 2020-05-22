@@ -81,7 +81,7 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
     full_name = StringField(
         _(u"Full name of the person to call"),
         validators=[
-            Length(max=400, message=_(u"Your full name must be 400 " u"characters or less")),
+            Length(max=400, message=_(u"Their full name must be 400 characters or less")),
             InputRequired(message=_(u"Tell us the name of the person to call")),
         ],
     )

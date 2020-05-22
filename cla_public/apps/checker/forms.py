@@ -506,10 +506,10 @@ class IncomeFieldForm(BaseNoCsrfForm):
         description=_(u"Payments you get from an ex-partner"),
         validators=[
             MoneyIntervalAmountRequired(
-                message=_(u"Enter the total amount of Maintenance you receive, or 0 if this doesn’t apply to you"),
-                freq_message=_(u"Tell us how often you receive your Maintenance"),
+                message=_(u"Enter the total amount of maintenance you receive, or 0 if this doesn’t apply to you"),
+                freq_message=_(u"Tell us how often you receive your maintenance"),
                 amount_message=_(
-                    u"Tell us how much Maintenance you receive"
+                    u"Tell us how much maintenance you receive"
                 ),  # this is followed by the time period, e.g. "... every week"
             )
         ],
