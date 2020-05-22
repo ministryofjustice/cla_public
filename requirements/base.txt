@@ -10,7 +10,7 @@ PyYAML==3.11
 Werkzeug==0.9.6
 argparse==1.2.1
 blinker==1.3
-git+https://github.com/ministryofjustice/cla_common.git@a9af895a91aaa71b1b4df41e1761cd95baaadffe#egg=cla_common==0.3.6
+git+https://github.com/ministryofjustice/cla_common.git@0.3.7#egg=cla_common
 speaklater==1.3 # Required by cla_common
 itsdangerous==0.24
 logstash_formatter==0.5.9
