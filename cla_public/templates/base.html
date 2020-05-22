@@ -113,23 +113,6 @@
 {% block javascripts %}
   <script>
 
-    $(document).ready(function(){
-      /*COVID-19: This function is a stopgap for emergency opening times*/
-      $("#field-thirdparty-time-day, #field-callback-time-day")
-        .find("option:contains(Saturday), option:contains(Sunday)")
-        .remove();
-      $("#thirdparty-time-time_in_day, #thirdparty-time-time_today, #callback-time-time_in_day, #callback-time-time_today")
-        .find("option:contains(7:30 PM), option:contains(6:30 PM), option:contains(5:30 PM)")
-        .remove();
-      const d = new Date();
-      const n = d.getDay();
-      if (n == 6 || n === 0) {
-        /*if we are currently in a weekend*/
-        $("#thirdparty-time-specific_day-0, #callback-time-specific_day-0").attr('disabled', 'disabled');
-        $("#thirdparty-time-specific_day-1, #callback-time-specific_day-1").prop('checked', true);
-      }
-    });
-
     function fleeFromPage(fleeMethod) {
       $("body").hide();
       ga('moj.send', 'event', 'Quick-exit', 'Quick exit by '+fleeMethod, 'Quick exit from '+stripPII(window.location.href));
