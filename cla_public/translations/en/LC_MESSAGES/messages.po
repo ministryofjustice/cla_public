@@ -3564,10 +3564,17 @@ msgstr ""
 msgid "Opening times:"
 msgstr ""
 
+#: cla_public/templates/errors/50x.html:146
 #: cla_public/templates/errors/5xx.html:28
 msgid "Monday to Friday: 9am to 8pm"
 msgstr ""
 
+#: cla_public/templates/errors/50x.html:147
+#: cla_public/templates/errors/5xx.html:29
+msgid "Monday to Friday: 9am to 5pm"
+msgstr ""
+
+#: cla_public/templates/errors/50x.html:146
 #: cla_public/templates/errors/5xx.html:28
 msgid "Saturday: 9am to 12.30pm"
 msgstr ""

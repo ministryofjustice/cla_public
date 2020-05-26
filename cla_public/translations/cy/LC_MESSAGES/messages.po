@@ -3569,10 +3569,17 @@ msgstr "Bydd galwadau yn costio oddeutu 9c y funud o linell dir. Bydd galwadau o
 msgid "Opening times:"
 msgstr "Oriau agor:"
 
+#: cla_public/templates/errors/50x.html:146
 #: cla_public/templates/errors/5xx.html:28
 msgid "Monday to Friday: 9am to 8pm"
 msgstr "Dydd Llun i ddydd Gwener: 9am tan 8pm"
 
+#: cla_public/templates/errors/50x.html:147
+#: cla_public/templates/errors/5xx.html:29
+msgid "Monday to Friday: 9am to 5pm"
+msgstr "Dydd Llun i ddydd Gwener: 9am tan 5pm"
+
+#: cla_public/templates/errors/50x.html:146
 #: cla_public/templates/errors/5xx.html:28
 msgid "Saturday: 9am to 12.30pm"
 msgstr "Dydd Sadwrn: 9am tan 12.30pm"
