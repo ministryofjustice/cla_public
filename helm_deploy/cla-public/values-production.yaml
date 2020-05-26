@@ -20,3 +20,7 @@ ingress:
 envVars:
   - name: DEBUG
     value: "False"
+  - name: MOJ_GA_ID
+    value: UA-37377084-21
+  - name: GDS_GA_ID
+    value: UA-145652997-1
