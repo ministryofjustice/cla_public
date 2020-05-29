@@ -263,6 +263,7 @@ workflows:
                 - master
       - staging_deploy:
           requires:
+            - build
             - staging_deploy_approval
           context: laa-cla-public-live-1
           multideploy: true
