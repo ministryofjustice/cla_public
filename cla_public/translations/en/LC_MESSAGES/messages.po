@@ -377,7 +377,7 @@ msgid "per year"
 msgstr ""
 
 #: cla_public/apps/checker/validators.py:95
-msgid "every week"
+msgid "each week"
 msgstr ""
 
 #: cla_public/apps/checker/validators.py:97
@@ -385,11 +385,11 @@ msgid "every 4 weeks"
 msgstr ""
 
 #: cla_public/apps/checker/validators.py:99
-msgid "every month"
+msgid "each month"
 msgstr ""
 
 #: cla_public/apps/checker/validators.py:101
-msgid "every year"
+msgid "each year"
 msgstr ""
 
 #: cla_public/apps/checker/constants.py:107
