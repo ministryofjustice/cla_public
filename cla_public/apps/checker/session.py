@@ -261,7 +261,7 @@ class CheckerSession(SecureCookieSession, SessionMixin):
 
 
 class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
-    def dumps(self, value):  # noqa: C901
+    def dumps(self, value):
         def _tag(value):
             if isinstance(value, CheckerSessionObject):
                 return {" ch": dict((k, _tag(v)) for k, v in iteritems(value))}
