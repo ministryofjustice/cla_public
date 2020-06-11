@@ -23,10 +23,10 @@ msgstr ""
 
 #: Test
 msgid "Beth yw eich problem teuluol?"
-msgid "Beth yw eich problem teuluol? / What is your family problem about?"
+msgid "Beth yw eich problem teuluol? -- What is your family problem about?"
 #: Test
 msgid "What is your family problem about?"
-msgid "What is your family problem about? / Beth yw eich problem teuluol?"
+msgid "What is your family problem about? -- Beth yw eich problem teuluol?"
 
 #: Default error message translation - DO NOT DELETE
 msgid "This field is required."
