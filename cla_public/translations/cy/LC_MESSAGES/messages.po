@@ -21,6 +21,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
+#: Test
+msgid "Beth yw eich problem teuluol?"
+msgid "Beth yw eich problem teuluol? / What is your family problem about?"
+#: Test
+msgid "What is your family problem about?"
+msgid "What is your family problem about? / Beth yw eich problem teuluol?"
+
 #: Default error message translation - DO NOT DELETE
 msgid "This field is required."
 msgstr "Rhaid cwblhau’r maes hwn"
