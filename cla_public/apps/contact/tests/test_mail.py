@@ -21,7 +21,7 @@ def submit(**kwargs):
         "callback-contact_number": "0123456789",
     }
 
-    if datetime.datetime.now().time() > datetime.time(hour=17, minute=30):
+    if datetime.datetime.now().time() > datetime.time(hour=14, minute=30):
         # use tomorrow because no more callbacks available today
         another_day = datetime.date.today() + datetime.timedelta(days=1)
         if another_day.weekday() in (5, 6):
