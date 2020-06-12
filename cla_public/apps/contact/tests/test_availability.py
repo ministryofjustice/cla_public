@@ -172,12 +172,12 @@ class TestDayTimeChoices(unittest.TestCase):
             field = DayChoiceField()
             field = field.bind(form, "day")
             choices = field.day_time_choices
-            # half day on saturday
-            self.assertEqual(7, len(choices["20150214"]))
+            # no availability on saturday
+            self.assertNotIn("20150214", choices.keys())
             # can book before 11am on monday. Monday morning call back capping removed.
-            self.assertEqual(22, len(choices["20150216"]))
+            self.assertEqual(16, len(choices["20150216"]))
             # can book any slot on tuesday
-            self.assertEqual(22, len(choices["20150217"]))
+            self.assertEqual(16, len(choices["20150217"]))
 
     def test_monday_available_before_11_on_saturday(self):
         with override_current_time(datetime.datetime(2015, 5, 9, 10, 30)):
