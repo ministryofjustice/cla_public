@@ -318,10 +318,9 @@ class Tag:
             if instance["value"] == "__html__":
                 if callable(getattr(value, "__html__", None)):
                     return instance["method"](value)
-            if isinstance(value, instance["value"]):
+            elif isinstance(value, instance["value"]):
                 return instance["method"](value)
         return value
-
 
 
 class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
