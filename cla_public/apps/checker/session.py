@@ -259,6 +259,7 @@ class CheckerSession(SecureCookieSession, SessionMixin):
             super(CheckerSession, self).clear()
             self.checker = CheckerSessionObject()
 
+
 class Tag:
     def __init__(self):
         self.instances = [
