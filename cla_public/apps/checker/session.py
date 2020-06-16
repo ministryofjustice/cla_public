@@ -265,7 +265,7 @@ class Tag:
         self.instances = [
             {
                 'value': CheckerSessionObject,
-                'method': self.isACheckSessionObjectisAC
+                'method': self.isACheckSessionObject
             },
             {
                 'value': MeansTest,
