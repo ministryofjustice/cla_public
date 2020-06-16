@@ -261,94 +261,65 @@ class CheckerSession(SecureCookieSession, SessionMixin):
 
 
 class Tag:
+
     def __init__(self):
         self.instances = [
-            {
-                'value': CheckerSessionObject,
-                'method': self.isACheckSessionObject
-            },
-            {
-                'value': MeansTest,
-                'method': self.isAMeansTestObject
-            },
-            {
-                'value': tuple,
-                'method': self.isATupleObject
-            },
-            {
-                'value': uuid.UUID,
-                'method': self.isAUUIDObject
-            },
-            {
-                'value': bytes,
-                'method': self.isAByteObject
-            },
-            {
-                'value': "__html__",
-                'method': self.isCallable
-            },
-            {
-                'value': list,
-                'method': self.isAListObject
-            },
-            {
-                'value': datetime,
-                'method': self.isADatetimeObject
-            },
-            {
-                'value': dict,
-                'method': self.isADictObject
-            },
-            {
-                'value': str,
-                'method': self.isAString
-            }
-        ]
+            {'value': CheckerSessionObject,
+             'method': self.isACheckSessionObject},
+            {'value': MeansTest, 'method': self.isAMeansTestObject},
+            {'value': tuple, 'method': self.isATupleObject},
+            {'value': uuid.UUID, 'method': self.isAUUIDObject},
+            {'value': bytes, 'method': self.isAByteObject},
+            {'value': '__html__', 'method': self.isCallable},
+            {'value': list, 'method': self.isAListObject},
+            {'value': datetime, 'method': self.isADatetimeObject},
+            {'value': dict, 'method': self.isADictObject},
+            {'value': str, 'method': self.isAString},
+            ]
 
     def isACheckSessionObject(self, value):
-        return {" ch": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
+        return {' ch': dict((k, self.checkTag(v)) for (k, v) in
+                iteritems(value))}
 
     def isAMeansTestObject(self, value):
-        return {" mt": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
+        return {' mt': dict((k, self.checkTag(v)) for (k, v) in
+                iteritems(value))}
 
     def isATupleObject(self, value):
-        return {" t": [self.checkTag(x) for x in value]}
+        return {' t': [self.checkTag(x) for x in value]}
 
     def isAUUIDObject(self, value):
-        return {" u": value.hex}
+        return {' u': value.hex}
 
     def isAByteObject(self, value):
-        return {" b": b64encode(value).decode("ascii")}
+        return {' b': b64encode(value).decode('ascii')}
 
     def isCallable(self, value):
-        return {" m": text_type(value.__html__())}
+        return {' m': text_type(value.__html__())}
 
     def isAListObject(self, value):
         return [self.checkTag(x) for x in value]
 
     def isADatetimeObject(self, value):
-        return {" d": http_date(value)}
+        return {' d': http_date(value)}
 
     def isADictObject(self, value):
-        return dict((k, self.checkTag(v)) for k, v in iteritems(value))
+        return dict((k, self.checkTag(v)) for (k, v) in
+                    iteritems(value))
 
     def isAString(self, value):
         try:
             return text_type(value)
         except UnicodeError:
-            raise UnexpectedUnicodeError(
-                u"A byte string with "
-                u"non-ASCII data was passed to the session system "
-                u"which can only store unicode strings.  Consider "
-                u"base64 encoding your string (String was %r)" % value
-            )
+            raise UnexpectedUnicodeError(u'A byte string with non-ASCII data was passed to the session system which can only store unicode strings.  Consider base64 encoding your string (String was %r)'
+                     % value)
 
     def checkTag(self, value):
-        for instance in self.instaces:
-            if(instance.value == "__html__"):
-                if(callable(getattr(value, "__html__", None))):
+        for instance in self.instances:
+            if instance.value == '__html__':
+                if callable(getattr(value, '__html__', None)):
                     return instance.method(value)
-            elif(isinstance(value, instance.value)):
+            elif isinstance(value, instance.value):
                 return instance.method(value)
         return value
 
