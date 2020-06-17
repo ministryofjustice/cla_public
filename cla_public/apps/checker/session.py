@@ -329,7 +329,6 @@ class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
         _tag = newTag.checkTag
         return json.dumps(_tag(value), separators=(",", ":"))
 
-
     def loads(self, value):
         def object_hook(obj):
             if len(obj) != 1:
