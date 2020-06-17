@@ -324,10 +324,11 @@ class Tag:
 
 
 class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
-    def dumps(self, value):  
+    def dumps(self, value):
         newTag = Tag()
         _tag = newTag.checkTag
         return json.dumps(_tag(value), separators=(",", ":"))
+
 
     def loads(self, value):
         def object_hook(obj):
