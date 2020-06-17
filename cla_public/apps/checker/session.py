@@ -263,16 +263,16 @@ class CheckerSession(SecureCookieSession, SessionMixin):
 class Tag:
     def __init__(self):
         self.instances = [
-            {"value": CheckerSessionObject, "method": self.isACheckSessionObject},
-            {"value": MeansTest, "method": self.isAMeansTestObject},
-            {"value": tuple, "method": self.isATupleObject},
-            {"value": uuid.UUID, "method": self.isAUUIDObject},
-            {"value": bytes, "method": self.isAByteObject},
-            {"value": "__html__", "method": self.isCallable},
-            {"value": list, "method": self.isAListObject},
-            {"value": datetime, "method": self.isADatetimeObject},
-            {"value": dict, "method": self.isADictObject},
-            {"value": str, "method": self.isAString},
+            {"type": CheckerSessionObject, "method": self.isACheckSessionObject},
+            {"type": MeansTest, "method": self.isAMeansTestObject},
+            {"type": tuple, "method": self.isATupleObject},
+            {"type": uuid.UUID, "method": self.isAUUIDObject},
+            {"type": bytes, "method": self.isAByteObject},
+            {"type": "__html__", "method": self.isCallable},
+            {"type": list, "method": self.isAListObject},
+            {"type": datetime, "method": self.isADatetimeObject},
+            {"type": dict, "method": self.isADictObject},
+            {"type": str, "method": self.isAString},
         ]
 
     def isACheckSessionObject(self, value):
@@ -315,10 +315,10 @@ class Tag:
 
     def checkTag(self, value):
         for instance in self.instances:
-            if instance["value"] == "__html__":
-                if callable(getattr(value, "__html__", None)):
+            if instance["type"] == "__html__":
+                if callable(getattr(value, instance["type"], None)):
                     return instance["method"](value)
-            elif isinstance(value, instance["value"]):
+            elif isinstance(value, instance["type"]):
                 return instance["method"](value)
         return value
 
