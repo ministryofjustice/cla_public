@@ -56,6 +56,8 @@ msgid "Ydych chi wedi dechrau cyfryngu teuluol eisoes? (Mae hyn yn cynnwys achos
 msgstr "Have you already started family mediation? (This includes cases that have already finished)"
 msgid "Have you taken part in a family mediation session?"
 msgstr ""
+msgid "Dewiswch yr opsiwn sy'n disgrifio orau eich sefyllfa tai"
+msgstr "Choose the option that best describes your housing situation"
 msgid "Ydych chi mewn perygl o golli eich cartref oherwydd methdaliad, ailfeddiannu neu ddyled morgais?"
 msgstr "Are you at risk of losing your home because of bankruptcy, repossession or mortgage debt?"
 msgid "Beth yw eich problem ynglŷn â thai?"
@@ -64,8 +66,12 @@ msgid "A yw hyn yn creu perygl difrifol o salwch neu anaf?"
 msgstr "Does this create a serious risk of illness or injury?"
 msgid "Eich landlord yw:"
 msgstr "Your landlord is:"
+msgid "Beth yw eich problem ynglŷn â budd-daliadau?"
+msgstr "What is your benefits problem about?"
 msgid "Rydych eisiau apelio yn erbyn penderfyniad ynglŷn â budd-daliadau:"
 msgstr "You want to appeal a benefits decision:"
+msgid "Beth yw eich problem?"
+msgstr "What is your problem about?"
 
 
 #: cla_public/templates/macros/form.html:305 - DO NOT DELETE

@@ -33,8 +33,6 @@ msgid "Choose the option that best describes your personal situation"
 msgstr "Dewiswch yr opsiwn sy’n disgrifio orau eich sefyllfa bersonol"
 msgid "Are you or your children at immediate risk of harm?"
 msgstr "Ydych chi neu eich plant mewn perygl uniongyrchol o niwed?"
-msgid "Are you at immediate risk of harm?"
-msgstr "Ydych chi mewn perygl uniongyrchol o niwed?"
 msgid "On what grounds have you been discriminated against?"
 msgstr "Ar ba sail y gwahaniaethwyd yn eich erbyn?"
 msgid "How old are you?"
@@ -51,16 +49,20 @@ msgid "Select the option that best describes your situation"
 msgstr "Dewiswch yr opsiwn sy’n disgrifio eich sefyllfa orau"
 msgid "Choose the option that best describes your situation"
 msgstr "Dewiswch yr opsiwn sy’n disgrifio eich sefyllfa orau"
+msgid "Are you at immediate risk of harm?"
+msgstr "Ydych chi mewn perygl uniongyrchol o niwed?"
+msgid "Have you already started family mediation? (This includes cases that have already finished)"
+msgstr "Ydych chi wedi dechrau cyfryngu teuluol eisoes? (Mae hyn yn cynnwys achosion sydd wedi dod i ben eisoes)"
+msgid "Have you taken part in a family mediation session?"
+msgstr ""
 msgid "What kind of dispute is it?"
 msgstr "Pa fath o anghydfod ydyw?"
 msgid "Is the child a victim of child abuse within the family?"
 msgstr "A yw’r plentyn yn ddioddefwr cam-drin plant o fewn y teulu?"
 msgid "Is the local council trying to take your child into care?"
 msgstr "Yw’r cyngor lleol yn ceisio rhoi eich plentyn mewn gofal?"
-msgid "Have you already started family mediation? (This includes cases that have already finished)"
-msgstr "Ydych chi wedi dechrau cyfryngu teuluol eisoes? (Mae hyn yn cynnwys achosion sydd wedi dod i ben eisoes)"
-msgid "Have you taken part in a family mediation session?"
-msgstr ""
+msgid "Choose the option that best describes your housing situation"
+msgstr "Dewiswch yr opsiwn sy’n disgrifio orau eich sefyllfa tai"
 msgid "Are you at risk of losing your home because of bankruptcy, repossession or mortgage debt?"
 msgstr "Ydych chi mewn perygl o golli eich cartref oherwydd methdaliad, ailfeddiannu neu ddyled morgais?"
 msgid "What is your housing problem about?"
@@ -69,8 +71,12 @@ msgid "Does this create a serious risk of illness or injury?"
 msgstr "A yw hyn yn creu perygl difrifol o salwch neu anaf?"
 msgid "Your landlord is:"
 msgstr "Eich landlord yw:"
+msgid "What is your benefits problem about?"
+msgstr "Beth yw eich problem ynglŷn â budd-daliadau?"
 msgid "You want to appeal a benefits decision:"
 msgstr "Rydych eisiau apelio yn erbyn penderfyniad ynglŷn â budd-daliadau:"
+msgid "What is your problem about?"
+msgstr "Beth yw eich problem?"
 
 
 
@@ -1669,7 +1675,7 @@ msgstr "Mae Google Analytics yn gosod y cwcis canlynol:"
 
 #: cla_public/templates/cookies.html:50
 msgid "Google Analytics cookies"
-msgstr ""
+msgstr "Cwcis Google Analytics"
 
 #: cla_public/templates/cookies.html:53 cla_public/templates/cookies.html:90
 #: cla_public/templates/cookies.html:110 cla_public/templates/cookies.html:130
@@ -1772,7 +1778,7 @@ msgstr "Gallwch ddewis i ddefnyddio’r gwasanaeth hwn yn Gymraeg yn lle Saesneg
 
 #: cla_public/templates/cookies.html:127
 msgid "Welsh language cookies"
-msgstr ""
+msgstr "Cwcis iaith Gymraeg"
 
 #: cla_public/templates/cookies.html:28
 msgid "Change cookie settings"
