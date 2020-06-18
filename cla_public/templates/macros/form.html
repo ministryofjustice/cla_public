@@ -36,8 +36,8 @@
         </legend>
       {% endif %}
 
-      {{ render_field_errors(field.errors) if field and field.errors}}
       {{ render_field_description(field) }}
+      {{ render_field_errors(field.errors) if field and field.errors}}
 
       {% if field or caller %}
         <div class="{{ kwargs.row_class }}">
@@ -101,8 +101,8 @@
   <span id="{{ field.id }}-hint" class="govuk-hint">
     {% trans %}Select all that apply{% endtrans %}
   </span>
-  {{ render_field_errors(field.errors) if field and field.errors}}
   {{ render_field_description(field) }}
+  {{ render_field_errors(field.errors) if field and field.errors}}
 
   {% if field or caller %}
     <div class="govuk-checkboxes {{ kwargs.row_class }}">
@@ -153,11 +153,11 @@
 
     {{ render_field_label(field, kwargs.hide_label, kwargs.custom_label) }}
 
+    {{ render_field_description(field) }}
+
     {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
       {{ render_field_errors(field.errors) }}
     {% endif %}
-
-    {{ render_field_description(field) }}
 
     {% if use_row and (field or caller) %}
       <div class="form-row {{ kwargs.row_class }}">
