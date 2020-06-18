@@ -24,3 +24,5 @@ envVars:
     value: UA-37377084-21
   - name: GDS_GA_ID
     value: UA-145652997-1
+  - name: MOJ_GA_ID
+    value: GTM-MWL77F6
