@@ -65,6 +65,10 @@ msgid "Are you at risk of losing your home because of bankruptcy, repossession o
 msgstr "Ydych chi mewn perygl o golli eich cartref oherwydd methdaliad, ailfeddiannu neu ddyled morgais?"
 msgid "What is your housing problem about?"
 msgstr "Beth yw eich problem ynglŷn â thai?"
+msgid "Does this create a serious risk of illness or injury?"
+msgstr "A yw hyn yn creu perygl difrifol o salwch neu anaf?"
+msgid "Your landlord is:"
+msgstr "Eich landlord yw:"
 msgid "You want to appeal a benefits decision:"
 msgstr "Rydych eisiau apelio yn erbyn penderfyniad ynglŷn â budd-daliadau:"
 
