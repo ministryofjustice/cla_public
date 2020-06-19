@@ -6,7 +6,7 @@ image:
   pullPolicy: IfNotPresent
 
 environment: staging
-backend_base_uri: https://lga-959-kubernetes-laa-cla-backend-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+backend_base_uri: https://staging-backend.cla.dsd.io/
 laalaa_api_host: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
 google_maps_api_key: AIzaSyBVsZmfkiRFNNMJnPraN_8sBW3Dj-BFFNs
 
