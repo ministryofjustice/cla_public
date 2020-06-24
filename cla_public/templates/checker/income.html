@@ -9,7 +9,7 @@
   </p>
   <form method="POST">
     {{ form.csrf_token }}
-    
+
     {% with skip = not (session.checker.is_employed or session.checker.is_self_employed) %}
       {% if session.checker.has_partner %}
         <fieldset class="govuk-fieldset">

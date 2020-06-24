@@ -269,6 +269,12 @@
       </ul>
     {% endcall %}
   </script>
+  <script>
+    $(document).ready(function(){
+      $('.govuk-error-summary + .govuk-error-summary').remove();
+      //removes duplicate error summaries
+    });
+  </script>
 
   <script type="text/html" id="fieldError">
     <% _.each(errors, function(error, index) { %>

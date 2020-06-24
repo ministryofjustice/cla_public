@@ -257,8 +257,9 @@
       _.each(errorFields, addErrors);
 
       if(this.$form.data('error-banner') !== false) {
-        this.$form.prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
+        this.$form.closest('main').prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
       }
+
 
       // Report to GA about form errors
       var errorFieldNames = _.keys(errorFields);
@@ -281,7 +282,7 @@
       $('.govuk-error-message').remove();
       $('.form-row.field-error').remove();
       $('form>.alert.alert-error').remove();
-      $('form>.govuk-error-summary').remove();
+      $('.govuk-error-summary').remove();
       $('.form-error')
         .removeClass('form-error')
         .removeAttr('aria-invalid');
@@ -294,4 +295,3 @@
         .removeClass("govuk-select--error");
     }
   };
-
