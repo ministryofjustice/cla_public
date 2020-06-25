@@ -22,3 +22,5 @@ envVars:
     value: "False"
   - name: MOJ_GA_ID
     value: UA-37377084-13
+  - name: MOJ_GTM_ID
+    value: GTM-MWL77F6
