@@ -24,3 +24,5 @@ envVars:
     value: UA-37377084-13
   - name: MOJ_GTM_ID
     value: GTM-MWL77F6
+  - name: MOJ_GTM_AUTH
+    value: "4KOuCU7aXv3Owhcs7U0ORw"
