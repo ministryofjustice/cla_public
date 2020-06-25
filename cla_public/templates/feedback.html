@@ -7,6 +7,7 @@
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  {{ Form.handle_errors(form) }}
   <h1 class="govuk-heading-xl">{{ title }}</h1>
   <p class="govuk-body-l">
     {% trans %}Do not include any personal or financial details, for example, your National Insurance or credit card numbers.{% endtrans %}
@@ -16,7 +17,6 @@
     {{ form.csrf_token }}
     {{ form.referrer }}
 
-    {{ Form.handle_errors(form) }}
 
     {% if non_field_error %}
       {% call Element.alert('error', icon='cross') %}

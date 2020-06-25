@@ -586,7 +586,7 @@
         <p>{{ _('Please try submitting the form again.') }}</p>
       {% endcall %}
     {% else%}
-      {% call Element.alert('error', title=_('This form has errors')) %}
+      {% call Element.alert('error', title=_('There is a problem')) %}
         {% if form['properties'] %}
           {% for property_form in form['properties'] %}
             {% if property_form.errors %}

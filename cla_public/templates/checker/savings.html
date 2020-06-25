@@ -1,6 +1,7 @@
 {% extends "checker/base.html" %}
 
 {% block inner_content %}
+  {{ Form.handle_errors(form) }}
   <h1 class="govuk-heading-xl">
     {{ form.title }}
   </h1>
@@ -14,7 +15,6 @@
 
   <form method="POST">
     {{ form.csrf_token }}
-    {{ Form.handle_errors(form) }}
 
     {% with skip = not session.checker.has_savings %}
       {{ Form.group(form.savings, field_attrs={'prefix': '£', 'class_': 'govuk-!-width-one-third'}) }}
