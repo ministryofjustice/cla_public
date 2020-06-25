@@ -28,6 +28,8 @@
     }
 
     window.GOVUK.setCookie('cookie_policy', JSON.stringify(approvedConsent), { days: 365 })
+    var event = new Event("cookies_approved");
+    window.dispatchEvent(event, {"cookies": approvedConsent});
     moj.Modules.GA.send("pageview", document.location.pathname);
   }
 
