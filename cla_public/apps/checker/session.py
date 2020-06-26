@@ -260,73 +260,71 @@ class CheckerSession(SecureCookieSession, SessionMixin):
             self.checker = CheckerSessionObject()
 
 
-class Tag:
-    def __init__(self):
-        self.instances = [
-            {"type": CheckerSessionObject, "method": self.isACheckSessionObject},
-            {"type": MeansTest, "method": self.isAMeansTestObject},
-            {"type": tuple, "method": self.isATupleObject},
-            {"type": uuid.UUID, "method": self.isAUUIDObject},
-            {"type": bytes, "method": self.isAByteObject},
-            {"type": "__html__", "method": self.isCallable},
-            {"type": list, "method": self.isAListObject},
-            {"type": datetime, "method": self.isADatetimeObject},
-            {"type": dict, "method": self.isADictObject},
-            {"type": str, "method": self.isAString},
-        ]
-
-    def isACheckSessionObject(self, value):
-        return {" ch": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
-
-    def isAMeansTestObject(self, value):
-        return {" mt": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
-
-    def isATupleObject(self, value):
-        return {" t": [self.checkTag(x) for x in value]}
-
-    def isAUUIDObject(self, value):
-        return {" u": value.hex}
-
-    def isAByteObject(self, value):
-        return {" b": b64encode(value).decode("ascii")}
-
-    def isCallable(self, value):
-        return {" m": text_type(value.__html__())}
-
-    def isAListObject(self, value):
-        return [self.checkTag(x) for x in value]
-
-    def isADatetimeObject(self, value):
-        return {" d": http_date(value)}
-
-    def isADictObject(self, value):
-        return dict((k, self.checkTag(v)) for k, v in iteritems(value))
-
-    def isAString(self, value):
-        try:
-            return text_type(value)
-        except UnicodeError:
-            raise UnexpectedUnicodeError(
-                u"A byte string with "
-                u"non-ASCII data was passed to the session system "
-                u"which can only store unicode strings.  Consider "
-                u"base64 encoding your string (String was %r)" % value
-            )
-
-    def checkTag(self, value):
-        for instance in self.instances:
-            if instance["type"] == "__html__":
-                if callable(getattr(value, instance["type"], None)):
-                    return instance["method"](value)
-            elif isinstance(value, instance["type"]):
-                return instance["method"](value)
-        return value
-
-
 class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
     def dumps(self, value):
-        newTag = Tag()
-        _tag = newTag.checkTag
+        def _tag(value):
+            class Tag:
+                def __init__(self):
+                    self.instances = [
+                        {"type": CheckerSessionObject, "method": self.isACheckSessionObject},
+                        {"type": MeansTest, "method": self.isAMeansTestObject},
+                        {"type": tuple, "method": self.isATupleObject},
+                        {"type": uuid.UUID, "method": self.isAUUIDObject},
+                        {"type": bytes, "method": self.isAByteObject},
+                        {"type": "markup", "method": self.isMarkup},
+                        {"type": list, "method": self.isAListObject},
+                        {"type": datetime, "method": self.isADatetimeObject},
+                        {"type": dict, "method": self.isADictObject},
+                        {"type": str, "method": self.isAString},
+                    ]
+
+                def isACheckSessionObject(self, value):
+                    return {" ch": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
+
+                def isAMeansTestObject(self, value):
+                    return {" mt": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
+
+                def isATupleObject(self, value):
+                    return {" t": [self.checkTag(x) for x in value]}
+
+                def isAUUIDObject(self, value):
+                    return {" u": value.hex}
+
+                def isAByteObject(self, value):
+                    return {" b": b64encode(value).decode("ascii")}
+
+                def isMarkup(self, value):
+                    print('markup', value)
+                    return {" m": text_type(value.__html__())}
+
+                def isAListObject(self, value):
+                    return [self.checkTag(x) for x in value]
+
+                def isADatetimeObject(self, value):
+                    return {" d": http_date(value)}
+
+                def isADictObject(self, value):
+                    return dict((k, self.checkTag(v)) for k, v in iteritems(value))
+
+                def isAString(self, value):
+                    try:
+                        return text_type(value)
+                    except UnicodeError:
+                        raise UnexpectedUnicodeError(
+                            u"A byte string with "
+                            u"non-ASCII data was passed to the session system "
+                            u"which can only store unicode strings.  Consider "
+                            u"base64 encoding your string (String was %r)" % value
+                        )
+
+                def checkTag(self, val):
+                    for instance in self.instances:
+                        if instance["type"] == "markup":
+                            if callable(getattr(val, instance["type"], None)):
+                                return instance["method"](val)
+                        elif isinstance(val, instance["type"]):
+                            return instance["method"](val)
+            return Tag().checkTag(value)
         return json.dumps(_tag(value), separators=(",", ":"))
 
     def loads(self, value):
