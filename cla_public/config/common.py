@@ -72,6 +72,8 @@ ZENDESK_DEFAULT_REQUESTER = 649762516  # anonymous feedback <noreply@ministryofj
 
 MOJ_GA_ID = os.environ.get("MOJ_GA_ID")
 GDS_GA_ID = os.environ.get("GDS_GA_ID")
+MOJ_GTM_ID = os.environ.get("MOJ_GTM_ID")
+MOJ_GTM_AUTH = os.environ.get("MOJ_GTM_AUTH")
 
 CACHE_TYPE = "simple"
 
