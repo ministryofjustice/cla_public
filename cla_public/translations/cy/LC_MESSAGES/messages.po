@@ -1186,15 +1186,19 @@ msgid "Enter postcode"
 msgstr "Rhowch eich côd post"
 
 #: cla_public/apps/checker/validators.py:76
-msgid "Must select at least one option."
+msgid "Select at least one option"
 msgstr "Dewiswch o leiaf un opsiwn"
 
 #: cla_public/apps/checker/validators.py:88
 msgid "Please provide an amount"
 msgstr "Rhowch swm"
 
+#: cla_public/apps/checker/validators.py:88
+msgid "Type in a number"
+msgstr "Rhowch swm"
+
 #: cla_public/apps/checker/validators.py:112
-msgid "Please select a time period from the drop down"
+msgid "Select a time period from the drop down"
 msgstr "Dewiswch gyfnod o’r gwymplen"
 
 #: cla_public/apps/checker/views.py:60 cla_public/apps/contact/views.py:76
