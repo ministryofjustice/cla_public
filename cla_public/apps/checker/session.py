@@ -263,7 +263,7 @@ class CheckerSession(SecureCookieSession, SessionMixin):
 class Tag:
     def __init__(self):
         self.instances = [
-            {"type": CheckerSessionObject, "method": self.isACheckSessionObject,},
+            {"type": CheckerSessionObject, "method": self.isACheckSessionObject},
             {"type": MeansTest, "method": self.isAMeansTestObject},
             {"type": tuple, "method": self.isATupleObject},
             {"type": uuid.UUID, "method": self.isAUUIDObject},
