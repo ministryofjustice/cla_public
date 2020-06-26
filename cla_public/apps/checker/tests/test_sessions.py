@@ -2,8 +2,8 @@ import unittest
 import uuid
 
 from datetime import datetime
-from werkzeug.http import http_date
 from cla_public.apps.checker.session import CheckerTaggedJSONSerializer, CheckerSessionObject, MeansTest
+
 
 class TestCheckerSession(unittest.TestCase):
     def setUp(self):
