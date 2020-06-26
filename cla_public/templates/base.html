@@ -141,19 +141,26 @@
     <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
   {% endif %}
 
+{% if config.MOJ_GTM_ID %}
 <!-- Start of google tag manager -->
 <script>
-{% if config.MOJ_GTM_ID %}
-  if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
+  function add_gtm() {
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','{{ config.MOJ_GTM_ID }}');
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth={{config.MOJ_GTM_AUTH}}&gtm_preview=env-3&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{config.MOJ_GTM_ID}}');
   }
-{% endif %}
+  window.addEventListener("cookies_approved", function(event){
+    add_gtm()
+  });
+  if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
+    add_gtm();
+  }
+
 </script>
 <!-- End of google tag manager -->
+{% endif %}
 
 <!-- Start of google analytics -->
 <script>
