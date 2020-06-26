@@ -100,7 +100,7 @@ class AboutYouForm(BaseForm):
         validators=[
             IgnoreIf("have_children", FieldValueOrNone(NO)),
             DataRequired(_(u"Tell us how many children you have aged 15 or under")),
-            NumberRange(min=1, max=50, message=_(u"Enter a number between 1 and 50")),
+            NumberRange(min=1, max=50, message=_(u"Number must be between 1 and 50")),
         ],
     )
     have_dependants = YesNoField(
