@@ -600,7 +600,7 @@ msgstr "Dewiswch pa fudd-daliadau rydych chi’n eu derbyn"
 msgid "Tell us whether you receive any other benefits"
 msgstr "Ydych chi’n derbyn unrhyw fudd-daliadau eraill"
 
-#: cla_public/apps/checker/forms.py:261
+#: cla_public/apps/checker/forms.py:261 (... each week etc)
 msgid "Tell us how much you receive in other benefits"
 msgstr "Faint rydych chi’n ei dderbyn mewn budd-daliadau eraill"
 
