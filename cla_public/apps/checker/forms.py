@@ -245,7 +245,7 @@ class AdditionalBenefitsForm(BaseForm):
         partner_label=_(u"Do you or your partner receive any other benefits " u"not listed above? "),
         description=_(
             u"For example, National Asylum Support Service Benefit, "
-            u"Incapacity Benefit, Contribution-based Jobseeker's "
+            u"Incapacity Benefit, Contribution-based Jobseeker’s "
             u"Allowance"
         ),
         validators=[InputRequired(message=_(u"Tell us whether you receive any other benefits"))],
@@ -299,7 +299,7 @@ class PropertyForm(BaseNoCsrfForm):
         label=_(u"How much was your monthly mortgage repayment last month?"),
         validators=[
             IgnoreIf("mortgage_remaining", FieldValue(0)),
-            InputRequired(_(u"Tell us your monthly mortgage repayment last month")),
+            InputRequired(_(u"Enter your mortgage repayment for last month")),
         ],
     )
     is_rented = YesNoField(
@@ -314,8 +314,8 @@ class PropertyForm(BaseNoCsrfForm):
         validators=[
             IgnoreIf("is_rented", FieldValueOrNone(NO)),
             MoneyIntervalAmountRequired(
-                message=_(u"Tell us how much rent you get from this property"),
-                freq_message=_(u"Tell us how often you charge this rent"),
+                message=_(u"Tell us how much rent you receive from this property"),
+                freq_message=_(u"Tell us how often you receive this rent"),
                 amount_message=_(
                     u"Tell us how much rent you receive"
                 ),  # this is followed by the time period, e.g. "... each week"
