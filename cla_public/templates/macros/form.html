@@ -619,25 +619,19 @@
 
 {% macro show_field_error(field) %}
   {% if field.form and field.form.errors %}
-    <dl class="error-summary-details">
-      <dt>
-        {{ field.label.text }}
-      </dt>
-      <dd>
-        {% for error in field.form.errors %}
-          {{ show_field_error(field.form[error]) }}
-        {% endfor %}
-      </dd>
-    </dl>
+    {{ field.label.text }}<br>
+    {% for error in field.form.errors %}
+      {{ show_field_error(field.form[error]) }}
+    {% endfor %}
   {% else %}
     {% if field.type in ['YesNoField', 'RadioField', 'PartnerYesNoField', 'MultiCheckboxField', 'PartnerMultiCheckboxField' ] %}
-      <a href="#{{ field.id }}-0">{{ field.label.text }}</a>
+      <a href="#{{ field.id }}-0">{{ field.label.text }}</a><br>
     {% elif field.type in ['MoneyIntervalField', 'PartnerMoneyIntervalField', 'SelfEmployedMoneyIntervalField' ] %}
-      <a href="#{{ field.id }}-per_interval_value">{{ field.label.text }}</a>
+      <a href="#{{ field.id }}-per_interval_value">{{ field.label.text }}</a><br>
     {% elif field.type in ['SetZeroIntegerField', 'MoneyField', 'PartnerMoneyField' ] %}
-      <a href="#{{ field.id }}">{{ field.label.text }}</a>
+      <a href="#{{ field.id }}">{{ field.label.text }}</a><br>
     {% else %}
-      <a href="#field-{{ field.id }}">{{ field.label.text }}</a>
+      <a href="#field-{{ field.id }}">{{ field.label.text }}</a><br>
     {% endif %}
   {% endif %}
 {% endmacro %}
