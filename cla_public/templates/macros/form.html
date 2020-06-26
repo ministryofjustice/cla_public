@@ -630,7 +630,15 @@
       </dd>
     </dl>
   {% else %}
-    <a href="#field-{{ field.id }}">{{ field.label.text }}</a>
+    {% if field.type in ['YesNoField', 'RadioField', 'PartnerYesNoField', 'MultiCheckboxField', 'PartnerMultiCheckboxField' ] %}
+      <a href="#{{ field.id }}-0">{{ field.label.text }}</a>
+    {% elif field.type in ['MoneyIntervalField', 'PartnerMoneyIntervalField', 'SelfEmployedMoneyIntervalField' ] %}
+      <a href="#{{ field.id }}-per_interval_value">{{ field.label.text }}</a>
+    {% elif field.type in ['SetZeroIntegerField', 'MoneyField', 'PartnerMoneyField' ] %}
+      <a href="#{{ field.id }}">{{ field.label.text }}</a>
+    {% else %}
+      <a href="#field-{{ field.id }}">{{ field.label.text }}</a>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
