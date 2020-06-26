@@ -263,10 +263,7 @@ class CheckerSession(SecureCookieSession, SessionMixin):
 class Tag:
     def __init__(self):
         self.instances = [
-            {
-                "type": CheckerSessionObject,
-                "method": self.isACheckSessionObject,
-            },
+            {"type": CheckerSessionObject, "method": self.isACheckSessionObject,},
             {"type": MeansTest, "method": self.isAMeansTestObject},
             {"type": tuple, "method": self.isATupleObject},
             {"type": uuid.UUID, "method": self.isAUUIDObject},
@@ -279,14 +276,10 @@ class Tag:
         ]
 
     def isACheckSessionObject(self, value):
-        return {
-            " ch": dict((k, self.checkTag(v)) for k, v in iteritems(value))
-        }
+        return {" ch": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
 
     def isAMeansTestObject(self, value):
-        return {
-            " mt": dict((k, self.checkTag(v)) for k, v in iteritems(value))
-        }
+        return {" mt": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
 
     def isATupleObject(self, value):
         return {" t": [self.checkTag(x) for x in value]}
@@ -332,8 +325,8 @@ class Tag:
 class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
     def dumps(self, value):
         def _tag(value):
-
             return Tag().checkTag(value)
+
         return json.dumps(_tag(value), separators=(",", ":"))
 
     def loads(self, value):

@@ -20,7 +20,7 @@ class TestCheckerSession(unittest.TestCase):
         self.assertIsInstance(serialize, str)
 
     def test_tuple_input(self):
-        value = ('hello', 'mate')
+        value = ("hello", "mate")
         serialize = self.serializer.dumps(value)
         self.assertIsInstance(serialize, str)
 
@@ -36,17 +36,17 @@ class TestCheckerSession(unittest.TestCase):
 
     def test_markup_input(self):
         class TestMarkup:
-            def __call__(self):
-                print('callable')
-
             markup = True
+
+            def __call__(self):
+                print("callable")
 
         value = TestMarkup()
         serialize = self.serializer.dumps(value)
         self.assertIsInstance(serialize, str)
 
     def test_list_input(self):
-        value = ['test', 'list']
+        value = ["test", "list"]
         serialize = self.serializer.dumps(value)
         self.assertIsInstance(serialize, str)
 
@@ -56,12 +56,12 @@ class TestCheckerSession(unittest.TestCase):
         self.assertIsInstance(serialize, str)
 
     def test_dict_input(self):
-        value = {'test': 'string'}
+        value = {"test": "string"}
         serialize = self.serializer.dumps(value)
         self.assertIsInstance(serialize, str)
 
     def test_str_input(self):
-        value = 'hello'
+        value = "hello"
         serialize = self.serializer.dumps(value)
         self.assertIsInstance(serialize, str)
 
