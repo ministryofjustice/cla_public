@@ -260,7 +260,6 @@
         this.$form.closest('main').prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
       }
 
-
       // Report to GA about form errors
       var errorFieldNames = _.keys(errorFields);
       if(!window.ga) {

@@ -538,7 +538,7 @@ msgstr "Eich gŵr, gwraig, partner sifil (oni bai eich bod wedi gwahanu yn barha
 
 #: cla_public/apps/checker/forms.py:64
 msgid "Tell us whether you have a partner"
-msgstr "Oes gennych
+msgstr "Oes gennych chi bartner"
 
 #: cla_public/apps/checker/forms.py:79
 msgid "Tell us whether you’re in dispute with your partner"
