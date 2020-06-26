@@ -108,12 +108,12 @@ class TestMoneyInterval(unittest.TestCase):
         )
         form.validate()
 
-        self.assertIn(u"Enter a value of less than £100,000,000", form.money_interval.errors)
+        self.assertIn(u"This amount must be less than £100,000,000", form.money_interval.errors)
 
     def test_money_interval_only_one_error_if_amount_missing(self):
         form = test_form(validators=[MoneyIntervalAmountRequired()]).submit(
             {"money_interval-per_interval_value": "", "money_interval-interval_period": "per_week"}
         )
         form.validate()
-        self.assertIn(u"Type in a number", form.money_interval.errors)
+        self.assertIn(u"Please provide an amount", form.money_interval.errors)
         self.assertEqual(1, len(form.money_interval.errors))
