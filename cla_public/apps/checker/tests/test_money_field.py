@@ -28,19 +28,19 @@ class TestMoneyField(unittest.TestCase):
     def assertInvalidAmount(self, amount):
         form = submit(default_moneyfield=amount)
         self.assertIn(
-            u"Enter a number", form.default_moneyfield.process_errors, "{0} is a valid amount".format(amount)
+            u"Not a valid amount", form.default_moneyfield.process_errors, "{0} is a valid amount".format(amount)
         )
 
     def assertValidAmount(self, amount):
         form = submit(default_moneyfield=amount)
         self.assertNotIn(
-            u"Enter a number", form.default_moneyfield.process_errors, "{0} is an invalid amount".format(amount)
+            u"Not a valid amount", form.default_moneyfield.process_errors, "{0} is an invalid amount".format(amount)
         )
 
     def assertAmountTooLow(self, amount):
         form = submit(default_moneyfield=amount)
         self.assertIn(
-            u"Enter a value of more than £0",
+            u"This amount must be more than £0",
             form.default_moneyfield.process_errors,
             "{0} is not too low".format(amount),
         )
@@ -49,7 +49,7 @@ class TestMoneyField(unittest.TestCase):
         form = submit(**{field: amount})
         max_val = getattr(form, field).max_val / 100.0
         self.assertIn(
-            u"Enter a value of less than £{:,.0f}".format(max_val),
+            u"This amount must be less than £{:,.0f}".format(max_val),
             getattr(form, field).process_errors,
             "{0} is not too high".format(amount),
         )
