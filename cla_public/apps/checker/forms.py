@@ -140,14 +140,14 @@ class AboutYouForm(BaseForm):
     )
     is_employed = YesNoField(
         label=_(u"Are you employed?"),
-        description=(_(u"This means working as an employee - you may be both employed " u"and self-employed")),
+        description=(_(u"This means working as an employee - you may be both employed and self-employed")),
         validators=[InputRequired(message=_(u"Tell us if you are employed"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
     partner_is_employed = YesNoField(
         label=_(u"Is your partner employed?"),
-        description=_(u"This means working as an employee - your partner may be both " u"employed and self-employed"),
+        description=_(u"This means working as an employee - your partner may be both employed and self-employed"),
         validators=[
             IgnoreIf("in_dispute", FieldValueOrNone(YES)),
             InputRequired(message=_(u"Please choose Yes or No")),
@@ -157,14 +157,14 @@ class AboutYouForm(BaseForm):
     )
     is_self_employed = YesNoField(
         label=_(u"Are you self-employed?"),
-        description=(_(u"This means working for yourself - you may be both employed " u"and self-employed")),
+        description=(_(u"This means working for yourself - you may be both employed and self-employed")),
         validators=[InputRequired(message=_(u"Tell us if you are self-employed"))],
         yes_text=lazy_pgettext(u"I am", u"Yes"),
         no_text=lazy_pgettext(u"I’m not", u"No"),
     )
     partner_is_self_employed = YesNoField(
         label=_(u"Is your partner self-employed?"),
-        description=_(u"This means working for yourself - your partner may be both " u"employed and self-employed"),
+        description=_(u"This means working for yourself - your partner may be both employed and self-employed"),
         validators=[
             IgnoreIf("in_dispute", FieldValueOrNone(YES)),
             InputRequired(message=_(u"Please choose Yes or No")),
