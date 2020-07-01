@@ -1,71 +1,120 @@
 import unittest
 import uuid
+from flask import json
+from base64 import b64encode
+from flask._compat import text_type
+from werkzeug.http import http_date
+
+
 
 from datetime import datetime
-from cla_public.apps.checker.session import CheckerTaggedJSONSerializer, CheckerSessionObject, MeansTest
+from cla_public.apps.checker.session import CheckerTaggedJSONSerializer, CheckerSessionObject, MeansTest, CheckerSessionInterface
 
 
 class TestCheckerSession(unittest.TestCase):
     def setUp(self):
         self.serializer = CheckerTaggedJSONSerializer()
 
-    def test_checker_session_object_input(self):
-        value = CheckerSessionObject()
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
+    def assert_json(self, value):
+        try:
+            json.loads(value)
+        except JSONDecodeError:
+            self.fail('Not valid JSON')
+
+    def format_json(self, value):
+        return json.dumps(value, separators=(",", ":"))
+
+    def test_serializer_with_checker_session_object(self):
+        value = CheckerSessionObject({'checker': {'foo': 'bar'}})
+        jsonOutput = self.serializer.dumps(value)
+        expectedDict = {" ch": {"checker": {"foo": {" b": b64encode("bar").decode("ascii")}}}}
+        expectedJSON = self.format_json(expectedDict)
+        self.assert_json(jsonOutput)
+        self.assertEqual(jsonOutput, expectedJSON)
+
+    def compare_dicts(self, outputDict, expectedDict):
+        for key, value in expectedDict.items():
+            if isinstance(value, dict):
+                self.compare_dicts(outputDict[key], value)
+            else:
+                self.assertEqual(outputDict[key], value)
 
     def test_means_test_input(self):
         value = MeansTest()
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
+        outputJSON = self.serializer.dumps(value)
+        expectedDict = {u" mt": {u"on_passported_benefits": {u" b": b64encode("0").decode("ascii")}, u"specific_benefits": {}, u"dependants_old": None, u"you": {u"savings": {u"credit_balance": None, u"investment_balance": None, u"asset_balance": None, u"bank_balance": None}, u"deductions": {u"income_tax": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"mortgage": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"childcare": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"rent": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"maintenance": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"criminal_legalaid_contributions": None, u"national_insurance": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}}, u"income": {u"self_employment_drawings": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"benefits": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"maintenance_received": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"self_employed": {u" b": b64encode("0").decode("ascii")}, u"tax_credits": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"earnings": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"child_benefits": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"other_income": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"pension": {u"per_interval_value": None, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}}}, u"dependants_young": None, u"on_nass_benefits": {u" b": b64encode("0").decode("ascii")}}}
 
-    def test_tuple_input(self):
-        value = ("hello", "mate")
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
+        expectedJSON = self.format_json(expectedDict)
+        self.assert_json(outputJSON)
+        outputDict = json.loads(outputJSON)
+        self.compare_dicts(outputDict, expectedDict)
 
-    def test_uuid_input(self):
-        value = uuid.UUID
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
+    def test_serializer_with_tuple(self):
+        value = ("test1", "test2")
+        jsonOutput = self.serializer.dumps(value)
+        expectedDict = {" t": [{" b": b64encode("test1").decode("ascii")}, {" b": b64encode("test2").decode("ascii")}]}
+        expectedJSON = self.format_json(expectedDict)
+        self.assert_json(jsonOutput)
+        self.assertEqual(jsonOutput, expectedJSON)
 
-    def test_bytes_input(self):
-        value = bytes
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
+    def test_serializer_with_uuid(self):
+        value = uuid.UUID('12345678123456781234567812345678')
+        jsonOutput = self.serializer.dumps(value)
+        expectedDict = """{{" u":"{uuid_value}"}}""".format(uuid_value=value.hex)
+        expectedJSON = json.dumps(expectedDict)
+        self.assert_json(jsonOutput)
+        self.assertEqual(jsonOutput, expectedDict)
 
-    def test_markup_input(self):
+    def test_serializer_with_bytes(self):
+        value = b'test1'
+        jsonOutput = self.serializer.dumps(value)
+        expectedDict = {" b": b64encode(value).decode("ascii")}
+        expectedJSON = self.format_json(expectedDict)
+        self.assert_json(jsonOutput)
+        self.assertEqual(jsonOutput, expectedJSON)
+
+    def test_serializer_with_markup(self):
         class TestMarkup:
-            markup = True
-
-            def __call__(self):
-                print("callable")
+            def __html__(self):
+                return '<h1>Test</h1>'
 
         value = TestMarkup()
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
+        jsonOutput = self.serializer.dumps(value)
+        expectedDict = {" m": text_type('<h1>Test</h1>')}
+        expectedJSON = self.format_json(expectedDict)
+        self.assert_json(jsonOutput)
+        self.assertEqual(jsonOutput, expectedJSON)
 
-    def test_list_input(self):
-        value = ["test", "list"]
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
-
-    def test_datetime_input(self):
+    def test_serializer_with_list(self):
+        value = ["test", {"key1": "value2"}]
+        jsonOutput = self.serializer.dumps(value)
+        expectedDict = [{" b": b64encode("test").decode("ascii")}, {"key1": {" b": b64encode("value2").decode("ascii")}}]
+        expectedJSON = self.format_json(expectedDict)
+        self.assert_json(jsonOutput)
+        self.assertEqual(jsonOutput, expectedJSON)
+#
+    def test_serializer_with_datetime(self):
         value = datetime(1990, 1, 2)
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
-
-    def test_dict_input(self):
+        jsonOutput = self.serializer.dumps(value)
+        expectedDict = {" d": http_date(value)}
+        expectedJSON = self.format_json(expectedDict)
+        self.assert_json(jsonOutput)
+        self.assertEqual(jsonOutput, expectedJSON)
+#
+    def test_serializer_with_dict(self):
         value = {"test": "string"}
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
-
-    def test_str_input(self):
-        value = "hello"
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
-
-    def test_int_input(self):
-        value = 5
-        serialize = self.serializer.dumps(value)
-        self.assertIsInstance(serialize, str)
+        jsonOutput = self.serializer.dumps(value)
+        expectedDict = {"test": {" b": b64encode("string").decode("ascii")}}
+        expectedJSON = self.format_json(expectedDict)
+        self.assert_json(jsonOutput)
+        self.assertEqual(jsonOutput, expectedJSON)
+#
+#     def test_str_input(self):
+#         value = "hello"
+#         serialize = self.serializer.dumps(value)
+#         self.assertIsInstance(serialize, str)
+#
+#     def test_int_input(self):
+#         value = 5
+#         serialize = self.serializer.dumps(value)
+#         self.assertIsInstance(serialize, str)
