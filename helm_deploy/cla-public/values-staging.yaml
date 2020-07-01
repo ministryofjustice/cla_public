@@ -26,3 +26,5 @@ envVars:
     value: GTM-MWL77F6
   - name: MOJ_GTM_AUTH
     value: "4KOuCU7aXv3Owhcs7U0ORw"
+  - name: MOJ_GTM_PREVIEW
+    value: "env-3"
