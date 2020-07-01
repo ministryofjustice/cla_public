@@ -316,7 +316,7 @@ class Tag:
     def checkTag(self, val):
         for instance in self.instances:
             if instance["type"] == "markup":
-                if callable(getattr(val, instance["type"], None)):
+                if callable(getattr(val, "__html__", None)):
                     return instance["method"](val)
             elif isinstance(val, instance["type"]):
                 return instance["method"](val)
@@ -326,7 +326,6 @@ class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
     def dumps(self, value):
         def _tag(value):
             return Tag().checkTag(value)
-
         return json.dumps(_tag(value), separators=(",", ":"))
 
     def loads(self, value):
