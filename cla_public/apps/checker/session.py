@@ -320,6 +320,7 @@ class Tag:
                     return instance["method"](val)
             elif isinstance(val, instance["type"]):
                 return instance["method"](val)
+        return val
 
 
 class CheckerTaggedJSONSerializer(TaggedJSONSerializer):

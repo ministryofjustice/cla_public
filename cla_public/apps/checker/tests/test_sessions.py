@@ -88,7 +88,7 @@ class TestCheckerSession(unittest.TestCase):
         expectedJSON = self.format_json(expectedDict)
         self.assert_json(jsonOutput)
         self.assertEqual(jsonOutput, expectedJSON)
-#
+
     def test_serializer_with_datetime(self):
         value = datetime(1990, 1, 2)
         jsonOutput = self.serializer.dumps(value)
@@ -96,7 +96,7 @@ class TestCheckerSession(unittest.TestCase):
         expectedJSON = self.format_json(expectedDict)
         self.assert_json(jsonOutput)
         self.assertEqual(jsonOutput, expectedJSON)
-#
+
     def test_serializer_with_dict(self):
         value = {"test": "string"}
         jsonOutput = self.serializer.dumps(value)
