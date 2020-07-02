@@ -262,47 +262,47 @@ class CheckerSession(SecureCookieSession, SessionMixin):
 
 class Tag:
     def __init__(self):
-        self.instances = [
-            {"type": CheckerSessionObject, "method": self.isACheckSessionObject},
-            {"type": MeansTest, "method": self.isAMeansTestObject},
-            {"type": tuple, "method": self.isATupleObject},
-            {"type": uuid.UUID, "method": self.isAUUIDObject},
-            {"type": bytes, "method": self.isAByteObject},
-            {"type": "markup", "method": self.isMarkup},
-            {"type": list, "method": self.isAListObject},
-            {"type": datetime, "method": self.isADatetimeObject},
-            {"type": dict, "method": self.isADictObject},
-            {"type": str, "method": self.isAString},
+        self.data_types = [
+            (CheckerSessionObject, self.serialize_checker_session_object),
+            (MeansTest, self.serialize_means_test),
+            (tuple, self.serialize_tuple),
+            (uuid.UUID, self.serialize_uuid),
+            (bytes, self.serialize_bytes),
+            ("markup", self.serialize_markup),
+            (list, self.serialize_list),
+            (datetime, self.serialize_datetime),
+            (dict, self.serialize_dict),
+            (str, self.serialize_string),
         ]
 
-    def isACheckSessionObject(self, value):
+    def serialize_checker_session_object(self, value):
         return {" ch": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
 
-    def isAMeansTestObject(self, value):
+    def serialize_means_test(self, value):
         return {" mt": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
 
-    def isATupleObject(self, value):
+    def serialize_tuple(self, value):
         return {" t": [self.checkTag(x) for x in value]}
 
-    def isAUUIDObject(self, value):
+    def serialize_uuid(self, value):
         return {" u": value.hex}
 
-    def isAByteObject(self, value):
+    def serialize_bytes(self, value):
         return {" b": b64encode(value).decode("ascii")}
 
-    def isMarkup(self, value):
+    def serialize_markup(self, value):
         return {" m": text_type(value.__html__())}
 
-    def isAListObject(self, value):
+    def serialize_list(self, value):
         return [self.checkTag(x) for x in value]
 
-    def isADatetimeObject(self, value):
+    def serialize_datetime(self, value):
         return {" d": http_date(value)}
 
-    def isADictObject(self, value):
+    def serialize_dict(self, value):
         return dict((k, self.checkTag(v)) for k, v in iteritems(value))
 
-    def isAString(self, value):
+    def serialize_string(self, value):
         try:
             return text_type(value)
         except UnicodeError:
@@ -313,22 +313,19 @@ class Tag:
                 u"base64 encoding your string (String was %r)" % value
             )
 
-    def checkTag(self, val):
-        for instance in self.instances:
-            if instance["type"] == "markup":
-                if callable(getattr(val, "__html__", None)):
-                    return instance["method"](val)
-            elif isinstance(val, instance["type"]):
-                return instance["method"](val)
-        return val
+    def checkTag(self, value):
+        for data_type, method in self.data_types:
+            if data_type == "markup":
+                if callable(getattr(value, "__html__", None)):
+                    return method(value)
+            elif isinstance(value, data_type):
+                return method(value)
+        return value
 
 
 class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
     def dumps(self, value):
-        def _tag(value):
-            return Tag().checkTag(value)
-
-        return json.dumps(_tag(value), separators=(",", ":"))
+        return json.dumps(Tag().checkTag(value), separators=(",", ":"))
 
     def loads(self, value):
         def object_hook(obj):
