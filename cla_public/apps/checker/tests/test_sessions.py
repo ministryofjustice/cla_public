@@ -5,7 +5,7 @@ from base64 import b64encode
 from flask._compat import text_type
 from werkzeug.http import http_date
 from datetime import datetime
-from cla_public.apps.checker.session import CheckerTaggedJSONSerializer, CheckerSessionObject, MeansTest, CheckerSessionInterface
+from cla_public.apps.checker.session import CheckerTaggedJSONSerializer, CheckerSessionObject, MeansTest
 
 
 class TestCheckerSession(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestCheckerSession(unittest.TestCase):
         try:
             json.loads(value)
         except Exception:
-            self.fail('Not valid JSON')
+            self.fail("Not valid JSON")
 
     def format_json(self, value):
         return json.dumps(value, separators=(",", ":"))
@@ -29,7 +29,7 @@ class TestCheckerSession(unittest.TestCase):
                 self.assertEqual(outputDict[key], value)
 
     def test_serializer_with_checker_session_object(self):
-        value = CheckerSessionObject({'checker': {'foo': 'bar'}})
+        value = CheckerSessionObject({"checker": {"foo": "bar"}})
         jsonOutput = self.serializer.dumps(value)
         expectedDict = {" ch": {"checker": {"foo": {" b": b64encode("bar").decode("ascii")}}}}
         expectedJSON = self.format_json(expectedDict)
@@ -39,8 +39,85 @@ class TestCheckerSession(unittest.TestCase):
     def test_serializer_with_means_test(self):
         value = MeansTest()
         outputJSON = self.serializer.dumps(value)
-        expectedDict = {u" mt": {u"on_passported_benefits": {u" b": b64encode("0").decode("ascii")}, u"specific_benefits": {}, u"dependants_old": 0, u"you": {u"savings": {u"credit_balance": 0, u"investment_balance": 0, u"asset_balance": 0, u"bank_balance": 0}, u"deductions": {u"income_tax": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"mortgage": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"childcare": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"rent": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"maintenance": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"criminal_legalaid_contributions": 0, u"national_insurance": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}}, u"income": {u"self_employment_drawings": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"benefits": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"maintenance_received": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"self_employed": {u" b": b64encode("0").decode("ascii")}, u"tax_credits": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"earnings": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"child_benefits": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"other_income": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}, u"pension": {u"per_interval_value": 0, u"interval_period": {u" b": b64encode("per_month").decode("ascii")}}}}, u"dependants_young": 0, u"on_nass_benefits": {u" b": b64encode("0").decode("ascii")}}}
-        expectedJSON = self.format_json(expectedDict)
+        expectedDict = {
+            u" mt": {
+                u"on_passported_benefits": {u" b": b64encode("0").decode("ascii")},
+                u"specific_benefits": {},
+                u"dependants_old": 0,
+                u"you": {
+                    u"savings": {
+                        u"credit_balance": 0,
+                        u"investment_balance": 0,
+                        u"asset_balance": 0,
+                        u"bank_balance": 0,
+                    },
+                    u"deductions": {
+                        u"income_tax": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"mortgage": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"childcare": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"rent": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"maintenance": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"criminal_legalaid_contributions": 0,
+                        u"national_insurance": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                    },
+                    u"income": {
+                        u"self_employment_drawings": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"benefits": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"maintenance_received": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"self_employed": {u" b": b64encode("0").decode("ascii")},
+                        u"tax_credits": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"earnings": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"child_benefits": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"other_income": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                        u"pension": {
+                            u"per_interval_value": 0,
+                            u"interval_period": {u" b": b64encode("per_month").decode("ascii")},
+                        },
+                    },
+                },
+                u"dependants_young": 0,
+                u"on_nass_benefits": {u" b": b64encode("0").decode("ascii")},
+            }
+        }
         self.assert_json(outputJSON)
         outputDict = json.loads(outputJSON)
         self.compare_dicts(outputDict, expectedDict)
@@ -54,15 +131,15 @@ class TestCheckerSession(unittest.TestCase):
         self.assertEqual(jsonOutput, expectedJSON)
 
     def test_serializer_with_uuid(self):
-        value = uuid.UUID('12345678123456781234567812345678')
+        value = uuid.UUID("12345678123456781234567812345678")
         jsonOutput = self.serializer.dumps(value)
-        expectedDict = """{{" u":"{uuid_value}"}}""".format(uuid_value=value.hex)
-        expectedJSON = json.dumps(expectedDict)
+        expectedDict = {" u": value.hex}
+        expectedJSON = self.format_json(expectedDict)
         self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedDict)
+        self.assertEqual(jsonOutput, expectedJSON)
 
     def test_serializer_with_bytes(self):
-        value = b'test1'
+        value = b"test1"
         jsonOutput = self.serializer.dumps(value)
         expectedDict = {" b": b64encode(value).decode("ascii")}
         expectedJSON = self.format_json(expectedDict)
@@ -72,11 +149,11 @@ class TestCheckerSession(unittest.TestCase):
     def test_serializer_with_markup(self):
         class TestMarkup:
             def __html__(self):
-                return '<h1>Test</h1>'
+                return "<h1>Test</h1>"
 
         value = TestMarkup()
         jsonOutput = self.serializer.dumps(value)
-        expectedDict = {" m": text_type('<h1>Test</h1>')}
+        expectedDict = {" m": text_type("<h1>Test</h1>")}
         expectedJSON = self.format_json(expectedDict)
         self.assert_json(jsonOutput)
         self.assertEqual(jsonOutput, expectedJSON)
@@ -84,7 +161,10 @@ class TestCheckerSession(unittest.TestCase):
     def test_serializer_with_list(self):
         value = ["test", {"key1": "value2"}]
         jsonOutput = self.serializer.dumps(value)
-        expectedDict = [{" b": b64encode("test").decode("ascii")}, {"key1": {" b": b64encode("value2").decode("ascii")}}]
+        expectedDict = [
+            {" b": b64encode("test").decode("ascii")},
+            {"key1": {" b": b64encode("value2").decode("ascii")}},
+        ]
         expectedJSON = self.format_json(expectedDict)
         self.assert_json(jsonOutput)
         self.assertEqual(jsonOutput, expectedJSON)

@@ -355,6 +355,7 @@ class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
                         u"base64 encoding your string (String was %r)" % value
                     )
             return value
+
         return json.dumps(_tag(value), separators=(",", ":"))
 
     def loads(self, value):
