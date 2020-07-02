@@ -30,11 +30,11 @@ class TestCheckerSession(unittest.TestCase):
 
     def test_serializer_with_checker_session_object(self):
         value = CheckerSessionObject({"checker": {"foo": "bar"}})
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedDict = {" ch": {"checker": {"foo": {" b": b64encode("bar").decode("ascii")}}}}
         expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_means_test(self):
         value = MeansTest()
@@ -124,27 +124,27 @@ class TestCheckerSession(unittest.TestCase):
 
     def test_serializer_with_tuple(self):
         value = ("test1", "test2")
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedDict = {" t": [{" b": b64encode("test1").decode("ascii")}, {" b": b64encode("test2").decode("ascii")}]}
         expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_uuid(self):
         value = uuid.UUID("12345678123456781234567812345678")
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedDict = {" u": value.hex}
         expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_bytes(self):
         value = b"test1"
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedDict = {" b": b64encode(value).decode("ascii")}
         expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_markup(self):
         class TestMarkup:
@@ -152,59 +152,75 @@ class TestCheckerSession(unittest.TestCase):
                 return "<h1>Test</h1>"
 
         value = TestMarkup()
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedDict = {" m": text_type("<h1>Test</h1>")}
         expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_list(self):
         value = ["test", {"key1": "value2"}]
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedDict = [
             {" b": b64encode("test").decode("ascii")},
             {"key1": {" b": b64encode("value2").decode("ascii")}},
         ]
         expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_datetime(self):
         value = datetime(1990, 1, 2)
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedDict = {" d": http_date(value)}
         expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_dict(self):
-        value = {"test": "string"}
-        jsonOutput = self.serializer.dumps(value)
-        expectedDict = {"test": {" b": b64encode("string").decode("ascii")}}
-        expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        value = {
+            "test": {
+                "foo": u"bar",
+                "baz": {"foo": [9, 0, u"bar"], "bar": datetime(1990, 12, 5), "baz": {"foo": u"bar"}},
+            }
+        }
+        outputJSON = self.serializer.dumps(value)
+
+        expectedDict = {
+            "test": {
+                "foo": u"bar",
+                "baz": {
+                    "foo": [9, 0, u"bar"],
+                    "bar": {" d": http_date(datetime(1990, 12, 5))},
+                    "baz": {"foo": u"bar"},
+                },
+            }
+        }
+
+        self.assert_json(outputJSON)
+        outputDict = json.loads(outputJSON)
+        self.compare_dicts(outputDict, expectedDict)
 
     def test_serializer_with_str(self):
         value = "hello"
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedDict = {" b": b64encode(value).decode("ascii")}
         expectedJSON = self.format_json(expectedDict)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_int(self):
         value = 5
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedValue = 5
         expectedJSON = self.format_json(expectedValue)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
 
     def test_serializer_with_unicode_str(self):
         value = u"hello"
-        jsonOutput = self.serializer.dumps(value)
+        outputJSON = self.serializer.dumps(value)
         expectedValue = u"hello"
         expectedJSON = self.format_json(expectedValue)
-        self.assert_json(jsonOutput)
-        self.assertEqual(jsonOutput, expectedJSON)
+        self.assert_json(outputJSON)
+        self.assertEqual(outputJSON, expectedJSON)
