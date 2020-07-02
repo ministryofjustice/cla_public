@@ -327,6 +327,7 @@ class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
     def dumps(self, value):
         def _tag(value):
             return Tag().checkTag(value)
+
         return json.dumps(_tag(value), separators=(",", ":"))
 
     def loads(self, value):
