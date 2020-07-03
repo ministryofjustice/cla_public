@@ -5,7 +5,8 @@ from base64 import b64encode
 from flask._compat import text_type
 from werkzeug.http import http_date
 from datetime import datetime
-from cla_public.apps.checker.session import CheckerTaggedJSONSerializer, CheckerSessionObject, MeansTest
+from cla_public.apps.checker.means_test import MeansTest
+from cla_public.apps.checker.session import CheckerTaggedJSONSerializer, CheckerSessionObject
 
 
 class TestCheckerSession(unittest.TestCase):
