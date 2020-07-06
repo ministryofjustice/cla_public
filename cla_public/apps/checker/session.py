@@ -260,40 +260,72 @@ class CheckerSession(SecureCookieSession, SessionMixin):
             self.checker = CheckerSessionObject()
 
 
-class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
-    def dumps(self, value):  # noqa: C901
-        def _tag(value):
-            if isinstance(value, CheckerSessionObject):
-                return {" ch": dict((k, _tag(v)) for k, v in iteritems(value))}
-            elif isinstance(value, MeansTest):
-                return {" mt": dict((k, _tag(v)) for k, v in iteritems(value))}
-            elif isinstance(value, tuple):
-                return {" t": [_tag(x) for x in value]}
-            elif isinstance(value, uuid.UUID):
-                return {" u": value.hex}
-            elif isinstance(value, bytes):
-                return {" b": b64encode(value).decode("ascii")}
-            elif callable(getattr(value, "__html__", None)):
-                return {" m": text_type(value.__html__())}
-            elif isinstance(value, list):
-                return [_tag(x) for x in value]
-            elif isinstance(value, datetime):
-                return {" d": http_date(value)}
-            elif isinstance(value, dict):
-                return dict((k, _tag(v)) for k, v in iteritems(value))
-            elif isinstance(value, str):
-                try:
-                    return text_type(value)
-                except UnicodeError:
-                    raise UnexpectedUnicodeError(
-                        u"A byte string with "
-                        u"non-ASCII data was passed to the session system "
-                        u"which can only store unicode strings.  Consider "
-                        u"base64 encoding your string (String was %r)" % value
-                    )
-            return value
+class Tag:
+    def __init__(self):
+        self.data_types = [
+            (CheckerSessionObject, self.serialize_checker_session_object),
+            (MeansTest, self.serialize_means_test),
+            (tuple, self.serialize_tuple),
+            (uuid.UUID, self.serialize_uuid),
+            (bytes, self.serialize_bytes),
+            ("markup", self.serialize_markup),
+            (list, self.serialize_list),
+            (datetime, self.serialize_datetime),
+            (dict, self.serialize_dict),
+            (str, self.serialize_string),
+        ]
 
-        return json.dumps(_tag(value), separators=(",", ":"))
+    def serialize_checker_session_object(self, value):
+        return {" ch": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
+
+    def serialize_means_test(self, value):
+        return {" mt": dict((k, self.checkTag(v)) for k, v in iteritems(value))}
+
+    def serialize_tuple(self, value):
+        return {" t": [self.checkTag(x) for x in value]}
+
+    def serialize_uuid(self, value):
+        return {" u": value.hex}
+
+    def serialize_bytes(self, value):
+        return {" b": b64encode(value).decode("ascii")}
+
+    def serialize_markup(self, value):
+        return {" m": text_type(value.__html__())}
+
+    def serialize_list(self, value):
+        return [self.checkTag(x) for x in value]
+
+    def serialize_datetime(self, value):
+        return {" d": http_date(value)}
+
+    def serialize_dict(self, value):
+        return dict((k, self.checkTag(v)) for k, v in iteritems(value))
+
+    def serialize_string(self, value):
+        try:
+            return text_type(value)
+        except UnicodeError:
+            raise UnexpectedUnicodeError(
+                u"A byte string with "
+                u"non-ASCII data was passed to the session system "
+                u"which can only store unicode strings.  Consider "
+                u"base64 encoding your string (String was %r)" % value
+            )
+
+    def checkTag(self, value):
+        for data_type, method in self.data_types:
+            if data_type == "markup":
+                if callable(getattr(value, "__html__", None)):
+                    return method(value)
+            elif isinstance(value, data_type):
+                return method(value)
+        return value
+
+
+class CheckerTaggedJSONSerializer(TaggedJSONSerializer):
+    def dumps(self, value):
+        return json.dumps(Tag().checkTag(value), separators=(",", ":"))
 
     def loads(self, value):
         def object_hook(obj):
