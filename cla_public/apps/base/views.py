@@ -24,7 +24,9 @@ log = logging.getLogger(__name__)
 @base.route("/")
 def index():
     session.clear()
-    return redirect(current_app.config.get("GOV_UK_START_PAGE"))
+    if current_app.config["CLA_ENV"] == "prod":
+        return redirect(current_app.config.get("GOV_UK_START_PAGE"))
+    return render_template("index.html")
 
 
 @base.route("/cookies")
