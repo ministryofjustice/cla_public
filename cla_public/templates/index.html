@@ -8,42 +8,34 @@
 {% endblock %}
 
 {% block inner_content %}
-  <h1 class="page-title">Check if you can get legal aid</h1>
-  <p>Legal aid can help pay for legal advice.</p>
-  <p>This service will check that your problem is covered by legal aid.</p>
-  <ul>
-    <li>If it looks like you can get legal aid, you may be able to get help over the phone or we’ll suggest that you speak to an adviser face to face.</li>
-    <li>If it looks like you can’t get legal aid, we’ll point you towards other organisations that offer legal advice, or help you find a solicitor. You will have to pay for the solicitor’s advice.</li>
-  </ul>
+  <h1 class="page-title">{% trans %}Check if you can get legal aid{% endtrans %}</h1>
+  <p>{% trans %}Legal aid can help pay for legal advice.{% endtrans %}</p>
+  <p>{% trans %}You’ll be asked general questions about your legal problem and your income and savings. You’ll be told where you can get legal advice.{% endtrans %}</p>
+
+  {% call Element.alert() %}
+    <p>{{ _('This guide is also available <a href="/locale/cy_GB">in Welsh (Cymraeg)</a>.') }}</p>
+  {% endcall %}
 
   <p>
     <a class="button button-get-started" href="{{ url_for('base.get_started') }}" id="start" role="button">
-      Start now
+      {% trans %}Start now{% endtrans %}
     </a>
   </p>
 
-  {{ Element.staying_safe_online_link() }}
+  <h2 class="govuk-heading-m">{% trans %}Before you start{% endtrans %}</h2>
 
-  {% call Element.alert() %}
-    <p>You’ll only get guidance on whether or not you might qualify for legal aid – you won’t get a final decision until you speak to an adviser.</p>
-  {% endcall %}
+  <div class="gem-c-govspeak govuk-govspeak " data-module="govspeak">
 
-  <p>This service can’t help if you’ve been charged with a crime – ask your solicitor or barrister about criminal legal aid.</p>
+    <p>{% trans %}You can only check for non-criminal (‘civil’) cases. If you’ve been charged with a crime, ask your solicitor or barrister if you’re able to get criminal legal aid.{% endtrans %}</p>
 
-  <p>
-    If you’re looking for family mediation, you can also
-    <a href="http://www.familymediationcouncil.org.uk/find-local-mediator/" rel="external">find a local mediator</a>.
-  </p>
+    <p>{% trans %}You’ll only get guidance on whether or not you can get legal aid - you will not get a final decision until you speak to an adviser.{% endtrans %}</p>
 
-  {% call Element.alert() %}
-    <p>
-      Legal aid is different in <a href="http://www.slab.org.uk/public/advice/index.html" rel="external">Scotland</a>
-      and <a href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm" rel="external">Northern Ireland.</a>
-    </p>
-  {% endcall %}
-
-  <div class="meta-data group">
-    <p class="modified-date">Last updated: 17 July 2015</p>
+    {% call Element.alert() %}
+      <p>
+        Legal aid is different in <a href="https://www.mygov.scot/legal-aid/" rel="external">Scotland</a>
+        and <a href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm" rel="external">Northern Ireland.</a>
+      </p>
+    {% endcall %}
   </div>
 
 {% endblock %}
