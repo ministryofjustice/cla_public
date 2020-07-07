@@ -2,7 +2,7 @@
 {% import "macros/element.html" as Element %}
 
 {% block before_content %}
-  <!-- no phase banner -->
+  <!-- no phase banner for pseudo start page -->
 {% endblock %}
 
 {% block sidebar %}
@@ -39,8 +39,12 @@
 
   <div role="note" aria-label="Information" class="govuk-inset-text">
     <p class="govuk-body">
-      {{ _('Legal aid is different in <a href="https://www.mygov.scot/legal-aid/" rel="external">Scotland</a> and <a href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm" rel="external">Northern Ireland</a>.') }}
+      {% trans
+        Scotland_legal_aid_link=Element.link_same_window('https://www.mygov.scot/legal-aid/', _('Scotland'), True),
+        Ulster_legal_aid_link=Element.link_same_window('http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm', _('Northern Ireland'), True)
+      %}Legal aid is different in {{ Scotland_legal_aid_link }} and {{ Ulster_legal_aid_link }}.{% endtrans %}
     </p>
+
   </div>
 
 

@@ -1201,9 +1201,54 @@ msgstr "Roedd gwall wrth anfon eich e-bost. Gwiriwch a cheisiwch eto, neu rhowch
 msgid "What do you need help with?"
 msgstr "Ar gyfer beth y mae arnoch chi angen cymorth?"
 
-#: cla_public/config/common.py:48 cla_public/config/common.py:49
+#: cla_public/config/common.py:48 cla_public/config/common.py:49 cla_public/templates/index.html:15
 msgid "Check if you can get legal aid"
 msgstr "Gwirio os y gallwch chi gael cymorth cyfreithiol"
+
+#cla_public/templates/index.html:16
+msgid "Legal aid can help pay for legal advice."
+msgstr "Gall cymorth cyfreithiol helpu i dalu am gyngor cyfreithiol."
+
+#cla_public/templates/index.html:17
+msgid "You’ll be asked general questions about your legal problem and your income and savings. You’ll be told where you can get legal advice."
+msgstr "Byddwch yn cael eich holi’n gyffredinol am eich problem gyfreithiol, eich incwm â’ch cynilion. Byddwch yn cael gwybod ble gallwch gael cyngor cyfreithiol."
+
+#!!!This translation offers the site in English - so it is not a literal translation of the English
+#cla_public/templates/index.html:21
+msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\" data-ga=\"event:locale/switch/welsh\">in Welsh (Cymraeg)</a>"
+msgstr "Mae’r canllaw hwn hefyd ar gael <a class=\"govuk-link" lang=\"en\" href=\"/locale/en_GB\" data-ga=\"event:locale/switch/english\">yn Saesneg (English)</a>"
+
+#cla_public/templates/index.html:27
+msgid "Start now"
+msgstr "Dechrau nawr"
+
+#cla_public/templates/index.html:36
+msgid "You can only check for non-criminal (‘civil’) cases. If you’ve been charged with a crime, ask your solicitor or barrister if you’re able to get criminal legal aid."
+msgstr "Gallwch wirio ar gyfer achosion sydd ddim yn droseddol yn unig (‘sifil’). Os ydych chi wedi cael eich cyhuddo o drosedd, gofynnwch i’ch cyfreithiwr neu fargyfreithiwr os oes modd i chi gael cymorth cyfreithiol troseddol."
+
+#cla_public/templates/index.html:38
+msgid "You’ll only get guidance on whether or not you can get legal aid - you will not get a final decision until you speak to an adviser."
+msgstr "Byddwch yn cael arweiniad ynghylch p’un a ydych yn gallu cael cymorth cyfreithiol ai peidio yn unig – ni fyddwch yn cael penderfyniad terfynol nes eich bod yn siarad â chynghorydd."
+
+#cla_public/templates/index.html:42
+msgid "Legal aid is different in <a href=\"https://www.mygov.scot/legal-aid/" rel=\"external\">Scotland</a> and <a href=\"http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm\" rel=\"external\">Northern Ireland</a>."
+msgstr "Mae cymorth cyfreithiol yn wahanol yn yr <a href=\"https://www.mygov.scot/legal-aid/\" rel=\"external\">Alban</a> a <a href=\"http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm\" rel=\"external\">Gogledd Iwerddon</a>."
+
+#cla_public/templates/index.html:42
+msgid "Scotland"
+msgstr "Alban"
+
+#cla_public/templates/index.html:42
+msgid "Northern Ireland"
+msgstr "Gogledd Iwerddon"
+
+#cla_public/templates/index.html:42
+msgid "Legal aid is different in <a href=\"%(anchorScot)\" rel=\"external\">Scotland</a> and <a href=\"%(anchorUlster)\" rel=\"external\">Northern Ireland</a>."
+msgstr "Mae cymorth cyfreithiol yn wahanol yn yr <a href=\"%(anchorScot)\" rel=\"external\">Alban</a> a <a href=\"%(anchorUlster)\" rel=\"external\">Gogledd Iwerddon</a>."
+
+#cla_public/templates/index.html:42
+msgid "Legal aid is different in %(Scotland_legal_aid_link)s and %(Ulster_legal_aid_link)s."
+msgstr "Mae cymorth cyfreithiol yn wahanol yn yr %(Scotland_legal_aid_link)s a %(Ulster_legal_aid_link)s."
 
 #: cla_public/libs/honeypot.py:23
 msgid "This field must be left empty"
