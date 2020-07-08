@@ -279,7 +279,7 @@
   <script type="text/html" id="fieldError">
     <% _.each(errors, function(error, index) { %>
       <span class="govuk-error-message" id="error-<%= fieldName %>">
-        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>
         <span class="cla-error-message"><%= error %></span>
       <% }); %>
     </span>
