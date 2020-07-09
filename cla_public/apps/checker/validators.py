@@ -83,7 +83,7 @@ class MoneyIntervalAmountRequired(object):
         self.freq_message = freq_message
         self.amount_message = amount_message
 
-    def append_interval_text(self, field):
+    def append_interval_text(self, field, interval):
         if interval.data == "per_week":
             interval_text = field.gettext(u"each week")
         if interval.data == "per_4week":
@@ -102,7 +102,7 @@ class MoneyIntervalAmountRequired(object):
 
         if amount_field_is_blank:
             if specific_period_error_message:
-                message = self.append_interval_text(field)
+                message = self.append_interval_text(field, interval)
             else:
                 message = self.message or field.gettext(u"Type in a number")
             raise StopValidation(message)
