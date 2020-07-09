@@ -78,21 +78,18 @@ class AtLeastOne(object):
 
 
 class MoneyIntervalAmountRequired(object):
+
+    interval_texts = {
+        "per_week": u"each week",
+        "per_4week": u"every 4 weeks",
+        "per_month": u"each month",
+        "per_year": u"each year",
+    }
+
     def __init__(self, message=None, freq_message=None, amount_message=None):
         self.message = message
         self.freq_message = freq_message
         self.amount_message = amount_message
-
-    def append_interval_text(self, field, interval):
-        if interval.data == "per_week":
-            interval_text = field.gettext(u"each week")
-        if interval.data == "per_4week":
-            interval_text = field.gettext(u"every 4 weeks")
-        if interval.data == "per_month":
-            interval_text = field.gettext(u"each month")
-        if interval.data == "per_year":
-            interval_text = field.gettext(u"each year")
-        return self.amount_message + " " + interval_text
 
     def __call__(self, form, field):
         amount = field.form.per_interval_value
@@ -102,7 +99,7 @@ class MoneyIntervalAmountRequired(object):
 
         if amount_field_is_blank:
             if specific_period_error_message:
-                message = self.append_interval_text(field, interval)
+                message = self.amount_message + " " + field.gettext(interval_texts[interval.data])
             else:
                 message = self.message or field.gettext(u"Type in a number")
             raise StopValidation(message)
