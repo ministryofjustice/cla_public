@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% import "macros/element.html" as Element %}
 
+{% block before_content %}
+  <!-- no phase banner for pseudo start page -->
+{% endblock %}
+
 {% block sidebar %}
   <aside class="sidebar">
     {% include '_resources.html' %}
@@ -8,34 +12,40 @@
 {% endblock %}
 
 {% block inner_content %}
-  <h1 class="page-title">{% trans %}Check if you can get legal aid{% endtrans %}</h1>
-  <p>{% trans %}Legal aid can help pay for legal advice.{% endtrans %}</p>
-  <p>{% trans %}You’ll be asked general questions about your legal problem and your income and savings. You’ll be told where you can get legal advice.{% endtrans %}</p>
+  <h1 class="govuk-heading-xl">{% trans %}Check if you can get legal aid{% endtrans %}</h1>
+  <p class="govuk-body">{% trans %}Legal aid can help pay for legal advice.{% endtrans %}</p>
+  <p class="govuk-body">{% trans %}You’ll be asked general questions about your legal problem and your income and savings. You’ll be told where you can get legal advice.{% endtrans %}</p>
 
-  {% call Element.alert() %}
-    <p>{{ _('This guide is also available <a href="/locale/cy_GB">in Welsh (Cymraeg)</a>.') }}</p>
-  {% endcall %}
+  <div role="note" aria-label="Information" class="govuk-inset-text">
+    <p>
+      {{ _('This guide is also available <a class="govuk-link" lang="cy" href="/locale/cy_GB" data-ga="event:locale/switch/welsh">in Welsh (Cymraeg)</a>') }}.
+    </p>
+  </div>
 
-  <p>
-    <a class="button button-get-started" href="{{ url_for('base.get_started') }}" id="start" role="button">
+  <p class="govuk-body">
+    <a role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button" href="{{ url_for('base.get_started') }}" id="start">
       {% trans %}Start now{% endtrans %}
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+      </svg>
     </a>
   </p>
 
   <h2 class="govuk-heading-m">{% trans %}Before you start{% endtrans %}</h2>
 
-  <div class="gem-c-govspeak govuk-govspeak " data-module="govspeak">
+  <p class="govuk-body">{% trans %}You can only check for non-criminal (‘civil’) cases. If you’ve been charged with a crime, ask your solicitor or barrister if you’re able to get criminal legal aid.{% endtrans %}</p>
 
-    <p>{% trans %}You can only check for non-criminal (‘civil’) cases. If you’ve been charged with a crime, ask your solicitor or barrister if you’re able to get criminal legal aid.{% endtrans %}</p>
+  <p class="govuk-body">{% trans %}You’ll only get guidance on whether or not you can get legal aid - you will not get a final decision until you speak to an adviser.{% endtrans %}</p>
 
-    <p>{% trans %}You’ll only get guidance on whether or not you can get legal aid - you will not get a final decision until you speak to an adviser.{% endtrans %}</p>
+  <div role="note" aria-label="Information" class="govuk-inset-text">
+    <p class="govuk-body">
+      {% trans
+        Scotland_legal_aid_link=Element.link_same_window('https://www.mygov.scot/legal-aid/', _('Scotland'), True),
+        Ulster_legal_aid_link=Element.link_same_window('http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm', _('Northern Ireland'), True)
+      %}Legal aid is different in {{ Scotland_legal_aid_link }} and {{ Ulster_legal_aid_link }}.{% endtrans %}
+    </p>
 
-    {% call Element.alert() %}
-      <p>
-        Legal aid is different in <a href="https://www.mygov.scot/legal-aid/" rel="external">Scotland</a>
-        and <a href="http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm" rel="external">Northern Ireland.</a>
-      </p>
-    {% endcall %}
   </div>
+
 
 {% endblock %}
