@@ -9,9 +9,9 @@
 {% endmacro %}
 
 {% block inner_content %}
+  {{ Form.handle_errors(form) }}
   <form method="POST">
     {{ form.csrf_token }}
-    {{ Form.handle_errors(form) }}
 
     <div class="govuk-form-group">
       <fieldset aria-describedby="reasons-hint" class="govuk-fieldset {% if form.errors %}govuk-form-group--error{% endif %}" id="field-benefits">

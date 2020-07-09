@@ -12,6 +12,7 @@
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block inner_content %}
+  {{ Form.handle_errors(form) }}
   {% block page_text %}
     {% if config.CONTACT_ONLY %}
       {% call Element.alert() %}
@@ -57,7 +58,6 @@
 
   <form method="POST" action="{{ url_for('contact.get_in_touch') }}">
     {{ form.csrf_token }}
-    {{ Form.handle_errors(form) }}
 
     {{ Form.group(form.full_name, field_attrs={'class': 'm-large', 'spellcheck': "false"}) }}
 
@@ -162,7 +162,7 @@
 
   <script type="text/html" id="postcodeNotEnteredText">
     <span class="govuk-error-message" role="alert">
-      <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
+      <span class="govuk-visually-hidden">{{ _('Error') }}: </span>
       <span class="cla-error-message">{{ _('Must contain a valid postcode') }}</span>
     </span>
   </script>
@@ -179,14 +179,14 @@
 
   <script type="text/html" id="noAddressesFoundText">
     <span class="govuk-error-message" role="alert">
-      <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
+      <span class="govuk-visually-hidden">{{ _('Error') }}: </span>
       <span class="cla-error-message">{{ _('No addresses were found with that postcode, but you can still enter your address manually') }}</span>
     </span>
   </script>
 
   <script type="text/html" id="requestFailedText">
     <span class="govuk-error-message" role="alert">
-      <span class="govuk-visually-hidden">{{ _('Error') }}:</span>
+      <span class="govuk-visually-hidden">{{ _('Error') }}: </span>
       <span class="cla-error-message">{{ _('Request failed: ') }} <%= textStatus %>, <%= error %></span>
     </span>
   </script>

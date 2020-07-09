@@ -36,8 +36,8 @@
         </legend>
       {% endif %}
 
-      {{ render_field_errors(field.errors) if field and field.errors}}
       {{ render_field_description(field) }}
+      {{ render_field_errors(field.errors) if field and field.errors}}
 
       {% if field or caller %}
         <div class="{{ kwargs.row_class }}">
@@ -101,8 +101,8 @@
   <span id="{{ field.id }}-hint" class="govuk-hint">
     {% trans %}Select all that apply{% endtrans %}
   </span>
-  {{ render_field_errors(field.errors) if field and field.errors}}
   {{ render_field_description(field) }}
+  {{ render_field_errors(field.errors) if field and field.errors}}
 
   {% if field or caller %}
     <div class="govuk-checkboxes {{ kwargs.row_class }}">
@@ -153,11 +153,11 @@
 
     {{ render_field_label(field, kwargs.hide_label, kwargs.custom_label) }}
 
+    {{ render_field_description(field) }}
+
     {% if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) %}
       {{ render_field_errors(field.errors) }}
     {% endif %}
-
-    {{ render_field_description(field) }}
 
     {% if use_row and (field or caller) %}
       <div class="form-row {{ kwargs.row_class }}">
@@ -220,19 +220,29 @@
                 {{ render_field_label(field, kwargs.hide_label, _('Amount')) }}
                 <div class="laa-currency">
                   <span class="laa-currency-prefix">£</span>
-                  {{ field.per_interval_value(class_='govuk-input govuk-input--width-10 ', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+                  {{
+                    field.per_interval_value(
+                      class_='govuk-input govuk-input--width-10%s'  % (' govuk-select--error' if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) ),
+                      autocomplete='off',
+                      **{'aria-required': 'false' if field.flags.optional else 'true'}
+                    )
+                  }}
                 </div>
               </div>
               <div class="govuk-form-group laa-currency-period-input__item">
                 {{
                   field.label(
-                      for=field.interval_period.id if field.interval_period else field.id,
-                      text=_("Frequency"),
-                      id="field-label-frequency-%s" % field.id,
-                      class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
+                    for=field.interval_period.id if field.interval_period else field.id,
+                    text=_("Frequency"),
+                    id="field-label-frequency-%s" % field.id,
+                    class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
                   )
                 }}
-                {{ field.interval_period(class_='govuk-select') }}
+                {{
+                  field.interval_period(
+                    class_="govuk-select%s" % (' govuk-select--error' if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) )
+                  )
+                }}
               </div>
             {% endif %}
           {% endif %}
@@ -354,11 +364,11 @@
   <span class="govuk-error-message">
     {% for error in errors %}
       {% if error is string or error == error|string %}
-        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>
         <span class="cla-error-message">{{error}}</span>
       {% else %}
         {% for line in error %}
-          <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+          <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>
           <span class="cla-error-message">{{line}}</span>
         {% endfor %}
       {% endif %}
@@ -435,7 +445,7 @@
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
     {% if field and field.errors %}
       <span id="{{field.id}}-error" class="govuk-error-message">
-        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}:</span>
+        <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>
         <span class="cla-error-message">{{ field.errors[0] }}</span>
       </span>
       {% set class_ = "govuk-input--error" %}
@@ -576,7 +586,7 @@
         <p>{{ _('Please try submitting the form again.') }}</p>
       {% endcall %}
     {% else%}
-      {% call Element.alert('error', title=_('This form has errors')) %}
+      {% call Element.alert('error', title=_('There is a problem')) %}
         {% if form['properties'] %}
           {% for property_form in form['properties'] %}
             {% if property_form.errors %}
@@ -608,24 +618,22 @@
 
 
 {% macro show_field_error(field) %}
-  <dl class="error-summary-details">
-    <dt>
-      {% if field.form and field.form.errors %}
-        {{ field.label.text }}
-      {% else %}
-        <a href="#field-{{ field.id }}">{{ field.label.text }}</a>
-      {% endif %}
-    </dt>
-    {% if field.form and field.form.errors %}
-      <dd>
-        {% for error in field.form.errors %}
-          {{ show_field_error(field.form[error]) }}
-        {% endfor %}
-      </dd>
+  {% if field.form and field.form.errors %}
+    {{ field.label.text }}<br>
+    {% for error in field.form.errors %}
+      {{ show_field_error(field.form[error]) }}
+    {% endfor %}
+  {% else %}
+    {% if field.type in ['YesNoField', 'RadioField', 'PartnerYesNoField', 'MultiCheckboxField', 'PartnerMultiCheckboxField' ] %}
+      <a href="#{{ field.id }}-0">{{ field.label.text }}</a><br>
+    {% elif field.type in ['MoneyIntervalField', 'PartnerMoneyIntervalField', 'SelfEmployedMoneyIntervalField' ] %}
+      <a href="#{{ field.id }}-per_interval_value">{{ field.label.text }}</a><br>
+    {% elif field.type in ['SetZeroIntegerField', 'MoneyField', 'PartnerMoneyField' ] %}
+      <a href="#{{ field.id }}">{{ field.label.text }}</a><br>
     {% else %}
-      <dd>{{ error }}</dd>
+      <a href="#field-{{ field.id }}">{{ field.label.text }}</a><br>
     {% endif %}
-  </dl>
+  {% endif %}
 {% endmacro %}
 
 

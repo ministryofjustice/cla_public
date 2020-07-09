@@ -54,7 +54,7 @@ msgstr "Ydych chi mewn perygl uniongyrchol o niwed?"
 msgid "Have you already started family mediation? (This includes cases that have already finished)"
 msgstr "Ydych chi wedi dechrau cyfryngu teuluol eisoes? (Mae hyn yn cynnwys achosion sydd wedi dod i ben eisoes)"
 msgid "Have you taken part in a family mediation session?"
-msgstr ""
+msgstr "Ydych chi wedi cymryd rhan mewn sesiwn gyfryngu i'r teulu?"
 msgid "What kind of dispute is it?"
 msgstr "Pa fath o anghydfod ydyw?"
 msgid "Is the child a victim of child abuse within the family?"
@@ -382,6 +382,22 @@ msgstr "pob mis"
 msgid "per year"
 msgstr "y flwyddyn"
 
+#: cla_public/apps/checker/validators.py:95
+msgid "each week"
+msgstr "yr wythnos"
+
+#: cla_public/apps/checker/validators.py:97
+msgid "every 4 weeks"
+msgstr "pob 4 wythnos"
+
+#: cla_public/apps/checker/validators.py:99
+msgid "each month"
+msgstr "pob mis"
+
+#: cla_public/apps/checker/validators.py:101
+msgid "each year"
+msgstr "y flwyddyn"
+
 #: cla_public/apps/checker/constants.py:107
 msgid "Armed Forces Independence payment"
 msgstr "Taliad Annibyniaeth y Lluoedd Arfog"
@@ -519,6 +535,182 @@ msgstr "Oes gennych chi bartner?"
 #: cla_public/apps/checker/forms.py:58
 msgid "Your husband, wife, civil partner (unless you have permanently separated) or someone you live with as if you’re married"
 msgstr "Eich gŵr, gwraig, partner sifil (oni bai eich bod wedi gwahanu yn barhaol) neu rywun sy’n byw gyda chi fel pe baech chi wedi priodi"
+
+#: cla_public/apps/checker/forms.py:64
+msgid "Tell us whether you have a partner"
+msgstr "Oes gennych chi bartner"
+
+#: cla_public/apps/checker/forms.py:79
+msgid "Tell us whether you’re in dispute with your partner"
+msgstr "Ydych chi mewn anghydfod â’ch partner"
+
+#: cla_public/apps/checker/forms.py:87
+msgid "Tell us whether you receive benefits"
+msgstr "Ydych chi’n derbyn budd-daliadau"
+
+#: cla_public/apps/checker/forms.py:94
+msgid "Tell us whether you have any children aged 15 or under"
+msgstr "Oes gennych chi blant 15 oed neu hŷn"
+
+#: cla_public/apps/checker/forms.py:102
+msgid "Tell us how many children you have aged 15 or under"
+msgstr "Faint o blant 15 oed neu hŷn sydd gennych chi"
+
+#: cla_public/apps/checker/forms.py:112
+msgid "Tell us whether you have any dependants aged 16 or over"
+msgstr "Oes gennych chi ddibynyddion 16 oed neu hŷn"
+
+#: cla_public/apps/checker/forms.py:120
+msgid "Tell us how many dependants you have aged 16 or over"
+msgstr "Faint o ddibynyddion 16 oed neu hŷn sydd gennych chi"
+
+#: cla_public/apps/checker/forms.py:177
+msgid "Tell us if you or your partner are aged 60 or over"
+msgstr "Ydych chi neu eich partner yn 60 oed neu hŷn"
+
+#: cla_public/apps/checker/forms.py:139
+msgid "Tell us if you own any properties"
+msgstr "Ydych chi’n berchen ar unrhyw eiddo"
+
+#: cla_public/apps/checker/forms.py:144
+msgid "Tell us if you are employed"
+msgstr "Ydych chi mewn gwaith"
+
+#: cla_public/apps/checker/forms.py:161
+msgid "Tell us if you are self-employed"
+msgstr "Ydych chi’n hunangyflogedig"
+
+#: cla_public/apps/checker/forms.py:126
+msgid "Tell us whether you have savings or investments"
+msgstr "Oes gennych chi gynilion neu fuddsoddiadau"
+
+#: cla_public/apps/checker/forms.py:132
+msgid "Tell us if you have any valuable items worth over £500 each"
+msgstr "Oes gennych chi eitemau gwerthfawr sydd werth dros £500 yr un"
+
+#: cla_public/apps/checker/forms.py:387
+msgid "Enter the total of all valuable items over £500"
+msgstr "Rhowch gyfanswm yr holl eitemau gwerthfawr dros £500"
+
+#: cla_public/apps/checker/forms.py:194
+msgid "Select which benefits you receive"
+msgstr "Dewiswch pa fudd-daliadau rydych chi’n eu derbyn"
+
+#: cla_public/apps/checker/forms.py:251
+msgid "Tell us whether you receive any other benefits"
+msgstr "Ydych chi’n derbyn unrhyw fudd-daliadau eraill"
+
+#: cla_public/apps/checker/forms.py:261 (... each week etc)
+msgid "Tell us how much you receive in other benefits"
+msgstr "Faint rydych chi’n ei dderbyn mewn budd-daliadau eraill"
+
+#: cla_public/apps/checker/forms.py:262
+msgid "Tell us how often you receive these other benefits"
+msgstr "Pa mor aml rydych chi’n derbyn y budd-daliadau eraill hyn"
+
+#: cla_public/apps/checker/forms.py:509
+msgid "Enter the total amount of maintenance you receive, or 0 if this doesn’t apply to you"
+msgstr "Rhowch gyfanswm yr arian cynhaliaeth rydych chi’n ei dderbyn, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
+
+#: cla_public/apps/checker/forms.py:510
+msgid "Tell us how often you receive maintenance"
+msgstr "Pa mor aml rydych chi’n derbyn arian cynhaliaeth"
+
+#: cla_public/apps/checker/forms.py:512 (...each week etc)
+msgid "Tell us how much maintenance you receive"
+msgstr "Faint o arian cynhaliaeth rydych chi’n ei dderbyn"
+
+#: cla_public/apps/checker/forms.py:522
+msgid "Enter the total amount of pension you receive, or 0 if this doesn’t apply to you"
+msgstr "Rhowch gyfanswm y pensiwn rydych chi’n ei dderbyn, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
+
+#: cla_public/apps/checker/forms.py:523
+msgid "Tell us how often you receive your pension"
+msgstr "Pa mor aml rydych chi’n derbyn eich pensiwn"
+
+#: cla_public/apps/checker/forms.py:525 (...each week etc)
+msgid "Tell us how much pension you receive"
+msgstr "Faint o bensiwn rydych chi’n ei dderbyn"
+
+#: cla_public/apps/checker/forms.py:535
+msgid "Enter the total amount of other income you receive, or 0 if this doesn’t apply to you"
+msgstr "Rhowch gyfanswm yr incwm arall rydych chi’n ei dderbyn, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
+
+#: cla_public/apps/checker/forms.py:536
+msgid "Tell us how often you receive this other income"
+msgstr "Pa mor aml rydych chi’n derbyn yr incwm arall hwn"
+
+#: cla_public/apps/checker/forms.py:538 (...each week etc)
+msgid "Tell us how much other income you receive"
+msgstr "Faint o incwm arall rydych chi’n ei dderbyn"
+
+#: cla_public/apps/checker/forms.py:591
+msgid "Tell us how much rent you pay, or enter 0 if you don’t pay rent"
+msgstr "Faint rydych chi’n ei dalu mewn rhent, neu rhowch 0 os nad ydych yn talu rhent"
+
+#: cla_public/apps/checker/forms.py:592
+msgid "Tell us how often you pay this rent"
+msgstr "Pa mor aml rydych chi’n talu’r rhent hwn"
+
+#: cla_public/apps/checker/forms.py:594 (...each week etc)
+msgid "Tell us how much rent you pay"
+msgstr "Faint rydych chi’n ei dalu mewn rhent"
+
+#: cla_public/apps/checker/forms.py:605
+msgid "Tell us how much maintenance you pay, or enter 0 if this doesn’t apply to you"
+msgstr "Faint o arian cynhaliaeth rydych chi’n ei dalu, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
+
+#: cla_public/apps/checker/forms.py:606
+msgid "Tell us how often you pay this maintenance"
+msgstr "Pa mor aml rydych chi’n talu’r arian cynhaliaeth hwn"
+
+#: cla_public/apps/checker/forms.py:608 (...each week etc)
+msgid "Tell us how much maintenance you pay"
+msgstr "Faint o arian cynhaliaeth rydych chi’n ei dalu"
+
+#: cla_public/apps/checker/forms.py:619
+msgid "Tell us how much you pay towards Criminal Legal Aid, or enter 0 if this doesn’t apply to you"
+msgstr "Faint rydych chi’n ei dalu tuag at Gymorth Cyfreithiol Troseddol, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
+
+#: cla_public/apps/checker/forms.py:276
+msgid "Tell us whether this is your main home"
+msgstr "Ai hwn yw eich prif gartref"
+
+#: cla_public/apps/checker/forms.py:282
+msgid "Tell us whether anyone else owns a share of this property"
+msgstr "Oes rhywun arall yn berchen ar gyfran o’r eiddo hwn"
+
+#: cla_public/apps/checker/forms.py:289
+msgid "Tell us the approximate value of this property"
+msgstr "Faint yw gwerth yr eiddo hwn, yn fras"
+
+#: cla_public/apps/checker/forms.py:295
+msgid "Tell us how much is left to pay on the mortgage, or enter 0 if you have no mortgage"
+msgstr "Faint sy’n weddill i’w dalu ar y morgais, neu rhowch 0 os nad oes gennych forgais"
+
+#: cla_public/apps/checker/forms.py:302
+msgid "Enter your mortgage repayment for last month"
+msgstr "Rhowch eich taliad morgais ar gyfer y mis diwethaf"
+
+#: cla_public/apps/checker/forms.py:307
+msgid "Tell us whether you rent out some of this property"
+msgstr "Ydych chi’n gosod rhan o’r eiddo hwn ar rent"
+
+#: cla_public/apps/checker/forms.py:328
+msgid "Tell us whether this property is in dispute"
+msgstr "Ydy’r eiddo hwn yn rhan o anghydfod"
+
+#: cla_public/apps/checker/forms.py:317
+msgid "Tell us how much rent you receive from this property"
+msgstr "Faint o rent rydych chi’n ei dderbyn ar gyfer yr eiddo hwn"
+
+#: cla_public/apps/checker/forms.py:318
+msgid "Tell us how often you receive this rent"
+msgstr "Pa mor aml rydych chi’n derbyn y rhent hwn"
+
+#: cla_public/apps/checker/forms.py:320 (...each week etc)
+msgid "Tell us how much rent you receive"
+msgstr "Faint o rent rydych chi’n ei dderbyn"
 
 #: cla_public/apps/checker/forms.py:64 cla_public/apps/checker/forms.py:89
 #: cla_public/apps/checker/forms.py:106 cla_public/apps/checker/forms.py:119
@@ -688,7 +880,7 @@ msgid "Do you or your partner receive any other benefits not listed above? "
 msgstr "Ydych chi neu’ch partner yn cael unrhyw fudd-daliadau eraill sydd heb eu rhestru uchod? "
 
 #: cla_public/apps/checker/forms.py:223
-msgid "For example, National Asylum Support Service Benefit, Incapacity Benefit, Contribution-based Jobseeker's Allowance"
+msgid "For example, National Asylum Support Service Benefit, Incapacity Benefit, Contribution-based Jobseeker’s Allowance"
 msgstr "Er enghraifft, Budd-dal y Gwasanaeth Cynnal Cenedlaethol i Geiswyr Lloches, Budd-dal Analluogrwydd, Lwfans Ceisio Gwaith yn Seiliedig ar Gyfraniadau"
 
 #: cla_public/apps/checker/forms.py:232
@@ -708,7 +900,7 @@ msgid "Does anyone else own a share of the property?"
 msgstr "A oes unrhyw un arall sy’n berchen ar gyfran o’r eiddo?"
 
 #: cla_public/apps/checker/forms.py:246
-msgid "Select 'Yes' if you share ownership with a friend, relative or ex-partner"
+msgid "Select ‘Yes’ if you share ownership with a friend, relative or ex-partner"
 msgstr "Rhowch ‘oes’ yn ateb os ydych chi’n rhannu perchenogaeth â ffrind, perthynas neu gynbartner"
 
 #: cla_public/apps/checker/forms.py:247
@@ -964,11 +1156,11 @@ msgid "Monthly Income Contribution Order"
 msgstr "Gorchymyn Cyfrannu Incwm Misol"
 
 #: cla_public/apps/checker/forms.py:478
-msgid "Money you pay per month towards your criminal legal aid"
+msgid "Money you pay per month towards your Criminal Legal Aid"
 msgstr "Arian yr ydych chi yn ei dalu at eich cymorth cyfreithiol troseddol"
 
 #: cla_public/apps/checker/forms.py:479
-msgid "Money you and/or your partner pay per month towards your criminal legal aid"
+msgid "Money you and/or your partner pay per month towards your Criminal Legal Aid"
 msgstr "Arian yr ydych chi a/neu’ch partner yn ei dalu at eich cymorth cyfreithiol troseddol"
 
 #: cla_public/apps/checker/forms.py:483
@@ -994,15 +1186,19 @@ msgid "Enter postcode"
 msgstr "Rhowch eich côd post"
 
 #: cla_public/apps/checker/validators.py:76
-msgid "Must select at least one option."
+msgid "Select at least one option"
 msgstr "Dewiswch o leiaf un opsiwn"
 
 #: cla_public/apps/checker/validators.py:88
 msgid "Please provide an amount"
 msgstr "Rhowch swm"
 
+#: cla_public/apps/checker/validators.py:88
+msgid "Type in a number"
+msgstr "Rhowch swm"
+
 #: cla_public/apps/checker/validators.py:112
-msgid "Please select a time period from the drop down"
+msgid "Select a time period from the drop down"
 msgstr "Dewiswch gyfnod o’r gwymplen"
 
 #: cla_public/apps/checker/views.py:60 cla_public/apps/contact/views.py:76
@@ -1039,7 +1235,7 @@ msgid "Not a valid time"
 msgstr "Nid yw hwn yn amser dilys"
 
 #: cla_public/apps/contact/fields.py:140
-msgid "Can't schedule a callback at the requested time"
+msgid "Can’t schedule a callback at the requested time"
 msgstr "Methu trefnu i’ch ffonio’n ôl ar yr amser a nodwyd yn eich cais"
 
 #: cla_public/apps/contact/fields.py:148
@@ -1219,7 +1415,7 @@ msgstr "Cafodd eich dewisiadau cwcis eu cadw"
 
 #: cla_public/templates/_cookie-consent-form.html:4
 msgid "Government services may set additional cookies and, if so, will have their own cookie policy and banner."
-msgstr "Gall gwasanaethau'r llywodraeth osod cwcis ychwanegol, ac os felly, bydd ganddynt bolisi a baner cwcis eu hunain."
+msgstr "Gall gwasanaethau’r llywodraeth osod cwcis ychwanegol, ac os felly, bydd ganddynt bolisi a baner cwcis eu hunain."
 
 #: cla_public/templates/_cookie-consent-form.html:6
 msgid "Go back to the page you were looking at"
@@ -1280,11 +1476,11 @@ msgstr "Mae angen i’r cwcis hyn fod ar waith er mwyn i chi gael y profiad gora
 
 #: cla_public/templates/_cookie-consent-form.html:37
 msgid "Read more about cookies on 'Check if you can get legal aid'"
-msgstr "Darllenwch fwy am ddefnyddio cwcis ar 'Gwirio os ydych yn gymwys i gael cymorth cyfreithiol'"
+msgstr "Darllenwch fwy am ddefnyddio cwcis ar ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/_cookie-consent-form.html:42
 msgid "Cookies used to improve 'Check you can get legal aid'"
-msgstr "Cwcis sy’n cael eu defnyddio i wella ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol'"
+msgstr "Cwcis sy’n cael eu defnyddio i wella ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/_cookie-consent-form.html:45
 msgid "We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs."
@@ -1296,7 +1492,7 @@ msgstr "Nid ydym yn gadael i Google ddefnyddio na rhannu’r data ynglŷn â sut
 
 #: cla_public/templates/_cookie-consent-form.html:49
 msgid "You agree to the Ministry of Justice using your data to help improve the 'Check if you can get legal aid' service."
-msgstr "Rydych yn cytuno y gall y Weinyddiaeth Gyfiawnder ddefnyddio eich data i helpu i wella’r gwasanaeth 'Gwirio os ydych yn gymwys i gael cymorth cyfreithiol'."
+msgstr "Rydych yn cytuno y gall y Weinyddiaeth Gyfiawnder ddefnyddio eich data i helpu i wella’r gwasanaeth ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’."
 
 #: cla_public/templates/_cookie-consent-form.html:56
 #: cla_public/templates/_cookie-consent-form.html:78
@@ -2032,7 +2228,7 @@ msgstr "Pori’n breifat"
 msgid ""
 "You can also look at a website without information like cookies being stored by using the private browsing setting\n"
 "    in your browser. Go to the menu, click on ‘File’ and choose:"
-msgstr "Hefyd, gallwch edrych ar wefan heb i wybodaeth fel cwcis gael eu storio drwy ddefnyddio’r gosodiad pori preifat yn eich porwr.  Ewch i’r ddewislen, cliciwch ar 'Ffeil' a dewiswch:"
+msgstr "Hefyd, gallwch edrych ar wefan heb i wybodaeth fel cwcis gael eu storio drwy ddefnyddio’r gosodiad pori preifat yn eich porwr.  Ewch i’r ddewislen, cliciwch ar ‘Ffeil’ a dewiswch:"
 
 #: cla_public/templates/online-safety.html:39
 msgid "<strong>InPrivate</strong> on Internet Explorer"
@@ -3641,7 +3837,7 @@ msgstr "Dydd Sadwrn: 9am tan 12.30pm"
 
 #: cla_public/templates/macros/element.html:18
 msgid "There is a problem"
-msgstr ""
+msgstr "Mae yna broblem"
 
 #: cla_public/templates/macros/element.html:54
 msgid "If you’re having trouble completing this form"

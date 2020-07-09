@@ -1,6 +1,7 @@
 {% extends "checker/base.html" %}
 
 {% block inner_content %}
+  {{ Form.handle_errors(form) }}
   <h1 class="govuk-heading-xl">{{ title }}</h1>
   <p class="govuk-body">{{ _('You’ll need to provide evidence of the financial information you’ve given us through this service.') }}</p>
   <p class="govuk-body">
@@ -8,7 +9,6 @@
   </p>
   <form method="POST">
     {{ form.csrf_token }}
-    {{ Form.handle_errors(form) }}
 
     {% with skip = not (session.checker.is_employed or session.checker.is_self_employed) %}
       {% if session.checker.has_partner %}

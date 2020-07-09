@@ -67,7 +67,7 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
         ),
         validators=[
             InputRequired(),
-            Length(max=20, message=_(u"Your telephone number must be 20 " u"characters or less")),
+            Length(max=20, message=_(u"Your telephone number must be 20 characters or less")),
         ],
     )
     time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))
@@ -200,7 +200,7 @@ class ConfirmationForm(Honeypot, BabelTranslationsFormMixin, Form):
         _(u"Receive this confirmation by email"),
         description=_(u"Enter your email address"),
         validators=[
-            Length(max=255, message=_(u"Your address must be 255 characters " u"or less")),
+            Length(max=255, message=_(u"Your address must be 255 characters or less")),
             EmailValidator(message=_(u"Invalid email address")),
             InputRequired(),
         ],

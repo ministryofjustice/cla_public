@@ -115,5 +115,5 @@ class TestMoneyInterval(unittest.TestCase):
             {"money_interval-per_interval_value": "", "money_interval-interval_period": "per_week"}
         )
         form.validate()
-        self.assertIn(u"Please provide an amount", form.money_interval.errors)
+        self.assertIn(u"Type in a number", form.money_interval.errors)
         self.assertEqual(1, len(form.money_interval.errors))
