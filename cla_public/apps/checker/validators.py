@@ -99,7 +99,7 @@ class MoneyIntervalAmountRequired(object):
 
         if amount_field_is_blank:
             if specific_period_error_message:
-                message = self.amount_message + " " + field.gettext(interval_texts[interval.data])
+                message = self.amount_message + " " + field.gettext(self.interval_texts[interval.data])
             else:
                 message = self.message or field.gettext(u"Type in a number")
             raise StopValidation(message)
