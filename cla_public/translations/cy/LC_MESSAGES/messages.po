@@ -1231,20 +1231,12 @@ msgid "You’ll only get guidance on whether or not you can get legal aid - you 
 msgstr "Byddwch yn cael arweiniad ynghylch p’un a ydych yn gallu cael cymorth cyfreithiol ai peidio yn unig – ni fyddwch yn cael penderfyniad terfynol nes eich bod yn siarad â chynghorydd."
 
 #cla_public/templates/index.html:42
-msgid "Legal aid is different in <a href=\"https://www.mygov.scot/legal-aid/" rel=\"external\">Scotland</a> and <a href=\"http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm\" rel=\"external\">Northern Ireland</a>."
-msgstr "Mae cymorth cyfreithiol yn wahanol yn yr <a href=\"https://www.mygov.scot/legal-aid/\" rel=\"external\">Alban</a> a <a href=\"http://www.dojni.gov.uk/index/legalservices/legal-services-members-of-the-public.htm\" rel=\"external\">Gogledd Iwerddon</a>."
-
-#cla_public/templates/index.html:42
 msgid "Scotland"
 msgstr "Alban"
 
 #cla_public/templates/index.html:42
 msgid "Northern Ireland"
 msgstr "Gogledd Iwerddon"
-
-#cla_public/templates/index.html:42
-msgid "Legal aid is different in <a href=\"%(anchorScot)\" rel=\"external\">Scotland</a> and <a href=\"%(anchorUlster)\" rel=\"external\">Northern Ireland</a>."
-msgstr "Mae cymorth cyfreithiol yn wahanol yn yr <a href=\"%(anchorScot)\" rel=\"external\">Alban</a> a <a href=\"%(anchorUlster)\" rel=\"external\">Gogledd Iwerddon</a>."
 
 #cla_public/templates/index.html:42
 msgid "Legal aid is different in %(Scotland_legal_aid_link)s and %(Ulster_legal_aid_link)s."
