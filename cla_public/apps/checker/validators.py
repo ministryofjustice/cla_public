@@ -90,18 +90,21 @@ class MoneyIntervalAmountRequired(object):
         nonzero_amount = amount.data > 0
         interval_selected = interval.data != ""
 
-        if not amount.errors and interval_selected and amount_not_set and self.amount_message:
-            if interval.data == "per_week":
-                interval_text = field.gettext(u"each week")
-            if interval.data == "per_4week":
-                interval_text = field.gettext(u"every 4 weeks")
-            if interval.data == "per_month":
-                interval_text = field.gettext(u"each month")
-            if interval.data == "per_year":
-                interval_text = field.gettext(u"each year")
-            raise StopValidation(self.amount_message + " " + interval_text)
+        if not amount.errors and amount_not_set:  # blank ("not amount.errors" to exclude non-numeric errors)
+            if (
+                interval_selected and self.amount_message
+            ):  # if interval is selected and there is a specific error for interval selected but no numnber input
+                if interval.data == "per_week":
+                    interval_text = field.gettext(u"each week")
+                if interval.data == "per_4week":
+                    interval_text = field.gettext(u"every 4 weeks")
+                if interval.data == "per_month":
+                    interval_text = field.gettext(u"each month")
+                if interval.data == "per_year":
+                    interval_text = field.gettext(u"each year")
+                raise StopValidation(self.amount_message + " " + interval_text)
 
-        if not amount.errors and amount_not_set:
+            # if above error not triggered
             message = self.message or field.gettext(u"Type in a number")
             raise StopValidation(message)
 
