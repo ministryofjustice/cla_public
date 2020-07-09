@@ -83,32 +83,31 @@ class MoneyIntervalAmountRequired(object):
         self.freq_message = freq_message
         self.amount_message = amount_message
 
+    def append_interval_text(self, field):
+        if interval.data == "per_week":
+            interval_text = field.gettext(u"each week")
+        if interval.data == "per_4week":
+            interval_text = field.gettext(u"every 4 weeks")
+        if interval.data == "per_month":
+            interval_text = field.gettext(u"each month")
+        if interval.data == "per_year":
+            interval_text = field.gettext(u"each year")
+        return self.amount_message + " " + interval_text
+
     def __call__(self, form, field):
         amount = field.form.per_interval_value
         interval = field.form.interval_period
-        amount_not_set = amount.data is None
-        nonzero_amount = amount.data > 0
-        interval_selected = interval.data != ""
+        amount_field_is_blank = not amount.errors and amount.data is None
+        specific_period_error_message = interval.data != "" and self.amount_message
 
-        if not amount.errors and amount_not_set:  # blank ("not amount.errors" to exclude non-numeric errors)
-            if (
-                interval_selected and self.amount_message
-            ):  # if interval is selected and there is a specific error for interval selected but no numnber input
-                if interval.data == "per_week":
-                    interval_text = field.gettext(u"each week")
-                if interval.data == "per_4week":
-                    interval_text = field.gettext(u"every 4 weeks")
-                if interval.data == "per_month":
-                    interval_text = field.gettext(u"each month")
-                if interval.data == "per_year":
-                    interval_text = field.gettext(u"each year")
-                raise StopValidation(self.amount_message + " " + interval_text)
-
-            # if above error not triggered
-            message = self.message or field.gettext(u"Type in a number")
+        if amount_field_is_blank:
+            if specific_period_error_message:
+                message = self.append_interval_text(field)
+            else:
+                message = self.message or field.gettext(u"Type in a number")
             raise StopValidation(message)
 
-        if not interval_selected and nonzero_amount and self.freq_message:
+        if interval.data == "" and amount.data > 0 and self.freq_message:
             raise StopValidation(self.freq_message)
 
 
