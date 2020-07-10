@@ -54,7 +54,7 @@ msgstr "Ydych chi mewn perygl uniongyrchol o niwed?"
 msgid "Have you already started family mediation? (This includes cases that have already finished)"
 msgstr "Ydych chi wedi dechrau cyfryngu teuluol eisoes? (Mae hyn yn cynnwys achosion sydd wedi dod i ben eisoes)"
 msgid "Have you taken part in a family mediation session?"
-msgstr "Ydych chi wedi cymryd rhan mewn sesiwn gyfryngu i'r teulu?"
+msgstr "Ydych chi wedi cymryd rhan mewn sesiwn gyfryngu i’r teulu?"
 msgid "What kind of dispute is it?"
 msgstr "Pa fath o anghydfod ydyw?"
 msgid "Is the child a victim of child abuse within the family?"
@@ -99,6 +99,18 @@ msgstr "Dewiswch bob un a fyddai yn wir"
 #: cla_public/templates/macros/form.html:206
 msgid "For example, £32.18 per week"
 msgstr "Er enghraifft, £32.18 yr wythnos"
+
+#: cla_public/templates/macros/base.html:65
+msgid "Click to hide this page"
+msgstr "Cliciwch i guddio’r dudalen hon"
+
+#: cla_public/templates/macros/base.html:66
+msgid "Hide this page"
+msgstr "Gadael yn gyflym"
+
+#: cla_public/templates/macros/base.html:67
+msgid "Or press escape key to hide this page"
+msgstr "Neu pwyswch y fysell Esc"
 
 #: cla_public/templates/macros/base.html:36
 #: cla_public/templates/macros/base.html:48
@@ -1466,6 +1478,26 @@ msgstr "Ffeiliau sy’n cael eu cadw ar eich ffôn, tabled neu gyfrifiadur pan f
 msgid "We use cookies to store information about how you use ‘Check you can get legal aid’, such as the pages you visit."
 msgstr "Rydym yn defnyddio cwcis i storio gwybodaeth ynglŷn â sut rydych yn defnyddio ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’, er enghraifft y tudalennau rydych yn ymweld â nhw."
 
+#: cla_public/templates/_cookie-popup.html:5
+msgid "Cookies on Check if you can get Legal Aid"
+msgstr "Cwcis ar Wirio os ydych yn gymwys i gael Cymorth Cyfreithiol"
+
+#: cla_public/templates/_cookie-popup.html:8
+msgid "We use <a class=\"govuk-link\" href=\"%(cookie_info_url)s\">cookies to collect information</a> about how you use GOV.UK."
+msgstr "Rydyn ni’n defnyddio <a class=\"govuk-link\" href=\"%(cookie_info_url)s\">cwcis i gasglu gwybodaeth</a> am y ffordd rydych chi’n defnyddio GOV.UK."
+
+#: cla_public/templates/_cookie-popup.html:9
+msgid "We use this information to make the website work as well as possible and improve government services."
+msgstr "Rydyn ni’n defnyddio’r wybodaeth hon i wneud i’r wefan weithio cystal â phosib ac i well gwasanaethau’r llywodraeth."
+
+#: cla_public/templates/_cookie-popup.html:13
+msgid "Accept all cookies"
+msgstr "Derbyn cwcis"
+
+#: cla_public/templates/_cookie-popup.html:16
+msgid "Set cookie preferences"
+msgstr "Gosod dewisiadau cwcis"
+
 #: cla_public/templates/_cookie-consent-form.html:14
 #: cla_public/templates/_cookie-popup.html:8
 msgid "Cookie settings"
@@ -1484,7 +1516,7 @@ msgid "turning on Javascript in your browser"
 msgstr "troi Javascript ymlaen yn eich porwr"
 
 #: cla_public/templates/_cookie-consent-form.html:26
-msgid "We use different types of cookies. You can choose which cookies you're happy for us to use and how the data is shared."
+msgid "We use different types of cookies. You can choose which cookies you’re happy for us to use and how the data is shared."
 msgstr "Rydym yn defnyddio gwahanol fathau o gwcis. Gallwch ddewis pa gwcis rydych yn fodlon i ni eu defnyddio a sut y rhennir y data."
 
 #: cla_public/templates/_cookie-consent-form.html:29
@@ -1512,11 +1544,11 @@ msgid "These cookies need to be on to give you the best experience using the ser
 msgstr "Mae angen i’r cwcis hyn fod ar waith er mwyn i chi gael y profiad gorau wrth ddefnyddio’r gwasanaeth."
 
 #: cla_public/templates/_cookie-consent-form.html:37
-msgid "Read more about cookies on 'Check if you can get legal aid'"
+msgid "Read more about cookies on ‘Check if you can get legal aid’"
 msgstr "Darllenwch fwy am ddefnyddio cwcis ar ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/_cookie-consent-form.html:42
-msgid "Cookies used to improve 'Check you can get legal aid'"
+msgid "Cookies used to improve ‘Check if you can get legal aid’"
 msgstr "Cwcis sy’n cael eu defnyddio i wella ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/_cookie-consent-form.html:45
@@ -1528,7 +1560,7 @@ msgid "We do not allow Google to use or share the data about how you use this si
 msgstr "Nid ydym yn gadael i Google ddefnyddio na rhannu’r data ynglŷn â sut rydych yn defnyddio’r safle hwn."
 
 #: cla_public/templates/_cookie-consent-form.html:49
-msgid "You agree to the Ministry of Justice using your data to help improve the 'Check if you can get legal aid' service."
+msgid "You agree to the Ministry of Justice using your data to help improve the ‘Check if you can get legal aid’ service."
 msgstr "Rydych yn cytuno y gall y Weinyddiaeth Gyfiawnder ddefnyddio eich data i helpu i wella’r gwasanaeth ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’."
 
 #: cla_public/templates/_cookie-consent-form.html:56
@@ -1860,7 +1892,7 @@ msgstr "aboutcookies.org (Saesneg)"
 #: cla_public/templates/cookies.html:25
 #, python-format
 msgid "Find out more about how to manage cookies at %(manage_cookies_link)s."
-msgstr "Cael rhagor o wybodaeth ynghylch sut i reoli cwcis: %(manage_cookies_link)s."
+msgstr "Dysgwch fwy am sut i reoli cwcis yn %(manage_cookies_link)s."
 
 #: cla_public/templates/cookies.html:29
 msgid "How cookies are used on Check if you can get legal aid"
@@ -1971,7 +2003,7 @@ msgstr "Efallai y byddwch yn gweld neges groeso pan fyddwch yn ymweld â GOV.UK 
 
 #: cla_public/templates/cookies.html:87
 msgid "Introductory cookies"
-msgstr ""
+msgstr "Cwcis cyflwyno"
 
 #: cla_public/templates/cookies.html:98
 msgid "Saves a message to let us know that you have seen our cookie message"
@@ -1991,7 +2023,7 @@ msgstr "Pan fyddwch yn defnyddio’r gwasanaeth ‘Gwirio os ydych yn gymwys i g
 
 #: cla_public/templates/cookies.html:107
 msgid "Progress cookies"
-msgstr ""
+msgstr "Cwcis cynnydd"
 
 #: cla_public/templates/cookies.html:118
 msgid "An identifier for your session"
@@ -2011,7 +2043,7 @@ msgstr "Gallwch ddewis i ddefnyddio’r gwasanaeth hwn yn Gymraeg yn lle Saesneg
 
 #: cla_public/templates/cookies.html:127
 msgid "Welsh language cookies"
-msgstr "Cwcis iaith Gymraeg"
+msgstr "Cwcis Cymraeg"
 
 #: cla_public/templates/cookies.html:28
 msgid "Change cookie settings"
@@ -2349,9 +2381,8 @@ msgid ""
 msgstr "Dim ond os byddwch chi’n penderfynu cysylltu â gweithredwr Cyngor Cyfreithiol Sifil y byddwn ni’n cadw’r wybodaeth yr ydych chi’n ei rhoi."
 
 #: cla_public/templates/privacy.html:49
-msgid ""
-"At this point, you will need to tell us your name and phone number and all the information you’ve entered will\n"
-"    be stored when you click 'Submit your application'. We store this information so that the operator can see it\n"
+msgid "At this point, you will need to tell us your name and phone number and all the information you’ve entered will\n"
+"    be stored when you click ‘Submit your application’. We store this information so that the operator can see it\n"
 "    when they speak to you."
 msgstr "Yn awr, bydd angen i chi roi’ch enw a’ch rhif ffôn i ni a bydd yr holl wybodaeth yr ydych wedi’i rhoi yn cael ei storio pan fyddwch chi’n clicio ar ‘Cyflwyno’ch cais’. Rydyn ni’n storio’r wybodaeth hon fel y gall gweithredwr ei gweld pan fydd yn siarad â chi."
 
@@ -2771,7 +2802,7 @@ msgstr "Er mwyn darparu’r gwasanaeth gorau posibl i chi, mae’n bosibl y bydd
 
 #: cla_public/templates/privacy.html:353 cla_public/templates/privacy.html:411
 msgid "Who we share information with"
-msgstr ""
+msgstr "Gyda phwy rydyn ni’n rhannu gwybodaeth"
 
 #: cla_public/templates/privacy.html:356 cla_public/templates/privacy.html:414
 msgid "Who"
@@ -3254,6 +3285,26 @@ msgstr "Bydd eich sesiwn yn dod i ben os yw wedi bod yn anweithredol am hanner a
 msgid "Search"
 msgstr "Chwilio"
 
+#: cla_public/templates/checker/result/_find-legal-adviser.html:33
+msgid "Legal Aid is different in Scotland. Visit %(link)s for more information."
+msgstr "Mae Cymorth Cyfreithiol yn wahanol yn Yr Alban. Ewch i %(link)s i gael rhagor o wybodaeth."
+
+#: cla_public/templates/checker/result/_find-legal-adviser.html:37
+msgid "Legal Aid is different in Northern Ireland. Visit %(link)s for more information."
+msgstr "Mae Cymorth Cyfreithiol yn wahanol yng Ngogledd Iwerddon. Ewch i %(link)s i gael rhagor o wybodaeth."
+
+#: cla_public/templates/checker/result/_find-legal-adviser.html:41
+msgid "Legal Aid is different on the Isle of Man. Visit %(link)s for more information."
+msgstr "Mae Cymorth Cyfreithiol yn wahanol yn Ynys Manaw. Ewch i %(link)s i gael rhagor o wybodaeth."
+
+#: cla_public/templates/checker/result/_find-legal-adviser.html:45
+msgid "Legal Aid is different in Jersey. Visit %(link)s for more information."
+msgstr "Mae Cymorth Cyfreithiol yn wahanol yn Jersey. Ewch i %(link)s i gael rhagor o wybodaeth."
+
+#: cla_public/templates/checker/result/_find-legal-adviser.html:49
+msgid "Legal Aid is different in Guernsey. Visit %(link)s for more information."
+msgstr "Mae Cymorth Cyfreithiol yn wahanol yn Ynys y Garn. Ewch i %(link)s i gael rhagor o wybodaeth."
+
 #: cla_public/templates/checker/result/_find-legal-adviser.html:57
 #, python-format
 msgid "Showing %(count)s results around"
@@ -3299,13 +3350,13 @@ msgstr "Dim canlyniadau"
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:157
 msgid ""
-"We couldn't find any results for your search.\n"
+"We couldn’t find any results for your search.\n"
 "        We are constantly updating our records so please try again later."
 msgstr "Nid oeddem yn gallu dod o hyd i unrhyw ganlyniadau ar gyfer eich chwiliad. Rydym yn diweddaru ein cofnodion yn barhaus, felly rhowch gynnig arall arni nes ymlaen."
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:165
 msgid "Loading…"
-msgstr "Llwytho..."
+msgstr "Llwytho…"
 
 #: cla_public/templates/checker/result/confirmation.html:17
 msgid "We will call you back"
@@ -3349,8 +3400,9 @@ msgid ""
 msgstr "Os oes gennych ddyddiad gwrandawiad llys, mae’n bwysig eich  bod yn cael cyngor cyn gynted â phosib. Efallai y cewch gymorth ar fyr rybudd ar ddiwrnod y gwrandawiad gan gynghorydd yn adeilad y llys."
 
 #: cla_public/templates/checker/result/confirmation.html:64
+# old translation "Beth fydd yn digwydd nesaf?"
 msgid "What happens next?"
-msgstr "Beth fydd yn digwydd nesaf?"
+msgstr "Beth sy’n di?"
 
 #: cla_public/templates/checker/result/confirmation.html:69
 msgid ""
@@ -3569,8 +3621,9 @@ msgstr "Fel arfer, dim ond os yw’ch plentyn wedi cael anaf i’r ymennydd yn y
 
 #: cla_public/templates/checker/result/face-to-face.html:33
 #: cla_public/templates/checker/result/face-to-face.html:58
+#old translation: "Beth fydd yn digwydd nesaf"
 msgid "What happens next"
-msgstr "Beth fydd yn digwydd nesaf"
+msgstr "Beth sy’n di"
 
 #: cla_public/templates/checker/result/face-to-face.html:35
 msgid ""
@@ -3845,13 +3898,12 @@ msgid "0845 609 6677"
 msgstr ""
 
 #: cla_public/templates/errors/5xx.html:20
-msgid ""
-"Calls will cost approximately 9p per minute from landline. Calls from mobiles may cost more.\n"
-"    </p>\n"
-"    <p class=\"govuk-body\">\n"
-"      If you are worried about the cost, you can request a call-back within 24 hours by either calling the helpline\n"
-"      or texting 'legal aid' and your name to <strong class=\"govuk-!-font-weight-bold\">80010</strong>. "
-msgstr "Bydd galwadau yn costio oddeutu 9c y funud o linell dir. Bydd galwadau o ffonau symudol yn costio mwy fel arfer. </p><p class=\"govuk-body\">Os ydych yn pryderu am y gost, gallwch wneud cais i aelod o staff eich ffonio yn ôl o fewn 24 awr, un ai trwy ffonio’r llinell gymorth neu drwy anfon neges destun gyda’r geiriau ‘legal aid’ a’ch enw i <strong class=\"govuk-!-font-weight-bold\">80010</strong>."
+msgid "Calls will cost approximately 9p per minute from landline. Calls from mobiles may cost more."
+msgstr "Bydd galwadau yn costio oddeutu 9c y funud o linell dir. Bydd galwadau o ffonau symudol yn costio mwy fel arfer."
+
+#: cla_public/templates/errors/5xx.html:23
+msgid "If you are worried about the cost, you can request a call-back within 24 hours by either calling the helpline or texting ‘legal aid’ and your name to <strong class=\"govuk-!-font-weight-bold\">80010</strong>."
+msgstr "Os ydych yn pryderu am y gost, gallwch wneud cais i aelod o staff eich ffonio yn ôl o fewn 24 awr, un ai trwy ffonio’r llinell gymorth neu drwy anfon neges destun gyda’r geiriau ‘legal aid’ a’ch enw i <strong class=\"govuk-!-font-weight-bold\">80010</strong>."
 
 #: cla_public/templates/errors/5xx.html:27
 msgid "Opening times:"
@@ -4185,7 +4237,7 @@ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 #~ msgid "Before you contact Civil Legal Advice"
 #~ msgstr "Ceisiadau i weld a diwygio Data CLA"
 
-#~ msgid "So we can improve this service, we'd like to understand why you want to contact <abbr title=\"Civil Legal Advice\">CLA</abbr>."
+#~ msgid "So we can improve this service, we’d like to understand why you want to contact <abbr title=\"Civil Legal Advice\">CLA</abbr>."
 #~ msgstr "Mae gennych chi hawl i ofyn am fanylion y wybodaeth bersonol y mae CLA yn ei dal amdanoch chi."
 
 #~ msgid "We will leave a message when we call."
