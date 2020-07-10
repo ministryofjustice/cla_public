@@ -1548,7 +1548,7 @@ msgid "Read more about cookies on ‘Check if you can get legal aid’"
 msgstr "Darllenwch fwy am ddefnyddio cwcis ar ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/_cookie-consent-form.html:42
-msgid "Cookies used to improve ‘Check if you can get legal aid’"
+msgid "Cookies used to improve ‘Check you can get legal aid’"
 msgstr "Cwcis sy’n cael eu defnyddio i wella ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/_cookie-consent-form.html:45
