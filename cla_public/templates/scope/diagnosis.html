@@ -4,7 +4,7 @@
 {% if nodes|length %}
   {% set title = _(nodes[-1].heading) %}
 {% else %}
-  {% set title = _('Choose the area you most need help with') %}
+  {% set title = _('XXX') %}
 {% endif %}
 
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
