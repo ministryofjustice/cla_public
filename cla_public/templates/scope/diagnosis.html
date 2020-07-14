@@ -3,8 +3,10 @@
 
 {% if nodes|length %}
   {% set title = _(nodes[-1].heading) %}
-{% else %}
+{% elif not choices|length %}
   {% set title = _('XXX') %}
+{% else %}
+  {% set title = _('Choose the area you most need help with') %}
 {% endif %}
 
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
