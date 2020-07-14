@@ -1475,7 +1475,7 @@ msgid "Cookies are files saved on your phone, tablet or computer when you visit 
 msgstr "Ffeiliau sy’n cael eu cadw ar eich ffôn, tabled neu gyfrifiadur pan fyddwch yn ymweld â gwefan yw cwcis."
 
 #: cla_public/templates/_cookie-consent-form.html:12
-msgid "We use cookies to store information about how you use ‘Check you can get legal aid’, such as the pages you visit."
+msgid "We use cookies to store information about how you use ‘Check if you can get legal aid’, such as the pages you visit."
 msgstr "Rydym yn defnyddio cwcis i storio gwybodaeth ynglŷn â sut rydych yn defnyddio ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’, er enghraifft y tudalennau rydych yn ymweld â nhw."
 
 #: cla_public/templates/_cookie-popup.html:5
@@ -1524,7 +1524,7 @@ msgid "Strictly necessary cookies"
 msgstr "Cwcis hollol angenrheidiol"
 
 #: cla_public/templates/_cookie-consent-form.html:30
-msgid "We use essential cookies to help you use the ‘Check you can get legal aid’ service. These do things such as:"
+msgid "We use essential cookies to help you use the ‘Check if you can get legal aid’ service. These do things such as:"
 msgstr "Rydym yn defnyddio cwcis hanfodol i’ch helpu i ddefnyddio’r gwasanaeth ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’. Mae’r rhain yn gwneud pethau fel:"
 
 #: cla_public/templates/_cookie-consent-form.html:32
@@ -1548,11 +1548,11 @@ msgid "Read more about cookies on ‘Check if you can get legal aid’"
 msgstr "Darllenwch fwy am ddefnyddio cwcis ar ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/_cookie-consent-form.html:42
-msgid "Cookies used to improve ‘Check you can get legal aid’"
+msgid "Cookies used to improve ‘Check if you can get legal aid’"
 msgstr "Cwcis sy’n cael eu defnyddio i wella ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’"
 
 #: cla_public/templates/_cookie-consent-form.html:45
-msgid "We use Google Analytics to measure how you use ‘Check you can get legal aid’ so we can improve it based on user needs."
+msgid "We use Google Analytics to measure how you use ‘Check if you can get legal aid’ so we can improve it based on user needs."
 msgstr "Rydym yn defnyddio Google Analytics i fesur sut rydych yn defnyddio ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’ er mwyn i ni allu gwella’r gwasanaeth ar sail anghenion defnyddwyr."
 
 #: cla_public/templates/_cookie-consent-form.html:46
@@ -2771,7 +2771,7 @@ msgstr "<a class=\"govuk-link\" href=\"%(cookie_settings_url)s\">Gallwch newid e
 #, python-format
 msgid ""
 "You can read more about <a class=\"govuk-link\" href=\"%(cookie_url)s\">cookies used on \n"
-"    check you can get legal aid</a>."
+"    Check if you can get legal aid</a>."
 msgstr "<a class=\"govuk-link\" href=\"%(cookie_url)s\">Gallwch ddarllen mwy am y cwcis sy’n cael eu defnyddio ar ‘Gwirio os ydych yn gymwys i gael cymorth cyfreithiol’</a>"
 
 #: cla_public/templates/privacy.html:337
