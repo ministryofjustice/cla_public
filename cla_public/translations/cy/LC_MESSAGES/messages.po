@@ -3400,7 +3400,6 @@ msgid ""
 msgstr "Os oes gennych ddyddiad gwrandawiad llys, mae’n bwysig eich  bod yn cael cyngor cyn gynted â phosib. Efallai y cewch gymorth ar fyr rybudd ar ddiwrnod y gwrandawiad gan gynghorydd yn adeilad y llys."
 
 #: cla_public/templates/checker/result/confirmation.html:64
-# old translation "Beth fydd yn digwydd nesaf?"
 msgid "What happens next?"
 msgstr "Beth sy’n di?"
 
@@ -3621,7 +3620,6 @@ msgstr "Fel arfer, dim ond os yw’ch plentyn wedi cael anaf i’r ymennydd yn y
 
 #: cla_public/templates/checker/result/face-to-face.html:33
 #: cla_public/templates/checker/result/face-to-face.html:58
-#old translation: "Beth fydd yn digwydd nesaf"
 msgid "What happens next"
 msgstr "Beth sy’n di"
 
