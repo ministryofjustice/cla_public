@@ -189,7 +189,7 @@ hr {
   display:inline;
 
   .govuk-input{
-    padding-left:1.35em;
+    padding-left:2.1em;
     background: transparent;
     position: relative;
     z-index: 1;
@@ -197,10 +197,13 @@ hr {
 }
 .laa-currency-prefix {
   position: absolute;
-  bottom: 0;
-  left: 10px;
-  font-weight: bold;
+  height: 40px;
+  background-color: #f3f2f1;
+  border-right: 2px solid;
+  padding: 10px 11px 0 13px;
+  box-sizing: border-box;
 }
+
 .laa-telephone {
   white-space: nowrap;
 }
