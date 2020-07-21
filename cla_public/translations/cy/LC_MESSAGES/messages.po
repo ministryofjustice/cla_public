@@ -108,8 +108,16 @@ msgstr "Cliciwch i guddio’r dudalen hon"
 msgid "Hide this page"
 msgstr "Gadael yn gyflym"
 
+#: cla_public/templates/macros/base.html:66
+msgid "Quick exit"
+msgstr "Gadael yn gyflym"
+
 #: cla_public/templates/macros/base.html:67
 msgid "Or press escape key to hide this page"
+msgstr "Neu pwyswch y fysell Esc"
+
+#: cla_public/templates/macros/base.html:67
+msgid "Or press Esc key"
 msgstr "Neu pwyswch y fysell Esc"
 
 #: cla_public/templates/macros/base.html:36
