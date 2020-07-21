@@ -28,25 +28,25 @@
       <strong class="govuk-warning-text__text">
         <span class="govuk-warning-text__assistive">Warning </span>
         {% if postcode_info.is_scottish_postcode %}
-          Legal Aid is different in Scotland. Visit
-          <a class="govuk-link" href="https://www.mygov.scot/legal-aid/">mygov.scot</a>
-          for more information.
+          {% trans
+            link=Element.link_same_window('https://www.mygov.scot/legal-aid/', _('mygov.scot'), True)
+          %}Legal Aid is different in Scotland. Visit {{ link }} for more information.{% endtrans %}
         {% elif postcode_info.is_ni_postcode %}
-          Legal Aid is different in Northern Ireland. Visit
-          <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/legal-aid-schemes">nidirect.gov.uk</a>
-          for more information.
+          {% trans
+            link=Element.link_same_window('https://www.nidirect.gov.uk/articles/legal-aid-schemes', _('nidirect.gov.uk'), True)
+          %}Legal Aid is different in Northern Ireland. Visit {{ link }} for more information.{% endtrans %}
         {% elif postcode_info.is_mann_postcode %}
-          Legal Aid is different on the Isle of Man. Visit
-          <a class="govuk-link" href="https://www.gov.im/categories/benefits-and-financial-support/legal-aid/">gov.im</a>
-          for more information.
+          {% trans
+            link=Element.link_same_window('https://www.gov.im/categories/benefits-and-financial-support/legal-aid/', _('gov.im'), True)
+          %}Legal Aid is different on the Isle of Man. Visit {{ link }} for more information.{% endtrans %}
         {% elif postcode_info.is_jersey_postcode  %}
-          Legal Aid is different in Jersey. Visit
-          <a class="govuk-link" href="https://www.legalaid.je/">legalaid.je</a>
-          for more information.
+          {% trans
+            link=Element.link_same_window('https://www.legalaid.je/', _('legalaid.je'), True)
+          %}Legal Aid is different in Jersey. Visit {{ link }} for more information.{% endtrans %}
         {% elif postcode_info.is_guernsey_postcode %}
-          Legal Aid is different in Guernsey. Visit
-          <a class="govuk-link" href="https://www.gov.gg/legalaid">gov.gg</a>
-          for information about the process in Guernsey.
+          {% trans
+            link=Element.link_same_window('https://www.gov.gg/legalaid', _('gov.gg'), True)
+          %}Legal Aid is different in Guernsey. Visit {{ link }} for more information.{% endtrans %}
         {% endif %}
       </strong>
     </div>
@@ -154,7 +154,7 @@
   {% elif 'count' in data and data.count == 0 %}
     {% call Element.alert('error', title=_('No results')) %}
       <p class="govuk-body">
-        {% trans %}We couldn't find any results for your search.
+        {% trans %}We couldn’t find any results for your search.
         We are constantly updating our records so please try again later.{% endtrans %}
       </p>
     {% endcall %}
