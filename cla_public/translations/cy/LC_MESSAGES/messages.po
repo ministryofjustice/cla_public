@@ -3998,8 +3998,12 @@ msgid "If your nominated person misses the call you’ll need to complete this f
 msgstr "Os yw’r unigolyn a enwebwyd yn methu’r alwad, bydd arnoch angen llenwi’r ffurflen hon eto."
 
 #: cla_public/templates/scope/diagnosis.html:7
-#: cla_public/templates/scope/diagnosis.html:18
 msgid "Choose the area you most need help with"
+msgstr "Dewiswch y maes y mae arnoch angen mwyaf o gymorth gydag ef"
+
+#: cla_public/templates/scope/diagnosis.html:7
+# temporary - same translation as the "choose the" sentence above
+msgid "Select which area you most need help with"
 msgstr "Dewiswch y maes y mae arnoch angen mwyaf o gymorth gydag ef"
 
 #: cla_public/templates/scope/diagnosis.html:15
