@@ -287,12 +287,19 @@ dl.govuk-list.govuk-list--bullet {
 }
 
 @media only screen {
+  .js-enabled .laa-flee-button-container.govuk-visually-hidden {
+    display:block;
+  }
+
   .js-enabled .laa-flee-button-container.laa-flee-button-enabled {
     display:block;
     float: right;
+    position: -webkit-sticky;
+    position: sticky;
+    top:0;
+    z-index:1000;
 
     .laa-flee-button-position {
-      position: fixed;
       z-index:1000;
       background-color:govuk-colour("white");
 
@@ -312,15 +319,36 @@ dl.govuk-list.govuk-list--bullet {
   }
 }
 
-@media only screen and (max-width: 640px) {
-  footer.govuk-footer {
-    padding-bottom: 95px;
+.laa-flee-button-position {
+  position:fixed;
+}
+@media only screen and (min-width: 641px) {
+  @supports (position:sticky) {
+    .laa-flee-button-position {
+      position:sticky;
+      top:0;
+    }
   }
+}
+
+@media only screen and (max-width: 640px) {
+  .js-enabled .laa-flee-button-container.govuk-visually-hidden {
+    display:block;
+
+    ~.gem-c-cookie-banner__confirmation,.gem-c-cookie-banner {
+      padding-top:40px;
+    }
+
+    ~ #skiplink-container {
+      padding-top:40px;
+    }
+  }
+
   .js-enabled .laa-flee-button-container.laa-flee-button-enabled {
     float: none;
 
     .laa-flee-button-position {
-      bottom: 0;
+      top: 0;
       width: 100vw;
       left: 0;
       background: govuk-colour("light-grey");
