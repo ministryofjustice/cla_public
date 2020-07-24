@@ -189,7 +189,7 @@ hr {
   display:inline;
 
   .govuk-input{
-    padding-left:1.35em;
+    padding-left:2.1em;
     background: transparent;
     position: relative;
     z-index: 1;
@@ -197,10 +197,21 @@ hr {
 }
 .laa-currency-prefix {
   position: absolute;
-  bottom: 0;
-  left: 10px;
-  font-weight: bold;
+  height: 40px;
+  background-color: govuk-colour("light-grey");
+  border-right: 2px solid;
+  padding: 10px 11px 0 13px;
+  box-sizing: border-box;
 }
+@media only screen and (max-width: 640px) {
+  .laa-currency .govuk-input{
+    padding-left:2.3em;
+  }
+  .laa-currency-prefix {
+    padding: 12px 11px 0 13px;
+  }
+}
+
 .laa-telephone {
   white-space: nowrap;
 }
