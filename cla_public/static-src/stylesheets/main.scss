@@ -309,7 +309,11 @@ dl.govuk-list.govuk-list--bullet {
       }
 
       .laa-quick-exit-info {
-        text-align:center;
+        text-align: center;
+        padding: 10px 0;
+        border: 1px $govuk-border-colour solid;
+        border-top-style: none;
+        margin: 0;
       }
     }
 
