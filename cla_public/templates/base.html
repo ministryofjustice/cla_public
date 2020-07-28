@@ -59,7 +59,7 @@
     {% endif %}
     ">
     <div class="laa-flee-button-position">
-      <a href="https://www.google.com" id="quick-exit" class="govuk-button govuk-button--warning govuk-!-margin-bottom-0 laa-flee-button">
+      <a href="https://www.google.com" id="quick-exit" class="govuk-button govuk-button--warning laa-flee-button">
         <strong>{{ _('Hide this page') }}</strong>
         <span class="govuk-visually-hidden">{{ _('Or press escape key to hide this page') }}</span>
       </a>
@@ -67,6 +67,9 @@
         ({{ _('Or press Esc key') }})
       </p>
     </div>
+    <p class="govuk-button laa-flee-button-sizing">
+      <strong>{{ _('Hide this page') }}</strong>
+    </p>
   </div>
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     <div class="govuk-grid-row">

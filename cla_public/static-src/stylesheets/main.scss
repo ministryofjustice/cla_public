@@ -291,7 +291,7 @@ dl.govuk-list.govuk-list--bullet {
     display:block;
   }
 
-  .js-enabled .laa-flee-button-container.laa-flee-button-enabled {
+  .laa-flee-button-container.laa-flee-button-enabled {
     display:block;
     float: right;
     position: -webkit-sticky;
@@ -305,6 +305,7 @@ dl.govuk-list.govuk-list--bullet {
 
       .laa-flee-button {
         width:100%;
+        margin-bottom:0;
       }
 
       .laa-quick-exit-info {
@@ -312,8 +313,7 @@ dl.govuk-list.govuk-list--bullet {
       }
     }
 
-    .laa-flee-button-sizing,
-    .exit-info-sizing {
+    .laa-flee-button-sizing{
       visibility:hidden;
     }
   }
@@ -332,6 +332,11 @@ dl.govuk-list.govuk-list--bullet {
 }
 
 @media only screen and (max-width: 640px) {
+
+  .laa-flee-button-sizing{
+    display:none;
+  }
+
   .js-enabled .laa-flee-button-container.govuk-visually-hidden {
     display:block;
 
@@ -344,7 +349,7 @@ dl.govuk-list.govuk-list--bullet {
     }
   }
 
-  .js-enabled .laa-flee-button-container.laa-flee-button-enabled {
+  .laa-flee-button-container.laa-flee-button-enabled {
     float: none;
 
     .laa-flee-button-position {
@@ -354,25 +359,14 @@ dl.govuk-list.govuk-list--bullet {
       background: govuk-colour("light-grey");
     }
 
-    .laa-flee-button-sizing,
-    .exit-info-sizing {
+    .laa-flee-button-sizing{
       display:none;
     }
     
-    .laa-explanation-long,
-    .laa-quick-exit-info,
-    .exit-info-sizing {
+    .laa-quick-exit-info{
       display:none;
     }
-
-    .laa-explanation-short {
-      display:inline;
-    }
   }
-}
-
-.laa-explanation-short {
-  display:none;
 }
 
 .laa-flee-button-container {
