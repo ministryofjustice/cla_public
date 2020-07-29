@@ -287,64 +287,90 @@ dl.govuk-list.govuk-list--bullet {
 }
 
 @media only screen {
-  .js-enabled .laa-flee-button-container.laa-flee-button-enabled {
+  .js-enabled .laa-flee-button-container.govuk-visually-hidden {
+    display:block;
+  }
+
+  .laa-flee-button-container.laa-flee-button-enabled {
     display:block;
     float: right;
+    position: -webkit-sticky;
+    position: sticky;
+    top:0;
+    z-index:1000;
 
     .laa-flee-button-position {
-      position: fixed;
       z-index:1000;
       background-color:govuk-colour("white");
 
       .laa-flee-button {
         width:100%;
+        margin-bottom:0;
       }
 
       .laa-quick-exit-info {
-        text-align:center;
+        text-align: center;
+        padding: 10px 0;
+        border: 1px $govuk-border-colour solid;
+        border-top-style: none;
+        margin: 0;
       }
     }
 
-    .laa-flee-button-sizing,
-    .exit-info-sizing {
+    .laa-flee-button-sizing{
       visibility:hidden;
     }
   }
 }
 
-@media only screen and (max-width: 640px) {
-  footer.govuk-footer {
-    padding-bottom: 95px;
+.laa-flee-button-position {
+  position:fixed;
+}
+@media only screen and (min-width: 641px) {
+  @supports (position:sticky) {
+    .laa-flee-button-position {
+      position:sticky;
+      top:0;
+    }
   }
-  .js-enabled .laa-flee-button-container.laa-flee-button-enabled {
+}
+
+@media only screen and (max-width: 640px) {
+
+  .laa-flee-button-sizing{
+    display:none;
+  }
+
+  .js-enabled .laa-flee-button-container.govuk-visually-hidden {
+    display:block;
+
+    ~.gem-c-cookie-banner__confirmation,.gem-c-cookie-banner {
+      padding-top:40px;
+    }
+
+    ~ #skiplink-container {
+      padding-top:40px;
+    }
+  }
+
+  .laa-flee-button-container.laa-flee-button-enabled {
     float: none;
 
     .laa-flee-button-position {
-      bottom: 0;
+      top: 0;
       width: 100vw;
       left: 0;
       background: govuk-colour("light-grey");
     }
 
-    .laa-flee-button-sizing,
-    .exit-info-sizing {
+    .laa-flee-button-sizing{
       display:none;
     }
     
-    .laa-explanation-long,
-    .laa-quick-exit-info,
-    .exit-info-sizing {
+    .laa-quick-exit-info{
       display:none;
     }
-
-    .laa-explanation-short {
-      display:inline;
-    }
   }
-}
-
-.laa-explanation-short {
-  display:none;
 }
 
 .laa-flee-button-container {

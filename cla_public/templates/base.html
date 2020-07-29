@@ -59,22 +59,17 @@
     {% endif %}
     ">
     <div class="laa-flee-button-position">
-      <button id="quick-exit" class="govuk-button govuk-button--warning govuk-!-margin-bottom-2 laa-flee-button">
+      <a href="https://www.google.com" id="quick-exit" class="govuk-button govuk-button--warning laa-flee-button">
         <strong>{{ _('Hide this page') }}</strong>
         <span class="govuk-visually-hidden">{{ _('Or press escape key to hide this page') }}</span>
-      </button>
-      <p class="laa-quick-exit-info govuk-body-s govuk-!-font-size-14">
+      </a>
+      <p class="laa-quick-exit-info govuk-!-font-size-14">
         ({{ _('Or press Esc key') }})
       </p>
     </div>
-    <button class="govuk-button govuk-button--warning govuk-!-margin-bottom-2 laa-flee-button-sizing" style="visibility: hidden;">
+    <p class="govuk-button laa-flee-button-sizing">
       <strong>{{ _('Hide this page') }}</strong>
-    </button>
-    <p class="govuk-body-s govuk-!-font-size-14 exit-info-sizing" style="visibility: hidden;">
-      {{ _('Or press Esc key') }}
     </p>
-    <!-- identical with above to space out.-->
-
   </div>
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     <div class="govuk-grid-row">
@@ -134,8 +129,10 @@
       window.open("http://bbc.co.uk/weather", "_newtab");
       window.location.replace("http://www.google.co.uk");
     }
-    $("#quick-exit").on("click", function() {
+    $("#quick-exit").on("click", function(e) {
       fleeFromPage("mouse click");
+      e.preventDefault();
+      e.stopPropagation();
     });
     $(document).keyup(function(e) {
       if ($('.laa-flee-button-enabled').length && e.keyCode == 27) { // 27 = escape key
