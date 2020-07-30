@@ -102,6 +102,14 @@
 {% block javascripts %}
   <script>
 
+    {% if nodes|length %}
+    {% elif not choices|length %}
+        $( document ).ready(function(){
+          console.log("no options");
+          ga('moj.send', 'event', 'No-options', 'No options instance, 'No options instance: '+window.location.href);
+        })
+    {% endif %}
+
     function focusError(fieldID){
       document.getElementById("field-"+fieldID).scrollIntoView();
       if($("#"+fieldID+"-0").length) { // the error is a radio or tickbox - select the first option
