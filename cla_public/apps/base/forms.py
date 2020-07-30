@@ -57,7 +57,7 @@ class FeedbackForm(Honeypot, BabelTranslationsFormMixin, Form):
 
         environment = current_app.config["CLA_ENV"]
         subject = "CLA Public Feedback"
-        if environment != "prod":
+        if environment != "production":
             subject = "[TEST] - " + subject
 
         ticket = {

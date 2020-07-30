@@ -21,7 +21,7 @@ for key in settings_required:
 
 DEBUG = os.environ.get("SET_DEBUG", False) == "True"
 
-SESSION_COOKIE_SECURE = os.environ.get("CLA_ENV", "") in ["prod", "staging"]
+SESSION_COOKIE_SECURE = os.environ.get("CLA_ENV", "") in ["production", "staging"]
 
 HOST_NAME = os.environ.get("HOST_NAME") or os.environ.get("HOSTNAME")
 
