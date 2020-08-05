@@ -102,8 +102,8 @@
 {% block javascripts %}
   <script>
 
-    {% if title == 'Select which area you most need help with' %}
-      // this title is found in diagnosis.html and only fires if the no-option error has occurred.
+    {% if zeroOptions is true%}
+      // this is set in diagnosis.html
       $( document ).ready(function(){
         ga('moj.send', 'event', 'Zero-options', 'Zero options instance', 'No options instance: '+stripPII(window.location.href));
       })
