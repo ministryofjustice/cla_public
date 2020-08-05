@@ -5,6 +5,7 @@
   {% set title = _(nodes[-1].heading) %}
 {% elif not choices|length %}
   {% set title = _('Select which area you most need help with') %}
+  {% set zeroOptions = true %}
 {% else %}
   {% set title = _('Choose the area you most need help with') %}
 {% endif %}
