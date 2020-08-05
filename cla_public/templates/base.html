@@ -102,7 +102,7 @@
 {% block javascripts %}
   <script>
 
-    {% if zeroOptions is true%}
+    {% if zeroOptions %}
       // this is set in diagnosis.html
       $( document ).ready(function(){
         ga('moj.send', 'event', 'Zero-options', 'Zero options instance', 'No options instance: '+stripPII(window.location.href));
