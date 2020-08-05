@@ -103,16 +103,10 @@
   <script>
 
     {% if title == 'Select which area you most need help with' %}
-        console.log("No options 1");
-    //    $( document ).ready(function(){
-    //      ga('moj.send', 'event', 'No-options', 'No options instance', 'No options instance: '+stripPII(window.location.href));
-    //    })
-    {% endif %}
-    {% if title == 'Choose the area you most need help with' %}
-        console.log("No options 2");
-    {% endif %}
-    {% if title == 'Choose the option that best describes your debt problem' %}
-        console.log("No options 3");
+      // this title is found in diagnosis.html and only fires if the no-option error has occurred.
+      $( document ).ready(function(){
+        ga('moj.send', 'event', 'Zero-options', 'Zero options instance', 'No options instance: '+stripPII(window.location.href));
+      })
     {% endif %}
 
     function focusError(fieldID){
