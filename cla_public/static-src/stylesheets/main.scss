@@ -203,6 +203,16 @@ hr {
   padding: 10px 11px 0 13px;
   box-sizing: border-box;
 }
+@supports (-moz-appearance:none) {
+  /*for fixing firefox only bug where currency prefix was off.*/
+  .laa-currency-prefix {
+    top:-9px;
+  }
+  .govuk-input {
+    outline: govuk-colour("white") solid;
+  }
+}
+
 @media only screen and (max-width: 640px) {
   .laa-currency .govuk-input{
     padding-left:2.3em;
