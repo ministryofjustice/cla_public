@@ -88,8 +88,6 @@ class MoneyIntervalAmountRequired(object):
     is_partner = None
 
     def __init__(self, message=None, freq_message=None, amount_message=None, **kwargs):
-        self.args = [message, freq_message, amount_message]
-        self.kwargs = kwargs
         self.messages = {"message": message, "freq_message": freq_message, "amount_message": amount_message}
         self.partner_messages = {
             "message": kwargs.get("partner_message", message),
