@@ -206,10 +206,10 @@ hr {
 @supports (-moz-appearance:none) {
   /*for fixing firefox only bug where currency prefix was off.*/
   .laa-currency-prefix {
-    top:-10px;
+    top:-9px;
   }
   .govuk-input {
-    outline: govuk-colour("white");
+    outline: govuk-colour("white") solid;
   }
 }
 
