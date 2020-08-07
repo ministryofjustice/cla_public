@@ -486,13 +486,13 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much other income you receive"
                 ),  # this is followed by the time period, e.g. "... each week"
-                partner_message=_(
-                    u"Enter the total amount of other income your partner receives, or 0 if this doesn’t apply to them"
-                ),
-                partner_freq_message=_(u"Tell us how often your partner receives this other income"),
-                partner_amount_message=_(
-                    u"Tell us how much other income your partner receives"
-                ),  # this is followed by the time period, e.g. "... each week"
+                # partner_message=_(
+                # u"Enter the total amount of other income your partner receives, or 0 if this doesn’t apply to them"
+                # ),
+                # partner_freq_message=_(u"Tell us how often your partner receives this other income"),
+                # partner_amount_message=_(
+                # u"Tell us how much other income your partner receives"
+                # ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
