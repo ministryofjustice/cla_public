@@ -1,11 +1,15 @@
 {% extends "errors/5xx.html" %}
 
 
-{% set title = _('Maintenance') %}
-{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+{% set title = _('This service is currently down for maintenance') %}
+{% block page_title %}{{ title }} {% endblock %}
 
-  {% block heading %}
-  <h1 class="govuk-heading-xl">{{ _('Sorry, we are currently down for maintenance') }}</h1>
-  {% endblock %}
+{% block before_content %} {% endblock %}
 
+{% block heading %}
+<h1 class="govuk-heading-xl">{{ _('This service is currently down for maintenance') }}</h1>
+{% endblock %}
 
+{% block description %}
+<p class="govuk-body">{{ _('If you were part way through the service, you will have to start again when the service becomes available') }}</p>
+{% endblock %}
