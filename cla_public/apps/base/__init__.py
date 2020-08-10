@@ -1,7 +1,7 @@
 "Base app"
 import urllib
 import datetime
-from flask import Blueprint, after_this_request, request, redirect
+from flask import Blueprint, after_this_request, request, redirect, current_app
 
 base = Blueprint("base", __name__)
 
@@ -22,3 +22,9 @@ def detect_user_locale():
             response = redirect(path)
             response.set_cookie("locale", locale, expires=expires)
             return response
+
+
+@base.before_app_request
+def detect_maintenance():
+    if current_app.config.get("MAINTENANCE_MODE", False) and request.path != u"/maintenance":
+        return redirect("/maintenance")

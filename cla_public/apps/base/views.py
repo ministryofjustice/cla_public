@@ -259,3 +259,8 @@ def healthcheck():
     result = jsonify(response)
     result.status_code = 200 if ok else 503
     return result
+
+
+@base.route("/maintenance")
+def maintenance_page():
+    return render_template("maintenance.html")

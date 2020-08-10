@@ -107,6 +107,7 @@ MAIL_PASSWORD = os.environ.get("SMTP_PASSWORD")
 MAIL_DEFAULT_SENDER = ("Civil Legal Advice", "no-reply@civillegaladvice.service.gov.uk")
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
+MAINTENANCE_MODE = os.environ.get("MAINTENANCE_MODE", "False").upper() == "TRUE"
 
 
 def current_app_cache_factory(*args, **kwargs):

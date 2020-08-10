@@ -5,7 +5,9 @@
 {% block page_title %}{{ _('Sorry, there is a problem with the service')}} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
+  {% block heading %}
   <h1 class="govuk-heading-xl">{{ _('Sorry, there is a problem with the service') }}</h1>
+  {% endblock %}
   <p class="govuk-body">{{ _('Try again later.') }}</p>
   <p class="govuk-body">{{ _('We have not saved any information you have entered. When the service is available, you will have to start again.') }}</p>
   <p class="govuk-body">{{ _('Contact the Civil Legal Advice Helpline if you need urgent information or advice.') }}</p>
