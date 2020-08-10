@@ -616,10 +616,6 @@ msgstr "Oes gennych chi gynilion neu fuddsoddiadau"
 msgid "Tell us if you have any valuable items worth over £500 each"
 msgstr "Oes gennych chi eitemau gwerthfawr sydd werth dros £500 yr un"
 
-#: cla_public/apps/checker/forms.py:387
-msgid "Enter the total of all valuable items over £500"
-msgstr "Rhowch gyfanswm yr holl eitemau gwerthfawr dros £500"
-
 #: cla_public/apps/checker/forms.py:194
 msgid "Select which benefits you receive"
 msgstr "Dewiswch pa fudd-daliadau rydych chi’n eu derbyn"
@@ -635,6 +631,18 @@ msgstr "Faint rydych chi’n ei dderbyn mewn budd-daliadau eraill"
 #: cla_public/apps/checker/forms.py:262
 msgid "Tell us how often you receive these other benefits"
 msgstr "Pa mor aml rydych chi’n derbyn y budd-daliadau eraill hyn"
+
+#: cla_public/apps/checker/forms.py:373
+msgid "Enter your total savings, or 0 if you have none"
+msgstr "Rhowch gyfanswm eich cynilion, neu 0 os nad oes gennych rai"
+
+#: cla_public/apps/checker/forms.py:379
+msgid "Enter your total investments, or 0 if you have none"
+msgstr "Rhowch gyfanswm eich buddsoddiadau, neu 0 os nad oes gennych rai"
+
+#: cla_public/apps/checker/forms.py:387
+msgid "Enter the total of all valuable items over £500"
+msgstr "Rhowch gyfanswm yr holl eitemau gwerthfawr dros £500"
 
 #: cla_public/apps/checker/forms.py:509
 msgid "Enter the total amount of maintenance you receive, or 0 if this doesn’t apply to you"
@@ -1120,10 +1128,170 @@ msgid "For example, student grants, income from trust funds, dividends"
 msgstr "Er enghraifft, grantiau myfyriwr, incwm o gronfeydd ymddiriedolaeth, difidendau"
 
 #: cla_public/apps/checker/forms.py:434
+msgid "Tell us how much you receive in wages"
+msgstr "Dywedwch wrthym faint o gyflog rydych chi’n ei dderbyn"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often you receive wages"
+msgstr "Dywedwch wrthym pa mor aml rydych chi’n derbyn cyflog"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how much income tax you pay"
+msgstr "Dywedwch wrthym faint o dreth incwm rydych chi’n ei thalu"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often you pay income tax"
+msgstr "Dywedwch wrthym pa mor aml rydych chi’n talu treth incwm"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how much National Insurance you pay"
+msgstr "Dywedwch wrthym faint o Yswiriant Gwladol rydych chi’n ei dalu"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often you pay National Insurance"
+msgstr "Dywedwch wrthym pa mor aml rydych chi’n talu Yswiriant Gwladol"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter the Working Tax Credit you receive, or 0 if it doesn’t apply to you"
+msgstr "Rhowch y Credyd Treth Gwaith rydych chi’n ei dderbyn, neu 0 os nad yw’n berthnasol i chi"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often you receive Working Tax Credit"
+msgstr "Dywedwch wrthym pa mor aml rydych chi’n derbyn Credyd Treth Gwaith"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter the Child Tax Credit you receive, or 0 if it doesn’t apply to you"
+msgstr "Rhowch y Credyd Treth Plant rydych chi’n ei dderbyn, neu 0 os nad yw’n berthnasol i chi"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often you receive Child Tax Credit"
+msgstr "Dywedwch wrthym pa mor aml rydych chi’n derbyn Credyd Treth Plant"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how much your partner receives in wages"
+msgstr "Dywedwch wrthym faint mae eich partner yn ei dderbyn mewn cyflogau"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often your partner receives wages"
+msgstr "Dywedwch wrthym pa mor aml mae eich partner yn derbyn cyflog"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how much income tax your partner pays"
+msgstr "Dywedwch wrthym faint o dreth incwm mae eich partner yn ei thalu"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often your partner pays income tax"
+msgstr "Dywedwch wrthym pa mor aml mae eich partner yn talu treth incwm"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how much National Insurance your partner pays"
+msgstr "DywDywedwch wrthym faint o Yswiriant Gwladol mae eich partner yn ei dalu"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often your partner pays National Insurance"
+msgstr "Dywedwch wrthym pa mor aml mae eich partner yn talu Yswiriant Gwladol"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter the Working Tax Credit your partner receives, or 0 if it doesn’t apply"
+msgstr "Rhowch y Credyd Treth Gwaith mae eich partner yn ei dderbyn, neu 0 os nad yw’n berthnasol"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often your partner receives Working Tax Credit"
+msgstr "Dywedwch wrthym pa mor aml mae eich partner yn derbyn Credyd Treth Gwaith"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter the total amount of maintenance your partner receives, or 0 if this doesn’t apply"
+msgstr "Rhowch gyfanswm y taliadau cynnal mae eich partner yn eu derbyn, neu 0 os nad yw hyn yn berthnasol"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how much maintenance your partner receives"
+msgstr "Dywedwch wrthym faint o daliadau cynnal mae eich partner yn eu derbyn"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter the pension your partner receives, or 0 if this doesn’t apply"
+msgstr "Rhowch y pensiwn mae eich partner yn ei dderbyn, neu 0 os nad yw hyn yn berthnasol"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often your partner receives their pension"
+msgstr "Dywedwch wrthym pa mor aml mae eich partner yn derbyn ei bensiwn"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter the other income your partner receives, or 0 if this doesn’t apply"
+msgstr "Rhowch yr incwm arall mae eich partner yn ei dderbyn, neu 0 os nad yw hyn yn berthnasol"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often your partner receives this other income"
+msgstr "Dywedwch wrthym pa mor aml mae eich partner yn derbyn yr incwm arall hwn"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how much you pay towards childcare"
+msgstr "Dywedwch wrthym faint rydych chi’n ei dalu tuag at ofal plant"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often you pay childcare costs"
+msgstr "Dywedwch wrthym pa mor aml rydych chi’n talu costau gofal plant"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter the Child Benefit you receive"
+msgstr "Nodwch y Budd-dal Plant rydych chi’n ei dderbyn"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how often you receive Child Benefit"
+msgstr "Dywedwch wrthym pa mor aml rydych chi’n derbyn Budd-dal Plant"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter a number"
+msgstr "Rhowch rif"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter an amount less than £100,000,000"
+msgstr "Rhowch swm llai na £100,000,000"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter an amount more than £0"
+msgstr "Rhowch swm mwy na £0"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us what number to ring"
+msgstr "Dywedwch wrthym pa rif i’w ffonio"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us the name of the person to call"
+msgstr "Dywedwch wrthym beth yw enw’r unigolyn y dylem ei ffonio"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Their full name must be 400 characters or less"
+msgstr "Rhaid i’w enw llawn fod yn 400 nod neu lai"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how you know this person"
+msgstr "Dywedwch wrthym sut rydych chi’n adnabod yr unigolyn hwn"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us what number to ring"
+msgstr "Dywedwch wrthym pa rif i’w ffonio"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us your name"
+msgstr "Dywedwch wrthym beth yw eich enw"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us how we should get in contact"
+msgstr "Dywedwch wrthym sut dylem gysylltu"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Enter a valid email address"
+msgstr "Rhowch gyfeiriad e-bost dilys"
+
+#: cla_public/apps/checker/forms.py:434
+msgid "Tell us what email address to send to"
+msgstr "Dywedwch wrthym pa gyfeiriad e-bost y dylem ei ddefnyddio i anfon"
+
+#: cla_public/apps/checker/forms.py:568
 msgid "You and your partner’s income and tax"
 msgstr "Eich incwm a’ch treth chi a’ch partner"
 
-#: cla_public/apps/checker/forms.py:435
+#: cla_public/apps/checker/forms.py:569
 msgid "You and your partner’s money coming in"
 msgstr "Arian sy’n dod i mewn gennych chi a’ch partner"
 
@@ -3909,7 +4077,7 @@ msgstr "Nid ydym wedi cadw unrhyw wybodaeth rydych wedi’i rhoi. Pan fydd y gwa
 
 #: cla_public/templates/errors/5xx.html:11
 msgid "Contact the Civil Legal Advice Helpline if you need urgent information or advice."
-msgstr "Cysylltwch â'r Llinell Gymorth Cyngor Cyfreithiol Sifil os oes angen gwybodaeth neu gyngor brys arnoch chi."
+msgstr "Cysylltwch â’r Llinell Gymorth Cyngor Cyfreithiol Sifil os oes angen gwybodaeth neu gyngor brys arnoch chi."
 
 #: cla_public/templates/errors/5xx.html:13
 msgid "0345 345 4345"

@@ -436,6 +436,11 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much you receive in wages"
                 ),  # this is followed by the time period, e.g. "... each week"
+                partner_message=_(u"Tell us how much your partner receive in wages"),
+                partner_freq_message=_(u"Tell us how often your partner receive wages"),
+                partner_amount_message=_(
+                    u"Tell us how much your partner receive in wages"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
