@@ -1,6 +1,7 @@
 # coding: utf-8
 "Checker forms"
 
+import copy
 import logging
 
 from flask import session, request
@@ -406,6 +407,12 @@ class IncomeFieldForm(BaseNoCsrfForm):
         for field in self_employed_fields:
             field.set_self_employed_details(self.is_partner)
 
+        money_interval_fields = [field for field in self if isinstance(field, MoneyIntervalField)]
+        for field in money_interval_fields:
+            field.validators = [copy.copy(validator) for validator in field.validators]
+            for validator in field.validators:
+                validator.is_partner = self.is_partner
+
     earnings = SelfEmployedMoneyIntervalField(
         label=_(u"Wages before tax"),
         self_employed_descriptions={
@@ -479,6 +486,13 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much other income you receive"
                 ),  # this is followed by the time period, e.g. "... each week"
+                # partner_message=_(
+                # u"Enter the total amount of other income your partner receives, or 0 if this doesn’t apply to them"
+                # ),
+                # partner_freq_message=_(u"Tell us how often your partner receives this other income"),
+                # partner_amount_message=_(
+                # u"Tell us how much other income your partner receives"
+                # ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )

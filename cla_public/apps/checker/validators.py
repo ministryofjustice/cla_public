@@ -85,27 +85,33 @@ class MoneyIntervalAmountRequired(object):
         "per_month": u"each month",
         "per_year": u"each year",
     }
+    is_partner = None
 
-    def __init__(self, message=None, freq_message=None, amount_message=None):
-        self.message = message
-        self.freq_message = freq_message
-        self.amount_message = amount_message
+    def __init__(self, message=None, freq_message=None, amount_message=None, **kwargs):
+        self.messages = {"message": message, "freq_message": freq_message, "amount_message": amount_message}
+        self.partner_messages = {
+            "message": kwargs.get("partner_message", message),
+            "freq_message": kwargs.get("partner_freq_message", freq_message),
+            "amount_message": kwargs.get("partner_amount_message", amount_message),
+        }
 
     def __call__(self, form, field):
+        messages = self.partner_messages if self.is_partner else self.messages
+
         amount = field.form.per_interval_value
         interval = field.form.interval_period
         amount_field_is_blank = not amount.errors and amount.data is None
-        specific_period_error_message = interval.data != "" and self.amount_message
+        specific_period_error_message = interval.data != "" and messages["amount_message"]
 
         if amount_field_is_blank:
             if specific_period_error_message:
-                message = self.amount_message + " " + field.gettext(self.interval_texts[interval.data])
+                message = messages["amount_message"] + " " + field.gettext(self.interval_texts[interval.data])
             else:
-                message = self.message or field.gettext(u"Type in a number")
+                message = messages["message"] or field.gettext(u"Type in a number")
             raise StopValidation(message)
 
-        if interval.data == "" and amount.data > 0 and self.freq_message:
-            raise StopValidation(self.freq_message)
+        if interval.data == "" and amount.data > 0 and messages["freq_message"]:
+            raise StopValidation(messages["freq_message"])
 
 
 class ValidMoneyInterval(object):
