@@ -44,7 +44,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
         description=_(u"Please tell us what you need in the box below"),
         validators=[
             IgnoreIf("is_other_adaptation", FieldValue(False)),
-            Length(max=4000, message=_(u"Your other communication needs must be 4000 characters " u"or less")),
+            Length(max=4000, message=_(u"Your other communication needs must be 4000 characters or less")),
             Optional(),
         ],
     )
@@ -63,7 +63,7 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     contact_number = StringField(
         _(u"Phone number for the callback"),
         description=_(
-            u"Please enter full phone number including area code, " u"using only numbers. For example 020 7946 0492"
+            u"Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
         ),
         validators=[
             InputRequired(message=_(u"Tell us what number to ring")),

@@ -3631,13 +3631,13 @@ msgstr "Beth sy’n di?"
 #: cla_public/templates/checker/result/confirmation.html:69
 msgid ""
 "Your details have been submitted and an operator will call\n"
-"        the person you nominated at least once during your chosen time, or as close to the time as possible."
+"        the person you nominated at least once during your chosen time, or as close to the time as possible"
 msgstr "Mae eich manylion wedi cael eu cyflwyno a bydd gweithredwr yn eich ffonio o leiaf unwaith ar yr adeg o’ch dewis, neu mor agos at yr adeg honno ag sy’n bosibl"
 
 #: cla_public/templates/checker/result/confirmation.html:72
 msgid ""
 "Your details have been submitted and an operator will call\n"
-"        you at least once during your chosen time, or as close to the time as possible."
+"        you at least once during your chosen time, or as close to the time as possible"
 msgstr "Mae eich manylion wedi cael eu cyflwyno a bydd gweithredwr yn eich ffonio o leiaf unwaith ar yr adeg o’ch dewis, neu mor agos at yr adeg honno ag sy’n bosibl"
 
 #: cla_public/templates/checker/result/confirmation.html:76

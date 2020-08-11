@@ -67,10 +67,10 @@
     <p class="govuk-body">
       {% if is_thirdparty %}
         {% trans %}Your details have been submitted and an operator will call
-        the person you nominated at least once during your chosen time, or as close to the time as possible.{% endtrans %}
+        the person you nominated at least once during your chosen time, or as close to the time as possible{% endtrans %}
       {% else %}
         {% trans %}Your details have been submitted and an operator will call
-        you at least once during your chosen time, or as close to the time as possible.{% endtrans %}
+        you at least once during your chosen time, or as close to the time as possible{% endtrans %}
       {% endif %}
       (<strong>{{ session.stored.callback_time|datetime('full') }}</strong>).
       {% trans %}When a CLA operator calls, the call will come from an anonymous number.{% endtrans %}
