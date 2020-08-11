@@ -107,7 +107,7 @@ class MoneyIntervalAmountRequired(object):
             if specific_period_error_message:
                 message = messages["amount_message"] + " " + field.gettext(self.interval_texts[interval.data])
             else:
-                message = messages["message"] or field.gettext(u"Type in a number")
+                message = messages["message"] or field.gettext(u"Enter a number")
             raise StopValidation(message)
 
         if interval.data == "" and amount.data > 0 and messages["freq_message"]:
@@ -131,7 +131,7 @@ class ValidMoneyInterval(object):
             raise ValidationError(amount.errors[0])
 
         if interval_selected and amount_not_set:
-            raise ValidationError(field.gettext(u"Type in a number"))
+            raise ValidationError(field.gettext(u"Enter a number"))
 
         if not interval_selected and nonzero_amount:
             raise ValidationError(field.gettext(u"Select a time period from the drop down"))

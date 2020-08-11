@@ -44,7 +44,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
         description=_(u"Please tell us what you need in the box below"),
         validators=[
             IgnoreIf("is_other_adaptation", FieldValue(False)),
-            Length(max=4000, message=_(u"Your other communication needs must be 4000 characters " u"or less")),
+            Length(max=4000, message=_(u"Your other communication needs must be 4000 characters or less")),
             Optional(),
         ],
     )
@@ -63,10 +63,10 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     contact_number = StringField(
         _(u"Phone number for the callback"),
         description=_(
-            u"Please enter full phone number including area code, " u"using only numbers. For example 020 7946 0492"
+            u"Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
         ),
         validators=[
-            InputRequired(),
+            InputRequired(message=_(u"Tell us what number to ring")),
             Length(max=20, message=_(u"Your telephone number must be 20 characters or less")),
         ],
     )
@@ -80,19 +80,24 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
 
     full_name = StringField(
         _(u"Full name of the person to call"),
-        validators=[Length(max=400, message=_(u"Your full name must be 400 " u"characters or less")), InputRequired()],
+        validators=[
+            Length(max=400, message=_(u"Their full name must be 400 characters or less")),
+            InputRequired(message=_(u"Tell us the name of the person to call")),
+        ],
     )
     relationship = SelectField(
-        _(u"Relationship to you"), choices=(THIRDPARTY_RELATIONSHIP_CHOICES), validators=[Required()]
+        _(u"Relationship to you"),
+        choices=(THIRDPARTY_RELATIONSHIP_CHOICES),
+        validators=[Required(message=_(u"Tell us how you know this person"))],
     )
     contact_number = StringField(
         _(u"Phone number for the callback"),
         description=_(
-            u"Please enter full phone number including area code, " u"using only numbers. For example 020 7946 0492"
+            u"Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
         ),
         validators=[
-            InputRequired(),
-            Length(max=20, message=_(u"Your telephone number must be 20 " u"characters or less")),
+            InputRequired(message=_(u"Tell us what number to ring")),
+            Length(max=20, message=_(u"Your telephone number must be 20 characters or less")),
         ],
     )
     time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))
@@ -120,12 +125,15 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     full_name = StringField(
         _(u"Your full name"),
-        validators=[Length(max=400, message=_(u"Your full name must be 400 " u"characters or less")), InputRequired()],
+        validators=[
+            Length(max=400, message=_(u"Your full name must be 400 characters or less")),
+            InputRequired(message=_(u"Tell us your name")),
+        ],
     )
     contact_type = RadioField(
         _(u"Select a contact option"),
         choices=CONTACT_PREFERENCE,
-        validators=[InputRequired(message=_(u"Please choose one of the options"))],
+        validators=[InputRequired(message=_(u"Tell us how we should get in contact"))],
     )
     callback = ValidatedFormField(
         CallBackForm,
@@ -201,7 +209,7 @@ class ConfirmationForm(Honeypot, BabelTranslationsFormMixin, Form):
         description=_(u"Enter your email address"),
         validators=[
             Length(max=255, message=_(u"Your address must be 255 characters or less")),
-            EmailValidator(message=_(u"Invalid email address")),
-            InputRequired(),
+            EmailValidator(message=_(u"Enter a valid email address")),
+            InputRequired(message=_(u"Tell us what email address to send to")),
         ],
     )
