@@ -93,11 +93,11 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
     contact_number = StringField(
         _(u"Phone number for the callback"),
         description=_(
-            u"Please enter full phone number including area code, " u"using only numbers. For example 020 7946 0492"
+            u"Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
         ),
         validators=[
             InputRequired(message=_(u"Tell us what number to ring")),
-            Length(max=20, message=_(u"Your telephone number must be 20 " u"characters or less")),
+            Length(max=20, message=_(u"Your telephone number must be 20 characters or less")),
         ],
     )
     time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))

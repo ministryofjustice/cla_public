@@ -652,6 +652,10 @@ msgstr "Rhowch gyfanswm yr arian cynhaliaeth rydych chi’n ei dderbyn, neu rhow
 msgid "Tell us how often you receive maintenance"
 msgstr "Pa mor aml rydych chi’n derbyn arian cynhaliaeth"
 
+#: cla_public/apps/checker/forms.py:539
+msgid "Tell us how often your partner receives maintenance"
+msgstr "Dywedwch wrthym pa mor aml mae eich partner yn eu derbyn daliadau cynnal"
+
 #: cla_public/apps/checker/forms.py:512 (...each week etc)
 msgid "Tell us how much maintenance you receive"
 msgstr "Faint o arian cynhaliaeth rydych chi’n ei dderbyn"

@@ -436,10 +436,10 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much you receive in wages"
                 ),  # this is followed by the time period, e.g. "... each week"
-                partner_message=_(u"Tell us how much your partner receive in wages"),
-                partner_freq_message=_(u"Tell us how often your partner receive wages"),
+                partner_message=_(u"Tell us how much your partner receives in wages"),
+                partner_freq_message=_(u"Tell us how often your partner receives wages"),
                 partner_amount_message=_(
-                    u"Tell us how much your partner receive in wages"
+                    u"Tell us how much your partner receives in wages"
                 ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
@@ -458,6 +458,11 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much income tax you pay"
                 ),  # this is followed by the time period, e.g. "... each week"
+                partner_message=_(u"Tell us how much income tax your partner pays"),
+                partner_freq_message=_(u"Tell us how often your partner pays income tax"),
+                partner_amount_message=_(
+                    u"Tell us how much income tax your partner pays"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -475,6 +480,11 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much National Insurance you pay"
                 ),  # this is followed by the time period, e.g. "... each week"
+                partner_message=_(u"Tell us how much National Insurance your partner pays"),
+                partner_freq_message=_(u"Tell us how often your partner pays National Insurance"),
+                partner_amount_message=_(
+                    u"Tell us how much National Insurance your partner pays"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -487,6 +497,11 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 freq_message=_(u"Tell us how often you receive Working Tax Credit"),
                 amount_message=_(
                     u"Tell us how much Working Tax Credit you receive"
+                ),  # this is followed by the time period, e.g. "... each week"
+                partner_message=_(u"Enter the Working Tax Credit your partner receive, or 0 if it doesn’t apply"),
+                partner_freq_message=_(u"Tell us how often your partner receives Working Tax Credit"),
+                partner_amount_message=_(
+                    u"Tell us how much Working Tax Credit your partner receives"
                 ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
@@ -502,6 +517,11 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much Child Tax Credit you receive"
                 ),  # this is followed by the time period, e.g. "... each week"
+                partner_message=_(u"Enter the Child Tax Credit your partner receives, or 0 if it doesn’t apply"),
+                partner_freq_message=_(u"Tell us how often your partner receive Child Tax Credit"),
+                partner_amount_message=_(
+                    u"Tell us how much Child Tax Credit your partner receives"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -514,6 +534,11 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 freq_message=_(u"Tell us how often you receive maintenance"),
                 amount_message=_(
                     u"Tell us how much maintenance you receive"
+                ),  # this is followed by the time period, e.g. "... each week"
+                partner_message=_(u"Enter the total amount of maintenance your partner receives, or 0 if this doesn’t apply"),
+                partner_freq_message=_(u"Tell us how often your partner receives maintenance"),
+                partner_amount_message=_(
+                    u"Tell us how much maintenance your partner receives"
                 ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
@@ -528,6 +553,11 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much pension you receive"
                 ),  # this is followed by the time period, e.g. "... each week"
+                partner_message=_(u"Enter the pension your partner receives, or 0 if this doesn’t apply"),
+                partner_freq_message=_(u"Tell us how often your partner receives their pension"),
+                partner_amount_message=_(
+                    u"Tell us how much pension your partner receives"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
@@ -541,13 +571,13 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much other income you receive"
                 ),  # this is followed by the time period, e.g. "... each week"
-                # partner_message=_(
-                # u"Enter the total amount of other income your partner receives, or 0 if this doesn’t apply to them"
-                # ),
-                # partner_freq_message=_(u"Tell us how often your partner receives this other income"),
-                # partner_amount_message=_(
-                # u"Tell us how much other income your partner receives"
-                # ),  # this is followed by the time period, e.g. "... each week"
+                partner_message=_(
+                    u"Enter the other income your partner receives, or 0 if this doesn’t apply"
+                ),
+                partner_freq_message=_(u"Tell us how often your partner receives this other income"),
+                partner_amount_message=_(
+                    u"Tell us how much other income your partner receives"
+                ),  # this is followed by the time period, e.g. "... each week"
             )
         ],
     )
