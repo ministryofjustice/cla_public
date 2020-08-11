@@ -16,7 +16,7 @@
     {% endif %}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Review your answers')) }}
+    {{ Form.actions(_('Review your answers'),"submit-button") }}
   </form>
   {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}

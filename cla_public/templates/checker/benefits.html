@@ -26,7 +26,7 @@
       </fieldset>
     </div>
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Continue')) }}
+    {{ Form.actions(_('Continue'),"submit-button") }}
   </form>
   {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
