@@ -32,7 +32,7 @@
     {{ Form.group(form.ideas, field_attrs={'class': 'm-full', 'rows': 6}) }}
 
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Continue to contact CLA')) }}
+    {{ Form.actions(_('Continue to contact CLA'),"submit-button") }}
   </form>
   {% include "checker/time-out-warning.html" %}
 {% endblock %}

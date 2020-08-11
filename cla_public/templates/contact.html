@@ -112,7 +112,7 @@
       {{ Subform.adaptations(form.adaptations) }}
     </div>
     {{ Form.honeypot(form) }}
-    {{ Form.actions(_('Submit details')) }}
+    {{ Form.actions(_('Submit details'),"submit-button") }}
   </form>
   {% include "checker/time-out-warning.html" %}
   {% block notice %}

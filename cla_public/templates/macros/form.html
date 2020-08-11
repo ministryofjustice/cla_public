@@ -558,8 +558,8 @@
     - button_label <string>
         Button label
 #}
-{% macro actions(button_label) %}
-  <button class="govuk-button" data-module="govuk-button">
+{% macro actions(button_label,id) %}
+  <button class="govuk-button" id="{{ id }}" data-module="govuk-button">
     {{ button_label }}
   </button>
 {% endmacro %}
