@@ -498,7 +498,7 @@ class IncomeFieldForm(BaseNoCsrfForm):
                 amount_message=_(
                     u"Tell us how much Working Tax Credit you receive"
                 ),  # this is followed by the time period, e.g. "... each week"
-                partner_message=_(u"Enter the Working Tax Credit your partner receive, or 0 if it doesn’t apply"),
+                partner_message=_(u"Enter the Working Tax Credit your partner receives, or 0 if it doesn’t apply"),
                 partner_freq_message=_(u"Tell us how often your partner receives Working Tax Credit"),
                 partner_amount_message=_(
                     u"Tell us how much Working Tax Credit your partner receives"
