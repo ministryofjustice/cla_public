@@ -26,5 +26,8 @@ def detect_user_locale():
 
 @base.before_app_request
 def detect_maintenance():
-    if current_app.config.get("MAINTENANCE_MODE", False) and request.path != u"/maintenance":
+    maintenance_mode = current_app.config.get("MAINTENANCE_MODE", False)
+    if maintenance_mode and request.path != u"/maintenance":
         return redirect("/maintenance")
+    if not maintenance_mode and request.path == u"/maintenance":
+        return redirect("/start")
