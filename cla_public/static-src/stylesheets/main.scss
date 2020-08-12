@@ -377,9 +377,12 @@ dl.govuk-list.govuk-list--bullet {
       display:none;
     }
     
-    .laa-quick-exit-info{
-      display:none;
-    }
+  }
+}
+
+@media only screen and (hover: none) {
+  .laa-quick-exit-info{
+    display:none;
   }
 }
 
