@@ -58,7 +58,7 @@
         e.stopPropagation();
         $.ajax({
           type: 'POST',
-          url: '',
+          url: this.$form.attr('action'),
           contentType: 'application/x-www-form-urlencoded',
           data: this.$form.serialize()
         })
