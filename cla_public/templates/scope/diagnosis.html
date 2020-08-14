@@ -13,8 +13,8 @@
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <fieldset>
-    <legend>
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend">
       <h1 class="govuk-heading-xl">{{ title }}</h1>
     </legend>
     {% if not nodes|length or nodes and nodes[-1].data_safety %}
