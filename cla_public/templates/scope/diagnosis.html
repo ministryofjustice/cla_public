@@ -13,24 +13,27 @@
 {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
 {% block inner_content %}
-  <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <fieldset>
+    <legend>
+      <h1 class="govuk-heading-xl">{{ title }}</h1>
+    </legend>
+    {% if not nodes|length or nodes and nodes[-1].data_safety %}
+      {{ Element.staying_safe_online_link() }}
+    {% endif %}
 
-  {% if not nodes|length or nodes and nodes[-1].data_safety %}
-    {{ Element.staying_safe_online_link() }}
-  {% endif %}
-
-  <ul class="cla-scope-options-list">
-    {% for choice in choices %}
-      <li class="cla-scope-options-list-item">
-        <a class="cla-scope-options-list-item-link" title="{{ choice.label|safe|striptags }}" href="{{ choice.url }}"{% if not nodes|length %} data-ga="event:category-of-law/{{ choice.label|striptags }}"{% endif %} role="button">
-          <h2 class="govuk-heading-m govuk-!-margin-2">{{ choice.label|safe|striptags }}</h2>
-          {% if choice.help_text %}
-            <p class="govuk-body govuk-!-margin-2">{{ choice.help_text|safe|striptags }}</p>
-          {% endif %}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+    <ul class="cla-scope-options-list">
+      {% for choice in choices %}
+        <li class="cla-scope-options-list-item">
+          <a class="cla-scope-options-list-item-link" title="{{ choice.label|safe|striptags }}" href="{{ choice.url }}"{% if not nodes|length %} data-ga="event:category-of-law/{{ choice.label|striptags }}"{% endif %} role="button">
+            <h2 class="govuk-heading-m govuk-!-margin-2">{{ choice.label|safe|striptags }}</h2>
+            {% if choice.help_text %}
+              <p class="govuk-body govuk-!-margin-2">{{ choice.help_text|safe|striptags }}</p>
+            {% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </fieldset>
   {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
   
