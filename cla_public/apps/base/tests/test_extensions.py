@@ -74,4 +74,4 @@ class TestMaintenanceModeEnabled(FlaskAppTestCase):
         response = client.get("/maintenance")
         self.assertEqual(302, response.status_code)
         headers = dict(response.headers)
-        self.assertEqual(headers.get("Location"), "http://localhost/start")
+        self.assertEqual(headers.get("Location"), "http://localhost/")

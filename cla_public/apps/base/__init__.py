@@ -30,4 +30,4 @@ def detect_maintenance():
     if maintenance_mode and request.path != u"/maintenance":
         return redirect("/maintenance")
     if not maintenance_mode and request.path == u"/maintenance":
-        return redirect("/start")
+        return redirect("/")
