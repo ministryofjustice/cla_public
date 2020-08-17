@@ -1,5 +1,7 @@
 <div class="govuk-inset-text">
-  {% trans %}
-    Your session will time out after 30 minutes of inactivity. We do this for your security.
-  {% endtrans %}
+  {% if zeroOptions %}
+    {% trans %}If you are on this page for more than a few seconds, please refresh your browser{% endtrans %}
+  {% else %}
+    {% trans %}Your session will time out after 30 minutes of inactivity. We do this for your security.{% endtrans %}
+  {% endif %}
 </div>
