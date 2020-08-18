@@ -73,7 +73,7 @@
 
   </head>
 
-  <body class="govuk-template__body {% block body_classes %}{{ product_type }} {{ phase }}{% endblock %}">
+  <body class="govuk-template__body {% block body_classes %}{{ product_type }} {{ phase }} {{ 'cla-staging' if environment != 'production' }}{% endblock %}">
     <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
     <div class="laa-flee-button-container
