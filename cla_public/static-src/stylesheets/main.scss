@@ -389,3 +389,12 @@ dl.govuk-list.govuk-list--bullet {
 .laa-flee-button-container {
   display:none;
 }
+
+.cla-staging {
+  .govuk-header__container {
+    border-bottom-color:govuk-colour("bright-purple");
+  }
+  .govuk-tag {
+    background-color:govuk-colour("bright-purple");
+  }
+}
