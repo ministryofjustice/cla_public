@@ -60,6 +60,8 @@ spec:
               value: "{{ .Values.google_maps_api_key }}"
             - name: LOG_LEVEL
               value: "{{ .Values.logLevel }}"
+            - name: MAINTENANCE_MODE
+              value: "{{ .Values.maintenanceMode }}"
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:

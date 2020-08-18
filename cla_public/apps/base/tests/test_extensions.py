@@ -42,3 +42,36 @@ class TestIsQuickExitEnabled(FlaskAppTestCase):
     def test_partial_code_match(self):
         self.session.set_history(["n1", "n1490"])
         self.assertFalse(is_quick_exit_enabled(self.session))
+
+
+class TestMaintenanceModeEnabled(FlaskAppTestCase):
+    def test_maintenance_mode_enabled_start_page(self):
+        self.app.config["MAINTENANCE_MODE"] = True
+        client = self.app.test_client()
+        response = client.get("/start")
+        self.assertEqual(302, response.status_code)
+        headers = dict(response.headers)
+        self.assertEqual(headers.get("Location"), "http://localhost/maintenance")
+
+    def test_maintenance_mode_disabled_start_page(self):
+        self.app.config["MAINTENANCE_MODE"] = False
+        client = self.app.test_client()
+        response = client.get("/start")
+        self.assertEqual(302, response.status_code)
+        headers = dict(response.headers)
+        self.assertEqual(headers.get("Location"), "http://localhost/scope/diagnosis/")
+
+    def test_maintenance_mode_enabled_maintenance_page(self):
+        self.app.config["MAINTENANCE_MODE"] = True
+        client = self.app.test_client()
+        response = client.get("/maintenance")
+        self.assertEqual(200, response.status_code)
+        self.assertIn("This service is currently down for maintenance", response.data)
+
+    def test_maintenance_mode_disabled_maintenance_page(self):
+        self.app.config["MAINTENANCE_MODE"] = False
+        client = self.app.test_client()
+        response = client.get("/maintenance")
+        self.assertEqual(302, response.status_code)
+        headers = dict(response.headers)
+        self.assertEqual(headers.get("Location"), "http://localhost/")
