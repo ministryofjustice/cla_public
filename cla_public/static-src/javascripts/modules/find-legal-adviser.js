@@ -42,7 +42,6 @@
       this.$organisationListItems.on('click', '.org-summary', function(evt) {
         evt.preventDefault();
         self.$organisationListItems.find('.org-summary').attr('aria-expanded', false);
-        $(this).attr('aria-expanded', true);
         self._handleItemHighlight(evt, $(this).closest('li'));
       });
 
@@ -191,6 +190,7 @@
 
       this.$organisationListItems.removeClass('s-highlighted');
       $item.addClass('s-highlighted');
+      $item.find('.org-summary').attr('aria-expanded', true);
 
       $item.find('.org-details').attr('tabindex', -1).focus();
 
