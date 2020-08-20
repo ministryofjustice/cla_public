@@ -10,7 +10,7 @@
 
     {{ Form.currency_fieldset(form.rent) }}
     {{ Form.currency_fieldset(form.maintenance) }}
-    {{ Form.group(form.income_contribution, field_attrs={'prefix': '£', 'class_': 'm-small'}) }}
+    {{ Form.group(form.income_contribution, field_attrs={'prefix': '£'}) }}
     {% if session.checker.has_children or session.checker.has_dependants %}
       {{ Form.currency_fieldset(form.childcare, skip=not session.checker.has_children and not session.checker.has_dependants) }}
     {% endif %}

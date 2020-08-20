@@ -322,9 +322,7 @@
          class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
        ) %}
 
-    <div class="form-group-label{{ (' sr-only' if hide_label) }}">
-      {{ field_label }}
-    </div>
+    {{ field_label }}
   {% endif %}
 {% endmacro %}
 
@@ -433,7 +431,8 @@
       <div class="laa-currency">
       <span class="laa-currency-prefix">{{prefix}}</span>
     {% endif %}
-        {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+    {% set attribs={'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'} %}
+    {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', spellcheck='false', pattern='[0-9]*', inputmode='numeric', **attribs) }}
     {% if prefix %}
       </div>
     {% endif %}
