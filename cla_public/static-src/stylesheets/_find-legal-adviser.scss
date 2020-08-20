@@ -2,6 +2,7 @@ $results-sidebar-width: 40%;
 $map-height: 460px;
 
 .find-legal-adviser {
+
   .legal-adviser-search {
     padding: 20px;
     margin: 20px 0;
@@ -328,5 +329,12 @@ $map-height: 460px;
     .search-results-pagination {
       display: none;
     }
+  }
+}
+
+@media screen and (min-width:641px) {
+  .govuk-grid-column-two-thirds .find-legal-adviser {
+    width:150%;
+    max-width: 660px;
   }
 }
