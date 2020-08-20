@@ -431,7 +431,11 @@
       <div class="laa-currency">
       <span class="laa-currency-prefix">{{prefix}}</span>
     {% endif %}
-    {% set attribs={'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'} %}
+    {% if field.description %}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'} %}
+    {% else %}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true'} %}
+    {% endif %}
     {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', spellcheck='false', pattern='[0-9]*', inputmode='numeric', **attribs) }}
     {% if prefix %}
       </div>
