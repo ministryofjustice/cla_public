@@ -681,8 +681,8 @@ msgid "Tell us how much other income you receive"
 msgstr "Faint o incwm arall rydych chi’n ei dderbyn"
 
 #: cla_public/apps/checker/forms.py:591
-msgid "Tell us how much rent you pay, or enter 0 if you don’t pay rent"
-msgstr "Faint rydych chi’n ei dalu mewn rhent, neu rhowch 0 os nad ydych yn talu rhent"
+msgid "Tell us how much rent you pay"
+msgstr "Faint rydych chi’n ei dalu mewn rhent"
 
 #: cla_public/apps/checker/forms.py:592
 msgid "Tell us how often you pay this rent"
@@ -693,8 +693,8 @@ msgid "Tell us how much rent you pay"
 msgstr "Faint rydych chi’n ei dalu mewn rhent"
 
 #: cla_public/apps/checker/forms.py:605
-msgid "Tell us how much maintenance you pay, or enter 0 if this doesn’t apply to you"
-msgstr "Faint o arian cynhaliaeth rydych chi’n ei dalu, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
+msgid "Tell us how much maintenance you pay"
+msgstr "Faint o arian cynhaliaeth rydych chi’n ei dalu"
 
 #: cla_public/apps/checker/forms.py:606
 msgid "Tell us how often you pay this maintenance"
@@ -705,8 +705,8 @@ msgid "Tell us how much maintenance you pay"
 msgstr "Faint o arian cynhaliaeth rydych chi’n ei dalu"
 
 #: cla_public/apps/checker/forms.py:619
-msgid "Tell us how much you pay towards Criminal Legal Aid, or enter 0 if this doesn’t apply to you"
-msgstr "Faint rydych chi’n ei dalu tuag at Gymorth Cyfreithiol Troseddol, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
+msgid "Tell us how much you pay towards Criminal Legal Aid"
+msgstr "Faint rydych chi’n ei dalu tuag at Gymorth Cyfreithiol Troseddol"
 
 #: cla_public/apps/checker/forms.py:276
 msgid "Tell us whether this is your main home"
@@ -721,8 +721,8 @@ msgid "Tell us the approximate value of this property"
 msgstr "Faint yw gwerth yr eiddo hwn, yn fras"
 
 #: cla_public/apps/checker/forms.py:295
-msgid "Tell us how much is left to pay on the mortgage, or enter 0 if you have no mortgage"
-msgstr "Faint sy’n weddill i’w dalu ar y morgais, neu rhowch 0 os nad oes gennych forgais"
+msgid "Tell us how much is left to pay on the mortgage"
+msgstr "Faint sy’n weddill i’w dalu ar y morgais"
 
 #: cla_public/apps/checker/forms.py:302
 msgid "Enter your mortgage repayment for last month"
@@ -965,8 +965,8 @@ msgid "How much is left to pay on the mortgage?"
 msgstr "Pa swm sy’n weddill i’w dalu ar y morgais?"
 
 #: cla_public/apps/checker/forms.py:258
-msgid "Include the full amount owed, even if the property has shared ownership"
-msgstr "Rhowch y cyfanswm sy’n ddyledus, hyd yn oed os yw perchenogaeth yr eiddo wedi’i rhannu"
+msgid "Include the full amount owed, even if the property has shared ownership, or enter 0 if you have no mortgage"
+msgstr "Rhowch y cyfanswm sy’n ddyledus, hyd yn oed os yw perchenogaeth yr eiddo wedi’i rhannu, neu rhowch 0 os nad oes gennych forgais"
 
 #: cla_public/apps/checker/forms.py:259 cla_public/apps/checker/forms.py:265
 msgid "Please enter 0 if you have no mortgage"
@@ -1013,8 +1013,8 @@ msgid "Savings"
 msgstr "Cynilion"
 
 #: cla_public/apps/checker/forms.py:323
-msgid "The total amount of savings in cash, bank or building society"
-msgstr "Cyfanswm y cynilion mewn arian parod, yn y banc neu mewn cymdeithas adeiladu"
+msgid "The total amount of savings in cash, bank or building society; or enter 0 if you have none"
+msgstr "Cyfanswm y cynilion mewn arian parod, yn y banc neu mewn cymdeithas adeiladu; neu rhowch 0 os nad oes gennych rai"
 
 #: cla_public/apps/checker/forms.py:324
 msgid "Enter 0 if you have no savings"
@@ -1025,8 +1025,8 @@ msgid "Investments"
 msgstr "Buddsoddiadau"
 
 #: cla_public/apps/checker/forms.py:328
-msgid "This includes stocks, shares, bonds (but not property)"
-msgstr "Mae hyn yn cynnwys stociau, cyfrannau, bondiau (ond nid eiddo)"
+msgid "This includes stocks, shares, bonds (but not property); enter 0 if you have none"
+msgstr "Mae hyn yn cynnwys stociau, cyfrannau, bondiau (ond nid eiddo); rhowch 0 os nad oes gennych rai"
 
 #: cla_public/apps/checker/forms.py:329
 msgid "Enter 0 if you have no investments"
@@ -1090,8 +1090,8 @@ msgid "Working Tax Credit"
 msgstr "Credyd Treth Gwaith"
 
 #: cla_public/apps/checker/forms.py:396
-msgid "Extra money for people who work and have a low income"
-msgstr "Arian ychwanegol i bobl sy’n gweithio ac sydd ar incwm isel"
+msgid "Extra money for people who work and have a low income, enter 0 if this doesn’t apply to you"
+msgstr "Arian ychwanegol i bobl sy’n gweithio ac sydd ar incwm isel, rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:397 cla_public/apps/checker/forms.py:403
 #: cla_public/apps/checker/forms.py:408 cla_public/apps/checker/forms.py:413
@@ -1105,32 +1105,32 @@ msgid "Child Tax Credit"
 msgstr "Credyd Treth Plant"
 
 #: cla_public/apps/checker/forms.py:401
-msgid "The total amount you get for all your children"
-msgstr "Y cyfanswm yr ydych chi’n ei gael ar gyfer eich holl blant"
+msgid "The total amount you get for all your children, enter 0 if this doesn’t apply to you"
+msgstr "Y cyfanswm yr ydych chi’n ei gael ar gyfer eich holl blant, rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:406
 msgid "Maintenance received"
 msgstr "Taliadau Cynhaliaeth yr ydych chi’n eu cael"
 
 #: cla_public/apps/checker/forms.py:407
-msgid "Payments you get from an ex-partner"
-msgstr "Taliadau yr ydych chi’n eu cael gan gynbartner"
+msgid "Payments you get from an ex-partner, or enter 0 if this doesn’t apply to you"
+msgstr "Taliadau yr ydych chi’n eu cael gan gynbartner, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:411
 msgid "Pension received"
 msgstr "Pensiwn yr ydych chi’n ei gael"
 
 #: cla_public/apps/checker/forms.py:412
-msgid "Payments you receive if you’re retired"
-msgstr "Taliadau yr ydych chi’n eu cael os ydych chi wedi ymddeol"
+msgid "Payments you receive if you’re retired, enter 0 if this doesn’t apply to you"
+msgstr "Taliadau yr ydych chi’n eu cael os ydych chi wedi ymddeol, rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:416
 msgid "Any other income"
 msgstr "Unrhyw incwm arall"
 
 #: cla_public/apps/checker/forms.py:417
-msgid "For example, student grants, income from trust funds, dividends"
-msgstr "Er enghraifft, grantiau myfyriwr, incwm o gronfeydd ymddiriedolaeth, difidendau"
+msgid "For example, student grants, income from trust funds, dividends, or enter 0 if this doesn’t apply to you"
+msgstr "Er enghraifft, grantiau myfyriwr, incwm o gronfeydd ymddiriedolaeth, difidendau, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:434
 msgid "Tell us how much you receive in wages"
@@ -1357,12 +1357,12 @@ msgid "Rent"
 msgstr "Rhent"
 
 #: cla_public/apps/checker/forms.py:459
-msgid "Money you pay your landlord for rent. Do not include rent that is paid by Housing Benefit"
-msgstr "Arian yr ydych chi yn ei dalu i’ch landlord fel rhent. Peidiwch â chynnwys rhent sy’n cael ei dalu gan fudd-dal tai"
+msgid "Money you pay your landlord for rent, or enter 0 if you don’t pay rent. Do not include rent that is paid by Housing Benefit."
+msgstr "Arian yr ydych chi yn ei dalu i’ch landlord fel rhent, neu rhowch 0 os nad ydych yn talu rhent. Peidiwch â chynnwys rhent sy’n cael ei dalu gan fudd-dal tai."
 
 #: cla_public/apps/checker/forms.py:462
-msgid "Money you and your partner pay your landlord for rent. Do not include rent that is paid by Housing Benefit"
-msgstr "Arian yr ydych chi a’ch partner yn ei dalu i’ch landlord fel rhent. Peidiwch â chynnwys rhent sy’n cael ei dalu gan fudd-dal tai"
+msgid "Money you and your partner pay your landlord for rent, or enter 0 if you don’t pay rent. Do not include rent that is paid by Housing Benefit."
+msgstr "Arian yr ydych chi a’ch partner yn ei dalu i’ch landlord fel rhent, neu rhowch 0 os nad ydych yn talu rhent. Peidiwch â chynnwys rhent sy’n cael ei dalu gan fudd-dal tai."
 
 #: cla_public/apps/checker/forms.py:468
 msgid "Enter 0 if you don’t pay rent"
@@ -1373,24 +1373,24 @@ msgid "Maintenance"
 msgstr "Cynhaliaeth"
 
 #: cla_public/apps/checker/forms.py:472
-msgid "Money you pay to an ex-partner for their living costs"
-msgstr "Arian yr ydych chi yn ei dalu i gynbartner at gostau byw"
+msgid "Money you pay to an ex-partner for their living costs, or enter 0 if this doesn’t apply to you"
+msgstr "Arian yr ydych chi yn ei dalu i gynbartner at gostau byw, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:473
-msgid "Money you and/or your partner pay to an ex-partner for their living costs"
-msgstr "Arian yr ydych chi a/neu’ch partner yn ei dalu i gynbartner at gostau byw"
+msgid "Money you and/or your partner pay to an ex-partner for their living costs, or enter 0 if this doesn’t apply"
+msgstr "Arian yr ydych chi a/neu’ch partner yn ei dalu i gynbartner at gostau byw, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:477
 msgid "Monthly Income Contribution Order"
 msgstr "Gorchymyn Cyfrannu Incwm Misol"
 
 #: cla_public/apps/checker/forms.py:478
-msgid "Money you pay per month towards your Criminal Legal Aid"
-msgstr "Arian yr ydych chi yn ei dalu at eich cymorth cyfreithiol troseddol"
+msgid "Money you pay per month towards your Criminal Legal Aid, or enter 0 if this doesn’t apply to you"
+msgstr "Arian yr ydych chi yn ei dalu at eich cymorth cyfreithiol troseddol, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:479
-msgid "Money you and/or your partner pay per month towards your Criminal Legal Aid"
-msgstr "Arian yr ydych chi a/neu’ch partner yn ei dalu at eich cymorth cyfreithiol troseddol"
+msgid "Money you and/or your partner pay per month towards your Criminal Legal Aid, or enter 0 if this doesn’t apply"
+msgstr "Arian yr ydych chi a/neu’ch partner yn ei dalu at eich cymorth cyfreithiol troseddol, neu rhowch 0 os nad yw hyn yn berthnasol i chi"
 
 #: cla_public/apps/checker/forms.py:483
 msgid "Childcare"
