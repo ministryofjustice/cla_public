@@ -288,6 +288,9 @@
     {% else %}
       {% do field_attrs.update(class='form-control %s' % field_attrs.class) %} <div style="display:none;">{{ field.type }}</div>
     {% endif %}
+    {% if field.description %}
+      {% do field_attrs.update({'aria-describedby':field.name+'-hint'}) %}
+    {% endif %}
     {{ field(**field_attrs) }}
   {% endif %}
 {% endmacro %}
@@ -416,7 +419,12 @@
     {% if prefix %}
       <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
     {% endif %}
-    {{ field(class_='govuk-input ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+    {% if field.description %}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'} %}
+    {% else %}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true'} %}
+    {% endif %}
+    {{ field(class_='govuk-input ' + class_, autocomplete='off', **attribs) }}
     {% if suffix %}
       <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
     {% endif %}
