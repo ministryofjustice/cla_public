@@ -224,7 +224,9 @@
                     field.per_interval_value(
                       class_='govuk-input govuk-input--width-10%s'  % (' govuk-select--error' if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) ),
                       autocomplete='off',
-                      **{'aria-required': 'false' if field.flags.optional else 'true'}
+                      spellcheck='false',
+                      inputmode='numeric',
+                      **{'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'}
                     )
                   }}
                 </div>
@@ -275,7 +277,11 @@
       {{ radio_buttons(field) }}
     </div>
   {% elif field.type in ['MoneyIntervalField', 'SelfEmployedMoneyIntervalField', 'PartnerMoneyIntervalField'] %}
-    {{ money_interval(field, kwargs.skip) }}
+    {#
+      This is never called - the currency_fieldset is used instead
+      Added error tag to test this
+    #}
+    <strong class="govuk-tag govuk-tag--red">Error</strong>
   {% elif field.type in ['MoneyField', 'PartnerMoneyField'] %}
     {{ money_input(field, **field_attrs) }}
   {% else %}
@@ -528,30 +534,6 @@
     {% endfor %}
   {% endif %}
   </div>
-{% endmacro %}
-
-
-{#
-  Money field with period interval
-
-  Params:
-    - field <object>
-        WTForm field
-    - skip <boolean> (default: False)
-        Whether to skip (render as hidden input) the text input
-#}
-{% macro money_interval(field, skip=False) %}
-  {% if skip %}
-    <input type="hidden" name="{{ field.per_interval_value.name }}" value="0">
-    <input type="hidden" name="{{ field.interval_period.name }}" value="per_week">
-  {% else %}
-    <div class="laa-currency">
-      <span class="laa-currency-prefix">£</span>
-      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'} %}
-      {{ field.per_interval_value(class_='govuk-input govuk-input--width-10 ', autocomplete='off', spellcheck='false', inputmode='numeric', **attribs) }}
-    </div>
-    {{ field.interval_period(class_='govuk-select') }}
-  {% endif %}
 {% endmacro %}
 
 
