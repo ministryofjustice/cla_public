@@ -436,7 +436,7 @@
     {% else %}
       {% set attribs={'aria-required': 'false' if field.flags.optional else 'true'} %}
     {% endif %}
-    {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', spellcheck='false', pattern='[0-9]*', inputmode='numeric', **attribs) }}
+    {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', spellcheck='false', inputmode='numeric', **attribs) }}
     {% if prefix %}
       </div>
     {% endif %}
@@ -547,7 +547,8 @@
   {% else %}
     <div class="laa-currency">
       <span class="laa-currency-prefix">£</span>
-      {{ field.per_interval_value(class_='govuk-input govuk-input--width-10 ', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'} %}
+      {{ field.per_interval_value(class_='govuk-input govuk-input--width-10 ', autocomplete='off', spellcheck='false', inputmode='numeric', **attribs) }}
     </div>
     {{ field.interval_period(class_='govuk-select') }}
   {% endif %}
