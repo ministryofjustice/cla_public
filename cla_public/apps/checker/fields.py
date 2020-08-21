@@ -150,8 +150,6 @@ class SetZeroFormField(FormField):
 
 class MoneyTextInput(widgets.TextInput):
     def __call__(self, field, **kwargs):
-        if field.label.text:
-            kwargs["aria-label"] = u"%s. %s" % (field.label.text, field.gettext(u"Enter 0 if this does not apply."))
         return super(MoneyTextInput, self).__call__(field, **kwargs)
 
 
