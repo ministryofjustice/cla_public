@@ -276,12 +276,6 @@
     <div class="govuk-radios govuk-radios--inline">
       {{ radio_buttons(field) }}
     </div>
-  {% elif field.type in ['MoneyIntervalField', 'SelfEmployedMoneyIntervalField', 'PartnerMoneyIntervalField'] %}
-    {#
-      This is never called - the currency_fieldset is used instead
-      Added error tag to test this
-    #}
-    <strong class="govuk-tag govuk-tag--red">Error</strong>
   {% elif field.type in ['MoneyField', 'PartnerMoneyField'] %}
     {{ money_input(field, **field_attrs) }}
   {% else %}
