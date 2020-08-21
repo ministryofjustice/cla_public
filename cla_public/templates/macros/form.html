@@ -224,7 +224,9 @@
                     field.per_interval_value(
                       class_='govuk-input govuk-input--width-10%s'  % (' govuk-select--error' if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) ),
                       autocomplete='off',
-                      **{'aria-required': 'false' if field.flags.optional else 'true'}
+                      spellcheck='false',
+                      inputmode='numeric',
+                      **{'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'}
                     )
                   }}
                 </div>
@@ -274,8 +276,6 @@
     <div class="govuk-radios govuk-radios--inline">
       {{ radio_buttons(field) }}
     </div>
-  {% elif field.type in ['MoneyIntervalField', 'SelfEmployedMoneyIntervalField', 'PartnerMoneyIntervalField'] %}
-    {{ money_interval(field, kwargs.skip) }}
   {% elif field.type in ['MoneyField', 'PartnerMoneyField'] %}
     {{ money_input(field, **field_attrs) }}
   {% else %}
@@ -287,6 +287,9 @@
       {% do field_attrs.update(class='govuk-input %s' % field_attrs.class) %}
     {% else %}
       {% do field_attrs.update(class='form-control %s' % field_attrs.class) %} <div style="display:none;">{{ field.type }}</div>
+    {% endif %}
+    {% if field.description %}
+      {% do field_attrs.update({'aria-describedby':field.name+'-hint'}) %}
     {% endif %}
     {{ field(**field_attrs) }}
   {% endif %}
@@ -322,9 +325,7 @@
          class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
        ) %}
 
-    <div class="form-group-label{{ (' sr-only' if hide_label) }}">
-      {{ field_label }}
-    </div>
+    {{ field_label }}
   {% endif %}
 {% endmacro %}
 
@@ -418,7 +419,12 @@
     {% if prefix %}
       <label class="input-prefix" for="{{field.id}}">{{prefix}}</label>
     {% endif %}
-    {{ field(class_='govuk-input ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+    {% if field.description %}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'} %}
+    {% else %}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true'} %}
+    {% endif %}
+    {{ field(class_='govuk-input ' + class_, autocomplete='off', **attribs) }}
     {% if suffix %}
       <label class="input-suffix" for="{{field.id}}">{{suffix}}</label>
     {% endif %}
@@ -433,7 +439,12 @@
       <div class="laa-currency">
       <span class="laa-currency-prefix">{{prefix}}</span>
     {% endif %}
-        {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
+    {% if field.description %}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'} %}
+    {% else %}
+      {% set attribs={'aria-required': 'false' if field.flags.optional else 'true'} %}
+    {% endif %}
+    {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', spellcheck='false', inputmode='numeric', **attribs) }}
     {% if prefix %}
       </div>
     {% endif %}
@@ -525,29 +536,6 @@
     {% endfor %}
   {% endif %}
   </div>
-{% endmacro %}
-
-
-{#
-  Money field with period interval
-
-  Params:
-    - field <object>
-        WTForm field
-    - skip <boolean> (default: False)
-        Whether to skip (render as hidden input) the text input
-#}
-{% macro money_interval(field, skip=False) %}
-  {% if skip %}
-    <input type="hidden" name="{{ field.per_interval_value.name }}" value="0">
-    <input type="hidden" name="{{ field.interval_period.name }}" value="per_week">
-  {% else %}
-    <div class="laa-currency">
-      <span class="laa-currency-prefix">£</span>
-      {{ field.per_interval_value(class_='govuk-input govuk-input--width-10 ', autocomplete='off', **{'aria-required': 'false' if field.flags.optional else 'true'}) }}
-    </div>
-    {{ field.interval_period(class_='govuk-select') }}
-  {% endif %}
 {% endmacro %}
 
 

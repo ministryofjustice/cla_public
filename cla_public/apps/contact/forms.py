@@ -145,9 +145,9 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     )
     email = StringField(
         _(u"Email"),
-        description=_(u"If you add your email we will send you the " u"reference number when you submit your details"),
+        description=_(u"If you add your email we will send you the reference number when you submit your details"),
         validators=[
-            Length(max=255, message=_(u"Your address must be 255 characters " u"or less")),
+            Length(max=255, message=_(u"Your address must be 255 characters or less")),
             EmailValidator(message=_(u"Invalid email address")),
             Optional(),
         ],
@@ -155,7 +155,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     address = ValidatedFormField(AddressForm)
     extra_notes = TextAreaField(
         _(u"Tell us more about your problem"),
-        validators=[Length(max=4000, message=_(u"Your notes must be 4000 characters " u"or less")), Optional()],
+        validators=[Length(max=4000, message=_(u"Your notes must be 4000 characters or less")), Optional()],
     )
     adaptations = ValidatedFormField(AdaptationsForm, _(u"Do you have any special communication needs?"))
 
