@@ -383,3 +383,9 @@ $map-height: 460px;
     max-width: 660px;
   }
 }
+
+@media (max-width: 640px) {
+  .search-results-container, .search-results-list {
+    height: auto!important;
+  }
+}
