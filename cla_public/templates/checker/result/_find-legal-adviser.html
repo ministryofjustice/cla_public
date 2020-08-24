@@ -86,14 +86,6 @@
                   </div>
                 </header>
                 <div class="org-details">
-                  {% if item.categories|length %}
-                    <div class="org-categories" role="list">
-                      <div class="sr-only">{{ _('Categories of law') }}</div>
-                      {% for cat in item.categories if cat %}
-                        <span class="org-category" role="listitem">{{ cat }}</span>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
                   <p>
                     <span class="sr-only">{{ _('Address') }}:</span>
                     <span class="adr">
@@ -111,6 +103,16 @@
                       <span>{{ _('Website') }}:</span>
                       {{ Element.link_same_window(item.organisation.website|human_to_url, item.organisation.website|url_to_human, is_external=True, **{'class': 'url'}) }}
                     </p>
+                  {% endif %}
+                  {% if item.categories|length %}
+                    <div class="org-categories" role="list">
+                      <h4 class="govuk-heading-s govuk-!-font-size-16 govuk-!-margin-bottom-2">{{ _('Categories of law') }}</h4>
+                      <ul class="govuk-list govuk-list--bullet govuk-!-font-size-14" role="list">
+                        {% for cat in item.categories if cat %}
+                          <li class="govuk-!-margin-0" role="listitem">{{ cat }}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
                   {% endif %}
                 </div>
               </li>
