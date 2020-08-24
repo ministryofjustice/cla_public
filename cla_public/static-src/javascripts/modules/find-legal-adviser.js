@@ -308,7 +308,7 @@
   };
 
   function setMapHeight() {
-    if ($(window).width() > 460 && $("ul.org-list").height() > 460) {
+    if ($(window).width() > 640 && $("ul.org-list").height() > 460) {
       $(".search-results-container").height($("ul.org-list").height());
       $(".search-results-list").height($("ul.org-list").height());
     }

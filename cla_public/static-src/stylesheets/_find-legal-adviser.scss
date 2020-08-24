@@ -48,6 +48,10 @@ $map-height: 460px;
   }
 
   .search-results-list {
+    .org-details {
+      outline:none;
+    }
+
     .org-list {
       margin: 0;
       padding: 0;
