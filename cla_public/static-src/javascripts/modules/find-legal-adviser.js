@@ -316,10 +316,8 @@
   $("document").ready(function(){
     const originalMapHeight = $(".search-results-container").height();
     setMapHeight();
-
-    $(".search-results-container").click(function(){
-      setMapHeight();
-    });
-
   });
 
+  $(".search-results-container").click(function(){
+    setMapHeight();
+  });
