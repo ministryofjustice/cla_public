@@ -86,7 +86,7 @@
                   </div>
                 </header>
                 <div class="org-details">
-                  <p>
+                  <p class="govuk-body-s">
                     <span class="sr-only">{{ _('Address') }}:</span>
                     <span class="adr">
                       <span class="street-address">{{ item.location.address }}</span>
@@ -94,25 +94,23 @@
                       <span class="postal-code">{{ item.location.postcode }}</span>
                     </span>
                   </p>
-                  <p>
+                  <p class="govuk-body-s">
                     <span>{{ _('Helpline') }}:</span>
                     <span class="tel">{{ item.telephone }}</span>
                   </p>
                   {% if item.organisation.website %}
-                    <p>
+                    <p class="govuk-body-s">
                       <span>{{ _('Website') }}:</span>
                       {{ Element.link_same_window(item.organisation.website|human_to_url, item.organisation.website|url_to_human, is_external=True, **{'class': 'url'}) }}
                     </p>
                   {% endif %}
                   {% if item.categories|length %}
-                    <div class="org-categories" role="list">
-                      <h4 class="govuk-heading-s govuk-!-font-size-16 govuk-!-margin-bottom-2">{{ _('Categories of law') }}</h4>
-                      <ul class="govuk-list govuk-list--bullet govuk-!-font-size-14" role="list">
-                        {% for cat in item.categories if cat %}
-                          <li class="govuk-!-margin-0" role="listitem">{{ cat }}</li>
-                        {% endfor %}
-                      </ul>
-                    </div>
+                    <h4 class="govuk-heading-s govuk-!-font-size-16 govuk-!-margin-bottom-2">{{ _('Categories of law') }}</h4>
+                    <ul class="govuk-list govuk-list--bullet govuk-!-font-size-14" role="list">
+                      {% for cat in item.categories if cat %}
+                        <li class="govuk-!-margin-0" role="listitem">{{ cat }}</li>
+                      {% endfor %}
+                    </ul>
                   {% endif %}
                 </div>
               </li>

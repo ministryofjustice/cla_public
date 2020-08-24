@@ -217,8 +217,13 @@ $map-height: 460px;
       border-left: 1px solid $grey-2;
       margin-left: -1px;
 
-      .fn {
-        color: $link-colour;
+      a {
+        .fn {
+          color: $govuk-link-colour;
+        }
+        &:focus .fn {
+          color: $govuk-text-colour;
+        }
       }
 
       .org-details {
