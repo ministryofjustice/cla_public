@@ -307,3 +307,18 @@
     }
   };
 
+  function setMapHeight() {
+    if ($(window).width() > 460 && $("ul.org-list").height() > 460) {
+      var setHeight = $("ul.org-list").height();
+      if (setHeight > $(window).height()) setHeight = $(window).height();
+      $(".search-results-container").height(setHeight);
+      $(".search-results-list").height(setHeight);
+    }
+  }
+  $("document").ready(function(){
+    setMapHeight();
+  });
+
+  $(".search-results-container").click(function(){
+    setMapHeight();
+  });
