@@ -336,6 +336,10 @@ $map-height: 460px;
   }
 }
 
+a.org-summary:focus {
+  background-color: $govuk-focus-colour;
+}
+
 @media print {
   .find-legal-adviser {
     page-break-before: always;
