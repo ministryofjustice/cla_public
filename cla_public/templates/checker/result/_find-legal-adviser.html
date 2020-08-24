@@ -117,7 +117,7 @@
             {% endfor %}
           </ul>
         </div>
-        <nav class="search-results-pagination" style="display:none /*reason:this-is-dormant*/">
+        <nav class="search-results-pagination" style="display:none; /*reason:this-is-dormant*/">
           <ul>
             {% if data.previous %}
               {% set prev_page = data.previous|query_to_dict('page') %}
