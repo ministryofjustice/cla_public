@@ -187,7 +187,6 @@ $map-height: 460px;
 
   .map {
     display: block;
-    height: $map-height;
     margin-bottom: 1em;
 
     @include media(mobile) {
@@ -224,6 +223,10 @@ $map-height: 460px;
         &:focus .fn {
           color: $govuk-text-colour;
         }
+      }
+
+      .postal-code {
+        text-transform:uppercase;
       }
 
       .org-details {
