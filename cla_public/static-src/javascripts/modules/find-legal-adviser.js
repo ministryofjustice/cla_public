@@ -307,19 +307,19 @@
     }
   };
 
-  function setMapHeight(setHeight) {
-    if ($(window).width() > 640) {
-      if ($("ul.org-list").height() > setHeight) setHeight = $("ul.org-list").height();
-      $(".search-results-container").height(setHeight);
-      $(".search-results-list").height(setHeight);
+  function setMapHeight() {
+    if ($(window).width() > 640 && $("ul.org-list").height() > 460) {
+      $(".search-results-container").height($("ul.org-list").height());
+      $(".search-results-list").height($("ul.org-list").height());
     }
   }
   $("document").ready(function(){
     const originalMapHeight = $(".search-results-container").height();
-    setMapHeight(originalMapHeight);
+    setMapHeight();
 
     $(".search-results-container").click(function(){
-      setMapHeight(originalMapHeight);
+      setMapHeight();
     });
 
   });
+
