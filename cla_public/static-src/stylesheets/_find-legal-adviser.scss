@@ -316,7 +316,7 @@ $map-height: 460px;
   .gmnoprint {
     div[role=button] {
       border-bottom:3px #929191 solid!important;
-      border-radius:0!important;
+      border-radius:0.01px!important;
       background-color:govuk-colour("white")!important;
       outline: none;
       color:$govuk-text-colour!important;
@@ -331,14 +331,16 @@ $map-height: 460px;
       }
     }
   }
-  .gm-style-cc a {
+  .gm-style-cc a:focus {
     outline-offset:0;
+    outline: solid 2px $govuk-focus-colour;
   }
 }
 
-a.org-summary:focus {
+.search-results-container a:focus {
   background-color: $govuk-focus-colour;
 }
+
 
 @media print {
   .find-legal-adviser {
