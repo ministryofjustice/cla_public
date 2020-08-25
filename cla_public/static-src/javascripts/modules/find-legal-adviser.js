@@ -310,15 +310,14 @@
   function setMapHeight(setHeight) {
     if ($(window).width() > 640) {
       if ($("ul.org-list").height() > setHeight) setHeight = $("ul.org-list").height();
-      $(".search-results-container").height(setHeight);
-      $(".search-results-list").height(setHeight);
+      $(".search-results-container, .search-results-list").height(setHeight);
     }
   }
 
   $("document").ready(function(){
     setMapHeight(460);
+    $(".search-results-container").click(function(){
+      setMapHeight(460);
+    });
   });
 
-  $(".search-results-container").click(function(){
-    setMapHeight(460);
-  });
