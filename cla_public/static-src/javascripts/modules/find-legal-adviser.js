@@ -1,4 +1,4 @@
-const wideScreen = 641;
+var wideScreen = 641;
  'use strict';
   var _ = require('lodash');
   moj.Modules.FindLegalAdviser = {
