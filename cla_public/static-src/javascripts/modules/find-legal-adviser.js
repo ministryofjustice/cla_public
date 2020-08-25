@@ -1,3 +1,4 @@
+const wideScreen = 641;
  'use strict';
   var _ = require('lodash');
   moj.Modules.FindLegalAdviser = {
@@ -24,7 +25,7 @@
 
     // Handle events which rely on media queries
     _handleMQTest: function() {
-      if(window.Modernizr.mq('(min-width: 641px)')) {
+      if(window.Modernizr.mq('(min-width: ' + wideScreen + 'px)')) {
         if(!this.eventsBound) {
           this.bindEvents();
         }
@@ -308,7 +309,7 @@
   };
 
   function setMapHeight(setHeight) {
-    if ($(window).width() > 640) {
+    if ($(window).width() >= wideScreen) {
       var listHeight = $("ul.org-list").height();
       if (listHeight > setHeight) setHeight = listHeight;
       $(".search-results-container, .search-results-list").height(setHeight);
