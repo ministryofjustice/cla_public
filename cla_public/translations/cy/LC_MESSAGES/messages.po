@@ -1943,6 +1943,10 @@ msgstr "Gwall"
 msgid "Show {count} more"
 msgstr "Dangos {count} mwy"
 
+#: cla_public/templates/base.html:148
+msgid "Show {count} more sources of help"
+msgstr "Dangos {count} mwy"
+
 #: cla_public/templates/base.html:155 cla_public/templates/online-safety.html:3
 #: cla_public/templates/online-safety.html:6
 msgid "Staying safe online"

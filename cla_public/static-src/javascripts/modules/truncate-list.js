@@ -42,7 +42,7 @@
     },
 
     addExpandLink: function(listContainer, $listItems) {
-      var expandButton = $(this.$expandButtonTemplate.replace('{count}', listContainer.remainingCount));
+      var expandButton = $(this.$expandButtonTemplate.replace(/{count}/g, listContainer.remainingCount));
       var $listContainer = $(listContainer);
 
       expandButton.appendTo($listContainer);
