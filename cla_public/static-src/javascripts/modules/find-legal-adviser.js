@@ -308,19 +308,18 @@
   };
 
   function setMapHeight(setHeight) {
-    console.log(setHeight);
     if ($(window).width() > 640) {
-      let listHeight = $("ul.org-list").height();
+      var listHeight = $("ul.org-list").height();
       if (listHeight > setHeight) setHeight = listHeight;
       $(".search-results-container, .search-results-list").height(setHeight);
     }
   }
 
   $("document").ready(function(){
-    $(".search-results-container").data("originalheight", $(".search-results-container").height());
-    setMapHeight(460);
+    var originalHeight = $(".search-results-container").height();
+    setMapHeight(originalHeight);
     $(".search-results-container").click(function(){
-      setMapHeight(460);
+      setMapHeight(originalHeight);
     });
   });
 
