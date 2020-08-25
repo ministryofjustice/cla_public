@@ -317,7 +317,7 @@ var wideScreen = 641;
   }
 
   $("document").ready(function(){
-    var originalHeight = $(".search-results-container").height();
+    var originalHeight = $("#resultsMap").height();
     setMapHeight(originalHeight);
     $(".search-results-container").click(function(){
       setMapHeight(originalHeight);
