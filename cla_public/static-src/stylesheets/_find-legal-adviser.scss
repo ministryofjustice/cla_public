@@ -17,14 +17,6 @@ $map-height: 460px;
     }
   }
 
-  .org-category {
-    font-size: 11px;
-    display: inline-block;
-    padding: 1px 5px;
-    background: $yellow-25;
-    text-transform: uppercase;
-  }
-
   .results-filter {
     cursor: default;
     display: inline-block;
@@ -56,6 +48,10 @@ $map-height: 460px;
   }
 
   .search-results-list {
+    .org-details {
+      outline:none;
+    }
+
     .org-list {
       margin: 0;
       padding: 0;
@@ -63,7 +59,7 @@ $map-height: 460px;
     }
 
     .org-list-item {
-      border-top: 1px solid $grey-3;
+      border-top: 1px solid $govuk-border-colour;
       padding: 10px;
       margin: 0;
       display: block;
@@ -106,7 +102,7 @@ $map-height: 460px;
     }
 
     .distance {
-      color: $grey-1;
+      color: $govuk-text-colour;
       font-size: .8em;
       float: right;
       margin-right: -80px;
@@ -195,7 +191,6 @@ $map-height: 460px;
 
   .map {
     display: block;
-    height: $map-height;
     margin-bottom: 1em;
 
     @include media(mobile) {
@@ -225,8 +220,17 @@ $map-height: 460px;
       border-left: 1px solid $grey-2;
       margin-left: -1px;
 
-      .fn {
-        color: $link-colour;
+      a {
+        .fn {
+          color: $govuk-link-colour;
+        }
+        &:focus .fn {
+          color: $govuk-text-colour;
+        }
+      }
+
+      .postal-code {
+        text-transform:uppercase;
       }
 
       .org-details {
@@ -252,11 +256,11 @@ $map-height: 460px;
         padding: 4px;
 
         &:hover {
-          background: $grey-4;
+          background: govuk-colour("light-grey");
         }
 
         &.s-highlighted {
-          background: $yellow;
+          background: $govuk-focus-colour;
         }
       }
 
@@ -297,6 +301,51 @@ $map-height: 460px;
   }
 }
 
+#resultsMap.map {
+  * {
+    font-family:"GDS Transport",Arial,sans-serif!important;
+  }
+
+  .gm-style {
+    button:hover, div[role=button]:hover {
+      background-color: govuk-colour("light-grey") !important;
+      outline: govuk-colour("light-grey") 0px solid;
+    }
+    button:focus, div[role=button]:focus {
+      background-color: $govuk-focus-colour !important;
+      outline: $govuk-focus-colour 0px solid;
+    }
+  }
+
+  .gmnoprint {
+    div[role=button] {
+      border-bottom:3px #929191 solid!important;
+      border-radius:0.01px!important;
+      background-color:govuk-colour("white")!important;
+      outline: none;
+      color:$govuk-text-colour!important;
+      border:1px solid govuk-colour("light-grey");
+
+      &:hover {
+        background-color:govuk-colour("light-grey")!important;
+      }
+      &:focus {
+        background-color: $govuk-focus-colour !important;
+        border-bottom-color:govuk-colour("black")!important;
+      }
+    }
+  }
+  .gm-style-cc a:focus {
+    outline-offset:0;
+    outline: solid 2px $govuk-focus-colour;
+  }
+}
+
+.search-results-container a:focus {
+  background-color: $govuk-focus-colour;
+}
+
+
 @media print {
   .find-legal-adviser {
     page-break-before: always;
@@ -335,6 +384,12 @@ $map-height: 460px;
 @media screen and (min-width:641px) {
   .govuk-grid-column-two-thirds .find-legal-adviser {
     width:150%;
-    max-width: 660px;
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-results-container, .search-results-list {
+    height: auto!important;
   }
 }
