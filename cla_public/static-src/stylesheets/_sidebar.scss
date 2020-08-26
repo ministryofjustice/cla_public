@@ -1,6 +1,16 @@
+body:not(.cla-production) .sidebar {
+  border-top: 10px solid $laa-unknown-colour;
+}
+body.cla-staging .sidebar {
+  border-top: 10px solid $laa-staging-colour;
+}
+body.cla-dev .sidebar {
+  border-top: 10px solid $laa-dev-colour;
+}
+
 .sidebar {
   margin-top: 40px;
-  border-top: 10px solid $govuk-blue;
+  border-top: 10px solid $govuk-brand-colour;
 
   h2 {
     margin: 0 0 10px;

@@ -2906,8 +2906,24 @@ msgstr ""
 msgid "Start again"
 msgstr ""
 
-#: cla_public/templates/checker/_progress.html:12
-msgid "(completed)"
+#: cla_public/templates/checker/_progress.html:14
+msgid "Current page"
+msgstr ""
+
+#: cla_public/templates/checker/_progress.html:16
+msgid "Completed page"
+msgstr ""
+
+#: cla_public/templates/checker/_progress.html:18
+msgid "Future page"
+msgstr ""
+
+#: cla_public/templates/checker/_progress.html:29
+msgid "Final page"
+msgstr ""
+
+#: cla_public/templates/checker/_progress.html:31
+msgid "Approximately %(approximate_percentage)s&#37; completed"
 msgstr ""
 
 #: cla_public/templates/checker/_progress.html:18

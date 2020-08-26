@@ -4,19 +4,34 @@
 {% set completion_percentage = completed_step_count / total_step_count * 100 %}
 {% set current_percentage = current_step.count / total_step_count * 100 if current_step else 0 %}
 {% set is_contact_page = request.path.startswith('/result/') %}
-{% set completion_perc_offset = 0 if is_contact_page else -5 %}
+{% set completion_perc_offset = 0 if is_contact_page else -2 %}
 
 {% import "macros/element.html" as Element %}
 
-{% macro step_status(is_completed=False) %}
-  <span class="step-status">{% if is_completed %}{{ _('(completed)') }}{% endif %}</span>
+{% macro step_status(is_completed=False, is_current=False) %}
+  <span class="step-status">
+    {% if is_current %}
+      {{ _('Current page') }}:
+    {% elif is_completed %}
+      {{ _('Completed page') }}:
+    {% else %}
+      {{ _('Future page') }}:
+    {% endif %}
+  </span>
 {% endmacro %}
 
 <div class="progress">
-  {{ Element.progress_bar(current_percentage, current_percentage, completion_perc_offset) }}
+  {{ Element.progress_bar(current_percentage, completion_perc_offset) }}
 
   <h2 class="govuk-heading-m">{{ _('Your progress') }}</h2>
-  <span class="govuk-visually-hidden">{{current_percentage}}%</span>
+  <span class="govuk-visually-hidden">
+    {% if is_contact_page %}
+      {{ _('Final page')}}
+    {% else %}
+      {% set approximate_percentage = ((current_percentage - 0.1) // 5 * 5) | int %}
+      {% trans %}Approximately {{ approximate_percentage }}&#37; completed{% endtrans %}
+    {% endif %}
+  </span>
 
   <ul class="progress-steps">
     {% for step in steps if step.name in ['problem', 'about']
@@ -26,17 +41,14 @@
         {% if step.is_completed %}m-completed{% endif %}
         {% if step.is_current %}m-current{% endif %}"
       >
-        {% if (step.is_completed and not is_contact_page)
-          or (steps[loop.index0 - 1].is_completed and not is_contact_page)
-          or step.is_current
-        %}
+        {% if (step.is_completed and not is_contact_page and not step.is_current) %}
           <a class="step-name" href="{{ url_for('checker.wizard', step=step.name) }}">
-            {{ step_status(step.is_completed) }}
+            {{ step_status(step.is_completed, step.is_current) }}
             {{ step.form_class.title }}
           </a>
         {% else %}
           <span class="step-name">
-            {{ step_status(step.is_completed) }}
+            {{ step_status(step.is_completed, step.is_current) }}
             {{ step.form_class.title }}
           </span>
         {% endif %}
@@ -46,6 +58,7 @@
       and not (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed)
     %}
       <li class="progress-step m-collapsed">
+        <span class="govuk-visually-hidden">_('Several future pages')</span>
         {% for n in range(3) %}
           <div class="step-name"></div>
         {% endfor %}
@@ -55,12 +68,12 @@
       {% if current_step.name == 'review' %}m-current{% endif %}
       {% if not has_remaining_forms and current_step.name != 'review' %}m-completed{% endif %}"
     >
-      {% if has_remaining_forms or is_contact_page %}
+      {% if has_remaining_forms or is_contact_page or current_step.name == 'review'%}
         <span class="step-name">
       {% else %}
         <a class="step-name" href="{{ url_for('checker.wizard', step='review') }}">
       {% endif %}
-        {{ step_status(not has_remaining_forms) }}
+        {{ step_status(not has_remaining_forms, current_step.name == 'review') }}
         {{ _('Review your answers') }}
       {% if has_remaining_forms or is_contact_page %}
         </span>
@@ -70,7 +83,7 @@
     </li>
     <li class="progress-step {% if is_contact_page %}m-current{% endif %}">
       <span class="step-name">
-        {{ step_status() }}
+        {{ step_status(false, is_contact_page) }}
         {{ _('Contact information') }}
       </span>
     </li>

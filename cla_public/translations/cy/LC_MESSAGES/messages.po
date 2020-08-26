@@ -3388,9 +3388,25 @@ msgstr "Gallwch ddechrau eto isod."
 msgid "Start again"
 msgstr "Dechrau eto"
 
-#: cla_public/templates/checker/_progress.html:12
-msgid "(completed)"
-msgstr "(wedi’i gwblhau)"
+#: cla_public/templates/checker/_progress.html:14
+msgid "Current page"
+msgstr ""
+
+#: cla_public/templates/checker/_progress.html:16
+msgid "Completed page"
+msgstr "Wedi’i gwblhau"
+
+#: cla_public/templates/checker/_progress.html:18
+msgid "Future page"
+msgstr ""
+
+#: cla_public/templates/checker/_progress.html:29
+msgid "Final page"
+msgstr ""
+
+#: cla_public/templates/checker/_progress.html:31
+msgid "Approximately %(approximate_percentage)s&#37; completed"
+msgstr "Tua %(approximate_percentage)s&#37; wedi’i gwblhau"
 
 #: cla_public/templates/checker/_progress.html:18
 msgid "Your progress"
