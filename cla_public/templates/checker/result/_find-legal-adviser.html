@@ -117,38 +117,6 @@
             {% endfor %}
           </ul>
         </div>
-        <nav class="search-results-pagination" style="display:none; /*reason:this-is-dormant*/">
-          <ul>
-            {% if data.previous %}
-              {% set prev_page = data.previous|query_to_dict('page') %}
-              <li class="results-nav results-nav-prev">
-                <a
-                  href="{{ url_for(request.url_rule.endpoint,
-                    postcode=request.args['postcode'],
-                    page=prev_page,
-                    category=category) }}"
-                  data-page="{{prev_page}}"
-                >
-                  {{ _('Previous') }}
-                </a>
-              </li>
-            {% endif %}
-            {% if data.next %}
-              {% set next_page = data.next|query_to_dict('page')|first %}
-              <li class="results-nav results-nav-next">
-                <a
-                  href="{{ url_for(request.url_rule.endpoint,
-                    postcode=request.args['postcode'],
-                    page=next_page,
-                    category=category) }}"
-                  data-page="{{next_page}}"
-                >
-                  {{ _('Next') }}
-                </a>
-              </li>
-            {% endif %}
-          </ul>
-        </nav>
       </div>
     </div>
   {% elif 'count' in data and data.count == 0 %}
