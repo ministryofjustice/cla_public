@@ -16,11 +16,11 @@
         </strong>
       </a>
     {% elif config["CLA_ENV"] == "staging" %}
-    <a class="govuk-link" href="/start">
-      <strong class="govuk-tag govuk-phase-banner__content__tag">
-        Staging
-      </strong>
-    </a>
+      <a class="govuk-link" href="/start">
+        <strong class="govuk-tag govuk-phase-banner__content__tag">
+          Staging
+        </strong>
+      </a>
     {% endif %}
     <span class="govuk-phase-banner__text" id="aria-feedback">
       {% set contact_url = url_for('base.reasons_for_contacting') %}
