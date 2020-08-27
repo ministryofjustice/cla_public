@@ -74,7 +74,15 @@
   </head>
 
   <body class="govuk-template__body 
-  {% block body_classes %}{{ product_type }} {{ phase }} {{ 'cla-staging' if config["CLA_ENV"] != 'production' else 'cla-production' }}{% endblock %}">
+  {% block body_classes %}{{ product_type }} {{ phase }}
+  {% if config["CLA_ENV"] == 'staging'%}
+  {{ 'cla-staging' }} 
+  {% elif config["CLA_ENV"] == 'production'%}
+  {{ 'cla-production' }}
+  {% else %}
+  {{ 'cla-dev' }}
+  {% endif %}
+  {% endblock %}">
     <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
     <div class="laa-flee-button-container
@@ -100,19 +108,6 @@
     
     <header class="govuk-header " role="banner" data-module="govuk-header">
       <div class="govuk-header__container govuk-width-container {% block error_class %}{% endblock %}">
-          {% if config["CLA_ENV"] != "production" %}
-      <a class="govuk-link" href="/start">
-        <strong class="govuk-tag govuk-phase-banner__content__tag">
-          Staging
-        </strong>
-      </a>
-    {% else %}
-    <a class="govuk-link" href="/start">
-      <strong class="govuk-tag govuk-phase-banner__content__tag">
-        Production
-      </strong>
-    </a>
-    {% endif %}
         <div class="govuk-header__logo">
           <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
             <span class="govuk-header__logotype">
