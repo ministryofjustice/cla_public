@@ -121,25 +121,11 @@
 
         <div class="govuk-phase-banner">
           <p class="govuk-phase-banner__content">
-            {% if config["CLA_ENV"] == "staging" %}
-              <a class="govuk-link" href="/start">
-                <strong class="govuk-tag govuk-phase-banner__content__tag">
-                  Staging
-                </strong>
-              </a>
-              {% if config["CLA_ENV"] == "production" %}
-              <a class="govuk-link" href="/start">
-                <strong class="govuk-tag govuk-phase-banner__content__tag">
-                  Production
-                </strong>
-              </a>
-              {% else %}
-              <a class="govuk-link" href="/start">
-                <strong class="govuk-tag govuk-phase-banner__content__tag">
-                  Dev
-                </strong>
-              </a>
-            {% endif %}
+            <a class="govuk-link" href="/start">
+              <strong class="govuk-tag govuk-phase-banner__content__tag">
+                {{ config["CLA_ENV"].upper() }}
+              </strong>
+            </a>
             <span class="govuk-phase-banner__text" id="aria-feedback">
               {% trans %}<a href="{{ url_for('base.reasons_for_contacting')}}">Report a problem</a> if you need help or would like to give feedback to improve this service{% endtrans %}
             </span>
