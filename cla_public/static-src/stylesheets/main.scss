@@ -398,3 +398,12 @@ dl.govuk-list.govuk-list--bullet {
     background-color:govuk-colour("pink");
   }
 }
+
+.cla-production {
+  .govuk-header__container {
+    border-bottom-color:govuk-colour("red");
+  }
+  .govuk-tag {
+    background-color:govuk-colour("red");
+  }
+}
