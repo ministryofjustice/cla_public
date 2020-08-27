@@ -74,15 +74,7 @@
   </head>
 
   <body class="govuk-template__body 
-  {% block body_classes %}{{ product_type }} {{ phase }}
-  {% if config["CLA_ENV"] == 'staging'%}
-  {{ 'cla-staging' }} 
-  {% elif config["CLA_ENV"] == 'production'%}
-  {{ 'cla-production' }}
-  {% else %}
-  {{ 'cla-dev' }}
-  {% endif %}
-  {% endblock %}">
+  {% block body_classes %}{{ product_type }} {{ phase }} {{ 'cla-' + config["CLA_ENV"] if config["CLA_ENV"] != 'production' }} {% endblock %}">
     <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
     <div class="laa-flee-button-container
