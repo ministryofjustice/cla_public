@@ -9,16 +9,22 @@
       Beta
     </strong>
     -->
-    {% if config["CLA_ENV"] != "production" %}
+    {% if config["CLA_ENV"] == "staging" %}
       <a class="govuk-link" href="/start">
         <strong class="govuk-tag govuk-phase-banner__content__tag">
           Staging
         </strong>
       </a>
-    {% else %}
+    {% elif config["CLA_ENV"] == "production" %}
     <a class="govuk-link" href="/start">
       <strong class="govuk-tag govuk-phase-banner__content__tag">
         Production
+      </strong>
+    </a>
+    {% else %}
+    <a class="govuk-link" href="/start">
+      <strong class="govuk-tag govuk-phase-banner__content__tag">
+        Dev
       </strong>
     </a>
     {% endif %}
