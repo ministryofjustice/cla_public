@@ -127,6 +127,12 @@
                   Staging
                 </strong>
               </a>
+              {% else %}
+              <a class="govuk-link" href="/start">
+                <strong class="govuk-tag govuk-phase-banner__content__tag">
+                  Production
+                </strong>
+              </a>
             {% endif %}
             <span class="govuk-phase-banner__text" id="aria-feedback">
               {% trans %}<a href="{{ url_for('base.reasons_for_contacting')}}">Report a problem</a> if you need help or would like to give feedback to improve this service{% endtrans %}
