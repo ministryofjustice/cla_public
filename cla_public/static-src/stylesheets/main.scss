@@ -399,15 +399,6 @@ dl.govuk-list.govuk-list--bullet {
   }
 }
 
-.cla-production {
-  .govuk-header__container {
-    border-bottom-color:govuk-colour("red");
-  }
-  .govuk-tag {
-    background-color:govuk-colour("red");
-  }
-}
-
 .cla-dev {
   .govuk-header__container {
     border-bottom-color:govuk-colour("turquoise");
