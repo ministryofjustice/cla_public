@@ -21,6 +21,12 @@
           Staging
         </strong>
       </a>
+    {% elif config["CLA_ENV"] != "production" %}
+      <a class="govuk-link" href="/start">
+        <strong class="govuk-tag govuk-phase-banner__content__tag">
+          {{ config["CLA_ENV"].title() }}
+        </strong>
+      </a>
     {% endif %}
     <span class="govuk-phase-banner__text" id="aria-feedback">
       {% set contact_url = url_for('base.reasons_for_contacting') %}

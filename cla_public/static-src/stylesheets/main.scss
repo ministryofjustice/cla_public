@@ -390,6 +390,15 @@ dl.govuk-list.govuk-list--bullet {
   display:none;
 }
 
+body:not(.cla-production) {
+  .govuk-header__container {
+    border-bottom-color:govuk-colour("orange");
+  }
+  .govuk-phase-banner__content__tag{
+    background-color:govuk-colour("orange");
+  }
+}
+
 .cla-staging {
   .govuk-header__container {
     border-bottom-color:govuk-colour("pink");
