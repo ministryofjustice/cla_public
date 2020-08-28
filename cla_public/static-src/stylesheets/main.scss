@@ -399,7 +399,7 @@ body:not(.cla-production) {
   }
 }
 
-.cla-staging {
+body.cla-staging {
   .govuk-header__container {
     border-bottom-color:govuk-colour("pink");
   }
@@ -408,7 +408,7 @@ body:not(.cla-production) {
   }
 }
 
-.cla-dev {
+body.cla-dev {
   .govuk-header__container {
     border-bottom-color:govuk-colour("turquoise");
   }
