@@ -27,7 +27,7 @@
           {% endif %}
         {% endif %}
 
-          {{ Form.fieldset(property.is_main_home) }}
+          {{ Form.fieldset(property.is_main_home, hidden_legend_prefix='Property ' + loop.index) }}
           {{ Form.fieldset(property.other_shareholders) }}
           {{ Form.group(property.property_value, field_attrs={'prefix': '£', 'class_': ''}) }}
           {{ Form.group(property.mortgage_remaining, field_attrs={'prefix': '£', 'class_': ''}) }}
