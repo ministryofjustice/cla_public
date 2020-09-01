@@ -27,19 +27,19 @@
           {% endif %}
         {% endif %}
 
-          {{ Form.fieldset(property.is_main_home, hidden_legend_prefix='Property ' + loop.index) }}
-          {{ Form.fieldset(property.other_shareholders) }}
-          {{ Form.group(property.property_value, field_attrs={'prefix': '£', 'class_': ''}) }}
-          {{ Form.group(property.mortgage_remaining, field_attrs={'prefix': '£', 'class_': ''}) }}
-          {{ Form.group(property.mortgage_payments, field_attrs={'prefix': '£', 'class_': ''}) }}
+        {{ Form.fieldset(property.is_main_home, hidden_legend_prefix='Property ' ~ loop.index) }}
+        {{ Form.fieldset(property.other_shareholders) }}
+        {{ Form.group(property.property_value, field_attrs={'prefix': '£', 'class_': ''}) }}
+        {{ Form.group(property.mortgage_remaining, field_attrs={'prefix': '£', 'class_': ''}) }}
+        {{ Form.group(property.mortgage_payments, field_attrs={'prefix': '£', 'class_': ''}) }}
 
-          {% call Form.fieldset(property.is_rented) %}
-            <div class="govuk-radios__conditional">
-              {{ Form.currency_fieldset(property.rent_amount, '', controlled_by=property.is_rented) }}
-            </div>
-          {% endcall %}
+        {% call Form.fieldset(property.is_rented) %}
+          <div class="govuk-radios__conditional">
+            {{ Form.currency_fieldset(property.rent_amount, '', controlled_by=property.is_rented) }}
+          </div>
+        {% endcall %}
 
-          {{ Form.fieldset(property.in_dispute) }}
+        {{ Form.fieldset(property.in_dispute) }}
       {% endcall %}
     {% endfor %}
 

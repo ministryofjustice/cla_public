@@ -15,9 +15,6 @@
 #}
 {% macro fieldset(field=None, class_='govuk-fieldset ', legend=None, field_attrs={}, hidden_legend_prefix=None) %}
   {% set legend_ = field.label.text if field else legend %}
-  {% if hidden_legend_prefix %}
-    {% set legend_ = '<span class="govuk-visually-hidden">' + hidden_legend_prefix + '</span>' + legend_ | safe %}
-  {% endif %}
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
   {% set legend_size = kwargs.legend_size if kwargs.legend_size else 's' %}
@@ -35,6 +32,9 @@
     >
       {% if legend_ %}
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--{{ legend_size }}" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
+          {% if hidden_legend_prefix %}
+            <span class="govuk-visually-hidden">{{ hidden_legend_prefix }}</span>
+          {% endif %}
           {{ legend_ }}
         </legend>
       {% endif %}
