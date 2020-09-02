@@ -24,6 +24,9 @@ $govuk-typography-use-rem: false;
 @import "govuk_publishing_components/components/button";
 @import "govuk_publishing_components/components/notice";
 
+$laa-unknown-colour: govuk-colour("orange");
+$laa-staging-colour: govuk-colour("turquoise");
+$laa-dev-colour: govuk-colour("pink");
 @import 'phase-banner';
 @import 'typography';
 @import 'forms';
@@ -389,3 +392,31 @@ dl.govuk-list.govuk-list--bullet {
 .laa-flee-button-container {
   display:none;
 }
+
+body:not(.cla-production) {
+  .govuk-header__container {
+    border-bottom-color:$laa-unknown-colour;
+  }
+  .govuk-phase-banner__content__tag{
+    background-color:$laa-unknown-colour
+  }
+}
+
+body.cla-staging {
+  .govuk-header__container {
+    border-bottom-color:$laa-staging-colour;
+  }
+  .govuk-phase-banner__content__tag {
+    background-color:$laa-staging-colour;
+  }
+}
+
+body.cla-dev {
+  .govuk-header__container {
+    border-bottom-color:$laa-dev-colour;
+  }
+  .govuk-phase-banner__content__tag{
+    background-color:$laa-dev-colour;
+  }
+}
+

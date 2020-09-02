@@ -9,6 +9,7 @@
       Beta
     </strong>
     -->
+    {% include '_environment-badge.html' %}
     <span class="govuk-phase-banner__text" id="aria-feedback">
       {% set contact_url = url_for('base.reasons_for_contacting') %}
       {% trans %}<a class="govuk-link" href="{{ contact_url }}">Contact us</a> if you need help or would like to give feedback to improve this service{% endtrans %}
