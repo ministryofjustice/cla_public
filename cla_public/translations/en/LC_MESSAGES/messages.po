@@ -2926,6 +2926,10 @@ msgstr ""
 msgid "Approximately %(approximate_percentage)s&#37; completed"
 msgstr ""
 
+#: cla_public/templates/checker/_progress.html:61
+msgid "Several future pages"
+msgstr ""
+
 #: cla_public/templates/checker/_progress.html:18
 msgid "Your progress"
 msgstr ""

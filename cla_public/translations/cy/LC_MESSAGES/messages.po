@@ -3408,6 +3408,10 @@ msgstr ""
 msgid "Approximately %(approximate_percentage)s&#37; completed"
 msgstr "Tua %(approximate_percentage)s&#37; wedi’i gwblhau"
 
+#: cla_public/templates/checker/_progress.html:61
+msgid "Several future pages"
+msgstr ""
+
 #: cla_public/templates/checker/_progress.html:18
 msgid "Your progress"
 msgstr "Eich cynnydd"
