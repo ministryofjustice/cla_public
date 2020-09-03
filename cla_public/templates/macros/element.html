@@ -75,18 +75,14 @@
   Progress bar
 
   Params:
-    - current <Number>
     - completed <Number>
 #}
 
-{%  macro progress_bar(current, completed, offset=-5) %}
-  {% if current is number or completed is number %}
+{%  macro progress_bar(completed, offset=-5) %}
+  {% if completed is number %}
     <div class="progress-bar">
       {% if completed %}
-        <div class="progress-value m-completed" style="width:{{ completed + offset }}%;"></div>
-      {% endif %}
-      {% if current %}
-        <div class="progress-value m-current" style="left:{{ current + offset }}%;"></div>
+        <div class="progress-value m-completed {{ 'cla-progress-unfinished' if not completed + offset >= 100 }}" style="width:{{ completed + offset }}%;"></div>
       {% endif %}
     </div>
   {% endif %}
