@@ -13,7 +13,7 @@
     - attrs <object> (default: None)
         Custom HTML attributes for fieldset element
 #}
-{% macro fieldset(field=None, class_='govuk-fieldset ', legend=None, field_attrs={}) %}
+{% macro fieldset(field=None, class_='govuk-fieldset ', legend=None, field_attrs={}, hidden_legend_prefix=None) %}
   {% set legend_ = field.label.text if field else legend %}
   {% set controlled_by = kwargs.controlled_by %}
   {% set control_value = kwargs.control_value if kwargs.control_value else '1' %}
@@ -32,6 +32,9 @@
     >
       {% if legend_ %}
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--{{ legend_size }}" {% if field %} id="field-label-{{ field.id }}"{% endif %}>
+          {% if hidden_legend_prefix %}
+            <span class="govuk-visually-hidden">{{ hidden_legend_prefix }} </span>
+          {% endif %}
           {{ legend_ }}
         </legend>
       {% endif %}
