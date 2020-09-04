@@ -6,7 +6,16 @@
 {% if form.title %}
   {% set title = form.title %}
 {% endif %}
-{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+{% block page_title %}
+  {% if form.errors %}
+    {% if request.cookies.get('locale') == 'cy_GB' %}
+      Gwall:
+    {% else %}
+      Error:
+    {% endif %}
+  {% endif %}
+  {{ title }} - {{ super() }}
+{% endblock %}
 
 {% block sidebar %}
   <aside class="sidebar">
