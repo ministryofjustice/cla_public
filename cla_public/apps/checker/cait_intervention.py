@@ -47,8 +47,17 @@ def get_uuid():
     return uuid.uuid1()
 
 
+class CreateCaitParams:
+    def __init__(self):
+        self.params = {}
+
+    def create_cait_survey_params(self):
+        pass
+
+
 def get_cait_params(category_name, organisations, choices=[], truncate=5):  # noqa: C901
-    params = {}
+    params_class = CreateCaitParams()
+    params = params_class.params
     if category_name != "Family" or request.path != "/scope/refer/family":
         return params
 
