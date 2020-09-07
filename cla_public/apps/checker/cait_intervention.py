@@ -54,10 +54,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):  # no
 
     try:
         cait_intervention_config = get_config()
-    except ConfigException:
-        return params
 
-    try:
         # Make sure any errors with the json/config do not effect the site
 
         survey_config = cait_intervention_config.get("survey", {})
@@ -118,6 +115,10 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):  # no
         if params.get("info_tools"):
             params["cait_css"] = css_config
             params["cait_js"] = js_config
+
+    except ConfigException:
+        return params
+
     except Exception:
         pass
 
