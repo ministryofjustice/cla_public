@@ -53,7 +53,7 @@
   {% endif %}
 
   {% if data and data.count and data.count > 0 %}
-    <p class="govuk-body">
+    <p id="larp-results" class="govuk-body">
       {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
       <strong class="govuk-!-font-weight-bold">{{ data.origin.postcode }}</strong>
       {% if category_name %}
