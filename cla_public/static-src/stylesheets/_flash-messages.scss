@@ -1,29 +1,12 @@
-.flash-messages {
-  position: relative;
-  margin-top: -40px;
-  margin-bottom: 30px;
-  background: $yellow-25;
+.laa-datastore_banner {
+  background-color: $govuk-brand-colour;
+  color: white;
+  margin: -20px 15px 30px;
   padding: 10px 20px;
-  font-size: .9em;
-  padding-right: 40px;
 
-  .flash-messages-close {
-    position: absolute;
-    right: 13px;
-    top: 13px;
-    border: 0;
-    text-indent: -999em;
-    cursor: pointer;
-    opacity: .7;
-
-    &:hover {
-      opacity: 1;
-    }
+  &-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
-}
-
-.flash-messages-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
