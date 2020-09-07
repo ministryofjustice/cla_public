@@ -258,6 +258,11 @@
 
       if(this.$form.data('error-banner') !== false) {
         this.$form.closest('main').prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
+        if (GOVUK.getCookie("locale") == "cy_GB") {
+          $("title").prepend("Gwall: ");
+        } else {
+          $("title").prepend("Error: ");
+        }
       }
 
       // Report to GA about form errors
@@ -278,6 +283,11 @@
     },
 
     clearErrors: function() {
+      $("title").text(
+        $("title").text()
+          .replace("Error: ", "")
+          .replace("Gwall: ", "")
+      );
       $('.govuk-error-message').remove();
       $('.form-row.field-error').remove();
       $('form>.alert.alert-error').remove();
