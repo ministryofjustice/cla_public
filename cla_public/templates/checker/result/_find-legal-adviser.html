@@ -49,7 +49,7 @@
     </div>
   {% endif %}
 
-  <section class="find-legal-adviser">
+  <section class="find-legal-adviser govuk-!-margin-bottom-7">
 
     <div class="search-results-container">
       {% if data.origin %}
@@ -124,6 +124,8 @@
       We are constantly updating our records so please try again later.{% endtrans %}
     </p>
   {% endcall %}
+
+  {% set postcode_error %}
 
   {% set find_legal_advisor_subtitle = _('Try again') %}
 
@@ -200,8 +202,11 @@
 <form method="GET">
   {{ Form.postcode_input(form.postcode) }}
   {% if category %}
-    <div class="govuk-form-group">
-      <input class="govuk-input govuk-input--width-10" id="category" type="hidden" name="category" value="{{ category }}" />
+    <div class="govuk-form-group {{ 'govuk-form-group--error' if postcode_error }}">
+      {% if postcode_error %}
+        {{ _('Postcode not found') }}
+      {% endif %}
+      <input class="govuk-input govuk-input--width-10 {{ 'govuk-input--error' if postcode_error }}" id="category" type="hidden" name="category" value="{{ category }}" />
     </div>
   {% endif %}
   <button class="govuk-button" type="submit">
