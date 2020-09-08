@@ -455,10 +455,10 @@
 {% endmacro %}
 
 {% macro postcode_input(field, prefix=None, suffix=None, class_='', skip=False, default_value='0', custom_error='') %}
-  {% if field and field.errors %}
-    {% set error_message_text = field.errors[0] %}
-  {% elif custom_error != '' %}
+  {% if custom_error != '' %}
     {% set error_message_text = custom_error %}
+  {% elif field and field.errors %}
+    {% set error_message_text = field.errors[0] %}
   {% endif %}
   <div class="govuk-form-group {{"govuk-form-group--error" if error_message_text|length > 1  }}">
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>

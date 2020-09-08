@@ -218,14 +218,13 @@
 <form method="GET">
   {% if postcode_error == true %}
     {{ Form.postcode_input(form.postcode, custom_error=_('Postcode not found')) }}
-  {% elif error_text|length > 1 %}
+  {% elif error_text %}
     {{ Form.postcode_input(form.postcode, custom_error=error_text) }}
   {% else %}
     {{ Form.postcode_input(form.postcode) }}
   {% endif %}
   {% if category %}
     <div class="govuk-form-group ">
-    {{ error_text }}
       <input class="govuk-input govuk-input--width-10 " id="category" type="hidden" name="category" value="{{ category }}" />
     </div>
   {% endif %}
