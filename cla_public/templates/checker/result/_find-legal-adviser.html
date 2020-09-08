@@ -113,6 +113,66 @@
     {% endcall %}
   {% else %}
 
+    {% if category == 'clinneg' %}
+      <h1 class="govuk-heading-xl">
+        {{ _('A legal adviser may be able to help you') }}
+      </h1>
+      <p class="govuk-body">
+        {% trans %}You will usually only get legal aid for advice about
+          clinical negligence if your child has suffered a brain injury during pregnancy,
+          birth or in the first 8 weeks of life.{% endtrans %}
+      </p>
+      <h2 class="govuk-heading-m">{% trans %}What happens next{% endtrans %}</h2>
+      <p class="govuk-body">
+        {% trans %}You should contact a legal aid adviser in your area,
+            who may be able to help.{% endtrans %}
+      </p>
+
+    {% elif category == 'pi' %}
+      <h1 class="govuk-heading-xl">
+        {{ _('Legal aid is not usually available for advice about personal injury') }}
+      </h1>
+      <p class="govuk-body">
+        {% trans %}You may be able to get legal aid in exceptional cases. You
+          could seek advice from a legal adviser about whether an application
+          might succeed in your case and how to apply.{% endtrans %}
+      </p>
+      <h2 class="govuk-heading-m">What happens next</h2>
+    {% elif category == 'debt' or category == 'housing' %}
+      <h1 class="govuk-heading-xl">
+        {{ _('A legal adviser may be able to help you') }}
+      </h1>
+      <h2 class="govuk-heading-m">What happens next</h2>
+    {% else %}
+      <h1 class="govuk-heading-xl">
+        {{ _('A legal adviser may be able to help you') }}
+      </h1>
+      <h2 class="govuk-heading-m">{{ _('What happens next') }}</h2>
+    {% endif %}
+
+    <p class="govuk-body">
+      {% trans %}
+        Your adviser will check whether you qualify for legal aid <strong>at
+        no cost to you</strong> by asking about your problem and your finances.
+      {% endtrans %}
+      {% trans %}In some cases you may need to pay a contribution towards your legal aid.{% endtrans %}
+    </p>
+
+    <p class="govuk-body">
+        <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
+          {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
+
+    </p>
+
+    {% if category == 'mentalhealth' %}
+      <p class="govuk-body">
+        {% trans %}If you’re applying for legal aid for a mental health issue,
+          the requirements for the financial assessment are less rigorous than
+          for other legal aid problems.{% endtrans %}
+      </p>
+
+    {% endif %}
+
     {% if not hide_subtitle %}
       <h2 class="govuk-heading-m">{{ _('Find a legal adviser') }}</h2>
     {% endif %}
