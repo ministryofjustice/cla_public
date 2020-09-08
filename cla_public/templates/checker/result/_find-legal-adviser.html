@@ -125,13 +125,6 @@
     </p>
   {% endcall %}
 
-  {% if Form.postcode %}
-    Postcode: {{ Form.postcode }}
-    {% if Form.postcode.error %}
-      Postcode Error: {{ Form.postcode.error }}
-    {% endif %}
-  {% endif %}
-
   {% set find_legal_advisor_subtitle = _('Try again') %}
 
 {% else %}
