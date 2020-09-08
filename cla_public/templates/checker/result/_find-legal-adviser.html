@@ -125,7 +125,7 @@
     </p>
   {% endcall %}
 
-  {% Form.postcode.append( "Postcode not found" ) %}
+  {% Form.postcode.error.append( "Postcode not found" ) %}
 
   {% set find_legal_advisor_subtitle = _('Try again') %}
 
