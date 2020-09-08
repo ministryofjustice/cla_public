@@ -225,6 +225,7 @@
   {% endif %}
   {% if category %}
     <div class="govuk-form-group ">
+    {{ error_text }}
       <input class="govuk-input govuk-input--width-10 " id="category" type="hidden" name="category" value="{{ category }}" />
     </div>
   {% endif %}
