@@ -125,6 +125,8 @@
     </p>
   {% endcall %}
 
+  {% set postcode_error = true %}
+
   {% set find_legal_advisor_subtitle = _('Try again') %}
 
 {% else %}
@@ -198,6 +200,9 @@
 {% endif %}
 
 <form method="GET">
+  {% if postcode_error = true %}
+    {% set form.postcode.error[0] = "Postcode not found" %}
+  {% endif %}
   {{ Form.postcode_input(form.postcode) }}
   {% if category %}
     <div class="govuk-form-group ">
