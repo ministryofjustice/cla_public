@@ -455,13 +455,13 @@
 {% endmacro %}
 
 {% macro postcode_input(field, prefix=None, suffix=None, class_='', skip=False, default_value='0', custom_error='') %}
-  <div class="govuk-form-group {{"govuk-form-group--error" if field and field.errors}}">
+  {% if field and field.errors %}
+    {% set error_message_text = field.errors[0] %}
+  {% elif custom_error != '' %}
+    {% set error_message_text = custom_error %}
+  {% endif %}
+  <div class="govuk-form-group {{"govuk-form-group--error" if custom_error != ''}}">
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
-    {% if field and field.errors %}
-      {% set error_message_text = field.errors[0] %}
-    {% elif custom_error != '' %}
-      {% set error_message_text = custom_error %}
-    {% endif %}
     {% if error_message_text %}
       <span id="{{field.id}}-error" class="govuk-error-message">
         <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>

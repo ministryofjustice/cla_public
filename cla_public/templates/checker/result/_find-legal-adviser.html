@@ -123,6 +123,16 @@
       {% trans %}We couldn’t find any results for your search.
       We are constantly updating our records so please try again later.{% endtrans %}
     </p>
+    <div class="govuk-error-summary__body">
+    <ul class="govuk-list govuk-error-summary__list">
+      <li>
+
+      <li>
+        <a href="#postcode">{% trans %}We couldn’t find any results for your search.
+      We are constantly updating our records so please try again later.{% endtrans %}</a>
+      </li>
+    </ul>
+  </div>
   {% endcall %}
 
   {% set postcode_error = true %}
