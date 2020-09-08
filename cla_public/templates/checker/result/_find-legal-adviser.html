@@ -136,7 +136,7 @@
     {% set find_legal_advisor_subtitle = _('Try again') %}
   {% endif %}
 
-  {% if field and field.errors %}
+  {% if form.postcode and form.postcode.errors %}
     <h2> Error error error </h2>
   {% endif %}
 
