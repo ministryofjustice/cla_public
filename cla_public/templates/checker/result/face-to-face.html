@@ -11,12 +11,11 @@
   {% block sidebar %}{% endblock %}
 
   {% if data.origin %}
-    {% set title_prefix = _('Results for ') + data.origin.postcode + ' | ' %}
+    {% set title = _('Legal Adviser Search Results') %}
   {% else %}
-    {% set title_prefix = '' %}
+    {% set title = _('Find a legal adviser') %}
   {% endif %}
 
-  {% set title = title_prefix + _('Seek legal advice') %}
   {% block page_title %}{{ title }} - {{ super() }}{% endblock %}
 
   {% block inner_content %}

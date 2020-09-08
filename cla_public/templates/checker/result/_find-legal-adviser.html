@@ -148,17 +148,9 @@
     {% endcall %}
   {% endif %}
 
-  {% if category == 'clinneg' %}
-    <h1 class="govuk-heading-xl">
-      {{ _('A legal adviser may be able to help you') }}
-    </h1>
-  {% elif category == 'pi' %}
+  {% if category == 'pi' %}
     <h1 class="govuk-heading-xl">
       {{ _('Legal aid is not usually available for advice about personal injury') }}
-    </h1>
-  {% elif category == 'debt' or category == 'housing' %}
-    <h1 class="govuk-heading-xl">
-      {{ _('A legal adviser may be able to help you') }}
     </h1>
   {% else %}
     <h1 class="govuk-heading-xl">
