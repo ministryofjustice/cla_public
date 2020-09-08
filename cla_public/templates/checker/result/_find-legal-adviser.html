@@ -117,23 +117,24 @@
 
   {% set find_legal_advisor_subtitle = _('Search again') %}
 
-{% elif 'count' in data and data.count == 0 %}
-  {% call Element.alert('error', title=_('No results')) %}
-    <div class="govuk-error-summary__body">
-    <ul class="govuk-list govuk-error-summary__list">
-      <li>
-        <a href="#postcode">{% trans %}We couldn’t find any results for your search.
-      We are constantly updating our records so please try again later.{% endtrans %}</a>
-      </li>
-    </ul>
-  </div>
-  {% endcall %}
-
-  {% set postcode_error = true %}
-
-  {% set find_legal_advisor_subtitle = _('Try again') %}
-
 {% else %}
+
+  {% if 'count' in data and data.count == 0 %}
+    {% call Element.alert('error', title=_('No results')) %}
+      <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list">
+        <li>
+          <a href="#postcode">{% trans %}We couldn’t find any results for your search.
+        We are constantly updating our records so please try again later.{% endtrans %}</a>
+        </li>
+      </ul>
+    </div>
+    {% endcall %}
+
+    {% set postcode_error = true %}
+
+    {% set find_legal_advisor_subtitle = _('Try again') %}
+  {% endif %}
 
   {% if category == 'clinneg' %}
     <h1 class="govuk-heading-xl">

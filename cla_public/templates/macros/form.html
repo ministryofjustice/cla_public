@@ -460,7 +460,7 @@
   {% elif custom_error != '' %}
     {% set error_message_text = custom_error %}
   {% endif %}
-  <div class="govuk-form-group {{"govuk-form-group--error" if custom_error != ''}}">
+  <div class="govuk-form-group {{"govuk-form-group--error" if error_message_text != ''}}">
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
     {% if error_message_text %}
       <span id="{{field.id}}-error" class="govuk-error-message">
