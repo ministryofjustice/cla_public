@@ -122,13 +122,13 @@
   {% if 'count' in data and data.count == 0 %}
     {% call Element.alert('error', title=_('No results')) %}
       <div class="govuk-error-summary__body">
-      <ul class="govuk-list govuk-error-summary__list">
-        <li>
-          <a href="#postcode">{% trans %}We couldn’t find any results for your search.
-        We are constantly updating our records so please try again later.{% endtrans %}</a>
-        </li>
-      </ul>
-    </div>
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            <a href="#postcode">{% trans %}We couldn’t find any results for your search.
+          We are constantly updating our records so please try again later.{% endtrans %}</a>
+          </li>
+        </ul>
+      </div>
     {% endcall %}
 
     {% set postcode_error = true %}
@@ -137,7 +137,15 @@
   {% endif %}
 
   {% if form.postcode and form.postcode.errors %}
-    <h2> Error error error </h2>
+    {% call Element.alert('error') %}
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            <a href="#postcode">{{ form.postcode.errors[0] }}</a>
+          </li>
+        </ul>
+      </div>
+    {% endcall %}
   {% endif %}
 
   {% if category == 'clinneg' %}
