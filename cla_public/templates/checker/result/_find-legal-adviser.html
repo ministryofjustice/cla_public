@@ -136,6 +136,10 @@
     {% set find_legal_advisor_subtitle = _('Try again') %}
   {% endif %}
 
+  {% if field and field.errors %}
+    <h2> Error error error </h2>
+  {% endif %}
+
   {% if category == 'clinneg' %}
     <h1 class="govuk-heading-xl">
       {{ _('A legal adviser may be able to help you') }}
