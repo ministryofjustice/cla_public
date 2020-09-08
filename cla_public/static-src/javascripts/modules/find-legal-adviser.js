@@ -129,7 +129,7 @@ var wideScreen = 641;
     _prepareMarkers: function() {
       var organisations = $.map(this.$organisationListItems, function(item) {
         var $item = $(item);
-        console.log('Dæta: '+$item)
+        console.log('Dæta: '+JSON.stringify($item));
         return {
           id: $item.data('id'),
           position: {
