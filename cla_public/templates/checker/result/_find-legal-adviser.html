@@ -218,7 +218,7 @@
 <form method="GET">
   {% if postcode_error == true %}
     {{ Form.postcode_input(form.postcode, custom_error=_('Postcode not found')) }}
-  {% elif error_text %}
+  {% elif error_text|length > 1 %}
     {{ Form.postcode_input(form.postcode, custom_error=error_text) }}
   {% else %}
     {{ Form.postcode_input(form.postcode) }}
