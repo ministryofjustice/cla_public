@@ -201,7 +201,7 @@
 
 <form method="GET">
   {% if postcode_error == true %}
-    {{ Form.postcode_input(form.postcode, class_="govuk-form-group--error") }}
+    {{ Form.postcode_input(form.postcode, custom_error=_('Postcode not found')) }}
   {% else %}
     {{ Form.postcode_input(form.postcode) }}
   {% endif %}
