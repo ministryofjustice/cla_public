@@ -51,8 +51,29 @@ class CreateCaitParams:
     def __init__(self):
         self.params = {}
 
-    def create_cait_survey_params(self):
-        pass
+    def create_cait_survey_options(self, survey_config, choices, nodes_config):
+        if survey_config.get("run") is True:
+            self.params["info_tools"] = True
+            survey_urls = survey_config["urls"]
+            survey_url = ""
+
+            if len(choices) > 1:
+                entrypoint = nodes_config.get(choices[1], {})
+                survey = entrypoint.get("survey")
+
+                if entrypoint:
+                    nested = entrypoint.get("nested", [])
+                    if not nested or (len(choices) > 2 and choices[2] in nested):
+                        survey_url = survey_urls.get(survey)
+
+            if not survey_url:
+                survey_url = survey_urls.get("default")
+
+            survey_body = re.sub(
+                r"##(.*)##", r'<a href="%s" target="cait_survey">\1</a>' % survey_url, survey_config.get("body", "")
+            )
+
+            self.params["cait_survey"] = {"heading": survey_config.get("heading"), "body": survey_body}
 
 
 def get_cait_params(category_name, organisations, choices=[], truncate=5):  # noqa: C901
@@ -74,28 +95,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):  # no
         js_config = cait_intervention_config.get("js", "")
 
         # Survey
-        if survey_config.get("run") is True:
-            params["info_tools"] = True
-            survey_urls = survey_config["urls"]
-            survey_url = ""
-
-            if len(choices) > 1:
-                entrypoint = nodes_config.get(choices[1], {})
-                survey = entrypoint.get("survey")
-
-                if entrypoint:
-                    nested = entrypoint.get("nested", [])
-                    if not nested or (len(choices) > 2 and choices[2] in nested):
-                        survey_url = survey_urls.get(survey)
-
-            if not survey_url:
-                survey_url = survey_urls.get("default")
-
-            survey_body = re.sub(
-                r"##(.*)##", r'<a href="%s" target="cait_survey">\1</a>' % survey_url, survey_config.get("body", "")
-            )
-
-            params["cait_survey"] = {"heading": survey_config.get("heading"), "body": survey_body}
+        params_class.create_cait_survey_options(survey_config, choices, nodes_config)
 
         # CAIT link
         if intervention_config.get("run") is True:
