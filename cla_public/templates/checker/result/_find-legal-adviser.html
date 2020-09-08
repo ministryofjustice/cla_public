@@ -141,7 +141,7 @@
       <div class="govuk-error-summary__body">
         <ul class="govuk-list govuk-error-summary__list">
           <li>
-            <a href="#postcode">{{ form.postcode.errors[0] }}</a>
+            <a href="#postcode">{{ form.postcode.errors[0] }}</a> {{ request.args.get('postcode') }}
           </li>
         </ul>
       </div>
