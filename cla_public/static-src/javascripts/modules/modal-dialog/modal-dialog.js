@@ -145,7 +145,7 @@
 
         var seconds = 60 * minutes
 
-        $timer.text(minutes + (minutesLeft > 1 ? minuteTextPlural : minuteTextSingle));
+        $timer.text(minutes + (minutes > 1 ? minuteTextPlural : minuteTextSingle));
 
         (function runTimer () {
           var minutesLeft = parseInt(seconds / 60, 10)
