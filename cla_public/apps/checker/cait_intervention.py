@@ -75,6 +75,29 @@ class CreateCaitParams:
 
             self.params["cait_survey"] = {"heading": survey_config.get("heading"), "body": survey_body}
 
+    def create_cait_link_options(self, intervention_config, links_config, organisations, truncate, choices):
+        if intervention_config.get("run") is True:
+            self.params["info_tools"] = True
+            intervention_quota = intervention_config.get("quota")
+            intervention_cycle = intervention_config.get("quota_cycle")
+
+            if intervention_quota and intervention_cycle:
+                cycle_count = get_counter(increment=1) % intervention_cycle
+                if cycle_count < intervention_quota:
+                    cycle_count = 0
+                variant = "default" if cycle_count else "variant-plain"
+                self.params["cait_variant"] = variant
+                if variant != "default":
+                    organisations.insert(0, links_config["cait"])
+                    for org in organisations:
+                        org_class = org["service_name"].replace(" ", "-").lower()
+                        org.update({"classname": org_class})
+                    self.params["truncate"] = truncate + 1
+                    journey = {"uuid": get_uuid()}
+                    if len(choices) > 0:
+                        journey.update({"nodes": "/".join(choices), "last_node": choices[-1]})
+                    self.params["cait_journey"] = journey
+
 
 def get_cait_params(category_name, organisations, choices=[], truncate=5):  # noqa: C901
     params_class = CreateCaitParams()
@@ -98,27 +121,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):  # no
         params_class.create_cait_survey_options(survey_config, choices, nodes_config)
 
         # CAIT link
-        if intervention_config.get("run") is True:
-            params["info_tools"] = True
-            intervention_quota = intervention_config.get("quota")
-            intervention_cycle = intervention_config.get("quota_cycle")
-
-            if intervention_quota and intervention_cycle:
-                cycle_count = get_counter(increment=1) % intervention_cycle
-                if cycle_count < intervention_quota:
-                    cycle_count = 0
-                variant = "default" if cycle_count else "variant-plain"
-                params["cait_variant"] = variant
-                if variant != "default":
-                    organisations.insert(0, links_config["cait"])
-                    for org in organisations:
-                        org_class = org["service_name"].replace(" ", "-").lower()
-                        org.update({"classname": org_class})
-                    params["truncate"] = truncate + 1
-                    journey = {"uuid": get_uuid()}
-                    if len(choices) > 0:
-                        journey.update({"nodes": "/".join(choices), "last_node": choices[-1]})
-                    params["cait_journey"] = journey
+        params_class.create_cait_link_options(intervention_config, links_config, organisations, truncate, choices)
 
         # Additional CSS injection
         if params.get("info_tools"):
