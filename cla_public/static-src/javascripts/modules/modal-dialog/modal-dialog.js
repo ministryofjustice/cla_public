@@ -4,6 +4,17 @@
   var GOVUK = global.GOVUK || {}
   var $ = global.jQuery
 
+  if (GOVUK.getCookie("locale") == "cy_GB") {
+    var minuteTextSingle = minuteTextPlural = "munud";
+    var secondTextSingle = secondTextPlural = "eiliad";
+  } else {
+    var minuteTextSingle = "minute";
+    var secondTextSingle = "second";
+    var minuteTextPlural = "minutes";
+    var secondTextPlural = "seconds";
+  }
+
+
   // Modal dialog prototype
   GOVUK.modalDialog = {
     containerSelector: '#content',
@@ -134,15 +145,15 @@
 
         var seconds = 60 * minutes
 
-        $timer.text(minutes + ' minute' + (minutes > 1 ? 's' : ''));
+        $timer.text(minutes + (minutesLeft > 1 ? minuteTextPlural : minuteTextSingle));
 
         (function runTimer () {
           var minutesLeft = parseInt(seconds / 60, 10)
           var secondsLeft = parseInt(seconds % 60, 10)
           var timerExpired = minutesLeft < 1 && secondsLeft < 1
 
-          var minutesText = minutesLeft > 0 ? '<span class="tabular-numbers">' + minutesLeft + '</span> minute' + (minutesLeft > 1 ? 's' : '') + '' : ' '
-          var secondsText = secondsLeft >= 1 ? ' <span class="tabular-numbers">' + secondsLeft + '</span> second' + (secondsLeft > 1 ? 's' : '') + '' : ''
+          var minutesText = minutesLeft > 0 ? '<span class="tabular-numbers">' + minutesLeft + '</span> ' + (minutesLeft > 1 ? minuteTextPlural : minuteTextSingle) + '' : ' '
+          var secondsText = secondsLeft >= 1 ? ' <span class="tabular-numbers">' + secondsLeft + '</span> ' + (secondsLeft > 1 ? secondTextPlural : secondTextSingle) + '' : ''
           var atMinutesNumberAsText = ''
           var atSecondsNumberAsText = ''
 
@@ -154,8 +165,8 @@
             atSecondsNumberAsText = secondsLeft
           }
 
-          var atMinutesText = minutesLeft > 0 ? atMinutesNumberAsText + ' minute' + (minutesLeft > 1 ? 's' : '') + '' : ''
-          var atSecondsText = secondsLeft >= 1 ? ' ' + atSecondsNumberAsText + ' second' + (secondsLeft > 1 ? 's' : '') + '' : ''
+          var atMinutesText = minutesLeft > 0 ? atMinutesNumberAsText + (minutesLeft > 1 ? minuteTextPlural : minuteTextSingle) + '' : ''
+          var atSecondsText = secondsLeft >= 1 ? ' ' + atSecondsNumberAsText + (secondsLeft > 1 ? secondTextPlural : secondTextSingle) + '' : ''
 
           // Below string will get read out by screen readers every time the timeout refreshes (every 15 secs. See below).
           // Please add additional information in the modal body content or in below extraText which will get announced to AT the first time the time out opens
