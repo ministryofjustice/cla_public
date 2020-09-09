@@ -7,11 +7,13 @@
   if (GOVUK.getCookie("locale") == "cy_GB") {
     var minuteTextSingle = minuteTextPlural = "munud";
     var secondTextSingle = secondTextPlural = "eiliad";
+    var andText = " a ";
   } else {
     var minuteTextSingle = "minute";
     var secondTextSingle = "second";
     var minuteTextPlural = "minutes";
     var secondTextPlural = "seconds";
+    var andText = " and ";
   }
 
 
@@ -153,7 +155,7 @@
           var timerExpired = minutesLeft < 1 && secondsLeft < 1
 
           var minutesText = minutesLeft > 0 ? '<span class="tabular-numbers">' + minutesLeft + '</span> ' + (minutesLeft > 1 ? minuteTextPlural : minuteTextSingle) + '' : ' '
-          var secondsText = secondsLeft >= 1 ? ' <span class="tabular-numbers">' + secondsLeft + '</span> ' + (secondsLeft > 1 ? secondTextPlural : secondTextSingle) + '' : ''
+          var secondsText = secondsLeft >= 1 ? (minutesLeft >= 1 ? andText : '') + ' <span class="tabular-numbers">' + secondsLeft + '</span> ' + (secondsLeft > 1 ? secondTextPlural : secondTextSingle) + '' : ''
           var atMinutesNumberAsText = ''
           var atSecondsNumberAsText = ''
 
