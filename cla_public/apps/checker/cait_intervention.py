@@ -98,6 +98,11 @@ class CreateCaitParams:
                         journey.update({"nodes": "/".join(choices), "last_node": choices[-1]})
                     self.params["cait_journey"] = journey
 
+    def create_css_and_js_options(self, css_config, js_config):
+        if self.params.get("info_tools"):
+            self.params["cait_css"] = css_config
+            self.params["cait_js"] = js_config
+
 
 def get_cait_params(category_name, organisations, choices=[], truncate=5):  # noqa: C901
     params_class = CreateCaitParams()
@@ -124,9 +129,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):  # no
         params_class.create_cait_link_options(intervention_config, links_config, organisations, truncate, choices)
 
         # Additional CSS injection
-        if params.get("info_tools"):
-            params["cait_css"] = css_config
-            params["cait_js"] = js_config
+        params_class.create_css_and_js_options(css_config, js_config)
 
     except ConfigException:
         return params
