@@ -104,7 +104,7 @@ class CreateCaitParams:
             self.params["cait_js"] = js_config
 
 
-def get_cait_params(category_name, organisations, choices=[], truncate=5):  # noqa: C901
+def get_cait_params(category_name, organisations, choices=[], truncate=5):
     params_class = CreateCaitParams()
     params = params_class.params
     if category_name != "Family" or request.path != "/scope/refer/family":
