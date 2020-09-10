@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+import datetime
 
 from flask import Blueprint, url_for
 from flask.ext.markdown import Markdown
@@ -54,5 +55,10 @@ def change_jinja_templates(app):
         except KeyError:
             log.critical("Cannot find APP_SETTINGS group in the configuration file.")
             sys.exit(1)
+
+    # get today's date
+    @app.context_processor
+    def inject_today_date():
+        return {"today_date": datetime.date.today()}
 
     return app
