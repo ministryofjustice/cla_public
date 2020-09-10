@@ -1,15 +1,15 @@
 <dialog id="js-modal-dialog" data-minutes-idle-timeout="25" data-minutes-modal-visible="5"
-data-url-redirect="/session-expired" class="modal-dialog dialog" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer">
+data-url-redirect="/session-expired" class="modal-dialog dialog" role="dialog" aria-live="polite" aria-labelledby="dialog-title" aria-describedby="at-timer" tabindex="-1">
   <div class="modal-dialog__inner">
-	  <h1 id="dialog-title" class="heading-large">
+	  <h2 id="dialog-title" class="govuk-heading-l">
       {% trans %}Your application will time out soon{% endtrans %}
-    </h1>
+    </h2>
     <div class="modal-dialog__inner__text">
       <div class="timer" aria-hidden="true" aria-relevant="additions"></div>
       <div id="at-timer" class="at-timer govuk-visually-hidden" role="status"></div>
     </div>
     <div class="modal-dialog__inner__block">
-      <button class="govuk-button dialog-button modal-dialog__inner__button js-dialog-close">{% trans %}Continue{% endtrans %}</button>
+      <button class="govuk-button dialog-button modal-dialog__inner__button js-dialog-close">{% trans %}Extend time limit{% endtrans %}</button>
       <a class="govuk-link modal-dialog__inner__link" style="margin-left: 25px;padding: 5px;position: relative;top: 7px;" href="/session-expired">{% trans %}Exit service{% endtrans %}</a>
     </div>
   </div>
