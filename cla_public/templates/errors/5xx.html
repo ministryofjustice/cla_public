@@ -29,7 +29,7 @@
   </div>
   <p class="govuk-body">{{ _('Opening times:') }}<br />
     {% set today_date_string = today_date | replace("-", "") | int %}
-    {% if today_date_string <= 20200930 %}
+    {% if today_date_string >= 20200930 %}
       <strong class="govuk-!-font-weight-bold">{{ _('Monday to Friday: 9am to 8pm') }}<br />{{ _('Saturday: 9am to 12.30pm') }}</strong>
     {% else %}
       <strong class="govuk-!-font-weight-bold">{{ _('Monday to Friday: 9am to 5pm') }}</strong>
