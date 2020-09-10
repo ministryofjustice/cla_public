@@ -145,7 +145,7 @@
           </p>
           <p class="govuk-body">{% trans %}Opening times:{% endtrans %}<br />
             {% set today_date_string = today_date | replace("-", "") | int %}
-            {% if today_date_string >= 20200930 %}
+            {% if today_date_string <= 20200930 %}
               <strong class="govuk-!-font-weight-bold">{% trans %}Monday to Friday: 9am to 8pm{% endtrans %}<br />{% trans %}Saturday: 9am to 12.30pm{% endtrans %}</strong>
             {% else %}
               <strong class="govuk-!-font-weight-bold">{% trans %}Monday to Friday: 9am to 5pm{% endtrans %}</strong>
