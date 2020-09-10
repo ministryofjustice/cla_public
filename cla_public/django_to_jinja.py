@@ -58,7 +58,8 @@ def change_jinja_templates(app):
 
     # get today's date
     @app.context_processor
-    def inject_today_date():
-        return {"today_date": datetime.date.today()}
+    def covid_availability_times():
+        show_covid_availability_times = datetime.date(year=2020,month=9,day=30) > datetime.date.today()
+        return {"show_covid_availability_times": show_covid_availability_times}
 
     return app
