@@ -78,7 +78,7 @@
     - completed <Number>
 #}
 
-{%  macro progress_bar(completed, offset=-5) %}
+{% macro progress_bar(completed, offset=-5) %}
   {% if completed is number %}
     <div class="progress-bar">
       {% if completed %}

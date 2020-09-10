@@ -144,8 +144,11 @@
             <a href="https://www.gov.uk/call-charges">{% trans %}Find out about call charges here{% endtrans %}</a>.
           </p>
           <p class="govuk-body">{% trans %}Opening times:{% endtrans %}<br />
-            <!--<strong class="govuk-!-font-weight-bold">{% trans %}Monday to Friday: 9am to 8pm{% endtrans %}<br />{% trans %}Saturday: 9am to 12.30pm{% endtrans %}</strong>-->
-            <strong class="govuk-!-font-weight-bold">{% trans %}Monday to Friday: 9am to 5pm{% endtrans %}</strong>
+            {% if show_covid_availability_times %}
+              <strong class="govuk-!-font-weight-bold">{% trans %}Monday to Friday: 9am to 5pm{% endtrans %}</strong>
+            {% else %}
+              <strong class="govuk-!-font-weight-bold">{% trans %}Monday to Friday: 9am to 8pm{% endtrans %}<br />{% trans %}Saturday: 9am to 12.30pm{% endtrans %}</strong>
+            {% endif %}
           </p>
           <div class="govuk-inset-text">
             {%- trans -%}This service is only available if you are a resident of England or Wales.{% endtrans %}

@@ -28,8 +28,11 @@
     </p>
   </div>
   <p class="govuk-body">{{ _('Opening times:') }}<br />
-    <!--<strong class="govuk-!-font-weight-bold">{{ _('Monday to Friday: 9am to 8pm') }}<br />{{ _('Saturday: 9am to 12.30pm') }}</strong>-->
-    <strong class="govuk-!-font-weight-bold">{{ _('Monday to Friday: 9am to 5pm') }}</strong>
+    {% if show_covid_availability_times %}
+      <strong class="govuk-!-font-weight-bold">{{ _('Monday to Friday: 9am to 5pm') }}</strong>
+    {% else %}
+      <strong class="govuk-!-font-weight-bold">{{ _('Monday to Friday: 9am to 8pm') }}<br />{{ _('Saturday: 9am to 12.30pm') }}</strong>
+    {% endif %}
   </p>
 {% endblock %}
 
