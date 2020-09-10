@@ -1827,6 +1827,7 @@ msgstr "Cuddio"
 msgid "Your application will time out soon"
 msgstr "Bydd yr amser a neilltuwyd ar gyfer eich cais yn dod i ben cyn bo hir"
 
+#: Welsh still says "continue" (the old text), waiting for new translation to update this
 #: cla_public/templates/_modal-dialog.html:12
 msgid "Extend time limit"
 msgstr "Ymlaen"
