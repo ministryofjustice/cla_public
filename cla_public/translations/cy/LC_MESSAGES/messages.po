@@ -3558,7 +3558,7 @@ msgstr "Rhowch gôd post"
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:139
-msgid "Legal Adviser Search Results"
+msgid "Legal adviser search results"
 msgstr "Canlyniadau Chwilio Cynghorydd Cyfreithiol"
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
