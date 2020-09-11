@@ -3546,6 +3546,11 @@ msgstr "Dim canlyniadau, Rhowch gynnig arall arni"
 msgid "No results returned for Guernsey, try a postcode in England or Wales"
 msgstr "Dim canlyniadau, Rhowch gynnig arall arni"
 
+#: PLACEHOLDER PENDING TRANSLATION RETURN
+#: cla_public/templates/checker/result/_find-legal-adviser.html:139
+msgid "Postcode not found"
+msgstr "Cod post heb ei ddarganfod"
+
 #: cla_public/templates/checker/result/_find-legal-adviser.html:17
 msgid "Search"
 msgstr "Chwilio"
