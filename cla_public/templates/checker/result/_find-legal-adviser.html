@@ -110,11 +110,6 @@
     </div>
   </section>
 
-  <p class="govuk-body">
-    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
-      {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
-  </p>
-
   {% set find_legal_advisor_subtitle = _('Search again') %}
 
 {% else %}
@@ -180,8 +175,7 @@
   </p>
   <h2 class="govuk-heading-m">{{ _('What happens next') }}</h2>
   <p class="govuk-body">
-    {% trans %}You should contact a legal aid adviser in your area,
-        who may be able to help.{% endtrans %}
+    {% trans %}You should contact a legal aid adviser in your area, who may be able to help.{% endtrans %}
   </p>
 
 {% elif category == 'pi' %}
@@ -208,6 +202,13 @@
     {% trans %}If you’re applying for legal aid for a mental health issue,
       the requirements for the financial assessment are less rigorous than
       for other legal aid problems.{% endtrans %}
+  </p>
+{% endif %}
+
+{% if find_legal_advisor_subtitle == _('Search again') %}
+  <p class="govuk-body">
+    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
+      {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
   </p>
 {% endif %}
 
