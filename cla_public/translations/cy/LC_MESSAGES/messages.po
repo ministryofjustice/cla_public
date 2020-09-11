@@ -3528,11 +3528,23 @@ msgid "We need to know about any money you have saved or invested."
 msgstr "Mae arnom angen gwybod am unrhyw arian yr ydych wedi’i gynilo neu fuddsoddi"
 
 #: cla_public/templates/checker/time-out-warning.html:2
-msgid ""
-"\n"
-"    Your session will time out after 30 minutes of inactivity. We do this for your security.\n"
-"  "
+msgid "Your session will time out after 30 minutes of inactivity. We do this for your security."
 msgstr "Bydd eich sesiwn yn dod i ben os yw wedi bod yn anweithredol am hanner awr. Rydym yn gwneud hyn er mwyn eich cadw’n ddiogel."
+
+#: PLACEHOLDER PENDING TRANSLATION RETURN
+#: cla_public/templates/checker/result/_find-legal-adviser.html:137
+msgid "No results returned for the Isle of Man, try a postcode in England or Wales"
+msgstr "Dim canlyniadau, Rhowch gynnig arall arni"
+
+#: PLACEHOLDER PENDING TRANSLATION RETURN
+#: cla_public/templates/checker/result/_find-legal-adviser.html:138
+msgid "No results returned for Jersey, try a postcode in England or Wales"
+msgstr "Dim canlyniadau, Rhowch gynnig arall arni"
+
+#: PLACEHOLDER PENDING TRANSLATION RETURN
+#: cla_public/templates/checker/result/_find-legal-adviser.html:139
+msgid "No results returned for Guernsey, try a postcode in England or Wales"
+msgstr "Dim canlyniadau, Rhowch gynnig arall arni"
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:17
 msgid "Search"
@@ -3602,9 +3614,7 @@ msgid "No results"
 msgstr "Dim canlyniadau"
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:157
-msgid ""
-"We couldn’t find any results for your search.\n"
-"        We are constantly updating our records so please try again later."
+msgid "We couldn’t find any results for your search. We are constantly updating our records so please try again later."
 msgstr "Nid oeddem yn gallu dod o hyd i unrhyw ganlyniadau ar gyfer eich chwiliad. Rydym yn diweddaru ein cofnodion yn barhaus, felly rhowch gynnig arall arni nes ymlaen."
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:165
@@ -3887,16 +3897,12 @@ msgstr "Fel arfer ni fydd cymorth cyfreithiol ar gael ar gyfer cyngor ar anafiad
 #: cla_public/templates/checker/result/face-to-face.html:44
 msgid ""
 "You may be able to get legal aid in exceptional cases. You\n"
-"          could seek advice from a legal adviser about whether an application\n"
-"          might succeed in your case and how to apply."
+"      could seek advice from a legal adviser about whether an application\n"
+"      might succeed in your case and how to apply."
 msgstr "Efallai y bydd cymorth cyfreithiol yn dal ar gael mewn achosion eithriadol. Gallech chi ofyn am gyngor gan gynghorydd cyfreithiol ynghylch a fydd cais am gymorth cyfreithiol yn debygol o lwyddo yn eich achos chi a sut i wneud cais."
 
 #: cla_public/templates/checker/result/face-to-face.html:62
-msgid ""
-"\n"
-"        Your adviser will check whether you qualify for legal aid <strong>at\n"
-"        no cost to you</strong> by asking about your problem and your finances.\n"
-"      "
+msgid "Your adviser will check whether you qualify for legal aid <strong>at no cost to you</strong> by asking about your problem and your finances."
 msgstr "Bydd eich cynghorydd yn gwirio a ydych chi’n gymwys i gael cymorth cyfreithiol am ddim drwy ofyn cwestiynau i chi am eich problem a’ch amgylchiadau ariannol."
 
 #: cla_public/templates/checker/result/face-to-face.html:66
@@ -3920,8 +3926,8 @@ msgstr "(mae’n cymryd 30 eiliad)"
 #: cla_public/templates/checker/result/face-to-face.html:77
 msgid ""
 "If you’re applying for legal aid for a mental health issue,\n"
-"          the requirements for the financial assessment are less rigorous than\n"
-"          for other legal aid problems."
+"      the requirements for the financial assessment are less rigorous than\n"
+"      for other legal aid problems."
 msgstr "Os ydych yn gwneud cais am gymorth cyfreithiol ar gyfer problem iechyd meddwl, nid yw’r gofynion ar gyfer yr asesiad ariannol mor llym o’i gymharu â phroblemau cymorth cyfreithiol eraill."
 
 #: cla_public/templates/checker/result/ineligible.html:3
