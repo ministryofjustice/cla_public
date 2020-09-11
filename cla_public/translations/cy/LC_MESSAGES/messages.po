@@ -3534,22 +3534,37 @@ msgstr "Bydd eich sesiwn yn dod i ben os yw wedi bod yn anweithredol am hanner a
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:137
 msgid "No results returned for the Isle of Man, try a postcode in England or Wales"
-msgstr "Dim canlyniadau, Rhowch gynnig arall arni"
+msgstr "Dim canlyniadau, rhowch gynnig arall arni"
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:138
 msgid "No results returned for Jersey, try a postcode in England or Wales"
-msgstr "Dim canlyniadau, Rhowch gynnig arall arni"
+msgstr "Dim canlyniadau, rhowch gynnig arall arni"
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:139
 msgid "No results returned for Guernsey, try a postcode in England or Wales"
-msgstr "Dim canlyniadau, Rhowch gynnig arall arni"
+msgstr "Dim canlyniadau, rhowch gynnig arall arni"
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:139
 msgid "Postcode not found"
-msgstr "Cod post heb ei ddarganfod"
+msgstr "Côd post heb ei ddarganfod"
+
+#: PLACEHOLDER PENDING TRANSLATION RETURN
+#: cla_public/templates/checker/result/_find-legal-adviser.html:139
+msgid "Enter a postcode"
+msgstr "Rhowch gôd post"
+
+#: PLACEHOLDER PENDING TRANSLATION RETURN
+#: cla_public/templates/checker/result/_find-legal-adviser.html:139
+msgid "Legal Adviser Search Results"
+msgstr "Canlyniadau Chwilio Cynghorydd Cyfreithiol"
+
+#: PLACEHOLDER PENDING TRANSLATION RETURN
+#: cla_public/templates/checker/result/_find-legal-adviser.html:17
+msgid "Search again"
+msgstr "Chwilio eto"
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:17
 msgid "Search"
