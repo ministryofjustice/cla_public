@@ -113,6 +113,13 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
     try:
         cait_intervention_config = get_config()
 
+    except ConfigException:
+        return params
+
+    except Exception:
+        pass
+
+    else:
         # Make sure any errors with the json/config do not effect the site
 
         survey_config = cait_intervention_config.get("survey", {})
@@ -130,11 +137,5 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
 
         # Additional CSS injection
         params_class.create_css_and_js_params(css_config, js_config)
-
-    except ConfigException:
-        return params
-
-    except Exception:
-        pass
 
     return params
