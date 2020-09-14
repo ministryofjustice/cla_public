@@ -120,7 +120,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
         pass
 
     else:
-        # Make sure any errors with the json/config do not effect the site
+        # Make sure any errors with the json/config do not affect the site
 
         survey_config = cait_intervention_config.get("survey", {})
         intervention_config = cait_intervention_config.get("intervention", {})
