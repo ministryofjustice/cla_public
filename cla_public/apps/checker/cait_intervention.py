@@ -62,7 +62,11 @@ class CreateCaitParams(dict):
     ):
         self.create_cait_survey_params(survey_config, choices, nodes_config)
         self.create_cait_link_params(intervention_config, links_config, organisations, truncate, choices)
-        self.create_css_and_js_params(css_config, js_config)
+
+        # Additional CSS injection
+        if self.get("info_tools"):
+            self["cait_css"] = css_config
+            self["cait_js"] = js_config
 
     # Survey
     def create_cait_survey_params(self, survey_config, choices, nodes_config):
@@ -112,12 +116,6 @@ class CreateCaitParams(dict):
                     if len(choices) > 0:
                         journey.update({"nodes": "/".join(choices), "last_node": choices[-1]})
                     self["cait_journey"] = journey
-
-    # Additional CSS injection
-    def create_css_and_js_params(self, css_config, js_config):
-        if self.get("info_tools"):
-            self["cait_css"] = css_config
-            self["cait_js"] = js_config
 
 
 def get_cait_params(category_name, organisations, choices=[], truncate=5):
