@@ -47,13 +47,13 @@ def get_uuid():
     return uuid.uuid1()
 
 
-class CreateCaitParams:
-    def __init__(self):
-        self.params = {}
+class CreateCaitParams(dict):
+    def __init__(self, *args, **kwargs):
+        super(CreateCaitParams, self).__init__(*args, **kwargs)
 
     def create_cait_survey_params(self, survey_config, choices, nodes_config):
         if survey_config.get("run") is True:
-            self.params["info_tools"] = True
+            self["info_tools"] = True
             survey_urls = survey_config["urls"]
             survey_url = ""
 
@@ -73,11 +73,11 @@ class CreateCaitParams:
                 r"##(.*)##", r'<a href="%s" target="cait_survey">\1</a>' % survey_url, survey_config.get("body", "")
             )
 
-            self.params["cait_survey"] = {"heading": survey_config.get("heading"), "body": survey_body}
+            self["cait_survey"] = {"heading": survey_config.get("heading"), "body": survey_body}
 
     def create_cait_link_params(self, intervention_config, links_config, organisations, truncate, choices):
         if intervention_config.get("run") is True:
-            self.params["info_tools"] = True
+            self["info_tools"] = True
             intervention_quota = intervention_config.get("quota")
             intervention_cycle = intervention_config.get("quota_cycle")
 
@@ -86,27 +86,26 @@ class CreateCaitParams:
                 if cycle_count < intervention_quota:
                     cycle_count = 0
                 variant = "default" if cycle_count else "variant-plain"
-                self.params["cait_variant"] = variant
+                self["cait_variant"] = variant
                 if variant != "default":
                     organisations.insert(0, links_config["cait"])
                     for org in organisations:
                         org_class = org["service_name"].replace(" ", "-").lower()
                         org.update({"classname": org_class})
-                    self.params["truncate"] = truncate + 1
+                    self["truncate"] = truncate + 1
                     journey = {"uuid": get_uuid()}
                     if len(choices) > 0:
                         journey.update({"nodes": "/".join(choices), "last_node": choices[-1]})
-                    self.params["cait_journey"] = journey
+                    self["cait_journey"] = journey
 
     def create_css_and_js_params(self, css_config, js_config):
-        if self.params.get("info_tools"):
-            self.params["cait_css"] = css_config
-            self.params["cait_js"] = js_config
+        if self.get("info_tools"):
+            self["cait_css"] = css_config
+            self["cait_js"] = js_config
 
 
 def get_cait_params(category_name, organisations, choices=[], truncate=5):
-    params_class = CreateCaitParams()
-    params = params_class.params
+    params = CreateCaitParams()
     if category_name != "Family" or request.path != "/scope/refer/family":
         return params
 
@@ -130,12 +129,12 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
         js_config = cait_intervention_config.get("js", "")
 
         # Survey
-        params_class.create_cait_survey_params(survey_config, choices, nodes_config)
+        params.create_cait_survey_params(survey_config, choices, nodes_config)
 
         # CAIT link
-        params_class.create_cait_link_params(intervention_config, links_config, organisations, truncate, choices)
+        params.create_cait_link_params(intervention_config, links_config, organisations, truncate, choices)
 
         # Additional CSS injection
-        params_class.create_css_and_js_params(css_config, js_config)
+        params.create_css_and_js_params(css_config, js_config)
 
     return params
