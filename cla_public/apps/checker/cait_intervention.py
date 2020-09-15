@@ -48,9 +48,23 @@ def get_uuid():
 
 
 class CreateCaitParams(dict):
-    def __init__(self, *args, **kwargs):
-        super(CreateCaitParams, self).__init__(*args, **kwargs)
+    def __init__(
+        self,
+        survey_config,
+        intervention_config,
+        nodes_config,
+        links_config,
+        css_config,
+        js_config,
+        organisations,
+        choices,
+        truncate,
+    ):
+        self.create_cait_survey_params(survey_config, choices, nodes_config)
+        self.create_cait_link_params(intervention_config, links_config, organisations, truncate, choices)
+        self.create_css_and_js_params(css_config, js_config)
 
+    # Survey
     def create_cait_survey_params(self, survey_config, choices, nodes_config):
         if survey_config.get("run") is True:
             self["info_tools"] = True
@@ -75,6 +89,7 @@ class CreateCaitParams(dict):
 
             self["cait_survey"] = {"heading": survey_config.get("heading"), "body": survey_body}
 
+    # CAIT link
     def create_cait_link_params(self, intervention_config, links_config, organisations, truncate, choices):
         if intervention_config.get("run") is True:
             self["info_tools"] = True
@@ -98,6 +113,7 @@ class CreateCaitParams(dict):
                         journey.update({"nodes": "/".join(choices), "last_node": choices[-1]})
                     self["cait_journey"] = journey
 
+    # Additional CSS injection
     def create_css_and_js_params(self, css_config, js_config):
         if self.get("info_tools"):
             self["cait_css"] = css_config
@@ -105,7 +121,7 @@ class CreateCaitParams(dict):
 
 
 def get_cait_params(category_name, organisations, choices=[], truncate=5):
-    params = CreateCaitParams()
+    params = {}
     if category_name != "Family" or request.path != "/scope/refer/family":
         return params
 
@@ -128,13 +144,16 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
         css_config = cait_intervention_config.get("css", "")
         js_config = cait_intervention_config.get("js", "")
 
-        # Survey
-        params.create_cait_survey_params(survey_config, choices, nodes_config)
-
-        # CAIT link
-        params.create_cait_link_params(intervention_config, links_config, organisations, truncate, choices)
-
-        # Additional CSS injection
-        params.create_css_and_js_params(css_config, js_config)
+        params = CreateCaitParams(
+            survey_config,
+            intervention_config,
+            nodes_config,
+            links_config,
+            css_config,
+            js_config,
+            organisations,
+            choices,
+            truncate,
+        )
 
     return params
