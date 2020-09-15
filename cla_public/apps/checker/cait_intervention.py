@@ -48,25 +48,17 @@ def get_uuid():
 
 
 class CreateCaitParams(dict):
-    def __init__(
-        self,
-        survey_config,
-        intervention_config,
-        nodes_config,
-        links_config,
-        css_config,
-        js_config,
-        organisations,
-        choices,
-        truncate,
-    ):
-        self.create_cait_survey_params(survey_config, choices, nodes_config)
-        self.create_cait_link_params(intervention_config, links_config, organisations, truncate, choices)
+    def __init__(self, *args, **kwargs):
+        organisations, choices, truncate = args
+        self.create_cait_survey_params(kwargs["survey_config"], choices, kwargs["nodes_config"])
+        self.create_cait_link_params(
+            kwargs["intervention_config"], kwargs["links_config"], organisations, truncate, choices
+        )
 
         # Additional CSS injection
         if self.get("info_tools"):
-            self["cait_css"] = css_config
-            self["cait_js"] = js_config
+            self["cait_css"] = kwargs["css_config"]
+            self["cait_js"] = kwargs["js_config"]
 
     # Survey
     def create_cait_survey_params(self, survey_config, choices, nodes_config):
@@ -143,15 +135,15 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
         js_config = cait_intervention_config.get("js", "")
 
         params = CreateCaitParams(
-            survey_config,
-            intervention_config,
-            nodes_config,
-            links_config,
-            css_config,
-            js_config,
             organisations,
             choices,
             truncate,
+            survey_config=survey_config,
+            intervention_config=intervention_config,
+            nodes_config=nodes_config,
+            links_config=links_config,
+            css_config=css_config,
+            js_config=js_config,
         )
 
     return params
