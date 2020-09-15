@@ -69,11 +69,11 @@ class CaitParams(dict):
 
             if len(choices) > 1:
                 entrypoint = nodes_config.get(choices[1], {})
-                survey = entrypoint.get("survey")
 
                 if entrypoint:
                     nested = entrypoint.get("nested", [])
                     if not nested or (len(choices) > 2 and choices[2] in nested):
+                        survey = entrypoint.get("survey")
                         survey_url = survey_urls.get(survey)
 
             if not survey_url:
