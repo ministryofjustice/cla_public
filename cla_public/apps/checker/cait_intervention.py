@@ -47,7 +47,7 @@ def get_uuid():
     return uuid.uuid1()
 
 
-class CreateCaitParams(dict):
+class CaitParams(dict):
     def __init__(self, *args, **kwargs):
         organisations, choices, truncate = args
         self.create_cait_survey_params(kwargs["survey_config"], choices, kwargs["nodes_config"])
@@ -134,7 +134,7 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):
         css_config = cait_intervention_config.get("css", "")
         js_config = cait_intervention_config.get("js", "")
 
-        params = CreateCaitParams(
+        params = CaitParams(
             organisations,
             choices,
             truncate,
