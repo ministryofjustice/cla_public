@@ -8,6 +8,8 @@ import sys
 
 from flask.ext.script import Manager, Shell, Server
 import requests
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 from cla_public.app import create_app
 
@@ -18,6 +20,11 @@ app = create_app()
 manager = Manager(app)
 
 VENV = os.environ.get("VIRTUAL_ENV", "")
+
+
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN"), environment=os.environ.get("CLA_ENV"), integrations=[FlaskIntegration()]
+)
 
 
 def run(command, **kwargs):

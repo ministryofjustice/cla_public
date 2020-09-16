@@ -9,7 +9,6 @@ from flask import Flask, render_template
 from flask.ext.babel import Babel
 from flask.ext.cache import Cache
 from flask.ext.mail import Mail
-from raven.contrib.flask import Sentry
 import urllib3.contrib.pyopenssl
 
 from cla_public.django_to_jinja import change_jinja_templates
@@ -30,9 +29,6 @@ def create_app(config_file=None):
         app.config.from_pyfile(config_file)
     else:
         app.config.from_envvar("CLA_PUBLIC_CONFIG")
-
-    if app.config.get("SENTRY_DSN"):
-        app.sentry = Sentry(app, dsn=app.config.get("SENTRY_DSN"), logging=True, level=logging.ERROR)
 
     app.babel = Babel(app)
     app.babel.localeselector(get_locale)
