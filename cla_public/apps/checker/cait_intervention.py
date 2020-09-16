@@ -47,39 +47,33 @@ def get_uuid():
     return uuid.uuid1()
 
 
-def get_cait_params(category_name, organisations, choices=[], truncate=5):  # noqa: C901
-    params = {}
-    if category_name != "Family" or request.path != "/scope/refer/family":
-        return params
+class CaitParams(dict):
+    def __init__(self, *args, **kwargs):
+        organisations, choices, truncate = args
+        self.create_cait_survey_params(kwargs["survey_config"], choices, kwargs["nodes_config"])
+        self.create_cait_link_params(
+            kwargs["intervention_config"], kwargs["links_config"], organisations, truncate, choices
+        )
 
-    try:
-        cait_intervention_config = get_config()
-    except ConfigException:
-        return params
+        # Additional CSS injection
+        if self.get("info_tools"):
+            self["cait_css"] = kwargs["css_config"]
+            self["cait_js"] = kwargs["js_config"]
 
-    try:
-        # Make sure any errors with the json/config do not effect the site
-
-        survey_config = cait_intervention_config.get("survey", {})
-        intervention_config = cait_intervention_config.get("intervention", {})
-        nodes_config = cait_intervention_config.get("nodes", {})
-        links_config = cait_intervention_config.get("links", {})
-        css_config = cait_intervention_config.get("css", "")
-        js_config = cait_intervention_config.get("js", "")
-
-        # Survey
+    # Survey
+    def create_cait_survey_params(self, survey_config, choices, nodes_config):
         if survey_config.get("run") is True:
-            params["info_tools"] = True
+            self["info_tools"] = True
             survey_urls = survey_config["urls"]
             survey_url = ""
 
             if len(choices) > 1:
                 entrypoint = nodes_config.get(choices[1], {})
-                survey = entrypoint.get("survey")
 
                 if entrypoint:
                     nested = entrypoint.get("nested", [])
                     if not nested or (len(choices) > 2 and choices[2] in nested):
+                        survey = entrypoint.get("survey")
                         survey_url = survey_urls.get(survey)
 
             if not survey_url:
@@ -89,11 +83,12 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):  # no
                 r"##(.*)##", r'<a href="%s" target="cait_survey">\1</a>' % survey_url, survey_config.get("body", "")
             )
 
-            params["cait_survey"] = {"heading": survey_config.get("heading"), "body": survey_body}
+            self["cait_survey"] = {"heading": survey_config.get("heading"), "body": survey_body}
 
-        # CAIT link
+    # CAIT link
+    def create_cait_link_params(self, intervention_config, links_config, organisations, truncate, choices):
         if intervention_config.get("run") is True:
-            params["info_tools"] = True
+            self["info_tools"] = True
             intervention_quota = intervention_config.get("quota")
             intervention_cycle = intervention_config.get("quota_cycle")
 
@@ -102,22 +97,52 @@ def get_cait_params(category_name, organisations, choices=[], truncate=5):  # no
                 if cycle_count < intervention_quota:
                     cycle_count = 0
                 variant = "default" if cycle_count else "variant-plain"
-                params["cait_variant"] = variant
+                self["cait_variant"] = variant
                 if variant != "default":
                     organisations.insert(0, links_config["cait"])
                     for org in organisations:
                         org_class = org["service_name"].replace(" ", "-").lower()
                         org.update({"classname": org_class})
-                    params["truncate"] = truncate + 1
+                    self["truncate"] = truncate + 1
                     journey = {"uuid": get_uuid()}
                     if len(choices) > 0:
                         journey.update({"nodes": "/".join(choices), "last_node": choices[-1]})
-                    params["cait_journey"] = journey
+                    self["cait_journey"] = journey
 
-        # Additional CSS injection
-        if params.get("info_tools"):
-            params["cait_css"] = css_config
-            params["cait_js"] = js_config
+
+def get_cait_params(category_name, organisations, choices=[], truncate=5):
+    params = {}
+    if category_name != "Family" or request.path != "/scope/refer/family":
+        return params
+
+    try:
+        cait_intervention_config = get_config()
+
+    except ConfigException:
+        return params
+
+    try:
+        # Make sure any errors with the json/config do not affect the site
+
+        survey_config = cait_intervention_config.get("survey", {})
+        intervention_config = cait_intervention_config.get("intervention", {})
+        nodes_config = cait_intervention_config.get("nodes", {})
+        links_config = cait_intervention_config.get("links", {})
+        css_config = cait_intervention_config.get("css", "")
+        js_config = cait_intervention_config.get("js", "")
+
+        params = CaitParams(
+            organisations,
+            choices,
+            truncate,
+            survey_config=survey_config,
+            intervention_config=intervention_config,
+            nodes_config=nodes_config,
+            links_config=links_config,
+            css_config=css_config,
+            js_config=js_config,
+        )
+
     except Exception:
         pass
 
