@@ -29,7 +29,7 @@ pyasn1==0.1.7
 wtforms==2.1
 postcodeinfo>=0.0,<0.1
 django-extended-choices==0.3.0
-sentry-sdk[flask]==0.16.2
+sentry-sdk[flask]==0.13.3
 
 # fork of https://github.com/samgiles/slumber
 # with custom parameters for timeouts and additional headers on requests
