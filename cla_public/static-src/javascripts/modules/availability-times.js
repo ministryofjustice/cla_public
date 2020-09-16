@@ -34,7 +34,7 @@
 
       var dayTimes = dayTimeHours[dayValue];
       var timeOptions = _.keys(dayTimes).sort();
-      var $timeSelector = $daySelector.closest('[role=radiogroup]').find(this.$timeSelectors);
+      var $timeSelector = $daySelector.closest('.govuk-radios').find(this.$timeSelectors);
       var $options = _.map(timeOptions, function(v) {
         var d = dayTimes[v];
         return $('<option>', { value: v, html: d });
