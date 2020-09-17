@@ -49,11 +49,6 @@ def online_safety():
     return render_template("online-safety.html")
 
 
-@base.route("/trigger-error")
-def trigger_error():
-    return render_template("non-existent-template-two.html")
-
-
 class AbstractFeedbackView(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
     """
     Abstract view for feedback forms
