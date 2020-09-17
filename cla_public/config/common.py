@@ -55,9 +55,6 @@ API_CLIENT_TIMEOUT = 10
 
 BACKEND_API = {"url": "{url}/checker/api/v1/".format(url=BACKEND_BASE_URI)}
 
-SENTRY_DSN = os.environ.get("RAVEN_CONFIG_DSN", "")
-SENTRY_SITE_NAME = os.environ.get("RAVEN_CONFIG_SITE", "")
-
 POSTCODEINFO_API = {
     "auth_token": os.environ.get("POSTCODEINFO_API_TOKEN"),
     "api_url": os.environ.get("POSTCODEINFO_API_URL"),
