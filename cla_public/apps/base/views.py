@@ -51,7 +51,7 @@ def online_safety():
 
 @base.route("/trigger-error")
 def trigger_error():
-    return render_template("non-existent-template.html")
+    return render_template("non-existent-template-two.html")
 
 
 class AbstractFeedbackView(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
