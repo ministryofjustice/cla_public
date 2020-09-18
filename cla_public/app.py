@@ -9,8 +9,9 @@ from flask import Flask, render_template
 from flask.ext.babel import Babel
 from flask.ext.cache import Cache
 from flask.ext.mail import Mail
-from raven.contrib.flask import Sentry
 import urllib3.contrib.pyopenssl
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 from cla_public.django_to_jinja import change_jinja_templates
 from cla_public.apps.geocoder.views import geocoder
@@ -23,6 +24,11 @@ from cla_public.libs import honeypot
 from cla_public.libs.utils import get_locale
 
 
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN"), environment=os.environ.get("CLA_ENV"), integrations=[FlaskIntegration()]
+)
+
+
 def create_app(config_file=None):
     app = Flask(__name__)
     app = change_jinja_templates(app)
@@ -30,9 +36,6 @@ def create_app(config_file=None):
         app.config.from_pyfile(config_file)
     else:
         app.config.from_envvar("CLA_PUBLIC_CONFIG")
-
-    if app.config.get("SENTRY_DSN"):
-        app.sentry = Sentry(app, dsn=app.config.get("SENTRY_DSN"), logging=True, level=logging.ERROR)
 
     app.babel = Babel(app)
     app.babel.localeselector(get_locale)

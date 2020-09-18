@@ -116,5 +116,11 @@ spec:
                   name: raven-config
                   key: RAVEN_CONFIG_SITE
                   optional: {{ .Values.useDevValues }}
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: sentry
+                  key: DSN
+                  optional: {{ .Values.useDevValues }}
 
             {{- toYaml .Values.envVars | nindent 12 }}

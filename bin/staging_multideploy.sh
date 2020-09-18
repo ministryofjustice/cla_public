@@ -9,6 +9,7 @@ helm upgrade $CLEANED_BRANCH_NAME \
   --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
   --values ${HELM_DIR}/values-staging.yaml \
   --set fullnameOverride=$CLEANED_BRANCH_NAME \
+  --set environment=$CLEANED_BRANCH_NAME \
   --set host=$CLEANED_BRANCH_NAME.$STAGING_HOST \
   --set ingress.secretName=tls-wildcard-certificate \
   --set image.repository=$DOCKER_REPOSITORY \
