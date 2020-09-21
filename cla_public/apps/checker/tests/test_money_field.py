@@ -128,8 +128,8 @@ class TestMoneyField(unittest.TestCase):
         self.assertValidAmount("£-800")
         self.assertAmountTooLow("£-800")
 
-    def test_pound_sign_in_wrong_places(self):
-        self.assertInvalidAmount("£30£0")
-        self.assertInvalidAmount("££9,300")
-        self.assertInvalidAmount("3£00")
-        self.assertInvalidAmount("754£.90")
+    def test_pound_sign_in_multiple_places(self):
+        self.assertValidAmount("£30£0")
+        self.assertValidAmount("££9,300")
+        self.assertValidAmount("3£00")
+        self.assertValidAmount("754£.90")
