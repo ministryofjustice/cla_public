@@ -49,6 +49,11 @@ def online_safety():
     return render_template("online-safety.html")
 
 
+@base.route("/accessibility-statement")
+def accessibility():
+    return render_template("accessibility-statement.html")
+
+
 class AbstractFeedbackView(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
     """
     Abstract view for feedback forms
