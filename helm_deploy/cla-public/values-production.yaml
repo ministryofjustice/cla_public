@@ -30,5 +30,3 @@ envVars:
     value: "pXnyHhiNQwB3LpZ4-zTZYg"
   - name: MOJ_GTM_PREVIEW
     value: "env-1"
-
-maintenanceMode: true
