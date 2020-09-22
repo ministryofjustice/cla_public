@@ -17,14 +17,14 @@
     {% call Form.fieldset(form.have_children) %}
       <div class="govuk-radios__conditional">
         {{ Form.group(form.num_children, '',
-            controlled_by=form.have_children, field_attrs={'class': 'govuk-input--width-4'}) }}
+            controlled_by=form.have_children, field_attrs={'class': 'govuk-input--width-4', 'inputmode':'numeric'}) }}
       </div>
     {% endcall %}
 
     {% call Form.fieldset(form.have_dependants) %}
       <div class="govuk-radios__conditional">
         {{ Form.group(form.num_dependants, '',
-            controlled_by=form.have_dependants, field_attrs={'class': 'govuk-input--width-4'}) }}
+            controlled_by=form.have_dependants, field_attrs={'class': 'govuk-input--width-4', 'inputmode':'numeric'}) }}
       </div>
     {% endcall %}
     

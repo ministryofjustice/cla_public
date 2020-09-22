@@ -228,7 +228,7 @@
                       class_='govuk-input govuk-input--width-10%s'  % (' govuk-select--error' if field and (field.errors and controlled_by and not controlled_by.errors or field.errors and not controlled_by) ),
                       autocomplete='off',
                       spellcheck='false',
-                      inputmode='numeric',
+                      inputmode='decimal',
                       **{'aria-required': 'false' if field.flags.optional else 'true', 'aria-describedby':field.name+'-hint'}
                     )
                   }}
@@ -447,7 +447,7 @@
     {% else %}
       {% set attribs={'aria-required': 'false' if field.flags.optional else 'true'} %}
     {% endif %}
-    {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', spellcheck='false', inputmode='numeric', **attribs) }}
+    {{ field(class_='govuk-input govuk-input--width-10 ' + class_, autocomplete='off', spellcheck='false', inputmode='decimal', **attribs) }}
     {% if prefix %}
       </div>
     {% endif %}
