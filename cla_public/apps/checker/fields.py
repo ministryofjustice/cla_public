@@ -176,7 +176,7 @@ class MoneyField(SetZeroIntegerField):
             pounds, _, pence = valuelist[0].strip().partition(".")
             pounds = self.convert_amount_to_utf8(pounds)
             # xa3 is the numeric character reference for the pound sign
-            pounds = re.sub(r"^(£|\xa3)|[\s,]+", "", pounds)
+            pounds = re.sub(r"^\xa3|[\s,]+", "", pounds)
 
             if pence:
                 if len(pence) > 2:
