@@ -169,7 +169,7 @@ class MoneyField(SetZeroIntegerField):
             # Input is already in UTF-8 format
             pass
 
-        # xa3 is the numeric character reference for the pound sign
+        # xa3 is the ASCII character reference for the pound sign
         pounds = re.sub(r"^\xa3|[\s,]+", "", pounds)
         return pounds, pence
 
