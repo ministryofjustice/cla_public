@@ -136,6 +136,8 @@
         $this.find(' .govuk-input')
           .not('.govuk-form-group--error .govuk-radios__conditional .govuk-input')
           .addClass("govuk-input--error");
+        $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+            .addClass("laa-currency-prefix--error");
         $this.find(' .govuk-select')
           .not('.govuk-form-group--error .govuk-radios__conditional .govuk-select')
           .addClass("govuk-select--error");
@@ -302,5 +304,7 @@
         .removeClass("govuk-input--error");
       $(".govuk-select--error")
         .removeClass("govuk-select--error");
+      $(".laa-currency-prefix--error")
+        .removeClass("laa-currency-prefix--error");
     }
   };
