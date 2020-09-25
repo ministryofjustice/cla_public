@@ -7,7 +7,7 @@
   "scripts": {},
   "engineStrict": true,
   "devDependencies": {
-    "browser-sync": "~2.23.2",
+    "browser-sync": "^2.26.12",
     "bs-html-injector": "^3.0.3",
     "del": "^3.0.0",
     "govuk_frontend_toolkit": "^2.0.1",
@@ -24,7 +24,7 @@
     "gulp-rename": "~1.2.0",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
-    "jshint": "^2.9.5",
+    "jshint": "^2.12.0",
     "jshint-stylish": "~2.2.1",
     "natives": "^1.1.4",
     "require-dir": "^0.3.2",
@@ -35,9 +35,9 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
-    "govuk-frontend": "^3.2.0",
+    "govuk-frontend": "^3.9.1",
+    "govuk_publishing_components": "https://github.com/alphagov/govuk_publishing_components.git#v20.5.2",
     "lodash": "^3.10.1",
-    "numeral": "^1.5.6",
-    "govuk_publishing_components": "https://github.com/alphagov/govuk_publishing_components.git#v20.5.2"
+    "numeral": "^1.5.6"
   }
 }

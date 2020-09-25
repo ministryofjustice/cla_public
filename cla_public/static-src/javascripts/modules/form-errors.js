@@ -152,6 +152,9 @@
             return ($(this).val())
           })
           .removeClass("govuk-select--error")
+
+          $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+            .addClass("laa-currency-prefix--error");
         }
 
         if (errorText) {
@@ -302,5 +305,7 @@
         .removeClass("govuk-input--error");
       $(".govuk-select--error")
         .removeClass("govuk-select--error");
+      $(".laa-currency-prefix--error")
+        .removeClass("laa-currency-prefix--error");
     }
   };

@@ -206,7 +206,12 @@ hr {
   border-right: 2px solid;
   padding: 10px 11px 0 13px;
   box-sizing: border-box;
+
+  &--error {
+    border-color: $govuk-error-colour;
+  }
 }
+
 @supports (-moz-appearance:none) {
   /*for fixing firefox only bug where currency prefix was off.*/
   .laa-currency-prefix {
