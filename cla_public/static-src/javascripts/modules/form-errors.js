@@ -1,4 +1,5 @@
  'use strict';
+  var currencyValidation = require('./currencyInputValidation');
   var _ = require('lodash');
   moj.Modules.FormErrors = {
     init: function() {
@@ -122,7 +123,7 @@
           labelField = labelField.parents(".cla-currency-by-frequency").children("legend");
 
           $this.find(' .govuk-input').filter(function () {
-            return ($(this).val() && Number($(this).val()) > 0)
+            return currencyValidation.isValidAmount($(this).val())
           })
           .removeClass("govuk-input--error");
 
