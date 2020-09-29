@@ -87,7 +87,7 @@ var wideScreen = 641;
         .unbind('click')
         .find('.org-summary')
         .each(function() {
-          $(this).replaceWith('<header class="' + this.className + '">' + $(this).html() + '</header>');
+          $(this).replaceWith('<header class="' + this.className + '" data-gtm-stuff="' + $(this).data('gtmStuff') + '" >' + $(this).html() + '</header>');
         });
 
       this.$resultsPagination.unbind('click');
