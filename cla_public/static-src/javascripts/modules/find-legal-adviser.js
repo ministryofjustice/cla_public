@@ -37,7 +37,7 @@ var wideScreen = 641;
     bindEvents: function() {
       var self = this;
       this.$organisationListItems.find('.org-summary').each(function() {
-        $(this).replaceWith('<a class="' + this.className + '" data-gtm-stuff="' + $(this).data('gtmStuff') + '" aria-expanded="false" href="#">' + $(this).html() + '</a>');
+        $(this).replaceWith('<a class="' + this.className + '" data-laa-google-tag-manager-index-and-name="' + $(this).data('laaGoogleTagManagerIndexAndName') + '" aria-expanded="false" href="#">' + $(this).html() + '</a>');
       });
 
       this.$organisationListItems.on('click', '.org-summary', function(evt) {
@@ -87,7 +87,7 @@ var wideScreen = 641;
         .unbind('click')
         .find('.org-summary')
         .each(function() {
-          $(this).replaceWith('<header class="' + this.className + '" data-gtm-stuff="' + $(this).data('gtmStuff') + '" >' + $(this).html() + '</header>');
+          $(this).replaceWith('<header class="' + this.className + '" data-laa-google-tag-manager-index-and-name="' + $(this).data('laaGoogleTagManagerIndexAndName') + '" >' + $(this).html() + '</header>');
         });
 
       this.$resultsPagination.unbind('click');
