@@ -4,7 +4,9 @@
   "engines": {
     "node": ">=8.9.x"
   },
-  "scripts": {},
+  "scripts": {
+    "jest": "jest --verbose test"
+  },
   "engineStrict": true,
   "devDependencies": {
     "browser-sync": "^2.26.12",
@@ -25,6 +27,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.12.0",
+    "jest": "^24.0.0",
     "jshint-stylish": "~2.2.1",
     "natives": "^1.1.4",
     "require-dir": "^0.3.2",
