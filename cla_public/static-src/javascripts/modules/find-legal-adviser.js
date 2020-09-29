@@ -37,7 +37,7 @@ var wideScreen = 641;
     bindEvents: function() {
       var self = this;
       this.$organisationListItems.find('.org-summary').each(function() {
-        $(this).replaceWith('<a class="' + this.className + '" aria-expanded="false" href="#">' + $(this).html() + '</a>');
+        $(this).replaceWith('<a class="' + this.className + '" data-gtm-stuff="' + this.data('gtmStuff') + '" aria-expanded="false" href="#">' + $(this).html() + '</a>');
       });
 
       this.$organisationListItems.on('click', '.org-summary', function(evt) {
