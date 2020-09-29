@@ -62,7 +62,7 @@
           <ul class="org-list">
             {% for item in data.results %}
               <li class="org-list-item vcard" data-lat="{{ item.location.point.coordinates[1] }}" data-lon="{{ item.location.point.coordinates[0] }}" data-id="{{ loop.index }}">
-                <header class="org-summary">
+                <header class="org-summary" data-laa-google-tag-manager-index-and-name="{{ loop.index }}: {{ item.organisation.name }}">
                   <h3 class="org-title">
                     <span class="marker">{{ loop.index }}</span>
                     <span class="fn org">{{ item.organisation.name }}</span>
