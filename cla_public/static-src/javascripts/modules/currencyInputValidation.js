@@ -3,15 +3,22 @@
 function isValidAmount(input) {
     var maxVal = 100000000
     var minVal = 0
+    var pounds;
+    var pence;
 
-    var value = input.split('.')
-    var pounds = value[0]
-    var pence = value[1]
-    pounds = pounds.replaceAll(/^£|[\s,]+/g, "")
+    var trimmedInput = input.trim()
+
+    var decimalPointPosition = trimmedInput.indexOf('.')
+    if(decimalPointPosition === -1) {
+        pounds = trimmedInput
+    } else {
+        pounds = trimmedInput.slice(0, decimalPointPosition)
+        pence = trimmedInput.slice(decimalPointPosition + 1)
+    }
+    pounds = pounds.replace(/^£|[\s,]+/g, "")
 
     if(pence) {
-        var lengthOfPence = pence.length
-        if(lengthOfPence > 2) {
+        if(pence.length > 2) {
             return false
         }
     }
@@ -22,7 +29,6 @@ function isValidAmount(input) {
     }
 
     if(amount) {
-        console.log('Amount: ' + amount)
         if(amount > maxVal || amount < minVal) {
             return false
         }
