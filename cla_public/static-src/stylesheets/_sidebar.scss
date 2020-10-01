@@ -8,9 +8,13 @@ body.cla-dev .sidebar {
   border-top: 10px solid $laa-dev-colour;
 }
 
-.sidebar {
+body .sidebar {
   margin-top: 40px;
   border-top: 10px solid $govuk-brand-colour;
+
+  .exceptional_cases {
+    border-top:none;
+  }
 
   h2 {
     margin: 0 0 10px;
