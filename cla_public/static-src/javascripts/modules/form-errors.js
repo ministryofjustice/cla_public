@@ -122,18 +122,30 @@
         if (labelField.parents(".cla-currency-by-frequency").length) {
           labelField = labelField.parents(".cla-currency-by-frequency").children("legend");
 
-          $this.find(' .govuk-input').filter(function () {
+          var inputElementWithValidEntry = $this.find(' .govuk-input').filter(function () {
             return currencyValidation.isValidAmount($(this).val())
           })
-          .removeClass("govuk-input--error");
+
+          if(!inputElementWithValidEntry.length) {
+            $this.find(' .govuk-input')
+            .focus(function() {
+              $(".laa-currency-prefix--error")
+              .removeClass("laa-currency-prefix--error")
+            })
+            .blur(function() {
+              $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+              .addClass("laa-currency-prefix--error");
+            })
+          }
+
+          inputElementWithValidEntry
+          .removeClass("govuk-input--error")
 
           $this.find(' .govuk-select').filter(function () {
             return ($(this).val())
           })
           .removeClass("govuk-select--error")
-
-          $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
-            .addClass("laa-currency-prefix--error");
+          
         }
 
         if (errorText) {
