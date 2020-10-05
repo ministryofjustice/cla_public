@@ -145,6 +145,9 @@
             return ($(this).val())
           })
           .removeClass("govuk-select--error")
+
+          $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+          .addClass("laa-currency-prefix--error");
           
         }
 
