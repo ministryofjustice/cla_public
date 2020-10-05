@@ -15,10 +15,10 @@ $govuk-typography-use-rem: false;
  * Some components are not yet part of govuk_frontend
   * but are available in govuk_publishing_components
 @import "govuk_publishing_components/components/mixins/margins";
-@import "govuk_publishing_components/components/cookie-banner";
 @import "govuk_publishing_components/components/button";
 @import "govuk_publishing_components/components/notice";
  */
+@import "govuk_publishing_components/components/cookie-banner";
 
 $laa-unknown-colour: govuk-colour("orange");
 $laa-staging-colour: govuk-colour("turquoise");
