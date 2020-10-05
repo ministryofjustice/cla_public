@@ -1,5 +1,3 @@
-// ($(this).val() && Number($(this).val()) > 0)
-
 function isValidAmount(input) {
     var maxVal = 100000000
     var minVal = 0
