@@ -129,7 +129,7 @@
           if(!inputElementWithValidEntry.length) {
             $this.find(' .govuk-input')
             .focus(function() {
-              $(".laa-currency-prefix--error")
+              $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
               .removeClass("laa-currency-prefix--error")
             })
             .blur(function() {
