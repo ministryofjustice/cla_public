@@ -201,6 +201,7 @@ hr {
   border-right: 2px solid;
   padding: 8px 11px 0 13px;
   box-sizing: border-box;
+  font-size: 19px;
 
   &--error {
     border-color: $govuk-error-colour;
@@ -223,6 +224,7 @@ hr {
   }
   .laa-currency-prefix {
     padding: 11px 11px 0 13px;
+    font-size: 16px;
   }
 }
 
