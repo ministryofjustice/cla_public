@@ -243,6 +243,8 @@ div.progress {
     width: 13px;
     border-radius: 100%;
     text-indent: -999em;
+    position: relative;
+    top: 1px;
   }
 
   .step-name-subtitle {

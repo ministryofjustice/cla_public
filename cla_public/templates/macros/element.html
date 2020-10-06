@@ -50,7 +50,7 @@
   'get in touch' link to contact page
 #}
 {% macro get_in_touch_link() %}
-  <p id="aria-get-in-touch" class="get-in-touch">
+  <p id="aria-get-in-touch" class="govuk-body get-in-touch">
     {{ _('If you’re having trouble completing this form') }},
     <a href="{{ url_for('base.reasons_for_contacting') }}" id="callback-link" class="govuk-link">
       {{ _('get in touch') }}</a>.
