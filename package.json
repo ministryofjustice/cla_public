@@ -5,7 +5,7 @@
     "node": ">=8.9.x"
   },
   "scripts": {
-    "jest": "jest --verbose test"
+    "jest": "jest --verbose --coverage cla_public/javascript-tests/test"
   },
   "engineStrict": true,
   "devDependencies": {
