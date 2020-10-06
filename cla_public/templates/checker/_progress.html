@@ -33,7 +33,7 @@
     {% endif %}
   </span>
 
-  <ul class="govuk-body progress-steps">
+  <ul class="govuk-list progress-steps">
     {% for step in steps if step.name in ['problem', 'about']
       or (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed)
     %}
