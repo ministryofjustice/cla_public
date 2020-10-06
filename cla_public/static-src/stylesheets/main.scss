@@ -7,7 +7,6 @@
  */
 $govuk-images-path: "/static/images/";
 $govuk-fonts-path: "/static/images/fonts/";
-$govuk-use-legacy-font: false;
 $govuk-typography-use-rem: false;
 @import "govuk/all";
 
@@ -119,6 +118,7 @@ fieldset.govuk-form-group--error {
 
 .cla-currency-by-frequency .govuk-form-group {
   margin-bottom: 8px;
+  line-height: 1.25;
 }
 
 .contact-form {
@@ -198,7 +198,7 @@ hr {
   height: 40px;
   background-color: govuk-colour("light-grey");
   border-right: 2px solid;
-  padding: 10px 11px 0 13px;
+  padding: 8px 11px 0 13px;
   box-sizing: border-box;
 
   &--error {
@@ -221,7 +221,7 @@ hr {
     padding-left:2.3em;
   }
   .laa-currency-prefix {
-    padding: 12px 11px 0 13px;
+    padding: 11px 11px 0 13px;
   }
 }
 

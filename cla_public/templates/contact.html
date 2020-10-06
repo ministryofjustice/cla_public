@@ -116,7 +116,7 @@
   </form>
   {% include "checker/time-out-warning.html" %}
   {% block notice %}
-    <p class="notice">
+    <p class="govuk-body notice">
       {% trans privacy_link=Element.link_same_window(url_for('base.privacy'), _('Civil Legal Advice Privacy Statement')) %}
         Protecting your personal data and your privacy is important to us.
         Read the full {{ privacy_link }}.
