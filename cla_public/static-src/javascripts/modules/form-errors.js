@@ -25,22 +25,6 @@
         var $target = $(e.target);
         $target.closest('form').attr('submit-name', $target.attr('name'));
       });
-
-      // Focus on field with error
-      $('#content').on('click', '.error-summary a', function(e) {
-        e.preventDefault();
-        var targetId = e.target.href.replace(/.*#/, '#');
-        if(targetId.length < 2) {
-          return;
-        }
-        var $target = $(targetId);
-
-        $('html, body').animate({
-          scrollTop: $target.offset().top - 20
-        }, 300, function() {
-          $target.attr('tabindex', -1).focus();
-        });
-      });
     },
 
     postToFormErrors: function(e) {
