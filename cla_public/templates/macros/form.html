@@ -288,7 +288,7 @@
     {% elif field.type in ['StringField', 'SetZeroIntegerField'] %}
       {% do field_attrs.update(class='govuk-input %s' % field_attrs.class) %}
     {% else %}
-      {% do field_attrs.update(class='govuk-input %s' % field_attrs.class) %} <div style="display:none;">{{ field.type }}</div>
+      {% do field_attrs.update(class='form-control %s' % field_attrs.class) %} <div style="display:none;">{{ field.type }}</div>
     {% endif %}
     {% if field.description %}
       {% do field_attrs.update({'aria-describedby':field.name+'-hint'}) %}
