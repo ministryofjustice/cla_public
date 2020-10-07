@@ -276,7 +276,6 @@
           .replace("Gwall: ", "")
       );
       $('.govuk-error-message').remove();
-      $('.form-row.field-error').remove();
       $('form>.alert.alert-error').remove();
       $('.govuk-error-summary').remove();
       $('.form-error')
