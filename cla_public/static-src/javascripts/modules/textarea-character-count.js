@@ -23,9 +23,13 @@
 
       function updateCount() {
         self.$currentCounter = $(self.characterCounter({
-          count: remainingCount,
-          counter_class: remainingCount < 0 ? 'govuk-error-message' : ''
+          count: remainingCount < 0 ? remainingCount*-1 : remainingCount,
+          counter_class: remainingCount < 0 ? 'govuk-error-message' : 'govuk-hint',
+          remaining_text: remainingCount < 0 ? _('characters too many') : _('characters remaining')
         }));
+
+        $textArea.removeClass("govuk-textarea--error")
+        if (remainingCount < 0) $textArea.addClass("govuk-textarea--error");
 
         return self.$currentCounter;
       }
