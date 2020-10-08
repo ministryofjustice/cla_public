@@ -208,7 +208,7 @@
         } else if(label.is('legend')) {
           insertError(label, errors, fieldName);
         } else {
-          insertError(label.closest('.form-group-label'), errors, fieldName);
+          insertError(label.closest('.govuk-label'), errors, fieldName);
         }
       }
 

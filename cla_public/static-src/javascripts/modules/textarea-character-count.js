@@ -3,11 +3,11 @@
   var LOW_CHAR_COUNT = 80;
 
   if (GOVUK.getCookie("locale") == "cy_GB") {
-    var someCharactersRemaining = 'nodau ar ôl'
-    var noCharactersRemaining = 'nodau gormod'
+    var someCharactersRemaining = 'nodau ar ôl';
+    var noCharactersRemaining = 'nodau gormod';
   } else {
-    var someCharactersRemaining = 'characters remaining'
-    var noCharactersRemaining = 'characters too many'
+    var someCharactersRemaining = 'characters remaining';
+    var noCharactersRemaining = 'characters too many';
   }
 
   moj.Modules.TextAreaCharacterCount = {
