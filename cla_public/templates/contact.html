@@ -155,7 +155,7 @@
   </script>
 
   <script type="text/html" id="characterCounter">
-    <div class="character-counter <%= counter_class %>">
+    <div class="govuk-hint govuk-character-count__message <%= counter_class %>" aria-live="polite">
       <%= count %> {{ _('characters remaining') }}
     </div>
   </script>

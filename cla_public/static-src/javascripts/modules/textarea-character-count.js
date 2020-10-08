@@ -24,15 +24,10 @@
       function updateCount() {
         self.$currentCounter = $(self.characterCounter({
           count: remainingCount,
-          counter_class: remainingCount < LOW_CHAR_COUNT ? 'counter-low' : ''
+          counter_class: remainingCount < 0 ? 'govuk-error-message' : ''
         }));
 
         return self.$currentCounter;
-      }
-
-      if(remainingCount < 0) {
-        $textArea.val(value.slice(0, maxLength));
-        return;
       }
 
       if(this.$currentCounter) {
@@ -42,16 +37,10 @@
       }
     },
 
-    removeCounter: function() {
-      this.$currentCounter.remove();
-      this.$currentCounter = null;
-    },
-
     bindEvents: function() {
       this.textAreasWithCharCount
         .on('keyup', $.proxy(this.renderCounter, this))
-        .focus($.proxy(this.renderCounter, this))
-        .blur($.proxy(this.removeCounter, this));
+        .focus($.proxy(this.renderCounter, this));
     },
 
     cacheEls: function() {
