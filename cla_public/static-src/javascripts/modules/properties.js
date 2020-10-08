@@ -40,7 +40,7 @@
       })).success(function(res) {
         self._updateForm(res);
 
-        var totalProperties = self.$form.find('.fieldset-group').length;
+        var totalProperties = self.$form.find('#PropertiesForm > .govuk-form-group').length;
 
         window.ga('send', 'event', 'property', button.name + ' / total:' + totalProperties);
 
