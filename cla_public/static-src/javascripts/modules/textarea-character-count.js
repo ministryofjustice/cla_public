@@ -2,6 +2,14 @@
   var _ = require('lodash');
   var LOW_CHAR_COUNT = 80;
 
+  if (GOVUK.getCookie("locale") == "cy_GB") {
+    var someCharactersRemaining = 'nodau ar ôl'
+    var noCharactersRemaining = 'nodau gormod'
+  } else {
+    var someCharactersRemaining = 'characters remaining'
+    var noCharactersRemaining = 'characters too many'
+  }
+
   moj.Modules.TextAreaCharacterCount = {
     $currentCounter: null,
 
@@ -25,7 +33,7 @@
         self.$currentCounter = $(self.characterCounter({
           count: remainingCount < 0 ? remainingCount*-1 : remainingCount,
           counter_class: remainingCount < 0 ? 'govuk-error-message' : 'govuk-hint',
-          remaining_text: remainingCount < 0 ? _('characters too many') : _('characters remaining')
+          remaining_text: remainingCount < 0 ? noCharactersRemaining : someCharactersRemaining
         }));
 
         $textArea.removeClass("govuk-textarea--error")

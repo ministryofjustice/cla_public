@@ -108,7 +108,7 @@
     {% set max_length_validator = form.extra_notes.validators|selectattr('max')|first %}
     {% set max_length = max_length_validator.max if max_length_validator %}
     {{ Form.group(form.extra_notes, 'cla-question-text--large', field_attrs={'rows': 7, 'data-character-count': max_length}) }}
-    <div class="govuk-form-group">
+    <div class="govuk-form-group govuk-character-count ">
       {{ Subform.adaptations(form.adaptations) }}
     </div>
     {{ Form.honeypot(form) }}
