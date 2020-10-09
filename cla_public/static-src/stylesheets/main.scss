@@ -71,12 +71,8 @@ html {
   }
 }
 
-.adr {
-  font-style: normal;
-
-  span {
-    display: block;
-  }
+.adr span {
+  display: block;
 }
 
 .js-enabled .s-hidden,
@@ -97,20 +93,6 @@ html {
   overflow: visible;
 }
 
-.form-notice {
-  background: $grey-4;
-  font-size: .9em;
-
-  p:first-child {
-    margin: 0;
-  }
-
-  ul {
-    padding-left: 20px;
-    margin: 0;
-  }
-}
-
 fieldset.govuk-form-group--error {
   padding-left:15px;
   border-left:5px solid $govuk-error-colour;
@@ -121,32 +103,10 @@ fieldset.govuk-form-group--error {
   line-height: 1.25;
 }
 
-.contact-form {
-  margin-top: 40px;
-}
-
-hr {
-  border: 0;
-  height: 2px;
-  background: $grey-3;
-}
-
 .get-in-touch {
   padding-top: 30px;
   margin-top: 40px;
   border-top: 2px solid $govuk-border-colour;
-}
-
-.styled-list li {
-  list-style: disc;
-}
-
-.gds-header__error {
-  border-bottom: 10px solid $govuk-error-colour;
-}
-
-.legal-aid-unavailable {
-  background-color: $govuk-error-colour;
 }
 
 .cla-postcode-text {

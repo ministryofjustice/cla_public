@@ -96,14 +96,15 @@ $map-height: 460px;
 
     .org-title {
       margin: 0;
-      font-size: 1em;
+      font-size: 16px;
+      font-weight: 700;
       line-height: 1.1;
       float: left;
     }
 
     .distance {
       color: $govuk-text-colour;
-      font-size: .8em;
+      font-size: 14px;
       float: right;
       margin-right: -80px;
     }
