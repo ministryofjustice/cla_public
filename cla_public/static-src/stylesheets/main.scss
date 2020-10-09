@@ -26,12 +26,12 @@ $laa-dev-colour: govuk-colour("pink");
 @import 'forms';
 @import 'alerts';
 @import 'icons';
+@import 'notice';
 @import 'tables';
 @import 'confirmation';
 @import 'help-organisations';
 @import 'sidebar';
 @import 'split-panels';
-@import 'notice';
 @import 'answers-summary';
 @import 'progress';
 @import 'utilities';
@@ -101,12 +101,6 @@ fieldset.govuk-form-group--error {
 .cla-currency-by-frequency .govuk-form-group {
   margin-bottom: 8px;
   line-height: 1.25;
-}
-
-.get-in-touch {
-  padding-top: 30px;
-  margin-top: 40px;
-  border-top: 2px solid $govuk-border-colour;
 }
 
 .cla-postcode-text {
