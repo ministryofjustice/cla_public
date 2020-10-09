@@ -42,7 +42,7 @@
       <strong>{{ confirmation_email }}</strong>.
     </p>
   {% else %}
-    <form method="POST" data-error-banner="false">
+    <form class="confirmation-email-form" method="POST" data-error-banner="false">
       {{ form.csrf_token }}
       {{ Form.group(form.email, '', field_attrs={'autocomplete': 'off'}) }}
       <button type="submit" class="govuk-button">{{ _('Send') }}</button>
