@@ -22,6 +22,19 @@ test('Not a number', () => {
     expect(isValidAmount("one2three")).toBe(false)
 })
 
+test('Amount too high', () => {
+    expect(isValidAmount("100000000.00")).toBe(false)
+})
+
+test('High amount', () => {
+    expect(isValidAmount("10000000")).toBe(true)
+})
+
+test('Negative amounts', () => {
+    expect(isValidAmount("-32")).toBe(false)
+    expect(isValidAmount("-12.34")).toBe(false)
+})
+
 test('Input with commas and spaces', () => {
     expect(isValidAmount("1,200")).toBe(true)
     expect(isValidAmount("1,,,,2")).toBe(true)
@@ -39,11 +52,6 @@ test('Only one decimal place', () => {
 test('No commas or space in pence', () => {
     expect(isValidAmount("1.23.45")).toBe(false)
     expect(isValidAmount("12.3 45.6")).toBe(false)
-})
-
-test('Negative amounts', () => {
-    expect(isValidAmount("-32")).toBe(false)
-    expect(isValidAmount("-12.34")).toBe(false)
 })
 
 test('Input with pound sign as prefix', () => {
