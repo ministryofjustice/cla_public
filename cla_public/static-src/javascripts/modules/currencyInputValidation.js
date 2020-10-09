@@ -1,5 +1,5 @@
 function isValidAmount(input) {
-    var maxVal = 100000000
+    var maxVal = 9999999999
     var minVal = 0
     var pounds;
     var pence;
