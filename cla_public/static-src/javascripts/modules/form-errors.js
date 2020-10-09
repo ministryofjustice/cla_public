@@ -11,12 +11,6 @@
       $('form')
         .on('submit', this.postToFormErrors)
         // Focus back on summary if field-error is focused and escape key is pressed
-        .on('keyup', function(e) {
-          var $target = $(e.target);
-          if(e.keyCode === 27 && ($target.is('.govuk-form-group--error') || $target.parent().is('.govuk-form-group--error'))) {
-            $target.closest('form').find('> .alert').focus();
-          }
-        })
         .on('blur', '.form-group', function(e) {
           $(e.target).removeAttr('tabindex');
         });
@@ -276,11 +270,7 @@
           .replace("Gwall: ", "")
       );
       $('.govuk-error-message').remove();
-      $('form>.alert.alert-error').remove();
       $('.govuk-error-summary').remove();
-      $('.form-error')
-        .removeClass('form-error')
-        .removeAttr('aria-invalid');
       $('.govuk-form-group--error')
         .removeClass('govuk-form-group--error')
         .removeAttr('aria-invalid');
