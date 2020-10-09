@@ -7,15 +7,13 @@
  */
 $govuk-images-path: "/static/images/";
 $govuk-fonts-path: "/static/images/fonts/";
+$govuk-use-legacy-font: false;
 $govuk-typography-use-rem: false;
 @import "govuk/all";
 
 /**
  * Some components are not yet part of govuk_frontend
   * but are available in govuk_publishing_components
-@import "govuk_publishing_components/components/mixins/margins";
-@import "govuk_publishing_components/components/button";
-@import "govuk_publishing_components/components/notice";
  */
 @import "govuk_publishing_components/components/cookie-banner";
 
@@ -26,10 +24,10 @@ $laa-dev-colour: govuk-colour("pink");
 @import 'forms';
 @import 'alerts';
 @import 'icons';
-@import 'notice';
 @import 'confirmation';
 @import 'help-organisations';
 @import 'sidebar';
+@import 'notice';
 @import 'progress';
 @import 'utilities';
 @import 'layout';
@@ -193,9 +191,6 @@ dl.govuk-list.govuk-list--bullet {
     padding-left: 6px;
     margin-left: 20px;
   }
-}
-.form-group-label {
-  font-weight:bold;
 }
 .laa-input-link {
   cursor: pointer;

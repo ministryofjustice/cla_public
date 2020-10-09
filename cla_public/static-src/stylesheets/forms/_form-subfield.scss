@@ -7,15 +7,6 @@
   zoom: 1;
   overflow: hidden;
 
-  > .form-group-label {
-    float: left;
-    margin-bottom: 10px;
-
-    label:after {
-      content: none;
-    }
-  }
-
   .input-prefix {
     margin: 0 5px 0 0;
     display: inline-block;
@@ -33,10 +24,6 @@
 
     &:last-child {
       margin-bottom: -10px;
-    }
-
-    > .form-group-label label:after {
-      content: none;
     }
   }
 
