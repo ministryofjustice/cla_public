@@ -1188,7 +1188,7 @@ msgid "Your notes must be 4000 characters or less"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:152
-msgid "Do you have any special communication needs?"
+msgid "Do you have any special communication needs? (optional)"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:200
