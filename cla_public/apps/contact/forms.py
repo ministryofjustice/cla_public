@@ -157,7 +157,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         _(u"Tell us more about your problem"),
         validators=[Length(max=4000, message=_(u"Your notes must be 4000 characters or less")), Optional()],
     )
-    adaptations = ValidatedFormField(AdaptationsForm, _(u"Do you have any special communication needs?"))
+    adaptations = ValidatedFormField(AdaptationsForm, _(u"Do you have any special communication needs? (optional)"))
 
     def api_payload(self):
         "Form data as data structure ready to send to API"
