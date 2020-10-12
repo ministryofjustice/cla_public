@@ -61,7 +61,7 @@
 
     {{ Form.group(form.full_name, 'cla-question-text--large', field_attrs={'spellcheck': "false"}) }}
 
-    {% call Form.fieldset(form.contact_type, field_as_label=True) %}
+    {% call Form.fieldset(form.contact_type, field_as_label=True, legend_size='m') %}
       <div class="govuk-radios">
         {%- for option in form.contact_type -%}
           <div class="govuk-radios__item">
