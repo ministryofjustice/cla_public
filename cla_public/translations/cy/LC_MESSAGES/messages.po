@@ -1603,8 +1603,8 @@ msgid "Your notes must be 4000 characters or less"
 msgstr "Rhaid i’ch nodiadau fod yn 4000 nod neu lai"
 
 #: cla_public/apps/contact/forms.py:152
-msgid "Do you have any special communication needs?"
-msgstr "Oes gennych chi unrhyw anghenion cyfathrebu arbennig?"
+msgid "Do you have any special communication needs? (optional)"
+msgstr "Oes gennych chi unrhyw anghenion cyfathrebu arbennig? (dewisol)"
 
 #: cla_public/apps/contact/forms.py:200
 msgid "Receive this confirmation by email"

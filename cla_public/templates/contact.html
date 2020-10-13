@@ -59,9 +59,9 @@
   <form method="POST" action="{{ url_for('contact.get_in_touch') }}">
     {{ form.csrf_token }}
 
-    {{ Form.group(form.full_name, field_attrs={'class': 'm-large', 'spellcheck': "false"}) }}
+    {{ Form.group(form.full_name, 'cla-question-text--large', field_attrs={'spellcheck': "false"}) }}
 
-    {% call Form.fieldset(form.contact_type, field_as_label=True) %}
+    {% call Form.fieldset(form.contact_type, field_as_label=True, legend_size='m') %}
       <div class="govuk-radios">
         {%- for option in form.contact_type -%}
           <div class="govuk-radios__item">
@@ -92,7 +92,7 @@
       </div>
     {% endcall %}
 
-    {{ Form.group(form.email, field_attrs={'class': 'm-large'}) }}
+    {{ Form.group(form.email, 'cla-question-text--large') }}
 
     {% call Form.fieldset(form.address, field_as_label=True, legend_size='m') %}
       {{ Form.group(form.address.post_code,
@@ -102,12 +102,12 @@
 
       {{ Form.group(form.address.street_address,
           'form-group-plain',
-          field_attrs={'class': 'm-large', 'rows': 4}) }}
+          field_attrs={'rows': 4}) }}
     {% endcall %}
 
     {% set max_length_validator = form.extra_notes.validators|selectattr('max')|first %}
     {% set max_length = max_length_validator.max if max_length_validator %}
-    {{ Form.group(form.extra_notes, field_attrs={'class': 'm-full', 'rows': 7, 'data-character-count': max_length}) }}
+    {{ Form.group(form.extra_notes, 'cla-question-text--large', field_attrs={'rows': 7, 'data-character-count': max_length}) }}
     <div class="govuk-form-group">
       {{ Subform.adaptations(form.adaptations) }}
     </div>

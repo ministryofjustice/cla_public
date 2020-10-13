@@ -112,6 +112,7 @@
       // tidy up addresses for dropdown list
       $.each(addresses, function (i, addr) {
         var parts = addr.formatted_address.split('\n');
+        parts.pop();  // strip postcode
         var text = parts.join(', ');
         addrItems.push(text);
       });
