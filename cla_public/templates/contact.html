@@ -103,7 +103,7 @@
       {{ Form.group(form.address.street_address,
           'form-group-plain',
           field_attrs={'rows': 4}) }}
-      {% endcall %}
+    {% endcall %}
 
     {% set max_length_validator = form.extra_notes.validators|selectattr('max')|first %}
     {% set max_length = max_length_validator.max if max_length_validator %}
