@@ -418,7 +418,8 @@ body:not(.cla-production) {
     border-bottom-color:$laa-unknown-colour;
   }
   .govuk-phase-banner__content__tag{
-    background-color:$laa-unknown-colour
+    background-color:$laa-unknown-colour;
+    white-space: nowrap;
   }
 }
 

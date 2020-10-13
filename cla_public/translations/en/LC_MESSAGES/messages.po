@@ -1629,15 +1629,14 @@ msgstr ""
 #: cla_public/templates/cookies.html:25
 msgid "how to manage cookies"
 msgstr ""
+
 #: cla_public/templates/cookies.html:25
 msgid "aboutcookies.org"
-msgstr "aboutcookies.org (Saesneg)"
+msgstr ""
+
 #: cla_public/templates/cookies.html:25
 #, python-format
-msgid ""
-"\n"
-"      Find out more about %(manage_cookies_link)s.\n"
-"    "
+msgid "Find out more about how to manage cookies at %(manage_cookies_link)s."
 msgstr ""
 
 #: cla_public/templates/cookies.html:29
