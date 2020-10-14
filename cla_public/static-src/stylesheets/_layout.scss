@@ -1,17 +1,3 @@
-.container {
-  max-width: 960px;
-  padding: 0 30px;
-  margin: 0 auto;
-
-  @include media(mobile) {
-    padding: 0 15px;
-  }
-
-  @media print {
-    padding: 0 3mm;
-  }
-}
-
 #content {
   padding-top: 40px;
 
@@ -24,31 +10,6 @@
 
     h1 {
       margin: 0;
-    }
-  }
-}
-
-.m-has-sidebar {
-  @extend %grid-row;
-
-  .main-content,
-  .sidebar {
-    @include media(tablet) {
-      float: left;
-    }
-  }
-
-  .main-content {
-    @include media(tablet) {
-      width: 66%;
-      padding-right: 4%;
-    }
-  }
-
-  .sidebar {
-    @include media(tablet) {
-      margin-top: 12px;
-      width: 30%;
     }
   }
 }

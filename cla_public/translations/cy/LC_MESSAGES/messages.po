@@ -1480,8 +1480,8 @@ msgstr "Amser"
 msgid "Day"
 msgstr "Dydd"
 
-#: cla_public/apps/contact/forms.py:23
-msgid "-- Choose a language --"
+#: cla_public/apps/contact/forms.py:40
+msgid "Choose a language"
 msgstr "Dewiswch iaith"
 
 #: cla_public/apps/contact/forms.py:35
@@ -1505,8 +1505,8 @@ msgid "Other language"
 msgstr "Iaith arall"
 
 #: cla_public/apps/contact/forms.py:40
-msgid "Language required:"
-msgstr "Iaith sydd ei hangen:"
+msgid "Language required"
+msgstr "Iaith sydd ei hangen"
 
 #: cla_public/apps/contact/forms.py:41
 msgid "Any other communication needs"

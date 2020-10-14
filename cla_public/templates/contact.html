@@ -107,8 +107,10 @@
 
     {% set max_length_validator = form.extra_notes.validators|selectattr('max')|first %}
     {% set max_length = max_length_validator.max if max_length_validator %}
-    {{ Form.group(form.extra_notes, 'cla-question-text--large', field_attrs={'rows': 7, 'data-character-count': max_length}) }}
-    <div class="govuk-form-group">
+    <div class="govuk-character-count">
+      {{ Form.group(form.extra_notes, 'cla-question-text--large', field_attrs={'rows': 7, 'data-character-count': max_length}) }}
+    </div>
+    <div class="govuk-form-group ">
       {{ Subform.adaptations(form.adaptations) }}
     </div>
     {{ Form.honeypot(form) }}
@@ -116,7 +118,7 @@
   </form>
   {% include "checker/time-out-warning.html" %}
   {% block notice %}
-    <p class="notice">
+    <p class="govuk-body notice">
       {% trans privacy_link=Element.link_same_window(url_for('base.privacy'), _('Civil Legal Advice Privacy Statement')) %}
         Protecting your personal data and your privacy is important to us.
         Read the full {{ privacy_link }}.
@@ -155,8 +157,8 @@
   </script>
 
   <script type="text/html" id="characterCounter">
-    <div class="character-counter <%= counter_class %>">
-      <%= count %> {{ _('characters remaining') }}
+    <div class="govuk-character-count__message <%= counter_class %>" aria-live="polite">
+      <%= count %> <%= remaining_text %>
     </div>
   </script>
 

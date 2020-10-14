@@ -139,10 +139,9 @@
         {{ subform.is_other_language.label.text }}
       </label>
     </div>
-        {{ Form.group(subform.other_language, 'form-subfield',
+        {{ Form.group(subform.other_language, 'govuk-checkboxes__conditional',
             controlled_by=subform.is_other_language,
             control_value='y',
-            hide_label=True,
             row_class='') }}
     <div class="govuk-checkboxes__item">
       {{ subform.is_other_adaptation(**{'aria-controls': subform.other_adaptation.id, "class": "govuk-checkboxes__input"}) }}
@@ -150,11 +149,10 @@
         {{ subform.is_other_adaptation.label.text }}
       </label>
     </div>
-        {{ Form.group(subform.other_adaptation, 'form-subfield',
+        {{ Form.group(subform.other_adaptation, 'govuk-checkboxes__conditional',
             controlled_by=subform.is_other_adaptation,
             control_value='y',
-            hide_label=True,
-            field_attrs={'class': 'm-large', 'rows': 4},
+            field_attrs={'rows': 4},
             row_class='') }}
   {% endcall %}
 {% endmacro %}

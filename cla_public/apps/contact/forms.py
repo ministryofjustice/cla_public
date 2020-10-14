@@ -19,9 +19,7 @@ from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
 
 
-LANG_CHOICES = filter(
-    lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", _("-- Choose a language --"))] + ADAPTATION_LANGUAGES
-)
+LANG_CHOICES = filter(lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", "")] + ADAPTATION_LANGUAGES)
 
 THIRDPARTY_RELATIONSHIP = map(lambda relationship: (relationship[0], _(relationship[1])), THIRDPARTY_RELATIONSHIP)
 THIRDPARTY_RELATIONSHIP_CHOICES = [("", _("-- Please select --"))] + THIRDPARTY_RELATIONSHIP
@@ -37,7 +35,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     text_relay = BooleanField(_(u"Text Relay – for people with hearing or speech impairments"))
     welsh = BooleanField(_(u"Welsh"))
     is_other_language = BooleanField(_(u"Other language"))
-    other_language = SelectField(_(u"Language required:"), choices=(LANG_CHOICES))
+    other_language = SelectField(_(u"Choose a language"), choices=(LANG_CHOICES))
     is_other_adaptation = BooleanField(_(u"Any other communication needs"))
     other_adaptation = TextAreaField(
         _(u"Other communication needs"),

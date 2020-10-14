@@ -68,7 +68,7 @@
                     <span class="fn org">{{ item.organisation.name }}</span>
                   </h3>
                   <div class="distance">
-                    <span class="sr-only">{{ _('Distance') }}</span>
+                    <span class="govuk-visually-hidden">{{ _('Distance') }}</span>
                     {% if data.origin %}
                       {% trans miles=item.distance|round(2) %}{{ miles }} miles{% endtrans %}
                     {% endif %}
@@ -76,7 +76,7 @@
                 </header>
                 <div class="org-details">
                   <p class="govuk-body-s">
-                    <span class="sr-only">{{ _('Address') }}:</span>
+                    <span class="govuk-visually-hidden">{{ _('Address') }}:</span>
                     <span class="adr">
                       <span class="street-address">{{ item.location.address }}</span>
                       <span class="city">{{ item.location.city }}</span>

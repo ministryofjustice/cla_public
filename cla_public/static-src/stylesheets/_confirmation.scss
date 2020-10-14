@@ -1,60 +1,27 @@
-.confirmation {
-  background: $turquoise;
-  padding: 30px;
-  color: white;
-  text-align: center;
-
-  .confirmation-actions {
-    margin-top: 30px;
-  }
-
-  .flash-messages + & {
-    margin-top: -10px;
-  }
-}
-
-.confirmation-ref-number {
-  display: block;
-  font-size: 1.3em;
-  margin-top: 5px;
-}
-
-.confirmation-inset {
-  background: lighten($turquoise, 50);
-  color: $black;
-  padding: 20px;
-  margin: 20px 0 0;
-
-  @media print {
-    border-top: 1px solid $black;
-    background: none;
-    padding-bottom: 0;
-  }
-}
-
-.confirmation-email-form {
-  padding: 20px 30px;
-  border: 3px solid $turquoise;
-
-  h3 {
-    margin: 10px 0;
-  }
-}
-
-@media print {
-  .main-content .confirmation {
-    background: none;
-    border: 3px solid $black;
-    margin-top: -20px;
-
-    .confirmation-ref-number {
-      font-size: 17pt;
+.laa-confirmation-button-link {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: govuk-colour("white");
+  text-decoration: underline;
+  &:hover{
+    color: govuk-colour("light-grey");
+    &:focus{
+      color: $govuk-text-colour;
     }
   }
+}
+.laa-confirmation-inset {
+  background: govuk-colour("white");
+  color: $govuk-text-colour;
+  padding: 20px;
+  margin: 20px 0 0;
+}
 
+
+@media print {
   .confirmation-actions,
-  .confirmation-email-form,
-  .flash-messages {
+  .confirmation-email-form {
     display: none;
   }
 }

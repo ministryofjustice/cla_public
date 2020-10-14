@@ -11,12 +11,6 @@
       $('form')
         .on('submit', this.postToFormErrors)
         // Focus back on summary if field-error is focused and escape key is pressed
-        .on('keyup', function(e) {
-          var $target = $(e.target);
-          if(e.keyCode === 27 && ($target.is('.govuk-form-group--error') || $target.parent().is('.govuk-form-group--error'))) {
-            $target.closest('form').find('> .alert').focus();
-          }
-        })
         .on('blur', '.form-group', function(e) {
           $(e.target).removeAttr('tabindex');
         });
@@ -24,22 +18,6 @@
       $('[type=submit]').on('click', function(e) {
         var $target = $(e.target);
         $target.closest('form').attr('submit-name', $target.attr('name'));
-      });
-
-      // Focus on field with error
-      $('#content').on('click', '.error-summary a', function(e) {
-        e.preventDefault();
-        var targetId = e.target.href.replace(/.*#/, '#');
-        if(targetId.length < 2) {
-          return;
-        }
-        var $target = $(targetId);
-
-        $('html, body').animate({
-          scrollTop: $target.offset().top - 20
-        }, 300, function() {
-          $target.attr('tabindex', -1).focus();
-        });
       });
     },
 
@@ -224,7 +202,7 @@
         } else if(label.is('legend')) {
           insertError(label, errors, fieldName);
         } else {
-          insertError(label.closest('.form-group-label'), errors, fieldName);
+          insertError(label.closest('.govuk-label'), errors, fieldName);
         }
       }
 
@@ -292,12 +270,7 @@
           .replace("Gwall: ", "")
       );
       $('.govuk-error-message').remove();
-      $('.form-row.field-error').remove();
-      $('form>.alert.alert-error').remove();
       $('.govuk-error-summary').remove();
-      $('.form-error')
-        .removeClass('form-error')
-        .removeAttr('aria-invalid');
       $('.govuk-form-group--error')
         .removeClass('govuk-form-group--error')
         .removeAttr('aria-invalid');

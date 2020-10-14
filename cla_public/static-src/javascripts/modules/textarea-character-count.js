@@ -2,6 +2,14 @@
   var _ = require('lodash');
   var LOW_CHAR_COUNT = 80;
 
+  if (GOVUK.getCookie("locale") == "cy_GB") {
+    var someCharactersRemaining = 'nodau ar ôl';
+    var noCharactersRemaining = 'nodau gormod';
+  } else {
+    var someCharactersRemaining = 'characters remaining';
+    var noCharactersRemaining = 'characters too many';
+  }
+
   moj.Modules.TextAreaCharacterCount = {
     $currentCounter: null,
 
@@ -23,16 +31,15 @@
 
       function updateCount() {
         self.$currentCounter = $(self.characterCounter({
-          count: remainingCount,
-          counter_class: remainingCount < LOW_CHAR_COUNT ? 'counter-low' : ''
+          count: remainingCount < 0 ? remainingCount*-1 : remainingCount,
+          counter_class: remainingCount < 0 ? 'govuk-error-message' : 'govuk-hint',
+          remaining_text: remainingCount < 0 ? noCharactersRemaining : someCharactersRemaining
         }));
 
-        return self.$currentCounter;
-      }
+        $textArea.removeClass("govuk-textarea--error")
+        if (remainingCount < 0) $textArea.addClass("govuk-textarea--error");
 
-      if(remainingCount < 0) {
-        $textArea.val(value.slice(0, maxLength));
-        return;
+        return self.$currentCounter;
       }
 
       if(this.$currentCounter) {
@@ -42,16 +49,10 @@
       }
     },
 
-    removeCounter: function() {
-      this.$currentCounter.remove();
-      this.$currentCounter = null;
-    },
-
     bindEvents: function() {
       this.textAreasWithCharCount
         .on('keyup', $.proxy(this.renderCounter, this))
-        .focus($.proxy(this.renderCounter, this))
-        .blur($.proxy(this.removeCounter, this));
+        .focus($.proxy(this.renderCounter, this));
     },
 
     cacheEls: function() {

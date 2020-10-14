@@ -1090,7 +1090,7 @@ msgid "Other language"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:40
-msgid "Language required:"
+msgid "Language required"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:41

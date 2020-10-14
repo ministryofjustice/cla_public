@@ -46,7 +46,7 @@
 #}
 {% import "macros/element.html" as Element %}
 {% macro org_list(organisations, category_name='') %}
-  <ul class="org-list">
+  <ul class="org-list govuk-list">
     {% for org in organisations %}
       <li class="vcard {{ org.classname }}">
         <h3 class="govuk-heading-m">

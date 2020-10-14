@@ -1,7 +1,3 @@
-@import "govuk_frontend_toolkit/stylesheets/colours"; /*to be removed*/
-@import "govuk_frontend_toolkit/stylesheets/grid_layout"; /*to be removed*/
-@import "govuk_frontend_toolkit/stylesheets/typography"; /*to be removed*/
-
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/alpha-beta";
 @import "govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
 
@@ -19,27 +15,19 @@ $govuk-typography-use-rem: false;
  * Some components are not yet part of govuk_frontend
   * but are available in govuk_publishing_components
  */
-@import "govuk_publishing_components/components/mixins/margins";
 @import "govuk_publishing_components/components/cookie-banner";
-@import "govuk_publishing_components/components/button";
-@import "govuk_publishing_components/components/notice";
 
 $laa-unknown-colour: govuk-colour("orange");
 $laa-staging-colour: govuk-colour("turquoise");
 $laa-dev-colour: govuk-colour("pink");
 
-@import 'phase-banner';
-@import 'typography';
 @import 'forms';
 @import 'alerts';
 @import 'icons';
-@import 'tables';
 @import 'confirmation';
 @import 'help-organisations';
 @import 'sidebar';
-@import 'split-panels';
 @import 'notice';
-@import 'answers-summary';
 @import 'progress';
 @import 'utilities';
 @import 'layout';
@@ -78,12 +66,8 @@ html {
   }
 }
 
-.adr {
-  font-style: normal;
-
-  span {
-    display: block;
-  }
+.adr span {
+  display: block;
 }
 
 .js-enabled .s-hidden,
@@ -104,20 +88,6 @@ html {
   overflow: visible;
 }
 
-.form-notice {
-  background: $grey-4;
-  font-size: .9em;
-
-  p:first-child {
-    margin: 0;
-  }
-
-  ul {
-    padding-left: 20px;
-    margin: 0;
-  }
-}
-
 fieldset.govuk-form-group--error {
   padding-left:15px;
   border-left:5px solid $govuk-error-colour;
@@ -125,34 +95,7 @@ fieldset.govuk-form-group--error {
 
 .cla-currency-by-frequency .govuk-form-group {
   margin-bottom: 8px;
-}
-
-.contact-form {
-  margin-top: 40px;
-}
-
-hr {
-  border: 0;
-  height: 2px;
-  background: $grey-3;
-}
-
-.get-in-touch {
-  padding-top: 30px;
-  margin-top: 40px;
-  border-top: 2px solid $grey-3;
-}
-
-.styled-list li {
-  list-style: disc;
-}
-
-.gds-header__error {
-  border-bottom: 10px solid $govuk-error-colour;
-}
-
-.legal-aid-unavailable {
-  background-color: $govuk-error-colour;
+  line-height: 1.25;
 }
 
 .cla-postcode-text {
@@ -200,12 +143,14 @@ hr {
   }
 }
 .laa-currency-prefix {
+  font-family: $govuk-font-family;
   position: absolute;
   height: 40px;
   background-color: govuk-colour("light-grey");
   border-right: 2px solid;
-  padding: 10px 11px 0 13px;
+  padding: 8px 11px 0 13px;
   box-sizing: border-box;
+  font-size: 19px;
 
   &--error {
     border-color: $govuk-error-colour;
@@ -227,7 +172,8 @@ hr {
     padding-left:2.3em;
   }
   .laa-currency-prefix {
-    padding: 12px 11px 0 13px;
+    padding: 11px 11px 0 13px;
+    font-size: 16px;
   }
 }
 
@@ -246,22 +192,6 @@ dl.govuk-list.govuk-list--bullet {
     margin-left: 20px;
   }
 }
-.form-group-label {
-  font-weight:bold;
-}
-.laa-confirmation-button-link {
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: white;
-  text-decoration: underline;
-  &:hover{
-    color: #f3f2f1;
-    &:focus{
-      color: $govuk-text-colour;
-    }
-  }
-}
 .laa-input-link {
   cursor: pointer;
   background: none;
@@ -275,12 +205,6 @@ dl.govuk-list.govuk-list--bullet {
       color: $govuk-focus-text-colour;
     }
   }
-}
-.laa-confirmation-inset {
-  background: white;
-  color: $govuk-text-colour;
-  padding: 20px;
-  margin: 20px 0 0;
 }
 @media only screen {
   a[rel="external"]:after {

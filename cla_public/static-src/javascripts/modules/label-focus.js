@@ -1,7 +1,7 @@
  'use strict';
 
   moj.Modules.LabelFocus = {
-    el: '.radio-inline, .govuk-checkboxes__label',
+    el: '.govuk-checkboxes__label',
 
     init: function () {
       this.cacheEls();

@@ -7,7 +7,7 @@
 {% block inner_content %}
   <h1 class="govuk-heading-xl">{{ title }}</h1>
 
-  <form method="POST" class="answers-summary">
+  <form method="POST">
     {% if session.checker.scope_answers %}
       <h2 class="govuk-heading-l" id="step-scope">{{ _('Your problem area') }}</h2>
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">

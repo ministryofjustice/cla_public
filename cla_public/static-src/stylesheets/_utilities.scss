@@ -1,30 +1,13 @@
+//GDS design system styles for widths do not work with our tables at narrow resolutions (2020-10-09)
+
 .u-width-50 {
   width: 50%;
-}
-
-.u-width-33 {
-  width: 33%;
 }
 
 .u-width-20 {
   width: 20%;
 }
 
-.u-width-10 {
-  width: 10%;
-}
-
-.u-text-right {
-  text-align: right;
-}
-
-.sr-only {
-  clip: rect(0, 0, 0, 0);
-  overflow: hidden !important;
-  position: absolute !important;
-  opacity: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 1px;
-  height: 1px;
+.u-width-15 {
+  width: 15%;
 }
