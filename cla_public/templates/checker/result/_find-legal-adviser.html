@@ -152,7 +152,8 @@
     {% endcall %}
   {% endif %}
 
-  {% if category == 'pi' %}
+  {% if title %}
+  {% elif category == 'pi' %}
     <h1 class="govuk-heading-xl">
       {{ _('Legal aid is not usually available for advice about personal injury') }}
     </h1>
