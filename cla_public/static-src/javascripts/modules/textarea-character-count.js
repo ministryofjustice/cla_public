@@ -27,7 +27,7 @@
       var $textArea = $(evt.target);
       var value = $textArea.val();
       var maxLength = $textArea.data('character-count');
-      var numberOfLineReturns = (value.match(/[^\n]+/g) || []).length;
+      var numberOfLineReturns = (value.match(/\n/g) || []).length;
       var remainingCount = maxLength - value.length - numberOfLineReturns;
 
       function updateCount() {
