@@ -110,6 +110,12 @@
     <div class="govuk-character-count">
       {{ Form.group(form.extra_notes, 'cla-question-text--large', field_attrs={'rows': 7, 'data-character-count': max_length}) }}
     </div>
+    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="{{ max_length }}">
+      {{ Form.group(form.extra_notes, 'cla-question-text--large', field_attrs={'rows': 7}) }}
+      <div id="label-as-page-heading-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+        You can enter up to 4000 characters
+      </div>
+    </div>
     <div class="govuk-form-group ">
       {{ Subform.adaptations(form.adaptations) }}
     </div>
