@@ -1599,7 +1599,7 @@ msgid "Tell us more about your problem"
 msgstr "Dywedwch fwy wrthym am eich problem"
 
 #: cla_public/apps/contact/forms.py:150
-msgid "Your notes must be 4000 characters or less"
+msgid "Your notes must be 4000 characters or fewer"
 msgstr "Rhaid i’ch nodiadau fod yn 4000 nod neu lai"
 
 #: cla_public/apps/contact/forms.py:152

@@ -293,7 +293,7 @@
           .replace("Error: ", "")
           .replace("Gwall: ", "")
       );
-      $('.govuk-error-message').remove();
+      $('.govuk-error-message:not(.govuk-character-count__message )').remove();
       $('.govuk-error-summary').remove();
       $('.govuk-form-group--error')
         .removeClass('govuk-form-group--error')

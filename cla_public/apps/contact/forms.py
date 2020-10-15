@@ -42,7 +42,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
         description=_(u"Please tell us what you need in the box below"),
         validators=[
             IgnoreIf("is_other_adaptation", FieldValue(False)),
-            Length(max=4000, message=_(u"Your other communication needs must be 4000 characters or less")),
+            Length(max=4000, message=_(u"Your other communication needs must be 4000 characters or fewer")),
             Optional(),
         ],
     )

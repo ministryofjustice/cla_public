@@ -14,7 +14,6 @@
     $currentCounter: null,
 
     init: function() {
-      console.log("init");
       this.cacheEls();
 
       if(this.textAreasWithCharCount.length) {
@@ -24,7 +23,6 @@
     },
 
     renderCounter: function(evt) {
-      console.log("render");
       var self = this;
       var $textArea = $(evt.target);
       var value = $textArea.val();
@@ -45,23 +43,19 @@
       }
 
       if(this.$currentCounter) {
-        console.log("update");
         this.$currentCounter.replaceWith(updateCount());
       } else {
-        console.log("create");
         $textArea.after(updateCount());
       }
     },
 
     bindEvents: function() {
-      console.log("bind events");
       this.textAreasWithCharCount
         .on('keyup', $.proxy(this.renderCounter, this))
         .focus($.proxy(this.renderCounter, this));
     },
 
     cacheEls: function() {
-      console.log("cache");
       this.textAreasWithCharCount = $('textarea[data-character-count]')
         .filter(function() {
           return typeof $(this).data('character-count') === 'number';
@@ -69,7 +63,6 @@
     },
 
     templates: function() {
-      console.log("templates");
       this.characterCounter = _.template($('#characterCounter').html());
     }
   };
