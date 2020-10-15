@@ -109,3 +109,36 @@ class TestMoneyField(unittest.TestCase):
 
     def test_default_max(self):
         self.assertAmountTooHigh("100000000.00", field="default_moneyfield")
+
+    def test_pound_sign_as_prefix(self):
+        self.assertValidAmount("£100")
+        self.assertAmount(10000, "£100")
+        self.assertValidAmount("£435.34")
+        self.assertAmount(43534, "£435.34")
+        self.assertValidAmount("£5000.2")
+        self.assertAmount(500020, "£5000.2")
+        self.assertValidAmount("£349.21")
+        self.assertAmount(34921, "£349.21")
+        self.assertValidAmount("£3,90   ")
+        self.assertAmount(39000, "£3,90   ")
+        self.assertValidAmount("£3,,,412.57")
+        self.assertAmount(341257, "£3,,,412.57")
+
+    def test_pound_sign_with_negative_number(self):
+        self.assertValidAmount("£-5000.2")
+        self.assertAmountTooLow("£-5000.2")
+        self.assertValidAmount("£-800")
+        self.assertAmountTooLow("£-800")
+
+    def test_pound_sign_in_wrong_places(self):
+        self.assertInvalidAmount("£30£0")
+        self.assertInvalidAmount("££9,300")
+        self.assertInvalidAmount("3£00")
+        self.assertInvalidAmount("754£.90")
+
+    def test_pound_sign_after_decimal_point(self):
+        self.assertInvalidAmount("£93,200.£50")
+        self.assertInvalidAmount("£15.£4")
+        self.assertInvalidAmount("100.£20")
+        self.assertInvalidAmount("430.£2")
+        self.assertInvalidAmount("754£.£90")

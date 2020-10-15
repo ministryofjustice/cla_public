@@ -1,4 +1,5 @@
  'use strict';
+  var currencyValidation = require('./currencyInputValidation');
   var _ = require('lodash');
   moj.Modules.FormErrors = {
     init: function() {
@@ -113,7 +114,15 @@
 
         $this.find(' .govuk-input')
           .not('.govuk-form-group--error .govuk-radios__conditional .govuk-input')
-          .addClass("govuk-input--error");
+          .addClass("govuk-input--error")
+          .focus(function() {
+            $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+            .removeClass("laa-currency-prefix--error")
+          })
+          .blur(function() {
+            $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+            .addClass("laa-currency-prefix--error");
+          });
         $this.find(' .govuk-select')
           .not('.govuk-form-group--error .govuk-radios__conditional .govuk-select')
           .addClass("govuk-select--error");
@@ -121,19 +130,34 @@
         if (labelField.parents(".cla-currency-by-frequency").length) {
           labelField = labelField.parents(".cla-currency-by-frequency").children("legend");
 
-          $this.find(' .govuk-input').filter(function () {
-            return ($(this).val() && Number($(this).val()) > 0)
+          var inputElementWithValidEntry = $this.find(' .govuk-input').filter(function () {
+            return currencyValidation.isValidAmount($(this).val())
           })
-          .removeClass("govuk-input--error");
+
+          if(!inputElementWithValidEntry.length) {
+            $this.find(' .govuk-input')
+            .focus(function() {
+              $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+              .removeClass("laa-currency-prefix--error")
+            })
+            .blur(function() {
+              $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+              .addClass("laa-currency-prefix--error");
+            })
+          }
+
+          inputElementWithValidEntry
+          .removeClass("govuk-input--error")
 
           $this.find(' .govuk-select').filter(function () {
             return ($(this).val())
           })
           .removeClass("govuk-select--error")
 
-          $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
-            .addClass("laa-currency-prefix--error");
         }
+
+        $this.find('.laa-currency .govuk-input.govuk-input--error').siblings(".laa-currency-prefix")
+        .addClass("laa-currency-prefix--error");
 
         if (errorText) {
           var labelText = errorText;
