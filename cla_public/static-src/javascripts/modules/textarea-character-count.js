@@ -3,11 +3,17 @@
   var LOW_CHAR_COUNT = 80;
 
   if (GOVUK.getCookie("locale") == "cy_GB") {
+    var youHave = '';
     var someCharactersRemaining = 'nodau ar ôl';
-    var noCharactersRemaining = 'nodau gormod';
+    var oneCharacterRemaining = 'nod ar ôl';
+    var oneCharacterTooMany = 'nod gormod';
+    var someCharactersTooMany = 'nodau gormod';
   } else {
+    var youHave = 'You have';
     var someCharactersRemaining = 'characters remaining';
-    var noCharactersRemaining = 'characters too many';
+    var oneCharacterRemaining = 'character remaining';
+    var oneCharacterTooMany = 'character too many';
+    var someCharactersTooMany = 'characters too many';
   }
 
   moj.Modules.TextAreaCharacterCount = {
@@ -29,12 +35,22 @@
       var maxLength = $textArea.data('character-count');
       var numberOfLineReturns = (value.match(/\n/g) || []).length;
       var remainingCount = maxLength - value.length - numberOfLineReturns;
+      if (remainingCount < -1) {
+        var remainText = someCharactersTooMany;
+      } else if (remainingCount === -1) {
+        var remainText = oneCharacterTooMany;
+      } else if (remainingCount === 1) {
+        var remainText = oneCharacterRemaining;
+      } else { // > 1 or 0
+        var remainText = someCharactersRemaining;
+      }
 
       function updateCount() {
         self.$currentCounter = $(self.characterCounter({
           count: remainingCount < 0 ? remainingCount*-1 : remainingCount,
           counter_class: remainingCount < 0 ? 'govuk-error-message' : 'govuk-hint',
-          remaining_text: remainingCount < 0 ? noCharactersRemaining : someCharactersRemaining
+          you_have: youHave,
+          remaining_text: remainText
         }));
 
         $textArea.removeClass("govuk-textarea--error")
