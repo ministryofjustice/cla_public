@@ -109,6 +109,11 @@
     {% set max_length = max_length_validator.max if max_length_validator %}
     <div class="govuk-character-count">
       {{ Form.group(form.extra_notes, 'cla-question-text--large', field_attrs={'rows': 7, 'data-character-count': max_length}) }}
+      <noscript>
+        <div class="govuk-hint">
+          {% trans %}You can enter up to {{max_length}} characters{% endtrans %}
+        </div>
+      </noscript>
     </div>
     <div class="govuk-form-group ">
       {{ Subform.adaptations(form.adaptations) }}

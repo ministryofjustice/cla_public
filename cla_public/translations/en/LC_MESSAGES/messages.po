@@ -1550,6 +1550,10 @@ msgstr ""
 msgid "We’ll give you the CLA phone number when you submit your details below."
 msgstr ""
 
+#: cla_public/templates/contact.html:114
+msgid "You can enter up to %(cookie_settings_url)s characters"
+msgstr ""
+
 #: cla_public/templates/contact.html:115
 msgid "Submit details"
 msgstr ""
