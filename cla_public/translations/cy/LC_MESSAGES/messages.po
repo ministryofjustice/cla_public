@@ -2031,7 +2031,7 @@ msgid "We’ll give you the CLA phone number when you submit your details below.
 msgstr "Byddwn yn rhoi rhif ffôn CLA i chi pan fyddwch yn cyflwyno eich manylion isod."
 
 #: cla_public/templates/contact.html:114
-msgid "You can enter up to %(cookie_settings_url)s characters"
+msgid "You can enter up to %(max_length)s characters"
 msgstr ""
 
 #: cla_public/templates/contact.html:115
