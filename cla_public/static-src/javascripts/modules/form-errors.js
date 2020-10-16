@@ -262,11 +262,19 @@
       _.each(errorFields, addErrors);
 
       if(this.$form.data('error-banner') !== false) {
-        this.$form.closest('main').prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
-        if (GOVUK.getCookie("locale") == "cy_GB") {
-          $("title").prepend("Gwall: ");
+        if ($(".s-hidden input").val()) {
+          // In case a hidden field is throwing an error,
+          $(".s-hidden input").val("");
+          // we wipe the value,
+          $("#submit-button").click();
+          // and retry the submit.
         } else {
-          $("title").prepend("Error: ");
+          this.$form.closest('main').prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
+          if (GOVUK.getCookie("locale") == "cy_GB") {
+            $("title").prepend("Gwall: ");
+          } else {
+            $("title").prepend("Error: ");
+          }
         }
       }
 
