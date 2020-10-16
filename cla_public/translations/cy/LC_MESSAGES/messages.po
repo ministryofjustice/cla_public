@@ -1599,7 +1599,7 @@ msgid "Tell us more about your problem"
 msgstr "Dywedwch fwy wrthym am eich problem"
 
 #: cla_public/apps/contact/forms.py:150
-msgid "Your notes must be 4000 characters or less"
+msgid "Your notes must be 4000 characters or fewer"
 msgstr "Rhaid i’ch nodiadau fod yn 4000 nod neu lai"
 
 #: cla_public/apps/contact/forms.py:152
@@ -2029,6 +2029,10 @@ msgstr "Bydd angen i chi ddarparu tystiolaeth o’r wybodaeth ariannol yr ydych 
 #: cla_public/templates/contact.html:78
 msgid "We’ll give you the CLA phone number when you submit your details below."
 msgstr "Byddwn yn rhoi rhif ffôn CLA i chi pan fyddwch yn cyflwyno eich manylion isod."
+
+#: cla_public/templates/contact.html:114
+msgid "You can enter up to %(max_length)s characters"
+msgstr ""
 
 #: cla_public/templates/contact.html:115
 msgid "Submit details"
