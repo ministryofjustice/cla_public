@@ -262,11 +262,17 @@
       _.each(errorFields, addErrors);
 
       if(this.$form.data('error-banner') !== false) {
-        this.$form.closest('main').prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
-        if (GOVUK.getCookie("locale") == "cy_GB") {
-          $("title").prepend("Gwall: ");
+        if ($("#submit-button").length && $(".s-hidden input").val()) {
+          // LGA-1162 checking for hidden fields that are throwing errors and clearing them
+          $(".s-hidden input").val("");
+          $("#submit-button").click();
         } else {
-          $("title").prepend("Error: ");
+          this.$form.closest('main').prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
+          if (GOVUK.getCookie("locale") == "cy_GB") {
+            $("title").prepend("Gwall: ");
+          } else {
+            $("title").prepend("Error: ");
+          }
         }
       }
 
