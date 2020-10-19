@@ -262,8 +262,8 @@
       _.each(errorFields, addErrors);
 
       if(this.$form.data('error-banner') !== false) {
-        if ($(".s-hidden input").val()) {
-          // In case a hidden field is throwing an error,
+        if ($("#submit-button").length && $(".s-hidden input").val()) {
+          // In case a hidden field is throwing an error (and there is a submit button),
           $(".s-hidden input").val("");
           // we wipe the value,
           $("#submit-button").click();
