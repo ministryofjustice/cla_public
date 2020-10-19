@@ -263,11 +263,9 @@
 
       if(this.$form.data('error-banner') !== false) {
         if ($("#submit-button").length && $(".s-hidden input").val()) {
-          // In case a hidden field is throwing an error (and there is a submit button),
+          // LGA-1162 checking for hidden fields that are throwing errors and clearing them
           $(".s-hidden input").val("");
-          // we wipe the value,
           $("#submit-button").click();
-          // and retry the submit.
         } else {
           this.$form.closest('main').prepend(this.mainFormError({ errors: this.createErrorSummary(unattachedErrors)}));
           if (GOVUK.getCookie("locale") == "cy_GB") {
