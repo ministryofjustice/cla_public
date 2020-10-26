@@ -142,7 +142,13 @@
         {{ Form.group(subform.other_language, 'govuk-checkboxes__conditional',
             controlled_by=subform.is_other_language,
             control_value='y',
-            row_class='') }}
+            row_class='',
+            field_attrs={'class': 'govuk-!-width-two-thirds'}) }}
+        {#
+          if removing class, leave in class code like this:
+          field_attrs={'class': ''}
+          otherwise the class acts haywire (see LGA-1479)
+        #}
     <div class="govuk-checkboxes__item">
       {{ subform.is_other_adaptation(**{'aria-controls': subform.other_adaptation.id, "class": "govuk-checkboxes__input"}) }}
       <label class="govuk-label govuk-checkboxes__label" for="{{subform.is_other_adaptation.id}}">
