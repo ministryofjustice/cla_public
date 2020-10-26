@@ -101,14 +101,16 @@ jobs:
   webhint:
     docker:
       - image: circleci/node:stretch
-    working_directory: ~/
     steps:
       - checkout # check out the code in the project directory
       # Add the necessary steps to deploy your website.
       - run: 
           name: Install and run webhint
           command: | 
+            mkdir webhint
+            cd webhint
             npm install --no-save hint puppeteer
+            
   test:
     docker:
       - image: circleci/python:2.7
