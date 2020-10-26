@@ -107,7 +107,7 @@ jobs:
           name: Install and run webhint
           command: | 
             npm install --no-save hint puppeteer
-            
+            node node_modules/hint/dist/src/bin/hint.js https://staging.checklegalaid.service.gov.uk/scope/diagnosis/
   test:
     docker:
       - image: circleci/python:2.7
