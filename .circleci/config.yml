@@ -100,19 +100,13 @@ jobs:
             black --check --diff cla_public
   webhint:
     docker:
-      - image: circleci/python:latest-node-browsers
+      - image: node:15.0.0-stretch
     steps:
       - checkout # check out the code in the project directory
       # Add the necessary steps to deploy your website.
       - run: 
-          name: Install dependancies for nvm (node package manager) and run webhint
+          name: Install and run webhint
           command: | 
-            sudo apt-get update
-            sudo apt-get install build-essential checkinstall libssl-dev
-            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
-            nvm --version
-            nvm install node
-            nvm use node
             npm install --no-save hint puppeteer
   test:
     docker:
