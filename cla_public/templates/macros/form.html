@@ -282,7 +282,7 @@
     {{ money_input(field, **field_attrs) }}
   {% else %}
     {% if field.type in ['SelectField', 'TimeChoiceField', 'DayChoiceField'] %}
-      {% do field_attrs.update(class='govuk-select cla-probe-one %s' % field_attrs.class) %} <div style="display:none;">{{ field.type }}</div>
+      {% do field_attrs.update(class='govuk-select %s' % field_attrs.class) %}
     {% elif field.type == "TextAreaField" %}
       {% do field_attrs.update(class='govuk-textarea %s' % field_attrs.class) %}
     {% elif field.type in ['StringField', 'SetZeroIntegerField'] %}
