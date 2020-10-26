@@ -108,7 +108,6 @@ jobs:
           name: Install and run webhint
           command: | 
             npm install hint --no-save
-            node node_modules/hint/dist/src/bin/hint.js https://staging.checklegalaid.service.gov.uk/scope/diagnosis/
   test:
     docker:
       - image: circleci/python:2.7
@@ -251,6 +250,9 @@ workflows:
       - lint-with-py2-tools
       - lint-with-py3-tools
       - webhint
+      - test:
+          requires:
+            - webhint
       - cleanup_merged:
           context: laa-cla-public-live-1
       - build:
