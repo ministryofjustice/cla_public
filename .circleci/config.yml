@@ -98,6 +98,17 @@ jobs:
           command: |
             source py3-lint-env/bin/activate
             black --check --diff cla_public
+  webhint:
+    docker:
+      - image: circleci/python:latest-node-browsers
+    steps:
+      - checkout # check out the code in the project directory
+      # Add the necessary steps to deploy your website.
+      - run: 
+          name: Install and run webhint
+          command: | 
+            npm install hint --no-save
+            node node_modules/hint/dist/src/bin/hint.js https://staging.checklegalaid.service.gov.uk/scope/diagnosis/
   test:
     docker:
       - image: circleci/python:2.7
@@ -239,14 +250,13 @@ workflows:
     jobs:
       - lint-with-py2-tools
       - lint-with-py3-tools
-      - test
+      - webhint
       - cleanup_merged:
           context: laa-cla-public-live-1
       - build:
           requires:
             - lint-with-py2-tools
             - lint-with-py3-tools
-            - test
           context: laa-cla-public-live-1
       - staging_deploy_approval:
           type: approval
