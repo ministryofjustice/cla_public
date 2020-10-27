@@ -101,7 +101,7 @@ jobs:
             black --check --diff cla_public
   webhint:
     docker:
-      - image: circleci/node:stretch
+      - image: circleci/python:latest-node-browsers
     steps:
       # Add the necessary steps to deploy your website.
       - puppeteer/install
