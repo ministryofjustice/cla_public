@@ -104,9 +104,7 @@ jobs:
       - image: circleci/node:stretch
     steps:
       # Add the necessary steps to deploy your website.
-      - run: 
-          name: Install puppeteer and headless chrome 
-          - puppeteer/install
+      - puppeteer/install
       - run: 
           name: Create configuration file for webhint
           command: | 
