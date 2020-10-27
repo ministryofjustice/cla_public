@@ -131,7 +131,7 @@ jobs:
             node node_modules/hint/dist/src/bin/hint.js https://staging.checklegalaid.service.gov.uk/scope/diagnosis/
 
       - store_artifacts:
-          path: /project/hint-report
+          path: /hint-report
   test:
     docker:
       - image: circleci/python:2.7
