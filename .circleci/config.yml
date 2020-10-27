@@ -145,6 +145,25 @@ jobs:
             xdg-utils 
             wget
       - run: 
+          name: Create configuration file for webhint
+          command: | 
+            cat >> .hintrc
+            {
+              "connector": {
+              "name": "puppeteer",
+              "options": {
+                  "headless": true,
+                  "puppeteerOptions": {
+                      "args": ["--no-sandbox"]
+                    }
+                }
+              },
+              "extends": [
+              "accessibility"
+              ]
+            }
+            EOF
+      - run: 
           name: Install and run webhint
           command: | 
             npm install --no-save hint puppeteer
