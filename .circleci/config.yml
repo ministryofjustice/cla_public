@@ -106,7 +106,7 @@ jobs:
       # Add the necessary steps to deploy your website.
       - run: 
           name: Install puppeteer and headless chrome 
-          command: puppeteer/install
+          - puppeteer/install
       - run: 
           name: Create configuration file for webhint
           command: | 
