@@ -110,22 +110,22 @@ jobs:
       - run: 
           name: Create configuration file for webhint
           command: | 
-            cat >> .hintrc
-            {
-              "connector": {
-              "name": "puppeteer",
-              "options": {
-                  "headless": true,
-                  "puppeteerOptions": {
-                      "args": ["--no-sandbox"]
+          cat \<< EOF 
+          {
+            "connector": {
+                "name": "puppeteer",
+                "options": {
+                    "headless": true,
+                    "puppeteerOptions": {
+                        "args": ["--no-sandbox"]
                     }
                 }
-              },
-              "extends": [
-              "accessibility"
-              ]
-            }
-            EOF
+            },
+            "extends": [
+                "accessibility"
+            ]
+          }
+          EOF
       - run: 
           name: Install and run webhint
           command: | 
