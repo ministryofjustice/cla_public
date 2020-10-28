@@ -286,6 +286,7 @@ workflows:
           requires:
             - lint-with-py2-tools
             - lint-with-py3-tools
+            - test
           context: laa-cla-public-live-1
       - staging_deploy_approval:
           type: approval
