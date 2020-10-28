@@ -105,25 +105,25 @@ jobs:
     steps:
       # Add the necessary steps to deploy your website.
       - puppeteer/install
-      # - run: 
-      #     name: Create configuration file for webhint
-      #     command: | 
-      #       cat \<< EOF 
-      #       {
-      #         "connector": {
-      #             "name": "puppeteer",
-      #             "options": {
-      #                 "headless": true,
-      #                 "puppeteerOptions": {
-      #                     "args": ["--no-sandbox"]
-      #                 }
-      #             }
-      #         },
-      #         "extends": [
-      #             "accessibility"
-      #         ]
-      #       }
-      #       EOF
+      - run: 
+          name: Create configuration file for webhint
+          command: | 
+            cat << EOF > .hintrc
+            {
+                "connector": {
+                    "name": "puppeteer",
+                    "options": {
+                        "headless": true,
+                        "puppeteerOptions": {
+                            "args": ["--no-sandbox"]
+                        }
+                    }
+                },
+                "extends": [
+                    "web-recommended"
+                ]
+            }
+            EOF
       - run: 
           name: Install and run webhint
           command: | 
