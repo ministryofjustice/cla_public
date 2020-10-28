@@ -108,7 +108,7 @@ jobs:
       - run: 
           name: Create configuration file for webhint
           command: | 
-            cat << EOF > .hintrc
+            cat \<< EOF > .hintrc
             {
                 "connector": {
                     "name": "puppeteer",
