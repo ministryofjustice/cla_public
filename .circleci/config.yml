@@ -273,10 +273,7 @@ workflows:
     jobs:
       - lint-with-py2-tools
       - lint-with-py3-tools
-      - webhint
-      - test:
-          requires:
-            - webhint
+      - test
       - cleanup_merged:
           context: laa-cla-public-live-1
       - build:
@@ -308,6 +305,9 @@ workflows:
             branches:
               ignore:
                 - master
+      - webhint:
+          requiries:
+            - staging_deploy
       - production_deploy_approval:
           type: approval
           requires:
