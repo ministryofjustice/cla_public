@@ -306,7 +306,7 @@ workflows:
               ignore:
                 - master
       - webhint:
-          requiries:
+          requires:
             - staging_deploy
       - production_deploy_approval:
           type: approval
