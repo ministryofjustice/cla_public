@@ -125,6 +125,11 @@ jobs:
             }
             EOF
       - run: 
+          name: Extract staging URL
+          command: | 
+            source .circleci/define_build_environment_variables
+            echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
+      - run: 
           name: Install and run webhint
           command: | 
             npm install --no-save hint
