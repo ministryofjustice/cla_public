@@ -115,8 +115,7 @@ jobs:
       - run: 
           name: Install and run webhint
           command: | 
-            rm package.json package-lock.json
-            rm -rf node_modules 
+            rm -rf node_modules package.json package-lock.json
             npm install --no-save hint
             node node_modules/hint/dist/src/bin/hint.js https://$RELEASE_HOST/start
 
