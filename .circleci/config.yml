@@ -106,25 +106,6 @@ jobs:
       # Add the necessary steps to deploy your website.
       - puppeteer/install
       - run: 
-          name: Create configuration file for webhint
-          command: | 
-            cat \<< EOF > .hintrc
-            {
-                "connector": {
-                    "name": "puppeteer",
-                    "options": {
-                        "headless": true,
-                        "puppeteerOptions": {
-                            "args": ["--no-sandbox"]
-                        }
-                    }
-                },
-                "extends": [
-                    "web-recommended"
-                ]
-            }
-            EOF
-      - run: 
           name: Extract staging URL
           command: | 
             cp /.circleci .
