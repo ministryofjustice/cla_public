@@ -1,0 +1,14 @@
+{
+    "connector": {
+        "name": "puppeteer",
+        "options": {
+            "headless": true,
+            "puppeteerOptions": {
+                "args": ["--no-sandbox"]
+            }
+        }
+    },
+    "extends": [
+        "accessibility"
+        ]
+}
