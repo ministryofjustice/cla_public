@@ -107,6 +107,10 @@ jobs:
       - checkout
       - puppeteer/install
       - run: 
+          name: Delete existing javascript packages
+          command: | 
+            rm -rf node_modules package.json package-lock.json
+      - run: 
           name: Extract staging URL
           command: | 
             source .circleci/define_build_environment_variables
@@ -114,7 +118,6 @@ jobs:
       - run: 
           name: Install and run webhint
           command: | 
-            rm -rf node_modules package.json package-lock.json
             npm install --no-save hint
             node node_modules/hint/dist/src/bin/hint.js https://$RELEASE_HOST/start
 
