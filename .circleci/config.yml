@@ -105,6 +105,7 @@ jobs:
     steps:
       # Add the necessary steps to deploy your website.
       - puppeteer/install
+      - checkout
       - run: 
           name: Extract staging URL
           command: | 
