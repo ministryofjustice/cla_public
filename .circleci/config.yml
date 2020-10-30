@@ -105,11 +105,11 @@ jobs:
     steps:
       # Add the necessary steps to deploy your website.
       - checkout
-      - puppeteer/install
       - run: 
           name: Delete existing javascript packages
           command: | 
             rm -rf node_modules package.json package-lock.json
+      - puppeteer/install
       - run: 
           name: Extract staging URL
           command: | 
