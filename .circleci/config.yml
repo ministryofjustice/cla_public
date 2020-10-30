@@ -109,7 +109,6 @@ jobs:
       - run: 
           name: Extract staging URL
           command: | 
-            cp /.circleci .
             source .circleci/define_build_environment_variables
             echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
       - run: 
