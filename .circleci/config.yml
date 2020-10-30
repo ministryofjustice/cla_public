@@ -104,8 +104,8 @@ jobs:
       - image: circleci/python:latest-node-browsers
     steps:
       # Add the necessary steps to deploy your website.
-      - puppeteer/install
       - checkout
+      - puppeteer/install
       - run: 
           name: Extract staging URL
           command: | 
