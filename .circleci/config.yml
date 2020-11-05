@@ -119,7 +119,7 @@ jobs:
           name: Install and run webhint
           command: | 
             npm install --no-save hint
-            node node_modules/hint/dist/src/bin/hint.js https://$RELEASE_HOST/start
+            node node_modules/hint/dist/src/bin/hint.js https://$RELEASE_HOST/
 
       - store_artifacts:
           path: ~/project/hint-report/
