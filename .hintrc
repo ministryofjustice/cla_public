@@ -9,6 +9,6 @@
         }
     },
     "extends": [
-        "accessibility"
+        "web-recommended"
         ]
 }
