@@ -10,5 +10,10 @@
     },
     "extends": [
         "accessibility"
-        ]
+    ],
+    "hints": {
+        "html-checker": ["error", {
+            "details": true
+        }]
+    }
 }
