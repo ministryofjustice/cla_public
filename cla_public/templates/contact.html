@@ -97,7 +97,7 @@
     {% call Form.fieldset(form.address, field_as_label=True, legend_size='m') %}
       {{ Form.group(form.address.post_code,
           'form-group-plain',
-          field_attrs={'class': 'govuk-input--width-10 cla-postcode-text', 'data-address-el': '#address-street_address', 'autocomplete': "postal-code", 'spellcheck': "false"},
+          field_attrs={'class': 'govuk-input--width-10 cla-postcode-text govuk-!-margin-bottom-4', 'data-address-el': '#address-street_address', 'autocomplete': "postal-code", 'spellcheck': "false"},
           row_class='address-finder') }}
 
       {{ Form.group(form.address.street_address,
