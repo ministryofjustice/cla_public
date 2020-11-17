@@ -402,3 +402,12 @@ $map-height: 460px;
     height: auto!important;
   }
 }
+
+iframe ~ div div:focus-within {
+    background-color:$govuk-focus-colour;
+    box-shadow:0 -2px 0 0 govuk-colour("black") inset;
+}
+iframe ~ div div a:focus {
+    outline:none!important;
+    background-color:transparent!important;
+}
