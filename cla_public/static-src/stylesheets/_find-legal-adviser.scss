@@ -278,6 +278,10 @@ $map-height: 460px;
         outline: 0;
         margin: -4px;
         padding: 8px 88px 8px 34px;
+
+        &:focus {
+          box-shadow: 0 -3px 0 0 govuk-colour("black") inset;
+        }
       }
     }
 
@@ -315,6 +319,10 @@ $map-height: 460px;
     button:focus, div[role=button]:focus {
       background-color: $govuk-focus-colour !important;
       outline: $govuk-focus-colour 0px solid;
+      box-shadow: 0px 3px 0px 0px govuk-colour("black") !important;
+      + div {
+        background-color:unset!important;
+      }
     }
   }
 
@@ -393,4 +401,12 @@ $map-height: 460px;
   .search-results-container, .search-results-list {
     height: auto!important;
   }
+}
+
+iframe ~ div div a {
+    display:block!important;
+}
+iframe ~ div div a:focus {
+    outline:none;
+    box-shadow:0 -2px 0 0 govuk-colour("black") inset;
 }
