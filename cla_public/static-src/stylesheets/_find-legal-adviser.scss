@@ -402,11 +402,3 @@ $map-height: 460px;
     height: auto!important;
   }
 }
-
-iframe ~ div div a {
-    display:block!important;
-}
-iframe ~ div div a:focus {
-    outline:none;
-    box-shadow:0 -2px 0 0 govuk-colour("black") inset;
-}
