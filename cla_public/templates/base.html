@@ -199,15 +199,6 @@
         "linker": true
       }
     {% endif %}
-    {% if config.MOJ_GA_ID %}
-      window.ga_trackers["usage"] = {
-        "id": '{{ config.MOJ_GA_ID }}',
-        "domain": "auto",
-        "name": "moj",
-        "options": {},
-        "linker": false
-      }
-    {% endif %}
 
     const localeLanguage = "{{ request.cookies.get('locale', 'en_GB') }}"
 
