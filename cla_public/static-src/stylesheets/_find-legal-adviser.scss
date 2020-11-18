@@ -317,7 +317,7 @@ $map-height: 460px;
       outline: govuk-colour("light-grey") 0px solid;
     }
     button:focus, div[role=button]:focus {
-      border-radius: 0;
+      border-radius: 0!important;
       background-color: $govuk-focus-colour !important;
       outline: $govuk-focus-colour 0px solid;
       box-shadow: 0px 3px 0px 0px govuk-colour("black") !important;
