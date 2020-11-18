@@ -2402,8 +2402,8 @@ msgid ""
 msgstr "Os ydych o dan 18 oed, dylech <a class=\"govuk-link\" href=\"%(url)s\">gysylltu â’r CLA</a> heb gwblhau’r asesiad ariannol."
 
 #: cla_public/templates/interstitial.html:53
-msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"http://www.interpretingline.co.uk/vbooking.html\"> British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
-msgstr "Os ydych yn fyddar neu’n drwm eich clyw gallwch lenwi ffurflen gais i ofyn am ddehonglydd <a class=\"govuk-link\" href=\"http://www.interpretingline.co.uk/vbooking.html\">Iaith Arwyddion Prydain</a>. Ar ôl i chi lenwi’r ffurflen, bydd y gweithredwr yn dod yn ôl atoch i gwblhau’r gwiriad cymhwystra a rhoi unrhyw gyngor arall."
+msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"http://www.interpretingline.co.uk/vbooking.html\" rel=\"external\">British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
+msgstr "Os ydych yn fyddar neu’n drwm eich clyw gallwch lenwi ffurflen gais i ofyn am <a class=\"govuk-link\" href=\"http://www.interpretingline.co.uk/vbooking.html\" rel=\"external\">ddehonglydd Iaith Arwyddion Prydain</a>. Ar ôl i chi lenwi’r ffurflen, bydd y gweithredwr yn dod yn ôl atoch i gwblhau’r gwiriad cymhwystra a rhoi unrhyw gyngor arall."
 
 #: cla_public/templates/interstitial.html:57
 msgid "Check if you qualify financially"
