@@ -325,6 +325,14 @@ $map-height: 460px;
         background-color:unset!important;
       }
     }
+    iframe ~ div div:focus-within {
+        background-color:$govuk-focus-colour;
+        box-shadow:0 -2px 0 0 govuk-colour("black") inset;
+    }
+    iframe ~ div div a:focus {
+        outline:none!important;
+        background-color:transparent!important;
+    }
   }
 
   .gmnoprint {
@@ -402,13 +410,4 @@ $map-height: 460px;
   .search-results-container, .search-results-list {
     height: auto!important;
   }
-}
-
-iframe ~ div div:focus-within {
-    background-color:$govuk-focus-colour;
-    box-shadow:0 -2px 0 0 govuk-colour("black") inset;
-}
-iframe ~ div div a:focus {
-    outline:none!important;
-    background-color:transparent!important;
 }
