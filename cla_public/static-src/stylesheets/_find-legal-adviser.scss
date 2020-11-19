@@ -278,6 +278,10 @@ $map-height: 460px;
         outline: 0;
         margin: -4px;
         padding: 8px 88px 8px 34px;
+
+        &:focus {
+          box-shadow: 0 -3px 0 0 govuk-colour("black") inset;
+        }
       }
     }
 
@@ -303,18 +307,34 @@ $map-height: 460px;
 }
 
 #resultsMap.map {
-  * {
-    font-family:"GDS Transport",Arial,sans-serif!important;
-  }
-
   .gm-style {
+    * {
+      font-family:"GDS Transport",Arial,sans-serif!important;
+    }
     button:hover, div[role=button]:hover {
       background-color: govuk-colour("light-grey") !important;
       outline: govuk-colour("light-grey") 0px solid;
     }
+    button:focus img {
+      filter: contrast(10);
+    }
     button:focus, div[role=button]:focus {
+      color:$govuk-text-colour!important;
+      border-radius: 0!important;
       background-color: $govuk-focus-colour !important;
       outline: $govuk-focus-colour 0px solid;
+      box-shadow: 0px 3px 0px 0px govuk-colour("black") !important;
+      + div {
+        background-color:unset!important;
+      }
+    }
+    iframe ~ div div:focus-within {
+        background-color:$govuk-focus-colour;
+        box-shadow:0 -2px 0 0 govuk-colour("black") inset;
+    }
+    iframe ~ div div a:focus {
+        outline:none!important;
+        background-color:transparent!important;
     }
   }
 
