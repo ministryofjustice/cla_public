@@ -313,7 +313,7 @@ $map-height: 460px;
     }
     [tabindex="0"]:focus {
       > .gm-style-pbc + div {
-        box-shadow:0 0 0 2px govuk-colour("black") inset, 0 0 0 7px $govuk-focus-colour inset;
+        box-shadow:0 0 0 2px govuk-colour("black") inset, 0 0 0 11px $govuk-focus-colour inset;
       }
       ~ div .gm-style-cc * {
         background-color:transparent!important;
