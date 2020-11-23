@@ -10,5 +10,11 @@
     },
     "extends": [
         "web-recommended"
-    ]
+    ],
+    "hints": {
+        "axe/keyboard": ["error", [
+            "tabindex"
+            ]
+        ]
+    }
 }
