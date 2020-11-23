@@ -5,20 +5,37 @@
 {% block inner_content %}
   <h1 class="govuk-heading-xl">{{ _('Accessibility statement') }}</h1>
 
-  <button tabindex="1">+</button>
-  <a href="#">
-    <img src="" />
-  </a>
-
-  <img src="" />
-
-  <form>
-    <label>Name</label>
-    <input />
+  <div>
+    <button tabindex="1">+</button>
+    <a href="#">
+      <img src="" />
+    </a>
   
-    <div>Name</div>
-    <input />
-  </form>
+    <img src="" />
+  
+    <form>
+      <label>Name</label>
+      <input />
+    
+      <div>Name</div>
+      <input />
+    </form>
+
+    <form>
+      <fieldset>
+        <legend>Choose your favorite monster</legend>
+    
+        <input type="radio" id="kraken" name="monster">
+        <label for="kraken">Kraken</label><br/>
+    
+        <input type="radio" id="sasquatch" name="monster">
+        <label for="sasquatch">Sasquatch</label><br/>
+    
+        <input type="radio" id="mothman" name="monster">
+        <label for="mothman">Mothman</label>
+      </fieldset>
+    </form>
+  </div>
 
   <h2 class="govuk-heading-m">{{ _('Using this service') }}</h2>
   <p class="govuk-body">
