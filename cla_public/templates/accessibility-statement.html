@@ -5,6 +5,19 @@
 {% block inner_content %}
   <h1 class="govuk-heading-xl">{{ _('Accessibility statement') }}</h1>
 
+  <button>+</button>
+  <a href="">
+    <img src="" />
+  </a>
+
+  <img src="" />
+
+  <label>Name</label>
+  <input />
+
+  <div>Name</div>
+  <input />
+
   <h2 class="govuk-heading-m">{{ _('Using this service') }}</h2>
   <p class="govuk-body">
     {% trans %}The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service.{% endtrans %}
@@ -66,7 +79,6 @@
 
   <h3 class="govuk-heading-m">{{ _('Non compliance with the accessibility regulations') }}</h3>
 
-  <ul class="govuk-list govuk-list--bullet">
     <li>
       {% trans %}Users are not able to turn off, adjust or extend the time in which inactivity will result in a loss of data. This fails WCAG 2.1 2.2.1 A (Timing Adjustable).{% endtrans %}
     </li>
@@ -76,7 +88,6 @@
     <li>
       {% trans %}When a user enters figures into form fields it is not clear that the field does not accept currency symbols. This fails WCAG 2.1 2.4.6 AA (Headings and Labels).{% endtrans %}
     </li>
-  </ul>
 
   <h2 class="govuk-heading-m">{{ _('Disproportionate burden') }}</h2>
 
