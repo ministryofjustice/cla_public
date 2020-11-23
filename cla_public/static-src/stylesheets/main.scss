@@ -18,7 +18,7 @@ $govuk-typography-use-rem: false;
 @import "govuk_publishing_components/components/cookie-banner";
 
 $laa-unknown-colour: govuk-colour("orange");
-$laa-staging-colour: govuk-colour("turquoise");
+$laa-staging-colour: govuk-colour("white");
 $laa-dev-colour: govuk-colour("pink");
 
 @import 'forms';
