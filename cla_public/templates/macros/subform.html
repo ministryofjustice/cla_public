@@ -72,7 +72,6 @@
           {% if radio.data == 'today' %}
             <div class="govuk-radios__conditional">
               {{ Form.group(subform.time_today,
-                '',
                 custom_label=_('Time'),
                 controlled_by=subform.specific_day,
                 control_value='today',
@@ -90,7 +89,6 @@
                   field_attrs={'class': ''},
                   row_class='') }}
                 {{ Form.group(subform.time_in_day,
-                  '',
                   custom_label=_('Time'),
                   controlled_by=subform.specific_day,
                   control_value='specific_day',
