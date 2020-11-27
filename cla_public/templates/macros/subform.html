@@ -17,7 +17,7 @@
       <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
       <li>{{ _('If you miss the call you’ll need to complete this form again.') }}</li>
     </ul>
-    {{ Form.group(form.callback.contact_number, field_attrs={'class': 'm-large', 'autocomplete': 'tel', 'type': 'tel'}) }}
+    {{ Form.group(form.callback.contact_number, field_attrs={'class': '', 'autocomplete': 'tel', 'type': 'tel'}) }}
     {{ time_picker(form.callback.time) }}
   {% endcall %}
 {% endmacro %}
@@ -41,9 +41,9 @@
       <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
       <li>{{ _('If your nominated person misses the call you’ll need to complete this form again.') }}</li>
     </ul>
-    {{ Form.group(form.thirdparty.full_name, field_attrs={'class': 'm-large'}) }}
-    {{ Form.group(form.thirdparty.relationship) }}
-    {{ Form.group(form.thirdparty.contact_number, field_attrs={'class': 'm-large', 'autocomplete': 'tel', 'type': 'tel'}) }}
+    {{ Form.group(form.thirdparty.full_name, field_attrs={'class': ''}) }}
+    {{ Form.group(form.thirdparty.relationship, field_attrs={'class': ''}) }}
+    {{ Form.group(form.thirdparty.contact_number, field_attrs={'class': '', 'autocomplete': 'tel', 'type': 'tel'}) }}
     {{ time_picker(form.thirdparty.time) }}
   {% endcall %}
 {% endmacro %}
@@ -70,10 +70,10 @@
           {% if radio.data == 'today' %}
             <div class="govuk-radios__conditional">
               {{ Form.group(subform.time_today,
-                '',
                 custom_label=_('Time'),
                 controlled_by=subform.specific_day,
                 control_value='today',
+                field_attrs={'class': ''},
                 row_class='') }}
             </div>
           {% else %}
@@ -84,12 +84,13 @@
                   custom_label=_('Day'),
                   controlled_by=subform.specific_day,
                   control_value='specific_day',
+                  field_attrs={'class': ''},
                   row_class='') }}
                 {{ Form.group(subform.time_in_day,
-                  '',
                   custom_label=_('Time'),
                   controlled_by=subform.specific_day,
                   control_value='specific_day',
+                  field_attrs={'class': ''},
                   row_class='') }}
               </div>
           {% endif %}
