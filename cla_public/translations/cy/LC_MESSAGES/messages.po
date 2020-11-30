@@ -54,7 +54,7 @@ msgstr "Ydych chi mewn perygl uniongyrchol o niwed?"
 msgid "Have you already started family mediation? (This includes cases that have already finished)"
 msgstr "Ydych chi wedi dechrau cyfryngu teuluol eisoes? (Mae hyn yn cynnwys achosion sydd wedi dod i ben eisoes)"
 msgid "Have you taken part in a family mediation session?"
-msgstr "Ydych chi wedi cymryd rhan mewn sesiwn gyfryngu i’r teulu?"
+msgstr "Ydych chi wedi cymryd rhan mewn sesiwn cyfryngu i deuluoedd?"
 msgid "What kind of dispute is it?"
 msgstr "Pa fath o anghydfod ydyw?"
 msgid "Is the child a victim of child abuse within the family?"
@@ -220,6 +220,18 @@ msgstr "Gallwch ddewis mwy nag un opsiwn"
 #: cla_public/apps/base/forms.py:91
 msgid "Please specify"
 msgstr "Manylwch"
+
+#: cla_public/apps/base/forms.py:171
+msgid "Tell us whether your partner is self-employed"
+msgstr "Dywedwch wrthym a yw eich partner yn hunangyflogedig"
+
+#: cla_public/apps/base/forms.py:171
+msgid "Tell us whether your partner is employed"
+msgstr "Dywedwch wrthym a yw eich partner yn gyflogedig"
+
+#: cla_public/apps/base/forms.py:386
+msgid "See below for examples of what valuable items to include"
+msgstr "Gweler isod am enghreifftiau o’r eitemau gwerthfawr i’w cynnwys"
 
 #: cla_public/apps/base/views.py:99
 msgid "Something went wrong. Please try again."
@@ -818,7 +830,7 @@ msgstr "Rhaid i’r rhif fod rhwng 1 a 50"
 #: cla_public/apps/checker/forms.py:96 cla_public/apps/checker/forms.py:97
 #: cla_public/apps/checker/forms.py:113 cla_public/apps/checker/forms.py:114
 msgid "Enter a number between 1 and 50"
-msgstr "Rhowch rif fod rhwng 1 a 50"
+msgstr "Rhowch rif rhwng 1 a 50"
 
 #: cla_public/apps/checker/forms.py:101
 msgid "Do you have any dependants aged 16 or over?"
@@ -1830,7 +1842,7 @@ msgstr "Bydd yr amser a neilltuwyd ar gyfer eich cais yn dod i ben cyn bo hir"
 #: Welsh still says "continue" (the old text), waiting for new translation to update this
 #: cla_public/templates/_modal-dialog.html:12
 msgid "Extend time limit"
-msgstr "Ymlaen"
+msgstr "Ymestyn y terfyn amser"
 
 #: cla_public/templates/checker/about.html:42
 #: cla_public/templates/checker/additional-benefits.html:26
@@ -1949,7 +1961,7 @@ msgstr "Dangos {count} mwy"
 
 #: cla_public/templates/base.html:148
 msgid "Show {count} more sources of help"
-msgstr "Dangos {count} mwy"
+msgstr "Dangos {count} ffynhonnell cymorth arall"
 
 #: cla_public/templates/base.html:155 cla_public/templates/online-safety.html:3
 #: cla_public/templates/online-safety.html:6
@@ -3398,23 +3410,23 @@ msgstr "Dechrau eto"
 
 #: cla_public/templates/checker/_progress.html:14
 msgid "Current page"
-msgstr ""
+msgstr "Tudalen gyfredol"
 
 #: cla_public/templates/checker/_progress.html:16
 msgid "Completed page"
-msgstr "Wedi’i gwblhau"
+msgstr "Tudalen wedi’i chwblhau"
 
 #: cla_public/templates/checker/_progress.html:18
 msgid "Future page"
-msgstr ""
+msgstr "Tudalen i’r dyfodol"
 
 #: cla_public/templates/checker/_progress.html:29
 msgid "Final page"
-msgstr ""
+msgstr "Tudalen olaf"
 
 #: cla_public/templates/checker/_progress.html:31
 msgid "Approximately %(approximate_percentage)s&#37; completed"
-msgstr "Tua %(approximate_percentage)s&#37; wedi’i gwblhau"
+msgstr "Cwblhawyd tua %(approximate_percentage)s&#37;"
 
 #: cla_public/templates/checker/_progress.html:61
 msgid "Several future pages"
@@ -3538,22 +3550,22 @@ msgstr "Bydd eich sesiwn yn dod i ben os yw wedi bod yn anweithredol am hanner a
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:137
 msgid "No results returned for the Isle of Man, try a postcode in England or Wales"
-msgstr "Dim canlyniadau, rhowch gynnig arall arni"
+msgstr "Dim canlyniadau wedi’u dychwelyd ar gyfer Ynys Manaw. Rhowch gynnig ar gôd post yng Nghymru neu Loegr."
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:138
 msgid "No results returned for Jersey, try a postcode in England or Wales"
-msgstr "Dim canlyniadau, rhowch gynnig arall arni"
+msgstr "Dim canlyniadau wedi’u dychwelyd ar gyfer Jersey. Rhowch gynnig ar gôd post yng Nghymru neu Loegr."
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:139
 msgid "No results returned for Guernsey, try a postcode in England or Wales"
-msgstr "Dim canlyniadau, rhowch gynnig arall arni"
+msgstr "Dim canlyniadau wedi’u dychwelyd ar gyfer Ynys y Garn. Rhowch gynnig ar gôd post yng Nghymru neu Loegr."
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:139
 msgid "Postcode not found"
-msgstr "Côd post heb ei ddarganfod"
+msgstr "Heb ddod o hyd i gôd post"
 
 #: PLACEHOLDER PENDING TRANSLATION RETURN
 #: cla_public/templates/checker/result/_find-legal-adviser.html:139
@@ -3639,7 +3651,7 @@ msgstr "Dim canlyniadau"
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:157
 msgid "We couldn’t find any results for your search. We are constantly updating our records so please try again later."
-msgstr "Nid oeddem yn gallu dod o hyd i unrhyw ganlyniadau ar gyfer eich chwiliad. Rydym yn diweddaru ein cofnodion yn barhaus, felly rhowch gynnig arall arni nes ymlaen."
+msgstr "Doedd dim modd i ni ddod o hyd i unrhyw ganlyniadau ar gyfer eich chwiliad. Rydyn ni’n diweddaru ein cofnodion yn gyson, felly rhowch gynnig arall arni yn nes ymlaen."
 
 #: cla_public/templates/checker/result/_find-legal-adviser.html:165
 msgid "Loading…"
