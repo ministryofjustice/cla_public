@@ -4381,6 +4381,139 @@ msgstr "Chwiliwch am gyfryngwr teulu yn eich ardal chi i ganfod a ydych yn gymwy
 msgid "Find your local mediator"
 msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Accessibility statement"
+msgstr "Datganiad hygyrchedd"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Using this service"
+msgstr "Defnyddio’r gwasanaeth hwn"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is responsible for the Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service."
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr title=\"Asiantaeth Cymorth Cyfreithiol\">LAA</abbr>) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>)."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "We want as many people as possible to be able to use this service. For example, that means you should be able to:"
+msgstr "Rydyn ni am i gynifer o bobl â phosibl allu defnyddio’r gwasanaeth hwn. Er enghraifft, mae hynny’n golygu y dylech allu:"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "change colours, contrast levels and fonts"
+msgstr "newid lliwiau, lefelau cyferbyniad a ffontiau"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "zoom in up to 300% without the text spilling off the screen"
+msgstr "chwyddo mewn hyd at 300% heb i'r testun ollwng oddi ar y sgrin"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "navigate the service using just a keyboard"
+msgstr "symud o gwmpas gan ddefnyddio bysellfwrdd yn unig"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "AbilityNet has advice on making your device easier to use if you have a disability."
+msgstr "Mae gan AbilityNet gyngor ar wneud eich dyfais yn haws ei defnyddio os oes gennych chi anabledd."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "What to do if you can’t access part of this service"
+msgstr "Beth i’w wneud os na allwch gael mynediad at ran o’r gwasanaeth hwn"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "If you need information on this service in a different format, you can contact us at civil-legal-advice@digital.justice.gov.uk."
+msgstr "Os oes angen gwybodaeth arnoch am y gwasanaeth hwn mewn fformat gwahanol, gallwch gysylltu â ni yn civil-legal-advice@digital.justice.gov.uk."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Reporting accessibility problems"
+msgstr "Rhoi gwybod am broblemau hygyrchedd"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "We’re always looking to improve the accessibility of this service. If you find any problems that aren’t listed on this page or think we’re not meeting the requirements of the accessibility regulations, contact civil-legal-advice@digital.justice.gov.uk giving details of the issue and any assistive technology you are using."
+msgstr "Rydyn ni bob amser yn ceisio gwella hygyrchedd y gwasanaeth hwn. Os byddwch chi’n dod o hyd i unrhyw broblemau nad ydynt wedi’u rhestru ar y dudalen hon neu os ydych chi’n meddwl nad ydyn ni’n bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â civil-legal-advice@digital.justice.gov.uk gan roi manylion y broblem ac unrhyw dechnoleg gynorthwyol rydych chi’n ei defnyddio."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Enforcement procedure"
+msgstr "Gweithdrefn gorfodi"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "The Equality and Human Rights Commission (EHRC) is responsible for enforcing the accessibility regulations. If you’re not happy with how we respond to your complaint, contact the <a class=\"govuk-link\" href=\"https://www.equalityadvisoryservice.com/\" rel=\"external\">Equality Advisory and Support Service (<abbr>EASS</abbr>)</a>."
+msgstr "Y Comisiwn Cydraddoldeb a Hawliau Dynol sy’n gyfrifol am orfodi’r rheoliadau hygyrchedd. Os nad ydych chi’n fodlon â sut rydyn ni’n ymateb i’ch cwyn, cysylltwch â’r <a class=\"govuk-link\" href=\"http://eass-ws.custhelp.com/app/home\" rel=\"external\">Gwasanaeth Cynghori a Chefnogi Cydraddoldeb (EASS)</a>."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Technical information about this service’s accessibility"
+msgstr "Gwybodaeth dechnegol am hygyrchedd y gwasanaeth hwn"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "The Legal Aid Agency is committed to making its service accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (&#8470; 2) Accessibility Regulations 2018."
+msgstr "Mae’r Asiantaeth Cymorth Cyfreithiol wedi ymrwymo i wneud ei gwasanaeth yn hygyrch, yn unol â Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "This service is partially compliant with the <a class=\"govuk-link\" href=\"https://www.w3.org/TR/WCAG21/\" rel=\"external\">Web Content Accessibility Guidelines version 2.1</a> AA standard, due to the non-compliance issues listed below."
+msgstr "Mae’r gwasanaeth hwn yn cydymffurfio’n rhannol â safon AA <a class=\"govuk-link\" href=\"https://www.w3.org/TR/WCAG21/\" rel=\"external\">Canllawiau Hygyrchedd Cynnwys y We fersiwn 2.1</a>, oherwydd y materion diffyg cydymffurfio a restrir isod."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Non-accessible content"
+msgstr "Cynnwys nad oes modd cael gafael arno"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "The content listed below is non-accessible for the following reasons."
+msgstr "Nid oes modd cael gafael ar y cynnwys a restrir isod am y rhesymau canlynol."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Non compliance with the accessibility regulations"
+msgstr "Ddim yn cydymffurfio â’r rheoliadau hygyrchedd"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Users are not able to turn off, adjust or extend the time in which inactivity will result in a loss of data. This fails WCAG 2.1 2.2.1 A (Timing Adjustable)."
+msgstr "Ni all defnyddwyr ddiffodd, addasu nac ymestyn yr amser pan fydd anweithgarwch yn arwain at golli data. Mae hyn yn methu WCAG 2.1 2.2.1 A (Addasu’r Amseriad)."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Some page elements are not available in Welsh. This fails WCAG 2.1 3.1.1 A (Language of Page)."
+msgstr "Nid yw rhai elfennau tudalen ar gael yn Gymraeg. Mae hyn yn methu WCAG 2.1 3.1.1 A (Iaith Tudalen)."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "When a user enters figures into form fields it is not clear that the field does not accept currency symbols. This fails WCAG 2.1 2.4.6 AA (Headings and Labels)."
+msgstr "Pan fydd defnyddiwr yn rhoi ffigurau mewn meysydd ffurflen, nid yw’n glir nad yw’r maes yn derbyn symbolau arian. Mae hyn yn methu WCAG 2.1 2.4.6 AA (Penawdau a Labeli)."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Disproportionate burden"
+msgstr "Baich anghymesur"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Not applicable"
+msgstr "Ddim yn berthnasol"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "Content that’s not within the scope of the accessibility regulations"
+msgstr "Cynnwys nad yw o fewn cwmpas y rheoliadau hygyrchedd"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "How we tested this service"
+msgstr "Sut y buom yn profi’r gwasanaeth hwn"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "This service was last tested on 22 July 2020. The test was carried out by the Digital Accessibility Centre (DAC)."
+msgstr "Cafodd y gwasanaeth hwn ei brofi ddiwethaf ar 22 Gorffennaf 2020. Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (DAC)."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested the service available at <a class='govuk-link' href='https://checklegalaid.service.gov.uk/'>https://checklegalaid.service.gov.uk/</a>."
+msgstr "Profodd y <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr> y gwasanaeth sydd ar gael yn <a class='govuk-link' href='https://www.gov.uk/gwirio-os-ydych-yn-gymwys-i-gael-cymorth-cyfreithiol'>https://checklegalaid.service.gov.uk/</a>."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "What we’re doing to improve accessibility"
+msgstr "Beth rydyn ni’n ei wneud i wella hygyrchedd"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "We are working to fix the issues listed in this statement by December 2020. When the issues are fixed we will send the service for a re-test with the <abbr title='Digital Accessibility Centre'>DAC</abbr>."
+msgstr "Rydyn ni’n gweithio i ddatrys y materion a restrir yn y datganiad hwn erbyn mis Rhagfyr 2020. Pan fydd y materion yn cael eu datrys, byddwn yn anfon y gwasanaeth i gael ail brawf gyda’r <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr>."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "We will monitor the accessibility of this service on an ongoing basis and fix any accessibility issues reported to us."
+msgstr "Byddwn yn monitro hygyrchedd y gwasanaeth hwn yn barhaus ac yn datrys unrhyw broblemau hygyrchedd y rhoddir gwybod i ni amdanyn nhw."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "This statement was prepared on 17 September 2020."
+msgstr "Cafodd y datganiad hwn ei baratoi ar 17 Medi 2020."
+
+
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
 
