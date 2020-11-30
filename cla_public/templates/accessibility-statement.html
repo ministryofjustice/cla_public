@@ -33,7 +33,10 @@
   <h2 class="govuk-heading-m">{{ _('What to do if you can’t access part of this service') }}</h2>
 
   <p class="govuk-body">
-    {% trans %}If you need information on this service in a different format, you can contact us at <a class="govuk-link email" href="mailto:civil-legal-advice@digital.justice.gov.uk">civil-legal-advice@digital.justice.gov.uk</a>.{% endtrans %}
+    {% trans
+      email_link=Element.link_same_window('mailto:civil-legal-advice@digital.justice.gov.uk', civil-legal-advice@digital.justice.gov.uk, **{'class': 'email'}) )
+    %}
+    If you need information on this service in a different format, you can contact us at {{email_link}}.{% endtrans %}
   </p>
 
   <h2 class="govuk-heading-m">{{ _('Reporting accessibility problems') }}</h2>

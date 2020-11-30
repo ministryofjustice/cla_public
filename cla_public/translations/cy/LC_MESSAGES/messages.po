@@ -4390,8 +4390,8 @@ msgid "Using this service"
 msgstr "Defnyddio’r gwasanaeth hwn"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "The Legal Aid Agency (<abbr title=\"Legal Aid Agency\">LAA</abbr>) is responsible for the Civil Legal Advice (<abbr title=\"Civil Legal Advice\">CLA</abbr>) service."
-msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr title=\"Asiantaeth Cymorth Cyfreithiol\">LAA</abbr>) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>)."
+msgid "The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service."
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr>CLA</abbr>)."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "We want as many people as possible to be able to use this service. For example, that means you should be able to:"
@@ -4402,8 +4402,8 @@ msgid "change colours, contrast levels and fonts"
 msgstr "newid lliwiau, lefelau cyferbyniad a ffontiau"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "zoom in up to 300% without the text spilling off the screen"
-msgstr "chwyddo mewn hyd at 300% heb i'r testun ollwng oddi ar y sgrin"
+msgid "zoom in up to 300\% without the text spilling off the screen"
+msgstr "chwyddo mewn hyd at 300\% heb i’r testun ollwng oddi ar y sgrin"
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "navigate the service using just a keyboard"
@@ -4418,8 +4418,8 @@ msgid "What to do if you can’t access part of this service"
 msgstr "Beth i’w wneud os na allwch gael mynediad at ran o’r gwasanaeth hwn"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "If you need information on this service in a different format, you can contact us at civil-legal-advice@digital.justice.gov.uk."
-msgstr "Os oes angen gwybodaeth arnoch am y gwasanaeth hwn mewn fformat gwahanol, gallwch gysylltu â ni yn civil-legal-advice@digital.justice.gov.uk."
+msgid "If you need information on this service in a different format, you can contact us at %(email_link)s."
+msgstr "Os oes angen gwybodaeth arnoch am y gwasanaeth hwn mewn fformat gwahanol, gallwch gysylltu â ni yn %(email_link)s."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "Reporting accessibility problems"
