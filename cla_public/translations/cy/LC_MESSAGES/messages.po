@@ -4402,8 +4402,8 @@ msgid "change colours, contrast levels and fonts"
 msgstr "newid lliwiau, lefelau cyferbyniad a ffontiau"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "zoom in up to 300\% without the text spilling off the screen"
-msgstr "chwyddo mewn hyd at 300\% heb i’r testun ollwng oddi ar y sgrin"
+msgid "zoom in up to 300&#37; without the text spilling off the screen"
+msgstr "chwyddo mewn hyd at 300&#37; heb i’r testun ollwng oddi ar y sgrin"
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "navigate the service using just a keyboard"
@@ -4490,8 +4490,20 @@ msgid "How we tested this service"
 msgstr "Sut y buom yn profi’r gwasanaeth hwn"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "This service was last tested on 22 July 2020. The test was carried out by the Digital Accessibility Centre (DAC)."
-msgstr "Cafodd y gwasanaeth hwn ei brofi ddiwethaf ar 22 Gorffennaf 2020. Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (DAC)."
+msgid "July"
+msgstr "Gorffennaf"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "September"
+msgstr "Medi"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "December"
+msgstr "Rhagfyr"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "This service was last tested on %(date)s. The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
+msgstr "Cafodd y gwasanaeth hwn ei brofi ddiwethaf ar %(date)s. Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (DAC)."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested the service available at <a class='govuk-link' href='https://checklegalaid.service.gov.uk/'>https://checklegalaid.service.gov.uk/</a>."
@@ -4502,16 +4514,16 @@ msgid "What we’re doing to improve accessibility"
 msgstr "Beth rydyn ni’n ei wneud i wella hygyrchedd"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "We are working to fix the issues listed in this statement by December 2020. When the issues are fixed we will send the service for a re-test with the <abbr title='Digital Accessibility Centre'>DAC</abbr>."
-msgstr "Rydyn ni’n gweithio i ddatrys y materion a restrir yn y datganiad hwn erbyn mis Rhagfyr 2020. Pan fydd y materion yn cael eu datrys, byddwn yn anfon y gwasanaeth i gael ail brawf gyda’r <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr>."
+msgid "We are working to fix the issues listed in this statement by %(date)s. When the issues are fixed we will send the service for a re-test with the <abbr title='Digital Accessibility Centre'>DAC</abbr>."
+msgstr "Rydyn ni’n gweithio i ddatrys y materion a restrir yn y datganiad hwn erbyn mis %(date)s. Pan fydd y materion yn cael eu datrys, byddwn yn anfon y gwasanaeth i gael ail brawf gyda’r <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr>."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "We will monitor the accessibility of this service on an ongoing basis and fix any accessibility issues reported to us."
 msgstr "Byddwn yn monitro hygyrchedd y gwasanaeth hwn yn barhaus ac yn datrys unrhyw broblemau hygyrchedd y rhoddir gwybod i ni amdanyn nhw."
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "This statement was prepared on 17 September 2020."
-msgstr "Cafodd y datganiad hwn ei baratoi ar 17 Medi 2020."
+msgid "This statement was prepared on %(date)s."
+msgstr "Cafodd y datganiad hwn ei baratoi ar %(date)s."
 
 
 #~ msgid "Overall, how did you feel about the service you received today?"
