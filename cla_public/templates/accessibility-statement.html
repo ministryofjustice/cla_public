@@ -55,7 +55,9 @@
   </p>
 
   <p class="govuk-body">
-    {% trans %}This service is partially compliant with the <a class="govuk-link" href="https://www.w3.org/TR/WCAG21/" rel="external">Web Content Accessibility Guidelines version 2.1</a> AA standard, due to the non-compliance issues listed below.{% endtrans %}
+    {% trans
+      wcaglink=Element.link_same_window('https://www.w3.org/TR/WCAG21/', _('Web Content Accessibility Guidelines version 2.1'), True)
+    %}This service is partially compliant with the {{ wcaglink }} AA standard, due to the non-compliance issues listed below.{% endtrans %}
   </p>
 
    <h2 class="govuk-heading-m">{{ _('Non-accessible content') }}</h2>
@@ -94,7 +96,9 @@
 
   <p class="govuk-body">
     {% trans
-      day = "22", month = _('July'), year = "2020"
+      day = "22",
+      month = _('July'),
+      year = "2020"
     %}This service was last tested on {{ day }} {{ month }} {{ year }}. The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>).{% endtrans %}
   </p>
 
@@ -106,8 +110,9 @@
 
   <p class="govuk-body">
     {% trans
-      date = _('December') ~ " " ~ "2020"
-    %}We are working to fix the issues listed in this statement by {{ date }}. When the issues are fixed we will send the service for a re-test with the <abbr title='Digital Accessibility Centre'>DAC</abbr>.{% endtrans %}
+      month = _('December'),
+      year = "2020"
+    %}We are working to fix the issues listed in this statement by {{ month }} {{ year }}. When the issues are fixed we will send the service for a re-test with the <abbr title='Digital Accessibility Centre'>DAC</abbr>.{% endtrans %}
   </p>
 
   <p class="govuk-body">
@@ -116,8 +121,10 @@
 
   <p class="govuk-body">
     {% trans
-      date = "17" ~ " "~ _('September') ~ " " ~ "2020"
-    %}This statement was prepared on {{ date }}.{% endtrans %}
+      day = "17",
+      month = _('September'),
+      year = "2020"
+    %}This statement was prepared on {{ day }} {{ month }} {{ year }}.{% endtrans %}
   </p>
 
   {% include "checker/time-out-warning.html" %}

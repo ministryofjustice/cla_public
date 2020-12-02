@@ -4446,8 +4446,12 @@ msgid "The Legal Aid Agency is committed to making its service accessible, in ac
 msgstr "Mae’r Asiantaeth Cymorth Cyfreithiol wedi ymrwymo i wneud ei gwasanaeth yn hygyrch, yn unol â Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018."
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "This service is partially compliant with the <a class=\"govuk-link\" href=\"https://www.w3.org/TR/WCAG21/\" rel=\"external\">Web Content Accessibility Guidelines version 2.1</a> AA standard, due to the non-compliance issues listed below."
-msgstr "Mae’r gwasanaeth hwn yn cydymffurfio’n rhannol â safon AA <a class=\"govuk-link\" href=\"https://www.w3.org/TR/WCAG21/\" rel=\"external\">Canllawiau Hygyrchedd Cynnwys y We fersiwn 2.1</a>, oherwydd y materion diffyg cydymffurfio a restrir isod."
+msgid "Web Content Accessibility Guidelines version 2.1"
+msgstr "Canllawiau Hygyrchedd Cynnwys y We fersiwn 2.1"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "This service is partially compliant with the %(wcaglink)s AA standard, due to the non-compliance issues listed below."
+msgstr "Mae’r gwasanaeth hwn yn cydymffurfio’n rhannol â safon AA %(wcaglink)s, oherwydd y materion diffyg cydymffurfio a restrir isod."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "Non-accessible content"
@@ -4514,16 +4518,16 @@ msgid "What we’re doing to improve accessibility"
 msgstr "Beth rydyn ni’n ei wneud i wella hygyrchedd"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "We are working to fix the issues listed in this statement by %(date)s. When the issues are fixed we will send the service for a re-test with the <abbr title='Digital Accessibility Centre'>DAC</abbr>."
-msgstr "Rydyn ni’n gweithio i ddatrys y materion a restrir yn y datganiad hwn erbyn mis %(date)s. Pan fydd y materion yn cael eu datrys, byddwn yn anfon y gwasanaeth i gael ail brawf gyda’r <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr>."
+msgid "We are working to fix the issues listed in this statement by %(month)s %(year)s. When the issues are fixed we will send the service for a re-test with the <abbr title='Digital Accessibility Centre'>DAC</abbr>."
+msgstr "Rydyn ni’n gweithio i ddatrys y materion a restrir yn y datganiad hwn erbyn mis %(month)s %(year)s. Pan fydd y materion yn cael eu datrys, byddwn yn anfon y gwasanaeth i gael ail brawf gyda’r <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr>."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "We will monitor the accessibility of this service on an ongoing basis and fix any accessibility issues reported to us."
 msgstr "Byddwn yn monitro hygyrchedd y gwasanaeth hwn yn barhaus ac yn datrys unrhyw broblemau hygyrchedd y rhoddir gwybod i ni amdanyn nhw."
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "This statement was prepared on %(date)s."
-msgstr "Cafodd y datganiad hwn ei baratoi ar %(date)s."
+msgid "This statement was prepared on %(day)s %(month)s %(year)s."
+msgstr "Cafodd y datganiad hwn ei baratoi ar %(day)s %(month)s %(year)s."
 
 
 #~ msgid "Overall, how did you feel about the service you received today?"
