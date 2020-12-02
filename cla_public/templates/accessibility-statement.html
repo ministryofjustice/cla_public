@@ -149,26 +149,5 @@
     {% trans %}The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested the service available at <a class='govuk-link' href='https://checklegalaid.service.gov.uk/'>https://checklegalaid.service.gov.uk/</a>.{% endtrans %}
   </p>
 
-  <h2 class="govuk-heading-m">{{ _('What we’re doing to improve accessibility') }}</h2>
-
-  <p class="govuk-body">
-    {% trans
-      month = _('December'),
-      year = "2020"
-    %}We are working to fix the issues listed in this statement by {{ month }} {{ year }}. When the issues are fixed we will send the service for a re-test with the <abbr title='Digital Accessibility Centre'>DAC</abbr>.{% endtrans %}
-  </p>
-
-  <p class="govuk-body">
-    {% trans %}We will monitor the accessibility of this service on an ongoing basis and fix any accessibility issues reported to us.{% endtrans %}
-  </p>
-
-  <p class="govuk-body">
-    {% trans
-      day = "17",
-      month = _('September'),
-      year = "2020"
-    %}This statement was prepared on {{ day }} {{ month }} {{ year }}.{% endtrans %}
-  </p>
-
   {% include "checker/time-out-warning.html" %}
 {% endblock %}
