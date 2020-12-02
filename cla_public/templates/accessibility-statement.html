@@ -94,8 +94,8 @@
 
   <p class="govuk-body">
     {% trans
-      date = "22" ~ " "~ _('July') ~ " " ~ "2020"
-    %}This service was last tested on {{ date }}. The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>).{% endtrans %}
+      day = "22", month = _('July'), year = "2020"
+    %}This service was last tested on {{ day }} {{ month }} {{ year }}. The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>).{% endtrans %}
   </p>
 
   <p class="govuk-body">

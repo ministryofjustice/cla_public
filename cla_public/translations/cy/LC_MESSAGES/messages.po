@@ -4502,8 +4502,8 @@ msgid "December"
 msgstr "Rhagfyr"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "This service was last tested on %(date)s. The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
-msgstr "Cafodd y gwasanaeth hwn ei brofi ddiwethaf ar %(date)s. Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (DAC)."
+msgid "This service was last tested on %(day)s %(month)s %(year)s. The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
+msgstr "Cafodd y gwasanaeth hwn ei brofi ddiwethaf ar %(day)s %(month)s %(year)s. Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (DAC)."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested the service available at <a class='govuk-link' href='https://checklegalaid.service.gov.uk/'>https://checklegalaid.service.gov.uk/</a>."
