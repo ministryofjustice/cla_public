@@ -4462,7 +4462,7 @@ msgid "The content listed below is non-accessible for the following reasons."
 msgstr "Nid oes modd cael gafael ar y cynnwys a restrir isod am y rhesymau canlynol."
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "Non compliance with the accessibility regulations"
+msgid "Non-compliance with the accessibility regulations"
 msgstr "Ddim yn cydymffurfio â’r rheoliadau hygyrchedd"
 
 #: cla_public/templates/accessibility-statement.html:1
@@ -4506,8 +4506,12 @@ msgid "December"
 msgstr "Rhagfyr"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "This service was last tested on %(day)s %(month)s %(year)s. The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
-msgstr "Cafodd y gwasanaeth hwn ei brofi ddiwethaf ar %(day)s %(month)s %(year)s. Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (DAC)."
+msgid "This service was last tested on %(day)s %(month)s %(year)s."
+msgstr "Cafodd y gwasanaeth hwn ei brofi ddiwethaf ar %(day)s %(month)s %(year)s."
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
+msgstr "Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (DAC)."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested the service available at <a class='govuk-link' href='https://checklegalaid.service.gov.uk/'>https://checklegalaid.service.gov.uk/</a>."
