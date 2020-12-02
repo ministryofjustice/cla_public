@@ -4418,16 +4418,16 @@ msgid "What to do if you can’t access part of this service"
 msgstr "Beth i’w wneud os na allwch gael mynediad at ran o’r gwasanaeth hwn"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "If you need information on this service in a different format, you can contact us at civil-legal-advice@digital.justice.gov.uk."
-msgstr "Os oes angen gwybodaeth arnoch am y gwasanaeth hwn mewn fformat gwahanol, gallwch gysylltu â ni yn civil-legal-advice@digital.justice.gov.uk."
+msgid "If you need information on this service in a different format, you can contact us at %(email)s."
+msgstr "Os oes angen gwybodaeth arnoch am y gwasanaeth hwn mewn fformat gwahanol, gallwch gysylltu â ni yn %(email)s."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "Reporting accessibility problems"
 msgstr "Rhoi gwybod am broblemau hygyrchedd"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "We’re always looking to improve the accessibility of this service. If you find any problems that aren’t listed on this page or think we’re not meeting the requirements of the accessibility regulations, contact civil-legal-advice@digital.justice.gov.uk giving details of the issue and any assistive technology you are using."
-msgstr "Rydyn ni bob amser yn ceisio gwella hygyrchedd y gwasanaeth hwn. Os byddwch chi’n dod o hyd i unrhyw broblemau nad ydynt wedi’u rhestru ar y dudalen hon neu os ydych chi’n meddwl nad ydyn ni’n bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â civil-legal-advice@digital.justice.gov.uk gan roi manylion y broblem ac unrhyw dechnoleg gynorthwyol rydych chi’n ei defnyddio."
+msgid "We’re always looking to improve the accessibility of this service. If you find any problems that aren’t listed on this page or think we’re not meeting the requirements of the accessibility regulations, contact %(email)s giving details of the issue and any assistive technology you are using."
+msgstr "Rydyn ni bob amser yn ceisio gwella hygyrchedd y gwasanaeth hwn. Os byddwch chi’n dod o hyd i unrhyw broblemau nad ydynt wedi’u rhestru ar y dudalen hon neu os ydych chi’n meddwl nad ydyn ni’n bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â %(email)s gan roi manylion y broblem ac unrhyw dechnoleg gynorthwyol rydych chi’n ei defnyddio."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "Enforcement procedure"
