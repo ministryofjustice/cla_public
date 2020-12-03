@@ -4434,8 +4434,8 @@ msgid "Enforcement procedure"
 msgstr "Gweithdrefn gorfodi"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "The Equality and Human Rights Commission (EHRC) is responsible for enforcing the accessibility regulations. If you’re not happy with how we respond to your complaint, contact the <a class=\"govuk-link\" href=\"https://www.equalityadvisoryservice.com/\" rel=\"external\">Equality Advisory and Support Service (<abbr>EASS</abbr>)</a>."
-msgstr "Y Comisiwn Cydraddoldeb a Hawliau Dynol sy’n gyfrifol am orfodi’r rheoliadau hygyrchedd. Os nad ydych chi’n fodlon â sut rydyn ni’n ymateb i’ch cwyn, cysylltwch â’r <a class=\"govuk-link\" href=\"http://eass-ws.custhelp.com/app/home\" rel=\"external\">Gwasanaeth Cynghori a Chefnogi Cydraddoldeb (EASS)</a>."
+msgid "The Equality and Human Rights Commission (<abbr>EHRC</abbr>) is responsible for enforcing the accessibility regulations. If you’re not happy with how we respond to your complaint, contact the <a class=\"govuk-link\" href=\"https://www.equalityadvisoryservice.com/\" rel=\"external\">Equality Advisory and Support Service (<abbr>EASS</abbr>)</a>."
+msgstr "Y Comisiwn Cydraddoldeb a Hawliau Dynol sy’n gyfrifol am orfodi’r rheoliadau hygyrchedd. Os nad ydych chi’n fodlon â sut rydyn ni’n ymateb i’ch cwyn, cysylltwch â’r <a class=\"govuk-link\" href=\"http://eass-ws.custhelp.com/app/home\" rel=\"external\">Gwasanaeth Cynghori a Chefnogi Cydraddoldeb (<abbr>EASS</abbr>)</a>."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "Technical information about this service’s accessibility"
@@ -4500,6 +4500,10 @@ msgstr "Gorffennaf"
 #: cla_public/templates/accessibility-statement.html:1
 msgid "September"
 msgstr "Medi"
+
+#: cla_public/templates/accessibility-statement.html:1
+msgid "November"
+msgstr "/ 11 /"
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "December"
