@@ -6,8 +6,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/ministryofjustice/cla_public/badge.svg?branch=master)](https://coveralls.io/github/ministryofjustice/cla_public?branch=master)
 
 # Civil Legal Advice
-  
-Civil Legal Advice is a service provided to the general public in England and Wales where users can obtain free legal advice from specialist legal providers relating to a range of Civil matters. This is subject to the user's matter being within scope of the service and the user passing the means eligibility test. The advice can either be given via telephone or in person depending upon the client's unique circumstances. 
+
+Civil Legal Advice is a service provided to the general public in England and Wales where users can obtain free legal advice from specialist legal providers relating to a range of Civil matters. This is subject to the user's matter being within scope of the service and the user passing the means eligibility test. The advice can either be given via telephone or in person depending upon the client's unique circumstances.
 
 The provision of the Civil Legal Advice Service is mandated in secondary legislation and is the required route (Gateway) to access any further civil legal aid services in the "Debt" category of law.
 
@@ -16,6 +16,12 @@ The provision of the Civil Legal Advice Service is mandated in secondary legisla
 This repository holds the code for the "Check if you can get legal aid" application. The service helps members of the public in England and Wales to determine if they can get legal aid.
 
 The website address is https://checklegalaid.service.gov.uk/.
+
+## Architecture Diagram
+
+View the [architecture diagram](https://structurizr.com/share/55246/diagrams#cla-container) for this project.
+It's defined as code and [can be edited](https://github.com/ministryofjustice/laa-architecture-as-code/blob/main/src/main/kotlin/model/CLA.kt) by anyone.
+
 
 ## Documentation
 
