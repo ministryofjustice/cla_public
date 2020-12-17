@@ -34,6 +34,10 @@ In the HTML files, ensure that all strings are wrapped in translation tags.  The
     {{ _('Back') }}
     {% trans %}Back{% endtrans %}
 
+In python files the format is slightly different
+
+     _(u"Back")
+
 ## Translation quality
 
 When updating the translation file, it is important to maintain the quality of the text.  
@@ -76,9 +80,12 @@ For example
 
 Some characters, such as the `%` sign, cause problems.  Always use the HTML code for this symbol and any others that cause issues.  
 
-    {% trans %}The <abbr title='Legal Aid Agency'>LAA</abbr>{% endtrans %}
+    {% trans %}Zoom in up to 300&#37;{% endtrans %}
 
-### Links
+    msgid "Zoom in up to 300&#37;"
+    msgstr "Zoom in up to 300&#37;"
+
+## Links
 
 Often, links appear mid sentence.  There are a number of things to consider with links.  If using the above approach, they can become ungainly, especially in the midst of long sentences.  However, this approach will still work and is sometimes required.  
 
@@ -94,13 +101,67 @@ But if the website in question has a Welsh version, we should link to the Welsh 
 
 You should check all URLs at point of translation to see if there is a Welsh version of the website you're linking to.
 
-If there is no Welsh version to link to, then you should consider the below alternative which is easier to maintain should the URL change.
+If there is no Welsh version to link to, then you should consider using a variable which is easier to maintain should the URL change.
 
+    {% trans
+        email = Element.link_same_window('mailto:civil-legal-advice@digital.justice.gov.uk', 'civil-legal-advice@digital.justice.gov.uk', **{'class': 'email'})
+    %}You can contact us at {{email}}{% endtrans %}
 
+    msgid "You can contact us at %(email)s"
+    msgstr "Gallwch gysylltu â ni yn %(email)s."
 
+## One to many translations
 
+Occasionally, a single English word required a number of Welsh translations.  This is the case with the word "Yes".  
 
-This project uses pybabel to manage strings that need translation. 
+There are four translations for "yes".
+
+- Ie
+- Ydy
+- Oes
+- Ydw
+
+The word "ie" is the default word for Yes, and this is handled in the usual way:
+
+    msgid "Yes"
+    msgstr "Ie"
+
+For all the others, we have to mark it as being used in a certain situation.  We do this with a `msgctxt` tag.
+
+    msgctxt "There is/are"
+    msgid "Yes"
+    msgstr "Oes"
+
+We then need to mark the English.  Currently this is only done in python files, it is done thus:  
+
+    lazy_pgettext(u"There is/are", u"Yes")
+
+At current, we only do this for **Yes** and **No**.  
+
+| English     | Specific Mark     | Welsh       |
+| ----------- | ----------------- | ----------- |
+| Yes         |                   | Ie          |
+| Yes         | I am              | Ydw         |
+| Yes         | There is/are      | Oes         |
+| Yes         | It is             | Ydy         |
+| No          |                   | Na          |
+| No          | I’m not           | Nac ydw     |
+| No          | There is/are not  | Nac oes     |
+| No          | It isn’t          | Nac ydy     |
+
+## Automatic process
+
+This project can use pybabel to manage translations.  This is a more automated approach that was used in CLA Public up until early 2020.
+
+However, it has been found that some crucial strings are not picked up by this more automated approach, espeically those buried deeper in the code than normal.  This includes:
+
+    msgid "This field is required."
+    msgstr "Rhaid cwblhau’r maes hwn"
+
+Since 2020, the manual process outlined above has been used to manage translations.
+
+<details>
+  <summary>Details on this process are here for those who are curious</summary>
 
 Install the Transifex client
 
@@ -138,3 +199,4 @@ Compile the translations
     pybabel compile -f -d cla_public/translations
 
 Commit translations
+</details>
