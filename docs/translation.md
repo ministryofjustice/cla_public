@@ -38,19 +38,6 @@ In python files the format is slightly different
 
      _(u"Back")
 
-## Translation quality
-
-When updating the translation file, it is important to maintain the quality of the text.  
-
-- Ensure that all text uses smart quotes (`’` instead of `'`).
-- Ensure all abbreviations are wrapped in `<abbr>` tags.
-- - If it isn't obvious from context, expand the abbreviations with their meaning by adding a `title` attribute (e.g. `<abbr title='Legal Aid Agency'>LAA</abbr>`).
-- - The abbreviation doesn't change with Welsh, e.g. `<abbr title='Asiantaeth Cymorth Cyfreithiol'>LAA</abbr>`.
-
-Ensure that both the English on the HTML page and the Welsh translations are of good quality.
-
-The content designer owns the content, so if you think there is poor wording or something should be rephrased, defer to him.  He will decide whether or not the Welsh needs to be redone - but often, if neither the meaning nor the emphasis of the sentence hasn't changed, the Welsh will not need to be altered.  
-
 ## Markup in translation
 
 If a full sentence is wrapped in an HTML tag, this should be without the trans tags.  
@@ -110,6 +97,24 @@ If there is no Welsh version to link to, then you should consider using a variab
     msgid "You can contact us at %(email)s"
     msgstr "Gallwch gysylltu â ni yn %(email)s."
 
+## Translation quality
+
+When updating the translation file, it is important to maintain the quality of the text.  
+
+- Ensure that all text uses smart quotes (`’` instead of `'`).
+- Ensure all abbreviations are wrapped in `<abbr>` tags.
+- - If it isn't obvious from context, expand the abbreviations with their meaning by adding a `title` attribute (e.g. `<abbr title='Legal Aid Agency'>LAA</abbr>`).
+- - The abbreviation doesn't change with Welsh, e.g. `<abbr title='Asiantaeth Cymorth Cyfreithiol'>LAA</abbr>`.
+
+Ensure that both the English on the HTML page and the Welsh translations are of good quality.
+
+The content designer owns the content, so if you think there is poor wording or something should be rephrased, defer to him.  He will decide whether or not the Welsh needs to be redone - but often, if neither the meaning nor the emphasis of the sentence has changed, the Welsh will not need to be altered.  
+
+If you are writing in a different language (e.g. English in the Welsh translation), mark it accordingly with markup.
+
+    msgid "This guide is also available in Welsh (<span lang='cy'>yn Cymraeg</span>)"
+    msgstr "Mae’r canllaw hwn hefyd ar gael yn Saes (<span lang='en'>in English</span>)"
+
 ## One to many translations
 
 Occasionally, a single English word required a number of Welsh translations.  This is the case with the word "Yes".  
@@ -149,6 +154,18 @@ At current, we only do this for **Yes** and **No**.
 | No          | There is/are not  | Nac oes     |
 | No          | It isn’t          | Nac ydy     |
 
+## Edge cases
+
+Some translations are not suited to this approach.  For these edge cases.  We can check the Welsh language cookie and manually change what is displayed.  
+
+    {% if request.cookies.get('locale') == 'cy_GB' %}
+        Gwall:
+    {% else %}
+        Error: 
+    {% endif %}
+
+If you use this approach, always check for Welsh, and if that returns false, assume the language is English.
+
 ## Automatic process
 
 This project can use pybabel to manage translations.  This is a more automated approach that was used in CLA Public up until early 2020.
@@ -163,40 +180,39 @@ Since 2020, the manual process outlined above has been used to manage translatio
 <details>
   <summary>Details on this process are here for those who are curious</summary>
 
-Install the Transifex client
-
-    source env/bin/activate
-    pip install requirements/dev.txt
-
-Extract translatable strings
-
-    ./manage.py make_messages
-
-Using the a Transifex account that has been added as a Project maintainer to the `cla_public` project,
-fetch an API token from https://www.transifex.com/user/settings/api/
-
-Create `~/.transifexrc` in the following format and insert the API token:
-
-    [https://www.transifex.com]
-    api_hostname = https://api.transifex.com
-    hostname = https://www.transifex.com
-    password = INSERT_API_TOKEN_HERE
-    token = INSERT_API_TOKEN_HERE
-    username = api
-
-Push to Transifex
-        
-    ./manage.py push_messages
-
-Wait for strings to be translated
-
-Pull from Transifex
-
-    ./manage.py pull_messages
-        
-Compile the translations
-
-    pybabel compile -f -d cla_public/translations
-
-Commit translations
+> Install the Transifex client
+> 
+>     source env/bin/activate
+>     pip install requirements/dev.txt
+> 
+> Extract translatable strings
+> 
+>     ./manage.py make_messages
+> 
+> Using the a Transifex account that has been added as a Project maintainer to the `cla_public` project, fetch an API token from https://www.transifex.com/user/settings/api/
+> 
+> Create `~/.transifexrc` in the following format and insert the API token:
+> 
+>     [https://www.transifex.com]
+>     api_hostname = https://api.transifex.com
+>     hostname = https://www.transifex.com
+>     password = INSERT_API_TOKEN_HERE
+>     token = INSERT_API_TOKEN_HERE
+>     username = api
+> 
+> Push to Transifex
+>         
+>     ./manage.py push_messages
+> 
+> Wait for strings to be translated
+> 
+> Pull from Transifex
+> 
+>     ./manage.py pull_messages
+> 
+> Compile the translations
+> 
+>     pybabel compile -f -d cla_public/translations
+> 
+> Commit translations
 </details>
