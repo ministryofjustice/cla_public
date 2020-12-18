@@ -1,6 +1,6 @@
 describe('Mini test', function() {
   it('should work', function () {
-    cy.visit("https://staging.checklegalaid.service.gov.uk/start")
+    cy.visit("https://lga-1543-install-and-integra.staging.checklegalaid.service.gov.uk/start")
 
     cy.contains('Choose the area you most need help with')
     cy.contains('Debt').click()
@@ -11,13 +11,10 @@ describe('Mini test', function() {
     cy.contains('Legal aid is available for this type of problem')
     cy.contains('Check if you qualify financially').click()
 
-    cy.get(".govuk-radios__item input[value='0']").each(($el, index, $list) => {
-      if($el.css("visibility") !== "hidden") {
-        cy.wrap($el).check();
-      }
-    })
+    cy.getRadioInput('have_partner', 'Yes')
+    cy.getRadioInput('on_benefits', 'No')
 
-    cy.get("#submit-button").click();
+    // cy.get("#submit-button").click();
 
   });
 })
