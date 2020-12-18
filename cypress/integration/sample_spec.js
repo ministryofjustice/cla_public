@@ -11,8 +11,8 @@ describe('Mini test', function() {
     cy.contains('Legal aid is available for this type of problem')
     cy.contains('Check if you qualify financially').click()
 
-    cy.getRadioInput('have_partner', 'Yes')
-    cy.getRadioInput('on_benefits', 'No')
+    cy.setRadioInput('have_partner')
+    cy.setRadioInput('on_benefits', 'No')
 
     // cy.get("#submit-button").click();
 
