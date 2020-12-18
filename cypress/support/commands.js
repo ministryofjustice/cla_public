@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getRadioInput', (selector, value) => {
+  cy.get(`input[name="${selector}"]`).each(($el, index, $list) => {
+    if(value === 'Yes' && $el.val() === "1") {
+      cy.wrap($el).check();
+    } else if(value === 'No' && $el.val() === "0") {
+      cy.wrap($el).check();
+    }
+  })
+})
