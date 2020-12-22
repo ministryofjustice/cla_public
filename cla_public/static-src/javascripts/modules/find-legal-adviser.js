@@ -326,8 +326,8 @@ var wideScreen = 641;
     $( "a.govuk-skip-link" ).click(function( event ) {
       event.preventDefault();
       $('.search-results-list').attr('tabindex', -1).focus();
-      $('html, body').delay(300).animate({
-        'scrollTop': self.$('.find-legal-adviser').offset().top - 10
+      $('html, body').delay(30).animate({
+        'scrollTop': self.$('h1').offset().top - 10
       }, 160);
     });
   });
