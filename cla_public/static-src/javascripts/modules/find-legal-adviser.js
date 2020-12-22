@@ -65,6 +65,7 @@ var wideScreen = 641;
 
         var url = document.location.pathname + '?' + $(this).serialize();
         self._fetchPage(url, true);
+        console.log("the book of the dead: " + url);
 
         if(window.history && history.pushState) {
           history.pushState(null, null, url);
@@ -112,8 +113,6 @@ var wideScreen = 641;
               'scrollTop': self.$findLegalAdviserContainer.offset().top - 10
             }, 160);
           }
-
-    //      $('.search-results-list').attr('tabindex', -1).focus();
 
           window.ga('send', 'pageview', stripPII(url));
         })
