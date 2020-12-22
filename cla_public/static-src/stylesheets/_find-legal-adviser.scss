@@ -290,7 +290,8 @@ $map-height: 460px;
       height: $map-height - $_pagination-height;
 
       &:focus {
-        outline: 2px solid $yellow;
+        outline: 1px solid $govuk-border-colour;
+        // no focus colour - no user advantage to knowing where focus state is
       }
     }
 
