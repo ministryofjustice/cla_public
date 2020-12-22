@@ -113,7 +113,7 @@ var wideScreen = 641;
             }, 160);
           }
 
-          $('.search-results-list').attr('tabindex', -1).focus();
+    //      $('.search-results-list').attr('tabindex', -1).focus();
 
           window.ga('send', 'pageview', stripPII(url));
         })
