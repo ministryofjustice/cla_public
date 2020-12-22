@@ -33,12 +33,12 @@
       {{ Form.currency_fieldset(form.your_income.pension) }}
       {{ Form.currency_fieldset(form.your_income.other_income) }}
       <details class="govuk-details" data-module="govuk-details">
-        {% trans %}What payments do not count as income?{% endtrans %}
         <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text">
-            {% include '_disregards-info.html' %}
+            {% trans %}What payments do not count as income?{% endtrans %}
           </span>
         </summary>
+        {% include '_disregards-info.html' %}
       </details>
       {% if session.checker.has_partner %}
         </fieldset>

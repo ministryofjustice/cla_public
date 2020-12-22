@@ -19,12 +19,12 @@
     {% with skip = not session.checker.has_savings %}
       {{ Form.group(form.savings, field_attrs={'prefix': '£', 'class_': 'govuk-!-width-one-third'}) }}
       <details class="govuk-details" data-module="govuk-details">
-        {% trans %}What payments do not count as savings?{% endtrans %}
         <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text">
-            {% include '_disregards-info.html' %}
+            {% trans %}What payments do not count as savings?{% endtrans %}
           </span>
         </summary>
+        {% include '_disregards-info.html' %}
       </details>
       {{ Form.group(form.investments, field_attrs={'prefix': '£', 'class_': 'govuk-!-width-one-third'}) }}
     {% endwith %}
