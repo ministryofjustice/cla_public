@@ -24,12 +24,12 @@ CATEGORIES = [
     (
         "discrimination",
         _(u"Discrimination"),
-        _(u"Being treated unfairly because of your race, sex, sexual " u"orientation"),
+        _(u"Being treated unfairly because of your race, sex, sexual orientation"),
     ),
     (
         "education",
         _(u"Education"),
-        _(u"Special educational needs, problems with school places, " u"exclusions, learning difficulties"),
+        _(u"Special educational needs, problems with school places, exclusions, learning difficulties"),
     ),
     ("employment", _(u"Employment"), _(u"Being treated unfairly at work, unfair dismissal, employment tribunals")),
     (
@@ -48,7 +48,7 @@ CATEGORIES = [
     (
         "immigration",
         _(u"Immigration and asylum"),
-        _(u"Applying for asylum or permission to stay in the UK, including for victims of " u"human trafficking"),
+        _(u"Applying for asylum or permission to stay in the UK, including for victims of human trafficking"),
     ),
     ("mentalhealth", _(u"Mental health"), _(u"Help with mental health and mental capacity legal issues")),
     ("pi", _(u"Personal injury"), _(u"An accident that was not your fault")),
@@ -132,6 +132,7 @@ F2F_CATEGORIES = (
     "publiclaw",
     "aap",
     "employment",
+    "traffickingslavery",
     "other",
 )
 
