@@ -1,5 +1,6 @@
 # coding: utf-8
 from cla_common.constants import DIAGNOSIS_SCOPE
+from cla_public.apps.base.utils import check_categories
 from cla_public.apps.checker.views import HelpOrganisations
 from cla_public.apps.scope import scope
 from cla_public.apps.scope.api import diagnosis_api_client as api
@@ -56,7 +57,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
             else:
                 outcome_url = url_for(outcome_url[0], **outcome_url[1])
                 if state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
-                    outcome_url = "%s?category=%s" % (outcome_url, session.checker.category)
+                    outcome_url = "%s?category=%s" % (outcome_url, self.get_category_for_larp(session))
 
             return redirect(outcome_url)
 
@@ -70,6 +71,13 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
         display_choices = map(add_link, response_json.get("choices", []))
 
         return render_template("scope/diagnosis.html", choices=display_choices, nodes=nodes)
+
+    def get_category_for_larp(self, session):
+        category_for_LARP = session.checker.category
+        categories_list = ["n88", "n149"]
+        if check_categories(session, categories_list):
+            category_for_LARP = "traffickingslavery"
+        return category_for_LARP
 
 
 class ScopeIneligible(HelpOrganisations):
