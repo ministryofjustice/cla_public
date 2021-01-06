@@ -168,6 +168,7 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     "education": ["edu"],
     "family": ["mat", "fmed"],
     "housing": ["hou"],
+    "traffickingslavery": ["mosl"],
     "immigration": ["immas"],
     "mentalhealth": ["mhe"],
     "publiclaw": ["pub"],
