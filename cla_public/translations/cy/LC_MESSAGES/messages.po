@@ -1643,7 +1643,7 @@ msgid "Check if you can get legal aid"
 msgstr "Gwirio os y gallwch chi gael cymorth cyfreithiol"
 
 #: cla_public/templates/_disregards-info.html:4
-msgid "Infected Blood financial support payments"
+msgid "Infected Blood Support Scheme"
 msgstr "Cynllun Cefnogi Gwaed Heintiedig"
 
 #: cla_public/templates/_disregards-info.html:5
@@ -1651,11 +1651,11 @@ msgid "Vaccine Damage Payment"
 msgstr "Taliad Niwed Trwy Frechiad"
 
 #: cla_public/templates/_disregards-info.html:7
-msgid "Criminal Injuries Compensation Scheme payments"
+msgid "Criminal Injuries Compensation Scheme"
 msgstr "Y Cynllun Iawndal Am Anafiadau Troseddol"
 
 #: cla_public/templates/_disregards-info.html:9
-msgid "London Emergencies Trust payments"
+msgid "London Emergencies Trust"
 msgstr "Ymddiriedolaeth Argyfyngau Llundain"
 
 #cla_public/templates/index.html:16
