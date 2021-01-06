@@ -1642,6 +1642,22 @@ msgstr "Ar gyfer beth y mae arnoch chi angen cymorth?"
 msgid "Check if you can get legal aid"
 msgstr "Gwirio os y gallwch chi gael cymorth cyfreithiol"
 
+#: cla_public/templates/_disregards-info.html:4
+msgid "Infected Blood financial support payments"
+msgstr "Cynllun Cefnogi Gwaed Heintiedig"
+
+#: cla_public/templates/_disregards-info.html:5
+msgid "Vaccine Damage Payment"
+msgstr "Taliad Niwed Trwy Frechiad"
+
+#: cla_public/templates/_disregards-info.html:7
+msgid "Criminal Injuries Compensation Scheme payments"
+msgstr "Y Cynllun Iawndal Am Anafiadau Troseddol"
+
+#: cla_public/templates/_disregards-info.html:9
+msgid "London Emergencies Trust payments"
+msgstr "Ymddiriedolaeth Argyfyngau Llundain"
+
 #cla_public/templates/index.html:16
 msgid "Legal aid can help pay for legal advice."
 msgstr "Gall cymorth cyfreithiol helpu i dalu am gyngor cyfreithiol."
