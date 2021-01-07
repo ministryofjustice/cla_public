@@ -32,3 +32,7 @@ Cypress.Commands.add('setRadioInput', (selector, value) => {
 Cypress.Commands.add('setTextInput', (selector, value) => {
   cy.get(`#${selector}`).type(value);
 })
+
+Cypress.Commands.add('setCheckboxInput', (selector) => {
+  cy.get(`#${selector}`).check();
+})
