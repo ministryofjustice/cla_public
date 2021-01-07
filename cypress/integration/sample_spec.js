@@ -25,7 +25,12 @@ describe('Mini test', function() {
     cy.setRadioInput('have_valuables', 'No')
     cy.get("#submit-button").click();
 
-    
+    // Which benefits do you receive form
+    cy.setCheckboxInput('benefits-5')
+    cy.setCheckboxInput('benefits-6')
+    cy.get("#submit-button").click();
+
+
 
   });
 })
