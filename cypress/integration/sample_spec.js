@@ -12,6 +12,7 @@ describe('Mini test', function() {
     cy.contains('Check if you qualify financially').click()
 
     // About you form
+    cy.contains('About you')
     cy.setRadioInput('have_partner', 'No')
     cy.setRadioInput('on_benefits', 'Yes')
     cy.setRadioInput('have_children', 'Yes')
@@ -26,11 +27,13 @@ describe('Mini test', function() {
     cy.get("#submit-button").click();
 
     // Which benefits do you receive form
+    cy.contains('Which benefits do you receive')
     cy.setCheckboxInput('benefits-5')
     cy.setCheckboxInput('benefits-6')
     cy.get("#submit-button").click();
 
     // Your additional benefits form
+    cy.contains('Your additional benefits')
     cy.setCheckboxInput('benefits-6')
     cy.setCheckboxInput('benefits-10')
     cy.setRadioInput('other_benefits', 'No')
