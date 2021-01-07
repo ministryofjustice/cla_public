@@ -30,6 +30,11 @@ describe('Mini test', function() {
     cy.setCheckboxInput('benefits-6')
     cy.get("#submit-button").click();
 
+    // Your additional benefits form
+    cy.setCheckboxInput('benefits-6')
+    cy.setCheckboxInput('benefits-10')
+    cy.setRadioInput('other_benefits', 'No')
+    cy.get("#submit-button").click();
 
 
   });
