@@ -11,20 +11,21 @@ describe('Mini test', function() {
     cy.contains('Legal aid is available for this type of problem')
     cy.contains('Check if you qualify financially').click()
 
-    // About you page form
-    cy.setRadioInput('have_partner', 'Yes')
-    cy.setRadioInput('in_dispute', 'No')  // Depends on have_partner being set to 'Yes'
+    // About you form
+    cy.setRadioInput('have_partner', 'No')
     cy.setRadioInput('on_benefits', 'Yes')
-    cy.setRadioInput('have_children')
-    cy.setRadioInput('have_dependants')
-    cy.setRadioInput('own_property')
-    cy.setRadioInput('is_employed')
-    cy.setRadioInput('is_self_employed')
-    cy.setRadioInput('aged_60_or_over')
-    cy.setRadioInput('have_savings')
-    cy.setRadioInput('have_valuables')
+    cy.setRadioInput('have_children', 'Yes')
+    cy.setTextInput('num_children', '4')
+    cy.setRadioInput('have_dependants', 'No')
+    cy.setRadioInput('own_property', 'Yes')
+    cy.setRadioInput('is_employed', 'No')
+    cy.setRadioInput('is_self_employed', 'No')
+    cy.setRadioInput('aged_60_or_over', 'No')
+    cy.setRadioInput('have_savings', 'Yes')
+    cy.setRadioInput('have_valuables', 'No')
+    cy.get("#submit-button").click();
 
-    // cy.get("#submit-button").click();
+    
 
   });
 })
