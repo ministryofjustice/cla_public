@@ -3966,6 +3966,9 @@ msgid ""
 "      for other legal aid problems."
 msgstr "Os ydych yn gwneud cais am gymorth cyfreithiol ar gyfer problem iechyd meddwl, nid yw’r gofynion ar gyfer yr asesiad ariannol mor llym o’i gymharu â phroblemau cymorth cyfreithiol eraill."
 
+msgid "Parent or guardian"
+msgstr "Rhiant neu warcheidwad"
+
 #: cla_public/templates/checker/result/ineligible.html:3
 msgid "Help organisations"
 msgstr ""
