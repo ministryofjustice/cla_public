@@ -28,3 +28,7 @@ Cypress.Commands.add('setRadioInput', (selector, value) => {
   const selectorValue = value === 'Yes' ? '0' : '1'
   cy.get(`#${selector}-${selectorValue}`).check();
 })
+
+Cypress.Commands.add('setTextInput', (selector, value) => {
+  cy.get(`#${selector}`).type(value);
+})
