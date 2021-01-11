@@ -1,4 +1,5 @@
 import datetime
+from flask.ext.babel import lazy_gettext as _
 
 
 def time_choice(time):
@@ -10,9 +11,9 @@ def time_choice(time):
 
 def suffix(d):
     if 11 <= d <= 13:
-        return "th"
-    return {1: "st", 2: "nd", 3: "rd"}.get(d % 10, "th")
+        return _("th")
+    return {1: _("st"), 2: _("nd"), 3: _("rd")}.get(d % 10, _("th"))
 
 
 def day_choice(day):
-    return day.strftime("%Y%m%d"), "%s %s%s" % (day.strftime("%A"), day.strftime("%d").lstrip("0"), suffix(day.day))
+    return day.strftime("%Y%m%d"), "%s %s%s" % (_(day.strftime("%A")), day.strftime("%d").lstrip("0"), suffix(day.day))
