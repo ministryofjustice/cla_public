@@ -3969,6 +3969,27 @@ msgstr "Os ydych yn gwneud cais am gymorth cyfreithiol ar gyfer problem iechyd m
 msgid "Parent or guardian"
 msgstr "Rhiant neu warcheidwad"
 
+msgid "Monday"
+msgstr "Dydd Llun"
+
+msgid "Tuesday"
+msgstr "Dydd Mawrth"
+
+msgid "Wednesday"
+msgstr "Dydd Mercher"
+
+msgid "Thursday"
+msgstr "Dydd Iau"
+
+msgid "Friday"
+msgstr "Dydd Gwener"
+
+msgid "Saturday"
+msgstr "Dydd Sadwrn"
+
+msgid "Sunday"
+msgstr "Dydd Sul"
+
 #: cla_public/templates/checker/result/ineligible.html:3
 msgid "Help organisations"
 msgstr ""
