@@ -33,6 +33,9 @@ Cypress.Commands.add('setTextInput', (selector, value) => {
   cy.get(`#${selector}`).type(value);
 })
 
-Cypress.Commands.add('setCheckboxInput', (selector) => {
+Cypress.Commands.add('setCheckboxInput', selector => {
   cy.get(`#${selector}`).check();
+})
+Cypress.Commands.add('setSelectInput', (selector, value) => {
+  cy.get(`#${selector}`).select(value);
 })

@@ -11,6 +11,8 @@ describe('Mini test', function() {
     cy.contains('Legal aid is available for this type of problem')
     cy.contains('Check if you qualify financially').click()
 
+    const randomValue = 3245;
+
     // About you form
     cy.contains('About you')
     cy.setRadioInput('have_partner', 'No')
@@ -39,6 +41,36 @@ describe('Mini test', function() {
     cy.setRadioInput('other_benefits', 'No')
     cy.get("#submit-button").click();
 
+    // Your property form
+    cy.contains('Your property')
+    cy.setRadioInput('properties-0-is_main_home', 'Yes')
+    cy.setRadioInput('properties-0-other_shareholders', 'Yes')
+    cy.setTextInput('properties-0-property_value', randomValue)
+    cy.setTextInput('properties-0-mortgage_remaining', randomValue)
+    cy.setTextInput('properties-0-mortgage_payments', randomValue)
+    cy.setRadioInput('properties-0-is_rented', 'Yes')
+    cy.setTextInput('properties-0-rent_amount-per_interval_value', randomValue)
+    cy.setSelectInput('properties-0-rent_amount-interval_period', 'per_week')
+    cy.setRadioInput('properties-0-in_dispute', 'Yes')
+    cy.get("#submit-button").click();
+
+    // Your savings form
+    cy.contains('Your savings')
+    cy.setTextInput('savings', randomValue)
+    cy.setTextInput('investments', randomValue)
+    cy.get("#submit-button").click();
+
+    // Review your answers page
+    cy.contains('Review your answers')
+    cy.contains('Your problem area')
+    cy.get("#submit-button").click();
+
+
+    // Contact Civil Legal Advice page
+    cy.contains('Contact Civil Legal Advice')
+    cy.setTextInput('full_name', 'Michael')
+    cy.setRadioInput('contact_type')
+    cy.setTextInput('callback-contact_number', '11111111111')
 
   });
 })
