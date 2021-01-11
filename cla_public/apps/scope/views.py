@@ -73,11 +73,10 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
         return render_template("scope/diagnosis.html", choices=display_choices, nodes=nodes)
 
     def get_category_for_larp(self, session):
-        category_for_LARP = session.checker.category
         categories_list = ["n88", "n149"]
         if check_categories(session, categories_list):
-            category_for_LARP = "traffickingslavery"
-        return category_for_LARP
+            return "traffickingslavery"
+        return session.checker.category
 
 
 class ScopeIneligible(HelpOrganisations):

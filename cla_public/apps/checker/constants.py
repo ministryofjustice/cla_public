@@ -132,7 +132,6 @@ F2F_CATEGORIES = (
     "publiclaw",
     "aap",
     "employment",
-    "traffickingslavery",
     "other",
 )
 
