@@ -178,19 +178,7 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
     def complete(self):
         # TODO: Is this still used now that scope diagnosis is taking care of F2F redirects for certain categories?
         if session.checker.needs_face_to_face:
-
-            def is_human_trafficking_modern_slavery(session):
-                if "diagnosis_previous_choices" in session.checker:
-                    trafficking_slavery_categories = ["n88", "n149"]
-                    for category in trafficking_slavery_categories:
-                        if category in session.checker["diagnosis_previous_choices"]:
-                            return True
-                return False
-
-            if is_human_trafficking_modern_slavery(session):
-                return self.redirect(url_for(".face-to-face", category="traffickingslavery"))
-            else:
-                return self.redirect(url_for(".face-to-face", category=session.checker.category))
+            return self.redirect(url_for(".face-to-face", category=session.checker.category))
 
         if session.checker.ineligible:
             session.store(
