@@ -175,6 +175,7 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     "other": ["other"],
 }
 
+# adds another to the above - see get_category_for_larp
 LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": ["mosl"]})
 
 END_SERVICE_FLASH_MESSAGE = _(
