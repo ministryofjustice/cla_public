@@ -24,12 +24,12 @@ CATEGORIES = [
     (
         "discrimination",
         _(u"Discrimination"),
-        _(u"Being treated unfairly because of your race, sex, sexual " u"orientation"),
+        _(u"Being treated unfairly because of your race, sex, sexual orientation"),
     ),
     (
         "education",
         _(u"Education"),
-        _(u"Special educational needs, problems with school places, " u"exclusions, learning difficulties"),
+        _(u"Special educational needs, problems with school places, exclusions, learning difficulties"),
     ),
     ("employment", _(u"Employment"), _(u"Being treated unfairly at work, unfair dismissal, employment tribunals")),
     (
@@ -48,7 +48,7 @@ CATEGORIES = [
     (
         "immigration",
         _(u"Immigration and asylum"),
-        _(u"Applying for asylum or permission to stay in the UK, including for victims of " u"human trafficking"),
+        _(u"Applying for asylum or permission to stay in the UK, including for victims of human trafficking"),
     ),
     ("mentalhealth", _(u"Mental health"), _(u"Help with mental health and mental capacity legal issues")),
     ("pi", _(u"Personal injury"), _(u"An accident that was not your fault")),
@@ -174,6 +174,9 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     "benefits": ["wb"],
     "other": ["other"],
 }
+
+# adds another to the above - see get_category_for_larp
+LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": ["mosl"]})
 
 END_SERVICE_FLASH_MESSAGE = _(
     u"The information you’ve entered has not been stored on your computer or "
