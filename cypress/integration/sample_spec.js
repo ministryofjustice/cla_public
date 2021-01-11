@@ -76,5 +76,8 @@ describe('Mini test', function() {
     cy.setSelectInput('callback-time-time_in_day', '2:00 PM - 2:30 PM')
     cy.get("#submit-button").click();
 
+    // Result confirmation page
+    cy.contains('We will call you back')
+
   });
 })
