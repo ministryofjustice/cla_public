@@ -168,13 +168,14 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     "education": ["edu"],
     "family": ["mat", "fmed"],
     "housing": ["hou"],
-    "traffickingslavery": ["mosl"],
     "immigration": ["immas"],
     "mentalhealth": ["mhe"],
     "publiclaw": ["pub"],
     "benefits": ["wb"],
     "other": ["other"],
 }
+
+LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": ["mosl"]})
 
 END_SERVICE_FLASH_MESSAGE = _(
     u"The information you’ve entered has not been stored on your computer or "
