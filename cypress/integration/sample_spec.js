@@ -14,7 +14,7 @@ describe('Mini test', function() {
     const randomValue = 3245;
 
     // About you form
-    cy.contains('About you')
+    cy.contains('.govuk-heading-xl', 'About you')
     cy.setYesNoRadioInput('have_partner', 'No')
     cy.setYesNoRadioInput('on_benefits', 'Yes')
     cy.setYesNoRadioInput('have_children', 'Yes')
@@ -29,20 +29,20 @@ describe('Mini test', function() {
     cy.get("#submit-button").click();
 
     // Which benefits do you receive form
-    cy.contains('Which benefits do you receive')
+    cy.contains('.govuk-fieldset__heading', 'Which benefits do you receive?')
     cy.setCheckboxInput('benefits-5')
     cy.setCheckboxInput('benefits-6')
     cy.get("#submit-button").click();
 
     // Your additional benefits form
-    cy.contains('Your additional benefits')
+    cy.contains('.govuk-heading-xl', 'Your additional benefits')
     cy.setCheckboxInput('benefits-6')
     cy.setCheckboxInput('benefits-10')
     cy.setYesNoRadioInput('other_benefits', 'No')
     cy.get("#submit-button").click();
 
     // Your property form
-    cy.contains('Your property')
+    cy.contains('.govuk-heading-xl', 'Your property')
     cy.setYesNoRadioInput('properties-0-is_main_home', 'Yes')
     cy.setYesNoRadioInput('properties-0-other_shareholders', 'Yes')
     cy.setTextInput('properties-0-property_value', randomValue)
@@ -55,29 +55,29 @@ describe('Mini test', function() {
     cy.get("#submit-button").click();
 
     // Your savings form
-    cy.contains('Your savings')
+    cy.contains('.govuk-heading-xl', 'Your savings')
     cy.setTextInput('savings', randomValue)
     cy.setTextInput('investments', randomValue)
     cy.get("#submit-button").click();
 
     // Review your answers page
-    cy.contains('Review your answers')
-    cy.contains('Your problem area')
+    cy.contains('.govuk-heading-xl', 'Review your answers')
     cy.get("#submit-button").click();
 
 
     // Contact Civil Legal Advice page
-    cy.contains('Contact Civil Legal Advice')
+    cy.contains('.govuk-heading-xl', 'Contact Civil Legal Advice')
     cy.setTextInput('full_name', 'Michael')
     cy.setRadioInput('contact_type-1')
     cy.setTextInput('callback-contact_number', '11111111111')
     cy.setRadioInput('callback-time-specific_day-1')
-    cy.setSelectInput('callback-time-day', 'Tuesday 12th')
+    cy.setSelectInput('callback-time-day', 'Wednesday 13th')
     cy.setSelectInput('callback-time-time_in_day', '2:00 PM - 2:30 PM')
     cy.get("#submit-button").click();
 
     // Result confirmation page
     cy.contains('We will call you back')
+    cy.contains('Receive this confirmation by email')
 
   });
 })
