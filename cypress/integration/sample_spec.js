@@ -71,8 +71,6 @@ describe('Mini test', function() {
     cy.setRadioInput('contact_type-1')
     cy.setTextInput('callback-contact_number', '11111111111')
     cy.setRadioInput('callback-time-specific_day-1')
-    cy.setSelectInput('callback-time-day', 'Wednesday 13th')
-    cy.setSelectInput('callback-time-time_in_day', '2:00 PM - 2:30 PM')
     cy.get("#submit-button").click();
 
     // Result confirmation page
