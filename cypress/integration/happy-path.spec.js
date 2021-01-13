@@ -75,6 +75,5 @@ describe('Happy path testing', function() {
     // Result confirmation page
     cy.contains('We will call you back')
     cy.contains('Receive this confirmation by email')
-
   });
 })
