@@ -1,5 +1,5 @@
-describe('Mini test', function() {
-  it('should work', function () {
+describe('Happy path testing', function() {
+  it('Should complete happy path successfully from scope diagnosis to confirmation page', function () {
     cy.visit("https://lga-1543-install-and-integra.staging.checklegalaid.service.gov.uk/start")
 
     cy.contains('Choose the area you most need help with')
@@ -11,7 +11,7 @@ describe('Mini test', function() {
     cy.contains('Legal aid is available for this type of problem')
     cy.contains('Check if you qualify financially').click()
 
-    const randomValue = 3245;
+    const someNumber = 3245;
 
     // About you form
     cy.contains('.govuk-heading-xl', 'About you')
@@ -45,25 +45,24 @@ describe('Mini test', function() {
     cy.contains('.govuk-heading-xl', 'Your property')
     cy.setYesNoRadioInput('properties-0-is_main_home', 'Yes')
     cy.setYesNoRadioInput('properties-0-other_shareholders', 'Yes')
-    cy.setTextInput('properties-0-property_value', randomValue)
-    cy.setTextInput('properties-0-mortgage_remaining', randomValue)
-    cy.setTextInput('properties-0-mortgage_payments', randomValue)
+    cy.setTextInput('properties-0-property_value', someNumber)
+    cy.setTextInput('properties-0-mortgage_remaining', someNumber)
+    cy.setTextInput('properties-0-mortgage_payments', someNumber)
     cy.setYesNoRadioInput('properties-0-is_rented', 'Yes')
-    cy.setTextInput('properties-0-rent_amount-per_interval_value', randomValue)
+    cy.setTextInput('properties-0-rent_amount-per_interval_value', someNumber)
     cy.setSelectInput('properties-0-rent_amount-interval_period', 'per_week')
     cy.setYesNoRadioInput('properties-0-in_dispute', 'Yes')
     cy.get("#submit-button").click();
 
     // Your savings form
     cy.contains('.govuk-heading-xl', 'Your savings')
-    cy.setTextInput('savings', randomValue)
-    cy.setTextInput('investments', randomValue)
+    cy.setTextInput('savings', someNumber)
+    cy.setTextInput('investments', someNumber)
     cy.get("#submit-button").click();
 
     // Review your answers page
     cy.contains('.govuk-heading-xl', 'Review your answers')
     cy.get("#submit-button").click();
-
 
     // Contact Civil Legal Advice page
     cy.contains('.govuk-heading-xl', 'Contact Civil Legal Advice')
