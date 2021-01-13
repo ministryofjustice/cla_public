@@ -22,6 +22,8 @@ msgid "This field is required."
 msgstr "This field is required"
 
 #: Backend django.po - this might return Welsh for English phrases so this needed here to correct
+msgid "Ydych chi wedi cymryd rhan mewn sesiwn cyfryngu i deuluoedd?"
+msgstr "Have you taken part in a family mediation session?"
 msgid "Dewiswch yr opsiwn sy'n disgrifio orau eich problem dyled"
 msgstr "Choose the option that best describes your debt problem"
 msgid "Dewiswch yr opsiwn sy'n disgrifio orau eich sefyllfa bersonol"
