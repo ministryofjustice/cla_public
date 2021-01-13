@@ -5,6 +5,29 @@ from flask.ext.babel import lazy_gettext as _
 
 AFTERNOON = datetime.time(hour=12, minute=0)
 EVENING_NIGHT = datetime.time(hour=18, minute=0)
+WELSH_ORDINALS = {
+    "1": "af",
+    "2": "il",
+    "3": "ydd",
+    "4": "ydd",
+    "5": "ed",
+    "6": "ed",
+    "7": "fed",
+    "8": "fed",
+    "9": "fed",
+    "10": "fed",
+    "11": "eg",
+    "12": "fed",
+    "13": "eg",
+    "14": "eg",
+    "15": "fed",
+    "16": "eg",
+    "17": "eg",
+    "18": "fed",
+    "19": "eg",
+    "20": "fed",
+}
+WELSH_DEFAULT_ORDINAL = "ain"
 
 
 def format_time_welsh_suffix(time):
@@ -37,33 +60,11 @@ def time_choice(time):
     return time.strftime("%H%M"), display_string
 
 
-def suffix_welsh(day):
-    ordinals = {
-        "1": "af",
-        "2": "il",
-        "3": "ydd",
-        "4": "ydd",
-        "5": "ed",
-        "6": "ed",
-        "7": "fed",
-        "8": "fed",
-        "9": "fed",
-        "10": "fed",
-        "11": "eg",
-        "12": "fed",
-        "13": "eg",
-        "14": "eg",
-        "15": "fed",
-        "16": "eg",
-        "17": "eg",
-        "18": "fed",
-        "19": "eg",
-        "20": "fed",
-    }
-    return ordinals.get(str(day), "ain")
+def suffix_day_welsh(day):
+    return WELSH_ORDINALS.get(str(day), WELSH_DEFAULT_ORDINAL)
 
 
-def suffix_english(day):
+def suffix_day_english(day):
     if 11 <= day <= 13:
         return _("th")
     return {1: _("st"), 2: _("nd"), 3: _("rd")}.get(day % 10, _("th"))
@@ -71,9 +72,9 @@ def suffix_english(day):
 
 def suffix(day):
     if get_locale()[:2] == "cy":
-        return suffix_welsh(day)
+        return suffix_day_welsh(day)
 
-    return suffix_english(day)
+    return suffix_day_english(day)
 
 
 def day_choice(day):
