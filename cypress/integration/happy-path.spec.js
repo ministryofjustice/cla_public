@@ -1,6 +1,14 @@
 describe('Happy path testing', function() {
   it('Should complete happy path successfully from scope diagnosis to confirmation page', function () {
+
+    const path = '/Users/mayowaaderohunmu-adeniyi/Documents/GovCode/cla_public/cypress/pages'
+
     cy.visit("https://lga-1543-install-and-integra.staging.checklegalaid.service.gov.uk/start")
+
+
+    cy.url().then(url => {
+      cy.downloadFile(url, path, 'homepage.html')
+    })
 
     cy.contains('Choose the area you most need help with')
     cy.contains('Debt').click()

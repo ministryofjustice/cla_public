@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+require('cypress-downloadfile/lib/downloadFileCommand')
+
 Cypress.Commands.add('setYesNoRadioInput', (selector, value) => {
   const selectorValue = value === 'Yes' ? '0' : '1'
   cy.get(`#${selector}-${selectorValue}`).check();
