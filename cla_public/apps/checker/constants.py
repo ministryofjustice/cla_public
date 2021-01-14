@@ -176,7 +176,7 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
 }
 
 # adds another to the above - see get_category_for_larp
-LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": ["mosl"]})
+LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": [""]})
 
 END_SERVICE_FLASH_MESSAGE = _(
     u"The information you’ve entered has not been stored on your computer or "
