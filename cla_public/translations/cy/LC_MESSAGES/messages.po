@@ -4555,7 +4555,18 @@ msgstr "Cafodd y datganiad hwn ei baratoi ar %(day)s %(month)s %(year)s."
 
 #: fox-admin database opening hours
 msgid "Monday - Friday, 9am - 5pm."
-msgstr "Dydd Llun - Dydd Gwener, 9yb - 5yp."
+msgstr "Dydd Llun &ndash; Gwener, 9yb &ndash; 5yp"
+
+msgid "Monday-Friday,  9.30am - 5.30pm"
+msgstr "Dydd Llun &ndash; Gwener, 9.30yb &ndash; 5.30yp"
+
+msgid "Monday-Friday, 8am-8pm\nSaturday-Sunday, 8am-5pm"
+msgstr "Dydd Llun &ndash; Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn &ndashl Sul, 9yb &ndash; 5yp"
+
+msgid "Mondays, 10am - 6pm"
+"Tuesdays/Thursdays/Fridays, 10am - 4pm"
+"Wednesdays, 10am-1pm and 5pm-7pm"
+msgstr "Dydd Llun, 10yb &ndash; 6yh;<br />Dydd Mawrth/Iau/Gwener, 10yb &ndash; 4yp;<br />Dydd Mercher, 10yb &ndash; 1yp, 5yp &ndash 7yh"
 
 
 
