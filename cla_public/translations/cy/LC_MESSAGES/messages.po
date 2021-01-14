@@ -4554,34 +4554,179 @@ msgid "This statement was prepared on %(day)s %(month)s %(year)s."
 msgstr "Cafodd y datganiad hwn ei baratoi ar %(day)s %(month)s %(year)s."
 
 #: fox-admin database opening hours
-msgid "Monday - Friday, 9am - 5pm."
-msgstr "Dydd Llun &ndash; Gwener, 9yb &ndash; 5yp"
+msgid "9am - 5pm"
+msgstr "9yb &ndash; 5yp"
+
+msgid "8am to 7pm, every day of the year"
+msgstr "Dydd Llun i ddydd Sul, 8yb &ndash; 7yh"
+
+msgid "Every day of the year  12:00 -14:30 and 19:00 - 21:30"
+msgstr "Dydd Llun i ddydd Sul, 12:00yp &ndash; 2:30yp a 7:00yh &ndash; 9:30yh"
+
+msgid "7 days a week, 7 am - midnight"
+msgstr "Dydd Llun i ddydd Sul, 7:00yb &ndash; hanner nos"
+
+msgid "Wednesday to Thursday 10am - 8pm"
+msgstr "Dydd Mercher a Iau, 10yb &ndash; 8yh"
+
+msgid "Only Monday 10am - 2pm"
+msgstr "Dydd Llun, 10yb &ndash; 2yp"
+
+msgid "Friday 10am - 1pm"
+msgstr "Dydd Gwener, 10yb &ndash; 1yp"
+
+msgid "Monday to Friday, 9.15am - 5.15pm"
+msgstr "Dydd Llun i ddydd Gwener, 9:15yb &ndash; 5:15yp"
 
 msgid "Monday-Friday,  9.30am - 5.30pm"
-msgstr "Dydd Llun &ndash; Gwener, 9.30yb &ndash; 5.30yp"
+msgstr "Dydd Llun i ddydd Gwener, 9:30yb &ndash; 5:30yp"
+
+msgid "Monday - Friday, 8am - 6pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 6yh"
+
+msgid "Monday to Friday 8am - 6pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 6yh"
+
+msgid "Monday - Friday, 8.30am - 5:30pm,"
+msgstr "Dydd Llun i ddydd Gwener, 8:30yb &ndash; 5:30yp"
+
+msgid "Monday to Friday 9:30am–5:30pm"
+msgstr "Dydd Llun i ddydd Gwener, 9:30yb &ndash; 5:30yp"
+
+msgid "Monday to Friday 9:30am - 4:30pm"
+msgstr "Dydd Llun i ddydd Gwener, 9:30yb &ndash; 4:30yp"
+
+msgid "Monday - Friday, 9am - 5pm."
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp"
+
+msgid "Monday to Friday 09:00am to 5pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp"
 
 msgid "Monday - Friday 9am-5pm"
-msgstr "Dydd Llun &ndash; Gwener, 9yb &ndash; 5yp"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp"
+
+msgid "Monday-Friday, 9am-5pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp"
+
+msgid "Monday to Friday 9am - 5pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp"
+
+msgid "Monday to Friday, 9am - 5pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp"
 
 msgid "Monday - Friday, 9am - 5pm"
-msgstr "Dydd Llun &ndash; Gwener, 9yb &ndash; 5yp"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp"
+
+msgid "Monday -Friday, 9.00am - 5.00pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp"
+
+msgid "Mondays to Fridays 9 am - 5.30 pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5:30yp"
+
+msgid "Monday - Friday,  9.30am-3pm"
+msgstr "Dydd Llun i ddydd Gwener, 9:30yb &ndash; 3yp"
+
+msgid "Monday - Friday, 10am-5pm"
+msgstr "Dydd Llun i ddydd Gwener, 10yb &ndash; 5yp"
+
+msgid "Mon - Fri 09:00-17:00 (excl.bank holidays)"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 5yp (ac eithrio gwyliau banc)"
+
+msgid "Monday to Friday 9:30am to 4pm"
+msgstr "Dydd Llun i ddydd Gwener, 9:30yb &ndash; 4yp"
 
 msgid "Monday to Friday, 9.30am - 5.00pm"
-msgstr "Dydd Llun &ndash; Gwener, 9.30yb &ndash; 5yp"
+msgstr "Dydd Llun i ddydd Gwener, 9:30yb &ndash; 5yp"
+
+msgid "Monday to Friday 9am - 6pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 6yh"
+
+msgid "Monday to Friday, 9am - 7pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 7yh"
+
+msgid "Monday to Friday 9am - 8pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 8yh"
+
+msgid "Monday-Friday, 8am-8pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh"
+
+msgid "Monday to Friday, 9:00am – 5:00pm, Closed for Lunch 12:30pm – 1:30pm"
+msgstr "Dydd Llun i ddydd Gwener, 9:00yb &ndash; 12:30yp a 1:30yp &ndash; 5:00yp"
+
+msgid "Monday to Friday 10am - 1pm then 2pm - 5pm"
+msgstr "Dydd Llun i ddydd Gwener, 10yb &ndash; 1yp a 2yp &ndash; 5yp"
+
+msgid "Monday to Friday, 8am - 8pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh"
+
+msgid "Monday - Friday, 10am - 5pm (not Wednesdays)"
+msgstr "Dydd Llun/Mawrth/Iau/Gwener, 10yb &ndash; 5yp"
+
+msgid "Monday, Tuesday, Thursday, Friday 9am - 5pm Wednesday 10am - 5pm"
+msgstr "Dydd Llun/Mawrth/Iau/Gwener, 9yb &ndash; 5yp<br />Dydd Mercher, 10yb &ndash; 5yp"
+
+msgid "Monday to Thursday 10am-4pm, Friday 9am-3pm"
+msgstr "Dydd Llun i ddydd Iau, 10yb &ndash; 4yp;<br />Dydd Gwener, 9yb &ndash; 3yp"
+
+msgid "Monday, Wednesday and Friday  10:00-12:30 and 14:00-16:30, Tuesday Evening 16.30-19.00"
+msgstr "Dydd Llun/Mercher/Gwener, 10yb &ndash; 12:30yp; a 2:00yp &ndash; 4:30 yp<br />Dydd Mawrth, 4:30yp &ndash; 7:00yh"
+
+msgid "Monday and Wednesday 9am - 8pm, Tuesday, Thursday and Friday 9am - 5pm"
+msgstr "Dydd Llun/Mercher, 9yb &ndash; 8yh<br />Dydd Mawrth/Iau, 9yb &ndash; 5yp"
+
+msgid "Monday to Friday 8am to 8pm, Saturday 9am to 4pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn, 9yb &ndash; 4yp"
+
+msgid "Monday-Friday, 9am-9pm, Saturday-Sunday, 10am-3pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 9yh;<br />Dydd Sadwrn a Sul, 10yb &ndash; 3yp"
+
+msgid "Monday to Friday 8:30am - 6:30pm, Saturdays 9am - 1pm"
+msgstr "Dydd Llun i ddydd Gwener, 8:30yb &ndash; 6:30yh;<br />Dydd Sadwrn, 9yb &ndash; 1yp"
+
+msgid "Monday - Friday 9am - 10pm, Saturday and Sunday 10am - 3pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 10yh;<br />Dydd Sadwrn a Sul, 10yb &ndash; 3yp"
+
+msgid "Monday to Friday 8am - 8pm, Saturday and Sunday 9am - 5pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn a Sul, 9yb &ndash; 5yp"
 
 msgid "Monday-Friday, 8am-8pm\nSaturday-Sunday, 8am-5pm"
-msgstr "Dydd Llun &ndash; Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn &ndash; Sul, 9yb &ndash; 5yp"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn a Sul, 9yb &ndash; 5yp"
+
+msgid "Monday - Friday, 8am - 8pm\nSaturday, 9am - 4pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn, 9yb &ndash; 4yp"
+
+msgid "Monday to Friday 8am - 8pm, Saturday 8am - 4pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn, 8yb &ndash; 4yp"
+
+msgid "Monday to Friday 9am - 7pm, Saturday 10am to 2pm."
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 7yh;<br />Dydd Sadwrn, 10yb &ndash; 2yp"
+
+msgid "Monday - Friday, 9am - 8pm\nSaturday, 10am - 2pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 8yh;<br />Dydd Sadwrn, 10yb &ndash; 2yp"
+
+msgid "Monday to Friday 9am-9pm, Saturday 9.30am-1pm"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 9yh;<br />Dydd Sadwrn, 9:30yb &ndash; 1yp"
+
+msgid "Monday-Friday, 8am-8pm\nSaturday, 9am-1pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn, 9yb &ndash; 1yp"
+
+msgid "Monday - Friday, 8am - 8pm\nSaturday, 9am - 1pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn, 9yb &ndash; 1yp"
 
 msgid "Monday - Friday, 8am-8pm\nSaturday, 9am-12pm"
-msgstr "Dydd Llun &ndash; Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn, 9yb &ndash; 12yp"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn, 9yb &ndash; 12yp"
 
 msgid "Monday - Friday, 9am-9pm\nSaturday, 9.30am-1pm"
-msgstr "Dydd Llun &ndash; Gwener, 9yb &ndash; 9yh;<br />Dydd Sadwrn, 9.30yb &ndash; 1yp"
+msgstr "Dydd Llun i ddydd Gwener, 9yb &ndash; 9yh;<br />Dydd Sadwrn, 9:30yb &ndash; 1yp"
+
+msgid "Monday to Friday 8am - 8pm, Saturday to Sunday 10am - 6pm"
+msgstr "Dydd Llun i ddydd Gwener, 8yb &ndash; 8yh;<br />Dydd Sadwrn a Sul, 10yb &ndash; 6yh"
 
 msgid "Mondays, 10am - 6pm\nTuesdays/Thursdays/Fridays, 10am - 4pm\nWednesdays, 10am-1pm and 5pm-7pm"
 msgstr "Dydd Llun, 10yb &ndash; 6yh;<br />Dydd Mawrth/Iau/Gwener, 10yb &ndash; 4yp;<br />Dydd Mercher, 10yb &ndash; 1yp a 5yp &ndash; 7yh"
 
-
+msgid "Monday, 10am-8pm\nTuesday, 10am-5pm , (1pm-5pm Tuesday is a trans-specific service)\nWednesday, 10am-5pm \nThursday, 10am - 8pm"
+msgstr "Dydd Llun, 10yb &ndash; 8yh;<br />Dydd Mawrth, 10yb &ndash; 5yp;<br />Dydd Mercher, 10yb &ndash; 5yp;<br />Dydd Iau, 10yb &ndash; 8yh"
 
 
 #~ msgid "Overall, how did you feel about the service you received today?"
