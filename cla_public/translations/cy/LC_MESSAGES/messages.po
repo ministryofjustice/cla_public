@@ -4553,6 +4553,12 @@ msgstr "Byddwn yn monitro hygyrchedd y gwasanaeth hwn yn barhaus ac yn datrys un
 msgid "This statement was prepared on %(day)s %(month)s %(year)s."
 msgstr "Cafodd y datganiad hwn ei baratoi ar %(day)s %(month)s %(year)s."
 
+#: fox-admin database opening hours
+msgid "Monday - Friday, 9am - 5pm."
+msgstr "Dydd Llun - Dydd Gwener, 9yb - 5yp."
+
+
+
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
