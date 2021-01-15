@@ -77,7 +77,7 @@
             {% if org.opening_hours %}
               <dl>
                 <dt>{{ _('Opening hours') }}:</dt>
-                <dd>{{ _(org.opening_hours | replace("\n","<br />")) }}</dd>
+                <dd>{{ _(org.opening_hours) | replace("\n","<br />") }}</dd>
               </dl>
             {% endif %}
             {% if org.email %}
