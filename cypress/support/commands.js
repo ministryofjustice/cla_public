@@ -45,3 +45,9 @@ Cypress.Commands.add('setSelectInput', (selector, value) => {
 Cypress.Commands.add('setRadioInput', selector => {
   cy.get(`#${selector}`).check();
 })
+
+Cypress.Commands.add('savePage', fileName => {
+  cy.url().then(url => {
+    cy.downloadFile(url, '/Users/mayowaaderohunmu-adeniyi/Documents/GovCode/cla_public/cypress/pages', `${fileName}.html`)
+  })
+})
