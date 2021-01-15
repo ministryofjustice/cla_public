@@ -48,6 +48,6 @@ Cypress.Commands.add('setRadioInput', selector => {
 
 Cypress.Commands.add('savePage', fileName => {
   cy.url().then(url => {
-    cy.downloadFile(url, '/Users/mayowaaderohunmu-adeniyi/Documents/GovCode/cla_public/cypress/pages', `${fileName}.html`)
+    cy.downloadFile(url, '~/project/cypress-pages/', `${fileName}.html`)
   })
 })
