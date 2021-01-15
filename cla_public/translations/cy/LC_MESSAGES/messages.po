@@ -4554,6 +4554,12 @@ msgid "This statement was prepared on %(day)s %(month)s %(year)s."
 msgstr "Cafodd y datganiad hwn ei baratoi ar %(day)s %(month)s %(year)s."
 
 #: fox-admin database opening hours
+msgid "24/7, every day of the year, including Christmas"
+msgstr "24 awr y dydd, 7 diwrnod yr wythnos"
+
+msgid "24 hours a day, 365 days a year"
+msgstr "24 awr y dydd, 7 diwrnod yr wythnos"
+
 msgid "9am - 5pm"
 msgstr "9yb &ndash; 5yp"
 
