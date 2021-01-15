@@ -116,13 +116,20 @@ jobs:
             source .circleci/define_build_environment_variables
             echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
       - run: 
-          name: Install and run webhint
+          name: Install and run Cypress
           command: | 
-            npm install --no-save hint
-            node node_modules/hint/dist/src/bin/hint.js https://$RELEASE_HOST/accessibility-statement
-
+            npm install cypress --save-dev
+            node node_modules/.bin/cypress run --spec "cypress/integration/happy-path.spec.js"
       - store_artifacts:
-          path: ~/project/hint-report/
+          path: ~/project/cypress-pages/
+      # - run: 
+      #     name: Install and run webhint
+      #     command: | 
+      #       npm install --no-save hint
+      #       node node_modules/hint/dist/src/bin/hint.js https://$RELEASE_HOST/accessibility-statement
+
+      # - store_artifacts:
+      #     path: ~/project/hint-report/
   test:
     docker:
       - image: circleci/python:2.7
