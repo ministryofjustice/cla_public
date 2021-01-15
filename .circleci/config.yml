@@ -120,9 +120,10 @@ jobs:
           command: | 
             npm install cypress --save-dev
             npm i cypress-downloadfile
+            mkdir ~/project/cypress/pages
             node node_modules/.bin/cypress run --spec "cypress/integration/happy-path.spec.js"
       - store_artifacts:
-          path: ~/project/cypress-pages/
+          path: ~/project/cypress/pages
       # - run: 
       #     name: Install and run webhint
       #     command: | 
