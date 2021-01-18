@@ -15,7 +15,7 @@ describe('Happy path testing', function() {
     cy.savePage('scope-outcome')
     cy.contains('Check if you qualify financially').click()
 
-    const someNumber = 3245;
+    const generalMonetaryValue = 3245;
 
     // About you form
     cy.contains('.govuk-heading-xl', 'About you')
@@ -52,11 +52,11 @@ describe('Happy path testing', function() {
     cy.contains('.govuk-heading-xl', 'Your property')
     cy.setYesNoRadioInput('properties-0-is_main_home', 'Yes')
     cy.setYesNoRadioInput('properties-0-other_shareholders', 'Yes')
-    cy.setTextInput('properties-0-property_value', someNumber)
-    cy.setTextInput('properties-0-mortgage_remaining', someNumber)
-    cy.setTextInput('properties-0-mortgage_payments', someNumber)
+    cy.setTextInput('properties-0-property_value', generalMonetaryValue)
+    cy.setTextInput('properties-0-mortgage_remaining', generalMonetaryValue)
+    cy.setTextInput('properties-0-mortgage_payments', generalMonetaryValue)
     cy.setYesNoRadioInput('properties-0-is_rented', 'Yes')
-    cy.setTextInput('properties-0-rent_amount-per_interval_value', someNumber)
+    cy.setTextInput('properties-0-rent_amount-per_interval_value', generalMonetaryValue)
     cy.setSelectInput('properties-0-rent_amount-interval_period', 'per_week')
     cy.setYesNoRadioInput('properties-0-in_dispute', 'Yes')
     cy.savePage('property-form')
@@ -64,8 +64,8 @@ describe('Happy path testing', function() {
 
     // Your savings form
     cy.contains('.govuk-heading-xl', 'Your savings')
-    cy.setTextInput('savings', someNumber)
-    cy.setTextInput('investments', someNumber)
+    cy.setTextInput('savings', generalMonetaryValue)
+    cy.setTextInput('investments', generalMonetaryValue)
     cy.savePage('savings-form')
     cy.get("#submit-button").click();
 
