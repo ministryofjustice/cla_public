@@ -3982,6 +3982,42 @@ msgid ""
 "      for other legal aid problems."
 msgstr "Os ydych yn gwneud cais am gymorth cyfreithiol ar gyfer problem iechyd meddwl, nid yw’r gofynion ar gyfer yr asesiad ariannol mor llym o’i gymharu â phroblemau cymorth cyfreithiol eraill."
 
+msgid "Parent or guardian"
+msgstr "Rhiant neu warcheidwad"
+
+msgid "Family member or friend"
+msgstr "Aelod o’ch teulu neu ffrind"
+
+msgid "Professional"
+msgstr "Gweithiwr proffesiynol"
+
+msgid "Legal adviser"
+msgstr "Cynghorydd cyfreithiol"
+
+msgid "Other"
+msgstr "Arall"
+
+msgid "Monday"
+msgstr "Dydd Llun"
+
+msgid "Tuesday"
+msgstr "Dydd Mawrth"
+
+msgid "Wednesday"
+msgstr "Dydd Mercher"
+
+msgid "Thursday"
+msgstr "Dydd Iau"
+
+msgid "Friday"
+msgstr "Dydd Gwener"
+
+msgid "Saturday"
+msgstr "Dydd Sadwrn"
+
+msgid "Sunday"
+msgstr "Dydd Sul"
+
 #: cla_public/templates/checker/result/ineligible.html:3
 msgid "Help organisations"
 msgstr ""
