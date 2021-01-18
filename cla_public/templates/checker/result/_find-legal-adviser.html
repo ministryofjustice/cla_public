@@ -265,7 +265,7 @@
         minZoom: 6,
         maxZoom: 19,
         style: style,
-        center: [ -2.968, 54.425 ],
+        center: [ {{ item.location.point.coordinates[0] }}, {{ item.location.point.coordinates[1] }} ],
         zoom: 13
     });
 
