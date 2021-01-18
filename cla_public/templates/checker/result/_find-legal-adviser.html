@@ -265,10 +265,9 @@
         minZoom: 6,
         maxZoom: 19,
         style: style,
-        center: [ {{ item.location.point.coordinates[0] }}, {{ item.location.point.coordinates[1] }} ],
+        center: [ -2.968, 54.425 ],
         zoom: 13
     });
-
     map.dragRotate.disable(); // Disable map rotation using right click + drag.
     map.touchZoomRotate.disableRotation(); // Disable map rotation using touch rotation gesture.
 
@@ -276,6 +275,36 @@
     map.addControl(new mapboxgl.NavigationControl({
         showCompass: false
     }));
+    map.on('load', function() {
+        map.addSource('geojson', {
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [ -0.09, 51.5 ]
+                        }
+                    }
+                ]
+            }
+        }
+        map.addLayer({
+          'id': 'point',
+          'type': 'circle',
+          'source': 'geojson',
+          'layout': {},
+          'paint': {
+              'circle-radius': 7,
+              'circle-color': '#38f',
+              'circle-stroke-color': '#fff',
+              'circle-stroke-width': 3
+          },
+          'filter': ['==', '$type', 'Point']
+      });
+    }
 
 </script>
 <script>
