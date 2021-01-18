@@ -5,6 +5,7 @@
   <h1 class="govuk-heading-xl">
     {{ _('Legal adviser search results') }}
   </h1>
+  <div id="map"></div>
   <p id="larp-results" class="govuk-body">
     {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
     <strong class="govuk-!-font-weight-bold">{{ data.origin.postcode }}</strong>
@@ -232,7 +233,51 @@
   </button>
 </form>
 
+<script src="https://labs.os.uk/public/os-api-branding/v0.2.0/os-api-branding.js"></script>
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+<script>
 
+    var apiKey = 'Iy2qAcy6zHSbjZvzVYETn9LNR99ehUNM';
+
+    var serviceUrl = 'https://api.os.uk/maps/raster/v1/zxy/Road_27700/{z}/{x}/{y}.png?key=Iy2qAcy6zHSbjZvzVYETn9LNR99ehUNM';
+
+    // Create a map style object using the ZXY service.
+    var style = {
+        "version": 8,
+        "sources": {
+            "raster-tiles": {
+                "type": "raster",
+                "tiles": [ serviceUrl + "/Light_3857/{z}/{x}/{y}.png?key=" + apiKey ],
+                "tileSize": 256,
+                "maxzoom": 20
+            }
+        },
+        "layers": [{
+            "id": "os-maps-zxy",
+            "type": "raster",
+            "source": "raster-tiles"
+        }]
+    };
+
+    // Initialize the map object.
+    var map = new mapboxgl.Map({
+        container: 'map',
+        minZoom: 6,
+        maxZoom: 19,
+        style: style,
+        center: [ -2.968, 54.425 ],
+        zoom: 13
+    });
+
+    map.dragRotate.disable(); // Disable map rotation using right click + drag.
+    map.touchZoomRotate.disableRotation(); // Disable map rotation using touch rotation gesture.
+
+    // Add navigation control (excluding compass button) to the map.
+    map.addControl(new mapboxgl.NavigationControl({
+        showCompass: false
+    }));
+
+</script>
 <script>
   window.LABELS = {
     loading: "{{ _('Loading…') }}"
