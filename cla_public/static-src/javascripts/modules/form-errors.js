@@ -64,7 +64,7 @@
           errorBanner.attr({'tabindex': -1}).focus();
         });
       }
-      if (data.non_field_errors.length) {
+      if (data.non_field_errors && data.non_field_errors.length) {
         $('#non-field-error-ajax .alert-message').text(data.non_field_errors[0]);
         $('#non-field-error-ajax').show();
       }

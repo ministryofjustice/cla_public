@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   slack: circleci/slack@3.4.2
+  puppeteer: threetreeslight/puppeteer@0.1.2
 
 jobs:
   build:
@@ -98,6 +99,36 @@ jobs:
           command: |
             source py3-lint-env/bin/activate
             black --check --diff cla_public
+  webhint:
+    docker:
+      - image: circleci/python:latest-node-browsers
+    steps:
+      # Add the necessary steps to deploy your website.
+      - checkout
+      - run: 
+          name: Delete existing javascript packages
+          command: | 
+            rm -rf node_modules package.json package-lock.json
+      - puppeteer/install
+      - run: 
+          name: Extract staging URL
+          command: | 
+            source .circleci/define_build_environment_variables
+            echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
+      - run: 
+          name: Install and run Cypress
+          command: | 
+            npm i cypress
+            npm i cypress-downloadfile
+            mkdir ~/project/cypress/pages
+            node node_modules/.bin/cypress run --spec "cypress/integration/happy-path.spec.js"
+      # - run: 
+      #     name: Install and run webhint
+      #     command: | 
+      #       npm install --no-save hint
+      #       node node_modules/hint/dist/src/bin/hint.js https://$RELEASE_HOST/accessibility-statement
+      # - store_artifacts:
+      #     path: ~/project/hint-report/
   test:
     docker:
       - image: circleci/python:2.7
@@ -271,6 +302,9 @@ workflows:
             branches:
               ignore:
                 - master
+      - webhint:
+          requires:
+            - staging_deploy
       - production_deploy_approval:
           type: approval
           requires:
