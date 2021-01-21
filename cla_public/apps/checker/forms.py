@@ -130,6 +130,7 @@ class AboutYouForm(BaseForm):
     )
     have_valuables = YesNoField(
         label=_(u"Do you have any valuable items worth over £500 each?"),
+        description=_(u"See below for examples of what to include"),
         validators=[InputRequired(message=_(u"Tell us if you have any valuable items worth over £500 each"))],
         yes_text=lazy_pgettext(u"There is/are", u"Yes"),
         no_text=lazy_pgettext(u"There is/are not", u"No"),
