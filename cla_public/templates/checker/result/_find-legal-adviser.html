@@ -275,6 +275,15 @@
     map.addControl(new mapboxgl.NavigationControl({
         showCompass: false
     }));
+
+  var marker1 = new mapboxgl.Marker({ color: '#38f' })
+    .setLngLat([ -0.09, 51.5 ])
+    .addTo(map);
+  var marker2 = new mapboxgl.Marker({ color: '#38f' })
+    .setLngLat([ -2.968, 54.425 ])
+    .addTo(map);
+
+/*
     map.on('load', function() {
         map.addSource('geojson', {
             'type': 'geojson',
@@ -312,7 +321,7 @@
           'filter': ['==', '$type', 'Point']
       });
     });
-
+*/
 </script>
 <script>
   window.LABELS = {
