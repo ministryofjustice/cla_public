@@ -321,8 +321,8 @@
         },
         'filter': ['==', '$type', 'Point']
       });
+        // Add click functionality
       var qryLayers = [ 'point'];
-      // Add click functionality
       map.on('click', function(e) {
           var bbox = [
               [ e.point.x - 5, e.point.y - 5 ],
@@ -336,8 +336,9 @@
 
           new mapboxgl.Popup()
               .setLngLat(e.lngLat)
-              .setHTML('I am a <b>' + features[0].layer.id + '</b> at <b>1' + features[0].source + '</b>.<b>2' + features[0].source.type + '</b>.<b>3' + features[0].source.data.features.geometry.coorginates + '</b>.')
+              .setHTML('I am a <b>' + features[0].layer.id + '</b> at <b>1' + features[0] + '</b>.')
               .addTo(map);
+          console.log(features[0]);
       });
       // Make cursor pointer on hover
       map.on('mousemove', function(e) {
