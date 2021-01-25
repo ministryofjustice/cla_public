@@ -237,8 +237,9 @@
 <script>
 
     var apiKey = 'Iy2qAcy6zHSbjZvzVYETn9LNR99ehUNM';
-
     var serviceUrl = 'https://api.os.uk/maps/raster/v1/zxy';
+    var mapLatitude = 54.425;
+    var mapLongitude = -2.968;
 
     // Create a map style object using the ZXY service.
     var style = {
@@ -264,7 +265,7 @@
         minZoom: 6,
         maxZoom: 19,
         style: style,
-        center: [ -2.968, 54.425 ],
+        center: [ mapLongitude, mapLatitude ],
         zoom: 13
     });
     map.dragRotate.disable(); // Disable map rotation using right click + drag.
