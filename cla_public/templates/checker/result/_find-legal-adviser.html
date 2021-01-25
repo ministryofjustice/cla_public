@@ -5,7 +5,7 @@
   <h1 class="govuk-heading-xl">
     {{ _('Legal adviser search results') }}
   </h1>
-  <div id="map"></div>
+  <div style="min-height:300px;" id="map"></div>
   <p id="larp-results" class="govuk-body">
     {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
     <strong class="govuk-!-font-weight-bold">{{ data.origin.postcode }}</strong>
@@ -336,9 +336,8 @@
 
           new mapboxgl.Popup()
               .setLngLat(e.lngLat)
-              .setHTML('I am a <b>' + features[0].layer.id + '</b> at <b>1' + features[0] + '</b>.')
+              .setHTML('I am a <b>' + features[0].layer.id + '</b>.')
               .addTo(map);
-          console.log(features[0]);
       });
       // Make cursor pointer on hover
       map.on('mousemove', function(e) {
