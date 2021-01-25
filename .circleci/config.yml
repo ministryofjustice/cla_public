@@ -122,13 +122,13 @@ jobs:
             npm i cypress-downloadfile
             mkdir ~/project/cypress/pages
             node node_modules/.bin/cypress run --spec "cypress/integration/happy-path.spec.js"
-      # - run: 
-      #     name: Install and run webhint
-      #     command: | 
-      #       npm install --no-save hint
-      #       node node_modules/hint/dist/src/bin/hint.js https://$RELEASE_HOST/accessibility-statement
-      # - store_artifacts:
-      #     path: ~/project/hint-report/
+      - run: 
+          name: Install and run webhint
+          command: | 
+            npm install --no-save hint
+            node node_modules/hint/dist/src/bin/hint.js cypress/pages/
+      - store_artifacts:
+          path: ~/project/hint-report/
   test:
     docker:
       - image: circleci/python:2.7
