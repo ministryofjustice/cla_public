@@ -3,6 +3,17 @@ var apiKey = 'Iy2qAcy6zHSbjZvzVYETn9LNR99ehUNM';
 var serviceUrl = 'https://api.os.uk/maps/raster/v1/zxy';
 var mapLatitude = $("#map").data('lat');
 var mapLongitude = $("#map").data('lon');
+var orgDataArray = [];
+$(".org-list-item").each(function(){
+  var orgEntry = {};
+  orgEntry["type"] = "Feature";
+  orgEntry["geometry"] = {
+                        "type': "Point",
+                        "coordinates": [ $(this).data("lon"), $(this).data("lat") ]
+                    };
+  orgDataArray.push(JSON.stringify(orgEntry));
+});
+var orgData = orgDataArray.join();
 
 // Create a map style object using the ZXY service.
 var style = {
@@ -53,20 +64,7 @@ var marker2 = new mapboxgl.Marker({ color: '#38f' })
         'data': {
             'type': 'FeatureCollection',
             'features': [
-                {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Point',
-                        'coordinates': [ -0.09, 51.5 ]
-                    }
-                },
-                {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Point',
-                        'coordinates': [ -2.968, 54.425 ]
-                    }
-                }
+                orgData
             ]
         }
     });
