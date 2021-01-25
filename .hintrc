@@ -9,7 +9,7 @@
         }
     },
     "extends": [
-        "web-recommended"
+        "development"
     ],
     "hints": {
         "axe/keyboard": ["error", [
