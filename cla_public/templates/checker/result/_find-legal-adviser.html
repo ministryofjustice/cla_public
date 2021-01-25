@@ -336,7 +336,7 @@
 
           new mapboxgl.Popup()
               .setLngLat(e.lngLat)
-              .setHTML('I am a <b>' + features[0].layer.id + '</b> at <b>' + features[0].source.coordinates + '</b>.')
+              .setHTML('I am a <b>' + features[0].layer.id + '</b> at <b>1' + features[0].source + '</b>.<b>2' + features[0].source.type + '</b>.<b>3' + features[0].source.data.features.geometry.coorginates + '</b>.')
               .addTo(map);
       });
       // Make cursor pointer on hover
