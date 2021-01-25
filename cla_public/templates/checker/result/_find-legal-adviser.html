@@ -238,8 +238,8 @@
 
     var apiKey = 'Iy2qAcy6zHSbjZvzVYETn9LNR99ehUNM';
     var serviceUrl = 'https://api.os.uk/maps/raster/v1/zxy';
-    var mapLatitude = 54.425;
-    var mapLongitude = -2.968;
+    var mapLatitude = $("#map").data('lat');
+    var mapLongitude = $("#map").data('lon');
 
     // Create a map style object using the ZXY service.
     var style = {
