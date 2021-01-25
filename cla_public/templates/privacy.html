@@ -137,8 +137,11 @@
   <h2 class="govuk-heading-m">{{ _('Details of transfers to third country and safeguards') }}</h2>
 
   <p class="govuk-body">
-    {% trans %}It may sometimes be necessary to transfer personal information overseas. When this is needed, information may be transferred to: the European Economic Area (<abbr>EEA</abbr>).{% endtrans %}
+    {% trans %}It may sometimes be necessary to transfer personal information overseas. When this is needed, information may be transferred to:{% endtrans %}
   </p> 
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{% trans %}the European Economic Area (<abbr>EEA</abbr>).{% endtrans %}</li>
+  </ul>
   <p class="govuk-body">
     {% trans %}Any transfers made will be in full compliance with all aspects of the data protection law.{% endtrans %}
   </p> 
