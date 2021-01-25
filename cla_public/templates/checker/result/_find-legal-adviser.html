@@ -5,7 +5,6 @@
   <h1 class="govuk-heading-xl">
     {{ _('Legal adviser search results') }}
   </h1>
-  <div style="min-height:300px;" id="map"></div>
   <p id="larp-results" class="govuk-body">
     {% trans count=data.results|length %}Showing {{ count }} results around{% endtrans %}
     <strong class="govuk-!-font-weight-bold">{{ data.origin.postcode }}</strong>
@@ -54,9 +53,9 @@
 
     <div class="search-results-container">
       {% if data.origin %}
-        <div id="resultsMap" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
+        <div id="map" class="map" data-lat="{{ data.origin.point.coordinates[1] }}" data-lon="{{ data.origin.point.coordinates[0] }}"></div>
       {% else %}
-        <div id="resultsMap" class="map"></div>
+        <div id="map" class="map"></div>
       {% endif %}
       <div class="search-results">
         <div class="search-results-list" data-current-page="{{ data.current_page }}">
