@@ -13,8 +13,7 @@ $(".org-list-item").each(function(){
                     };
   orgDataArray.push(JSON.stringify(orgEntry));
 });
-var orgData = orgDataArray.join();
-
+var orgData =    "{'type': 'Feature','geometry': {'type': 'Point','coordinates': [ -0.09, 51.5 ]}},{'type': 'Feature','geometry': {'type': 'Point','coordinates': [ -2.968, 54.425 ]}}";
 // Create a map style object using the ZXY service.
 var style = {
     "version": 8,
