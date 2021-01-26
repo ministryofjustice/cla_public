@@ -1,7 +1,7 @@
 describe('Happy path testing', function() {
   it('Should complete happy path successfully from scope diagnosis to confirmation page', function () {
 
-    cy.visit("https://lga-1509-test-happy-path-wit.staging.checklegalaid.service.gov.uk/start")
+    cy.visit(Cypress.env('UAT_URL'))
     
     cy.contains('Choose the area you most need help with')
     cy.savePage('homepage')
