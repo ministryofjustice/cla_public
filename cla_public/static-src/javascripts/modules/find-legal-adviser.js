@@ -4,6 +4,8 @@ var serviceUrl = 'https://api.os.uk/maps/raster/v1/zxy';
 var mapLatitude = $("#map").data('lat');
 var mapLongitude = $("#map").data('lon');
 var orgDataArray = [];
+/*
+In progress - dynamic list of points
 $(".org-list-item").each(function(){
   var orgEntry = {};
   orgEntry["type"] = "Feature";
@@ -14,7 +16,7 @@ $(".org-list-item").each(function(){
   orgDataArray.push(JSON.stringify(orgEntry));
 });
 var orgData = orgDataArray.join();
-
+*/
 // Create a map style object using the ZXY service.
 var style = {
     "version": 8,
@@ -64,23 +66,22 @@ var marker2 = new mapboxgl.Marker({ color: '#38f' })
         'type': 'geojson',
         'data': {
             'type': 'FeatureCollection',
-            "features":
-                [
-                    {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'Point',
-                            'coordinates': [ -0.09, 51.5 ]
-                        }
-                    },
-                    {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'Point',
-                            'coordinates': [ -2.968, 54.425 ]
-                        }
+            'features': [
+                {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [ -0.09, 51.5 ]
                     }
-                ]
+                },
+                {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [ -2.968, 54.425 ]
+                    }
+                }
+            ]
         }
     });
     // Add points to map
