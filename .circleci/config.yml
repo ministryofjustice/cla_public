@@ -121,7 +121,7 @@ jobs:
             npm i cypress
             npm i cypress-downloadfile
             mkdir ~/project/cypress/pages
-            node node_modules/.bin/cypress run --env UAT_URL=$RELEASE_HOST --spec "cypress/integration/happy-path.spec.js"
+            node node_modules/.bin/cypress run --env UAT_URL=https://$RELEASE_HOST/start --spec "cypress/integration/happy-path.spec.js"
       - run: 
           name: Install and run webhint
           command: | 
