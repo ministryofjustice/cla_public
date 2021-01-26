@@ -13,24 +13,8 @@ $(".org-list-item").each(function(){
                     };
   orgDataArray.push(JSON.stringify(orgEntry));
 });
-var orgData =  {"features":
-                  [
-                    {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'Point',
-                            'coordinates': [ -0.09, 51.5 ]
-                        }
-                    },
-                    {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'Point',
-                            'coordinates': [ -2.968, 54.425 ]
-                        }
-                    }
-                  ]
-                };
+var orgData = orgDataArray.join();
+
 // Create a map style object using the ZXY service.
 var style = {
     "version": 8,
@@ -67,7 +51,7 @@ map.addControl(new mapboxgl.NavigationControl({
 }));
 
 /*
-Method 2 test
+Method 2 (add markers)
 var marker1 = new mapboxgl.Marker({ color: '#38f' })
   .setLngLat([ -0.09, 51.5 ])
   .addTo(map);
@@ -80,7 +64,23 @@ var marker2 = new mapboxgl.Marker({ color: '#38f' })
         'type': 'geojson',
         'data': {
             'type': 'FeatureCollection',
-            orgData
+            "features":
+                [
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [ -0.09, 51.5 ]
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [ -2.968, 54.425 ]
+                        }
+                    }
+                ]
         }
     });
     // Add points to map
