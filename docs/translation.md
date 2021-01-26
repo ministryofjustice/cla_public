@@ -108,7 +108,7 @@ When updating the translation file, it is important to maintain the quality of t
 
 Ensure that both the English on the HTML page and the Welsh translations are of good quality.
 
-The content designer owns the content, so if you think there is poor wording or something should be rephrased, defer to him.  He will decide whether or not the Welsh needs to be redone - but often, if neither the meaning nor the emphasis of the sentence has changed, the Welsh will not need to be altered.  
+The content designer owns the content, so if you think there is poor wording or something should be rephrased, defer to them.  They will decide whether or not the Welsh needs to be redone - but often, if neither the meaning nor the emphasis of the sentence has changed, the Welsh will not need to be altered.  
 
 If you are writing in a different language (e.g. English in the Welsh translation), mark it accordingly with markup.
 
