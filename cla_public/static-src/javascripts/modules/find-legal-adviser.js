@@ -13,7 +13,7 @@ $(".org-list-item").each(function(){
                     };
   orgDataArray.push(JSON.stringify(orgEntry));
 });
-var orgData =  {"locations":
+var orgData =  {"features":
                   [
                     {
                         'type': 'Feature',
@@ -67,6 +67,7 @@ map.addControl(new mapboxgl.NavigationControl({
 }));
 
 /*
+Method 2 test
 var marker1 = new mapboxgl.Marker({ color: '#38f' })
   .setLngLat([ -0.09, 51.5 ])
   .addTo(map);
@@ -79,9 +80,7 @@ var marker2 = new mapboxgl.Marker({ color: '#38f' })
         'type': 'geojson',
         'data': {
             'type': 'FeatureCollection',
-            'features': [
-                orgData.locations
-            ]
+            orgData
         }
     });
     // Add points to map
