@@ -124,6 +124,7 @@ var marker2 = new mapboxgl.Marker({ color: '#38f' })
   });
 /**/
 
+//OLD 
 
 var wideScreen = 641;
  'use strict';
