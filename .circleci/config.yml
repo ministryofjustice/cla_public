@@ -124,13 +124,9 @@ jobs:
             node node_modules/.bin/cypress run --env UAT_URL=https://$RELEASE_HOST/start --spec "cypress/integration/happy-path.spec.js"
       - run: 
           name: Install and run webhint
-          # Move .hintrc into cypress/pages folder so webhint uses our custom webhint config
           command: | 
             npm install --no-save hint
-            cp .hintrc cypress/pages/
-            cd ./cypress/pages/
-            node ../../node_modules/hint/dist/src/bin/hint.js ./
-            mv hint-report ../..
+            node ~/project/node_modules/hint/dist/src/bin/hint.js cypress/pages/
       - store_artifacts:
           path: ~/project/hint-report/
   test:
