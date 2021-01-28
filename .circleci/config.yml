@@ -126,7 +126,9 @@ jobs:
           name: Install and run webhint
           command: | 
             npm install --no-save hint
-            node ~/project/node_modules/hint/dist/src/bin/hint.js cypress/pages/
+            for file in cypress/pages/*.html; do
+              node node_modules/hint/dist/src/bin/hint.js $filename
+            done
       - store_artifacts:
           path: ~/project/hint-report/
   test:
