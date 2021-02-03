@@ -1,15 +1,9 @@
 {
     "connector": {
-        "name": "puppeteer",
-        "options": {
-            "headless": true,
-            "puppeteerOptions": {
-                "args": ["--no-sandbox"]
-            }
-        }
+        "name": "local"
     },
     "extends": [
-        "web-recommended"
+        "development"
     ],
     "hints": {
         "axe/keyboard": ["error", [
