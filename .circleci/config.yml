@@ -124,8 +124,6 @@ jobs:
           command: | 
             mkdir ~/project/cypress/pages
             node node_modules/.bin/cypress run --env UAT_URL=https://$RELEASE_HOST/start --spec "cypress/integration/happy-path.spec.js"
-      - store_artifacts:
-          path: ~/project/hint-report/
   test:
     docker:
       - image: circleci/python:2.7
