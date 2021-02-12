@@ -13,5 +13,6 @@ module.exports = (on, config) => {
       console.error(message)
       return null;
     }
-  })
+  }),
+  require('cypress-log-to-output').install(on)
 }
