@@ -37,8 +37,6 @@ Cypress.Commands.add('runAccessibilityTest', () => {
 
 Cypress.Commands.add('checkAccessibility', () => {
   cy.runAccessibilityTest().then(results => {
-    if(results.violations.length > 0) {
-      cy.log(results.violations)
-    }
+    if(results.violations.length > 0) throw 'Accessibility issues found'
   })
 })

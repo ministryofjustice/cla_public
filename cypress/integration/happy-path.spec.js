@@ -1,6 +1,10 @@
 describe('Happy path testing', function() {
   it('Should complete happy path successfully from scope diagnosis to confirmation page', function () {
 
+    cy.on('fail', e => {
+      console.error(e)
+    })
+
     cy.visit(Cypress.env('UAT_URL'))
     
     cy.contains('Choose the area you most need help with')
