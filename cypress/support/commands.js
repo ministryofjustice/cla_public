@@ -1,6 +1,8 @@
 require('cypress-downloadfile/lib/downloadFileCommand')
 const axe = require('axe-core')
 
+Cypress.Commands.overwrite('log', (subject, message) => cy.task('log', message));
+
 Cypress.Commands.add('setYesNoRadioInput', (selector, value) => {
   const selectorValue = value === 'Yes' ? '0' : '1'
   cy.get(`#${selector}-${selectorValue}`).check();
@@ -36,7 +38,7 @@ Cypress.Commands.add('runAccessibilityTest', () => {
 Cypress.Commands.add('checkAccessibility', () => {
   cy.runAccessibilityTest().then(results => {
     if(results.violations.length > 0) {
-      cy.task('log', results.violations)
+      cy.log(results.violations)
     }
   })
 })
