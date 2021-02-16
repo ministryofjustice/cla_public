@@ -1,4 +1,7 @@
 require('cypress-downloadfile/lib/downloadFileCommand')
+const axe = require('axe-core')
+
+Cypress.Commands.overwrite('log', (subject, message) => cy.task('log', message));
 
 Cypress.Commands.add('setYesNoRadioInput', (selector, value) => {
   const selectorValue = value === 'Yes' ? '0' : '1'
@@ -23,5 +26,17 @@ Cypress.Commands.add('setRadioInput', selector => {
 Cypress.Commands.add('savePage', fileName => {
   cy.url().then(url => {
     cy.downloadFile(url, 'cypress/pages' , `${fileName}.html`)
+  })
+})
+
+Cypress.Commands.add('runAccessibilityTest', () => {
+  return axe.run({
+    runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
+  })
+})
+
+Cypress.Commands.add('checkAccessibility', () => {
+  cy.runAccessibilityTest().then(results => {
+    if(results.violations.length > 0) results.violations.forEach(violation => cy.task('log', violation))
   })
 })

@@ -1,17 +1,24 @@
 describe('Happy path testing', function() {
   it('Should complete happy path successfully from scope diagnosis to confirmation page', function () {
 
+    cy.on('fail', e => {
+      console.error(e)
+    })
+
     cy.visit(Cypress.env('UAT_URL'))
     
     cy.contains('Choose the area you most need help with')
+    cy.checkAccessibility()
     cy.savePage('homepage')
     cy.contains('Debt').click()
 
     cy.contains('Choose the option that best describes your debt problem')
+    cy.checkAccessibility()
     cy.savePage('debt-options')
     cy.get(':nth-child(1) > .cla-scope-options-list-item-link').click()
 
     cy.contains('Legal aid is available for this type of problem')
+    cy.checkAccessibility()
     cy.savePage('scope-outcome')
     cy.contains('Check if you qualify financially').click()
 
@@ -30,6 +37,7 @@ describe('Happy path testing', function() {
     cy.setYesNoRadioInput('aged_60_or_over', 'No')
     cy.setYesNoRadioInput('have_savings', 'Yes')
     cy.setYesNoRadioInput('have_valuables', 'No')
+    cy.checkAccessibility()
     cy.savePage('about-you-form')
     cy.get("#submit-button").click();
 
@@ -37,6 +45,7 @@ describe('Happy path testing', function() {
     cy.contains('.govuk-fieldset__heading', 'Which benefits do you receive?')
     cy.setCheckboxInput('benefits-5')
     cy.setCheckboxInput('benefits-6')
+    cy.checkAccessibility()
     cy.savePage('which-benefits-do-you-receive-form')
     cy.get("#submit-button").click();
 
@@ -45,6 +54,7 @@ describe('Happy path testing', function() {
     cy.setCheckboxInput('benefits-6')
     cy.setCheckboxInput('benefits-10')
     cy.setYesNoRadioInput('other_benefits', 'No')
+    cy.checkAccessibility()
     cy.savePage('additional-benefits-form')
     cy.get("#submit-button").click();
 
@@ -59,6 +69,7 @@ describe('Happy path testing', function() {
     cy.setTextInput('properties-0-rent_amount-per_interval_value', generalMonetaryValue)
     cy.setSelectInput('properties-0-rent_amount-interval_period', 'per_week')
     cy.setYesNoRadioInput('properties-0-in_dispute', 'Yes')
+    cy.checkAccessibility()
     cy.savePage('property-form')
     cy.get("#submit-button").click();
 
@@ -66,11 +77,13 @@ describe('Happy path testing', function() {
     cy.contains('.govuk-heading-xl', 'Your savings')
     cy.setTextInput('savings', generalMonetaryValue)
     cy.setTextInput('investments', generalMonetaryValue)
+    cy.checkAccessibility()
     cy.savePage('savings-form')
     cy.get("#submit-button").click();
 
     // Review your answers page
     cy.contains('.govuk-heading-xl', 'Review your answers')
+    cy.checkAccessibility()
     cy.savePage('review-page')
     cy.get("#submit-button").click();
 
@@ -80,12 +93,14 @@ describe('Happy path testing', function() {
     cy.setRadioInput('contact_type-1')
     cy.setTextInput('callback-contact_number', '11111111111')
     cy.setRadioInput('callback-time-specific_day-1')
+    cy.checkAccessibility()
     cy.savePage('contact-CLA')
     cy.get("#submit-button").click();
 
     // Result confirmation page
     cy.contains('We will call you back')
     cy.contains('Receive this confirmation by email')
+    cy.checkAccessibility()
     cy.savePage('confirmation-page')
   });
 })
