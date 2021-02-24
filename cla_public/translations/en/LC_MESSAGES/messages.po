@@ -4257,5 +4257,6 @@ msgstr ""
 #~ "      "
 #~ msgstr ""
 
+#: cla_public/templates/checker/savings.html:9
 #~ msgid "What payments do not count as savings?"
 #~ msgstr ""
