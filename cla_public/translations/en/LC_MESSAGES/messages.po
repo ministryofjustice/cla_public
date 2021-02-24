@@ -4257,3 +4257,5 @@ msgstr ""
 #~ "      "
 #~ msgstr ""
 
+#~ msgid "What payments do not count as savings?"
+#~ msgstr ""
