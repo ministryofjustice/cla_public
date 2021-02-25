@@ -5057,6 +5057,14 @@ msgstr "Dydd Llun, 10yb &ndash; 8yh;<br />Dydd Mawrth, 10yb &ndash; 5yp;<br />Dy
 #~ msgid "Go back and change answer"
 #~ msgstr "Mynd yn ôl i newid ateb"
 
-#: cla_public/templates/checker/savings.html:24
-#~ msgid "What payments do not count as savings?"
-#~ msgstr "Pa daliadau nad ydynt yn cyfrif fel cynilion?"
+msgid "What payments do not count as savings?"
+msgstr "Pa daliadau nad ydynt yn cyfrif fel cynilion?"
+
+msgid "Do not include monies received from the following schemes"
+msgstr "Peidiwch â chynnwys arian a geir o'r cynlluniau canlynol"
+
+msgid "National Emergencies Trust"
+msgstr "Ymddiriedolaeth Argyfyngau Cenedlaethol"
+
+msgid "We Love Manchester Emergency Fund"
+msgstr "Cronfa Argyfwng We Love Manchester"
