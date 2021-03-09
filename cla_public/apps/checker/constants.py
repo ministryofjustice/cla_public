@@ -72,6 +72,38 @@ CATEGORIES = [
     ("other", _(u"Any other problem"), ""),
 ]
 
+# Mapping LAALAA category codes to CLA category codes
+LAALAA_PROVIDER_CATEGORIES_MAP = {
+    "aap": ["aap"],
+    "clinneg": ["med"],
+    "commcare": ["com"],
+    "debt": ["deb"],
+    "discrimination": ["disc"],
+    "education": ["edu"],
+    "family": ["mat", "fmed"],
+    "housing": ["hou"],
+    "immigration": ["immas"],
+    "mentalhealth": ["mhe"],
+    "publiclaw": ["pub"],
+    "benefits": ["wb"],
+    "other": ["other"],
+}
+# adds another to the above - see get_category_for_larp
+LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": ["mosl"]})
+
+"Categories that will result in the Face-to-Face route"
+F2F_CATEGORIES = (
+    "clinneg",
+    "commcare",
+    "immigration",
+    "mentalhealth",
+    "pi",
+    "publiclaw",
+    "aap",
+    "employment",
+    "other",
+)
+
 "Outcomes of the checker"
 RESULT_OPTIONS = [
     ("eligible", _(u"Eligible")),
@@ -123,18 +155,6 @@ NON_INCOME_BENEFITS = [
     ("war-pension", _(u"War Pension")),
 ]
 
-F2F_CATEGORIES = (
-    "clinneg",
-    "commcare",
-    "immigration",
-    "mentalhealth",
-    "pi",
-    "publiclaw",
-    "aap",
-    "employment",
-    "other",
-)
-
 "Dont go to callback page for these cats"
 NO_CALLBACK_CATEGORIES = ("benefits",)
 
@@ -158,25 +178,6 @@ CONTACT_PREFERENCE = Choices(
 )
 
 LEGAL_ADVISER_SEARCH_PREFERENCE = (("location", _(u"Location")), ("organisation", _(u"Organisation")))
-
-LAALAA_PROVIDER_CATEGORIES_MAP = {
-    "aap": ["aap"],
-    "clinneg": ["med"],
-    "commcare": ["com"],
-    "debt": ["deb"],
-    "discrimination": ["disc"],
-    "education": ["edu"],
-    "family": ["mat", "fmed"],
-    "housing": ["hou"],
-    "immigration": ["immas"],
-    "mentalhealth": ["mhe"],
-    "publiclaw": ["pub"],
-    "benefits": ["wb"],
-    "other": ["other"],
-}
-
-# adds another to the above - see get_category_for_larp
-LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": ["mosl"]})
 
 END_SERVICE_FLASH_MESSAGE = _(
     u"The information you’ve entered has not been stored on your computer or "
