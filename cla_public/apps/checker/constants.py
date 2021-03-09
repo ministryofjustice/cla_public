@@ -2,7 +2,7 @@
 from flask.ext.babel import lazy_gettext as _
 from extended_choices import Choices
 
-"Categories the user needs help with"
+# Categories the user needs help with
 CATEGORIES = [
     # value, label, inline help text
     (
@@ -91,7 +91,7 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
 # adds another to the above - see get_category_for_larp
 LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": ["mosl"]})
 
-"Categories that will result in the Face-to-Face route"
+# Categories that will result in the Face-to-Face route
 F2F_CATEGORIES = (
     "clinneg",
     "commcare",
@@ -104,14 +104,14 @@ F2F_CATEGORIES = (
     "other",
 )
 
-"Outcomes of the checker"
+# Outcomes of the checker
 RESULT_OPTIONS = [
     ("eligible", _(u"Eligible")),
     ("face-to-face", _(u"Face-to-face")),
     ("confirmation", _(u"Confirmation")),
 ]
 
-"Benefits"
+# Benefits
 BENEFITS_CHOICES = [
     ("child_benefit", _(u"Child Benefit")),
     ("pension_credit", _(u"Guarantee Credit")),
@@ -155,7 +155,7 @@ NON_INCOME_BENEFITS = [
     ("war-pension", _(u"War Pension")),
 ]
 
-"Dont go to callback page for these cats"
+# Dont go to callback page for these cats
 NO_CALLBACK_CATEGORIES = ("benefits",)
 
 YES = "1"
