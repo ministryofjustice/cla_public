@@ -75,7 +75,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
     def get_category_for_larp(self, session):
         categories_list = ["n88", "n149"]
         if check_categories(session, categories_list):
-            return "traffickingslavery"
+            return "traffickingandslavery"
         return session.checker.category
 
 

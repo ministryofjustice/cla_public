@@ -70,6 +70,7 @@ CATEGORIES = [
         ),
     ),
     ("other", _(u"Any other problem"), ""),
+    ("traffickingandslavery", _(u"Modern slavery"), ""),
 ]
 
 # Mapping LAALAA category codes to CLA category codes
@@ -88,8 +89,12 @@ LAALAA_PROVIDER_CATEGORIES_MAP = {
     "benefits": ["wb"],
     "other": ["other"],
 }
-# adds another to the above - see get_category_for_larp
-LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingslavery": ["mosl"]})
+"""
+Add pseudo traffickingandslavery category code to map to the 'mosl' LAALAA category.
+Human trafficking and modern slavery are both lumped into modern slavery.
+traffickingandslavery is defined in cla_public.apps.scope.views.ScopeDiagnosis.get_category_for_larp
+"""
+LAALAA_PROVIDER_CATEGORIES_MAP.update({"traffickingandslavery": ["mosl"]})
 
 # Categories that will result in the Face-to-Face route
 F2F_CATEGORIES = (
