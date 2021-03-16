@@ -150,7 +150,6 @@ class ReviewStep(CheckerStep):
         return len(steps) + 1
 
     def render(self, *args, **kwargs):
-        steps = CheckerWizard("").relevant_steps[:-1]
         review_steps = CheckerWizard("").review_steps
         current_step = self
         return render_template(
