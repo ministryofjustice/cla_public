@@ -154,7 +154,7 @@ class ReviewStep(CheckerStep):
         review_steps = CheckerWizard("").review_steps
         current_step = self
         return render_template(
-            self.template, steps=steps, review_steps=review_steps, current_step=current_step, form=self.form
+            self.template, steps=review_steps, review_steps=review_steps, current_step=current_step, form=self.form
         )
 
 
