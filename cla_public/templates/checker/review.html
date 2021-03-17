@@ -29,7 +29,7 @@
       </dl>
     {% endif %}
 
-    {% for step in steps %}
+    {% for step in review_steps %}
       {% set answers = step.completed_fields() %}
       {% set multiple_answers = step.name in ['property', 'income'] or answers|length > 1 %}
       {% set property_or_income = step.name in ['property', 'income'] %}
