@@ -5,6 +5,8 @@
 image:
   pullPolicy: IfNotPresent
 
+environment: production
+
 replicaCount: 2
 
 ingress:
