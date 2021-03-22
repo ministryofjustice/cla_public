@@ -62,6 +62,10 @@ Create the name of the service account to use
 {{- end -}}
 {{- end -}}
 
+{{/*
+Takes our environment variables set in the values file, and arranges them
+in an appropriate format
+*/}}
 {{- define "cla-public.app.vars" -}}
 {{- $environment := .Values.environment -}}
 - name: ALLOWED_HOSTS
