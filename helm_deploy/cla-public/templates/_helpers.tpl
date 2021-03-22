@@ -61,3 +61,37 @@ Create the name of the service account to use
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{- define "cla-public.app.vars" -}}
+{{- $environment := .Values.environment -}}
+- name: ALLOWED_HOSTS
+  value: "{{ .Values.host }}"
+- name:  CLA_ENV
+  value: "{{ $environment }}"
+{{ range $name, $data := .Values.envVars }}
+- name: {{ $name }}
+{{- if $data.value }}
+  value: "{{ $data.value }}"
+{{- else if $data.secret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ $data.secret.name }}
+      key: {{ $data.secret.key }}
+      {{- if eq $environment "development" }}
+      optional: true
+      {{- else }}
+      optional: {{ $data.secret.optional | default false }}
+      {{- end }}
+{{- else if $data.configmap }}
+  valueFrom:
+    configMapKeyReg:
+      name: {{ $data.configmap.name }}
+      key: {{ $data.configmap.key }}
+      {{- if eq $environment "development" }}
+      optional: true
+      {{- else }}
+      optional: {{ $data.secret.optional | default false }}
+      {{- end }}
+{{- end -}}
+{{- end -}}
+{{- end -}}

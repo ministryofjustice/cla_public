@@ -12,9 +12,6 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-logLevel: INFO
-useDevValues: false
-
 service:
   type: ClusterIP
   port: 80
@@ -37,6 +34,43 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-maintenanceMode: false
+envVars:
+  MAINTENANCE_MODE:
+    value: "False"
+  SECRET_KEY:
+    secret:
+      name: flask-secret-key
+      key: SECRET_KEY
+  OS_PLACES_API_KEY:
+    secret:
+      name: os-places
+      key: apiKey
+  ZENDESK_API_TOKEN:
+    secret:
+      name: zendesk-api
+      key: ZENDESK_API_TOKEN
+  ZENDESK_API_USERNAME:
+    secret:
+      name: zendesk-api
+      key: ZENDESK_API_USERNAME
+  SMTP_HOST:
+    secret:
+      name: smtp-sendgrid
+      key: SMTP_HOST
+  SMTP_USER:
+    secret:
+      name: smtp-sendgrid
+      key: SMTP_USER
+  SMTP_PASSWORD:
+    secret:
+      name: smtp-sendgrid
+      key: SMTP_PASSWORD
+  SENTRY_DSN:
+    secret:
+      name: sentry
+      key: DSN
+  EMERGENCY_MESSAGE_ON:
+    configmap:
+      name: emergency-message
+      key: message-on
 
-envVars: []
