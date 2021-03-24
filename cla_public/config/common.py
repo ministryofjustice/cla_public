@@ -105,6 +105,8 @@ MAIL_DEFAULT_SENDER = ("Civil Legal Advice", "no-reply@civillegaladvice.service.
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 MAINTENANCE_MODE = os.environ.get("MAINTENANCE_MODE", "False").upper() == "TRUE"
 
+SMART_SURVEY_CID = os.environ.get("SMART_SURVEY_CID", "")
+
 
 def current_app_cache_factory(*args, **kwargs):
     from flask import current_app  # noqa: E402
