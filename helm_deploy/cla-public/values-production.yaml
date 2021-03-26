@@ -28,3 +28,5 @@ envVars:
     value: "pXnyHhiNQwB3LpZ4-zTZYg"
   - name: MOJ_GTM_PREVIEW
     value: "env-1"
+  - name: SMART_SURVEY_CID
+    value: ""
