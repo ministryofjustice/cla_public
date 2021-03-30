@@ -4785,6 +4785,44 @@ msgstr "Ymddiriedolaeth Argyfyngau Cenedlaethol"
 msgid "We Love Manchester Emergency Fund"
 msgstr "Cronfa Argyfwng We Love Manchester"
 
+msgid "This accessibility statement applies to"
+msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â"
+
+msgid "Feedback and contact information"
+msgstr "Adborth a gwybodaeth gyswllt"
+
+msgid "Compliance status"
+msgstr "Statws cydymffurfio"
+
+msgid "Time-out"
+msgstr "Terfyn amser"
+
+msgid "We are experiencing intermittent problems with the time-out feature where users are unexpectedly timed-out without the time-out warning appearing. We are currently investigating the source of this issue."
+msgstr "Rydym yn cael problemau ysbeidiol gyda'r nodwedd terfyn amser, lle bydd amser defnyddwyr yn dod i ben yn annisgwyl heb i'r rhybudd terfyn amser ymddangos. Rydym yn ymchwilio i'r broblem hon ar hyn o bryd."
+
+msgid "The ‘Hide this page’ button does not accurately describe the link destination. This fails WCAG 2.1 1.3.1 A (Info and relationships) and 2.4.6 AA (Headings and Labels)."
+msgstr "Nid yw'r botwm ‘Cuddio'r dudalen hon’ yn disgrifio cyrchfan y ddolen yn gywir. Mae hyn yn methu WCAG 2.1 1.3.1 A (Gwybodaeth a pherthnasoedd) a 2.4.6 AA (Penawdau a Labeli)."
+
+msgid "We understand that ‘Hide this page’ does not describe the link destination. We have purposely designed the feature to protect vulnerable users and provide a quick exit from the service rather than take users to a specific destination."
+msgstr "Rydym yn deall nad yw ‘Cuddio'r dudalen hon’ yn disgrifio cyrchfan y ddolen. Rydym wedi dylunio'r nodwedd yn fwriadol i ddiogelu defnyddwyr agored i niwed, a'u galluogi i adael y gwasanaeth yn gyflym yn hytrach nag arwain defnyddwyr i gyrchfan penodol."
+
+msgid "We are working to fix the time-out issue listed in this statement."
+msgstr "Rydym yn gweithio i ddatrys y broblem terfyn amser a restrir yn y datganiad hwn."
+
+msgid "Preparation of this accessibility statement"
+msgstr "Paratoi'r datganiad hygyrchedd hwn"
+
+msgid "It was last reviewed on 30 November 2020."
+msgstr "Fe’i adolygwyd ddiwethaf ar 30 Tachwedd 2020."
+
+msgid "This service was tested on 22 July 2020 and issues were re-tested on 23 October 2020. The tests were carried out by the Digital Accessibility Centre (DAC)."
+msgstr "Profwyd y gwasanaeth hwn ar 22 Gorffennaf 2020 ac ailbrofwyd y materion a oedd angen sylw ar 23 Hydref 2020. Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (DAC)."
+
+msgid "The DAC tested core journeys, key functionality and interactive features that reflect the content that the average user may encounter."
+msgstr "Aeth y DAC ati i brofi teithiau craidd, swyddogaeth allweddol a nodweddion rhyngweithiol sy'n adlewyrchu'r cynnwys y gall y defnyddiwr cyffredin ddod ar eu traws."
+
+msgid "The DAC tested the service available at"
+msgstr "Mae'r DAC wedi profi'r gwasanaeth sydd ar gael yn"
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
