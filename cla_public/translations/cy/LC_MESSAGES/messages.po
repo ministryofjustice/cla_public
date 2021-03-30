@@ -4785,8 +4785,8 @@ msgstr "Ymddiriedolaeth Argyfyngau Cenedlaethol"
 msgid "We Love Manchester Emergency Fund"
 msgstr "Cronfa Argyfwng We Love Manchester"
 
-msgid "This accessibility statement applies to"
-msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â"
+msgid "This accessibility statement applies to https://checklegalaid.service.gov.uk/. The Legal Aid Agency (LAA) is responsible for the Civil Legal Advice (CLA) service."
+msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â https://checklegalaid.service.gov.uk/. Yr Asiantaeth Cymorth Cyfreithiol (LAA) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (CLA)."
 
 msgid "Feedback and contact information"
 msgstr "Adborth a gwybodaeth gyswllt"
@@ -4812,8 +4812,8 @@ msgstr "Rydym yn gweithio i ddatrys y broblem terfyn amser a restrir yn y datgan
 msgid "Preparation of this accessibility statement"
 msgstr "Paratoi'r datganiad hygyrchedd hwn"
 
-msgid "It was last reviewed on 30 November 2020."
-msgstr "Fe’i adolygwyd ddiwethaf ar 30 Tachwedd 2020."
+msgid "This statement was prepared on 17 September 2020. It was last reviewed on 30 November 2020."
+msgstr "Paratowyd y datganiad hwn ar 17 Medi 2020. Fe’i adolygwyd ddiwethaf ar 30 Tachwedd 2020."
 
 msgid "This service was tested on 22 July 2020 and issues were re-tested on 23 October 2020. The tests were carried out by the Digital Accessibility Centre (DAC)."
 msgstr "Profwyd y gwasanaeth hwn ar 22 Gorffennaf 2020 ac ailbrofwyd y materion a oedd angen sylw ar 23 Hydref 2020. Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (DAC)."
@@ -4821,8 +4821,8 @@ msgstr "Profwyd y gwasanaeth hwn ar 22 Gorffennaf 2020 ac ailbrofwyd y materion 
 msgid "The DAC tested core journeys, key functionality and interactive features that reflect the content that the average user may encounter."
 msgstr "Aeth y DAC ati i brofi teithiau craidd, swyddogaeth allweddol a nodweddion rhyngweithiol sy'n adlewyrchu'r cynnwys y gall y defnyddiwr cyffredin ddod ar eu traws."
 
-msgid "The DAC tested the service available at"
-msgstr "Mae'r DAC wedi profi'r gwasanaeth sydd ar gael yn"
+msgid "The DAC tested the service available at https://checklegalaid.service.gov.uk/."
+msgstr "Mae'r DAC wedi profi'r gwasanaeth sydd ar gael yn https://checklegalaid.service.gov.uk/."
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
