@@ -4585,10 +4585,6 @@ msgstr "Rydyn ni’n gweithio i ddatrys y materion a restrir yn y datganiad hwn 
 msgid "We will monitor the accessibility of this service on an ongoing basis and fix any accessibility issues reported to us."
 msgstr "Byddwn yn monitro hygyrchedd y gwasanaeth hwn yn barhaus ac yn datrys unrhyw broblemau hygyrchedd y rhoddir gwybod i ni amdanyn nhw."
 
-#: cla_public/templates/accessibility-statement.html:1
-msgid "This statement was prepared on %(day)s %(month)s %(year)s."
-msgstr "Cafodd y datganiad hwn ei baratoi ar %(day)s %(month)s %(year)s."
-
 #: fox-admin database opening hours
 msgid "24/7, every day of the year, including Christmas"
 msgstr "24 awr y dydd, 7 diwrnod yr wythnos"
