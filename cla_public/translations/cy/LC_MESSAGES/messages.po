@@ -4442,8 +4442,8 @@ msgid "Using this service"
 msgstr "Defnyddio’r gwasanaeth hwn"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service."
-msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr>CLA</abbr>)."
+msgid "This accessibility statement applies to https://checklegalaid.service.gov.uk/. The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service."
+msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â https://checklegalaid.service.gov.uk/. Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr>CLA</abbr>)."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "We want as many people as possible to be able to use this service. For example, that means you should be able to:"
@@ -4780,9 +4780,6 @@ msgstr "Ymddiriedolaeth Argyfyngau Cenedlaethol"
 
 msgid "We Love Manchester Emergency Fund"
 msgstr "Cronfa Argyfwng We Love Manchester"
-
-msgid "This accessibility statement applies to https://checklegalaid.service.gov.uk/. The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service."
-msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â https://checklegalaid.service.gov.uk/. Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr>CLA</abbr>)."
 
 msgid "Feedback and contact information"
 msgstr "Adborth a gwybodaeth gyswllt"
