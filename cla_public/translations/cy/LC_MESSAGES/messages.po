@@ -4782,7 +4782,7 @@ msgid "We Love Manchester Emergency Fund"
 msgstr "Cronfa Argyfwng We Love Manchester"
 
 msgid "This accessibility statement applies to <a class="govuk-link" href="https://checklegalaid.service.gov.uk/">https://checklegalaid.service.gov.uk/</a>."
-msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â <a class="govuk-link" href="https://www.gov.uk/gwirio-os-ydych-yn-gymwys-i-gael-cymorth-cyfreithiol</a>."
+msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â <a class="govuk-link" href="https://checklegalaid.service.gov.uk/">https://checklegalaid.service.gov.uk/</a>."
 
 msgid "Feedback and contact information"
 msgstr "Adborth a gwybodaeth gyswllt"
@@ -4809,16 +4809,16 @@ msgid "Preparation of this accessibility statement"
 msgstr "Paratoi'r datganiad hygyrchedd hwn"
 
 msgid "This statement was prepared on {{ day }} {{ month }} {{ year }}."
-msgstr "Paratowyd y datganiad hwn ar 17 Medi 2020."
+msgstr "Paratowyd y datganiad hwn ar {{ day }} {{ month }} {{ year }}."
 
 msgid "It was last reviewed on {{ day }} {{ month }} {{ year }}."
-msgstr "Fe’i adolygwyd ddiwethaf ar 30 Tachwedd 2020."
+msgstr "Fe’i adolygwyd ddiwethaf ar {{ day }} {{ month }} {{ year }}."
 
 msgid "This service was tested on {{ day1 }} {{ month1 }} {{ year1 }} and issues were re-tested on {{ day2 }} {{ month2 }} {{ year2 }}."
-msgstr "Profwyd y gwasanaeth hwn ar 22 Gorffennaf 2020 ac ailbrofwyd y materion a oedd angen sylw ar 23 Hydref 2020."
+msgstr "Profwyd y gwasanaeth hwn ar {{ day1 }} {{ month1 }} {{ year1 }} ac ailbrofwyd y materion a oedd angen sylw ar {{ day2 }} {{ month2 }} {{ year2 }}."
 
 msgid "The tests were carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
-msgstr "Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (DAC)."
+msgstr "Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>)."
 
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested core journeys, key functionality and interactive features that reflect the content that the average user may encounter."
 msgstr "Aeth y DAC ati i brofi teithiau craidd, swyddogaeth allweddol a nodweddion rhyngweithiol sy'n adlewyrchu'r cynnwys y gall y defnyddiwr cyffredin ddod ar eu traws."
