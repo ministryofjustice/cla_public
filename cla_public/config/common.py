@@ -8,6 +8,9 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 DEBUG = False
 
+# Sets whether the emergency message displays on the contact page or not
+EMERGENCY_MESSAGE_ON = os.environ.get("EMERGENCY_MESSAGE_ON", "False") == "True"
+
 TESTING = False
 
 CLEAR_SESSION = True
