@@ -102,6 +102,8 @@
 {% block javascripts %}
   <script>
 
+    window.SMART_SURVEY_CID = "{{ config.SMART_SURVEY_CID }}";
+
     {% if zeroOptions %}
       // this is set in diagnosis.html
       $( document ).ready(function(){

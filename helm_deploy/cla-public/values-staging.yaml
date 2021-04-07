@@ -33,3 +33,5 @@ envVars:
     value: "INFO"
   DEBUG:
     value: "False"
+  SMART_SURVEY_CID:
+    value: "1139766"
