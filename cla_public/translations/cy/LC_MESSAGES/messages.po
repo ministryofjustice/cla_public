@@ -4442,8 +4442,8 @@ msgid "Using this service"
 msgstr "Defnyddio’r gwasanaeth hwn"
 
 #: cla_public/templates/accessibility-statement.html:1
-msgid "This accessibility statement applies to https://checklegalaid.service.gov.uk/. The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service."
-msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â https://checklegalaid.service.gov.uk/. Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy’n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr>CLA</abbr>)."
+msgid "The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service."
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy'n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr>CLA</abbr>)."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "We want as many people as possible to be able to use this service. For example, that means you should be able to:"
@@ -4555,7 +4555,7 @@ msgstr "Medi"
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "November"
-msgstr "/ 11 /"
+msgstr "Tachwedd"
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "December"
@@ -4571,7 +4571,7 @@ msgstr "Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>).
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested the service available at <a class='govuk-link' href='https://checklegalaid.service.gov.uk/'>https://checklegalaid.service.gov.uk/</a>."
-msgstr "Profodd y <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr> y gwasanaeth sydd ar gael yn <a class='govuk-link' href='https://www.gov.uk/gwirio-os-ydych-yn-gymwys-i-gael-cymorth-cyfreithiol'>https://checklegalaid.service.gov.uk/</a>."
+msgstr "Mae'r <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr> wedi profi'r gwasanaeth sydd ar gael yn <a class='govuk-link' href='https://www.gov.uk/gwirio-os-ydych-yn-gymwys-i-gael-cymorth-cyfreithiol'>https://checklegalaid.service.gov.uk/</a>."
 
 #: cla_public/templates/accessibility-statement.html:1
 msgid "What we’re doing to improve accessibility"
@@ -4784,6 +4784,9 @@ msgstr "Cronfa Argyfwng We Love Manchester"
 msgid "This accessibility statement applies to <a class="govuk-link" href="https://checklegalaid.service.gov.uk/">https://checklegalaid.service.gov.uk/</a>."
 msgstr "Mae'r datganiad hygyrchedd hwn yn ymwneud â <a class="govuk-link" href="https://checklegalaid.service.gov.uk/">https://checklegalaid.service.gov.uk/</a>."
 
+msgid "The Legal Aid Agency (<abbr>LAA</abbr>) is responsible for the Civil Legal Advice (<abbr>CLA</abbr>) service."
+msgstr "Yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) sy'n gyfrifol am y gwasanaeth Cyngor Cyfreithiol Sifil (<abbr>CLA</abbr>)."
+
 msgid "Feedback and contact information"
 msgstr "Adborth a gwybodaeth gyswllt"
 
@@ -4814,7 +4817,7 @@ msgstr "Paratowyd y datganiad hwn ar %(day)s %(month)s %(year)s."
 msgid "It was last reviewed on %(day)s %(month)s %(year)s."
 msgstr "Fe’i adolygwyd ddiwethaf ar %(day)s %(month)s %(year)s."
 
-msgid "This service was tested on {%(day)s %(month)s %(year)s and issues were re-tested on %(day)s %(month)s %(year)s."
+msgid "This service was tested on %(day)s %(month)s %(year)s and issues were re-tested on %(day)s %(month)s %(year)s."
 msgstr "Profwyd y gwasanaeth hwn ar %(day)s %(month)s %(year)s ac ailbrofwyd y materion a oedd angen sylw ar %(day)s %(month)s %(year)s."
 
 msgid "The tests were carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
@@ -4822,9 +4825,6 @@ msgstr "Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>
 
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested core journeys, key functionality and interactive features that reflect the content that the average user may encounter."
 msgstr "Aeth y DAC ati i brofi teithiau craidd, swyddogaeth allweddol a nodweddion rhyngweithiol sy'n adlewyrchu'r cynnwys y gall y defnyddiwr cyffredin ddod ar eu traws."
-
-msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested the service available at <a class='govuk-link' href='https://checklegalaid.service.gov.uk/'>https://checklegalaid.service.gov.uk/</a>."
-msgstr "Mae'r DAC wedi profi'r gwasanaeth sydd ar gael yn <a class='govuk-link' href='https://checklegalaid.service.gov.uk/'>https://checklegalaid.service.gov.uk/</a>.."
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
