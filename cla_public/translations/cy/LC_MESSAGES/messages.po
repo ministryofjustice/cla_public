@@ -4562,6 +4562,10 @@ msgid "December"
 msgstr "Rhagfyr"
 
 #: cla_public/templates/accessibility-statement.html:1
+msgid "October"
+msgstr "Hydref"
+
+#: cla_public/templates/accessibility-statement.html:1
 msgid "The test was carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
 msgstr "Cynhaliwyd y prawf gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>)."
 
@@ -4813,8 +4817,14 @@ msgstr "Paratowyd y datganiad hwn ar %(day)s %(month)s %(year)s."
 msgid "It was last reviewed on %(day)s %(month)s %(year)s."
 msgstr "Fe’i adolygwyd ddiwethaf ar %(day)s %(month)s %(year)s."
 
-msgid "This service was tested on %(day)s %(month)s %(year)s and issues were re-tested on %(day)s %(month)s %(year)s. The tests were carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
-msgstr "Profwyd y gwasanaeth hwn ar %(day)s %(month)s %(year)s ac ailbrofwyd y materion a oedd angen sylw ar %(day)s %(month)s %(year)s. Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>)."
+msgid "This service was tested on %(day)s %(month)s %(year)s"
+msgstr "Profwyd y gwasanaeth hwn ar %(day)s %(month)s %(year)s"
+
+msgid "and issues were re-tested on %(day)s %(month)s %(year)s."
+msgstr "ac ailbrofwyd y materion a oedd angen sylw ar %(day)s %(month)s %(year)s."
+
+msgid "The tests were carried out by the Digital Accessibility Centre (<abbr>DAC</abbr>)."
+msgstr "Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>)."
 
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested core journeys, key functionality and interactive features that reflect the content that the average user may encounter."
 msgstr "Aeth y DAC ati i brofi teithiau craidd, swyddogaeth allweddol a nodweddion rhyngweithiol sy'n adlewyrchu'r cynnwys y gall y defnyddiwr cyffredin ddod ar eu traws."
