@@ -2741,8 +2741,8 @@ msgid "Reason for contacting <abbr title="Civil Legal Advice">CLA</abbr>, such a
 msgstr "Y rheswm dros gysylltu â <abbr title="Cyngor Cyfreithiol Sifil">CLA</abbr>, er enghraifft, natur eich problem neu fanylion penodol am eich sefyllfa;"
 
 #: cla_public/templates/privacy.html:127
-msgid "Details of any specific needs that you may have in order to access the <abbr>CLA</abbr> service; and"
-msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth <abbr>CLA</abbr>; a"
+msgid "Details of any specific needs that you may have in order to access the <abbr title="Civil Legal Advice">CLA</abbr> service; and"
+msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth <abbr title="Cyngor Cyfreithiol Sifil">CLA</abbr>; a"
 
 #: cla_public/templates/privacy.html:130
 msgid ""
