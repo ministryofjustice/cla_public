@@ -2742,7 +2742,7 @@ msgstr "Y rheswm dros gysylltu â <abbr title="Cyngor Cyfreithiol Sifil">CLA</ab
 
 #: cla_public/templates/privacy.html:127
 msgid "Details of any specific needs that you may have in order to access the <abbr>CLA</abbr> service; and"
-msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth <abbr title="Cyngor Cyfreithiol Sifil">CLA</abbr>; a"
+msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth <abbr>CLA</abbr>; a"
 
 #: cla_public/templates/privacy.html:130
 msgid ""
