@@ -4931,8 +4931,8 @@ msgstr "Cyfnod cadw'r wybodaeth a gesglir"
 msgid "Your personal information will not be retained for any longer than is necessary for the lawful purposes for which it has been collected and processed. This is to ensure that your personal information does not become inaccurate, out of date or irrelevant. The Legal Aid Agency have set retention periods for the personal information that we collect, this can be accessed via our website:"
 msgstr "Ni fydd eich gwybodaeth bersonol yn cael ei chadw am fwy o amser nag sydd angen at y dibenion cyfreithiol y cafodd ei chasglu a'i phrosesu. Pwrpas hyn yw sicrhau nad yw eich gwybodaeth bersonol yn dod yn anghywir, yn hen neu'n amherthnasol. Mae'r Asiantaeth Cymorth Cyfreithiol wedi gosod cyfnodau cadw ar gyfer yr wybodaeth bersonol a gasglwn, a gallwch weld y rheiny ar ein gwefan:"
 
-msgid "<a class="govuk-link" href="https://www.gov.uk/government/publications/record-retention-and-disposition-schedules" rel="external">See our record retention and disposition schedules</a>"
-msgstr "<a class="govuk-link" href="https://www.gov.uk/government/publications/record-retention-and-disposition-schedules" rel="external">Edrychwch ar ein hamserlenni ar gyfer cadw a gwaredu cofnodion</a>"
+msgid "See our record retention and disposition schedules"
+msgstr "Edrychwch ar ein hamserlenni ar gyfer cadw a gwaredu cofnodion"
 
 msgid "You can also contact our Data Protection Officer for a copy of our retention schedules."
 msgstr "Gallwch hefyd gysylltu â'n Swyddog Diogelu Data am gopi o'n hamserlenni cadw gwybodaeth."
