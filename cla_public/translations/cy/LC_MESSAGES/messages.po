@@ -2677,8 +2677,8 @@ msgid ""
 msgstr "Er mwyn darparu gwasanaeth i chi, mae’n bosibl y bydd angen i Gyngor Cyfreithiol Sifil (<abbr>CLA</abbr>) weld, casglu, cofnodi a dal (‘prosesu’) data personol amdanoch chi."
 
 #: cla_public/templates/privacy.html:75
-msgid "Personal data is information about you as an individual. It can be your name, address or telephone number. It can also include the information that you have provided in this form, such as your financial circumstances."
-msgstr "Mae data personol yn wybodaeth amdanoch chi fel unigolyn. Gall gynnwys eich enw, eich cyfeiriad neu eich rhif ffôn. Gall hefyd gynnwys gwybodaeth rydych wedi’i rhoi yn y ffurflen hon, er enghraifft eich amgylchiadau ariannol."
+msgid "Personal data is information about you as an individual. It can be your name, address or telephone number."
+msgstr "Mae data personol yn wybodaeth amdanoch chi fel unigolyn. Gall gynnwys eich enw, eich cyfeiriad neu eich rhif ffôn."
 
 #: cla_public/templates/privacy.html:79
 msgid ""
@@ -2737,12 +2737,12 @@ msgid "Financial information needed to determine if you qualify for legal aid;"
 msgstr "Gwybodaeth ariannol sydd ei hangen i bennu a ydych chi’n gymwys i gael cymorth cyfreithiol;"
 
 #: cla_public/templates/privacy.html:124
-msgid "Reason for contacting <abbr>CLA</abbr>, such as the nature of your problem or specific details about your situation;"
-msgstr "Y rheswm dros gysylltu â <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>, er enghraifft, natur eich problem neu fanylion penodol am eich sefyllfa;"
+msgid "Reason for contacting <abbr title="Civil Legal Advice">CLA</abbr>, such as the nature of your problem or specific details about your situation;"
+msgstr "Y rheswm dros gysylltu â <abbr title="Cyngor Cyfreithiol Sifil">CLA</abbr>, er enghraifft, natur eich problem neu fanylion penodol am eich sefyllfa;"
 
 #: cla_public/templates/privacy.html:127
 msgid "Details of any specific needs that you may have in order to access the <abbr>CLA</abbr> service; and"
-msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth <abbr title=\"Cyngor Cyfreithiol Sifil\">CLA</abbr>; a"
+msgstr "Manylion unrhyw anghenion penodol sydd gennych er mwyn cael mynediad at wasanaeth <abbr title="Cyngor Cyfreithiol Sifil">CLA</abbr>; a"
 
 #: cla_public/templates/privacy.html:130
 msgid ""
@@ -4826,8 +4826,11 @@ msgstr "Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested core journeys, key functionality and interactive features that reflect the content that the average user may encounter."
 msgstr "Aeth y <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr> ati i brofi teithiau craidd, swyddogaeth allweddol a nodweddion rhyngweithiol sy'n adlewyrchu'r cynnwys y gall y defnyddiwr cyffredin ddod ar eu traws."
 
-msgid "Civil Legal Advice (“CLA”) &ndash; Legal Aid Agency Privacy Notice"
-msgstr "Cyngor Cyfreithiol Sifil (“CLA”) &ndash; Hysbysiad Preifatrwydd yr Asiantaeth Cymorth Cyfreithiol"
+msgid "Civil Legal Advice ("CLA") &ndash; Legal Aid Agency Privacy Notice"
+msgstr "Cyngor Cyfreithiol Sifil ("CLA") &ndash; Hysbysiad Preifatrwydd yr Asiantaeth Cymorth Cyfreithiol"
+
+msgid "About personal information"
+msgstr "Gwybodaeth bersonol"
 
 msgid "This privacy notice sets out the standards that you can expect from the Legal Aid Agency (<abbr>LAA</abbr>) when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met."
 msgstr "Mae'r hysbysiad preifatrwydd hwn yn nodi'r safonau y gallwch eu disgwyl gan yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) pan fyddwn yn gofyn am wybodaeth bersonol ('data personol') amdanoch neu'n cadw gwybodaeth bersonol amdanoch chi; sut y gallwch gael gafael ar gopi o'ch data personol; a'r hyn y gallwch ei wneud os ydych yn credu nad ydym yn cyrraedd y safonau."
@@ -4928,8 +4931,8 @@ msgstr "Cyfnod cadw'r wybodaeth a gesglir"
 msgid "Your personal information will not be retained for any longer than is necessary for the lawful purposes for which it has been collected and processed. This is to ensure that your personal information does not become inaccurate, out of date or irrelevant. The Legal Aid Agency have set retention periods for the personal information that we collect, this can be accessed via our website:"
 msgstr "Ni fydd eich gwybodaeth bersonol yn cael ei chadw am fwy o amser nag sydd angen at y dibenion cyfreithiol y cafodd ei chasglu a'i phrosesu. Pwrpas hyn yw sicrhau nad yw eich gwybodaeth bersonol yn dod yn anghywir, yn hen neu'n amherthnasol. Mae'r Asiantaeth Cymorth Cyfreithiol wedi gosod cyfnodau cadw ar gyfer yr wybodaeth bersonol a gasglwn, a gallwch weld y rheiny ar ein gwefan:"
 
-msgid "<a class="govuk-link" href="https://www.gov.uk/government/publications/record-retention-and-disposition-schedules" rel="external">See our record retention and disposition schedules"
-msgstr "<a class="govuk-link" href="https://www.gov.uk/government/publications/record-retention-and-disposition-schedules" rel="external">Edrychwch ar ein hamserlenni ar gyfer cadw a gwaredu cofnodion"
+msgid "<a class="govuk-link" href="https://www.gov.uk/government/publications/record-retention-and-disposition-schedules" rel="external">See our record retention and disposition schedules</a>"
+msgstr "<a class="govuk-link" href="https://www.gov.uk/government/publications/record-retention-and-disposition-schedules" rel="external">Edrychwch ar ein hamserlenni ar gyfer cadw a gwaredu cofnodion</a>"
 
 msgid "You can also contact our Data Protection Officer for a copy of our retention schedules."
 msgstr "Gallwch hefyd gysylltu â'n Swyddog Diogelu Data am gopi o'n hamserlenni cadw gwybodaeth."
