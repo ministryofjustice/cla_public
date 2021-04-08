@@ -4826,8 +4826,8 @@ msgstr "Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested core journeys, key functionality and interactive features that reflect the content that the average user may encounter."
 msgstr "Aeth y <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr> ati i brofi teithiau craidd, swyddogaeth allweddol a nodweddion rhyngweithiol sy'n adlewyrchu'r cynnwys y gall y defnyddiwr cyffredin ddod ar eu traws."
 
-msgid "Civil Legal Advice ("CLA") &ndash; Legal Aid Agency Privacy Notice"
-msgstr "Cyngor Cyfreithiol Sifil ("CLA") &ndash; Hysbysiad Preifatrwydd yr Asiantaeth Cymorth Cyfreithiol"
+msgid "Civil Legal Advice (CLA) &ndash; Legal Aid Agency Privacy Notice"
+msgstr "Cyngor Cyfreithiol Sifil (CLA) &ndash; Hysbysiad Preifatrwydd yr Asiantaeth Cymorth Cyfreithiol"
 
 msgid "About personal information"
 msgstr "Gwybodaeth bersonol"
