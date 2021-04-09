@@ -23,8 +23,11 @@ envVars:
     value: "pXnyHhiNQwB3LpZ4-zTZYg"
   MOJ_GTM_PREVIEW:
     value: "env-1"
+<<<<<<< HEAD
   SMART_SURVEY_CID:
     value: "1150763"
+=======
+>>>>>>> 35a7f2f9afb2cf232a1d8799ef32f79665ff8fa3
   BACKEND_BASE_URI:
     value: "https://fox.civillegaladvice.service.gov.uk"
   LAALAA_API_HOST:
@@ -35,3 +38,8 @@ envVars:
     value: "INFO"
   DEBUG:
     value: "False"
+<<<<<<< HEAD
+=======
+  SMART_SURVEY_CID:
+    value: ""
+>>>>>>> 35a7f2f9afb2cf232a1d8799ef32f79665ff8fa3
