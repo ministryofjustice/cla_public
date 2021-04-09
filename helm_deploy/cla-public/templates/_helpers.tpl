@@ -88,7 +88,7 @@ in an appropriate format
       {{- end }}
 {{- else if $data.configmap }}
   valueFrom:
-    configMapKeyReg:
+    configMapKeyRef:
       name: {{ $data.configmap.name }}
       key: {{ $data.configmap.key }}
       {{- if eq $environment "development" }}
