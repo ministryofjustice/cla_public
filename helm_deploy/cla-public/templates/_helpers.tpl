@@ -94,7 +94,7 @@ in an appropriate format
       {{- if eq $environment "development" }}
       optional: true
       {{- else }}
-      optional: {{ $data.secret.optional | default false }}
+      optional: {{ $data.configmap.optional | default false }}
       {{- end }}
 {{- end -}}
 {{- end -}}
