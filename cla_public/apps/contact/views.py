@@ -62,8 +62,9 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
     template = "contact.html"
 
     def get(self, *args, **kwargs):
+        self.template_context = {"emergency_message": current_app.config["EMERGENCY_MESSAGE_ON"]}
         if ReasonsForContacting.GA_SESSION_KEY in session:
-            self.template_context = {"reasons_for_contacting": session[ReasonsForContacting.GA_SESSION_KEY]}
+            self.template_context.update({"reasons_for_contacting": session[ReasonsForContacting.GA_SESSION_KEY]})
             del session[ReasonsForContacting.GA_SESSION_KEY]
         return super(Contact, self).get(*args, **kwargs)
 
