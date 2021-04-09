@@ -6,9 +6,6 @@ image:
   pullPolicy: IfNotPresent
 
 environment: production
-backend_base_uri: https://fox.civillegaladvice.service.gov.uk
-laalaa_api_host: https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk
-google_maps_api_key: AIzaSyB_75-8mb5ZGgBh95USV07dupsoB8dxcDY
 
 replicaCount: 2
 
@@ -16,17 +13,24 @@ ingress:
   enabled: true
   secretName: tls-certificate
 
-# Lists don't deep merge, so this list of envVars overrides anything defined in an earlier values file
 envVars:
-  - name: DEBUG
-    value: "False"
-  - name: GDS_GA_ID
+  GDS_GA_ID:
     value: UA-145652997-1
-  - name: MOJ_GTM_ID
+  MOJ_GTM_ID:
     value: GTM-MWL77F6
-  - name: MOJ_GTM_AUTH
+  MOJ_GTM_AUTH:
     value: "pXnyHhiNQwB3LpZ4-zTZYg"
-  - name: MOJ_GTM_PREVIEW
+  MOJ_GTM_PREVIEW:
     value: "env-1"
-  - name: SMART_SURVEY_CID
+  SMART_SURVEY_CID:
     value: "1150763"
+  BACKEND_BASE_URI:
+    value: "https://fox.civillegaladvice.service.gov.uk"
+  LAALAA_API_HOST:
+    value: "https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk"
+  GOOGLE_MAPS_API_KEY:
+    value: "AIzaSyB_75-8mb5ZGgBh95USV07dupsoB8dxcDY"
+  LOG_LEVEL:
+    value: "INFO"
+  DEBUG:
+    value: "False"

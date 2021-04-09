@@ -6,9 +6,6 @@ image:
   pullPolicy: IfNotPresent
 
 environment: staging
-backend_base_uri: https://laa-cla-backend-uat.apps.live-1.cloud-platform.service.justice.gov.uk
-laalaa_api_host: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
-google_maps_api_key: AIzaSyBVsZmfkiRFNNMJnPraN_8sBW3Dj-BFFNs
 
 replicaCount: 2
 
@@ -16,15 +13,24 @@ ingress:
   enabled: true
   secretName: tls-certificate
 
-# Lists don't deep merge, so this list of envVars overrides anything defined in an earlier values file
 envVars:
-  - name: DEBUG
-    value: "False"
-  - name: MOJ_GTM_ID
+  GDS_GA_ID:
+    value: UA-145652997-1
+  MOJ_GTM_ID:
     value: GTM-MWL77F6
-  - name: MOJ_GTM_AUTH
+  MOJ_GTM_AUTH:
     value: "4KOuCU7aXv3Owhcs7U0ORw"
-  - name: MOJ_GTM_PREVIEW
+  MOJ_GTM_PREVIEW:
     value: "env-3"
-  - name: SMART_SURVEY_CID
+  SMART_SURVEY_CID:
     value: "1139766"
+  BACKEND_BASE_URI:
+    value: "https://laa-cla-backend-uat.apps.live-1.cloud-platform.service.justice.gov.uk"
+  LAALAA_API_HOST:
+    value: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
+  GOOGLE_MAPS_API_KEY:
+    value: "AIzaSyBVsZmfkiRFNNMJnPraN_8sBW3Dj-BFFNs"
+  LOG_LEVEL:
+    value: "INFO"
+  DEBUG:
+    value: "False"
