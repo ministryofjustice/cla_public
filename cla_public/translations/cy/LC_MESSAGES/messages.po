@@ -2060,7 +2060,7 @@ msgstr "Byddwn yn rhoi rhif ffôn CLA i chi pan fyddwch yn cyflwyno eich manylio
 
 #: cla_public/templates/contact.html:114
 msgid "You can enter up to %(max_length)s characters"
-msgstr ""
+msgstr "Gallwch roi hyd at %(max_length)s nod."
 
 #: cla_public/templates/contact.html:115
 msgid "Submit details"

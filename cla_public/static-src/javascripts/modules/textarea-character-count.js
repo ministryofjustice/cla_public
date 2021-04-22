@@ -3,11 +3,11 @@
   var LOW_CHAR_COUNT = 80;
 
   if (GOVUK.getCookie("locale") == "cy_GB") {
-    var youHave = '';
-    var someCharactersRemaining = 'nodau ar ôl';
-    var oneCharacterRemaining = 'nod ar ôl';
-    var oneCharacterTooMany = 'nod gormod';
-    var someCharactersTooMany = 'nodau gormod';
+    var youHave = 'Mae gennych';
+    var someCharactersRemaining = 'nod yn weddill';
+    var oneCharacterRemaining = 'nod yn weddill';
+    var oneCharacterTooMany = 'nod yn ormod';
+    var someCharactersTooMany = 'nod yn ormod';
   } else {
     var youHave = 'You have';
     var someCharactersRemaining = 'characters remaining';
