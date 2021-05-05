@@ -4048,7 +4048,7 @@ msgid ""
 "From\n"
 "    what you have told us today it looks like you won’t be able to get\n"
 "    legal aid %(fromcla)s as you don’t qualify financially"
-msgstr "O'r hyn rydych chi wedi'i ddweud wrthym heddiw, mae’n debyg na fyddwch yn gallu cael cymorth cyfreithiol gan nad ydych yn gymwys yn ariannol."
+msgstr "O'r hyn rydych chi wedi'i ddweud wrthym heddiw, mae’n debyg na fyddwch yn gallu cael cymorth cyfreithiol gan nad ydych yn gymwys yn ariannol"
 
 #: cla_public/templates/checker/result/ineligible.html:17
 msgid "from CLA"
