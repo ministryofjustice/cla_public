@@ -133,6 +133,12 @@ class ReasonsForContacting(AbstractFeedbackView):
         referrer = re.sub(r"^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?/", "/", request.referrer or "")
         return render_template(self.template, form=self.form, referrer=referrer)
 
+    def get(self, *args, **kwargs):
+        if not session or not session.is_current:
+            session.checker["started"] = datetime.datetime.now()
+
+        return super(ReasonsForContacting, self).get(*args, **kwargs)
+
     def post(self):
         if self.form.validate_on_submit():
             if len(self.form.reasons.data) == 0:
