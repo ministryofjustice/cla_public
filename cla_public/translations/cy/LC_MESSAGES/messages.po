@@ -4040,7 +4040,7 @@ msgstr ""
 
 #: cla_public/templates/checker/result/ineligible.html:14
 msgid "You’re unlikely to get legal aid"
-msgstr ""
+msgstr "Rydych yn annhebygol o gael cymorth cyfreithiol"
 
 #: cla_public/templates/checker/result/ineligible.html:17
 #, python-format
@@ -4048,7 +4048,7 @@ msgid ""
 "From\n"
 "    what you have told us today it looks like you won’t be able to get\n"
 "    legal aid %(fromcla)s as you don’t qualify financially"
-msgstr ""
+msgstr "O'r hyn rydych chi wedi'i ddweud wrthym heddiw, mae’n debyg na fyddwch yn gallu cael cymorth cyfreithiol gan nad ydych yn gymwys yn ariannol"
 
 #: cla_public/templates/checker/result/ineligible.html:17
 msgid "from CLA"
@@ -4056,13 +4056,13 @@ msgstr ""
 
 #: cla_public/templates/checker/result/ineligible.html:24
 msgid "This is because"
-msgstr ""
+msgstr "Mae hyn oherwydd bod"
 
 #: cla_public/templates/checker/result/ineligible.html:26
 msgid ""
 "have too much disposable\n"
 "      capital"
-msgstr ""
+msgstr "gennych ormod o gyfalaf gwario"
 
 #: cla_public/templates/checker/result/ineligible.html:31
 msgid ""
@@ -4080,7 +4080,7 @@ msgstr ""
 msgid ""
 "Disposable capital includes savings, valuable items and the\n"
 "      equity in any property you own."
-msgstr ""
+msgstr "Mae cyfalaf gwario yn cynnwys cynilion, eitemau gwerthfawr a'r ecwiti yn yr eiddo sydd gennych."
 
 #: cla_public/templates/checker/result/ineligible.html:48
 msgid ""
@@ -4104,7 +4104,7 @@ msgstr ""
 
 #: cla_public/templates/checker/result/ineligible.html:72
 msgid "A legal adviser may still be able to help"
-msgstr ""
+msgstr "Efallai y bydd cynghorydd cyfreithiol yn gallu helpu o hyd."
 
 #: cla_public/templates/checker/result/ineligible.html:76
 msgid ""
@@ -5169,7 +5169,7 @@ msgstr "Pan fyddwn yn gofyn am wybodaeth gennych, byddwn yn cydymffurfio â'r gy
 #~ msgstr "chi a’ch partner"
 
 #~ msgid "You’re unlikely to get legal aid"
-#~ msgstr "chi"
+#~ msgstr "Rydych yn annhebygol o gael cymorth cyfreithiol"
 
 #~ msgid "from CLA"
 #~ msgstr "chi a’ch partner"
