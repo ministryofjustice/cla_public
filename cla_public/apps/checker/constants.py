@@ -185,7 +185,8 @@ CONTACT_PREFERENCE = Choices(
 LEGAL_ADVISER_SEARCH_PREFERENCE = (("location", _(u"Location")), ("organisation", _(u"Organisation")))
 
 END_SERVICE_FLASH_MESSAGE = _(
-    u"The information you’ve entered has not been stored on your computer or "
-    u"mobile device. If you are at risk of harm, you should delete your "
-    u"browser history."
+    u"The information you have entered has not been stored on your "
+    u"computer or mobile device, but your browsing history will record "
+    u"you have visited this service. If you are at risk of harm, you "
+    u"should delete your browser history."
 )

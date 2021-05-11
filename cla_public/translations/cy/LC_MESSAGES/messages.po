@@ -4949,6 +4949,9 @@ msgstr "Rydym yn addo rhoi gwybod i chi pam fod angen eich data personol arnom a
 msgid "When we ask you for information, we will keep to the law. If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
 msgstr "Pan fyddwn yn gofyn am wybodaeth gennych, byddwn yn cydymffurfio â'r gyfraith. Os ydych chi'n teimlo bod eich gwybodaeth wedi'i thrin yn anghywir, gallwch gysylltu â'r Comisiynydd Gwybodaeth am gyngor annibynnol ynghylch diogelu data. Gallwch gysylltu â'r Comisiynydd Gwybodaeth yn:"
 
+msgid "The information you have entered has not been stored on your computer or mobile device, but your browsing history will record you have visited this service. If you are at risk of harm, you should delete your browser history."
+msgstr "Nid yw’r wybodaeth a roddwyd gennych chi wedi cael ei storio ar eich cyfrifiadur na’ch dyfais symudol, ond bydd eich hanes pori yn dangos eich bod wedi ymweld â’r gwasanaeth hwn. Os ydych chi mewn perygl o niwed, dylech chi ddileu eich hanes pori."
+
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
 
