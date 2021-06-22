@@ -78,8 +78,6 @@ msgstr "Rydych eisiau apelio yn erbyn penderfyniad ynglŷn â budd-daliadau:"
 msgid "What is your problem about?"
 msgstr "Beth yw eich problem?"
 
-
-
 #: cla_public/templates/macros/form.html:305 - DO NOT DELETE (can be deleted by the auto-update process)
 msgid "optional"
 msgstr "dewisol"
@@ -4951,6 +4949,15 @@ msgstr "Pan fyddwn yn gofyn am wybodaeth gennych, byddwn yn cydymffurfio â'r gy
 
 msgid "The information you have entered has not been stored on your computer or mobile device, but your browsing history will record you have visited this service. If you are at risk of harm, you should delete your browser history."
 msgstr "Nid yw’r wybodaeth a roddwyd gennych chi wedi cael ei storio ar eich cyfrifiadur na’ch dyfais symudol, ond bydd eich hanes pori yn dangos eich bod wedi ymweld â’r gwasanaeth hwn. Os ydych chi mewn perygl o niwed, dylech chi ddileu eich hanes pori."
+
+msgid "Use the Family Mediation Council (FMC) directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
+msgstr "Defnyddiwch gyfeiriadur y Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr a threfnu apwyntiad ar gyfer Cyfarfod Asesu a Gwybodaeth am Gyfryngu."
+
+msgid "To search for mediators with a legal aid contract, tick the box: “Provides mediation funded by legal aid”."
+msgstr "I chwilio am gyfryngwyr sydd â chontract cymorth cyfreithiol, ticiwch y blwch: “Yn darparu gwasanaeth cyfryngu a ariennir gan gymorth cyfreithiol”."
+
+msgid "The mediator can check if you qualify for legal aid."
+msgstr "Gall y cyfryngwr wirio a ydych chi’n gymwys i gael cymorth cyfreithiol."
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
