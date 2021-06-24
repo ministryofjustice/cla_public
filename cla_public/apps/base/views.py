@@ -16,7 +16,7 @@ from cla_public.apps.base import base, healthchecks
 from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 from cla_public.apps.checker.api import post_reasons_for_contacting
 from cla_public.libs import zendesk
-from cla_public.libs.views import AjaxOrNormalMixin, HasFormMixin
+from cla_public.libs.views import AjaxOrNormalMixin, EnsureSessionExists, HasFormMixin
 
 log = logging.getLogger(__name__)
 
@@ -116,7 +116,7 @@ def feedback_confirmation():
     return render_template("feedback-confirmation.html")
 
 
-class ReasonsForContacting(AbstractFeedbackView):
+class ReasonsForContacting(EnsureSessionExists, AbstractFeedbackView):
     """
     Interstitial form to ascertain why users are dropping out of
     the checker service
@@ -132,12 +132,6 @@ class ReasonsForContacting(AbstractFeedbackView):
     def render_form(self):
         referrer = re.sub(r"^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?/", "/", request.referrer or "")
         return render_template(self.template, form=self.form, referrer=referrer)
-
-    def get(self, *args, **kwargs):
-        if not session or not session.is_current:
-            session.checker["started"] = datetime.datetime.now()
-
-        return super(ReasonsForContacting, self).get(*args, **kwargs)
 
     def post(self):
         if self.form.validate_on_submit():
