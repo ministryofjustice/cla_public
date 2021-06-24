@@ -4959,6 +4959,15 @@ msgstr "I chwilio am gyfryngwyr sydd â chontract cymorth cyfreithiol, ticiwch y
 msgid "The mediator can check if you qualify for legal aid."
 msgstr "Gall y cyfryngwr wirio a ydych chi’n gymwys i gael cymorth cyfreithiol."
 
+msgid "Important"
+msgstr "Pwysig"
+
+msgid "The CLA helpline is currently unavailable"
+msgstr "Nid yw llinell gymorth CLA ar gael ar hyn o bryd"
+
+msgid "Book a call back or text ‘legalaid’ and your name to 80010 and we will contact you as soon as we can."
+msgstr "Trefnwch alwad yn ôl neu tecstiwch ‘legalaid’ a’ch enw at 80010 a byddwn mewn cysylltiad â chi cyn gynted ag y gallwn."
+
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
 
