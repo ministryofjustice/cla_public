@@ -2,12 +2,12 @@
     <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
         <div class="govuk-notification-banner__header">
         <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
-            Important
+            {% trans %}Important{% endtrans %}
         </h2>
         </div>
         <div class="govuk-notification-banner__content">
         <p class="govuk-notification-banner__heading">
-            <h3 class="govuk-heading-m">The CLA helpline is currently unavailable</h3>
+            <h3 class="govuk-heading-m">{% trans %}The CLA helpline is currently unavailable{% endtrans %}</h3>
             {{ caller() }}
         </p>
         </div>
