@@ -4090,16 +4090,6 @@ msgstr "Incwm gwario yw'r ariansydd gennych ar ôl ar ôl i ni gynnwys rhai cost
 msgid "Family Mediation Council"
 msgstr ""
 
-#: cla_public/templates/checker/result/ineligible.html:57
-#, python-format
-msgid ""
-"\n"
-"        If you want to make an application to court about a family matter you need to first of all\n"
-"        see if family mediation will help. Use the %(family_mediation_link)s directory to find a mediator\n"
-"        and make an appointment for a Mediation Information and Assessment Meeting (MIAM).\n"
-"      "
-msgstr "Defnyddiwch gyfeirlyfr y Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac Asesu Cyfryngu (MIAM)."
-
 #: cla_public/templates/checker/result/ineligible.html:72
 msgid "A legal adviser may still be able to help"
 msgstr "Efallai y bydd cynghorydd cyfreithiol yn gallu helpu o hyd."
@@ -4967,6 +4957,10 @@ msgstr "Nid yw llinell gymorth CLA ar gael ar hyn o bryd"
 
 msgid "Book a call back or text ‘legalaid’ and your name to 80010 and we will contact you as soon as we can."
 msgstr "Trefnwch alwad yn ôl neu tecstiwch ‘legalaid’ a’ch enw at 80010 a byddwn mewn cysylltiad â chi cyn gynted ag y gallwn."
+
+msgid "If you want to make an application to court about a family matter you need to first of all see if family mediation will help. Use the {{ family_mediation_link }} directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
+msgstr "Os ydych eisiau gwneud cais i'r llys am fater teuluol, mae angen i chi weld yn gyntaf a fydd cyfryngu teuluol yn helpu. Defnyddiwch gyfeirlyfr y
+Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac Asesu Cyfryngu (MIAM)."
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
