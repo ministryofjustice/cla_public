@@ -4959,8 +4959,7 @@ msgid "Book a call back or text ‘legalaid’ and your name to 80010 and we wil
 msgstr "Trefnwch alwad yn ôl neu tecstiwch ‘legalaid’ a’ch enw at 80010 a byddwn mewn cysylltiad â chi cyn gynted ag y gallwn."
 
 msgid "If you want to make an application to court about a family matter you need to first of all see if family mediation will help. Use the {{ family_mediation_link }} directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
-msgstr "Os ydych eisiau gwneud cais i'r llys am fater teuluol, mae angen i chi weld yn gyntaf a fydd cyfryngu teuluol yn helpu. Defnyddiwch gyfeirlyfr y
-Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac Asesu Cyfryngu (MIAM)."
+msgstr "Os ydych eisiau gwneud cais i'r llys am fater teuluol, mae angen i chi weld yn gyntaf a fydd cyfryngu teuluol yn helpu. Defnyddiwch gyfeirlyfr y Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac Asesu Cyfryngu (MIAM)."
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
