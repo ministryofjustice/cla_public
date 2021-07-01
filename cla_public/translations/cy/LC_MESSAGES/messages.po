@@ -4981,9 +4981,11 @@ msgid "Disposable income is the money you have left after we’ve accounted\n
 msgstr "Incwm gwario yw'r ariansydd gennych ar ôl ar ôl i ni gynnwys rhai costau byw, fel rhent neu daliadau morgais."
 
 msgid "If you want to make an application to court about a family matter you need to first of all\n
-        see if family mediation will help. Use the {{ family_mediation_link }} directory to find a mediator\n
-        and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
-msgstr "Os ydych eisiau gwneud cais i'r llys am fater teuluol, mae angen i chi weld yn gyntaf a fydd cyfryngu teuluol yn helpu. Defnyddiwch gyfeirlyfr y Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac Asesu Cyfryngu (MIAM)."
+        see if family mediation will help. Use the"
+msgstr "Os ydych eisiau gwneud cais i'r llys am fater teuluol, mae angen i chi weld yn gyntaf a fydd cyfryngu teuluol yn helpu. Defnyddiwch gyfeirlyfr y"
+
+msgid "directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
+msgstr "i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac Asesu Cyfryngu (MIAM)."
 
 msgid "You may still qualify for legal aid to seek a court order for protection. To find out if you
       might qualify, contact a legal adviser in your area."
