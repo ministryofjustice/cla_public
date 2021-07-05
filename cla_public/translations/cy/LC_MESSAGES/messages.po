@@ -4066,13 +4066,13 @@ msgstr "gennych ormod o gyfalaf gwario"
 msgid ""
 "gross income is more than\n"
 "      the maximum allowed"
-msgstr ""
+msgstr "mae eich incwm gros yn fwy na'r uchafswm sy’n cael ei ganiatáu"
 
 #: cla_public/templates/checker/result/ineligible.html:36
 msgid ""
 "disposable income is\n"
 "      higher than the limit we allow"
-msgstr ""
+msgstr "mae eich incwm gwario yn uwch na'r terfyn sy’n cael ei ganiatáu"
 
 #: cla_public/templates/checker/result/ineligible.html:43
 msgid ""
@@ -4084,21 +4084,11 @@ msgstr "Mae cyfalaf gwario yn cynnwys cynilion, eitemau gwerthfawr a'r ecwiti yn
 msgid ""
 "Disposable income is the money you have left after we’ve accounted\n"
 "      for certain living expenses, like rent or mortgage payments."
-msgstr ""
+msgstr "Incwm gwario yw'r ariansydd gennych ar ôl ar ôl i ni gynnwys rhai costau byw, fel rhent neu daliadau morgais."
 
 #: cla_public/templates/checker/result/ineligible.html:57
 msgid "Family Mediation Council"
-msgstr ""
-
-#: cla_public/templates/checker/result/ineligible.html:57
-#, python-format
-msgid ""
-"\n"
-"        If you want to make an application to court about a family matter you need to first of all\n"
-"        see if family mediation will help. Use the %(family_mediation_link)s directory to find a mediator\n"
-"        and make an appointment for a Mediation Information and Assessment Meeting (MIAM).\n"
-"      "
-msgstr ""
+msgstr "Cyngor Cyfryngu Teuluol"
 
 #: cla_public/templates/checker/result/ineligible.html:72
 msgid "A legal adviser may still be able to help"
@@ -4108,7 +4098,7 @@ msgstr "Efallai y bydd cynghorydd cyfreithiol yn gallu helpu o hyd."
 msgid ""
 "You may still qualify for legal aid to seek a court order for protection. To find out if you\n"
 "      might qualify, contact a legal adviser in your area."
-msgstr ""
+msgstr "Efallai y byddwch dal yn gymwys am gymorth cyfreithiol i ofyn am orchymyn llys i’ch amddiffyn. I weld os allwch chi fod yn gymwys, cysylltwch â chynghorydd cyfreithiol yn eich ardal."
 
 #: cla_public/templates/checker/result/ineligible.html:80
 msgid "You can still ask a legal adviser for help – you will have to pay for their advice."
@@ -4967,6 +4957,12 @@ msgstr "Nid yw llinell gymorth CLA ar gael ar hyn o bryd"
 
 msgid "Book a call back or text ‘legalaid’ and your name to 80010 and we will contact you as soon as we can."
 msgstr "Trefnwch alwad yn ôl neu tecstiwch ‘legalaid’ a’ch enw at 80010 a byddwn mewn cysylltiad â chi cyn gynted ag y gallwn."
+
+msgid "If you want to make an application to court about a family matter you need to first of all see if family mediation will help. Use the" 
+msgstr "Os ydych eisiau gwneud cais i'r llys am fater teuluol, mae angen i chi weld yn gyntaf a fydd cyfryngu teuluol yn helpu. Defnyddiwch gyfeirlyfr y"
+
+msgid "directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
+msgstr "i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac Asesu Cyfryngu (MIAM)."
 
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
