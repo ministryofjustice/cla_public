@@ -22,8 +22,6 @@ envVars:
     value: "4KOuCU7aXv3Owhcs7U0ORw"
   MOJ_GTM_PREVIEW:
     value: "env-3"
-  SMART_SURVEY_CID:
-    value: "1139766"
   BACKEND_BASE_URI:
     value: "https://laa-cla-backend-uat.apps.live-1.cloud-platform.service.justice.gov.uk"
   LAALAA_API_HOST:
