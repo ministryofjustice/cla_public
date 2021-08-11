@@ -3877,6 +3877,13 @@ msgid ""
 "        advice."
 msgstr "Os nad ydych yn gymwys i gael Cymorth Cyfreithiol, bydd rhaid ichi dalu am gyngor cyfreithiol. Dylech holi gyda’ch cynghorydd am gost eu cyngor."
 
+#: cla_public/templates/checker/result/eligible.html:5
+msgid ""
+"To decide whether you might qualify for legal aid, we need more information about\n"
+"      your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and\n"
+"      Wales to get help to find a legal advisor in your area if you do."
+msgstr ""
+
 #: cla_public/templates/checker/result/eligible.html:11
 msgid ""
 "To decide whether you might qualify for legal aid, we need more information about\n"
@@ -4958,7 +4965,7 @@ msgstr "Nid yw llinell gymorth CLA ar gael ar hyn o bryd"
 msgid "Book a call back or text ‘legalaid’ and your name to 80010 and we will contact you as soon as we can."
 msgstr "Trefnwch alwad yn ôl neu tecstiwch ‘legalaid’ a’ch enw at 80010 a byddwn mewn cysylltiad â chi cyn gynted ag y gallwn."
 
-msgid "If you want to make an application to court about a family matter you need to first of all see if family mediation will help. Use the" 
+msgid "If you want to make an application to court about a family matter you need to first of all see if family mediation will help. Use the"
 msgstr "Os ydych eisiau gwneud cais i'r llys am fater teuluol, mae angen i chi weld yn gyntaf a fydd cyfryngu teuluol yn helpu. Defnyddiwch gyfeirlyfr y"
 
 msgid "directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
