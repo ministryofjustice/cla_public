@@ -2,22 +2,28 @@
 
 {% import "macros/element.html" as Element %}
 
+{% if session.checker["category"] == "family" and family_issue_flag == True %}
+  {% set first_paragraph =
+    """To decide whether you might qualify for legal aid, we need more information about
+      your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and
+      Wales to get help to find a legal advisor in your area if you do."""
+  -%}
+{% else %}
+  {% set first_paragraph =
+    """To decide whether you might qualify for legal aid, we need more information about
+      your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and
+      Wales to get specialist advice."""
+  %}
+{% endif %}
+
 {% block page_text %}
   <h1 class="govuk-heading-xl">
     {% trans %}Contact Civil Legal Advice{% endtrans %}
   </h1>
   {% if session.checker.need_more_info %}
-    <p class="govuk-body">
-      {% trans %}To decide whether you might qualify for legal aid, we need more information about
-      your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and
-      Wales to get specialist advice.{% endtrans %}
-    </p>
+    <p class="govuk-body">{{ _(first_paragraph) }}</p>
   {% else %}
-    <p class="govuk-body">
-      {% trans %}Based on the answers you’ve given today, you might qualify for legal aid.
-      Contact Civil Legal Advice (CLA), a national helpline for England and
-      Wales, to confirm that you qualify, and get specialist advice if you do.{% endtrans %}
-    </p>
+    <p class="govuk-body">{{ _(first_paragraph) }}</p>
     <p class="govuk-body">
       {% trans %}In some cases, you may need to pay a contribution towards your legal aid.{% endtrans %}
     </p>

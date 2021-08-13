@@ -3170,6 +3170,13 @@ msgid ""
 "        advice."
 msgstr ""
 
+#: cla_public/templates/checker/result/eligible.html:5
+msgid ""
+"To decide whether you might qualify for legal aid, we need more information about\n"
+"      your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and\n"
+"      Wales to get help to find a legal advisor in your area if you do."
+msgstr ""
+
 #: cla_public/templates/checker/result/eligible.html:11
 msgid ""
 "To decide whether you might qualify for legal aid, we need more information about\n"

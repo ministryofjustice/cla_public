@@ -3,7 +3,7 @@
 import logging
 
 from cla_common.constants import ELIGIBILITY_REASONS
-from flask import abort, render_template, redirect, session, url_for, views, request
+from flask import abort, render_template, redirect, session, url_for, views, request, current_app
 from flask.ext.babel import lazy_gettext as _
 from wtforms.validators import StopValidation
 
@@ -364,7 +364,13 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, object):
 
         current_step = {"count": len(steps) + 1, "is_current": True, "is_completed": False}
 
-        return render_template("checker/result/eligible.html", current_step=current_step, steps=steps, form=self.form)
+        return render_template(
+            "checker/result/eligible.html",
+            current_step=current_step,
+            steps=steps,
+            form=self.form,
+            family_issue_flag=current_app.config["FAMILY_ISSUE_FEATURE_FLAG"],
+        )
 
 
 checker.add_url_rule("/result/eligible", view_func=Eligible.as_view("eligible"), methods=("GET", "POST"))
