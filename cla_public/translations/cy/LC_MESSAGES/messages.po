@@ -3882,7 +3882,7 @@ msgid ""
 "To decide whether you might qualify for legal aid, we need more information about\n"
 "      your financial circumstances. Contact Civil Legal Advice (CLA), a national helpline for England and\n"
 "      Wales to get help to find a legal advisor in your area if you do."
-msgstr ""
+msgstr "I benderfynu a allech fod yn gymwys i gael cymorth cyfreithiol, mae angen mwy o wybodaeth arnom am eich amgylchiadau ariannol. Cysylltwch â Chyngor Cyfreithiol Sifil (<abbr>CLA</abbr>), llinell gymorth genedlaethol ar gyfer Cymru a Lloegr, i gael help i ddod o hyd i gynghorydd cyfreithiol yn eich ardal os ydych eisiau gwneud hynny."
 
 #: cla_public/templates/checker/result/eligible.html:11
 msgid ""
