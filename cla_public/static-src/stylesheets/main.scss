@@ -9,6 +9,7 @@ $govuk-images-path: "/static/images/";
 $govuk-fonts-path: "/static/images/fonts/";
 $govuk-use-legacy-font: false;
 $govuk-typography-use-rem: false;
+$govuk-new-link-styles: true;
 @import "govuk/all";
 
 /**
