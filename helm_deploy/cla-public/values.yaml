@@ -24,6 +24,9 @@ dashboard:
 ingress:
   enabled: false
   annotations: {}
+  cluster:
+    name: ~
+    weight: ~
   tls: []
 
 envVars:
