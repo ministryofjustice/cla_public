@@ -7,8 +7,12 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "cla-public.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
   annotations:
+    {{- if .Values.ingress.cluster.name }}
+    external-dns.alpha.kubernetes.io/set-identifier: "{{ $fullName }}-{{ .Release.Namespace }}-{{- .Values.ingress.cluster.name -}}"
+    external-dns.alpha.kubernetes.io/aws-weight: "{{- .Values.ingress.cluster.weight -}}"
+    {{- end }}
+  {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:

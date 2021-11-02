@@ -104,25 +104,25 @@ jobs:
     steps:
       # Add the necessary steps to deploy your website.
       - checkout
-      - run: 
+      - run:
           name: Delete existing javascript packages
-          command: | 
+          command: |
             rm -rf node_modules package.json package-lock.json
-      - run: 
+      - run:
           name: Extract staging URL
-          command: | 
+          command: |
             source .circleci/define_build_environment_variables
             echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
-      - run: 
+      - run:
           name: Install cypress and axe-core
-          command: | 
+          command: |
             npm i cypress
             npm i cypress-downloadfile
-            npm i cypress-log-to-output   
+            npm i cypress-log-to-output
             npm i axe-core
-      - run: 
+      - run:
           name: Run accessibility test
-          command: | 
+          command: |
             mkdir ~/project/cypress/pages
             node node_modules/.bin/cypress run --env UAT_URL=https://$RELEASE_HOST/start --spec "cypress/integration/happy-path.spec.js"
       - store_artifacts:
@@ -198,6 +198,8 @@ jobs:
             - deploy:
                 name: Deploy laa-cla-public to fixed staging
                 command: |
+                  export INGRESS_CLUSTER_NAME=`kubectl get configmap ingress-cluster -o jsonpath='{.data.name}'`
+                  export INGRESS_CLUSTER_WEIGHT=`kubectl get configmap ingress-cluster -o jsonpath='{.data.weight}'`
                   source .circleci/define_build_environment_variables
                   ./bin/staging_deploy.sh
                   echo "export RELEASE_HOST=$STAGING_HOST" >> $BASH_ENV
@@ -207,6 +209,8 @@ jobs:
             - deploy:
                 name: Deploy laa-cla-public to multideploy staging
                 command: |
+                  export INGRESS_CLUSTER_NAME=`kubectl get configmap ingress-cluster -o jsonpath='{.data.name}'`
+                  export INGRESS_CLUSTER_WEIGHT=`kubectl get configmap ingress-cluster -o jsonpath='{.data.weight}'`
                   source .circleci/define_build_environment_variables
                   ./bin/staging_multideploy.sh
                   echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
@@ -255,6 +259,8 @@ jobs:
       - deploy:
           name: Deploy laa-cla-public to production
           command: |
+            export INGRESS_CLUSTER_NAME=`kubectl get configmap ingress-cluster -o jsonpath='{.data.name}'`
+            export INGRESS_CLUSTER_WEIGHT=`kubectl get configmap ingress-cluster -o jsonpath='{.data.weight}'`
             source .circleci/define_build_environment_variables
             ./bin/production_deploy.sh
       - slack/notify:

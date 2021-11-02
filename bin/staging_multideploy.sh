@@ -11,6 +11,8 @@ helm upgrade $CLEANED_BRANCH_NAME \
   --set fullnameOverride=$CLEANED_BRANCH_NAME \
   --set environment=$CLEANED_BRANCH_NAME \
   --set host=$CLEANED_BRANCH_NAME.$STAGING_HOST \
+  --set ingress.cluster.name=${INGRESS_CLUSTER_NAME} \
+  --set ingress.cluster.weight=${INGRESS_CLUSTER_WEIGHT} \
   --set ingress.secretName=tls-wildcard-certificate \
   --set image.repository=$DOCKER_REPOSITORY \
   --set image.tag=$IMAGE_TAG \
