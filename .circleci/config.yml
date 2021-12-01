@@ -188,10 +188,8 @@ jobs:
             tar -zxvf helm-v3.1.2-linux-amd64.tar.gz
             mv linux-amd64/helm /usr/local/bin/helm
       - run:
-          name: Initialise Kubernetes staging context
-          command: |
-            setup-kube-auth
-            kubectl config use-context staging
+          name: Authenticate with cluster
+          command: .circleci/authenticate_with_kubernetes_cluster
       - unless:
           condition: << parameters.multideploy >>
           steps:
@@ -231,10 +229,8 @@ jobs:
             tar -zxvf helm-v3.1.2-linux-amd64.tar.gz
             mv linux-amd64/helm /usr/local/bin/helm
       - run:
-          name: Initialise Kubernetes staging context
-          command: |
-            setup-kube-auth
-            kubectl config use-context staging
+          name: Authenticate with cluster
+          command: .circleci/authenticate_with_kubernetes_cluster
       - run:
           name: Delete staging release
           command: |
@@ -252,10 +248,8 @@ jobs:
             tar -zxvf helm-v3.1.2-linux-amd64.tar.gz
             mv linux-amd64/helm /usr/local/bin/helm
       - run:
-          name: Initialise Kubernetes production context
-          command: |
-            setup-kube-auth
-            kubectl config use-context production
+          name: Authenticate with cluster
+          command: .circleci/authenticate_with_kubernetes_cluster
       - deploy:
           name: Deploy laa-cla-public to production
           command: |
@@ -276,7 +270,9 @@ workflows:
       - lint-with-py3-tools
       - test
       - cleanup_merged:
-          context: laa-cla-public-live-1
+          context:
+            - laa-cla-public-live-1
+            - laa-cla-public-live1-staging
       - build:
           requires:
             - lint-with-py2-tools
@@ -289,7 +285,9 @@ workflows:
           requires:
             - build
             - staging_deploy_approval
-          context: laa-cla-public-live-1
+          context:
+            - laa-cla-public-live-1
+            - laa-cla-public-live1-staging
           name: staging_deploy_master
           multideploy: false
           filters:
@@ -300,7 +298,9 @@ workflows:
           requires:
             - build
             - staging_deploy_approval
-          context: laa-cla-public-live-1
+          context:
+            - laa-cla-public-live-1
+            - laa-cla-public-live1-staging
           multideploy: true
           filters:
             branches:
@@ -320,4 +320,6 @@ workflows:
       - production_deploy:
           requires:
             - production_deploy_approval
-          context: laa-cla-public-live-1
+          context:
+            - laa-cla-public-live-1
+            - laa-cla-public-live1-production
