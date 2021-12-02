@@ -288,6 +288,34 @@ workflows:
           context:
             - laa-cla-public-live-1
             - laa-cla-public-live1-staging
+          name: staging_deploy_master_live1
+          multideploy: false
+          filters:
+            branches:
+              only:
+                - master
+      - staging_deploy:
+          name: staging_deploy_live1
+          requires:
+            - build
+            - staging_deploy_approval
+          context:
+            - laa-cla-public-live-1
+            - laa-cla-public-live1-staging
+          multideploy: true
+          filters:
+            branches:
+              ignore:
+                - master
+
+      # Deploy staging to live (both master and feature branches)
+      - staging_deploy:
+          requires:
+            - build
+            - staging_deploy_approval
+          context:
+            - laa-cla-public-live-1
+            - laa-cla-public-live-staging
           name: staging_deploy_master
           multideploy: false
           filters:
@@ -300,12 +328,13 @@ workflows:
             - staging_deploy_approval
           context:
             - laa-cla-public-live-1
-            - laa-cla-public-live1-staging
+            - laa-cla-public-live-staging
           multideploy: true
           filters:
             branches:
               ignore:
                 - master
+
       - accessibility-test:
           requires:
             - staging_deploy
