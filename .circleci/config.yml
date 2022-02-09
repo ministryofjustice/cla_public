@@ -325,7 +325,7 @@ workflows:
           requires:
             - production_deploy_approval
           context:
-            - laa-cla-public
+            - laa-cla-public-live-1
             - laa-cla-public-live1-production
 
       - production_deploy:
