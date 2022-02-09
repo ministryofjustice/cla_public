@@ -321,14 +321,6 @@ workflows:
                 - master
 
       - production_deploy:
-          name: production_deploy_live1
-          requires:
-            - production_deploy_approval
-          context:
-            - laa-cla-public-live-1
-            - laa-cla-public-live1-production
-
-      - production_deploy:
           name: production_deploy_live
           requires:
             - production_deploy_approval
