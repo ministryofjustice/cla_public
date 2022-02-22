@@ -27,7 +27,7 @@ spec:
           - path: "/"
             pathType: ImplementationSpecific
             backend:
-              service
+              service:
                 name: {{ $fullName }}-app
                 port:
                   number: {{ $svcPort }}
