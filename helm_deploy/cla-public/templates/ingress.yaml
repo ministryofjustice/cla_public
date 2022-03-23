@@ -8,9 +8,9 @@ metadata:
   labels:
     {{- include "cla-public.labels" . | nindent 4 }}
   annotations:
-  # Add annotation to exclude 503 error pages from the list the cloud-platform error pages
-  # and use our error pages for 503 errors
-    nginx.ingress.kubernetes.io/custom-http-errors: "413,502,504"
+  # # Add annotation to exclude 503 error pages from the list the cloud-platform error pages
+  # # and use our error pages for 503 errors
+  #   nginx.ingress.kubernetes.io/custom-http-errors: "413,502,504"
     kubernetes.io/ingress.class: "modsec01"
     {{- if .Values.ingress.cluster.name }}
     external-dns.alpha.kubernetes.io/set-identifier: "{{ $fullName }}-{{ .Release.Namespace }}-{{- .Values.ingress.cluster.name -}}"
