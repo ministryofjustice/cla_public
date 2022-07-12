@@ -8,7 +8,7 @@
   <h2 class="govuk-heading-m">{{ _('Purpose') }}</h2>
 
   <p class="govuk-body">
-    {% trans %}This privacy notice sets out the standards that you can expect from the Legal Aid Agency (<abbr>LAA</abbr>) when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met.{% endtrans %}
+    {% trans %}This privacy notice sets out the standards that you can expect from the Legal Aid Agency when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met.{% endtrans %}
   </p>
 
   <p class="govuk-body">{{ _('The Legal Aid Agency is an Executive Agency of the Ministry of Justice (<abbr>MoJ</abbr>). The <abbr>MoJ</abbr> is the data controller for the personal information we hold. The Legal Aid Agency collects and processes personal data for the exercise of its own and associated public functions. Our public function is to provide legal aid.') }}</p>
@@ -39,7 +39,7 @@
       {{ _('Reason for contacting <abbr title="Civil Legal Advice">CLA</abbr>, such as the nature of your problem or specific details about your situation;') }}
     </li>
     <li>
-      {{ _('Details of any specific needs that you may have in order to access the <abbr title="Civil Legal Advice">CLA</abbr> service; and') }}
+      {{ _('Details of any specific needs that you may have in order to access the <abbr title="Civil Legal Advice">CLA</abbr> service;') }}
     </li>
     <li>
       {% trans %}Responses to any customer satisfaction survey or details of any feedback, complaints or requests
@@ -64,7 +64,7 @@
   <h2 class="govuk-heading-m">{{ _('Purpose of processing and the lawful basis for the process') }}</h2>
 
   <p class="govuk-body">
-    {% trans %}The purpose of the Legal Aid Agency collecting and processing the personal data which you have provided on this form is for the purposes of providing legal aid. Specifically, we will use this personal data in the following ways:{% endtrans %}
+    {% trans %}The purpose of the Legal Aid Agency collecting and processing the personal data which you have provided in a legal aid application is for the purposes of providing legal aid. Our lawful basis is ‘the performance of a task carried out in the public interest or in the exercise of official authority’ as set out in Article 6(1)(e) of UK GDPR. The tasks are those set out in the Legal Aid, Sentencing and Punishment of Offenders Act 2012. Specifically, we will use this personal data in the following ways:{% endtrans %}
   </p>
 
   <ul class="govuk-list govuk-list--bullet">
@@ -86,7 +86,7 @@
   </ul>
 
   <p class="govuk-body">
-    {% trans %}Were the Legal Aid Agency unable to collect this personal information, we would not be able to conduct the activities above, which would prevent our ability to provide legal aid.{% endtrans %}
+    {% trans %}Were the Legal Aid Agency unable to collect this personal information, we would not be able to conduct the activities above, which would prevent us from providing legal aid.{% endtrans %}
   </p>  
 
   <p class="govuk-body">
@@ -94,8 +94,12 @@
   </p>  
 
   <p class="govuk-body">
-    {% trans %}We also collect ‘special categories of personal data’ for the purposes of monitoring equality, this is a legal requirement for public authorities under the Equality Act 2010. Special categories of personal data obtained for equality monitoring will be treated with the strictest confidence and any information published will not identify you or anyone else associated with your legal aid application.{% endtrans %}
+    {% trans %}We collect ‘special categories of personal data’. This data is collected where necessary for the purposes set out above. The condition under which we process this data is Article 9(g) of UK GDPR – Reasons of substantial public interest. Our associated Schedule 1 condition is Statutory and Government purposes. We also collect this data for the purposes of monitoring equality, this is a legal requirement for public authorities under the Equality Act 2010. Special categories of personal data will be treated with the strictest confidence and any information published under the Equality Act will not identify you or anyone else associated with your legal aid application.{% endtrans %}
   </p> 
+
+  <p class="govuk-body">
+    {% trans %}We collect ‘personal data relating to criminal convictions and offences or related security measures’. This data is collected where relevant for the purposes set out above. The Legal Aid Agency is an Executive Agency of the <abbr>MoJ</abbr>, an Official Authority for the purposes of Article 10 of UK GDPR.{% endtrans %}
+  </p>
 
   <h2 class="govuk-heading-m">{{ _('Who the information may be shared with') }}</h2>
 
@@ -116,6 +120,9 @@
     <li>
       {% trans %}If false or inaccurate information is provided or fraud identified, the Legal Aid Agency can lawfully share your personal information with fraud prevention agencies to detect and to prevent fraud and money laundering.{% endtrans %}
     </li>
+    <li>
+      {% trans %}Where a debt is owed to the Legal Aid Agency, we may share your data with public authorities such as HMRC and DWP and with debt collection partners such as Marston Holdings for the purposes of tracing, debt collection and enforcement.{% endtrans %}
+    </li>
   </ul>
 
   <p class="govuk-body">
@@ -125,23 +132,27 @@
   <h2 class="govuk-heading-m">{{ _('Data processors') }}</h2>
 
   <p class="govuk-body">
-    {% trans %}The LAA may contract with third party data processors to provide email, system administration, document management and IT storage services.{% endtrans %}
+    {% trans %}We may contract with third party data processors to provide email, system administration, document management and IT storage services. Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law.{% endtrans %}
   </p> 
 
   <p class="govuk-body">
-    {% trans %}Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law.{% endtrans %}
-  </p> 
+    {% trans %}We contract with Marston Holdings as a data processor for the collection and enforcement of criminal legal aid contributions. Any personal data shared with the data processor for this purpose is governed by model contract clauses under data protection law.{% endtrans %}
+  </p>
+
+  <h2 class="govuk-heading-m">{{ _('Automated decision making') }}</h2>
+
+  <p class="govuk-body">
+    We do not use solely automated decision making within the definition of Article 22(1) of UK <abbr>GDPR</abbr>. The overall decision on an application for legal aid or a claim for costs in a legal aid case will always be made by a human decision maker. This could be a member of our staff, or a staff member of a legal aid Provider acting under delegated authority from the Legal Aid Agency
+  </p>
 
   <h2 class="govuk-heading-m">{{ _('Details of transfers to third country and safeguards') }}</h2>
 
   <p class="govuk-body">
-    {% trans %}It may sometimes be necessary to transfer personal information overseas. When this is needed, information may be transferred to:{% endtrans %}
+    {% trans %}Personal data may be transferred to locations in the European Economic Area (<abbr>EEA</abbr>) where required by our data processors for hosting, storage and secure backup of our IT services. Such transfers are made on the basis of Adequacy decisions between the UK and EEA in accordance with Article 45 of UK <abbr>GDPR</abbr>.{% endtrans %}
   </p> 
-  <ul class="govuk-list govuk-list--bullet">
-    <li>{% trans %}the European Economic Area (<abbr>EEA</abbr>).{% endtrans %}</li>
-  </ul>
+
   <p class="govuk-body">
-    {% trans %}Any transfers made will be in full compliance with all aspects of the data protection law.{% endtrans %}
+    {% trans %}In limited and exceptional circumstances, where required for the provision of technical support, personal data stored in our call centre software may be accessed by support staff located in USA, Romania, Philippines, Singapore or Australia. Where transfers for this purpose are made to locations without Adequacy decisions the transfer is made on the basis of exceptions under Article 49 of UK <abbr>GDPR</abbr> and is required for the legitimate interests of the Ministry of Justice. The software provider maintains the same standards of IT and personnel security for its services overseas as it does for services in the UK.{% endtrans %}
   </p> 
 
   <h2 class="govuk-heading-m">{{ _('Retention period for information collected') }}</h2>
@@ -150,7 +161,7 @@
     {% trans %}Your personal information will not be retained for any longer than is necessary for the lawful purposes for which it has been collected and processed. This is to ensure that your personal information does not become inaccurate, out of date or irrelevant. The Legal Aid Agency have set retention periods for the personal information that we collect, this can be accessed via our website:{% endtrans %}
   </p> 
   <p class="govuk-body">
-   <a class="govuk-link" href="https://www.gov.uk/government/publications/record-retention-and-disposition-schedules" rel="external">{% trans %}See our record retention and disposition schedules{% endtrans %}</a>
+   <a class="govuk-link" href="https://www.gov.uk/government/publications/record-retention-and-disposition-schedules" rel="external">https://www.gov.uk/government/publications/record-retention-and-disposition-schedules</a>
   </p>
   <p class="govuk-body">
     {% trans %}You can also contact our Data Protection Officer for a copy of our retention schedules.{% endtrans %}
@@ -222,7 +233,7 @@
       {% trans %}Our instructions to staff on how to collect, use or delete your personal information;{% endtrans %}
     </li>
     <li>
-      {% trans %}How we check that the information we hold is accurate and up-to-date; and{% endtrans %}
+      {% trans %}How we check that the information we hold is accurate and up-to-date;{% endtrans %}
     </li>
     <li>
       {% trans %}How to make a complaint.{% endtrans %}
@@ -237,12 +248,10 @@
       {% trans %}
       The Data Protection Officer<br/>
       Ministry of Justice<br/>
-      3rd Floor, Post Point 3.20<br/>
-      10 South Colonnades<br/>
-      Canary Wharf<br/>
+      102 Petty France<br/>
       London<br/>
-      E14 4PU<br/>
-      <a class="govuk-link email" href="mailto:privacy@justice.gov.uk">privacy@justice.gov.uk</a>
+      SW1H 9AJ<br/>
+      <a class="govuk-link email" href="mailto:dataprotection@justice.gov.uk">dataprotection@justice.gov.uk</a>
       {% endtrans %}
   </p>
 
