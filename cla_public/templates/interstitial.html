@@ -51,8 +51,8 @@
 
   <p class="govuk-body">
     {% set get_in_touch_url = url_for('contact.get_in_touch') %}
-    <span class="govuk-!-font-weight-bold">{% trans %}Capital trapped in a property you own or other assets that you are not able to access</span>,
-    you should contact <a class="govuk-link" href="{{ get_in_touch_url }}">CLA</a> without completing the financial assessment.{% endtrans %}
+    {% trans %}If you have {% endtrans %}
+    <span class="govuk-!-font-weight-bold">{% trans %}Capital trapped in a property you own or other assets that you are not able to access{% endtrans %}</span>{% trans %}, you should contact <a class="govuk-link" href="{{ get_in_touch_url }}">CLA</a> without completing the financial assessment.{% endtrans %}
   </p>
 
   <p class="govuk-body">
