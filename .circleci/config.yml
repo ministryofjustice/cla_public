@@ -116,17 +116,16 @@ jobs:
       - run:
           name: Install cypress and axe-core
           command: |
-            npm i cypress
-            npm i cypress-downloadfile
-            npm i cypress-log-to-output
-            npm i axe-core
+            cd accessibility_tests
+            npm install
       - run:
           name: Run accessibility test
           command: |
-            mkdir ~/project/cypress/pages
+            cd accessibility_tests
+            mkdir cypress/pages
             node node_modules/.bin/cypress run --env UAT_URL=https://$RELEASE_HOST/start --spec "cypress/integration/happy-path.spec.js"
       - store_artifacts:
-          path: ~/project/cypress/videos
+          path: ~/project/accessibility_tests/cypress/videos
   test:
     docker:
       - image: circleci/python:2.7

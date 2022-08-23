@@ -1,0 +1,14 @@
+{
+  "name": "cla_public-accessibility",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=v16.13.1"
+  },
+  "engineStrict": true,
+  "dependencies": {
+    "cypress": "^9.7.0",
+    "cypress-downloadfile": "^1.2.2",
+    "cypress-log-to-output": "^1.1.2",
+    "axe-core": "^4.4.3"
+  }
+}
