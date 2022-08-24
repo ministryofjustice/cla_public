@@ -2578,10 +2578,6 @@ msgstr "<strong>Incognito</strong> ar Google Chrome"
 msgid "<strong>Private Window</strong> on Safari"
 msgstr "<strong>Ffenestr Breifat</strong> ar Safari"
 
-#: cla_public/templates/privacy.html:3
-msgid "Privacy Statement"
-msgstr "Datganiad Preifatrwydd"
-
 #: cla_public/templates/privacy.html:6
 msgid "Terms and conditions and privacy"
 msgstr "Telerau ac Amodau a phreifatrwydd"
@@ -2676,13 +2672,12 @@ msgstr "Er mwyn darparu gwasanaeth i chi, mae’n bosibl y bydd angen i Gyngor C
 
 #: cla_public/templates/privacy.html:75
 msgid "Personal data is information about you as an individual. It can be your name, address or telephone number."
-msgstr "Mae data personol yn wybodaeth amdanoch chi fel unigolyn. Gall gynnwys eich enw, eich cyfeiriad neu eich rhif ffôn."
+msgstr "Data personol ydy gwybodaeth amdanoch chi fel unigolyn. Gall hynny fod yn enw, cyfeiriad neu rif ffôn."
 
 #: cla_public/templates/privacy.html:79
 msgid ""
-"This statement explains how <abbr>CLA</abbr> will process any personal data that we collect\n"
-"    from you or that you provide to us."
-msgstr "Mae’r datganiad hwn yn egluro sut y bydd CLA yn prosesu unrhyw ddata personol y byddwn yn eu casglu oddi wrthych neu y byddwch yn eu darparu i ni."
+"The kind of information that <abbr title="Civil Legal Advice">CLA</abbr> will collect about you includes:"
+msgstr "Mae’r fath o wybodaeth fydd CCS yn casglu amdanoch chi yn cynnwys:"
 
 #: cla_public/templates/privacy.html:84
 msgid ""
@@ -4827,14 +4822,14 @@ msgstr "Cyngor Cyfreithiol Sifil (CLA) &ndash; Hysbysiad Preifatrwydd yr Asianta
 msgid "About personal information"
 msgstr "Gwybodaeth bersonol"
 
-msgid "This privacy notice sets out the standards that you can expect from the Legal Aid Agency (<abbr>LAA</abbr>) when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met."
-msgstr "Mae'r hysbysiad preifatrwydd hwn yn nodi'r safonau y gallwch eu disgwyl gan yr Asiantaeth Cymorth Cyfreithiol (<abbr>LAA</abbr>) pan fyddwn yn gofyn am wybodaeth bersonol ('data personol') amdanoch neu'n cadw gwybodaeth bersonol amdanoch chi; sut y gallwch gael gafael ar gopi o'ch data personol; a'r hyn y gallwch ei wneud os ydych yn credu nad ydym yn cyrraedd y safonau."
+msgid "This privacy notice sets out the standards that you can expect from the Legal Aid Agency when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met."
+msgstr "Mae’r hysbysiad preifatrwydd hon yn gosod y safonau yr allwch chi eu disgwyl gan yr Asiantaeth Cymorth Cyfreithiol pan yr ydym yn gofyn am neu yn cadw gwybodaeth bersonol (‘data personol’) amdanoch chi; sut allwch chi gael copi o’ch data personol; a beth allwch chi ei wneud os ydych chi’n meddwl nad ydym yn cwrdd â’r safonau."
 
 msgid "The Legal Aid Agency is an Executive Agency of the Ministry of Justice (<abbr>MoJ</abbr>). The <abbr>MoJ</abbr> is the data controller for the personal information we hold. The Legal Aid Agency collects and processes personal data for the exercise of its own and associated public functions. Our public function is to provide legal aid."
-msgstr "Mae'r Asiantaeth Cymorth Cyfreithiol yn Asiantaeth Weithredol o'r Weinyddiaeth Gyfiawnder (<abbr>MoJ</abbr>). Y Weinyddiaeth Gyfiawnder yw rheolydd data'r wybodaeth bersonol rydym yn ei chadw. Mae'r Asiantaeth Cymorth Cyfreithiol yn casglu ac yn prosesu data personol er mwyn ymarfer ei swyddogaethau ei hun a'r swyddogaethau cyhoeddus cysylltiedig. Ein swyddogaeth gyhoeddus yw darparu cymorth cyfreithiol."
+msgstr "Asiantaeth Gweithredol y Weinyddiaeth Gyfiawnder ydy’r Asiantaeth Cymorth Cyfreithiol. Y Weinyddiaeth Gyfiawnder ydy’r rheolwr data ar gyfer y wybodaeth bersonol yr ydym yn ei chadw. Mae’r Asiantaeth Cymorth Cyfreithiol yn casglu ac yn prosesu data personol er mwyn arfer swyddogaethau cyhoeddus ei hun a swyddogaethau cysylltiedig. Darparu cymorth cyfreithiol ydy ein swyddogaeth gyhoeddus."
 
 msgid "The <abbr title="Civil Legal Advice">CLA</abbr> Operator Service is delivered by Hinduja Global Solutions UK Ltd, a contractor employed by the Legal Aid Agency to deliver <abbr title="Civil Legal Advice">CLA</abbr>. If it is determined that you qualify for <abbr title="Civil Legal Advice">CLA</abbr>, we may put you through to one of a number of <abbr title="Civil Legal Advice">CLA</abbr> Specialist Advice Providers. These organisations are data processors on behalf of the Legal Aid Agency and Ministry of Justice."
-msgstr "Caiff y Gwasanaeth Gweithrediadau <abbr title="Civil Legal Advice">CLA</abbr> eu darparu gan Hinduja Global Solutions UK Ltd, sef contractwr a gyflogir gan yr Asiantaeth Cymorth Cyfreithiol i ddarparu <abbr title="Civil Legal Advice">CLA</abbr>. Os penderfynir eich bod yn gymwys am <abbr title="Civil Legal Advice">CLA</abbr>, efallai y byddwn yn eich trosglwyddo at un o nifer o Ddarparwyr Cyngor Arbenigol <abbr title="Civil Legal Advice">CLA</abbr>. Mae'r sefydliadau hyn yn broseswyr data ar ran yr Asiantaeth Cymorth Cyfreithiol a'r Weinyddiaeth Gyfiawnder."
+msgstr "Darperir Gwasanaeth Gweithredwr CCS gan Hinduja Global Solutions UK Cyf, contractwr a ddefnyddir gan yr Asiantaeth Cymorth Cyfreithiol i ddarparu CCS. Pe penderfynid gennym eich bod yn gymwys ar gyfer CCS, efallai y trosglwyddwn ni ohonoch at un o’r amryw Ddarparwyr Cyngor Arbenigol CCS. Mae’r cyrff hyn yn broseswyr data ar gyfer yr Asiantaeth Cymorth Cyfreithiol a’r Weinyddiaeth Gyfiawnder."
 
 msgid "The kind of information that <abbr title="Civil Legal Advice">CLA</abbr> will collect about you includes:"
 msgstr "Dyma'r math o wybodaeth y bydd y <abbr title="Civil Legal Advice">CLA</abbr> yn ei chasglu amdanoch chi:"
@@ -5256,3 +5251,255 @@ msgstr "i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac 
 
 #~ msgid "Go back and change answer"
 #~ msgstr "Mynd yn ôl i newid ateb"
+
+msgid "Purpose"
+msgstr "Bwriad"
+
+msgid "This privacy notice sets out the standards that you can expect from the Legal Aid Agency when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met."
+msgstr "Mae’r hysbysiad preifatrwydd hon yn gosod y safonau yr allwch chi eu disgwyl gan yr Asiantaeth Cymorth Cyfreithiol pan yr ydym yn gofyn am neu yn cadw gwybodaeth bersonol (‘data personol’) amdanoch chi; sut allwch chi gael copi o’ch data personol; a beth allwch chi ei wneud os ydych chi’n meddwl nad ydym yn cwrdd â’r safonau."
+
+msgid "The Legal Aid Agency is an Executive Agency of the Ministry of Justice (<abbr>MoJ</abbr>). The <abbr>MoJ</abbr> is the data controller for the personal information we hold. The Legal Aid Agency collects and processes personal data for the exercise of its own and associated public functions. Our public function is to provide legal aid."
+msgstr "Asiantaeth Gweithredol y Weinyddiaeth Gyfiawnder ydy’r Asiantaeth Cymorth Cyfreithiol. Y Weinyddiaeth Gyfiawnder ydy’r rheolwr data ar gyfer y wybodaeth bersonol yr ydym yn ei chadw. Mae’r Asiantaeth Cymorth Cyfreithiol yn casglu ac yn prosesu data personol er mwyn arfer swyddogaethau cyhoeddus ei hun a swyddogaethau cysylltiedig. Darparu cymorth cyfreithiol ydy ein swyddogaeth gyhoeddus."
+
+msgid "The <abbr title="Civil Legal Advice">CLA</abbr> Operator Service is delivered by Hinduja Global Solutions UK Ltd, a contractor employed by the Legal Aid Agency to deliver <abbr title="Civil Legal Advice">CLA</abbr>. If it is determined that you qualify for <abbr title="Civil Legal Advice">CLA</abbr>, we may put you through to one of a number of <abbr title="Civil Legal Advice">CLA</abbr> Specialist Advice Providers. These organisations are data processors on behalf of the Legal Aid Agency and Ministry of Justice."
+msgstr "Darperir Gwasanaeth Gweithredwr CCS gan Hinduja Global Solutions UK Cyf, contractwr a ddefnyddir gan yr Asiantaeth Cymorth Cyfreithiol i ddarparu CCS. Pe penderfynid gennym eich bod yn gymwys ar gyfer CCS, efallai y trosglwyddwn ni ohonoch at un o’r amryw Ddarparwyr Cyngor Arbenigol CCS. Mae’r cyrff hyn yn broseswyr data ar gyfer yr Asiantaeth Cymorth Cyfreithiol a’r Weinyddiaeth Gyfiawnder."
+
+msgid "About personal information"
+msgstr "Ynglŷn â gwybodaeth bersonol"
+
+msgid "Personal data is information about you as an individual. It can be your name, address or telephone number."
+msgstr "Data personol ydy gwybodaeth amdanoch chi fel unigolyn. Gall hynny fod yn enw, cyfeiriad neu rif ffôn."
+
+msgid "The kind of information that <abbr title="Civil Legal Advice">CLA</abbr> will collect about you includes:"
+msgstr "Mae’r fath o wybodaeth fydd CCS yn casglu amdanoch chi yn cynnwys:"
+
+msgid ""
+    "Personal details including your name, address, date of birth, contact details, diversity\n"
+    "monitoring information and national insurance number;"
+msgstr ""
+    "Manylion personol yn cynnwys eich enw, cyfeiriad, dyddiad geni, manylion cyswllt, \n"
+    "gwybodaeth fonitro amrywiaeth a rhif yswiriant gwladol;"
+
+msgid "Financial information needed to determine if you qualify for legal aid;"
+msgstr "Manylion cyllidol sydd angen er mwyn penderfynu os ydych yn gymwys ar gyfer cymorth cyfreithiol;"
+
+msgid "Reason for contacting <abbr title="Civil Legal Advice">CLA</abbr>, such as the nature of your problem or specific details about your situation;"
+msgstr "Rheswm dros cysylltu â CCS, megis hanfodion eich problem neu fanylion penodol ynglŷn â’ch sefyllfa;"
+
+msgid "Details of any specific needs that you may have in order to access the <abbr title="Civil Legal Advice">CLA</abbr> service;"
+msgstr "Manylion unrhyw anghenion penodol sydd gennych chi er mwyn cael mynediad at wasanaeth CCS;"
+
+msgid ""
+    "Responses to any customer satisfaction survey or details of any feedback, complaints or requests\n"
+    "for a review of our decision about whether you qualify for legal aid."
+msgstr ""
+    "Ymatebion i unrhyw arolwg boddhad cwsmer neu fanylion unrhyw adborth, cwynion neu /n"
+    "geisiadau am adolygiad o’n penderfyniad ynglŷn a’ch cymhwyster am gyfer cymorth cyfreithiol."
+
+msgid "We will only save the information you enter if you decide to contact a Civil Legal Advice operator. Therefore, the personal information that you have submitted, will only be stored when you click ‘submit your application’."
+msgstr "Cadwn ni ddim ond o’r gwybodaeth y rhoddwch chi os ydych chi’n penderfynu i gysylltu â gweithredwr Cyngor Cyfreithiol Sifil. Felly, bydd y wybodaeth bersonol yr ydych chi wedi cyflwyno ddim ond yn cael e chadw ar ôl i chi glicio ‘danfon cais’."
+
+msgid "We know how important it is to protect customers’ privacy and to comply with data protection laws. We will safeguard your personal data and will only disclose it where it is lawful to do so, or with your consent."
+msgstr "Rydyn yn ystyried pa mor bwysig ydy hi i ddiogelu preifatrwydd cwsmeriaid a chydymffurfio â chyfraith diogelu data. Byddwn ni’n gwarchod eich data personol a dim ond ei ddatgelu lle mae’n gyfreithlon i’w wneud, neu gyda’ch caniatâd."
+
+msgid "Types of personal data we process"
+msgstr "Mathau o ddata personol yr ydym yn prosesu"
+
+msgid "We only process personal data that is relevant for the services we are providing to you. The personal data which you have provided will only be used for the purposes set out below."
+msgstr "Rydym ond yn prosesu data personol sy’n berthnasol ar gyfer y gwasanaethau yr ydym ni’n darparu i chi. Ddefnyddir y data personol yr ydych chi wedi cyflwyno ar gyfer y dibenion isod yn unig."
+
+msgid "Purpose of processing and the lawful basis for the process"
+msgstr "Diben prosesu a sail gyfreithiol y proses"
+
+msgid "The purpose of the Legal Aid Agency collecting and processing the personal data which you have provided in a legal aid application is for the purposes of providing legal aid. Our lawful basis is ‘the performance of a task carried out in the public interest or in the exercise of official authority’ as set out in Article 6(1)(e) of UK GDPR. The tasks are those set out in the Legal Aid, Sentencing and Punishment of Offenders Act 2012. Specifically, we will use this personal data in the following ways:"
+msgstr "Darparu cymorth cyfreithiol ydy diben yr Asiantaeth Cymorth Cyfreithiol wrth gasglu a phrosesu’r data personol yr ydych chi wedi cyflwyno mewn cais cymorth cyfreithiol. Ein sail gyfreithiol ydy ‘perfformio tasg a chynhelir er budd y cyhoedd neu wrth arfer awdurdod swyddogol’ yn ôl Erthygl 6(1)(e) GDPR y DU. Y tasgau ydy’r rhai a rhestrir yn Neddf Gymorth Cyfreithiol, Dedfryd a Chosbi Troseddwyr 2012. Yn benodol, byddwn yn defnyddio’r data personol hwn fel a ganlyn:"
+
+msgid "In deciding whether you qualify for legal aid. This is to assess whether your issue is within the scope of the <abbr title="Civil Legal Advice">CLA</abbr> and whether you are financially eligible."
+msgstr "Er mwyn penderfynu os ydych yn gymwys ar gyfer cymorth cyfreithiol. Hynny yw, asesu os ydy’ch fater o fewn terfynau CCS ac os ydych chi’n gymwys yn ariannol."
+
+msgid "In assisting us in providing information and/or advice services to you."
+msgstr "Er mwyn helpu ni darparu gwybodaeth a/neu gwasanaethau cyngor i chi."
+
+msgid "To prevent or detect crime and fraud."
+msgstr "Er mwyn atal neu ganfod trosedd neu dwyll."
+
+msgid "In conducting periodic assurance audits on legal aid files to ensure that decisions have been made correctly and accurately."
+msgstr "Er mwyn cynnal archwiliadau aswiriant ar ffeiliau cymorth cyfreithiol i sicrhau bod penderfyniadau wedi eu gwneud yn gywir ac yn iawn."
+
+msgid "In producing statistics and information on our processes to enable us to improve and monitor our processes to assist us in carrying out our functions. This information is collated in an anonymous format, it will not be used to identify you."
+msgstr "Er mwyn cynhyrchu ystadegau a gwybodaeth ynglŷn â’n prosesau, yn ein galluogi ni i wella a monitro prosesau er mwyn helpu cynnal ein swyddogaethau. Coladir y wybodaeth hon mewn fformat dienw, ac ni ddefnyddir y wybodaeth i’ch adnabod chi."
+
+msgid "Were the Legal Aid Agency unable to collect this personal information, we would not be able to conduct the activities above, which would prevent us from providing legal aid."
+msgstr "Ble na all yr Asiantaeth Cymorth Cyfreithiol casglu’r wybodaeth bersonol hon, na allwn cynnal y gweithgareddau uchod, a byddai’n ein hatal ni rhag ddarparu cymorth cyfreithiol."
+
+msgid "We collect ‘special categories of personal data’. This data is collected where necessary for the purposes set out above. The condition under which we process this data is Article 9(g) of UK GDPR – Reasons of substantial public interest. Our associated Schedule 1 condition is Statutory and Government purposes. We also collect this data for the purposes of monitoring equality, this is a legal requirement for public authorities under the Equality Act 2010. Special categories of personal data will be treated with the strictest confidence and any information published under the Equality Act will not identify you or anyone else associated with your legal aid application."
+msgstr "Rydym ni’n casglu ‘categorïau arbennig o ddata personol’. Cesglid y data hwn lle mae angen at y dibenion a ddatgenir uchod. Rydym ni’n prosesu’r data hwn o dan amod Erthygl 9(g) GDPR y DU – Rhesymau o fudd sylweddol i’r cyhoedd. Ein hamod cysylltiedig Atodlen 1 ydy Dibenion Statudol a Llywodraethol. Rydyn ni hefyd yn casglu’r data hwn ar gyfer diben monitro cydraddoldeb; mae hyn yn ofyniad cyfreithiol ar gyfer awdurdodau cyhoeddus o dan Ddeddf Gydraddoldeb 2010. Ymdriniwn â chategorïau arbennig o ddata personol gyda’r cyfrinachedd eithaf ac na fydd unrhyw wybodaeth a gyflwynir o dan y Ddeddf Gydraddoldeb yn eich enwi chi neu unrhyw berson arall sy’n gysylltiedig â’ch cais cymorth cyfreithiol."
+
+msgid "We collect ‘personal data relating to criminal convictions and offences or related security measures’. This data is collected where relevant for the purposes set out above. The Legal Aid Agency is an Executive Agency of the <abbr>MoJ</abbr>, an Official Authority for the purposes of Article 10 of UK GDPR."
+msgstr "Rydym yn casglu ‘data personol ynglŷn ag euogfarnau a throseddau neu fesurau diogelwch cysylltiedig’. Cesglir y data hwn lle mae’n berthnasol ar gyfer y dibenion a ddatgenir uchod. Mae’r Asiantaeth Cymorth Cyfreithiol yn Asiantaeth Gweithredol y Weinyddiaeth Gyfiawnder, sef Awdurdod Swyddogol ar gyfer dibenion Erthygl 10 GDPR y DU."
+
+msgid "Who the information may be shared with"
+msgstr "Gyda phwy y gellid rhannu’r gwybodaeth"
+
+msgid "We sometimes need to share the personal information we process with other organisations. When this is necessary, we will comply with all aspects of the relevant data protection laws. The organisations we may share your personal information include:"
+msgstr "Weithiau mae angen i ni rannu'r wybodaeth bersonol rydyn ni’n ei phrosesu gyda chyrff eraill. Pan fydd hyn yn angenrheidiol, byddwn ni’n cydymffurfio â phob agwedd y deddfau diogelu data perthnasol. Mae’r cyrff y gallwn ni rannu eich gwybodaeth bersonol gyda nhw yn cynnwys:"
+
+msgid "Public authorities such as: HM Courts and Tribunal Service (<abbr>HMCTS</abbr>), HM Revenue and Customs (<abbr>HMRC</abbr>), Department of Work and Pensions (<abbr>DWP</abbr>) and HM Land Registry;"
+msgstr "Awdurdodau cyhoeddus fel: Gwasanaeth Llysoedd a Thribiwnlysoedd EM (GLlThEM), Cyllid a Thollau EM (CThEM), yr Adran Gwaith a Phensiynau (AGPh) a Chofrestrfa Tir EM;"
+
+msgid "Non-public authorities such as: Credit reference agencies Equifax and Transunion and our debt collection partners Marston Holdings;"
+msgstr "Awdurdodau nad ydynt yn gyhoeddus megis: Asiantaethau gwirio credyd Equifax a Transunion a'n partneriaid casglu dyledion Marston Holdings;"
+
+msgid "Hinduja Global Solutions UK Ltd and"
+msgstr "Hinduja Global Solutions UK Cyf a"
+
+msgid "If false or inaccurate information is provided or fraud identified, the Legal Aid Agency can lawfully share your personal information with fraud prevention agencies to detect and to prevent fraud and money laundering."
+msgstr "Os darperir gwybodaeth ffug neu anghywir neu os canfyddir twyll, gall yr Asiantaeth Cymorth Cyfreithiol rannu eich gwybodaeth bersonol yn gyfreithlon gydag asiantaethau atal twyll i ddarganfod ac atal twyll a gwyngalchu arian."
+
+msgid "Where a debt is owed to the Legal Aid Agency, we may share your data with public authorities such as HMRC and DWP and with debt collection partners such as Marston Holdings for the purposes of tracing, debt collection and enforcement."
+msgstr "Lle mae dyled tuag at yr Asiantaeth Cymorth Cyfreithiol, mae’n bosibl y byddwn ni’n rhannu eich data gydag awdurdodau cyhoeddus fel CThEM a’r AGPh a phartneriaid casglu dyledion fel Marston Holdings at ddibenion olrhain, casglu dyledion a gorfodi."
+
+msgid "You can contact our Data Protection Officer for further information on the organisations we may share your personal information with."
+msgstr "Gallwch chi gysylltu â’n Swyddog Diogelu Data i gael rhagor o wybodaeth am y sefydliadau y gallwn ni rannu eich gwybodaeth bersonol gyda nhw."
+
+msgid "Data processors"
+msgstr "Prosesyddion data"
+
+msgid "We may contract with third party data processors to provide email, system administration, document management and IT storage services. Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law."
+msgstr "Mae’n bosibl y byddwn ni’n contractio gyda phrosesyddion data trydydd parti i ddarparu gwasanaethau e-bost, gweinyddu systemau, rheoli dogfennau a storio TG. Bydd unrhyw ddata personol a rennir gyda phrosesydd data at y diben hwn yn cael ei lywodraethu gan gymalau contract enghreifftiol o dan gyfraith diogelu data."
+
+msgid "We contract with Marston Holdings as a data processor for the collection and enforcement of criminal legal aid contributions. Any personal data shared with the data processor for this purpose is governed by model contract clauses under data protection law."
+msgstr "Rydym yn contractio â Marston Holdings fel prosesydd data ar gyfer casglu a gorfodi cyfraniadau cymorth cyfreithiol troseddol. Mae unrhyw ddata personol a rennir gyda’r prosesydd data at y diben hwn yn cael ei lywodraethu gan gymalau contract enghreifftiol o dan gyfraith ddiogelu data."
+
+msgid "Automated decision making"
+msgstr "Gwneud penderfyniadau yn awtomataidd"
+
+msgid "We do not use solely automated decision making within the definition of Article 22(1) of UK <abbr>GDPR</abbr>. The overall decision on an application for legal aid or a claim for costs in a legal aid case will always be made by a human decision maker. This could be a member of our staff, or a staff member of a legal aid Provider acting under delegated authority from the Legal Aid Agency."
+msgstr "Nid ydym yn defnyddio prosesau gwneud penderfyniadau yn awtomataidd yn unig o fewn y diffiniad yn Erthygl 22(1) GDPR y DU. Bydd y penderfyniad cyflawn ar gais am gymorth cyfreithiol neu hawliad am gostau mewn achos cymorth cyfreithiol yn cael ei wneud gan fod dynol bob tro. Gallai hwn fod yn aelod o’n staff, neu’n aelod o staff Darparwr cymorth cyfreithiol sy’n gweithredu o dan awdurdod dirprwyedig yr Asiantaeth Cymorth Cyfreithiol."
+
+msgid "Details of transfers to third country and safeguards"
+msgstr "Manylion trosglwyddiadau i drydydd gwledydd ac amddiffyniadau"
+
+msgid "Personal data may be transferred to locations in the European Economic Area (<abbr>EEA</abbr>) where required by our data processors for hosting, storage and secure backup of our IT services. Such transfers are made on the basis of Adequacy decisions between the UK and EEA in accordance with Article 45 of UK <abbr>GDPR</abbr>."
+msgstr "Mae’n bosibl y drosglwyddir data personol i leoliadau yn yr Ardal Economaidd Ewropeaidd (AEE) lle bod angen ar ein prosesyddion data ar gyfer lletya, storio a chadw copïau wrth gefn diogel o’n gwasanaethau TG. Gwneir trosglwyddiadau cyfryw ar sail penderfyniadau Digonolrwydd rhwng y DU a’r AEE yn unol ag Erthygl 45 GDPR y DU."
+
+msgid "In limited and exceptional circumstances, where required for the provision of technical support, personal data stored in our call centre software may be accessed by support staff located in USA, Romania, Philippines, Singapore or Australia. Where transfers for this purpose are made to locations without Adequacy decisions the transfer is made on the basis of exceptions under Article 49 of UK <abbr>GDPR</abbr> and is required for the legitimate interests of the Ministry of Justice. The software provider maintains the same standards of IT and personnel security for its services overseas as it does for services in the UK."
+msgstr "Mewn amgylchiadau cyfyngedig ac eithriadol, lle mae angen ar gyfer darparu cymorth technegol, gall staff cymorth yn yr UDA, Rwmania, y Philipinau, Singapôr neu Awstralia gael mynediad i ddata personol sydd wedi'i storio yn ein meddalwedd canolfan alwadau. Lle gwneir trosglwyddiadau at y diben hwn i leoliadau heb benderfyniadau Digonolrwydd, gwneir y trosglwyddiad ar sail eithriadau o dan Erthygl 49 GDPR y DU lle mae angen er budd cyfreithus y Weinyddiaeth Gyfiawnder. Mae darparwr y meddalwedd yn cynnal yr union safonau TG a diogelwch personél ar gyfer ei wasanaethau dramor ag y mae o ar gyfer gwasanaethau yn y DU."
+
+msgid "Retention period for information collected"
+msgstr "Cyfnod cadw ar gyfer gwybodaeth a gesglir"
+
+msgid "Your personal information will not be retained for any longer than is necessary for the lawful purposes for which it has been collected and processed. This is to ensure that your personal information does not become inaccurate, out of date or irrelevant. The Legal Aid Agency have set retention periods for the personal information that we collect, this can be accessed via our website:"
+msgstr "Ni chaiff eich gwybodaeth bersonol ei chadw am fwy o amser na sy’n angenrheidiol at y dibenion cyfreithlon y gasglwyd a phroseswyd ar eu cyfer. Mae hyn er mwyn sicrhau nad ydy eich gwybodaeth bersonol yn mynd yn wallus, yn heneiddol nac yn amherthnasol. Mae’r Asiantaeth Cymorth Cyfreithiol wedi gosod cyfnodau cadw ar gyfer y wybodaeth bersonol a gasglwn, a gellir gael mynediad i hyn trwy ein gwefan ni:"
+
+msgid "You can also contact our Data Protection Officer for a copy of our retention schedules."
+msgstr "Gallwch hefyd gysylltu â'n Swyddog Diogelu Data i gael copi o'n hamserlenni cadw."
+
+msgid "While we retain your personal data, we will ensure that it is protected from loss, misuse or unauthorised access and disclosure. Once the retention period has been reached, your personal data will be permanently and securely deleted and destroyed."
+msgstr "Tra byddwn ni’n cadw eich data personol, byddwn yn sicrhau ei fod yn cael ei ddiogelu rhag golled, camddefnydd neu fynediad a datgeliad anawdurdodedig. Unwaith y bydd y cyfnod cadw yn dod i ben, bydd eich data personol yn cael ei ddileu a'i ddinistrio'n barhaol ac yn ddiogel."
+
+msgid "Access to personal information"
+msgstr "Mynediad i wybodaeth bersonol"
+
+msgid "You can find out if we hold any personal data about you by making a ‘subject access request’. If you wish to make a subject access request please contact:"
+msgstr "Gallwch ddarganfod os ydym yn cadw unrhyw ddata personol amdanoch trwy wneud ‘cais cyrchu gwrthrych’. Os hoffech chi wneud cais cyrchu gwrthrych, cysylltwch â:"
+
+msgid ""
+    "Disclosure Team - Post point 10.25<br/>"
+    "Ministry of Justice<br/>"
+    "102 Petty France<br/>"
+    "London<br/>"
+    "SW1H 9AJ <br/>"    
+    "<a class="govuk-link email" href="mailto:data.access@justice.gov.uk">data.access@justice.gov.uk</a>"
+msgstr ""
+    "Tîm Datgelu – Pwynt post 10.25<br/>"
+    "Gweinyddiaeth Gyfiawnder<br/>"
+    "102 Petty France<br/>"
+    "Llundain<br/>"
+    "SW1H 9AJ <br/>"
+    "<a class="govuk-link email" href="mailto:data.access@justice.gov.uk">data.access@justice.gov.uk</a>"
+
+msgid "When we ask you for personal data"
+msgstr "Tra gofynnwn ni am wybodaeth bersonol"
+
+msgid "We promise to inform you why we need your personal data and ask only for the personal data we need and not collect information that is irrelevant or excessive."
+msgstr "Rydyn ni’n addo i roi gwybod i chi pam mae angen eich data personol chi, dim ond i ofyn am y data personol rydyn ni ei angen, ac i beidio casglu gwybodaeth sy’n amherthnasol neu’n ormodol."
+
+msgid "When we collect your personal data, we have responsibilities, and you have rights. These include:"
+msgstr "Pan yr ydyn ni’n casglu eich data personol, mae gennym ni gyfrifoldebau, a mae gennych chi hawliau, gan gynnwys:"
+
+msgid "That you can withdraw consent at any time, where relevant;"
+msgstr "Eich bod chi’n gallu tynnu caniatâd yn ôl ar unrhyw adeg, lle mae’n berthnasol;"
+
+msgid "That you can lodge a complaint with the supervisory authority;"
+msgstr "Eich bod chi’n gallu gwneud cwyn i’r awdurdod goruchwylio;"
+
+msgid "That we will protect and ensure that no unauthorised person has access to it;"
+msgstr "Ein bod ni’n diogelu’r data ac yn sicrhau nad ydy unrhyw berson anawdurdodedig yn cael mynediad iddo;"
+
+msgid "That your personal data is shared with other organisations only for legitimate purposes;"
+msgstr "Y rennir eich data personol gyda chyrff eraill at ddibenion cyfreithus yn unig;"
+
+msgid "That we don’t keep it longer than is necessary;"
+msgstr "Ein bod ni ddim yn ei gadw yn hirach na sy’n angenrheidiol;"
+
+msgid "That we will not make your personal data available for commercial use without your consent; and"
+msgstr "Ein bod ni ddim yn gwneud eich data personol ar gael ar gyfer defnyddion masnachol heb eich caniatâd; ac"
+
+msgid "That we will consider your request to correct, stop processing or erase your personal data."
+msgstr "Ein bod ni’n ystyried unrhyw gais i gywiro, atal prosesu neu ddileu eich data personol."
+
+msgid "You can get more details on:"
+msgstr "Gallwch chi gael mwy o fanylion ynglŷn â:"
+
+msgid "Agreements we have with other organisations for sharing information;"
+msgstr "Cytundebau sydd gennym ni gyda chyrff eraill er mwyn rhannu gwybodaeth;"
+
+msgid "" 
+    "Circumstances where we can pass on personal information without telling you, for example, to help with the prevention \n" 
+    "or detection of crime or to produce anonymised statistics;"
+msgstr ""
+    "Amgylchiadau lle gallwn ni rhannu gwybodaeth bersonol heb ddweud wrthoch chi, er \n"
+    "enghraifft, i helpu gyda rhwystro neu ganfod troseddau neu i greu ystadegau dienw;"
+
+msgid "Our instructions to staff on how to collect, use or delete your personal information;"
+msgstr "Ein cyfarwyddiadau i’n staff ni ynglŷn â sut i gasglu, defnyddio neu ddileu eich gwybodaeth bersonol;"
+
+msgid "How we check that the information we hold is accurate and up-to-date;"
+msgstr "Sut yr ydyn ni’n sicrhau bod y gwybodaeth yr ydyn ni’n ei chadw yn gywir ac yn gyfoes;"
+
+msgid "How to make a complaint."
+msgstr "Sut i wneud cwyn."
+
+msgid "For more information about the above issues, please contact the <abbr>MoJ</abbr> Data Protection Officer:"
+msgstr "Am fwy o wybodaeth ynglŷn â’r materion uchod, cysylltwch â swyddog diogelu data y Weinyddiaeth Gyfiawnder:"
+
+msgid ""
+      "The Data Protection Officer<br/>"
+      "Ministry of Justice<br/>"
+      "102 Petty France<br/>"
+      "London<br/>"
+      "SW1H 9AJ<br/>"
+      "<a class="govuk-link email" href="mailto:dataprotection@justice.gov.uk">dataprotection@justice.gov.uk</a>"
+msgstr ""
+    "Y Swyddog Diogelu Data<br/>"
+    "Gweinyddiaeth Gyfiawnder<br/>"
+    "102 Petty France<br/>"
+    "Llundain<br/>"
+    "SW1H 9AJ<br/>"
+    "<a class="govuk-link email" href="mailto:dataprotection@justice.gov.uk">dataprotection@justice.gov.uk</a>"
+
+msgid "For more information on how and why your information is processed, please see the information provided when you accessed our services or were contacted by us."
+msgstr "Am fwy o wybodaeth ynglŷn â sut a pam yr ydyn ni’n prosesu eich gwybodaeth, gweler y wybodaeth a ddarparwyd pan ddechreuoch chi ddefnyddio ein gwasanaethau neu pan gysylltom ni â chi."
+
+msgid "Complaints"
+msgstr "Cwynion"
+
+msgid "When we ask you for information, we will keep to the law. If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
+msgstr "Pan yr ydym yn gofyn i chi am wybodaeth, byddwn yn cadw at y gyfraith. Os ydych yn ystyried bod eich gwybodaeth wedi cael ei thrin yn anghywir, gallwch gysylltu â’r Comisiynydd Gwybodaeth ar gyfer cyngor annibynnol ynglŷn â diogelu data. Gallwch gysylltu â’r Comisiynydd Gwybodaeth ar:"
+
+msgid "Information Commissioner’s Office"
+msgstr "Swyddfa’r Comisiynydd Gwybodaeth"
+
+msgid "Tel:"
+msgstr "Ffôn:"
