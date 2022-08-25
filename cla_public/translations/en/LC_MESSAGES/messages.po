@@ -3465,8 +3465,7 @@ msgid "The kind of information that <abbr title="Civil Legal Advice">CLA</abbr> 
 msgstr ""
 
 msgid ""
-    "Personal details including your name, address, date of birth, contact details, diversity\n"
-    "monitoring information and national insurance number;"
+    "Personal details including your name, address, date of birth, contact details, diversity monitoring information and national insurance number;"
 msgstr ""
 
 msgid "Financial information needed to determine if you qualify for legal aid;"
