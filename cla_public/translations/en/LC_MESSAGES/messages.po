@@ -3464,8 +3464,7 @@ msgstr ""
 msgid "The kind of information that <abbr title="Civil Legal Advice">CLA</abbr> will collect about you includes:"
 msgstr ""
 
-msgid ""
-    "Personal details including your name, address, date of birth, contact details, diversity monitoring information and national insurance number;"
+msgid "Personal details including your name, address, date of birth, contact details, diversity monitoring information and national insurance number;"
 msgstr ""
 
 msgid "Financial information needed to determine if you qualify for legal aid;"
@@ -3478,8 +3477,7 @@ msgid "Details of any specific needs that you may have in order to access the <a
 msgstr ""
 
 msgid ""
-    "Responses to any customer satisfaction survey or details of any feedback, complaints or requests\n"
-    "for a review of our decision about whether you qualify for legal aid."
+    "Responses to any customer satisfaction survey or details of any feedback, complaints or requests for a review of our decision about whether you qualify for legal aid."
 msgstr ""
 
 msgid "We will only save the information you enter if you decide to contact a Civil Legal Advice operator. Therefore, the personal information that you have submitted, will only be stored when you click ‘submit your application’."
