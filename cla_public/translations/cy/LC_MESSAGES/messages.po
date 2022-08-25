@@ -4524,7 +4524,7 @@ msgid "When we ask you for information, we will keep to the law. If you consider
 msgstr "Pan yr ydym yn gofyn i chi am wybodaeth, byddwn yn cadw at y gyfraith. Os ydych yn ystyried bod eich gwybodaeth wedi cael ei thrin yn anghywir, gallwch gysylltu â’r Comisiynydd Gwybodaeth ar gyfer cyngor annibynnol ynglŷn â diogelu data. Gallwch gysylltu â’r Comisiynydd Gwybodaeth ar:"
 
 msgid "Information Commissioner’s Office<br />"
-msgstr "Swyddfa’r Comisiynydd Gwybodaeth"
+msgstr "Swyddfa’r Comisiynydd Gwybodaeth<br />"
 
 msgid "Tel:"
 msgstr "Ffôn:"
