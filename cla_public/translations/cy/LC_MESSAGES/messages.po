@@ -4000,47 +4000,8 @@ msgstr "Aeth y <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr> ati i brofi 
 msgid "Civil Legal Advice (CLA) &ndash; Legal Aid Agency Privacy Notice"
 msgstr "Cyngor Cyfreithiol Sifil (CLA) &ndash; Hysbysiad Preifatrwydd yr Asiantaeth Cymorth Cyfreithiol"
 
-msgid "The kind of information that <abbr title="Civil Legal Advice">CLA</abbr> will collect about you includes:"
-msgstr "Dyma'r math o wybodaeth y bydd y <abbr title="Civil Legal Advice">CLA</abbr> yn ei chasglu amdanoch chi:"
-
-msgid "The purpose of the Legal Aid Agency collecting and processing the personal data which you have provided on this form is for the purposes of providing legal aid. Specifically, we will use this personal data in the following ways:"
-msgstr "Mae'r Asiantaeth Cymorth Cyfreithiol yn casglu ac yn prosesu’r data personol a rowch ar y ffurflen hon er mwyn darparu cymorth cyfreithiol. Yn benodol, byddwn yn defnyddio'r data personol hwn fel a ganlyn:"
-
-msgid "Were the Legal Aid Agency unable to collect this personal information, we would not be able to conduct the activities above, which would prevent our ability to provide legal aid."
-msgstr "Petai'r Asiantaeth Cymorth Cyfreithiol yn methu â chasglu'r wybodaeth bersonol hon, ni fyddai modd i ni ymgymryd â'r gweithgareddau uchod, a byddai hynny'n ein hatal rhag darparu cymorth cyfreithiol."
-
-msgid "The lawful basis for the Legal Aid Agency collecting and processing your personal data is for the administration of justice and the result of the powers contained in Legal Aid, Sentencing and Punishment of Offenders Act 2012."
-msgstr "Y sail gyfreithiol dros gael yr Asiantaeth Cymorth Cyfreithiol i gasglu a phrosesu eich data personol yw er mwyn gweinyddu cyfiawnder a chanlyniad y pwerau yn y Ddeddf Cymorth Cyfreithiol, Dedfrydu a Chosbi Troseddwyr 2012."
-
-msgid "We also collect ‘special categories of personal data’ for the purposes of monitoring equality, this is a legal requirement for public authorities under the Equality Act 2010. Special categories of personal data obtained for equality monitoring will be treated with the strictest confidence and any information published will not identify you or anyone else associated with your legal aid application."
-msgstr "Rydym hefyd yn casglu ‘categorïau arbennig o ddata personol’ at ddibenion monitro cydraddoldeb, sy'n ofyniad cyfreithiol i awdurdodau cyhoeddus o dan Ddeddf Cydraddoldeb 2010. Bydd categorïau arbennig o ddata personol a geir er mwyn monitro cydraddoldeb yn cael eu trin yn gwbl gyfrinachol, ac ni fydd unrhyw wybodaeth a gyhoeddir yn galluogi eraill i’ch adnabod chi nac unrhyw un arall sy'n gysylltiedig â'ch cais am gymorth cyfreithiol."
-
-msgid "Public authorities such as: HM Courts and Tribunal Service (<abbr>HMCTS</abbr>), HM Revenue and Customs (<abbr>HMRC</abbr>), Department of Work and Pensions (<abbr>DWP</abbr>) and HM Land Registry;"
-msgstr "Awdurdodau cyhoeddus fel: Gwasanaeth Llysoedd a Thribiwnlysoedd EM (<abbr>GLlTEM</abbr>), Cyllid a Thollau EM (<abbr>HMRC</abbr>), Yr Adran Gwaith a Phensiynau (<abbr>DWP</abbr>) a Chofrestrfa Tir EM;"
-
-msgid "Non-public authorities such as: Credit reference agencies Equifax and Transunion and our debt collection partners Marston Holdings;"
-msgstr "Awdurdodau nad ydynt yn rhai cyhoeddus fel: Asiantaethau gwirio credyd Equifax a Transunion a'n partneriaid casglu dyledion Marston Holdings;"
-
-msgid "The LAA may contract with third party data processors to provide email, system administration, document management and IT storage services."
-msgstr "Gallai'r LAA ddod i gytundeb gyda phroseswyr data trydydd parti i ddarparu gwasanaethau e-bost, gweinyddu systemau, rheoli dogfennau a storio TG."
-
 msgid "Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law."
 msgstr "Caiff unrhyw ddata personol a rennir gyda phrosesydd data at y diben hwn ei lywodraethu gan gymalau contract enghreifftiol o dan gyfraith diogelu data."
-
-msgid "It may sometimes be necessary to transfer personal information overseas. When this is needed, information may be transferred to:"
-msgstr "Efallai weithiau y bydd angen trosglwyddo gwybodaeth bersonol dramor. Pan fydd angen gwneud hyn, gall gwybodaeth gael ei throsglwyddo i'r:"
-
-msgid "the European Economic Area (<abbr>EEA</abbr>)."
-msgstr "Ardal Economaidd Ewropeaidd."
-
-msgid "See our record retention and disposition schedules"
-msgstr "Edrychwch ar ein hamserlenni ar gyfer cadw a gwaredu cofnodion"
-
-msgid "You can find out if we hold any personal data about you by making a ‘subject access request’. If you wish to make a subject access request please contact:"
-msgstr "Gallwch ganfod a oes gennym unrhyw ddata personol amdanoch drwy wneud 'cais gwrthrych am wybodaeth’. Os hoffech wneud cais am fynediad at eich data, cysylltwch â:"
-
-msgid "The information you have entered has not been stored on your computer or mobile device, but your browsing history will record you have visited this service. If you are at risk of harm, you should delete your browser history."
-msgstr "Nid yw’r wybodaeth a roddwyd gennych chi wedi cael ei storio ar eich cyfrifiadur na’ch dyfais symudol, ond bydd eich hanes pori yn dangos eich bod wedi ymweld â’r gwasanaeth hwn. Os ydych chi mewn perygl o niwed, dylech chi ddileu eich hanes pori."
 
 msgid "Use the Family Mediation Council (FMC) directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
 msgstr "Defnyddiwch gyfeiriadur y Cyngor Cyfryngu Teuluol i ddod o hyd i gyfryngwr a threfnu apwyntiad ar gyfer Cyfarfod Asesu a Gwybodaeth am Gyfryngu."
