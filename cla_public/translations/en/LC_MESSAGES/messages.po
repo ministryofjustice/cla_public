@@ -3671,7 +3671,7 @@ msgstr ""
 msgid "When we ask you for information, we will keep to the law. If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
 msgstr ""
 
-msgid "Information Commissioner’s Office"
+msgid "Information Commissioner’s Office<br />"
 msgstr ""
 
 msgid "Tel:"
