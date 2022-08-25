@@ -3997,9 +3997,6 @@ msgstr "Cynhaliwyd y profion gan y Ganolfan Hygyrchedd Digidol (<abbr>DAC</abbr>
 msgid "The <abbr title='Digital Accessibility Centre'>DAC</abbr> tested core journeys, key functionality and interactive features that reflect the content that the average user may encounter."
 msgstr "Aeth y <abbr title='Ganolfan Hygyrchedd Digidol'>DAC</abbr> ati i brofi teithiau craidd, swyddogaeth allweddol a nodweddion rhyngweithiol sy'n adlewyrchu'r cynnwys y gall y defnyddiwr cyffredin ddod ar eu traws."
 
-msgid "Civil Legal Advice (CLA) &ndash; Legal Aid Agency Privacy Notice"
-msgstr "Cyngor Cyfreithiol Sifil (CLA) &ndash; Hysbysiad Preifatrwydd yr Asiantaeth Cymorth Cyfreithiol"
-
 msgid "Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law."
 msgstr "Caiff unrhyw ddata personol a rennir gyda phrosesydd data at y diben hwn ei lywodraethu gan gymalau contract enghreifftiol o dan gyfraith diogelu data."
 
@@ -4313,8 +4310,8 @@ msgstr "i ddod o hyd i gyfryngwr ac i wneud apwyntiad am Gyfarfod Gwybodaeth ac 
 #~ msgid "Go back and change answer"
 #~ msgstr "Mynd yn ôl i newid ateb"
 
-msgid "Purpose"
-msgstr "Bwriad"
+msgid "Civil Legal Advice (CLA) &ndash; Legal Aid Agency Privacy Notice"
+msgstr "Cyngor Cyfteithiol Sifil (“CCS”) – Asiantaeth Cymroth Cyfteithiol Hysbysiad Preifatrwydd"
 
 msgid "This privacy notice sets out the standards that you can expect from the Legal Aid Agency when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met."
 msgstr "Mae’r hysbysiad preifatrwydd hon yn gosod y safonau yr allwch chi eu disgwyl gan yr Asiantaeth Cymorth Cyfreithiol pan yr ydym yn gofyn am neu yn cadw gwybodaeth bersonol (‘data personol’) amdanoch chi; sut allwch chi gael copi o’ch data personol; a beth allwch chi ei wneud os ydych chi’n meddwl nad ydym yn cwrdd â’r safonau."

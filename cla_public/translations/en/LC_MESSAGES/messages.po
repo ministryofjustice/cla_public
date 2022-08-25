@@ -3443,9 +3443,6 @@ msgstr ""
 #~ "      "
 #~ msgstr ""
 
-msgid "Purpose"
-msgstr ""
-
 msgid "This privacy notice sets out the standards that you can expect from the Legal Aid Agency when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met."
 msgstr ""
 
