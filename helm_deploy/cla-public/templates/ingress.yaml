@@ -1,45 +1,5 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "cla-public.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: {{ $fullName }}
-  labels:
-    {{- include "cla-public.labels" . | nindent 4 }}
-  annotations:
-  # Add annotation to exclude 503 error pages from the list the cloud-platform error pages
-  # and use our error pages for 503 errors
-    nginx.ingress.kubernetes.io/custom-http-errors: "413,502,504"
-    kubernetes.io/ingress.class: "modsec01"
-    {{- if .Values.ingress.cluster.name }}
-    external-dns.alpha.kubernetes.io/set-identifier: "{{ $fullName }}-{{ .Release.Namespace }}-{{- .Values.ingress.cluster.name -}}"
-    external-dns.alpha.kubernetes.io/aws-weight: "{{- .Values.ingress.cluster.weight -}}"
-    {{- end }}
-  {{- with .Values.ingress.annotations }}
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
-spec:
-  tls:
-    - hosts:
-       - "{{ .Values.host }}"
-      secretName: {{ .Values.ingress.secretName }}
-  rules:
-    - host: "{{ .Values.host }}"
-      http:
-        paths:
-          - path: "/"
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: {{ $fullName }}-app
-                port:
-                  number: {{ $svcPort }}
-{{- end }}
----
-{{- if .Values.ingress.enabled -}}
-{{- $fullName := include "cla-public.fullname" . -}}
 {{- $ingressName := printf "%s-%s" $fullName "v122" -}}
 {{- $svcPort := .Values.service.port -}}
 apiVersion: networking.k8s.io/v1
