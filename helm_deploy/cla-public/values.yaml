@@ -71,6 +71,14 @@ envVars:
     configmap:
       name: emergency-message
       key: message-on
+  EMERGENCY_MESSAGE_TITLE:
+    configmap:
+      name: emergency-message
+      key: message-title
+  EMERGENCY_MESSAGE_TEXT:
+    configmap:
+      name: emergency-message
+      key: message-text
   FAMILY_ISSUE_FEATURE_FLAG:
     configmap:
       name: family-issue
