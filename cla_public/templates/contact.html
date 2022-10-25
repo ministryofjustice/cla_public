@@ -14,8 +14,7 @@
 
 {% block inner_content %}
   {% if emergency_message %}
-    {% call EmergencyMessage.emergency_message(emergency_title, emergency_text) %}
-    {% endcall %}
+    {{ EmergencyMessage(emergency_title, emergency_text) }}
   {% endif %}
   {{ Form.handle_errors(form) }}
   {% block page_text %}
