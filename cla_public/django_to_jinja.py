@@ -3,7 +3,7 @@ import os
 import sys
 import datetime
 
-from flask import Blueprint, url_for
+from flask import Blueprint, url_for, current_app
 from flask.ext.markdown import Markdown
 import jinja2
 
@@ -55,6 +55,14 @@ def change_jinja_templates(app):
         except KeyError:
             log.critical("Cannot find APP_SETTINGS group in the configuration file.")
             sys.exit(1)
+
+    @app.context_processor
+    def emergency_message_settings():
+        return {
+            "emergency_message_on": current_app.config["EMERGENCY_MESSAGE_ON"],
+            "emergency_message_title": current_app.config["EMERGENCY_MESSAGE_TITLE"],
+            "emergency_message_text": current_app.config["EMERGENCY_MESSAGE_TEXT"],
+        }
 
     # get today's date
     @app.context_processor

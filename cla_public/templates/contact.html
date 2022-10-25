@@ -7,15 +7,11 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/subform.html" as Subform %}
 {% import "macros/element.html" as Element %}
-{% import "macros/emergency_message.html" as EmergencyMessage %}
 
 {% set title = _('Contact Civil Legal Advice') %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block inner_content %}
-  {% if emergency_message %}
-    {{ EmergencyMessage(emergency_title, emergency_text) }}
-  {% endif %}
   {{ Form.handle_errors(form) }}
   {% block page_text %}
     {% if config.CONTACT_ONLY %}

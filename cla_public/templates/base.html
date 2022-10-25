@@ -1,6 +1,7 @@
 {% extends "moj_template_base.jinja" %}
 
 {% import "macros/element.html" as Element %}
+{% import "macros/emergency_message.html" as Message %}
 
 {% block page_title %}{{ app_title }}{% endblock %}
 
@@ -84,8 +85,16 @@
             </div>
           {% endif %}
         {% endwith %}
-      <div class="govuk-grid-column-two-thirds">
         {% block session_timeout_dialog %} {% include "_modal-dialog.html" %} {% endblock %}
+      <div class="govuk-grid-column-full">
+        {% block emergency_message_block %}
+          {% if emergency_message_on %}
+            {% call Message.emergency_message(emergency_message_title, emergency_message_text) %}
+            {% endcall %}
+          {% endif %}
+        {% endblock %}
+      </div>
+      <div class="govuk-grid-column-two-thirds">
         {% block inner_content %}{% endblock %}
       </div>
       <div class="govuk-grid-column-one-third">
