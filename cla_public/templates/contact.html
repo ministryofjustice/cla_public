@@ -8,16 +8,17 @@
 {% import "macros/subform.html" as Subform %}
 {% import "macros/element.html" as Element %}
 {% import "macros/emergency_message.html" as EmergencyMessage %}
+{% import "macros/maintenance_message.html" as EmergencyMessage %}
 
 {% set title = _('Contact Civil Legal Advice') %}
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block inner_content %}
   {% if emergency_message %}
-    {% call EmergencyMessage.emergency_message() %}
-      {{ _('Book a call back or text ‘legalaid’ and your name to 80010 and we will contact you as soon as we can.')}}
+    {% call EmergencyMessage.emergency_message(emergency_title, emergency_text) %}
     {% endcall %}
   {% endif %}
+{% endif %}
   {{ Form.handle_errors(form) }}
   {% block page_text %}
     {% if config.CONTACT_ONLY %}
