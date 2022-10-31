@@ -21,7 +21,7 @@ metadata:
   {{- end }}
     nginx.ingress.kubernetes.io/enable-modsecurity: "true"
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
-      SecRuleRemoveById 200001
+      SecRuleEngine On
 spec:
   ingressClassName: "modsec"
   tls:
