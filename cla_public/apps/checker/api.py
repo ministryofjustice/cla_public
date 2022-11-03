@@ -111,7 +111,7 @@ API_MESSAGE_WARNINGS = ["Case with this Eligibility check already exists."]
 
 def log_api_errors_to_sentry(fn):
     def wrapped(*args, **kwargs):
-        sentry = getattr(current_app, "sentry", None)
+        sentry = getattr(current_app, "sentry", True)
         try:
             return fn(*args, **kwargs)
         except (ConnectionError, Timeout, SlumberBaseException) as e:
