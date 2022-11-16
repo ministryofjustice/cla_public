@@ -3,7 +3,6 @@
 from collections import OrderedDict
 
 import datetime
-import random
 
 from flask.ext.babel import lazy_gettext as _
 from wtforms import FormField, RadioField, SelectField
@@ -57,9 +56,12 @@ class DayChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
+        self.choices.insert(0, ("", "-- Please select --"))
+        self.day_choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
 
     @property
     def day_time_choices(self, num_days=6):
+        """Generate time slots options for call on another day select options"""
         days = OPERATOR_HOURS.available_days(num_days)
 
         def time_slots(day):
@@ -92,14 +94,16 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     """
 
     def __init__(self, choices_callback=None, validators=None, **kwargs):
+        """choices_callback is the datetime day argument"""
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
-        if self.choices:
-            self.default, _ = random.choice(self.choices)
+        self.choices.insert(0, ("", "-- Please select --"))
+        self.default = self.choices
 
     def set_day_choices(self, day):
         self.choices = time_slots_for_day(day)
-        self.default, _ = random.choice(self.choices)
+        self.choices.insert(0, ("", "-- Please select --"))
+        self.default = self.choices
 
     def process_data(self, value):
         if isinstance(value, basestring):
@@ -133,6 +137,8 @@ class AvailableSlot(object):
 
     def __call__(self, form, field):
         date = call_centre_availability.current_datetime()
+        if field.data is None:
+            raise ValidationError([field.gettext(u"No time was selected from options")])
         if self.day == DAY_SPECIFIC:
             date = form.day.data
         time = datetime.datetime.combine(date, field.data) if date else None
@@ -152,7 +158,12 @@ class AvailabilityCheckerForm(NoCsrfForm):
         OPERATOR_HOURS.today_slots,
         validators=[IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)), AvailableSlot(DAY_TODAY)],
     )
-    day = DayChoiceField(validators=[IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)), InputRequired()])
+    day = DayChoiceField(
+        validators=[
+            IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
+            InputRequired(message=_(u"Please a day to call back")),
+        ]
+    )
     time_in_day = TimeChoiceField(
         OPERATOR_HOURS.time_slots,
         validators=[IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)), AvailableSlot(DAY_SPECIFIC)],
@@ -163,7 +174,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC
 
-        day = datetime.datetime.strptime(self.day.choices[0][0], "%Y%m%d").date()
+        day = datetime.datetime.strptime(self.day.day_choices[0][0], "%Y%m%d").date()
         self.time_in_day.set_day_choices(day)
 
     def scheduled_time(self, today=None):
