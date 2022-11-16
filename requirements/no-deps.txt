@@ -2,3 +2,4 @@
 # so that it can use the static helper in it's single template file.
 # However mimic for this has already been added (see cla_public/django_to_jinja.py)
 jinja-moj-template==0.19.0
+django>=3.2.15 # not directly required, pinned by Snyk to avoid a vulnerability
