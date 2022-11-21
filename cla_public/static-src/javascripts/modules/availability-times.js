@@ -24,27 +24,6 @@
       this.$todayTimeSelectors = $('[name$=time_today]');
     },
 
-    _populateDayTime: function($daySelector) {
-      var dayTimeHours = $daySelector.data('day-time-choices');
-      var dayValue = $daySelector.val();
-
-      if(!dayValue || !dayTimeHours) {
-        return;
-      }
-
-      var dayTimes = dayTimeHours[dayValue];
-      var timeOptions = _.keys(dayTimes).sort();
-      var $timeSelector = $daySelector.closest('.govuk-radios').find(this.$timeSelectors);
-      var $options = _.map(timeOptions, function(v) {
-        var d = dayTimes[v];
-        return $('<option>', { value: v, html: d });
-      });
-
-      $timeSelector
-        .html($options)
-        .val(timeOptions[Math.floor(Math.random() * timeOptions.length)]);
-    },
-
     handleTimeRadioCheck: function(evt) {
       var $target = $(evt.target);
       var $radioButton = $target.closest('li').find('[type=radio]');
@@ -59,7 +38,6 @@
     },
 
     handleDayChange: function(evt) {
-      this._populateDayTime($(evt.target));
       this.handleTimeRadioCheck(evt);
     }
   };
