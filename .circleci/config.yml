@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   slack: circleci/slack@3.4.2
-
+  cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@volatile
 jobs:
   build:
     docker:
@@ -278,6 +278,19 @@ workflows:
             - lint-with-py3-tools
             - test
           context: laa-cla-public
+      - cla-end-to-end-tests/behave:
+        requires:
+          - build
+        context: laa-cla-public
+        pre-steps:
+          - checkout:
+              path: cla_public
+          - run:
+              command: |
+                cd cla_public
+                source .circleci/define_build_environment_variables testing
+                echo "export CLA_PUBLIC_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
+                echo "Setting CLA Public image $ECR_DEPLOY_IMAGE"
       - staging_deploy_approval:
           type: approval
       # Deploy staging to live (both master and feature branches)
