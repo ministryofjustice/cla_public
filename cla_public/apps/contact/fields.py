@@ -11,7 +11,7 @@ from wtforms.validators import InputRequired, ValidationError
 
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import OpeningHours
-from cla_common.constants import OPERATOR_HOURS as CALL_CENTRE_OPERATOR_HOURS
+from cla_common.constants import OPERATOR_HOURS as CALL_CENTRE_OPERATOR_HOURS, SELECT_OPTION_DEFAULT
 
 from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
@@ -48,6 +48,12 @@ def time_slots_for_day(day):
     return map(time_choice, slots)
 
 
+def append_default_option_to_list(append_list):
+    """Append a default non selectable message to a HTML select option"""
+    # append to index 0
+    return append_list.insert(0, SELECT_OPTION_DEFAULT[0])
+
+
 class DayChoiceField(FormattedChoiceField, SelectField):
     """
     Select field with next `num_days` days as options
@@ -56,7 +62,7 @@ class DayChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
-        self.choices.insert(0, ("", "-- Please select --"))
+        append_default_option_to_list(self.choices)
         self.day_choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
 
     @property
@@ -97,12 +103,12 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
         """choices_callback is the datetime day argument"""
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
-        self.choices.insert(0, ("", "-- Please select --"))
+        append_default_option_to_list(self.choices)
         self.default = self.choices
 
     def set_day_choices(self, day):
         self.choices = time_slots_for_day(day)
-        self.choices.insert(0, ("", "-- Please select --"))
+        append_default_option_to_list(self.choices)
         self.default = self.choices
 
     def process_data(self, value):
