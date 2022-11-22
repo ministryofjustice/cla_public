@@ -1,5 +1,6 @@
 # coding: utf-8
 "Contact forms"
+import datetime
 
 from flask import current_app
 from flask.ext.babel import lazy_gettext as _
@@ -10,20 +11,27 @@ from wtforms import BooleanField, RadioField, SelectField, StringField, TextArea
 from wtforms.validators import InputRequired, Optional, Required, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
-from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
+from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField, get_mapped_days
 from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
 from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
+from cla_common.call_centre_availability import OpeningHours
+from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, DAY_SPECIFIC
+from cla_public.apps.contact.fields import AvailableSlot
+from cla_common.constants import OPERATOR_HOURS as CALL_CENTRE_OPERATOR_HOURS
+from cla_public.libs.call_centre_availability import day_choice, time_choice
 
+
+
+OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
 
 LANG_CHOICES = filter(lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", "")] + ADAPTATION_LANGUAGES)
-
 THIRDPARTY_RELATIONSHIP = map(lambda relationship: (relationship[0], _(relationship[1])), THIRDPARTY_RELATIONSHIP)
 THIRDPARTY_RELATIONSHIP_CHOICES = [("", _("-- Please select --"))] + THIRDPARTY_RELATIONSHIP
-
+MAPPED_DAY_CHOICES = test()
 
 class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     """
@@ -68,7 +76,27 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
             Length(max=20, message=_(u"Your telephone number must be 20 characters or less")),
         ],
     )
-    time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))
+    time_today = SelectField(
+        _(u"Select a time for us to call"),
+        choices=THIRDPARTY_RELATIONSHIP_CHOICES,
+        validators=[Required(message=_(u"Please select a valid time"))],
+    )
+
+    day = SelectField(
+        _(u"Select a day for us to call"),
+        choices=THIRDPARTY_RELATIONSHIP_CHOICES,
+        validators=[Required(message=_(u"Please select a valid day"))],
+    )
+
+    time_in_day = SelectField(
+        _(u"Select a time for us to call"),
+        choices=THIRDPARTY_RELATIONSHIP_CHOICES,
+        validators=[Required(message=_(u"Please select a valid time"))],
+    )
+
+    specific_day = RadioField(label=_(u"Arrange a callback time"), choices=DAY_CHOICES, default=DAY_TODAY)
+
+# time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))
 
 
 class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):

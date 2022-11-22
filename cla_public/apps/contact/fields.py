@@ -7,7 +7,7 @@ import datetime
 from flask.ext.babel import lazy_gettext as _
 from wtforms import FormField, RadioField, SelectField
 from wtforms import Form as NoCsrfForm
-from wtforms.validators import InputRequired, ValidationError
+from wtforms.validators import InputRequired, ValidationError, Required
 
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import OpeningHours
@@ -38,6 +38,7 @@ class FormattedChoiceField(object):
 
     def pre_validate(self, form):
         choice_values = (v for v, _ in self.choices)
+        print(self._format(self.data))
         if self._format(self.data) not in choice_values:
             raise ValueError(self.gettext("Not a valid choice"))
 
@@ -52,6 +53,10 @@ def append_default_option_to_list(append_list):
     """Append a default non selectable message to a HTML select option"""
     # append to index 0
     return append_list.insert(0, SELECT_OPTION_DEFAULT[0])
+
+
+def get_mapped_days():
+    return map(day_choice, OPERATOR_HOURS.available_days(6))
 
 
 class DayChoiceField(FormattedChoiceField, SelectField):
@@ -143,8 +148,6 @@ class AvailableSlot(object):
 
     def __call__(self, form, field):
         date = call_centre_availability.current_datetime()
-        if field.data is None:
-            raise ValidationError([field.gettext(u"No time was selected from options")])
         if self.day == DAY_SPECIFIC:
             date = form.day.data
         time = datetime.datetime.combine(date, field.data) if date else None
@@ -177,8 +180,8 @@ class AvailabilityCheckerForm(NoCsrfForm):
 
     def __init__(self, *args, **kwargs):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
-        if not self.time_today.choices:
-            self.specific_day.data = DAY_SPECIFIC
+        # if not self.time_today.choices:
+        #     self.specific_day.data = DAY_SPECIFIC
 
         day = datetime.datetime.strptime(self.day.day_choices[0][0], "%Y%m%d").date()
         self.time_in_day.set_day_choices(day)
@@ -207,6 +210,7 @@ class AvailabilityCheckerField(FormField):
     """Convenience class for FormField(AvailabilityCheckerForm"""
 
     def __init__(self, *args, **kwargs):
+        self.mapped_day = map(day_choice, OPERATOR_HOURS.available_days(6))
         super(AvailabilityCheckerField, self).__init__(AvailabilityCheckerForm, *args, **kwargs)
 
     @property

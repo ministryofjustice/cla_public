@@ -79,6 +79,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             return self.return_form_errors()
 
     def add_errors(self, el, error_list):
+        print(error_list, " error_list")
         for error in el:
             if isinstance(error, basestring):
                 error_list.append(error)

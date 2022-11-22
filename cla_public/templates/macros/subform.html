@@ -18,7 +18,7 @@
       <li>{{ _('If you miss the call you’ll need to complete this form again.') }}</li>
     </ul>
     {{ Form.group(form.callback.contact_number, field_attrs={'class': '', 'autocomplete': 'tel', 'type': 'tel'}) }}
-    {{ time_picker(form.callback.time) }}
+    {{ time_picker(form.callback.time_today, form.callback.specific_day, form.callback.day, form.callback.time_in_day) }}
   {% endcall %}
 {% endmacro %}
 
@@ -44,7 +44,7 @@
     {{ Form.group(form.thirdparty.full_name, field_attrs={'class': ''}) }}
     {{ Form.group(form.thirdparty.relationship, field_attrs={'class': ''}) }}
     {{ Form.group(form.thirdparty.contact_number, field_attrs={'class': '', 'autocomplete': 'tel', 'type': 'tel'}) }}
-    {{ time_picker(form.thirdparty.time) }}
+<!--    {{ time_picker(form.thirdparty.time, form.callback.specific_day) }}-->
   {% endcall %}
 {% endmacro %}
 
@@ -56,11 +56,10 @@
     - field <object>
         WTForm field
 #}
-{% macro time_picker(subform) %}
+{% macro time_picker(subform, radio_fields, day, time_day) %}
   {% call Form.fieldset(legend=subform.label.text, class_='form-group') %}
     <div class="govuk-radios">
-      {% for radio in subform.specific_day %}
-        {% if (radio.data == 'today' and subform.time_today.choices) or (radio.data == 'specific_day' and subform.day.choices) %}
+      {% for radio in radio_fields %}
           <div class="govuk-radios__item">
             {{ radio(**{"class": "govuk-radios__input"}) }}
             <label class="govuk-label govuk-radios__label" for="{{ radio.id }}">
@@ -69,7 +68,7 @@
           </div>
           {% if radio.data == 'today' %}
             <div class="govuk-radios__conditional">
-              {{ Form.group(subform.time_today,
+              {{ Form.group(subform,
                 custom_label=_('Time'),
                 controlled_by=subform.specific_day,
                 control_value='today',
@@ -78,23 +77,8 @@
             </div>
           {% else %}
             <div class="govuk-radios__conditional">
-                {{ Form.group(subform.day,
-                  'govuk-!-padding-bottom-4 govuk-!-margin-bottom-0',
-                  {'data-day-time-choices': subform.day.day_time_choices|tojson|safe},
-                  custom_label=_('Day'),
-                  controlled_by=subform.specific_day,
-                  control_value='specific_day',
-                  field_attrs={'class': ''},
-                  row_class='') }}
-                {{ Form.group(subform.time_in_day,
-                  custom_label=_('Time'),
-                  controlled_by=subform.specific_day,
-                  control_value='specific_day',
-                  field_attrs={'class': ''},
-                  row_class='') }}
               </div>
           {% endif %}
-        {% endif %}
       {% endfor %}
     </div>
   {% endcall %}

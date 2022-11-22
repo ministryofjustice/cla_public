@@ -50,6 +50,7 @@
       if (data.redirect) {
         window.location.href = data.redirect;
       }
+      console.log(data.field_errors)
       if (data.field_errors) {
         this.loadErrors(data.field_errors);
         var errorBanner = $('.govuk-error-summary:visible:first');
