@@ -7,7 +7,7 @@ import datetime
 from flask.ext.babel import lazy_gettext as _
 from wtforms import FormField, RadioField, SelectField
 from wtforms import Form as NoCsrfForm
-from wtforms.validators import InputRequired, ValidationError
+from wtforms.validators import ValidationError
 
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import OpeningHours
@@ -19,6 +19,9 @@ from cla_public.libs.call_centre_availability import day_choice, time_choice
 
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
+
+# array of errors raised
+ERRORS_RAISED = []
 
 
 class FormattedChoiceField(object):
@@ -143,8 +146,6 @@ class AvailableSlot(object):
 
     def __call__(self, form, field):
         date = call_centre_availability.current_datetime()
-        if field.data is None:
-            raise ValidationError([field.gettext(u"No time was selected from options")])
         if self.day == DAY_SPECIFIC:
             date = form.day.data
         time = datetime.datetime.combine(date, field.data) if date else None
@@ -164,12 +165,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
         OPERATOR_HOURS.today_slots,
         validators=[IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)), AvailableSlot(DAY_TODAY)],
     )
-    day = DayChoiceField(
-        validators=[
-            IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
-            InputRequired(message=_(u"Please a day to call back")),
-        ]
-    )
+    day = DayChoiceField(validators=[IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC))])
     time_in_day = TimeChoiceField(
         OPERATOR_HOURS.time_slots,
         validators=[IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)), AvailableSlot(DAY_SPECIFIC)],
@@ -218,6 +214,13 @@ class AvailabilityCheckerField(FormField):
 
     def scheduled_time(self):
         return self.form.scheduled_time()
+
+    @property
+    def errors(self):
+        print(type(self.form.errors))
+        print(self.form.errors)
+
+        return self.form.errors
 
 
 class ValidatedFormField(FormField):
