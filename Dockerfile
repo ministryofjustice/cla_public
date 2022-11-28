@@ -1,15 +1,19 @@
-FROM alpine:3.9
+FROM alpine:3.15.0
 
 RUN apk add --no-cache \
+      curl \
       bash \
       gettext \
       nginx \
       npm \
-      py2-pip \
+      python2-dev\
       supervisor \
       tzdata \
       uwsgi-python && \
-    adduser -D www-data -G www-data
+      adduser -D www-data -G www-data
+
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+RUN python get-pip.py
 
 # To install python and nodejs dependencies
 RUN apk add --no-cache \
@@ -20,12 +24,10 @@ RUN apk add --no-cache \
       libffi-dev \
       nasm \
       openssl-dev \
-      python2-dev \
-      zlib-dev \
-      curl
+      zlib-dev
 
 RUN cp /usr/share/zoneinfo/Europe/London /etc/localtime
-RUN pip install -U setuptools pip==18.1 wheel
+RUN pip install -U setuptools pip wheel
 
 ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
