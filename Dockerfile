@@ -7,7 +7,6 @@ RUN apk add --no-cache \
       nginx \
       npm \
       python2-dev\
-      supervisor \
       tzdata && \
       adduser -D www-data -G www-data
 
