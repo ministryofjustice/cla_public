@@ -8,8 +8,7 @@ RUN apk add --no-cache \
       npm \
       python2-dev\
       supervisor \
-      tzdata \
-      uwsgi-python && \
+      tzdata && \
       adduser -D www-data -G www-data
 
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
