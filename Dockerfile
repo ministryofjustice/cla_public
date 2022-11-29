@@ -1,8 +1,7 @@
-FROM node:10.19.0-alpine3.11 as node_build
+FROM node:10 as node_build
 
-COPY package.json package-lock.json ./
+COPY . .
 RUN npm install
-
 RUN ./node_modules/.bin/gulp build
 
 FROM alpine:3.15.0
@@ -47,8 +46,6 @@ COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 RUN mkdir /var/run/supervisor/
 RUN chown -R www-data: /var/run/
 RUN chown -R www-data: /var/log/
-RUN chown -R www-data /var/tmp/nginx
-RUN chown -R www-data /var/lib/nginx/
 
 COPY . .
 
