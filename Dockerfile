@@ -1,11 +1,19 @@
+FROM node:8.17-alpine3.10 as node_build
+
+COPY package.json package-lock.json ./
+RUN npm install
+
+RUN ./node_modules/.bin/gulp build
+
 FROM alpine:3.15.0
+
+COPY --from=node_build ./cla_public/static/ ./cla_public/static/
 
 RUN apk add --no-cache \
       curl \
       bash \
       gettext \
       nginx \
-      npm \
       python2-dev\
       tzdata && \
       adduser -D www-data -G www-data
@@ -34,9 +42,6 @@ COPY requirements.txt .
 COPY requirements/ requirements/
 RUN pip install -r requirements.txt &&  pip install -r requirements/no-deps.txt --no-deps
 
-COPY package.json package-lock.json ./
-RUN npm install
-
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
 RUN mkdir /var/run/supervisor/
@@ -47,9 +52,8 @@ RUN chown -R www-data /var/lib/nginx/
 
 COPY . .
 
-# Compile frontend assets and translations
-RUN ./node_modules/.bin/gulp build && \
-    pybabel compile -f -d cla_public/translations
+# Compile translations
+RUN  pybabel compile -f -d cla_public/translations
 
 USER 1000
 EXPOSE 8000
