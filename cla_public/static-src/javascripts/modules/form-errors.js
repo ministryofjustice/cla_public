@@ -81,37 +81,41 @@
     formatErrors: function(errors) {
       var errorFields = {};
 
+      function formatNestedCallbackErrors (errorsId) {
+        var callback_id_prefix = "time-"
+        // loop to check if call back time has generated any errors.
+        // array generated has been re-organised.
+        for (var key in errorsId) {
+          if (errorsId[key][0] === "time") {
+            var callback_values = errorsId[key][1]
+
+            //Splice time and object values to create empty array.
+            //empty array will be populated with new values
+            errorsId[key].splice(0)
+            errorsId[key].splice(1)
+
+            for (var key1 in callback_values) {
+              if (errorsId[key].length >= 2) {
+                // push new array object
+                errorsId.push([callback_id_prefix + key1, callback_values[key1]])
+              } else {
+                // push to old and empty array
+                errorsId[key].push(callback_id_prefix + key1, callback_values[key1])
+              }
+            }
+          }
+        }
+        return errorsId
+      }
+
       (function fieldName (errorsObj, prefix) {
         prefix = (typeof prefix === 'undefined') ? '' : prefix + '-';
 
         for (var key in errorsObj) {
           var field = prefix + key;
-          var callback_id = errorsObj[key]
-          var callback_id_prefix = "time-"
 
-          // loop to check if call back time has generated any errors.
-          // array generated has been re-organised.
-          for (var key1 in callback_id) {
-            if (callback_id[key1][0] === "time") {
-
-              var callback_values = callback_id[key1][1]
-
-              //Splice time and object values to create empty array.
-              //empty array will be populated with new values
-              callback_id[key1].splice(0)
-              callback_id[key1].splice(1)
-
-              for (var key2 in callback_values) {
-                if (callback_id[key1].length >= 2) {
-                  // push new array object
-                  callback_id.push([callback_id_prefix + key2, callback_values[key2]])
-                } else {
-                  // push to old and empty array
-                  callback_id[key1].push(callback_id_prefix + key2, callback_values[key2])
-                }
-              }
-            }
-          }
+          // Check for nested errors in errorsObj
+          errorsObj[key] = formatNestedCallbackErrors(errorsObj[key])
 
           if ($.isArray(errorsObj[key])) {
             errorFields[field] = errorsObj[key];

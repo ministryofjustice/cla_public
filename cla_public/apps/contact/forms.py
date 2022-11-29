@@ -15,6 +15,7 @@ from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENC
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
+from cla_public.apps.contact.constants import SELECT_OPTION_DEFAULT
 from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
 
@@ -22,7 +23,7 @@ from cla_public.libs.utils import get_locale
 LANG_CHOICES = filter(lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", "")] + ADAPTATION_LANGUAGES)
 
 THIRDPARTY_RELATIONSHIP = map(lambda relationship: (relationship[0], _(relationship[1])), THIRDPARTY_RELATIONSHIP)
-THIRDPARTY_RELATIONSHIP_CHOICES = [("", _("-- Please select --"))] + THIRDPARTY_RELATIONSHIP
+THIRDPARTY_RELATIONSHIP_CHOICES = SELECT_OPTION_DEFAULT + THIRDPARTY_RELATIONSHIP
 
 
 class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
