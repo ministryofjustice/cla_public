@@ -4,7 +4,7 @@ COPY . .
 RUN npm install
 RUN ./node_modules/.bin/gulp build
 
-FROM alpine:3.15.0
+FROM alpine:3.15
 
 COPY --from=node_build ./cla_public/static/ ./cla_public/static/
 
