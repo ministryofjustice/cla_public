@@ -9,10 +9,11 @@ from wtforms import Form
 from wtforms.validators import InputRequired, ValidationError
 
 from cla_common import call_centre_availability
-from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
+from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC, SELECT_OPTION_DEFAULT
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, OPERATOR_HOURS, TimeChoiceField
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.base.tests import FlaskAppTestCase
+from werkzeug.datastructures import ImmutableMultiDict
 
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
@@ -208,21 +209,23 @@ class TestCallbackInPastBug(FlaskAppTestCase):
     def test_EU_5247_5578(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
             form = ContactForm()
-            self.assertEqual([], form.callback.time.form.time_today.choices)
+            self.assertEqual(SELECT_OPTION_DEFAULT, form.callback.time.form.time_today.choices)
 
     def test_YJ_4697_7619(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 22, 19)):
             form = ContactForm()
-            self.assertEqual([], form.callback.time.form.time_today.choices)
+            self.assertEqual(SELECT_OPTION_DEFAULT, form.callback.time.form.time_today.choices)
 
 
 class TestTimeChoiceField(unittest.TestCase):
     def setUp(self):
         self.form = Form()
+        # Provide a time that has been selected to process.
+        formdata = ImmutableMultiDict([("a", "1930")])
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
             field = TimeChoiceField(choices_callback=OPERATOR_HOURS.time_slots, validators=[InputRequired()])
             self.field = field.bind(self.form, "a")
-            self.field.process(None)
+            self.field.process(formdata)
 
     def test_process_valid(self):
         # one of the options should be selected
