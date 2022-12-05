@@ -19,9 +19,6 @@ from cla_public.libs.call_centre_availability import day_choice, time_choice
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
 
-# array of errors raised
-ERRORS_RAISED = []
-
 
 class FormattedChoiceField(object):
     """
@@ -96,16 +93,15 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     """
 
     def __init__(self, choices_callback=None, validators=None, **kwargs):
-        """choices_callback is the datetime day argument"""
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
         append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
-        self.default = self.choices[0][0]
+        self.default = self.choices
 
     def set_day_choices(self, day):
         self.choices = time_slots_for_day(day)
         append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
-        self.default = self.choices[0][0]
+        self.default = self.choices
 
     def process_data(self, value):
         if isinstance(value, basestring):
@@ -161,21 +157,21 @@ class AvailabilityCheckerForm(NoCsrfForm):
         OPERATOR_HOURS.today_slots,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)),
-            InputRequired(message=_(u"Select a callback time for today")),
+            InputRequired(message=_(u"Select what time to ring you back")),
             AvailableSlot(DAY_TODAY),
         ],
     )
     day = DayChoiceField(
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
-            InputRequired(message=_(u"Select a day to callback")),
+            InputRequired(message=_(u"Select what day to ring you back")),
         ]
     )
     time_in_day = TimeChoiceField(
         OPERATOR_HOURS.time_slots,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
-            InputRequired(message=_(u"Select a time to callback")),
+            InputRequired(message=_(u"Select what time to ring you back")),
             AvailableSlot(DAY_SPECIFIC),
         ],
     )
