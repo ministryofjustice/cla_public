@@ -410,6 +410,8 @@ class TestApiPayloads(FlaskAppTestCase):
             "contact_number": "00000000000",
             "relationship": parent_guardian,
         }
+        form_data["thirdparty-time-specific_day"] = form_data["callback-time-specific_day"]
+        form_data["thirdparty-time-time_today"] = form_data["callback-time-time_today"]
         form_data.update(flatten_dict("thirdparty", thirdparty))
 
         with override_current_time(self.now):
