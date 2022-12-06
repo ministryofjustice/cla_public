@@ -46,6 +46,14 @@ class TestAvailability(FlaskAppTestCase):
         self.patcher.stop()
         super(TestAvailability, self).tearDown()
 
+    def assertValidationError(self, time, form=None):
+        form = form or Mock()
+        field = Mock()
+        field.data = time
+        with self.assertRaises(ValidationError) as context:
+            self.validator(form, field)
+            self.assertTrue('Not a valid time' in str(context.exception))
+
     def assertAvailable(self, time, form=None):
         form = form or Mock()
         field = Mock()
@@ -53,6 +61,7 @@ class TestAvailability(FlaskAppTestCase):
         with override_current_time(self.now):
             try:
                 self.validator(form, field)
+
             except ValidationError as e:
                 self.fail("{time} was not available at {now}: {exc}".format(time=time, now=self.now, exc=e))
 
@@ -162,6 +171,11 @@ class TestAvailability(FlaskAppTestCase):
 
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(monday_after_11))
 
+    def test_no_day_selected(self):
+        # check that this raises a validation error
+        self.validator = AvailableSlot(DAY_SPECIFIC)
+        self.assertValidationError(time=None)
+
 
 class TestDayTimeChoices(unittest.TestCase):
     def assertDayInChoices(self, day, choices):
@@ -220,7 +234,6 @@ class TestCallbackInPastBug(FlaskAppTestCase):
 class TestTimeChoiceField(unittest.TestCase):
     def setUp(self):
         self.form = Form()
-        # Provide a time that has been selected to process.
         formdata = ImmutableMultiDict([("a", "1930")])
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
             field = TimeChoiceField(choices_callback=OPERATOR_HOURS.time_slots, validators=[InputRequired()])
@@ -232,4 +245,9 @@ class TestTimeChoiceField(unittest.TestCase):
         self.assertTrue(any([x[2] for x in self.field.iter_choices()]))
 
     def test_data_is_time_object(self):
+        self.assertTrue(isinstance(self.field.data, datetime.time))
+
+    def test_no_selection_made(self):
+        self.formdata = ImmutableMultiDict([("a", "1930")])
+        # check that a validation error is raised
         self.assertTrue(isinstance(self.field.data, datetime.time))
