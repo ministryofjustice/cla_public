@@ -171,8 +171,10 @@ class TestAvailability(FlaskAppTestCase):
 
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(monday_after_11))
 
-    def test_no_day_selected(self):
+    def test_no_time_selected(self):
         # check that this raises a validation error
+        self.validator = AvailableSlot(DAY_TODAY)
+        self.assertValidationError(time=None)
         self.validator = AvailableSlot(DAY_SPECIFIC)
         self.assertValidationError(time=None)
 
