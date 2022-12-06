@@ -96,12 +96,12 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
         append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
-        self.default = self.choices
+        self.default = SELECT_OPTION_DEFAULT[0][0]
 
     def set_day_choices(self, day):
         self.choices = time_slots_for_day(day)
         append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
-        self.default = self.choices
+        self.default = SELECT_OPTION_DEFAULT[0][0]
 
     def process_data(self, value):
         if isinstance(value, basestring):
