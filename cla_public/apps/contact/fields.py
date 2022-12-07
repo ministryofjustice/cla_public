@@ -95,11 +95,13 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, choices_callback=None, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
-        append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
+        if self.choices:
+            append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
 
     def set_day_choices(self, day):
         self.choices = time_slots_for_day(day)
-        append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
+        if self.choices:
+            append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
 
     def process_data(self, value):
         if isinstance(value, basestring):

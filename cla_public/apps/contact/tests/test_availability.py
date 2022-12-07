@@ -11,7 +11,7 @@ from wtforms.validators import InputRequired, ValidationError
 from cla_common import call_centre_availability
 from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC, SELECT_OPTION_DEFAULT
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, OPERATOR_HOURS, TimeChoiceField
-from cla_public.apps.contact.forms import ContactForm
+from cla_public.apps.contact.forms import ContactForm, CallBackForm
 from cla_public.apps.base.tests import FlaskAppTestCase
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -46,12 +46,12 @@ class TestAvailability(FlaskAppTestCase):
         self.patcher.stop()
         super(TestAvailability, self).tearDown()
 
-    def assertValidationError(self, time, form=None):
-        form = form or Mock()
-        field = Mock()
-        field.data = time
+    def assertTimeValidationError(self):
+        mock_form = Mock()
+        mock_field = Mock()
+        mock_field.data = None
         with self.assertRaises(ValidationError) as context:
-            self.validator(form, field)
+            self.validator(mock_form, mock_field)
             self.assertTrue('Not a valid time' in str(context.exception))
 
     def assertAvailable(self, time, form=None):
@@ -76,6 +76,13 @@ class TestAvailability(FlaskAppTestCase):
                 pass
             else:
                 self.fail("{time} was available at {now}".format(time=time, now=self.now))
+
+    def test_no_time_selected(self):
+        # check that this raises a validation error
+        self.validator = AvailableSlot(DAY_TODAY)
+        self.assertTimeValidationError()
+        self.validator = AvailableSlot(DAY_SPECIFIC)
+        self.assertTimeValidationError()
 
     def test_available_slot_today_next_slot(self):
 
@@ -171,13 +178,6 @@ class TestAvailability(FlaskAppTestCase):
 
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(monday_after_11))
 
-    def test_no_time_selected(self):
-        # check that this raises a validation error
-        self.validator = AvailableSlot(DAY_TODAY)
-        self.assertValidationError(time=None)
-        self.validator = AvailableSlot(DAY_SPECIFIC)
-        self.assertValidationError(time=None)
-
 
 class TestDayTimeChoices(unittest.TestCase):
     def assertDayInChoices(self, day, choices):
@@ -225,12 +225,12 @@ class TestCallbackInPastBug(FlaskAppTestCase):
     def test_EU_5247_5578(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
             form = ContactForm()
-            self.assertEqual(SELECT_OPTION_DEFAULT, form.callback.time.form.time_today.choices)
+            self.assertEqual([], form.callback.time.form.time_today.choices)
 
     def test_YJ_4697_7619(self):
         with override_current_time(datetime.datetime(2015, 2, 11, 22, 19)):
             form = ContactForm()
-            self.assertEqual(SELECT_OPTION_DEFAULT, form.callback.time.form.time_today.choices)
+            self.assertEqual([], form.callback.time.form.time_today.choices)
 
 
 class TestTimeChoiceField(unittest.TestCase):
@@ -249,7 +249,14 @@ class TestTimeChoiceField(unittest.TestCase):
     def test_data_is_time_object(self):
         self.assertTrue(isinstance(self.field.data, datetime.time))
 
-    def test_no_selection_made(self):
-        self.formdata = ImmutableMultiDict([("a", "1930")])
-        # check that a validation error is raised
-        self.assertTrue(isinstance(self.field.data, datetime.time))
+    class TestAvailabilityCheckerField(FlaskAppTestCase):
+        # We are beyond the last time slot for the day
+        # there should not be any call back today options
+        def test_end_of_day_no_today_option(self):
+            with override_current_time(datetime.datetime(2015, 5, 6, 19, 30)):
+                form = CallBackForm()
+                field = form.time
+                # time_today should not have any values in choices so won't be displayed
+                time_today_field = getattr(field.form, "time_today")
+                self.assertEqual(len(time_today_field.choices), 0)
+
