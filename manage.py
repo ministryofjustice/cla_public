@@ -6,16 +6,28 @@ import os
 import subprocess
 import sys
 
-from flask.ext.script import Manager, Shell, Server
+from flask.ext.script import Manager, Shell, Server, Command
 import requests
 
 from cla_public.app import create_app
 
 
+class MyManager(Manager):
+    def command(self, capture_all=False):
+        def decorator(func):
+            command = Command(func)
+            command.capture_all_args = capture_all
+            self.add_command(func.__name__, command)
+
+            return func
+
+        return decorator
+
+
 log = logging.getLogger(__name__)
 os.environ.setdefault("CLA_PUBLIC_CONFIG", "config/common.py")
 app = create_app()
-manager = Manager(app)
+manager = MyManager(app)
 
 VENV = os.environ.get("VIRTUAL_ENV", "")
 
@@ -29,14 +41,19 @@ def run(command, **kwargs):
         sys.exit(return_code)
 
 
-@manager.command
-def test():
+@manager.command(True)
+def test(*args):
     import xmlrunner
     import unittest
 
-    result = xmlrunner.XMLTestRunner(output="test-reports", verbosity=3).run(
-        unittest.TestLoader().discover("cla_public")
-    )
+    if args[0]:
+        result = xmlrunner.XMLTestRunner(output="test-reports", verbosity=3).run(
+            unittest.TestLoader().loadTestsFromNames(args[0])
+        )
+    else:
+        result = xmlrunner.XMLTestRunner(output="test-reports", verbosity=3).run(
+            unittest.TestLoader().discover("cla_public")
+        )
     return sys.exit(not result.wasSuccessful())
 
 
