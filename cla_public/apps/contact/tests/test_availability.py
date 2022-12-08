@@ -9,7 +9,7 @@ from wtforms import Form
 from wtforms.validators import InputRequired, ValidationError
 
 from cla_common import call_centre_availability
-from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC, SELECT_OPTION_DEFAULT
+from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, OPERATOR_HOURS, TimeChoiceField
 from cla_public.apps.contact.forms import ContactForm, CallBackForm
 from cla_public.apps.base.tests import FlaskAppTestCase
@@ -52,7 +52,7 @@ class TestAvailability(FlaskAppTestCase):
         mock_field.data = None
         with self.assertRaises(ValidationError) as context:
             self.validator(mock_form, mock_field)
-            self.assertTrue('Not a valid time' in str(context.exception))
+            self.assertTrue("Not a valid time" in str(context.exception))
 
     def assertAvailable(self, time, form=None):
         form = form or Mock()
@@ -259,4 +259,3 @@ class TestTimeChoiceField(unittest.TestCase):
                 # time_today should not have any values in choices so won't be displayed
                 time_today_field = getattr(field.form, "time_today")
                 self.assertEqual(len(time_today_field.choices), 0)
-
