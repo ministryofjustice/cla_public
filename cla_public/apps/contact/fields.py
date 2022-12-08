@@ -180,9 +180,8 @@ class AvailabilityCheckerForm(NoCsrfForm):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC
-
-        day = datetime.datetime.strptime(self.day.day_choices[0][0], "%Y%m%d").date()
-        self.time_in_day.set_day_choices(day)
+        # day = datetime.datetime.strptime(self.day.day_choices[0][0], "%Y%m%d").date()
+        # self.time_in_day.set_day_choices(day)
 
     def scheduled_time(self, today=None):
         """

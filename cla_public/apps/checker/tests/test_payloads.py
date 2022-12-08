@@ -413,6 +413,10 @@ class TestApiPayloads(FlaskAppTestCase):
         form_data["thirdparty-time-specific_day"] = form_data["callback-time-specific_day"]
         form_data["thirdparty-time-time_today"] = form_data["callback-time-time_today"]
         form_data.update(flatten_dict("thirdparty", thirdparty))
+        # this form should not pass in callback
+        form_data.pop("callback-contact_number")
+        form_data.pop("callback-time-specific_day")
+        form_data.pop("callback-time-time_today")
 
         with override_current_time(self.now):
             payload = self.form_payload(ContactForm, form_data)
