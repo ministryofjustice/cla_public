@@ -13,7 +13,15 @@ from cla_common import call_centre_availability
 from cla_common.call_centre_availability import OpeningHours
 from cla_common.constants import OPERATOR_HOURS as CALL_CENTRE_OPERATOR_HOURS
 from cla_public.apps.contact.helper import append_default_option_to_list
-from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, DAY_SPECIFIC, SELECT_OPTION_DEFAULT
+from cla_public.apps.contact.constants import (
+    DAY_CHOICES,
+    DAY_TODAY,
+    DAY_SPECIFIC,
+    SELECT_OPTION_DEFAULT,
+    TIME_TODAY_VALIDATION_ERROR,
+    DAY_SPECIFIC_VALIDATION_ERROR,
+    TIME_SPECIFIC_VALIDATION_ERROR,
+)
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import day_choice, time_choice
 
@@ -157,21 +165,21 @@ class AvailabilityCheckerForm(NoCsrfForm):
         OPERATOR_HOURS.today_slots,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)),
-            InputRequired(message=_(u"Select what time to ring you back")),
+            InputRequired(message=_(TIME_TODAY_VALIDATION_ERROR)),
             AvailableSlot(DAY_TODAY),
         ],
     )
     day = DayChoiceField(
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
-            InputRequired(message=_(u"Select what day to ring you back")),
+            InputRequired(message=_(DAY_SPECIFIC_VALIDATION_ERROR)),
         ]
     )
     time_in_day = TimeChoiceField(
         OPERATOR_HOURS.time_slots,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
-            InputRequired(message=_(u"Select what time to ring you back")),
+            InputRequired(message=_(TIME_SPECIFIC_VALIDATION_ERROR)),
             AvailableSlot(DAY_SPECIFIC),
         ],
     )
@@ -180,8 +188,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC
-        # day = datetime.datetime.strptime(self.day.day_choices[0][0], "%Y%m%d").date()
-        # self.time_in_day.set_day_choices(day)
 
     def scheduled_time(self, today=None):
         """

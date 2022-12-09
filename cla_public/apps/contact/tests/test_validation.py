@@ -6,6 +6,11 @@ from werkzeug.datastructures import MultiDict
 from cla_public.app import create_app
 from cla_public.apps.contact.forms import CallBackForm
 from cla_public.apps.contact.tests.test_availability import override_current_time
+from cla_public.apps.contact.constants import (
+    TIME_TODAY_VALIDATION_ERROR,
+    DAY_SPECIFIC_VALIDATION_ERROR,
+    TIME_SPECIFIC_VALIDATION_ERROR,
+)
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
 
@@ -67,7 +72,7 @@ class TestContactFormValidation(unittest.TestCase):
                 is_valid, errors = validate_contact_form(data)
                 if not is_valid:
                     # check the errors
-                    self.assertIn("Select what day to ring you back", errors["day"][0])
+                    self.assertIn(DAY_SPECIFIC_VALIDATION_ERROR, errors["day"][0])
                     self.assertIn("schedule a callback at the requested time", errors["time_in_day"][0][0])
                 else:
                     self.fail("Specific day was not set but form was validated")
@@ -80,7 +85,7 @@ class TestContactFormValidation(unittest.TestCase):
                 is_valid, errors = validate_contact_form(data)
                 if not is_valid:
                     # check the errors
-                    self.assertIn("Select what time to ring you back", errors["time_today"][0])
+                    self.assertIn(TIME_TODAY_VALIDATION_ERROR, errors["time_today"][0])
                 else:
                     self.fail("Time today was not set but form was validated")
 
@@ -97,6 +102,6 @@ class TestContactFormValidation(unittest.TestCase):
                 is_valid, errors = validate_contact_form(data)
                 if not is_valid:
                     # check the errors
-                    self.assertIn("Select what time to ring you back", errors["time_in_day"][0])
+                    self.assertIn(TIME_SPECIFIC_VALIDATION_ERROR, errors["time_in_day"][0])
                 else:
                     self.fail("Specific day was not set but form was validated")
