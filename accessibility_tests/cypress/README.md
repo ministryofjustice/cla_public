@@ -1,5 +1,5 @@
 # Helpful links:
-- [Crypess](https://docs.cypress.io/guides/getting-started/installing-cypress)
+- [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress)
 - [NVM](https://github.com/nvm-sh/nvm)
 - 
 # Requires
