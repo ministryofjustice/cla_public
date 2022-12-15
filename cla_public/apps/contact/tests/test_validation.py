@@ -22,7 +22,7 @@ def base_form_data():
 
 
 def validate_contact_form(data):
-    form = CallBackForm(MultiDict(data), csrf_enabled=False)
+    form = CallBackForm(MultiDict(data), csrf_enabled=True)
     valid_submit = form.validate()
     return valid_submit, form.errors.get("time", {})
 
