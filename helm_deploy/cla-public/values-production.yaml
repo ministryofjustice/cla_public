@@ -23,7 +23,7 @@ envVars:
   MOJ_GTM_PREVIEW:
     value: "env-1"
   BACKEND_BASE_URI:
-    value: "https://fox.civillegaladvice.service.gov.uk"
+    value: "http://cla-backend-app.laa-cla-backend-production.svc.cluster.local"
   LAALAA_API_HOST:
     value: "https://laa-legal-adviser-api-production.cloud-platform.service.justice.gov.uk"
   GOOGLE_MAPS_API_KEY:

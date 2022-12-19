@@ -18,7 +18,7 @@ envVars:
   GDS_GA_ID:
     value: UA-145652997-1
   BACKEND_BASE_URI:
-    value: "https://staging.fox.civillegaladvice.service.gov.uk"
+    value: "http://cla-backend-app.laa-cla-backend-staging.svc.cluster.local"
   LAALAA_API_HOST:
     value: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
   GOOGLE_MAPS_API_KEY:
