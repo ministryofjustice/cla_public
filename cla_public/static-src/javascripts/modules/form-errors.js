@@ -1,5 +1,6 @@
  'use strict';
   var currencyValidation = require('./currencyInputValidation');
+  var formatNestedObject = require('./format-nested-objects');
   var _ = require('lodash');
   moj.Modules.FormErrors = {
     init: function() {
@@ -83,8 +84,13 @@
 
       (function fieldName (errorsObj, prefix) {
         prefix = (typeof prefix === 'undefined') ? '' : prefix + '-';
+
         for (var key in errorsObj) {
           var field = prefix + key;
+
+          // Check for nested errors in errorsObj
+          errorsObj[key] = formatNestedObject.formatNestedCallbackErrors(errorsObj[key])
+
           if ($.isArray(errorsObj[key])) {
             errorFields[field] = errorsObj[key];
           } else {

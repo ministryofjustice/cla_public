@@ -199,7 +199,7 @@ class YourBenefitsForm(BaseForm):
         label=_(u"If yes, enter the total amount you get for all your children"),
         choices=money_intervals("", "per_week", "per_4week"),
         validators=[
-            IgnoreIf("benefits", FieldValueNotIn("child_benefit"),),
+            IgnoreIf("benefits", FieldValueNotIn("child_benefit")),
             MoneyIntervalAmountRequired(
                 message=_(u"Enter the Child Benefit you receive"),
                 freq_message=_(u"Tell us how often you receive Child Benefit"),

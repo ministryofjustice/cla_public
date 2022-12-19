@@ -3,21 +3,27 @@
 from collections import OrderedDict
 
 import datetime
-import random
 
 from flask.ext.babel import lazy_gettext as _
 from wtforms import FormField, RadioField, SelectField
 from wtforms import Form as NoCsrfForm
-from wtforms.validators import InputRequired, ValidationError
+from wtforms.validators import ValidationError, InputRequired
 
 from cla_common import call_centre_availability
 from cla_common.call_centre_availability import OpeningHours
 from cla_common.constants import OPERATOR_HOURS as CALL_CENTRE_OPERATOR_HOURS
-
-from cla_public.apps.contact.constants import DAY_CHOICES, DAY_TODAY, DAY_SPECIFIC
+from cla_public.apps.contact.helper import append_default_option_to_list
+from cla_public.apps.contact.constants import (
+    DAY_CHOICES,
+    DAY_TODAY,
+    DAY_SPECIFIC,
+    SELECT_OPTION_DEFAULT,
+    TIME_TODAY_VALIDATION_ERROR,
+    DAY_SPECIFIC_VALIDATION_ERROR,
+    TIME_SPECIFIC_VALIDATION_ERROR,
+)
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import day_choice, time_choice
-
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
 
@@ -57,9 +63,12 @@ class DayChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
+        append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
+        self.day_choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
 
     @property
     def day_time_choices(self, num_days=6):
+        """Generate time slots options for call on another day select options"""
         days = OPERATOR_HOURS.available_days(num_days)
 
         def time_slots(day):
@@ -95,11 +104,12 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
         if self.choices:
-            self.default, _ = random.choice(self.choices)
+            append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
 
     def set_day_choices(self, day):
         self.choices = time_slots_for_day(day)
-        self.default, _ = random.choice(self.choices)
+        if self.choices:
+            append_default_option_to_list(self.choices, SELECT_OPTION_DEFAULT)
 
     def process_data(self, value):
         if isinstance(value, basestring):
@@ -135,6 +145,9 @@ class AvailableSlot(object):
         date = call_centre_availability.current_datetime()
         if self.day == DAY_SPECIFIC:
             date = form.day.data
+        # If user selects the default pre-fix "please select" option
+        if field.data is None:
+            raise ValidationError([field.gettext(u"Not a valid time")])
         time = datetime.datetime.combine(date, field.data) if date else None
         if not (time and OPERATOR_HOURS.can_schedule_callback(time)):
             raise ValidationError([field.gettext(u"Can’t schedule a callback at the requested time")])
@@ -150,21 +163,31 @@ class AvailabilityCheckerForm(NoCsrfForm):
     # choices must be set dynamically as cache is not available at runtime
     time_today = TimeChoiceField(
         OPERATOR_HOURS.today_slots,
-        validators=[IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)), AvailableSlot(DAY_TODAY)],
+        validators=[
+            IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)),
+            InputRequired(message=_(TIME_TODAY_VALIDATION_ERROR)),
+            AvailableSlot(DAY_TODAY),
+        ],
     )
-    day = DayChoiceField(validators=[IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)), InputRequired()])
+    day = DayChoiceField(
+        validators=[
+            IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
+            InputRequired(message=_(DAY_SPECIFIC_VALIDATION_ERROR)),
+        ]
+    )
     time_in_day = TimeChoiceField(
         OPERATOR_HOURS.time_slots,
-        validators=[IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)), AvailableSlot(DAY_SPECIFIC)],
+        validators=[
+            IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
+            InputRequired(message=_(TIME_SPECIFIC_VALIDATION_ERROR)),
+            AvailableSlot(DAY_SPECIFIC),
+        ],
     )
 
     def __init__(self, *args, **kwargs):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC
-
-        day = datetime.datetime.strptime(self.day.choices[0][0], "%Y%m%d").date()
-        self.time_in_day.set_day_choices(day)
 
     def scheduled_time(self, today=None):
         """

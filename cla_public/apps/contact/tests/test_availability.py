@@ -11,8 +11,9 @@ from wtforms.validators import InputRequired, ValidationError
 from cla_common import call_centre_availability
 from cla_public.apps.contact.constants import DAY_TODAY, DAY_SPECIFIC
 from cla_public.apps.contact.fields import AvailableSlot, DayChoiceField, OPERATOR_HOURS, TimeChoiceField
-from cla_public.apps.contact.forms import ContactForm
+from cla_public.apps.contact.forms import ContactForm, CallBackForm
 from cla_public.apps.base.tests import FlaskAppTestCase
+from werkzeug.datastructures import ImmutableMultiDict
 
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
@@ -45,6 +46,14 @@ class TestAvailability(FlaskAppTestCase):
         self.patcher.stop()
         super(TestAvailability, self).tearDown()
 
+    def assertTimeValidationError(self):
+        mock_form = Mock()
+        mock_field = Mock()
+        mock_field.data = None
+        with self.assertRaises(ValidationError) as context:
+            self.validator(mock_form, mock_field)
+            self.assertTrue("Not a valid time" in str(context.exception))
+
     def assertAvailable(self, time, form=None):
         form = form or Mock()
         field = Mock()
@@ -52,6 +61,7 @@ class TestAvailability(FlaskAppTestCase):
         with override_current_time(self.now):
             try:
                 self.validator(form, field)
+
             except ValidationError as e:
                 self.fail("{time} was not available at {now}: {exc}".format(time=time, now=self.now, exc=e))
 
@@ -66,6 +76,13 @@ class TestAvailability(FlaskAppTestCase):
                 pass
             else:
                 self.fail("{time} was available at {now}".format(time=time, now=self.now))
+
+    def test_no_time_selected(self):
+        # check that this raises a validation error
+        self.validator = AvailableSlot(DAY_TODAY)
+        self.assertTimeValidationError()
+        self.validator = AvailableSlot(DAY_SPECIFIC)
+        self.assertTimeValidationError()
 
     def test_available_slot_today_next_slot(self):
 
@@ -219,10 +236,11 @@ class TestCallbackInPastBug(FlaskAppTestCase):
 class TestTimeChoiceField(unittest.TestCase):
     def setUp(self):
         self.form = Form()
+        formdata = ImmutableMultiDict([("a", "1930")])
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
             field = TimeChoiceField(choices_callback=OPERATOR_HOURS.time_slots, validators=[InputRequired()])
             self.field = field.bind(self.form, "a")
-            self.field.process(None)
+            self.field.process(formdata)
 
     def test_process_valid(self):
         # one of the options should be selected
@@ -230,3 +248,14 @@ class TestTimeChoiceField(unittest.TestCase):
 
     def test_data_is_time_object(self):
         self.assertTrue(isinstance(self.field.data, datetime.time))
+
+    class TestAvailabilityCheckerField(FlaskAppTestCase):
+        # We are beyond the last time slot for the day
+        # there should not be any call back today options
+        def test_end_of_day_no_today_option(self):
+            with override_current_time(datetime.datetime(2015, 5, 6, 19, 30)):
+                form = CallBackForm()
+                field = form.time
+                # time_today should not have any values in choices so won't be displayed
+                time_today_field = getattr(field.form, "time_today")
+                self.assertEqual(len(time_today_field.choices), 0)
