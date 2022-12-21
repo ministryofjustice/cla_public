@@ -23,7 +23,7 @@ envVars:
   MOJ_GTM_PREVIEW:
     value: "env-3"
   BACKEND_BASE_URI:
-    value: "https://laa-cla-backend-uat.apps.live-1.cloud-platform.service.justice.gov.uk"
+    value: "http://cla-backend-app.laa-cla-backend-staging.svc.cluster.local"
   LAALAA_API_HOST:
     value: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
   GOOGLE_MAPS_API_KEY:
