@@ -177,7 +177,7 @@ jobs:
         type: boolean
         default: false
     docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+      - image: ministryofjustice/cloud-platform-tools:2.1
     steps:
       - checkout
       - run:
@@ -218,7 +218,7 @@ jobs:
 
   cleanup_merged:
     docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+      - image: ministryofjustice/cloud-platform-tools:2.1
     steps:
       - checkout
       - run:
