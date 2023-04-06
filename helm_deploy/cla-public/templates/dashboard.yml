@@ -446,7 +446,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": {{ include "cla-public.fullname" . }},
+      "title": "{{ include "cla-public.fullname" . }}",
       "version": 1
     }
 {{- end }}
