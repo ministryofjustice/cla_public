@@ -30,7 +30,8 @@ wtforms==2.1
 postcodeinfo>=0.0,<0.1
 django-extended-choices==0.3.0
 sentry-sdk[flask]==0.13.3
-
+uwsgi==2.0.21
+supervisor==4.2.4
 # fork of https://github.com/samgiles/slumber
 # with custom parameters for timeouts and additional headers on requests
 https://github.com/s-block/slumber/archive/da38360d6d158ee7ed445b43228fefc6f7e430e6.zip
