@@ -1,4 +1,12 @@
+FROM node:10 as node_build
+
+COPY . .
+RUN npm install
+RUN ./node_modules/.bin/gulp build
+
 FROM alpine:3.15
+
+COPY --from=node_build ./cla_public/static/ /home/app/flask/cla_public/static/
 
 RUN apk add --no-cache \
       pcre \
@@ -7,7 +15,6 @@ RUN apk add --no-cache \
       gettext \
       nginx\
       python2-dev\
-      npm \
       tzdata && \
     adduser -D www-data -G www-data
 
@@ -49,9 +56,8 @@ RUN chown -R www-data /var/lib/nginx/
 
 COPY . .
 
-# Compile frontend assets and translations
-RUN ./node_modules/.bin/gulp build && \
-    pybabel compile -f -d cla_public/translations
+# Compile translations
+RUN pybabel compile -f -d cla_public/translations
 
 USER 1000
 EXPOSE 8000
