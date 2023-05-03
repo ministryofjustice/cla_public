@@ -6,10 +6,11 @@ orbs:
 jobs:
   build:
     docker:
-      - image: docker:18.09-git
+      - image: docker:19.03-git
     steps:
       - checkout
       - setup_remote_docker:
+          version: "19.03.13"
           docker_layer_caching: true
       - run:
           name: Login to the ECR Docker registry
@@ -46,7 +47,7 @@ jobs:
             fi
   lint-with-py2-tools:
     docker:
-      - image: circleci/python:2.7
+      - image: cimg/python:2.7
     steps:
       - checkout
       - run:
@@ -73,7 +74,7 @@ jobs:
             flake8 cla_public
   format-with-py3-tools:
     docker:
-      - image: circleci/python:3.7
+      - image: cimg/python:3.7
     steps:
       - checkout
       - run:
@@ -128,7 +129,7 @@ jobs:
           path: ~/project/accessibility_tests/cypress/videos
   test:
     docker:
-      - image: circleci/python:2.7
+      - image: cimg/python:2.7
     steps:
       - checkout
       - run:
