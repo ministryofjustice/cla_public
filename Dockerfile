@@ -43,15 +43,11 @@ COPY requirements.txt .
 COPY requirements/ requirements/
 RUN pip install -r requirements.txt &&  pip install -r requirements/generated/requirements-no-deps.txt --no-deps
 
-COPY package.json package-lock.json ./
-RUN npm install
-
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
 RUN mkdir /var/run/supervisor/
 RUN chown -R www-data: /var/run/
 RUN chown -R www-data: /var/log/
-RUN chown -R www-data /var/tmp/nginx
 RUN chown -R www-data /var/lib/nginx/
 
 COPY . .
