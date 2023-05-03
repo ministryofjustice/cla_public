@@ -56,14 +56,14 @@ jobs:
             virtualenv py2-lint-env
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/py2-lint.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/py2-lint.txt" }}
       - run:
           name: Install dependencies
           command: |
             source py2-lint-env/bin/activate
-            pip install --requirement requirements/py2-lint.txt
+            pip install --requirement requirements/generated/py2-lint.txt
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/py2-lint.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/py2-lint.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
@@ -83,14 +83,14 @@ jobs:
             virtualenv py3-lint-env
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/py3-lint.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/py3-lint.txt" }}
       - run:
           name: Install dependencies
           command: |
             source py3-lint-env/bin/activate
-            pip install --requirement requirements/py3-lint.txt
+            pip install --requirement requirements/generated/py3-lint.txt
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/py3-lint.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/py3-lint.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
@@ -141,17 +141,17 @@ jobs:
 
       - restore_cache:
           keys:
-            - pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
+            - pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/generated/test.txt" }}
       - run:
           name: Install dependencies
           command: |
             source env/bin/activate
-            pip install --requirement requirements.txt --requirement requirements/test.txt
+            pip install --requirement requirements.txt --requirement requirements/generated/test.txt
             pip check
             # Don't do pip check for packages installed with --no-deps as that will complain about missing dependencies
-            pip install --requirement requirements/no-deps.txt --no-deps
+            pip install --requirement requirements/generated/no-deps.txt --no-deps
       - save_cache:
-          key: pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}-{{ checksum "requirements/no-deps.txt" }}
+          key: pip-v2-{{ checksum "requirements/generated/base.txt" }}-{{ checksum "requirements/generated/test.txt" }}-{{ checksum "requirements/generated/no-deps.txt" }}
           paths:
             - "~/.cache/pip"
 
