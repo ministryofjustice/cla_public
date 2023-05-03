@@ -21,7 +21,7 @@ RUN apk add --no-cache \
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 RUN python get-pip.py
 
-# To install python and nodejs dependencies
+# To install python dependencies
 RUN apk add --no-cache \
       autoconf \
       automake \
@@ -34,7 +34,7 @@ RUN apk add --no-cache \
 
 
 RUN cp /usr/share/zoneinfo/Europe/London /etc/localtime
-RUN pip install -U setuptools pip==18.1 wheel
+
 
 ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
