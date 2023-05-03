@@ -146,12 +146,12 @@ jobs:
           name: Install dependencies
           command: |
             source env/bin/activate
-            pip install --requirement requirements.txt --requirement requirements/generated/requirements-testing.txt
+            pip install --requirement requirements/generated/requirements-testing.txt
             pip check
             # Don't do pip check for packages installed with --no-deps as that will complain about missing dependencies
             pip install --requirement requirements/generated/requirements-no-deps.txt --no-deps
       - save_cache:
-          key: pip-v2-{{ checksum "requirements/generated/requirements-production.txt" }}-{{ checksum "requirements/generated/requirements-testing.txt" }}-{{ checksum "requirements/generated/requirements-no-deps.txt" }}
+          key: pip-v2-{{ checksum "requirements/generated/requirements-testing.txt" }}-{{ checksum "requirements/generated/requirements-no-deps.txt" }}
           paths:
             - "~/.cache/pip"
 

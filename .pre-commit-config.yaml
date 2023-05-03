@@ -26,7 +26,7 @@ repos:
         args: [requirements/source/requirements-py2-lint.in, "--output-file", requirements/generated/requirements-py2-lint.txt]
       - id: pip-compile
         name: pip-compile requirements-testing.in
-        files: requirements-testing.in
+        files: requirements-(base|testing).in
         args: [requirements/source/requirements-testing.in, "--output-file", requirements/generated/requirements-testing.txt]
       - id: pip-compile
         name: pip-compile requirements-production.in
