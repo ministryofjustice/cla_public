@@ -3,7 +3,7 @@ repos:
     rev: 18.9b0
     hooks:
     - id: black
-      language_version: python3
+      language_version: python3.7
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.1.0
     hooks:
@@ -23,11 +23,7 @@ repos:
       - id: pip-compile
         name: pip-compile requirements-py2-lint.in
         files: requirements-py2-lint.in
-        args: [requirements/source/requirements-lint.in, "--output-file", requirements/generated/requirements-py2-lint.txt]
-      - id: pip-compile
-        name: pip-compile requirements-py3-lint.in
-        files: requirements-py3-lint.in
-        args: [requirements/source/requirements-py3-lint.in, "--output-file", requirements/generated/requirements-py3-lint.txt]
+        args: [requirements/source/requirements-py2-lint.in, "--output-file", requirements/generated/requirements-py2-lint.txt]
       - id: pip-compile
         name: pip-compile requirements-testing.in
         files: requirements-testing.in
