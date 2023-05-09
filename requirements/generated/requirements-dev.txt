@@ -20,7 +20,7 @@ blinker==1.3
     #   flask-debugtoolbar
     #   flask-mail
     #   sentry-sdk
-certifi==2021.10.8
+certifi==2022.12.7
     # via
     #   requests
     #   sentry-sdk
