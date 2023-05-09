@@ -3,9 +3,33 @@ repos:
     rev: 18.9b0
     hooks:
     - id: black
-      language_version: python3
+      language_version: python3.7
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.1.0
     hooks:
     - id: flake8
       args: ['--config=setup.cfg',  '--exclude=./cla_public/config/*']
+-   repo: https://github.com/jazzband/pip-tools
+    rev: 5.5.0
+    hooks:
+      - id: pip-compile
+        name: pip-compile requirements-no-deps.in
+        files: requirements-no-deps.in
+        args: [requirements/source/requirements-no-deps.in, "--output-file", requirements/generated/requirements-no-deps.txt]
+      - id: pip-compile
+        name: pip-compile requirements-dev.in
+        files: requirements-(base|dev).in
+        args: [requirements/source/requirements-dev.in, "--output-file", requirements/generated/requirements-dev.txt]
+      - id: pip-compile
+        name: pip-compile requirements-py2-lint.in
+        files: requirements-py2-lint.in
+        args: [requirements/source/requirements-py2-lint.in, "--output-file", requirements/generated/requirements-py2-lint.txt]
+      - id: pip-compile
+        name: pip-compile requirements-testing.in
+        files: requirements-(base|testing).in
+        args: [requirements/source/requirements-testing.in, "--output-file", requirements/generated/requirements-testing.txt]
+      - id: pip-compile
+        name: pip-compile requirements-production.in
+        files: requirements-(base|production).in
+        args: [requirements/source/requirements-production.in, "--output-file", requirements/generated/requirements-production.txt]
+

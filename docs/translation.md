@@ -183,7 +183,7 @@ Since 2020, the manual process outlined above has been used to manage translatio
 > Install the Transifex client
 > 
 >     source env/bin/activate
->     pip install requirements/dev.txt
+>     pip install requirements/generated/requirements-dev.txt
 > 
 > Extract translatable strings
 > 

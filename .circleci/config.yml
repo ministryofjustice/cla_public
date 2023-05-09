@@ -6,16 +6,17 @@ orbs:
 jobs:
   build:
     docker:
-      - image: docker:18.09-git
+      - image: docker:19.03-git
     steps:
       - checkout
       - setup_remote_docker:
+          version: "19.03.13"
           docker_layer_caching: true
       - run:
           name: Login to the ECR Docker registry
           command: |
             if [ -z "$CIRCLE_PR_NUMBER" ]; then
-              apk add --no-cache --no-progress py2-pip
+              apk add --no-cache --no-progress py3-pip
               pip install awscli
               ecr_login="$(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)"
               ${ecr_login}
@@ -46,7 +47,7 @@ jobs:
             fi
   lint-with-py2-tools:
     docker:
-      - image: circleci/python:2.7
+      - image: cimg/python:2.7
     steps:
       - checkout
       - run:
@@ -56,14 +57,14 @@ jobs:
             virtualenv py2-lint-env
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/py2-lint.txt" }}
+            - pip-v1-{{ checksum "requirements/generated/requirements-py2-lint.txt" }}
       - run:
           name: Install dependencies
           command: |
             source py2-lint-env/bin/activate
-            pip install --requirement requirements/py2-lint.txt
+            pip install --requirement requirements/generated/requirements-py2-lint.txt
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/py2-lint.txt" }}
+          key: pip-v1-{{ checksum "requirements/generated/requirements-py2-lint.txt" }}
           paths:
             - "~/.cache/pip"
       - run:
@@ -71,32 +72,32 @@ jobs:
           command: |
             source py2-lint-env/bin/activate
             flake8 cla_public
-  lint-with-py3-tools:
+  format-with-py3-tools:
     docker:
-      - image: circleci/python:3.7
+      - image: cimg/python:3.7
     steps:
       - checkout
       - run:
           name: Setup Python environment
           command: |
             pip install virtualenv
-            virtualenv py3-lint-env
+            virtualenv format-env
       - restore_cache:
           keys:
-            - pip-v1-{{ checksum "requirements/py3-lint.txt" }}
+            - pip-v1-black-18.9b0
       - run:
           name: Install dependencies
           command: |
-            source py3-lint-env/bin/activate
-            pip install --requirement requirements/py3-lint.txt
+            source format-env/bin/activate
+            pip install black==18.9b0
       - save_cache:
-          key: pip-v1-{{ checksum "requirements/py3-lint.txt" }}
+          key: pip-v1-black-18.9b0
           paths:
             - "~/.cache/pip"
       - run:
           name: Check formatting with Black
           command: |
-            source py3-lint-env/bin/activate
+            source format-env/bin/activate
             black --check --diff cla_public
   accessibility-test:
     docker:
@@ -128,7 +129,7 @@ jobs:
           path: ~/project/accessibility_tests/cypress/videos
   test:
     docker:
-      - image: circleci/python:2.7
+      - image: cimg/python:2.7
     steps:
       - checkout
       - run:
@@ -141,17 +142,17 @@ jobs:
 
       - restore_cache:
           keys:
-            - pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}
+            - pip-v2-{{ checksum "requirements/generated/requirements-production.txt" }}-{{ checksum "requirements/generated/requirements-testing.txt" }}
       - run:
           name: Install dependencies
           command: |
             source env/bin/activate
-            pip install --requirement requirements.txt --requirement requirements/test.txt
+            pip install --requirement requirements/generated/requirements-testing.txt
             pip check
             # Don't do pip check for packages installed with --no-deps as that will complain about missing dependencies
-            pip install --requirement requirements/no-deps.txt --no-deps
+            pip install --requirement requirements/generated/requirements-no-deps.txt --no-deps
       - save_cache:
-          key: pip-v2-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/test.txt" }}-{{ checksum "requirements/no-deps.txt" }}
+          key: pip-v2-{{ checksum "requirements/generated/requirements-testing.txt" }}-{{ checksum "requirements/generated/requirements-no-deps.txt" }}
           paths:
             - "~/.cache/pip"
 
@@ -177,7 +178,7 @@ jobs:
         type: boolean
         default: false
     docker:
-      - image: ministryofjustice/cloud-platform-tools:2.1
+      - image: ministryofjustice/cloud-platform-tools
     steps:
       - checkout
       - run:
@@ -266,7 +267,7 @@ workflows:
   build-test-and-approval-deploy:
     jobs:
       - lint-with-py2-tools
-      - lint-with-py3-tools
+      - format-with-py3-tools
       - test
       - cleanup_merged:
           context:
@@ -275,7 +276,7 @@ workflows:
       - build:
           requires:
             - lint-with-py2-tools
-            - lint-with-py3-tools
+            - format-with-py3-tools
             - test
           context: laa-cla-public
       - cla-end-to-end-tests/behave:
@@ -288,7 +289,7 @@ workflows:
             - run:
                 command: |
                   cd cla_public
-                  source .circleci/define_build_environment_variables testing
+                  source .circleci/define_build_environment_variables
                   echo "export CLA_PUBLIC_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
                   echo "export A11Y_ENABLED=true" >> $BASH_ENV
                   echo "Setting CLA Public image $ECR_DEPLOY_IMAGE"
