@@ -219,7 +219,7 @@ jobs:
 
   cleanup_merged:
     docker:
-      - image: ministryofjustice/cloud-platform-tools:2.1
+      - image: ministryofjustice/cloud-platform-tools
     steps:
       - checkout
       - run:
@@ -238,7 +238,7 @@ jobs:
 
   production_deploy:
     docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+      - image: ministryofjustice/cloud-platform-tools
     steps:
       - checkout
       - run:
