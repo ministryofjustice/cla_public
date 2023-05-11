@@ -21,6 +21,7 @@ from cla_public.apps.checker.api import (
 )
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
+from notifications_python_client.notifications import NotificationsAPIClient
 
 
 @contact.after_request
