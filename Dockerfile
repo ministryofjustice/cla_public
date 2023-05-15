@@ -40,7 +40,7 @@ ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
 
 COPY ./requirements/generated/ ./requirements
-RUN pip install -r requirements-testing.txt &&  pip install -r requirements/generated/requirements-no-deps.txt --no-deps
+RUN pip install -r requirements-production.txt
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
