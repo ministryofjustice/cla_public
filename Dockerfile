@@ -39,8 +39,7 @@ RUN cp /usr/share/zoneinfo/Europe/London /etc/localtime
 ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
 
-COPY requirements.txt .
-COPY requirements/ requirements/
+COPY ./requirements/generated/ ./requirements
 RUN pip install -r requirements.txt &&  pip install -r requirements/generated/requirements-no-deps.txt --no-deps
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
