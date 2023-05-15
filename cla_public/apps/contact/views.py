@@ -20,7 +20,7 @@ from cla_public.apps.checker.api import (
 )
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
-from cla_public.apps.base.api import GovUkNotify
+from cla_public.apps.base.gov_notify.api import GovUkNotify
 
 
 @contact.after_request
