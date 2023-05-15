@@ -40,7 +40,7 @@ ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
 
 COPY ./requirements/generated/ ./requirements
-RUN pip install -r requirements-production.txt
+RUN pip install -r requirements-production.txt --no-cache-dir
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
