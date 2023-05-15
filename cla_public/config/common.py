@@ -22,7 +22,7 @@ CLEAR_SESSION = True
 
 GOV_UK_START_PAGE = "https://www.gov.uk/check-legal-aid"
 
-BACKEND_BASE_URI = os.environ.get("BACKEND_BASE_URI", "http://127.0.0.1:8000")  # For healthcheck.json requests
+BACKEND_BASE_URI = os.environ.get("BACKEND_BASE_URI", "http://127.0.0.1:8010")  # For healthcheck.json requests
 
 # Disable eligibility check and allow users to request a callback only
 CONTACT_ONLY = os.environ.get("CALLMEBACK_ONLY", False) == "True"
@@ -87,6 +87,8 @@ EXTENSIONS = []
 CLA_ENV = os.environ.get("CLA_ENV", "dev")
 
 LANGUAGES = [("en", "English"), ("cy", "Welsh")]
+
+GOVUK_NOTIFY_API_KEY = "pkh_api_key_test-a0f06831-b125-4647-af53-d1b397f75dd2-853af9f3-cc84-4f82-aea9-ffa6b4964701"
 
 
 def config_path(x):

@@ -6,7 +6,6 @@ from collections import Mapping
 
 from flask import abort, render_template, session, url_for, views, current_app
 from flask.ext.babel import lazy_gettext as _, gettext
-from flask.ext.mail import Message
 
 from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
@@ -21,7 +20,7 @@ from cla_public.apps.checker.api import (
 )
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
-from notifications_python_client.notifications import NotificationsAPIClient
+from cla_public.base.gov_notify.api import GovUkNotify
 
 
 @contact.after_request
@@ -47,15 +46,56 @@ def create_confirmation_email(data):
             {"callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")}
         )
 
-    recipient = (data["full_name"], data["email"]) if data.get("full_name") else data["email"]
-
     session["confirmation_email"] = data["email"]
 
-    return Message(
-        gettext(u"Your Civil Legal Advice reference number"),
-        recipients=[recipient],
-        body=render_template("emails/confirmation.txt", data=data),
-    )
+    try:
+        if data["callback"]:
+            if data["contact_type"] == "callback":
+                callback_time = session.stored.get("callback_time")
+                end_time = callback_time + datetime.timedelta(minutes=30)
+                data.update(
+                    {
+                        "callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ")
+                        + end_time.strftime("%H:%M")
+                    }
+                )
+
+                # Callback for user
+                GovUkNotify().send_email(
+                    email_address=data["email"],
+                    template_id="48ce3539-48f3-4b2d-9931-2a57f89a521f",
+                    personalisation={
+                        "callback_number": "yes" if data["contact_number"] else "no",
+                        "no_callback_number": "yes" if not data["contact_number"] else "no",
+                        "full_name": data["full_name"],
+                        "case_reference": data["case_ref"],
+                        "contact_number": data["contact_number"],
+                        "date_time": data["callback_time_string"],
+                    },
+                )
+
+            elif data["thirdparty"]:
+                # Callback for someone else
+                GovUkNotify().send_email(
+                    email_address=data["email"],
+                    template_id="7ffc6de3-07bd-4232-b416-cf18d0abfec6",
+                    personalisation={
+                        "full_name": data["full_name"],
+                        "case_reference": data["case_ref"],
+                        "contact_number": data["contact_number"],
+                        "date_time": data["callback_time_string"],
+                    },
+                )
+
+        else:
+            # No callback requested
+            GovUkNotify().send_email(
+                email_address=data["email"],
+                template_id="382cc41c-b81d-4197-8819-2ad76522d03d",
+                personalisation={"case_reference": data["case_ref"]},
+            )
+    except:
+        pass
 
 
 class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):

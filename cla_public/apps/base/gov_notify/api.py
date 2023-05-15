@@ -1,10 +1,11 @@
 from notifications_python_client.notifications import NotificationsAPIClient
+from cla_public.config.common import GOVUK_NOTIFY_API_KEY
 
 
 class GovUkNotify(object):
     def __init__(self):
-        if settings.GOVUK_NOTIFY_API_KEY:
-            self.notifications_client = NotificationsAPIClient(settings.GOVUK_NOTIFY_API_KEY)
+        if GOVUK_NOTIFY_API_KEY:
+            self.notifications_client = NotificationsAPIClient(GOVUK_NOTIFY_API_KEY)
         else:
             raise ValueError("Missing API Key for GOVUK Notify")
 
