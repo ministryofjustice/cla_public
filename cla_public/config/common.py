@@ -88,7 +88,7 @@ CLA_ENV = os.environ.get("CLA_ENV", "dev")
 
 LANGUAGES = [("en", "English"), ("cy", "Welsh")]
 
-GOVUK_NOTIFY_API_KEY = "pkh_api_key_test-a0f06831-b125-4647-af53-d1b397f75dd2-853af9f3-cc84-4f82-aea9-ffa6b4964701"
+GOVUK_NOTIFY_API_KEY = os.environ.get("GOVUK_NOTIFY_API_KEY")
 
 
 def config_path(x):

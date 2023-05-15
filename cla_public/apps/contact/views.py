@@ -5,7 +5,7 @@ from smtplib import SMTPAuthenticationError
 from collections import Mapping
 
 from flask import abort, render_template, session, url_for, views, current_app
-from flask.ext.babel import lazy_gettext as _, gettext
+from flask.ext.babel import lazy_gettext as _
 
 from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
@@ -20,7 +20,7 @@ from cla_public.apps.checker.api import (
 )
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
-from cla_public.base.gov_notify.api import GovUkNotify
+from cla_public.apps.base.api import GovUkNotify
 
 
 @contact.after_request
@@ -49,16 +49,12 @@ def create_confirmation_email(data):
     session["confirmation_email"] = data["email"]
 
     try:
+        callback = callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")
         if data["callback"]:
             if data["contact_type"] == "callback":
                 callback_time = session.stored.get("callback_time")
                 end_time = callback_time + datetime.timedelta(minutes=30)
-                data.update(
-                    {
-                        "callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ")
-                        + end_time.strftime("%H:%M")
-                    }
-                )
+                data.update({"callback_time_string": callback})
 
                 # Callback for user
                 GovUkNotify().send_email(
@@ -94,7 +90,7 @@ def create_confirmation_email(data):
                 template_id="382cc41c-b81d-4197-8819-2ad76522d03d",
                 personalisation={"case_reference": data["case_ref"]},
             )
-    except:
+    except Exception:
         pass
 
 
