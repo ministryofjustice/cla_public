@@ -24,7 +24,6 @@ def submit(**kwargs):
         "callback-contact_number": "0123456789",
         "thirdparty-full_name": "John Smith",
         "thirdparty-contact_number": "0123456789",
-        "callback_requested": True,
     }
 
     if datetime.datetime.now().time() > datetime.time(hour=14, minute=30):
@@ -50,6 +49,7 @@ def submit(**kwargs):
 def submit_and_store_in_session(**kwargs):
     form = submit(**kwargs)
     session.checker["ContactForm"] = form.data
+    session.checker["callback_requested"] = kwargs["callback_requested"] if kwargs["callback_requested"] else True
     session.store_checker_details()
     return form
 
