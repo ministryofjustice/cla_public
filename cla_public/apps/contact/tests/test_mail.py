@@ -64,30 +64,41 @@ class TestConfirmationEmail(unittest.TestCase):
 
     def tearDown(self):
         self.ctx.pop()
-        
-    def email_args(self, **kwargs):
-        arg_data = {
-            "personalisation": ANY,
-            "email_address": ANY,
-            "template_id": ANY,
-        }
-        arg_data.update(kwargs)
-        return arg_data
+
+    def assert_email_arguments(self, govuk_notify, template_id):
+        govuk_notify.send_email.assert_called_with(
+            personalisation=ANY,
+            email_address=ANY,
+            template_id=template_id
+        )
 
     def test_confirmation_email_callback(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session()
         create_and_send_confirmation_email(govuk_notify, form.data)
-        govuk_notify.send_email.assert_called_with(self.email_args(template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]))
+        self.assert_email_arguments(
+            govuk_notify,
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
+        )
 
     def test_confirmation_email_no_callback(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session(callback_requested=False)
         create_and_send_confirmation_email(govuk_notify, form.data)
-        govuk_notify.send_email.assert_called_with(self.email_args(template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]))
+        print('xxxxxxxxxx')
+        print(form)
+        self.assert_email_arguments(
+            govuk_notify,
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
+        )
 
     def test_confirmation_email_thirdparty(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session(contact_type="nothing", thirdparty=True)
         create_and_send_confirmation_email(govuk_notify, form.data)
-        govuk_notify.send_email.assert_called_with(self.email_args(template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]))
+        print('xxxxxxxxxx')
+        print(form)
+        self.assert_email_arguments(
+            govuk_notify,
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
+        )
