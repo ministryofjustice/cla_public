@@ -30,6 +30,7 @@ def add_no_cache_headers(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+
 def set_callback_time_string(data):
     data.update({"callback_requested": session.stored.get("callback_requested")})
     if data.get("callback_requested"):
@@ -49,36 +50,32 @@ def generate_confirmation_email_data(data):
     )
     session["confirmation_email"] = data["email"]
     email_address = data["email"]
-    personalisation = (
-        {
-            "full_name": data["full_name"],
-            "thirdparty_full_name": data["thirdparty"]["full_name"],
-            "case_reference": data["case_ref"],
-            "contact_number": data["callback"]["contact_number"],
-            "date_time": set_callback_time_string() if data["contact_number"] else None,
-        },
-    )
+    personalisation = {
+        "full_name": data["full_name"],
+        "thirdparty_full_name": data["thirdparty"]["full_name"],
+        "case_reference": data["case_ref"],
+        "date_time": set_callback_time_string(data),
+    }
     if data["callback_requested"] is False:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
     else:
         if data["contact_type"] == "callback":
             template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
+            personalisation.update(contact_number=data["callback"]["contact_number"])
         elif data["thirdparty"]:
             template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
-            personalisation = {"contact_number": data["thirdparty"]["contact_number"]}
+            personalisation.update(contact_number=data["thirdparty"]["contact_number"])
 
     return email_address, template_id, personalisation
 
 
-def create_and_send_confirmation_email(govuk_notify):
+def create_and_send_confirmation_email(govuk_notify, data):
     try:
-        govuk_notify.send_email(
-            email_address=generate_confirmation_email_data("email_address"),
-            template_id=generate_confirmation_email_data("template_id"),
-            personalisation=generate_confirmation_email_data("personalisation"),
-        )
+        email_address, template_id, personalisation = generate_confirmation_email_data(data)
+        govuk_notify.send_email(email_address=email_address, template_id=template_id, personalisation=personalisation)
     except Exception as error:
         raise error
+
 
 class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
     form_class = ContactForm
@@ -124,7 +121,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             session.store_checker_details()
             if self.form.email.data:
                 govuk_notify = GovUkNotify()
-                create_confirmation_email(govuk_notify, self.form.data)
+                create_and_send_confirmation_email(govuk_notify, self.form.data)
             return self.redirect(url_for("contact.confirmation"))
         except AlreadySavedApiError:
             return self.already_saved()
@@ -188,7 +185,7 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
         if self.form.email.data:
             try:
                 govuk_notify = GovUkNotify()
-                create_confirmation_email(govuk_notify, self.form.data)
+                create_and_send_confirmation_email(govuk_notify, self.form.data)
             except Exception:
                 self.form._fields["email"].errors.append(
                     _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
