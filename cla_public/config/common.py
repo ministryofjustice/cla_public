@@ -90,6 +90,21 @@ LANGUAGES = [("en", "English"), ("cy", "Welsh")]
 
 GOVUK_NOTIFY_API_KEY = os.environ.get("GOVUK_NOTIFY_API_KEY")
 
+GOVUK_NOTIFY_TEMPLATES = {
+    "PUBLIC_CALLBACK_NOT_REQUESTED": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_NOT_REQUESTED", "382cc41c-b81d-4197-8819-2ad76522d03d"
+    ),
+    "PUBLIC_CALLBACK_WITH_NUMBER": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_WITH_NUMBER", "b4cfa1b6-f1e9-44c1-9b02-f07ba896b669"
+    ),
+    "PUBLIC_CALLBACK_WITH_NO_NUMBER": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_WITH_NO_NUMBER", "3e2926c5-1bdf-4eb3-b212-7f206f1d764d"
+    ),
+    "PUBLIC_CALLBACK_THIRD_PARTY": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_THIRD_PARTY", "7ffc6de3-07bd-4232-b416-cf18d0abfec6"
+    ),
+}
+
 
 def config_path(x):
     return os.path.join(PROJECT_ROOT, "config", "forms", x, "forms_config.yml")

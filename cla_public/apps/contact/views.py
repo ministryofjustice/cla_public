@@ -21,6 +21,7 @@ from cla_public.apps.checker.api import (
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
 from cla_public.apps.base.gov_notify.api import GovUkNotify
+from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
 
 
 @contact.after_request
@@ -38,19 +39,19 @@ def create_confirmation_email(data):
             "contact_type": session.stored.get("contact_type"),
         }
     )
-
+    print(data)
     if data.get("callback_requested"):
         callback_time = session.stored.get("callback_time")
         end_time = callback_time + datetime.timedelta(minutes=30)
         data.update(
             {"callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")}
         )
+        callback = callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")
 
     session["confirmation_email"] = data["email"]
 
     try:
-        callback = callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")
-        if data["callback"]:
+        if data["callback_requested"] is True:
             if data["contact_type"] == "callback":
                 callback_time = session.stored.get("callback_time")
                 end_time = callback_time + datetime.timedelta(minutes=30)
@@ -59,9 +60,9 @@ def create_confirmation_email(data):
                 # Callback for user
                 GovUkNotify().send_email(
                     email_address=data["email"],
-                    template_id="b4cfa1b6-f1e9-44c1-9b02-f07ba896b669"
+                    template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
                     if data["callback"]["contact_number"]
-                    else "3e2926c5-1bdf-4eb3-b212-7f206f1d764d",
+                    else GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NO_NUMBER"],
                     personalisation={
                         "full_name": data["full_name"],
                         "case_reference": data["case_ref"],
@@ -75,7 +76,7 @@ def create_confirmation_email(data):
                 # Callback for someone else
                 GovUkNotify().send_email(
                     email_address=data["email"],
-                    template_id="7ffc6de3-07bd-4232-b416-cf18d0abfec6",
+                    template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"],
                     personalisation={
                         "thirdparty_full_name": data["thirdparty"]["full_name"],
                         "full_name": data["full_name"],
@@ -89,7 +90,7 @@ def create_confirmation_email(data):
             # No callback requested
             GovUkNotify().send_email(
                 email_address=data["email"],
-                template_id="382cc41c-b81d-4197-8819-2ad76522d03d",
+                template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"],
                 personalisation={"case_reference": data["case_ref"]},
             )
     except Exception as error:
