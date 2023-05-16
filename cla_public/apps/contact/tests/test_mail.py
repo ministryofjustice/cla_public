@@ -86,7 +86,7 @@ class TestConfirmationEmail(unittest.TestCase):
         form = submit_and_store_in_session(callback_requested=False)
         create_and_send_confirmation_email(govuk_notify, form.data)
         print('xxxxxxxxxx')
-        print(form)
+        print(form.data)
         self.assert_email_arguments(
             govuk_notify,
             template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
@@ -97,7 +97,7 @@ class TestConfirmationEmail(unittest.TestCase):
         form = submit_and_store_in_session(contact_type="nothing", thirdparty=True)
         create_and_send_confirmation_email(govuk_notify, form.data)
         print('xxxxxxxxxx')
-        print(form)
+        print(form.data)
         self.assert_email_arguments(
             govuk_notify,
             template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
