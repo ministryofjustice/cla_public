@@ -83,10 +83,12 @@ class TestConfirmationEmail(unittest.TestCase):
 
     def test_confirmation_email_no_callback(self):
         govuk_notify = MagicMock()
-        form = submit_and_store_in_session(callback_requested=False)
-        create_and_send_confirmation_email(govuk_notify, form.data)
         print('xxxxxxxxxx')
         print(session.stored.get("callback_requested"))
+        form = submit_and_store_in_session(callback_requested=False)
+        print('xxxxxxxxxx')
+        print(session.stored.get("callback_requested"))
+        create_and_send_confirmation_email(govuk_notify, form.data)
         print(form.data)
         self.assert_email_arguments(
             govuk_notify,
@@ -95,6 +97,8 @@ class TestConfirmationEmail(unittest.TestCase):
 
     def test_confirmation_email_thirdparty(self):
         govuk_notify = MagicMock()
+        print('xxxxxxxxxx')
+        print(session.stored.get("callback_requested"))
         form = submit_and_store_in_session(contact_type="nothing", thirdparty=True)
         create_and_send_confirmation_email(govuk_notify, form.data)
         print('xxxxxxxxxx')
