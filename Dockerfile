@@ -39,9 +39,9 @@ RUN cp /usr/share/zoneinfo/Europe/London /etc/localtime
 ENV APP_HOME /home/app/flask
 WORKDIR /home/app/flask
 
+COPY ./requirements/generated/ ./requirements
 RUN echo "You are currently in: $PWD"
 RUN echo "The items in this directory are $(ls)"
-COPY ./requirements/generated/ ./requirements
 RUN pip install -r .cla_public/requirements/generated/requirements-production.txt
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
