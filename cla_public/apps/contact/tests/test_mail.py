@@ -49,7 +49,7 @@ def submit(**kwargs):
 def submit_and_store_in_session(**kwargs):
     form = submit(**kwargs)
     session.checker["ContactForm"] = form.data
-    session.checker["callback_requested"] = kwargs["callback_requested"] if kwargs["callback_requested"] else True
+    session.checker["callback_requested"] = kwargs.get('callback_requested',True)
     session.store_checker_details()
     return form
 
