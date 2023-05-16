@@ -49,7 +49,7 @@ def submit(**kwargs):
 def submit_and_store_in_session(**kwargs):
     form = submit(**kwargs)
     session.checker["ContactForm"] = form.data
-    session.checker["callback_requested"] = kwargs.get('callback_requested',True)
+    session.checker["callback_requested"] = kwargs.get('callback_requested', True)
     session.store_checker_details()
     return form
 
@@ -86,6 +86,7 @@ class TestConfirmationEmail(unittest.TestCase):
         form = submit_and_store_in_session(callback_requested=False)
         create_and_send_confirmation_email(govuk_notify, form.data)
         print('xxxxxxxxxx')
+        print(session.stored.get("callback_requested"))
         print(form.data)
         self.assert_email_arguments(
             govuk_notify,
@@ -97,6 +98,7 @@ class TestConfirmationEmail(unittest.TestCase):
         form = submit_and_store_in_session(contact_type="nothing", thirdparty=True)
         create_and_send_confirmation_email(govuk_notify, form.data)
         print('xxxxxxxxxx')
+        print(session.stored.get("callback_requested"))
         print(form.data)
         self.assert_email_arguments(
             govuk_notify,
