@@ -45,7 +45,7 @@ RUN echo "The items in this directory are $(ls)"
 RUN echo "Changing directory..." && \
     cd requirements / && \
     echo "Inside requirements $(ls)"
-RUN pip install -r requirements/generated/requirements-production.txt
+RUN pip install -r requirements/requirements-production.txt
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
