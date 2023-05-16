@@ -62,19 +62,19 @@ class TestConfirmationEmail(unittest.TestCase):
 
     def tearDown(self):
         self.ctx.pop()
-        
+
     def test_confirmation_email_callback(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session()
         create_confirmation_email(govuk_notify, form.data)
         govuk_notify.send_email.assert_called_with(template_id="b4cfa1b6-f1e9-44c1-9b02-f07ba896b669")
-    
+
     def test_confirmation_email_no_callback(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session(callback=False)
         create_confirmation_email(govuk_notify, form.data)
         govuk_notify.send_email.assert_called_with(template_id="382cc41c-b81d-4197-8819-2ad76522d03d")
-    
+
     def test_confirmation_email_thirdparty(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session(contact_type="nothing", thirdparty=True)
