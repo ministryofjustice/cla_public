@@ -89,7 +89,7 @@ class TestConfirmationEmail(unittest.TestCase):
         govuk_notify = MagicMock()
         print('xxxxxxxxxx')
         print(session.stored.get("callback_requested"))
-        form = submit_and_store_in_session()
+        form = submit_and_store_in_session(contact_type="nothing")
         session.checker["callback_requested"] = False
         print('xxxxxxxxxx')
         print(session.stored.get("callback_requested"))
@@ -104,7 +104,7 @@ class TestConfirmationEmail(unittest.TestCase):
         govuk_notify = MagicMock()
         print('xxxxxxxxxx')
         print(session.stored.get("callback_requested"))
-        form = submit_and_store_in_session(contact_type="nothing")
+        form = submit_and_store_in_session()
         session.checker["callback_requested"] = True
         create_and_send_confirmation_email(govuk_notify, form.data)
         print('xxxxxxxxxx')
