@@ -42,7 +42,10 @@ WORKDIR /home/app/flask
 COPY ./requirements/generated/ ./requirements
 RUN echo "You are currently in: $PWD"
 RUN echo "The items in this directory are $(ls)"
-RUN pip install -r .cla_public/requirements/generated/requirements-production.txt
+RUN echo "Changing directory..." && \
+    cd requirements / && \
+    echo "Inside requirements $(ls)"
+RUN pip install -r requirements/generated/requirements-production.txt
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
