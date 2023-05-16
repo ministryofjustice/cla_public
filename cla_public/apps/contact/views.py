@@ -32,8 +32,8 @@ def add_no_cache_headers(response):
 
 
 def set_callback_time_string(data):
-    # data.update({"callback_requested": session.stored.get("callback_requested")})
-    if session.stored.get("callback_requested"):
+    data.update({"callback_requested": session.stored.get("callback_requested")})
+    if data.get("callback_requested"):
         callback_time = session.stored.get("callback_time")
         end_time = callback_time + datetime.timedelta(minutes=30)
         callback_time_string = callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")
@@ -61,10 +61,10 @@ def generate_confirmation_email_data(data):
 
         return email_address, template_id, personalisation
 
-    if data["contact_type"] == "callback":
+    if data["callback"]["contact_number"]:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
         personalisation.update(contact_number=data["callback"]["contact_number"])
-    elif data["thirdparty"]:
+    elif data["thirdparty"]["contact_number"]:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
         personalisation.update(contact_number=data["thirdparty"]["contact_number"])
 
