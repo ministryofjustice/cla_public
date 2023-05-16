@@ -58,13 +58,15 @@ def generate_confirmation_email_data(data):
     }
     if data["callback_requested"] is False:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
-    else:
-        if data["contact_type"] == "callback":
-            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
-            personalisation.update(contact_number=data["callback"]["contact_number"])
-        elif data["thirdparty"]:
-            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
-            personalisation.update(contact_number=data["thirdparty"]["contact_number"])
+
+        return email_address, template_id, personalisation
+
+    if data["contact_type"] == "callback":
+        template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
+        personalisation.update(contact_number=data["callback"]["contact_number"])
+    elif data["thirdparty"]:
+        template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
+        personalisation.update(contact_number=data["thirdparty"]["contact_number"])
 
     return email_address, template_id, personalisation
 
