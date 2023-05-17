@@ -195,8 +195,7 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
         if self.form.email.data:
             try:
                 govuk_notify = GovUkNotify()
-                # import pdb; pdb.set_trace()
-                session.checker.update({"email": self.form.email.data})
+                session.checker["ContactForm"].update({"email": self.form.email.data})
                 create_and_send_confirmation_email(govuk_notify, session.checker["ContactForm"])
                 session.clear_checker()
             except Exception:
