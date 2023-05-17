@@ -48,11 +48,13 @@ def generate_confirmation_email_data(data):
             "contact_type": session.stored.get("contact_type"),
         }
     )
-    session["confirmation_email"] = data["email"]
+
     email_address = data["email"]
     personalisation = {
-        "full_name": data["full_name"],
-        "thirdparty_full_name": data["thirdparty"]["full_name"],
+        "full_name": data["full_name"] if data["full_name"] else session.stored.get("full_name"),
+        "thirdparty_full_name": data["thirdparty"]["full_name"]
+        if data["thirdparty"]["full_name"]
+        else session.stored.get("thirdparty_full_name"),
         "case_reference": data["case_ref"],
         "date_time": set_callback_time_string(data),
     }
@@ -61,12 +63,20 @@ def generate_confirmation_email_data(data):
 
         return email_address, template_id, personalisation
 
-    if data["callback"]["contact_number"]:
+    if data["callback"]["contact_number"] or session.stored.get("callback_contact_number"):
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
-        personalisation.update(contact_number=data["callback"]["contact_number"])
-    elif data["thirdparty"]["contact_number"]:
+        personalisation.update(
+            contact_number=data["callback"]["contact_number"]
+            if data["callback"]["contact_number"]
+            else session.stored.get("callback_contact_number")
+        )
+    elif data["thirdparty"]["contact_number"] or session.stored.get("thirdparty_contact_number"):
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
-        personalisation.update(contact_number=data["thirdparty"]["contact_number"])
+        personalisation.update(
+            contact_number=data["thirdparty"]["contact_number"]
+            if data["thirdparty"]["contact_number"]
+            else session.stored.get("thirdparty_contact_number")
+        )
 
     return email_address, template_id, personalisation
 
@@ -166,8 +176,6 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
     form_class = ConfirmationForm
 
     def get(self):
-        session.clear_checker()
-
         confirmation_email = session.get("confirmation_email", None)
         if confirmation_email:
             del session["confirmation_email"]
@@ -187,7 +195,10 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
         if self.form.email.data:
             try:
                 govuk_notify = GovUkNotify()
-                create_and_send_confirmation_email(govuk_notify, self.form.data)
+                # import pdb; pdb.set_trace()
+                session.checker.update({"email": self.form.email.data})
+                create_and_send_confirmation_email(govuk_notify, session.checker["ContactForm"])
+                session.clear_checker()
             except Exception:
                 self.form._fields["email"].errors.append(
                     _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
