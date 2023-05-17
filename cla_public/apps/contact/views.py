@@ -3,10 +3,8 @@
 import datetime
 from smtplib import SMTPAuthenticationError
 from collections import Mapping
-
 from flask import abort, render_template, session, url_for, views
 from flask.ext.babel import lazy_gettext as _
-
 from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm, ConfirmationForm
@@ -48,13 +46,11 @@ def generate_confirmation_email_data(data):
             "contact_type": session.stored.get("contact_type"),
         }
     )
-
+    session["confirmation_email"] = data["email"]
     email_address = data["email"]
     personalisation = {
-        "full_name": data["full_name"] if data["full_name"] else session.stored.get("full_name"),
-        "thirdparty_full_name": data["thirdparty"]["full_name"]
-        if data["thirdparty"]["full_name"]
-        else session.stored.get("thirdparty_full_name"),
+        "full_name": data["full_name"],
+        "thirdparty_full_name": data["thirdparty"]["full_name"],
         "case_reference": data["case_ref"],
         "date_time": set_callback_time_string(data),
     }
@@ -63,20 +59,12 @@ def generate_confirmation_email_data(data):
 
         return email_address, template_id, personalisation
 
-    if data["callback"]["contact_number"] or session.stored.get("callback_contact_number"):
+    if data["contact_type"] == "callback":
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
-        personalisation.update(
-            contact_number=data["callback"]["contact_number"]
-            if data["callback"]["contact_number"]
-            else session.stored.get("callback_contact_number")
-        )
-    elif data["thirdparty"]["contact_number"] or session.stored.get("thirdparty_contact_number"):
+        personalisation.update(contact_number=data["callback"]["contact_number"])
+    elif data["thirdparty"]:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
-        personalisation.update(
-            contact_number=data["thirdparty"]["contact_number"]
-            if data["thirdparty"]["contact_number"]
-            else session.stored.get("thirdparty_contact_number")
-        )
+        personalisation.update(contact_number=data["thirdparty"]["contact_number"])
 
     return email_address, template_id, personalisation
 
@@ -106,7 +94,6 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             return self.redirect(url_for("contact.confirmation"))
         except ApiError:
             error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
-
             self.form.errors["timeout"] = error_text
             return self.return_form_errors()
 
@@ -142,12 +129,9 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             error_list = []
             self.add_errors(errors.values(), error_list)
             error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
-
             if error_list:
                 error_text += " - " + ", ".join(error_list)
-
             self.form.errors["timeout"] = error_text
-
             return self.return_form_errors()
         except SMTPAuthenticationError:
             self.form._fields["email"].errors.append(
@@ -172,10 +156,10 @@ contact.add_url_rule("/contact", view_func=Contact.as_view("get_in_touch"), meth
 
 
 class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
-
     form_class = ConfirmationForm
 
     def get(self):
+        session.clear_checker()
         confirmation_email = session.get("confirmation_email", None)
         if confirmation_email:
             del session["confirmation_email"]
@@ -195,9 +179,7 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
         if self.form.email.data:
             try:
                 govuk_notify = GovUkNotify()
-                session.checker["ContactForm"].update({"email": self.form.email.data})
-                create_and_send_confirmation_email(govuk_notify, session.checker["ContactForm"])
-                session.clear_checker()
+                create_and_send_confirmation_email(govuk_notify, self.form.data)
             except Exception:
                 self.form._fields["email"].errors.append(
                     _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
