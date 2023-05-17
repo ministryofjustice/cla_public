@@ -59,10 +59,10 @@ def generate_confirmation_email_data(data):
 
         return email_address, template_id, personalisation
 
-    if data["contact_type"] == "callback":
+    if data["callback"]["contact_number"]:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
         personalisation.update(contact_number=data["callback"]["contact_number"])
-    elif data["thirdparty"]:
+    elif data["thirdparty"]["contact_number"]:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
         personalisation.update(contact_number=data["thirdparty"]["contact_number"])
 
