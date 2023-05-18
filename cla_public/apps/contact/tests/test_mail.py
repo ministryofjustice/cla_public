@@ -2,7 +2,7 @@ import datetime
 import logging
 import unittest
 
-from unittest.mock import MagicMock
+from mock import MagicMock
 
 from flask import session
 from werkzeug.datastructures import MultiDict
