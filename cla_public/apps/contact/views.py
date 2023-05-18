@@ -3,10 +3,8 @@
 import datetime
 from smtplib import SMTPAuthenticationError
 from collections import Mapping
-
 from flask import abort, render_template, session, url_for, views
 from flask.ext.babel import lazy_gettext as _
-
 from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm, ConfirmationForm
@@ -61,10 +59,10 @@ def generate_confirmation_email_data(data):
 
         return email_address, template_id, personalisation
 
-    if data["contact_type"] == "callback":
+    if data["callback"]["contact_number"]:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
         personalisation.update(contact_number=data["callback"]["contact_number"])
-    elif data["thirdparty"]:
+    elif data["thirdparty"]["contact_number"]:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
         personalisation.update(contact_number=data["thirdparty"]["contact_number"])
 
@@ -96,7 +94,6 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             return self.redirect(url_for("contact.confirmation"))
         except ApiError:
             error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
-
             self.form.errors["timeout"] = error_text
             return self.return_form_errors()
 
@@ -132,12 +129,9 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             error_list = []
             self.add_errors(errors.values(), error_list)
             error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
-
             if error_list:
                 error_text += " - " + ", ".join(error_list)
-
             self.form.errors["timeout"] = error_text
-
             return self.return_form_errors()
         except SMTPAuthenticationError:
             self.form._fields["email"].errors.append(
@@ -162,12 +156,10 @@ contact.add_url_rule("/contact", view_func=Contact.as_view("get_in_touch"), meth
 
 
 class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
-
     form_class = ConfirmationForm
 
     def get(self):
         session.clear_checker()
-
         confirmation_email = session.get("confirmation_email", None)
         if confirmation_email:
             del session["confirmation_email"]
