@@ -2,14 +2,15 @@ import datetime
 import logging
 import unittest
 
-from mock import MagicMock
+from mock import ANY, MagicMock
 
 from flask import session
 from werkzeug.datastructures import MultiDict
 
 from cla_public.app import create_app
-from cla_public.apps.contact.views import create_confirmation_email
+from cla_public.apps.contact.views import create_and_send_confirmation_email
 from cla_public.apps.contact.forms import ContactForm
+from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
 
@@ -20,6 +21,8 @@ def submit(**kwargs):
         "email": "john.smith@example.com",
         "contact_type": "callback",
         "callback-contact_number": "0123456789",
+        "thirdparty-full_name": "John Smith",
+        "thirdparty-contact_number": "0123456789",
         "callback_requested": True,
     }
 
@@ -61,20 +64,31 @@ class TestConfirmationEmail(unittest.TestCase):
     def tearDown(self):
         self.ctx.pop()
 
+    def email_args(self, **kwargs):
+        arg_data = {"personalisation": ANY, "email_address": ANY, "template_id": ANY}
+        arg_data.update(kwargs)
+        return arg_data
+
     def test_confirmation_email_callback(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session()
-        create_confirmation_email(govuk_notify, form.data)
-        govuk_notify.send_email.assert_called_with(template_id="b4cfa1b6-f1e9-44c1-9b02-f07ba896b669")
+        create_and_send_confirmation_email(govuk_notify, form.data)
+        govuk_notify.send_email.assert_called_with(
+            self.email_args(template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"])
+        )
 
     def test_confirmation_email_no_callback(self):
         govuk_notify = MagicMock()
-        form = submit_and_store_in_session(callback=False)
-        create_confirmation_email(govuk_notify, form.data)
-        govuk_notify.send_email.assert_called_with(template_id="382cc41c-b81d-4197-8819-2ad76522d03d")
+        form = submit_and_store_in_session(callback_requested=False)
+        create_and_send_confirmation_email(govuk_notify, form.data)
+        govuk_notify.send_email.assert_called_with(
+            self.email_args(template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"])
+        )
 
     def test_confirmation_email_thirdparty(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session(contact_type="nothing", thirdparty=True)
-        create_confirmation_email(govuk_notify, form.data)
-        govuk_notify.send_email.assert_called_with(template_id="7ffc6de3-07bd-4232-b416-cf18d0abfec6")
+        create_and_send_confirmation_email(govuk_notify, form.data)
+        govuk_notify.send_email.assert_called_with(
+            self.email_args(template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"])
+        )
