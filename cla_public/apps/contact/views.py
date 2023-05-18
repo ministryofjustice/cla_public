@@ -60,10 +60,10 @@ def create_confirmation_email(data):
                 # Callback for user
                 GovUkNotify().send_email(
                     email_address=data["email"],
-                    template_id="b4cfa1b6-f1e9-44c1-9b02-f07ba896b669",
+                    template_id="b4cfa1b6-f1e9-44c1-9b02-f07ba896b669"
+                    if data["callback"]["contact_number"]
+                    else "3e2926c5-1bdf-4eb3-b212-7f206f1d764d",
                     personalisation={
-                        "callback_number": "yes" if data["callback"]["contact_number"] else "no",
-                        "no_callback_number": "yes" if not data["callback"]["contact_number"] else "no",
                         "full_name": data["full_name"],
                         "case_reference": data["case_ref"],
                         "contact_number": data["callback"]["contact_number"]
@@ -79,6 +79,7 @@ def create_confirmation_email(data):
                     email_address=data["email"],
                     template_id="7ffc6de3-07bd-4232-b416-cf18d0abfec6",
                     personalisation={
+                        "thirdparty_full_name": data["thirdparty"]["full_name"],
                         "full_name": data["full_name"],
                         "case_reference": data["case_ref"],
                         "contact_number": data["thirdparty"]["contact_number"],
