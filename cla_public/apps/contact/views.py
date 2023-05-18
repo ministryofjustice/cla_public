@@ -1,6 +1,7 @@
 # coding: utf-8
 "Contact views"
 import datetime
+import logging
 from smtplib import SMTPAuthenticationError
 from collections import Mapping
 from flask import abort, render_template, session, url_for, views
@@ -22,6 +23,9 @@ from cla_public.apps.base.govuk_notify.api import GovUkNotify
 from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
 
 
+log = logging.getLogger(__name__)
+
+
 @contact.after_request
 def add_no_cache_headers(response):
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0"
@@ -39,40 +43,50 @@ def set_callback_time_string(data):
 
 
 def generate_confirmation_email_data(data):
-    data.update(
-        {
-            "case_ref": session.stored.get("case_ref"),
-            "callback_requested": session.stored.get("callback_requested"),
-            "contact_type": session.stored.get("contact_type"),
-        }
-    )
-    session["confirmation_email"] = data["email"]
-    email_address = data["email"]
-    if "full_name" in data:
-        personalisation = {
-            "full_name": data["full_name"],
-            "thirdparty_full_name": data["thirdparty"]["full_name"],
-            "case_reference": data["case_ref"],
-            "date_time": set_callback_time_string(data),
-        }
-    else:
-        personalisation = {"case_reference": data["case_ref"]}
-        template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
+    try:
+        data.update(
+            {
+                "case_ref": session.stored.get("case_ref"),
+                "callback_requested": session.stored.get("callback_requested"),
+                "contact_type": session.stored.get("contact_type"),
+            }
+        )
+        session["confirmation_email"] = data["email"]
+        email_address = data["email"]
+        if "full_name" in data:
+            personalisation = {
+                "full_name": data["full_name"],
+                "thirdparty_full_name": data["thirdparty"]["full_name"],
+                "case_reference": data["case_ref"],
+                "date_time": set_callback_time_string(data),
+            }
+        else:
+            personalisation = {"case_reference": data["case_ref"]}
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
+            return email_address, template_id, personalisation
+
+        if data["callback_requested"] is False:
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
+
+            return email_address, template_id, personalisation
+
+        if data["callback"]["contact_number"]:
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
+            personalisation.update(contact_number=data["callback"]["contact_number"])
+        elif data["thirdparty"]["contact_number"]:
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
+            personalisation.update(contact_number=data["thirdparty"]["contact_number"])
+
         return email_address, template_id, personalisation
-
-    if data["callback_requested"] is False:
-        template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
-
-        return email_address, template_id, personalisation
-
-    if data["callback"]["contact_number"]:
-        template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
-        personalisation.update(contact_number=data["callback"]["contact_number"])
-    elif data["thirdparty"]["contact_number"]:
-        template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
-        personalisation.update(contact_number=data["thirdparty"]["contact_number"])
-
-    return email_address, template_id, personalisation
+    except KeyError as key_error:
+        log.warning("Key Error Reference: {}".format(str(key_error)))
+        raise key_error
+    except ValueError as value_error:
+        log.warning("Value Error Reference: {}".format(str(value_error)))
+        raise value_error
+    except Exception as error:
+        log.warning("Exception: {}".format(str(error)))
+        raise error
 
 
 def create_and_send_confirmation_email(govuk_notify, data):
@@ -80,6 +94,7 @@ def create_and_send_confirmation_email(govuk_notify, data):
         email_address, template_id, personalisation = generate_confirmation_email_data(data)
         govuk_notify.send_email(email_address=email_address, template_id=template_id, personalisation=personalisation)
     except Exception as error:
+        log.warning("Exception: {}".format(str(error)))
         raise error
 
 
