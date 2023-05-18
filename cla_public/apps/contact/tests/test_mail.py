@@ -149,3 +149,11 @@ class TestConfirmationEmail(unittest.TestCase):
             personalisation=personalisation_data,
             template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"],
         )
+
+
+class TestSetCallbackTimeString(unittest.TestCase):
+    def test_set_callback_time_string(self):
+        session.stored["callback_requested"] = True
+        session.stored["callback_time"] = datetime.datetime(2023, 5, 19, 9, 0)
+        date_time = set_callback_time_string(data={})
+        self.assertEqual(date_time, "Friday, 19 May at 09:00 - 09:30")
