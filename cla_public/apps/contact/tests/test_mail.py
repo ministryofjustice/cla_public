@@ -94,3 +94,14 @@ class TestConfirmationEmail(unittest.TestCase):
         self.assert_email_arguments(
             govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
         )
+
+    def test_confirmation_callback(self):
+        govuk_notify = MagicMock()
+        form = submit_and_store_in_session()
+        dictform = form.data
+        dictform.pop("full_name")
+        session.stored["callback_requested"] = True
+        create_and_send_confirmation_email(govuk_notify, dictform)
+        self.assert_email_arguments(
+            govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"]
+        )
