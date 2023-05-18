@@ -2,13 +2,14 @@ import datetime
 import logging
 import unittest
 
+from unittest.mock import MagicMock
+
 from flask import session
 from werkzeug.datastructures import MultiDict
 
 from cla_public.app import create_app
 from cla_public.apps.contact.views import create_confirmation_email
 from cla_public.apps.contact.forms import ContactForm
-
 
 logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
 
@@ -19,6 +20,7 @@ def submit(**kwargs):
         "email": "john.smith@example.com",
         "contact_type": "callback",
         "callback-contact_number": "0123456789",
+        "callback_requested": True,
     }
 
     if datetime.datetime.now().time() > datetime.time(hour=14, minute=30):
@@ -48,7 +50,7 @@ def submit_and_store_in_session(**kwargs):
     return form
 
 
-class TestMail(unittest.TestCase):
+class TestConfirmationEmail(unittest.TestCase):
     def setUp(self):
         self.app = create_app("config/testing.py")
         self.ctx = self.app.test_request_context()
@@ -59,36 +61,20 @@ class TestMail(unittest.TestCase):
     def tearDown(self):
         self.ctx.pop()
 
-    def receive_email(self, msg):
-        with self.app.mail.record_messages() as outbox:
-            self.app.mail.send(msg)
-            assert len(outbox) == 1
-            return outbox[0]
-
-    def test_confirmation_email(self):
-        with self.client:
-            form = submit_and_store_in_session()
-            msg = create_confirmation_email(form.data)
-            msg = self.receive_email(msg)
-
-            assert msg.subject == "Your Civil Legal Advice reference number"
-            assert "Dear John Smith" in msg.body
-            assert "reference number is XX-XXXX-XXXX" in msg.body
-            assert "call you back on 0123456789" in msg.body
-            callback_time = form.data["callback"]["time"]
-            self.assertIn(
-                "during your chosen time ({0:%A, %d %B at %H:%M} - {1:%H:%M})".format(
-                    callback_time, callback_time + datetime.timedelta(minutes=30)
-                ),
-                msg.body,
-            )
-            assert "We will not leave a message" in msg.body
+    def test_confirmation_email_callback(self):
+        govuk_notify = MagicMock()
+        form = submit_and_store_in_session()
+        create_confirmation_email(govuk_notify, form.data)
+        govuk_notify.send_email.assert_called_with(template_id="b4cfa1b6-f1e9-44c1-9b02-f07ba896b669")
 
     def test_confirmation_email_no_callback(self):
-        with self.client:
-            form = submit_and_store_in_session(contact_type="call")
-            msg = create_confirmation_email(form.data)
-            msg = self.receive_email(msg)
+        govuk_notify = MagicMock()
+        form = submit_and_store_in_session(callback=False)
+        create_confirmation_email(govuk_notify, form.data)
+        govuk_notify.send_email.assert_called_with(template_id="382cc41c-b81d-4197-8819-2ad76522d03d")
 
-            assert "reference number is XX-XXXX-XXXX" in msg.body
-            assert "You can now call CLA" in msg.body
+    def test_confirmation_email_thirdparty(self):
+        govuk_notify = MagicMock()
+        form = submit_and_store_in_session(contact_type="nothing", thirdparty=True)
+        create_confirmation_email(govuk_notify, form.data)
+        govuk_notify.send_email.assert_called_with(template_id="7ffc6de3-07bd-4232-b416-cf18d0abfec6")
