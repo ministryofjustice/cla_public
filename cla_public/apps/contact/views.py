@@ -56,10 +56,7 @@ def generate_confirmation_email_data(data):
 
         if "full_name" not in data:
             if set_callback_time_string(data):
-                personalisation = {
-                    "case_reference": data["case_ref"],
-                    "date_time": set_callback_time_string(data),
-                }
+                personalisation = {"case_reference": data["case_ref"], "date_time": set_callback_time_string(data)}
                 template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"]
             else:
                 personalisation = {"case_reference": data["case_ref"]}
