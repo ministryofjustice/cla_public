@@ -48,12 +48,18 @@ def generate_confirmation_email_data(data):
     )
     session["confirmation_email"] = data["email"]
     email_address = data["email"]
-    personalisation = {
-        "full_name": data["full_name"],
-        "thirdparty_full_name": data["thirdparty"]["full_name"],
-        "case_reference": data["case_ref"],
-        "date_time": set_callback_time_string(data),
-    }
+    if "full_name" in data:
+        personalisation = {
+            "full_name": data["full_name"],
+            "thirdparty_full_name": data["thirdparty"]["full_name"],
+            "case_reference": data["case_ref"],
+            "date_time": set_callback_time_string(data),
+        }
+    else:
+        personalisation = {"case_reference": data["case_ref"]}
+        template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
+        return email_address, template_id, personalisation
+
     if data["callback_requested"] is False:
         template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
 
