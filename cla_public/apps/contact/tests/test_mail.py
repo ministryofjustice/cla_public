@@ -95,6 +95,4 @@ class TestConfirmationEmail(unittest.TestCase):
         dictform.pop("full_name")
         session.stored["callback_requested"] = False
         create_and_send_confirmation_email(govuk_notify, dictform)
-        self.assert_email_arguments(
-            govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
-        )
+        self.assert_email_arguments(govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_PAGE_EMAIL"])

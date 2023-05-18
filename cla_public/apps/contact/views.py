@@ -62,7 +62,7 @@ def generate_confirmation_email_data(data):
             }
         else:
             personalisation = {"case_reference": data["case_ref"]}
-            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_PAGE_EMAIL"]
             return email_address, template_id, personalisation
 
         if data["callback_requested"] is False:
