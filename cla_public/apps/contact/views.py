@@ -31,7 +31,7 @@ def add_no_cache_headers(response):
     return response
 
 
-def create_confirmation_email(data):
+def create_confirmation_email(govuk_notify, data):
     data.update(
         {
             "case_ref": session.stored.get("case_ref"),
@@ -58,7 +58,7 @@ def create_confirmation_email(data):
                 data.update({"callback_time_string": callback})
 
                 # Callback for user
-                GovUkNotify().send_email(
+                govuk_notify.send_email(
                     email_address=data["email"],
                     template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
                     if data["callback"]["contact_number"]
@@ -74,7 +74,7 @@ def create_confirmation_email(data):
                 )
             elif data["thirdparty"]:
                 # Callback for someone else
-                GovUkNotify().send_email(
+                govuk_notify.send_email(
                     email_address=data["email"],
                     template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"],
                     personalisation={
@@ -88,7 +88,7 @@ def create_confirmation_email(data):
 
         else:
             # No callback requested
-            GovUkNotify().send_email(
+            govuk_notify.send_email(
                 email_address=data["email"],
                 template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"],
                 personalisation={"case_reference": data["case_ref"]},
@@ -140,7 +140,8 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
             session.store_checker_details()
             if self.form.email.data:
-                create_confirmation_email(self.form.data)
+                govuk_notify = GovUkNotify()
+                create_confirmation_email(govuk_notify, self.form.data)
             return self.redirect(url_for("contact.confirmation"))
         except AlreadySavedApiError:
             return self.already_saved()
@@ -203,7 +204,8 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
     def on_valid_submit(self):
         if self.form.email.data:
             try:
-                create_confirmation_email(self.form.data)
+                govuk_notify = GovUkNotify()
+                create_confirmation_email(govuk_notify, self.form.data)
             except Exception:
                 self.form._fields["email"].errors.append(
                     _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
