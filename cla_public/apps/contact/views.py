@@ -53,17 +53,18 @@ def generate_confirmation_email_data(data):
         )
         session["confirmation_email"] = data["email"]
         email_address = data["email"]
-        if "full_name" in data:
-            personalisation = {
-                "full_name": data["full_name"],
-                "thirdparty_full_name": data["thirdparty"]["full_name"],
-                "case_reference": data["case_ref"],
-                "date_time": set_callback_time_string(data),
-            }
-        else:
+        if "full_name" not in data:
             personalisation = {"case_reference": data["case_ref"]}
-            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_PAGE_EMAIL"]
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
+
             return email_address, template_id, personalisation
+
+        personalisation = {
+            "full_name": data["full_name"],
+            "thirdparty_full_name": data["thirdparty"]["full_name"],
+            "case_reference": data["case_ref"],
+            "date_time": set_callback_time_string(data),
+        }
 
         if data["callback_requested"] is False:
             template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
@@ -78,14 +79,8 @@ def generate_confirmation_email_data(data):
             personalisation.update(contact_number=data["thirdparty"]["contact_number"])
 
         return email_address, template_id, personalisation
-    except KeyError as key_error:
-        log.warning("Key Error Reference: {}".format(str(key_error)))
-        raise key_error
-    except ValueError as value_error:
-        log.warning("Value Error Reference: {}".format(str(value_error)))
-        raise value_error
     except Exception as error:
-        log.warning("Exception: {}".format(str(error)))
+        log.warning("Error Reference: {}".format(str(error)))
         raise error
 
 
@@ -94,7 +89,7 @@ def create_and_send_confirmation_email(govuk_notify, data):
         email_address, template_id, personalisation = generate_confirmation_email_data(data)
         govuk_notify.send_email(email_address=email_address, template_id=template_id, personalisation=personalisation)
     except Exception as error:
-        log.warning("Exception: {}".format(str(error)))
+        log.warning("Error Reference: {}".format(str(error)))
         raise error
 
 

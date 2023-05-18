@@ -99,7 +99,7 @@ FORM_CONFIG_TRANSLATIONS = {code: config_path(code) for code, label in LANGUAGES
 TIMEZONE = "Europe/London"
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", "https://prod.laalaa.dsd.io")
-
+# Remove the SMTP bits after the code has been removed
 MAIL_SERVER = os.environ.get("SMTP_HOST")
 MAIL_PORT = os.environ.get("SMTP_PORT", 465)
 MAIL_USE_TLS = False
@@ -124,8 +124,11 @@ GOVUK_NOTIFY_TEMPLATES = {
     "PUBLIC_CALLBACK_THIRD_PARTY": os.environ.get(
         "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_THIRD_PARTY", "7ffc6de3-07bd-4232-b416-cf18d0abfec6"
     ),
-    "PUBLIC_CONFIRMATION_PAGE_EMAIL": os.environ.get(
-        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_PAGE_EMAIL", "1a56ee47-a200-43f9-bab2-e0852da0714b"
+    "PUBLIC_CONFIRMATION_NO_CALLBACK": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_NO_CALLBACK", "1a56ee47-a200-43f9-bab2-e0852da0714b"
+    ),
+    "PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED", "020ba10c-ac98-4b7c-a49f-1f129462506b"
     ),
 }
 

@@ -1,5 +1,4 @@
 import datetime
-import logging
 import unittest
 
 from mock import ANY, MagicMock
@@ -11,9 +10,6 @@ from cla_public.app import create_app
 from cla_public.apps.contact.views import create_and_send_confirmation_email
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
-
-
-logging.getLogger("MARKDOWN").setLevel(logging.WARNING)
 
 
 def submit(**kwargs):
@@ -95,4 +91,6 @@ class TestConfirmationEmail(unittest.TestCase):
         dictform.pop("full_name")
         session.stored["callback_requested"] = False
         create_and_send_confirmation_email(govuk_notify, dictform)
-        self.assert_email_arguments(govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_PAGE_EMAIL"])
+        self.assert_email_arguments(
+            govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
+        )
