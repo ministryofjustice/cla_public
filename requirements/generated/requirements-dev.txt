@@ -59,7 +59,9 @@ django-extended-choices==0.3.0
     #   -r requirements/source/requirements-base.in
     #   cla-common
 docopt==0.6.2
-    # via coveralls
+    # via
+    #   coveralls
+    #   notifications-python-client
 enum34==1.1.10
     # via cryptography
 filelock==3.2.1
@@ -88,6 +90,8 @@ flask==0.10.1
     #   flask-script
     #   flask-wtf
     #   sentry-sdk
+future==0.18.3
+    # via notifications-python-client
 futures==3.4.0
     # via pre-commit
 identify==1.6.2
@@ -130,10 +134,14 @@ markupsafe==0.23
     #   jinja2
 mock==1.0.1
     # via -r requirements/source/requirements-testing.in
+monotonic==1.6
+    # via notifications-python-client
 ndg-httpsclient==0.4.0
     # via -r requirements/source/requirements-base.in
 nodeenv==1.7.0
     # via pre-commit
+notifications-python-client==6.0.0
+    # via -r requirements/source/requirements-base.in
 pathlib2==2.3.7.post1
     # via
     #   importlib-metadata
@@ -151,6 +159,8 @@ pyasn1==0.1.7
     # via -r requirements/source/requirements-base.in
 pycparser==2.21
     # via cffi
+pyjwt==1.7.1
+    # via notifications-python-client
 pyopenssl==18.0.0
     # via
     #   -r requirements/source/requirements-base.in
@@ -174,6 +184,7 @@ requests==2.19.1
     #   -r requirements/source/requirements-base.in
     #   cla-common
     #   coveralls
+    #   notifications-python-client
     #   postcodeinfo
     #   requests-mock
     #   slumber
