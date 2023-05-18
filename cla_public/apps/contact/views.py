@@ -34,6 +34,10 @@ def add_no_cache_headers(response):
 
 
 def set_callback_time_string(data):
+    """
+    Sets the callback time string in the format day,
+    date month and time from and too using time as an input
+    """
     data.update({"callback_requested": session.stored.get("callback_requested")})
     if data.get("callback_requested"):
         callback_time = session.stored.get("callback_time")
@@ -43,6 +47,10 @@ def set_callback_time_string(data):
 
 
 def generate_confirmation_email_data(data):
+    """
+    Generates the data used in the sending of Gov Notify emails;
+    includes paths for 5 different templates based on circumstance
+    """
     try:
         data.update(
             {
@@ -53,6 +61,7 @@ def generate_confirmation_email_data(data):
         )
         email_address = data["email"]
 
+        # Path for confirmation email if no email is provided initially
         if "full_name" not in data:
             if session.stored["callback_requested"] is True:
                 personalisation = {"case_reference": data["case_ref"], "date_time": set_callback_time_string(data)}
@@ -63,6 +72,7 @@ def generate_confirmation_email_data(data):
 
             return email_address, template_id, personalisation
 
+        # Returns email if provided on contact form
         personalisation = {
             "full_name": data["full_name"],
             "thirdparty_full_name": data["thirdparty"]["full_name"],
@@ -75,6 +85,7 @@ def generate_confirmation_email_data(data):
 
             return email_address, template_id, personalisation
 
+        # Decides between a personal callback or a third party callback
         if data["callback"]["contact_number"]:
             template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
             personalisation.update(contact_number=data["callback"]["contact_number"])
