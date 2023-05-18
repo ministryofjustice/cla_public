@@ -21,9 +21,9 @@ def submit(**kwargs):
         "full_name": "John Smith",
         "email": "john.smith@example.com",
         "contact_type": "callback",
-        "callback-contact_number": "0123456789",
+        "callback-contact_number": kwargs.get("callback_contact_number", ""),
         "thirdparty-full_name": "John Smith",
-        "thirdparty-contact_number": "0123456789",
+        "thirdparty-contact_number": kwargs.get("thirdparty_contact_number", ""),
     }
 
     if datetime.datetime.now().time() > datetime.time(hour=14, minute=30):
@@ -69,7 +69,7 @@ class TestConfirmationEmail(unittest.TestCase):
 
     def test_confirmation_email_callback(self):
         govuk_notify = MagicMock()
-        form = submit_and_store_in_session()
+        form = submit_and_store_in_session(callback_contact_number="07960207329")
         session.stored["callback_requested"] = True
         create_and_send_confirmation_email(govuk_notify, form.data)
         self.assert_email_arguments(govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"])
@@ -83,7 +83,7 @@ class TestConfirmationEmail(unittest.TestCase):
 
     def test_confirmation_email_thirdparty(self):
         govuk_notify = MagicMock()
-        form = submit_and_store_in_session(contact_type="thirdparty")
+        form = submit_and_store_in_session(thirdparty_contact_number="07960207329")
         session.stored["callback_requested"] = True
         create_and_send_confirmation_email(govuk_notify, form.data)
         self.assert_email_arguments(govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"])
