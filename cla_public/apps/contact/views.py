@@ -4,9 +4,10 @@ import datetime
 from smtplib import SMTPAuthenticationError
 from collections import Mapping
 
-from flask import abort, render_template, session, url_for, views, current_app
-from flask.ext.babel import lazy_gettext as _, gettext
-from flask.ext.mail import Message
+from flask import abort, render_template, session, url_for, views
+from flask.ext.babel import lazy_gettext as _
+from cla_public.apps.base.govuk_notify.api import GovUkNotify
+
 
 from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
@@ -46,15 +47,54 @@ def create_confirmation_email(data):
             {"callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")}
         )
 
-    recipient = (data["full_name"], data["email"]) if data.get("full_name") else data["email"]
-
     session["confirmation_email"] = data["email"]
 
-    return Message(
-        gettext(u"Your Civil Legal Advice reference number"),
-        recipients=[recipient],
-        body=render_template("emails/confirmation.txt", data=data),
-    )
+    try:
+        callback = callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")
+        if data["callback"]:
+            if data["contact_type"] == "callback":
+                callback_time = session.stored.get("callback_time")
+                end_time = callback_time + datetime.timedelta(minutes=30)
+                data.update({"callback_time_string": callback})
+
+                # Callback for user
+                GovUkNotify().send_email(
+                    email_address=data["email"],
+                    template_id="b4cfa1b6-f1e9-44c1-9b02-f07ba896b669",
+                    personalisation={
+                        "callback_number": "yes" if data["callback"]["contact_number"] else "no",
+                        "no_callback_number": "yes" if not data["callback"]["contact_number"] else "no",
+                        "full_name": data["full_name"],
+                        "case_reference": data["case_ref"],
+                        "contact_number": data["callback"]["contact_number"]
+                        if data["callback"]["contact_number"]
+                        else None,
+                        "date_time": data["callback_time_string"],
+                    },
+                )
+
+            elif data["thirdparty"]:
+                # Callback for someone else
+                GovUkNotify().send_email(
+                    email_address=data["email"],
+                    template_id="7ffc6de3-07bd-4232-b416-cf18d0abfec6",
+                    personalisation={
+                        "full_name": data["full_name"],
+                        "case_reference": data["case_ref"],
+                        "contact_number": data["thirdparty"]["contact_number"],
+                        "date_time": data["callback_time_string"],
+                    },
+                )
+
+        else:
+            # No callback requested
+            GovUkNotify().send_email(
+                email_address=data["email"],
+                template_id="382cc41c-b81d-4197-8819-2ad76522d03d",
+                personalisation={"case_reference": data["case_ref"]},
+            )
+    except Exception as error:
+        raise error
 
 
 class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
@@ -99,8 +139,8 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 )
                 del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
             session.store_checker_details()
-            if self.form.email.data and current_app.config["MAIL_SERVER"]:
-                current_app.mail.send(create_confirmation_email(self.form.data))
+            if self.form.email.data:
+                create_confirmation_email(self.form.data)
             return self.redirect(url_for("contact.confirmation"))
         except AlreadySavedApiError:
             return self.already_saved()
@@ -161,9 +201,9 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
         return self.return_form_errors()
 
     def on_valid_submit(self):
-        if self.form.email.data and current_app.config["MAIL_SERVER"]:
+        if self.form.email.data:
             try:
-                current_app.mail.send(create_confirmation_email(self.form.data))
+                create_confirmation_email(self.form.data)
             except SMTPAuthenticationError:
                 self.form._fields["email"].errors.append(
                     _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
