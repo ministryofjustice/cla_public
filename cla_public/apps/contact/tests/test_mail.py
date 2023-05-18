@@ -7,7 +7,7 @@ from flask import session
 from werkzeug.datastructures import MultiDict
 
 from cla_public.app import create_app
-from cla_public.apps.contact.views import create_and_send_confirmation_email
+from cla_public.apps.contact.views import create_and_send_confirmation_email, set_callback_time_string
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
 
@@ -60,29 +60,66 @@ class TestConfirmationEmail(unittest.TestCase):
     def tearDown(self):
         self.ctx.pop()
 
-    def assert_email_arguments(self, govuk_notify, template_id):
-        govuk_notify.send_email.assert_called_with(personalisation=ANY, email_address=ANY, template_id=template_id)
+    def assert_email_arguments(self, govuk_notify, template_id, personalisation=None):
+        govuk_notify.send_email.assert_called_with(
+            personalisation=personalisation if personalisation else ANY, email_address=ANY, template_id=template_id
+        )
 
     def test_confirmation_email_callback(self):
         govuk_notify = MagicMock()
-        form = submit_and_store_in_session(callback_contact_number="07960207329")
+        form = submit_and_store_in_session(callback_contact_number="0123456789")
         session.stored["callback_requested"] = True
         create_and_send_confirmation_email(govuk_notify, form.data)
-        self.assert_email_arguments(govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"])
+        date_time = set_callback_time_string(form.data)
+        personalisation_data = {
+            "date_time": date_time,
+            "contact_number": "0123456789",
+            "case_reference": "XX-XXXX-XXXX",
+            "full_name": "John Smith",
+            "thirdparty_full_name": "John Smith",
+        }
+        self.assert_email_arguments(
+            govuk_notify,
+            personalisation=personalisation_data,
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"],
+        )
 
     def test_confirmation_email_no_callback(self):
         govuk_notify = MagicMock()
         form = submit_and_store_in_session(contact_type="nothing")
         session.stored["callback_requested"] = False
         create_and_send_confirmation_email(govuk_notify, form.data)
-        self.assert_email_arguments(govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"])
+        date_time = set_callback_time_string(form.data)
+        personalisation_data = {
+            "date_time": date_time,
+            "case_reference": "XX-XXXX-XXXX",
+            "full_name": "John Smith",
+            "thirdparty_full_name": "John Smith",
+        }
+        self.assert_email_arguments(
+            govuk_notify,
+            personalisation=personalisation_data,
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"],
+        )
 
     def test_confirmation_email_thirdparty(self):
         govuk_notify = MagicMock()
-        form = submit_and_store_in_session(thirdparty_contact_number="07960207329")
+        form = submit_and_store_in_session(thirdparty_contact_number="0123456789")
         session.stored["callback_requested"] = True
         create_and_send_confirmation_email(govuk_notify, form.data)
-        self.assert_email_arguments(govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"])
+        date_time = set_callback_time_string(form.data)
+        personalisation_data = {
+            "date_time": date_time,
+            "contact_number": "0123456789",
+            "case_reference": "XX-XXXX-XXXX",
+            "full_name": "John Smith",
+            "thirdparty_full_name": "John Smith",
+        }
+        self.assert_email_arguments(
+            govuk_notify,
+            personalisation=personalisation_data,
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"],
+        )
 
     def test_confirmation_no_callback(self):
         govuk_notify = MagicMock()
@@ -91,8 +128,11 @@ class TestConfirmationEmail(unittest.TestCase):
         dictform.pop("full_name")
         session.stored["callback_requested"] = False
         create_and_send_confirmation_email(govuk_notify, dictform)
+        personalisation_data = {"case_reference": "XX-XXXX-XXXX"}
         self.assert_email_arguments(
-            govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
+            govuk_notify,
+            personalisation=personalisation_data,
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"],
         )
 
     def test_confirmation_callback(self):
@@ -102,6 +142,10 @@ class TestConfirmationEmail(unittest.TestCase):
         dictform.pop("full_name")
         session.stored["callback_requested"] = True
         create_and_send_confirmation_email(govuk_notify, dictform)
+        date_time = set_callback_time_string(form.data)
+        personalisation_data = {"date_time": date_time, "case_reference": "XX-XXXX-XXXX"}
         self.assert_email_arguments(
-            govuk_notify, template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"]
+            govuk_notify,
+            personalisation=personalisation_data,
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"],
         )

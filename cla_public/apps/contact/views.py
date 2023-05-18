@@ -51,11 +51,10 @@ def generate_confirmation_email_data(data):
                 "contact_type": session.stored.get("contact_type"),
             }
         )
-        session["confirmation_email"] = data["email"]
         email_address = data["email"]
 
         if "full_name" not in data:
-            if set_callback_time_string(data):
+            if session.stored["callback_requested"] is True:
                 personalisation = {"case_reference": data["case_ref"], "date_time": set_callback_time_string(data)}
                 template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"]
             else:
@@ -71,7 +70,7 @@ def generate_confirmation_email_data(data):
             "date_time": set_callback_time_string(data),
         }
 
-        if data["callback_requested"] is False:
+        if session.stored["callback_requested"] is False:
             template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
 
             return email_address, template_id, personalisation
