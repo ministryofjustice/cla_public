@@ -60,6 +60,7 @@ def generate_confirmation_email_data(data):
             }
         )
         email_address = data["email"]
+        template_id = ""
 
         # Path for confirmation email if no email is provided initially
         if "full_name" not in data:
