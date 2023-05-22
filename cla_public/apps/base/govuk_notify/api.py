@@ -17,6 +17,9 @@ class GovUkNotify(object):
             raise ValueError("Missing API Key for GOVUK Notify")
 
     def send_email(self, email_address, template_id, personalisation):
+        if not self.notifications_client:
+            log.info("No API key set, unable to send email")
+            return
         try:
             self.notifications_client.send_email_notification(
                 email_address=email_address,  # required string
