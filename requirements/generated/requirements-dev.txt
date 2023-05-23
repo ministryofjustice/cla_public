@@ -159,7 +159,7 @@ pyasn1==0.1.7
     # via -r requirements/source/requirements-base.in
 pycparser==2.21
     # via cffi
-pyjwt==1.7.1
+pyjwt==2.4.0
     # via notifications-python-client
 pyopenssl==18.0.0
     # via
