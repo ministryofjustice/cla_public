@@ -49,7 +49,7 @@ flask-script==2.0.5
     # via -r requirements/source/requirements-base.in
 flask-wtf==0.10.2
     # via -r requirements/source/requirements-base.in
-flask==0.10.1
+flask==2.2.5
     # via
     #   -r requirements/source/requirements-base.in
     #   flask-babel
