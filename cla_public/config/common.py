@@ -16,7 +16,7 @@ EMERGENCY_MESSAGE_TEXT = os.environ.get("EMERGENCY_MESSAGE_TEXT", "Text not set"
 # Sets whether the updated family issue text displays on the outcome (/result/eligible or /result/provisional) pages or not
 FAMILY_ISSUE_FEATURE_FLAG = os.environ.get("FAMILY_ISSUE_FEATURE_FLAG", "False") == "True"
 
-TESTING = False
+TESTING = os.environ.get("TESTING", "False").upper() == "TRUE"
 
 CLEAR_SESSION = True
 
@@ -99,7 +99,7 @@ FORM_CONFIG_TRANSLATIONS = {code: config_path(code) for code, label in LANGUAGES
 TIMEZONE = "Europe/London"
 
 LAALAA_API_HOST = os.environ.get("LAALAA_API_HOST", "https://prod.laalaa.dsd.io")
-
+# Remove the SMTP bits after the code has been removed
 MAIL_SERVER = os.environ.get("SMTP_HOST")
 MAIL_PORT = os.environ.get("SMTP_PORT", 465)
 MAIL_USE_TLS = False
@@ -109,6 +109,28 @@ MAIL_USERNAME = os.environ.get("SMTP_USER")
 MAIL_PASSWORD = os.environ.get("SMTP_PASSWORD")
 
 MAIL_DEFAULT_SENDER = ("Civil Legal Advice", "no-reply@civillegaladvice.service.gov.uk")
+GOVUK_NOTIFY_API_KEY = os.environ.get("GOVUK_NOTIFY_API_KEY")
+
+GOVUK_NOTIFY_TEMPLATES = {
+    "PUBLIC_CALLBACK_NOT_REQUESTED": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_NOT_REQUESTED", "382cc41c-b81d-4197-8819-2ad76522d03d"
+    ),
+    "PUBLIC_CALLBACK_WITH_NUMBER": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_WITH_NUMBER", "b4cfa1b6-f1e9-44c1-9b02-f07ba896b669"
+    ),
+    "PUBLIC_CALLBACK_WITH_NO_NUMBER": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_WITH_NO_NUMBER", "3e2926c5-1bdf-4eb3-b212-7f206f1d764d"
+    ),
+    "PUBLIC_CALLBACK_THIRD_PARTY": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CALLBACK_THIRD_PARTY", "7ffc6de3-07bd-4232-b416-cf18d0abfec6"
+    ),
+    "PUBLIC_CONFIRMATION_NO_CALLBACK": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_NO_CALLBACK", "1a56ee47-a200-43f9-bab2-e0852da0714b"
+    ),
+    "PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED", "020ba10c-ac98-4b7c-a49f-1f129462506b"
+    ),
+}
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 MAINTENANCE_MODE = os.environ.get("MAINTENANCE_MODE", "False").upper() == "TRUE"

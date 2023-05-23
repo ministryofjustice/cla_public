@@ -36,3 +36,4 @@ supervisor==4.2.4
 # with custom parameters for timeouts and additional headers on requests
 https://github.com/s-block/slumber/archive/da38360d6d158ee7ed445b43228fefc6f7e430e6.zip
 Flask-Script==2.0.5
+notifications-python-client==6.0.0

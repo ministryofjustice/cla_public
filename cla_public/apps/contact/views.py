@@ -1,13 +1,11 @@
 # coding: utf-8
 "Contact views"
 import datetime
+import logging
 from smtplib import SMTPAuthenticationError
 from collections import Mapping
-
-from flask import abort, render_template, session, url_for, views, current_app
-from flask.ext.babel import lazy_gettext as _, gettext
-from flask.ext.mail import Message
-
+from flask import abort, render_template, session, url_for, views
+from flask.ext.babel import lazy_gettext as _
 from cla_public.apps.base.views import ReasonsForContacting
 from cla_public.apps.contact import contact
 from cla_public.apps.contact.forms import ContactForm, ConfirmationForm
@@ -21,6 +19,11 @@ from cla_public.apps.checker.api import (
 )
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
+from cla_public.apps.base.govuk_notify.api import GovUkNotify
+from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
+
+
+log = logging.getLogger(__name__)
 
 
 @contact.after_request
@@ -30,31 +33,80 @@ def add_no_cache_headers(response):
     return response
 
 
-def create_confirmation_email(data):
-    data.update(
-        {
-            "case_ref": session.stored.get("case_ref"),
-            "callback_requested": session.stored.get("callback_requested"),
-            "contact_type": session.stored.get("contact_type"),
-        }
-    )
-
+def set_callback_time_string(data):
+    """
+    Sets the callback time string in the format day,
+    date month and time from and too using time as an input
+    """
+    data.update({"callback_requested": session.stored.get("callback_requested")})
     if data.get("callback_requested"):
         callback_time = session.stored.get("callback_time")
         end_time = callback_time + datetime.timedelta(minutes=30)
+        callback_time_string = callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")
+        return callback_time_string
+
+
+def generate_confirmation_email_data(data):
+    """
+    Generates the data used in the sending of Gov Notify emails;
+    includes paths for 5 different templates based on circumstance
+    """
+    try:
         data.update(
-            {"callback_time_string": callback_time.strftime("%A, %d %B at %H:%M - ") + end_time.strftime("%H:%M")}
+            {
+                "case_ref": session.stored.get("case_ref"),
+                "callback_requested": session.stored.get("callback_requested"),
+                "contact_type": session.stored.get("contact_type"),
+            }
         )
+        email_address = data["email"]
+        template_id = ""
 
-    recipient = (data["full_name"], data["email"]) if data.get("full_name") else data["email"]
+        # Path for confirmation email if no email is provided initially
+        if "full_name" not in data:
+            if session.stored["callback_requested"] is True:
+                personalisation = {"case_reference": data["case_ref"], "date_time": set_callback_time_string(data)}
+                template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"]
+            else:
+                personalisation = {"case_reference": data["case_ref"]}
+                template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
 
-    session["confirmation_email"] = data["email"]
+            return email_address, template_id, personalisation
 
-    return Message(
-        gettext(u"Your Civil Legal Advice reference number"),
-        recipients=[recipient],
-        body=render_template("emails/confirmation.txt", data=data),
-    )
+        # Returns email if provided on contact form
+        personalisation = {
+            "full_name": data["full_name"],
+            "thirdparty_full_name": data["thirdparty"]["full_name"],
+            "case_reference": data["case_ref"],
+            "date_time": set_callback_time_string(data),
+        }
+
+        if session.stored["callback_requested"] is False:
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
+
+            return email_address, template_id, personalisation
+
+        # Decides between a personal callback or a third party callback
+        if data["callback"]["contact_number"]:
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
+            personalisation.update(contact_number=data["callback"]["contact_number"])
+        elif data["thirdparty"]["contact_number"]:
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
+            personalisation.update(contact_number=data["thirdparty"]["contact_number"])
+
+        return email_address, template_id, personalisation
+    except Exception as error:
+        log.warning("Error Reference: {}".format(str(error)))
+        raise error
+
+
+def create_and_send_confirmation_email(govuk_notify, data):
+    try:
+        email_address, template_id, personalisation = generate_confirmation_email_data(data)
+        govuk_notify.send_email(email_address=email_address, template_id=template_id, personalisation=personalisation)
+    except Exception as error:
+        log.warning("Error Reference: {}".format(str(error)))
+        raise error
 
 
 class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
@@ -74,7 +126,6 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             return self.redirect(url_for("contact.confirmation"))
         except ApiError:
             error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
-
             self.form.errors["timeout"] = error_text
             return self.return_form_errors()
 
@@ -99,8 +150,9 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 )
                 del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
             session.store_checker_details()
-            if self.form.email.data and current_app.config["MAIL_SERVER"]:
-                current_app.mail.send(create_confirmation_email(self.form.data))
+            if self.form.email.data:
+                govuk_notify = GovUkNotify()
+                create_and_send_confirmation_email(govuk_notify, self.form.data)
             return self.redirect(url_for("contact.confirmation"))
         except AlreadySavedApiError:
             return self.already_saved()
@@ -109,12 +161,9 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             error_list = []
             self.add_errors(errors.values(), error_list)
             error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
-
             if error_list:
                 error_text += " - " + ", ".join(error_list)
-
             self.form.errors["timeout"] = error_text
-
             return self.return_form_errors()
         except SMTPAuthenticationError:
             self.form._fields["email"].errors.append(
@@ -139,12 +188,10 @@ contact.add_url_rule("/contact", view_func=Contact.as_view("get_in_touch"), meth
 
 
 class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
-
     form_class = ConfirmationForm
 
     def get(self):
         session.clear_checker()
-
         confirmation_email = session.get("confirmation_email", None)
         if confirmation_email:
             del session["confirmation_email"]
@@ -161,10 +208,11 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
         return self.return_form_errors()
 
     def on_valid_submit(self):
-        if self.form.email.data and current_app.config["MAIL_SERVER"]:
+        if self.form.email.data:
             try:
-                current_app.mail.send(create_confirmation_email(self.form.data))
-            except SMTPAuthenticationError:
+                govuk_notify = GovUkNotify()
+                create_and_send_confirmation_email(govuk_notify, self.form.data)
+            except Exception:
                 self.form._fields["email"].errors.append(
                     _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
                 )

@@ -83,3 +83,7 @@ envVars:
     configmap:
       name: family-issue
       key: family-issue-on
+  GOVUK_NOTIFY_API_KEY:
+    secret:
+      name: govuk-notify
+      key: api-key
