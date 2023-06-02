@@ -27,7 +27,7 @@ chardet==3.0.4
     # via requests
 https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.14.tar.gz
     # via -r requirements/source/requirements-base.in
-cryptography==3.3.2
+cryptography==41.0.0
     # via pyopenssl
 django-extended-choices==0.3.0
     # via
