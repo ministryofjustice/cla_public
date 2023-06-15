@@ -10,6 +10,7 @@ from cla_public.app import create_app
 from cla_public.apps.contact.views import create_and_send_confirmation_email, set_callback_time_string
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
+from cla_public.libs.utils import get_locale
 
 
 def submit(**kwargs):
@@ -81,7 +82,7 @@ class TestConfirmationEmail(unittest.TestCase):
         self.assert_email_arguments(
             govuk_notify,
             personalisation=personalisation_data,
-            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"],
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"][get_locale()[:2]],
         )
 
     def test_confirmation_email_no_callback(self):
@@ -99,7 +100,7 @@ class TestConfirmationEmail(unittest.TestCase):
         self.assert_email_arguments(
             govuk_notify,
             personalisation=personalisation_data,
-            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"],
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"][get_locale()[:2]],
         )
 
     def test_confirmation_email_thirdparty(self):
@@ -118,7 +119,7 @@ class TestConfirmationEmail(unittest.TestCase):
         self.assert_email_arguments(
             govuk_notify,
             personalisation=personalisation_data,
-            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"],
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"][get_locale()[:2]],
         )
 
     def test_confirmation_no_callback(self):
@@ -132,7 +133,7 @@ class TestConfirmationEmail(unittest.TestCase):
         self.assert_email_arguments(
             govuk_notify,
             personalisation=personalisation_data,
-            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"],
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"][get_locale()[:2]],
         )
 
     def test_confirmation_callback(self):
@@ -147,7 +148,7 @@ class TestConfirmationEmail(unittest.TestCase):
         self.assert_email_arguments(
             govuk_notify,
             personalisation=personalisation_data,
-            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"],
+            template_id=GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"][get_locale()[:2]],
         )
 
 
