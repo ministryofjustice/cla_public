@@ -21,7 +21,7 @@ from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
 from cla_public.apps.base.govuk_notify.api import GovUkNotify
 from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
-
+from cla_public.libs.utils import get_locale
 
 log = logging.getLogger(__name__)
 
@@ -66,10 +66,10 @@ def generate_confirmation_email_data(data):
         if "full_name" not in data:
             if session.stored["callback_requested"] is True:
                 personalisation = {"case_reference": data["case_ref"], "date_time": set_callback_time_string(data)}
-                template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"]
+                template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"][get_locale()[:2]]
             else:
                 personalisation = {"case_reference": data["case_ref"]}
-                template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"]
+                template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"][get_locale()[:2]]
 
             return email_address, template_id, personalisation
 
@@ -82,16 +82,16 @@ def generate_confirmation_email_data(data):
         }
 
         if session.stored["callback_requested"] is False:
-            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"]
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_NOT_REQUESTED"][get_locale()[:2]]
 
             return email_address, template_id, personalisation
 
         # Decides between a personal callback or a third party callback
         if data["callback"]["contact_number"]:
-            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"]
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_WITH_NUMBER"][get_locale()[:2]]
             personalisation.update(contact_number=data["callback"]["contact_number"])
         elif data["thirdparty"]["contact_number"]:
-            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"]
+            template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CALLBACK_THIRD_PARTY"][get_locale()[:2]]
             personalisation.update(contact_number=data["thirdparty"]["contact_number"])
 
         return email_address, template_id, personalisation
