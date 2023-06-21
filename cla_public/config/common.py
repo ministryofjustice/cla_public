@@ -22,7 +22,7 @@ CLEAR_SESSION = True
 
 GOV_UK_START_PAGE = "https://www.gov.uk/check-legal-aid"
 
-BACKEND_BASE_URI = os.environ.get("BACKEND_BASE_URI", "http://127.0.0.1:8000")  # For healthcheck.json requests
+BACKEND_BASE_URI = os.environ.get("BACKEND_BASE_URI", "http://127.0.0.1:8010")  # For healthcheck.json requests
 
 # Disable eligibility check and allow users to request a callback only
 CONTACT_ONLY = os.environ.get("CALLMEBACK_ONLY", False) == "True"
@@ -129,6 +129,10 @@ GOVUK_NOTIFY_TEMPLATES = {
     ),
     "PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED": os.environ.get(
         "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED", "020ba10c-ac98-4b7c-a49f-1f129462506b"
+    ),
+    "PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED_THIRDPARTY": os.environ.get(
+        "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED_THIRDPARTY",
+        "ca425753-c31b-426b-a532-b864701b2178",
     ),
 }
 
