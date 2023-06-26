@@ -65,8 +65,16 @@ def generate_confirmation_email_data(data):
         # Path for confirmation email if no email is provided initially
         if "full_name" not in data:
             if session.stored["callback_requested"] is True:
-                personalisation = {"case_reference": data["case_ref"], "date_time": set_callback_time_string(data)}
-                template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"][get_locale()[:2]]
+                if session.stored["contact_type"] == "thirdparty":
+                    personalisation = {"case_reference": data["case_ref"], "date_time": set_callback_time_string(data)}
+                    template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED_THIRDPARTY"][
+                        get_locale()[:2]
+                    ]
+                else:
+                    personalisation = {"case_reference": data["case_ref"], "date_time": set_callback_time_string(data)}
+                    template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED"][
+                        get_locale()[:2]
+                    ]
             else:
                 personalisation = {"case_reference": data["case_ref"]}
                 template_id = GOVUK_NOTIFY_TEMPLATES["PUBLIC_CONFIRMATION_NO_CALLBACK"][get_locale()[:2]]

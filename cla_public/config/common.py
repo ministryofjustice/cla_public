@@ -162,6 +162,16 @@ GOVUK_NOTIFY_TEMPLATES = {
             "8b169ee3-4295-4a6b-beb3-ca67c8123e6b",
         ),
     },
+    "PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED_THIRDPARTY": {
+        "en": os.environ.get(
+            "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED_THIRDPARTY",
+            "ca425753-c31b-426b-a532-b864701b2178",
+        ),
+        "cy": os.environ.get(
+            "GOVUK_NOTIFY_TEMPLATE_PUBLIC_CONFIRMATION_EMAIL_CALLBACK_REQUESTED_THIRDPARTY_WELSH",
+            "9fbf2cda-3097-4ce2-b6c2-371acf391698",
+        ),
+    },
 }
 
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
