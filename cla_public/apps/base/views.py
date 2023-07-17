@@ -268,4 +268,4 @@ def healthcheck():
 
 @base.route("/maintenance")
 def maintenance_page():
-    return render_template("maintenance.html")
+    return render_template("maintenance.html"), 503
