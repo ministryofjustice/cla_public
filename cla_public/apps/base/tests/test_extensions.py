@@ -65,7 +65,7 @@ class TestMaintenanceModeEnabled(FlaskAppTestCase):
         self.app.config["MAINTENANCE_MODE"] = True
         client = self.app.test_client()
         response = client.get("/maintenance")
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(503, response.status_code)
         self.assertIn("This service is currently down for maintenance", response.data)
 
     def test_maintenance_mode_disabled_maintenance_page(self):
