@@ -26,7 +26,7 @@ cffi==1.15.1
     # via cryptography
 chardet==3.0.4
     # via requests
-https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.14.tar.gz
+https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.21.tar.gz
     # via -r requirements/source/requirements-base.in
 coverage==5.0.3
     # via
@@ -123,10 +123,11 @@ python-dateutil==2.2
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common
-pytz==2018.5
+pytz==2021.1
     # via
     #   -r requirements/source/requirements-base.in
     #   babel
+    #   cla-common
 pyyaml==3.11
     # via -r requirements/source/requirements-base.in
 requests==2.19.1
