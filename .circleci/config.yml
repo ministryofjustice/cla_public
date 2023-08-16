@@ -3,48 +3,42 @@ version: 2.1
 orbs:
   slack: circleci/slack@3.4.2
   cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@volatile
+  aws-cli: circleci/aws-cli@4.0.0 # use v4 of this orb
+  aws-ecr: circleci/aws-ecr@8.2.1 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 jobs:
   build:
-    docker:
-      - image: docker:19.03-git
+    executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
     steps:
+      # Checkout your repository
       - checkout
-      - setup_remote_docker:
-          version: "19.03.13"
-          docker_layer_caching: true
+      # Authenticate to AWS using OIDC v2 with the AWS CLI
+      - aws-cli/setup:
+          role_arn: $ECR_ROLE_TO_ASSUME # this will use the env var
+          region: $ECR_REGION # this will use the env var
+      # Authenticate to the ECR repository using the standard command
+      - run: |
+          aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
+      # Build and push your Docker image
       - run:
-          name: Login to the ECR Docker registry
+          name: Create target tag for main application image
           command: |
-            if [ -z "$CIRCLE_PR_NUMBER" ]; then
-              apk add --no-cache --no-progress py3-pip
-              pip install awscli
-              ecr_login="$(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)"
-              ${ecr_login}
-            else
-              echo "We do not need to authenticate for forked pull requests."
-            fi
-      - run:
-          name: Build Docker image
-          command: |
-            docker build --tag application:$CIRCLE_SHA1 \
-              --label build.git.sha=$CIRCLE_SHA1 \
-              --label build.git.branch=$CIRCLE_BRANCH \
-              --label build.url=$CIRCLE_BUILD_URL \
-              .
+            source .circleci/define_build_environment_variables
+            echo "Created tags $TARGET_TAGS"
+            echo "export BUILD_TAGS=$TARGET_TAGS" >> $BASH_ENV
+            echo "export IMAGE_TAG=$IMAGE_TAG" >> $BASH_ENV
+      - aws-ecr/build-image:
+          push-image: true
+          tag: $BUILD_TAGS
+          region: $ECR_REGION # this will use the env var
+          repo: $ECR_REPOSITORY # this will use the env var
+          extra-build-args: |
+            --build-arg target=production
+      # Validate the python version as 2.7
       - run:
           name: Validate Python version
-          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 python --version | grep "2.7"
-      - run:
-          name: Validate that image runs on Europe/London timezone
-          command: docker run --rm --tty --interactive application:$CIRCLE_SHA1 date '+%Z' | egrep "(GMT|BST)"
-      - run:
-          name: Tag and push Docker images
           command: |
-            if [ -z "$CIRCLE_PR_NUMBER" ]; then
-              .circleci/tag_and_push_docker_image application:$CIRCLE_SHA1
-            else
-              echo "We do not need to push Docker images for forked pull requests."
-            fi
+            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "2.7"
+
   lint-with-py2-tools:
     docker:
       - image: cimg/python:2.7
