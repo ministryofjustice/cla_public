@@ -5,6 +5,33 @@ orbs:
   cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@volatile
   aws-cli: circleci/aws-cli@4.0.0 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@8.2.1 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
+
+# ------------------
+# EXECUTORS
+# these are ones we use rather than one from rom the orb
+# ------------------
+
+executors:
+  cloud-platform-executor:
+    docker:
+      - image: ministryofjustice/cloud-platform-tools:2.1
+
+
+# ------------------
+#
+# REFERENCES
+#
+# ------------------
+
+references:
+  install_helm: &install_helm
+      run:
+        name: Install helm v3
+        command: |
+          wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
+          tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
+          mv linux-amd64/helm /usr/local/bin/helm
+
 jobs:
   build:
     executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
@@ -171,16 +198,10 @@ jobs:
       multideploy:
         type: boolean
         default: false
-    docker:
-      - image: ministryofjustice/cloud-platform-tools
+    executor: cloud-platform-executor
     steps:
       - checkout
-      - run:
-          name: Install helm v3
-          command: |
-            wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
-            tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
-            mv linux-amd64/helm /usr/local/bin/helm
+      - *install_helm
       - run:
           name: Authenticate with cluster
           command: .circleci/authenticate_with_kubernetes_cluster
@@ -212,16 +233,10 @@ jobs:
           title_link: 'https://$RELEASE_HOST/start'
 
   cleanup_merged:
-    docker:
-      - image: ministryofjustice/cloud-platform-tools
+    executor: cloud-platform-executor
     steps:
       - checkout
-      - run:
-          name: Install helm v3
-          command: |
-            wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
-            tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
-            mv linux-amd64/helm /usr/local/bin/helm
+      - *install_helm
       - run:
           name: Authenticate with cluster
           command: .circleci/authenticate_with_kubernetes_cluster
@@ -231,16 +246,10 @@ jobs:
             ./bin/delete_staging_release.sh
 
   production_deploy:
-    docker:
-      - image: ministryofjustice/cloud-platform-tools
+    executor: cloud-platform-executor
     steps:
       - checkout
-      - run:
-          name: Install helm v3
-          command: |
-            wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
-            tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
-            mv linux-amd64/helm /usr/local/bin/helm
+      - *install_helm
       - run:
           name: Authenticate with cluster
           command: .circleci/authenticate_with_kubernetes_cluster
