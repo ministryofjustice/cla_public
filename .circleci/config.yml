@@ -267,15 +267,15 @@ jobs:
     executor: aws-ecr/default
     steps:
       - checkout:
-          path: fala
+          path: cla_public
       - run: |
-          cd fala
+          cd cla_public
           source .circleci/define_build_environment_variables
-          echo "export FALA_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
+          echo "export CLA_PUBLIC_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
           echo "export A11Y_ENABLED=true" >> $BASH_ENV
-          echo "Setting FALA image $ECR_DEPLOY_IMAGE"
+          echo "Setting CLA_Public image $ECR_DEPLOY_IMAGE"
       - cla-end-to-end-tests/behave
-      
+
 workflows:
   version: 2
   build-test-and-approval-deploy:
