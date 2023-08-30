@@ -263,6 +263,19 @@ jobs:
           title: '$PRODUCTION_HOST'
           title_link: 'https://$PRODUCTION_HOST/start'
 
+  behave:
+    executor: aws-ecr/default
+    steps:
+      - checkout:
+          path: cla_public
+      - run: |
+          cd cla_public
+          source .circleci/define_build_environment_variables
+          echo "export CLA_PUBLIC_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
+          echo "export A11Y_ENABLED=true" >> $BASH_ENV
+          echo "Setting CLA_Public image $ECR_DEPLOY_IMAGE"
+      - cla-end-to-end-tests/behave
+
 workflows:
   version: 2
   build-test-and-approval-deploy:
@@ -280,20 +293,10 @@ workflows:
             - format-with-py3-tools
             - test
           context: laa-cla-public
-      - cla-end-to-end-tests/behave:
+      - behave:
           requires:
             - build
           context: laa-cla-public
-          pre-steps:
-            - checkout:
-                path: cla_public
-            - run:
-                command: |
-                  cd cla_public
-                  source .circleci/define_build_environment_variables
-                  echo "export CLA_PUBLIC_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
-                  echo "export A11Y_ENABLED=true" >> $BASH_ENV
-                  echo "Setting CLA Public image $ECR_DEPLOY_IMAGE"
       - staging_deploy_approval:
           type: approval
       # Deploy staging to live (both master and feature branches)
