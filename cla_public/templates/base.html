@@ -54,24 +54,15 @@
       {% endfor %}
     {% endif %}
   {% endif %}
-  <div class="laa-flee-button-container
-    {% if is_quick_exit_enabled(session) %}
-      laa-flee-button-enabled
-    {% endif %}
-    ">
-    <div class="laa-flee-button-position">
-      <a href="https://www.google.com" id="quick-exit" tabindex="-1" class="govuk-button govuk-button--warning laa-flee-button">
-        <strong>{{ _('Hide this page') }}</strong>
-        <span class="govuk-visually-hidden">{{ _('Or press escape key to hide this page') }}</span>
-      </a>
-      <p class="laa-quick-exit-info govuk-!-font-size-14">
-        ({{ _('Or press Esc key') }})
-      </p>
-    </div>
-    <p class="govuk-button laa-flee-button-sizing">
-      <strong>{{ _('Hide this page') }}</strong>
-    </p>
+  <div class="laa-flee-button-container {% if is_quick_exit_enabled(session) %} laa-flee-button-enabled {% endif %}">
+      <div class="govuk-exit-this-page" data-module="govuk-exit-this-page">
+        <a href="https://www.bbc.co.uk/weather" role="button" draggable="false" class="govuk-button govuk-button--warning govuk-exit-this-page__button govuk-js-exit-this-page-button" data-module="govuk-button">
+        Exit this page
+        </a>
+        <p class="govuk-!-text-align-centre govuk-body-s govuk-!-margin-top-1">({{ _('Or press Esc key') }})</p>
+      </div>
   </div>
+
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     <div class="govuk-grid-row">
         {% with flash_messages = get_flashed_messages() %}
