@@ -50,7 +50,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ static('images/apple-touch-icon-72x72.png') }}">
     <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
     <link rel="apple-touch-icon-precomposed" href="{{ static('images/apple-touch-icon-57x57.png') }}">
-    
+
     <!-- latest Dec 19 -->
     <link rel="mask-icon" href="{{ static('images/govuk-mask-icon.svg') }}" color="#0b0c0c">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ static('images/govuk-apple-touch-icon-180x180.png') }}">
@@ -73,31 +73,22 @@
 
   </head>
 
-  <body class="govuk-template__body 
+  <body class="govuk-template__body
   {% block body_classes %}{{ product_type }} {{ phase }} {{ 'cla-' + config["CLA_ENV"] }} {% endblock %}">
-    <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-    <div class="laa-flee-button-container
-      {% if is_quick_exit_enabled(session) %}
-        govuk-visually-hidden
-      {% endif %}
-      ">
-      <p class="govuk-body">
-        ({{ _('To leave the page quickly, press the escape key.') }})
-      </p>
-    </div>
-    <div id="skiplink-container">
-      <div>
-        <a href="#main-content" class="govuk-skip-link">{{ _('Skip to main content') }}</a>
-      </div>
-    </div>
+<div id="skiplink-container">
+  <div>
+    <a href="#main-content" class="govuk-skip-link">{{ _('Skip to main content') }}</a>
+    <a href="https://bbc.co.uk/weather/" class="govuk-skip-link govuk-js-exit-this-page-skiplink" rel="nofollow noreferrer" data-module="govuk-skip-link">Exit this page</a>
+  </div>
+</div>
 
     <div id="cookie-message" class="gem-c-cookie-banner" data-module="cookie-banner" role="region" aria-label="cookie banner">
       {% block cookie_message %} {% endblock %}
     </div>
     <!--end global-cookie-message-->
 
-    
+
     <header class="govuk-header " role="banner" data-module="govuk-header">
       <div class="govuk-header__container govuk-width-container {% block error_class %}{% endblock %}">
         <div class="govuk-header__logo">

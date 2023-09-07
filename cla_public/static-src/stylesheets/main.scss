@@ -37,7 +37,6 @@ $laa-dev-colour: govuk-colour("pink");
 @import 'scope-diagnosis';
 @import 'modal-dialog';
 @import 'cookie-settings';
-@import 'flee-behaviour';
 
 html {
   height: 100%;
@@ -247,7 +246,7 @@ dl.govuk-list.govuk-list--bullet {
 
 @media only screen and (max-width: 640px) {
 
-  .js-enabled .laa-flee-button-container.govuk-visually-hidden {
+  .js-enabled {
     display:block;
 
     ~.gem-c-cookie-banner__confirmation,.gem-c-cookie-banner {
