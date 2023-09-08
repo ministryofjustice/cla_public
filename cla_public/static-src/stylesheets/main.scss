@@ -40,7 +40,7 @@ $laa-dev-colour: govuk-colour("pink");
 
 html {
   height: 100%;
-  font-size:initial;
+  font-size: initial;
 }
 
 @media print {
@@ -90,8 +90,8 @@ html {
 }
 
 fieldset.govuk-form-group--error {
-  padding-left:15px;
-  border-left:5px solid $govuk-error-colour;
+  padding-left: 15px;
+  border-left: 5px solid $govuk-error-colour;
 }
 
 .cla-currency-by-frequency .govuk-form-group {
@@ -115,14 +115,16 @@ fieldset.govuk-form-group--error {
   border-width: 2px;
 }
 
-.gem-c-button--secondary{
-  border:2px solid;
+.gem-c-button--secondary {
+  border: 2px solid;
+
   &:hover {
     border-color: #00692f;
     color: #00692f;
     background-color: #f8f8f8;
     text-decoration: none;
   }
+
   &:focus &:link:focus {
     outline: none;
     border-color: $govuk-focus-colour;
@@ -133,16 +135,17 @@ fieldset.govuk-form-group--error {
 }
 
 .laa-currency {
-  position:relative;
-  display:inline;
+  position: relative;
+  display: inline;
 
-  .govuk-input{
-    padding-left:2.1em;
+  .govuk-input {
+    padding-left: 2.1em;
     background: transparent;
     position: relative;
     z-index: 1;
   }
 }
+
 .laa-currency-prefix {
   font-family: $govuk-font-family;
   position: absolute;
@@ -161,7 +164,7 @@ fieldset.govuk-form-group--error {
 @supports (-moz-appearance:none) {
   /*for fixing firefox only bug where currency prefix was off.*/
   .laa-currency-prefix {
-    top:-9px;
+    top: -9px;
   }
   .govuk-input {
     outline: govuk-colour("white") solid;
@@ -169,8 +172,8 @@ fieldset.govuk-form-group--error {
 }
 
 @media only screen and (max-width: 640px) {
-  .laa-currency .govuk-input{
-    padding-left:2.3em;
+  .laa-currency .govuk-input {
+    padding-left: 2.3em;
   }
   .laa-currency-prefix {
     padding: 11px 11px 0 13px;
@@ -181,11 +184,13 @@ fieldset.govuk-form-group--error {
 .laa-telephone {
   white-space: nowrap;
 }
+
 dl.govuk-list.govuk-list--bullet {
   dt {
     font-weight: 700;
     padding: 1em 0 0.5em;
   }
+
   dd {
     list-style-type: disc;
     display: list-item;
@@ -193,6 +198,7 @@ dl.govuk-list.govuk-list--bullet {
     margin-left: 20px;
   }
 }
+
 .laa-input-link {
   cursor: pointer;
   background: none;
@@ -200,16 +206,19 @@ dl.govuk-list.govuk-list--bullet {
   color: $govuk-link-colour;
   text-decoration: underline;
   padding: 0;
-  &:hover{
+
+  &:hover {
     color: $govuk-link-hover-colour;
-    &:focus{
+
+    &:focus {
       color: $govuk-focus-text-colour;
     }
   }
 }
+
 @media only screen {
   a[rel="external"]:after {
-    content:" (opens external site)";
+    content: " (opens external site)";
     position: absolute !important;
     width: 1px !important;
     height: 7px !important;
@@ -223,13 +232,15 @@ dl.govuk-list.govuk-list--bullet {
     white-space: nowrap !important;
   }
   *[lang=cy] a[rel="external"]:after {
-    content:" (gwefan allanol)";
+    content: " (gwefan allanol)";
   }
 }
+
 .govuk-label:not(.govuk-radios__label):not(.govuk-checkboxes__label),
 .govuk-fieldset__legend {
-  font-weight:700;
+  font-weight: 700;
 }
+
 .laa-currency-period-input__item {
   display: inline-block;
   margin-right: 20px;
@@ -246,30 +257,30 @@ dl.govuk-list.govuk-list--bullet {
 
 @media only screen {
   .js-enabled .laa-flee-button-container.govuk-visually-hidden {
-    display:block;
+    display: block;
   }
 
   .laa-flee-button-container.laa-flee-button-enabled {
-    display:block;
+    display: block;
     float: right;
     position: -webkit-sticky;
     position: sticky;
-    top:0;
-    z-index:1000;
+    top: 0;
+    z-index: 1000;
   }
 }
 
 @media only screen and (max-width: 640px) {
 
   .js-enabled .laa-flee-button-container.govuk-visually-hidden {
-    display:block;
+    display: block;
 
-    ~.gem-c-cookie-banner__confirmation,.gem-c-cookie-banner {
-      padding-top:40px;
+    ~ .gem-c-cookie-banner__confirmation, .gem-c-cookie-banner {
+      padding-top: 40px;
     }
 
     ~ #skiplink-container {
-      padding-top:40px;
+      padding-top: 40px;
     }
   }
 
@@ -279,34 +290,37 @@ dl.govuk-list.govuk-list--bullet {
 }
 
 .laa-flee-button-container {
-  display:none;
+  display: none;
 }
 
 body:not(.cla-production) {
   .govuk-header__container {
-    border-bottom-color:$laa-unknown-colour;
+    border-bottom-color: $laa-unknown-colour;
   }
-  .govuk-phase-banner__content__tag{
-    background-color:$laa-unknown-colour;
+
+  .govuk-phase-banner__content__tag {
+    background-color: $laa-unknown-colour;
     white-space: nowrap;
   }
 }
 
 body.cla-staging {
   .govuk-header__container {
-    border-bottom-color:$laa-staging-colour;
+    border-bottom-color: $laa-staging-colour;
   }
+
   .govuk-phase-banner__content__tag {
-    background-color:$laa-staging-colour;
+    background-color: $laa-staging-colour;
   }
 }
 
 body.cla-dev {
   .govuk-header__container {
-    border-bottom-color:$laa-dev-colour;
+    border-bottom-color: $laa-dev-colour;
   }
-  .govuk-phase-banner__content__tag{
-    background-color:$laa-dev-colour;
+
+  .govuk-phase-banner__content__tag {
+    background-color: $laa-dev-colour;
   }
 }
 

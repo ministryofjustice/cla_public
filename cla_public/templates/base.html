@@ -56,27 +56,29 @@
   {% endif %}
 
   <div class="laa-flee-button-container {% if is_quick_exit_enabled(session) %} laa-flee-button-enabled {% endif %}">
-      <div class="govuk-exit-this-page" data-module="govuk-exit-this-page">
-        <a href="https://www.bbc.co.uk/weather" role="button" draggable="false" class="govuk-button govuk-button--warning govuk-exit-this-page__button govuk-js-exit-this-page-button" data-module="govuk-button">
-          Exit this page
-        </a>
-      </div>
+    <div class="govuk-exit-this-page" data-module="govuk-exit-this-page">
+      <a href="https://www.bbc.co.uk/weather" role="button" draggable="false"
+         class="govuk-button govuk-button--warning govuk-exit-this-page__button govuk-js-exit-this-page-button"
+         data-module="govuk-button">
+        Exit this page
+      </a>
+    </div>
   </div>
 
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     <div class="govuk-grid-row">
-        {% with flash_messages = get_flashed_messages() %}
-          {% if flash_messages %}
-            <div class="laa-datastore_banner">
-              <ul class="laa-datastore_banner-list">
+      {% with flash_messages = get_flashed_messages() %}
+        {% if flash_messages %}
+          <div class="laa-datastore_banner">
+            <ul class="laa-datastore_banner-list">
               {% for message in flash_messages %}
                 <li class="laa-datastore_banner-item">{{ message }}</li>
               {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-        {% endwith %}
-        {% block session_timeout_dialog %} {% include "_modal-dialog.html" %} {% endblock %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block session_timeout_dialog %} {% include "_modal-dialog.html" %} {% endblock %}
       <div class="govuk-grid-column-full">
         {% block emergency_message_block %}
           {% if emergency_message_on %}
@@ -104,71 +106,154 @@
 
     {% if zeroOptions %}
       // this is set in diagnosis.html
-      $( document ).ready(function(){
-        ga('moj.send', 'event', 'Zero-options', 'Zero options (page reload)', 'No options instance: '+stripPII(window.location.href));
+      $(document).ready(function () {
+        ga('moj.send', 'event', 'Zero-options', 'Zero options (page reload)', 'No options instance: ' + stripPII(window.location.href));
         location.reload();
       })
     {% endif %}
 
-    function focusError(fieldID){
-      document.getElementById("field-"+fieldID).scrollIntoView();
-      if($("#"+fieldID+"-0").length) { // the error is a radio or tickbox - select the first option
-        focusElement = fieldID+"-0";
-      } else if($("#"+fieldID+"-per_interval_value.govuk-input--error").length) { // the error is a currency rate
-        focusElement = fieldID +"-per_interval_value";
-      } else if($("#"+fieldID+"-interval_period.govuk-select--error").length) { // the error is a currency rate but only the drop-down
-        focusElement = fieldID+"-interval_period";
-      } else if($("#"+fieldID+"-per_interval_value").length) { // the error is a currency rate (but no error style)
-        focusElement = fieldID +"-per_interval_value";
-      } else if($("#"+fieldID).length) { // the error is any other input
+    function focusError(fieldID) {
+      document.getElementById("field-" + fieldID).scrollIntoView();
+      if ($("#" + fieldID + "-0").length) { // the error is a radio or tickbox - select the first option
+        focusElement = fieldID + "-0";
+      } else if ($("#" + fieldID + "-per_interval_value.govuk-input--error").length) { // the error is a currency rate
+        focusElement = fieldID + "-per_interval_value";
+      } else if ($("#" + fieldID + "-interval_period.govuk-select--error").length) { // the error is a currency rate but only the drop-down
+        focusElement = fieldID + "-interval_period";
+      } else if ($("#" + fieldID + "-per_interval_value").length) { // the error is a currency rate (but no error style)
+        focusElement = fieldID + "-per_interval_value";
+      } else if ($("#" + fieldID).length) { // the error is any other input
         focusElement = fieldID;
       } else { // shouldn't occur
-        focusElement = "#field-"+fieldID;
+        focusElement = "#field-" + fieldID;
       }
-      $("#"+focusElement).focus();
+      $("#" + focusElement).focus();
     }
 
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
      * Build: http://modernizr.com/download/#-mq-teststyles
      */
-    window.Modernizr=function(a,b,c){function v(a){i.cssText=a}function w(a,b){return v(prefixes.join(a+";")+(b||""))}function x(a,b){return typeof a===b}function y(a,b){return!!~(""+a).indexOf(b)}function z(a,b,d){for(var e in a){var f=b[a[e]];if(f!==c)return d===!1?a[e]:x(f,"function")?f.bind(d||b):f}return!1}var d="2.8.3",e={},f=b.documentElement,g="modernizr",h=b.createElement(g),i=h.style,j,k={}.toString,l={},m={},n={},o=[],p=o.slice,q,r=function(a,c,d,e){var h,i,j,k,l=b.createElement("div"),m=b.body,n=m||b.createElement("body");if(parseInt(d,10))while(d--)j=b.createElement("div"),j.id=e?e[d]:g+(d+1),l.appendChild(j);return h=["&#173;",'<style id="s',g,'">',a,"</style>"].join(""),l.id=g,(m?l:n).innerHTML+=h,n.appendChild(l),m||(n.style.background="",n.style.overflow="hidden",k=f.style.overflow,f.style.overflow="hidden",f.appendChild(n)),i=c(l,a),m?l.parentNode.removeChild(l):(n.parentNode.removeChild(n),f.style.overflow=k),!!i},s=function(b){var c=a.matchMedia||a.msMatchMedia;if(c)return c(b)&&c(b).matches||!1;var d;return r("@media "+b+" { #"+g+" { position: absolute; } }",function(b){d=(a.getComputedStyle?getComputedStyle(b,null):b.currentStyle)["position"]=="absolute"}),d},t={}.hasOwnProperty,u;!x(t,"undefined")&&!x(t.call,"undefined")?u=function(a,b){return t.call(a,b)}:u=function(a,b){return b in a&&x(a.constructor.prototype[b],"undefined")},Function.prototype.bind||(Function.prototype.bind=function(b){var c=this;if(typeof c!="function")throw new TypeError;var d=p.call(arguments,1),e=function(){if(this instanceof e){var a=function(){};a.prototype=c.prototype;var f=new a,g=c.apply(f,d.concat(p.call(arguments)));return Object(g)===g?g:f}return c.apply(b,d.concat(p.call(arguments)))};return e});for(var A in l)u(l,A)&&(q=A.toLowerCase(),e[q]=l[A](),o.push((e[q]?"":"no-")+q));return e.addTest=function(a,b){if(typeof a=="object")for(var d in a)u(a,d)&&e.addTest(d,a[d]);else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof enableClasses!="undefined"&&enableClasses&&(f.className+=" "+(b?"":"no-")+a),e[a]=b}return e},v(""),h=j=null,e._version=d,e.mq=s,e.testStyles=r,e}(this,this.document);
+    window.Modernizr = function (a, b, c) {
+      function v(a) {
+        i.cssText = a
+      }
+
+      function w(a, b) {
+        return v(prefixes.join(a + ";") + (b || ""))
+      }
+
+      function x(a, b) {
+        return typeof a === b
+      }
+
+      function y(a, b) {
+        return !!~("" + a).indexOf(b)
+      }
+
+      function z(a, b, d) {
+        for (var e in a) {
+          var f = b[a[e]];
+          if (f !== c) return d === !1 ? a[e] : x(f, "function") ? f.bind(d || b) : f
+        }
+        return !1
+      }
+
+      var d = "2.8.3", e = {}, f = b.documentElement, g = "modernizr", h = b.createElement(g), i = h.style, j,
+        k = {}.toString, l = {}, m = {}, n = {}, o = [], p = o.slice, q, r = function (a, c, d, e) {
+          var h, i, j, k, l = b.createElement("div"), m = b.body, n = m || b.createElement("body");
+          if (parseInt(d, 10)) while (d--) j = b.createElement("div"), j.id = e ? e[d] : g + (d + 1), l.appendChild(j);
+          return h = ["&#173;", '<style id="s', g, '">', a, "</style>"].join(""), l.id = g, (m ? l : n).innerHTML += h, n.appendChild(l), m || (n.style.background = "", n.style.overflow = "hidden", k = f.style.overflow, f.style.overflow = "hidden", f.appendChild(n)), i = c(l, a), m ? l.parentNode.removeChild(l) : (n.parentNode.removeChild(n), f.style.overflow = k), !!i
+        }, s = function (b) {
+          var c = a.matchMedia || a.msMatchMedia;
+          if (c) return c(b) && c(b).matches || !1;
+          var d;
+          return r("@media " + b + " { #" + g + " { position: absolute; } }", function (b) {
+            d = (a.getComputedStyle ? getComputedStyle(b, null) : b.currentStyle)["position"] == "absolute"
+          }), d
+        }, t = {}.hasOwnProperty, u;
+      !x(t, "undefined") && !x(t.call, "undefined") ? u = function (a, b) {
+        return t.call(a, b)
+      } : u = function (a, b) {
+        return b in a && x(a.constructor.prototype[b], "undefined")
+      }, Function.prototype.bind || (Function.prototype.bind = function (b) {
+        var c = this;
+        if (typeof c != "function") throw new TypeError;
+        var d = p.call(arguments, 1), e = function () {
+          if (this instanceof e) {
+            var a = function () {
+            };
+            a.prototype = c.prototype;
+            var f = new a, g = c.apply(f, d.concat(p.call(arguments)));
+            return Object(g) === g ? g : f
+          }
+          return c.apply(b, d.concat(p.call(arguments)))
+        };
+        return e
+      });
+      for (var A in l) u(l, A) && (q = A.toLowerCase(), e[q] = l[A](), o.push((e[q] ? "" : "no-") + q));
+      return e.addTest = function (a, b) {
+        if (typeof a == "object") for (var d in a) u(a, d) && e.addTest(d, a[d]); else {
+          a = a.toLowerCase();
+          if (e[a] !== c) return e;
+          b = typeof b == "function" ? b() : b, typeof enableClasses != "undefined" && enableClasses && (f.className += " " + (b ? "" : "no-") + a), e[a] = b
+        }
+        return e
+      }, v(""), h = j = null, e._version = d, e.mq = s, e.testStyles = r, e
+    }(this, this.document);
   </script>
   <script src="{{ asset(filename='javascripts/cla.js') }}"></script>
   {% if config.DEBUG %}
     <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
   {% endif %}
 
-{% if config.MOJ_GTM_ID %}
-<!-- Start of google tag manager -->
-<script>
-  function add_gtm() {
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth={{config.MOJ_GTM_AUTH}}&gtm_preview={{config.MOJ_GTM_PREVIEW}}&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','{{config.MOJ_GTM_ID}}');
-  }
-  window.addEventListener("cookies_approved", function(event){
-    add_gtm()
-  });
-  if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
-    add_gtm();
-  }
+  {% if config.MOJ_GTM_ID %}
+    <!-- Start of google tag manager -->
+    <script>
+      function add_gtm() {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({
+            'gtm.start':
+              new Date().getTime(), event: 'gtm.js'
+          });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl + '&gtm_auth={{config.MOJ_GTM_AUTH}}&gtm_preview={{config.MOJ_GTM_PREVIEW}}&gtm_cookies_win=x';
+          f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', '{{config.MOJ_GTM_ID}}');
+      }
 
-</script>
-<!-- End of google tag manager -->
-{% endif %}
+      window.addEventListener("cookies_approved", function (event) {
+        add_gtm()
+      });
+      if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
+        add_gtm();
+      }
 
-<!-- Start of google analytics -->
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script>
+    <!-- End of google tag manager -->
+  {% endif %}
+
+  <!-- Start of google analytics -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
     function stripPII(input) {
       return input.replace(/postcode=[^&]+/gi, 'postcode=[postcode]');
     }
+
     window.ga_trackers = {}
     {% if config.GDS_GA_ID %}
       window.ga_trackers["gds"] = {
@@ -182,7 +267,7 @@
 
     const localeLanguage = "{{ request.cookies.get('locale', 'en_GB') }}"
 
-    _.forEach(window.ga_trackers, function(values, id){
+    _.forEach(window.ga_trackers, function (values, id) {
       ga('create', values["id"], values["domain"], values["name"], values["options"]);
       ga(values["name"] + '.set', 'anonymizeIp', true);
       ga(values["name"] + '.set', 'location', stripPII(window.location.href));
@@ -221,26 +306,26 @@
       <ul class="govuk-list govuk-error-summary__list">
         <% _.each(errors, function(field) { %>
         <li>
-            <% if(field.name) { %>
-              <% if(field.errors.length) { %>
-                <% _.each(field.errors, function(error) { %>
-                  <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
-                <% }); %>
-              <% } else { %>
-                <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= field.label %></a>
-              <% } %>
-            <% } else { %>
-              <% _.each(field.errors, function(error) { %>
-                <%= error %>
-              <% }); %>
-            <% } %>
+          <% if(field.name) { %>
+          <% if(field.errors.length) { %>
+          <% _.each(field.errors, function(error) { %>
+          <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
+          <% }); %>
+          <% } else { %>
+          <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= field.label %></a>
+          <% } %>
+          <% } else { %>
+          <% _.each(field.errors, function(error) { %>
+          <%= error %>
+          <% }); %>
+          <% } %>
         </li>
         <% }); %>
       </ul>
     {% endcall %}
   </script>
   <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
       $('.govuk-error-summary + .govuk-error-summary').remove();
       //removes duplicate error summaries - shouldn't be needed
     });
@@ -248,7 +333,7 @@
 
   <script type="text/html" id="fieldError">
     <% _.each(errors, function(error, index) { %>
-      <span class="govuk-error-message" id="error-<%= fieldName %>">
+    <span class="govuk-error-message" id="error-<%= fieldName %>">
         <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>
         <span class="cla-error-message"><%= error %></span>
       <% }); %>
@@ -257,7 +342,8 @@
 
   <script type="text/html" id="truncateListExpandLink">
     <p class="action">
-      <button class="govuk-button govuk-button--secondary" data-module="govuk-button" type="button" aria-label="{{ _('Show {count} more sources of help') }}">
+      <button class="govuk-button govuk-button--secondary" data-module="govuk-button" type="button"
+              aria-label="{{ _('Show {count} more sources of help') }}">
         {{ _('Show {count} more') }}
       </button>
     </p>
@@ -269,9 +355,17 @@
 {% endblock %}
 
 {% block footer_support_links %}
-  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link" href="{{ url_for('base.online_safety') }}">{{ _('Staying safe online') }}</a></li>
-  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link" href="{{ url_for('base.privacy') }}">{{ _('Privacy Policy') }}</a></li>
-  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link" href="{{ url_for('base.cookies') }}">{{ _('Cookies') }}</a></li>
-  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link" href="{{ url_for('base.reasons_for_contacting')}}">{{ _('Contact') }}</a></li>
-  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link" href="{{ url_for('base.accessibility')}}">{{ _('Accessibility statement') }}</a></li>
+  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link"
+                                                href="{{ url_for('base.online_safety') }}">{{ _('Staying safe online') }}</a>
+  </li>
+  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link"
+                                                href="{{ url_for('base.privacy') }}">{{ _('Privacy Policy') }}</a></li>
+  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link"
+                                                href="{{ url_for('base.cookies') }}">{{ _('Cookies') }}</a></li>
+  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link"
+                                                href="{{ url_for('base.reasons_for_contacting') }}">{{ _('Contact') }}</a>
+  </li>
+  <li class="govuk-footer__inline-list-item"><a class="govuk-footer__link"
+                                                href="{{ url_for('base.accessibility') }}">{{ _('Accessibility statement') }}</a>
+  </li>
 {% endblock %}

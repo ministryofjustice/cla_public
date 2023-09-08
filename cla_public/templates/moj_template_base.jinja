@@ -88,13 +88,15 @@
 <body class="govuk-template__body
   {% block body_classes %}{{ product_type }} {{ phase }} {{ 'cla-' + config["CLA_ENV"] }} {% endblock %}">
 
-<script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+<script
+  type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
 <div class="laa-flee-button-container {% if is_quick_exit_enabled(session) %} govuk-visually-hidden {% endif %}"></div>
 <div id="skiplink-container">
   <div>
     <a href="#main-content" class="govuk-skip-link">{{ _('Skip to main content') }}</a>
-    <a href="https://bbc.co.uk/weather/" class="govuk-skip-link govuk-js-exit-this-page-skiplink" rel="nofollow noreferrer" data-module="govuk-skip-link">Exit this page</a>
+    <a href="https://bbc.co.uk/weather/" class="govuk-skip-link govuk-js-exit-this-page-skiplink"
+       rel="nofollow noreferrer" data-module="govuk-skip-link">Exit this page</a>
   </div>
 </div>
 
