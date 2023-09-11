@@ -309,10 +309,10 @@
           <% if(field.name) { %>
           <% if(field.errors.length) { %>
           <% _.each(field.errors, function(error) { %>
-          <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
+          <a href="/#<%= field.name %>'" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
           <% }); %>
           <% } else { %>
-          <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= field.label %></a>
+          <a href="/#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= field.label %></a>
           <% } %>
           <% } else { %>
           <% _.each(field.errors, function(error) { %>
