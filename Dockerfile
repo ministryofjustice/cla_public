@@ -6,7 +6,7 @@ COPY . .
 RUN npm install
 RUN ./node_modules/.bin/gulp build
 
-FROM ${ALPINE_BASE_IMAGE}}
+FROM ${ALPINE_BASE_IMAGE}
 
 COPY --from=node_build ./cla_public/static/ /home/app/flask/cla_public/static/
 
