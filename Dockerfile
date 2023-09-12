@@ -1,10 +1,12 @@
-FROM node:10 as node_build
+ARG NODE_BASE_IMAGE="node:10"
+FROM ${NODE_BASE_IMAGE} as node_build
 
 COPY . .
 RUN npm install
 RUN ./node_modules/.bin/gulp build
 
-FROM amd64/alpine:3.15
+ARG ALPINE_BASE_IMAGE="alpine"
+FROM ${ALPINE_BASE_IMAGE}:3.15
 
 COPY --from=node_build ./cla_public/static/ /home/app/flask/cla_public/static/
 
