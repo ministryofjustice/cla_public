@@ -1,10 +1,10 @@
-FROM amd64/node:10 as node_build
+FROM node:10 as node_build
 
 COPY . .
 RUN npm install
 RUN ./node_modules/.bin/gulp build
 
-FROM arm64v8/alpine:3.15
+FROM amd64/alpine:3.15
 
 COPY --from=node_build ./cla_public/static/ /home/app/flask/cla_public/static/
 
