@@ -56,7 +56,6 @@
   {% endif %}
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
     {% if is_quick_exit_enabled(session) %}
-      <div class="laa-flee-button-container laa-flee-button-enabled">
         <div class="govuk-exit-this-page" data-module="govuk-exit-this-page">
           <a href="https://www.bbc.co.uk/weather" role="button" draggable="false"
              class="govuk-button govuk-button--warning govuk-exit-this-page__button govuk-js-exit-this-page-button"
@@ -64,7 +63,6 @@
             Exit this page
           </a>
         </div>
-      </div>
     {% endif %}
     <div class="govuk-grid-row">
       {% with flash_messages = get_flashed_messages() %}
