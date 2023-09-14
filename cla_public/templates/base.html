@@ -54,38 +54,29 @@
       {% endfor %}
     {% endif %}
   {% endif %}
-  <div class="laa-flee-button-container
-    {% if is_quick_exit_enabled(session) %}
-      laa-flee-button-enabled
-    {% endif %}
-    ">
-    <div class="laa-flee-button-position">
-      <a href="https://www.google.com" id="quick-exit" tabindex="-1" class="govuk-button govuk-button--warning laa-flee-button">
-        <strong>{{ _('Hide this page') }}</strong>
-        <span class="govuk-visually-hidden">{{ _('Or press escape key to hide this page') }}</span>
-      </a>
-      <p class="laa-quick-exit-info govuk-!-font-size-14">
-        ({{ _('Or press Esc key') }})
-      </p>
-    </div>
-    <p class="govuk-button laa-flee-button-sizing">
-      <strong>{{ _('Hide this page') }}</strong>
-    </p>
-  </div>
   <main class="govuk-main-wrapper " id="main-content" role="main" lang="{{ request.cookies.get('locale', 'en')[:2] }}">
+    {% if is_quick_exit_enabled(session) %}
+        <div class="govuk-exit-this-page" data-module="govuk-exit-this-page">
+          <a href="https://www.bbc.co.uk/weather" role="button" draggable="false"
+             class="govuk-button govuk-button--warning govuk-exit-this-page__button govuk-js-exit-this-page-button"
+             data-module="govuk-button">
+            Exit this page
+          </a>
+        </div>
+    {% endif %}
     <div class="govuk-grid-row">
-        {% with flash_messages = get_flashed_messages() %}
-          {% if flash_messages %}
-            <div class="laa-datastore_banner">
-              <ul class="laa-datastore_banner-list">
+      {% with flash_messages = get_flashed_messages() %}
+        {% if flash_messages %}
+          <div class="laa-datastore_banner">
+            <ul class="laa-datastore_banner-list">
               {% for message in flash_messages %}
                 <li class="laa-datastore_banner-item">{{ message }}</li>
               {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-        {% endwith %}
-        {% block session_timeout_dialog %} {% include "_modal-dialog.html" %} {% endblock %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block session_timeout_dialog %} {% include "_modal-dialog.html" %} {% endblock %}
       <div class="govuk-grid-column-full">
         {% block emergency_message_block %}
           {% if emergency_message_on %}
@@ -137,26 +128,6 @@
       $("#"+focusElement).focus();
     }
 
-    function fleeFromPage(fleeMethod) {
-      $("body").hide();
-      ga('moj.send', 'event', 'Quick-exit', 'Quick exit by '+fleeMethod, 'Quick exit from '+stripPII(window.location.href));
-      $.ajax({
-        url: '/session_end',
-      });
-      window.open("http://bbc.co.uk/weather", "_newtab");
-      window.location.replace("http://www.google.co.uk");
-    }
-    $("#quick-exit").on("click", function(e) {
-      fleeFromPage("mouse click");
-      e.preventDefault();
-      e.stopPropagation();
-    });
-    $(document).keyup(function(e) {
-      if ($('.laa-flee-button-enabled').length && e.keyCode == 27) { // 27 = escape key
-        fleeFromPage("escape key");
-      }
-    });
-
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
      * Build: http://modernizr.com/download/#-mq-teststyles
      */
@@ -167,32 +138,32 @@
     <script src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
   {% endif %}
 
-{% if config.MOJ_GTM_ID %}
-<!-- Start of google tag manager -->
-<script>
-  function add_gtm() {
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth={{config.MOJ_GTM_AUTH}}&gtm_preview={{config.MOJ_GTM_PREVIEW}}&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','{{config.MOJ_GTM_ID}}');
-  }
-  window.addEventListener("cookies_approved", function(event){
-    add_gtm()
-  });
-  if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
-    add_gtm();
-  }
+  {% if config.MOJ_GTM_ID %}
+    <!-- Start of google tag manager -->
+    <script>
+      function add_gtm() {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth={{config.MOJ_GTM_AUTH}}&gtm_preview={{config.MOJ_GTM_PREVIEW}}&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{config.MOJ_GTM_ID}}');
+      }
+      window.addEventListener("cookies_approved", function(event){
+        add_gtm()
+      });
+      if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
+        add_gtm();
+      }
 
-</script>
-<!-- End of google tag manager -->
-{% endif %}
+    </script>
+    <!-- End of google tag manager -->
+  {% endif %}
 
-<!-- Start of google analytics -->
-<script>
+  <!-- Start of google analytics -->
+  <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
     function stripPII(input) {
@@ -250,19 +221,19 @@
       <ul class="govuk-list govuk-error-summary__list">
         <% _.each(errors, function(field) { %>
         <li>
-            <% if(field.name) { %>
-              <% if(field.errors.length) { %>
-                <% _.each(field.errors, function(error) { %>
-                  <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
-                <% }); %>
-              <% } else { %>
-                <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= field.label %></a>
-              <% } %>
-            <% } else { %>
-              <% _.each(field.errors, function(error) { %>
-                <%= error %>
-              <% }); %>
-            <% } %>
+          <% if(field.name) { %>
+          <% if(field.errors.length) { %>
+          <% _.each(field.errors, function(error) { %>
+          <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
+          <% }); %>
+          <% } else { %>
+          <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= field.label %></a>
+          <% } %>
+          <% } else { %>
+          <% _.each(field.errors, function(error) { %>
+          <%= error %>
+          <% }); %>
+          <% } %>
         </li>
         <% }); %>
       </ul>
@@ -277,7 +248,7 @@
 
   <script type="text/html" id="fieldError">
     <% _.each(errors, function(error, index) { %>
-      <span class="govuk-error-message" id="error-<%= fieldName %>">
+    <span class="govuk-error-message" id="error-<%= fieldName %>">
         <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>
         <span class="cla-error-message"><%= error %></span>
       <% }); %>
