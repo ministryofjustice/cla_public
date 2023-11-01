@@ -1,6 +1,12 @@
 import logging
 
-from cla_public.config.common import GOVUK_NOTIFY_API_KEY, TESTING, DEBUG, EMAIL_ORCHESTRATOR_URL, USE_EMAIL_ORCHESTRATOR_FLAG
+from cla_public.config.common import (
+    GOVUK_NOTIFY_API_KEY,
+    TESTING,
+    DEBUG,
+    EMAIL_ORCHESTRATOR_URL,
+    USE_EMAIL_ORCHESTRATOR_FLAG,
+)
 from notifications_python_client.notifications import NotificationsAPIClient
 from notifications_python_client.errors import HTTPError
 import requests
@@ -55,8 +61,8 @@ class NotifyEmailOrchestrator(object):
 
     def send_email(self, email_address, template_id, personalisation=None):
         data = {
-            'email_address': email_address,
-            'template_id': template_id,
+            "email_address": email_address,
+            "template_id": template_id,
         }
         if personalisation:
             data["personalisation"] = personalisation
