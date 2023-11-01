@@ -60,10 +60,7 @@ class NotifyEmailOrchestrator(object):
         return base_url + self.endpoint
 
     def send_email(self, email_address, template_id, personalisation=None):
-        data = {
-            "email_address": email_address,
-            "template_id": template_id,
-        }
+        data = {"email_address": email_address, "template_id": template_id}
         if personalisation:
             data["personalisation"] = personalisation
 
