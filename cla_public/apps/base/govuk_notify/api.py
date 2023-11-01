@@ -60,11 +60,13 @@ class NotifyEmailOrchestrator(object):
         return base_url + self.endpoint
 
     def send_email(self, email_address, template_id, personalisation=None):
+        if not self.base_url:
+            return
         data = {"email_address": email_address, "template_id": template_id}
         if personalisation:
             data["personalisation"] = personalisation
 
-        response = requests.post(self.url(), data)
+        response = requests.post(self.url(), json=data)
 
         if response.status_code != 201:
             raise HTTPError(response)
