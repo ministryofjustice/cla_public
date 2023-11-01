@@ -64,7 +64,7 @@ class NotifyEmailOrchestrator(object):
         if personalisation:
             data["personalisation"] = personalisation
 
-        response = requests.post(self.url(), data)
+        response = requests.post(self.url(), json=data)
 
         if response.status_code != 201:
             raise HTTPError(response)
