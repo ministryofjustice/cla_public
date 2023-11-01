@@ -179,7 +179,7 @@ MAINTENANCE_MODE = os.environ.get("MAINTENANCE_MODE", "False").upper() == "TRUE"
 
 EMAIL_ORCHESTRATOR_URL = os.environ.get("EMAIL_ORCHESTRATOR_URL", "Not set")
 
-USE_EMAIL_ORCHESTRATOR_FLAG = os.environ.get("EMAIL_ORCHESTRATOR_FLAG", "False") == "True"
+USE_EMAIL_ORCHESTRATOR_FLAG = os.environ.get("USE_EMAIL_ORCHESTRATOR_FLAG", "False") == "True"
 
 
 def current_app_cache_factory(*args, **kwargs):
