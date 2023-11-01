@@ -313,6 +313,7 @@ workflows:
             branches:
               only:
                 - master
+                - feature/LGA-2768-Enable-communication-between-CLA_Public-and-Email-Orchestrator
       - staging_deploy:
           requires:
             - build
