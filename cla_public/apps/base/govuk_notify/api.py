@@ -1,10 +1,6 @@
 import logging
 
-from cla_public.config.common import (
-    TESTING,
-    DEBUG,
-    EMAIL_ORCHESTRATOR_URL,
-)
+from cla_public.config.common import TESTING, DEBUG, EMAIL_ORCHESTRATOR_URL
 from notifications_python_client.errors import HTTPError
 import requests
 
