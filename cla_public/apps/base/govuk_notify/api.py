@@ -1,13 +1,10 @@
 import logging
 
 from cla_public.config.common import (
-    GOVUK_NOTIFY_API_KEY,
     TESTING,
     DEBUG,
     EMAIL_ORCHESTRATOR_URL,
-    USE_EMAIL_ORCHESTRATOR_FLAG,
 )
-from notifications_python_client.notifications import NotificationsAPIClient
 from notifications_python_client.errors import HTTPError
 import requests
 
@@ -15,43 +12,13 @@ import requests
 log = logging.getLogger(__name__)
 
 
-class GovUkNotify(object):
-    def __new__(cls):
-        """
-        If this feature flag is set rather than creating a GovUkNotify object
-        a NotifyEmailOrchestrator object will be created instead, overloading the send_email method.
-        """
-        if USE_EMAIL_ORCHESTRATOR_FLAG:
-            return NotifyEmailOrchestrator()
-        return super(GovUkNotify, cls).__new__(cls)
-
-    def __init__(self):
-        self.notifications_client = None
-        if GOVUK_NOTIFY_API_KEY:
-            self.notifications_client = NotificationsAPIClient(GOVUK_NOTIFY_API_KEY)
-        elif not TESTING and not DEBUG:
-            raise ValueError("Missing API Key for GOVUK Notify")
-
-    def send_email(self, email_address, template_id, personalisation):
-        if not self.notifications_client:
-            log.info("No API key set, unable to send email")
-            return
-        try:
-            self.notifications_client.send_email_notification(
-                email_address=email_address,  # required string
-                template_id=template_id,  # required UUID string
-                personalisation=personalisation,
-            )
-        except HTTPError as error:
-            log.error("GovUkNotify error: {}".format(str(error)))
-            raise error
-
-
 class NotifyEmailOrchestrator(object):
     def __init__(self):
-        if not EMAIL_ORCHESTRATOR_URL:
+        self.base_url = None
+        if EMAIL_ORCHESTRATOR_URL:
+            self.base_url = EMAIL_ORCHESTRATOR_URL
+        elif not TESTING and not DEBUG:
             raise EnvironmentError("EMAIL_ORCHESTRATOR_URL is not set.")
-        self.base_url = EMAIL_ORCHESTRATOR_URL
         self.endpoint = "email"
 
     def url(self):
@@ -61,7 +28,7 @@ class NotifyEmailOrchestrator(object):
 
     def send_email(self, email_address, template_id, personalisation=None):
         if not self.base_url:
-            return
+            raise EnvironmentError("EMAIL_ORCHESTRATOR_URL is not set, unable to send email")
         data = {"email_address": email_address, "template_id": template_id}
         if personalisation:
             data["personalisation"] = personalisation

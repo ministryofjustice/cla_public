@@ -83,17 +83,8 @@ envVars:
     configmap:
       name: family-issue
       key: family-issue-on
-  GOVUK_NOTIFY_API_KEY:
-    secret:
-      name: govuk-notify
-      key: api-key
   EMAIL_ORCHESTRATOR_URL:
     configmap:
       name: notify-orchestrator
       key: url
-      optional: true
-  USE_EMAIL_ORCHESTRATOR_FLAG:
-    configmap:
-      name: feature-flags
-      key: use-email-orchestrator
       optional: true
