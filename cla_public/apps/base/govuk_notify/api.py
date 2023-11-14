@@ -23,8 +23,13 @@ class NotifyEmailOrchestrator(object):
         return base_url + self.endpoint
 
     def send_email(self, email_address, template_id, personalisation=None):
+        if TESTING or DEBUG:
+            log.info("Application is in TESTING mode, will not send email")
+            return
+        
         if not self.base_url:
-            raise EnvironmentError("EMAIL_ORCHESTRATOR_URL is not set, unable to send email")
+            log.error("EMAIL_ORCHESTRATOR_URL is not set, unable to send email")
+
         data = {"email_address": email_address, "template_id": template_id}
         if personalisation:
             data["personalisation"] = personalisation
