@@ -26,7 +26,7 @@ class NotifyEmailOrchestrator(object):
         if TESTING or DEBUG:
             log.info("Application is in TESTING mode, will not send email")
             return
-        
+
         if not self.base_url:
             log.error("EMAIL_ORCHESTRATOR_URL is not set, unable to send email")
 
