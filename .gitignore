@@ -55,6 +55,8 @@ venv
 *.iml
 *.iws
 
+.vscode
+
 .DS_Store
 
 # node

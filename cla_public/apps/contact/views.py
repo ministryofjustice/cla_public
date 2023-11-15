@@ -19,7 +19,7 @@ from cla_public.apps.checker.api import (
 )
 from cla_public.apps.checker.views import UpdatesMeansTest
 from cla_public.libs.views import AjaxOrNormalMixin, AllowSessionOverride, SessionBackedFormView, HasFormMixin
-from cla_public.apps.base.govuk_notify.api import GovUkNotify
+from cla_public.apps.base.govuk_notify.api import NotifyEmailOrchestrator
 from cla_public.config.common import GOVUK_NOTIFY_TEMPLATES
 from cla_public.libs.utils import get_locale
 
@@ -159,7 +159,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
             session.store_checker_details()
             if self.form.email.data:
-                govuk_notify = GovUkNotify()
+                govuk_notify = NotifyEmailOrchestrator()
                 create_and_send_confirmation_email(govuk_notify, self.form.data)
             return self.redirect(url_for("contact.confirmation"))
         except AlreadySavedApiError:
@@ -218,7 +218,7 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
     def on_valid_submit(self):
         if self.form.email.data:
             try:
-                govuk_notify = GovUkNotify()
+                govuk_notify = NotifyEmailOrchestrator()
                 create_and_send_confirmation_email(govuk_notify, self.form.data)
             except Exception:
                 self.form._fields["email"].errors.append(

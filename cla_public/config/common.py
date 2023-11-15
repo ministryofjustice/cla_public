@@ -109,7 +109,6 @@ MAIL_USERNAME = os.environ.get("SMTP_USER")
 MAIL_PASSWORD = os.environ.get("SMTP_PASSWORD")
 
 MAIL_DEFAULT_SENDER = ("Civil Legal Advice", "no-reply@civillegaladvice.service.gov.uk")
-GOVUK_NOTIFY_API_KEY = os.environ.get("GOVUK_NOTIFY_API_KEY")
 
 GOVUK_NOTIFY_TEMPLATES = {
     "PUBLIC_CALLBACK_NOT_REQUESTED": {
@@ -178,8 +177,6 @@ GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 MAINTENANCE_MODE = os.environ.get("MAINTENANCE_MODE", "False").upper() == "TRUE"
 
 EMAIL_ORCHESTRATOR_URL = os.environ.get("EMAIL_ORCHESTRATOR_URL")
-
-USE_EMAIL_ORCHESTRATOR_FLAG = os.environ.get("USE_EMAIL_ORCHESTRATOR_FLAG", "False") == "True"
 
 
 def current_app_cache_factory(*args, **kwargs):
