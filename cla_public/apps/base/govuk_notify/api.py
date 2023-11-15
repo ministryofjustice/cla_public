@@ -27,13 +27,13 @@ class NotifyEmailOrchestrator(object):
         Sends an email to the Email Orchestration API.
 
             Parameters:
-                email_address (str) - Email address of the reciever
+                email_address (str) - Email address of the receiver
                 template_id (str) - The GOV.UK Notify template id
                 personalisation (optional, dictionary) - The personalisation dictionary
 
             Returns:
-                send_api_request (bool) - Was the request sent, will return True if the request was made succesfully
-                                          will return False if the EMAIL_ORCHESTATOR_URL is not set or
+                send_api_request (bool) - Will return True if the request was made successfully
+                                          will return False if the EMAIL_ORCHESTRATOR_URL is not set or
                                           the application is in TESTING or DEBUG mode
         """
         if TESTING or DEBUG:
