@@ -9,6 +9,7 @@ var paths = {
     'cla_public/static-src/javascripts/**/*',
     '!cla_public/static-src/javascripts/templates.js',
   ],
+  jquery_scripts ['node_modules/jquery/dist/*'],
   vendor_scripts: ['cla_public/static-src/vendor/*'],
   images: 'cla_public/static-src/images/**/*',
   templates: 'cla_public/templates/**/*',
