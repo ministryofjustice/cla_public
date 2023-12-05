@@ -3,7 +3,7 @@
 ## Dependencies
 
 - [Virtualenv](http://www.virtualenv.org/en/latest/)
-- [Python 2.7](http://www.python.org/) (Can be installed using `brew`)
+- [Python 2.7.18](http://www.python.org/) (Can be installed using `pyenv`)
 - [nodejs.org](http://nodejs.org/) (v8.12 - can be installed using [nvm](https://github.com/creationix/nvm))
 - [docker](https://www.docker.com/) - Only required for running application from Docker
 
