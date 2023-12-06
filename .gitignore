@@ -64,6 +64,9 @@ node_modules/
 
 .sass-cache/
 
+# pyenv
+.python-version
+
 cla_public/config/local.py
 cla_public/static-src/vendor/**
 cla_public/static/
