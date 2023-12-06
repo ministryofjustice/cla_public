@@ -1,19 +1,21 @@
 # Installation and running
 
-## Dependencies
+## Running locally
+
+### Dependencies
 
 - [Virtualenv](http://www.virtualenv.org/en/latest/)
 - [Python 2.7.18](http://www.python.org/) (Can be installed using `pyenv`)
 - [nodejs.org](http://nodejs.org/) (v8.12 - can be installed using [nvm](https://github.com/creationix/nvm))
 - [docker](https://www.docker.com/) - Only required for running application from Docker
 
-## Manual Installation
+### Installation
 
 Clone the repository:
 
     git clone git@github.com:ministryofjustice/cla_public.git
 
-Next, create the environment and start it up:
+Create the python virtual environment, activate it, and install libraries in it:
 
     cd cla_public
     virtualenv env --prompt=\(cla_public\)
@@ -22,34 +24,59 @@ Next, create the environment and start it up:
 
     pip install -r requirements/generated/requirements-dev.txt  && pip install -r requirements/generated/requirements-no-deps.txt --no-deps
 
+Install NodeJS, packages and build the front-end assets:
+
     nvm install v8.12
-
     nvm use v8.12
-
     npm install -g gulp
-
     npm install
-
     gulp
 
 Create a ``local.py`` settings file from the example file:
 
     cp cla_public/config/local.py.example cla_public/config/local.py
 
-Next, you can run the management command like this:
+You can run the management command like this:
 
     ./manage.py --help
 
-You can run the server with:
+### Running
+
+Run the server with:
+
+    source env/bin/activate
+    BACKEND_BASE_URI=http://localhost:8010 CLA_PUBLIC_CONFIG=config/local.py ./manage.py runserver
+
+Point your browser at it: http://localhost:5000/
+
+You can check the cla_backend service (that it relies on) is configured and responding using:
+
+    curl http://localhost:5000/healthcheck.json
+
+### Environment variables
+
+These are the important env vars during development:
+
+| name | default | notes |
+|------|---------|-------|
+| BACKEND_BASE_URI | http://localhost:8000 | 'cla_backend' service's base URL. Provides 'checker' API etc. If you run cla_backend locally with docker-compose then it is likely at `http://localhost:8010` |
+| LAALAA_API_HOST | https://prod.laalaa.dsd.io | 'laalaa' service's base URL. Provides a legal advisor data API. |
+
+More env vars are used in deployed environments - see <helm_deploy/cla-public/values-production.yaml>
+
+### Config
+
+`common.py` is used by default, and has all the common config, but is not great to development because the DEBUG = False
+
+`local.py` is intended for development. (It's created during installation - see above.) Usage:
 
     CLA_PUBLIC_CONFIG=config/local.py ./manage.py runserver
 
-*OR*
+`testing.py` is designed for running tests. Usage:
 
     CLA_PUBLIC_CONFIG=config/testing.py ./manage.py runserver
 
-With the `testing` configuration, you can use `BACKEND_BASE_URI` and `LAALAA_API_HOST`
-environment variables to configure the dependent service API ports.
+`deployment.py` is for deployed environments
 
 ## Running locally on Kubernetes
 
