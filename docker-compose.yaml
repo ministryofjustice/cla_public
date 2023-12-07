@@ -8,6 +8,8 @@ services:
       -wait tcp://cla_public:8000
       -wait-retry-interval 10s
       -timeout 180s
+    depends_on:
+      - cla_public
 
   cla_public:
     build:

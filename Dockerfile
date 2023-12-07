@@ -72,3 +72,15 @@ CMD ["supervisord", "--configuration=/home/app/flask/docker/supervisord.conf"]
 #################################################
 
 FROM base AS development
+
+ARG NODE_BASE_IMAGE="node:10"
+FROM ${NODE_BASE_IMAGE} AS node_build
+
+
+COPY . .
+RUN npm install
+RUN ./node_modules/.bin/gulp build
+
+USER 1000
+EXPOSE 8000
+CMD ["docker/run_dev.sh"]
