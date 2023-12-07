@@ -1,6 +1,11 @@
+#################################################
+# BASE IMAGE USED BY ALL STAGES
+#################################################
+
 ARG NODE_BASE_IMAGE="node:10"
-ARG ALPINE_BASE_IMAGE="alpine:3.15"
-FROM ${NODE_BASE_IMAGE} as node_build
+ARG ALPINE_BASE_IMAGE=alpine:3.15
+FROM ${ALPINE_BASE_IMAGE} AS base
+FROM ${NODE_BASE_IMAGE} AS node_build
 
 COPY . .
 RUN npm install
@@ -61,3 +66,9 @@ USER 1000
 EXPOSE 8000
 
 CMD ["supervisord", "--configuration=/home/app/flask/docker/supervisord.conf"]
+
+#################################################
+# DEVELOPMENT
+#################################################
+
+FROM base AS development

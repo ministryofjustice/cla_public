@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  start_applications:
+    image: jwilder/dockerize
+    security_opt:
+      - no-new-privileges:true
+    command: >
+      -wait tcp://cla_public:8000
+      -wait-retry-interval 10s
+      -timeout 180s
+
+  cla_public:
+    build:
+      context: .
+      target: ${ENVIRONMENT:-development}
+    ports:
+      - "8012:8000"
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/home/app
+    container_name:
+      cla_public
+    environment:
+      ENV: local
+      DEBUG: "True"
+      SECRET_KEY: CHANGE_ME
+      BACKEND_BASE_URI: http://clabackend:8000
+      CLA_ENV: dev
+      ZENDESK_API_USERNAME: ""
+      ZENDESK_API_TOKEN: ""
+      SMTP_HOST: ""
+      SMTP_USER: ""
+      SMTP_PASSWORD: ""
+      RAVEN_CONFIG_DSN: ""
+      RAVEN_CONFIG_SITE: ""
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      LAALAA_API_HOST: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+      MOJ_GA_ID: "UA-XXXXXXXX-X1"
+      GDS_GA_ID: "UA-XXXXXXXX-X2"
+      GOOGLE_MAPS_API_KEY: AIzaSyBVsZmfkiRFNNMJnPraN_8sBW3Dj-BFFNs
+      OS_PLACES_API_KEY: ${OS_PLACES_API_KEY:-CHANGE_ME}
+      GOVUK_NOTIFY_API_KEY: ${GOVUK_NOTIFY_API_KEY:-}
+      TESTING: "True"
+      EMAIL_ORCHESTRATOR_URL: ${EMAIL_ORCHESTRATOR_URL:-}
+
