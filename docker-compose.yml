@@ -1,20 +1,11 @@
 version: "3.9"
-services:
-  start_applications:
-    image: jwilder/dockerize
-    security_opt:
-      - no-new-privileges:true
-    command: >
-      -wait tcp://cla_public:8000
-      -wait-retry-interval 10s
-      -timeout 180s
-    depends_on:
-      - cla_public
 
+services:
   cla_public:
     build:
-      context: .
-      target: ${ENVIRONMENT:-development}
+      context: "."
+      platforms:
+        - "linux/amd64"
     ports:
       - "8012:8000"
     stdin_open: true
