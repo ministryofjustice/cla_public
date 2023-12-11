@@ -10,15 +10,15 @@ services:
       - "8012:8000"
     stdin_open: true
     tty: true
-#    volumes:
-#      - .:/home/app
+    volumes:
+      - .:/home/app
     container_name:
       cla_public
     environment:
       ENV: local
       DEBUG: "True"
       SECRET_KEY: CHANGE_ME
-      BACKEND_BASE_URI: http://clabackend:8000
+      BACKEND_BASE_URI: http://host.docker.internal:8010
       CLA_ENV: dev
       ZENDESK_API_USERNAME: ""
       ZENDESK_API_TOKEN: ""
