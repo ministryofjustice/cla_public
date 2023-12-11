@@ -10,8 +10,8 @@ services:
       - "8012:8000"
     stdin_open: true
     tty: true
-    volumes:
-      - .:/home/app
+#    volumes:
+#      - .:/home/app
     container_name:
       cla_public
     environment:
