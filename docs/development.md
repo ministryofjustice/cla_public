@@ -25,3 +25,12 @@ To run them manually:
 ```
 pre-commit run --all-files
 ```
+
+# Running Docker
+
+Create an `.env` within your cla_public project.
+
+Copy everything in `.env.example` into you `env` file.
+
+Now call:
+`./run_local.sh`
