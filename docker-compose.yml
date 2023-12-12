@@ -5,8 +5,8 @@ services:
     build:
       context: .
       args:
-        - NODE_BASE_IMAGE=${NODE_BASE_IMAGE}
-        - ALPINE_BASE_IMAGE=${ALPINE_BASE_IMAGE}
+        NODE_BASE_IMAGE: ${NODE_BASE_IMAGE:-}
+        ALPINE_BASE_IMAGE: ${ALPINE_BASE_IMAGE:-}
       platforms:
         - "linux/amd64"
     ports:
