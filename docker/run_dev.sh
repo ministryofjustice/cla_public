@@ -4,4 +4,4 @@ set -e
 echo "I was called"
 
 # used to generate static files for local development.
-BACKEND_BASE_URI=http://localhost:8010 CLA_PUBLIC_CONFIG=config/local.py ./manage.py runserver
+./manage.py runserver --host=0.0.0.0 --port=5000

@@ -2,6 +2,8 @@ version: "3.9"
 
 services:
   cla_public:
+    command:
+      - "docker/run_dev.sh"
     build:
       context: .
       args:
@@ -10,11 +12,12 @@ services:
       platforms:
         - "linux/amd64"
     ports:
-      - "8012:8000"
+      - "8000:5000"
     stdin_open: true
     tty: true
     volumes:
       - .:/home/app/flask
+      - /home/app/flask/cla_public/static
     container_name:
       cla_public
     environment:
