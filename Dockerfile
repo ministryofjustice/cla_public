@@ -2,6 +2,10 @@ ARG NODE_BASE_IMAGE="node:10"
 ARG ALPINE_BASE_IMAGE="alpine:3.15"
 FROM ${NODE_BASE_IMAGE} as node_build
 
+# Use build-time ARGs to set environment variables
+ENV NODE_BASE_IMAGE=$NODE_BASE_IMAGE
+ENV ALPINE_BASE_IMAGE=$ALPINE_BASE_IMAGE
+
 COPY . .
 RUN npm install
 RUN ./node_modules/.bin/gulp build
@@ -59,5 +63,7 @@ RUN pybabel compile -f -d cla_public/translations
 
 USER 1000
 EXPOSE 8000
+
+RUN ls -l /home/app/flask/docker
 
 CMD ["supervisord", "--configuration=/home/app/flask/docker/supervisord.conf"]
