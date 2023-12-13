@@ -4,9 +4,8 @@ ARG BASE_REQUIREMENTS_FILE="requirements.txt"
 
 FROM ${NODE_BASE_IMAGE} as node_build
 COPY ./cla_public/static-src ./cla_public/static-src
-COPY ./package.json .
-COPY ./package-lock.json .
-RUN npm install --no-cache
+COPY ./package.json ./package-lock.json ./
+RUN npm install
 
 COPY ./gulpfile.js .
 COPY ./tasks ./tasks
