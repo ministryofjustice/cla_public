@@ -78,6 +78,10 @@ More env vars are used in deployed environments - see <helm_deploy/cla-public/va
 
 `deployment.py` is for deployed environments
 
+## Running locally in a Docker container
+
+Please see: [Development](development.md) on how to run docker locally for development and testing purposes.
+
 ## Running locally on Kubernetes
 
 ### Preparation
