@@ -177,9 +177,13 @@ ORGANISATION_CATEGORY_MAPPING = {
 SAFE_TO_CONTACT = "SAFE"
 
 CONTACT_PREFERENCE = Choices(
-    ("CALL", "call", _(u"I’ll call CLA")),
+    ("CALL", "call", _(u"I will call you")),
     ("CALLBACK", "callback", _(u"Call me back")),
     ("THIRDPARTY", "thirdparty", _(u"Call someone else instead of me")),
+)
+
+ANNOUNCE_PREFERENCE = Choices(
+    ("Yes", "true", _(u"Yes")), ("No", "false", _(u"No - do not say where you are calling from"))
 )
 
 LEGAL_ADVISER_SEARCH_PREFERENCE = (("location", _(u"Location")), ("organisation", _(u"Organisation")))

@@ -1911,7 +1911,7 @@ msgid ""
 msgstr ""
 
 #: cla_public/templates/interstitial.html:53
-msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"http://www.interpretingline.co.uk/vbooking.html\" rel=\"external\">British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
+msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"https://www.interpretingline.co.uk/EBooking\" rel=\"external\">British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
 msgstr ""
 
 #: cla_public/templates/interstitial.html:57
@@ -3593,7 +3593,7 @@ msgid ""
     "Ministry of Justice<br/>"
     "102 Petty France<br/>"
     "London<br/>"
-    "SW1H 9AJ <br/>"    
+    "SW1H 9AJ <br/>"
     "<a class="govuk-link email" href="mailto:data.access@justice.gov.uk">data.access@justice.gov.uk</a>"
 msgstr ""
 
@@ -3633,10 +3633,10 @@ msgstr ""
 msgid "Agreements we have with other organisations for sharing information;"
 msgstr ""
 
-msgid "" 
-    "Circumstances where we can pass on personal information without telling you, for example, to help with the prevention \n" 
+msgid ""
+    "Circumstances where we can pass on personal information without telling you, for example, to help with the prevention \n"
     "or detection of crime or to produce anonymised statistics;"
-msgstr ""    
+msgstr ""
 
 msgid "Our instructions to staff on how to collect, use or delete your personal information;"
 msgstr ""

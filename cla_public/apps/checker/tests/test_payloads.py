@@ -5,6 +5,7 @@ from cla_common import call_centre_availability
 from cla_common.constants import THIRDPARTY_RELATIONSHIP
 from flask import session
 from mock import patch
+
 import pytz
 from werkzeug.datastructures import MultiDict
 
