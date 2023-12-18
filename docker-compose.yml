@@ -38,7 +38,6 @@ services:
       LAALAA_API_HOST: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
       MOJ_GA_ID: "UA-XXXXXXXX-X1"
       GDS_GA_ID: "UA-XXXXXXXX-X2"
-      GOOGLE_MAPS_API_KEY: AIzaSyBVsZmfkiRFNNMJnPraN_8sBW3Dj-BFFNs
       OS_PLACES_API_KEY: ${OS_PLACES_API_KEY:-CHANGE_ME}
       GOVUK_NOTIFY_API_KEY: ${GOVUK_NOTIFY_API_KEY:-}
       TESTING: "True"
