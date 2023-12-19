@@ -225,7 +225,7 @@ def set_locale(locale):
         abort(404)
     response = redirect(next_url())
     expires = datetime.datetime.now() + datetime.timedelta(days=30)
-    response.set_cookie("locale", locale, expires=expires, secure=True, httponly=True, samesite="Lax")
+    response.set_cookie("locale", locale, expires=expires, secure=True, httponly=True)
     return response
 
 
