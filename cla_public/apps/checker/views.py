@@ -47,7 +47,7 @@ def add_header(response):
     """
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0"
     response.headers["Pragma"] = "no-cache"
-    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers["X-Content-Type-Options"] = "nosniff"
     return response
 
 
