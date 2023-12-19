@@ -9,6 +9,7 @@ services:
       args:
         NODE_BASE_IMAGE: ${NODE_BASE_IMAGE:-}
         ALPINE_BASE_IMAGE: ${ALPINE_BASE_IMAGE:-}
+        BASE_REQUIREMENTS_FILE: "requirements/generated/requirements-dev.txt"
       platforms:
         - "linux/amd64"
     ports:
