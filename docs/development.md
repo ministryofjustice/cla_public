@@ -25,3 +25,19 @@ To run them manually:
 ```
 pre-commit run --all-files
 ```
+
+# Running Docker locally
+
+## Before beginning
+You will need to have `cla_backend` Docker containers up and running.
+
+`cla_backend` has its own Docker containers which can be run locally.
+
+## Create an env file
+Create an `.env` within your `cla_public` project.
+
+Copy everything in `.env.example` into you `env` file.
+
+## Calling run script
+Now call within main directory:
+`./run_local.sh`

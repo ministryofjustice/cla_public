@@ -1,12 +1,18 @@
 ARG NODE_BASE_IMAGE="node:10"
 ARG ALPINE_BASE_IMAGE="alpine:3.15"
-FROM ${NODE_BASE_IMAGE} as node_build
+ARG BASE_REQUIREMENTS_FILE="requirements.txt"
 
-COPY . .
+FROM ${NODE_BASE_IMAGE} as node_build
+COPY ./cla_public/static-src ./cla_public/static-src
+COPY ./package.json ./package-lock.json ./
 RUN npm install
+
+COPY ./gulpfile.js .
+COPY ./tasks ./tasks
 RUN ./node_modules/.bin/gulp build
 
 FROM ${ALPINE_BASE_IMAGE}
+ARG BASE_REQUIREMENTS_FILE
 
 COPY --from=node_build ./cla_public/static/ /home/app/flask/cla_public/static/
 
@@ -43,7 +49,7 @@ WORKDIR /home/app/flask
 
 COPY requirements.txt .
 COPY requirements/ requirements/
-RUN pip install -r requirements.txt &&  pip install -r requirements/generated/requirements-no-deps.txt --no-deps
+RUN pip install -r ${BASE_REQUIREMENTS_FILE} &&  pip install -r requirements/generated/requirements-no-deps.txt --no-deps
 
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 

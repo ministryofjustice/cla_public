@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  cla_public:
+    command:
+      - "docker/run_dev.sh"
+    build:
+      context: .
+      args:
+        NODE_BASE_IMAGE: ${NODE_BASE_IMAGE:-}
+        ALPINE_BASE_IMAGE: ${ALPINE_BASE_IMAGE:-}
+        BASE_REQUIREMENTS_FILE: "requirements/generated/requirements-dev.txt"
+      platforms:
+        - "linux/amd64"
+    ports:
+      - "8000:5000"
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/home/app/flask
+      - /home/app/flask/cla_public/static
+    container_name:
+      cla_public
+    environment:
+      ENV: local
+      DEBUG: "True"
+      SECRET_KEY: CHANGE_ME
+      BACKEND_BASE_URI: http://host.docker.internal:8010
+      CLA_ENV: dev
+      ZENDESK_API_USERNAME: ""
+      ZENDESK_API_TOKEN: ""
+      SMTP_HOST: ""
+      SMTP_USER: ""
+      SMTP_PASSWORD: ""
+      RAVEN_CONFIG_DSN: ""
+      RAVEN_CONFIG_SITE: ""
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      LAALAA_API_HOST: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+      MOJ_GA_ID: "UA-XXXXXXXX-X1"
+      GDS_GA_ID: "UA-XXXXXXXX-X2"
+      OS_PLACES_API_KEY: ${OS_PLACES_API_KEY:-CHANGE_ME}
+      GOVUK_NOTIFY_API_KEY: ${GOVUK_NOTIFY_API_KEY:-}
+      TESTING: "True"
+      EMAIL_ORCHESTRATOR_URL: ${EMAIL_ORCHESTRATOR_URL:-}
+
