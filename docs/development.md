@@ -31,7 +31,7 @@ pre-commit run --all-files
 ## Before beginning
 You will need to have `cla_backend` Docker containers up and running.
 
-`cla_backend` has it's on Docker containers which can be run locally.
+`cla_backend` has its own Docker containers which can be run locally.
 
 ## Create an env file
 Create an `.env` within your `cla_public` project.
