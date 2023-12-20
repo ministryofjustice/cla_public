@@ -1281,7 +1281,7 @@ msgstr "Trefnu amser i ffonio’n ôl"
 
 #: cla_public/apps/contact/forms.py:34
 msgid "British Sign Language – webcam"
-msgstr ""
+msgstr "Iaith Arwyddo Brydeinig  – webcam"
 
 #: cla_public/apps/contact/forms.py:35
 msgid "Minicom – for textphone users"
