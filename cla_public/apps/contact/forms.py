@@ -146,7 +146,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     )
     email = StringField(
         _(u"Email"),
-        description=_(u"If you add your email we will send you the reference number when you submit your details"),
+        description=_(u"We will use this to send your reference number."),
         validators=[
             Length(max=255, message=_(u"Your address must be 255 characters or less")),
             EmailValidator(message=_(u"Invalid email address")),

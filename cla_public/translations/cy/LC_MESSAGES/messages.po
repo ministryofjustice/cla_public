@@ -505,8 +505,8 @@ msgid "War Pension"
 msgstr "Pensiwn Rhyfel"
 
 #: cla_public/apps/checker/constants.py:155
-msgid "I’ll call CLA"
-msgstr "Mi wnâi ffonio’r CLA"
+msgid "I will call you"
+msgstr "Byddaf yn galw chi"
 
 #: cla_public/apps/checker/constants.py:156
 msgid "Call me back"
@@ -1596,8 +1596,8 @@ msgid "Email"
 msgstr "E-bost"
 
 #: cla_public/apps/contact/forms.py:140
-msgid "If you add your email we will send you the reference number when you submit your details"
-msgstr "Os byddwch yn ychwanegu eich cyfeiriad e-bost, byddwn yn anfon y cyfeirnod atoch pan fyddwch yn cyflwyno eich manylion"
+msgid "We will use this to send your reference number."
+msgstr "Byddwn yn defnyddio hwn i anfon eich cyfeirnod i chi.  "
 
 #: cla_public/apps/contact/forms.py:143 cla_public/apps/contact/forms.py:204
 msgid "Invalid email address"
@@ -2030,8 +2030,8 @@ msgid "You can also ask us to call you back using the form below, which is free.
 msgstr "Gallwch hefyd ofyn i ni eich ffonio’n ôl gan ddefnyddio’r ffurflen isod, sydd yn rhad ac am ddim."
 
 #: cla_public/templates/contact.html:44
-msgid "Please submit your details to get in touch with Civil Legal Advice (CLA)."
-msgstr "Cyflwynwch eich manylion i gysylltu â Chyngor Cyfreithiol Sifil (CLA)."
+msgid "Civil Legal Advice will check if you can get legal aid and help you contact the right legal adviser. If you cannot get legal aid, we’ll tell you about other help you can get."
+msgstr "Bydd Cyngor Cyfreithiol Sifil yn gwirio os allwch chi gael cymorth cyfreithiol, a byddan nhw yn eich helpu i gysylltu efo’r cynghorydd cyfreithiol cywir. Os na allwch chi gael cymorth cyfreithiol, mi fydden ni’n hysbysu chi am gymorth arall sydd ar gael."
 
 #: cla_public/templates/contact.html:47
 #: cla_public/templates/checker/result/eligible.html:30
@@ -2042,14 +2042,14 @@ msgstr "cyfraddau galwadau"
 #, python-format
 msgid ""
 "\n"
-"          You can choose to contact CLA yourself and speak to someone immediately\n"
-"          (this is an 0345 number - %(call_charges_link)s apply) or ask us to call you back, which is free.\n"
+"          You can call Civil Legal Advice yourself - this is an 0345 number, so %(call_charges_link)s apply.\n"
+"          Or you can ask us to call you back, which is free.\n"
 "        "
-msgstr "Gallwch ddewis cysylltu â CLA eich hun a siarad â rhywun ar unwaith (mae hwn yn rhif 0345 - %(call_charges_link)s) neu gallwch ofyn i ni eich ffonio yn ôl, sydd yn rhad ac am ddim."
+msgstr "Gallwch chi alw Cyngor Cyfreithiol Sifil eich hun – mae hon yn rhif 0345, felly bydd %(call_charges_link)s tâl galwad. Neu mi allwch chi ofyn i ni alw chi yn ôl, sydd am ddim."
 
 #: cla_public/templates/contact.html:53
-msgid "You’ll need to provide evidence of the financial information (if any) you’ve given us through this service."
-msgstr "Bydd angen i chi ddarparu tystiolaeth o’r wybodaeth ariannol yr ydych wedi ei rhoi i ni (os o gwbl) drwy’r gwasanaeth hwn."
+msgid "We’ll ask questions about your legal problem and your financial situation. You might need to provide evidence of any financial information you give us."
+msgstr "Byddwn yn cyflwyno rhif ffôn Cymorth Cyfreithiol Sifil ar ôl i chi danfon eich manylion i ni."
 
 #: cla_public/templates/contact.html:78
 msgid "We’ll give you the CLA phone number when you submit your details below."

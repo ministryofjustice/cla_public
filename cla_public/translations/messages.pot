@@ -1065,7 +1065,7 @@ msgid "Email"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:140
-msgid "If you add your email we will send you the reference number when you submit your details"
+msgid "We will use this to send your reference number."
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:143 cla_public/apps/contact/forms.py:204
@@ -1436,7 +1436,7 @@ msgid "You’ll need to provide evidence of the financial information (if any) y
 msgstr ""
 
 #: cla_public/templates/contact.html:78
-msgid "We’ll give you the CLA phone number when you submit your details below."
+msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
 msgstr ""
 
 #: cla_public/templates/contact.html:115
