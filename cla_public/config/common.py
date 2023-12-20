@@ -48,13 +48,6 @@ LOGGING = {
 
 SECRET_KEY = os.environ.get("SECRET_KEY", os.urandom(24))
 
-# Should be True when served over HTTPS, False otherwise (or CSRF will break)
-SESSION_COOKIE_SECURE = True
-
-SESSION_COOKIE_HTTPONLY = True
-
-SESSION_COOKIE_SAMESITE = "Strict"
-
 PERMANENT_SESSION_LIFETIME = datetime.timedelta(minutes=5)
 
 APP_SETTINGS = {
