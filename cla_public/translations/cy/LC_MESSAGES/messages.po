@@ -3837,31 +3837,31 @@ msgstr "Oriau agor"
 #: cla_public/templates/macros/subform.html:16
 #: cla_public/templates/macros/subform.html:62
 msgid "We’ll call during the time you choose."
-msgstr ""
+msgstr "Byddwn yn galw chi yn ystod yr amser rydych chi’n dewis"
 
 #: cla_public/templates/macros/subform.html:17
 #: cla_public/templates/macros/subform.html:63
 msgid "The call will come from an unknown or withheld number."
-msgstr ""
+msgstr "Bydd y galwad yn dod o rif anghyfarwydd neu wedi ei ddal yn ôl"
 
 #: cla_public/templates/macros/subform.html:18
 #: cla_public/templates/macros/subform.html:64
 msgid "If you miss the call, we will call 2 more times in the next few days."
-msgstr ""
+msgstr "Os ydych chi’n colli’r galwad, byddwn yn galw chi yn ôl dwywaith eto dros y dyddiau nesaf."
 
 #: cla_public/templates/macros/subform.html:19
 #: cla_public/templates/macros/subform.html:65
 msgid "We will not leave a message."
-msgstr ""
+msgstr "Byddwn ni ddim yn gadael neges."
 
 #: cla_public/templates/macros/subform.html:20
 #: cla_public/templates/macros/subform.html:66
 msgid "If you miss all 3 calls, or if you need urgent advice, call us on:"
-msgstr ""
+msgstr "If you miss all 3 calls, or if you need urgent advice, call us on:"
 
 #: cla_public/templates/macros/subform.html:61
 msgid "You must be with the person when we call."
-msgstr ""
+msgstr "Byddwn yn galw chi yn ystod yr amser rydych chi’n dewis"
 
 #: cla_public/templates/macros/subform.html:99
 #: cla_public/templates/macros/subform.html:116
