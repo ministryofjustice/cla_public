@@ -1341,7 +1341,7 @@ msgstr "Dewiswch amser i ni eich ffonio"
 
 #: cla_public/apps/contact/forms.py:73
 msgid "Can we say that we're calling from Civil Legal Advice?"
-msgstr ""
+msgstr "Gallwn ni ddweud ein bod ni’n galw o Gymorth Cyfreithiol Sifil?"
 
 #: cla_public/apps/contact/forms.py:75
 msgid "Select if we can say that we’re calling from Civil Legal Advice"
@@ -3857,7 +3857,7 @@ msgstr "Byddwn ni ddim yn gadael neges."
 #: cla_public/templates/macros/subform.html:20
 #: cla_public/templates/macros/subform.html:66
 msgid "If you miss all 3 calls, or if you need urgent advice, call us on:"
-msgstr "If you miss all 3 calls, or if you need urgent advice, call us on:"
+msgstr "Os gollwch chi'r tair galwad, neu os rydych chi angen gymorth ar brys, galwch ni ar y rhif canlynol:"
 
 #: cla_public/templates/macros/subform.html:61
 msgid "You must be with the person when we call."
