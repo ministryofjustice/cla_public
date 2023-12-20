@@ -54,8 +54,10 @@
         {% endtrans %}
       </p>
       <p class="govuk-body">
-        {{ _('We’ll ask questions about your legal problem and your financial situation.
-        You might need to provide evidence of any financial information you give us.') }}
+        {% trans %}
+          We’ll ask questions about your legal problem and your financial situation.
+          You might need to provide evidence of any financial information you give us.
+        {% endtrans %}
       </p>
     {% endif %}
   {% endblock %}

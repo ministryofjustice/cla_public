@@ -2030,7 +2030,8 @@ msgid "You can also ask us to call you back using the form below, which is free.
 msgstr "Gallwch hefyd ofyn i ni eich ffonio’n ôl gan ddefnyddio’r ffurflen isod, sydd yn rhad ac am ddim."
 
 #: cla_public/templates/contact.html:44
-msgid "Civil Legal Advice will check if you can get legal aid and help you contact the right legal adviser. If you cannot get legal aid, we’ll tell you about other help you can get."
+msgid "Civil Legal Advice will check if you can get legal aid and help you contact the right legal adviser.
+          If you cannot get legal aid, we’ll tell you about other help you can get."
 msgstr "Bydd Cyngor Cyfreithiol Sifil yn gwirio os allwch chi gael cymorth cyfreithiol, a byddan nhw yn eich helpu i gysylltu efo’r cynghorydd cyfreithiol cywir. Os na allwch chi gael cymorth cyfreithiol, mi fydden ni’n hysbysu chi am gymorth arall sydd ar gael."
 
 #: cla_public/templates/contact.html:47
@@ -2048,7 +2049,8 @@ msgid ""
 msgstr "Gallwch chi alw Cyngor Cyfreithiol Sifil eich hun – mae hon yn rhif 0345, felly bydd %(call_charges_link)s tâl galwad. Neu mi allwch chi ofyn i ni alw chi yn ôl, sydd am ddim."
 
 #: cla_public/templates/contact.html:53
-msgid "We’ll ask questions about your legal problem and your financial situation. You might need to provide evidence of any financial information you give us."
+msgid "We’ll ask questions about your legal problem and your financial situation.
+          You might need to provide evidence of any financial information you give us."
 msgstr "Byddwn yn cyflwyno rhif ffôn Cymorth Cyfreithiol Sifil ar ôl i chi danfon eich manylion i ni."
 
 #: cla_public/templates/contact.html:78
