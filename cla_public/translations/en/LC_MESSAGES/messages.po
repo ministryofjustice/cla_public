@@ -369,24 +369,24 @@ msgstr ""
 
 #: cla_public/apps/checker/constants.py:180
 msgid "I will call you"
-msgstr ""
+msgstr "Byddaf yn galw chi"
 
 #: cla_public/apps/checker/constants.py:181
 msgid "Call me back"
-msgstr ""
+msgstr "Galwch fi yn ôl"
 
 #: cla_public/apps/checker/constants.py:182
 msgid "Call someone else instead of me"
-msgstr ""
+msgstr "Galwch rywun yn fy lle"
 
 #: cla_public/apps/checker/constants.py:186
 #: cla_public/apps/checker/fields.py:121
 msgid "Yes"
-msgstr ""
+msgstr "Gallwch"
 
 #: cla_public/apps/checker/constants.py:186
 msgid "No - do not say where you are calling from"
-msgstr ""
+msgstr "Na allwch – peidiwch â dweud o le rydych chi’n galw"
 
 #: cla_public/apps/checker/constants.py:189
 msgid "Location"
@@ -1281,19 +1281,19 @@ msgstr ""
 
 #: cla_public/apps/contact/forms.py:35
 msgid "Minicom – for textphone users"
-msgstr ""
+msgstr "'Minicom’ – ar gyfer pobl sydd yn defnyddio ‘textphone'"
 
 #: cla_public/apps/contact/forms.py:36
 msgid "Text Relay – for people with hearing or speech impairments"
-msgstr ""
+msgstr "Ailadrodd testun – ar gyfer pobl efo amhariad llafar neu glyw"
 
 #: cla_public/apps/contact/forms.py:37
 msgid "Welsh"
-msgstr ""
+msgstr "Cymraeg"
 
 #: cla_public/apps/contact/forms.py:38
 msgid "Other language"
-msgstr ""
+msgstr "Iaith arall"
 
 #: cla_public/apps/contact/forms.py:39
 msgid "Choose a language"
@@ -1301,7 +1301,7 @@ msgstr ""
 
 #: cla_public/apps/contact/forms.py:40
 msgid "Any other communication needs"
-msgstr ""
+msgstr "Unrhyw anghenion cyfathrebu eraill"
 
 #: cla_public/apps/contact/forms.py:42
 msgid "Other communication needs"
@@ -1321,7 +1321,7 @@ msgstr ""
 
 #: cla_public/apps/contact/forms.py:64 cla_public/apps/contact/forms.py:98
 msgid "Enter the full number, including the area code. For example, 01632 960 1111."
-msgstr ""
+msgstr "Rhowch y rhif cyfan, gan gynnwys côd yr ardal. Er enghraifft, 01632 960 1111."
 
 #: cla_public/apps/contact/forms.py:66 cla_public/apps/contact/forms.py:100
 msgid "Tell us what number to ring"
@@ -1333,19 +1333,19 @@ msgstr ""
 
 #: cla_public/apps/contact/forms.py:70 cla_public/apps/contact/forms.py:104
 msgid "Select a time for us to call"
-msgstr ""
+msgstr "Dewiswch amser i ni alw"
 
 #: cla_public/apps/contact/forms.py:73
 msgid "Can we say that we're calling from Civil Legal Advice?"
-msgstr ""
+msgstr "Gallwn ni ddweud ein bod ni’n galw o Gymorth Cyfreithiol Sifil?"
 
 #: cla_public/apps/contact/forms.py:75
 msgid "Select if we can say that we’re calling from Civil Legal Advice"
-msgstr ""
+msgstr "Dewiswch os allwn ni ddweud ein bod ni’n galw o Gymorth Cyfreithiol Sifil"
 
 #: cla_public/apps/contact/forms.py:85
 msgid "Full name of the person to call"
-msgstr ""
+msgstr "Enw cyfan y person i alw"
 
 #: cla_public/apps/contact/forms.py:87
 msgid "Their full name must be 400 characters or less"
@@ -1944,7 +1944,7 @@ msgstr ""
 #: cla_public/templates/base.html:220
 #: cla_public/templates/macros/element.html:18
 msgid "There is a problem"
-msgstr ""
+msgstr "Mae yna broblem"
 
 #: cla_public/templates/base.html:252 cla_public/templates/contact.html:178
 #: cla_public/templates/contact.html:195 cla_public/templates/contact.html:202
@@ -2039,7 +2039,7 @@ msgstr ""
 
 #: cla_public/templates/contact.html:84
 msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
-msgstr ""
+msgstr "Byddwn yn cyflwyno rhif ffôn Cymorth Cyfreithiol Sifil ar ôl i chi danfon eich manylion i ni."
 
 #: cla_public/templates/contact.html:120
 #, python-format
@@ -3833,31 +3833,31 @@ msgstr ""
 #: cla_public/templates/macros/subform.html:16
 #: cla_public/templates/macros/subform.html:62
 msgid "We’ll call during the time you choose."
-msgstr ""
+msgstr "Byddwn yn galw chi yn ystod yr amser rydych chi’n dewis"
 
 #: cla_public/templates/macros/subform.html:17
 #: cla_public/templates/macros/subform.html:63
 msgid "The call will come from an unknown or withheld number."
-msgstr ""
+msgstr "Bydd y galwad yn dod o rif anghyfarwydd neu wedi ei ddal yn ôl"
 
 #: cla_public/templates/macros/subform.html:18
 #: cla_public/templates/macros/subform.html:64
 msgid "If you miss the call, we will call 2 more times in the next few days."
-msgstr ""
+msgstr "Os ydych chi’n colli’r galwad, byddwn yn galw chi yn ôl dwywaith eto dros y dyddiau nesaf."
 
 #: cla_public/templates/macros/subform.html:19
 #: cla_public/templates/macros/subform.html:65
 msgid "We will not leave a message."
-msgstr ""
+msgstr "Byddwn ni ddim yn gadael neges."
 
 #: cla_public/templates/macros/subform.html:20
 #: cla_public/templates/macros/subform.html:66
 msgid "If you miss all 3 calls, or if you need urgent advice, call us on:"
-msgstr ""
+msgstr "Os gollwch chi'r tair galwad, neu os rydych chi angen gymorth ar brys, galwch ni ar y rhif canlynol:"
 
 #: cla_public/templates/macros/subform.html:61
 msgid "You must be with the person when we call."
-msgstr ""
+msgstr "Byddwn yn galw chi yn ystod yr amser rydych chi’n dewis"
 
 #: cla_public/templates/macros/subform.html:99
 #: cla_public/templates/macros/subform.html:116
@@ -4488,7 +4488,7 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "British Sign Language – Webcam"
-#~ msgstr ""
+#~ msgstr "Iaith Arwyddo Brydeinig  – webcam"
 
 #~ msgid "Language required"
 #~ msgstr ""
