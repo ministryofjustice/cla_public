@@ -37,7 +37,7 @@ def create_app(config_file=None):
     else:
         app.config.from_envvar("CLA_PUBLIC_CONFIG")
 
-    app.config.update(SESSION_COOKIE_SECURE=True, SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Lax")
+    app.config.update(SESSION_COOKIE_SECURE=True, SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Strict")
 
     app.babel = Babel(app)
     app.babel.localeselector(get_locale)
