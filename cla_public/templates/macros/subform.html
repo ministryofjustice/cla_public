@@ -13,16 +13,14 @@
       controlled_by=form.contact_type,
       control_value='callback') %}
     <ul class="govuk-list govuk-list--bullet">
-      {% trans %}
-      <li>{{ _('We’ll call during the time you choose.') }}</li>
-      <li>{{ _('The call will come from an unknown or withheld number.') }}</li>
-      <li>{{ _('If you miss the call, we will call 2 more times in the next few days.') }}</li>
-      <li>{{ _('We will not leave a message.') }}</li>
-      <li>{{ _('If you miss all 3 calls, or if you need urgent advice, call us on:') }}
+      <li>{% trans %}We’ll call during the time you choose.{% endtrans %}</li>
+      <li>{% trans %}The call will come from an unknown or withheld number.{% endtrans %}</li>
+      <li>{% trans %}If you miss the call, we will call 2 more times in the next few days.{% endtrans %}</li>
+      <li>{% trans %}We will not leave a message.{% endtrans %}</li>
+      <li>{% trans %}If you miss all 3 calls, or if you need urgent advice, call us on:{% endtrans %}
         <br>
         <a href="tel:0345 345 4345">0345 345 4345</a>.
       </li>
-      {% endtrans %}
     </ul>
     {{ Form.group(form.callback.contact_number, field_attrs={'class': '', 'autocomplete': 'tel', 'type': 'tel'}) }}
     {{ time_picker(form.callback.time) }}
@@ -60,17 +58,15 @@
       controlled_by=form.contact_type,
       control_value='thirdparty') %}
     <ul class="govuk-list govuk-list--bullet">
-      {% trans %}
-      <li>{{ _('You must be with the person when we call.') }}</li>
-      <li>{{ _('We’ll call during the time you choose.') }}</li>
-      <li>{{ _('The call will come from an unknown or withheld number.') }}</li>
-      <li>{{ _('If you miss the call, we will call 2 more times in the next few days.') }}</li>
-      <li>{{ _('We will not leave a message.') }}</li>
-      <li>{{ _('If you miss all 3 calls, or if you need urgent advice, call us on:') }}
+      <li>{% trans %}You must be with the person when we call.{% endtrans %}</li>
+      <li>{% trans %}We’ll call during the time you choose.{% endtrans %}</li>
+      <li>{% trans %}The call will come from an unknown or withheld number.{% endtrans %}</li>
+      <li>{% trans %}If you miss the call, we will call 2 more times in the next few days.{% endtrans %}</li>
+      <li>{% trans %}We will not leave a message.{% endtrans %}</li>
+      <li>{% trans %}If you miss all 3 calls, or if you need urgent advice, call us on:{% endtrans %}
         <br>
         <a href="tel:0345 345 4345">0345 345 4345</a>.
       </li>
-      {% endtrans %}
     </ul>
     {{ Form.group(form.thirdparty.full_name, field_attrs={'class': ''}) }}
     {{ Form.group(form.thirdparty.relationship, field_attrs={'class': ''}) }}
