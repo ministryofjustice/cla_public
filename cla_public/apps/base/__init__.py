@@ -20,7 +20,7 @@ def detect_user_locale():
             if request_args:
                 path = "%s?%s" % (path, urllib.urlencode(request_args))
             response = redirect(path)
-            response.set_cookie("locale", locale, expires=expires, samesite="Lax", secure=True, httponly=True)
+            response.set_cookie("locale", locale, expires=expires)
             return response
 
 

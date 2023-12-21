@@ -6,6 +6,7 @@ import logging.config
 import os
 
 from flask import Flask, render_template
+from flask_talisman import Talisman
 from flask.ext.babel import Babel
 from flask.ext.cache import Cache
 from flask.ext.mail import Mail
@@ -31,6 +32,8 @@ sentry_sdk.init(
 
 def create_app(config_file=None):
     app = Flask(__name__)
+    # Adds security to Flask
+    Talisman(app)
     app = change_jinja_templates(app)
     if config_file:
         app.config.from_pyfile(config_file)
