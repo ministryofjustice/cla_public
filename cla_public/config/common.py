@@ -1,6 +1,5 @@
 import os
 import datetime
-import base64
 
 from flask.ext.babel import lazy_gettext as _
 from cla_common.services import CacheAdapter, TranslationAdapter
