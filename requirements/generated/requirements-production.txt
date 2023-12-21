@@ -47,6 +47,8 @@ flask-markdown==0.3
     # via -r requirements/source/requirements-base.in
 flask-script==2.0.5
     # via -r requirements/source/requirements-base.in
+flask-talisman==1.1.0
+    # via -r requirements/source/requirements-base.in
 flask-wtf==0.10.2
     # via -r requirements/source/requirements-base.in
 flask==0.10.1
