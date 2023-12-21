@@ -180,11 +180,11 @@
 {% block javascripts %}
   {{ super() }}
 
-  <script type="text/html" id="printButtonTemplate">
+  <script nonce="{{ csp_nonce() }}" type="text/html" id="printButtonTemplate">
     <button type="button" class="govuk-!-margin-top-6 govuk-!-font-size-19 govuk-link laa-confirmation-button-link ">{{ _('Print this page') }}</button>
   </script>
 
-  <script>
+  <script nonce="{{ csp_nonce() }}" nonce="{{ csp_nonce() }}">
     ga('send', 'event', 'confirmation', 'survey', '{{ _('Finish') }}');
     ga('send', 'event', 'confirmation', 'contact-type', '{{ session.stored.contact_type }}');
     {% if session.stored.adaptations %}
