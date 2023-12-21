@@ -33,7 +33,62 @@ sentry_sdk.init(
 def create_app(config_file=None):
     app = Flask(__name__)
     # Adds security to Flask
-    Talisman(app)
+    csp = {
+        "default-src": ["'self'", "*.googletagmanager.com"],
+        "img-src": [
+            "'self'",
+            "*.googleapis.com",
+            "*.gstatic.com",
+            "*.google.com",
+            "*.googleusercontent.com",
+            "data:",
+            "*.googletagmanager.com",
+            "*.analytics.google.com",
+            "*.google.co.uk",
+            "*.g.doubleclick.net",
+            "*.google-analytics.com",
+        ],
+        "object-src": "'self'",
+        "script-src": [
+            "'self'",
+            "*.googleapis.com",
+            "*.gstatic.com",
+            "*.google.com",
+            "*.ggpht.com",
+            "*.googleusercontent.com",
+            "blob:",
+            "*.googletagmanager.com",
+            "*.analytics.google.com",
+            "*.g.doubleclick.net",
+            "*.google.co.uk",
+        ],
+        "frame-src": "*.google.com",
+        "connect-src": [
+            "'self'",
+            "*.googleapis.com",
+            "*.google.com",
+            "*.gstatic.com",
+            "data:",
+            "blob:",
+            "*.google-analytics.com",
+            "*.analytics.google.com",
+            "*.googletagmanager.com",
+            "*.g.doubleclick.net",
+            "*.google.co.uk",
+        ],
+        "font-src": ["'self'", "data:", "fonts.gstatic.com"],
+        "style-src": [
+            "'self'",
+            "'unsafe-inline'",
+            "*.googleapis.com",
+            "*.google.com",
+            "*.google.co.uk",
+            "fonts.googleapis.com",
+            "*.gstatic.com",
+        ],
+        "worker-src": "blob:",
+    }
+    Talisman(app, content_security_policy=csp)
     app = change_jinja_templates(app)
     if config_file:
         app.config.from_pyfile(config_file)
