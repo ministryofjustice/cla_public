@@ -1944,7 +1944,7 @@ msgstr ""
 #: cla_public/templates/base.html:220
 #: cla_public/templates/macros/element.html:18
 msgid "There is a problem"
-msgstr "Mae yna broblem"
+msgstr ""
 
 #: cla_public/templates/base.html:252 cla_public/templates/contact.html:178
 #: cla_public/templates/contact.html:195 cla_public/templates/contact.html:202
