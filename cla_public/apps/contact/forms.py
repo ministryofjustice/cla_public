@@ -11,7 +11,7 @@ from wtforms.validators import InputRequired, Optional, Required, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
 from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
-from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE
+from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE, ANNOUNCE_PREFERENCE
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
@@ -31,7 +31,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform for adaptations
     """
 
-    bsl_webcam = BooleanField(_(u"British Sign Language – Webcam"))
+    bsl_webcam = BooleanField(_(u"British Sign Language – webcam"))
     minicom = BooleanField(_(u"Minicom – for textphone users"))
     text_relay = BooleanField(_(u"Text Relay – for people with hearing or speech impairments"))
     welsh = BooleanField(_(u"Welsh"))
@@ -61,15 +61,19 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
 
     contact_number = StringField(
         _(u"Phone number for the callback"),
-        description=_(
-            u"Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
-        ),
+        description=_(u"Enter the full number, including the area code. For example, 01632 960 1111."),
         validators=[
             InputRequired(message=_(u"Tell us what number to ring")),
             Length(max=20, message=_(u"Your telephone number must be 20 characters or less")),
         ],
     )
     time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))
+
+    announce_call_from_cla = RadioField(
+        _(u"Can we say that we're calling from Civil Legal Advice?"),
+        choices=ANNOUNCE_PREFERENCE,
+        validators=[InputRequired(message=_(u"Select if we can say that we’re calling from Civil Legal Advice"))],
+    )
 
 
 class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -91,9 +95,7 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
     )
     contact_number = StringField(
         _(u"Phone number for the callback"),
-        description=_(
-            u"Please enter full phone number including area code, using only numbers. For example 020 7946 0492"
-        ),
+        description=_(u"Enter the full number, including the area code. For example, 01632 960 1111."),
         validators=[
             InputRequired(message=_(u"Tell us what number to ring")),
             Length(max=20, message=_(u"Your telephone number must be 20 characters or less")),
@@ -144,7 +146,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     )
     email = StringField(
         _(u"Email"),
-        description=_(u"If you add your email we will send you the reference number when you submit your details"),
+        description=_(u"We will use this to send your reference number."),
         validators=[
             Length(max=255, message=_(u"Your address must be 255 characters or less")),
             EmailValidator(message=_(u"Invalid email address")),
@@ -170,6 +172,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             return local.astimezone(pytz.utc).isoformat()
 
         safe_to_contact = SAFE_TO_CONTACT if self.contact_type.data == CONTACT_PREFERENCE.CALLBACK else ""
+
         data = {
             "personal_details": {
                 "full_name": self.full_name.data,
@@ -178,6 +181,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
                 "mobile_phone": self.callback.form.contact_number.data,
                 "street": self.address.form.street_address.data,
                 "safe_to_contact": safe_to_contact,
+                "announce_call": True,
             },
             "adaptation_details": {
                 "bsl_webcam": self.adaptations.bsl_webcam.data,
@@ -189,6 +193,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         }
         if self.contact_type.data == "callback":
             data["requires_action_at"] = process_selected_time(self.callback.form.time)
+            data["personal_details"]["announce_call"] = self.callback.form.announce_call_from_cla.data
 
         if self.contact_type.data == "thirdparty":
             data["thirdparty_details"] = {"personal_details": {}}
@@ -205,7 +210,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 class ConfirmationForm(Honeypot, BabelTranslationsFormMixin, Form):
     email = StringField(
         _(u"Receive this confirmation by email"),
-        description=_(u"Enter your email address"),
+        description=_(u"We will use this to send your reference number."),
         validators=[
             Length(max=255, message=_(u"Your address must be 255 characters or less")),
             EmailValidator(message=_(u"Enter a valid email address")),

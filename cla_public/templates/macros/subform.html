@@ -13,12 +13,34 @@
       controlled_by=form.contact_type,
       control_value='callback') %}
     <ul class="govuk-list govuk-list--bullet">
-      <li>{{ _('We will call at least once during your chosen time, or as close to the time as possible.') }}</li>
-      <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
-      <li>{{ _('If you miss the call you’ll need to complete this form again.') }}</li>
+      <li>{% trans %}We’ll call during the time you choose.{% endtrans %}</li>
+      <li>{% trans %}The call will come from an unknown or withheld number.{% endtrans %}</li>
+      <li>{% trans %}If you miss the call, we will call 2 more times in the next few days.{% endtrans %}</li>
+      <li>{% trans %}We will not leave a message.{% endtrans %}</li>
+      <li>{% trans %}If you miss all 3 calls, or if you need urgent advice, call us on:{% endtrans %}
+        <br>
+        <a href="tel:0345 345 4345">0345 345 4345</a>.
+      </li>
     </ul>
     {{ Form.group(form.callback.contact_number, field_attrs={'class': '', 'autocomplete': 'tel', 'type': 'tel'}) }}
     {{ time_picker(form.callback.time) }}
+    {{ announce_options(form.callback.announce_call_from_cla) }}
+  {% endcall %}
+{% endmacro %}
+
+
+{% macro announce_options(subform) %}
+  {% call Form.fieldset(subform, class_='form-group', field_as_label=True, legend_size='s') %}
+    <div class="govuk-radios">
+    {% for radio in subform %}
+      <div class="govuk-radios__item">
+        {{ radio(**{"class": "govuk-radios__input"}) }}
+        <label class="govuk-label govuk-radios__label" for="{{ radio.id }}">
+          {{ radio.label.text }}
+        </label>
+      </div>
+    {% endfor %}
+    </div>
   {% endcall %}
 {% endmacro %}
 
@@ -36,10 +58,15 @@
       controlled_by=form.contact_type,
       control_value='thirdparty') %}
     <ul class="govuk-list govuk-list--bullet">
-      <li>{{ _('Please make sure you are with your nominated person at the time of the callback.') }}</li>
-      <li>{{ _('We will call at least once during your chosen time, or as close to the time as possible.') }}</li>
-      <li>{{ _('When a CLA operator calls, the call will come from an anonymous number.') }}</li>
-      <li>{{ _('If your nominated person misses the call you’ll need to complete this form again.') }}</li>
+      <li>{% trans %}You must be with the person when we call.{% endtrans %}</li>
+      <li>{% trans %}We’ll call during the time you choose.{% endtrans %}</li>
+      <li>{% trans %}The call will come from an unknown or withheld number.{% endtrans %}</li>
+      <li>{% trans %}If you miss the call, we will call 2 more times in the next few days.{% endtrans %}</li>
+      <li>{% trans %}We will not leave a message.{% endtrans %}</li>
+      <li>{% trans %}If you miss all 3 calls, or if you need urgent advice, call us on:{% endtrans %}
+        <br>
+        <a href="tel:0345 345 4345">0345 345 4345</a>.
+      </li>
     </ul>
     {{ Form.group(form.thirdparty.full_name, field_attrs={'class': ''}) }}
     {{ Form.group(form.thirdparty.relationship, field_attrs={'class': ''}) }}
@@ -47,7 +74,6 @@
     {{ time_picker(form.thirdparty.time) }}
   {% endcall %}
 {% endmacro %}
-
 
 {#
   Time picker subform
@@ -57,7 +83,7 @@
         WTForm field
 #}
 {% macro time_picker(subform) %}
-  {% call Form.fieldset(legend=subform.label.text, class_='form-group') %}
+  {% call Form.fieldset(subform, class_='form-group', field_as_label=True, legend_size='s') %}
     <div class="govuk-radios">
       {% for radio in subform.specific_day %}
         {% if (radio.data == 'today' and subform.time_today.choices) or (radio.data == 'specific_day' and subform.day.choices) %}

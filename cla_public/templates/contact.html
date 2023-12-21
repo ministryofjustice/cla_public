@@ -42,16 +42,22 @@
       </p>
     {% else %}
       <p class="govuk-body">
-        {% trans %}Please submit your details to get in touch with Civil Legal Advice (CLA).{% endtrans %}
-      </p>
-      <p class="govuk-body">
-        {% trans call_charges_link=Element.link_same_window('https://www.gov.uk/call-charges', _('call charges'), True) %}
-          You can choose to contact CLA yourself and speak to someone immediately
-          (this is an 0345 number - {{ call_charges_link }} apply) or ask us to call you back, which is free.
+        {% trans %}
+          Civil Legal Advice will check if you can get legal aid and help you contact the right legal adviser.
+          If you cannot get legal aid, we’ll tell you about other help you can get.
         {% endtrans %}
       </p>
       <p class="govuk-body">
-        {{ _('You’ll need to provide evidence of the financial information (if any) you’ve given us through this service.') }}
+        {% trans call_charges_link=Element.link_same_window('https://www.gov.uk/call-charges', _('call charges'), True) %}
+          You can call Civil Legal Advice yourself - this is an 0345 number, so {{ call_charges_link }} apply.
+          Or you can ask us to call you back, which is free.
+        {% endtrans %}
+      </p>
+      <p class="govuk-body">
+        {% trans %}
+          We’ll ask questions about your legal problem and your financial situation.
+          You might need to provide evidence of any financial information you give us.
+        {% endtrans %}
       </p>
     {% endif %}
   {% endblock %}
@@ -75,7 +81,7 @@
               <div data-controlled-by="contact_type"
                    data-control-value="call" role="alert">
                 <p class="govuk-body">
-                  {{ _('We’ll give you the CLA phone number when you submit your details below.') }}
+                  {{ _('We’ll give you the Civil Legal Advice phone number when you submit your details.') }}
                 </p>
               </div>
             </div>
