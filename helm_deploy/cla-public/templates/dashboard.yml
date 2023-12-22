@@ -1,4 +1,5 @@
 {{- if .Values.ingress.enabled -}}
+{{- if .Values.dashboard.enabled -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -449,4 +450,5 @@ data:
       "title": "{{ include "cla-public.fullname" . }}",
       "version": 1
     }
+{{- end }}
 {{- end }}
