@@ -19,7 +19,7 @@ service:
 host: 'localhost'
 
 dashboard:
-  enabled: false
+  enabled: true
 
 ingress:
   enabled: false
