@@ -33,7 +33,7 @@ def create_app(config_file=None):
     app = Flask(__name__)
     # Adds security to Flask
     csp = {
-        "default-src": ["'self'", "*.googletagmanager.com"],
+        "default-src": ["'self'", "https:", "*.googletagmanager.com"],
         "img-src": [
             "'self'",
             "*.googleapis.com",
