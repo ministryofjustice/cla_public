@@ -50,7 +50,6 @@ def create_app(config_file=None):
         "object-src": "'self'",
         "script-src": [
             "'self'",
-            "'unsafe-eval'",
             "*.googleapis.com",
             "*.gstatic.com",
             "*.google.com",
@@ -64,6 +63,7 @@ def create_app(config_file=None):
             "*.google.co.uk",
             "*.google-analytics.com",
         ],
+        "script-src-elem": ["'self'", "*.google-analytics.com"],
         "frame-src": "*.google.com",
         "connect-src": [
             "'self'",
@@ -96,7 +96,7 @@ def create_app(config_file=None):
         Talisman(
             app,
             content_security_policy=csp,
-            content_security_policy_nonce_in=["script-src"],
+            content_security_policy_nonce_in=["script-src", "script-src-elem"],
             x_content_type_options=False,
         )
     app = change_jinja_templates(app)
