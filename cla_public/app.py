@@ -23,7 +23,6 @@ from cla_public.apps.scope.urls import scope
 from cla_public.apps.checker.session import CheckerSessionInterface, CustomJSONEncoder
 from cla_public.libs import honeypot
 from cla_public.libs.utils import get_locale
-from cla_public.config.common import TESTING, DEBUG
 
 sentry_sdk.init(
     dsn=os.environ.get("SENTRY_DSN"), environment=os.environ.get("CLA_ENV"), integrations=[FlaskIntegration()]
@@ -89,7 +88,7 @@ def create_app(config_file=None):
         ],
         "worker-src": "blob:",
     }
-    if TESTING or DEBUG or os.environ.get("CLA_PUBLIC_CONFIG") == "config/local.py":
+    if os.environ.get("CIRCLE_BUILD_NUM"):
         Talisman(app, force_https=False, content_security_policy=None)
     else:
         Talisman(
