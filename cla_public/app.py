@@ -23,6 +23,7 @@ from cla_public.apps.scope.urls import scope
 from cla_public.apps.checker.session import CheckerSessionInterface, CustomJSONEncoder
 from cla_public.libs import honeypot
 from cla_public.libs.utils import get_locale
+from cla_public.config.common import TESTING, DEBUG
 
 sentry_sdk.init(
     dsn=os.environ.get("SENTRY_DSN"), environment=os.environ.get("CLA_ENV"), integrations=[FlaskIntegration()]
@@ -88,9 +89,15 @@ def create_app(config_file=None):
         ],
         "worker-src": "blob:",
     }
-    Talisman(
-        app, content_security_policy=csp, content_security_policy_nonce_in=["script-src"], x_content_type_options=False
-    )
+    if TESTING or DEBUG:
+        Talisman(app, force_https=False, content_security_policy=None)
+    else:
+        Talisman(
+            app,
+            content_security_policy=csp,
+            content_security_policy_nonce_in=["script-src"],
+            x_content_type_options=False,
+        )
     app = change_jinja_templates(app)
     if config_file:
         app.config.from_pyfile(config_file)
