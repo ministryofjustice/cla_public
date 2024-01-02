@@ -56,6 +56,7 @@ def create_app(config_file=None):
             "*.ggpht.com",
             "*.googleusercontent.com",
             "blob:",
+            "ajax.aspnetcdn.com",
             "*.googletagmanager.com",
             "*.analytics.google.com",
             "*.g.doubleclick.net",
