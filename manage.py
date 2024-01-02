@@ -46,6 +46,8 @@ def test(*args):
     import xmlrunner
     import unittest
 
+    print(os.environ.items())
+
     if args[0]:
         result = xmlrunner.XMLTestRunner(output="test-reports", verbosity=3).run(
             unittest.TestLoader().loadTestsFromNames(args[0])
