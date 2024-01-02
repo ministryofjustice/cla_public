@@ -89,7 +89,7 @@ def create_app(config_file=None):
         ],
         "worker-src": "blob:",
     }
-    if TESTING or DEBUG:
+    if TESTING or DEBUG or os.environ.get("CLA_PUBLIC_CONFIG") == "config/local.py":
         Talisman(app, force_https=False, content_security_policy=None)
     else:
         Talisman(
