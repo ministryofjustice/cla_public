@@ -33,7 +33,7 @@ def create_app(config_file=None):
     app = Flask(__name__)
     # Adds security to Flask
     csp = {
-        "default-src": ["'self'", "https:", "*.googletagmanager.com"],
+        "default-src": ["'self'", "*.googletagmanager.com"],
         "img-src": [
             "'self'",
             "*.googleapis.com",
@@ -64,7 +64,7 @@ def create_app(config_file=None):
             "*.google-analytics.com",
         ],
         "script-src-elem": ["'self'", "*.google-analytics.com"],
-        "frame-src": "*.google.com",
+        "frame-src": ["'self'", "*.google.com"],
         "connect-src": [
             "'self'",
             "*.googleapis.com",
@@ -97,7 +97,7 @@ def create_app(config_file=None):
             app,
             content_security_policy=csp,
             content_security_policy_nonce_in=["script-src", "script-src-elem"],
-            x_content_type_options=False,
+            x_content_type_options=True,
         )
     app = change_jinja_templates(app)
     if config_file:
