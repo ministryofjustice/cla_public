@@ -89,10 +89,7 @@ def create_app(config_file=None):
         "worker-src": "blob:",
     }
     Talisman(
-        app,
-        content_security_policy=csp,
-        content_security_policy_nonce_in=["script-src"],
-        x_content_type_options=["script-src"],
+        app, content_security_policy=csp, content_security_policy_nonce_in=["script-src"], x_content_type_options=False
     )
     app = change_jinja_templates(app)
     if config_file:
