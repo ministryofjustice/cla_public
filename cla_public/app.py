@@ -63,7 +63,6 @@ def create_app(config_file=None):
             "*.google.co.uk",
             "*.google-analytics.com",
         ],
-        "script-src-elem": ["'self'", "*.google-analytics.com"],
         "frame-src": ["'self'", "*.google.com"],
         "connect-src": [
             "'self'",
