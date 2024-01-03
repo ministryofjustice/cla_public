@@ -3,7 +3,8 @@ import urllib
 import datetime
 from flask import Blueprint, after_this_request, request, redirect, current_app
 
-base = Blueprint("base", __name__)
+
+base = Blueprint("base", __name__, static_url_path="/static")
 
 
 @base.before_app_request
