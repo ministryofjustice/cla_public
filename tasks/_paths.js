@@ -2,7 +2,7 @@
 
 var paths = {
   src: 'cla_public/static-src/',
-  dest: 'cla_public/moj-static/',
+  dest: 'cla_public/static/',
   styles: 'cla_public/static-src/stylesheets/**/*.scss',
   ie_styles: 'cla_public/static-src/ie/**/*.scss',
   scripts: [

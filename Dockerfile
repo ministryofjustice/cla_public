@@ -14,7 +14,7 @@ RUN ./node_modules/.bin/gulp build
 FROM ${ALPINE_BASE_IMAGE}
 ARG BASE_REQUIREMENTS_FILE
 
-COPY --from=node_build ./cla_public/moj-static/ /home/app/flask/cla_public/moj-static/
+COPY --from=node_build ./cla_public/static/ /home/app/flask/cla_public/static/
 
 RUN apk add --no-cache \
       pcre \
