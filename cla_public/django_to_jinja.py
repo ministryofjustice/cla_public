@@ -35,7 +35,7 @@ def change_jinja_templates(app):
         "moj_template",
         "moj_template",
         static_folder=static_dir,
-        static_url_path="/static",
+        static_url_path="/moj-static",
         template_folder=template_dir,
     )
     app.register_blueprint(moj_template_blueprint)
