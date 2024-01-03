@@ -40,6 +40,15 @@ def change_jinja_templates(app):
     )
     app.register_blueprint(moj_template_blueprint)
 
+    static_files_blueprint = Blueprint(
+        "static_template",
+        "static_template",
+        static_folder=static_dir,
+        static_url_path="/static",
+        template_folder=template_dir,
+    )
+    app.register_blueprint(static_files_blueprint)
+
     @app.context_processor
     def utility_processor():
         def static(filename):
