@@ -28,6 +28,7 @@ def add_header(response):
 
 
 class ScopeDiagnosis(RequiresSession, views.MethodView):
+    # flake8: noqa: C901
     def get(self, choices="", *args, **kwargs):
         api.create_diagnosis()
 
@@ -55,7 +56,12 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
             if state == DIAGNOSIS_SCOPE.INELIGIBLE:
                 outcome_url = url_for(outcome_url[0], category_name=session.checker.category_slug)
             else:
-                outcome_url = url_for(outcome_url[0], **outcome_url[1])
+                try:
+                    is_hlpas = "yes" if nodes[-2]["context"]["hlpas"].lower() == "true" else "no"
+                except Exception:
+                    is_hlpas = "no"
+
+                outcome_url = url_for(outcome_url[0], hlpas=is_hlpas, **outcome_url[1])
                 if state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
                     outcome_url = "%s?category=%s" % (outcome_url, self.get_category_for_larp(session))
 

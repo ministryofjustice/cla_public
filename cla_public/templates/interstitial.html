@@ -25,7 +25,11 @@
     {{ title }}
   </h1>
   <p class="govuk-body-l">
-    {{ _('However, you must also qualify financially.') }}
+    {% if is_hlpas %}
+      {{ _('However, you may need to also qualify financially.') }}
+    {% else %}
+      {{ _('However, you must also qualify financially.') }}
+    {% endif %}
   </p>
   <p class="govuk-body">
     {{ _('If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),
