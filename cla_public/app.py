@@ -95,8 +95,8 @@ def create_app(config_file=None):
         Talisman(
             app,
             content_security_policy=csp,
-            content_security_policy_nonce_in=["script-src", "script-src-elem"],
-            x_content_type_options=True,
+            content_security_policy_nonce_in=["script-src"],
+            x_content_type_options=False,
         )
     app = change_jinja_templates(app)
     if config_file:
