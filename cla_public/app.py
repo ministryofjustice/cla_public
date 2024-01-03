@@ -50,7 +50,10 @@ def create_app(config_file=None):
         "object-src": "'self'",
         "script-src": [
             "'self'",
-            "*/static/*",
+            "*/static/javascripts/jquery/jquery.js",
+            "*/static/javascripts/cla.js",
+            "*/static/javascripts/jquery/jquery.min.js",
+            "*/static/javascripts/cla.min.js",
             "*.googleapis.com",
             "*.gstatic.com",
             "*.google.com",
