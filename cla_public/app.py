@@ -49,7 +49,7 @@ def create_app(config_file=None):
         ],
         "object-src": "'self'",
         "script-src": [
-            "'unsafe-eval'"
+            "'unsafe-eval'",
             "'self'",
             "*.googleapis.com",
             "*.gstatic.com",
