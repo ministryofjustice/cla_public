@@ -49,6 +49,7 @@ def create_app(config_file=None):
         ],
         "object-src": "'self'",
         "script-src": [
+            "'unsafe-eval'"
             "'self'",
             "*.googleapis.com",
             "*.gstatic.com",
@@ -97,6 +98,7 @@ def create_app(config_file=None):
             content_security_policy=csp,
             content_security_policy_nonce_in=["script-src"],
             x_content_type_options=False,
+            force_https=False,
         )
     app = change_jinja_templates(app)
     if config_file:
