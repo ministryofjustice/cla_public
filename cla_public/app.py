@@ -109,7 +109,7 @@ def create_app(config_file=None):
             x_content_type_options=False,
             session_cookie_secure=True,
             session_cookie_http_only=True,
-            session_cookie_samesite="Strict",
+            session_cookie_samesite="Lax",
         )
     app = change_jinja_templates(app)
     if config_file:
