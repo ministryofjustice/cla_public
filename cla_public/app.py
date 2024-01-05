@@ -92,7 +92,14 @@ def create_app(config_file=None):
         "worker-src": "blob:",
     }
     if os.environ.get("CIRCLE_BUILD_NUM"):
-        Talisman(app, force_https=False, content_security_policy=None, x_content_type_options=False)
+        Talisman(
+            app,
+            force_https=False,
+            content_security_policy=None,
+            x_content_type_options=False,
+            session_cookie_secure=False,
+            session_cookie_http_only=False,
+        )
     elif os.environ.get("DOCKER_BUILDKIT") == 1 or os.environ.get("TESTING") == "True":
         Talisman(
             app,
@@ -100,6 +107,8 @@ def create_app(config_file=None):
             content_security_policy_nonce_in=["script-src"],
             x_content_type_options=False,
             force_https=False,
+            session_cookie_secure=False,
+            session_cookie_http_only=False,
         )
     else:
         Talisman(
