@@ -92,14 +92,21 @@ def create_app(config_file=None):
         "worker-src": "blob:",
     }
     if os.environ.get("CIRCLE_BUILD_NUM"):
-        Talisman(app, force_https=False, content_security_policy=None, x_content_type_options=False)
-    else:
+        pass
+    elif os.environ.get("DOCKER_BUILDKIT") == 1:
         Talisman(
             app,
             content_security_policy=csp,
             content_security_policy_nonce_in=["script-src"],
             x_content_type_options=False,
             force_https=False,
+        )
+    else:
+        Talisman(
+            app,
+            content_security_policy=csp,
+            content_security_policy_nonce_in=["script-src"],
+            x_content_type_options=False,
         )
     app = change_jinja_templates(app)
     if config_file:
