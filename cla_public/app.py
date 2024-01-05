@@ -92,7 +92,7 @@ def create_app(config_file=None):
         "worker-src": "blob:",
     }
     if os.environ.get("CIRCLE_BUILD_NUM"):
-        pass
+        Talisman(app, force_https=False, content_security_policy=None, x_content_type_options=False)
     elif os.environ.get("DOCKER_BUILDKIT") == 1:
         Talisman(
             app,
