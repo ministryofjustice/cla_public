@@ -93,7 +93,7 @@ def create_app(config_file=None):
     }
     if os.environ.get("CIRCLE_BUILD_NUM"):
         Talisman(app, force_https=False, content_security_policy=None, x_content_type_options=False)
-    elif os.environ.get("DOCKER_BUILDKIT") == 1:
+    elif os.environ.get("DOCKER_BUILDKIT") == 1 or os.environ.get("TESTING") == "True":
         Talisman(
             app,
             content_security_policy=csp,
