@@ -2393,6 +2393,10 @@ msgstr "Gall y cyfyngiadau hyn amrywio mewn rhai amgylchiadau - er enghraifft, o
 msgid "However, you must also qualify financially."
 msgstr "Fodd bynnag, mae’n rhaid i chi fod yn gymwys yn ariannol hefyd."
 
+#: cla_public/templates/interstitial.html:29
+msgid "However, you may need to also qualify financially."
+msgstr "Er hynny, mae'n bosib bod rhaid ymgymhwyso'n ariannol."
+
 #: cla_public/templates/interstitial.html:31
 msgid ""
 "If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),\n"

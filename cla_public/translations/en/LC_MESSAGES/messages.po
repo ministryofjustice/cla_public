@@ -2389,6 +2389,10 @@ msgstr ""
 msgid "However, you must also qualify financially."
 msgstr ""
 
+#: cla_public/templates/interstitial.html:29
+msgid "However, you may need to also qualify financially."
+msgstr ""
+
 #: cla_public/templates/interstitial.html:31
 msgid ""
 "If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),\n"

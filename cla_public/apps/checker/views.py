@@ -444,6 +444,11 @@ def interstitial():
         category_name_english = unicode(session.checker.category_name)
 
     organisations = get_organisation_list(article_category__name=category_name_english)
-
-    context = {"category": category, "category_name": category_name, "organisations": organisations}
+    is_hlpas = request.args.get("hlpas", "no").lower() == "yes"
+    context = {
+        "category": category,
+        "category_name": category_name,
+        "organisations": organisations,
+        "is_hlpas": is_hlpas,
+    }
     return render_template("interstitial.html", **context)
