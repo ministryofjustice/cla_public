@@ -130,7 +130,7 @@ pytz==2021.1
     #   cla-common
 pyyaml==3.11
     # via -r requirements/source/requirements-base.in
-requests==2.19.1
+requests==2.31.0
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common

@@ -180,7 +180,7 @@ pyyaml==3.11
     #   -r requirements/source/requirements-base.in
     #   aspy.yaml
     #   pre-commit
-requests==2.19.1
+requests==2.31.0
     # via
     #   -r requirements/source/requirements-base.in
     #   cla-common
