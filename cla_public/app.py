@@ -32,7 +32,7 @@ sentry_sdk.init(
 
 def create_app(config_file=None):
     app = Flask(__name__)
-    # Adds security to Flask
+    # Adds security to Flask, unsafe eval is required to use the webpack
     csp = {
         "default-src": ["'self'", "*.googletagmanager.com"],
         "img-src": [
