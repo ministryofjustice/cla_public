@@ -119,7 +119,7 @@ itsdangerous==0.24
     #   -r requirements/source/requirements-base.in
     #   flask
     #   flask-debugtoolbar
-jinja2==2.7.3
+jinja2==3.1.3
     # via
     #   -r requirements/source/requirements-base.in
     #   flask
