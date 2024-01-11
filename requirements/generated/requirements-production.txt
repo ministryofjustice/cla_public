@@ -144,7 +144,7 @@ urllib3==1.23
     #   sentry-sdk
 uwsgi==2.0.21
     # via -r requirements/source/requirements-base.in
-werkzeug==0.9.6
+werkzeug==2.3.8
     # via
     #   -r requirements/source/requirements-base.in
     #   flask
