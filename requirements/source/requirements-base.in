@@ -7,7 +7,6 @@ Flask-Markdown==0.3
 flask-talisman==1.1.0
 Jinja2==2.7.3
 MarkupSafe==0.23
-PyYAML==3.11
 Werkzeug==0.9.6
 argparse==1.2.1
 blinker==1.3
