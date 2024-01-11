@@ -44,7 +44,7 @@
   {% include "checker/time-out-warning.html" %}
   {{ Element.get_in_touch_link() }}
 
-  <script>
+  <script nonce="{{ csp_nonce() }}">
     window.CONDITIONAL_LABELS = {
       in_dispute: '{{ _('Are you in a dispute with your partner?') }}',
       num_children: '{{ _('How many?') }}',

@@ -48,7 +48,7 @@
 {% endmacro %}
 
 {% macro script(info_tools, cait_variant = '', cait_journey = {}, js = '') %}
-  <script>
+  <script nonce="{{ csp_nonce() }}">
   (function() {
     var variant = '{{ cait_variant }}' || 'none'
     function gaSendEvent(category, action, label) {

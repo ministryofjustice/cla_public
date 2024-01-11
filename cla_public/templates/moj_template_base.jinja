@@ -10,7 +10,7 @@
     {% block page_title %}{% endblock %} - GOV.UK
   </title>
 
-  <script type="text/javascript">
+  <script nonce="{{ csp_nonce() }}" type="text/javascript">
     (function () {
       if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
         var d = document, c = "appendChild", a = d.createElement("style");
@@ -30,7 +30,7 @@
   <link href="{{ static('stylesheets/govuk-template-print.css') }}" media="print" rel="stylesheet" type="text/css"/>
 
   <!--[if IE 8]>
-    <script type="text/javascript">
+    <script nonce="{{ csp_nonce() }}" type="text/javascript">
       (function(){if(window.opera){return;}
        setTimeout(function(){var a=document,g,b={families:(g=
        ["nta"]),urls:["{{ static('stylesheets/fonts-ie8.css') }}"]},
@@ -47,7 +47,7 @@
 
 
   <!--[if lt IE 9]>
-      <script src="{{ static('javascripts/ie.js') }}" type="text/javascript"></script>
+      <script nonce="{{ csp_nonce() }}" src="{{ static('javascripts/ie.js') }}" type="text/javascript"></script>
     <![endif]-->
 
   <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ static('images/favicon.ico') }}" type="image/x-icon"/>
@@ -88,7 +88,7 @@
 <body class="govuk-template__body
   {% block body_classes %}{{ product_type }} {{ phase }} {{ 'cla-' + config["CLA_ENV"] }} {% endblock %}">
 
-<script
+<script nonce="{{ csp_nonce() }}"
   type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
 <div id="skiplink-container">
@@ -136,7 +136,7 @@
 <!--end header-->
 <div class="govuk-width-container">
   <!--[if lte IE 6]>
-  <script>document.body.className = document.body.className.replace('js-enabled', '');</script><![endif]-->
+  <script nonce="{{ csp_nonce() }}">document.body.className = document.body.className.replace('js-enabled', '');</script><![endif]-->
   {% block before_content %}{% endblock %}
   {% block content %}{% endblock %}
 </div>
@@ -189,12 +189,12 @@
 <div id="global-app-error" class="app-error hidden"></div>
 
 <!--[if gt IE 6]><!-->
-<script src="{{ asset('javascripts/jquery/jquery.js') }}" type="text/javascript"></script>
-<script src="{{ static('javascripts/moj.js') }}" type="text/javascript"></script>
+<script nonce="{{ csp_nonce() }}" src="{{ asset('javascripts/jquery/jquery.js') }}" type="text/javascript"></script>
+<script nonce="{{ csp_nonce() }}" src="{{ static('javascripts/moj.js') }}" type="text/javascript"></script>
 
 {% block javascripts %}{% endblock %}
 
-<script type="text/javascript">$(moj.init);</script>
+<script nonce="{{ csp_nonce() }}" type="text/javascript">$(moj.init);</script>
 <!--<![endif]-->
 
 {% block body_end %}{% endblock %}

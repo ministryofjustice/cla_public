@@ -142,18 +142,18 @@
   {{ super() }}
 
   {% if reasons_for_contacting -%}
-    <script>
+    <script nonce="{{ csp_nonce() }}">
       ga('send', 'event', 'reasons-for-contacting', '{{ reasons_for_contacting }}');
     </script>
   {%- endif -%}
 
-  <script type="text/html" id="addressFinderButton">
+  <script nonce="{{ csp_nonce() }}" type="text/html" id="addressFinderButton">
     <button class="govuk-button govuk-button--secondary address-finder-button" type="button" data-module="govuk-button">
       {{ _('Find UK address') }}
     </button>
   </script>
 
-  <script type="text/html" id="addressFinderList">
+  <script nonce="{{ csp_nonce() }}" type="text/html" id="addressFinderList">
     <div class="govuk-radios__conditional address-list">
       <label class="govuk-label" for="address-finder">
         {{ _('Select an address') }}
@@ -167,20 +167,20 @@
     </div>
   </script>
 
-  <script type="text/html" id="characterCounter">
+  <script nonce="{{ csp_nonce() }}" type="text/html" id="characterCounter">
     <div class="govuk-character-count__message <%= counter_class %>" aria-live="polite">
       <%= you_have %> <%= count %> <%= remaining_text %>
     </div>
   </script>
 
-  <script type="text/html" id="postcodeNotEnteredText">
+  <script nonce="{{ csp_nonce() }}" type="text/html" id="postcodeNotEnteredText">
     <span class="govuk-error-message" role="alert">
       <span class="govuk-visually-hidden">{{ _('Error') }}: </span>
       <span class="cla-error-message">{{ _('Must contain a valid postcode') }}</span>
     </span>
   </script>
 
-  <script type="text/html" id="geoWarning">
+  <script nonce="{{ csp_nonce() }}" type="text/html" id="geoWarning">
     <div class="govuk-warning-text geographyWarning">
       <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
       <strong class="govuk-warning-text__text">
@@ -190,14 +190,14 @@
     </div>
   </script>
 
-  <script type="text/html" id="noAddressesFoundText">
+  <script nonce="{{ csp_nonce() }}" type="text/html" id="noAddressesFoundText">
     <span class="govuk-error-message" role="alert">
       <span class="govuk-visually-hidden">{{ _('Error') }}: </span>
       <span class="cla-error-message">{{ _('No addresses were found with that postcode, but you can still enter your address manually') }}</span>
     </span>
   </script>
 
-  <script type="text/html" id="requestFailedText">
+  <script nonce="{{ csp_nonce() }}" type="text/html" id="requestFailedText">
     <span class="govuk-error-message" role="alert">
       <span class="govuk-visually-hidden">{{ _('Error') }}: </span>
       <span class="cla-error-message">{{ _('Request failed: ') }} <%= textStatus %>, <%= error %></span>
