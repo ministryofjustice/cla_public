@@ -23,6 +23,7 @@ metadata:
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
       SecRuleEngine On
       SecDefaultAction "phase:2,pass,log,tag:github_team=laa-get-access"
+      SecRuleRemoveById 942230
 spec:
   ingressClassName: "modsec"
   tls:
