@@ -24,6 +24,8 @@ metadata:
       SecRuleEngine On
       SecDefaultAction "phase:2,pass,log,tag:github_team=laa-get-access"
       SecRuleRemoveById 942230
+      SecRuleRemoveById 930120
+      SecRuleRemoveById 933210
 spec:
   ingressClassName: "modsec"
   tls:
