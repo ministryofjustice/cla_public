@@ -50,7 +50,7 @@
       <script nonce="{{ csp_nonce() }}" src="{{ static('javascripts/ie.js') }}" type="text/javascript"></script>
     <![endif]-->
 
-  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ static('images/favicon.ico') }}" type="image/x-icon"/>
+  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ asset("images/favicon.ico", skip_min="true") }}" type="image/x-icon"/>
 
   <!-- For third-generation iPad with high-resolution Retina display: -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ static('images/apple-touch-icon-144x144.png') }}">

@@ -5,8 +5,9 @@ from cla_public.apps.base.utils import check_categories
 
 
 @base.app_template_global()
-def asset(filename, min_ext="min"):
-    if not current_app.config["DEBUG"]:
+def asset(filename, min_ext="min", skip_min="true"):
+    minify = not current_app.config["DEBUG"] and (skip_min.lower() not in ["yes", "true"])
+    if minify:
         amended = filename.split(".")
         amended.insert(-1, min_ext)
         filename = ".".join(amended)
