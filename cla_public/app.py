@@ -32,96 +32,30 @@ sentry_sdk.init(
 
 def create_app(config_file=None):
     app = Flask(__name__)
-    # Adds security to Flask, unsafe eval is required to use the webpack
-    csp = {
-        "default-src": ["'self'", "*.googletagmanager.com"],
-        "img-src": [
-            "'self'",
-            "*.googleapis.com",
-            "*.gstatic.com",
-            "*.google.com",
-            "*.googleusercontent.com",
-            "data:",
-            "*.googletagmanager.com",
-            "*.analytics.google.com",
-            "*.google.co.uk",
-            "*.g.doubleclick.net",
-            "*.google-analytics.com",
-        ],
-        "object-src": "'self'",
-        "script-src": [
-            "'unsafe-eval'",
-            "'self'",
-            "*.googleapis.com",
-            "*.gstatic.com",
-            "*.google.com",
-            "*.ggpht.com",
-            "*.googleusercontent.com",
-            "blob:",
-            "ajax.aspnetcdn.com",
-            "*.googletagmanager.com",
-            "*.analytics.google.com",
-            "*.g.doubleclick.net",
-            "*.google.co.uk",
-            "*.google-analytics.com",
-        ],
-        "frame-src": ["'self'", "*.google.com"],
-        "connect-src": [
-            "'self'",
-            "*.googleapis.com",
-            "*.google.com",
-            "*.gstatic.com",
-            "data:",
-            "blob:",
-            "*.google-analytics.com",
-            "*.analytics.google.com",
-            "*.googletagmanager.com",
-            "*.g.doubleclick.net",
-            "*.google.co.uk",
-        ],
-        "font-src": ["'self'", "data:", "fonts.gstatic.com"],
-        "style-src": [
-            "'self'",
-            "'unsafe-inline'",
-            "*.googleapis.com",
-            "*.google.com",
-            "*.google.co.uk",
-            "fonts.googleapis.com",
-            "*.gstatic.com",
-        ],
-        "worker-src": "blob:",
-    }
-    if os.environ.get("CIRCLE_BUILD_NUM"):
-        Talisman(
-            app,
-            force_https=False,
-            content_security_policy=None,
-            x_content_type_options=False,
-            session_cookie_secure=False,
-            session_cookie_http_only=False,
-        )
-    elif os.environ.get("DOCKER_BUILDKIT") == 1 or os.environ.get("TESTING") == "True":
-        Talisman(
-            app,
-            content_security_policy=csp,
-            content_security_policy_nonce_in=["script-src"],
-            x_content_type_options=False,
-            force_https=False,
-            session_cookie_secure=False,
-            session_cookie_http_only=False,
-        )
-    else:
-        Talisman(
-            app,
-            content_security_policy=csp,
-            content_security_policy_nonce_in=["script-src"],
-            x_content_type_options=False,
-        )
-    app = change_jinja_templates(app)
     if config_file:
         app.config.from_pyfile(config_file)
     else:
         app.config.from_envvar("CLA_PUBLIC_CONFIG")
+
+    # Adds security to Flask, unsafe eval is required to use the webpack
+    if app.config["DEBUG"]:
+        Talisman(
+            app,
+            content_security_policy=app.config["CSP_CONFIG"],
+            content_security_policy_nonce_in=["script-src"],
+            x_content_type_options=False,
+            force_https=False,
+            session_cookie_secure=False,
+            session_cookie_http_only=False,
+        )
+    else:
+        Talisman(
+            app,
+            content_security_policy=app.config["CSP_CONFIG"],
+            content_security_policy_nonce_in=["script-src"],
+            x_content_type_options=False,
+        )
+    app = change_jinja_templates(app)
 
     app.babel = Babel(app)
     app.babel.localeselector(get_locale)

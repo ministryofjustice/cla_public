@@ -3,7 +3,7 @@
 import logging
 
 from cla_common.constants import ELIGIBILITY_REASONS
-from flask import abort, render_template, redirect, session, url_for, views, request, current_app
+from flask import abort, render_template, redirect, session, url_for, views, request, current_app, jsonify
 from flask.ext.babel import lazy_gettext as _
 from wtforms.validators import StopValidation
 
@@ -36,7 +36,7 @@ from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, FormWizardStep, RequiresSession, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 from cla_public.apps.checker.cait_intervention import get_cait_params
-
+from cla_public.apps.checker.api import get_api_connection
 log = logging.getLogger(__name__)
 
 
@@ -452,3 +452,10 @@ def interstitial():
         "is_hlpas": is_hlpas,
     }
     return render_template("interstitial.html", **context)
+
+
+@checker.route("/callback-time-slots")
+def privacy():
+    backend = get_api_connection()
+    slots = backend.callback_time_slots.get()
+    return jsonify(slots=slots)
