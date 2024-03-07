@@ -45,18 +45,20 @@ def format_time(dt):
     else:
         time = dt
     display_format = "%I:%M"
+    if time.minute == 0:
+        display_format = "%I"
     display_string = time.strftime(display_format).lstrip("0")
-    if get_locale()[:2] == "cy":
-        time_suffix = format_time_welsh_suffix(time)
-    else:
-        time_suffix = time.strftime("%p")
 
-    return "%s %s" % (display_string, time_suffix)
+    time_suffix = time.strftime("%p").lower()
+
+    return "%s%s" % (display_string, time_suffix)
 
 
 def time_choice(time):
     end = time + datetime.timedelta(minutes=30)
-    display_string = format_time(time) + " - " + format_time(end)
+    display_string = format_time(time) + " to " + format_time(end)
+    if get_locale().startswith("cy"):
+        display_string = format_time(time) + " i " + format_time(end)
     return time.strftime("%H%M"), display_string
 
 
