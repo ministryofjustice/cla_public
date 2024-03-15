@@ -25,6 +25,7 @@ from cla_public.apps.contact.constants import (
 )
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import day_choice, time_choice
+from cla_public.apps.checker.api import get_valid_callback_timeslots_on_day, get_valid_callback_days
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
 
@@ -51,8 +52,7 @@ class FormattedChoiceField(object):
 
 
 def time_slots_for_day(day):
-    slots = OPERATOR_HOURS.time_slots(day)
-    slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
+    slots = get_valid_callback_timeslots_on_day(day)
     return map(time_choice, slots)
 
 
@@ -63,19 +63,19 @@ class DayChoiceField(FormattedChoiceField, SelectField):
 
     def __init__(self, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
-        self.choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
+        
+        self.choices = map(day_choice, get_valid_callback_days(include_today=False))
         append_default_option_to_list(self.choices, SELECT_DATE_OPTION_DEFAULT)
-        self.day_choices = map(day_choice, OPERATOR_HOURS.available_days(num_days))
+        self.day_choices = map(day_choice, get_valid_callback_days(include_today=False))
 
     @property
-    def day_time_choices(self, num_days=6):
+    def day_time_choices(self):
         """Generate time slots options for call on another day select options"""
-        days = OPERATOR_HOURS.available_days(num_days)
+        days =  get_valid_callback_days(include_today=False)
 
         def time_slots(day):
             slots = OrderedDict(time_slots_for_day(day.date()))
             return (self._format(day), slots)
-
         return dict(map(time_slots, days))
 
     def process_formdata(self, valuelist):

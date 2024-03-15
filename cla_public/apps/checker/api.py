@@ -2,7 +2,7 @@ from collections import OrderedDict
 import logging
 import urllib
 
-from flask import current_app, session
+from flask import current_app, session, jsonify
 from requests.exceptions import ConnectionError, Timeout
 import slumber
 from slumber.exceptions import SlumberBaseException
@@ -12,6 +12,7 @@ from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.constants import CATEGORIES
 from cla_public.libs.api_proxy import on_timeout
 from cla_public.libs.utils import get_locale
+import datetime
 
 
 log = logging.getLogger(__name__)
@@ -226,6 +227,49 @@ def get_ordered_organisations_by_category(**kwargs):
                 break
     return categories
 
+
+@on_timeout(response="{}")
+def get_valid_callback_timeslots_on_day(day):
+    """Lists the times where a callback slot is available from the backend API as list of datetimes.
+
+    Parameters:
+        day: A datetime of the requested query date.
+
+    Returns:
+        List[Datetimes]: List of valid datetimes.
+    """
+    valid_callback_times = []
+    
+    backend = get_api_connection()
+    valid_days = backend.callback_time_slots.get()
+    date = datetime.datetime.strftime(day, "%Y%m%d")
+    if date not in valid_days.keys():
+        return []
+    for times in valid_days[date].items():
+        start_time_string = times[1]['start']
+        start_time_datetime = datetime.datetime.strptime(start_time_string, "%Y-%m-%dT%H:%M:%S")
+        valid_callback_times.append(start_time_datetime)
+    return valid_callback_times
+        
+@on_timeout(response="{}")
+def get_valid_callback_days(include_today=True):
+    """Get the days where a callback slot is available from the backend API as list of datetimes.
+
+    Returns:
+        List[Datetimes]: List of valid datetimes.
+    """
+    valid_callback_days = []
+    
+    backend = get_api_connection()
+    days = backend.callback_time_slots.get().keys()
+    for day in days:
+        if day == 'today':
+            if include_today:
+                valid_callback_days.append(datetime.datetime.today())
+            continue
+        date = datetime.datetime.strptime(day, "%Y%m%d")
+        valid_callback_days.append(date)
+    return sorted(valid_callback_days)
 
 @ignore_api_error
 @log_api_errors_to_sentry
