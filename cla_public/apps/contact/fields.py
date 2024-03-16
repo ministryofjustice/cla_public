@@ -25,7 +25,7 @@ from cla_public.apps.contact.constants import (
 )
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import day_choice, time_choice
-from cla_public.apps.checker.api import get_valid_callback_timeslots_on_day, get_valid_callback_days
+from cla_public.apps.checker.api import get_valid_callback_timeslots_on_date, get_valid_callback_days
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
 
@@ -51,8 +51,8 @@ class FormattedChoiceField(object):
             raise ValueError(self.gettext("Not a valid choice"))
 
 
-def time_slots_for_day(day):
-    slots = get_valid_callback_timeslots_on_day(day)
+def time_slots_for_day(day, is_third_party_callback=False):
+    slots = get_valid_callback_timeslots_on_date(day, is_third_party_callback)
     return map(time_choice, slots)
 
 
@@ -70,7 +70,7 @@ class DayChoiceField(FormattedChoiceField, SelectField):
 
     @property
     def day_time_choices(self):
-        """Generate time slots options for call on another day select options"""
+        # Generate time slots options for call on another day select options
         days =  get_valid_callback_days(include_today=False)
 
         def time_slots(day):
@@ -101,14 +101,14 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     Select field with available time slots for a specific day as options
     """
 
-    def __init__(self, choices_callback=None, validators=None, **kwargs):
+    def __init__(self, choices_callback=None, validators=None, is_third_party_callback=False, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.choices = map(time_choice, choices_callback())
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 
     def set_day_choices(self, day):
-        self.choices = time_slots_for_day(day)
+        self.choices = time_slots_for_day(day, self.is_third_party_callback)
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 

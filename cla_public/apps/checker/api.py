@@ -16,6 +16,7 @@ import datetime
 
 
 log = logging.getLogger(__name__)
+CALLBACK_API_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 
 class ApiError(Exception):
@@ -228,12 +229,14 @@ def get_ordered_organisations_by_category(**kwargs):
     return categories
 
 
-@on_timeout(response="{}")
-def get_valid_callback_timeslots_on_day(day):
+@on_timeout(response="[]")
+@log_api_errors_to_sentry
+def get_valid_callback_timeslots_on_date(date, is_third_party_callback=False):
     """Lists the times where a callback slot is available from the backend API as list of datetimes.
 
     Parameters:
-        day: A datetime of the requested query date.
+        date: A datetime.date of the requested query date.
+        is_third_party_callback: Third party callbacks are not affected by capacity
 
     Returns:
         List[Datetimes]: List of valid datetimes.
@@ -241,17 +244,15 @@ def get_valid_callback_timeslots_on_day(day):
     valid_callback_times = []
     
     backend = get_api_connection()
-    valid_days = backend.callback_time_slots.get()
-    date = datetime.datetime.strftime(day, "%Y%m%d")
-    if date not in valid_days.keys():
-        return []
-    for times in valid_days[date].items():
-        start_time_string = times[1]['start']
-        start_time_datetime = datetime.datetime.strptime(start_time_string, "%Y-%m-%dT%H:%M:%S")
-        valid_callback_times.append(start_time_datetime)
+    slots = backend.callback_time_slots.get(third_party_callback=is_third_party_callback)["slots"]
+    slots = [datetime.datetime.strptime(slot, CALLBACK_API_DATETIME_FORMAT) for slot in slots]
+    
+    valid_callback_times = filter(lambda slot_date: slot_date.date() == date, slots)
+    print(valid_callback_times)
     return valid_callback_times
         
-@on_timeout(response="{}")
+@on_timeout(response="[]")
+@log_api_errors_to_sentry
 def get_valid_callback_days(include_today=True):
     """Get the days where a callback slot is available from the backend API as list of datetimes.
 
@@ -261,14 +262,15 @@ def get_valid_callback_days(include_today=True):
     valid_callback_days = []
     
     backend = get_api_connection()
-    days = backend.callback_time_slots.get().keys()
-    for day in days:
-        if day == 'today':
-            if include_today:
-                valid_callback_days.append(datetime.datetime.today())
-            continue
-        date = datetime.datetime.strptime(day, "%Y%m%d")
-        valid_callback_days.append(date)
+    slots = backend.callback_time_slots.get()["slots"]    
+    valid_callback_days = set(datetime.datetime.strptime(slot, CALLBACK_API_DATETIME_FORMAT).date() for slot in slots)
+    
+    if not include_today:
+        today = datetime.datetime.today().date()
+        if today in valid_callback_days:
+            valid_callback_days.remove(today)
+
+    valid_callback_days = [datetime.datetime.combine(day, datetime.time(0, 0)) for day in valid_callback_days]
     return sorted(valid_callback_days)
 
 @ignore_api_error
