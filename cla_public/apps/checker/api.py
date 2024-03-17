@@ -248,7 +248,6 @@ def get_valid_callback_timeslots_on_date(date, is_third_party_callback=False):
     slots = [datetime.datetime.strptime(slot, CALLBACK_API_DATETIME_FORMAT) for slot in slots]
     
     valid_callback_times = filter(lambda slot_date: slot_date.date() == date, slots)
-    print(valid_callback_times)
     return valid_callback_times
         
 @on_timeout(response="[]")

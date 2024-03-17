@@ -29,6 +29,15 @@ WELSH_ORDINALS = {
 }
 WELSH_DEFAULT_ORDINAL = "ain"
 
+SHORT_MONTHS = {
+    "en": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "cy": ["Ion", "Chwe", "Maw", "Ebr", "Mai", "Meh", "Gor", "Awst", "Med", "Hyd", "Tach", "Rhag"]
+}
+
+SHORT_DAYS = {
+    "en": ["Mon", "Tues", "Weds", "Thurs", "Fri", "Sat", "Sun"],
+    "cy": ["Llun", "Maw", "Mer", "Iau", "Gwe", "Sad", "Sul"]
+}
 
 def format_time_welsh_suffix(time):
     if time >= EVENING_NIGHT:
@@ -78,6 +87,13 @@ def suffix(day):
 
     return suffix_day_english(day)
 
+def get_short_month_str(day):
+    local = "cy" if get_locale().startswith("cy") else "en"
+    return SHORT_MONTHS[local][day.month - 1]
+
+def get_short_day_str(day):
+    local = "cy" if get_locale().startswith("cy") else "en"
+    return SHORT_DAYS[local][day.weekday()]
 
 def day_choice(day):
-    return day.strftime("%Y%m%d"), "%s %s%s" % (_(day.strftime("%A")), day.strftime("%d").lstrip("0"), suffix(day.day))
+    return day.strftime("%Y%m%d"), "%s %s %s" % (get_short_day_str(day), day.strftime("%d").lstrip("0"), get_short_month_str(day))
