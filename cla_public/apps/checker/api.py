@@ -258,8 +258,6 @@ def get_valid_callback_days(include_today=True):
     Returns:
         List[Datetimes]: List of valid datetimes.
     """
-    valid_callback_days = []
-    
     backend = get_api_connection()
     slots = backend.callback_time_slots.get()["slots"]    
     valid_callback_days = set(datetime.datetime.strptime(slot, CALLBACK_API_DATETIME_FORMAT).date() for slot in slots)

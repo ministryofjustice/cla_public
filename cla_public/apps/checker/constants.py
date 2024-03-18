@@ -182,6 +182,11 @@ CONTACT_PREFERENCE = Choices(
     ("THIRDPARTY", "thirdparty", _(u"Call someone else instead of me")),
 )
 
+CONTACT_PREFERENCE_NO_CALLBACK = Choices(
+    ("CALL", "call", _(u"I will call you")),
+    ("THIRDPARTY", "thirdparty", _(u"Call someone else instead of me")),
+)
+
 ANNOUNCE_PREFERENCE = Choices(
     ("Yes", "true", _(u"Yes")), ("No", "false", _(u"No - do not say where you are calling from"))
 )

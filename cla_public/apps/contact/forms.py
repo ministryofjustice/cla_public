@@ -11,13 +11,14 @@ from wtforms.validators import InputRequired, Optional, Required, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
 from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
-from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE, ANNOUNCE_PREFERENCE
+from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE, CONTACT_PREFERENCE_NO_CALLBACK, ANNOUNCE_PREFERENCE
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
 from cla_public.apps.contact.constants import SELECT_OPTION_DEFAULT
 from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
+from cla_public.apps.checker.api import get_valid_callback_days
 
 
 LANG_CHOICES = filter(lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", "")] + ADAPTATION_LANGUAGES)
@@ -123,6 +124,9 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Form to contact CLA
     """
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.update_contact_preference()
 
     full_name = StringField(
         _(u"Your full name"),
@@ -131,11 +135,18 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             InputRequired(message=_(u"Tell us your name")),
         ],
     )
+
     contact_type = RadioField(
         _(u"Select a contact option"),
         choices=CONTACT_PREFERENCE,
         validators=[InputRequired(message=_(u"Tell us how we should get in contact"))],
     )
+    
+    def update_contact_preference(self):
+        # If there are no callback slots available when the contact_type field is called the callback option should be removed.
+        callback_slots_available = len(get_valid_callback_days()) != 0
+        self.contact_type.choices = CONTACT_PREFERENCE if callback_slots_available else CONTACT_PREFERENCE_NO_CALLBACK
+
     callback = ValidatedFormField(
         CallBackForm,
         validators=[IgnoreIf("contact_type", FieldValue("call")), IgnoreIf("contact_type", FieldValue("thirdparty"))],

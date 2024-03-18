@@ -101,9 +101,9 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     Select field with available time slots for a specific day as options
     """
 
-    def __init__(self, choices_callback=None, validators=None, is_third_party_callback=False, **kwargs):
+    def __init__(self, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
-        self.choices = map(time_choice, choices_callback())
+        self.choices = map(time_choice, get_valid_callback_timeslots_on_date(datetime.date.today()))
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 
@@ -163,7 +163,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
 
     # choices must be set dynamically as cache is not available at runtime
     time_today = TimeChoiceField(
-        OPERATOR_HOURS.today_slots,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)),
             InputRequired(message=_(TIME_TODAY_VALIDATION_ERROR)),
@@ -173,11 +172,10 @@ class AvailabilityCheckerForm(NoCsrfForm):
     day = DayChoiceField(
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
-            InputRequired(message=_(DAY_SPECIFIC_VALIDATION_ERROR)),
+            InputRequired(message=_(DAY_SPECIFIC_VALIDATION_ERROR))
         ]
     )
     time_in_day = TimeChoiceField(
-        OPERATOR_HOURS.time_slots,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
             InputRequired(message=_(TIME_SPECIFIC_VALIDATION_ERROR)),
