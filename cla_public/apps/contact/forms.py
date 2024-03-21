@@ -9,7 +9,7 @@ from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, RadioField, SelectField, StringField, TextAreaField
 from wtforms.validators import InputRequired, Optional, Required, Length
 
-from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
+from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP, CALLBACK_TYPES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
 from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE, CONTACT_PREFERENCE_NO_CALLBACK, ANNOUNCE_PREFERENCE
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
@@ -205,6 +205,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         if self.contact_type.data == "callback":
             data["requires_action_at"] = process_selected_time(self.callback.form.time)
             data["personal_details"]["announce_call"] = self.callback.form.announce_call_from_cla.data
+            data["callback_type"] = CALLBACK_TYPES.CHECKER_SELF
 
         if self.contact_type.data == "thirdparty":
             data["thirdparty_details"] = {"personal_details": {}}
@@ -212,6 +213,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             data["thirdparty_details"]["personal_details"]["mobile_phone"] = self.thirdparty.contact_number.data
             data["thirdparty_details"]["personal_details"]["safe_to_contact"] = SAFE_TO_CONTACT
             data["thirdparty_details"]["personal_relationship"] = self.thirdparty.relationship.data
+            data["callback_type"] = CALLBACK_TYPES.CHECKER_THIRD_PARTY
 
             data["requires_action_at"] = process_selected_time(self.thirdparty.form.time)
 
