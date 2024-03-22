@@ -42,10 +42,12 @@ class FormattedChoiceField(object):
             self.data = value
 
     def iter_choices(self):
-        for value, label in self.choices:
+        for value, label in self.choices:   
             yield (value, label, self.coerce(value) == self._format(self.data))
 
     def pre_validate(self, form):
+        if isinstance(form, AvailabilityCheckerForm):
+            return True  # This is validated using AvailableSlot 
         choice_values = (v for v, _ in self.choices)
         if self._format(self.data) not in choice_values:
             raise ValueError(self.gettext("Not a valid choice"))
@@ -104,7 +106,7 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, third_party_callback=False, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.is_third_party_callback = third_party_callback
-        self.choices = map(time_choice, OPERATOR_HOURS.time_slots())
+        self.choices = map(time_choice, get_valid_callback_timeslots_on_date(datetime.date.today(), is_third_party_callback=self.is_third_party_callback))
 
     def set_day_choices(self, day):
         self.choices = map(time_choice, get_valid_callback_timeslots_on_date(day, is_third_party_callback=self.is_third_party_callback))
