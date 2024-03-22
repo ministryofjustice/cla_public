@@ -25,7 +25,7 @@ from cla_public.apps.contact.constants import (
 )
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import day_choice, time_choice
-from cla_public.apps.checker.api import get_valid_callback_slots, get_valid_callback_days, get_valid_callback_timeslots_on_date
+from cla_public.apps.contact.api import get_valid_callback_slots, get_valid_callback_days, get_valid_callback_timeslots_on_date
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
 
@@ -61,10 +61,10 @@ class DayChoiceField(FormattedChoiceField, SelectField):
     Select field with next `num_days` days as options
     """
 
-    def __init__(self, num_days=6, *args, **kwargs):
+    def __init__(self, third_party_callback=False, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
-        
-        self.valid_days = get_valid_callback_days(include_today=False)
+        self.is_third_party_callback = third_party_callback
+        self.valid_days = get_valid_callback_days(include_today=False, is_third_party_callback=self.is_third_party_callback)
         self.choices = map(day_choice, self.valid_days)
         append_default_option_to_list(self.choices, SELECT_DATE_OPTION_DEFAULT)
         self.day_choices = map(day_choice, self.valid_days)
@@ -74,7 +74,7 @@ class DayChoiceField(FormattedChoiceField, SelectField):
         # Generate time slots options for call on another day select options
 
         def time_slots(day):
-            slots = OrderedDict(time_slots_for_day(day.date()))
+            slots = OrderedDict(time_slots_for_day(day.date(), self.is_third_party_callback))
             return (self._format(day), slots)
         return dict(map(time_slots, self.valid_days))
 
@@ -101,12 +101,13 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     Select field with available time slots for a specific day as options
     """
 
-    def __init__(self, today_field=True, validators=None, **kwargs):
+    def __init__(self, third_party_callback=False, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
+        self.is_third_party_callback = third_party_callback
         self.choices = map(time_choice, OPERATOR_HOURS.time_slots())
 
     def set_day_choices(self, day):
-        self.choices = map(time_choice, self.get_slots_on_date(day))
+        self.choices = map(time_choice, get_valid_callback_timeslots_on_date(day, is_third_party_callback=self.is_third_party_callback))
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 
@@ -161,7 +162,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
 
     # choices must be set dynamically as cache is not available at runtime
     time_today = TimeChoiceField(
-        today_field=True,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)),
             InputRequired(message=_(TIME_TODAY_VALIDATION_ERROR)),
@@ -175,7 +175,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
         ]
     )
     time_in_day = TimeChoiceField(
-        today_field=False,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
             InputRequired(message=_(TIME_SPECIFIC_VALIDATION_ERROR)),
@@ -187,18 +186,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC
-
-        self.slots = get_valid_callback_slots(num_days=7, is_third_party_callback=False)
-
-        for field in [self.time_in_day, self.time_today]:
-            field.get_slots_on_day = self.get_slots_on_date
-            
-    def get_slots_on_date(self, date):
-        return filter(lambda slot_date: slot_date.date() == date, self.slots)
-    
-    def get_valid_callback_days(self):
-        valid_callback_days = set(slot.date() for slot in self.slots)
-        return [datetime.datetime.combine(day, datetime.time(0, 0)) for day in valid_callback_days]
 
     def scheduled_time(self, today=None):
         """
@@ -218,7 +205,6 @@ class AvailabilityCheckerForm(NoCsrfForm):
             return datetime.datetime.combine(date, time)
 
         return None
-
 
 class AvailabilityCheckerField(FormField):
     """Convenience class for FormField(AvailabilityCheckerForm"""

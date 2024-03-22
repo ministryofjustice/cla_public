@@ -18,7 +18,7 @@ from cla_public.apps.contact.validators import EmailValidator
 from cla_public.apps.contact.constants import SELECT_OPTION_DEFAULT
 from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
-from cla_public.apps.checker.api import get_valid_callback_days
+from cla_public.apps.contact.api import get_valid_callback_days
 
 
 LANG_CHOICES = filter(lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", "")] + ADAPTATION_LANGUAGES)
