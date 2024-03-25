@@ -37,12 +37,13 @@ def get_valid_callback_timeslots_on_date(date, is_third_party_callback=False):
         List[Datetimes]: List of valid datetimes.
     """
     valid_callback_times = []
-    
+
     slots = get_valid_callback_slots(num_days=7, is_third_party_callback=is_third_party_callback)
-    
+
     valid_callback_times = filter(lambda slot_date: slot_date.date() == date, slots)
     return valid_callback_times
-        
+
+
 @on_timeout(response="[]")
 @log_api_errors_to_sentry
 def get_valid_callback_days(include_today=True, is_third_party_callback=False):
@@ -51,9 +52,9 @@ def get_valid_callback_days(include_today=True, is_third_party_callback=False):
     Returns:
         List[Datetimes]: List of valid datetimes.
     """
-    slots = get_valid_callback_slots(num_days=7, is_third_party_callback=is_third_party_callback) 
+    slots = get_valid_callback_slots(num_days=7, is_third_party_callback=is_third_party_callback)
     valid_callback_days = set(slot.date() for slot in slots)
-    
+
     if not include_today:
         today = datetime.datetime.today().date()
         if today in valid_callback_days:

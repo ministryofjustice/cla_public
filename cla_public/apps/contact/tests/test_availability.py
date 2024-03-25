@@ -1,7 +1,7 @@
 from contextlib import contextmanager
 import datetime
 import logging
-from mock import Mock, patch
+from mock import Mock
 import unittest
 import mock
 

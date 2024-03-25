@@ -2,7 +2,7 @@ from collections import OrderedDict
 import logging
 import urllib
 
-from flask import current_app, session, jsonify
+from flask import current_app, session
 from requests.exceptions import ConnectionError, Timeout
 import slumber
 from slumber.exceptions import SlumberBaseException
@@ -12,7 +12,6 @@ from cla_common.constants import ELIGIBILITY_STATES
 from cla_public.apps.checker.constants import CATEGORIES
 from cla_public.libs.api_proxy import on_timeout
 from cla_public.libs.utils import get_locale
-import datetime
 
 
 log = logging.getLogger(__name__)
@@ -227,6 +226,7 @@ def get_ordered_organisations_by_category(**kwargs):
                 categories[cat["name"]].append(organisation)
                 break
     return categories
+
 
 @ignore_api_error
 @log_api_errors_to_sentry

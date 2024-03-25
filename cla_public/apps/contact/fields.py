@@ -43,12 +43,12 @@ class FormattedChoiceField(object):
             self.data = value
 
     def iter_choices(self):
-        for value, label in self.choices:   
+        for value, label in self.choices:
             yield (value, label, self.coerce(value) == self._format(self.data))
 
     def pre_validate(self, form):
         if isinstance(form, AvailabilityCheckerForm):
-            return True  # This is validated using AvailableSlot 
+            return True  # This is validated using AvailableSlot
         choice_values = (v for v, _ in self.choices)
         if self._format(self.data) not in choice_values:
             raise ValueError(self.gettext("Not a valid choice"))
@@ -71,9 +71,11 @@ class DayChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, third_party_callback=False, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.is_third_party_callback = third_party_callback
-
-        self.valid_days = get_valid_callback_days(include_today=False, is_third_party_callback=self.is_third_party_callback) if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False) else OPERATOR_HOURS.available_days(num_days)
-
+        self.valid_days = (
+            get_valid_callback_days(include_today=False, is_third_party_callback=self.is_third_party_callback)
+            if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False)
+            else OPERATOR_HOURS.available_days(num_days)
+        )
         self.choices = map(day_choice, self.valid_days)
         append_default_option_to_list(self.choices, SELECT_DATE_OPTION_DEFAULT)
         self.day_choices = map(day_choice, self.valid_days)
@@ -85,6 +87,7 @@ class DayChoiceField(FormattedChoiceField, SelectField):
         def time_slots(day):
             slots = OrderedDict(time_slots_for_day(day.date(), self.is_third_party_callback))
             return (self._format(day), slots)
+
         return dict(map(time_slots, self.valid_days))
 
     def process_formdata(self, valuelist):
@@ -113,7 +116,13 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, choices_callback=None, third_party_callback=False, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.is_third_party_callback = third_party_callback
-        valid_slots = get_valid_callback_timeslots_on_date(datetime.date.today(), is_third_party_callback=self.is_third_party_callback) if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False) else choices_callback()
+        valid_slots = (
+            get_valid_callback_timeslots_on_date(
+                datetime.date.today(), is_third_party_callback=self.is_third_party_callback
+            )
+            if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False)
+            else choices_callback()
+        )
         self.choices = map(time_choice, valid_slots)
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
@@ -184,7 +193,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
     day = DayChoiceField(
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
-            InputRequired(message=_(DAY_SPECIFIC_VALIDATION_ERROR))
+            InputRequired(message=_(DAY_SPECIFIC_VALIDATION_ERROR)),
         ]
     )
     time_in_day = TimeChoiceField(
@@ -248,6 +257,7 @@ class ThirdPartyAvailabilityCheckerForm(AvailabilityCheckerForm):
         ],
     )
     
+
 
 class AvailabilityCheckerField(FormField):
     """Convenience class for FormField(AvailabilityCheckerForm"""
