@@ -1,7 +1,7 @@
 from contextlib import contextmanager
 import datetime
 import logging
-from mock import Mock, patch
+from mock import Mock
 import unittest
 import mock
 
@@ -231,6 +231,8 @@ class TestCallbackInPastBug(FlaskAppTestCase):
         with override_current_time(datetime.datetime(2015, 2, 11, 22, 19)):
             form = ContactForm()
             self.assertEqual([], form.callback.time.form.time_today.choices)
+
+
 class TestTimeChoiceField(unittest.TestCase):
     def setUp(self):
         self.form = Form()

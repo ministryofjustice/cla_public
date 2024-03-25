@@ -11,7 +11,12 @@ from wtforms.validators import InputRequired, Optional, Required, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP, CALLBACK_TYPES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
-from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE, CONTACT_PREFERENCE_NO_CALLBACK, ANNOUNCE_PREFERENCE
+from cla_public.apps.checker.constants import (
+    SAFE_TO_CONTACT,
+    CONTACT_PREFERENCE,
+    CONTACT_PREFERENCE_NO_CALLBACK,
+    ANNOUNCE_PREFERENCE,
+)
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
@@ -124,6 +129,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     Form to contact CLA
     """
+
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
         if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
@@ -142,7 +148,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         choices=CONTACT_PREFERENCE,
         validators=[InputRequired(message=_(u"Tell us how we should get in contact"))],
     )
-    
+
     def update_contact_preference(self):
         # If there are no callback slots available when the contact_type field is called the callback option should be removed.
         callback_slots_available = len(get_valid_callback_days()) != 0
