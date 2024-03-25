@@ -52,10 +52,11 @@ def format_time_welsh_suffix(time):
 def format_time(dt):
     time = dt.time() if isinstance(dt, datetime.datetime) else dt
     time_format = "%-I.%M" if time.minute != 0 else "%-I"
+    formatted_time = time.strftime(time_format)
 
     time_suffix = time.strftime("%p").lower()
 
-    return "%s%s" % (time_format, time_suffix)
+    return "%s%s" % (formatted_time, time_suffix)
 
 
 def format_time_option(start_time):
