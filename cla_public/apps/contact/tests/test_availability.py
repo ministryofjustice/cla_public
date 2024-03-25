@@ -179,12 +179,66 @@ class TestAvailability(FlaskAppTestCase):
             self.assertTrue(OPERATOR_HOURS.can_schedule_callback(monday_after_11))
 
 
+class TestDayTimeChoices(unittest.TestCase):
+    def assertDayInChoices(self, day, choices):
+        self.assertIn(day, [d for d, _ in choices])
+
+    def test_day_time_choices(self):
+        with override_current_time(datetime.datetime(2015, 2, 13, 21)):
+            form = Mock()
+            field = DayChoiceField()
+            field = field.bind(form, "day")
+            choices = field.day_time_choices
+            # lower availability on saturday
+            self.assertEqual(7, len(choices["20150214"]))
+            # can book before 11am on monday. Monday morning call back capping removed.
+            self.assertEqual(22, len(choices["20150216"]))
+            # can book any slot on tuesday
+            self.assertEqual(22, len(choices["20150217"]))
+
+    def test_monday_available_before_11_on_saturday(self):
+        with override_current_time(datetime.datetime(2015, 5, 9, 10, 30)):
+            form = Mock()
+            field = DayChoiceField()
+            field = field.bind(form, "day")
+            self.assertDayInChoices("20150511", field.choices)
+
+        with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
+            form = Mock()
+            field = DayChoiceField()
+            field = field.bind(form, "day")
+            self.assertDayInChoices("20150526", field.choices)
+
+    def test_available_days(self):
+        with override_current_time(datetime.datetime(2015, 5, 23, 10, 30)):
+            days = OPERATOR_HOURS.available_days()
+            self.assertIn(datetime.datetime(2015, 5, 26, 10, 30), days)
+
+
+class TestCallbackInPastBug(FlaskAppTestCase):
+    """
+    Had 2 cases in which callbacks were requested in the past:
+    EU-5247-5578 created 2015-02-11 23:03 for 2015-02-11 10:30
+    YJ-4697-7619 created 2015-02-11 22:19 for 2015-02-11 11:00
+    """
+
+    def test_EU_5247_5578(self):
+        with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
+            form = ContactForm()
+            self.assertEqual([], form.callback.time.form.time_today.choices)
+
+    def test_YJ_4697_7619(self):
+        with override_current_time(datetime.datetime(2015, 2, 11, 22, 19)):
+            form = ContactForm()
+            self.assertEqual([], form.callback.time.form.time_today.choices)
+
+
 class TestTimeChoiceField(unittest.TestCase):
     def setUp(self):
         self.form = Form()
         formdata = ImmutableMultiDict([("a", "1930")])
         with override_current_time(datetime.datetime(2015, 2, 11, 23, 3)):
-            field = TimeChoiceField(validators=[InputRequired()])
+            field = TimeChoiceField(choices_callback=OPERATOR_HOURS.time_slots, validators=[InputRequired()])
             self.field = field.bind(self.form, "a")
             self.field.process(formdata)
 

@@ -4,6 +4,7 @@ from collections import OrderedDict
 
 import datetime
 
+from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 from wtforms import FormField, RadioField, SelectField
 from wtforms import Form as NoCsrfForm
@@ -25,7 +26,7 @@ from cla_public.apps.contact.constants import (
 )
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import day_choice, time_choice
-from cla_public.apps.contact.api import get_valid_callback_slots, get_valid_callback_days, get_valid_callback_timeslots_on_date
+from cla_public.apps.contact.api import get_valid_callback_days, get_valid_callback_timeslots_on_date
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
 
@@ -54,7 +55,11 @@ class FormattedChoiceField(object):
 
 
 def time_slots_for_day(day, is_third_party_callback=False):
-    slots = get_valid_callback_timeslots_on_date(day, is_third_party_callback)
+    if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
+        slots = get_valid_callback_timeslots_on_date(day, is_third_party_callback)
+    else:
+        slots = OPERATOR_HOURS.time_slots(day)
+        slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
     return map(time_choice, slots)
 
 
@@ -66,7 +71,9 @@ class DayChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, third_party_callback=False, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.is_third_party_callback = third_party_callback
-        self.valid_days = get_valid_callback_days(include_today=False, is_third_party_callback=self.is_third_party_callback)
+
+        self.valid_days = get_valid_callback_days(include_today=False, is_third_party_callback=self.is_third_party_callback) if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False) else OPERATOR_HOURS.available_days(num_days)
+
         self.choices = map(day_choice, self.valid_days)
         append_default_option_to_list(self.choices, SELECT_DATE_OPTION_DEFAULT)
         self.day_choices = map(day_choice, self.valid_days)
@@ -103,13 +110,16 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     Select field with available time slots for a specific day as options
     """
 
-    def __init__(self, third_party_callback=False, validators=None, **kwargs):
+    def __init__(self, choices_callback=None, third_party_callback=False, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.is_third_party_callback = third_party_callback
-        self.choices = map(time_choice, get_valid_callback_timeslots_on_date(datetime.date.today(), is_third_party_callback=self.is_third_party_callback))
+        valid_slots = get_valid_callback_timeslots_on_date(datetime.date.today(), is_third_party_callback=self.is_third_party_callback) if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False) else choices_callback()
+        self.choices = map(time_choice, valid_slots)
+        if self.choices:
+            append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 
     def set_day_choices(self, day):
-        self.choices = map(time_choice, get_valid_callback_timeslots_on_date(day, is_third_party_callback=self.is_third_party_callback))
+        self.choices = time_slots_for_day(day, self.is_third_party_callback)
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 
@@ -164,6 +174,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
 
     # choices must be set dynamically as cache is not available at runtime
     time_today = TimeChoiceField(
+        choices_callback=OPERATOR_HOURS.today_slots,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)),
             InputRequired(message=_(TIME_TODAY_VALIDATION_ERROR)),
@@ -177,6 +188,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
         ]
     )
     time_in_day = TimeChoiceField(
+        choices_callback=OPERATOR_HOURS.time_slots,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
             InputRequired(message=_(TIME_SPECIFIC_VALIDATION_ERROR)),
@@ -211,6 +223,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
     
 class ThirdPartyAvailabilityCheckerForm(AvailabilityCheckerForm):
     time_today = TimeChoiceField(
+        choices_callback=OPERATOR_HOURS.today_slots,
         third_party_callback=True,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_TODAY)),
@@ -226,6 +239,7 @@ class ThirdPartyAvailabilityCheckerForm(AvailabilityCheckerForm):
         ]
     )
     time_in_day = TimeChoiceField(
+        choices_callback=OPERATOR_HOURS.time_slots,
         third_party_callback=True,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
