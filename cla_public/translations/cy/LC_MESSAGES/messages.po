@@ -2041,9 +2041,13 @@ msgid ""
 "        "
 msgstr "Byddwn ni’n gofyn cwestiynau am eich problem gyfreithiol ac eich sefyllfa gyllidol. Efallai bydd rhaid i chi ddangos tystiolaeth o unrhyw wybodaeth ariannol rydych chi’n cyflenwi."
 
-#: cla_public/templates/contact.html:84
+#: cla_public/templates/contact.html:85
 msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
-msgstr "Byddwn yn cyflwyno rhif ffôn Cymorth Cyfreithiol Sifil ar ôl i chi danfon eich manylion i ni."
+msgstr "Byddwn yn rhoi rhif ffôn Civil Legal Advice i chi pan fyddwch yn cyflwyno eich manylion."
+
+#: cla_public/templates/contact.html:87
+msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
+msgstr "Byddwn yn rhoi rhif ffôn Civil Legal Advice i chi pan fyddwch yn cyflwyno eich manylion. Os ydych chi'n poeni am gost yr alwad hon, gofynnwch i ni eich ffonio'n ôl."
 
 #: cla_public/templates/contact.html:120
 #, python-format

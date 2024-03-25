@@ -9,15 +9,21 @@ from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, RadioField, SelectField, StringField, TextAreaField
 from wtforms.validators import InputRequired, Optional, Required, Length
 
-from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
+from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP, CALLBACK_TYPES
 from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
-from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE, ANNOUNCE_PREFERENCE
+from cla_public.apps.checker.constants import (
+    SAFE_TO_CONTACT,
+    CONTACT_PREFERENCE,
+    CONTACT_PREFERENCE_NO_CALLBACK,
+    ANNOUNCE_PREFERENCE,
+)
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
 from cla_public.apps.contact.constants import SELECT_OPTION_DEFAULT
 from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
+from cla_public.apps.contact.api import get_valid_callback_days
 
 
 LANG_CHOICES = filter(lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", "")] + ADAPTATION_LANGUAGES)
@@ -124,6 +130,11 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     Form to contact CLA
     """
 
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
+            self.update_contact_preference()
+
     full_name = StringField(
         _(u"Your full name"),
         validators=[
@@ -131,11 +142,18 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             InputRequired(message=_(u"Tell us your name")),
         ],
     )
+
     contact_type = RadioField(
         _(u"Select a contact option"),
         choices=CONTACT_PREFERENCE,
         validators=[InputRequired(message=_(u"Tell us how we should get in contact"))],
     )
+
+    def update_contact_preference(self):
+        # If there are no callback slots available when the contact_type field is called the callback option should be removed.
+        callback_slots_available = len(get_valid_callback_days()) != 0
+        self.contact_type.choices = CONTACT_PREFERENCE if callback_slots_available else CONTACT_PREFERENCE_NO_CALLBACK
+
     callback = ValidatedFormField(
         CallBackForm,
         validators=[IgnoreIf("contact_type", FieldValue("call")), IgnoreIf("contact_type", FieldValue("thirdparty"))],
@@ -194,6 +212,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         if self.contact_type.data == "callback":
             data["requires_action_at"] = process_selected_time(self.callback.form.time)
             data["personal_details"]["announce_call"] = self.callback.form.announce_call_from_cla.data
+            data["callback_type"] = CALLBACK_TYPES.CHECKER_SELF
 
         if self.contact_type.data == "thirdparty":
             data["thirdparty_details"] = {"personal_details": {}}
@@ -201,6 +220,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             data["thirdparty_details"]["personal_details"]["mobile_phone"] = self.thirdparty.contact_number.data
             data["thirdparty_details"]["personal_details"]["safe_to_contact"] = SAFE_TO_CONTACT
             data["thirdparty_details"]["personal_relationship"] = self.thirdparty.relationship.data
+            data["callback_type"] = CALLBACK_TYPES.CHECKER_THIRD_PARTY
 
             data["requires_action_at"] = process_selected_time(self.thirdparty.form.time)
 

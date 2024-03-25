@@ -39,7 +39,7 @@ moj.Modules.AvailabilityTimes = {
       var d = dayTimes[v];
       return $('<option>', { value: v, html: d });
     });
-    $options.unshift($('<option>', { value: "", html: "-- Please select --" }))
+    $options.unshift($('<option>', { value: "", html: "Select time:" }))
 
     $timeSelector
       .html($options)

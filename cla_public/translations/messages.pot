@@ -2037,8 +2037,12 @@ msgid ""
 "        "
 msgstr ""
 
-#: cla_public/templates/contact.html:84
+#: cla_public/templates/contact.html:85
 msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
+msgstr ""
+
+#: cla_public/templates/contact.html:87
+msgid "We’ll give you the Civil Legal Advice phone number when you submit your details. If you’re worried about the cost of this call, ask us to call you back."
 msgstr ""
 
 #: cla_public/templates/contact.html:120

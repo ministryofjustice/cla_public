@@ -88,3 +88,7 @@ envVars:
       name: notify-orchestrator
       key: url
       optional: true
+  USE_BACKEND_CALLBACK_SLOTS:
+    configmap:
+      name: backend-callback-slots
+      key: enabled
