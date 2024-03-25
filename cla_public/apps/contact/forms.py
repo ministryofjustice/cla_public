@@ -126,7 +126,8 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     """
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
-        self.update_contact_preference()
+        if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
+            self.update_contact_preference()
 
     full_name = StringField(
         _(u"Your full name"),
