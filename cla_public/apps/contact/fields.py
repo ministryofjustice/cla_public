@@ -25,7 +25,7 @@ from cla_public.apps.contact.constants import (
     TIME_SPECIFIC_VALIDATION_ERROR,
 )
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
-from cla_public.libs.call_centre_availability import day_choice, time_choice
+from cla_public.libs.call_centre_availability import format_date_option, format_time_option
 from cla_public.apps.contact.api import get_valid_callback_days, get_valid_callback_timeslots_on_date
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
@@ -60,7 +60,7 @@ def time_slots_for_day(day, is_third_party_callback=False):
     else:
         slots = OPERATOR_HOURS.time_slots(day)
         slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
-    return map(time_choice, slots)
+    return map(format_time_option, slots)
 
 
 class DayChoiceField(FormattedChoiceField, SelectField):
@@ -76,9 +76,9 @@ class DayChoiceField(FormattedChoiceField, SelectField):
             if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False)
             else OPERATOR_HOURS.available_days(num_days)
         )
-        self.choices = map(day_choice, self.valid_days)
+        self.choices = map(format_date_option, self.valid_days)
         append_default_option_to_list(self.choices, SELECT_DATE_OPTION_DEFAULT)
-        self.day_choices = map(day_choice, self.valid_days)
+        self.day_choices = map(format_date_option, self.valid_days)
 
     @property
     def day_time_choices(self):
@@ -123,7 +123,7 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
             if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False)
             else choices_callback()
         )
-        self.choices = map(time_choice, valid_slots)
+        self.choices = map(format_time_option, valid_slots)
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 

@@ -24,8 +24,6 @@ def get_valid_callback_slots(num_days=7, is_third_party_callback=False):
     return slots
 
 
-@on_timeout(response="[]")
-@log_api_errors_to_sentry
 def get_valid_callback_timeslots_on_date(date, is_third_party_callback=False):
     """Lists the times where a callback slot is available from the backend API as list of datetimes.
 
@@ -44,8 +42,6 @@ def get_valid_callback_timeslots_on_date(date, is_third_party_callback=False):
     return valid_callback_times
 
 
-@on_timeout(response="[]")
-@log_api_errors_to_sentry
 def get_valid_callback_days(include_today=True, is_third_party_callback=False):
     """Get the days where a callback slot is available from the backend API as list of datetimes.
 
