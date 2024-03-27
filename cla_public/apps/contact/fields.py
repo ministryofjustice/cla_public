@@ -228,8 +228,8 @@ class AvailabilityCheckerForm(NoCsrfForm):
             return datetime.datetime.combine(date, time)
 
         return None
-    
-    
+
+
 class ThirdPartyAvailabilityCheckerForm(AvailabilityCheckerForm):
     time_today = TimeChoiceField(
         choices_callback=OPERATOR_HOURS.today_slots,
@@ -244,8 +244,8 @@ class ThirdPartyAvailabilityCheckerForm(AvailabilityCheckerForm):
         third_party_callback=True,
         validators=[
             IgnoreIf("specific_day", FieldValueNot(DAY_SPECIFIC)),
-            InputRequired(message=_(DAY_SPECIFIC_VALIDATION_ERROR))
-        ]
+            InputRequired(message=_(DAY_SPECIFIC_VALIDATION_ERROR)),
+        ],
     )
     time_in_day = TimeChoiceField(
         choices_callback=OPERATOR_HOURS.time_slots,
@@ -256,7 +256,6 @@ class ThirdPartyAvailabilityCheckerForm(AvailabilityCheckerForm):
             AvailableSlot(DAY_SPECIFIC),
         ],
     )
-    
 
 
 class AvailabilityCheckerField(FormField):
@@ -274,11 +273,11 @@ class AvailabilityCheckerField(FormField):
 
     def scheduled_time(self):
         return self.form.scheduled_time()
-    
+
 
 class ThirdPartyAvailabilityCheckerField(AvailabilityCheckerField):
     def __init__(self, *args, **kwargs):
-        super(AvailabilityCheckerField, self).__init__(ThirdPartyAvailabilityCheckerForm, *args, **kwargs) 
+        super(AvailabilityCheckerField, self).__init__(ThirdPartyAvailabilityCheckerForm, *args, **kwargs)
 
 
 class ValidatedFormField(FormField):

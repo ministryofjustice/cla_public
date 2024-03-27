@@ -10,12 +10,17 @@ from wtforms import BooleanField, RadioField, SelectField, StringField, TextArea
 from wtforms.validators import InputRequired, Optional, Required, Length
 
 from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP, CALLBACK_TYPES
-from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
+from cla_public.apps.contact.fields import (
+    AvailabilityCheckerField,
+    ValidatedFormField,
+    ThirdPartyAvailabilityCheckerField,
+)
 from cla_public.apps.checker.constants import (
     SAFE_TO_CONTACT,
     CONTACT_PREFERENCE,
     CONTACT_PREFERENCE_NO_CALLBACK,
     ANNOUNCE_PREFERENCE,
+)
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
