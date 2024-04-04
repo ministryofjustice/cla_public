@@ -14,7 +14,9 @@
   {% endif %}
 
   <p class="govuk-body">You can call any legal advisor from this list, so you do not have to pick a local one. If they are busy, you may need to contact more than one.</p>
-  <p class="govuk-body govuk-!-margin-bottom-6">If you cannot find a legal adviser to help you, contact Civil Legal Advice. Tell them that you qualify for housing loss prevention advice.</p>
+  {% if category == 'hlpas' %}
+    <p class="govuk-body govuk-!-margin-bottom-6">If you cannot find a legal adviser to help you, contact Civil Legal Advice. Tell them that you qualify for housing loss prevention advice.</p>
+  {% endif %}
 
   {% for item in data.results %}
   <div>
@@ -26,14 +28,15 @@
       <p class="govuk-body govuk-!-margin-bottom-2">Address: {{ item.location.address}}, {{item.location.city }}, {{ item.location.postcode }}</p>
     {% endif %}
     {% if item.organisation.website %}
-      <p class="govuk-body govuk-!-margin-bottom-2">Website: <a href='http://{{ item.organisation.website }}'> {{ item.organisation.website }}</a></p>
+      <p class="govuk-body govuk-!-margin-bottom-2">Website: <a target="_blank" href='http://{{ item.organisation.website }}'> {{ item.organisation.website }} (opens in a new tab)</a></p>
     {% endif %}
-      <p class="govuk-body govuk-!-margin-bottom-2"><a href='https://www.google.com/maps/dir/?api=1&origin={{ data.origin.postcode }}&destination={{ item.location.address }}, {{ item.location.postcode }}'>Map and directions (opens in a new tab)</a></p>
-    <div class="govuk-!-margin-bottom-2">
+      <p class="govuk-body govuk-!-margin-bottom-2"><a target="_blank" href='https://www.google.com/maps/dir/?api=1&origin={{ data.origin.postcode }}&destination={{ item.location.address }}, {{ item.location.postcode }}'>Map and directions (opens in a new tab)</a></p>
+      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">Categories of law</p>
+      <ul class="govuk-list govuk-list--bullet">
       {% for category in item.categories%}
-        <strong class="govuk-tag govuk-tag--grey">{{ category }}</strong>
+        <li><p class="govuk-body govuk-!-margin-bottom-1">{{ category }}</p></li>
       {% endfor %}
-    </div>
+      </ul>
   </div>
   
   {% endfor %}
