@@ -16,7 +16,20 @@
   <p class="govuk-body">You can call any legal advisor from this list, so you do not have to pick a local one. If they are busy, you may need to contact more than one.</p>
   {% if category == 'hlpas' %}
     <p class="govuk-body govuk-!-margin-bottom-6">If you cannot find a legal adviser to help you, contact Civil Legal Advice. Tell them that you qualify for housing loss prevention advice.</p>
-  {% endif %}
+  {% elif category == 'clinneg' %}
+  <p class="govuk-body">
+    {% trans %}You will usually only get legal aid for advice about
+      clinical negligence if your child has suffered a brain injury during pregnancy,
+      birth or in the first 8 weeks of life.{% endtrans %}
+  </p>
+
+{% elif category == 'pi' %}
+  <p class="govuk-body">
+    {% trans %}You may be able to get legal aid in exceptional cases. You
+      could seek advice from a legal adviser about whether an application
+      might succeed in your case and how to apply.{% endtrans %}
+  </p>
+{% endif %}
 
   {% for item in data.results %}
   <div>
@@ -31,15 +44,11 @@
       <p class="govuk-body govuk-!-margin-bottom-2">Website: <a target="_blank" href='http://{{ item.organisation.website }}'> {{ item.organisation.website }} (opens in a new tab)</a></p>
     {% endif %}
       <p class="govuk-body govuk-!-margin-bottom-2"><a target="_blank" href='https://www.google.com/maps/dir/?api=1&origin={{ data.origin.postcode }}&destination={{ item.location.address }}, {{ item.location.postcode }}'>Map and directions (opens in a new tab)</a></p>
-      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">Categories of law</p>
-      <ul class="govuk-list govuk-list--bullet">
-      {% for category in item.categories%}
-        <li><p class="govuk-body govuk-!-margin-bottom-1">{{ category }}</p></li>
-      {% endfor %}
-      </ul>
   </div>
   
   {% endfor %}
+
+  <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4 govuk-!-margin-top-4">
 
   <nav class="govuk-pagination" aria-label="Pagination">
     {% if data.current_page | int != 1 %}
@@ -162,42 +171,44 @@
     {% endcall %}
   {% endif %}
 
-  {% if title %}
-  {% elif category == 'pi' %}
+  {% if category == 'pi' %}
     <h1 class="govuk-heading-xl">
       {{ _('Legal aid is not usually available for advice about personal injury') }}
     </h1>
   {% else %}
-    <h1 class="govuk-heading-xl">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
       {{ _('Find a legal advisor') }}
     </h1>
+    {% if category %}
+      <span class="govuk-caption-l govuk-!-margin-bottom-6">For {{category_name.lower()}}</span>
+    {% endif %}
   {% endif %}
 
   {% set find_legal_advisor_subtitle = _('Find a legal adviser') %}
 
 {% endif %}
 
-{% if category == 'clinneg' %}
-  <p class="govuk-body">
-    {% trans %}You will usually only get legal aid for advice about
-      clinical negligence if your child has suffered a brain injury during pregnancy,
-      birth or in the first 8 weeks of life.{% endtrans %}
-  </p>
-  <h2 class="govuk-heading-m">{{ _('What happens next') }}</h2>
-  <p class="govuk-body">
-    {% trans %}You should contact a legal aid adviser in your area, who may be able to help.{% endtrans %}
-  </p>
+
+{% if 'postcode' not in request.args %}
+
+{% if category == 'hlpas' %}
+<p class="govuk-body govuk-!-margin-bottom-6">If you cannot find a legal adviser to help you, contact Civil Legal Advice. Tell them that you qualify for housing loss prevention advice.</p>
+{% elif category == 'clinneg' %}
+<p class="govuk-body">
+{% trans %}You will usually only get legal aid for advice about
+  clinical negligence if your child has suffered a brain injury during pregnancy,
+  birth or in the first 8 weeks of life.{% endtrans %}
+</p>
 
 {% elif category == 'pi' %}
-  <p class="govuk-body">
-    {% trans %}You may be able to get legal aid in exceptional cases. You
-      could seek advice from a legal adviser about whether an application
-      might succeed in your case and how to apply.{% endtrans %}
-  </p>
-  <h2 class="govuk-heading-m">{{ _('What happens next') }}</h2>
-{% else %}
-  <h2 class="govuk-heading-m">{{ _('What happens next') }}</h2>
+<p class="govuk-body">
+{% trans %}You may be able to get legal aid in exceptional cases. You
+  could seek advice from a legal adviser about whether an application
+  might succeed in your case and how to apply.{% endtrans %}
+</p>
 {% endif %}
+
+<h2 class="govuk-heading-m">{{ _('What happens next') }}</h2>
 
 <p class="govuk-body">
   {% trans %}Your adviser will check whether you qualify for legal aid <strong>at no cost to you</strong> by asking about your problem and your finances.{% endtrans %}
@@ -240,7 +251,7 @@
     {{ _('Search') }}
   </button>
 </form>
-
+{% endif %}
 
 <script nonce="{{ csp_nonce() }}">
   window.LABELS = {
