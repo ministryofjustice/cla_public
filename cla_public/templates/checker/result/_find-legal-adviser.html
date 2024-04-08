@@ -8,12 +8,15 @@
   {% if category %}
     {% if category == 'housing' %}
         <span class="govuk-caption-l govuk-!-margin-bottom-6">For the Housing Loss Prevention Advice Scheme</span>
+    {% elif category == 'aap' %}
+        <span class="govuk-caption-l govuk-!-margin-bottom-6">For trouble with the police and public authorities</span>
     {% else %}
       <span class="govuk-caption-l govuk-!-margin-bottom-6">For {{category_name.lower()}}</span>
     {% endif %}
   {% endif %}
 
-  <p class="govuk-body">You can call any legal advisor from this list, so you do not have to pick a local one. If they are busy, you may need to contact more than one.</p>
+  <p class="govuk-body">You can contact any legal adviser from this list.</p>
+  <p class="govuk-body">Your adviser will check whether you qualify for legal aid <strong>at no cost to you</strong> by asking about your problem and your finances. In some cases you may need to pay a contribution towards your legal aid.</p>
   {% if category == 'hlpas' %}
     <p class="govuk-body govuk-!-margin-bottom-6">If you cannot find a legal adviser to help you, contact Civil Legal Advice. Tell them that you qualify for housing loss prevention advice.</p>
   {% elif category == 'clinneg' %}
@@ -31,19 +34,29 @@
   </p>
 {% endif %}
 
+<p id="aria-satisfaction-survey" class="govuk-body">
+  {% trans -%}
+    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">What did you think of this service?</a> (takes 30 seconds)
+  {%- endtrans %}
+</p>
+
+  {% if data.origin.postcode %}
+    <p class="govuk-body">Results in order of closeness to <strong>{{data.origin.postcode}}</strong></p>
+  {% endif %}
+
   {% for item in data.results %}
   <div>
     <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4 govuk-!-margin-top-4">
     <span class="govuk-caption-m govuk-!-margin-bottom-2">{% trans miles=item.distance|round(2) %}{{ miles }} miles away{% endtrans %}</span>
     <p class="govuk-body-l govuk-!-font-weight-bold govuk-!-margin-bottom-2">{{ item.organisation.name }} </p>
-    <p class="govuk-body govuk-!-margin-bottom-2">{{ item.telephone }}</p>
+    <p class="govuk-body govuk-!-margin-bottom-2">Telephone: {{ item.telephone }}</p>
     {% if item.location.address %}
       <p class="govuk-body govuk-!-margin-bottom-2">Address: {{ item.location.address}}, {{item.location.city }}, {{ item.location.postcode }}</p>
     {% endif %}
     {% if item.organisation.website %}
-      <p class="govuk-body govuk-!-margin-bottom-2">Website: <a target="_blank" href='http://{{ item.organisation.website }}'> {{ item.organisation.website }} (opens in a new tab)</a></p>
+      <p class="govuk-body govuk-!-margin-bottom-2">Website: <a target="_blank" class="govuk-link" href='http://{{ item.organisation.website }}'> {{ item.organisation.website }} (opens in a new tab)</a></p>
     {% endif %}
-      <p class="govuk-body govuk-!-margin-bottom-2"><a target="_blank" href='https://www.google.com/maps/dir/?api=1&origin={{ data.origin.postcode }}&destination={{ item.location.address }}, {{ item.location.postcode }}'>Map and directions (opens in a new tab)</a></p>
+      <p class="govuk-body govuk-!-margin-bottom-2"><a target="_blank" class="govuk-link" href='https://www.google.com/maps/dir/?api=1&origin={{ data.origin.postcode }}&destination={{ item.location.address }}, {{ item.location.postcode }}'>Map and directions (opens in a new tab)</a></p>
   </div>
   
   {% endfor %}
@@ -180,7 +193,11 @@
       {{ _('Find a legal advisor') }}
     </h1>
     {% if category %}
+      {% if category == 'aap' %}
+      <span class="govuk-caption-l govuk-!-margin-bottom-6">For trouble with the police and public authorities</span>
+      {% else %}
       <span class="govuk-caption-l govuk-!-margin-bottom-6">For {{category_name.lower()}}</span>
+      {% endif %}
     {% endif %}
   {% endif %}
 
