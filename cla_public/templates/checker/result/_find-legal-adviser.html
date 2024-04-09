@@ -1,38 +1,47 @@
 {% import "macros/form.html" as Form %}
 {% import "macros/element.html" as Element %}
 
-{% if data and data.count and data.count > 0 %}
-  <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
-    {{ _('Contact a legal advsior') }}
-  </h1>
+{% macro category_information(category) %}
+  {% if category == 'hlpas' %}
+    <p class="govuk-body">
+      {% trans %}If you cannot find a legal adviser to help you, contact Civil Legal advice. 
+      Tell them that you qualify for housing loss prevention advice.{% endtrans %}
+    </p>
+  {% elif category == 'clinneg' %}
+    <p class="govuk-body">
+    {% trans %}You will usually only get legal aid for advice about
+      clinical negligence if your child has suffered a brain injury during pregnancy,
+      birth or in the first 8 weeks of life.{% endtrans %}
+    </p>
+  {% elif category == 'pi' %}
+    <p class="govuk-body">
+    {% trans %}You may be able to get legal aid in exceptional cases. You
+      could seek advice from a legal adviser about whether an application
+      might succeed in your case and how to apply.{% endtrans %}
+    </p>
+  {% endif %}
+{% endmacro %}
+
+{% macro category_caption(category) %}
   {% if category %}
-    {% if category == 'housing' %}
-        <span class="govuk-caption-l govuk-!-margin-bottom-6">For the Housing Loss Prevention Advice Scheme</span>
-    {% elif category == 'aap' %}
-        <span class="govuk-caption-l govuk-!-margin-bottom-6">For trouble with the police and public authorities</span>
+    {% if category == 'aap' %}
+        <span class="govuk-caption-l govuk-!-margin-bottom-6">{% trans %}For trouble with the police and public authorities{% endtrans %}</span>
     {% else %}
       <span class="govuk-caption-l govuk-!-margin-bottom-6">For {{category_name.lower()}}</span>
     {% endif %}
   {% endif %}
+{% endmacro %}
+
+{% if data and data.count and data.count > 0 %}
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
+    {{ _('Contact a legal advsior') }}
+    {{ category_caption(category) }}
+  </h1>
+
 
   <p class="govuk-body">You can contact any legal adviser from this list.</p>
   <p class="govuk-body">Your adviser will check whether you qualify for legal aid <strong>at no cost to you</strong> by asking about your problem and your finances. In some cases you may need to pay a contribution towards your legal aid.</p>
-  {% if category == 'hlpas' %}
-    <p class="govuk-body govuk-!-margin-bottom-6">If you cannot find a legal adviser to help you, contact Civil Legal Advice. Tell them that you qualify for housing loss prevention advice.</p>
-  {% elif category == 'clinneg' %}
-  <p class="govuk-body">
-    {% trans %}You will usually only get legal aid for advice about
-      clinical negligence if your child has suffered a brain injury during pregnancy,
-      birth or in the first 8 weeks of life.{% endtrans %}
-  </p>
-
-{% elif category == 'pi' %}
-  <p class="govuk-body">
-    {% trans %}You may be able to get legal aid in exceptional cases. You
-      could seek advice from a legal adviser about whether an application
-      might succeed in your case and how to apply.{% endtrans %}
-  </p>
-{% endif %}
+  {{ category_information(category) }}
 
 <p id="aria-satisfaction-survey" class="govuk-body">
   {% trans -%}
@@ -192,13 +201,7 @@
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
       {{ _('Find a legal advisor') }}
     </h1>
-    {% if category %}
-      {% if category == 'aap' %}
-      <span class="govuk-caption-l govuk-!-margin-bottom-6">For trouble with the police and public authorities</span>
-      {% else %}
-      <span class="govuk-caption-l govuk-!-margin-bottom-6">For {{category_name.lower()}}</span>
-      {% endif %}
-    {% endif %}
+    {{ category_caption(category) }}
   {% endif %}
 
   {% set find_legal_advisor_subtitle = _('Find a legal adviser') %}
@@ -208,66 +211,51 @@
 
 {% if 'postcode' not in request.args %}
 
-{% if category == 'hlpas' %}
-<p class="govuk-body govuk-!-margin-bottom-6">If you cannot find a legal adviser to help you, contact Civil Legal Advice. Tell them that you qualify for housing loss prevention advice.</p>
-{% elif category == 'clinneg' %}
-<p class="govuk-body">
-{% trans %}You will usually only get legal aid for advice about
-  clinical negligence if your child has suffered a brain injury during pregnancy,
-  birth or in the first 8 weeks of life.{% endtrans %}
-</p>
+  {{ category_information(category) }}
 
-{% elif category == 'pi' %}
-<p class="govuk-body">
-{% trans %}You may be able to get legal aid in exceptional cases. You
-  could seek advice from a legal adviser about whether an application
-  might succeed in your case and how to apply.{% endtrans %}
-</p>
-{% endif %}
+  <h2 class="govuk-heading-m">{{ _('What happens next') }}</h2>
 
-<h2 class="govuk-heading-m">{{ _('What happens next') }}</h2>
-
-<p class="govuk-body">
-  {% trans %}Your adviser will check whether you qualify for legal aid <strong>at no cost to you</strong> by asking about your problem and your finances.{% endtrans %}
-  {% trans %}In some cases you may need to pay a contribution towards your legal aid.{% endtrans %}
-</p>
-
-{% if category == 'mentalhealth' %}
   <p class="govuk-body">
-    {% trans %}If you’re applying for legal aid for a mental health issue,
-      the requirements for the financial assessment are less rigorous than
-      for other legal aid problems.{% endtrans %}
+    {% trans %}Your adviser will check whether you qualify for legal aid <strong>at no cost to you</strong> by asking about your problem and your finances.{% endtrans %}
+    {% trans %}In some cases you may need to pay a contribution towards your legal aid.{% endtrans %}
   </p>
-{% endif %}
 
-{% if find_legal_advisor_subtitle == _('Search again') %}
-  <p class="govuk-body">
-    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
-      {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
-  </p>
-{% endif %}
-
-{% if not hide_subtitle %}
-  <h2 class="govuk-heading-m">{{ find_legal_advisor_subtitle }}</h2>
-{% endif %}
-
-<form method="GET">
-  {% if postcode_error == true %}
-    {{ Form.postcode_input(form.postcode, custom_error=_('Postcode not found')) }}
-  {% elif error_text %}
-    {{ Form.postcode_input(form.postcode, custom_error=error_text) }}
-  {% else %}
-    {{ Form.postcode_input(form.postcode) }}
+  {% if category == 'mentalhealth' %}
+    <p class="govuk-body">
+      {% trans %}If you’re applying for legal aid for a mental health issue,
+        the requirements for the financial assessment are less rigorous than
+        for other legal aid problems.{% endtrans %}
+    </p>
   {% endif %}
-  {% if category %}
-    <div class="govuk-form-group ">
-      <input class="govuk-input govuk-input--width-10 " id="category" type="hidden" name="category" value="{{ category }}" />
-    </div>
+
+  {% if find_legal_advisor_subtitle == _('Search again') %}
+    <p class="govuk-body">
+      <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
+        {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
+    </p>
   {% endif %}
-  <button class="govuk-button" type="submit">
-    {{ _('Search') }}
-  </button>
-</form>
+
+  {% if not hide_subtitle %}
+    <h2 class="govuk-heading-m">{{ find_legal_advisor_subtitle }}</h2>
+  {% endif %}
+
+  <form method="GET">
+    {% if postcode_error == true %}
+      {{ Form.postcode_input(form.postcode, custom_error=_('Postcode not found')) }}
+    {% elif error_text %}
+      {{ Form.postcode_input(form.postcode, custom_error=error_text) }}
+    {% else %}
+      {{ Form.postcode_input(form.postcode) }}
+    {% endif %}
+    {% if category %}
+      <div class="govuk-form-group ">
+        <input class="govuk-input govuk-input--width-10 " id="category" type="hidden" name="category" value="{{ category }}" />
+      </div>
+    {% endif %}
+    <button class="govuk-button" type="submit">
+      {{ _('Search') }}
+    </button>
+  </form>
 {% endif %}
 
 <script nonce="{{ csp_nonce() }}">
