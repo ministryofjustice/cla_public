@@ -40,6 +40,9 @@
         {% endif %}
       {% endfor %}
     {% endif %}
+  {% elif 'refer' in request.path and 'postcode' in request.args %}
+    {% set url = url_for(request.endpoint, category=request.args.category) %}
+    <a href={{ url }} class="govuk-back-link">{{ _('Back') }}</a>
   {% else %}
     {% if (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
       {% set url = '/about' %}

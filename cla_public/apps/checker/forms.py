@@ -700,3 +700,4 @@ class ReviewForm(BaseForm):
 
 class FindLegalAdviserForm(Honeypot, BabelTranslationsFormMixin, Form):
     postcode = StringField(_(u"Enter postcode"), validators=[InputRequired(_(u"Enter a postcode"))])
+    category = StringField()
