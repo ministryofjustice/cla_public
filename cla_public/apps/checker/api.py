@@ -15,6 +15,7 @@ from cla_public.libs.utils import get_locale
 
 
 log = logging.getLogger(__name__)
+CALLBACK_API_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 
 class ApiError(Exception):

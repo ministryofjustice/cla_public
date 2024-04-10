@@ -29,6 +29,16 @@ WELSH_ORDINALS = {
 }
 WELSH_DEFAULT_ORDINAL = "ain"
 
+SHORT_MONTHS = {
+    "en": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "cy": ["Ion", "Chwe", "Maw", "Ebr", "Mai", "Meh", "Gor", "Awst", "Med", "Hyd", "Tach", "Rhag"],
+}
+
+SHORT_DAYS = {
+    "en": ["Mon", "Tues", "Weds", "Thurs", "Fri", "Sat", "Sun"],
+    "cy": ["Llun", "Maw", "Mer", "Iau", "Gwe", "Sad", "Sul"],
+}
+
 
 def format_time_welsh_suffix(time):
     if time >= EVENING_NIGHT:
@@ -40,24 +50,24 @@ def format_time_welsh_suffix(time):
 
 
 def format_time(dt):
-    if isinstance(dt, datetime.datetime):
-        time = dt.time()
-    else:
-        time = dt
-    display_format = "%I:%M"
-    display_string = time.strftime(display_format).lstrip("0")
-    if get_locale()[:2] == "cy":
-        time_suffix = format_time_welsh_suffix(time)
-    else:
-        time_suffix = time.strftime("%p")
+    time = dt.time() if isinstance(dt, datetime.datetime) else dt
+    time_format = "%-I.%M" if time.minute != 0 else "%-I"
+    formatted_time = time.strftime(time_format)
 
-    return "%s %s" % (display_string, time_suffix)
+    time_suffix = time.strftime("%p").lower()
+
+    return "%s%s" % (formatted_time, time_suffix)
 
 
-def time_choice(time):
-    end = time + datetime.timedelta(minutes=30)
-    display_string = format_time(time) + " - " + format_time(end)
-    return time.strftime("%H%M"), display_string
+def format_time_option(start_time):
+    end_time = start_time + datetime.timedelta(minutes=30)
+    preposition = "to" if get_locale().startswith("en") else "i"
+
+    # Example time format: 9am to 9.30am
+    formatted_time = "{start_time} {preposition} {end_time}".format(
+        start_time=format_time(start_time), preposition=preposition, end_time=format_time(end_time)
+    )
+    return start_time.strftime("%H%M"), formatted_time
 
 
 def suffix_day_welsh(day):
@@ -77,5 +87,19 @@ def suffix(day):
     return suffix_day_english(day)
 
 
-def day_choice(day):
-    return day.strftime("%Y%m%d"), "%s %s%s" % (_(day.strftime("%A")), day.strftime("%d").lstrip("0"), suffix(day.day))
+def get_short_month_str(day):
+    return SHORT_MONTHS[get_locale()][day.month - 1]
+
+
+def get_short_day_str(day):
+    return SHORT_DAYS[get_locale()][day.weekday()]
+
+
+def format_date_option(day):
+    # Example date format: Mon 1 Jan
+    formatted_date = "{short_day_name} {day_in_month} {short_month_name}".format(
+        short_day_name=get_short_day_str(day),
+        day_in_month=day.strftime("%-d"),
+        short_month_name=get_short_month_str(day),
+    )
+    return day.strftime("%Y%m%d"), formatted_date
