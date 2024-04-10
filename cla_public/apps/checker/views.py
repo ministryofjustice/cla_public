@@ -36,6 +36,7 @@ from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, FormWizardStep, RequiresSession, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 from cla_public.apps.checker.cait_intervention import get_cait_params
+import math
 
 log = logging.getLogger(__name__)
 
@@ -247,8 +248,11 @@ class LaaLaaView(views.MethodView):
     @classmethod
     def handle_find_legal_adviser_form(cls, form, args):
         data = {}
-        page = 1
 
+        items_per_page = 10
+        max_pages = 9
+
+        page = 1
         if "postcode" in args:
             if form.validate():
                 if "page" in args and args["page"].isdigit():
@@ -262,6 +266,11 @@ class LaaLaaView(views.MethodView):
                     form.postcode.errors.append(
                         u"%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
                     )
+
+        data["num_pages"] = 1
+        if "count" in data:
+            data["num_pages"] = min(math.ceil(data["count"] / items_per_page), max_pages)
+
         data["current_page"] = page
         return data
 
