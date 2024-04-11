@@ -62,7 +62,7 @@ flask==0.10.1
     #   sentry-sdk
 future==0.18.3
     # via notifications-python-client
-idna==2.7
+idna==3.7
     # via requests
 ipaddress==1.0.23
     # via cryptography
