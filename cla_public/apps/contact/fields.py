@@ -61,6 +61,10 @@ class DayChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, third_party_callback=False, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.is_third_party_callback = third_party_callback
+        self.valid_days = OPERATOR_HOURS.available_days(num_days)
+        self.choices = map(format_date_option, self.valid_days)
+        append_default_option_to_list(self.choices, SELECT_DATE_OPTION_DEFAULT)
+        self.day_choices = map(format_date_option, self.valid_days)
 
     def populate_field(self, num_days=6):
         self.valid_days = (
@@ -119,6 +123,10 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.is_third_party_callback = third_party_callback
         self.choices_callback = choices_callback
+        valid_slots = choices_callback()
+        self.choices = map(format_time_option, valid_slots)
+        if self.choices:
+            append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 
     def populate_field(self):
         valid_slots = (
