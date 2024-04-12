@@ -27,7 +27,7 @@ from cla_public.apps.contact.validators import EmailValidator
 from cla_public.apps.contact.constants import SELECT_OPTION_DEFAULT
 from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
-from cla_public.apps.contact.api import get_valid_callback_days
+from cla_public.apps.contact.api import CallCentreCapacity
 
 
 LANG_CHOICES = filter(lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", "")] + ADAPTATION_LANGUAGES)
@@ -136,6 +136,9 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
+        self.call_centre_capacity = CallCentreCapacity()
+        self.callback.time.populate_fields(self.call_centre_capacity)
+        self.thirdparty.time.populate_fields(self.call_centre_capacity)
         if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
             self.update_contact_preference()
 
@@ -155,7 +158,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
 
     def update_contact_preference(self):
         # If there are no callback slots available when the contact_type field is called the callback option should be removed.
-        callback_slots_available = len(get_valid_callback_days()) != 0
+        callback_slots_available = len(self.call_centre_capacity.get_valid_callback_days()) != 0
         self.contact_type.choices = CONTACT_PREFERENCE if callback_slots_available else CONTACT_PREFERENCE_NO_CALLBACK
 
     callback = ValidatedFormField(

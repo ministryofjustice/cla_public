@@ -26,7 +26,6 @@ from cla_public.apps.contact.constants import (
 )
 from cla_public.apps.checker.validators import IgnoreIf, FieldValueNot
 from cla_public.libs.call_centre_availability import format_date_option, format_time_option
-from cla_public.apps.contact.api import get_valid_callback_days, get_valid_callback_timeslots_on_date
 
 OPERATOR_HOURS = OpeningHours(**CALL_CENTRE_OPERATOR_HOURS)
 
@@ -54,15 +53,6 @@ class FormattedChoiceField(object):
             raise ValueError(self.gettext("Not a valid choice"))
 
 
-def time_slots_for_day(day, is_third_party_callback=False):
-    if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
-        slots = get_valid_callback_timeslots_on_date(day, is_third_party_callback)
-    else:
-        slots = OPERATOR_HOURS.time_slots(day)
-        slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
-    return map(format_time_option, slots)
-
-
 class DayChoiceField(FormattedChoiceField, SelectField):
     """
     Select field with next `num_days` days as options
@@ -71,8 +61,12 @@ class DayChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, third_party_callback=False, num_days=6, *args, **kwargs):
         super(DayChoiceField, self).__init__(*args, **kwargs)
         self.is_third_party_callback = third_party_callback
+
+    def populate_field(self, num_days=6):
         self.valid_days = (
-            get_valid_callback_days(include_today=False, is_third_party_callback=self.is_third_party_callback)
+            self.capacity.get_valid_callback_days(
+                include_today=False, is_third_party_callback=self.is_third_party_callback
+            )
             if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False)
             else OPERATOR_HOURS.available_days(num_days)
         )
@@ -80,12 +74,20 @@ class DayChoiceField(FormattedChoiceField, SelectField):
         append_default_option_to_list(self.choices, SELECT_DATE_OPTION_DEFAULT)
         self.day_choices = map(format_date_option, self.valid_days)
 
+    def time_slots_for_day(self, day, is_third_party_callback=False):
+        if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
+            slots = self.capacity.get_valid_callback_timeslots_on_date(day, is_third_party_callback)
+        else:
+            slots = OPERATOR_HOURS.time_slots(day)
+            slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
+        return map(format_time_option, slots)
+
     @property
     def day_time_choices(self):
         # Generate time slots options for call on another day select options
 
         def time_slots(day):
-            slots = OrderedDict(time_slots_for_day(day.date(), self.is_third_party_callback))
+            slots = OrderedDict(self.time_slots_for_day(day.date(), self.is_third_party_callback))
             return (self._format(day), slots)
 
         return dict(map(time_slots, self.valid_days))
@@ -116,19 +118,30 @@ class TimeChoiceField(FormattedChoiceField, SelectField):
     def __init__(self, choices_callback=None, third_party_callback=False, validators=None, **kwargs):
         super(TimeChoiceField, self).__init__(validators=validators, **kwargs)
         self.is_third_party_callback = third_party_callback
+        self.choices_callback = choices_callback
+
+    def populate_field(self):
         valid_slots = (
-            get_valid_callback_timeslots_on_date(
+            self.capacity.get_valid_callback_timeslots_on_date(
                 datetime.date.today(), is_third_party_callback=self.is_third_party_callback
             )
             if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False)
-            else choices_callback()
+            else self.choices_callback()
         )
         self.choices = map(format_time_option, valid_slots)
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 
+    def time_slots_for_day(self, day, is_third_party_callback=False):
+        if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
+            slots = self.capacity.get_valid_callback_timeslots_on_date(day, is_third_party_callback)
+        else:
+            slots = OPERATOR_HOURS.time_slots(day)
+            slots = filter(OPERATOR_HOURS.can_schedule_callback, slots)
+        return map(format_time_option, slots)
+
     def set_day_choices(self, day):
-        self.choices = time_slots_for_day(day, self.is_third_party_callback)
+        self.choices = self.time_slots_for_day(day, self.is_third_party_callback)
         if self.choices:
             append_default_option_to_list(self.choices, SELECT_TIME_OPTION_DEFAULT)
 
@@ -209,6 +222,14 @@ class AvailabilityCheckerForm(NoCsrfForm):
         super(AvailabilityCheckerForm, self).__init__(*args, **kwargs)
         if not self.time_today.choices:
             self.specific_day.data = DAY_SPECIFIC
+
+    def populate_fields(self, call_centre_capacity):
+        self.time_today.capacity = call_centre_capacity
+        self.time_today.populate_field()
+        self.time_in_day.capacity = call_centre_capacity
+        self.time_in_day.populate_field()
+        self.day.capacity = call_centre_capacity
+        self.day.populate_field()
 
     def scheduled_time(self, today=None):
         """

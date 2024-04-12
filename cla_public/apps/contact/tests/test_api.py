@@ -5,13 +5,14 @@ from cla_public.apps.contact.api import get_valid_callback_days, get_valid_callb
 
 
 class TestGetValidCallbackDays(TestCase):
-    def test_full_week(self):
+    @patch("cla_public.apps.contact.api.CallCentreCapacity")
+    def test_full_week(self, mock_capacity):
         full_week_of_datetimes = [datetime.datetime(2024, 1, day, 9, 0) for day in range(1, 8)]
-        with patch("cla_public.apps.contact.api.get_valid_callback_slots", return_value=full_week_of_datetimes):
-            valid_days = get_valid_callback_days(include_today=True)
-            assert len(valid_days) == 7
-            for index, day in enumerate(valid_days):
-                assert day.date() == full_week_of_datetimes[index].date()
+        mock_capacity.available_capacity = full_week_of_datetimes
+        valid_days = mock_capacity.get_valid_callback_days(include_today=True)
+        assert len(valid_days) == 7
+        for index, day in enumerate(valid_days):
+            assert day.date() == full_week_of_datetimes[index].date()
 
     def test_no_valid_days_week(self):
         no_valid_slots = []
