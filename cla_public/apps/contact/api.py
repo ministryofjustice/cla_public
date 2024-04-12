@@ -7,8 +7,8 @@ CALLBACK_API_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 class CallCentreCapacity:
     def __init__(self):
-        self.available_capacity = self.get_valid_callback_slots(num_days=7, is_third_party_callback=False)
-        self.third_party_available_capacity = self.get_valid_callback_slots(num_days=7, is_third_party_callback=True)
+        self.available_capacity = None
+        self.third_party_available_capacity = None
 
     @on_timeout(response="[]")
     @log_api_errors_to_sentry
@@ -30,13 +30,23 @@ class CallCentreCapacity:
 
         return slots
 
+    def populate_capacity(self):
+        self.available_capacity = get_valid_callback_slots(num_days=7, is_third_party_callback=False)
+        self.third_party_available_capacity = get_valid_callback_slots(num_days=7, is_third_party_callback=True)
+
     def get_valid_callback_timeslots_on_date(self, date, is_third_party_callback=False):
+        if not self.available_capacity or self.third_party_available_capacity:
+            self.populate_capacity()
+
         slots = self.available_capacity if not is_third_party_callback else self.third_party_available_capacity
 
         valid_callback_times = filter(lambda slot_date: slot_date.date() == date, slots)
         return valid_callback_times
 
     def get_valid_callback_days(self, include_today=False, is_third_party_callback=False):
+        if not self.available_capacity or self.third_party_available_capacity:
+            self.populate_capacity()
+
         slots = self.available_capacity if not is_third_party_callback else self.third_party_available_capacity
         valid_callback_days = set(slot.date() for slot in slots)
 
