@@ -38,6 +38,41 @@
     {{ category_caption(category) }}
   </h1>
 
+  {% if postcode_info.is_scottish_postcode
+    or postcode_info.is_ni_postcode
+    or postcode_info.is_mann_postcode
+    or postcode_info.is_jersey_postcode
+    or postcode_info.is_guernsey_postcode
+    %}
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning </span>
+        {% if postcode_info.is_scottish_postcode %}
+          {% trans
+            link=Element.link_same_window('https://www.mygov.scot/legal-aid/', _('mygov.scot'), True)
+          %}Legal Aid is different in Scotland. Visit {{ link }} for more information.{% endtrans %}
+        {% elif postcode_info.is_ni_postcode %}
+          {% trans
+            link=Element.link_same_window('https://www.nidirect.gov.uk/articles/legal-aid-schemes', _('nidirect.gov.uk'), True)
+          %}Legal Aid is different in Northern Ireland. Visit {{ link }} for more information.{% endtrans %}
+        {% elif postcode_info.is_mann_postcode %}
+          {% trans
+            link=Element.link_same_window('https://www.gov.im/categories/benefits-and-financial-support/legal-aid/', _('gov.im'), True)
+          %}Legal Aid is different on the Isle of Man. Visit {{ link }} for more information.{% endtrans %}
+        {% elif postcode_info.is_jersey_postcode  %}
+          {% trans
+            link=Element.link_same_window('https://www.legalaid.je/', _('legalaid.je'), True)
+          %}Legal Aid is different in Jersey. Visit {{ link }} for more information.{% endtrans %}
+        {% elif postcode_info.is_guernsey_postcode %}
+          {% trans
+            link=Element.link_same_window('https://www.gov.gg/legalaid', _('gov.gg'), True)
+          %}Legal Aid is different in Guernsey. Visit {{ link }} for more information.{% endtrans %}
+        {% endif %}
+      </strong>
+    </div>
+  {% endif %}
+
 
   <p class="govuk-body">You can contact any legal adviser from this list.</p>
   <p class="govuk-body">Your adviser will check whether you qualify for legal aid <strong>at no cost to you</strong> by asking about your problem and your finances. In some cases you may need to pay a contribution towards your legal aid.</p>
@@ -116,41 +151,6 @@
     {% endif %}
   </nav>
 
-  {% if postcode_info.is_scottish_postcode
-    or postcode_info.is_ni_postcode
-    or postcode_info.is_mann_postcode
-    or postcode_info.is_jersey_postcode
-    or postcode_info.is_guernsey_postcode
-    %}
-    <div class="govuk-warning-text">
-      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-      <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive">Warning </span>
-        {% if postcode_info.is_scottish_postcode %}
-          {% trans
-            link=Element.link_same_window('https://www.mygov.scot/legal-aid/', _('mygov.scot'), True)
-          %}Legal Aid is different in Scotland. Visit {{ link }} for more information.{% endtrans %}
-        {% elif postcode_info.is_ni_postcode %}
-          {% trans
-            link=Element.link_same_window('https://www.nidirect.gov.uk/articles/legal-aid-schemes', _('nidirect.gov.uk'), True)
-          %}Legal Aid is different in Northern Ireland. Visit {{ link }} for more information.{% endtrans %}
-        {% elif postcode_info.is_mann_postcode %}
-          {% trans
-            link=Element.link_same_window('https://www.gov.im/categories/benefits-and-financial-support/legal-aid/', _('gov.im'), True)
-          %}Legal Aid is different on the Isle of Man. Visit {{ link }} for more information.{% endtrans %}
-        {% elif postcode_info.is_jersey_postcode  %}
-          {% trans
-            link=Element.link_same_window('https://www.legalaid.je/', _('legalaid.je'), True)
-          %}Legal Aid is different in Jersey. Visit {{ link }} for more information.{% endtrans %}
-        {% elif postcode_info.is_guernsey_postcode %}
-          {% trans
-            link=Element.link_same_window('https://www.gov.gg/legalaid', _('gov.gg'), True)
-          %}Legal Aid is different in Guernsey. Visit {{ link }} for more information.{% endtrans %}
-        {% endif %}
-      </strong>
-    </div>
-  {% endif %}
-
   {% set find_legal_advisor_subtitle = _('Search again') %}
 
 {% else %}
@@ -209,7 +209,7 @@
 {% endif %}
 
 
-{% if 'postcode' not in request.args %}
+{% if 'postcode' not in request.args or form.postcode.errors or data.count == 0 %}
 
   {{ category_information(category) }}
 
