@@ -209,7 +209,7 @@
 {% endif %}
 
 
-{% if 'postcode' not in request.args or form.postcode.errors %}
+{% if 'postcode' not in request.args or form.postcode.errors or data.count == 0 %}
 
   {{ category_information(category) }}
 
