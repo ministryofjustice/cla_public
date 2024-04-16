@@ -88,12 +88,16 @@
           {% endif %}
         {% endblock %}
       </div>
-      <div class="govuk-grid-column-two-thirds">
-        {% block inner_content %}{% endblock %}
+
+      {% set inner_content_class = "govuk-grid-column-full" if disable_sidebar else "govuk-grid-column-two-thirds" %}
+      <div class="{{inner_content_class}}">
+      {% block inner_content %}{% endblock %}
       </div>
+      {% if not disable_sidebar %}
       <div class="govuk-grid-column-one-third">
         {% block sidebar %}<!-- sidebar placeholder -->{% endblock %}
       </div>
+      {% endif %}
     </div>
   </main>
 {% endblock %}
