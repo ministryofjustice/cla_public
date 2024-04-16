@@ -4,7 +4,7 @@
 {% macro category_information(category) %}
   {% if category == 'hlpas' %}
     <p class="govuk-body">
-      {% trans %}If you cannot find a legal adviser to help you, contact Civil Legal advice. 
+      {% trans %}If you cannot find a legal adviser to help you, contact Civil Legal advice.
       Tell them that you qualify for housing loss prevention advice.{% endtrans %}
     </p>
   {% elif category == 'clinneg' %}
@@ -26,6 +26,8 @@
   {% if category %}
     {% if category == 'aap' %}
         <span class="govuk-caption-l govuk-!-margin-bottom-6">{% trans %}For trouble with the police and public authorities{% endtrans %}</span>
+    {% elif category == 'hlpas' %}
+        <span class="govuk-caption-l govuk-!-margin-bottom-6">For the {{category_name}}</span>
     {% else %}
       <span class="govuk-caption-l govuk-!-margin-bottom-6">For {{category_name.lower()}}</span>
     {% endif %}
@@ -67,7 +69,7 @@
     {% endif %}
       <p class="govuk-body govuk-!-margin-bottom-2"><a target="_blank" class="govuk-link" href='https://www.google.com/maps/dir/?api=1&origin={{ data.origin.postcode }}&destination={{ item.location.address }}, {{ item.location.postcode }}'>Map and directions (opens in a new tab)</a></p>
   </div>
-  
+
   {% endfor %}
 
   <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4 govuk-!-margin-top-4">

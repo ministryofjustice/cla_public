@@ -190,6 +190,10 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
                     "outcome": "referred/help-organisations/means",
                 }
             )
+            is_hlpas = session.stored.get("hlpas", "")
+            if is_hlpas.lower() == "yes":
+                return self.redirect(url_for("checker.hlpas_page"))
+
             return self.redirect(url_for(".help_organisations", category_name=session.checker.category_slug))
 
         if session.checker.need_more_info:
@@ -437,6 +441,12 @@ class HelpOrganisations(views.MethodView):
 checker.add_url_rule(
     "/result/refer/<category_name>", view_func=HelpOrganisations.as_view("help_organisations"), methods=["GET"]
 )
+
+
+@checker.route("/result/hlpas")
+def hlpas_page():
+    context = {"url": url_for(".face-to-face", category="hlpas", hlpas="yes")}
+    return render_template("hlpas.html", **context)
 
 
 @checker.route("/legal-aid-available")

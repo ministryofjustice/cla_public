@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% set title = _('You may qualify for free legal advice') %}
+{% set disable_sidebar = True %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+<h1 class="govuk-heading-xl">{{ title }}</h1>
+<p class="govuk-body">You can get early legal advice to help you. This is through the Housing Loss Prevention Advice Service.</p>
+<p class="govuk-body">This advice is free for anyone who can show their home is at risk. You do not need to show evidence of how much you earn or your financial situation.</p>
+<h2 class="govuk-heading-m">Next steps</h2>
+<p class="govuk-body">
+  <ol type="1" style="list-style: decimal;">
+  <li> We’ll show you a list of legal advisors who can help you.</li>
+  <li> You need to contact the legal advisor.</li>
+  <li> Tell them that you could lose your home and show them what you have to show this.</li>
+  <li> They will give you legal advice.</li>
+  </ol>
+</p>
+<a href="{{url}}" title="Continue" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+    Continue
+</a>
+{% endblock %}}
