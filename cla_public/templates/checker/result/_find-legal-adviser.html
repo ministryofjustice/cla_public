@@ -4,8 +4,10 @@
 {% macro category_information(category) %}
   {% if category == 'hlpas' %}
     <p class="govuk-body">
-      {% trans %}If you cannot find a legal adviser to help you, contact Civil Legal advice.
-      Tell them that you qualify for housing loss prevention advice.{% endtrans %}
+      {% trans %}You can call any legal advisor from this list, so you do not have to pick a local one. If they are busy, you may need to contact more than one.{% endtrans %}
+    </p>
+    <p class="govuk-body">
+      {% trans %}Tell them that your home is at risk and  that you want advice through the Housing Loss Prevention Advice Scheme.{% endtrans %}
     </p>
   {% elif category == 'clinneg' %}
     <p class="govuk-body">
@@ -40,6 +42,7 @@
     {{ category_caption(category) }}
   </h1>
 
+<<<<<<< HEAD
   {% if postcode_info.is_scottish_postcode
     or postcode_info.is_ni_postcode
     or postcode_info.is_mann_postcode
@@ -76,8 +79,12 @@
   {% endif %}
 
 
+=======
+  {% if category != "hlpas" %}
+>>>>>>> 1d7d4ffe (Display custom text for fala hlpas category)
   <p class="govuk-body">You can contact any legal adviser from this list.</p>
   <p class="govuk-body">Your adviser will check whether you qualify for legal aid <strong>at no cost to you</strong> by asking about your problem and your finances. In some cases you may need to pay a contribution towards your legal aid.</p>
+  {% endif %}
   {{ category_information(category) }}
 
 <p id="aria-satisfaction-survey" class="govuk-body">
