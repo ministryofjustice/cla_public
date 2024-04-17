@@ -2480,7 +2480,7 @@ msgstr ""
 #: cla_public/templates/checker/result/_find-legal-adviser.html:166
 #: cla_public/templates/checker/result/face-to-face.html:16
 msgid "Find a legal adviser"
-msgstr ""
+msgstr "Darganfod ymgynghorydd cyfreithiol"
 
 #: cla_public/templates/interstitial.html:85
 msgid "Other sources of help"
