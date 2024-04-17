@@ -1,0 +1,31 @@
+{% macro category_information(category, caller=None) %}
+  {% if category == 'hlpas' %}
+    <p class="govuk-body">{% trans %}You can contact any legal adviser from this list.{% endtrans %}</p>
+    <p class="govuk-body">{% trans %}Tell them that your home is at risk and that you want advice through the Housing Loss Prevention Advice Scheme.{% endtrans %}</p>
+  {% elif category == 'clinneg' %}
+    <p class="govuk-body">
+    {% trans %}You will usually only get legal aid for advice about
+      clinical negligence if your child has suffered a brain injury during pregnancy,
+      birth or in the first 8 weeks of life.{% endtrans %}
+    </p>
+  {% elif category == 'pi' %}
+    <p class="govuk-body">
+    {% trans %}You may be able to get legal aid in exceptional cases. You
+      could seek advice from a legal adviser about whether an application
+      might succeed in your case and how to apply.{% endtrans %}
+    </p>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro category_caption(category, category_name, caller=None) %}
+  {% if category %}
+    {% if category == 'aap' %}
+        <span class="govuk-caption-l govuk-!-margin-bottom-6">{% trans %}For trouble with the police and public authorities{% endtrans %}</span>
+    {% elif category == 'hlpas' %}
+        <span class="govuk-caption-l govuk-!-margin-bottom-6">For the {{category_name}}</span>
+    {% else %}
+      <span class="govuk-caption-l govuk-!-margin-bottom-6">For {{category_name.lower()}}</span>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
