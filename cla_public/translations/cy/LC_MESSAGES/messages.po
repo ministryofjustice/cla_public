@@ -3964,6 +3964,70 @@ msgstr "Gall y cyfryngwr wirio a ydych chi’n gymwys i gael cymorth cyfreithiol
 msgid "Find your local mediator"
 msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 
+# HLPAS
+
+msgid "You might qualify for free legal advice"
+msgstr "Efallai byddwch yn gymwys am gyngor cyfreithiol am ddim"
+
+msgid "You might be able to get free legal advice through the Housing Loss Prevention Advice Scheme."
+msgstr "Efallai byddwch yn gallu cael cyngor cyfreithiol am ddim trwy’r Cynllun Cyngor Atal Colli Tai."
+
+msgid "This advice is free to anyone who can show their home is at risk. It does not depend on what you earn or your financial situation."
+msgstr "Mae’r cyngor am ddim i unrhyw un sy’n gallu dangos fod eu tŷ mewn perygl. Dydy hi ddim yn dibynnu ar faint rydych yn ennill neu eich sefyllfa ariannol."
+
+msgid "Next steps"
+msgstr "Camau nesaf"
+
+msgid "We’ll show you a list of legal advisors."
+msgstr "Byddwn yn dangos rhestr o gynghorwyr cyfreithiol i chi."
+
+msgid "You need to contact the legal adviser."
+msgstr "Bydd yn rhaid i chi gysylltu â'r cynghorydd cyfreithiol."
+
+msgid "Explain that you could lose your home."
+msgstr "Eglurwch fod yna risg y byddwch yn colli eich cartref."
+
+msgid "Tell them if you have any letters or documents about your situation."
+msgstr "Dywedwch wrthynt os oes gennych unrhyw lythyrau neu ddogfennau yn ymwneud â'ch sefyllfa."
+
+msgid "Continue"
+msgstr "Parhau"
+
+# FALA search form
+msgid "For the Housing Loss Prevention Advice Scheme"
+msgstr "o’r Cynllun Cyngor Atal Colli Tai"
+
+msgid "We’ll show you a list of legal advisers. You can contact any adviser from this list."
+msgstr "Byddwn yn dangos i chi rhestr o ymgynghorydd cyfreithiol. Byddwch yn gallu cysylltu i unrhyw un o’r ymgynghorydd ar y rhestr."
+
+msgid "If they are busy, you might need to contact more than one."
+msgstr "Os ydynt yn brysur, efallai bydd rhaid cysylltu gyda mwy nag un."
+
+msgid "All our legal advisers are regulated and contracted by the government."
+msgstr "Mae’r ymgynghorydd i gyd wedi ei rheoli a’i chontractio gan y llywodraeth."
+
+msgid "Enter postcode"
+msgstr "Ysgrifennwch eich Cod Post"
+
+msgid "For example, SW1H 9AJ."
+msgstr "Er enghraifft, SW1H 9AJ."
+
+msgid "Search"
+msgstr "Chwilio"
+
+# FALA search result
+msgid "Contact a legal adviser"
+msgstr "Darganfod ymgynghorydd cyfreithiol"
+
+msgid "Contact a legal adviser"
+msgstr "Darganfod ymgynghorydd cyfreithiol"
+
+msgid "You can contact any legal adviser from this list."
+msgstr "Gallwch gysylltu ag unrhyw un o’r ymgynghorydd cyfreithiol o restr yma."
+
+msgid "Tell them that your home is at risk and that you want advice through the Housing Loss Prevention Advice Scheme."
+msgstr "Dwedwch wrthynt fod eich tŷ mewn perygl a bod eisiau cyngor trwy’r Cynllun Cyngor Atal Colli Tai."
+
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
 
