@@ -23,7 +23,7 @@
     {% if category == 'aap' %}
         <span class="govuk-caption-l govuk-!-margin-bottom-6">{% trans %}For trouble with the police and public authorities{% endtrans %}</span>
     {% elif category == 'hlpas' %}
-        <span class="govuk-caption-l govuk-!-margin-bottom-6">For the {{category_name}}</span>
+        <span class="govuk-caption-l govuk-!-margin-bottom-6">{% trans %}For the{% endtrans %} {{category_name}}</span>
     {% else %}
       <span class="govuk-caption-l govuk-!-margin-bottom-6">For {{category_name.lower()}}</span>
     {% endif %}

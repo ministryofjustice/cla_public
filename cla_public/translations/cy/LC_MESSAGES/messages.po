@@ -3994,8 +3994,14 @@ msgid "Continue"
 msgstr "Parhau"
 
 # FALA search form
-msgid "For the Housing Loss Prevention Advice Scheme"
-msgstr "o’r Cynllun Cyngor Atal Colli Tai"
+msgid "Find a legal adviser"
+msgstr "Darganfod ymgynghorydd cyfreithiol"
+
+msgid "For the"
+msgstr "o’r"
+
+msgid "Housing Loss Prevention Advice Scheme"
+msgstr "Cynllun Cyngor Atal Colli Tai"
 
 msgid "We’ll show you a list of legal advisers. You can contact any adviser from this list."
 msgstr "Byddwn yn dangos i chi rhestr o ymgynghorydd cyfreithiol. Byddwch yn gallu cysylltu i unrhyw un o’r ymgynghorydd ar y rhestr."
