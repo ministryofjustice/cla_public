@@ -36,6 +36,7 @@ from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, FormWizardStep, RequiresSession, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 from cla_public.apps.checker.cait_intervention import get_cait_params
+import urllib
 import math
 
 log = logging.getLogger(__name__)
@@ -294,6 +295,10 @@ class LaaLaaView(views.MethodView):
         form = FindLegalAdviserForm(request.args, csrf_enabled=False)
         data = self.handle_find_legal_adviser_form(form, request.args)
 
+        if "results" in data:
+            for legal_advisor in data["results"]:
+                legal_advisor['google_maps_url'] = LaaLaaView.get_google_maps_destination_url(legal_advisor, data["origin"]["postcode"])
+
         return render_template(
             self.template, category=category, category_name=category_name, data=data, form=form, **extra_context
         )
@@ -341,6 +346,30 @@ class LaaLaaView(views.MethodView):
             "TD",
             "ZE",
         ]
+
+    @staticmethod
+    def get_destination_string_from_address(address, postcode):
+        # Any newlines in the address should be converted to a comma.
+        address = address.replace("\n", ", ")
+        parsed_address = urllib.quote(address)
+        parsed_postcode = urllib.quote(postcode)
+        return "{address}, {postcode}".format(address=parsed_address, postcode=parsed_postcode)
+
+    @staticmethod
+    def get_google_maps_destination_url(legal_advisor, origin_postcode):
+        """Gets the Google Maps query string URL for the journey between the origin postcode and the destination.
+
+        Args:
+            origin_postcode (_type_): _description_
+            destination (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        destination = LaaLaaView.get_destination_string_from_address(legal_advisor['location']['address'], legal_advisor['location']['postcode'])
+        formatted_postcode = urllib.quote(origin_postcode)
+        formatted_url = "https://www.google.com/maps/dir/?api=1&origin={origin_postcode}&destination={destination}".format(origin_postcode=formatted_postcode, destination=destination)
+        return formatted_url
 
 
 checker.add_url_rule("/find-a-legal-adviser", view_func=LaaLaaView.as_view("laalaa"))
