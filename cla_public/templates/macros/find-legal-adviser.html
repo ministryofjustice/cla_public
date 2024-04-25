@@ -21,7 +21,7 @@
 
 
 {% macro category_caption(category, category_name, caller=None) %}
-  {% if category %}
+  {% if category and category_name %}
     {% if category == 'aap' %}
         <span class="govuk-caption-l govuk-!-margin-bottom-6">{% trans %}For trouble with the police and public authorities{% endtrans %}</span>
     {% elif category == 'hlpas' %}

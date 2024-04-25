@@ -14,6 +14,44 @@
   {% call FALA.category_caption(category, category_name) %}{% endcall %}
 {% endif %}
 
+{% if 'count' in data and data.count == 0 %}
+  {% call Element.alert('error', title=_('No results')) %}
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list">
+        <li>
+          <a href="#postcode">
+            {% trans %}We couldn’t find any results for your search. We are constantly updating our records so please try again later.{% endtrans %}
+          </a>
+        </li>
+      </ul>
+    </div>
+  {% endcall %}
+
+  {% set postcode_error = true %}
+
+{% endif %}
+
+{% if form.postcode and form.postcode.errors %}
+  {% if postcode_info.is_mann_postcode %}
+    {% set error_text = _('No results returned for the Isle of Man, try a postcode in England or Wales') %}
+  {% elif postcode_info.is_jersey_postcode %}
+    {% set error_text = _('No results returned for Jersey, try a postcode in England or Wales') %}
+  {% elif postcode_info.is_guernsey_postcode %}
+    {% set error_text = _('No results returned for Guernsey, try a postcode in England or Wales') %}
+  {% else %}
+    {% set error_text = form.postcode.errors[0] %}
+  {% endif %}
+  {% call Element.alert('error') %}
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list">
+        <li>
+          <a href="#postcode">{{ error_text }}</a>
+        </li>
+      </ul>
+    </div>
+  {% endcall %}
+{% endif %}
+
 
 {% if category == "hlpas" %}
   <p class="govuk-body">{% trans %}We’ll show you a list of legal advisers. You can contact any adviser from this list.{% endtrans %}</p>
