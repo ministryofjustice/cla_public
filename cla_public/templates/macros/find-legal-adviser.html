@@ -16,6 +16,25 @@
       could seek advice from a legal adviser about whether an application
       might succeed in your case and how to apply.{% endtrans %}
     </p>
+  {% elif category == 'benefits' %}
+      <p class="govuk-body">
+      {% trans %}Civil Legal Advice does not provide advice about issues
+        related to welfare benefits but you may be able to get free advice from
+        a legal adviser in your area.{% endtrans %}
+    </p>
+
+    <p class="govuk-body">
+      {% trans %}To get advice about appealing a decision made by the social
+        security tribunal about your benefits to the Upper Tribunal, Court of
+        Appeal or Supreme Court, you should contact a legal adviser.
+      {% endtrans %}
+    </p>
+
+    <p class="govuk-body">
+      {% trans %}If you don’t qualify for legal aid, you will have to pay for
+        legal advice. You should ask your adviser about the cost of their
+        advice.{% endtrans %}
+    </p>
   {% endif %}
 {% endmacro %}
 
