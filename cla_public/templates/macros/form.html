@@ -461,11 +461,6 @@
   {% endif %}
   <div class="govuk-form-group {{"govuk-form-group--error" if error_message_text|length > 1  }}">
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
-  {% if field.description %}
-    <div id="{{ field.id }}-hint" class="govuk-hint">
-      {{- field.description -}}
-    </div>
-  {% endif %}
     {% if error_message_text %}
       <span id="{{field.id}}-error" class="govuk-error-message">
         <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>

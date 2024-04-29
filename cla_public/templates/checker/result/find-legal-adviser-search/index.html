@@ -1,5 +1,0 @@
-{% if "postcode" in request.args and not form.postcode.errors and data.count > 0 %}
-  {% include 'checker/result/find-legal-adviser-search/result.html' %}
-{% else %}
-  {% include 'checker/result/find-legal-adviser-search/form.html' %}
-{% endif %}
