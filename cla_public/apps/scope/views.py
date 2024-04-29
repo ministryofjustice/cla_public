@@ -62,6 +62,7 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
                     is_hlpas = "no"
 
                 outcome_url[1]["hlpas"] = is_hlpas
+                session.store(dict(hlpas=is_hlpas))
 
                 if state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
                     category = self.get_category_for_larp(session)

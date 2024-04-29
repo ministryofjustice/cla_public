@@ -71,6 +71,7 @@ CATEGORIES = [
     ),
     ("other", _(u"Any other problem"), ""),
     ("traffickingandslavery", _(u"Modern slavery"), ""),
+    ("hlpas", _("Housing Loss Prevention Advice Scheme"), ""),
 ]
 
 # Mapping LAALAA category codes to CLA category codes
