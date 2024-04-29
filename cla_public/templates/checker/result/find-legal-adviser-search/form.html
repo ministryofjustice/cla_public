@@ -7,6 +7,10 @@
   <h1 class="govuk-heading-xl">
     {{ _('Legal aid is not usually available for advice about personal injury') }}
   </h1>
+{% elif category == 'benefits' %}
+  <h1 class="govuk-heading-xl">
+    {{ _('You might qualify for legal aid') }}
+  </h1>
 {% else %}
   <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
     {{ _('Find a legal adviser') }}

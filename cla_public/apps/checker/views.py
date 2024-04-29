@@ -373,7 +373,7 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, object):
         steps = CheckerWizard("").relevant_steps[:-1]
         if session.checker.category in NO_CALLBACK_CATEGORIES:
             session.store({"outcome": "referred/f2f/means"})
-            return redirect(url_for(".find-legal-adviser", category=session.checker.category))
+            return redirect(url_for(".face-to-face", category=session.checker.category))
 
         current_step = {"count": len(steps) + 1, "is_current": True, "is_completed": False}
 
