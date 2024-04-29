@@ -1,6 +1,6 @@
 {% if request.is_xhr %}
     {% with postcode_info=postcode_info  %}
-      {% include "checker/result/_find-legal-adviser.html" %}
+      {% include "checker/result/find-legal-adviser-search/index.html" %}
     {% endwith %}
 {% else %}
 
@@ -42,7 +42,7 @@
     </p>
 
     {% with postcode_info=postcode_info  %}
-      {% include "checker/result/_find-legal-adviser.html" %}
+      {% include "checker/result/find-legal-adviser-search/index.html" %}
     {% endwith %}
     {% include "checker/time-out-warning.html" %}
   {% endblock %}
