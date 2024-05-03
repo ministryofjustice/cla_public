@@ -2449,16 +2449,16 @@ msgstr "Os ydych o dan 18 oed, dylech <a class=\"govuk-link\" href=\"%(url)s\">g
 
 #: cla_public/templates/interstitial.html:54
 msgid "If you have "
-msgstr ""
+msgstr "Os oes gennych"
 
 #: cla_public/templates/interstitial.html:55
 msgid "Capital trapped in a property you own or other assets that you are not able to access"
-msgstr ""
+msgstr "chi gyfalaf caeth yn eich eiddo neu asedau eraill heb fynediad iddynt"
 
 #: cla_public/templates/interstitial.html:55
 #, python-format
 msgid ", you should contact <a class=\"govuk-link\" href=\"%(get_in_touch_url)s\">CLA</a> without completing the financial assessment."
-msgstr ""
+msgstr ", dylech chi gysylltu â <a class=\"govuk-link\" href=\"%(get_in_touch_url)s\">CLA</a> heb gwblhau’r asesiad ariannol"
 
 #: cla_public/templates/interstitial.html:59
 msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"https://www.interpretingline.co.uk/EBooking\" rel=\"external\">British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
