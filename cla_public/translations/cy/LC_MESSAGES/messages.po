@@ -2458,7 +2458,7 @@ msgstr "chi gyfalaf caeth yn eich eiddo neu asedau eraill heb fynediad iddynt"
 #: cla_public/templates/interstitial.html:55
 #, python-format
 msgid ", you should contact <a class=\"govuk-link\" href=\"%(get_in_touch_url)s\">CLA</a> without completing the financial assessment."
-msgstr ", dylech chi gysylltu â <a class=\"govuk-link\" href=\"%(get_in_touch_url)s\">CLA</a> heb gwblhau’r asesiad ariannol"
+msgstr ", dylech chi gysylltu â <a class=\"govuk-link\" href=\"%(get_in_touch_url)s\">CLA</a> heb gwblhau’r asesiad ariannol."
 
 #: cla_public/templates/interstitial.html:59
 msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"https://www.interpretingline.co.uk/EBooking\" rel=\"external\">British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
