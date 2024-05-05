@@ -100,6 +100,17 @@
 
 {% block head %}
   <meta http-equiv="content-language" content="{{ request.cookies.get('locale', 'en')[:2] }}">
+  <script type="text/javascripts" src="{{ asset(filename='javascripts/google-tag-manager.js') }}"></script>
+  <!-- Overide user ID in GTM data layer -->
+  <script nonce="{{ csp_nonce() }}">
+    if(window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        //'userId': '{{ GA_user_id }}'
+      });
+    }
+  </script>
+  <!-- End setup google tag manager -->
 {%- endblock %}
 
 {% block javascripts %}
@@ -141,6 +152,7 @@
     <script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
   {% endif %}
 
+<<<<<<< Updated upstream
   {% if config.MOJ_GTM_ID %}
     <!-- Start of google tag manager -->
     <script nonce="{{ csp_nonce() }}">
@@ -209,6 +221,8 @@
 
   </script>
   <!-- End of google analytics -->
+=======
+>>>>>>> Stashed changes
   <script nonce="{{ csp_nonce() }}" type="text/html" id="moreInfoButtonLink">
     <a class="field-more-info-toggle" role="button">{{ _('more info') }}</a>
   </script>
