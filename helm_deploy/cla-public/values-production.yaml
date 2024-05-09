@@ -12,6 +12,7 @@ replicaCount: 2
 ingress:
   enabled: true
   secretName: tls-certificate
+  whitelist: ~
 
 envVars:
   GDS_GA_ID:

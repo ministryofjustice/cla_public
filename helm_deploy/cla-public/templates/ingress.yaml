@@ -26,6 +26,7 @@ metadata:
       SecRuleRemoveById 942230
       SecRuleRemoveById 930120
       SecRuleRemoveById 933210
+    nginx.ingress.kubernetes.io/whitelist-source-range: "{{ include "cla-public.whitelist" . }}"
 spec:
   ingressClassName: "modsec"
   tls:
