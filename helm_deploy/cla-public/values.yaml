@@ -28,6 +28,7 @@ ingress:
     name: ~
     weight: ~
   tls: []
+  addNoIndexResponseHeader: true
   whitelist:
     # Cisco Anyconnect (Dom1) / ARK data centre
     - 194.33.192.0/25
