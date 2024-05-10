@@ -50,28 +50,8 @@
 {% macro script(info_tools, cait_variant = '', cait_journey = {}, js = '') %}
   <script nonce="{{ csp_nonce() }}">
   (function() {
-    var variant = '{{ cait_variant }}' || 'none'
-    function gaSendEvent(category, action, label) {
-      ga('send', 'event', category, action, label)
-    }
-    function gaSendOrgLink(label) {
-      label = variant + '|' + label
-      var userId = document.cookie.split('; ')
-                    .filter(function (i) { return i.indexOf('_ga=') === 0 })
-                    .map(function (i) { return i.replace('_ga=', '') })
-                    .join('')
-      gaSendEvent('External Link User', userId, label)
-    }
-    jQuery(document).ready(function(){
-      jQuery('#content a').on('click', function(e){
-        gaSendOrgLink(this.innerText.replace(/ Opens in .*/, ''))
-      })
-    })
 
     {% if info_tools %}
-      {% if cait_variant %}
-      gaSendEvent('CAIT exit page', document.location.pathname, variant)
-      {% endif %}
 
     if (jQuery(window).width() >= 641) {
       var cait_survey

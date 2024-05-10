@@ -281,17 +281,6 @@
           }
         }
       }
-
-      // Report to GA about form errors
-      var errorFieldNames = _.keys(errorFields);
-      if(!window.ga) {
-        return;
-      }
-      window.ga('send', 'event', 'form-errors',
-        window.location.pathname,
-        errorFieldNames.join('|'),
-        errorFieldNames.length
-      );
     },
 
     loadTemplates: function() {

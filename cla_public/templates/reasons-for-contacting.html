@@ -30,12 +30,3 @@
   </form>
   {% include "checker/time-out-warning.html" %}
 {% endblock %}
-
-{% block javascripts %}
-  {{ super() }}
-  <script nonce="{{ csp_nonce() }}">
-    {% if referrer %}
-      ga('send', 'event', 'skip-to-contact-referrer', '{{ referrer }}');
-    {% endif %}
-  </script>
-{% endblock %}

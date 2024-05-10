@@ -14,14 +14,6 @@ ingress:
   secretName: tls-certificate
 
 envVars:
-  GDS_GA_ID:
-    value: UA-145652997-1
-  MOJ_GTM_ID:
-    value: GTM-MWL77F6
-  MOJ_GTM_AUTH:
-    value: "4KOuCU7aXv3Owhcs7U0ORw"
-  MOJ_GTM_PREVIEW:
-    value: "env-3"
   BACKEND_BASE_URI:
     value: "http://cla-backend-app.laa-cla-backend-staging.svc.cluster.local"
   LAALAA_API_HOST:

@@ -184,15 +184,4 @@
     <button type="button" class="govuk-!-margin-top-6 govuk-!-font-size-19 govuk-link laa-confirmation-button-link ">{{ _('Print this page') }}</button>
   </script>
 
-  <script nonce="{{ csp_nonce() }}">
-    ga('send', 'event', 'confirmation', 'survey', '{{ _('Finish') }}');
-    ga('send', 'event', 'confirmation', 'contact-type', '{{ session.stored.contact_type }}');
-    {% if session.stored.adaptations %}
-      ga('send', 'event', 'confirmation', 'adaptation', '{{ session.stored.adaptations|join(', ') }}');
-    {% endif %}
-    {% if confirmation_email and not form.errors %}
-      ga('send', 'event', 'confirmation', 'email-sent');
-    {% endif %}
-  </script>
-  {% include '_ga-outcome-pageview.html' %}
 {% endblock %}

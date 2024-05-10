@@ -16,14 +16,6 @@ ingress:
   whitelist: false
 
 envVars:
-  GDS_GA_ID:
-    value: UA-145652997-1
-  MOJ_GTM_ID:
-    value: GTM-MWL77F6
-  MOJ_GTM_AUTH:
-    value: "pXnyHhiNQwB3LpZ4-zTZYg"
-  MOJ_GTM_PREVIEW:
-    value: "env-1"
   BACKEND_BASE_URI:
     value: "http://cla-backend-app.laa-cla-backend-production.svc.cluster.local"
   LAALAA_API_HOST:

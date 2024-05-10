@@ -50,8 +50,7 @@
     {% for org in organisations %}
       <li class="vcard {{ org.classname }}">
         <h3 class="govuk-heading-m">
-          {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', org.service_name) %}
-          {{ Element.link_same_window(org.website, org.service_name, is_external=True, **{'class': 'url', 'data-ga': ga_event}) }}
+          {{ Element.link_same_window(org.website, org.service_name, is_external=True, **{'class': 'url'}) }}
         </h3>
         {% if org.public_description %}
           <div class="org-description">

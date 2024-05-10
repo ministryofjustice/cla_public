@@ -2337,7 +2337,7 @@ msgid "You’ll be asked general questions about your legal problem and your inc
 msgstr ""
 
 #: cla_public/templates/index.html:21
-msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\" data-ga=\"event:locale/switch/welsh\">in Welsh (Cymraeg)</a>"
+msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\">in Welsh (Cymraeg)</a>"
 msgstr ""
 
 #: cla_public/templates/index.html:27
