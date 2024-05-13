@@ -99,3 +99,7 @@ in an appropriate format
 {{- end -}}
 {{- end -}}
 {{- end -}}
+
+{{- define "cla-public.whitelist" -}}
+{{ join "," .Values.ingress.whitelist }},{{- .Values.pingdomIPs }}
+{{- end -}}

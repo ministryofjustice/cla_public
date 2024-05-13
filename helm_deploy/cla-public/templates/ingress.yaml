@@ -26,6 +26,13 @@ metadata:
       SecRuleRemoveById 942230
       SecRuleRemoveById 930120
       SecRuleRemoveById 933210
+    {{- if .Values.ingress.addNoIndexResponseHeader }}
+    nginx.ingress.kubernetes.io/server-snippet: |
+      add_header X-Robots-Tag "noindex, nofollow";
+    {{- end }}
+    {{- if .Values.ingress.whitelist }}
+    nginx.ingress.kubernetes.io/whitelist-source-range: "{{ include "cla-public.whitelist" . }}"
+    {{- end }}
 spec:
   ingressClassName: "modsec"
   tls:

@@ -13,3 +13,5 @@ if [ "$CIRCLE_BRANCH" == "master" ]; then
 else
   export TARGET_TAGS=$IMAGE_TAG,$safe_git_branch
 fi
+
+export PINGDOM_IPS=`python3 bin/pingdom_ips.py`

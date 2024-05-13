@@ -17,5 +17,6 @@ helm upgrade $CLEANED_BRANCH_NAME \
   --set image.repository=$DOCKER_REPOSITORY \
   --set image.tag=$IMAGE_TAG \
   --set dashboard.enabled=false \
+  --set-string pingdomIPs=$PINGDOM_IPS \
   --force \
   --install
