@@ -17,6 +17,7 @@ from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 from cla_public.apps.checker.api import post_reasons_for_contacting
 from cla_public.libs import zendesk
 from cla_public.libs.views import AjaxOrNormalMixin, EnsureSessionExists, HasFormMixin
+from cla_public.apps.base import get_GTM_ANON_ID_from_cookie
 
 log = logging.getLogger(__name__)
 
@@ -167,6 +168,7 @@ def show_session():
 @base.route("/session-expired")
 def session_expired():
     session.clear()
+    session['GTM_ANON_ID'] = get_GTM_ANON_ID_from_cookie()
     return render_template("session-expired.html")
 
 
