@@ -56,7 +56,5 @@ def detect_GTM_ANON_ID():
             def remember_GTM_ANON_ID(response):
                 session["GTM_ANON_ID"] = str(uuid.uuid4())
                 expiration_date = datetime.utcnow() + timedelta(days=30)
-                path = request.path
-                response = redirect(path)
                 response.set_cookie("GTM_ANON_ID", session.get("GTM_ANON_ID"), expires=expiration_date)
                 return response
