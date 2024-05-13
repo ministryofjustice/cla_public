@@ -194,8 +194,8 @@ def post_to_case_api(form):
     backend = get_api_connection()
     payload = form.api_payload()
 
-    gtm_anon_id = session.get('GTM_ANON_ID', '')
-    payload['GTM_ANON_ID'] = gtm_anon_id
+    gtm_anon_id = session.get("GTM_ANON_ID", "")
+    payload["GTM_ANON_ID"] = gtm_anon_id
 
     if should_attach_eligibility_check():
         attach_eligibility_check(payload)

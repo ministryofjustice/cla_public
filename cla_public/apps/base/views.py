@@ -168,7 +168,7 @@ def show_session():
 @base.route("/session-expired")
 def session_expired():
     session.clear()
-    session['GTM_ANON_ID'] = get_GTM_ANON_ID_from_cookie()
+    session["GTM_ANON_ID"] = get_GTM_ANON_ID_from_cookie()
     return render_template("session-expired.html")
 
 

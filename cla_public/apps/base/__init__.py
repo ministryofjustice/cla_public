@@ -25,6 +25,7 @@ def detect_user_locale():
             response.set_cookie("locale", locale, expires=expires)
             return response
 
+
 @base.before_app_request
 def detect_maintenance():
     maintenance_mode = current_app.config.get("MAINTENANCE_MODE", False)
@@ -33,26 +34,29 @@ def detect_maintenance():
     if not maintenance_mode and request.path == u"/maintenance":
         return redirect("/")
 
+
 def get_GTM_ANON_ID_from_cookie():
-    UUID_PATTERN = re.compile(r'^[\da-f]{8}-([\da-f]{4}-){3}[\da-f]{12}$')
-    anon_id_cookie = request.cookies.get('GTM_ANON_ID')
+    UUID_PATTERN = re.compile(r"^[\da-f]{8}-([\da-f]{4}-){3}[\da-f]{12}$")
+    anon_id_cookie = request.cookies.get("GTM_ANON_ID")
     if anon_id_cookie is None or not UUID_PATTERN.match(anon_id_cookie):
         return None
     return anon_id_cookie
 
+
 @base.before_app_request
 def detect_GTM_ANON_ID():
     # The variable is used to track user anonymously across services for Google Tag Manager
-    if 'GTM_ANON_ID' not in session:
+    if "GTM_ANON_ID" not in session:
         anon_id_cookie = get_GTM_ANON_ID_from_cookie()
         if anon_id_cookie:
-            session['GTM_ANON_ID'] = anon_id_cookie
+            session["GTM_ANON_ID"] = anon_id_cookie
         else:
+
             @after_this_request
             def remember_GTM_ANON_ID(response):
-                session['GTM_ANON_ID'] = str(uuid.uuid4())
+                session["GTM_ANON_ID"] = str(uuid.uuid4())
                 expiration_date = datetime.utcnow() + timedelta(days=30)
                 path = request.path
                 response = redirect(path)
-                response.set_cookie('GTM_ANON_ID', session.get('GTM_ANON_ID',''), expires=expiration_date)
+                response.set_cookie("GTM_ANON_ID", session.get("GTM_ANON_ID"), expires=expiration_date)
                 return response

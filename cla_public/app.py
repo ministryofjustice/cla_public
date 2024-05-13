@@ -141,8 +141,8 @@ def create_app(config_file=None):
     app.add_template_global(honeypot.FIELD_NAME, name="honeypot_field_name")
 
     def put_GTM_ANON_ID_to_templates():
-        GTM_ANON_ID = session.get('GTM_ANON_ID','')
-        return { 'GTM_ANON_ID': GTM_ANON_ID }
+        GTM_ANON_ID = session.get("GTM_ANON_ID", "")
+        return {"GTM_ANON_ID": GTM_ANON_ID}
 
     base.context_processor(put_GTM_ANON_ID_to_templates)
     scope.context_processor(put_GTM_ANON_ID_to_templates)
