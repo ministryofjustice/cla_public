@@ -186,21 +186,35 @@ def session_end():
     return jsonify({"session": "CLEAR"})
 
 
-@base.route("/start")
-def get_started():
+def start_session(target_page, **kwargs):
     """
     Redirect to checker unless currently disabled
     """
     session.clear()
     session.checker["started"] = datetime.datetime.now()
-    args = {}
-    if "_ga" in request.args:
-        args["_ga"] = request.args["_ga"]
 
     if current_app.config.get("CONTACT_ONLY"):
         session.checker["contact_only"] = "yes"
-        return redirect(url_for("contact.get_in_touch", **args))
-    return redirect(url_for("scope.diagnosis", **args))
+        return redirect(url_for("contact.get_in_touch", **kwargs))
+    return redirect(url_for(target_page, **kwargs))
+
+
+@base.route("/start")
+def get_started():
+    """
+    Redirect to checker unless currently disabled
+    """
+    args = request.args.to_dict()
+    return start_session("scope.diagnosis", **args)
+
+
+@base.route("/start-bsl")
+def bsl_get_started():
+    """
+    Redirect to checker unless currently disabled
+    """
+    args = request.args.to_dict()
+    return start_session("contact.get_in_touch", **args)
 
 
 def is_safe_url(url):
