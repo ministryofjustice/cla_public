@@ -142,6 +142,9 @@
         {{ subform.bsl_webcam.label.text }}
       </label>
     </div>
+    <div class="govuk-inset-text{{ ' s-hidden' if not subform.bsl_email.errors }}" id="field-adaptations-bsl_email-wrapper">
+      {{ Form.group(subform.bsl_email, 'cla-question-text--large', hide_label=True) }}
+    </div>
     <div class="govuk-checkboxes__item">
       {{ subform.minicom(**{"class": "govuk-checkboxes__input"}) }}
       <label class="govuk-label govuk-checkboxes__label" for="{{subform.minicom.id}}">

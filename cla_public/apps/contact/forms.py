@@ -42,6 +42,15 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     """
 
     bsl_webcam = BooleanField(_(u"British Sign Language – webcam"))
+    bsl_email = StringField(
+        _(u"Email"),
+        description=_(u"Enter your email address so we can arrange a BSL call."),
+        validators=[
+            IgnoreIf("bsl_webcam", FieldValue(False)),
+            Length(max=255, message=_(u"Your address must be 255 characters or less")),
+            EmailValidator(message=_(u"Enter an email address   ")),
+        ],
+    )
     minicom = BooleanField(_(u"Minicom – for textphone users"))
     text_relay = BooleanField(_(u"Text Relay – for people with hearing or speech impairments"))
     welsh = BooleanField(_(u"Welsh"))
@@ -182,6 +191,9 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     )
     adaptations = ValidatedFormField(AdaptationsForm, _(u"Do you have any special communication needs? (optional)"))
 
+    def get_email(self):
+        return self.email.data or self.adaptations.bsl_email.data
+
     def api_payload(self):
         "Form data as data structure ready to send to API"
 
@@ -198,7 +210,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         data = {
             "personal_details": {
                 "full_name": self.full_name.data,
-                "email": self.email.data,
+                "email": self.get_email(),
                 "postcode": self.address.form.post_code.data,
                 "mobile_phone": self.callback.form.contact_number.data,
                 "street": self.address.form.street_address.data,

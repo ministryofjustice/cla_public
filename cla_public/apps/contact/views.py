@@ -158,9 +158,12 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
                 )
                 del session[ReasonsForContacting.MODEL_REF_SESSION_KEY]
             session.store_checker_details()
-            if self.form.email.data:
+            email = self.form.get_email()
+            if email:
                 govuk_notify = NotifyEmailOrchestrator()
-                create_and_send_confirmation_email(govuk_notify, self.form.data)
+                data = self.form.data
+                data["email"] = email
+                create_and_send_confirmation_email(govuk_notify, data)
             return self.redirect(url_for("contact.confirmation"))
         except AlreadySavedApiError:
             return self.already_saved()
