@@ -11,6 +11,7 @@ gulp.task('build', [
     'copy-jquery',
     'minify-css',
     'webpack',
+    'webpack-head',
     'images'
   ]
 );

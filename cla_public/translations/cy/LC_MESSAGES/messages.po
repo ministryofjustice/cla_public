@@ -2341,8 +2341,8 @@ msgid "You’ll be asked general questions about your legal problem and your inc
 msgstr "Byddwch yn cael eich holi’n gyffredinol am eich problem gyfreithiol, eich incwm â’ch cynilion. Byddwch yn cael gwybod ble gallwch gael cyngor cyfreithiol."
 
 #: cla_public/templates/index.html:21
-msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\" data-ga=\"event:locale/switch/welsh\">in Welsh (Cymraeg)</a>"
-msgstr "Mae’r canllaw hwn hefyd ar gael <a class=\"govuk-link\" lang=\"en\" href=\"/locale/en_GB\" data-ga=\"event:locale/switch/english\">yn Saesneg (English)</a>"
+msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\">in Welsh (Cymraeg)</a>"
+msgstr "Mae’r canllaw hwn hefyd ar gael <a class=\"govuk-link\" lang=\"en\" href=\"/locale/en_GB\">yn Saesneg (English)</a>"
 
 #: cla_public/templates/index.html:27
 msgid "Start now"

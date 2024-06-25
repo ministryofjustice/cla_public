@@ -50,10 +50,6 @@ moj.Modules.AvailabilityTimes = {
     var $target = $(evt.target);
     var $radioButton = $target.closest('li').find('[type=radio]');
 
-    var targetName = $target.attr('name');
-    if(window.ga && targetName) {
-      window.ga('send', 'event', 'availability-times', 'select', targetName);
-    }
     $radioButton
       .prop('checked', true)
       .trigger('label-select');

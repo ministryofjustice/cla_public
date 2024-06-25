@@ -5,7 +5,7 @@ import logging
 import logging.config
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 from flask_talisman import Talisman
 from flask.ext.babel import Babel
 from flask.ext.cache import Cache
@@ -139,6 +139,15 @@ def create_app(config_file=None):
     register_error_handlers(app)
 
     app.add_template_global(honeypot.FIELD_NAME, name="honeypot_field_name")
+
+    def put_GTM_ANON_ID_to_templates():
+        GTM_ANON_ID = session.get("GTM_ANON_ID", "")
+        return {"GTM_ANON_ID": GTM_ANON_ID}
+
+    base.context_processor(put_GTM_ANON_ID_to_templates)
+    scope.context_processor(put_GTM_ANON_ID_to_templates)
+    checker.context_processor(put_GTM_ANON_ID_to_templates)
+    contact.context_processor(put_GTM_ANON_ID_to_templates)
 
     app.register_blueprint(base)
     app.register_blueprint(geocoder)

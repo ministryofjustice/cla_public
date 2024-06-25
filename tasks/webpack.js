@@ -13,3 +13,9 @@ gulp.task('webpack', ['clean-js', 'webpack-debug', 'lint'], function() {
     .pipe(webpack(common))
     .pipe(gulp.dest(paths.dest + 'javascripts'));
 });
+
+gulp.task('webpack-head', function() {
+  var scripts = paths.head_scripts;
+  return gulp.src(scripts)
+    .pipe(gulp.dest(paths.dest + 'javascripts'));
+});

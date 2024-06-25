@@ -114,8 +114,6 @@ var wideScreen = 641;
           }
 
           $('.search-results-list').attr('tabindex', -1).focus();
-
-          window.ga('send', 'pageview', stripPII(url));
         })
         .error();
     },
@@ -208,8 +206,6 @@ var wideScreen = 641;
       }
 
       name = (count ? count + ':' : '') + name;
-
-      window.ga('send', 'event', 'find-legal-adviser', 'selected', name);
     },
 
     renderMap: function(lat, lon) {
