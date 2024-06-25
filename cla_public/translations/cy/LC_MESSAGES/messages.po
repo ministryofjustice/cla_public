@@ -4034,6 +4034,12 @@ msgstr "Gallwch gysylltu ag unrhyw un o’r ymgynghorydd cyfreithiol o restr yma
 msgid "Tell them that your home is at risk and that you want advice through the Housing Loss Prevention Advice Scheme."
 msgstr "Dwedwch wrthynt fod eich tŷ mewn perygl a bod eisiau cyngor trwy’r Cynllun Cyngor Atal Colli Tai."
 
+msgid "Enter an email address."
+msgstr "Rhowch gyfeiriad e-bost."
+
+msgid "Enter your email address so we can arrange a BSL call."
+msgstr "Rhowch eich cyfeiriad e-bost er mwyn i ni allu trefnu galwad Iaith Arwyddion Prydain (BSL)."
+
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
 
