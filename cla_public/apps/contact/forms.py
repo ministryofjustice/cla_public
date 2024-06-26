@@ -70,6 +70,11 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     def __init__(self, formdata=None, obj=None, prefix="", data=None, meta=None, **kwargs):
         if data is None:
             data = {"welsh": get_locale()[:2] == "cy"}
+        if formdata is not None:
+            is_bsl = formdata.get("adaptations-bsl_webcam")
+            email = formdata.get("adaptations-bsl_email") or formdata.get("email")
+            if is_bsl and email:
+                formdata["adaptations-bsl_email"] = email
         super(AdaptationsForm, self).__init__(formdata, obj, prefix, data, meta, **kwargs)
 
 

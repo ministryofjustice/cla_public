@@ -132,6 +132,19 @@ class TestContactFormValidation(unittest.TestCase):
                 else:
                     self.fail("Specific day was not set but form was validated")
 
+    def test_bsl(self):
+        with self.client:
+            data = {
+                "adaptations-other_language": "",
+                "adaptations-bsl_webcam": "y",
+                "email": "john.doe@digital.justice.gov.uk",
+                "contact_type": "call",
+                "full_name": "John Doe",
+            }
+            form = ContactForm(MultiDict(data), csrf_enabled=False)
+            self.assertTrue(form.validate())
+            self.assertEqual(form.api_payload()["personal_details"]["email"], "john.doe@digital.justice.gov.uk")
+
     def test_bsl_email_success(self):
         with self.client:
             data = {
