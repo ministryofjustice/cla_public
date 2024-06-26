@@ -43,8 +43,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
 
     bsl_webcam = BooleanField(_(u"British Sign Language – webcam"))
     bsl_email = StringField(
-        _(u"Email"),
-        description=_(u"Enter your email address so we can arrange a BSL call."),
+        _(u"Enter your email address so we can arrange a BSL call."),
         validators=[
             IgnoreIf("bsl_webcam", FieldValue(False)),
             Length(max=255, message=_(u"Your address must be 255 characters or less")),
