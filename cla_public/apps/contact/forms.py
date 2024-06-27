@@ -50,10 +50,9 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
             EmailValidator(message=_(u"Enter an email address.")),
         ],
     )
-    minicom = BooleanField(_(u"Minicom – for textphone users"))
     text_relay = BooleanField(_(u"Text relay"))
     welsh = BooleanField(_(u"Welsh"))
-    is_other_language = BooleanField(_(u"Other language"))
+    is_other_language = BooleanField(_(u"Other language - need an interpreter"))
     other_language = SelectField(_(u"Choose a language"), choices=(LANG_CHOICES))
     is_other_adaptation = BooleanField(_(u"Any other communication need"))
     other_adaptation = TextAreaField(
@@ -223,7 +222,6 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             },
             "adaptation_details": {
                 "bsl_webcam": self.adaptations.bsl_webcam.data,
-                "minicom": self.adaptations.minicom.data,
                 "text_relay": self.adaptations.text_relay.data,
                 "language": self.adaptations.welsh.data and "WELSH" or self.adaptations.other_language.data,
                 "notes": self.adaptations.other_adaptation.data if self.adaptations.is_other_adaptation.data else "",

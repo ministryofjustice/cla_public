@@ -336,7 +336,6 @@ class TestApiPayloads(FlaskAppTestCase):
     def application_form_data(self):
         adaptations_data = {
             "bsl_webcam": YES,
-            "minicom": YES,
             "text_relay": YES,
             "welsh": YES,
             "is_other_language": YES,
@@ -374,7 +373,6 @@ class TestApiPayloads(FlaskAppTestCase):
             self.assertEqual(payload["personal_details"]["street"], "21 Jump Street")
 
             self.assertEqual(payload["adaptation_details"]["bsl_webcam"], True)
-            self.assertEqual(payload["adaptation_details"]["minicom"], True)
             self.assertEqual(payload["adaptation_details"]["text_relay"], True)
             self.assertEqual(payload["adaptation_details"]["language"], "WELSH")
             self.assertEqual(payload["adaptation_details"]["notes"], "other")

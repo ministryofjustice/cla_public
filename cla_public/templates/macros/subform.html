@@ -146,12 +146,6 @@
       {{ Form.group(subform.bsl_email, field_label_class='govuk-label govuk-checkboxes__label') }}
     </div>
     <div class="govuk-checkboxes__item">
-      {{ subform.minicom(**{"class": "govuk-checkboxes__input"}) }}
-      <label class="govuk-label govuk-checkboxes__label" for="{{subform.minicom.id}}">
-        {{ subform.minicom.label.text }}
-      </label>
-    </div>
-    <div class="govuk-checkboxes__item">
       {{ subform.text_relay(**{"class": "govuk-checkboxes__input"}) }}
       <label class="govuk-label govuk-checkboxes__label" for="{{subform.text_relay.id}}">
         {{ subform.text_relay.label.text }}
