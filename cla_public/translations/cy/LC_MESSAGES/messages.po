@@ -1304,7 +1304,7 @@ msgid "Choose a language"
 msgstr "Dewiswch iaith"
 
 #: cla_public/apps/contact/forms.py:40
-msgid "Any other communication needs"
+msgid "Any other communication need"
 msgstr "Unrhyw anghenion cyfathrebu eraill"
 
 #: cla_public/apps/contact/forms.py:42
