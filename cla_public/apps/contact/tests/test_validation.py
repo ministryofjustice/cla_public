@@ -168,4 +168,6 @@ class TestContactFormValidation(unittest.TestCase):
             }
             form = ContactForm(MultiDict(data), csrf_enabled=False)
             self.assertFalse(form.validate())
-            self.assertIn(("bsl_email", ["Enter an email address."]), form.errors["adaptations"])
+            self.assertIn(
+                ("bsl_email", ["Enter your email address so we can arrange a BSL call"]), form.errors["adaptations"]
+            )

@@ -48,7 +48,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
         validators=[
             IgnoreIf("bsl_webcam", FieldValue(False)),
             Length(max=255, message=_(u"Your address must be 255 characters or less")),
-            EmailValidator(message=_(u"Enter an email address.")),
+            EmailValidator(message=_(u"Enter your email address so we can arrange a BSL call")),
         ],
     )
     text_relay = BooleanField(_(u"Text relay"))
