@@ -1,6 +1,7 @@
 # coding: utf-8
 "Contact forms"
 
+from werkzeug.datastructures import ImmutableMultiDict
 from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 from flask_wtf import Form
@@ -72,7 +73,9 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
             is_bsl = formdata.get("adaptations-bsl_webcam")
             email = formdata.get("adaptations-bsl_email") or formdata.get("email")
             if is_bsl and email:
+                formdata = formdata.to_dict()
                 formdata["adaptations-bsl_email"] = email
+                formdata = ImmutableMultiDict(formdata)
         super(AdaptationsForm, self).__init__(formdata, obj, prefix, data, meta, **kwargs)
 
 

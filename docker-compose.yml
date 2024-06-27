@@ -13,7 +13,7 @@ services:
       platforms:
         - "linux/amd64"
     ports:
-      - "8000:5000"
+      - "8011:5000"
     stdin_open: true
     tty: true
     volumes:
