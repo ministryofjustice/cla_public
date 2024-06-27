@@ -41,7 +41,7 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform for adaptations
     """
 
-    bsl_webcam = BooleanField(_(u"British Sign Language – webcam"))
+    bsl_webcam = BooleanField(_(u"British Sign Language (BSL)"))
     bsl_email = StringField(
         _(u"Enter your email address so we can arrange a BSL call"),
         validators=[
@@ -51,13 +51,13 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
         ],
     )
     minicom = BooleanField(_(u"Minicom – for textphone users"))
-    text_relay = BooleanField(_(u"Text Relay – for people with hearing or speech impairments"))
+    text_relay = BooleanField(_(u"Text relay"))
     welsh = BooleanField(_(u"Welsh"))
     is_other_language = BooleanField(_(u"Other language"))
     other_language = SelectField(_(u"Choose a language"), choices=(LANG_CHOICES))
-    is_other_adaptation = BooleanField(_(u"Any other communication needs"))
+    is_other_adaptation = BooleanField(_(u"Any other communication need"))
     other_adaptation = TextAreaField(
-        _(u"Other communication needs"),
+        _(u"Other language - need an interpreter"),
         description=_(u"Please tell us what you need in the box below"),
         validators=[
             IgnoreIf("is_other_adaptation", FieldValue(False)),

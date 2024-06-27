@@ -1280,16 +1280,16 @@ msgid "Arrange a callback time"
 msgstr "Trefnu amser i ffonio’n ôl"
 
 #: cla_public/apps/contact/forms.py:34
-msgid "British Sign Language – webcam"
-msgstr "Iaith Arwyddo Brydeinig  – webcam"
+msgid "British Sign Language (BSL)"
+msgstr "Iaith Arwyddion Prydain (BSL)"
 
 #: cla_public/apps/contact/forms.py:35
 msgid "Minicom – for textphone users"
 msgstr "Minicom - ar gyfer defnyddwyr ffôn testun"
 
 #: cla_public/apps/contact/forms.py:36
-msgid "Text Relay – for people with hearing or speech impairments"
-msgstr "Trosglwyddo Neges Destun - ar gyfer pobl sydd â nam ar y clyw neu ar y lleferydd"
+msgid "Text relay"
+msgstr "Cyfnewid testun"
 
 #: cla_public/apps/contact/forms.py:37
 msgid "Welsh"
@@ -1308,8 +1308,8 @@ msgid "Any other communication needs"
 msgstr "Unrhyw anghenion cyfathrebu eraill"
 
 #: cla_public/apps/contact/forms.py:42
-msgid "Other communication needs"
-msgstr "Anghenion cyfathrebu eraill"
+msgid "Other language - need an interpreter"
+msgstr "Iaith arall – angen cyfieithydd"
 
 #: cla_public/apps/contact/forms.py:43
 msgid "Please tell us what you need in the box below"
@@ -4501,9 +4501,6 @@ msgstr "Rhowch eich cyfeiriad e-bost er mwyn i ni allu trefnu galwad Iaith Arwyd
 
 #~ msgid "Type in a number"
 #~ msgstr "Rhowch swm"
-
-#~ msgid "British Sign Language – Webcam"
-#~ msgstr "Iaith Arwyddion Prydain – Gwe-gamera"
 
 #~ msgid "Language required"
 #~ msgstr "Iaith sydd ei hangen"
