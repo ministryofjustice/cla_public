@@ -1,6 +1,7 @@
 # coding: utf-8
 "Contact forms"
 
+from werkzeug.datastructures import ImmutableMultiDict
 from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 from flask_wtf import Form
@@ -41,15 +42,22 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform for adaptations
     """
 
-    bsl_webcam = BooleanField(_(u"British Sign Language – webcam"))
-    minicom = BooleanField(_(u"Minicom – for textphone users"))
-    text_relay = BooleanField(_(u"Text Relay – for people with hearing or speech impairments"))
+    bsl_webcam = BooleanField(_(u"British Sign Language (BSL)"))
+    bsl_email = StringField(
+        _(u"Enter your email address so we can arrange a BSL call"),
+        validators=[
+            IgnoreIf("bsl_webcam", FieldValue(False)),
+            Length(max=255, message=_(u"Your address must be 255 characters or less")),
+            EmailValidator(message=_(u"Enter your email address")),
+        ],
+    )
+    text_relay = BooleanField(_(u"Text relay"))
     welsh = BooleanField(_(u"Welsh"))
-    is_other_language = BooleanField(_(u"Other language"))
+    is_other_language = BooleanField(_(u"Other language - need an interpreter"))
     other_language = SelectField(_(u"Choose a language"), choices=(LANG_CHOICES))
-    is_other_adaptation = BooleanField(_(u"Any other communication needs"))
+    is_other_adaptation = BooleanField(_(u"Any other communication need"))
     other_adaptation = TextAreaField(
-        _(u"Other communication needs"),
+        _(u"Other language - need an interpreter"),
         description=_(u"Please tell us what you need in the box below"),
         validators=[
             IgnoreIf("is_other_adaptation", FieldValue(False)),
@@ -61,6 +69,13 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     def __init__(self, formdata=None, obj=None, prefix="", data=None, meta=None, **kwargs):
         if data is None:
             data = {"welsh": get_locale()[:2] == "cy"}
+        if formdata is not None:
+            is_bsl = formdata.get("adaptations-bsl_webcam")
+            email = formdata.get("adaptations-bsl_email") or formdata.get("email")
+            if is_bsl and email:
+                formdata = formdata.to_dict()
+                formdata["adaptations-bsl_email"] = email
+                formdata = ImmutableMultiDict(formdata)
         super(AdaptationsForm, self).__init__(formdata, obj, prefix, data, meta, **kwargs)
 
 
@@ -182,6 +197,9 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     )
     adaptations = ValidatedFormField(AdaptationsForm, _(u"Do you have any special communication needs? (optional)"))
 
+    def get_email(self):
+        return self.email.data or self.adaptations.bsl_email.data
+
     def api_payload(self):
         "Form data as data structure ready to send to API"
 
@@ -198,7 +216,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         data = {
             "personal_details": {
                 "full_name": self.full_name.data,
-                "email": self.email.data,
+                "email": self.get_email(),
                 "postcode": self.address.form.post_code.data,
                 "mobile_phone": self.callback.form.contact_number.data,
                 "street": self.address.form.street_address.data,
@@ -207,7 +225,6 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             },
             "adaptation_details": {
                 "bsl_webcam": self.adaptations.bsl_webcam.data,
-                "minicom": self.adaptations.minicom.data,
                 "text_relay": self.adaptations.text_relay.data,
                 "language": self.adaptations.welsh.data and "WELSH" or self.adaptations.other_language.data,
                 "notes": self.adaptations.other_adaptation.data if self.adaptations.is_other_adaptation.data else "",

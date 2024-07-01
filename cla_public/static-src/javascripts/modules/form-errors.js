@@ -234,6 +234,7 @@
         } else {
           insertError(label.closest('.govuk-label'), errors, fieldName);
         }
+        $('#field-' + fieldName).trigger("error", errors);
       }
 
       function addSubformErrors(errors, fieldName) {
