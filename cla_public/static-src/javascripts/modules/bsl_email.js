@@ -13,21 +13,22 @@
       });
 
       $('#field-adaptations-bsl_email').on('error', function (errors){
+        $('#field-bsl-email-wrapper').removeClass("govuk-inset-text");
         moj.Modules.BSLEmail.handleToggle($('#adaptations-bsl_webcam')[0]);
       });
 
     },
 
     handleToggle: function(target) {
-      var bsl_email_wrapper = $('#field-adaptations-bsl_email-wrapper');
-      var email_wrapper = $("#field-email")
+      var field_bsl_email_wrapper = $('#field-bsl-email-wrapper');
+      var field_email = $("#field-email")
       var email = $('#email').val();
       if (target.checked && email === '') {
-        bsl_email_wrapper.removeClass('s-hidden');
-        email_wrapper.addClass('s-hidden');
+        field_bsl_email_wrapper.removeClass('s-hidden');
+        field_email.addClass('s-hidden');
       } else {
-        bsl_email_wrapper.addClass('s-hidden');
-        email_wrapper.removeClass('s-hidden');
+        field_bsl_email_wrapper.addClass('s-hidden');
+        field_email.removeClass('s-hidden');
       }
     }
   };
