@@ -2447,8 +2447,8 @@ msgstr "cyfriflenni morgais a phrisiad cyfredol ar gyfer unrhyw eiddo rydych yn 
 msgid "When you do not need to complete the financial assessment"
 msgstr "Pan nad oes angen i chi gwblhau’r asesiad ariannol"
 
-msgid "You should contact CLA without completing the financial assessment if you are:"
-msgstr "Dyma pryd ddylech gysylltu â Chyngor Cyfreithiol Sifil heb gwblhau'r asesiad ariannol:"
+msgid "You should <a class=\"govuk-link\" href=\"/contact\">contact CLA</a> without completing the financial assessment if you are:"
+msgstr "Dyma pryd ddylech <a class=\"govuk-link\" href=\"/contact\">gysylltu â Chyngor Cyfreithiol Sifil</a> heb gwblhau'r asesiad ariannol:"
 
 msgid "under 18"
 msgstr "os ydych o dan 18 oed"
@@ -2464,8 +2464,8 @@ msgstr "Gallwch ddewis peidio â chwblhau’r asesiad ariannol ar-lein, a gofyn 
 
 
 #: cla_public/templates/interstitial.html:59
-msgid "Fill in the <a class=\"govuk-link\" href=\"/contact\">‘Contact CLA</a> page. Select 'BSL' under 'Communication needs'."
-msgstr "Llenwch y dudalen <a class=\"govuk-link\" href=\"/contact\">‘Cysylltu â Chyngor Cyfreithiol Sifil</a>. Dewiswch 'BSL' o dan 'Anghenion cyfathrebu'."
+msgid "Fill in the '<a class=\"govuk-link\" href=\"/contact\">Contact CLA</a>' page. Select 'BSL' under 'Communication needs'."
+msgstr "Llenwch y dudalen '<a class=\"govuk-link\" href=\"/contact\">Cysylltu â Chyngor Cyfreithiol Sifil</a>'. Dewiswch 'BSL' o dan 'Anghenion cyfathrebu'."
 
 #: cla_public/templates/interstitial.html:63
 msgid "Check if you qualify financially"
