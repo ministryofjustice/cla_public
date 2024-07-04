@@ -2409,7 +2409,7 @@ msgstr "Os ydych yn gymwys yn ariannol, gallwch siarad â Chyngor Cyfreithiol Si
 
 #: cla_public/templates/interstitial.html:35
 msgid "The CLA operator will check all the information you’ve given through this service."
-msgstr "Bydd y gweithredwr Cyngor Cyfreithiol Sifil yn gwirio’r holl wybodaeth rydych wedi’i rhoi drwy’r gwasanaeth hwn.."
+msgstr "Bydd y gweithredwr Cyngor Cyfreithiol Sifil yn gwirio’r holl wybodaeth rydych wedi’i rhoi drwy’r gwasanaeth hwn."
 
 #: cla_public/templates/interstitial.html:36
 msgid "You’ll need to provide evidence of your finances and a specialist will ask you about your case in more detail before your application can progress."
