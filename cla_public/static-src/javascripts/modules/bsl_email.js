@@ -13,7 +13,7 @@
       });
 
       $('#field-adaptations-bsl_email').on('error', function (errors){
-        $('#field-bsl-email-wrapper').removeClass("govuk-inset-text");
+        $('#field-bsl-email-wrapper').removeClass("govuk-checkboxes__conditional");
         moj.Modules.BSLEmail.handleToggle($('#adaptations-bsl_webcam')[0]);
       });
 
