@@ -3,10 +3,9 @@ ARG ALPINE_BASE_IMAGE="alpine:3.15"
 ARG BASE_REQUIREMENTS_FILE="requirements.txt"
 
 FROM ${NODE_BASE_IMAGE} as node_build
-COPY ./cla_public/static-src ./cla_public/static-src
 COPY ./package.json ./package-lock.json ./
 RUN npm install
-
+COPY ./cla_public/static-src ./cla_public/static-src
 COPY ./gulpfile.js .
 COPY ./tasks ./tasks
 RUN ./node_modules/.bin/gulp build

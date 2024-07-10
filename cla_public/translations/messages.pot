@@ -1276,7 +1276,7 @@ msgid "Arrange a callback time"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:34
-msgid "British Sign Language – webcam"
+msgid "British Sign Language (BSL)"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:35
@@ -1284,7 +1284,7 @@ msgid "Minicom – for textphone users"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:36
-msgid "Text Relay – for people with hearing or speech impairments"
+msgid "Text relay"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:37
@@ -1300,11 +1300,11 @@ msgid "Choose a language"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:40
-msgid "Any other communication needs"
+msgid "Any other communication need"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:42
-msgid "Other communication needs"
+msgid "Other language - need an interpreter"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:43

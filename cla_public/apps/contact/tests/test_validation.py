@@ -5,7 +5,7 @@ import unittest
 
 from werkzeug.datastructures import MultiDict
 from cla_public.app import create_app
-from cla_public.apps.contact.forms import CallBackForm
+from cla_public.apps.contact.forms import CallBackForm, ContactForm
 from cla_public.apps.contact.tests.test_availability import override_current_time
 from cla_public.apps.contact.constants import (
     TIME_TODAY_VALIDATION_ERROR,
@@ -131,3 +131,41 @@ class TestContactFormValidation(unittest.TestCase):
                     self.assertIn(TIME_SPECIFIC_VALIDATION_ERROR, errors["time_in_day"][0])
                 else:
                     self.fail("Specific day was not set but form was validated")
+
+    def test_bsl(self):
+        with self.client:
+            data = {
+                "adaptations-other_language": "",
+                "adaptations-bsl_webcam": "y",
+                "email": "john.doe@digital.justice.gov.uk",
+                "contact_type": "call",
+                "full_name": "John Doe",
+            }
+            form = ContactForm(MultiDict(data), csrf_enabled=False)
+            self.assertTrue(form.validate())
+            self.assertEqual(form.api_payload()["personal_details"]["email"], "john.doe@digital.justice.gov.uk")
+
+    def test_bsl_email_success(self):
+        with self.client:
+            data = {
+                "adaptations-other_language": "",
+                "adaptations-bsl_webcam": "y",
+                "adaptations-bsl_email": "john.doe@digital.justice.gov.uk",
+                "contact_type": "call",
+                "full_name": "John Doe",
+            }
+            form = ContactForm(MultiDict(data), csrf_enabled=False)
+            self.assertTrue(form.validate())
+            self.assertEqual(form.api_payload()["personal_details"]["email"], "john.doe@digital.justice.gov.uk")
+
+    def test_bsl_email_missing_email(self):
+        with self.client:
+            data = {
+                "adaptations-other_language": "",
+                "adaptations-bsl_webcam": "y",
+                "contact_type": "call",
+                "full_name": "John Doe",
+            }
+            form = ContactForm(MultiDict(data), csrf_enabled=False)
+            self.assertFalse(form.validate())
+            self.assertIn(("bsl_email", ["Enter your email address"]), form.errors["adaptations"])
