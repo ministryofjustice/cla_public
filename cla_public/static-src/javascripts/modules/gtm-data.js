@@ -26,7 +26,7 @@ moj.Modules.GMTData = {
         case 'select': value = $(this).find('option:selected').text(); break;
       }
 
-      value = value.trim().replace(/\n/g,'').substr(0,30); // can be up to 100 if needed
+      value = value.trim().replace(/\n/g,'').substring(0,30); // can be up to 100 if needed
 
       GTM.push({ 
         'event': 'element-' + e.type, 
