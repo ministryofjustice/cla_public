@@ -25,6 +25,12 @@
   <p class="govuk-body">Results in order of closeness to <strong>{{data.origin.postcode}}</strong></p>
 {% endif %}
 
+{% if data.results %}
+<script type="text/javascript">
+  var CLOSEST_PROVIDER_MILEAGE = '{{ data.results[0].distance }}';
+</script>
+{% endif %}
+
 {% for item in data.results %}
   <div>
     <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4 govuk-!-margin-top-4">
