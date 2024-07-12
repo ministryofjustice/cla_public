@@ -40,30 +40,29 @@ moj.Modules.GTMData = {
   },
 
   trackFALA: function() {
-    var url = window.location;
-    if(url.pathname !== '/scope/refer/legal-adviser')return;
-    var urlParams = new URLSearchParams(url.search);
-    var postcode = urlParams.get('postcode');
-    var category = urlParams.get('category');
-    if(!postcode || !category)return;
+          
+    if(window.location.pathname !== '/scope/refer/legal-adviser' ||
+      typeof RESOLVED_POSTCODE !== 'string' || 
+      typeof CATEGORY !=='string' || 
+      typeof CLOSEST_PROVIDER_MILEAGE !=='string')return;
 
-    var match = postcode.match(/^(.+?)(\d[A-Z]{2})$/i);
+    var match = RESOLVED_POSTCODE.match(/^(.+?)(\d[A-Z]{2})$/i);
     var district = match ? match[1] : '';
 
-    var mileage = typeof CLOSEST_PROVIDER_MILEAGE === 'string' ? !isNaN(CLOSEST_PROVIDER_MILEAGE) ? CLOSEST_PROVIDER_MILEAGE : '' : '';
+    var mileage = !isNaN(CLOSEST_PROVIDER_MILEAGE) ? CLOSEST_PROVIDER_MILEAGE : '';
 
     var GTM = window.dataLayer;
     GTM.push({
       'event': 'fala_search',
       'district': district,
-      'category': category,
+      'category': CATEGORY.substring(0,50),
       'closest_provider': mileage
     });
 
     console.log({
       'event': 'fala_search',
       'district': district,
-      'category': category,
+      'category': CATEGORY.substring(0,50),
       'closest_provider': mileage
     });
   }
