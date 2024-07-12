@@ -26,7 +26,7 @@
 {% endif %}
 
 {% if data.results %}
-<script type="text/javascript">
+<script nonce="{{ csp_nonce() }}" type="text/javascript">
   var CLOSEST_PROVIDER_MILEAGE = '{{ data.results[0].distance }}';
 </script>
 {% endif %}
