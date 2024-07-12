@@ -1,7 +1,5 @@
 'use strict';
-
 moj.Modules.GTMData = {
-
   init: function() {
 
     var GTM = window.dataLayer;
@@ -68,4 +66,5 @@ moj.Modules.GTMData = {
       'category': category,
       'closest_provider': mileage
     });
+  }
 }
