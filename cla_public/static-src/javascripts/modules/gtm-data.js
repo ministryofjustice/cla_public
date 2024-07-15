@@ -46,24 +46,24 @@ moj.Modules.GTMData = {
       typeof CATEGORY !=='string' || 
       typeof CLOSEST_PROVIDER_MILEAGE !=='string')return;
 
-    var match = RESOLVED_POSTCODE.match(/^(.+?)(\d[A-Z]{2})$/i);
+    var match = RESOLVED_POSTCODE.replace(/\s/g, '').match(/^(.+?)(\d[A-Z]{2})$/i);
     var district = match ? match[1] : '';
 
-    var mileage = !isNaN(CLOSEST_PROVIDER_MILEAGE) ? CLOSEST_PROVIDER_MILEAGE : '';
+    var mileage = !isNaN(CLOSEST_PROVIDER_MILEAGE) ? parseFloat(CLOSEST_PROVIDER_MILEAGE).toFixed(2).toString() : '';
 
     var GTM = window.dataLayer;
     GTM.push({
       'event': 'fala_search',
       'district': district,
-      'category': CATEGORY.substring(0,50),
-      'closest_provider': mileage
+      'category_name': CATEGORY.substring(0,50),
+      'closest_provider_mileage': mileage
     });
 
     console.log({
       'event': 'fala_search',
       'district': district,
-      'category': CATEGORY.substring(0,50),
-      'closest_provider': mileage
+      'category_name': CATEGORY.substring(0,50),
+      'closest_provider_mileage': mileage
     });
   }
 }
