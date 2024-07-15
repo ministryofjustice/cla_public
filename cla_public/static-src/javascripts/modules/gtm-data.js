@@ -35,15 +35,14 @@ moj.Modules.GTMData = {
       });
     });
 
-    // Track FALA-lite input
-    this.trackFALA();
+    this.trackFALASearch();
   },
 
-  trackFALA: function() {
-          
+  trackFALASearch: function() {
+      
     if(window.location.pathname !== '/scope/refer/legal-adviser' ||
-      typeof RESOLVED_POSTCODE !== 'string' || 
-      typeof CATEGORY !=='string' || 
+      typeof RESOLVED_POSTCODE !== 'string' ||
+      typeof CATEGORY !=='string' ||
       typeof CLOSEST_PROVIDER_MILEAGE !=='string')return;
 
     var match = RESOLVED_POSTCODE.replace(/\s/g, '').match(/^(.+?)(\d[A-Z]{2})$/i);
@@ -53,13 +52,6 @@ moj.Modules.GTMData = {
 
     var GTM = window.dataLayer;
     GTM.push({
-      'event': 'fala_search',
-      'district': district,
-      'category_name': CATEGORY.substring(0,50),
-      'closest_provider_mileage': mileage
-    });
-
-    console.log({
       'event': 'fala_search',
       'district': district,
       'category_name': CATEGORY.substring(0,50),
