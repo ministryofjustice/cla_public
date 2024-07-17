@@ -1,7 +1,5 @@
 'use strict';
-
-moj.Modules.GMTData = {
-
+moj.Modules.GTMData = {
   init: function() {
 
     var GTM = window.dataLayer;
@@ -9,10 +7,10 @@ moj.Modules.GMTData = {
 
     // Track element clicks and form element changes
     $('input, select, button, textarea').on('click change', function(e){
-      
+
       var clickInputTypes = ['checkbox', 'radio', 'button', 'textarea'];
       var thisIsAClickInput = clickInputTypes.includes($(this).attr('type'));
-      
+
       // Don't track changes for clickable input types, only clicks
       if(e.type === 'change' && thisIsAClickInput)return;
 
@@ -28,13 +26,36 @@ moj.Modules.GMTData = {
 
       value = value.trim().replace(/\n/g,'').substring(0,30); // can be up to 100 if needed
 
-      GTM.push({ 
-        'event': 'element-' + e.type, 
-        'element_tag': elem, 
-        'element_id': $(this).attr('id'), 
+      GTM.push({
+        'event': 'element-' + e.type,
+        'element_tag': elem,
+        'element_id': $(this).attr('id'),
         'element_value': value,
-        'element_checked': $(this).is(':checked')     
+        'element_checked': $(this).is(':checked')
       });
+    });
+
+    this.trackFALASearch();
+  },
+
+  trackFALASearch: function() {
+      
+    if(window.location.pathname !== '/scope/refer/legal-adviser' ||
+      typeof RESOLVED_POSTCODE !== 'string' ||
+      typeof CATEGORY !=='string' ||
+      typeof CLOSEST_PROVIDER_MILEAGE !=='string')return;
+
+    var match = RESOLVED_POSTCODE.replace(/\s/g, '').match(/^(.+?)(\d[A-Z]{2})$/i);
+    var district = match ? match[1] : '';
+
+    var mileage = !isNaN(CLOSEST_PROVIDER_MILEAGE) ? parseFloat(CLOSEST_PROVIDER_MILEAGE).toFixed(2).toString() : '';
+
+    var GTM = window.dataLayer;
+    GTM.push({
+      'event': 'fala_search',
+      'district': district,
+      'category_name': CATEGORY.substring(0,50),
+      'closest_provider_mileage': mileage
     });
   }
 }

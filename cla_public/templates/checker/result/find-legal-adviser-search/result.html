@@ -23,6 +23,15 @@
 
 {% if data.origin.postcode %}
   <p class="govuk-body">Results in order of closeness to <strong>{{data.origin.postcode}}</strong></p>
+  {% if data.results %}
+  <script nonce="{{ csp_nonce() }}" type="text/javascript">
+    // Used by gtm-data module
+    var CLOSEST_PROVIDER_MILEAGE = '{{ data.results[0].distance }}';
+    var RESOLVED_POSTCODE = '{{ data.origin.postcode }}'
+    var CATEGORY = '{{ category_name }}'
+  </script>
+  {% endif %}
+
 {% endif %}
 
 {% for item in data.results %}
