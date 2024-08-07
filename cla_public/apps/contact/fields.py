@@ -179,7 +179,9 @@ class AvailabilityCheckerForm(NoCsrfForm):
     Subform allowing the user to select a time and date for a callback
     """
 
-    specific_day = RadioField(label=_(u"Arrange a callback time"), choices=DAY_CHOICES, default=DAY_TODAY)
+    specific_day = RadioField(label=_(u"Arrange a callback time"), choices=DAY_CHOICES, validators=[
+            InputRequired(message=_(u"Please select a time for us to call")),
+        ] )
 
     # choices must be set dynamically as cache is not available at runtime
     time_today = TimeChoiceField(
