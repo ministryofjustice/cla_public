@@ -182,7 +182,7 @@ class AvailabilityCheckerForm(NoCsrfForm):
     specific_day = RadioField(
         label=_(u"Arrange a callback time"),
         choices=DAY_CHOICES,
-        validators=[InputRequired(message=_(TIME_TODAY_VALIDATION_ERROR))],
+        validators=[InputRequired(message=_("Please select what time you want to be called"))],
     )
 
     # choices must be set dynamically as cache is not available at runtime

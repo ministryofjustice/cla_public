@@ -169,8 +169,8 @@
           <% } %>
           <% } else { %>
           <% _.each(field.errors, function(error) { %>
-            <% if (error.includes('Please select a time for us to call')) { %>
-              <a href="#field-callback-time" onclick="addErrors('Please select a time for us to call', field-callback-time);return false;">Please select a time for us to call</a>
+            <% if (error.includes('Please select what time you want to be called')) { %>
+              <a href="#field-callback-time" onclick="addErrors('Please select what time you want to be called', field-callback-time);return false;">Please select what time you want to be called</a>
               <% } else { %>
               <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
               <% } %>
