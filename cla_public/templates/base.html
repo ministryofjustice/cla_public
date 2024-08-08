@@ -170,7 +170,8 @@
           <% } else { %>
           <% _.each(field.errors, function(error) { %>
             <% if (error.includes('Select a day and time for us to call')) {  %>
-              <a href="#field-callback-time" onclick="focusError('time');return false;">Select a day and time for us to call</a>
+              <a href="#field-callback-time" onclick="focusError('callback-time');return false;">Select a day and time for us to call</a>
+              <script nonce="{{ csp_nonce() }}" >addErrors('Select a day and time for us to call','specific_day')</script>
               <% } else { %>
               <a href="#<%= field.name %>" onclick="focusError('<%= field.name %>');return false;"><%= error %></a>
               <% } %>
