@@ -1339,6 +1339,10 @@ msgstr "Rhaid i’ch rhif ffôn fod yn 20 llythyren neu lai"
 msgid "Select a time for us to call"
 msgstr "Dewiswch amser i ni eich ffonio"
 
+#: cla_public/apps/contact/forms.py:71 cla_public/apps/contact/forms.py:105
+msgid "Select a day and time for us to call"
+msgstr "Dewiswch ddiwrnod ac amser i ni ffonio"
+
 #: cla_public/apps/contact/forms.py:73
 msgid "Can we say that we're calling from Civil Legal Advice?"
 msgstr "Gallwn ni ddweud ein bod ni’n galw o Gymorth Cyfreithiol Sifil?"

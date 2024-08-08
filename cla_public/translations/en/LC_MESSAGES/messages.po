@@ -1335,6 +1335,10 @@ msgstr ""
 msgid "Select a time for us to call"
 msgstr ""
 
+#: cla_public/apps/contact/forms.py:71 cla_public/apps/contact/forms.py:105
+msgid "Select a day and time for us to call"
+msgstr "Dewiswch ddiwrnod ac amser i ni ffonio"
+
 #: cla_public/apps/contact/forms.py:73
 msgid "Can we say that we're calling from Civil Legal Advice?"
 msgstr ""
