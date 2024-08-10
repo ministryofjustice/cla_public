@@ -82,11 +82,10 @@ moj.Modules.GTMData = {
     };
 
     var labelLoadTime = function(loadTime) {
-      with(this)
-        return  loadTime < 1 ? labels.excellent : 
-                loadTime < 2 ? labels.veryGood : 
-                loadTime < 3 ? labels.acceptable : 
-                loadTime < 5 ? labels.improve : labels.fix;
+      return  loadTime < 1 ? labels.excellent : 
+              loadTime < 2 ? labels.veryGood : 
+              loadTime < 3 ? labels.acceptable : 
+              loadTime < 5 ? labels.improve : labels.fix;
     };
       
     var loadTime = getLoadTimeSeconds();
