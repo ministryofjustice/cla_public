@@ -38,7 +38,7 @@ moj.Modules.GTMData = {
     this.trackFALASearch();
     
     // Delay to allow browser to calculate timings
-    setTimeout(function() { this.trackPageLoadTime()}.bind(this),1000);
+    setTimeout('moj.Modules.GTMData.trackPageLoadTime()',1000);
   },
 
   trackFALASearch: function() {
