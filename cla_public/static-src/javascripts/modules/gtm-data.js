@@ -1,12 +1,9 @@
 'use strict';
 moj.Modules.GTMData = {
 
-  GTM: null,
-
   init: function() {
 
-    this.GTM = window.dataLayer;
-    if(!this.GTM)return;
+    if(!window.dataLayer)return;
 
     // Track element clicks and form element changes
     $('input, select, button, textarea').on('click change', function(e){
@@ -29,7 +26,7 @@ moj.Modules.GTMData = {
 
       value = value.trim().replace(/\n/g,'').substring(0,30); // can be up to 100 if needed
 
-      this.GTM.push({
+      window.dataLayer.push({
         'event': 'element-' + e.type,
         'element_tag': elem,
         'element_id': $(this).attr('id'),
@@ -56,7 +53,7 @@ moj.Modules.GTMData = {
 
     var mileage = !isNaN(CLOSEST_PROVIDER_MILEAGE) ? parseFloat(CLOSEST_PROVIDER_MILEAGE).toFixed(2).toString() : '';
 
-    this.GTM.push({
+    window.dataLayer.push({
       'event': 'fala_search',
       'district': district,
       'category_name': CATEGORY.substring(0,50),
@@ -93,7 +90,7 @@ moj.Modules.GTMData = {
               
     var label = labelLoadTime(loadTime);
     
-    this.GTM.push({
+    window.dataLayer.push({
       'event': 'page_load_time',
       'variable_label': label,
       'variable_number': parseFloat(loadTime).toFixed(2).toString()

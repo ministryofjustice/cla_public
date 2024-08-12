@@ -145,12 +145,6 @@
 {% block javascripts %}
   {{ super() }}
 
-  {% if reasons_for_contacting -%}
-    <script nonce="{{ csp_nonce() }}">
-      ga('send', 'event', 'reasons-for-contacting', '{{ reasons_for_contacting }}');
-    </script>
-  {%- endif -%}
-
   <script nonce="{{ csp_nonce() }}" type="text/html" id="addressFinderButton">
     <button class="govuk-button govuk-button--secondary address-finder-button" type="button" data-module="govuk-button">
       {{ _('Find UK address') }}
