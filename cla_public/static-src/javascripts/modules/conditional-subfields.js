@@ -89,6 +89,10 @@
         .toggleClass('s-hidden', !isVisible);
 
       if(!isVisible && !$field.data('persist-values')) {
+        // Reset phone number when another option is selected
+        $field.find('input[type=tel]')
+          .prop('value', '');
+
         $field.find('input')
           .prop('checked', false)
           .trigger('label-select');
