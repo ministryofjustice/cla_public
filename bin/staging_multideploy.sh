@@ -4,7 +4,7 @@ set -e
 ROOT=$(dirname "$0")
 HELM_DIR="$ROOT/../helm_deploy/cla-public/"
 
-SHARED_IP_RANGES_LAA=$(curl -s https://raw.githubusercontent.com/ministryofjustice/laa-ip-allowlist/main/cidrs.txt | tr -d ' ' | tr '\n' ',' | sed 's/,$//')
+SHARED_IP_RANGES_LAA=$(curl -s https://raw.githubusercontent.com/ministryofjustice/laa-ip-allowlist/main/cidrs.txt | tr -d ' ' | tr '\n' ',' | sed 's/,/\\,/g' | sed 's/\\,$//')
 
 helm upgrade $CLEANED_BRANCH_NAME \
   $HELM_DIR \
