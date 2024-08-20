@@ -101,5 +101,5 @@ in an appropriate format
 {{- end -}}
 
 {{- define "cla-public.whitelist" -}}
-{{ join "," .Values.ingress.whitelist }},{{- .Values.pingdomIPs }}
+{{ join "," .Values.ingress.whitelist }},{{- .Values.pingdomIPs }},{{- .Values.sharedIPRangesLAA }}
 {{- end -}}
