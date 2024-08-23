@@ -30,16 +30,10 @@ ingress:
   tls: []
   addNoIndexResponseHeader: true
   whitelist:
-    # Cisco Anyconnect (Dom1) / ARK data centre
-    - 194.33.192.0/25
-    - 194.33.196.0/25
     # HGS
     - 84.43.86.100/32
-    # GlobalProtect VPN (Digital Mac)
-    - 18.169.147.172/32
-    - 35.176.93.186/32
-    - 18.130.148.126/32
-    - 35.176.148.126/32
+
+    # Note: Additional shared LAA IP ranges and Pingdom IPs are loaded in from bash scripts e.g. bin/staging_deply.sh
 
 envVars:
   MAINTENANCE_MODE:
