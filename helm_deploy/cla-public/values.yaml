@@ -43,10 +43,7 @@ ingress:
 
 envVars:
   MAINTENANCE_MODE:
-    configmap:
-      name: maintenance-mode
-      key: "value"
-      optional: true
+    value: "True"
   SECRET_KEY:
     secret:
       name: flask-secret-key
