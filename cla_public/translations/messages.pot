@@ -1316,7 +1316,7 @@ msgid "Your other communication needs must be 4000 characters or fewer"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:63 cla_public/apps/contact/forms.py:97
-msgid "Phone number for the callback"
+msgid "Phone number"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:64 cla_public/apps/contact/forms.py:98

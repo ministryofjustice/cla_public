@@ -85,7 +85,7 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     """
 
     contact_number = StringField(
-        _(u"Phone number for the callback"),
+        _(u"Phone number"),
         description=_(u"Enter the full number, including the area code. For example, 01632 960 1111."),
         validators=[
             InputRequired(message=_(u"Tell us what number to ring")),
@@ -119,7 +119,7 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
         validators=[Required(message=_(u"Tell us how you know this person"))],
     )
     contact_number = StringField(
-        _(u"Phone number for the callback"),
+        _(u"Phone number"),
         description=_(u"Enter the full number, including the area code. For example, 01632 960 1111."),
         validators=[
             InputRequired(message=_(u"Tell us what number to ring")),
