@@ -154,7 +154,7 @@
     {% if field %}id="field-{{ field.id }}"{% endif %}
   >
 
-    {{ render_field_label(field, kwargs.hide_label, kwargs.custom_label) }}
+    {{ render_field_label(field, kwargs.hide_label, kwargs.custom_label, kwargs.field_label_class) }}
 
     {{ render_field_description(field) }}
 
@@ -308,7 +308,7 @@
     - hide_label <boolean> (default: False)
         Whether to hide the label visually (still available for screen readers)
 #}
-{% macro render_field_label(field, hide_label=False, custom_label='') %}
+{% macro render_field_label(field, hide_label=False, custom_label='', field_label_class=None) %}
   {% if field %}
     {% if custom_label %}
       {% set label_text = _(custom_label) %}
@@ -320,11 +320,17 @@
       {% set label_text = label_text + ' (' + _('optional') + ')' %}
     {% endif %}
 
+    {% if field_label_class  is defined %}
+        {% set field_label_class = field_label_class %}
+    {% else %}
+        {% set field_label_class = "govuk-label%s" % (' govuk-visually-hidden' if hide_label) %}
+    {% endif %}
+
     {% set field_label = field.label(
          for=field.per_interval_value.id if field.per_interval_value else field.id,
          text=label_text,
          id="field-label-%s" % field.id,
-         class="govuk-label%s" % (' govuk-visually-hidden' if hide_label)
+         class=field_label_class
        ) %}
 
     {{ field_label }}
@@ -461,6 +467,11 @@
   {% endif %}
   <div class="govuk-form-group {{"govuk-form-group--error" if error_message_text|length > 1  }}">
     <label class="govuk-label" for="{{field.id}}">{{ _('Postcode') }}</label>
+  {% if field.description %}
+    <div id="{{ field.id }}-hint" class="govuk-hint">
+      {{- field.description -}}
+    </div>
+  {% endif %}
     {% if error_message_text %}
       <span id="{{field.id}}-error" class="govuk-error-message">
         <span class="govuk-visually-hidden">{% trans %}Error{% endtrans %}: </span>

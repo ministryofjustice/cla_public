@@ -75,11 +75,6 @@ ZENDESK_API_USERNAME = os.environ.get("ZENDESK_API_USERNAME")
 ZENDESK_API_TOKEN = os.environ.get("ZENDESK_API_TOKEN")
 ZENDESK_DEFAULT_REQUESTER = 649762516  # anonymous feedback <noreply@ministryofjustice.zendesk.com>
 
-GDS_GA_ID = os.environ.get("GDS_GA_ID")
-MOJ_GTM_ID = os.environ.get("MOJ_GTM_ID")
-MOJ_GTM_AUTH = os.environ.get("MOJ_GTM_AUTH")
-MOJ_GTM_PREVIEW = os.environ.get("MOJ_GTM_PREVIEW")
-
 CACHE_TYPE = "simple"
 
 EXTENSIONS = []
@@ -177,6 +172,9 @@ GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 MAINTENANCE_MODE = os.environ.get("MAINTENANCE_MODE", "False").upper() == "TRUE"
 
 EMAIL_ORCHESTRATOR_URL = os.environ.get("EMAIL_ORCHESTRATOR_URL")
+
+# Callback slots will be determined by the backend callback_time_slots route rather than cla_common
+USE_BACKEND_CALLBACK_SLOTS = os.environ.get("USE_BACKEND_CALLBACK_SLOTS", "False") == "True"
 
 
 def current_app_cache_factory(*args, **kwargs):

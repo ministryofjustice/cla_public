@@ -13,7 +13,7 @@ services:
       platforms:
         - "linux/amd64"
     ports:
-      - "8000:5000"
+      - "8011:5000"
     stdin_open: true
     tty: true
     volumes:
@@ -36,8 +36,6 @@ services:
       RAVEN_CONFIG_SITE: ""
       SENTRY_DSN: ${SENTRY_DSN:-}
       LAALAA_API_HOST: https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk
-      MOJ_GA_ID: "UA-XXXXXXXX-X1"
-      GDS_GA_ID: "UA-XXXXXXXX-X2"
       OS_PLACES_API_KEY: ${OS_PLACES_API_KEY:-CHANGE_ME}
       GOVUK_NOTIFY_API_KEY: ${GOVUK_NOTIFY_API_KEY:-}
       TESTING: "True"

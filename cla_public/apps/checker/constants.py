@@ -71,6 +71,7 @@ CATEGORIES = [
     ),
     ("other", _(u"Any other problem"), ""),
     ("traffickingandslavery", _(u"Modern slavery"), ""),
+    ("hlpas", _("Housing Loss Prevention Advice Scheme"), ""),
 ]
 
 # Mapping LAALAA category codes to CLA category codes
@@ -180,6 +181,10 @@ CONTACT_PREFERENCE = Choices(
     ("CALL", "call", _(u"I will call you")),
     ("CALLBACK", "callback", _(u"Call me back")),
     ("THIRDPARTY", "thirdparty", _(u"Call someone else instead of me")),
+)
+
+CONTACT_PREFERENCE_NO_CALLBACK = Choices(
+    ("CALL", "call", _(u"I will call you")), ("THIRDPARTY", "thirdparty", _(u"Call someone else instead of me"))
 )
 
 ANNOUNCE_PREFERENCE = Choices(

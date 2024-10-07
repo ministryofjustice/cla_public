@@ -1,6 +1,7 @@
 # coding: utf-8
 "Contact forms"
 
+from werkzeug.datastructures import ImmutableMultiDict
 from flask import current_app
 from flask.ext.babel import lazy_gettext as _
 from flask_wtf import Form
@@ -9,15 +10,25 @@ from wtforms import Form as NoCsrfForm
 from wtforms import BooleanField, RadioField, SelectField, StringField, TextAreaField
 from wtforms.validators import InputRequired, Optional, Required, Length
 
-from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP
-from cla_public.apps.contact.fields import AvailabilityCheckerField, ValidatedFormField
-from cla_public.apps.checker.constants import SAFE_TO_CONTACT, CONTACT_PREFERENCE, ANNOUNCE_PREFERENCE
+from cla_common.constants import ADAPTATION_LANGUAGES, THIRDPARTY_RELATIONSHIP, CALLBACK_TYPES
+from cla_public.apps.contact.fields import (
+    AvailabilityCheckerField,
+    ValidatedFormField,
+    ThirdPartyAvailabilityCheckerField,
+)
+from cla_public.apps.checker.constants import (
+    SAFE_TO_CONTACT,
+    CONTACT_PREFERENCE,
+    CONTACT_PREFERENCE_NO_CALLBACK,
+    ANNOUNCE_PREFERENCE,
+)
 from cla_public.apps.base.forms import BabelTranslationsFormMixin
 from cla_public.apps.checker.validators import IgnoreIf, FieldValue
 from cla_public.apps.contact.validators import EmailValidator
 from cla_public.apps.contact.constants import SELECT_OPTION_DEFAULT
 from cla_public.libs.honeypot import Honeypot
 from cla_public.libs.utils import get_locale
+from cla_public.apps.contact.api import get_valid_callback_days
 
 
 LANG_CHOICES = filter(lambda x: x[0] not in ("ENGLISH", "WELSH"), [("", "")] + ADAPTATION_LANGUAGES)
@@ -31,15 +42,22 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     Subform for adaptations
     """
 
-    bsl_webcam = BooleanField(_(u"British Sign Language – webcam"))
-    minicom = BooleanField(_(u"Minicom – for textphone users"))
-    text_relay = BooleanField(_(u"Text Relay – for people with hearing or speech impairments"))
+    bsl_webcam = BooleanField(_(u"British Sign Language (BSL)"))
+    bsl_email = StringField(
+        _(u"Enter your email address so we can arrange a BSL call"),
+        validators=[
+            IgnoreIf("bsl_webcam", FieldValue(False)),
+            Length(max=255, message=_(u"Your address must be 255 characters or less")),
+            EmailValidator(message=_(u"Enter your email address")),
+        ],
+    )
+    text_relay = BooleanField(_(u"Text relay"))
     welsh = BooleanField(_(u"Welsh"))
-    is_other_language = BooleanField(_(u"Other language"))
+    is_other_language = BooleanField(_(u"Other language - need an interpreter"))
     other_language = SelectField(_(u"Choose a language"), choices=(LANG_CHOICES))
-    is_other_adaptation = BooleanField(_(u"Any other communication needs"))
+    is_other_adaptation = BooleanField(_(u"Any other communication need"))
     other_adaptation = TextAreaField(
-        _(u"Other communication needs"),
+        _(u"Other language - need an interpreter"),
         description=_(u"Please tell us what you need in the box below"),
         validators=[
             IgnoreIf("is_other_adaptation", FieldValue(False)),
@@ -51,6 +69,13 @@ class AdaptationsForm(BabelTranslationsFormMixin, NoCsrfForm):
     def __init__(self, formdata=None, obj=None, prefix="", data=None, meta=None, **kwargs):
         if data is None:
             data = {"welsh": get_locale()[:2] == "cy"}
+        if formdata is not None:
+            is_bsl = formdata.get("adaptations-bsl_webcam")
+            email = formdata.get("adaptations-bsl_email") or formdata.get("email")
+            if is_bsl and email:
+                formdata = formdata.to_dict()
+                formdata["adaptations-bsl_email"] = email
+                formdata = ImmutableMultiDict(formdata)
         super(AdaptationsForm, self).__init__(formdata, obj, prefix, data, meta, **kwargs)
 
 
@@ -60,7 +85,7 @@ class CallBackForm(BabelTranslationsFormMixin, NoCsrfForm):
     """
 
     contact_number = StringField(
-        _(u"Phone number for the callback"),
+        _(u"Phone number"),
         description=_(u"Enter the full number, including the area code. For example, 01632 960 1111."),
         validators=[
             InputRequired(message=_(u"Tell us what number to ring")),
@@ -94,14 +119,14 @@ class ThirdPartyForm(BabelTranslationsFormMixin, NoCsrfForm):
         validators=[Required(message=_(u"Tell us how you know this person"))],
     )
     contact_number = StringField(
-        _(u"Phone number for the callback"),
+        _(u"Phone number"),
         description=_(u"Enter the full number, including the area code. For example, 01632 960 1111."),
         validators=[
             InputRequired(message=_(u"Tell us what number to ring")),
             Length(max=20, message=_(u"Your telephone number must be 20 characters or less")),
         ],
     )
-    time = AvailabilityCheckerField(label=_(u"Select a time for us to call"))
+    time = ThirdPartyAvailabilityCheckerField(label=_(u"Select a time for us to call"))
 
 
 class AddressForm(BabelTranslationsFormMixin, NoCsrfForm):
@@ -124,6 +149,11 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     Form to contact CLA
     """
 
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        if current_app.config.get("USE_BACKEND_CALLBACK_SLOTS", False):
+            self.update_contact_preference()
+
     full_name = StringField(
         _(u"Your full name"),
         validators=[
@@ -131,11 +161,18 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             InputRequired(message=_(u"Tell us your name")),
         ],
     )
+
     contact_type = RadioField(
         _(u"Select a contact option"),
         choices=CONTACT_PREFERENCE,
         validators=[InputRequired(message=_(u"Tell us how we should get in contact"))],
     )
+
+    def update_contact_preference(self):
+        # If there are no callback slots available when the contact_type field is called the callback option should be removed.
+        callback_slots_available = len(get_valid_callback_days()) != 0
+        self.contact_type.choices = CONTACT_PREFERENCE if callback_slots_available else CONTACT_PREFERENCE_NO_CALLBACK
+
     callback = ValidatedFormField(
         CallBackForm,
         validators=[IgnoreIf("contact_type", FieldValue("call")), IgnoreIf("contact_type", FieldValue("thirdparty"))],
@@ -160,6 +197,9 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
     )
     adaptations = ValidatedFormField(AdaptationsForm, _(u"Do you have any special communication needs? (optional)"))
 
+    def get_email(self):
+        return self.email.data or self.adaptations.bsl_email.data
+
     def api_payload(self):
         "Form data as data structure ready to send to API"
 
@@ -176,7 +216,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         data = {
             "personal_details": {
                 "full_name": self.full_name.data,
-                "email": self.email.data,
+                "email": self.get_email(),
                 "postcode": self.address.form.post_code.data,
                 "mobile_phone": self.callback.form.contact_number.data,
                 "street": self.address.form.street_address.data,
@@ -185,7 +225,6 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             },
             "adaptation_details": {
                 "bsl_webcam": self.adaptations.bsl_webcam.data,
-                "minicom": self.adaptations.minicom.data,
                 "text_relay": self.adaptations.text_relay.data,
                 "language": self.adaptations.welsh.data and "WELSH" or self.adaptations.other_language.data,
                 "notes": self.adaptations.other_adaptation.data if self.adaptations.is_other_adaptation.data else "",
@@ -194,6 +233,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
         if self.contact_type.data == "callback":
             data["requires_action_at"] = process_selected_time(self.callback.form.time)
             data["personal_details"]["announce_call"] = self.callback.form.announce_call_from_cla.data
+            data["callback_type"] = CALLBACK_TYPES.CHECKER_SELF
 
         if self.contact_type.data == "thirdparty":
             data["thirdparty_details"] = {"personal_details": {}}
@@ -201,6 +241,7 @@ class ContactForm(Honeypot, BabelTranslationsFormMixin, Form):
             data["thirdparty_details"]["personal_details"]["mobile_phone"] = self.thirdparty.contact_number.data
             data["thirdparty_details"]["personal_details"]["safe_to_contact"] = SAFE_TO_CONTACT
             data["thirdparty_details"]["personal_relationship"] = self.thirdparty.relationship.data
+            data["callback_type"] = CALLBACK_TYPES.CHECKER_THIRD_PARTY
 
             data["requires_action_at"] = process_selected_time(self.thirdparty.form.time)
 

@@ -50,8 +50,6 @@
       expandButton.on('click', function() {
         $listItems.removeClass('s-hidden').addClass('s-expanded');
         expandButton.remove();
-
-        window.ga('send', 'event', 'org-list', 'expand', $listContainer.data('name'));
       });
     },
 

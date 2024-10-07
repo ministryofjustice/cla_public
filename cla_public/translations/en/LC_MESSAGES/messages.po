@@ -1276,7 +1276,7 @@ msgid "Arrange a callback time"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:34
-msgid "British Sign Language – webcam"
+msgid "British Sign Language (BSL)"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:35
@@ -1284,7 +1284,7 @@ msgid "Minicom – for textphone users"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:36
-msgid "Text Relay – for people with hearing or speech impairments"
+msgid "Text relay"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:37
@@ -1300,11 +1300,11 @@ msgid "Choose a language"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:40
-msgid "Any other communication needs"
+msgid "Any other communication need"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:42
-msgid "Other communication needs"
+msgid "Other language - need an interpreter"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:43
@@ -1316,7 +1316,7 @@ msgid "Your other communication needs must be 4000 characters or fewer"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:63 cla_public/apps/contact/forms.py:97
-msgid "Phone number for the callback"
+msgid "Phone number"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:64 cla_public/apps/contact/forms.py:98
@@ -2037,7 +2037,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: cla_public/templates/contact.html:84
+#: cla_public/templates/contact.html:85
+msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
+msgstr ""
+
+#: cla_public/templates/contact.html:87
 msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
 msgstr ""
 
@@ -2333,7 +2337,7 @@ msgid "You’ll be asked general questions about your legal problem and your inc
 msgstr ""
 
 #: cla_public/templates/index.html:21
-msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\" data-ga=\"event:locale/switch/welsh\">in Welsh (Cymraeg)</a>"
+msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\">in Welsh (Cymraeg)</a>"
 msgstr ""
 
 #: cla_public/templates/index.html:27
@@ -4489,9 +4493,6 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "-- Choose a language --"
-#~ msgstr ""
-
-#~ msgid "British Sign Language – Webcam"
 #~ msgstr ""
 
 #~ msgid "Language required"

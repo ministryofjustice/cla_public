@@ -1280,16 +1280,16 @@ msgid "Arrange a callback time"
 msgstr "Trefnu amser i ffonio’n ôl"
 
 #: cla_public/apps/contact/forms.py:34
-msgid "British Sign Language – webcam"
-msgstr "Iaith Arwyddo Brydeinig  – webcam"
+msgid "British Sign Language (BSL)"
+msgstr "Iaith Arwyddion Prydain (BSL)"
 
 #: cla_public/apps/contact/forms.py:35
 msgid "Minicom – for textphone users"
 msgstr "Minicom - ar gyfer defnyddwyr ffôn testun"
 
 #: cla_public/apps/contact/forms.py:36
-msgid "Text Relay – for people with hearing or speech impairments"
-msgstr "Trosglwyddo Neges Destun - ar gyfer pobl sydd â nam ar y clyw neu ar y lleferydd"
+msgid "Text relay"
+msgstr "Cyfnewid testun"
 
 #: cla_public/apps/contact/forms.py:37
 msgid "Welsh"
@@ -1304,12 +1304,12 @@ msgid "Choose a language"
 msgstr "Dewiswch iaith"
 
 #: cla_public/apps/contact/forms.py:40
-msgid "Any other communication needs"
+msgid "Any other communication need"
 msgstr "Unrhyw anghenion cyfathrebu eraill"
 
 #: cla_public/apps/contact/forms.py:42
-msgid "Other communication needs"
-msgstr "Anghenion cyfathrebu eraill"
+msgid "Other language - need an interpreter"
+msgstr "Iaith arall – angen cyfieithydd"
 
 #: cla_public/apps/contact/forms.py:43
 msgid "Please tell us what you need in the box below"
@@ -1320,8 +1320,8 @@ msgid "Your other communication needs must be 4000 characters or fewer"
 msgstr ""
 
 #: cla_public/apps/contact/forms.py:63 cla_public/apps/contact/forms.py:97
-msgid "Phone number for the callback"
-msgstr "Rhif ffôn ar gyfer eich ffonio’n ôl"
+msgid "Phone number"
+msgstr "Rhif ffôn"
 
 #: cla_public/apps/contact/forms.py:64 cla_public/apps/contact/forms.py:98
 msgid "Enter the full number, including the area code. For example, 01632 960 1111."
@@ -2041,9 +2041,13 @@ msgid ""
 "        "
 msgstr "Byddwn ni’n gofyn cwestiynau am eich problem gyfreithiol ac eich sefyllfa gyllidol. Efallai bydd rhaid i chi ddangos tystiolaeth o unrhyw wybodaeth ariannol rydych chi’n cyflenwi."
 
-#: cla_public/templates/contact.html:84
+#: cla_public/templates/contact.html:85
 msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
-msgstr "Byddwn yn cyflwyno rhif ffôn Cymorth Cyfreithiol Sifil ar ôl i chi danfon eich manylion i ni."
+msgstr "Byddwn yn rhoi rhif ffôn Civil Legal Advice i chi pan fyddwch yn cyflwyno eich manylion."
+
+#: cla_public/templates/contact.html:87
+msgid "We’ll give you the Civil Legal Advice phone number when you submit your details."
+msgstr "Byddwn yn rhoi rhif ffôn Civil Legal Advice i chi pan fyddwch yn cyflwyno eich manylion. Os ydych chi'n poeni am gost yr alwad hon, gofynnwch i ni eich ffonio'n ôl."
 
 #: cla_public/templates/contact.html:120
 #, python-format
@@ -2337,8 +2341,8 @@ msgid "You’ll be asked general questions about your legal problem and your inc
 msgstr "Byddwch yn cael eich holi’n gyffredinol am eich problem gyfreithiol, eich incwm â’ch cynilion. Byddwch yn cael gwybod ble gallwch gael cyngor cyfreithiol."
 
 #: cla_public/templates/index.html:21
-msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\" data-ga=\"event:locale/switch/welsh\">in Welsh (Cymraeg)</a>"
-msgstr "Mae’r canllaw hwn hefyd ar gael <a class=\"govuk-link\" lang=\"en\" href=\"/locale/en_GB\" data-ga=\"event:locale/switch/english\">yn Saesneg (English)</a>"
+msgid "This guide is also available <a class=\"govuk-link\" lang=\"cy\" href=\"/locale/cy_GB\">in Welsh (Cymraeg)</a>"
+msgstr "Mae’r canllaw hwn hefyd ar gael <a class=\"govuk-link\" lang=\"en\" href=\"/locale/en_GB\">yn Saesneg (English)</a>"
 
 #: cla_public/templates/index.html:27
 msgid "Start now"
@@ -2399,66 +2403,69 @@ msgstr "Er hynny, mae'n bosib bod rhaid ymgymhwyso'n ariannol."
 
 #: cla_public/templates/interstitial.html:31
 msgid ""
-"If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),\n"
+"If you do qualify financially, you can speak to Civil Legal Advice (CLA),\n"
 "    a national helpline for certain legal aid problems in England and Wales."
-msgstr "Os ydych chi’n gymwys yn ariannol, mae’n bosibl y byddwch chi’n gallu cael help gan Gyngor Cyfreithiol Sifil (CLA), llinell gynghori genedlaethol ar gyfer rhai problemau cymorth cyfreithiol yng Nghymru a Lloegr."
+msgstr "Os ydych yn gymwys yn ariannol, gallwch siarad â Chyngor Cyfreithiol Sifil, sef llinell gymorth genedlaethol sy’n delio â phroblemau cymorth cyfreithiol penodol yng Nghymru a Lloegr."
 
 #: cla_public/templates/interstitial.html:35
 msgid "The CLA operator will check all the information you’ve given through this service."
-msgstr "Bydd yr gweithredwr CLA yn gwirio’r holl wybodaeth yr ydych wedi ei rhoi i ni drwy’r gwasanaeth hwn."
+msgstr "Bydd y gweithredwr Cyngor Cyfreithiol Sifil yn gwirio’r holl wybodaeth rydych wedi’i rhoi drwy’r gwasanaeth hwn."
 
 #: cla_public/templates/interstitial.html:36
 msgid "You’ll need to provide evidence of your finances and a specialist will ask you about your case in more detail before your application can progress."
 msgstr "Bydd arnoch angen darparu tystiolaeth o’ch sefyllfa ariannol a bydd arbenigwr yn gofyn cwestiynau i chi ynglŷn â’ch achos yn fanylach cyn y gellir mynd ymlaen â’ch cais."
 
-#: cla_public/templates/interstitial.html:38
+msgid "What you need to check if you qualify financially"
+msgstr "Yr hyn sydd angen i chi ei wirio i weld a ydych yn gymwys yn ariannol"
+
 msgid "To complete the financial assessment, you and your partner (if you have one) will need:"
 msgstr "I gwblhau’r asesiad ariannol, bydd arnoch chi a’ch partner (os oes gennych chi un) angen:"
 
+msgid "You and your partner (if you have one) will need:"
+msgstr "Bydd angen y canlynol arnoch chi a’ch partner (os oes gennych un):"
+
 #: cla_public/templates/interstitial.html:40
 msgid "recent payslips (if you’re working) and bank statements"
-msgstr "slipiau cyflog (os ydych yn gweithio) a chyfriflenni banc diweddar"
+msgstr "slipiau cyflog diweddar (os ydych yn gweithio) a chyfriflenni banc"
 
 #: cla_public/templates/interstitial.html:41
 msgid "a summary of your income tax and National Insurance contributions"
-msgstr "crynodeb o’ch cyfraniadau treth incwm a chyfraniadau Yswiriant Gwladol"
+msgstr "crynodeb o’ch treth incwm a’ch cyfraniadau Yswiriant Gwladol"
 
 #: cla_public/templates/interstitial.html:42
 msgid "details of any savings and investments you have"
-msgstr "manylion unrhyw gynilion a buddsoddiadau sydd gennych chi"
+msgstr "manylion unrhyw gynilon a buddsoddiadau sydd gennych"
 
 #: cla_public/templates/interstitial.html:43
 msgid "details of any benefits you receive"
-msgstr "manylion unrhyw fudd-daliadau yr ydych chi’n eu cael"
+msgstr "manylion unrhyw fudd-daliadau rydych yn eu cael"
 
 #: cla_public/templates/interstitial.html:44
 msgid "mortgage statements and a current valuation for any property you own"
-msgstr "datganiadau morgais a phrisiad cyfredol ar unrhyw eiddo yr ydych chi’n berchen arno"
+msgstr "cyfriflenni morgais a phrisiad cyfredol ar gyfer unrhyw eiddo rydych yn berchen arno"
 
-#: cla_public/templates/interstitial.html:47
-#, python-format
-msgid ""
-"\n"
-"    If you’re under 18, you should <a class=\"govuk-link\" href=\"%(url)s\">contact CLA</a>\n"
-"    without completing the financial assessment."
-msgstr "Os ydych o dan 18 oed, dylech <a class=\"govuk-link\" href=\"%(url)s\">gysylltu â’r CLA</a> heb gwblhau’r asesiad ariannol."
+msgid "When you do not need to complete the financial assessment"
+msgstr "Pan nad oes angen i chi gwblhau’r asesiad ariannol"
 
-#: cla_public/templates/interstitial.html:54
-msgid "If you have "
-msgstr ""
+msgid "You should <a class=\"govuk-link\" href=\"/contact\">contact CLA</a> without completing the financial assessment if you are:"
+msgstr "Dyma pryd ddylech <a class=\"govuk-link\" href=\"/contact\">gysylltu â Chyngor Cyfreithiol Sifil</a> heb gwblhau'r asesiad ariannol:"
 
-#: cla_public/templates/interstitial.html:55
-msgid "Capital trapped in a property you own or other assets that you are not able to access"
-msgstr ""
+msgid "under 18"
+msgstr "os ydych o dan 18 oed"
 
-#: cla_public/templates/interstitial.html:55
-#, python-format
-msgid ", you should contact <a class=\"govuk-link\" href=\"%(get_in_touch_url)s\">CLA</a> without completing the financial assessment."
-msgstr ""
+msgid "have capital trapped in a property you own or other money or assets that you cannot access"
+msgstr "os oes gennych gyfalaf wedi’i ddal mewn eiddo rydych yn berchen arno, neu arian neu asedau eraill nad oes gennych fynediad atynt"
+
+msgid "If you use British Sign Language (BSL)"
+msgstr "Os ydych yn defnyddio Iaith Arwyddion Prydain (BSL)"
+
+msgid "You can choose not to complete the financial assessment online, and instead ask for a call with a BSL interpreter."
+msgstr "Gallwch ddewis peidio â chwblhau’r asesiad ariannol ar-lein, a gofyn yn hytrach am alwad gyda dehonglydd BSL."
+
 
 #: cla_public/templates/interstitial.html:59
-msgid "If you’re deaf or hard of hearing you can book a <a class=\"govuk-link\" href=\"https://www.interpretingline.co.uk/EBooking\" rel=\"external\">British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice."
-msgstr "Os ydych yn fyddar neu’n drwm eich clyw gallwch lenwi ffurflen gais i ofyn am <a class=\"govuk-link\" href=\"https://www.interpretingline.co.uk/EBooking\" rel=\"external\">ddehonglydd Iaith Arwyddion Prydain</a>. Ar ôl i chi lenwi’r ffurflen, bydd y gweithredwr yn dod yn ôl atoch i gwblhau’r gwiriad cymhwystra a rhoi unrhyw gyngor arall."
+msgid "Fill in the '<a class=\"govuk-link\" href=\"/contact\">Contact CLA</a>' page. Select 'BSL' under 'Communication needs'."
+msgstr "Llenwch y dudalen '<a class=\"govuk-link\" href=\"/contact\">Cysylltu â Chyngor Cyfreithiol Sifil</a>'. Dewiswch 'BSL' o dan 'Anghenion cyfathrebu'."
 
 #: cla_public/templates/interstitial.html:63
 msgid "Check if you qualify financially"
@@ -3960,6 +3967,85 @@ msgstr "Gall y cyfryngwr wirio a ydych chi’n gymwys i gael cymorth cyfreithiol
 msgid "Find your local mediator"
 msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 
+# HLPAS
+
+msgid "You might qualify for free legal advice"
+msgstr "Efallai byddwch yn gymwys am gyngor cyfreithiol am ddim"
+
+msgid "You might be able to get free legal advice through the Housing Loss Prevention Advice Scheme."
+msgstr "Efallai byddwch yn gallu cael cyngor cyfreithiol am ddim trwy’r Cynllun Cyngor Atal Colli Tai."
+
+msgid "This advice is free to anyone who can show their home is at risk. It does not depend on what you earn or your financial situation."
+msgstr "Mae’r cyngor am ddim i unrhyw un sy’n gallu dangos fod eu tŷ mewn perygl. Dydy hi ddim yn dibynnu ar faint rydych yn ennill neu eich sefyllfa ariannol."
+
+msgid "Next steps"
+msgstr "Camau nesaf"
+
+msgid "We’ll show you a list of legal advisors."
+msgstr "Byddwn yn dangos rhestr o gynghorwyr cyfreithiol i chi."
+
+msgid "You need to contact the legal adviser."
+msgstr "Bydd yn rhaid i chi gysylltu â'r cynghorydd cyfreithiol."
+
+msgid "Explain that you could lose your home."
+msgstr "Eglurwch fod yna risg y byddwch yn colli eich cartref."
+
+msgid "Tell them if you have any letters or documents about your situation."
+msgstr "Dywedwch wrthynt os oes gennych unrhyw lythyrau neu ddogfennau yn ymwneud â'ch sefyllfa."
+
+msgid "Continue"
+msgstr "Parhau"
+
+# FALA search form
+msgid "Find a legal adviser"
+msgstr "Darganfod ymgynghorydd cyfreithiol"
+
+msgid "For the"
+msgstr "o’r"
+
+msgid "Housing Loss Prevention Advice Scheme"
+msgstr "Cynllun Cyngor Atal Colli Tai"
+
+msgid "We’ll show you a list of legal advisers. You can contact any adviser from this list."
+msgstr "Byddwn yn dangos i chi rhestr o ymgynghorydd cyfreithiol. Byddwch yn gallu cysylltu i unrhyw un o’r ymgynghorydd ar y rhestr."
+
+msgid "If they are busy, you might need to contact more than one."
+msgstr "Os ydynt yn brysur, efallai bydd rhaid cysylltu gyda mwy nag un."
+
+msgid "All our legal advisers are regulated and contracted by the government."
+msgstr "Mae’r ymgynghorydd i gyd wedi ei rheoli a’i chontractio gan y llywodraeth."
+
+msgid "Enter postcode"
+msgstr "Ysgrifennwch eich Cod Post"
+
+msgid "For example, SW1H 9AJ."
+msgstr "Er enghraifft, SW1H 9AJ."
+
+msgid "Search"
+msgstr "Chwilio"
+
+# FALA search result
+msgid "Contact a legal adviser"
+msgstr "Darganfod ymgynghorydd cyfreithiol"
+
+msgid "Contact a legal adviser"
+msgstr "Darganfod ymgynghorydd cyfreithiol"
+
+msgid "You can contact any legal adviser from this list."
+msgstr "Gallwch gysylltu ag unrhyw un o’r ymgynghorydd cyfreithiol o restr yma."
+
+msgid "Tell them that your home is at risk and that you want advice through the Housing Loss Prevention Advice Scheme."
+msgstr "Dwedwch wrthynt fod eich tŷ mewn perygl a bod eisiau cyngor trwy’r Cynllun Cyngor Atal Colli Tai."
+
+msgid "Enter an email address."
+msgstr "Rhowch gyfeiriad e-bost."
+
+msgid "Enter your email address so we can arrange a BSL call"
+msgstr "Rhowch eich cyfeiriad e-bost er mwyn i ni allu trefnu galwad Iaith Arwyddion Prydain (BSL)"
+
+msgid "Enter your email address"
+msgstr "Rhowch eich cyfeiriad e-bost"
+
 #~ msgid "Overall, how did you feel about the service you received today?"
 #~ msgstr "Ar y cyfan, sut oeddech yn teimlo ynghylch y gwasanaeth a gawsoch heddiw?"
 
@@ -4421,9 +4507,6 @@ msgstr "Dewch o hyd i’ch cyfryngwr lleol"
 
 #~ msgid "Type in a number"
 #~ msgstr "Rhowch swm"
-
-#~ msgid "British Sign Language – Webcam"
-#~ msgstr "Iaith Arwyddion Prydain – Gwe-gamera"
 
 #~ msgid "Language required"
 #~ msgstr "Iaith sydd ei hangen"

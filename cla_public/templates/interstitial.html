@@ -32,14 +32,16 @@
     {% endif %}
   </p>
   <p class="govuk-body">
-    {{ _('If you do qualify financially, you’ll be able to speak to Civil Legal Advice (CLA),
+    {{ _('If you do qualify financially, you can speak to Civil Legal Advice (CLA),
     a national helpline for certain legal aid problems in England and Wales.') }}
   </p>
   <p class="govuk-body">
     {{ _('The CLA operator will check all the information you’ve given through this service.') }}
-    {{ _('You’ll need to provide evidence of your finances and a specialist will ask you about your case in more detail before your application can progress.') }}
   </p>
-  <p class="govuk-body">{{ _('To complete the financial assessment, you and your partner (if you have one) will need:') }}</p>
+  <h2 class="govuk-heading-m">
+    {{ _('What you need to check if you qualify financially') }}
+  </h2>
+  <p class="govuk-body">{{ _('You and your partner (if you have one) will need:' ) }}</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>{{ _('recent payslips (if you’re working) and bank statements') }}</li>
     <li>{{ _('a summary of your income tax and National Insurance contributions') }}</li>
@@ -48,19 +50,23 @@
     <li>{{ _('mortgage statements and a current valuation for any property you own') }}</li>
   </ul>
 
-  <p class="govuk-body">{% trans url=url_for('contact.get_in_touch') %}
-    If you’re under 18, you should <a class="govuk-link" href="{{ url }}">contact CLA</a>
-    without completing the financial assessment.{% endtrans %}
-  </p>
-
+  <h2 class="govuk-heading-m">
+    {{ _('When you do not need to complete the financial assessment') }}
+  </h2>
   <p class="govuk-body">
-    {% set get_in_touch_url = url_for('contact.get_in_touch') %}
-    {% trans %}If you have {% endtrans %}
-    <span class="govuk-!-font-weight-bold">{% trans %}Capital trapped in a property you own or other assets that you are not able to access{% endtrans %}</span>{% trans %}, you should contact <a class="govuk-link" href="{{ get_in_touch_url }}">CLA</a> without completing the financial assessment.{% endtrans %}
+    {% trans %}You should <a class="govuk-link" href="/contact">contact CLA</a> without completing the financial assessment if you are:{% endtrans %}
   </p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ _('under 18') }}</li>
+    <li>{{ _('have capital trapped in a property you own or other money or assets that you cannot access') }}</li>
+  </ul>
 
+  <h3 class="govuk-heading-s">
+    {{ _('If you use British Sign Language (BSL)') }}
+  </h3>
+  <p class="govuk-body">{{ _('You can choose not to complete the financial assessment online, and instead ask for a call with a BSL interpreter.') }}</p>
   <p class="govuk-body">
-    {% trans %}If you’re deaf or hard of hearing you can book a <a class="govuk-link" href="https://www.interpretingline.co.uk/EBooking" rel="external">British Sign Language interpreter</a> by completing a request form.  Once complete, the operator will get back to you to complete the eligibility check and provide any further advice.{% endtrans %}
+    {% trans %}Fill in the '<a class="govuk-link" href="/contact">Contact CLA</a>' page. Select 'BSL' under 'Communication needs'.{% endtrans %}
   </p>
 
   <a class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" href="{{ url_for('.wizard', step='about') }}" role="button">
@@ -80,8 +86,7 @@
     {{ _('If you qualify, in some cases you may need to pay a contribution towards your legal aid.') }}
   </p>
   <p class="govuk-body">
-    {% set ga_event = 'event:%s/%s/%s' % ('External Link Clicked', 'click', 'Find a legal adviser') %}
-    <a class="govuk-link" href="{{ url_for('.laalaa') }}?category={{ category }}" data-ga="{{ ga_event }}">{{ _('Find a legal adviser') }}</a>
+    <a class="govuk-link" href="{{ url_for('.laalaa') }}?category={{ category }}">{{ _('Find a legal adviser') }}</a>
   </p>
 
   {% if organisations %}

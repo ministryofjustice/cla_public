@@ -17,6 +17,7 @@ from cla_public.apps.base.forms import FeedbackForm, ReasonsForContactingForm
 from cla_public.apps.checker.api import post_reasons_for_contacting
 from cla_public.libs import zendesk
 from cla_public.libs.views import AjaxOrNormalMixin, EnsureSessionExists, HasFormMixin
+from cla_public.apps.base import get_GTM_ANON_ID_from_cookie
 
 log = logging.getLogger(__name__)
 
@@ -167,6 +168,7 @@ def show_session():
 @base.route("/session-expired")
 def session_expired():
     session.clear()
+    session["GTM_ANON_ID"] = get_GTM_ANON_ID_from_cookie()
     return render_template("session-expired.html")
 
 
@@ -186,21 +188,35 @@ def session_end():
     return jsonify({"session": "CLEAR"})
 
 
-@base.route("/start")
-def get_started():
+def start_session(target_page, **kwargs):
     """
     Redirect to checker unless currently disabled
     """
     session.clear()
     session.checker["started"] = datetime.datetime.now()
-    args = {}
-    if "_ga" in request.args:
-        args["_ga"] = request.args["_ga"]
 
     if current_app.config.get("CONTACT_ONLY"):
         session.checker["contact_only"] = "yes"
-        return redirect(url_for("contact.get_in_touch", **args))
-    return redirect(url_for("scope.diagnosis", **args))
+        return redirect(url_for("contact.get_in_touch", **kwargs))
+    return redirect(url_for(target_page, **kwargs))
+
+
+@base.route("/start")
+def get_started():
+    """
+    Redirect to checker unless currently disabled
+    """
+    args = request.args.to_dict()
+    return start_session("scope.diagnosis", **args)
+
+
+@base.route("/start-bsl")
+def bsl_get_started():
+    """
+    Redirect to checker unless currently disabled
+    """
+    args = request.args.to_dict()
+    return start_session("contact.get_in_touch", **args)
 
 
 def is_safe_url(url):

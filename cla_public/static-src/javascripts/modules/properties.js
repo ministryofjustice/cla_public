@@ -42,8 +42,6 @@
 
         var totalProperties = self.$form.find('#PropertiesForm > .govuk-form-group').length;
 
-        window.ga('send', 'event', 'property', button.name + ' / total:' + totalProperties);
-
         $("#PropertiesForm>.govuk-form-group").get(-1).scrollIntoView(); //scrolls to last property on screen
 
       });

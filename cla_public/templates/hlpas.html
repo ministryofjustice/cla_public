@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% set title = _('You might qualify for free legal advice') %}
+{% block page_title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block inner_content %}
+<h1 class="govuk-heading-xl">{{ title }}</h1>
+<p class="govuk-body">{% trans %}You might be able to get free legal advice through the Housing Loss Prevention Advice Scheme.{% endtrans %}</p>
+<p class="govuk-body">{% trans %}This advice is free to anyone who can show their home is at risk. It does not depend on what you earn or your financial situation.{% endtrans %}</p>
+<h2 class="govuk-heading-m">{% trans %}Next steps{% endtrans %}</h2>
+<p class="govuk-body">
+  <ol class="govuk-list govuk-list--number">
+    <li> {% trans %}We’ll show you a list of legal advisors.{% endtrans %}</li>
+    <li> {% trans %}You need to contact the legal adviser.{% endtrans %}</li>
+    <li> {% trans %}Explain that you could lose your home.{% endtrans %}</li>
+    <li> {% trans %}Tell them if you have any letters or documents about your situation.{% endtrans %}</li>
+  </ol>
+</p>
+<a href="{{url}}" title="Continue" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+    {% trans %}Continue{% endtrans %}
+</a>
+{% endblock %}}

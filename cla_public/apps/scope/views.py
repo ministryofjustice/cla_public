@@ -61,9 +61,14 @@ class ScopeDiagnosis(RequiresSession, views.MethodView):
                 except Exception:
                     is_hlpas = "no"
 
-                outcome_url = url_for(outcome_url[0], hlpas=is_hlpas, **outcome_url[1])
+                outcome_url[1]["hlpas"] = is_hlpas
+                session.store(dict(hlpas=is_hlpas))
+
                 if state == DIAGNOSIS_SCOPE.OUTOFSCOPE:
-                    outcome_url = "%s?category=%s" % (outcome_url, self.get_category_for_larp(session))
+                    category = self.get_category_for_larp(session)
+                    outcome_url[1]["category"] = category
+
+                outcome_url = url_for(outcome_url[0], **outcome_url[1])
 
             return redirect(outcome_url)
 

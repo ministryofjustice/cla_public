@@ -11,7 +11,7 @@ metadata:
   annotations:
   # Add annotation to exclude 503 error pages from the list the cloud-platform error pages
   # and use our error pages for 503 errors
-    nginx.ingress.kubernetes.io/custom-http-errors: "413,502,504"
+    nginx.ingress.kubernetes.io/custom-http-errors: "403,413,502,503,504"
     {{- if .Values.ingress.cluster.name }}
     external-dns.alpha.kubernetes.io/set-identifier: "{{ $ingressName }}-{{ .Release.Namespace }}-{{- .Values.ingress.cluster.name -}}"
     external-dns.alpha.kubernetes.io/aws-weight: "{{- .Values.ingress.cluster.weight -}}"
@@ -26,6 +26,13 @@ metadata:
       SecRuleRemoveById 942230
       SecRuleRemoveById 930120
       SecRuleRemoveById 933210
+    {{- if .Values.ingress.addNoIndexResponseHeader }}
+    nginx.ingress.kubernetes.io/server-snippet: |
+      add_header X-Robots-Tag "noindex, nofollow";
+    {{- end }}
+    {{- if .Values.ingress.whitelist }}
+    nginx.ingress.kubernetes.io/whitelist-source-range: "{{ include "cla-public.whitelist" . }}"
+    {{- end }}
 spec:
   ingressClassName: "modsec"
   tls:

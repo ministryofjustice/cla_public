@@ -1,6 +1,6 @@
 {% if request.is_xhr %}
   {% with postcode_info=postcode_info  %}
-    {% include "checker/result/_find-legal-adviser.html" %}
+    {% include "checker/result/find-legal-adviser-search/index.html" %}
   {% endwith %}
 {% else %}
 
@@ -21,7 +21,7 @@
   {% block inner_content %}
 
     {% with postcode_info=postcode_info  %}
-      {% include "checker/result/_find-legal-adviser.html" %}
+      {% include "checker/result/find-legal-adviser-search/index.html" %}
     {% endwith %}
 
     {% include "checker/time-out-warning.html" %}
@@ -30,12 +30,6 @@
   {% block javascripts %}
     {{ super() }}
     <script nonce="{{ csp_nonce() }}" type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=true&key={{config.GOOGLE_MAPS_API_KEY}}"></script>
-    {% include '_ga-outcome-pageview.html' %}
   {% endblock %}
 
-  {% block ga_pageview -%}
-    ga('moj.set', 'title', 'Results for [postcode] | Seek legal advice');
-    ga('govuk_shared.set', 'title', 'Results for [postcode] | Seek legal advice');
-    {{ super() }}
-  {%- endblock %}
 {% endif %}

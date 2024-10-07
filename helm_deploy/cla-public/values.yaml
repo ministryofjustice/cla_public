@@ -28,6 +28,12 @@ ingress:
     name: ~
     weight: ~
   tls: []
+  addNoIndexResponseHeader: true
+  whitelist:
+    # HGS
+    - 84.43.86.100/32
+
+    # Note: Additional shared LAA IP ranges and Pingdom IPs are loaded in from bash scripts e.g. bin/staging_deply.sh
 
 envVars:
   MAINTENANCE_MODE:
@@ -88,3 +94,7 @@ envVars:
       name: notify-orchestrator
       key: url
       optional: true
+  USE_BACKEND_CALLBACK_SLOTS:
+    configmap:
+      name: backend-callback-slots
+      key: enabled
