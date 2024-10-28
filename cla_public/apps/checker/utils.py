@@ -51,7 +51,7 @@ def set_session_data(category, question_answer_map):
     if category not in valid_categories:
         raise ValueError("Invalid Category Code")
 
-    user_answer_as_text = ""
+    user_answer_as_text = u""
 
     session.checker["started"] = datetime.now()
     session.checker["scope_answers"] = []
@@ -61,7 +61,7 @@ def set_session_data(category, question_answer_map):
             question = unicode(question, "utf-8")
         if not isinstance(answer, unicode):
             answer = unicode(answer, "utf-8")
-        user_answer_as_text += "{question}: {answer}\n\n".format(question=question, answer=answer)
+        user_answer_as_text += u"{question}: {answer}\n\n".format(question=question, answer=answer)
         session.checker["scope_answers"].append({"answer": answer, "question": question})
 
     session.checker["category"] = category
