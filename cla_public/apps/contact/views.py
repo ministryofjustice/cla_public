@@ -133,7 +133,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             session.store_checker_details()
             return self.redirect(url_for("contact.confirmation"))
         except ApiError:
-            error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
+            error_text = _("There was an error submitting your data. " "Please check and try again.")
             self.form.errors["timeout"] = error_text
             return self.return_form_errors()
 
@@ -146,7 +146,7 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
 
     def on_valid_submit(self):
         if self.form.extra_notes.data:
-            session.checker.add_note(u"User problem", self.form.extra_notes.data)
+            session.checker.add_note("User problem", self.form.extra_notes.data)
         try:
             if not self.form.adaptations.is_other_adaptation.data:
                 self.clear_other_adaptation_data()
@@ -171,14 +171,14 @@ class Contact(AllowSessionOverride, UpdatesMeansTest, SessionBackedFormView):
             errors = getattr(e, "errors", {})
             error_list = []
             self.add_errors(errors.values(), error_list)
-            error_text = _(u"There was an error submitting your data. " u"Please check and try again.")
+            error_text = _("There was an error submitting your data. " "Please check and try again.")
             if error_list:
                 error_text += " - " + ", ".join(error_list)
             self.form.errors["timeout"] = error_text
             return self.return_form_errors()
         except SMTPAuthenticationError:
             self.form._fields["email"].errors.append(
-                _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
+                _("There was an error submitting your email. " "Please check and try again or try without it.")
             )
             return self.return_form_errors()
 
@@ -225,7 +225,7 @@ class ContactConfirmation(AjaxOrNormalMixin, HasFormMixin, views.MethodView):
                 create_and_send_confirmation_email(govuk_notify, self.form.data)
             except Exception:
                 self.form._fields["email"].errors.append(
-                    _(u"There was an error submitting your email. " u"Please check and try again or try without it.")
+                    _("There was an error submitting your email. " "Please check and try again or try without it.")
                 )
                 return self.return_form_errors()
         return self.redirect(url_for("contact.confirmation"))
