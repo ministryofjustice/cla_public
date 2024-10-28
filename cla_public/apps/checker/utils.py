@@ -57,10 +57,6 @@ def set_session_data(category, question_answer_map):
     session.checker["scope_answers"] = []
 
     for question, answer in question_answer_map.items():
-        if not isinstance(question, unicode):
-            question = unicode(question, "utf-8")
-        if not isinstance(answer, unicode):
-            answer = unicode(answer, "utf-8")
         user_answer_as_text += u"{question}: {answer}\n\n".format(question=question, answer=answer)
         session.checker["scope_answers"].append({"answer": answer, "question": question})
 

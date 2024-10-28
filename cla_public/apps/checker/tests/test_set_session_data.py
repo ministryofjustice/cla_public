@@ -64,11 +64,11 @@ class TestSetSessionData(FlaskAppTestCase):
     def test_unicode_handling(self):
         """Test handling of unicode characters in questions and answers"""
         category = "family"
-        question_answer_map = {"Answer with a non-ascii character": "München"}
+        question_answer_map = {"Answer with a non-ascii character": u"München"}
 
         set_session_data(category, question_answer_map)
 
-        expected_notes = "Answer with a non-ascii character: München\n\n"
+        expected_notes = u"Answer with a non-ascii character: München\n\n"
         self.assertEqual(session.checker["notes"]["user_selected"], expected_notes)
 
     def test_session_preservation(self):
