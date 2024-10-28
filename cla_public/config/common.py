@@ -176,6 +176,8 @@ EMAIL_ORCHESTRATOR_URL = os.environ.get("EMAIL_ORCHESTRATOR_URL")
 # Callback slots will be determined by the backend callback_time_slots route rather than cla_common
 USE_BACKEND_CALLBACK_SLOTS = os.environ.get("USE_BACKEND_CALLBACK_SLOTS", "False") == "True"
 
+JWT_SECRET = os.environ.get("JWT_SECRET")
+
 
 def current_app_cache_factory(*args, **kwargs):
     from flask import current_app  # noqa: E402

@@ -1,16 +1,14 @@
 # coding: utf-8
 "Checker views"
 import logging
-
 from cla_common.constants import ELIGIBILITY_REASONS
 from flask import abort, render_template, redirect, session, url_for, views, request, current_app
 from flask.ext.babel import lazy_gettext as _
 from wtforms.validators import StopValidation
-
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.checker.forms import FindLegalAdviserForm
-from cla_public.apps.checker.utils import category_option_from_name
+from cla_public.apps.checker.utils import category_option_from_name, set_session_data
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import (
     ORGANISATION_CATEGORY_MAPPING,
@@ -36,6 +34,8 @@ from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, FormWizardStep, RequiresSession, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 from cla_public.apps.checker.cait_intervention import get_cait_params
+from collections import OrderedDict
+import jwt  # Using PyJWT for token signing
 import math
 
 log = logging.getLogger(__name__)
@@ -471,3 +471,42 @@ def interstitial():
         "is_hlpas": is_hlpas,
     }
     return render_template("interstitial.html", **context)
+
+
+@checker.route('/landing', methods=['GET'])
+def receive_user_answers():
+    """ Receives a signed JWT payload from access civil legal aid.
+        This is used to populate the users' session before redirecting them onwards to their requested destination.
+
+        Routing logic is handled by the new frontend, cla_public is only responsible for generating the URL and session management.
+    """
+    token = request.args.get('token')
+    if not token:
+        return abort(404)
+
+    try:
+        # Decode and verify JWT
+        jwt_secret_key = current_app.config["JWT_SECRET"]
+
+        if not jwt_secret_key:
+            return abort(500)
+
+        payload = jwt.decode(token, jwt_secret_key, algorithms=['HS256'], options={"object_pairs_hook": OrderedDict})
+    except (jwt.ExpiredSignatureError, jwt.InvalidTokenError, jwt.InvalidSignatureError, jwt.DecodeError):
+        return abort(403)
+
+    category = payload['category']  # Can be one of contants.CATEGORY or 'domestic-abuse'
+    question_answer_map = payload['answers']  # Map of the users answers to questions they have been presented with on the new frontend.
+    destination = payload['destination']  # Can be fala, means-test, or, contact
+
+    if destination == "fala":
+        return redirect(url_for(".face-to-face", category=category))
+
+    set_session_data(category, question_answer_map)
+
+    if destination == "means-test":
+        return redirect(url_for("checker.interstitial"))
+    if destination == "contact":
+        return redirect(url_for("contact.get_in_touch"))
+
+    raise ValueError("Invalid destination")
