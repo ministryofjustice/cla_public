@@ -113,7 +113,7 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
             return not is_null(field)
 
         fields = filter(user_completed, form._fields.items())
-        fields = map(lambda (name, field): (field), fields)
+        fields = tuple(field for name, field in fields)
         return fields
 
     @property
@@ -473,14 +473,14 @@ def interstitial():
     return render_template("interstitial.html", **context)
 
 
-@checker.route('/landing', methods=['GET'])
+@checker.route("/landing", methods=["GET"])
 def receive_user_answers():
     """ Receives a signed JWT payload from access civil legal aid.
         This is used to populate the users' session before redirecting them onwards to their requested destination.
 
         Routing logic is handled by the new frontend, cla_public is only responsible for generating the URL and session management.
     """
-    token = request.args.get('token')
+    token = request.args.get("token")
     if not token:
         return abort(404)
 
@@ -491,13 +491,15 @@ def receive_user_answers():
         if not jwt_secret_key:
             return abort(500)
 
-        payload = jwt.decode(token, jwt_secret_key, algorithms=['HS256'], options={"object_pairs_hook": OrderedDict})
+        payload = jwt.decode(token, jwt_secret_key, algorithms=["HS256"], options={"object_pairs_hook": OrderedDict})
     except (jwt.ExpiredSignatureError, jwt.InvalidTokenError, jwt.InvalidSignatureError, jwt.DecodeError):
         return abort(403)
 
-    category = payload['category']  # Can be one of contants.CATEGORY or 'domestic-abuse'
-    question_answer_map = payload['answers']  # Map of the users answers to questions they have been presented with on the new frontend.
-    destination = payload['destination']  # Can be fala, means-test, or, contact
+    category = payload["category"]  # Can be one of contants.CATEGORY or 'domestic-abuse'
+    question_answer_map = payload[
+        "answers"
+    ]  # Map of the users answers to questions they have been presented with on the new frontend.
+    destination = payload["destination"]  # Can be fala, means-test, or, contact
 
     if destination == "fala":
         return redirect(url_for(".face-to-face", category=category))
