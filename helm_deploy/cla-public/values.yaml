@@ -98,3 +98,7 @@ envVars:
     configmap:
       name: backend-callback-slots
       key: enabled
+  JWT_SECRET:
+    secret:
+      name: jwt-secret
+      key: JWT_SECRET

@@ -28,28 +28,24 @@ class TestReceiveUserAnswers(FlaskAppTestCase):
         return "{0}?{1}".format(self.landing_url, params)
 
     def test_malformed_token(self):
-        with self.client as client:
-            response = client.get(self.get_url_with_token("invalid token"))
-            self.assertEqual(response.status_code, 403)
+        response = self.client.get(self.get_url_with_token("invalid token"))
+        self.assertEqual(response.status_code, 403)
 
     def test_empty_token(self):
-        with self.client as client:
-            response = client.get(self.landing_url)
-            self.assertEqual(response.status_code, 404)
+        response = self.client.get(self.landing_url)
+        self.assertEqual(response.status_code, 404)
 
     def test_missing_jwt_secret(self):
         self.app.config["JWT_SECRET"] = ""
         token = self.create_token(self.valid_payload)
-        with self.client as client:
-            response = client.get(self.get_url_with_token(token))
-            self.assertEqual(response.status_code, 500)
+        response = self.client.get(self.get_url_with_token(token))
+        self.assertEqual(response.status_code, 500)
 
     @patch("cla_public.apps.checker.views.set_session_data")
     def test_set_session_data_called(self, mock_set_session):
         token = self.create_token(self.valid_payload)
 
         self.client.get(self.get_url_with_token(token))
-
         # Check set_session_data was called with correct args
         mock_set_session.assert_called_once_with("debt", OrderedDict([("Question 1", "Yes"), ("Question 2", "No")]))
 
