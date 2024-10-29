@@ -101,4 +101,4 @@ envVars:
   JWT_SECRET:
     secret:
       name: jwt-secret
-      key: JWT_SECRET
+      key: key
