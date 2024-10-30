@@ -34,7 +34,6 @@ from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, FormWizardStep, RequiresSession, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 from cla_public.apps.checker.cait_intervention import get_cait_params
-from collections import OrderedDict
 import jwt  # Using PyJWT for token signing
 import math
 
@@ -491,11 +490,11 @@ def receive_user_answers():
         if not jwt_secret_key:
             return abort(500)
 
-        payload = jwt.decode(token, jwt_secret_key, algorithms=["HS256"], options={"object_pairs_hook": OrderedDict})
+        payload = jwt.decode(token, jwt_secret_key, algorithms=["HS256"])
     except (jwt.ExpiredSignatureError, jwt.InvalidTokenError, jwt.InvalidSignatureError, jwt.DecodeError):
         return abort(403)
 
-    category = payload["category"]  # Can be one of contants.CATEGORY or 'domestic-abuse'
+    category = payload["category"]  # Can be one of constants.CATEGORY or 'domestic-abuse'
     question_answer_map = payload[
         "answers"
     ]  # Map of the users answers to questions they have been presented with on the new frontend.

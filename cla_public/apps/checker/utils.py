@@ -35,8 +35,8 @@ def set_session_data(category, question_answer_map):
 
     Args:
         category: str - A category key string, this should match one of legalaid_category.code
-        question_answer_map: dict[str, str] - Mapping of the users questions and answers in the form of
-        { "English Question Label": "English Answer Label"}
+        question_answer_map: List[dict[str, str]] - Mapping of the users questions and answers in the form of
+        [{ "question": "English Question Label", "answer", English Answer Label"}]
 
     Raises:
         ValueError - If the category is invalid
@@ -56,7 +56,9 @@ def set_session_data(category, question_answer_map):
     session.checker["started"] = datetime.now()
     session.checker["scope_answers"] = []
 
-    for question, answer in question_answer_map.items():
+    for question_answer_pair in question_answer_map:
+        question = question_answer_pair["question"]
+        answer = question_answer_pair["answer"]
         user_answer_as_text += u"{question}: {answer}\n\n".format(question=question, answer=answer)
         session.checker["scope_answers"].append({"answer": answer, "question": question})
 
