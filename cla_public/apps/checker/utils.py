@@ -42,7 +42,7 @@ def set_session_data(category, question_answer_map):
         ValueError - If the category is invalid
     """
 
-    # Domestic Abuse has a category value of violence in cla_pubic, it is classed as domestic abuse on the new frontend
+    # Domestic Abuse has a category value of violence in cla_public, it is classed as domestic abuse on the new frontend
     # we will set it to violence for consistency.
     if category == "domestic-abuse":
         category = "violence"
