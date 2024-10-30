@@ -66,5 +66,5 @@ def set_session_data(category, question_answer_map):
         # This ensured 'Exit this page' and safe content appears on the /contact page.
         session.checker["diagnosis_previous_choices"] = ["n18"]
 
-    session.checker["notes"] = {"user_selected": user_answer_as_text}
+    session.checker["notes"] = {u"User selected": user_answer_as_text}
     return

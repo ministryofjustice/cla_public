@@ -26,7 +26,7 @@ class TestSetSessionData(FlaskAppTestCase):
 
         # Check notes were formatted correctly
         expected_notes = "Question 1: Yes\n\nQuestion 2: Text\n\n"
-        self.assertEqual(session.checker["notes"]["user_selected"], expected_notes)
+        self.assertEqual(session.checker["notes"][u"User selected"], expected_notes)
 
     def test_invalid_category(self):
         """Test that invalid category raises ValueError"""
@@ -59,7 +59,7 @@ class TestSetSessionData(FlaskAppTestCase):
         # Check basic session data was set
         self.assertEqual(session.checker["category"], "debt")
         self.assertEqual(session.checker["scope_answers"], [])
-        self.assertEqual(session.checker["notes"]["user_selected"], "")
+        self.assertEqual(session.checker["notes"][u"User selected"], "")
 
     def test_unicode_handling(self):
         """Test handling of unicode characters in questions and answers"""
@@ -69,7 +69,7 @@ class TestSetSessionData(FlaskAppTestCase):
         set_session_data(category, question_answer_map)
 
         expected_notes = u"Answer with a non-ascii character: München\n\n"
-        self.assertEqual(session.checker["notes"]["user_selected"], expected_notes)
+        self.assertEqual(session.checker["notes"][u"User selected"], expected_notes)
 
     def test_session_preservation(self):
         """Test that existing session data is preserved when setting new data"""
