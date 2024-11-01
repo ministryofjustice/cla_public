@@ -1209,22 +1209,22 @@ msgid "Hide"
 msgstr "Cuddio"
 
 msgid "Do not include any money you received from:"
-msgstr ""
+msgstr "Peidiwch â chynnwys unrhyw arian a gawsoch gan:"
 
 msgid "The Energy Support Scheme payments (2022 and 2023)"
-msgstr ""
+msgstr "Taliadau’r Cynllun Cymorth Biliau Ynni (2022 a 2023)"
 
 msgid "Cost of living payments"
-msgstr ""
+msgstr "Taliadau costau byw"
 
 msgid "Criminal Injuries Compensation Scheme (CICA)"
-msgstr ""
+msgstr "Cynllun Digolledu am Anafiadau Troseddol (CICA)"
 
 msgid "Grenfell Tower compensation"
-msgstr ""
+msgstr "Iawndal Tŵr Grenfell"
 
 msgid "Modern Slavery Victim Care Contract or National Referral Mechanism (NRM)"
-msgstr ""
+msgstr "Contract Gofalu am Ddioddefwyr Caethwasiaeth Fodern neu’r Mecanwaith Atgyfeirio Cenedlaethol (NRM)"
 
 msgid "National Emergencies Trust"
 msgstr "Ymddiriedolaeth Argyfyngau Cenedlaethol"
@@ -1233,19 +1233,19 @@ msgid "London Emergencies Trust"
 msgstr "Ymddiriedolaeth Argyfyngau Llundain"
 
 msgid "Variant Creutzfeldt-Jakob Disease (“vCJD”) Trust"
-msgstr ""
+msgstr "Ymddiriedolaeth Clefyd Amrywiolyn Creutzfeldt-Jakob (“vCJD”)"
 
 msgid "Vaccine Damage Payment"
 msgstr "Taliad Niwed Trwy Frechiad"
 
 msgid "Victims of Overseas Terrorism Compensation Scheme (VOTCS)"
-msgstr ""
+msgstr "Cynllun Iawndal Dioddefwyr Terfysgaeth Dramor (VOTCS)"
 
 msgid "Scotland and Northern Ireland redress schemes for historical child abuse"
-msgstr ""
+msgstr "Cynlluniau gwneud iawn yr Alban a Gogledd Iwerddon ar achosion hanesyddol o gam-drin"
 
 msgid "Miscarriage of justice compensation"
-msgstr ""
+msgstr "Iawndal Camweinyddu Cyfiawnder"
 
 msgid "We Love Manchester Emergency Fund"
 msgstr "Cronfa Argyfwng We Love Manchester"
