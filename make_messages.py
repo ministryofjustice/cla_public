@@ -5,6 +5,7 @@ import sys
 VENV = os.environ.get("VIRTUAL_ENV", "")
 LANGUAGES = [("en", "English"), ("cy", "Welsh")]
 
+
 def add_msgctxt(**format_kwargs):
     """add msgctxt to pot file as babel doesn't seem to correctly add this for pgettext"""
     cmd = (
@@ -22,10 +23,11 @@ def run(command, **kwargs):
     if return_code:
         sys.exit(return_code)
 
+
 def make_messages():
     """compile po file."""
     run(
-        "{venv}/bin/pybabel extract -F babel.cfg -k pgettext -k lazy_pgettext -k "
+        "{venv}/bin/pybabel extract --no-location -F babel.cfg -k pgettext -k lazy_pgettext -k "
         "gettext -k lazy_gettext -k ugettext -k ungettext -k pugettext -k "
         "lazy_pugettext -o cla_public/translations/messages.pot --no-wrap"
         " .".format(venv=VENV)
@@ -36,6 +38,7 @@ def make_messages():
             "{venv}/bin/pybabel update -i cla_public/translations/messages.pot -d cla_public/translations"
             " -l {language_code} --no-wrap --no-fuzzy-matching".format(venv=VENV, language_code=language_code)
         )
+
 
 if __name__ == "__main__":
     make_messages()
