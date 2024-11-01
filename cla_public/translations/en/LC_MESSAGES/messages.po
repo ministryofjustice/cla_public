@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-01 14:59+0000\n"
+"POT-Creation-Date: 2024-11-01 15:10+0000\n"
 "PO-Revision-Date: 2014-12-04 12:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -1244,6 +1244,12 @@ msgid "Miscarriage of justice compensation"
 msgstr ""
 
 msgid "We Love Manchester Emergency Fund"
+msgstr ""
+
+msgid "Backdated benefit payments"
+msgstr ""
+
+msgid "Backdated child maintenance payments"
 msgstr ""
 
 msgid "Your application will time out soon"
@@ -3350,79 +3356,79 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Dewiswch yr opsiwn sy'n disgrifio orau eich sefyllfa bersonol"
-#~ msgstr "This field is required"
+#~ msgstr ""
 
 #~ msgid "Ydych chi neu eich plant mewn perygl uniongyrchol o niwed?"
-#~ msgstr "Choose the option that best describes your debt problem"
+#~ msgstr "This field is required"
 
 #~ msgid "Ydych chi mewn perygl uniongyrchol o niwed?"
-#~ msgstr "Choose the option that best describes your personal situation"
+#~ msgstr "Choose the option that best describes your debt problem"
 
 #~ msgid "Ar ba sail y gwahaniaethwyd yn eich erbyn?"
-#~ msgstr "Are you or your children at immediate risk of harm?"
+#~ msgstr "Choose the option that best describes your personal situation"
 
 #~ msgid "Faint yw eich oed?"
-#~ msgstr "Are you at immediate risk of harm?"
+#~ msgstr "Are you or your children at immediate risk of harm?"
 
 #~ msgid "Ym mhle ddigwyddodd y gwahaniaethu?"
-#~ msgstr "On what grounds have you been discriminated against?"
+#~ msgstr "Are you at immediate risk of harm?"
 
 #~ msgid "Beth yw eich problem ynglŷn ag addysg?"
-#~ msgstr "How old are you?"
+#~ msgstr "On what grounds have you been discriminated against?"
 
 #~ msgid "Beth yw eich problem ynglŷn â chyflogaeth?"
-#~ msgstr "Where did the discrimination occur?"
+#~ msgstr "How old are you?"
 
 #~ msgid "Beth yw eich problem teuluol?"
-#~ msgstr "What is your education problem about?"
+#~ msgstr "Where did the discrimination occur?"
 
 #~ msgid "Dewiswch yr opsiwn sy'n disgrifio eich sefyllfa orau"
-#~ msgstr "What is your employment problem about?"
+#~ msgstr "What is your education problem about?"
 
 #~ msgid "Pa fath o anghydfod ydyw?"
-#~ msgstr "What is your family problem about?"
+#~ msgstr "What is your employment problem about?"
 
 #~ msgid "A yw'r plentyn yn ddioddefwr cam-drin plant o fewn y teulu?"
-#~ msgstr "Select the option that best describes your situation"
+#~ msgstr "What is your family problem about?"
 
 #~ msgid "Yw'r cyngor lleol yn ceisio rhoi eich plentyn mewn gofal?"
-#~ msgstr "What kind of dispute is it?"
+#~ msgstr "Select the option that best describes your situation"
 
 #~ msgid "Ydych chi wedi cymryd rhan mewn sesiwn cyfryngu i deuluoedd?"
-#~ msgstr "Is the child a victim of child abuse within the family?"
+#~ msgstr "What kind of dispute is it?"
 
 #~ msgid "Dewiswch yr opsiwn sy'n disgrifio orau eich sefyllfa tai"
-#~ msgstr "Is the local council trying to take your child into care?"
+#~ msgstr "Is the child a victim of child abuse within the family?"
 
 #~ msgid "Ydych chi mewn perygl o golli eich cartref oherwydd methdaliad, ailfeddiannu neu ddyled morgais?"
-#~ msgstr "Have you taken part in a family mediation session?"
+#~ msgstr "Is the local council trying to take your child into care?"
 
 #~ msgid "Beth yw eich problem ynglŷn â thai?"
-#~ msgstr "Choose the option that best describes your housing situation"
+#~ msgstr "Have you taken part in a family mediation session?"
 
 #~ msgid "A yw hyn yn creu perygl difrifol o salwch neu anaf?"
-#~ msgstr "Are you at risk of losing your home because of bankruptcy, repossession or mortgage debt?"
+#~ msgstr "Choose the option that best describes your housing situation"
 
 #~ msgid "Eich landlord yw:"
-#~ msgstr "What is your housing problem about?"
+#~ msgstr "Are you at risk of losing your home because of bankruptcy, repossession or mortgage debt?"
 
 #~ msgid "Beth yw eich problem ynglŷn â budd-daliadau?"
-#~ msgstr "Does this create a serious risk of illness or injury?"
+#~ msgstr "What is your housing problem about?"
 
 #~ msgid "Rydych eisiau apelio yn erbyn penderfyniad ynglŷn â budd-daliadau:"
-#~ msgstr "Your landlord is:"
+#~ msgstr "Does this create a serious risk of illness or injury?"
 
 #~ msgid "Beth yw eich problem?"
-#~ msgstr "What is your benefits problem about?"
+#~ msgstr "Your landlord is:"
 
 #~ msgid "optional"
-#~ msgstr "You want to appeal a benefits decision:"
+#~ msgstr "What is your benefits problem about?"
 
 #~ msgid "Frequency"
-#~ msgstr "What is your problem about?"
+#~ msgstr "You want to appeal a benefits decision:"
 
 #~ msgid "Amount"
-#~ msgstr ""
+#~ msgstr "What is your problem about?"
 
 #~ msgid "Select all that apply"
 #~ msgstr ""

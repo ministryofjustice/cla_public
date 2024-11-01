@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-01 14:59+0000\n"
+"POT-Creation-Date: 2024-11-01 15:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1244,6 +1244,12 @@ msgid "Miscarriage of justice compensation"
 msgstr ""
 
 msgid "We Love Manchester Emergency Fund"
+msgstr ""
+
+msgid "Backdated benefit payments"
+msgstr ""
+
+msgid "Backdated child maintenance payments"
 msgstr ""
 
 msgid "Your application will time out soon"
