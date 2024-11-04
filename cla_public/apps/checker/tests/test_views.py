@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from mock import patch
 import jwt
 from flask import url_for
@@ -14,7 +13,7 @@ class TestReceiveUserAnswers(FlaskAppTestCase):
         self.client = self.app.test_client()
         self.valid_payload = {
             "category": "debt",
-            "answers": OrderedDict([("Question 1", "Yes"), ("Question 2", "No")]),
+            "answers": [{"question": "Question 1", "answer": "Yes"}, {"question": "Question 2", "answer": "No"}],
             "destination": "means-test",
         }
         self.landing_url = url_for("checker.receive_user_answers")
@@ -47,7 +46,12 @@ class TestReceiveUserAnswers(FlaskAppTestCase):
 
         self.client.get(self.get_url_with_token(token))
         # Check set_session_data was called with correct args
-        mock_set_session.assert_called_once_with("debt", OrderedDict([("Question 1", "Yes"), ("Question 2", "No")]))
+        mock_set_session.assert_called_once_with(
+            "debt",
+            [{"question": "Question 1", "answer": "Yes"}, {"question": "Question 2", "answer": "No"}],
+            "INSCOPE",
+            False,
+        )
 
     def test_valid_token_means_test(self,):
         """Test successful means test flow with valid token"""
@@ -63,7 +67,7 @@ class TestReceiveUserAnswers(FlaskAppTestCase):
         """Test successful contact flow with valid token"""
         payload = {
             "category": "domestic-abuse",
-            "answers": OrderedDict([("Question 1", "Yes"), ("Question 2", "No")]),
+            "answers": [{"question": "Question 1", "answer": "Blue"}, {"question": "Question 2", "answer": "Red"}],
             "destination": "contact",
         }
         token = self.create_token(payload)
