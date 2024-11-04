@@ -1,7 +1,7 @@
 # coding: utf-8
 "Checker views"
 import logging
-from cla_common.constants import ELIGIBILITY_REASONS
+from cla_common.constants import ELIGIBILITY_REASONS, DIAGNOSIS_SCOPE
 from flask import abort, render_template, redirect, session, url_for, views, request, current_app
 from flask.ext.babel import lazy_gettext as _
 from wtforms.validators import StopValidation
@@ -499,15 +499,24 @@ def receive_user_answers():
         "answers"
     ]  # Map of the users answers to questions they have been presented with on the new frontend.
     destination = payload["destination"]  # Can be fala, means-test, or, contact
+    harm_flag = payload.get("harm_flag", False)
 
     if destination == "fala":
         return redirect(url_for(".face-to-face", category=category))
 
-    set_session_data(category, question_answer_map)
+    redirect_url = None
+    outcome = DIAGNOSIS_SCOPE.UNKNOWN
 
     if destination == "means-test":
-        return redirect(url_for("checker.interstitial"))
+        redirect_url = url_for("checker.interstitial")
+        outcome = DIAGNOSIS_SCOPE.INSCOPE
     if destination == "contact":
-        return redirect(url_for("contact.get_in_touch"))
+        redirect_url = url_for("contact.get_in_touch")
+        outcome = DIAGNOSIS_SCOPE.CONTACT
+
+    set_session_data(category, question_answer_map, outcome, harm_flag)
+
+    if redirect_url:
+        return redirect(redirect_url)
 
     raise ValueError("Invalid destination")
