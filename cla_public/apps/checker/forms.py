@@ -4,7 +4,7 @@
 import copy
 import logging
 
-from flask import session, request
+from flask import session, request, current_app
 from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from wtforms import Form as NoCsrfForm, StringField
@@ -270,10 +270,14 @@ class AdditionalBenefitsForm(BaseForm):
 
 
 class PropertyForm(BaseNoCsrfForm):
-
+    main_home_text = (
+        u"If you’re temporarily living away from the property, select ‘Yes’"
+        if current_app.config["MTR_UPDATES_FEATURE_FLAG"]
+        else u"If you are separated and no longer live in the property you own, please answer ‘no’"
+    )
     is_main_home = YesNoField(
         label=_(u"Is this property your main home?"),
-        description=(_(u"If you are separated and no longer live in the property you own, please answer ‘no’")),
+        description=(main_home_text),
         validators=[InputRequired(message=_(u"Tell us whether this is your main home"))],
     )
     other_shareholders = PartnerYesNoField(

@@ -525,6 +525,9 @@ msgstr "Ai’r eiddo hwn yw’ch prif gartref?"
 msgid "If you are separated and no longer live in the property you own, please answer ‘no’"
 msgstr "Os ydych chi wedi gwahanu ac os nad ydych chi bellach yn byw yn yr eiddo yr ydych chi’n berchen arno, rhowch ‘na’ yn ateb"
 
+msgid "If you’re temporarily living away from the property, select ‘Yes’"
+msgstr "Os nad ydych chi'n byw yn yr eiddo dros dro, dewiswch 'Yes'"
+
 msgid "Tell us whether this is your main home"
 msgstr "Ai hwn yw eich prif gartref"
 

@@ -521,6 +521,9 @@ msgstr ""
 msgid "If you are separated and no longer live in the property you own, please answer ‘no’"
 msgstr ""
 
+msgid "If you’re temporarily living away from the property, select ‘Yes’"
+msgstr ""
+
 msgid "Tell us whether this is your main home"
 msgstr ""
 
