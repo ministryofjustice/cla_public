@@ -10,6 +10,7 @@ from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from wtforms import Form as NoCsrfForm, StringField
 from wtforms.validators import InputRequired, NumberRange, DataRequired
 
+from cla_public.config.common import MTR_UPDATES_FEATURE_FLAG
 from cla_public.apps.checker.constants import BENEFITS_CHOICES, NON_INCOME_BENEFITS, YES, NO
 from cla_public.apps.checker.fields import (
     MoneyIntervalField,
@@ -271,7 +272,7 @@ class AdditionalBenefitsForm(BaseForm):
 
 class PropertyForm(BaseNoCsrfForm):
 
-    if current_app.config["MTR_UPDATES_FEATURE_FLAG"]:
+    if MTR_UPDATES_FEATURE_FLAG:
         main_home_text = u"If you’re temporarily living away from the property, select ‘Yes’"
     else:
         main_home_text = u"If you are separated and no longer live in the property you own, please answer ‘no’"
