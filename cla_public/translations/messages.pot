@@ -705,7 +705,7 @@ msgid "Is this property your main home?"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:276
-msgid "If you are separated and no longer live in the property you own, please answer ‘no’"
+msgid "If you’re temporarily living away from the property, select ‘Yes’"
 msgstr ""
 
 #: cla_public/apps/checker/forms.py:277
