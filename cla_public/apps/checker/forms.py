@@ -270,11 +270,11 @@ class AdditionalBenefitsForm(BaseForm):
 
 
 class PropertyForm(BaseNoCsrfForm):
-    main_home_text = (
-        u"If you’re temporarily living away from the property, select ‘Yes’"
-        if current_app.config["MTR_UPDATES_FEATURE_FLAG"]
-        else u"If you are separated and no longer live in the property you own, please answer ‘no’"
-    )
+
+    if current_app.config["MTR_UPDATES_FEATURE_FLAG"]:
+        main_home_text = u"If you’re temporarily living away from the property, select ‘Yes’"
+    else:
+        main_home_text = u"If you are separated and no longer live in the property you own, please answer ‘no’"
     is_main_home = YesNoField(
         label=_(u"Is this property your main home?"),
         description=(main_home_text),
