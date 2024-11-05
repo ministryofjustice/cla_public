@@ -101,4 +101,4 @@ envVars:
   MTR_UPDATES_FEATURE_FLAG:
     configmap:
       name: mtr-updates
-      key: mtr-updates
+      key: mtr-updates-on
