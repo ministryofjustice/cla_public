@@ -15,6 +15,8 @@ environment: development
 
 # Lists don't deep merge, so this list of envVars overrides anything defined in an earlier values file
 envVars:
+  MTR_UPDATES_FEATURE_FLAG:
+    value: "True"
   BACKEND_BASE_URI:
     value: "http://cla-backend-app.laa-cla-backend-staging.svc.cluster.local"
   LAALAA_API_HOST:
