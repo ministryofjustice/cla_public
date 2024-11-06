@@ -4,7 +4,7 @@
 import copy
 import logging
 
-from flask import session, request, current_app
+from flask import session, request
 from flask_wtf import Form
 from flask.ext.babel import lazy_gettext as _, lazy_pgettext
 from wtforms import Form as NoCsrfForm, StringField
