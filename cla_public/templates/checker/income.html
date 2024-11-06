@@ -40,6 +40,8 @@
         </summary>
         {% if config.MTR_UPDATES_FEATURE_FLAG %}
         {% include '_disregards-info-income.html' %}
+        {% else %}
+        {% include '_disregards-info.html' %}
         {% endif %}
       </details>
       {% if session.checker.has_partner %}

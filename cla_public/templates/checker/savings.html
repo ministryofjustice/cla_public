@@ -26,6 +26,8 @@
         </summary>
         {% if config.MTR_UPDATES_FEATURE_FLAG %}
         {% include '_disregards-info-savings.html' %}
+        {% else %}
+        {% include '_disregards-info.html' %}
         {% endif %}
       </details>
       {{ Form.group(form.investments, field_attrs={'prefix': '£', 'class_': 'govuk-!-width-one-third'}) }}
