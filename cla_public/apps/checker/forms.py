@@ -278,7 +278,7 @@ class PropertyForm(BaseNoCsrfForm):
         main_home_text = u"If you are separated and no longer live in the property you own, please answer ‘no’"
     is_main_home = YesNoField(
         label=_(u"Is this property your main home?"),
-        description=(main_home_text),
+        description=(_(main_home_text)),
         validators=[InputRequired(message=_(u"Tell us whether this is your main home"))],
     )
     other_shareholders = PartnerYesNoField(
