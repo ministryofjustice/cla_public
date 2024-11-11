@@ -102,3 +102,7 @@ envVars:
     secret:
       name: jwt-secret
       key: key
+  MTR_UPDATES_FEATURE_FLAG:
+    configmap:
+      name: mtr-updates
+      key: mtr-updates-on

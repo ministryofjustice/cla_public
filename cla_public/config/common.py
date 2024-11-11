@@ -16,6 +16,8 @@ EMERGENCY_MESSAGE_TEXT = os.environ.get("EMERGENCY_MESSAGE_TEXT", "Text not set"
 # Sets whether the updated family issue text displays on the outcome (/result/eligible or /result/provisional) pages or not
 FAMILY_ISSUE_FEATURE_FLAG = os.environ.get("FAMILY_ISSUE_FEATURE_FLAG", "False") == "True"
 
+MTR_UPDATES_FEATURE_FLAG = os.environ.get("MTR_UPDATES_FEATURE_FLAG", "False") == "True"
+
 TESTING = os.environ.get("TESTING", "False").upper() == "TRUE"
 
 CLEAR_SESSION = True
