@@ -98,3 +98,7 @@ envVars:
     configmap:
       name: backend-callback-slots
       key: enabled
+  MTR_UPDATES_FEATURE_FLAG:
+    configmap:
+      name: mtr-updates
+      key: mtr-updates-on
