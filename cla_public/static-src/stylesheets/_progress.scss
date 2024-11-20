@@ -26,7 +26,9 @@ div.progress {
     border-width: 1px 0;
 
     .m-completed {
-      font-weight: 700;
+      position: absolute;
+      top: 0;
+      bottom: 0;
     }
 
     .cla-progress-unfinished {
@@ -35,6 +37,7 @@ div.progress {
   }
 
   .progress-steps {
+    overflow: hidden;
     list-style: none;
     padding: 0;
   }
@@ -44,8 +47,16 @@ div.progress {
 
     &.m-completed {
       .step-status {
-        background-color: govuk-colour("blue");
-        border-color: govuk-colour("blue");
+        border-color: #00703C;
+        transform: rotate(-45deg);
+        border-style: solid;
+        width: 13px;
+        border-width: 0 0 4px 4px;
+        height: 5px;
+        border-radius: 0;
+        margin-top: 1px;
+        box-shadow: none;
+        background-color: inherit;
       }
 
       &.m-current .step-status {
@@ -146,9 +157,11 @@ div.progress {
     }
     &:not(.m-current):not(.m-completed)>a.step-name .step-status {
       background-color: $govuk-border-colour;
+      box-shadow: inset 0 0 0 2px #f3f2f1;
     }
     &:not(.m-current):not(.m-completed)>a.step-name:focus:not(:hover):not(:active) .step-status {
       background-color: $govuk-text-colour;
+      box-shadow: inset 0 0 0 2px $govuk-focus-colour;
     }
 
 
