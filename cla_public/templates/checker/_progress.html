@@ -38,8 +38,8 @@
       or (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed)
     %}
       <li class="progress-step
-        {% if step.is_current %}m-current{% endif %}
-        {% if step.is_completed %}m-completed{% endif %}"
+        {% if step.is_completed %}m-completed{% endif %}
+        {% if step.is_current %}m-current{% endif %}"
       >
         {% if (step.is_completed and not is_contact_page and not step.is_current) %}
           <a class="step-name" href="{{ url_for('checker.wizard', step=step.name) }}">
