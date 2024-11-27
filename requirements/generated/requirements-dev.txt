@@ -98,7 +98,7 @@ futures==3.4.0
     # via pre-commit
 identify==1.6.2
     # via pre-commit
-idna==2.7
+idna==3.7
     # via
     #   requests
     #   urllib3
