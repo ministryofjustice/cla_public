@@ -1,8 +1,6 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@3.4.2
-  cla-end-to-end-tests: ministryofjustice/cla-end-to-end-tests@volatile
   aws-cli: circleci/aws-cli@4.1 # use v4 of this orb
   aws-ecr: circleci/aws-ecr@9.0 # this orb doesn't support OIDC v2, so we use aws-cli to authenticate
 
@@ -33,218 +31,8 @@ references:
           mv linux-amd64/helm /usr/local/bin/helm
 
 jobs:
-  build:
-    executor: aws-ecr/default # use the aws-ecr/default executor to start the docker daemon
-    steps:
-      # Checkout your repository
-      - checkout
-      # Authenticate to AWS using OIDC v2 with the AWS CLI
-      - aws-cli/setup:
-          role_arn: $ECR_ROLE_TO_ASSUME # this will use the env var
-          region: $ECR_REGION # this will use the env var
-      # Authenticate to the ECR repository using the standard command
-      - run: |
-          aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com
-      # Build and push your Docker image
-      - run:
-          name: Create target tag for main application image
-          command: |
-            source .circleci/define_build_environment_variables
-            echo "Created tags $TARGET_TAGS"
-            echo "export BUILD_TAGS=$TARGET_TAGS" >> $BASH_ENV
-            echo "export IMAGE_TAG=$IMAGE_TAG" >> $BASH_ENV
-      - aws-ecr/build_image:
-          push_image: true
-          account_id: $AWS_ECR_REGISTRY_ID
-          tag: $BUILD_TAGS
-          region: $ECR_REGION # this will use the env var
-          repo: $ECR_REPOSITORY # this will use the env var
-      # Validate the python version as 2.7
-      - run:
-          name: Validate Python version
-          command: |
-            docker run --rm --tty --interactive ${AWS_ECR_REGISTRY_ID}.dkr.ecr.${ECR_REGION}.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG python --version | grep "2.7"
 
-  lint-with-py2-tools:
-    docker:
-      - image: cimg/python:2.7
-    steps:
-      - checkout
-      - run:
-          name: Setup Python environment
-          command: |
-            pip install virtualenv
-            virtualenv py2-lint-env
-      - restore_cache:
-          keys:
-            - pip-v1-{{ checksum "requirements/generated/requirements-py2-lint.txt" }}
-      - run:
-          name: Install dependencies
-          command: |
-            source py2-lint-env/bin/activate
-            pip install --requirement requirements/generated/requirements-py2-lint.txt
-      - save_cache:
-          key: pip-v1-{{ checksum "requirements/generated/requirements-py2-lint.txt" }}
-          paths:
-            - "~/.cache/pip"
-      - run:
-          name: Lint with flake8
-          command: |
-            source py2-lint-env/bin/activate
-            flake8 cla_public
-  format-with-py3-tools:
-    docker:
-      - image: cimg/python:3.7
-    steps:
-      - checkout
-      - run:
-          name: Setup Python environment
-          command: |
-            pip install virtualenv
-            virtualenv format-env
-      - restore_cache:
-          keys:
-            - pip-v1-black-18.9b0
-      - run:
-          name: Install dependencies
-          command: |
-            source format-env/bin/activate
-            pip install black==18.9b0
-      - save_cache:
-          key: pip-v1-black-18.9b0
-          paths:
-            - "~/.cache/pip"
-      - run:
-          name: Check formatting with Black
-          command: |
-            source format-env/bin/activate
-            black --check --diff cla_public
-  accessibility-test:
-    docker:
-      - image: circleci/python:latest-node-browsers
-    steps:
-      # Add the necessary steps to deploy your website.
-      - checkout
-      - run:
-          name: Delete existing javascript packages
-          command: |
-            rm -rf node_modules package.json package-lock.json
-      - run:
-          name: Extract staging URL
-          command: |
-            source .circleci/define_build_environment_variables
-            echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
-      - run:
-          name: Install cypress and axe-core
-          command: |
-            cd accessibility_tests
-            npm install
-      - run:
-          name: Run accessibility test
-          command: |
-            cd accessibility_tests
-            mkdir cypress/pages
-            node node_modules/.bin/cypress run --env UAT_URL=https://$RELEASE_HOST/start --spec "cypress/integration/happy-path.spec.js"
-      - store_artifacts:
-          path: ~/project/accessibility_tests/cypress/videos
-  test:
-    docker:
-      - image: cimg/python:2.7
-    steps:
-      - checkout
-      - run:
-          name: Setup Python environment
-          command: |
-            pip install virtualenv
-            virtualenv env
-            source env/bin/activate
-            pip install pip==18.1
-
-      - restore_cache:
-          keys:
-            - pip-v2-{{ checksum "requirements/generated/requirements-production.txt" }}-{{ checksum "requirements/generated/requirements-testing.txt" }}
-      - run:
-          name: Install dependencies
-          command: |
-            source env/bin/activate
-            pip install --requirement requirements/generated/requirements-testing.txt
-            pip check
-            # Don't do pip check for packages installed with --no-deps as that will complain about missing dependencies
-            pip install --requirement requirements/generated/requirements-no-deps.txt --no-deps
-      - save_cache:
-          key: pip-v2-{{ checksum "requirements/generated/requirements-testing.txt" }}-{{ checksum "requirements/generated/requirements-no-deps.txt" }}
-          paths:
-            - "~/.cache/pip"
-
-      - run:
-          name: Run unit tests
-          command: |
-            source env/bin/activate
-            coverage run manage.py test
-            coverage report -m
-            coverage html
-            coveralls
-      - store_artifacts:
-          path: htmlcov
-          destination: coverage
-      - store_test_results:
-          path: test-reports
-      - store_artifacts:
-          path: test-reports
-
-  staging_deploy:
-    parameters:
-      multideploy:
-        type: boolean
-        default: false
-    executor: cloud-platform-executor
-    steps:
-      - checkout
-      - *install_helm
-      - run:
-          name: Authenticate with cluster
-          command: .circleci/authenticate_with_kubernetes_cluster
-      - unless:
-          condition: << parameters.multideploy >>
-          steps:
-            - deploy:
-                name: Deploy laa-cla-public to fixed staging
-                command: |
-                  export INGRESS_CLUSTER_NAME=`kubectl get configmap ingress-cluster -o jsonpath='{.data.name}'`
-                  export INGRESS_CLUSTER_WEIGHT=`kubectl get configmap ingress-cluster -o jsonpath='{.data.weight}'`
-                  source .circleci/define_build_environment_variables
-                  ./bin/staging_deploy.sh
-                  echo "export RELEASE_HOST=$STAGING_HOST" >> $BASH_ENV
-      - when:
-          condition: << parameters.multideploy >>
-          steps:
-            - deploy:
-                name: Deploy laa-cla-public to multideploy staging
-                command: |
-                  export INGRESS_CLUSTER_NAME=`kubectl get configmap ingress-cluster -o jsonpath='{.data.name}'`
-                  export INGRESS_CLUSTER_WEIGHT=`kubectl get configmap ingress-cluster -o jsonpath='{.data.weight}'`
-                  source .circleci/define_build_environment_variables
-                  ./bin/staging_multideploy.sh
-                  echo "export RELEASE_HOST=$CLEANED_BRANCH_NAME.$STAGING_HOST" >> $BASH_ENV
-      - slack/notify:
-          message: ':tada: Deployed branch $CIRCLE_BRANCH'
-          title: '$RELEASE_HOST'
-          title_link: 'https://$RELEASE_HOST/start'
-
-  cleanup_merged:
-    executor: cloud-platform-executor
-    steps:
-      - checkout
-      - *install_helm
-      - run:
-          name: Authenticate with cluster
-          command: .circleci/authenticate_with_kubernetes_cluster
-      - run:
-          name: Delete staging release
-          command: |
-            ./bin/delete_staging_release.sh
-
-  production_deploy:
+  dnstest_deploy:
     executor: cloud-platform-executor
     steps:
       - checkout
@@ -253,96 +41,22 @@ jobs:
           name: Authenticate with cluster
           command: .circleci/authenticate_with_kubernetes_cluster
       - deploy:
-          name: Deploy laa-cla-public to production
+          name: Deploy laa-cla-public to dnstest
           command: |
-            export INGRESS_CLUSTER_NAME=`kubectl get configmap ingress-cluster -o jsonpath='{.data.name}'`
-            export INGRESS_CLUSTER_WEIGHT=`kubectl get configmap ingress-cluster -o jsonpath='{.data.weight}'`
             source .circleci/define_build_environment_variables
-            ./bin/production_deploy.sh
-      - slack/notify:
-          message: ':tada: Deployed to production'
-          title: '$PRODUCTION_HOST'
-          title_link: 'https://$PRODUCTION_HOST/start'
-
-  behave:
-    executor: aws-ecr/default
-    steps:
-      - checkout:
-          path: cla_public
-      - run: |
-          cd cla_public
-          source .circleci/define_build_environment_variables
-          echo "export CLA_PUBLIC_IMAGE=$ECR_DEPLOY_IMAGE" >> $BASH_ENV
-          echo "export A11Y_ENABLED=true" >> $BASH_ENV
-          echo "Setting CLA_Public image $ECR_DEPLOY_IMAGE"
-      - cla-end-to-end-tests/behave
+            ./bin/dnstest_deploy.sh
 
 workflows:
   version: 2
-  build-test-and-approval-deploy:
+  deploy_dns_test_with_latest_image:
     jobs:
-      - lint-with-py2-tools
-      - format-with-py3-tools
-      - test
-      - cleanup_merged:
+      - dnstest_deploy:
           context:
             - laa-cla-public
-            - laa-cla-public-live-staging
-      - build:
-          requires:
-            - lint-with-py2-tools
-            - format-with-py3-tools
-            - test
-          context: laa-cla-public
-      - behave:
-          requires:
-            - build
-          context: laa-cla-public
-      - staging_deploy_approval:
-          type: approval
-      # Deploy staging to live (both master and feature branches)
-      - staging_deploy:
-          requires:
-            - build
-            - staging_deploy_approval
-          context:
-            - laa-cla-public
-            - laa-cla-public-live-staging
-          name: staging_deploy_master
-          multideploy: false
+            - laa-cla-public-dnstest
+          name: dnstest_deploy_branch
           filters:
             branches:
               only:
-                - master
-      - staging_deploy:
-          requires:
-            - build
-            - staging_deploy_approval
-          context:
-            - laa-cla-public
-            - laa-cla-public-live-staging
-          multideploy: true
-          filters:
-            branches:
-              ignore:
-                - master
+                - LGA-3471-dsn-transfer-test
 
-      - accessibility-test:
-          requires:
-            - staging_deploy
-      - production_deploy_approval:
-          type: approval
-          requires:
-            - staging_deploy_master
-          filters:
-            branches:
-              only:
-                - master
-
-      - production_deploy:
-          name: production_deploy_live
-          requires:
-            - production_deploy_approval
-          context:
-            - laa-cla-public
-            - laa-cla-public-live-production
