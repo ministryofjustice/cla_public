@@ -28,26 +28,6 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /ping.json
-              port: http
-              httpHeaders:
-                - name: Host
-                  value: "{{ .Values.host }}"
-            initialDelaySeconds: 10
-            timeoutSeconds: 1
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /ping.json
-              port: http
-              httpHeaders:
-                - name: Host
-                  value: "{{ .Values.host }}"
-            initialDelaySeconds: 5
-            timeoutSeconds: 1
-            periodSeconds: 10
           lifecycle:
             preStop:
               exec:
