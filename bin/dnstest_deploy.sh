@@ -8,7 +8,7 @@ helm upgrade cla-public \
   $HELM_DIR \
   --namespace=laa-cla-public-dnstest \
   --values ${HELM_DIR}/values-dnstest.yaml \
-  --set host=dnstest.checklegalaid.service.gov.uk \
+  --set host=laa-cla-public-dnstest.apps.live.cloud-platform.service.justice.gov.uk \
   --set ingress.cluster.name=green \
   --set ingress.cluster.weight=100 \
   --set image.repository=$DOCKER_REPOSITORY \
