@@ -7,7 +7,7 @@ image:
 
 environment: dnstest
 
-replicaCount: 1
+replicaCount: 2
 
 ingress:
   enabled: true
@@ -23,4 +23,4 @@ envVars:
   LOG_LEVEL:
     value: "INFO"
   DEBUG:
-    value: "False"
+    value: "True"
