@@ -7,7 +7,7 @@ image:
 
 environment: dnstest
 
-replicaCount: 2
+replicaCount: 1
 
 ingress:
   enabled: true
