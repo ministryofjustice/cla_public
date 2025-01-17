@@ -18,6 +18,6 @@ helm upgrade cla-public \
   --set image.repository=$DOCKER_REPOSITORY \
   --set image.tag=$HARDCODED_IMAGE_TAG_IN_CONTEXT \
   --set-string pingdomIPs=$PINGDOM_IPS \
-  --set-string $SHARED_IP_RANGES_LAA \
+  --set-string sharedIPRangesLAA=$SHARED_IP_RANGES_LAA \
   --force \
   --install
