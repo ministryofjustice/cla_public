@@ -102,3 +102,8 @@ envVars:
     configmap:
       name: mtr-updates
       key: mtr-updates-on
+  INGRESS_ENABLED_OVERRIDE:
+    configmap:
+      name: ingress-status
+      key: enabled
+      optional: true
