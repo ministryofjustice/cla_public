@@ -1,4 +1,4 @@
-{{- if .Values.envVars.INGRESS_ENABLED_OVERRIDE -}}
+{{- if eq (default "false" .Values.envVars.INGRESS_ENABLED_OVERRIDE | quote) "true" -}}
 {{- $fullName := include "cla-public.fullname" . -}}
 {{- $ingressName := printf "%s-%s" $fullName "v122" -}}
 {{- $svcPort := .Values.service.port -}}
