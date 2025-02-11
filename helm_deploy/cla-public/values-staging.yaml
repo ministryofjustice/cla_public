@@ -15,7 +15,7 @@ ingress:
 
 envVars:
   BACKEND_BASE_URI:
-    value: "http://cla-backend-app.laa-cla-backend-uat.svc.cluster.local"
+    value: "http://cla-backend-app.laa-cla-backend-staging.svc.cluster.local"
   LAALAA_API_HOST:
     value: "https://laa-legal-adviser-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
   GOOGLE_MAPS_API_KEY:
