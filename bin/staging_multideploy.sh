@@ -23,6 +23,6 @@ helm upgrade $CLEANED_BRANCH_NAME \
   --set dashboard.enabled=false \
   --set-string pingdomIPs=$PINGDOM_IPS \
   --set-string sharedIPRangesLAA=$SHARED_IP_RANGES_LAA \
-  --set-string envVars.BACKEND_BASE_URI="http://cla-backend-app.laa-cla-backend-uat.svc.cluster.local" \
+  --set-string envVars.BACKEND_BASE_URI.value="http://cla-backend-app.laa-cla-backend-uat.svc.cluster.local" \
   --force \
   --install
