@@ -98,6 +98,10 @@ envVars:
     configmap:
       name: backend-callback-slots
       key: enabled
+  JWT_SECRET:
+    secret:
+      name: jwt-secret
+      key: key
   MTR_UPDATES_FEATURE_FLAG:
     configmap:
       name: mtr-updates
