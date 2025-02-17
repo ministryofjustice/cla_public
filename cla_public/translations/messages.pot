@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2024 ORGANIZATION
+# Copyright (C) 2025 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-01 15:10+0000\n"
+"POT-Creation-Date: 2025-02-17 23:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -516,12 +516,6 @@ msgid "Tell us how often you receive these other benefits"
 msgstr ""
 
 msgid "Is this property your main home?"
-msgstr ""
-
-msgid "If you are separated and no longer live in the property you own, please answer ‘no’"
-msgstr ""
-
-msgid "If you’re temporarily living away from the property, select ‘Yes’"
 msgstr ""
 
 msgid "Tell us whether this is your main home"
@@ -1253,6 +1247,21 @@ msgid "Backdated benefit payments"
 msgstr ""
 
 msgid "Backdated child maintenance payments"
+msgstr ""
+
+msgid "Do not include monies received from the following schemes"
+msgstr ""
+
+msgid "Infected Blood Support Scheme"
+msgstr ""
+
+msgid "Criminal Injuries Compensation Scheme"
+msgstr ""
+
+msgid "Energy prices Act 2022"
+msgstr ""
+
+msgid "Cost of living payment- Social Security (additional payments) Act 2022"
 msgstr ""
 
 msgid "Your application will time out soon"
@@ -2136,7 +2145,7 @@ msgstr ""
 msgid "Public authorities such as: HM Courts and Tribunal Service (<abbr>HMCTS</abbr>), HM Revenue and Customs (<abbr>HMRC</abbr>), Department of Work and Pensions (<abbr>DWP</abbr>) and HM Land Registry;"
 msgstr ""
 
-msgid "Non-public authorities such as: Credit reference agencies Equifax and Transunion and our debt collection partners Marston Holdings;"
+msgid "Non-public authorities such as: Credit reference agencies Equifax and Transunion and our debt collection partners Advantis Credit Ltd;"
 msgstr ""
 
 msgid "Hinduja Global Solutions UK Ltd and"
@@ -2145,7 +2154,7 @@ msgstr ""
 msgid "If false or inaccurate information is provided or fraud identified, the Legal Aid Agency can lawfully share your personal information with fraud prevention agencies to detect and to prevent fraud and money laundering."
 msgstr ""
 
-msgid "Where a debt is owed to the Legal Aid Agency, we may share your data with public authorities such as HMRC and DWP and with debt collection partners such as Marston Holdings for the purposes of tracing, debt collection and enforcement."
+msgid "Where a debt is owed to the Legal Aid Agency, we may share your data with public authorities such as HMRC and DWP and with debt collection partners such as Advantis Credit Ltd for the purposes of tracing, debt collection and enforcement."
 msgstr ""
 
 msgid "You can contact our Data Protection Officer for further information on the organisations we may share your personal information with."
@@ -2157,7 +2166,7 @@ msgstr ""
 msgid "We may contract with third party data processors to provide email, system administration, document management and IT storage services. Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law."
 msgstr ""
 
-msgid "We contract with Marston Holdings as a data processor for the collection and enforcement of criminal legal aid contributions. Any personal data shared with the data processor for this purpose is governed by model contract clauses under data protection law."
+msgid "We contract with Advantis Credit Ltd as a data processor for the collection and enforcement of criminal legal aid contributions. Any personal data shared with the data processor for this purpose is governed by model contract clauses under data protection law."
 msgstr ""
 
 msgid "Automated decision making"
@@ -2199,7 +2208,7 @@ msgid ""
 "    Ministry of Justice<br/>\n"
 "    102 Petty France<br/>\n"
 "    London<br/>\n"
-"    SW1H 9AJ <br/>    \n"
+"    SW1H 9AJ <br/>\n"
 "    <a class=\"govuk-link email\" href=\"mailto:data.access@justice.gov.uk\">data.access@justice.gov.uk</a>\n"
 "    "
 msgstr ""
