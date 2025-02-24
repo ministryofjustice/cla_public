@@ -1,16 +1,14 @@
 # coding: utf-8
 "Checker views"
 import logging
-
-from cla_common.constants import ELIGIBILITY_REASONS
+from cla_common.constants import ELIGIBILITY_REASONS, DIAGNOSIS_SCOPE
 from flask import abort, render_template, redirect, session, url_for, views, request, current_app
 from flask.ext.babel import lazy_gettext as _
 from wtforms.validators import StopValidation
-
 from cla_public.apps.checker import checker
 from cla_public.apps.checker.api import get_organisation_list
 from cla_public.apps.checker.forms import FindLegalAdviserForm
-from cla_public.apps.checker.utils import category_option_from_name
+from cla_public.apps.checker.utils import category_option_from_name, set_session_data
 from cla_public.apps.contact.forms import ContactForm
 from cla_public.apps.checker.constants import (
     ORGANISATION_CATEGORY_MAPPING,
@@ -36,6 +34,7 @@ from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, FormWizardStep, RequiresSession, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 from cla_public.apps.checker.cait_intervention import get_cait_params
+import jwt  # Using PyJWT for token signing
 import math
 
 log = logging.getLogger(__name__)
@@ -113,7 +112,7 @@ class CheckerStep(UpdatesMeansTest, FormWizardStep):
             return not is_null(field)
 
         fields = filter(user_completed, form._fields.items())
-        fields = map(lambda (name, field): (field), fields)
+        fields = tuple(field for name, field in fields)
         return fields
 
     @property
@@ -471,3 +470,53 @@ def interstitial():
         "is_hlpas": is_hlpas,
     }
     return render_template("interstitial.html", **context)
+
+
+@checker.route("/landing", methods=["GET"])
+def receive_user_answers():
+    """ Receives a signed JWT payload from access civil legal aid.
+        This is used to populate the users' session before redirecting them onwards to their requested destination.
+
+        Routing logic is handled by the new frontend, cla_public is only responsible for generating the URL and session management.
+    """
+    token = request.args.get("token")
+    if not token:
+        return abort(404)
+
+    try:
+        # Decode and verify JWT
+        jwt_secret_key = current_app.config["JWT_SECRET"]
+
+        if not jwt_secret_key:
+            return abort(500)
+
+        payload = jwt.decode(token, jwt_secret_key, algorithms=["HS256"])
+    except (jwt.ExpiredSignatureError, jwt.InvalidTokenError, jwt.InvalidSignatureError, jwt.DecodeError):
+        return abort(403)
+
+    category = payload["category"]  # Can be one of constants.CATEGORY or 'domestic-abuse'
+    question_answer_map = payload[
+        "answers"
+    ]  # Map of the users answers to questions they have been presented with on the new frontend.
+    destination = payload["destination"]  # Can be fala, means-test, or, contact
+    harm_flag = payload.get("harm_flag", False)
+
+    if destination == "fala":
+        return redirect(url_for(".face-to-face", category=category))
+
+    redirect_url = None
+    outcome = DIAGNOSIS_SCOPE.UNKNOWN
+
+    if destination == "means-test":
+        redirect_url = url_for("checker.interstitial")
+        outcome = DIAGNOSIS_SCOPE.INSCOPE
+    if destination == "contact":
+        redirect_url = url_for("contact.get_in_touch")
+        outcome = DIAGNOSIS_SCOPE.CONTACT
+
+    set_session_data(category, question_answer_map, outcome, harm_flag)
+
+    if redirect_url:
+        return redirect(redirect_url)
+
+    raise ValueError("Invalid destination")
