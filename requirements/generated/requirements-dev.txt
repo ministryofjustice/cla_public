@@ -255,7 +255,7 @@ wtforms==2.1
     #   flask-wtf
 xlrd==0.9.3
     # via -r requirements/source/requirements-base.in
-zipp==1.2.0
+zipp==3.19.1
     # via
     #   importlib-metadata
     #   importlib-resources
