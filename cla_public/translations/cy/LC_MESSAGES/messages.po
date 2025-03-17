@@ -2849,11 +2849,8 @@ msgstr "Os ydych yn cael problemau wrth lenwi’r ffurflen hon, gofynnwch i ni"
 msgid "get in touch"
 msgstr "cysylltwch â ni"
 
-msgid "What do you think about this service?"
-msgstr "A gawsoch unrhyw anhawster gyda’r gwasanaeth hwn?"
-
-msgid "Your feedback will improve this service. Please <a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">send us your thoughts</a>."
-msgstr "Bydd eich adborth yn gwella’r gwasanaeth hwn. <a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">Anfonwch eich sylwadau atom</a>."
+msgid "Tell us what you think of this service (opens new tab)"
+msgstr "Rhowch eich barn am y gwasanaeth hwn (yn agor mewn tab newydd)"
 
 #, python-format
 msgid "The information you enter won’t be stored on this device. Find out more about %(link)s."
