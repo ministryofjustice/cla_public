@@ -15,10 +15,8 @@
   {% endif %}
   {% call FALA.category_information(category) %}{% endcall %}
 
-<p id="aria-satisfaction-survey" class="govuk-body">
-  {% trans -%}
-    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">What did you think of this service?</a> (takes 30 seconds)
-  {%- endtrans %}
+<p class="govuk-body">
+    <a class="govuk-link" href="https://www.smartsurvey.co.uk/s/legalaid4/" target="_blank">{% trans %}Tell us what you think of this service (opens new tab) {% endtrans %}</a>
 </p>
 
 {% if data.origin.postcode %}
