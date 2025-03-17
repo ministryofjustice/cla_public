@@ -81,9 +81,7 @@
 {% endif %}
 
 {% if find_legal_advisor_subtitle == _('Search again') %}
-  <p class="govuk-body">
-    <a class="govuk-link" href="https://www.smartsurvey.co.uk/s/legalaid4/" target="_blank">{% trans %}Tell us what you think of this service (opens new tab){% endtrans %}</a>
-  </p>
+  {{ Element.satisfaction_survey("FALA") }}
 {% endif %}
 
 {% if not hide_subtitle %}

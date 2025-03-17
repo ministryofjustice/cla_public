@@ -171,9 +171,8 @@
     </p>
   {% endif %}
 
-  <p class="govuk-body">
-    <a class="govuk-link" href="https://www.smartsurvey.co.uk/s/legalaid2/" target="_blank">{% trans %}Tell us what you think of this service (opens new tab){% endtrans %}</a>
-  </p>
+  {{ Element.satisfaction_survey("confirmation") }}
+
 {% include "checker/time-out-warning.html" %}
 {% endblock %}
 

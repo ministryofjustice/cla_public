@@ -15,9 +15,7 @@
   {% endif %}
   {% call FALA.category_information(category) %}{% endcall %}
 
-<p class="govuk-body">
-    <a class="govuk-link" href="https://www.smartsurvey.co.uk/s/legalaid4/" target="_blank">{% trans %}Tell us what you think of this service (opens new tab) {% endtrans %}</a>
-</p>
+{{ Element.satisfaction_survey("FALA") }}
 
 {% if data.origin.postcode %}
   <p class="govuk-body">Results in order of closeness to <strong>{{data.origin.postcode}}</strong></p>

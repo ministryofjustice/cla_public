@@ -53,11 +53,11 @@
     {{ Element.link_same_window('https://www.gov.uk/find-a-legal-adviser', _('Find a solicitor'), **{'class': 'govuk-button'}) }}
   </p>
 
-  <p class="govuk-body">
-    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
-      {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
-    </a>
-  </p>
+  {% if organisations | length > 0 %}
+    {{ Element.satisfaction_survey("scope_ineligible_with_alternative_help") }}
+  {% else %}
+    {{ Element.satisfaction_survey("scope_ineligible_without_alternative_help") }}
+  {% endif %}
 
   {% if category != 'other' %}
     <p class="govuk-body">
