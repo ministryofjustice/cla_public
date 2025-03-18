@@ -2274,6 +2274,27 @@ msgstr "Y Swyddog Diogelu Data<br/>Gweinyddiaeth Gyfiawnder<br/>102 Petty France
 msgid "For more information on how and why your information is processed, please see the information provided when you accessed our services or were contacted by us."
 msgstr "Am fwy o wybodaeth ynglŷn â sut a pam yr ydyn ni’n prosesu eich gwybodaeth, gweler y wybodaeth a ddarparwyd pan ddechreuoch chi ddefnyddio ein gwasanaethau neu pan gysylltom ni â chi."
 
+msgid "Links to other websites"
+msgstr "Dolenni i wefannau eraill"
+
+msgid "This service contains links to other websites."
+msgstr "Mae’r gwasanaeth hwn yn cynnwys dolenni i wefannau eraill."
+
+msgid "This privacy notice only applies to this service and does not cover other government services and transactions that we link to."
+msgstr "Dim ond i’r gwasanaeth hwn y mae’r hysbysiad preifatrwydd hwn yn berthnasol ac nid yw’n berthnasol i wasanaethau a thrafodion eraill y llywodraeth yr ydym darparu dolenni atynt."
+
+msgid "If you follow a link to a service provided by another government department or agency, that organisation will:"
+msgstr "Os byddwch yn dilyn dolen i wasanaeth a ddarperir gan un o adrannau neu asiantaethau eraill y llywodraeth, y sefydliad hwnnw:"
+
+msgid "be the data controller"
+msgstr "fydd yn rheolydd data"
+
+msgid "be responsible for processing any data you share with them"
+msgstr "fydd yn gyfrifol am brosesu unrhyw ddata rydych chi’n ei rannu gyda nhw"
+
+msgid "publish and manage their own privacy notice with details of how to contact them"
+msgstr "a bydd yn cyhoeddi ac yn rheoli ei hysbysiad preifatrwydd ei hun gyda manylion am sut i gysylltu â nhw"
+
 msgid "Complaints"
 msgstr "Cwynion"
 
