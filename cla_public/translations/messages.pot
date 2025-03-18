@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-17 22:34+0000\n"
+"POT-Creation-Date: 2025-03-18 15:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2268,6 +2268,27 @@ msgid "The Data Protection Officer<br/>Ministry of Justice<br/>102 Petty France<
 msgstr ""
 
 msgid "For more information on how and why your information is processed, please see the information provided when you accessed our services or were contacted by us."
+msgstr ""
+
+msgid "Links to other websites"
+msgstr ""
+
+msgid "This service contains links to other websites."
+msgstr ""
+
+msgid "This privacy notice only applies to this service and does not cover other government services and transactions that we link to."
+msgstr ""
+
+msgid "If you follow a link to a service provided by another government department or agency, that organisation will:"
+msgstr ""
+
+msgid "be the data controller"
+msgstr ""
+
+msgid "be responsible for processing any data you share with them"
+msgstr ""
+
+msgid "publish and manage their own privacy notice with details of how to contact them"
 msgstr ""
 
 msgid "Complaints"
