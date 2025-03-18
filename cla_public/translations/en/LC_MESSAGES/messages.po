@@ -2845,10 +2845,7 @@ msgstr ""
 msgid "get in touch"
 msgstr ""
 
-msgid "What do you think about this service?"
-msgstr ""
-
-msgid "Your feedback will improve this service. Please <a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">send us your thoughts</a>."
+msgid "Tell us what you think of this service (opens new tab)"
 msgstr ""
 
 #, python-format

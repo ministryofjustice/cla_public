@@ -7,7 +7,7 @@
 {% block inner_content %}
 
   <h1 class="govuk-heading-xl">{{ _('You may be able to get legal aid for family mediation') }}</h1>
-  
+
   <p class="govuk-body">
   {% trans %}Use the Family Mediation Council (FMC) directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM).{% endtrans %}
   </p>
@@ -24,10 +24,7 @@
     {{ _('Find your local mediator') }}
   </a>
 
-  <p class="govuk-body">
-    <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" aria-labelledby="aria-satisfaction-survey">
-      {% trans %}What did you think of this service?{% endtrans %}</a> {% trans %}(takes 30 seconds){% endtrans %}
-    </a>
-  </p>
+  {{ Element.satisfaction_survey("scope_ineligible_with_category") }}
+
   {% include "checker/time-out-warning.html" %}
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-02-17 23:42+0000\n"
+"POT-Creation-Date: 2025-03-17 22:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2523,9 +2523,6 @@ msgid ""
 "      <a class=\"govuk-link\" href=\"https://www.gov.uk/call-charges\" rel=\"external\">call charges</a>."
 msgstr ""
 
-msgid "Finish"
-msgstr ""
-
 msgid "Print this page"
 msgstr ""
 
@@ -2641,12 +2638,6 @@ msgstr ""
 msgid "directory to find a mediator and make an appointment for a Mediation Information and Assessment Meeting (MIAM)."
 msgstr ""
 
-msgid "What did you think of this service?"
-msgstr ""
-
-msgid "(takes 30 seconds)"
-msgstr ""
-
 msgid "A legal adviser may still be able to help"
 msgstr ""
 
@@ -2722,9 +2713,6 @@ msgid "Loading…"
 msgstr ""
 
 msgid "Contact a legal adviser"
-msgstr ""
-
-msgid "<a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">What did you think of this service?</a> (takes 30 seconds)"
 msgstr ""
 
 #, python-format
@@ -2845,10 +2833,7 @@ msgstr ""
 msgid "get in touch"
 msgstr ""
 
-msgid "What do you think about this service?"
-msgstr ""
-
-msgid "Your feedback will improve this service. Please <a class=\"govuk-link\" href=\"https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you\">send us your thoughts</a>."
+msgid "Tell us what you think of this service (opens new tab)"
 msgstr ""
 
 #, python-format

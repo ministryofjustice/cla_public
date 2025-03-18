@@ -171,9 +171,8 @@
     </p>
   {% endif %}
 
-  <p class="govuk-body">
-    <a class="govuk-button" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you" role="button">{{ _('Finish') }}</a>
-  </p>
+  {{ Element.satisfaction_survey("confirmation") }}
+
 {% include "checker/time-out-warning.html" %}
 {% endblock %}
 
