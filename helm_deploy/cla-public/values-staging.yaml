@@ -12,6 +12,8 @@ replicaCount: 2
 ingress:
   enabled: true
   secretName: tls-certificate
+  annotations:
+    allowed-duplicate-ns: "laa-cla-public-staging,laa-access-civil-legal-aid-staging"
 
 envVars:
   BACKEND_BASE_URI:

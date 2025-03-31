@@ -14,6 +14,8 @@ ingress:
   secretName: tls-certificate
   addNoIndexResponseHeader: false
   whitelist: false
+  annotations:
+    allowed-duplicate-ns: "laa-cla-public-production,laa-access-civil-legal-aid-production"
 
 envVars:
   BACKEND_BASE_URI:
