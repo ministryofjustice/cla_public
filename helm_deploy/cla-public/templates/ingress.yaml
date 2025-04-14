@@ -34,7 +34,7 @@ metadata:
     nginx.ingress.kubernetes.io/whitelist-source-range: "{{ include "cla-public.whitelist" . }}"
     {{- end }}
 spec:
-  ingressClassName: "modsec-non-prod"
+  ingressClassName: modsec-non-prod
   tls:
     - hosts:
        - "{{ .Values.host }}"
