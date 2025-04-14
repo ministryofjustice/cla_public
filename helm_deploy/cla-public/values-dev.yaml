@@ -2,9 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-ingress:
-  annotations:
-    allowed-duplicate-ns: "laa-cla-public-staging,laa-access-civil-legal-aid-staging"
 
 image:
   repository: cla_public_local
