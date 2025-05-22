@@ -56,8 +56,6 @@ window.GOVUK.Modules = window.GOVUK.Modules || {};
 
     window.GOVUK.setConsentCookie(options)
 
-    moj.Modules.GA.send("pageview", document.location.pathname);
-
     if (!window.GOVUK.cookie("seen_cookie_message")) {
       window.GOVUK.setCookie("seen_cookie_message", true, { days: 365 })
     }

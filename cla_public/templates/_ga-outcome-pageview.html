@@ -1,3 +1,0 @@
-{% if session.stored.outcome -%}
-  <script nonce="{{ csp_nonce() }}">ga('send', 'pageview', '/vpv/outcome/{{ session.stored.outcome }}');</script>
-{%- endif %}

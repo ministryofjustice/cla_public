@@ -15,6 +15,7 @@ from cla_public.libs.utils import get_locale
 
 
 log = logging.getLogger(__name__)
+CALLBACK_API_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 
 class ApiError(Exception):
@@ -192,6 +193,9 @@ def attach_eligibility_check(payload):
 def post_to_case_api(form):
     backend = get_api_connection()
     payload = form.api_payload()
+
+    gtm_anon_id = session.get("GTM_ANON_ID", "")
+    payload["gtm_anon_id"] = gtm_anon_id
 
     if should_attach_eligibility_check():
         attach_eligibility_check(payload)

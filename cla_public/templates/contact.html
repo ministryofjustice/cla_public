@@ -81,7 +81,11 @@
               <div data-controlled-by="contact_type"
                    data-control-value="call" role="alert">
                 <p class="govuk-body">
-                  {{ _('We’ll give you the Civil Legal Advice phone number when you submit your details.') }}
+                  {% if "callback" in form.contact_type.choices  %}
+                    {{ _('We’ll give you the Civil Legal Advice phone number when you submit your details.') }}
+                  {% else %}
+                    {{ _('We’ll give you the Civil Legal Advice phone number when you submit your details. If you’re worried about the cost of this call, ask us to call you back.') }}
+                  {% endif %}
                 </p>
               </div>
             </div>
@@ -140,12 +144,6 @@
 
 {% block javascripts %}
   {{ super() }}
-
-  {% if reasons_for_contacting -%}
-    <script nonce="{{ csp_nonce() }}">
-      ga('send', 'event', 'reasons-for-contacting', '{{ reasons_for_contacting }}');
-    </script>
-  {%- endif -%}
 
   <script nonce="{{ csp_nonce() }}" type="text/html" id="addressFinderButton">
     <button class="govuk-button govuk-button--secondary address-finder-button" type="button" data-module="govuk-button">

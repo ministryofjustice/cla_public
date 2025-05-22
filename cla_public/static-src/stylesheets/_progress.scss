@@ -37,6 +37,7 @@ div.progress {
   }
 
   .progress-steps {
+    overflow: hidden;
     list-style: none;
     padding: 0;
   }

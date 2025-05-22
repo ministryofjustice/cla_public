@@ -23,11 +23,24 @@ dashboard:
 
 ingress:
   enabled: false
-  annotations: {}
+  annotations:
+    allow-duplicate-host: "true"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "ROUTE"
+    nginx.ingress.kubernetes.io/session-cookie-path: "/"
+    nginx.ingress.kubernetes.io/session-cookie-refresh: "true"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "300"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "300"
   cluster:
     name: ~
     weight: ~
   tls: []
+  addNoIndexResponseHeader: true
+  whitelist:
+    # HGS
+    - 84.43.86.100/32
+
+    # Note: Additional shared LAA IP ranges and Pingdom IPs are loaded in from bash scripts e.g. bin/staging_deply.sh
 
 envVars:
   MAINTENANCE_MODE:
@@ -88,3 +101,11 @@ envVars:
       name: notify-orchestrator
       key: url
       optional: true
+  USE_BACKEND_CALLBACK_SLOTS:
+    configmap:
+      name: backend-callback-slots
+      key: enabled
+  MTR_UPDATES_FEATURE_FLAG:
+    configmap:
+      name: mtr-updates
+      key: mtr-updates-on

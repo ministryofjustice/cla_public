@@ -57,17 +57,26 @@
   </p>
 {% endmacro %}
 
-{#
-  Prompt to complete the satisfaction survey on gov.uk
-#}
-{%  macro satisfaction_survey_prompt() %}
-  {% call alert(title=_('What do you think about this service?')) %}
-    <p id="aria-satisfaction-survey">
-      {% trans -%}
-        Your feedback will improve this service. Please <a class="govuk-link" href="https://www.gov.uk/done/check-if-civil-legal-advice-can-help-you">send us your thoughts</a>.
-      {%- endtrans %}
-    </p>
-  {% endcall %}
+{# Prompt to complete the satisfaction survey, the tracking link depends on where the link to the survey is found #}
+{% macro satisfaction_survey(link_origin) %}
+  {% if link_origin == "scope_ineligible_without_alternative_help" %}
+    {% set survey_link = "https://www.smartsurvey.co.uk/s/legalaid1/" %}
+  {% elif link_origin == "scope_ineligible_with_alternative_help" %}
+    {% set survey_link = "https://www.smartsurvey.co.uk/s/legalaid3/" %}
+  {% elif link_origin == "confirmation" %}
+    {% set survey_link = "https://www.smartsurvey.co.uk/s/legalaid2/" %}
+  {% elif link_origin == "FALA" %}
+    {% set survey_link = "https://www.smartsurvey.co.uk/s/legalaid4/" %}
+  {% elif link_origin == "failed_means" %}
+    {% set survey_link = "https://www.smartsurvey.co.uk/s/legalaid5/" %}
+  {% elif link_origin == "email" %}
+    {% set survey_link = "https://www.smartsurvey.co.uk/s/legalaid6/" %}
+  {% else %}
+    {% set survey_link = "https://www.smartsurvey.co.uk/s/legalaid1/" %}
+  {% endif %}
+  <p class="govuk-body">
+    <a class="govuk-link" href="{{ survey_link }}" target="_blank">{% trans %}Tell us what you think of this service (opens new tab){% endtrans %}</a>
+  </p>
 {% endmacro %}
 
 

@@ -142,11 +142,8 @@
         {{ subform.bsl_webcam.label.text }}
       </label>
     </div>
-    <div class="govuk-checkboxes__item">
-      {{ subform.minicom(**{"class": "govuk-checkboxes__input"}) }}
-      <label class="govuk-label govuk-checkboxes__label" for="{{subform.minicom.id}}">
-        {{ subform.minicom.label.text }}
-      </label>
+    <div class="govuk-checkboxes__conditional s-hidden" id="field-bsl-email-wrapper">
+      {{ Form.group(subform.bsl_email, field_label_class="govuk-label govuk-!-font-weight-regular") }}
     </div>
     <div class="govuk-checkboxes__item">
       {{ subform.text_relay(**{"class": "govuk-checkboxes__input"}) }}

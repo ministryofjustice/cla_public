@@ -36,6 +36,7 @@ from cla_public.libs.utils import override_locale, category_id_to_name
 from cla_public.libs.views import AllowSessionOverride, FormWizard, FormWizardStep, RequiresSession, HasFormMixin
 from cla_public.libs import laalaa, honeypot
 from cla_public.apps.checker.cait_intervention import get_cait_params
+import math
 
 log = logging.getLogger(__name__)
 
@@ -189,6 +190,10 @@ class CheckerWizard(AllowSessionOverride, FormWizard):
                     "outcome": "referred/help-organisations/means",
                 }
             )
+            is_hlpas = session.stored.get("hlpas", "")
+            if is_hlpas.lower() == "yes":
+                return self.redirect(url_for("checker.hlpas_page"))
+
             return self.redirect(url_for(".help_organisations", category_name=session.checker.category_slug))
 
         if session.checker.need_more_info:
@@ -247,8 +252,11 @@ class LaaLaaView(views.MethodView):
     @classmethod
     def handle_find_legal_adviser_form(cls, form, args):
         data = {}
-        page = 1
 
+        items_per_page = 10
+        max_pages = 9
+
+        page = 1
         if "postcode" in args:
             if form.validate():
                 if "page" in args and args["page"].isdigit():
@@ -262,6 +270,11 @@ class LaaLaaView(views.MethodView):
                     form.postcode.errors.append(
                         u"%s %s" % (_("Error looking up legal advisers."), _("Please try again later."))
                     )
+
+        data["num_pages"] = 1
+        if "count" in data:
+            data["num_pages"] = min(math.ceil(data["count"] / items_per_page), max_pages)
+
         data["current_page"] = page
         return data
 
@@ -360,7 +373,7 @@ class Eligible(HasFormMixin, RequiresSession, views.MethodView, object):
         steps = CheckerWizard("").relevant_steps[:-1]
         if session.checker.category in NO_CALLBACK_CATEGORIES:
             session.store({"outcome": "referred/f2f/means"})
-            return redirect(url_for(".find-legal-adviser", category=session.checker.category))
+            return redirect(url_for(".face-to-face", category=session.checker.category))
 
         current_step = {"count": len(steps) + 1, "is_current": True, "is_completed": False}
 
@@ -428,6 +441,12 @@ class HelpOrganisations(views.MethodView):
 checker.add_url_rule(
     "/result/refer/<category_name>", view_func=HelpOrganisations.as_view("help_organisations"), methods=["GET"]
 )
+
+
+@checker.route("/result/hlpas")
+def hlpas_page():
+    context = {"url": url_for(".face-to-face", category="hlpas", hlpas="yes")}
+    return render_template("hlpas.html", **context)
 
 
 @checker.route("/legal-aid-available")

@@ -37,12 +37,10 @@
       $.post('', this._injectFormData({
         name: button.name,
         value: button.value
-      })).success(function(res) {
+      })).done(function(res) {
         self._updateForm(res);
 
         var totalProperties = self.$form.find('#PropertiesForm > .govuk-form-group').length;
-
-        window.ga('send', 'event', 'property', button.name + ' / total:' + totalProperties);
 
         $("#PropertiesForm>.govuk-form-group").get(-1).scrollIntoView(); //scrolls to last property on screen
 

@@ -40,6 +40,9 @@
         {% endif %}
       {% endfor %}
     {% endif %}
+  {% elif 'refer' in request.path and 'postcode' in request.args %}
+    {% set url = url_for(request.endpoint, category=request.args.category) %}
+    <a href={{ url }} class="govuk-back-link">{{ _('Back') }}</a>
   {% else %}
     {% if (session.checker.AboutYouForm and session.checker.AboutYouForm.is_completed) %}
       {% set url = '/about' %}
@@ -97,6 +100,10 @@
 
 {% block head %}
   <meta http-equiv="content-language" content="{{ request.cookies.get('locale', 'en')[:2] }}">
+  <script nonce="{{ csp_nonce() }}">
+    GTM_ANON_ID = '{{ GTM_ANON_ID }}';
+  </script>
+  <script type="text/javascript" nonce="{{ csp_nonce() }}" src="{{ asset(filename='javascripts/google-tag-manager.js') }}"></script>
 {%- endblock %}
 
 {% block javascripts %}
@@ -105,7 +112,6 @@
     {% if zeroOptions %}
       // this is set in diagnosis.html
       $( document ).ready(function(){
-        ga('moj.send', 'event', 'Zero-options', 'Zero options (page reload)', 'No options instance: '+stripPII(window.location.href));
         location.reload();
       })
     {% endif %}
@@ -138,74 +144,6 @@
     <script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='javascripts/cla-debug.js') }}"></script>
   {% endif %}
 
-  {% if config.MOJ_GTM_ID %}
-    <!-- Start of google tag manager -->
-    <script nonce="{{ csp_nonce() }}">
-      function add_gtm() {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth={{config.MOJ_GTM_AUTH}}&gtm_preview={{config.MOJ_GTM_PREVIEW}}&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','{{config.MOJ_GTM_ID}}');
-      }
-      window.addEventListener("cookies_approved", function(event){
-        add_gtm()
-      });
-      if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
-        add_gtm();
-      }
-
-    </script>
-    <!-- End of google tag manager -->
-  {% endif %}
-
-  <!-- Start of google analytics -->
-  <script nonce="{{ csp_nonce() }}">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    function stripPII(input) {
-      return input.replace(/postcode=[^&]+/gi, 'postcode=[postcode]');
-    }
-    window.ga_trackers = {}
-    {% if config.GDS_GA_ID %}
-      window.ga_trackers["gds"] = {
-        id: '{{ config.GDS_GA_ID }}',
-        "domain": "auto",
-        "name": "govuk_shared",
-        "options": {'allowLinker': true},
-        "linker": true
-      }
-    {% endif %}
-
-    const localeLanguage = "{{ request.cookies.get('locale', 'en_GB') }}"
-
-    _.forEach(window.ga_trackers, function(values, id){
-      ga('create', values["id"], values["domain"], values["name"], values["options"]);
-      ga(values["name"] + '.set', 'anonymizeIp', true);
-      ga(values["name"] + '.set', 'location', stripPII(window.location.href));
-      if (values["linker"]) {
-        ga(values["name"] + '.require', 'linker');
-        ga(values["name"] + '.linker.set', 'anonymizeIp', true);
-        ga(values["name"] + '.linker:autoLink', ['www.gov.uk']);
-      }
-      ga(values["name"] + '.set', 'language', localeLanguage)
-    });
-
-    {% block ga_pageview -%}
-      if (window.GOVUK.checkConsentCookieCategory('', 'usage')) {
-        ga('moj.send', 'pageview');
-      }
-      if (window.GOVUK.checkConsentCookieCategory('', 'gds')) {
-        // GDS CROSS DOMAIN ANALYTICS
-        ga('govuk_shared.send', 'pageview');
-      }
-    {%- endblock %}
-
-  </script>
-  <!-- End of google analytics -->
   <script nonce="{{ csp_nonce() }}" type="text/html" id="moreInfoButtonLink">
     <a class="field-more-info-toggle" role="button">{{ _('more info') }}</a>
   </script>

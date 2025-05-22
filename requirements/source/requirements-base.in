@@ -11,7 +11,7 @@ PyYAML==3.11
 Werkzeug==0.9.6
 argparse==1.2.1
 blinker==1.3
-https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.22.tar.gz
+https://github.com/ministryofjustice/cla_common/archive/refs/tags/0.3.23.tar.gz
 speaklater==1.3 # Required by cla_common
 itsdangerous==0.24
 logstash_formatter==0.5.9
