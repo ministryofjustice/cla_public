@@ -6,7 +6,7 @@
   },
   "engineStrict": true,
   "dependencies": {
-    "cypress": "^9.7.0",
+    "cypress": "^13.0.0",
     "cypress-downloadfile": "^1.2.2",
     "cypress-log-to-output": "^1.1.2",
     "axe-core": "^4.4.3"
