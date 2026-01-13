@@ -239,7 +239,7 @@ urllib3[secure]==1.23
     #   transifex-client
 uwsgi==2.0.21
     # via -r requirements/source/requirements-base.in
-virtualenv==20.15.1
+virtualenv==20.36.1
     # via pre-commit
 werkzeug==0.9.6
     # via
