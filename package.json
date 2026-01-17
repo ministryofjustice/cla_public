@@ -24,7 +24,7 @@
     "gulp-jshint": "~2.1.0",
     "gulp-print": "^2.0.1",
     "gulp-rename": "~1.2.0",
-    "gulp-sass": "^4.0.1",
+    "gulp-sass": "^6.0.1",
     "gulp-uglify": "^3.0.0",
     "jquery": "^3.7.1",
     "jshint": "^2.12.0",
