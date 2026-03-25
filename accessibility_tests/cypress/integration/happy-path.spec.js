@@ -5,7 +5,7 @@ describe('Happy path testing', function() {
       console.error(e)
     })
 
-    cy.visit(Cypress.env('UAT_URL'))
+    cy.visit(Cypress.env('APP_URL'))
     
     cy.contains('Choose the area you most need help with')
     cy.checkAccessibility()

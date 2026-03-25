@@ -144,7 +144,7 @@ jobs:
           command: |
             cd accessibility_tests
             mkdir cypress/pages
-            node node_modules/.bin/cypress run --env UAT_URL=https://$RELEASE_HOST/start --spec "cypress/integration/happy-path.spec.js"
+            node node_modules/.bin/cypress run --env APP_URL=https://$RELEASE_HOST/start --spec "cypress/integration/happy-path.spec.js"
       - store_artifacts:
           path: ~/project/accessibility_tests/cypress/videos
   test:
